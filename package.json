@@ -10,18 +10,19 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@types/node": "^20.8.10",
-    "@types/nprogress": "^0.2.2",
     "@formkit/auto-animate": "^0.8.1",
     "@nuxt/devtools": "latest",
     "@nuxt/image": "^1.1.0",
     "@nuxtjs/robots": "^3.0.0",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "@pinia/nuxt": "^0.5.1",
+    "@types/node": "^20.8.10",
+    "@types/nprogress": "^0.2.2",
     "@vite-pwa/nuxt": "^0.3.2",
     "dayjs-nuxt": "^2.1.9",
     "nuxt": "^3.8.2",
     "nuxt-icon": "^0.6.6",
+    "nuxt-schema-org": "^3.2.1",
     "nuxt-typed-router": "^3.4.0",
     "sass": "^1.69.5",
     "vue": "^3.3.8",
@@ -43,9 +44,9 @@
     "@milkdown/transformer": "^7.3.1",
     "@milkdown/utils": "^7.3.1",
     "@milkdown/vue": "^7.3.1",
+    "@nuxtjs/i18n": "8.0.0-rc.6",
     "@prosemirror-adapter/vue": "^0.2.6",
     "animate.css": "^4.1.1",
-    "@nuxtjs/i18n": "8.0.0-rc.6",
     "localforage": "^1.10.0",
     "nprogress": "^0.2.0"
   }

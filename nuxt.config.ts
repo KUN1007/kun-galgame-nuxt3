@@ -18,7 +18,13 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@vite-pwa/nuxt',
     'nuxt-typed-router',
+    'nuxt-schema-org',
   ],
+  runtimeConfig: {
+    public: {
+      kungalgameUrl: 'https://www.kungal.com',
+    },
+  },
   vite: {
     esbuild: {
       drop: ['console', 'debugger'],

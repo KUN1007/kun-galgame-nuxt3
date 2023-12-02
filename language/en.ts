@@ -1,4 +1,9 @@
 export default {
+  head: {
+    title: 'KUN Visual Novel Forum',
+    description:
+      'The CUTEST Visual Novel Forum! Visual Novel Communication, Visual Novel Technique.To Create The Best Atmosphere! NO ADs Forever! Free Forever! ',
+  },
   header: {
     name: 'KUN Visual Novel',
     pool: 'POOL',

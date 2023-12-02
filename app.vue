@@ -1,9 +1,92 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+import { KUNGalgameLanguage } from '~/utils/getDefaultEnv'
+
+const { tm } = useI18n()
+
+const config = useRuntimeConfig()
+
+useHead({
+  title: tm('head.title'),
+  htmlAttrs: {
+    lang: KUNGalgameLanguage(),
+  },
+  meta: [
+    {
+      name: 'description',
+      content: tm('head.description'),
+    },
+    {
+      name: 'format-detection',
+      content: 'telephone=no',
+    },
+    {
+      name: 'og:title',
+      content: tm('head.title'),
+    },
+    {
+      name: 'og:description',
+      content: tm('head.description'),
+    },
+    {
+      property: 'og:image',
+      content: '/kungalgame.webp',
+    },
+    {
+      property: 'og:type',
+      content: 'website',
+    },
+    {
+      property: 'og:url',
+      content: config.public.kungalgameUrl,
+    },
+    {
+      property: 'twitter:card',
+      content: 'summary',
+    },
+    {
+      name: 'twitter:title',
+      content: tm('head.title'),
+    },
+    {
+      name: 'twitter:description',
+      content: tm('head.description'),
+    },
+    {
+      property: 'twitter:image',
+      content: '/kungalgame.webp',
+    },
+    {
+      property: 'twitter:url',
+      content: config.public.kungalgameUrl,
+    },
+  ],
+  link: [
+    {
+      rel: 'icon',
+      href: '/favicon.ico',
+    },
+    {
+      rel: 'apple-touch-icon',
+      href: '/apple-touch-icon.png',
+    },
+  ],
+})
+
+useSchemaOrg([
+  defineOrganization({
+    name: 'KUN Visual Novel',
+    url: 'https://kungal.com',
+    sameAs: ['https://github.com/KUNGalgame'],
+  }),
+  defineWebSite({ name: 'KUN Visual Novel' }),
+  defineWebPage(),
+])
+</script>
 
 <template>
+  <NuxtLoadingIndicator />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
 </template>
-
-<style lang="scss" scoped></style>
