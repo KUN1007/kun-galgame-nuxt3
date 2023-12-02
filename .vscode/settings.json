@@ -1,3 +1,14 @@
 {
-  "cSpell.words": ["Nuxt", "pinia", "nuxtjs", "persistedstate"]
+  "cSpell.words": [
+    "formkit",
+    "Nuxt",
+    "nuxtjs",
+    "persistedstate",
+    "pinia",
+    "nprogress",
+    "milkdown",
+    "commonmark",
+    "prosemirror",
+    "localforage"
+  ]
 }
