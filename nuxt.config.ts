@@ -19,4 +19,15 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     'nuxt-typed-router',
   ],
+  vite: {
+    esbuild: {
+      drop: ['console', 'debugger'],
+    },
+  },
+  i18n: {
+    locales: ['en', 'zh'],
+    defaultLocale: 'en',
+    strategy: 'prefix',
+    vueI18n: '~/language/i18n.ts',
+  },
 })
