@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useTempMessageStore } from '@/store/temp/message'
 import { registerFormItem } from './utils/registerForm'
-import { Message } from '../global/alert/Message'
 
 // Using the message store
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(

@@ -3,7 +3,6 @@ import { useKUNGalgameUserStore } from '@/store/modules/kungalgamer'
 import { useTempMessageStore } from '@/store/temp/message'
 import { storeToRefs } from 'pinia'
 import { isValidEmail, isValidName, isValidPassword } from '@/utils/validate'
-import { Message } from '../global/alert/Message'
 
 const router = useRouter()
 

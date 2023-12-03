@@ -1,8 +1,6 @@
-// Function to get a random number
 import { randomNum } from '@/utils/random'
-// Get a local image file; note that you cannot use @ as the base path here, you can only use ..
 const getAssetsFile = (name: string) => {
-  return new URL(`../../assets/images/alert/${name}.webp`, import.meta.url).href
+  return new URL(`~/alert/${name}.webp`, import.meta.url).href
 }
 
 const number = randomNum(0, 2)

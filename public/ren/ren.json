@@ -1,0 +1,802 @@
+[
+ {
+  "name": "汗",
+  "left": 287,
+  "top": 425,
+  "width": 12,
+  "height": 14,
+  "visible": 1,
+  "layer_id": 2961,
+  "group_layer_id": 2931
+ },
+ {
+  "name": "追真剣",
+  "left": 234,
+  "top": 383,
+  "width": 76,
+  "height": 27,
+  "visible": 1,
+  "layer_id": 3022,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "笑１",
+  "left": 232,
+  "top": 380,
+  "width": 78,
+  "height": 29,
+  "visible": 1,
+  "layer_id": 2842,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "笑２",
+  "left": 235,
+  "top": 385,
+  "width": 76,
+  "height": 32,
+  "visible": 1,
+  "layer_id": 2845,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "怒１",
+  "left": 239,
+  "top": 382,
+  "width": 63,
+  "height": 28,
+  "visible": 1,
+  "layer_id": 2848,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "怒２",
+  "left": 240,
+  "top": 382,
+  "width": 60,
+  "height": 26,
+  "visible": 1,
+  "layer_id": 2864,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "悲１",
+  "left": 237,
+  "top": 386,
+  "width": 70,
+  "height": 28,
+  "visible": 1,
+  "layer_id": 2855,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "悲２",
+  "left": 238,
+  "top": 391,
+  "width": 66,
+  "height": 28,
+  "visible": 1,
+  "layer_id": 2859,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "泣１",
+  "left": 243,
+  "top": 388,
+  "width": 58,
+  "height": 30,
+  "visible": 1,
+  "layer_id": 2865,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "泣２",
+  "left": 240,
+  "top": 386,
+  "width": 65,
+  "height": 31,
+  "visible": 1,
+  "layer_id": 2870,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "驚１",
+  "left": 232,
+  "top": 379,
+  "width": 78,
+  "height": 31,
+  "visible": 1,
+  "layer_id": 2877,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "驚２",
+  "left": 232,
+  "top": 379,
+  "width": 78,
+  "height": 33,
+  "visible": 1,
+  "layer_id": 2882,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "照１",
+  "left": 234,
+  "top": 382,
+  "width": 77,
+  "height": 31,
+  "visible": 1,
+  "layer_id": 2887,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "照２",
+  "left": 239,
+  "top": 385,
+  "width": 70,
+  "height": 31,
+  "visible": 1,
+  "layer_id": 2893,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "えっへん",
+  "left": 235,
+  "top": 384,
+  "width": 72,
+  "height": 25,
+  "visible": 1,
+  "layer_id": 2899,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "ギャグ笑",
+  "left": 234,
+  "top": 383,
+  "width": 76,
+  "height": 33,
+  "visible": 1,
+  "layer_id": 2905,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "ギャグ怒",
+  "left": 239,
+  "top": 384,
+  "width": 61,
+  "height": 29,
+  "visible": 1,
+  "layer_id": 2910,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "ギャグ泣",
+  "left": 239,
+  "top": 389,
+  "width": 63,
+  "height": 26,
+  "visible": 1,
+  "layer_id": 2915,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "ギャグ驚",
+  "left": 235,
+  "top": 383,
+  "width": 66,
+  "height": 23,
+  "visible": 1,
+  "layer_id": 2918,
+  "group_layer_id": 2923
+ },
+ {
+  "name": "追真剣",
+  "left": 238,
+  "top": 392,
+  "width": 78,
+  "height": 41,
+  "visible": 0,
+  "layer_id": 3020,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "笑１",
+  "left": 238,
+  "top": 390,
+  "width": 78,
+  "height": 43,
+  "visible": 0,
+  "layer_id": 2843,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "笑２",
+  "left": 244,
+  "top": 395,
+  "width": 69,
+  "height": 37,
+  "visible": 0,
+  "layer_id": 2846,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "怒１",
+  "left": 238,
+  "top": 391,
+  "width": 78,
+  "height": 42,
+  "visible": 0,
+  "layer_id": 2850,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "怒２",
+  "left": 238,
+  "top": 391,
+  "width": 78,
+  "height": 42,
+  "visible": 0,
+  "layer_id": 2853,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "悲１",
+  "left": 238,
+  "top": 392,
+  "width": 78,
+  "height": 41,
+  "visible": 0,
+  "layer_id": 2856,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "悲２",
+  "left": 240,
+  "top": 396,
+  "width": 75,
+  "height": 37,
+  "visible": 0,
+  "layer_id": 2861,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "泣１",
+  "left": 243,
+  "top": 396,
+  "width": 71,
+  "height": 37,
+  "visible": 1,
+  "layer_id": 3025,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "泣２",
+  "left": 238,
+  "top": 394,
+  "width": 78,
+  "height": 60,
+  "visible": 0,
+  "layer_id": 3024,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "驚１",
+  "left": 238,
+  "top": 390,
+  "width": 78,
+  "height": 43,
+  "visible": 0,
+  "layer_id": 2880,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "驚２",
+  "left": 238,
+  "top": 390,
+  "width": 78,
+  "height": 43,
+  "visible": 0,
+  "layer_id": 2885,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "照１",
+  "left": 238,
+  "top": 392,
+  "width": 78,
+  "height": 41,
+  "visible": 0,
+  "layer_id": 2891,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "照２",
+  "left": 244,
+  "top": 395,
+  "width": 69,
+  "height": 37,
+  "visible": 0,
+  "layer_id": 2896,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "えっへん",
+  "left": 244,
+  "top": 396,
+  "width": 68,
+  "height": 38,
+  "visible": 0,
+  "layer_id": 2902,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "ギャグ笑",
+  "left": 244,
+  "top": 395,
+  "width": 69,
+  "height": 37,
+  "visible": 0,
+  "layer_id": 2908,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "ギャグ怒",
+  "left": 244,
+  "top": 401,
+  "width": 66,
+  "height": 33,
+  "visible": 0,
+  "layer_id": 2913,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "ギャグ泣",
+  "left": 244,
+  "top": 405,
+  "width": 66,
+  "height": 47,
+  "visible": 0,
+  "layer_id": 2916,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "ギャグ驚",
+  "left": 248,
+  "top": 395,
+  "width": 57,
+  "height": 37,
+  "visible": 0,
+  "layer_id": 2920,
+  "group_layer_id": 2925
+ },
+ {
+  "name": "追開け",
+  "left": 270,
+  "top": 430,
+  "width": 19,
+  "height": 16,
+  "visible": 1,
+  "layer_id": 2980,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "追閉じ",
+  "left": 271,
+  "top": 430,
+  "width": 18,
+  "height": 14,
+  "visible": 0,
+  "layer_id": 2969,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "追真剣",
+  "left": 273,
+  "top": 433,
+  "width": 12,
+  "height": 13,
+  "visible": 0,
+  "layer_id": 3023,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "笑１",
+  "left": 269,
+  "top": 429,
+  "width": 21,
+  "height": 18,
+  "visible": 0,
+  "layer_id": 2844,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "笑２",
+  "left": 268,
+  "top": 428,
+  "width": 24,
+  "height": 22,
+  "visible": 0,
+  "layer_id": 2847,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "怒１",
+  "left": 272,
+  "top": 433,
+  "width": 15,
+  "height": 12,
+  "visible": 0,
+  "layer_id": 2851,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "怒２",
+  "left": 268,
+  "top": 428,
+  "width": 25,
+  "height": 23,
+  "visible": 0,
+  "layer_id": 2854,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "悲１",
+  "left": 272,
+  "top": 434,
+  "width": 14,
+  "height": 11,
+  "visible": 0,
+  "layer_id": 2857,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "悲２",
+  "left": 272,
+  "top": 435,
+  "width": 15,
+  "height": 12,
+  "visible": 0,
+  "layer_id": 2862,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "泣１",
+  "left": 270,
+  "top": 431,
+  "width": 21,
+  "height": 17,
+  "visible": 0,
+  "layer_id": 2869,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "泣２",
+  "left": 270,
+  "top": 433,
+  "width": 22,
+  "height": 13,
+  "visible": 0,
+  "layer_id": 2876,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "驚１",
+  "left": 272,
+  "top": 432,
+  "width": 14,
+  "height": 16,
+  "visible": 0,
+  "layer_id": 2881,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "驚２",
+  "left": 268,
+  "top": 427,
+  "width": 26,
+  "height": 25,
+  "visible": 0,
+  "layer_id": 2886,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "照１",
+  "left": 269,
+  "top": 431,
+  "width": 20,
+  "height": 15,
+  "visible": 0,
+  "layer_id": 2892,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "照２",
+  "left": 268,
+  "top": 430,
+  "width": 23,
+  "height": 19,
+  "visible": 0,
+  "layer_id": 2897,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "えっへん",
+  "left": 269,
+  "top": 429,
+  "width": 22,
+  "height": 20,
+  "visible": 0,
+  "layer_id": 2903,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "ギャグ笑",
+  "left": 267,
+  "top": 427,
+  "width": 26,
+  "height": 24,
+  "visible": 0,
+  "layer_id": 2909,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "ギャグ怒",
+  "left": 270,
+  "top": 430,
+  "width": 20,
+  "height": 16,
+  "visible": 0,
+  "layer_id": 2914,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "ギャグ泣",
+  "left": 270,
+  "top": 434,
+  "width": 19,
+  "height": 11,
+  "visible": 0,
+  "layer_id": 2917,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "ギャグ驚",
+  "left": 267,
+  "top": 427,
+  "width": 25,
+  "height": 24,
+  "visible": 0,
+  "layer_id": 2921,
+  "group_layer_id": 2927
+ },
+ {
+  "name": "G頬",
+  "left": 249,
+  "top": 415,
+  "width": 59,
+  "height": 28,
+  "visible": 0,
+  "layer_id": 813,
+  "group_layer_id": 2314
+ },
+ {
+  "name": "頬１",
+  "left": 246,
+  "top": 410,
+  "width": 65,
+  "height": 35,
+  "visible": 0,
+  "layer_id": 2369,
+  "group_layer_id": 2314
+ },
+ {
+  "name": "頬２",
+  "left": 245,
+  "top": 410,
+  "width": 66,
+  "height": 35,
+  "visible": 0,
+  "layer_id": 2364,
+  "group_layer_id": 2314
+ },
+ {
+  "name": "頬３",
+  "left": 245,
+  "top": 408,
+  "width": 66,
+  "height": 38,
+  "visible": 0,
+  "layer_id": 2360,
+  "group_layer_id": 2314
+ },
+ {
+  "name": "頬４",
+  "left": 242,
+  "top": 406,
+  "width": 69,
+  "height": 44,
+  "visible": 1,
+  "layer_id": 2356,
+  "group_layer_id": 2314
+ },
+ {
+  "name": "頬５",
+  "left": 245,
+  "top": 410,
+  "width": 66,
+  "height": 36,
+  "visible": 0,
+  "layer_id": 2352,
+  "group_layer_id": 2314
+ },
+ {
+  "name": "斜め１",
+  "left": 148,
+  "top": 323,
+  "width": 309,
+  "height": 600,
+  "visible": 1,
+  "layer_id": 2346,
+  "group_layer_id": 2086
+ },
+ {
+  "name": "斜め２",
+  "left": 148,
+  "top": 323,
+  "width": 309,
+  "height": 600,
+  "visible": 0,
+  "layer_id": 2345,
+  "group_layer_id": 2086
+ },
+ {
+  "name": "斜め１",
+  "left": 147,
+  "top": 323,
+  "width": 313,
+  "height": 600,
+  "visible": 1,
+  "layer_id": 2934,
+  "group_layer_id": 2090
+ },
+ {
+  "name": "斜め２",
+  "left": 147,
+  "top": 323,
+  "width": 313,
+  "height": 600,
+  "visible": 1,
+  "layer_id": 2933,
+  "group_layer_id": 2090
+ },
+ {
+  "name": "斜め１",
+  "left": 137,
+  "top": 323,
+  "width": 367,
+  "height": 602,
+  "visible": 1,
+  "layer_id": 2340,
+  "group_layer_id": 2094
+ },
+ {
+  "name": "斜め２",
+  "left": 137,
+  "top": 323,
+  "width": 367,
+  "height": 602,
+  "visible": 1,
+  "layer_id": 2339,
+  "group_layer_id": 2094
+ },
+ {
+  "name": "斜め１",
+  "left": 148,
+  "top": 323,
+  "width": 294,
+  "height": 599,
+  "visible": 0,
+  "layer_id": 2338,
+  "group_layer_id": 2098
+ },
+ {
+  "name": "斜め２",
+  "left": 148,
+  "top": 323,
+  "width": 290,
+  "height": 599,
+  "visible": 1,
+  "layer_id": 2337,
+  "group_layer_id": 2098
+ },
+ {
+  "name": "汗",
+  "left": 0,
+  "top": 0,
+  "width": 0,
+  "height": 0,
+  "visible": 0,
+  "layer_id": 2931,
+  "group_layer_id": 974
+ },
+ {
+  "name": "眉",
+  "left": 0,
+  "top": 0,
+  "width": 0,
+  "height": 0,
+  "visible": 0,
+  "layer_id": 2923,
+  "group_layer_id": 974
+ },
+ {
+  "name": "目",
+  "left": 0,
+  "top": 0,
+  "width": 0,
+  "height": 0,
+  "visible": 1,
+  "layer_id": 2925,
+  "group_layer_id": 974
+ },
+ {
+  "name": "口",
+  "left": 0,
+  "top": 0,
+  "width": 0,
+  "height": 0,
+  "visible": 0,
+  "layer_id": 2927,
+  "group_layer_id": 974
+ },
+ {
+  "name": "頬",
+  "left": 0,
+  "top": 0,
+  "width": 0,
+  "height": 0,
+  "visible": 0,
+  "layer_id": 2314,
+  "group_layer_id": 975
+ },
+ {
+  "name": "喫茶店服",
+  "left": 0,
+  "top": 0,
+  "width": 0,
+  "height": 0,
+  "visible": 0,
+  "layer_id": 2086,
+  "group_layer_id": 975
+ },
+ {
+  "name": "パジャマ",
+  "left": 0,
+  "top": 0,
+  "width": 0,
+  "height": 0,
+  "visible": 0,
+  "layer_id": 2090,
+  "group_layer_id": 975
+ },
+ {
+  "name": "私服２",
+  "left": 0,
+  "top": 0,
+  "width": 0,
+  "height": 0,
+  "visible": 0,
+  "layer_id": 2094,
+  "group_layer_id": 975
+ },
+ {
+  "name": "私服１",
+  "left": 0,
+  "top": 0,
+  "width": 0,
+  "height": 0,
+  "visible": 1,
+  "layer_id": 2098,
+  "group_layer_id": 975
+ }
+]

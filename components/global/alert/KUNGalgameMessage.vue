@@ -1,12 +1,8 @@
 <script setup lang="ts">
-import { watch, ref } from 'vue'
 import { Icon } from '@iconify/vue'
-
-// Import the settings panel store
+import 'animate.css'
 import { useKUNGalgameSettingsStore } from '@/store/modules/settings'
-import { storeToRefs } from 'pinia'
 
-// Use the settings panel store
 const { showKUNGalgameLanguage } = storeToRefs(useKUNGalgameSettingsStore())
 
 const props = defineProps<{
@@ -47,18 +43,18 @@ watch(
 <template>
   <div class="kungalgame-message-container">
     <div class="kungalgame-message" :class="messageClass(type)">
-      <span class="icon" v-if="type === 'warn'"
-        ><Icon icon="line-md:alert"
-      /></span>
-      <span class="icon" v-else-if="type === 'success'"
-        ><Icon icon="line-md:circle-to-confirm-circle-transition"
-      /></span>
-      <span class="icon" v-else-if="type === 'error'"
-        ><Icon icon="line-md:close-circle"
-      /></span>
-      <span class="icon" v-else-if="type === 'info'"
-        ><Icon icon="line-md:alert-circle"
-      /></span>
+      <span class="icon" v-if="type === 'warn'">
+        <Icon icon="line-md:alert" />
+      </span>
+      <span class="icon" v-else-if="type === 'success'">
+        <Icon icon="line-md:circle-to-confirm-circle-transition" />
+      </span>
+      <span class="icon" v-else-if="type === 'error'">
+        <Icon icon="line-md:close-circle" />
+      </span>
+      <span class="icon" v-else-if="type === 'info'">
+        <Icon icon="line-md:alert-circle" />
+      </span>
       <span v-html="message"></span>
     </div>
   </div>
