@@ -1,0 +1,72 @@
+html {
+  --kungalgame-font-color-0: #777777;
+  --kungalgame-font-color-1: #666666;
+  --kungalgame-font-color-2: #4d4d4d;
+  --kungalgame-font-color-3: #242424;
+
+  --kungalgame-white: #ffffff;
+
+  --kungalgame-gray-4: #bcc8d4;
+
+  --kungalgame-blue-0: #ddf4ff;
+  --kungalgame-blue-1: #b6e3ff;
+  --kungalgame-blue-2: #80ccff;
+  --kungalgame-blue-3: #54aeff;
+  --kungalgame-blue-4: #218bff;
+  --kungalgame-blue-5: #0969da;
+
+  --kungalgame-green-4: #2da44e;
+
+  --kungalgame-yellow-2: #fcd554;
+  --kungalgame-yellow-3: #d4a72c;
+
+  --kungalgame-red-0: #ffebe9;
+  --kungalgame-red-1: #ffcecb;
+  --kungalgame-red-2: #ffaba8;
+  --kungalgame-red-3: #ff8182;
+  --kungalgame-red-4: #fa4549;
+  --kungalgame-red-5: #cf222e;
+
+  --kungalgame-purple-4: #a475f9;
+
+  --kungalgame-pink-0: #ffeff7;
+  --kungalgame-pink-3: #ff80c8;
+  --kungalgame-pink-4: #e85aad;
+
+  /* 
+   
+    transparent color
+    
+    */
+
+  --kungalgame-trans-white-2: #ffffffd9;
+  --kungalgame-trans-white-5: #ffffff8e;
+  /* This placeholder is necessary; otherwise, it could lead to a collapse */
+  --kungalgame-trans-white-9: #ffffff00;
+
+  --kungalgame-trans-blue-0: #ddf4ff77;
+  --kungalgame-trans-blue-1: #b6e3ff77;
+  --kungalgame-trans-blue-2: #80ccff77;
+  --kungalgame-trans-blue-3: #54aeff77;
+  --kungalgame-trans-blue-4: #218bff77;
+
+  --kungalgame-trans-red-0: #ffebe977;
+  --kungalgame-trans-red-1: #ffcecb77;
+  --kungalgame-trans-red-2: #ffaba877;
+  --kungalgame-trans-red-3: #ff818277;
+  --kungalgame-trans-red-4: #fa454977;
+
+  --kungalgame-trans-pink-0: #ffeff777;
+  --kungalgame-trans-pink-1: #ffd3eb77;
+  --kungalgame-trans-pink-2: #ffadda77;
+
+  /* Special */
+
+  --kungalgame-mask-color-0: #00000077;
+  --shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05),
+    0 2px 8px hsla(0, 0%, 0%, 0.05);
+  --kungalgame-shadow-0: 0px 0px 17px 5px var(--kungalgame-blue-1);
+  --kungalgame-shadow-1: 0px 0px 7px 2px var(--kungalgame-blue-1);
+  --kungalgame-shadow-2: inset 1px 1px 2px var(--kungalgame-blue-1),
+    inset -1px -1px 2px var(--kungalgame-blue-1);
+}

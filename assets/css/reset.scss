@@ -1,0 +1,72 @@
+/* --------------------------------------------------------------
+   reset.css
+   * Resets default browser CSS.
+-------------------------------------------------------------- */
+
+/* Reset default CSS styles for all elements */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+/* Remove focus outlines on elements */
+:focus {
+  outline: none;
+}
+
+/* Hide scrollbars (compatible with Firefox 64+) */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Compatibility for Firefox to hide scrollbars */
+* {
+  scrollbar-width: none; /* Firefox 64+ */
+}
+
+/* Ensure that button and select elements inherit the font family */
+button,
+select {
+  font-family: inherit;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+}
+
+/* Set the background color and text color for selected text */
+*::selection {
+  background-color: var(
+    --kungalgame-blue-1
+  ); /* Background color of selected text */
+  color: var(--kungalgame-blue-4); /* Text color of selected text */
+}
+
+/* Milkdown */
+p code {
+  background-color: var(--kungalgame-trans-blue-2);
+  padding: 2px 7px;
+  font-size: 13px;
+  border-radius: 7px;
+}

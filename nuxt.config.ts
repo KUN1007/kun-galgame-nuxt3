@@ -25,6 +25,7 @@ export default defineNuxtConfig({
       kungalgameUrl: 'https://www.kungal.com',
     },
   },
+  css: ['@/assets/css/index.scss'],
   vite: {
     esbuild: {
       drop: ['console', 'debugger'],
@@ -33,7 +34,7 @@ export default defineNuxtConfig({
   i18n: {
     locales: ['en', 'zh'],
     defaultLocale: 'en',
-    strategy: 'prefix',
+    strategy: 'prefix_except_default',
     vueI18n: '~/language/i18n.ts',
   },
 })
