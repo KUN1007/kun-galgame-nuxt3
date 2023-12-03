@@ -33,7 +33,7 @@ watch(
       }, 1000)
 
       // Send the verification code
-      await useKUNGalgameUserStore().sendCode(props.email)
+      // await useKUNGalgameUserStore().sendCode(props.email)
 
       info.info('AlertInfo.code.code')
     }

@@ -85,6 +85,18 @@ useSchemaOrg([
 </script>
 
 <template>
+  <!-- Global alert component -->
+  <Alert />
+
+  <!-- Global info component -->
+  <AlertInfo />
+
+  <!-- Global capture component -->
+  <Capture />
+
+  <!-- Global search component -->
+  <SearchKUNGalgameSearchBox />
+
   <NuxtLoadingIndicator />
   <NuxtLayout>
     <NuxtPage />

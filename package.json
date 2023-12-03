@@ -16,6 +16,7 @@
     "@nuxtjs/robots": "^3.0.0",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "@pinia/nuxt": "^0.5.1",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.8.10",
     "@types/nprogress": "^0.2.2",
     "@vite-pwa/nuxt": "^0.3.2",
@@ -47,6 +48,7 @@
     "@nuxtjs/i18n": "8.0.0-rc.6",
     "@prosemirror-adapter/vue": "^0.2.6",
     "animate.css": "^4.1.1",
+    "js-cookie": "^3.0.5",
     "localforage": "^1.10.0",
     "nprogress": "^0.2.0"
   }

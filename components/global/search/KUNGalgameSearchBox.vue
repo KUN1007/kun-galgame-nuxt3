@@ -7,7 +7,7 @@ import SearchResult from './SearchResult.vue'
 import { useTempHomeStore } from '@/store/temp/home'
 import { storeToRefs } from 'pinia'
 
-import { HomeSearchTopic } from '@/api'
+// import { HomeSearchTopic } from '@/api'
 
 const { search, isShowSearch } = storeToRefs(useTempHomeStore())
 

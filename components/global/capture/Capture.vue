@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { questionsEN, Question } from './questionsEN'
+import { questionsEN } from './questionsEN'
 import { questionsCN } from './questionsCN'
-
-import Message from '@/components/alert/Message'
+import type { Question } from './questionsEN'
 
 import { useTempMessageStore } from '@/store/temp/message'
 import { useKUNGalgameSettingsStore } from '@/store/modules/settings'
