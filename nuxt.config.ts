@@ -22,10 +22,16 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     MONGODB_URL: process.env.MONGODB_URL,
+
+    REDIS_HOST: process.env.REDIS_HOST,
+    REDIS_PORT: process.env.REDIS_PORT,
+
     public: {
       KUN_GALGAME_URL: process.env.KUN_GALGAME_URL,
     },
   },
+
+  // Frontend
   css: ['@/assets/css/index.scss'],
   vite: {
     esbuild: {

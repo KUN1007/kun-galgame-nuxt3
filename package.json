@@ -52,6 +52,7 @@
     "localforage": "^1.10.0",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.2",
-    "nprogress": "^0.2.0"
+    "nprogress": "^0.2.0",
+    "zod": "^3.22.4"
   }
 }
