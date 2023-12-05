@@ -38,7 +38,7 @@ useHead({
     },
     {
       property: 'og:url',
-      content: config.public.kungalgameUrl,
+      content: config.public.KUN_GALGAME_URL,
     },
     {
       property: 'twitter:card',
@@ -58,7 +58,7 @@ useHead({
     },
     {
       property: 'twitter:url',
-      content: config.public.kungalgameUrl,
+      content: config.public.KUN_GALGAME_URL,
     },
   ],
   link: [

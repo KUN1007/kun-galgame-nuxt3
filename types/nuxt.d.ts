@@ -1,7 +1,9 @@
 declare module 'nuxt/schema' {
-  interface RuntimeConfig {}
+  interface RuntimeConfig {
+    MONGODB_URL: string
+  }
   interface PublicRuntimeConfig {
-    kungalgameUrl: string
+    KUN_GALGAME_URL: string
   }
 }
 

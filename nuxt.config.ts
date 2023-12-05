@@ -21,8 +21,9 @@ export default defineNuxtConfig({
     'nuxt-schema-org',
   ],
   runtimeConfig: {
+    MONGODB_URL: process.env.MONGODB_URL,
     public: {
-      kungalgameUrl: 'https://www.kungal.com',
+      KUN_GALGAME_URL: process.env.KUN_GALGAME_URL,
     },
   },
   css: ['@/assets/css/index.scss'],
