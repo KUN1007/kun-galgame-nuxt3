@@ -1,4 +1,10 @@
 import { useKUNGalgameUserStore } from '@/store/modules/kungalgamer'
+import { onRequestError } from '~/error/onRequestError'
+import {
+  isKunError,
+  type KUNError,
+  type KUNSuccess,
+} from '~/server/utils/createResponse'
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
@@ -9,13 +15,22 @@ type FetchOptions = {
   body?: BodyInit
 }
 
-const kunFetchRequest = async (url: string, options: FetchOptions) => {
+const kunFetchRequest = async <T>(url: string, options: FetchOptions) => {
   const headers = {
     ...options.headers,
     Authorization: `Bearer ${useKUNGalgameUserStore().getToken()}`,
   }
 
-  return await $fetch(`api${url}`, { ...options, headers })
+  const response: KUNError | KUNSuccess<T> = await $fetch(`api${url}`, {
+    ...options,
+    headers,
+  })
+
+  if (isKunError(response)) {
+    onRequestError(response)
+  }
+
+  return response
 }
 
 const fetchGet = async (url: string, headers?: Record<string, string>) => {
