@@ -1,5 +1,5 @@
-interface KUNGalgameResponseData<T> {
-  code: number
-  message: string
+export interface KUNGalgameResponseData<T> {
+  statusCode: number
+  statusMessage: string
   data: T
 }

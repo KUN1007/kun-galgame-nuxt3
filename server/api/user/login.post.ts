@@ -1,32 +1,33 @@
-import { Error } from 'mongoose'
+import bcrypt from 'bcrypt'
 import UserModel from '~/server/models/user'
 import type { LoginRequestData } from '~/types/api/user'
 
-import { z } from 'zod'
-const objectSchema = z.object({
-  name: z.string(),
-  password: z.string(),
-})
-const body = await readValidatedBody(event, objectSchema.safeParse)
-
 export default defineEventHandler(async (event) => {
-  try {
-    const body: ITodo = await readBody(event)
-    if (!body) {
-      return setResponse(event, {
-        statusCode: 400,
-        statusMessage: 'Item field is required.',
-      })
-    }
-    await todoModel.create({ item: body.item })
-    return setResponse(event, {
-      statusCode: 200,
-      statusMessage: 'New item has been added.',
-    })
-  } catch (error: unknown) {
-    return setResponse(event, {
-      statusCode: 500,
-      statusMessage: 'Something went wrong.',
-    })
+  const { name, password }: LoginRequestData = await readBody(event)
+
+  const user = await UserModel.findOne({ $or: [{ name }, { email: name }] })
+  if (!user) {
+    return 10101
+  }
+
+  const isCorrectPassword = await bcrypt.compare(password, user.password)
+  if (!isCorrectPassword) {
+    return 10102
+  }
+
+  const { token, refreshToken } = await generateTokens(user.uid, user.name)
+
+  const userInfo = {
+    uid: user.uid,
+    name: user.name,
+    avatar: user.avatar,
+    moemoepoint: user.moemoepoint,
+    roles: user.roles,
+    token,
+  }
+
+  return {
+    data: userInfo,
+    refreshToken,
   }
 })

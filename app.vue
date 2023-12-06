@@ -95,7 +95,7 @@ useSchemaOrg([
   <Capture />
 
   <!-- Global search component -->
-  <SearchKUNGalgameSearchBox />
+  <!-- <SearchKUNGalgameSearchBox /> -->
 
   <NuxtLoadingIndicator />
   <NuxtLayout>

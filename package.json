@@ -16,6 +16,7 @@
     "@nuxtjs/robots": "^3.0.0",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "@pinia/nuxt": "^0.5.1",
+    "@types/bcrypt": "^5.0.2",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.8.10",
     "@types/nprogress": "^0.2.2",
@@ -47,12 +48,14 @@
     "@milkdown/vue": "^7.3.1",
     "@nuxtjs/i18n": "8.0.0-rc.6",
     "@prosemirror-adapter/vue": "^0.2.6",
+    "@types/jsonwebtoken": "^9.0.5",
     "animate.css": "^4.1.1",
+    "bcrypt": "^5.1.1",
     "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
     "localforage": "^1.10.0",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.2",
-    "nprogress": "^0.2.0",
-    "zod": "^3.22.4"
+    "nprogress": "^0.2.0"
   }
 }

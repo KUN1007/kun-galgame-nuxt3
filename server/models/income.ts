@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import increasingSequence from '../middleware/increasing-sequence'
+import increasingSequence from '../utils/increasingSequence'
 
 import { IncomeAttributes } from './types/income'
 

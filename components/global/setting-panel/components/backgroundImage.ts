@@ -1,16 +1,3 @@
-/* Background test picture: 
-  https://s3.bmp.ovh/imgs/2023/05/30/1ee99996d0eb2646.png
-  https://s3.bmp.ovh/imgs/2023/05/30/87d94be5e004547a.png
-  https://s3.bmp.ovh/imgs/2023/05/30/2a639bd15113b570.png
-  https://s3.bmp.ovh/imgs/2023/05/30/b7c73a1643bdc55b.png
-  https://s3.bmp.ovh/imgs/2023/05/30/ee67fdadd4104bbd.png
-  https://s3.bmp.ovh/imgs/2023/05/30/30aacd3045496498.png
-  https://s3.bmp.ovh/imgs/2023/05/30/ab2da01971cc1629.png
-  https://s3.bmp.ovh/imgs/2023/05/30/ed196495796482e4.png
-  https://s3.bmp.ovh/imgs/2023/05/30/a6dcdae0afe118f0.png
-  https://s3.bmp.ovh/imgs/2023/05/30/7aa57120cc6977a1.png
-  */
-
 interface Background {
   index: number
   message: BackgroundDetail

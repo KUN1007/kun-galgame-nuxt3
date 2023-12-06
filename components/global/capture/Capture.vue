@@ -257,8 +257,8 @@ const handleCloseCapture = () => {
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: end;
-  justify-content: end;
+  align-items: flex-end;
+  justify-content: flex-end;
   font-style: oblique;
   .hint {
     width: 100%;

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { getLoli } from './loli'
+import { getLoli } from './getLoli'
 
 import LoliSkeleton from '@/components/skeleton/settings-panel/LoliSkeleton.vue'
 import KUNGalgameLoading from '@/components/loading/KUNGalgameLoading.vue'
@@ -104,3 +104,4 @@ onMounted(async () => {
   position: absolute;
 }
 </style>
+./gatLoli

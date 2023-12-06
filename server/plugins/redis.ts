@@ -11,4 +11,7 @@ export default defineNitroPlugin(() => {
   })
 
   storage.mount('redis', driver)
+  console.log(
+    `redis: ${config.REDIS_HOST}:${config.REDIS_PORT} connection successful! `
+  )
 })

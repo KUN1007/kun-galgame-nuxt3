@@ -1,9 +1,4 @@
 export default {
-  head: {
-    title: '鲲 Galgame 论坛',
-    description:
-      '世界上最萌的 Galgame 论坛! Galgame 交流讨论, Galgame 技术交流。为营造最好的氛围而努力! 永远不会有广告! 永远免费! ',
-  },
   header: {
     name: '鲲 Galgame',
     pool: '所有话题',
@@ -49,6 +44,7 @@ export default {
   },
   back: {
     back: '返回',
+    home: '主页',
   },
   mainPage: {
     header: {

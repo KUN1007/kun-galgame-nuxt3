@@ -6,7 +6,7 @@ import BackgroundImageSkeleton from '@/components/skeleton/settings-panel/Backgr
 import { useKUNGalgameSettingsStore } from '@/store/modules/settings'
 import { storeToRefs } from 'pinia'
 
-import { backgroundImages } from './background'
+import { backgroundImages } from './backgroundImage'
 import { getBackgroundURL } from '@/hooks/useBackgroundPicture'
 import { restoreBackground } from '@/hooks/useBackgroundPicture'
 
@@ -142,3 +142,4 @@ onMounted(async () => {
   }
 }
 </style>
+./backgroundImage

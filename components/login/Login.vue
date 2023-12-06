@@ -7,28 +7,22 @@ import { isValidEmail, isValidName, isValidPassword } from '@/utils/validate'
 const router = useRouter()
 
 const info = useTempMessageStore()
-// Using the message store
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useTempMessageStore()
 )
 
-// User login form
 const loginForm = reactive({
   name: '',
   password: '',
 })
 
-// Check username
 const checkUsername = (name: string) => {
-  // If the input field is empty
   if (!name.trim()) {
-    // Notify the user that the name field cannot be empty
     Message('Username cannot be empty', '用户名不可为空', 'warn')
     return false
   }
 
   if (!isValidName(name) && !isValidEmail(name)) {
-    // Logic for invalid username format
     info.info('AlertInfo.login.invalidUsername')
     return false
   }
@@ -38,13 +32,10 @@ const checkUsername = (name: string) => {
 
 const checkPassword = (password: string) => {
   if (!password.trim()) {
-    // Notify the user that the password field cannot be empty
     Message('Password cannot be empty', '密码不可为空', 'warn')
     return false
   }
-  // If the password format is incorrect (same as username or email)
   if (!isValidPassword(password)) {
-    // If the password is invalid, return an error
     info.info('AlertInfo.login.invalidPassword')
     return false
   }
@@ -57,12 +48,10 @@ const checkLogin = (
   password: string,
   isCaptureSuccessful: boolean
 ) => {
-  // Check username and password
   if (!checkUsername(name) || !checkPassword(password)) {
     return false
   }
 
-  // If human verification is not completed, return directly
   if (!isCaptureSuccessful) {
     Message(
       'Please click above to complete the human verification',
@@ -75,9 +64,7 @@ const checkLogin = (
   return true
 }
 
-// Handle user login logic when the user clicks the login button
 const handleLogin = async () => {
-  // Check user input and human verification
   const result = checkLogin(
     loginForm.name,
     loginForm.password,
@@ -88,16 +75,15 @@ const handleLogin = async () => {
     return
   }
 
-  // Send a request to the backend only if all validations pass
-  // const res = await useKUNGalgameUserStore().login(loginForm)
-  // // If the request is successful, redirect to the main page
+  const res = await useKUNGalgameUserStore().login(loginForm)
+  console.log(res)
+
   // if (res.code === 200) {
   //   info.info('AlertInfo.login.success')
   //   router.push('/')
   // }
 }
 
-// Forgot password
 const handleClickForgotPassword = () => {
   // router.push('/forgot')
 }

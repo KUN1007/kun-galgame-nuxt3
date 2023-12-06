@@ -184,7 +184,7 @@ const handelCloseSettingsPanel = () => {
   font-size: 25px;
   width: 270px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin: 20px;
   cursor: pointer;
 }

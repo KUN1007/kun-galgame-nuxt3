@@ -1,15 +1,12 @@
 <script setup lang="ts">
 const isShowPanel = ref('')
 
-// Background image, this is the backend's URL
 const backgroundImageUrl = `https://cdn.jsdelivr.net/gh/kun-moe/kun-image@main/blog/202312031407983.webp`
 
-// Click login, slide the panel
 const handleClickSignIn = () => {
   isShowPanel.value = ''
 }
 
-// Click register, slide the panel
 const handleClickRegister = () => {
   isShowPanel.value = 'active'
 }

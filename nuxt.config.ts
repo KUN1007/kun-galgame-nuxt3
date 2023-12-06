@@ -7,6 +7,10 @@ export default defineNuxtConfig({
       enabled: true,
     },
   },
+  devServer: {
+    host: '127.0.0.1',
+    port: 1007,
+  },
   modules: [
     '@pinia/nuxt',
     '@nuxt/image',
@@ -23,8 +27,14 @@ export default defineNuxtConfig({
   runtimeConfig: {
     MONGODB_URL: process.env.MONGODB_URL,
 
+    KUN_GALGAME_API: process.env.KUN_GALGAME_API,
+
     REDIS_HOST: process.env.REDIS_HOST,
     REDIS_PORT: process.env.REDIS_PORT,
+
+    JWT_ISS: process.env.JWT_ISS,
+    JWT_AUD: process.env.JWT_AUD,
+    JWT_SECRET: process.env.JWT_SECRET,
 
     public: {
       KUN_GALGAME_URL: process.env.KUN_GALGAME_URL,
