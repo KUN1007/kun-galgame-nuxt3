@@ -16,13 +16,13 @@ const loginController = async (event: H3Event) => {
     !(isValidName(name) || isValidEmail(name)) ||
     !isValidPassword(password)
   ) {
-    return kunError(10107)
+    throw createError({ statusMessage: '10107' })
   }
 
   const loginCD = await useStorage('redis').getItem(`loginCD:${name}`)
 
   if (loginCD) {
-    return kunError(10112)
+    throw createError({ statusMessage: '10112' })
   } else {
     useStorage('redis').setItem(`loginCD:${name}`, name, { ttl: 60 })
   }
@@ -39,12 +39,12 @@ export default defineEventHandler(async (event) => {
 
   const user = await UserModel.findOne({ $or: [{ name }, { email: name }] })
   if (!user) {
-    return kunError(10101)
+    throw createError({ statusMessage: '10101' })
   }
 
   const isCorrectPassword = await bcrypt.compare(password, user.password)
   if (!isCorrectPassword) {
-    return kunError(10102)
+    throw createError({ statusMessage: '10102' })
   }
 
   const { token, refreshToken } = await createTokens(user.uid, user.name)
@@ -62,5 +62,5 @@ export default defineEventHandler(async (event) => {
     token,
   }
 
-  return kunSuccess(userInfo)
+  return userInfo
 })

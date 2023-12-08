@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTempMessageStore } from '@/store/temp/message'
-import { registerFormItem } from './utils/registerForm'
+import { registerFormItem } from './utils/registerFormItem'
 
 // Using the message store
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
@@ -291,3 +291,4 @@ const handleRegister = async () => {
   }
 }
 </style>
+./utils/checkRegisterForm

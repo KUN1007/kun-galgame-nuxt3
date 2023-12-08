@@ -1,13 +1,5 @@
 import { defineStore } from 'pinia'
 import type { KUNGalgamerStore } from '../types/kungalgamer'
-import type { LoginRequestData, LoginResponseData } from '~/types/api/user'
-
-const loginURLs = {
-  login: `/user/login`,
-  register: `/user/register`,
-  verificationCode: `/auth/email/code`,
-  refreshToken: `/auth/token/refresh`,
-}
 
 export const useKUNGalgameUserStore = defineStore({
   id: 'KUNGalgameUser',
@@ -48,11 +40,6 @@ export const useKUNGalgameUserStore = defineStore({
 
     removeToken() {
       this.moemoeAccessToken = ''
-    },
-
-    async login(request: LoginRequestData) {
-      const res = await fetchPost(loginURLs.login, request)
-      return res
     },
   },
 })

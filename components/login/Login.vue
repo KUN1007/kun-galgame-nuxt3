@@ -75,8 +75,13 @@ const handleLogin = async () => {
     return
   }
 
-  const res = await useKUNGalgameUserStore().login(loginForm)
-  console.log(res)
+  const { data } = await useFetch('/api/user/login', {
+    method: 'POST',
+    body: loginForm,
+    watch: [loginForm],
+  })
+
+  console.log(data.value)
 
   // if (res.code === 200) {
   //   info.info('AlertInfo.login.success')
