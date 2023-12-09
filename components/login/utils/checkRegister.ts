@@ -1,5 +1,5 @@
-import { useTempMessageStore } from '@/store/temp/message'
-import { isValidEmail, isValidName, isValidPassword } from '@/utils/validate'
+import { useTempMessageStore } from '~/store/temp/message'
+import { isValidEmail, isValidName, isValidPassword } from '~/utils/validate'
 import type { Pinia } from '@pinia/nuxt/dist/runtime/composables'
 
 export const checkRegisterForm = {

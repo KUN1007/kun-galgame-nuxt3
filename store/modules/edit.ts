@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
-import { postNewTopicApi, getTopTagsApi } from '@/api'
+import { postNewTopicApi, getTopTagsApi } from '~/api'
 import {
   EditCreateTopicRequestData,
   EditCreateTopicResponseData,
   EditGetHotTagsRequestData,
   EditGetHotTagsResponseData,
-} from '@/api'
+} from '~/api'
 
 import { checkTopicPublish } from '../utils/checkTopicPublish'
 import type { EditStorePersist } from '../types/edit'

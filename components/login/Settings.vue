@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-import { useKUNGalgameSettingsStore } from '@/store/modules/settings'
+import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
 
 const { showKUNGalgameLanguage, showKUNGalgameMode } = storeToRefs(
   useKUNGalgameSettingsStore()

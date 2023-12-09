@@ -86,19 +86,19 @@ useSchemaOrg([
 
 <template>
   <!-- Global alert component -->
-  <Alert />
+  <KunAlert />
 
   <!-- Global info component -->
-  <AlertInfo />
+  <KunAlertInfo />
 
   <!-- Global capture component -->
-  <Capture />
+  <KunCapture />
 
   <!-- Global search component -->
   <!-- <SearchKUNGalgameSearchBox /> -->
 
   <NuxtLoadingIndicator />
-  <NuxtLayout>
+  <NuxtLayout name="nav">
     <NuxtPage />
   </NuxtLayout>
 </template>

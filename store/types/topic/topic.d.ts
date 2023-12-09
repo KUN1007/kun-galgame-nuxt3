@@ -1,4 +1,4 @@
-import type { TopicReply } from '@/api'
+import type { TopicReply } from '~/api'
 
 export interface TopicStorePersist {
   // Whether to show advanced editing mode

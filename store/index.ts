@@ -1,9 +1,9 @@
 import { useKUNGalgameEditStore } from './modules/edit'
 import { usePersistKUNGalgameHomeStore } from './modules/home'
-import { useKUNGalgameUserStore } from '@/store/modules/kungalgamer'
-import { useKUNGalgameSettingsStore } from '@/store/modules/settings'
-import { usePersistKUNGalgameTopicStore } from '@/store/modules/topic/topic'
-import { usePersistKUNGalgameReplyStore } from '@/store/modules/topic/reply'
+import { useKUNGalgameUserStore } from '~/store/modules/kungalgamer'
+import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
+import { usePersistKUNGalgameTopicStore } from '~/store/modules/topic/topic'
+import { usePersistKUNGalgameReplyStore } from '~/store/modules/topic/reply'
 
 export const kungalgameStoreReset = () => {
   const editStore = useKUNGalgameEditStore()

@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 
-import { getPoolTopicApi } from '@/api'
-import type { PoolTopicsRequestData, PoolTopicResponseData } from '@/api'
+import { getPoolTopicApi } from '~/api'
+import type { PoolTopicsRequestData, PoolTopicResponseData } from '~/api'
 
-import type { PoolStoreTemp } from '@/store/types/pool'
+import type { PoolStoreTemp } from '~/store/types/pool'
 
 export const useTempPoolStore = defineStore({
   id: 'tempPool',

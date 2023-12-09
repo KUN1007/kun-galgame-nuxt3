@@ -5,7 +5,7 @@ import {
   isValidName,
   isValidPassword,
   isValidMailConfirmCode,
-} from '@/utils/validate'
+} from '~/utils/validate'
 import type { H3Event } from 'h3'
 import type { LoginRequestData, LoginResponseData } from '~/types/api/user'
 

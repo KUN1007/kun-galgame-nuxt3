@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia'
 
-import { postReplyByTidApi } from '@/api'
+import { postReplyByTidApi } from '~/api'
 
 import type {
   TopicCreateReplyRequestData,
   TopicCreateReplyResponseData,
-} from '@/api'
+} from '~/api'
 
-import { checkReplyPublish } from '@/store/utils/checkReplyPublish'
-import type { ReplyStorePersist } from '@/store/types/topic/reply'
+import { checkReplyPublish } from '~/store/utils/checkReplyPublish'
+import type { ReplyStorePersist } from '~/store/types/topic/reply'
 
 export const usePersistKUNGalgameReplyStore = defineStore({
   id: 'KUNGalgameReply',

@@ -6,7 +6,7 @@ import {
   updateReplyLikeApi,
   updateReplyDislikeApi,
   updateReplyApi,
-} from '@/api'
+} from '~/api'
 
 import type {
   TopicReplyRequestData,
@@ -19,10 +19,10 @@ import type {
   TopicDislikeReplyResponseData,
   TopicUpdateReplyRequestData,
   TopicUpdateReplyResponseData,
-} from '@/api'
+} from '~/api'
 
-import { checkReplyPublish } from '@/store/utils/checkReplyPublish'
-import type { ReplyStoreTemp } from '@/store/types/topic/reply'
+import { checkReplyPublish } from '~/store/utils/checkReplyPublish'
+import type { ReplyStoreTemp } from '~/store/types/topic/reply'
 
 export const useTempReplyStore = defineStore({
   id: 'tempReply',

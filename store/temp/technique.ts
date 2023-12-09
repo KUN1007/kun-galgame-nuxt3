@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia'
 
-import { getTechniqueTopicApi } from '@/api'
+import { getTechniqueTopicApi } from '~/api'
 import type {
   TechniqueTopicsRequestData,
   TechniqueTopicResponseData,
-} from '@/api'
+} from '~/api'
 
-import type { TechniqueStoreTemp } from '@/store/types/technique'
+import type { TechniqueStoreTemp } from '~/store/types/technique'
 
 export const useTempTechniqueStore = defineStore({
   id: 'tempTechnique',

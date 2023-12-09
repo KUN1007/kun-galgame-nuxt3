@@ -5,9 +5,9 @@ import type {
   RankingGetTopicsResponseData,
   RankingGetUserRequestData,
   RankingGetUsersResponseData,
-} from '@/api'
+} from '~/api'
 
-import { getRankingTopicsApi, getRankingUsersApi } from '@/api'
+import { getRankingTopicsApi, getRankingUsersApi } from '~/api'
 
 interface RankingStore {
   topic: RankingGetTopicsRequestData

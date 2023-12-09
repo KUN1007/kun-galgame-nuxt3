@@ -1,5 +1,5 @@
 import { render, h, ref } from 'vue'
-import KUNGalgameMessage from '~/components/global/alert/KUNGalgameMessage.vue'
+import Message from '~/components/kun/alert/Message.vue'
 
 type MessageType = `warn` | `success` | `error` | `info`
 
@@ -20,7 +20,7 @@ export const useMessage = (
   messageCount.value++
   render(null, document.body)
 
-  const messageNode = h(KUNGalgameMessage, {
+  const messageNode = h(Message, {
     messageCN,
     messageEN,
     type,

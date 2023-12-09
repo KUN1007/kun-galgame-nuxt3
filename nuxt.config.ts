@@ -42,7 +42,7 @@ export default defineNuxtConfig({
   },
 
   // Frontend
-  css: ['@/assets/css/index.scss'],
+  css: ['~/assets/css/index.scss'],
   vite: {
     esbuild: {
       drop: ['console', 'debugger'],

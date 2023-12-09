@@ -6,9 +6,9 @@ import type {
   BalanceIncomeResponseData,
   BalanceExpenditureResponseData,
   BalancePLStatementResponseData,
-} from '@/api'
+} from '~/api'
 
-import { getIncomeApi, getExpenditureApi, getPLStatementApi } from '@/api'
+import { getIncomeApi, getExpenditureApi, getPLStatementApi } from '~/api'
 
 interface BalanceStore {
   income: BalanceIncomeRequestData

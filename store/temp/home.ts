@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
-import { getHomeSearchTopicApi, getHomeTopicApi } from '@/api/index'
+import { getHomeSearchTopicApi, getHomeTopicApi } from '~/api/index'
 import type {
   HomeSearchTopicRequestData,
   HomeSearchTopicResponseData,
   HomeTopicRequestData,
   HomeTopicResponseData,
-} from '@/api/index'
+} from '~/api/index'
 import type { HomeStoreTemp } from '../types/home'
 
 export const useTempHomeStore = defineStore({

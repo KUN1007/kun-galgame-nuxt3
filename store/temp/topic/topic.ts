@@ -7,7 +7,7 @@ import {
   updateTopicUpvoteApi,
   updateTopicLikeApi,
   updateTopicDislikeApi,
-} from '@/api'
+} from '~/api'
 
 import type {
   TopicDetailResponseData,
@@ -20,7 +20,7 @@ import type {
   TopicLikeTopicResponseData,
   TopicDislikeTopicRequestData,
   TopicDislikeTopicResponseData,
-} from '@/api'
+} from '~/api'
 
 export const useTempTopicStore = defineStore({
   id: 'tempTopic',

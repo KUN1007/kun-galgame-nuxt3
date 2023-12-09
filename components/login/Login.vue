@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useKUNGalgameUserStore } from '@/store/modules/kungalgamer'
-import { useTempMessageStore } from '@/store/temp/message'
+import { useKUNGalgameUserStore } from '~/store/modules/kungalgamer'
+import { useTempMessageStore } from '~/store/temp/message'
 import { storeToRefs } from 'pinia'
 import { checkLoginForm } from './utils/checkLogin'
 

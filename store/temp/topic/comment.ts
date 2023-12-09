@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { CommentDraft } from '@/store/types/topic/comment'
+import type { CommentDraft } from '~/store/types/topic/comment'
 
 // Comments
 import {
@@ -7,7 +7,7 @@ import {
   updateCommentLikeApi,
   updateCommentDislikeApi,
   postCommentByPidAndRidApi,
-} from '@/api'
+} from '~/api'
 
 import type {
   TopicCommentResponseData,
@@ -17,7 +17,7 @@ import type {
   TopicDislikeCommentResponseData,
   TopicCreateCommentRequestData,
   TopicCreateCommentResponseData,
-} from '@/api'
+} from '~/api'
 
 export const useTempCommentStore = defineStore({
   id: 'tempComment',

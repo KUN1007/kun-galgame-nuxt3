@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { TopicStorePersist } from '@/store/types/topic/topic'
+import { TopicStorePersist } from '~/store/types/topic/topic'
 
 export const usePersistKUNGalgameTopicStore = defineStore({
   id: 'KUNGalgameTopic',

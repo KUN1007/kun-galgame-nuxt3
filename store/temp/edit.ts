@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia'
 
-import { updateNewTopicApi } from '@/api'
+import { updateNewTopicApi } from '~/api'
 
 import type {
   EditUpdateTopicRequestData,
   EditUpdateTopicResponseData,
-} from '@/api'
+} from '~/api'
 
-import { checkTopicPublish } from '@/store/utils/checkTopicPublish'
-import { EditStoreTemp } from '@/store/types/edit'
+import { checkTopicPublish } from '~/store/utils/checkTopicPublish'
+import { EditStoreTemp } from '~/store/types/edit'
 
 export const useTempEditStore = defineStore({
   id: 'tempEdit',

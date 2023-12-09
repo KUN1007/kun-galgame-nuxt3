@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 
-import type { NonMoeLogRequestData, NonMoeGetLogsResponseData } from '@/api'
+import type { NonMoeLogRequestData, NonMoeGetLogsResponseData } from '~/api'
 
-import { getNonMoeLogsApi } from '@/api'
+import { getNonMoeLogsApi } from '~/api'
 
 export const useTempNonMoeStore = defineStore({
   id: 'tempNonMoe',

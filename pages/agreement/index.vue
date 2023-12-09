@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useKUNGalgameSettingsStore } from '@/store/modules/settings'
+import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
 import { storeToRefs } from 'pinia'
 
 const { showKUNGalgameLanguage } = storeToRefs(useKUNGalgameSettingsStore())
