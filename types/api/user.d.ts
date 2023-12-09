@@ -95,44 +95,42 @@ export interface VerificationCodeMailRequestData {
   email: string
 }
 
-export type UserInfoResponseData = KUNGalgameResponseData<UserInfo>
+export type UserInfoResponseData = UserInfo
 
-export type UserUpdateAvatarResponseData = KUNGalgameResponseData<{
+export type UserUpdateAvatarResponseData = {
   avatar: string
   avatarMin: string
-}>
+}
 
-export type UserUpdateBioResponseData = KUNGalgameResponseData<{}>
+export type UserUpdateBioResponseData = {}
 
-export type UserGetUserEmailResponseData = KUNGalgameResponseData<{
+export type UserGetUserEmailResponseData = {
   email: string
-}>
+}
 
-export type UserGetEmailRestCodeResponseData = KUNGalgameResponseData<{}>
+export type UserGetEmailRestCodeResponseData = {}
 
-export type UserUpdateEmailResponseData = KUNGalgameResponseData<{}>
+export type UserUpdateEmailResponseData = {}
 
-export type UserUpdatePasswordResponseData = KUNGalgameResponseData<{}>
+export type UserUpdatePasswordResponseData = {}
 
-export type UserGetUserTopicResponseData = KUNGalgameResponseData<UserTopic[]>
+export type UserGetUserTopicResponseData = UserTopic[]
 
-export type UserGetUserReplyResponseData = KUNGalgameResponseData<UserReply[]>
+export type UserGetUserReplyResponseData = UserReply[]
 
-export type UserGetUserCommentResponseData = KUNGalgameResponseData<
-  UserComment[]
->
+export type UserGetUserCommentResponseData = UserComment[]
 
-export type UserResetPasswordByEmailResponseData = KUNGalgameResponseData<{}>
+export type UserResetPasswordByEmailResponseData = {}
 
-export type LoginResponseData = KUNGalgameResponseData<{
+export type LoginResponseData = {
   uid: number
   name: string
   avatar: string
   moemoepoint: number
   roles: number
   token: string
-}>
+}
 
-export type RefreshTokenResponseData = KUNGalgameResponseData<{
+export type RefreshTokenResponseData = {
   token: string
-}>
+}

@@ -18,7 +18,7 @@ const loginForm = reactive({
 
 const checkUsername = (name: string) => {
   if (!name.trim()) {
-    Message('Username cannot be empty', '用户名不可为空', 'warn')
+    useMessage('Username cannot be empty', '用户名不可为空', 'warn')
     return false
   }
 
@@ -32,7 +32,7 @@ const checkUsername = (name: string) => {
 
 const checkPassword = (password: string) => {
   if (!password.trim()) {
-    Message('Password cannot be empty', '密码不可为空', 'warn')
+    useMessage('Password cannot be empty', '密码不可为空', 'warn')
     return false
   }
   if (!isValidPassword(password)) {
@@ -53,7 +53,7 @@ const checkLogin = (
   }
 
   if (!isCaptureSuccessful) {
-    Message(
+    useMessage(
       'Please click above to complete the human verification',
       '请点击上方完成人机身份验证',
       'warn'
@@ -78,15 +78,18 @@ const handleLogin = async () => {
   const { data } = await useFetch('/api/user/login', {
     method: 'POST',
     body: loginForm,
-    watch: [loginForm],
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
   })
 
-  console.log(data.value)
-
-  // if (res.code === 200) {
-  //   info.info('AlertInfo.login.success')
-  //   router.push('/')
-  // }
+  if (data.value) {
+    info.info('AlertInfo.login.success')
+    useKUNGalgameUserStore().setUserInfo(data.value)
+  }
 }
 
 const handleClickForgotPassword = () => {

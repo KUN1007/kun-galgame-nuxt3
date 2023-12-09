@@ -11,7 +11,7 @@ const messageCount = ref(0)
  * @param {type} type - Type of the message, can be one of `warn`, `success`, `error`, or `info`
  * @param {number} duration - Display duration of the message, optional, default is 3 seconds
  */
-export const Message = (
+export const useMessage = (
   messageEN: string,
   messageCN: string,
   type: MessageType,

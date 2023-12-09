@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import type { KUNGalgamerStore } from '../types/kungalgamer'
+import type { LoginResponseData } from '~/types/api/user'
 
 export const useKUNGalgameUserStore = defineStore({
   id: 'KUNGalgameUser',
@@ -15,19 +16,14 @@ export const useKUNGalgameUserStore = defineStore({
   }),
   getters: {},
   actions: {
-    setUserInfo(
-      uid: number,
-      name: string,
-      avatar: string,
-      moemoepoint: number,
-      roles: number
-    ): void {
-      this.uid = uid
-      this.name = name
-      this.avatar = avatar
-      this.avatarMin = avatar.replace(/\.webp$/, '-100.webp')
-      this.moemoepoint = moemoepoint
-      this.roles = roles
+    setUserInfo(user: LoginResponseData): void {
+      this.uid = user.uid
+      this.name = user.name
+      this.avatar = user.avatar
+      this.avatarMin = user.avatar.replace(/\.webp$/, '-100.webp')
+      this.moemoepoint = user.moemoepoint
+      this.roles = user.roles
+      this.moemoeAccessToken = user.token
     },
 
     setToken(moemoeAccessToken: string) {

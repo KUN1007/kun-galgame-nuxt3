@@ -85,7 +85,7 @@ const submitAnswer = () => {
     isCaptureSuccessful.value = true
     // Close the panel
     isShowCapture.value = false
-    Message(
+    useMessage(
       'Human-machine identity verification successful ~',
       '人机身份验证通过 ~',
       'success'
@@ -95,7 +95,7 @@ const submitAnswer = () => {
     // Wrong answer
     errorCounter.value++
 
-    Message('Wrong answer!', '回答错误！', 'warn')
+    useMessage('Wrong answer!', '回答错误！', 'warn')
 
     // Randomly select a new question
     const randomIndex = randomizeQuestion()
