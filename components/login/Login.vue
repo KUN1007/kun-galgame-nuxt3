@@ -2,7 +2,6 @@
 import { useKUNGalgameUserStore } from '@/store/modules/kungalgamer'
 import { useTempMessageStore } from '@/store/temp/message'
 import { storeToRefs } from 'pinia'
-import { isValidEmail, isValidName, isValidPassword } from '@/utils/validate'
 import { checkLoginForm } from './utils/checkLogin'
 
 const router = useRouter()
@@ -18,8 +17,7 @@ const loginForm = reactive({
 })
 
 const handleLogin = async () => {
-  const { $pinia } = useNuxtApp()
-  const checkLogin = checkLoginForm.asyncData($pinia)
+  const checkLogin = checkLoginForm.asyncData(useNuxtApp().$pinia)
   const result = checkLogin(
     loginForm.name,
     loginForm.password,

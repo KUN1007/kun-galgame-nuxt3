@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { useTempMessageStore } from '@/store/temp/message'
 import { registerFormItem } from './utils/registerFormItem'
+import { checkRegisterForm } from './utils/checkRegister'
 
-// Using the message store
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useTempMessageStore()
 )
 
-const info = useTempMessageStore()
+const { checkForm, checkRegister } = checkRegisterForm.asyncData(
+  useNuxtApp().$pinia
+)
 
-// Current route
 const router = useRouter()
 const isSendCode = ref(false)
 
@@ -20,73 +21,9 @@ const registerForm = reactive<Record<string, string>>({
   code: '',
 })
 
-const checkRegisterForm = (
-  name: string,
-  email: string,
-  password: string
-): boolean => {
-  if (!name.trim() || !email.trim() || !password.trim()) {
-    useMessage(
-      'Username, email, password field cannot be empty!',
-      '用户名，邮箱，密码字段不可为空！',
-      'warn'
-    )
-    return false
-  }
-
-  if (!isValidName(name)) {
-    info.info('AlertInfo.login.invalidUsername')
-    return false
-  }
-
-  if (!isValidEmail(email)) {
-    useMessage('Invalid email format!', '非法的邮箱格式！', 'warn')
-    return false
-  }
-
-  if (!isValidPassword(password)) {
-    info.info('AlertInfo.login.invalidPassword')
-    return false
-  }
-
-  return true
-}
-
-const checkRegisterFormSubmit = (isSendCode: boolean, code: string) => {
-  if (!isSendCode) {
-    useMessage(
-      'Need to send an email verification code',
-      '需要发送邮箱验证码',
-      'warn'
-    )
-    return false
-  }
-
-  if (!code.trim()) {
-    useMessage(
-      'Email verification code cannot be empty',
-      '邮箱验证码不可为空',
-      'warn'
-    )
-    return false
-  }
-
-  if (!isValidMailConfirmCode(code)) {
-    info.info('AlertInfo.login.invalidCode')
-    return false
-  }
-
-  return true
-}
-
-// Send verification code
 const handleSendCode = () => {
   if (
-    !checkRegisterForm(
-      registerForm.name,
-      registerForm.email,
-      registerForm.password
-    )
+    !checkForm(registerForm.name, registerForm.email, registerForm.password)
   ) {
     return
   }
@@ -101,7 +38,7 @@ const handleSendCode = () => {
 }
 
 const handleRegister = async () => {
-  if (!checkRegisterFormSubmit(isSendCode.value, registerForm.code)) {
+  if (!checkRegister(isSendCode.value, registerForm.code)) {
     return
   }
 
@@ -282,7 +219,8 @@ const handleRegister = async () => {
     top: 0%;
     left: 5%;
     border-radius: 7px;
-    box-shadow: 0 15px 27px var(--kungalgame-blue-0),
+    box-shadow:
+      0 15px 27px var(--kungalgame-blue-0),
       0 10px 10px var(--kungalgame-blue-0);
   }
 
