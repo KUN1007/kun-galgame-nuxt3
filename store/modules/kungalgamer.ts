@@ -2,40 +2,47 @@ import { defineStore } from 'pinia'
 import type { KUNGalgamerStore } from '../types/kungalgamer'
 import type { LoginResponseData } from '~/types/api/user'
 
-export const useKUNGalgameUserStore = defineStore({
-  id: 'KUNGalgameUser',
-  persist: true,
-  state: (): KUNGalgamerStore => ({
-    uid: 0,
-    name: '',
-    avatar: '',
-    avatarMin: '',
-    moemoepoint: 0,
-    moemoeAccessToken: '',
-    roles: 0,
-  }),
-  getters: {},
-  actions: {
-    setUserInfo(user: LoginResponseData): void {
-      this.uid = user.uid
-      this.name = user.name
-      this.avatar = user.avatar
-      this.avatarMin = user.avatar.replace(/\.webp$/, '-100.webp')
-      this.moemoepoint = user.moemoepoint
-      this.roles = user.roles
-      this.moemoeAccessToken = user.token
-    },
+export const useKUNGalgameUserStore = defineStore(
+  'KUNGalgameUser',
+  () => {
+    const kungalgamer: KUNGalgamerStore = {
+      uid: 0,
+      name: '',
+      avatar: '',
+      avatarMin: '',
+      moemoepoint: 0,
+      moemoeAccessToken: '',
+      roles: 0,
+    }
 
-    setToken(moemoeAccessToken: string) {
-      this.moemoeAccessToken = moemoeAccessToken
-    },
+    const setUserInfo = (user: LoginResponseData) => {
+      kungalgamer.uid = user.uid
+      kungalgamer.name = user.name
+      kungalgamer.avatar = user.avatar
+      kungalgamer.avatarMin = user.avatar.replace(/\.webp$/, '-100.webp')
+      kungalgamer.moemoepoint = user.moemoepoint
+      kungalgamer.roles = user.roles
+      kungalgamer.moemoeAccessToken = user.token
+    }
 
-    getToken() {
-      return this.moemoeAccessToken
-    },
+    const setToken = (moemoeAccessToken: string) => {
+      kungalgamer.moemoeAccessToken = moemoeAccessToken
+    }
 
-    removeToken() {
-      this.moemoeAccessToken = ''
-    },
+    const getToken = () => {
+      return kungalgamer.moemoeAccessToken
+    }
+
+    const removeToken = () => {
+      kungalgamer.moemoeAccessToken = ''
+    }
+
+    return {
+      setUserInfo,
+      setToken,
+      getToken,
+      removeToken,
+    }
   },
-})
+  { persist: true }
+)

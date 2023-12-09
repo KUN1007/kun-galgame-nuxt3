@@ -3,6 +3,7 @@ import { useKUNGalgameUserStore } from '@/store/modules/kungalgamer'
 import { useTempMessageStore } from '@/store/temp/message'
 import { storeToRefs } from 'pinia'
 import { isValidEmail, isValidName, isValidPassword } from '@/utils/validate'
+import { checkLoginForm } from './utils/checkLogin'
 
 const router = useRouter()
 
@@ -16,55 +17,9 @@ const loginForm = reactive({
   password: '',
 })
 
-const checkUsername = (name: string) => {
-  if (!name.trim()) {
-    useMessage('Username cannot be empty', '用户名不可为空', 'warn')
-    return false
-  }
-
-  if (!isValidName(name) && !isValidEmail(name)) {
-    info.info('AlertInfo.login.invalidUsername')
-    return false
-  }
-
-  return true
-}
-
-const checkPassword = (password: string) => {
-  if (!password.trim()) {
-    useMessage('Password cannot be empty', '密码不可为空', 'warn')
-    return false
-  }
-  if (!isValidPassword(password)) {
-    info.info('AlertInfo.login.invalidPassword')
-    return false
-  }
-
-  return true
-}
-
-const checkLogin = (
-  name: string,
-  password: string,
-  isCaptureSuccessful: boolean
-) => {
-  if (!checkUsername(name) || !checkPassword(password)) {
-    return false
-  }
-
-  if (!isCaptureSuccessful) {
-    useMessage(
-      'Please click above to complete the human verification',
-      '请点击上方完成人机身份验证',
-      'warn'
-    )
-    return false
-  }
-
-  return true
-}
-
 const handleLogin = async () => {
+  const { $pinia } = useNuxtApp()
+  const checkLogin = checkLoginForm.asyncData($pinia)
   const result = checkLogin(
     loginForm.name,
     loginForm.password,
@@ -107,13 +62,13 @@ const handleClickForgotPassword = () => {
       <input
         v-model="loginForm.name"
         type="text"
-        :placeholder="($tm('login.login.loginUsername') as string)"
+        :placeholder="$tm('login.login.loginUsername') as string"
         class="input"
       />
       <input
         v-model="loginForm.password"
         type="password"
-        :placeholder="($tm('login.login.loginPassword') as string)"
+        :placeholder="$tm('login.login.loginPassword') as string"
         class="input"
       />
 
@@ -232,7 +187,8 @@ const handleClickForgotPassword = () => {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 7px;
-    box-shadow: 0 15px 27px var(--kungalgame-blue-0),
+    box-shadow:
+      0 15px 27px var(--kungalgame-blue-0),
       0 10px 10px var(--kungalgame-blue-0);
   }
 
