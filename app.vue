@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { KUNGalgameLanguage } from '~/utils/getDefaultEnv'
 
 import { useKUNGalgameSettingsStore } from '@/store/modules/settings'
 import { storeToRefs } from 'pinia'
@@ -11,6 +10,7 @@ const config = useRuntimeConfig()
 
 const { showKUNGalgameLanguage, showKUNGalgameMode, showKUNGalgameFontStyle } =
   storeToRefs(useKUNGalgameSettingsStore())
+const i18n = useNuxtApp().$i18n
 
 useHead({
   title: t('head.title'),

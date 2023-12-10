@@ -4,8 +4,8 @@ export const useKUNGalgameSettingsStore = defineStore({
   id: 'KUNGalgameSettings',
   persist: true,
   state: (): KUNGalgameSettingsStore => ({
-    showKUNGalgameMode: mode(),
-    showKUNGalgameLanguage: KUNGalgameLanguage(),
+    showKUNGalgameMode: '',
+    showKUNGalgameLanguage: 'en',
     showKUNGalgamePageWidth: {
       KUN: 90,
       Topic: 90,

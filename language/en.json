@@ -29,6 +29,8 @@
       "name": "Settings",
       "mode": "Mode",
       "language": "Language",
+      "en": "English",
+      "zh": "简体中文",
       "font": "Font Style",
       "default": "System Default",
       "fontInput": "Input font name here",

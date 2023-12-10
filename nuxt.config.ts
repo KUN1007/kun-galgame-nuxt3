@@ -54,7 +54,4 @@ export default defineNuxtConfig({
     strategy: 'no_prefix',
     vueI18n: '~/language/i18n.ts',
   },
-  piniaPersistedstate: {
-    storage: 'localStorage',
-  },
 })
