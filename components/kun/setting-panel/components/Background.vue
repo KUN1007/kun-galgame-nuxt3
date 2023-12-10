@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import CustomBackground from './CustomBackground.vue'
-import BackgroundImageSkeleton from '~/components/skeleton/settings-panel/BackgroundImageSkeleton.vue'
 
 import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
 import { storeToRefs } from 'pinia'
 
 import { backgroundImages } from './backgroundImage'
-import { getBackgroundURL } from '~/hooks/useBackgroundPicture'
-import { restoreBackground } from '~/hooks/useBackgroundPicture'
+import { getBackgroundURL } from '~/composables/useBackgroundPicture'
+import { restoreBackground } from '~/composables/useBackgroundPicture'
 
 const imageArray = ref<string[]>([])
 const { showKUNGalgameBackground } = storeToRefs(useKUNGalgameSettingsStore())
@@ -49,7 +48,9 @@ onMounted(async () => {
               @click="handleChangeImage(kun.index)"
             />
 
-            <BackgroundImageSkeleton v-if="!imageArray[kun.index - 1]" />
+            <KunSkeletonSettingsPanelBackgroundImage
+              v-if="!imageArray[kun.index - 1]"
+            />
           </li>
         </ul>
       </li>

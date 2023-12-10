@@ -7,11 +7,9 @@ import { onBeforeRouteLeave } from 'vue-router'
 
 const Hamburger = defineAsyncComponent(() => import('./Hamburger.vue'))
 const KUNGalgameSettingsPanel = defineAsyncComponent(
-  () => import('../setting-panel/KUNGalgameSettingPanel.vue')
+  () => import('../setting-panel/SettingPanel.vue')
 )
-const KUNGalgameUserInfo = defineAsyncComponent(
-  () => import('./KUNGalgameUserInfo.vue')
-)
+const KUNGalgameUserInfo = defineAsyncComponent(() => import('./UserInfo.vue'))
 
 import { useTempHomeStore } from '~/store/temp/home'
 import { useKUNGalgameUserStore } from '~/store/modules/kungalgamer'
@@ -52,10 +50,7 @@ onBeforeRouteLeave(() => {
 
       <div class="kungalgame">
         <RouterLink to="/kun">
-          <img
-            src="@/assets/images/favicon.webp"
-            alt="KUN Visual Novel | 鲲 Galgame"
-          />
+          <img src="/favicon.webp" alt="KUN Visual Novel | 鲲 Galgame" />
           <span>{{ $tm('header.name') }}</span>
         </RouterLink>
       </div>

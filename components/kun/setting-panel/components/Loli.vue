@@ -2,9 +2,6 @@
 import { onMounted, ref } from 'vue'
 import { getLoli } from './getLoli'
 
-import LoliSkeleton from '~/components/skeleton/settings-panel/LoliSkeleton.vue'
-import KUNGalgameLoading from '~/components/loading/KUNGalgameLoading.vue'
-
 const loliData = ref({
   loliBodyLeft: '',
   loliBodyTop: '',
@@ -70,9 +67,9 @@ onMounted(async () => {
       />
     </div>
 
-    <LoliSkeleton v-if="!loliData.body" />
+    <KunSkeletonSettingsPanelLoli v-if="!loliData.body" />
 
-    <KUNGalgameLoading v-if="isShowLoading" style="top: 310px; left: 140px" />
+    <KunLoading v-if="isShowLoading" style="top: 310px; left: 140px" />
   </div>
 </template>
 

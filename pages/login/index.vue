@@ -65,7 +65,7 @@ const handleClickRegister = () => {
       </div>
     </div>
 
-    <KUNGalgameFooter style="position: absolute; bottom: 2%" />
+    <KunFooter style="position: absolute; bottom: 2%" />
   </div>
 </template>
 
@@ -89,7 +89,8 @@ const handleClickRegister = () => {
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 5px;
-  box-shadow: 0 15px 27px var(--kungalgame-blue-0),
+  box-shadow:
+    0 15px 27px var(--kungalgame-blue-0),
     0 10px 10px var(--kungalgame-blue-0);
   height: 490px;
   max-width: 700px;

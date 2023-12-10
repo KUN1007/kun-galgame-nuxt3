@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import Message from '~/components/alert/Message'
-
 import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
 import { storeToRefs } from 'pinia'
 
-import { saveImage, getImage } from '~/hooks/useLocalforage'
+import { saveImage, getImage } from '~/composables/useLocalforage'
 
 const { showKUNGalgameBackground, showKUNGalgameCustomBackground } =
   storeToRefs(useKUNGalgameSettingsStore())
@@ -36,7 +34,7 @@ const handleFileChange = async (event: Event) => {
       backgroundImageBlobData
     )
   } else {
-    Message('Upload image failed!', '上传图片错误！', 'error')
+    useMessage('Upload image failed!', '上传图片错误！', 'error')
   }
 }
 </script>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import Message from '~/components/alert/Message'
 
 import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
 import { storeToRefs } from 'pinia'
@@ -15,7 +14,7 @@ const setFont = () => {
     settingsStore.setKUNGalgameFontStyle(font.value)
     font.value = ''
   } else {
-    Message('Please input a valid font name', '请输入合法的字体名', 'warn')
+    useMessage('Please input a valid font name', '请输入合法的字体名', 'warn')
   }
 }
 </script>

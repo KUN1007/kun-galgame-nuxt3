@@ -38,6 +38,7 @@ export const useKUNGalgameUserStore = defineStore(
     }
 
     return {
+      ...kungalgamer,
       setUserInfo,
       setToken,
       getToken,

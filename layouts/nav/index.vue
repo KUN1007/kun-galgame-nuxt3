@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onMounted, watch, ref } from 'vue'
 import { getCurrentBackground } from '~/composables/useBackgroundPicture'
-import KUNGalgameTopBar from '~/components/top-bar/KUNGalgameTopBar.vue'
 
 import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
 import { storeToRefs } from 'pinia'
@@ -33,7 +32,7 @@ watch(
 <template>
   <div class="app" :style="{ backgroundImage: `url(${imageURL})` }">
     <div class="top-bar">
-      <KUNGalgameTopBar />
+      <KunTopBar />
     </div>
     <RouterView />
   </div>

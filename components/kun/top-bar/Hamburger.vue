@@ -15,7 +15,7 @@ defineEmits(['showKUNGalgameHamburger'])
     >
       <div class="container" @click.stop>
         <div class="kungalgame">
-          <img src="@/assets/images/favicon.webp" alt="KUNGalgame" />
+          <img src="/favicon.webp" alt="KUNGalgame" />
           <span>{{ $tm('header.name') }}</span>
         </div>
         <!-- Interactive items -->

@@ -2,13 +2,9 @@
 import { Icon } from '@iconify/vue'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-// Global message component (top)
-import Message from '~/components/alert/Message'
-// Global message component (bottom)
 import { useTempMessageStore } from '~/store/temp/message'
 import { useKUNGalgameUserStore } from '~/store/modules/kungalgamer'
 import { storeToRefs } from 'pinia'
-// Reset store
 import { kungalgameStoreReset } from '~/store'
 
 const { uid, name, moemoepoint } = storeToRefs(useKUNGalgameUserStore())
@@ -21,28 +17,23 @@ const emits = defineEmits<{
   close: []
 }>()
 
-// Close the panel when losing focus
 const handlePanelBlur = async () => {
-  // Wait for a while, or it will directly close the panel
   await new Promise((resolve) => {
     setTimeout(resolve, 107)
   })
   emits('close')
 }
 
-// Log out - for simplicity, the code here does not communicate with the backend to remove the token from Redis.
 const logOut = async () => {
-  // Get the user's response
   const res = await useTempMessageStore().alert('AlertInfo.edit.logout', true)
   if (res) {
     kungalgameStoreReset()
     router.push('/login')
-    Message('Logout successfully!', '登出成功', 'success')
+    useMessage('Logout successfully!', '登出成功', 'success')
   }
 }
 
 onMounted(() => {
-  // Automatically get focus
   container.value?.focus()
 })
 </script>
