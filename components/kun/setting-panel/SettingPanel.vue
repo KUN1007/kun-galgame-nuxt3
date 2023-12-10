@@ -31,7 +31,7 @@ const handelCloseSettingsPanel = () => {
   <div class="root">
     <div class="container">
       <div class="title">
-        <span>{{ $tm('header.settings.name') }}</span>
+        <span>{{ $t('header.settings.name') }}</span>
         <span><Icon class="settings-icon" icon="uiw:setting-o" /></span>
       </div>
 
@@ -45,13 +45,13 @@ const handelCloseSettingsPanel = () => {
             :class="isShowPageWidth ? 'active' : ''"
             @click="isShowPageWidth = true"
           >
-            {{ $tm('header.settings.width') }}
+            {{ $t('header.settings.width') }}
           </span>
           <span
             :class="isShowPageWidth ? '' : 'active'"
             @click="isShowPageWidth = false"
           >
-            {{ $tm('header.settings.font') }}
+            {{ $t('header.settings.font') }}
           </span>
         </div>
 
@@ -69,7 +69,7 @@ const handelCloseSettingsPanel = () => {
       <Background />
 
       <button class="reset" @click="handleRecover">
-        {{ $tm('header.settings.recover') }}
+        {{ $t('header.settings.recover') }}
       </button>
     </div>
 

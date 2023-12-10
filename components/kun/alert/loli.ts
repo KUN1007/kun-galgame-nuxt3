@@ -1,6 +1,6 @@
 import { randomNum } from '~/utils/random'
 const getAssetsFile = (name: string) => {
-  return new URL(`~/alert/${name}.webp`, import.meta.url).href
+  return new URL(`~/assets/alert/${name}.webp`, import.meta.url).href
 }
 
 const number = randomNum(0, 2)

@@ -22,9 +22,9 @@ const setFont = () => {
 <template>
   <div class="font">
     <div class="title">
-      <span>{{ $tm('header.settings.font') }}</span>
+      <span>{{ $t('header.settings.font') }}</span>
       <span v-if="showKUNGalgameFontStyle === 'system-ui'">
-        {{ $tm('header.settings.default') }}
+        {{ $t('header.settings.default') }}
       </span>
       <span v-else-if="showKUNGalgameFontStyle !== 'system-ui'">
         {{ showKUNGalgameFontStyle }}
@@ -33,13 +33,13 @@ const setFont = () => {
 
     <div class="font-input">
       <input
-        :placeholder="`${$tm('header.settings.fontInput')}`"
+        :placeholder="`${$t('header.settings.fontInput')}`"
         type="text"
         v-model="font"
         required
       />
       <button @click="setFont">
-        {{ $tm('header.settings.confirm') }}
+        {{ $t('header.settings.confirm') }}
       </button>
     </div>
   </div>

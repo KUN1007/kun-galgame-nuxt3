@@ -2,19 +2,25 @@
 import { useI18n } from 'vue-i18n'
 import { KUNGalgameLanguage } from '~/utils/getDefaultEnv'
 
-const { tm } = useI18n()
+import { useKUNGalgameSettingsStore } from '@/store/modules/settings'
+import { storeToRefs } from 'pinia'
+
+const { t } = useI18n()
 
 const config = useRuntimeConfig()
 
+const { showKUNGalgameLanguage, showKUNGalgameMode, showKUNGalgameFontStyle } =
+  storeToRefs(useKUNGalgameSettingsStore())
+
 useHead({
-  title: tm('head.title'),
+  title: t('head.title'),
   htmlAttrs: {
-    lang: KUNGalgameLanguage(),
+    lang: showKUNGalgameLanguage.value,
   },
   meta: [
     {
       name: 'description',
-      content: tm('head.description'),
+      content: t('head.description'),
     },
     {
       name: 'format-detection',
@@ -22,11 +28,11 @@ useHead({
     },
     {
       name: 'og:title',
-      content: tm('head.title'),
+      content: t('head.title'),
     },
     {
       name: 'og:description',
-      content: tm('head.description'),
+      content: t('head.description'),
     },
     {
       property: 'og:image',
@@ -46,11 +52,11 @@ useHead({
     },
     {
       name: 'twitter:title',
-      content: tm('head.title'),
+      content: t('head.title'),
     },
     {
       name: 'twitter:description',
-      content: tm('head.description'),
+      content: t('head.description'),
     },
     {
       property: 'twitter:image',
@@ -82,6 +88,18 @@ useSchemaOrg([
   defineWebSite({ name: 'KUN Visual Novel' }),
   defineWebPage(),
 ])
+
+onBeforeMount(() => {
+  const theme = showKUNGalgameMode.value
+  const font = showKUNGalgameFontStyle.value
+
+  if (theme) {
+    document.documentElement.className = theme
+  }
+  if (font) {
+    document.documentElement.style.fontFamily = font
+  }
+})
 </script>
 
 <template>

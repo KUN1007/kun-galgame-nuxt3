@@ -31,11 +31,11 @@ onMounted(async () => {
 <template>
   <div class="kungalgame-background">
     <div class="bg-settings">
-      {{ $tm('header.settings.background') }}
+      {{ $t('header.settings.background') }}
     </div>
     <ul class="kungalgame-background-container">
       <li>
-        <span>{{ $tm('header.settings.preset') }}</span>
+        <span>{{ $t('header.settings.preset') }}</span>
         <ul class="kungalgame-restore-bg">
           <li
             v-for="kun in backgroundImages"
@@ -59,7 +59,7 @@ onMounted(async () => {
         <CustomBackground />
 
         <button class="restore-bg" @click="restoreBackground">
-          {{ $tm('header.settings.restore') }}
+          {{ $t('header.settings.restore') }}
         </button>
       </li>
     </ul>

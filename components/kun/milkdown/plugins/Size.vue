@@ -64,7 +64,7 @@ onMounted(() => {
 <template>
   <div class="footer">
     <Settings />
-    <span> {{ size + ` ${$tm('edit.word')}` }} </span>
+    <span> {{ size + ` ${$t('edit.word')}` }} </span>
   </div>
 </template>
 

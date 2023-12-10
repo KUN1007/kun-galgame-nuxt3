@@ -5,7 +5,7 @@ import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
 
 <template>
   <div class="mode">
-    <span>{{ $tm('header.settings.mode') }}</span>
+    <span>{{ $t('header.settings.mode') }}</span>
     <div class="mode-container">
       <span>
         <Icon

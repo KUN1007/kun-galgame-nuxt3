@@ -51,7 +51,10 @@ export default defineNuxtConfig({
   i18n: {
     locales: ['en', 'zh'],
     defaultLocale: 'en',
-    strategy: 'prefix_except_default',
+    strategy: 'no_prefix',
     vueI18n: '~/language/i18n.ts',
+  },
+  piniaPersistedstate: {
+    storage: 'localStorage',
   },
 })

@@ -85,7 +85,7 @@ onBeforeUnmount(() => {
           <SearchResult :topics="topics" v-if="topics.length" />
 
           <span class="empty" v-if="!topics.length && search.keywords">
-            {{ $tm('mainPage.header.emptyResult') }}
+            {{ $t('mainPage.header.emptyResult') }}
           </span>
         </div>
       </div>

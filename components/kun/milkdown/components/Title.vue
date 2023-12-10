@@ -72,7 +72,7 @@ const handleInput = () => {
   <div class="title">
     <input
       type="text"
-      :placeholder="`${$tm('edit.title')}`"
+      :placeholder="`${$t('edit.title')}`"
       v-model="topicTitle"
       @input="handleInput"
       :maxlength="maxInputLength"

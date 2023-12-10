@@ -15,7 +15,7 @@ watch(showKUNGalgameLanguage, () => {
 
 <template>
   <div class="set-lang">
-    <span>{{ $tm('header.settings.language') }}</span>
+    <span>{{ $t('header.settings.language') }}</span>
     <select class="select" v-model="showKUNGalgameLanguage">
       <option value="en">English</option>
       <option value="zh">中文</option>

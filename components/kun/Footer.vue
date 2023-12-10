@@ -2,10 +2,10 @@
 
 <template>
   <div class="footer">
-    <div>{{ $tm('footer.copyright') }}</div>
+    <div>{{ $t('footer.copyright') }}</div>
 
     <div>
-      <span>{{ $tm('footer.openSource') }}</span>
+      <span>{{ $t('footer.openSource') }}</span>
 
       <a
         href="http://github.com/KUN1007/kun-galgame-vue"
@@ -18,7 +18,7 @@
     </div>
 
     <div>
-      <span>{{ $tm('footer.reserved') }} 1.3.0</span>
+      <span>{{ $t('footer.reserved') }} 1.3.0</span>
     </div>
   </div>
 </template>

@@ -49,16 +49,16 @@ onBeforeRouteLeave(() => {
       </div>
 
       <div class="kungalgame">
-        <RouterLink to="/kun">
+        <RouterLink to="/">
           <img src="/favicon.webp" alt="KUN Visual Novel | 鲲 Galgame" />
-          <span>{{ $tm('header.name') }}</span>
+          <span>{{ $t('header.name') }}</span>
         </RouterLink>
       </div>
 
       <div class="top-bar">
         <span v-for="kun in topBarItem" :key="kun.index">
           <RouterLink :to="{ path: kun.router }">
-            {{ $tm(`header.${kun.name}`) }}
+            {{ $t(`header.${kun.name}`) }}
           </RouterLink>
         </span>
 

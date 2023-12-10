@@ -12,7 +12,7 @@ const props = defineProps<{
 }>()
 
 const message = ref('')
-// Initialize
+
 message.value =
   showKUNGalgameLanguage.value === 'en' ? props.messageEN : props.messageCN
 
@@ -30,7 +30,6 @@ const messageClass = (type: string): string => {
   }
 }
 
-// Watch properties for reactivity
 watch(
   () => useKUNGalgameSettingsStore().showKUNGalgameLanguage,
   () => {

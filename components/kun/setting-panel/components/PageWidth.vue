@@ -52,10 +52,10 @@ onActivated(() => {
   <div
     class="width"
     :class="isDisabled ? 'disabled' : ''"
-    :title="isDisabled ? `${$tm('header.settings.disabled')}` : ''"
+    :title="isDisabled ? `${$t('header.settings.disabled')}` : ''"
   >
     <div class="width-container">
-      <span>{{ $tm('header.settings.width') }}</span>
+      <span>{{ $t('header.settings.width') }}</span>
       <span>{{ pageWidth }}%</span>
     </div>
 

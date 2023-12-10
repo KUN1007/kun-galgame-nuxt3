@@ -1,10 +1,9 @@
-import { KUNGalgameLanguage } from '~/utils/getDefaultEnv'
-
-import zh from './zh'
-import en from './en'
+import zh from './zh.json'
+import en from './en.json'
 
 export default defineI18nConfig(() => ({
-  locale: KUNGalgameLanguage(),
+  locale: 'en',
+  fallbackLocale: 'en',
   legacy: false,
   globalInjection: true,
   messages: {

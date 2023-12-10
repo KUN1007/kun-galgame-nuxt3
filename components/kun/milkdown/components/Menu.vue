@@ -46,7 +46,7 @@ const handelCloseSettingsPanel = () => {
       <div class="content">
         <!-- Editor height settings -->
         <div class="editor-height-title">
-          <span> {{ $tm('edit.editorHeight') }} </span>
+          <span> {{ $t('edit.editorHeight') }} </span>
           <span>{{ editorHeight }} </span>
         </div>
 
@@ -78,7 +78,7 @@ const handelCloseSettingsPanel = () => {
 
         <!-- Whether to display popular keywords -->
         <div class="keywords">
-          <div class="keywords-title">{{ $tm('edit.tagsHint') }}</div>
+          <div class="keywords-title">{{ $t('edit.tagsHint') }}</div>
           <SwitchButton />
         </div>
       </div>

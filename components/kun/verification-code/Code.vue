@@ -49,7 +49,7 @@ const handleSendCode = () => {
 
 <template>
   <button @click="handleSendCode" :disabled="isSending">
-    {{ isSending ? countdown : $tm('login.register.send') }}
+    {{ isSending ? countdown : $t('login.register.send') }}
   </button>
 </template>
 

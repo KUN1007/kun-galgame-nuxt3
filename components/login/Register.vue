@@ -66,18 +66,18 @@ const handleRegister = async () => {
     <LoginSettings />
 
     <div class="form">
-      <h2 class="title">{{ $tm('login.register.title') }}</h2>
+      <h2 class="title">{{ $t('login.register.title') }}</h2>
 
       <div class="container" v-for="item in registerFormItem" :key="item.index">
         <input
           v-model="registerForm[item.value]"
           :type="item.type"
-          :placeholder="`${$tm(`login.register.${item.placeholder}`)}`"
+          :placeholder="`${$t(`login.register.${item.placeholder}`)}`"
           :class="item.class"
         />
       </div>
 
-      <VerificationCode
+      <KunVerificationCode
         @click="handleSendCode"
         class="code"
         :email="registerForm.email"
@@ -85,21 +85,21 @@ const handleRegister = async () => {
 
       <!-- Registration button -->
       <button @click="handleRegister" class="btn" type="submit">
-        {{ $tm('login.register.title') }}
+        {{ $t('login.register.title') }}
       </button>
 
       <!-- User agreement prompt, etc. -->
       <span class="user-agreement">
-        {{ $tm('login.register.click') }}
+        {{ $t('login.register.click') }}
 
         <!-- User agreement and privacy policy -->
         <div class="licence">
           <RouterLink to="/agreement">
-            <span>{{ $tm('login.register.agreement') }}</span>
+            <span>{{ $t('login.register.agreement') }}</span>
           </RouterLink>
-          {{ $tm('login.register.and') }}
+          {{ $t('login.register.and') }}
           <RouterLink to="/privacy">
-            <span>{{ $tm('login.register.privacy') }}</span>
+            <span>{{ $t('login.register.privacy') }}</span>
           </RouterLink>
         </div>
       </span>

@@ -3,9 +3,9 @@ import { Icon } from '@iconify/vue'
 </script>
 
 <template>
-  <RouterLink to="/kun" class="return">
+  <RouterLink to="/" class="return">
     <Icon class="icon" icon="line-md:home-md-twotone" />
-    <span>{{ $tm('back.home') }}</span>
+    <span>{{ $t('back.home') }}</span>
   </RouterLink>
 </template>
 

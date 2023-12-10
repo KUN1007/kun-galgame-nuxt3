@@ -73,7 +73,6 @@ const handleClose = () => {
   top: -41px;
   padding-left: 150px;
   border-bottom: none;
-  /* This shadow can only be drawn like this */
   filter: drop-shadow(2px 4px 3px var(--kungalgame-trans-blue-4));
 
   span {
@@ -81,7 +80,6 @@ const handleClose = () => {
     text-align: center;
     background-color: var(--kungalgame-trans-white-2);
     font-size: 24px;
-    /* Here, the shape of the character's name is clipped into a hexagon */
     clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0 50%);
   }
 }

@@ -16,13 +16,13 @@ defineEmits(['showKUNGalgameHamburger'])
       <div class="container" @click.stop>
         <div class="kungalgame">
           <img src="/favicon.webp" alt="KUNGalgame" />
-          <span>{{ $tm('header.name') }}</span>
+          <span>{{ $t('header.name') }}</span>
         </div>
         <!-- Interactive items -->
         <div class="item" style="font-size: 17px">
           <span v-for="kun in hamburgerItem" :key="kun.index">
             <RouterLink :to="kun.router">
-              {{ $tm(`header.hamburger.${kun.name}`) }}
+              {{ $t(`header.hamburger.${kun.name}`) }}
             </RouterLink>
           </span>
         </div>
@@ -34,7 +34,7 @@ defineEmits(['showKUNGalgameHamburger'])
         <CustomBackground :is-mobile="true" />
 
         <div class="home">
-          <RouterLink to="/kun">{{ $tm('header.hamburger.home') }}</RouterLink>
+          <RouterLink to="/">{{ $t('header.hamburger.home') }}</RouterLink>
         </div>
       </div>
     </Transition>

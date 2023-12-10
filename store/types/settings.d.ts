@@ -3,7 +3,7 @@ export interface KUNGalgameSettingsStore {
   // Day and night mode toggle
   showKUNGalgameMode: '' | 'dark'
   // Website display language
-  showKUNGalgameLanguage: 'en' | 'zh'
+  showKUNGalgameLanguage: string
   // Main page width
   showKUNGalgamePageWidth: Record<string, number>
   // Website font style

@@ -8,7 +8,7 @@ const { showKUNGalgameLanguage } = storeToRefs(useKUNGalgameSettingsStore())
 <template>
   <div class="root">
     <div class="container">
-      <div class="title">{{ $tm('kungalgame.privacy') }}</div>
+      <div class="title">{{ $t('kungalgame.privacy') }}</div>
 
       <div class="article" v-if="showKUNGalgameLanguage === 'en'">
         <br />

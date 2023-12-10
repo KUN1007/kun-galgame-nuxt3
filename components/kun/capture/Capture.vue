@@ -130,7 +130,7 @@ const handleCloseCapture = () => {
           <!-- Title -->
           <div class="title">
             <!-- <span>{{ `❮` }}</span> -->
-            <h2>{{ $tm('AlertInfo.capture.title') }}</h2>
+            <h2>{{ $t('AlertInfo.capture.title') }}</h2>
             <!-- <span>{{ `❯` }}</span> -->
           </div>
           <p class="question">{{ currentQuestion.text }}</p>
@@ -149,10 +149,10 @@ const handleCloseCapture = () => {
           <!-- Submit buttons -->
           <div class="btn">
             <button @click="submitAnswer">
-              {{ $tm('AlertInfo.capture.submit') }}
+              {{ $t('AlertInfo.capture.submit') }}
             </button>
             <button @click="handleCloseCapture">
-              {{ $tm('AlertInfo.capture.close') }}
+              {{ $t('AlertInfo.capture.close') }}
             </button>
           </div>
 
@@ -160,21 +160,21 @@ const handleCloseCapture = () => {
           <!-- tabindex allows this element to be focused on the page -->
           <div class="hint-container">
             <div v-if="isShowHint" class="hint">
-              <div>{{ $tm('AlertInfo.capture.hint1') }}</div>
+              <div>{{ $t('AlertInfo.capture.hint1') }}</div>
               <div>
-                {{ $tm('AlertInfo.capture.hint2') }}
+                {{ $t('AlertInfo.capture.hint2') }}
                 <span>kun</span>
-                {{ $tm('AlertInfo.capture.hint3') }}
+                {{ $t('AlertInfo.capture.hint3') }}
               </div>
             </div>
             <div v-if="isShowAnswer" class="answer">
-              <div>{{ $tm('AlertInfo.capture.hint4') }}</div>
+              <div>{{ $t('AlertInfo.capture.hint4') }}</div>
               <a
                 href="https://github.com/KUN1007/kun-galgame-vue/tree/remove-server/src/components/capture"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {{ $tm('AlertInfo.capture.answer') }}
+                {{ $t('AlertInfo.capture.answer') }}
               </a>
             </div>
           </div>

@@ -51,38 +51,33 @@ const handleClickForgotPassword = () => {
 </script>
 
 <template>
-  <!-- Login -->
   <div class="login">
-    <!-- Settings -->
     <LoginSettings />
     <div class="form">
-      <h2 class="title">{{ $tm('login.login.loginTitle') }}</h2>
+      <h2 class="title">{{ $t('login.login.loginTitle') }}</h2>
       <input
         v-model="loginForm.name"
         type="text"
-        :placeholder="$tm('login.login.loginUsername') as string"
+        :placeholder="$t('login.login.loginUsername') as string"
         class="input"
       />
       <input
         v-model="loginForm.password"
         type="password"
-        :placeholder="$tm('login.login.loginPassword') as string"
+        :placeholder="$t('login.login.loginPassword') as string"
         class="input"
       />
 
-      <!-- Forgot Password -->
       <span @click="handleClickForgotPassword" class="forget">
-        {{ $tm('login.login.forget') }}
+        {{ $t('login.login.forget') }}
       </span>
 
-      <!-- Human Verification -->
       <span @click="isShowCapture = true" class="capture">
-        {{ $tm('login.login.capture') }}
+        {{ $t('login.login.capture') }}
       </span>
 
-      <!-- Click to Login -->
       <button @click="handleLogin" class="btn" type="submit">
-        {{ $tm('login.login.loginTitle') }}
+        {{ $t('login.login.loginTitle') }}
       </button>
     </div>
   </div>

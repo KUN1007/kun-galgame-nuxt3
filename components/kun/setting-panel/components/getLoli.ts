@@ -1,4 +1,4 @@
-import loliData from '~/public/ren/ren.json'
+import loliData from '~/assets/ren/ren.json'
 import { randomNum } from '~/utils/random'
 
 export const getLoli = async () => {

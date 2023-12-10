@@ -21,9 +21,9 @@ const handleClickRegister = () => {
     >
       <!-- Login and registration toggle -->
       <div class="switch">
-        <div @click="handleClickSignIn">{{ $tm('login.overlay.login') }}</div>
+        <div @click="handleClickSignIn">{{ $t('login.overlay.login') }}</div>
         <div @click="handleClickRegister">
-          {{ $tm('login.overlay.register') }}
+          {{ $t('login.overlay.register') }}
         </div>
       </div>
 
@@ -38,27 +38,27 @@ const handleClickRegister = () => {
         <div class="overlay">
           <div class="panel left">
             <h2>
-              {{ $tm('login.overlay.title') }}<br /><br />——
-              {{ $tm('login.overlay.world') }}
-              <span>{{ $tm('login.overlay.moe') }}</span>
-              {{ $tm('login.overlay.forum') }}
+              {{ $t('login.overlay.title') }}<br /><br />——
+              {{ $t('login.overlay.world') }}
+              <span>{{ $t('login.overlay.moe') }}</span>
+              {{ $t('login.overlay.forum') }}
             </h2>
             <br />
             <button class="btn" @click="handleClickSignIn">
-              {{ $tm('login.overlay.login') }}
+              {{ $t('login.overlay.login') }}
             </button>
           </div>
           <div class="panel right">
             <h2>
-              {{ $tm('login.overlay.home') }}
+              {{ $t('login.overlay.home') }}
               <br />
               <br />
-              {{ $tm('login.overlay.kun') }}
+              {{ $t('login.overlay.kun') }}
               <br />
-              {{ $tm('login.overlay.hug') }}
+              {{ $t('login.overlay.hug') }}
             </h2>
             <button class="btn" @click="handleClickRegister">
-              {{ $tm('login.overlay.register') }}
+              {{ $t('login.overlay.register') }}
             </button>
           </div>
         </div>

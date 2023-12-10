@@ -53,10 +53,10 @@ onMounted(() => {
       <div class="func">
         <span>
           <RouterLink :to="routerRedirectTo">
-            {{ $tm('header.user.profile') }}
+            {{ $t('header.user.profile') }}
           </RouterLink>
         </span>
-        <span @click="logOut">{{ $tm('header.user.logout') }}</span>
+        <span @click="logOut">{{ $t('header.user.logout') }}</span>
       </div>
     </div>
   </div>

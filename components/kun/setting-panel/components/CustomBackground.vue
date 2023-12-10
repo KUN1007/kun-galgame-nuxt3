@@ -52,7 +52,7 @@ const handleFileChange = async (event: Event) => {
       :class="props.isMobile ? 'mobile' : ''"
       @click="handleCustomBackground"
     >
-      {{ $tm('header.settings.custom') }}
+      {{ $t('header.settings.custom') }}
     </button>
   </div>
 </template>
