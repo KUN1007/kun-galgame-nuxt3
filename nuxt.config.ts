@@ -50,19 +50,35 @@ export default defineNuxtConfig({
     },
   },
   i18n: {
-    locales: ['en', 'zh'],
+    langDir: './language',
+    locales: [
+      {
+        code: 'en',
+        iso: 'en-US',
+        file: 'en.json',
+      },
+      {
+        code: 'zh',
+        iso: 'zh-CN',
+        file: 'zh.json',
+      },
+    ],
     defaultLocale: 'en',
     strategy: 'no_prefix',
-    vueI18n: '~/language/i18n.ts',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+    },
   },
   colorMode: {
-    preference: 'system', // default value of $colorMode.preference
-    fallback: 'light', // fallback value if not system preference found
+    preference: 'system',
+    fallback: 'light',
     hid: 'nuxt-color-mode-script',
-    globalName: '__NUXT_COLOR_MODE__',
+    globalName: '__KUNGALGAME_COLOR_MODE__',
     componentName: 'ColorScheme',
     classPrefix: 'kun-',
     classSuffix: '-mode',
-    storageKey: 'nuxt-color-mode',
+    storageKey: 'kungalgame-color-mode',
   },
 })

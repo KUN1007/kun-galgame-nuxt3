@@ -37,6 +37,14 @@ const availableThemes = [
           @click="$colorMode.preference = 'dark'"
         />
       </span>
+
+      <span>
+        <Icon
+          class="moon"
+          icon="line-md:light-dark-loop"
+          @click="$colorMode.preference = 'system'"
+        />
+      </span>
     </div>
   </div>
 </template>
@@ -62,6 +70,9 @@ const availableThemes = [
   }
   span:nth-child(2) {
     color: var(--kungalgame-blue-4);
+  }
+  span:nth-child(3) {
+    color: var(--kungalgame-purple-4);
   }
 }
 </style>

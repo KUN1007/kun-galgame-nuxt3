@@ -4,29 +4,24 @@ import { watch } from 'vue'
 import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
 import { storeToRefs } from 'pinia'
 
-const i18n = useNuxtApp().$i18n
+const { locale, setLocale } = useI18n()
 const { showKUNGalgameLanguage } = storeToRefs(useKUNGalgameSettingsStore())
-
-watch(
-  () => showKUNGalgameLanguage.value,
-  () => {
-    i18n.locale.value = showKUNGalgameLanguage.value
-  }
-)
 </script>
 
 <template>
   <div class="set-lang">
     <span>{{ $t('header.settings.language') }}</span>
-    <select class="select" v-model="showKUNGalgameLanguage">
+    <!-- <select class="select" v-model="showKUNGalgameLanguage">
       <option
-        v-for="(lang, index) in i18n.availableLocales"
+        v-for="(lang, index) in $i18n.availableLocales"
         :key="index"
         :value="lang"
       >
         {{ $t(`header.settings.${lang}`) }}
       </option>
-    </select>
+    </select> -->
+    <button @click="setLocale('en')">en</button>
+    <button @click="setLocale('zh')">zh</button>
   </div>
 </template>
 

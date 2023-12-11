@@ -13,7 +13,7 @@ const { showKUNGalgameLanguage } = storeToRefs(useKUNGalgameSettingsStore())
 useHead({
   title: t('head.title'),
   htmlAttrs: {
-    lang: showKUNGalgameLanguage.value,
+    lang: 'en',
   },
   meta: [
     {
