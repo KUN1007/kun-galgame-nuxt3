@@ -6,8 +6,6 @@ export const useKUNGalgameSettingsStore = defineStore({
     storage: persistedState.cookies,
   },
   state: (): KUNGalgameSettingsStore => ({
-    showKUNGalgameMode: '',
-    showKUNGalgameLanguage: 'en',
     showKUNGalgamePageWidth: {
       KUN: 90,
       Topic: 90,
@@ -25,12 +23,6 @@ export const useKUNGalgameSettingsStore = defineStore({
     isShowPageWidth: true,
   }),
   actions: {
-    // Set the theme, there are only two modes
-    // , light and dark, with light represented as ''
-    setKUNGalgameTheme(theme: '' | 'dark') {
-      this.showKUNGalgameMode = theme
-      document.documentElement.className = theme
-    },
     // Set the font style, allowing users to set their own
     // , with the default as system UI
     setKUNGalgameFontStyle(font: string) {
@@ -41,7 +33,6 @@ export const useKUNGalgameSettingsStore = defineStore({
     // , Pinia reactivity is not effective
     setKUNGalgameSettingsRecover() {
       this.$reset()
-      this.setKUNGalgameTheme('')
       this.setKUNGalgameFontStyle('system-ui')
     },
   },

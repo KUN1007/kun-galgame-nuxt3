@@ -5,25 +5,23 @@ import { questionsCN } from './questionsCN'
 import type { Question } from './questionsEN'
 
 import { useTempMessageStore } from '~/store/temp/message'
-import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
-import { storeToRefs } from 'pinia'
 
-const { showKUNGalgameLanguage } = storeToRefs(useKUNGalgameSettingsStore())
+const { locale } = useI18n()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useTempMessageStore()
 )
-// Current language
 const questions = ref<Question[]>([])
 
 // Initialize
-questions.value =
-  showKUNGalgameLanguage.value === 'en' ? questionsEN : questionsCN
+questions.value = locale.value === 'en' ? questionsEN : questionsCN
 
 // Watch for changes in the language setting
-watch(showKUNGalgameLanguage, () => {
-  questions.value =
-    showKUNGalgameLanguage.value === 'en' ? questionsEN : questionsCN
-})
+watch(
+  () => locale.value,
+  () => {
+    questions.value = locale.value === 'en' ? questionsEN : questionsCN
+  }
+)
 
 // Function to randomly select a question
 const randomizeQuestion = () => {
