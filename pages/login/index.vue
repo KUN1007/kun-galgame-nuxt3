@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: false,
+})
+
 const isShowPanel = ref('')
 
 const backgroundImageUrl = `https://cdn.jsdelivr.net/gh/kun-moe/kun-image@main/blog/202312031407983.webp`
@@ -13,60 +17,62 @@ const handleClickRegister = () => {
 </script>
 
 <template>
-  <div class="root">
-    <div
-      class="container"
-      :class="isShowPanel"
-      :style="{ backgroundImage: `url(${backgroundImageUrl})` }"
-    >
-      <!-- Login and registration toggle -->
-      <div class="switch">
-        <div @click="handleClickSignIn">{{ $t('login.overlay.login') }}</div>
-        <div @click="handleClickRegister">
-          {{ $t('login.overlay.register') }}
+  <NuxtLayout name="blank">
+    <div class="root">
+      <div
+        class="container"
+        :class="isShowPanel"
+        :style="{ backgroundImage: `url(${backgroundImageUrl})` }"
+      >
+        <!-- Login and registration toggle -->
+        <div class="switch">
+          <div @click="handleClickSignIn">{{ $t('login.overlay.login') }}</div>
+          <div @click="handleClickRegister">
+            {{ $t('login.overlay.register') }}
+          </div>
+        </div>
+
+        <!-- Login panel -->
+        <Login class="login" />
+
+        <!-- Registration panel -->
+        <LoginRegister class="register" />
+
+        <!-- Sidebar -->
+        <div class="container-overlay">
+          <div class="overlay">
+            <div class="panel left">
+              <h2>
+                {{ $t('login.overlay.title') }}<br /><br />——
+                {{ $t('login.overlay.world') }}
+                <span>{{ $t('login.overlay.moe') }}</span>
+                {{ $t('login.overlay.forum') }}
+              </h2>
+              <br />
+              <button class="btn" @click="handleClickSignIn">
+                {{ $t('login.overlay.login') }}
+              </button>
+            </div>
+            <div class="panel right">
+              <h2>
+                {{ $t('login.overlay.home') }}
+                <br />
+                <br />
+                {{ $t('login.overlay.kun') }}
+                <br />
+                {{ $t('login.overlay.hug') }}
+              </h2>
+              <button class="btn" @click="handleClickRegister">
+                {{ $t('login.overlay.register') }}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Login panel -->
-      <Login class="login" />
-
-      <!-- Registration panel -->
-      <LoginRegister class="register" />
-
-      <!-- Sidebar -->
-      <div class="container-overlay">
-        <div class="overlay">
-          <div class="panel left">
-            <h2>
-              {{ $t('login.overlay.title') }}<br /><br />——
-              {{ $t('login.overlay.world') }}
-              <span>{{ $t('login.overlay.moe') }}</span>
-              {{ $t('login.overlay.forum') }}
-            </h2>
-            <br />
-            <button class="btn" @click="handleClickSignIn">
-              {{ $t('login.overlay.login') }}
-            </button>
-          </div>
-          <div class="panel right">
-            <h2>
-              {{ $t('login.overlay.home') }}
-              <br />
-              <br />
-              {{ $t('login.overlay.kun') }}
-              <br />
-              {{ $t('login.overlay.hug') }}
-            </h2>
-            <button class="btn" @click="handleClickRegister">
-              {{ $t('login.overlay.register') }}
-            </button>
-          </div>
-        </div>
-      </div>
+      <KunFooter style="position: absolute; bottom: 2%" />
     </div>
-
-    <KunFooter style="position: absolute; bottom: 2%" />
-  </div>
+  </NuxtLayout>
 </template>
 
 <style lang="scss" scoped>
@@ -77,10 +83,6 @@ const handleClickRegister = () => {
   place-items: center;
   min-height: 500px;
   min-width: 800px;
-  background: linear-gradient(
-    var(--kungalgame-trans-pink-0),
-    var(--kungalgame-trans-blue-0)
-  );
   position: relative;
 }
 

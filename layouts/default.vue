@@ -34,7 +34,7 @@ watch(
     <div class="top-bar">
       <KunTopBar />
     </div>
-    <RouterView />
+    <slot />
   </div>
 </template>
 

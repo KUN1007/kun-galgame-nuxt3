@@ -109,7 +109,7 @@ onBeforeMount(() => {
   <!-- <SearchKUNGalgameSearchBox /> -->
 
   <NuxtLoadingIndicator />
-  <NuxtLayout name="nav">
+  <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
 </template>
