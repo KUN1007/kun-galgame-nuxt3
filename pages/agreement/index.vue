@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
-import { storeToRefs } from 'pinia'
-
-const { showKUNGalgameLanguage } = storeToRefs(useKUNGalgameSettingsStore())
+const { locale } = useI18n()
 </script>
 
 <template>
   <div class="root">
-    <div class="article" v-if="showKUNGalgameLanguage === 'en'">
+    <div class="article" v-if="locale === 'en'">
       <div class="title">User Agreement</div>
       <div class="content">
         <p>
@@ -37,7 +34,7 @@ const { showKUNGalgameLanguage } = storeToRefs(useKUNGalgameSettingsStore())
       <BackToHome />
     </div>
 
-    <div class="article" v-if="showKUNGalgameLanguage === 'zh'">
+    <div class="article" v-if="locale === 'zh'">
       <div class="title">用户协议</div>
       <div class="content">
         <p>

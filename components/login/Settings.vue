@@ -17,6 +17,12 @@
         @click="$colorMode.preference = 'dark'"
       />
     </span>
+
+    <span class="home">
+      <NuxtLink to="/">
+        <Icon class="icon" name="line-md:home-md-twotone" />
+      </NuxtLink>
+    </span>
   </div>
 </template>
 
@@ -30,7 +36,6 @@
 
   span {
     cursor: pointer;
-    margin-right: 17px;
   }
 
   .light {
@@ -39,6 +44,13 @@
 
   .dark {
     color: var(--kungalgame-blue-4);
+  }
+
+  .home {
+    margin-left: 17px;
+    .icon {
+      color: var(--kungalgame-purple-4);
+    }
   }
 }
 

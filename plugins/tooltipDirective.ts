@@ -1,5 +1,5 @@
+import Cookies from 'js-cookie'
 import type { DirectiveBinding } from 'vue'
-import { KUNGalgameLanguage } from '@/utils/getDefaultEnv'
 
 interface TooltipBinding {
   message: {
@@ -15,7 +15,9 @@ const initializeTooltip = (element: HTMLElement, binding: DirectiveBinding) => {
     position: 'left',
   }
 
-  const messageI18n = KUNGalgameLanguage() === 'en' ? message.en : message.zh
+  const localeCookies = Cookies.get('kungalgame-language')
+  const locale = localeCookies ? localeCookies : 'en'
+  const messageI18n = locale === 'en' ? message.en : message.zh
 
   element.setAttribute('tooltip', messageI18n)
   element.setAttribute('position', position)
@@ -28,10 +30,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     },
     updated(element: HTMLElement, binding: DirectiveBinding) {
       initializeTooltip(element, binding)
-    },
-    getSSRProps(binding, vnode) {
-      // you can provide SSR-specific props here
-      return {}
     },
   })
 })

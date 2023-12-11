@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
-import { storeToRefs } from 'pinia'
-
-const { showKUNGalgameLanguage } = storeToRefs(useKUNGalgameSettingsStore())
+const { locale } = useI18n()
 </script>
 
 <template>
@@ -10,7 +7,7 @@ const { showKUNGalgameLanguage } = storeToRefs(useKUNGalgameSettingsStore())
     <div class="container">
       <div class="title">{{ $t('kungalgame.privacy') }}</div>
 
-      <div class="article" v-if="showKUNGalgameLanguage === 'en'">
+      <div class="article" v-if="locale === 'en'">
         <br />
         <p>
           We will never use your personal information and will not use your
@@ -47,7 +44,7 @@ const { showKUNGalgameLanguage } = storeToRefs(useKUNGalgameSettingsStore())
         <BackToHome />
       </div>
 
-      <div class="article" v-if="showKUNGalgameLanguage === 'zh'">
+      <div class="article" v-if="locale === 'zh'">
         <br />
         <p>
           我们永远不会利用你的个人信息，不会将你的个人信息用于除了本站以外的任何地方
