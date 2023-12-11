@@ -13,6 +13,7 @@
     "@formkit/auto-animate": "^0.8.1",
     "@nuxt/devtools": "^1.0.5",
     "@nuxt/image": "^1.1.0",
+    "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/robots": "^3.0.0",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "@pinia/nuxt": "^0.5.1",

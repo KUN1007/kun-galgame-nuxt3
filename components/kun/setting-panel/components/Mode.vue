@@ -1,6 +1,21 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
+
+const availableThemes = [
+  {
+    key: 'light',
+    text: 'Light',
+  },
+  {
+    key: 'dark',
+    text: 'Dark',
+  },
+  {
+    key: 'system',
+    text: 'System',
+  },
+]
 </script>
 
 <template>
@@ -11,7 +26,7 @@ import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
         <Icon
           class="sun"
           icon="line-md:moon-filled-alt-to-sunny-filled-loop-transition"
-          @click="useKUNGalgameSettingsStore().setKUNGalgameTheme('')"
+          @click="$colorMode.preference = 'light'"
         />
       </span>
 
@@ -19,7 +34,7 @@ import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
         <Icon
           class="moon"
           icon="line-md:sunny-outline-to-moon-loop-transition"
-          @click="useKUNGalgameSettingsStore().setKUNGalgameTheme('dark')"
+          @click="$colorMode.preference = 'dark'"
         />
       </span>
     </div>

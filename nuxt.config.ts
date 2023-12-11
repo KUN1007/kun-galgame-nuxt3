@@ -23,6 +23,7 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     'nuxt-typed-router',
     'nuxt-schema-org',
+    '@nuxtjs/color-mode',
   ],
   runtimeConfig: {
     MONGODB_URL: process.env.MONGODB_URL,
@@ -53,5 +54,15 @@ export default defineNuxtConfig({
     defaultLocale: 'en',
     strategy: 'no_prefix',
     vueI18n: '~/language/i18n.ts',
+  },
+  colorMode: {
+    preference: 'system', // default value of $colorMode.preference
+    fallback: 'light', // fallback value if not system preference found
+    hid: 'nuxt-color-mode-script',
+    globalName: '__NUXT_COLOR_MODE__',
+    componentName: 'ColorScheme',
+    classPrefix: 'kun-',
+    classSuffix: '-mode',
+    storageKey: 'nuxt-color-mode',
   },
 })

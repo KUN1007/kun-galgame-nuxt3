@@ -94,6 +94,9 @@ devDependencies:
   '@nuxt/image':
     specifier: ^1.1.0
     version: 1.1.0(rollup@2.79.1)
+  '@nuxtjs/color-mode':
+    specifier: ^3.3.2
+    version: 3.3.2(rollup@2.79.1)
   '@nuxtjs/robots':
     specifier: ^3.0.0
     version: 3.0.0(rollup@2.79.1)

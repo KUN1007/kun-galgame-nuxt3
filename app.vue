@@ -8,9 +8,7 @@ const { t } = useI18n()
 
 const config = useRuntimeConfig()
 
-const { showKUNGalgameLanguage, showKUNGalgameMode, showKUNGalgameFontStyle } =
-  storeToRefs(useKUNGalgameSettingsStore())
-const i18n = useNuxtApp().$i18n
+const { showKUNGalgameLanguage } = storeToRefs(useKUNGalgameSettingsStore())
 
 useHead({
   title: t('head.title'),
@@ -88,18 +86,6 @@ useSchemaOrg([
   defineWebSite({ name: 'KUN Visual Novel' }),
   defineWebPage(),
 ])
-
-onBeforeMount(() => {
-  const theme = showKUNGalgameMode.value
-  const font = showKUNGalgameFontStyle.value
-
-  if (theme) {
-    document.documentElement.className = theme
-  }
-  if (font) {
-    document.documentElement.style.fontFamily = font
-  }
-})
 </script>
 
 <template>

@@ -1,18 +1,10 @@
-// Settings panel configuration
 export interface KUNGalgameSettingsStore {
-  // Day and night mode toggle
   showKUNGalgameMode: '' | 'dark'
-  // Website display language
-  showKUNGalgameLanguage: string
-  // Main page width
+  showKUNGalgameLanguage: 'en' | 'zh'
   showKUNGalgamePageWidth: Record<string, number>
-  // Website font style
   showKUNGalgameFontStyle: string
-  // Background image
   showKUNGalgameBackground: string
-  // Custom background image
   showKUNGalgameCustomBackground: string
 
-  // Whether to display page width or font settings
   isShowPageWidth: boolean
 }

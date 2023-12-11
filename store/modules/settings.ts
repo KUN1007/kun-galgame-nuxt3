@@ -2,7 +2,9 @@ import type { KUNGalgameSettingsStore } from '../types/settings'
 
 export const useKUNGalgameSettingsStore = defineStore({
   id: 'KUNGalgameSettings',
-  persist: true,
+  persist: {
+    storage: persistedState.cookies,
+  },
   state: (): KUNGalgameSettingsStore => ({
     showKUNGalgameMode: '',
     showKUNGalgameLanguage: 'en',
