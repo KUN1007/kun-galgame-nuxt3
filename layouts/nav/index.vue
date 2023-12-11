@@ -34,7 +34,7 @@ watch(
     <div class="top-bar">
       <KunTopBar />
     </div>
-    <slot />
+    <NuxtPage />
   </div>
 </template>
 
