@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useKUNGalgameUserStore } from '~/store/modules/kungalgamer'
 import { useTempMessageStore } from '~/store/temp/message'
-import { storeToRefs } from 'pinia'
 import { checkLoginForm } from './utils/checkLogin'
 
 const router = useRouter()
@@ -42,6 +41,7 @@ const handleLogin = async () => {
   if (data.value) {
     info.info('AlertInfo.login.success')
     useKUNGalgameUserStore().setUserInfo(data.value)
+    router.push('/')
   }
 }
 
@@ -94,7 +94,6 @@ const handleClickForgotPassword = () => {
   transition: all 0.6s ease-in-out;
 }
 
-/* Form styling */
 .form {
   background-color: var(--kungalgame-white);
   display: flex;
@@ -106,7 +105,6 @@ const handleClickForgotPassword = () => {
   text-align: center;
 }
 
-/* Login and Register Fonts */
 .title {
   font-weight: 300;
   font-weight: bold;
@@ -130,7 +128,6 @@ const handleClickForgotPassword = () => {
   }
 }
 
-/* Forgot Password */
 .forget {
   cursor: pointer;
   text-decoration: none;

@@ -1,13 +1,19 @@
-<script setup lang="ts">
-const route = useRoute()
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div>
-    <h1>{{ $t('header.name') }}</h1>
-    <p>Current route: {{ route.path }}</p>
-    <a href="https://nuxt.com/docs/getting-started/routing" target="_blank"
-      >Learn more about Nuxt Routing</a
-    >
-  </div>
+  <div class="root"></div>
 </template>
+
+<style lang="scss" scoped>
+.root {
+  height: 1500px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 700px) {
+  .root {
+    height: 100vh;
+  }
+}
+</style>
