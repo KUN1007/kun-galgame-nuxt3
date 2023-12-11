@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import 'animate.css'
-import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
 
-const { showKUNGalgameLanguage } = storeToRefs(useKUNGalgameSettingsStore())
+const locale = useCookie('kungalgame-language').value
 
 const props = defineProps<{
   messageCN: string
@@ -13,8 +12,7 @@ const props = defineProps<{
 
 const message = ref('')
 
-message.value =
-  showKUNGalgameLanguage.value === 'en' ? props.messageEN : props.messageCN
+message.value = locale === 'en' ? props.messageEN : props.messageCN
 
 const messageClass = (type: string): string => {
   if (type === 'warn') {
@@ -31,10 +29,9 @@ const messageClass = (type: string): string => {
 }
 
 watch(
-  () => useKUNGalgameSettingsStore().showKUNGalgameLanguage,
+  () => locale,
   () => {
-    message.value =
-      showKUNGalgameLanguage.value === 'en' ? props.messageEN : props.messageCN
+    message.value = locale === 'en' ? props.messageEN : props.messageCN
   }
 )
 </script>

@@ -1,44 +1,20 @@
-<script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-
-import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
-
-const { showKUNGalgameLanguage, showKUNGalgameMode } = storeToRefs(
-  useKUNGalgameSettingsStore()
-)
-
-// Global language settings, it must be written this way
-// , otherwise reactivity won't work
-const { locale } = useI18n({ useScope: 'global' })
-
-const handleSwitchLanguage = () => {
-  const lang = showKUNGalgameLanguage.value
-  if (lang === 'en') {
-    showKUNGalgameLanguage.value = 'zh'
-  } else {
-    showKUNGalgameLanguage.value = 'en'
-  }
-  locale.value = showKUNGalgameLanguage.value
-}
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="settings">
-    <span @click="handleSwitchLanguage" class="language">
-      <Icon name="fa:language" />
-    </span>
-    <span class="light" v-if="showKUNGalgameMode === 'dark'">
+    <span class="light" v-show="$colorMode.preference === 'dark'">
       <Icon
         class="sun"
         name="line-md:moon-filled-alt-to-sunny-filled-loop-transition"
-        @click="useKUNGalgameSettingsStore().setKUNGalgameTheme('')"
+        @click="$colorMode.preference = 'light'"
       />
     </span>
-    <span class="dark" v-if="showKUNGalgameMode === ''">
+
+    <span class="dark" v-show="$colorMode.preference === 'light'">
       <Icon
         class="moon"
         name="line-md:sunny-outline-to-moon-loop-transition"
-        @click="useKUNGalgameSettingsStore().setKUNGalgameTheme('dark')"
+        @click="$colorMode.preference = 'dark'"
       />
     </span>
   </div>
@@ -54,9 +30,6 @@ const handleSwitchLanguage = () => {
 
   span {
     cursor: pointer;
-  }
-
-  .language {
     margin-right: 17px;
   }
 

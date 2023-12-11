@@ -14,7 +14,7 @@ const setFont = () => {
     settingsStore.setKUNGalgameFontStyle(font.value)
     font.value = ''
   } else {
-    useMessage('Please input a valid font name', '请输入合法的字体名', 'warn')
+    settingsStore.setKUNGalgameFontStyle('system-ui')
   }
 }
 </script>

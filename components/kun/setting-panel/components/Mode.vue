@@ -1,22 +1,4 @@
-<script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
-
-const availableThemes = [
-  {
-    key: 'light',
-    text: 'Light',
-  },
-  {
-    key: 'dark',
-    text: 'Dark',
-  },
-  {
-    key: 'system',
-    text: 'System',
-  },
-]
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="mode">
@@ -25,7 +7,7 @@ const availableThemes = [
       <span>
         <Icon
           class="sun"
-          icon="line-md:moon-filled-alt-to-sunny-filled-loop-transition"
+          name="line-md:moon-filled-alt-to-sunny-filled-loop-transition"
           @click="$colorMode.preference = 'light'"
         />
       </span>
@@ -33,7 +15,7 @@ const availableThemes = [
       <span>
         <Icon
           class="moon"
-          icon="line-md:sunny-outline-to-moon-loop-transition"
+          name="line-md:sunny-outline-to-moon-loop-transition"
           @click="$colorMode.preference = 'dark'"
         />
       </span>
@@ -41,7 +23,7 @@ const availableThemes = [
       <span>
         <Icon
           class="moon"
-          icon="line-md:light-dark-loop"
+          name="line-md:light-dark-loop"
           @click="$colorMode.preference = 'system'"
         />
       </span>
