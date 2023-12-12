@@ -297,7 +297,7 @@
     }
   },
   "forgot":{
-    "title": "Forget Password",
+    "title": "Forgot Password",
     "email": "Your Email",
     "code": "Code",
     "next": "Next",

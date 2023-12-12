@@ -211,9 +211,9 @@ const handleChangePassword = async () => {
 }
 
 .nav {
-  margin-top: 30px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 20px;
 }
 
 .slide-enter-active,

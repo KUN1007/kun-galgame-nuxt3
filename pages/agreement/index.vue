@@ -35,8 +35,10 @@ const { locale } = useI18n()
           <p>Agreement Version - V 1.0.0</p>
         </div>
 
-        <KunBackToPrevious />
-        <KunBackToHome />
+        <div class="nav">
+          <KunBackToPrevious />
+          <KunBackToHome />
+        </div>
       </div>
 
       <div class="article" v-if="locale === 'zh'">
@@ -58,8 +60,10 @@ const { locale } = useI18n()
           <p>协议版本 - V 1.0.0</p>
         </div>
 
-        <KunBackToPrevious />
-        <KunBackToHome />
+        <div class="nav">
+          <KunBackToPrevious />
+          <KunBackToHome />
+        </div>
       </div>
 
       <KunFooter class="footer" />
@@ -122,6 +126,12 @@ const { locale } = useI18n()
 
 .footer {
   width: 100%;
+}
+
+.nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (max-width: 700px) {

@@ -47,8 +47,11 @@ const { locale } = useI18n()
               information, etc., for convenient device adaptation.
             </li>
           </ul>
-          <KunBackToPrevious />
-          <KunBackToHome />
+
+          <div class="nav">
+            <KunBackToPrevious />
+            <KunBackToHome />
+          </div>
         </div>
 
         <div class="article" v-if="locale === 'zh'">
@@ -72,8 +75,11 @@ const { locale } = useI18n()
             </li>
             <li>设备相关：设备日期、操作系统信息等，方便我们对设备进行适配</li>
           </ul>
-          <KunBackToPrevious />
-          <KunBackToHome />
+
+          <div class="nav">
+            <KunBackToPrevious />
+            <KunBackToHome />
+          </div>
         </div>
 
         <KunFooter style="position: absolute; bottom: -100px" />
@@ -127,6 +133,11 @@ const { locale } = useI18n()
   justify-content: center;
   align-items: center;
   margin: 10px 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (max-width: 700px) {
