@@ -12,7 +12,12 @@ const props = defineProps<{
 
 const message = ref('')
 
-message.value = locale === 'en' ? props.messageEN : props.messageCN
+message.value = computed(() => {
+  if (!locale) {
+    return props.messageEN
+  }
+  return locale === 'en' ? props.messageEN : props.messageCN
+}).value
 
 const messageClass = (type: string): string => {
   if (type === 'warn') {
@@ -67,6 +72,7 @@ watch(
   display: flex;
   z-index: 9999;
 }
+
 .kungalgame-message {
   margin: 0 auto;
   font-size: large;
@@ -79,6 +85,7 @@ watch(
   justify-content: center;
   padding: 1vh 10vw;
   box-shadow: var(--shadow);
+
   span {
     display: flex;
     flex-direction: column;
@@ -94,6 +101,7 @@ watch(
 
 .warn {
   border: 1px solid var(--kungalgame-yellow-3);
+
   .icon {
     color: var(--kungalgame-yellow-3);
   }
@@ -101,6 +109,7 @@ watch(
 
 .success {
   border: 1px solid var(--kungalgame-green-4);
+
   .icon {
     color: var(--kungalgame-green-4);
   }
@@ -108,6 +117,7 @@ watch(
 
 .error {
   border: 1px solid var(--kungalgame-red-4);
+
   .icon {
     color: var(--kungalgame-red-4);
   }
@@ -115,6 +125,7 @@ watch(
 
 .info {
   border: 1px solid var(--kungalgame-blue-4);
+
   .icon {
     color: var(--kungalgame-blue-4);
   }
