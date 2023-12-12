@@ -2,7 +2,8 @@
 import { useTempMessageStore } from '~/store/temp/message'
 
 const props = defineProps<{
-  name: string
+  to: 'register' | 'forgot'
+  name?: string
   email: string
 }>()
 
@@ -12,6 +13,29 @@ const info = useTempMessageStore()
 const isSendCode = ref(false)
 const isSending = ref(false)
 const countdown = ref(0)
+
+const sendCode = async () => {
+  const url =
+    props.to === 'register'
+      ? '/api/auth/email/code/register'
+      : '/api/auth/email/code/forgot'
+  const body =
+    props.to === 'register'
+      ? { email: props.email, name: props.name }
+      : { email: props.email }
+
+  const { data } = await useFetch(url, {
+    method: 'POST',
+    body: body,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
+  return data
+}
 
 watch(
   () => isSendCode.value,
@@ -28,16 +52,7 @@ watch(
         }
       }, 1000)
 
-      const { data } = await useFetch('/api/auth/email/code', {
-        method: 'POST',
-        body: { email: props.email, name: props.name },
-        onResponse({ request, response, options }) {
-          if (response.status === 233) {
-            kungalgameErrorHandler(response.statusText)
-            return
-          }
-        },
-      })
+      const data = await sendCode()
 
       if (data.value) {
         info.info('AlertInfo.code.code')

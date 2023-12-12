@@ -85,6 +85,7 @@ const handleRegister = async () => {
         class="code"
         :name="registerForm.name"
         :email="registerForm.email"
+        to="register"
       />
 
       <button @click="handleRegister" class="btn" type="submit">

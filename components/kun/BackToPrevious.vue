@@ -10,11 +10,11 @@ const router = useRouter()
 
 <style lang="scss" scoped>
 .return {
-  position: absolute;
-  bottom: 1%;
-  left: 2%;
   color: var(--kungalgame-font-color-0);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .return:hover {

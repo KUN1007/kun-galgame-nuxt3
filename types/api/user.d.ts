@@ -91,8 +91,12 @@ export interface RegisterRequestData {
   code: string
 }
 
-export interface VerificationCodeMailRequestData {
+export interface RegisterVerificationCodeRequestData {
   name: string
+  email: string
+}
+
+export interface ForgotPasswordVerificationCodeRequestData {
   email: string
 }
 

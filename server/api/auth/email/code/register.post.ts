@@ -1,9 +1,10 @@
 import UserModel from '~/server/models/user'
 import { isValidEmail } from '~/utils/validate'
-import type { VerificationCodeMailRequestData } from '~/types/api/user'
+import type { RegisterVerificationCodeRequestData } from '~/types/api/user'
 
 export default defineEventHandler(async (event) => {
-  const { name, email }: VerificationCodeMailRequestData = await readBody(event)
+  const { name, email }: RegisterVerificationCodeRequestData =
+    await readBody(event)
 
   if (!isValidEmail(email)) {
     kunError(event, 10302)
@@ -24,12 +25,12 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const result = await sendVerificationCodeEmail(event, email)
+  const result = await sendVerificationCodeEmail(event, email, 'register')
 
   if (typeof result === 'number') {
     kunError(event, result)
     return
   }
 
-  return 'ok'
+  return 'MOEMOE!'
 })

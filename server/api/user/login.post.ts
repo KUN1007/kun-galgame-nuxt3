@@ -4,7 +4,7 @@ import { isValidEmail, isValidName, isValidPassword } from '~/utils/validate'
 import type { H3Event } from 'h3'
 import type { LoginRequestData, LoginResponseData } from '~/types/api/user'
 
-const loginController = async (event: H3Event) => {
+const login = async (event: H3Event) => {
   const { name, password }: LoginRequestData = await readBody(event)
 
   if (
@@ -28,7 +28,7 @@ const loginController = async (event: H3Event) => {
 }
 
 export default defineEventHandler(async (event) => {
-  const result = await loginController(event)
+  const result = await login(event)
   if (!result) {
     return
   }

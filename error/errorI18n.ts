@@ -30,6 +30,7 @@ const errorMessagesEN: Record<number, string> = {
   10302: `Invalid Email Format (-B)`,
   10303: `Invalid Email, Password, or Verification Code Format (-B)`,
   10304: `Disposable email addresses are not allowed (-B)`,
+  10305: `Email address not registered. (-B)`,
 
   // Comment Part
   10401: `Comment length exceed 1007 characters. Or empty. (-B)`,
@@ -69,6 +70,7 @@ const errorMessagesCN: Record<number, string> = {
   10302: `非法的邮箱格式 (-B)`,
   10303: `非法的邮箱, 密码, 或验证码 (-B)`,
   10304: `不允许临时邮箱地址 (-B)`,
+  10305: `该邮箱地址未注册 (-B)`,
 
   10401: `评论内容长度超过 1007 个字符, 或为空 (-B)`,
 

@@ -11,9 +11,6 @@ import { Icon } from '@iconify/vue'
 
 <style lang="scss" scoped>
 .return {
-  position: absolute;
-  bottom: 1%;
-  right: 2%;
   color: var(--kungalgame-font-color-0);
   cursor: pointer;
   display: flex;

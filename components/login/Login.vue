@@ -46,7 +46,7 @@ const handleLogin = async () => {
 }
 
 const handleClickForgotPassword = () => {
-  // router.push('/forgot')
+  router.push('/forgot')
 }
 </script>
 
