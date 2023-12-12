@@ -14,6 +14,7 @@ const errorMessagesEN: Record<number, string> = {
   10110: `Avatar image upload error. The image is an array. (-B)`,
   10111: `Avatar image upload error. The final compressed size of the image exceeds 50KB. (-B)`,
   10112: `In cooldown for login, two identical login attempts should have a one-minute interval. (-B)`,
+  10113: `In cooldown for register, two identical register attempts should have a one-minute interval. (-B)`,
 
   // Topic Part
   10201: `Your daily topic limit has been reached for today. (-B)`,
@@ -28,6 +29,7 @@ const errorMessagesEN: Record<number, string> = {
   10301: `Sending emails too frequently, please waiting 30s (-B)`,
   10302: `Invalid Email Format (-B)`,
   10303: `Invalid Email, Password, or Verification Code Format (-B)`,
+  10304: `Disposable email addresses are not allowed (-B)`,
 
   // Comment Part
   10401: `Comment length exceed 1007 characters. Or empty. (-B)`,
@@ -53,6 +55,7 @@ const errorMessagesCN: Record<number, string> = {
   10110: `头像上传错误. 图片为数组 (-B)`,
   10111: `头像上传错误. 图片最终压缩大小超过 50kb (-B)`,
   10112: `登陆冷却中，两次相同登陆时间间隔一分钟 (-B)`,
+  10113: `注册冷却中，两次相同注册时间间隔一分钟 (-B)`,
 
   10201: `您今日可以发表的话题数已达上限 (-B)`,
   10202: `您的萌萌点不足 1100, 无法使用推话题功能 (-B)`,
@@ -65,6 +68,7 @@ const errorMessagesCN: Record<number, string> = {
   10301: `发送邮件频率过快, 请等待 30 秒 (-B)`,
   10302: `非法的邮箱格式 (-B)`,
   10303: `非法的邮箱, 密码, 或验证码 (-B)`,
+  10304: `不允许临时邮箱地址 (-B)`,
 
   10401: `评论内容长度超过 1007 个字符, 或为空 (-B)`,
 

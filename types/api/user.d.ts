@@ -92,6 +92,7 @@ export interface RegisterRequestData {
 }
 
 export interface VerificationCodeMailRequestData {
+  name: string
   email: string
 }
 

@@ -1,0 +1,48 @@
+import nodemailer from 'nodemailer'
+import SMPTransport from 'nodemailer-smtp-transport'
+import env from '~/server/env/dotenv'
+import type { H3Event } from 'h3'
+
+export const sendVerificationCodeEmail = async (
+  event: H3Event,
+  email: string
+) => {
+  try {
+    const ip =
+      event.node.req.socket.remoteAddress ||
+      event.node.req.headers['x-forwarded-for']
+
+    const limitEmail = await useStorage('redis').getItem(`limitEmail:${email}`)
+    const limitIP = await useStorage('redis').getItem(`limitIP:${ip}`)
+    if (limitEmail || limitIP) {
+      return 10301
+    }
+
+    const code = generateRandomCode(7)
+    await useStorage('redis').setItem(email, code, { ttl: 10 * 60 })
+    await useStorage('redis').setItem(`limitEmail:${email}`, code, { ttl: 30 })
+    await useStorage('redis').setItem(`limitIP:${ip}`, code, { ttl: 30 })
+
+    const transporter = nodemailer.createTransport(
+      SMPTransport({
+        host: env.KUN_VISUAL_NOVEL_EMAIL_HOST,
+        auth: {
+          user: env.KUN_VISUAL_NOVEL_EMAIL_ACCOUNT,
+          pass: env.KUN_VISUAL_NOVEL_EMAIL_PASSWORD,
+        },
+      })
+    )
+
+    const mailOptions = {
+      from: `${env.KUN_VISUAL_NOVEL_EMAIL_FROM}<${env.KUN_VISUAL_NOVEL_EMAIL_ACCOUNT}>`,
+      sender: env.KUN_VISUAL_NOVEL_EMAIL_ACCOUNT,
+      to: email,
+      subject: 'KUN Visual Novel Verification Code',
+      text: `Your verification code is\n${code}\nYou are registering KUN Visual Novel. Please do not disclose this verification code.`,
+    }
+
+    transporter.sendMail(mailOptions)
+  } catch (error) {
+    console.log(error)
+  }
+}

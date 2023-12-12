@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { useKUNGalgameUserStore } from '~/store/modules/kungalgamer'
 import { useTempMessageStore } from '~/store/temp/message'
 import { registerFormItem } from './utils/registerFormItem'
 import { checkRegisterForm } from './utils/checkRegister'
 
+const info = useTempMessageStore()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useTempMessageStore()
 )
@@ -42,22 +44,23 @@ const handleRegister = async () => {
     return
   }
 
-  // Execute registration logic, send a request, and validate the code on the backend
-  // const res = await useKUNGalgameUserStore().register({
-  //   name: registerForm.name,
-  //   email: registerForm.email,
-  //   password: registerForm.password,
-  //   code: registerForm.code,
-  // })
+  const { data } = await useFetch('/api/user/register', {
+    method: 'POST',
+    body: registerForm,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
 
-  // // If the request is successful, redirect to the main page
-  // if (res.code === 200) {
-  //   router.push('/')
-  //   Message('Register successfully!', '注册成功！', 'success')
-  //   info.info('AlertInfo.login.success')
-  // } else {
-  //   Message('Register failed!', '注册失败！', 'error')
-  // }
+  if (data.value) {
+    info.info('AlertInfo.login.success')
+    useMessage('Register successfully!', '注册成功！', 'success')
+    useKUNGalgameUserStore().setUserInfo(data.value)
+    router.push('/')
+  }
 }
 </script>
 
@@ -80,24 +83,23 @@ const handleRegister = async () => {
       <KunVerificationCode
         @click="handleSendCode"
         class="code"
+        :name="registerForm.name"
         :email="registerForm.email"
       />
 
-      <!-- Registration button -->
       <button @click="handleRegister" class="btn" type="submit">
         {{ $t('login.register.title') }}
       </button>
 
-      <!-- User agreement prompt, etc. -->
       <span class="user-agreement">
         {{ $t('login.register.click') }}
-
-        <!-- User agreement and privacy policy -->
         <div class="licence">
           <RouterLink to="/agreement">
             <span>{{ $t('login.register.agreement') }}</span>
           </RouterLink>
+
           {{ $t('login.register.and') }}
+
           <RouterLink to="/privacy">
             <span>{{ $t('login.register.privacy') }}</span>
           </RouterLink>
@@ -163,7 +165,6 @@ const handleRegister = async () => {
   right: 50px;
 }
 
-/* User agreement */
 .user-agreement {
   position: absolute;
   bottom: 3%;
@@ -229,4 +230,3 @@ const handleRegister = async () => {
   }
 }
 </style>
-./utils/checkRegisterForm

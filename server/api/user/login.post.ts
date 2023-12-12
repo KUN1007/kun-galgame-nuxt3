@@ -1,11 +1,6 @@
 import bcrypt from 'bcrypt'
 import UserModel from '~/server/models/user'
-import {
-  isValidEmail,
-  isValidName,
-  isValidPassword,
-  isValidMailConfirmCode,
-} from '~/utils/validate'
+import { isValidEmail, isValidName, isValidPassword } from '~/utils/validate'
 import type { H3Event } from 'h3'
 import type { LoginRequestData, LoginResponseData } from '~/types/api/user'
 
@@ -26,7 +21,7 @@ const loginController = async (event: H3Event) => {
     kunError(event, 10112)
     return
   } else {
-    useStorage('redis').setItem(`loginCD:${name}`, name, { ttl: 6 })
+    useStorage('redis').setItem(`loginCD:${name}`, name, { ttl: 60 })
   }
 
   return { name, password }

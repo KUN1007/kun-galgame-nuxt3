@@ -128,7 +128,8 @@
     "yurzhang",
     "Yuuki",
     "yuyu",
-    "zako"
+    "zako",
+    "abcdefghjkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ"
   ],
   "i18n-ally.localesPaths": ["language"]
 }

@@ -20,6 +20,8 @@
     "@types/bcrypt": "^5.0.2",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.10.4",
+    "@types/nodemailer": "^6.4.14",
+    "@types/nodemailer-smtp-transport": "^2.7.8",
     "@types/nprogress": "^0.2.3",
     "@vite-pwa/nuxt": "^0.3.5",
     "dayjs-nuxt": "^2.1.9",
@@ -57,6 +59,8 @@
     "localforage": "^1.10.0",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
+    "nodemailer": "^6.9.7",
+    "nodemailer-smtp-transport": "^2.7.4",
     "nprogress": "^0.2.0"
   }
 }

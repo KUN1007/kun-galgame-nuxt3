@@ -1,12 +1,8 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-
-import { useKUNGalgameUserStore } from '~/store/modules/kungalgamer'
 import { useTempMessageStore } from '~/store/temp/message'
-import { storeToRefs } from 'pinia'
 
-// The parent component instructs it to send the verification code, and it will do so.
 const props = defineProps<{
+  name: string
   email: string
 }>()
 
@@ -32,10 +28,22 @@ watch(
         }
       }, 1000)
 
-      // Send the verification code
-      // await useKUNGalgameUserStore().sendCode(props.email)
+      const { data } = await useFetch('/api/auth/email/code', {
+        method: 'POST',
+        body: { email: props.email, name: props.name },
+        onResponse({ request, response, options }) {
+          if (response.status === 233) {
+            kungalgameErrorHandler(response.statusText)
+            return
+          }
+        },
+      })
 
-      info.info('AlertInfo.code.code')
+      if (data.value) {
+        info.info('AlertInfo.code.code')
+      } else {
+        isSending.value = false
+      }
     }
   }
 )
