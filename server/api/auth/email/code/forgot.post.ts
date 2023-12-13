@@ -1,6 +1,6 @@
 import UserModel from '~/server/models/user'
 import { isValidEmail } from '~/utils/validate'
-import type { ForgotPasswordVerificationCodeRequestData } from '~/types/api/user'
+import type { ForgotPasswordVerificationCodeRequestData } from '~/types/api/auth'
 
 export default defineEventHandler(async (event) => {
   const { email }: ForgotPasswordVerificationCodeRequestData =

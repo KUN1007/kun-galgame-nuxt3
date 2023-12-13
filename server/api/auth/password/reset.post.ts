@@ -5,7 +5,7 @@ import {
   isValidMailConfirmCode,
   isValidPassword,
 } from '~/utils/validate'
-import type { UserResetPasswordByEmailRequestData } from '~/types/api/user'
+import type { ResetPasswordByEmailRequestData } from '~/types/api/auth'
 
 const resetPasswordByEmail = async (
   email: string,
@@ -31,7 +31,7 @@ const resetPasswordByEmail = async (
 }
 
 export default defineEventHandler(async (event) => {
-  const { email, code, newPassword }: UserResetPasswordByEmailRequestData =
+  const { email, code, newPassword }: ResetPasswordByEmailRequestData =
     await readBody(event)
 
   if (

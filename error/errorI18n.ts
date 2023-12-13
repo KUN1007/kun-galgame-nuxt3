@@ -24,6 +24,7 @@ const errorMessagesEN: Record<number, string> = {
   10206: `Topic with a maximum of 7 tags. Minimum one tag. (-B)`,
   10207: `Topic with a maximum of 2 categories. Minimum one category. (-B)`,
   10208: `Invalid topics timestamp. (-B)`,
+  10209: `We currently do not allow customizing the number of topics per single page query. (-B)`,
 
   // Auth Part
   10301: `Sending emails too frequently, please waiting 30s (-B)`,
@@ -64,7 +65,8 @@ const errorMessagesCN: Record<number, string> = {
   10205: `话题内容长度超过 100007 个字符, 或为空 (-B)`,
   10206: `话题最多 7 个标签, 最少一个标签 (-B)`,
   10207: `话题最多 2 个分类, 最少一个分类 (-B)`,
-  10208: `非法的话题时间戳. (-B)`,
+  10208: `非法的话题时间戳 (-B)`,
+  10209: `我们暂时还没有允许自定义单页查询的话题数 (-B)`,
 
   10301: `发送邮件频率过快, 请等待 30 秒 (-B)`,
   10302: `非法的邮箱格式 (-B)`,

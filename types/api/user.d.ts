@@ -73,12 +73,6 @@ export interface UserGetUserCommentRequestData {
   cidArray: number[]
 }
 
-export interface UserResetPasswordByEmailRequestData {
-  email: string
-  code: string
-  newPassword: string
-}
-
 export interface LoginRequestData {
   name: string
   password: string
@@ -89,15 +83,6 @@ export interface RegisterRequestData {
   email: string
   password: string
   code: string
-}
-
-export interface RegisterVerificationCodeRequestData {
-  name: string
-  email: string
-}
-
-export interface ForgotPasswordVerificationCodeRequestData {
-  email: string
 }
 
 export type UserInfoResponseData = UserInfo
@@ -113,19 +98,11 @@ export type UserGetUserEmailResponseData = {
   email: string
 }
 
-export type UserGetEmailRestCodeResponseData = {}
-
-export type UserUpdateEmailResponseData = {}
-
-export type UserUpdatePasswordResponseData = {}
-
 export type UserGetUserTopicResponseData = UserTopic[]
 
 export type UserGetUserReplyResponseData = UserReply[]
 
 export type UserGetUserCommentResponseData = UserComment[]
-
-export type UserResetPasswordByEmailResponseData = {}
 
 export type LoginResponseData = {
   uid: number

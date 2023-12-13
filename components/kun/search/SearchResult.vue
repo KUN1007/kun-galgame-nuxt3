@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { HomeSearchTopic } from '~/api'
+import type { SearchTopic } from '~/types/api/home'
 
 import { usePersistKUNGalgameHomeStore } from '~/store/modules/home'
 
@@ -13,7 +13,7 @@ const router = useRouter()
 const { search, isShowSearch } = storeToRefs(useTempHomeStore())
 
 const props = defineProps<{
-  topics: HomeSearchTopic[]
+  topics: SearchTopic[]
 }>()
 
 const topics = computed(() => props.topics)

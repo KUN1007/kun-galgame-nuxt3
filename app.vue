@@ -106,7 +106,7 @@ onBeforeMount(() => {
   <KunCapture />
 
   <!-- Global search component -->
-  <!-- <SearchKUNGalgameSearchBox /> -->
+  <KunSearch />
 
   <NuxtLoadingIndicator />
   <NuxtLayout>

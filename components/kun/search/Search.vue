@@ -1,21 +1,24 @@
 <script setup lang="ts">
-import { onBeforeUnmount, ref, watch } from 'vue'
-import SearchBox from './SearchBox.vue'
-import SearchHistory from './SearchHistory.vue'
-import SearchResult from './SearchResult.vue'
-
 import { useTempHomeStore } from '~/store/temp/home'
-import { storeToRefs } from 'pinia'
-
-import { HomeSearchTopic } from '~/api'
+import type { SearchTopic } from '~/types/api/home'
 
 const { search, isShowSearch } = storeToRefs(useTempHomeStore())
 
-const topics = ref<HomeSearchTopic[]>([])
+const topics = ref<SearchTopic[]>([])
 const container = ref<HTMLElement>()
 
 const searchTopics = async () => {
-  return (await useTempHomeStore().searchTopic()).data
+  const { data } = await useFetch('/api/home/search', {
+    query: search.value,
+    watch: false,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
+  return data.value ? data.value : []
 }
 
 watch(
@@ -78,11 +81,11 @@ onBeforeUnmount(() => {
     <Transition name="search">
       <div class="mask" v-if="isShowSearch" @click="isShowSearch = false">
         <div ref="container" class="container" @click.stop>
-          <SearchBox />
+          <KunSearchBox />
 
-          <SearchHistory v-if="!search.keywords" />
+          <KunSearchHistory v-if="!search.keywords" />
 
-          <SearchResult :topics="topics" v-if="topics.length" />
+          <KunSearchResult :topics="topics" v-if="topics.length" />
 
           <span class="empty" v-if="!topics.length && search.keywords">
             {{ $t('mainPage.header.emptyResult') }}
