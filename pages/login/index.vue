@@ -24,7 +24,6 @@ const handleClickRegister = () => {
         :class="isShowPanel"
         :style="{ backgroundImage: `url(${backgroundImageUrl})` }"
       >
-        <!-- Login and registration toggle -->
         <div class="switch">
           <div @click="handleClickSignIn">{{ $t('login.overlay.login') }}</div>
           <div @click="handleClickRegister">
@@ -32,13 +31,10 @@ const handleClickRegister = () => {
           </div>
         </div>
 
-        <!-- Login panel -->
         <Login class="login" />
 
-        <!-- Registration panel -->
         <LoginRegister class="register" />
 
-        <!-- Sidebar -->
         <div class="container-overlay">
           <div class="overlay">
             <div class="panel left">

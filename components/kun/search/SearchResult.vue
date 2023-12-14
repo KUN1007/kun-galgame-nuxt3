@@ -1,15 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { usePersistKUNGalgameHomeStore } from '~/store/modules/home'
+import { useTempHomeStore } from '~/store/temp/home'
 import type { SearchTopic } from '~/types/api/home'
 
-import { usePersistKUNGalgameHomeStore } from '~/store/modules/home'
-
-const { searchHistory } = storeToRefs(usePersistKUNGalgameHomeStore())
-import { useTempHomeStore } from '~/store/temp/home'
-import { storeToRefs } from 'pinia'
-
 const router = useRouter()
+const { searchHistory } = storeToRefs(usePersistKUNGalgameHomeStore())
 const { search, isShowSearch } = storeToRefs(useTempHomeStore())
 
 const props = defineProps<{

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 import { useTempMessageStore } from '~/store/temp/message'
-import { storeToRefs } from 'pinia'
 import img from './loli'
 import 'animate.css'
 

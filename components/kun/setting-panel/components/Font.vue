@@ -1,20 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
-import { storeToRefs } from 'pinia'
-
-const settingsStore = useKUNGalgameSettingsStore()
-const { showKUNGalgameFontStyle } = storeToRefs(settingsStore)
 
 const font = ref('')
+const { showKUNGalgameFontStyle } = storeToRefs(useKUNGalgameSettingsStore())
 
 const setFont = () => {
   if (font.value) {
-    settingsStore.setKUNGalgameFontStyle(font.value)
+    useKUNGalgameSettingsStore().setKUNGalgameFontStyle(font.value)
     font.value = ''
   } else {
-    settingsStore.setKUNGalgameFontStyle('system-ui')
+    useKUNGalgameSettingsStore().setKUNGalgameFontStyle('system-ui')
   }
 }
 </script>

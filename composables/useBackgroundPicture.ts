@@ -1,7 +1,6 @@
 import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
 import { useKUNGalgameUserStore } from '~/store/modules/kungalgamer'
 import { saveImage, getImage } from './useLocalforage'
-import { storeToRefs } from 'pinia'
 
 const { showKUNGalgameBackground, showKUNGalgameCustomBackground } =
   storeToRefs(useKUNGalgameSettingsStore())

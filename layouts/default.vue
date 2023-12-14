@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import { onMounted, watch, ref } from 'vue'
-import { getCurrentBackground } from '~/composables/useBackgroundPicture'
-
 import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
-import { storeToRefs } from 'pinia'
-import { getImage } from '~/composables/useLocalforage'
 
 const { showKUNGalgameBackground, showKUNGalgameCustomBackground } =
   storeToRefs(useKUNGalgameSettingsStore())

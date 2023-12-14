@@ -4,11 +4,13 @@ import SwitchLanguage from '../setting-panel/components/SwitchLanguage.vue'
 import CustomBackground from '../setting-panel/components/CustomBackground.vue'
 import { hamburgerItem } from './hamburgerItem'
 
-defineEmits(['showKUNGalgameHamburger'])
+defineEmits<{
+  close: []
+}>()
 </script>
 
 <template>
-  <div class="root" @click="$emit('showKUNGalgameHamburger', false)">
+  <div class="root" @click="$emit('close')">
     <Transition
       enter-active-class="animate__animated animate__fadeInLeft animate__faster"
       appear
@@ -18,7 +20,7 @@ defineEmits(['showKUNGalgameHamburger'])
           <img src="/favicon.webp" alt="KUNGalgame" />
           <span>{{ $t('header.name') }}</span>
         </div>
-        <!-- Interactive items -->
+
         <div class="item" style="font-size: 17px">
           <span v-for="kun in hamburgerItem" :key="kun.index">
             <RouterLink :to="kun.router">

@@ -1,12 +1,10 @@
-<script setup lang="ts">
-import { Icon } from '@iconify/vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <RouterLink to="/" class="return">
-    <Icon class="icon" icon="line-md:home-md-twotone" />
+  <NuxtLink to="/" class="return">
+    <Icon name="icon" icon="line-md:home-md-twotone" />
     <span>{{ $t('back.home') }}</span>
-  </RouterLink>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>

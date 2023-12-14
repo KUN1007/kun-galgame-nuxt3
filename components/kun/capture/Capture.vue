@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
 import { questionsEN } from './questionsEN'
 import { questionsCN } from './questionsCN'
 import type { Question } from './questionsEN'
@@ -11,11 +10,8 @@ const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useTempMessageStore()
 )
 const questions = ref<Question[]>([])
-
-// Initialize
 questions.value = locale.value === 'en' ? questionsEN : questionsCN
 
-// Watch for changes in the language setting
 watch(
   () => locale.value,
   () => {
@@ -23,25 +19,17 @@ watch(
   }
 )
 
-// Function to randomly select a question
 const randomizeQuestion = () => {
-  // Generate a random integer between 0 and the number of questions minus 1
   return Math.floor(Math.random() * questions.value.length)
 }
 
-// User's input answer
 const userAnswers = ref('')
-// Current question index
 const currentQuestionIndex = ref(randomizeQuestion())
-// Current question
 const currentQuestion = ref(questions.value[currentQuestionIndex.value])
-// Error count
 const errorCounter = ref(0)
 const expectedKeys = ref(['k', 'u', 'n'])
 const currentIndex = ref(0)
-// Whether to show hints
 const isShowHint = ref(false)
-// Whether to show the answer
 const isShowAnswer = ref(false)
 
 const resetStatus = () => {
@@ -54,34 +42,25 @@ const resetStatus = () => {
   isShowAnswer.value = false
 }
 
-// Listen to keyboard events
 const checkKeyPress = (event: KeyboardEvent) => {
   const pressedKey = event.key
 
   if (pressedKey === expectedKeys.value[currentIndex.value]) {
-    // When the user presses the expected key
     if (currentIndex.value === expectedKeys.value.length - 1) {
-      // If the last key "n" has been pressed, trigger the corresponding logic
       isShowAnswer.value = true
     } else {
-      // Otherwise, continue to the next expected key
       currentIndex.value++
     }
   } else {
-    // If the wrong key is pressed, start checking again
     currentIndex.value = 0
   }
 }
 
-// Submit the answer
 const submitAnswer = () => {
   const correctOption = currentQuestion.value.correctOption
 
   if (userAnswers.value === correctOption) {
-    // Correct answer
-    // Set the validation as successful
     isCaptureSuccessful.value = true
-    // Close the panel
     isShowCapture.value = false
     useMessage(
       'Human-machine identity verification successful ~',
@@ -90,24 +69,20 @@ const submitAnswer = () => {
     )
     resetStatus()
   } else {
-    // Wrong answer
     errorCounter.value++
 
     useMessage('Wrong answer!', '回答错误！', 'warn')
 
-    // Randomly select a new question
     const randomIndex = randomizeQuestion()
     currentQuestionIndex.value = randomIndex
     userAnswers.value = ''
 
-    // Show hints if the error count is greater than or equal to 3
     if (errorCounter.value >= 3) {
       isShowHint.value = true
     }
   }
 }
 
-// Close panel
 const handleCloseCapture = () => {
   isShowCapture.value = false
   resetStatus()
@@ -117,7 +92,6 @@ const handleCloseCapture = () => {
 <template>
   <Teleport to="body" :disabled="isShowCapture">
     <Transition name="capture">
-      <!-- Mask -->
       <div
         class="mask"
         @keydown="checkKeyPress($event)"
@@ -125,15 +99,12 @@ const handleCloseCapture = () => {
         v-if="isShowCapture"
       >
         <div class="validate">
-          <!-- Title -->
           <div class="title">
-            <!-- <span>{{ `❮` }}</span> -->
             <h2>{{ $t('AlertInfo.capture.title') }}</h2>
-            <!-- <span>{{ `❯` }}</span> -->
           </div>
+
           <p class="question">{{ currentQuestion.text }}</p>
 
-          <!-- Options -->
           <div class="select">
             <label
               v-for="(option, index) in currentQuestion.options"
@@ -144,7 +115,6 @@ const handleCloseCapture = () => {
             </label>
           </div>
 
-          <!-- Submit buttons -->
           <div class="btn">
             <button @click="submitAnswer">
               {{ $t('AlertInfo.capture.submit') }}
@@ -154,8 +124,6 @@ const handleCloseCapture = () => {
             </button>
           </div>
 
-          <!-- Hints -->
-          <!-- tabindex allows this element to be focused on the page -->
           <div class="hint-container">
             <div v-if="isShowHint" class="hint">
               <div>{{ $t('AlertInfo.capture.hint1') }}</div>

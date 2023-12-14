@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { useTempMessageStore } from '~/store/temp/message'
 import { useKUNGalgameUserStore } from '~/store/modules/kungalgamer'
-import { storeToRefs } from 'pinia'
 import { kungalgameStoreReset } from '~/store'
 
 const { uid, name, moemoepoint } = storeToRefs(useKUNGalgameUserStore())
@@ -46,7 +42,7 @@ onMounted(() => {
       <div class="info">
         <p>{{ name }}</p>
         <p>
-          <span><Icon icon="line-md:star-alt-twotone"></Icon></span>
+          <span><Icon name="line-md:star-alt-twotone"></Icon></span>
           <span>{{ moemoepoint }}</span>
         </p>
       </div>

@@ -1,25 +1,14 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-
-import Loli from './components/Loli.vue'
-import Mode from './components/Mode.vue'
-import SwitchLanguage from './components/SwitchLanguage.vue'
-import PageWidth from './components/PageWidth.vue'
-import Font from './components/Font.vue'
-import Background from './components/Background.vue'
-
 import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
-import { storeToRefs } from 'pinia'
 
-const settingsStore = useKUNGalgameSettingsStore()
-const { isShowPageWidth } = storeToRefs(settingsStore)
+const { isShowPageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 
 const emits = defineEmits<{
   close: [showKUNGalgamePanel: boolean]
 }>()
 
 const handleRecover = () => {
-  settingsStore.setKUNGalgameSettingsRecover()
+  useKUNGalgameSettingsStore().setKUNGalgameSettingsRecover()
 }
 
 const handelCloseSettingsPanel = () => {
@@ -32,12 +21,12 @@ const handelCloseSettingsPanel = () => {
     <div class="container">
       <div class="title">
         <span>{{ $t('header.settings.name') }}</span>
-        <span><Icon class="settings-icon" icon="uiw:setting-o" /></span>
+        <span><Icon class="settings-icon" name="uiw:setting-o" /></span>
       </div>
 
-      <Mode />
+      <KunSettingPanelComponentsMode />
 
-      <SwitchLanguage />
+      <KunSettingPanelComponentsSwitchLanguage />
 
       <div class="switch">
         <div class="menu">
@@ -57,26 +46,26 @@ const handelCloseSettingsPanel = () => {
 
         <TransitionGroup name="item" tag="div">
           <div class="item" v-if="isShowPageWidth">
-            <PageWidth />
+            <KunSettingPanelComponentsPageWidth />
           </div>
 
           <div class="item" v-else-if="!isShowPageWidth">
-            <Font />
+            <KunSettingPanelComponentsFont />
           </div>
         </TransitionGroup>
       </div>
 
-      <Background />
+      <KunSettingPanelComponentsBackground />
 
       <button class="reset" @click="handleRecover">
         {{ $t('header.settings.recover') }}
       </button>
     </div>
 
-    <Loli class="loli" />
+    <KunSettingPanelComponentsLoli class="loli" />
 
     <div class="close">
-      <Icon @click="handelCloseSettingsPanel" icon="line-md:close" />
+      <Icon @click="handelCloseSettingsPanel" name="line-md:close" />
     </div>
   </div>
 </template>

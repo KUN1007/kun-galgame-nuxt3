@@ -1,13 +1,8 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onActivated, watch } from 'vue'
-import { useRoute } from 'vue-router'
 import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
-import { storeToRefs } from 'pinia'
 
 const route = useRoute()
-
-const settingsStore = useKUNGalgameSettingsStore()
-const { showKUNGalgamePageWidth } = storeToRefs(settingsStore)
+const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 
 const pageWidth = ref(0)
 const routeName = computed(() => route.name as string)

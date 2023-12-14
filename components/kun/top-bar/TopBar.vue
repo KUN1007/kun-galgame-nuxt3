@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { defineAsyncComponent, ref } from 'vue'
 import { Icon } from '@iconify/vue'
-import 'animate.css'
 import { topBarItem } from './topBarItem'
-import { onBeforeRouteLeave } from 'vue-router'
+import 'animate.css'
 
 const Hamburger = defineAsyncComponent(() => import('./Hamburger.vue'))
 const KUNGalgameSettingsPanel = defineAsyncComponent(
@@ -13,7 +11,6 @@ const KUNGalgameUserInfo = defineAsyncComponent(() => import('./UserInfo.vue'))
 
 import { useTempHomeStore } from '~/store/temp/home'
 import { useKUNGalgameUserStore } from '~/store/modules/kungalgamer'
-import { storeToRefs } from 'pinia'
 
 const { isShowSearch } = storeToRefs(useTempHomeStore())
 const { name, avatarMin } = storeToRefs(useKUNGalgameUserStore())
@@ -43,7 +40,7 @@ onBeforeRouteLeave(() => {
         <Transition name="hamburger">
           <Hamburger
             v-if="showKUNGalgameHamburger"
-            @showKUNGalgameHamburger="showKUNGalgameHamburger = false"
+            @close="showKUNGalgameHamburger = false"
           />
         </Transition>
       </div>

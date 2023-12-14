@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
 import { getLoli } from './getLoli'
 
 const loliData = ref({
@@ -101,4 +100,3 @@ onMounted(async () => {
   position: absolute;
 }
 </style>
-./gatLoli

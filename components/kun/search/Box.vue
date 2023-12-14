@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import { ref, onBeforeMount, onMounted, watch } from 'vue'
-
-import { debounce } from '~/utils/debounce'
-
 import { useTempHomeStore } from '~/store/temp/home'
-import { storeToRefs } from 'pinia'
 
 const { search } = storeToRefs(useTempHomeStore())
 

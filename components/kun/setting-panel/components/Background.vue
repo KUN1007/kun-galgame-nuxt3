@@ -1,13 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import CustomBackground from './CustomBackground.vue'
-
 import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
-import { storeToRefs } from 'pinia'
-
 import { backgroundImages } from './backgroundImage'
-import { getBackgroundURL } from '~/composables/useBackgroundPicture'
-import { restoreBackground } from '~/composables/useBackgroundPicture'
 
 const imageArray = ref<string[]>([])
 const { showKUNGalgameBackground } = storeToRefs(useKUNGalgameSettingsStore())
@@ -56,7 +49,7 @@ onMounted(async () => {
       </li>
 
       <li>
-        <CustomBackground />
+        <KunSettingPanelComponentsCustomBackground />
 
         <button class="restore-bg" @click="restoreBackground">
           {{ $t('header.settings.restore') }}
@@ -143,4 +136,3 @@ onMounted(async () => {
   }
 }
 </style>
-./backgroundImage

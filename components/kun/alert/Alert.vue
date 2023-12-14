@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useTempMessageStore } from '~/store/temp/message'
-import { storeToRefs } from 'pinia'
 
 const { showAlert, alertMsg, isShowCancel } = storeToRefs(useTempMessageStore())
 
