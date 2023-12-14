@@ -13,7 +13,7 @@ const mpWidth = computed(() => {
 <template>
   <div class="header">
     <div class="avatar" v-if="props.avatar">
-      <img :src="props.avatar" :alt="props.name" />
+      <NuxtImg :src="props.avatar" :alt="props.name" />
     </div>
 
     <div class="name">

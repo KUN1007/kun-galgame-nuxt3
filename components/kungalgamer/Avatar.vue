@@ -74,7 +74,7 @@ const handleChangeAvatar = async () => {
 
 <template>
   <div class="avatar">
-    <div class="title">{{ $tm('user.settings.avatar') }}</div>
+    <div class="title">{{ $t('user.settings.avatar') }}</div>
 
     <div class="container">
       <div
@@ -86,7 +86,7 @@ const handleChangeAvatar = async () => {
         @click="handleClickUpload"
       >
         <span class="plus" v-if="!selectedFileUrl"></span>
-        <img
+        <NuxtImg
           class="avatar-preview"
           :src="selectedFileUrl"
           alt="Uploaded Image"
@@ -103,16 +103,16 @@ const handleChangeAvatar = async () => {
 
       <div class="help">
         <div class="hint">
-          <span>{{ $tm('user.settings.drag') }}</span>
-          <span>{{ $tm('user.settings.click') }}</span>
+          <span>{{ $t('user.settings.drag') }}</span>
+          <span>{{ $t('user.settings.click') }}</span>
         </div>
         <div class="support">
-          <span>{{ $tm('user.settings.supportImage') }}</span>
+          <span>{{ $t('user.settings.supportImage') }}</span>
           <br />
-          <span>{{ $tm('user.settings.supportFormat') }}</span>
+          <span>{{ $t('user.settings.supportFormat') }}</span>
         </div>
         <button @click="handleChangeAvatar">
-          {{ $tm('user.settings.confirm') }}
+          {{ $t('user.settings.confirm') }}
         </button>
       </div>
     </div>

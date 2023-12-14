@@ -46,7 +46,7 @@ onBeforeRouteLeave(() => {
 
       <div class="kungalgame">
         <NuxtLink to="/">
-          <img src="/favicon.webp" alt="KUN Visual Novel | 鲲 Galgame" />
+          <NuxtImg src="/favicon.webp" alt="KUN Visual Novel | 鲲 Galgame" />
           <span>{{ $t('header.name') }}</span>
         </NuxtLink>
       </div>
@@ -75,11 +75,11 @@ onBeforeRouteLeave(() => {
       </span>
 
       <div class="avatar">
-        <img
+        <NuxtImg
           v-if="avatarMin"
           @click="showKUNGalgameUserPanel = true"
           :src="avatarMin"
-          alt="KUN"
+          :alt="name"
         />
         <span @click="showKUNGalgameUserPanel = true" v-if="!avatarMin">
           {{ name }}

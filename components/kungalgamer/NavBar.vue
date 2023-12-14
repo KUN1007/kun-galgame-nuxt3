@@ -46,7 +46,7 @@ watch(
       v-show="isShowNavItem(kun.permission)"
     >
       <NuxtLink :to="`/kungalgamer/${currentPageUid}/${kun.router}`">
-        <span>{{ $tm(`user.nav.${kun.name}`) }}</span>
+        <span>{{ $t(`user.nav.${kun.name}`) }}</span>
       </NuxtLink>
     </div>
   </div>

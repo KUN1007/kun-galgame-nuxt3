@@ -1,23 +1,11 @@
 <script setup lang="ts">
 import { backgroundImages } from './backgroundImage'
 
-const imageArray = ref<string[]>([])
 const { showKUNGalgameBackground } = storeToRefs(useKUNGalgameSettingsStore())
-
-const getBackground = async (imageNumber: number) => {
-  return await getBackgroundURL(`bg${imageNumber}-m`)
-}
 
 const handleChangeImage = (index: number) => {
   showKUNGalgameBackground.value = `bg${index}`
 }
-
-onMounted(async () => {
-  for (const background of backgroundImages) {
-    const backgroundURL = await getBackground(background.index)
-    imageArray.value.push(backgroundURL)
-  }
-})
 </script>
 
 <template>
@@ -25,6 +13,7 @@ onMounted(async () => {
     <div class="bg-settings">
       {{ $t('header.settings.background') }}
     </div>
+
     <ul class="kungalgame-background-container">
       <li>
         <span>{{ $t('header.settings.preset') }}</span>
@@ -34,14 +23,10 @@ onMounted(async () => {
             :key="kun.index"
             v-tooltip="{ message: kun.message, position: 'bottom' }"
           >
-            <img
+            <NuxtImg
               v-if="kun"
-              :src="imageArray[kun.index - 1]"
+              :src="`bg/bg${kun.index}-m.webp`"
               @click="handleChangeImage(kun.index)"
-            />
-
-            <KunSkeletonSettingsPanelBackgroundImage
-              v-if="!imageArray[kun.index - 1]"
             />
           </li>
         </ul>

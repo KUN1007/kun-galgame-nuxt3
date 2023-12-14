@@ -101,7 +101,7 @@ onMounted(async () => {
       v-if="!tidArray.length && !ridArray.length && !cidArray.length"
       class="null"
     >
-      {{ $tm('user.profile.null') }}
+      {{ $t('user.profile.null') }}
     </div>
   </div>
 </template>

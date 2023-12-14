@@ -28,7 +28,7 @@ const handleClose = () => {
         </Transition>
 
         <div class="avatar">
-          <img :src="loli" />
+          <NuxtImg :src="loli" />
         </div>
 
         <Transition

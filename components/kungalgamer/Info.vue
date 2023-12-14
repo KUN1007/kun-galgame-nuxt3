@@ -42,48 +42,48 @@ const statusName = () => {
       <!-- User basic information -->
       <div class="basic">
         <!-- Username -->
-        <span>{{ $tm('user.profile.name') }}: {{ user.name }}</span>
+        <span>{{ $t('user.profile.name') }}: {{ user.name }}</span>
         <!-- Moemoepoint -->
         <span>
-          {{ $tm('user.profile.moemoepoint') }}: {{ user.moemoepoint }}
+          {{ $t('user.profile.moemoepoint') }}: {{ user.moemoepoint }}
         </span>
         <!-- Registration number -->
-        <span>{{ $tm('user.profile.register') }}: {{ user.uid }}</span>
+        <span>{{ $t('user.profile.register') }}: {{ user.uid }}</span>
         <!-- Role -->
-        <span>{{ $tm('user.profile.roles') }}: {{ rolesName() }}</span>
+        <span>{{ $t('user.profile.roles') }}: {{ rolesName() }}</span>
         <!-- Status -->
-        <span>{{ $tm('user.profile.status') }}: {{ statusName() }}</span>
+        <span>{{ $t('user.profile.status') }}: {{ statusName() }}</span>
         <!-- Upvotes received -->
-        <span>{{ $tm('user.profile.upvote') }}: {{ user.upvote }}</span>
+        <span>{{ $t('user.profile.upvote') }}: {{ user.upvote }}</span>
         <!-- Likes received -->
-        <span>{{ $tm('user.profile.like') }}: {{ user.like }}</span>
+        <span>{{ $t('user.profile.like') }}: {{ user.like }}</span>
         <!-- Dislikes received -->
-        <span>{{ $tm('user.profile.dislike') }}: {{ user.dislike }}</span>
+        <span>{{ $t('user.profile.dislike') }}: {{ user.dislike }}</span>
         <!-- Topics published today -->
         <span>
-          {{ $tm('user.profile.today') }}: {{ user.daily_topic_count }}
+          {{ $t('user.profile.today') }}: {{ user.daily_topic_count }}
         </span>
         <!-- Total topics published -->
-        <span>{{ $tm('user.profile.topic') }}: {{ user.topic.length }}</span>
+        <span>{{ $t('user.profile.topic') }}: {{ user.topic.length }}</span>
         <!-- Total replies published -->
-        <span>{{ $tm('user.profile.reply') }}: {{ user.reply.length }}</span>
+        <span>{{ $t('user.profile.reply') }}: {{ user.reply.length }}</span>
         <!-- Total comments published -->
         <span>
-          {{ $tm('user.profile.comment') }}: {{ user.comment.length }}
+          {{ $t('user.profile.comment') }}: {{ user.comment.length }}
         </span>
 
         <!-- Registration date -->
         <span>
-          {{ $tm('user.profile.time') }}:
+          {{ $t('user.profile.time') }}:
           {{ dayjs(user.time).format('YYYY/MM/DD') }}
         </span>
       </div>
 
       <!-- User bio -->
       <div class="bio">
-        <div>{{ $tm('user.profile.bio') }}:</div>
+        <div>{{ $t('user.profile.bio') }}:</div>
         <div v-if="user.bio">{{ user.bio }}</div>
-        <div v-if="!user.bio" class="null">{{ $tm('user.profile.null') }}</div>
+        <div v-if="!user.bio" class="null">{{ $t('user.profile.null') }}</div>
       </div>
     </div>
   </div>

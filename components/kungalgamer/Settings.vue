@@ -36,10 +36,10 @@ onMounted(() => {
     <Avatar />
 
     <div class="bio">
-      <div class="title">{{ $tm('user.settings.bio') }}</div>
+      <div class="title">{{ $t('user.settings.bio') }}</div>
       <textarea
         name="bio"
-        :placeholder="`${$tm('user.settings.hint')}`"
+        :placeholder="`${$t('user.settings.hint')}`"
         rows="5"
         v-model="bioValue"
       >
@@ -47,10 +47,10 @@ onMounted(() => {
 
       <div class="help">
         <span class="bioCount">
-          {{ $tm('user.settings.count') }}: {{ bioValue.length }}
+          {{ $t('user.settings.count') }}: {{ bioValue.length }}
         </span>
         <button @click="handleChangeBio">
-          {{ $tm('user.settings.confirm') }}
+          {{ $t('user.settings.confirm') }}
         </button>
       </div>
     </div>

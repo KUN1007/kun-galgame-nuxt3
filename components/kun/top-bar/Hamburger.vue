@@ -14,7 +14,7 @@ defineEmits<{
     >
       <div class="container" @click.stop>
         <div class="kungalgame">
-          <img src="/favicon.webp" alt="KUNGalgame" />
+          <NuxtImg src="/favicon.webp" alt="KUNGalgame" />
           <span>{{ $t('header.name') }}</span>
         </div>
 

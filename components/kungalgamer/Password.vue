@@ -114,62 +114,62 @@ const handleClickForgotPassword = () => {
   <div class="article">
     <!-- Change email -->
     <div class="email">
-      <div class="title">{{ $tm('user.email.email') }}:</div>
+      <div class="title">{{ $t('user.email.email') }}:</div>
       <!-- Current email -->
       <div class="current-email">
-        {{ $tm('user.email.current') }}: {{ email }}
+        {{ $t('user.email.current') }}: {{ email }}
       </div>
       <!-- New email -->
       <div class="input">
-        <span>{{ $tm('user.email.newEmail') }}: </span>
+        <span>{{ $t('user.email.newEmail') }}: </span>
         <input v-model="input.newEmail" type="text" />
       </div>
       <!-- Email verification code -->
       <div class="input">
-        <span>{{ $tm('user.email.code') }}: </span>
+        <span>{{ $t('user.email.code') }}: </span>
         <input v-model="input.code" type="text" />
       </div>
       <!-- Send code -->
       <div class="btn">
         <button @click="handleSendCode" v-if="!hasSentCodeEmail">
-          {{ $tm('user.email.send') }}
+          {{ $t('user.email.send') }}
         </button>
         <!-- Confirm email -->
         <button @click="handleResetEmail">
-          {{ $tm('user.email.confirmEmail') }}
+          {{ $t('user.email.confirmEmail') }}
         </button>
       </div>
     </div>
 
     <!-- Change user password -->
     <div class="password">
-      <div class="title">{{ $tm('user.email.pwd') }}:</div>
+      <div class="title">{{ $t('user.email.pwd') }}:</div>
       <!-- Old password -->
       <div class="input">
-        <span>{{ $tm('user.email.oldPwd') }}: </span>
+        <span>{{ $t('user.email.oldPwd') }}: </span>
         <input v-model="input.oldPassword" type="password" />
       </div>
       <!-- New password -->
       <div class="input">
-        <span>{{ $tm('user.email.newPwd') }}: </span>
+        <span>{{ $t('user.email.newPwd') }}: </span>
         <input v-model="input.newPassword" type="password" />
       </div>
       <!-- Confirm password -->
       <div class="input">
-        <span>{{ $tm('user.email.rePwd') }}: </span>
+        <span>{{ $t('user.email.rePwd') }}: </span>
         <input v-model="input.repeatPassword" type="password" />
       </div>
 
       <div class="btn">
         <button @click="handleChangePassword">
-          {{ $tm('user.email.confirmPwd') }}
+          {{ $t('user.email.confirmPwd') }}
         </button>
       </div>
     </div>
 
     <!-- Forgot password -->
     <span @click="handleClickForgotPassword" class="forget">
-      {{ $tm('login.login.forget') }}
+      {{ $t('login.login.forget') }}
     </span>
   </div>
 </template>
