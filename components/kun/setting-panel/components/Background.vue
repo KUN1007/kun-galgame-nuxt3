@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
 import { backgroundImages } from './backgroundImage'
 
 const imageArray = ref<string[]>([])

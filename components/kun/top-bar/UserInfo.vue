@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { useTempMessageStore } from '~/store/temp/message'
-import { useKUNGalgameUserStore } from '~/store/modules/kungalgamer'
-import { kungalgameStoreReset } from '~/store'
-
 const { uid, name, moemoepoint } = storeToRefs(useKUNGalgameUserStore())
 
 const router = useRouter()

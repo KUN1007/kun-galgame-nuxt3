@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useTempMessageStore } from '~/store/temp/message'
-
 const { showAlert, alertMsg, isShowCancel } = storeToRefs(useTempMessageStore())
 
 const handleClose = () => {

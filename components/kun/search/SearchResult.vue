@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { usePersistKUNGalgameHomeStore } from '~/store/modules/home'
-import { useTempHomeStore } from '~/store/temp/home'
 import type { SearchTopic } from '~/types/api/home'
 
 const router = useRouter()

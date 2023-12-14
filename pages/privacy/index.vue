@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { KunBackToHome } from '#build/components'
-
 definePageMeta({
   layout: false,
 })

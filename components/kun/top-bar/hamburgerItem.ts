@@ -1,12 +1,9 @@
-// Interface for individual items in the top navigation bar
 interface Hamburger {
   index: number
   name: string
   router: string
 }
 
-// Items in the top navigation bar
-// (be sure to include '/' here, or child routes may have issues!!!)
 export const hamburgerItem: Hamburger[] = [
   { index: 1, name: 'pool', router: '/pool' },
   { index: 2, name: 'create', router: '/edit' },

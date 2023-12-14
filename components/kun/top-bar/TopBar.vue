@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
 import { topBarItem } from './topBarItem'
 import 'animate.css'
 
@@ -33,7 +32,7 @@ onBeforeRouteLeave(() => {
     <div class="nav-top">
       <div class="hamburger">
         <Icon
-          icon="line-md:menu-fold-right"
+          name="line-md:menu-fold-right"
           v-if="!showKUNGalgameHamburger"
           @click="showKUNGalgameHamburger = !showKUNGalgameHamburger"
         />
@@ -65,14 +64,14 @@ onBeforeRouteLeave(() => {
 
     <div class="kungalgamer-info">
       <span class="search" @click="isShowSearch = true">
-        <Icon icon="line-md:search" />
+        <Icon name="line-md:search" />
       </span>
 
       <span
         class="settings"
         @click="showKUNGalgamePanel = !showKUNGalgamePanel"
       >
-        <Icon icon="uiw:setting-o" />
+        <Icon name="uiw:setting-o" />
       </span>
 
       <div class="avatar">

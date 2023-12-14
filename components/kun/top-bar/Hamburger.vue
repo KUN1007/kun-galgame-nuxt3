@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import Mode from '../setting-panel/components/Mode.vue'
-import SwitchLanguage from '../setting-panel/components/SwitchLanguage.vue'
-import CustomBackground from '../setting-panel/components/CustomBackground.vue'
 import { hamburgerItem } from './hamburgerItem'
 
 defineEmits<{
@@ -23,20 +20,20 @@ defineEmits<{
 
         <div class="item" style="font-size: 17px">
           <span v-for="kun in hamburgerItem" :key="kun.index">
-            <RouterLink :to="kun.router">
+            <NuxtLink :to="kun.router">
               {{ $t(`header.hamburger.${kun.name}`) }}
-            </RouterLink>
+            </NuxtLink>
           </span>
         </div>
 
-        <Mode style="font-size: 15px" />
+        <KunSettingPanelComponentsMode style="font-size: 15px" />
 
-        <SwitchLanguage style="font-size: 15px" />
+        <KunSettingPanelComponentsSwitchLanguage style="font-size: 15px" />
 
-        <CustomBackground :is-mobile="true" />
+        <KunSettingPanelComponentsCustomBackground :is-mobile="true" />
 
         <div class="home">
-          <RouterLink to="/">{{ $t('header.hamburger.home') }}</RouterLink>
+          <NuxtLink to="/">{{ $t('header.hamburger.home') }}</NuxtLink>
         </div>
       </div>
     </Transition>

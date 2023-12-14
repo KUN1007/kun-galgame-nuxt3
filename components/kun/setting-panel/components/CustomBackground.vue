@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
-
 const { showKUNGalgameBackground, showKUNGalgameCustomBackground } =
   storeToRefs(useKUNGalgameSettingsStore())
 

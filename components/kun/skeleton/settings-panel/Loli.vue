@@ -1,11 +1,9 @@
-<script setup lang="ts">
-import { Icon } from '@iconify/vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="skeleton">
     <ul>
-      <li><Icon icon="line-md:image" /></li>
+      <li><Icon name="line-md:image" /></li>
     </ul>
   </div>
 </template>

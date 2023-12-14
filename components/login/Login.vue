@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useKUNGalgameUserStore } from '~/store/modules/kungalgamer'
-import { useTempMessageStore } from '~/store/temp/message'
 import { checkLoginForm } from './utils/checkLogin'
 
 const router = useRouter()

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { checkEmail, checkCode, checkPassword } from './check'
-import { useTempMessageStore } from '~/store/temp/message'
 
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useTempMessageStore()

@@ -3,8 +3,6 @@ import { questionsEN } from './questionsEN'
 import { questionsCN } from './questionsCN'
 import type { Question } from './questionsEN'
 
-import { useTempMessageStore } from '~/store/temp/message'
-
 const { locale } = useI18n()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useTempMessageStore()

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { useTempMessageStore } from '~/store/temp/message'
 import img from './loli'
 import 'animate.css'
 
@@ -42,7 +40,7 @@ const handleClose = () => {
         </Transition>
 
         <div class="close" @click="handleClose">
-          <Icon icon="line-md:close" />
+          <Icon name="line-md:close" />
         </div>
       </div>
     </Transition>

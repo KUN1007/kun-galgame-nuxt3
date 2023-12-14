@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useTempHomeStore } from '~/store/temp/home'
 import type { SearchTopic } from '~/types/api/home'
 
 const { search, isShowSearch } = storeToRefs(useTempHomeStore())

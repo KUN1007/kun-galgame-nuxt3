@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useTempHomeStore } from '~/store/temp/home'
-
 const { search } = storeToRefs(useTempHomeStore())
 
 const input = ref<HTMLElement | null>(null)

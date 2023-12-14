@@ -1,10 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-
-import { usePersistKUNGalgameHomeStore } from '~/store/modules/home'
-import { useTempHomeStore } from '~/store/temp/home'
-import { storeToRefs } from 'pinia'
-
 const { searchHistory } = storeToRefs(usePersistKUNGalgameHomeStore())
 const { search } = storeToRefs(useTempHomeStore())
 
@@ -42,7 +36,7 @@ const handleDeleteHistory = (historyIndex: number) => {
           <Icon
             @click="handleDeleteHistory(index)"
             class="delete"
-            icon="line-md:close-circle"
+            name="line-md:close-circle"
           />
         </span>
       </div>
