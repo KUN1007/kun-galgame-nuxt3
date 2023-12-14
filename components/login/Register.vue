@@ -93,15 +93,15 @@ const handleRegister = async () => {
       <span class="user-agreement">
         {{ $t('login.register.click') }}
         <div class="licence">
-          <RouterLink to="/agreement">
+          <NuxtLink to="/agreement">
             <span>{{ $t('login.register.agreement') }}</span>
-          </RouterLink>
+          </NuxtLink>
 
           {{ $t('login.register.and') }}
 
-          <RouterLink to="/privacy">
+          <NuxtLink to="/privacy">
             <span>{{ $t('login.register.privacy') }}</span>
-          </RouterLink>
+          </NuxtLink>
         </div>
       </span>
     </div>

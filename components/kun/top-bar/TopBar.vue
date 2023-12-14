@@ -45,17 +45,17 @@ onBeforeRouteLeave(() => {
       </div>
 
       <div class="kungalgame">
-        <RouterLink to="/">
+        <NuxtLink to="/">
           <img src="/favicon.webp" alt="KUN Visual Novel | 鲲 Galgame" />
           <span>{{ $t('header.name') }}</span>
-        </RouterLink>
+        </NuxtLink>
       </div>
 
       <div class="top-bar">
         <span v-for="kun in topBarItem" :key="kun.index">
-          <RouterLink :to="{ path: kun.router }">
+          <NuxtLink :to="{ path: kun.router }">
             {{ $t(`header.${kun.name}`) }}
-          </RouterLink>
+          </NuxtLink>
         </span>
 
         <div class="box"></div>
@@ -85,6 +85,7 @@ onBeforeRouteLeave(() => {
           {{ name }}
         </span>
       </div>
+
       <KUNGalgameUserInfo
         v-if="showKUNGalgameUserPanel"
         @close="showKUNGalgameUserPanel = false"
@@ -93,7 +94,7 @@ onBeforeRouteLeave(() => {
   </div>
 
   <div class="settings-panel">
-    <transition
+    <Transition
       enter-active-class="animate__animated animate__jackInTheBox animate__faster"
       leave-active-class="animate__animated animate__fadeOutRight animate__faster"
     >
@@ -103,7 +104,7 @@ onBeforeRouteLeave(() => {
           @close="showKUNGalgamePanel = false"
         />
       </KeepAlive>
-    </transition>
+    </Transition>
   </div>
 </template>
 

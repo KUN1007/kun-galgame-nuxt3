@@ -44,9 +44,9 @@ onMounted(() => {
       </div>
       <div class="func">
         <span>
-          <RouterLink :to="routerRedirectTo">
+          <NuxtLink :to="routerRedirectTo">
             {{ $t('header.user.profile') }}
-          </RouterLink>
+          </NuxtLink>
         </span>
         <span @click="logOut">{{ $t('header.user.logout') }}</span>
       </div>
