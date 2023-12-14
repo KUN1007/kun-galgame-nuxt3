@@ -85,24 +85,14 @@ export interface RegisterRequestData {
   code: string
 }
 
-export type UserInfoResponseData = UserInfo
-
 export type UserUpdateAvatarResponseData = {
   avatar: string
   avatarMin: string
 }
 
-export type UserUpdateBioResponseData = {}
-
 export type UserGetUserEmailResponseData = {
   email: string
 }
-
-export type UserGetUserTopicResponseData = UserTopic[]
-
-export type UserGetUserReplyResponseData = UserReply[]
-
-export type UserGetUserCommentResponseData = UserComment[]
 
 export type LoginResponseData = {
   uid: number
@@ -110,9 +100,5 @@ export type LoginResponseData = {
   avatar: string
   moemoepoint: number
   roles: number
-  token: string
-}
-
-export type RefreshTokenResponseData = {
   token: string
 }

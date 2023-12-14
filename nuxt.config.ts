@@ -41,6 +41,9 @@ export default defineNuxtConfig({
       KUN_GALGAME_URL: process.env.KUN_GALGAME_URL,
     },
   },
+  imports: {
+    dirs: ['./composables', './utils', './store/**/*.ts'],
+  },
 
   // Frontend
   css: ['~/assets/css/index.scss'],
