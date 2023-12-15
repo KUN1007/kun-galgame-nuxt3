@@ -3,7 +3,6 @@ const { uid, name, moemoepoint } = storeToRefs(useKUNGalgameUserStore())
 
 const router = useRouter()
 const container = ref<HTMLElement>()
-const routerRedirectTo = `/kungalgamer/${uid.value}/info`
 
 const emits = defineEmits<{
   close: []
@@ -19,7 +18,6 @@ const handlePanelBlur = async () => {
 const logOut = async () => {
   const res = await useTempMessageStore().alert('AlertInfo.edit.logout', true)
   if (res) {
-    kungalgameStoreReset()
     router.push('/login')
     useMessage('Logout successfully!', '登出成功', 'success')
   }
@@ -44,7 +42,7 @@ onMounted(() => {
       </div>
       <div class="func">
         <span>
-          <NuxtLink :to="routerRedirectTo">
+          <NuxtLink :to="`/kungalgamer/${uid}/info`">
             {{ $t('header.user.profile') }}
           </NuxtLink>
         </span>

@@ -52,6 +52,11 @@ export default defineNuxtConfig({
       drop: ['console', 'debugger'],
     },
   },
+  piniaPersistedstate: {
+    cookieOptions: {
+      maxAge: 60 * 60 * 24 * 7,
+    },
+  },
   i18n: {
     langDir: './language',
     locales: [
