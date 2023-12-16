@@ -15,6 +15,7 @@ const errorMessagesEN: Record<number, string> = {
   10111: `Avatar image upload error. The final compressed size of the image exceeds 50KB. (-B)`,
   10112: `In cooldown for login, two identical login attempts should have a one-minute interval. (-B)`,
   10113: `In cooldown for register, two identical register attempts should have a one-minute interval. (-B)`,
+  10114: `Invalid user uid (-B)`,
 
   // Topic Part
   10201: `Your daily topic limit has been reached for today. (-B)`,
@@ -58,6 +59,7 @@ const errorMessagesCN: Record<number, string> = {
   10111: `头像上传错误. 图片最终压缩大小超过 50kb (-B)`,
   10112: `登陆冷却中，两次相同登陆时间间隔一分钟 (-B)`,
   10113: `注册冷却中，两次相同注册时间间隔一分钟 (-B)`,
+  10114: `非法的用户 UID (-B)`,
 
   10201: `您今日可以发表的话题数已达上限 (-B)`,
   10202: `您的萌萌点不足 1100, 无法使用推话题功能 (-B)`,

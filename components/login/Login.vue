@@ -22,7 +22,7 @@ const handleLogin = async () => {
   )
 
   if (!result) {
-    return
+    return  
   }
 
   const { data } = await useFetch('/api/user/login', {

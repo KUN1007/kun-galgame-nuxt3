@@ -2,24 +2,27 @@
 import NavBar from './components/NavBar.vue'
 import Header from './components/Header.vue'
 
+import type { UserInfo } from '~/types/api/user'
+
 const route = useRoute()
 const uid = computed(() => {
-  return parseInt(route.params.uid as string)
+  return parseInt(route.params!.uid as string)
 })
-const user = ref<UserInfo>()
+
 const { name, moemoepoint } = storeToRefs(useKUNGalgameUserStore())
 
-const getUser = async (uid: number) => {
-  const userInfo = await useKUNGalgameUserStore().getUser(uid)
-  return userInfo.data
-}
-
-onMounted(async () => {
-  user.value = await getUser(uid.value)
-
-  if (user.value.name === name.value) {
-    moemoepoint.value = user.value.moemoepoint
-  }
+const { data: user } = await useFetch(`/api/user/${uid.value}`, {
+  method: 'GET',
+  onResponse({ request, response, options }) {
+    if (response.status === 233) {
+      kungalgameErrorHandler(response.statusText)
+      return
+    }
+    if (!user.value) {
+      navigateTo('/')
+    }
+    console.log(user.value)
+  },
 })
 </script>
 
@@ -34,7 +37,7 @@ onMounted(async () => {
 
       <div class="content">
         <NavBar :uid="uid" />
-        <RouterView v-if="user" :user="user" />
+        <NuxtPage v-if="user" :user="user" />
       </div>
     </div>
 
