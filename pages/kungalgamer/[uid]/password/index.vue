@@ -3,7 +3,7 @@ import {
   checkSendCode,
   checkResetEmail,
   checkChangePassword,
-} from './utils/check'
+} from '../utils/check'
 import type { UserInfo } from '~/types/api/user'
 
 defineProps<{

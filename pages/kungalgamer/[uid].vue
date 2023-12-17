@@ -1,9 +1,4 @@
 <script setup lang="ts">
-import NavBar from './components/NavBar.vue'
-import Header from './components/Header.vue'
-
-import type { UserInfo } from '~/types/api/user'
-
 const route = useRoute()
 const uid = computed(() => {
   return parseInt(route.params!.uid as string)
@@ -18,10 +13,6 @@ const { data: user } = await useFetch(`/api/user/${uid.value}`, {
       kungalgameErrorHandler(response.statusText)
       return
     }
-    if (!user.value) {
-      navigateTo('/')
-    }
-    console.log(user.value)
   },
 })
 </script>
@@ -29,15 +20,15 @@ const { data: user } = await useFetch(`/api/user/${uid.value}`, {
 <template>
   <div class="root">
     <div class="container">
-      <Header
+      <KungalgamerHeader
         :name="user?.name"
         :avatar="user?.avatar"
         :moemoepoint="user?.moemoepoint"
       />
 
       <div class="content">
-        <NavBar :uid="uid" />
-        <NuxtPage v-if="user" :user="user" />
+        <KungalgamerNavBar :uid="uid" />
+        <NuxtPage :user="user" />
       </div>
     </div>
 

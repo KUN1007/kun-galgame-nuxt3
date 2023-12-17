@@ -239,3 +239,4 @@ const handleChangeAvatar = async () => {
   }
 }
 </style>
+../../pages/kungalgamer/[uid]/utils/handleFileChange
