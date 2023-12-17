@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { checkImageValid, resizeImage } from './utils/handleFileChange'
-import { useKUNGalgameUserStore } from '@/store/modules/kungalgamer'
-import { storeToRefs } from 'pinia'
 
 const uploadedImage = ref<Blob>()
 const selectedFileUrl = ref<string>('')

@@ -18,9 +18,18 @@ const handleChangeBio = async () => {
     return
   }
 
-  const res = await useKUNGalgameUserStore().updateBio(bioValue.value)
+  const { data } = await useFetch('/api/user/:uid/bio', {
+    method: 'PUT',
+    body: { bio: bioValue.value },
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
 
-  if (res.code === 200) {
+  if (data.value) {
     useMessage('Rewrite bio successfully!', 'Rewrite 签名成功', 'success')
     bioValue.value = ''
   }
@@ -32,27 +41,23 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="settings">
-    <Avatar />
+  <div class="bio">
+    <div class="title">{{ $t('user.settings.bio') }}</div>
+    <textarea
+      name="bio"
+      :placeholder="`${$t('user.settings.hint')}`"
+      rows="5"
+      v-model="bioValue"
+    >
+    </textarea>
 
-    <div class="bio">
-      <div class="title">{{ $t('user.settings.bio') }}</div>
-      <textarea
-        name="bio"
-        :placeholder="`${$t('user.settings.hint')}`"
-        rows="5"
-        v-model="bioValue"
-      >
-      </textarea>
-
-      <div class="help">
-        <span class="bioCount">
-          {{ $t('user.settings.count') }}: {{ bioValue.length }}
-        </span>
-        <button @click="handleChangeBio">
-          {{ $t('user.settings.confirm') }}
-        </button>
-      </div>
+    <div class="help">
+      <span class="bioCount">
+        {{ $t('user.settings.count') }}: {{ bioValue.length }}
+      </span>
+      <button @click="handleChangeBio">
+        {{ $t('user.settings.confirm') }}
+      </button>
     </div>
   </div>
 </template>
