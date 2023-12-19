@@ -130,13 +130,13 @@ email.value = data.value ? data.value : ''
     <div class="current-email">{{ $t('user.email.current') }}: {{ email }}</div>
 
     <div class="input">
-      <span>{{ $t('user.email.newEmail') }}: </span>
-      <input v-model="input.newEmail" type="text" />
+      <label for="email">{{ $t('user.email.newEmail') }}: </label>
+      <input id="email" v-model="input.newEmail" type="text" />
     </div>
 
     <div class="input">
-      <span>{{ $t('user.email.code') }}: </span>
-      <input v-model="input.code" type="text" />
+      <label for="code">{{ $t('user.email.code') }}: </label>
+      <input id="code" v-model="input.code" type="text" />
     </div>
 
     <div class="btn">
@@ -153,18 +153,22 @@ email.value = data.value ? data.value : ''
     <div class="title">{{ $t('user.email.pwd') }}:</div>
 
     <div class="input">
-      <span>{{ $t('user.email.oldPwd') }}: </span>
-      <input v-model="input.oldPassword" type="password" />
+      <label for="old-password">{{ $t('user.email.oldPwd') }}: </label>
+      <input id="old-password" v-model="input.oldPassword" type="password" />
     </div>
 
     <div class="input">
-      <span>{{ $t('user.email.newPwd') }}: </span>
-      <input v-model="input.newPassword" type="password" />
+      <label for="new-password">{{ $t('user.email.newPwd') }}: </label>
+      <input id="new-password" v-model="input.newPassword" type="password" />
     </div>
 
     <div class="input">
-      <span>{{ $t('user.email.rePwd') }}: </span>
-      <input v-model="input.repeatPassword" type="password" />
+      <label for="repeat-password">{{ $t('user.email.rePwd') }}: </label>
+      <input
+        id="repeat-password"
+        v-model="input.repeatPassword"
+        type="password"
+      />
     </div>
 
     <div class="btn">
@@ -246,7 +250,7 @@ email.value = data.value ? data.value : ''
 
   .input {
     padding: 0;
-    span {
+    label {
       margin-right: 5px;
     }
   }

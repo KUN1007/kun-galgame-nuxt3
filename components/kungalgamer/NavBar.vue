@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { navBarRoute } from './routeName'
+import { navBarRoute } from './utils/routeName'
 
 const { uid, roles } = storeToRefs(useKUNGalgameUserStore())
 
@@ -56,9 +56,8 @@ watch(
 .nav {
   height: 100%;
   width: 120px;
-  background-color: var(--kungalgame-trans-pink-0);
   border-radius: 0 0 0 7px;
-  border-right: 1px solid var(--kungalgame-blue-4);
+  border-right: 1px solid var(--kungalgame-blue-5);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
@@ -80,15 +79,15 @@ watch(
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
   }
 }
 
 .active {
-  background-color: var(--kungalgame-blue-4);
+  background-color: var(--kungalgame-blue-5);
 
   &:hover {
-    background-color: var(--kungalgame-blue-4);
+    background-color: var(--kungalgame-blue-5);
   }
 
   a {

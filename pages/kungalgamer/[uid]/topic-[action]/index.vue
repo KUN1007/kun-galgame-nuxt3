@@ -22,41 +22,9 @@ const tidArray = computed(() => {
 </script>
 
 <template>
-  <div class="article">
+  <KungalgamerList>
     <KungalgamerTopic :tid-array="tidArray" />
 
-    <div v-if="!tidArray.length" class="null">
-      {{ $t('user.profile.null') }}
-    </div>
-  </div>
+    <KungalgamerEmpty v-if="!tidArray.length" />
+  </KungalgamerList>
 </template>
-
-<style lang="scss" scoped>
-.article {
-  width: 100%;
-  padding: 7px 17px;
-  display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
-
-  &::-webkit-scrollbar {
-    display: inline;
-    width: 4px;
-    height: 0;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--kungalgame-blue-4);
-    border-radius: 2px;
-  }
-
-  scrollbar-width: thin;
-  scrollbar-color: var(--kungalgame-blue-4) var(--kungalgame-blue-1);
-}
-
-.null {
-  margin: auto;
-  color: var(--kungalgame-blue-2);
-  font-style: oblique;
-}
-</style>
