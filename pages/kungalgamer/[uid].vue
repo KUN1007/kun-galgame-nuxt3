@@ -1,10 +1,9 @@
 <script setup lang="ts">
 const route = useRoute()
-const uid = computed(() => {
-  return parseInt(route.params!.uid as string)
-})
 
-const { name, moemoepoint } = storeToRefs(useKUNGalgameUserStore())
+const uid = computed(() => {
+  return parseInt((route.params as { uid: string }).uid)
+})
 
 const { data: user } = await useFetch(`/api/user/${uid.value}`, {
   method: 'GET',

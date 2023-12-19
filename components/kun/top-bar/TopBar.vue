@@ -20,11 +20,6 @@ const showKUNGalgameUserPanel = ref(false)
 
 const navItemNum = topBarItem.length
 const navItemLength = `${navItemNum}00px`
-
-onBeforeRouteLeave(() => {
-  showKUNGalgamePanel.value = false
-  showKUNGalgameHamburger.value = false
-})
 </script>
 
 <template>

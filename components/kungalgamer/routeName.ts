@@ -27,19 +27,19 @@ export const navBarRoute: nav[] = [
   {
     index: 4,
     name: 'published',
-    router: 'published-topic',
+    router: 'topic-published',
     permission: [1, 2, 3, 4],
   },
   {
     index: 5,
     name: 'liked',
-    router: 'liked-topic',
+    router: 'topic-liked',
     permission: [2, 3, 4],
   },
   {
     index: 6,
     name: 'upvote',
-    router: 'upvote-topic',
+    router: 'topic-upvote',
     permission: [2, 3, 4],
   },
   {
