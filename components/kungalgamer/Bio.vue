@@ -5,6 +5,7 @@ const props = defineProps<{
   user: UserInfo
 }>()
 
+const refresh = inject<() => Promise<void>>('refresh')
 const bioValue = ref('')
 const user = computed(() => props.user)
 
@@ -36,6 +37,7 @@ const handleChangeBio = async () => {
   if (data.value) {
     useMessage('Rewrite bio successfully!', 'Rewrite 签名成功', 'success')
     bioValue.value = ''
+    await refresh?.()
   }
 }
 

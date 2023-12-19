@@ -5,7 +5,7 @@ const uid = computed(() => {
   return parseInt((route.params as { uid: string }).uid)
 })
 
-const { data: user } = await useFetch(`/api/user/${uid.value}`, {
+const { data: user, refresh } = await useFetch(`/api/user/${uid.value}`, {
   method: 'GET',
   onResponse({ request, response, options }) {
     if (response.status === 233) {
@@ -14,6 +14,8 @@ const { data: user } = await useFetch(`/api/user/${uid.value}`, {
     }
   },
 })
+
+provide('refresh', refresh)
 </script>
 
 <template>

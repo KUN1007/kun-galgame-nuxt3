@@ -45,7 +45,7 @@ watch(
       :class="activeClass(currentPageUid, kun.router)"
       v-show="isShowNavItem(kun.permission)"
     >
-      <NuxtLink :to="`/kungalgamer/${currentPageUid}/${kun.router}`">
+      <NuxtLink :to="`/kungalgamer/${currentPageUid}/${kun.router}`.toString()">
         <span>{{ $t(`user.nav.${kun.name}`) }}</span>
       </NuxtLink>
     </div>
