@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import type { UserInfo } from '~/types/api/user'
-import dayjs from 'dayjs'
 
 const props = defineProps<{
   user: UserInfo
 }>()
 const user = computed(() => props.user)
 
-const { data } = await useFetch('/api/user/replies', {
+const { data } = await useFetch('/api/user/comments', {
   method: 'GET',
-  query: { ridArray: user.value.reply },
+  query: { cidArray: user.value.comment },
   watch: false,
   onResponse({ request, response, options }) {
     if (response.status === 233) {
@@ -22,16 +21,13 @@ const { data } = await useFetch('/api/user/replies', {
 
 <template>
   <div class="article">
-    <div class="reply" v-if="data">
-      <div class="item" v-for="(reply, index) in data" :key="index">
-        <NuxtLink :to="`/topic/${reply.tid}`">
+    <div class="comment" v-if="data">
+      <div class="item" v-for="(comment, index) in data" :key="index">
+        <RouterLink :to="`/topic/${comment.tid}`">
           <div class="title">
-            {{ markdownToText(reply.content) }}
+            {{ comment.content }}
           </div>
-          <div class="time">
-            {{ dayjs(reply.time).format('MM/DD/YYYY') }}
-          </div>
-        </NuxtLink>
+        </RouterLink>
       </div>
     </div>
 
@@ -86,7 +82,7 @@ const { data } = await useFetch('/api/user/replies', {
   }
 }
 
-.reply {
+.comment {
   .item {
     border-bottom: 1px solid var(--kungalgame-red-1);
     border-left: 2px solid var(--kungalgame-red-3);
