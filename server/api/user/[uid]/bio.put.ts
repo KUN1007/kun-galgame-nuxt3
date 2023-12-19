@@ -1,4 +1,3 @@
-import { navigateTo } from 'nuxt/app'
 import UserModel from '~/server/models/user'
 
 export default defineEventHandler(async (event) => {
@@ -7,7 +6,6 @@ export default defineEventHandler(async (event) => {
   const userInfo = getCookieTokenInfo(event)
 
   if (!userInfo) {
-    navigateTo('/')
     kunError(event, 10115)
     return
   }
@@ -23,7 +21,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  await UserModel.updateOne({ uidNumber }, { $set: { bio: bio } })
+  await UserModel.updateOne({ uid: uidNumber }, { $set: { bio: bio } })
 
   return 'Moe Moe'
 })

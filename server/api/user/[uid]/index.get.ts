@@ -3,7 +3,6 @@ import type { UserInfo } from '~/types/api/user'
 
 export default defineEventHandler(async (event) => {
   const uid = getRouterParam(event, 'uid')
-  console.log('uid', uid)
 
   if (!uid) {
     kunError(event, 10101)

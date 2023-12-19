@@ -9,6 +9,10 @@ const bioValue = ref('')
 const user = computed(() => props.user)
 
 const handleChangeBio = async () => {
+  if (!bioValue.value.trim()) {
+    return
+  }
+
   if (bioValue.value.length > 107) {
     useMessage(
       'Bio must not exceed a maximum length of 107 characters',
@@ -18,7 +22,7 @@ const handleChangeBio = async () => {
     return
   }
 
-  const { data } = await useFetch('/api/user/:uid/bio', {
+  const { data } = await useFetch(`/api/user/${user.value.uid}/bio`, {
     method: 'PUT',
     body: { bio: bioValue.value },
     onResponse({ request, response, options }) {
