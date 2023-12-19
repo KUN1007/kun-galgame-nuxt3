@@ -18,7 +18,6 @@ export default defineEventHandler(async (event) => {
   }
 
   const result = await sendVerificationCodeEmail(event, email, 'forgot')
-
   if (typeof result === 'number') {
     kunError(event, result)
     return

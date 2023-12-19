@@ -28,15 +28,25 @@ const handleSendCode = async () => {
     '邮箱验证码正在发送 ~~~',
     'info'
   )
-  // const res = await useKUNGalgameUserStore().getResetEmailCode(input.newEmail)
 
-  // if (res.code === 200) {
-  //   useMessage(
-  //     'Reset email verification code sent successfully!',
-  //     '重置邮箱验证码发送成功！',
-  //     'success'
-  //   )
-  // }
+  const { data } = await useFetch('/api/auth/email/code/forgot', {
+    method: 'POST',
+    body: { email: input.newEmail },
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
+
+  if (data.value) {
+    useMessage(
+      'Reset email verification code sent successfully!',
+      '重置邮箱验证码发送成功！',
+      'success'
+    )
+  }
 }
 
 const handleResetEmail = async () => {
@@ -114,51 +124,47 @@ email.value = data.value ? data.value : ''
 </script>
 
 <template>
-  <!-- Right content area -->
   <div class="article">
-    <!-- Change email -->
     <div class="email">
       <div class="title">{{ $t('user.email.email') }}:</div>
-      <!-- Current email -->
+
       <div class="current-email">
         {{ $t('user.email.current') }}: {{ email }}
       </div>
-      <!-- New email -->
+
       <div class="input">
         <span>{{ $t('user.email.newEmail') }}: </span>
         <input v-model="input.newEmail" type="text" />
       </div>
-      <!-- Email verification code -->
+
       <div class="input">
         <span>{{ $t('user.email.code') }}: </span>
         <input v-model="input.code" type="text" />
       </div>
-      <!-- Send code -->
+
       <div class="btn">
         <button @click="handleSendCode" v-if="!hasSentCodeEmail">
           {{ $t('user.email.send') }}
         </button>
-        <!-- Confirm email -->
         <button @click="handleResetEmail">
           {{ $t('user.email.confirmEmail') }}
         </button>
       </div>
     </div>
 
-    <!-- Change user password -->
     <div class="password">
       <div class="title">{{ $t('user.email.pwd') }}:</div>
-      <!-- Old password -->
+
       <div class="input">
         <span>{{ $t('user.email.oldPwd') }}: </span>
         <input v-model="input.oldPassword" type="password" />
       </div>
-      <!-- New password -->
+
       <div class="input">
         <span>{{ $t('user.email.newPwd') }}: </span>
         <input v-model="input.newPassword" type="password" />
       </div>
-      <!-- Confirm password -->
+
       <div class="input">
         <span>{{ $t('user.email.rePwd') }}: </span>
         <input v-model="input.repeatPassword" type="password" />
@@ -171,7 +177,6 @@ email.value = data.value ? data.value : ''
       </div>
     </div>
 
-    <!-- Forgot password -->
     <span @click="router.push('/forgot')" class="forget">
       {{ $t('login.login.forget') }}
     </span>
