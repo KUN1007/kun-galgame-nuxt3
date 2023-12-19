@@ -27,7 +27,7 @@ export const useKUNGalgameSettingsStore = defineStore({
     // , with the default as system UI
     setKUNGalgameFontStyle(font: string) {
       this.showKUNGalgameFontStyle = font
-      document.documentElement.style.fontFamily = font
+      document.documentElement.style.setProperty('--font-family', font)
     },
     // Reset all settings; because it interacts with the document
     // , Pinia reactivity is not effective

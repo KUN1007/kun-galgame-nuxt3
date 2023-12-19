@@ -4,11 +4,6 @@ import {
   checkResetEmail,
   checkChangePassword,
 } from '../utils/check'
-import type { UserInfo } from '~/types/api/user'
-
-defineProps<{
-  user: UserInfo
-}>()
 
 const router = useRouter()
 const email = ref('')
@@ -100,18 +95,16 @@ const handleChangePassword = async () => {
   // }
 }
 
-onMounted(async () => {
-  // const response = await useKUNGalgameUserStore().getEmail()
-  // if (response.code === 200) {
-  //   email.value = response.data.email
-  // } else {
-  //   useMessage('Get email failed!', '获取邮箱失败！', 'error')
-  // }
+const { data } = await useFetch('/api/user/email', {
+  method: 'GET',
+  onResponse({ request, response, options }) {
+    if (response.status === 233) {
+      kungalgameErrorHandler(response.statusText)
+      return
+    }
+    email.value = data.value ? data.value : ''
+  },
 })
-
-const handleClickForgotPassword = () => {
-  router.push('/forgot')
-}
 </script>
 
 <template>
@@ -173,7 +166,7 @@ const handleClickForgotPassword = () => {
     </div>
 
     <!-- Forgot password -->
-    <span @click="handleClickForgotPassword" class="forget">
+    <span @click="router.push('/forgot')" class="forget">
       {{ $t('login.login.forget') }}
     </span>
   </div>

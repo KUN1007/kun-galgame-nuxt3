@@ -1,15 +1,7 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-
-import { useKUNGalgameSettingsStore } from '@/store/modules/settings'
-import { storeToRefs } from 'pinia'
-
 const { t, locale } = useI18n()
 
 const config = useRuntimeConfig()
-
-const { showKUNGalgameFontStyle } = storeToRefs(useKUNGalgameSettingsStore())
-
 useHead({
   title: t('head.title'),
   htmlAttrs: {
@@ -86,13 +78,6 @@ useSchemaOrg([
   defineWebSite({ name: 'KUN Visual Novel' }),
   defineWebPage(),
 ])
-
-onBeforeMount(() => {
-  const font = showKUNGalgameFontStyle.value
-  if (font) {
-    document.documentElement.style.fontFamily = font
-  }
-})
 </script>
 
 <template>

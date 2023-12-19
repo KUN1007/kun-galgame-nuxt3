@@ -10,7 +10,6 @@ export default defineEventHandler(async (event) => {
   }
 
   const uidNumber = parseInt(uid)
-
   if (uidNumber <= 0 && typeof uidNumber !== 'number') {
     kunError(event, 10114)
     return
