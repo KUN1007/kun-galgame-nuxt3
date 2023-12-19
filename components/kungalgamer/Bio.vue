@@ -22,7 +22,7 @@ const handleChangeBio = async () => {
     return
   }
 
-  const { data } = await useFetch(`/api/user/${user.value.uid}/bio`, {
+  const { data } = await useFetch('/api/user/bio', {
     method: 'PUT',
     body: { bio: bioValue.value },
     onResponse({ request, response, options }) {
@@ -47,13 +47,15 @@ onMounted(() => {
 <template>
   <div class="bio">
     <div class="title">{{ $t('user.settings.bio') }}</div>
-    <textarea
-      name="bio"
-      :placeholder="`${$t('user.settings.hint')}`"
-      rows="5"
-      v-model="bioValue"
-    >
-    </textarea>
+    <ClientOnly>
+      <textarea
+        name="bio"
+        :placeholder="`${$t('user.settings.hint')}`"
+        rows="5"
+        v-model="bioValue"
+      >
+      </textarea>
+    </ClientOnly>
 
     <div class="help">
       <span class="bioCount">
@@ -67,12 +69,6 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-.settings {
-  width: 100%;
-  height: 100%;
-  padding: 10px 17px;
-}
-
 .bio {
   width: 100%;
   display: flex;

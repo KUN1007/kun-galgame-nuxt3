@@ -33,15 +33,15 @@ const handleSendCode = async () => {
     '邮箱验证码正在发送 ~~~',
     'info'
   )
-  const res = await useKUNGalgameUserStore().getResetEmailCode(input.newEmail)
+  // const res = await useKUNGalgameUserStore().getResetEmailCode(input.newEmail)
 
-  if (res.code === 200) {
-    useMessage(
-      'Reset email verification code sent successfully!',
-      '重置邮箱验证码发送成功！',
-      'success'
-    )
-  }
+  // if (res.code === 200) {
+  //   useMessage(
+  //     'Reset email verification code sent successfully!',
+  //     '重置邮箱验证码发送成功！',
+  //     'success'
+  //   )
+  // }
 }
 
 const handleResetEmail = async () => {
@@ -49,12 +49,18 @@ const handleResetEmail = async () => {
     return
   }
 
-  const res = await useKUNGalgameUserStore().updateEmail(
-    hasSentCodeEmail.value,
-    input.code
-  )
+  const { data } = await useFetch('/api/user/email', {
+    method: 'PUT',
+    body: { email: input.newEmail, code: input.code },
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
 
-  if (res.code === 200) {
+  if (data.value) {
     input.newEmail = ''
     input.code = ''
     useMessage('Email change successful!', '邮箱更改成功', 'success')
@@ -72,7 +78,7 @@ const handleChangePassword = async () => {
     return
   }
 
-  const result = await useTempuseMessageStore().alert(
+  const result = await useTempMessageStore().alert(
     'AlertInfo.code.password',
     true
   )
@@ -80,28 +86,27 @@ const handleChangePassword = async () => {
     return
   }
 
-  const res = await useKUNGalgameUserStore().updatePassword(
-    input.oldPassword,
-    input.newPassword
-  )
+  // const res = await useKUNGalgameUserStore().updatePassword(
+  //   input.oldPassword,
+  //   input.newPassword
+  // )
 
-  if (res.code === 200) {
-    kungalgameStoreReset()
-    router.push('/login')
-    useMessage('Password change successful!', '密码更改成功', 'success')
-  } else {
-    useMessage('Password change failed!', '密码更改失败', 'error')
-  }
+  // if (res.code === 200) {
+  //   kungalgameStoreReset()
+  //   router.push('/login')
+  //   useMessage('Password change successful!', '密码更改成功', 'success')
+  // } else {
+  //   useMessage('Password change failed!', '密码更改失败', 'error')
+  // }
 }
 
 onMounted(async () => {
-  const response = await useKUNGalgameUserStore().getEmail()
-
-  if (response.code === 200) {
-    email.value = response.data.email
-  } else {
-    useMessage('Get email failed!', '获取邮箱失败！', 'error')
-  }
+  // const response = await useKUNGalgameUserStore().getEmail()
+  // if (response.code === 200) {
+  //   email.value = response.data.email
+  // } else {
+  //   useMessage('Get email failed!', '获取邮箱失败！', 'error')
+  // }
 })
 
 const handleClickForgotPassword = () => {

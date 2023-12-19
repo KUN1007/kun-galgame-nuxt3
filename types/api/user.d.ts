@@ -30,7 +30,6 @@ export interface UserUpdateBioRequestData {
 }
 
 export interface UserUpdateEmailRequestData {
-  uid: number
   email: string
   code: string
 }

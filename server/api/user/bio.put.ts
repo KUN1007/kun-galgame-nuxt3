@@ -10,18 +10,12 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const uidNumber = userInfo.uid
-  if (uidNumber <= 0 && typeof uidNumber !== 'number') {
-    kunError(event, 10114)
-    return
-  }
-
   if (bio.length > 107) {
     kunError(event, 10106)
     return
   }
 
-  await UserModel.updateOne({ uid: uidNumber }, { $set: { bio: bio } })
+  await UserModel.updateOne({ uid: userInfo.uid }, { $set: { bio: bio } })
 
   return 'Moe Moe'
 })
