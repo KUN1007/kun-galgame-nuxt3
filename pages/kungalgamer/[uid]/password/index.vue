@@ -81,18 +81,23 @@ const handleChangePassword = async () => {
     return
   }
 
-  // const res = await useKUNGalgameUserStore().updatePassword(
-  //   input.oldPassword,
-  //   input.newPassword
-  // )
+  const { data } = await useFetch('/api/user/password', {
+    method: 'PUT',
+    body: { oldPassword: input.oldPassword, newPassword: input.newPassword },
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
 
-  // if (res.code === 200) {
-  //   kungalgameStoreReset()
-  //   router.push('/login')
-  //   useMessage('Password change successful!', '密码更改成功', 'success')
-  // } else {
-  //   useMessage('Password change failed!', '密码更改失败', 'error')
-  // }
+  if (data.value) {
+    // TODO:
+    // kungalgameStoreReset()
+    router.push('/login')
+    useMessage('Password change successful!', '密码更改成功', 'success')
+  }
 }
 
 const { data } = await useFetch('/api/user/email', {
@@ -102,9 +107,10 @@ const { data } = await useFetch('/api/user/email', {
       kungalgameErrorHandler(response.statusText)
       return
     }
-    email.value = data.value ? data.value : ''
   },
 })
+
+email.value = data.value ? data.value : ''
 </script>
 
 <template>

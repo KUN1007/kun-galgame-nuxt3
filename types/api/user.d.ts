@@ -35,7 +35,6 @@ export interface UserUpdateEmailRequestData {
 }
 
 export interface UserUpdatePasswordRequestData {
-  uid: number
   oldPassword: string
   newPassword: string
 }
