@@ -35,24 +35,26 @@ const { data } = await useFetch('/api/user/topics', {
 
 <style lang="scss" scoped>
 .item {
-  transition: all 0.2s;
   width: 100%;
-  height: 30px;
-  padding: 2px 5px;
-  margin: 5px 0;
-  border-bottom: 1px solid var(--kungalgame-blue-1);
-  border-left: 2px solid var(--kungalgame-blue-4);
+  margin-top: 17px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
   cursor: pointer;
+
   a {
+    border-radius: 10px;
+    padding: 10px;
     height: 100%;
     color: var(--kungalgame-font-color-3);
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  &:hover {
-    border-bottom: 1px solid var(--kungalgame-blue-4);
-    background-color: var(--kungalgame-trans-blue-1);
+
+    &:hover {
+      transition: all 0.2s;
+      color: var(--kungalgame-white);
+      background-color: var(--kungalgame-blue-4);
+    }
   }
 }
 

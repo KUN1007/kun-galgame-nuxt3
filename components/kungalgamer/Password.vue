@@ -208,6 +208,7 @@ email.value = data.value ? data.value : ''
     padding-left: 5px;
     border: 1px solid var(--kungalgame-blue-4);
     background-color: var(--kungalgame-trans-white-9);
+    color: var(--kungalgame-font-color-3);
 
     &:focus {
       background-color: var(--kungalgame-trans-blue-0);
