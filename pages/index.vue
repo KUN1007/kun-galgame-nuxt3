@@ -1,7 +1,10 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="root"></div>
+  <div class="root">
+    <HomeContent />
+    <HomeFooter />
+  </div>
 </template>
 
 <style lang="scss" scoped>
