@@ -1,42 +1,25 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { Icon } from '@iconify/vue'
+import type { HomeHotTopic, HomeNewTopic } from '~/types/api/home'
 
-import { HomeHotTopic, HomeNewTopic } from '@/api/home/types/home'
-import HomeAsideSkeleton from '@/components/skeleton/home/HomeAsideSkeleton.vue'
-import { getHomeNavHotTopicApi, getHomeNavNewTopicApi } from '@/api/home/index'
-
-// Import settings panel store
-import { useKUNGalgameSettingsStore } from '@/store/modules/settings'
-import { storeToRefs } from 'pinia'
-// Use the settings panel store
-const settingsStore = storeToRefs(useKUNGalgameSettingsStore())
-
-// Import i18n function for formatting time
-import { formatTimeDifference } from '@/utils/formatTime'
+const { locale, setLocale } = useI18n()
 
 const navHotTopic = ref<HomeHotTopic[]>()
 const navNewTopic = ref<HomeNewTopic[]>()
 
-onMounted(async () => {
-  const responseHotData = await getHomeNavHotTopicApi()
-  navHotTopic.value = responseHotData.data
+// onMounted(async () => {
+//   const responseHotData = await getHomeNavHotTopicApi()
+//   navHotTopic.value = responseHotData.data
 
-  const responseNewData = await getHomeNavNewTopicApi()
-  navNewTopic.value = responseNewData.data
-})
+//   const responseNewData = await getHomeNavNewTopicApi()
+//   navNewTopic.value = responseNewData.data
+// })
 </script>
 
 <template>
-  <!-- Sidebar dynamic updates for today's hot topics -->
   <div class="topic-wrap">
-    <!-- Name of today's hot topics -->
-    <!-- Render the name using the globally registered i18n function $t -->
     <div class="title-hot">
       {{ $t(`mainPage.asideActive.hot`) }}
     </div>
-    <!-- Directory of hot topics -->
-    <!-- Use the isHotTopic data passed from the parent component here -->
     <span
       class="topic-content hot-bg"
       v-if="navHotTopic"
@@ -46,17 +29,15 @@ onMounted(async () => {
         <div class="topic">
           <div class="title">{{ kun.title }}</div>
           <div class="hot">
-            <Icon icon="bi:fire" />
-            <!-- Round up all values due to potential decimal precision issues on the backend -->
+            <Icon name="bi:fire" />
             <span>{{ Math.ceil(kun.popularity) }}</span>
           </div>
         </div>
       </RouterLink>
     </span>
 
-    <HomeAsideSkeleton v-if="!navHotTopic" />
+    <KunSkeletonHomeAside v-if="!navHotTopic" />
 
-    <!-- Today's newest topics -->
     <div class="title-new">
       {{ $t(`mainPage.asideActive.new`) }}
     </div>
@@ -69,19 +50,14 @@ onMounted(async () => {
         <div class="topic">
           <div class="title">{{ kun.title }}</div>
           <div class="new">
-            <Icon icon="eos-icons:hourglass" />
-            <span>{{
-              formatTimeDifference(
-                kun.time,
-                settingsStore.showKUNGalgameLanguage.value
-              )
-            }}</span>
+            <Icon name="eos-icons:hourglass" />
+            <span>{{ formatTimeDifference(kun.time, locale) }}</span>
           </div>
         </div>
       </RouterLink>
     </span>
 
-    <HomeAsideSkeleton v-if="!navNewTopic" />
+    <KunSkeletonHomeAside v-if="!navNewTopic" />
   </div>
 </template>
 

@@ -1,15 +1,7 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Icon } from '@iconify/vue'
+import type { HomeTopic } from '~/types/api/home'
 
-import { formatTimeDifference } from '@/utils/formatTime'
-import { markdownToText } from '@/utils/markdownToText'
-
-import { useKUNGalgameSettingsStore } from '@/store/modules/settings'
-import { storeToRefs } from 'pinia'
-const settingsStore = storeToRefs(useKUNGalgameSettingsStore())
-
-import { HomeTopic } from '@/api'
+const { locale, setLocale } = useI18n()
 
 const props = defineProps<{
   topic: HomeTopic
@@ -45,26 +37,21 @@ const getRepliesCount = computed(() => {
       <div class="status">
         <ul>
           <li>
-            <Icon icon="ic:outline-remove-red-eye" /><span>{{ views }}</span>
+            <Icon name="ic:outline-remove-red-eye" /><span>{{ views }}</span>
           </li>
           <li>
-            <Icon icon="line-md:thumbs-up-twotone" /><span>
+            <Icon name="line-md:thumbs-up-twotone" /><span>
               {{ likesCount }}
             </span>
           </li>
           <li>
-            <Icon icon="ri:reply-line" /><span>{{ getRepliesCount }}</span>
+            <Icon name="ri:reply-line" /><span>{{ getRepliesCount }}</span>
           </li>
         </ul>
 
         <div class="time">
           <span>
-            {{
-              formatTimeDifference(
-                time,
-                settingsStore.showKUNGalgameLanguage.value
-              )
-            }}
+            {{ formatTimeDifference(time, locale) }}
           </span>
         </div>
       </div>

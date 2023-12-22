@@ -55,11 +55,11 @@ export interface HomeNewTopic {
 }
 
 export interface HomeTopicRequestData {
-  category: string
-  page: number
-  limit: number
-  sortField: string
-  sortOrder: string
+  category: string[]
+  page: string
+  limit: string
+  sortField: SortField
+  sortOrder: SortOrder
 }
 
 export interface HomeTopic {

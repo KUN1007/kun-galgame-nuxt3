@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { ref } from 'vue'
-
-import { useTempHomeStore } from '@/store/temp/home'
-import { storeToRefs } from 'pinia'
-
-import { sortItem } from './navItem'
+import { sortItem } from '../utils/navItem'
 
 const ascClass = ref('')
 
@@ -19,7 +13,6 @@ const handleSortByField = (field: string) => {
 const orderAscending = () => {
   useTempHomeStore().resetHomePageStatus()
   topic.value.sortOrder = 'asc'
-  // Change style
   ascClass.value = 'active'
 }
 
@@ -44,7 +37,7 @@ const iconMap: Record<string, string> = {
   <div class="container" :class="ascClass">
     <span>{{ $t('mainPage.header.filter') }}</span>
     <span class="filter">
-      <Icon :icon="iconMap[topic.sortField]" />
+      <Icon :name="iconMap[topic.sortField]" />
     </span>
 
     <div class="sort-container">
@@ -55,16 +48,16 @@ const iconMap: Record<string, string> = {
           :key="kun.index"
           @click="handleSortByField(kun.sortField)"
         >
-          <span><Icon class="icon-item" :icon="kun.icon" /></span>
+          <span><Icon class="icon-item" :name="kun.icon" /></span>
           <span>{{ $t(`mainPage.header.${kun.name}`) }}</span>
         </div>
 
         <div class="sort-order">
           <span @click="orderAscending">
-            <Icon icon="tdesign:order-ascending" />
+            <Icon name="tdesign:order-ascending" />
           </span>
           <span @click="orderDescending">
-            <Icon icon="tdesign:order-descending" />
+            <Icon name="tdesign:order-descending" />
           </span>
         </div>
       </div>

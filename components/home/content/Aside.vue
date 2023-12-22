@@ -1,15 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import { asideItem } from '../utils/asideItem'
 
-import { useKUNGalgameSettingsStore } from '@/store/modules/settings'
-import { storeToRefs } from 'pinia'
+const { locale, setLocale } = useI18n()
 
-const { showKUNGalgameLanguage } = storeToRefs(useKUNGalgameSettingsStore())
-
-// Calculate page style based on the current language
 const langClass = computed(() => {
-  return showKUNGalgameLanguage.value === 'en' ? 'en' : 'cn'
+  return locale.value === 'en' ? 'en' : 'cn'
 })
 </script>
 
@@ -70,4 +65,3 @@ const langClass = computed(() => {
   text-orientation: upright;
 }
 </style>
-../utils/asideItem

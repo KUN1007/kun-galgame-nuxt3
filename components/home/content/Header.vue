@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { Icon } from '@iconify/vue'
-import SortTopic from './SortTopic.vue'
-
-import { useTempHomeStore } from '@/store/temp/home'
-import { storeToRefs } from 'pinia'
-
-import { categoryItem } from './navItem'
+import { categoryItem } from '../utils/navItem'
 
 const { topic } = storeToRefs(useTempHomeStore())
 const categoryIcon = ref('galgame')
@@ -16,7 +9,6 @@ const handleSortByCategory = (name: string) => {
   topic.value.category = []
   categoryIcon.value = name
 
-  // Because category is [Galgame, Technique, Others], need to capitalize first letter
   const capitalizeFirstLetter = name.charAt(0).toUpperCase() + name.slice(1)
   topic.value.category.push(capitalizeFirstLetter)
 }
@@ -32,7 +24,7 @@ const iconMap: Record<string, string> = {
   <div class="nav-article">
     <div class="category">
       <span>{{ $t('mainPage.header.category') }}</span>
-      <span><Icon :icon="iconMap[categoryIcon]" /></span>
+      <span><Icon :name="iconMap[categoryIcon]" /></span>
 
       <div class="category-container">
         <div class="category-submenu">
@@ -42,7 +34,7 @@ const iconMap: Record<string, string> = {
             :key="kun.index"
             @click="handleSortByCategory(kun.name)"
           >
-            <span><Icon class="icon-item" :icon="kun.icon" /></span>
+            <span><Icon class="icon-item" :name="kun.icon" /></span>
             <span>
               {{ $t(`mainPage.header.${kun.name}`) }}
             </span>
@@ -51,11 +43,11 @@ const iconMap: Record<string, string> = {
       </div>
     </div>
 
-    <SortTopic />
+    <HomeContentSortTopic />
 
     <RouterLink to="/pool" class="more">
       <span>{{ $t('mainPage.header.all') }}</span>
-      <Icon class="all-topic" icon="line-md:chevron-triple-right" />
+      <Icon class="all-topic" name="line-md:chevron-triple-right" />
     </RouterLink>
   </div>
 </template>

@@ -1,21 +1,30 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeUnmount, onBeforeMount } from 'vue'
-import SingleTopic from './SingleTopic.vue'
-import HomeTopicSkeleton from '@/components/skeleton/home/HomeTopicSkeleton.vue'
-import { hourDiff } from '@/utils/time'
-
-import { HomeTopic } from '@/api'
-
-import { useTempHomeStore } from '@/store/temp/home'
-import { storeToRefs } from 'pinia'
+import type { HomeTopic } from '~/types/api/home'
 
 const { topic } = storeToRefs(useTempHomeStore())
 
 const homeTopics = ref<HomeTopic[]>([])
 const content = ref<HTMLElement>()
 
-const getTopics = async (): Promise<HomeTopic[]> => {
-  return (await useTempHomeStore().getHomeTopic()).data
+const getTopics = async () => {
+  const { data } = await useFetch('/api/home/topic', {
+    method: 'GET',
+    query: {
+      category: topic.value.category,
+      page: topic.value.page,
+      limit: topic.value.limit,
+      sortField: topic.value.sortField,
+      sortOrder: topic.value.sortOrder,
+    },
+    watch: false,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
+  return data.value ? data.value : []
 }
 
 watch(
@@ -87,14 +96,14 @@ onBeforeUnmount(() => {
         <span></span>
         <span></span>
 
-        <SingleTopic :topic="topic" />
+        <HomeContentSingleTopic :topic="topic" />
       </div>
     </TransitionGroup>
 
     <!-- Skeleton -->
-    <HomeTopicSkeleton :count="7" v-if="!homeTopics.length" />
+    <KunSkeletonHomeTopic :count="7" v-if="!homeTopics.length" />
 
-    <HomeTopicSkeleton v-if="topic.isLoading && homeTopics.length >= 16" />
+    <KunSkeletonHomeTopic v-if="topic.isLoading && homeTopics.length >= 16" />
   </div>
 </template>
 
