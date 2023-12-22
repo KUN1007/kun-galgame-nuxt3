@@ -2,7 +2,6 @@
 import 'animate.css'
 
 const { replyPanelWidth } = storeToRefs(usePersistKUNGalgameReplyStore())
-
 const route = useRoute()
 const routeName = computed(() => route.name as string)
 const isShowSettingsMenu = ref(false)
@@ -46,7 +45,7 @@ const handelCloseSettingsMenu = () => {
       />
     </div>
 
-    <KunMilkdownComponentsSettings
+    <KunMilkdownComponentsMenu
       @close="handelCloseSettingsMenu"
       :isShowSettingsMenu="isShowSettingsMenu"
     />
