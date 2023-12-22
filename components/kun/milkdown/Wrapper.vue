@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// Milkdown
 import { MilkdownProvider } from '@milkdown/vue'
 import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
 
@@ -65,7 +64,6 @@ const saveMarkdown = (editorMarkdown: string) => {
 }
 </script>
 
-<!-- MilkdownEditorWrapper.vue -->
 <template>
   <div class="editor">
     <MilkdownProvider>

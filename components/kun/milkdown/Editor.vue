@@ -148,6 +148,11 @@ const editorInfo = useEditor((root) =>
       class="editor"
       :class="isEditorFocus || editorContent ? 'active' : ''"
     />
+
+    <div class="loading" v-if="editorInfo.loading.value">
+      <KunLoading />
+      <span>正在加载编辑器</span>
+    </div>
   </div>
 </template>
 
@@ -270,6 +275,21 @@ const editorInfo = useEditor((root) =>
       position: relative;
       overflow-x: auto;
     }
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: calc(v-bind(editorHight) + 61px);
+
+  span {
+    margin-left: 20px;
+    font-size: large;
+    font-style: oblique;
+    color: var(--kungalgame-blue-4);
   }
 }
 
