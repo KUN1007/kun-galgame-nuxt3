@@ -140,7 +140,6 @@ const editorInfo = useEditor((root) =>
 )
 </script>
 
-<!-- MilkdownEditor.vue -->
 <template>
   <div ref="container" class="editor-container">
     <KunMilkdownPluginsMenu v-if="isShowMenu" :editorInfo="editorInfo" />
@@ -151,7 +150,7 @@ const editorInfo = useEditor((root) =>
 
     <div class="loading" v-if="editorInfo.loading.value">
       <KunLoading />
-      <span>正在加载编辑器</span>
+      <span>{{ $t('edit.loading') }}</span>
     </div>
   </div>
 </template>

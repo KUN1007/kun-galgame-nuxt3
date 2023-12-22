@@ -20,14 +20,14 @@ watch(
 
 <template>
   <input
-    v-if="routeName === 'Edit'"
+    v-if="routeName === 'edit'"
     type="checkbox"
     id="switch"
     v-model="isShowEditHotKeywords"
   />
 
   <input
-    v-if="routeName === 'Topic'"
+    v-if="routeName === 'topic'"
     type="checkbox"
     id="switch"
     v-model="isShowReplyHotKeywords"

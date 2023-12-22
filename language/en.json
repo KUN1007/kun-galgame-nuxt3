@@ -179,6 +179,7 @@
   },
   "edit":{
     "title": "Title",
+    "loading": "Loading editor...",
     "word": "Word(s)",
     "editorHeight": "Editor Height",
     "editorMode": "Editor Mode",

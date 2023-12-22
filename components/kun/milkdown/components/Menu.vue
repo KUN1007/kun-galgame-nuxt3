@@ -39,7 +39,7 @@ const handelCloseSettingsPanel = () => {
           <span>{{ editorHeight }} </span>
         </div>
 
-        <div v-if="routeName === 'Edit'" class="editor-height">
+        <div v-if="routeName === 'edit'" class="editor-height">
           <span>200 px</span>
           <input
             type="range"
@@ -51,7 +51,7 @@ const handelCloseSettingsPanel = () => {
           <span>500 px</span>
         </div>
 
-        <div v-if="routeName === 'Topic'" class="editor-height">
+        <div v-if="routeName === 'topic'" class="editor-height">
           <span>100 px</span>
           <input
             type="range"

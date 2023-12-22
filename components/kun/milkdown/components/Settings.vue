@@ -35,7 +35,7 @@ const handelCloseSettingsMenu = () => {
 
       <slot name="help" />
       <input
-        v-if="routeName === 'Topic'"
+        v-if="routeName === 'topic'"
         class="panel-width"
         type="range"
         min="50"

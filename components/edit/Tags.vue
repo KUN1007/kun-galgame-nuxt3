@@ -16,7 +16,7 @@ const {
 } = storeToRefs(usePersistKUNGalgameReplyStore())
 
 const isShowKeywords = computed(() =>
-  routeName.value === 'Edit'
+  routeName.value === 'edit'
     ? isShowEditHotKeywords.value
     : isShowReplyHotKeywords.value
 )
@@ -27,23 +27,38 @@ const isInputFocus = ref(false)
 const inputValue = ref('')
 const canDeleteTag = ref(false)
 
-onBeforeMount(() => {
-  if (isSaveTopic.value && routeName.value === 'Edit') {
-    selectedTags.value = editTags.value
-  }
+if (isSaveTopic.value && routeName.value === 'edit') {
+  selectedTags.value = editTags.value
+}
 
-  if (isTopicRewriting.value && routeName.value === 'Edit') {
-    selectedTags.value = rewriteTags.value
-  }
+if (isTopicRewriting.value && routeName.value === 'edit') {
+  selectedTags.value = rewriteTags.value
+}
 
-  if (isSaveReply.value && routeName.value === 'Topic') {
-    selectedTags.value = replyDraft.value.tags
-  }
+if (isSaveReply.value && routeName.value === 'topic') {
+  selectedTags.value = replyDraft.value.tags
+}
 
-  if (isReplyRewriting.value && routeName.value === 'Topic') {
-    selectedTags.value = replyRewrite.value.tags
-  }
-})
+if (isReplyRewriting.value && routeName.value === 'topic') {
+  selectedTags.value = replyRewrite.value.tags
+}
+
+const getTags = async () => {
+  const { data } = await useFetch('/api/tag/popular', {
+    method: 'GET',
+    watch: false,
+  })
+  return data.value ? data.value : []
+}
+
+const isLoadEditHotTags =
+  routeName.value === 'edit' && isShowEditHotKeywords.value
+const isLoadTopicHotTags =
+  routeName.value === 'topic' && isShowReplyHotKeywords.value
+
+if (isLoadEditHotTags || isLoadTopicHotTags) {
+  hotTags.value = await getTags()
+}
 
 const handleTagClick = (tag: string) => {
   if (selectedTags.value.length < 7) {
@@ -58,7 +73,7 @@ const handleTagClose = (tag: string) => {
   }
 }
 
-const remainingTags = computed<string[]>(() => {
+const remainingTags = computed(() => {
   return hotTags.value.filter((tag) => !selectedTags.value.includes(tag))
 })
 
@@ -103,40 +118,25 @@ const validateTagName = (tagName: string) => {
 }
 
 watch(selectedTags.value, () => {
-  if (routeName.value === 'Topic') {
+  if (routeName.value === 'topic') {
     replyDraft.value.tags = selectedTags.value
   }
-  if (routeName.value === 'Edit') {
+  if (routeName.value === 'edit') {
     editTags.value = selectedTags.value
   }
 })
-
-const getTags = async () => {
-  return (await useKUNGalgameEditStore().getHotTags(10)).data
-}
 
 watch(
   () => isShowKeywords.value,
   async () => {
     if (
-      (routeName.value === 'Edit' && isShowEditHotKeywords.value) ||
-      (routeName.value === 'Topic' && isShowReplyHotKeywords.value)
+      (routeName.value === 'edit' && isShowEditHotKeywords.value) ||
+      (routeName.value === 'topic' && isShowReplyHotKeywords.value)
     ) {
       hotTags.value = await getTags()
     }
   }
 )
-
-onMounted(async () => {
-  const isLoadEditHotTags =
-    routeName.value === 'Edit' && isShowEditHotKeywords.value
-  const isLoadTopicHotTags =
-    routeName.value === 'Topic' && isShowReplyHotKeywords.value
-
-  if (isLoadEditHotTags || isLoadTopicHotTags) {
-    hotTags.value = await getTags()
-  }
-})
 </script>
 
 <template>

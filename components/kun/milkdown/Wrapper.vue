@@ -26,36 +26,36 @@ const routeName = computed(() => route.name as string)
 const valueMarkdown = ref('')
 
 const editorHeightStyle = computed(() =>
-  routeName.value === 'Edit' ? editEditorHeight.value : replyEditorHeight.value
+  routeName.value === 'edit' ? editEditorHeight.value : replyEditorHeight.value
 )
 
 onBeforeMount(() => {
-  if (isSaveTopic.value && routeName.value === 'Edit') {
+  if (isSaveTopic.value && routeName.value === 'edit') {
     valueMarkdown.value = editContent.value
   }
-  if (isTopicRewriting.value && routeName.value === 'Edit') {
+  if (isTopicRewriting.value && routeName.value === 'edit') {
     valueMarkdown.value = rewriteContent.value
   }
-  if (isSaveReply.value && routeName.value === 'Topic') {
+  if (isSaveReply.value && routeName.value === 'topic') {
     valueMarkdown.value = replyDraft.value.content
   }
-  if (isReplyRewriting.value && routeName.value === 'Topic') {
+  if (isReplyRewriting.value && routeName.value === 'topic') {
     valueMarkdown.value = replyRewrite.value.content
   }
 })
 
 const saveMarkdown = (editorMarkdown: string) => {
   const debouncedUpdateContent = debounce(() => {
-    if (!isTopicRewriting.value && routeName.value === 'Edit') {
+    if (!isTopicRewriting.value && routeName.value === 'edit') {
       editContent.value = editorMarkdown
     }
-    if (isTopicRewriting.value && routeName.value === 'Edit') {
+    if (isTopicRewriting.value && routeName.value === 'edit') {
       rewriteContent.value = editorMarkdown
     }
-    if (!isReplyRewriting.value && routeName.value === 'Topic') {
+    if (!isReplyRewriting.value && routeName.value === 'topic') {
       replyDraft.value.content = editorMarkdown
     }
-    if (isReplyRewriting.value && routeName.value === 'Topic') {
+    if (isReplyRewriting.value && routeName.value === 'topic') {
       replyRewrite.value.content = editorMarkdown
     }
   }, 1007)
