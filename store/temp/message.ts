@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-
 import type { MessageStore } from '../types/message'
 
 export const useTempMessageStore = defineStore({

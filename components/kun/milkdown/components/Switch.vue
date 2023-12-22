@@ -1,28 +1,14 @@
-<!-- Common Toggle Button for KUNGalgame -->
-
 <script setup lang="ts">
-import { watch, computed } from 'vue'
-import { useRoute } from 'vue-router'
-
-import { useKUNGalgameEditStore } from '~/store/modules/edit'
-import { usePersistKUNGalgameReplyStore } from '~/store/modules/topic/reply'
-import { storeToRefs } from 'pinia'
-
-// Current page's route
 const route = useRoute()
-// Name of the current page's route
 const routeName = computed(() => route.name as string)
 
-// Use the store for the editing page
 const { isShowHotKeywords: isShowEditHotKeywords } = storeToRefs(
   useKUNGalgameEditStore()
 )
-// Store for the topic page, used for replies
 const { isShowHotKeywords: isShowReplyHotKeywords, replyDraft } = storeToRefs(
   usePersistKUNGalgameReplyStore()
 )
 
-// Watch for changes in store states to keep button states in sync with the store
 watch(
   () => [isShowEditHotKeywords.value, isShowReplyHotKeywords.value],
   ([newValue1, newValue2]) => {
@@ -33,7 +19,6 @@ watch(
 </script>
 
 <template>
-  <!-- Bind different models based on the route name -->
   <input
     v-if="routeName === 'Edit'"
     type="checkbox"
@@ -89,7 +74,6 @@ input:checked + label:after {
   transform: translateX(-100%);
 }
 
-// Centering
 body {
   display: flex;
   justify-content: center;

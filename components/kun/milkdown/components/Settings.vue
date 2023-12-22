@@ -1,33 +1,13 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { computed, defineAsyncComponent, ref } from 'vue'
-// Import the router
-import { useRoute } from 'vue-router'
-
-// Asynchronously import the editor settings menu
-const EditorSettingsMenu = defineAsyncComponent(
-  () => import('./EditorSettingsMenu.vue')
-)
-// Import CSS animations
 import 'animate.css'
 
-import { usePersistKUNGalgameReplyStore } from '~/store/modules/topic/reply'
-import { storeToRefs } from 'pinia'
-
-// Topic page store for replies and adjusting reply panel width
 const { replyPanelWidth } = storeToRefs(usePersistKUNGalgameReplyStore())
 
-// Current route
 const route = useRoute()
-// Name of the current page route
 const routeName = computed(() => route.name as string)
-
-// Whether to display the editor settings panel
 const isShowSettingsMenu = ref(false)
-// Style when the settings panel is activated
 const settingsPanelActive = ref('')
 
-// Click the settings button
 const handelClickSettings = () => {
   isShowSettingsMenu.value = !isShowSettingsMenu.value
   if (isShowSettingsMenu.value) {
@@ -37,7 +17,6 @@ const handelClickSettings = () => {
   }
 }
 
-// Close the panel emits
 const handelCloseSettingsMenu = () => {
   isShowSettingsMenu.value = false
   settingsPanelActive.value = ''
@@ -46,17 +25,15 @@ const handelCloseSettingsMenu = () => {
 
 <template>
   <div class="container">
-    <!-- Display the settings button -->
     <div class="settings">
       <span
         @click="handelClickSettings"
         class="settings-icon"
         :class="settingsPanelActive"
       >
-        <Icon icon="uiw:setting-o" />
+        <Icon name="uiw:setting-o" />
       </span>
 
-      <!-- Help slot -->
       <slot name="help" />
       <input
         v-if="routeName === 'Topic'"
@@ -69,8 +46,7 @@ const handelCloseSettingsMenu = () => {
       />
     </div>
 
-    <!-- Settings panel -->
-    <EditorSettingsMenu
+    <KunMilkdownComponentsSettings
       @close="handelCloseSettingsMenu"
       :isShowSettingsMenu="isShowSettingsMenu"
     />
@@ -155,7 +131,6 @@ const handelCloseSettingsMenu = () => {
   }
 }
 
-// Keep the settings button rotating when activated.
 .settings-icon-active {
   color: var(--kungalgame-blue-4);
   animation: settings 3s linear infinite;

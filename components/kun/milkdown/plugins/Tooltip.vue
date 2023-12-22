@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
 import type { CmdKey } from '@milkdown/core'
 import { TooltipProvider } from '@milkdown/plugin-tooltip'
 import {
@@ -11,7 +10,7 @@ import { toggleStrikethroughCommand } from '@milkdown/preset-gfm'
 import { callCommand } from '@milkdown/utils'
 import { useInstance } from '@milkdown/vue'
 import { usePluginViewContext } from '@prosemirror-adapter/vue'
-import { onMounted, onUnmounted, ref, VNodeRef, watch } from 'vue'
+import type { VNodeRef } from 'vue'
 
 const { view, prevState } = usePluginViewContext()
 const [loading, get] = useInstance()
@@ -36,7 +35,7 @@ onUnmounted(() => {
   tooltipProvider.destroy()
 })
 
-const call = <T>(command: CmdKey<T>, payload?: T) => {
+const call = <T,>(command: CmdKey<T>, payload?: T) => {
   return get()?.action(callCommand(command, payload))
 }
 </script>
@@ -44,19 +43,19 @@ const call = <T>(command: CmdKey<T>, payload?: T) => {
 <template>
   <div v-if="loading" class="tooltip" ref="divRef">
     <button @click="call(toggleStrongCommand.key)">
-      <Icon icon="material-symbols:format-bold-rounded" />
+      <Icon name="material-symbols:format-bold-rounded" />
     </button>
 
     <button @click="call(toggleEmphasisCommand.key)">
-      <Icon icon="material-symbols:format-italic-rounded" />
+      <Icon name="material-symbols:format-italic-rounded" />
     </button>
 
     <button @click="call(toggleStrikethroughCommand.key)">
-      <Icon icon="material-symbols:strikethrough-s-rounded" />
+      <Icon name="material-symbols:strikethrough-s-rounded" />
     </button>
 
     <button @click="call(toggleInlineCodeCommand.key)">
-      <Icon icon="material-symbols:code-rounded" />
+      <Icon name="material-symbols:code-rounded" />
     </button>
   </div>
 </template>

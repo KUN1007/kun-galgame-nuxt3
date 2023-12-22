@@ -131,5 +131,6 @@
     "zako",
     "abcdefghjkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ"
   ],
-  "i18n-ally.localesPaths": ["language"]
+  "i18n-ally.localesPaths": ["language"],
+  "i18n-ally.keystyle": "nested"
 }

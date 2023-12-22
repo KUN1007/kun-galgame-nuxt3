@@ -1,14 +1,5 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
 import 'animate.css'
-
-import { useKUNGalgameEditStore } from '~/store/modules/edit'
-import { usePersistKUNGalgameReplyStore } from '~/store/modules/topic/reply'
-import { storeToRefs } from 'pinia'
-
-import SwitchButton from './SwitchButton.vue'
 
 const { editorHeight: editEditorHeight } = storeToRefs(useKUNGalgameEditStore())
 const { editorHeight: replyEditorHeight } = storeToRefs(
@@ -41,16 +32,13 @@ const handelCloseSettingsPanel = () => {
     enter-active-class="animate__animated animate__jackInTheBox animate__faster"
     leave-active-class="animate__animated animate__rollOut animate__faster"
   >
-    <!-- Settings menu -->
     <div v-if="isShowSettingsMenu" class="settings-menu">
       <div class="content">
-        <!-- Editor height settings -->
         <div class="editor-height-title">
           <span> {{ $t('edit.editorHeight') }} </span>
           <span>{{ editorHeight }} </span>
         </div>
 
-        <!-- Editor page -->
         <div v-if="routeName === 'Edit'" class="editor-height">
           <span>200 px</span>
           <input
@@ -63,7 +51,6 @@ const handelCloseSettingsPanel = () => {
           <span>500 px</span>
         </div>
 
-        <!-- Reply panel -->
         <div v-if="routeName === 'Topic'" class="editor-height">
           <span>100 px</span>
           <input
@@ -76,16 +63,14 @@ const handelCloseSettingsPanel = () => {
           <span>500 px</span>
         </div>
 
-        <!-- Whether to display popular keywords -->
         <div class="keywords">
           <div class="keywords-title">{{ $t('edit.tagsHint') }}</div>
-          <SwitchButton />
+          <KunMilkdownComponentsSwitch />
         </div>
       </div>
 
-      <!-- Close button -->
       <div class="close">
-        <Icon @click="handelCloseSettingsPanel" icon="line-md:close" />
+        <Icon @click="handelCloseSettingsPanel" name="line-md:close" />
       </div>
     </div>
   </Transition>
@@ -134,7 +119,6 @@ const handelCloseSettingsPanel = () => {
   align-items: center;
 }
 
-// Close settings
 .close {
   font-size: 25px;
   margin-left: 10px;
@@ -143,7 +127,6 @@ const handelCloseSettingsPanel = () => {
   cursor: pointer;
 }
 
-// Whether to display popular keywords
 .keywords {
   display: flex;
   justify-content: space-between;

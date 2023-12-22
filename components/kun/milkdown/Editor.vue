@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-// KUN Visual Novel Menu
-import MilkdownMenu from './plugins/MilkdownMenu.vue'
 // Milkdown core
 import { Editor, rootCtx, rootAttrsCtx, defaultValueCtx } from '@milkdown/core'
 import { Milkdown, useEditor } from '@milkdown/vue'
@@ -24,7 +21,7 @@ import { $prose } from '@milkdown/utils'
 import { Plugin } from '@milkdown/prose/state'
 
 // KUN Visual Novel style
-import '~/styles/editor/index.scss'
+import '~/assets/css/editor/index.scss'
 
 // Syntax highlight
 import c from 'refractor/lang/c'
@@ -146,7 +143,7 @@ const editorInfo = useEditor((root) =>
 <!-- MilkdownEditor.vue -->
 <template>
   <div ref="container" class="editor-container">
-    <MilkdownMenu v-if="isShowMenu" :editorInfo="editorInfo" />
+    <KunMilkdownPluginsMenu v-if="isShowMenu" :editorInfo="editorInfo" />
     <Milkdown
       class="editor"
       :class="isEditorFocus || editorContent ? 'active' : ''"

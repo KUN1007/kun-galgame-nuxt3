@@ -4,23 +4,11 @@ const { locale } = useI18n()
 const { data: hotTopic } = await useFetch('/api/home/nav/hot', {
   method: 'GET',
   watch: false,
-  onResponse({ request, response, options }) {
-    if (response.status === 233) {
-      kungalgameErrorHandler(response.statusText)
-      return
-    }
-  },
 })
 
 const { data: newTopic } = await useFetch('/api/home/nav/new', {
   method: 'GET',
   watch: false,
-  onResponse({ request, response, options }) {
-    if (response.status === 233) {
-      kungalgameErrorHandler(response.statusText)
-      return
-    }
-  },
 })
 </script>
 

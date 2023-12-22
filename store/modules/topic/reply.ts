@@ -1,13 +1,3 @@
-import { defineStore } from 'pinia'
-
-import { postReplyByTidApi } from '~/api'
-
-import type {
-  TopicCreateReplyRequestData,
-  TopicCreateReplyResponseData,
-} from '~/api'
-
-import { checkReplyPublish } from '~/store/utils/checkReplyPublish'
 import type { ReplyStorePersist } from '~/store/types/topic/reply'
 
 export const usePersistKUNGalgameReplyStore = defineStore({
@@ -32,26 +22,6 @@ export const usePersistKUNGalgameReplyStore = defineStore({
     },
   }),
   actions: {
-    // Create a new reply
-    async postNewReply(): Promise<TopicCreateReplyResponseData | undefined> {
-      // The values here are used to initialize the reply
-      const requestData: TopicCreateReplyRequestData = {
-        tid: this.replyDraft.tid,
-        to_uid: this.replyDraft.toUid,
-        to_floor: this.replyDraft.toFloor,
-        tags: this.replyDraft.tags,
-        content: this.replyDraft.content,
-        time: Date.now(),
-      }
-
-      if (!checkReplyPublish(requestData.tags, requestData.content)) {
-        return
-      }
-
-      return await postReplyByTidApi(requestData)
-    },
-
-    // Reset reply draft to its original value, used for the reply publish button
     resetReplyDraft() {
       this.textCount = 0
 

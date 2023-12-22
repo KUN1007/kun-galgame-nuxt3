@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
-import { UseEditorReturn } from '@milkdown/vue'
+import type { UseEditorReturn } from '@milkdown/vue'
 import type { CmdKey } from '@milkdown/core'
 import { callCommand } from '@milkdown/utils'
 import {
@@ -26,7 +25,7 @@ const props = defineProps<{
 
 const { get, loading } = props.editorInfo
 
-const call = <T>(command: CmdKey<T>, payload?: T) => {
+const call = <T,>(command: CmdKey<T>, payload?: T) => {
   return get()?.action(callCommand(command, payload))
 }
 
@@ -46,74 +45,74 @@ const handleClickCodeBlock = () => {
       aria-label="kun-galgame-bold"
       @click="call(toggleStrongCommand.key)"
     >
-      <Icon icon="material-symbols:format-bold-rounded" />
+      <Icon name="material-symbols:format-bold-rounded" />
     </button>
 
     <button
       aria-label="kun-galgame-italic"
       @click="call(toggleEmphasisCommand.key)"
     >
-      <Icon icon="material-symbols:format-italic-rounded" />
+      <Icon name="material-symbols:format-italic-rounded" />
     </button>
 
     <button
       aria-label="kun-galgame-italic"
       @click="call(toggleStrikethroughCommand.key)"
     >
-      <Icon icon="material-symbols:strikethrough-s-rounded" />
+      <Icon name="material-symbols:strikethrough-s-rounded" />
     </button>
 
     <button
       aria-label="kun-galgame-table"
       @click="call(insertTableCommand.key)"
     >
-      <Icon icon="material-symbols:table" />
+      <Icon name="material-symbols:table" />
     </button>
 
     <button
       aria-label="kun-galgame-list-bulleted"
       @click="call(wrapInBulletListCommand.key)"
     >
-      <Icon icon="material-symbols:format-list-bulleted-rounded" />
+      <Icon name="material-symbols:format-list-bulleted-rounded" />
     </button>
 
     <button
       aria-label="kun-galgame-list-numbered"
       @click="call(wrapInOrderedListCommand.key)"
     >
-      <Icon icon="material-symbols:format-list-numbered-rounded" />
+      <Icon name="material-symbols:format-list-numbered-rounded" />
     </button>
 
     <button
       aria-label="kun-galgame-quote"
       @click="call(wrapInBlockquoteCommand.key)"
     >
-      <Icon icon="material-symbols:format-quote-rounded" />
+      <Icon name="material-symbols:format-quote-rounded" />
     </button>
 
     <button
       aria-label="kun-galgame-horizontal"
       @click="call(insertHrCommand.key)"
     >
-      <Icon icon="material-symbols:horizontal-rule-rounded" />
+      <Icon name="material-symbols:horizontal-rule-rounded" />
     </button>
 
     <button
       aria-label="kun-galgame-italic"
       @click="call(toggleLinkCommand.key)"
     >
-      <Icon icon="material-symbols:link-rounded" />
+      <Icon name="material-symbols:link-rounded" />
     </button>
 
     <button aria-label="kun-galgame-italic" @click="handleClickCodeBlock">
-      <Icon icon="material-symbols:code-blocks-outline-rounded" />
+      <Icon name="material-symbols:code-blocks-outline-rounded" />
     </button>
 
     <button
       aria-label="kun-galgame-italic"
       @click="call(toggleInlineCodeCommand.key)"
     >
-      <Icon icon="material-symbols:code-rounded" />
+      <Icon name="material-symbols:code-rounded" />
     </button>
   </div>
 </template>

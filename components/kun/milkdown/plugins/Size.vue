@@ -1,16 +1,5 @@
-<!-- Custom plugins, calculate text size -->
-
 <script setup lang="ts">
-import { computed, onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
-import Settings from '../components/Settings.vue'
 import { usePluginViewContext } from '@prosemirror-adapter/vue'
-
-import { useTempEditStore } from '~/store/temp/edit'
-import { useKUNGalgameEditStore } from '~/store/modules/edit'
-import { useTempReplyStore } from '~/store/temp/topic/reply'
-import { usePersistKUNGalgameReplyStore } from '~/store/modules/topic/reply'
-import { storeToRefs } from 'pinia'
 
 const { textCount: textCountEditRewrite, isTopicRewriting } =
   storeToRefs(useTempEditStore())
@@ -63,7 +52,7 @@ onMounted(() => {
 
 <template>
   <div class="footer">
-    <Settings />
+    <KunMilkdownComponentsSettings />
     <span> {{ size + ` ${$t('edit.word')}` }} </span>
   </div>
 </template>

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { computed, onMounted, watch } from 'vue'
-
 import {
   Editor,
   rootCtx,
@@ -97,7 +95,6 @@ watch(
 )
 </script>
 
-<!-- MilkdownEditor.vue -->
 <template>
   <Milkdown class="editor" />
 </template>
@@ -108,7 +105,6 @@ watch(
     width: 100%;
     padding: 10px;
 
-    /* Silence css check */
     * {
       white-space: pre-wrap;
     }
@@ -130,7 +126,6 @@ watch(
         border-radius: 3px;
       }
 
-      /* Compatible with Firefox */
       scrollbar-width: thin;
       scrollbar-color: var(--kungalgame-blue-4) var(--kungalgame-blue-1);
     }
