@@ -1,3 +1,28 @@
+export interface EditCreateTopicRequestData {
+  title: string
+  content: string
+  time: number
+  tags: Array<string>
+  category: Array<string>
+}
+
+export interface EditKUNGalgameTopic {
+  tid: number
+}
+
+export interface EditUpdateTopicRequestData {
+  tid: number
+  title: string
+  content: string
+  tags: string[]
+  category: string[]
+  edited: number
+}
+
+export interface EditGetHotTagsRequestData {
+  limit: number
+}
+
 export interface TopicUserInfo {
   uid: number
   name: string

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { topicCategory } from './category'
-import type { Category } from './category'
+import { topicCategory } from './utils/category'
+import type { Category } from './utils/category'
 
 const { category: rewriteCategory, isTopicRewriting } =
   storeToRefs(useTempEditStore())
@@ -102,3 +102,4 @@ const handleClickCategory = (kun: Category) => {
   color: var(--kungalgame-white);
 }
 </style>
+./utils/category./utils/category

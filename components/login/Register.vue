@@ -45,6 +45,7 @@ const handleRegister = async () => {
   const { data } = await useFetch('/api/user/register', {
     method: 'POST',
     body: registerForm,
+    watch: false,
     onResponse({ request, response, options }) {
       if (response.status === 233) {
         kungalgameErrorHandler(response.statusText)

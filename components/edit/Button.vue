@@ -1,26 +1,49 @@
 <script setup lang="ts">
+import { checkTopicPublish } from './utils/checkTopicPublish'
+import type { EditCreateTopicRequestData } from '~/types/api/topic'
+
 const router = useRouter()
 
 const { tid, isTopicRewriting } = storeToRefs(useTempEditStore())
-const { isSaveTopic } = storeToRefs(useKUNGalgameEditStore())
+const { textCount, title, content, tags, category, isSaveTopic } = storeToRefs(
+  useKUNGalgameEditStore()
+)
 const messageStore = useTempMessageStore()
 
 const handlePublish = async () => {
-  const res = await messageStore.alert('AlertInfo.edit.publish', true)
+  const requestData: EditCreateTopicRequestData = {
+    title: title.value,
+    content: content.value,
+    time: Date.now(),
+    tags: tags.value,
+    category: category.value,
+  }
+  if (!checkTopicPublish(textCount.value, requestData)) {
+    return
+  }
 
-  if (res) {
-    // const res = await useKUNGalgameEditStore().createNewTopic()
-    // if (res?.code === 200) {
-    //   const tid = res.data.tid
-    //   router.push({
-    //     name: 'Topic',
-    //     params: {
-    //       tid: tid,
-    //     },
-    //   })
-    //   messageStore.info('AlertInfo.edit.publishSuccess')
-    //   useKUNGalgameEditStore().resetTopicData()
-    // }
+  const res = await messageStore.alert('AlertInfo.edit.publish', true)
+  if (!res) {
+    return
+  }
+
+  const { data } = await useFetch('/api/topic/create', {
+    method: 'POST',
+    body: requestData,
+    watch: false,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
+
+  if (data.value) {
+    const tid = data.value
+    router.push(`/topic/${tid}`)
+    messageStore.info('AlertInfo.edit.publishSuccess')
+    useKUNGalgameEditStore().resetTopicData()
   }
 }
 

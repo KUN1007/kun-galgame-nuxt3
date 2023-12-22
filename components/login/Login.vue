@@ -22,12 +22,13 @@ const handleLogin = async () => {
   )
 
   if (!result) {
-    return  
+    return
   }
 
   const { data } = await useFetch('/api/user/login', {
     method: 'POST',
     body: loginForm,
+    watch: false,
     onResponse({ request, response, options }) {
       if (response.status === 233) {
         kungalgameErrorHandler(response.statusText)
