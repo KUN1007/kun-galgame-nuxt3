@@ -1,18 +1,27 @@
 <script setup lang="ts">
-import type { HomeHotTopic, HomeNewTopic } from '~/types/api/home'
+const { locale } = useI18n()
 
-const { locale, setLocale } = useI18n()
+const { data: hotTopic } = await useFetch('/api/home/nav/hot', {
+  method: 'GET',
+  watch: false,
+  onResponse({ request, response, options }) {
+    if (response.status === 233) {
+      kungalgameErrorHandler(response.statusText)
+      return
+    }
+  },
+})
 
-const navHotTopic = ref<HomeHotTopic[]>()
-const navNewTopic = ref<HomeNewTopic[]>()
-
-// onMounted(async () => {
-//   const responseHotData = await getHomeNavHotTopicApi()
-//   navHotTopic.value = responseHotData.data
-
-//   const responseNewData = await getHomeNavNewTopicApi()
-//   navNewTopic.value = responseNewData.data
-// })
+const { data: newTopic } = await useFetch('/api/home/nav/new', {
+  method: 'GET',
+  watch: false,
+  onResponse({ request, response, options }) {
+    if (response.status === 233) {
+      kungalgameErrorHandler(response.statusText)
+      return
+    }
+  },
+})
 </script>
 
 <template>
@@ -20,12 +29,8 @@ const navNewTopic = ref<HomeNewTopic[]>()
     <div class="title-hot">
       {{ $t(`mainPage.asideActive.hot`) }}
     </div>
-    <span
-      class="topic-content hot-bg"
-      v-if="navHotTopic"
-      v-for="kun in navHotTopic"
-    >
-      <RouterLink :to="{ path: `/topic/${kun.tid}` }">
+    <span class="topic-content hot-bg" v-if="hotTopic" v-for="kun in hotTopic">
+      <NuxtLink :to="{ path: `/topic/${kun.tid}` }">
         <div class="topic">
           <div class="title">{{ kun.title }}</div>
           <div class="hot">
@@ -33,20 +38,16 @@ const navNewTopic = ref<HomeNewTopic[]>()
             <span>{{ Math.ceil(kun.popularity) }}</span>
           </div>
         </div>
-      </RouterLink>
+      </NuxtLink>
     </span>
 
-    <KunSkeletonHomeAside v-if="!navHotTopic" />
+    <KunSkeletonHomeAside v-if="!hotTopic" />
 
     <div class="title-new">
       {{ $t(`mainPage.asideActive.new`) }}
     </div>
-    <span
-      class="topic-content new-bg"
-      v-if="navNewTopic"
-      v-for="kun in navNewTopic"
-    >
-      <RouterLink :to="{ path: `/topic/${kun.tid}` }">
+    <span class="topic-content new-bg" v-if="newTopic" v-for="kun in newTopic">
+      <NuxtLink :to="{ path: `/topic/${kun.tid}` }">
         <div class="topic">
           <div class="title">{{ kun.title }}</div>
           <div class="new">
@@ -54,10 +55,10 @@ const navNewTopic = ref<HomeNewTopic[]>()
             <span>{{ formatTimeDifference(kun.time, locale) }}</span>
           </div>
         </div>
-      </RouterLink>
+      </NuxtLink>
     </span>
 
-    <KunSkeletonHomeAside v-if="!navNewTopic" />
+    <KunSkeletonHomeAside v-if="!newTopic" />
   </div>
 </template>
 

@@ -12,9 +12,9 @@ const topic = computed(() => props.topic)
   <div class="topic">
     <HomeContentUserPart :user="topic.user" />
 
-    <RouterLink :to="`/topic/${topic.tid}`">
+    <NuxtLink :to="`/topic/${topic.tid}`">
       <HomeContentTopicPart :topic="topic" />
-    </RouterLink>
+    </NuxtLink>
   </div>
 </template>
 

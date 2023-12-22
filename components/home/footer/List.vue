@@ -130,9 +130,9 @@ const link: FooterInfoItem[] = [
 
       <ul class="function" v-for="yuyu in kun.list" :key="yuyu.index">
         <li>
-          <RouterLink :to="yuyu.router" :aria-label="yuyu.label">
+          <NuxtLink :to="yuyu.router" :aria-label="yuyu.label">
             {{ $t(`mainPage.footer.item.${yuyu.name}`) }}
-          </RouterLink>
+          </NuxtLink>
         </li>
       </ul>
     </div>

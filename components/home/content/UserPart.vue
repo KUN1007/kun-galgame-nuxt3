@@ -13,14 +13,14 @@ const user = computed(() => props.user)
 <template>
   <div class="kungalgamer">
     <div class="avatar">
-      <RouterLink :to="`/kungalgamer/${user.uid}/info`">
+      <NuxtLink :to="`/kungalgamer/${user.uid}/info`">
         <img
           v-if="props.user.avatar"
           :src="user.avatar.replace(/\.webp$/, '-100.webp')"
           :alt="user.name"
         />
         <span v-if="!props.user.avatar">{{ props.user.name.slice(0, 1) }}</span>
-      </RouterLink>
+      </NuxtLink>
     </div>
 
     <div class="name">

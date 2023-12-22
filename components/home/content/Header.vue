@@ -45,10 +45,10 @@ const iconMap: Record<string, string> = {
 
     <HomeContentSortTopic />
 
-    <RouterLink to="/pool" class="more">
+    <NuxtLink to="/pool" class="more">
       <span>{{ $t('mainPage.header.all') }}</span>
       <Icon class="all-topic" name="line-md:chevron-triple-right" />
-    </RouterLink>
+    </NuxtLink>
   </div>
 </template>
 
@@ -184,4 +184,3 @@ const iconMap: Record<string, string> = {
   }
 }
 </style>
-../utils/navItem

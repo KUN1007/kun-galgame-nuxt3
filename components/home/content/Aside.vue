@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { asideItem } from '../utils/asideItem'
 
-const { locale, setLocale } = useI18n()
+const { locale } = useI18n()
 
 const langClass = computed(() => {
   return locale.value === 'en' ? 'en' : 'cn'
@@ -11,9 +11,9 @@ const langClass = computed(() => {
 <template>
   <div class="aside">
     <span v-for="kun in asideItem" :key="kun.index">
-      <RouterLink :class="langClass" :to="{ path: kun.router }">
+      <NuxtLink :class="langClass" :to="{ path: kun.router }">
         {{ $t(`mainPage.asideActive.${kun.name}`) }}
-      </RouterLink>
+      </NuxtLink>
     </span>
   </div>
 </template>

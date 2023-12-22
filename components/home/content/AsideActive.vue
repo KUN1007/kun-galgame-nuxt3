@@ -9,18 +9,18 @@ const props = defineProps<{
 <template>
   <div class="item-box" v-show="props.isActive">
     <div class="new-article">
-      <RouterLink to="/edit">
+      <NuxtLink to="/edit">
         <button class="btn-new-article">
           {{ $t('mainPage.asideActive.create') }}
         </button>
-      </RouterLink>
+      </NuxtLink>
     </div>
 
     <div class="item-box-container">
       <span v-if="asideItem.length" v-for="kun in asideItem" :key="kun.index">
-        <RouterLink :to="{ path: kun.router }">
+        <NuxtLink :to="{ path: kun.router }">
           {{ $t(`mainPage.asideActive.${kun.name}`) }}
-        </RouterLink>
+        </NuxtLink>
       </span>
     </div>
   </div>

@@ -38,7 +38,6 @@ const getHomeTopics = async (
     repliesCount: topic.replies_count,
     comments: topic.comments,
     time: topic.time,
-    // Preview length
     content: topic.content.slice(0, 233),
     tags: topic.tags,
     category: topic.category,

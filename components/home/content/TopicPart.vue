@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { HomeTopic } from '~/types/api/home'
 
-const { locale, setLocale } = useI18n()
+const { locale } = useI18n()
 
 const props = defineProps<{
   topic: HomeTopic
