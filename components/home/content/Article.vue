@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import type { HomeTopic } from '~/types/api/home'
-
 const { topic } = storeToRefs(useTempHomeStore())
-
-const homeTopics = ref<HomeTopic[]>([])
 const content = ref<HTMLElement>()
 
 const getTopics = async () => {
-  const { data } = await useFetch('/api/home/topic', {
+  const data = await useFetch('/api/home/topic', {
     method: 'GET',
     query: {
       category: topic.value.category,
@@ -24,13 +20,16 @@ const getTopics = async () => {
       }
     },
   })
-  return data.value ? data.value : []
+  return data
 }
+
+const { data } = await getTopics()
 
 watch(
   () => [topic.value.category, topic.value.sortField, topic.value.sortOrder],
   async () => {
-    homeTopics.value = await getTopics()
+    const { data: newData } = await getTopics()
+    data.value = newData.value
   }
 )
 
@@ -38,13 +37,15 @@ const scrollHandler = async () => {
   if (isScrollAtBottom() && topic.value.isLoading) {
     topic.value.page++
 
-    const lazyLoadTopics = await getTopics()
+    const { data: newData } = await getTopics()
 
-    if (!lazyLoadTopics.length) {
+    if (!newData.value?.length) {
       topic.value.isLoading = false
     }
 
-    homeTopics.value = [...homeTopics.value, ...lazyLoadTopics]
+    if (data.value && newData.value) {
+      data.value = [...data.value, ...newData.value]
+    }
   }
 }
 
@@ -65,12 +66,9 @@ onBeforeMount(async () => {
 
 onMounted(async () => {
   const element = content.value
-
   if (element) {
     element.addEventListener('scroll', scrollHandler)
   }
-
-  homeTopics.value = await getTopics()
 })
 
 onBeforeUnmount(() => {
@@ -83,9 +81,9 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="topic-container" ref="content">
-    <TransitionGroup name="list" tag="div" v-if="homeTopics.length">
+    <TransitionGroup name="list" tag="div" v-if="data">
       <div
-        v-for="topic in homeTopics"
+        v-for="topic in data"
         :key="topic.tid"
         :class="
           hourDiff(topic.upvote_time, 10) ? 'kungalgame-comet-surround' : ''
@@ -100,10 +98,10 @@ onBeforeUnmount(() => {
       </div>
     </TransitionGroup>
 
-    <!-- Skeleton -->
-    <KunSkeletonHomeTopic :count="7" v-if="!homeTopics.length" />
-
-    <KunSkeletonHomeTopic v-if="topic.isLoading && homeTopics.length >= 16" />
+    <KunSkeletonHomeTopic :count="7" v-if="!data" />
+    <KunSkeletonHomeTopic
+      v-if="topic.isLoading && data && data?.length >= 16"
+    />
   </div>
 </template>
 
@@ -127,9 +125,8 @@ onBeforeUnmount(() => {
     border-radius: 2px;
   }
 
-  /* Compatibility with Firefox */
   scrollbar-width: thin;
-  scrollbar-color: var(--kungalgame-blue-4) var(--kungalgame-blue-1); /* Firefox 64+ */
+  scrollbar-color: var(--kungalgame-blue-4) var(--kungalgame-blue-1);
 
   div {
     & > div {
@@ -138,7 +135,6 @@ onBeforeUnmount(() => {
   }
 }
 
-/* Style normalization */
 .kungalgame-comet-surround {
   padding: 0;
   flex-shrink: 0;
@@ -160,8 +156,6 @@ onBeforeUnmount(() => {
   opacity: 0;
 }
 
-/* Ensure that the leaving element is removed from the layout flow
-   to calculate the moving animation correctly. */
 .list-leave-active {
   position: absolute;
 }
