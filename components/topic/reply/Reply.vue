@@ -52,103 +52,98 @@ watch(
 </script>
 
 <template>
-  <Transition
-    enter-active-class="animate__animated animate__fadeInUp animate__faster"
-    appear
-  >
-    <div>
-      <div
-        class="other-topic-container"
-        v-for="(reply, index) in replies"
-        :class="hourDiff(reply.upvote_time, 10) ? 'active-upvote' : ''"
-        :key="index"
-        :id="`kungalgame-reply-${reply.floor}`"
-      >
-        <div class="floor" :class="reply.edited ? 'rewrite' : ''">
-          <span>K{{ reply.floor }}</span>
-        </div>
+  <div>
+    <div
+      class="other-topic-container"
+      v-for="(reply, index) in replies"
+      :class="hourDiff(reply.upvote_time, 10) ? 'active-upvote' : ''"
+      :key="index"
+      :id="`kungalgame-reply-${reply.floor}`"
+    >
+      <div class="floor" :class="reply.edited ? 'rewrite' : ''">
+        <span>K{{ reply.floor }}</span>
+      </div>
 
-        <div class="container">
-          <div class="content">
-            <div class="article">
-              <TopicKUNGalgamerInfo :user="reply.r_user" />
+      <div class="container">
+        <div class="content">
+          <div class="article">
+            <TopicKUNGalgamerInfo :user="reply.r_user" />
 
-              <div class="right">
-                <div class="top">
-                  <div class="reply">
-                    {{ `${$t('topic.panel.to')} @` }}
+            <div class="right">
+              <div class="top">
+                <div class="reply">
+                  {{ `${$t('topic.panel.to')} @` }}
 
-                    <span @click="scrollToReplyId = reply.to_floor">
-                      {{ reply.to_user.name }}
-                    </span>
-                  </div>
-
-                  <TopicRewrite v-if="reply.edited" :time="reply.edited" />
+                  <span @click="scrollToReplyId = reply.to_floor">
+                    {{ reply.to_user.name }}
+                  </span>
                 </div>
 
-                <TopicContent :content="reply.content" />
+                <TopicRewrite v-if="reply.edited" :time="reply.edited" />
               </div>
-            </div>
 
-            <div class="bottom">
-              <TopicTags :tags="reply.tags" />
-              <TopicTime :time="reply.time" />
+              <TopicContent :content="reply.content" />
             </div>
           </div>
 
-          <TopicFooter
-            :info="{
-              tid: reply.tid,
-              rid: reply.rid,
-              views: 0,
-              likes: reply.likes,
-              dislikes: reply.dislikes,
-              upvotes: reply.upvotes,
-            }"
-            :content="{
-              title: props.title,
-              content: reply.content,
-              tags: reply.tags,
-              category: [],
-            }"
-            :to-user="{
-              uid: reply.r_user.uid,
-              name: reply.r_user.name,
-            }"
-            :to-floor="reply.floor"
-          >
-            <template #comment>
-              <span
-                @click="
-                  handleClickComment(
-                    reply.tid,
-                    reply.rid,
-                    reply.r_user.uid,
-                    reply.r_user.name
-                  )
-                "
-                class="icon"
-                v-tooltip="{
-                  message: { en: 'Comment', zh: '评论' },
-                  position: 'bottom',
-                }"
-              >
-                <Icon name="fa-regular:comment-dots" />
-              </span>
-            </template>
-          </TopicFooter>
-
-          <TopicComment
-            :tid="reply.tid"
-            :rid="reply.rid"
-            :to-user="{ uid: reply.r_user.uid, name: reply.r_user.name }"
-          />
+          <div class="bottom">
+            <TopicTags :tags="reply.tags" />
+            <TopicTime :time="reply.time" />
+          </div>
         </div>
-      </div>
 
-      <KunSkeletonTopicReply v-if="isLoading" />
+        <TopicFooter
+          :info="{
+            tid: reply.tid,
+            rid: reply.rid,
+            views: 0,
+            likes: reply.likes,
+            dislikes: reply.dislikes,
+            upvotes: reply.upvotes,
+          }"
+          :content="{
+            title: props.title,
+            content: reply.content,
+            tags: reply.tags,
+            category: [],
+          }"
+          :to-user="{
+            uid: reply.r_user.uid,
+            name: reply.r_user.name,
+          }"
+          :to-floor="reply.floor"
+        >
+          <template #comment>
+            <span
+              @click="
+                handleClickComment(
+                  reply.tid,
+                  reply.rid,
+                  reply.r_user.uid,
+                  reply.r_user.name
+                )
+              "
+              class="icon"
+              v-tooltip="{
+                message: { en: 'Comment', zh: '评论' },
+                position: 'bottom',
+              }"
+            >
+              <Icon name="fa-regular:comment-dots" />
+            </span>
+          </template>
+        </TopicFooter>
+
+        <TopicComment
+          :tid="reply.tid"
+          :rid="reply.rid"
+          :to-user="{ uid: reply.r_user.uid, name: reply.r_user.name }"
+        />
+      </div>
     </div>
-  </Transition>
+
+    <KunSkeletonTopicReply v-if="isLoading" />
+  </div>
 </template>
 
 <style lang="scss" scoped>

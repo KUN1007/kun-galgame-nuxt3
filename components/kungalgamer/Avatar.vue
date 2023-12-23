@@ -55,6 +55,7 @@ const handleChangeAvatar = async () => {
   const formData = new FormData()
   formData.append('avatar', uploadedImage.value, useKUNGalgameUserStore().name)
 
+  // TODO:
   // const res = await useKUNGalgameUserStore().updateAvatar(formData)
 
   // if (res.code === 200) {

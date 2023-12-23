@@ -1,5 +1,4 @@
-export type SortField = 'floor' | 'likes_count' | 'comments_count'
-export type SortOrder = 'asc' | 'desc'
+import type { SortField, SortOrder } from '~/types/api/reply'
 
 interface Item {
   index: number

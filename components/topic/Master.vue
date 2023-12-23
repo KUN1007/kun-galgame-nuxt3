@@ -41,66 +41,61 @@ const loliStatus = computed(() => {
 </script>
 
 <template>
-  <Transition
-    enter-active-class="animate__animated animate__fadeInRight animate__faster"
-    appear
-  >
-    <div class="container" :id="`kungalgame-reply-0`">
-      <div class="content-container">
-        <div class="header">
-          <div class="title">
-            {{ title }}
-          </div>
+  <div class="container" :id="`kungalgame-reply-0`">
+    <div class="content-container">
+      <div class="header">
+        <div class="title">
+          {{ title }}
         </div>
-
-        <div class="content">
-          <div class="content-top">
-            <TopicTags v-if="tags" :tags="tags" />
-            <TopicTime v-if="time" :time="time" />
-          </div>
-
-          <div class="content-center">
-            <TopicKUNGalgamerInfo v-if="user" :user="user" />
-
-            <TopicContent :content="content" />
-          </div>
-
-          <div class="content-bottom">
-            <div class="status">
-              <span>{{ `${$t('topic.content.status')}:` }}</span>
-              <span :class="loliStatus">
-                {{ $t(`topic.content.${loliStatus}`) }}
-              </span>
-            </div>
-
-            <TopicRewrite v-if="edited" :time="edited" />
-          </div>
-        </div>
-
-        <TopicFooter
-          :info="{
-            tid,
-            rid: 0,
-            views,
-            likes,
-            dislikes,
-            upvotes,
-          }"
-          :content="{
-            title,
-            content,
-            tags,
-            category,
-          }"
-          :to-user="{
-            uid: user.uid,
-            name: user.name,
-          }"
-          :to-floor="0"
-        />
       </div>
+
+      <div class="content">
+        <div class="content-top">
+          <TopicTags v-if="tags" :tags="tags" />
+          <TopicTime v-if="time" :time="time" />
+        </div>
+
+        <div class="content-center">
+          <TopicKUNGalgamerInfo v-if="user" :user="user" />
+
+          <TopicContent :content="content" />
+        </div>
+
+        <div class="content-bottom">
+          <div class="status">
+            <span>{{ `${$t('topic.content.status')}:` }}</span>
+            <span :class="loliStatus">
+              {{ $t(`topic.content.${loliStatus}`) }}
+            </span>
+          </div>
+
+          <TopicRewrite v-if="edited" :time="edited" />
+        </div>
+      </div>
+
+      <TopicFooter
+        :info="{
+          tid,
+          rid: 0,
+          views,
+          likes,
+          dislikes,
+          upvotes,
+        }"
+        :content="{
+          title,
+          content,
+          tags,
+          category,
+        }"
+        :to-user="{
+          uid: user.uid,
+          name: user.name,
+        }"
+        :to-floor="0"
+      />
     </div>
-  </Transition>
+  </div>
 </template>
 
 <style lang="scss" scoped>

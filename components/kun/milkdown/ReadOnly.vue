@@ -44,7 +44,7 @@ const valueMarkdown = computed(() => props.valueMarkdown)
 
 const editable = () => !props.isReadonly
 
-const editor = useEditor((root) =>
+const { get, loading } = useEditor((root) =>
   Editor.make()
     .config((ctx) => {
       ctx.set(rootCtx, root)
@@ -90,13 +90,16 @@ const editor = useEditor((root) =>
 watch(
   () => valueMarkdown.value,
   () => {
-    editor.get()?.action(replaceAll(valueMarkdown.value))
+    get()?.action(replaceAll(valueMarkdown.value))
   }
 )
 </script>
 
 <template>
-  <Milkdown class="editor" />
+  <div>
+    <div v-if="loading">{{ valueMarkdown }}</div>
+    <Milkdown class="editor" />
+  </div>
 </template>
 
 <style lang="scss" scoped>

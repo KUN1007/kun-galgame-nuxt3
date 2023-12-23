@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TopicDetail, TopicReply } from '~/types/api/topic'
+import type { TopicReplyRequestData } from '~/types/api/reply'
 
 const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
@@ -20,12 +20,11 @@ const props = defineProps<{
   tid: number
 }>()
 const tid = computed(() => props.tid)
-const repliesData = ref<TopicReply[]>([])
 const content = ref<HTMLElement>()
 const isExecuteScrollToReplyAnimate = ref(false)
 const contentScrollHeight = ref(0)
 
-const { data: topicData, refresh } = await useFetch(`/api/topic/${tid.value}`, {
+const { data: topicData } = await useFetch(`/api/topic/${tid.value}`, {
   method: 'GET',
   watch: false,
   onResponse({ request, response, options }) {
@@ -36,20 +35,45 @@ const { data: topicData, refresh } = await useFetch(`/api/topic/${tid.value}`, {
   },
 })
 
-// const getReplies = async (): Promise<TopicReply[]> => {
-//   return (await useTempReplyStore().getReplies(tid.value)).data
-// }
+const getReplies = async () => {
+  const data = await useFetch(`/api/topic/${tid.value}/replies`, {
+    method: 'GET',
+    query: {
+      page: replyRequest.value.page,
+      limit: replyRequest.value.limit,
+      sortField: replyRequest.value.sortField,
+      sortOrder: replyRequest.value.sortOrder,
+    },
+    watch: false,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
+  return data
+}
 
-// watch(
-//   () => [replyRequest.value.sortOrder, replyRequest.value.sortField],
-//   async () => {
-//     repliesData.value = await getReplies()
-//   }
-// )
+const { data: repliesData } = await getReplies()
+if (repliesData.value && repliesData.value.length < 3) {
+  isLoading.value = false
+}
+
+watch(
+  () => [replyRequest.value.sortOrder, replyRequest.value.sortField],
+  async () => {
+    const newReplies = await getReplies()
+    repliesData.value = newReplies.data.value
+  }
+)
 
 watch(
   () => tempReply.value.rid,
   async () => {
+    if (!repliesData.value) {
+      return
+    }
     repliesData.value = [...repliesData.value, tempReply.value]
 
     await new Promise((resolve) => {
@@ -102,20 +126,25 @@ watch(
   }
 )
 
-// const handelScroll = async () => {
-//   if (isScrollAtBottom() && isLoading.value) {
-//     replyRequest.value.page++
+const handelScroll = async () => {
+  if (!repliesData.value) {
+    return
+  }
 
-//     const lazyLoadReplies = await getReplies()
+  if (isScrollAtBottom() && isLoading.value) {
+    replyRequest.value.page++
 
-//     if (!lazyLoadReplies.length) {
-//       isLoading.value = false
-//       return
-//     }
+    const { data } = await getReplies()
+    const lazyLoadReplies = data.value ? data.value : []
 
-//     repliesData.value = [...repliesData.value, ...lazyLoadReplies]
-//   }
-// }
+    if (!lazyLoadReplies.length) {
+      isLoading.value = false
+      return
+    }
+
+    repliesData.value = [...repliesData.value, ...lazyLoadReplies]
+  }
+}
 
 const isScrollAtBottom = () => {
   if (content.value) {
@@ -129,16 +158,6 @@ const isScrollAtBottom = () => {
     return Math.abs(scrollHeight - scrollTop - clientHeight) < errorMargin
   }
 }
-
-// onMounted(async () => {
-//   useTempReplyStore().resetPageStatus()
-//   topicData.value = await getTopic()
-//   repliesData.value = await getReplies()
-
-//   if (repliesData.value.length < 3) {
-//     isLoading.value = false
-//   }
-// })
 
 const topicPageWidth = computed(() => {
   return showKUNGalgamePageWidth.value.Topic + '%'

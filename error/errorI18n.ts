@@ -26,7 +26,7 @@ const errorMessagesEN: Record<number, string> = {
   10206: `Topic with a maximum of 7 tags. Minimum one tag. (-B)`,
   10207: `Topic with a maximum of 2 categories. Minimum one category. (-B)`,
   10208: `Invalid topics timestamp. (-B)`,
-  10209: `We currently do not allow customizing the number of topics per single page query. (-B)`,
+  10209: `We currently do not allow customizing the number of items per single page query. (-B)`,
   10210: `Read topic ID failed. (-B)`,
   10211: `Topic not found. (-B)`,
 
@@ -46,6 +46,8 @@ const errorMessagesEN: Record<number, string> = {
   10503: `Reply content is empty (-B)`,
   10504: `Reply maximum length is 10007 characters (-B)`,
   10505: `Invalid reply timestamp. (-B)`,
+  10506: `Reply not found. (-B)`,
+  10507: `Insufficient parameters to get a reply request, or failed to parse the request (-B)`,
 }
 
 const errorMessagesCN: Record<number, string> = {
@@ -72,7 +74,7 @@ const errorMessagesCN: Record<number, string> = {
   10206: `话题最多 7 个标签, 最少一个标签 (-B)`,
   10207: `话题最多 2 个分类, 最少一个分类 (-B)`,
   10208: `非法的话题时间戳 (-B)`,
-  10209: `我们暂时还没有允许自定义单页查询的话题数 (-B)`,
+  10209: `我们暂时还没有允许自定义单页查询的项目数 (-B)`,
   10210: `读取话题 ID 失败 (-B)`,
   10211: `未找到话题 (-B)`,
 
@@ -89,6 +91,8 @@ const errorMessagesCN: Record<number, string> = {
   10503: `回复内容不可为空 (-B)`,
   10504: `回复内容最大长度为 10007 个字符 (-B)`,
   10505: `非法的回复时间戳 (-B)`,
+  10506: `回复未找到 (-B)`,
+  10507: `获取回复请求参数不足, 或解析请求参数失败 (-B)`,
 }
 
 export const getErrorMessageEN = (errorCode: number) => {
