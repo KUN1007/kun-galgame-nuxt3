@@ -13,7 +13,7 @@ import { gfm } from '@milkdown/preset-gfm'
 import { prism, prismConfig } from '@milkdown/plugin-prism'
 import { replaceAll } from '@milkdown/utils'
 
-import '~/styles/editor/index.scss'
+import '~/assets/css/editor/index.scss'
 
 // Syntax highlight
 import c from 'refractor/lang/c'
