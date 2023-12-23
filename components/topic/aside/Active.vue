@@ -38,7 +38,7 @@ const handleClickSortOrder = (sortOrder: SortOrder) => {
           @click="handleSortReply(item.sortField)"
         >
           <span><Icon :name="item.icon" /></span>
-          <span>{{ $tm(`topic.aside.${item.name}`) }}</span>
+          <span>{{ $t(`topic.aside.${item.name}`) }}</span>
         </div>
 
         <div class="order">

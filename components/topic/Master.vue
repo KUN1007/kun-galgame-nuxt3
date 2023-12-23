@@ -67,9 +67,9 @@ const loliStatus = computed(() => {
 
           <div class="content-bottom">
             <div class="status">
-              <span>{{ `${$tm('topic.content.status')}:` }}</span>
+              <span>{{ `${$t('topic.content.status')}:` }}</span>
               <span :class="loliStatus">
-                {{ $tm(`topic.content.${loliStatus}`) }}
+                {{ $t(`topic.content.${loliStatus}`) }}
               </span>
             </div>
 

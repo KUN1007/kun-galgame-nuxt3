@@ -76,7 +76,7 @@ watch(
               <div class="right">
                 <div class="top">
                   <div class="reply">
-                    {{ `${$tm('topic.panel.to')} @` }}
+                    {{ `${$t('topic.panel.to')} @` }}
 
                     <span @click="scrollToReplyId = reply.to_floor">
                       {{ reply.to_user.name }}

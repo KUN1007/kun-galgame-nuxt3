@@ -101,6 +101,12 @@ const handleClickUpvote = async () => {
 </template>
 
 <style lang="scss" scoped>
+.icon {
+  font-size: 24px;
+  color: var(--kungalgame-red-4);
+  cursor: pointer;
+}
+
 li {
   display: flex;
   justify-content: center;
@@ -108,19 +114,11 @@ li {
   font-size: 14px;
   margin: 17px;
   margin-right: 0;
+
   span {
     display: flex;
     margin-right: 3px;
   }
-  &:nth-child(1) span {
-    color: var(--kungalgame-red-4);
-  }
-}
-
-.icon {
-  font-size: 24px;
-  color: var(--kungalgame-font-color-2);
-  cursor: pointer;
 }
 
 .active {

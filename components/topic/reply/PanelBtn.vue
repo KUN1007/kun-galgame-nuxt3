@@ -63,20 +63,19 @@ const handleShowAdvance = () => {
 <template>
   <div class="btn-container">
     <button class="advance-btn" @click="handleShowAdvance">
-      {{ $tm('topic.panel.advance') }}
+      {{ $t('topic.panel.advance') }}
     </button>
 
     <button v-if="!isReplyRewriting" class="confirm-btn" @click="handlePublish">
-      {{ $tm('topic.panel.confirm') }}
+      {{ $t('topic.panel.confirm') }}
     </button>
 
     <button v-if="isReplyRewriting" class="rewrite-btn" @click="handleRewrite">
-      {{ $tm('topic.panel.rewrite') }}
+      {{ $t('topic.panel.rewrite') }}
     </button>
 
-
     <button v-if="!isReplyRewriting" class="save-btn" @click="handleSave">
-      {{ $tm('topic.panel.save') }}
+      {{ $t('topic.panel.save') }}
     </button>
   </div>
 </template>

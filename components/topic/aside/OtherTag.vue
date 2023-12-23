@@ -30,7 +30,7 @@ const isEmpty = ref(false)
 <template>
   <div class="other">
     <div class="title">
-      {{ $tm('topic.aside.tags') }}
+      {{ $t('topic.aside.tags') }}
     </div>
 
     <KunSkeletonTopicAside v-if="!topicData" />
@@ -40,7 +40,7 @@ const isEmpty = ref(false)
     </div>
 
     <span class="empty" v-if="isEmpty">
-      {{ $tm('topic.aside.tagsEmpty') }}
+      {{ $t('topic.aside.tagsEmpty') }}
     </span>
   </div>
 </template>

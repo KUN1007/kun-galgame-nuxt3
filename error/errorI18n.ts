@@ -27,6 +27,8 @@ const errorMessagesEN: Record<number, string> = {
   10207: `Topic with a maximum of 2 categories. Minimum one category. (-B)`,
   10208: `Invalid topics timestamp. (-B)`,
   10209: `We currently do not allow customizing the number of topics per single page query. (-B)`,
+  10210: `Read topic ID failed. (-B)`,
+  10211: `Topic not found. (-B)`,
 
   // Auth Part
   10301: `Sending emails too frequently, please waiting 30s (-B)`,
@@ -71,6 +73,8 @@ const errorMessagesCN: Record<number, string> = {
   10207: `话题最多 2 个分类, 最少一个分类 (-B)`,
   10208: `非法的话题时间戳 (-B)`,
   10209: `我们暂时还没有允许自定义单页查询的话题数 (-B)`,
+  10210: `读取话题 ID 失败 (-B)`,
+  10211: `未找到话题 (-B)`,
 
   10301: `发送邮件频率过快, 请等待 30 秒 (-B)`,
   10302: `非法的邮箱格式 (-B)`,

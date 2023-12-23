@@ -80,15 +80,15 @@ const handleCloseCommentPanel = () => {
     <div class="top">
       <div class="title">
         <span>{{ name }}</span>
-        <span>{{ $tm('topic.content.comment') }}</span>
+        <span>{{ $t('topic.content.comment') }}</span>
         <span>{{ toUsername }}</span>
       </div>
       <div class="confirm">
         <button @click="handlePublishComment">
-          {{ $tm('topic.content.publish') }}
+          {{ $t('topic.content.publish') }}
         </button>
         <button @click="handleCloseCommentPanel">
-          {{ $tm('topic.content.close') }}
+          {{ $t('topic.content.close') }}
         </button>
       </div>
     </div>
@@ -96,7 +96,7 @@ const handleCloseCommentPanel = () => {
     <div class="container">
       <textarea
         name="comment"
-        :placeholder="`${$tm('topic.content.hint')}`"
+        :placeholder="`${$t('topic.content.hint')}`"
         rows="5"
         v-model="commentValue"
         @input="handleInputComment"

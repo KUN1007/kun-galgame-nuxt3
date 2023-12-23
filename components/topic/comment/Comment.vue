@@ -67,7 +67,7 @@ const handleClickComment = (
 
     <div class="container" v-if="commentsData?.length">
       <div class="title">
-        <span>{{ $tm('topic.content.comments') }}</span>
+        <span>{{ $t('topic.content.comments') }}</span>
       </div>
 
       <div
@@ -88,7 +88,7 @@ const handleClickComment = (
         <div class="content">
           <div class="describe">
             <div class="name">
-              {{ `${comment.c_user.name} ${$tm('topic.content.comment')}` }}
+              {{ `${comment.c_user.name} ${$t('topic.content.comment')}` }}
               <RouterLink :to="`/kungalgamer/${comment.to_user.uid}/info`">
                 {{ comment.to_user.name }}
               </RouterLink>

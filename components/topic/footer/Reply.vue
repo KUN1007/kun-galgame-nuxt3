@@ -21,7 +21,7 @@ const handleClickReply = () => {
 
 <template>
   <div @click="handleClickReply" class="reply">
-    {{ $tm('topic.content.reply') }}
+    {{ $t('topic.content.reply') }}
   </div>
 </template>
 

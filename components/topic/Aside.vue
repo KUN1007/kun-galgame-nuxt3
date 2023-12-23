@@ -34,7 +34,7 @@ watch(
         v-if="!isActiveAside"
       />
 
-      <span v-if="isActiveAside">{{ $tm('mainPage.asideActive.fold') }}</span>
+      <span v-if="isActiveAside">{{ $t('mainPage.asideActive.fold') }}</span>
     </div>
 
     <div class="item-active" v-if="isActiveAside">

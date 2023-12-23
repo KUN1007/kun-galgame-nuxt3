@@ -46,11 +46,11 @@ const handleClosePanel = async () => {
         <div class="container" :style="`width: ${panelWidth}`">
           <div class="title">
             <h3>
-              <span>{{ $tm('topic.panel.to') + ' @' }}</span>
+              <span>{{ $t('topic.panel.to') + ' @' }}</span>
               <span>{{ replyDraft.toUserName }}</span>
               <span>
                 <span class="emoji">(⋈◍＞◡＜◍)。✧♡ </span>
-                {{ `${$tm(`topic.panel.${position}`)} ${replyDraft.toFloor}` }}
+                {{ `${$t(`topic.panel.${position}`)} ${replyDraft.toFloor}` }}
               </span>
             </h3>
             <Icon
