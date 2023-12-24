@@ -118,7 +118,7 @@ const loliStatus = computed(() => {
   border-radius: 5px;
   box-shadow: var(--shadow);
   background-color: var(--kungalgame-trans-white-5);
-  transition: all 0.5s;
+  transition: width 0.5s;
 }
 
 .header {

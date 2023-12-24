@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { asideItem, sortItem } from '../utils/asideItem'
-import type { SortField, SortOrder } from '../utils/asideItem'
+import type { SortField, SortOrder } from '~/types/api/reply'
 
 const { isScrollToTop, replyRequest } = storeToRefs(useTempReplyStore())
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { asideItem, sortItem } from '../utils/asideItem'
-import type { SortField, SortOrder } from '../utils/asideItem'
+import type { SortField, SortOrder } from '~/types/api/reply'
 
 const { replyRequest } = storeToRefs(useTempReplyStore())
 
@@ -114,12 +114,10 @@ const handleClickSortOrder = (sortOrder: SortOrder) => {
 }
 
 .item-active {
-  transition: all 0.2s;
   background-color: var(--kungalgame-trans-blue-2);
 }
 
 .order-active {
-  transition: all 0.2s;
   background-color: var(--kungalgame-blue-4);
   color: var(--kungalgame-white);
 }

@@ -20,28 +20,36 @@ const ridRef = ref(props.rid)
 const toUser = ref(props.toUser)
 const currentUserUid = useKUNGalgameUserStore().uid
 
-// watch(
-//   () => props.rid,
-//   async () => {
-//     ridRef.value = props.rid
-//     toUser.value = props.toUser
-//     commentsData.value = await getComments(tidRef.value, ridRef.value)
-//   }
-// )
+const getComments = async () => {
+  const data = await useFetch(`/api/topic/${props.tid}/comment`, {
+    method: 'GET',
+    query: { rid: props.rid },
+    watch: false,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
+  return data
+}
 
-const commentsData = ref<TopicComment[]>([])
+const { data: commentsData } = await getComments()
 
-// const getComments = async (topicId: number, replyId: number) => {
-//   return (await useTempCommentStore().getComments(topicId, replyId)).data
-// }
+watch(
+  () => props.rid,
+  async () => {
+    ridRef.value = props.rid
+    toUser.value = props.toUser
+    const newComment = await getComments()
+    commentsData.value = newComment.data.value
+  }
+)
 
-// const getCommentEmits = (newComment: TopicComment) => {
-//   commentsData.value?.push(newComment)
-// }
-
-// onMounted(async () => {
-//   commentsData.value = await getComments(tidRef.value, ridRef.value)
-// })
+const getCommentEmits = (newComment: TopicComment) => {
+  commentsData.value?.push(newComment)
+}
 
 const handleClickComment = (
   topicId: number,
@@ -60,10 +68,10 @@ const handleClickComment = (
 
 <template>
   <div class="comment-container">
-    <!-- <CommentPanel
+    <CommentPanel
       @getCommentEmits="getCommentEmits"
       v-if="isShowCommentPanelRid === ridRef"
-    /> -->
+    />
 
     <div class="container" v-if="commentsData?.length">
       <div class="title">
@@ -220,5 +228,7 @@ const handleClickComment = (
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 10;
+  border-left: 2px solid var(--kungalgame-blue-4);
+  padding-left: 10px;
 }
 </style>

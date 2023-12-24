@@ -191,7 +191,7 @@ watch(
   border-radius: 5px;
   background-color: var(--kungalgame-trans-white-5);
   box-shadow: var(--shadow);
-  transition: all 0.5s;
+  transition: width 0.5s;
 }
 
 .content {
