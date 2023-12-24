@@ -1,4 +1,4 @@
-import type { PoolStoreTemp } from '@/store/types/pool'
+import type { PoolStoreTemp } from '~/store/types/pool'
 
 export const useTempPoolStore = defineStore({
   id: 'tempPool',

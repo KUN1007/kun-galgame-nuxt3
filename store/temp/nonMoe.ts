@@ -1,4 +1,4 @@
-import type { getNonMoeLogsApi } from '@/api'
+import type { getNonMoeLogsApi } from '~/api'
 
 export const useTempNonMoeStore = defineStore({
   id: 'tempNonMoe',

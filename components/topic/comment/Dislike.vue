@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTempCommentStore } from '@/store/temp/topic/comment'
+import { useTempCommentStore } from '~/store/temp/topic/comment'
 
 const props = defineProps<{
   tid: number

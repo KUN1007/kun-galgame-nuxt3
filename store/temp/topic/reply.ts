@@ -1,4 +1,4 @@
-import type { ReplyStoreTemp } from '@/store/types/topic/reply'
+import type { ReplyStoreTemp } from '~/store/types/topic/reply'
 
 export const useTempReplyStore = defineStore({
   id: 'tempReply',

@@ -1,4 +1,4 @@
-import type { TechniqueStoreTemp } from '@/store/types/technique'
+import type { TechniqueStoreTemp } from '~/store/types/technique'
 
 export const useTempTechniqueStore = defineStore({
   id: 'tempTechnique',

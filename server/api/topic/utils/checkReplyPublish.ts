@@ -1,4 +1,4 @@
-import { isValidTimestamp } from '@/utils/validate'
+import { isValidTimestamp } from '~/utils/validate'
 
 export const checkReplyPublish = (
   tags: string[],

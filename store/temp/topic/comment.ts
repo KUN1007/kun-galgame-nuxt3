@@ -1,4 +1,4 @@
-import type { CommentDraft } from '@/store/types/topic/comment'
+import type { CommentDraft } from '~/store/types/topic/comment'
 
 export const useTempCommentStore = defineStore({
   id: 'tempComment',

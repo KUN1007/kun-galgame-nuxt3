@@ -22,6 +22,8 @@ const content = ref<HTMLElement>()
 const isExecuteScrollToReplyAnimate = ref(false)
 const contentScrollHeight = ref(0)
 
+useTempReplyStore().resetPageStatus()
+
 const { data: topicData } = await useFetch(`/api/topic/${tid.value}`, {
   method: 'GET',
   watch: false,

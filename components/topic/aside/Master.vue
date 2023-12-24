@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { TopicAside } from '~/types/api/topic'
-import { useTempTopicStore } from '@/store/temp/topic/topic'
 
 const props = defineProps<{
   uid: number
