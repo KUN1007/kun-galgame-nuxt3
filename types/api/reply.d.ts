@@ -55,8 +55,8 @@ export interface TopicDislikeReplyRequestData {
 }
 
 export interface TopicUpdateReplyRequestData {
-  rid: number
+  rid: string
   content: string
   tags: string[]
-  edited: number
+  edited: string
 }

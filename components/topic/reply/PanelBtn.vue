@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { checkReplyPublish } from '../utils/checkReplyPublish'
-import type { TopicCreateReplyRequestData } from '~/types/api/reply'
+import type {
+  TopicCreateReplyRequestData,
+  TopicUpdateReplyRequestData,
+} from '~/types/api/reply'
 
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
@@ -59,17 +62,39 @@ const saveRewriteReply = () => {
 }
 
 const handleRewrite = async () => {
-  const res = await messageStore.alert('AlertInfo.edit.rewrite', true)
+  const requestData: TopicUpdateReplyRequestData = {
+    rid: replyRewrite.value.rid.toString(),
+    tags: replyRewrite.value.tags,
+    content: replyRewrite.value.content,
+    edited: Date.now().toString(),
+  }
+  if (!checkReplyPublish(requestData.tags, requestData.content)) {
+    return
+  }
 
-  if (res) {
-    // const responseData = await useTempReplyStore().updateReply()
-    // if (responseData?.code === 200) {
-    //   useMessage('Reply rewrite successfully', '回复重新编辑成功', 'success')
-    //   saveRewriteReply()
-    //   useTempReplyStore().resetRewriteReplyData()
-    //   isShowAdvance.value = false
-    //   isEdit.value = false
-    // }
+  const res = await messageStore.alert('AlertInfo.edit.rewrite', true)
+  if (!res) {
+    return
+  }
+
+  const { data } = await useFetch(`/api/topic/${replyDraft.value.tid}/reply`, {
+    method: 'PUT',
+    body: requestData,
+    watch: false,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
+
+  if (data.value) {
+    useMessage('Reply rewrite successfully', '回复重新编辑成功', 'success')
+    saveRewriteReply()
+    useTempReplyStore().resetRewriteReplyData()
+    isShowAdvance.value = false
+    isEdit.value = false
   }
 }
 
@@ -115,21 +140,22 @@ const handleShowAdvance = () => {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-}
 
-.btn-container button {
-  margin: 10px 0;
-  height: 40px;
-  width: 150px;
-  font-size: 17px;
-  white-space: nowrap;
-  border-radius: 5px;
-  overflow: hidden;
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: all 0.2s;
-  &:hover {
-    color: var(--kungalgame-white);
+  button {
+    margin: 10px 0;
+    height: 40px;
+    width: 150px;
+    font-size: 17px;
+    white-space: nowrap;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s;
+
+    &:hover {
+      color: var(--kungalgame-white);
+    }
   }
 }
 
