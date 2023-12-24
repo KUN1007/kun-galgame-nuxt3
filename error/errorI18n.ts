@@ -20,7 +20,7 @@ const errorMessagesEN: Record<number, string> = {
 
   // Topic Part
   10201: `Your daily topic limit has been reached for today. (-B)`,
-  10202: `Your moemoepoints are less than 1100, so you can't use the topic suggestion feature (-B)`,
+  10202: `Your moemoepoints are less than 1100, so you can't use the upvote topic feature (-B)`,
   10204: `Topic title length exceed 40 characters. Or empty. (-B)`,
   10205: `Topic content length exceed 100007 characters. Or empty. (-B)`,
   10206: `Topic with a maximum of 7 tags. Minimum one tag. (-B)`,
@@ -48,6 +48,7 @@ const errorMessagesEN: Record<number, string> = {
   10505: `Invalid reply timestamp. (-B)`,
   10506: `Reply not found. (-B)`,
   10507: `Insufficient parameters to get a reply request, or failed to parse the request (-B)`,
+  10508: `Your moemoepoints are less than 1100, so you can't use the upvote reply feature (-B)`,
 }
 
 const errorMessagesCN: Record<number, string> = {
@@ -93,6 +94,7 @@ const errorMessagesCN: Record<number, string> = {
   10505: `非法的回复时间戳 (-B)`,
   10506: `回复未找到 (-B)`,
   10507: `获取回复请求参数不足, 或解析请求参数失败 (-B)`,
+  10508: `您的萌萌点不足 1100, 无法使用推回复功能 (-B)`,
 }
 
 export const getErrorMessageEN = (errorCode: number) => {

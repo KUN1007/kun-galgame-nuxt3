@@ -29,7 +29,6 @@ export interface TopicReply {
 }
 
 export interface TopicCreateReplyRequestData {
-  tid: number
   to_uid: number
   to_floor: number
   tags: string[]
@@ -38,28 +37,24 @@ export interface TopicCreateReplyRequestData {
 }
 
 export interface TopicUpvoteReplyRequestData {
-  tid: number
-  to_uid: number
-  rid: number
-  time: number
+  to_uid: string
+  rid: string
+  time: string
 }
 
 export interface TopicLikeReplyRequestData {
-  tid: number
   to_uid: number
   rid: number
   isPush: boolean
 }
 
 export interface TopicDislikeReplyRequestData {
-  tid: number
   to_uid: number
   rid: number
   isPush: boolean
 }
 
 export interface TopicUpdateReplyRequestData {
-  tid: number
   rid: number
   content: string
   tags: string[]

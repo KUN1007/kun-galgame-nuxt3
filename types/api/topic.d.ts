@@ -21,21 +21,12 @@ export interface EditCreateTopicRequestData {
   category: Array<string>
 }
 
-export interface EditKUNGalgameTopic {
-  tid: number
-}
-
 export interface EditUpdateTopicRequestData {
-  tid: number
   title: string
   content: string
   tags: string[]
   category: string[]
   edited: number
-}
-
-export interface EditGetHotTagsRequestData {
-  limit: number
 }
 
 export interface TopicUserInfo {
@@ -71,28 +62,16 @@ export interface TopicDetail {
 }
 
 export interface TopicUpvoteTopicRequestData {
-  tid: string
   to_uid: string
   time: string
 }
 
 export interface TopicLikeTopicRequestData {
-  tid: number
-  to_uid: number
-  isPush: boolean
+  to_uid: string
+  isPush: string
 }
 
 export interface TopicDislikeTopicRequestData {
-  tid: number
   to_uid: number
   isPush: boolean
-}
-
-export interface TopicUpdateRequestData {
-  tid: number
-  uid: number
-  title: string
-  content: string
-  tags: string[]
-  category: string[]
 }

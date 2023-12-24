@@ -1,13 +1,13 @@
 import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
+import ReplyModel from '~/server/models/reply'
 import mongoose from 'mongoose'
 import { isValidTimestamp } from '~/utils/validate'
-import type { TopicUpvoteTopicRequestData } from '~/types/api/topic'
+import type { TopicUpvoteReplyRequestData } from '~/types/api/reply'
 
-const updateTopicUpvote = async (
+const updateReplyUpvote = async (
   uid: number,
   to_uid: number,
-  tid: number,
+  rid: number,
   time: number
 ) => {
   const userInfo = await UserModel.findOne({ uid })
@@ -17,35 +17,26 @@ const updateTopicUpvote = async (
 
   const moemoepoint = userInfo.moemoepoint
   if (moemoepoint < 1100) {
-    return 10202
+    return 10508
   }
 
   const session = await mongoose.startSession()
   session.startTransaction()
 
   try {
-    await TopicModel.updateOne(
-      { tid },
+    await ReplyModel.updateOne(
+      { rid },
       {
         $set: { upvote_time: time },
         $push: { upvotes: uid },
-        $inc: { popularity: 50, upvotes_count: 1 },
       }
     )
 
-    await UserModel.updateOne(
-      { uid: uid },
-      {
-        $inc: { moemoepoint: -17, upvote_topic_count: 1 },
-        $addToSet: {
-          upvote_topic: tid,
-        },
-      }
-    )
+    await UserModel.updateOne({ uid }, { $inc: { moemoepoint: -3 } })
 
     await UserModel.updateOne(
       { uid: to_uid },
-      { $inc: { moemoepoint: 7, upvote: 1 } }
+      { $inc: { moemoepoint: 1, upvote: 1 } }
     )
 
     await session.commitTransaction()
@@ -70,8 +61,9 @@ export default defineEventHandler(async (event) => {
   }
   const uid = userInfo.uid
 
-  const { to_uid, time }: TopicUpvoteTopicRequestData = await getQuery(event)
-  if (!to_uid || !time) {
+  const { to_uid, rid, time }: TopicUpvoteReplyRequestData =
+    await getQuery(event)
+  if (!to_uid || !rid || !time) {
     kunError(event, 10507)
     return
   }
@@ -85,7 +77,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const result = await updateTopicUpvote(
+  const result = await updateReplyUpvote(
     uid,
     parseInt(to_uid),
     parseInt(tid),

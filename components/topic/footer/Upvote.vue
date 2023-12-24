@@ -27,14 +27,11 @@ const upvoteTopic = async () => {
     return
   }
 
-  const { tid, toUid } = props
   const queryData = {
-    tid: tid,
-    to_uid: toUid,
+    to_uid: props.toUid,
     time: Date.now(),
   }
-
-  const { data } = await useFetch(`/api/topic/${tid}/upvote`, {
+  const { data } = await useFetch(`/api/topic/${props.tid}/upvote`, {
     method: 'PUT',
     query: queryData,
     watch: false,
@@ -58,19 +55,31 @@ const upvoteReply = async () => {
     'AlertInfo.edit.upvoteReply',
     true
   )
+  if (!res) {
+    return
+  }
 
-  if (res) {
-    const { tid, toUid, rid } = props
-    // const res = await useTempReplyStore().updateReplyUpvote(tid, toUid, rid)
+  const queryData = {
+    to_uid: props.toUid,
+    rid: props.rid,
+    time: Date.now(),
+  }
+  const { data } = await useFetch(`/api/topic/${props.tid}/reply/upvote`, {
+    method: 'PUT',
+    query: queryData,
+    watch: false,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
 
-    // if (res.code === 200) {
-    //   upvoteCount.value++
-    //   isUpvote.value = true
-
-    //   useMessage('Reply upvote successfully', '推回复成功', 'success')
-    // } else {
-    //   useMessage('Reply upvote failed!', '推回复失败', 'error')
-    // }
+  if (data.value) {
+    upvoteCount.value++
+    isUpvote.value = true
+    useMessage('Reply upvote successfully', '推回复成功', 'success')
   }
 }
 

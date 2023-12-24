@@ -260,7 +260,7 @@ watch(
 }
 
 .active-upvote .container {
-  border: 1px solid var(--kungalgame-red-4);
+  border: 2px solid var(--kungalgame-red-4);
 }
 
 .active .container {
