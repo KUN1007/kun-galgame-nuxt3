@@ -4,7 +4,12 @@ const route = useRoute()
 const uid = computed(() => {
   return parseInt((route.params as { uid: string }).uid)
 })
-const { avatar, avatarMin, moemoepoint } = storeToRefs(useKUNGalgameUserStore())
+const {
+  uid: currentUserUid,
+  avatar,
+  avatarMin,
+  moemoepoint,
+} = storeToRefs(useKUNGalgameUserStore())
 
 const { data: user, refresh } = await useFetch(`/api/user/${uid.value}`, {
   method: 'GET',
@@ -19,7 +24,7 @@ const { data: user, refresh } = await useFetch(`/api/user/${uid.value}`, {
 provide('refresh', refresh)
 
 onMounted(async () => {
-  if (!user.value) {
+  if (!user.value || currentUserUid.value !== uid.value) {
     return
   }
   if (user.value.avatar) {
