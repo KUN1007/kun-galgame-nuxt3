@@ -71,9 +71,9 @@ export interface TopicDetail {
 }
 
 export interface TopicUpvoteTopicRequestData {
-  tid: number
-  to_uid: number
-  time: number
+  tid: string
+  to_uid: string
+  time: string
 }
 
 export interface TopicLikeTopicRequestData {

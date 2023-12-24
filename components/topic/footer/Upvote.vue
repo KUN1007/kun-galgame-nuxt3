@@ -23,19 +23,33 @@ const upvoteTopic = async () => {
     'AlertInfo.edit.upvoteTopic',
     true
   )
+  if (!res) {
+    return
+  }
 
-  if (res) {
-    const { tid, toUid } = props
-    // const res = await useTempTopicStore().updateTopicUpvote(tid, toUid)
+  const { tid, toUid } = props
+  const queryData = {
+    tid: tid,
+    to_uid: toUid,
+    time: Date.now(),
+  }
 
-    // if (res.code === 200) {
-    //   upvoteCount.value++
-    //   isUpvote.value = true
+  const { data } = await useFetch(`/api/topic/${tid}/upvote`, {
+    method: 'PUT',
+    query: queryData,
+    watch: false,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
 
-    //   useMessage('Topic upvote successfully', '推话题成功', 'success')
-    // } else {
-    //   useMessage('Topic upvote failed!', '推话题失败', 'error')
-    // }
+  if (data.value) {
+    upvoteCount.value++
+    isUpvote.value = true
+    useMessage('Topic upvote successfully', '推话题成功', 'success')
   }
 }
 
