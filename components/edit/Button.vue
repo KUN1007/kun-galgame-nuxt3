@@ -1,10 +1,22 @@
 <script setup lang="ts">
 import { checkTopicPublish } from './utils/checkTopicPublish'
-import type { EditCreateTopicRequestData } from '~/types/api/topic'
+import type {
+  EditCreateTopicRequestData,
+  EditUpdateTopicRequestData,
+} from '~/types/api/topic'
 
 const router = useRouter()
 
-const { tid, isTopicRewriting } = storeToRefs(useTempEditStore())
+const {
+  tid,
+  title: rewriteTitle,
+  content: rewriteContent,
+  tags: rewriteTags,
+  category: rewriteCategory,
+  textCount: rewriteTextCount,
+  isTopicRewriting,
+} = storeToRefs(useTempEditStore())
+
 const { textCount, title, content, tags, category, isSaveTopic } = storeToRefs(
   useKUNGalgameEditStore()
 )
@@ -48,18 +60,39 @@ const handlePublish = async () => {
 }
 
 const handleRewrite = async () => {
+  const requestData: EditUpdateTopicRequestData = {
+    tid: tid.value,
+    title: rewriteTitle.value,
+    content: rewriteContent.value,
+    tags: rewriteTags.value,
+    category: rewriteCategory.value,
+    edited: Date.now(),
+  }
+  if (!checkTopicPublish(rewriteTextCount.value, requestData)) {
+    return
+  }
+
   const res = await messageStore.alert('AlertInfo.edit.rewrite', true)
-  if (res) {
-    // await useTempEditStore().rewriteTopic()
-    // const rewrittenTopicTid = tid.value
-    // router.push({
-    //   name: 'Topic',
-    //   params: {
-    //     tid: rewrittenTopicTid,
-    //   },
-    // })
-    // messageStore.info('AlertInfo.edit.rewriteSuccess')
-    // useTempEditStore().resetRewriteTopicData()
+  if (!res) {
+    return
+  }
+
+  const { data } = await useFetch(`/api/topic/${tid.value}`, {
+    method: 'PUT',
+    body: requestData,
+    watch: false,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
+
+  if (data.value) {
+    router.push(`/topic/${tid.value}`)
+    messageStore.info('AlertInfo.edit.rewriteSuccess')
+    useTempEditStore().resetRewriteTopicData()
   }
 }
 
@@ -71,17 +104,14 @@ const handleSave = () => {
 
 <template>
   <div class="btn-container">
-    <!-- Confirm button -->
     <button v-if="!isTopicRewriting" class="confirm-btn" @click="handlePublish">
       {{ $t('edit.publish') }}
     </button>
 
-    <!-- Rewrite button -->
     <button v-if="isTopicRewriting" class="rewrite-btn" @click="handleRewrite">
       {{ $t('edit.rewrite') }}
     </button>
 
-    <!-- Save button -->
     <button v-if="!isTopicRewriting" class="save-btn" @click="handleSave">
       {{ $t('edit.draft') }}
     </button>
