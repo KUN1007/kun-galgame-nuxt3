@@ -49,9 +49,9 @@ export interface TopicLikeReplyRequestData {
 }
 
 export interface TopicDislikeReplyRequestData {
-  to_uid: number
-  rid: number
-  isPush: boolean
+  to_uid: string
+  rid: string
+  isPush: string
 }
 
 export interface TopicUpdateReplyRequestData {

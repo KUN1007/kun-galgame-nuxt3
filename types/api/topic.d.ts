@@ -72,6 +72,6 @@ export interface TopicLikeTopicRequestData {
 }
 
 export interface TopicDislikeTopicRequestData {
-  to_uid: number
-  isPush: boolean
+  to_uid: string
+  isPush: string
 }

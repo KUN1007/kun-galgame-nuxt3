@@ -33,11 +33,42 @@ const dislikeOperation = async (
   isPush: boolean
 ) => {
   const isMasterTopic = rid === 0
-  // if (isMasterTopic) {
-  //   return await useTempTopicStore().updateTopicDislike(tid, toUid, isPush)
-  // } else {
-  //   return await useTempReplyStore().updateReplyDislike(tid, toUid, rid, isPush)
-  // }
+  if (isMasterTopic) {
+    const queryData = {
+      isPush: isPush,
+      to_uid: toUid,
+    }
+    const { data } = await useFetch(`/api/topic/${tid}/dislike`, {
+      method: 'PUT',
+      query: queryData,
+      watch: false,
+      onResponse({ request, response, options }) {
+        if (response.status === 233) {
+          kungalgameErrorHandler(response.statusText)
+          return
+        }
+      },
+    })
+    return data
+  } else {
+    const queryData = {
+      isPush: isPush,
+      rid: props.rid,
+      to_uid: toUid,
+    }
+    const { data } = await useFetch(`/api/topic/${tid}/reply/dislike`, {
+      method: 'PUT',
+      query: queryData,
+      watch: false,
+      onResponse({ request, response, options }) {
+        if (response.status === 233) {
+          kungalgameErrorHandler(response.statusText)
+          return
+        }
+      },
+    })
+    return data
+  }
 }
 
 const toggleDislike = async () => {
@@ -49,24 +80,18 @@ const toggleDislike = async () => {
   const { tid, rid, toUid } = props
   const isPush = !isDisliked.value
 
-  const res = await dislikeOperation(tid, rid, toUid, isPush)
+  const data = await dislikeOperation(tid, rid, toUid, isPush)
 
-  // if (res.code === 200) {
-  //   isDisliked.value = isPush
-  //   dislikesCount.value += isPush ? 1 : -1
+  if (data.value) {
+    isDisliked.value = isPush
+    dislikesCount.value += isPush ? 1 : -1
 
-  //   if (isPush) {
-  //     useMessage('Dislike successfully!', '点踩成功！', 'success')
-  //   } else {
-  //     useMessage('Cancel dislike successfully!', '取消点踩成功！', 'success')
-  //   }
-  // } else {
-  //   if (isPush) {
-  //     useMessage('Dislike failed!', '点踩失败！', 'error')
-  //   } else {
-  //     useMessage('Cancel dislike failed!', '取消点踩失败！', 'error')
-  //   }
-  // }
+    if (isPush) {
+      useMessage('Dislike successfully!', '点踩成功！', 'success')
+    } else {
+      useMessage('Cancel dislike successfully!', '取消点踩成功！', 'success')
+    }
+  }
 }
 
 const handleClickDislikeThrottled = throttle(

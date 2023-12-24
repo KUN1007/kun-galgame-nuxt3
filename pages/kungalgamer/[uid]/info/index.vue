@@ -35,51 +35,45 @@ const statusName = () => {
 </script>
 
 <template>
-  <!-- Right content area -->
   <div class="article" v-if="user">
-    <!-- User profile information -->
     <div class="info">
-      <!-- User basic information -->
       <div class="basic">
-        <!-- Username -->
         <span>{{ $t('user.profile.name') }}: {{ user.name }}</span>
-        <!-- Moemoepoint -->
+
         <span>
           {{ $t('user.profile.moemoepoint') }}: {{ user.moemoepoint }}
         </span>
-        <!-- Registration number -->
+
         <span>{{ $t('user.profile.register') }}: {{ user.uid }}</span>
-        <!-- Role -->
+
         <span>{{ $t('user.profile.roles') }}: {{ rolesName() }}</span>
-        <!-- Status -->
+
         <span>{{ $t('user.profile.status') }}: {{ statusName() }}</span>
-        <!-- Upvotes received -->
+
         <span>{{ $t('user.profile.upvote') }}: {{ user.upvote }}</span>
-        <!-- Likes received -->
+
         <span>{{ $t('user.profile.like') }}: {{ user.like }}</span>
-        <!-- Dislikes received -->
+
         <span>{{ $t('user.profile.dislike') }}: {{ user.dislike }}</span>
-        <!-- Topics published today -->
+
         <span>
           {{ $t('user.profile.today') }}: {{ user.daily_topic_count }}
         </span>
-        <!-- Total topics published -->
+
         <span>{{ $t('user.profile.topic') }}: {{ user.topic.length }}</span>
-        <!-- Total replies published -->
+
         <span>{{ $t('user.profile.reply') }}: {{ user.reply.length }}</span>
-        <!-- Total comments published -->
+
         <span>
           {{ $t('user.profile.comment') }}: {{ user.comment.length }}
         </span>
 
-        <!-- Registration date -->
         <span>
           {{ $t('user.profile.time') }}:
           {{ dayjs(user.time).format('YYYY/MM/DD') }}
         </span>
       </div>
 
-      <!-- User bio -->
       <div class="bio">
         <div>{{ $t('user.profile.bio') }}:</div>
         <div v-if="user.bio">{{ user.bio }}</div>

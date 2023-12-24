@@ -1,9 +1,9 @@
 import UserModel from '~/server/models/user'
 import TopicModel from '~/server/models/topic'
 import mongoose from 'mongoose'
-import type { TopicLikeTopicRequestData } from '~/types/api/topic'
+import type { TopicDislikeTopicRequestData } from '~/types/api/topic'
 
-const updateTopicLike = async (
+const updateTopicDislike = async (
   uid: number,
   to_uid: number,
   tid: number,
@@ -18,13 +18,13 @@ const updateTopicLike = async (
     return 10211
   }
 
-  const isLikedTopic = topic.likes.includes(uid)
-  if (isLikedTopic && isPush) {
-    return 10212
+  const isDislikedTopic = topic.dislikes.includes(uid)
+  if (isDislikedTopic && isPush) {
+    return 10213
   }
 
-  const moemoepointAmount = isPush ? 1 : -1
-  const popularity = isPush ? 2 : -2
+  const amount = isPush ? 1 : -1
+  const popularity = isPush ? -5 : 5
 
   const session = await mongoose.startSession()
   session.startTransaction()
@@ -33,20 +33,17 @@ const updateTopicLike = async (
     await TopicModel.updateOne(
       { tid: tid },
       {
-        $inc: { popularity: popularity, likes_count: moemoepointAmount },
-        [isPush ? '$push' : '$pull']: { likes: uid },
+        $inc: { popularity: popularity, dislikes_count: amount },
+        [isPush ? '$push' : '$pull']: { dislikes: uid },
       }
     )
 
     await UserModel.updateOne(
       { uid: uid },
-      { [isPush ? '$push' : '$pull']: { like_topic: tid } }
+      { [isPush ? '$push' : '$pull']: { dislike_topic: tid } }
     )
 
-    await UserModel.updateOne(
-      { uid: to_uid },
-      { $inc: { moemoepoint: moemoepointAmount, like: moemoepointAmount } }
-    )
+    await UserModel.updateOne({ uid: to_uid }, { $inc: { dislike: amount } })
 
     await session.commitTransaction()
     session.endSession()
@@ -70,7 +67,7 @@ export default defineEventHandler(async (event) => {
   }
   const uid = userInfo.uid
 
-  const { to_uid, isPush }: TopicLikeTopicRequestData = await getQuery(event)
+  const { to_uid, isPush }: TopicDislikeTopicRequestData = await getQuery(event)
   if (!to_uid || !isPush) {
     kunError(event, 10507)
     return
@@ -80,7 +77,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const result = await updateTopicLike(
+  const result = await updateTopicDislike(
     uid,
     parseInt(to_uid),
     parseInt(tid),
@@ -91,5 +88,5 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  return 'MOEMOE like topic operation successfully!'
+  return 'MOEMOE dislike topic operation successfully!'
 })

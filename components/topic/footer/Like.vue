@@ -91,12 +91,6 @@ const toggleLike = async () => {
     } else {
       useMessage('Unlike successfully!', '取消点赞成功！', 'success')
     }
-  } else {
-    if (isPush) {
-      useMessage('Like failed!', '点赞失败！', 'error')
-    } else {
-      useMessage('Unlike failed!', '取消点赞失败！', 'error')
-    }
   }
 }
 
