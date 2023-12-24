@@ -82,7 +82,6 @@ export default defineEventHandler(async (event) => {
 
   const { page, limit, sortField, sortOrder }: TopicReplyRequestData =
     await getQuery(event)
-
   if (!page || !limit || !sortField || !sortOrder) {
     kunError(event, 10507)
     return
@@ -100,7 +99,6 @@ export default defineEventHandler(async (event) => {
     sortField,
     sortOrder
   )
-
   if (typeof result === 'number') {
     kunError(event, result)
     return

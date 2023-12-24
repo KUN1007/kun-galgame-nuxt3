@@ -13,6 +13,16 @@ const updateTopicLike = async (
     return
   }
 
+  const topic = await TopicModel.findOne({ tid })
+  if (!topic) {
+    return 10211
+  }
+
+  const isLikedTopic = topic.likes.includes(uid)
+  if (isLikedTopic) {
+    return 10212
+  }
+
   const moemoepointAmount = isPush ? 1 : -1
   const popularity = isPush ? 2 : -2
 
@@ -70,7 +80,16 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  await updateTopicLike(uid, parseInt(to_uid), parseInt(tid), isPush === 'true')
+  const result = await updateTopicLike(
+    uid,
+    parseInt(to_uid),
+    parseInt(tid),
+    isPush === 'true'
+  )
+  if (typeof result === 'number') {
+    kunError(event, result)
+    return
+  }
 
   return 'MOEMOE like topic operation successfully!'
 })

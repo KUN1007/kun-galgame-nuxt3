@@ -2,7 +2,7 @@
 
 <template>
   <NuxtLink to="/" class="return">
-    <Icon name="icon" icon="line-md:home-md-twotone" />
+    <Icon class="icon" name="line-md:home-md-twotone" />
     <span>{{ $t('back.home') }}</span>
   </NuxtLink>
 </template>

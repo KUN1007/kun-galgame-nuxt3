@@ -13,6 +13,16 @@ const updateReplyLike = async (
     return
   }
 
+  const reply = await ReplyModel.findOne({ rid })
+  if (!reply) {
+    return 10506
+  }
+
+  const isLikedTopic = reply.likes.includes(uid)
+  if (isLikedTopic) {
+    return 10509
+  }
+
   const moemoepointAmount = isPush ? 1 : -1
 
   const session = await mongoose.startSession()
@@ -57,7 +67,16 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  await updateReplyLike(uid, parseInt(to_uid), parseInt(rid), isPush === 'true')
+  const result = await updateReplyLike(
+    uid,
+    parseInt(to_uid),
+    parseInt(rid),
+    isPush === 'true'
+  )
+  if (typeof result === 'number') {
+    kunError(event, result)
+    return
+  }
 
   return 'MOEMOE like reply successfully!'
 })

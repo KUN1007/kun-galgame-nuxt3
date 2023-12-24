@@ -30,7 +30,7 @@ const { isScrollToTop } = storeToRefs(useTempReplyStore())
   box-shadow: var(--shadow);
   cursor: pointer;
   background-color: var(--kungalgame-trans-white-2);
-  border: 1px solid var(--kungalgame-blue-1);
+  border: 2px solid var(--kungalgame-blue-4);
   color: var(--kungalgame-font-color-3);
   border-radius: 50%;
 

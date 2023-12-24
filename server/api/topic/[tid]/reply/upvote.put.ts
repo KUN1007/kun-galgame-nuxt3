@@ -83,7 +83,7 @@ export default defineEventHandler(async (event) => {
     parseInt(tid),
     parseInt(time)
   )
-  if (result) {
+  if (typeof result === 'number') {
     kunError(event, result)
     return
   }

@@ -1,6 +1,6 @@
 import type { H3Event } from 'h3'
 
-export const kunError = (event: H3Event, code: number) => {
-  event.node.res.statusCode = 233
+export const kunError = (event: H3Event, code: number, errorCode?: number) => {
+  event.node.res.statusCode = errorCode ? errorCode : 233
   event.node.res.statusMessage = code.toString()
 }
