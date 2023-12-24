@@ -1,26 +1,53 @@
 <script setup lang="ts">
+import { checkReplyPublish } from '../utils/checkReplyPublish'
+import type { TopicCreateReplyRequestData } from '~/types/api/reply'
+
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
-const { isSaveReply } = storeToRefs(usePersistKUNGalgameReplyStore())
+const { isSaveReply, replyDraft } = storeToRefs(
+  usePersistKUNGalgameReplyStore()
+)
 
 const { isEdit, tempReplyRewrite } = storeToRefs(useTempReplyStore())
 
 const messageStore = useTempMessageStore()
 
 const handlePublish = async () => {
+  const requestData: TopicCreateReplyRequestData = {
+    to_uid: replyDraft.value.toUid.toString(),
+    to_floor: replyDraft.value.toFloor.toString(),
+    tags: replyDraft.value.tags,
+    content: replyDraft.value.content,
+    time: Date.now().toString(),
+  }
+  if (!checkReplyPublish(requestData.tags, requestData.content)) {
+    return
+  }
+
   const res = await messageStore.alert('AlertInfo.edit.publish', true)
+  if (!res) {
+    return
+  }
+  useTempReplyStore().resetPageStatus()
 
-  if (res) {
-    useTempReplyStore().resetPageStatus()
-    // const responseData = await usePersistKUNGalgameReplyStore().postNewReply()
+  const { data } = await useFetch(`/api/topic/${replyDraft.value.tid}/reply`, {
+    method: 'POST',
+    body: requestData,
+    watch: false,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
 
-    // if (responseData?.code === 200) {
-    //   useTempReplyStore().tempReply = responseData.data
-    //   usePersistKUNGalgameReplyStore().resetReplyDraft()
+  if (data.value) {
+    useTempReplyStore().tempReply = data.value
+    usePersistKUNGalgameReplyStore().resetReplyDraft()
 
-    //   isEdit.value = false
-    //   useMessage('Publish reply successfully!', '发布回复成功！', 'success')
-    // }
+    isEdit.value = false
+    useMessage('Publish reply successfully!', '发布回复成功！', 'success')
   }
 }
 

@@ -16,17 +16,18 @@ export interface TopicAsideMasterRequestData {
 export interface EditCreateTopicRequestData {
   title: string
   content: string
-  time: number
-  tags: Array<string>
-  category: Array<string>
+  time: string
+  tags: string[]
+  category: string[]
 }
 
 export interface EditUpdateTopicRequestData {
+  tid: number
   title: string
   content: string
   tags: string[]
   category: string[]
-  edited: number
+  edited: string
 }
 
 export interface TopicUserInfo {

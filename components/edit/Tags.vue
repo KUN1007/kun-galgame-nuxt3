@@ -35,11 +35,11 @@ if (isTopicRewriting.value && routeName.value === 'edit') {
   selectedTags.value = rewriteTags.value
 }
 
-if (isSaveReply.value && routeName.value === 'topic') {
+if (isSaveReply.value && routeName.value === 'topic-tid') {
   selectedTags.value = replyDraft.value.tags
 }
 
-if (isReplyRewriting.value && routeName.value === 'topic') {
+if (isReplyRewriting.value && routeName.value === 'topic-tid') {
   selectedTags.value = replyRewrite.value.tags
 }
 
@@ -54,7 +54,7 @@ const getTags = async () => {
 const isLoadEditHotTags =
   routeName.value === 'edit' && isShowEditHotKeywords.value
 const isLoadTopicHotTags =
-  routeName.value === 'topic' && isShowReplyHotKeywords.value
+  routeName.value === 'topic-tid' && isShowReplyHotKeywords.value
 
 if (isLoadEditHotTags || isLoadTopicHotTags) {
   hotTags.value = await getTags()
@@ -118,7 +118,7 @@ const validateTagName = (tagName: string) => {
 }
 
 watch(selectedTags.value, () => {
-  if (routeName.value === 'topic') {
+  if (routeName.value === 'topic-tid') {
     replyDraft.value.tags = selectedTags.value
   }
   if (routeName.value === 'edit') {
@@ -131,7 +131,7 @@ watch(
   async () => {
     if (
       (routeName.value === 'edit' && isShowEditHotKeywords.value) ||
-      (routeName.value === 'topic' && isShowReplyHotKeywords.value)
+      (routeName.value === 'topic-tid' && isShowReplyHotKeywords.value)
     ) {
       hotTags.value = await getTags()
     }

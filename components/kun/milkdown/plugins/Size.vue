@@ -26,14 +26,14 @@ watch(
       textCountEditRewrite.value = size.value
       return
     }
-    if (routeName.value === 'topic' && isReplyRewriting.value) {
+    if (routeName.value === 'topic-tid' && isReplyRewriting.value) {
       textCountReplyRewrite.value = size.value
       return
     }
     if (routeName.value === 'edit') {
       textCountEdit.value = size.value
     }
-    if (routeName.value === 'topic') {
+    if (routeName.value === 'topic-tid') {
       textCountReply.value = size.value
     }
   }
@@ -44,7 +44,7 @@ onMounted(() => {
     textCountEditRewrite.value = size.value
     return
   }
-  if (routeName.value === 'topic' && isReplyRewriting.value) {
+  if (routeName.value === 'topic-tid' && isReplyRewriting.value) {
     textCountReplyRewrite.value = size.value
   }
 })

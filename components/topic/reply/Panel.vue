@@ -118,11 +118,11 @@ const handleClosePanel = async () => {
     &:nth-child(2) {
       margin: 0 5px;
       cursor: pointer;
-      color: var(--kungalgame-pink-3);
+      color: var(--kungalgame-blue-4);
       border-bottom: 2px solid var(--kungalgame-white-9);
 
       &:hover {
-        border-bottom: 2px solid var(--kungalgame-pink-3);
+        border-bottom: 2px solid var(--kungalgame-blue-4);
       }
     }
 

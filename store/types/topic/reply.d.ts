@@ -1,4 +1,4 @@
-import type { TopicReply } from '~/api'
+import type { TopicReply } from '~/types/api/reply'
 
 interface ReplyDraft {
   tid: number

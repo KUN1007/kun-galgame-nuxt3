@@ -26,7 +26,7 @@ const handlePublish = async () => {
   const requestData: EditCreateTopicRequestData = {
     title: title.value,
     content: content.value,
-    time: Date.now(),
+    time: Date.now().toString(),
     tags: tags.value,
     category: category.value,
   }
@@ -66,7 +66,7 @@ const handleRewrite = async () => {
     content: rewriteContent.value,
     tags: rewriteTags.value,
     category: rewriteCategory.value,
-    edited: Date.now(),
+    edited: Date.now().toString(),
   }
   if (!checkTopicPublish(rewriteTextCount.value, requestData)) {
     return

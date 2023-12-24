@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { TopicReplyRequestData } from '~/types/api/reply'
-
 const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
@@ -36,7 +34,7 @@ const { data: topicData } = await useFetch(`/api/topic/${tid.value}`, {
 })
 
 const getReplies = async () => {
-  const data = await useFetch(`/api/topic/${tid.value}/replies`, {
+  const data = await useFetch(`/api/topic/${tid.value}/reply`, {
     method: 'GET',
     query: {
       page: replyRequest.value.page,

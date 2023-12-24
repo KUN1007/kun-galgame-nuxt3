@@ -5,7 +5,6 @@ import type { TopicDetail } from '~/types/api/topic'
 
 export default defineEventHandler(async (event) => {
   const tid = getRouterParam(event, 'tid')
-
   if (!tid) {
     kunError(event, 10210)
     return

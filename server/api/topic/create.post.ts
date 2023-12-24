@@ -5,11 +5,11 @@ import { checkTopicPublish } from './utils/checkTopicPublish'
 import type { H3Event } from 'h3'
 import type { EditCreateTopicRequestData } from '~/types/api/topic'
 
-const createCheck = async (event: H3Event) => {
+const readTopicData = async (event: H3Event) => {
   const { title, content, time, tags, category }: EditCreateTopicRequestData =
     await readBody(event)
 
-  const res = checkTopicPublish(title, content, tags, category, time)
+  const res = checkTopicPublish(title, content, tags, category, parseInt(time))
 
   if (res) {
     kunError(event, res)
@@ -27,7 +27,7 @@ const createCheck = async (event: H3Event) => {
 }
 
 export default defineEventHandler(async (event) => {
-  const result = await createCheck(event)
+  const result = await readTopicData(event)
   if (!result) {
     return
   }

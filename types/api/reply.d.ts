@@ -29,11 +29,11 @@ export interface TopicReply {
 }
 
 export interface TopicCreateReplyRequestData {
-  to_uid: number
-  to_floor: number
+  to_uid: string
+  to_floor: string
   tags: string[]
   content: string
-  time: number
+  time: string
 }
 
 export interface TopicUpvoteReplyRequestData {

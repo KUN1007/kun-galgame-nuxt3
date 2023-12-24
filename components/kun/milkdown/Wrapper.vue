@@ -36,10 +36,10 @@ onBeforeMount(() => {
   if (isTopicRewriting.value && routeName.value === 'edit') {
     valueMarkdown.value = rewriteContent.value
   }
-  if (isSaveReply.value && routeName.value === 'topic') {
+  if (isSaveReply.value && routeName.value === 'topic-tid') {
     valueMarkdown.value = replyDraft.value.content
   }
-  if (isReplyRewriting.value && routeName.value === 'topic') {
+  if (isReplyRewriting.value && routeName.value === 'topic-tid') {
     valueMarkdown.value = replyRewrite.value.content
   }
 })
@@ -52,10 +52,10 @@ const saveMarkdown = (editorMarkdown: string) => {
     if (isTopicRewriting.value && routeName.value === 'edit') {
       rewriteContent.value = editorMarkdown
     }
-    if (!isReplyRewriting.value && routeName.value === 'topic') {
+    if (!isReplyRewriting.value && routeName.value === 'topic-tid') {
       replyDraft.value.content = editorMarkdown
     }
-    if (isReplyRewriting.value && routeName.value === 'topic') {
+    if (isReplyRewriting.value && routeName.value === 'topic-tid') {
       replyRewrite.value.content = editorMarkdown
     }
   }, 1007)

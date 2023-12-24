@@ -40,7 +40,13 @@ export default defineEventHandler(async (event) => {
   const { title, content, tags, category, edited }: EditUpdateTopicRequestData =
     await readBody(event)
 
-  const res = checkTopicPublish(title, content, tags, category, edited)
+  const res = checkTopicPublish(
+    title,
+    content,
+    tags,
+    category,
+    parseInt(edited)
+  )
   if (res) {
     kunError(event, res)
     return
@@ -53,7 +59,15 @@ export default defineEventHandler(async (event) => {
   }
   const uid = userInfo.uid
 
-  await updateTopic(uid, parseInt(tid), title, content, tags, category, edited)
+  await updateTopic(
+    uid,
+    parseInt(tid),
+    title,
+    content,
+    tags,
+    category,
+    parseInt(edited)
+  )
 
   return 'MOEMOE update topic successfully!'
 })
