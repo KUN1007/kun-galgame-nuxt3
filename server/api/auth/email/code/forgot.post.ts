@@ -23,5 +23,5 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  return 'MOEMOE!'
+  return 'MOEMOE send forget password verification code successfully!'
 })

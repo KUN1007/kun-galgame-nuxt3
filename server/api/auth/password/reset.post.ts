@@ -50,5 +50,5 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  return 'MOEMOE!'
+  return 'MOEMOE reset password by email successfully!'
 })

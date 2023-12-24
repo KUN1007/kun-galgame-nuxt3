@@ -32,5 +32,5 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  return 'MOEMOE!'
+  return 'MOEMOE send register verification code successfully!'
 })

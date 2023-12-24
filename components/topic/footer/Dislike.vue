@@ -83,11 +83,11 @@ const handleClickDislike = () => {
 <template>
   <li>
     <span
-      class="icon"
+      class="dislike"
       :class="isDisliked ? 'active' : ''"
       @click="handleClickDislike"
     >
-      <Icon name="line-md:thumbs-down-twotone" />
+      <Icon class="icon" name="line-md:thumbs-down-twotone" />
     </span>
     {{ dislikesCount }}
   </li>
@@ -101,23 +101,20 @@ li {
   font-size: 14px;
   margin: 17px;
   margin-right: 0;
+
   span {
     display: flex;
     margin-right: 3px;
   }
-  &:nth-child(1) span {
-    color: var(--kungalgame-red-4);
-  }
 }
 
-.icon {
+.dislike {
   font-size: 24px;
   color: var(--kungalgame-font-color-2);
   cursor: pointer;
 }
 
-/* Styles after activation */
-.active {
+.active .icon {
   color: var(--kungalgame-blue-4);
 }
 </style>

@@ -88,5 +88,5 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  return 'MOEMOE!'
+  return 'MOEMOE upvote reply operation successfully!'
 })

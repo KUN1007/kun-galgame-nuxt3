@@ -55,5 +55,5 @@ export default defineEventHandler(async (event) => {
 
   await updateTopic(uid, parseInt(tid), title, content, tags, category, edited)
 
-  return 'MOEMOE!'
+  return 'MOEMOE update topic successfully!'
 })

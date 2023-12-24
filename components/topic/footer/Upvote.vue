@@ -113,23 +113,17 @@ const handleClickUpvote = async () => {
 <template>
   <li>
     <span
-      class="icon"
+      class="upvote"
       :class="isUpvote ? 'active' : ''"
       @click="handleClickUpvote"
     >
-      <Icon name="bi:rocket" />
+      <Icon class="icon" name="bi:rocket" />
     </span>
     {{ upvoteCount }}
   </li>
 </template>
 
 <style lang="scss" scoped>
-.icon {
-  font-size: 24px;
-  color: var(--kungalgame-red-4);
-  cursor: pointer;
-}
-
 li {
   display: flex;
   justify-content: center;
@@ -144,7 +138,13 @@ li {
   }
 }
 
-.active {
-  color: var(--kungalgame-blue-4) !important;
+.upvote {
+  font-size: 24px;
+  color: var(--kungalgame-red-4);
+  cursor: pointer;
+}
+
+.active .icon {
+  color: var(--kungalgame-blue-4);
 }
 </style>

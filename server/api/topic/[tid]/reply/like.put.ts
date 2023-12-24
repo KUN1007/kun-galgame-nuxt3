@@ -1,12 +1,12 @@
 import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
+import ReplyModel from '~/server/models/reply'
 import mongoose from 'mongoose'
-import type { TopicLikeTopicRequestData } from '~/types/api/topic'
+import type { TopicLikeReplyRequestData } from '~/types/api/reply'
 
-const updateTopicLike = async (
+const updateReplyLike = async (
   uid: number,
   to_uid: number,
-  tid: number,
+  rid: number,
   isPush: boolean
 ) => {
   if (uid === to_uid) {
@@ -14,23 +14,15 @@ const updateTopicLike = async (
   }
 
   const moemoepointAmount = isPush ? 1 : -1
-  const popularity = isPush ? 2 : -2
 
   const session = await mongoose.startSession()
   session.startTransaction()
 
   try {
-    await TopicModel.updateOne(
-      { tid: tid },
-      {
-        $inc: { popularity: popularity, likes_count: moemoepointAmount },
-        [isPush ? '$addToSet' : '$pull']: { likes: uid },
-      }
-    )
-
-    await UserModel.updateOne(
-      { uid: uid },
-      { [isPush ? '$addToSet' : '$pull']: { like_topic: tid } }
+    await ReplyModel.updateOne(
+      { rid: rid },
+      { [isPush ? '$addToSet' : '$pull']: { likes: uid } },
+      { $inc: { likes_count: moemoepointAmount } }
     )
 
     await UserModel.updateOne(
@@ -47,12 +39,6 @@ const updateTopicLike = async (
 }
 
 export default defineEventHandler(async (event) => {
-  const tid = getRouterParam(event, 'tid')
-  if (!tid) {
-    kunError(event, 10210)
-    return
-  }
-
   const userInfo = getCookieTokenInfo(event)
   if (!userInfo) {
     kunError(event, 10115)
@@ -60,7 +46,8 @@ export default defineEventHandler(async (event) => {
   }
   const uid = userInfo.uid
 
-  const { to_uid, isPush }: TopicLikeTopicRequestData = await getQuery(event)
+  const { to_uid, rid, isPush }: TopicLikeReplyRequestData =
+    await getQuery(event)
   if (!to_uid || !isPush) {
     kunError(event, 10507)
     return
@@ -70,7 +57,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  await updateTopicLike(uid, parseInt(to_uid), parseInt(tid), isPush === 'true')
+  await updateReplyLike(uid, parseInt(to_uid), parseInt(rid), isPush === 'true')
 
-  return 'MOEMOE like topic operation successfully!'
+  return 'MOEMOE like reply successfully!'
 })

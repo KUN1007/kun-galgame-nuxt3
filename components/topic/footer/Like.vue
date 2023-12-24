@@ -26,19 +26,50 @@ const throttleCallback = () => {
   )
 }
 
-// const likeOperation = async (
-//   tid: number,
-//   rid: number,
-//   toUid: number,
-//   isPush: boolean
-// ) => {
-//   const isMasterTopic = rid === 0
-//   if (isMasterTopic) {
-//     return await useTempTopicStore().updateTopicLike(tid, toUid, isPush)
-//   } else {
-//     return await useTempReplyStore().updateReplyLike(tid, toUid, rid, isPush)
-//   }
-// }
+const likeOperation = async (
+  tid: number,
+  rid: number,
+  toUid: number,
+  isPush: boolean
+) => {
+  const isMasterTopic = rid === 0
+  if (isMasterTopic) {
+    const queryData = {
+      isPush: isPush,
+      to_uid: toUid,
+    }
+    const { data } = await useFetch(`/api/topic/${tid}/like`, {
+      method: 'PUT',
+      query: queryData,
+      watch: false,
+      onResponse({ request, response, options }) {
+        if (response.status === 233) {
+          kungalgameErrorHandler(response.statusText)
+          return
+        }
+      },
+    })
+    return data
+  } else {
+    const queryData = {
+      isPush: isPush,
+      rid: props.rid,
+      to_uid: toUid,
+    }
+    const { data } = await useFetch(`/api/topic/${tid}/reply/like`, {
+      method: 'PUT',
+      query: queryData,
+      watch: false,
+      onResponse({ request, response, options }) {
+        if (response.status === 233) {
+          kungalgameErrorHandler(response.statusText)
+          return
+        }
+      },
+    })
+    return data
+  }
+}
 
 const toggleLike = async () => {
   if (props.uid === props.toUid) {
@@ -49,24 +80,24 @@ const toggleLike = async () => {
   const { tid, rid, toUid } = props
   const isPush = !isLiked.value
 
-  // const res = await likeOperation(tid, rid, toUid, isPush)
+  const data = await likeOperation(tid, rid, toUid, isPush)
 
-  // if (res.code === 200) {
-  //   isLiked.value = isPush
-  //   likesCount.value += isPush ? 1 : -1
+  if (data.value) {
+    isLiked.value = isPush
+    likesCount.value += isPush ? 1 : -1
 
-  //   if (isPush) {
-  //     useMessage('Like successfully!', '点赞成功！', 'success')
-  //   } else {
-  //     useMessage('Unlike successfully!', '取消点赞成功！', 'success')
-  //   }
-  // } else {
-  //   if (isPush) {
-  //     useMessage('Like failed!', '点赞失败！', 'error')
-  //   } else {
-  //     useMessage('Unlike failed!', '取消点赞失败！', 'error')
-  //   }
-  // }
+    if (isPush) {
+      useMessage('Like successfully!', '点赞成功！', 'success')
+    } else {
+      useMessage('Unlike successfully!', '取消点赞成功！', 'success')
+    }
+  } else {
+    if (isPush) {
+      useMessage('Like failed!', '点赞失败！', 'error')
+    } else {
+      useMessage('Unlike failed!', '取消点赞失败！', 'error')
+    }
+  }
 }
 
 const handleClickLikeThrottled = throttle(toggleLike, 1007, throttleCallback)
@@ -79,11 +110,11 @@ const handleClickLike = () => {
 <template>
   <li>
     <span
-      class="icon"
+      class="like"
       :class="isLiked ? 'active' : ''"
       @click="handleClickLike"
     >
-      <Icon name="line-md:thumbs-up-twotone" />
+      <Icon class="icon" name="line-md:thumbs-up-twotone" />
     </span>
     {{ likesCount }}
   </li>
@@ -102,20 +133,15 @@ li {
     display: flex;
     margin-right: 3px;
   }
-
-  &:nth-child(1) span {
-    color: var(--kungalgame-red-4);
-  }
 }
 
-.icon {
+.like {
   font-size: 24px;
   color: var(--kungalgame-font-color-2);
   cursor: pointer;
 }
 
-/* Style after activation */
-.active {
+.active .icon {
   color: var(--kungalgame-blue-4);
 }
 </style>
