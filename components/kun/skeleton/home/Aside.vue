@@ -29,7 +29,7 @@ ul {
     background-image: linear-gradient(
       90deg,
       var(--kungalgame-trans-blue-2) 25%,
-      var(--kungalgame-pink-0) 37%,
+      var(--kungalgame-trans-pink-0) 37%,
       var(--kungalgame-trans-blue-2) 63%
     );
     border-radius: 3px;

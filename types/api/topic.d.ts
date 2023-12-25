@@ -3,16 +3,6 @@ export interface TopicAside {
   tid: number
 }
 
-export interface TopicAsideOtherTagRequestData {
-  tags: string[]
-  tid: number
-}
-
-export interface TopicAsideMasterRequestData {
-  uid: number
-  tid: string
-}
-
 export interface EditCreateTopicRequestData {
   title: string
   content: string

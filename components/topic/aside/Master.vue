@@ -1,29 +1,27 @@
 <script setup lang="ts">
-import type { TopicAside } from '~/types/api/topic'
-
 const props = defineProps<{
   uid: number
 }>()
 
 const route = useRoute()
-
-// const tid = route.params.tid as string
-const topicData = ref<TopicAside[]>()
+const tid = computed(() => {
+  return parseInt((route.params as { tid: string }).tid)
+})
 const isEmpty = ref(false)
 
-// const fetchTopicData = async () => {
-//   return (
-//     await useTempTopicStore().getPopularTopicsByUserUid({
-//       uid: props.uid,
-//       tid: tid,
-//     })
-//   ).data
-// }
+const { data } = await useFetch(`/api/topic/${tid.value}/popular`, {
+  method: 'GET',
+  query: { uid: props.uid },
+  watch: false,
+  onResponse({ request, response, options }) {
+    if (response.status === 233) {
+      kungalgameErrorHandler(response.statusText)
+      return
+    }
+  },
+})
 
-// onMounted(async () => {
-//   topicData.value = await fetchTopicData()
-//   isEmpty.value = !topicData.value.length
-// })
+isEmpty.value = !data.value?.length
 </script>
 
 <template>
@@ -32,9 +30,9 @@ const isEmpty = ref(false)
       {{ $t('topic.aside.master') }}
     </div>
 
-    <KunSkeletonTopicAside v-if="!topicData" />
+    <KunSkeletonTopicAside v-if="!data" />
 
-    <div class="topic" v-for="(kun, index) in topicData" :key="index">
+    <div class="topic" v-for="(kun, index) in data" :key="index">
       <RouterLink :to="`/topic/${kun.tid}`">{{ kun.title }}</RouterLink>
     </div>
 

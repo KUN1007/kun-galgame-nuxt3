@@ -7,24 +7,24 @@ const props = defineProps<{
 
 const tags = toRaw(props.tags)
 const route = useRoute()
-
-// const tid = parseInt(route.params.tid as string)
-const topicData = ref<TopicAside[]>()
+const tid = computed(() => {
+  return parseInt((route.params as { tid: string }).tid)
+})
 const isEmpty = ref(false)
 
-// const fetchTopicData = async () => {
-//   return (
-//     await useTempTopicStore().getRelatedTopicsByTags({
-//       tags: tags,
-//       tid: tid,
-//     })
-//   ).data
-// }
+const { data } = await useFetch(`/api/topic/${tid.value}/related`, {
+  method: 'GET',
+  query: { tags },
+  watch: false,
+  onResponse({ request, response, options }) {
+    if (response.status === 233) {
+      kungalgameErrorHandler(response.statusText)
+      return
+    }
+  },
+})
 
-// onMounted(async () => {
-//   topicData.value = await fetchTopicData()
-//   isEmpty.value = !topicData.value.length
-// })
+isEmpty.value = !data.value?.length
 </script>
 
 <template>
@@ -33,9 +33,9 @@ const isEmpty = ref(false)
       {{ $t('topic.aside.tags') }}
     </div>
 
-    <KunSkeletonTopicAside v-if="!topicData" />
+    <KunSkeletonTopicAside v-if="!data" />
 
-    <div class="topic" v-for="(kun, index) in topicData" :key="index">
+    <div class="topic" v-for="(kun, index) in data" :key="index">
       <RouterLink :to="`/topic/${kun.tid}`">{{ kun.title }}</RouterLink>
     </div>
 

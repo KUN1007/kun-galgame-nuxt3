@@ -22,44 +22,37 @@ const handleClickSortOrder = (sortOrder: SortOrder) => {
 </script>
 
 <template>
-  <Transition
-    enter-active-class="animate__animated animate__fadeInLeft animate__faster"
-    appear
-  >
-    <div class="aside">
-      <div class="sort">
-        <div
-          class="item"
-          :class="
-            replyRequest.sortField === item.sortField ? 'item-active' : ''
-          "
-          v-for="item in asideItem"
-          :key="item.index"
-          @click="handleSortReply(item.sortField)"
-        >
-          <span><Icon :name="item.icon" /></span>
-          <span>{{ $t(`topic.aside.${item.name}`) }}</span>
-        </div>
-
-        <div class="order">
-          <span
-            :class="
-              replyRequest.sortOrder === order.sortOrder ? 'order-active' : ''
-            "
-            v-for="order in sortItem"
-            :key="order.index"
-            @click="handleClickSortOrder(order.sortOrder)"
-          >
-            <Icon :name="order.icon" />
-          </span>
-        </div>
+  <div class="aside">
+    <div class="sort">
+      <div
+        class="item"
+        :class="replyRequest.sortField === item.sortField ? 'item-active' : ''"
+        v-for="item in asideItem"
+        :key="item.index"
+        @click="handleSortReply(item.sortField)"
+      >
+        <span><Icon :name="item.icon" /></span>
+        <span>{{ $t(`topic.aside.${item.name}`) }}</span>
       </div>
 
-      <TopicAsideOtherTag style="margin-bottom: 17px" :tags="tags" />
-      <TopicAsideMaster :uid="uid" />
-      <KunFooter />
+      <div class="order">
+        <span
+          :class="
+            replyRequest.sortOrder === order.sortOrder ? 'order-active' : ''
+          "
+          v-for="order in sortItem"
+          :key="order.index"
+          @click="handleClickSortOrder(order.sortOrder)"
+        >
+          <Icon :name="order.icon" />
+        </span>
+      </div>
     </div>
-  </Transition>
+
+    <TopicAsideOtherTag style="margin-bottom: 17px" :tags="tags" />
+    <TopicAsideMaster :uid="uid" />
+    <KunFooter />
+  </div>
 </template>
 
 <style lang="scss" scoped>

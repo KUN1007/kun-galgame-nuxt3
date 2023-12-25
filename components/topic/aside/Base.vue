@@ -20,33 +20,28 @@ const handleBackToTop = () => {
 </script>
 
 <template>
-  <Transition
-    enter-active-class="animate__animated animate__slideInUp animate__faster"
-    appear
-  >
-    <div class="item">
-      <span
-        v-for="kun in asideItem"
-        :key="kun.index"
-        @click="handleSortReply(kun.sortField)"
-      >
-        <Icon class="icon" :name="kun.icon" />
-      </span>
+  <div class="item">
+    <span
+      v-for="kun in asideItem"
+      :key="kun.index"
+      @click="handleSortReply(kun.sortField)"
+    >
+      <Icon class="icon" :name="kun.icon" />
+    </span>
 
-      <span
-        class="sort"
-        v-for="order in sortItem"
-        :key="order.index"
-        @click="handleClickSortOrder(order.sortOrder)"
-      >
-        <Icon class="icon" :name="order.icon" />
-      </span>
+    <span
+      class="sort"
+      v-for="order in sortItem"
+      :key="order.index"
+      @click="handleClickSortOrder(order.sortOrder)"
+    >
+      <Icon class="icon" :name="order.icon" />
+    </span>
 
-      <span class="top" @click="handleBackToTop">
-        <Icon class="icon" name="line-md:arrow-close-up" />
-      </span>
-    </div>
-  </Transition>
+    <span class="top" @click="handleBackToTop">
+      <Icon class="icon" name="line-md:arrow-close-up" />
+    </span>
+  </div>
 </template>
 
 <style lang="scss" scoped>
