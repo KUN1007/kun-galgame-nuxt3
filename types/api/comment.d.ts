@@ -24,8 +24,7 @@ export interface TopicDislikeCommentRequestData {
 }
 
 export interface TopicCreateCommentRequestData {
-  tid: number
-  rid: number
-  to_uid: number
+  rid: string
+  to_uid: string
   content: string
 }

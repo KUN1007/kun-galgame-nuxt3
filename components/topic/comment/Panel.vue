@@ -1,75 +1,53 @@
 <script setup lang="ts">
+import { checkCommentPublish } from '../utils/checkCommentPublish'
 import type { TopicComment } from '~/types/api/comment'
 
 const { name } = storeToRefs(useKUNGalgameUserStore())
 const { tid, rid, toUid, toUsername, content, isShowCommentPanelRid } =
   storeToRefs(useTempCommentStore())
 
-// Define parent component emits
 const emits = defineEmits<{
   getCommentEmits: [newComment: TopicComment]
 }>()
 
-// Comment content
 const commentValue = ref('')
 
-// Handle comment input
 const handleInputComment = () => {
-  // Create a debounced processing function
   const debouncedUpdateContent = debounce(() => {
     content.value = commentValue.value
   }, 300)
-
-  // Call the debounced processing function
-  // which will execute the update operation only once within the specified delay
   debouncedUpdateContent()
 }
 
-// Check if the comment is valid
-const isValidComment = () => {
-  // Warning if comment content is empty
-  if (!content.value.trim()) {
-    useMessage('Comment content cannot be empty!', '评论内容不能为空！', 'warn')
-    return false
-  }
-
-  // Warning if comment content exceeds the limit
-  if (content.value.trim().length > 1007) {
-    useMessage(
-      'The maximum length for comments should not exceed 1007 characters.',
-      '评论最大长度不可超过 1007 个字符',
-      'warn'
-    )
-    return false
-  }
-
-  return true
-}
-
-// Publish a comment
 const handlePublishComment = async () => {
-  if (isValidComment()) {
-    // Get the new comment
-    // const newComment = (
-    //   await useTempCommentStore().postNewComment(
-    //     tid.value,
-    //     rid.value,
-    //     toUid.value,
-    //     content.value
-    //   )
-    // ).data
+  const requestData = {
+    rid: rid.value,
+    to_uid: toUid.value,
+    content: content.value,
+  }
+  if (!checkCommentPublish(requestData.content)) {
+    return
+  }
 
-    // // Pass the new comment content to the parent component
-    // emits('getCommentEmits', newComment)
+  const { data } = await useFetch(`/api/topic/${tid.value}/comment`, {
+    method: 'POST',
+    body: requestData,
+    watch: false,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
 
-    // Inform the user
+  if (data.value) {
+    emits('getCommentEmits', data.value)
     useMessage('Comment published successfully!', '评论发布成功', 'success')
-
     handleCloseCommentPanel()
   }
 }
 
-// Close the comment panel
 const handleCloseCommentPanel = () => {
   isShowCommentPanelRid.value = 0
 }
@@ -92,7 +70,7 @@ const handleCloseCommentPanel = () => {
         </button>
       </div>
     </div>
-    <!-- Textarea container -->
+
     <div class="container">
       <textarea
         name="comment"
@@ -103,7 +81,6 @@ const handleCloseCommentPanel = () => {
       >
       </textarea>
 
-      <!-- Text count -->
       <div class="count">{{ commentValue.length }}</div>
     </div>
   </div>
