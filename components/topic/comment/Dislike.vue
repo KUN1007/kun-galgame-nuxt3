@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useTempCommentStore } from '~/store/temp/topic/comment'
-
 const props = defineProps<{
   tid: number
   cid: number
@@ -40,16 +38,27 @@ const dislikeComment = async () => {
     return
   }
 
-  const { tid, cid, toUid } = props
-  // const res = await useTempCommentStore().updateCommentDislike(tid, cid, toUid)
+  const queryData = {
+    cid: props.cid,
+    to_uid: props.toUid,
+  }
+  const { data } = await useFetch(`/api/topic/${props.tid}/comment/dislike`, {
+    method: 'PUT',
+    query: queryData,
+    watch: false,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
 
-  // if (res.code === 200) {
-  //   dislikesCount.value++
-  //   isDisliked.value = true
-  //   useMessage('Dislike successfully!', '点踩成功', 'success')
-  // } else {
-  //   useMessage('Dislike failed!', '点踩失败', 'error')
-  // }
+  if (data.value) {
+    dislikesCount.value++
+    isDisliked.value = true
+    useMessage('Dislike successfully!', '点踩成功', 'success')
+  }
 }
 
 const handleClickDislikeThrottled = throttle(
@@ -83,7 +92,6 @@ li {
   }
 }
 
-/* Styles after activation */
 .active .icon {
   color: var(--kungalgame-blue-4);
 }
