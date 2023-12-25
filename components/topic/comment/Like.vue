@@ -38,16 +38,27 @@ const likeComment = async () => {
     return
   }
 
-  const { tid, cid, toUid } = props
-  // const res = await useTempCommentStore().updateCommentLike(tid, cid, toUid)
+  const queryData = {
+    cid: props.cid,
+    to_uid: props.toUid,
+  }
+  const { data } = await useFetch(`/api/topic/${props.tid}/comment/like`, {
+    method: 'PUT',
+    query: queryData,
+    watch: false,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
 
-  // if (res.code === 200) {
-  //   likesCount.value++
-  //   isLiked.value = true
-  //   useMessage('Like successfully!', '点赞成功', 'success')
-  // } else {
-  //   useMessage('Like failed!', '点赞失败', 'error')
-  // }
+  if (data.value) {
+    likesCount.value++
+    isLiked.value = true
+    useMessage('Like successfully!', '点赞成功', 'success')
+  }
 }
 
 const handleClickLikeThrottled = throttle(likeComment, 1007, throttleCallback)
@@ -77,7 +88,6 @@ li {
   }
 }
 
-/* Styles after activation */
 .active .icon {
   color: var(--kungalgame-blue-4);
 }

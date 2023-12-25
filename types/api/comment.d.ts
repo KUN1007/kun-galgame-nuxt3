@@ -12,15 +12,13 @@ export interface TopicComment {
 }
 
 export interface TopicLikeCommentRequestData {
-  tid: number
-  cid: number
-  to_uid: number
+  cid: string
+  to_uid: string
 }
 
 export interface TopicDislikeCommentRequestData {
-  tid: number
-  cid: number
-  to_uid: number
+  cid: string
+  to_uid: string
 }
 
 export interface TopicCreateCommentRequestData {

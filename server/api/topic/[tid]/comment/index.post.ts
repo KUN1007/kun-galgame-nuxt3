@@ -13,6 +13,10 @@ import type {
 const readReplyData = async (event: H3Event) => {
   const { rid, to_uid, content }: TopicCreateCommentRequestData =
     await readBody(event)
+  if (!rid || !to_uid) {
+    kunError(event, 10507)
+    return
+  }
 
   const res = checkCommentPublish(content)
   if (res) {
