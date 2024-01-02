@@ -173,6 +173,7 @@ onBeforeRouteLeave(async (to, from, next) => {
   if (isReplyRewriting.value) {
     const res = await useTempMessageStore().alert('AlertInfo.edit.leave', true)
     if (res) {
+      useTempReplyStore().resetRewriteReplyData()
       resetPanelStatus()
       next()
     } else {
