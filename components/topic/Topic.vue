@@ -63,6 +63,10 @@ if (repliesData.value && repliesData.value.length < 3) {
 watch(
   () => [replyRequest.value.sortOrder, replyRequest.value.sortField],
   async () => {
+    if (repliesData.value && repliesData.value?.length < 3) {
+      isLoading.value = false
+      return
+    }
     const newReplies = await getReplies()
     repliesData.value = newReplies.data.value
   }
@@ -91,7 +95,6 @@ watch(isScrollToTop, () => {
   if (content.value) {
     content.value.scrollTo({
       top: 0,
-      behavior: 'smooth',
     })
     isScrollToTop.value = false
   }
