@@ -1,24 +1,18 @@
-<script setup lang="ts">
-definePageMeta({
-  layout: false,
-})
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <NuxtLayout name="blank">
-    <div class="root">
-      <div class="container">
-        <div class="title">{{ $t('forgot.title') }}</div>
+  <div class="root">
+    <div class="container">
+      <div class="title">{{ $t('forgot.title') }}</div>
 
-        <ForgotPassword />
+      <ForgotPassword />
 
-        <div class="nav">
-          <KunBackToPrevious />
-          <KunBackToHome />
-        </div>
+      <div class="nav">
+        <KunBackToPrevious />
+        <KunBackToHome />
       </div>
     </div>
-  </NuxtLayout>
+  </div>
 </template>
 
 <style lang="scss" scoped>

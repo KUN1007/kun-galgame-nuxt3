@@ -94,7 +94,8 @@ useSchemaOrg([
   <KunSearch />
 
   <NuxtLoadingIndicator color="var(--kungalgame-blue-4)" />
-  <NuxtLayout>
+
+  <KunLayout>
     <NuxtPage />
-  </NuxtLayout>
+  </KunLayout>
 </template>

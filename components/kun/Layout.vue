@@ -1,20 +1,19 @@
 <script setup lang="ts">
-import { useKUNGalgameSettingsStore } from '~/store/modules/settings'
-
 const { showKUNGalgameBackground, showKUNGalgameCustomBackground } =
   storeToRefs(useKUNGalgameSettingsStore())
 
 const imageURL = ref('')
+const { getCurrentBackground } = useBackgroundPicture.asyncData(
+  useNuxtApp().$pinia
+)
 
-onMounted(async () => {
-  const backgroundImageBlobData = await getImage('kun-galgame-custom-bg')
-  if (showKUNGalgameBackground.value === 'bg1007' && backgroundImageBlobData) {
-    showKUNGalgameCustomBackground.value = URL.createObjectURL(
-      backgroundImageBlobData
-    )
-  }
-  imageURL.value = await getCurrentBackground()
-})
+const backgroundImageBlobData = await getImage('kun-galgame-custom-bg')
+if (showKUNGalgameBackground.value === 'bg1007' && backgroundImageBlobData) {
+  showKUNGalgameCustomBackground.value = URL.createObjectURL(
+    backgroundImageBlobData
+  )
+}
+imageURL.value = await getCurrentBackground()
 
 watch(
   () => [showKUNGalgameBackground.value, showKUNGalgameCustomBackground.value],

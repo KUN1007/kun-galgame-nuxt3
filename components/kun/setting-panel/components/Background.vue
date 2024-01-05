@@ -2,6 +2,9 @@
 import { backgroundImages } from './backgroundImage'
 
 const { showKUNGalgameBackground } = storeToRefs(useKUNGalgameSettingsStore())
+const { restoreBackground } = useBackgroundPicture.asyncData(
+  useNuxtApp().$pinia
+)
 
 const handleChangeImage = (index: number) => {
   showKUNGalgameBackground.value = `bg${index}`

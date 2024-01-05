@@ -16,7 +16,7 @@
 
 @media (max-width: 700px) {
   .root {
-    height: 100vh;
+    height: calc(100vh - 65px);
   }
 }
 </style>
