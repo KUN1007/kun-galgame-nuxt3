@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
+import type { BalanceIncome, BalanceExpenditure } from '~/types/api/balance'
 
 const props = defineProps<{
   isIncome: boolean

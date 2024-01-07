@@ -1,4 +1,10 @@
 <script setup lang="ts">
+import type {
+  BalanceIncome,
+  BalanceExpenditure,
+  PLStatement,
+} from '~/types/api/balance'
+
 const props = defineProps<{
   isIncome: boolean
   incomeData?: BalanceIncome[]

@@ -1,12 +1,6 @@
 <script setup lang="ts">
 const { income, expenditure } = storeToRefs(useTempBalanceStore())
 
-const statement: PLStatement = reactive({
-  totalIncome: 0,
-  totalExpenditure: 0,
-  profitLoss: 0,
-})
-
 const { data: incomeData } = await useFetch(`/api/balance/income`, {
   method: 'GET',
   query: {
@@ -41,20 +35,22 @@ const { data: expenditureData } = await useFetch(`/api/balance/expenditure`, {
   },
 })
 
-const getPLStatementData = async () => {
-  const response = await useTempBalanceStore().getPLStatement()
-  return response.data
-}
-
-// onMounted(async () => {
-//   incomeData.value = await getIncomeData()
-//   expenditureData.value = await getExpenditureData()
-
-//   const PLData = await getPLStatementData()
-//   statement.totalIncome = PLData.totalIncome
-//   statement.totalExpenditure = PLData.totalExpenditure
-//   statement.profitLoss = PLData.profitLoss
-// })
+const { data: statement } = await useFetch(`/api/balance/statement`, {
+  method: 'GET',
+  query: {
+    page: expenditure.value.page,
+    limit: expenditure.value.limit,
+    sortField: expenditure.value.sortField,
+    sortOrder: expenditure.value.sortOrder,
+  },
+  watch: false,
+  onResponse({ request, response, options }) {
+    if (response.status === 233) {
+      kungalgameErrorHandler(response.statusText)
+      return
+    }
+  },
+})
 </script>
 
 <template>
@@ -77,7 +73,7 @@ const getPLStatementData = async () => {
         />
       </div>
 
-      <div class="sum">
+      <div class="sum" v-if="statement">
         <div
           class="amount-status-deficit"
           :class="statement.profitLoss >= 0 ? 'amount-status-surplus' : ''"
