@@ -6,7 +6,6 @@ interface PageName {
   pool: number
   bylaw: number
   technique: number
-  'thanks-list': number
 }
 
 export interface KUNGalgameSettingsStore {

@@ -7,13 +7,15 @@ const { getCurrentBackground } = useBackgroundPicture.asyncData(
   useNuxtApp().$pinia
 )
 
-const backgroundImageBlobData = await getImage('kun-galgame-custom-bg')
-if (showKUNGalgameBackground.value === 'bg1007' && backgroundImageBlobData) {
-  showKUNGalgameCustomBackground.value = URL.createObjectURL(
-    backgroundImageBlobData
-  )
-}
-imageURL.value = await getCurrentBackground()
+onMounted(async () => {
+  const backgroundImageBlobData = await getImage('kun-galgame-custom-bg')
+  if (showKUNGalgameBackground.value === 'bg1007' && backgroundImageBlobData) {
+    showKUNGalgameCustomBackground.value = URL.createObjectURL(
+      backgroundImageBlobData
+    )
+  }
+  imageURL.value = await getCurrentBackground()
+})
 
 watch(
   () => [showKUNGalgameBackground.value, showKUNGalgameCustomBackground.value],

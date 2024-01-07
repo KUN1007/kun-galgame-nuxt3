@@ -3,7 +3,7 @@ const { locale } = useI18n()
 
 const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 const bylawPageWidth = computed(() => {
-  return showKUNGalgamePageWidth.value.Bylaw + '%'
+  return showKUNGalgamePageWidth.value.bylaw + '%'
 })
 </script>
 

@@ -14,7 +14,6 @@ const pageNameArray = [
   'pool',
   'bylaw',
   'technique',
-  'thanks-list',
 ]
 
 const initPageWidth = () => {
