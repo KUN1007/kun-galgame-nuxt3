@@ -172,7 +172,8 @@
     "title": "All the non-moe behavior were recorded here, don't do that",
     "reason": "reason",
     "consequence": "consequence",
-    "moemoepoint": "moemoepoint"
+    "moemoepoint": "moemoepoint",
+    "empty": "No records of non-moe at the moment"
   },
   "contact":{
     "title": "Join / Contact Us"

@@ -172,7 +172,8 @@
     "title": "这里记录了迄今为止所有被处罚的记录，希望大家不要这样做",
     "reason": "原因",
     "consequence": "后果",
-    "moemoepoint": "萌萌点"
+    "moemoepoint": "萌萌点",
+    "empty": "暂无不萌记录"
   },
   "contact":{
     "title": "加入 / 联系我们"

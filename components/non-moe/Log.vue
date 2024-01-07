@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
+import type { NonMoeLog } from '~/types/api/non-moe'
 
 const props = defineProps<{
   logs: NonMoeLog[]
@@ -26,7 +27,7 @@ const logs = computed(() => props.logs)
       </div>
       <div class="result">
         <Icon class="warning" name="line-md:alert" />
-        <span>{{ $tm('nonMoe.moemoepoint') }} - {{ kun.result }}</span>
+        <span>{{ $t('nonMoe.moemoepoint') }} - {{ kun.result }}</span>
       </div>
     </div>
   </div>

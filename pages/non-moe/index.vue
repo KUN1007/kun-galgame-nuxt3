@@ -1,33 +1,40 @@
 <script setup lang="ts">
 const { locale } = useI18n()
 
-const logs = ref<NonMoeLog[]>([])
-// Calculate the CSS class for the title based on the current language
+const { page, limit, sortOrder } = useTempNonMoeStore()
+
 const langClass = computed(() => {
   return locale.value === 'en' ? 'title-en' : 'title-cn'
 })
 
-const getLogs = async () => {
-  const response = await useTempNonMoeStore().getLogs()
-  return response.data
-}
-
-onMounted(async () => {
-  logs.value = await getLogs()
+const { data: logs } = await useFetch(`/api/non-moe/logs`, {
+  method: 'GET',
+  query: { page, limit, sortOrder },
+  watch: false,
+  onResponse({ request, response, options }) {
+    if (response.status === 233) {
+      kungalgameErrorHandler(response.statusText)
+      return
+    }
+  },
 })
 </script>
 
 <template>
   <div class="root">
     <div class="container">
-      <div class="title" :class="langClass">{{ $tm('nonMoe.log') }}</div>
+      <div class="title" :class="langClass">{{ $t('nonMoe.log') }}</div>
       <div class="article">
         <div class="article-title">
-          {{ $tm('nonMoe.title') }}
+          {{ $t('nonMoe.title') }}
         </div>
 
-        <div class="content">
-          <NonMoeLog :logs="logs" />
+        <div class="content" v-if="logs">
+          <NonMoeLog v-if="logs.length" :logs="logs" />
+
+          <span class="empty" v-if="!logs.length">
+            {{ $t('nonMoe.empty') }}
+          </span>
         </div>
       </div>
     </div>
@@ -46,7 +53,6 @@ onMounted(async () => {
 
 .container {
   height: 70vh;
-  width: 80vw;
   min-height: 600px;
   max-width: 1000px;
   margin: auto;
@@ -119,6 +125,16 @@ onMounted(async () => {
   scrollbar-color: var(--kungalgame-blue-4) var(--kungalgame-blue-1);
 }
 
+.empty {
+  width: 100%;
+  height: 100%;
+  color: var(--kungalgame-blue-2);
+  font-style: oblique;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 700px) {
   .root {
     width: 95%;
@@ -145,12 +161,9 @@ onMounted(async () => {
   }
 
   .article {
+    height: 100%;
     border-left: none;
     border-top: 1px solid var(--kungalgame-blue-1);
-  }
-
-  .content {
-    height: calc(100% - 150px);
   }
 }
 </style>
