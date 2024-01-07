@@ -15,7 +15,6 @@ const props = defineProps<{
   }
 }>()
 
-const tidRef = ref(props.tid)
 const ridRef = ref(props.rid)
 const toUser = ref(props.toUser)
 const currentUserUid = useKUNGalgameUserStore().uid
@@ -228,7 +227,7 @@ const handleClickComment = (
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 10;
-  border-left: 2px solid var(--kungalgame-blue-4);
+  border-left: 3px solid var(--kungalgame-blue-4);
   padding-left: 10px;
 }
 </style>
