@@ -2,7 +2,7 @@
 const { isTopicRewriting } = storeToRefs(useTempEditStore())
 const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 const editPageWidth = computed(() => {
-  return showKUNGalgamePageWidth.value.Edit + '%'
+  return showKUNGalgamePageWidth.value.edit + '%'
 })
 
 onBeforeRouteLeave(async (to, from, next) => {

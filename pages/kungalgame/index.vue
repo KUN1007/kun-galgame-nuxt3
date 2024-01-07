@@ -3,7 +3,7 @@ const { locale } = useI18n()
 
 const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 const kungalgamePageWidth = computed(() => {
-  return showKUNGalgamePageWidth.value.KUNGalgame + '%'
+  return showKUNGalgamePageWidth.value.kungalgame + '%'
 })
 </script>
 

@@ -163,7 +163,7 @@ const isScrollAtBottom = () => {
 }
 
 const topicPageWidth = computed(() => {
-  return showKUNGalgamePageWidth.value.Topic + '%'
+  return showKUNGalgamePageWidth.value.topic + '%'
 })
 
 const resetPanelStatus = () => {

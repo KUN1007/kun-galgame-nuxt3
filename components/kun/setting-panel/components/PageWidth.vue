@@ -7,14 +7,14 @@ const routeName = computed(() => route.name as string)
 const isDisabled = ref(false)
 
 const pageNameArray = [
-  'KUN',
-  'Topic',
-  'Edit',
-  'KUNGalgame',
-  'Pool',
-  'Bylaw',
-  'Technique',
-  'ThanksList',
+  'index',
+  'topic',
+  'edit',
+  'kungalgame',
+  'pool',
+  'bylaw',
+  'technique',
+  'thanks-list',
 ]
 
 const initPageWidth = () => {
@@ -26,19 +26,16 @@ const initPageWidth = () => {
   }
 }
 
-watch(pageWidth, () => {
-  if (pageNameArray.includes(routeName.value)) {
-    showKUNGalgamePageWidth.value[routeName.value] = pageWidth.value
+watch(
+  () => pageWidth.value,
+  () => {
+    if (pageNameArray.includes(routeName.value)) {
+      showKUNGalgamePageWidth.value[routeName.value] = pageWidth.value
+    }
   }
-})
+)
 
-onMounted(() => {
-  initPageWidth()
-})
-
-onActivated(() => {
-  initPageWidth()
-})
+initPageWidth()
 </script>
 
 <template>

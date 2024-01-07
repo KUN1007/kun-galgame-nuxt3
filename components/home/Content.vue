@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 const mainPageWidth = computed(() => {
-  return showKUNGalgamePageWidth.value.KUN + '%'
+  return showKUNGalgamePageWidth.value.index + '%'
 })
 </script>
 

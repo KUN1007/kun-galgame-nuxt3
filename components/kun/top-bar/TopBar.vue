@@ -8,9 +8,6 @@ const KUNGalgameSettingsPanel = defineAsyncComponent(
 )
 const KUNGalgameUserInfo = defineAsyncComponent(() => import('./UserInfo.vue'))
 
-import { useTempHomeStore } from '~/store/temp/home'
-import { useKUNGalgameUserStore } from '~/store/modules/kungalgamer'
-
 const { isShowSearch } = storeToRefs(useTempHomeStore())
 const { name, avatarMin } = storeToRefs(useKUNGalgameUserStore())
 const route = useRoute()
