@@ -141,7 +141,7 @@ const handleChangePassword = async () => {
     border: none;
     color: var(--kungalgame-font-color-3);
     border-bottom: 1.5px solid var(--kungalgame-blue-1);
-    background-color: var(--kungalgame-white);
+    background-color: var(--kungalgame-trans-white-9-white);
     transition: all 0.2s;
 
     &:focus {
@@ -162,7 +162,7 @@ const handleChangePassword = async () => {
     padding: 7px 10px;
     border: 1px solid var(--kungalgame-blue-4);
     border-radius: 5px;
-    background-color: var(--kungalgame-white);
+    background-color: var(--kungalgame-trans-white-9);
     margin: 10px;
     color: var(--kungalgame-blue-4);
   }

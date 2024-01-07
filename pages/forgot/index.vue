@@ -27,7 +27,8 @@
   margin: auto;
   width: 300px;
   height: 400px;
-  background-color: var(--kungalgame-white);
+  background-color: var(--kungalgame-trans-white-2);
+  backdrop-filter: blur(5px);
   border-radius: 5px;
   box-shadow: var(--shadow);
 }

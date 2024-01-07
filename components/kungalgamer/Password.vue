@@ -103,8 +103,7 @@ const handleChangePassword = async () => {
   })
 
   if (data.value) {
-    // TODO:
-    // kungalgameStoreReset()
+    kungalgameStoreReset()
     router.push('/login')
     useMessage('Password change successful!', '密码更改成功', 'success')
   }

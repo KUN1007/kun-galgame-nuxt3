@@ -28,13 +28,13 @@ const { sortField, sortOrder, isScrollToTop } = storeToRefs(useTempPoolStore())
         </div>
       </div>
 
-      <div class="icon">
+      <div class="icon-item">
         <Icon name="bi:sort-down" />
       </div>
     </div>
 
     <div class="top" @click="isScrollToTop = true">
-      <div class="icon">
+      <div class="icon-item">
         <Icon name="line-md:arrow-close-up" />
       </div>
     </div>
@@ -124,14 +124,14 @@ const { sortField, sortOrder, isScrollToTop } = storeToRefs(useTempPoolStore())
   box-shadow: var(--shadow);
   cursor: pointer;
   background-color: var(--kungalgame-trans-white-2);
-  border: 1px solid var(--kungalgame-blue-1);
+  border: 2px solid var(--kungalgame-blue-4);
   color: var(--kungalgame-font-color-3);
   border-radius: 50%;
+}
 
-  .icon {
-    font-size: 22px;
-    color: var(--kungalgame-blue-4);
-  }
+.icon-item {
+  font-size: 22px;
+  color: var(--kungalgame-blue-4);
 }
 
 .top {
