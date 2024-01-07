@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
 
   const emailCount = await UserModel.countDocuments({ email })
   if (!emailCount) {
-    kunError(event, 10305)
+    kunError(event, 10304)
     return
   }
 

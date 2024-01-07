@@ -8,7 +8,8 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const { tags }: { tags: string[] } = await getQuery(event)
+  const query: { tags: string[] | string } = await getQuery(event)
+  const tags = Array.isArray(query.tags) ? query.tags : [query.tags]
   if (!tags || tags.length > 7) {
     kunError(event, 10507)
     return
