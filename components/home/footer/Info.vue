@@ -6,10 +6,7 @@
       <div class="top">
         <HomeFooterList class="list" />
 
-        <div class="bottom">
-          <HomeFooterContacts class="contacts" />
-          <KunFooter class="footer" />
-        </div>
+        <HomeFooterContacts class="contacts" />
       </div>
 
       <HomeFooterDescribe class="describe" />
@@ -37,17 +34,8 @@
   flex-grow: 2;
 }
 
-.bottom {
-  display: flex;
-}
-
-.footer {
-  margin: 0 auto;
-}
-
 @media (max-width: 1000px) {
   .list,
-  .contacts,
   .describe {
     display: none;
   }

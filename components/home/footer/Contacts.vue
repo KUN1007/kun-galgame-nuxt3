@@ -1,106 +1,67 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="kungalgame-contact">
-    <ul>
-      <li>
-        <a
-          aria-label="KUN Visual Novel Official Telegram Group"
-          href="https://t.me/kungalgame"
-          target="_blank"
-        >
-          <Icon name="line-md:telegram" />
-        </a>
-      </li>
+  <div class="contacts">
+    <a
+      aria-label="KUN Visual Novel Official Telegram Group"
+      href="https://t.me/kungalgame"
+      target="_blank"
+    >
+      <Icon name="line-md:telegram" />
+    </a>
 
-      <li>
-        <a
-          aria-label="KUN Visual Novel Official Twitter (X) Account | 鲲 Galgame 论坛官方推特账号"
-          href="https://twitter.com/kungalgame"
-          target="_blank"
-        >
-          <Icon name="line-md:twitter-x-alt" />
-        </a>
-      </li>
+    <a
+      aria-label="KUN Visual Novel Official Twitter (X) Account | 鲲 Galgame 论坛官方推特账号"
+      href="https://twitter.com/kungalgame"
+      target="_blank"
+    >
+      <Icon name="line-md:twitter-x-alt" />
+    </a>
 
-      <li>
-        <a
-          aria-label="KUN Visual Novel Open Source GitHub Repository | 鲲 Galgame 论坛开源 GitHub 仓库"
-          href="https://github.com/KUN1007/kun-galgame-vue"
-          target="_blank"
-        >
-          <Icon name="line-md:github-loop" />
-        </a>
-      </li>
+    <a
+      aria-label="KUN Visual Novel Open Source GitHub Repository | 鲲 Galgame 论坛开源 GitHub 仓库"
+      href="https://github.com/KUN1007/kun-galgame-vue"
+      target="_blank"
+    >
+      <Icon name="line-md:github-loop" />
+    </a>
 
-      <li>
-        <a
-          aria-label="KUN Visual Novel Open Source GitHub Repository | 鲲 Galgame 论坛官方 Discord 群组"
-          href="https://discord.com/invite/5F4FS2cXhX"
-          target="_blank"
-        >
-          <Icon name="line-md:discord" />
-        </a>
-      </li>
+    <a
+      aria-label="KUN Visual Novel Open Source GitHub Repository | 鲲 Galgame 论坛官方 Discord 群组"
+      href="https://discord.com/invite/5F4FS2cXhX"
+      target="_blank"
+    >
+      <Icon name="line-md:discord" />
+    </a>
 
-      <li>
-        <a
-          aria-label="KUN Visual Novel Official Youtube Channel | 鲲 Galgame 官方 Youtube 频道"
-          href="https://youtube.com/@kungalgame"
-          target="_blank"
-        >
-          <Icon name="line-md:youtube" />
-        </a>
-      </li>
+    <a
+      aria-label="KUN Visual Novel Official Youtube Channel | 鲲 Galgame 官方 Youtube 频道"
+      href="https://youtube.com/@kungalgame"
+      target="_blank"
+    >
+      <Icon name="line-md:youtube" />
+    </a>
 
-      <li>
-        <a
-          aria-label="KUN Visual Novel Official Bilibili Account | 鲲 Galgame 官方 Bilibili"
-          href="https://space.bilibili.com/1748455574"
-          target="_blank"
-        >
-          <Icon name="ri:bilibili-line" />
-        </a>
-      </li>
-    </ul>
+    <a
+      aria-label="KUN Visual Novel Official Bilibili Account | 鲲 Galgame 官方 Bilibili"
+      href="https://space.bilibili.com/1748455574"
+      target="_blank"
+    >
+      <Icon name="ri:bilibili-line" />
+    </a>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.kungalgame-contact {
-  width: 160px;
+.contacts {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  color: var(--kungalgame-font-color-2);
-  font-size: small;
+  flex-grow: 1;
 
-  h2 {
-    margin-right: 20px;
-    font-size: medium;
-  }
-
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-
-    li {
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      a {
-        font-size: 17px;
-        color: var(--kungalgame-font-color-2);
-      }
-    }
+  a {
+    font-size: 17px;
+    color: var(--kungalgame-font-color-2);
   }
 }
 </style>
