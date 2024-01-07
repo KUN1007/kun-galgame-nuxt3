@@ -1,12 +1,12 @@
-import IncomeModel from '~/server/models/income'
+import ExpenditureModel from '~/server/models/expenditure'
 import type {
   SortField,
   SortOrder,
-  BalanceIncomeRequestData,
-  BalanceIncome,
+  BalanceExpenditureRequestData,
+  BalanceExpenditure,
 } from '~/types/api/balance'
 
-const getIncomes = async (
+const getExpenditures = async (
   page: number,
   limit: number,
   sortField: SortField,
@@ -18,31 +18,33 @@ const getIncomes = async (
     [sortField]: sortOrder === 'asc' ? 'asc' : 'desc',
   }
 
-  const incomeDetails = await IncomeModel.find()
+  const expenditureModelDetails = await ExpenditureModel.find()
     .sort(sortOptions)
     .skip(skip)
     .limit(limit)
     .lean()
 
-  const responseData: BalanceIncome[] = incomeDetails.map((income) => ({
-    iid: income.iid,
-    reason: income.reason,
-    time: income.time,
-    amount: income.amount,
-  }))
+  const responseData: BalanceExpenditure[] = expenditureModelDetails.map(
+    (expenditure) => ({
+      eid: expenditure.eid,
+      reason: expenditure.reason,
+      time: expenditure.time,
+      amount: expenditure.amount,
+    })
+  )
 
   return responseData
 }
 
 export default defineEventHandler(async (event) => {
-  const { page, limit, sortField, sortOrder }: BalanceIncomeRequestData =
+  const { page, limit, sortField, sortOrder }: BalanceExpenditureRequestData =
     await getQuery(event)
   if (!page || !limit || !sortField || !sortOrder) {
     kunError(event, 10507)
     return
   }
 
-  const topics = await getIncomes(
+  const topics = await getExpenditures(
     parseInt(page),
     parseInt(limit),
     sortField as SortField,

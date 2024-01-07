@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const { income, expenditure } = storeToRefs(useTempBalanceStore())
 
-const expenditureData = ref<BalanceExpenditure[]>([])
 const statement: PLStatement = reactive({
   totalIncome: 0,
   totalExpenditure: 0,
@@ -25,10 +24,22 @@ const { data: incomeData } = await useFetch(`/api/balance/income`, {
   },
 })
 
-const getExpenditureData = async () => {
-  const response = await useTempBalanceStore().getExpenditure()
-  return response.data
-}
+const { data: expenditureData } = await useFetch(`/api/balance/expenditure`, {
+  method: 'GET',
+  query: {
+    page: expenditure.value.page,
+    limit: expenditure.value.limit,
+    sortField: expenditure.value.sortField,
+    sortOrder: expenditure.value.sortOrder,
+  },
+  watch: false,
+  onResponse({ request, response, options }) {
+    if (response.status === 233) {
+      kungalgameErrorHandler(response.statusText)
+      return
+    }
+  },
+})
 
 const getPLStatementData = async () => {
   const response = await useTempBalanceStore().getPLStatement()
@@ -53,11 +64,13 @@ const getPLStatementData = async () => {
 
       <div class="content">
         <BalanceForm
+          v-if="incomeData"
           :isIncome="true"
           :income-data="incomeData"
           :statement="statement"
         />
         <BalanceForm
+          v-if="expenditureData"
           :isIncome="false"
           :expenditure-data="expenditureData"
           :statement="statement"
