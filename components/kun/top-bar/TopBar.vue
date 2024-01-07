@@ -75,7 +75,7 @@ watch(
         <Icon name="uiw:setting-o" />
       </span>
 
-      <div class="avatar">
+      <div class="avatar" v-if="name">
         <NuxtImg
           v-if="avatarMin"
           @click="showKUNGalgameUserPanel = true"
@@ -85,6 +85,10 @@ watch(
         <span @click="showKUNGalgameUserPanel = true" v-if="!avatarMin">
           {{ name }}
         </span>
+      </div>
+
+      <div class="login" v-if="!name">
+        <NuxtLink to="/login">{{ $t('login.login.loginTitle') }}</NuxtLink>
       </div>
 
       <KUNGalgameUserInfo
@@ -275,6 +279,12 @@ $navNumber: v-bind(navItemNum);
     border-radius: 50%;
     position: relative;
   }
+}
+
+.login {
+  margin-left: 30px;
+  font-weight: bold;
+  white-space: nowrap;
 }
 
 .settings-panel {

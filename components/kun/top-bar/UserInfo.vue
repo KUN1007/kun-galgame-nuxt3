@@ -18,6 +18,7 @@ const handlePanelBlur = async () => {
 const logOut = async () => {
   const res = await useTempMessageStore().alert('AlertInfo.edit.logout', true)
   if (res) {
+    kungalgameStoreReset()
     router.push('/login')
     useMessage('Logout successfully!', '登出成功', 'success')
   }
