@@ -47,16 +47,16 @@ const handleClickSortOrder = () => {
 
 <template>
   <div class="topic">
-    <div class="title">{{ $tm('ranking.topic') }}</div>
+    <div class="title">{{ $t('ranking.topic') }}</div>
     <div class="nav">
       <div class="order" @click="handleClickSortOrder">
         <Transition name="order" mode="out-in">
           <div v-if="isAscending">
-            <span>{{ $tm('ranking.asc') }}</span>
+            <span>{{ $t('ranking.asc') }}</span>
             <Icon class="icon" name="line-md:arrow-small-up" />
           </div>
           <div v-else-if="!isAscending">
-            <span>{{ $tm('ranking.desc') }}</span>
+            <span>{{ $t('ranking.desc') }}</span>
             <Icon class="icon" name="line-md:arrow-small-down" />
           </div>
         </Transition>
@@ -64,7 +64,7 @@ const handleClickSortOrder = () => {
 
       <div class="sort">
         <Icon class="icon" :name="topicIconMap[topic.sortField]" />
-        <span>{{ $tm('ranking.filter') }}</span>
+        <span>{{ $t('ranking.filter') }}</span>
         <div class="submenu">
           <div
             class="item"
@@ -73,7 +73,7 @@ const handleClickSortOrder = () => {
             @click="topic.sortField = kun.sortField"
           >
             <span><Icon class="icon" :name="kun.icon" /></span>
-            <span>{{ $tm(`ranking.${kun.name}`) }}</span>
+            <span>{{ $t(`ranking.${kun.name}`) }}</span>
           </div>
         </div>
       </div>

@@ -1,15 +1,15 @@
-import TopicModel from '~/server/models/topic'
+import UserModel from '~/server/models/user'
 import type {
-  TopicSortFieldRanking,
+  UserSortFieldRanking,
   SortOrder,
-  RankingGetTopicsRequestData,
-  RankingTopics,
+  RankingGetUserRequestData,
+  RankingUsers,
 } from '~/types/api/ranking'
 
-const getTopicRanking = async (
+const getUserRanking = async (
   page: number,
   limit: number,
-  sortField: TopicSortFieldRanking,
+  sortField: UserSortFieldRanking,
   sortOrder: SortOrder
 ) => {
   const skip = (page - 1) * limit
@@ -18,23 +18,24 @@ const getTopicRanking = async (
     [sortField]: sortOrder === 'asc' ? 'asc' : 'desc',
   }
 
-  const topics = await TopicModel.find()
+  const users = await UserModel.find()
     .sort(sortOptions)
     .skip(skip)
     .limit(limit)
     .lean()
 
-  const responseData: RankingTopics[] = topics.map((topic) => ({
-    tid: topic.tid,
-    title: topic.title,
-    field: topic[sortField],
+  const responseData: RankingUsers[] = users.map((user) => ({
+    uid: user.uid,
+    name: user.name,
+    avatar: user.avatar,
+    field: user[sortField],
   }))
 
   return responseData
 }
 
 export default defineEventHandler(async (event) => {
-  const { page, limit, sortField, sortOrder }: RankingGetTopicsRequestData =
+  const { page, limit, sortField, sortOrder }: RankingGetUserRequestData =
     await getQuery(event)
   if (!page || !limit || !sortField || !sortOrder) {
     kunError(event, 10507)
@@ -45,7 +46,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const topics = await getTopicRanking(
+  const topics = await getUserRanking(
     parseInt(page),
     parseInt(limit),
     sortField,

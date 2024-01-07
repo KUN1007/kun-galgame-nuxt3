@@ -40,5 +40,5 @@ export interface RankingUsers {
   uid: number
   name: string
   avatar: string
-  field: string
+  field: number
 }

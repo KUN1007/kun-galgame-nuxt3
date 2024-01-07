@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
-import { Icon } from '@iconify/vue'
-import KUNGalgamer from './KUNGalgamer.vue'
-
-import { useTempRankingStore } from '@/store/temp/ranking'
-import { storeToRefs } from 'pinia'
-
-import type { RankingUsers } from '@/api'
 import { userSortItem, userIconMap } from './navSortItem'
 
 const { user } = storeToRefs(useTempRankingStore())
-const users = ref<RankingUsers[]>([])
-// Ascending or descending order
 const isAscending = ref(false)
 
-// Get users
 const getUsers = async () => {
-  const responseData = await useTempRankingStore().getUsers()
-  return responseData.data
+  const data = await useFetch(`/api/ranking/user`, {
+    method: 'GET',
+    query: {
+      page: user.value.page,
+      limit: user.value.limit,
+      sortField: user.value.sortField,
+      sortOrder: user.value.sortOrder,
+    },
+    watch: false,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
+  return data
 }
 
-// Listen for new users when user data changes
+const { data: users } = await getUsers()
+
 watch(
   () => user,
   async () => {
-    users.value = await getUsers()
+    const newUsers = await getUsers()
+    users.value = newUsers.data.value
   },
   { deep: true }
 )
 
-// Fetch users when the component is mounted
-onMounted(async () => {
-  users.value = await getUsers()
-})
-
-// Toggle the sorting order
 const handleClickSortOrder = () => {
   isAscending.value = !isAscending.value
   if (isAscending.value) {
@@ -47,25 +47,25 @@ const handleClickSortOrder = () => {
 
 <template>
   <div class="user">
-    <div class="title">{{ $tm('ranking.user') }}</div>
+    <div class="title">{{ $t('ranking.user') }}</div>
     <div class="nav">
       <div class="order" @click="handleClickSortOrder">
         <Transition name="order" mode="out-in">
           <div v-if="isAscending">
-            <span>{{ $tm('ranking.asc') }}</span>
-            <Icon class="icon" icon="line-md:arrow-small-up" />
+            <span>{{ $t('ranking.asc') }}</span>
+            <Icon class="icon" name="line-md:arrow-small-up" />
           </div>
 
           <div v-else-if="!isAscending">
-            <span>{{ $tm('ranking.desc') }}</span>
-            <Icon class="icon" icon="line-md:arrow-small-down" />
+            <span>{{ $t('ranking.desc') }}</span>
+            <Icon class="icon" name="line-md:arrow-small-down" />
           </div>
         </Transition>
       </div>
 
       <div class="sort">
-        <Icon class="icon" :icon="userIconMap[user.sortField]" />
-        <span>{{ $tm('ranking.filter') }}</span>
+        <Icon class="icon" :name="userIconMap[user.sortField]" />
+        <span>{{ $t('ranking.filter') }}</span>
         <div class="submenu">
           <div
             class="item"
@@ -73,15 +73,15 @@ const handleClickSortOrder = () => {
             :key="kun.index"
             @click="user.sortField = kun.sortField"
           >
-            <span><Icon class="icon" :icon="kun.icon" /></span>
-            <span>{{ $tm(`ranking.${kun.name}`) }}</span>
+            <span><Icon class="icon" :name="kun.icon" /></span>
+            <span>{{ $t(`ranking.${kun.name}`) }}</span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="container">
-      <KUNGalgamer :field="user.sortField" :users="users" />
+    <div class="container" v-if="users">
+      <RankingKUNGalgamer :field="user.sortField" :users="users" />
     </div>
   </div>
 </template>

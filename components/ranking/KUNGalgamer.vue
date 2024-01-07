@@ -1,20 +1,13 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Icon } from '@iconify/vue'
 import { userIconMap } from './navSortItem'
-import type { RankingUsers } from '@/api'
+import type { UserSortFieldRanking, RankingUsers } from '~/types/api/ranking'
 
 const props = defineProps<{
-  field: string
+  field: UserSortFieldRanking
   users: RankingUsers[]
 }>()
 
 const users = computed(() => props.users)
-
-// Convert the incoming data to numbers
-const parseTopicNumber = (field: string | string[]) => {
-  return Array.isArray(field) ? field.length : Math.ceil(parseInt(field))
-}
 </script>
 
 <template>
@@ -23,7 +16,6 @@ const parseTopicNumber = (field: string | string[]) => {
       <RouterLink :to="`/kungalgamer/${user.uid}/info`">
         <div class="info">
           <span class="avatar">
-            <!-- Using a compressed 100px image -->
             <img
               v-if="user.avatar"
               :src="user.avatar.replace(/\.webp$/, '-100.webp')"
@@ -33,10 +25,9 @@ const parseTopicNumber = (field: string | string[]) => {
           <span class="name">{{ user.name }}</span>
         </div>
 
-        <!-- User's other information -->
         <div class="detail">
-          <Icon :icon="userIconMap[props.field]" />
-          <span>{{ parseTopicNumber(user.field) }}</span>
+          <Icon :name="userIconMap[props.field]" />
+          <span>{{ Math.ceil(user.field) }}</span>
         </div>
       </RouterLink>
     </div>
