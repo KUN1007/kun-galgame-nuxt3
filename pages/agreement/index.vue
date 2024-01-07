@@ -78,6 +78,8 @@ const { locale } = useI18n()
   margin: auto;
   position: relative;
   border-radius: 7px;
+  background-color: var(--kungalgame-trans-white-2);
+  backdrop-filter: blur(5px);
   box-shadow: var(--kungalgame-shadow-0);
   display: flex;
   flex-direction: column;

@@ -95,7 +95,8 @@ const { locale } = useI18n()
   max-width: 500px;
   margin: auto;
   position: relative;
-  background-color: var(--kungalgame-trans-blue-0);
+  background-color: var(--kungalgame-trans-white-2);
+  backdrop-filter: blur(5px);
   border-radius: 7px;
   box-shadow: var(--kungalgame-shadow-0);
   display: flex;

@@ -412,8 +412,8 @@ const { locale } = useI18n()
   flex-direction: column;
   align-items: center;
   color: var(--kungalgame-font-color-3);
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(17px);
+  background-color: var(--kungalgame-trans-white-2);
+  backdrop-filter: blur(5px);
   padding: 20px;
   box-shadow: var(--shadow);
 }
