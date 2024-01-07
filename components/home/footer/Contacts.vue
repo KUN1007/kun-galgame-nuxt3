@@ -35,11 +35,21 @@
 
       <li>
         <a
-          aria-label="KUN Visual Novel Official QQ Group | 鲲 Galgame 官方 QQ 群"
-          href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=hlXYbLM8MqOm9WzE22ZodNiQJ3nc1Bu2&authKey=7xfTYC1atV5loXyWNv9VOTOaf5ZzR9BdCFcMNJWdmyukck8%2FDLSF3%2FrHgyiY48pT&noverify=0&group_code=726477957"
+          aria-label="KUN Visual Novel Open Source GitHub Repository | 鲲 Galgame 论坛官方 Discord 群组"
+          href="https://discord.com/invite/5F4FS2cXhX"
           target="_blank"
         >
-          <Icon name="bi:tencent-qq" />
+          <Icon name="line-md:discord" />
+        </a>
+      </li>
+
+      <li>
+        <a
+          aria-label="KUN Visual Novel Official Youtube Channel | 鲲 Galgame 官方 Youtube 频道"
+          href="https://youtube.com/@kungalgame"
+          target="_blank"
+        >
+          <Icon name="line-md:youtube" />
         </a>
       </li>
 
