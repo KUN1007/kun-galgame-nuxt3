@@ -13,6 +13,7 @@ import { useKUNGalgameUserStore } from '~/store/modules/kungalgamer'
 
 const { isShowSearch } = storeToRefs(useTempHomeStore())
 const { name, avatarMin } = storeToRefs(useKUNGalgameUserStore())
+const route = useRoute()
 
 const showKUNGalgameHamburger = ref(false)
 const showKUNGalgamePanel = ref(false)
@@ -20,6 +21,14 @@ const showKUNGalgameUserPanel = ref(false)
 
 const navItemNum = topBarItem.length
 const navItemLength = `${navItemNum}00px`
+
+watch(
+  () => route.name,
+  () => {
+    showKUNGalgamePanel.value = false
+    showKUNGalgameHamburger.value = false
+  }
+)
 </script>
 
 <template>
