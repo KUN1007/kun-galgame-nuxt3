@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { getUpdateLogApi } from '@/api/update-log/index'
-import { UpdateLog } from '@/api'
-import { ref, onBeforeMount } from 'vue'
-
-// Define reactive topic data in the component
-const topics = ref<UpdateLog[]>([])
-
-// Call fetchTopics to get topic data when the component is mounted
-onBeforeMount(async () => {
-  topics.value = await getUpdateLogApi()
+const { data: updateLogs } = await useFetch(`/api/update/history`, {
+  method: 'GET',
+  query: { page: 0, limit: 0 },
+  watch: false,
+  onResponse({ request, response, options }) {
+    if (response.status === 233) {
+      kungalgameErrorHandler(response.statusText)
+      return
+    }
+  },
 })
 </script>
 
 <template>
   <div class="article-history">
-    <ul class="history-list" v-if="topics.length">
-      <li v-for="kun in topics" :key="kun.upid">
+    <ul class="history-list" v-if="updateLogs && updateLogs.length">
+      <li v-for="kun in updateLogs" :key="kun.upid">
         <div>
           <p>{{ kun.description }}</p>
         </div>
-        <!-- update time and version -->
+
         <div class="time">
           <span>{{ kun.time }} - Version {{ kun.version }}</span>
         </div>
@@ -53,7 +53,7 @@ onBeforeMount(async () => {
   }
 
   scrollbar-width: thin;
-  scrollbar-color: var(--kungalgame-blue-4) var(--kungalgame-blue-1); /* Firefox 64+ */
+  scrollbar-color: var(--kungalgame-blue-4) var(--kungalgame-blue-1);
 }
 
 li {
@@ -73,7 +73,7 @@ p {
 
 .time {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   font-size: 13px;
   margin-top: 7px;
   margin-right: 10px;
