@@ -4,7 +4,7 @@ const isShowLanguage = ref(false)
 const { locale, setLocale } = useI18n()
 
 const handleClickShowLanguage = async () => {
-  isShowLanguage.value = !isShowLanguage.value
+  isShowLanguage.value = true
   await new Promise((resolve) => {
     setTimeout(resolve, 107)
   })
