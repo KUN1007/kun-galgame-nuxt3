@@ -1,40 +1,40 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
-import { Icon } from '@iconify/vue'
-import Topic from './Topic.vue'
-
-import { useTempRankingStore } from '@/store/temp/ranking'
-import { storeToRefs } from 'pinia'
-
-import type { RankingTopics } from '@/api'
 import { topicSortItem, topicIconMap } from './navSortItem'
 
 const { topic } = storeToRefs(useTempRankingStore())
-const topics = ref<RankingTopics[]>([])
-// Ascending or descending order
 const isAscending = ref(false)
 
-// Get topics
 const getTopics = async () => {
-  const responseData = await useTempRankingStore().getTopics()
-  return responseData.data
+  const data = await useFetch(`/api/ranking/topic`, {
+    method: 'GET',
+    query: {
+      page: topic.value.page,
+      limit: topic.value.limit,
+      sortField: topic.value.sortField,
+      sortOrder: topic.value.sortOrder,
+    },
+    watch: false,
+    onResponse({ request, response, options }) {
+      if (response.status === 233) {
+        kungalgameErrorHandler(response.statusText)
+        return
+      }
+    },
+  })
+  return data
 }
 
-// Watch for new topics when topic data changes
+const { data: topics } = await getTopics()
+
 watch(
-  () => topic,
+  () => topic.value,
   async () => {
-    topics.value = await getTopics()
+    const newTopics = await getTopics()
+    topics.value = newTopics.data.value
   },
   { deep: true }
 )
 
-// Fetch topics when the component is mounted
-onMounted(async () => {
-  topics.value = await getTopics()
-})
-
-// Toggle the sorting order
 const handleClickSortOrder = () => {
   isAscending.value = !isAscending.value
   if (isAscending.value) {
@@ -53,17 +53,17 @@ const handleClickSortOrder = () => {
         <Transition name="order" mode="out-in">
           <div v-if="isAscending">
             <span>{{ $tm('ranking.asc') }}</span>
-            <Icon class="icon" icon="line-md:arrow-small-up" />
+            <Icon class="icon" name="line-md:arrow-small-up" />
           </div>
           <div v-else-if="!isAscending">
             <span>{{ $tm('ranking.desc') }}</span>
-            <Icon class="icon" icon="line-md:arrow-small-down" />
+            <Icon class="icon" name="line-md:arrow-small-down" />
           </div>
         </Transition>
       </div>
 
       <div class="sort">
-        <Icon class="icon" :icon="topicIconMap[topic.sortField]" />
+        <Icon class="icon" :name="topicIconMap[topic.sortField]" />
         <span>{{ $tm('ranking.filter') }}</span>
         <div class="submenu">
           <div
@@ -72,15 +72,15 @@ const handleClickSortOrder = () => {
             :key="kun.index"
             @click="topic.sortField = kun.sortField"
           >
-            <span><Icon class="icon" :icon="kun.icon" /></span>
+            <span><Icon class="icon" :name="kun.icon" /></span>
             <span>{{ $tm(`ranking.${kun.name}`) }}</span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="container">
-      <Topic :field="topic.sortField" :topics="topics" />
+    <div class="container" v-if="topics">
+      <RankingTopic :field="topic.sortField" :topics="topics" />
     </div>
   </div>
 </template>

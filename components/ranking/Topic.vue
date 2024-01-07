@@ -1,20 +1,13 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Icon } from '@iconify/vue'
 import { topicIconMap } from './navSortItem'
-import type { RankingTopics } from '@/api'
+import type { TopicSortFieldRanking, RankingTopics } from '~/types/api/ranking'
 
 const props = defineProps<{
-  field: string
+  field: TopicSortFieldRanking
   topics: RankingTopics[]
 }>()
 
 const topics = computed(() => props.topics)
-
-// Convert the incoming data to numbers
-const parseTopicNumber = (field: string | string[]) => {
-  return Array.isArray(field) ? field.length : Math.ceil(parseInt(field))
-}
 </script>
 
 <template>
@@ -26,8 +19,8 @@ const parseTopicNumber = (field: string | string[]) => {
         </div>
 
         <div class="detail">
-          <Icon :icon="topicIconMap[props.field]" />
-          <span>{{ parseTopicNumber(topic.field) }}</span>
+          <Icon :name="topicIconMap[props.field]" />
+          <span>{{ Math.ceil(topic.field) }}</span>
         </div>
       </RouterLink>
     </div>
