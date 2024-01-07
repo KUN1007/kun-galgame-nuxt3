@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const incomeData = ref<BalanceIncome[]>([])
+const { income, expenditure } = storeToRefs(useTempBalanceStore())
+
 const expenditureData = ref<BalanceExpenditure[]>([])
 const statement: PLStatement = reactive({
   totalIncome: 0,
@@ -7,10 +8,22 @@ const statement: PLStatement = reactive({
   profitLoss: 0,
 })
 
-const getIncomeData = async () => {
-  const response = await useTempBalanceStore().getIncome()
-  return response.data
-}
+const { data: incomeData } = await useFetch(`/api/balance/income`, {
+  method: 'GET',
+  query: {
+    page: income.value.page,
+    limit: income.value.limit,
+    sortField: income.value.sortField,
+    sortOrder: income.value.sortOrder,
+  },
+  watch: false,
+  onResponse({ request, response, options }) {
+    if (response.status === 233) {
+      kungalgameErrorHandler(response.statusText)
+      return
+    }
+  },
+})
 
 const getExpenditureData = async () => {
   const response = await useTempBalanceStore().getExpenditure()
@@ -22,15 +35,15 @@ const getPLStatementData = async () => {
   return response.data
 }
 
-onMounted(async () => {
-  incomeData.value = await getIncomeData()
-  expenditureData.value = await getExpenditureData()
+// onMounted(async () => {
+//   incomeData.value = await getIncomeData()
+//   expenditureData.value = await getExpenditureData()
 
-  const PLData = await getPLStatementData()
-  statement.totalIncome = PLData.totalIncome
-  statement.totalExpenditure = PLData.totalExpenditure
-  statement.profitLoss = PLData.profitLoss
-})
+//   const PLData = await getPLStatementData()
+//   statement.totalIncome = PLData.totalIncome
+//   statement.totalExpenditure = PLData.totalExpenditure
+//   statement.profitLoss = PLData.profitLoss
+// })
 </script>
 
 <template>

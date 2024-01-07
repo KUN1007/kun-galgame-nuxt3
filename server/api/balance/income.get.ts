@@ -1,15 +1,14 @@
-import TopicModel from '~/server/models/topic'
+import IncomeModel from '~/server/models/income'
 import type {
+  SortField,
   SortOrder,
-  SortFieldPool,
-  PoolTopicsRequestData,
-  PoolTopic,
-} from '~/types/api/pool'
+  BalanceIncomeRequestData,
+} from '~/types/api/balance'
 
-const getPoolTopics = async (
+const getIncomes = async (
   page: number,
   limit: number,
-  sortField: SortFieldPool,
+  sortField: SortField,
   sortOrder: SortOrder
 ) => {
   const skip = (page - 1) * limit
@@ -18,26 +17,24 @@ const getPoolTopics = async (
     [sortField]: sortOrder === 'asc' ? 'asc' : 'desc',
   }
 
-  const topics = await TopicModel.find()
+  const incomeDetails = await IncomeModel.find()
     .sort(sortOptions)
     .skip(skip)
     .limit(limit)
     .lean()
 
-  const data: PoolTopic[] = topics.map((topic) => ({
-    tid: topic.tid,
-    title: topic.title,
-    views: topic.views,
-    likesCount: topic.likes_count,
-    time: topic.time,
-    content: topic.content.slice(0, 233),
+  const responseData = incomeDetails.map((income) => ({
+    iid: income.iid,
+    reason: income.reason,
+    time: income.time,
+    amount: income.amount,
   }))
 
-  return data
+  return responseData
 }
 
 export default defineEventHandler(async (event) => {
-  const { page, limit, sortField, sortOrder }: PoolTopicsRequestData =
+  const { page, limit, sortField, sortOrder }: BalanceIncomeRequestData =
     await getQuery(event)
   if (!page || !limit || !sortField || !sortOrder) {
     kunError(event, 10507)
@@ -48,10 +45,10 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const topics = await getPoolTopics(
+  const topics = await getIncomes(
     parseInt(page),
     parseInt(limit),
-    sortField as SortFieldPool,
+    sortField as SortField,
     sortOrder as SortOrder
   )
 
