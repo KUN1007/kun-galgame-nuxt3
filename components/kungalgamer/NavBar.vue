@@ -8,9 +8,13 @@ const props = defineProps<{
 }>()
 
 const route = useRoute()
-const currentPageUid = ref(0)
+const currentPageUid = computed(() => props.uid)
 
 const currentPageUserRoles = computed(() => {
+  if (!uid.value) {
+    return 1
+  }
+
   if (props.uid === uid.value) {
     return 4
   } else {
@@ -26,14 +30,6 @@ const activeClass = (currentPageUid: number, routeName: string) => {
     ? 'active'
     : ''
 }
-
-watch(
-  () => props.uid,
-  () => {
-    currentPageUid.value = props.uid
-  },
-  { immediate: true }
-)
 </script>
 
 <template>
