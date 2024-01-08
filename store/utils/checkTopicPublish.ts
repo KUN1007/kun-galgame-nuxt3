@@ -1,30 +1,28 @@
-// Type guard to determine if EditUpdateTopicRequestData contains tid
+import type {
+  EditCreateTopicRequestData,
+  EditUpdateTopicRequestData,
+} from '~/types/api/topic'
+
 const isEditUpdateTopicData = (data: any): data is EditUpdateTopicRequestData =>
   typeof data.tid !== 'undefined'
 
-// Check if user input is valid when publishing
 export const checkTopicPublish = (
   textCount: number,
   topicData: EditCreateTopicRequestData | EditUpdateTopicRequestData
 ): boolean => {
-  // Check tid
   if (isEditUpdateTopicData(topicData)) {
-    // Topic ID should not be zero
     if (!topicData.tid) {
       useMessage('Failed to resolve topic', '未能解析话题 ID', 'error')
       return false
     }
   }
 
-  // Check title
   if (!topicData.title.trim()) {
-    // If the title is empty, show a warning
     useMessage('Title cannot be empty!', '标题不可为空！', 'warn')
     return false
   }
 
   if (topicData.title.trim().length > 40) {
-    // If the title is empty, show a warning
     useMessage(
       'Title maximum length is 40 characters!',
       '标题最大长度为 40 个字符！',
@@ -33,9 +31,7 @@ export const checkTopicPublish = (
     return false
   }
 
-  // Check content character count
   if (!textCount) {
-    // If the content is empty, show a warning
     useMessage('Content cannot be empty!', '内容不可为空！', 'warn')
     return false
   }
@@ -49,7 +45,6 @@ export const checkTopicPublish = (
     return false
   }
 
-  // Check tags
   if (!topicData.tags.length) {
     useMessage('Please use at least one tag!', '请至少使用一个标签！', 'warn')
     return false
@@ -71,7 +66,6 @@ export const checkTopicPublish = (
     }
   }
 
-  // Check category
   if (!topicData.category.length) {
     useMessage(
       'Please select at least one category!',
@@ -90,6 +84,5 @@ export const checkTopicPublish = (
     return false
   }
 
-  // If all checks pass, return true
   return true
 }
