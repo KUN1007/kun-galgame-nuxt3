@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  middleware: 'auth',
+})
+
 const { isTopicRewriting } = storeToRefs(useTempEditStore())
 const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 const editPageWidth = computed(() => {

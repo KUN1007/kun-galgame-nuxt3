@@ -18,6 +18,13 @@
       />
     </span>
 
+    <span class="system" v-show="$colorMode.preference === 'system'">
+      <Icon
+        name="line-md:light-dark-loop"
+        @click="$colorMode.preference = 'light'"
+      />
+    </span>
+
     <span class="home">
       <NuxtLink to="/">
         <Icon class="icon" name="line-md:home-md-twotone" />
@@ -44,6 +51,10 @@
 
   .dark {
     color: var(--kungalgame-blue-4);
+  }
+
+  .system {
+    color: var(--kungalgame-purple-4);
   }
 
   .home {
