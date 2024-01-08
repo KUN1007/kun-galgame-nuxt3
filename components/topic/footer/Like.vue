@@ -7,6 +7,7 @@ const props = defineProps<{
   toUid: number
 }>()
 
+const { moemoeAccessToken } = useKUNGalgameUserStore()
 const isLiked = ref(props.likes.includes(props.uid))
 const likesCount = ref(props.likes.length)
 
@@ -97,6 +98,10 @@ const toggleLike = async () => {
 const handleClickLikeThrottled = throttle(toggleLike, 1007, throttleCallback)
 
 const handleClickLike = () => {
+  if (!moemoeAccessToken) {
+    useMessage('You need to login to like', '您需要登录以点赞', 'warn', 5000)
+    return
+  }
   handleClickLikeThrottled()
 }
 </script>

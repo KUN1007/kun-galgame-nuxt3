@@ -56,6 +56,10 @@ const handleClickComment = (
   uid: number,
   name: string
 ) => {
+  if (!currentUserUid) {
+    useMessage('You need to login to comment', '您需要登录以评论', 'warn', 5000)
+    return
+  }
   tid.value = topicId
   rid.value = replyId
   toUid.value = uid

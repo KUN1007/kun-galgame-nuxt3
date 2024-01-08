@@ -8,6 +8,7 @@ const props = defineProps<{
   dislikes: number[]
 }>()
 
+const { moemoeAccessToken } = useKUNGalgameUserStore()
 const isDisliked = ref(props.dislikes.includes(props.uid))
 const dislikesCount = ref(props.dislikes.length)
 
@@ -68,6 +69,10 @@ const handleClickDislikeThrottled = throttle(
 )
 
 const handleClickDislike = () => {
+  if (!moemoeAccessToken) {
+    useMessage('You need to login to dislike', '您需要登录以点踩', 'warn', 5000)
+    return
+  }
   handleClickDislikeThrottled()
 }
 </script>

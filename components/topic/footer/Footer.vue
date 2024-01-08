@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { locale, setLocale } = useI18n()
+const { locale } = useI18n()
 
 const props = defineProps<{
   info: {

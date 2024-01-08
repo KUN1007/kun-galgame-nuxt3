@@ -80,6 +80,7 @@ const handleClickRegister = () => {
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
+  opacity: 0.95;
   border-radius: 5px;
   box-shadow:
     0 15px 27px var(--kungalgame-blue-0),

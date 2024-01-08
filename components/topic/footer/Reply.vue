@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { moemoeAccessToken } = useKUNGalgameUserStore()
 const { isEdit } = storeToRefs(useTempReplyStore())
 const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 
@@ -10,6 +11,11 @@ const props = defineProps<{
 }>()
 
 const handleClickReply = () => {
+  if (!moemoeAccessToken) {
+    useMessage('You need to login to reply', '您需要登录以回复', 'warn', 5000)
+    return
+  }
+
   replyDraft.value.tid = props.tid
   replyDraft.value.toUserName = props.toUserName
   replyDraft.value.toUid = props.toUid

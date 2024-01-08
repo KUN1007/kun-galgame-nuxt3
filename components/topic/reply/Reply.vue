@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { TopicReply } from '~/types/api/reply'
 
+const { moemoeAccessToken } = useKUNGalgameUserStore()
 const { isLoading, scrollToReplyId, tempReplyRewrite } =
   storeToRefs(useTempReplyStore())
 
@@ -22,6 +23,10 @@ const handleClickComment = (
   uid: number,
   name: string
 ) => {
+  if (!moemoeAccessToken) {
+    useMessage('You need to login to comment', '您需要登录以评论', 'warn', 5000)
+    return
+  }
   isCommentPanelOpen.value = !isCommentPanelOpen.value
   if (isCommentPanelOpen.value) {
     tid.value = topicId

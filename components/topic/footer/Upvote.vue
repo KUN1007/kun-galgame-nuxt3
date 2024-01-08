@@ -7,6 +7,7 @@ const props = defineProps<{
   toUid: number
 }>()
 
+const { moemoeAccessToken } = useKUNGalgameUserStore()
 const isUpvote = ref(props.upvotes.includes(props.uid))
 const upvoteCount = ref(props.upvotes.length)
 
@@ -84,6 +85,16 @@ const upvoteReply = async () => {
 }
 
 const handleClickUpvote = async () => {
+  if (!moemoeAccessToken) {
+    useMessage(
+      'You need to login to use upvote feature',
+      '您需要登录使用推功能',
+      'warn',
+      5000
+    )
+    return
+  }
+
   if (props.uid === props.toUid) {
     useMessage(
       'You cannot upvote your own topic',

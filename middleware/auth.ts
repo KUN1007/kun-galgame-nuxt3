@@ -2,8 +2,8 @@ export default defineNuxtRouteMiddleware((to, from) => {
   const { moemoeAccessToken } = useKUNGalgameUserStore()
   if (!moemoeAccessToken) {
     useMessage(
-      'You need login to publish topic',
-      '您需要登录以发布话题',
+      'You need to login to continue your operation',
+      '您需要登录以继续操作',
       'warn',
       5000
     )

@@ -54,6 +54,7 @@ const handleBackToTop = () => {
 
   span {
     margin-top: 20px;
+    cursor: pointer;
 
     &:hover {
       transition: color 0.2s;
