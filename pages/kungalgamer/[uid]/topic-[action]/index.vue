@@ -1,15 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  validate: async (route) => {
-    const action = (route.params as { action: string }).action
-    if (action === 'published') {
-      return true
-    } else {
-      return false
-    }
-  },
-})
-
 import type { UserInfo } from '~/types/api/user'
 
 const props = defineProps<{

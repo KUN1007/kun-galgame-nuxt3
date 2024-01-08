@@ -34,13 +34,13 @@ export const navBarRoute: nav[] = [
     index: 5,
     name: 'liked',
     router: 'topic-liked',
-    permission: [2, 3, 4],
+    permission: [1, 2, 3, 4],
   },
   {
     index: 6,
     name: 'upvote',
     router: 'topic-upvote',
-    permission: [2, 3, 4],
+    permission: [1, 2, 3, 4],
   },
   {
     index: 7,
