@@ -32,12 +32,7 @@ const handleSendCode = async () => {
   const { data } = await useFetch('/api/auth/email/code/forgot', {
     method: 'POST',
     body: { email: input.newEmail },
-    onResponse({ request, response, options }) {
-      if (response.status === 233) {
-        kungalgameErrorHandler(response.statusText)
-        return
-      }
-    },
+    ...kungalgameResponseHandler,
   })
 
   if (data.value) {
@@ -57,12 +52,7 @@ const handleResetEmail = async () => {
   const { data } = await useFetch('/api/user/email', {
     method: 'PUT',
     body: { email: input.newEmail, code: input.code },
-    onResponse({ request, response, options }) {
-      if (response.status === 233) {
-        kungalgameErrorHandler(response.statusText)
-        return
-      }
-    },
+    ...kungalgameResponseHandler,
   })
 
   if (data.value) {
@@ -94,12 +84,7 @@ const handleChangePassword = async () => {
   const { data } = await useFetch('/api/user/password', {
     method: 'PUT',
     body: { oldPassword: input.oldPassword, newPassword: input.newPassword },
-    onResponse({ request, response, options }) {
-      if (response.status === 233) {
-        kungalgameErrorHandler(response.statusText)
-        return
-      }
-    },
+    ...kungalgameResponseHandler,
   })
 
   if (data.value) {
@@ -111,12 +96,7 @@ const handleChangePassword = async () => {
 
 const { data } = await useFetch('/api/user/email', {
   method: 'GET',
-  onResponse({ request, response, options }) {
-    if (response.status === 233) {
-      kungalgameErrorHandler(response.statusText)
-      return
-    }
-  },
+  ...kungalgameResponseHandler,
 })
 
 email.value = data.value ? data.value : ''

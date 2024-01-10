@@ -16,12 +16,7 @@ const { data } = await useFetch(`/api/topic/${tid.value}/related`, {
   method: 'GET',
   query: { tags },
   watch: false,
-  onResponse({ request, response, options }) {
-    if (response.status === 233) {
-      kungalgameErrorHandler(response.statusText)
-      return
-    }
-  },
+  ...kungalgameResponseHandler,
 })
 
 isEmpty.value = !data.value?.length

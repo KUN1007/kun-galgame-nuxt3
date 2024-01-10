@@ -14,12 +14,7 @@ const getTopics = async () => {
       sortOrder: topic.value.sortOrder,
     },
     watch: false,
-    onResponse({ request, response, options }) {
-      if (response.status === 233) {
-        kungalgameErrorHandler(response.statusText)
-        return
-      }
-    },
+    ...kungalgameResponseHandler,
   })
   return data
 }

@@ -27,12 +27,7 @@ useTempReplyStore().resetPageStatus()
 const { data: topicData } = await useFetch(`/api/topic/${tid.value}`, {
   method: 'GET',
   watch: false,
-  onResponse({ request, response, options }) {
-    if (response.status === 233) {
-      kungalgameErrorHandler(response.statusText)
-      return
-    }
-  },
+  ...kungalgameResponseHandler,
 })
 
 const getReplies = async () => {

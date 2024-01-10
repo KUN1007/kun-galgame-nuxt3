@@ -37,12 +37,7 @@ const handlePublish = async () => {
     method: 'POST',
     body: requestData,
     watch: false,
-    onResponse({ request, response, options }) {
-      if (response.status === 233) {
-        kungalgameErrorHandler(response.statusText)
-        return
-      }
-    },
+    ...kungalgameResponseHandler,
   })
 
   if (data.value) {
@@ -81,12 +76,7 @@ const handleRewrite = async () => {
     method: 'PUT',
     body: requestData,
     watch: false,
-    onResponse({ request, response, options }) {
-      if (response.status === 233) {
-        kungalgameErrorHandler(response.statusText)
-        return
-      }
-    },
+    ...kungalgameResponseHandler,
   })
 
   if (data.value) {

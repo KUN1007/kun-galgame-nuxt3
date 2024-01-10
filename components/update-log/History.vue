@@ -3,12 +3,7 @@ const { data: updateLogs } = await useFetch(`/api/update/history`, {
   method: 'GET',
   query: { page: 0, limit: 0 },
   watch: false,
-  onResponse({ request, response, options }) {
-    if (response.status === 233) {
-      kungalgameErrorHandler(response.statusText)
-      return
-    }
-  },
+  ...kungalgameResponseHandler,
 })
 </script>
 

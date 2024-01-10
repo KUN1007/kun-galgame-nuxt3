@@ -10,12 +10,7 @@ const { data: incomeData } = await useFetch(`/api/balance/income`, {
     sortOrder: income.value.sortOrder,
   },
   watch: false,
-  onResponse({ request, response, options }) {
-    if (response.status === 233) {
-      kungalgameErrorHandler(response.statusText)
-      return
-    }
-  },
+  ...kungalgameResponseHandler,
 })
 
 const { data: expenditureData } = await useFetch(`/api/balance/expenditure`, {
@@ -27,12 +22,7 @@ const { data: expenditureData } = await useFetch(`/api/balance/expenditure`, {
     sortOrder: expenditure.value.sortOrder,
   },
   watch: false,
-  onResponse({ request, response, options }) {
-    if (response.status === 233) {
-      kungalgameErrorHandler(response.statusText)
-      return
-    }
-  },
+  ...kungalgameResponseHandler,
 })
 
 const { data: statement } = await useFetch(`/api/balance/statement`, {
@@ -44,12 +34,7 @@ const { data: statement } = await useFetch(`/api/balance/statement`, {
     sortOrder: expenditure.value.sortOrder,
   },
   watch: false,
-  onResponse({ request, response, options }) {
-    if (response.status === 233) {
-      kungalgameErrorHandler(response.statusText)
-      return
-    }
-  },
+  ...kungalgameResponseHandler,
 })
 </script>
 
@@ -60,13 +45,13 @@ const { data: statement } = await useFetch(`/api/balance/statement`, {
 
       <div class="content">
         <BalanceForm
-          v-if="incomeData"
+          v-if="incomeData && statement"
           :isIncome="true"
           :income-data="incomeData"
           :statement="statement"
         />
         <BalanceForm
-          v-if="expenditureData"
+          v-if="expenditureData && statement"
           :isIncome="false"
           :expenditure-data="expenditureData"
           :statement="statement"

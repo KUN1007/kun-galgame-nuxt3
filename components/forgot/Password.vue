@@ -56,12 +56,7 @@ const handleChangePassword = async () => {
   const { data } = await useFetch('/api/auth/password/reset', {
     method: 'POST',
     body: input,
-    onResponse({ request, response, options }) {
-      if (response.status === 233) {
-        kungalgameErrorHandler(response.statusText)
-        return
-      }
-    },
+    ...kungalgameResponseHandler,
   })
 
   if (data.value) {

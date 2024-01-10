@@ -13,12 +13,7 @@ const {
 
 const { data: user, refresh } = await useFetch(`/api/user/${uid.value}`, {
   method: 'GET',
-  onResponse({ request, response, options }) {
-    if (response.status === 233) {
-      kungalgameErrorHandler(response.statusText)
-      return
-    }
-  },
+  ...kungalgameResponseHandler,
 })
 
 provide('refresh', refresh)

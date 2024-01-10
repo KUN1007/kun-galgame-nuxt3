@@ -9,12 +9,7 @@ const { data } = await useFetch('/api/user/topics', {
   method: 'GET',
   query: { tidArray: props.tidArray },
   watch: false,
-  onResponse({ request, response, options }) {
-    if (response.status === 233) {
-      kungalgameErrorHandler(response.statusText)
-      return
-    }
-  },
+  ...kungalgameResponseHandler,
 })
 </script>
 

@@ -25,12 +25,7 @@ const sendCode = async () => {
   const { data } = await useFetch(url, {
     method: 'POST',
     body: body,
-    onResponse({ request, response, options }) {
-      if (response.status === 233) {
-        kungalgameErrorHandler(response.statusText)
-        return
-      }
-    },
+    ...kungalgameResponseHandler,
   })
   return data
 }

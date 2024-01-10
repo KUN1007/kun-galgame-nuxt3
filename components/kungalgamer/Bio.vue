@@ -26,12 +26,7 @@ const handleChangeBio = async () => {
   const { data } = await useFetch('/api/user/bio', {
     method: 'PUT',
     body: { bio: bioValue.value },
-    onResponse({ request, response, options }) {
-      if (response.status === 233) {
-        kungalgameErrorHandler(response.statusText)
-        return
-      }
-    },
+    ...kungalgameResponseHandler,
   })
 
   if (data.value) {

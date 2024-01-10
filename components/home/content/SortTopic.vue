@@ -184,8 +184,7 @@ const iconMap: Record<string, string> = {
 }
 
 .active {
-  border: 1px solid var(--kungalgame-pink-4);
-  background-color: var(--kungalgame-pink-4);
+  background-color: var(--kungalgame-blue-4);
   color: var(--kungalgame-white);
 
   & > span:nth-child(2) {

@@ -13,12 +13,7 @@ const { data } = await useFetch(`/api/topic/${tid.value}/popular`, {
   method: 'GET',
   query: { uid: props.uid },
   watch: false,
-  onResponse({ request, response, options }) {
-    if (response.status === 233) {
-      kungalgameErrorHandler(response.statusText)
-      return
-    }
-  },
+  ...kungalgameResponseHandler,
 })
 
 isEmpty.value = !data.value?.length

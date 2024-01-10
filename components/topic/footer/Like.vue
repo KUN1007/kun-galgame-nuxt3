@@ -43,12 +43,7 @@ const likeOperation = async (
       method: 'PUT',
       query: queryData,
       watch: false,
-      onResponse({ request, response, options }) {
-        if (response.status === 233) {
-          kungalgameErrorHandler(response.statusText)
-          return
-        }
-      },
+      ...kungalgameResponseHandler,
     })
     return data
   } else {
@@ -61,12 +56,7 @@ const likeOperation = async (
       method: 'PUT',
       query: queryData,
       watch: false,
-      onResponse({ request, response, options }) {
-        if (response.status === 233) {
-          kungalgameErrorHandler(response.statusText)
-          return
-        }
-      },
+      ...kungalgameResponseHandler,
     })
     return data
   }

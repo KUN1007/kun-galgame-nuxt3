@@ -9,12 +9,7 @@ const { data } = await useFetch('/api/user/replies', {
   method: 'GET',
   query: { ridArray: props.reply },
   watch: false,
-  onResponse({ request, response, options }) {
-    if (response.status === 233) {
-      kungalgameErrorHandler(response.statusText)
-      return
-    }
-  },
+  ...kungalgameResponseHandler,
 })
 </script>
 

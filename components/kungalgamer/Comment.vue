@@ -7,12 +7,7 @@ const { data } = await useFetch('/api/user/comments', {
   method: 'GET',
   query: { cidArray: props.comment },
   watch: false,
-  onResponse({ request, response, options }) {
-    if (response.status === 233) {
-      kungalgameErrorHandler(response.statusText)
-      return
-    }
-  },
+  ...kungalgameResponseHandler,
 })
 </script>
 

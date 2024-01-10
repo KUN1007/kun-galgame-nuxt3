@@ -11,12 +11,7 @@ const { data: logs } = await useFetch(`/api/non-moe/logs`, {
   method: 'GET',
   query: { page, limit, sortOrder },
   watch: false,
-  onResponse({ request, response, options }) {
-    if (response.status === 233) {
-      kungalgameErrorHandler(response.statusText)
-      return
-    }
-  },
+  ...kungalgameResponseHandler,
 })
 </script>
 

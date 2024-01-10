@@ -29,12 +29,7 @@ const handleLogin = async () => {
     method: 'POST',
     body: loginForm,
     watch: false,
-    onResponse({ request, response, options }) {
-      if (response.status === 233) {
-        kungalgameErrorHandler(response.statusText)
-        return
-      }
-    },
+    ...kungalgameResponseHandler,
   })
 
   if (data.value) {
