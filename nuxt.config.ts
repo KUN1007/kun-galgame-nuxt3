@@ -89,4 +89,42 @@ export default defineNuxtConfig({
     classSuffix: '-mode',
     storageKey: 'kungalgame-color-mode',
   },
+  pwa: {
+    registerType: 'autoUpdate',
+    manifest: {
+      name: 'KUN Visual Novel PWA',
+      short_name: 'KunPWA',
+      theme_color: '#218bff',
+      icons: [
+        {
+          src: 'pwa/pwa-192x192.png',
+          sizes: '192x192',
+          type: 'image/png',
+        },
+        {
+          src: 'pwa/pwa-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+        },
+        {
+          src: 'pwa/pwa-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+          purpose: 'any maskable',
+        },
+      ],
+    },
+    workbox: {
+      globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
+    },
+    client: {
+      installPrompt: true,
+    },
+    devOptions: {
+      enabled: true,
+      suppressWarnings: true,
+      navigateFallbackAllowlist: [/^\/$/],
+      type: 'module',
+    },
+  },
 })

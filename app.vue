@@ -56,6 +56,10 @@ useHead({
       property: 'twitter:url',
       content: config.public.KUN_GALGAME_URL,
     },
+    {
+      name: 'theme-color',
+      content: '#218bff',
+    },
   ],
   link: [
     {
@@ -93,6 +97,7 @@ useSchemaOrg([
   <!-- Global search component -->
   <KunSearch />
 
+  <NuxtPwaManifest />
   <NuxtLoadingIndicator color="var(--kungalgame-blue-4)" />
 
   <KunLayout>
