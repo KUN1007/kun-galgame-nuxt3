@@ -73,6 +73,7 @@ const handleClickTitle = () => {
   border-left: none;
   border-top: none;
   border-radius: 0 5px 5px 5px;
+  min-height: 100vh;
 }
 
 .item-container {

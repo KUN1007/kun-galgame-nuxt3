@@ -185,6 +185,7 @@ onBeforeMount(() => {
 <template>
   <div class="content-container">
     <TopicAside
+      class="aside"
       v-if="topicData?.tags && topicData.user"
       :tags="topicData.tags"
       :uid="topicData.user.uid"
@@ -255,6 +256,10 @@ onBeforeMount(() => {
 @media (max-width: 700px) {
   .content-container {
     width: 100%;
+  }
+
+  .aside {
+    display: none;
   }
 }
 </style>
