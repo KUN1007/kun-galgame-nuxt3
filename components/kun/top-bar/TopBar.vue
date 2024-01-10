@@ -318,6 +318,10 @@ $navNumber: v-bind(navItemNum);
   .settings {
     display: none !important;
   }
+
+  .login {
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 700px) {

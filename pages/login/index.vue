@@ -61,7 +61,7 @@ const handleClickRegister = () => {
       </div>
     </div>
 
-    <KunFooter style="position: absolute; bottom: 2%" />
+    <KunFooter class="footer" />
   </div>
 </template>
 
@@ -227,6 +227,11 @@ const handleClickRegister = () => {
   }
 }
 
+.footer {
+  position: absolute;
+  bottom: 2%;
+}
+
 @keyframes show {
   0%,
   49.99% {
@@ -271,6 +276,10 @@ const handleClickRegister = () => {
       animation: none;
       transform: translateX(0);
     }
+  }
+
+  .footer {
+    position: relative;
   }
 }
 </style>
