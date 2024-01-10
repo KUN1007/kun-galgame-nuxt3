@@ -1,5 +1,6 @@
 {
   "cSpell.words": [
+    "abcdefghjkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ",
     "ACGNGAME",
     "Ahahaha",
     "Akai",
@@ -18,6 +19,7 @@
     "composables",
     "cooldown",
     "cout",
+    "defu",
     "dompurify",
     "fontawesome",
     "formkit",
@@ -61,12 +63,15 @@
     "Nanami",
     "nawa",
     "NEKOPARA",
+    "nitropack",
     "non-moe",
     "nonmoe",
     "nord",
     "nprogress",
     "Nuxt",
     "Nuxtjs",
+    "ofetch",
+    "ohash",
     "okaidia",
     "Otome",
     "Owaru",
@@ -102,6 +107,7 @@
     "Tsuki",
     "Tsumugi",
     "twotone",
+    "unjs",
     "unplugin",
     "unref",
     "unstorage",
@@ -128,8 +134,7 @@
     "yurzhang",
     "Yuuki",
     "yuyu",
-    "zako",
-    "abcdefghjkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ"
+    "zako"
   ],
   "i18n-ally.localesPaths": ["language"],
   "i18n-ally.keystyle": "nested"

@@ -3,6 +3,7 @@ import type {
   SortField,
   SortOrder,
   HomeTopicRequestData,
+  HomeTopic,
 } from '~/types/api/home'
 
 const getHomeTopics = async (
@@ -29,7 +30,7 @@ const getHomeTopics = async (
     .populate('user', 'uid avatar name')
     .lean()
 
-  const data = topics.map((topic) => ({
+  const data: HomeTopic[] = topics.map((topic) => ({
     tid: topic.tid,
     title: topic.title,
     views: topic.views,
