@@ -4,6 +4,10 @@ import { hamburgerItem } from './hamburgerItem'
 defineEmits<{
   close: []
 }>()
+
+const handleClickTitle = () => {
+  navigateTo('/')
+}
 </script>
 
 <template>
@@ -13,17 +17,20 @@ defineEmits<{
       appear
     >
       <div class="container" @click.stop>
-        <div class="kungalgame">
-          <NuxtImg src="/favicon.webp" alt="KUNGalgame" />
+        <div class="kungalgame" @click="handleClickTitle">
+          <NuxtImg src="/favicon.webp" :alt="$t('head.title')" />
           <span>{{ $t('header.name') }}</span>
         </div>
 
-        <div class="item" style="font-size: 17px">
-          <span v-for="kun in hamburgerItem" :key="kun.index">
+        <div class="item-container">
+          <div v-for="kun in hamburgerItem" :key="kun.index" class="item">
+            <span class="icon-item">
+              <Icon :name="kun.icon"></Icon>
+            </span>
             <NuxtLink :to="kun.router">
               {{ $t(`header.hamburger.${kun.name}`) }}
             </NuxtLink>
-          </span>
+          </div>
         </div>
 
         <KunSettingPanelComponentsMode style="font-size: 15px" />
@@ -49,15 +56,14 @@ defineEmits<{
   left: 0;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
   color: var(--kungalgame-font-color-3);
-  font-size: 25px;
   background-color: var(--kungalgame-mask-color-0);
   transition: opacity 0.3s ease;
   z-index: 1;
 }
 
 .container {
-  height: 100vh;
   position: absolute;
   width: 247px;
   padding: 10px;
@@ -69,13 +75,38 @@ defineEmits<{
   border-radius: 0 5px 5px 5px;
 }
 
-.item {
-  margin-left: 20px;
+.item-container {
+  border-top: 1px solid var(--kungalgame-trans-blue-4);
+  border-bottom: 1px solid var(--kungalgame-trans-blue-4);
   margin-top: 20px;
-  font-size: 20px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  gap: 10px;
+  font-size: 17px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+
+  &:first-child {
+    padding-top: 20px;
+  }
+
+  &:last-child {
+    padding-bottom: 20px;
+  }
+
+  .icon-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: var(--kungalgame-blue-4);
+    margin-right: 10px;
+  }
+
   a {
     color: var(--kungalgame-blue-4);
   }
@@ -84,10 +115,12 @@ defineEmits<{
 .kungalgame {
   display: flex;
   align-items: center;
+
   img {
     height: 40px;
     margin-right: 10px;
   }
+
   span {
     font-size: 20px;
   }
@@ -95,10 +128,10 @@ defineEmits<{
 
 .home {
   width: 100%;
-  margin-top: 50px;
+  margin-top: 20px;
 
   a {
-    padding: 5px 10px;
+    padding: 3px 7px;
     width: 100%;
     display: flex;
     justify-content: center;
