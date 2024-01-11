@@ -1,4 +1,3 @@
-// 支出
 export interface ExpenditureAttributes {
   eid: number
   reason: string

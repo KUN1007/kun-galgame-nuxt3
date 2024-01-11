@@ -1,6 +1,5 @@
 import type { UserAttributes } from './user'
 
-// 回复
 export interface ReplyAttributes {
   rid: number
   tid: number
@@ -22,7 +21,7 @@ export interface ReplyAttributes {
   dislikes: number[]
   share: number[]
   comment: number[]
-  // 虚拟字段
+
   r_user: UserAttributes[]
   to_user: UserAttributes[]
 }

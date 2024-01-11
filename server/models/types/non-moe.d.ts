@@ -1,4 +1,3 @@
-// 不萌记录
 export interface NonMoeAttributes {
   nid: number
   uid: number

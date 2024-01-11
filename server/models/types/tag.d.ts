@@ -1,4 +1,3 @@
-// 标签
 export interface TagAttributes {
   tag_id: number
   tid: number

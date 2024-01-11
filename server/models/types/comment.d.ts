@@ -1,6 +1,5 @@
 import type { UserAttributes } from './user'
 
-// 定义 Comment 文档的接口类型
 export interface CommentAttributes {
   cid: number
   rid: number
@@ -14,7 +13,7 @@ export interface CommentAttributes {
 
   likes: number[]
   dislikes: number[]
-  // 虚拟字段
+
   cuid: UserAttributes[]
   touid: UserAttributes[]
 }

@@ -1,11 +1,12 @@
 import type { UserAttributes } from './user'
 
-// 话题
 interface TopicAttributes {
   tid: number
   title: string
   content: string
   uid: number
+  avatar: string
+  name: string
   tags: string[]
   category: string[]
   time: number
@@ -29,6 +30,6 @@ interface TopicAttributes {
 
   status: number
   edited: number
-  // 虚拟字段
+
   user: UserAttributes[]
 }

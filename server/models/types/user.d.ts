@@ -1,4 +1,3 @@
-// 用户
 export interface UserAttributes {
   uid: number
   name: string
