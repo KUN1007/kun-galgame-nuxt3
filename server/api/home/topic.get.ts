@@ -1,3 +1,4 @@
+import UserModel from '~/server/models/user'
 import TopicModel from '~/server/models/topic'
 import type {
   SortField,
@@ -63,6 +64,9 @@ export default defineEventHandler(async (event) => {
     kunError(event, 10209)
     return
   }
+
+  // TODO: Schema hasn't been registered for model 'user', maybe it can be solved in the future
+  await UserModel.findOne()
 
   const result = await getHomeTopics(
     category,
