@@ -1,9 +1,37 @@
 <script setup lang="ts">
 import { hamburgerItem } from './hamburgerItem'
 
-defineEmits<{
+const emits = defineEmits<{
   close: []
 }>()
+
+const startX = ref(0)
+const currentX = ref(0)
+const isDragging = ref(false)
+
+const handleTouchStart = (event: TouchEvent) => {
+  startX.value = event.touches[0].clientX
+  currentX.value = 0
+  isDragging.value = true
+}
+
+const handleTouchMove = (event: TouchEvent) => {
+  const touchX = event.touches[0].clientX
+  const deltaX = touchX - startX.value
+
+  if (deltaX < 0) {
+    currentX.value = deltaX
+  }
+}
+
+const handleTouchEnd = () => {
+  isDragging.value = false
+  const movedX = currentX.value
+  if (Math.abs(movedX) > 100) {
+    emits('close')
+  }
+  currentX.value = 0 // 重置位置
+}
 
 const handleClickTitle = () => {
   navigateTo('/')
@@ -16,7 +44,15 @@ const handleClickTitle = () => {
       enter-active-class="animate__animated animate__fadeInLeft animate__faster"
       appear
     >
-      <div class="container" @click.stop>
+      <div
+        class="container"
+        @click.stop
+        :class="{ 'is-dragging': isDragging }"
+        :style="{ transform: `translateX(${currentX}px)` }"
+        @touchstart="handleTouchStart"
+        @touchmove="handleTouchMove"
+        @touchend="handleTouchEnd"
+      >
         <div class="kungalgame" @click="handleClickTitle">
           <NuxtImg src="/favicon.webp" :alt="$t('head.title')" />
           <span>{{ $t('header.name') }}</span>
@@ -64,6 +100,7 @@ const handleClickTitle = () => {
 }
 
 .container {
+  transition: transform 0.3s;
   position: absolute;
   width: 247px;
   padding: 10px;
