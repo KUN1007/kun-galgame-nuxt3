@@ -1,5 +1,5 @@
 import type { Server } from 'socket.io'
 
-export function defineIOHandler (cb: (io: Server) => void) {
+export function defineIOHandler(cb: (io: Server) => void) {
   return cb
 }

@@ -58,7 +58,7 @@ onMounted(() => {
   position: absolute;
   top: 50px;
   right: 80px;
-  opacity: 0.77;
+  opacity: 0.9;
 }
 
 .triangle1 {
