@@ -33,6 +33,7 @@ onMounted(() => {
   <div ref="container" tabindex="-1" class="container" @blur="handlePanelBlur">
     <span class="triangle1"></span>
     <span class="triangle2"></span>
+
     <div class="kungalgamer">
       <div class="info">
         <p>{{ name }}</p>
@@ -41,6 +42,7 @@ onMounted(() => {
           <span>{{ moemoepoint }}</span>
         </p>
       </div>
+
       <div class="func">
         <span>
           <NuxtLink :to="`/kungalgamer/${uid}/info`">

@@ -36,12 +36,12 @@
 
   div {
     display: flex;
-    justify-self: center;
+    justify-content: center;
     align-items: center;
 
     a {
       display: flex;
-      justify-self: center;
+      justify-content: center;
       align-items: center;
       margin-left: 5px;
       color: var(--kungalgame-blue-5);
