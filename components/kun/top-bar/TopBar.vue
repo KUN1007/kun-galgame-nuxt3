@@ -7,6 +7,7 @@ const KUNGalgameSettingsPanel = defineAsyncComponent(
   () => import('../setting-panel/SettingPanel.vue')
 )
 const KUNGalgameUserInfo = defineAsyncComponent(() => import('./UserInfo.vue'))
+const MessageBox = defineAsyncComponent(() => import('./MessageBox.vue'))
 
 const { isShowSearch } = storeToRefs(useTempHomeStore())
 const { name, avatarMin } = storeToRefs(useKUNGalgameUserStore())
@@ -44,6 +45,8 @@ watch(
           />
         </Transition>
       </div>
+
+      <MessageBox />
 
       <div class="kungalgame">
         <NuxtLink to="/">

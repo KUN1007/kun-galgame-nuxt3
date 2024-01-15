@@ -16,3 +16,11 @@ export interface KUNGalgameSettingsStore {
 
   isShowPageWidth: boolean
 }
+
+export interface TempSettingStore {
+  showKUNGalgameHamburger: boolean
+  showKUNGalgamePanel: boolean
+  showKUNGalgameUserPanel: boolean
+
+  showKUNGalgameMessageBox: boolean
+}

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { uid, name, moemoepoint } = storeToRefs(useKUNGalgameUserStore())
+const { showKUNGalgameMessageBox } = storeToRefs(useTempSettingStore())
 
 const router = useRouter()
 const container = ref<HTMLElement>()
@@ -49,6 +50,9 @@ onMounted(() => {
             {{ $t('header.user.profile') }}
           </NuxtLink>
         </span>
+
+        <span @click="showKUNGalgameMessageBox = true">Message</span>
+
         <span @click="logOut">{{ $t('header.user.logout') }}</span>
       </div>
     </div>

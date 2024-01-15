@@ -102,14 +102,12 @@ const handleClickTitle = () => {
 .container {
   transition: transform 0.3s;
   position: absolute;
-  width: 247px;
+  width: 250px;
   padding: 10px;
   background-color: var(--kungalgame-trans-white-2);
-  border: 1px solid var(--kungalgame-blue-1);
+  border-right: 1px solid var(--kungalgame-blue-1);
   box-shadow: var(--shadow);
-  border-left: none;
-  border-top: none;
-  border-radius: 0 5px 5px 5px;
+  border-radius: 0 5px 5px 0;
   min-height: 100vh;
 }
 
