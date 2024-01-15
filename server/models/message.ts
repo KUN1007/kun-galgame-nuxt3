@@ -1,20 +1,30 @@
 import mongoose from 'mongoose'
 import increasingSequence from '../utils/increasingSequence'
 
-import { IncomeAttributes } from './types/income'
+import { MessageAttributes } from './types/message'
 
-const IncomeSchema = new mongoose.Schema<IncomeAttributes>(
+const MessageSchema = new mongoose.Schema<MessageAttributes>(
   {
-    iid: { type: Number, unique: true },
-    reason: { type: String, default: '' },
+    mid: { type: Number, unique: true },
+    sender_uid: { type: Number, required: true, ref: 'user' },
+    receiver_uid: { type: Number, required: true },
     time: { type: Number, default: Date.now() },
-    amount: { type: Number, default: 0 },
+    tid: { type: Number },
+    content: { type: String, default: '' },
+    status: { type: String, required: true },
+    type: { type: String, required: true },
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )
 
-IncomeSchema.pre('save', increasingSequence('iid'))
+MessageSchema.virtual('user', {
+  ref: 'user',
+  localField: 'sender_uid',
+  foreignField: 'uid',
+})
 
-const IncomeModel = mongoose.model<IncomeAttributes>('income', IncomeSchema)
+MessageSchema.pre('save', increasingSequence('mid'))
 
-export default IncomeModel
+const MessageModel = mongoose.model<MessageAttributes>('message', MessageSchema)
+
+export default MessageModel

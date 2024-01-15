@@ -1,5 +1,22 @@
 <script setup lang="ts">
 const { showKUNGalgameMessageBox } = storeToRefs(useTempSettingStore())
+
+const getMessages = async () => {
+  const data = await useFetch(`/api/message`, {
+    method: 'GET',
+    query: {
+      page: '1',
+      limit: '10',
+      type: '',
+      sortOrder: 'desc',
+    },
+    watch: false,
+    ...kungalgameResponseHandler,
+  })
+  return data
+}
+
+const { data: messageData } = await getMessages()
 </script>
 
 <template>
@@ -15,18 +32,19 @@ const { showKUNGalgameMessageBox } = storeToRefs(useTempSettingStore())
         </span>
       </div>
 
-      <div class="container">
-        <div class="message">
+      <div class="container" v-if="messageData">
+        <div class="message" v-for="(msg, index) in messageData" :key="index">
           <div class="top">
             <span class="status">
               <Icon name="line-md:alert-circle" />
               <Icon name="line-md:confirm-circle" />
             </span>
-            <span class="time">11111111111111</span>
+            <span class="time">{{ msg.time }}</span>
           </div>
 
           <div class="content">
-            Your post was ${actionType} by ${actionUserId}
+            <!-- Your post was ${actionType} by ${actionUserId} -->
+            {{ msg.content }}
           </div>
 
           <div class="bottom">

@@ -48,6 +48,8 @@ const updateTopicLike = async (
       { $inc: { moemoepoint: moemoepointAmount, like: moemoepointAmount } }
     )
 
+    await createMessage(uid, to_uid, 'unread', 'liked', 'topic', tid)
+
     await session.commitTransaction()
     session.endSession()
   } catch (error) {
