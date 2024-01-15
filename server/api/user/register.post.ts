@@ -16,7 +16,8 @@ const registerController = async (event: H3Event) => {
 
   const ip =
     event.node.req.socket.remoteAddress ||
-    event.node.req.headers['x-forwarded-for']
+    event.node.req.headers['x-forwarded-for'] ||
+    ''
 
   if (
     !isValidEmail(email) ||
@@ -28,17 +29,12 @@ const registerController = async (event: H3Event) => {
     return
   }
 
-  const registerCDEmail = await useStorage('redis').getItem(
-    `registerCD:${name}`
-  )
-  const registerCDIp = await useStorage('redis').getItem(`registerCD:${name}`)
-
-  if (registerCDEmail || registerCDIp) {
+  const registerCD = await useStorage('redis').getItem(`registerCD:${name}`)
+  if (registerCD) {
     kunError(event, 10113)
     return
   } else {
-    useStorage('redis').setItem(`registerCD:${email}`, email, { ttl: 60 })
-    useStorage('redis').setItem(`registerCD:${ip}`, ip ? ip : '', { ttl: 60 })
+    useStorage('redis').setItem(`registerCD:${ip}`, ip, { ttl: 60 })
   }
 
   return { name, email, password, code, ip }

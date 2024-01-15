@@ -6,6 +6,10 @@ import type { LoginRequestData, LoginResponseData } from '~/types/api/user'
 
 const login = async (event: H3Event) => {
   const { name, password }: LoginRequestData = await readBody(event)
+  const ip =
+    event.node.req.socket.remoteAddress ||
+    event.node.req.headers['x-forwarded-for'] ||
+    ''
 
   if (
     !(isValidName(name) || isValidEmail(name)) ||
@@ -15,13 +19,12 @@ const login = async (event: H3Event) => {
     return
   }
 
-  const loginCD = await useStorage('redis').getItem(`loginCD:${name}`)
-
+  const loginCD = await useStorage('redis').getItem(`loginCD:${ip}`)
   if (loginCD) {
     kunError(event, 10112)
     return
   } else {
-    useStorage('redis').setItem(`loginCD:${name}`, name, { ttl: 60 })
+    useStorage('redis').setItem(`loginCD:${ip}`, ip, { ttl: 60 })
   }
 
   return { name, password }
