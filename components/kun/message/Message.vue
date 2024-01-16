@@ -37,7 +37,21 @@ const handleMarkAsRead = async (mid: number) => {
 
   if (data.value) {
     props.refresh()
-    useMessage('Mark as read successfully!', '标记已读成功', 'success')
+    useMessage('Mark as read successfully!', '标记为已读成功', 'success')
+  }
+}
+
+const handleDeleteMessage = async (mid: number) => {
+  const { data } = await useFetch(`/api/message/delete`, {
+    method: 'DELETE',
+    query: { mid },
+    watch: false,
+    ...kungalgameResponseHandler,
+  })
+
+  if (data.value) {
+    props.refresh()
+    useMessage('Delete message successfully!', '删除消息成功', 'success')
   }
 }
 </script>
@@ -90,7 +104,7 @@ const handleMarkAsRead = async (mid: number) => {
         <span v-if="msg.status === 'unread'" @click="handleMarkAsRead(msg.mid)"
           >Mark as read</span
         >
-        <span>Delete message</span>
+        <span @click="handleDeleteMessage(msg.mid)">Delete message</span>
       </div>
     </div>
   </div>
