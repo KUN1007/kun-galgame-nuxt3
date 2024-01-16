@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
-import { getMessageI18n } from './getMessageI18n'
+import { getMessageZH, getMessageI18n } from './getMessageI18n'
 import type { Message } from '~/types/api/message'
 
 const props = defineProps<{
@@ -35,8 +35,14 @@ const handelClickShowMoreOperation = async (mid: number) => {
   }
 }
 
-const handleClickGoto = (uid: number) => {
-  navigateTo(`/kungalgamer/${uid}/info`)
+const handleGetMessageDetail = (message: Message) => {
+  return computed(() => {
+    const messageContent = markdownToText(messageMap.get(message.mid) ?? '')
+    return `${message.senderName} ${getMessageZH(
+      locale.value,
+      message.type
+    )}: ${messageContent}`
+  }).value
 }
 
 const handleMarkAsRead = async (mid: number) => {
@@ -110,9 +116,11 @@ const handleDeleteMessage = async (mid: number) => {
         class="more"
         v-if="isShowMoreOperation(msg.mid) && activeMessage.includes(msg.mid)"
       >
-        <div>{{ msg.senderName + msg.type + messageMap.get(msg.mid) }}</div>
+        <div class="detail">
+          {{ handleGetMessageDetail(msg) }}
+        </div>
 
-        <span @click="handleClickGoto(msg.senderUid)"
+        <span @click="navigateTo(`/kungalgamer/${msg.senderUid}/info`)"
           >Goto user {{ msg.senderName }}</span
         >
         <span v-if="msg.status === 'unread'" @click="handleMarkAsRead(msg.mid)"
@@ -212,6 +220,11 @@ const handleDeleteMessage = async (mid: number) => {
       background-color: var(--kungalgame-trans-blue-1);
     }
   }
+}
+
+.detail {
+  padding: 5px;
+  border-left: 4px solid var(--kungalgame-blue-4);
 }
 
 .more-btn-active {

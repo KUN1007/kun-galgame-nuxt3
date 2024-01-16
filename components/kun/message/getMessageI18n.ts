@@ -9,7 +9,7 @@ const zhMessageMap: Record<string, string> = {
   commented: '评论了',
 }
 
-const getMessageZh = (locale: Locale, content: string) => {
+export const getMessageZH = (locale: Locale, content: string) => {
   if (locale === 'zh') {
     return zhMessageMap[content]
   }
@@ -36,7 +36,7 @@ export const getMessageI18n = (locale: Locale, message: Message) => {
   }
 
   if (locale === 'zh') {
-    const actionZH = getMessageZh(locale, message.type)
+    const actionZH = getMessageZH(locale, message.type)
     const messageContentZH = `${message.senderName} ${actionZH}您！`
     return messageContentZH
   }
