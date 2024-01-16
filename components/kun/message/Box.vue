@@ -2,6 +2,7 @@
 import type { KunMessage } from '#build/components'
 
 const { showKUNGalgameMessageBox } = storeToRefs(useTempSettingStore())
+const isShowFunction = ref(false)
 
 const getMessages = async () => {
   const data = await useFetch(`/api/message`, {
@@ -32,6 +33,21 @@ const { data: messageData, refresh } = await getMessages()
         <span class="icon-item" @click="showKUNGalgameMessageBox = false">
           <Icon name="line-md:close" />
         </span>
+      </div>
+
+      <div class="func">
+        <span
+          class="func-icon"
+          :class="isShowFunction ? 'func-icon-active' : ''"
+          @click="isShowFunction = !isShowFunction"
+        >
+          <Icon name="line-md:chevron-small-right" />
+        </span>
+
+        <div class="func-container" v-if="isShowFunction">
+          <button class="read">Mark All Messages as Read</button>
+          <button class="delete">Delete All Messages</button>
+        </div>
       </div>
 
       <KunMessage
@@ -67,5 +83,55 @@ const { data: messageData, refresh } = await getMessages()
   .icon-item {
     cursor: pointer;
   }
+}
+
+.func {
+  padding: 0 5px;
+
+  .func-icon {
+    width: 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+      color: var(--kungalgame-blue-4);
+    }
+  }
+}
+
+.func-container {
+  display: flex;
+  flex-direction: column;
+
+  button {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background: none;
+
+    &:nth-child(1) {
+      margin-bottom: 5px;
+      &:hover {
+        background-color: var(--kungalgame-trans-blue-1);
+      }
+    }
+
+    &:nth-child(2) {
+      color: var(--kungalgame-red-5);
+
+      &:hover {
+        background-color: var(--kungalgame-red-5);
+        color: var(--kungalgame-white);
+      }
+    }
+  }
+}
+
+.func-icon-active {
+  transform: rotate(90deg);
+  transition: transform 0.2s;
 }
 </style>

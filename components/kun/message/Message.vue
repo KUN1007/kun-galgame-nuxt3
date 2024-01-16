@@ -85,7 +85,7 @@ const handleMarkAsRead = async (mid: number) => {
         v-if="isShowMoreOperation(msg.mid) && activeMessage.includes(msg.mid)"
       >
         <span @click="handleClickGoto(msg.senderUid)"
-          >Goto {{ msg.senderName }}</span
+          >Goto user {{ msg.senderName }}</span
         >
         <span v-if="msg.status === 'unread'" @click="handleMarkAsRead(msg.mid)"
           >Mark as read</span
@@ -178,6 +178,7 @@ const handleMarkAsRead = async (mid: number) => {
     cursor: pointer;
     padding: 5px;
     border-radius: 5px;
+    font-size: 15px;
 
     &:hover {
       background-color: var(--kungalgame-trans-blue-1);
