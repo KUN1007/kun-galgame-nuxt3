@@ -22,6 +22,19 @@ const getMessages = async () => {
 
 const { data: messageData, refresh } = await getMessages()
 
+const handleReadAllMessage = async () => {
+  const { data } = await useFetch(`/api/message/read/all`, {
+    method: 'PUT',
+    watch: false,
+    ...kungalgameResponseHandler,
+  })
+
+  if (data.value) {
+    refresh()
+    useMessage('Read all messages successfully!', '已读所有消息成功', 'success')
+  }
+}
+
 const handleDeleteAllMessage = async () => {
   const res = await messageStore.alert('AlertInfo.message.delete', true)
   if (!res) {
@@ -37,7 +50,7 @@ const handleDeleteAllMessage = async () => {
   if (data.value) {
     refresh()
     useMessage(
-      'Delete all message successfully!',
+      'Delete all messages successfully!',
       '删除所有消息成功',
       'success'
     )
@@ -68,10 +81,12 @@ const handleDeleteAllMessage = async () => {
         </span>
 
         <div class="func-container" v-if="isShowFunction">
-          <button class="read">Mark All Messages as Read</button>
-          <button @click="handleDeleteAllMessage" class="delete">
+          <span @click="handleReadAllMessage" class="read"
+            >Mark All Messages as Read</span
+          >
+          <span @click="handleDeleteAllMessage" class="delete">
             Delete All Messages
-          </button>
+          </span>
         </div>
       </div>
 
@@ -130,12 +145,12 @@ const handleDeleteAllMessage = async () => {
   display: flex;
   flex-direction: column;
 
-  button {
+  span {
+    font-size: 15px;
     cursor: pointer;
     padding: 5px;
     border-radius: 5px;
-    border: none;
-    background: none;
+    color: var(--kungalgame-font-color-3);
 
     &:nth-child(1) {
       margin-bottom: 5px;
