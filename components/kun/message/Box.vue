@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { KunMessage } from '#build/components'
 
+const messageStore = useTempMessageStore()
 const { showKUNGalgameMessageBox } = storeToRefs(useTempSettingStore())
 const isShowFunction = ref(false)
 
@@ -20,6 +21,28 @@ const getMessages = async () => {
 }
 
 const { data: messageData, refresh } = await getMessages()
+
+const handleDeleteAllMessage = async () => {
+  const res = await messageStore.alert('AlertInfo.message.delete', true)
+  if (!res) {
+    return
+  }
+
+  const { data } = await useFetch(`/api/message/delete/all`, {
+    method: 'DELETE',
+    watch: false,
+    ...kungalgameResponseHandler,
+  })
+
+  if (data.value) {
+    refresh()
+    useMessage(
+      'Delete all message successfully!',
+      '删除所有消息成功',
+      'success'
+    )
+  }
+}
 </script>
 
 <template>
@@ -46,7 +69,9 @@ const { data: messageData, refresh } = await getMessages()
 
         <div class="func-container" v-if="isShowFunction">
           <button class="read">Mark All Messages as Read</button>
-          <button class="delete">Delete All Messages</button>
+          <button @click="handleDeleteAllMessage" class="delete">
+            Delete All Messages
+          </button>
         </div>
       </div>
 

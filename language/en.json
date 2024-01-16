@@ -428,6 +428,9 @@
       "leave": "Confirm leaving the page? Your changes will not be saved.",
       "logout": "Are you sure you want to log out?"
     },
+    "message": {
+      "delete": "Are you sure you want to delete all messages? This action cannot be undone."
+    },
     "login":{
       "invalidUsername":
         "Invalid username. Username should be 1 to 17 characters long and can include: Chinese characters, English letters, numbers, underscore, and tilde (~)",
