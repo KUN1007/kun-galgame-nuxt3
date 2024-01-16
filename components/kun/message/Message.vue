@@ -10,14 +10,26 @@ const props = defineProps<{
 
 const { locale } = useI18n()
 const activeMessage = ref<number[]>([])
+const messageMap = reactive(new Map<number, string | null>())
 
 const isShowMoreOperation = (mid: number) => {
   return activeMessage.value.includes(mid)
 }
 
-const handelClickShowMoreOperation = (mid: number) => {
+const handelClickShowMoreOperation = async (mid: number) => {
   if (!isShowMoreOperation(mid)) {
     activeMessage.value.push(mid)
+
+    if (messageMap.get(mid)) {
+      return
+    }
+    const { data } = await useFetch(`/api/message`, {
+      method: 'GET',
+      query: { mid },
+      watch: false,
+      ...kungalgameResponseHandler,
+    })
+    messageMap.set(mid, data.value)
   } else {
     activeMessage.value = activeMessage.value.filter((item) => item !== mid)
   }
@@ -98,6 +110,8 @@ const handleDeleteMessage = async (mid: number) => {
         class="more"
         v-if="isShowMoreOperation(msg.mid) && activeMessage.includes(msg.mid)"
       >
+        <div>{{ msg.senderName + msg.type + messageMap.get(msg.mid) }}</div>
+
         <span @click="handleClickGoto(msg.senderUid)"
           >Goto user {{ msg.senderName }}</span
         >

@@ -6,12 +6,11 @@ const { showKUNGalgameMessageBox } = storeToRefs(useTempSettingStore())
 const isShowFunction = ref(false)
 
 const getMessages = async () => {
-  const data = await useFetch(`/api/message`, {
+  const data = await useFetch(`/api/message/all`, {
     method: 'GET',
     query: {
       page: '1',
       limit: '10',
-      type: '',
       sortOrder: 'desc',
     },
     watch: false,
