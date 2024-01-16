@@ -23,6 +23,7 @@ export interface MessageRequestData {
 }
 
 export interface Message {
+  mid: number
   senderUid: number
   senderName: string
   receiverUid: number

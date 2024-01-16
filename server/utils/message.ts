@@ -13,6 +13,17 @@ export const createMessage = async (
   content?: RelatedContent | string,
   tid?: number
 ) => {
+  const duplicatedMessage = await MessageModel.findOne({
+    sender_uid: senderUid,
+    receiver_uid: receiverUid,
+    type,
+    content,
+    tid,
+  })
+  if (duplicatedMessage) {
+    return
+  }
+
   const newTopic = new MessageModel({
     sender_uid: senderUid,
     receiver_uid: receiverUid,

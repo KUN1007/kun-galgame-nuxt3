@@ -30,6 +30,7 @@ const getMessages = async (
     .lean()
 
   const responseData: Message[] = messages.map((message) => ({
+    mid: message.mid,
     senderUid: message.sender_uid,
     // @ts-ignore
     senderName: message.user[0].name,

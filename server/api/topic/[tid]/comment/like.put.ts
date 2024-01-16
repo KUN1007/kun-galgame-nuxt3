@@ -4,12 +4,6 @@ import mongoose from 'mongoose'
 import type { TopicLikeCommentRequestData } from '~/types/api/comment'
 
 export default defineEventHandler(async (event) => {
-  const tid = getRouterParam(event, 'tid')
-  if (!tid) {
-    kunError(event, 10210)
-    return
-  }
-
   const userInfo = getCookieTokenInfo(event)
   if (!userInfo) {
     kunError(event, 10115)

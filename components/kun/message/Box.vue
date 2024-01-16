@@ -18,7 +18,7 @@ const getMessages = async () => {
   return data
 }
 
-const { data: messageData } = await getMessages()
+const { data: messageData, refresh } = await getMessages()
 </script>
 
 <template>
@@ -34,7 +34,11 @@ const { data: messageData } = await getMessages()
         </span>
       </div>
 
-      <KunMessage v-if="messageData" :message="messageData" />
+      <KunMessage
+        v-if="messageData"
+        :message="messageData"
+        :refresh="refresh"
+      />
     </div>
   </Transition>
 </template>
