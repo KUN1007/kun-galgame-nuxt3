@@ -20,6 +20,7 @@
     "composables",
     "cooldown",
     "cout",
+    "Dedup",
     "defu",
     "dompurify",
     "fontawesome",

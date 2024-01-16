@@ -4,8 +4,8 @@ type Locale = 'en' | 'zh' | string
 
 const zhMessageMap: Record<string, string> = {
   topic: '话题',
-  reply: '评论',
-  comment: '回复',
+  reply: '回复',
+  comment: '评论',
 
   upvoted: '推',
   liked: '点赞',

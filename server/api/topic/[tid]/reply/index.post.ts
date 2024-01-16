@@ -98,6 +98,14 @@ export default defineEventHandler(async (event) => {
       await createTagsByTidAndRid(tid, savedReply.rid, tags, [])
     }
 
+    if (r_uid.toString() !== to_uid) {
+      if (newReply.floor === 1) {
+        await createMessage(r_uid, parseInt(to_uid), 'replied', 'topic', tid)
+      } else {
+        await createMessage(r_uid, parseInt(to_uid), 'replied', 'reply', tid)
+      }
+    }
+
     const responseData: TopicReply = {
       rid: savedReply.rid,
       tid: savedReply.tid,

@@ -8,6 +8,7 @@ const updateReplyUpvote = async (
   uid: number,
   to_uid: number,
   rid: number,
+  tid: number,
   time: number
 ) => {
   const userInfo = await UserModel.findOne({ uid })
@@ -38,6 +39,8 @@ const updateReplyUpvote = async (
       { uid: to_uid },
       { $inc: { moemoepoint: 1, upvote: 1 } }
     )
+
+    await createMessage(uid, to_uid, 'upvoted', 'reply', tid)
 
     await session.commitTransaction()
     session.endSession()
@@ -80,6 +83,7 @@ export default defineEventHandler(async (event) => {
   const result = await updateReplyUpvote(
     uid,
     parseInt(to_uid),
+    parseInt(rid),
     parseInt(tid),
     parseInt(time)
   )

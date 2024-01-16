@@ -11,7 +11,7 @@ const MessageSchema = new mongoose.Schema<MessageAttributes>(
     time: { type: Number, default: Date.now() },
     tid: { type: Number },
     content: { type: String, default: '' },
-    status: { type: String, required: true },
+    status: { type: String, default: 'unread' },
     type: { type: String, required: true },
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }

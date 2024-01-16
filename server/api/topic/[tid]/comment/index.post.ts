@@ -93,11 +93,15 @@ export default defineEventHandler(async (event) => {
       { $inc: { popularity: 2, comments: 1 } }
     )
 
-    await ReplyModel.updateOne(
+    const reply = await ReplyModel.findOneAndUpdate(
       { rid },
       { $addToSet: { comment: savedComment.cid } },
       { $inc: { comment_count: 1 } }
     )
+
+    if (c_uid !== to_uid) {
+      await createMessage(c_uid, to_uid, 'commented', 'comment', tid)
+    }
 
     const responseData: TopicComment = {
       cid: savedComment.cid,

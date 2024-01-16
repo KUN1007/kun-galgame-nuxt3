@@ -7,6 +7,7 @@ const updateReplyLike = async (
   uid: number,
   to_uid: number,
   rid: number,
+  tid: number,
   isPush: boolean
 ) => {
   if (uid === to_uid) {
@@ -40,6 +41,8 @@ const updateReplyLike = async (
       { $inc: { moemoepoint: moemoepointAmount, like: moemoepointAmount } }
     )
 
+    await createDedupMessage(uid, to_uid, 'liked', 'reply', tid)
+
     await session.commitTransaction()
     session.endSession()
   } catch (error) {
@@ -49,6 +52,12 @@ const updateReplyLike = async (
 }
 
 export default defineEventHandler(async (event) => {
+  const tid = getRouterParam(event, 'tid')
+  if (!tid) {
+    kunError(event, 10210)
+    return
+  }
+
   const userInfo = getCookieTokenInfo(event)
   if (!userInfo) {
     kunError(event, 10115)
@@ -71,6 +80,7 @@ export default defineEventHandler(async (event) => {
     uid,
     parseInt(to_uid),
     parseInt(rid),
+    parseInt(tid),
     isPush === 'true'
   )
   if (typeof result === 'number') {

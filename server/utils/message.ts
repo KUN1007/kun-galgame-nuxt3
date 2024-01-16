@@ -1,14 +1,28 @@
 import MessageModel from '../models/message'
-import type {
-  RelatedContent,
-  MessageStatus,
-  MessageType,
-} from '~/types/api/message'
+import type { RelatedContent, MessageType } from '~/types/api/message'
 
 export const createMessage = async (
   senderUid: number,
   receiverUid: number,
-  status: MessageStatus,
+  type: MessageType,
+  content?: RelatedContent | string,
+  tid?: number
+) => {
+  const newTopic = new MessageModel({
+    sender_uid: senderUid,
+    receiver_uid: receiverUid,
+    type,
+    content,
+    tid,
+  })
+
+  return await newTopic.save()
+}
+
+// When user toggle like ans dislike, maybe send deduplication request
+export const createDedupMessage = async (
+  senderUid: number,
+  receiverUid: number,
   type: MessageType,
   content?: RelatedContent | string,
   tid?: number
@@ -27,7 +41,6 @@ export const createMessage = async (
   const newTopic = new MessageModel({
     sender_uid: senderUid,
     receiver_uid: receiverUid,
-    status,
     type,
     content,
     tid,

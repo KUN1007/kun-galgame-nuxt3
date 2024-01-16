@@ -49,7 +49,7 @@ const updateTopicLike = async (
     )
 
     if (isPush) {
-      await createMessage(uid, to_uid, 'unread', 'liked', 'topic', tid)
+      await createDedupMessage(uid, to_uid, 'liked', 'topic', tid)
     }
 
     await session.commitTransaction()
