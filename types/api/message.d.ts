@@ -6,8 +6,6 @@ export type MessageType =
   | 'mentioned'
   | 'admin'
 
-export type RelatedContent = 'topic' | 'reply' | 'comment'
-
 export type MessageStatus = 'read' | 'unread'
 
 export type SortField = 'time'
@@ -29,7 +27,6 @@ export interface Message {
   receiverUid: number
   time: number
   tid?: number
-  content?: RelatedContent | string
   status: MessageStatus
   type: MessageType
 }

@@ -30,7 +30,7 @@ const updateReplyLike = async (
   session.startTransaction()
 
   try {
-    await ReplyModel.updateOne(
+    const reply = await ReplyModel.findOneAndUpdate(
       { rid: rid },
       { [isPush ? '$push' : '$pull']: { likes: uid } },
       { $inc: { likes_count: moemoepointAmount } }
@@ -41,7 +41,7 @@ const updateReplyLike = async (
       { $inc: { moemoepoint: moemoepointAmount, like: moemoepointAmount } }
     )
 
-    await createDedupMessage(uid, to_uid, 'liked', 'reply', tid)
+    await createDedupMessage(uid, to_uid, 'liked', reply?.content ?? '', tid)
 
     await session.commitTransaction()
     session.endSession()

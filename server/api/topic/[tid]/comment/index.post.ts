@@ -100,7 +100,7 @@ export default defineEventHandler(async (event) => {
     )
 
     if (c_uid !== to_uid) {
-      await createMessage(c_uid, to_uid, 'commented', 'comment', tid)
+      await createMessage(c_uid, to_uid, 'commented', savedComment.content, tid)
     }
 
     const responseData: TopicComment = {

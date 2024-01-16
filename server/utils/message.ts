@@ -1,11 +1,11 @@
 import MessageModel from '../models/message'
-import type { RelatedContent, MessageType } from '~/types/api/message'
+import type { MessageType } from '~/types/api/message'
 
 export const createMessage = async (
   senderUid: number,
   receiverUid: number,
   type: MessageType,
-  content?: RelatedContent | string,
+  content: string,
   tid?: number
 ) => {
   const newTopic = new MessageModel({
@@ -24,7 +24,7 @@ export const createDedupMessage = async (
   senderUid: number,
   receiverUid: number,
   type: MessageType,
-  content?: RelatedContent | string,
+  content: string,
   tid?: number
 ) => {
   const duplicatedMessage = await MessageModel.findOne({

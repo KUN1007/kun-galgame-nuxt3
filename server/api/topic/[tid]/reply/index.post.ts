@@ -99,11 +99,13 @@ export default defineEventHandler(async (event) => {
     }
 
     if (r_uid.toString() !== to_uid) {
-      if (newReply.floor === 1) {
-        await createMessage(r_uid, parseInt(to_uid), 'replied', 'topic', tid)
-      } else {
-        await createMessage(r_uid, parseInt(to_uid), 'replied', 'reply', tid)
-      }
+      await createMessage(
+        r_uid,
+        parseInt(to_uid),
+        'replied',
+        savedReply.content.slice(233),
+        tid
+      )
     }
 
     const responseData: TopicReply = {

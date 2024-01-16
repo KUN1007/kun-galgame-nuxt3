@@ -25,7 +25,7 @@ const updateReplyUpvote = async (
   session.startTransaction()
 
   try {
-    await ReplyModel.updateOne(
+    const reply = await ReplyModel.findOneAndUpdate(
       { rid },
       {
         $set: { upvote_time: time },
@@ -40,7 +40,7 @@ const updateReplyUpvote = async (
       { $inc: { moemoepoint: 1, upvote: 1 } }
     )
 
-    await createMessage(uid, to_uid, 'upvoted', 'reply', tid)
+    await createMessage(uid, to_uid, 'upvoted', reply?.content ?? '', tid)
 
     await session.commitTransaction()
     session.endSession()

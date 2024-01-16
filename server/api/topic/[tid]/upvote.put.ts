@@ -24,7 +24,7 @@ const updateTopicUpvote = async (
   session.startTransaction()
 
   try {
-    await TopicModel.updateOne(
+    const topic = await TopicModel.findOneAndUpdate(
       { tid },
       {
         $set: { upvote_time: time },
@@ -47,6 +47,8 @@ const updateTopicUpvote = async (
       { uid: to_uid },
       { $inc: { moemoepoint: 7, upvote: 1 } }
     )
+
+    await createMessage(uid, to_uid, 'upvoted', topic?.content ?? '', tid)
 
     await session.commitTransaction()
     session.endSession()

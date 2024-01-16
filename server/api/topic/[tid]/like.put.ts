@@ -30,7 +30,7 @@ const updateTopicLike = async (
   session.startTransaction()
 
   try {
-    await TopicModel.updateOne(
+    const topic = await TopicModel.findOneAndUpdate(
       { tid: tid },
       {
         $inc: { popularity: popularity, likes_count: moemoepointAmount },
@@ -49,7 +49,7 @@ const updateTopicLike = async (
     )
 
     if (isPush) {
-      await createDedupMessage(uid, to_uid, 'liked', 'topic', tid)
+      await createDedupMessage(uid, to_uid, 'liked', topic?.content ?? '', tid)
     }
 
     await session.commitTransaction()

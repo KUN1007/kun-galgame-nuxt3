@@ -1,8 +1,4 @@
-import type {
-  RelatedContent,
-  MessageStatus,
-  MessageType,
-} from '~/types/api/message'
+import type { MessageStatus, MessageType } from '~/types/api/message'
 
 export interface MessageAttributes {
   mid: number
@@ -10,7 +6,7 @@ export interface MessageAttributes {
   receiver_uid: number
   time: number
   tid?: number
-  content?: RelatedContent | string
+  content: string
   status: MessageStatus
   type: MessageType
 }
