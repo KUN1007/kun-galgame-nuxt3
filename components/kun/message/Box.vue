@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { KunMessage } from '#build/components'
+
 const { showKUNGalgameMessageBox } = storeToRefs(useTempSettingStore())
 
 const getMessages = async () => {
@@ -32,27 +34,7 @@ const { data: messageData } = await getMessages()
         </span>
       </div>
 
-      <div class="container" v-if="messageData">
-        <div class="message" v-for="(msg, index) in messageData" :key="index">
-          <div class="top">
-            <span class="status">
-              <Icon name="line-md:alert-circle" />
-              <Icon name="line-md:confirm-circle" />
-            </span>
-            <span class="time">{{ msg.time }}</span>
-          </div>
-
-          <div class="content">
-            <!-- Your post was ${actionType} by ${actionUserId} -->
-            {{ msg.content }}
-          </div>
-
-          <div class="bottom">
-            <span>Read</span>
-            <span>Delete</span>
-          </div>
-        </div>
-      </div>
+      <KunMessage v-if="messageData" :message="messageData" />
     </div>
   </Transition>
 </template>
@@ -80,33 +62,6 @@ const { data: messageData } = await getMessages()
 
   .icon-item {
     cursor: pointer;
-  }
-}
-
-.container {
-  padding: 10px;
-}
-
-.message {
-  padding: 10px;
-  border: 1px solid var(--kungalgame-blue-1);
-  border-radius: 5px;
-  background-color: var(--kungalgame-trans-blue-0);
-
-  .top {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .content {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    word-break: break-all;
-  }
-
-  .bottom {
-    display: flex;
-    justify-content: space-between;
   }
 }
 </style>
