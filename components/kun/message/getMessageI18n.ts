@@ -39,7 +39,7 @@ export const getMessageI18n = (locale: Locale, message: Message) => {
   if (locale === 'zh') {
     const contentZH = getMessageZh(locale, message.content ?? '')
     const actionZH = getMessageZh(locale, message.type)
-    const messageContentZH = `您的${contentZH}被 <a href="/kungalgamer/${message.senderUid}/info">${message.senderName}</a> ${actionZH}！`
+    const messageContentZH = `您的${contentZH}被 ${message.senderName} ${actionZH}！`
     return messageContentZH
   }
 

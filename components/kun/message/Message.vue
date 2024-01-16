@@ -8,6 +8,7 @@ const props = defineProps<{
 }>()
 
 const { locale } = useI18n()
+const isShowMoreOperation = ref(false)
 </script>
 
 <template>
@@ -31,8 +32,22 @@ const { locale } = useI18n()
       <div class="content" v-html="getMessageI18n(locale, msg)"></div>
 
       <div class="bottom">
-        <span>Read</span>
-        <span>Delete</span>
+        <NuxtLink v-if="msg.tid" class="link" :to="`/topic/${msg.tid}`">
+          Link
+        </NuxtLink>
+        <span
+          class="more-btn"
+          :class="isShowMoreOperation ? 'more-active' : ''"
+          @click="isShowMoreOperation = !isShowMoreOperation"
+        >
+          <Icon name="line-md:chevron-small-right" />
+        </span>
+      </div>
+
+      <div class="more" v-if="isShowMoreOperation">
+        <span>Goto {{ msg.senderName }}</span>
+        <span>Mark as read</span>
+        <span>Delete message</span>
       </div>
     </div>
   </div>
@@ -45,9 +60,8 @@ const { locale } = useI18n()
 
 .message {
   padding: 10px;
-  border: 1px solid var(--kungalgame-blue-1);
+  border: 1px solid var(--kungalgame-blue-4);
   border-radius: 5px;
-  background-color: var(--kungalgame-trans-blue-0);
 
   .top {
     display: flex;
@@ -75,11 +89,62 @@ const { locale } = useI18n()
     margin-top: 10px;
     margin-bottom: 10px;
     word-break: break-all;
+
+    :deep(a) {
+      color: var(--kungalgame-blue-4);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   .bottom {
     display: flex;
     justify-content: space-between;
   }
+}
+
+.link {
+  cursor: pointer;
+  color: var(--kungalgame-blue-5);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.more-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    color: var(--kungalgame-blue-4);
+  }
+}
+
+.more {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  span {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: var(--kungalgame-trans-blue-1);
+    }
+  }
+}
+
+.more-active {
+  transform: rotate(90deg);
+  transition: transform 0.2s;
 }
 </style>
