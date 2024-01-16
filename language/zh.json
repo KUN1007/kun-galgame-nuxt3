@@ -45,7 +45,17 @@
     },
     "user":{
       "profile": "个人主页",
+      "message": "我的消息",
       "logout": "退出登录"
+    },
+    "message":{
+      "message": "消息",
+      "readAll": "标记所有消息为已读",
+      "deleteAll": "删除所有消息",
+      "link": "链接",
+      "goto": "前往用户",
+      "read": "标记为已读",
+      "delete": "删除消息"
     }
   },
   "back":{

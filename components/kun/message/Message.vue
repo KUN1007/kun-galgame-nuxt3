@@ -101,7 +101,7 @@ const handleDeleteMessage = async (mid: number) => {
 
       <div class="bottom">
         <NuxtLink v-if="msg.tid" class="link" :to="`/topic/${msg.tid}`">
-          Link
+          {{ $t('header.message.link') }}
         </NuxtLink>
         <span
           class="more-btn"
@@ -121,12 +121,14 @@ const handleDeleteMessage = async (mid: number) => {
         </div>
 
         <span @click="navigateTo(`/kungalgamer/${msg.senderUid}/info`)"
-          >Goto user {{ msg.senderName }}</span
-        >
-        <span v-if="msg.status === 'unread'" @click="handleMarkAsRead(msg.mid)"
-          >Mark as read</span
-        >
-        <span @click="handleDeleteMessage(msg.mid)">Delete message</span>
+          >{{ `${$t('header.message.goto')} ${msg.senderName}` }}
+        </span>
+        <span v-if="msg.status === 'unread'" @click="handleMarkAsRead(msg.mid)">
+          {{ $t('header.message.read') }}
+        </span>
+        <span @click="handleDeleteMessage(msg.mid)">
+          {{ $t('header.message.delete') }}
+        </span>
       </div>
     </div>
   </div>

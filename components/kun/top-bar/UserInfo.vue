@@ -51,7 +51,9 @@ onMounted(() => {
           </NuxtLink>
         </span>
 
-        <span @click="showKUNGalgameMessageBox = true">Message</span>
+        <span @click="showKUNGalgameMessageBox = true">
+          {{ $t('header.user.message') }}
+        </span>
 
         <span @click="logOut">{{ $t('header.user.logout') }}</span>
       </div>

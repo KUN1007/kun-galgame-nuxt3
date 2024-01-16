@@ -64,7 +64,7 @@ const handleDeleteAllMessage = async () => {
   >
     <div class="root" v-if="showKUNGalgameMessageBox">
       <div class="title">
-        <span class="name">Message</span>
+        <span class="name">{{ $t('header.message.message') }}</span>
         <span class="icon-item" @click="showKUNGalgameMessageBox = false">
           <Icon name="line-md:close" />
         </span>
@@ -80,11 +80,11 @@ const handleDeleteAllMessage = async () => {
         </span>
 
         <div class="func-container" v-if="isShowFunction">
-          <span @click="handleReadAllMessage" class="read"
-            >Mark All Messages as Read</span
-          >
+          <span @click="handleReadAllMessage" class="read">
+            {{ $t('header.message.readAll') }}
+          </span>
           <span @click="handleDeleteAllMessage" class="delete">
-            Delete All Messages
+            {{ $t('header.message.deleteAll') }}
           </span>
         </div>
       </div>

@@ -45,7 +45,17 @@
     },
     "user":{
       "profile": "Profile Page",
+      "message": "Message",
       "logout": "Log out"
+    },
+    "message":{
+      "message": "Message",
+      "readAll": "Mark All Messages as Read",
+      "deleteAll": "Delete All Messages",
+      "link": "Link",
+      "goto": "Goto user",
+      "read": "Mark as read",
+      "delete": "Delete message"
     }
   },
   "back":{

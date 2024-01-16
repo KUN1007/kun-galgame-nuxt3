@@ -80,7 +80,7 @@ const mpWidth = computed(() => {
   span:nth-child(2) {
     font-family: serif;
     position: absolute;
-    right: 0;
+    right: 10px;
     font-size: 100px;
     color: var(--kungalgame-trans-white-5);
     font-style: italic;
