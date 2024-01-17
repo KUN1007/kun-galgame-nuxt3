@@ -18,7 +18,7 @@ const readReplyData = async (event: H3Event) => {
 
   const userInfo = getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115)
+    kunError(event, 10115, 205)
     return
   }
   const uid = userInfo.uid

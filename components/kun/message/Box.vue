@@ -58,44 +58,35 @@ const handleDeleteAllMessage = async () => {
 </script>
 
 <template>
-  <Transition
-    enter-active-class="animate__animated animate__fadeInRight animate__faster"
-    leave-active-class="animate__animated animate__fadeOutRight animate__faster"
-  >
-    <div class="root" v-if="showKUNGalgameMessageBox">
-      <div class="title">
-        <span class="name">{{ $t('header.message.message') }}</span>
-        <span class="icon-item" @click="showKUNGalgameMessageBox = false">
-          <Icon name="line-md:close" />
-        </span>
-      </div>
-
-      <div class="func">
-        <span
-          class="func-icon"
-          :class="isShowFunction ? 'func-icon-active' : ''"
-          @click="isShowFunction = !isShowFunction"
-        >
-          <Icon name="line-md:chevron-small-right" />
-        </span>
-
-        <div class="func-container" v-if="isShowFunction">
-          <span @click="handleReadAllMessage" class="read">
-            {{ $t('header.message.readAll') }}
-          </span>
-          <span @click="handleDeleteAllMessage" class="delete">
-            {{ $t('header.message.deleteAll') }}
-          </span>
-        </div>
-      </div>
-
-      <KunMessage
-        v-if="messageData"
-        :message="messageData"
-        :refresh="refresh"
-      />
+  <div class="root">
+    <div class="title">
+      <span class="name">{{ $t('header.message.message') }}</span>
+      <span class="icon-item" @click="showKUNGalgameMessageBox = false">
+        <Icon name="line-md:close" />
+      </span>
     </div>
-  </Transition>
+
+    <div class="func">
+      <span
+        class="func-icon"
+        :class="isShowFunction ? 'func-icon-active' : ''"
+        @click="isShowFunction = !isShowFunction"
+      >
+        <Icon name="line-md:chevron-small-right" />
+      </span>
+
+      <div class="func-container" v-if="isShowFunction">
+        <span @click="handleReadAllMessage" class="read">
+          {{ $t('header.message.readAll') }}
+        </span>
+        <span @click="handleDeleteAllMessage" class="delete">
+          {{ $t('header.message.deleteAll') }}
+        </span>
+      </div>
+    </div>
+
+    <KunMessage v-if="messageData" :message="messageData" :refresh="refresh" />
+  </div>
 </template>
 
 <style lang="scss" scoped>

@@ -16,11 +16,7 @@ type KunOnResponseErrorContext<R extends ResponseType = 'json'> =
     response: FetchResponse<R>
   }
 
-export const onResponse = (context: KunOnResponseContext) => {
-  if (context.response.status === 233) {
-    kungalgameErrorHandler(context.response.statusText)
-    return
-  }
+export const onResponse = async (context: KunOnResponseContext) => {
   if (context.response.status === 205) {
     kungalgameStoreReset()
     useMessage(
@@ -30,6 +26,12 @@ export const onResponse = (context: KunOnResponseContext) => {
       7777
     )
     navigateTo('/login')
+    return
+  }
+
+  if (context.response.status === 233) {
+    kungalgameErrorHandler(context.response.statusText)
+    return
   }
 }
 

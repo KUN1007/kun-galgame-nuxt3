@@ -11,6 +11,7 @@ const MessageBox = defineAsyncComponent(() => import('../message/Box.vue'))
 
 const { isShowSearch } = storeToRefs(useTempHomeStore())
 const { name, avatarMin } = storeToRefs(useKUNGalgameUserStore())
+const { showKUNGalgameMessageBox } = storeToRefs(useTempSettingStore())
 const route = useRoute()
 
 const showKUNGalgameHamburger = ref(false)
@@ -57,7 +58,12 @@ onMounted(() => {
         </Transition>
       </div>
 
-      <MessageBox />
+      <Transition
+        enter-active-class="animate__animated animate__fadeInRight animate__faster"
+        leave-active-class="animate__animated animate__fadeOutRight animate__faster"
+      >
+        <MessageBox v-if="showKUNGalgameMessageBox" />
+      </Transition>
 
       <div class="kungalgame">
         <NuxtLink to="/">
