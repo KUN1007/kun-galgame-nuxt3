@@ -132,6 +132,11 @@ export default defineNuxtConfig({
 
   // Backend
   socket: {
-    serverOptions: {},
+    serverOptions: {
+      // Cookies: {
+      //   name: 'kungalgame-moemoe-refresh-token',
+      //   httpOnly: true,
+      // },
+    },
   },
 })

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { KUNGalgamePayload } from '~/types/utils/jwt'
+import type { KUNGalgamePayload } from '~/types/utils/jwt'
 
 const config = useRuntimeConfig()
 

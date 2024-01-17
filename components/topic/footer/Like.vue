@@ -95,7 +95,7 @@ const handleClickLike = () => {
   handleClickLikeThrottled()
 
   const socket = useSocket()
-  socket.emit('like', socket.id)
+  socket.emit('like', props.toUid)
 }
 </script>
 

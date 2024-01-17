@@ -32,11 +32,18 @@ watch(
 onMounted(() => {
   const socket = useIO()()
 
-  socket.emit('register', socket.id)
+  socket.emit('register', useKUNGalgameUserStore().uid)
+
+  socket.on('connect', () => {
+    console.log('Socket.io Connected!')
+  })
+
+  socket.on('disconnect', () => {
+    console.log('Socket.io Disconnected...')
+  })
 
   socket.on('liked', (socket) => {
-    console.log('uid', socket)
-    alert(`Once`)
+    useMessage('Like!', '点赞', 'info')
   })
 })
 </script>
