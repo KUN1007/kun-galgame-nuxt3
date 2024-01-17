@@ -129,4 +129,9 @@ export default defineNuxtConfig({
       type: 'module',
     },
   },
+
+  // Backend
+  socket: {
+    serverOptions: {},
+  },
 })

@@ -27,6 +27,17 @@ watch(
     showKUNGalgameHamburger.value = false
   }
 )
+
+onMounted(() => {
+  const socket = useIO()()
+
+  socket.emit('register', socket.id)
+
+  socket.on('liked', (socket) => {
+    console.log('uid', socket)
+    alert(`Once`)
+  })
+})
 </script>
 
 <template>

@@ -93,6 +93,9 @@ const handleClickLike = () => {
     return
   }
   handleClickLikeThrottled()
+
+  const socket = useSocket()
+  socket.emit('like', socket.id)
 }
 </script>
 

@@ -60,6 +60,7 @@
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
     "nodemailer": "^6.9.7",
-    "nodemailer-smtp-transport": "^2.7.4"
+    "nodemailer-smtp-transport": "^2.7.4",
+    "nuxt3-socket.io": "^0.3.0"
   }
 }
