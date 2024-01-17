@@ -24,7 +24,7 @@ export default defineNuxtConfig({
     'nuxt-typed-router',
     'nuxt-schema-org',
     '@nuxtjs/color-mode',
-    './modules/socket/module',
+    'nuxt3-socket.io',
   ],
   runtimeConfig: {
     MONGODB_URL: process.env.MONGODB_URL,

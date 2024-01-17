@@ -82,20 +82,6 @@ useSchemaOrg([
   defineWebSite({ name: 'KUN Visual Novel' }),
   defineWebPage(),
 ])
-
-const socket = useSocket()
-
-const connected = ref(false)
-
-onMounted(() => {
-  socket.on('connect', () => {
-    connected.value = socket.connected
-  })
-
-  socket.on('disconnect', () => {
-    connected.value = socket.connected
-  })
-})
 </script>
 
 <template>

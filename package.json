@@ -60,8 +60,6 @@
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
     "nodemailer": "^6.9.7",
-    "nodemailer-smtp-transport": "^2.7.4",
-    "socket.io": "^4.7.4",
-    "socket.io-client": "^4.7.4"
+    "nodemailer-smtp-transport": "^2.7.4"
   }
 }
