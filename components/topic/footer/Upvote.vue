@@ -43,6 +43,9 @@ const upvoteTopic = async () => {
     upvoteCount.value++
     isUpvote.value = true
     useMessage('Topic upvote successfully', '推话题成功', 'success')
+
+    const socket = useSocket()
+    socket.emit('upvote', props.toUid)
   }
 }
 
@@ -71,6 +74,9 @@ const upvoteReply = async () => {
     upvoteCount.value++
     isUpvote.value = true
     useMessage('Reply upvote successfully', '推回复成功', 'success')
+
+    const socket = useSocket()
+    socket.emit('upvote', props.toUid)
   }
 }
 

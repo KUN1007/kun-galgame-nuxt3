@@ -54,6 +54,9 @@ const likeComment = async () => {
     likesCount.value++
     isLiked.value = true
     useMessage('Like successfully!', '点赞成功', 'success')
+
+    const socket = useSocket()
+    socket.emit('like', props.toUid)
   }
 }
 

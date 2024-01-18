@@ -40,6 +40,9 @@ const handlePublishComment = async () => {
     emits('getCommentEmits', data.value)
     useMessage('Comment published successfully!', '评论发布成功', 'success')
     handleCloseCommentPanel()
+
+    const socket = useSocket()
+    socket.emit('comment', toUid.value)
   }
 }
 

@@ -43,6 +43,10 @@ onMounted(() => {
   })
 
   // TODO: Toast message info
+  socket.on('upvoted', (socket) => {
+    messageStatus.value = 'new'
+  })
+
   socket.on('liked', (socket) => {
     messageStatus.value = 'new'
   })

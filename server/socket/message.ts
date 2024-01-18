@@ -5,7 +5,7 @@ import env from '../env/dotenv'
 import type { KUNGalgamePayload } from '../../types/utils/jwt'
 import type { Socket } from 'socket.io'
 
-const userSockets = new Map()
+const userSockets = new Map<number | undefined, KUNGalgameSocket>()
 
 interface KUNGalgameSocket extends Socket {
   payload?: KUNGalgamePayload
@@ -34,12 +34,39 @@ export default defineIOHandler((io) => {
       userSockets.set(uid, socket)
     })
 
+    socket.on('upvote', (uid: number) => {
+      const upvotedUserSocket = userSockets.get(uid)
+      const username = socket.payload?.name
+
+      if (upvotedUserSocket) {
+        upvotedUserSocket.emit('upvoted', username)
+      }
+    })
+
     socket.on('like', (uid: number) => {
       const likedUserSocket = userSockets.get(uid)
       const username = socket.payload?.name
 
       if (likedUserSocket) {
-        likedUserSocket.emit('liked', [username, 'liked'])
+        likedUserSocket.emit('liked', username)
+      }
+    })
+
+    socket.on('reply', (uid: number) => {
+      const repliedUserSocket = userSockets.get(uid)
+      const username = socket.payload?.name
+
+      if (repliedUserSocket) {
+        repliedUserSocket.emit('replied', username)
+      }
+    })
+
+    socket.on('comment', (uid: number) => {
+      const commentedUserSocket = userSockets.get(uid)
+      const username = socket.payload?.name
+
+      if (commentedUserSocket) {
+        commentedUserSocket.emit('commented', username)
       }
     })
   })
