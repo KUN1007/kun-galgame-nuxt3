@@ -12,6 +12,10 @@ declare module 'nuxt/schema' {
   }
 
   interface PublicRuntimeConfig {
+    DEV_HOST: string
+    DEV_PORT: string
+    DEV_SERVER: string
+
     KUN_GALGAME_URL: string
   }
 }

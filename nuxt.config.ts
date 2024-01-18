@@ -8,8 +8,8 @@ export default defineNuxtConfig({
     // },
   },
   devServer: {
-    host: '127.0.0.1',
-    port: 1007,
+    host: process.env.DEV_HOST,
+    port: parseInt(process.env.DEV_PORT || '1007'),
   },
   modules: [
     '@pinia/nuxt',
@@ -39,6 +39,10 @@ export default defineNuxtConfig({
     JWT_SECRET: process.env.JWT_SECRET,
 
     public: {
+      DEV_HOST: process.env.DEV_HOST,
+      DEV_PORT: process.env.DEV_PORT,
+      DEV_SERVER: process.env.DEV_SERVER,
+
       KUN_GALGAME_URL: process.env.KUN_GALGAME_URL,
     },
   },

@@ -20,7 +20,16 @@ watch(
 )
 
 onMounted(() => {
-  const socket = useIO()()
+  const websiteURL = useRuntimeConfig().public.DEV_SERVER
+  // TODO: Dev server to production server
+  const kungalgameURL =
+    process.env.NODE_ENV === 'development'
+      ? `${useRuntimeConfig().public.DEV_HOST}:${
+          useRuntimeConfig().public.DEV_PORT
+        }`
+      : websiteURL
+
+  const socket = useIO()(kungalgameURL)
   socket.emit('register')
 
   socket.on('connect', () => {
