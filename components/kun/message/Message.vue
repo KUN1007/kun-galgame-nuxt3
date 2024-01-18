@@ -136,7 +136,9 @@ const handleDeleteMessage = async (mid: number) => {
 
 <style lang="scss" scoped>
 .container {
+  height: calc(100vh - 63px);
   padding: 10px;
+  overflow-y: scroll;
 }
 
 .message {
@@ -227,6 +229,7 @@ const handleDeleteMessage = async (mid: number) => {
 .detail {
   padding: 5px;
   border-left: 4px solid var(--kungalgame-blue-4);
+  word-break: break-word;
 }
 
 .more-btn-active {

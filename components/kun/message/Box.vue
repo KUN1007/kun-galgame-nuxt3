@@ -130,7 +130,7 @@ const handleTouchEnd = () => {
   top: 0;
   right: 0;
   width: 250px;
-  min-height: 100vh;
+  height: 100vh;
   border-left: 1px solid var(--kungalgame-blue-1);
   border-radius: 5px 0 0 5px;
   background-color: var(--kungalgame-trans-white-2);
