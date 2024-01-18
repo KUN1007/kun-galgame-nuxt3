@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { topBarItem } from './topBarItem'
 import 'animate.css'
+import type { MessageStatus } from '~/types/utils/message'
 
 const Hamburger = defineAsyncComponent(() => import('./Hamburger.vue'))
 const KUNGalgameSettingsPanel = defineAsyncComponent(
@@ -17,7 +18,8 @@ const route = useRoute()
 const showKUNGalgameHamburger = ref(false)
 const showKUNGalgamePanel = ref(false)
 const showKUNGalgameUserPanel = ref(false)
-
+const messageStatus = ref<MessageStatus>('offline')
+  
 const navItemNum = topBarItem.length
 const navItemLength = `${navItemNum}00px`
 

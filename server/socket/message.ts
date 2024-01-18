@@ -28,18 +28,18 @@ export default defineIOHandler((io) => {
     }
   })
 
-  io.on('connection', (socket) => {
-    socket.on('register', (uid: number) => {
+  io.on('connection', (socket: KUNGalgameSocket) => {
+    socket.on('register', () => {
+      const uid = socket.payload?.uid
       userSockets.set(uid, socket)
     })
 
     socket.on('like', (uid: number) => {
-      console.log(uid)
-
       const likedUserSocket = userSockets.get(uid)
+      const username = socket.payload?.name
 
       if (likedUserSocket) {
-        likedUserSocket.emit('liked', uid)
+        likedUserSocket.emit('liked', [username, 'liked'])
       }
     })
   })
