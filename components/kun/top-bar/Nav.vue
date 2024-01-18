@@ -20,7 +20,13 @@ watch(
 )
 
 onMounted(() => {
-  const socket = useIO()()
+  /*
+   * disable HTTP long-polling on the client-side
+   * See: https://socket.io/docs/v4/pm2/
+   */
+  const socket = useIO()({
+    transports: ['websocket'],
+  })
   socket.emit('register')
 
   socket.on('connect', () => {
