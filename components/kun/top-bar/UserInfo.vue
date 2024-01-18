@@ -6,6 +6,12 @@ const { showKUNGalgameMessageBox, messageStatus } = storeToRefs(
 
 const router = useRouter()
 const container = ref<HTMLElement>()
+const isShowMessageDot = computed(() => {
+  if (messageStatus.value === 'new' || messageStatus.value === 'admin') {
+    return true
+  }
+  return false
+})
 
 const emits = defineEmits<{
   close: []
@@ -62,7 +68,8 @@ onMounted(() => {
         </span>
 
         <span @click="handleClickMessage">
-          {{ $t('header.user.message') }}
+          <text>{{ $t('header.user.message') }}</text>
+          <text v-if="isShowMessageDot" class="message-dot"></text>
         </span>
 
         <span @click="logOut">{{ $t('header.user.logout') }}</span>
@@ -141,6 +148,7 @@ onMounted(() => {
 
 .func {
   span {
+    position: relative;
     cursor: pointer;
     color: var(--kungalgame-blue-5);
     height: 30px;
@@ -162,5 +170,15 @@ onMounted(() => {
       background-color: var(--kungalgame-trans-blue-1);
     }
   }
+}
+
+.message-dot {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--kungalgame-pink-4);
 }
 </style>
