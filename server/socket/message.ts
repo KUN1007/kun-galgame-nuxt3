@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { defineIOHandler } from 'nuxt3-socket.io/helpers'
+import { defineIOHandler } from '../../modules/socket/runtime/helpers'
 import { parse } from 'cookie-es'
 import env from '../env/dotenv'
 import type { KUNGalgamePayload } from '../../types/utils/jwt'

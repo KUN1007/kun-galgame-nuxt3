@@ -1,75 +1,41 @@
-# Nuxt 3 Minimal Starter
+# kun-galgame-nuxt3
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+---
 
-## Setup
+Note: You must use `@socket.io/pm2` instead `pm2`
 
-Make sure to install the dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+```shell
+npm install -g @socket.io/pm2
 ```
 
-## Development Server
+If pm2 is already installed, you will have to remove it first:
 
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+```shell
+npm remove -g pm2
 ```
 
-## Production
+See: https://socket.io/docs/v4/pm2/
 
-Build the application for production:
+## How to start
 
-```bash
-# npm
-npm run build
+Clone this repository.
 
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+```shell
+git clone https://github.com/KUN1007/kun-galgame-nuxt3
 ```
 
-Locally preview production build:
+Install packages, we recommend you use `pnpm`
 
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+```shell
+pnpm i
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Create `.env` file in project root folder.
+
+Reference `.env.example` white your own project config.
+
+Run project, for development environment
+
+```shell
+pnpm dev
+```

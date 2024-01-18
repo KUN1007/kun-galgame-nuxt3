@@ -51,6 +51,8 @@
     "@milkdown/utils": "^7.3.2",
     "@milkdown/vue": "^7.3.2",
     "@prosemirror-adapter/vue": "^0.2.6",
+    "@socket.io/cluster-adapter": "^0.2.2",
+    "@socket.io/sticky": "^1.0.4",
     "@types/jsonwebtoken": "^9.0.5",
     "animate.css": "^4.1.1",
     "bcrypt": "^5.1.1",
@@ -61,6 +63,7 @@
     "mongoose": "^8.0.3",
     "nodemailer": "^6.9.7",
     "nodemailer-smtp-transport": "^2.7.4",
-    "nuxt3-socket.io": "^0.3.0"
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.7.4"
   }
 }
