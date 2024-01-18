@@ -1,13 +1,23 @@
 <script setup lang="ts">
 import { hamburgerItem } from './hamburgerItem'
+import 'animate.css'
 
-const emits = defineEmits<{
-  close: []
-}>()
+const { showKUNGalgameHamburger } = storeToRefs(useTempSettingStore())
 
 const startX = ref(0)
 const currentX = ref(0)
 const isDragging = ref(false)
+const isShowHamburger = ref(false)
+
+onMounted(() => (isShowHamburger.value = true))
+
+const handleClose = async () => {
+  isShowHamburger.value = false
+  await new Promise((resolve) => {
+    setTimeout(resolve, 17)
+  })
+  showKUNGalgameHamburger.value = false
+}
 
 const handleTouchStart = (event: TouchEvent) => {
   startX.value = event.touches[0].clientX
@@ -28,9 +38,9 @@ const handleTouchEnd = () => {
   isDragging.value = false
   const movedX = currentX.value
   if (Math.abs(movedX) > 100) {
-    emits('close')
+    showKUNGalgameHamburger.value = false
   }
-  currentX.value = 0 // 重置位置
+  currentX.value = 0
 }
 
 const handleClickTitle = () => {
@@ -39,12 +49,13 @@ const handleClickTitle = () => {
 </script>
 
 <template>
-  <div class="root" @click="$emit('close')">
+  <div class="root" @click="handleClose">
     <Transition
       enter-active-class="animate__animated animate__fadeInLeft animate__faster"
-      appear
+      leave-active-class="animate__animated animate__fadeOutLeft animate__faster"
     >
       <div
+        v-if="isShowHamburger"
         class="container"
         @click.stop
         :class="{ 'is-dragging': isDragging }"
@@ -95,7 +106,7 @@ const handleClickTitle = () => {
   overflow-y: scroll;
   color: var(--kungalgame-font-color-3);
   background-color: var(--kungalgame-mask-color-0);
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s;
   z-index: 1;
 }
 
