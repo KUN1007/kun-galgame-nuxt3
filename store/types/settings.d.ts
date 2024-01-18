@@ -1,3 +1,5 @@
+import type { MessageStatus } from '~/types/utils/message'
+
 interface PageName {
   index: number
   topic: number
@@ -23,4 +25,5 @@ export interface TempSettingStore {
   showKUNGalgameUserPanel: boolean
 
   showKUNGalgameMessageBox: boolean
+  messageStatus: MessageStatus
 }

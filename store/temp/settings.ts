@@ -7,7 +7,17 @@ export const useTempSettingStore = defineStore({
     showKUNGalgameHamburger: false,
     showKUNGalgamePanel: false,
     showKUNGalgameUserPanel: false,
-
     showKUNGalgameMessageBox: false,
+
+    messageStatus: 'offline',
   }),
+
+  actions: {
+    reset() {
+      this.showKUNGalgameHamburger = false
+      this.showKUNGalgamePanel = false
+      this.showKUNGalgameUserPanel = false
+      this.showKUNGalgameMessageBox = false
+    },
+  },
 })

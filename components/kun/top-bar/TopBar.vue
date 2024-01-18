@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { topBarItem } from './topBarItem'
 import 'animate.css'
-import type { MessageStatus } from '~/types/utils/message'
 
 const Hamburger = defineAsyncComponent(() => import('./Hamburger.vue'))
 const KUNGalgameSettingsPanel = defineAsyncComponent(
@@ -12,40 +11,48 @@ const MessageBox = defineAsyncComponent(() => import('../message/Box.vue'))
 
 const { isShowSearch } = storeToRefs(useTempHomeStore())
 const { name, avatarMin } = storeToRefs(useKUNGalgameUserStore())
-const { showKUNGalgameMessageBox } = storeToRefs(useTempSettingStore())
+const {
+  showKUNGalgameHamburger,
+  showKUNGalgamePanel,
+  showKUNGalgameMessageBox,
+  showKUNGalgameUserPanel,
+  messageStatus,
+} = storeToRefs(useTempSettingStore())
 const route = useRoute()
 
-const showKUNGalgameHamburger = ref(false)
-const showKUNGalgamePanel = ref(false)
-const showKUNGalgameUserPanel = ref(false)
-const messageStatus = ref<MessageStatus>('offline')
-  
 const navItemNum = topBarItem.length
 const navItemLength = `${navItemNum}00px`
 
 watch(
   () => route.name,
   () => {
-    showKUNGalgamePanel.value = false
-    showKUNGalgameHamburger.value = false
+    useTempSettingStore().reset()
   }
 )
 
 onMounted(() => {
   const socket = useIO()()
-
-  socket.emit('register', useKUNGalgameUserStore().uid)
+  socket.emit('register')
 
   socket.on('connect', () => {
-    console.log('Socket.io Connected!')
+    messageStatus.value = 'online'
   })
 
   socket.on('disconnect', () => {
-    console.log('Socket.io Disconnected...')
+    messageStatus.value = 'offline'
   })
 
+  // TODO: Toast message info
   socket.on('liked', (socket) => {
-    useMessage('Like!', '点赞', 'info')
+    messageStatus.value = 'new'
+  })
+
+  socket.on('replied', (socket) => {
+    messageStatus.value = 'new'
+  })
+
+  socket.on('commented', (socket) => {
+    messageStatus.value = 'new'
   })
 })
 </script>
@@ -105,13 +112,21 @@ onMounted(() => {
       </span>
 
       <div class="avatar" v-if="name">
-        <NuxtImg
-          v-if="avatarMin"
+        <div>
+          <NuxtImg
+            class="avatar-image"
+            v-if="avatarMin"
+            @click="showKUNGalgameUserPanel = true"
+            :src="avatarMin"
+            :alt="name"
+          />
+          <div class="status" :class="messageStatus"></div>
+        </div>
+        <span
+          class="guest"
           @click="showKUNGalgameUserPanel = true"
-          :src="avatarMin"
-          :alt="name"
-        />
-        <span @click="showKUNGalgameUserPanel = true" v-if="!avatarMin">
+          v-if="!avatarMin"
+        >
           {{ name }}
         </span>
       </div>
@@ -288,7 +303,7 @@ $navNumber: v-bind(navItemNum);
   justify-content: center;
   align-items: center;
 
-  span {
+  .guest {
     white-space: nowrap;
     cursor: pointer;
     font-size: medium;
@@ -300,7 +315,7 @@ $navNumber: v-bind(navItemNum);
     }
   }
 
-  img {
+  .avatar-image {
     margin-left: 30px;
     height: 40px;
     width: 40px;
@@ -308,6 +323,33 @@ $navNumber: v-bind(navItemNum);
     border-radius: 50%;
     position: relative;
   }
+}
+
+.status {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.online {
+  background-color: var(--kungalgame-green-4);
+}
+
+.offline {
+  background-color: var(--kungalgame-blue-4);
+}
+
+.new {
+  animation: kun-pulse 1s infinite;
+  background-color: var(--kungalgame-pink-4);
+}
+
+.admin {
+  animation: kun-pulse 1s infinite;
+  background-color: var(--kungalgame-red-4);
 }
 
 .login {
@@ -332,6 +374,21 @@ $navNumber: v-bind(navItemNum);
 .hamburger-leave-to .container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+
+@keyframes kun-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @media (max-width: 1000px) {

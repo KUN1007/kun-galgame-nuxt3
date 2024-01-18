@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const { uid, name, moemoepoint } = storeToRefs(useKUNGalgameUserStore())
-const { showKUNGalgameMessageBox } = storeToRefs(useTempSettingStore())
+const { showKUNGalgameMessageBox, messageStatus } = storeToRefs(
+  useTempSettingStore()
+)
 
 const router = useRouter()
 const container = ref<HTMLElement>()
@@ -14,6 +16,14 @@ const handlePanelBlur = async () => {
     setTimeout(resolve, 107)
   })
   emits('close')
+}
+
+const handleClickMessage = () => {
+  showKUNGalgameMessageBox.value = true
+
+  if (messageStatus.value === 'new' || messageStatus.value === 'admin') {
+    messageStatus.value = 'online'
+  }
 }
 
 const logOut = async () => {
@@ -51,7 +61,7 @@ onMounted(() => {
           </NuxtLink>
         </span>
 
-        <span @click="showKUNGalgameMessageBox = true">
+        <span @click="handleClickMessage">
           {{ $t('header.user.message') }}
         </span>
 
