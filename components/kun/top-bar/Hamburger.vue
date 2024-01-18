@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { hamburgerItem } from './hamburgerItem'
 import 'animate.css'
+import { hamburgerItem } from './hamburgerItem'
 
 const { showKUNGalgameHamburger } = storeToRefs(useTempSettingStore())
 
@@ -49,7 +49,7 @@ const handleClickTitle = () => {
 </script>
 
 <template>
-  <div class="root" @click="handleClose">
+  <div class="hamburger-root" @click="handleClose">
     <Transition
       enter-active-class="animate__animated animate__fadeInLeft animate__faster"
       leave-active-class="animate__animated animate__fadeOutLeft animate__faster"
@@ -58,7 +58,6 @@ const handleClickTitle = () => {
         v-if="isShowHamburger"
         class="container"
         @click.stop
-        :class="{ 'is-dragging': isDragging }"
         :style="{ transform: `translateX(${currentX}px)` }"
         @touchstart="handleTouchStart"
         @touchmove="handleTouchMove"
@@ -95,7 +94,7 @@ const handleClickTitle = () => {
 </template>
 
 <style lang="scss" scoped>
-.root {
+.hamburger-root {
   height: 100vh;
   width: 100vw;
   position: fixed;

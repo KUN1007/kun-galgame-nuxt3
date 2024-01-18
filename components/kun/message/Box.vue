@@ -3,6 +3,10 @@ import type { KunMessage } from '#build/components'
 
 const messageStore = useTempMessageStore()
 const { showKUNGalgameMessageBox } = storeToRefs(useTempSettingStore())
+
+const startX = ref(0)
+const currentX = ref(0)
+const isDragging = ref(false)
 const isShowFunction = ref(false)
 
 const getMessages = async () => {
@@ -55,10 +59,40 @@ const handleDeleteAllMessage = async () => {
     )
   }
 }
+
+const handleTouchStart = (event: TouchEvent) => {
+  startX.value = event.touches[0].clientX
+  currentX.value = 0
+  isDragging.value = true
+}
+
+const handleTouchMove = (event: TouchEvent) => {
+  const touchX = event.touches[0].clientX
+  const deltaX = touchX - startX.value
+
+  if (deltaX > 0) {
+    currentX.value = deltaX
+  }
+}
+
+const handleTouchEnd = () => {
+  isDragging.value = false
+  const movedX = currentX.value
+  if (Math.abs(movedX) > 100) {
+    showKUNGalgameMessageBox.value = false
+  }
+  currentX.value = 0
+}
 </script>
 
 <template>
-  <div class="root">
+  <div
+    class="message-root"
+    :style="{ transform: `translateX(${currentX}px)` }"
+    @touchstart="handleTouchStart"
+    @touchmove="handleTouchMove"
+    @touchend="handleTouchEnd"
+  >
     <div class="title">
       <span class="name">{{ $t('header.message.message') }}</span>
       <span class="icon-item" @click="showKUNGalgameMessageBox = false">
@@ -90,7 +124,7 @@ const handleDeleteAllMessage = async () => {
 </template>
 
 <style lang="scss" scoped>
-.root {
+.message-root {
   z-index: 9999;
   position: fixed;
   top: 0;
