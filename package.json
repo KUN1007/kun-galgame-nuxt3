@@ -8,7 +8,6 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "start": "pm2 start ecosystem.config.js",
-    "start:dev": "pm2 start ecosystem.config.dev.js",
     "stop": "pm2 delete kun-visual-novel"
   },
   "devDependencies": {
