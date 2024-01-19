@@ -1,7 +1,5 @@
 import { eventHandler } from 'h3'
 import { Server as SocketServer } from 'socket.io'
-import { createAdapter } from '@socket.io/cluster-adapter'
-import { setupWorker } from '@socket.io/sticky'
 import type { Server } from 'http'
 import type { ServerOptions } from 'socket.io'
 
@@ -16,10 +14,6 @@ export function createIOHandler<
     if (!globalThis.__io && process.env.NODE_ENV === 'production') {
       const httpServer = (event.node.req.socket as any).server as Server
       const io = new SocketServer(httpServer, serverOptions)
-
-      // See: https://socket.io/docs/v4/pm2/#usage
-      io.adapter(createAdapter())
-      setupWorker(io)
 
       Object.keys(functions).forEach((fn) => {
         functions[fn](io)
