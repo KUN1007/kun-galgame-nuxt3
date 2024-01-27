@@ -55,13 +55,10 @@ onMounted(() => {
     <div class="hamburger">
       <Icon
         name="line-md:menu-fold-right"
-        v-if="!showKUNGalgameHamburger"
         @click="showKUNGalgameHamburger = true"
       />
 
-      <Transition name="hamburger">
-        <Hamburger v-if="showKUNGalgameHamburger" />
-      </Transition>
+      <Hamburger />
     </div>
 
     <Transition
@@ -186,20 +183,6 @@ $navNumber: v-bind(navItemNum);
       margin-right: 30px;
     }
   }
-}
-
-.hamburger-enter-from {
-  opacity: 0;
-}
-
-.hamburger-leave-to {
-  opacity: 0;
-}
-
-.hamburger-enter-from .container,
-.hamburger-leave-to .container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
 }
 
 @media (max-width: 1000px) {

@@ -76,22 +76,20 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="topic-container" ref="content">
-    <TransitionGroup name="list" tag="div" v-if="data">
-      <div
-        v-for="topic in data"
-        :key="topic.tid"
-        :class="
-          hourDiff(topic.upvote_time, 10) ? 'kungalgame-comet-surround' : ''
-        "
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+    <div
+      v-for="topic in data"
+      :key="topic.tid"
+      :class="
+        hourDiff(topic.upvote_time, 10) ? 'kungalgame-comet-surround' : ''
+      "
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
 
-        <HomeContentSingleTopic :topic="topic" />
-      </div>
-    </TransitionGroup>
+      <HomeContentSingleTopic :topic="topic" />
+    </div>
 
     <KunSkeletonHomeTopic :count="7" v-if="!data" />
     <KunSkeletonHomeTopic

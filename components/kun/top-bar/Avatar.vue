@@ -105,6 +105,12 @@ const { showKUNGalgamePanel, showKUNGalgameUserPanel, messageStatus } =
   }
 }
 
+.login {
+  a {
+    color: var(--kungalgame-blue-5);
+  }
+}
+
 .status {
   position: absolute;
   right: 0;

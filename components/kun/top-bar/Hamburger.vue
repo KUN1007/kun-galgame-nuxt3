@@ -5,78 +5,74 @@ import { hamburgerItem } from './hamburgerItem'
 const { showKUNGalgameHamburger } = storeToRefs(useTempSettingStore())
 
 const startX = ref(0)
+const startY = ref(0)
 const currentX = ref(0)
 const isDragging = ref(false)
-const isShowHamburger = ref(false)
-
-onMounted(() => (isShowHamburger.value = true))
-
-const handleClose = async () => {
-  isShowHamburger.value = false
-  await new Promise((resolve) => {
-    setTimeout(resolve, 17)
-  })
-  showKUNGalgameHamburger.value = false
-}
+const item = computed(() => hamburgerItem)
 
 const handleTouchStart = (event: TouchEvent) => {
   startX.value = event.touches[0].clientX
+  startY.value = event.touches[0].clientY
   currentX.value = 0
   isDragging.value = true
 }
 
 const handleTouchMove = (event: TouchEvent) => {
   const touchX = event.touches[0].clientX
+  const touchY = event.touches[0].clientY
   const deltaX = touchX - startX.value
+  const deltaY = touchY - startY.value
+  console.log(deltaX, deltaY)
+
+  if (deltaY < deltaX) {
+    return
+  }
 
   if (deltaX < 0) {
-    currentX.value = deltaX
+    requestAnimationFrame(() => {
+      currentX.value = deltaX
+    })
   }
 }
 
 const handleTouchEnd = () => {
   isDragging.value = false
   const movedX = currentX.value
-  if (Math.abs(movedX) > 100) {
+  if (Math.abs(movedX) > 30) {
     showKUNGalgameHamburger.value = false
   }
   currentX.value = 0
 }
-
-const handleClickTitle = () => {
-  navigateTo('/')
-}
 </script>
 
 <template>
-  <div class="hamburger-root" @click="handleClose">
-    <Transition
-      enter-active-class="animate__animated animate__fadeInLeft animate__faster"
-      leave-active-class="animate__animated animate__fadeOutLeft animate__faster"
+  <Transition :duration="550" name="slide">
+    <div
+      v-if="showKUNGalgameHamburger"
+      class="mask"
+      @click="showKUNGalgameHamburger = false"
     >
       <div
-        v-if="isShowHamburger"
         class="container"
         @click.stop
-        :style="{ transform: `translateX(${currentX}px)` }"
         @touchstart="handleTouchStart"
         @touchmove="handleTouchMove"
         @touchend="handleTouchEnd"
       >
-        <div class="kungalgame" @click="handleClickTitle">
+        <div class="kungalgame" @click="navigateTo('/')">
           <NuxtImg src="/favicon.webp" :alt="$t('head.title')" />
           <span>{{ $t('header.name') }}</span>
         </div>
 
         <div class="item-container">
-          <div v-for="kun in hamburgerItem" :key="kun.index" class="item">
+          <p v-for="kun in item" :key="kun.index" class="item">
             <span class="icon-item">
               <Icon :name="kun.icon"></Icon>
             </span>
             <NuxtLink :to="kun.router">
               {{ $t(`header.hamburger.${kun.name}`) }}
             </NuxtLink>
-          </div>
+          </p>
         </div>
 
         <KunSettingPanelComponentsMode style="font-size: 15px" />
@@ -89,12 +85,12 @@ const handleClickTitle = () => {
           <NuxtLink to="/">{{ $t('header.hamburger.home') }}</NuxtLink>
         </div>
       </div>
-    </Transition>
-  </div>
+    </div>
+  </Transition>
 </template>
 
 <style lang="scss" scoped>
-.hamburger-root {
+.mask {
   height: 100vh;
   width: 100vw;
   position: fixed;
@@ -110,7 +106,6 @@ const handleClickTitle = () => {
 }
 
 .container {
-  transition: transform 0.3s;
   position: absolute;
   width: 250px;
   padding: 10px;
@@ -187,5 +182,30 @@ const handleClickTitle = () => {
     border: 1px solid var(--kungalgame-blue-4);
     color: var(--kungalgame-blue-4);
   }
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+
+.slide-leave-active {
+  transition-delay: 0.25s;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-active .container,
+.slide-leave-active .container {
+  transition: all 0.3s ease-in-out;
+}
+
+.slide-enter-from .container,
+.slide-leave-to .container {
+  transform: translateX(-100%);
+  opacity: 0;
 }
 </style>
