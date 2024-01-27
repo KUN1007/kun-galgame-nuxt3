@@ -1,8 +1,6 @@
 <script setup lang="ts">
 const isShowPanel = ref('')
 
-const backgroundImageUrl = `https://cdn.jsdelivr.net/gh/kun-moe/kun-image@main/blog/202312031407983.webp`
-
 const handleClickSignIn = () => {
   isShowPanel.value = ''
 }
@@ -17,7 +15,7 @@ const handleClickRegister = () => {
     <div
       class="container"
       :class="isShowPanel"
-      :style="{ backgroundImage: `url(${backgroundImageUrl})` }"
+      :style="{ backgroundImage: `url(/login.webp)` }"
     >
       <div class="switch">
         <div @click="handleClickSignIn">{{ $t('login.overlay.login') }}</div>

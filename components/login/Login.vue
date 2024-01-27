@@ -52,13 +52,13 @@ const handleClickForgotPassword = () => {
       <input
         v-model="loginForm.name"
         type="text"
-        :placeholder="$t('login.login.loginUsername') as string"
+        :placeholder="`${$t('login.login.loginUsername')}`"
         class="input"
       />
       <input
         v-model="loginForm.password"
         type="password"
-        :placeholder="$t('login.login.loginPassword') as string"
+        :placeholder="`${$t('login.login.loginPassword')}`"
         class="input"
       />
 

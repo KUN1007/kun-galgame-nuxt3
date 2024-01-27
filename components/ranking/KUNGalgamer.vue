@@ -11,27 +11,25 @@ const users = computed(() => props.users)
 </script>
 
 <template>
-  <TransitionGroup name="list">
-    <div class="single-user" v-for="user in users" :key="user.uid">
-      <RouterLink :to="`/kungalgamer/${user.uid}/info`">
-        <div class="info">
-          <span class="avatar">
-            <img
-              v-if="user.avatar"
-              :src="user.avatar.replace(/\.webp$/, '-100.webp')"
-              :alt="user.name"
-            />
-          </span>
-          <span class="name">{{ user.name }}</span>
-        </div>
+  <div class="single-user" v-for="user in users" :key="user.uid">
+    <RouterLink :to="`/kungalgamer/${user.uid}/info`">
+      <div class="info">
+        <span class="avatar">
+          <img
+            v-if="user.avatar"
+            :src="user.avatar.replace(/\.webp$/, '-100.webp')"
+            :alt="user.name"
+          />
+        </span>
+        <span class="name">{{ user.name }}</span>
+      </div>
 
-        <div class="detail">
-          <Icon :name="userIconMap[props.field]" />
-          <span>{{ Math.ceil(user.field) }}</span>
-        </div>
-      </RouterLink>
-    </div>
-  </TransitionGroup>
+      <div class="detail">
+        <Icon :name="userIconMap[props.field]" />
+        <span>{{ Math.ceil(user.field) }}</span>
+      </div>
+    </RouterLink>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -89,20 +87,5 @@ const users = computed(() => props.users)
     color: var(--kungalgame-font-color-3);
     margin-left: 10px;
   }
-}
-
-.list-move,
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-}
-
-.list-leave-active {
-  position: absolute;
 }
 </style>

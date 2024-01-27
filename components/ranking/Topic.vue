@@ -11,20 +11,18 @@ const topics = computed(() => props.topics)
 </script>
 
 <template>
-  <TransitionGroup name="list">
-    <div class="single-topic" v-for="topic in topics" :key="topic.tid">
-      <RouterLink :to="`/topic/${topic.tid}`">
-        <div class="topic-name">
-          {{ topic.title }}
-        </div>
+  <div class="single-topic" v-for="topic in topics" :key="topic.tid">
+    <RouterLink :to="`/topic/${topic.tid}`">
+      <div class="topic-name">
+        {{ topic.title }}
+      </div>
 
-        <div class="detail">
-          <Icon :name="topicIconMap[props.field]" />
-          <span>{{ Math.ceil(topic.field) }}</span>
-        </div>
-      </RouterLink>
-    </div>
-  </TransitionGroup>
+      <div class="detail">
+        <Icon :name="topicIconMap[props.field]" />
+        <span>{{ Math.ceil(topic.field) }}</span>
+      </div>
+    </RouterLink>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -67,20 +65,5 @@ const topics = computed(() => props.topics)
     color: var(--kungalgame-font-color-3);
     margin-left: 10px;
   }
-}
-
-.list-move,
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-}
-
-.list-leave-active {
-  position: absolute;
 }
 </style>

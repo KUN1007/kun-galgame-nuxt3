@@ -18,7 +18,7 @@ const { data: newTopic } = await useFetch('/api/home/nav/new', {
       {{ $t(`mainPage.asideActive.hot`) }}
     </div>
     <span class="topic-content hot-bg" v-if="hotTopic" v-for="kun in hotTopic">
-      <NuxtLink :to="{ path: `/topic/${kun.tid}` }">
+      <NuxtLink :to="`/topic/${kun.tid}`">
         <div class="topic">
           <div class="title">{{ kun.title }}</div>
           <div class="hot">
@@ -28,8 +28,6 @@ const { data: newTopic } = await useFetch('/api/home/nav/new', {
         </div>
       </NuxtLink>
     </span>
-
-    <KunSkeletonHomeAside v-if="!hotTopic" />
 
     <div class="title-new">
       {{ $t(`mainPage.asideActive.new`) }}
@@ -45,8 +43,6 @@ const { data: newTopic } = await useFetch('/api/home/nav/new', {
         </div>
       </NuxtLink>
     </span>
-
-    <KunSkeletonHomeAside v-if="!newTopic" />
   </div>
 </template>
 

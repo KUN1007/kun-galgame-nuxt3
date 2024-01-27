@@ -121,9 +121,13 @@ onBeforeUnmount(() => {
   scrollbar-width: thin;
   scrollbar-color: var(--kungalgame-blue-4) var(--kungalgame-blue-1);
 
-  div {
+  & > div {
     & > div {
       margin: 7px 0;
+    }
+
+    &:last-child {
+      margin-bottom: 5px;
     }
   }
 }
@@ -136,20 +140,5 @@ onBeforeUnmount(() => {
   & > div {
     margin: 0 !important;
   }
-}
-
-.list-move,
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-}
-
-.list-leave-active {
-  position: absolute;
 }
 </style>
