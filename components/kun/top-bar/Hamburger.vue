@@ -100,12 +100,8 @@ const handleShowMore = () => {
           :is-mobile="true"
         />
 
-        <span
-          class="more"
-          :class="isShowSettings ? 'active' : ''"
-          @click="handleShowMore"
-        >
-          <Icon name="line-md:chevron-down"></Icon>
+        <span class="more" :class="isShowSettings ? 'active' : ''">
+          <Icon @click="handleShowMore" name="line-md:chevron-down"></Icon>
         </span>
       </div>
     </div>
