@@ -1,4 +1,4 @@
-interface Hamburger {
+export interface Hamburger {
   index: number
   icon: string
   name: string

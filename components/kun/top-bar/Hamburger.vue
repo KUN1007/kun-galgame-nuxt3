@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import 'animate.css'
 import { hamburgerItem } from './hamburgerItem'
+import type { Hamburger } from './hamburgerItem'
 
 const { showKUNGalgameHamburger } = storeToRefs(useTempSettingStore())
 
@@ -8,7 +9,8 @@ const startX = ref(0)
 const startY = ref(0)
 const currentX = ref(0)
 const isDragging = ref(false)
-const item = computed(() => hamburgerItem)
+const item = ref<Hamburger[]>(hamburgerItem.slice(0, 4))
+const isShowSettings = computed(() => item.value.length > 4)
 
 const handleTouchStart = (event: TouchEvent) => {
   startX.value = event.touches[0].clientX
@@ -42,6 +44,14 @@ const handleTouchEnd = () => {
   }
   currentX.value = 0
 }
+
+const handleShowMore = () => {
+  if (item.value.length === 4) {
+    item.value = hamburgerItem
+  } else {
+    item.value = hamburgerItem.slice(0, 4)
+  }
+}
 </script>
 
 <template>
@@ -49,6 +59,7 @@ const handleTouchEnd = () => {
     <div
       v-if="showKUNGalgameHamburger"
       class="mask"
+      @click.stop
       @click="showKUNGalgameHamburger = false"
     >
       <div
@@ -74,15 +85,28 @@ const handleTouchEnd = () => {
           </p>
         </div>
 
-        <KunSettingPanelComponentsMode style="font-size: 15px" />
+        <KunSettingPanelComponentsMode
+          v-if="isShowSettings"
+          style="font-size: 15px"
+        />
 
-        <KunSettingPanelComponentsSwitchLanguage style="font-size: 15px" />
+        <KunSettingPanelComponentsSwitchLanguage
+          v-if="isShowSettings"
+          style="font-size: 15px"
+        />
 
-        <KunSettingPanelComponentsCustomBackground :is-mobile="true" />
+        <KunSettingPanelComponentsCustomBackground
+          v-if="isShowSettings"
+          :is-mobile="true"
+        />
 
-        <div class="home">
-          <NuxtLink to="/">{{ $t('header.hamburger.home') }}</NuxtLink>
-        </div>
+        <span
+          class="more"
+          :class="isShowSettings ? 'active' : ''"
+          @click="handleShowMore"
+        >
+          <Icon name="line-md:chevron-down"></Icon>
+        </span>
       </div>
     </div>
   </Transition>
@@ -152,6 +176,17 @@ const handleTouchEnd = () => {
   }
 }
 
+.more {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.active {
+  transform: rotate(180deg);
+  transition: transform 0.2s;
+}
+
 .kungalgame {
   display: flex;
   align-items: center;
@@ -163,23 +198,6 @@ const handleTouchEnd = () => {
 
   span {
     font-size: 20px;
-  }
-}
-
-.home {
-  width: 100%;
-  margin-top: 20px;
-
-  a {
-    padding: 3px 7px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 17px;
-    font-size: 17px;
-    border: 1px solid var(--kungalgame-blue-4);
-    color: var(--kungalgame-blue-4);
   }
 }
 

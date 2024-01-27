@@ -206,15 +206,16 @@ $navNumber: v-bind(navItemNum);
 }
 
 .message-enter-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.3s;
 }
 
 .message-leave-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.3s;
 }
 
 .message-enter-from,
 .message-leave-to {
   transform: translateX(100%);
+  opacity: 0;
 }
 </style>
