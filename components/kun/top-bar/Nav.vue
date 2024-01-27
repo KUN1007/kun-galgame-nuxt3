@@ -61,10 +61,7 @@ onMounted(() => {
       <Hamburger />
     </div>
 
-    <Transition
-      enter-active-class="animate__animated animate__fadeInRight animate__faster"
-      leave-active-class="animate__animated animate__fadeOutRight animate__faster"
-    >
+    <Transition name="message">
       <MessageBox v-if="showKUNGalgameMessageBox" />
     </Transition>
 
@@ -206,5 +203,18 @@ $navNumber: v-bind(navItemNum);
   .hamburger {
     display: block;
   }
+}
+
+.message-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.message-leave-active {
+  transition: all 0.3s ease-out;
+}
+
+.message-enter-from,
+.message-leave-to {
+  transform: translateX(100%);
 }
 </style>

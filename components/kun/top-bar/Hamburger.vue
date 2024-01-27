@@ -22,7 +22,6 @@ const handleTouchMove = (event: TouchEvent) => {
   const touchY = event.touches[0].clientY
   const deltaX = touchX - startX.value
   const deltaY = touchY - startY.value
-  console.log(deltaX, deltaY)
 
   if (deltaY < deltaX) {
     return

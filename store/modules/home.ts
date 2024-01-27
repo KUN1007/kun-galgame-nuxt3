@@ -5,7 +5,7 @@ export const usePersistKUNGalgameHomeStore = defineStore({
   id: 'KUNGalgameHome',
   persist: true,
   state: (): HomeStorePersist => ({
-    isActiveMainPageAside: true,
+    isActiveMainPageAside: false,
 
     searchHistory: [],
   }),

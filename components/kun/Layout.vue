@@ -41,6 +41,7 @@ watch(
   background-size: cover;
   background-attachment: fixed;
   background-color: var(--kungalgame-white);
+  overflow: hidden;
 }
 
 .top-bar {

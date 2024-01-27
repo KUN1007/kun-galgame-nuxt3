@@ -5,6 +5,7 @@ const messageStore = useTempMessageStore()
 const { showKUNGalgameMessageBox } = storeToRefs(useTempSettingStore())
 
 const startX = ref(0)
+const startY = ref(0)
 const currentX = ref(0)
 const isDragging = ref(false)
 const isShowFunction = ref(false)
@@ -62,23 +63,32 @@ const handleDeleteAllMessage = async () => {
 
 const handleTouchStart = (event: TouchEvent) => {
   startX.value = event.touches[0].clientX
+  startY.value = event.touches[0].clientY
   currentX.value = 0
   isDragging.value = true
 }
 
 const handleTouchMove = (event: TouchEvent) => {
   const touchX = event.touches[0].clientX
+  const touchY = event.touches[0].clientY
   const deltaX = touchX - startX.value
+  const deltaY = touchY - startY.value
+
+  if (deltaY > deltaX) {
+    return
+  }
 
   if (deltaX > 0) {
-    currentX.value = deltaX
+    requestAnimationFrame(() => {
+      currentX.value = deltaX
+    })
   }
 }
 
 const handleTouchEnd = () => {
   isDragging.value = false
   const movedX = currentX.value
-  if (Math.abs(movedX) > 100) {
+  if (Math.abs(movedX) > 30) {
     showKUNGalgameMessageBox.value = false
   }
   currentX.value = 0
@@ -88,7 +98,6 @@ const handleTouchEnd = () => {
 <template>
   <div
     class="message-root"
-    :style="{ transform: `translateX(${currentX}px)` }"
     @touchstart="handleTouchStart"
     @touchmove="handleTouchMove"
     @touchend="handleTouchEnd"

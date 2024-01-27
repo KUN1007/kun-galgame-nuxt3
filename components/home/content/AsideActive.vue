@@ -7,7 +7,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="item-box" v-show="props.isActive">
+  <div class="item-box" v-if="props.isActive">
     <div class="new-article">
       <NuxtLink to="/edit">
         <button class="btn-new-article">
@@ -25,7 +25,7 @@ const props = defineProps<{
     </div>
   </div>
 
-  <HomeContentTopic v-show="props.isActive" />
+  <HomeContentTopic v-if="props.isActive" />
 </template>
 
 <style lang="scss" scoped>
