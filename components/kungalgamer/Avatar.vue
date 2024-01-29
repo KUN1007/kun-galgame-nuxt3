@@ -55,6 +55,16 @@ const handleChangeAvatar = async () => {
   const formData = new FormData()
   formData.append('avatar', uploadedImage.value, useKUNGalgameUserStore().name)
 
+  const { data } = await useFetch('/api/user/avatar', {
+    method: 'POST',
+    body: formData,
+    ...kungalgameResponseHandler,
+  })
+
+  if (data.value) {
+    console.log(data.value)
+  }
+
   // TODO:
   // const res = await useKUNGalgameUserStore().updateAvatar(formData)
 
