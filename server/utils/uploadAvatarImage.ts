@@ -46,5 +46,5 @@ export const resizeUserAvatar = async (
     uid
   )
 
-  return res1.ETag && res2.ETag
+  return res1.ETag && res2.ETag ? true : false
 }

@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { checkImageValid, resizeImage } from './utils/handleFileChange'
 
+const refresh = inject<() => Promise<void>>('refresh')
 const uploadedImage = ref<Blob>()
 const selectedFileUrl = ref<string>('')
 const input = ref<HTMLElement>()
+const isUploading = ref(false)
 const { avatar, avatarMin } = storeToRefs(useKUNGalgameUserStore())
 
 const uploadImage = async (file: File) => {
@@ -55,6 +57,9 @@ const handleChangeAvatar = async () => {
   const formData = new FormData()
   formData.append('avatar', uploadedImage.value, useKUNGalgameUserStore().name)
 
+  isUploading.value = true
+  useMessage('Uploading avatar image...', '正在上传头像图片...', 'info')
+
   const { data } = await useFetch('/api/user/avatar', {
     method: 'POST',
     body: formData,
@@ -62,22 +67,13 @@ const handleChangeAvatar = async () => {
   })
 
   if (data.value) {
-    console.log(data.value)
+    avatar.value = data.value
+    avatarMin.value = data.value.replace(/\.webp$/, '-100.webp')
+    selectedFileUrl.value = ''
+    useMessage('Update avatar successfully!', '更新头像成功', 'success')
+    await refresh?.()
+    isUploading.value = false
   }
-
-  // TODO:
-  // const res = await useKUNGalgameUserStore().updateAvatar(formData)
-
-  // if (res.code === 200) {
-  //   const avatarLink = res.data.avatar
-  //   avatar.value = avatarLink
-  //   avatarMin.value = avatarLink.replace(/\.webp$/, '-100.webp')
-  //   selectedFileUrl.value = ''
-
-  //   useMessage('Update avatar successfully!', '更新头像成功', 'success')
-  // } else {
-  //   useMessage('Update avatar failed!', '更新头像失败', 'error')
-  // }
 }
 </script>
 
@@ -120,7 +116,8 @@ const handleChangeAvatar = async () => {
           <br />
           <span>{{ $t('user.settings.supportFormat') }}</span>
         </div>
-        <button @click="handleChangeAvatar">
+
+        <button v-if="!isUploading" @click="handleChangeAvatar">
           {{ $t('user.settings.confirm') }}
         </button>
       </div>

@@ -24,7 +24,7 @@ const login = async (event: H3Event) => {
     kunError(event, 10112)
     return
   } else {
-    useStorage('redis').setItem(`loginCD:${ip}`, ip, { ttl: 60 })
+    useStorage('redis').setItem(`loginCD:${ip}`, ip, { ttl: 17 })
   }
 
   return { name, password }
