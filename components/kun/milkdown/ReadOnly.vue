@@ -112,26 +112,6 @@ watch(
       white-space: pre-wrap;
     }
 
-    & > div:nth-child(1) {
-      transition: all 0.2s;
-      margin: 0 auto;
-      overflow-y: scroll;
-
-      &::-webkit-scrollbar {
-        display: inline;
-        width: 7px;
-        height: 0;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        cursor: default;
-        background: var(--kungalgame-blue-4);
-        border-radius: 3px;
-      }
-
-      scrollbar-width: thin;
-    }
-
     img {
       max-width: 100%;
     }

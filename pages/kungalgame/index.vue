@@ -510,18 +510,6 @@ const kungalgamePageWidth = computed(() => {
   border: 1px solid var(--kungalgame-blue-4);
   border-radius: 7px;
   display: flex;
-
-  &::-webkit-scrollbar {
-    display: inline;
-    width: 4px;
-    height: 0;
-  }
-
-  &:hover::-webkit-scrollbar-thumb {
-    background: var(--kungalgame-blue-4);
-    border-radius: 2px;
-  }
-
   position: relative;
   scrollbar-width: thin;
 }

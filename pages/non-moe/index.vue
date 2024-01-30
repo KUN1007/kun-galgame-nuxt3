@@ -104,18 +104,6 @@ const { data: logs } = await useFetch(`/api/non-moe/logs`, {
   height: 100%;
   overflow-y: scroll;
   padding: 0 10px;
-
-  &::-webkit-scrollbar {
-    display: inline;
-    width: 4px;
-    height: 0;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--kungalgame-blue-4);
-    border-radius: 2px;
-  }
-
   scrollbar-width: thin;
 }
 

@@ -13,18 +13,6 @@
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-
-  &::-webkit-scrollbar {
-    display: inline;
-    width: 4px;
-    height: 0;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--kungalgame-blue-4);
-    border-radius: 2px;
-  }
-
   scrollbar-width: thin;
 }
 </style>

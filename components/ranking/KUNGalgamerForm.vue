@@ -178,18 +178,6 @@ const handleClickSortOrder = () => {
   flex-direction: column;
   margin-left: 10px;
   overflow-y: scroll;
-
-  &::-webkit-scrollbar {
-    display: inline;
-    width: 4px;
-    height: 0;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--kungalgame-pink-4);
-    border-radius: 2px;
-  }
-
   scrollbar-width: thin;
 }
 

@@ -149,7 +149,7 @@ const editorInfo = useEditor((root) =>
     />
 
     <div class="loading" v-if="editorInfo.loading.value">
-      <KunLoading />
+      <span><Icon name="svg-spinners:12-dots-scale-rotate" /></span>
       <span>{{ $t('edit.loading') }}</span>
     </div>
   </div>
@@ -179,21 +179,6 @@ const editorInfo = useEditor((root) =>
       transition: all 0.2s;
       margin: 0 auto;
       min-height: v-bind(editorHight);
-      overflow-y: scroll;
-
-      &::-webkit-scrollbar {
-        display: inline;
-        width: 7px;
-        height: 0;
-      }
-
-      &::-webkit-scrollbar-thumb {
-        cursor: default;
-        background: var(--kungalgame-blue-4);
-        border-radius: 3px;
-      }
-
-      scrollbar-width: thin;
     }
 
     img {
@@ -287,6 +272,10 @@ const editorInfo = useEditor((root) =>
     font-size: large;
     font-style: oblique;
     color: var(--kungalgame-blue-4);
+
+    &:nth-child(1) {
+      font-size: 50px;
+    }
   }
 }
 

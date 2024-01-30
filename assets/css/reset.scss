@@ -43,11 +43,6 @@ ul {
   outline: none;
 }
 
-/* Hide scrollbars (compatible with Firefox 64+) */
-*::-webkit-scrollbar {
-  display: none;
-}
-
 /* Compatibility for Firefox to hide scrollbars */
 * {
   scrollbar-width: none;

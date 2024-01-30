@@ -106,18 +106,6 @@ onBeforeUnmount(() => {
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-
-  &::-webkit-scrollbar {
-    display: inline;
-    width: 4px;
-    height: 0;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--kungalgame-blue-4);
-    border-radius: 2px;
-  }
-
   scrollbar-width: thin;
 
   & > div {
