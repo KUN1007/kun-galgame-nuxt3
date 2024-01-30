@@ -524,7 +524,6 @@ const kungalgamePageWidth = computed(() => {
 
   position: relative;
   scrollbar-width: thin;
-  scrollbar-color: var(--kungalgame-blue-4) var(--kungalgame-blue-1);
 }
 
 .article {

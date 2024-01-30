@@ -191,7 +191,6 @@ const handleClickSortOrder = () => {
   }
 
   scrollbar-width: thin;
-  scrollbar-color: var(--kungalgame-pink-4) var(--kungalgame-pink-0);
 }
 
 .order-enter-active,

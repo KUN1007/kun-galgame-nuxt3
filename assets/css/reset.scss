@@ -50,7 +50,8 @@ ul {
 
 /* Compatibility for Firefox to hide scrollbars */
 * {
-  scrollbar-width: none; /* Firefox 64+ */
+  scrollbar-width: none;
+  scrollbar-color: var(--kungalgame-blue-4) var(--kungalgame-trans-white-9);
 }
 
 /* Ensure that button and select elements inherit the font family */

@@ -48,7 +48,6 @@ const { data: updateLogs } = await useFetch(`/api/update/history`, {
   }
 
   scrollbar-width: thin;
-  scrollbar-color: var(--kungalgame-blue-4) var(--kungalgame-blue-1);
 }
 
 li {

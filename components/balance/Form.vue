@@ -74,7 +74,6 @@ const { isIncome, incomeData, expenditureData, statement } = toRefs(props)
     }
 
     scrollbar-width: thin;
-    scrollbar-color: var(--kungalgame-blue-4) var(--kungalgame-blue-1); /* Firefox 64+ */
   }
 
   .sum {

@@ -117,7 +117,6 @@ const { data: logs } = await useFetch(`/api/non-moe/logs`, {
   }
 
   scrollbar-width: thin;
-  scrollbar-color: var(--kungalgame-blue-4) var(--kungalgame-blue-1);
 }
 
 .empty {
