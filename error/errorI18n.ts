@@ -17,6 +17,7 @@ const errorMessagesEN: Record<number, string> = {
   10113: `In cooldown for register, two identical register attempts should have a one-minute interval. (-B)`,
   10114: `Invalid user uid (-B)`,
   10115: `Login expired, please login to use this feature (-B)`,
+  10116: `Upload avatar image error, unknown server error`,
 
   // Topic Part
   10201: `Your daily topic limit has been reached for today. (-B)`,
@@ -70,6 +71,7 @@ const errorMessagesCN: Record<number, string> = {
   10113: `注册冷却中，两次相同注册时间间隔一分钟 (-B)`,
   10114: `非法的用户 UID (-B)`,
   10115: `登陆过期, 请登录使用该功能 (-B)`,
+  10116: `上传头像图片错误，未知的服务器错误`,
 
   10201: `您今日可以发表的话题数已达上限 (-B)`,
   10202: `您的萌萌点不足 1100, 无法使用推话题功能 (-B)`,

@@ -1,24 +1,5 @@
-import AWS from 'aws-sdk'
 import env from '~/server/env/dotenv'
-
-const uploadAvatarImage = async (file: Buffer, fileName: string) => {
-  const s3 = new AWS.S3({
-    endpoint: env.KUN_VISUAL_NOVEL_IMAGE_BED_ENDPOINT,
-    accessKeyId: env.KUN_VISUAL_NOVEL_IMAGE_BED_ACCESS_KEY,
-    secretAccessKey: env.KUN_VISUAL_NOVEL_IMAGE_BED_SECRET_KEY,
-    s3BucketEndpoint: true,
-  })
-
-  const res = await s3
-    .putObject({
-      Body: file,
-      Bucket: 'avatar',
-      Key: fileName,
-    })
-    .promise()
-
-  return res
-}
+import { resizeUserAvatar } from '~/server/utils/uploadAvatarImage'
 
 export default defineEventHandler(async (event) => {
   const avatarFile = await readMultipartFormData(event)
@@ -34,5 +15,17 @@ export default defineEventHandler(async (event) => {
 
   const newFileName = `${userInfo.name}-${userInfo.uid}-kun-galgame-avatar`
 
-  const res = await uploadAvatarImage(avatarFile[0].data, newFileName)
+  const res = await resizeUserAvatar(
+    newFileName,
+    avatarFile[0].data,
+    userInfo.uid
+  )
+
+  if (res) {
+    const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_ENDPOINT}/avatar/user_${userInfo.uid}/${newFileName}`
+    return imageLink
+  } else {
+    kunError(event, 10116)
+    return
+  }
 })
