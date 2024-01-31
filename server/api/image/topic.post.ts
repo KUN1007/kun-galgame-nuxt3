@@ -1,28 +1,5 @@
 import UserModel from '~/server/models/user'
 import env from '~/server/env/dotenv'
-import sharp from 'sharp'
-import { uploadImage } from '~/server/utils/uploadImage'
-
-const resizeUserAvatar = async (name: string, avatar: Buffer, uid: number) => {
-  const miniAvatar = await sharp(avatar)
-    .resize(100, 100, {
-      fit: 'contain',
-      background: { r: 0, g: 0, b: 0, alpha: 0 },
-    })
-    .toBuffer()
-
-  const miniAvatarName = `${name}-100`
-  const bucketName = `image/avatar/user_${uid}`
-
-  const res1 = await uploadImage(avatar, `${name}.webp`, bucketName)
-  const res2 = await uploadImage(
-    miniAvatar,
-    `${miniAvatarName}.webp`,
-    bucketName
-  )
-
-  return res1 && res2 ? true : false
-}
 
 export default defineEventHandler(async (event) => {
   const avatarFile = await readMultipartFormData(event)
@@ -37,7 +14,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const newFileName = `${userInfo.name}-kun-galgame-avatar`
+  const newFileName = `${userInfo.name}-${Date.now()}-kun-galgame-avatar`
 
   const res = await resizeUserAvatar(
     newFileName,

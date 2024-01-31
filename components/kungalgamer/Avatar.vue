@@ -72,7 +72,6 @@ const handleChangeAvatar = async () => {
     selectedFileUrl.value = ''
     useMessage('Update avatar successfully!', '更新头像成功', 'success')
     await refresh?.()
-    isUploading.value = false
   }
 }
 </script>

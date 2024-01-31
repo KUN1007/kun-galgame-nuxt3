@@ -32,6 +32,9 @@ dependencies:
   '@milkdown/plugin-trailing':
     specifier: 7.3.2
     version: 7.3.2(@milkdown/core@7.3.2)(@milkdown/ctx@7.3.2)(@milkdown/prose@7.3.2)(@milkdown/transformer@7.3.2)
+  '@milkdown/plugin-upload':
+    specifier: 7.3.2
+    version: 7.3.2(@milkdown/core@7.3.2)(@milkdown/ctx@7.3.2)(@milkdown/prose@7.3.2)(@milkdown/transformer@7.3.2)
   '@milkdown/preset-commonmark':
     specifier: 7.3.2
     version: 7.3.2(@milkdown/core@7.3.2)(@milkdown/ctx@7.3.2)(@milkdown/prose@7.3.2)(@milkdown/transformer@7.3.2)
@@ -60,8 +63,8 @@ dependencies:
     specifier: ^4.1.1
     version: 4.1.1
   aws-sdk:
-    specifier: ^2.1546.0
-    version: 2.1546.0
+    specifier: ^2.1547.0
+    version: 2.1547.0
   bcrypt:
     specifier: ^5.1.1
     version: 5.1.1
@@ -2291,6 +2294,23 @@ packages:
     dependencies:
       '@milkdown/core': 7.3.2(@milkdown/ctx@7.3.2)(@milkdown/prose@7.3.2)(@milkdown/transformer@7.3.2)
       '@milkdown/ctx': 7.3.2
+      '@milkdown/prose': 7.3.2
+      '@milkdown/utils': 7.3.2(@milkdown/core@7.3.2)(@milkdown/ctx@7.3.2)(@milkdown/prose@7.3.2)(@milkdown/transformer@7.3.2)
+      tslib: 2.6.2
+    transitivePeerDependencies:
+      - '@milkdown/transformer'
+    dev: false
+
+  /@milkdown/plugin-upload@7.3.2(@milkdown/core@7.3.2)(@milkdown/ctx@7.3.2)(@milkdown/prose@7.3.2)(@milkdown/transformer@7.3.2):
+    resolution: {integrity: sha512-T6M3cS7Ye23OMs8lGj+mVMmNvOPikwACSQ52UJUI4pnsCaZmWhbmpu0gY6YS17fEzVgtEcUzqEpG/x/5G/Ps8Q==}
+    peerDependencies:
+      '@milkdown/core': ^7.2.0
+      '@milkdown/ctx': ^7.2.0
+      '@milkdown/prose': ^7.2.0
+    dependencies:
+      '@milkdown/core': 7.3.2(@milkdown/ctx@7.3.2)(@milkdown/prose@7.3.2)(@milkdown/transformer@7.3.2)
+      '@milkdown/ctx': 7.3.2
+      '@milkdown/exception': 7.3.2
       '@milkdown/prose': 7.3.2
       '@milkdown/utils': 7.3.2(@milkdown/core@7.3.2)(@milkdown/ctx@7.3.2)(@milkdown/prose@7.3.2)(@milkdown/transformer@7.3.2)
       tslib: 2.6.2
@@ -4735,8 +4755,8 @@ packages:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
     engines: {node: '>= 0.4'}
 
-  /aws-sdk@2.1546.0:
-    resolution: {integrity: sha512-v9fZehIMQRCvojbD1BNN4YiUjoj/KtD0/7KUPEyTQpuzpD8/QI6CSJx71hC8ad1y8ObDf+OntPvmtvXBnPES5g==}
+  /aws-sdk@2.1547.0:
+    resolution: {integrity: sha512-jk7u3KtDZ5F20k2X6D2FhndpLGkt3ZuNfRU5crp+fI6B/GFj/S91GJDoZh/Yw3rW+CemY1sFmdFT8ReA2G8WkA==}
     engines: {node: '>= 10.0.0'}
     dependencies:
       buffer: 4.9.2
@@ -4800,7 +4820,6 @@ packages:
 
   /base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
-    requiresBuild: true
     dev: false
 
   /base64id@2.0.0:

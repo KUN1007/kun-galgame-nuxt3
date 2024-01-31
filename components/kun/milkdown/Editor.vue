@@ -12,6 +12,9 @@ import { clipboard } from '@milkdown/plugin-clipboard'
 import { indent } from '@milkdown/plugin-indent'
 import { trailing } from '@milkdown/plugin-trailing'
 import { usePluginViewFactory } from '@prosemirror-adapter/vue'
+import { upload, uploadConfig } from '@milkdown/plugin-upload'
+import { uploader } from './plugins/uploader'
+import type { Uploader } from '@milkdown/plugin-upload'
 // KUN Visual Novel Custom tooltip
 import { tooltipFactory } from '@milkdown/plugin-tooltip'
 import Tooltip from './plugins/Tooltip.vue'
@@ -87,6 +90,11 @@ const editorInfo = useEditor((root) =>
         isEditorFocus.value = true
       })
 
+      ctx.update(uploadConfig.key, (prev) => ({
+        ...prev,
+        uploader,
+      }))
+
       ctx.set(prismConfig.key, {
         configureRefractor: (refractor) => {
           refractor.register(c)
@@ -125,6 +133,7 @@ const editorInfo = useEditor((root) =>
     .use(indent)
     .use(trailing)
     .use(tooltip)
+    .use(upload)
     // Add custom plugin view, calculate markdown text size
     .use(
       $prose(
