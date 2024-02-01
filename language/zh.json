@@ -191,6 +191,7 @@
   "edit":{
     "title": "标题",
     "loading": "正在加载编辑器...",
+    "uploading": "正在上传中...",
     "word": "字",
     "editorHeight": "编辑器高度",
     "editorMode": "编辑器模式",

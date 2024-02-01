@@ -13,8 +13,7 @@ import { indent } from '@milkdown/plugin-indent'
 import { trailing } from '@milkdown/plugin-trailing'
 import { usePluginViewFactory } from '@prosemirror-adapter/vue'
 import { upload, uploadConfig } from '@milkdown/plugin-upload'
-import { uploader } from './plugins/uploader'
-import type { Uploader } from '@milkdown/plugin-upload'
+import { kunUploader, kunUploadWidgetFactory } from './plugins/uploader'
 // KUN Visual Novel Custom tooltip
 import { tooltipFactory } from '@milkdown/plugin-tooltip'
 import Tooltip from './plugins/Tooltip.vue'
@@ -92,7 +91,8 @@ const editorInfo = useEditor((root) =>
 
       ctx.update(uploadConfig.key, (prev) => ({
         ...prev,
-        uploader,
+        uploader: kunUploader,
+        uploadWidgetFactory: kunUploadWidgetFactory,
       }))
 
       ctx.set(prismConfig.key, {

@@ -191,6 +191,7 @@
   "edit":{
     "title": "Title",
     "loading": "Loading editor...",
+    "uploading": "Uploading in progress...",
     "word": "Word(s)",
     "editorHeight": "Editor Height",
     "editorMode": "Editor Mode",

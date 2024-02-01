@@ -1,7 +1,8 @@
+import { Decoration } from '@milkdown/prose/view'
 import type { Uploader } from '@milkdown/plugin-upload'
 import type { Node } from '@milkdown/prose/model'
 
-export const uploader: Uploader = async (files, schema) => {
+export const kunUploader: Uploader = async (files, schema) => {
   const images: File[] = []
 
   for (let i = 0; i < files.length; i++) {
@@ -38,4 +39,16 @@ export const uploader: Uploader = async (files, schema) => {
   )
 
   return nodes
+}
+
+export const kunUploadWidgetFactory = (
+  pos: number,
+  spec: Parameters<typeof Decoration.widget>[2]
+) => {
+  const { $i18n } = useNuxtApp()
+
+  const widgetDOM = document.createElement('span')
+  widgetDOM.textContent = $i18n.t('edit.uploading')
+  widgetDOM.style.color = 'var(--kungalgame-blue-5)'
+  return Decoration.widget(pos, widgetDOM, spec)
 }
