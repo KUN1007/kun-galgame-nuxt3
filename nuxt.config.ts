@@ -92,6 +92,8 @@ export default defineNuxtConfig({
   },
   pwa: {
     registerType: 'autoUpdate',
+    // Disable pwa in development environment
+    disable: process.env.NODE_ENV === 'development',
     manifest: {
       name: 'KUN Visual Novel PWA',
       short_name: 'KunPWA',
@@ -127,16 +129,6 @@ export default defineNuxtConfig({
       suppressWarnings: true,
       navigateFallbackAllowlist: [/^\/$/],
       type: 'module',
-    },
-  },
-
-  // Backend
-  socket: {
-    serverOptions: {
-      // Cookies: {
-      //   name: 'kungalgame-moemoe-refresh-token',
-      //   httpOnly: true,
-      // },
     },
   },
 })
