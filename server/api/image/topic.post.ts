@@ -1,6 +1,7 @@
-import { uploadImage } from '~/server/utils/uploadImage'
 import sharp from 'sharp'
 import env from '~/server/env/dotenv'
+import UserModel from '~/server/models/user'
+import { uploadImage } from '~/server/utils/uploadImage'
 import { checkBufferSize } from '~/server/utils/checkBufferSize'
 
 const compressImage = async (name: string, image: Buffer, uid: number) => {
@@ -37,6 +38,15 @@ export default defineEventHandler(async (event) => {
     kunError(event, 10115, 205)
     return
   }
+  const user = await UserModel.findOne({ uid: userInfo.uid })
+  if (!user) {
+    kunError(event, 10101)
+    return
+  }
+  if (user.daily_image_count >= 50) {
+    kunError(event, 10217)
+    return
+  }
 
   const newFileName = `${userInfo.name}-${Date.now()}`
 
@@ -49,6 +59,11 @@ export default defineEventHandler(async (event) => {
     kunError(event, res)
     return
   }
+
+  await UserModel.updateOne(
+    { uid: userInfo.uid },
+    { $inc: { daily_image_count: 1 } }
+  )
 
   const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/topic/user_${userInfo.uid}/${newFileName}.webp`
   return imageLink

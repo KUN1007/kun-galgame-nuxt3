@@ -40,7 +40,8 @@ export default defineEventHandler(async (event) => {
   }
 
   if (user.moemoepoint / 10 < user.daily_topic_count) {
-    return 10201
+    kunError(event, 10201)
+    return
   }
 
   const session = await mongoose.startSession()

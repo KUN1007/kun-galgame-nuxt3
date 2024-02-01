@@ -14,6 +14,7 @@ export interface UserAttributes {
   like: number
   dislike: number
   daily_topic_count: number
+  daily_image_count: number
 
   friend_count: number
   followed_count: number
