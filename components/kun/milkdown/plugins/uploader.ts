@@ -10,8 +10,7 @@ export const uploader: Uploader = async (files, schema) => {
       continue
     }
 
-    // You can handle whatever the file type you want, we handle image here.
-    if (!file.type.includes('image')) {
+    if (!file.type.startsWith('image/')) {
       continue
     }
 
@@ -20,11 +19,19 @@ export const uploader: Uploader = async (files, schema) => {
 
   const nodes: Node[] = await Promise.all(
     images.map(async (image) => {
-      // const src = await YourUploadAPI(image)
-      const src = 'TODO:'
+      const formData = new FormData()
+      formData.append('image', image)
+
+      const { data } = await useFetch('/api/image/topic', {
+        method: 'POST',
+        body: formData,
+        watch: false,
+        ...kungalgameResponseHandler,
+      })
+
       const alt = image.name
       return schema.nodes.image.createAndFill({
-        src,
+        src: data.value,
         alt,
       }) as Node
     })

@@ -11,13 +11,13 @@ const errorMessagesEN: Record<number, string> = {
   10107: `Invalid Email, Name, Password, or Verification Code Format (-B)`,
   10108: `Invalid password format (-B)`,
   10109: `Invalid Email or Verification Code Format (-B)`,
-  10110: `Avatar image upload error. The image is an array. (-B)`,
+  10110: `Avatar image upload error. The image is null or an array. (-B)`,
   10111: `Avatar image upload error. The final compressed size of the image exceeds 50KB. (-B)`,
   10112: `In cooldown for login, two identical login attempts should have a 17 seconds interval. (-B)`,
   10113: `In cooldown for register, two identical register attempts should have a one-minute interval. (-B)`,
   10114: `Invalid user uid (-B)`,
   10115: `Login expired, please login to use this feature (-B)`,
-  10116: `Upload avatar image error, unknown server error`,
+  10116: `Upload image error, unknown server error`,
 
   // Topic Part
   10201: `Your daily topic limit has been reached for today. (-B)`,
@@ -32,6 +32,9 @@ const errorMessagesEN: Record<number, string> = {
   10211: `Topic not found. (-B)`,
   10212: `You've already liked this topic. (-B)`,
   10213: `You've already disliked this topic. (-B)`,
+  10214: `Upload image size is too large, maximum allowed is 10 MB. (-B)`,
+  10215: `The compressed image still exceeds 1007 kb. Please upload again.`,
+  10216: `Image upload error. The image is null or an array. (-B)`,
 
   // Auth Part
   10301: `Sending emails too frequently, please waiting 30s (-B)`,
@@ -65,13 +68,13 @@ const errorMessagesCN: Record<number, string> = {
   10107: `非法的邮箱, 用户名, 密码, 或验证码 (-B)`,
   10108: `非法的密码格式 (-B)`,
   10109: `非法的邮箱或验证码格式 (-B)`,
-  10110: `头像上传错误. 图片为数组 (-B)`,
+  10110: `头像上传错误. 图片为空或数组 (-B)`,
   10111: `头像上传错误. 图片最终压缩大小超过 50kb (-B)`,
   10112: `登陆冷却中，两次相同登陆时间间隔 17 秒 (-B)`,
   10113: `注册冷却中，两次相同注册时间间隔一分钟 (-B)`,
   10114: `非法的用户 UID (-B)`,
   10115: `登陆过期, 请登录使用该功能 (-B)`,
-  10116: `上传头像图片错误，未知的服务器错误`,
+  10116: `上传图片错误，未知的服务器错误`,
 
   10201: `您今日可以发表的话题数已达上限 (-B)`,
   10202: `您的萌萌点不足 1100, 无法使用推话题功能 (-B)`,
@@ -85,6 +88,9 @@ const errorMessagesCN: Record<number, string> = {
   10211: `未找到话题 (-B)`,
   10212: `您已经点赞过这个话题了 (-B)`,
   10213: `您已经点踩过这个话题了 (-B)`,
+  10214: `上传图片大小过大，最大为 10 MB (-B)`,
+  10215: `图片压缩后超过 1007 KB, 请重新上传`,
+  10216: `图片上传错误，图片为空或数组 (-B)`,
 
   10301: `发送邮件频率过快, 请等待 30 秒 (-B)`,
   10302: `非法的邮箱格式 (-B)`,

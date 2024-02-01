@@ -63,6 +63,7 @@ const handleChangeAvatar = async () => {
   const { data } = await useFetch('/api/user/avatar', {
     method: 'POST',
     body: formData,
+    watch: false,
     ...kungalgameResponseHandler,
   })
 

@@ -2,6 +2,7 @@ import UserModel from '~/server/models/user'
 import env from '~/server/env/dotenv'
 import sharp from 'sharp'
 import { uploadImage } from '~/server/utils/uploadImage'
+import { checkBufferSize } from '~/server/utils/checkBufferSize'
 
 const resizeUserAvatar = async (name: string, avatar: Buffer, uid: number) => {
   const miniAvatar = await sharp(avatar)
@@ -10,6 +11,10 @@ const resizeUserAvatar = async (name: string, avatar: Buffer, uid: number) => {
       background: { r: 0, g: 0, b: 0, alpha: 0 },
     })
     .toBuffer()
+
+  if (!checkBufferSize(miniAvatar, 1.007)) {
+    return 10111
+  }
 
   const miniAvatarName = `${name}-100`
   const bucketName = `image/avatar/user_${uid}`
@@ -46,6 +51,10 @@ export default defineEventHandler(async (event) => {
   )
   if (!res) {
     kunError(event, 10116)
+    return
+  }
+  if (typeof res === 'number') {
+    kunError(event, res)
     return
   }
 
