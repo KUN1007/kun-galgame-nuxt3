@@ -11,6 +11,7 @@ import {
   wrapInBulletListCommand,
   wrapInOrderedListCommand,
   insertHrCommand,
+  insertImageCommand,
   toggleInlineCodeCommand,
   toggleLinkCommand,
 } from '@milkdown/preset-commonmark'
@@ -113,6 +114,13 @@ const handleClickCodeBlock = () => {
       @click="call(toggleInlineCodeCommand.key)"
     >
       <Icon name="material-symbols:code-rounded" />
+    </button>
+
+    <button
+      aria-label="kun-galgame-upload-image"
+      @click="call(insertImageCommand.key)"
+    >
+      <Icon name="line-md:image" />
     </button>
   </div>
 </template>
