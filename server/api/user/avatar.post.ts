@@ -42,7 +42,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const newFileName = `${userInfo.name}-kun-galgame-avatar`
+  const newFileName = `${userInfo.name}-${Date.now()}-kun-galgame-avatar`
 
   const res = await resizeUserAvatar(
     newFileName,
