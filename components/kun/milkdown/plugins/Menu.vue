@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { UseEditorReturn } from '@milkdown/vue'
-import type { CmdKey } from '@milkdown/core'
 import { callCommand } from '@milkdown/utils'
 import {
   createCodeBlockCommand,
@@ -19,12 +17,15 @@ import {
   insertTableCommand,
   toggleStrikethroughCommand,
 } from '@milkdown/preset-gfm'
+import type { UseEditorReturn } from '@milkdown/vue'
+import type { CmdKey } from '@milkdown/core'
 
 const props = defineProps<{
   editorInfo: UseEditorReturn
 }>()
 
 const { get, loading } = props.editorInfo
+const input = ref<HTMLElement>()
 
 const call = <T,>(command: CmdKey<T>, payload?: T) => {
   return get()?.action(callCommand(command, payload))
@@ -37,91 +38,117 @@ const selectLanguage = () => {}
 const handleClickCodeBlock = () => {
   call(createCodeBlockCommand.key, 'javascript')
 }
+
+const handleFileChange = async (event: Event) => {
+  const input = event.target as HTMLInputElement
+  if (!input.files || !input.files[0]) {
+    return
+  }
+  const file = input.files[0]
+
+  const formData = new FormData()
+  formData.append('image', file)
+
+  useMessage('Uploading in progress...', '正在上传中...', 'info')
+  const { data } = await useFetch('/api/image/topic', {
+    method: 'POST',
+    body: formData,
+    watch: false,
+    ...kungalgameResponseHandler,
+  })
+
+  if (data.value) {
+    const fileName = file.name.replace(/[^a-zA-Z0-9 ]/g, '')
+    const userName = useKUNGalgameUserStore().name
+    const imageName = `${userName}-${Date.now()}-${fileName}`
+    call(insertImageCommand.key, {
+      src: data.value ?? '',
+      title: imageName,
+      alt: imageName,
+    })
+  }
+}
+
+const handleClickUploadImage = () => {
+  input.value?.click()
+}
 </script>
 
 <template>
   <div class="menu">
     <!-- Mark Group -->
-    <button
-      aria-label="kun-galgame-bold"
-      @click="call(toggleStrongCommand.key)"
-    >
+    <div aria-label="kun-galgame-bold" @click="call(toggleStrongCommand.key)">
       <Icon name="material-symbols:format-bold-rounded" />
-    </button>
+    </div>
 
-    <button
+    <div
       aria-label="kun-galgame-italic"
       @click="call(toggleEmphasisCommand.key)"
     >
       <Icon name="material-symbols:format-italic-rounded" />
-    </button>
+    </div>
 
-    <button
+    <div
       aria-label="kun-galgame-italic"
       @click="call(toggleStrikethroughCommand.key)"
     >
       <Icon name="material-symbols:strikethrough-s-rounded" />
-    </button>
+    </div>
 
-    <button
-      aria-label="kun-galgame-table"
-      @click="call(insertTableCommand.key)"
-    >
+    <div aria-label="kun-galgame-table" @click="call(insertTableCommand.key)">
       <Icon name="material-symbols:table" />
-    </button>
+    </div>
 
-    <button
+    <div
       aria-label="kun-galgame-list-bulleted"
       @click="call(wrapInBulletListCommand.key)"
     >
       <Icon name="material-symbols:format-list-bulleted-rounded" />
-    </button>
+    </div>
 
-    <button
+    <div
       aria-label="kun-galgame-list-numbered"
       @click="call(wrapInOrderedListCommand.key)"
     >
       <Icon name="material-symbols:format-list-numbered-rounded" />
-    </button>
+    </div>
 
-    <button
+    <div
       aria-label="kun-galgame-quote"
       @click="call(wrapInBlockquoteCommand.key)"
     >
       <Icon name="material-symbols:format-quote-rounded" />
-    </button>
+    </div>
 
-    <button
-      aria-label="kun-galgame-horizontal"
-      @click="call(insertHrCommand.key)"
-    >
+    <div aria-label="kun-galgame-horizontal" @click="call(insertHrCommand.key)">
       <Icon name="material-symbols:horizontal-rule-rounded" />
-    </button>
+    </div>
 
-    <button
-      aria-label="kun-galgame-italic"
-      @click="call(toggleLinkCommand.key)"
-    >
+    <div aria-label="kun-galgame-italic" @click="call(toggleLinkCommand.key)">
       <Icon name="material-symbols:link-rounded" />
-    </button>
+    </div>
 
-    <button aria-label="kun-galgame-italic" @click="handleClickCodeBlock">
+    <div aria-label="kun-galgame-italic" @click="handleClickCodeBlock">
       <Icon name="material-symbols:code-blocks-outline-rounded" />
-    </button>
+    </div>
 
-    <button
+    <div
       aria-label="kun-galgame-italic"
       @click="call(toggleInlineCodeCommand.key)"
     >
       <Icon name="material-symbols:code-rounded" />
-    </button>
+    </div>
 
-    <button
-      aria-label="kun-galgame-upload-image"
-      @click="call(insertImageCommand.key)"
-    >
+    <div aria-label="kun-galgame-upload-image" @click="handleClickUploadImage">
       <Icon name="line-md:image" />
-    </button>
+      <input
+        ref="input"
+        hidden
+        type="file"
+        accept=".jpg, .jpeg, .png, .webp"
+        @change="handleFileChange($event)"
+      />
+    </div>
   </div>
 </template>
 
@@ -134,7 +161,7 @@ const handleClickCodeBlock = () => {
   border-bottom: 1px solid var(--kungalgame-blue-1);
   border-top: 1px solid var(--kungalgame-blue-1);
 
-  button {
+  div {
     cursor: pointer;
     display: flex;
     justify-content: center;

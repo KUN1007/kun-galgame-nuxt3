@@ -185,15 +185,6 @@ watch(
 }
 
 .input-container {
-  &::before {
-    content: '☪';
-    font-size: 23px;
-    display: flex;
-    align-items: center;
-    padding: 7px;
-    color: var(--kungalgame-blue-3);
-  }
-
   width: 100%;
   display: flex;
   align-items: center;

@@ -101,7 +101,7 @@ const handleChangeAvatar = async () => {
           ref="input"
           hidden
           type="file"
-          accept=".jpg, .jpeg, .png"
+          accept=".jpg, .jpeg, .png, .webp"
           @change="handleFileChange($event)"
         />
       </div>
