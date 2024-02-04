@@ -2,10 +2,6 @@
 export default defineNuxtConfig({
   devtools: {
     enabled: false,
-
-    // timeline: {
-    //   enabled: true,
-    // },
   },
   devServer: {
     host: '127.0.0.1',
@@ -90,16 +86,18 @@ export default defineNuxtConfig({
     storageKey: 'kungalgame-color-mode',
   },
   robots: {
-    UserAgent: '*',
-    Allow: '/',
+    rules: {
+      UserAgent: '*',
+      Allow: '/',
+    },
   },
   pwa: {
     registerType: 'autoUpdate',
     // Disable pwa in development environment
     disable: process.env.NODE_ENV === 'development',
     manifest: {
-      name: 'KUN Visual Novel PWA',
-      short_name: 'KunPWA',
+      name: 'KUN Visual Novel',
+      short_name: 'KUN Visual Novel',
       theme_color: '#218bff',
       icons: [
         {
