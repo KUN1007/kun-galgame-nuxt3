@@ -1,9 +1,11 @@
 <script setup lang="ts">
-const { topic } = storeToRefs(useTempHomeStore())
+const { topic, topics } = storeToRefs(useTempHomeStore())
+
 const content = ref<HTMLElement>()
+const isLoadingComplete = ref(false)
 
 const getTopics = async () => {
-  const data = await useFetch('/api/home/topic', {
+  const { data } = await useFetch('/api/home/topic', {
     method: 'GET',
     query: {
       category: topic.value.category,
@@ -12,35 +14,35 @@ const getTopics = async () => {
       sortField: topic.value.sortField,
       sortOrder: topic.value.sortOrder,
     },
-    watch: false,
     ...kungalgameResponseHandler,
   })
-  return data
+  return data.value ?? []
 }
 
-const { data } = await getTopics()
+if (!topics.value.length) {
+  topics.value = await getTopics()
+}
 
 watch(
   () => [topic.value.category, topic.value.sortField, topic.value.sortOrder],
   async () => {
-    const { data: newData } = await getTopics()
-    data.value = newData.value
+    isLoadingComplete.value = false
+    useTempHomeStore().resetHomePageStatus()
+    topics.value = await getTopics()
   }
 )
 
 const scrollHandler = async () => {
-  if (isScrollAtBottom() && topic.value.isLoading) {
+  if (isScrollAtBottom() && !isLoadingComplete.value) {
     topic.value.page++
 
-    const { data: newData } = await getTopics()
+    const newData = await getTopics()
 
-    if (!newData.value?.length) {
-      topic.value.isLoading = false
+    if (newData.length < 17) {
+      isLoadingComplete.value = true
     }
 
-    if (data.value && newData.value) {
-      data.value = [...data.value, ...newData.value]
-    }
+    topics.value = topics.value.concat(newData)
   }
 }
 
@@ -54,10 +56,6 @@ const isScrollAtBottom = () => {
     return Math.abs(scrollHeight - scrollTop - clientHeight) < errorMargin
   }
 }
-
-onBeforeMount(async () => {
-  useTempHomeStore().resetHomePageStatus()
-})
 
 onMounted(async () => {
   const element = content.value
@@ -77,7 +75,7 @@ onBeforeUnmount(() => {
 <template>
   <div class="topic-container" ref="content">
     <div
-      v-for="topic in data"
+      v-for="topic in topics"
       :key="topic.tid"
       :class="
         hourDiff(topic.upvote_time, 10) ? 'kungalgame-comet-surround' : ''
@@ -91,10 +89,7 @@ onBeforeUnmount(() => {
       <HomeContentSingleTopic :topic="topic" />
     </div>
 
-    <KunSkeletonHomeTopic :count="7" v-if="!data" />
-    <KunSkeletonHomeTopic
-      v-if="topic.isLoading && data && data?.length >= 16"
-    />
+    <KunSkeletonHomeTopic v-if="!isLoadingComplete" />
   </div>
 </template>
 

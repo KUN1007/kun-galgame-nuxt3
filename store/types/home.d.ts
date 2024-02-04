@@ -1,3 +1,5 @@
+import type { HomeTopic } from '~/types/api/home'
+
 interface HomeSearchTemp {
   keywords: string
   category: string[]
@@ -15,13 +17,13 @@ export interface HomeTopicTemp {
   limit: number
   sortField: string
   sortOrder: string
-
-  isLoading: boolean
 }
 
 export interface HomeStoreTemp {
   search: HomeSearchTemp
   topic: HomeTopicTemp
+
+  topics: HomeTopic[]
 
   isShowSearch: boolean
 }

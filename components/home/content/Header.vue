@@ -5,7 +5,6 @@ const { topic } = storeToRefs(useTempHomeStore())
 const categoryIcon = ref('galgame')
 
 const handleSortByCategory = (name: string) => {
-  useTempHomeStore().resetHomePageStatus()
   topic.value.category = []
   categoryIcon.value = name
 

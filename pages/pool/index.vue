@@ -32,7 +32,7 @@ if (!topics.value.length) {
 }
 
 const scrollHandler = async () => {
-  if (isScrollAtBottom() && pool.value) {
+  if (isScrollAtBottom() && !isLoadingComplete.value) {
     page.value++
 
     const newData = await getTopics()
@@ -62,6 +62,11 @@ watch(
   () => [sortField.value, sortOrder.value],
   async () => {
     isLoadingComplete.value = false
+
+    pool.value?.scrollTo({
+      top: 0,
+    })
+
     useTempPoolStore().resetPageStatus()
 
     topics.value = await getTopics()

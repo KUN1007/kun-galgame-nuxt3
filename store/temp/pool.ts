@@ -18,6 +18,8 @@ export const useTempPoolStore = defineStore({
     resetPageStatus() {
       this.page = 1
       this.limit = 10
+      this.topics = []
+      this.savedPosition = 0
     },
   },
 })
