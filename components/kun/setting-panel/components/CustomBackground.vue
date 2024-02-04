@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const { showKUNGalgameBackground, showKUNGalgameCustomBackground } =
-  storeToRefs(useKUNGalgameSettingsStore())
+const { showKUNGalgameBackground } = storeToRefs(useKUNGalgameSettingsStore())
 
 const props = defineProps<{
   isMobile?: boolean
@@ -20,16 +19,7 @@ const handleFileChange = async (event: Event) => {
 
   const file = input.files[0]
   await saveImage(file, 'kun-galgame-custom-bg')
-  const backgroundImageBlobData = await getImage('kun-galgame-custom-bg')
-
-  if (backgroundImageBlobData) {
-    showKUNGalgameBackground.value = 'bg1007'
-    showKUNGalgameCustomBackground.value = URL.createObjectURL(
-      backgroundImageBlobData
-    )
-  } else {
-    useMessage('Upload image failed!', '上传图片错误！', 'error')
-  }
+  showKUNGalgameBackground.value = -1
 }
 </script>
 

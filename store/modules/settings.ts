@@ -2,9 +2,7 @@ import type { KUNGalgameSettingsStore } from '../types/settings'
 
 export const useKUNGalgameSettingsStore = defineStore({
   id: 'KUNGalgameSettings',
-  persist: {
-    storage: persistedState.cookies,
-  },
+  persist: true,
   state: (): KUNGalgameSettingsStore => ({
     showKUNGalgamePageWidth: {
       index: 90,
@@ -17,8 +15,7 @@ export const useKUNGalgameSettingsStore = defineStore({
       'thanks-list': 90,
     },
     showKUNGalgameFontStyle: 'system-ui',
-    showKUNGalgameBackground: 'none',
-    showKUNGalgameCustomBackground: '',
+    showKUNGalgameBackground: 0,
 
     isShowPageWidth: true,
   }),
@@ -31,9 +28,10 @@ export const useKUNGalgameSettingsStore = defineStore({
     },
     // Reset all settings; because it interacts with the document
     // , Pinia reactivity is not effective
-    setKUNGalgameSettingsRecover() {
+    async setKUNGalgameSettingsRecover() {
       this.$reset()
       this.setKUNGalgameFontStyle('system-ui')
+      await deleteImage('kun-galgame-custom-bg')
     },
   },
 })

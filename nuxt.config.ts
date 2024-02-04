@@ -50,6 +50,7 @@ export default defineNuxtConfig({
   piniaPersistedstate: {
     cookieOptions: {
       maxAge: 60 * 60 * 24 * 7,
+      sameSite: 'strict',
     },
   },
   i18n: {

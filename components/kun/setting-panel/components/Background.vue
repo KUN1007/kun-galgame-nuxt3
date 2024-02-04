@@ -2,12 +2,14 @@
 import { backgroundImages } from './backgroundImage'
 
 const { showKUNGalgameBackground } = storeToRefs(useKUNGalgameSettingsStore())
-const { restoreBackground } = useBackgroundPicture.asyncData(
-  useNuxtApp().$pinia
-)
+const restoreBackground = async () => {
+  showKUNGalgameBackground.value = 0
+  await deleteImage('kun-galgame-custom-bg')
+}
 
-const handleChangeImage = (index: number) => {
-  showKUNGalgameBackground.value = `bg${index}`
+const handleChangeImage = async (index: number) => {
+  showKUNGalgameBackground.value = index
+  await deleteImage('kun-galgame-custom-bg')
 }
 </script>
 

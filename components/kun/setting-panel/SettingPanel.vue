@@ -5,8 +5,8 @@ const emits = defineEmits<{
   close: [showKUNGalgamePanel: boolean]
 }>()
 
-const handleRecover = () => {
-  useKUNGalgameSettingsStore().setKUNGalgameSettingsRecover()
+const handleRecover = async () => {
+  await useKUNGalgameSettingsStore().setKUNGalgameSettingsRecover()
 }
 
 const handelCloseSettingsPanel = () => {
