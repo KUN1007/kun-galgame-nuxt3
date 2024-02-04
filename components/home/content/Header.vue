@@ -29,6 +29,9 @@ const iconMap: Record<string, string> = {
         <div class="category-submenu">
           <div
             class="item"
+            :class="
+              topic.category[0].toLowerCase() === kun.name ? 'active' : ''
+            "
             v-for="(kun, _) in categoryItem"
             :key="kun.index"
             @click="handleSortByCategory(kun.name)"
@@ -116,15 +119,6 @@ const iconMap: Record<string, string> = {
     justify-content: space-around;
     cursor: pointer;
 
-    &:hover {
-      background-color: var(--kungalgame-trans-blue-1);
-      backdrop-filter: blur(5px);
-    }
-
-    &:active {
-      background-color: var(--kungalgame-trans-blue-2);
-    }
-
     .icon-item {
       color: var(--kungalgame-blue-4);
       padding-right: 3px;
@@ -175,6 +169,11 @@ const iconMap: Record<string, string> = {
 .all-topic {
   font-size: 18px;
   margin-left: 7px;
+}
+
+.active {
+  background-color: var(--kungalgame-trans-blue-1);
+  backdrop-filter: blur(5px);
 }
 
 @media (max-width: 1000px) {

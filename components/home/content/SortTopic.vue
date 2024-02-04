@@ -44,6 +44,7 @@ const iconMap: Record<string, string> = {
       <div class="sort-submenu">
         <div
           class="sort-item"
+          :class="topic.sortField === kun.sortField ? 'item-active' : ''"
           v-for="kun in sortItem"
           :key="kun.index"
           @click="handleSortByField(kun.sortField)"
@@ -53,10 +54,13 @@ const iconMap: Record<string, string> = {
         </div>
 
         <div class="sort-order">
-          <span @click="orderAscending">
+          <span :class="ascClass ? 'order-active' : ''" @click="orderAscending">
             <Icon name="tdesign:order-ascending" />
           </span>
-          <span @click="orderDescending">
+          <span
+            :class="ascClass ? '' : 'order-active'"
+            @click="orderDescending"
+          >
             <Icon name="tdesign:order-descending" />
           </span>
         </div>
@@ -121,6 +125,7 @@ const iconMap: Record<string, string> = {
   background-color: var(--kungalgame-trans-white-2);
   box-shadow: var(--shadow);
   border-radius: 5px;
+  overflow: hidden;
 }
 
 .container:hover .sort-submenu {
@@ -134,15 +139,6 @@ const iconMap: Record<string, string> = {
   text-decoration: none;
   display: flex;
   justify-content: space-around;
-
-  &:hover {
-    background-color: var(--kungalgame-trans-blue-1);
-    backdrop-filter: blur(5px);
-  }
-
-  &:active {
-    background-color: var(--kungalgame-trans-blue-2);
-  }
 
   &:first-child {
     border-radius: 5px 5px 0 0;
@@ -159,11 +155,11 @@ const iconMap: Record<string, string> = {
   width: 100%;
   display: flex;
   cursor: default;
+  color: var(--kungalgame-blue-4);
   background-color: var(--kungalgame-trans-white-2);
   border-radius: 0 0 5px 5px;
 
   span {
-    color: var(--kungalgame-blue-4);
     width: 100%;
     display: flex;
     justify-content: center;
@@ -171,15 +167,6 @@ const iconMap: Record<string, string> = {
     font-size: 17px;
     padding: 10px 0;
     cursor: pointer;
-
-    &:hover {
-      transition: all 0.2s;
-      color: var(--kungalgame-red-4);
-    }
-
-    &:nth-child(2) {
-      border-left: 1px solid var(--kungalgame-trans-blue-4);
-    }
   }
 }
 
@@ -196,6 +183,16 @@ const iconMap: Record<string, string> = {
   }
 }
 
+.item-active {
+  background-color: var(--kungalgame-trans-blue-1);
+  backdrop-filter: blur(5px);
+}
+
+.order-active {
+  background-color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-white);
+}
+
 @media (max-width: 700px) {
   .sort-item {
     display: flex;
@@ -204,4 +201,3 @@ const iconMap: Record<string, string> = {
   }
 }
 </style>
-../utils/navItem
