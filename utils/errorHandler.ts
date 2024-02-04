@@ -4,7 +4,7 @@ const showMessage = (errorCode: number) => {
   const messageType = 'error'
   const messageTextEN = getErrorMessageEN(errorCode)
   const messageTextCN = getErrorMessageCN(errorCode)
-  useMessage(messageTextEN, messageTextCN, messageType)
+  useMessage(messageTextEN, messageTextCN, messageType, 5000)
 }
 
 export const kungalgameErrorHandler = (errorNumber: string) => {

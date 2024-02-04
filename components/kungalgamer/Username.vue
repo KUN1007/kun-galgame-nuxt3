@@ -1,11 +1,43 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const message = useTempMessageStore()
+
+const refresh = inject<() => Promise<void>>('refresh')
+const inputValue = ref('')
+
+const handleChangeUsername = async () => {
+  if (!isValidName(inputValue.value)) {
+    useMessage('Please input valid username', '请输入合法的用户名', 'warn')
+    return
+  }
+
+  const res = await message.alert('AlertInfo.user.username', true)
+  if (!res) {
+    return
+  }
+
+  useMessage('Changing username in progress...', '正在更改用户名...', 'info')
+  const { data } = await useFetch('/api/user/username', {
+    method: 'PUT',
+    watch: false,
+    body: { username: inputValue.value },
+    ...kungalgameResponseHandler,
+  })
+
+  if (data.value) {
+    useMessage('Username update successfully', '用户名更新成功', 'success')
+    await refresh?.()
+  }
+}
+</script>
 
 <template>
   <div class="username">
     <div class="title">{{ $t('user.settings.username') }}</div>
-    <input type="text" />
+    <input type="text" v-model="inputValue" />
     <p>{{ $t('user.settings.usernameHint') }}</p>
-    <button>{{ $t('user.settings.confirm') }}</button>
+    <button @click="handleChangeUsername">
+      {{ $t('user.settings.confirm') }}
+    </button>
   </div>
 </template>
 
