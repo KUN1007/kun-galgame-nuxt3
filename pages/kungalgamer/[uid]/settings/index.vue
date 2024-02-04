@@ -16,6 +16,8 @@ const user = computed(() => props.user)
     <KungalgamerAvatar />
 
     <KungalgamerBio :user="user" />
+
+    <KungalgamerUsername />
   </div>
 </template>
 

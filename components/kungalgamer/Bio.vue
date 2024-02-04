@@ -70,10 +70,10 @@ onMounted(() => {
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 
   textarea {
     color: var(--kungalgame-font-color-3);
-    flex: 1;
     margin-bottom: 10px;
     width: 100%;
     border: 1px solid var(--kungalgame-blue-4);
@@ -110,6 +110,7 @@ onMounted(() => {
       background-color: var(--kungalgame-blue-4);
       color: var(--kungalgame-white);
     }
+
     &:active {
       transform: scale(0.9);
     }
