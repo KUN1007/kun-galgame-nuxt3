@@ -1,18 +1,22 @@
 <script setup lang="ts">
 import { asideItem } from '../utils/asideItem'
-
-const { locale } = useI18n()
-
-const langClass = computed(() => {
-  return locale.value === 'en' ? 'en' : 'cn'
-})
 </script>
 
 <template>
   <div class="aside">
-    <span v-for="kun in asideItem" :key="kun.index">
-      <NuxtLink :class="langClass" :to="{ path: kun.router }">
-        {{ $t(`mainPage.asideActive.${kun.name}`) }}
+    <span
+      v-for="kun in asideItem"
+      :key="kun.index"
+      v-tooltip="{
+        message: $t(`mainPage.asideActive.${kun.name}`),
+        position: 'right',
+      }"
+    >
+      <NuxtLink
+        :aria-label="$t(`mainPage.asideActive.${kun.name}`)"
+        :to="{ path: kun.router }"
+      >
+        <Icon :name="kun.icon" />
       </NuxtLink>
     </span>
   </div>
@@ -31,7 +35,7 @@ const langClass = computed(() => {
     width: 100%;
     height: 1px;
     flex-grow: 1;
-    font-size: 18px;
+    font-size: 25px;
     border-top: 1px solid var(--kungalgame-blue-4);
 
     &:first-child {
@@ -52,16 +56,5 @@ const langClass = computed(() => {
       color: var(--kungalgame-blue-5);
     }
   }
-}
-
-.en {
-  writing-mode: vertical-lr;
-  text-orientation: sideways;
-  transform: rotate(180deg);
-}
-
-.cn {
-  writing-mode: vertical-rl;
-  text-orientation: upright;
 }
 </style>

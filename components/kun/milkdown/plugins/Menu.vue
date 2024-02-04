@@ -66,6 +66,7 @@ const handleFileChange = async (event: Event) => {
       title: imageName,
       alt: imageName,
     })
+    useMessage('Image upload successfully!', '图片上传成功!', 'success')
   }
 }
 
