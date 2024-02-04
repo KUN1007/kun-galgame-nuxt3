@@ -5,10 +5,45 @@ import 'animate.css'
 const { showInfo, infoMsg } = storeToRefs(useTempMessageStore())
 
 const { loli, name } = img
+const timer = ref<NodeJS.Timeout | null>()
+const progressWidth = ref('')
 
 const handleClose = () => {
+  if (timer.value) {
+    clearTimeout(timer.value)
+    timer.value = null
+  }
+
   showInfo.value = false
 }
+
+watch(
+  () => showInfo.value,
+  (newValue) => {
+    const duration = 3000
+
+    if (newValue) {
+      const startTime = Date.now()
+      timer.value = setInterval(() => {
+        const currentTime = Date.now()
+        const elapsedTime = currentTime - startTime
+        const elapsedPercentage = (elapsedTime / duration) * 100
+        const remainingPercentage = Math.max(1, 100 - elapsedPercentage)
+        progressWidth.value = remainingPercentage + '%'
+        if (remainingPercentage <= 1 && timer.value) {
+          clearInterval(timer.value)
+          timer.value = null
+          showInfo.value = false
+        }
+      }, 10)
+    } else {
+      if (timer.value) {
+        clearInterval(timer.value)
+        timer.value = null
+      }
+    }
+  }
+)
 </script>
 
 <template>
@@ -42,6 +77,8 @@ const handleClose = () => {
         <div class="close" @click="handleClose">
           <Icon name="line-md:close" />
         </div>
+
+        <span class="progress"></span>
       </div>
     </Transition>
   </Teleport>
@@ -108,12 +145,22 @@ const handleClose = () => {
     1px 2px var(--kungalgame-font-color-3),
     1px 2px var(--kungalgame-font-color-3);
 }
+
 .close {
   font-size: 30px;
   position: absolute;
   top: 0;
   right: 0;
   color: var(--kungalgame-font-color-1);
+}
+
+.progress {
+  position: absolute;
+  height: 5px;
+  width: v-bind(progressWidth);
+  background-color: var(--kungalgame-blue-4);
+  top: 0;
+  right: 0;
 }
 
 @media (max-width: 700px) {

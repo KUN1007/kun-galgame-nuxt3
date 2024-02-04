@@ -102,4 +102,3 @@ const handleClickCategory = (kun: Category) => {
   color: var(--kungalgame-white);
 }
 </style>
-./utils/category./utils/category

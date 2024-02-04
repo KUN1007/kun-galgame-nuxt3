@@ -17,7 +17,7 @@
 
 <style lang="scss" scoped>
 .root {
-  height: 100vh;
+  height: calc(100vh - 65px);
   width: 100vw;
   display: flex;
   color: var(--kungalgame-font-color-3);

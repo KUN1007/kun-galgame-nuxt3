@@ -11,6 +11,7 @@ export const useTempMessageStore = defineStore({
     alertMsg: '',
     isShowCancel: false,
     confirm: false,
+
     isShowCapture: false,
     isCaptureSuccessful: false,
   }),
