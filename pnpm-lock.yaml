@@ -97,9 +97,6 @@ dependencies:
     version: 4.7.4
 
 devDependencies:
-  '@formkit/auto-animate':
-    specifier: ^0.8.1
-    version: 0.8.1
   '@nuxt/devtools':
     specifier: ^1.0.8
     version: 1.0.8(nuxt@3.9.3)(rollup@4.9.6)(vite@5.0.12)
@@ -1679,10 +1676,6 @@ packages:
 
   /@floating-ui/utils@0.2.1:
     resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
-    dev: true
-
-  /@formkit/auto-animate@0.8.1:
-    resolution: {integrity: sha512-0/Z2cuNXWVVIG/l0SpcHAWFhGdvLJ8DRvEfRWvmojtmRWfEy+LWNwgDazbZqY0qQYtkHcoEK3jBLkhiZaB/4Ig==}
     dev: true
 
   /@iconify-json/carbon@1.1.28:
