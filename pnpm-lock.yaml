@@ -109,9 +109,6 @@ devDependencies:
   '@nuxtjs/i18n':
     specifier: 8.0.0
     version: 8.0.0(rollup@4.9.6)(vue-router@4.2.5)(vue@3.4.15)
-  '@nuxtjs/robots':
-    specifier: ^3.0.0
-    version: 3.0.0(rollup@4.9.6)
   '@pinia-plugin-persistedstate/nuxt':
     specifier: ^1.2.0
     version: 1.2.0(@pinia/nuxt@0.5.1)(pinia@2.1.7)(rollup@4.9.6)
@@ -2966,16 +2963,6 @@ packages:
       - vue
       - vue-i18n-bridge
       - vue-router
-    dev: true
-
-  /@nuxtjs/robots@3.0.0(rollup@4.9.6):
-    resolution: {integrity: sha512-qsHGW1KXBvV5Kq7u3huPnFCUTbHS4Fk8Za2mNPgmUXcwLgp3exvhPtdZfIdjrCF/aZk3A8OZONNmGghs6CecBA==}
-    dependencies:
-      '@nuxt/kit': 3.9.3(rollup@4.9.6)
-      h3: 1.10.1
-    transitivePeerDependencies:
-      - rollup
-      - supports-color
     dev: true
 
   /@parcel/watcher-android-arm64@2.4.0:

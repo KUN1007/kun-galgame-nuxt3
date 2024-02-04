@@ -15,7 +15,6 @@
     "@nuxt/image": "^1.3.0",
     "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/i18n": "8.0.0",
-    "@nuxtjs/robots": "^3.0.0",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "@pinia/nuxt": "^0.5.1",
     "@types/bcrypt": "^5.0.2",

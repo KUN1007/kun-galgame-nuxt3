@@ -13,7 +13,6 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@pinia-plugin-persistedstate/nuxt',
     'dayjs-nuxt',
-    '@nuxtjs/robots',
     'nuxt-icon',
     '@vite-pwa/nuxt',
     'nuxt-typed-router',
@@ -84,12 +83,6 @@ export default defineNuxtConfig({
     classPrefix: 'kun-',
     classSuffix: '-mode',
     storageKey: 'kungalgame-color-mode',
-  },
-  robots: {
-    rules: {
-      UserAgent: '*',
-      Allow: '/',
-    },
   },
   pwa: {
     registerType: 'autoUpdate',
