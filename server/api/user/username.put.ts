@@ -25,7 +25,9 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const duplicatedNumber = await UserModel.countDocuments({ name: username })
+  const duplicatedNumber = await UserModel.countDocuments({
+    name: { $regex: new RegExp('^' + username + '$', 'i') },
+  })
   if (duplicatedNumber) {
     kunError(event, 10105)
     return
