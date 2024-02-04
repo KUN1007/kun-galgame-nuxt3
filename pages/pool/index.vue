@@ -1,29 +1,61 @@
 <script setup lang="ts">
 const pool = ref<HTMLElement>()
 
-const { page, limit, sortField, sortOrder, isScrollToTop } =
-  storeToRefs(useTempPoolStore())
+const {
+  page,
+  limit,
+  sortField,
+  sortOrder,
+  isScrollToTop,
+  savedPosition,
+  topics,
+} = storeToRefs(useTempPoolStore())
 const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 const isLoadingComplete = ref(false)
-
-useTempPoolStore().resetPageStatus()
 
 const poolPageWidth = computed(() => {
   return showKUNGalgamePageWidth.value.pool + '%'
 })
 
 const getTopics = async () => {
-  const data = await useFetch(`/api/pool/topic`, {
+  const { data } = await useFetch(`/api/pool/topic`, {
     method: 'GET',
     query: { page, limit, sortField, sortOrder },
     watch: false,
     ...kungalgameResponseHandler,
   })
-  return data
+  return data.value ?? []
 }
-const { data: topics } = await getTopics()
-if (!topics.value || topics.value.length < 10) {
-  isLoadingComplete.value = true
+
+if (!topics.value.length) {
+  topics.value = await getTopics()
+}
+
+const scrollHandler = async () => {
+  if (isScrollAtBottom() && pool.value) {
+    page.value++
+
+    const newData = await getTopics()
+
+    if (newData.length < 10) {
+      isLoadingComplete.value = true
+    }
+
+    topics.value = topics.value.concat(newData)
+  }
+}
+
+const isScrollAtBottom = () => {
+  if (pool.value) {
+    const scrollHeight = pool.value.scrollHeight
+    const scrollTop = pool.value.scrollTop
+    const clientHeight = pool.value.clientHeight
+
+    savedPosition.value = scrollTop
+
+    const errorMargin = 1.007
+    return Math.abs(scrollHeight - scrollTop - clientHeight) < errorMargin
+  }
 }
 
 watch(
@@ -32,8 +64,7 @@ watch(
     isLoadingComplete.value = false
     useTempPoolStore().resetPageStatus()
 
-    const newTopics = await getTopics()
-    topics.value = newTopics.data.value
+    topics.value = await getTopics()
   }
 )
 
@@ -55,15 +86,32 @@ const handleLoadTopics = async () => {
   }
 
   page.value++
-  const { data } = await getTopics()
-  const lazyLoadTopics = data.value ? data.value : []
+  const lazyLoadTopics = await getTopics()
 
   if (lazyLoadTopics.length < 10) {
     isLoadingComplete.value = true
-    return
   }
-  topics.value = [...topics.value, ...lazyLoadTopics]
+  topics.value = topics.value.concat(lazyLoadTopics)
 }
+
+onMounted(() => {
+  pool.value?.scrollTo({
+    top: savedPosition.value,
+    left: 0,
+  })
+
+  const element = pool.value
+  if (element) {
+    element.addEventListener('scroll', scrollHandler)
+  }
+})
+
+onBeforeUnmount(() => {
+  const element = pool.value
+  if (element) {
+    element.removeEventListener('scroll', scrollHandler)
+  }
+})
 </script>
 
 <template>
@@ -71,7 +119,6 @@ const handleLoadTopics = async () => {
     <div class="pool-container">
       <div class="topic-container">
         <PoolTopic
-          v-if="topics && topics.length"
           v-for="(kun, index) in topics"
           :key="index"
           class="item"

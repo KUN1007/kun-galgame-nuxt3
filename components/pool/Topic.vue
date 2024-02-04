@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { PoolTopic } from '~/types/api/pool'
 
-// rgba(208, 234, 255, 0.31) is good
 const light = `rgba(${randomNum(200, 255)}, ${randomNum(200, 255)}, ${randomNum(
   200,
   255

@@ -10,6 +10,9 @@ export const useTempPoolStore = defineStore({
     sortOrder: 'desc',
 
     isScrollToTop: false,
+    savedPosition: 0,
+
+    topics: [],
   }),
   actions: {
     resetPageStatus() {

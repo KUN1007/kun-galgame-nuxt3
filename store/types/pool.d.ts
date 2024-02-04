@@ -1,3 +1,5 @@
+import type { PoolTopic } from '~/types/api/pool'
+
 export interface PoolStoreTemp {
   page: number
   limit: number
@@ -5,4 +7,7 @@ export interface PoolStoreTemp {
   sortOrder: string
 
   isScrollToTop: boolean
+  savedPosition: number
+
+  topics: PoolTopic[]
 }
