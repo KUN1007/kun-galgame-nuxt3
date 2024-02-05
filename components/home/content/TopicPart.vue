@@ -90,6 +90,8 @@ const getRepliesCount = computed(() => {
   white-space: nowrap;
   text-overflow: ellipsis;
   color: var(--kungalgame-blue-5);
+  font-weight: bold;
+  margin-bottom: 7px;
 }
 
 .status {

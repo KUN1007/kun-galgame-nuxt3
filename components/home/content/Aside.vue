@@ -42,11 +42,6 @@ import { asideItem } from '../utils/asideItem'
       border-top: none;
     }
 
-    &:hover {
-      transition: 0.2s;
-      background-color: var(--kungalgame-trans-blue-1);
-    }
-
     a {
       width: 100%;
       height: 100%;
@@ -54,6 +49,15 @@ import { asideItem } from '../utils/asideItem'
       justify-content: center;
       align-items: center;
       color: var(--kungalgame-blue-5);
+    }
+
+    &:hover {
+      transition: 0.2s;
+      background-color: var(--kungalgame-blue-4);
+
+      a {
+        color: var(--kungalgame-white);
+      }
     }
   }
 }

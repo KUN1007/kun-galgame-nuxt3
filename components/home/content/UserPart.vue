@@ -57,6 +57,7 @@ const user = computed(() => props.user)
     padding: 2px;
     border-radius: 50%;
     display: inline-block;
+    margin-bottom: 7px;
   }
 
   span {

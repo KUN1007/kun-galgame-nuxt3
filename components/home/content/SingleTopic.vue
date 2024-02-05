@@ -21,7 +21,7 @@ const topic = computed(() => props.topic)
 <style lang="scss" scoped>
 .topic {
   width: 100%;
-  height: 77px;
+  height: 85px;
   flex-shrink: 0;
   border-radius: 3px;
   background-color: var(--kungalgame-trans-blue-0);
