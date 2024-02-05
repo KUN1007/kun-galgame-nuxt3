@@ -1,5 +1,15 @@
 <script setup lang="ts">
-const router = useRouter()
+const { t } = useI18n()
+
+useHead({
+  title: t('seo.donate.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('seo.donate.description'),
+    },
+  ],
+})
 
 const handleClickDonate = () => {
   useMessage(
@@ -22,7 +32,7 @@ const handleClickDonate = () => {
       </p>
       <div class="btn">
         <span @click="handleClickDonate">{{ $t('donate.confirm') }}</span>
-        <span @click="router.push('/')">{{ $t('donate.back') }}</span>
+        <span @click="navigateTo('/')">{{ $t('donate.back') }}</span>
       </div>
     </div>
 

@@ -3,6 +3,18 @@ definePageMeta({
   middleware: 'auth',
 })
 
+const { t } = useI18n()
+
+useHead({
+  title: t('seo.edit.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('seo.edit.description'),
+    },
+  ],
+})
+
 const { isTopicRewriting } = storeToRefs(useTempEditStore())
 const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 const editPageWidth = computed(() => {

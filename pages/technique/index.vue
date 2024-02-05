@@ -1,4 +1,16 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
+useHead({
+  title: t('seo.technique.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('seo.technique.description'),
+    },
+  ],
+})
+
 const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 
 const techniquePageWidth = computed(() => {

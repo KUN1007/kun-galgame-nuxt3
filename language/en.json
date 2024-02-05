@@ -1,7 +1,8 @@
 {
   "head": {
     "title": "KUN Visual Novel",
-    "description": "The CUTEST Visual Novel Forum! Visual Novel Communication, Visual Novel Technique.To Create The Best Atmosphere! NO ADs Forever! Free Forever!"
+    "description": "The CUTEST Visual Novel Forum! Visual Novel Communication, Visual Novel Technique.To Create The Best Atmosphere! NO ADs Forever! Free Forever!",
+    "keywords": "Visualnovel, visualnovel downloads, visualnovel reviews, visualnovel data analysis, visualnovel news, visualnovel translation/internationalization, visualnovel production, visualnovel discussions, visualnovel sources, technical exchanges, other discussions."
   },
   "header":{
     "name": "KUN Visual Novel",
@@ -421,6 +422,76 @@
     "copyright": "Copyright © 2024 KUN Visual Novel",
     "openSource": "GitHub Open Source",
     "reserved": "All rights reserved | Version"
+  },
+  "seo": {
+    "agreement": {
+        "title": "User Agreement",
+        "description": "1. All statements made by users are not related to KUN Visual Novel. 2. KUN Visual Novel is merely an open-source collaborative web development project designed for everyone to learn web knowledge. 3. We reserve the right to ban users who engage in actions detrimental to the maintenance of our open-source project. 4. KUN Visual Novel is not responsible for any losses caused by issues such as user account theft."
+    },
+    "balance": {
+        "title": "Financial Disclosure",
+        "description": "KUN Visual Novel's financial disclosure, KUN Visual Novel is a completely free forum. Income comes from donations, and expenses include servers, domains, email services, and image hosting services."
+    },
+    "bylaw": {
+        "title": "Bylaws",
+        "description": "KUN Visual Novel bylaws, covering users, topics, and moemoepoints. The goal is to make the forum's operation more transparent; these are not rules, as we do not have strict rules."
+    },
+    "contact": {
+        "title": "Join / Contact Us",
+        "description": "Join the official KUN Visual Novel Telegram group, official Twitter / X subscription, official GitHub project, official Discord discussion group, official YouTube channel, official Bilibili."
+    },
+    "donate": {
+        "title": "Sponsor / Donate Us",
+        "description": "Sponsor KUN Visual Novel forum to relieve our operational pressure."
+    },
+    "edit": {
+        "title": "Post Topic",
+        "description": "Post a topic on KUN Visual Novel, any type is allowed, including visualnovel-related content, visualnovel downloads, visualnovel impressions, etc."
+    },
+    "forgot": {
+        "title": "Forgot Password",
+        "description": "Forgot password on KUN Visual Novel, recover your password if forgotten."
+    },
+    "kungalgame": {
+        "title": "About Us",
+        "description": "KUN Visual Novel is a visualnovel forum that will become a website integrating all things visualnovel, including visualnovel downloads, visualnovel reviews, visualnovel data analysis, visualnovel news, visualnovel translation/internationalization, visualnovel production, and more. Our ultimate goal is to be the world's best visualnovel forum!"
+    },
+    "login": {
+        "title": "Login / Register KUN Visual Novel Forum",
+        "description": "Login / Register KUN Visual Novel Forum, the world's cutest visualnovel forum! Visualnovel discussions, technical exchanges. Striving to create the best atmosphere! No advertisements ever! Always free!"
+    },
+    "nonMoe": {
+        "title": "Non-moe Record",
+        "description": "KUN Visual Novel's records of user violations. This section records all penalties imposed so far. We hope everyone will not engage in such behavior."
+    },
+    "pool": {
+        "title": "Topic Pool",
+        "description": "KUN Visual Novel topic pool, visualnovel discussions, technical exchanges, and other discussions."
+    },
+    "privacy": {
+        "title": "Privacy Policy",
+        "description": "KUN Visual Novel privacy policy. KUN Visual Novel is a completely free, ad-free visualnovel forum. We will never use your personal information for anything other than this site. We do not operate for profit. Email, registration time, etc., are used for password recovery. Through cookies, Local Storage, etc., we provide optimized experiences such as search history, image caching. Device date, operating system information, etc."
+    },
+    "ranking": {
+        "title": "Rankings",
+        "description": "KUN Visual Novel rankings, user rankings, topic rankings, popularity rankings, moemoepoints rankings."
+    },
+    "technique": {
+        "title": "Technical Exchange",
+        "description": "KUN Visual Novel technical exchange. visualnovel cracking, visualnovel translation, visualnovel production, advanced visualnovel. Perhaps you can develop a high-performance visualnovel website. Not limited to visualnovel, we encourage exploration of all technical aspects, such as programming, Adobe series, SAI drawing, Auto CAD mapping, high-tech, rooting, firewalls, servers, DDoS principles."
+    },
+    "thanksList": {
+        "title": "Thanks List",
+        "description": "KUN Visual Novel thank you list. Thanks to ACGNGAME (Old Yu), shinnku (shinnku-sister), YM Galgame (Cang Lin), yurzhang (yur), Haruki (Haruki Nikaido), Asuka Minato (Asuka-san), Kun's Galgame discussion group Telegram, Kun's Galgame discussion group QQ, and everyone for their help."
+    },
+    "updateLog": {
+        "title": "Update Log",
+        "description": "Update log of KUN Visual Novel forum's open-source GitHub repository, documenting everything from the forum's inception."
+    },
+    "home": {
+      "title": "KUN Visual Novel Forum",
+      "description": "The CUTEST Visual Novel Forum! Visual Novel Communication, Visual Novel Technique.To Create The Best Atmosphere! NO ADs Forever! Free Forever!"
+    }
   },
   "ComponentAlert":{
     "confirm": "OK",

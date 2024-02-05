@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { TopicDetail } from '~/types/api/topic'
+
 const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
@@ -16,19 +18,15 @@ const { isShowCommentPanelRid } = storeToRefs(useTempCommentStore())
 
 const props = defineProps<{
   tid: number
+  topicData: TopicDetail
 }>()
 const tid = computed(() => props.tid)
+const topicData = computed(() => props.topicData)
 const content = ref<HTMLElement>()
 const isExecuteScrollToReplyAnimate = ref(false)
 const contentScrollHeight = ref(0)
 
 useTempReplyStore().resetPageStatus()
-
-const { data: topicData } = await useFetch(`/api/topic/${tid.value}`, {
-  method: 'GET',
-  watch: false,
-  ...kungalgameResponseHandler,
-})
 
 const getReplies = async () => {
   const data = await useFetch(`/api/topic/${tid.value}/reply`, {

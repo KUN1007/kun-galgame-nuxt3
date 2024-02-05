@@ -7,13 +7,33 @@ const route = useRoute()
 const tid = computed(() => {
   return parseInt((route.params as { tid: string }).tid)
 })
+
+const { data } = await useFetch(`/api/topic/${tid.value}`, {
+  method: 'GET',
+  watch: false,
+  ...kungalgameResponseHandler,
+})
+
+const topicContentText = computed(() =>
+  markdownToText(data.value?.content ?? '').slice(0, 150)
+)
+
+useHead({
+  title: data.value?.title,
+  meta: [
+    {
+      name: 'description',
+      content: topicContentText.value,
+    },
+  ],
+})
 </script>
 
 <template>
   <div class="root">
     <ReplyPanel />
 
-    <Topic :tid="tid" />
+    <Topic v-if="data" :tid="tid" :topic-data="data" />
 
     <TopicBar />
   </div>

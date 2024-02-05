@@ -1,5 +1,15 @@
 <script setup lang="ts">
-const { locale } = useI18n()
+const { t, locale } = useI18n()
+
+useHead({
+  title: t('seo.privacy.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('seo.privacy.description'),
+    },
+  ],
+})
 </script>
 
 <template>

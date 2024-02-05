@@ -1,5 +1,15 @@
 <script setup lang="ts">
-const { locale } = useI18n()
+const { t, locale } = useI18n()
+
+useHead({
+  title: t('seo.nonMoe.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('seo.nonMoe.description'),
+    },
+  ],
+})
 
 const { page, limit, sortOrder } = useTempNonMoeStore()
 

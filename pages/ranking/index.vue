@@ -1,4 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { t } = useI18n()
+
+useHead({
+  title: t('seo.ranking.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('seo.ranking.description'),
+    },
+  ],
+})
+</script>
 
 <template>
   <div class="root">

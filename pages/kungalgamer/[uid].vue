@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
 const route = useRoute()
 
 const uid = computed(() => {
@@ -27,6 +29,16 @@ onMounted(async () => {
     avatarMin.value = avatar.value.replace(/\.webp$/, '-100.webp')
   }
   moemoepoint.value = user.value.moemoepoint
+})
+
+useHead({
+  title: user.value?.name,
+  meta: [
+    {
+      name: 'description',
+      content: user.value?.bio ? user.value?.bio : user.value?.name,
+    },
+  ],
 })
 </script>
 

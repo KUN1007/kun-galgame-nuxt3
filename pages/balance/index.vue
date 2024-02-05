@@ -1,4 +1,16 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
+useHead({
+  title: t('seo.balance.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('seo.balance.description'),
+    },
+  ],
+})
+
 const { income, expenditure } = storeToRefs(useTempBalanceStore())
 
 const { data: incomeData } = await useFetch(`/api/balance/income`, {

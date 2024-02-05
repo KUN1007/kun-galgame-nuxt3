@@ -1,4 +1,16 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
+useHead({
+  title: t('seo.pool.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('seo.pool.description'),
+    },
+  ],
+})
+
 const pool = ref<HTMLElement>()
 
 const {

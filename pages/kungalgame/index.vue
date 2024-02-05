@@ -1,4 +1,16 @@
 <script setup lang="ts">
+const { t } = useI18n()
+
+useHead({
+  title: t('seo.kungalgame.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('seo.kungalgame.description'),
+    },
+  ],
+})
+
 const { locale } = useI18n()
 
 const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())

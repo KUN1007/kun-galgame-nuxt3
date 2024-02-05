@@ -13,6 +13,10 @@ useHead({
       content: t('head.description'),
     },
     {
+      name: 'keywords',
+      content: t('head.keywords'),
+    },
+    {
       name: 'format-detection',
       content: 'telephone=no',
     },
