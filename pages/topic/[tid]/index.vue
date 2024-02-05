@@ -15,7 +15,10 @@ const { data } = await useFetch(`/api/topic/${tid.value}`, {
 })
 
 const topicContentText = computed(() =>
-  markdownToText(data.value?.content ?? '').slice(0, 150)
+  markdownToText(data.value?.content ?? '')
+    .trim()
+    .replace(/\s+/g, ',')
+    .slice(0, 150)
 )
 
 useHead({
@@ -24,6 +27,10 @@ useHead({
     {
       name: 'description',
       content: topicContentText.value,
+    },
+    {
+      name: 'keywords',
+      content: data.value?.tags.toString(),
     },
   ],
 })
