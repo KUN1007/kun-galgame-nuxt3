@@ -148,11 +148,11 @@ useHead({
           Frontend: Vue3 + Vite + Typescript + Pinia implementation:
           <span class="skip">
             <a
-              href="https://github.com/KUN1007/kun-galgame-vue"
+              href="https://github.com/KUN1007/kun-galgame-nuxt3"
               target="_blank"
               rel="noopener noreferrer"
             >
-              kun-galgame-vue
+              kun-galgame-nuxt3
             </a>
           </span>
         </p>
@@ -356,11 +356,11 @@ useHead({
           前端 Vue3 + Vite + Typescript + Pinia 实现：
           <span class="skip">
             <a
-              href="https://github.com/KUN1007/kun-galgame-vue"
+              href="https://github.com/KUN1007/kun-galgame-nuxt3"
               target="_blank"
               rel="noopener noreferrer"
             >
-              kun-galgame-vue
+              kun-galgame-nuxt3
             </a>
           </span>
         </p>

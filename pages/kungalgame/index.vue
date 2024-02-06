@@ -44,7 +44,7 @@ const kungalgamePageWidth = computed(() => {
             individually, and it is currently in the
             <span class="skip">
               <a
-                href="https://github.com/KUN1007/kun-galgame-vue"
+                href="https://github.com/KUN1007/kun-galgame-nuxt3"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -302,7 +302,7 @@ const kungalgamePageWidth = computed(() => {
             个人发起的一个 galgame 论坛建设项目，目前正在
             <span class="skip">
               <a
-                href="https://github.com/KUN1007/kun-galgame-vue"
+                href="https://github.com/KUN1007/kun-galgame-nuxt3"
                 target="_blank"
                 rel="noopener noreferrer"
               >

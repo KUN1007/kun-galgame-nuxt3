@@ -134,7 +134,7 @@ const handleCloseCapture = () => {
             <div v-if="isShowAnswer" class="answer">
               <div>{{ $t('AlertInfo.capture.hint4') }}</div>
               <a
-                href="https://github.com/KUN1007/kun-galgame-vue/tree/remove-server/src/components/capture"
+                href="https://github.com/KUN1007/kun-galgame-nuxt3/tree/remove-server/src/components/capture"
                 target="_blank"
                 rel="noopener noreferrer"
               >

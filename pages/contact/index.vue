@@ -39,7 +39,7 @@ useHead({
 
         <a
           aria-label="KUN Visual Novel Open Source GitHub Repository | 鲲 Galgame 论坛开源 GitHub 仓库"
-          href="https://github.com/KUN1007/kun-galgame-vue"
+          href="https://github.com/KUN1007/kun-galgame-nuxt3"
           target="_blank"
         >
           <Icon class="icon" name="line-md:github-loop" />
