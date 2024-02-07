@@ -69,7 +69,6 @@ const replaceTimeUnits = (input: string, language: string) => {
 export const formatTimeDifference = (pastTime: number, language: string) => {
   const now = dayjs()
   const diffInSeconds = now.diff(pastTime, 'second')
-  const hint = language === 'en' ? ' ago' : '前'
 
   // Use the relativeTime plugin of dayjs to format relative time
   const time = () => {
@@ -89,12 +88,12 @@ export const formatTimeDifference = (pastTime: number, language: string) => {
   }
 
   if (time() === 'a few seconds') {
-    return language === 'en' ? 'a few secs ago' : '几秒前'
+    return language === 'en' ? 'a few secs' : '几秒'
   }
 
-  const cnTime = replaceTimeUnits(time(), language).replace(/s\b/g, '') + hint
+  const cnTime = replaceTimeUnits(time(), language).replace(/s\b/g, '')
 
-  const enTime = replaceTimeUnits(time(), language) + hint
+  const enTime = replaceTimeUnits(time(), language)
 
   return language === 'en' ? enTime : cnTime
 }

@@ -93,8 +93,8 @@
       "bylaw": "执行条例",
       "contact": "加入我们",
       "nonMoe": "不萌记录",
-      "hot": "今日热门话题",
-      "new": "今日最新话题"
+      "popularity": "今日热门话题",
+      "time": "今日最新话题"
     },
     "footer":{
       "title":{

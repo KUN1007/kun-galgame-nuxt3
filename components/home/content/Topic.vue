@@ -1,54 +1,77 @@
 <script setup lang="ts">
+import type { TypeToGet, HomeNavTopic } from '~/types/api/home'
+
 const { locale } = useI18n()
 
-const { data: hotTopic } = await useFetch('/api/home/nav/hot', {
-  method: 'GET',
-  watch: false,
-})
+const { typeToGet } = storeToRefs(usePersistKUNGalgameHomeStore())
+const topics = ref<HomeNavTopic[]>()
 
-const { data: newTopic } = await useFetch('/api/home/nav/new', {
-  method: 'GET',
-  watch: false,
-})
+interface IconItem {
+  name: TypeToGet
+  icon: string
+}
+
+const iconItem: IconItem[] = [
+  {
+    name: 'time',
+    icon: 'eos-icons:hourglass',
+  },
+  {
+    name: 'popularity',
+    icon: 'bi:fire',
+  },
+]
+
+const getTopics = async () => {
+  const { data } = await useFetch('/api/home/nav', {
+    method: 'GET',
+    query: { type: typeToGet.value },
+    watch: false,
+  })
+  return data.value ?? []
+}
+
+topics.value = await getTopics()
+
+const handleClickIcon = async (icon: TypeToGet) => {
+  typeToGet.value = icon
+  topics.value = await getTopics()
+}
 </script>
 
 <template>
   <div class="topic-wrap">
     <div class="title">
-      <span class="title-hot">
-        <Icon name="bi:fire" />
-      </span>
-      <span class="title-new">
-        <Icon name="eos-icons:hourglass" />
+      <span
+        v-for="(icon, index) in iconItem"
+        :key="index"
+        :class="typeToGet === icon.name ? 'active' : ''"
+        @click="handleClickIcon(icon.name)"
+        v-tooltip="{
+          message: $t(`mainPage.asideActive.${icon.name}`),
+          position: 'bottom',
+        }"
+      >
+        <Icon :name="icon.icon" />
       </span>
     </div>
 
-    <div class="content" v-if="hotTopic" v-for="kun in hotTopic">
+    <div class="content" v-if="topics" v-for="kun in topics">
       <NuxtLink :to="`/topic/${kun.tid}`">
         <div class="topic">
           <div class="name">{{ kun.title }}</div>
-          <div class="hot">
+          <div class="hot" v-if="typeToGet === 'popularity'">
             <Icon name="bi:fire" />
             <span>{{ Math.ceil(kun.popularity) }}</span>
           </div>
-        </div>
-      </NuxtLink>
-    </div>
 
-    <!--     <div class="title-new">
-      {{ $t(`mainPage.asideActive.new`) }}
-    </div>
-    <span class="topic-content new-bg" v-if="newTopic" v-for="kun in newTopic">
-      <NuxtLink :to="{ path: `/topic/${kun.tid}` }">
-        <div class="topic">
-          <div class="title">{{ kun.title }}</div>
-          <div class="new">
+          <div class="new" v-if="typeToGet === 'time'">
             <Icon name="eos-icons:hourglass" />
             <span>{{ formatTimeDifference(kun.time, locale) }}</span>
           </div>
         </div>
       </NuxtLink>
-    </span> -->
+    </div>
   </div>
 </template>
 
@@ -86,6 +109,19 @@ const { data: newTopic } = await useFetch('/api/home/nav/new', {
   justify-content: space-around;
   font-size: 20px;
   padding-bottom: 10px;
+
+  span {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+  }
+}
+
+.active {
+  color: var(--kungalgame-blue-5);
+  border-bottom: 2px solid var(--kungalgame-blue-5);
 }
 
 .topic {
@@ -118,6 +154,20 @@ const { data: newTopic } = await useFetch('/api/home/nav/new', {
 
   span {
     font-size: small;
+    margin-left: 5px;
+    color: var(--kungalgame-font-color-3);
+  }
+}
+
+.new {
+  margin-right: 10px;
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  color: var(--kungalgame-purple-4);
+
+  span {
+    font-size: x-small;
     margin-left: 5px;
     color: var(--kungalgame-font-color-3);
   }

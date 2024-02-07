@@ -1,4 +1,4 @@
-import type { HomeTopic } from '~/types/api/home'
+import type { HomeTopic, TypeToGet } from '~/types/api/home'
 
 interface HomeSearchTemp {
   keywords: string
@@ -30,6 +30,8 @@ export interface HomeStoreTemp {
 
 export interface HomeStorePersist {
   isActiveMainPageAside: boolean
+
+  typeToGet: TypeToGet
 
   searchHistory: string[]
 }

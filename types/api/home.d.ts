@@ -20,6 +20,8 @@ export type SortFieldRanking =
 
 export type SortFieldPool = 'views' | 'likes_count' | 'time'
 
+export type TypeToGet = 'time' | 'popularity'
+
 export interface SearchTopic {
   tid: number
   title: string
@@ -42,16 +44,11 @@ interface HomeUserInfo {
   name: string
 }
 
-export interface HomeHotTopic {
-  tid: number
-  title: string
-  popularity: number
-}
-
-export interface HomeNewTopic {
+export interface HomeNavTopic {
   tid: number
   title: string
   time: number
+  popularity: number
 }
 
 export interface HomeTopicRequestData {

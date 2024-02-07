@@ -11,19 +11,24 @@ const props = defineProps<{
 const { locale } = useI18n()
 const user = computed(() => props.user)
 const time = computed(() => props.time)
+
+const handleClickAvatar = (event: MouseEvent) => {
+  event.preventDefault()
+  navigateTo(`/kungalgamer/${user.value.uid}/info`)
+}
 </script>
 
 <template>
   <div class="kungalgamer">
-    <div class="avatar">
-      <NuxtLink :to="`/kungalgamer/${user.uid}/info`">
-        <img
-          v-if="props.user.avatar"
-          :src="user.avatar.replace(/\.webp$/, '-100.webp')"
-          :alt="user.name"
-        />
-        <span v-if="!props.user.avatar">{{ props.user.name.slice(0, 1) }}</span>
-      </NuxtLink>
+    <div class="avatar" @click="handleClickAvatar($event)">
+      <img
+        v-if="props.user.avatar"
+        :src="user.avatar.replace(/\.webp$/, '-100.webp')"
+        :alt="user.name"
+      />
+      <span v-if="!props.user.avatar">{{
+        props.user.name.slice(0, 1).toUpperCase()
+      }}</span>
     </div>
 
     <div class="info">
@@ -47,12 +52,6 @@ const time = computed(() => props.time)
   display: flex;
   justify-content: center;
 
-  a {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
   img {
     height: 50px;
     width: 50px;
@@ -61,6 +60,8 @@ const time = computed(() => props.time)
   }
 
   span {
+    height: 50px;
+    width: 50px;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -93,8 +93,8 @@
       "bylaw": "Bylaw",
       "contact": "Join Us",
       "nonMoe": "Non-moe",
-      "hot": "Today's Hot Topic",
-      "new": "Today's New Topic"
+      "popularity": "Today's Hot Topic",
+      "time": "Today's New Topic"
     },
     "footer":{
       "title":{
