@@ -29,7 +29,7 @@ const props = defineProps<{
   gap: 17px;
   font-size: 14px;
   background-color: var(--kungalgame-trans-white-5);
-  margin: 17px 0;
+  margin-bottom: 17px;
   color: var(--kungalgame-font-color-3);
   box-shadow: var(--kungalgame-shadow-0);
   border-radius: 10px;

@@ -29,7 +29,6 @@ import { asideItem } from '../utils/asideItem'
   justify-content: space-around;
   align-items: center;
   border-radius: 20px;
-  margin-top: 17px;
   background-color: var(--kungalgame-trans-white-5);
   box-shadow: var(--kungalgame-shadow-0);
 

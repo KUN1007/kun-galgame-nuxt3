@@ -67,6 +67,7 @@ watch(
   background-color: var(--kungalgame-blue-5);
   border-radius: 20px;
   box-shadow: var(--kungalgame-shadow-0);
+  margin-bottom: 17px;
 
   span {
     white-space: nowrap;

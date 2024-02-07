@@ -98,11 +98,10 @@ onBeforeUnmount(() => {
 .topic-container {
   width: 100%;
   height: 100%;
-  padding: 10px;
+  padding: 17px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  scrollbar-width: thin;
 
   & > div {
     & > div {
