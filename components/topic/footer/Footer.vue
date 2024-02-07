@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { locale } = useI18n()
-
 const props = defineProps<{
   info: {
     tid: number
@@ -37,24 +35,10 @@ const currUserUid = useKUNGalgameUserStore().uid
 
 // Share
 const handleClickShare = () => {
-  const shareLinkEN = computed(
-    () =>
-      `Share Link from KUN Visual Novel Forum ~~~
-Title: ${props.content.title}
-Link: https://www.kungal.com/topic/${props.info.tid}`
-  )
-
-  const shareLinkCN = computed(
-    () =>
-      `来自鲲 Galgame 论坛的分享链接 ~~~
-标题: ${props.content.title}
-链接: https://www.kungal.com/topic/${props.info.tid}`
-  )
-
-  const shareLink = locale.value === 'en' ? shareLinkEN : shareLinkCN
+  const shareLink = `${props.content.title}: https://www.kungal.com/topic/${props.info.tid}`
 
   navigator.clipboard
-    .writeText(shareLink.value)
+    .writeText(shareLink)
     .then(() => {
       useMessage(
         'Share Link copied successfully!',
