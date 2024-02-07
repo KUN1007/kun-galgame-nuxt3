@@ -252,11 +252,8 @@
     }
   },
   "user":{
-    "user": "用户",
-    "admin": "管理员",
-    "SU": "超级管理员",
-    "normal": "正常",
-    "banned": "封禁",
+    "notFound": "该用户不存在",
+    "banned": "该用户已被封禁",
     "nav":{
       "profile": "个人信息",
       "settings": "信息设置",
@@ -268,6 +265,11 @@
       "comment": "发的评论"
     },
     "profile":{
+      "user": "用户",
+      "admin": "管理员",
+      "SU": "超级管理员",
+      "normal": "正常",
+      "banned": "封禁",
       "name": "用户名",
       "moemoepoint": "萌萌点",
       "register": "注册序号",

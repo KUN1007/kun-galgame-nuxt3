@@ -1,6 +1,8 @@
 <script setup lang="ts">
-const { t } = useI18n()
+import type { UserInfo } from '~/types/api/user'
 
+const user = ref<UserInfo>()
+const isBanned = ref(false)
 const route = useRoute()
 
 const uid = computed(() => {
@@ -13,10 +15,16 @@ const {
   moemoepoint,
 } = storeToRefs(useKUNGalgameUserStore())
 
-const { data: user, refresh } = await useFetch(`/api/user/${uid.value}`, {
+const { data, refresh } = await useFetch(`/api/user/${uid.value}`, {
   method: 'GET',
   ...kungalgameResponseHandler,
 })
+
+if (data.value === 'banned') {
+  isBanned.value = true
+} else {
+  user.value = data.value ?? undefined
+}
 
 provide('refresh', refresh)
 
@@ -44,11 +52,11 @@ useHead({
 
 <template>
   <div class="root">
-    <div class="container">
+    <div class="container" v-if="user">
       <KungalgamerHeader
-        :name="user?.name"
-        :avatar="user?.avatar"
-        :moemoepoint="user?.moemoepoint"
+        :name="user.name"
+        :avatar="user.avatar"
+        :moemoepoint="user.moemoepoint"
       />
 
       <div class="content">
@@ -56,6 +64,10 @@ useHead({
         <NuxtPage :user="user" />
       </div>
     </div>
+
+    <KunBlank info="user.notFound" v-if="!user && !isBanned"></KunBlank>
+
+    <KunBlank info="user.banned" v-if="isBanned"></KunBlank>
 
     <KunFooter style="margin: 0 auto; padding-bottom: 17px" />
   </div>
@@ -85,6 +97,14 @@ useHead({
   flex-direction: column;
   color: var(--kungalgame-font-color-3);
   transition: all 0.2s;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--kungalgame-red-5);
 }
 
 .content {

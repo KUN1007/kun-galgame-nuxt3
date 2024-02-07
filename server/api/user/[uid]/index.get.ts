@@ -20,6 +20,11 @@ export default defineEventHandler(async (event) => {
     kunError(event, 10114)
     return
   }
+
+  if (user.status) {
+    return 'banned'
+  }
+
   const responseData: UserInfo = {
     uid: user.uid,
     name: user.name,

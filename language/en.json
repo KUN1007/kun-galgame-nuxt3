@@ -253,11 +253,8 @@
     }
   },
   "user":{
-    "user": "User",
-    "admin": "Administrator",
-    "SU": "Super Admin",
-    "normal": "Normal",
-    "banned": "Banned",
+    "notFound": "User not found",
+    "banned": "User has been banned",
     "nav":{
       "profile": "Profile",
       "settings": "Settings",
@@ -269,6 +266,11 @@
       "comment": "Comment"
     },
     "profile":{
+      "user": "User",
+      "admin": "Administrator",
+      "SU": "Super Admin",
+      "normal": "Normal",
+      "banned": "Banned",
       "name": "Name",
       "moemoepoint": "MoeMoePoint",
       "register": "Registration Number",

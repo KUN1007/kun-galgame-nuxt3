@@ -46,9 +46,15 @@ const statusName = () => {
 
         <span>{{ $t('user.profile.register') }}: {{ user.uid }}</span>
 
-        <span>{{ $t('user.profile.roles') }}: {{ rolesName() }}</span>
+        <span>
+          {{ $t('user.profile.roles') }}:
+          {{ $t(`user.profile.${rolesName()}`) }}
+        </span>
 
-        <span>{{ $t('user.profile.status') }}: {{ statusName() }}</span>
+        <span>
+          {{ $t('user.profile.status') }}:
+          {{ $t(`user.profile.${statusName()}`) }}
+        </span>
 
         <span>{{ $t('user.profile.upvote') }}: {{ user.upvote }}</span>
 
