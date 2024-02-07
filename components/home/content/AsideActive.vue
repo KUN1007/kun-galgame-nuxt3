@@ -37,9 +37,6 @@ const props = defineProps<{
 
 .new-article {
   width: 100%;
-  height: 163px;
-
-  button {
     height: 100%;
     width: 100%;
     background-color: var(--kungalgame-trans-blue-0);
