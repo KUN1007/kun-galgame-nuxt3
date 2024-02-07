@@ -60,7 +60,7 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   border-radius: 17px;
-  background-color: var(--kungalgame-trans-white-2);
+  background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(5px);
 }
 

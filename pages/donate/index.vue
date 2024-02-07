@@ -42,7 +42,7 @@ const handleClickDonate = () => {
 
 <style lang="scss" scoped>
 .root {
-  height: calc(100vh - 65px);
+  height: calc(100vh - 75px);
   width: 100vw;
   min-width: 500px;
   min-height: 500px;

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { HomeTopic } from '~/types/api/home'
 
-const { locale } = useI18n()
-
 const props = defineProps<{
   topic: HomeTopic
 }>()
@@ -28,30 +26,31 @@ const getRepliesCount = computed(() => {
 </script>
 
 <template>
-  <div class="topic-info">
-    <div class="summary">
-      <div class="title">
-        <span>{{ title }}</span>
-      </div>
+  <div class="topic">
+    <div class="title">
+      <span>{{ title }}</span>
+    </div>
 
-      <div class="status">
-        <ul>
-          <li>
-            <Icon name="ic:outline-remove-red-eye" /><span>{{ views }}</span>
-          </li>
-          <li>
-            <Icon name="line-md:thumbs-up-twotone" /><span>
+    <div class="info">
+      <HomeContentUserPart :user="props.topic.user" :time="time" />
+
+      <div>
+        <TopicTags :tags="tags.slice(0, 2)" :is-show-icon="false" />
+
+        <div class="status">
+          <span>
+            <Icon class="icon" name="ic:outline-remove-red-eye" />
+            <span>{{ views }}</span>
+          </span>
+          <span>
+            <Icon class="icon" name="line-md:thumbs-up-twotone" />
+            <span>
               {{ likesCount }}
             </span>
-          </li>
-          <li>
-            <Icon name="ri:reply-line" /><span>{{ getRepliesCount }}</span>
-          </li>
-        </ul>
-
-        <div class="time">
+          </span>
           <span>
-            {{ formatTimeDifference(time, locale) }}
+            <Icon class="icon" name="ri:reply-line" />
+            <span>{{ getRepliesCount }}</span>
           </span>
         </div>
       </div>
@@ -66,7 +65,7 @@ const getRepliesCount = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-.topic-info {
+.topic {
   width: 100%;
   height: 100%;
   display: flex;
@@ -74,62 +73,33 @@ const getRepliesCount = computed(() => {
   color: var(--kungalgame-font-color-3);
 }
 
-.summary {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
 .title {
   width: 100%;
-  height: 100%;
   display: flex;
-  align-items: center;
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   color: var(--kungalgame-blue-5);
+  font-size: 18px;
   font-weight: bold;
   margin-bottom: 7px;
 }
 
-.status {
+.info {
   display: flex;
-  align-items: center;
-  white-space: nowrap;
-
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-decoration: none;
-    display: flex;
-    color: var(--kungalgame-font-color-2);
-    font-size: smaller;
-
-    li {
-      margin-right: 5px;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-
-      span {
-        margin-left: 3px;
-      }
-    }
-  }
+  justify-content: space-between;
+  margin: 10px 0;
 }
 
-.time {
-  width: 77px;
-  font-size: x-small;
-  color: var(--kungalgame-font-color-0);
+.status {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  overflow: hidden;
-  white-space: nowrap;
+
+  .icon {
+    margin-right: 3px;
+  }
+
+  span {
+    margin-right: 7px;
+  }
 }
 
 .introduction {

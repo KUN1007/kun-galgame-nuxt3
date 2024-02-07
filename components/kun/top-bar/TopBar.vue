@@ -41,7 +41,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
   justify-content: space-between;
   position: relative;
   z-index: 1;
-  margin-bottom: 7px;
+  margin-bottom: 17px;
   flex-shrink: 0;
   color: var(--kungalgame-font-color-3);
 }

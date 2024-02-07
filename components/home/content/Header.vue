@@ -30,7 +30,7 @@ const iconMap: Record<string, string> = {
           <div
             class="item"
             :class="
-              topic.category[0].toLowerCase() === kun.name ? 'active' : ''
+              topic.category[0].toLowerCase() === kun.name ? 'item-active' : ''
             "
             v-for="(kun, _) in categoryItem"
             :key="kun.index"
@@ -72,7 +72,6 @@ const iconMap: Record<string, string> = {
   flex-grow: 1;
   position: relative;
   background-color: var(--kungalgame-trans-blue-0);
-  border: 1px solid var(--kungalgame-blue-4);
   border-radius: 5px;
   cursor: pointer;
 
@@ -87,7 +86,6 @@ const iconMap: Record<string, string> = {
 
   &:hover {
     transition: all 0.2s;
-    border: 1px solid var(--kungalgame-blue-4);
     background-color: var(--kungalgame-blue-4);
     color: var(--kungalgame-white);
 
@@ -106,7 +104,8 @@ const iconMap: Record<string, string> = {
 .category-submenu {
   display: none;
   flex-direction: column;
-  background-color: var(--kungalgame-trans-white-2);
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(5px);
   box-shadow: var(--shadow);
   border-radius: 5px;
 
@@ -147,7 +146,6 @@ const iconMap: Record<string, string> = {
   align-items: center;
   white-space: nowrap;
   background-color: var(--kungalgame-trans-blue-0);
-  border: 1px solid var(--kungalgame-blue-4);
   flex-grow: 1;
   border-radius: 5px;
   cursor: pointer;
@@ -156,7 +154,6 @@ const iconMap: Record<string, string> = {
 
   &:hover {
     transition: all 0.2s;
-    border: 1px solid var(--kungalgame-blue-4);
     background-color: var(--kungalgame-blue-4);
     color: var(--kungalgame-white);
 
@@ -171,7 +168,7 @@ const iconMap: Record<string, string> = {
   margin-left: 7px;
 }
 
-.active {
+.item-active {
   background-color: var(--kungalgame-trans-blue-1);
   backdrop-filter: blur(5px);
 }

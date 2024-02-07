@@ -5,9 +5,12 @@ const props = defineProps<{
     avatar: string
     name: string
   }
+  time: number
 }>()
 
+const { locale } = useI18n()
 const user = computed(() => props.user)
+const time = computed(() => props.time)
 </script>
 
 <template>
@@ -23,24 +26,24 @@ const user = computed(() => props.user)
       </NuxtLink>
     </div>
 
-    <div class="name">
-      <span>{{ props.user.name }}</span>
+    <div class="info">
+      <span class="name">{{ props.user.name }}</span>
+
+      <span class="time">
+        {{ formatTimeDifference(time, locale) }}
+      </span>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .kungalgamer {
-  width: 60px;
-  height: 50px;
   display: flex;
-  flex-shrink: 0;
-  flex-direction: column;
-  margin: 5px;
+  justify-content: center;
+  align-items: center;
 }
 
 .avatar {
-  flex-grow: 1;
   display: flex;
   justify-content: center;
 
@@ -48,16 +51,13 @@ const user = computed(() => props.user)
     width: 100%;
     display: flex;
     justify-content: center;
-    flex-grow: 1;
   }
 
   img {
     height: 50px;
     width: 50px;
-    padding: 2px;
     border-radius: 50%;
     display: inline-block;
-    margin-bottom: 7px;
   }
 
   span {
@@ -69,19 +69,16 @@ const user = computed(() => props.user)
   }
 }
 
-.name {
-  height: 10px;
+.info {
+  height: 100%;
+  margin-left: 10px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
 
-  span {
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: var(--kungalgame-font-color-3);
-    font-size: x-small;
+  .time {
+    font-size: 13px;
+    color: var(--kungalgame-font-color-1);
   }
 }
 </style>

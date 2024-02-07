@@ -234,7 +234,7 @@ const bylawPageWidth = computed(() => {
 <style lang="scss" scoped>
 .root {
   height: 100%;
-  min-height: calc(100vh - 65px);
+  min-height: calc(100vh - 75px);
   display: flex;
   flex-direction: column;
 }

@@ -7,9 +7,11 @@ Requires four <span> elements with the class .kungalgame-comet-surround */
   color: var(--kungalgame-blue-3);
   overflow: hidden;
   border: 2px solid var(--kungalgame-blue-2);
+  border-radius: 10px;
   filter: hue-rotate(0deg);
   transition: all 0.1s linear;
   cursor: pointer;
+
   &:hover {
     border: 2px solid transparent;
     color: var(--kungalgame-red-3);
@@ -21,7 +23,7 @@ Requires four <span> elements with the class .kungalgame-comet-surround */
         top: 0;
         left: 0;
         width: 100%;
-        height: 3px;
+        height: 5px;
         background: linear-gradient(
           90deg,
           transparent,
@@ -33,7 +35,7 @@ Requires four <span> elements with the class .kungalgame-comet-surround */
         filter: hue-rotate(60deg);
         top: -100%;
         right: 0;
-        width: 3px;
+        width: 5px;
         height: 100%;
         background: linear-gradient(
           180deg,
@@ -60,7 +62,7 @@ Requires four <span> elements with the class .kungalgame-comet-surround */
         filter: hue-rotate(300deg);
         bottom: -100%;
         left: 0;
-        width: 3px;
+        width: 5px;
         height: 100%;
         background: linear-gradient(
           360deg,
@@ -94,7 +96,7 @@ Requires four <span> elements with the class .kungalgame-comet-surround */
 @keyframes animate3 {
   0% {
     right: -100%;
-    height: 3px;
+    height: 5px;
   }
   50%,
   100% {

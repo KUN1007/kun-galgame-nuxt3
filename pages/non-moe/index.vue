@@ -50,7 +50,7 @@ const { data: logs } = await useFetch(`/api/non-moe/logs`, {
 
 <style lang="scss" scoped>
 .root {
-  height: calc(100vh - 65px);
+  height: calc(100vh - 75px);
   display: flex;
   flex-direction: column;
   min-height: 750px;

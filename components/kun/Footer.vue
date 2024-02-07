@@ -25,7 +25,6 @@
 
 <style lang="scss" scoped>
 .footer {
-  margin-top: 17px;
   letter-spacing: 1px;
   color: var(--kungalgame-font-color-3);
   display: flex;

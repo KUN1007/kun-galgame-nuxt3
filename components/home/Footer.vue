@@ -11,9 +11,7 @@
 
 <style lang="scss" scoped>
 .footer {
-  height: 1px;
-  width: 100%;
-  flex-grow: 4;
+  height: 200px;
   overflow: hidden;
   display: flex;
   flex-direction: column;

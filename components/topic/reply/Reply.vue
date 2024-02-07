@@ -92,7 +92,7 @@ watch(
           </div>
 
           <div class="bottom">
-            <TopicTags :tags="reply.tags" />
+            <TopicTags :tags="reply.tags" :is-show-icon="true" />
             <TopicTime :time="reply.time" />
           </div>
         </div>

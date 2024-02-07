@@ -89,8 +89,8 @@ watch(
   min-height: 120px;
   width: 100%;
   color: var(--kungalgame-font-color-3);
-  background-color: var(--kungalgame-trans-white-2);
-  backdrop-filter: blur(2px);
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(5px);
   box-shadow: var(--shadow);
   border-top: 1px solid var(--kungalgame-blue-1);
   position: fixed;

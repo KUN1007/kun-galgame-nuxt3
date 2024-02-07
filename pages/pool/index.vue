@@ -164,7 +164,7 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .pool {
-  height: calc(100vh - 65px);
+  height: calc(100vh - 75px);
   display: flex;
   flex-direction: column;
   overflow-y: scroll;

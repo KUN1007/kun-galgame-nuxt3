@@ -87,14 +87,12 @@ const iconMap: Record<string, string> = {
   flex-grow: 1;
   position: relative;
   background-color: var(--kungalgame-trans-blue-0);
-  border: 1px solid var(--kungalgame-blue-4);
   border-radius: 5px;
   cursor: pointer;
   margin-left: 7px;
 
   &:hover {
     transition: all 0.2s;
-    border: 1px solid var(--kungalgame-blue-4);
     background-color: var(--kungalgame-blue-4);
     color: var(--kungalgame-white);
 
@@ -122,7 +120,8 @@ const iconMap: Record<string, string> = {
 .sort-submenu {
   display: none;
   flex-direction: column;
-  background-color: var(--kungalgame-trans-white-2);
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(5px);
   box-shadow: var(--shadow);
   border-radius: 5px;
   overflow: hidden;
@@ -156,7 +155,6 @@ const iconMap: Record<string, string> = {
   display: flex;
   cursor: default;
   color: var(--kungalgame-blue-4);
-  background-color: var(--kungalgame-trans-white-2);
   border-radius: 0 0 5px 5px;
 
   span {

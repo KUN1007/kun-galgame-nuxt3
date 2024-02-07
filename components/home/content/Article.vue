@@ -97,7 +97,8 @@ onBeforeUnmount(() => {
 @use '~/assets/css/effect/effect.scss';
 .topic-container {
   width: 100%;
-  padding: 0 7px;
+  height: 100%;
+  padding: 10px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -105,11 +106,7 @@ onBeforeUnmount(() => {
 
   & > div {
     & > div {
-      margin: 7px 0;
-    }
-
-    &:last-child {
-      margin-bottom: 5px;
+      margin: 10px 0;
     }
   }
 }
@@ -118,6 +115,7 @@ onBeforeUnmount(() => {
   padding: 0;
   flex-shrink: 0;
   border: 2px solid var(--kungalgame-red-4);
+  margin-top: 10px;
 
   & > div {
     margin: 0 !important;

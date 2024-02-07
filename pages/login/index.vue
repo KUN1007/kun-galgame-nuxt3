@@ -79,7 +79,7 @@ const handleClickRegister = () => {
 .root {
   align-items: center;
   display: grid;
-  height: calc(100vh - 65px);
+  height: calc(100vh - 75px);
   place-items: center;
   min-height: 500px;
   min-width: 800px;
@@ -91,6 +91,7 @@ const handleClickRegister = () => {
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.95;
+  overflow: hidden;
   border-radius: 5px;
   box-shadow:
     0 15px 27px var(--kungalgame-blue-0),

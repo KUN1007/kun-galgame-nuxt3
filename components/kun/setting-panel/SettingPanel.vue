@@ -70,7 +70,7 @@ const handelCloseSettingsPanel = () => {
 
 <style lang="scss" scoped>
 .root {
-  top: 65px;
+  top: 75px;
   right: 0;
   position: absolute;
   background-color: var(--kungalgame-trans-white-5);

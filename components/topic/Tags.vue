@@ -1,12 +1,13 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   tags: string[]
+  isShowIcon: boolean
 }>()
 </script>
 
 <template>
   <div class="tags" v-if="$props.tags.length">
-    <Icon class="tag" name="mingcute:tag-2-fill" />
+    <Icon v-if="props.isShowIcon" class="tag" name="mingcute:tag-2-fill" />
     <ul>
       <li v-for="(tag, index) in tags" :key="index">{{ tag }}</li>
     </ul>

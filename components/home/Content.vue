@@ -7,40 +7,33 @@ const mainPageWidth = computed(() => {
 
 <template>
   <div class="main">
-    <div class="main-container">
-      <div class="content-container">
-        <HomeAside class="aside" />
-        <HomeArticle />
-      </div>
+    <HomeAside class="aside" />
+    <div class="article">
+      <HomeContentArticle />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .main {
-  width: 100%;
-  height: 1px;
-  flex-grow: 21;
-}
-
-.main-container {
   height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.content-container {
+  height: calc(100dvh - 75px);
   width: v-bind(mainPageWidth);
   transition: width 0.2s;
-  height: 100%;
-  margin: 0 auto;
   display: flex;
   align-items: center;
-  backdrop-filter: blur(5px);
+  margin: 0 auto;
+  margin-bottom: 17px;
+}
+
+.article {
+  height: 100%;
+  width: 1px;
+  flex-grow: 1;
   background-color: var(--kungalgame-trans-white-5);
-  border-radius: 5px;
-  padding: 5px;
-  border: 1px solid var(--kungalgame-blue-4);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: var(--kungalgame-shadow-0);
 }
 
 @media (max-width: 1000px) {

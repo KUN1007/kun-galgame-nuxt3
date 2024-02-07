@@ -9,9 +9,7 @@ const topic = computed(() => props.topic)
 </script>
 
 <template>
-  <div class="topic">
-    <HomeContentUserPart :user="topic.user" />
-
+  <div class="container">
     <NuxtLink :to="`/topic/${topic.tid}`">
       <HomeContentTopicPart :topic="topic" />
     </NuxtLink>
@@ -19,30 +17,24 @@ const topic = computed(() => props.topic)
 </template>
 
 <style lang="scss" scoped>
-.topic {
+.container {
   width: 100%;
-  height: 85px;
   flex-shrink: 0;
-  border-radius: 3px;
-  background-color: var(--kungalgame-trans-blue-0);
+  border-radius: 10px;
   display: flex;
-  flex-shrink: 0;
+  border: 2px solid var(--kungalgame-trans-blue-2);
 
   &:hover {
-    background-color: var(--kungalgame-white);
-    box-shadow: var(--kungalgame-shadow-1);
-    transition: 0.2s;
+    border: 2px solid var(--kungalgame-blue-5);
   }
 
   &:last-child {
     margin-bottom: 0;
   }
 
-  /** Width is the total width of a single topic minus the width of the user part
-      Here it's 2 + 5 + 60 + 5 + 2 = 74px */
   a {
-    width: calc(100% - 74px);
-    padding: 7px 0;
+    width: 100%;
+    padding: 10px;
   }
 }
 </style>

@@ -28,15 +28,17 @@ import { asideItem } from '../utils/asideItem'
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  border: 1px solid var(--kungalgame-blue-4);
-  border-radius: 5px;
+  border-radius: 20px;
+  margin-top: 17px;
+  background-color: var(--kungalgame-trans-white-5);
+  box-shadow: var(--kungalgame-shadow-0);
 
   span {
     width: 100%;
     height: 1px;
     flex-grow: 1;
     font-size: 25px;
-    border-top: 1px solid var(--kungalgame-blue-4);
+    border-top: 2px solid var(--kungalgame-blue-5);
 
     &:first-child {
       border-top: none;
@@ -52,8 +54,15 @@ import { asideItem } from '../utils/asideItem'
     }
 
     &:hover {
-      transition: 0.2s;
-      background-color: var(--kungalgame-blue-4);
+      background-color: var(--kungalgame-blue-5);
+
+      &:first-child {
+        border-radius: 20px 20px 0 0;
+      }
+
+      &:last-child {
+        border-radius: 0 0 20px 20px;
+      }
 
       a {
         color: var(--kungalgame-white);

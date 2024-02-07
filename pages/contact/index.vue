@@ -84,7 +84,7 @@ useHead({
 
 <style lang="scss" scoped>
 .root {
-  height: calc(100vh - 65px);
+  height: calc(100vh - 75px);
   width: 100vw;
   min-height: 300px;
   display: flex;
@@ -95,19 +95,13 @@ useHead({
   width: 400px;
   height: 300px;
   margin: auto;
-  background-color: var(--kungalgame-trans-white-2);
+  background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(5px);
   border-radius: 7px;
-  box-shadow: var(--kungalgame-shadow-0);
   display: flex;
   flex-direction: column;
   align-items: center;
   color: var(--kungalgame-font-color-3);
-
-  &:hover {
-    box-shadow: var(--kungalgame-shadow-1);
-    transition: 0.3s;
-  }
 }
 
 .title {

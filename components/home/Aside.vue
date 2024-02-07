@@ -20,13 +20,13 @@ watch(
   <div class="aside">
     <div class="nav-aside" @click="handleFold">
       <Icon
+        class="icon"
         name="line-md:arrow-left"
-        style="font-size: 17px"
         v-if="isActiveMainPageAside"
       />
       <Icon
+        class="icon"
         name="line-md:arrow-right"
-        style="font-size: 17px"
         v-if="!isActiveMainPageAside"
       />
       <span v-if="isActiveMainPageAside">
@@ -46,16 +46,12 @@ watch(
 
 <style lang="scss" scoped>
 .aside {
-  margin-right: 7px;
+  margin-right: 17px;
   width: v-bind('asideWidth');
   height: 100%;
   display: flex;
   flex-direction: column;
   transition: 0.5s;
-
-  span {
-    white-space: nowrap;
-  }
 }
 
 .nav-aside {
@@ -65,9 +61,21 @@ watch(
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: small;
-  color: var(--kungalgame-font-color-3);
+  font-size: 15px;
+  color: var(--kungalgame-white);
   cursor: pointer;
+  background-color: var(--kungalgame-blue-5);
+  border-radius: 20px;
+  box-shadow: var(--kungalgame-shadow-0);
+
+  span {
+    white-space: nowrap;
+    margin-left: 10px;
+  }
+
+  .icon {
+    font-size: 17px;
+  }
 }
 
 .item-active {

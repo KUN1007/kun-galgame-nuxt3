@@ -51,7 +51,7 @@ const loliStatus = computed(() => {
 
       <div class="content">
         <div class="content-top">
-          <TopicTags v-if="tags" :tags="tags" />
+          <TopicTags v-if="tags" :tags="tags" :is-show-icon="true" />
           <TopicTime v-if="time" :time="time" />
         </div>
 

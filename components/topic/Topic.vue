@@ -214,7 +214,7 @@ onBeforeMount(() => {
 .content-container {
   width: v-bind(topicPageWidth);
   transition: width 0.2s;
-  height: calc(100vh - 65px);
+  height: calc(100vh - 75px);
   min-height: 500px;
   margin: 0 auto;
   display: flex;

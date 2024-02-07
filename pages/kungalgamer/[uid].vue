@@ -75,7 +75,7 @@ useHead({
 
 <style lang="scss" scoped>
 .root {
-  height: calc(100vh - 65px);
+  height: calc(100vh - 75px);
   min-height: 800px;
   width: 100vw;
   display: flex;

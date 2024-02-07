@@ -518,8 +518,8 @@ const kungalgamePageWidth = computed(() => {
 .content {
   height: 100%;
   overflow-y: scroll;
-  background-color: var(--kungalgame-trans-white-2);
-  border: 1px solid var(--kungalgame-blue-4);
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(5px);
   border-radius: 7px;
   display: flex;
   position: relative;

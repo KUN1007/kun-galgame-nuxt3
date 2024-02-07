@@ -93,7 +93,7 @@ useHead({
 <style lang="scss" scoped>
 .root {
   padding-top: 20px;
-  height: calc(100vh - 65px);
+  height: calc(100vh - 75px);
   width: 100vw;
   overflow-y: scroll;
   display: flex;

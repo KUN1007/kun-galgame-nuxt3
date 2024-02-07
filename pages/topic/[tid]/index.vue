@@ -48,7 +48,7 @@ useHead({
 
 <style lang="scss" scoped>
 .root {
-  min-height: calc(100vh - 65px);
+  min-height: calc(100vh - 75px);
   display: flex;
   flex-shrink: 0;
   flex-direction: column;

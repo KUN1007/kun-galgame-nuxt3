@@ -29,7 +29,7 @@ useHead({
 
 <style lang="scss" scoped>
 .root {
-  height: calc(100vh - 65px);
+  height: calc(100vh - 75px);
   width: 100vw;
   display: flex;
   color: var(--kungalgame-font-color-3);
