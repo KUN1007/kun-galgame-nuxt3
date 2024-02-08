@@ -49,15 +49,14 @@ useHead({
   position: relative;
   margin: auto;
   background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
   border-radius: 7px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px;
   color: var(--kungalgame-font-color-3);
-  border: 1px solid var(--kungalgame-blue-1);
-  box-shadow: var(--shadow);
+  box-shadow: var(--kungalgame-shadow-0);
 }
 
 .content {
