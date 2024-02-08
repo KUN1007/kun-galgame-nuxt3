@@ -18,7 +18,7 @@ watch(
 )
 
 const randomizeQuestion = () => {
-  return Math.floor(Math.random() * questions.value.length)
+  return randomNum(0, questions.value.length - 1)
 }
 
 const userAnswers = ref('')
@@ -38,6 +38,12 @@ const resetStatus = () => {
   currentIndex.value = 0
   isShowHint.value = false
   isShowAnswer.value = false
+}
+
+const nextQuestion = () => {
+  const randomIndex = randomizeQuestion()
+  currentQuestionIndex.value = randomIndex
+  currentQuestion.value = questions.value[currentQuestionIndex.value]
 }
 
 const checkKeyPress = (event: KeyboardEvent) => {
@@ -69,10 +75,21 @@ const submitAnswer = () => {
   } else {
     errorCounter.value++
 
-    useMessage('Wrong answer!', '回答错误！', 'warn')
+    if (currentQuestion.value.isHard) {
+      useMessage(
+        `Zako ojisan♡ If you can't answer today, you won't be rewarded. Smelly zako ♡`,
+        '杂鱼大叔♡ 答不出来今天就不奖励你了♡ 臭杂鱼♡',
+        'warn'
+      )
+    } else {
+      useMessage(
+        `Zako ojisan♡ Can't even answer such a simple question. Smelly zako ♡`,
+        '杂鱼大叔♡ 这么简单都答不出来♡ 臭杂鱼♡',
+        'warn'
+      )
+    }
 
-    const randomIndex = randomizeQuestion()
-    currentQuestionIndex.value = randomIndex
+    nextQuestion()
     userAnswers.value = ''
 
     if (errorCounter.value >= 3) {
@@ -123,6 +140,8 @@ const handleCloseCapture = () => {
           </div>
 
           <div class="hint-container">
+            <div class="hard" v-if="currentQuestion.isHard">HARD</div>
+
             <div v-if="isShowHint" class="hint">
               <div>{{ $t('AlertInfo.capture.hint1') }}</div>
               <div>
@@ -224,6 +243,13 @@ const handleCloseCapture = () => {
   align-items: flex-end;
   justify-content: flex-end;
   font-style: oblique;
+
+  .hard {
+    color: var(--kungalgame-red-5);
+    font-size: 15px;
+    font-weight: bold;
+  }
+
   .hint {
     width: 100%;
     font-size: 10px;
