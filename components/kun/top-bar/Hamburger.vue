@@ -61,6 +61,7 @@ const handleShowMore = () => {
       class="mask"
       @click.stop
       @click="showKUNGalgameHamburger = false"
+      @touchmove.prevent
     >
       <div
         class="container"
@@ -110,7 +111,7 @@ const handleShowMore = () => {
 
 <style lang="scss" scoped>
 .mask {
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
   position: fixed;
   top: 0;

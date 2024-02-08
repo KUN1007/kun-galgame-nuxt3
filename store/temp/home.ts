@@ -17,7 +17,7 @@ export const useTempHomeStore = defineStore({
     topic: {
       category: ['Galgame'],
       page: 1,
-      limit: 17,
+      limit: 10,
       sortField: 'updated',
       sortOrder: 'desc',
     },
@@ -36,7 +36,7 @@ export const useTempHomeStore = defineStore({
 
     resetHomePageStatus() {
       this.topic.page = 1
-      this.topic.limit = 17
+      this.topic.limit = 10
       this.topics = []
     },
   },

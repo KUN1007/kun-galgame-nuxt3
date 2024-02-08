@@ -22,4 +22,10 @@
   flex-direction: column;
   flex-grow: 1;
 }
+
+@media (max-width: 700px) {
+  .footer {
+    height: 100px;
+  }
+}
 </style>

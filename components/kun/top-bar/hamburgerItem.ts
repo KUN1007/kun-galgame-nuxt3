@@ -53,8 +53,14 @@ export const hamburgerItem: Hamburger[] = [
   {
     index: 10,
     name: 'thanks',
-    icon: 'ph:hand-heart',
+    icon: 'line-md:heart',
     router: '/thanks-list',
   },
-  { index: 11, name: 'join', icon: 'line-md:heart', router: '/contact' },
+  {
+    index: 11,
+    name: 'donate',
+    icon: 'ph:hand-heart',
+    router: '/donate',
+  },
+  { index: 12, name: 'join', icon: 'line-md:telegram', router: '/contact' },
 ]

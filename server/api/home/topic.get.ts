@@ -60,7 +60,7 @@ export default defineEventHandler(async (event) => {
   const { category, page, limit, sortField, sortOrder }: HomeTopicRequestData =
     await getQuery(event)
 
-  if (limit !== '17') {
+  if (limit !== '10') {
     kunError(event, 10209)
     return
   }

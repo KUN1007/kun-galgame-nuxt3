@@ -24,6 +24,7 @@
       "nonMoe": "不萌记录",
       "thanks": "感谢名单",
       "join": "加入 / 联系",
+      "donate": "赞助我们",
       "home": "返回主页"
     },
     "settings":{
@@ -374,9 +375,7 @@
     "comments": "评论数"
   },
   "kungalgame":{
-    "introduction": "网站简介",
-    "operating": "运营理念",
-    "rules": "论坛规定",
+    "agreement":"用户协议",
     "privacy": "隐私政策",
     "bylaw": "执行条例",
     "update": "更新日志",

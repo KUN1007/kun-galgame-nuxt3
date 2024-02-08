@@ -100,10 +100,4 @@ useSchemaOrg([
   display: flex;
   flex-direction: column;
 }
-
-@media (max-width: 700px) {
-  .root {
-    height: calc(100vh - 75px);
-  }
-}
 </style>

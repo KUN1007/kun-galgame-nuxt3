@@ -24,6 +24,7 @@
       "nonMoe": "Non-moe",
       "thanks": "Thanks List",
       "join": "Join / Contacts",
+      "donate": "Donate Us",
       "home": "Back Home"
     },
     "settings":{
@@ -375,9 +376,7 @@
     "comments": "Comments"
   },
   "kungalgame":{
-    "introduction": "Introduction",
-    "operating": "Operating",
-    "rules": "Forum Rules",
+    "agreement":"User Agreement",
     "privacy": "Privacy",
     "bylaw": "Bylaws",
     "update": "Update Log",
