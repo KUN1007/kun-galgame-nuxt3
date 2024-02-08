@@ -71,7 +71,7 @@ onMounted(() => {
   font-size: 16px;
   border: none;
   background-color: var(--kungalgame-trans-white-9);
-  border: 2px solid var(--kungalgame-blue-4);
+  border: 2px solid var(--kungalgame-blue-5);
   border-radius: 17px;
   color: var(--kungalgame-font-color-3);
   transition: all 0.2s;

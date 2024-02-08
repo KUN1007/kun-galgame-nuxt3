@@ -11,7 +11,7 @@ export const useKUNGalgameEditStore = defineStore({
     content: '',
     tags: [],
     category: [],
-    isShowHotKeywords: true,
+    isShowHotKeywords: false,
     isSaveTopic: false,
   }),
   getters: {},

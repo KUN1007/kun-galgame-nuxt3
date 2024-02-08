@@ -90,10 +90,11 @@ onBeforeRouteLeave(async (to, from, next) => {
   overflow-y: scroll;
   margin: 0 auto;
   box-shadow: var(--shadow);
-  background-color: var(--kungalgame-trans-white-2);
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(10px);
   color: var(--kungalgame-font-color-3);
-  border: 1px solid var(--kungalgame-blue-1);
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: var(--kungalgame-shadow-0);
 }
 
 .content-footer {

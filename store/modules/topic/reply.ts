@@ -7,7 +7,7 @@ export const usePersistKUNGalgameReplyStore = defineStore({
     replyPanelWidth: 90,
 
     isSaveReply: false,
-    isShowHotKeywords: true,
+    isShowHotKeywords: false,
 
     editorHeight: 200,
     textCount: 0,

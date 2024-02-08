@@ -45,7 +45,7 @@ const handleClickTopic = (tid: number) => {
 
   .topic {
     color: var(--kungalgame-font-color-3);
-    border: 1px solid var(--kungalgame-blue-4);
+    border: 2px solid var(--kungalgame-trans-blue-2);
     background-color: var(--kungalgame-trans-blue-0);
     padding: 10px;
     margin-bottom: 10px;
@@ -57,9 +57,7 @@ const handleClickTopic = (tid: number) => {
     }
 
     &:hover {
-      transition: all 0.2s;
-      background-color: var(--kungalgame-white);
-      box-shadow: var(--kungalgame-shadow-1);
+      border: 2px solid var(--kungalgame-blue-5);
     }
   }
 
@@ -72,6 +70,7 @@ const handleClickTopic = (tid: number) => {
       overflow: hidden;
       -webkit-box-orient: vertical;
       color: var(--kungalgame-blue-5);
+      margin-bottom: 10px;
     }
 
     &:nth-child(2) {

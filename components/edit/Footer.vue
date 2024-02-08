@@ -84,7 +84,7 @@ const handleClickCategory = (kun: Category) => {
   font-size: 17px;
   cursor: pointer;
   border: 1px solid var(--kungalgame-blue-4);
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: var(--kungalgame-trans-white-9);
   color: var(--kungalgame-blue-4);
   display: flex;
@@ -97,7 +97,6 @@ const handleClickCategory = (kun: Category) => {
 }
 
 .active {
-  transition: 0.2s;
   background-color: var(--kungalgame-blue-4);
   color: var(--kungalgame-white);
 }

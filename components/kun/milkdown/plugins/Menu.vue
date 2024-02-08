@@ -13,10 +13,7 @@ import {
   toggleInlineCodeCommand,
   toggleLinkCommand,
 } from '@milkdown/preset-commonmark'
-import {
-  insertTableCommand,
-  toggleStrikethroughCommand,
-} from '@milkdown/preset-gfm'
+import { toggleStrikethroughCommand } from '@milkdown/preset-gfm'
 import type { UseEditorReturn } from '@milkdown/vue'
 import type { CmdKey } from '@milkdown/core'
 
@@ -96,9 +93,9 @@ const handleClickUploadImage = () => {
       <Icon name="material-symbols:strikethrough-s-rounded" />
     </div>
 
-    <div aria-label="kun-galgame-table" @click="call(insertTableCommand.key)">
+    <!-- <div aria-label="kun-galgame-table" @click="call(insertTableCommand.key)">
       <Icon name="material-symbols:table" />
-    </div>
+    </div> -->
 
     <div
       aria-label="kun-galgame-list-bulleted"
@@ -158,9 +155,9 @@ const handleClickUploadImage = () => {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  background-color: var(--kungalgame-trans-blue-1);
-  border-bottom: 1px solid var(--kungalgame-blue-1);
-  border-top: 1px solid var(--kungalgame-blue-1);
+  background-color: var(--kungalgame-trans-blue-0);
+  border-bottom: 1px solid var(--kungalgame-blue-5);
+  border-top: 1px solid var(--kungalgame-blue-5);
 
   div {
     cursor: pointer;
@@ -175,11 +172,10 @@ const handleClickUploadImage = () => {
     color: var(--kungalgame-font-color-3);
     background-color: var(--kungalgame-trans-white-9);
     border: 1px solid var(--kungalgame-trans-white-9);
-    transition: all 0.2s;
 
     &:hover {
-      border: 1px solid var(--kungalgame-blue-4);
-      color: var(--kungalgame-blue-4);
+      border: 1px solid var(--kungalgame-blue-5);
+      color: var(--kungalgame-blue-5);
     }
   }
 }
