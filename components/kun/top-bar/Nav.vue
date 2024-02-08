@@ -20,7 +20,9 @@ watch(
 )
 
 onMounted(() => {
-  const socket = useIO()()
+  const socket = useIO()({
+    transports: ['websocket'],
+  })
   socket.emit('register')
 
   socket.on('connect', () => {
