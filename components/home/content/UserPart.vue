@@ -35,7 +35,7 @@ const handleClickAvatar = (event: MouseEvent) => {
       <span class="name">{{ props.user.name }}</span>
 
       <span class="time">
-        {{ formatTimeDifference(time, locale) }}
+        {{ formatTimeDifferenceHint(time, locale) }}
       </span>
     </div>
   </div>

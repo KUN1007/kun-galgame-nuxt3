@@ -27,6 +27,7 @@ import { asideBarItem } from './asideItem'
   justify-content: space-around;
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
+  border-left: 5px solid var(--kungalgame-blue-5);
   box-shadow: var(--kungalgame-shadow-0);
   border-radius: 10px;
   margin-right: 17px;

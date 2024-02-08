@@ -89,9 +89,9 @@ useHead({
   max-width: 1350px;
   max-width: 1200px;
   background-color: var(--kungalgame-trans-white-2);
-  border: 1px solid var(--kungalgame-blue-4);
+  border: 1px solid var(--kungalgame-blue-5);
   box-shadow: var(--shadow);
-  border-radius: 7px;
+  border-radius: 10px;
   margin: auto;
   display: flex;
   flex-direction: column;
