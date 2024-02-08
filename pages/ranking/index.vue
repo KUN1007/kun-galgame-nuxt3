@@ -35,10 +35,10 @@ useHead({
   height: 100vh;
   width: 90%;
   background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(5px);
-  border: 1px solid var(--kungalgame-blue-1);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--kungalgame-shadow-0);
   box-shadow: var(--shadow);
-  border-radius: 7px;
+  border-radius: 10px;
   margin: auto;
   display: flex;
   padding: 10px;

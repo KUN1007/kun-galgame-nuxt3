@@ -42,17 +42,15 @@ const users = computed(() => props.users)
     justify-content: space-between;
     align-items: center;
     background-color: var(--kungalgame-trans-pink-0);
-    border: 1px solid var(--kungalgame-trans-pink-2);
+    border: 2px solid var(--kungalgame-trans-pink-2);
     border-radius: 5px;
     color: var(--kungalgame-font-color-3);
     padding: 0 10px;
     cursor: pointer;
 
     &:hover {
-      transition: all 0.5s;
       background-color: var(--kungalgame-trans-white-9);
-      border: 1px solid var(--kungalgame-pink-4);
-      color: var(--kungalgame-pink-4);
+      border: 2px solid var(--kungalgame-pink-4);
     }
   }
 }

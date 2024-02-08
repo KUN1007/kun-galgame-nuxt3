@@ -35,17 +35,15 @@ const topics = computed(() => props.topics)
     justify-content: space-between;
     align-items: center;
     background-color: var(--kungalgame-trans-blue-0);
-    border: 1px solid var(--kungalgame-trans-blue-2);
+    border: 2px solid var(--kungalgame-trans-blue-2);
     border-radius: 5px;
     color: var(--kungalgame-font-color-3);
     padding: 0 10px;
     cursor: pointer;
 
     &:hover {
-      transition: all 0.5s;
       background-color: var(--kungalgame-trans-white-9);
-      border: 1px solid var(--kungalgame-blue-4);
-      color: var(--kungalgame-blue-4);
+      border: 2px solid var(--kungalgame-blue-4);
     }
   }
 }
