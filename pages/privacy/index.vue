@@ -105,9 +105,9 @@ useHead({
   max-width: 500px;
   margin: auto;
   position: relative;
-  background-color: var(--kungalgame-trans-white-2);
-  backdrop-filter: blur(5px);
-  border-radius: 7px;
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
   box-shadow: var(--kungalgame-shadow-0);
   display: flex;
   flex-direction: column;

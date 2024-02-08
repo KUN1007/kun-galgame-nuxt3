@@ -160,6 +160,7 @@ watch(
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10px;
 
   &:last-child {
     margin-bottom: 20px;
@@ -192,11 +193,12 @@ watch(
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
-  border: 1px solid var(--kungalgame-blue-1);
   border-radius: 5px;
-  background-color: var(--kungalgame-trans-white-5);
-  box-shadow: var(--shadow);
-  transition: width 0.5s;
+  border: 2px solid var(--kungalgame-trans-blue-2);
+
+  &:hover {
+    border: 2px solid var(--kungalgame-blue-5);
+  }
 }
 
 .content {
@@ -212,8 +214,8 @@ watch(
 }
 
 .bottom {
-  border-top: 1px solid var(--kungalgame-blue-1);
-  border-bottom: 1px solid var(--kungalgame-blue-1);
+  border-top: 1px solid var(--kungalgame-blue-4);
+  border-bottom: 1px solid var(--kungalgame-blue-4);
   display: flex;
   justify-content: space-between;
 }
@@ -269,7 +271,7 @@ watch(
 }
 
 .active .container {
-  border: 1px solid var(--kungalgame-red-3);
+  box-shadow: 0 0 0 2px var(--kungalgame-red-3);
   background-color: var(--kungalgame-trans-red-1);
 }
 
@@ -289,7 +291,7 @@ watch(
   .top {
     margin: 0;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--kungalgame-blue-1);
+    border-bottom: 1px solid var(--kungalgame-blue-4);
   }
 }
 </style>

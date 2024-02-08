@@ -40,8 +40,8 @@ useHead({
   width: 300px;
   height: 400px;
   background-color: var(--kungalgame-trans-white-2);
-  backdrop-filter: blur(5px);
-  border-radius: 5px;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
   box-shadow: var(--shadow);
 }
 
@@ -52,7 +52,7 @@ useHead({
   padding: 20px;
   font-size: large;
   background-color: var(--kungalgame-blue-4);
-  border-radius: 5px 5px 0 0;
+  border-radius: 10px 10px 0 0;
   color: var(--kungalgame-white);
 }
 

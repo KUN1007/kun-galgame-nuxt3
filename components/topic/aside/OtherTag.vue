@@ -43,23 +43,18 @@ isEmpty.value = !data.value?.length
 <style lang="scss" scoped>
 .other {
   width: 100%;
-  overflow: hidden;
-  border-radius: 5px;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--kungalgame-blue-1);
-  background-color: var(--kungalgame-trans-blue-0);
-  height: 340px;
   display: flex;
   flex-direction: column;
 
   .title {
-    border-left: 0;
     height: 40px;
     font-size: 14px;
     font-weight: bold;
+    flex-shrink: 0;
     color: var(--kungalgame-font-color-2);
-    background-color: var(--kungalgame-trans-blue-1);
-    border-bottom: 1px solid var(--kungalgame-blue-1);
+    border: 2px solid var(--kungalgame-trans-blue-2);
+    border-radius: 20px;
+    margin-bottom: 17px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,12 +65,12 @@ isEmpty.value = !data.value?.length
     display: flex;
     justify-content: center;
     align-items: center;
-    border-left: 4px solid transparent;
+    border-left: 4px solid var(--kungalgame-trans-blue-2);
+    margin-bottom: 5px;
 
     &:hover {
-      border-left: 4px solid var(--kungalgame-pink-3);
-      background-color: var(--kungalgame-trans-blue-1);
-      transition: 0.2s;
+      border-left: 4px solid var(--kungalgame-blue-5);
+      background-color: var(--kungalgame-trans-blue-2);
     }
 
     a {

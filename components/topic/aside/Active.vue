@@ -22,7 +22,7 @@ const handleClickSortOrder = (sortOrder: SortOrder) => {
 </script>
 
 <template>
-  <div class="aside">
+  <div class="container">
     <div class="sort">
       <div
         class="item"
@@ -56,8 +56,7 @@ const handleClickSortOrder = (sortOrder: SortOrder) => {
 </template>
 
 <style lang="scss" scoped>
-.aside {
-  height: 940px;
+.container {
   width: 100%;
   display: flex;
   flex-shrink: 0;
@@ -71,16 +70,16 @@ const handleClickSortOrder = (sortOrder: SortOrder) => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid var(--kungalgame-blue-4);
-  border-radius: 5px;
+  padding-bottom: 17px;
   margin-bottom: 17px;
-  box-shadow: var(--shadow);
   cursor: pointer;
+  border-bottom: 2px solid var(--kungalgame-blue-5);
 
   .item {
     width: 100%;
     display: flex;
     justify-content: space-around;
+    border-radius: 20px;
 
     span {
       padding: 7px;
@@ -95,6 +94,7 @@ const handleClickSortOrder = (sortOrder: SortOrder) => {
     display: flex;
     font-size: 20px;
     color: var(--kungalgame-blue-4);
+    margin-top: 17px;
 
     span {
       padding: 7px;
@@ -102,6 +102,7 @@ const handleClickSortOrder = (sortOrder: SortOrder) => {
       display: flex;
       justify-content: center;
       align-items: center;
+      border-radius: 20px;
     }
   }
 }

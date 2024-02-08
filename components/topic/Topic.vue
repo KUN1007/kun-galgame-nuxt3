@@ -218,11 +218,6 @@ onBeforeMount(() => {
   min-height: 500px;
   margin: 0 auto;
   display: flex;
-  backdrop-filter: blur(5px);
-  background-color: var(--kungalgame-trans-white-5);
-  border: 1px solid var(--kungalgame-blue-0);
-  border-radius: 5px;
-  padding: 5px;
 }
 
 .content {
@@ -231,6 +226,10 @@ onBeforeMount(() => {
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
+  border-radius: 10px;
+  box-shadow: var(--kungalgame-shadow-0);
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(10px);
 }
 
 .title-scroll {
@@ -245,15 +244,15 @@ onBeforeMount(() => {
   font-weight: bold;
   color: var(--kungalgame-font-color-3);
   background-color: var(--kungalgame-trans-white-5);
-  border: 1px solid var(--kungalgame-blue-1);
-  border-radius: 0 0 5px 5px;
-  backdrop-filter: blur(5px);
+  border: 1px solid var(--kungalgame-blue-4);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
   z-index: 1;
 }
 
 @media (max-width: 700px) {
   .content-container {
-    width: 100%;
+    width: 95%;
   }
 
   .aside {

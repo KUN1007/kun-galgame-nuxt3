@@ -62,14 +62,13 @@ const { data: logs } = await useFetch(`/api/non-moe/logs`, {
   max-width: 1000px;
   margin: auto;
   background-color: var(--kungalgame-trans-white-5);
-  border: 1px solid var(--kungalgame-blue-1);
+  backdrop-filter: blur(10px);
   overflow: hidden;
-  border-radius: 7px;
-  backdrop-filter: blur(5px);
+  border-radius: 10px;
   display: flex;
   color: var(--kungalgame-font-color-3);
   position: relative;
-  box-shadow: var(--shadow);
+  box-shadow: var(--kungalgame-shadow-0);
 }
 
 .title {
@@ -97,7 +96,7 @@ const { data: logs } = await useFetch(`/api/non-moe/logs`, {
 
 .article {
   background-color: var(--kungalgame-trans-white-5);
-  border-left: 1px solid var(--kungalgame-blue-1);
+  border-left: 3px solid var(--kungalgame-red-5);
   display: flex;
   flex-direction: column;
   align-items: center;

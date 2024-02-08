@@ -18,7 +18,7 @@
     </div>
 
     <div>
-      <span>{{ $t('footer.reserved') }} 2.3.0</span>
+      <span>{{ $t('footer.reserved') }} 2.4.0</span>
     </div>
   </div>
 </template>

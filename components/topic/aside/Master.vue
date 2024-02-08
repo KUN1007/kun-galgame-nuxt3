@@ -40,23 +40,18 @@ isEmpty.value = !data.value?.length
 <style lang="scss" scoped>
 .master {
   width: 100%;
-  overflow: hidden;
-  border-radius: 5px;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--kungalgame-trans-pink-2);
-  background-color: var(--kungalgame-trans-pink-0);
-  height: 340px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 40px;
 
   .title {
-    border-left: 0;
+    flex-shrink: 0;
     height: 40px;
     font-size: 14px;
     font-weight: bold;
-    color: var(--kungalgame-font-color-2);
-    background-color: var(--kungalgame-trans-pink-1);
-    border-bottom: 1px solid var(--kungalgame-trans-pink-2);
+    border-radius: 20px;
+    border: 2px solid var(--kungalgame-trans-pink-2);
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,12 +62,12 @@ isEmpty.value = !data.value?.length
     display: flex;
     justify-content: center;
     align-items: center;
-    border-left: 4px solid transparent;
+    border-left: 4px solid var(--kungalgame-trans-pink-2);
+    margin-bottom: 5px;
 
     &:hover {
-      border-left: 4px solid var(--kungalgame-blue-3);
-      background-color: var(--kungalgame-trans-pink-1);
-      transition: 0.2s;
+      border-left: 4px solid var(--kungalgame-pink-4);
+      background-color: var(--kungalgame-trans-pink-2);
     }
 
     a {

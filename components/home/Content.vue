@@ -52,9 +52,8 @@ const mainPageWidth = computed(() => {
     display: none;
   }
 
-  .content-container {
-    width: 100%;
-    border: none;
+  .main {
+    width: 95%;
   }
 }
 </style>

@@ -24,11 +24,13 @@ watch(
   <div class="aside">
     <div class="nav-aside" @click="handleFold">
       <Icon
+        class="icon"
         name="line-md:arrow-left"
         style="font-size: 17px"
         v-if="isActiveAside"
       />
       <Icon
+        class="icon"
         name="line-md:arrow-right"
         style="font-size: 17px"
         v-if="!isActiveAside"
@@ -49,14 +51,19 @@ watch(
 
 <style lang="scss" scoped>
 .aside {
-  margin-right: 5px;
+  margin-right: 17px;
   width: v-bind('asideWidth');
   height: 100%;
   display: flex;
   flex-direction: column;
-  transition: 0.5s;
+  transition: width 0.5s;
   overflow-y: scroll;
   flex-shrink: 0;
+  background-color: var(--kungalgame-trans-white-5);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--kungalgame-shadow-0);
+  padding: 10px;
 
   span {
     white-space: nowrap;
@@ -70,10 +77,20 @@ watch(
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* 字体设置 */
-  font-size: small;
-  color: var(--kungalgame-font-color-3);
+  font-size: 15px;
   cursor: pointer;
+  margin-bottom: 17px;
+  border-bottom: 2px solid var(--kungalgame-blue-5);
+  color: var(--kungalgame-font-color-3);
+
+  span {
+    white-space: nowrap;
+    margin-left: 10px;
+  }
+
+  .icon {
+    font-size: 17px;
+  }
 }
 
 .item-active {
