@@ -58,7 +58,7 @@ const { sortField, sortOrder, isScrollToTop } = storeToRefs(useTempPoolStore())
   cursor: pointer;
   display: none;
   background-color: var(--kungalgame-trans-white-2);
-  border: 1px solid var(--kungalgame-blue-4);
+  border: 2px solid var(--kungalgame-blue-5);
   border-radius: 6px;
   top: 0;
 }
@@ -92,10 +92,10 @@ const { sortField, sortOrder, isScrollToTop } = storeToRefs(useTempPoolStore())
     display: flex;
     justify-content: space-around;
     align-items: center;
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
 
     &:hover {
-      background-color: var(--kungalgame-blue-4);
+      background-color: var(--kungalgame-blue-5);
       color: var(--kungalgame-white);
     }
 
@@ -123,7 +123,8 @@ const { sortField, sortOrder, isScrollToTop } = storeToRefs(useTempPoolStore())
   width: 50px;
   box-shadow: var(--shadow);
   cursor: pointer;
-  background-color: var(--kungalgame-trans-white-2);
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(10px);
   border: 2px solid var(--kungalgame-blue-4);
   color: var(--kungalgame-font-color-3);
   border-radius: 50%;

@@ -164,7 +164,7 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .pool {
-  height: calc(100vh - 75px);
+  height: calc(100dvh - 75px);
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
@@ -173,21 +173,19 @@ onBeforeUnmount(() => {
 .pool-container {
   transition: width 0.2s;
   width: v-bind(poolPageWidth);
+  padding: 0 10px;
   margin: 0 auto;
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
-  backdrop-filter: blur(5px);
-  background-color: var(--kungalgame-trans-white-5);
-  border-radius: 5px;
-  padding: 5px;
 }
 
 .topic-container {
+  margin: 10px 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-auto-rows: minmax(100px, 320px);
-  gap: 10px;
+  gap: 17px;
 }
 
 .load {

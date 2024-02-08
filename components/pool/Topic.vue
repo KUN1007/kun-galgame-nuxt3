@@ -4,12 +4,12 @@ import type { PoolTopic } from '~/types/api/pool'
 const light = `rgba(${randomNum(200, 255)}, ${randomNum(200, 255)}, ${randomNum(
   200,
   255
-)}, ${randomNum(30, 70) / 100})`
+)}, ${randomNum(60, 80) / 100})`
 
 const dark = `rgba(${randomNum(0, 55)}, ${randomNum(0, 55)}, ${randomNum(
   0,
   55
-)}, ${randomNum(30, 70) / 100})`
+)}, ${randomNum(60, 80) / 100})`
 
 const props = defineProps<{
   topic: PoolTopic
@@ -85,12 +85,13 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   background-color: v-bind(color);
-  border: 1px solid var(--kungalgame-blue-1);
-  border-radius: 5px;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
   color: var(--kungalgame-font-color-3);
   cursor: pointer;
-  box-shadow: var(--shadow);
+  box-shadow: var(--kungalgame-shadow-0);
   max-width: 300px;
+  padding: 10px;
 
   &:hover {
     transition: all 0.2s;
@@ -106,11 +107,10 @@ onMounted(() => {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   margin: 0 auto;
-  margin-top: 7px;
-  padding: 0 7px;
   font-weight: bold;
-  color: var(--kungalgame-font-color-2);
+  color: var(--kungalgame-blue-5);
   flex-shrink: 0;
+  margin-bottom: 10px;
 }
 
 .content {
@@ -122,7 +122,7 @@ onMounted(() => {
   overflow-wrap: break-word;
   font-size: 14px;
   padding: 0 10px;
-  margin: 7px 0;
+  margin-bottom: 10px;
 }
 
 .status {
@@ -131,6 +131,7 @@ onMounted(() => {
   justify-content: space-around;
   overflow: hidden;
   flex-wrap: wrap;
+  margin-bottom: 10px;
 
   span {
     display: flex;
@@ -145,11 +146,9 @@ onMounted(() => {
   font-size: small;
   letter-spacing: 1px;
   overflow: hidden;
-  padding: 7px;
 
   .hourglass {
     flex-shrink: 0;
-    margin: 0 5px;
     color: var(--kungalgame-purple-4);
   }
 }
