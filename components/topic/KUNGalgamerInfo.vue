@@ -55,7 +55,6 @@ const user = computed(() => props.user)
 
   img {
     width: 100px;
-    height: 100px;
   }
 }
 
