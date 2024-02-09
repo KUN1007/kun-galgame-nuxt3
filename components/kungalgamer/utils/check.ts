@@ -88,7 +88,7 @@ export const checkChangePassword = (
   if (!isValidPassword(oldPassword) || !isValidPassword(newPassword)) {
     useMessage(
       'Invalid password format.\nPassword must be 6 to 17 characters long and must include at least one letter and one number.\nIt can optionally include special characters such as \\w!@#$%^&()-+=',
-      '非法的密码格式，密码的长度为 6 到 17 位，必须包含至少一个英文字符和一个数字，可以选择性的包含 \\w!@#$%^&*()-+= 等特殊字符',
+      '非法的密码格式，密码的长度为 6 到 17 位，必须包含至少一个英文字符和一个数字，可以选择性的包含 \\w!@#$%^&*()-+=\\/ 等特殊字符',
       'warn',
       5000
     )
