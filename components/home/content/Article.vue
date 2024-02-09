@@ -38,7 +38,7 @@ const scrollHandler = async () => {
 
     const newData = await getTopics()
 
-    if (newData.length < 17) {
+    if (newData.length < 10) {
       isLoadingComplete.value = true
     }
 

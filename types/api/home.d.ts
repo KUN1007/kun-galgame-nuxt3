@@ -52,7 +52,7 @@ export interface HomeNavTopic {
 }
 
 export interface HomeTopicRequestData {
-  category: string[]
+  category: string
   page: string
   limit: string
   sortField: SortField

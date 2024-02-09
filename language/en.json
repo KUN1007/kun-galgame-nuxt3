@@ -113,10 +113,13 @@
         "privacy": "Privacy",
         "principle": "Principle",
         "balance": "Profit and Loss",
+        "sticker": "KUN Visualnovel Stickers",
         "acgngame": "ACGNGAME",
         "shinnku": "Shinnku's Visual Novel",
         "ymgal": "YM galgame",
-        "kun": "KUN's Blog"
+        "kun": "KUN's Blog",
+        "ohmygpt": "OhMyGPT",
+        "galgamer": "Galgamer"
       },
       "describe":{
         "title": "KUN Visual Novel",

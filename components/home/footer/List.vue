@@ -90,28 +90,46 @@ const info: FooterInfo[] = [
 const link: FooterInfoItem[] = [
   {
     index: 1,
+    name: `sticker`,
+    router: `https://sticker.kungal.com`,
+    label: 'KUN Visualnovel Stickers | 鲲 Galgame 表情包',
+  },
+  {
+    index: 2,
     name: `acgngame`,
     router: `https://acgngames.net`,
     label: 'ACGNGAME, Gal World, Galgame 游戏爱好者之家',
   },
   {
-    index: 2,
+    index: 3,
     name: `shinnku`,
     router: `https://shinnku.com`,
     label: `Shinnku's Visual Novel, Upset Gal, 失落的小站 失落小站 - galgame资源站`,
   },
   {
-    index: 3,
+    index: 4,
     name: `ymgal`,
     router: `https://www.ymgal.games`,
     label:
       'YM Galgame, 月幕 Galgame -最戳你XP的美少女游戏综合交流平台 | 来感受这绝妙的艺术体裁',
   },
   {
-    index: 4,
+    index: 5,
     name: `kun`,
     router: `https://soft.moe`,
     label: `KUN's Blog | 鲲的博客`,
+  },
+  {
+    index: 6,
+    name: `ohmygpt`,
+    router: `https://ohmygpt.com`,
+    label: `OhMyGPT.COM offers you convenient, unlimited access to advanced AI models like GPT-3.5-turbo, GPT-3.5-turbo-16k, GPT-4, GPT-4-32k, DALL-E, whisper, MidJourney, and more.`,
+  },
+  {
+    index: 7,
+    name: `galgamer`,
+    router: `https://galgamer.moe`,
+    label: `因爲你是一個一個一個 <Galgamer/美少女> 啊啊啊啊阿`,
   },
 ]
 </script>

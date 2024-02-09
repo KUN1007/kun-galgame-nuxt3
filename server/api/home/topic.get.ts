@@ -69,7 +69,7 @@ export default defineEventHandler(async (event) => {
   await UserModel.findOne()
 
   const result = await getHomeTopics(
-    category,
+    [category],
     parseInt(page),
     parseInt(limit),
     sortField,

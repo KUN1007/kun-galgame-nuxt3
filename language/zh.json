@@ -113,10 +113,13 @@
         "privacy": "隐私政策",
         "principle": "运营理念",
         "balance": "收支公示",
+        "sticker": "鲲 Galgame 表情包",
         "acgngame": "ACGNGAME",
         "shinnku": "失落的小站",
         "ymgal": "月幕 galgame",
-        "kun": "鲲的博客"
+        "kun": "鲲的博客",
+        "ohmygpt": "OhMyGPT",
+        "galgamer": "Galgamer"
       },
       "describe":{
         "title": "鲲 Galgame",
