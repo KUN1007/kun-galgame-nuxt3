@@ -8,6 +8,5 @@ const showMessage = (errorCode: number) => {
 }
 
 export const kungalgameErrorHandler = (errorNumber: string) => {
-  alert(errorNumber + '----' + typeof errorNumber)
   showMessage(parseInt(errorNumber))
 }

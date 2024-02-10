@@ -23,8 +23,6 @@ export const sendVerificationCodeEmail = async (
   const limitEmail = await useStorage('redis').getItem(`limitEmail:${email}`)
   const limitIP = await useStorage('redis').getItem(`limitIP:${ip}`)
   if (limitEmail || limitIP) {
-    console.log('sendVerificationCodeEmail email error', event)
-
     return 10301
   }
 

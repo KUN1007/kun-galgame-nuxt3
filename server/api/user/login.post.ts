@@ -15,16 +15,12 @@ const login = async (event: H3Event) => {
     !(isValidName(name) || isValidEmail(name)) ||
     !isValidPassword(password)
   ) {
-    console.log('login valid error', event)
-
     kunError(event, 10107)
     return
   }
 
   const loginCD = await useStorage('redis').getItem(`loginCD:${ip}`)
   if (loginCD) {
-    console.log('login dc error', event)
-
     kunError(event, 10112)
     return
   } else {
@@ -43,16 +39,12 @@ export default defineEventHandler(async (event) => {
 
   const user = await UserModel.findOne({ $or: [{ name }, { email: name }] })
   if (!user) {
-    console.log('login user not found error', event)
-
     kunError(event, 10101)
     return
   }
 
   const isCorrectPassword = await bcrypt.compare(password, user.password)
   if (!isCorrectPassword) {
-    console.log('login user password error', event)
-
     kunError(event, 10102)
     return
   }

@@ -25,16 +25,12 @@ const registerController = async (event: H3Event) => {
     !isValidPassword(password) ||
     !isValidMailConfirmCode(code)
   ) {
-    console.log('register valid error', event)
-
     kunError(event, 10107)
     return
   }
 
   const registerCD = await useStorage('redis').getItem(`registerCD:${name}`)
   if (registerCD) {
-    console.log('register cd error', event)
-
     kunError(event, 10113)
     return
   } else {
@@ -53,8 +49,6 @@ export default defineEventHandler(async (event) => {
 
   const isCodeValid = await verifyVerificationCode(email, code)
   if (!isCodeValid) {
-    console.log('register email code error', event)
-
     kunError(event, 10103)
     return
   }
@@ -63,16 +57,12 @@ export default defineEventHandler(async (event) => {
     name: { $regex: new RegExp('^' + name + '$', 'i') },
   })
   if (usernameCount > 0) {
-    console.log('register username duplicated error', event)
-
     kunError(event, 10105)
     return
   }
 
   const emailCount = await UserModel.countDocuments({ email })
   if (emailCount > 0) {
-    console.log('register email duplicated error', event)
-
     kunError(event, 10104)
     return
   }
@@ -114,8 +104,6 @@ export default defineEventHandler(async (event) => {
   } catch (error) {
     await session.abortTransaction()
     session.endSession()
-    console.log(error)
-
     throw error
   }
 })
