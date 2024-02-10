@@ -30,7 +30,7 @@ export const onResponse = async (context: KunOnResponseContext) => {
   }
 
   if (context.response.status === 233) {
-    kungalgameErrorHandler(context.response.headers.get('KunError') || '')
+    kungalgameErrorHandler(context.response.headers.get('Kun-Error') || '')
     return
   }
 }
