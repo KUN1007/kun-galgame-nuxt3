@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  debug: true,
   devtools: {
     enabled: false,
   },
@@ -44,7 +45,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/index.scss'],
   vite: {
     esbuild: {
-      drop: ['console', 'debugger'],
+      drop: ['debugger'],
     },
   },
   piniaPersistedstate: {
