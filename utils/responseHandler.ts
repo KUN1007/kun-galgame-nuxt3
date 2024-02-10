@@ -30,6 +30,8 @@ export const onResponse = async (context: KunOnResponseContext) => {
   }
 
   if (context.response.status === 233) {
+    console.log(context.response.toString())
+
     kungalgameErrorHandler(context.response.statusText)
     return
   }

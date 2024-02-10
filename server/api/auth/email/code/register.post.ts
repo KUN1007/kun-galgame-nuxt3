@@ -7,6 +7,8 @@ export default defineEventHandler(async (event) => {
     await readBody(event)
 
   if (!isValidEmail(email)) {
+    console.log('register auth email valid error', event)
+
     kunError(event, 10302)
     return
   }
@@ -15,12 +17,16 @@ export default defineEventHandler(async (event) => {
     name: { $regex: new RegExp('^' + name + '$', 'i') },
   })
   if (usernameCount > 0) {
+    console.log('register auth username duplicated error', event)
+
     kunError(event, 10105)
     return
   }
 
   const emailCount = await UserModel.countDocuments({ email })
   if (emailCount > 0) {
+    console.log('register auth email duplicated error', event)
+
     kunError(event, 10104)
     return
   }
