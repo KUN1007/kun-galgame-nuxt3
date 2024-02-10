@@ -423,7 +423,7 @@
   "footer":{
     "copyright": "版权所有 © 2024 鲲 Galgame",
     "openSource": "GitHub 开源",
-    "reserved": "保留所有权利 | 版本"
+    "reserved": "保留所有权利 {'|'} 版本"
   },
   "seo": {
     "agreement": {
