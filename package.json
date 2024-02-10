@@ -24,7 +24,7 @@
     "@types/nodemailer-smtp-transport": "^2.7.8",
     "@vite-pwa/nuxt": "^0.4.0",
     "dayjs-nuxt": "^2.1.9",
-    "nuxt": "3.8.0",
+    "nuxt": "^3.9.3",
     "nuxt-icon": "^0.6.8",
     "nuxt-schema-org": "^3.3.3",
     "nuxt-typed-router": "^3.5.1",

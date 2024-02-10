@@ -29,9 +29,7 @@ const handleLogin = async () => {
     method: 'POST',
     body: loginForm,
     watch: false,
-    onResponse({ request, response, options }) {
-      console.log(response)
-    },
+    ...kungalgameResponseHandler,
   })
   if (data.value) {
     info.info('AlertInfo.login.success')

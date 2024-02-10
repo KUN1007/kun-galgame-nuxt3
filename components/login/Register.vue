@@ -46,9 +46,7 @@ const handleRegister = async () => {
     method: 'POST',
     body: registerForm,
     watch: false,
-    onResponse({ request, response, options }) {
-      console.log(response)
-    },
+    ...kungalgameResponseHandler,
   })
 
   if (data.value) {
