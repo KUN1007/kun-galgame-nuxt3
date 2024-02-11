@@ -4,6 +4,8 @@
 
 **お問い合わせ：[Telegram](https://t.me/kungalgame) | [Discord](https://discord.com/invite/5F4FS2cXhX)**
 
+この画像は、ゲーム [Ark Order](https://apps.qoo-app.com/en/app/9593) から提供されており、キャラクターは 'こん'（Kun）です。
+
 # KUN ビジュアルノベルフォーラム
 
 ウェブサイト紹介

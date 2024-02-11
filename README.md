@@ -4,6 +4,8 @@
 
 **Contact us：[Telegram](https://t.me/kungalgame) | [Discord](https://discord.com/invite/5F4FS2cXhX)**
 
+The image is sourced from the game [Ark Order](https://apps.qoo-app.com/en/app/9593), featuring the character 'KUN' (鲲).
+
 # KUN Visual Novel Forum
 
 Website Introduction

@@ -4,6 +4,8 @@
 
 **联系我们：[Telegram](https://t.me/kungalgame) | [Discord](https://discord.com/invite/5F4FS2cXhX)**
 
+图片来源为游戏 [方舟指令](https://apps.qoo-app.com/en/app/9593) 中的角色鲲（KUN）
+
 # 鲲 Galgame 论坛
 
 项目简介
