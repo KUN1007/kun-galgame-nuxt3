@@ -5,13 +5,13 @@
     <h1>About Us</h1>
     <h2 id="introduction">Website Introduction</h2>
     <p>
-      Kun Galgame is a collective of individuals passionate about the Galgame
-      genre. It currently consists of the following sub-websites:
+      KUN Visual Novel is a collective of individuals passionate about the
+      Galgame genre. It currently consists of the following sub-websites:
     </p>
 
     <br />
     <ul class="list">
-      <li>Kun Galgame Forum (this forum)</li>
+      <li>KUN Visual Novel Forum (this forum)</li>
       <li>
         <span class="skip">
           <a
@@ -19,7 +19,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            Kun Galgame Sticker Pack
+            KUN Visual Novel Sticker Pack
           </a>
         </span>
         (a website dedicated to collecting and creating Galgame sticker packs)
@@ -31,7 +31,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            Kun Galgame Development Documentation
+            KUN Visual Novel Development Documentation
           </a>
         </span>
         (this forum is entirely open source, and the development documentation
@@ -42,9 +42,9 @@
     <br />
 
     <p>
-      In addition to the projects owned by Kun Galgame itself, we would like to
-      express our gratitude to the following websites, which have made
-      significant contributions to the development of Kun Galgame.
+      In addition to the projects owned by KUN Visual Novel itself, we would
+      like to express our gratitude to the following websites, which have made
+      significant contributions to the development of KUN Visual Novel.
     </p>
     <br />
     <ul class="list">
@@ -122,9 +122,9 @@
     <br />
 
     <p>
-      In addition, the construction of Kun Galgame has received support from
-      numerous individuals and inspiration from various websites. Please refer
-      to the
+      In addition, the construction of KUN Visual Novel has received support
+      from numerous individuals and inspiration from various websites. Please
+      refer to the
       <span class="skip">
         <RouterLink to="/thanks-list">thanks list</RouterLink>
       </span>
@@ -136,7 +136,8 @@
     <p>
       <strong>
         We sincerely thank everyone who has contributed to the development of
-        Kun Galgame! And thank you to those who use the Kun Galgame Forum!
+        KUN Visual Novel! And thank you to those who use the KUN Visual Novel
+        Forum!
       </strong>
     </p>
     <br />
