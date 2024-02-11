@@ -19,7 +19,7 @@ watch(
   }
 )
 
-onMounted(() => {
+onMounted(async () => {
   const socket = useIO()()
   socket.emit('register')
 
@@ -47,6 +47,13 @@ onMounted(() => {
   socket.on('commented', (socket) => {
     messageStatus.value = 'new'
   })
+
+  const { data } = await useFetch(`/api/message/unread`, {
+    method: 'GET',
+  })
+  if (data.value) {
+    messageStatus.value = 'new'
+  }
 })
 </script>
 

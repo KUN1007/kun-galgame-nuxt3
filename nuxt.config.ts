@@ -91,7 +91,7 @@ export default defineNuxtConfig({
     disable: process.env.NODE_ENV === 'development',
     manifest: {
       name: 'KUN Visual Novel',
-      short_name: 'KUN Visual Novel',
+      short_name: 'KunGal',
       theme_color: '#218bff',
       icons: [
         {
