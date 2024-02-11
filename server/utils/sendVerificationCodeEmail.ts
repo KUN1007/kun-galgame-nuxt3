@@ -3,18 +3,23 @@ import SMPTransport from 'nodemailer-smtp-transport'
 import env from '~/server/env/dotenv'
 import type { H3Event } from 'h3'
 
-const getMailContent = (type: 'register' | 'forgot', code: string) => {
+const getMailContent = (
+  type: 'register' | 'forgot' | 'reset',
+  code: string
+) => {
   if (type === 'register') {
     return `Your verification code is\n${code}\nYou are registering KUN Visual Novel. Please do not disclose this verification code.`
-  } else {
+  } else if (type === 'forgot') {
     return `Your verification code is\n${code}\nYou are resetting your password. Please do not disclose this verification code.`
+  } else {
+    return `Your verification code is\n${code}\nYou are resetting your email. Please do not disclose this verification code.`
   }
 }
 
 export const sendVerificationCodeEmail = async (
   event: H3Event,
   email: string,
-  type: 'register' | 'forgot'
+  type: 'register' | 'forgot' | 'reset'
 ) => {
   const ip =
     event.node.req.socket.remoteAddress ||

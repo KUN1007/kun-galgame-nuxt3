@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  await UserModel.updateOne({ uid: userInfo.uid }, { $set: { email: email } })
+  await UserModel.updateOne({ uid: userInfo.uid }, { $set: { email } })
 
   return 'Moe Moe'
 })

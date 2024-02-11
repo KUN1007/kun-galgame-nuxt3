@@ -6,8 +6,12 @@ import {
 } from './utils/check'
 
 const router = useRouter()
-const email = ref('')
 const hasSentCodeEmail = ref('')
+
+const { data, refresh } = await useFetch('/api/user/email', {
+  method: 'GET',
+  ...kungalgameResponseHandler,
+})
 
 const input = reactive({
   newEmail: '',
@@ -29,7 +33,7 @@ const handleSendCode = async () => {
     'info'
   )
 
-  const { data } = await useFetch('/api/auth/email/code/forgot', {
+  const { data } = await useFetch('/api/auth/email/code/reset', {
     method: 'POST',
     body: { email: input.newEmail },
     ...kungalgameResponseHandler,
@@ -59,6 +63,7 @@ const handleResetEmail = async () => {
     input.newEmail = ''
     input.code = ''
     useMessage('Email change successful!', '邮箱更改成功', 'success')
+    refresh()
   }
 }
 
@@ -93,20 +98,13 @@ const handleChangePassword = async () => {
     useMessage('Password change successful!', '密码更改成功', 'success')
   }
 }
-
-const { data } = await useFetch('/api/user/email', {
-  method: 'GET',
-  ...kungalgameResponseHandler,
-})
-
-email.value = data.value ? data.value : ''
 </script>
 
 <template>
   <div class="email">
     <div class="title">{{ $t('user.email.email') }}:</div>
 
-    <div class="current-email">{{ $t('user.email.current') }}: {{ email }}</div>
+    <div class="current-email">{{ $t('user.email.current') }}: {{ data }}</div>
 
     <div class="input">
       <label for="email">{{ $t('user.email.newEmail') }}: </label>
