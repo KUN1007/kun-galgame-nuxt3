@@ -25,11 +25,24 @@ export default defineEventHandler(async (event) => {
   session.startTransaction()
 
   try {
-    await CommentModel.updateOne({ cid }, { $addToSet: { likes: uid } })
+    const comment = await CommentModel.findOneAndUpdate(
+      { cid },
+      { $addToSet: { likes: uid } }
+    )
     await UserModel.updateOne(
       { uid: to_uid },
       { $inc: { like: 1, moemoepoint: 1 } }
     )
+
+    if (comment) {
+      await createMessage(
+        uid,
+        parseInt(to_uid),
+        'liked',
+        comment.content,
+        comment.tid
+      )
+    }
 
     await session.commitTransaction()
     session.endSession()

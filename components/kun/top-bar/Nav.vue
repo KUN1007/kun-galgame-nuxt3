@@ -23,30 +23,27 @@ onMounted(async () => {
   const socket = useIO()()
   socket.emit('register')
 
-  socket.on('connect', () => {
-    messageStatus.value = 'online'
-  })
-
-  socket.on('disconnect', () => {
-    messageStatus.value = 'offline'
-  })
-
-  // TODO: Toast message info
-  socket.on('upvoted', (socket) => {
-    messageStatus.value = 'new'
-  })
-
-  socket.on('liked', (socket) => {
-    messageStatus.value = 'new'
-  })
-
-  socket.on('replied', (socket) => {
-    messageStatus.value = 'new'
-  })
-
-  socket.on('commented', (socket) => {
-    messageStatus.value = 'new'
-  })
+  socket
+    .on('connect', () => {
+      if (messageStatus.value === 'offline') {
+        messageStatus.value = 'online'
+      }
+    })
+    .on('disconnect', () => {
+      messageStatus.value = 'offline'
+    })
+    .on('upvoted', (socket) => {
+      messageStatus.value = 'new'
+    })
+    .on('liked', (socket) => {
+      messageStatus.value = 'new'
+    })
+    .on('replied', (socket) => {
+      messageStatus.value = 'new'
+    })
+    .on('commented', (socket) => {
+      messageStatus.value = 'new'
+    })
 
   const { data } = await useFetch(`/api/message/unread`, {
     method: 'GET',

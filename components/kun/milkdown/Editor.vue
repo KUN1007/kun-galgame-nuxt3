@@ -182,6 +182,7 @@ const editorInfo = useEditor((root) =>
     /* Silence css check */
     * {
       white-space: pre-wrap;
+      word-break: break-word;
     }
 
     & > div:nth-child(1) {

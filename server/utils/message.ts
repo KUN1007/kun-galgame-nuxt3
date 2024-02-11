@@ -11,6 +11,7 @@ export const createMessage = async (
   const newTopic = new MessageModel({
     sender_uid: senderUid,
     receiver_uid: receiverUid,
+    time: Date.now(),
     type,
     content,
     tid,
@@ -41,6 +42,7 @@ export const createDedupMessage = async (
   const newTopic = new MessageModel({
     sender_uid: senderUid,
     receiver_uid: receiverUid,
+    time: Date.now(),
     type,
     content,
     tid,

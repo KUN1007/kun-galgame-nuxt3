@@ -110,6 +110,7 @@ watch(
 
     * {
       white-space: pre-wrap;
+      word-break: break-word;
     }
 
     img {
