@@ -70,7 +70,7 @@ export default defineEventHandler(async (event) => {
 
     const replyUser = await UserModel.findOneAndUpdate(
       { uid: savedReply.r_uid },
-      { $addToSet: { reply: savedReply.rid } }
+      { $addToSet: { reply: savedReply.rid }, $inc: { reply_count: 1 } }
     )
     if (!replyUser) {
       kunError(event, 10101)

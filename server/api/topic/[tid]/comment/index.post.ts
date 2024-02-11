@@ -70,7 +70,7 @@ export default defineEventHandler(async (event) => {
       {
         uid: c_uid,
       },
-      { $addToSet: { comment: savedComment.cid } }
+      { $addToSet: { comment: savedComment.cid }, $inc: { comment_count: 1 } }
     )
     if (!commentUser) {
       kunError(event, 10101)
