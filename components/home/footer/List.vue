@@ -131,6 +131,12 @@ const link: FooterInfoItem[] = [
     router: `https://galgamer.moe`,
     label: `因爲你是一個一個一個 <Galgamer/美少女> 啊啊啊啊阿`,
   },
+  {
+    index: 8,
+    name: `mikugal`,
+    router: `https://yngal.com`,
+    label: `初音的青葱,我的galgame,资源发布,汉化硬盘版,汉化,galgame下载,galgame,游戏下载,gal下载`,
+  },
 ]
 </script>
 

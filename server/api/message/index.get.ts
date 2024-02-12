@@ -16,5 +16,5 @@ export default defineEventHandler(async (event) => {
 
   const message = await MessageModel.findOne({ receiver_uid: uid, mid })
 
-  return message?.content.slice(0, 233)
+  return message?.content.slice(0, 77)
 })
