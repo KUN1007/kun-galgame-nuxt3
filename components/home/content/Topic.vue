@@ -34,8 +34,8 @@ const getTopics = async () => {
 topics.value = await getTopics()
 
 const handleClickIcon = async (icon: TypeToGet) => {
-  typeToGet.value = icon
   topics.value = await getTopics()
+  typeToGet.value = icon
 }
 </script>
 
