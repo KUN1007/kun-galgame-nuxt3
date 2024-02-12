@@ -271,6 +271,7 @@ const handleClickRegister = () => {
     background-image: none !important;
     display: flex;
     box-shadow: none;
+    overflow: visible;
   }
 
   .container-overlay {
