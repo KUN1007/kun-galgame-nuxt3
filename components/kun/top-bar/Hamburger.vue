@@ -61,7 +61,7 @@ const handleShowMore = () => {
       class="mask"
       @click.stop
       @click="showKUNGalgameHamburger = false"
-      @touchmove.prevent
+      @touchmove.self.prevent
     >
       <div
         class="container"
@@ -111,14 +111,13 @@ const handleShowMore = () => {
 
 <style lang="scss" scoped>
 .mask {
-  height: 100dvh;
+  height: calc(100dvh + 117px);
   width: 100vw;
   position: fixed;
   top: 0;
   left: 0;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
   color: var(--kungalgame-font-color-3);
   background-color: var(--kungalgame-mask-color-0);
   transition: opacity 0.3s;
@@ -128,6 +127,8 @@ const handleShowMore = () => {
 .container {
   position: absolute;
   width: 250px;
+  height: 100%;
+  overflow-y: scroll;
   padding: 10px;
   background-color: var(--kungalgame-trans-white-2);
   border-right: 1px solid var(--kungalgame-blue-1);
