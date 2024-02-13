@@ -15,7 +15,6 @@ const registerController = async (event: H3Event) => {
     await readBody(event)
 
   const ip =
-    event.node.req.socket.remoteAddress ||
     event.node.req.headers['x-real-ip'] ||
     event.node.req.headers['x-forwarded-for'] ||
     ''
