@@ -44,7 +44,6 @@ const handleRegister = async () => {
 
   const { data } = await useFetch('/api/user/register', {
     method: 'POST',
-    headers: useRequestHeaders(['x-forwarded-for', 'x-real-ip', 'user-agent']),
     body: registerForm,
     watch: false,
     ...kungalgameResponseHandler,

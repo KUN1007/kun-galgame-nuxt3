@@ -22,8 +22,8 @@ export const sendVerificationCodeEmail = async (
   type: 'register' | 'forgot' | 'reset'
 ) => {
   const ip =
-    event.node.req.headers['x-real-ip'] ||
     event.node.req.headers['x-forwarded-for'] ||
+    event.node.req.headers['x-real-ip'] ||
     ''
   const limitEmail = await useStorage('redis').getItem(`limitEmail:${email}`)
   const limitIP = await useStorage('redis').getItem(`limitIP:${ip}`)

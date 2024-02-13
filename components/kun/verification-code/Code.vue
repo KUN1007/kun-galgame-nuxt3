@@ -24,7 +24,6 @@ const sendCode = async () => {
 
   const { data } = await useFetch(url, {
     method: 'POST',
-    headers: useRequestHeaders(['x-forwarded-for', 'x-real-ip', 'user-agent']),
     body: body,
     ...kungalgameResponseHandler,
   })

@@ -35,7 +35,6 @@ const handleSendCode = async () => {
 
   const { data } = await useFetch('/api/auth/email/code/reset', {
     method: 'POST',
-    headers: useRequestHeaders(['x-forwarded-for', 'x-real-ip', 'user-agent']),
     body: { email: input.newEmail },
     ...kungalgameResponseHandler,
   })
