@@ -22,19 +22,19 @@ const iconItem: IconItem[] = [
   },
 ]
 
-const getTopics = async () => {
+const getTopics = async (type: TypeToGet) => {
   const { data } = await useFetch('/api/home/nav', {
     method: 'GET',
-    query: { type: typeToGet.value },
+    query: { type },
     watch: false,
   })
   return data.value ?? []
 }
 
-topics.value = await getTopics()
+topics.value = await getTopics(typeToGet.value)
 
 const handleClickIcon = async (icon: TypeToGet) => {
-  topics.value = await getTopics()
+  topics.value = await getTopics(icon)
   typeToGet.value = icon
 }
 </script>
