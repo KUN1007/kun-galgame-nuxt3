@@ -1,23 +1,11 @@
 <script setup lang="ts">
 import type { PoolTopic } from '~/types/api/pool'
 
-const light = `rgba(${randomNum(200, 255)}, ${randomNum(200, 255)}, ${randomNum(
-  200,
-  255
-)}, ${randomNum(60, 80) / 100})`
-
-const dark = `rgba(${randomNum(0, 55)}, ${randomNum(0, 55)}, ${randomNum(
-  0,
-  55
-)}, ${randomNum(60, 80) / 100})`
-
 const props = defineProps<{
   topic: PoolTopic
 }>()
 
-const color = ref(light)
 const { locale } = useI18n()
-const colorMode = useColorMode()
 const topic = computed(() => props.topic)
 const { formattedENDate, formattedCNDate } = formatTimeI18n(topic.value.time)
 
@@ -31,25 +19,6 @@ const loliTime = computed(() => {
   }
 
   return ''
-})
-
-onMounted(() => {
-  if (colorMode.value === 'dark') {
-    color.value = dark
-  } else {
-    color.value = light
-  }
-
-  watch(
-    () => colorMode.value,
-    () => {
-      if (colorMode.value === 'dark') {
-        color.value = dark
-      } else {
-        color.value = light
-      }
-    }
-  )
 })
 </script>
 
@@ -84,19 +53,16 @@ onMounted(() => {
 .topic {
   display: flex;
   flex-direction: column;
-  background-color: v-bind(color);
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
   color: var(--kungalgame-font-color-3);
+  box-shadow: var(--shadow);
   cursor: pointer;
-  box-shadow: var(--kungalgame-shadow-0);
   max-width: 300px;
   padding: 10px;
+  border: 2px solid var(--kungalgame-trans-blue-2);
+  border-radius: 10px;
 
   &:hover {
-    transition: all 0.2s;
-    background-color: var(--kungalgame-trans-white-2);
-    box-shadow: var(--kungalgame-shadow-1);
+    border: 2px solid var(--kungalgame-blue-5);
   }
 }
 

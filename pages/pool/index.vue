@@ -169,15 +169,17 @@ onBeforeUnmount(() => {
   transition: width 0.2s;
   width: 100%;
   max-width: 64rem;
-  padding: 0 10px;
   margin: 0 auto;
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 17px;
+  background-color: var(--kungalgame-trans-white-5);
 }
 
 .topic-container {
-  margin: 10px 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-auto-rows: minmax(100px, 320px);

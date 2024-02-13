@@ -104,9 +104,7 @@ onBeforeUnmount(() => {
   flex-direction: column;
 
   & > div {
-    & > div {
-      margin: 10px 0;
-    }
+    margin-bottom: 17px;
   }
 }
 

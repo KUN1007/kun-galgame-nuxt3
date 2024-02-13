@@ -226,6 +226,7 @@ onBeforeMount(() => {
   box-shadow: var(--kungalgame-shadow-0);
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
+  scrollbar-width: thin;
 }
 
 .title-scroll {
