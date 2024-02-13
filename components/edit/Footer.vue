@@ -2,6 +2,13 @@
 import { topicCategory } from './utils/category'
 import type { Category } from './utils/category'
 
+// TODO:
+const { locale } = useI18n()
+const alertInfo =
+  locale.value === 'en'
+    ? 'ATTENTION: If you are publishing game resources, it is prohibited to use links from other websites without authorization.'
+    : '注意：如果发布游戏资源，禁止盗用其他网站的链接'
+
 const { category: rewriteCategory, isTopicRewriting } =
   storeToRefs(useTempEditStore())
 const { isSaveTopic, category: editCategory } = storeToRefs(
@@ -47,6 +54,11 @@ const handleClickCategory = (kun: Category) => {
 
 <template>
   <div class="topic-group">
+    <span class="link" @click="navigateTo('/topic/280')">
+      {{ alertInfo }}
+    </span>
+    <br />
+    <br />
     <div>{{ $t('edit.categories') }}</div>
     <div class="group-btn">
       <span
@@ -65,6 +77,16 @@ const handleClickCategory = (kun: Category) => {
 </template>
 
 <style lang="scss" scoped>
+.link {
+  color: var(--kungalgame-blue-5);
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 2px solid var(--kungalgame-trans-white-9);
+
+  &:hover {
+    border-bottom: 2px solid var(--kungalgame-blue-5);
+  }
+}
 .topic-group {
   width: 100%;
   margin-top: 20px;
