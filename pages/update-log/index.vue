@@ -34,18 +34,17 @@ useHead({
 
 <style lang="scss" scoped>
 .root {
-  height: calc(100vh - 75px);
+  height: calc(100dvh - 75px);
   display: flex;
   flex-direction: column;
-  min-width: 1000px;
   min-height: 650px;
 }
 
 .container {
   height: 60vh;
-  width: 80vw;
+  width: 100%;
+  max-width: 64rem;
   max-height: 500px;
-  max-width: 900px;
   position: relative;
   margin: auto;
   background-color: var(--kungalgame-trans-white-5);

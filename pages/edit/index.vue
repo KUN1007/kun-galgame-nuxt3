@@ -16,10 +16,6 @@ useHead({
 })
 
 const { isTopicRewriting } = storeToRefs(useTempEditStore())
-const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
-const editPageWidth = computed(() => {
-  return showKUNGalgamePageWidth.value.edit + '%'
-})
 
 onBeforeRouteLeave(async (to, from, next) => {
   if (isTopicRewriting.value) {
@@ -85,8 +81,8 @@ onBeforeRouteLeave(async (to, from, next) => {
 
 .container {
   transition: all 0.2s;
-  width: v-bind(editPageWidth);
-  max-width: 1500px;
+  width: 100%;
+  max-width: 64rem;
   overflow-y: scroll;
   margin: 0 auto;
   box-shadow: var(--shadow);

@@ -59,7 +59,8 @@ const { data: logs } = await useFetch(`/api/non-moe/logs`, {
 .container {
   height: 70vh;
   min-height: 600px;
-  max-width: 1000px;
+  width: 100%;
+  max-width: 48rem;
   margin: auto;
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
@@ -95,6 +96,7 @@ const { data: logs } = await useFetch(`/api/non-moe/logs`, {
 }
 
 .article {
+  width: 100%;
   background-color: var(--kungalgame-trans-white-5);
   border-left: 3px solid var(--kungalgame-red-5);
   display: flex;

@@ -10,12 +10,6 @@ useHead({
     },
   ],
 })
-
-const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
-
-const techniquePageWidth = computed(() => {
-  return showKUNGalgamePageWidth.value.technique + '%'
-})
 </script>
 
 <template>
@@ -40,7 +34,8 @@ const techniquePageWidth = computed(() => {
   padding: 5px;
   height: 100%;
   transition: width 0.2s;
-  width: v-bind(techniquePageWidth);
+  width: 100%;
+  max-width: 64rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

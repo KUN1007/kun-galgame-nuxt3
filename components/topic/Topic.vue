@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { TopicDetail } from '~/types/api/topic'
 
-const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
 
@@ -150,10 +149,6 @@ const isScrollAtBottom = () => {
   }
 }
 
-const topicPageWidth = computed(() => {
-  return showKUNGalgamePageWidth.value.topic + '%'
-})
-
 const resetPanelStatus = () => {
   isShowCommentPanelRid.value = 0
   isShowAdvance.value = false
@@ -212,7 +207,8 @@ onBeforeMount(() => {
 
 <style lang="scss" scoped>
 .content-container {
-  width: v-bind(topicPageWidth);
+  width: 100%;
+  max-width: 64rem;
   transition: width 0.2s;
   height: calc(100vh - 75px);
   min-height: 500px;

@@ -22,12 +22,7 @@ const {
   savedPosition,
   topics,
 } = storeToRefs(useTempPoolStore())
-const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 const isLoadingComplete = ref(false)
-
-const poolPageWidth = computed(() => {
-  return showKUNGalgamePageWidth.value.pool + '%'
-})
 
 const getTopics = async () => {
   const { data } = await useFetch(`/api/pool/topic`, {
@@ -172,7 +167,8 @@ onBeforeUnmount(() => {
 
 .pool-container {
   transition: width 0.2s;
-  width: v-bind(poolPageWidth);
+  width: 100%;
+  max-width: 64rem;
   padding: 0 10px;
   margin: 0 auto;
   display: flex;

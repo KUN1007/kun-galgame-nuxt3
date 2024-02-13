@@ -25,6 +25,7 @@
   margin: 0 auto;
   width: 90%;
   display: flex;
+  max-width: 64rem;
 }
 
 .top {

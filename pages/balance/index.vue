@@ -100,7 +100,7 @@ const { data: statement } = await useFetch(`/api/balance/statement`, {
 
 <style lang="scss" scoped>
 .root {
-  height: 100vh;
+  height: calc(100dvh - 75px);
   display: flex;
   flex-direction: column;
   min-height: 800px;

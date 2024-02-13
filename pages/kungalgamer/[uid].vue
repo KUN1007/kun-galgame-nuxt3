@@ -86,8 +86,8 @@ useHead({
   width: 60%;
   height: 70%;
   min-height: 700px;
-  max-width: 1350px;
-  max-width: 1200px;
+  width: 100%;
+  max-width: 48rem;
   background-color: var(--kungalgame-trans-white-2);
   border: 1px solid var(--kungalgame-blue-5);
   box-shadow: var(--shadow);

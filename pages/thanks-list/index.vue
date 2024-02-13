@@ -36,7 +36,8 @@ useHead({
 
 .container {
   transition: width 0.2s;
-  width: 90%;
+  width: 100%;
+  max-width: 64rem;
   max-width: 1300px;
   margin: 0 auto;
   position: relative;

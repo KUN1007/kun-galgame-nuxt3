@@ -1,9 +1,4 @@
-<script setup lang="ts">
-const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
-const mainPageWidth = computed(() => {
-  return showKUNGalgamePageWidth.value.index + '%'
-})
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="main">
@@ -18,7 +13,8 @@ const mainPageWidth = computed(() => {
 .main {
   height: 100%;
   height: calc(100dvh - 75px);
-  width: v-bind(mainPageWidth);
+  width: 100%;
+  max-width: 64rem;
   transition: width 0.2s;
   display: flex;
   align-items: center;

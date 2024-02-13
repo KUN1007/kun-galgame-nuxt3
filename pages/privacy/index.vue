@@ -102,7 +102,8 @@ useHead({
 }
 
 .container {
-  max-width: 500px;
+  width: 100%;
+  max-width: 48rem;
   margin: auto;
   position: relative;
   background-color: var(--kungalgame-trans-white-5);

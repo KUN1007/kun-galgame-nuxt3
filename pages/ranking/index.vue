@@ -33,7 +33,8 @@ useHead({
 
 .article {
   height: 100vh;
-  width: 90%;
+  width: 100%;
+  max-width: 64rem;
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
   box-shadow: var(--kungalgame-shadow-0);

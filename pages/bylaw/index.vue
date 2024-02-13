@@ -12,11 +12,6 @@ useHead({
 })
 
 const { locale } = useI18n()
-
-const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
-const bylawPageWidth = computed(() => {
-  return showKUNGalgamePageWidth.value.bylaw + '%'
-})
 </script>
 
 <template>
@@ -43,7 +38,8 @@ const bylawPageWidth = computed(() => {
   margin: 0 auto;
   padding: 10px;
   transition: width 0.2s;
-  width: v-bind(bylawPageWidth);
+  width: 100%;
+  max-width: 64rem;
   max-width: 1300px;
   height: 100%;
   background-color: var(--kungalgame-trans-white-5);

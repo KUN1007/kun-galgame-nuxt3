@@ -12,11 +12,6 @@ useHead({
 })
 
 const { locale } = useI18n()
-
-const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
-const kungalgamePageWidth = computed(() => {
-  return showKUNGalgamePageWidth.value.kungalgame + '%'
-})
 </script>
 
 <template>
@@ -38,7 +33,8 @@ const kungalgamePageWidth = computed(() => {
   border-radius: 7px;
   height: calc(100dvh - 75px);
   transition: width 0.2s;
-  width: v-bind(kungalgamePageWidth);
+  width: 100%;
+  max-width: 64rem;
   margin: auto;
   display: flex;
 }
