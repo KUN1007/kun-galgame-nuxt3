@@ -6,10 +6,8 @@ import type { LoginRequestData, LoginResponseData } from '~/types/api/user'
 
 const login = async (event: H3Event) => {
   const { name, password }: LoginRequestData = await readBody(event)
-  const ip =
-    event.node.req.headers['x-forwarded-for'] ||
-    event.node.req.headers['x-real-ip'] ||
-    ''
+  const ip = getRemoteIp(event)
+
   if (
     !(isValidName(name) || isValidEmail(name)) ||
     !isValidPassword(password)

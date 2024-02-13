@@ -14,10 +14,7 @@ const registerController = async (event: H3Event) => {
   const { name, email, password, code }: RegisterRequestData =
     await readBody(event)
 
-  const ip =
-    event.node.req.headers['x-forwarded-for'] ||
-    event.node.req.headers['x-real-ip'] ||
-    ''
+  const ip = getRemoteIp(event)
 
   if (
     !isValidEmail(email) ||
