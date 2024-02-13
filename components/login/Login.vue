@@ -27,6 +27,7 @@ const handleLogin = async () => {
 
   const { data } = await useFetch('/api/user/login', {
     method: 'POST',
+    headers: useRequestHeaders(['x-forwarded-for', 'x-real-ip', 'user-agent']),
     body: loginForm,
     watch: false,
     ...kungalgameResponseHandler,
