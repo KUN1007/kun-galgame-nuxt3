@@ -5,7 +5,7 @@ export const useTempPoolStore = defineStore({
   persist: false,
   state: (): PoolStoreTemp => ({
     page: 1,
-    limit: 10,
+    limit: 12,
     sortField: 'time',
     sortOrder: 'desc',
 
@@ -17,7 +17,7 @@ export const useTempPoolStore = defineStore({
   actions: {
     resetPageStatus() {
       this.page = 1
-      this.limit = 10
+      this.limit = 12
       this.topics = []
       this.savedPosition = 0
     },
