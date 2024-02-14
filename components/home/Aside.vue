@@ -60,6 +60,7 @@ watch(
   flex-shrink: 0;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   text-align: center;
   font-size: 15px;
   color: var(--kungalgame-white);
@@ -80,9 +81,9 @@ watch(
 }
 
 .item-active {
-  display: flex;
+  display: grid;
+  grid-template-rows: auto 1fr;
   flex-grow: 1;
-  flex-direction: column;
 }
 
 .item {

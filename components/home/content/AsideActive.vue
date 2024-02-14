@@ -38,9 +38,11 @@ const props = defineProps<{
 
   a {
     font-weight: bold;
+    text-wrap: nowrap;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    overflow: hidden;
     height: 100%;
     width: 100%;
     color: var(--kungalgame-font-color-2);
