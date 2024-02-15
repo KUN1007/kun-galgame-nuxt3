@@ -5,6 +5,7 @@ import type { TopicComment } from '~/types/api/comment'
 const { name } = storeToRefs(useKUNGalgameUserStore())
 const { tid, rid, toUid, toUsername, content, isShowCommentPanelRid } =
   storeToRefs(useTempCommentStore())
+const isPublishing = ref(false)
 
 const emits = defineEmits<{
   getCommentEmits: [newComment: TopicComment]
@@ -29,12 +30,19 @@ const handlePublishComment = async () => {
     return
   }
 
+  if (isPublishing.value) {
+    return
+  } else {
+    isPublishing.value = true
+    useMessage('Publishing...', '正在发布...', 'info')
+  }
   const { data } = await useFetch(`/api/topic/${tid.value}/comment`, {
     method: 'POST',
     body: requestData,
     watch: false,
     ...kungalgameResponseHandler,
   })
+  isPublishing.value = false
 
   if (data.value) {
     emits('getCommentEmits', data.value)
@@ -114,10 +122,11 @@ const handleCloseCommentPanel = () => {
 
     &:nth-child(3) {
       cursor: pointer;
-      color: var(--kungalgame-blue-4);
+      color: var(--kungalgame-blue-5);
+      border-bottom: 2px solid var(--kungalgame-trans-white-9);
 
       &:hover {
-        text-decoration: underline;
+        border-bottom: 2px solid var(--kungalgame-blue-5);
       }
     }
   }
@@ -130,15 +139,14 @@ const handleCloseCommentPanel = () => {
 
   button {
     cursor: pointer;
-    transition: all 0.2s;
-    color: var(--kungalgame-blue-4);
-    padding: 2px 7px;
-    border: 1px solid var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
+    padding: 5px 10px;
+    border: 1px solid var(--kungalgame-blue-5);
     border-radius: 5px;
-    background-color: var(--kungalgame-trans-white-5);
+    background-color: var(--kungalgame-trans-white-9);
 
     &:hover {
-      background-color: var(--kungalgame-blue-4);
+      background-color: var(--kungalgame-blue-5);
       color: var(--kungalgame-white);
     }
 
@@ -157,10 +165,14 @@ const handleCloseCommentPanel = () => {
     flex: 1;
     margin-bottom: 20px;
     width: 100%;
-    border: 1px solid var(--kungalgame-blue-4);
+    border: 1px solid var(--kungalgame-blue-5);
     background-color: var(--kungalgame-trans-white-9);
     border-radius: 5px;
     padding: 5px;
+
+    &::placeholder {
+      color: var(--kungalgame-font-color-1);
+    }
 
     &:focus {
       border: 1px solid var(--kungalgame-pink-3);

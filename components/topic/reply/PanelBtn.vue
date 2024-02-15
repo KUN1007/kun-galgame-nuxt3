@@ -10,6 +10,7 @@ const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
 const { isSaveReply, replyDraft } = storeToRefs(
   usePersistKUNGalgameReplyStore()
 )
+const isPublishing = ref(false)
 
 const { isEdit, tempReplyRewrite } = storeToRefs(useTempReplyStore())
 
@@ -33,12 +34,19 @@ const handlePublish = async () => {
   }
   useTempReplyStore().resetPageStatus()
 
+  if (isPublishing.value) {
+    return
+  } else {
+    isPublishing.value = true
+    useMessage('Publishing...', '正在发布...', 'info')
+  }
   const { data } = await useFetch(`/api/topic/${replyDraft.value.tid}/reply`, {
     method: 'POST',
     body: requestData,
     watch: false,
     ...kungalgameResponseHandler,
   })
+  isPublishing.value = false
 
   if (data.value) {
     useTempReplyStore().tempReply = data.value
@@ -75,12 +83,19 @@ const handleRewrite = async () => {
     return
   }
 
+  if (isPublishing.value) {
+    return
+  } else {
+    isPublishing.value = true
+    useMessage('Publishing...', '正在发布...', 'info')
+  }
   const { data } = await useFetch(`/api/topic/${replyDraft.value.tid}/reply`, {
     method: 'PUT',
     body: requestData,
     watch: false,
     ...kungalgameResponseHandler,
   })
+  isPublishing.value = false
 
   if (data.value) {
     useMessage('Reply rewrite successfully', '回复重新编辑成功', 'success')

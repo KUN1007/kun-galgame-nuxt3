@@ -21,6 +21,7 @@ const { textCount, title, content, tags, category, isSaveTopic } = storeToRefs(
   useKUNGalgameEditStore()
 )
 const messageStore = useTempMessageStore()
+const isPublishing = ref(false)
 
 const handlePublish = async () => {
   const requestData: EditCreateTopicRequestData = {
@@ -39,12 +40,19 @@ const handlePublish = async () => {
     return
   }
 
+  if (isPublishing.value) {
+    return
+  } else {
+    isPublishing.value = true
+    useMessage('Publishing...', '正在发布...', 'info')
+  }
   const { data } = await useFetch('/api/topic/create', {
     method: 'POST',
     body: requestData,
     watch: false,
     ...kungalgameResponseHandler,
   })
+  isPublishing.value = false
 
   if (data.value) {
     const tid = data.value
@@ -72,12 +80,19 @@ const handleRewrite = async () => {
     return
   }
 
+  if (isPublishing.value) {
+    return
+  } else {
+    isPublishing.value = true
+    useMessage('Publishing...', '正在发布...', 'info')
+  }
   const { data } = await useFetch(`/api/topic/${tid.value}`, {
     method: 'PUT',
     body: requestData,
     watch: false,
     ...kungalgameResponseHandler,
   })
+  isPublishing.value = false
 
   if (data.value) {
     router.push(`/topic/${tid.value}`)
@@ -94,7 +109,12 @@ const handleSave = () => {
 
 <template>
   <div class="btn-container">
-    <button v-if="!isTopicRewriting" class="confirm-btn" @click="handlePublish">
+    <button
+      v-if="!isTopicRewriting"
+      class="confirm-btn"
+      @click="handlePublish"
+      :disabled="isPublishing"
+    >
       {{ $t('edit.publish') }}
     </button>
 
