@@ -82,9 +82,9 @@ const handleShowMore = () => {
             <span class="icon-item">
               <Icon :name="kun.icon"></Icon>
             </span>
-            <NuxtLink :to="localePath(kun.router)">
+            <NuxtLinkLocale :to="kun.router">
               {{ $t(`header.hamburger.${kun.name}`) }}
-            </NuxtLink>
+            </NuxtLinkLocale>
           </p>
         </div>
 

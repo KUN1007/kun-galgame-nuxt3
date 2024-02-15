@@ -9,18 +9,16 @@ const { data } = await useFetch('/api/user/comments', {
   watch: false,
   ...kungalgameResponseHandler,
 })
-
-const localePath = useLocalePath()
 </script>
 
 <template>
   <div class="comment" v-if="data">
     <div class="item" v-for="(comment, index) in data" :key="index">
-      <NuxtLink :to="localePath(`/topic/${comment.tid}`)">
+      <NuxtLinkLocale :to="`/topic/${comment.tid}`">
         <div class="title">
           {{ comment.content }}
         </div>
-      </NuxtLink>
+      </NuxtLinkLocale>
     </div>
   </div>
 </template>

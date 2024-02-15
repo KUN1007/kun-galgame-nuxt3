@@ -6,8 +6,6 @@ const props = defineProps<{
   logs: NonMoeLog[]
 }>()
 
-const localePath = useLocalePath()
-
 const logs = computed(() => props.logs)
 </script>
 
@@ -15,9 +13,9 @@ const logs = computed(() => props.logs)
   <div class="log" v-for="(kun, index) in logs" :key="index">
     <div class="kungalgamer">
       @
-      <NuxtLink :to="localePath(`/kungalgamer/${kun.uid}/info`)">
+      <NuxtLinkLocale :to="`/kungalgamer/${kun.uid}/info`">
         {{ kun.name }}
-      </NuxtLink>
+      </NuxtLinkLocale>
     </div>
 
     <div class="reason" v-html="kun.description"></div>

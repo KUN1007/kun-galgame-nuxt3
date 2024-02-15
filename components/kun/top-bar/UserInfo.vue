@@ -4,7 +4,6 @@ const { showKUNGalgameMessageBox, messageStatus } = storeToRefs(
   useTempSettingStore()
 )
 
-const localePath = useLocalePath()
 const router = useRouter()
 const container = ref<HTMLElement>()
 const isShowMessageDot = computed(() => {
@@ -63,9 +62,9 @@ onMounted(() => {
 
       <div class="func">
         <span>
-          <NuxtLink :to="localePath(`/kungalgamer/${uid}/info`)">
+          <NuxtLinkLocale :to="`/kungalgamer/${uid}/info`">
             {{ $t('header.user.profile') }}
-          </NuxtLink>
+          </NuxtLinkLocale>
         </span>
 
         <span @click="handleClickMessage">

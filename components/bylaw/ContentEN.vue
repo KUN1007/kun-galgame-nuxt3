@@ -1,6 +1,4 @@
-<script setup lang="ts">
-const localePath = useLocalePath()
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="article">
@@ -11,7 +9,7 @@ const localePath = useLocalePath()
         is to make the forum's operation more transparent. It's not about rules;
         we
         <span>
-          <NuxtLink :to="localePath('/kungalgame')">have no rules</NuxtLink>
+          <NuxtLinkLocale to="/kungalgame">have no rules</NuxtLinkLocale>
         </span>
       </p>
     </div>

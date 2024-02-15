@@ -2,7 +2,6 @@
 import type { TypeToGet, HomeNavTopic } from '~/types/api/home'
 
 const { locale } = useI18n()
-const localePath = useLocalePath()
 
 const { typeToGet } = storeToRefs(usePersistKUNGalgameHomeStore())
 const topics = ref<HomeNavTopic[]>()
@@ -58,7 +57,7 @@ const handleClickIcon = async (icon: TypeToGet) => {
     </div>
 
     <div class="content" v-if="topics" v-for="kun in topics">
-      <NuxtLink :to="localePath(`/topic/${kun.tid}`)">
+      <NuxtLinkLocale :to="`/topic/${kun.tid}`">
         <div class="topic">
           <div class="name">{{ kun.title }}</div>
           <div class="hot" v-if="typeToGet === 'popularity'">
@@ -71,7 +70,7 @@ const handleClickIcon = async (icon: TypeToGet) => {
             <span>{{ formatTimeDifference(kun.time, locale) }}</span>
           </div>
         </div>
-      </NuxtLink>
+      </NuxtLinkLocale>
     </div>
   </div>
 </template>

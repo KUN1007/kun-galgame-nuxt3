@@ -26,8 +26,8 @@ export const onResponse = async (context: KunOnResponseContext) => {
       7777
     )
 
-    const localePath = useLocalePath()
-    navigateTo(localePath('/login'))
+    const nuxt = useNuxtApp()
+    navigateTo(nuxt.$localePath('/login'))
     return
   }
 

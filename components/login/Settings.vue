@@ -1,6 +1,4 @@
-<script setup lang="ts">
-const localePath = useLocalePath()
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="settings">
@@ -28,9 +26,9 @@ const localePath = useLocalePath()
     </span>
 
     <span class="home">
-      <NuxtLink :to="localePath('/')">
+      <NuxtLinkLocale to="/">
         <Icon class="icon" name="line-md:home-md-twotone" />
-      </NuxtLink>
+      </NuxtLinkLocale>
     </span>
   </div>
 </template>

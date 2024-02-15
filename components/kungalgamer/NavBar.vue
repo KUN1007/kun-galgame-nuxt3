@@ -7,7 +7,6 @@ const props = defineProps<{
   uid: number
 }>()
 
-const localePath = useLocalePath()
 const route = useRoute()
 const currentPageUid = computed(() => props.uid)
 
@@ -42,13 +41,11 @@ const activeClass = (currentPageUid: number, routeName: string) => {
       :class="activeClass(currentPageUid, kun.router)"
       v-show="isShowNavItem(kun.permission)"
     >
-      <NuxtLink
-        :to="
-          localePath(`/kungalgamer/${currentPageUid}/${kun.router}`.toString())
-        "
+      <NuxtLinkLocale
+        :to="`/kungalgamer/${currentPageUid}/${kun.router}`.toString()"
       >
         <span>{{ $t(`user.nav.${kun.name}`) }}</span>
-      </NuxtLink>
+      </NuxtLinkLocale>
     </div>
   </div>
 </template>

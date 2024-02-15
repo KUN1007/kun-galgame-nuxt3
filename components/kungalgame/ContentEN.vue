@@ -1,6 +1,4 @@
-<script setup lang="ts">
-const localePath = useLocalePath()
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="article">
@@ -128,7 +126,7 @@ const localePath = useLocalePath()
       from numerous individuals and inspiration from various websites. Please
       refer to the
       <span class="skip">
-        <NuxtLink :to="localePath('/thanks-list')">thanks list</NuxtLink>
+        <NuxtLinkLocale to="/thanks-list">thanks list</NuxtLinkLocale>
       </span>
       for more details.
     </p>
@@ -205,7 +203,7 @@ const localePath = useLocalePath()
         we focus primarily on visual novels, and all topics on the homepage are
         related to visual novels. Other topics are placed in
         <span class="skip">
-          <NuxtLink :to="localePath('/pool')">Topic Pool</NuxtLink>
+          <NuxtLinkLocale to="/pool">Topic Pool</NuxtLinkLocale>
         </span>
       </strong>
     </p>
@@ -258,7 +256,7 @@ const localePath = useLocalePath()
       >. The amount of virtual currency depends on appreciation from others. If
       you would like to support us, you can do so
       <span class="skip">
-        <NuxtLink :to="localePath('/donate')">here</NuxtLink>
+        <NuxtLinkLocale to="/donate">here</NuxtLinkLocale>
       </span>
       .
     </p>
@@ -286,7 +284,7 @@ const localePath = useLocalePath()
       Why offer suggestions? Because these are not "Moe" behaviors. If you'd
       like to learn more about posting etiquette, please see
       <span class="skip">
-        <NuxtLink :to="localePath('/non-moe')"> the Non-Moe Records </NuxtLink>
+        <NuxtLinkLocale to="/non-moe"> the Non-Moe Records </NuxtLinkLocale>
       </span>
       .
     </p>

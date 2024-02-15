@@ -1,20 +1,18 @@
 <script setup lang="ts">
 import { asideBarItem } from './asideItem'
-
-const localePath = useLocalePath()
 </script>
 
 <template>
   <div class="aside">
     <span class="skip" v-for="kun in asideBarItem" :key="kun.index">
-      <NuxtLink
+      <NuxtLinkLocale
         style="color: var(--kungalgame-blue-5)"
-        :to="localePath({ path: kun.router })"
+        :to="{ path: kun.router }"
         :aria-label="kun.label"
       >
         <Icon class="icon" :name="kun.icon"></Icon>
         {{ $t(`kungalgame.${kun.name}`) }}
-      </NuxtLink>
+      </NuxtLinkLocale>
     </span>
   </div>
 </template>

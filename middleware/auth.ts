@@ -1,7 +1,7 @@
 export default defineNuxtRouteMiddleware((to, from) => {
   const { moemoeAccessToken } = useKUNGalgameUserStore()
 
-  const localePath = useLocalePath()
+  const nuxt = useNuxtApp()
 
   if (!moemoeAccessToken) {
     useMessage(
@@ -10,6 +10,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
       'warn',
       5000
     )
-    return navigateTo(localePath('/login'))
+    return navigateTo(nuxt.$localePath('/login'))
   }
 })

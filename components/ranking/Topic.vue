@@ -7,13 +7,12 @@ const props = defineProps<{
   topics: RankingTopics[]
 }>()
 
-const localePath = useLocalePath()
 const topics = computed(() => props.topics)
 </script>
 
 <template>
   <div class="single-topic" v-for="topic in topics" :key="topic.tid">
-    <NuxtLink :to="localePath(`/topic/${topic.tid}`)">
+    <NuxtLinkLocale :to="`/topic/${topic.tid}`">
       <div class="topic-name">
         {{ topic.title }}
       </div>
@@ -22,7 +21,7 @@ const topics = computed(() => props.topics)
         <Icon :name="topicIconMap[props.field]" />
         <span>{{ Math.ceil(topic.field) }}</span>
       </div>
-    </NuxtLink>
+    </NuxtLinkLocale>
   </div>
 </template>
 

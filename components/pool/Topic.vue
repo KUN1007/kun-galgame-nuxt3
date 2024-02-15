@@ -6,7 +6,6 @@ const props = defineProps<{
 }>()
 
 const { locale } = useI18n()
-const localePath = useLocalePath()
 
 const topic = computed(() => props.topic)
 const { formattedENDate, formattedCNDate } = formatTimeI18n(topic.value.time)
@@ -25,7 +24,7 @@ const loliTime = computed(() => {
 </script>
 
 <template>
-  <NuxtLink class="topic" :to="localePath(`/topic/${topic.tid}`)">
+  <NuxtLinkLocale class="topic" :to="`/topic/${topic.tid}`">
     <div class="title">
       {{ topic.title }}
     </div>
@@ -48,7 +47,7 @@ const loliTime = computed(() => {
       <Icon name="eos-icons:hourglass" class="hourglass" />
       <div>{{ loliTime }}</div>
     </div>
-  </NuxtLink>
+  </NuxtLinkLocale>
 </template>
 
 <style lang="scss" scoped>

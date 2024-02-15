@@ -1,6 +1,4 @@
-<script setup lang="ts">
-const localePath = useLocalePath()
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="article">
@@ -10,7 +8,7 @@ const localePath = useLocalePath()
         tips: 这是执行条例，✔
         代表已经落实。目的是让论坛的运行机制更加透明，并不是规矩，我们
         <span>
-          <NuxtLink :to="localePath('/kungalgame')">没有规矩</NuxtLink>
+          <NuxtLinkLocale to="/kungalgame">没有规矩</NuxtLinkLocale>
         </span>
       </p>
     </div>

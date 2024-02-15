@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { asideItem } from '../utils/asideItem'
-
-const localePath = useLocalePath()
 </script>
 
 <template>
@@ -14,12 +12,12 @@ const localePath = useLocalePath()
         position: 'right',
       }"
     >
-      <NuxtLink
+      <NuxtLinkLocale
         :aria-label="$t(`mainPage.asideActive.${kun.name}`)"
-        :to="localePath({ path: kun.router })"
+        :to="{ path: kun.router }"
       >
         <Icon :name="kun.icon" />
-      </NuxtLink>
+      </NuxtLinkLocale>
     </span>
   </div>
 </template>

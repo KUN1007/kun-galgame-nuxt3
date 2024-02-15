@@ -1,6 +1,4 @@
-<script setup lang="ts">
-const localePath = useLocalePath()
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="article">
@@ -125,7 +123,7 @@ const localePath = useLocalePath()
       除此之外，鲲 Galgame
       的建设还受到了大量人员的支持，以及诸多网站的启发，请看
       <span class="skip">
-        <NuxtLink :to="localePath('/thanks-list')">感谢名单</NuxtLink>
+        <NuxtLinkLocale to="/thanks-list">感谢名单</NuxtLinkLocale>
       </span>
     </p>
 
@@ -181,7 +179,7 @@ const localePath = useLocalePath()
       </strong>
       ，其它话题全部位于
       <span class="skip">
-        <NuxtLink :to="localePath('/pool')">话题池</NuxtLink>
+        <NuxtLinkLocale to="/pool">话题池</NuxtLinkLocale>
       </span>
       中
     </p>
@@ -212,7 +210,7 @@ const localePath = useLocalePath()
     <p>
       字面意思，任何人永远不会为网站的任何虚拟货币（萌萌点）花钱，虚拟货币的数量取决于别人对你的赞赏，我们认为运营不起一个网站只能说明我们的经济有问题，直接关站即可，当然，我们提供
       <span class="skip">
-        <NuxtLink :to="localePath('/donate')">赞助渠道</NuxtLink>
+        <NuxtLinkLocale to="/donate">赞助渠道</NuxtLinkLocale>
       </span>
     </p>
     <h2 id="stipulate">论坛规定</h2>
@@ -235,7 +233,7 @@ const localePath = useLocalePath()
       为什么要建议，当然是因为这些不萌啦，如果还想了解更多关于发帖的礼仪，请查看
       《
       <span class="skip">
-        <NuxtLink :to="localePath('/non-moe')">不萌记录</NuxtLink>
+        <NuxtLinkLocale to="/non-moe">不萌记录</NuxtLinkLocale>
       </span>
       》
     </p>

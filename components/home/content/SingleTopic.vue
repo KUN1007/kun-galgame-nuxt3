@@ -5,16 +5,14 @@ const props = defineProps<{
   topic: HomeTopic
 }>()
 
-const localePath = useLocalePath()
-
 const topic = computed(() => props.topic)
 </script>
 
 <template>
   <div class="container">
-    <NuxtLink :to="localePath(`/topic/${topic.tid}`)">
+    <NuxtLinkLocale :to="`/topic/${topic.tid}`">
       <HomeContentTopicPart :topic="topic" />
-    </NuxtLink>
+    </NuxtLinkLocale>
   </div>
 </template>
 

@@ -102,13 +102,9 @@ const handleDeleteMessage = async (mid: number) => {
       <div class="content" v-html="getMessageI18n(locale, msg)"></div>
 
       <div class="bottom">
-        <NuxtLink
-          v-if="msg.tid"
-          class="link"
-          :to="localePath(`/topic/${msg.tid}`)"
-        >
+        <NuxtLinkLocale v-if="msg.tid" class="link" :to="`/topic/${msg.tid}`">
           {{ $t('header.message.link') }}
-        </NuxtLink>
+        </NuxtLinkLocale>
         <span
           class="more-btn"
           :class="isShowMoreOperation(msg.mid) ? 'more-btn-active' : ''"
@@ -126,9 +122,7 @@ const handleDeleteMessage = async (mid: number) => {
           {{ handleGetMessageDetail(msg) }}
         </div>
 
-        <span
-          @click="navigateTo(localePath(`/kungalgamer/${msg.senderUid}/info`))"
-        >
+        <span @click="navigateTo(`/kungalgamer/${msg.senderUid}/info`)">
           {{ `${$t('header.message.goto')} ${msg.senderName}` }}
         </span>
         <span v-if="msg.status === 'unread'" @click="handleMarkAsRead(msg.mid)">

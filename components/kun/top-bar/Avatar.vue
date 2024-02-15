@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import 'animate.css'
 
-const localePath = useLocalePath()
-
 const KUNGalgameUserInfo = defineAsyncComponent(() => import('./UserInfo.vue'))
 
 const { isShowSearch } = storeToRefs(useTempHomeStore())
@@ -42,9 +40,9 @@ const { showKUNGalgamePanel, showKUNGalgameUserPanel, messageStatus } =
     </div>
 
     <div class="login" v-if="!name">
-      <NuxtLink :to="localePath('/login')">
+      <NuxtLinkLocale to="/login">
         {{ $t('login.login.loginTitle') }}
-      </NuxtLink>
+      </NuxtLinkLocale>
     </div>
 
     <KUNGalgameUserInfo
