@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 useHead({
   title: t('seo.kungalgame.title'),
@@ -10,8 +10,6 @@ useHead({
     },
   ],
 })
-
-const { locale } = useI18n()
 </script>
 
 <template>
@@ -19,9 +17,9 @@ const { locale } = useI18n()
     <KungalgameAside class="aside" />
 
     <div class="content">
-      <KungalgameContentEN v-if="locale === 'en'" />
+      <KungalgameContentEN v-if="locale === 'en-us'" />
 
-      <KungalgameContentCN v-if="locale === 'zh'" />
+      <KungalgameContentCN v-if="locale === 'zh-cn'" />
 
       <KunFooter style="padding-bottom: 20px" />
     </div>

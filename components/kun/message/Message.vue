@@ -9,7 +9,6 @@ const props = defineProps<{
 }>()
 
 const { locale } = useI18n()
-const localePath = useLocalePath()
 
 const activeMessage = ref<number[]>([])
 const messageMap = reactive(new Map<number, string | null>())

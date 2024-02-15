@@ -6,7 +6,7 @@ import type { Category } from './utils/category'
 const localePath = useLocalePath()
 const { locale } = useI18n()
 const alertInfo =
-  locale.value === 'en'
+  locale.value === 'en-us'
     ? 'ATTENTION: If you are publishing game resources, it is prohibited to use links from other websites without authorization.'
     : '注意：如果发布游戏资源，禁止盗用其他网站的链接'
 

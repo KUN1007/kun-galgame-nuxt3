@@ -3,15 +3,15 @@ const props = defineProps<{
   time: number
 }>()
 
-const { locale, setLocale } = useI18n()
+const { locale } = useI18n()
 const { formattedENDate, formattedCNDate } = formatTimeI18n(props.time)
 
 const loliTime = computed(() => {
-  if (locale.value === 'en') {
+  if (locale.value === 'en-us') {
     return formattedENDate
   }
 
-  if (locale.value === 'zh') {
+  if (locale.value === 'zh-cn') {
     return formattedCNDate
   }
 

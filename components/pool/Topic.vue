@@ -11,11 +11,11 @@ const topic = computed(() => props.topic)
 const { formattedENDate, formattedCNDate } = formatTimeI18n(topic.value.time)
 
 const loliTime = computed(() => {
-  if (locale.value === 'en') {
+  if (locale.value === 'en-us') {
     return formattedENDate
   }
 
-  if (locale.value === 'zh') {
+  if (locale.value === 'zh-cn') {
     return formattedCNDate
   }
 

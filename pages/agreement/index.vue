@@ -14,7 +14,7 @@ useHead({
 
 <template>
   <div class="root">
-    <div class="article" v-if="locale === 'en'">
+    <div class="article" v-if="locale === 'en-us'">
       <div class="title">User Agreement</div>
       <div class="content">
         <p>
@@ -46,7 +46,7 @@ useHead({
       </div>
     </div>
 
-    <div class="article" v-if="locale === 'zh'">
+    <div class="article" v-if="locale === 'zh-cn'">
       <div class="title">用户协议</div>
       <div class="content">
         <p>

@@ -57,18 +57,18 @@ export default defineNuxtConfig({
     langDir: './language',
     locales: [
       {
-        code: 'en',
+        code: 'en-us',
         iso: 'en-US',
         file: 'en.json',
       },
       {
-        code: 'zh',
+        code: 'zh-cn',
         iso: 'zh-CN',
         file: 'zh.json',
       },
     ],
     baseUrl: process.env.KUN_GALGAME_URL,
-    defaultLocale: 'en',
+    defaultLocale: 'en-us',
     strategy: 'prefix_except_default',
     detectBrowserLanguage: {
       useCookie: true,

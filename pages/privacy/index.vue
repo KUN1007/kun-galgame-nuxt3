@@ -17,7 +17,7 @@ useHead({
     <div class="container">
       <div class="title">{{ $t('kungalgame.privacy') }}</div>
 
-      <div class="article" v-if="locale === 'en'">
+      <div class="article" v-if="locale === 'en-us'">
         <br />
         <p>
           We will never use your personal information and will not use your
@@ -57,7 +57,7 @@ useHead({
         </div>
       </div>
 
-      <div class="article" v-if="locale === 'zh'">
+      <div class="article" v-if="locale === 'zh-cn'">
         <br />
         <p>
           我们永远不会利用你的个人信息，不会将你的个人信息用于除了本站以外的任何地方

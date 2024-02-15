@@ -8,12 +8,12 @@ const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useTempMessageStore()
 )
 const questions = ref<Question[]>([])
-questions.value = locale.value === 'en' ? questionsEN : questionsCN
+questions.value = locale.value === 'en-us' ? questionsEN : questionsCN
 
 watch(
   () => locale.value,
   () => {
-    questions.value = locale.value === 'en' ? questionsEN : questionsCN
+    questions.value = locale.value === 'en-us' ? questionsEN : questionsCN
   }
 )
 

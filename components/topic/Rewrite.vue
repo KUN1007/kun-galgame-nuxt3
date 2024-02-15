@@ -13,11 +13,11 @@ const formattedCNDate = dayjs(props.time).format('YYYY年MM月DD日-HH:mm:ss')
 const formattedENDate = dayjs(props.time).format('M / D, YYYY - h:mm:ss A')
 
 const loliTime = computed(() => {
-  if (locale.value === 'en') {
+  if (locale.value === 'en-us') {
     return formattedENDate
   }
 
-  if (locale.value === 'zh') {
+  if (locale.value === 'zh-cn') {
     return formattedCNDate
   }
 

@@ -14,7 +14,7 @@ useHead({
 const { page, limit, sortOrder } = useTempNonMoeStore()
 
 const langClass = computed(() => {
-  return locale.value === 'en' ? 'title-en' : 'title-cn'
+  return locale.value === 'en-us' ? 'title-en' : 'title-cn'
 })
 
 const { data: logs } = await useFetch(`/api/non-moe/logs`, {

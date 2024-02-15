@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 useHead({
   title: t('seo.bylaw.title'),
@@ -10,16 +10,14 @@ useHead({
     },
   ],
 })
-
-const { locale } = useI18n()
 </script>
 
 <template>
   <div class="root">
     <div class="container">
-      <BylawContentEN v-if="locale === 'en'" />
+      <BylawContentEN v-if="locale === 'en-us'" />
 
-      <BylawContentCN v-if="locale === 'zh'" />
+      <BylawContentCN v-if="locale === 'zh-cn'" />
 
       <KunFooter style="position: absolute; bottom: 2%" />
     </div>
