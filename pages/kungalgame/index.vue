@@ -49,6 +49,7 @@ const { locale } = useI18n()
   display: flex;
   flex-direction: column;
   position: relative;
+  padding: 0 30px;
 }
 
 @media (max-width: 1000px) {

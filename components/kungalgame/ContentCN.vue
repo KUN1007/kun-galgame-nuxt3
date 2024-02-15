@@ -245,7 +245,6 @@
 <style lang="scss" scoped>
 .article {
   width: 100%;
-  padding-left: 30px;
 }
 
 ul {
