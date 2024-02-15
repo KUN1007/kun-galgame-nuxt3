@@ -7,12 +7,13 @@ const props = defineProps<{
   users: RankingUsers[]
 }>()
 
+const localePath = useLocalePath()
 const users = computed(() => props.users)
 </script>
 
 <template>
   <div class="single-user" v-for="user in users" :key="user.uid">
-    <RouterLink :to="`/kungalgamer/${user.uid}/info`">
+    <NuxtLink :to="localePath(`/kungalgamer/${user.uid}/info`)">
       <div class="info">
         <span class="avatar">
           <img
@@ -28,7 +29,7 @@ const users = computed(() => props.users)
         <Icon :name="userIconMap[props.field]" />
         <span>{{ Math.ceil(user.field) }}</span>
       </div>
-    </RouterLink>
+    </NuxtLink>
   </div>
 </template>
 

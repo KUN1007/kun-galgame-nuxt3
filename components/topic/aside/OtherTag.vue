@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { TopicAside } from '~/types/api/topic'
-
 const props = defineProps<{
   tags: string[]
 }>()
 
 const tags = toRaw(props.tags)
 const route = useRoute()
+const localePath = useLocalePath()
+
 const tid = computed(() => {
   return parseInt((route.params as { tid: string }).tid)
 })
@@ -31,7 +31,7 @@ isEmpty.value = !data.value?.length
     <KunSkeletonTopicAside v-if="!data" />
 
     <div class="topic" v-for="(kun, index) in data" :key="index">
-      <RouterLink :to="`/topic/${kun.tid}`">{{ kun.title }}</RouterLink>
+      <NuxtLink :to="localePath(`/topic/${kun.tid}`)">{{ kun.title }}</NuxtLink>
     </div>
 
     <span class="empty" v-if="isEmpty">

@@ -8,28 +8,30 @@ const props = defineProps<{
   }
 }>()
 
+const localePath = useLocalePath()
+
 const user = computed(() => props.user)
 </script>
 
 <template>
   <div class="kungalgamer">
     <div class="avatar" v-if="user.avatar">
-      <RouterLink
+      <NuxtLink
         :aria-label="`KUN Visual Novel, 鲲 Galgame, User ${props.user.name}`"
-        :to="`/kungalgamer/${user.uid}/info`"
+        :to="localePath(`/kungalgamer/${user.uid}/info`)"
       >
         <img :src="user.avatar" :alt="user.name" />
-      </RouterLink>
+      </NuxtLink>
     </div>
 
     <div class="info">
       <div class="name">
-        <RouterLink
+        <NuxtLink
           :aria-label="`KUN Visual Novel, 鲲 Galgame, User ${props.user.name}`"
-          :to="`/kungalgamer/${user.uid}/info`"
+          :to="localePath(`/kungalgamer/${user.uid}/info`)"
         >
           {{ user.name }}
-        </RouterLink>
+        </NuxtLink>
       </div>
 
       <div class="moemoepoint">

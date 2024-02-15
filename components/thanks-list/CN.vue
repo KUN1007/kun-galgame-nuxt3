@@ -149,7 +149,7 @@
     <p>
       我们的网站会秉承萌萌（美好）、开源、免费的
       <span class="skip">
-        <RouterLink to="/kungalgame">建立原则</RouterLink>
+        <NuxtLink to="/kungalgame">建立原则</NuxtLink>
       </span>
       ，不断完善和更新，您可以在 github 看到我们的项目：
     </p>

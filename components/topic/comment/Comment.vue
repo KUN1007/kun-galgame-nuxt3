@@ -5,6 +5,7 @@ import type { TopicComment } from '~/types/api/comment'
 const { tid, rid, toUid, toUsername, isShowCommentPanelRid } = storeToRefs(
   useTempCommentStore()
 )
+const localePath = useLocalePath()
 
 const props = defineProps<{
   tid: number
@@ -86,23 +87,25 @@ const handleClickComment = (
         v-for="(comment, index) in commentsData"
         :key="index"
       >
-        <RouterLink
+        <NuxtLink
           v-if="comment.c_user.avatar"
-          :to="`/kungalgamer/${comment.c_user.uid}/info`"
+          :to="localePath(`/kungalgamer/${comment.c_user.uid}/info`)"
         >
           <img
             :src="comment.c_user.avatar.replace(/\.webp$/, '-100.webp')"
             alt="KUN"
           />
-        </RouterLink>
+        </NuxtLink>
 
         <div class="content">
           <div class="describe">
             <div class="name">
               {{ `${comment.c_user.name} ${$t('topic.content.comment')}` }}
-              <RouterLink :to="`/kungalgamer/${comment.to_user.uid}/info`">
+              <NuxtLink
+                :to="localePath(`/kungalgamer/${comment.to_user.uid}/info`)"
+              >
                 {{ comment.to_user.name }}
-              </RouterLink>
+              </NuxtLink>
             </div>
 
             <div class="operate">

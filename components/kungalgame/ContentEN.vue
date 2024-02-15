@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const localePath = useLocalePath()
+</script>
 
 <template>
   <div class="article">
@@ -126,7 +128,7 @@
       from numerous individuals and inspiration from various websites. Please
       refer to the
       <span class="skip">
-        <RouterLink to="/thanks-list">thanks list</RouterLink>
+        <NuxtLink :to="localePath('/thanks-list')">thanks list</NuxtLink>
       </span>
       for more details.
     </p>
@@ -203,7 +205,7 @@
         we focus primarily on visual novels, and all topics on the homepage are
         related to visual novels. Other topics are placed in
         <span class="skip">
-          <RouterLink to="/pool">Topic Pool</RouterLink>
+          <NuxtLink :to="localePath('/pool')">Topic Pool</NuxtLink>
         </span>
       </strong>
     </p>
@@ -255,7 +257,10 @@
         (Moemoepoints)</strong
       >. The amount of virtual currency depends on appreciation from others. If
       you would like to support us, you can do so
-      <span class="skip"> <RouterLink to="/donate">here</RouterLink> </span>.
+      <span class="skip">
+        <NuxtLink :to="localePath('/donate')">here</NuxtLink>
+      </span>
+      .
     </p>
     <h2 id="stipulate">Forum Guidelines</h2>
     <p>
@@ -281,8 +286,9 @@
       Why offer suggestions? Because these are not "Moe" behaviors. If you'd
       like to learn more about posting etiquette, please see
       <span class="skip">
-        <RouterLink to="/non-moe">the Non-Moe Records</RouterLink> </span
-      >.
+        <NuxtLink :to="localePath('/non-moe')"> the Non-Moe Records </NuxtLink>
+      </span>
+      .
     </p>
     <br />
     <br />

@@ -1,78 +1,112 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const localePath = useLocalePath()
+</script>
 
 <template>
   <div class="article">
-    <div class="title-0">执行条例（试行）</div>
+    <div class="title-0">Regulations (Trial)</div>
     <div class="tips">
       <p>
-        tips: 这是执行条例，✔
-        代表已经落实。目的是让论坛的运行机制更加透明，并不是规矩，我们
+        Tips: These are trial regulations, ✔ indicating implementation. The aim
+        is to make the forum's operation more transparent. It's not about rules;
+        we
         <span>
-          <RouterLink to="/kungalgame">没有规矩</RouterLink>
+          <NuxtLink :to="localePath('/kungalgame')">have no rules</NuxtLink>
         </span>
       </p>
     </div>
 
     <div class="moemoepoint">
-      <div class="title-1">萌萌点</div>
+      <div class="title-1">Moemoepoints</div>
 
       <div class="gain">
-        <div class="title-2">- 获取方法</div>
+        <div class="title-2">- Acquisition Methods</div>
         <ul>
-          <li>1. 每个注册用户初始拥有 1007 萌萌点 ✔</li>
-          <li>2. 每天登录自动获得随机 1 ~ 7 萌萌点</li>
-          <li>3. 用户的话题 / 回复 / 评论被点赞，可以获得 1 萌萌点 ✔</li>
-          <li>4. 有人回复用户的话题，用户将会获得 2 点萌萌点 ✔</li>
+          <li>1. Each registered user initially has 1007 moemoepoints ✔</li>
           <li>
-            5. 有人评论用户的回复，楼主和被评论的回复人都会获得 1 萌萌点 ✔
+            2. Automatically receive random 1 ~ 7 moemoepoints upon daily login
           </li>
-          <li>6. 用户的话题 / 回复被推，将会获得 7 点萌萌点 ✔</li>
+          <li>
+            3. Users earn 1 moemoepoint when their topics/replies/comments are
+            liked ✔
+          </li>
+          <li>
+            4. If someone replies to a user's topic, the user earns 2
+            moemoepoints ✔
+          </li>
+          <li>
+            5. If someone comments on a user's reply, both the original poster
+            and the commenter receive 1 moemoepoint ✔
+          </li>
+          <li>
+            6. If a user's topic/reply is promoted, they will receive 7
+            moemoepoints ✔
+          </li>
         </ul>
       </div>
 
       <div class="deduct">
-        <div class="title-2">- 扣除方法</div>
+        <div class="title-2">- Deduction Methods</div>
         <ul>
           <li>
-            1. 用户的不萌行为，根据严重程度，将会被扣除 7, 17, 77, 177, 777
-            点萌萌点
+            1. Users engaging in non-moe behavior will have points deducted (7,
+            17, 77, 177, 777 points depending on severity)
           </li>
-          <li>2. 单个话题每被踩 10 次，若审核无误，扣除 100 萌萌点</li>
-          <li>3. 用户推话题一次将会被扣除 17 萌萌点，可以重复推话题 ✔</li>
+          <li>
+            2. If a single topic is disliked 10 times, and after verification,
+            100 moemoepoints will be deducted
+          </li>
+          <li>
+            3. Each time a user promotes a topic, they will be deducted 17
+            moemoepoints, but it can be done repeatedly ✔
+          </li>
         </ul>
       </div>
     </div>
 
     <div class="kungalgamer">
-      <div class="title-1">用户</div>
+      <div class="title-1">Users</div>
       <ul>
-        <li><strong>1. 萌萌点低于 1000 的用户将会被删除账户</strong></li>
-        <li>2. 萌萌点低于 1100 的用户无法使用“推话题”功能 ✔</li>
         <li>
-          3. 连续 “踩” 10 次将会被删除账户（我们希望少一点批评，多一点赞美）
+          <strong
+            >1. Users with less than 1000 moemoepoints will have their accounts
+            deleted</strong
+          >
+        </li>
+        <li>
+          2. Users with less than 1100 moemoepoints cannot use the "Promote
+          Topic" feature ✔
+        </li>
+        <li>
+          3. Users will be deleted if they receive 10 consecutive dislikes (We
+          hope for less criticism and more praise)
         </li>
       </ul>
     </div>
 
     <div class="topic">
-      <div class="title-1">话题</div>
+      <div class="title-1">Topics</div>
       <ul>
         <li>
-          1.
-          每个位于主页的话题处于“动态推送状态”，一旦该话题受到包括“点赞”“评论”“推话题”的影响时，该话题将会被置顶
-          ✔
+          1. Each topic on the homepage is in "Dynamic Promotion" status. Once
+          influenced by actions like "likes," "comments," or "topic promotion,"
+          it will be pinned ✔
         </li>
         <li>
-          2. 话题热度值计算公式：热度值 = 浏览数 × 0.1 评论数 × 2 + 点赞数 × 2 +
-          推话题数 × 50 – 踩 × 5 ✔
-        </li>
-        <li>3. 话题被推 10 小时内会获得“流光”样式 ✔</li>
-        <li>
-          4. 一旦单个话题“踩”的数量达到 10，该话题会被系统屏蔽，交由管理审核
+          2. Topic popularity calculation formula: Popularity = Views × 0.1 +
+          Comments × 2 + Likes × 2 + Topic Upvotes × 50 – Dislikes × 5 ✔
         </li>
         <li>
-          5. 每天晚上 12: 00 话题池会清空一轮，留下昨天话题热度值最高的 17
-          个话题，热度值相同则都被推送
+          3. Topics promoted within 10 hours will receive a "Glowing" style ✔
+        </li>
+        <li>
+          4. Once a single topic receives 10 dislikes, it will be automatically
+          blocked by the system and subject to manual review
+        </li>
+        <li>
+          5. Every night at 12:00, the topic pool will be cleared, leaving the
+          top 17 topics with the highest popularity values from the previous
+          day. If popularity values are tied, all will be promoted
         </li>
       </ul>
     </div>
