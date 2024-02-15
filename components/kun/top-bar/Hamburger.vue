@@ -3,6 +3,8 @@ import 'animate.css'
 import { hamburgerItem } from './hamburgerItem'
 import type { Hamburger } from './hamburgerItem'
 
+const localePath = useLocalePath()
+
 const { showKUNGalgameHamburger } = storeToRefs(useTempSettingStore())
 
 const startX = ref(0)
@@ -70,7 +72,7 @@ const handleShowMore = () => {
         @touchmove="handleTouchMove"
         @touchend="handleTouchEnd"
       >
-        <div class="kungalgame" @click="navigateTo('/')">
+        <div class="kungalgame" @click="navigateTo(localePath('/'))">
           <NuxtImg src="/favicon.webp" :alt="$t('head.title')" />
           <span>{{ $t('header.name') }}</span>
         </div>
@@ -80,7 +82,7 @@ const handleShowMore = () => {
             <span class="icon-item">
               <Icon :name="kun.icon"></Icon>
             </span>
-            <NuxtLink :to="kun.router">
+            <NuxtLink :to="localePath(kun.router)">
               {{ $t(`header.hamburger.${kun.name}`) }}
             </NuxtLink>
           </p>

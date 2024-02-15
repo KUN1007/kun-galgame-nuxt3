@@ -2,13 +2,17 @@
 const props = defineProps<{
   info: string
 }>()
+
+const localePath = useLocalePath()
 </script>
 
 <template>
   <div class="blank">
     <div class="container">
       <h1>{{ $t(props.info) }}</h1>
-      <button @click="navigateTo('/')">{{ $t('kungalgame.home') }}</button>
+      <button @click="navigateTo(localePath('/'))">
+        {{ $t('kungalgame.home') }}
+      </button>
     </div>
   </div>
 </template>

@@ -5,6 +5,7 @@ import 'animate.css'
 const Hamburger = defineAsyncComponent(() => import('./Hamburger.vue'))
 const MessageBox = defineAsyncComponent(() => import('../message/Box.vue'))
 
+const localePath = useLocalePath()
 const { showKUNGalgameHamburger, showKUNGalgameMessageBox, messageStatus } =
   storeToRefs(useTempSettingStore())
 const route = useRoute()
@@ -70,7 +71,7 @@ onMounted(async () => {
     </Transition>
 
     <div class="kungalgame">
-      <NuxtLink to="/">
+      <NuxtLink :to="localePath('/')">
         <NuxtImg src="/favicon.webp" alt="KUN Visual Novel | 鲲 Galgame" />
         <span>{{ $t('header.name') }}</span>
       </NuxtLink>
@@ -78,7 +79,7 @@ onMounted(async () => {
 
     <div class="top-bar">
       <span v-for="kun in topBarItem" :key="kun.index">
-        <NuxtLink :to="{ path: kun.router }">
+        <NuxtLink :to="localePath({ path: kun.router })">
           {{ $t(`header.${kun.name}`) }}
         </NuxtLink>
       </span>

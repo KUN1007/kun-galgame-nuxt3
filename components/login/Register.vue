@@ -11,6 +11,7 @@ const { checkForm, checkRegister } = checkRegisterForm.asyncData(
   useNuxtApp().$pinia
 )
 
+const localePath = useLocalePath()
 const router = useRouter()
 const isSendCode = ref(false)
 
@@ -89,13 +90,13 @@ const handleRegister = async () => {
       <span class="user-agreement">
         {{ $t('login.register.click') }}
         <div class="licence">
-          <NuxtLink to="/agreement">
+          <NuxtLink :to="localePath('/agreement')">
             <span>{{ $t('login.register.agreement') }}</span>
           </NuxtLink>
 
           {{ $t('login.register.and') }}
 
-          <NuxtLink to="/privacy">
+          <NuxtLink :to="localePath('/privacy')">
             <span>{{ $t('login.register.privacy') }}</span>
           </NuxtLink>
         </div>

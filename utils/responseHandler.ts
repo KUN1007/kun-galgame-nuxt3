@@ -25,7 +25,9 @@ export const onResponse = async (context: KunOnResponseContext) => {
       'error',
       7777
     )
-    navigateTo('/login')
+
+    const localePath = useLocalePath()
+    navigateTo(localePath('/login'))
     return
   }
 

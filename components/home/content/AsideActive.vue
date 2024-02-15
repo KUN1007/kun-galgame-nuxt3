@@ -4,12 +4,14 @@ import { asideItem } from '../utils/asideItem'
 const props = defineProps<{
   isActive: boolean
 }>()
+
+const localePath = useLocalePath()
 </script>
 
 <template>
   <div class="item" v-if="props.isActive">
     <span v-if="asideItem.length" v-for="kun in asideItem" :key="kun.index">
-      <NuxtLink :to="{ path: kun.router }">
+      <NuxtLink :to="localePath({ path: kun.router })">
         <Icon class="icon" :name="kun.icon" />
         {{ $t(`mainPage.asideActive.${kun.name}`) }}
       </NuxtLink>

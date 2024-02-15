@@ -67,8 +67,9 @@ export default defineNuxtConfig({
         file: 'zh.json',
       },
     ],
+    baseUrl: process.env.KUN_GALGAME_URL,
     defaultLocale: 'en',
-    strategy: 'no_prefix',
+    strategy: 'prefix_except_default',
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'kungalgame-language',

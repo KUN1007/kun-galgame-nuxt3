@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const localePath = useLocalePath()
+</script>
 
 <template>
-  <NuxtLink to="/" class="return">
+  <NuxtLink :to="localePath('/')" class="return">
     <Icon class="icon" name="line-md:home-md-twotone" />
     <span>{{ $t('back.home') }}</span>
   </NuxtLink>

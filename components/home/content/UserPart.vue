@@ -9,12 +9,14 @@ const props = defineProps<{
 }>()
 
 const { locale } = useI18n()
+const localePath = useLocalePath()
+
 const user = computed(() => props.user)
 const time = computed(() => props.time)
 
 const handleClickAvatar = (event: MouseEvent) => {
   event.preventDefault()
-  navigateTo(`/kungalgamer/${user.value.uid}/info`)
+  navigateTo(localePath(`/kungalgamer/${user.value.uid}/info`))
 }
 </script>
 

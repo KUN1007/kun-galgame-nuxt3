@@ -17,6 +17,8 @@ const iconMap: Record<string, string> = {
   technique: 'mingcute:tool-line',
   others: 'basil:other-1-outline',
 }
+
+const localePath = useLocalePath()
 </script>
 
 <template>
@@ -47,7 +49,7 @@ const iconMap: Record<string, string> = {
 
     <HomeContentSortTopic />
 
-    <NuxtLink to="/pool" class="more">
+    <NuxtLink :to="localePath('/pool')" class="more">
       <span>{{ $t('mainPage.header.all') }}</span>
       <Icon class="all-topic" name="line-md:chevron-triple-right" />
     </NuxtLink>

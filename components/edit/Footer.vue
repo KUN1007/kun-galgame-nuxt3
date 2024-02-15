@@ -3,6 +3,7 @@ import { topicCategory } from './utils/category'
 import type { Category } from './utils/category'
 
 // TODO:
+const localePath = useLocalePath()
 const { locale } = useI18n()
 const alertInfo =
   locale.value === 'en'
@@ -54,7 +55,7 @@ const handleClickCategory = (kun: Category) => {
 
 <template>
   <div class="topic-group">
-    <span class="link" @click="navigateTo('/topic/280')">
+    <span class="link" @click="navigateTo(localePath('/topic/280'))">
       {{ alertInfo }}
     </span>
     <br />

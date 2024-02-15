@@ -40,7 +40,6 @@ const { locale } = useI18n()
   transition: width 0.2s;
   width: 100%;
   max-width: 64rem;
-  max-width: 1300px;
   height: 100%;
   background-color: var(--kungalgame-trans-white-5);
   border-radius: 10px;

@@ -11,12 +11,14 @@ const { data } = await useFetch('/api/user/topics', {
   watch: false,
   ...kungalgameResponseHandler,
 })
+
+const localePath = useLocalePath()
 </script>
 
 <template>
   <div class="topic" v-if="tidArray.length">
     <div class="item" v-for="(topic, index) in data" :key="index">
-      <NuxtLink :to="`/topic/${topic.tid}`">
+      <NuxtLink :to="localePath(`/topic/${topic.tid}`)">
         <div class="title">
           {{ topic.title }}
         </div>

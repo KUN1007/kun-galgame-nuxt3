@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n()
+const localePath = useLocalePath()
 
 useHead({
   title: t('seo.donate.title'),
@@ -32,7 +33,9 @@ const handleClickDonate = () => {
       </p>
       <div class="btn">
         <span @click="handleClickDonate">{{ $t('donate.confirm') }}</span>
-        <span @click="navigateTo('/')">{{ $t('donate.back') }}</span>
+        <span @click="navigateTo(localePath('/'))">
+          {{ $t('donate.back') }}
+        </span>
       </div>
     </div>
 

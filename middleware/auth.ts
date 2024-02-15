@@ -1,5 +1,8 @@
 export default defineNuxtRouteMiddleware((to, from) => {
   const { moemoeAccessToken } = useKUNGalgameUserStore()
+
+  const localePath = useLocalePath()
+
   if (!moemoeAccessToken) {
     useMessage(
       'You need to login to continue your operation',
@@ -7,6 +10,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
       'warn',
       5000
     )
-    return navigateTo('/login')
+    return navigateTo(localePath('/login'))
   }
 })
