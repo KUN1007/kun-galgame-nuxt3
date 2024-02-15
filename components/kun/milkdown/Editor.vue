@@ -205,10 +205,13 @@ const editorInfo = useEditor((root) =>
 
     blockquote {
       margin: 17px 0;
-      padding: 10px;
-      font-size: 18px;
-      border-left: 4px solid var(--kungalgame-blue-4);
+      padding: 17px;
+      border-left: 5px solid var(--kungalgame-blue-5);
+      border-radius: 10px;
       background-color: var(--kungalgame-trans-blue-0);
+      color: var(--kungalgame-font-color-3);
+      font-style: oblique;
+      line-height: 2rem;
 
       p {
         margin: 0;
@@ -217,7 +220,7 @@ const editorInfo = useEditor((root) =>
 
     pre {
       margin: 17px 0;
-      border: 1px solid var(--kungalgame-blue-4);
+      border: 1px solid var(--kungalgame-blue-5);
       border-radius: 5px;
       padding: 17px;
       background-color: var(--kungalgame-trans-white-2);
@@ -233,7 +236,7 @@ const editorInfo = useEditor((root) =>
       cursor: pointer;
       font-style: oblique;
       font-weight: bold;
-      color: var(--kungalgame-blue-4);
+      color: var(--kungalgame-blue-5);
 
       &:hover {
         text-decoration: underline;
@@ -241,14 +244,14 @@ const editorInfo = useEditor((root) =>
     }
 
     table {
-      border: 1px solid var(--kungalgame-blue-4);
+      border: 1px solid var(--kungalgame-blue-5);
       border-radius: 5px;
       white-space: nowrap;
     }
 
     th,
     td {
-      border: 1px solid var(--kungalgame-blue-4);
+      border: 1px solid var(--kungalgame-blue-5);
       padding: 3px;
       text-align: left;
     }
@@ -259,7 +262,7 @@ const editorInfo = useEditor((root) =>
 
     ul li,
     ol li {
-      color: var(--kungalgame-blue-4);
+      color: var(--kungalgame-blue-5);
     }
 
     .tableWrapper {
@@ -281,7 +284,7 @@ const editorInfo = useEditor((root) =>
     margin-left: 20px;
     font-size: large;
     font-style: oblique;
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
 
     &:nth-child(1) {
       font-size: 50px;

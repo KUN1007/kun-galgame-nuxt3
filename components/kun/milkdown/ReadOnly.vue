@@ -127,10 +127,13 @@ watch(
 
     blockquote {
       margin: 17px 0;
-      padding: 10px;
-      font-size: 18px;
-      border-left: 4px solid var(--kungalgame-blue-4);
+      padding: 17px;
+      border-left: 5px solid var(--kungalgame-blue-5);
+      border-radius: 10px;
       background-color: var(--kungalgame-trans-blue-0);
+      color: var(--kungalgame-font-color-3);
+      font-style: oblique;
+      line-height: 2rem;
 
       p {
         margin: 0;
@@ -139,7 +142,7 @@ watch(
 
     pre {
       margin: 17px 0;
-      border: 1px solid var(--kungalgame-blue-4);
+      border: 1px solid var(--kungalgame-blue-5);
       border-radius: 5px;
       padding: 17px;
       background-color: var(--kungalgame-trans-white-5);
@@ -155,7 +158,7 @@ watch(
       cursor: pointer;
       font-style: oblique;
       font-weight: bold;
-      color: var(--kungalgame-blue-4);
+      color: var(--kungalgame-blue-5);
 
       &:hover {
         text-decoration: underline;
@@ -163,14 +166,14 @@ watch(
     }
 
     table {
-      border: 1px solid var(--kungalgame-blue-4);
+      border: 1px solid var(--kungalgame-blue-5);
       border-radius: 5px;
       white-space: nowrap;
     }
 
     th,
     td {
-      border: 1px solid var(--kungalgame-blue-4);
+      border: 1px solid var(--kungalgame-blue-5);
       padding: 3px;
       text-align: left;
     }
