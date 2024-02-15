@@ -56,7 +56,7 @@ const setFont = () => {
     width: 100%;
     padding-left: 5px;
     height: 25px;
-    border: 1px solid var(--kungalgame-blue-4);
+    border: 1px solid var(--kungalgame-blue-5);
     background-color: var(--kungalgame-trans-white-9);
     color: var(--kungalgame-font-color-3);
 
@@ -72,17 +72,14 @@ const setFont = () => {
     height: 25px;
     width: 70px;
     color: var(--kungalgame-font-color-3);
-    border: 1px solid var(--kungalgame-blue-4);
+    border: 1px solid var(--kungalgame-blue-5);
     border-left: none;
     background-color: var(--kungalgame-trans-white-5);
     cursor: pointer;
 
     &:hover {
-      background-color: var(--kungalgame-trans-red-1);
-
-      &:active {
-        background-color: var(--kungalgame-trans-red-3);
-      }
+      background-color: var(--kungalgame-blue-5);
+      color: var(--kungalgame-white);
     }
   }
 }

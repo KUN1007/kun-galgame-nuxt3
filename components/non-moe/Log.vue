@@ -36,7 +36,7 @@ const logs = computed(() => props.logs)
 <style lang="scss" scoped>
 .log {
   margin: 20px 40px;
-  border-bottom: 1px solid var(--kungalgame-blue-4);
+  border-bottom: 1px solid var(--kungalgame-blue-5);
 }
 
 .kungalgamer {
@@ -57,7 +57,7 @@ const logs = computed(() => props.logs)
 .reason {
   width: 100%;
   padding-left: 5px;
-  border-left: 2px solid var(--kungalgame-blue-4);
+  border-left: 2px solid var(--kungalgame-blue-5);
 }
 
 .footer {

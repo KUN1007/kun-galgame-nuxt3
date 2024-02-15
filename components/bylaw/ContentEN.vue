@@ -98,16 +98,16 @@
 }
 
 .tips {
-  border-top: 2px solid var(--kungalgame-blue-4);
+  border-top: 2px solid var(--kungalgame-blue-5);
   padding-top: 10px;
   margin-bottom: 47px;
 
   span {
     cursor: pointer;
-    border-bottom: 1px solid var(--kungalgame-blue-4);
+    border-bottom: 1px solid var(--kungalgame-blue-5);
 
     a {
-      color: var(--kungalgame-blue-4);
+      color: var(--kungalgame-blue-5);
     }
   }
 }
@@ -115,7 +115,7 @@
 .title-1 {
   font-size: 25px;
   margin: 20px 0;
-  border-left: 4px solid var(--kungalgame-blue-4);
+  border-left: 4px solid var(--kungalgame-blue-5);
   text-indent: 1em;
 }
 

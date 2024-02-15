@@ -32,7 +32,7 @@ ul {
     justify-content: center;
     align-items: center;
     font-size: 77px;
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
   }
 }
 </style>

@@ -46,7 +46,7 @@ ul {
 /* Compatibility for Firefox to hide scrollbars */
 * {
   scrollbar-width: none;
-  scrollbar-color: var(--kungalgame-blue-4) var(--kungalgame-trans-white-9);
+  scrollbar-color: var(--kungalgame-blue-5) var(--kungalgame-trans-white-9);
 }
 
 /* Ensure that button and select elements inherit the font family */
@@ -65,7 +65,7 @@ button {
   background-color: var(
     --kungalgame-blue-1
   ); /* Background color of selected text */
-  color: var(--kungalgame-blue-4); /* Text color of selected text */
+  color: var(--kungalgame-blue-5); /* Text color of selected text */
 }
 
 /* Milkdown */

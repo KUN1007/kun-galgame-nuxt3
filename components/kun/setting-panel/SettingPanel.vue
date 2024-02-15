@@ -79,7 +79,7 @@ const handelCloseSettingsPanel = () => {
   border-radius: 10px;
   display: flex;
   color: var(--kungalgame-font-color-3);
-  border: 1px solid var(--kungalgame-blue-1);
+  border: 1px solid var(--kungalgame-blue-2);
 }
 
 .container {
@@ -121,7 +121,7 @@ const handelCloseSettingsPanel = () => {
     display: flex;
     justify-content: space-between;
     margin-bottom: 17px;
-    border: 1px solid var(--kungalgame-blue-4);
+    border: 1px solid var(--kungalgame-blue-5);
 
     span {
       cursor: pointer;
@@ -130,16 +130,16 @@ const handelCloseSettingsPanel = () => {
       display: flex;
       font-size: 15px;
       justify-content: center;
-      color: var(--kungalgame-blue-4);
+      color: var(--kungalgame-blue-5);
       transition: all 0.2s;
 
       &:nth-child(1) {
-        border-right: 1px solid var(--kungalgame-blue-4);
+        border-right: 1px solid var(--kungalgame-blue-5);
       }
     }
 
     .active {
-      background-color: var(--kungalgame-blue-4);
+      background-color: var(--kungalgame-blue-5);
       color: var(--kungalgame-white);
     }
   }

@@ -22,6 +22,6 @@
 }
 
 .return:hover {
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
 }
 </style>

@@ -54,7 +54,6 @@ const handleConfirm = () => {
   margin: auto;
   padding: 20px 30px;
   background-color: var(--kungalgame-trans-white-2);
-  border: 1px solid var(--kungalgame-blue-1);
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
@@ -69,18 +68,22 @@ const handleConfirm = () => {
 .button {
   width: 70px;
   height: 30px;
-  color: var(--kungalgame-font-color-3);
   cursor: pointer;
   border-radius: 2px;
+
   &:nth-child(1) {
-    background-color: var(--kungalgame-trans-blue-1);
-    border: 1px solid var(--kungalgame-blue-4);
+    background-color: var(--kungalgame-trans-white-9);
+    border: 1px solid var(--kungalgame-blue-5);
+    color: var(--kungalgame-blue-5);
   }
+
   &:nth-child(2) {
     margin-left: 98px;
-    background-color: var(--kungalgame-trans-red-1);
+    background-color: var(--kungalgame-trans-white-9);
     border: 1px solid var(--kungalgame-red-4);
+    color: var(--kungalgame-red-5);
   }
+
   &:active {
     transform: scale(0.9);
     transition: 0.1s;

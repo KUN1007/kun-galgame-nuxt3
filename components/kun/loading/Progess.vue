@@ -10,7 +10,7 @@
   height: 4.8px;
   display: inline-block;
   position: relative;
-  background: var(--kungalgame-blue-4);
+  background: var(--kungalgame-blue-5);
   box-shadow: var(--kungalgame-shadow-0);
   box-sizing: border-box;
   animation: animFw 8s linear infinite;

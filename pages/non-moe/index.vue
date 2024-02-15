@@ -156,7 +156,7 @@ const { data: logs } = await useFetch(`/api/non-moe/logs`, {
   .article {
     height: 100%;
     border-left: none;
-    border-top: 1px solid var(--kungalgame-blue-1);
+    border-top: 1px solid var(--kungalgame-blue-2);
   }
 }
 </style>

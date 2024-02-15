@@ -135,12 +135,12 @@ const handleChangePassword = async () => {
   input {
     border: none;
     color: var(--kungalgame-font-color-3);
-    border-bottom: 1.5px solid var(--kungalgame-blue-1);
+    border-bottom: 1.5px solid var(--kungalgame-blue-2);
     background-color: var(--kungalgame-trans-white-9-white);
     transition: all 0.2s;
 
     &:focus {
-      border-bottom: 1.5px solid var(--kungalgame-blue-4);
+      border-bottom: 1.5px solid var(--kungalgame-blue-5);
     }
   }
 }
@@ -155,11 +155,11 @@ const handleChangePassword = async () => {
     width: 110px;
     height: 33px;
     padding: 7px 10px;
-    border: 1px solid var(--kungalgame-blue-4);
+    border: 1px solid var(--kungalgame-blue-5);
     border-radius: 5px;
     background-color: var(--kungalgame-trans-white-9);
     margin: 10px;
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
   }
 }
 

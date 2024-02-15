@@ -125,14 +125,14 @@ const { sortField, sortOrder, isScrollToTop } = storeToRefs(useTempPoolStore())
   cursor: pointer;
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
-  border: 2px solid var(--kungalgame-blue-4);
+  border: 2px solid var(--kungalgame-blue-5);
   color: var(--kungalgame-font-color-3);
   border-radius: 50%;
 }
 
 .icon-item {
   font-size: 22px;
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
 }
 
 .top {

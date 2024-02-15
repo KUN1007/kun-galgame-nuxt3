@@ -92,7 +92,7 @@ watch(
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(5px);
   box-shadow: var(--shadow);
-  border-top: 1px solid var(--kungalgame-blue-1);
+  border-top: 1px solid var(--kungalgame-blue-2);
   position: fixed;
   bottom: 0;
   left: 0;
@@ -158,7 +158,7 @@ watch(
   position: absolute;
   height: 5px;
   width: v-bind(progressWidth);
-  background-color: var(--kungalgame-blue-4);
+  background-color: var(--kungalgame-blue-5);
   top: 0;
   right: 0;
 }

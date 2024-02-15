@@ -69,7 +69,7 @@ const handleDeleteHistory = (historyIndex: number) => {
       cursor: pointer;
 
       &:hover {
-        color: var(--kungalgame-blue-4);
+        color: var(--kungalgame-blue-5);
       }
     }
   }
@@ -90,7 +90,7 @@ const handleDeleteHistory = (historyIndex: number) => {
   margin: 2px 0;
 
   &:hover {
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
 
     .delete {
       display: flex;

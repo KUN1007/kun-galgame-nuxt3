@@ -116,7 +116,7 @@ const handleClickForgotPassword = () => {
   color: var(--kungalgame-font-color-3);
 
   &:focus {
-    border-bottom: 1.5px solid var(--kungalgame-blue-4);
+    border-bottom: 1.5px solid var(--kungalgame-blue-5);
     transition: 0.2s linear;
   }
 }
@@ -125,7 +125,7 @@ const handleClickForgotPassword = () => {
   cursor: pointer;
   text-decoration: none;
   font-size: small;
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
   margin: 20px 0;
 }
 
@@ -141,8 +141,8 @@ const handleClickForgotPassword = () => {
   bottom: 10%;
   border-radius: 50px;
   background-color: var(--kungalgame-trans-white-5);
-  border: 1px solid var(--kungalgame-blue-4);
-  color: var(--kungalgame-blue-4);
+  border: 1px solid var(--kungalgame-blue-5);
+  color: var(--kungalgame-blue-5);
   cursor: pointer;
   font-size: 15px;
   letter-spacing: 2px;
@@ -153,7 +153,7 @@ const handleClickForgotPassword = () => {
   white-space: nowrap;
 
   &:hover {
-    background-color: var(--kungalgame-blue-4);
+    background-color: var(--kungalgame-blue-5);
     color: var(--kungalgame-white);
   }
 

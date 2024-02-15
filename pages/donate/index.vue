@@ -107,11 +107,11 @@ const handleClickDonate = () => {
 
     &:nth-child(2) {
       color: var(--kungalgame-blue-5);
-      border: 1px solid var(--kungalgame-blue-4);
+      border: 1px solid var(--kungalgame-blue-5);
       cursor: pointer;
 
       &:hover {
-        background-color: var(--kungalgame-blue-4);
+        background-color: var(--kungalgame-blue-5);
         color: var(--kungalgame-white);
       }
     }

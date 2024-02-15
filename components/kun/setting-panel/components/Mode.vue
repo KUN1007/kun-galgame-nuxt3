@@ -51,7 +51,7 @@
     color: var(--kungalgame-red-4);
   }
   span:nth-child(2) {
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
   }
   span:nth-child(3) {
     color: var(--kungalgame-purple-4);

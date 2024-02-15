@@ -43,7 +43,7 @@ const topics = computed(() => props.topics)
 
     &:hover {
       background-color: var(--kungalgame-trans-white-9);
-      border: 2px solid var(--kungalgame-blue-4);
+      border: 2px solid var(--kungalgame-blue-5);
     }
   }
 }
@@ -57,7 +57,7 @@ const topics = computed(() => props.topics)
 .detail {
   display: flex;
   align-items: center;
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
 
   span {
     color: var(--kungalgame-font-color-3);

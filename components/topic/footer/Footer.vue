@@ -209,7 +209,7 @@ const handleClickShare = () => {
 }
 
 .active {
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
 }
 
 @media (max-width: 700px) {

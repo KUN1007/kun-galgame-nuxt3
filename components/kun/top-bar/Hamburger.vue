@@ -131,7 +131,7 @@ const handleShowMore = () => {
   overflow-y: scroll;
   padding: 10px;
   background-color: var(--kungalgame-trans-white-2);
-  border-right: 1px solid var(--kungalgame-blue-1);
+  border-right: 1px solid var(--kungalgame-blue-2);
   box-shadow: var(--shadow);
   border-radius: 0 5px 5px 0;
   min-height: 100vh;
@@ -165,12 +165,12 @@ const handleShowMore = () => {
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
     margin-right: 10px;
   }
 
   a {
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
   }
 }
 

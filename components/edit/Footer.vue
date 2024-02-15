@@ -105,10 +105,10 @@ const handleClickCategory = (kun: Category) => {
   width: 177px;
   font-size: 17px;
   cursor: pointer;
-  border: 1px solid var(--kungalgame-blue-4);
+  border: 1px solid var(--kungalgame-blue-5);
   border-radius: 15px;
   background-color: var(--kungalgame-trans-white-9);
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,7 +119,7 @@ const handleClickCategory = (kun: Category) => {
 }
 
 .active {
-  background-color: var(--kungalgame-blue-4);
+  background-color: var(--kungalgame-blue-5);
   color: var(--kungalgame-white);
 }
 </style>

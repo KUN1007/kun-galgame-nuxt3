@@ -93,7 +93,7 @@ const iconMap: Record<string, string> = {
 
   &:hover {
     transition: all 0.2s;
-    background-color: var(--kungalgame-blue-4);
+    background-color: var(--kungalgame-blue-5);
     color: var(--kungalgame-white);
 
     & > span:nth-child(2) {
@@ -114,7 +114,7 @@ const iconMap: Record<string, string> = {
   align-items: center;
   font-size: 18px;
   margin-left: 7px;
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
 }
 
 .sort-submenu {
@@ -145,7 +145,7 @@ const iconMap: Record<string, string> = {
 }
 
 .icon-item {
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
   padding-right: 3px;
   font-size: 20px;
 }
@@ -154,7 +154,7 @@ const iconMap: Record<string, string> = {
   width: 100%;
   display: flex;
   cursor: default;
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
   border-radius: 0 0 5px 5px;
 
   span {
@@ -169,7 +169,7 @@ const iconMap: Record<string, string> = {
 }
 
 .active {
-  background-color: var(--kungalgame-blue-4);
+  background-color: var(--kungalgame-blue-5);
   color: var(--kungalgame-white);
 
   & > span:nth-child(2) {
@@ -187,7 +187,7 @@ const iconMap: Record<string, string> = {
 }
 
 .order-active {
-  background-color: var(--kungalgame-blue-4);
+  background-color: var(--kungalgame-blue-5);
   color: var(--kungalgame-white);
 }
 

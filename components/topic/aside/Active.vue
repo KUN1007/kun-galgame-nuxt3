@@ -93,7 +93,7 @@ const handleClickSortOrder = (sortOrder: SortOrder) => {
     width: 100%;
     display: flex;
     font-size: 20px;
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
     margin-top: 17px;
 
     span {
@@ -112,7 +112,7 @@ const handleClickSortOrder = (sortOrder: SortOrder) => {
 }
 
 .order-active {
-  background-color: var(--kungalgame-blue-4);
+  background-color: var(--kungalgame-blue-5);
   color: var(--kungalgame-white);
 }
 </style>

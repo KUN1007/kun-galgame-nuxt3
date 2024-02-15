@@ -158,7 +158,7 @@ const handleDeleteMessage = async (mid: number) => {
       }
 
       .read {
-        color: var(--kungalgame-blue-4);
+        color: var(--kungalgame-blue-5);
       }
     }
 
@@ -173,7 +173,7 @@ const handleDeleteMessage = async (mid: number) => {
     word-break: break-all;
 
     :deep(a) {
-      color: var(--kungalgame-blue-4);
+      color: var(--kungalgame-blue-5);
 
       &:hover {
         text-decoration: underline;
@@ -204,7 +204,7 @@ const handleDeleteMessage = async (mid: number) => {
   transition: transform 0.2s;
 
   &:hover {
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
   }
 }
 
@@ -228,7 +228,7 @@ const handleDeleteMessage = async (mid: number) => {
 
 .detail {
   padding: 5px;
-  border-left: 4px solid var(--kungalgame-blue-4);
+  border-left: 4px solid var(--kungalgame-blue-5);
   word-break: break-word;
 }
 

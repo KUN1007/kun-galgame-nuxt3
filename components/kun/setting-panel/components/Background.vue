@@ -114,14 +114,14 @@ const handleChangeImage = async (index: number) => {
   width: 100%;
   margin-top: 10px;
   color: var(--kungalgame-font-color-3);
-  border: 1px solid var(--kungalgame-blue-4);
+  border: 1px solid var(--kungalgame-blue-5);
   background-color: var(--kungalgame-trans-white-9);
   transition: all 0.2s;
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
 
   &:hover {
     color: var(--kungalgame-white);
-    background-color: var(--kungalgame-blue-4);
+    background-color: var(--kungalgame-blue-5);
   }
 }
 </style>

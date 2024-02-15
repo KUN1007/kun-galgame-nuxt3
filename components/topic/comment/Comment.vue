@@ -150,7 +150,7 @@ const handleClickComment = (
 
 <style lang="scss" scoped>
 .title {
-  border-top: 1px solid var(--kungalgame-blue-4);
+  border-top: 1px solid var(--kungalgame-blue-5);
   flex-shrink: 0;
   padding: 17px 0;
   color: var(--kungalgame-font-color-3);
@@ -228,7 +228,7 @@ const handleClickComment = (
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 10;
-  border-left: 3px solid var(--kungalgame-blue-4);
+  border-left: 3px solid var(--kungalgame-blue-5);
   padding-left: 10px;
 }
 </style>

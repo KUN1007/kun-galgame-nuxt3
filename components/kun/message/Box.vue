@@ -140,7 +140,7 @@ const handleTouchEnd = () => {
   right: 0;
   width: 250px;
   height: 100vh;
-  border-left: 1px solid var(--kungalgame-blue-1);
+  border-left: 1px solid var(--kungalgame-blue-2);
   border-radius: 5px 0 0 5px;
   background-color: var(--kungalgame-trans-white-2);
   color: var(--kungalgame-font-color-3);
@@ -169,7 +169,7 @@ const handleTouchEnd = () => {
     transition: transform 0.2s;
 
     &:hover {
-      color: var(--kungalgame-blue-4);
+      color: var(--kungalgame-blue-5);
     }
   }
 }

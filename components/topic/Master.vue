@@ -125,7 +125,7 @@ const loliStatus = computed(() => {
   justify-content: center;
   color: var(--kungalgame-font-color-3);
   font-size: 17px;
-  border-bottom: 1px solid var(--kungalgame-blue-4);
+  border-bottom: 1px solid var(--kungalgame-blue-5);
 }
 
 .title {
@@ -145,14 +145,14 @@ const loliStatus = computed(() => {
   display: flex;
   text-align: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--kungalgame-blue-4);
+  border-bottom: 1px solid var(--kungalgame-blue-5);
   flex-grow: 1;
 }
 
 .content-center {
   width: 100%;
   display: flex;
-  border-bottom: 1px solid var(--kungalgame-blue-4);
+  border-bottom: 1px solid var(--kungalgame-blue-5);
 }
 
 .content-bottom {
@@ -161,7 +161,7 @@ const loliStatus = computed(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--kungalgame-blue-4);
+  border-bottom: 1px solid var(--kungalgame-blue-5);
 }
 
 .status {
@@ -199,8 +199,9 @@ const loliStatus = computed(() => {
 }
 
 .active .content-container {
-  box-shadow: 0 0 0 2px var(--kungalgame-red-3);
-  background-color: var(--kungalgame-trans-red-1);
+  box-shadow: 0 0 0 2px var(--kungalgame-red-4) inset;
+  border-radius: 10px;
+  background-color: var(--kungalgame-trans-blue-0);
 }
 
 @media (max-width: 1000px) {

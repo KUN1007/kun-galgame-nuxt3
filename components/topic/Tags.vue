@@ -35,14 +35,14 @@ const props = defineProps<{
       font-size: small;
       padding: 3px 17px;
       background-color: var(--kungalgame-trans-blue-0);
-      border: 1px solid var(--kungalgame-blue-4);
+      border: 1px solid var(--kungalgame-blue-5);
       border-radius: 14px;
       overflow-y: scroll;
       cursor: pointer;
 
       &:hover {
         color: var(--kungalgame-white);
-        background-color: var(--kungalgame-blue-4);
+        background-color: var(--kungalgame-blue-5);
       }
     }
   }
@@ -51,7 +51,7 @@ const props = defineProps<{
 .tag {
   font-size: 23px;
   margin: 0 20px;
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
   flex-shrink: 0;
 }
 </style>

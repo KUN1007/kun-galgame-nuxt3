@@ -88,7 +88,7 @@ const handleClickSortOrder = () => {
 
 .title {
   font-size: 27px;
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
   height: 50px;
   display: flex;
   justify-content: center;
@@ -102,7 +102,7 @@ const handleClickSortOrder = () => {
   justify-content: space-around;
   align-items: center;
   margin-left: 10px;
-  border: 1px solid var(--kungalgame-blue-4);
+  border: 1px solid var(--kungalgame-blue-5);
   border-radius: 5px;
 }
 
@@ -134,7 +134,7 @@ const handleClickSortOrder = () => {
   justify-content: space-around;
   align-items: center;
   cursor: pointer;
-  border-left: 1px solid var(--kungalgame-blue-4);
+  border-left: 1px solid var(--kungalgame-blue-5);
 }
 
 .sort:hover .submenu {
@@ -142,7 +142,7 @@ const handleClickSortOrder = () => {
 }
 
 .icon {
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
 }
 
 .submenu {
@@ -152,7 +152,7 @@ const handleClickSortOrder = () => {
   display: none;
   flex-direction: column;
   border-radius: 5px;
-  border: 1px solid var(--kungalgame-blue-1);
+  border: 1px solid var(--kungalgame-blue-2);
   box-shadow: var(--shadow);
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(5px);
@@ -185,7 +185,7 @@ const handleClickSortOrder = () => {
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--kungalgame-blue-4);
+    background: var(--kungalgame-blue-5);
     border-radius: 2px;
   }
 

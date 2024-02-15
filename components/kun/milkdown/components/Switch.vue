@@ -66,7 +66,7 @@ label:after {
 }
 
 input:checked + label {
-  background: var(--kungalgame-blue-4);
+  background: var(--kungalgame-blue-5);
 }
 
 input:checked + label:after {

@@ -58,7 +58,7 @@ const handleBackToTop = () => {
 
     &:hover {
       transition: color 0.2s;
-      color: var(--kungalgame-blue-4);
+      color: var(--kungalgame-blue-5);
     }
 
     &:last-child {
@@ -66,7 +66,7 @@ const handleBackToTop = () => {
     }
   }
   .sort {
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
 
     &:hover {
       color: var(--kungalgame-red-4);

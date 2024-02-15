@@ -209,11 +209,11 @@
 }
 
 .skip {
-  border-bottom: 1.5px solid var(--kungalgame-blue-4);
+  border-bottom: 1.5px solid var(--kungalgame-blue-5);
   cursor: pointer;
 
   a {
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
   }
 }
 

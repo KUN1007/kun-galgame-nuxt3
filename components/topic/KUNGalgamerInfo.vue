@@ -104,7 +104,7 @@ const user = computed(() => props.user)
     justify-content: center;
     margin-top: 17px;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--kungalgame-blue-1);
+    border-bottom: 1px solid var(--kungalgame-blue-2);
   }
 
   .avatar {

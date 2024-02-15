@@ -63,7 +63,7 @@ const handleClickShowLanguage = async () => {
   align-items: center;
 
   .icon {
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
   }
 }
 

@@ -214,8 +214,8 @@ watch(
 }
 
 .bottom {
-  border-top: 1px solid var(--kungalgame-blue-4);
-  border-bottom: 1px solid var(--kungalgame-blue-4);
+  border-top: 1px solid var(--kungalgame-blue-5);
+  border-bottom: 1px solid var(--kungalgame-blue-5);
   display: flex;
   justify-content: space-between;
 }
@@ -271,8 +271,9 @@ watch(
 }
 
 .active .container {
-  box-shadow: 0 0 0 2px var(--kungalgame-red-3);
-  background-color: var(--kungalgame-trans-red-1);
+  border: 2px solid var(--kungalgame-red-4);
+  border-radius: 10px;
+  box-shadow: -3px 0 0 0 var(--kungalgame-red-4);
 }
 
 @media (max-width: 1000px) {
@@ -291,7 +292,7 @@ watch(
   .top {
     margin: 0;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--kungalgame-blue-4);
+    border-bottom: 1px solid var(--kungalgame-blue-5);
   }
 }
 </style>

@@ -103,7 +103,7 @@ onMounted(() => {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 17px solid var(--kungalgame-blue-1);
+  border-bottom: 17px solid var(--kungalgame-blue-2);
 }
 
 .kungalgamer {
@@ -112,7 +112,7 @@ onMounted(() => {
   transform: translateX(-43%);
   width: 130px;
   background-color: var(--kungalgame-white);
-  border: 1px solid var(--kungalgame-blue-1);
+  border: 1px solid var(--kungalgame-blue-2);
   border-radius: 5px;
   position: absolute;
   display: flex;

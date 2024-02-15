@@ -26,10 +26,10 @@ const data = computed(() => props.data)
 <style lang="scss" scoped>
 .log {
   margin-top: 20px;
-  border-bottom: 1px solid var(--kungalgame-blue-4);
+  border-bottom: 1px solid var(--kungalgame-blue-5);
 
   .reason {
-    border-left: 5px solid var(--kungalgame-blue-4);
+    border-left: 5px solid var(--kungalgame-blue-5);
     padding-left: 5px;
   }
 

@@ -14,7 +14,7 @@
   <KunSearch />
 
   <NuxtPwaManifest />
-  <NuxtLoadingIndicator color="var(--kungalgame-blue-4)" />
+  <NuxtLoadingIndicator color="var(--kungalgame-blue-5)" />
 
   <KunLayout>
     <NuxtPage />

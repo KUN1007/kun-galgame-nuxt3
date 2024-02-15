@@ -51,7 +51,7 @@ useHead({
   justify-content: center;
   padding: 20px;
   font-size: large;
-  background-color: var(--kungalgame-blue-4);
+  background-color: var(--kungalgame-blue-5);
   border-radius: 10px 10px 0 0;
   color: var(--kungalgame-white);
 }

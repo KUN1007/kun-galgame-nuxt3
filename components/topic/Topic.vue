@@ -241,7 +241,7 @@ onBeforeMount(() => {
   font-weight: bold;
   color: var(--kungalgame-font-color-3);
   background-color: var(--kungalgame-trans-white-5);
-  border: 1px solid var(--kungalgame-blue-4);
+  border: 1px solid var(--kungalgame-blue-5);
   border-radius: 10px;
   backdrop-filter: blur(10px);
   z-index: 1;

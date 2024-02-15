@@ -243,12 +243,12 @@ watch(
   height: 2px;
   width: 1px;
   display: flex;
-  background-color: var(--kungalgame-blue-1);
+  background-color: var(--kungalgame-blue-2);
 }
 
 .box-active {
   width: 100%;
-  background-color: var(--kungalgame-blue-4);
+  background-color: var(--kungalgame-blue-5);
 }
 
 .hint {
@@ -266,7 +266,7 @@ watch(
   flex-wrap: wrap;
 
   & > span {
-    border: 1px solid var(--kungalgame-blue-4);
+    border: 1px solid var(--kungalgame-blue-5);
     border-radius: 14px;
     margin: 5px;
     display: block;
@@ -278,7 +278,7 @@ watch(
 
     &:hover {
       color: var(--kungalgame-white);
-      background-color: var(--kungalgame-blue-4);
+      background-color: var(--kungalgame-blue-5);
     }
   }
 }

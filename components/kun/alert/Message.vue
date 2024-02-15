@@ -124,10 +124,10 @@ watch(
 }
 
 .info {
-  border: 1px solid var(--kungalgame-blue-4);
+  border: 1px solid var(--kungalgame-blue-5);
 
   .icon {
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
   }
 }
 </style>

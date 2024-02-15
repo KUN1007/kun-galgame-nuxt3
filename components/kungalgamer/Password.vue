@@ -183,7 +183,7 @@ const handleChangePassword = async () => {
   input {
     height: 25px;
     padding-left: 5px;
-    border: 1px solid var(--kungalgame-blue-4);
+    border: 1px solid var(--kungalgame-blue-5);
     background-color: var(--kungalgame-trans-white-9);
     color: var(--kungalgame-font-color-3);
 
@@ -200,14 +200,14 @@ const handleChangePassword = async () => {
   button {
     cursor: pointer;
     padding: 5px 17px;
-    border: 1px solid var(--kungalgame-blue-4);
+    border: 1px solid var(--kungalgame-blue-5);
     background-color: var(--kungalgame-trans-white-9);
     border-radius: 5px;
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
     transition: all 0.2s;
 
     &:hover {
-      background-color: var(--kungalgame-blue-4);
+      background-color: var(--kungalgame-blue-5);
       color: var(--kungalgame-white);
     }
 

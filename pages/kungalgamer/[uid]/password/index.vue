@@ -27,7 +27,7 @@ const router = useRouter()
   font-size: medium;
   cursor: pointer;
   text-decoration: none;
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
 }
 
 @media (max-width: 700px) {

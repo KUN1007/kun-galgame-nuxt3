@@ -104,7 +104,7 @@ onBeforeRouteLeave(async (to, from, next) => {
 .reference {
   a {
     font-style: oblique;
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
 
     &:hover {
       text-decoration: underline;

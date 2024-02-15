@@ -108,7 +108,7 @@ const statusName = () => {
   grid-template-columns: repeat(3, minmax(0, 2fr));
   grid-template-rows: repeat(5, minmax(0, 1fr));
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--kungalgame-blue-4);
+  border-bottom: 1px solid var(--kungalgame-blue-5);
 
   span {
     padding: 5px 7px;

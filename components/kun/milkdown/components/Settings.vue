@@ -115,7 +115,7 @@ const handelCloseSettingsMenu = () => {
 
         span {
           cursor: pointer;
-          color: var(--kungalgame-blue-4);
+          color: var(--kungalgame-blue-5);
 
           &:hover {
             text-decoration: underline;
@@ -131,7 +131,7 @@ const handelCloseSettingsMenu = () => {
 }
 
 .settings-icon-active {
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
   animation: settings 3s linear infinite;
 }
 

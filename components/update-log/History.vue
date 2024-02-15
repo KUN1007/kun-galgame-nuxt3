@@ -25,7 +25,7 @@ const { data: updateLogs } = await useFetch(`/api/update/history`, {
 
 <style lang="scss" scoped>
 .article-history {
-  border-left: 1px solid var(--kungalgame-blue-4);
+  border-left: 1px solid var(--kungalgame-blue-5);
   height: 75%;
   padding: 10px;
 }
@@ -44,7 +44,7 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-bottom: 1px solid var(--kungalgame-blue-4);
+  border-bottom: 1px solid var(--kungalgame-blue-5);
   &:first-child {
     margin-top: 10px;
   }

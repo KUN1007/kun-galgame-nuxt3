@@ -50,7 +50,7 @@
   }
 
   .dark {
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
   }
 
   .system {

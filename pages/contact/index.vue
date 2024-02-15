@@ -130,7 +130,7 @@ useHead({
   cursor: pointer;
 
   &:hover {
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
     transition: 0.2s;
   }
 }
@@ -158,7 +158,7 @@ useHead({
 .icon {
   font-size: 25px;
   height: 100%;
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
   cursor: pointer;
   text-align: center;
 

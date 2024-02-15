@@ -92,6 +92,6 @@ li {
 }
 
 .active .icon {
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
 }
 </style>

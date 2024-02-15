@@ -114,7 +114,7 @@ const handleClickRegister = () => {
   justify-content: space-around;
   align-items: center;
   color: var(--kungalgame-white);
-  background-color: var(--kungalgame-blue-4);
+  background-color: var(--kungalgame-blue-5);
   border-radius: 5px 5px 0 0;
   display: none;
 

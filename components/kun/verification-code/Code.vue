@@ -78,7 +78,7 @@ button {
   cursor: pointer;
   color: var(--kungalgame-font-color-1);
   &:hover {
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
   }
 }
 </style>

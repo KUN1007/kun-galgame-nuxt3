@@ -44,7 +44,7 @@ const { isIncome, incomeData, expenditureData, statement } = toRefs(props)
   width: 460px;
   margin: 0 10px;
   height: 300px;
-  border: 1px solid var(--kungalgame-blue-4);
+  border: 1px solid var(--kungalgame-blue-5);
   display: flex;
   flex-direction: column;
 
@@ -53,7 +53,7 @@ const { isIncome, incomeData, expenditureData, statement } = toRefs(props)
     display: flex;
     justify-content: center;
     padding: 10px 0;
-    border-bottom: 1px solid var(--kungalgame-blue-4);
+    border-bottom: 1px solid var(--kungalgame-blue-5);
     background-color: var(--kungalgame-trans-blue-0);
   }
 
@@ -71,7 +71,7 @@ const { isIncome, incomeData, expenditureData, statement } = toRefs(props)
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top: 1px solid var(--kungalgame-blue-4);
+    border-top: 1px solid var(--kungalgame-blue-5);
     background-color: var(--kungalgame-trans-blue-0);
   }
 }

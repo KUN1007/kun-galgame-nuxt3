@@ -144,7 +144,7 @@ const handleChangeAvatar = async () => {
 .avatar-upload {
   width: 150px;
   height: 150px;
-  border: 1px solid var(--kungalgame-blue-4);
+  border: 1px solid var(--kungalgame-blue-5);
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -170,7 +170,7 @@ const handleChangeAvatar = async () => {
     transition: all 0.2s;
     content: '';
     position: absolute;
-    background: var(--kungalgame-blue-4);
+    background: var(--kungalgame-blue-5);
   }
 
   .plus::before {
@@ -205,14 +205,14 @@ const handleChangeAvatar = async () => {
   button {
     cursor: pointer;
     padding: 5px 17px;
-    border: 1px solid var(--kungalgame-blue-4);
+    border: 1px solid var(--kungalgame-blue-5);
     background-color: var(--kungalgame-trans-white-9);
     border-radius: 5px;
-    color: var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
     transition: all 0.2s;
 
     &:hover {
-      background-color: var(--kungalgame-blue-4);
+      background-color: var(--kungalgame-blue-5);
       color: var(--kungalgame-white);
     }
 

@@ -96,15 +96,15 @@ const mpWidth = computed(() => {
     transform: scale(1.1);
   }
   80% {
-    box-shadow: 0px 0px 2px 7px var(--kungalgame-trans-red-2);
+    box-shadow: 0px 0px 2px 7px var(--kungalgame-trans-blue-2);
   }
 }
 
 .moemoepoint {
   height: 1px;
   flex-grow: 1;
-  border-top: 2px solid var(--kungalgame-blue-4);
-  border-bottom: 1px solid var(--kungalgame-blue-4);
+  border-top: 2px solid var(--kungalgame-blue-5);
+  border-bottom: 1px solid var(--kungalgame-blue-5);
   display: flex;
   align-items: center;
   z-index: 1;

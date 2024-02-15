@@ -28,7 +28,7 @@ const count = 7
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--kungalgame-blue-4);
+      background: var(--kungalgame-blue-5);
       margin: -4px 0 0 -4px;
     }
 

@@ -154,12 +154,12 @@ const handleSave = () => {
 }
 
 .confirm-btn {
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
   background-color: var(--kungalgame-trans-white-9);
-  border: 1px solid var(--kungalgame-blue-4);
+  border: 1px solid var(--kungalgame-blue-5);
 
   &:hover {
-    background-color: var(--kungalgame-blue-4);
+    background-color: var(--kungalgame-blue-5);
     transition: 0.2s;
   }
 }

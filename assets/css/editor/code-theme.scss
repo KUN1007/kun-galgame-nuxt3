@@ -7,7 +7,9 @@ pre[class*='language-'] {
   word-wrap: normal;
   color: var(--kungalgame-pink-0);
   background: var(--kungalgame-font-color-0);
-  font-family: Roboto Mono, monospace;
+  font-family:
+    Roboto Mono,
+    monospace;
   font-size: 1em;
   line-height: 1.5em;
 
@@ -83,11 +85,11 @@ pre[class*='language-'] {
 }
 
 .token.cdata {
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
 }
 
 .token.char {
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
 }
 
 .token.class {
@@ -137,7 +139,7 @@ pre[class*='language-'] {
 }
 
 .token.inserted {
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
 }
 
 .token.keyword {
@@ -157,7 +159,7 @@ pre[class*='language-'] {
 }
 
 .token.property {
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
 }
 
 .token.pseudo-class {

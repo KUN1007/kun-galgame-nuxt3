@@ -187,7 +187,7 @@ const handleCloseCapture = () => {
   margin: auto;
   padding: 17px;
   background-color: var(--kungalgame-trans-white-2);
-  border: 1px solid var(--kungalgame-blue-1);
+  border: 1px solid var(--kungalgame-blue-2);
   border-radius: 5px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
@@ -200,7 +200,7 @@ const handleCloseCapture = () => {
   justify-content: center;
   align-items: center;
   margin-bottom: 17px;
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
 }
 
 .question {
@@ -223,14 +223,14 @@ const handleCloseCapture = () => {
   button {
     width: 77px;
     padding: 5px;
-    color: var(--kungalgame-blue-4);
-    border: 1px solid var(--kungalgame-blue-4);
+    color: var(--kungalgame-blue-5);
+    border: 1px solid var(--kungalgame-blue-5);
     border-radius: 5px;
     background-color: var(--kungalgame-trans-white-9);
     transition: all 0.2s;
     &:hover {
       color: var(--kungalgame-white);
-      background-color: var(--kungalgame-blue-4);
+      background-color: var(--kungalgame-blue-5);
     }
   }
 }

@@ -39,7 +39,7 @@ const handleClickReply = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--kungalgame-blue-4);
+  color: var(--kungalgame-blue-5);
   cursor: pointer;
   transition: all 0.2s;
   margin-right: 10px;
