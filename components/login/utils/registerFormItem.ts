@@ -4,6 +4,7 @@ interface RegisterFormItem {
   type: string
   placeholder: string
   class: string
+  autocomplete?: string
 }
 
 export const registerFormItem: RegisterFormItem[] = [
@@ -13,6 +14,7 @@ export const registerFormItem: RegisterFormItem[] = [
     type: 'text',
     placeholder: 'name',
     class: 'input',
+    autocomplete: 'username',
   },
   {
     index: 2,
@@ -20,6 +22,7 @@ export const registerFormItem: RegisterFormItem[] = [
     type: 'email',
     placeholder: 'email',
     class: 'input',
+    autocomplete: 'email',
   },
   {
     index: 3,
@@ -27,6 +30,7 @@ export const registerFormItem: RegisterFormItem[] = [
     type: 'password',
     placeholder: 'password',
     class: 'input',
+    autocomplete: 'current-password',
   },
   {
     index: 4,

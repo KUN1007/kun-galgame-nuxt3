@@ -62,12 +62,13 @@ const handleRegister = async () => {
   <div class="register">
     <LoginSettings />
 
-    <div class="form">
+    <form class="form" @submit.prevent>
       <h2 class="title">{{ $t('login.register.title') }}</h2>
 
       <div class="container" v-for="item in registerFormItem" :key="item.index">
         <input
           v-model="registerForm[item.value]"
+          :autocomplete="item.autocomplete"
           :type="item.type"
           :placeholder="`${$t(`login.register.${item.placeholder}`)}`"
           :class="item.class"
@@ -100,7 +101,7 @@ const handleRegister = async () => {
           </NuxtLinkLocale>
         </div>
       </span>
-    </div>
+    </form>
   </div>
 </template>
 

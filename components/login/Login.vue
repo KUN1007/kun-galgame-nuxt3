@@ -46,16 +46,19 @@ const handleClickForgotPassword = () => {
 <template>
   <div class="login">
     <LoginSettings />
-    <div class="form">
+
+    <form class="form" @submit.prevent>
       <h2 class="title">{{ $t('login.login.loginTitle') }}</h2>
       <input
         v-model="loginForm.name"
+        autocomplete="username"
         type="text"
         :placeholder="`${$t('login.login.loginUsername')}`"
         class="input"
       />
       <input
         v-model="loginForm.password"
+        autocomplete="current-password"
         type="password"
         :placeholder="`${$t('login.login.loginPassword')}`"
         class="input"
@@ -72,7 +75,7 @@ const handleClickForgotPassword = () => {
       <button @click="handleLogin" class="btn" type="submit">
         {{ $t('login.login.loginTitle') }}
       </button>
-    </div>
+    </form>
   </div>
 </template>
 

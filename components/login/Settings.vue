@@ -2,29 +2,6 @@
 
 <template>
   <div class="settings">
-    <span class="light" v-show="$colorMode.preference === 'dark'">
-      <Icon
-        class="sun"
-        name="line-md:moon-filled-alt-to-sunny-filled-loop-transition"
-        @click="$colorMode.preference = 'light'"
-      />
-    </span>
-
-    <span class="dark" v-show="$colorMode.preference === 'light'">
-      <Icon
-        class="moon"
-        name="line-md:sunny-outline-to-moon-loop-transition"
-        @click="$colorMode.preference = 'dark'"
-      />
-    </span>
-
-    <span class="system" v-show="$colorMode.preference === 'system'">
-      <Icon
-        name="line-md:light-dark-loop"
-        @click="$colorMode.preference = 'light'"
-      />
-    </span>
-
     <span class="home">
       <NuxtLinkLocale to="/">
         <Icon class="icon" name="line-md:home-md-twotone" />
@@ -40,22 +17,6 @@
   position: absolute;
   font-size: 20px;
   padding: 17px;
-
-  span {
-    cursor: pointer;
-  }
-
-  .light {
-    color: var(--kungalgame-red-4);
-  }
-
-  .dark {
-    color: var(--kungalgame-blue-5);
-  }
-
-  .system {
-    color: var(--kungalgame-purple-4);
-  }
 
   .home {
     margin-left: 17px;
