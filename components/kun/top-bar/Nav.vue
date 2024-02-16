@@ -58,6 +58,7 @@ onMounted(async () => {
     <div class="hamburger">
       <Icon
         name="line-md:menu-fold-right"
+        class="icon"
         @click="showKUNGalgameHamburger = true"
       />
 
@@ -91,8 +92,11 @@ onMounted(async () => {
 .hamburger {
   display: none;
   margin-left: 20px;
-  font-size: 25px;
   cursor: pointer;
+
+  .icon {
+    font-size: 20px;
+  }
 }
 
 .nav-top {

@@ -87,20 +87,21 @@ const handleShowMore = () => {
           </p>
         </div>
 
-        <KunSettingPanelComponentsMode
-          v-if="isShowSettings"
-          style="font-size: 15px"
-        />
+        <KunSettingPanelComponentsMode v-if="isShowSettings" />
 
-        <KunSettingPanelComponentsSwitchLanguage
-          v-if="isShowSettings"
-          style="font-size: 15px"
-        />
+        <KunSettingPanelComponentsSwitchLanguage v-if="isShowSettings" />
 
         <KunSettingPanelComponentsCustomBackground
           v-if="isShowSettings"
           :is-mobile="true"
         />
+
+        <KunSettingPanelComponentsFont
+          v-if="isShowSettings"
+          style="margin-top: 17px"
+        />
+
+        <KunSettingPanelComponentsReset v-if="isShowSettings" />
 
         <span class="more" :class="isShowSettings ? 'active' : ''">
           <Icon @click="handleShowMore" name="line-md:chevron-down"></Icon>
@@ -145,7 +146,6 @@ const handleShowMore = () => {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  font-size: 17px;
 }
 
 .item {

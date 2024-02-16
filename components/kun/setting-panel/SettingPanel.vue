@@ -5,10 +5,6 @@ const emits = defineEmits<{
   close: [showKUNGalgamePanel: boolean]
 }>()
 
-const handleRecover = async () => {
-  await useKUNGalgameSettingsStore().setKUNGalgameSettingsRecover()
-}
-
 const handelCloseSettingsPanel = () => {
   emits('close', false)
 }
@@ -55,9 +51,7 @@ const handelCloseSettingsPanel = () => {
 
       <KunSettingPanelComponentsBackground />
 
-      <button class="reset" @click="handleRecover">
-        {{ $t('header.settings.recover') }}
-      </button>
+      <KunSettingPanelComponentsReset />
     </div>
 
     <KunSettingPanelComponentsLoli class="loli" />
@@ -147,23 +141,6 @@ const handelCloseSettingsPanel = () => {
   .item {
     width: 100%;
     height: 73px;
-  }
-}
-
-.reset {
-  font-size: 15px;
-  cursor: pointer;
-  margin-top: 20px;
-  color: var(--kungalgame-red-5);
-  border: 1px solid var(--kungalgame-red-5);
-  background-color: var(--kungalgame-trans-white-9);
-  width: 100%;
-  height: 30px;
-  transition: all 0.2s;
-
-  &:hover {
-    background-color: var(--kungalgame-red-5);
-    color: var(--kungalgame-white);
   }
 }
 

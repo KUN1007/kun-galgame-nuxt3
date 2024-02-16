@@ -1,9 +1,6 @@
 <script setup lang="ts">
 const { showKUNGalgameBackground } = storeToRefs(useKUNGalgameSettingsStore())
 
-const props = defineProps<{
-  isMobile?: boolean
-}>()
 const input = ref<HTMLElement>()
 
 const handleCustomBackground = () => {
@@ -32,10 +29,7 @@ const handleFileChange = async (event: Event) => {
       accept=".jpg, .jpeg, .png"
       @change="handleFileChange($event)"
     />
-    <button
-      :class="props.isMobile ? 'mobile' : ''"
-      @click="handleCustomBackground"
-    >
+    <button @click="handleCustomBackground">
       {{ $t('header.settings.custom') }}
     </button>
   </div>
@@ -54,7 +48,6 @@ const handleFileChange = async (event: Event) => {
     color: var(--kungalgame-font-color-3);
     border: 1px solid var(--kungalgame-blue-5);
     background-color: var(--kungalgame-trans-white-9);
-    transition: all 0.2s;
     color: var(--kungalgame-blue-5);
 
     &:hover {
@@ -62,9 +55,5 @@ const handleFileChange = async (event: Event) => {
       background-color: var(--kungalgame-blue-5);
     }
   }
-}
-
-.mobile {
-  border-radius: 14px;
 }
 </style>

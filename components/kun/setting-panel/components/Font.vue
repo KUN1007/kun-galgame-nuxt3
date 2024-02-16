@@ -54,8 +54,8 @@ const setFont = () => {
 
   input {
     width: 100%;
-    padding-left: 5px;
-    height: 25px;
+    padding-left: 7px;
+    height: 30px;
     border: 1px solid var(--kungalgame-blue-5);
     background-color: var(--kungalgame-trans-white-9);
     color: var(--kungalgame-font-color-3);
@@ -69,12 +69,12 @@ const setFont = () => {
   button {
     flex-shrink: 0;
     padding: 0 10px;
-    height: 25px;
+    height: 30px;
     width: 70px;
     color: var(--kungalgame-font-color-3);
     border: 1px solid var(--kungalgame-blue-5);
     border-left: none;
-    background-color: var(--kungalgame-trans-white-5);
+    background-color: var(--kungalgame-trans-white-9);
     cursor: pointer;
 
     &:hover {
