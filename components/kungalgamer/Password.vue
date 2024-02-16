@@ -101,7 +101,7 @@ const handleChangePassword = async () => {
 </script>
 
 <template>
-  <div class="email">
+  <form class="email" @submit.prevent>
     <div class="title">{{ $t('user.email.email') }}:</div>
 
     <div class="current-email">{{ $t('user.email.current') }}: {{ data }}</div>
@@ -124,25 +124,37 @@ const handleChangePassword = async () => {
         {{ $t('user.email.confirmEmail') }}
       </button>
     </div>
-  </div>
+  </form>
 
-  <div class="password">
+  <form class="password" @submit.prevent>
     <div class="title">{{ $t('user.email.pwd') }}:</div>
+    <input autocomplete="username" type="text" hidden />
 
     <div class="input">
       <label for="old-password">{{ $t('user.email.oldPwd') }}: </label>
-      <input id="old-password" v-model="input.oldPassword" type="password" />
+      <input
+        id="old-password"
+        autocomplete="current-password"
+        v-model="input.oldPassword"
+        type="password"
+      />
     </div>
 
     <div class="input">
       <label for="new-password">{{ $t('user.email.newPwd') }}: </label>
-      <input id="new-password" v-model="input.newPassword" type="password" />
+      <input
+        id="new-password"
+        autocomplete="new-password"
+        v-model="input.newPassword"
+        type="password"
+      />
     </div>
 
     <div class="input">
       <label for="repeat-password">{{ $t('user.email.rePwd') }}: </label>
       <input
         id="repeat-password"
+        autocomplete="new-password"
         v-model="input.repeatPassword"
         type="password"
       />
@@ -153,7 +165,7 @@ const handleChangePassword = async () => {
         {{ $t('user.email.confirmPwd') }}
       </button>
     </div>
-  </div>
+  </form>
 </template>
 
 <style lang="scss" scoped>
