@@ -171,24 +171,12 @@ const handleClickSortOrder = () => {
 }
 
 .container {
-  height: 100%;
+  height: calc(100dvh - 75px - 160px);
   border-top: none;
   display: flex;
   flex-direction: column;
   margin-left: 10px;
   overflow-y: scroll;
-
-  &::-webkit-scrollbar {
-    display: inline;
-    width: 4px;
-    height: 0;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--kungalgame-blue-5);
-    border-radius: 2px;
-  }
-
   scrollbar-width: thin;
 }
 

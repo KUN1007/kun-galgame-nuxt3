@@ -172,7 +172,7 @@ const handleClickSortOrder = () => {
 }
 
 .container {
-  height: 100%;
+  height: calc(100dvh - 75px - 160px);
   border-top: none;
   display: flex;
   flex-direction: column;
