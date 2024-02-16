@@ -32,7 +32,7 @@ useHead({
 }
 
 .article {
-  height: 100vh;
+  max-height: calc(100dvh - 100px);
   width: 100%;
   max-width: 64rem;
   background-color: var(--kungalgame-trans-white-5);
@@ -42,6 +42,7 @@ useHead({
   margin: auto;
   display: flex;
   padding: 10px;
+  overflow-y: scroll;
   color: var(--kungalgame-font-color-3);
 }
 
