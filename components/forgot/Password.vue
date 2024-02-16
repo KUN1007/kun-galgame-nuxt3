@@ -71,7 +71,7 @@ const handleChangePassword = async () => {
     <div class="email" v-if="flag">
       <div class="input">
         <span>{{ $t('forgot.email') }}: </span>
-        <input v-model="input.email" type="text" />
+        <input v-model="input.email" type="text" autocomplete="email" />
       </div>
 
       <div class="input">
@@ -80,16 +80,25 @@ const handleChangePassword = async () => {
       </div>
     </div>
 
-    <div class="password" v-else-if="!flag">
+    <form class="password" v-else-if="!flag" @submit.prevent>
+      <input autocomplete="username" type="text" hidden />
       <div class="input">
         <span>{{ $t('forgot.new') }}: </span>
-        <input v-model="input.newPassword" type="password" />
+        <input
+          v-model="input.newPassword"
+          autocomplete="new-password"
+          type="password"
+        />
       </div>
       <div class="input">
         <span>{{ $t('forgot.rePwd') }}: </span>
-        <input v-model="input.confirmPassword" type="password" />
+        <input
+          v-model="input.confirmPassword"
+          autocomplete="new-password"
+          type="password"
+        />
       </div>
-    </div>
+    </form>
   </Transition>
 
   <div class="btn">
