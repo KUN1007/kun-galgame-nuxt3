@@ -51,7 +51,7 @@ watch(
   height: 100%;
   display: flex;
   flex-direction: column;
-  transition: 0.5s;
+  transition: width 0.5s;
 }
 
 .nav-aside {

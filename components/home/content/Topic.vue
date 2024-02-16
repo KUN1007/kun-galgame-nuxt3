@@ -4,7 +4,7 @@ import type { TypeToGet, HomeNavTopic } from '~/types/api/home'
 const { locale } = useI18n()
 
 const { typeToGet } = storeToRefs(usePersistKUNGalgameHomeStore())
-const topics = ref<HomeNavTopic[]>()
+const topics = ref<HomeNavTopic[]>([])
 
 interface IconItem {
   name: TypeToGet
@@ -56,7 +56,7 @@ const handleClickIcon = async (icon: TypeToGet) => {
       </span>
     </div>
 
-    <div class="content" v-if="topics" v-for="kun in topics">
+    <div class="content" v-for="kun in topics">
       <NuxtLinkLocale :to="`/topic/${kun.tid}`">
         <div class="topic">
           <div class="name">{{ kun.title }}</div>
