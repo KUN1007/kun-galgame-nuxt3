@@ -13,8 +13,10 @@ export interface UserAttributes {
   upvote: number
   like: number
   dislike: number
+
   daily_topic_count: number
   daily_image_count: number
+  daily_check_in: number
 
   friend_count: number
   followed_count: number

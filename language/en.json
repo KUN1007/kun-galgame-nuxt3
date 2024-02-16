@@ -48,6 +48,7 @@
     "user":{
       "profile": "Profile Page",
       "message": "Message",
+      "check": "Daily Check",
       "logout": "Log out"
     },
     "message":{
@@ -542,6 +543,11 @@
     },
     "user": {
       "username": "Are you sure you want to change your username? This will cost you 17 moemoepoints."
+    },
+    "check": {
+      "message1": "Za~~~ko~♡ zako~♡ Smelly zako ♡. Check-in successful, you haven't received anything today...",
+      "message3": "Za~~~ko~♡. Check-in successful, you have earned {moemoepoints} moemoepoints today.",
+      "message4": "Zako~♡♡♡♡♡. Check-in successful, today's good luck has earned you {moemoepoints} points!"
     }
   }
 }

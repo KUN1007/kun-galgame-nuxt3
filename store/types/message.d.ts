@@ -1,5 +1,8 @@
 export interface MessageStore {
   showInfo: boolean
+  infoTranslateParams: string
+  durations: number
+
   showAlert: boolean
   infoMsg: string
   alertMsg: string

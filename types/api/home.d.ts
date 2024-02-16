@@ -38,6 +38,11 @@ export interface SearchTopicRequestData {
   sortOrder: SortOrder
 }
 
+export interface HomeUserStatus {
+  moemoepoints: number
+  isCheckIn: boolean
+}
+
 interface HomeUserInfo {
   uid: number
   avatar: string

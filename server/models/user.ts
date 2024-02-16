@@ -19,8 +19,10 @@ const UserSchema = new mongoose.Schema<UserAttributes>(
     upvote: { type: Number, default: 0 },
     like: { type: Number, default: 0 },
     dislike: { type: Number, default: 0 },
+
     daily_topic_count: { type: Number, default: 0 },
     daily_image_count: { type: Number, default: 0 },
+    daily_check_in: { type: Number, default: 0 },
 
     friend_count: { type: Number, default: 0 },
     followed_count: { type: Number, default: 0 },

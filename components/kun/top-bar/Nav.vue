@@ -12,7 +12,7 @@ const navItemNum = topBarItem.length
 const navItemLength = `${navItemNum}00px`
 
 watch(
-  () => useRouteName(),
+  () => useRouteName().value,
   () => {
     useTempSettingStore().reset()
   }

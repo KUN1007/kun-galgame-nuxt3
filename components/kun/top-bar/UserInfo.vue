@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import type { HomeUserStatus } from '~/types/api/home'
+
 const { uid, name, moemoepoint } = storeToRefs(useKUNGalgameUserStore())
 const { showKUNGalgameMessageBox, messageStatus } = storeToRefs(
   useTempSettingStore()
 )
+const messageStore = useTempMessageStore()
 
 const router = useRouter()
 const container = ref<HTMLElement>()
+const status = ref<HomeUserStatus>()
+
 const isShowMessageDot = computed(() => {
   if (messageStatus.value === 'new' || messageStatus.value === 'admin') {
     return true
@@ -32,6 +37,24 @@ const handleClickMessage = () => {
   }
 }
 
+const handleCheckIn = async () => {
+  const { data } = await useFetch(`/api/user/check-in`, {
+    method: 'POST',
+    watch: false,
+    ...kungalgameResponseHandler,
+  })
+
+  if (data.value) {
+    if (data.value === 0) {
+      messageStore.info('AlertInfo.check.message1')
+    } else if (data.value === 7) {
+      messageStore.info('AlertInfo.check.message2')
+    } else {
+      messageStore.info('AlertInfo.check.message3')
+    }
+  }
+}
+
 const logOut = async () => {
   const res = await useTempMessageStore().alert('AlertInfo.edit.logout', true)
   if (res) {
@@ -41,8 +64,19 @@ const logOut = async () => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
   container.value?.focus()
+
+  const { data } = await useFetch(`/api/user/status`, {
+    method: 'GET',
+    watch: false,
+    ...kungalgameResponseHandler,
+  })
+
+  if (data.value) {
+    status.value = data.value
+    moemoepoint.value = data.value.moemoepoints
+  }
 })
 </script>
 
@@ -70,6 +104,11 @@ onMounted(() => {
         <span @click="handleClickMessage">
           <text>{{ $t('header.user.message') }}</text>
           <text v-if="isShowMessageDot" class="message-dot"></text>
+        </span>
+
+        <span v-if="!status?.isCheckIn" @click="handleCheckIn">
+          <text>{{ $t('header.user.check') }}</text>
+          <text class="message-dot"></text>
         </span>
 
         <span @click="logOut">{{ $t('header.user.logout') }}</span>
