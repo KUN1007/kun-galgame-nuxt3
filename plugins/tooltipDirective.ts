@@ -26,8 +26,8 @@ const initializeTooltip = (element: HTMLElement, binding: DirectiveBinding) => {
   }
 
   const localeCookies = Cookies.get('kungalgame-language')
-  const locale = localeCookies ? localeCookies : 'en'
-  const messageI18n = locale === 'en' ? message.en : message.zh
+  const locale = localeCookies ? localeCookies : 'en-us'
+  const messageI18n = locale === 'en-us' ? message.en : message.zh
 
   element.setAttribute('tooltip', messageI18n)
   element.setAttribute('position', position)

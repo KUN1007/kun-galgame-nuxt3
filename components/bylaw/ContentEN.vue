@@ -22,7 +22,8 @@
         <ul>
           <li>1. Each registered user initially has 1007 moemoepoints ✔</li>
           <li>
-            2. Automatically receive random 1 ~ 7 moemoepoints upon daily login
+            2. Gain random 0 to 7 moemoepoints daily upon check-in, and the
+            check-in refreshes every day at midnight. ✔
           </li>
           <li>
             3. Users earn 1 moemoepoint when their topics/replies/comments are

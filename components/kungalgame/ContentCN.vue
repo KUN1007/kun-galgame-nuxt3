@@ -164,6 +164,93 @@
     <p>
       我们将要实现的最终目标是：<strong>世界上最棒的 galgame 论坛！</strong>
     </p>
+    <br />
+    <br />
+
+    <h3>开源声明</h3>
+    <p>
+      本论坛和其所有子项目遵循
+      <span class="skip">
+        <a
+          href="https://www.gnu.org/licenses/gpl-3.0.en.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GPL-3.0 协议
+        </a>
+      </span>
+      , 完全开源买免费, GitHub 项目开源地址为
+    </p>
+    <br />
+
+    <p>
+      当前版本论坛 (V2):
+      <br />
+      <br />
+      Nuxt3 + mongodb 全栈实现
+      <span class="skip">
+        <a
+          href="https://github.com/KUN1007/kun-galgame-nuxt3"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          kun-galgame-nuxt3
+        </a>
+      </span>
+    </p>
+
+    <br />
+    <br />
+
+    <p>
+      前后端分离式论坛 (V1):
+      <br />
+      <br />
+      前端 Vue3 + Vite + Typescript + Pinia 实现：
+      <span class="skip">
+        <a
+          href="https://github.com/KUN1007/kun-galgame-vue"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          kun-galgame-vue
+        </a>
+      </span>
+    </p>
+    <p>
+      后端 Koa2 + Redis + Mongoose + Mongodb 实现：
+      <span class="skip">
+        <a
+          href="https://github.com/KUN1007/kun-galgame-koa"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          kun-galgame-koa
+        </a>
+      </span>
+    </p>
+
+    <br />
+    <br />
+
+    <p>
+      论坛最初始设计稿:
+      <br />
+      <br />
+      纯 HTML + CSS 实现：
+      <span class="skip">
+        <a
+          href="https://github.com/KUN1007/kungalgame-pure-css"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          kun-galgame-pure-css
+        </a>
+      </span>
+    </p>
+    <br />
+    <br />
+    <p>不嫌弃的话，您可以给我们的 GitHub 项目点一个 star，当作对我们的支持。</p>
 
     <h2 id="principle">运营理念</h2>
     <br />

@@ -6,7 +6,7 @@
     <h2 id="introduction">Website Introduction</h2>
     <p>
       KUN Visual Novel is a collective of individuals passionate about the
-      Galgame genre. It currently consists of the following sub-websites:
+      Visual Novel genre. It currently consists of the following sub-websites:
     </p>
 
     <br />
@@ -22,7 +22,8 @@
             KUN Visual Novel Sticker Pack
           </a>
         </span>
-        (a website dedicated to collecting and creating Galgame sticker packs)
+        (a website dedicated to collecting and creating Visual Novel sticker
+        packs)
       </li>
       <li>
         <span class="skip">
@@ -142,7 +143,7 @@
     </p>
     <br />
 
-    <h3>The Significance of KUNGalgame Creation:</h3>
+    <h3>The Significance of KUN Visual Novel Creation:</h3>
 
     <ul class="list">
       <li>
@@ -184,7 +185,98 @@
     <br />
     <p>
       Our ultimate goal is to create:
-      <strong>The world's best Galgame forum!</strong>
+      <strong>The world's best Visual Novel forum!</strong>
+    </p>
+    <br />
+    <br />
+
+    <h3>Open Source Declaration</h3>
+    <p>
+      This forum and all its sub-projects adhere to the
+      <span class="skip">
+        <a
+          href="https://www.gnu.org/licenses/gpl-3.0.en.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GPL-3.0 license
+        </a>
+      </span>
+      , fully open-source and free. The GitHub project's open-source repository
+      is located at
+    </p>
+    <br />
+
+    <p>
+      Current version of the forum (V2):
+      <br />
+      <br />
+      Full-stack implementation with Nuxt3 + MongoDB
+      <span class="skip">
+        <a
+          href="https://github.com/KUN1007/kun-galgame-nuxt3"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          kun-galgame-nuxt3
+        </a>
+      </span>
+    </p>
+
+    <br />
+    <br />
+
+    <p>
+      Decoupled forum (V1):
+      <br />
+      <br />
+      Frontend implemented with Vue3 + Vite + Typescript + Pinia:
+      <span class="skip">
+        <a
+          href="https://github.com/KUN1007/kun-galgame-vue"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          kun-galgame-vue
+        </a>
+      </span>
+    </p>
+    <p>
+      Backend implemented with Koa2 + Redis + Mongoose + MongoDB:
+      <span class="skip">
+        <a
+          href="https://github.com/KUN1007/kun-galgame-koa"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          kun-galgame-koa
+        </a>
+      </span>
+    </p>
+
+    <br />
+    <br />
+
+    <p>
+      Initial design draft of the forum:
+      <br />
+      <br />
+      Implemented with pure HTML + CSS:
+      <span class="skip">
+        <a
+          href="https://github.com/KUN1007/kungalgame-pure-css"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          kun-galgame-pure-css
+        </a>
+      </span>
+    </p>
+    <br />
+    <br />
+    <p>
+      If you don't mind, you can give our GitHub projects a star as a token of
+      your support.
     </p>
 
     <h2 id="principle">Operating Principles</h2>

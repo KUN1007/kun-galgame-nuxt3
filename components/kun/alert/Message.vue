@@ -16,7 +16,7 @@ message.value = computed(() => {
   if (!locale) {
     return props.messageEN
   }
-  return locale === 'en' ? props.messageEN : props.messageCN
+  return locale === 'en-us' ? props.messageEN : props.messageCN
 }).value
 
 const messageClass = (type: string): string => {
@@ -36,7 +36,7 @@ const messageClass = (type: string): string => {
 watch(
   () => locale,
   () => {
-    message.value = locale === 'en' ? props.messageEN : props.messageCN
+    message.value = locale === 'en-us' ? props.messageEN : props.messageCN
   }
 )
 </script>
