@@ -7,7 +7,6 @@ const props = defineProps<{
   uid: number
 }>()
 
-const route = useRoute()
 const currentPageUid = computed(() => props.uid)
 
 const currentPageUserRoles = computed(() => {
@@ -26,7 +25,8 @@ const isShowNavItem = (permission: number[]) =>
   permission.includes(currentPageUserRoles.value)
 
 const activeClass = (currentPageUid: number, routeName: string) => {
-  return route.fullPath === `/kungalgamer/${currentPageUid}/${routeName}`
+  return useRouteFullPath().value ===
+    `/kungalgamer/${currentPageUid}/${routeName}`
     ? 'active'
     : ''
 }

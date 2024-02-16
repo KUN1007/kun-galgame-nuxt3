@@ -1,9 +1,8 @@
 <script setup lang="ts">
-const route = useRoute()
 const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
 
 const pageWidth = ref(0)
-const routeName = computed(() => route.name as string)
+const routeName = useRouteName()
 const isDisabled = ref(false)
 
 const pageNameArray = [

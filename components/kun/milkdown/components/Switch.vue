@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const route = useRoute()
-const routeName = computed(() => route.name as string)
+const routeName = useRouteName()
 
 const { isShowHotKeywords: isShowEditHotKeywords } = storeToRefs(
   useKUNGalgameEditStore()

@@ -21,8 +21,7 @@ const props = defineProps<{
 }>()
 const isShowMenu = computed(() => props.isShowMenu)
 
-const route = useRoute()
-const routeName = computed(() => route.name as string)
+const routeName = useRouteName()
 const valueMarkdown = ref('')
 
 const editorHeightStyle = computed(() =>

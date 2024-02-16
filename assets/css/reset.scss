@@ -63,7 +63,7 @@ button {
 /* Set the background color and text color for selected text */
 *::selection {
   background-color: var(
-    --kungalgame-blue-1
+    --kungalgame-trans-blue-2
   ); /* Background color of selected text */
   color: var(--kungalgame-blue-5); /* Text color of selected text */
 }

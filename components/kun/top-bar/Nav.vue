@@ -7,13 +7,12 @@ const MessageBox = defineAsyncComponent(() => import('../message/Box.vue'))
 
 const { showKUNGalgameHamburger, showKUNGalgameMessageBox, messageStatus } =
   storeToRefs(useTempSettingStore())
-const route = useRoute()
 
 const navItemNum = topBarItem.length
 const navItemLength = `${navItemNum}00px`
 
 watch(
-  () => route.name,
+  () => useRouteName(),
   () => {
     useTempSettingStore().reset()
   }

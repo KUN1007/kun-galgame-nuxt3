@@ -14,8 +14,8 @@ const emits = defineEmits<{
   close: [isShowSettingsMenu: boolean]
 }>()
 
-const route = useRoute()
-const routeName = computed(() => route.name as string)
+const routeName = useRouteName()
+
 const editorHeight = computed(() => {
   return routeName.value === 'Edit'
     ? `${editEditorHeight.value}px`

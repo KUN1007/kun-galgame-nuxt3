@@ -12,8 +12,7 @@ const { textCount: textCountReply } = storeToRefs(
 
 const { view } = usePluginViewContext()
 
-const route = useRoute()
-const routeName = computed(() => route.name as string)
+const routeName = useRouteName()
 
 const size = computed(() => {
   return view.value.state.doc.textContent.length

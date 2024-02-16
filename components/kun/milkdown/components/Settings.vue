@@ -2,8 +2,7 @@
 import 'animate.css'
 
 const { replyPanelWidth } = storeToRefs(usePersistKUNGalgameReplyStore())
-const route = useRoute()
-const routeName = computed(() => route.name as string)
+const routeName = useRouteName()
 const isShowSettingsMenu = ref(false)
 const settingsPanelActive = ref('')
 
