@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { HomeUserStatus } from '~/types/api/home'
-
 const { uid, name, moemoepoint } = storeToRefs(useKUNGalgameUserStore())
 const { showKUNGalgameMessageBox, messageStatus } = storeToRefs(
   useTempSettingStore()
@@ -9,7 +7,7 @@ const messageStore = useTempMessageStore()
 
 const router = useRouter()
 const container = ref<HTMLElement>()
-const status = ref<HomeUserStatus>()
+const isCheckIn = ref(true)
 
 const isShowMessageDot = computed(() => {
   if (messageStatus.value === 'new' || messageStatus.value === 'admin') {
@@ -38,19 +36,23 @@ const handleClickMessage = () => {
 }
 
 const handleCheckIn = async () => {
+  isCheckIn.value = true
+
   const { data } = await useFetch(`/api/user/check-in`, {
     method: 'POST',
     watch: false,
     ...kungalgameResponseHandler,
   })
 
-  if (data.value) {
+  if (typeof data.value === 'number') {
+    moemoepoint.value += data.value
+
     if (data.value === 0) {
-      messageStore.info('AlertInfo.check.message1')
+      messageStore.info('AlertInfo.check.message1', '', 5000)
     } else if (data.value === 7) {
-      messageStore.info('AlertInfo.check.message2')
+      messageStore.info('AlertInfo.check.message3', '7', 5000)
     } else {
-      messageStore.info('AlertInfo.check.message3')
+      messageStore.info('AlertInfo.check.message2', data.value.toString(), 5000)
     }
   }
 }
@@ -74,7 +76,7 @@ onMounted(async () => {
   })
 
   if (data.value) {
-    status.value = data.value
+    isCheckIn.value = data.value.isCheckIn
     moemoepoint.value = data.value.moemoepoints
   }
 })
@@ -106,7 +108,7 @@ onMounted(async () => {
           <text v-if="isShowMessageDot" class="message-dot"></text>
         </span>
 
-        <span v-if="!status?.isCheckIn" @click="handleCheckIn">
+        <span v-if="!isCheckIn" @click="handleCheckIn">
           <text>{{ $t('header.user.check') }}</text>
           <text class="message-dot"></text>
         </span>

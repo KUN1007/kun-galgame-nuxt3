@@ -6,11 +6,11 @@ export const useTempMessageStore = defineStore({
   persist: false,
   state: (): MessageStore => ({
     showInfo: false,
+    infoMsg: '',
     infoTranslateParams: '',
     durations: 0,
 
     showAlert: false,
-    infoMsg: '',
     alertMsg: '',
     isShowCancel: false,
     confirm: false,
@@ -20,9 +20,11 @@ export const useTempMessageStore = defineStore({
   }),
   getters: {},
   actions: {
-    info(infoMsg: string, infoTranslateParams: string, durations: number) {
+    info(infoMsg: string, infoTranslateParams?: string, durations?: number) {
       this.showInfo = true
       this.infoMsg = infoMsg
+      this.infoTranslateParams = infoTranslateParams ?? ''
+      this.durations = durations ?? 3000
     },
 
     alert(alertMsg: string, isShowCancel: boolean): Promise<boolean> {

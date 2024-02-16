@@ -2,7 +2,9 @@
 import img from './loli'
 import 'animate.css'
 
-const { showInfo, infoMsg } = storeToRefs(useTempMessageStore())
+const { showInfo, infoMsg, infoTranslateParams, durations } = storeToRefs(
+  useTempMessageStore()
+)
 
 const { loli, name } = img
 const timer = ref<NodeJS.Timeout | null>()
@@ -20,14 +22,12 @@ const handleClose = () => {
 watch(
   () => showInfo.value,
   (newValue) => {
-    const duration = 3000
-
     if (newValue) {
       const startTime = Date.now()
       timer.value = setInterval(() => {
         const currentTime = Date.now()
         const elapsedTime = currentTime - startTime
-        const elapsedPercentage = (elapsedTime / duration) * 100
+        const elapsedPercentage = (elapsedTime / durations.value) * 100
         const remainingPercentage = Math.max(1, 100 - elapsedPercentage)
         progressWidth.value = remainingPercentage + '%'
         if (remainingPercentage <= 1 && timer.value) {
@@ -71,7 +71,9 @@ watch(
           appear
         >
           <!-- A ha ha ha! You probably didn't expect that this was inspired by しゅがてん！-Sugarfull tempering- -->
-          <div class="info">{{ `「 ${$t(`${infoMsg}`)} 」` }}</div>
+          <div class="info">
+            {{ `「 ${$t(infoMsg, { params: infoTranslateParams })} 」` }}
+          </div>
         </Transition>
 
         <div class="close" @click="handleClose">

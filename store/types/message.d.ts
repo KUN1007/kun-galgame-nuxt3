@@ -1,10 +1,10 @@
 export interface MessageStore {
   showInfo: boolean
+  infoMsg: string
   infoTranslateParams: string
   durations: number
 
   showAlert: boolean
-  infoMsg: string
   alertMsg: string
   isShowCancel: boolean
   confirm: boolean

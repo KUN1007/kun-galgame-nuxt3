@@ -546,8 +546,8 @@
     },
     "check": {
       "message1": "Za~~~ko~♡ zako~♡ Smelly zako ♡. Check-in successful, you haven't received anything today...",
-      "message3": "Za~~~ko~♡. Check-in successful, you have earned {moemoepoints} moemoepoints today.",
-      "message4": "Zako~♡♡♡♡♡. Check-in successful, today's good luck has earned you {moemoepoints} points!"
+      "message2": "Za~~~ko~♡. Check-in successful, you have earned {params} moemoepoints today.",
+      "message3": "Zako~♡♡♡♡♡. Check-in successful, today's good luck has earned you {params} points!"
     }
   }
 }
