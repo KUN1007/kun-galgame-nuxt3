@@ -76,16 +76,6 @@ useHead({
     },
   ],
 })
-
-useSchemaOrg([
-  defineOrganization({
-    name: 'KUN Visual Novel',
-    url: 'https://kungal.com',
-    sameAs: ['https://github.com/KUNGalgame'],
-  }),
-  defineWebSite({ name: 'KUN Visual Novel' }),
-  defineWebPage(),
-])
 </script>
 
 <template>
