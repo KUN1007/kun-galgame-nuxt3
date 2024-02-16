@@ -137,7 +137,7 @@ const handleDeleteMessage = async (mid: number) => {
 
 <style lang="scss" scoped>
 .container {
-  height: calc(100vh - 63px);
+  height: calc(100vh - 63px + 200px);
   padding: 10px;
   overflow-y: scroll;
 }
@@ -243,6 +243,12 @@ const handleDeleteMessage = async (mid: number) => {
 
   .link {
     color: var(--kungalgame-blue-5);
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    height: calc(100vh - 63px + 100px);
   }
 }
 </style>

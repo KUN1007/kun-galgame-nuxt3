@@ -139,7 +139,7 @@ const handleTouchEnd = () => {
   top: 0;
   right: 0;
   width: 250px;
-  height: 100vh;
+  height: calc(100dvh + 217px);
   border-left: 1px solid var(--kungalgame-blue-2);
   border-radius: 5px 0 0 5px;
   background-color: var(--kungalgame-trans-white-2);
@@ -206,5 +206,11 @@ const handleTouchEnd = () => {
 .func-icon-active {
   transform: rotate(90deg);
   transition: transform 0.2s;
+}
+
+@media (max-width: 700px) {
+  .message-root {
+    height: calc(100dvh + 117px);
+  }
 }
 </style>
