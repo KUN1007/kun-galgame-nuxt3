@@ -23,6 +23,7 @@ export const useTempHomeStore = defineStore({
     },
 
     topics: [],
+    savedPosition: 0,
 
     isShowSearch: false,
   }),

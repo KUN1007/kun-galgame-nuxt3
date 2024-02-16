@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { topic, topics } = storeToRefs(useTempHomeStore())
+const { topic, topics, savedPosition } = storeToRefs(useTempHomeStore())
 
 const content = ref<HTMLElement>()
 const isLoadingComplete = ref(false)
@@ -52,12 +52,19 @@ const isScrollAtBottom = () => {
     const scrollTop = content.value.scrollTop
     const clientHeight = content.value.clientHeight
 
+    savedPosition.value = scrollTop
+
     const errorMargin = 1.007
     return Math.abs(scrollHeight - scrollTop - clientHeight) < errorMargin
   }
 }
 
 onMounted(async () => {
+  content.value?.scrollTo({
+    top: savedPosition.value,
+    left: 0,
+  })
+
   const element = content.value
   if (element) {
     element.addEventListener('scroll', scrollHandler)
