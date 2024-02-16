@@ -98,8 +98,8 @@ const handleTouchEnd = () => {
 <template>
   <div
     class="message-root"
-    @touchstart="handleTouchStart"
-    @touchmove="handleTouchMove"
+    @touchstart.passive="handleTouchStart"
+    @touchmove.passive="handleTouchMove"
     @touchend="handleTouchEnd"
   >
     <div class="title">

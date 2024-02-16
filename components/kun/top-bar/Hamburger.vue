@@ -63,13 +63,12 @@ const handleShowMore = () => {
       class="mask"
       @click.stop
       @click="showKUNGalgameHamburger = false"
-      @touchmove.self.prevent
     >
       <div
         class="container"
         @click.stop
-        @touchstart="handleTouchStart"
-        @touchmove="handleTouchMove"
+        @touchstart.passive="handleTouchStart"
+        @touchmove.passive="handleTouchMove"
         @touchend="handleTouchEnd"
       >
         <div class="kungalgame" @click="navigateTo(localePath('/'))">
