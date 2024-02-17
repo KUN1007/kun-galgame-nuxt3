@@ -32,6 +32,7 @@ const handleClear = async () => {
   }
   useKUNGalgameEditStore().resetTopicData()
   clearTopic.value = !clearTopic.value
+  useMessage('Clearing content successful', '清空内容成功', 'success')
 }
 
 const handlePublish = async () => {

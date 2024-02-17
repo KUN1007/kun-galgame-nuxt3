@@ -43,6 +43,7 @@ export interface ReplyStoreTemp {
   scrollToReplyId: number
 
   isReplyRewriting: boolean
+  isClearContent: boolean
 
   replyRequest: ReplyRequest
   replyRewrite: ReplyRewrite
@@ -51,7 +52,6 @@ export interface ReplyStoreTemp {
 }
 
 export interface ReplyStorePersist {
-  isSaveReply: boolean
   isShowHotKeywords: boolean
 
   editorHeight: number

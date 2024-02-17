@@ -6,10 +6,9 @@ import type {
 } from '~/types/api/reply'
 
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
-const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
-const { isSaveReply, replyDraft } = storeToRefs(
-  usePersistKUNGalgameReplyStore()
-)
+const { isReplyRewriting, isClearContent, replyRewrite } =
+  storeToRefs(useTempReplyStore())
+const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 const isPublishing = ref(false)
 
 const { isEdit, tempReplyRewrite } = storeToRefs(useTempReplyStore())
@@ -106,13 +105,14 @@ const handleRewrite = async () => {
   }
 }
 
-const handleSave = () => {
-  isSaveReply.value = true
-  useMessage(
-    'The draft has been saved successfully!',
-    '草稿已经保存成功',
-    'success'
-  )
+const handleClear = async () => {
+  const res = await messageStore.alert('AlertInfo.edit.clear', true)
+  if (!res) {
+    return
+  }
+  usePersistKUNGalgameReplyStore().resetReplyContent()
+  isClearContent.value = !isClearContent.value
+  useMessage('Clearing content successful', '清空内容成功', 'success')
 }
 
 const handleShowAdvance = () => {
@@ -122,6 +122,10 @@ const handleShowAdvance = () => {
 
 <template>
   <div class="btn-container">
+    <button v-if="!isReplyRewriting" class="clear-btn" @click="handleClear">
+      {{ $t('topic.panel.clear') }}
+    </button>
+
     <button class="advance-btn" @click="handleShowAdvance">
       {{ $t('topic.panel.advance') }}
     </button>
@@ -132,10 +136,6 @@ const handleShowAdvance = () => {
 
     <button v-if="isReplyRewriting" class="rewrite-btn" @click="handleRewrite">
       {{ $t('topic.panel.rewrite') }}
-    </button>
-
-    <button v-if="!isReplyRewriting" class="save-btn" @click="handleSave">
-      {{ $t('topic.panel.save') }}
     </button>
   </div>
 </template>
@@ -199,7 +199,7 @@ const handleShowAdvance = () => {
   }
 }
 
-.save-btn {
+.clear-btn {
   color: var(--kungalgame-pink-4);
   background-color: var(--kungalgame-trans-white-9);
   border: 1px solid var(--kungalgame-pink-4);

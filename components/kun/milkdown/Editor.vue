@@ -65,6 +65,7 @@ const emits = defineEmits<{
 }>()
 
 const { clearTopic } = storeToRefs(useTempEditStore())
+const { isClearContent } = storeToRefs(useTempReplyStore())
 
 const editorHight = computed(() => props.editorHight + 'px')
 const valueMarkdown = computed(() => props.valueMarkdown)
@@ -76,7 +77,7 @@ const container = ref<HTMLElement | null>(null)
 const editorContent = ref('')
 
 watch(
-  () => clearTopic.value,
+  () => [clearTopic.value, isClearContent.value],
   () => {
     editorInfo.get()?.action((ctx: Ctx) => {
       const view = ctx.get(editorViewCtx)

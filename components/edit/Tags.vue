@@ -8,12 +8,11 @@ const {
 } = storeToRefs(useTempEditStore())
 const { isShowHotKeywords: isShowEditHotKeywords, tags: editTags } =
   storeToRefs(useKUNGalgameEditStore())
-const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
-const {
-  isShowHotKeywords: isShowReplyHotKeywords,
-  isSaveReply,
-  replyDraft,
-} = storeToRefs(usePersistKUNGalgameReplyStore())
+const { isReplyRewriting, isClearContent, replyRewrite } =
+  storeToRefs(useTempReplyStore())
+const { isShowHotKeywords: isShowReplyHotKeywords, replyDraft } = storeToRefs(
+  usePersistKUNGalgameReplyStore()
+)
 
 const isShowKeywords = computed(() =>
   routeName.value === 'edit'
@@ -35,12 +34,12 @@ if (routeName.value === 'edit') {
   }
 }
 
-if (isSaveReply.value && routeName.value === 'topic-tid') {
-  selectedTags.value = replyDraft.value.tags
-}
-
-if (isReplyRewriting.value && routeName.value === 'topic-tid') {
-  selectedTags.value = replyRewrite.value.tags
+if (routeName.value === 'topic-tid') {
+  if (isReplyRewriting.value) {
+    selectedTags.value = replyRewrite.value.tags
+  } else {
+    selectedTags.value = replyDraft.value.tags
+  }
 }
 
 const getTags = async () => {
@@ -139,7 +138,7 @@ watch(
 )
 
 watch(
-  () => clearTopic.value,
+  () => [clearTopic.value, isClearContent.value],
   () => {
     selectedTags.value = []
   }

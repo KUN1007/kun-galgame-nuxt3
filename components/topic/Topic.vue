@@ -151,8 +151,8 @@ const isScrollAtBottom = () => {
 
 const resetPanelStatus = () => {
   isShowCommentPanelRid.value = 0
-  isShowAdvance.value = false
   isEdit.value = false
+  isShowAdvance.value = false
 }
 
 onBeforeRouteLeave(async (to, from, next) => {
@@ -168,6 +168,8 @@ onBeforeRouteLeave(async (to, from, next) => {
   } else {
     next()
   }
+  isEdit.value = false
+  isShowAdvance.value = false
 })
 
 onBeforeMount(() => {

@@ -7,14 +7,11 @@ const { clearTopic } = storeToRefs(useTempEditStore())
 const topicTitle = ref('')
 const maxInputLength = 40
 
-onBeforeMount(() => {
-  if (isTopicRewriting.value) {
-    topicTitle.value = rewriteTitle.value
-    return
-  }
-
+if (isTopicRewriting.value) {
+  topicTitle.value = rewriteTitle.value
+} else {
   topicTitle.value = editTitle.value
-})
+}
 
 const handleInput = () => {
   if (topicTitle.value.length > maxInputLength) {

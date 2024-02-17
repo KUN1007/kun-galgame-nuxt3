@@ -11,11 +11,9 @@ const { editorHeight: editEditorHeight, content: editContent } = storeToRefs(
   useKUNGalgameEditStore()
 )
 const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
-const {
-  editorHeight: replyEditorHeight,
-  isSaveReply,
-  replyDraft,
-} = storeToRefs(usePersistKUNGalgameReplyStore())
+const { editorHeight: replyEditorHeight, replyDraft } = storeToRefs(
+  usePersistKUNGalgameReplyStore()
+)
 
 const props = defineProps<{
   isShowMenu: boolean
@@ -37,11 +35,12 @@ if (routeName.value === 'edit') {
   }
 }
 
-if (isSaveReply.value && routeName.value === 'topic-tid') {
-  valueMarkdown.value = replyDraft.value.content
-}
-if (isReplyRewriting.value && routeName.value === 'topic-tid') {
-  valueMarkdown.value = replyRewrite.value.content
+if (routeName.value === 'topic-tid') {
+  if (isReplyRewriting.value) {
+    valueMarkdown.value = replyRewrite.value.content
+  } else {
+    valueMarkdown.value = replyDraft.value.content
+  }
 }
 
 const saveMarkdown = (editorMarkdown: string) => {
@@ -54,11 +53,12 @@ const saveMarkdown = (editorMarkdown: string) => {
       }
     }
 
-    if (!isReplyRewriting.value && routeName.value === 'topic-tid') {
-      replyDraft.value.content = editorMarkdown
-    }
-    if (isReplyRewriting.value && routeName.value === 'topic-tid') {
-      replyRewrite.value.content = editorMarkdown
+    if (routeName.value === 'topic-tid') {
+      if (isReplyRewriting.value) {
+        replyRewrite.value.content = editorMarkdown
+      } else {
+        replyDraft.value.content = editorMarkdown
+      }
     }
 
     autosaveCount.value++

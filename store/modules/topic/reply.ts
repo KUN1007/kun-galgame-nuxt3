@@ -4,7 +4,6 @@ export const usePersistKUNGalgameReplyStore = defineStore({
   id: 'KUNGalgameReply',
   persist: true,
   state: (): ReplyStorePersist => ({
-    isSaveReply: false,
     isShowHotKeywords: false,
 
     editorHeight: 200,
@@ -29,8 +28,13 @@ export const usePersistKUNGalgameReplyStore = defineStore({
       this.replyDraft.content = ''
       this.replyDraft.tags = []
       this.replyDraft.toFloor = 0
+    },
 
-      this.isSaveReply = false
+    resetReplyContent() {
+      this.textCount = 0
+
+      this.replyDraft.content = ''
+      this.replyDraft.tags = []
     },
   },
 })

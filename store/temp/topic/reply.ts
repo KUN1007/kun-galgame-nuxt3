@@ -11,6 +11,7 @@ export const useTempReplyStore = defineStore({
 
     scrollToReplyId: -1,
     isReplyRewriting: false,
+    isClearContent: false,
 
     replyRequest: {
       page: 1,
