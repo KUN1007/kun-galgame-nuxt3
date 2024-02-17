@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import 'animate.css'
 
-const { replyPanelWidth } = storeToRefs(usePersistKUNGalgameReplyStore())
-const routeName = useRouteName()
+const { autosaveCount } = storeToRefs(useTempEditStore())
 const isShowSettingsMenu = ref(false)
 const settingsPanelActive = ref('')
 
@@ -32,16 +31,9 @@ const handelCloseSettingsMenu = () => {
         <Icon name="uiw:setting-o" />
       </span>
 
-      <slot name="help" />
-      <input
-        v-if="routeName === 'topic'"
-        class="panel-width"
-        type="range"
-        min="50"
-        max="100"
-        step="1"
-        v-model="replyPanelWidth"
-      />
+      <span class="save">
+        {{ `${$t('edit.save')} × ${autosaveCount}` }}
+      </span>
     </div>
 
     <KunMilkdownComponentsMenu
@@ -72,60 +64,9 @@ const handelCloseSettingsMenu = () => {
     align-items: center;
   }
 
-  .help {
-    cursor: pointer;
-    margin-left: 20px;
-    color: var(--kungalgame-font-color-1);
-    font-size: 23px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .info {
-    padding: 3px;
-    color: var(--kungalgame-font-color-2);
-    position: absolute;
-    left: 200px;
-    transition: 0.3s background-color ease;
-    border-radius: 5px;
-    margin-bottom: 100px;
-
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      background-color: var(--kungalgame-white);
-      padding: 5px;
-      border-radius: 5px;
-
-      li {
-        &::before {
-          content: '❆ ';
-          color: var(--kungalgame-pink-3);
-        }
-
-        cursor: default;
-        font-size: 15px;
-        line-height: 27px;
-
-        span {
-          cursor: pointer;
-          color: var(--kungalgame-blue-5);
-
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-    }
-  }
-
-  .panel-width {
-    margin-left: 20px;
+  .save {
+    margin-left: 17px;
+    font-size: 15px;
   }
 }
 

@@ -9,17 +9,13 @@ const Tags = defineAsyncComponent(() => import('~/components/edit/Tags.vue'))
 const messageStore = useTempMessageStore()
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
-const { replyDraft, replyPanelWidth } = storeToRefs(
-  usePersistKUNGalgameReplyStore()
-)
+const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 
 const { isEdit } = storeToRefs(useTempReplyStore())
 
 const position = computed(() => {
   return replyDraft.value.toFloor === 0 ? 'master' : 'reply'
 })
-
-const panelWidth = computed(() => `${replyPanelWidth.value}%`)
 
 const handleClosePanel = async () => {
   if (isReplyRewriting.value) {
@@ -43,7 +39,7 @@ const handleClosePanel = async () => {
       leave-active-class="animate__animated animate__fadeOutDown animate__faster"
     >
       <div class="root" v-if="isEdit">
-        <div class="container" :style="`width: ${panelWidth}`">
+        <div class="container">
           <div class="title">
             <h3>
               <span>{{ $t('topic.panel.to') + ' @' }}</span>
@@ -97,7 +93,8 @@ const handleClosePanel = async () => {
 
 .container {
   transition: all 0.2s;
-  max-width: 1000px;
+  width: 90%;
+  max-width: 60rem;
   max-height: 77vh;
   overflow-y: scroll;
   color: var(--kungalgame-font-color-3);

@@ -2,8 +2,11 @@
 import { MilkdownProvider } from '@milkdown/vue'
 import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
 
-const { content: rewriteContent, isTopicRewriting } =
-  storeToRefs(useTempEditStore())
+const {
+  content: rewriteContent,
+  isTopicRewriting,
+  autosaveCount,
+} = storeToRefs(useTempEditStore())
 const { editorHeight: editEditorHeight, content: editContent } = storeToRefs(
   useKUNGalgameEditStore()
 )
@@ -45,7 +48,7 @@ onBeforeMount(() => {
 })
 
 const saveMarkdown = (editorMarkdown: string) => {
-  const debouncedUpdateContent = debounce(() => {
+  debounce(() => {
     if (!isTopicRewriting.value && routeName.value === 'edit') {
       editContent.value = editorMarkdown
     }
@@ -58,9 +61,9 @@ const saveMarkdown = (editorMarkdown: string) => {
     if (isReplyRewriting.value && routeName.value === 'topic-tid') {
       replyRewrite.value.content = editorMarkdown
     }
-  }, 1007)
 
-  debouncedUpdateContent()
+    autosaveCount.value++
+  }, 1007)()
 }
 </script>
 

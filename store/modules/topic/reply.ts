@@ -4,8 +4,6 @@ export const usePersistKUNGalgameReplyStore = defineStore({
   id: 'KUNGalgameReply',
   persist: true,
   state: (): ReplyStorePersist => ({
-    replyPanelWidth: 90,
-
     isSaveReply: false,
     isShowHotKeywords: false,
 

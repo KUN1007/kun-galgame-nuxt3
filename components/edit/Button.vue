@@ -123,7 +123,7 @@ const handleRewrite = async () => {
 .btn-container {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 20px;
 
@@ -163,22 +163,6 @@ const handleRewrite = async () => {
   &:hover {
     background-color: var(--kungalgame-red-4);
     transition: 0.2s;
-  }
-}
-
-.save-btn {
-  color: var(--kungalgame-pink-4);
-  background-color: var(--kungalgame-trans-white-9);
-  border: 1px solid var(--kungalgame-pink-4);
-
-  &:hover {
-    background-color: var(--kungalgame-pink-4);
-    transition: 0.2s;
-  }
-
-  &:active {
-    background-color: var(--kungalgame-pink-3);
-    transform: scale(0.8);
   }
 }
 

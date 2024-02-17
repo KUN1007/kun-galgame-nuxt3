@@ -7,7 +7,6 @@ export interface EditStorePersist {
   tags: Array<string>
   category: Array<string>
 
-  // Whether to display hot keywords
   isShowHotKeywords: boolean
 }
 
@@ -19,6 +18,7 @@ export interface EditStoreTemp {
   category: Array<string>
 
   textCount: number
-  // Whether the topic is being rewritten
   isTopicRewriting: boolean
+
+  autosaveCount: number
 }

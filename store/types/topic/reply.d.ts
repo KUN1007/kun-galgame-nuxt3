@@ -51,8 +51,6 @@ export interface ReplyStoreTemp {
 }
 
 export interface ReplyStorePersist {
-  replyPanelWidth: number
-
   isSaveReply: boolean
   isShowHotKeywords: boolean
 
