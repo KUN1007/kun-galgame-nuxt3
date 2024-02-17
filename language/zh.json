@@ -199,6 +199,7 @@
     "title": "标题",
     "loading": "正在加载编辑器...",
     "uploading": "正在上传中...",
+    "clear": "清空内容",
     "save": "自动保存",
     "word": "字",
     "editorHeight": "编辑器高度",
@@ -502,6 +503,7 @@
   },
   "AlertInfo":{
     "edit":{
+      "clear": "您确定要清空内容吗?",
       "publish": "确认发布吗？",
       "publishSuccess": "发布成功",
       "upvoteTopic": "您确定推这个话题吗，这将会消耗您 17 萌萌点",
@@ -509,7 +511,6 @@
       "rewrite": "确认 Rewrite 吗？",
       "rewriteSuccess": "Rewrite 成功",
       "closePanel": "确认关闭面板吗？您的更改将不会被保存",
-      "draft": "草稿已经保存成功！",
       "leave": "确认离开界面吗？您的更改将不会保存",
       "logout": "您确定退出登录吗？"
     },

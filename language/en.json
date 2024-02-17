@@ -200,6 +200,7 @@
     "title": "Title",
     "loading": "Loading editor...",
     "uploading": "Uploading in progress...",
+    "clear": "Clear Content",
     "save": "Auto save",
     "word": "Word(s)",
     "editorHeight": "Editor Height",
@@ -500,6 +501,7 @@
   },
   "AlertInfo":{
     "edit":{
+      "clear": "Are you sure want to clear content?",
       "publish": "Confirm to publish?",
       "publishSuccess": "Publish Successfully",
       "upvoteTopic":
@@ -509,7 +511,6 @@
       "rewrite": "Confirm to Rewrite?",
       "rewriteSuccess": "Rewrite Successfully",
       "closePanel": "Confirm closing the panel? Your changes will not be saved.",
-      "draft": "The draft has been saved successfully!",
       "leave": "Confirm leaving the page? Your changes will not be saved.",
       "logout": "Are you sure you want to log out?"
     },

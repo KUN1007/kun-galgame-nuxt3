@@ -2,6 +2,7 @@
 const { title: rewriteTitle, isTopicRewriting } =
   storeToRefs(useTempEditStore())
 const { title: editTitle } = storeToRefs(useKUNGalgameEditStore())
+const { clearTopic } = storeToRefs(useTempEditStore())
 
 const topicTitle = ref('')
 const maxInputLength = 40
@@ -26,17 +27,21 @@ const handleInput = () => {
     return
   }
 
-  const debouncedInput = debounce(() => {
-    if (!isTopicRewriting.value) {
-      editTitle.value = topicTitle.value
-    }
+  debounce(() => {
     if (isTopicRewriting.value) {
       rewriteTitle.value = topicTitle.value
+    } else {
+      editTitle.value = topicTitle.value
     }
-  }, 300)
-
-  debouncedInput()
+  }, 1007)()
 }
+
+watch(
+  () => clearTopic.value,
+  () => {
+    topicTitle.value = ''
+  }
+)
 </script>
 
 <template>

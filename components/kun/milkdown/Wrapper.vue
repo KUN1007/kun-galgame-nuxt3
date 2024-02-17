@@ -29,32 +29,31 @@ const editorHeightStyle = computed(() =>
   routeName.value === 'edit' ? editEditorHeight.value : replyEditorHeight.value
 )
 
-onBeforeMount(() => {
-  if (isTopicRewriting.value && routeName.value === 'edit') {
+if (routeName.value === 'edit') {
+  if (isTopicRewriting.value) {
     valueMarkdown.value = rewriteContent.value
-    return
-  }
-
-  if (routeName.value === 'edit') {
+  } else {
     valueMarkdown.value = editContent.value
   }
+}
 
-  if (isSaveReply.value && routeName.value === 'topic-tid') {
-    valueMarkdown.value = replyDraft.value.content
-  }
-  if (isReplyRewriting.value && routeName.value === 'topic-tid') {
-    valueMarkdown.value = replyRewrite.value.content
-  }
-})
+if (isSaveReply.value && routeName.value === 'topic-tid') {
+  valueMarkdown.value = replyDraft.value.content
+}
+if (isReplyRewriting.value && routeName.value === 'topic-tid') {
+  valueMarkdown.value = replyRewrite.value.content
+}
 
 const saveMarkdown = (editorMarkdown: string) => {
   debounce(() => {
-    if (!isTopicRewriting.value && routeName.value === 'edit') {
-      editContent.value = editorMarkdown
+    if (routeName.value === 'edit') {
+      if (isTopicRewriting.value) {
+        rewriteContent.value = editorMarkdown
+      } else {
+        editContent.value = editorMarkdown
+      }
     }
-    if (isTopicRewriting.value && routeName.value === 'edit') {
-      rewriteContent.value = editorMarkdown
-    }
+
     if (!isReplyRewriting.value && routeName.value === 'topic-tid') {
       replyDraft.value.content = editorMarkdown
     }

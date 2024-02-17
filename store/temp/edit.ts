@@ -14,6 +14,7 @@ export const useTempEditStore = defineStore({
     isTopicRewriting: false,
 
     autosaveCount: 0,
+    clearTopic: false,
   }),
   actions: {
     resetRewriteTopicData() {

@@ -21,4 +21,5 @@ export interface EditStoreTemp {
   isTopicRewriting: boolean
 
   autosaveCount: number
+  clearTopic: boolean
 }

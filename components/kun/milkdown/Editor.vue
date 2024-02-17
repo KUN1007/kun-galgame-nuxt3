@@ -1,9 +1,18 @@
 <script setup lang="ts">
 // Milkdown core
-import { Editor, rootCtx, rootAttrsCtx, defaultValueCtx } from '@milkdown/core'
+import {
+  Editor,
+  rootCtx,
+  rootAttrsCtx,
+  defaultValueCtx,
+  editorViewCtx,
+  parserCtx,
+} from '@milkdown/core'
+import type { Ctx } from '@milkdown/ctx'
 import { Milkdown, useEditor } from '@milkdown/vue'
 import { commonmark } from '@milkdown/preset-commonmark'
 import { gfm } from '@milkdown/preset-gfm'
+import { Slice } from '@milkdown/prose/model'
 // Milkdown Plugins
 import { history } from '@milkdown/plugin-history'
 import { prism, prismConfig } from '@milkdown/plugin-prism'
@@ -55,6 +64,8 @@ const emits = defineEmits<{
   saveMarkdown: [editorMarkdown: string]
 }>()
 
+const { clearTopic } = storeToRefs(useTempEditStore())
+
 const editorHight = computed(() => props.editorHight + 'px')
 const valueMarkdown = computed(() => props.valueMarkdown)
 const isShowMenu = computed(() => props.isShowMenu)
@@ -62,8 +73,26 @@ const isShowMenu = computed(() => props.isShowMenu)
 const tooltip = tooltipFactory('Text')
 const pluginViewFactory = usePluginViewFactory()
 const container = ref<HTMLElement | null>(null)
-const isEditorFocus = ref(false)
 const editorContent = ref('')
+
+watch(
+  () => clearTopic.value,
+  () => {
+    editorInfo.get()?.action((ctx: Ctx) => {
+      const view = ctx.get(editorViewCtx)
+      const parser = ctx.get(parserCtx)
+      const doc = parser('')
+      const state = view.state
+      view.dispatch(
+        state.tr.replace(
+          0,
+          state.doc.content.size,
+          new Slice(doc.content, 0, 0)
+        )
+      )
+    })
+  }
+)
 
 const editorInfo = useEditor((root) =>
   Editor.make()
@@ -81,12 +110,6 @@ const editorInfo = useEditor((root) =>
           editorContent.value = markdown
           emits('saveMarkdown', markdown)
         }
-      })
-      listener.blur(() => {
-        isEditorFocus.value = false
-      })
-      listener.focus(() => {
-        isEditorFocus.value = true
       })
 
       ctx.update(uploadConfig.key, (prev) => ({
@@ -152,10 +175,7 @@ const editorInfo = useEditor((root) =>
 <template>
   <div ref="container" class="editor-container">
     <KunMilkdownPluginsMenu v-if="isShowMenu" :editorInfo="editorInfo" />
-    <Milkdown
-      class="editor"
-      :class="isEditorFocus || editorContent ? 'active' : ''"
-    />
+    <Milkdown class="editor" />
 
     <div class="loading" v-if="editorInfo.loading.value">
       <span><Icon name="svg-spinners:12-dots-scale-rotate" /></span>
@@ -167,13 +187,6 @@ const editorInfo = useEditor((root) =>
 <style lang="scss" scoped>
 .editor {
   position: relative;
-  &::before {
-    position: absolute;
-    padding: 27px 10px;
-    content: 'Moe Moe Moe!';
-    font-style: oblique;
-    color: var(--kungalgame-blue-3);
-  }
 
   :deep(.milkdown) {
     width: 100%;
@@ -289,12 +302,6 @@ const editorInfo = useEditor((root) =>
     &:nth-child(1) {
       font-size: 50px;
     }
-  }
-}
-
-.active {
-  &::before {
-    content: '';
   }
 }
 </style>

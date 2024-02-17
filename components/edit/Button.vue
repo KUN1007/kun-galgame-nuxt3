@@ -20,8 +20,19 @@ const {
 const { textCount, title, content, tags, category } = storeToRefs(
   useKUNGalgameEditStore()
 )
+const { clearTopic } = storeToRefs(useTempEditStore())
+
 const messageStore = useTempMessageStore()
 const isPublishing = ref(false)
+
+const handleClear = async () => {
+  const res = await messageStore.alert('AlertInfo.edit.clear', true)
+  if (!res) {
+    return
+  }
+  useKUNGalgameEditStore().resetTopicData()
+  clearTopic.value = !clearTopic.value
+}
 
 const handlePublish = async () => {
   const requestData: EditCreateTopicRequestData = {
@@ -104,6 +115,10 @@ const handleRewrite = async () => {
 
 <template>
   <div class="btn-container">
+    <button v-if="!isTopicRewriting" class="clear-btn" @click="handleClear">
+      {{ $t('edit.clear') }}
+    </button>
+
     <button
       v-if="!isTopicRewriting"
       class="confirm-btn"
@@ -123,7 +138,7 @@ const handleRewrite = async () => {
 .btn-container {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 
@@ -163,6 +178,22 @@ const handleRewrite = async () => {
   &:hover {
     background-color: var(--kungalgame-red-4);
     transition: 0.2s;
+  }
+}
+
+.clear-btn {
+  color: var(--kungalgame-pink-4);
+  background-color: var(--kungalgame-trans-white-9);
+  border: 1px solid var(--kungalgame-pink-4);
+
+  &:hover {
+    background-color: var(--kungalgame-pink-4);
+    transition: 0.2s;
+  }
+
+  &:active {
+    background-color: var(--kungalgame-pink-3);
+    transform: scale(0.8);
   }
 }
 
