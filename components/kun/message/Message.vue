@@ -191,9 +191,10 @@ const handleDeleteMessage = async (mid: number) => {
 .link {
   cursor: pointer;
   color: var(--kungalgame-pink-4);
+  border-bottom: 2px solid var(--kungalgame-trans-white-9);
 
   &:hover {
-    text-decoration: underline;
+    border-bottom: 2px solid var(--kungalgame-pink-4);
   }
 }
 
@@ -243,6 +244,10 @@ const handleDeleteMessage = async (mid: number) => {
 
   .link {
     color: var(--kungalgame-blue-5);
+
+    &:hover {
+      border-bottom: 2px solid var(--kungalgame-blue-5);
+    }
   }
 }
 

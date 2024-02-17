@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import type { KunMessage } from '#build/components'
-
 const messageStore = useTempMessageStore()
 const { showKUNGalgameMessageBox } = storeToRefs(useTempSettingStore())
+const { autoRead } = storeToRefs(useKUNGalgameMessageStore())
 
 const startX = ref(0)
 const startY = ref(0)
@@ -93,6 +92,15 @@ const handleTouchEnd = () => {
   }
   currentX.value = 0
 }
+
+onBeforeUnmount(async () => {
+  const hasUnreadMessage = messageData.value?.some(
+    (message) => message.status === 'unread'
+  )
+  if (autoRead.value && hasUnreadMessage) {
+    await handleReadAllMessage()
+  }
+})
 </script>
 
 <template>
@@ -107,6 +115,11 @@ const handleTouchEnd = () => {
       <span class="icon-item" @click="showKUNGalgameMessageBox = false">
         <Icon name="line-md:close" />
       </span>
+    </div>
+
+    <div class="auto-read">
+      <span>{{ $t('header.message.auto') }}</span>
+      <KunSwitch v-model="autoRead" />
     </div>
 
     <div class="func">
@@ -158,6 +171,13 @@ const handleTouchEnd = () => {
   }
 }
 
+.auto-read {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .func {
   padding: 0 5px;
 
@@ -187,6 +207,7 @@ const handleTouchEnd = () => {
 
     &:nth-child(1) {
       margin-bottom: 5px;
+
       &:hover {
         background-color: var(--kungalgame-trans-blue-1);
       }
