@@ -9,8 +9,6 @@ export interface EditStorePersist {
 
   // Whether to display hot keywords
   isShowHotKeywords: boolean
-  // Whether to save the topic
-  isSaveTopic: boolean
 }
 
 export interface EditStoreTemp {

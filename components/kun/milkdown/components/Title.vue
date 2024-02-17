@@ -1,18 +1,18 @@
 <script setup lang="ts">
 const { title: rewriteTitle, isTopicRewriting } =
   storeToRefs(useTempEditStore())
-const { isSaveTopic, title: editTitle } = storeToRefs(useKUNGalgameEditStore())
+const { title: editTitle } = storeToRefs(useKUNGalgameEditStore())
 
 const topicTitle = ref('')
 const maxInputLength = 40
 
 onBeforeMount(() => {
-  if (isSaveTopic.value) {
-    topicTitle.value = editTitle.value
-  }
   if (isTopicRewriting.value) {
     topicTitle.value = rewriteTitle.value
+    return
   }
+
+  topicTitle.value = editTitle.value
 })
 
 const handleInput = () => {

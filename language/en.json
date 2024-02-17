@@ -224,8 +224,7 @@
     "Technique": "Technique",
     "Others": "Others",
     "publish": "Confirm Publish",
-    "rewrite": "Confirm Rewrite",
-    "draft": "Save Draft"
+    "rewrite": "Confirm Rewrite"
   },
   "login":{
     "login":{

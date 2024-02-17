@@ -4,11 +4,9 @@ import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
 
 const { content: rewriteContent, isTopicRewriting } =
   storeToRefs(useTempEditStore())
-const {
-  editorHeight: editEditorHeight,
-  isSaveTopic,
-  content: editContent,
-} = storeToRefs(useKUNGalgameEditStore())
+const { editorHeight: editEditorHeight, content: editContent } = storeToRefs(
+  useKUNGalgameEditStore()
+)
 const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
 const {
   editorHeight: replyEditorHeight,
@@ -29,12 +27,15 @@ const editorHeightStyle = computed(() =>
 )
 
 onBeforeMount(() => {
-  if (isSaveTopic.value && routeName.value === 'edit') {
-    valueMarkdown.value = editContent.value
-  }
   if (isTopicRewriting.value && routeName.value === 'edit') {
     valueMarkdown.value = rewriteContent.value
+    return
   }
+
+  if (routeName.value === 'edit') {
+    valueMarkdown.value = editContent.value
+  }
+
   if (isSaveReply.value && routeName.value === 'topic-tid') {
     valueMarkdown.value = replyDraft.value.content
   }

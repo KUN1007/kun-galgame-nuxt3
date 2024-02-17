@@ -12,22 +12,15 @@ const alertInfo =
 
 const { category: rewriteCategory, isTopicRewriting } =
   storeToRefs(useTempEditStore())
-const { isSaveTopic, category: editCategory } = storeToRefs(
-  useKUNGalgameEditStore()
-)
+const { category: editCategory } = storeToRefs(useKUNGalgameEditStore())
 
 const selectedCategories = ref<string[]>([])
 
-onBeforeMount(() => {
-  if (isTopicRewriting.value) {
-    selectedCategories.value = rewriteCategory.value
-    return
-  }
-
-  if (isSaveTopic.value) {
-    selectedCategories.value = editCategory.value
-  }
-})
+if (isTopicRewriting.value) {
+  selectedCategories.value = rewriteCategory.value
+} else {
+  selectedCategories.value = editCategory.value
+}
 
 const handleClickCategory = (kun: Category) => {
   if (kun.index === 1 && selectedCategories.value.includes('Others')) {

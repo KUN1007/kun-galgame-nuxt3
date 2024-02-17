@@ -12,7 +12,6 @@ export const useKUNGalgameEditStore = defineStore({
     tags: [],
     category: [],
     isShowHotKeywords: false,
-    isSaveTopic: false,
   }),
   getters: {},
   actions: {
@@ -23,8 +22,6 @@ export const useKUNGalgameEditStore = defineStore({
       this.content = ''
       this.tags = []
       this.category = []
-
-      this.isSaveTopic = false
     },
   },
 })

@@ -2,11 +2,8 @@
 const routeName = useRouteName()
 
 const { tags: rewriteTags, isTopicRewriting } = storeToRefs(useTempEditStore())
-const {
-  isShowHotKeywords: isShowEditHotKeywords,
-  tags: editTags,
-  isSaveTopic,
-} = storeToRefs(useKUNGalgameEditStore())
+const { isShowHotKeywords: isShowEditHotKeywords, tags: editTags } =
+  storeToRefs(useKUNGalgameEditStore())
 const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
 const {
   isShowHotKeywords: isShowReplyHotKeywords,
@@ -26,12 +23,12 @@ const isInputFocus = ref(false)
 const inputValue = ref('')
 const canDeleteTag = ref(false)
 
-if (isSaveTopic.value && routeName.value === 'edit') {
-  selectedTags.value = editTags.value
-}
-
-if (isTopicRewriting.value && routeName.value === 'edit') {
-  selectedTags.value = rewriteTags.value
+if (routeName.value === 'edit') {
+  if (isTopicRewriting.value) {
+    selectedTags.value = rewriteTags.value
+  } else {
+    selectedTags.value = editTags.value
+  }
 }
 
 if (isSaveReply.value && routeName.value === 'topic-tid') {

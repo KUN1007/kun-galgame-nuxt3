@@ -17,7 +17,7 @@ const {
   isTopicRewriting,
 } = storeToRefs(useTempEditStore())
 
-const { textCount, title, content, tags, category, isSaveTopic } = storeToRefs(
+const { textCount, title, content, tags, category } = storeToRefs(
   useKUNGalgameEditStore()
 )
 const messageStore = useTempMessageStore()
@@ -100,11 +100,6 @@ const handleRewrite = async () => {
     useTempEditStore().resetRewriteTopicData()
   }
 }
-
-const handleSave = () => {
-  isSaveTopic.value = true
-  messageStore.info('AlertInfo.edit.draft')
-}
 </script>
 
 <template>
@@ -120,10 +115,6 @@ const handleSave = () => {
 
     <button v-if="isTopicRewriting" class="rewrite-btn" @click="handleRewrite">
       {{ $t('edit.rewrite') }}
-    </button>
-
-    <button v-if="!isTopicRewriting" class="save-btn" @click="handleSave">
-      {{ $t('edit.draft') }}
     </button>
   </div>
 </template>
