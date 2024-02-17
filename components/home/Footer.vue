@@ -3,7 +3,7 @@
 <template>
   <div class="footer">
     <div class="container">
-      <HomeFooterWave />
+      <HomeFooterWave class="wave" />
       <HomeFooterInfo />
     </div>
   </div>
@@ -25,7 +25,7 @@
 
 @media (max-width: 700px) {
   .footer {
-    height: 100px;
+    display: none;
   }
 }
 </style>

@@ -11,8 +11,8 @@ const startX = ref(0)
 const startY = ref(0)
 const currentX = ref(0)
 const isDragging = ref(false)
-const item = ref<Hamburger[]>(hamburgerItem.slice(0, 4))
-const isShowSettings = computed(() => item.value.length > 4)
+const item = ref<Hamburger[]>(hamburgerItem.slice(0, 5))
+const isShowSettings = computed(() => item.value.length > 5)
 
 const handleTouchStart = (event: TouchEvent) => {
   startX.value = event.touches[0].clientX
@@ -48,10 +48,10 @@ const handleTouchEnd = () => {
 }
 
 const handleShowMore = () => {
-  if (item.value.length === 4) {
+  if (item.value.length === 5) {
     item.value = hamburgerItem
   } else {
-    item.value = hamburgerItem.slice(0, 4)
+    item.value = hamburgerItem.slice(0, 5)
   }
 }
 </script>
@@ -113,7 +113,7 @@ const handleShowMore = () => {
 
 <style lang="scss" scoped>
 .mask {
-  height: calc(100dvh + 117px);
+  height: 100dvh;
   width: 100vw;
   position: fixed;
   top: 0;
@@ -124,19 +124,19 @@ const handleShowMore = () => {
   background-color: var(--kungalgame-mask-color-0);
   transition: opacity 0.3s;
   z-index: 1;
+  overflow: hidden;
 }
 
 .container {
+  height: 100%;
   position: absolute;
   width: 250px;
-  height: 100%;
   overflow-y: scroll;
   padding: 10px;
   background-color: var(--kungalgame-trans-white-2);
   border-right: 1px solid var(--kungalgame-blue-2);
   box-shadow: var(--shadow);
   border-radius: 0 5px 5px 0;
-  min-height: 100vh;
 }
 
 .item-container {
