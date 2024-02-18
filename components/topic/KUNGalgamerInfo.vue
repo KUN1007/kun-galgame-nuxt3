@@ -52,9 +52,14 @@ const user = computed(() => props.user)
 .avatar {
   width: 100px;
   margin-top: 17px;
+  aspect-ratio: 1/1;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 
   img {
     width: 100px;
+    object-fit: cover;
   }
 }
 
@@ -115,7 +120,6 @@ const user = computed(() => props.user)
 
     img {
       width: 70px;
-      height: 70px;
     }
   }
 

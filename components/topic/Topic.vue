@@ -235,7 +235,7 @@ onBeforeMount(() => {
   position: sticky;
   top: 0;
   width: 100%;
-  min-height: 50px;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -245,7 +245,7 @@ onBeforeMount(() => {
   background-color: var(--kungalgame-trans-white-5);
   border: 1px solid var(--kungalgame-blue-5);
   border-radius: 10px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(17px);
   z-index: 1;
 }
 

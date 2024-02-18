@@ -49,15 +49,17 @@ const mpWidth = computed(() => {
   border-radius: 50%;
   left: 50px;
   z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 
   img {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
+    width: 100%;
+  }
 
-    &:hover {
-      animation: spin 1s;
-    }
+  &:hover {
+    animation: spin 1s;
   }
 }
 
@@ -152,11 +154,6 @@ const mpWidth = computed(() => {
     left: 30px;
     width: 100px;
     height: 100px;
-
-    img {
-      width: 100px;
-      height: 100px;
-    }
   }
 
   .name {
