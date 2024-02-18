@@ -112,8 +112,6 @@ const handleChangeAvatar = async () => {
           <span>{{ $t('user.settings.click') }}</span>
         </div>
         <div class="support">
-          <span>{{ $t('user.settings.supportImage') }}</span>
-          <br />
           <span>{{ $t('user.settings.supportFormat') }}</span>
         </div>
 
@@ -245,4 +243,3 @@ const handleChangeAvatar = async () => {
   }
 }
 </style>
-../../pages/kungalgamer/[uid]/utils/handleFileChange
