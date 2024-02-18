@@ -106,9 +106,11 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   padding: 17px;
+  padding-right: 10px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
+  scrollbar-width: thin;
 
   & > div {
     margin-bottom: 17px;
