@@ -5,7 +5,7 @@ import {
   checkChangePassword,
 } from './utils/check'
 
-const router = useRouter()
+const localePath = useLocalePath()
 const hasSentCodeEmail = ref('')
 
 const { data, refresh } = await useFetch('/api/user/email', {
@@ -94,7 +94,7 @@ const handleChangePassword = async () => {
 
   if (data.value) {
     kungalgameStoreReset()
-    router.push('/login')
+    navigateTo(localePath('/login'))
     useMessage('Password change successful!', '密码更改成功', 'success')
   }
 }

@@ -12,7 +12,7 @@ const input = reactive({
   confirmPassword: '',
 })
 
-const router = useRouter()
+const localePath = useLocalePath()
 const flag = ref(true)
 const isSendCode = ref(false)
 
@@ -60,7 +60,7 @@ const handleChangePassword = async () => {
   })
 
   if (data.value) {
-    router.push('/login')
+    navigateTo(localePath('/login'))
     useMessage('Password change successfully!', '密码更改成功', 'success')
   }
 }

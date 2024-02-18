@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { checkLoginForm } from './utils/checkLogin'
 
-const router = useRouter()
+const localePath = useLocalePath()
 
 const info = useTempMessageStore()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
@@ -34,12 +34,12 @@ const handleLogin = async () => {
   if (data.value) {
     info.info('AlertInfo.login.success')
     useKUNGalgameUserStore().setUserInfo(data.value)
-    router.push('/')
+    navigateTo(localePath('/'))
   }
 }
 
 const handleClickForgotPassword = () => {
-  router.push('/forgot')
+  navigateTo(localePath('/forgot'))
 }
 </script>
 

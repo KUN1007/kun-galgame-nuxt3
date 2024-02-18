@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { SearchTopic } from '~/types/api/home'
 
-const router = useRouter()
+const localePath = useLocalePath()
 const { searchHistory } = storeToRefs(usePersistKUNGalgameHomeStore())
 const { search, isShowSearch } = storeToRefs(useTempHomeStore())
 
@@ -12,7 +12,7 @@ const props = defineProps<{
 const topics = computed(() => props.topics)
 
 const handleClickTopic = (tid: number) => {
-  router.push(`/topic/${tid}`)
+  navigateTo(localePath(`/topic/${tid}`))
   if (!searchHistory.value.includes(search.value.keywords)) {
     searchHistory.value.push(search.value.keywords)
   }

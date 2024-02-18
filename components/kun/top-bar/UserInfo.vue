@@ -5,7 +5,7 @@ const { showKUNGalgameMessageBox, messageStatus } = storeToRefs(
 )
 const messageStore = useTempMessageStore()
 
-const router = useRouter()
+const localePath = useLocalePath()
 const container = ref<HTMLElement>()
 const isCheckIn = ref(true)
 
@@ -61,7 +61,7 @@ const logOut = async () => {
   const res = await useTempMessageStore().alert('AlertInfo.edit.logout', true)
   if (res) {
     kungalgameStoreReset()
-    router.push('/login')
+    navigateTo(localePath('/login'))
     useMessage('Logout successfully!', '登出成功', 'success')
   }
 }

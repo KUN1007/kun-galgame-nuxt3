@@ -4,7 +4,7 @@ const { tid, title, content, tags, category, isTopicRewriting } =
 const { isEdit } = storeToRefs(useTempReplyStore())
 const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
 
-const router = useRouter()
+const localePath = useLocalePath()
 
 const props = defineProps<{
   tid: number
@@ -38,7 +38,7 @@ const rewriteTopic = () => {
   category.value = props.category
   isTopicRewriting.value = true
 
-  router.push('/edit')
+  navigateTo(localePath('/edit'))
 }
 
 const rewriteReply = () => {

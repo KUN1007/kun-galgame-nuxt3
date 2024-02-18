@@ -11,7 +11,7 @@ const { checkForm, checkRegister } = checkRegisterForm.asyncData(
   useNuxtApp().$pinia
 )
 
-const router = useRouter()
+const localePath = useLocalePath()
 const isSendCode = ref(false)
 
 const registerForm = reactive<Record<string, string>>({
@@ -53,7 +53,7 @@ const handleRegister = async () => {
     info.info('AlertInfo.login.success')
     useMessage('Register successfully!', '注册成功！', 'success')
     useKUNGalgameUserStore().setUserInfo(data.value)
-    router.push('/')
+    navigateTo(localePath('/'))
   }
 }
 </script>

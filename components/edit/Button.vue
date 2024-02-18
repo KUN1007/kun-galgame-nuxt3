@@ -5,7 +5,7 @@ import type {
   EditUpdateTopicRequestData,
 } from '~/types/api/topic'
 
-const router = useRouter()
+const localePath = useLocalePath()
 
 const {
   tid,
@@ -68,7 +68,7 @@ const handlePublish = async () => {
 
   if (data.value) {
     const tid = data.value
-    router.push(`/topic/${tid}`)
+    navigateTo(localePath(`/topic/${tid}`))
     messageStore.info('AlertInfo.edit.publishSuccess')
     useKUNGalgameEditStore().resetTopicData()
   }
@@ -107,7 +107,7 @@ const handleRewrite = async () => {
   isPublishing.value = false
 
   if (data.value) {
-    router.push(`/topic/${tid.value}`)
+    navigateTo(localePath(`/topic/${tid.value}`))
     messageStore.info('AlertInfo.edit.rewriteSuccess')
     useTempEditStore().resetRewriteTopicData()
   }
