@@ -21,6 +21,7 @@ const errorMessagesEN: Record<number, string> = {
   10117: `Update username failed, invalid username (-B)`,
   10118: `Update username failed, your moemoepoints are less than 1017 (-B)`,
   10119: `You have already checked in today (-B)`,
+  10120: `You have been banned (-B)`,
 
   // Topic Part
   10201: `Your daily topic limit has been reached for today. (-B)`,
@@ -82,6 +83,7 @@ const errorMessagesCN: Record<number, string> = {
   10117: `更新用户名错误，非法的用户名 (-B)`,
   10118: `更新用户名错误，您的萌萌点不足 1017 (-B)`,
   10119: `您今日已经签到过了 (-B)`,
+  10120: `您已被封禁 (-B)`,
 
   10201: `您今日可以发表的话题数已达上限 (-B)`,
   10202: `您的萌萌点不足 1100, 无法使用推话题功能 (-B)`,

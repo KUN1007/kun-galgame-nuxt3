@@ -39,6 +39,10 @@ export default defineEventHandler(async (event) => {
     kunError(event, 10101)
     return
   }
+  if (user.status) {
+    kunError(event, 10120)
+    return
+  }
 
   const isCorrectPassword = await bcrypt.compare(password, user.password)
   if (!isCorrectPassword) {
