@@ -2,8 +2,7 @@ import loliData from '~/assets/ren/ren.json'
 import { randomNum } from '~/utils/random'
 
 export const getLoli = async () => {
-  const linkPreset = `https://cdn.jsdelivr.net/gh/kun-moe/kun-image@main/ren/`
-  const getAssetsFile = (name: number) => `${linkPreset}${name}.webp`
+  const getAssetsFile = (name: number) => `/ren/${name}.webp`
 
   const randomBrow = randomNum(1, 18)
   const randomEye = randomNum(19, 36)
