@@ -42,13 +42,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const newFileName = `${userInfo.name}-kun-galgame-avatar`
-
-  const res = await resizeUserAvatar(
-    newFileName,
-    avatarFile[0].data,
-    userInfo.uid
-  )
+  const res = await resizeUserAvatar('avatar', avatarFile[0].data, userInfo.uid)
   if (!res) {
     kunError(event, 10116)
     return
@@ -58,7 +52,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/avatar/user_${userInfo.uid}/${newFileName}.webp`
+  const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/avatar/user_${userInfo.uid}/avatar.webp`
   await UserModel.updateOne(
     { uid: userInfo.uid },
     { $set: { avatar: imageLink } }
