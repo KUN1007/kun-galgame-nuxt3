@@ -29,12 +29,14 @@ const readReplyData = async (event: H3Event) => {
     return
   }
 
+  const deduplicatedTags = Array.from(new Set(tags))
+
   return {
     tid: parseInt(tid),
     r_uid: uid,
     to_uid,
     to_floor,
-    tags,
+    tags: deduplicatedTags,
     content,
     time,
   }

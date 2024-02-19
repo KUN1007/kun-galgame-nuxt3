@@ -23,7 +23,9 @@ const readTopicData = async (event: H3Event) => {
   }
   const uid = userInfo.uid
 
-  return { title, content, time, tags, category, uid }
+  const deduplicatedTags = Array.from(new Set(tags))
+
+  return { title, content, time, tags: deduplicatedTags, category, uid }
 }
 
 export default defineEventHandler(async (event) => {
