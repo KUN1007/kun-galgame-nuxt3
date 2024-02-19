@@ -227,8 +227,7 @@
       "loginTitle": "登录",
       "forget": "忘记密码?",
       "loginUsername": "用户名或邮箱",
-      "loginPassword": "密码",
-      "capture": "点击进行人机身份验证"
+      "loginPassword": "密码"
     },
     "overlay":{
       "title": "欢迎注册 KUNgalgame",

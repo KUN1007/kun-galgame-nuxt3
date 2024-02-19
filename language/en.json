@@ -227,8 +227,7 @@
       "loginTitle": "Login",
       "forget": "Forgot your password?",
       "loginUsername": "Username or email",
-      "loginPassword": "Password",
-      "capture": "Click to proceed with the human verification process"
+      "loginPassword": "Password"
     },
     "overlay":{
       "title": "Welcome to KUN Visual Novel Registration",

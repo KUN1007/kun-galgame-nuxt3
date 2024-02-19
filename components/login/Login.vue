@@ -15,28 +15,37 @@ const loginForm = reactive({
 
 const handleLogin = async () => {
   const checkLogin = checkLoginForm.asyncData(useNuxtApp().$pinia)
-  const result = checkLogin(
-    loginForm.name,
-    loginForm.password,
-    isCaptureSuccessful.value
-  )
-
+  const result = checkLogin(loginForm.name, loginForm.password)
   if (!result) {
     return
   }
 
-  const { data } = await useFetch('/api/user/login', {
-    method: 'POST',
-    body: loginForm,
-    watch: false,
-    ...kungalgameResponseHandler,
-  })
-  if (data.value) {
-    info.info('AlertInfo.login.success')
-    useKUNGalgameUserStore().setUserInfo(data.value)
-    navigateTo(localePath('/'))
+  if (!isCaptureSuccessful.value) {
+    isShowCapture.value = true
+    return
   }
 }
+
+watch(
+  () => isCaptureSuccessful.value,
+  async () => {
+    if (!isCaptureSuccessful.value) {
+      return
+    }
+
+    const { data } = await useFetch('/api/user/login', {
+      method: 'POST',
+      body: loginForm,
+      watch: false,
+      ...kungalgameResponseHandler,
+    })
+    if (data.value) {
+      info.info('AlertInfo.login.success')
+      useKUNGalgameUserStore().setUserInfo(data.value)
+      navigateTo(localePath('/'))
+    }
+  }
+)
 
 const handleClickForgotPassword = () => {
   navigateTo(localePath('/forgot'))
@@ -66,10 +75,6 @@ const handleClickForgotPassword = () => {
 
       <span @click="handleClickForgotPassword" class="forget">
         {{ $t('login.login.forget') }}
-      </span>
-
-      <span @click="isShowCapture = true" class="capture">
-        {{ $t('login.login.capture') }}
       </span>
 
       <button @click="handleLogin" class="btn" type="submit">
@@ -130,12 +135,6 @@ const handleClickForgotPassword = () => {
   font-size: small;
   color: var(--kungalgame-blue-5);
   margin: 20px 0;
-}
-
-.capture {
-  color: var(--kungalgame-font-color-2);
-  cursor: pointer;
-  font-size: 15px;
 }
 
 .btn {

@@ -33,21 +33,8 @@ export const checkLoginForm = {
       return true
     }
 
-    const checkLogin = (
-      name: string,
-      password: string,
-      isCaptureSuccessful: boolean
-    ) => {
+    const checkLogin = (name: string, password: string) => {
       if (!checkUsername(name) || !checkPassword(password)) {
-        return false
-      }
-
-      if (!isCaptureSuccessful) {
-        useMessage(
-          'Please click above to complete the human verification',
-          '请点击上方完成人机身份验证',
-          'warn'
-        )
         return false
       }
 
