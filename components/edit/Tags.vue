@@ -77,7 +77,7 @@ const remainingTags = computed(() => {
 })
 
 const handleAddTag = () => {
-  const tagName = inputValue.value.trim()
+  const tagName = inputValue.value.trim().slice(0, 17)
 
   if (selectedTags.value.includes(tagName)) {
     useMessage(
@@ -109,8 +109,8 @@ const handleRemoveTag = () => {
 const validateTagName = (tagName: string) => {
   let validatedName = tagName
 
-  if (validatedName.length > 10) {
-    validatedName = validatedName.slice(0, 10)
+  if (validatedName.length > 17) {
+    validatedName = validatedName.slice(0, 17)
   }
 
   return validatedName

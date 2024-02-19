@@ -28,7 +28,6 @@ const props = defineProps<{
     max-height: 100%;
     display: flex;
     flex-wrap: wrap;
-    overflow-y: scroll;
 
     li {
       margin: 3px;
@@ -37,7 +36,6 @@ const props = defineProps<{
       background-color: var(--kungalgame-trans-blue-0);
       border: 1px solid var(--kungalgame-blue-5);
       border-radius: 14px;
-      overflow-y: scroll;
       cursor: pointer;
 
       &:hover {

@@ -141,7 +141,6 @@ const loliStatus = computed(() => {
 
 .content-top {
   width: 100%;
-  max-height: 100px;
   display: flex;
   text-align: center;
   justify-content: space-between;

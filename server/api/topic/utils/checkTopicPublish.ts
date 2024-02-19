@@ -19,6 +19,12 @@ export const checkTopicPublish = (
     return 10206
   }
 
+  for (const tag of tags) {
+    if (tag.length > 17) {
+      return 10502
+    }
+  }
+
   if (!category.length || category.length > 2) {
     return 10207
   }
