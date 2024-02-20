@@ -11,14 +11,19 @@ useHead({
   ],
 })
 
+type Tab = 'login' | 'register'
+
 const isShowPanel = ref('')
+const tab = ref<Tab>('login')
 
 const handleClickSignIn = () => {
   isShowPanel.value = ''
+  tab.value = 'login'
 }
 
 const handleClickRegister = () => {
   isShowPanel.value = 'active'
+  tab.value = 'register'
 }
 </script>
 
@@ -30,10 +35,16 @@ const handleClickRegister = () => {
       :style="{ backgroundImage: `url(/login.webp)` }"
     >
       <div class="switch">
-        <div @click="handleClickSignIn">{{ $t('login.overlay.login') }}</div>
-        <div @click="handleClickRegister">
+        <button :class="{ active: tab === 'login' }" @click="handleClickSignIn">
+          {{ $t('login.overlay.login') }}
+        </button>
+        <button
+          :class="{ active: tab === 'register' }"
+          @click="handleClickRegister"
+        >
           {{ $t('login.overlay.register') }}
-        </div>
+        </button>
+        <div class="plate" :class="{ moveRight: tab === 'register' }" />
       </div>
 
       <Login class="login" />
@@ -113,20 +124,37 @@ const handleClickRegister = () => {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  color: var(--kungalgame-white);
-  background-color: var(--kungalgame-blue-5);
   border-radius: 5px 5px 0 0;
+  overflow: hidden;
   display: none;
 
-  div {
-    width: 100%;
+  button {
+    background: none;
+    border: none;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    line-height: 40px;
+    text-align: center;
+    color: var(--kungalgame-font-color-2);
+    transition: color 0.3s ease-in-out;
 
-    &:nth-child(1) {
-      border-right: 1px solid var(--kungalgame-white);
+    &.active {
+      color: var(--kungalgame-white);
+    }
+  }
+
+  .plate {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    background-color: var(--kungalgame-blue-5);
+    z-index: -1;
+    transition: transform 0.3s ease-in-out;
+
+    &.moveRight {
+      transform: translateX(100%);
     }
   }
 }
