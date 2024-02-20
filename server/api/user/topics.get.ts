@@ -8,7 +8,10 @@ export default defineEventHandler(async (event) => {
     return []
   }
 
-  const topics = await TopicModel.find({ tid: { $in: tidArray } }).limit(50)
+  const topics = await TopicModel.find({
+    tid: { $in: tidArray },
+    status: { $ne: 1 },
+  }).limit(50)
 
   const responseData: UserTopic[] = topics.map((topic) => ({
     tid: topic.tid,

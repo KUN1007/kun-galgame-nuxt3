@@ -26,7 +26,7 @@ const searchTopics = async (
 
   const searchQuery = {
     $and: [
-      { category: { $in: category } },
+      { category: { $in: category }, status: { $ne: 1 } },
       {
         $or: [
           { title: { $regex: escapedKeywords.join('|'), $options: 'i' } },

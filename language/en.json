@@ -134,6 +134,8 @@
     }
   },
   "topic":{
+    "notFound": "Topic not found",
+    "banned": "Topic has been banned",
     "aside":{
       "floor": "Sort by Floor Number",
       "like": "Sort by Likes Count",

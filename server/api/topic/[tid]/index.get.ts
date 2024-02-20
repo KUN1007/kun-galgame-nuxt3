@@ -19,6 +19,10 @@ export default defineEventHandler(async (event) => {
       return
     }
 
+    if (topic.status) {
+      return 'banned'
+    }
+
     await TopicModel.updateOne({ tid }, { $inc: { views: 1, popularity: 0.1 } })
 
     const user = await UserModel.findOne({ uid: topic.uid })

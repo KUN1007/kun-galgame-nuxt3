@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import type { TopicDetail } from '~/types/api/topic'
+
 const ReplyPanel = defineAsyncComponent(
   () => import('~/components/topic/reply/Panel.vue')
 )
 
+const topic = ref<TopicDetail>()
 const route = useRoute()
+const isBanned = ref(false)
 const tid = computed(() => {
   return parseInt((route.params as { tid: string }).tid)
 })
@@ -14,15 +18,21 @@ const { data } = await useFetch(`/api/topic/${tid.value}`, {
   ...kungalgameResponseHandler,
 })
 
+if (data.value === 'banned') {
+  isBanned.value = true
+} else {
+  topic.value = data.value ?? undefined
+}
+
 const topicContentText = computed(() =>
-  markdownToText(data.value?.content ?? '')
+  markdownToText(topic.value?.content ?? '')
     .trim()
     .replace(/\s+/g, ',')
     .slice(0, 150)
 )
 
 useHead({
-  title: data.value?.title,
+  title: topic.value?.title,
   meta: [
     {
       name: 'description',
@@ -30,7 +40,7 @@ useHead({
     },
     {
       name: 'keywords',
-      content: data.value?.tags.toString(),
+      content: topic.value?.tags.toString(),
     },
   ],
 })
@@ -40,7 +50,11 @@ useHead({
   <div class="root">
     <ReplyPanel />
 
-    <Topic v-if="data" :tid="tid" :topic-data="data" />
+    <Topic v-if="topic" :tid="tid" :topic-data="topic" />
+
+    <KunBlank info="topic.notFound" v-if="!topic && !isBanned"></KunBlank>
+
+    <KunBlank info="topic.banned" v-if="isBanned"></KunBlank>
 
     <TopicBar />
   </div>

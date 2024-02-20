@@ -18,6 +18,7 @@ const getHomeTopics = async (
 
   const searchQuery = {
     category: { $in: category },
+    status: { $ne: 1 },
   }
 
   const sortOptions: Record<string, 'asc' | 'desc'> = {

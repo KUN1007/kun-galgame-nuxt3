@@ -18,7 +18,7 @@ const getPoolTopics = async (
     [sortField]: sortOrder === 'asc' ? 'asc' : 'desc',
   }
 
-  const topics = await TopicModel.find()
+  const topics = await TopicModel.find({ status: { $ne: 1 } })
     .sort(sortOptions)
     .skip(skip)
     .limit(limit)
