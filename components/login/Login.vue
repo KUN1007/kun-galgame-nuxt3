@@ -54,7 +54,7 @@ const handleClickForgotPassword = () => {
 
 <template>
   <div class="login">
-    <LoginSettings />
+    <slot />
 
     <form class="form" @submit.prevent>
       <h2 class="title">{{ $t('login.login.loginTitle') }}</h2>
@@ -172,9 +172,7 @@ const handleClickForgotPassword = () => {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 7px;
-    box-shadow:
-      0 15px 27px var(--kungalgame-blue-0),
-      0 10px 10px var(--kungalgame-blue-0);
+    box-shadow: var(--kungalgame-shadow-1);
   }
 
   .form {

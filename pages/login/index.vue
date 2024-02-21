@@ -29,16 +29,21 @@ const handleClickRegister = () => {
       :class="isShowPanel"
       :style="{ backgroundImage: `url(/login.webp)` }"
     >
-      <div class="switch">
-        <div @click="handleClickSignIn">{{ $t('login.overlay.login') }}</div>
-        <div @click="handleClickRegister">
-          {{ $t('login.overlay.register') }}
-        </div>
-      </div>
+      <Login class="login">
+        <LoginSettings>
+          <div class="switch" @click="handleClickRegister">
+            <span>{{ $t('login.overlay.register') }}</span>
+          </div>
+        </LoginSettings>
+      </Login>
 
-      <Login class="login" />
-
-      <LoginRegister class="register" />
+      <LoginRegister class="register">
+        <LoginSettings>
+          <div class="switch" @click="handleClickSignIn">
+            <span>{{ $t('login.overlay.login') }}</span>
+          </div>
+        </LoginSettings>
+      </LoginRegister>
 
       <div class="container-overlay">
         <div class="overlay">
@@ -93,9 +98,7 @@ const handleClickRegister = () => {
   opacity: 0.95;
   overflow: hidden;
   border-radius: 5px;
-  box-shadow:
-    0 15px 27px var(--kungalgame-blue-0),
-    0 10px 10px var(--kungalgame-blue-0);
+  box-shadow: var(--kungalgame-shadow-1);
   height: 490px;
   max-width: 700px;
   position: relative;
@@ -103,32 +106,9 @@ const handleClickRegister = () => {
 }
 
 .switch {
-  width: 90%;
-  top: 4%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 40px;
-  position: absolute;
-  z-index: 10;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  color: var(--kungalgame-white);
-  background-color: var(--kungalgame-blue-5);
-  border-radius: 5px 5px 0 0;
   display: none;
-
-  div {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    &:nth-child(1) {
-      border-right: 1px solid var(--kungalgame-white);
-    }
-  }
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--kungalgame-blue-5);
 }
 
 .container.active {
@@ -259,9 +239,8 @@ const handleClickRegister = () => {
 
 @media (max-width: 700px) {
   .switch {
-    display: flex;
+    display: block;
   }
-
   .root {
     min-width: 0;
     width: 100%;

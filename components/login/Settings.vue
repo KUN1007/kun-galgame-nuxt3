@@ -7,6 +7,8 @@
         <Icon class="icon" name="line-md:home-md-twotone" />
       </NuxtLinkLocale>
     </span>
+
+    <slot />
   </div>
 </template>
 
@@ -15,20 +17,16 @@
   width: 100%;
   color: var(--kungalgame-font-color-2);
   position: absolute;
-  font-size: 20px;
-  padding: 17px;
+  padding: 17px 34px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   .home {
-    margin-left: 17px;
+    font-size: 20px;
     .icon {
       color: var(--kungalgame-purple-4);
     }
-  }
-}
-
-@media (max-width: 700px) {
-  .settings {
-    padding-top: 50px;
   }
 }
 </style>

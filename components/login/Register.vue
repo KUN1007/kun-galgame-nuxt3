@@ -60,8 +60,7 @@ const handleRegister = async () => {
 
 <template>
   <div class="register">
-    <LoginSettings />
-
+    <slot />
     <form class="form" @submit.prevent>
       <h2 class="title">{{ $t('login.register.title') }}</h2>
 
@@ -216,9 +215,7 @@ const handleRegister = async () => {
     top: 0%;
     left: 5%;
     border-radius: 7px;
-    box-shadow:
-      0 15px 27px var(--kungalgame-blue-0),
-      0 10px 10px var(--kungalgame-blue-0);
+    box-shadow: var(--kungalgame-shadow-1);
   }
 
   .form {
