@@ -3,15 +3,6 @@ import type { KUNGalgamePayload } from '~/types/utils/jwt'
 
 const config = useRuntimeConfig()
 
-export const verifyJWTPayload = (token: string) => {
-  try {
-    const payload = jwt.verify(token, config.JWT_SECRET) as KUNGalgamePayload
-    return payload
-  } catch (error) {
-    return null
-  }
-}
-
 export const generateToken = (uid: number, name: string, expire: string) => {
   const payload: KUNGalgamePayload = {
     iss: config.JWT_ISS,

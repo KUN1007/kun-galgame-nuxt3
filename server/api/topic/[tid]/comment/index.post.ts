@@ -24,7 +24,7 @@ const readReplyData = async (event: H3Event) => {
     return
   }
 
-  const userInfo = getCookieTokenInfo(event)
+  const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
     kunError(event, 10115, 205)
     return

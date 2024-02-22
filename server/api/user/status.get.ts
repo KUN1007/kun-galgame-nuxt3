@@ -2,7 +2,7 @@ import UserModel from '~/server/models/user'
 import type { HomeUserStatus } from '~/types/api/home'
 
 export default defineEventHandler(async (event) => {
-  const userInfo = getCookieTokenInfo(event)
+  const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
     kunError(event, 10115, 205)
     return

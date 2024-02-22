@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import type { FetchContext, FetchResponse } from 'ofetch'
 
 interface ResponseMap {
@@ -18,17 +19,21 @@ type KunOnResponseErrorContext<R extends ResponseType = 'json'> =
 
 export const onResponse = async (context: KunOnResponseContext) => {
   if (context.response.status === 205) {
-    kungalgameStoreReset()
-    useMessage(
-      'Login expired, please login again',
-      '登录过期, 请重新登陆',
-      'error',
-      7777
-    )
+    const navigateCookie = Cookies.get('kungalgame-is-navigate-to-login')
+    if (!navigateCookie) {
+      kungalgameStoreReset()
+      useMessage(
+        'Login expired, please login again',
+        '登录过期, 请重新登陆',
+        'error',
+        7777
+      )
 
-    const nuxt = useNuxtApp()
-    navigateTo(nuxt.$localePath('/login'))
-    return
+      const nuxt = useNuxtApp()
+      navigateTo(nuxt.$localePath('/login'))
+      Cookies.set('kungalgame-is-navigate-to-login', 'navigated')
+      return
+    }
   }
 
   if (context.response.status === 233) {

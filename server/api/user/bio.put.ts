@@ -3,7 +3,7 @@ import UserModel from '~/server/models/user'
 export default defineEventHandler(async (event) => {
   const { bio }: { bio: string } = await readBody(event)
 
-  const userInfo = getCookieTokenInfo(event)
+  const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
     kunError(event, 10115, 205)
     return

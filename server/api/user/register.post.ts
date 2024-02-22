@@ -79,7 +79,7 @@ export default defineEventHandler(async (event) => {
     await user.save()
 
     const { token, refreshToken } = await createTokens(user.uid, user.name)
-    setCookie(event, 'kungalgame-is-navigate-to-login', '0')
+    deleteCookie(event, 'kungalgame-is-navigate-to-login')
     setCookie(event, 'kungalgame-moemoe-refresh-token', refreshToken, {
       httpOnly: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
