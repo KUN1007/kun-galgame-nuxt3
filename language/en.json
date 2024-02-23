@@ -300,7 +300,8 @@
       "hint": "Please enter your new signature, up to 107 characters",
       "count": "Character count",
       "username": "Change Username",
-      "usernameHint": "Username should be 1 to 17 characters long with any characters. Usernames must be unique, changing your username will cost you 17 moemoepoints"      
+      "usernameHint": "Username should be 1 to 17 characters long with any characters. Usernames must be unique, changing your username will cost you 17 moemoepoints" ,     
+      "gravatar": "enable Gravatar"
     },
     "email":{
       "email": "Change Email",

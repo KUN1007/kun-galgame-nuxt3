@@ -1,10 +1,26 @@
 <script setup lang="ts">
 const model = defineModel()
+
+withDefaults(
+  defineProps<{
+    disabled?: boolean
+  }>(),
+  {
+    disabled: false,
+  }
+)
 </script>
 
 <template>
-  <input type="checkbox" id="switch" v-model="model" />
-  <label for="switch"></label>
+  <input type="checkbox" id="switch" :disabled="disabled" v-model="model" />
+  <label
+    for="switch"
+    :style="{
+      color: disabled ? 'var(--kungalgame-gray-4)' : '',
+      opacity: disabled ? 0.5 : 1,
+      cursor: disabled ? 'not-allowed' : 'pointer',
+    }"
+  ></label>
 </template>
 
 <style lang="scss" scoped>

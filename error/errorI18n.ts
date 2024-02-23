@@ -61,6 +61,9 @@ const errorMessagesEN: Record<number, string> = {
   10508: `Your moemoepoints are less than 1100, so you can't use the upvote reply feature (-B)`,
   10509: `You've already liked this reply. (-B)`,
   10510: `You've already disliked this reply. (-B)`,
+
+  // Other Pary
+  10601: `You have not enabled Gravatar (-B)`
 }
 
 const errorMessagesCN: Record<number, string> = {
@@ -119,6 +122,8 @@ const errorMessagesCN: Record<number, string> = {
   10508: `您的萌萌点不足 1100, 无法使用推回复功能 (-B)`,
   10509: `您已经点赞过这个回复了 (-B)`,
   10510: `您已经点踩过这个回复了 (-B)`,
+
+  10601: `您未启用 Gravatar`,
 }
 
 export const getErrorMessageEN = (errorCode: number) => {

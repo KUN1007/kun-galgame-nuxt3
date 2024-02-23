@@ -7,6 +7,10 @@ const selectedFileUrl = ref<string>('')
 const input = ref<HTMLElement>()
 const isUploading = ref(false)
 const { avatar, avatarMin } = storeToRefs(useKUNGalgameUserStore())
+const enableGravatar = ref(
+  avatar.value.startsWith('https://www.gravatar.com/avatar')
+)
+const switchDisable = ref(false)
 
 const uploadImage = async (file: File) => {
   const isFileValid = checkImageValid(file)
@@ -75,11 +79,58 @@ const handleChangeAvatar = async () => {
     await refresh?.()
   }
 }
+
+watch(enableGravatar, async () => {
+  switchDisable.value = true
+  const { data } = await useFetch('/api/user/gravatar', {
+    method: 'POST',
+    body: {
+      enable: enableGravatar.value,
+    },
+    watch: false,
+    ...kungalgameResponseHandler,
+  })
+
+  const resAvatar = data.value
+  if (enableGravatar.value) {
+    if (resAvatar) {
+      avatar.value = resAvatar + '?s=200'
+      avatarMin.value = resAvatar + '?s=100'
+      useMessage(
+        'Enable gravatar successfully!',
+        '启用 Gravatar 成功',
+        'success'
+      )
+    }
+  } else {
+    if (resAvatar === '') {
+      avatar.value = ''
+      avatarMin.value = ''
+      useMessage(
+        'Disable gravatar successfully!',
+        '关闭 Gravatar 成功',
+        'success'
+      )
+    }
+  }
+  await refresh?.()
+  switchDisable.value = false
+})
 </script>
 
 <template>
   <div class="avatar">
-    <div class="title">{{ $t('user.settings.avatar') }}</div>
+    <div class="title">
+      <span>{{ $t('user.settings.avatar') }}</span>
+      <div class="gravatar">
+        <a
+          href="https://support.gravatar.com/basic/what-is-gravatar/"
+          target="_blank"
+          >{{ $t('user.settings.gravatar') }}</a
+        >
+        <KunSwitch :disabled="switchDisable" v-model="enableGravatar" />
+      </div>
+    </div>
 
     <div class="container">
       <div
@@ -130,7 +181,21 @@ const handleChangeAvatar = async () => {
 }
 
 .title {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 10px;
+  padding-right: 16px;
+
+  .gravatar {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+
+    a {
+      cursor: pointer;
+      color: var(--kungalgame-blue-5);
+    }
+  }
 }
 
 .container {
