@@ -12,6 +12,7 @@ useHead({
 })
 
 const isShowPanel = ref('')
+const isLogin = computed(() => (isShowPanel.value ? true : false))
 
 const handleClickSignIn = () => {
   isShowPanel.value = ''
@@ -29,7 +30,7 @@ const handleClickRegister = () => {
       :class="isShowPanel"
       :style="{ backgroundImage: `url(/login.webp)` }"
     >
-      <Login class="login">
+      <Login class="login" :is-login="isLogin">
         <LoginSettings>
           <div class="switch" @click="handleClickRegister">
             <span>{{ $t('login.overlay.register') }}</span>
@@ -37,7 +38,7 @@ const handleClickRegister = () => {
         </LoginSettings>
       </Login>
 
-      <LoginRegister class="register">
+      <LoginRegister class="register" :is-login="isLogin">
         <LoginSettings>
           <div class="switch" @click="handleClickSignIn">
             <span>{{ $t('login.overlay.login') }}</span>

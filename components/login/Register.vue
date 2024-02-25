@@ -2,6 +2,10 @@
 import { registerFormItem } from './utils/registerFormItem'
 import { checkRegisterForm } from './utils/checkRegister'
 
+const props = defineProps<{
+  isLogin: boolean
+}>()
+
 const info = useTempMessageStore()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useTempMessageStore()
@@ -22,19 +26,20 @@ const registerForm = reactive<Record<string, string>>({
 })
 
 const handleSendCode = () => {
-  if (
-    !checkForm(registerForm.name, registerForm.email, registerForm.password)
-  ) {
+  const result = checkForm(
+    registerForm.name,
+    registerForm.email,
+    registerForm.password
+  )
+  if (!result) {
     return
   }
 
-  if (isCaptureSuccessful.value) {
-    isSendCode.value = true
-    isCaptureSuccessful.value = false
-  } else {
-    isSendCode.value = false
+  if (!isCaptureSuccessful.value) {
     isShowCapture.value = true
+    return
   }
+  isSendCode.value = true
 }
 
 const handleRegister = async () => {
@@ -55,6 +60,8 @@ const handleRegister = async () => {
     useKUNGalgameUserStore().setUserInfo(data.value)
     navigateTo(localePath('/'))
   }
+
+  isCaptureSuccessful.value = false
 }
 </script>
 

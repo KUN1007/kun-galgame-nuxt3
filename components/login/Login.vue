@@ -3,6 +3,10 @@ import { checkLoginForm } from './utils/checkLogin'
 
 const localePath = useLocalePath()
 
+const props = defineProps<{
+  isLogin: boolean
+}>()
+
 const info = useTempMessageStore()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useTempMessageStore()
@@ -29,7 +33,7 @@ const handleLogin = async () => {
 watch(
   () => isCaptureSuccessful.value,
   async () => {
-    if (!isCaptureSuccessful.value) {
+    if (!isCaptureSuccessful.value || props.isLogin) {
       return
     }
 
@@ -44,6 +48,8 @@ watch(
       useKUNGalgameUserStore().setUserInfo(data.value)
       navigateTo(localePath('/'))
     }
+
+    isCaptureSuccessful.value = false
   }
 )
 
