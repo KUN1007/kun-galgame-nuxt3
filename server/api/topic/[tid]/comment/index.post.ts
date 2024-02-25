@@ -93,7 +93,7 @@ export default defineEventHandler(async (event) => {
       { $inc: { popularity: 2, comments: 1 } }
     )
 
-    const reply = await ReplyModel.findOneAndUpdate(
+    await ReplyModel.findOneAndUpdate(
       { rid },
       { $addToSet: { comment: savedComment.cid } },
       { $inc: { comment_count: 1 } }

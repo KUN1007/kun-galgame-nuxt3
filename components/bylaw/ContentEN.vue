@@ -34,8 +34,8 @@
             moemoepoints ✔
           </li>
           <li>
-            5. If someone comments on a user's reply, both the original poster
-            and the commenter receive 1 moemoepoint ✔
+            5. If someone comments on a user's reply, the original poster
+            receive 1 moemoepoint ✔
           </li>
           <li>
             6. If a user's topic/reply is promoted, they will receive 7
