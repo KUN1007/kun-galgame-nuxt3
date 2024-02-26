@@ -65,7 +65,6 @@ const activeClass = (currentPageUid: number, routeName: string) => {
   height: 40px;
   background-color: var(--kungalgame-trans-blue-0);
   display: flex;
-  transition: all 0.2s;
 
   &:hover {
     background-color: var(--kungalgame-trans-blue-2);

@@ -154,10 +154,10 @@ const handleRegister = async () => {
   width: 100%;
   background-color: var(--kungalgame-white);
   color: var(--kungalgame-font-color-3);
+  border-bottom: 2px solid var(--kungalgame-trans-blue-2);
 
   &:focus {
-    border-bottom: 1.5px solid var(--kungalgame-blue-5);
-    transition: 0.2s linear;
+    border-bottom: 2px solid var(--kungalgame-blue-5);
   }
 }
 

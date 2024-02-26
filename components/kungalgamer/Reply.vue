@@ -46,9 +46,8 @@ const { data } = await useFetch('/api/user/replies', {
     align-items: center;
 
     &:hover {
-      transition: all 0.2s;
       color: var(--kungalgame-white);
-      background-color: var(--kungalgame-pink-4);
+      background-color: var(--kungalgame-blue-5);
     }
   }
 }

@@ -8,6 +8,7 @@ const props = defineProps<{
   refresh: () => {}
 }>()
 
+const localePath = useLocalePath()
 const { locale } = useI18n()
 
 const activeMessage = ref<number[]>([])
@@ -121,7 +122,9 @@ const handleDeleteMessage = async (mid: number) => {
           {{ handleGetMessageDetail(msg) }}
         </div>
 
-        <span @click="navigateTo(`/kungalgamer/${msg.senderUid}/info`)">
+        <span
+          @click="navigateTo(localePath(`/kungalgamer/${msg.senderUid}/info`))"
+        >
           {{ `${$t('header.message.goto')} ${msg.senderName}` }}
         </span>
         <span v-if="msg.status === 'unread'" @click="handleMarkAsRead(msg.mid)">

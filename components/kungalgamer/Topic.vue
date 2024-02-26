@@ -46,7 +46,6 @@ const { data } = await useFetch('/api/user/topics', {
     align-items: center;
 
     &:hover {
-      transition: all 0.2s;
       color: var(--kungalgame-white);
       background-color: var(--kungalgame-blue-5);
     }
