@@ -32,7 +32,7 @@ export const questionsCN: Question[] = reactive([
   },
   {
     id: 4,
-    text: '下列哪个游戏不属于五彩斑斓系列？',
+    text: '下列哪个不属于五彩斑斓系列？',
     options: [
       '五彩斑斓的世界',
       '五彩斑斓的曙光',

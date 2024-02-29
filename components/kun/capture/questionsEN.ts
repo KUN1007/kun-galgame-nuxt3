@@ -32,7 +32,7 @@ export const questionsEN: Question[] = reactive([
   },
   {
     id: 4,
-    text: 'Which of the following games does not belong to the "Irotoridori" series?',
+    text: 'Which of the following does not belong to the "Irotoridori" series?',
     options: [
       'Irotoridori no Sekai',
       'Irotoridori no Hikari',
