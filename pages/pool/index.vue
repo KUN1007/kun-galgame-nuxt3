@@ -173,10 +173,6 @@ onBeforeUnmount(() => {
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
-  padding: 17px;
-  background-color: var(--kungalgame-trans-white-5);
 }
 
 .topic-container {

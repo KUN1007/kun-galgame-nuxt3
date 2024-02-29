@@ -61,6 +61,8 @@ const loliTime = computed(() => {
   padding: 10px;
   border: 2px solid var(--kungalgame-trans-blue-2);
   border-radius: 10px;
+  backdrop-filter: blur(10px);
+  background-color: var(--kungalgame-trans-white-5);
 
   &:hover {
     border: 2px solid var(--kungalgame-blue-5);
