@@ -20,7 +20,7 @@ const handleChangeUsername = async () => {
     method: 'PUT',
     watch: false,
     body: { username: inputValue.value },
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {

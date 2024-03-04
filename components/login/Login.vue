@@ -14,10 +14,10 @@ const { isShowCapture, isCaptureSuccessful } = storeToRefs(
 
 const loginForm = reactive({
   name: '',
-  password: '',
+  password: ''
 })
 
-const handleLogin = async () => {
+const handleLogin = () => {
   const checkLogin = checkLoginForm.asyncData(useNuxtApp().$pinia)
   const result = checkLogin(loginForm.name, loginForm.password)
   if (!result) {
@@ -26,7 +26,6 @@ const handleLogin = async () => {
 
   if (!isCaptureSuccessful.value) {
     isShowCapture.value = true
-    return
   }
 }
 
@@ -41,7 +40,7 @@ watch(
       method: 'POST',
       body: loginForm,
       watch: false,
-      ...kungalgameResponseHandler,
+      ...kungalgameResponseHandler
     })
     if (data.value) {
       info.info('AlertInfo.login.success')

@@ -30,13 +30,13 @@ const upvoteTopic = async () => {
 
   const queryData = {
     to_uid: props.toUid,
-    time: Date.now(),
+    time: Date.now()
   }
   const { data } = await useFetch(`/api/topic/${props.tid}/upvote`, {
     method: 'PUT',
     query: queryData,
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {
@@ -61,13 +61,13 @@ const upvoteReply = async () => {
   const queryData = {
     to_uid: props.toUid,
     rid: props.rid,
-    time: Date.now(),
+    time: Date.now()
   }
   const { data } = await useFetch(`/api/topic/${props.tid}/reply/upvote`, {
     method: 'PUT',
     query: queryData,
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {
@@ -110,9 +110,9 @@ const handleClickUpvote = async () => {
   }
 
   if (props.rid === 0) {
-    upvoteTopic()
+    await upvoteTopic()
   } else {
-    upvoteReply()
+    await upvoteReply()
   }
 }
 </script>

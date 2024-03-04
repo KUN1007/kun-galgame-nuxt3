@@ -5,7 +5,7 @@ import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
 const {
   content: rewriteContent,
   isTopicRewriting,
-  autosaveCount,
+  autosaveCount
 } = storeToRefs(useTempEditStore())
 const { editorHeight: editEditorHeight, content: editContent } = storeToRefs(
   useKUNGalgameEditStore()

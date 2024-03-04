@@ -2,7 +2,7 @@
 import { checkReplyPublish } from '../utils/checkReplyPublish'
 import type {
   TopicCreateReplyRequestData,
-  TopicUpdateReplyRequestData,
+  TopicUpdateReplyRequestData
 } from '~/types/api/reply'
 
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
@@ -21,7 +21,7 @@ const handlePublish = async () => {
     to_floor: replyDraft.value.toFloor.toString(),
     tags: replyDraft.value.tags,
     content: replyDraft.value.content,
-    time: Date.now().toString(),
+    time: Date.now().toString()
   }
   if (!checkReplyPublish(requestData.tags, requestData.content)) {
     return
@@ -43,7 +43,7 @@ const handlePublish = async () => {
     method: 'POST',
     body: requestData,
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
   isPublishing.value = false
 
@@ -71,7 +71,7 @@ const handleRewrite = async () => {
     rid: replyRewrite.value.rid.toString(),
     tags: replyRewrite.value.tags,
     content: replyRewrite.value.content,
-    edited: Date.now().toString(),
+    edited: Date.now().toString()
   }
   if (!checkReplyPublish(requestData.tags, requestData.content)) {
     return
@@ -92,7 +92,7 @@ const handleRewrite = async () => {
     method: 'PUT',
     body: requestData,
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
   isPublishing.value = false
 

@@ -15,10 +15,10 @@ const getMessages = async () => {
     query: {
       page: '1',
       limit: '10',
-      sortOrder: 'desc',
+      sortOrder: 'desc'
     },
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
   return data
 }
@@ -29,7 +29,7 @@ const handleReadAllMessage = async () => {
   const { data } = await useFetch(`/api/message/read/all`, {
     method: 'PUT',
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {
@@ -47,7 +47,7 @@ const handleDeleteAllMessage = async () => {
   const { data } = await useFetch(`/api/message/delete/all`, {
     method: 'DELETE',
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {

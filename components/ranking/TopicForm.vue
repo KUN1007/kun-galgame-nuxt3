@@ -11,10 +11,10 @@ const getTopics = async () => {
       page: topic.value.page,
       limit: topic.value.limit,
       sortField: topic.value.sortField,
-      sortOrder: topic.value.sortOrder,
+      sortOrder: topic.value.sortOrder
     },
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
   return data
 }

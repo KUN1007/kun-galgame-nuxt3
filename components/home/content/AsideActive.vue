@@ -7,8 +7,8 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="item" v-if="props.isActive">
-    <span v-if="asideItem.length" v-for="kun in asideItem" :key="kun.index">
+  <div class="item" v-if="props.isActive && asideItem.length">
+    <span v-for="kun in asideItem" :key="kun.index">
       <NuxtLinkLocale :to="{ path: kun.router }">
         <Icon class="icon" :name="kun.icon" />
         {{ $t(`mainPage.asideActive.${kun.name}`) }}

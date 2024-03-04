@@ -153,11 +153,11 @@
         "experts."
       </li>
       <li>
-        <strong
-          >Avoid the negative aspects of modern internet trends, such as the
+        <strong>
+          Avoid the negative aspects of modern internet trends, such as the
           culture of praising and criticizing, valuing criticism as a virtue,
-          etc.</strong
-        >
+          etc.
+        </strong>
       </li>
       <li>
         Encourage everyone to learn basic computer fundamentals to prevent the
@@ -176,10 +176,11 @@
     <br />
     <br />
     <p>
-      We believe: "<strong style="color: red"
-        >A game that brings you joy and makes you genuinely laugh is a truly
-        good game!</strong
-      >"
+      We believe: "<strong style="color: red">
+        A game that brings you joy and makes you genuinely laugh is a truly good
+        game!
+      </strong>
+      "
     </p>
     <br />
     <br />
@@ -342,10 +343,11 @@
     <h3>4. Free Forever</h3>
     <p>
       Literally,
-      <strong
-        >no one will ever spend money on the website's virtual currency
-        (Moemoepoints)</strong
-      >. The amount of virtual currency depends on appreciation from others. If
+      <strong>
+        no one will ever spend money on the website's virtual currency
+        (Moemoepoints)
+      </strong>
+      . The amount of virtual currency depends on appreciation from others. If
       you would like to support us, you can do so
       <span class="skip">
         <NuxtLinkLocale to="/donate">here</NuxtLinkLocale>

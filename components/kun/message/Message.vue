@@ -29,7 +29,7 @@ const handelClickShowMoreOperation = async (mid: number) => {
       method: 'GET',
       query: { mid },
       watch: false,
-      ...kungalgameResponseHandler,
+      ...kungalgameResponseHandler
     })
     messageMap.set(mid, data.value)
   } else {
@@ -52,7 +52,7 @@ const handleMarkAsRead = async (mid: number) => {
     method: 'PUT',
     query: { mid },
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {
@@ -66,7 +66,7 @@ const handleDeleteMessage = async (mid: number) => {
     method: 'DELETE',
     query: { mid },
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {

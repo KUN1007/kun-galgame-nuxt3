@@ -7,16 +7,16 @@ const { data } = await useFetch('/api/user/comments', {
   method: 'GET',
   query: { cidArray: props.comment },
   watch: false,
-  ...kungalgameResponseHandler,
+  ...kungalgameResponseHandler
 })
 </script>
 
 <template>
   <div class="comment" v-if="data">
-    <div class="item" v-for="(comment, index) in data" :key="index">
-      <NuxtLinkLocale :to="`/topic/${comment.tid}`">
+    <div class="item" v-for="(commentData, index) in data" :key="index">
+      <NuxtLinkLocale :to="`/topic/${commentData.tid}`">
         <div class="title">
-          {{ comment.content }}
+          {{ commentData.content }}
         </div>
       </NuxtLinkLocale>
     </div>

@@ -24,7 +24,7 @@ const handlePublishComment = async () => {
   const requestData = {
     rid: rid.value,
     to_uid: toUid.value,
-    content: content.value,
+    content: content.value
   }
   if (!checkCommentPublish(requestData.content)) {
     return
@@ -40,7 +40,7 @@ const handlePublishComment = async () => {
     method: 'POST',
     body: requestData,
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
   isPublishing.value = false
 

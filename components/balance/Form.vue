@@ -2,7 +2,7 @@
 import type {
   BalanceIncome,
   BalanceExpenditure,
-  PLStatement,
+  PLStatement
 } from '~/types/api/balance'
 
 const props = defineProps<{

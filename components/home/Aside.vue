@@ -35,7 +35,7 @@ watch(
     </div>
 
     <div class="item-active" v-if="isActiveMainPageAside">
-      <HomeContentAsideActive :isActive="isActiveMainPageAside" />
+      <HomeContentAsideActive :is-active="isActiveMainPageAside" />
     </div>
 
     <div class="item" v-if="!isActiveMainPageAside">

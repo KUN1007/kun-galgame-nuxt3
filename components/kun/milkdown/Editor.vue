@@ -6,7 +6,7 @@ import {
   rootAttrsCtx,
   defaultValueCtx,
   editorViewCtx,
-  parserCtx,
+  parserCtx
 } from '@milkdown/core'
 import type { Ctx } from '@milkdown/ctx'
 import { Milkdown, useEditor } from '@milkdown/vue'
@@ -101,7 +101,7 @@ const editorInfo = useEditor((root) =>
       ctx.set(rootCtx, root)
       ctx.set(rootAttrsCtx, {
         roles: 'kun-galgame-milkdown-editor',
-        'aria-label': 'kun-galgame-milkdown-editor',
+        'aria-label': 'kun-galgame-milkdown-editor'
       })
       ctx.set(defaultValueCtx, valueMarkdown.value)
 
@@ -116,7 +116,7 @@ const editorInfo = useEditor((root) =>
       ctx.update(uploadConfig.key, (prev) => ({
         ...prev,
         uploader: kunUploader,
-        uploadWidgetFactory: kunUploadWidgetFactory,
+        uploadWidgetFactory: kunUploadWidgetFactory
       }))
 
       ctx.set(prismConfig.key, {
@@ -139,13 +139,13 @@ const editorInfo = useEditor((root) =>
           refractor.register(scala)
           refractor.register(sql)
           refractor.register(tsx)
-        },
+        }
       })
 
       ctx.set(tooltip.key, {
         view: pluginViewFactory({
-          component: Tooltip,
-        }),
+          component: Tooltip
+        })
       })
     })
     .use(history)
@@ -165,8 +165,8 @@ const editorInfo = useEditor((root) =>
           new Plugin({
             view: pluginViewFactory({
               component: Size,
-              root: () => (container.value ? container.value : root),
-            }),
+              root: () => (container.value ? container.value : root)
+            })
           })
       )
     )
@@ -175,7 +175,7 @@ const editorInfo = useEditor((root) =>
 
 <template>
   <div ref="container" class="editor-container">
-    <KunMilkdownPluginsMenu v-if="isShowMenu" :editorInfo="editorInfo" />
+    <KunMilkdownPluginsMenu v-if="isShowMenu" :editor-info="editorInfo" />
     <Milkdown class="editor" />
 
     <div class="loading" v-if="editorInfo.loading.value">

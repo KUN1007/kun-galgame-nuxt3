@@ -67,10 +67,10 @@
       <div class="title-1">Users</div>
       <ul>
         <li>
-          <strong
-            >1. Users with less than 1000 moemoepoints will have their accounts
-            deleted</strong
-          >
+          <strong>
+            1. Users with less than 1000 moemoepoints will have their accounts
+            deleted
+          </strong>
         </li>
         <li>
           2. Users with less than 1100 moemoepoints cannot use the "Promote

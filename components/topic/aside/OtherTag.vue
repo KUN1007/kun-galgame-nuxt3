@@ -15,7 +15,7 @@ const { data } = await useFetch(`/api/topic/${tid.value}/related`, {
   method: 'GET',
   query: { tags },
   watch: false,
-  ...kungalgameResponseHandler,
+  ...kungalgameResponseHandler
 })
 
 isEmpty.value = !data.value?.length

@@ -2,7 +2,7 @@
 import { checkTopicPublish } from './utils/checkTopicPublish'
 import type {
   EditCreateTopicRequestData,
-  EditUpdateTopicRequestData,
+  EditUpdateTopicRequestData
 } from '~/types/api/topic'
 
 const localePath = useLocalePath()
@@ -14,7 +14,7 @@ const {
   tags: rewriteTags,
   category: rewriteCategory,
   textCount: rewriteTextCount,
-  isTopicRewriting,
+  isTopicRewriting
 } = storeToRefs(useTempEditStore())
 
 const { textCount, title, content, tags, category } = storeToRefs(
@@ -41,7 +41,7 @@ const handlePublish = async () => {
     content: content.value,
     time: Date.now().toString(),
     tags: tags.value,
-    category: category.value,
+    category: category.value
   }
   if (!checkTopicPublish(textCount.value, requestData)) {
     return
@@ -62,7 +62,7 @@ const handlePublish = async () => {
     method: 'POST',
     body: requestData,
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
   isPublishing.value = false
 
@@ -81,7 +81,7 @@ const handleRewrite = async () => {
     content: rewriteContent.value,
     tags: rewriteTags.value,
     category: rewriteCategory.value,
-    edited: Date.now().toString(),
+    edited: Date.now().toString()
   }
   if (!checkTopicPublish(rewriteTextCount.value, requestData)) {
     return
@@ -102,7 +102,7 @@ const handleRewrite = async () => {
     method: 'PUT',
     body: requestData,
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
   isPublishing.value = false
 

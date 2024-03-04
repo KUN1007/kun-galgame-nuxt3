@@ -11,7 +11,7 @@ import {
   insertHrCommand,
   insertImageCommand,
   toggleInlineCodeCommand,
-  toggleLinkCommand,
+  toggleLinkCommand
 } from '@milkdown/preset-commonmark'
 import { toggleStrikethroughCommand } from '@milkdown/preset-gfm'
 import type { UseEditorReturn } from '@milkdown/vue'
@@ -51,7 +51,7 @@ const handleFileChange = async (event: Event) => {
     method: 'POST',
     body: formData,
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {
@@ -61,7 +61,7 @@ const handleFileChange = async (event: Event) => {
     call(insertImageCommand.key, {
       src: data.value ?? '',
       title: imageName,
-      alt: imageName,
+      alt: imageName
     })
     useMessage('Image upload successfully!', '图片上传成功!', 'success')
   }

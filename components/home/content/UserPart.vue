@@ -28,9 +28,9 @@ const handleClickAvatar = (event: MouseEvent) => {
         :src="user.avatar.replace(/\.webp$/, '-100.webp')"
         :alt="user.name"
       />
-      <span v-if="!props.user.avatar">{{
-        props.user.name.slice(0, 1).toUpperCase()
-      }}</span>
+      <span v-if="!props.user.avatar">
+        {{ props.user.name.slice(0, 1).toUpperCase() }}
+      </span>
     </div>
 
     <div class="info">

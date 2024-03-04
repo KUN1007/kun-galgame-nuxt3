@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// eslint-disable-next-line vue/require-prop-types
 const model = defineModel()
 </script>
 

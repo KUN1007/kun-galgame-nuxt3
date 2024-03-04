@@ -9,7 +9,7 @@ const { data } = await useFetch('/api/user/topics', {
   method: 'GET',
   query: { tidArray: props.tidArray },
   watch: false,
-  ...kungalgameResponseHandler,
+  ...kungalgameResponseHandler
 })
 </script>
 

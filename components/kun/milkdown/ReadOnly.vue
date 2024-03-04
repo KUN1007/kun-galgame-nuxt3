@@ -4,7 +4,7 @@ import {
   rootCtx,
   rootAttrsCtx,
   defaultValueCtx,
-  editorViewOptionsCtx,
+  editorViewOptionsCtx
 } from '@milkdown/core'
 import { Milkdown, useEditor } from '@milkdown/vue'
 import { commonmark } from '@milkdown/preset-commonmark'
@@ -50,13 +50,13 @@ const { get, loading } = useEditor((root) =>
       ctx.set(rootCtx, root)
       ctx.set(rootAttrsCtx, {
         roles: 'kun-galgame-milkdown-editor',
-        'aria-label': 'kun-galgame-milkdown-editor',
+        'aria-label': 'kun-galgame-milkdown-editor'
       })
       ctx.set(defaultValueCtx, valueMarkdown.value)
 
       ctx.update(editorViewOptionsCtx, (prev) => ({
         ...prev,
-        editable,
+        editable
       }))
 
       ctx.set(prismConfig.key, {
@@ -79,7 +79,7 @@ const { get, loading } = useEditor((root) =>
           refractor.register(scala)
           refractor.register(sql)
           refractor.register(tsx)
-        },
+        }
       })
     })
     .use(commonmark)

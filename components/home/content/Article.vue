@@ -12,9 +12,9 @@ const getTopics = async () => {
       page: topic.value.page,
       limit: topic.value.limit,
       sortField: topic.value.sortField,
-      sortOrder: topic.value.sortOrder,
+      sortOrder: topic.value.sortOrder
     },
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
   return data.value ?? []
 }
@@ -59,10 +59,10 @@ const isScrollAtBottom = () => {
   }
 }
 
-onMounted(async () => {
+onMounted(() => {
   content.value?.scrollTo({
     top: savedPosition.value,
-    left: 0,
+    left: 0
   })
 
   const element = content.value
@@ -82,18 +82,16 @@ onBeforeUnmount(() => {
 <template>
   <div class="topic-container" ref="content">
     <div
-      v-for="topic in topics"
-      :key="topic.tid"
-      :class="
-        hourDiff(topic.upvote_time, 10) ? 'kungalgame-comet-surround' : ''
-      "
+      v-for="(kun, index) in topics"
+      :key="index"
+      :class="hourDiff(kun.upvote_time, 10) ? 'kungalgame-comet-surround' : ''"
     >
       <span></span>
       <span></span>
       <span></span>
       <span></span>
 
-      <HomeContentSingleTopic :topic="topic" />
+      <HomeContentSingleTopic :topic="kun" />
     </div>
 
     <KunSkeletonHomeTopic v-if="!isLoadingComplete" />

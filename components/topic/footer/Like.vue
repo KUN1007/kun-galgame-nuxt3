@@ -36,27 +36,27 @@ const likeOperation = async (
   const isMasterTopic = rid === 0
   if (isMasterTopic) {
     const queryData = {
-      isPush: isPush,
-      to_uid: toUid,
+      isPush,
+      to_uid: toUid
     }
     const { data } = await useFetch(`/api/topic/${tid}/like`, {
       method: 'PUT',
       query: queryData,
       watch: false,
-      ...kungalgameResponseHandler,
+      ...kungalgameResponseHandler
     })
     return data
   } else {
     const queryData = {
-      isPush: isPush,
+      isPush,
       rid: props.rid,
-      to_uid: toUid,
+      to_uid: toUid
     }
     const { data } = await useFetch(`/api/topic/${tid}/reply/like`, {
       method: 'PUT',
       query: queryData,
       watch: false,
-      ...kungalgameResponseHandler,
+      ...kungalgameResponseHandler
     })
     return data
   }

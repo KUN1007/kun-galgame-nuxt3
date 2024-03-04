@@ -9,7 +9,7 @@ const input = reactive({
   email: '',
   code: '',
   newPassword: '',
-  confirmPassword: '',
+  confirmPassword: ''
 })
 
 const localePath = useLocalePath()
@@ -56,7 +56,7 @@ const handleChangePassword = async () => {
   const { data } = await useFetch('/api/auth/password/reset', {
     method: 'POST',
     body: input,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {
@@ -107,7 +107,7 @@ const handleChangePassword = async () => {
       @click="handleClickSendCode"
       class="code"
       :email="input.email"
-      :isSendCode="isSendCode"
+      :is-send-code="isSendCode"
       to="forgot"
     />
 

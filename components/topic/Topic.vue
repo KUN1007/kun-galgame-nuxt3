@@ -10,7 +10,7 @@ const {
   isScrollToTop,
   isLoading,
   scrollToReplyId,
-  tempReply,
+  tempReply
 } = storeToRefs(useTempReplyStore())
 
 const { isShowCommentPanelRid } = storeToRefs(useTempCommentStore())
@@ -34,10 +34,10 @@ const getReplies = async () => {
       page: replyRequest.value.page,
       limit: replyRequest.value.limit,
       sortField: replyRequest.value.sortField,
-      sortOrder: replyRequest.value.sortOrder,
+      sortOrder: replyRequest.value.sortOrder
     },
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
   return data
 }
@@ -81,7 +81,7 @@ watch(
 watch(isScrollToTop, () => {
   if (content.value) {
     content.value.scrollTo({
-      top: 0,
+      top: 0
     })
     isScrollToTop.value = false
   }
@@ -195,13 +195,13 @@ onBeforeMount(() => {
         </div>
       </Transition>
 
-      <TopicMaster v-if="topicData" :topicData="topicData" />
+      <TopicMaster v-if="topicData" :topic-data="topicData" />
 
       <TopicReply
         v-if="topicData && repliesData"
-        :repliesData="repliesData"
+        :replies-data="repliesData"
         :title="topicData.title"
-        :isExecuteScrollToReplyAnimate="isExecuteScrollToReplyAnimate"
+        :is-execute-scroll-to-reply-animate="isExecuteScrollToReplyAnimate"
       />
     </div>
   </div>

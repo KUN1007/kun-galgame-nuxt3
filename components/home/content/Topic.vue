@@ -14,19 +14,19 @@ interface IconItem {
 const iconItem: IconItem[] = [
   {
     name: 'time',
-    icon: 'eos-icons:hourglass',
+    icon: 'eos-icons:hourglass'
   },
   {
     name: 'popularity',
-    icon: 'bi:fire',
-  },
+    icon: 'bi:fire'
+  }
 ]
 
 const getTopics = async (type: TypeToGet) => {
   const { data } = await useFetch('/api/home/nav', {
     method: 'GET',
     query: { type },
-    watch: false,
+    watch: false
   })
   return data.value ?? []
 }
@@ -49,14 +49,14 @@ const handleClickIcon = async (icon: TypeToGet) => {
         @click="handleClickIcon(icon.name)"
         v-tooltip="{
           message: $t(`mainPage.asideActive.${icon.name}`),
-          position: 'bottom',
+          position: 'bottom'
         }"
       >
         <Icon :name="icon.icon" />
       </span>
     </div>
 
-    <div class="content" v-for="kun in topics">
+    <div class="content" v-for="(kun, index) in topics" :key="index">
       <NuxtLinkLocale :to="`/topic/${kun.tid}`">
         <div class="topic">
           <div class="name">{{ kun.title }}</div>

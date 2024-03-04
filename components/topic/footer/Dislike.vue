@@ -36,27 +36,27 @@ const dislikeOperation = async (
   const isMasterTopic = rid === 0
   if (isMasterTopic) {
     const queryData = {
-      isPush: isPush,
-      to_uid: toUid,
+      isPush,
+      to_uid: toUid
     }
     const { data } = await useFetch(`/api/topic/${tid}/dislike`, {
       method: 'PUT',
       query: queryData,
       watch: false,
-      ...kungalgameResponseHandler,
+      ...kungalgameResponseHandler
     })
     return data
   } else {
     const queryData = {
-      isPush: isPush,
+      isPush,
       rid: props.rid,
-      to_uid: toUid,
+      to_uid: toUid
     }
     const { data } = await useFetch(`/api/topic/${tid}/reply/dislike`, {
       method: 'PUT',
       query: queryData,
       watch: false,
-      ...kungalgameResponseHandler,
+      ...kungalgameResponseHandler
     })
     return data
   }

@@ -10,7 +10,7 @@ const searchTopics = async () => {
   const { data } = await useFetch('/api/home/search', {
     query: search.value,
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
   return data.value ? data.value : []
 }

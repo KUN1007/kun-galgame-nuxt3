@@ -9,19 +9,19 @@ const { data } = await useFetch('/api/user/replies', {
   method: 'GET',
   query: { ridArray: props.reply },
   watch: false,
-  ...kungalgameResponseHandler,
+  ...kungalgameResponseHandler
 })
 </script>
 
 <template>
   <div class="reply" v-if="data">
-    <div class="item" v-for="(reply, index) in data" :key="index">
-      <NuxtLinkLocale :to="`/topic/${reply.tid}`">
+    <div class="item" v-for="(replyData, index) in data" :key="index">
+      <NuxtLinkLocale :to="`/topic/${replyData.tid}`">
         <div class="title">
-          {{ markdownToText(reply.content) }}
+          {{ markdownToText(replyData.content) }}
         </div>
         <div class="time">
-          {{ dayjs(reply.time).format('MM/DD/YYYY') }}
+          {{ dayjs(replyData.time).format('MM/DD/YYYY') }}
         </div>
       </NuxtLinkLocale>
     </div>

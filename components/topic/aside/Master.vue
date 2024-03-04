@@ -13,7 +13,7 @@ const { data } = await useFetch(`/api/topic/${tid.value}/popular`, {
   method: 'GET',
   query: { uid: props.uid },
   watch: false,
-  ...kungalgameResponseHandler,
+  ...kungalgameResponseHandler
 })
 
 isEmpty.value = !data.value?.length

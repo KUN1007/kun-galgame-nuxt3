@@ -45,7 +45,7 @@ onMounted(async () => {
     })
 
   const { data } = await useFetch(`/api/message/unread`, {
-    method: 'GET',
+    method: 'GET'
   })
   if (data.value) {
     messageStatus.value = 'new'

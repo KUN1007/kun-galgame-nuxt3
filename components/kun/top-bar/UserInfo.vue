@@ -41,7 +41,7 @@ const handleCheckIn = async () => {
   const { data } = await useFetch(`/api/user/check-in`, {
     method: 'POST',
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (typeof data.value === 'number') {
@@ -72,7 +72,7 @@ onMounted(async () => {
   const { data } = await useFetch(`/api/user/status`, {
     method: 'GET',
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {

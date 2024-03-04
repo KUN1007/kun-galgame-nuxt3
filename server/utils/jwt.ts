@@ -11,7 +11,6 @@ export const generateToken = (uid: number, name: string, expire: string) => {
     name
   }
 
-  // eslint-disable-next-line import/no-named-as-default-member
   const token = jwt.sign(payload, config.JWT_SECRET, {
     expiresIn: expire
   })

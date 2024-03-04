@@ -7,20 +7,20 @@ interface Info {
 const info: Info[] = [
   {
     index: 1,
-    name: 'kun1',
+    name: 'kun1'
   },
   {
     index: 2,
-    name: 'kun2',
+    name: 'kun2'
   },
   {
     index: 3,
-    name: 'kun3',
+    name: 'kun3'
   },
   {
     index: 4,
-    name: 'kun4',
-  },
+    name: 'kun4'
+  }
 ]
 </script>
 

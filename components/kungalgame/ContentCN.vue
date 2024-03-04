@@ -155,9 +155,11 @@
     <br />
     <br />
     <p>
-      我们认为：“<strong style="color: red"
-        >让你觉得快乐的，让你发自内心笑出来的，才是真正的好游戏！</strong
-      >”
+      我们认为：“
+      <strong style="color: red">
+        让你觉得快乐的，让你发自内心笑出来的，才是真正的好游戏！
+      </strong>
+      ”
     </p>
     <br />
     <br />
@@ -261,8 +263,8 @@
     <br />
     <p>
       Galgame 论坛意味着
-      <strong
-        >我们只以 galgame 为主，在首页的话题中仅含有和 galgame 有关的一切话题
+      <strong>
+        我们只以 galgame 为主，在首页的话题中仅含有和 galgame 有关的一切话题
       </strong>
       ，其它话题全部位于
       <span class="skip">
@@ -306,9 +308,8 @@
     </p>
     <p>但是，我们还是希望可以温柔一点，少一点攻击性</p>
     <p style="margin-bottom: 10px">
-      为了避免过早的被删除账户，<strong style="color: red"
-        >我们提供这些建议</strong
-      >
+      为了避免过早的被删除账户，
+      <strong style="color: red"> 我们提供这些建议 </strong>
     </p>
     <ul class="list">
       <li>1. 政治讨论禁止</li>

@@ -4,7 +4,7 @@ const routeName = useRouteName()
 const {
   tags: rewriteTags,
   isTopicRewriting,
-  clearTopic,
+  clearTopic
 } = storeToRefs(useTempEditStore())
 const { isShowHotKeywords: isShowEditHotKeywords, tags: editTags } =
   storeToRefs(useKUNGalgameEditStore())
@@ -45,7 +45,7 @@ if (routeName.value === 'topic-tid') {
 const getTags = async () => {
   const { data } = await useFetch('/api/tag/popular', {
     method: 'GET',
-    watch: false,
+    watch: false
   })
   return data.value ? data.value : []
 }
@@ -149,7 +149,11 @@ watch(
   <div class="container-a">
     <div class="input-container">
       <div class="tags-container">
-        <span v-for="tag in selectedTags" class="selected-tag">
+        <span
+          v-for="(tag, index) in selectedTags"
+          :key="index"
+          class="selected-tag"
+        >
           {{ tag }}
           <span class="close-btn" @click="handleTagClose(tag)">×</span>
         </span>
@@ -177,7 +181,11 @@ watch(
       <div class="tags-info">{{ $t('edit.hot') }}</div>
 
       <div class="tags">
-        <span v-for="tag in remainingTags" @click="() => handleTagClick(tag)">
+        <span
+          v-for="(tag, index) in remainingTags"
+          :key="index"
+          @click="() => handleTagClick(tag)"
+        >
           {{ tag }}
         </span>
       </div>

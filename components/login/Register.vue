@@ -22,7 +22,7 @@ const registerForm = reactive<Record<string, string>>({
   name: '',
   email: '',
   password: '',
-  code: '',
+  code: ''
 })
 
 const handleSendCode = () => {
@@ -51,7 +51,7 @@ const handleRegister = async () => {
     method: 'POST',
     body: registerForm,
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {

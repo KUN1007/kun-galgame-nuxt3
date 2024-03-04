@@ -17,7 +17,7 @@ const {
   upvotesCount,
   tags,
   category,
-  popularity,
+  popularity
 } = props.topic
 
 const getRepliesCount = computed(() => {

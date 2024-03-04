@@ -44,7 +44,7 @@ watch(
     </div>
 
     <div class="item" v-if="!isActiveAside">
-      <TopicAsideBase :isActive="!isActiveAside" />
+      <TopicAsideBase :is-active="!isActiveAside" />
     </div>
   </div>
 </template>

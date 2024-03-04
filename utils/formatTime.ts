@@ -1,7 +1,7 @@
-import dayjs, { extend } from 'dayjs'
+import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
-extend(relativeTime)
+dayjs.extend(relativeTime)
 
 const languageOptions = {
   en: {

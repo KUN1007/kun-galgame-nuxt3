@@ -11,10 +11,10 @@ const getUsers = async () => {
       page: user.value.page,
       limit: user.value.limit,
       sortField: user.value.sortField,
-      sortOrder: user.value.sortOrder,
+      sortOrder: user.value.sortOrder
     },
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
   return data
 }

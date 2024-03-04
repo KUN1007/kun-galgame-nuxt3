@@ -16,7 +16,7 @@ const loliData = ref({
   eye: '',
   brow: '',
   mouth: '',
-  face: '',
+  face: ''
 })
 const isShowLoading = ref(false)
 

@@ -36,11 +36,9 @@ watch(
           showInfo.value = false
         }
       }, 10)
-    } else {
-      if (timer.value) {
-        clearInterval(timer.value)
-        timer.value = null
-      }
+    } else if (timer.value) {
+      clearInterval(timer.value)
+      timer.value = null
     }
   }
 )

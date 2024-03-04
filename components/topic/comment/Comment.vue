@@ -1,10 +1,15 @@
 <script setup lang="ts">
-const CommentPanel = defineAsyncComponent(() => import('./Panel.vue'))
 import type { TopicComment } from '~/types/api/comment'
 
-const { tid, rid, toUid, toUsername, isShowCommentPanelRid } = storeToRefs(
-  useTempCommentStore()
-)
+const CommentPanel = defineAsyncComponent(() => import('./Panel.vue'))
+
+const {
+  tid: storeTid,
+  rid: storeRid,
+  toUid,
+  toUsername,
+  isShowCommentPanelRid
+} = storeToRefs(useTempCommentStore())
 
 const props = defineProps<{
   tid: number
@@ -24,12 +29,7 @@ const getComments = async () => {
     method: 'GET',
     query: { rid: props.rid },
     watch: false,
-    onResponse({ request, response, options }) {
-      if (response.status === 233) {
-        kungalgameErrorHandler(response.statusText)
-        return
-      }
-    },
+    ...kungalgameResponseHandler
   })
   return data
 }
@@ -60,8 +60,8 @@ const handleClickComment = (
     useMessage('You need to login to comment', '您需要登录以评论', 'warn', 5000)
     return
   }
-  tid.value = topicId
-  rid.value = replyId
+  storeTid.value = topicId
+  storeRid.value = replyId
   toUid.value = uid
   toUsername.value = name
 
@@ -72,7 +72,7 @@ const handleClickComment = (
 <template>
   <div class="comment-container">
     <CommentPanel
-      @getCommentEmits="getCommentEmits"
+      @get-comment-emits="getCommentEmits"
       v-if="isShowCommentPanelRid === ridRef"
     />
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { navBarRoute } from './utils/routeName'
 
-const { uid, roles } = storeToRefs(useKUNGalgameUserStore())
+const { uid: storeUid, roles } = storeToRefs(useKUNGalgameUserStore())
 
 const props = defineProps<{
   uid: number
@@ -10,11 +10,11 @@ const props = defineProps<{
 const currentPageUid = computed(() => props.uid)
 
 const currentPageUserRoles = computed(() => {
-  if (!uid.value) {
+  if (!storeUid.value) {
     return 1
   }
 
-  if (props.uid === uid.value) {
+  if (props.uid === storeUid.value) {
     return 4
   } else {
     return roles.value

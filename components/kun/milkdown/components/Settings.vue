@@ -38,7 +38,7 @@ const handelCloseSettingsMenu = () => {
 
     <KunMilkdownComponentsMenu
       @close="handelCloseSettingsMenu"
-      :isShowSettingsMenu="isShowSettingsMenu"
+      :is-show-settings-menu="isShowSettingsMenu"
     />
   </div>
 </template>

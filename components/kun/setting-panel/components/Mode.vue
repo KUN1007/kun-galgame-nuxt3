@@ -7,16 +7,16 @@ interface Mode {
 const modeItem: Mode[] = [
   {
     name: 'light',
-    icon: 'line-md:moon-filled-alt-to-sunny-filled-loop-transition',
+    icon: 'line-md:moon-filled-alt-to-sunny-filled-loop-transition'
   },
   {
     name: 'dark',
-    icon: 'line-md:sunny-outline-to-moon-loop-transition',
+    icon: 'line-md:sunny-outline-to-moon-loop-transition'
   },
   {
     name: 'system',
-    icon: 'line-md:light-dark-loop',
-  },
+    icon: 'line-md:light-dark-loop'
+  }
 ]
 </script>
 

@@ -24,8 +24,8 @@ const sendCode = async () => {
 
   const { data } = await useFetch(url, {
     method: 'POST',
-    body: body,
-    ...kungalgameResponseHandler,
+    body,
+    ...kungalgameResponseHandler
   })
   return data
 }

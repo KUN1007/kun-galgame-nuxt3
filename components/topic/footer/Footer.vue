@@ -46,7 +46,7 @@ const handleClickShare = () => {
         'success'
       )
     })
-    .catch((err) => {
+    .catch(() => {
       useMessage('Share Link copied failed!', '分享链接复制失败!', 'error')
     })
 }
@@ -64,7 +64,7 @@ const handleClickShare = () => {
           :to-uid="toUser.uid"
           v-tooltip="{
             message: { en: 'Upvote', zh: '推话题' },
-            position: 'bottom',
+            position: 'bottom'
           }"
         />
 
@@ -72,7 +72,7 @@ const handleClickShare = () => {
           v-if="info.views > 0"
           v-tooltip="{
             message: { en: 'Views', zh: '浏览数' },
-            position: 'bottom',
+            position: 'bottom'
           }"
         >
           <span class="icon"><Icon name="ic:outline-remove-red-eye" /></span>
@@ -88,7 +88,7 @@ const handleClickShare = () => {
           :to-uid="toUser.uid"
           v-tooltip="{
             message: { en: 'Like', zh: '点赞' },
-            position: 'bottom',
+            position: 'bottom'
           }"
         />
 
@@ -101,7 +101,7 @@ const handleClickShare = () => {
           :to-uid="toUser.uid"
           v-tooltip="{
             message: { en: 'Dislike', zh: '点踩' },
-            position: 'bottom',
+            position: 'bottom'
           }"
         />
       </ul>
@@ -122,7 +122,7 @@ const handleClickShare = () => {
         class="icon"
         v-tooltip="{
           message: { en: 'Share', zh: '分享' },
-          position: 'bottom',
+          position: 'bottom'
         }"
       >
         <Icon name="majesticons:share-line" />
@@ -143,7 +143,7 @@ const handleClickShare = () => {
         :to-uid="toUser.uid"
         v-tooltip="{
           message: { en: 'Rewrite', zh: 'Rewrite' },
-          position: 'bottom',
+          position: 'bottom'
         }"
       />
 

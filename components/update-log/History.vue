@@ -3,7 +3,7 @@ const { data: updateLogs } = await useFetch(`/api/update/history`, {
   method: 'GET',
   query: { page: 0, limit: 0 },
   watch: false,
-  ...kungalgameResponseHandler,
+  ...kungalgameResponseHandler
 })
 </script>
 

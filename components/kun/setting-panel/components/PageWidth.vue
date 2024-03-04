@@ -12,7 +12,7 @@ const pageNameArray = [
   'kungalgame',
   'pool',
   'bylaw',
-  'technique',
+  'technique'
 ]
 
 const initPageWidth = () => {

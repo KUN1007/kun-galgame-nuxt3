@@ -22,7 +22,7 @@ const {
   share,
   category,
   popularity,
-  upvote_time,
+  upvote_time
 } = topicData.topicData
 
 const loliStatus = computed(() => {
@@ -80,17 +80,17 @@ const loliStatus = computed(() => {
           views,
           likes,
           dislikes,
-          upvotes,
+          upvotes
         }"
         :content="{
           title,
           content,
           tags,
-          category,
+          category
         }"
         :to-user="{
           uid: user.uid,
-          name: user.name,
+          name: user.name
         }"
         :to-floor="0"
       />

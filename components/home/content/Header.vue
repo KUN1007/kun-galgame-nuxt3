@@ -15,7 +15,7 @@ const handleSortByCategory = (name: string) => {
 const iconMap: Record<string, string> = {
   galgame: 'icon-park-outline:game',
   technique: 'mingcute:tool-line',
-  others: 'basil:other-1-outline',
+  others: 'basil:other-1-outline'
 }
 </script>
 
@@ -32,7 +32,7 @@ const iconMap: Record<string, string> = {
             :class="
               topic.category[0].toLowerCase() === kun.name ? 'item-active' : ''
             "
-            v-for="(kun, _) in categoryItem"
+            v-for="kun in categoryItem"
             :key="kun.index"
             @click="handleSortByCategory(kun.name)"
           >

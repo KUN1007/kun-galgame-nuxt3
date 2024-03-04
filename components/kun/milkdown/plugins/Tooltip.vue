@@ -4,7 +4,7 @@ import { TooltipProvider } from '@milkdown/plugin-tooltip'
 import {
   toggleStrongCommand,
   toggleEmphasisCommand,
-  toggleInlineCodeCommand,
+  toggleInlineCodeCommand
 } from '@milkdown/preset-commonmark'
 import { toggleStrikethroughCommand } from '@milkdown/preset-gfm'
 import { callCommand } from '@milkdown/utils'
@@ -19,9 +19,9 @@ const divRef = ref<VNodeRef>()
 
 let tooltipProvider: TooltipProvider
 
-onMounted(async () => {
+onMounted(() => {
   tooltipProvider = new TooltipProvider({
-    content: divRef.value as any,
+    content: divRef.value as any
   })
 
   tooltipProvider.update(view.value, prevState.value)

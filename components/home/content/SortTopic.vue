@@ -29,7 +29,7 @@ const iconMap: Record<string, string> = {
   views: 'ic:outline-remove-red-eye',
   likes_count: 'line-md:thumbs-up-twotone',
   replies_count: 'ri:reply-line',
-  comments: 'fa-regular:comment-dots',
+  comments: 'fa-regular:comment-dots'
 }
 </script>
 

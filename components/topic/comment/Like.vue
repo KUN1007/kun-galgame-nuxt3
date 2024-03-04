@@ -41,13 +41,13 @@ const likeComment = async () => {
 
   const queryData = {
     cid: props.cid,
-    to_uid: props.toUid,
+    to_uid: props.toUid
   }
   const { data } = await useFetch(`/api/topic/${props.tid}/comment/like`, {
     method: 'PUT',
     query: queryData,
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {

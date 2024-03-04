@@ -2,7 +2,7 @@
 import {
   checkSendCode,
   checkResetEmail,
-  checkChangePassword,
+  checkChangePassword
 } from './utils/check'
 
 const localePath = useLocalePath()
@@ -10,7 +10,7 @@ const hasSentCodeEmail = ref('')
 
 const { data, refresh } = await useFetch('/api/user/email', {
   method: 'GET',
-  ...kungalgameResponseHandler,
+  ...kungalgameResponseHandler
 })
 
 const input = reactive({
@@ -18,7 +18,7 @@ const input = reactive({
   code: '',
   oldPassword: '',
   newPassword: '',
-  repeatPassword: '',
+  repeatPassword: ''
 })
 
 const handleSendCode = async () => {
@@ -36,7 +36,7 @@ const handleSendCode = async () => {
   const { data } = await useFetch('/api/auth/email/code/reset', {
     method: 'POST',
     body: { email: input.newEmail },
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {
@@ -56,7 +56,7 @@ const handleResetEmail = async () => {
   const { data } = await useFetch('/api/user/email', {
     method: 'PUT',
     body: { email: input.newEmail, code: input.code },
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {
@@ -89,7 +89,7 @@ const handleChangePassword = async () => {
   const { data } = await useFetch('/api/user/password', {
     method: 'PUT',
     body: { oldPassword: input.oldPassword, newPassword: input.newPassword },
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {

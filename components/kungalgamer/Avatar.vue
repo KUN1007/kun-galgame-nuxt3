@@ -18,7 +18,7 @@ const uploadImage = async (file: File) => {
   selectedFileUrl.value = URL.createObjectURL(resizedFile)
 }
 
-const handleFileChange = async (event: Event) => {
+const handleFileChange = (event: Event) => {
   const input = event.target as HTMLInputElement
 
   if (!input.files || !input.files[0]) {
@@ -29,7 +29,7 @@ const handleFileChange = async (event: Event) => {
   uploadImage(file)
 }
 
-const handleDrop = async (event: DragEvent) => {
+const handleDrop = (event: DragEvent) => {
   event.preventDefault()
   event.stopPropagation()
 
@@ -64,7 +64,7 @@ const handleChangeAvatar = async () => {
     method: 'POST',
     body: formData,
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {

@@ -1,6 +1,12 @@
 <script setup lang="ts">
-const { tid, title, content, tags, category, isTopicRewriting } =
-  storeToRefs(useTempEditStore())
+const {
+  tid: storeTid,
+  title: storeTitle,
+  content: storeContent,
+  tags: storeTags,
+  category: storeCategory,
+  isTopicRewriting
+} = storeToRefs(useTempEditStore())
 const { isEdit } = storeToRefs(useTempReplyStore())
 const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
 
@@ -31,11 +37,11 @@ watch(
 )
 
 const rewriteTopic = () => {
-  tid.value = props.tid
-  title.value = props.title
-  content.value = props.content
-  tags.value = props.tags
-  category.value = props.category
+  storeTid.value = props.tid
+  storeTitle.value = props.title
+  storeContent.value = props.content
+  storeTags.value = props.tags
+  storeCategory.value = props.category
   isTopicRewriting.value = true
 
   navigateTo(localePath('/edit'))
