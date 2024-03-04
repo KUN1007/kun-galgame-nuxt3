@@ -33,7 +33,8 @@ export default defineNuxtConfig({
     JWT_SECRET: process.env.JWT_SECRET,
 
     public: {
-      KUN_GALGAME_URL: process.env.KUN_GALGAME_URL
+      KUN_GALGAME_URL: process.env.KUN_GALGAME_URL,
+      KUN_VISUAL_NOVEL_VERSION: process.env.KUN_VISUAL_NOVEL_VERSION
     }
   },
   imports: {

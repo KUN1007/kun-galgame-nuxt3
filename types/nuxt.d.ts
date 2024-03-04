@@ -13,6 +13,7 @@ declare module 'nuxt/schema' {
 
   interface PublicRuntimeConfig {
     KUN_GALGAME_URL: string
+    KUN_VISUAL_NOVEL_VERSION: string
   }
 }
 

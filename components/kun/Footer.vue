@@ -18,7 +18,10 @@
     </div>
 
     <div>
-      <span>{{ $t('footer.reserved') }} 2.4.0</span>
+      <span>
+        {{ $t('footer.reserved') }}
+        {{ useRuntimeConfig().public.KUN_VISUAL_NOVEL_VERSION }}
+      </span>
     </div>
   </div>
 </template>

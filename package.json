@@ -10,7 +10,9 @@
     "lint": "eslint .",
     "format": "prettier . --write",
     "start": "pm2 start ecosystem.config.js",
-    "stop": "pm2 delete kun-visual-novel"
+    "stop": "pm2 delete kun-visual-novel",
+    "prepare": "husky",
+    "update:version": "node ./.husky/scripts/updateAppVersion.js"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.0.8",
@@ -28,6 +30,7 @@
     "@vite-pwa/nuxt": "^0.4.0",
     "dayjs-nuxt": "^2.1.9",
     "eslint": "^8.57.0",
+    "husky": "^9.0.11",
     "nuxt": "^3.9.3",
     "nuxt-icon": "^0.6.8",
     "nuxt-schema-org": "^3.3.3",

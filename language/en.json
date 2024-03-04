@@ -423,7 +423,7 @@
   "footer":{
     "copyright": "Copyright © 2024 KUN Visual Novel",
     "openSource": "GitHub Open Source",
-    "reserved": "All rights reserved | Version"
+    "reserved": "All rights reserved {'|'} Version"
   },
   "seo": {
     "agreement": {
