@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
 
   const responseData: UserComment[] = comments.map((comment) => ({
     tid: comment.tid,
-    content: comment.content.substring(0, 107),
+    content: comment.content.substring(0, 107)
   }))
 
   return responseData

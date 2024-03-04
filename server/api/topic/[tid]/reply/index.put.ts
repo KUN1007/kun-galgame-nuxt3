@@ -15,7 +15,7 @@ const updateReply = async (
   session.startTransaction()
   try {
     await ReplyModel.updateOne(
-      { rid: rid, r_uid: uid },
+      { rid, r_uid: uid },
       { tags, edited, content }
     )
 

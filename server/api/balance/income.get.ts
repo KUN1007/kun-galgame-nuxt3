@@ -3,7 +3,7 @@ import type {
   SortField,
   SortOrder,
   BalanceIncomeRequestData,
-  BalanceIncome,
+  BalanceIncome
 } from '~/types/api/balance'
 
 const getIncomes = async (
@@ -15,7 +15,7 @@ const getIncomes = async (
   const skip = (page - 1) * limit
 
   const sortOptions: Record<string, 'asc' | 'desc'> = {
-    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc',
+    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
   }
 
   const incomeDetails = await IncomeModel.find()
@@ -28,7 +28,7 @@ const getIncomes = async (
     iid: income.iid,
     reason: income.reason,
     time: income.time,
-    amount: income.amount,
+    amount: income.amount
   }))
 
   return responseData

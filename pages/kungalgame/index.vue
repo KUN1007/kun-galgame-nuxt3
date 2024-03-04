@@ -6,9 +6,9 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: t('seo.kungalgame.description'),
-    },
-  ],
+      content: t('seo.kungalgame.description')
+    }
+  ]
 })
 </script>
 

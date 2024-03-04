@@ -2,7 +2,7 @@ import TopicModel from '~/server/models/topic'
 import type {
   SortField,
   SortOrder,
-  SearchTopicRequestData,
+  SearchTopicRequestData
 } from '~/types/api/home'
 
 const searchTopics = async (
@@ -32,14 +32,14 @@ const searchTopics = async (
           { title: { $regex: escapedKeywords.join('|'), $options: 'i' } },
           { content: { $regex: escapedKeywords.join('|'), $options: 'i' } },
           { category: { $in: escapedKeywords } },
-          { tags: { $in: escapedKeywords } },
-        ],
-      },
-    ],
+          { tags: { $in: escapedKeywords } }
+        ]
+      }
+    ]
   }
 
   const sortOptions: Record<string, 'asc' | 'desc'> = {
-    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc',
+    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
   }
 
   const topics = await TopicModel.find(searchQuery)
@@ -52,7 +52,7 @@ const searchTopics = async (
     tid: topic.tid,
     title: topic.title,
     category: topic.category,
-    content: topic.content.slice(0, 107),
+    content: topic.content.slice(0, 107)
   }))
 
   return data
@@ -65,7 +65,7 @@ export default defineEventHandler(async (event) => {
     page,
     limit,
     sortField,
-    sortOrder,
+    sortOrder
   }: SearchTopicRequestData = await getQuery(event)
 
   if (limit !== '7') {

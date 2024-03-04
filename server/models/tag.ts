@@ -9,7 +9,7 @@ const TagSchema = new mongoose.Schema<TagAttributes>(
     tid: { type: Number, require: true },
     rid: { type: Number, default: 0 },
     name: { type: String, require: true },
-    category: { type: [String], default: [] },
+    category: { type: [String], default: [] }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )

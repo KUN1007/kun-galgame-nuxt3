@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
     tid: topic.tid,
     title: topic.title,
     time: topic.time,
-    popularity: topic.popularity,
+    popularity: topic.popularity
   }))
 
   return data

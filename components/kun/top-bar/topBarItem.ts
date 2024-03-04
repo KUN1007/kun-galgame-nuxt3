@@ -10,5 +10,5 @@ export const topBarItem: topBar[] = [
   { index: 2, name: 'create', router: '/edit' },
   { index: 3, name: 'technique', router: '/technique' },
   { index: 4, name: 'about', router: '/kungalgame' },
-  { index: 5, name: 'return', router: '/' },
+  { index: 5, name: 'return', router: '/' }
 ]

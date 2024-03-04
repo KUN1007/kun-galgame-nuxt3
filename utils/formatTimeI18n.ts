@@ -1,7 +1,7 @@
-import dayjs from 'dayjs'
+import dayjs, { locale } from 'dayjs'
 import 'dayjs/locale/en'
 
-dayjs.locale('en')
+locale('en')
 
 export const formatTimeI18n = (time: number) => {
   const formattedENDate = dayjs(time).format('MMMM D, YYYY - h:mm:ss A')

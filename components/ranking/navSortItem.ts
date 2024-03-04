@@ -33,38 +33,38 @@ export const topicSortItem: Topic[] = [
     index: 1,
     icon: 'bi:fire',
     name: 'popularity',
-    sortField: 'popularity',
+    sortField: 'popularity'
   },
   {
     index: 2,
     icon: 'bi:rocket',
     name: 'upvote',
-    sortField: 'upvotes_count',
+    sortField: 'upvotes_count'
   },
   {
     index: 3,
     icon: 'ic:outline-remove-red-eye',
     name: 'views',
-    sortField: 'views',
+    sortField: 'views'
   },
   {
     index: 4,
     icon: 'line-md:thumbs-up-twotone',
     name: 'likes',
-    sortField: 'likes_count',
+    sortField: 'likes_count'
   },
   {
     index: 5,
     icon: 'ri:reply-line',
     name: 'replies',
-    sortField: 'replies_count',
+    sortField: 'replies_count'
   },
   {
     index: 6,
     icon: 'fa-regular:comment-dots',
     name: 'comments',
-    sortField: 'comments',
-  },
+    sortField: 'comments'
+  }
 ]
 
 export const userSortItem: User[] = [
@@ -72,38 +72,38 @@ export const userSortItem: User[] = [
     index: 1,
     icon: 'line-md:star-alt-twotone',
     name: 'moemoepoint',
-    sortField: 'moemoepoint',
+    sortField: 'moemoepoint'
   },
   {
     index: 2,
     icon: 'bi:rocket',
     name: 'upvote',
-    sortField: 'upvote',
+    sortField: 'upvote'
   },
   {
     index: 3,
     icon: 'line-md:thumbs-up-twotone',
     name: 'like',
-    sortField: 'like',
+    sortField: 'like'
   },
   {
     index: 4,
     icon: 'line-md:text-box',
     name: 'topicCount',
-    sortField: 'topic_count',
+    sortField: 'topic_count'
   },
   {
     index: 5,
     icon: 'ri:reply-line',
     name: 'replyCount',
-    sortField: 'reply_count',
+    sortField: 'reply_count'
   },
   {
     index: 6,
     icon: 'fa-regular:comment-dots',
     name: 'commentCount',
-    sortField: 'comment_count',
-  },
+    sortField: 'comment_count'
+  }
 ]
 
 export const userIconMap: Record<string, string> = {
@@ -112,7 +112,7 @@ export const userIconMap: Record<string, string> = {
   like: 'line-md:thumbs-up-twotone',
   topic_count: 'line-md:text-box',
   reply_count: 'ri:reply-line',
-  comment_count: 'fa-regular:comment-dots',
+  comment_count: 'fa-regular:comment-dots'
 }
 
 export const topicIconMap: Record<string, string> = {
@@ -121,5 +121,5 @@ export const topicIconMap: Record<string, string> = {
   views: 'ic:outline-remove-red-eye',
   likes_count: 'line-md:thumbs-up-twotone',
   replies_count: 'ri:reply-line',
-  comments: 'fa-regular:comment-dots',
+  comments: 'fa-regular:comment-dots'
 }

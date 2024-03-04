@@ -29,17 +29,17 @@ const updateTopicUpvote = async (
       {
         $set: { upvote_time: time },
         $push: { upvotes: uid },
-        $inc: { popularity: 50, upvotes_count: 1 },
+        $inc: { popularity: 50, upvotes_count: 1 }
       }
     )
 
     await UserModel.updateOne(
-      { uid: uid },
+      { uid },
       {
         $inc: { moemoepoint: -17, upvote_topic_count: 1 },
         $addToSet: {
-          upvote_topic: tid,
-        },
+          upvote_topic: tid
+        }
       }
     )
 

@@ -1,6 +1,7 @@
-import dayjs from 'dayjs'
+import dayjs, { extend } from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-dayjs.extend(relativeTime)
+
+extend(relativeTime)
 
 const languageOptions = {
   en: {
@@ -17,7 +18,7 @@ const languageOptions = {
     month: 'month',
     months: 'months',
     year: 'year',
-    years: 'years',
+    years: 'years'
   },
   zh: {
     second: '秒',
@@ -33,8 +34,8 @@ const languageOptions = {
     month: '月',
     months: '月',
     year: '年',
-    years: '年',
-  },
+    years: '年'
+  }
 }
 
 const replaceTimeUnits = (input: string, language: string) => {
@@ -57,7 +58,7 @@ const replaceTimeUnits = (input: string, language: string) => {
     month: languageOption.month,
     months: languageOption.months,
     year: languageOption.year,
-    years: languageOption.years,
+    years: languageOption.years
   }
 
   const regex = new RegExp(Object.keys(replacements).join('|'), 'g')

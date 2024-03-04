@@ -1,0 +1,24 @@
+{
+  "root": true,
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "extends": ["@nuxtjs/eslint-config-typescript"],
+  "rules": {
+    "no-console": "off",
+    "camelcase": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "vue/multi-word-component-names": "off",
+    "vue/singleline-html-element-content-newline": "off",
+    "vue/html-self-closing": "off",
+    "vue/attributes-order": "off",
+    "vue/no-multiple-template-root": "off",
+    "import/order": "off",
+    "arrow-parens": ["error", "always"],
+    "quotes": [
+      "error",
+      "single",
+      { "avoidEscape": true, "allowTemplateLiterals": true }
+    ]
+  }
+}

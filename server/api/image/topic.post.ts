@@ -8,7 +8,7 @@ const compressImage = async (name: string, image: Buffer, uid: number) => {
   const miniImage = await sharp(image)
     .resize(1920, 1080, {
       fit: 'inside',
-      withoutEnlargement: true,
+      withoutEnlargement: true
     })
     .webp({ quality: 77 })
     .toBuffer()
@@ -19,7 +19,7 @@ const compressImage = async (name: string, image: Buffer, uid: number) => {
 
   const bucketName = `image/topic/user_${uid}`
   const res1 = await uploadImage(miniImage, `${name}.webp`, bucketName)
-  return res1 ? true : false
+  return !!res1
 }
 
 export default defineEventHandler(async (event) => {

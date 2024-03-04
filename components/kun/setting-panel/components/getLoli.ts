@@ -15,7 +15,7 @@ export const getLoli = async () => {
     eye: loliData[randomEye],
     brow: loliData[randomBrow],
     mouth: loliData[randomMouth],
-    face: loliData[randomFace],
+    face: loliData[randomFace]
   }
 
   const loliBodyLeft = `${loli.lass.left}px`
@@ -38,7 +38,7 @@ export const getLoli = async () => {
     getAssetsFile(loli.eye.layer_id),
     getAssetsFile(loli.brow.layer_id),
     getAssetsFile(loli.mouth.layer_id),
-    getAssetsFile(loli.face.layer_id),
+    getAssetsFile(loli.face.layer_id)
   ].map((url) => fetch(url))
 
   const responses = await Promise.all(promises)
@@ -66,6 +66,6 @@ export const getLoli = async () => {
     eye,
     brow,
     mouth,
-    face,
+    face
   }
 }

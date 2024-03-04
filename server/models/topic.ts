@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import increasingSequence from '../utils/increasingSequence'
 
-import { TopicAttributes } from './types/topic'
+import type { TopicAttributes } from './types/topic'
 
 const TopicSchema = new mongoose.Schema<TopicAttributes>(
   {
@@ -31,7 +31,7 @@ const TopicSchema = new mongoose.Schema<TopicAttributes>(
     dislikes: { type: [Number], default: [] },
 
     status: { type: Number, default: 0 },
-    edited: { type: Number, default: 0 },
+    edited: { type: Number, default: 0 }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )
@@ -39,7 +39,7 @@ const TopicSchema = new mongoose.Schema<TopicAttributes>(
 TopicSchema.virtual('user', {
   ref: 'user',
   localField: 'uid',
-  foreignField: 'uid',
+  foreignField: 'uid'
 })
 
 TopicSchema.pre('save', increasingSequence('tid'))

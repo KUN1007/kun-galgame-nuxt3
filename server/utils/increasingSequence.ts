@@ -11,26 +11,25 @@ type PreSaveMiddleware<T extends Document> = (
   next: (error?: Error) => void
 ) => Promise<void>
 
+// eslint-disable-next-line space-before-function-paren
 function increasingSequence(
   fieldName: string,
   startSeq = 1
 ): PreSaveMiddleware<any> {
   return async function (next) {
-    const doc = this
-
-    if (!doc.isNew) {
+    if (!this.isNew) {
       return next()
     }
 
     try {
-      const lastTopic = await doc.constructor
+      const lastTopic = await this.constructor
         .findOne({}, { [fieldName]: 1 })
         .sort({ [fieldName]: -1 })
 
       if (lastTopic) {
-        doc[fieldName] = (lastTopic[fieldName] as number) + 1
+        this[fieldName] = (lastTopic[fieldName] as number) + 1
       } else {
-        doc[fieldName] = startSeq
+        this[fieldName] = startSeq
       }
 
       next()

@@ -5,6 +5,6 @@ export const usePersistKUNGalgameTopicStore = defineStore({
   persist: true,
   state: (): TopicStorePersist => ({
     isShowAdvance: false,
-    isActiveAside: false,
-  }),
+    isActiveAside: false
+  })
 })

@@ -31,15 +31,15 @@ const updateTopicDislike = async (
 
   try {
     await TopicModel.updateOne(
-      { tid: tid },
+      { tid },
       {
-        $inc: { popularity: popularity, dislikes_count: amount },
-        [isPush ? '$push' : '$pull']: { dislikes: uid },
+        $inc: { popularity, dislikes_count: amount },
+        [isPush ? '$push' : '$pull']: { dislikes: uid }
       }
     )
 
     await UserModel.updateOne(
-      { uid: uid },
+      { uid },
       { [isPush ? '$push' : '$pull']: { dislike_topic: tid } }
     )
 

@@ -3,18 +3,18 @@ const { locale } = useI18n()
 
 useHead({
   htmlAttrs: {
-    lang: locale.value,
-  },
+    lang: locale.value
+  }
 })
 
 useSchemaOrg([
   defineOrganization({
     name: 'KUN Visual Novel',
     url: 'https://kungal.com',
-    sameAs: ['https://github.com/KUNGalgame'],
+    sameAs: ['https://github.com/KUNGalgame']
   }),
   defineWebSite({ name: 'KUN Visual Novel' }),
-  defineWebPage(),
+  defineWebPage()
 ])
 </script>
 

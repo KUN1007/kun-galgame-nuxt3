@@ -3,7 +3,7 @@ import type {
   SortField,
   SortOrder,
   BalanceExpenditureRequestData,
-  BalanceExpenditure,
+  BalanceExpenditure
 } from '~/types/api/balance'
 
 const getExpenditures = async (
@@ -15,7 +15,7 @@ const getExpenditures = async (
   const skip = (page - 1) * limit
 
   const sortOptions: Record<string, 'asc' | 'desc'> = {
-    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc',
+    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
   }
 
   const expenditureModelDetails = await ExpenditureModel.find()
@@ -29,7 +29,7 @@ const getExpenditures = async (
       eid: expenditure.eid,
       reason: expenditure.reason,
       time: expenditure.time,
-      amount: expenditure.amount,
+      amount: expenditure.amount
     })
   )
 

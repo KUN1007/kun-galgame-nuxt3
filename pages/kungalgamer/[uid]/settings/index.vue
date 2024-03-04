@@ -1,9 +1,9 @@
 <script setup lang="ts">
-definePageMeta({
-  middleware: 'auth',
-})
-
 import type { UserInfo } from '~/types/api/user'
+
+definePageMeta({
+  middleware: 'auth'
+})
 
 const props = defineProps<{
   user: UserInfo

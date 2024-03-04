@@ -4,7 +4,7 @@ import type {
   SortField,
   SortOrder,
   HomeTopicRequestData,
-  HomeTopic,
+  HomeTopic
 } from '~/types/api/home'
 
 const getHomeTopics = async (
@@ -18,11 +18,11 @@ const getHomeTopics = async (
 
   const searchQuery = {
     category: { $in: category },
-    status: { $ne: 1 },
+    status: { $ne: 1 }
   }
 
   const sortOptions: Record<string, 'asc' | 'desc'> = {
-    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc',
+    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
   }
 
   const topics = await TopicModel.find(searchQuery)
@@ -48,10 +48,10 @@ const getHomeTopics = async (
     user: {
       uid: topic.user[0].uid,
       avatar: topic.user[0].avatar,
-      name: topic.user[0].name,
+      name: topic.user[0].name
     },
     status: topic.status,
-    upvote_time: topic.upvote_time,
+    upvote_time: topic.upvote_time
   }))
 
   return data

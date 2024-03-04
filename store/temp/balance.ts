@@ -1,6 +1,6 @@
 import type {
   BalanceIncomeRequestData,
-  BalanceExpenditureRequestData,
+  BalanceExpenditureRequestData
 } from '~/types/api/balance'
 
 interface BalanceStore {
@@ -16,15 +16,15 @@ export const useTempBalanceStore = defineStore({
       page: '0',
       limit: '0',
       sortField: 'time',
-      sortOrder: 'desc',
+      sortOrder: 'desc'
     },
     expenditure: {
       page: '0',
       limit: '0',
       sortField: 'time',
-      sortOrder: 'desc',
-    },
+      sortOrder: 'desc'
+    }
   }),
   getters: {},
-  actions: {},
+  actions: {}
 })

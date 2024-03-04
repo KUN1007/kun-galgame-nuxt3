@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  await UserModel.updateOne({ uid: userInfo.uid }, { $set: { bio: bio } })
+  await UserModel.updateOne({ uid: userInfo.uid }, { $set: { bio } })
 
   return 'Moe Moe'
 })

@@ -6,14 +6,14 @@ export interface Category {
 export const topicCategory: Category[] = [
   {
     index: 1,
-    name: 'Galgame',
+    name: 'Galgame'
   },
   {
     index: 2,
-    name: 'Technique',
+    name: 'Technique'
   },
   {
     index: 3,
-    name: 'Others',
-  },
+    name: 'Others'
+  }
 ]

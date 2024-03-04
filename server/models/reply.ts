@@ -24,7 +24,7 @@ const ReplySchema = new mongoose.Schema<ReplyAttributes>(
     likes: { type: [Number], default: [] },
     dislikes: { type: [Number], default: [] },
     share: { type: [Number], default: [] },
-    comment: { type: [String], default: [] },
+    comment: { type: [String], default: [] }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )
@@ -32,13 +32,13 @@ const ReplySchema = new mongoose.Schema<ReplyAttributes>(
 ReplySchema.virtual('r_user', {
   ref: 'user',
   localField: 'r_uid',
-  foreignField: 'uid',
+  foreignField: 'uid'
 })
 
 ReplySchema.virtual('to_user', {
   ref: 'user',
   localField: 'to_uid',
-  foreignField: 'uid',
+  foreignField: 'uid'
 })
 
 ReplySchema.pre('save', increasingSequence('rid'))

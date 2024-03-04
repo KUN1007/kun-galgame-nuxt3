@@ -2,7 +2,7 @@ import NonMoeModel from '~/server/models/non-moe'
 import type {
   SortOrder,
   NonMoeLogRequestData,
-  NonMoeLog,
+  NonMoeLog
 } from '~/types/api/non-moe'
 
 const getNonMoeLogs = async (
@@ -24,7 +24,7 @@ const getNonMoeLogs = async (
     name: log.name,
     description: log.description,
     time: log.time,
-    result: log.result,
+    result: log.result
   }))
 
   return responseData

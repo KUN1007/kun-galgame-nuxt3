@@ -1,9 +1,9 @@
-import bcrypt from 'bcrypt'
+import { hash } from 'bcrypt'
 import UserModel from '~/server/models/user'
 import {
   isValidEmail,
   isValidMailConfirmCode,
-  isValidPassword,
+  isValidPassword
 } from '~/utils/validate'
 import type { ResetPasswordByEmailRequestData } from '~/types/api/auth'
 
@@ -18,10 +18,10 @@ const resetPasswordByEmail = async (
     return 10103
   }
 
-  const hashedPassword = await bcrypt.hash(newPassword, 7)
+  const hashedPassword = await hash(newPassword, 7)
 
   const user = await UserModel.findOneAndUpdate(
-    { email: email },
+    { email },
     { $set: { password: hashedPassword } }
   )
 

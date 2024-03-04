@@ -6,9 +6,9 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: t('seo.nonMoe.description'),
-    },
-  ],
+      content: t('seo.nonMoe.description')
+    }
+  ]
 })
 
 const { page, limit, sortOrder } = useTempNonMoeStore()
@@ -21,7 +21,7 @@ const { data: logs } = await useFetch(`/api/non-moe/logs`, {
   method: 'GET',
   query: { page, limit, sortOrder },
   watch: false,
-  ...kungalgameResponseHandler,
+  ...kungalgameResponseHandler
 })
 </script>
 

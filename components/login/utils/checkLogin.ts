@@ -3,7 +3,7 @@ import { isValidEmail, isValidName, isValidPassword } from '~/utils/validate'
 import type { Pinia } from '@pinia/nuxt/dist/runtime/composables'
 
 export const checkLoginForm = {
-  asyncData($pinia: Pinia) {
+  asyncData ($pinia: Pinia) {
     const info = useTempMessageStore($pinia)
 
     const checkUsername = (name: string) => {
@@ -42,5 +42,5 @@ export const checkLoginForm = {
     }
 
     return checkLogin
-  },
+  }
 }

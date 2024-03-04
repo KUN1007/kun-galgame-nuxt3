@@ -12,10 +12,10 @@ export const useKUNGalgameUserStore = defineStore({
     avatarMin: '',
     moemoepoint: 0,
     moemoeAccessToken: '',
-    roles: 0,
+    roles: 0
   }),
   actions: {
-    setUserInfo(user: LoginResponseData) {
+    setUserInfo (user: LoginResponseData) {
       this.uid = user.uid
       this.name = user.name
       this.avatar = user.avatar
@@ -25,16 +25,16 @@ export const useKUNGalgameUserStore = defineStore({
       this.moemoeAccessToken = user.token
     },
 
-    setToken(moemoeAccessToken: string) {
+    setToken (moemoeAccessToken: string) {
       this.moemoeAccessToken = moemoeAccessToken
     },
 
-    getToken() {
+    getToken () {
       return this.moemoeAccessToken
     },
 
-    removeToken() {
+    removeToken () {
       this.moemoeAccessToken = ''
-    },
-  },
+    }
+  }
 })

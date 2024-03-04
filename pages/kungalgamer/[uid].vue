@@ -12,12 +12,12 @@ const {
   uid: currentUserUid,
   avatar,
   avatarMin,
-  moemoepoint,
+  moemoepoint
 } = storeToRefs(useKUNGalgameUserStore())
 
 const { data, refresh } = await useFetch(`/api/user/${uid.value}`, {
   method: 'GET',
-  ...kungalgameResponseHandler,
+  ...kungalgameResponseHandler
 })
 
 if (data.value === 'banned') {
@@ -28,7 +28,7 @@ if (data.value === 'banned') {
 
 provide('refresh', refresh)
 
-onMounted(async () => {
+onMounted(() => {
   if (!user.value || currentUserUid.value !== uid.value) {
     return
   }
@@ -44,9 +44,9 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: user.value?.bio ? user.value?.bio : user.value?.name,
-    },
-  ],
+      content: user.value?.bio ? user.value?.bio : user.value?.name
+    }
+  ]
 })
 </script>
 

@@ -15,11 +15,11 @@ export const usePersistKUNGalgameReplyStore = defineStore({
       toUid: 0,
       content: '',
       tags: [],
-      toFloor: 0,
-    },
+      toFloor: 0
+    }
   }),
   actions: {
-    resetReplyDraft() {
+    resetReplyDraft () {
       this.textCount = 0
 
       this.replyDraft.tid = 0
@@ -30,11 +30,11 @@ export const usePersistKUNGalgameReplyStore = defineStore({
       this.replyDraft.toFloor = 0
     },
 
-    resetReplyContent() {
+    resetReplyContent () {
       this.textCount = 0
 
       this.replyDraft.content = ''
       this.replyDraft.tags = []
-    },
-  },
+    }
+  }
 })

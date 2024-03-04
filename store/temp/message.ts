@@ -16,18 +16,18 @@ export const useTempMessageStore = defineStore({
     confirm: false,
 
     isShowCapture: false,
-    isCaptureSuccessful: false,
+    isCaptureSuccessful: false
   }),
   getters: {},
   actions: {
-    info(infoMsg: string, infoTranslateParams?: string, durations?: number) {
+    info (infoMsg: string, infoTranslateParams?: string, durations?: number) {
       this.showInfo = true
       this.infoMsg = infoMsg
       this.infoTranslateParams = infoTranslateParams ?? ''
       this.durations = durations ?? 3000
     },
 
-    alert(alertMsg: string, isShowCancel: boolean): Promise<boolean> {
+    alert (alertMsg: string, isShowCancel: boolean): Promise<boolean> {
       return new Promise<boolean>((resolve) => {
         this.showAlert = true
         this.alertMsg = alertMsg
@@ -39,7 +39,7 @@ export const useTempMessageStore = defineStore({
       })
     },
 
-    handleClose() {},
-    handleConfirm() {},
-  },
+    handleClose () {},
+    handleConfirm () {}
+  }
 })

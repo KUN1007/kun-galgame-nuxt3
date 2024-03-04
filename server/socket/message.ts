@@ -5,11 +5,11 @@ import env from '../env/dotenv'
 import type { KUNGalgamePayload } from '../../types/utils/jwt'
 import type { Socket } from 'socket.io'
 
-const userSockets = new Map<number | undefined, KUNGalgameSocket>()
-
 interface KUNGalgameSocket extends Socket {
   payload?: KUNGalgamePayload
 }
+
+const userSockets = new Map<number | undefined, KUNGalgameSocket>()
 
 export default defineIOHandler((io) => {
   io.use((socket: KUNGalgameSocket, next) => {
@@ -17,15 +17,14 @@ export default defineIOHandler((io) => {
     const refreshToken = token['kungalgame-moemoe-refresh-token']
 
     try {
+      // eslint-disable-next-line import/no-named-as-default-member
       const payload = jwt.verify(
         refreshToken,
         env.JWT_SECRET || ''
       ) as KUNGalgamePayload
       socket.payload = payload
       next()
-    } catch (error) {
-      return
-    }
+    } catch (error) {}
   })
 
   io.on('connection', (socket: KUNGalgameSocket) => {

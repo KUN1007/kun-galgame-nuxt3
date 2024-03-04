@@ -4,7 +4,7 @@ import type {
   SortField,
   SortOrder,
   MessageRequestData,
-  Message,
+  Message
 } from '~/types/api/message'
 
 const getMessages = async (
@@ -18,7 +18,7 @@ const getMessages = async (
   const skip = (page - 1) * limit
 
   const sortOptions: Record<string, 'asc' | 'desc'> = {
-    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc',
+    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
   }
   const findOptions = type ? { receiver_uid: uid, type } : { receiver_uid: uid }
 
@@ -38,7 +38,7 @@ const getMessages = async (
     time: message.time,
     tid: message.tid,
     status: message.status,
-    type: message.type,
+    type: message.type
   }))
 
   return responseData
@@ -63,8 +63,8 @@ export default defineEventHandler(async (event) => {
     uid,
     parseInt(page),
     parseInt(limit),
-    type ? type : '',
-    sortField ? sortField : 'time',
+    type || '',
+    sortField || 'time',
     sortOrder
   )
 

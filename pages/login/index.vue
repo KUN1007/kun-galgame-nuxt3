@@ -6,13 +6,13 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: t('seo.login.description'),
-    },
-  ],
+      content: t('seo.login.description')
+    }
+  ]
 })
 
 const isShowPanel = ref('')
-const isLogin = computed(() => (isShowPanel.value ? true : false))
+const isLogin = computed(() => (!!isShowPanel.value))
 
 const handleClickSignIn = () => {
   isShowPanel.value = ''

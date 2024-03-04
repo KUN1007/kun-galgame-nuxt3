@@ -23,13 +23,11 @@ export function throttle<T extends (...args: any[]) => void>(
     if (!lastExecution || now - lastExecution >= delay) {
       executeCallback(...args)
       lastExecution = now
-    } else {
-      if (!timeout && delayedCallback) {
-        delayedCallback(...args)
-        timeout = setTimeout(() => {
-          timeout = null
-        }, delay)
-      }
+    } else if (!timeout && delayedCallback) {
+      delayedCallback(...args)
+      timeout = setTimeout(() => {
+        timeout = null
+      }, delay)
     }
   }
 

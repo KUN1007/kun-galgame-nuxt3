@@ -6,9 +6,9 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: t('seo.contact.description'),
-    },
-  ],
+      content: t('seo.contact.description')
+    }
+  ]
 })
 </script>
 

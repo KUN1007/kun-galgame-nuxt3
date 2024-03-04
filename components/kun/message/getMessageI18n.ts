@@ -6,7 +6,7 @@ const zhMessageMap: Record<string, string> = {
   upvoted: '推了',
   liked: '点赞了',
   replied: '回复了',
-  commented: '评论了',
+  commented: '评论了'
 }
 
 export const getMessageZH = (locale: Locale, content: string) => {

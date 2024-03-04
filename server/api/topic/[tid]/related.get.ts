@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
 
   const relatedTopics = await TopicModel.find({
     tags: { $in: tags },
-    tid: { $ne: tid },
+    tid: { $ne: tid }
   })
     .sort({ popularity: -1 })
     .limit(5)
@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
 
   const topic: TopicAside[] = relatedTopics.map((topic) => ({
     title: topic.title,
-    tid: topic.tid,
+    tid: topic.tid
   }))
 
   return topic

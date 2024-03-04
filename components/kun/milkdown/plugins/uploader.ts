@@ -27,13 +27,13 @@ export const kunUploader: Uploader = async (files, schema) => {
         method: 'POST',
         body: formData,
         watch: false,
-        ...kungalgameResponseHandler,
+        ...kungalgameResponseHandler
       })
 
       const alt = image.name
       return schema.nodes.image.createAndFill({
         src: data.value,
-        alt,
+        alt
       }) as Node
     })
   )

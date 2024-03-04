@@ -7,12 +7,12 @@ export const useTempTechniqueStore = defineStore({
     page: 1,
     limit: 10,
     sortField: 'time',
-    sortOrder: 'desc',
+    sortOrder: 'desc'
   }),
   actions: {
-    resetPageStatus() {
+    resetPageStatus () {
       this.page = 1
       this.limit = 10
-    },
-  },
+    }
+  }
 })

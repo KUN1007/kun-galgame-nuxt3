@@ -11,18 +11,18 @@ export default defineEventHandler(async (event) => {
       {
         $group: {
           _id: null,
-          totalIncome: { $sum: '$amount' },
-        },
-      },
+          totalIncome: { $sum: '$amount' }
+        }
+      }
     ])
 
     const totalExpenditureResult = await ExpenditureModel.aggregate([
       {
         $group: {
           _id: null,
-          totalExpenditure: { $sum: '$amount' },
-        },
-      },
+          totalExpenditure: { $sum: '$amount' }
+        }
+      }
     ])
 
     const totalIncome: number =
@@ -37,7 +37,7 @@ export default defineEventHandler(async (event) => {
     const responseData: PLStatement = {
       totalIncome,
       totalExpenditure,
-      profitLoss,
+      profitLoss
     }
 
     await session.commitTransaction()

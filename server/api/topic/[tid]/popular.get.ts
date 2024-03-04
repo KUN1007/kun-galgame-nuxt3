@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
     }
     const popularTIDs = user.topic
     const popularTopics = await TopicModel.find({
-      tid: { $in: popularTIDs, $ne: tid },
+      tid: { $in: popularTIDs, $ne: tid }
     })
       .sort({ popularity: -1 })
       .limit(5)
@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
 
     const topic: TopicAside[] = popularTopics.map((topic) => ({
       title: topic.title,
-      tid: topic.tid,
+      tid: topic.tid
     }))
 
     await session.commitTransaction()

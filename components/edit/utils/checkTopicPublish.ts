@@ -1,6 +1,6 @@
 import type {
   EditCreateTopicRequestData,
-  EditUpdateTopicRequestData,
+  EditUpdateTopicRequestData
 } from '~/types/api/topic'
 
 const isEditUpdateTopicData = (data: any): data is EditUpdateTopicRequestData =>

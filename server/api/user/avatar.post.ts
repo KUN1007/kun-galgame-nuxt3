@@ -8,7 +8,7 @@ const resizeUserAvatar = async (name: string, avatar: Buffer, uid: number) => {
   const miniAvatar = await sharp(avatar)
     .resize(100, 100, {
       fit: 'contain',
-      background: { r: 0, g: 0, b: 0, alpha: 0 },
+      background: { r: 0, g: 0, b: 0, alpha: 0 }
     })
     .toBuffer()
 
@@ -26,7 +26,7 @@ const resizeUserAvatar = async (name: string, avatar: Buffer, uid: number) => {
     bucketName
   )
 
-  return res1 && res2 ? true : false
+  return !!(res1 && res2)
 }
 
 export default defineEventHandler(async (event) => {

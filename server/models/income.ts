@@ -8,7 +8,7 @@ const IncomeSchema = new mongoose.Schema<IncomeAttributes>(
     iid: { type: Number, unique: true },
     reason: { type: String, default: '' },
     time: { type: Number, default: Date.now() },
-    amount: { type: Number, default: 0 },
+    amount: { type: Number, default: 0 }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )

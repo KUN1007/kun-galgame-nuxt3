@@ -14,21 +14,21 @@ export const questionsEN: Question[] = reactive([
     text: 'Which one of the following is not a character in "Senren * Banka"?',
     options: ['Murasame', 'Roka', 'Yoshino', 'Nanami'],
     correctOption: 'Nanami',
-    isHard: false,
+    isHard: false
   },
   {
     id: 2,
-    text: 'What is the hair color of Tsumugi Wenders in "	Summer Pockets REFLECTION BLUE"?',
+    text: 'What is the hair color of Tsumugi Wenders in "Summer Pockets REFLECTION BLUE"?',
     options: ['Red', 'Gold', 'Purple', 'White'],
     correctOption: 'Gold',
-    isHard: false,
+    isHard: false
   },
   {
     id: 3,
     text: 'What is "Visual Novel" known as?',
     options: ['Gay game', 'Galgame', 'Otome game', 'Ah, this is a starfish'],
     correctOption: 'Galgame',
-    isHard: false,
+    isHard: false
   },
   {
     id: 4,
@@ -37,10 +37,10 @@ export const questionsEN: Question[] = reactive([
       'Irotoridori no Sekai',
       'Irotoridori no Hikari',
       'Akai Hitomi ni Utsuru Sekai',
-      'Irotoridori no Mirai',
+      'Irotoridori no Mirai'
     ],
     correctOption: 'Irotoridori no Mirai',
-    isHard: false,
+    isHard: false
   },
   {
     id: 5,
@@ -49,17 +49,17 @@ export const questionsEN: Question[] = reactive([
       'Tsuki ni Yorisou Otome no Sahou',
       'Otome * Domain',
       'Bishoujo Mangekyou 1',
-      'Ore-tachi ni Tsubasa wa Nai',
+      'Ore-tachi ni Tsubasa wa Nai'
     ],
     correctOption: 'Bishoujo Mangekyou 1',
-    isHard: false,
+    isHard: false
   },
   {
     id: 6,
     text: 'Which of the following games was produced by "SMEE"?',
     options: ['~Friend to Lover~', 'Dal Segno', 'Eden*', 'LOOPERS'],
     correctOption: '~Friend to Lover~',
-    isHard: false,
+    isHard: false
   },
   {
     id: 7,
@@ -68,10 +68,10 @@ export const questionsEN: Question[] = reactive([
       'Karenai Sekai to Owaru Hana',
       'Hokenshitsu no Sensei to Shabondama Chuudoku no Joshu',
       'Houkago Cinderella',
-      'Shugaten! -sugarfull tempering-',
+      'Shugaten! -sugarfull tempering-'
     ],
     correctOption: 'Houkago Cinderella',
-    isHard: false,
+    isHard: false
   },
   {
     id: 8,
@@ -80,10 +80,10 @@ export const questionsEN: Question[] = reactive([
       '9-nine- Sorairo Sorauta Soranooto',
       'Loca Love',
       'Hatsuyuki Sakura',
-      'Amazing Grace -What color is your attribute?-',
+      'Amazing Grace -What color is your attribute?-'
     ],
     correctOption: 'Loca Love',
-    isHard: false,
+    isHard: false
   },
   {
     id: 9,
@@ -92,10 +92,10 @@ export const questionsEN: Question[] = reactive([
       'Kimi to Hajimeru Dasanteki na Love Come',
       'Momoiro Seiheki Kaihou Sengen!',
       'PRIMAL×HEARTS',
-      'PRIMAL×HEARTS 2',
+      'PRIMAL×HEARTS 2'
     ],
     correctOption: 'Kimi to Hajimeru Dasanteki na Love Come',
-    isHard: true,
+    isHard: true
   },
   {
     id: 10,
@@ -104,10 +104,10 @@ export const questionsEN: Question[] = reactive([
       'Yes, he opens his eyes',
       "No, he doesn't open his eyes",
       'Woken up by Sena with a kiss',
-      'There is no CG with this scene',
+      'There is no CG with this scene'
     ],
     correctOption: "No, he doesn't open his eyes",
-    isHard: true,
+    isHard: true
   },
   {
     id: 11,
@@ -116,10 +116,10 @@ export const questionsEN: Question[] = reactive([
       'Toriko no Kusari',
       'Sekai de Ichiban Dame na Koi',
       'Rondo Duo',
-      'Qbit01T',
+      'Qbit01T'
     ],
     correctOption: 'Qbit01T',
-    isHard: true,
+    isHard: true
   },
   {
     id: 11,
@@ -128,16 +128,16 @@ export const questionsEN: Question[] = reactive([
       'Himawari no Kyoukai to Nagai Natsuyasumi',
       'Ikinari Anata ni Koishiteiru',
       'Supreme Candy',
-      'H2O -FOOTPRINTS IN THE SAND-',
+      'H2O -FOOTPRINTS IN THE SAND-'
     ],
     correctOption: 'H2O -FOOTPRINTS IN THE SAND-',
-    isHard: true,
+    isHard: true
   },
   {
     id: 11,
     text: 'Which of the following works is not from light?',
     options: ['Seabed', 'KKK', 'Hachimyoujin', 'Dies irae'],
     correctOption: 'Seabed',
-    isHard: true,
-  },
+    isHard: true
+  }
 ])

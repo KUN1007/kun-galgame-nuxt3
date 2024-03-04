@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer'
+import { createTransport } from 'nodemailer'
 import SMPTransport from 'nodemailer-smtp-transport'
 import env from '~/server/env/dotenv'
 import type { H3Event } from 'h3'
@@ -34,13 +34,13 @@ export const sendVerificationCodeEmail = async (
   await useStorage('redis').setItem(`limitEmail:${email}`, code, { ttl: 30 })
   await useStorage('redis').setItem(`limitIP:${ip}`, code, { ttl: 30 })
 
-  const transporter = nodemailer.createTransport(
+  const transporter = createTransport(
     SMPTransport({
       host: env.KUN_VISUAL_NOVEL_EMAIL_HOST,
       auth: {
         user: env.KUN_VISUAL_NOVEL_EMAIL_ACCOUNT,
-        pass: env.KUN_VISUAL_NOVEL_EMAIL_PASSWORD,
-      },
+        pass: env.KUN_VISUAL_NOVEL_EMAIL_PASSWORD
+      }
     })
   )
 
@@ -49,7 +49,7 @@ export const sendVerificationCodeEmail = async (
     sender: env.KUN_VISUAL_NOVEL_EMAIL_ACCOUNT,
     to: email,
     subject: 'KUN Visual Novel Verification Code',
-    text: getMailContent(type, code),
+    text: getMailContent(type, code)
   }
 
   transporter.sendMail(mailOptions)

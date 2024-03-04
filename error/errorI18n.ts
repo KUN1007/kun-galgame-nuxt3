@@ -60,7 +60,7 @@ const errorMessagesEN: Record<number, string> = {
   10507: `Insufficient parameters to get a reply request, or failed to parse the request (-B)`,
   10508: `Your moemoepoints are less than 1100, so you can't use the upvote reply feature (-B)`,
   10509: `You've already liked this reply. (-B)`,
-  10510: `You've already disliked this reply. (-B)`,
+  10510: `You've already disliked this reply. (-B)`
 }
 
 const errorMessagesCN: Record<number, string> = {
@@ -118,7 +118,7 @@ const errorMessagesCN: Record<number, string> = {
   10507: `获取回复请求参数不足, 或解析请求参数失败 (-B)`,
   10508: `您的萌萌点不足 1100, 无法使用推回复功能 (-B)`,
   10509: `您已经点赞过这个回复了 (-B)`,
-  10510: `您已经点踩过这个回复了 (-B)`,
+  10510: `您已经点踩过这个回复了 (-B)`
 }
 
 export const getErrorMessageEN = (errorCode: number) => {

@@ -1,11 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: {
-    enabled: false,
+    enabled: false
   },
   devServer: {
     host: '127.0.0.1',
-    port: 1007,
+    port: 1007
   },
   modules: [
     '@pinia/nuxt',
@@ -18,7 +18,7 @@ export default defineNuxtConfig({
     'nuxt-typed-router',
     'nuxt-schema-org',
     '@nuxtjs/color-mode',
-    './modules/socket/module',
+    './modules/socket/module'
   ],
   runtimeConfig: {
     MONGODB_URL: process.env.MONGODB_URL,
@@ -33,25 +33,25 @@ export default defineNuxtConfig({
     JWT_SECRET: process.env.JWT_SECRET,
 
     public: {
-      KUN_GALGAME_URL: process.env.KUN_GALGAME_URL,
-    },
+      KUN_GALGAME_URL: process.env.KUN_GALGAME_URL
+    }
   },
   imports: {
-    dirs: ['./composables', './utils', './store/**/*.ts'],
+    dirs: ['./composables', './utils', './store/**/*.ts']
   },
 
   // Frontend
   css: ['~/assets/css/index.scss'],
   vite: {
     esbuild: {
-      drop: ['console', 'debugger'],
-    },
+      drop: ['console', 'debugger']
+    }
   },
   piniaPersistedstate: {
     cookieOptions: {
       maxAge: 60 * 60 * 24 * 7,
-      sameSite: 'strict',
-    },
+      sameSite: 'strict'
+    }
   },
   i18n: {
     langDir: './language',
@@ -59,13 +59,13 @@ export default defineNuxtConfig({
       {
         code: 'en-us',
         iso: 'en-US',
-        file: 'en.json',
+        file: 'en.json'
       },
       {
         code: 'zh-cn',
         iso: 'zh-CN',
-        file: 'zh.json',
-      },
+        file: 'zh.json'
+      }
     ],
     baseUrl: process.env.KUN_GALGAME_URL,
     defaultLocale: 'en-us',
@@ -73,8 +73,8 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'kungalgame-language',
-      redirectOn: 'root',
-    },
+      redirectOn: 'root'
+    }
   },
   colorMode: {
     preference: 'system',
@@ -84,7 +84,7 @@ export default defineNuxtConfig({
     componentName: 'ColorScheme',
     classPrefix: 'kun-',
     classSuffix: '-mode',
-    storageKey: 'kungalgame-color-mode',
+    storageKey: 'kungalgame-color-mode'
   },
   pwa: {
     registerType: 'autoUpdate',
@@ -98,33 +98,33 @@ export default defineNuxtConfig({
         {
           src: 'pwa/pwa-192x192.png',
           sizes: '192x192',
-          type: 'image/png',
+          type: 'image/png'
+        },
+        {
+          src: 'pwa/pwa-512x512.png',
+          sizes: '512x512',
+          type: 'image/png'
         },
         {
           src: 'pwa/pwa-512x512.png',
           sizes: '512x512',
           type: 'image/png',
-        },
-        {
-          src: 'pwa/pwa-512x512.png',
-          sizes: '512x512',
-          type: 'image/png',
-          purpose: 'any maskable',
-        },
-      ],
+          purpose: 'any maskable'
+        }
+      ]
     },
     workbox: {
       globPatterns: ['**/*.{js,css,png,webp,svg,ico}'],
-      navigateFallback: null,
+      navigateFallback: null
     },
     client: {
-      installPrompt: true,
+      installPrompt: true
     },
     devOptions: {
       enabled: true,
       suppressWarnings: true,
       navigateFallbackAllowlist: [/^\/$/],
-      type: 'module',
-    },
-  },
+      type: 'module'
+    }
+  }
 })

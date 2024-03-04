@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path')
 
 module.exports = {
@@ -10,7 +11,7 @@ module.exports = {
       autorestart: true,
       watch: false,
       max_memory_restart: '2G',
-      script: './.output/server/index.mjs',
-    },
-  ],
+      script: './.output/server/index.mjs'
+    }
+  ]
 }

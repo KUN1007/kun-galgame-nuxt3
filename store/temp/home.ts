@@ -12,33 +12,33 @@ export const useTempHomeStore = defineStore({
       limit: 7,
       sortField: 'updated',
       sortOrder: 'desc',
-      isLoading: true,
+      isLoading: true
     },
     topic: {
       category: ['Galgame'],
       page: 1,
       limit: 10,
       sortField: 'updated',
-      sortOrder: 'desc',
+      sortOrder: 'desc'
     },
 
     topics: [],
     savedPosition: 0,
 
-    isShowSearch: false,
+    isShowSearch: false
   }),
   getters: {},
   actions: {
-    resetSearchStatus() {
+    resetSearchStatus () {
       this.search.page = 1
       this.search.limit = 7
       this.search.isLoading = true
     },
 
-    resetHomePageStatus() {
+    resetHomePageStatus () {
       this.topic.page = 1
       this.topic.limit = 10
       this.topics = []
-    },
-  },
+    }
+  }
 })

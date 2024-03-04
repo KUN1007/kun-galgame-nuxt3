@@ -7,7 +7,7 @@ import { checkCommentPublish } from '../../utils/checkCommentPublish'
 import type { H3Event } from 'h3'
 import type {
   TopicComment,
-  TopicCreateCommentRequestData,
+  TopicCreateCommentRequestData
 } from '~/types/api/comment'
 
 const readReplyData = async (event: H3Event) => {
@@ -42,7 +42,7 @@ const readReplyData = async (event: H3Event) => {
     tid: parseInt(tid),
     c_uid: uid,
     to_uid: parseInt(to_uid),
-    content,
+    content
   }
 }
 
@@ -61,14 +61,14 @@ export default defineEventHandler(async (event) => {
       tid,
       c_uid,
       to_uid,
-      content,
+      content
     })
 
     const savedComment = await newComment.save()
 
     const commentUser = await UserModel.findOneAndUpdate(
       {
-        uid: c_uid,
+        uid: c_uid
       },
       { $addToSet: { comment: savedComment.cid }, $inc: { comment_count: 1 } }
     )
@@ -79,7 +79,7 @@ export default defineEventHandler(async (event) => {
 
     const toUser = await UserModel.findOneAndUpdate(
       {
-        uid: to_uid,
+        uid: to_uid
       },
       { $inc: { moemoepoint: 1 } }
     )
@@ -110,15 +110,15 @@ export default defineEventHandler(async (event) => {
       c_user: {
         uid: commentUser.uid,
         name: commentUser.name,
-        avatar: commentUser.avatar,
+        avatar: commentUser.avatar
       },
       to_user: {
         uid: toUser.uid,
-        name: toUser.name,
+        name: toUser.name
       },
       content: savedComment.content,
       likes: savedComment.likes,
-      dislikes: savedComment.dislikes,
+      dislikes: savedComment.dislikes
     }
 
     await session.commitTransaction()

@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
-import bcrypt from 'bcrypt'
+import { hash } from 'bcrypt'
 import UserModel from '~/server/models/user'
 import {
   isValidEmail,
   isValidName,
   isValidPassword,
-  isValidMailConfirmCode,
+  isValidMailConfirmCode
 } from '~/utils/validate'
 import type { H3Event } from 'h3'
 import type { RegisterRequestData, LoginResponseData } from '~/types/api/user'
@@ -51,7 +51,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const usernameCount = await UserModel.countDocuments({
-    name: { $regex: new RegExp('^' + name + '$', 'i') },
+    name: { $regex: new RegExp('^' + name + '$', 'i') }
   })
   if (usernameCount) {
     kunError(event, 10105)
@@ -68,13 +68,13 @@ export default defineEventHandler(async (event) => {
   session.startTransaction()
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 7)
+    const hashedPassword = await hash(password, 7)
 
     const user = new UserModel({
       name,
       email,
       password: hashedPassword,
-      ip,
+      ip
     })
     await user.save()
 
@@ -82,7 +82,7 @@ export default defineEventHandler(async (event) => {
     deleteCookie(event, 'kungalgame-is-navigate-to-login')
     setCookie(event, 'kungalgame-moemoe-refresh-token', refreshToken, {
       httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000
     })
 
     const userInfo: LoginResponseData = {
@@ -91,7 +91,7 @@ export default defineEventHandler(async (event) => {
       avatar: user.avatar,
       moemoepoint: user.moemoepoint,
       roles: user.roles,
-      token,
+      token
     }
 
     await session.commitTransaction()

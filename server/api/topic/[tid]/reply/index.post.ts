@@ -38,7 +38,7 @@ const readReplyData = async (event: H3Event) => {
     to_floor,
     tags: deduplicatedTags,
     content,
-    time,
+    time
   }
 }
 
@@ -64,9 +64,9 @@ export default defineEventHandler(async (event) => {
       to_uid,
       to_floor,
       floor,
-      tags: tags,
+      tags,
       content,
-      time,
+      time
     })
     const savedReply = await newReply.save()
 
@@ -92,7 +92,7 @@ export default defineEventHandler(async (event) => {
       { tid },
       {
         $addToSet: { replies: savedReply.rid },
-        $inc: { popularity: 5, replies_count: 1 },
+        $inc: { popularity: 5, replies_count: 1 }
       }
     )
 
@@ -119,11 +119,11 @@ export default defineEventHandler(async (event) => {
         uid: replyUser.uid,
         name: replyUser.name,
         avatar: replyUser.avatar,
-        moemoepoint: replyUser.moemoepoint,
+        moemoepoint: replyUser.moemoepoint
       },
       to_user: {
         uid: replyToUser.uid,
-        name: replyToUser.name,
+        name: replyToUser.name
       },
       edited: savedReply.edited,
       content: savedReply.content,
@@ -133,7 +133,7 @@ export default defineEventHandler(async (event) => {
       dislikes: savedReply.dislikes,
       tags: savedReply.tags,
       time: savedReply.time,
-      comment: savedReply.comment,
+      comment: savedReply.comment
     }
 
     await session.commitTransaction()

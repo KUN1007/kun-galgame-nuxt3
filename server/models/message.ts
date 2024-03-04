@@ -12,7 +12,7 @@ const MessageSchema = new mongoose.Schema<MessageAttributes>(
     tid: { type: Number },
     content: { type: String, default: '' },
     status: { type: String, default: 'unread' },
-    type: { type: String, required: true },
+    type: { type: String, required: true }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )
@@ -20,7 +20,7 @@ const MessageSchema = new mongoose.Schema<MessageAttributes>(
 MessageSchema.virtual('user', {
   ref: 'user',
   localField: 'sender_uid',
-  foreignField: 'uid',
+  foreignField: 'uid'
 })
 
 MessageSchema.pre('save', increasingSequence('mid'))

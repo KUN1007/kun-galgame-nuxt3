@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  middleware: 'auth',
+  middleware: 'auth'
 })
 
 const { t } = useI18n()
@@ -10,9 +10,9 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: t('seo.edit.description'),
-    },
-  ],
+      content: t('seo.edit.description')
+    }
+  ]
 })
 
 const { isTopicRewriting } = storeToRefs(useTempEditStore())

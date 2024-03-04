@@ -3,7 +3,7 @@ import type {
   UserSortFieldRanking,
   SortOrder,
   RankingGetUserRequestData,
-  RankingUsers,
+  RankingUsers
 } from '~/types/api/ranking'
 
 const getUserRanking = async (
@@ -15,7 +15,7 @@ const getUserRanking = async (
   const skip = (page - 1) * limit
 
   const sortOptions: Record<string, 'asc' | 'desc'> = {
-    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc',
+    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
   }
 
   const users = await UserModel.find()
@@ -28,7 +28,7 @@ const getUserRanking = async (
     uid: user.uid,
     name: user.name,
     avatar: user.avatar,
-    field: user[sortField],
+    field: user[sortField]
   }))
 
   return responseData

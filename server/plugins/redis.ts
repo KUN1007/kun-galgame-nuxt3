@@ -6,7 +6,7 @@ export default defineNitroPlugin(() => {
 
   const driver = redisDriver({
     host: config.REDIS_HOST,
-    port: parseInt(config.REDIS_PORT),
+    port: parseInt(config.REDIS_PORT)
   })
 
   storage.mount('redis', driver)

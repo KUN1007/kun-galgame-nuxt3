@@ -8,10 +8,12 @@ export const generateToken = (uid: number, name: string, expire: string) => {
     iss: config.JWT_ISS,
     aud: config.JWT_AUD,
     uid,
-    name,
+    name
   }
+
+  // eslint-disable-next-line import/no-named-as-default-member
   const token = jwt.sign(payload, config.JWT_SECRET, {
-    expiresIn: expire,
+    expiresIn: expire
   })
 
   return token
@@ -23,7 +25,7 @@ export const createTokens = async (uid: number, name: string) => {
 
   // see: https://unstorage.unjs.io/drivers/redis
   await useStorage('redis').setItem(`refreshToken:${uid}`, refreshToken, {
-    ttl: 7 * 24 * 60 * 60,
+    ttl: 7 * 24 * 60 * 60
   })
 
   return { token, refreshToken }

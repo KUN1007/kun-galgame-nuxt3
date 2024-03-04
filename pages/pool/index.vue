@@ -6,9 +6,9 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: t('seo.pool.description'),
-    },
-  ],
+      content: t('seo.pool.description')
+    }
+  ]
 })
 
 const pool = ref<HTMLElement>()
@@ -20,7 +20,7 @@ const {
   sortOrder,
   isScrollToTop,
   savedPosition,
-  topics,
+  topics
 } = storeToRefs(useTempPoolStore())
 const isLoadingComplete = ref(false)
 
@@ -29,7 +29,7 @@ const getTopics = async () => {
     method: 'GET',
     query: { page, limit, sortField, sortOrder },
     watch: false,
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
   return data.value ?? []
 }
@@ -71,7 +71,7 @@ watch(
     isLoadingComplete.value = false
 
     pool.value?.scrollTo({
-      top: 0,
+      top: 0
     })
 
     useTempPoolStore().resetPageStatus()
@@ -85,7 +85,7 @@ watch(
   () => {
     if (pool.value) {
       pool.value.scrollTo({
-        top: 0,
+        top: 0
       })
       isScrollToTop.value = false
     }
@@ -109,7 +109,7 @@ const handleLoadTopics = async () => {
 onMounted(() => {
   pool.value?.scrollTo({
     top: savedPosition.value,
-    left: 0,
+    left: 0
   })
 
   const element = pool.value

@@ -12,20 +12,20 @@ export const asideItem: Item[] = [
     index: 1,
     sortField: 'floor',
     icon: 'line-md:arrows-vertical',
-    name: 'floor',
+    name: 'floor'
   },
   {
     index: 2,
     sortField: 'likes_count',
     icon: 'line-md:thumbs-up-twotone',
-    name: 'like',
+    name: 'like'
   },
   {
     index: 3,
     sortField: 'comments_count',
     icon: 'fa-regular:comment-dots',
-    name: 'comment',
-  },
+    name: 'comment'
+  }
 ]
 
 interface SortItem {
@@ -38,11 +38,11 @@ export const sortItem: SortItem[] = [
   {
     index: 1,
     sortOrder: 'asc',
-    icon: 'tdesign:order-ascending',
+    icon: 'tdesign:order-ascending'
   },
   {
     index: 2,
     sortOrder: 'desc',
-    icon: 'tdesign:order-descending',
-  },
+    icon: 'tdesign:order-descending'
+  }
 ]

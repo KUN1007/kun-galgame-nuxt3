@@ -10,7 +10,7 @@ const NonMoeSchema = new mongoose.Schema<NonMoeAttributes>(
     name: { type: String, require: true },
     description: { type: String, required: true },
     time: { type: Number, default: Date.now() },
-    result: { type: String, required: true },
+    result: { type: String, required: true }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )

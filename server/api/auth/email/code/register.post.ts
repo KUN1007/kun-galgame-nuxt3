@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const usernameCount = await UserModel.countDocuments({
-    name: { $regex: new RegExp('^' + name + '$', 'i') },
+    name: { $regex: new RegExp('^' + name + '$', 'i') }
   })
   if (usernameCount > 0) {
     kunError(event, 10105)

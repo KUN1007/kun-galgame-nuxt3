@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
   const responseData: UserReply[] = replies.map((reply) => ({
     tid: reply.tid,
     content: reply.content.substring(0, 107),
-    time: reply.time,
+    time: reply.time
   }))
   return responseData
 })

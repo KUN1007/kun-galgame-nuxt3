@@ -6,8 +6,8 @@ export const useTempNonMoeStore = defineStore({
   state: (): NonMoeLogRequestData => ({
     page: '1',
     limit: '30',
-    sortOrder: 'desc',
+    sortOrder: 'desc'
   }),
   getters: {},
-  actions: {},
+  actions: {}
 })

@@ -6,9 +6,9 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: t('seo.thanksList.description'),
-    },
-  ],
+      content: t('seo.thanksList.description')
+    }
+  ]
 })
 </script>
 

@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt'
+import { hash, compare } from 'bcrypt'
 import UserModel from '~/server/models/user'
 import { isValidPassword } from '~/utils/validate'
 import type { UserUpdatePasswordRequestData } from '~/types/api/user'
@@ -25,13 +25,13 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const isCorrectPassword = await bcrypt.compare(oldPassword, user.password)
+  const isCorrectPassword = await compare(oldPassword, user.password)
   if (!isCorrectPassword) {
     kunError(event, 10102)
     return
   }
 
-  const hashedPassword = await bcrypt.hash(newPassword, 7)
+  const hashedPassword = await hash(newPassword, 7)
   await UserModel.updateOne({ uid }, { $set: { password: hashedPassword } })
 
   return 'Moe Moe'

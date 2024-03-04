@@ -6,9 +6,9 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: t('seo.bylaw.description'),
-    },
-  ],
+      content: t('seo.bylaw.description')
+    }
+  ]
 })
 </script>
 

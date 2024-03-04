@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
     reply: user.reply,
     comment: user.comment,
     likeTopic: user.like_topic,
-    upvoteTopic: user.upvote_topic,
+    upvoteTopic: user.upvote_topic
   }
   return responseData
 })

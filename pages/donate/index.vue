@@ -7,9 +7,9 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: t('seo.donate.description'),
-    },
-  ],
+      content: t('seo.donate.description')
+    }
+  ]
 })
 
 const handleClickDonate = () => {

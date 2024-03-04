@@ -12,14 +12,14 @@ export const useTempPoolStore = defineStore({
     isScrollToTop: false,
     savedPosition: 0,
 
-    topics: [],
+    topics: []
   }),
   actions: {
-    resetPageStatus() {
+    resetPageStatus () {
       this.page = 1
       this.limit = 12
       this.topics = []
       this.savedPosition = 0
-    },
-  },
+    }
+  }
 })

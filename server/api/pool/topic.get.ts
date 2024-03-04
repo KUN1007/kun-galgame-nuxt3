@@ -3,7 +3,7 @@ import type {
   SortOrder,
   SortFieldPool,
   PoolTopicsRequestData,
-  PoolTopic,
+  PoolTopic
 } from '~/types/api/pool'
 
 const getPoolTopics = async (
@@ -15,7 +15,7 @@ const getPoolTopics = async (
   const skip = (page - 1) * limit
 
   const sortOptions: Record<string, 'asc' | 'desc'> = {
-    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc',
+    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
   }
 
   const topics = await TopicModel.find({ status: { $ne: 1 } })
@@ -30,7 +30,7 @@ const getPoolTopics = async (
     views: topic.views,
     likesCount: topic.likes_count,
     time: topic.time,
-    content: topic.content.slice(0, 233),
+    content: topic.content.slice(0, 233)
   }))
 
   return data

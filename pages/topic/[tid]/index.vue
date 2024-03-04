@@ -15,7 +15,7 @@ const tid = computed(() => {
 const { data } = await useFetch(`/api/topic/${tid.value}`, {
   method: 'GET',
   watch: false,
-  ...kungalgameResponseHandler,
+  ...kungalgameResponseHandler
 })
 
 if (data.value === 'banned') {
@@ -36,13 +36,13 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: topicContentText.value,
+      content: topicContentText.value
     },
     {
       name: 'keywords',
-      content: topic.value?.tags.toString(),
-    },
-  ],
+      content: topic.value?.tags.toString()
+    }
+  ]
 })
 </script>
 

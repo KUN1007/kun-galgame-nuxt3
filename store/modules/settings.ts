@@ -12,26 +12,26 @@ export const useKUNGalgameSettingsStore = defineStore({
       pool: 90,
       bylaw: 90,
       technique: 90,
-      'thanks-list': 90,
+      'thanks-list': 90
     },
     showKUNGalgameFontStyle: 'system-ui',
     showKUNGalgameBackground: 0,
 
-    isShowPageWidth: true,
+    isShowPageWidth: true
   }),
   actions: {
     // Set the font style, allowing users to set their own
     // , with the default as system UI
-    setKUNGalgameFontStyle(font: string) {
+    setKUNGalgameFontStyle (font: string) {
       this.showKUNGalgameFontStyle = font
       document.documentElement.style.setProperty('--font-family', font)
     },
     // Reset all settings; because it interacts with the document
     // , Pinia reactivity is not effective
-    async setKUNGalgameSettingsRecover() {
+    async setKUNGalgameSettingsRecover () {
       this.$reset()
       this.setKUNGalgameFontStyle('system-ui')
       await deleteImage('kun-galgame-custom-bg')
-    },
-  },
+    }
+  }
 })

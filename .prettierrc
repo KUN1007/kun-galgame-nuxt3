@@ -1,0 +1,11 @@
+{
+  "printWidth": 80,
+  "eslintIntegration": true,
+  "tabWidth": 2,
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "files.insertFinalNewline": true,
+  "htmlWhitespaceSensitivity": "css",
+  "arrowParens": "always"
+}

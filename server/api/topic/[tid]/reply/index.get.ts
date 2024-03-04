@@ -5,7 +5,7 @@ import type {
   TopicReplyRequestData,
   TopicReply,
   SortField,
-  SortOrder,
+  SortOrder
 } from '~/types/api/reply'
 
 const getReplies = async (
@@ -26,7 +26,7 @@ const getReplies = async (
 
     const skip = (page - 1) * limit
     const sortOptions: Record<string, 'asc' | 'desc'> = {
-      [sortField]: sortOrder === 'asc' ? 'asc' : 'desc',
+      [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
     }
 
     const replyDetails = await ReplyModel.find({ rid: { $in: replyId } })
@@ -46,11 +46,11 @@ const getReplies = async (
         uid: reply.r_user[0].uid,
         name: reply.r_user[0].name,
         avatar: reply.r_user[0].avatar,
-        moemoepoint: reply.r_user[0].moemoepoint,
+        moemoepoint: reply.r_user[0].moemoepoint
       },
       to_user: {
         uid: reply.to_user[0].uid,
-        name: reply.to_user[0].name,
+        name: reply.to_user[0].name
       },
       edited: reply.edited,
       content: reply.content,
@@ -60,7 +60,7 @@ const getReplies = async (
       dislikes: reply.dislikes,
       tags: reply.tags,
       time: reply.time,
-      comment: reply.comment,
+      comment: reply.comment
     }))
 
     await session.commitTransaction()

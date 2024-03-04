@@ -14,7 +14,7 @@ export const createMessage = async (
     time: Date.now(),
     type,
     content,
-    tid,
+    tid
   })
 
   return await newTopic.save()
@@ -33,7 +33,7 @@ export const createDedupMessage = async (
     receiver_uid: receiverUid,
     type,
     content,
-    tid,
+    tid
   })
   if (duplicatedMessage) {
     return
@@ -45,7 +45,7 @@ export const createDedupMessage = async (
     time: Date.now(),
     type,
     content,
-    tid,
+    tid
   })
 
   return await newTopic.save()

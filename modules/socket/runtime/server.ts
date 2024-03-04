@@ -4,11 +4,12 @@ import type { Server } from 'http'
 import type { ServerOptions } from 'socket.io'
 
 declare global {
+  // eslint-disable-next-line no-var
   var __io: SocketServer
 }
 
 export function createIOHandler<
-  T extends Record<string, (io: SocketServer) => void>,
+  T extends Record<string, (io: SocketServer) => void>
 >(functions: T, serverOptions: Partial<ServerOptions>) {
   return eventHandler((event) => {
     if (!globalThis.__io && process.env.NODE_ENV === 'production') {

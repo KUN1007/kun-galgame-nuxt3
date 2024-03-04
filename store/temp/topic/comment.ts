@@ -10,7 +10,7 @@ export const useTempCommentStore = defineStore({
     toUsername: '',
     content: '',
 
-    isShowCommentPanelRid: 0,
+    isShowCommentPanelRid: 0
   }),
-  actions: {},
+  actions: {}
 })

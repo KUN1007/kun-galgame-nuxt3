@@ -5,7 +5,7 @@ import {
   addPlugin,
   addImports,
   addTemplate,
-  createResolver,
+  createResolver
 } from '@nuxt/kit'
 import fg from 'fast-glob'
 import { Server as SocketServer } from 'socket.io'
@@ -19,13 +19,13 @@ export interface ModuleOptions {
 export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: 'nuxt3-socket.io',
-    configKey: 'socket',
+    configKey: 'socket'
   },
   defaults: {
     addPlugin: true,
-    serverOptions: {},
+    serverOptions: {}
   },
-  async setup(options, nuxt) {
+  async setup (options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
 
     const extGlob = '**/*.{ts,js,mjs}'
@@ -49,7 +49,7 @@ export default defineNuxtModule<ModuleOptions>({
     addTemplate({
       filename: 'io-dev-functions.mjs',
       write: true,
-      getContents() {
+      getContents () {
         return `
           import jiti from 'jiti';
           const _require = jiti(process.cwd(), { interopDefault: true, esmResolve: true });
@@ -67,7 +67,7 @@ export default defineNuxtModule<ModuleOptions>({
             ${files.map((_, index) => `function${index}`).join(',\n')}
           }
         `
-      },
+      }
     })
 
     if (nuxt.options.dev) {
@@ -92,24 +92,24 @@ export default defineNuxtModule<ModuleOptions>({
       addImports([
         {
           name: 'useSocket',
-          from: resolve(runtimeDir, 'composables'),
+          from: resolve(runtimeDir, 'composables')
         },
         {
           name: 'useIO',
-          from: resolve(runtimeDir, 'composables'),
-        },
+          from: resolve(runtimeDir, 'composables')
+        }
       ])
     }
 
     addServerHandler({
       middleware: true,
-      handler: resolve(nuxt.options.buildDir, 'io-handler.ts'),
+      handler: resolve(nuxt.options.buildDir, 'io-handler.ts')
     })
 
     addTemplate({
       filename: 'io-handler.ts',
       write: true,
-      getContents() {
+      getContents () {
         return `
           import { createIOHandler } from '${resolve(runtimeDir, 'server')}';
           ${files
@@ -122,18 +122,18 @@ export default defineNuxtModule<ModuleOptions>({
             ${files.map((_, index) => `function${index}`).join(',\n')}
           }, ${JSON.stringify(options.serverOptions)})
         `
-      },
+      }
     })
 
-    async function scanHandlers() {
+    async function scanHandlers () {
       files.length = 0
       const updatedFiles = await fg(extGlob, {
         cwd: resolve(nuxt.options.srcDir, 'server/socket'),
         absolute: true,
-        onlyFiles: true,
+        onlyFiles: true
       })
       files.push(...new Set(updatedFiles))
       return files
     }
-  },
+  }
 })

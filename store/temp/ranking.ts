@@ -1,6 +1,6 @@
 import type {
   RankingGetTopicsRequestData,
-  RankingGetUserRequestData,
+  RankingGetUserRequestData
 } from '~/types/api/ranking'
 
 interface RankingStore {
@@ -16,15 +16,15 @@ export const useTempRankingStore = defineStore({
       page: '1',
       limit: '30',
       sortField: 'popularity',
-      sortOrder: 'desc',
+      sortOrder: 'desc'
     },
     user: {
       page: '1',
       limit: '30',
       sortField: 'moemoepoint',
-      sortOrder: 'desc',
-    },
+      sortOrder: 'desc'
+    }
   }),
   getters: {},
-  actions: {},
+  actions: {}
 })

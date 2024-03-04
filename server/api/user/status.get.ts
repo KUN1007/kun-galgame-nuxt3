@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
 
   const responseData: HomeUserStatus = {
     moemoepoints: user.moemoepoint,
-    isCheckIn: user.daily_check_in === 1 ? true : false,
+    isCheckIn: user.daily_check_in === 1
   }
 
   return responseData

@@ -17,7 +17,7 @@ export const useTempReplyStore = defineStore({
       page: 1,
       limit: 3,
       sortField: 'floor',
-      sortOrder: 'asc',
+      sortOrder: 'asc'
     },
 
     replyRewrite: {
@@ -25,7 +25,7 @@ export const useTempReplyStore = defineStore({
       rid: 0,
       content: '',
       tags: [],
-      edited: 0,
+      edited: 0
     },
 
     tempReply: {
@@ -38,11 +38,11 @@ export const useTempReplyStore = defineStore({
         uid: 0,
         name: '',
         avatar: '',
-        moemoepoint: 0,
+        moemoepoint: 0
       },
       to_user: {
         uid: 0,
-        name: '',
+        name: ''
       },
       edited: 0,
       content: '',
@@ -52,13 +52,13 @@ export const useTempReplyStore = defineStore({
       dislikes: [],
       tags: [],
       time: 0,
-      comment: [],
+      comment: []
     },
 
-    tempReplyRewrite: { rid: 0, content: '', tags: [''], edited: 0 },
+    tempReplyRewrite: { rid: 0, content: '', tags: [''], edited: 0 }
   }),
   actions: {
-    resetRewriteReplyData() {
+    resetRewriteReplyData () {
       this.replyRewrite.tid = 0
       this.replyRewrite.rid = 0
       this.replyRewrite.content = ''
@@ -67,9 +67,9 @@ export const useTempReplyStore = defineStore({
       this.isReplyRewriting = false
     },
 
-    resetPageStatus() {
+    resetPageStatus () {
       this.replyRequest.page = 1
       this.isLoading = true
-    },
-  },
+    }
+  }
 })

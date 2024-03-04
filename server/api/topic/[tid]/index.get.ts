@@ -46,14 +46,14 @@ export default defineEventHandler(async (event) => {
         uid: user.uid,
         name: user.name,
         avatar: user.avatar,
-        moemoepoint: user.moemoepoint,
+        moemoepoint: user.moemoepoint
       },
       replies: topic.replies,
       status: topic.status,
       share: topic.share,
       category: topic.category,
       popularity: topic.popularity,
-      upvote_time: topic.upvote_time,
+      upvote_time: topic.upvote_time
     }
 
     await session.commitTransaction()

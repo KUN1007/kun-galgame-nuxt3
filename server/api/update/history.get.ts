@@ -13,7 +13,7 @@ const getUpdateLogs = async (page: number, limit: number) => {
     upid: log.upid,
     description: log.description,
     time: log.time,
-    version: log.version,
+    version: log.version
   }))
 
   return data

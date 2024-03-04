@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
 
   const message = await MessageModel.findOne({
     receiver_uid: uid,
-    status: 'unread',
+    status: 'unread'
   })
 
   if (message) {

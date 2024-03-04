@@ -6,9 +6,9 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: t('seo.balance.description'),
-    },
-  ],
+      content: t('seo.balance.description')
+    }
+  ]
 })
 
 const { income, expenditure } = storeToRefs(useTempBalanceStore())
@@ -19,10 +19,10 @@ const { data: incomeData } = await useFetch(`/api/balance/income`, {
     page: income.value.page,
     limit: income.value.limit,
     sortField: income.value.sortField,
-    sortOrder: income.value.sortOrder,
+    sortOrder: income.value.sortOrder
   },
   watch: false,
-  ...kungalgameResponseHandler,
+  ...kungalgameResponseHandler
 })
 
 const { data: expenditureData } = await useFetch(`/api/balance/expenditure`, {
@@ -31,10 +31,10 @@ const { data: expenditureData } = await useFetch(`/api/balance/expenditure`, {
     page: expenditure.value.page,
     limit: expenditure.value.limit,
     sortField: expenditure.value.sortField,
-    sortOrder: expenditure.value.sortOrder,
+    sortOrder: expenditure.value.sortOrder
   },
   watch: false,
-  ...kungalgameResponseHandler,
+  ...kungalgameResponseHandler
 })
 
 const { data: statement } = await useFetch(`/api/balance/statement`, {
@@ -43,10 +43,10 @@ const { data: statement } = await useFetch(`/api/balance/statement`, {
     page: expenditure.value.page,
     limit: expenditure.value.limit,
     sortField: expenditure.value.sortField,
-    sortOrder: expenditure.value.sortOrder,
+    sortOrder: expenditure.value.sortOrder
   },
   watch: false,
-  ...kungalgameResponseHandler,
+  ...kungalgameResponseHandler
 })
 </script>
 
@@ -58,13 +58,13 @@ const { data: statement } = await useFetch(`/api/balance/statement`, {
       <div class="content">
         <BalanceForm
           v-if="incomeData && statement"
-          :isIncome="true"
+          :is-income="true"
           :income-data="incomeData"
           :statement="statement"
         />
         <BalanceForm
           v-if="expenditureData && statement"
-          :isIncome="false"
+          :is-income="false"
           :expenditure-data="expenditureData"
           :statement="statement"
         />

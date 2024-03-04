@@ -12,6 +12,7 @@ export const getCookieTokenInfo = async (event: H3Event) => {
   }
 
   try {
+    // eslint-disable-next-line import/no-named-as-default-member
     const payload = jwt.verify(
       refreshToken,
       config.JWT_SECRET

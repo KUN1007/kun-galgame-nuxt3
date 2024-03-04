@@ -9,6 +9,6 @@ export const usePersistKUNGalgameHomeStore = defineStore({
 
     typeToGet: 'time',
 
-    searchHistory: [],
-  }),
+    searchHistory: []
+  })
 })

@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt'
+import { compare } from 'bcrypt'
 import UserModel from '~/server/models/user'
 import { isValidEmail, isValidName, isValidPassword } from '~/utils/validate'
 import type { H3Event } from 'h3'
@@ -44,7 +44,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const isCorrectPassword = await bcrypt.compare(password, user.password)
+  const isCorrectPassword = await compare(password, user.password)
   if (!isCorrectPassword) {
     kunError(event, 10102)
     return
@@ -54,7 +54,7 @@ export default defineEventHandler(async (event) => {
   deleteCookie(event, 'kungalgame-is-navigate-to-login')
   setCookie(event, 'kungalgame-moemoe-refresh-token', refreshToken, {
     httpOnly: true,
-    maxAge: 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000
   })
 
   const userInfo: LoginResponseData = {
@@ -63,7 +63,7 @@ export default defineEventHandler(async (event) => {
     avatar: user.avatar,
     moemoepoint: user.moemoepoint,
     roles: user.roles,
-    token,
+    token
   }
 
   return userInfo

@@ -31,7 +31,7 @@ const updateReplyLike = async (
 
   try {
     const reply = await ReplyModel.findOneAndUpdate(
-      { rid: rid },
+      { rid },
       { [isPush ? '$push' : '$pull']: { likes: uid } },
       { $inc: { likes_count: moemoepointAmount } }
     )

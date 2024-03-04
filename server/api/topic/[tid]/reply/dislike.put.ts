@@ -30,7 +30,7 @@ const updateReplyDislike = async (
 
   try {
     await ReplyModel.updateOne(
-      { rid: rid },
+      { rid },
       { [isPush ? '$push' : '$pull']: { dislikes: uid } }
     )
 

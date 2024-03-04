@@ -24,10 +24,10 @@ export const useMessage = (
     messageCN,
     messageEN,
     type,
-    duration,
+    duration
   })
 
-  const time = duration ? duration : 3000
+  const time = duration || 3000
 
   setTimeout(() => {
     messageCount.value--

@@ -31,15 +31,15 @@ const updateTopicLike = async (
 
   try {
     const topic = await TopicModel.findOneAndUpdate(
-      { tid: tid },
+      { tid },
       {
-        $inc: { popularity: popularity, likes_count: moemoepointAmount },
-        [isPush ? '$push' : '$pull']: { likes: uid },
+        $inc: { popularity, likes_count: moemoepointAmount },
+        [isPush ? '$push' : '$pull']: { likes: uid }
       }
     )
 
     await UserModel.updateOne(
-      { uid: uid },
+      { uid },
       { [isPush ? '$push' : '$pull']: { like_topic: tid } }
     )
 

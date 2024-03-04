@@ -19,15 +19,15 @@ export default defineEventHandler(async (event) => {
     c_user: {
       uid: comment.cuid[0].uid,
       avatar: comment.cuid[0].avatar,
-      name: comment.cuid[0].name,
+      name: comment.cuid[0].name
     },
     to_user: {
       uid: comment.touid[0].uid,
-      name: comment.touid[0].name,
+      name: comment.touid[0].name
     },
     content: comment.content,
     likes: comment.likes,
-    dislikes: comment.dislikes,
+    dislikes: comment.dislikes
   }))
 
   return replyComments

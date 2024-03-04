@@ -3,7 +3,7 @@ import type {
   TopicSortFieldRanking,
   SortOrder,
   RankingGetTopicsRequestData,
-  RankingTopics,
+  RankingTopics
 } from '~/types/api/ranking'
 
 const getTopicRanking = async (
@@ -15,7 +15,7 @@ const getTopicRanking = async (
   const skip = (page - 1) * limit
 
   const sortOptions: Record<string, 'asc' | 'desc'> = {
-    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc',
+    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
   }
 
   const topics = await TopicModel.find()
@@ -27,7 +27,7 @@ const getTopicRanking = async (
   const responseData: RankingTopics[] = topics.map((topic) => ({
     tid: topic.tid,
     title: topic.title,
-    field: topic[sortField],
+    field: topic[sortField]
   }))
 
   return responseData

@@ -17,7 +17,7 @@ type KunOnResponseErrorContext<R extends ResponseType = 'json'> =
     response: FetchResponse<R>
   }
 
-export const onResponse = async (context: KunOnResponseContext) => {
+export const onResponse = (context: KunOnResponseContext) => {
   if (context.response.status === 205) {
     const navigateCookie = Cookies.get('kungalgame-is-navigate-to-login')
     if (!navigateCookie) {
@@ -38,7 +38,6 @@ export const onResponse = async (context: KunOnResponseContext) => {
 
   if (context.response.status === 233) {
     kungalgameErrorHandler(context.response.headers.get('Kun-Error') || '')
-    return
   }
 }
 

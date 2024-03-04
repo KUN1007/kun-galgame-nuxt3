@@ -14,7 +14,7 @@ export const registerFormItem: RegisterFormItem[] = [
     type: 'text',
     placeholder: 'name',
     class: 'input',
-    autocomplete: 'username',
+    autocomplete: 'username'
   },
   {
     index: 2,
@@ -22,7 +22,7 @@ export const registerFormItem: RegisterFormItem[] = [
     type: 'email',
     placeholder: 'email',
     class: 'input',
-    autocomplete: 'email',
+    autocomplete: 'email'
   },
   {
     index: 3,
@@ -30,13 +30,13 @@ export const registerFormItem: RegisterFormItem[] = [
     type: 'password',
     placeholder: 'password',
     class: 'input',
-    autocomplete: 'current-password',
+    autocomplete: 'current-password'
   },
   {
     index: 4,
     value: 'code',
     type: 'text',
     placeholder: 'code',
-    class: 'input',
-  },
+    class: 'input'
+  }
 ]

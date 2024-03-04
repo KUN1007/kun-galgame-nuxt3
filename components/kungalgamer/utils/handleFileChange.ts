@@ -46,9 +46,7 @@ export const resizeImage = (file: File): Promise<Blob> => {
           '文件过大，请选择小于 1007KB 的文件！',
           'warn'
         )
-        reject(
-          'Image is too large. Please select an image smaller than 1007KB!'
-        )
+        reject(new Error('Image is too large.'))
       } else {
         resolve(resizedFile)
       }

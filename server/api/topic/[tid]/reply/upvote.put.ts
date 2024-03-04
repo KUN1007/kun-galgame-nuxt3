@@ -29,7 +29,7 @@ const updateReplyUpvote = async (
       { rid },
       {
         $set: { upvote_time: time },
-        $push: { upvotes: uid },
+        $push: { upvotes: uid }
       }
     )
 
