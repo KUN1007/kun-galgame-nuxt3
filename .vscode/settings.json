@@ -116,6 +116,7 @@
     "parens",
     "persistedstate",
     "Pinia",
+    "precommit",
     "prismjs",
     "prosemirror",
     "Qbit",

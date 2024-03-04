@@ -1,5 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
+  "version": "2.5.2",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -12,7 +13,7 @@
     "start": "pm2 start ecosystem.config.js",
     "stop": "pm2 delete kun-visual-novel",
     "prepare": "husky",
-    "update:version": "node ./.husky/scripts/updateAppVersion.js"
+    "precommit": "node ./.husky/scripts/bumpAppVersion.js && git add package.json"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.0.8",

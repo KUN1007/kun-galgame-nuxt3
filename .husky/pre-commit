@@ -1,1 +1,1 @@
-pnpm update:version
+pnpm precommit

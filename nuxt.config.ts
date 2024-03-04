@@ -1,3 +1,11 @@
+import fs from 'fs'
+import path from 'path'
+
+const packageJson = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, 'package.json'), 'utf-8')
+)
+const appVersion = packageJson.version
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: {
@@ -34,7 +42,7 @@ export default defineNuxtConfig({
 
     public: {
       KUN_GALGAME_URL: process.env.KUN_GALGAME_URL,
-      KUN_VISUAL_NOVEL_VERSION: process.env.KUN_VISUAL_NOVEL_VERSION
+      KUN_VISUAL_NOVEL_VERSION: appVersion
     }
   },
   imports: {
