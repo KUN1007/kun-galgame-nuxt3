@@ -11,7 +11,6 @@ type PreSaveMiddleware<T extends Document> = (
   next: (error?: Error) => void
 ) => Promise<void>
 
-// eslint-disable-next-line space-before-function-paren
 function increasingSequence(
   fieldName: string,
   startSeq = 1
