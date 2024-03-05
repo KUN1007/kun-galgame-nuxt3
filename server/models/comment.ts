@@ -13,10 +13,8 @@ const CommentSchema = new mongoose.Schema<CommentAttributes>(
     content: { type: String, default: '' },
 
     likes_count: { type: Number, default: 0 },
-    dislikes_count: { type: Number, default: 0 },
 
-    likes: { type: [Number], default: [] },
-    dislikes: { type: [Number], default: [] }
+    likes: { type: [Number], default: [] }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )

@@ -8,15 +8,9 @@ export interface TopicComment {
   to_user: TopicToUserInfo
   content: string
   likes: number[]
-  dislikes: number[]
 }
 
 export interface TopicLikeCommentRequestData {
-  cid: string
-  to_uid: string
-}
-
-export interface TopicDislikeCommentRequestData {
   cid: string
   to_uid: string
 }

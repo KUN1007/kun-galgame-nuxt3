@@ -9,10 +9,8 @@ export interface CommentAttributes {
   content: string
 
   likes_count: number
-  dislikes_count: number
 
   likes: number[]
-  dislikes: number[]
 
   cuid: UserAttributes[]
   touid: UserAttributes[]

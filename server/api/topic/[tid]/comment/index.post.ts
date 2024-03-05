@@ -91,13 +91,13 @@ export default defineEventHandler(async (event) => {
     await TopicModel.updateOne(
       { tid },
       { $inc: { popularity: 2, comments: 1 } }
-    )
+    ).lean()
 
     await ReplyModel.findOneAndUpdate(
       { rid },
       { $addToSet: { comment: savedComment.cid } },
       { $inc: { comment_count: 1 } }
-    )
+    ).lean()
 
     if (c_uid !== to_uid) {
       await createMessage(c_uid, to_uid, 'commented', savedComment.content, tid)
@@ -117,8 +117,7 @@ export default defineEventHandler(async (event) => {
         name: toUser.name
       },
       content: savedComment.content,
-      likes: savedComment.likes,
-      dislikes: savedComment.dislikes
+      likes: savedComment.likes
     }
 
     await session.commitTransaction()

@@ -26,8 +26,7 @@ export default defineEventHandler(async (event) => {
       name: comment.touid[0].name
     },
     content: comment.content,
-    likes: comment.likes,
-    dislikes: comment.dislikes
+    likes: comment.likes
   }))
 
   return replyComments
