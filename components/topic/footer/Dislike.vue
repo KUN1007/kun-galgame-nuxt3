@@ -109,7 +109,7 @@ const handleClickDislike = () => {
     >
       <Icon class="icon" name="line-md:thumbs-down-twotone" />
     </span>
-    {{ dislikesCount }}
+    <span v-if="dislikesCount">{{ dislikesCount }}</span>
   </li>
 </template>
 

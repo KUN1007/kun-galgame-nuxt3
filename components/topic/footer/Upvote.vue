@@ -126,7 +126,7 @@ const handleClickUpvote = async () => {
     >
       <Icon class="icon" name="bi:rocket" />
     </span>
-    {{ upvoteCount }}
+    <span v-if="upvoteCount">{{ upvoteCount }}</span>
   </li>
 </template>
 

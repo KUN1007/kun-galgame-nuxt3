@@ -29,6 +29,7 @@ const content = computed(() => props.content)
   border: none !important;
   padding: 0 10px;
   overflow-x: auto;
+  margin-top: 17px;
 }
 
 @media (max-width: 700px) {

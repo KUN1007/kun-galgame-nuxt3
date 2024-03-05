@@ -74,7 +74,7 @@ const handleClickLike = () => {
 <template>
   <li :class="isLiked ? 'active' : ''" @click="handleClickLike">
     <Icon class="icon" name="line-md:thumbs-up-twotone" />
-    {{ likesCount }}
+    <span v-if="likesCount">{{ likesCount }}</span>
   </li>
 </template>
 
@@ -84,10 +84,11 @@ li {
   justify-content: center;
   align-items: center;
   margin-right: 10px;
+
   .icon {
     cursor: pointer;
     color: var(--kungalgame-font-color-2);
-    margin-right: 2px;
+    margin-right: 10px;
   }
 }
 

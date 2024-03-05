@@ -108,7 +108,7 @@ const handleClickLike = () => {
     >
       <Icon class="icon" name="line-md:thumbs-up-twotone" />
     </span>
-    {{ likesCount }}
+    <span v-if="likesCount">{{ likesCount }}</span>
   </li>
 </template>
 

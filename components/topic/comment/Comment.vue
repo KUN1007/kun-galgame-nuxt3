@@ -115,14 +115,6 @@ const handleClickComment = (
                   :likes="comment.likes"
                 />
 
-                <TopicCommentDislike
-                  :tid="props.tid"
-                  :cid="comment.cid"
-                  :uid="currentUserUid"
-                  :to-uid="comment.c_user.uid"
-                  :dislikes="comment.dislikes"
-                />
-
                 <li
                   @click="
                     handleClickComment(
