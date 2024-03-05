@@ -136,9 +136,6 @@ li {
   justify-content: center;
   align-items: center;
   font-size: 14px;
-  margin: 17px;
-  margin-right: 0;
-
   span {
     display: flex;
     margin-right: 3px;
@@ -153,5 +150,11 @@ li {
 
 .active .icon {
   color: var(--kungalgame-blue-5);
+}
+
+@media (max-width: 700px) {
+  .upvote {
+    font-size: initial;
+  }
 }
 </style>

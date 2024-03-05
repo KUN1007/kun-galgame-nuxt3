@@ -136,4 +136,10 @@ li {
 .active .icon {
   color: var(--kungalgame-blue-5);
 }
+
+@media (max-width: 700px) {
+  .like {
+    font-size: initial;
+  }
+}
 </style>

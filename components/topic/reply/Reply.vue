@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import dayjs from 'dayjs'
+
 import type { TopicReply } from '~/types/api/reply'
 
 const { moemoeAccessToken } = useKUNGalgameUserStore()
@@ -65,14 +67,21 @@ watch(
       :key="index"
       :id="`kungalgame-reply-${reply.floor}`"
     >
-      <div class="floor" :class="reply.edited ? 'rewrite' : ''">
-        <span>K{{ reply.floor }}</span>
+      <div class="floor">
+        <span>{{ reply.floor }}</span>
       </div>
 
       <div class="container">
         <div class="content">
           <div class="article">
-            <TopicKUNGalgamerInfo :user="reply.r_user" />
+            <TopicKUNGalgamerInfo :user="reply.r_user">
+              <div class="reply-mobile">
+                =>
+                <span @click="scrollToReplyId = reply.to_floor">
+                  {{ reply.to_user.name }}
+                </span>
+              </div>
+            </TopicKUNGalgamerInfo>
 
             <div class="right">
               <div class="top">
@@ -93,7 +102,23 @@ watch(
 
           <div class="bottom">
             <TopicTags :tags="reply.tags" :is-show-icon="true" />
-            <TopicTime :time="reply.time" />
+            <TopicTime class="time" :time="reply.time" />
+
+            <p class="time-mobile">
+              <span>
+                {{ dayjs(reply.time).format('YYYY-MM-DD HH:mm:ss') }}
+              </span>
+              <s
+                class="rewrite-mobile"
+                v-if="reply.edited"
+                v-tooltip="{
+                  message: { en: 'Rewrite Time', zh: 'Rewrite 时间' },
+                  position: 'bottom'
+                }"
+              >
+                × {{ dayjs(reply.edited).format('YYYY-MM-DD HH:mm:ss') }}
+              </s>
+            </p>
           </div>
         </div>
 
@@ -104,17 +129,17 @@ watch(
             views: 0,
             likes: reply.likes,
             dislikes: reply.dislikes,
-            upvotes: reply.upvotes,
+            upvotes: reply.upvotes
           }"
           :content="{
             title: props.title,
             content: reply.content,
             tags: reply.tags,
-            category: [],
+            category: []
           }"
           :to-user="{
             uid: reply.r_user.uid,
-            name: reply.r_user.name,
+            name: reply.r_user.name
           }"
           :to-floor="reply.floor"
         >
@@ -128,10 +153,10 @@ watch(
                   reply.r_user.name
                 )
               "
-              class="icon"
+              class="comment"
               v-tooltip="{
                 message: { en: 'Comment', zh: '评论' },
-                position: 'bottom',
+                position: 'bottom'
               }"
             >
               <Icon name="fa-regular:comment-dots" />
@@ -170,7 +195,6 @@ watch(
 .floor {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
   font-weight: bold;
   font-style: oblique;
   color: var(--kungalgame-red-3);
@@ -179,7 +203,6 @@ watch(
   margin: 5px 0;
 
   span {
-    transform: rotate(10deg) translateY(40px);
     padding: 0 30px;
     text-align: center;
     background-color: var(--kungalgame-trans-white-2);
@@ -220,6 +243,18 @@ watch(
   justify-content: space-between;
 }
 
+.time-mobile {
+  display: none;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--kungalgame-font-color-1);
+  padding: 0 17px;
+
+  .rewrite-mobile {
+    color: var(--kungalgame-blue-5);
+  }
+}
+
 .right {
   width: 100%;
   display: flex;
@@ -234,7 +269,8 @@ watch(
   letter-spacing: 1px;
 }
 
-.reply {
+.reply,
+.reply-mobile {
   font-size: 17px;
   color: var(--kungalgame-font-color-3);
 
@@ -250,7 +286,12 @@ watch(
   }
 }
 
-.icon {
+.reply-mobile {
+  display: none;
+  margin-left: 17px;
+}
+
+.comment {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -258,12 +299,6 @@ watch(
   color: var(--kungalgame-font-color-2);
   cursor: pointer;
   margin-right: 17px;
-}
-
-.rewrite {
-  span {
-    transform: rotate(0) translateY(0) translateX(-7px);
-  }
 }
 
 .active-upvote .container {
@@ -286,13 +321,36 @@ watch(
 }
 
 @media (max-width: 700px) {
+  .other-topic-container {
+    min-height: initial;
+  }
+
   .article {
     flex-direction: column;
   }
+
   .top {
-    margin: 0;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--kungalgame-blue-5);
+    display: none;
+  }
+
+  .bottom {
+    border: transparent;
+  }
+
+  .icon {
+    font-size: initial;
+  }
+
+  .time {
+    display: none;
+  }
+
+  .time-mobile {
+    display: flex;
+  }
+
+  .reply-mobile {
+    display: block;
   }
 }
 </style>

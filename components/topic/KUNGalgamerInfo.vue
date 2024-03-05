@@ -23,19 +23,23 @@ const user = computed(() => props.user)
     </div>
 
     <div class="info">
-      <div class="name">
-        <NuxtLinkLocale
-          :aria-label="`KUN Visual Novel, 鲲 Galgame, User ${props.user.name}`"
-          :to="`/kungalgamer/${user.uid}/info`"
-        >
-          {{ user.name }}
-        </NuxtLinkLocale>
+      <div class="replier">
+        <p class="name">
+          <NuxtLinkLocale
+            :aria-label="`KUN Visual Novel, 鲲 Galgame, User ${props.user.name}`"
+            :to="`/kungalgamer/${user.uid}/info`"
+          >
+            {{ user.name }}
+          </NuxtLinkLocale>
+        </p>
+
+        <p class="moemoepoint">
+          <span><Icon name="line-md:star-alt-twotone"></Icon></span>
+          <span>{{ user.moemoepoint }}</span>
+        </p>
       </div>
 
-      <div class="moemoepoint">
-        <span><Icon name="line-md:star-alt-twotone"></Icon></span>
-        <span>{{ user.moemoepoint }}</span>
-      </div>
+      <slot />
     </div>
   </div>
 </template>
@@ -106,17 +110,13 @@ const user = computed(() => props.user)
 @media (max-width: 700px) {
   .kungalgamer {
     flex-direction: row;
-    justify-content: center;
-    margin-top: 17px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--kungalgame-blue-2);
+    margin-bottom: 0;
   }
 
   .avatar {
     width: 70px;
     height: 70px;
-    margin-top: 10px;
-    margin-right: 50px;
+    flex-shrink: 0;
 
     img {
       width: 70px;
@@ -124,9 +124,17 @@ const user = computed(() => props.user)
   }
 
   .info {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
+  }
+
+  .replier {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 17px;
   }
 }
 </style>

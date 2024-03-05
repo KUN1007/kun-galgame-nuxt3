@@ -33,9 +33,9 @@ const content = computed(() => props.content)
 
 @media (max-width: 700px) {
   .kungalgame-topic-content {
-    width: 100%;
     margin-top: 0;
-    padding: 17px 7px;
+    padding: 0 7px;
+    min-height: initial;
   }
 }
 </style>

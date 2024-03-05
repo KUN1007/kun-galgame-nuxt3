@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import dayjs from 'dayjs'
 import type { TopicDetail } from '~/types/api/topic'
 
 const topicData = defineProps<{
@@ -52,11 +53,15 @@ const loliStatus = computed(() => {
       <div class="content">
         <div class="content-top">
           <TopicTags v-if="tags" :tags="tags" :is-show-icon="true" />
-          <TopicTime v-if="time" :time="time" />
+          <TopicTime class="time" v-if="time" :time="time" />
         </div>
 
         <div class="content-center">
-          <TopicKUNGalgamerInfo v-if="user" :user="user" />
+          <TopicKUNGalgamerInfo v-if="user" :user="user">
+            <span class="time-mobile">
+              {{ dayjs(time).format('YYYY-MM-DD HH:mm:ss') }}
+            </span>
+          </TopicKUNGalgamerInfo>
 
           <TopicContent :content="content" />
         </div>
@@ -148,6 +153,17 @@ const loliStatus = computed(() => {
   flex-grow: 1;
 }
 
+.time-mobile {
+  display: none;
+  font-size: 13px;
+  color: var(--kungalgame-font-color-1);
+  padding: 0 17px;
+
+  .rewrite-mobile {
+    color: var(--kungalgame-blue-5);
+  }
+}
+
 .content-center {
   width: 100%;
   display: flex;
@@ -211,6 +227,14 @@ const loliStatus = computed(() => {
 }
 
 @media (max-width: 700px) {
+  .time {
+    display: none;
+  }
+
+  .time-mobile {
+    display: block;
+  }
+
   .content-center {
     flex-direction: column;
   }

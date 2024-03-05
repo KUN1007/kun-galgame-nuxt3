@@ -70,6 +70,7 @@ const handleClickShare = () => {
 
         <li
           v-if="info.views > 0"
+          class="views"
           v-tooltip="{
             message: { en: 'Views', zh: '浏览数' },
             position: 'bottom'
@@ -177,8 +178,7 @@ const handleClickShare = () => {
     justify-content: center;
     align-items: center;
     font-size: 14px;
-    margin: 17px;
-    margin-right: 0;
+    margin-left: 17px;
 
     span {
       display: flex;
@@ -189,6 +189,10 @@ const handleClickShare = () => {
       color: var(--kungalgame-red-4);
     }
   }
+}
+
+.views {
+  margin-left: 17px;
 }
 
 .icon {
@@ -213,11 +217,17 @@ const handleClickShare = () => {
 }
 
 @media (max-width: 700px) {
-  .footer {
-    flex-direction: column;
-  }
   .reply {
     margin-right: 0;
+  }
+  .icon {
+    font-size: initial;
+  }
+  .left ul {
+    li {
+      margin: 0;
+      margin-left: 17px;
+    }
   }
 }
 </style>
