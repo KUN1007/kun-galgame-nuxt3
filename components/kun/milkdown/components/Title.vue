@@ -13,7 +13,9 @@ if (isTopicRewriting.value) {
   topicTitle.value = editTitle.value
 }
 
-const handleInput = () => {
+const handleInput = debounce(() => {
+  console.log(111111111)
+
   if (topicTitle.value.length > maxInputLength) {
     topicTitle.value = topicTitle.value.slice(0, maxInputLength)
   }
@@ -24,14 +26,12 @@ const handleInput = () => {
     return
   }
 
-  debounce(() => {
-    if (isTopicRewriting.value) {
-      rewriteTitle.value = topicTitle.value
-    } else {
-      editTitle.value = topicTitle.value
-    }
-  }, 1007)()
-}
+  if (isTopicRewriting.value) {
+    rewriteTitle.value = topicTitle.value
+  } else {
+    editTitle.value = topicTitle.value
+  }
+}, 1007)
 
 watch(
   () => clearTopic.value,

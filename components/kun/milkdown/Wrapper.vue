@@ -43,27 +43,24 @@ if (routeName.value === 'topic-tid') {
   }
 }
 
-const saveMarkdown = (editorMarkdown: string) => {
-  debounce(() => {
-    if (routeName.value === 'edit') {
-      if (isTopicRewriting.value) {
-        rewriteContent.value = editorMarkdown
-      } else {
-        editContent.value = editorMarkdown
-      }
+const saveMarkdown = debounce((editorMarkdown: string) => {
+  if (routeName.value === 'edit') {
+    if (isTopicRewriting.value) {
+      rewriteContent.value = editorMarkdown
+    } else {
+      editContent.value = editorMarkdown
     }
+  }
 
-    if (routeName.value === 'topic-tid') {
-      if (isReplyRewriting.value) {
-        replyRewrite.value.content = editorMarkdown
-      } else {
-        replyDraft.value.content = editorMarkdown
-      }
+  if (routeName.value === 'topic-tid') {
+    if (isReplyRewriting.value) {
+      replyRewrite.value.content = editorMarkdown
+    } else {
+      replyDraft.value.content = editorMarkdown
     }
-
-    autosaveCount.value++
-  }, 1007)()
-}
+  }
+  autosaveCount.value++
+}, 1007)
 </script>
 
 <template>

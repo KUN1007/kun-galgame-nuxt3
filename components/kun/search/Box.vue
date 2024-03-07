@@ -16,10 +16,6 @@ const debouncedSearch = debounce((inputValue: string) => {
   }
 }, 300)
 
-const searchTopics = () => {
-  debouncedSearch(inputValue.value)
-}
-
 watch(
   () => search.value.keywords,
   () => {
@@ -45,7 +41,7 @@ onMounted(() => {
       class="input"
       :placeholder="`${$t('mainPage.header.search')}`"
       @input="debouncedSearch(inputValue)"
-      @keydown.enter="searchTopics"
+      @keydown.enter="debouncedSearch(inputValue)"
     />
   </div>
 </template>

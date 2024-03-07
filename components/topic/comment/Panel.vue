@@ -13,12 +13,11 @@ const emits = defineEmits<{
 
 const commentValue = ref('')
 
-const handleInputComment = () => {
-  const debouncedUpdateContent = debounce(() => {
-    content.value = commentValue.value
-  }, 300)
-  debouncedUpdateContent()
-}
+const handleInputComment = debounce(() => {
+  console.log(11111111111)
+
+  content.value = commentValue.value
+}, 300)
 
 const handlePublishComment = async () => {
   const requestData = {

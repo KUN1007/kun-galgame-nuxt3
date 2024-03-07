@@ -1,20 +1,19 @@
 /*
  * Debounce function that takes a function and a delay time as parameters
  */
-export type DebouncedFunction<T extends (...args: any[]) => any> = (
-  ...args: Parameters<T>
-) => void
+export const debounce = <F extends (...args: any[]) => any>(
+  fn: F,
+  time: number
+): ((...args: Parameters<F>) => void) => {
+  let timeoutID: NodeJS.Timeout | null = null
 
-let timeoutId: ReturnType<typeof setTimeout>
+  return function (...args: Parameters<F>) {
+    if (timeoutID !== null) {
+      clearTimeout(timeoutID)
+    }
 
-export const debounce = <T extends (...args: any[]) => any>(
-  func: T,
-  delay: number
-): DebouncedFunction<T> => {
-  return (...args) => {
-    clearTimeout(timeoutId)
-    timeoutId = setTimeout(() => {
-      func(...args)
-    }, delay)
+    timeoutID = setTimeout(() => {
+      fn(...args)
+    }, time)
   }
 }
