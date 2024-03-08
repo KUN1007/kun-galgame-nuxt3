@@ -118,9 +118,7 @@ const handleDeleteMessage = async (mid: number) => {
         class="more"
         v-if="isShowMoreOperation(msg.mid) && activeMessage.includes(msg.mid)"
       >
-        <div class="detail">
-          {{ handleGetMessageDetail(msg) }}
-        </div>
+        <pre class="detail">{{ handleGetMessageDetail(msg) }}</pre>
 
         <span
           @click="navigateTo(localePath(`/kungalgamer/${msg.senderUid}/info`))"
@@ -232,9 +230,12 @@ const handleDeleteMessage = async (mid: number) => {
 }
 
 .detail {
+  margin: 0;
   padding: 5px;
   border-left: 4px solid var(--kungalgame-blue-5);
   word-break: break-word;
+  white-space: pre-wrap;
+  font-family: inherit;
 }
 
 .more-btn-active {

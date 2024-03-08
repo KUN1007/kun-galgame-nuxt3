@@ -105,7 +105,7 @@ export default defineEventHandler(async (event) => {
         r_uid,
         parseInt(to_uid),
         'replied',
-        savedReply.content.slice(233),
+        savedReply.content.slice(0, 233),
         tid
       )
     }

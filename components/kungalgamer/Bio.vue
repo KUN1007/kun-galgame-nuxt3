@@ -27,7 +27,7 @@ const handleChangeBio = async () => {
     method: 'PUT',
     watch: false,
     body: { bio: bioValue.value },
-    ...kungalgameResponseHandler,
+    ...kungalgameResponseHandler
   })
 
   if (data.value) {

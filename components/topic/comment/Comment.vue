@@ -131,9 +131,7 @@ const handleClickComment = (
             </div>
           </div>
 
-          <div class="text">
-            {{ comment.content }}
-          </div>
+          <pre class="text">{{ comment.content }}</pre>
         </div>
       </div>
     </div>

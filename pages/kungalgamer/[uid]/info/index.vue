@@ -82,7 +82,7 @@ const statusName = () => {
 
       <div class="bio">
         <div>{{ $t('user.profile.bio') }}:</div>
-        <div v-if="user.bio">{{ user.bio }}</div>
+        <pre v-if="user.bio">{{ user.bio }}</pre>
         <div v-if="!user.bio" class="null">{{ $t('user.profile.null') }}</div>
       </div>
     </div>
@@ -130,10 +130,28 @@ const statusName = () => {
       margin-bottom: 10px;
     }
   }
+
+  pre {
+    display: block;
+    width: 100%;
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: large;
+  }
 }
 
 .null {
   color: var(--kungalgame-blue-2);
   font-style: oblique;
+}
+
+@media (max-width: 700px) {
+  .bio {
+    pre {
+      font-size: medium;
+    }
+  }
 }
 </style>

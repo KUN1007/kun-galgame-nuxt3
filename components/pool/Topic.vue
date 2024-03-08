@@ -29,7 +29,7 @@ const loliTime = computed(() => {
       {{ topic.title }}
     </div>
 
-    <div class="content">{{ markdownToText(topic.content) }}</div>
+    <pre class="content">{{ markdownToText(topic.content) }}</pre>
 
     <div class="status">
       <span>
@@ -79,7 +79,6 @@ const loliTime = computed(() => {
   font-weight: bold;
   color: var(--kungalgame-blue-5);
   flex-shrink: 0;
-  margin-bottom: 10px;
 }
 
 .content {
@@ -89,6 +88,8 @@ const loliTime = computed(() => {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 10;
   overflow-wrap: break-word;
+  white-space: pre-wrap;
+  font-family: inherit;
   font-size: 14px;
   padding: 0 10px;
   margin-bottom: 10px;

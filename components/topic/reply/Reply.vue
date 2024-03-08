@@ -68,7 +68,7 @@ watch(
       :id="`kungalgame-reply-${reply.floor}`"
     >
       <div class="floor">
-        <span>{{ reply.floor }}</span>
+        <span>K{{ reply.floor }}</span>
       </div>
 
       <div class="container">

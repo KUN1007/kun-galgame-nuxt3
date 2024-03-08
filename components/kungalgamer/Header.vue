@@ -5,9 +5,13 @@ const props = defineProps<{
   moemoepoint?: number
 }>()
 
+const isShowProgress = ref(false)
+
 const mpWidth = computed(() => {
   return props.moemoepoint ? `${props.moemoepoint % 100}%` : '0%'
 })
+
+onMounted(() => (isShowProgress.value = true))
 </script>
 
 <template>
@@ -23,7 +27,7 @@ const mpWidth = computed(() => {
 
     <div class="moemoepoint">
       <Transition name="progress">
-        <div class="mp-progress"></div>
+        <div v-if="isShowProgress" class="mp-progress"></div>
       </Transition>
       <p>
         <span><Icon name="line-md:star-alt-twotone"></Icon></span>
