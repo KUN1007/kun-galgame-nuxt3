@@ -125,4 +125,10 @@ onBeforeUnmount(() => {
     margin: 0 !important;
   }
 }
+
+@media (max-width: 700px) {
+  .topic-container {
+    padding-right: 17px;
+  }
+}
 </style>

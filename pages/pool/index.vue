@@ -202,12 +202,13 @@ onBeforeUnmount(() => {
 
 @media (max-width: 700px) {
   .pool-container {
-    width: 100%;
+    width: 95%;
   }
 
   .topic-container {
     grid-template-columns: repeat(2, minmax(100px, 222px));
     grid-auto-rows: minmax(100px, 300px);
+    gap: 7px;
   }
 }
 </style>
