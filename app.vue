@@ -1,5 +1,9 @@
 <script setup lang="ts">
 const { locale } = useI18n()
+const colorMode = useColorMode()
+const { showKUNGalgamePageTransparency } = storeToRefs(
+  useKUNGalgameSettingsStore()
+)
 
 useHead({
   htmlAttrs: {
@@ -16,6 +20,13 @@ useSchemaOrg([
   defineWebSite({ name: 'KUN Visual Novel' }),
   defineWebPage()
 ])
+
+onMounted(() => {
+  useKUNGalgameSettingsStore().setKUNGalgameTransparency(
+    showKUNGalgamePageTransparency.value,
+    colorMode.value as 'dark' | 'light'
+  )
+})
 </script>
 
 <template>

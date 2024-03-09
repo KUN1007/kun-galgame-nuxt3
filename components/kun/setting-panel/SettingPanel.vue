@@ -1,8 +1,5 @@
 <script setup lang="ts">
-// storeToRefs是用来将store中的数据转换成ref
-const { isShowPageWidth, showKUNGalgamePageAlpha } = storeToRefs(
-  useKUNGalgameSettingsStore()
-)
+const isShowTransparency = ref(true)
 
 const emits = defineEmits<{
   close: [showKUNGalgamePanel: boolean]
@@ -28,25 +25,25 @@ const handelCloseSettingsPanel = () => {
       <div class="switch">
         <div class="menu">
           <span
-            :class="isShowPageWidth ? 'active' : ''"
-            @click="isShowPageWidth = true"
+            :class="isShowTransparency ? 'active' : ''"
+            @click="isShowTransparency = true"
           >
-            {{ $t('header.settings.width') }}
+            {{ $t('header.settings.trans') }}
           </span>
           <span
-            :class="isShowPageWidth ? '' : 'active'"
-            @click="isShowPageWidth = false"
+            :class="isShowTransparency ? '' : 'active'"
+            @click="isShowTransparency = false"
           >
             {{ $t('header.settings.font') }}
           </span>
         </div>
 
         <TransitionGroup name="item" tag="div">
-          <div class="item" v-if="isShowPageWidth">
-            <KunSettingPanelComponentsPageWidth />
+          <div class="item" v-if="isShowTransparency">
+            <KunSettingPanelComponentsTransparency />
           </div>
 
-          <div class="item" v-else-if="!isShowPageWidth">
+          <div class="item" v-else-if="!isShowTransparency">
             <KunSettingPanelComponentsFont />
           </div>
         </TransitionGroup>

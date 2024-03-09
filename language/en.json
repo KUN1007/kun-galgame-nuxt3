@@ -36,7 +36,7 @@
       "font": "Font Style",
       "default": "System Default",
       "fontInput": "Input font name here",
-      "width": "Page Width",
+      "trans": "Transparency",
       "disabled": "The page does not allow width adjustment",
       "background": "Background Setting",
       "preset": "Use our preset background",

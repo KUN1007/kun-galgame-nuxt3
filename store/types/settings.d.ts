@@ -11,10 +11,9 @@ interface PageName {
 }
 
 export interface KUNGalgameSettingsStore {
-  showKUNGalgamePageAlpha: number
+  showKUNGalgamePageTransparency: number
   showKUNGalgameFontStyle: string
   showKUNGalgameBackground: number
-  isShowPageWidth: boolean
 }
 
 export interface TempSettingStore {
