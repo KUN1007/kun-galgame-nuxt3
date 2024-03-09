@@ -220,5 +220,6 @@ const handleClickComment = (
   -webkit-line-clamp: 10;
   border-left: 3px solid var(--kungalgame-blue-5);
   padding-left: 10px;
+  white-space: pre-wrap;
 }
 </style>
