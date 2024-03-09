@@ -1,39 +1,32 @@
 <script setup lang="ts">
-const { showKUNGalgamePageWidth } = storeToRefs(useKUNGalgameSettingsStore())
+const $colorMode = useColorMode()
+const { showKUNGalgamePageAlpha } = storeToRefs(useKUNGalgameSettingsStore())
 
 const pageWidth = ref(0)
-const routeName = useRouteName()
 const isDisabled = ref(false)
 
-const pageNameArray = [
-  'index',
-  'topic',
-  'edit',
-  'kungalgame',
-  'pool',
-  'bylaw',
-  'technique'
-]
+watch(showKUNGalgamePageAlpha, (value) => {
+  pageWidth.value = value
+})
 
-const initPageWidth = () => {
-  if (pageNameArray.includes(routeName.value)) {
-    pageWidth.value = showKUNGalgamePageWidth.value[routeName.value]
-    isDisabled.value = false
-  } else {
-    isDisabled.value = true
-  }
-}
-
-watch(
-  () => pageWidth.value,
-  () => {
-    if (pageNameArray.includes(routeName.value)) {
-      showKUNGalgamePageWidth.value[routeName.value] = pageWidth.value
+watch(pageWidth, () => {
+  setTimeout(() => {
+    switch ($colorMode.preference) {
+      case 'light':
+        document.documentElement.style.setProperty(
+          '--kungalgame-trans-white-5',
+          `rgba(255, 255, 255, ${pageWidth.value / 100})`
+        )
+        break
+      case 'dark':
+        document.documentElement.style.setProperty(
+          '--kungalgame-trans-white-5',
+          `rgba(15, 37, 61, ${pageWidth.value / 100})`
+        )
+        break
     }
-  }
-)
-
-initPageWidth()
+  }, 50)
+})
 </script>
 
 <template>

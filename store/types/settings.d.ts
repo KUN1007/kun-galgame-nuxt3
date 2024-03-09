@@ -11,7 +11,7 @@ interface PageName {
 }
 
 export interface KUNGalgameSettingsStore {
-  showKUNGalgamePageWidth: Record<string, number>
+  showKUNGalgamePageAlpha: number
   showKUNGalgameFontStyle: string
   showKUNGalgameBackground: number
   isShowPageWidth: boolean
