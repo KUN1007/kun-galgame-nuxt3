@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { showKUNGalgamePageAlpha } = storeToRefs(useKUNGalgameSettingsStore())
 interface Mode {
   name: string
   icon: string
@@ -18,6 +19,25 @@ const modeItem: Mode[] = [
     icon: 'line-md:light-dark-loop'
   }
 ]
+
+const checkoutMode = (modeName: string) => {
+  switch (modeName) {
+    case 'light':
+      document.documentElement.style.setProperty(
+        '--kungalgame-trans-white-5',
+        '#ffffffb4'
+      )
+      showKUNGalgamePageAlpha.value = 71
+      break
+    case 'dark':
+      document.documentElement.style.setProperty(
+        '--kungalgame-trans-white-5',
+        '#0f253d8e'
+      )
+      showKUNGalgamePageAlpha.value = 56
+      break
+  }
+}
 </script>
 
 <template>
@@ -32,7 +52,7 @@ const modeItem: Mode[] = [
         <Icon
           class="sun"
           :name="mode.icon"
-          @click="$colorMode.preference = mode.name"
+          @click="($colorMode.preference = mode.name), checkoutMode(mode.name)"
         />
       </span>
     </div>

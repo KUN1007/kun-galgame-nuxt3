@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const { isShowPageWidth } = storeToRefs(useKUNGalgameSettingsStore())
+// storeToRefs是用来将store中的数据转换成ref
+const { isShowPageWidth, showKUNGalgamePageAlpha } = storeToRefs(
+  useKUNGalgameSettingsStore()
+)
 
 const emits = defineEmits<{
   close: [showKUNGalgamePanel: boolean]
