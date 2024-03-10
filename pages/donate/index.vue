@@ -61,8 +61,8 @@ const handleClickDonate = () => {
   margin: auto;
   display: flex;
   flex-direction: column;
-  background-color: var(--kungalgame-trans-white-2);
-  backdrop-filter: blur(5px);
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(10px);
   box-shadow: var(--kungalgame-shadow-0);
   padding: 20px;
   position: relative;

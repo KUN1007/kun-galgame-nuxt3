@@ -39,7 +39,7 @@ useHead({
   margin: auto;
   width: 300px;
   height: 400px;
-  background-color: var(--kungalgame-trans-white-2);
+  background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
   border-radius: 10px;
   box-shadow: var(--shadow);

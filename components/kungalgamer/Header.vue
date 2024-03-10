@@ -71,7 +71,7 @@ onMounted(() => (isShowProgress.value = true))
   flex-grow: 2;
   width: 100%;
   background-color: var(--kungalgame-trans-blue-0);
-  border-radius: 7px 7px 0 0;
+  border-radius: 10px 10px 0 0;
   align-items: center;
 
   span:nth-child(1) {
