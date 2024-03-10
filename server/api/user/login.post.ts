@@ -54,7 +54,7 @@ export default defineEventHandler(async (event) => {
   deleteCookie(event, 'kungalgame-is-navigate-to-login')
   setCookie(event, 'kungalgame-moemoe-refresh-token', refreshToken, {
     httpOnly: true,
-    maxAge: 7 * 24 * 60 * 60 * 1000
+    maxAge: 30 * 24 * 60 * 60 * 1000
   })
 
   const userInfo: LoginResponseData = {

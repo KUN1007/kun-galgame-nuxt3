@@ -20,11 +20,11 @@ export const generateToken = (uid: number, name: string, expire: string) => {
 
 export const createTokens = async (uid: number, name: string) => {
   const token = generateToken(uid, name, '60m')
-  const refreshToken = generateToken(uid, name, '7d')
+  const refreshToken = generateToken(uid, name, '30d')
 
   // see: https://unstorage.unjs.io/drivers/redis
   await useStorage('redis').setItem(`refreshToken:${uid}`, refreshToken, {
-    ttl: 7 * 24 * 60 * 60
+    ttl: 30 * 24 * 60 * 60
   })
 
   return { token, refreshToken }
