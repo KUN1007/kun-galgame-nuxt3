@@ -71,11 +71,6 @@ const handleClickComment = (
 
 <template>
   <div class="comment-container">
-    <CommentPanel
-      @get-comment-emits="getCommentEmits"
-      v-if="isShowCommentPanelRid === ridRef"
-    />
-
     <div class="container" v-if="commentsData?.length">
       <div class="title">
         <span>{{ $t('topic.content.comments') }}</span>
@@ -135,6 +130,11 @@ const handleClickComment = (
         </div>
       </div>
     </div>
+
+    <CommentPanel
+      @get-comment-emits="getCommentEmits"
+      v-if="isShowCommentPanelRid === ridRef"
+    />
   </div>
 </template>
 
