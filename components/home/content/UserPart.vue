@@ -23,7 +23,9 @@ const handleClickAvatar = (event: MouseEvent) => {
 <template>
   <div class="kungalgamer">
     <div class="avatar" @click="handleClickAvatar($event)">
-      <img
+      <NuxtImg
+        height="50"
+        width="50"
         v-if="props.user.avatar"
         :src="user.avatar.replace(/\.webp$/, '-100.webp')"
         :alt="user.name"
@@ -55,8 +57,6 @@ const handleClickAvatar = (event: MouseEvent) => {
   justify-content: center;
 
   img {
-    height: 50px;
-    width: 50px;
     border-radius: 50%;
     display: inline-block;
   }

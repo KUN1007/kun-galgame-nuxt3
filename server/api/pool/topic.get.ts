@@ -22,15 +22,24 @@ const getPoolTopics = async (
     .sort(sortOptions)
     .skip(skip)
     .limit(limit)
+    .populate('user', 'uid avatar name')
     .lean()
 
   const data: PoolTopic[] = topics.map((topic) => ({
     tid: topic.tid,
     title: topic.title,
+    user: {
+      uid: topic.user[0].uid,
+      avatar: topic.user[0].avatar,
+      name: topic.user[0].name
+    },
     views: topic.views,
+    category: topic.category,
+    tags: topic.tags,
     likesCount: topic.likes_count,
-    time: topic.time,
-    content: topic.content.slice(0, 233)
+    replies: topic.replies_count,
+    comments: topic.comments,
+    time: topic.time
   }))
 
   return data

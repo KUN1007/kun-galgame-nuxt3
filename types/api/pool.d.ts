@@ -23,10 +23,18 @@ export type SortFieldPool = 'views' | 'likes_count' | 'time'
 export interface PoolTopic {
   tid: number
   title: string
+  user: {
+    uid: number
+    avatar: string
+    name: string
+  }
   views: number
+  category: string[]
+  tags: string[]
   likesCount: number
+  replies: number
+  comments: number
   time: number
-  content: string
 }
 
 export interface PoolTopicsRequestData {

@@ -95,7 +95,7 @@ const handleDeleteMessage = async (mid: number) => {
         </div>
 
         <span class="time">
-          {{ dayjs(msg.time).format('MM-D-YYYY - h:mm:ss') }}
+          {{ dayjs(msg.time).format('MM-D-YYYY - HH:mm:ss') }}
         </span>
       </div>
 
