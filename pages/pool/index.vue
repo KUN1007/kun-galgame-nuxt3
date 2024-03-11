@@ -178,7 +178,6 @@ onBeforeUnmount(() => {
 .topic-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-auto-rows: minmax(100px, 320px);
   gap: 17px;
 }
 
@@ -207,7 +206,6 @@ onBeforeUnmount(() => {
 
   .topic-container {
     grid-template-columns: repeat(2, minmax(100px, 222px));
-    grid-auto-rows: minmax(100px, 300px);
     gap: 7px;
   }
 }
