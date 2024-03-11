@@ -28,8 +28,8 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
       </span>
 
       <span>
-        <Icon name="ic:outline-remove-red-eye" />
-        {{ props.topic.views }}
+        <Icon name="line-md:thumbs-up-twotone" />
+        {{ props.topic.likesCount }}
       </span>
 
       <span>

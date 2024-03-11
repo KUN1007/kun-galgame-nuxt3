@@ -18,7 +18,7 @@ const time = computed(() => {
   if (locale.value === 'zh-cn') {
     return dayjs(props.time).format('MM/D - HH:mm')
   }
-  return dayjs(props.time).format('MM/D - HH:mm')
+  return dayjs(props.time).format('D/MM - HH:mm')
 })
 
 const handleClickAvatar = (event: MouseEvent) => {
