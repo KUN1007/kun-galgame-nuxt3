@@ -1,6 +1,7 @@
 export interface UpdateLogAttributes {
   upid: number
   description: string
-  time: number
+  language: string
+  time: string
   version: string
 }

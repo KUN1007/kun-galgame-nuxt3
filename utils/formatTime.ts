@@ -104,7 +104,6 @@ export const formatTimeDifferenceHint = (
   language: string
 ) => {
   const result = formatTimeDifference(pastTime, language)
-  const hintFront = language === 'en' ? 'Published at ' : '发布于 '
   const hintBack = language === 'en' ? ' ago' : '前'
-  return `${hintFront}${result}${hintBack}`
+  return `${result}${hintBack}`
 }

@@ -9,7 +9,7 @@ const getUpdateLogs = async (page: number, limit: number) => {
     .skip(skip)
     .limit(limit)
 
-  const data = updateLogs.map((log) => ({
+  const data: UpdateLog[] = updateLogs.map((log) => ({
     upid: log.upid,
     description: log.description,
     time: log.time,

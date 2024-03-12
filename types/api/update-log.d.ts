@@ -5,7 +5,7 @@ export interface UpdateLogRequestData {
 
 export interface UpdateLog {
   description: string
-  time: number
+  time: string
   upid: number
   version: string
 }

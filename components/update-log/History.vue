@@ -12,7 +12,7 @@ const { data: updateLogs } = await useFetch(`/api/update/history`, {
     <ul class="history-list" v-if="updateLogs && updateLogs.length">
       <li v-for="kun in updateLogs" :key="kun.upid">
         <div>
-          <p>{{ kun.description }}</p>
+          <p v-html="kun.description"></p>
         </div>
 
         <div class="time">

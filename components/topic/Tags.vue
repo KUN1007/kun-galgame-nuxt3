@@ -27,7 +27,6 @@ const props = defineProps<{
     border: 1px solid var(--kungalgame-blue-5);
     border-radius: 14px;
     cursor: pointer;
-    white-space: nowrap;
 
     &:hover {
       color: var(--kungalgame-white);
