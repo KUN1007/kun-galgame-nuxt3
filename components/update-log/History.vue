@@ -13,13 +13,8 @@ const { data: updateLogs } = await useFetch(`/api/update/history`, {
   <div class="article-history">
     <ul class="history-list" v-if="updateLogs && updateLogs.length">
       <li v-for="kun in updateLogs" :key="kun.upid">
-        <div>
-          <p v-html="kun.description"></p>
-        </div>
-
-        <div class="time">
-          <span>{{ kun.time }} - Version {{ kun.version }}</span>
-        </div>
+        <pre>{{ kun.description }}</pre>
+        <span class="time">{{ kun.time }} - Version {{ kun.version }}</span>
       </li>
     </ul>
   </div>
@@ -27,7 +22,6 @@ const { data: updateLogs } = await useFetch(`/api/update/history`, {
 
 <style lang="scss" scoped>
 .article-history {
-  border-left: 1px solid var(--kungalgame-blue-5);
   height: calc(100% - 80px);
   padding: 10px;
 }
@@ -46,14 +40,16 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-bottom: 1px solid var(--kungalgame-blue-5);
+  border-left: 5px solid var(--kungalgame-blue-5);
+  padding-left: 10px;
+
   &:first-child {
     margin-top: 10px;
   }
 }
 
-p {
-  margin: 5px 0;
+pre {
+  white-space: pre-wrap;
 }
 
 .time {

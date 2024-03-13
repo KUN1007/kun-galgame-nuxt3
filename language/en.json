@@ -168,11 +168,7 @@
     }
   },
   "update":{
-    "next": "Next Version",
-    "update": "Update Info",
-    "info": "Update Preview / More Info",
-    "visit": "Click to visit github",
-    "time": "Estimated update time",
+    "todo": "Todo List",
     "history": "History Version"
   },
   "balance":{

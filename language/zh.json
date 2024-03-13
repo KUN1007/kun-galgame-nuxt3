@@ -168,11 +168,7 @@
     }
   },
   "update":{
-    "next": "下个版本",
-    "update": "更新信息",
-    "info": "更新预览 / 更多信息",
-    "visit": "点击访问 github",
-    "time": "预计更新时间",
+    "todo": "待完成列表",
     "history": "历史版本"
   },
   "balance":{

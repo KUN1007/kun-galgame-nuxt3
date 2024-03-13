@@ -17,8 +17,8 @@ useHead({
     <div class="container">
       <div class="content">
         <div class="next-ver">
-          <div class="title">{{ $t('update.next') }}</div>
-          <UpdateLogNext />
+          <div class="title">{{ $t('update.todo') }}</div>
+          <UpdateLogTodo />
         </div>
 
         <div class="history-ver">
