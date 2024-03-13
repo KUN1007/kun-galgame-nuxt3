@@ -26,9 +26,9 @@ useHead({
           <UpdateLogHistory />
         </div>
       </div>
-
-      <KunFooter style="display: block" />
     </div>
+
+    <KunFooter />
   </div>
 </template>
 
@@ -41,10 +41,8 @@ useHead({
 }
 
 .container {
-  height: 60vh;
   width: 100%;
   max-width: 64rem;
-  max-height: 500px;
   position: relative;
   margin: auto;
   background-color: var(--kungalgame-trans-white-5);
@@ -91,6 +89,7 @@ useHead({
     height: 100%;
     width: 95%;
     max-height: 100%;
+    overflow-y: scroll;
   }
   .content {
     flex-direction: column;

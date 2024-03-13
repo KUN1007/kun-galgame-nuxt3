@@ -1,6 +1,7 @@
 export interface UpdateLogRequestData {
   page: string
   limit: string
+  language: Language
 }
 
 export interface UpdateLog {

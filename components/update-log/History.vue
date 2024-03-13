@@ -1,7 +1,9 @@
 <script setup lang="ts">
+const { locale } = useI18n()
+
 const { data: updateLogs } = await useFetch(`/api/update/history`, {
   method: 'GET',
-  query: { page: 0, limit: 0 },
+  query: { page: 0, limit: 0, language: locale.value },
   watch: false,
   ...kungalgameResponseHandler
 })
@@ -26,7 +28,7 @@ const { data: updateLogs } = await useFetch(`/api/update/history`, {
 <style lang="scss" scoped>
 .article-history {
   border-left: 1px solid var(--kungalgame-blue-5);
-  height: 75%;
+  height: calc(100% - 80px);
   padding: 10px;
 }
 
