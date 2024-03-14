@@ -1,5 +1,9 @@
 import UpdateLogModel from '~/server/models/update-log'
-import type { UpdateLogRequestData, UpdateLog } from '~/types/api/update-log'
+import type {
+  UpdateLogRequestData,
+  UpdateType,
+  UpdateLog
+} from '~/types/api/update-log'
 
 const getUpdateLogs = async (
   page: number,
@@ -15,6 +19,7 @@ const getUpdateLogs = async (
 
   const data: UpdateLog[] = updateLogs.map((log) => ({
     upid: log.upid,
+    type: log.type as UpdateType,
     description: log.description,
     time: log.time,
     version: log.version

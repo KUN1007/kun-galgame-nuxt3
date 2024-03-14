@@ -13,6 +13,7 @@ const { data: updateLogs } = await useFetch(`/api/update/history`, {
   <div class="article-history">
     <ul class="history-list" v-if="updateLogs && updateLogs.length">
       <li v-for="kun in updateLogs" :key="kun.upid">
+        <span class="type">{{ $t(`update.${kun.type}`) }}</span>
         <pre>{{ kun.description }}</pre>
         <span class="time">{{ kun.time }} - Version {{ kun.version }}</span>
       </li>
@@ -48,8 +49,13 @@ li {
   }
 }
 
+.type {
+  color: var(--kungalgame-blue-5);
+  font-weight: bold;
+}
+
 pre {
-  white-space: pre-wrap;
+  overflow-y: scroll;
 }
 
 .time {

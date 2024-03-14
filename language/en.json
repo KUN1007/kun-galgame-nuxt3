@@ -169,7 +169,18 @@
   },
   "update":{
     "todo": "Todo List",
-    "history": "History Version"
+    "history": "History Version",
+    "feat": "New Feature",
+    "pref": "Performance Optimization",
+    "fix": "BUG Fix",
+    "styles": "Style Changes",
+    "mod": "Functional Changes",
+    "chore": "Miscellaneous Changes",
+    "sec": "Security Enhancement",
+    "refactor": "Code Refactoring",
+    "docs": "Documentation Changes",
+    "test": "Test Cases"
+  
   },
   "balance":{
     "pl": "Income and Expenditure Statement",
