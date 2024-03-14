@@ -14,8 +14,6 @@ const emits = defineEmits<{
 const commentValue = ref('')
 
 const handleInputComment = debounce(() => {
-  console.log(11111111111)
-
   content.value = commentValue.value
 }, 300)
 

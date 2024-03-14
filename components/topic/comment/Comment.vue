@@ -212,14 +212,9 @@ const handleClickComment = (
 }
 
 .text {
-  font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 10;
   border-left: 3px solid var(--kungalgame-blue-5);
   padding-left: 10px;
   white-space: pre-wrap;
+  word-break: break-all;
 }
 </style>
