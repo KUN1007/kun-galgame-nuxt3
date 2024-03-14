@@ -16,12 +16,12 @@ useHead({
   <div class="root">
     <div class="container">
       <div class="content">
-        <div class="next-ver">
+        <div class="todo">
           <div class="title">{{ $t('update.todo') }}</div>
           <UpdateLogTodo />
         </div>
 
-        <div class="history-ver">
+        <div class="history">
           <div class="title">{{ $t('update.history') }}</div>
           <UpdateLogHistory />
         </div>
@@ -63,7 +63,7 @@ useHead({
   display: flex;
 }
 
-.next-ver {
+.todo {
   width: 50%;
 }
 
@@ -76,7 +76,7 @@ useHead({
   margin-bottom: 20px;
 }
 
-.history-ver {
+.history {
   height: 100%;
   width: 50%;
 }
@@ -95,8 +95,8 @@ useHead({
   .content {
     flex-direction: column;
   }
-  .next-ver,
-  .history-ver {
+  .todo,
+  .history {
     width: 100%;
   }
 }

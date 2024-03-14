@@ -1,6 +1,6 @@
 import UpdateLogModel from '~/server/models/update-log'
 import type {
-  UpdateLogRequestData,
+  GetUpdateLogRequestData,
   UpdateType,
   UpdateLog
 } from '~/types/api/update-log'
@@ -29,7 +29,8 @@ const getUpdateLogs = async (
 }
 
 export default defineEventHandler(async (event) => {
-  const { page, limit, language }: UpdateLogRequestData = await getQuery(event)
+  const { page, limit, language }: GetUpdateLogRequestData =
+    await getQuery(event)
   if (!page || !limit) {
     kunError(event, 10507)
     return

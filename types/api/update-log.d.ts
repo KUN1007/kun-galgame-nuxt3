@@ -1,4 +1,10 @@
-export interface UpdateLogRequestData {
+export interface GetTodoRequestData {
+  page: string
+  limit: string
+  language: Language
+}
+
+export interface GetUpdateLogRequestData {
   page: string
   limit: string
   language: Language
@@ -15,6 +21,15 @@ export type UpdateType =
   | 'refactor'
   | 'docs'
   | 'test'
+
+export interface Todo {
+  todoId: number
+  status: number
+  content: string
+  language: string
+  time: number
+  completedTime: number
+}
 
 export interface UpdateLog {
   description: string

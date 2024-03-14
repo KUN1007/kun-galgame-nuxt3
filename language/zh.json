@@ -169,6 +169,10 @@
   },
   "update":{
     "todo": "待办列表",
+    "status0": "待处理",
+    "status1": "进行中",
+    "status2": "已完成",
+    "status3": "已废弃",
     "history": "历史版本",
     "feat": "增加功能",
     "pref": "性能优化",

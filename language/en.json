@@ -169,6 +169,10 @@
   },
   "update":{
     "todo": "Todo List",
+    "status0": "Pending",
+    "status1": "Ongoing",
+    "status2": "Finished",
+    "status3": "Obsoleted",
     "history": "History Version",
     "feat": "New Feature",
     "pref": "Performance Optimization",
@@ -180,7 +184,6 @@
     "refactor": "Code Refactoring",
     "docs": "Documentation Changes",
     "test": "Test Cases"
-  
   },
   "balance":{
     "pl": "Income and Expenditure Statement",
