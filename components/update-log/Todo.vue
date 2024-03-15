@@ -68,9 +68,9 @@ p {
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
+  font-size: 14px;
 
   .time {
-    font-size: 14px;
     color: var(--kungalgame-font-color-1);
   }
 
@@ -83,7 +83,6 @@ p {
 
     span {
       &:nth-child(1) {
-        font-size: 14px;
         margin-right: 5px;
       }
     }

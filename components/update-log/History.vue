@@ -48,7 +48,7 @@ li {
 }
 
 pre {
-  overflow-y: scroll;
+  white-space: pre-wrap;
 }
 
 .time {

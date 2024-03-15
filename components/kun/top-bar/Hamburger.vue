@@ -96,6 +96,11 @@ const handleShowMore = () => {
           :is-mobile="true"
         />
 
+        <KunSettingPanelComponentsTransparency
+          v-if="isShowSettings"
+          style="margin-top: 17px"
+        />
+
         <KunSettingPanelComponentsFont
           v-if="isShowSettings"
           style="margin-top: 17px"

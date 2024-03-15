@@ -16,13 +16,13 @@ watch(
 </script>
 
 <template>
-  <div class="width">
-    <div class="width-container">
+  <div>
+    <div class="container">
       <span>{{ $t('header.settings.trans') }}</span>
       <span>{{ showKUNGalgamePageTransparency }}%</span>
     </div>
 
-    <div class="page-width">
+    <div class="scroll">
       <span>10%</span>
       <input
         class="main"
@@ -31,6 +31,7 @@ watch(
         step="0.1"
         type="range"
         v-model="showKUNGalgamePageTransparency"
+        @touchmove.stop.passive
       />
       <span>90%</span>
     </div>
@@ -38,7 +39,7 @@ watch(
 </template>
 
 <style lang="scss" scoped>
-.page-width {
+.scroll {
   width: 100%;
   font-size: 15px;
   display: flex;
@@ -54,7 +55,7 @@ watch(
   margin: 20px 0;
 }
 
-.width-container {
+.container {
   display: flex;
   justify-content: space-between;
 }
