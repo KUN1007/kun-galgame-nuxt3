@@ -27,6 +27,9 @@ const { data: todos } = await useFetch(`/api/update/todo`, {
         <span class="time">{{ dayjs(kun.time).format('MM/D - HH:mm') }}</span>
 
         <span class="description">
+          <span v-if="kun.completedTime">
+            {{ `${dayjs(kun.completedTime).format('MM/D - HH:mm')}` }}
+          </span>
           <Icon class="icon" :name="iconMap[kun.status]" />
           <span>{{ $t(`update.status${kun.status}`) }}</span>
         </span>
@@ -77,6 +80,13 @@ p {
     align-items: center;
     padding: 3px 10px;
     border-radius: 15px;
+
+    span {
+      &:nth-child(1) {
+        font-size: 14px;
+        margin-right: 5px;
+      }
+    }
 
     .icon {
       margin-right: 5px;
