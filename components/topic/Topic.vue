@@ -78,14 +78,18 @@ watch(
   }
 )
 
-watch(isScrollToTop, () => {
-  if (content.value) {
-    content.value.scrollTo({
-      top: 0
-    })
-    isScrollToTop.value = false
+watch(
+  () => isScrollToTop.value,
+  () => {
+    if (content.value) {
+      contentScrollHeight.value = 0
+      content.value.scrollTo({
+        top: 0
+      })
+      isScrollToTop.value = false
+    }
   }
-})
+)
 
 watch(
   () => scrollToReplyId.value,
@@ -116,7 +120,7 @@ watch(
   }
 )
 
-const handelScroll = async () => {
+const handelScroll = debounce(async () => {
   if (!repliesData.value) {
     return
   }
@@ -134,7 +138,7 @@ const handelScroll = async () => {
 
     repliesData.value = [...repliesData.value, ...lazyLoadReplies]
   }
-}
+}, 107)
 
 const isScrollAtBottom = () => {
   if (content.value) {

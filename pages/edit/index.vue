@@ -1,13 +1,15 @@
 <script setup lang="ts">
-const mainRef = ref<HTMLElement | null>(null)
-const atBottom = ref(false)
-const previousScrollTop = ref<number | null>(null)
-
 definePageMeta({
   middleware: 'auth'
 })
 
+const content = ref<HTMLElement | null>(null)
+const isAtBottom = ref(false)
+const isContentScroll = ref(false)
+const previousScrollTop = ref<number | null>(null)
+
 const { t } = useI18n()
+const { isTopicRewriting } = storeToRefs(useTempEditStore())
 
 useHead({
   title: t('seo.edit.title'),
@@ -19,7 +21,47 @@ useHead({
   ]
 })
 
-const { isTopicRewriting } = storeToRefs(useTempEditStore())
+const checkScroll = debounce(() => {
+  if (content.value) {
+    isContentScroll.value = true
+
+    const scrollTop = content.value.scrollTop
+    const scrollHeight = content.value.scrollHeight
+    const clientHeight = content.value.clientHeight
+    const errorMargin = 1.007
+
+    isAtBottom.value =
+      Math.abs(scrollHeight - scrollTop - clientHeight) < errorMargin
+  }
+}, 107)
+
+const scrollToBottom = () => {
+  if (content.value) {
+    previousScrollTop.value = content.value.scrollTop
+    content.value.scrollTo({
+      top: content.value.scrollHeight,
+      behavior: 'smooth'
+    })
+  }
+}
+
+const scrollToTop = () => {
+  if (content.value) {
+    content.value.scrollTo({
+      top: previousScrollTop.value ?? 0,
+      behavior: 'smooth'
+    })
+    previousScrollTop.value = null
+  }
+}
+
+onMounted(() => {
+  content.value?.addEventListener('scroll', checkScroll)
+})
+
+onBeforeUnmount(() => {
+  content.value?.removeEventListener('scroll', checkScroll)
+})
 
 onBeforeRouteLeave(async (_, __, next) => {
   if (isTopicRewriting.value) {
@@ -34,54 +76,12 @@ onBeforeRouteLeave(async (_, __, next) => {
     next()
   }
 })
-
-const checkScroll = debounce(() => {
-  if (mainRef.value) {
-    const scrollTop = mainRef.value.scrollTop
-    const scrollHeight = mainRef.value.scrollHeight
-    const clientHeight = mainRef.value.clientHeight
-    if (scrollTop + clientHeight >= scrollHeight - 10 && !atBottom.value) {
-      atBottom.value = true
-    }
-    if (scrollTop + clientHeight < scrollHeight - 10 && atBottom.value) {
-      atBottom.value = false
-    }
-  }
-}, 50)
-
-const scrollToBottom = () => {
-  if (mainRef.value) {
-    previousScrollTop.value = mainRef.value.scrollTop
-    console.log(mainRef.value.scrollTop)
-    mainRef.value.scrollTo({
-      top: mainRef.value.scrollHeight,
-      behavior: 'smooth'
-    })
-  }
-}
-
-const scrollToTop = () => {
-  if (mainRef.value) {
-    mainRef.value.scrollTo({
-      top: previousScrollTop.value ?? 0,
-      behavior: 'smooth'
-    })
-    previousScrollTop.value = null
-  }
-}
-
-onMounted(() => {
-  mainRef.value?.addEventListener('scroll', checkScroll)
-})
-onBeforeUnmount(() => {
-  mainRef.value?.removeEventListener('scroll', checkScroll)
-})
 </script>
 
 <template>
   <div class="root">
     <div class="container">
-      <div ref="mainRef" class="main">
+      <div ref="content" class="content">
         <KunMilkdownComponentsTitle />
         <KunMilkdownWrapper :is-show-menu="true" />
 
@@ -90,40 +90,37 @@ onBeforeUnmount(() => {
           <EditFooter />
         </div>
       </div>
-      <transition name="tool-button">
-        <div
-          v-if="atBottom"
-          class="tool-button top"
-          v-tooltip="{
-            message: previousScrollTop ? '回到上次位置' : '滚动到顶部',
-            position: 'left'
-          }"
-          @click="scrollToTop"
-        >
-          <Icon class="icon" name="line-md:arrow-left" />
-        </div>
-      </transition>
-      <transition name="tool-button">
-        <div
-          v-if="!atBottom"
-          class="tool-button bottom"
-          v-tooltip="{
-            message: '滚动到底部',
-            position: 'left'
-          }"
-          @click="scrollToBottom"
-        >
-          <Icon class="icon" name="line-md:arrow-left" />
-        </div>
-      </transition>
+
+      <div
+        v-if="isAtBottom"
+        class="tool-button top"
+        v-tooltip="{
+          message: previousScrollTop
+            ? { en: 'Return to Previous Position', zh: '回到上次位置' }
+            : { en: 'Scroll to Top', zh: '滚动到顶部' },
+          position: 'left'
+        }"
+        @click="scrollToTop"
+      >
+        <Icon class="icon" name="line-md:arrow-left" />
+      </div>
+
+      <div
+        v-if="!isAtBottom && isContentScroll"
+        class="tool-button bottom"
+        v-tooltip="{
+          message: { en: 'Scroll to Bottom', zh: '滚动到底部' },
+          position: 'left'
+        }"
+        @click="scrollToBottom"
+      >
+        <Icon class="icon" name="line-md:arrow-left" />
+      </div>
     </div>
 
     <KunFooter style="margin: 0 auto; padding-top: 10px" />
 
-    <span
-      class="reference"
-      style="margin: 0 auto; color: var(--kungalgame-font-color-3)"
-    >
+    <span class="reference">
       Editor powered by
       <a
         href="https://github.com/Milkdown/milkdown"
@@ -166,10 +163,12 @@ onBeforeUnmount(() => {
   border-radius: 10px;
   box-shadow: var(--kungalgame-shadow-0);
   overflow-y: scroll;
-  .main {
+
+  .content {
     height: 100%;
     overflow-y: scroll;
   }
+
   .tool-button {
     position: absolute;
     right: 20px;
@@ -185,15 +184,19 @@ onBeforeUnmount(() => {
     border-radius: 20px;
     box-shadow: var(--kungalgame-shadow-0);
   }
+
   .top {
     bottom: 80px;
+
     .icon {
       font-size: 17px;
       transform: rotate(90deg);
     }
   }
+
   .bottom {
     bottom: 20px;
+
     .icon {
       font-size: 17px;
       transform: rotate(-90deg);
@@ -210,6 +213,9 @@ onBeforeUnmount(() => {
 }
 
 .reference {
+  margin: 0 auto;
+  color: var(--kungalgame-font-color-3);
+
   a {
     font-style: oblique;
     color: var(--kungalgame-blue-5);
@@ -224,15 +230,5 @@ onBeforeUnmount(() => {
   .container {
     width: 100%;
   }
-}
-
-.tool-button-enter-active,
-.tool-button-leave-active {
-  transition: all 0.2s;
-}
-.tool-button-enter-from,
-.tool-button-leave-to {
-  opacity: 0;
-  transform: scale(0.5);
 }
 </style>
