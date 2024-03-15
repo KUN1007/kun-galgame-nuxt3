@@ -74,6 +74,7 @@ const isShowMenu = computed(() => props.isShowMenu)
 const tooltip = tooltipFactory('Text')
 const pluginViewFactory = usePluginViewFactory()
 const container = ref<HTMLElement | null>(null)
+const toolbar = ref<HTMLElement | null>(null)
 const editorContent = ref('')
 
 watch(
@@ -175,7 +176,12 @@ const editorInfo = useEditor((root) =>
 
 <template>
   <div ref="container" class="editor-container">
-    <KunMilkdownPluginsMenu v-if="isShowMenu" :editor-info="editorInfo" />
+    <KunMilkdownPluginsMenu
+      ref="toolbar"
+      v-if="isShowMenu"
+      :editor-info="editorInfo"
+    />
+
     <Milkdown class="editor" />
 
     <div class="loading" v-if="editorInfo.loading.value">
@@ -192,6 +198,7 @@ const editorInfo = useEditor((root) =>
   :deep(.milkdown) {
     width: 100%;
     padding: 10px;
+    overflow: auto;
 
     /* Silence css check */
     * {
