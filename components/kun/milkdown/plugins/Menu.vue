@@ -152,12 +152,15 @@ const handleClickUploadImage = () => {
 
 <style lang="scss" scoped>
 .menu {
+  position: sticky;
+  top: 0;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   background-color: var(--kungalgame-trans-blue-0);
   border-bottom: 1px solid var(--kungalgame-blue-5);
   border-top: 1px solid var(--kungalgame-blue-5);
+  z-index: 999;
 
   div {
     cursor: pointer;
