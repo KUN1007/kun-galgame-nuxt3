@@ -4,9 +4,7 @@ import type { GetTodoRequestData, Todo } from '~/types/api/update-log'
 const getTodos = async (page: number, limit: number, language: Language) => {
   const skip = (page - 1) * limit
 
-  const findOptions = language ? { language } : {}
-
-  const todos = await TodoModel.find(findOptions)
+  const todos = await TodoModel.find()
     .sort({ todo_id: -1 })
     .skip(skip)
     .limit(limit)
@@ -15,8 +13,7 @@ const getTodos = async (page: number, limit: number, language: Language) => {
   const data: Todo[] = todos.map((todo) => ({
     todoId: todo.todo_id,
     status: todo.status,
-    content: todo.content,
-    language: todo.language,
+    content: language === 'en-us' ? todo.content_en_us : todo.content_zh_cn,
     time: todo.time,
     completedTime: todo.completed_time
   }))
