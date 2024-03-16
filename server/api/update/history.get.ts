@@ -12,7 +12,7 @@ const getUpdateLogs = async (
 ) => {
   const skip = (page - 1) * limit
 
-  const updateLogs = await UpdateLogModel.find({ language })
+  const updateLogs = await UpdateLogModel.find()
     .sort({ upid: -1 })
     .skip(skip)
     .limit(limit)
@@ -20,7 +20,7 @@ const getUpdateLogs = async (
   const data: UpdateLog[] = updateLogs.map((log) => ({
     upid: log.upid,
     type: log.type as UpdateType,
-    description: log.description,
+    content: language === 'en-us' ? log.content_en_us : log.content_zh_cn,
     time: log.time,
     version: log.version
   }))

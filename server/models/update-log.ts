@@ -7,8 +7,8 @@ const UpdateLogSchema = new mongoose.Schema<UpdateLogAttributes>(
   {
     upid: { type: Number, unique: true },
     type: { type: String, required: true },
-    description: { type: String, required: true },
-    language: { type: String, required: true },
+    content_en_us: { type: String, require: true },
+    content_zh_cn: { type: String, require: true },
     time: { type: String, default: '' },
     version: { type: String, default: '' }
   },

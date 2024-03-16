@@ -31,9 +31,9 @@ export interface Todo {
 }
 
 export interface UpdateLog {
-  description: string
-  type: UpdateType
-  time: string
   upid: number
+  type: UpdateType
+  content: string
+  time: string
   version: string
 }

@@ -13,7 +13,7 @@ const { data: updateLogs } = await useFetch(`/api/update/history`, {
   <ul class="history-list" v-if="updateLogs && updateLogs.length">
     <li v-for="kun in updateLogs" :key="kun.upid">
       <span class="type">{{ $t(`update.${kun.type}`) }}</span>
-      <pre>{{ kun.description }}</pre>
+      <pre>{{ kun.content }}</pre>
       <span class="time">{{ kun.time }} - Version {{ kun.version }}</span>
     </li>
   </ul>
