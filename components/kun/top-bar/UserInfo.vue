@@ -91,7 +91,7 @@ onMounted(async () => {
       <div class="info">
         <p>{{ name }}</p>
         <p>
-          <span><Icon name="line-md:star-alt-twotone"></Icon></span>
+          <span><Icon name="lucide:lollipop"></Icon></span>
           <span>{{ moemoepoint }}</span>
         </p>
       </div>

@@ -21,8 +21,7 @@ const loliTime = computed(() => {
 
 <template>
   <div class="time">
-    <Icon class="hourglass" name="eos-icons:hourglass" />
-    <div>{{ loliTime }}</div>
+    <span>{{ loliTime }}</span>
   </div>
 </template>
 
@@ -38,18 +37,6 @@ const loliTime = computed(() => {
   color: var(--kungalgame-font-color-3);
   div {
     padding-right: 20px;
-  }
-}
-
-.hourglass {
-  font-size: 23px;
-  margin: 0 10px;
-  color: var(--kungalgame-red-4);
-}
-
-@media (max-width: 700px) {
-  .time {
-    justify-content: center;
   }
 }
 </style>

@@ -22,11 +22,11 @@ const logs = computed(() => props.logs)
 
     <div class="footer">
       <div class="time">
-        <Icon class="hourglass" name="eos-icons:hourglass" />
+        <Icon class="hourglass" name="lucide:clock-7" />
         <span>{{ dayjs(kun.time).format('YYYY/MM/DD') }}</span>
       </div>
       <div class="result">
-        <Icon class="warning" name="line-md:alert" />
+        <Icon class="warning" name="lucide:triangle-alert" />
         <span>{{ $t('nonMoe.moemoepoint') }} - {{ kun.result }}</span>
       </div>
     </div>

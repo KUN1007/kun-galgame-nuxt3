@@ -87,10 +87,10 @@ const handleDeleteMessage = async (mid: number) => {
       <div class="top">
         <div class="status">
           <span class="unread" v-if="msg.status === 'unread'">
-            <Icon name="line-md:alert-circle" />
+            <Icon name="lucide:info" />
           </span>
           <span class="read" v-if="msg.status === 'read'">
-            <Icon name="line-md:confirm-circle" />
+            <Icon name="lucide:check-check" />
           </span>
         </div>
 
@@ -110,7 +110,7 @@ const handleDeleteMessage = async (mid: number) => {
           :class="isShowMoreOperation(msg.mid) ? 'more-btn-active' : ''"
           @click="handelClickShowMoreOperation(msg.mid)"
         >
-          <Icon name="line-md:chevron-small-right" />
+          <Icon name="lucide:chevron-right" />
         </span>
       </div>
 

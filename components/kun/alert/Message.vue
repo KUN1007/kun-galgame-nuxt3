@@ -45,16 +45,16 @@ watch(
   <div class="kungalgame-message-container">
     <div class="kungalgame-message" :class="messageClass(type)">
       <span class="icon" v-if="type === 'warn'">
-        <Icon icon="line-md:alert" />
+        <Icon icon="lucide:triangle-alert" />
       </span>
       <span class="icon" v-else-if="type === 'success'">
-        <Icon icon="line-md:circle-to-confirm-circle-transition" />
+        <Icon icon="lucide:check" />
       </span>
       <span class="icon" v-else-if="type === 'error'">
-        <Icon icon="line-md:close-circle" />
+        <Icon icon="lucide:x" />
       </span>
       <span class="icon" v-else-if="type === 'info'">
-        <Icon icon="line-md:alert-circle" />
+        <Icon icon="lucide:info" />
       </span>
       <span v-html="message"></span>
     </div>

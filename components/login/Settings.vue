@@ -4,7 +4,7 @@
   <div class="settings">
     <span class="home">
       <NuxtLinkLocale to="/">
-        <Icon class="icon" name="line-md:home-md-twotone" />
+        <Icon class="icon" name="lucide:home" />
       </NuxtLinkLocale>
     </span>
 

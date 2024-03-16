@@ -102,14 +102,13 @@ watch(
 
           <div class="bottom">
             <TopicTags :tags="reply.tags" :is-show-icon="true" />
-            <TopicTime class="time" :time="reply.time" />
 
-            <p class="time-mobile">
+            <p class="time">
               <span>
                 {{ dayjs(reply.time).format('YYYY-MM-DD HH:mm:ss') }}
               </span>
               <s
-                class="rewrite-mobile"
+                class="rewrite"
                 v-if="reply.edited"
                 v-tooltip="{
                   message: { en: 'Rewrite Time', zh: 'Rewrite 时间' },
@@ -159,7 +158,7 @@ watch(
                 position: 'bottom'
               }"
             >
-              <Icon name="fa-regular:comment-dots" />
+              <Icon name="uil:comment-dots" />
             </span>
           </template>
         </TopicFooter>
@@ -237,21 +236,21 @@ watch(
 }
 
 .bottom {
-  border-top: 1px solid var(--kungalgame-blue-5);
-  border-bottom: 1px solid var(--kungalgame-blue-5);
   display: flex;
   justify-content: space-between;
-}
 
-.time-mobile {
-  display: none;
-  justify-content: space-between;
-  font-size: 13px;
-  color: var(--kungalgame-font-color-1);
-  padding: 0 17px;
+  .time {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--kungalgame-font-color-1);
+    padding: 0 17px;
+    margin-top: 5px;
 
-  .rewrite-mobile {
-    color: var(--kungalgame-blue-5);
+    .rewrite {
+      display: none;
+      color: var(--kungalgame-blue-5);
+    }
   }
 }
 
@@ -315,6 +314,7 @@ watch(
   .top {
     flex-direction: column;
   }
+
   .bottom {
     flex-direction: column;
   }
@@ -334,19 +334,15 @@ watch(
   }
 
   .bottom {
-    border: transparent;
+    .time {
+      .rewrite {
+        display: block;
+      }
+    }
   }
 
   .icon {
     font-size: initial;
-  }
-
-  .time {
-    display: none;
-  }
-
-  .time-mobile {
-    display: flex;
   }
 
   .reply-mobile {

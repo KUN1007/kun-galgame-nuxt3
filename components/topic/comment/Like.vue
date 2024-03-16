@@ -73,7 +73,7 @@ const handleClickLike = () => {
 
 <template>
   <li :class="isLiked ? 'active' : ''" @click="handleClickLike">
-    <Icon class="icon" name="line-md:thumbs-up-twotone" />
+    <Icon class="icon" name="lucide:thumbs-up" />
     <span v-if="likesCount">{{ likesCount }}</span>
   </li>
 </template>

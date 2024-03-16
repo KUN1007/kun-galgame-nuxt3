@@ -21,12 +21,12 @@ watch(
     <div class="nav-aside" @click="handleFold">
       <Icon
         class="icon"
-        name="line-md:arrow-left"
+        name="lucide:arrow-left"
         v-if="isActiveMainPageAside"
       />
       <Icon
         class="icon"
-        name="line-md:arrow-right"
+        name="lucide:arrow-right"
         v-if="!isActiveMainPageAside"
       />
       <span v-if="isActiveMainPageAside">

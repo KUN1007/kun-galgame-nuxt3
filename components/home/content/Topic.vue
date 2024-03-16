@@ -14,11 +14,11 @@ interface IconItem {
 const iconItem: IconItem[] = [
   {
     name: 'time',
-    icon: 'eos-icons:hourglass'
+    icon: 'lucide:calendar-heart'
   },
   {
     name: 'popularity',
-    icon: 'bi:fire'
+    icon: 'lucide:flame'
   }
 ]
 
@@ -61,12 +61,12 @@ const handleClickIcon = async (icon: TypeToGet) => {
         <div class="topic">
           <div class="name">{{ kun.title }}</div>
           <div class="hot" v-if="typeToGet === 'popularity'">
-            <Icon name="bi:fire" />
+            <Icon name="lucide:flame" />
             <span>{{ Math.ceil(kun.popularity) }}</span>
           </div>
 
           <div class="new" v-if="typeToGet === 'time'">
-            <Icon name="eos-icons:hourglass" />
+            <Icon name="lucide:clock-7" />
             <span>{{ formatTimeDifference(kun.time, locale) }}</span>
           </div>
         </div>

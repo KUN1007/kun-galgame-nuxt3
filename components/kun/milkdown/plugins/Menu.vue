@@ -76,69 +76,69 @@ const handleClickUploadImage = () => {
   <div class="menu">
     <!-- Mark Group -->
     <div aria-label="kun-galgame-bold" @click="call(toggleStrongCommand.key)">
-      <Icon name="material-symbols:format-bold-rounded" />
+      <Icon name="lucide:bold" />
     </div>
 
     <div
       aria-label="kun-galgame-italic"
       @click="call(toggleEmphasisCommand.key)"
     >
-      <Icon name="material-symbols:format-italic-rounded" />
+      <Icon name="lucide:italic" />
     </div>
 
     <div
       aria-label="kun-galgame-italic"
       @click="call(toggleStrikethroughCommand.key)"
     >
-      <Icon name="material-symbols:strikethrough-s-rounded" />
+      <Icon name="lucide:strikethrough" />
     </div>
 
     <!-- <div aria-label="kun-galgame-table" @click="call(insertTableCommand.key)">
-      <Icon name="material-symbols:table" />
+      <Icon name="lucide:table" />
     </div> -->
 
     <div
       aria-label="kun-galgame-list-bulleted"
       @click="call(wrapInBulletListCommand.key)"
     >
-      <Icon name="material-symbols:format-list-bulleted-rounded" />
+      <Icon name="lucide:list" />
     </div>
 
     <div
       aria-label="kun-galgame-list-numbered"
       @click="call(wrapInOrderedListCommand.key)"
     >
-      <Icon name="material-symbols:format-list-numbered-rounded" />
+      <Icon name="lucide:list-ordered" />
     </div>
 
     <div
       aria-label="kun-galgame-quote"
       @click="call(wrapInBlockquoteCommand.key)"
     >
-      <Icon name="material-symbols:format-quote-rounded" />
+      <Icon name="lucide:quote" />
     </div>
 
     <div aria-label="kun-galgame-horizontal" @click="call(insertHrCommand.key)">
-      <Icon name="material-symbols:horizontal-rule-rounded" />
+      <Icon name="lucide:minus" />
     </div>
 
     <div aria-label="kun-galgame-italic" @click="call(toggleLinkCommand.key)">
-      <Icon name="material-symbols:link-rounded" />
+      <Icon name="lucide:link" />
     </div>
 
     <div aria-label="kun-galgame-italic" @click="handleClickCodeBlock">
-      <Icon name="material-symbols:code-blocks-outline-rounded" />
+      <Icon name="lucide:square-code" />
     </div>
 
     <div
       aria-label="kun-galgame-italic"
       @click="call(toggleInlineCodeCommand.key)"
     >
-      <Icon name="material-symbols:code-rounded" />
+      <Icon name="lucide:code-xml" />
     </div>
 
     <div aria-label="kun-galgame-upload-image" @click="handleClickUploadImage">
-      <Icon name="line-md:image" />
+      <Icon name="lucide:image-plus" />
       <input
         ref="input"
         hidden

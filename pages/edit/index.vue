@@ -102,7 +102,7 @@ onBeforeRouteLeave(async (_, __, next) => {
         }"
         @click="scrollToTop"
       >
-        <Icon class="icon" name="line-md:arrow-left" />
+        <Icon class="icon" name="lucide:arrow-up" />
       </div>
 
       <div
@@ -114,7 +114,7 @@ onBeforeRouteLeave(async (_, __, next) => {
         }"
         @click="scrollToBottom"
       >
-        <Icon class="icon" name="line-md:arrow-left" />
+        <Icon class="icon" name="lucide:arrow-down" />
       </div>
     </div>
 
@@ -190,7 +190,6 @@ onBeforeRouteLeave(async (_, __, next) => {
 
     .icon {
       font-size: 17px;
-      transform: rotate(90deg);
     }
   }
 
@@ -199,7 +198,6 @@ onBeforeRouteLeave(async (_, __, next) => {
 
     .icon {
       font-size: 17px;
-      transform: rotate(-90deg);
     }
   }
 }

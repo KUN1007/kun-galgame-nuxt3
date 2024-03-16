@@ -48,12 +48,12 @@ const handleClickSortOrder = () => {
         <Transition name="order" mode="out-in">
           <div v-if="isAscending">
             <span>{{ $t('ranking.asc') }}</span>
-            <Icon class="icon" name="line-md:arrow-small-up" />
+            <Icon class="icon" name="lucide:arrow-up" />
           </div>
 
           <div v-else-if="!isAscending">
             <span>{{ $t('ranking.desc') }}</span>
-            <Icon class="icon" name="line-md:arrow-small-down" />
+            <Icon class="icon" name="lucide:arrow-down" />
           </div>
         </Transition>
       </div>

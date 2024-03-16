@@ -7,7 +7,7 @@ const props = defineProps<{
 
 <template>
   <div class="tags" v-if="$props.tags.length">
-    <Icon v-if="props.isShowIcon" class="tag" name="mingcute:tag-2-fill" />
+    <Icon v-if="props.isShowIcon" class="tag" name="lucide:tags" />
     <span v-for="(tag, index) in tags" :key="index">{{ tag }}</span>
   </div>
 </template>

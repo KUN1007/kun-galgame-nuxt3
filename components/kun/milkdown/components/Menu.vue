@@ -70,7 +70,7 @@ const handelCloseSettingsPanel = () => {
       </div>
 
       <div class="close">
-        <Icon @click="handelCloseSettingsPanel" name="line-md:close" />
+        <Icon @click="handelCloseSettingsPanel" name="lucide:x" />
       </div>
     </div>
   </Transition>

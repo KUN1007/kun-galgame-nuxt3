@@ -39,17 +39,17 @@ const getRepliesCount = computed(() => {
 
         <div class="status">
           <span>
-            <Icon class="icon" name="ic:outline-remove-red-eye" />
+            <Icon class="icon" name="lucide:mouse-pointer-click" />
             <span>{{ views }}</span>
           </span>
           <span>
-            <Icon class="icon" name="line-md:thumbs-up-twotone" />
+            <Icon class="icon" name="lucide:thumbs-up" />
             <span>
               {{ likesCount }}
             </span>
           </span>
           <span>
-            <Icon class="icon" name="ri:reply-line" />
+            <Icon class="icon" name="lucide:reply" />
             <span>{{ getRepliesCount }}</span>
           </span>
         </div>
@@ -98,6 +98,8 @@ const getRepliesCount = computed(() => {
   }
 
   span {
+    display: flex;
+    align-items: center;
     margin-right: 7px;
   }
 }

@@ -22,21 +22,18 @@ const content = computed(() => props.content)
 <style lang="scss" scoped>
 .kungalgame-topic-content {
   width: 100%;
-  min-height: 200px;
   font-size: 15px;
   padding: 17px;
   color: var(--kungalgame-font-color-3);
   border: none !important;
   padding: 0 10px;
   overflow-x: auto;
-  margin-top: 17px;
 }
 
 @media (max-width: 700px) {
   .kungalgame-topic-content {
     margin-top: 0;
     padding: 0 7px;
-    min-height: initial;
   }
 }
 </style>

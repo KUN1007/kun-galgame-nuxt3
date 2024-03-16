@@ -74,6 +74,8 @@ const loliStatus = computed(() => {
             </span>
           </div>
 
+          <span class="line"></span>
+
           <TopicRewrite v-if="edited" :time="edited" />
         </div>
       </div>
@@ -130,7 +132,6 @@ const loliStatus = computed(() => {
   justify-content: center;
   color: var(--kungalgame-font-color-3);
   font-size: 17px;
-  border-bottom: 1px solid var(--kungalgame-blue-5);
 }
 
 .title {
@@ -149,7 +150,6 @@ const loliStatus = computed(() => {
   display: flex;
   text-align: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--kungalgame-blue-5);
   flex-grow: 1;
 }
 
@@ -167,7 +167,6 @@ const loliStatus = computed(() => {
 .content-center {
   width: 100%;
   display: flex;
-  border-bottom: 1px solid var(--kungalgame-blue-5);
 }
 
 .content-bottom {
@@ -176,28 +175,34 @@ const loliStatus = computed(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--kungalgame-blue-5);
-}
 
-.status {
-  display: flex;
-  font-size: 12px;
-  margin-left: 10px;
-  color: var(--kungalgame-font-color-3);
+  .status {
+    display: flex;
+    flex-shrink: 0;
+    font-size: 12px;
+    margin: 0 10px;
+    color: var(--kungalgame-font-color-3);
 
-  span {
-    &:nth-child(1) {
-      margin-right: 5px;
+    span {
+      &:nth-child(1) {
+        margin-right: 5px;
+      }
+
+      &:nth-child(2) {
+        width: 50px;
+        padding: 1px;
+        color: var(--kungalgame-white);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
+  }
 
-    &:nth-child(2) {
-      width: 50px;
-      padding: 1px;
-      color: var(--kungalgame-white);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  .line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--kungalgame-blue-5);
   }
 }
 

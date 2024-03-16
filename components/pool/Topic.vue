@@ -23,18 +23,18 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
 
     <div class="status">
       <span>
-        <Icon name="ic:outline-remove-red-eye" />
-        {{ props.topic.views }}
+        <Icon name="lucide:mouse-pointer-click" />
+        <span>{{ props.topic.views }}</span>
       </span>
 
       <span>
-        <Icon name="line-md:thumbs-up-twotone" />
-        {{ props.topic.likesCount }}
+        <Icon name="lucide:thumbs-up" />
+        <span v-if="props.topic.likesCount">{{ props.topic.likesCount }}</span>
       </span>
 
       <span>
-        <Icon name="ri:reply-line" />
-        {{ actionsCount }}
+        <Icon name="lucide:reply" />
+        <span v-if="actionsCount">{{ actionsCount }}</span>
       </span>
     </div>
   </NuxtLinkLocale>
@@ -83,6 +83,10 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
   span {
     display: flex;
     align-items: center;
+
+    span {
+      margin-left: 5px;
+    }
   }
 }
 </style>

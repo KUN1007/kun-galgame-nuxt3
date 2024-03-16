@@ -31,37 +31,37 @@ interface User {
 export const topicSortItem: Topic[] = [
   {
     index: 1,
-    icon: 'bi:fire',
+    icon: 'lucide:flame',
     name: 'popularity',
     sortField: 'popularity'
   },
   {
     index: 2,
-    icon: 'bi:rocket',
+    icon: 'lucide:cherry',
     name: 'upvote',
     sortField: 'upvotes_count'
   },
   {
     index: 3,
-    icon: 'ic:outline-remove-red-eye',
+    icon: 'lucide:mouse-pointer-click',
     name: 'views',
     sortField: 'views'
   },
   {
     index: 4,
-    icon: 'line-md:thumbs-up-twotone',
+    icon: 'lucide:thumbs-up',
     name: 'likes',
     sortField: 'likes_count'
   },
   {
     index: 5,
-    icon: 'ri:reply-line',
+    icon: 'lucide:reply',
     name: 'replies',
     sortField: 'replies_count'
   },
   {
     index: 6,
-    icon: 'fa-regular:comment-dots',
+    icon: 'uil:comment-dots',
     name: 'comments',
     sortField: 'comments'
   }
@@ -70,56 +70,56 @@ export const topicSortItem: Topic[] = [
 export const userSortItem: User[] = [
   {
     index: 1,
-    icon: 'line-md:star-alt-twotone',
+    icon: 'lucide:lollipop',
     name: 'moemoepoint',
     sortField: 'moemoepoint'
   },
   {
     index: 2,
-    icon: 'bi:rocket',
+    icon: 'lucide:cherry',
     name: 'upvote',
     sortField: 'upvote'
   },
   {
     index: 3,
-    icon: 'line-md:thumbs-up-twotone',
+    icon: 'lucide:thumbs-up',
     name: 'like',
     sortField: 'like'
   },
   {
     index: 4,
-    icon: 'line-md:text-box',
+    icon: 'lucide:square-gantt-chart',
     name: 'topicCount',
     sortField: 'topic_count'
   },
   {
     index: 5,
-    icon: 'ri:reply-line',
+    icon: 'lucide:reply',
     name: 'replyCount',
     sortField: 'reply_count'
   },
   {
     index: 6,
-    icon: 'fa-regular:comment-dots',
+    icon: 'uil:comment-dots',
     name: 'commentCount',
     sortField: 'comment_count'
   }
 ]
 
 export const userIconMap: Record<string, string> = {
-  moemoepoint: 'line-md:star-alt-twotone',
-  upvote: 'bi:rocket',
-  like: 'line-md:thumbs-up-twotone',
-  topic_count: 'line-md:text-box',
-  reply_count: 'ri:reply-line',
-  comment_count: 'fa-regular:comment-dots'
+  moemoepoint: 'lucide:lollipop',
+  upvote: 'lucide:cherry',
+  like: 'lucide:thumbs-up',
+  topic_count: 'lucide:square-gantt-chart',
+  reply_count: 'lucide:reply',
+  comment_count: 'uil:comment-dots'
 }
 
 export const topicIconMap: Record<string, string> = {
-  popularity: 'bi:fire',
-  upvotes_count: 'bi:rocket',
-  views: 'ic:outline-remove-red-eye',
-  likes_count: 'line-md:thumbs-up-twotone',
-  replies_count: 'ri:reply-line',
-  comments: 'fa-regular:comment-dots'
+  popularity: 'lucide:flame',
+  upvotes_count: 'lucide:cherry',
+  views: 'lucide:mouse-pointer-click',
+  likes_count: 'lucide:thumbs-up',
+  replies_count: 'lucide:reply',
+  comments: 'uil:comment-dots'
 }

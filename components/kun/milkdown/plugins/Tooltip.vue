@@ -43,19 +43,19 @@ const call = <T,>(command: CmdKey<T>, payload?: T) => {
 <template>
   <div v-if="loading" class="tooltip" ref="divRef">
     <button @click="call(toggleStrongCommand.key)">
-      <Icon name="material-symbols:format-bold-rounded" />
+      <Icon name="lucide:bold" />
     </button>
 
     <button @click="call(toggleEmphasisCommand.key)">
-      <Icon name="material-symbols:format-italic-rounded" />
+      <Icon name="lucide:italic" />
     </button>
 
     <button @click="call(toggleStrikethroughCommand.key)">
-      <Icon name="material-symbols:strikethrough-s-rounded" />
+      <Icon name="lucide:strikethrough" />
     </button>
 
     <button @click="call(toggleInlineCodeCommand.key)">
-      <Icon name="material-symbols:code-rounded" />
+      <Icon name="lucide:code-xml" />
     </button>
   </div>
 </template>

@@ -34,7 +34,7 @@ const user = computed(() => props.user)
         </p>
 
         <p class="moemoepoint">
-          <span><Icon name="line-md:star-alt-twotone"></Icon></span>
+          <span><Icon name="lucide:lollipop"></Icon></span>
           <span>{{ user.moemoepoint }}</span>
         </p>
       </div>

@@ -107,7 +107,7 @@ const handleClickDislike = () => {
       :class="isDisliked ? 'active' : ''"
       @click="handleClickDislike"
     >
-      <Icon class="icon" name="line-md:thumbs-down-twotone" />
+      <Icon class="icon" name="lucide:thumbs-down" />
     </span>
     <span v-if="dislikesCount">{{ dislikesCount }}</span>
   </li>

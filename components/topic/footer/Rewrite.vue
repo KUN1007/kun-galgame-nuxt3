@@ -69,7 +69,7 @@ const handleClickRewrite = () => {
 
 <template>
   <span v-if="isShowRewrite" @click="handleClickRewrite" class="icon">
-    <Icon name="line-md:pencil-twotone-alt" />
+    <Icon name="lucide:pencil" />
   </span>
 </template>
 

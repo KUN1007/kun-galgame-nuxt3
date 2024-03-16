@@ -25,13 +25,13 @@ watch(
     <div class="nav-aside" @click="handleFold">
       <Icon
         class="icon"
-        name="line-md:arrow-left"
+        name="lucide:arrow-left"
         style="font-size: 17px"
         v-if="isActiveAside"
       />
       <Icon
         class="icon"
-        name="line-md:arrow-right"
+        name="lucide:arrow-right"
         style="font-size: 17px"
         v-if="!isActiveAside"
       />

@@ -2,7 +2,7 @@
 
 <template>
   <NuxtLinkLocale to="/" class="return">
-    <Icon class="icon" name="line-md:home-md-twotone" />
+    <Icon class="icon" name="lucide:home" />
     <span>{{ $t('back.home') }}</span>
   </NuxtLinkLocale>
 </template>

@@ -19,7 +19,7 @@ const handleClickShowLanguage = async () => {
     <div class="lang">
       <div class="chooser" @click="handleClickShowLanguage">
         <span>{{ $t(`header.settings.${locale}`) }}</span>
-        <Icon class="icon" name="line-md:chevron-down" />
+        <Icon class="icon" name="lucide:chevron-down" />
       </div>
 
       <Transition name="select">
@@ -63,6 +63,7 @@ const handleClickShowLanguage = async () => {
   align-items: center;
 
   .icon {
+    font-size: 18px;
     color: var(--kungalgame-blue-5);
   }
 }

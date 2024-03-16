@@ -5,7 +5,7 @@ const { isScrollToTop } = storeToRefs(useTempReplyStore())
 <template>
   <div class="bar">
     <div class="top" @click="isScrollToTop = true">
-      <Icon class="icon" name="line-md:arrow-close-up" />
+      <Icon class="icon" name="lucide:arrow-up-to-line" />
     </div>
   </div>
 </template>

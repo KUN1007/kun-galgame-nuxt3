@@ -76,7 +76,7 @@ const handleClickShare = () => {
             position: 'bottom'
           }"
         >
-          <span class="icon"><Icon name="ic:outline-remove-red-eye" /></span>
+          <span class="icon"><Icon name="lucide:mouse-pointer-click" /></span>
           {{ info.views }}
         </li>
 
@@ -126,7 +126,7 @@ const handleClickShare = () => {
           position: 'bottom'
         }"
       >
-        <Icon name="majesticons:share-line" />
+        <Icon name="lucide:share-2" />
       </span>
 
       <!-- View Only (TODO) -->

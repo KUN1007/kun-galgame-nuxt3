@@ -20,22 +20,22 @@ const { sortField, sortOrder, isScrollToTop } = storeToRefs(useTempPoolStore())
 
         <div class="order">
           <span @click="sortOrder = 'asc'">
-            <Icon name="tdesign:order-ascending" />
+            <Icon name="lucide:sort-asc" />
           </span>
           <span @click="sortOrder = 'desc'">
-            <Icon name="tdesign:order-descending" />
+            <Icon name="lucide:sort-desc" />
           </span>
         </div>
       </div>
 
       <div class="icon-item">
-        <Icon name="bi:sort-down" />
+        <Icon name="lucide:arrow-down-up" />
       </div>
     </div>
 
     <div class="top" @click="isScrollToTop = true">
       <div class="icon-item">
-        <Icon name="line-md:arrow-close-up" />
+        <Icon name="lucide:arrow-up-to-line" />
       </div>
     </div>
   </div>
@@ -84,6 +84,7 @@ const { sortField, sortOrder, isScrollToTop } = storeToRefs(useTempPoolStore())
 
 .order {
   display: flex;
+  font-size: 20px;
 
   span {
     padding: 8px;
@@ -131,6 +132,9 @@ const { sortField, sortOrder, isScrollToTop } = storeToRefs(useTempPoolStore())
 }
 
 .icon-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 22px;
   color: var(--kungalgame-blue-5);
 }

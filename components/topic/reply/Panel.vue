@@ -49,11 +49,7 @@ const handleClosePanel = async () => {
                 {{ `${$t(`topic.panel.${position}`)} ${replyDraft.toFloor}` }}
               </span>
             </h3>
-            <Icon
-              @click="handleClosePanel"
-              class="close"
-              name="line-md:close"
-            />
+            <Icon @click="handleClosePanel" class="close" name="lucide:x" />
           </div>
 
           <div class="content">

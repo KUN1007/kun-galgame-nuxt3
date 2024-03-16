@@ -8,19 +8,19 @@ interface Sort {
 export const sortItem: Sort[] = [
   {
     index: 1,
-    icon: 'ic:outline-remove-red-eye',
+    icon: 'lucide:mouse-pointer-click',
     name: 'view',
     field: 'views'
   },
   {
     index: 2,
-    icon: 'line-md:thumbs-up-twotone',
+    icon: 'lucide:thumbs-up',
     name: 'like',
     field: 'likes_count'
   },
   {
     index: 3,
-    icon: 'eos-icons:hourglass',
+    icon: 'lucide:calendar-heart',
     name: 'time',
     field: 'time'
   }

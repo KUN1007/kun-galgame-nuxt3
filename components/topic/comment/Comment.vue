@@ -120,7 +120,7 @@ const handleClickComment = (
                     )
                   "
                 >
-                  <Icon class="icon" name="fa-regular:comment-dots" />
+                  <Icon class="icon" name="uil:comment-dots" />
                 </li>
               </ul>
             </div>

@@ -12,7 +12,7 @@ const { showKUNGalgamePanel, showKUNGalgameUserPanel, messageStatus } =
 <template>
   <div class="kungalgamer-info">
     <span class="search" @click="isShowSearch = true">
-      <Icon name="line-md:search" />
+      <Icon name="lucide:search" />
     </span>
 
     <span class="settings" @click="showKUNGalgamePanel = !showKUNGalgamePanel">

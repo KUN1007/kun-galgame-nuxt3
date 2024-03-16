@@ -124,7 +124,7 @@ const handleClickUpvote = async () => {
       :class="isUpvote ? 'active' : ''"
       @click="handleClickUpvote"
     >
-      <Icon class="icon" name="bi:rocket" />
+      <Icon class="icon" name="lucide:cherry" />
     </span>
     <span v-if="upvoteCount">{{ upvoteCount }}</span>
   </li>

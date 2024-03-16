@@ -7,7 +7,7 @@
       href="https://t.me/kungalgame"
       target="_blank"
     >
-      <Icon name="line-md:telegram" />
+      <Icon name="ph:telegram-logo" />
     </a>
 
     <a
@@ -15,7 +15,7 @@
       href="https://twitter.com/kungalgame"
       target="_blank"
     >
-      <Icon name="line-md:twitter-x-alt" />
+      <Icon name="ri:twitter-x-line" />
     </a>
 
     <a
@@ -23,7 +23,7 @@
       href="https://github.com/KUN1007/kun-galgame-nuxt3"
       target="_blank"
     >
-      <Icon name="line-md:github-loop" />
+      <Icon name="lucide:github" />
     </a>
 
     <a
@@ -31,7 +31,7 @@
       href="https://discord.com/invite/5F4FS2cXhX"
       target="_blank"
     >
-      <Icon name="line-md:discord" />
+      <Icon name="mingcute:discord-line" />
     </a>
 
     <a
@@ -39,7 +39,7 @@
       href="https://youtube.com/@kungalgame"
       target="_blank"
     >
-      <Icon name="line-md:youtube" />
+      <Icon name="lucide:youtube" />
     </a>
 
     <a

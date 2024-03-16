@@ -57,7 +57,7 @@ onMounted(async () => {
   <div class="nav-top">
     <div class="hamburger">
       <Icon
-        name="line-md:menu-fold-right"
+        name="lucide:menu"
         class="icon"
         @click="showKUNGalgameHamburger = true"
       />

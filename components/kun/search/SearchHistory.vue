@@ -36,7 +36,7 @@ const handleDeleteHistory = (historyIndex: number) => {
           <Icon
             @click="handleDeleteHistory(index)"
             class="delete"
-            name="line-md:close-circle"
+            name="lucide:x"
           />
         </span>
       </div>

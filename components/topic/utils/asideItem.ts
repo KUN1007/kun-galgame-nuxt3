@@ -11,19 +11,19 @@ export const asideItem: Item[] = [
   {
     index: 1,
     sortField: 'floor',
-    icon: 'line-md:arrows-vertical',
+    icon: 'lucide:arrow-up-0-1',
     name: 'floor'
   },
   {
     index: 2,
     sortField: 'likes_count',
-    icon: 'line-md:thumbs-up-twotone',
+    icon: 'lucide:thumbs-up',
     name: 'like'
   },
   {
     index: 3,
     sortField: 'comments_count',
-    icon: 'fa-regular:comment-dots',
+    icon: 'uil:comment-dots',
     name: 'comment'
   }
 ]
@@ -38,11 +38,11 @@ export const sortItem: SortItem[] = [
   {
     index: 1,
     sortOrder: 'asc',
-    icon: 'tdesign:order-ascending'
+    icon: 'lucide:sort-asc'
   },
   {
     index: 2,
     sortOrder: 'desc',
-    icon: 'tdesign:order-descending'
+    icon: 'lucide:sort-desc'
   }
 ]
