@@ -31,6 +31,10 @@ const handelCloseSettingsMenu = () => {
         <Icon name="uiw:setting-o" />
       </span>
 
+      <NuxtLinkLocale to="/topic/280" class="rules">
+        {{ $t(`edit.rules`) }}
+      </NuxtLinkLocale>
+
       <span class="save">
         {{ `${$t('edit.save')} × ${autosaveCount}` }}
       </span>
@@ -64,9 +68,19 @@ const handelCloseSettingsMenu = () => {
     align-items: center;
   }
 
+  .rules,
   .save {
     margin-left: 17px;
     font-size: 15px;
+  }
+
+  .rules {
+    text-transform: uppercase;
+    color: var(--kungalgame-blue-5);
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 

@@ -2,14 +2,6 @@
 import { topicCategory } from './utils/category'
 import type { Category } from './utils/category'
 
-// TODO:
-const localePath = useLocalePath()
-const { locale } = useI18n()
-const alertInfo =
-  locale.value === 'en-us'
-    ? 'ATTENTION: If you are publishing game resources, it is prohibited to use links from other websites without authorization.'
-    : '注意：如果发布游戏资源，禁止盗用其他网站的链接'
-
 const { category: rewriteCategory, isTopicRewriting } =
   storeToRefs(useTempEditStore())
 const { category: editCategory } = storeToRefs(useKUNGalgameEditStore())
@@ -55,27 +47,19 @@ watch(
 </script>
 
 <template>
-  <div class="topic-group">
-    <span class="link" @click="navigateTo(localePath('/topic/280'))">
-      {{ alertInfo }}
-    </span>
-    <br />
-    <br />
-    <div>{{ $t('edit.categories') }}</div>
-    <div class="group-btn">
-      <span
-        class="btn"
-        v-for="kun in topicCategory"
-        :key="kun.index"
-        @click="handleClickCategory(kun)"
-        :class="{ active: selectedCategories.includes(kun.name) }"
-      >
-        {{ $t(`edit.${kun.name}`) }}
-      </span>
-    </div>
-  </div>
+  <div class="categories">
+    <p>{{ $t('edit.categories') }}</p>
 
-  <EditButton />
+    <span
+      class="btn"
+      v-for="kun in topicCategory"
+      :key="kun.index"
+      @click="handleClickCategory(kun)"
+      :class="{ active: selectedCategories.includes(kun.name) }"
+    >
+      {{ $t(`edit.${kun.name}`) }}
+    </span>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -89,39 +73,49 @@ watch(
     border-bottom: 2px solid var(--kungalgame-blue-5);
   }
 }
-.topic-group {
-  width: 100%;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
 
-.group-btn {
+.categories {
   height: 100%;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   margin: 20px 0;
+
+  p {
+    margin-right: 17px;
+  }
 }
 
 .btn {
   height: 30px;
-  width: 177px;
-  font-size: 17px;
+  padding: 0 17px;
   cursor: pointer;
-  border: 1px solid var(--kungalgame-blue-5);
-  border-radius: 15px;
-  background-color: var(--kungalgame-trans-white-9);
+  border: 1px solid var(--kungalgame-trans-blue-2);
+  background-color: transparent;
   color: var(--kungalgame-blue-5);
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 15px;
+  white-space: nowrap;
 
   &:nth-child(2) {
-    margin: 0 10px;
+    border-radius: 17px 0 0 17px;
+  }
+
+  &:nth-child(3) {
+    border-left: transparent;
+    border-right: transparent;
+  }
+
+  &:last-child {
+    border-radius: 0 17px 17px 0;
   }
 }
 
 .active {
   background-color: var(--kungalgame-blue-5);
+  border: 1px solid var(--kungalgame-blue-5);
   color: var(--kungalgame-white);
 }
 </style>

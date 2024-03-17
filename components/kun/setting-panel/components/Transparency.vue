@@ -28,7 +28,7 @@ watch(
         class="main"
         min="10"
         max="90"
-        step="0.1"
+        step="1"
         type="range"
         v-model="showKUNGalgamePageTransparency"
         @touchmove.stop.passive

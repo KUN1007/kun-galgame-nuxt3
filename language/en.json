@@ -214,6 +214,7 @@
     "loading": "Loading editor...",
     "uploading": "Uploading in progress...",
     "clear": "Clear Content",
+    "rules": "Posting Rules",
     "save": "Auto save",
     "word": "Word(s)",
     "editorHeight": "Editor Height",
@@ -227,8 +228,7 @@
     "tags": "Please input tags",
     "hint": "Hint: A single tag should be within 17 characters, choose at least one and up to 7 tags). You can enter text and press `Enter` to create a tag.",
     "hot": "Popular Tags (Click to Select): ",
-    "categories":
-      "Click to select topic categories (multiple selections allowed): ",
+    "categories": "Categories",
     "Galgame": "Visual Novel",
     "Technique": "Technique",
     "Others": "Others",

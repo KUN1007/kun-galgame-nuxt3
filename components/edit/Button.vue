@@ -144,7 +144,6 @@ const handleRewrite = async () => {
   margin-bottom: 20px;
 
   button {
-    transition: all 0.2s;
     height: 40px;
     width: 200px;
     font-size: 20px;
@@ -152,7 +151,7 @@ const handleRewrite = async () => {
     overflow: hidden;
     cursor: pointer;
     flex-shrink: 0;
-    border-radius: 5px;
+    border-radius: 10px;
 
     &:hover {
       color: var(--kungalgame-white);
@@ -166,35 +165,29 @@ const handleRewrite = async () => {
   border: 1px solid var(--kungalgame-blue-5);
 
   &:hover {
-    background-color: var(--kungalgame-blue-5);
     transition: 0.2s;
+    background-color: var(--kungalgame-blue-5);
   }
 }
 
 .rewrite-btn {
-  color: var(--kungalgame-red-4);
-  background-color: var(--kungalgame-trans-white-9);
-  border: 1px solid var(--kungalgame-red-4);
-
-  &:hover {
-    background-color: var(--kungalgame-red-4);
-    transition: 0.2s;
-  }
-}
-
-.clear-btn {
   color: var(--kungalgame-pink-4);
   background-color: var(--kungalgame-trans-white-9);
   border: 1px solid var(--kungalgame-pink-4);
 
   &:hover {
     background-color: var(--kungalgame-pink-4);
-    transition: 0.2s;
   }
+}
 
-  &:active {
-    background-color: var(--kungalgame-pink-3);
-    transform: scale(0.8);
+.clear-btn {
+  color: var(--kungalgame-red-5);
+  background-color: var(--kungalgame-trans-white-9);
+  border: 1px solid var(--kungalgame-red-5);
+
+  &:hover {
+    transition: 0.2s;
+    background-color: var(--kungalgame-red-5);
   }
 }
 
