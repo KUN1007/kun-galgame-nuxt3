@@ -51,12 +51,15 @@ const loliStatus = computed(() => {
       </div>
 
       <div class="content">
-        <div class="content-top">
+        <div class="top">
           <TopicTags v-if="tags" :tags="tags" :is-show-icon="true" />
-          <TopicTime class="time" v-if="time" :time="time" />
+
+          <span class="time">
+            {{ dayjs(time).format('YYYY-MM-DD HH:mm:ss') }}
+          </span>
         </div>
 
-        <div class="content-center">
+        <div class="center">
           <TopicKUNGalgamerInfo v-if="user" :user="user">
             <span class="time-mobile">
               {{ dayjs(time).format('YYYY-MM-DD HH:mm:ss') }}
@@ -66,7 +69,7 @@ const loliStatus = computed(() => {
           <TopicContent :content="content" />
         </div>
 
-        <div class="content-bottom">
+        <div class="bottom">
           <div class="status">
             <span>{{ `${$t('topic.content.status')}:` }}</span>
             <span :class="loliStatus">
@@ -145,12 +148,21 @@ const loliStatus = computed(() => {
   flex-direction: column;
 }
 
-.content-top {
+.top {
   width: 100%;
   display: flex;
   text-align: center;
   justify-content: space-between;
   flex-grow: 1;
+
+  .time {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: var(--kungalgame-font-color-1);
+    padding: 0 17px;
+  }
 }
 
 .time-mobile {
@@ -164,12 +176,12 @@ const loliStatus = computed(() => {
   }
 }
 
-.content-center {
+.center {
   width: 100%;
   display: flex;
 }
 
-.content-bottom {
+.bottom {
   width: 100%;
   height: 20px;
   display: flex;
@@ -225,22 +237,24 @@ const loliStatus = computed(() => {
 }
 
 @media (max-width: 1000px) {
-  .content-top {
+  .top {
     justify-content: center;
     flex-wrap: wrap;
   }
 }
 
 @media (max-width: 700px) {
-  .time {
-    display: none;
+  .top {
+    .time {
+      display: none;
+    }
   }
 
   .time-mobile {
     display: block;
   }
 
-  .content-center {
+  .center {
     flex-direction: column;
   }
 

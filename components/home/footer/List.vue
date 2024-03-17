@@ -136,6 +136,12 @@ const link: FooterInfoItem[] = [
     name: `mikugal`,
     router: `https://yngal.com`,
     label: `初音的青葱,我的galgame,资源发布,汉化硬盘版,汉化,galgame下载,galgame,游戏下载,gal下载`
+  },
+  {
+    index: 9,
+    name: `xiayuge`,
+    router: `https://xiayuge1.top/`,
+    label: `夏轩阁是一个创建于2022年的一个主要与galgame有关的站点, 与大家分享、探讨自己喜欢的作品, 我们一直在提供公益服务, 接下来的路还很长, 希望能够与各位一起走完。`
   }
 ]
 </script>
