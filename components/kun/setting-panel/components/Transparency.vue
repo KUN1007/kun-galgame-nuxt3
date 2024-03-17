@@ -5,13 +5,23 @@ const { showKUNGalgamePageTransparency } = storeToRefs(
 )
 
 watch(
-  () => [showKUNGalgamePageTransparency.value, colorMode.value],
+  () => showKUNGalgamePageTransparency.value,
   debounce(() => {
     useKUNGalgameSettingsStore().setKUNGalgameTransparency(
       showKUNGalgamePageTransparency.value,
       colorMode.value as 'dark' | 'light'
     )
   }, 300)
+)
+
+watch(
+  () => colorMode.value,
+  () => {
+    useKUNGalgameSettingsStore().setKUNGalgameTransparency(
+      showKUNGalgamePageTransparency.value,
+      colorMode.value as 'dark' | 'light'
+    )
+  }
 )
 </script>
 
