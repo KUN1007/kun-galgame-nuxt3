@@ -85,13 +85,7 @@ onBeforeRouteLeave(async (_, __, next) => {
         <KunMilkdownComponentsTitle />
         <KunMilkdownWrapper :is-show-menu="true" />
 
-        <div class="footer">
-          <EditTags />
-
-          <EditCategory />
-
-          <EditButton />
-        </div>
+        <EditFooter />
       </div>
 
       <div
@@ -155,7 +149,6 @@ onBeforeRouteLeave(async (_, __, next) => {
 
 .container {
   position: relative;
-  transition: all 0.2s;
   width: 100%;
   max-width: 64rem;
   margin: 0 auto;
@@ -203,14 +196,6 @@ onBeforeRouteLeave(async (_, __, next) => {
       font-size: 17px;
     }
   }
-}
-
-.footer {
-  padding: 10px;
-  padding-top: 17px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .reference {

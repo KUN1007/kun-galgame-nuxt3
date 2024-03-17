@@ -48,8 +48,6 @@ watch(
 
 <template>
   <div class="categories">
-    <p>{{ $t('edit.categories') }}</p>
-
     <span
       class="btn"
       v-for="kun in topicCategory"
@@ -63,27 +61,10 @@ watch(
 </template>
 
 <style lang="scss" scoped>
-.link {
-  color: var(--kungalgame-blue-5);
-  font-weight: bold;
-  cursor: pointer;
-  border-bottom: 2px solid var(--kungalgame-trans-white-9);
-
-  &:hover {
-    border-bottom: 2px solid var(--kungalgame-blue-5);
-  }
-}
-
 .categories {
   height: 100%;
-  width: 100%;
   display: flex;
-  align-items: center;
-  margin: 20px 0;
-
-  p {
-    margin-right: 17px;
-  }
+  margin: 0 17px 17px 0;
 }
 
 .btn {
@@ -99,11 +80,11 @@ watch(
   font-size: 15px;
   white-space: nowrap;
 
-  &:nth-child(2) {
+  &:nth-child(1) {
     border-radius: 17px 0 0 17px;
   }
 
-  &:nth-child(3) {
+  &:nth-child(2) {
     border-left: transparent;
     border-right: transparent;
   }

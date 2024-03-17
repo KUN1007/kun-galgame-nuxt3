@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import type { CSSProperties } from 'vue'
+
 const container = ref<HTMLElement>()
 const isShowOptions = ref(false)
 
 const props = defineProps<{
   options: string[]
+  styles?: CSSProperties
+  i18n: string
   position?: 'top' | 'bottom'
 }>()
 const position = computed(() => (props.position ? props.position : 'bottom'))
@@ -19,14 +23,15 @@ const handleClickShowLanguage = () => {
 </script>
 
 <template>
-  <div
-    ref="container"
-    tabindex="-1"
-    @blur="isShowOptions = false"
-    class="kun-select"
-  >
-    <div class="kun-chooser" @click="handleClickShowLanguage">
-      <span>{{ $t(`header.settings.${props.options[0]}`) }}</span>
+  <div class="kun-select" :style="props.styles">
+    <div
+      ref="container"
+      tabindex="-1"
+      @blur="isShowOptions = false"
+      class="kun-chooser"
+      @click="handleClickShowLanguage"
+    >
+      <slot />
       <Icon class="icon" name="lucide:chevron-down" />
     </div>
 
@@ -38,7 +43,7 @@ const handleClickShowLanguage = () => {
           @click.stop.prevent="emit('set', kun)"
           v-once
         >
-          {{ $t(`header.settings.${kun}`) }}
+          {{ $t(`${props.i18n}.${kun}`) }}
         </span>
       </div>
     </Transition>
@@ -52,7 +57,7 @@ const handleClickShowLanguage = () => {
 }
 
 .kun-chooser {
-  width: 100px;
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -64,13 +69,12 @@ const handleClickShowLanguage = () => {
 }
 
 .options {
-  width: 100px;
+  width: 100%;
   position: absolute;
   padding: 7px;
   border: 1px solid var(--kungalgame-trans-blue-1);
   background-color: var(--kungalgame-trans-white-2);
   border-radius: 5px;
-  overflow: hidden;
   box-shadow: var(--shadow);
 
   span {

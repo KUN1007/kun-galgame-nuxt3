@@ -178,7 +178,7 @@ watch(
     <div class="hint">{{ $t('edit.hint') }}</div>
 
     <div class="hot-tags" v-if="isShowKeywords">
-      <div class="tags-info">{{ $t('edit.hot') }}</div>
+      <p class="tags-info">{{ $t('edit.hot') }}</p>
 
       <div class="tags">
         <span
