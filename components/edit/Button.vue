@@ -112,6 +112,19 @@ const handleRewrite = async () => {
     useTempEditStore().resetRewriteTopicData()
   }
 }
+
+onMounted(() => {
+  window.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.key === 'Enter') {
+      console.log('按下了Ctrl+Enter')
+      if (!isTopicRewriting.value) {
+        handlePublish()
+      } else {
+        handleRewrite()
+      }
+    }
+  })
+})
 </script>
 
 <template>
