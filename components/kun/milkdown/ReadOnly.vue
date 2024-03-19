@@ -87,6 +87,19 @@ const { get, loading } = useEditor((root) =>
     .use(prism)
 )
 
+const milkdownRef = ref<InstanceType<typeof Milkdown> | null>(null)
+
+watch(loading, (newV) => {
+  if (!newV) {
+    const aTags = milkdownRef.value?.$el?.querySelectorAll(
+      'a'
+    ) as NodeListOf<HTMLAnchorElement>
+    aTags?.forEach((a) => {
+      a.setAttribute('target', '_blank')
+    })
+  }
+})
+
 watch(
   () => valueMarkdown.value,
   () => {
@@ -98,7 +111,7 @@ watch(
 <template>
   <div>
     <div v-if="loading">{{ valueMarkdown }}</div>
-    <Milkdown class="editor" />
+    <Milkdown ref="milkdownRef" class="editor" />
   </div>
 </template>
 

@@ -14,8 +14,6 @@ if (isTopicRewriting.value) {
 }
 
 const handleInput = debounce(() => {
-  console.log(111111111)
-
   if (topicTitle.value.length > maxInputLength) {
     topicTitle.value = topicTitle.value.slice(0, maxInputLength)
   }
