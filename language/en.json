@@ -242,8 +242,9 @@
     },
     "techniqueSection": {
       "web": "Web",
-      "linux": "Linux",
       "languages": "Programming Languages",
+      "practical": "Practical Technology",
+      "linux": "Linux",
       "ai": "AI",
       "crack": "Reverse Engineering",
       "android": "Android",
@@ -538,7 +539,6 @@
   },
   "AlertInfo":{
     "edit":{
-      "clear": "Are you sure want to clear content?",
       "publish": "Confirm to publish?",
       "publishSuccess": "Publish Successfully",
       "upvoteTopic":

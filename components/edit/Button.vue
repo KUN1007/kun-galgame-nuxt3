@@ -20,20 +20,9 @@ const {
 const { textCount, title, content, tags, category } = storeToRefs(
   useKUNGalgameEditStore()
 )
-const { clearTopic } = storeToRefs(useTempEditStore())
 
 const messageStore = useTempMessageStore()
 const isPublishing = ref(false)
-
-const handleClear = async () => {
-  const res = await messageStore.alert('AlertInfo.edit.clear', true)
-  if (!res) {
-    return
-  }
-  useKUNGalgameEditStore().resetTopicData()
-  clearTopic.value = !clearTopic.value
-  useMessage('Clearing content successful', '清空内容成功', 'success')
-}
 
 const handlePublish = async () => {
   const requestData: EditCreateTopicRequestData = {
@@ -130,10 +119,6 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 <template>
   <div class="btn-container">
-    <button v-if="!isTopicRewriting" class="clear-btn" @click="handleClear">
-      {{ $t('edit.clear') }}
-    </button>
-
     <button
       v-if="!isTopicRewriting"
       class="confirm-btn"
@@ -191,17 +176,6 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
   &:hover {
     background-color: var(--kungalgame-pink-4);
-  }
-}
-
-.clear-btn {
-  color: var(--kungalgame-red-5);
-  background-color: var(--kungalgame-trans-white-9);
-  border: 1px solid var(--kungalgame-red-5);
-
-  &:hover {
-    transition: 0.2s;
-    background-color: var(--kungalgame-red-5);
   }
 }
 

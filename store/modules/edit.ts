@@ -11,17 +11,19 @@ export const useKUNGalgameEditStore = defineStore({
     content: '',
     tags: [],
     category: [],
+    section: [],
     isShowHotKeywords: false
   }),
   getters: {},
   actions: {
-    resetTopicData () {
+    resetTopicData() {
       this.textCount = 0
 
       this.title = ''
       this.content = ''
       this.tags = []
       this.category = []
+      this.section = []
     }
   }
 })

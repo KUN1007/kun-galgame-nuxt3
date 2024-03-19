@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { topicCategory } from './utils/category'
 
-const { category: rewriteCategory, isTopicRewriting } =
-  storeToRefs(useTempEditStore())
-const { category: editCategory } = storeToRefs(useKUNGalgameEditStore())
-const { clearTopic } = storeToRefs(useTempEditStore())
+const {
+  category: rewriteCategory,
+  section: rewriteSection,
+  isTopicRewriting
+} = storeToRefs(useTempEditStore())
+const { category: editCategory, section: editSection } = storeToRefs(
+  useKUNGalgameEditStore()
+)
 
 const isShowSection = computed(
   () => editCategory.value.length || rewriteCategory.value.length

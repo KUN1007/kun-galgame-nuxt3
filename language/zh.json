@@ -242,8 +242,9 @@
     },
     "techniqueSection": {
       "web": "Web",
-      "linux": "Linux",
       "languages": "编程语言",
+      "linux": "Linux",
+      "practical": "实用技术",
       "ai": "AI",
       "crack": "逆向工程",
       "android": "Android",
@@ -541,7 +542,6 @@
   },
   "AlertInfo":{
     "edit":{
-      "clear": "您确定要清空内容吗?",
       "publish": "确认发布吗？",
       "publishSuccess": "发布成功",
       "upvoteTopic": "您确定推这个话题吗，这将会消耗您 17 萌萌点",

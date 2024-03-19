@@ -1,18 +1,9 @@
 <script setup lang="ts">
 // Milkdown core
-import {
-  Editor,
-  rootCtx,
-  rootAttrsCtx,
-  defaultValueCtx,
-  editorViewCtx,
-  parserCtx
-} from '@milkdown/core'
-import type { Ctx } from '@milkdown/ctx'
+import { Editor, rootCtx, rootAttrsCtx, defaultValueCtx } from '@milkdown/core'
 import { Milkdown, useEditor } from '@milkdown/vue'
 import { commonmark } from '@milkdown/preset-commonmark'
 import { gfm } from '@milkdown/preset-gfm'
-import { Slice } from '@milkdown/prose/model'
 // Milkdown Plugins
 import { history } from '@milkdown/plugin-history'
 import { prism, prismConfig } from '@milkdown/plugin-prism'
@@ -64,9 +55,6 @@ const emits = defineEmits<{
   saveMarkdown: [editorMarkdown: string]
 }>()
 
-const { clearTopic } = storeToRefs(useTempEditStore())
-const { isClearContent } = storeToRefs(useTempReplyStore())
-
 const editorHight = computed(() => props.editorHight + 'px')
 const valueMarkdown = computed(() => props.valueMarkdown)
 const isShowMenu = computed(() => props.isShowMenu)
@@ -76,25 +64,6 @@ const pluginViewFactory = usePluginViewFactory()
 const container = ref<HTMLElement | null>(null)
 const toolbar = ref<HTMLElement | null>(null)
 const editorContent = ref('')
-
-watch(
-  () => [clearTopic.value, isClearContent.value],
-  () => {
-    editorInfo.get()?.action((ctx: Ctx) => {
-      const view = ctx.get(editorViewCtx)
-      const parser = ctx.get(parserCtx)
-      const doc = parser('')
-      const state = view.state
-      view.dispatch(
-        state.tr.replace(
-          0,
-          state.doc.content.size,
-          new Slice(doc.content, 0, 0)
-        )
-      )
-    })
-  }
-)
 
 const editorInfo = useEditor((root) =>
   Editor.make()

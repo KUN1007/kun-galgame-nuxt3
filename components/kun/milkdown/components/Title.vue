@@ -2,7 +2,6 @@
 const { title: rewriteTitle, isTopicRewriting } =
   storeToRefs(useTempEditStore())
 const { title: editTitle } = storeToRefs(useKUNGalgameEditStore())
-const { clearTopic } = storeToRefs(useTempEditStore())
 
 const topicTitle = ref('')
 const maxInputLength = 40
@@ -30,13 +29,6 @@ const handleInput = debounce(() => {
     editTitle.value = topicTitle.value
   }
 }, 1007)
-
-watch(
-  () => clearTopic.value,
-  () => {
-    topicTitle.value = ''
-  }
-)
 </script>
 
 <template>

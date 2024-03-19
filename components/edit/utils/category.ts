@@ -19,6 +19,7 @@ export const topicCategory: Category[] = [
     options: [
       'crack',
       'languages',
+      'practical',
       'linux',
       'web',
       'android',

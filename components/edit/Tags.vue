@@ -1,15 +1,10 @@
 <script setup lang="ts">
 const routeName = useRouteName()
 
-const {
-  tags: rewriteTags,
-  isTopicRewriting,
-  clearTopic
-} = storeToRefs(useTempEditStore())
+const { tags: rewriteTags, isTopicRewriting } = storeToRefs(useTempEditStore())
 const { isShowHotKeywords: isShowEditHotKeywords, tags: editTags } =
   storeToRefs(useKUNGalgameEditStore())
-const { isReplyRewriting, isClearContent, replyRewrite } =
-  storeToRefs(useTempReplyStore())
+const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
 const { isShowHotKeywords: isShowReplyHotKeywords, replyDraft } = storeToRefs(
   usePersistKUNGalgameReplyStore()
 )
@@ -134,13 +129,6 @@ watch(
     ) {
       hotTags.value = await getTags()
     }
-  }
-)
-
-watch(
-  () => [clearTopic.value, isClearContent.value],
-  () => {
-    selectedTags.value = []
   }
 )
 </script>

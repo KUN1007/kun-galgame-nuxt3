@@ -43,7 +43,6 @@ export interface ReplyStoreTemp {
   scrollToReplyId: number
 
   isReplyRewriting: boolean
-  isClearContent: boolean
 
   replyRequest: ReplyRequest
   replyRewrite: ReplyRewrite

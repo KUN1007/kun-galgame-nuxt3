@@ -5,7 +5,6 @@ import type { Category } from './utils/category'
 const { category: rewriteCategory, isTopicRewriting } =
   storeToRefs(useTempEditStore())
 const { category: editCategory } = storeToRefs(useKUNGalgameEditStore())
-const { clearTopic } = storeToRefs(useTempEditStore())
 
 const selectedCategories = ref<string[]>([])
 
@@ -37,13 +36,6 @@ const handleClickCategory = (kun: Category) => {
 
   editCategory.value = selectedCategories.value
 }
-
-watch(
-  () => clearTopic.value,
-  () => {
-    selectedCategories.value = []
-  }
-)
 </script>
 
 <template>

@@ -6,8 +6,7 @@ import type {
 } from '~/types/api/reply'
 
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
-const { isReplyRewriting, isClearContent, replyRewrite } =
-  storeToRefs(useTempReplyStore())
+const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
 const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 const isPublishing = ref(false)
 
@@ -105,16 +104,6 @@ const handleRewrite = async () => {
   }
 }
 
-const handleClear = async () => {
-  const res = await messageStore.alert('AlertInfo.edit.clear', true)
-  if (!res) {
-    return
-  }
-  usePersistKUNGalgameReplyStore().resetReplyContent()
-  isClearContent.value = !isClearContent.value
-  useMessage('Clearing content successful', '清空内容成功', 'success')
-}
-
 const handleShowAdvance = () => {
   isShowAdvance.value = !isShowAdvance.value
 }
@@ -122,10 +111,6 @@ const handleShowAdvance = () => {
 
 <template>
   <div class="btn-container">
-    <button v-if="!isReplyRewriting" class="clear-btn" @click="handleClear">
-      {{ $t('topic.panel.clear') }}
-    </button>
-
     <button class="advance-btn" @click="handleShowAdvance">
       {{ $t('topic.panel.advance') }}
     </button>
@@ -174,12 +159,7 @@ const handleShowAdvance = () => {
 
   &:hover {
     background-color: var(--kungalgame-blue-5);
-    transition: 0.1s;
-  }
-
-  &:active {
-    background-color: var(--kungalgame-blue-3);
-    transform: scale(0.8);
+    transition: 0.2s;
   }
 }
 
@@ -190,28 +170,7 @@ const handleShowAdvance = () => {
 
   &:hover {
     background-color: var(--kungalgame-red-4);
-    transition: 0.1s;
-  }
-
-  &:active {
-    background-color: var(--kungalgame-red-3);
-    transform: scale(0.8);
-  }
-}
-
-.clear-btn {
-  color: var(--kungalgame-pink-4);
-  background-color: var(--kungalgame-trans-white-9);
-  border: 1px solid var(--kungalgame-pink-4);
-
-  &:hover {
-    background-color: var(--kungalgame-pink-4);
-    transition: 0.1s;
-  }
-
-  &:active {
-    background-color: var(--kungalgame-pink-3);
-    transform: scale(0.8);
+    transition: 0.2s;
   }
 }
 
@@ -222,12 +181,7 @@ const handleShowAdvance = () => {
 
   &:hover {
     background-color: var(--kungalgame-purple-4);
-    transition: 0.1s;
-  }
-
-  &:active {
-    background-color: var(--kungalgame-purple-4);
-    transform: scale(0.8);
+    transition: 0.2s;
   }
 }
 

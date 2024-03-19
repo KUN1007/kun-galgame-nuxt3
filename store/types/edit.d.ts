@@ -4,8 +4,9 @@ export interface EditStorePersist {
 
   title: string
   content: string
-  tags: Array<string>
-  category: Array<string>
+  tags: string[]
+  category: string[]
+  section: string[]
 
   isShowHotKeywords: boolean
 }
@@ -14,12 +15,12 @@ export interface EditStoreTemp {
   tid: number
   title: string
   content: string
-  tags: Array<string>
-  category: Array<string>
+  tags: string[]
+  category: string[]
+  section: string[]
 
   textCount: number
   isTopicRewriting: boolean
 
   autosaveCount: number
-  clearTopic: boolean
 }

@@ -73,7 +73,8 @@ const handleClickShowLanguage = () => {
   position: absolute;
   padding: 7px;
   border: 1px solid var(--kungalgame-trans-blue-1);
-  background-color: var(--kungalgame-trans-white-2);
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(10px);
   border-radius: 5px;
   box-shadow: var(--shadow);
 
