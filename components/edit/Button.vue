@@ -113,18 +113,19 @@ const handleRewrite = async () => {
   }
 }
 
-onMounted(() => {
-  window.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.key === 'Enter') {
-      console.log('按下了Ctrl+Enter')
-      if (!isTopicRewriting.value) {
-        handlePublish()
-      } else {
-        handleRewrite()
-      }
+const onKeydown = (event: KeyboardEvent) => {
+  if (event.ctrlKey && event.key === 'Enter') {
+    if (!isTopicRewriting.value) {
+      handlePublish()
+    } else {
+      handleRewrite()
     }
-  })
-})
+  }
+}
+
+onMounted(() => window.addEventListener('keydown', onKeydown))
+
+onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 </script>
 
 <template>
