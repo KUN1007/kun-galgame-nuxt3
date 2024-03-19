@@ -12,6 +12,8 @@ import { gfm } from '@milkdown/preset-gfm'
 
 import { prism, prismConfig } from '@milkdown/plugin-prism'
 import { replaceAll } from '@milkdown/utils'
+import type { EditorView } from 'prosemirror-view'
+import type { Node } from '@milkdown/prose/model'
 
 import '~/assets/css/editor/index.scss'
 
@@ -35,6 +37,9 @@ import sql from 'refractor/lang/sql'
 import tsx from 'refractor/lang/tsx'
 import markdown from 'refractor/lang/markdown'
 
+// Open link on new tab
+import { handleClick } from './plugins/hyperlinkOpen'
+
 const props = defineProps<{
   isReadonly: boolean
   valueMarkdown: string
@@ -56,8 +61,21 @@ const { get, loading } = useEditor((root) =>
 
       ctx.update(editorViewOptionsCtx, (prev) => ({
         ...prev,
-        editable
+        editable,
+        handleClickOn: (view: EditorView, pos: number, node: Node) =>
+          handleClick(ctx, view, pos, node)
       }))
+
+      // preventDefaultClick
+      const observer = new MutationObserver(() => {
+        const links = Array.from(root.querySelectorAll('a'))
+        links.forEach((link) => {
+          link.onclick = () => false
+        })
+      })
+      observer.observe(root, {
+        childList: true
+      })
 
       ctx.set(prismConfig.key, {
         configureRefractor: (refractor) => {
@@ -86,19 +104,6 @@ const { get, loading } = useEditor((root) =>
     .use(gfm)
     .use(prism)
 )
-
-const milkdownRef = ref<InstanceType<typeof Milkdown> | null>(null)
-
-watch(loading, (newV) => {
-  if (!newV) {
-    const aTags = milkdownRef.value?.$el?.querySelectorAll(
-      'a'
-    ) as NodeListOf<HTMLAnchorElement>
-    aTags?.forEach((a) => {
-      a.setAttribute('target', '_blank')
-    })
-  }
-})
 
 watch(
   () => valueMarkdown.value,
