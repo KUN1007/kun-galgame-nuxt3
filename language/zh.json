@@ -232,32 +232,30 @@
     "Galgame": "Galgame",
     "Technique": "技术交流",
     "Others": "其它",
-    "galgameSection": {
-      "walkthrough": "攻略",
-      "chatting": "闲聊",
-      "seeking": "寻求资源",
-      "news": "资讯",
-      "releases": "新作消息",
-      "other": "其它"
-    },
-    "techniqueSection": {
-      "web": "Web",
-      "languages": "编程语言",
-      "linux": "Linux",
-      "practical": "实用技术",
-      "ai": "AI",
-      "crack": "逆向工程",
-      "android": "Android",
-      "adobe": "Adobe",
-      "algorithm": "算法",
-      "other": "其它"
-    },
-    "otherSection": {
-      "anime": "动漫",
-      "comics": "漫画",
-      "music": "音乐",
-      "novel": "轻小说",
-      "other": "其它"
+    "section": {
+      "g-walkthrough": "攻略",
+      "g-chatting": "闲聊",
+      "g-seeking": "寻求资源",
+      "g-news": "资讯",
+      "g-releases": "新作消息",
+      "g-other": "其它",
+      
+      "t-web": "Web",
+      "t-languages": "编程语言",
+      "t-linux": "Linux",
+      "t-practical": "实用技术",
+      "t-ai": "AI",
+      "t-crack": "逆向工程",
+      "t-android": "Android",
+      "t-adobe": "Adobe",
+      "t-algorithm": "算法",
+      "t-other": "其它",
+      
+      "o-anime": "动漫",
+      "o-comics": "漫画",
+      "o-music": "音乐",
+      "o-novel": "轻小说",
+      "o-other": "其它"
     },
     "publish": "确认发布",
     "rewrite": "确认 Rewrite"

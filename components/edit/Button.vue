@@ -7,22 +7,35 @@ import type {
 
 const localePath = useLocalePath()
 
+const iconMap: Record<string, string> = {
+  g: 'lucide:gamepad-2',
+  t: 'lucide:drafting-compass',
+  o: 'lucide:circle-ellipsis'
+}
+
 const {
   tid,
   title: rewriteTitle,
   content: rewriteContent,
   tags: rewriteTags,
   category: rewriteCategory,
+  section: rewriteSection,
   textCount: rewriteTextCount,
   isTopicRewriting
 } = storeToRefs(useTempEditStore())
 
-const { textCount, title, content, tags, category } = storeToRefs(
-  useKUNGalgameEditStore()
-)
+const {
+  textCount,
+  title,
+  content,
+  tags,
+  category,
+  section: editSection
+} = storeToRefs(useKUNGalgameEditStore())
 
 const messageStore = useTempMessageStore()
 const isPublishing = ref(false)
+const section = isPublishing.value ? rewriteSection : editSection
 
 const handlePublish = async () => {
   const requestData: EditCreateTopicRequestData = {
@@ -119,6 +132,16 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 <template>
   <div class="btn-container">
+    <p class="section" v-if="!isTopicRewriting">
+      <Icon class="icon" name="lucide:layout-grid" />
+      <span v-for="(kun, index) in section" :key="index">
+        <Icon :name="iconMap[kun[0]]" />
+        <span>
+          {{ $t(`edit.section.${kun}`) }}
+        </span>
+      </span>
+    </p>
+
     <button
       v-if="!isTopicRewriting"
       class="confirm-btn"
@@ -158,6 +181,31 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   }
 }
 
+.section {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  color: var(--kungalgame-font-color-1);
+
+  .icon {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+  & > span {
+    margin: 3px;
+    padding: 3px 17px;
+    background-color: var(--kungalgame-trans-blue-0);
+    border: 1px solid var(--kungalgame-blue-5);
+    color: var(--kungalgame-blue-5);
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    user-select: none;
+  }
+}
+
 .confirm-btn {
   color: var(--kungalgame-blue-5);
   background-color: var(--kungalgame-trans-white-9);
@@ -180,9 +228,19 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 }
 
 @media (max-width: 700px) {
-  .btn-container button {
-    width: 150px;
-    font-size: 17px;
+  .btn-container {
+    flex-direction: column;
+    align-items: initial;
+
+    button {
+      width: 150px;
+      font-size: 17px;
+      margin: auto;
+    }
+  }
+
+  .section {
+    margin-bottom: 25px;
   }
 }
 </style>

@@ -1,38 +1,53 @@
 export interface Category {
   index: number
   name: string
-  i18n: string
   options: string[]
 }
+
+export const galgameSection = [
+  'g-walkthrough',
+  'g-chatting',
+  'g-seeking',
+  'g-news',
+  'g-releases',
+  'g-other'
+]
+
+export const techniqueSection = [
+  't-crack',
+  't-languages',
+  't-practical',
+  't-linux',
+  't-web',
+  't-android',
+  't-adobe',
+  't-ai',
+  't-algorithm',
+  't-other'
+]
+
+export const otherSection = [
+  'o-anime',
+  'o-comics',
+  'o-music',
+  'o-novel',
+  'o-other'
+]
 
 export const topicCategory: Category[] = [
   {
     index: 1,
     name: 'Galgame',
-    i18n: 'galgameSection',
-    options: ['walkthrough', 'chatting', 'seeking', 'news', 'releases', 'other']
+    options: galgameSection
   },
   {
     index: 2,
     name: 'Technique',
-    i18n: 'techniqueSection',
-    options: [
-      'crack',
-      'languages',
-      'practical',
-      'linux',
-      'web',
-      'android',
-      'adobe',
-      'ai',
-      'algorithm',
-      'other'
-    ]
+    options: techniqueSection
   },
   {
     index: 3,
     name: 'Others',
-    i18n: 'otherSection',
-    options: ['anime', 'comics', 'music', 'novel', 'other']
+    options: otherSection
   }
 ]

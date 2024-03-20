@@ -31,6 +31,5 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 17px;
 }
 </style>

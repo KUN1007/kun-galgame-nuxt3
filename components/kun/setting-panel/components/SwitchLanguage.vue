@@ -10,7 +10,7 @@ const { availableLocales, locale, setLocale } = useI18n()
       class="kun-select"
       :options="availableLocales"
       i18n="header.settings"
-      @set="(value) => setLocale(value)"
+      @set="setLocale"
     >
       <span>{{ $t(`header.settings.${locale}`) }}</span>
     </KunSelect>

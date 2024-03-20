@@ -13,7 +13,7 @@ const props = defineProps<{
 const position = computed(() => (props.position ? props.position : 'bottom'))
 
 const emit = defineEmits<{
-  set: [value: string]
+  set: [value: string, index: number]
 }>()
 
 const handleClickShowLanguage = () => {
@@ -40,7 +40,7 @@ const handleClickShowLanguage = () => {
         <span
           v-for="(kun, index) in props.options"
           :key="index"
-          @click.stop.prevent="emit('set', kun)"
+          @click.stop.prevent="emit('set', kun, index)"
           v-once
         >
           {{ $t(`${props.i18n}.${kun}`) }}

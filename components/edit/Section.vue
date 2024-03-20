@@ -1,5 +1,17 @@
 <script setup lang="ts">
-import { topicCategory } from './utils/category'
+import {
+  galgameSection,
+  techniqueSection,
+  otherSection,
+  topicCategory
+} from './utils/category'
+import { intersection } from './utils/intersection'
+
+const sectionMap: Record<string, string[]> = {
+  Galgame: galgameSection,
+  Technique: techniqueSection,
+  Others: otherSection
+}
 
 const {
   category: rewriteCategory,
@@ -19,6 +31,30 @@ const isShowSelect = (name: string) => {
     editCategory.value.includes(name) || rewriteCategory.value.includes(name)
   )
 }
+
+const handleSetSection = (name: string, value: string) => {
+  if (isTopicRewriting.value) {
+    const section = intersection(rewriteSection.value, sectionMap[name])
+    if (!section.length) {
+      rewriteSection.value.push(value)
+    } else if (!rewriteSection.value.includes(value)) {
+      rewriteSection.value = rewriteSection.value.filter(
+        (item) => item !== section[0]
+      )
+      rewriteSection.value.push(value)
+    }
+  } else {
+    const section = intersection(editSection.value, sectionMap[name])
+    if (!section.length) {
+      editSection.value.push(value)
+    } else if (!editSection.value.includes(value)) {
+      editSection.value = editSection.value.filter(
+        (item) => item !== section[0]
+      )
+      editSection.value.push(value)
+    }
+  }
+}
 </script>
 
 <template>
@@ -32,7 +68,8 @@ const isShowSelect = (name: string) => {
         v-if="isShowSelect(select.name)"
         :styles="{ width: '150px' }"
         :options="select.options"
-        :i18n="`edit.${select.i18n}`"
+        i18n="edit.section"
+        @set="(value) => handleSetSection(select.name, value)"
         position="top"
       >
         <span>{{ $t(`edit.${select.name}`) }}</span>

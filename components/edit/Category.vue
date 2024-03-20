@@ -2,9 +2,14 @@
 import { topicCategory } from './utils/category'
 import type { Category } from './utils/category'
 
-const { category: rewriteCategory, isTopicRewriting } =
-  storeToRefs(useTempEditStore())
-const { category: editCategory } = storeToRefs(useKUNGalgameEditStore())
+const {
+  category: rewriteCategory,
+  section: rewriteSection,
+  isTopicRewriting
+} = storeToRefs(useTempEditStore())
+const { category: editCategory, section: editSection } = storeToRefs(
+  useKUNGalgameEditStore()
+)
 
 const selectedCategories = ref<string[]>([])
 
@@ -31,15 +36,18 @@ const handleClickCategory = (kun: Category) => {
 
   if (isTopicRewriting.value) {
     rewriteCategory.value = selectedCategories.value
-    return
+    rewriteSection.value = []
+  } else {
+    editCategory.value = selectedCategories.value
+    editSection.value = []
   }
-
-  editCategory.value = selectedCategories.value
 }
 </script>
 
 <template>
   <div class="categories">
+    <Icon class="icon" name="lucide:layers-3" />
+
     <span
       class="btn"
       v-for="kun in topicCategory"
@@ -56,7 +64,15 @@ const handleClickCategory = (kun: Category) => {
 .categories {
   height: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 17px 17px 0;
+
+  .icon {
+    font-size: 20px;
+    color: var(--kungalgame-font-color-1);
+    margin-right: 10px;
+  }
 }
 
 .btn {
@@ -72,11 +88,11 @@ const handleClickCategory = (kun: Category) => {
   font-size: 15px;
   white-space: nowrap;
 
-  &:nth-child(1) {
+  &:nth-child(2) {
     border-radius: 17px 0 0 17px;
   }
 
-  &:nth-child(2) {
+  &:nth-child(3) {
     border-left: transparent;
     border-right: transparent;
   }
