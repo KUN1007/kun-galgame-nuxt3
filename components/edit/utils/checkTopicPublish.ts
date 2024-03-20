@@ -84,5 +84,23 @@ export const checkTopicPublish = (
     return false
   }
 
+  if (!topicData.section.length) {
+    useMessage(
+      'Please select at least one section!',
+      '请至少选择一个分区！',
+      'warn'
+    )
+    return false
+  }
+
+  if (topicData.category.length > 2) {
+    useMessage(
+      'Topic with a maximum of 2 sections!',
+      '最多选择两个分区！',
+      'warn'
+    )
+    return false
+  }
+
   return true
 }

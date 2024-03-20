@@ -11,6 +11,7 @@ const TopicSchema = new mongoose.Schema<TopicAttributes>(
     uid: { type: Number, required: true, ref: 'user' },
     tags: { type: [String], required: true },
     category: { type: [String], required: true },
+    section: { type: [String], required: true },
     time: { type: Number, default: Date.now() },
 
     popularity: { type: Number, default: 0 },

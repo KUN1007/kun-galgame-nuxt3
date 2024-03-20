@@ -10,6 +10,7 @@ const updateTopic = async (
   content: string,
   tags: string[],
   category: string[],
+  section: string[],
   edited: number
 ) => {
   const session = await mongoose.startSession()
@@ -17,7 +18,7 @@ const updateTopic = async (
   try {
     await TopicModel.updateOne(
       { tid, uid },
-      { title, content, tags, category, edited }
+      { title, content, tags, category, section, edited }
     )
 
     await updateTagsByTidAndRid(tid, 0, tags, category)
@@ -37,14 +38,21 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const { title, content, tags, category, edited }: EditUpdateTopicRequestData =
-    await readBody(event)
+  const {
+    title,
+    content,
+    tags,
+    category,
+    section,
+    edited
+  }: EditUpdateTopicRequestData = await readBody(event)
 
   const res = checkTopicPublish(
     title,
     content,
     tags,
     category,
+    section,
     parseInt(edited)
   )
   if (res) {
@@ -66,6 +74,7 @@ export default defineEventHandler(async (event) => {
     content,
     tags,
     category,
+    section,
     parseInt(edited)
   )
 

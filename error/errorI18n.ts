@@ -40,6 +40,8 @@ const errorMessagesEN: Record<number, string> = {
   10215: `The compressed image still exceeds 1007 kb. Please upload again.`,
   10216: `Image upload error. The image is null or an array. (-B)`,
   10217: `You have reached the limit of 50 uploaded images today. (-B)`,
+  10218: `Please select three known categories. (-B)`,
+  10219: `Topic with a maximum of 2 sections. Minimum one section. (-B)`,
 
   // Auth Part
   10301: `Sending emails too frequently, please waiting 30s (-B)`,
@@ -101,6 +103,8 @@ const errorMessagesCN: Record<number, string> = {
   10215: `图片压缩后超过 1007 KB, 请重新上传`,
   10216: `图片上传错误，图片为空或数组 (-B)`,
   10217: `您今天上传图片已达 50 张限制 (-B)`,
+  10218: `请选择已知的三个分类 (-B)`,
+  10219: `话题最多 2 个分区, 最少一个分区 (-B)`,
 
   10301: `发送邮件频率过快, 请等待 30 秒 (-B)`,
   10302: `非法的邮箱格式 (-B)`,

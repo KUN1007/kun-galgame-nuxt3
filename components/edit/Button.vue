@@ -43,7 +43,8 @@ const handlePublish = async () => {
     content: content.value,
     time: Date.now().toString(),
     tags: tags.value,
-    category: category.value
+    category: category.value,
+    section: editSection.value
   }
   if (!checkTopicPublish(textCount.value, requestData)) {
     return
@@ -83,6 +84,7 @@ const handleRewrite = async () => {
     content: rewriteContent.value,
     tags: rewriteTags.value,
     category: rewriteCategory.value,
+    section: rewriteSection.value,
     edited: Date.now().toString()
   }
   if (!checkTopicPublish(rewriteTextCount.value, requestData)) {

@@ -6,11 +6,23 @@ import type { H3Event } from 'h3'
 import type { EditCreateTopicRequestData } from '~/types/api/topic'
 
 const readTopicData = async (event: H3Event) => {
-  const { title, content, time, tags, category }: EditCreateTopicRequestData =
-    await readBody(event)
+  const {
+    title,
+    content,
+    time,
+    tags,
+    category,
+    section
+  }: EditCreateTopicRequestData = await readBody(event)
 
-  const res = checkTopicPublish(title, content, tags, category, parseInt(time))
-
+  const res = checkTopicPublish(
+    title,
+    content,
+    tags,
+    category,
+    section,
+    parseInt(time)
+  )
   if (res) {
     kunError(event, res)
     return
@@ -25,7 +37,15 @@ const readTopicData = async (event: H3Event) => {
 
   const deduplicatedTags = Array.from(new Set(tags))
 
-  return { title, content, time, tags: deduplicatedTags, category, uid }
+  return {
+    title,
+    content,
+    time,
+    tags: deduplicatedTags,
+    category,
+    section,
+    uid
+  }
 }
 
 export default defineEventHandler(async (event) => {
@@ -33,7 +53,7 @@ export default defineEventHandler(async (event) => {
   if (!result) {
     return
   }
-  const { title, content, time, tags, category, uid } = result
+  const { title, content, time, tags, category, section, uid } = result
 
   const user = await UserModel.findOne({ uid })
   if (!user) {
@@ -55,6 +75,7 @@ export default defineEventHandler(async (event) => {
       time,
       tags,
       category,
+      section,
       uid
     })
 

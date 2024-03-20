@@ -1,10 +1,13 @@
 import { isValidTimestamp } from '~/utils/validate'
 
+const topicCategory = ['Galgame', 'Technique', 'Others']
+
 export const checkTopicPublish = (
   title: string,
   content: string,
   tags: string[],
   category: string[],
+  section: string[],
   edited: number
 ) => {
   if (!title.trim() || title.trim().length > 40) {
@@ -27,6 +30,16 @@ export const checkTopicPublish = (
 
   if (!category.length || category.length > 2) {
     return 10207
+  }
+
+  for (const c of category) {
+    if (!topicCategory.includes(c)) {
+      return 10218
+    }
+  }
+
+  if (!section.length || section.length > 2) {
+    return 10219
   }
 
   if (!isValidTimestamp(edited)) {

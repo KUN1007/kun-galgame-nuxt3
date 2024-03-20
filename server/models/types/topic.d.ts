@@ -9,6 +9,7 @@ interface TopicAttributes {
   name: string
   tags: string[]
   category: string[]
+  section: string[]
   time: number
 
   popularity: number

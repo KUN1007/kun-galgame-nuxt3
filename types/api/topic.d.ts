@@ -9,6 +9,7 @@ export interface EditCreateTopicRequestData {
   time: string
   tags: string[]
   category: string[]
+  section: string[]
 }
 
 export interface EditUpdateTopicRequestData {
@@ -17,6 +18,7 @@ export interface EditUpdateTopicRequestData {
   content: string
   tags: string[]
   category: string[]
+  section: string[]
   edited: string
 }
 
