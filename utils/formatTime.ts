@@ -4,7 +4,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 dayjs.extend(relativeTime)
 
 const languageOptions = {
-  en: {
+  'en-us': {
     second: 'sec',
     seconds: 'secs',
     minute: 'min',
@@ -20,7 +20,7 @@ const languageOptions = {
     year: 'year',
     years: 'years'
   },
-  zh: {
+  'zh-cn': {
     second: '秒',
     seconds: '秒',
     minute: '分钟',
@@ -40,7 +40,8 @@ const languageOptions = {
 
 const replaceTimeUnits = (input: string, language: string) => {
   const languageOption =
-    (languageOptions as Record<string, any>)[language] || languageOptions.en
+    (languageOptions as Record<string, any>)[language] ||
+    languageOptions['en-us']
 
   const replacements: Record<string, string> = {
     an: '1', // Replace "an" with "1"
@@ -89,14 +90,14 @@ export const formatTimeDifference = (pastTime: number, language: string) => {
   }
 
   if (time() === 'a few seconds') {
-    return language === 'en' ? 'a few secs' : '几秒'
+    return language === 'en-us' ? 'a few secs' : '几秒'
   }
 
   const cnTime = replaceTimeUnits(time(), language).replace(/s\b/g, '')
 
   const enTime = replaceTimeUnits(time(), language)
 
-  return language === 'en' ? enTime : cnTime
+  return language === 'en-us' ? enTime : cnTime
 }
 
 export const formatTimeDifferenceHint = (
@@ -104,6 +105,6 @@ export const formatTimeDifferenceHint = (
   language: string
 ) => {
   const result = formatTimeDifference(pastTime, language)
-  const hintBack = language === 'en' ? ' ago' : '前'
+  const hintBack = language === 'en-us' ? ' ago' : '前'
   return `${result}${hintBack}`
 }

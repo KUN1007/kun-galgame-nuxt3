@@ -5,14 +5,11 @@ const props = defineProps<{
     avatar: string
     name: string
   }
-  time: number
 }>()
 
-const { locale } = useI18n()
 const localePath = useLocalePath()
 
 const user = computed(() => props.user)
-const time = computed(() => props.time)
 
 const handleClickAvatar = (event: MouseEvent) => {
   event.preventDefault()
@@ -36,19 +33,23 @@ const handleClickAvatar = (event: MouseEvent) => {
     </div>
 
     <div class="info">
-      <span class="name">{{ props.user.name }}</span>
+      <slot name="section" />
 
-      <span class="time">
-        {{ formatTimeDifferenceHint(time, locale) }}
-      </span>
+      <div class="user">
+        <span>
+          {{ props.user.name }}
+        </span>
+
+        <slot name="statistic" />
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .kungalgamer {
+  width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -73,13 +74,17 @@ const handleClickAvatar = (event: MouseEvent) => {
 }
 
 .info {
+  width: 100%;
   height: 100%;
   margin-left: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 
-  .time {
+  .user {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     font-size: 13px;
     color: var(--kungalgame-font-color-1);
   }

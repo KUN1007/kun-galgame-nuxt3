@@ -29,7 +29,7 @@ export interface PoolTopic {
     name: string
   }
   views: number
-  category: string[]
+  section: string[]
   tags: string[]
   likesCount: number
   replies: number

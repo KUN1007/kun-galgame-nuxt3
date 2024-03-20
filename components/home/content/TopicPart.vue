@@ -5,6 +5,8 @@ const props = defineProps<{
   topic: HomeTopic
 }>()
 
+const { locale } = useI18n()
+
 const {
   tid,
   title,
@@ -16,8 +18,9 @@ const {
   content,
   upvotesCount,
   tags,
-  category,
-  popularity
+  section,
+  popularity,
+  user
 } = props.topic
 
 const getRepliesCount = computed(() => {
@@ -29,31 +32,37 @@ const getRepliesCount = computed(() => {
   <div class="topic">
     <div class="title">
       <span>{{ title }}</span>
+      <span>{{ formatTimeDifferenceHint(time, locale) }}</span>
     </div>
 
     <div class="info">
-      <HomeContentUserPart :user="props.topic.user" :time="time" />
+      <HomeContentUserPart :user="user">
+        <template #section>
+          <div class="section">
+            <TopicSection :section="section" />
+            <TopicTags class="tags" :tags="tags" :is-show-icon="false" />
+          </div>
+        </template>
 
-      <div>
-        <TopicTags :tags="tags.slice(0, 2)" :is-show-icon="false" />
-
-        <div class="status">
-          <span>
-            <Icon class="icon" name="lucide:mouse-pointer-click" />
-            <span>{{ views }}</span>
-          </span>
-          <span>
-            <Icon class="icon" name="lucide:thumbs-up" />
+        <template #statistic>
+          <div class="status">
             <span>
-              {{ likesCount }}
+              <Icon class="icon" name="lucide:mouse-pointer-click" />
+              <span>{{ views }}</span>
             </span>
-          </span>
-          <span>
-            <Icon class="icon" name="lucide:reply" />
-            <span>{{ getRepliesCount }}</span>
-          </span>
-        </div>
-      </div>
+            <span>
+              <Icon class="icon" name="lucide:thumbs-up" />
+              <span>
+                {{ likesCount }}
+              </span>
+            </span>
+            <span>
+              <Icon class="icon" name="lucide:reply" />
+              <span>{{ getRepliesCount }}</span>
+            </span>
+          </div>
+        </template>
+      </HomeContentUserPart>
     </div>
 
     <div class="introduction">
@@ -75,23 +84,35 @@ const getRepliesCount = computed(() => {
 
 .title {
   width: 100%;
-  display: flex;
   color: var(--kungalgame-blue-5);
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 7px;
+
+  span:last-child {
+    color: var(--kungalgame-font-color-0);
+    font-size: small;
+    font-weight: initial;
+    margin-left: 17px;
+    white-space: nowrap;
+  }
 }
 
 .info {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
 }
 
+.section {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: small;
+}
+
 .status {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
 
   .icon {
     margin-right: 3px;
@@ -124,6 +145,10 @@ const getRepliesCount = computed(() => {
 
 @media (max-width: 700px) {
   .time {
+    display: none;
+  }
+
+  .tags {
     display: none;
   }
 }

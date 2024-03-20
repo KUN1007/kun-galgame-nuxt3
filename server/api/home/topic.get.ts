@@ -43,7 +43,7 @@ const getHomeTopics = async (
     time: topic.time,
     content: topic.content.slice(0, 233),
     tags: topic.tags,
-    category: topic.category,
+    section: topic.section,
     popularity: topic.popularity,
     user: {
       uid: topic.user[0].uid,

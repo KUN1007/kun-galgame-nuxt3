@@ -76,7 +76,7 @@ export interface HomeTopic {
   time: number
   content: string
   tags: string[]
-  category: string[]
+  section: string[]
   popularity: number
   user: HomeUserInfo
   status: number

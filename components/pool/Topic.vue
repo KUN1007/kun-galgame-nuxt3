@@ -16,10 +16,7 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
 
     <PoolUser :user="props.topic.user" :time="props.topic.time" />
 
-    <PoolIntroduction
-      :category="props.topic.category"
-      :tags="props.topic.tags"
-    />
+    <PoolIntroduction :section="props.topic.section" :tags="props.topic.tags" />
 
     <div class="status">
       <span>
