@@ -13,6 +13,7 @@ const props = defineProps<{
     content: string
     tags: string[]
     category: string[]
+    section?: string[]
   }
   toUser: {
     uid: number
@@ -141,6 +142,7 @@ const handleClickShare = () => {
         :content="content.content"
         :tags="content.tags"
         :category="content.category"
+        :section="content.section"
         :to-uid="toUser.uid"
         v-tooltip="{
           message: { en: 'Rewrite', zh: 'Rewrite' },

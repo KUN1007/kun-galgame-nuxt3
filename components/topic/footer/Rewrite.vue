@@ -5,6 +5,7 @@ const {
   content: storeContent,
   tags: storeTags,
   category: storeCategory,
+  section: storeSection,
   isTopicRewriting
 } = storeToRefs(useTempEditStore())
 const { isEdit } = storeToRefs(useTempReplyStore())
@@ -20,6 +21,7 @@ const props = defineProps<{
   content: string
   tags: string[]
   category: string[]
+  section?: string[]
   toUid: number
 }>()
 
@@ -42,6 +44,7 @@ const rewriteTopic = () => {
   storeContent.value = props.content
   storeTags.value = props.tags
   storeCategory.value = props.category
+  storeSection.value = props.section ?? []
   isTopicRewriting.value = true
 
   navigateTo(localePath('/edit'))

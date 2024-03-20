@@ -6,10 +6,10 @@ const props = defineProps<{
 </script>
 
 <template>
-  <p class="tags" v-if="$props.tags.length">
+  <span class="tags" v-if="$props.tags.length">
     <Icon v-if="props.isShowIcon" class="tag" name="lucide:tags" />
     <span v-for="(tag, index) in tags" :key="index">{{ tag }}</span>
-  </p>
+  </span>
 </template>
 
 <style lang="scss" scoped>
