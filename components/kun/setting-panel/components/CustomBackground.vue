@@ -15,8 +15,7 @@ const handleFileChange = async (event: Event) => {
   }
 
   const file = input.files[0]
-  await saveImage(file, 'kun-galgame-custom-bg')
-  showKUNGalgameBackground.value = -1
+  await useKUNGalgameSettingsStore().setCustomBackground(file)
 }
 </script>
 

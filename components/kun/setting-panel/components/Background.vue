@@ -2,14 +2,13 @@
 import { backgroundImages } from './backgroundImage'
 
 const { showKUNGalgameBackground } = storeToRefs(useKUNGalgameSettingsStore())
+
 const restoreBackground = async () => {
-  showKUNGalgameBackground.value = 0
-  await deleteImage('kun-galgame-custom-bg')
+  await useKUNGalgameSettingsStore().setSystemBackground(0)
 }
 
 const handleChangeImage = async (index: number) => {
-  showKUNGalgameBackground.value = index
-  await deleteImage('kun-galgame-custom-bg')
+  await useKUNGalgameSettingsStore().setSystemBackground(index)
 }
 </script>
 

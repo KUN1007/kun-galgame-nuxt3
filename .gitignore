@@ -25,3 +25,5 @@ logs
 
 #backup
 backup
+.vs
+package.json
