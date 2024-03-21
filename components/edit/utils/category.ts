@@ -5,8 +5,8 @@ export interface Category {
 }
 
 export const galgameSection = [
-  'g-walkthrough',
   'g-chatting',
+  'g-walkthrough',
   'g-seeking',
   'g-news',
   'g-releases',
