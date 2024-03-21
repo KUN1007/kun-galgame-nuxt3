@@ -1,11 +1,14 @@
 import type { KUNGalgameSettingsStore } from '../types/settings'
 
+const SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME: string = 'kun-galgame-custom-bg'
+const SETTINGS_DEFAULT_FONT_FAMILY: string = 'system-ui'
+
 export const useKUNGalgameSettingsStore = defineStore({
   id: 'KUNGalgameSettings',
   persist: true,
   state: (): KUNGalgameSettingsStore => ({
     showKUNGalgamePageTransparency: 77,
-    showKUNGalgameFontStyle: 'system-ui',
+    showKUNGalgameFontStyle: SETTINGS_DEFAULT_FONT_FAMILY,
     showKUNGalgameBackground: 0
   }),
   actions: {
@@ -30,12 +33,37 @@ export const useKUNGalgameSettingsStore = defineStore({
         )
       }
     },
+    // Set the system background
+    async setSystemBackground(index: number) {
+      this.showKUNGalgameBackground = index
+      await deleteImage(SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME)
+    },
+    // Set the image of custom
+    async setCustomBackground(file: File) {
+      await saveImage(file, SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME)
+      this.showKUNGalgameBackground = -1
+    },
+    // Get the image of current setting option
+    async getCurrentBackground() {
+      const backgroundImageBlobData = await getImage(
+        SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME
+      )
+      if (this.showKUNGalgameBackground === 0) {
+        return 'none'
+      }
+
+      if (this.showKUNGalgameBackground === -1 && backgroundImageBlobData) {
+        return URL.createObjectURL(backgroundImageBlobData)
+      }
+
+      return `/bg/bg${this.showKUNGalgameBackground}.webp`
+    },
     // Reset all settings; because it interacts with the document
     // , Pinia reactivity is not effective
     async setKUNGalgameSettingsRecover() {
       this.$reset()
-      this.setKUNGalgameFontStyle('system-ui')
-      await deleteImage('kun-galgame-custom-bg')
+      this.setKUNGalgameFontStyle(SETTINGS_DEFAULT_FONT_FAMILY)
+      await deleteImage(SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME)
     }
   }
 })

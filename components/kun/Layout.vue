@@ -2,27 +2,15 @@
 const { showKUNGalgameBackground } = storeToRefs(useKUNGalgameSettingsStore())
 
 const imageURL = ref('')
-const getCurrentBackground = async () => {
-  const backgroundImageBlobData = await getImage('kun-galgame-custom-bg')
-  if (showKUNGalgameBackground.value === 0) {
-    return 'none'
-  }
-
-  if (showKUNGalgameBackground.value === -1 && backgroundImageBlobData) {
-    return URL.createObjectURL(backgroundImageBlobData)
-  }
-
-  return `/bg/bg${showKUNGalgameBackground.value}.webp`
-}
 
 onMounted(async () => {
-  imageURL.value = await getCurrentBackground()
+  imageURL.value = await useKUNGalgameSettingsStore().getCurrentBackground()
 })
 
 watch(
   () => showKUNGalgameBackground.value,
   async () => {
-    imageURL.value = await getCurrentBackground()
+    imageURL.value = await useKUNGalgameSettingsStore().getCurrentBackground()
   }
 )
 </script>
