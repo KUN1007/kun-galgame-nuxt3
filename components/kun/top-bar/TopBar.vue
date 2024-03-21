@@ -35,7 +35,6 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
   height: 58px;
   box-shadow: 0 2px 4px 0 var(--kungalgame-trans-blue-1);
   background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -44,6 +43,17 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
   margin-bottom: 17px;
   flex-shrink: 0;
   color: var(--kungalgame-font-color-3);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    backdrop-filter: blur(10px);
+  }
 }
 
 .settings-panel {

@@ -102,7 +102,6 @@ onBeforeUnmount(() => {
   display: flex;
   transition: opacity 0.3s ease;
   justify-content: center;
-  align-items: center;
   color: var(--kungalgame-font-color-3);
 }
 
@@ -118,6 +117,8 @@ onBeforeUnmount(() => {
   box-shadow: var(--kungalgame-shadow-0);
   border-radius: 17px;
   padding: 10px;
+  margin-top: 10vh;
+  margin-bottom: auto;
   width: 40vw;
   max-width: 500px;
   min-height: 200px;

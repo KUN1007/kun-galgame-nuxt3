@@ -34,6 +34,12 @@ export const otherSection = [
   'o-other'
 ]
 
+export const iconMap: Record<string, string> = {
+  g: 'lucide:gamepad-2',
+  t: 'lucide:drafting-compass',
+  o: 'lucide:circle-ellipsis'
+}
+
 export const topicCategory: Category[] = [
   {
     index: 1,

@@ -124,27 +124,18 @@ onMounted(async () => {
   position: absolute;
   top: 50px;
   right: 80px;
-  opacity: 0.9;
 }
 
 .triangle1 {
   position: absolute;
-  top: 1px;
+  top: -1px;
   width: 0;
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 17px solid var(--kungalgame-white);
+  border-bottom: 17px solid var(--kungalgame-trans-white-5);
+  filter: drop-shadow(0px -1px 1px var(--kungalgame-trans-blue-2));
   z-index: 1;
-}
-
-.triangle2 {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 17px solid var(--kungalgame-blue-2);
 }
 
 .kungalgamer {
@@ -152,8 +143,8 @@ onMounted(async () => {
   top: 16px;
   transform: translateX(-43%);
   width: 130px;
-  background-color: var(--kungalgame-white);
-  border: 1px solid var(--kungalgame-blue-2);
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(10px);
   border-radius: 5px;
   position: absolute;
   display: flex;

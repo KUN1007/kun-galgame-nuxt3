@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { topBarItem } from './topBarItem'
 import 'animate.css'
 
 const Hamburger = defineAsyncComponent(() => import('./Hamburger.vue'))
@@ -7,9 +6,6 @@ const MessageBox = defineAsyncComponent(() => import('../message/Box.vue'))
 
 const { showKUNGalgameHamburger, showKUNGalgameMessageBox, messageStatus } =
   storeToRefs(useTempSettingStore())
-
-const navItemNum = topBarItem.length
-const navItemLength = `${navItemNum}00px`
 
 watch(
   () => useRouteName().value,
@@ -77,13 +73,23 @@ onMounted(async () => {
     </div>
 
     <div class="top-bar">
-      <span v-for="kun in topBarItem" :key="kun.index">
-        <NuxtLinkLocale :to="{ path: kun.router }">
-          {{ $t(`header.${kun.name}`) }}
-        </NuxtLinkLocale>
-      </span>
+      <KunPopover>
+        <span class="item">{{ $t('header.topic') }}</span>
+        <template #content>
+          <div class="topic-menu">
+            <span>
+              <NuxtLinkLocale to="/pool">
+                {{ $t('header.all') }}
+              </NuxtLinkLocale>
+            </span>
+            <span>{{ $t('header.category') }}</span>
+          </div>
+        </template>
+      </KunPopover>
 
-      <div class="box"></div>
+      <span class="item">{{ $t('header.publish') }}</span>
+      <span class="item">{{ $t('header.about') }}</span>
+      <span class="item">{{ $t('header.home') }}</span>
     </div>
   </div>
 </template>
@@ -105,72 +111,6 @@ onMounted(async () => {
   height: 100%;
 }
 
-$navNumber: v-bind(navItemNum);
-
-.top-bar {
-  position: relative;
-  text-align: center;
-  width: v-bind(navItemLength);
-  align-items: center;
-  display: flex;
-
-  .box {
-    border-radius: 2px;
-    bottom: 0;
-    height: 7px;
-    left: 0;
-    position: absolute;
-    transition: 0.5s;
-    width: calc(100% / $navNumber);
-
-    &:hover {
-      z-index: -1;
-    }
-  }
-
-  a {
-    display: block;
-    color: var(--kungalgame-blue-5);
-    width: 100%;
-    height: 100%;
-  }
-
-  span {
-    cursor: pointer;
-    display: block;
-    font-weight: bold;
-    line-height: 58px;
-    width: 100%;
-
-    &:nth-child(1):hover ~ .box {
-      background-color: var(--kungalgame-red-3);
-      left: calc(100% / $navNumber * 0);
-    }
-
-    &:nth-child(2):hover ~ .box {
-      background-color: var(--kungalgame-blue-3);
-      left: calc(100% / $navNumber * 1);
-    }
-
-    &:nth-child(3):hover ~ .box {
-      background-color: var(--kungalgame-yellow-2);
-      left: calc(100% / $navNumber * 2);
-    }
-
-    &:nth-child(4):hover ~ .box {
-      filter: hue-rotate(240deg);
-      background-color: var(--kungalgame-blue-3);
-      left: calc(100% / $navNumber * 3);
-    }
-
-    &:nth-child(5):hover ~ .box {
-      filter: hue-rotate(60deg);
-      background-color: var(--kungalgame-blue-3);
-      left: calc(100% / $navNumber * 4);
-    }
-  }
-}
-
 .kungalgame {
   display: flex;
   align-items: center;
@@ -179,12 +119,64 @@ $navNumber: v-bind(navItemNum);
   a {
     display: flex;
     align-items: center;
+    font-size: 20px;
     color: var(--kungalgame-font-color-3);
 
     img {
       width: 50px;
       height: 50px;
       margin-right: 30px;
+    }
+  }
+}
+
+.top-bar {
+  text-align: center;
+  width: 300px;
+  align-items: center;
+  display: flex;
+  margin-left: 30px;
+
+  .item {
+    cursor: pointer;
+    display: block;
+    line-height: 58px;
+    width: 100%;
+  }
+
+  .topic-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--kungalgame-trans-white-5);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    white-space: nowrap;
+    padding: 10px;
+
+    span {
+      padding: 10px;
+
+      a {
+        position: relative;
+        color: var(--kungalgame-blue-5);
+
+        &::before {
+          content: '';
+          position: absolute;
+          bottom: -3px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background-color: var(--kungalgame-blue-5);
+          transform: scaleX(0);
+          transition: transform 0.2s ease;
+        }
+
+        &:hover::before {
+          transform: scaleX(1);
+        }
+      }
     }
   }
 }

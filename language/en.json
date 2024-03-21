@@ -6,11 +6,12 @@
   },
   "header":{
     "name": "KUN Visual Novel",
-    "pool": "POOL",
-    "create": "CREATE",
-    "technique": "TECHNIQUE",
-    "about": "ABOUT",
-    "return": "HOME",
+    "topic": "Topic",
+    "all": "All Topics",
+    "category": "Category",
+    "publish": "Publish",
+    "about": "About",
+    "home": "Home",
     "hamburger":{
       "name": "KUN Visual Novel",
       "pool": "Pool",
