@@ -20,7 +20,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
       enter-active-class="animate__animated animate__jackInTheBox animate__faster"
       leave-active-class="animate__animated animate__fadeOutRight animate__faster"
     >
-      <KeepAlive :exclude="['PageWidth', 'Font']">
+      <KeepAlive>
         <KUNGalgameSettingsPanel
           v-if="showKUNGalgamePanel"
           @close="showKUNGalgamePanel = false"

@@ -6,10 +6,16 @@
   },
   "header":{
     "name": "KUN Visual Novel",
-    "topic": "Topic",
-    "all": "All Topics",
-    "category": "Category",
-    "publish": "Publish",
+    "topic": {
+      "name": "Topic",
+      "all": "All Topics",
+      "category": "Category"
+    },
+    "publish": {
+      "name": "Publish",
+      "topic": "Publish Topic",
+      "galgame": "Publish VN Resource"
+    },
     "about": "About",
     "home": "Home",
     "hamburger":{

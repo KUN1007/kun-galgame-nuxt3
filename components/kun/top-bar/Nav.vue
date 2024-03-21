@@ -72,25 +72,7 @@ onMounted(async () => {
       </NuxtLinkLocale>
     </div>
 
-    <div class="top-bar">
-      <KunPopover>
-        <span class="item">{{ $t('header.topic') }}</span>
-        <template #content>
-          <div class="topic-menu">
-            <span>
-              <NuxtLinkLocale to="/pool">
-                {{ $t('header.all') }}
-              </NuxtLinkLocale>
-            </span>
-            <span>{{ $t('header.category') }}</span>
-          </div>
-        </template>
-      </KunPopover>
-
-      <span class="item">{{ $t('header.publish') }}</span>
-      <span class="item">{{ $t('header.about') }}</span>
-      <span class="item">{{ $t('header.home') }}</span>
-    </div>
+    <KunTopBarNavBar />
   </div>
 </template>
 
@@ -130,57 +112,6 @@ onMounted(async () => {
   }
 }
 
-.top-bar {
-  text-align: center;
-  width: 300px;
-  align-items: center;
-  display: flex;
-  margin-left: 30px;
-
-  .item {
-    cursor: pointer;
-    display: block;
-    line-height: 58px;
-    width: 100%;
-  }
-
-  .topic-menu {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--kungalgame-trans-white-5);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    white-space: nowrap;
-    padding: 10px;
-
-    span {
-      padding: 10px;
-
-      a {
-        position: relative;
-        color: var(--kungalgame-blue-5);
-
-        &::before {
-          content: '';
-          position: absolute;
-          bottom: -3px;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background-color: var(--kungalgame-blue-5);
-          transform: scaleX(0);
-          transition: transform 0.2s ease;
-        }
-
-        &:hover::before {
-          transform: scaleX(1);
-        }
-      }
-    }
-  }
-}
-
 @media (max-width: 1000px) {
   .kungalgame {
     span {
@@ -193,9 +124,6 @@ onMounted(async () => {
 }
 
 @media (max-width: 700px) {
-  .top-bar {
-    display: none;
-  }
   .kungalgame {
     display: none;
   }

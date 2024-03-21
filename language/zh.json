@@ -6,10 +6,16 @@
   },
   "header":{
     "name": "鲲 Galgame",
-    "topic": "话题",
-    "all": "所有话题",
-    "category": "话题分类",
-    "publish": "发布",
+    "topic": {
+      "name": "话题",
+      "all": "所有话题",
+      "category": "话题分类"
+    },
+    "publish": {
+      "name": "发布",
+      "topic": "发布话题",
+      "galgame": "发布 Galgame 资源"
+    },
     "about": "关于",
     "home": "主页",
     "hamburger":{

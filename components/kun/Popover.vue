@@ -9,9 +9,12 @@ const showPopover = ref(false)
     @mouseleave="showPopover = false"
   >
     <slot></slot>
-    <div v-if="showPopover" class="popover">
-      <slot name="content"></slot>
-    </div>
+
+    <Transition name="slide-fade">
+      <div v-if="showPopover" class="popover">
+        <slot name="content"></slot>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -28,5 +31,19 @@ const showPopover = ref(false)
   position: absolute;
   display: flex;
   justify-content: center;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.1s ease-in;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(10px);
+  opacity: 0;
 }
 </style>
