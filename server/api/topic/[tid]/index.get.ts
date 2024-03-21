@@ -52,6 +52,7 @@ export default defineEventHandler(async (event) => {
       status: topic.status,
       share: topic.share,
       category: topic.category,
+      section: topic.section,
       popularity: topic.popularity,
       upvote_time: topic.upvote_time
     }

@@ -22,6 +22,7 @@ const {
   status,
   share,
   category,
+  section,
   popularity,
   upvote_time
 } = topicData.topicData
@@ -52,7 +53,10 @@ const loliStatus = computed(() => {
 
       <div class="content">
         <div class="top">
-          <TopicTags v-if="tags" :tags="tags" :is-show-icon="true" />
+          <div class="section">
+            <TopicSection :section="section" />
+            <TopicTags v-if="tags" :tags="tags" :is-show-icon="true" />
+          </div>
 
           <span class="time">
             {{ dayjs(time).format('YYYY-MM-DD HH:mm:ss') }}
@@ -96,7 +100,8 @@ const loliStatus = computed(() => {
           title,
           content,
           tags,
-          category
+          category,
+          section
         }"
         :to-user="{
           uid: user.uid,
@@ -154,6 +159,12 @@ const loliStatus = computed(() => {
   text-align: center;
   justify-content: space-between;
   flex-grow: 1;
+  padding: 0 17px;
+
+  .section {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
   .time {
     display: flex;
@@ -161,7 +172,7 @@ const loliStatus = computed(() => {
     align-items: center;
     font-size: 14px;
     color: var(--kungalgame-font-color-1);
-    padding: 0 17px;
+    margin-left: 17px;
   }
 }
 

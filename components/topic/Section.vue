@@ -31,6 +31,7 @@ const iconMap: Record<string, string> = {
   padding: 3px 10px;
   border-radius: 7px;
   margin-right: 5px;
+  font-size: small;
 
   .icon {
     font-size: 17px;

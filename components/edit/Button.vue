@@ -35,7 +35,7 @@ const {
 
 const messageStore = useTempMessageStore()
 const isPublishing = ref(false)
-const section = isPublishing.value ? rewriteSection : editSection
+const section = isTopicRewriting.value ? rewriteSection : editSection
 
 const handlePublish = async () => {
   const requestData: EditCreateTopicRequestData = {
@@ -134,7 +134,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 <template>
   <div class="btn-container">
-    <p class="section" v-if="!isTopicRewriting">
+    <p class="section">
       <Icon class="icon" name="lucide:layout-grid" />
       <span v-for="(kun, index) in section" :key="index">
         <Icon :name="iconMap[kun[0]]" />
