@@ -28,20 +28,21 @@ const props = defineProps<{
       </span>
     </div>
 
-    <NuxtLinkLocale to="/section" class="section-content">
+    <!-- TODO: -->
+    <NuxtLinkLocale to="/" class="section-content">
       <div class="topic">
-        <span>New Topic: Ren sukisukisukisukisukisukisukisuki</span>
+        <span>New Topic: Ren suki | test page | developing</span>
         <p>Published by Ren - 1 min ago</p>
       </div>
 
       <div class="statistic">
         <div class="count">
-          <span>Topic Count</span>
+          <span>Topics</span>
           <span>{{ formatNumberWithCommas(1007) }}</span>
         </div>
 
         <div class="views">
-          <span>Views Count</span>
+          <span>Views</span>
           <span>{{ formatNumberWithCommas(100708) }}</span>
         </div>
       </div>
@@ -116,6 +117,7 @@ const props = defineProps<{
 
 .section-content {
   padding: 17px;
+  padding-right: 0;
   display: flex;
   justify-content: space-between;
   position: relative;

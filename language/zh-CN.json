@@ -452,7 +452,8 @@
   "category": {
     "galgame": "Galgame",
     "technique": "技术交流",
-    "others": "其它"
+    "others": "其它",
+    "update": "页面数据十七分钟更新一次"
   },
   "page403":{
     "permission": "您没有权限访问这个页面",
@@ -483,6 +484,10 @@
     "bylaw": {
       "title": "执行条例",
       "description": "鲲 Galgame 执行条例, 涉及用户, 话题, 萌萌点相关, 目的是让论坛的运行机制更加透明，并不是规矩，我们没有规矩"
+    },
+    "category": {
+      "title": "话题分类",
+      "description": "话题分类 / 分区,Galgame攻略,Galgame闲聊,Galgame寻求资源,Galgame资讯,Galgame新作消息, Web,编程语言,Linux,实用技术,AI,逆向工程,Android,Adobe,算法, 动漫,漫画,音乐,轻小说"
     },
     "contact": {
       "title": "加入 / 联系我们",

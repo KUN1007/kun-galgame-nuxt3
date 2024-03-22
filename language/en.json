@@ -451,7 +451,8 @@
   "category": {
     "galgame": "VNs",
     "technique": "Technique",
-    "others": "Others"
+    "others": "Others",
+    "update": "Page data updates every seventeen minutes."
   },
   "page403":{
     "permission": "You don't have permission to access this page",
@@ -482,6 +483,10 @@
     "bylaw": {
         "title": "Bylaws",
         "description": "KUN Visual Novel bylaws, covering users, topics, and moemoepoints. The goal is to make the forum's operation more transparent; these are not rules, as we do not have strict rules."
+    },
+    "category": {
+      "title": "Topic Category",
+      "description": "Topic categories / sections,visualnovel walkthrough,visualnovel chatting,visualnovel seeking,visualnovel news,visualnovel releases, web,languages,linux,practical,ai,crack,android,adobe,algorithm, anime,comics,music,novel"
     },
     "contact": {
         "title": "Join / Contact Us",

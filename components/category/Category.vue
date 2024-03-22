@@ -3,6 +3,13 @@ type Category = 'galgame' | 'technique' | 'others'
 const availableCategory: Category[] = ['galgame', 'technique', 'others']
 
 const { category } = storeToRefs(useKUNGalgameCategoryStore())
+
+// const { data } = await useFetch(`/api/category`, {
+//   method: 'GET',
+//   query: { category },
+//   watch: false,
+//   ...kungalgameResponseHandler
+// })
 </script>
 
 <template>
@@ -19,6 +26,9 @@ const { category } = storeToRefs(useKUNGalgameCategoryStore())
     </div>
 
     <CategorySection :section="category" />
+
+    <p class="hint">{{ $t('category.update') }}</p>
+    <KunFooter />
   </div>
 </template>
 
@@ -64,5 +74,14 @@ const { category } = storeToRefs(useKUNGalgameCategoryStore())
     font-size: 25px;
     transition: all 0.2s;
   }
+}
+
+.hint {
+  display: flex;
+  justify-content: flex-end;
+  font-size: small;
+  font-style: oblique;
+  color: var(--kungalgame-font-color-0);
+  margin: 10px 0;
 }
 </style>
