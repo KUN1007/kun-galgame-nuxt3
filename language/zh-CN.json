@@ -449,6 +449,11 @@
     "confirm": "确定赞助",
     "back": "返回主页"
   },
+  "category": {
+    "galgame": "Galgame",
+    "technique": "技术交流",
+    "others": "其它"
+  },
   "page403":{
     "permission": "您没有权限访问这个页面",
     "back": "点击返回主页"

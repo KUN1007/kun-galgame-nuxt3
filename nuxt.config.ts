@@ -73,7 +73,7 @@ export default defineNuxtConfig({
       {
         code: 'zh-cn',
         iso: 'zh-CN',
-        file: 'zh.json'
+        file: 'zh-CN.json'
       }
     ],
     baseUrl: process.env.KUN_GALGAME_URL,

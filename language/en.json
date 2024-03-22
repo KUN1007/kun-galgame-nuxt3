@@ -448,6 +448,11 @@
     "confirm": "Confirm Donate",
     "back": "Back Home"
   },
+  "category": {
+    "galgame": "VNs",
+    "technique": "Technique",
+    "others": "Others"
+  },
   "page403":{
     "permission": "You don't have permission to access this page",
     "back": "Click to return to the homepage"
