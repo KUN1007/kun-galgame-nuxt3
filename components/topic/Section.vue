@@ -27,11 +27,11 @@ const iconMap: Record<string, string> = {
   margin: 3px;
   display: flex;
   align-items: center;
-  color: var(--kungalgame-white);
   padding: 3px 10px;
   border-radius: 7px;
   margin-right: 5px;
   font-size: small;
+  font-weight: bold;
 
   .icon {
     font-size: 17px;
@@ -40,14 +40,17 @@ const iconMap: Record<string, string> = {
 }
 
 .g {
-  background-color: var(--kungalgame-blue-5);
+  color: var(--kungalgame-blue-5);
+  border: 1.5px solid var(--kungalgame-blue-5);
 }
 
 .t {
-  background-color: var(--kungalgame-green-4);
+  color: var(--kungalgame-green-4);
+  border: 1.5px solid var(--kungalgame-green-4);
 }
 
 .o {
-  background-color: var(--kungalgame-yellow-3);
+  color: var(--kungalgame-pink-4);
+  border: 1.5px solid var(--kungalgame-pink-4);
 }
 </style>

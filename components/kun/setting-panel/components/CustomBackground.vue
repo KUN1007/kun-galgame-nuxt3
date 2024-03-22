@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { showKUNGalgameBackground } = storeToRefs(useKUNGalgameSettingsStore())
-
 const input = ref<HTMLElement>()
 
 const handleCustomBackground = () => {

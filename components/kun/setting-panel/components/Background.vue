@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { backgroundImages } from './backgroundImage'
 
-const { showKUNGalgameBackground } = storeToRefs(useKUNGalgameSettingsStore())
-
 const restoreBackground = async () => {
   await useKUNGalgameSettingsStore().setSystemBackground(0)
 }

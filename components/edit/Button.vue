@@ -1,17 +1,12 @@
 <script setup lang="ts">
 import { checkTopicPublish } from './utils/checkTopicPublish'
+import { iconMap } from './utils/category'
 import type {
   EditCreateTopicRequestData,
   EditUpdateTopicRequestData
 } from '~/types/api/topic'
 
 const localePath = useLocalePath()
-
-const iconMap: Record<string, string> = {
-  g: 'lucide:gamepad-2',
-  t: 'lucide:drafting-compass',
-  o: 'lucide:circle-ellipsis'
-}
 
 const {
   tid,

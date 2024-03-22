@@ -5,8 +5,8 @@ export interface Category {
 }
 
 export const galgameSection = [
-  'g-walkthrough',
   'g-chatting',
+  'g-walkthrough',
   'g-seeking',
   'g-news',
   'g-releases',
@@ -33,6 +33,12 @@ export const otherSection = [
   'o-novel',
   'o-other'
 ]
+
+export const iconMap: Record<string, string> = {
+  g: 'lucide:gamepad-2',
+  t: 'lucide:drafting-compass',
+  o: 'lucide:circle-ellipsis'
+}
 
 export const topicCategory: Category[] = [
   {
