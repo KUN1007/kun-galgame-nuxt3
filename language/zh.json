@@ -183,7 +183,9 @@
     "sec": "安全提升",
     "refactor": "代码重构",
     "docs": "文档修改",
-    "test": "测试用例"
+    "test": "测试用例",
+    "creator": "创建者",
+    "completer": "完成者"
   },
   "balance":{
     "pl": "收支公示",

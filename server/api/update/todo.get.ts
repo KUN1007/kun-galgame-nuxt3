@@ -10,6 +10,8 @@ const getTodos = async (page: number, limit: number, language: Language) => {
     .limit(limit)
     .lean()
 
+  const rows: number = Math.ceil(await TodoModel.find().countDocuments() / limit)
+
   const data: Todo[] = todos.map((todo) => ({
     todoId: todo.todo_id,
     status: todo.status,
@@ -22,7 +24,10 @@ const getTodos = async (page: number, limit: number, language: Language) => {
     completedTime: todo.completed_time
   }))
 
-  return data
+  return {
+    data,
+    rows
+  }
 }
 
 export default defineEventHandler(async (event) => {
@@ -32,7 +37,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const topics = await getTodos(parseInt(page), parseInt(limit), language)
+  const todos = await getTodos(parseInt(page), parseInt(limit), language)
 
-  return topics
+  return todos
 })

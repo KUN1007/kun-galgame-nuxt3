@@ -183,7 +183,9 @@
     "sec": "Security Enhancement",
     "refactor": "Code Refactoring",
     "docs": "Documentation Changes",
-    "test": "Test Cases"
+    "test": "Test Cases",
+    "creator": "Creator",
+    "completer": "Completer"
   },
   "balance":{
     "pl": "Income and Expenditure Statement",
