@@ -14,7 +14,11 @@ const getTodos = async (page: number, limit: number, language: Language) => {
     todoId: todo.todo_id,
     status: todo.status,
     content: language === 'en-us' ? todo.content_en_us : todo.content_zh_cn,
+    creator: todo.creator,
+    creator_id: todo.creator_id,
     time: todo.time,
+    completer: todo.completer,
+    completer_id: todo.completer_id,
     completedTime: todo.completed_time
   }))
 

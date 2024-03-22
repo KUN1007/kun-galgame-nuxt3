@@ -26,7 +26,11 @@ export interface Todo {
   todoId: number
   status: number
   content: string
+  creator: string
+  creator_id: number
   time: number
+  completer: string
+  completer_id: number
   completedTime: number
 }
 

@@ -9,7 +9,11 @@ const TodoSchema = new mongoose.Schema<TodoAttributes>(
     status: { type: Number, default: 0 },
     content_en_us: { type: String, require: true },
     content_zh_cn: { type: String, require: true },
+    creator: { type: String, require: true },
+    creator_id: { type: Number, require: true },
     time: { type: Number, default: Date.now() },
+    completer: { type: String, require: true },
+    completer_id: { type: Number, require: true },
     completed_time: { type: Number, default: 0 }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
