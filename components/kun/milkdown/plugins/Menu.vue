@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { callCommand } from '@milkdown/utils'
+import { insert, callCommand } from '@milkdown/utils'
 import {
   createCodeBlockCommand,
   updateCodeBlockLanguageCommand,
@@ -23,9 +23,15 @@ const props = defineProps<{
 
 const { get, loading } = props.editorInfo
 const input = ref<HTMLElement>()
+const isShowInsertLink = ref(false)
 
 const call = <T,>(command: CmdKey<T>, payload?: T) => {
   return get()?.action(callCommand(command, payload))
+}
+
+const handelInsertLink = (href: string, text: string) => {
+  get()?.action(insert(`[${text}](${href})`))
+  isShowInsertLink.value = false
 }
 
 // Select a language TODO:
@@ -122,8 +128,13 @@ const handleClickUploadImage = () => {
       <Icon name="lucide:minus" />
     </div>
 
-    <div aria-label="kun-galgame-italic" @click="call(toggleLinkCommand.key)">
+    <div aria-label="kun-galgame-italic" @click="isShowInsertLink=true">
       <Icon name="lucide:link" />
+      <KunMilkdownPluginsInsertLink 
+        :show="isShowInsertLink"
+        @insert="handelInsertLink"
+        @cancel="isShowInsertLink = false"
+      />
     </div>
 
     <div aria-label="kun-galgame-italic" @click="handleClickCodeBlock">

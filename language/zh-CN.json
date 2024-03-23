@@ -263,6 +263,13 @@
       "o-novel": "轻小说",
       "o-other": "其它"
     },
+    "link": {
+      "title": "插入超链接",
+      "URLLabel": "链接URL",
+      "textLabel": "链接文字（可选）",
+      "confirmInsert": "插入",
+      "cancelInsert": "取消"
+    },
     "publish": "确认发布",
     "rewrite": "确认 Rewrite"
   },
