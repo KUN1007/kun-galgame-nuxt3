@@ -63,44 +63,31 @@ export default defineEventHandler(async (event) => {
     kunError(event, 10104)
     return
   }
+  const hashedPassword = await hash(password, 7)
 
-  const session = await mongoose.startSession()
-  session.startTransaction()
+  const user = new UserModel({
+    name,
+    email,
+    password: hashedPassword,
+    ip
+  })
+  await user.save()
 
-  try {
-    const hashedPassword = await hash(password, 7)
+  const { token, refreshToken } = await createTokens(user.uid, user.name)
+  deleteCookie(event, 'kungalgame-is-navigate-to-login')
+  setCookie(event, 'kungalgame-moemoe-refresh-token', refreshToken, {
+    httpOnly: true,
+    maxAge: 30 * 24 * 60 * 60 * 1000
+  })
 
-    const user = new UserModel({
-      name,
-      email,
-      password: hashedPassword,
-      ip
-    })
-    await user.save()
-
-    const { token, refreshToken } = await createTokens(user.uid, user.name)
-    deleteCookie(event, 'kungalgame-is-navigate-to-login')
-    setCookie(event, 'kungalgame-moemoe-refresh-token', refreshToken, {
-      httpOnly: true,
-      maxAge: 30 * 24 * 60 * 60 * 1000
-    })
-
-    const userInfo: LoginResponseData = {
-      uid: user.uid,
-      name: user.name,
-      avatar: user.avatar,
-      moemoepoint: user.moemoepoint,
-      roles: user.roles,
-      token
-    }
-
-    await session.commitTransaction()
-    session.endSession()
-
-    return userInfo
-  } catch (error) {
-    await session.abortTransaction()
-    session.endSession()
-    throw error
+  const userInfo: LoginResponseData = {
+    uid: user.uid,
+    name: user.name,
+    avatar: user.avatar,
+    moemoepoint: user.moemoepoint,
+    roles: user.roles,
+    token
   }
+
+  return userInfo
 })
