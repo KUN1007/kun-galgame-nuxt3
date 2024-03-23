@@ -92,11 +92,11 @@ export default defineEventHandler(async (event) => {
     await createTagsByTidAndRid(savedTopic.tid, 0, tags, category)
 
     await session.commitTransaction()
-    session.endSession()
 
     return savedTopic.tid
   } catch (error) {
     await session.abortTransaction()
-    session.endSession()
+  } finally {
+    await session.endSession()
   }
 })

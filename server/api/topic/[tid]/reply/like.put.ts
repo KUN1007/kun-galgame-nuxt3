@@ -44,10 +44,10 @@ const updateReplyLike = async (
     await createDedupMessage(uid, to_uid, 'liked', reply?.content ?? '', tid)
 
     await session.commitTransaction()
-    session.endSession()
   } catch (error) {
     await session.abortTransaction()
-    session.endSession()
+  } finally {
+    await session.endSession()
   }
 }
 

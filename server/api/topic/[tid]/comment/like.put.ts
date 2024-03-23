@@ -45,10 +45,10 @@ export default defineEventHandler(async (event) => {
     }
 
     await session.commitTransaction()
-    session.endSession()
   } catch (error) {
     await session.abortTransaction()
-    session.endSession()
+  } finally {
+    await session.endSession()
   }
 
   return 'MOEMOE like comment successfully!'

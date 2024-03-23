@@ -24,10 +24,10 @@ const updateTopic = async (
     await updateTagsByTidAndRid(tid, 0, tags, category)
 
     await session.commitTransaction()
-    session.endSession()
   } catch (error) {
     await session.abortTransaction()
-    session.endSession()
+  } finally {
+    await session.endSession()
   }
 }
 

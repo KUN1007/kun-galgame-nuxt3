@@ -41,11 +41,11 @@ export default defineEventHandler(async (event) => {
     }
 
     await session.commitTransaction()
-    session.endSession()
 
     return responseData
   } catch (error) {
     await session.abortTransaction()
-    session.endSession()
+  } finally {
+    await session.endSession()
   }
 })

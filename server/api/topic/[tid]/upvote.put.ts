@@ -51,10 +51,10 @@ const updateTopicUpvote = async (
     await createMessage(uid, to_uid, 'upvoted', topic?.content ?? '', tid)
 
     await session.commitTransaction()
-    session.endSession()
   } catch (error) {
     await session.abortTransaction()
-    session.endSession()
+  } finally {
+    await session.endSession()
   }
 }
 

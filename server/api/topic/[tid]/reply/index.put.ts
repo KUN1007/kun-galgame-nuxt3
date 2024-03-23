@@ -14,18 +14,15 @@ const updateReply = async (
   const session = await mongoose.startSession()
   session.startTransaction()
   try {
-    await ReplyModel.updateOne(
-      { rid, r_uid: uid },
-      { tags, edited, content }
-    )
+    await ReplyModel.updateOne({ rid, r_uid: uid }, { tags, edited, content })
 
     await updateTagsByTidAndRid(tid, rid, tags, [])
 
     await session.commitTransaction()
-    session.endSession()
   } catch (error) {
     await session.abortTransaction()
-    session.endSession()
+  } finally {
+    await session.endSession()
   }
 }
 

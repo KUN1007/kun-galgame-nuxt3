@@ -37,10 +37,10 @@ const updateReplyDislike = async (
     await UserModel.updateOne({ uid: to_uid }, { $inc: { dislike: amount } })
 
     await session.commitTransaction()
-    session.endSession()
   } catch (error) {
     await session.abortTransaction()
-    session.endSession()
+  } finally {
+    await session.endSession()
   }
 }
 
