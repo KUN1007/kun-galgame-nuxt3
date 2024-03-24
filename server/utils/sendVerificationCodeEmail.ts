@@ -36,7 +36,13 @@ export const sendVerificationCodeEmail = async (
 
   const transporter = createTransport(
     SMPTransport({
+      pool: {
+        pool: true
+      },
       host: env.KUN_VISUAL_NOVEL_EMAIL_HOST,
+      port: Number(env.KUN_VISUAL_NOVEL_EMAIL_PORT) || 587,
+      secure: false,
+      requireTLS: true,
       auth: {
         user: env.KUN_VISUAL_NOVEL_EMAIL_ACCOUNT,
         pass: env.KUN_VISUAL_NOVEL_EMAIL_PASSWORD
