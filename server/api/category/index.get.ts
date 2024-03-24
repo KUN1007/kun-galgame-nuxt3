@@ -14,6 +14,14 @@ const getCategoryData = async (category: string) => {
       }
     },
     {
+      $lookup: {
+        from: 'user',
+        localField: 'uid',
+        foreignField: 'uid',
+        as: 'user'
+      }
+    },
+    {
       $project: {
         _id: 0,
         section: '$_id',
@@ -22,13 +30,15 @@ const getCategoryData = async (category: string) => {
           time: '$latestTopic.time'
         },
         user: {
-          uid: '$latestTopic.uid'
+          uid: '$latestTopic.user[0].uid',
+          name: '$latestTopic.user[0].name'
         },
         topics: 1,
         views: 1
       }
     }
   ])
+
   return data
 }
 
@@ -44,5 +54,5 @@ export default defineEventHandler(async (event) => {
     category.charAt(0).toUpperCase() + category.slice(1)
   const result = await getCategoryData(capitalizeFirstLetter)
 
-  console.log(result)
+  return result
 })

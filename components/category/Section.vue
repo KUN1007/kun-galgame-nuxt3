@@ -28,7 +28,6 @@ const props = defineProps<{
       </span>
     </div>
 
-    <!-- TODO: -->
     <NuxtLinkLocale to="/" class="section-content">
       <div class="topic">
         <span>New Topic: Ren suki | test page | developing</span>

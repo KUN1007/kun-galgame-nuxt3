@@ -3,9 +3,14 @@ export interface CategoryUser {
   uid: string
 }
 
-export interface CategoryResponseData {
-  category: string
+export interface CategoryTopic {
   title: string
+  time: number
+}
+
+export interface CategoryResponseData {
+  section: string[]
+  topic: CategoryTopic
   user: CategoryUser
   topics: number
   views: number

@@ -4,12 +4,12 @@ const availableCategory: Category[] = ['galgame', 'technique', 'others']
 
 const { category } = storeToRefs(useKUNGalgameCategoryStore())
 
-// const { data } = await useFetch(`/api/category`, {
-//   method: 'GET',
-//   query: { category },
-//   watch: false,
-//   ...kungalgameResponseHandler
-// })
+const { data } = await useFetch(`/api/category`, {
+  method: 'GET',
+  query: { category },
+  watch: false,
+  ...kungalgameResponseHandler
+})
 </script>
 
 <template>
