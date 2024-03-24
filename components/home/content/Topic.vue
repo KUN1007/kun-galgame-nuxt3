@@ -21,9 +21,8 @@ const iconItem: IconItem[] = [
   }
 ]
 
-const { data, pending } = await useFetch('/api/home/nav', {
+const { data, pending } = await useLazyFetch('/api/home/nav', {
   method: 'GET',
-  lazy: true,
   query: { type: typeToGet }
 })
 </script>

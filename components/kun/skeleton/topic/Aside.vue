@@ -18,7 +18,6 @@ const count = 5
   display: flex;
   justify-content: center;
   margin-top: 7px;
-  background-color: var(--kungalgame-trans-white-5);
   margin: 0 auto;
   padding: 12px;
 

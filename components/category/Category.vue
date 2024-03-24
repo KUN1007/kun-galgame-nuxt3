@@ -1,32 +1,13 @@
 <script setup lang="ts">
-import type { CategoryResponseData } from '~/types/api/category'
-
 type Category = 'galgame' | 'technique' | 'others'
 const availableCategory: Category[] = ['galgame', 'technique', 'others']
 const { category } = storeToRefs(useKUNGalgameCategoryStore())
 
-const data = ref<CategoryResponseData[]>([])
-const isLoading = ref(false)
-
-const getCategoryData = async (cat: Category) => {
-  isLoading.value = true
-  const { data: newData } = await useFetch(`/api/category`, {
-    method: 'GET',
-    query: { category: cat },
-    watch: false,
-    ...kungalgameResponseHandler
-  })
-  isLoading.value = false
-
-  return newData.value ?? []
-}
-
-data.value = await getCategoryData(category.value)
-
-const handleSwitchCategory = async (cat: Category) => {
-  data.value = await getCategoryData(cat)
-  category.value = cat
-}
+const { data, pending } = await useLazyFetch(`/api/category`, {
+  method: 'GET',
+  query: { category },
+  ...kungalgameResponseHandler
+})
 </script>
 
 <template>
@@ -35,15 +16,15 @@ const handleSwitchCategory = async (cat: Category) => {
       <span
         v-for="(cat, index) in availableCategory"
         :key="index"
-        @click="handleSwitchCategory(cat)"
+        @click="category = cat"
         :class="category === cat ? 'active' : ''"
       >
         {{ $t(`category.${cat}`) }}
       </span>
     </div>
 
-    <CategorySection v-if="data && !isLoading" :sections="data" />
-    <KunSkeletonCategory v-if="isLoading" />
+    <CategorySection v-if="data && !pending" :sections="data" />
+    <KunSkeletonCategory v-if="pending" />
 
     <p class="hint">{{ $t('category.update') }}</p>
     <KunFooter />

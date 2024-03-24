@@ -19,7 +19,6 @@ const count = 10
   height: 100%;
   display: flex;
   justify-content: center;
-  background-color: var(--kungalgame-trans-white-5);
   border-radius: 3px;
   margin: 0 auto;
   padding: 12px;

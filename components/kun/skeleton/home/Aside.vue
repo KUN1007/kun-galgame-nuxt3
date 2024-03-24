@@ -19,7 +19,6 @@ const count = 7
 }
 
 ul {
-  background-color: var(--kungalgame-trans-white-5);
   border-radius: 3px;
   margin: 0 auto;
   padding: 10px;
