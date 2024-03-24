@@ -7,7 +7,6 @@ const { category } = storeToRefs(useKUNGalgameCategoryStore())
 const { data } = await useFetch(`/api/category`, {
   method: 'GET',
   query: { category },
-  watch: false,
   ...kungalgameResponseHandler
 })
 </script>
@@ -25,7 +24,7 @@ const { data } = await useFetch(`/api/category`, {
       </span>
     </div>
 
-    <CategorySection :section="category" />
+    <CategorySection v-if="data" :sections="data" />
 
     <p class="hint">{{ $t('category.update') }}</p>
     <KunFooter />

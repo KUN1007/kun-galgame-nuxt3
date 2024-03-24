@@ -1,24 +1,28 @@
 import TopicModel from '~/server/models/topic'
+import type { CategoryResponseData } from '~/types/api/category'
+
+export const categoryMap: Record<string, RegExp> = {
+  Galgame: /^g-/,
+  Technique: /^t-/,
+  Others: /^o-/
+}
 
 const getCategoryData = async (category: string) => {
-  const data = await TopicModel.aggregate([
+  const data: CategoryResponseData[] = await TopicModel.aggregate([
     {
-      $match: { category }
+      $unwind: '$section'
+    },
+    {
+      $match: {
+        section: categoryMap[category]
+      }
     },
     {
       $group: {
         _id: '$section',
         topics: { $sum: 1 },
         views: { $sum: '$views' },
-        latestTopic: { $first: '$$ROOT' }
-      }
-    },
-    {
-      $lookup: {
-        from: 'user',
-        localField: 'uid',
-        foreignField: 'uid',
-        as: 'user'
+        latestTopic: { $last: '$$ROOT' }
       }
     },
     {
@@ -26,12 +30,9 @@ const getCategoryData = async (category: string) => {
         _id: 0,
         section: '$_id',
         topic: {
+          tid: '$latestTopic.tid',
           title: '$latestTopic.title',
           time: '$latestTopic.time'
-        },
-        user: {
-          uid: '$latestTopic.user[0].uid',
-          name: '$latestTopic.user[0].name'
         },
         topics: 1,
         views: 1

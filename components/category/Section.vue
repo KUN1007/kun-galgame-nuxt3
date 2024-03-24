@@ -1,48 +1,36 @@
 <script setup lang="ts">
-import {
-  galgameSection,
-  techniqueSection,
-  otherSection
-} from '~/components/edit/utils/category'
+import type { CategoryResponseData } from '~/types/api/category'
 
-const sectionMap: Record<string, string[]> = {
-  galgame: galgameSection,
-  technique: techniqueSection,
-  others: otherSection
-}
+const { locale } = useI18n()
 
 const props = defineProps<{
-  section: string
+  sections: CategoryResponseData[]
 }>()
 </script>
 
 <template>
-  <section
-    class="section"
-    v-for="(sec, index) in sectionMap[props.section]"
-    :key="index"
-  >
+  <section class="section" v-for="(sec, index) in props.sections" :key="index">
     <div class="section-title">
       <span>
-        {{ $t(`edit.section.${sec}`) }}
+        {{ $t(`edit.section.${sec.section}`) }}
       </span>
     </div>
 
-    <NuxtLinkLocale to="/" class="section-content">
+    <NuxtLinkLocale to="/" class="content">
       <div class="topic">
-        <span>New Topic: Ren suki | test page | developing</span>
-        <p>Published by Ren - 1 min ago</p>
+        <span>{{ sec.topic.title }}</span>
+        <p>Published {{ formatTimeDifferenceHint(sec.topic.time, locale) }}</p>
       </div>
 
       <div class="statistic">
         <div class="count">
           <span>Topics</span>
-          <span>{{ formatNumberWithCommas(1007) }}</span>
+          <span>{{ formatNumberWithCommas(sec.topics) }}</span>
         </div>
 
         <div class="views">
           <span>Views</span>
-          <span>{{ formatNumberWithCommas(100708) }}</span>
+          <span>{{ formatNumberWithCommas(sec.views) }}</span>
         </div>
       </div>
     </NuxtLinkLocale>
@@ -50,47 +38,22 @@ const props = defineProps<{
 </template>
 
 <style lang="scss" scoped>
-.root {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: calc(100dvh - 75px);
-  max-width: 64rem;
-  margin: 0 auto;
-  color: var(--kungalgame-font-color-3);
-}
-
-.category {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  padding: 17px;
-}
-
-.category-title {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 17px;
-
-  span {
-    font-size: 25px;
-  }
-}
-
 .section {
   margin-bottom: 20px;
 
   .section-title {
     transition: transform 0.2s ease;
+
+    span {
+      margin-right: 10px;
+    }
   }
 
   &:hover {
     .section-title {
       transform: translateX(20px) translateY(7px);
     }
-    .section-content {
+    .content {
       &::before {
         width: 100%;
         z-index: -1;
@@ -114,13 +77,22 @@ const props = defineProps<{
   }
 }
 
-.section-content {
-  padding: 17px;
+.content {
+  padding: 10px;
+  padding-left: 17px;
   padding-right: 0;
   display: flex;
   justify-content: space-between;
   position: relative;
   color: var(--kungalgame-font-color-3);
+
+  .topic {
+    p {
+      font-size: small;
+      margin-top: 7px;
+      color: var(--kungalgame-font-color-0);
+    }
+  }
 
   &::before {
     content: '';

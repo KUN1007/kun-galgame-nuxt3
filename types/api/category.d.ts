@@ -1,17 +1,12 @@
-export interface CategoryUser {
-  name: string
-  uid: string
-}
-
 export interface CategoryTopic {
+  tid: number
   title: string
   time: number
 }
 
 export interface CategoryResponseData {
-  section: string[]
+  section: string
   topic: CategoryTopic
-  user: CategoryUser
   topics: number
   views: number
 }
