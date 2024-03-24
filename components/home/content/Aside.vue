@@ -9,7 +9,7 @@ import { asideItem } from '../utils/asideItem'
       :key="kun.index"
       v-tooltip="{
         message: $t(`mainPage.asideActive.${kun.name}`),
-        position: 'right',
+        position: 'right'
       }"
     >
       <NuxtLinkLocale
@@ -37,11 +37,6 @@ import { asideItem } from '../utils/asideItem'
     height: 1px;
     flex-grow: 1;
     font-size: 25px;
-    border-top: 2px solid var(--kungalgame-blue-5);
-
-    &:first-child {
-      border-top: none;
-    }
 
     a {
       width: 100%;

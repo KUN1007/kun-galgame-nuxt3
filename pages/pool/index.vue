@@ -178,7 +178,7 @@ onBeforeUnmount(() => {
 .topic-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 17px;
+  gap: 10px;
 }
 
 .load {
