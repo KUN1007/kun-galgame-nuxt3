@@ -37,6 +37,7 @@ const { data } = await useFetch(`/api/category`, {
   height: 100%;
   border-radius: 10px;
   background-color: var(--kungalgame-trans-white-5);
+  box-shadow: var(--kungalgame-shadow-0);
   backdrop-filter: blur(10px);
   padding: 17px;
 }

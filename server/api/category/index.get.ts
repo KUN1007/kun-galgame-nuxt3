@@ -8,6 +8,13 @@ export const categoryMap: Record<string, RegExp> = {
 }
 
 const getCategoryData = async (category: string) => {
+  const categoryDataCache: CategoryResponseData[] | null = await useStorage(
+    'redis'
+  ).getItem(`categoryDataCache:${category}`)
+  if (categoryDataCache) {
+    return categoryDataCache
+  }
+
   const data: CategoryResponseData[] = await TopicModel.aggregate([
     {
       $unwind: '$section'
@@ -39,6 +46,10 @@ const getCategoryData = async (category: string) => {
       }
     }
   ])
+
+  await useStorage('redis').setItem(`categoryDataCache:${category}`, data, {
+    ttl: 17 * 60
+  })
 
   return data
 }

@@ -452,7 +452,8 @@
     "galgame": "VNs",
     "technique": "Technique",
     "others": "Others",
-    "update": "Page data updates every seventeen minutes."
+    "update": "Page data updates every seventeen minutes.",
+    "publish": "Published at"
   },
   "page403":{
     "permission": "You don't have permission to access this page",

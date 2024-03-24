@@ -453,7 +453,8 @@
     "galgame": "Galgame",
     "technique": "技术交流",
     "others": "其它",
-    "update": "页面数据十七分钟更新一次"
+    "update": "页面数据十七分钟更新一次",
+    "publish": "发布于"
   },
   "page403":{
     "permission": "您没有权限访问这个页面",

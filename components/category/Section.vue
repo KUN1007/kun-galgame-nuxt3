@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { CategoryResponseData } from '~/types/api/category'
 
+const localePath = useLocalePath()
 const { locale } = useI18n()
 
 const props = defineProps<{
@@ -18,8 +19,15 @@ const props = defineProps<{
 
     <NuxtLinkLocale to="/" class="content">
       <div class="topic">
-        <span>{{ sec.topic.title }}</span>
-        <p>Published {{ formatTimeDifferenceHint(sec.topic.time, locale) }}</p>
+        <span
+          @click.prevent="navigateTo(localePath(`/topic/${sec.topic.tid}`))"
+        >
+          {{ sec.topic.title }}
+        </span>
+        <p>
+          {{ $t('category.publish') }}
+          {{ formatTimeDifferenceHint(sec.topic.time, locale) }}
+        </p>
       </div>
 
       <div class="statistic">
@@ -53,6 +61,7 @@ const props = defineProps<{
     .section-title {
       transform: translateX(20px) translateY(7px);
     }
+
     .content {
       &::before {
         width: 100%;
@@ -87,6 +96,14 @@ const props = defineProps<{
   color: var(--kungalgame-font-color-3);
 
   .topic {
+    span {
+      color: var(--kungalgame-blue-5);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
     p {
       font-size: small;
       margin-top: 7px;
