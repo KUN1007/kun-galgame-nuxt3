@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import { asideItem } from '../utils/asideItem'
-
-const props = defineProps<{
-  isActive: boolean
-}>()
 </script>
 
 <template>
-  <div class="item" v-if="props.isActive && asideItem.length">
+  <div class="item">
     <span v-for="kun in asideItem" :key="kun.index">
       <NuxtLinkLocale :to="{ path: kun.router }">
         <Icon class="icon" :name="kun.icon" />
@@ -16,7 +12,7 @@ const props = defineProps<{
     </span>
   </div>
 
-  <HomeContentTopic v-if="props.isActive" />
+  <HomeContentTopic />
 </template>
 
 <style lang="scss" scoped>

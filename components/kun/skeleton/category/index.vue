@@ -1,14 +1,11 @@
 <script setup lang="ts">
-const count = 10
+const count = 5
 </script>
 
 <template>
-  <div v-for="(_, index) in count" :key="index" class="skeleton">
+  <div class="skeleton">
     <ul>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
+      <li v-for="(_, index) in count" :key="index"></li>
     </ul>
   </div>
 </template>
@@ -16,18 +13,15 @@ const count = 10
 <style lang="scss" scoped>
 .skeleton {
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
-  background-color: var(--kungalgame-trans-white-5);
-  border-radius: 3px;
-  margin: 0 auto;
-  padding: 12px;
 }
 
 ul {
-  padding: 0;
-  margin: 0;
+  background-color: var(--kungalgame-trans-white-5);
+  border-radius: 3px;
+  margin: 0 auto;
+  padding: 10px;
   width: 100%;
 
   li {
@@ -39,22 +33,12 @@ ul {
     );
     border-radius: 3px;
     width: 100%;
-    height: 10px;
+    height: 77px;
     list-style: none;
     background-size: 400% 100%;
-    margin-top: 10px;
+    margin-top: 20px;
     background-position: 100% 50%;
     animation: skeleton 1.7s ease infinite;
-
-    &:first-child {
-      margin-top: 0;
-      width: 50%;
-      height: 20px;
-    }
-
-    &:last-child {
-      width: 77%;
-    }
   }
 }
 

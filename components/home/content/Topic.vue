@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import type { TypeToGet, HomeNavTopic } from '~/types/api/home'
+import type { TypeToGet } from '~/types/api/home'
 
 const { locale } = useI18n()
 
 const { typeToGet } = storeToRefs(usePersistKUNGalgameHomeStore())
-const topics = ref<HomeNavTopic[]>([])
 
 interface IconItem {
   name: TypeToGet
@@ -22,21 +21,11 @@ const iconItem: IconItem[] = [
   }
 ]
 
-const getTopics = async (type: TypeToGet) => {
-  const { data } = await useFetch('/api/home/nav', {
-    method: 'GET',
-    query: { type },
-    watch: false
-  })
-  return data.value ?? []
-}
-
-topics.value = await getTopics(typeToGet.value)
-
-const handleClickIcon = async (icon: TypeToGet) => {
-  topics.value = await getTopics(icon)
-  typeToGet.value = icon
-}
+const { data, pending } = await useFetch('/api/home/nav', {
+  method: 'GET',
+  lazy: true,
+  query: { type: typeToGet }
+})
 </script>
 
 <template>
@@ -46,7 +35,7 @@ const handleClickIcon = async (icon: TypeToGet) => {
         v-for="(icon, index) in iconItem"
         :key="index"
         :class="typeToGet === icon.name ? 'active' : ''"
-        @click="handleClickIcon(icon.name)"
+        @click="typeToGet = icon.name"
         v-tooltip="{
           message: $t(`mainPage.asideActive.${icon.name}`),
           position: 'bottom'
@@ -56,7 +45,12 @@ const handleClickIcon = async (icon: TypeToGet) => {
       </span>
     </div>
 
-    <div class="content" v-for="(kun, index) in topics" :key="index">
+    <div
+      class="content"
+      v-show="!pending"
+      v-for="(kun, index) in data"
+      :key="index"
+    >
       <NuxtLinkLocale :to="`/topic/${kun.tid}`">
         <div class="topic">
           <div class="name">{{ kun.title }}</div>
@@ -72,6 +66,8 @@ const handleClickIcon = async (icon: TypeToGet) => {
         </div>
       </NuxtLinkLocale>
     </div>
+
+    <KunSkeletonHomeAside v-show="pending" />
   </div>
 </template>
 
@@ -99,7 +95,7 @@ const handleClickIcon = async (icon: TypeToGet) => {
     border-radius: 10px;
 
     &:hover {
-      background-color: var(--kungalgame-trans-blue-2);
+      background-color: var(--kungalgame-trans-blue-1);
     }
   }
 }

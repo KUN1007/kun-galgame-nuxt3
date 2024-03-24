@@ -8,7 +8,7 @@ const handleFold = () => {
 }
 
 watch(
-  isActiveMainPageAside,
+  () => isActiveMainPageAside.value,
   () => {
     asideWidth.value = isActiveMainPageAside.value ? '240px' : '40px'
   },
@@ -34,13 +34,9 @@ watch(
       </span>
     </div>
 
-    <div class="item-active" v-if="isActiveMainPageAside">
-      <HomeContentAsideActive :is-active="isActiveMainPageAside" />
-    </div>
+    <HomeContentAsideActive v-if="isActiveMainPageAside" />
 
-    <div class="item" v-if="!isActiveMainPageAside">
-      <HomeContentAside v-if="!isActiveMainPageAside" />
-    </div>
+    <HomeContentAside v-if="!isActiveMainPageAside" />
   </div>
 </template>
 

@@ -48,9 +48,9 @@ ul {
   li {
     background-image: linear-gradient(
       90deg,
-      var(--kungalgame-trans-blue-2) 25%,
-      var(--kungalgame-trans-pink-0) 37%,
-      var(--kungalgame-trans-blue-2) 63%
+      var(--kungalgame-trans-blue-0) 25%,
+      var(--kungalgame-trans-blue-2) 37%,
+      var(--kungalgame-trans-blue-0) 63%
     );
     border-radius: 3px;
     width: 100%;
