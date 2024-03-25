@@ -84,16 +84,11 @@ watch(
             </TopicKUNGalgamerInfo>
 
             <div class="right">
-              <div class="top">
-                <div class="reply">
-                  {{ `${$t('topic.panel.to')} @` }}
-
-                  <span @click="scrollToReplyId = reply.to_floor">
-                    {{ reply.to_user.name }}
-                  </span>
-                </div>
-
-                <TopicRewrite v-if="reply.edited" :time="reply.edited" />
+              <div class="reply">
+                {{ `${$t('topic.panel.to')} @` }}
+                <span @click="scrollToReplyId = reply.to_floor">
+                  {{ reply.to_user.name }}
+                </span>
               </div>
 
               <TopicContent :content="reply.content" />
@@ -125,7 +120,6 @@ watch(
           :info="{
             tid: reply.tid,
             rid: reply.rid,
-            views: 0,
             likes: reply.likes,
             dislikes: reply.dislikes,
             upvotes: reply.upvotes
@@ -185,6 +179,7 @@ watch(
   justify-content: center;
   align-items: center;
   padding: 10px;
+  color: var(--kungalgame-font-color-3);
 
   &:last-child {
     margin-bottom: 20px;
@@ -238,8 +233,10 @@ watch(
 .bottom {
   display: flex;
   justify-content: space-between;
+  user-select: none;
 
   .time {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     font-size: 13px;
@@ -248,7 +245,6 @@ watch(
     margin-top: 5px;
 
     .rewrite {
-      display: none;
       color: var(--kungalgame-blue-5);
     }
   }
@@ -260,34 +256,51 @@ watch(
   flex-direction: column;
 }
 
-.top {
+.reply {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin: 10px 0;
   letter-spacing: 1px;
-}
-
-.reply,
-.reply-mobile {
-  font-size: 17px;
-  color: var(--kungalgame-font-color-3);
 
   span {
-    color: var(--kungalgame-blue-5);
-    font-weight: 500;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: var(--kungalgame-blue-5);
+    font-weight: bold;
+    margin-left: 5px;
 
-    &:hover {
-      text-decoration: underline;
-      text-decoration-thickness: 2px;
+    &::after {
+      content: '➢';
+      color: var(--kungalgame-red-4);
+      margin-left: 10px;
+      transform: translateX(0);
+      transition: transform 0.2s ease;
+    }
+
+    &:hover::after {
+      transform: translateX(10px);
     }
   }
 }
 
 .reply-mobile {
+  font-size: 17px;
   display: none;
   margin-left: 17px;
+  color: var(--kungalgame-font-color-3);
+  align-items: center;
+
+  span {
+    color: var(--kungalgame-blue-5);
+    margin-left: 10px;
+
+    &::after {
+      content: '➢';
+      color: var(--kungalgame-red-4);
+      margin-left: 10px;
+    }
+  }
 }
 
 .comment {
@@ -329,16 +342,8 @@ watch(
     flex-direction: column;
   }
 
-  .top {
+  .reply {
     display: none;
-  }
-
-  .bottom {
-    .time {
-      .rewrite {
-        display: block;
-      }
-    }
   }
 
   .icon {
@@ -346,7 +351,7 @@ watch(
   }
 
   .reply-mobile {
-    display: block;
+    display: flex;
   }
 }
 </style>

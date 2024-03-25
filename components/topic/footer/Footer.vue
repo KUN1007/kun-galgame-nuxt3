@@ -3,7 +3,6 @@ const props = defineProps<{
   info: {
     tid: number
     rid: number
-    views: number
     likes: number[]
     dislikes: number[]
     upvotes: number[]
@@ -68,18 +67,6 @@ const handleClickShare = () => {
             position: 'bottom'
           }"
         />
-
-        <li
-          v-if="info.views > 0"
-          class="views"
-          v-tooltip="{
-            message: { en: 'Views', zh: '浏览数' },
-            position: 'bottom'
-          }"
-        >
-          <span class="icon"><Icon name="lucide:mouse-pointer-click" /></span>
-          {{ info.views }}
-        </li>
 
         <!-- Like -->
         <TopicFooterLike

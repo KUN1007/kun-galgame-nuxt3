@@ -83,7 +83,28 @@ const loliStatus = computed(() => {
 
           <span class="line"></span>
 
-          <TopicRewrite v-if="edited" :time="edited" />
+          <span
+            v-if="views > 0"
+            class="views"
+            v-tooltip="{
+              message: { en: 'Views', zh: '浏览数' },
+              position: 'bottom'
+            }"
+          >
+            <span class="icon"><Icon name="lucide:mouse-pointer-click" /></span>
+            {{ views }}
+          </span>
+
+          <s
+            class="rewrite"
+            v-if="edited"
+            v-tooltip="{
+              message: { en: 'Rewrite Time', zh: 'Rewrite 时间' },
+              position: 'bottom'
+            }"
+          >
+            × {{ dayjs(edited).format('YYYY-MM-DD HH:mm:ss') }}
+          </s>
         </div>
       </div>
 
@@ -91,7 +112,6 @@ const loliStatus = computed(() => {
         :info="{
           tid,
           rid: 0,
-          views,
           likes,
           dislikes,
           upvotes
@@ -198,6 +218,7 @@ const loliStatus = computed(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  user-select: none;
 
   .status {
     display: flex;
@@ -226,6 +247,30 @@ const loliStatus = computed(() => {
     width: 100%;
     height: 1px;
     background-color: var(--kungalgame-blue-5);
+  }
+
+  .views {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    margin: 0 10px;
+
+    span {
+      display: flex;
+      margin-right: 3px;
+    }
+
+    &:nth-child(1) span {
+      color: var(--kungalgame-red-4);
+    }
+  }
+
+  .rewrite {
+    white-space: nowrap;
+    font-size: small;
+    color: var(--kungalgame-blue-5);
+    margin-right: 10px;
   }
 }
 

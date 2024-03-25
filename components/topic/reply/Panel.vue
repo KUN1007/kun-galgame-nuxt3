@@ -80,7 +80,6 @@ const handleClosePanel = async () => {
   position: fixed;
   bottom: 0;
   width: 100%;
-  opacity: 0.92;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,7 +93,8 @@ const handleClosePanel = async () => {
   max-height: 77vh;
   overflow-y: scroll;
   color: var(--kungalgame-font-color-3);
-  background-color: var(--kungalgame-white);
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(10px);
   border-radius: 5px;
   border: 1px solid var(--kungalgame-blue-5);
   box-shadow: var(--shadow);
