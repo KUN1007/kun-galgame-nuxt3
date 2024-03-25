@@ -30,6 +30,11 @@ const updateTopicFavorite = async (
         [isPush ? '$push' : '$pull']: { favorites: uid }
       }
     )
+
+    await UserModel.updateOne(
+      { uid },
+      { [isPush ? '$push' : '$pull']: { favorite_topic: tid } }
+    )
     return
   }
 
