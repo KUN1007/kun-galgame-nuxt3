@@ -43,6 +43,12 @@ export const navBarRoute: nav[] = [
     permission: [1, 2, 3, 4]
   },
   {
+    index: 6,
+    name: 'favorite',
+    router: 'topic-favorite',
+    permission: [1, 2, 3, 4]
+  },
+  {
     index: 7,
     name: 'reply',
     router: 'reply',

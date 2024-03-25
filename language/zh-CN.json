@@ -307,6 +307,7 @@
       "published": "发的话题",
       "liked": "赞的话题",
       "upvote": "推的话题",
+      "favorite": "收藏话题",
       "reply": "发的回复",
       "comment": "发的评论"
     },

@@ -17,6 +17,9 @@ const tidArray = computed(() => {
   if (action.value === 'upvote') {
     return props.user.upvoteTopic
   }
+  if (action.value === 'favorite') {
+    return props.user.favoriteTopic
+  }
   return []
 })
 </script>

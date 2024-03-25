@@ -17,6 +17,7 @@ export interface UserInfo {
   comment: number[]
   likeTopic: number[]
   upvoteTopic: number[]
+  favoriteTopic: number[]
 }
 
 export interface UserUpdateAvatarRequestData {
