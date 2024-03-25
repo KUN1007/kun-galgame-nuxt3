@@ -50,17 +50,17 @@ useHead({
       <div class="title">用户协议</div>
       <div class="content">
         <p>
-          当您注册成为 KUNGalgame 的会员时，您即成为 KUNGalgame
-          的用户，这时我们认为您已经确认以下用户协议：
+          当您注册成为鲲 Galgame 论坛的会员时，您即成为鲲 Galgame
+          论坛的用户，这时我们认为您已经确认以下用户协议：
         </p>
-        <p>1. 用户所发表的一切言论与 KUNGalgame 没有任何关系</p>
+        <p>1. 用户所发表的一切言论与鲲 Galgame 论坛没有任何关系</p>
         <p>
-          2. KUNGalgame 只是一个开源的、合作的 Web 开发项目，目的是供所有人学习
-          Web 知识
+          2. 鲲 Galgame 论坛只是一个开源的、合作的 Web
+          开发项目，目的是供所有人学习 Web 知识
         </p>
         <p>3. 用户做出不利于我们开源项目维护的行为时，我们有权对用户进行封禁</p>
-        <p>4. 因用户账号被盗等造成的损失，KUNGalgame 概不承担</p>
-        <p>协议版本 - V 1.0.0</p>
+        <p>4. 因用户账号被盗等造成的损失, 鲲 Galgame 论坛概不承担</p>
+        <p>协议版本 - V 1.0.1</p>
       </div>
 
       <div class="nav">

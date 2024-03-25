@@ -274,13 +274,13 @@
       "loginPassword": "密码"
     },
     "overlay":{
-      "title": "欢迎注册 KUNgalgame",
+      "title": "欢迎注册鲲 Galgame 论坛",
       "world": "世界上最",
       "moe": "萌",
       "forum": "的 Galgame 论坛",
       "login": "登录",
       "home": "欢迎回家",
-      "kun": "KUNgalgame 给你",
+      "kun": "鲲 Galgame 论坛给你",
       "hug": "最温暖的拥抱",
       "register": "注册"
     },
@@ -476,7 +476,7 @@
   "seo": {
     "agreement": {
       "title": "用户协议",
-      "description": "1. 用户所发表的一切言论与 KUNGalgame 没有任何关系, 2. KUNGalgame 只是一个开源的、合作的 Web 开发项目，目的是供所有人学习 Web 知识, 3. 用户做出不利于我们开源项目维护的行为时，我们有权对用户进行封禁 4. 因用户账号被盗等造成的损失，KUNGalgame 概不承担"
+      "description": "1. 用户所发表的一切言论与鲲 Galgame 没有任何关系, 2. 鲲 Galgame 只是一个开源的、合作的 Web 开发项目，目的是供所有人学习 Web 知识, 3. 用户做出不利于我们开源项目维护的行为时，我们有权对用户进行封禁 4. 因用户账号被盗等造成的损失, 鲲 Galgame 概不承担"
     },
     "balance": {
       "title": "收支公示",

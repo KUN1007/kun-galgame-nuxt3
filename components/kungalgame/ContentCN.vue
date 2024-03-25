@@ -137,7 +137,7 @@
     </p>
     <br />
 
-    <h3>鲲 Galgame 论坛创建的意义在于：</h3>
+    <h3>创建意义</h3>
 
     <ul class="list">
       <li>

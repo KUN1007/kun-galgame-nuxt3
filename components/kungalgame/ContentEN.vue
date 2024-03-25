@@ -143,7 +143,7 @@
     </p>
     <br />
 
-    <h3>The Significance of KUN Visual Novel Creation:</h3>
+    <h3>Significance</h3>
 
     <ul class="list">
       <li>

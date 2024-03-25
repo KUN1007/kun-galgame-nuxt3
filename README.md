@@ -44,7 +44,7 @@ In addition, the construction of KUN Visual Novel has received support from nume
 
   
 
-### The Significance of KUNGalgame Creation:
+### Significance
 
 *   Actively promote truly good games, ensuring that everyone uses websites like VNDB to see real visualized data and avoid being misled by "experts."
 *   **Avoid the negative aspects of modern internet trends, such as the culture of praising and criticizing, valuing criticism as a virtue, etc.**
