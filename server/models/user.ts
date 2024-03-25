@@ -41,7 +41,7 @@ const UserSchema = new mongoose.Schema<UserAttributes>(
     like_topic: { type: [Number], default: [] },
     dislike_topic: { type: [Number], default: [] },
     upvote_topic: { type: [Number], default: [] },
-    reply_topic: { type: [Number], default: [] }
+    favorite_topic: { type: [Number], default: [] }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )

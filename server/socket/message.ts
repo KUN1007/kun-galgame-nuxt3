@@ -1,3 +1,8 @@
+/*
+ * WARNING! This code doesn't follow Nuxt3's hot reloading.
+ * After changing the code, the entire project needs to be restarted.
+ */
+
 import jwt from 'jsonwebtoken'
 import { defineIOHandler } from '../../modules/socket/runtime/helpers'
 import { parse } from 'cookie-es'
@@ -23,7 +28,7 @@ export default defineIOHandler((io) => {
       ) as KUNGalgamePayload
       socket.payload = payload
       next()
-    } catch (error) {}
+    } catch (_) {}
   })
 
   io.on('connection', (socket: KUNGalgameSocket) => {
@@ -47,6 +52,15 @@ export default defineIOHandler((io) => {
 
       if (likedUserSocket) {
         likedUserSocket.emit('liked', username)
+      }
+    })
+
+    socket.on('favorite', (uid: number) => {
+      const favoriteUserSocket = userSockets.get(uid)
+      const username = socket.payload?.name
+
+      if (favoriteUserSocket) {
+        favoriteUserSocket.emit('favorite', username)
       }
     })
 

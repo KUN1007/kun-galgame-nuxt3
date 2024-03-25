@@ -40,6 +40,7 @@ export interface TopicDetail {
   views: number
   likes: number[]
   dislikes: number[]
+  favorites: number[]
   time: number
   content: string
   upvotes: number[]
@@ -66,6 +67,11 @@ export interface TopicLikeTopicRequestData {
 }
 
 export interface TopicDislikeTopicRequestData {
+  to_uid: string
+  isPush: string
+}
+
+export interface TopicFavoriteTopicRequestData {
   to_uid: string
   isPush: string
 }

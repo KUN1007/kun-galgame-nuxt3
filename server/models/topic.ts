@@ -24,12 +24,14 @@ const TopicSchema = new mongoose.Schema<TopicAttributes>(
     likes_count: { type: Number, default: 0 },
     share_count: { type: Number, default: 0 },
     dislikes_count: { type: Number, default: 0 },
+    favorites_count: { type: Number, default: 0 },
 
     upvotes: { type: [Number], default: [] },
     replies: { type: [Number], default: [] },
     likes: { type: [Number], default: [] },
     share: { type: [Number], default: [] },
     dislikes: { type: [Number], default: [] },
+    favorites: { type: [Number], default: [] },
 
     status: { type: Number, default: 0 },
     edited: { type: Number, default: 0 }

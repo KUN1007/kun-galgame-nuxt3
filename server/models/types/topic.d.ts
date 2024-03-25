@@ -1,6 +1,6 @@
 import type { UserAttributes } from './user'
 
-interface TopicAttributes {
+export interface TopicAttributes {
   tid: number
   title: string
   content: string
@@ -21,6 +21,7 @@ interface TopicAttributes {
   likes_count: number
   share_count: number
   dislikes_count: number
+  favorites_count: number
 
   upvotes: number[]
   replies: number[]
@@ -28,6 +29,7 @@ interface TopicAttributes {
   share: number[]
   comments: number
   dislikes: number[]
+  favorites: number[]
 
   status: number
   edited: number

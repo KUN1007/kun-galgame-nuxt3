@@ -12,6 +12,7 @@ const {
   views,
   likes,
   dislikes,
+  favorites,
   time,
   content,
   upvotes,
@@ -128,7 +129,19 @@ const loliStatus = computed(() => {
           name: user.name
         }"
         :to-floor="0"
-      />
+      >
+        <template #favorite>
+          <TopicFooterFavorite
+            :tid="tid"
+            :favorites="favorites"
+            :to-uid="user.uid"
+            v-tooltip="{
+              message: { en: 'Favorite', zh: '收藏' },
+              position: 'bottom'
+            }"
+          />
+        </template>
+      </TopicFooter>
     </div>
   </div>
 </template>

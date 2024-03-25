@@ -134,7 +134,7 @@ li {
 }
 
 .active .icon {
-  color: var(--kungalgame-blue-5);
+  color: var(--kungalgame-red-4);
 }
 
 @media (max-width: 700px) {

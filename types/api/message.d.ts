@@ -1,6 +1,7 @@
 export type MessageType =
   | 'upvoted'
   | 'liked'
+  | 'favorite'
   | 'replied'
   | 'commented'
   | 'mentioned'

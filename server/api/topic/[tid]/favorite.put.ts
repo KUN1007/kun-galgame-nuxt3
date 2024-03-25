@@ -1,30 +1,37 @@
 import UserModel from '~/server/models/user'
 import TopicModel from '~/server/models/topic'
 import mongoose from 'mongoose'
-import type { TopicLikeTopicRequestData } from '~/types/api/topic'
+import type { TopicFavoriteTopicRequestData } from '~/types/api/topic'
 
-const updateTopicLike = async (
+const updateTopicFavorite = async (
   uid: number,
   to_uid: number,
   tid: number,
   isPush: boolean
 ) => {
-  if (uid === to_uid) {
-    return
-  }
-
   const topic = await TopicModel.findOne({ tid })
   if (!topic) {
     return 10211
   }
 
-  const isLikedTopic = topic.likes.includes(uid)
-  if (isLikedTopic && isPush) {
-    return 10212
+  const isFavoriteTopic = topic.favorites.includes(uid)
+  if (isFavoriteTopic && isPush) {
+    return 10221
   }
 
   const moemoepointAmount = isPush ? 1 : -1
   const popularity = isPush ? 2 : -2
+
+  if (uid === to_uid) {
+    await TopicModel.findOneAndUpdate(
+      { tid },
+      {
+        $inc: { favorites_count: moemoepointAmount },
+        [isPush ? '$push' : '$pull']: { favorites: uid }
+      }
+    )
+    return
+  }
 
   const session = await mongoose.startSession()
   session.startTransaction()
@@ -33,26 +40,26 @@ const updateTopicLike = async (
     const topic = await TopicModel.findOneAndUpdate(
       { tid },
       {
-        $inc: { popularity, likes_count: moemoepointAmount },
-        [isPush ? '$push' : '$pull']: { likes: uid }
+        $inc: { popularity, favorites_count: moemoepointAmount },
+        [isPush ? '$push' : '$pull']: { favorites: uid }
       }
     )
 
     await UserModel.updateOne(
       { uid },
-      { [isPush ? '$push' : '$pull']: { like_topic: tid } }
+      { [isPush ? '$push' : '$pull']: { favorite_topic: tid } }
     )
 
     await UserModel.updateOne(
       { uid: to_uid },
-      { $inc: { moemoepoint: moemoepointAmount, like: moemoepointAmount } }
+      { $inc: { moemoepoint: moemoepointAmount } }
     )
 
     if (isPush) {
       await createDedupMessage(
         uid,
         to_uid,
-        'liked',
+        'favorite',
         topic?.content.slice(0, 233) ?? '',
         tid
       )
@@ -80,17 +87,14 @@ export default defineEventHandler(async (event) => {
   }
   const uid = userInfo.uid
 
-  const { to_uid, isPush }: TopicLikeTopicRequestData = await getQuery(event)
+  const { to_uid, isPush }: TopicFavoriteTopicRequestData =
+    await getQuery(event)
   if (!to_uid || !isPush) {
     kunError(event, 10507)
     return
   }
 
-  if (uid.toString() === to_uid) {
-    return
-  }
-
-  const result = await updateTopicLike(
+  const result = await updateTopicFavorite(
     uid,
     parseInt(to_uid),
     parseInt(tid),
@@ -101,5 +105,5 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  return 'MOEMOE like topic operation successfully!'
+  return 'MOEMOE favorite topic operation successfully!'
 })

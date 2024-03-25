@@ -48,7 +48,13 @@ const updateTopicUpvote = async (
       { $inc: { moemoepoint: 7, upvote: 1 } }
     )
 
-    await createMessage(uid, to_uid, 'upvoted', topic?.content ?? '', tid)
+    await createMessage(
+      uid,
+      to_uid,
+      'upvoted',
+      topic?.content.slice(0, 233) ?? '',
+      tid
+    )
 
     await session.commitTransaction()
   } catch (error) {

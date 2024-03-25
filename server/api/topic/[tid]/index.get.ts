@@ -37,6 +37,7 @@ export default defineEventHandler(async (event) => {
       views: topic.views,
       likes: topic.likes,
       dislikes: topic.dislikes,
+      favorites: topic.favorites,
       time: topic.time,
       content: topic.content,
       upvotes: topic.upvotes,

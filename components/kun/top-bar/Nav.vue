@@ -33,6 +33,9 @@ onMounted(async () => {
     .on('liked', (socket) => {
       messageStatus.value = 'new'
     })
+    .on('favorite', (socket) => {
+      messageStatus.value = 'new'
+    })
     .on('replied', (socket) => {
       messageStatus.value = 'new'
     })

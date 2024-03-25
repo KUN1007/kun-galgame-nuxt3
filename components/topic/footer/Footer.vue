@@ -93,6 +93,9 @@ const handleClickShare = () => {
             position: 'bottom'
           }"
         />
+
+        <!-- Favorite slot -->
+        <slot name="favorite" />
       </ul>
     </div>
 
@@ -138,7 +141,7 @@ const handleClickShare = () => {
       />
 
       <!-- Comment slot -->
-      <slot name="comment"></slot>
+      <slot name="comment" />
     </div>
   </div>
 </template>

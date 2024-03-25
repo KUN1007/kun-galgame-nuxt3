@@ -3,10 +3,11 @@ import type { Message } from '~/types/api/message'
 type Locale = 'en-us' | 'zh-cn' | string
 
 const zhMessageMap: Record<string, string> = {
-  upvoted: '推了',
-  liked: '点赞了',
-  replied: '回复了',
-  commented: '评论了'
+  upvoted: '推了您！',
+  liked: '点赞了您！',
+  favorite: '收藏了您的话题！',
+  replied: '回复了您！',
+  commented: '评论了您！'
 }
 
 export const getMessageZH = (locale: Locale, content: string) => {
@@ -37,7 +38,7 @@ export const getMessageI18n = (locale: Locale, message: Message) => {
 
   if (locale === 'zh-cn') {
     const actionZH = getMessageZH(locale, message.type)
-    const messageContentZH = `${message.senderName} ${actionZH}您！`
+    const messageContentZH = `${message.senderName} ${actionZH}`
     return messageContentZH
   }
 

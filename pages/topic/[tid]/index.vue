@@ -52,9 +52,9 @@ useHead({
 
     <Topic v-if="topic" :tid="tid" :topic-data="topic" />
 
-    <KunBlank info="topic.notFound" v-if="!topic && !isBanned"></KunBlank>
+    <KunBlank info="topic.notFound" v-if="!topic && !isBanned" />
 
-    <KunBlank info="topic.banned" v-if="isBanned"></KunBlank>
+    <KunBlank info="topic.banned" v-if="isBanned" />
 
     <TopicBar />
   </div>

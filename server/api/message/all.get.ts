@@ -32,7 +32,6 @@ const getMessages = async (
   const responseData: Message[] = messages.map((message) => ({
     mid: message.mid,
     senderUid: message.sender_uid,
-    // @ts-ignore
     senderName: message.user[0].name,
     receiverUid: message.receiver_uid,
     time: message.time,

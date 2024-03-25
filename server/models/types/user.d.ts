@@ -34,5 +34,5 @@ export interface UserAttributes {
   like_topic: number[]
   dislike_topic: number[]
   upvote_topic: number[]
-  reply_topic: number[]
+  favorite_topic: number[]
 }
