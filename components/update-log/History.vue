@@ -49,6 +49,7 @@ li {
 
 pre {
   white-space: pre-wrap;
+  word-break: break-all;
 }
 
 .time {
