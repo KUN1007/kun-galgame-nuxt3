@@ -13,16 +13,6 @@ watch(
     )
   }, 300)
 )
-
-watch(
-  () => colorMode.value,
-  () => {
-    useKUNGalgameSettingsStore().setKUNGalgameTransparency(
-      showKUNGalgamePageTransparency.value,
-      colorMode.value as 'dark' | 'light'
-    )
-  }
-)
 </script>
 
 <template>

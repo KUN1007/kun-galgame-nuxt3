@@ -155,7 +155,8 @@ onBeforeUnmount(async () => {
   height: calc(100dvh + 217px);
   border-left: 1px solid var(--kungalgame-blue-2);
   border-radius: 5px 0 0 5px;
-  background-color: var(--kungalgame-trans-white-2);
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(10px);
   color: var(--kungalgame-font-color-3);
 }
 

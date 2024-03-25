@@ -1,4 +1,9 @@
 <script setup lang="ts">
+const colorMode = useColorMode()
+const { showKUNGalgamePageTransparency } = storeToRefs(
+  useKUNGalgameSettingsStore()
+)
+
 interface Mode {
   name: string
   icon: string
@@ -18,6 +23,16 @@ const modeItem: Mode[] = [
     icon: 'line-md:light-dark-loop'
   }
 ]
+
+watch(
+  () => colorMode.value,
+  () => {
+    useKUNGalgameSettingsStore().setKUNGalgameTransparency(
+      showKUNGalgamePageTransparency.value,
+      colorMode.value as 'dark' | 'light'
+    )
+  }
+)
 </script>
 
 <template>
