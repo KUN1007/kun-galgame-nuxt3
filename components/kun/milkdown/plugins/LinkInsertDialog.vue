@@ -19,60 +19,50 @@ watch(
 )
 
 const handleLinkInsert = () => {
-  if (inputHref.value.length == 0) {
+  if (inputHref.value.length === 0) {
     return
   }
-  const text = inputText.value.length == 0 ? inputHref.value : inputText.value
+  const text = inputText.value.length === 0 ? inputHref.value : inputText.value
   emit('insert', inputHref.value, text)
 }
-
-const handleCancelInsert = () => {
-  emit('cancel')
-}
 </script>
+
 <template>
   <Teleport to="body">
-    <Transition name="insertLink">
+    <Transition name="insert">
       <div
         class="mask"
         tabindex="0"
+        @click="emit('cancel')"
         v-if="show"
         @keydown.enter="handleLinkInsert"
+        @keydown.esc="emit('cancel')"
       >
-        <div class="dialog">
-          <div>
-            <h2>{{ $t('edit.link.title') }}</h2>
-          </div>
-          <hr />
-          <div class="input-wrapper">
-            <label for="LinkURLInput" class="label">
-              {{ $t('edit.link.URLLabel') }}:
-            </label>
-            <input
-              id="LinkURLInput"
-              type="url"
-              v-model="inputHref"
-              :placeholder="exampleURL"
-              class="input"
-            />
-          </div>
-          <div class="input-wrapper">
-            <label for="LinkTextInput" class="label">
-              {{ $t('edit.link.textLabel') }}:
-            </label>
-            <input
-              id="LinkTextInput"
-              type="text"
-              v-model="inputText"
-              class="input"
-            />
-          </div>
+        <div class="dialog" @click.stop>
+          <h2 class="title">{{ $t('edit.link.title') }}</h2>
+
+          <input
+            id="LinkURLInput"
+            type="url"
+            v-model="inputHref"
+            :placeholder="`${$t('edit.link.URLLabel')} (${exampleURL})`"
+            class="input"
+          />
+          <input
+            id="LinkTextInput"
+            type="text"
+            v-model="inputText"
+            :placeholder="$t('edit.link.textLabel')"
+            class="input"
+          />
+
           <div class="button-group">
+            <button @click="emit('cancel')" class="cancel-btn">
+              {{ $t('edit.link.cancelInsert') }}
+            </button>
+
             <button @click="handleLinkInsert" class="confirm-btn">
               {{ $t('edit.link.confirmInsert') }}
-            </button>
-            <button @click="handleCancelInsert" class="cancel-btn">
-              {{ $t('edit.link.cancelInsert') }}
             </button>
           </div>
         </div>
@@ -80,6 +70,7 @@ const handleCancelInsert = () => {
     </Transition>
   </Teleport>
 </template>
+
 <style lang="scss" scoped>
 .mask {
   position: fixed;
@@ -95,54 +86,76 @@ const handleCancelInsert = () => {
   justify-content: center;
   align-items: center;
 }
+
 .dialog {
   width: 600px;
-  height: 225px;
   padding: 17px;
   background-color: var(--kungalgame-white);
-  border: 1px solid var(--kungalgame-blue-2);
   border-radius: 5px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+
+  h2 {
+    margin-bottom: 17px;
+  }
 }
-.label {
-  display: inline-block;
-  width: 150px;
-  margin: 8px 0;
-}
-.input-wrapper {
-  padding: 4px 0;
-  display: inline-flex;
-}
+
 .input {
-  flex-grow: 1;
   background-color: var(--kungalgame-trans-white-9);
-  font-size: 17px;
-  border: 1px solid var(--kungalgame-blue-5);
+  border: 2px solid var(--kungalgame-trans-blue-2);
   border-radius: 5px;
   color: var(--kungalgame-font-color-3);
+  padding: 8px;
+  margin-bottom: 17px;
+
+  &:focus {
+    border: 2px solid var(--kungalgame-blue-5);
+  }
 }
+
 .button-group {
   display: flex;
-  flex-grow: 1;
   align-items: flex-end;
   justify-content: flex-end;
   flex-direction: row;
+
   button {
-    height: 32px;
-    width: 77px;
-    margin: 0 5px;
+    padding: 7px 17px;
     border-radius: 5px;
-    transition: all 0.2s;
     color: var(--kungalgame-blue-5);
-    border: 1px solid var(--kungalgame-blue-5);
     background-color: var(--kungalgame-trans-white-9);
+    border: 1px solid var(--kungalgame-blue-5);
+
+    &:last-child {
+      margin-left: 10px;
+    }
+
     &:hover {
       color: var(--kungalgame-white);
       background-color: var(--kungalgame-blue-5);
     }
+  }
+}
+
+.insert-enter-from {
+  opacity: 0;
+}
+
+.insert-leave-to {
+  opacity: 0;
+}
+
+.insert-enter-from .container,
+.insert-leave-to .container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+@media (max-width: 700px) {
+  .dialog {
+    margin: 0 17px;
   }
 }
 </style>

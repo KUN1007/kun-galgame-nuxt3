@@ -12,16 +12,16 @@ const { view, prevState } = usePluginViewContext()
 const linkUpdPopRef = ref<VNodeRef>()
 const linkHref = ref('')
 const hide = ref(true)
+const [_, get] = useInstance()
 
 let tooltipProvider: TooltipProvider
 
 onMounted(() => {
   const ctx = useTempEditStore().$state.editorContext
-
   if (!ctx) {
-    // Maybe throw a error?
     return
   }
+
   tooltipProvider = new TooltipProvider({
     content: linkUpdPopRef.value as any,
     debounce: 50,
@@ -45,7 +45,7 @@ onMounted(() => {
         }
         const linkMark = doc
           .nodeAt(selection.$cursor.pos)
-          ?.marks.find((mark) => mark.type == linkMarkType)
+          ?.marks.find((mark) => mark.type === linkMarkType)
         if (!linkMark) {
           return false
         }
@@ -69,7 +69,6 @@ onUnmounted(() => {
 })
 
 const handleUpdateLink = () => {
-  const get = useInstance()[1]
   get()?.action(callCommand(updateLinkCommand.key, { href: linkHref.value }))
 }
 </script>
@@ -77,11 +76,11 @@ const handleUpdateLink = () => {
 <template>
   <div ref="linkUpdPopRef">
     <div v-if="!hide" class="wrapper">
-      <input 
-        class="input" 
+      <input
+        class="input"
         type="url"
-        @keydown.enter = "handleUpdateLink"
-        v-model="linkHref" 
+        @keydown.enter="handleUpdateLink"
+        v-model="linkHref"
       />
       <button class="confirm-btn" @click="handleUpdateLink">
         {{ $t('edit.link.confirmUpdate') }}
@@ -93,17 +92,20 @@ const handleUpdateLink = () => {
 <style lang="scss" scoped>
 .wrapper {
   width: 350px;
-  min-height: 47px;
   display: inline-flex;
   border: 1px solid var(--kungalgame-blue-5);
   border-radius: 5px;
-  background-color: var(--kungalgame-trans-white-2);
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(10px);
 }
+
 .input {
-  flex-grow: 1;
+  width: 100%;
   border: none;
-  margin: 4px 8px;
+  padding: 10px;
+  background-color: transparent;
 }
+
 .confirm-btn {
   width: 65px;
   background-color: transparent;
@@ -111,6 +113,8 @@ const handleUpdateLink = () => {
   color: var(--kungalgame-blue-5);
   font-size: 15px;
   padding: 0 4px;
+  flex-shrink: 0;
+
   &:hover {
     color: var(--kungalgame-white);
     background-color: var(--kungalgame-blue-5);

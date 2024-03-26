@@ -264,7 +264,7 @@
     "link": {
       "title": "Insert Hyperlink",
       "URLLabel": "Link URL",
-      "textLabel": "Link Text(Optional)",
+      "textLabel": "Link Text (Optional)",
       "confirmInsert": "Confirm",
       "cancelInsert": "Cancel",
       "confirmUpdate": "Update"

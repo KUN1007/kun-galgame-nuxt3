@@ -5,15 +5,16 @@ import type { Ctx } from '@milkdown/ctx'
 
 export const handleClickOn = (
   ctx: Ctx,
-  view: EditorView,
-  pos: number,
-  node: Node /*, nodePos: number, event: MouseEvent, direct: boolean*/
+  _: EditorView,
+  __: number,
+  node: Node
 ) => {
   if (!node.isLeaf) {
     return false
   }
+
   const linkType = linkSchema.type(ctx)
-  if (!node.marks.find((mark) => mark.type == linkType)) {
+  if (!node.marks.find((mark) => mark.type === linkType)) {
     return false
   }
 
