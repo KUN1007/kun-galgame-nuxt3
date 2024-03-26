@@ -268,7 +268,8 @@
       "URLLabel": "链接URL",
       "textLabel": "链接文字（可选）",
       "confirmInsert": "插入",
-      "cancelInsert": "取消"
+      "cancelInsert": "取消",
+      "confirmUpdate": "更改"
     },
     "publish": "确认发布",
     "rewrite": "确认 Rewrite"

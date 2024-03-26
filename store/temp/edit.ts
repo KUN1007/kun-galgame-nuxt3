@@ -1,3 +1,4 @@
+import type { Ctx } from '@milkdown/ctx'
 import type { EditStoreTemp } from '~/store/types/edit'
 
 export const useTempEditStore = defineStore({
@@ -14,7 +15,9 @@ export const useTempEditStore = defineStore({
     textCount: 0,
     isTopicRewriting: false,
 
-    autosaveCount: 0
+    autosaveCount: 0,
+
+    editorContext: shallowRef<Ctx | null>(null)
   }),
   actions: {
     resetRewriteTopicData() {

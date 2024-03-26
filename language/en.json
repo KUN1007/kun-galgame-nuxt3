@@ -266,7 +266,8 @@
       "URLLabel": "Link URL",
       "textLabel": "Link Text(Optional)",
       "confirmInsert": "Confirm",
-      "cancelInsert": "Cancel"
+      "cancelInsert": "Cancel",
+      "confirmUpdate": "Update"
     },
     "publish": "Confirm Publish",
     "rewrite": "Confirm Rewrite"

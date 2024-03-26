@@ -1,3 +1,6 @@
+import type { Ctx } from '@milkdown/ctx'
+import type { ShallowRef } from 'vue'
+
 export interface EditStorePersist {
   editorHeight: number
   textCount: number
@@ -23,4 +26,6 @@ export interface EditStoreTemp {
   isTopicRewriting: boolean
 
   autosaveCount: number
+
+  editorContext: ShallowRef<Ctx | null>
 }
