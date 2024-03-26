@@ -1,10 +1,9 @@
 <script setup lang="ts">
-
 const props = defineProps<{
   show: boolean
 }>()
 const emit = defineEmits<{
-  insert: [href: string, text: string],
+  insert: [href: string, text: string]
   cancel: []
 }>()
 const inputHref = ref('')
@@ -20,14 +19,16 @@ watch(
 )
 
 const handleLinkInsert = () => {
+  if (inputHref.value.length == 0) {
+    return
+  }
   const text = inputText.value.length == 0 ? inputHref.value : inputText.value
-  emit("insert", inputHref.value, text)
+  emit('insert', inputHref.value, text)
 }
 
 const handleCancelInsert = () => {
-  emit("cancel")
+  emit('cancel')
 }
-
 </script>
 <template>
   <Teleport to="body">
@@ -36,6 +37,7 @@ const handleCancelInsert = () => {
         class="mask"
         tabindex="0"
         v-if="show"
+        @keydown.enter="handleLinkInsert"
       >
         <div class="dialog">
           <div>
@@ -44,21 +46,22 @@ const handleCancelInsert = () => {
           <hr />
           <div class="input-wrapper">
             <label for="LinkURLInput" class="label">
-              {{ $t("edit.link.URLLabel") }}:
+              {{ $t('edit.link.URLLabel') }}:
             </label>
-              <input 
-                id="LinkURLInput" 
-                type="url"
-                v-model="inputHref"
-                :placeholder="exampleURL"
-                class="input"
-              />
+            <input
+              id="LinkURLInput"
+              type="url"
+              v-model="inputHref"
+              :placeholder="exampleURL"
+              class="input"
+            />
           </div>
           <div class="input-wrapper">
             <label for="LinkTextInput" class="label">
-              {{ $t("edit.link.textLabel") }}:
+              {{ $t('edit.link.textLabel') }}:
             </label>
-            <input id="LinkTextInput"
+            <input
+              id="LinkTextInput"
               type="text"
               v-model="inputText"
               class="input"
@@ -66,10 +69,10 @@ const handleCancelInsert = () => {
           </div>
           <div class="button-group">
             <button @click="handleLinkInsert" class="confirm-btn">
-              {{ $t("edit.link.confirmInsert") }}
+              {{ $t('edit.link.confirmInsert') }}
             </button>
             <button @click="handleCancelInsert" class="cancel-btn">
-              {{ $t("edit.link.cancelInsert") }}
+              {{ $t('edit.link.cancelInsert') }}
             </button>
           </div>
         </div>

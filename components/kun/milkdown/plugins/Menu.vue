@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { insert, callCommand } from '@milkdown/utils'
+import { callCommand } from '@milkdown/utils'
 import {
   createCodeBlockCommand,
   updateCodeBlockLanguageCommand,
@@ -16,6 +16,7 @@ import {
 import { toggleStrikethroughCommand } from '@milkdown/preset-gfm'
 import type { UseEditorReturn } from '@milkdown/vue'
 import type { CmdKey } from '@milkdown/core'
+import { insertLinkPlugin } from './hyperlinkInsert'
 
 const props = defineProps<{
   editorInfo: UseEditorReturn
@@ -30,7 +31,7 @@ const call = <T,>(command: CmdKey<T>, payload?: T) => {
 }
 
 const handelInsertLink = (href: string, text: string) => {
-  get()?.action(insert(`[${text}](${href})`))
+  call(insertLinkPlugin.key, { href, text })
   isShowInsertLink.value = false
 }
 
@@ -128,9 +129,9 @@ const handleClickUploadImage = () => {
       <Icon name="lucide:minus" />
     </div>
 
-    <div aria-label="kun-galgame-italic" @click="isShowInsertLink=true">
+    <div aria-label="kun-galgame-italic" @click="isShowInsertLink = true">
       <Icon name="lucide:link" />
-      <KunMilkdownPluginsInsertLink 
+      <KunMilkdownPluginsLinkInsertDialog
         :show="isShowInsertLink"
         @insert="handelInsertLink"
         @cancel="isShowInsertLink = false"
