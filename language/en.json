@@ -261,6 +261,14 @@
       "o-novel": "Light Novel",
       "o-other": "Other"
     },
+    "link": {
+      "title": "Insert Hyperlink",
+      "URLLabel": "Link URL",
+      "textLabel": "Link Text(Optional)",
+      "confirmInsert": "Confirm",
+      "cancelInsert": "Cancel",
+      "confirmUpdate": "Update"
+    },
     "publish": "Confirm Publish",
     "rewrite": "Confirm Rewrite"
   },

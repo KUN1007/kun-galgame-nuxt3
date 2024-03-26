@@ -14,9 +14,11 @@ import { trailing } from '@milkdown/plugin-trailing'
 import { usePluginViewFactory } from '@prosemirror-adapter/vue'
 import { upload, uploadConfig } from '@milkdown/plugin-upload'
 import { kunUploader, kunUploadWidgetFactory } from './plugins/uploader'
+import { insertLinkPlugin } from './plugins/hyperlinkInsert'
 // KUN Visual Novel Custom tooltip
 import { tooltipFactory } from '@milkdown/plugin-tooltip'
 import Tooltip from './plugins/Tooltip.vue'
+import LinkUpdatePopup from './plugins/LinkUpdatePopup.vue'
 // Custom text size calculate
 import Size from './plugins/Size.vue'
 import { $prose } from '@milkdown/utils'
@@ -60,6 +62,7 @@ const valueMarkdown = computed(() => props.valueMarkdown)
 const isShowMenu = computed(() => props.isShowMenu)
 
 const tooltip = tooltipFactory('Text')
+const linkUpdatePopup = tooltipFactory('linkUpdate')
 const pluginViewFactory = usePluginViewFactory()
 const container = ref<HTMLElement | null>(null)
 const toolbar = ref<HTMLElement | null>(null)
@@ -112,9 +115,17 @@ const editorInfo = useEditor((root) =>
         }
       })
 
+      useTempEditStore().editorContext = ctx
+
       ctx.set(tooltip.key, {
         view: pluginViewFactory({
           component: Tooltip
+        })
+      })
+
+      ctx.set(linkUpdatePopup.key, {
+        view: pluginViewFactory({
+          component: LinkUpdatePopup
         })
       })
     })
@@ -127,7 +138,9 @@ const editorInfo = useEditor((root) =>
     .use(indent)
     .use(trailing)
     .use(tooltip)
+    .use(linkUpdatePopup)
     .use(upload)
+    .use(insertLinkPlugin)
     // Add custom plugin view, calculate markdown text size
     .use(
       $prose(

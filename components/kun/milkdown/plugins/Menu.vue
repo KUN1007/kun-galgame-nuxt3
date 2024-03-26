@@ -16,6 +16,7 @@ import {
 import { toggleStrikethroughCommand } from '@milkdown/preset-gfm'
 import type { UseEditorReturn } from '@milkdown/vue'
 import type { CmdKey } from '@milkdown/core'
+import { insertLinkPlugin } from './hyperlinkInsert'
 
 const props = defineProps<{
   editorInfo: UseEditorReturn
@@ -23,9 +24,15 @@ const props = defineProps<{
 
 const { get, loading } = props.editorInfo
 const input = ref<HTMLElement>()
+const isShowInsertLink = ref(false)
 
 const call = <T,>(command: CmdKey<T>, payload?: T) => {
   return get()?.action(callCommand(command, payload))
+}
+
+const handelInsertLink = (href: string, text: string) => {
+  call(insertLinkPlugin.key, { href, text })
+  isShowInsertLink.value = false
 }
 
 // Select a language TODO:
@@ -122,8 +129,13 @@ const handleClickUploadImage = () => {
       <Icon name="lucide:minus" />
     </div>
 
-    <div aria-label="kun-galgame-italic" @click="call(toggleLinkCommand.key)">
+    <div aria-label="kun-galgame-italic" @click="isShowInsertLink = true">
       <Icon name="lucide:link" />
+      <KunMilkdownPluginsLinkInsertDialog
+        :show="isShowInsertLink"
+        @insert="handelInsertLink"
+        @cancel="isShowInsertLink = false"
+      />
     </div>
 
     <div aria-label="kun-galgame-italic" @click="handleClickCodeBlock">
