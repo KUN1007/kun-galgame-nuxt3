@@ -17,7 +17,7 @@ const props = defineProps<{
       </span>
     </div>
 
-    <NuxtLinkLocale to="/" class="content">
+    <NuxtLinkLocale :to="`/section/${sec.section}`" class="content">
       <div class="topic">
         <span
           @click.prevent="navigateTo(localePath(`/topic/${sec.topic.tid}`))"

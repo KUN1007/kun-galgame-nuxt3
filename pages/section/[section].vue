@@ -1,7 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div></div>
+  <NuxtPage />
 </template>
-
-<style lang="scss" scoped></style>
