@@ -78,6 +78,7 @@ const prevPage = () => {
     </template>
 
     <button
+      v-if="totalPages !== 1"
       @click="gotoPage(totalPages)"
       :class="{ active: currentPage === totalPages }"
     >
