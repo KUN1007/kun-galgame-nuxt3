@@ -120,6 +120,8 @@
     "parens",
     "persistedstate",
     "Pinia",
+    "precache",
+    "precaching",
     "precommit",
     "prismjs",
     "prosemirror",

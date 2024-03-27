@@ -6,6 +6,8 @@ const packageJson = JSON.parse(
 )
 const appVersion = packageJson.version
 
+const sw = process.env.SW === 'true'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: {
@@ -97,6 +99,9 @@ export default defineNuxtConfig({
   },
   pwa: {
     registerType: 'autoUpdate',
+    strategies: sw ? 'injectManifest' : 'generateSW',
+    srcDir: sw ? 'service-worker' : undefined,
+    filename: sw ? 'sw.ts' : undefined,
     // Disable pwa in development environment
     disable: process.env.NODE_ENV === 'development',
     manifest: {
@@ -123,8 +128,7 @@ export default defineNuxtConfig({
       ]
     },
     workbox: {
-      globPatterns: ['**/*.{js,css,png,webp,svg,ico}'],
-      navigateFallback: null
+      globPatterns: ['**/*.{js,css,png,webp,svg,ico}']
     },
     client: {
       installPrompt: true
@@ -132,6 +136,7 @@ export default defineNuxtConfig({
     devOptions: {
       enabled: true,
       suppressWarnings: true,
+      navigateFallback: '/',
       navigateFallbackAllowlist: [/^\/$/],
       type: 'module'
     }
