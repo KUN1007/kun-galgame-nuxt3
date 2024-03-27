@@ -97,6 +97,39 @@ export default defineNuxtConfig({
     classSuffix: '-mode',
     storageKey: 'kungalgame-color-mode'
   },
+
+  // Backend
+  nitro: {
+    esbuild: {
+      options: {
+        target: 'esnext'
+      }
+    },
+    prerender: {
+      routes: [
+        '/',
+        '/agreement',
+        '/balance',
+        '/bylaw',
+        '/category',
+        '/contact',
+        '/donate',
+        '/forgot',
+        '/kungalgame',
+        '/kungalgamer',
+        '/login',
+        '/non-moe',
+        '/pool',
+        '/privacy',
+        '/ranking',
+        '/section',
+        '/technique',
+        '/thanks-list',
+        '/topic',
+        '/update-log'
+      ]
+    }
+  },
   pwa: {
     registerType: 'autoUpdate',
     strategies: sw ? 'injectManifest' : 'generateSW',
@@ -128,7 +161,10 @@ export default defineNuxtConfig({
       ]
     },
     workbox: {
-      globPatterns: ['**/*.{js,css,png,webp,svg,ico}']
+      globPatterns: ['**/*.{js,css,html,png,webp,svg,ico}']
+    },
+    injectManifest: {
+      globPatterns: ['**/*.{js,css,html,png,webp,svg,ico}']
     },
     client: {
       installPrompt: true

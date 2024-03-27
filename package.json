@@ -1,9 +1,9 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.8.6",
+  "version": "2.8.7",
   "private": true,
   "scripts": {
-    "build": "SW=true nuxt build",
+    "build": "cross-env SW=true nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -29,6 +29,7 @@
     "@types/nodemailer": "^6.4.14",
     "@types/nodemailer-smtp-transport": "^2.7.8",
     "@vite-pwa/nuxt": "^0.4.0",
+    "cross-env": "^7.0.3",
     "dayjs-nuxt": "^2.1.9",
     "eslint": "^8.57.0",
     "husky": "^9.0.11",
