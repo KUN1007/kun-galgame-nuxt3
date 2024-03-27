@@ -100,7 +100,7 @@ export default defineNuxtConfig({
     registerType: 'autoUpdate',
     // Disable pwa in development environment
     disable: process.env.NODE_ENV === 'development',
-    mode: 'production',
+    mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
     manifest: {
       name: 'KUN Visual Novel',
       short_name: 'KunGal',
@@ -133,6 +133,11 @@ export default defineNuxtConfig({
     },
     client: {
       installPrompt: true
+    },
+    devOptions: {
+      enabled: true,
+      suppressWarnings: true,
+      type: 'module'
     }
   }
 })
