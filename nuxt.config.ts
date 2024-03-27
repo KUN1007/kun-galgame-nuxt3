@@ -6,8 +6,6 @@ const packageJson = JSON.parse(
 )
 const appVersion = packageJson.version
 
-const sw = process.env.SW === 'true'
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: {
@@ -98,11 +96,11 @@ export default defineNuxtConfig({
     storageKey: 'kungalgame-color-mode'
   },
   pwa: {
-    strategies: sw ? 'injectManifest' : 'generateSW',
+    strategies: 'generateSW',
     registerType: 'autoUpdate',
     // Disable pwa in development environment
     disable: process.env.NODE_ENV === 'development',
-    mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
+    mode: 'production',
     manifest: {
       name: 'KUN Visual Novel',
       short_name: 'KunGal',
@@ -127,7 +125,8 @@ export default defineNuxtConfig({
       ]
     },
     workbox: {
-      globPatterns: ['**/*.{js,css,png,webp,svg,ico}']
+      globPatterns: ['**/*.{js,css,png,webp,svg,ico}'],
+      navigateFallback: null
     },
     injectManifest: {
       globPatterns: ['**/*.{js,css,png,webp,svg,ico}']
