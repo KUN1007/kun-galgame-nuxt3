@@ -96,11 +96,9 @@ export default defineNuxtConfig({
     storageKey: 'kungalgame-color-mode'
   },
   pwa: {
-    strategies: 'generateSW',
     registerType: 'autoUpdate',
     // Disable pwa in development environment
     disable: process.env.NODE_ENV === 'development',
-    mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
     manifest: {
       name: 'KUN Visual Novel',
       short_name: 'KunGal',
@@ -128,15 +126,13 @@ export default defineNuxtConfig({
       globPatterns: ['**/*.{js,css,png,webp,svg,ico}'],
       navigateFallback: null
     },
-    injectManifest: {
-      globPatterns: ['**/*.{js,css,png,webp,svg,ico}']
-    },
     client: {
       installPrompt: true
     },
     devOptions: {
       enabled: true,
       suppressWarnings: true,
+      navigateFallbackAllowlist: [/^\/$/],
       type: 'module'
     }
   }
