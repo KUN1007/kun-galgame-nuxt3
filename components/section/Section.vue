@@ -6,20 +6,33 @@ const localePath = useLocalePath()
 const props = defineProps<{
   section: string
 }>()
-const { topic } = storeToRefs(useTempSectionStore())
 
-const { data } = await useFetch(`/api/section`, {
+const { page, limit } = storeToRefs(useTempSectionStore())
+
+const { data, pending } = await useFetch(`/api/section`, {
   method: 'GET',
-  query: { ...topic.value, section: props.section },
+  query: { section: props.section, page, limit, order: 'desc' },
   ...kungalgameResponseHandler
 })
+
+watch(
+  () => pending.value,
+  () => {
+    if (!pending.value) {
+      window?.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
+  }
+)
 </script>
 
 <template>
   <NuxtLinkLocale
     class="section"
+    v-for="(sec, index) in data?.topics"
     :to="`/topic/${sec.tid}`"
-    v-for="(sec, index) in data"
     :key="index"
   >
     <div
@@ -71,6 +84,16 @@ const { data } = await useFetch(`/api/section`, {
       </div>
     </div>
   </NuxtLinkLocale>
+
+  <KunPagination
+    class="pagination"
+    v-if="data?.totalCount"
+    :page="page"
+    :limit="limit"
+    :sum="data?.totalCount"
+    :loading="pending"
+    @set-page="(newPage) => (page = newPage)"
+  />
 </template>
 
 <style lang="scss" scoped>
@@ -129,8 +152,13 @@ const { data } = await useFetch(`/api/section`, {
 
 .content {
   word-break: break-all;
-  font-size: 15px;
+  font-size: small;
   margin: 7px 0;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
 }
 
 .status {
@@ -145,6 +173,16 @@ const { data } = await useFetch(`/api/section`, {
     display: flex;
     align-items: center;
     margin-right: 17px;
+  }
+}
+
+.pagination {
+  margin: 50px 0;
+}
+
+@media (max-width: 700px) {
+  .pagination {
+    margin: 17px 0;
   }
 }
 </style>

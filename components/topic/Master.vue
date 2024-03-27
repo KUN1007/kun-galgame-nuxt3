@@ -153,6 +153,7 @@ const loliStatus = computed(() => {
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
+  color: var(--kungalgame-font-color-3);
 }
 
 .content-container {

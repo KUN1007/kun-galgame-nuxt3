@@ -9,7 +9,12 @@ const getSectionTopic = async (
 ) => {
   const skip = (page - 1) * limit
 
-  const topics = await TopicModel.find({
+  const totalCount = await TopicModel.countDocuments({
+    status: { $ne: 1 },
+    section: { $in: section }
+  })
+
+  const data = await TopicModel.find({
     status: { $ne: 1 },
     section: { $in: section }
   })
@@ -19,7 +24,7 @@ const getSectionTopic = async (
     .populate('user', 'uid avatar name')
     .lean()
 
-  const data: SectionTopic[] = topics.map((topic) => ({
+  const topics: SectionTopic[] = data.map((topic) => ({
     tid: topic.tid,
     title: topic.title,
     content: topic.content.slice(0, 233),
@@ -35,7 +40,7 @@ const getSectionTopic = async (
     }
   }))
 
-  return data
+  return { topics, totalCount }
 }
 
 export default defineEventHandler(async (event) => {

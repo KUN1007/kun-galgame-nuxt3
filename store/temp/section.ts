@@ -1,19 +1,14 @@
-import type { GetSectionRequestData } from '~/types/api/section'
-
 interface SectionStore {
-  topic: GetSectionRequestData
+  page: number
+  limit: number
 }
 
 export const useTempSectionStore = defineStore({
   id: 'tempSection',
   persist: false,
   state: (): SectionStore => ({
-    topic: {
-      section: '',
-      page: '1',
-      limit: '10',
-      order: 'asc'
-    }
+    page: 1,
+    limit: 10
   }),
   getters: {},
   actions: {}
