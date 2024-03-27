@@ -10,9 +10,6 @@ const sw = process.env.SW === 'true'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: {
-    enabled: false
-  },
   devServer: {
     host: '127.0.0.1',
     port: 1007
@@ -30,6 +27,12 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     './modules/socket/module'
   ],
+  future: {
+    typescriptBundlerResolution: true
+  },
+  experimental: {
+    watcher: 'parcel'
+  },
   runtimeConfig: {
     MONGODB_URL: process.env.MONGODB_URL,
 
@@ -131,12 +134,12 @@ export default defineNuxtConfig({
     }
   },
   pwa: {
+    // Disable pwa in development environment
+    disable: process.env.NODE_ENV === 'development',
     registerType: 'autoUpdate',
     strategies: sw ? 'injectManifest' : 'generateSW',
     srcDir: sw ? 'service-worker' : undefined,
     filename: sw ? 'sw.ts' : undefined,
-    // Disable pwa in development environment
-    disable: process.env.NODE_ENV === 'development',
     manifest: {
       name: 'KUN Visual Novel',
       short_name: 'KunGal',
