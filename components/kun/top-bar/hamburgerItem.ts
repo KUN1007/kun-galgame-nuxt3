@@ -22,7 +22,7 @@ export const hamburgerItem: Hamburger[] = [
     index: 3,
     name: 'create',
     icon: 'lucide:pencil',
-    router: '/edit'
+    router: '/edit/topic'
   },
   {
     index: 4,

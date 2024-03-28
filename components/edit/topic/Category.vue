@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { topicCategory } from './utils/category'
-import type { Category } from './utils/category'
+import { topicCategory } from '../utils/category'
+import type { Category } from '../utils/category'
 
 const {
   category: rewriteCategory,

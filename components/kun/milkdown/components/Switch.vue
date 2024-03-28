@@ -1,36 +1,12 @@
 <script setup lang="ts">
 const routeName = useRouteName()
-
-const { isShowHotKeywords: isShowEditHotKeywords } = storeToRefs(
-  useKUNGalgameEditStore()
-)
-const { isShowHotKeywords: isShowReplyHotKeywords, replyDraft } = storeToRefs(
-  usePersistKUNGalgameReplyStore()
-)
-
-watch(
-  () => [isShowEditHotKeywords.value, isShowReplyHotKeywords.value],
-  ([newValue1, newValue2]) => {
-    isShowEditHotKeywords.value = newValue1
-    isShowReplyHotKeywords.value = newValue2
-  }
-)
 </script>
 
 <template>
-  <input
-    v-if="routeName === 'edit'"
-    type="checkbox"
-    id="switch"
-    v-model="isShowEditHotKeywords"
-  />
+  <input v-if="routeName === 'edit-topic'" type="checkbox" id="switch" />
+  <!-- TODO: -->
 
-  <input
-    v-if="routeName === 'topic'"
-    type="checkbox"
-    id="switch"
-    v-model="isShowReplyHotKeywords"
-  />
+  <input v-if="routeName === 'topic'" type="checkbox" id="switch" />
   <label for="switch"></label>
 </template>
 

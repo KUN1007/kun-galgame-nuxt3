@@ -232,6 +232,7 @@ watch(
 
 .bottom {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   user-select: none;
 

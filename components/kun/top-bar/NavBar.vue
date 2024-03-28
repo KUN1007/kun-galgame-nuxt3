@@ -26,7 +26,7 @@
       <span class="nav">{{ $t('header.publish.name') }}</span>
       <template #content>
         <div class="menu">
-          <NuxtLinkLocale class="item" to="/edit">
+          <NuxtLinkLocale class="item" to="/edit/topic">
             <span>
               {{ $t('header.publish.topic') }}
             </span>

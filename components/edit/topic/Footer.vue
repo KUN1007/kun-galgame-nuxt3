@@ -2,22 +2,21 @@
 
 <template>
   <div class="footer">
-    <EditTags />
+    <EditTopicTags />
 
     <p class="hint">{{ $t('edit.categories') }}</p>
     <div class="partition">
-      <EditCategory />
-      <EditSection />
+      <EditTopicCategory />
+      <EditTopicSection />
     </div>
 
-    <EditButton />
+    <EditTopicButton />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .footer {
   padding: 10px;
-  padding-top: 17px;
   display: flex;
   flex-direction: column;
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { checkTopicPublish } from './utils/checkTopicPublish'
-import { iconMap } from './utils/category'
+import { checkTopicPublish } from '../utils/checkTopicPublish'
+import { iconMap } from '../utils/category'
 import type {
   EditCreateTopicRequestData,
   EditUpdateTopicRequestData

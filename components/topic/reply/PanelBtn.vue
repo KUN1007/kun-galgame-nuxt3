@@ -186,8 +186,13 @@ const handleShowAdvance = () => {
 }
 
 @media (max-width: 700px) {
-  .advance-btn {
-    display: none;
+  .btn-container {
+    button {
+      margin: 10px 0;
+      height: 35px;
+      width: 130px;
+      font-size: 15px;
+    }
   }
 }
 </style>

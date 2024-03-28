@@ -39,7 +39,7 @@ const handleBackToTop = () => {
     </span>
 
     <span class="top" @click="handleBackToTop">
-      <Icon class="icon" name="line-md:arrow-close-up" />
+      <Icon class="icon" name="lucide:arrow-up-to-line" />
     </span>
   </div>
 </template>

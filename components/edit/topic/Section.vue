@@ -4,8 +4,8 @@ import {
   techniqueSection,
   otherSection,
   topicCategory
-} from './utils/category'
-import { intersection } from './utils/intersection'
+} from '../utils/category'
+import { intersection } from '../utils/intersection'
 
 const sectionMap: Record<string, string[]> = {
   Galgame: galgameSection,

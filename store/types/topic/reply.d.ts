@@ -51,9 +51,6 @@ export interface ReplyStoreTemp {
 }
 
 export interface ReplyStorePersist {
-  isShowHotKeywords: boolean
-
-  editorHeight: number
   textCount: number
 
   replyDraft: ReplyDraft

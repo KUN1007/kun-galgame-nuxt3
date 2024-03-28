@@ -4,15 +4,13 @@ export const useKUNGalgameEditStore = defineStore({
   id: 'KUNGalgameEdit',
   persist: true,
   state: (): EditStorePersist => ({
-    editorHeight: 300,
     textCount: 0,
 
     title: '',
     content: '',
     tags: [],
     category: [],
-    section: [],
-    isShowHotKeywords: false
+    section: []
   }),
   getters: {},
   actions: {

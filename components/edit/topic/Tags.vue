@@ -2,26 +2,16 @@
 const routeName = useRouteName()
 
 const { tags: rewriteTags, isTopicRewriting } = storeToRefs(useTempEditStore())
-const { isShowHotKeywords: isShowEditHotKeywords, tags: editTags } =
-  storeToRefs(useKUNGalgameEditStore())
+const { tags: editTags } = storeToRefs(useKUNGalgameEditStore())
 const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
-const { isShowHotKeywords: isShowReplyHotKeywords, replyDraft } = storeToRefs(
-  usePersistKUNGalgameReplyStore()
-)
+const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 
-const isShowKeywords = computed(() =>
-  routeName.value === 'edit'
-    ? isShowEditHotKeywords.value
-    : isShowReplyHotKeywords.value
-)
-
-const hotTags = ref<string[]>([])
 const selectedTags = ref<string[]>([])
 const isInputFocus = ref(false)
 const inputValue = ref('')
 const canDeleteTag = ref(false)
 
-if (routeName.value === 'edit') {
+if (routeName.value === 'edit-topic') {
   if (isTopicRewriting.value) {
     selectedTags.value = rewriteTags.value
   } else {
@@ -37,29 +27,6 @@ if (routeName.value === 'topic-tid') {
   }
 }
 
-const getTags = async () => {
-  const { data } = await useFetch('/api/tag/popular', {
-    method: 'GET',
-    watch: false
-  })
-  return data.value ? data.value : []
-}
-
-const isLoadEditHotTags =
-  routeName.value === 'edit' && isShowEditHotKeywords.value
-const isLoadTopicHotTags =
-  routeName.value === 'topic-tid' && isShowReplyHotKeywords.value
-
-if (isLoadEditHotTags || isLoadTopicHotTags) {
-  hotTags.value = await getTags()
-}
-
-const handleTagClick = (tag: string) => {
-  if (selectedTags.value.length < 7) {
-    selectedTags.value.push(tag)
-  }
-}
-
 const handleTagClose = (tag: string) => {
   const index = selectedTags.value.indexOf(tag)
   if (index > -1) {
@@ -67,14 +34,13 @@ const handleTagClose = (tag: string) => {
   }
 }
 
-const remainingTags = computed(() => {
-  return hotTags.value.filter((tag) => !selectedTags.value.includes(tag))
-})
-
 const handleAddTag = () => {
-  const tagName = inputValue.value.trim().slice(0, 17)
+  const tagName = inputValue.value.trim().slice(0, 17).toLowerCase()
+  const isIncludes = selectedTags.value
+    .map((tag) => tag.toLowerCase())
+    .includes(tagName)
 
-  if (selectedTags.value.includes(tagName)) {
+  if (isIncludes) {
     useMessage(
       'Tag already exists, please choose another one',
       '标签已存在，请更换',
@@ -111,23 +77,14 @@ const validateTagName = (tagName: string) => {
   return validatedName
 }
 
-watch(selectedTags.value, () => {
-  if (routeName.value === 'topic-tid') {
-    replyDraft.value.tags = selectedTags.value
-  }
-  if (routeName.value === 'edit') {
-    editTags.value = selectedTags.value
-  }
-})
-
 watch(
-  () => isShowKeywords.value,
-  async () => {
-    if (
-      (routeName.value === 'edit' && isShowEditHotKeywords.value) ||
-      (routeName.value === 'topic-tid' && isShowReplyHotKeywords.value)
-    ) {
-      hotTags.value = await getTags()
+  () => selectedTags.value,
+  () => {
+    if (routeName.value === 'topic-tid' && !isReplyRewriting.value) {
+      replyDraft.value.tags = selectedTags.value
+    }
+    if (routeName.value === 'edit-topic' && !isReplyRewriting.value) {
+      editTags.value = selectedTags.value
     }
   }
 )
@@ -164,20 +121,6 @@ watch(
     </div>
 
     <div class="hint">{{ $t('edit.hint') }}</div>
-
-    <div class="hot-tags" v-if="isShowKeywords">
-      <p class="tags-info">{{ $t('edit.hot') }}</p>
-
-      <div class="tags">
-        <span
-          v-for="(tag, index) in remainingTags"
-          :key="index"
-          @click="() => handleTagClick(tag)"
-        >
-          {{ tag }}
-        </span>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -256,32 +199,5 @@ watch(
 .hint {
   font-size: small;
   color: var(--kungalgame-font-color-1);
-}
-
-.tags-info {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-
-  & > span {
-    border: 1px solid var(--kungalgame-blue-5);
-    border-radius: 14px;
-    margin: 5px;
-    display: block;
-    white-space: nowrap;
-    font-size: 14px;
-    padding: 3px 17px;
-    background-color: var(--kungalgame-trans-blue-0);
-    cursor: pointer;
-
-    &:hover {
-      color: var(--kungalgame-white);
-      background-color: var(--kungalgame-blue-5);
-    }
-  }
 }
 </style>

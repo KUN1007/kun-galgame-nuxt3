@@ -21,7 +21,7 @@ const size = computed(() => {
 watch(
   () => size.value,
   () => {
-    if (routeName.value === 'edit' && isTopicRewriting.value) {
+    if (routeName.value === 'edit-topic' && isTopicRewriting.value) {
       textCountEditRewrite.value = size.value
       return
     }
@@ -29,7 +29,7 @@ watch(
       textCountReplyRewrite.value = size.value
       return
     }
-    if (routeName.value === 'edit') {
+    if (routeName.value === 'edit-topic') {
       textCountEdit.value = size.value
     }
     if (routeName.value === 'topic-tid') {
@@ -39,7 +39,7 @@ watch(
 )
 
 onMounted(() => {
-  if (routeName.value === 'edit' && isTopicRewriting.value) {
+  if (routeName.value === 'edit-topic' && isTopicRewriting.value) {
     textCountEditRewrite.value = size.value
     return
   }

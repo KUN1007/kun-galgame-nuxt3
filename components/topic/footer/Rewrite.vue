@@ -47,7 +47,7 @@ const rewriteTopic = () => {
   storeSection.value = props.section ?? []
   isTopicRewriting.value = true
 
-  navigateTo(localePath('/edit'))
+  navigateTo(localePath('/edit/topic'))
 }
 
 const rewriteReply = () => {

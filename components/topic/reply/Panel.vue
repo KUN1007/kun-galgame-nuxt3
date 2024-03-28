@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import 'animate.css'
 
-const MilkdownEditor = defineAsyncComponent(
-  () => import('~/components/kun/milkdown/Wrapper.vue')
+const MilkdownEditor = defineAsyncComponent(() => import('./Editor.vue'))
+const Tags = defineAsyncComponent(
+  () => import('~/components/edit/topic/Tags.vue')
 )
-const Tags = defineAsyncComponent(() => import('~/components/edit/Tags.vue'))
 
 const messageStore = useTempMessageStore()
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())

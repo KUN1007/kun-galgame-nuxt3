@@ -2,7 +2,6 @@ import type { Ctx } from '@milkdown/ctx'
 import type { ShallowRef } from 'vue'
 
 export interface EditStorePersist {
-  editorHeight: number
   textCount: number
 
   title: string
@@ -10,8 +9,6 @@ export interface EditStorePersist {
   tags: string[]
   category: string[]
   section: string[]
-
-  isShowHotKeywords: boolean
 }
 
 export interface EditStoreTemp {

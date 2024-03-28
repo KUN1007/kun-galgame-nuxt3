@@ -82,10 +82,10 @@ onBeforeRouteLeave(async (_, __, next) => {
   <div class="root">
     <div class="container">
       <div ref="content" class="content">
-        <KunMilkdownComponentsTitle />
-        <KunMilkdownWrapper :is-show-menu="true" />
+        <EditTopicTitle />
+        <EditTopicEditor :is-show-menu="true" />
 
-        <EditFooter />
+        <EditTopicFooter />
       </div>
 
       <div
