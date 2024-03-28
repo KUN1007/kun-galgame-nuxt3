@@ -23,16 +23,16 @@ export const sendVerificationCodeEmail = async (
 ) => {
   const ip = getRemoteIp(event)
 
-  const limitEmail = await useStorage('redis').getItem(`limitEmail:${email}`)
-  const limitIP = await useStorage('redis').getItem(`limitIP:${ip}`)
+  const limitEmail = await useStorage('redis').getItem(`limit:email:${email}`)
+  const limitIP = await useStorage('redis').getItem(`limit:ip:${ip}`)
   if (limitEmail || limitIP) {
     return 10301
   }
 
   const code = generateRandomCode(7)
   await useStorage('redis').setItem(email, code, { ttl: 10 * 60 })
-  await useStorage('redis').setItem(`limitEmail:${email}`, code, { ttl: 30 })
-  await useStorage('redis').setItem(`limitIP:${ip}`, code, { ttl: 30 })
+  await useStorage('redis').setItem(`limit:email:${email}`, code, { ttl: 30 })
+  await useStorage('redis').setItem(`limit:ip:${ip}`, code, { ttl: 30 })
 
   const transporter = createTransport(
     SMPTransport({

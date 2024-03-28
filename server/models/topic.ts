@@ -33,6 +33,7 @@ const TopicSchema = new mongoose.Schema<TopicAttributes>(
     dislikes: { type: [Number], default: [] },
     favorites: { type: [Number], default: [] },
 
+    // 0 - normal, 1 - banned, 2 - pinned, 3 - essential
     status: { type: Number, default: 0 },
     edited: { type: Number, default: 0 }
   },

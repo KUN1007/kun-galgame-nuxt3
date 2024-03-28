@@ -64,6 +64,12 @@ export interface HomeTopicRequestData {
   sortOrder: SortOrder
 }
 
+export interface HomePinnedTopic {
+  tid: number
+  title: string
+  time: number
+}
+
 export interface HomeTopic {
   tid: number
   title: string

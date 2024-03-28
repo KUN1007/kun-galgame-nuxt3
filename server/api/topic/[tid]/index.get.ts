@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
       return
     }
 
-    if (topic.status) {
+    if (topic.status === 1) {
       return 'banned'
     }
 

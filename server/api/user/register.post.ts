@@ -26,12 +26,14 @@ const registerController = async (event: H3Event) => {
     return
   }
 
-  const registerCD = await useStorage('redis').getItem(`registerCD:${name}`)
+  const registerCD = await useStorage('redis').getItem(
+    `login:register:cd:${name}`
+  )
   if (registerCD) {
     kunError(event, 10113)
     return
   } else {
-    useStorage('redis').setItem(`registerCD:${ip}`, ip, { ttl: 60 })
+    useStorage('redis').setItem(`login:register:cd:${ip}`, ip, { ttl: 60 })
   }
 
   return { name, email, password, code, ip }

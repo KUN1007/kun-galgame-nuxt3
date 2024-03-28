@@ -33,13 +33,13 @@ const loliStatus = computed(() => {
     return 'featured'
   }
 
-  if (status === 0) {
-    return 'normal'
-  } else if (status === 1) {
-    return 'banned'
-  } else {
-    return ''
+  const statusMap: Record<number, string> = {
+    0: 'normal',
+    1: 'banned',
+    2: 'pinned',
+    3: 'essential'
   }
+  return statusMap[status]
 })
 </script>
 
@@ -295,8 +295,16 @@ const loliStatus = computed(() => {
   background-color: var(--kungalgame-gray-4);
 }
 
+.pinned {
+  background-color: var(--kungalgame-red-4);
+}
+
+.essential {
+  background-color: var(--kungalgame-yellow-2);
+}
+
 .featured {
-  background-color: var(--kungalgame-pink-3);
+  background-color: var(--kungalgame-pink-4);
 }
 
 .active .content-container {

@@ -10,7 +10,7 @@ export const categoryMap: Record<string, RegExp> = {
 const getCategoryData = async (category: string) => {
   const categoryDataCache: CategoryResponseData[] | null = await useStorage(
     'redis'
-  ).getItem(`categoryDataCache:${category}`)
+  ).getItem(`category:${category}`)
   if (categoryDataCache) {
     return categoryDataCache
   }
@@ -47,7 +47,7 @@ const getCategoryData = async (category: string) => {
     }
   ])
 
-  await useStorage('redis').setItem(`categoryDataCache:${category}`, data, {
+  await useStorage('redis').setItem(`category:${category}`, data, {
     ttl: 17 * 60
   })
 

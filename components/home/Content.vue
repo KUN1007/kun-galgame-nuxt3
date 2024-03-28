@@ -1,9 +1,14 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { data } = await useLazyFetch(`/api/home/pin`, {
+  method: 'GET'
+})
+</script>
 
 <template>
   <div class="main">
     <HomeAside class="aside" />
     <div class="article">
+      <HomePinned :topics="data" v-if="data?.length" />
       <HomeContentArticle />
     </div>
   </div>

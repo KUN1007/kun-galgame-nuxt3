@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  if (user.status) {
+  if (user.status === 1) {
     return 'banned'
   }
 

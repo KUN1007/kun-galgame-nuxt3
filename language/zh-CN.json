@@ -74,6 +74,7 @@
     "home": "主页"
   },
   "mainPage":{
+    "pinned": "置顶",
     "header":{
       "filter": "筛选",
       "category": "分类",
@@ -157,6 +158,8 @@
       "featured": "被推",
       "normal": "正常",
       "banned": "封禁",
+      "pinned": "置顶",
+      "essential": "精华",
       "reply": "回复",
       "comments": "评论",
       "comment": "评论",

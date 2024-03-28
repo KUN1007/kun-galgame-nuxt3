@@ -74,6 +74,7 @@
     "home": "Home"
   },
   "mainPage":{
+    "pinned": "Pinned",
     "header":{
       "filter": "Filter",
       "category": "Category",
@@ -157,6 +158,8 @@
       "featured": "Featured",
       "normal": "Normal",
       "banned": "Banned",
+      "pinned": "Pinned",
+      "essential": "Essential",
       "reply": "Reply",
       "comments": "Comments",
       "comment": "Commented to",

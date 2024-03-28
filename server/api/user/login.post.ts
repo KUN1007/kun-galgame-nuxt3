@@ -16,12 +16,12 @@ const login = async (event: H3Event) => {
     return
   }
 
-  const loginCD = await useStorage('redis').getItem(`loginCD:${ip}`)
+  const loginCD = await useStorage('redis').getItem(`login:login:cd:${ip}`)
   if (loginCD) {
     kunError(event, 10112)
     return
   } else {
-    useStorage('redis').setItem(`loginCD:${ip}`, ip, { ttl: 17 })
+    useStorage('redis').setItem(`login:login:cd:${ip}`, ip, { ttl: 17 })
   }
 
   return { name, password }
