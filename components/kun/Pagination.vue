@@ -100,7 +100,6 @@ const prevPage = () => {
   align-items: center;
   width: 100%;
   margin: 17px 0;
-  color: var(--kungalgame-font-color-3);
   position: relative;
 
   button {
@@ -110,6 +109,7 @@ const prevPage = () => {
     border: none;
     background-color: transparent;
     font-size: medium;
+    color: var(--kungalgame-font-color-3);
 
     &:hover {
       background-color: var(--kungalgame-trans-blue-1);

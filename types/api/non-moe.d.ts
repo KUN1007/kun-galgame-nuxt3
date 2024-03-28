@@ -1,9 +1,7 @@
-export type SortOrder = 'asc' | 'desc'
-
 export interface NonMoeLogRequestData {
   page: string
   limit: string
-  sortOrder: SortOrder
+  language: Language
 }
 
 export interface NonMoeLog {
