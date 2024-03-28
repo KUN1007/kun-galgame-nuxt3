@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.8.9",
+  "version": "2.7.11",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -16,29 +16,29 @@
     "precommit": "node ./.husky/scripts/bumpAppVersion.js && git add package.json"
   },
   "devDependencies": {
-    "@nuxt/image": "^1.4.0",
-    "@nuxtjs/color-mode": "^3.3.3",
+    "@nuxt/image": "^1.3.0",
+    "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
-    "@nuxtjs/i18n": "8.2.0",
+    "@nuxtjs/i18n": "8.0.0",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "@pinia/nuxt": "^0.5.1",
     "@types/bcrypt": "^5.0.2",
     "@types/js-cookie": "^3.0.6",
-    "@types/node": "^20.11.30",
+    "@types/node": "^20.11.10",
     "@types/nodemailer": "^6.4.14",
     "@types/nodemailer-smtp-transport": "^2.7.8",
     "@vite-pwa/nuxt": "^0.6.0",
     "dayjs-nuxt": "^2.1.9",
     "eslint": "^8.57.0",
     "husky": "^9.0.11",
-    "nuxt": "^3.11.1",
-    "nuxt-icon": "^0.6.10",
+    "nuxt": "^3.9.3",
+    "nuxt-icon": "^0.6.8",
     "nuxt-schema-org": "^3.3.6",
-    "nuxt-typed-router": "^3.6.1",
+    "nuxt-typed-router": "^3.5.1",
     "prettier": "^3.2.5",
-    "sass": "^1.72.0",
-    "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "sass": "^1.70.0",
+    "vue": "^3.4.15",
+    "vue-router": "^4.2.5"
   },
   "dependencies": {
     "@milkdown/core": "7.3.2",
@@ -58,18 +58,18 @@
     "@milkdown/utils": "7.3.2",
     "@milkdown/vue": "7.3.2",
     "@prosemirror-adapter/vue": "^0.2.6",
-    "@types/jsonwebtoken": "^9.0.6",
+    "@types/jsonwebtoken": "^9.0.5",
     "animate.css": "^4.1.1",
-    "aws-sdk": "^2.1586.0",
+    "aws-sdk": "^2.1547.0",
     "bcrypt": "^5.1.1",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "localforage": "^1.10.0",
-    "mongodb": "^6.5.0",
-    "mongoose": "^8.2.3",
-    "nodemailer": "^6.9.13",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.1.1",
+    "nodemailer": "^6.9.8",
     "nodemailer-smtp-transport": "^2.7.4",
-    "socket.io": "^4.7.5",
-    "socket.io-client": "^4.7.5"
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.7.4"
   }
 }
