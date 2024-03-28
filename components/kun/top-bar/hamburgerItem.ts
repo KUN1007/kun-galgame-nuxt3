@@ -14,15 +14,15 @@ export const hamburgerItem: Hamburger[] = [
   },
   {
     index: 2,
-    name: 'create',
-    icon: 'lucide:pencil',
-    router: '/edit'
+    name: 'category',
+    icon: 'lucide:layers-3',
+    router: '/category'
   },
   {
     index: 3,
-    name: 'technique',
-    icon: 'lucide:code-xml',
-    router: '/technique'
+    name: 'create',
+    icon: 'lucide:pencil',
+    router: '/edit'
   },
   {
     index: 4,

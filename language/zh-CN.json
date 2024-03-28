@@ -21,8 +21,8 @@
     "hamburger":{
       "name": "鲲 Galgame",
       "pool": "所有话题",
+      "category": "话题分类",
       "create": "发布话题",
-      "technique": "技术交流",
       "about": "关于我们",
       "ranking": "排行榜单",
       "update": "更新日志",

@@ -21,8 +21,8 @@
     "hamburger":{
       "name": "KUN Visual Novel",
       "pool": "Pool",
+      "category": "Category",
       "create": "Create Topic",
-      "technique": "Technique",
       "about": "About Us",
       "ranking": "Ranking",
       "update": "Update Log",
