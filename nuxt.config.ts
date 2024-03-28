@@ -6,8 +6,6 @@ const packageJson = JSON.parse(
 )
 const appVersion = packageJson.version
 
-const sw = process.env.SW === 'true'
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devServer: {
@@ -27,12 +25,6 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     './modules/socket/module'
   ],
-  future: {
-    typescriptBundlerResolution: true
-  },
-  experimental: {
-    watcher: 'parcel'
-  },
   runtimeConfig: {
     MONGODB_URL: process.env.MONGODB_URL,
 
@@ -100,46 +92,10 @@ export default defineNuxtConfig({
     classSuffix: '-mode',
     storageKey: 'kungalgame-color-mode'
   },
-
-  // Backend
-  nitro: {
-    esbuild: {
-      options: {
-        target: 'esnext'
-      }
-    },
-    prerender: {
-      routes: [
-        '/',
-        '/agreement',
-        '/balance',
-        '/bylaw',
-        '/category',
-        '/contact',
-        '/donate',
-        '/forgot',
-        '/kungalgame',
-        '/kungalgamer',
-        '/login',
-        '/non-moe',
-        '/pool',
-        '/privacy',
-        '/ranking',
-        '/section',
-        '/technique',
-        '/thanks-list',
-        '/topic',
-        '/update-log'
-      ]
-    }
-  },
   pwa: {
+    registerType: 'autoUpdate',
     // Disable pwa in development environment
     disable: process.env.NODE_ENV === 'development',
-    registerType: 'autoUpdate',
-    strategies: sw ? 'injectManifest' : 'generateSW',
-    srcDir: sw ? 'service-worker' : undefined,
-    filename: sw ? 'sw.ts' : undefined,
     manifest: {
       name: 'KUN Visual Novel',
       short_name: 'KunGal',
@@ -164,10 +120,8 @@ export default defineNuxtConfig({
       ]
     },
     workbox: {
-      globPatterns: ['**/*.{js,css,html,png,webp,svg,ico}']
-    },
-    injectManifest: {
-      globPatterns: ['**/*.{js,css,html,png,webp,svg,ico}']
+      globPatterns: ['**/*.{js,css,png,webp,svg,ico}'],
+      navigateFallback: null
     },
     client: {
       installPrompt: true
