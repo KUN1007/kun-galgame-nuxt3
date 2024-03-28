@@ -4,10 +4,17 @@ import type { TypeToGet, HomeNavTopic } from '~/types/api/home'
 export default defineEventHandler(async (event) => {
   const { type }: { type: TypeToGet } = await getQuery(event)
 
+  const seventeenDaysAgo = new Date()
+  seventeenDaysAgo.setDate(seventeenDaysAgo.getDate() - 17)
+  const seventeenDaysAgoTimestamp = seventeenDaysAgo.getTime()
+
   const sortOptions: Record<string, -1> =
     type === 'time' ? { time: -1 } : { popularity: -1 }
 
-  const topics = await TopicModel.find({}, 'tid title time popularity')
+  const topics = await TopicModel.find(
+    { time: { $gte: seventeenDaysAgoTimestamp } },
+    'tid title time popularity'
+  )
     .sort(sortOptions)
     .limit(7)
     .lean()

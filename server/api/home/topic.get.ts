@@ -16,9 +16,14 @@ const getHomeTopics = async (
 ) => {
   const skip = (page - 1) * limit
 
+  const seventeenDaysAgo = new Date()
+  seventeenDaysAgo.setDate(seventeenDaysAgo.getDate() - 17)
+  const seventeenDaysAgoTimestamp = seventeenDaysAgo.getTime()
+
   const searchQuery = {
     category: { $in: category },
-    status: { $ne: 1 }
+    status: { $ne: 1 },
+    time: { $gte: seventeenDaysAgoTimestamp }
   }
 
   const sortOptions: Record<string, 'asc' | 'desc'> = {
