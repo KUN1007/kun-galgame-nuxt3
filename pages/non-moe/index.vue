@@ -11,18 +11,32 @@ useHead({
   ]
 })
 
-const { page, limit, sortOrder } = useTempNonMoeStore()
+const { page, limit, language } = useTempNonMoeStore()
 
 const langClass = computed(() => {
   return locale.value === 'en-us' ? 'title-en' : 'title-cn'
 })
 
-const { data: logs } = await useFetch(`/api/non-moe/logs`, {
-  method: 'GET',
-  query: { page, limit, sortOrder },
-  watch: false,
-  ...kungalgameResponseHandler
-})
+const pageCount = ref(parseInt(page))
+
+const { data: totalLength, pending: totalPending } = await useFetch(
+  `/api/non-moe/total`,
+  {
+    method: 'GET',
+    watch: false,
+    ...kungalgameResponseHandler
+  }
+)
+
+const { data: logs, pending: listPending } = await useFetch(
+  `/api/non-moe/logs`,
+  {
+    method: 'GET',
+    query: { page: pageCount, limit, language },
+    watch: [pageCount],
+    ...kungalgameResponseHandler
+  }
+)
 </script>
 
 <template>
@@ -40,6 +54,15 @@ const { data: logs } = await useFetch(`/api/non-moe/logs`, {
           <span class="empty" v-if="!logs.length">
             {{ $t('nonMoe.empty') }}
           </span>
+
+          <KunPagination
+            v-if="totalLength && totalLength > 4"
+            :page="pageCount"
+            :limit="parseInt(limit)"
+            :sum="totalLength || 0"
+            :loading="listPending || totalPending"
+            @set-page="(newPage) => (pageCount = newPage)"
+          />
         </div>
       </div>
     </div>

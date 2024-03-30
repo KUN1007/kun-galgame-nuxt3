@@ -13,7 +13,7 @@ const logs = computed(() => props.logs)
   <div class="log" v-for="(kun, index) in logs" :key="index">
     <div class="kungalgamer">
       @
-      <NuxtLinkLocale :to="`/kungalgamer/${kun.uid}/info`">
+      <NuxtLinkLocale :to="`/kungalgamer/${kun.uid}/info`" target="_blank">
         {{ kun.name }}
       </NuxtLinkLocale>
     </div>
@@ -27,7 +27,10 @@ const logs = computed(() => props.logs)
       </div>
       <div class="result">
         <Icon class="warning" name="lucide:triangle-alert" />
-        <span>{{ $t('nonMoe.moemoepoint') }} - {{ kun.result }}</span>
+        <span v-if="typeof kun.result === 'number'">
+          {{ $t('nonMoe.moemoepoint') }} - {{ kun.result }}
+        </span>
+        <span v-else> {{ kun.result }} </span>
       </div>
     </div>
   </div>
