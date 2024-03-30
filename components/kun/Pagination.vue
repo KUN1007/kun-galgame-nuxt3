@@ -100,7 +100,9 @@ const prevPage = () => {
   align-items: center;
   width: 100%;
   margin: 17px 0;
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 
   button {
     padding: 5px 10px;

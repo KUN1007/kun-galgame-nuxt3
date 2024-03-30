@@ -1,4 +1,4 @@
-import { Document } from 'mongoose'
+import type { Document } from 'mongoose'
 
 /**
  * Generic function to generate an increasing sequence for a given model and field.
