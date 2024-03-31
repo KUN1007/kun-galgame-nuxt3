@@ -12,7 +12,6 @@
             </span>
           </NuxtLinkLocale>
 
-          <!-- TODO: -->
           <NuxtLinkLocale class="item" to="/category">
             <span>
               <span>{{ $t('header.topic.category') }}</span>
@@ -32,8 +31,7 @@
             </span>
           </NuxtLinkLocale>
 
-          <!-- TODO: -->
-          <NuxtLinkLocale class="item" to="/pool">
+          <NuxtLinkLocale class="item" to="/edit/galgame">
             <span>
               <span>{{ $t('header.publish.galgame') }}</span>
             </span>
