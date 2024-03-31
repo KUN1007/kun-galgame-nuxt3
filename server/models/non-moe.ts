@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 import increasingSequence from '../utils/increasingSequence'
 
 import { NonMoeAttributes } from './types/non-moe'
@@ -11,7 +11,7 @@ const NonMoeSchema = new mongoose.Schema<NonMoeAttributes>(
     description_en_us: { type: String, required: true },
     description_zh_cn: { type: String, required: true },
     time: { type: Number, default: Date.now() },
-    result: { type: String, required: true }
+    result: { type: Schema.Types.Mixed, required: true }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )

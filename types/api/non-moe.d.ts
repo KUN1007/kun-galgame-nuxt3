@@ -10,5 +10,5 @@ export interface NonMoeLog {
   name: string
   description: string
   time: number
-  result: string
+  result: string | number
 }

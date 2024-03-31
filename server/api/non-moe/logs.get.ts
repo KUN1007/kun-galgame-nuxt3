@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
     kunError(event, 10507)
     return
   }
-  if (limit !== '30') {
+  if (limit !== '4') {
     kunError(event, 10209)
     return
   }
