@@ -1,6 +1,5 @@
 <script setup lang="ts">
-// eslint-disable-next-line vue/require-prop-types
-const model = defineModel()
+const model = defineModel<boolean>({ required: true })
 </script>
 
 <template>

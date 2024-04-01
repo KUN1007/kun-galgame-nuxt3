@@ -1,4 +1,4 @@
-import type { Language } from './language'
+import { KunLanguage } from '~/types/i18n'
 import type { UserAttributes } from './user'
 
 export interface Galgame {
@@ -7,21 +7,21 @@ export interface Galgame {
   gid: number
   vndb_id: number
   uid: number
-  name: Language
+  name: KunLanguage
   banner: string
-  introduction: Language
+  introduction: KunLanguage
   platform: string[]
 
   // Auto initialized features
   time: number
   status: number
   views: number
-  editor: number[]
+  contributor: number[]
   likes: number[]
   favorites: number[]
 
   comments_count: number
-  editor_count: number
+  contributor_count: number
   likes_count: number
   favorites_count: number
 
