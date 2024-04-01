@@ -18,13 +18,6 @@ export interface UserAttributes {
   daily_image_count: number
   daily_check_in: number
 
-  friend_count: number
-  followed_count: number
-  follower_count: number
-  topic_count: number
-  reply_count: number
-  comment_count: number
-
   friend: number[]
   followed: number[]
   follower: number[]

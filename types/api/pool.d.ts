@@ -3,9 +3,9 @@ export type SortField =
   | 'time'
   | 'popularity'
   | 'views'
-  | 'upvotes_count'
-  | 'likes_count'
-  | 'replies_count'
+  | 'upvotes'
+  | 'likes'
+  | 'replies'
   | 'comments'
 
 export type SortOrder = 'asc' | 'desc'
@@ -13,12 +13,12 @@ export type SortOrder = 'asc' | 'desc'
 export type SortFieldRanking =
   | 'popularity'
   | 'views'
-  | 'upvotes_count'
-  | 'likes_count'
-  | 'replies_count'
+  | 'upvotes'
+  | 'likes'
+  | 'replies'
   | 'comments'
 
-export type SortFieldPool = 'views' | 'likes_count' | 'time'
+export type SortFieldPool = 'views' | 'likes' | 'time'
 
 export interface PoolTopic {
   tid: number
@@ -31,7 +31,7 @@ export interface PoolTopic {
   views: number
   section: string[]
   tags: string[]
-  likesCount: number
+  likes: number
   replies: number
   comments: number
   time: number

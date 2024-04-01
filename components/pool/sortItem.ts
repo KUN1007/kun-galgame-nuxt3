@@ -16,7 +16,7 @@ export const sortItem: Sort[] = [
     index: 2,
     icon: 'lucide:thumbs-up',
     name: 'like',
-    field: 'likes_count'
+    field: 'likes'
   },
   {
     index: 3,

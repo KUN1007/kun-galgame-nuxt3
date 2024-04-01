@@ -58,13 +58,13 @@ export const sortItem: Sort[] = [
     index: 5,
     icon: 'line-md:thumbs-up-twotone',
     name: 'likes',
-    sortField: 'likes_count'
+    sortField: 'likes'
   },
   {
     index: 6,
     icon: 'ri:reply-line',
     name: 'replies',
-    sortField: 'replies_count'
+    sortField: 'replies'
   },
   {
     index: 7,

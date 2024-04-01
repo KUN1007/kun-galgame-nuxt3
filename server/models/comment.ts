@@ -12,8 +12,6 @@ const CommentSchema = new mongoose.Schema<CommentAttributes>(
     to_uid: { type: Number, required: true, ref: 'user' },
     content: { type: String, default: '' },
 
-    likes_count: { type: Number, default: 0 },
-
     likes: { type: [Number], default: [] }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }

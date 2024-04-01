@@ -27,8 +27,8 @@ const iconMap: Record<string, string> = {
   time: 'eos-icons:hourglass',
   popularity: 'bi:fire',
   views: 'ic:outline-remove-red-eye',
-  likes_count: 'line-md:thumbs-up-twotone',
-  replies_count: 'ri:reply-line',
+  likes: 'line-md:thumbs-up-twotone',
+  replies: 'ri:reply-line',
   comments: 'fa-regular:comment-dots'
 }
 </script>

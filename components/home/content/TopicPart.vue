@@ -11,12 +11,12 @@ const {
   tid,
   title,
   views,
-  likesCount,
-  repliesCount,
+  likes,
+  replies,
   comments,
   time,
   content,
-  upvotesCount,
+  upvotes,
   tags,
   section,
   popularity,
@@ -24,7 +24,7 @@ const {
 } = props.topic
 
 const getRepliesCount = computed(() => {
-  return repliesCount + comments
+  return replies + comments
 })
 </script>
 
@@ -53,7 +53,7 @@ const getRepliesCount = computed(() => {
             <span>
               <Icon class="icon" name="lucide:thumbs-up" />
               <span>
-                {{ likesCount }}
+                {{ likes }}
               </span>
             </span>
             <span>

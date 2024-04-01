@@ -405,22 +405,27 @@
     "update": "更新日志"
   },
   "ranking":{
-    "user": "萌萌用户排行",
-    "topic": "萌萌话题排行",
     "asc": "升序",
     "desc": "降序",
     "filter": "筛选",
-    "moemoepoint": "萌萌点",
-    "upvote": "推数",
-    "like": "点赞数",
-    "topicCount": "话题数",
-    "replyCount": "回复数",
-    "commentCount": "评论数",
-    "popularity": "热度值",
-    "views": "浏览数",
-    "likes": "点赞数",
-    "replies": "回复数",
-    "comments": "评论数"
+    "user": {
+      "name": "萌萌用户排行",
+      "moemoepoint": "萌萌点",
+      "upvote": "推数",
+      "like": "点赞数",
+      "topic": "话题数",
+      "reply": "回复数",
+      "comment": "评论数"
+    },
+    "topic": {
+      "name": "萌萌话题排行",
+      "popularity": "热度值",
+      "upvote": "推数",
+      "views": "浏览数",
+      "likes": "点赞数",
+      "replies": "回复数",
+      "comments": "评论数"
+    }
   },
   "kungalgame":{
     "agreement":"用户协议",

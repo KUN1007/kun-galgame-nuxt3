@@ -25,10 +25,7 @@ const updateTopicFavorite = async (
   if (uid === to_uid) {
     await TopicModel.findOneAndUpdate(
       { tid },
-      {
-        $inc: { favorites_count: moemoepointAmount },
-        [isPush ? '$push' : '$pull']: { favorites: uid }
-      }
+      { [isPush ? '$push' : '$pull']: { favorites: uid } }
     )
 
     await UserModel.updateOne(
@@ -45,7 +42,7 @@ const updateTopicFavorite = async (
     const topic = await TopicModel.findOneAndUpdate(
       { tid },
       {
-        $inc: { popularity, favorites_count: moemoepointAmount },
+        $inc: { popularity },
         [isPush ? '$push' : '$pull']: { favorites: uid }
       }
     )

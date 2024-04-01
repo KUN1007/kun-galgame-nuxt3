@@ -70,7 +70,7 @@ export default defineEventHandler(async (event) => {
       {
         uid: c_uid
       },
-      { $addToSet: { comment: savedComment.cid }, $inc: { comment_count: 1 } }
+      { $addToSet: { comment: savedComment.cid } }
     )
     if (!commentUser) {
       kunError(event, 10101)
@@ -95,8 +95,7 @@ export default defineEventHandler(async (event) => {
 
     await ReplyModel.findOneAndUpdate(
       { rid },
-      { $addToSet: { comment: savedComment.cid } },
-      { $inc: { comment_count: 1 } }
+      { $addToSet: { comment: savedComment.cid } }
     ).lean()
 
     if (c_uid !== to_uid) {

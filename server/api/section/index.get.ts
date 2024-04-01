@@ -31,8 +31,8 @@ const getSectionTopic = async (
     time: topic.time,
     tags: topic.tags,
     views: topic.views,
-    likes: topic.likes_count,
-    replies: topic.replies_count,
+    likes: topic.likes.length,
+    replies: topic.replies.length,
     user: {
       uid: topic.user[0].uid,
       avatar: topic.user[0].avatar,

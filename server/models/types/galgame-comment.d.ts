@@ -8,7 +8,6 @@ export interface GalgameComment {
   content: string
 
   likes: number[]
-  likes_count: number
 
   cuid: UserAttributes[]
   touid: UserAttributes[]

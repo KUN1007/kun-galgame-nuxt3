@@ -24,13 +24,6 @@ const UserSchema = new mongoose.Schema<UserAttributes>(
     daily_image_count: { type: Number, default: 0 },
     daily_check_in: { type: Number, default: 0 },
 
-    friend_count: { type: Number, default: 0 },
-    followed_count: { type: Number, default: 0 },
-    follower_count: { type: Number, default: 0 },
-    topic_count: { type: Number, default: 0 },
-    reply_count: { type: Number, default: 0 },
-    comment_count: { type: Number, default: 0 },
-
     friend: { type: [Number], default: [] },
     followed: { type: [Number], default: [] },
     follower: { type: [Number], default: [] },

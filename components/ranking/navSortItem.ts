@@ -1,18 +1,18 @@
 type TopicSortFieldRanking =
   | 'popularity'
   | 'views'
-  | 'upvotes_count'
-  | 'likes_count'
-  | 'replies_count'
+  | 'upvotes'
+  | 'likes'
+  | 'replies'
   | 'comments'
 
 type UserSortFieldRanking =
   | 'moemoepoint'
   | 'upvote'
   | 'like'
-  | 'topic_count'
-  | 'reply_count'
-  | 'comment_count'
+  | 'topic'
+  | 'reply'
+  | 'comment'
 
 interface Topic {
   index: number
@@ -39,7 +39,7 @@ export const topicSortItem: Topic[] = [
     index: 2,
     icon: 'lucide:cherry',
     name: 'upvote',
-    sortField: 'upvotes_count'
+    sortField: 'upvotes'
   },
   {
     index: 3,
@@ -51,13 +51,13 @@ export const topicSortItem: Topic[] = [
     index: 4,
     icon: 'lucide:thumbs-up',
     name: 'likes',
-    sortField: 'likes_count'
+    sortField: 'likes'
   },
   {
     index: 5,
     icon: 'lucide:reply',
     name: 'replies',
-    sortField: 'replies_count'
+    sortField: 'replies'
   },
   {
     index: 6,
@@ -89,20 +89,20 @@ export const userSortItem: User[] = [
   {
     index: 4,
     icon: 'lucide:square-gantt-chart',
-    name: 'topicCount',
-    sortField: 'topic_count'
+    name: 'topic',
+    sortField: 'topic'
   },
   {
     index: 5,
     icon: 'lucide:reply',
-    name: 'replyCount',
-    sortField: 'reply_count'
+    name: 'reply',
+    sortField: 'reply'
   },
   {
     index: 6,
     icon: 'uil:comment-dots',
-    name: 'commentCount',
-    sortField: 'comment_count'
+    name: 'comment',
+    sortField: 'comment'
   }
 ]
 
@@ -110,16 +110,16 @@ export const userIconMap: Record<string, string> = {
   moemoepoint: 'lucide:lollipop',
   upvote: 'lucide:cherry',
   like: 'lucide:thumbs-up',
-  topic_count: 'lucide:square-gantt-chart',
-  reply_count: 'lucide:reply',
-  comment_count: 'uil:comment-dots'
+  topic: 'lucide:square-gantt-chart',
+  reply: 'lucide:reply',
+  comment: 'uil:comment-dots'
 }
 
 export const topicIconMap: Record<string, string> = {
   popularity: 'lucide:flame',
-  upvotes_count: 'lucide:cherry',
+  upvotes: 'lucide:cherry',
   views: 'lucide:mouse-pointer-click',
-  likes_count: 'lucide:thumbs-up',
-  replies_count: 'lucide:reply',
+  likes: 'lucide:thumbs-up',
+  replies: 'lucide:reply',
   comments: 'uil:comment-dots'
 }

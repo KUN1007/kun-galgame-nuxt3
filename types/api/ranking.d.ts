@@ -3,18 +3,18 @@ type SortOrder = 'asc' | 'desc'
 type TopicSortFieldRanking =
   | 'popularity'
   | 'views'
-  | 'upvotes_count'
-  | 'likes_count'
-  | 'replies_count'
+  | 'upvotes'
+  | 'likes'
+  | 'replies'
   | 'comments'
 
 type UserSortFieldRanking =
   | 'moemoepoint'
   | 'upvote'
   | 'like'
-  | 'topic_count'
-  | 'reply_count'
-  | 'comment_count'
+  | 'topic'
+  | 'reply'
+  | 'comment'
 
 export interface RankingGetTopicsRequestData {
   page: string

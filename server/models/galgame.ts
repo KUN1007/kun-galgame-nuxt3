@@ -28,11 +28,6 @@ const GalgameSchema = new mongoose.Schema<Galgame>(
     likes: { type: [Number], default: [] },
     favorites: { type: [Number], default: [] },
 
-    comments_count: { type: Number, default: 0 },
-    contributor_count: { type: Number, default: 0 },
-    likes_count: { type: Number, default: 0 },
-    favorites_count: { type: Number, default: 0 },
-
     alias: { type: [String], default: [] },
     official: { type: String, default: '' }
   },

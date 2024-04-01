@@ -403,22 +403,27 @@
     "update": "Update Log"
   },
   "ranking":{
-    "user": "Moe Moe User Ranking",
-    "topic": "Moe Moe Topic Ranking",
     "asc": "Ascending",
     "desc": "Descending",
     "filter": "Filter",
-    "moemoepoint": "MoeMoePoint",
-    "upvote": "Upvote",
-    "like": "Likes",
-    "topicCount": "Topics",
-    "replyCount": "Replies",
-    "commentCount": "Comments",
-    "popularity": "Popularity",
-    "views": "Views",
-    "likes": "Likes",
-    "replies": "Replies",
-    "comments": "Comments"
+    "user": {
+      "name": "Moe Moe User Ranking",
+      "moemoepoint": "MoeMoePoint",
+      "upvote": "Upvote",
+      "like": "Likes",
+      "topic": "Topics",
+      "reply": "Replies",
+      "comment": "Comments"
+    },
+    "topic": {
+      "name": "Moe Moe Topic Ranking",
+      "popularity": "Popularity",
+      "upvote": "Upvote",
+      "views": "Views",
+      "likes": "Likes",
+      "replies": "Replies",
+      "comments": "Comments"
+    }
   },
   "kungalgame":{
     "agreement":"User Agreement",

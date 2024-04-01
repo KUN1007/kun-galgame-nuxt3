@@ -8,8 +8,6 @@ export interface CommentAttributes {
   to_uid: number
   content: string
 
-  likes_count: number
-
   likes: number[]
 
   cuid: UserAttributes[]

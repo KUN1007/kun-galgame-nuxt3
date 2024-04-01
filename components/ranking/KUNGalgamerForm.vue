@@ -42,7 +42,7 @@ const handleClickSortOrder = () => {
 
 <template>
   <div class="user">
-    <div class="title">{{ $t('ranking.user') }}</div>
+    <div class="title">{{ $t('ranking.user.name') }}</div>
     <div class="nav">
       <div class="order" @click="handleClickSortOrder">
         <Transition name="order" mode="out-in">
@@ -69,7 +69,7 @@ const handleClickSortOrder = () => {
             @click="user.sortField = kun.sortField"
           >
             <span><Icon class="icon" :name="kun.icon" /></span>
-            <span>{{ $t(`ranking.${kun.name}`) }}</span>
+            <span>{{ $t(`ranking.user.${kun.name}`) }}</span>
           </div>
         </div>
       </div>

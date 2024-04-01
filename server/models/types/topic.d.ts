@@ -16,13 +16,6 @@ export interface TopicAttributes {
   views: number
   upvote_time: number
 
-  upvotes_count: number
-  replies_count: number
-  likes_count: number
-  share_count: number
-  dislikes_count: number
-  favorites_count: number
-
   upvotes: number[]
   replies: number[]
   likes: number[]

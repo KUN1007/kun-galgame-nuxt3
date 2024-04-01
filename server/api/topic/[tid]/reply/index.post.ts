@@ -72,7 +72,7 @@ export default defineEventHandler(async (event) => {
 
     const replyUser = await UserModel.findOneAndUpdate(
       { uid: savedReply.r_uid },
-      { $addToSet: { reply: savedReply.rid }, $inc: { reply_count: 1 } }
+      { $addToSet: { reply: savedReply.rid } }
     )
     if (!replyUser) {
       kunError(event, 10101)
@@ -92,7 +92,7 @@ export default defineEventHandler(async (event) => {
       { tid },
       {
         $addToSet: { replies: savedReply.rid },
-        $inc: { popularity: 5, replies_count: 1 }
+        $inc: { popularity: 5 }
       }
     )
 

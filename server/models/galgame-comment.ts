@@ -11,8 +11,7 @@ const GalgameCommentSchema = new mongoose.Schema<GalgameComment>(
     to_uid: { type: Number, required: true, ref: 'user' },
     content: { type: String, default: '' },
 
-    likes: { type: [Number], default: [] },
-    likes_count: { type: Number, default: 0 }
+    likes: { type: [Number], default: [] }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )

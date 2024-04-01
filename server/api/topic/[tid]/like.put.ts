@@ -33,7 +33,7 @@ const updateTopicLike = async (
     const topic = await TopicModel.findOneAndUpdate(
       { tid },
       {
-        $inc: { popularity, likes_count: moemoepointAmount },
+        $inc: { popularity },
         [isPush ? '$push' : '$pull']: { likes: uid }
       }
     )

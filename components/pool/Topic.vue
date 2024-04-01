@@ -26,7 +26,7 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
 
       <span>
         <Icon name="lucide:thumbs-up" />
-        <span v-if="props.topic.likesCount">{{ props.topic.likesCount }}</span>
+        <span v-if="props.topic.likes">{{ props.topic.likes }}</span>
       </span>
 
       <span>

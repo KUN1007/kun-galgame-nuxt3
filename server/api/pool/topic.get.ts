@@ -36,8 +36,8 @@ const getPoolTopics = async (
     views: topic.views,
     section: topic.section,
     tags: topic.tags,
-    likesCount: topic.likes_count,
-    replies: topic.replies_count,
+    likes: topic.likes.length,
+    replies: topic.replies.length,
     comments: topic.comments,
     time: topic.time
   }))

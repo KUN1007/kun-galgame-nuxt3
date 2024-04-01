@@ -16,13 +16,13 @@ export const asideItem: Item[] = [
   },
   {
     index: 2,
-    sortField: 'likes_count',
+    sortField: 'likes',
     icon: 'lucide:thumbs-up',
     name: 'like'
   },
   {
     index: 3,
-    sortField: 'comments_count',
+    sortField: 'comments',
     icon: 'uil:comment-dots',
     name: 'comment'
   }

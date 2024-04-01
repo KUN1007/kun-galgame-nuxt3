@@ -1,6 +1,6 @@
 import { TopicUserInfo, TopicToUserInfo } from './topic'
 
-export type SortField = 'floor' | 'likes_count' | 'comments_count'
+export type SortField = 'floor' | 'likes' | 'comments'
 export type SortOrder = 'asc' | 'desc'
 
 export interface TopicReplyRequestData {

@@ -19,13 +19,6 @@ const TopicSchema = new mongoose.Schema<TopicAttributes>(
     comments: { type: Number, default: 0 },
     upvote_time: { type: Number, default: 0 },
 
-    upvotes_count: { type: Number, default: 0 },
-    replies_count: { type: Number, default: 0 },
-    likes_count: { type: Number, default: 0 },
-    share_count: { type: Number, default: 0 },
-    dislikes_count: { type: Number, default: 0 },
-    favorites_count: { type: Number, default: 0 },
-
     upvotes: { type: [Number], default: [] },
     replies: { type: [Number], default: [] },
     likes: { type: [Number], default: [] },

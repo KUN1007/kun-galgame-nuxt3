@@ -20,11 +20,6 @@ export interface Galgame {
   likes: number[]
   favorites: number[]
 
-  comments_count: number
-  contributor_count: number
-  likes_count: number
-  favorites_count: number
-
   // Some todo features
   alias: string[]
   official: string

@@ -17,9 +17,6 @@ const ReplySchema = new mongoose.Schema<ReplyAttributes>(
     content: { type: String, default: '' },
     upvote_time: { type: Number, default: 0 },
 
-    likes_count: { type: Number, default: 0 },
-    comments_count: { type: Number, default: 0 },
-
     upvotes: { type: [Number], default: [] },
     likes: { type: [Number], default: [] },
     dislikes: { type: [Number], default: [] },

@@ -85,7 +85,7 @@ export default defineEventHandler(async (event) => {
       { uid },
       {
         $addToSet: { topic: savedTopic.tid },
-        $inc: { daily_topic_count: 1, topic_count: 1 }
+        $inc: { daily_topic_count: 1 }
       }
     )
 
