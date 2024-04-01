@@ -1,1 +1,1 @@
-type Language = 'en-us' | 'zh-cn'
+type Language = 'en-us' | 'ja-jp' | 'zh-cn'

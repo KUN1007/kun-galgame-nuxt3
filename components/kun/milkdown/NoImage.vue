@@ -12,8 +12,6 @@ import { clipboard } from '@milkdown/plugin-clipboard'
 import { indent } from '@milkdown/plugin-indent'
 import { trailing } from '@milkdown/plugin-trailing'
 import { usePluginViewFactory } from '@prosemirror-adapter/vue'
-import { upload, uploadConfig } from '@milkdown/plugin-upload'
-import { kunUploader, kunUploadWidgetFactory } from './plugins/uploader'
 import { insertLinkPlugin } from './plugins/hyperlinkInsert'
 // KUN Visual Novel Custom tooltip
 import { tooltipFactory } from '@milkdown/plugin-tooltip'
@@ -21,7 +19,7 @@ import Tooltip from './plugins/Tooltip.vue'
 import LinkUpdatePopup from './plugins/LinkUpdatePopup.vue'
 // Custom text size calculate
 import Size from './plugins/Size.vue'
-import { $prose } from '@milkdown/utils'
+import { $prose, replaceAll, getMarkdown } from '@milkdown/utils'
 import { Plugin } from '@milkdown/prose/state'
 
 // KUN Visual Novel style
@@ -49,17 +47,13 @@ import markdown from 'refractor/lang/markdown'
 
 const props = defineProps<{
   valueMarkdown: string
-  editorHight: string
-  isShowMenu: boolean
 }>()
 
 const emits = defineEmits<{
   saveMarkdown: [editorMarkdown: string]
 }>()
 
-const editorHight = computed(() => props.editorHight + 'px')
 const valueMarkdown = computed(() => props.valueMarkdown)
-const isShowMenu = computed(() => props.isShowMenu)
 
 const tooltip = tooltipFactory('Text')
 const linkUpdatePopup = tooltipFactory('linkUpdate')
@@ -85,12 +79,6 @@ const editorInfo = useEditor((root) =>
           emits('saveMarkdown', markdown)
         }
       })
-
-      ctx.update(uploadConfig.key, (prev) => ({
-        ...prev,
-        uploader: kunUploader,
-        uploadWidgetFactory: kunUploadWidgetFactory
-      }))
 
       ctx.set(prismConfig.key, {
         configureRefractor: (refractor) => {
@@ -139,7 +127,6 @@ const editorInfo = useEditor((root) =>
     .use(trailing)
     .use(tooltip)
     .use(linkUpdatePopup)
-    .use(upload)
     .use(insertLinkPlugin)
     // Add custom plugin view, calculate markdown text size
     .use(
@@ -154,15 +141,23 @@ const editorInfo = useEditor((root) =>
       )
     )
 )
+
+watch(
+  () => valueMarkdown.value,
+  () => {
+    if (valueMarkdown.value) {
+      editorInfo.get()?.action(replaceAll(valueMarkdown.value))
+    }
+  }
+)
 </script>
 
 <template>
   <div ref="container" class="editor-container">
     <KunMilkdownPluginsMenu
       ref="toolbar"
-      v-if="isShowMenu"
       :editor-info="editorInfo"
-      :is-show-upload-image="true"
+      :is-show-upload-image="false"
     />
 
     <Milkdown class="editor" />
@@ -192,7 +187,7 @@ const editorInfo = useEditor((root) =>
     & > div:nth-child(1) {
       transition: all 0.2s;
       margin: 0 auto;
-      min-height: v-bind(editorHight);
+      min-height: 300px;
     }
 
     img {
@@ -282,7 +277,7 @@ const editorInfo = useEditor((root) =>
   justify-content: center;
   align-items: center;
   position: relative;
-  height: calc(v-bind(editorHight) + 61px);
+  height: 350px;
 
   span {
     margin-left: 20px;

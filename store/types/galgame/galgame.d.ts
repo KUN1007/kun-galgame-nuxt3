@@ -1,10 +1,10 @@
-import type { KunLanguage } from '~/types/i18n'
+import type { KunLanguageFront } from '~/types/i18n'
 
 export interface GalgameStorePersist {
   vndb_id: number
-  name: KunLanguage
+  name: KunLanguageFront
   banner: string
-  introduction: KunLanguage
+  introduction: KunLanguageFront
   platform: string[]
 
   official: string

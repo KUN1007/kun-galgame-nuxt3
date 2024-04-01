@@ -20,6 +20,7 @@ import { insertLinkPlugin } from './hyperlinkInsert'
 
 const props = defineProps<{
   editorInfo: UseEditorReturn
+  isShowUploadImage: boolean
 }>()
 
 const { get, loading } = props.editorInfo
@@ -149,7 +150,11 @@ const handleClickUploadImage = () => {
       <Icon name="lucide:code-xml" />
     </div>
 
-    <div aria-label="kun-galgame-upload-image" @click="handleClickUploadImage">
+    <div
+      aria-label="kun-galgame-upload-image"
+      v-if="props.isShowUploadImage"
+      @click="handleClickUploadImage"
+    >
       <Icon name="lucide:image-plus" />
       <input
         ref="input"
