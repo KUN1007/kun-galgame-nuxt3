@@ -39,30 +39,30 @@ const handleLinkInsert = () => {
         @keydown.esc="emit('cancel')"
       >
         <div class="dialog" @click.stop>
-          <h2 class="title">{{ $t('edit.link.title') }}</h2>
+          <h2 class="title">{{ $t('edit.topic.link.title') }}</h2>
 
           <input
             id="LinkURLInput"
             type="url"
             v-model="inputHref"
-            :placeholder="`${$t('edit.link.URLLabel')} (${exampleURL})`"
+            :placeholder="`${$t('edit.topic.link.URLLabel')} (${exampleURL})`"
             class="input"
           />
           <input
             id="LinkTextInput"
             type="text"
             v-model="inputText"
-            :placeholder="$t('edit.link.textLabel')"
+            :placeholder="$t('edit.topic.link.textLabel')"
             class="input"
           />
 
           <div class="button-group">
             <button @click="emit('cancel')" class="cancel-btn">
-              {{ $t('edit.link.cancelInsert') }}
+              {{ $t('edit.topic.link.cancelInsert') }}
             </button>
 
             <button @click="handleLinkInsert" class="confirm-btn">
-              {{ $t('edit.link.confirmInsert') }}
+              {{ $t('edit.topic.link.confirmInsert') }}
             </button>
           </div>
         </div>

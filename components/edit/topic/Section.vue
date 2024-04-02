@@ -68,11 +68,11 @@ const handleSetSection = (name: string, value: string) => {
         v-if="isShowSelect(select.name)"
         :styles="{ width: '150px' }"
         :options="select.options"
-        i18n="edit.section"
+        i18n="edit.topic.section"
         @set="(value) => handleSetSection(select.name, value)"
         position="top"
       >
-        <span>{{ $t(`edit.${select.name}`) }}</span>
+        <span>{{ $t(`edit.topic.${select.name}`) }}</span>
       </KunSelect>
     </div>
   </div>

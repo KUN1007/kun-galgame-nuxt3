@@ -20,7 +20,7 @@ import { tooltipFactory } from '@milkdown/plugin-tooltip'
 import Tooltip from './plugins/Tooltip.vue'
 import LinkUpdatePopup from './plugins/LinkUpdatePopup.vue'
 // Custom text size calculate
-import Size from './plugins/Size.vue'
+import Footer from './plugins/Footer.vue'
 import { $prose } from '@milkdown/utils'
 import { Plugin } from '@milkdown/prose/state'
 
@@ -147,7 +147,7 @@ const editorInfo = useEditor((root) =>
         () =>
           new Plugin({
             view: pluginViewFactory({
-              component: Size,
+              component: Footer,
               root: () => (container.value ? container.value : root)
             })
           })
@@ -169,7 +169,7 @@ const editorInfo = useEditor((root) =>
 
     <div class="loading" v-if="editorInfo.loading.value">
       <span><Icon name="svg-spinners:12-dots-scale-rotate" /></span>
-      <span>{{ $t('edit.loading') }}</span>
+      <span>{{ $t('edit.topic.loading') }}</span>
     </div>
   </div>
 </template>

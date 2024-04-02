@@ -32,11 +32,11 @@ const handelCloseSettingsMenu = () => {
       </span>
 
       <NuxtLinkLocale to="/topic/280" class="rules">
-        {{ $t(`edit.rules`) }}
+        {{ $t(`edit.topic.rules`) }}
       </NuxtLinkLocale>
 
       <span class="save">
-        {{ `${$t('edit.save')} × ${autosaveCount}` }}
+        {{ `${$t('edit.topic.save')} × ${autosaveCount}` }}
       </span>
     </div>
 

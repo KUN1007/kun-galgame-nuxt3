@@ -26,7 +26,7 @@ const saveMarkdown = debounce((editorMarkdown: string) => {
   }
 
   autosaveCount.value++
-}, 1007)
+}, 107)
 </script>
 
 <template>

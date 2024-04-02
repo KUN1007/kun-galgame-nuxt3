@@ -13,7 +13,7 @@ const props = defineProps<{
   <section class="section" v-for="(sec, index) in props.sections" :key="index">
     <div class="section-title">
       <span>
-        {{ $t(`edit.section.${sec.section}`) }}
+        {{ $t(`edit.topic.section.${sec.section}`) }}
       </span>
     </div>
 

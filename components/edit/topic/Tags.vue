@@ -108,7 +108,7 @@ watch(
         class="input"
         type="text"
         v-model="inputValue"
-        :placeholder="`${$t('edit.tags')}`"
+        :placeholder="`${$t('edit.topic.tags')}`"
         @input="canDeleteTag = false"
         @keyup.enter="handleAddTag"
         @keyup.backspace="handleRemoveTag"
@@ -120,7 +120,7 @@ watch(
       <div class="box2" :class="isInputFocus ? 'box-active' : ''"></div>
     </div>
 
-    <div class="hint">{{ $t('edit.hint') }}</div>
+    <div class="hint">{{ $t('edit.topic.hint') }}</div>
   </div>
 </template>
 

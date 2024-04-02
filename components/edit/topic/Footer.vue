@@ -4,7 +4,7 @@
   <div class="footer">
     <EditTopicTags />
 
-    <p class="hint">{{ $t('edit.categories') }}</p>
+    <p class="hint">{{ $t('edit.topic.categories') }}</p>
     <div class="partition">
       <EditTopicCategory />
       <EditTopicSection />

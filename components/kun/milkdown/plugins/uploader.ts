@@ -48,7 +48,7 @@ export const kunUploadWidgetFactory = (
   const { $i18n } = useNuxtApp()
 
   const widgetDOM = document.createElement('span')
-  widgetDOM.textContent = $i18n.t('edit.uploading')
+  widgetDOM.textContent = $i18n.t('edit.topic.uploading')
   widgetDOM.style.color = 'var(--kungalgame-blue-5)'
   return Decoration.widget(pos, widgetDOM, spec)
 }

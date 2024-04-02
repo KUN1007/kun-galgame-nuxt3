@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <h2>请输入资源标题</h2>
+  <h2>请输入 Galgame 标题</h2>
   <div class="reference" v-if="titles.length">
     <b>参考标题（点击复制）</b>
     <span v-for="(title, index) in titles" :key="index">
@@ -62,6 +62,7 @@ h2 {
 .titles {
   display: flex;
   flex-direction: column;
+  margin-bottom: 17px;
 
   input {
     margin-bottom: 7px;

@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import { languageItem } from './languageItem'
 import type { VNDB, VNDBResponse } from './VNDB'
 
-const vndbId = ref('')
+const { locale } = useI18n()
+const introductionLanguage = ref(locale.value as Language)
+const isSuccess = ref(false)
+
 const data = ref<VNDB>({
   title: '',
   titles: [],
@@ -13,37 +17,53 @@ const { vndb_id, name, banner, introduction, platform, official } = storeToRefs(
 )
 
 const handleGetVNData = async () => {
-  const { data: vndbData, pending } = await useFetch<VNDBResponse>(
+  const { data: vndbData } = await useFetch<VNDBResponse>(
     `https://api.vndb.org/kana/vn`,
     {
       method: 'POST',
       body: {
-        filters: ['id', '=', vndbId.value],
+        filters: ['id', '=', vndb_id.value],
         fields: 'title, titles.title, description'
       }
     }
   )
   if (vndbData.value) {
     data.value = vndbData.value.results[0]
-    name.value.en_us = vndbData.value.results[0].title
+    name.value['en-us'] = data.value.title
+    introduction.value['en-us'] = data.value.description ?? ''
+
+    if (introductionLanguage.value !== 'en-us') {
+      introductionLanguage.value = 'en-us'
+    } else {
+      isSuccess.value = !isSuccess.value
+    }
   }
 }
 </script>
 
 <template>
   <div class="container">
-    <h2>请输入 VNDB 编号</h2>
+    <h2>请输入 Galgame VNDB 编号</h2>
 
     <div class="vndb">
-      <KunInput v-model="vndbId" placeholder="例如: v19658" />
+      <KunInput v-model="vndb_id" placeholder="例如: v19658" />
       <KunButton @click="handleGetVNData">获取数据</KunButton>
     </div>
 
     <EditGalgameTitle :titles="data.titles">
-      <KunInput v-model="name.ja_jp" />
-      <KunInput v-model="name.en_us" />
-      <KunInput v-model="name.zh_cn" />
+      <KunInput v-model="name['en-us']" />
+      <KunInput v-model="name['ja-jp']" />
+      <KunInput v-model="name['zh-cn']" />
     </EditGalgameTitle>
+
+    <h2>请输入 Galgame 介绍</h2>
+    <KunNav
+      class="nav"
+      :items="languageItem"
+      :default-value="introductionLanguage"
+      @set="(value) => (introductionLanguage = value as Language)"
+    />
+    <EditGalgameEditor :lang="introductionLanguage" :pending="isSuccess" />
   </div>
 </template>
 
@@ -78,5 +98,9 @@ h2 {
   input {
     margin-bottom: 7px;
   }
+}
+
+.nav {
+  margin-bottom: 17px;
 }
 </style>

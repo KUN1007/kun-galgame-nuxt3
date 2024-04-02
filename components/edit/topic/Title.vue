@@ -35,7 +35,7 @@ const handleInput = debounce(() => {
   <div class="title">
     <input
       type="text"
-      :placeholder="`${$t('edit.title')}`"
+      :placeholder="`${$t('edit.topic.title')}`"
       v-model="topicTitle"
       @input="handleInput"
       :maxlength="maxInputLength"

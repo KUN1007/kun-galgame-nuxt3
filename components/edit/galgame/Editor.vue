@@ -4,30 +4,25 @@ import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
 
 const props = defineProps<{
   lang: Language
+  pending: boolean
 }>()
 
 const { introduction } = storeToRefs(usePersistGalgameStore())
 
-const valueMarkdown = ref('')
-
-valueMarkdown.value = introduction.value[props.lang]
-
 const saveMarkdown = debounce((editorMarkdown: string) => {
   introduction.value[props.lang] = editorMarkdown
-}, 1007)
+}, 107)
 </script>
 
 <template>
-  <div class="editor">
-    <MilkdownProvider>
-      <ProsemirrorAdapterProvider>
-        <KunMilkdownEditor
-          @save-markdown="saveMarkdown"
-          :value-markdown="valueMarkdown"
-          editor-hight="300"
-          :is-show-menu="true"
-        />
-      </ProsemirrorAdapterProvider>
-    </MilkdownProvider>
-  </div>
+  <MilkdownProvider>
+    <ProsemirrorAdapterProvider>
+      <KunMilkdownNoImage
+        @save-markdown="saveMarkdown"
+        :value-markdown="introduction[lang]"
+        :language="lang"
+        :pending="pending"
+      />
+    </ProsemirrorAdapterProvider>
+  </MilkdownProvider>
 </template>

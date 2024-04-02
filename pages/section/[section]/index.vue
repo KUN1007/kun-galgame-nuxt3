@@ -24,9 +24,9 @@ useHead({
 <template>
   <div class="root">
     <div class="title" :class="section[0]">
-      <span>{{ $t(`edit.${categoryMap[section[0]]}`) }}</span>
+      <span>{{ $t(`edit.topic.${categoryMap[section[0]]}`) }}</span>
       >
-      <span>{{ $t(`edit.section.${section}`) }}</span>
+      <span>{{ $t(`edit.topic.section.${section}`) }}</span>
     </div>
 
     <Section :section="section" />

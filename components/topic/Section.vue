@@ -18,7 +18,7 @@ const iconMap: Record<string, string> = {
     :class="sec.toLowerCase()[0]"
   >
     <Icon class="icon" :name="iconMap[sec[0]]" />
-    <span>{{ $t(`edit.section.${sec}`) }}</span>
+    <span>{{ $t(`edit.topic.section.${sec}`) }}</span>
   </span>
 </template>
 

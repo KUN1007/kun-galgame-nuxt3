@@ -47,6 +47,8 @@ import markdown from 'refractor/lang/markdown'
 
 const props = defineProps<{
   valueMarkdown: string
+  language: Language
+  pending: boolean
 }>()
 
 const emits = defineEmits<{
@@ -143,11 +145,9 @@ const editorInfo = useEditor((root) =>
 )
 
 watch(
-  () => valueMarkdown.value,
+  () => [props.language, props.pending],
   () => {
-    if (valueMarkdown.value) {
-      editorInfo.get()?.action(replaceAll(valueMarkdown.value))
-    }
+    editorInfo.get()?.action(replaceAll(valueMarkdown.value))
   }
 )
 </script>
@@ -164,7 +164,7 @@ watch(
 
     <div class="loading" v-if="editorInfo.loading.value">
       <span><Icon name="svg-spinners:12-dots-scale-rotate" /></span>
-      <span>{{ $t('edit.loading') }}</span>
+      <span>{{ $t('edit.topic.loading') }}</span>
     </div>
   </div>
 </template>
@@ -277,7 +277,7 @@ watch(
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 350px;
+  height: 374px;
 
   span {
     margin-left: 20px;

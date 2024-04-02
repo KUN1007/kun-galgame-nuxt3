@@ -134,7 +134,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
       <span v-for="(kun, index) in section" :key="index">
         <Icon :name="iconMap[kun[0]]" />
         <span>
-          {{ $t(`edit.section.${kun}`) }}
+          {{ $t(`edit.topic.section.${kun}`) }}
         </span>
       </span>
     </p>
@@ -145,11 +145,11 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
       @click="handlePublish"
       :disabled="isPublishing"
     >
-      {{ $t('edit.publish') }}
+      {{ $t('edit.topic.publish') }}
     </button>
 
     <button v-if="isTopicRewriting" class="rewrite-btn" @click="handleRewrite">
-      {{ $t('edit.rewrite') }}
+      {{ $t('edit.topic.rewrite') }}
     </button>
   </div>
 </template>

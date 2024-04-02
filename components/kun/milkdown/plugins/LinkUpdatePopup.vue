@@ -83,7 +83,7 @@ const handleUpdateLink = () => {
         v-model="linkHref"
       />
       <button class="confirm-btn" @click="handleUpdateLink">
-        {{ $t('edit.link.confirmUpdate') }}
+        {{ $t('edit.topic.link.confirmUpdate') }}
       </button>
     </div>
   </div>

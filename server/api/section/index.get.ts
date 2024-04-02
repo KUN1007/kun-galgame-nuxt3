@@ -18,7 +18,7 @@ const getSectionTopic = async (
     status: { $ne: 1 },
     section: { $in: section }
   })
-    .sort({ updated: order })
+    .sort({ time: order })
     .skip(skip)
     .limit(limit)
     .populate('user', 'uid avatar name')

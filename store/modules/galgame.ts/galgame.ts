@@ -6,15 +6,15 @@ export const usePersistGalgameStore = defineStore({
   state: (): GalgameStorePersist => ({
     vndb_id: 0,
     name: {
-      en_us: '',
-      ja_jp: '',
-      zh_cn: ''
+      'en-us': '',
+      'ja-jp': '',
+      'zh-cn': ''
     },
     banner: '',
     introduction: {
-      en_us: '',
-      ja_jp: '',
-      zh_cn: ''
+      'en-us': '',
+      'ja-jp': '',
+      'zh-cn': ''
     },
     platform: [],
 

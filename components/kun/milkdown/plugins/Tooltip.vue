@@ -81,7 +81,6 @@ const call = <T,>(command: CmdKey<T>, payload?: T) => {
     color: var(--kungalgame-font-color-3);
     background-color: var(--kungalgame-trans-white-9);
     border: 1px solid var(--kungalgame-trans-white-9);
-    transition: all 0.2s;
 
     &:hover {
       border: 1px solid var(--kungalgame-blue-5);
