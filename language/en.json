@@ -272,7 +272,17 @@
       "vndb": "",
       "en-us": "English",
       "ja-jp": "Japanese",
-      "zh-cn": "Chinese"
+      "zh-cn": "Chinese",
+      "platform": {
+        "windows": "Windows",
+        "mac": "macOS",
+        "linux": "Linux",
+        "kirikiri": "KiriKiri",
+        "ons": "ONS",
+        "tyranor": "Tyranor",
+        "app": "Mobile App",
+        "exagear": "ExaGear"
+      }
     }
   },
   "login":{

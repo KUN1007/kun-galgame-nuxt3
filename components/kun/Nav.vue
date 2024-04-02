@@ -38,6 +38,10 @@ const emits = defineEmits<{
     cursor: pointer;
     padding: 3px 10px;
 
+    &:first-child {
+      padding-left: 0;
+    }
+
     span {
       padding: 0 5px;
       padding-bottom: 5px;

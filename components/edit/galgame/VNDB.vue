@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { languageItem } from './languageItem'
+import { languageItems, platformItems } from './items'
 import type { VNDB, VNDBResponse } from './VNDB'
 
 const { locale } = useI18n()
@@ -32,11 +32,20 @@ const handleGetVNData = async () => {
     name.value['en-us'] = data.value.title
     introduction.value['en-us'] = data.value.description ?? ''
 
+    // For reactivity
     if (introductionLanguage.value !== 'en-us') {
       introductionLanguage.value = 'en-us'
     } else {
       isSuccess.value = !isSuccess.value
     }
+  }
+}
+
+const handleSelectPlatform = (pl: string) => {
+  if (platform.value.includes(pl)) {
+    platform.value = platform.value.filter((item) => item !== pl)
+  } else {
+    platform.value = [...new Set([...platform.value, pl])]
   }
 }
 </script>
@@ -59,11 +68,23 @@ const handleGetVNData = async () => {
     <h2>请输入 Galgame 介绍</h2>
     <KunNav
       class="nav"
-      :items="languageItem"
+      :items="languageItems"
       :default-value="introductionLanguage"
       @set="(value) => (introductionLanguage = value as Language)"
     />
     <EditGalgameEditor :lang="introductionLanguage" :pending="isSuccess" />
+
+    <h2>请选择 Galgame 的平台</h2>
+    <div class="platform">
+      <span
+        :class="platform.includes(kun.value) ? 'active' : ''"
+        v-for="(kun, index) in platformItems"
+        :key="index"
+        @click="handleSelectPlatform(kun.value)"
+      >
+        {{ $t(`edit.galgame.platform.${kun.value}`) }}
+      </span>
+    </div>
   </div>
 </template>
 
@@ -102,5 +123,24 @@ h2 {
 
 .nav {
   margin-bottom: 17px;
+}
+
+.platform {
+  display: flex;
+  flex-wrap: wrap;
+
+  span {
+    cursor: pointer;
+    padding: 3px 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+  }
+
+  .active {
+    border: 2px solid var(--kungalgame-blue-5);
+    background-color: var(--kungalgame-trans-blue-0);
+  }
 }
 </style>

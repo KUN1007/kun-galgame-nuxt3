@@ -273,7 +273,17 @@
     "galgame": {
       "en-us": "英语",
       "ja-jp": "日语",
-      "zh-cn": "汉语"
+      "zh-cn": "汉语",
+      "platform": {
+        "windows": "Windows",
+        "mac": "macOS",
+        "linux": "Linux",
+        "kirikiri": "KRKR",
+        "ons": "ONS",
+        "tyranor": "Tyranor",
+        "app": "应用直装",
+        "exagear": "ExaGear"
+      }
     }
   },
   "login":{

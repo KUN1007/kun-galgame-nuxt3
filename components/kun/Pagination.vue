@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-
 interface PaginationProps {
   page: number
   limit: number
@@ -100,9 +98,7 @@ const prevPage = () => {
   align-items: center;
   width: 100%;
   margin: 17px 0;
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  position: relative;
 
   button {
     padding: 5px 10px;
