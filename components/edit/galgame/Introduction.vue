@@ -12,7 +12,7 @@ const emits = defineEmits<{
 </script>
 
 <template>
-  <h2>请输入 Galgame 介绍</h2>
+  <h2>{{ $t('edit.galgame.introduction.name') }}</h2>
   <KunNav
     class="nav"
     :items="languageItems"
@@ -23,10 +23,6 @@ const emits = defineEmits<{
 </template>
 
 <style lang="scss" scoped>
-h2 {
-  margin-bottom: 17px;
-}
-
 .nav {
   margin-bottom: 17px;
 }

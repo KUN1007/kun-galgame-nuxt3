@@ -43,11 +43,16 @@ const handleGetVNData = async () => {
 
 <template>
   <div class="container">
-    <h2>请输入 Galgame VNDB 编号</h2>
+    <h2>{{ $t('edit.galgame.vndb.name') }}</h2>
 
     <div class="vndb">
-      <KunInput v-model="vndb_id" placeholder="例如: v19658" />
-      <KunButton @click="handleGetVNData">获取数据</KunButton>
+      <KunInput
+        v-model="vndb_id"
+        :placeholder="$t('edit.galgame.vndb.placeholder')"
+      />
+      <KunButton @click="handleGetVNData">
+        {{ $t('edit.galgame.vndb.fetch') }}
+      </KunButton>
     </div>
 
     <EditGalgameTitle :titles="data.titles">
@@ -64,8 +69,9 @@ const handleGetVNData = async () => {
 
     <EditGalgamePlatform />
 
-    <h2>请选择 Galgame 的预览图</h2>
-    <KunUpload width="300px" :aspect="16 / 9" />
+    <EditGalgameBanner />
+
+    <h2>{{ $t('edit.galgame.resource.name') }}</h2>
   </div>
 </template>
 
@@ -80,7 +86,7 @@ const handleGetVNData = async () => {
   padding: 17px;
 }
 
-h2 {
+:deep(h2) {
   margin-bottom: 17px;
 }
 

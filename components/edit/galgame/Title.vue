@@ -7,9 +7,9 @@ defineProps<{
 </script>
 
 <template>
-  <h2>请输入 Galgame 标题</h2>
+  <h2>{{ $t('edit.galgame.title.name') }}</h2>
   <div class="reference" v-if="titles.length">
-    <b>参考标题（点击复制）</b>
+    <b>{{ $t('edit.galgame.title.reference') }}</b>
     <span v-for="(title, index) in titles" :key="index">
       {{ title.title }}
     </span>
@@ -21,10 +21,6 @@ defineProps<{
 </template>
 
 <style lang="scss" scoped>
-h2 {
-  margin-bottom: 17px;
-}
-
 .reference {
   display: flex;
   flex-wrap: wrap;

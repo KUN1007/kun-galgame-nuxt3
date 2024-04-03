@@ -271,10 +271,29 @@
       "rewrite": "确认 Rewrite"
     },
     "galgame": {
-      "en-us": "英语",
-      "ja-jp": "日语",
-      "zh-cn": "汉语",
+      "vndb": {
+        "name": "VNDB 编号",
+        "placeholder": "例如: v19658",
+        "fetch": "获取数据"
+      },
+      "title": {
+        "name": "标题",
+        "reference": "参考标题（点击复制）"
+      },
+      "introduction": {
+        "name": "介绍",
+        "en-us": "英语",
+        "ja-jp": "日语",
+        "zh-cn": "汉语"
+      },
+      "banner": {
+        "name": "预览图"
+      },
+      "resource": {
+        "name": "资源链接"
+      },
       "platform": {
+        "name": "平台",
         "windows": "Windows",
         "mac": "macOS",
         "linux": "Linux",

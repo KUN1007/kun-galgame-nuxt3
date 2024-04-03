@@ -13,7 +13,7 @@ const handleSelectPlatform = (pl: string) => {
 </script>
 
 <template>
-  <h2>请选择 Galgame 的平台</h2>
+  <h2>{{ $t('edit.galgame.platform.name') }}</h2>
   <div class="platform">
     <span
       :class="platform.includes(kun.value) ? 'active' : ''"
@@ -27,10 +27,6 @@ const handleSelectPlatform = (pl: string) => {
 </template>
 
 <style lang="scss" scoped>
-h2 {
-  margin-bottom: 17px;
-}
-
 .platform {
   display: flex;
   flex-wrap: wrap;

@@ -5,15 +5,15 @@ interface Item {
 
 export const languageItems: Item[] = [
   {
-    i18n: 'edit.galgame.en-us',
+    i18n: 'edit.galgame.introduction.en-us',
     value: 'en-us'
   },
   {
-    i18n: 'edit.galgame.ja-jp',
+    i18n: 'edit.galgame.introduction.ja-jp',
     value: 'ja-jp'
   },
   {
-    i18n: 'edit.galgame.zh-cn',
+    i18n: 'edit.galgame.introduction.zh-cn',
     value: 'zh-cn'
   }
 ]

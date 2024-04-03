@@ -269,11 +269,29 @@
       "rewrite": "Confirm Rewrite"
     },
     "galgame": {
-      "vndb": "",
-      "en-us": "English",
-      "ja-jp": "Japanese",
-      "zh-cn": "Chinese",
+      "vndb": {
+        "name": "VNDB ID",
+        "placeholder": "For example: v19658",
+        "fetch": "Fetch Data"
+      },
+      "title": {
+        "name": "Title",
+        "reference": "Reference Title (Click to Copy)"
+      },
+      "introduction": {
+        "name": "Introduction",
+        "en-us": "English",
+        "ja-jp": "Japanese",
+        "zh-cn": "Chinese"
+      },
+      "banner": {
+        "name": "Banner"
+      },
+      "resource": {
+        "name": "Resources Link"
+      },
       "platform": {
+        "name": "Platforms",
         "windows": "Windows",
         "mac": "macOS",
         "linux": "Linux",
