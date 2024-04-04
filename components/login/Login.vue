@@ -62,7 +62,7 @@ const handleClickForgotPassword = () => {
     <slot />
 
     <form class="form" @submit.prevent>
-      <h2 class="title">{{ $t('login.login.loginTitle') }}</h2>
+      <span class="title">{{ $t('login.login.loginTitle') }}</span>
       <input
         v-model="loginForm.name"
         autocomplete="username"
@@ -112,8 +112,8 @@ const handleClickForgotPassword = () => {
 }
 
 .title {
-  font-weight: 300;
   font-weight: bold;
+  font-size: 24px;
   margin: 20px;
   color: var(--kungalgame-font-color-2);
 }

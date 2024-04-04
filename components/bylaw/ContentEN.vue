@@ -2,7 +2,7 @@
 
 <template>
   <div class="article">
-    <div class="title-0">Regulations (Trial)</div>
+    <div class="title">Regulations (Trial)</div>
     <div class="tips">
       <p>
         Tips: These are trial regulations, ✔ indicating implementation. The aim
@@ -15,10 +15,10 @@
     </div>
 
     <div class="moemoepoint">
-      <div class="title-1">Moemoepoints</div>
+      <h2>Moemoepoints</h2>
 
       <div class="gain">
-        <div class="title-2">- Acquisition Methods</div>
+        <h3>Acquisition Methods</h3>
         <ul>
           <li>1. Each registered user initially has 1007 moemoepoints ✔</li>
           <li>
@@ -45,7 +45,7 @@
       </div>
 
       <div class="deduct">
-        <div class="title-2">- Deduction Methods</div>
+        <h3>Deduction Methods</h3>
         <ul>
           <li>
             1. Users engaging in non-moe behavior will have points deducted (7,
@@ -64,7 +64,7 @@
     </div>
 
     <div class="kungalgamer">
-      <div class="title-1">Users</div>
+      <h2>Users</h2>
       <ul>
         <li>
           <strong>
@@ -84,7 +84,7 @@
     </div>
 
     <div class="topic">
-      <div class="title-1">Topics</div>
+      <h2>Topics</h2>
       <ul>
         <li>
           1. Each topic on the homepage is in "Dynamic Promotion" status. Once
@@ -123,7 +123,7 @@
   height: 100%;
 }
 
-.title-0 {
+.title {
   font-size: 30px;
   margin: 17px 0;
   display: flex;
@@ -133,7 +133,6 @@
 .tips {
   border-top: 2px solid var(--kungalgame-blue-5);
   padding-top: 10px;
-  margin-bottom: 47px;
 
   span {
     cursor: pointer;
@@ -145,16 +144,9 @@
   }
 }
 
-.title-1 {
-  font-size: 25px;
-  margin: 20px 0;
-  border-left: 4px solid var(--kungalgame-blue-5);
-  text-indent: 1em;
-}
-
-.title-2 {
-  font-size: 17px;
-  text-indent: 1em;
+h2 {
+  margin-top: 30px;
+  margin-bottom: 17px;
 }
 
 .moemoepoint ul {

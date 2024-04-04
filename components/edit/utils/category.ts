@@ -31,6 +31,7 @@ export const otherSection = [
   'o-comics',
   'o-music',
   'o-novel',
+  'o-forum',
   'o-other'
 ]
 

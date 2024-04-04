@@ -1,6 +1,12 @@
 import { isValidTimestamp } from '~/utils/validate'
+import {
+  galgameSection,
+  techniqueSection,
+  otherSection
+} from '~/components/edit/utils/category'
 
 const topicCategory = ['Galgame', 'Technique', 'Others']
+const topicSection = [...galgameSection, ...techniqueSection, ...otherSection]
 
 export const checkTopicPublish = (
   title: string,
@@ -40,6 +46,12 @@ export const checkTopicPublish = (
 
   if (!section.length || section.length > 2) {
     return 10219
+  }
+
+  for (const s of section) {
+    if (!topicSection.includes(s)) {
+      return 10222
+    }
   }
 
   if (!isValidTimestamp(edited)) {

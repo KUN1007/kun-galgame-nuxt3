@@ -255,6 +255,7 @@
         "o-comics": "Comic",
         "o-music": "Music",
         "o-novel": "Light Novel",
+        "o-forum": "Forum-related",
         "o-other": "Other"
       },
       "link": {

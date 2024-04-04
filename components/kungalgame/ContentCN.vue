@@ -361,15 +361,11 @@ h1 {
 h2 {
   margin-top: 77px;
   margin-bottom: 30px;
-  border-left: 4px solid var(--kungalgame-blue-5);
-  text-indent: 1em;
 }
 
 h3 {
   margin-bottom: 30px;
   margin-top: 20px;
-  border-left: 3px solid var(--kungalgame-blue-5);
-  text-indent: 1em;
 }
 
 p {

@@ -69,7 +69,7 @@ const handleRegister = async () => {
   <div class="register">
     <slot />
     <form class="form" @submit.prevent>
-      <h2 class="title">{{ $t('login.register.title') }}</h2>
+      <span class="title">{{ $t('login.register.title') }}</span>
 
       <div class="container" v-for="item in registerFormItem" :key="item.index">
         <input
@@ -124,8 +124,8 @@ const handleRegister = async () => {
 }
 
 .title {
-  font-weight: 300;
   font-weight: bold;
+  font-size: 24px;
   margin-bottom: 20px;
   color: var(--kungalgame-font-color-2);
 }

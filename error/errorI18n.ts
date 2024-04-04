@@ -44,6 +44,7 @@ const errorMessagesEN: Record<number, string> = {
   10219: `Topic with a maximum of 2 sections. Minimum one section. (-B)`,
   10220: `Request parameter error, we only support galgame, technique, others category. (-B)`,
   10221: `You've already favorite this topic. (-B)`,
+  10222: `Please select a topic section that exists (-B)`,
 
   // Auth Part
   10301: `Sending emails too frequently, please waiting 30s (-B)`,
@@ -109,6 +110,7 @@ const errorMessagesCN: Record<number, string> = {
   10219: `话题最多 2 个分区, 最少一个分区 (-B)`,
   10220: `请求参数错误, 我们仅支持 Galgame, 技术交流, 其它分类 (-B)`,
   10221: `您已经收藏过这个话题了 (-B)`,
+  10222: `请选择我们存在的话题分区 (-B)`,
 
   10301: `发送邮件频率过快, 请等待 30 秒 (-B)`,
   10302: `非法的邮箱格式 (-B)`,

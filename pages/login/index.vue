@@ -12,7 +12,7 @@ useHead({
 })
 
 const isShowPanel = ref('')
-const isLogin = computed(() => (!!isShowPanel.value))
+const isLogin = computed(() => !!isShowPanel.value)
 
 const handleClickSignIn = () => {
   isShowPanel.value = ''
@@ -49,26 +49,26 @@ const handleClickRegister = () => {
       <div class="container-overlay">
         <div class="overlay">
           <div class="panel left">
-            <h2>
+            <p>
               {{ $t('login.overlay.title') }}<br /><br />——
               {{ $t('login.overlay.world') }}
               <span>{{ $t('login.overlay.moe') }}</span>
               {{ $t('login.overlay.forum') }}
-            </h2>
+            </p>
             <br />
             <button class="btn" @click="handleClickSignIn">
               {{ $t('login.overlay.login') }}
             </button>
           </div>
           <div class="panel right">
-            <h2>
+            <p>
               {{ $t('login.overlay.home') }}
               <br />
               <br />
               {{ $t('login.overlay.kun') }}
               <br />
               {{ $t('login.overlay.hug') }}
-            </h2>
+            </p>
             <button class="btn" @click="handleClickRegister">
               {{ $t('login.overlay.register') }}
             </button>
@@ -154,13 +154,14 @@ const handleClickRegister = () => {
   transition: transform 0.6s ease-in-out;
   width: 200%;
 
-  h2 {
+  p {
     margin-top: 150px;
+    font-weight: bold;
     font-size: medium;
     color: var(--kungalgame-font-color-2);
   }
 
-  h2 span {
+  p span {
     color: var(--kungalgame-red-4);
     padding: 0 5px;
     font-size: 20px;

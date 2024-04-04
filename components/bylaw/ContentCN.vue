@@ -2,7 +2,7 @@
 
 <template>
   <div class="article">
-    <div class="title-0">执行条例（试行）</div>
+    <div class="title">执行条例（试行）</div>
     <div class="tips">
       <p>
         tips: 这是执行条例，✔
@@ -14,10 +14,10 @@
     </div>
 
     <div class="moemoepoint">
-      <div class="title-1">萌萌点</div>
+      <h2>萌萌点</h2>
 
       <div class="gain">
-        <div class="title-2">- 获取方法</div>
+        <h3>获取方法</h3>
         <ul>
           <li>1. 每个注册用户初始拥有 1007 萌萌点 ✔</li>
           <li>2. 每天签到获得随机 0 ~ 7 萌萌点，签到每日零点刷新 ✔</li>
@@ -29,7 +29,7 @@
       </div>
 
       <div class="deduct">
-        <div class="title-2">- 扣除方法</div>
+        <h3>扣除方法</h3>
         <ul>
           <li>
             1. 用户的不萌行为，根据严重程度，将会被扣除 7, 17, 77, 177, 777
@@ -42,7 +42,7 @@
     </div>
 
     <div class="kungalgamer">
-      <div class="title-1">用户</div>
+      <h2>用户</h2>
       <ul>
         <li><strong>1. 萌萌点低于 1000 的用户将会被删除账户</strong></li>
         <li>2. 萌萌点低于 1100 的用户无法使用“推话题”功能 ✔</li>
@@ -53,7 +53,7 @@
     </div>
 
     <div class="topic">
-      <div class="title-1">话题</div>
+      <h2>话题</h2>
       <ul>
         <li>
           1.
@@ -88,7 +88,7 @@
   height: 100%;
 }
 
-.title-0 {
+.title {
   font-size: 30px;
   margin: 17px 0;
   display: flex;
@@ -98,7 +98,6 @@
 .tips {
   border-top: 2px solid var(--kungalgame-blue-5);
   padding-top: 10px;
-  margin-bottom: 47px;
 
   span {
     cursor: pointer;
@@ -110,16 +109,9 @@
   }
 }
 
-.title-1 {
-  font-size: 25px;
-  margin: 20px 0;
-  border-left: 4px solid var(--kungalgame-blue-5);
-  text-indent: 1em;
-}
-
-.title-2 {
-  font-size: 17px;
-  text-indent: 1em;
+h2 {
+  margin-top: 30px;
+  margin-bottom: 17px;
 }
 
 .moemoepoint ul {
