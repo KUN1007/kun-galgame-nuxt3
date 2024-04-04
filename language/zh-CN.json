@@ -271,6 +271,17 @@
       "rewrite": "确认 Rewrite"
     },
     "galgame": {
+      "help": {
+        "name": "发布帮助",
+        "tip": "参考网站 (可能需要网络代理)",
+        "vndb": "VNDB",
+        "erogamescape": "批评空间",
+        "dlsite": "DLsite",
+        "wikipedia": "维基百科",
+        "bangumi": "Bangumi 番组计划",
+        "moegirl": "萌娘百科"
+      },
+      "essential": "必要信息部分",
       "vndb": {
         "name": "VNDB 编号",
         "placeholder": "例如: v19658",
@@ -306,15 +317,7 @@
           "others": "其它"
         }
       },
-      "platform": {
-        "name": "平台",
-        "windows": "Windows",
-        "mac": "macOS",
-        "linux": "Linux",
-        "emulator": "模拟器",
-        "app": "应用直装",
-        "others": "其它"
-      }
+      "confirm": "确认发布 Galgame"
     }
   },
   "login":{

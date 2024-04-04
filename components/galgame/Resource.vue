@@ -3,7 +3,8 @@ import { typeOptions, languageOptions, platformOptions } from './options'
 import type { GalgameResourceStorePersist } from '~/store/types/galgame/resource'
 
 const { locale } = useI18n()
-const resourceLink = reactive<GalgameResourceStorePersist>({
+
+const originalLink = {
   type: 'game',
   link: '',
   language: locale.value,
@@ -13,9 +14,18 @@ const resourceLink = reactive<GalgameResourceStorePersist>({
   code: '',
   password: '',
   note: ''
-})
+}
+
+const resourceLink = ref<GalgameResourceStorePersist>(originalLink)
 
 const { resources } = storeToRefs(usePersistGalgameResourceStore())
+
+const handleCreateResourceLink = () => {
+  if (resourceLink.value.link && resourceLink.value.size) {
+    resources.value = [...new Set([...resources.value, resourceLink.value])]
+    resourceLink.value = originalLink
+  }
+}
 </script>
 
 <template>
@@ -30,7 +40,7 @@ const { resources } = storeToRefs(usePersistGalgameResourceStore())
       <div>
         <KunInput
           placeholder="资源体积 (MB 或 GB)"
-          v-model="resourceLink.password"
+          v-model="resourceLink.size"
         />
         <KunInput
           placeholder="资源提取码 (如果有)"
@@ -97,11 +107,12 @@ const { resources } = storeToRefs(usePersistGalgameResourceStore())
     </div>
 
     <div class="note">
-      <KunInput
-        placeholder="资源备注 (如果有)"
-        v-model="resourceLink.password"
-      />
+      <KunInput placeholder="资源备注 (如果有)" v-model="resourceLink.note" />
     </div>
+
+    <KunButton @click="handleCreateResourceLink">创建资源链接</KunButton>
+
+    <EditGalgameResourceLink :resources="resources" />
   </div>
 </template>
 
@@ -157,5 +168,6 @@ const { resources } = storeToRefs(usePersistGalgameResourceStore())
 .note {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 }
 </style>

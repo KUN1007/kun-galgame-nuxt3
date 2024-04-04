@@ -269,6 +269,17 @@
       "rewrite": "Confirm Rewrite"
     },
     "galgame": {
+      "help": {
+        "name": "Publish Help",
+        "tip": "Reference website (may require internet proxy)",
+        "vndb": "VNDB",
+        "erogamescape": "ErogameScape",
+        "dlsite": "DLsite",
+        "wikipedia": "Wikipedia",
+        "bangumi": "Bangumi",
+        "moegirl": "Moegirlpedia"
+      },
+      "essential": "Essential information section",
       "vndb": {
         "name": "VNDB ID",
         "placeholder": "For example: v19658",
@@ -304,15 +315,7 @@
           "others": "Others"
         }
       },
-      "platform": {
-        "name": "Platforms",
-        "windows": "Windows",
-        "mac": "macOS",
-        "linux": "Linux",
-        "emulator": "Emulator",
-        "app": "Mobile App",
-        "others": "Others"
-      }
+      "confirm": "Confirm Publish VN"
     }
   },
   "login":{

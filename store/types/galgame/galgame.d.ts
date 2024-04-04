@@ -5,7 +5,4 @@ export interface GalgameStorePersist {
   name: KunLanguageFront
   banner: string
   introduction: KunLanguageFront
-  platform: string[]
-
-  official: string
 }

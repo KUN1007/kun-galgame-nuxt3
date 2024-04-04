@@ -15,10 +15,7 @@ export const usePersistGalgameStore = defineStore({
       'en-us': '',
       'ja-jp': '',
       'zh-cn': ''
-    },
-    platform: ['windows'],
-
-    official: ''
+    }
   }),
   actions: {}
 })

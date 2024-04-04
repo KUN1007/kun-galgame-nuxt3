@@ -11,7 +11,7 @@ const data = ref<VNDB>({
   description: ''
 })
 
-const { vndb_id, name, banner, introduction, official } = storeToRefs(
+const { vndb_id, name, banner, introduction } = storeToRefs(
   usePersistGalgameStore()
 )
 
@@ -43,6 +43,12 @@ const handleGetVNData = async () => {
 
 <template>
   <div class="container">
+    <EditGalgameHelp />
+
+    <KunDivider margin="50px 0">
+      <span class="divider">{{ $t('edit.galgame.essential') }}</span>
+    </KunDivider>
+
     <h2>{{ $t('edit.galgame.vndb.name') }}</h2>
 
     <div class="vndb">
@@ -67,15 +73,11 @@ const handleGetVNData = async () => {
       @set="(value) => (introductionLanguage = value as Language)"
     />
 
-    <EditGalgamePlatform />
-
     <EditGalgameBanner />
 
-    <KunDivider margin="50px 0">
-      <span class="divider">资源链接部分</span>
-    </KunDivider>
-
-    <EditGalgameResource />
+    <div class="confirm">
+      <KunButton>{{ $t('edit.galgame.confirm') }}</KunButton>
+    </div>
   </div>
 </template>
 
@@ -113,6 +115,28 @@ const handleGetVNData = async () => {
 
   input {
     margin-bottom: 7px;
+  }
+}
+
+.confirm {
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+
+  button {
+    height: 40px;
+    width: 200px;
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+    flex-shrink: 0;
+    border-radius: 10px;
+    margin-left: auto;
+
+    &:hover {
+      color: var(--kungalgame-white);
+    }
   }
 }
 </style>
