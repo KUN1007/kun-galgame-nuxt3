@@ -7,7 +7,12 @@ defineProps<{
 </script>
 
 <template>
-  <h2>{{ $t('edit.galgame.title.name') }}</h2>
+  <KunHeader :size="2" :show-help="true">
+    <template #header>{{ $t('edit.galgame.title.name') }}</template>
+
+    <template #help>{{ $t('edit.galgame.title.help') }}</template>
+  </KunHeader>
+
   <div class="reference" v-if="titles.length">
     <b>{{ $t('edit.galgame.title.reference') }}</b>
     <span v-for="(title, index) in titles" :key="index">

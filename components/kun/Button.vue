@@ -19,5 +19,11 @@ button {
     background-color: var(--kungalgame-blue-5);
     color: var(--kungalgame-white);
   }
+
+  &:active {
+    box-shadow:
+      var(--kungalgame-white) 0px 0px 0px 2px,
+      var(--kungalgame-blue-5) 0px 0px 0px 4px;
+  }
 }
 </style>

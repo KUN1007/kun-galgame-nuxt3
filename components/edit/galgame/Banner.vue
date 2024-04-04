@@ -1,8 +1,12 @@
 <script setup lang="ts"></script>
 
 <template>
-  <h2>{{ $t('edit.galgame.banner.name') }}</h2>
-  <KunUpload class="upload" width="300px" :aspect="16 / 9" />
+  <KunHeader :size="2" :show-help="true">
+    <template #header>{{ $t('edit.galgame.banner.name') }}</template>
+
+    <template #help>{{ $t('edit.galgame.banner.help') }}</template>
+  </KunHeader>
+  <KunUpload class="upload" width="300px" :size="1920" :aspect="16 / 9" />
 </template>
 
 <style lang="scss" scoped>

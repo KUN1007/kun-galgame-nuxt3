@@ -53,6 +53,13 @@ const siteList: Site[] = [
       {{ $t(`edit.galgame.help.${site.name}`) }}
     </a>
   </div>
+
+  <div class="definition">
+    <span>{{ $t('edit.galgame.help.definition') }}</span>
+    <a href="http://" target="_blank" rel="noopener noreferrer">
+      {{ $t('edit.galgame.help.how') }}
+    </a>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -66,13 +73,10 @@ const siteList: Site[] = [
   }
 }
 
-p {
-  margin-bottom: 10px;
-}
-
 .site {
   display: flex;
   flex-wrap: wrap;
+  margin: 17px 0;
 
   a {
     font-weight: bold;
@@ -88,6 +92,13 @@ p {
     &:hover {
       border-bottom: 2px solid var(--kungalgame-blue-5);
     }
+  }
+}
+
+.definition {
+  a {
+    color: var(--kungalgame-blue-5);
+    font-style: oblique;
   }
 }
 </style>

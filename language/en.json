@@ -270,39 +270,46 @@
     },
     "galgame": {
       "help": {
-        "name": "Publish Help",
+        "name": "Publish VN Help",
         "tip": "Reference website (may require internet proxy)",
         "vndb": "VNDB",
         "erogamescape": "ErogameScape",
         "dlsite": "DLsite",
         "wikipedia": "Wikipedia",
         "bangumi": "Bangumi",
-        "moegirl": "Moegirlpedia"
+        "moegirl": "Moegirlpedia",
+        "definition": "Our current definition of Visualnovel is based on games that can be found on VNDB. If a game cannot be found on VNDB, it is not considered a Visualnovel. For non-Visualnovel games that cannot be found in the search, please temporarily classify them under topic's Galgame -> Others category.",
+        "how": "How to search for Galgame through VNDB?"
       },
       "essential": "Essential information section",
       "vndb": {
         "name": "VNDB ID",
+        "help": "We require that each VN must have a VNDB ID. The VNDB ID needs to be obtained from the VNDB official website (vndb.org) at the top of the page. When entering the page of the corresponding game, the ID in the game page URL (such as https://vndb.org/v19658) is the VNDB ID. After entering the ID, click 'Fetch Data', and the game's title and description (both in English) will be attempted to be retrieved from VNDB.",
         "placeholder": "For example: v19658",
         "fetch": "Fetch Data"
       },
       "title": {
         "name": "Title",
+        "help": "Title is required to have at least one. It's highly recommended to fill in all (If there is no corresponding translation for the game, it can be left blank. English titles can be automatically obtained from VNDB)",
         "reference": "Reference Title (Click to Copy)"
       },
       "introduction": {
         "name": "Introduction",
+        "help": "At least one type of introduction is required. The English introduction can be automatically retrieved by clicking 'Fetch Data', but there is a chance it may not be available. For the Japanese introduction, you can click on the 'DLsite' website at the top of the page to enter the game details page, and the 'ストーリー' section on that page is the Japanese introduction. The Chinese introduction can be obtained from Bangumi or the Moegirl Wiki",
         "en-us": "English",
         "ja-jp": "Japanese",
         "zh-cn": "Chinese"
       },
       "banner": {
-        "name": "Banner"
+        "name": "Banner",
+        "help": "Please try to capture the original resolution of the VN for the banner image instead of taking screenshots. Avoid including the edges of the device window, and it's preferable for the width to be greater than the height. The preview image will ultimately be resized to a resolution no larger than 1920 × 1080."
       },
       "resource": {
         "name": "Resources Link",
         "type": {
           "game": "Main Game",
           "patch": "Patch",
+          "collection": "Collection",
           "voice": "Voice-related",
           "image": "Image-related",
           "ai": "AI-related",

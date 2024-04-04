@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { platformItems } from './items'
 
+// TODO:
 const { platform } = storeToRefs(usePersistGalgameStore())
 
 const handleSelectPlatform = (pl: string) => {

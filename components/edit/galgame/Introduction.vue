@@ -12,7 +12,12 @@ const emits = defineEmits<{
 </script>
 
 <template>
-  <h2>{{ $t('edit.galgame.introduction.name') }}</h2>
+  <KunHeader :size="2" :show-help="true">
+    <template #header>{{ $t('edit.galgame.introduction.name') }}</template>
+
+    <template #help>{{ $t('edit.galgame.introduction.help') }}</template>
+  </KunHeader>
+
   <KunNav
     class="nav"
     :items="languageItems"

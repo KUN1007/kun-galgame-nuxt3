@@ -49,7 +49,11 @@ const handleGetVNData = async () => {
       <span class="divider">{{ $t('edit.galgame.essential') }}</span>
     </KunDivider>
 
-    <h2>{{ $t('edit.galgame.vndb.name') }}</h2>
+    <KunHeader :size="2" :show-help="true">
+      <template #header>{{ $t('edit.galgame.vndb.name') }}</template>
+
+      <template #help>{{ $t('edit.galgame.vndb.help') }}</template>
+    </KunHeader>
 
     <div class="vndb">
       <KunInput
@@ -62,9 +66,18 @@ const handleGetVNData = async () => {
     </div>
 
     <EditGalgameTitle :titles="data.titles">
-      <KunInput v-model="name['en-us']" />
-      <KunInput v-model="name['ja-jp']" />
-      <KunInput v-model="name['zh-cn']" />
+      <KunInput
+        :placeholder="$t('edit.galgame.introduction.en-us')"
+        v-model="name['en-us']"
+      />
+      <KunInput
+        :placeholder="$t('edit.galgame.introduction.ja-jp')"
+        v-model="name['ja-jp']"
+      />
+      <KunInput
+        :placeholder="$t('edit.galgame.introduction.zh-cn')"
+        v-model="name['zh-cn']"
+      />
     </EditGalgameTitle>
 
     <EditGalgameIntroduction
@@ -94,6 +107,11 @@ const handleGetVNData = async () => {
 
 :deep(h2) {
   margin-bottom: 17px;
+
+  .icon {
+    font-size: large;
+    margin-left: 10px;
+  }
 }
 
 .divider {
@@ -126,17 +144,10 @@ const handleGetVNData = async () => {
   button {
     height: 40px;
     width: 200px;
-    font-size: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    cursor: pointer;
+    font-size: 17px;
     flex-shrink: 0;
     border-radius: 10px;
     margin-left: auto;
-
-    &:hover {
-      color: var(--kungalgame-white);
-    }
   }
 }
 </style>

@@ -3,6 +3,7 @@ import { checkImageValid, resizeImage } from './utils/handleFileChange'
 
 const props = defineProps<{
   width: string
+  size: number
   aspect: number
 }>()
 
@@ -18,8 +19,8 @@ const uploadImage = async (file: File) => {
 
   const resizedFile = await resizeImage(
     file,
-    parseInt(props.width) * 4,
-    (parseInt(props.width) * 2) / props.aspect
+    props.size,
+    props.size / props.aspect
   )
   uploadedImage.value = resizedFile
   selectedFileUrl.value = URL.createObjectURL(resizedFile)

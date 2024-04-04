@@ -165,7 +165,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   button {
     height: 40px;
     width: 200px;
-    font-size: 20px;
+    font-size: 17px;
     white-space: nowrap;
     overflow: hidden;
     cursor: pointer;
@@ -186,7 +186,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   color: var(--kungalgame-font-color-1);
 
   .icon {
-    font-size: 20px;
+    font-size: 17px;
     margin-right: 10px;
   }
 
@@ -231,7 +231,6 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
     button {
       width: 150px;
-      font-size: 17px;
       margin: auto;
     }
   }
