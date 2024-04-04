@@ -3,11 +3,11 @@ const value = defineModel<string>({ required: true })
 </script>
 
 <template>
-  <input v-model="value" />
+  <input class="kun-input" v-model="value" />
 </template>
 
 <style lang="scss" scoped>
-input {
+.kun-input {
   padding: 7px 10px;
   border: 1px solid var(--kungalgame-trans-blue-2);
   color: var(--kungalgame-font-color-3);

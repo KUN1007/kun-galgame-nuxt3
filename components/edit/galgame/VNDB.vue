@@ -71,7 +71,11 @@ const handleGetVNData = async () => {
 
     <EditGalgameBanner />
 
-    <h2>{{ $t('edit.galgame.resource.name') }}</h2>
+    <KunDivider margin="50px 0">
+      <span class="divider">资源链接部分</span>
+    </KunDivider>
+
+    <EditGalgameResource />
   </div>
 </template>
 
@@ -88,6 +92,10 @@ const handleGetVNData = async () => {
 
 :deep(h2) {
   margin-bottom: 17px;
+}
+
+.divider {
+  padding: 0 17px;
 }
 
 .vndb {

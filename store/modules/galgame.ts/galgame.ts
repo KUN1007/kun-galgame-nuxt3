@@ -4,7 +4,7 @@ export const usePersistGalgameStore = defineStore({
   id: 'Galgame',
   persist: true,
   state: (): GalgameStorePersist => ({
-    vndb_id: 0,
+    vndb_id: '',
     name: {
       'en-us': '',
       'ja-jp': '',
@@ -16,7 +16,7 @@ export const usePersistGalgameStore = defineStore({
       'ja-jp': '',
       'zh-cn': ''
     },
-    platform: [],
+    platform: ['windows'],
 
     official: ''
   }),

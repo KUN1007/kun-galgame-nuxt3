@@ -33,15 +33,7 @@ export const platformItems: Item[] = [
   },
   {
     i18n: '',
-    value: 'kirikiri'
-  },
-  {
-    i18n: '',
-    value: 'ons'
-  },
-  {
-    i18n: '',
-    value: 'tyranor'
+    value: 'emulator'
   },
   {
     i18n: '',
@@ -49,6 +41,6 @@ export const platformItems: Item[] = [
   },
   {
     i18n: '',
-    value: 'exagear'
+    value: 'others'
   }
 ]

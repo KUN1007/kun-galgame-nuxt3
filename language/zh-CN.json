@@ -290,18 +290,30 @@
         "name": "预览图"
       },
       "resource": {
-        "name": "资源链接"
+        "name": "资源链接",
+        "type": {
+          "game": "游戏本体",
+          "patch": "补丁",
+          "voice": "音声相关",
+          "image": "图片相关",
+          "ai": "AI 相关",
+          "others": "其它"
+        },
+        "language": {
+          "ja-jp": "日语",
+          "en-us": "英语",
+          "zh-cn": "中文",
+          "others": "其它"
+        }
       },
       "platform": {
         "name": "平台",
         "windows": "Windows",
         "mac": "macOS",
         "linux": "Linux",
-        "kirikiri": "KRKR",
-        "ons": "ONS",
-        "tyranor": "Tyranor",
+        "emulator": "模拟器",
         "app": "应用直装",
-        "exagear": "ExaGear"
+        "others": "其它"
       }
     }
   },

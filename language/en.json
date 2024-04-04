@@ -288,18 +288,30 @@
         "name": "Banner"
       },
       "resource": {
-        "name": "Resources Link"
+        "name": "Resources Link",
+        "type": {
+          "game": "Main Game",
+          "patch": "Patch",
+          "voice": "Voice-related",
+          "image": "Image-related",
+          "ai": "AI-related",
+          "others": "Others"
+        },
+        "language": {
+          "ja-jp": "Japanese",
+          "en-us": "English",
+          "zh-cn": "Chinese",
+          "others": "Others"
+        }
       },
       "platform": {
         "name": "Platforms",
         "windows": "Windows",
         "mac": "macOS",
         "linux": "Linux",
-        "kirikiri": "KiriKiri",
-        "ons": "ONS",
-        "tyranor": "Tyranor",
+        "emulator": "Emulator",
         "app": "Mobile App",
-        "exagear": "ExaGear"
+        "others": "Others"
       }
     }
   },

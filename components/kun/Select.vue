@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
 
-const container = ref<HTMLElement>()
-const isShowOptions = ref(false)
-
 const props = defineProps<{
   options: string[]
   styles?: CSSProperties
   i18n: string
   position?: 'top' | 'bottom'
+  defaultValue?: string
 }>()
 const position = computed(() => (props.position ? props.position : 'bottom'))
+
+const container = ref<HTMLElement>()
+const isShowOptions = ref(false)
+const checkedValue = ref(props.defaultValue ?? '')
 
 const emit = defineEmits<{
   set: [value: string, index: number]
@@ -19,6 +21,11 @@ const emit = defineEmits<{
 const handleClickShowLanguage = () => {
   isShowOptions.value = true
   container.value?.focus()
+}
+
+const handleSetOption = (value: string, index: number) => {
+  emit('set', value, index)
+  checkedValue.value = value
 }
 </script>
 
@@ -40,10 +47,12 @@ const handleClickShowLanguage = () => {
         <span
           v-for="(kun, index) in props.options"
           :key="index"
-          @click.stop.prevent="emit('set', kun, index)"
-          v-once
+          @click.stop.prevent="handleSetOption(kun, index)"
         >
-          {{ $t(`${props.i18n}.${kun}`) }}
+          <span>{{ $t(`${props.i18n}.${kun}`) }}</span>
+          <span v-if="checkedValue === kun">
+            <Icon name="lucide:check" />
+          </span>
         </span>
       </div>
     </Transition>
@@ -54,6 +63,8 @@ const handleClickShowLanguage = () => {
 .kun-select {
   position: relative;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
 }
 
 .kun-chooser {
@@ -78,9 +89,10 @@ const handleClickShowLanguage = () => {
   border-radius: 5px;
   box-shadow: var(--shadow);
 
-  span {
+  & > span {
     font-size: 15px;
     display: flex;
+    justify-content: space-between;
     padding: 5px;
     border-radius: 5px;
 
