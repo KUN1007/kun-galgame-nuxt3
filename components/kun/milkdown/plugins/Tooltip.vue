@@ -27,6 +27,10 @@ onMounted(() => {
   tooltipProvider.update(view.value, prevState.value)
 })
 
+watch([view, prevState], () => {
+  tooltipProvider?.update(view.value, prevState.value)
+})
+
 onUnmounted(() => {
   tooltipProvider.destroy()
 })

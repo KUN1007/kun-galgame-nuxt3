@@ -202,6 +202,13 @@ const link: FooterInfoItem[] = [
   font-size: small;
   height: 117px;
   overflow-y: scroll;
+
+  h2 {
+    &::before {
+      content: '';
+      margin: 0;
+    }
+  }
 }
 
 .function {

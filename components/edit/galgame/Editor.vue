@@ -15,14 +15,16 @@ const saveMarkdown = debounce((editorMarkdown: string) => {
 </script>
 
 <template>
-  <MilkdownProvider>
-    <ProsemirrorAdapterProvider>
-      <KunMilkdownNoImage
-        @save-markdown="saveMarkdown"
-        :value-markdown="introduction[lang]"
-        :language="lang"
-        :pending="pending"
-      />
-    </ProsemirrorAdapterProvider>
-  </MilkdownProvider>
+  <div>
+    <MilkdownProvider>
+      <ProsemirrorAdapterProvider>
+        <KunMilkdownNoImage
+          @save-markdown="saveMarkdown"
+          :value-markdown="introduction[lang]"
+          :language="lang"
+          :pending="pending"
+        />
+      </ProsemirrorAdapterProvider>
+    </MilkdownProvider>
+  </div>
 </template>
