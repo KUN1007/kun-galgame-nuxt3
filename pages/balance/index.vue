@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 useHead({
   title: t('seo.balance.title'),
@@ -11,27 +11,19 @@ useHead({
   ]
 })
 
-const { income, expenditure } = storeToRefs(useTempBalanceStore())
+const { balance } = storeToRefs(useTempBalanceStore())
 
-const { data: incomeData } = await useFetch(`/api/balance/income`, {
+// TODO:
+
+const { data } = await useFetch(`/api/balance`, {
   method: 'GET',
   query: {
-    page: income.value.page,
-    limit: income.value.limit,
-    sortField: income.value.sortField,
-    sortOrder: income.value.sortOrder
-  },
-  watch: false,
-  ...kungalgameResponseHandler
-})
-
-const { data: expenditureData } = await useFetch(`/api/balance/expenditure`, {
-  method: 'GET',
-  query: {
-    page: expenditure.value.page,
-    limit: expenditure.value.limit,
-    sortField: expenditure.value.sortField,
-    sortOrder: expenditure.value.sortOrder
+    page: balance.value.page,
+    limit: balance.value.limit,
+    type: balance.value.type,
+    language: locale,
+    sortField: balance.value.sortField,
+    sortOrder: balance.value.sortOrder
   },
   watch: false,
   ...kungalgameResponseHandler
@@ -39,12 +31,6 @@ const { data: expenditureData } = await useFetch(`/api/balance/expenditure`, {
 
 const { data: statement } = await useFetch(`/api/balance/statement`, {
   method: 'GET',
-  query: {
-    page: expenditure.value.page,
-    limit: expenditure.value.limit,
-    sortField: expenditure.value.sortField,
-    sortOrder: expenditure.value.sortOrder
-  },
   watch: false,
   ...kungalgameResponseHandler
 })
@@ -55,7 +41,7 @@ const { data: statement } = await useFetch(`/api/balance/statement`, {
     <div class="article">
       <div class="title">{{ $t('balance.pl') }}</div>
 
-      <div class="content">
+      <!-- <div class="content">
         <BalanceForm
           v-if="incomeData && statement"
           :is-income="true"
@@ -68,7 +54,7 @@ const { data: statement } = await useFetch(`/api/balance/statement`, {
           :expenditure-data="expenditureData"
           :statement="statement"
         />
-      </div>
+      </div> -->
 
       <div class="sum" v-if="statement">
         <div

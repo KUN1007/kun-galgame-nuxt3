@@ -1,13 +1,15 @@
 import mongoose from 'mongoose'
-import IncomeModel from '~/server/models/income'
-import ExpenditureModel from '~/server/models/expenditure'
+import BalanceModel from '~/server/models/balance'
 import type { PLStatement } from '~/types/api/balance'
 
 export default defineEventHandler(async (event) => {
   const session = await mongoose.startSession()
   session.startTransaction()
   try {
-    const totalIncomeResult = await IncomeModel.aggregate([
+    const totalIncomeResult = await BalanceModel.aggregate([
+      {
+        $match: { type: 'income' }
+      },
       {
         $group: {
           _id: null,
@@ -16,7 +18,13 @@ export default defineEventHandler(async (event) => {
       }
     ])
 
-    const totalExpenditureResult = await ExpenditureModel.aggregate([
+    const totalIncome: number =
+      totalIncomeResult.length > 0 ? totalIncomeResult[0].totalIncome : 0
+
+    const totalExpenditureResult = await BalanceModel.aggregate([
+      {
+        $match: { type: 'expenditure' }
+      },
       {
         $group: {
           _id: null,
@@ -25,8 +33,6 @@ export default defineEventHandler(async (event) => {
       }
     ])
 
-    const totalIncome: number =
-      totalIncomeResult.length > 0 ? totalIncomeResult[0].totalIncome : 0
     const totalExpenditure: number =
       totalExpenditureResult.length > 0
         ? totalExpenditureResult[0].totalExpenditure

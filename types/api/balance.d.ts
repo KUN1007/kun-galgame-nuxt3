@@ -1,29 +1,19 @@
 type SortField = 'time' | 'amount'
 type SortOrder = 'asc' | 'desc'
+export type BalanceType = 'income' | 'expenditure'
 
-export interface BalanceIncomeRequestData {
+export interface BalanceRequestData {
   page: string
   limit: string
+  type: BalanceType
+  language: Language
   sortField: SortField
   sortOrder: SortOrder
 }
 
-export interface BalanceExpenditureRequestData {
-  page: string
-  limit: string
-  sortField: SortField
-  sortOrder: SortOrder
-}
-
-export interface BalanceIncome {
-  iid: number
-  reason: string
-  time: number
-  amount: number
-}
-
-export interface BalanceExpenditure {
-  eid: number
+export interface Balance {
+  bid: number
+  type: BalanceType
   reason: string
   time: number
   amount: number
