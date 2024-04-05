@@ -77,9 +77,11 @@ const siteList: Site[] = [
       corresponding game page.
     </p>
     <p>
-      The fetch VN data API is sourced from VNDB, and it has rate limits. Please
-      use it reasonably. If you cannot retrieve the data, please fill it in
-      manually.
+      <strong>
+        The fetch VN data API is sourced from VNDB, and it has rate limits.
+        Please use it reasonably. If you cannot retrieve the data, please fill
+        it in manually.
+      </strong>
     </p>
   </div>
 

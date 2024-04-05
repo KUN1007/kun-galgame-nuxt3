@@ -21,20 +21,26 @@ const UserSchema = new mongoose.Schema<UserAttributes>(
     dislike: { type: Number, default: 0 },
 
     daily_topic_count: { type: Number, default: 0 },
+    daily_galgame_count: { type: Number, default: 0 },
     daily_image_count: { type: Number, default: 0 },
     daily_check_in: { type: Number, default: 0 },
 
     friend: { type: [Number], default: [] },
     followed: { type: [Number], default: [] },
     follower: { type: [Number], default: [] },
-    topic: { type: [Number], default: [] },
     reply: { type: [Number], default: [] },
     comment: { type: [Number], default: [] },
 
+    topic: { type: [Number], default: [] },
     like_topic: { type: [Number], default: [] },
     dislike_topic: { type: [Number], default: [] },
     upvote_topic: { type: [Number], default: [] },
-    favorite_topic: { type: [Number], default: [] }
+    favorite_topic: { type: [Number], default: [] },
+
+    galgame: { type: [Number], default: [] },
+    like_galgame: { type: [Number], default: [] },
+    favorite_galgame: { type: [Number], default: [] },
+    contribute_galgame: { type: [Number], default: [] }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )

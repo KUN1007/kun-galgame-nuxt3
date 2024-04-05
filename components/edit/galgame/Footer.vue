@@ -25,25 +25,25 @@ const handlePublishGalgame = async () => {
     isPublishing.value = true
     useMessage('Publishing visualnovel...', '正在发布 Galgame...', 'info')
   }
-  // const { data } = await useFetch('/api/galgame/create', {
-  //   method: 'POST',
-  //   body: {
-  //     vndbId: vndbId.value,
-  //     name: name.value,
-  //     banner,
-  //     introduction: introduction.value
-  //   },
-  //   watch: false,
-  //   ...kungalgameResponseHandler
-  // })
-  // isPublishing.value = false
+  const { data } = await useFetch('/api/galgame/create', {
+    method: 'POST',
+    body: {
+      vndbId: vndbId.value,
+      name: name.value,
+      banner,
+      introduction: introduction.value
+    },
+    watch: false,
+    ...kungalgameResponseHandler
+  })
+  isPublishing.value = false
 
-  // if (data.value) {
-  //   const tid = data.value
-  //   navigateTo(localePath(`/topic/${tid}`))
-  //   messageStore.info('AlertInfo.edit.publishSuccess')
-  //   useKUNGalgameEditStore().resetTopicData()
-  // }
+  if (data.value) {
+    const tid = data.value
+    navigateTo(localePath(`/topic/${tid}`))
+    messageStore.info('AlertInfo.edit.publishSuccess')
+    useKUNGalgameEditStore().resetTopicData()
+  }
 }
 </script>
 

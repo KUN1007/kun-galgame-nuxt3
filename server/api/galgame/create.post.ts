@@ -1,30 +1,25 @@
 import mongoose from 'mongoose'
-import TopicModel from '~/server/models/topic'
+import env from '~/server/env/dotenv'
+import GalgameModel from '~/server/models/galgame'
 import UserModel from '~/server/models/user'
-import { checkTopicPublish } from './utils/checkTopicPublish'
+import { checkGalgamePublish } from './utils/checkGalgamePublish'
+import { uploadGalgameBanner } from './utils/uploadGalgameBanner'
 import type { H3Event } from 'h3'
-import type { EditCreateTopicRequestData } from '~/types/api/topic'
+import type { CreateGalgameRequestData } from '~/types/api/galgame'
 
-const readTopicData = async (event: H3Event) => {
-  const {
-    title,
-    content,
-    time,
-    tags,
-    category,
-    section
-  }: EditCreateTopicRequestData = await readBody(event)
+const readGalgameData = async (event: H3Event) => {
+  const { vndbId, name, banner, introduction }: CreateGalgameRequestData =
+    await readBody(event)
 
-  const res = checkTopicPublish(
-    title,
-    content,
-    tags,
-    category,
-    section,
-    parseInt(time)
-  )
+  const res = checkGalgamePublish(vndbId, name, banner, introduction)
   if (res) {
     kunError(event, res)
+    return
+  }
+
+  const galgame = await GalgameModel.findOne({ vndb_id: vndbId })
+  if (galgame) {
+    kunError(event, 10609)
     return
   }
 
@@ -35,25 +30,21 @@ const readTopicData = async (event: H3Event) => {
   }
   const uid = userInfo.uid
 
-  const deduplicatedTags = Array.from(new Set(tags))
-
   return {
-    title,
-    content,
-    time,
-    tags: deduplicatedTags,
-    category,
-    section,
-    uid
+    uid,
+    vndb_id: vndbId,
+    name,
+    banner,
+    introduction
   }
 }
 
 export default defineEventHandler(async (event) => {
-  const result = await readTopicData(event)
+  const result = await readGalgameData(event)
   if (!result) {
     return
   }
-  const { title, content, time, tags, category, section, uid } = result
+  const { uid, vndb_id, name, banner, introduction } = result
 
   const user = await UserModel.findOne({ uid })
   if (!user) {
@@ -61,39 +52,62 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  if (user.moemoepoint / 10 < user.daily_topic_count) {
-    kunError(event, 10201)
+  if (user.moemoepoint / 10 < user.daily_galgame_count) {
+    kunError(event, 10607)
     return
   }
 
   const session = await mongoose.startSession()
   session.startTransaction()
   try {
-    const newTopic = new TopicModel({
-      title,
-      content,
-      time,
-      tags,
-      category,
-      section,
-      uid
+    const newGalgame = new GalgameModel({
+      vndb_id,
+      uid,
+      name,
+      introduction
     })
 
-    const savedTopic = await newTopic.save()
+    const savedGalgame = await newGalgame.save()
 
     await UserModel.updateOne(
       { uid },
       {
-        $addToSet: { topic: savedTopic.tid },
-        $inc: { daily_topic_count: 1 }
+        $addToSet: {
+          galgame: savedGalgame.gid,
+          contribute_galgame: savedGalgame.gid
+        },
+        $inc: { daily_galgame_count: 1, moemoepoint: 5 }
       }
     )
 
-    await createTagsByTidAndRid(savedTopic.tid, 0, tags, category)
+    await GalgameModel.updateOne(
+      { gid: savedGalgame.gid },
+      { $push: { contributor: uid } }
+    )
+
+    const bannerArrayBuffer = await banner.arrayBuffer()
+    const res = await uploadGalgameBanner(
+      Buffer.from(bannerArrayBuffer),
+      savedGalgame.gid
+    )
+    if (!res) {
+      kunError(event, 10116)
+      return
+    }
+    if (typeof res === 'number') {
+      kunError(event, res)
+      return
+    }
+
+    const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${savedGalgame.gid}/banner/avatar.webp`
+    await GalgameModel.updateOne(
+      { gid: savedGalgame.gid },
+      { $set: { banner: imageLink } }
+    )
 
     await session.commitTransaction()
 
-    return savedTopic.tid
+    return savedGalgame.gid
   } catch (error) {
     await session.abortTransaction()
   } finally {

@@ -63,7 +63,7 @@ const statusName = () => {
         <span>{{ $t('user.profile.dislike') }}: {{ user.dislike }}</span>
 
         <span>
-          {{ $t('user.profile.today') }}: {{ user.daily_topic_count }}
+          {{ $t('user.profile.today') }}: {{ user.dailyTopicCount }}
         </span>
 
         <span>{{ $t('user.profile.topic') }}: {{ user.topic.length }}</span>
@@ -72,6 +72,20 @@ const statusName = () => {
 
         <span>
           {{ $t('user.profile.comment') }}: {{ user.comment.length }}
+        </span>
+
+        <span>
+          {{ $t('user.profile.galgame.galgame') }}: {{ user.galgame.length }}
+        </span>
+
+        <span>
+          {{ $t('user.profile.galgame.contribute') }}:
+          {{ user.contributeGalgame.length }}
+        </span>
+
+        <span>
+          {{ $t('user.profile.galgame.daily') }}:
+          {{ user.dailyGalgameCount }}
         </span>
 
         <span>

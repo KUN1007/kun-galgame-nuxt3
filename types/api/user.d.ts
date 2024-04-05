@@ -10,7 +10,7 @@ export interface UserInfo {
   upvote: number
   like: number
   dislike: number
-  daily_topic_count: number
+  dailyTopicCount: number
 
   topic: number[]
   reply: number[]
@@ -18,6 +18,10 @@ export interface UserInfo {
   likeTopic: number[]
   upvoteTopic: number[]
   favoriteTopic: number[]
+
+  galgame: number[]
+  contributeGalgame: number[]
+  dailyGalgameCount: number
 }
 
 export interface UserUpdateAvatarRequestData {

@@ -40,7 +40,7 @@ export const checkGalgamePublish = (
 
   if (!banner) {
     useMessage(
-      'You must upload a visualnovel preview image!',
+      'You must upload a visualnovel banner image!',
       '您必须上传一张 Galgame 预览图!',
       'warn'
     )
@@ -48,13 +48,17 @@ export const checkGalgamePublish = (
   }
 
   if (banner.size > 1007 * 1024) {
-    useMessage('VNDB ID cannot be empty!', '预览图大小不能超过 1007KB!', 'warn')
+    useMessage(
+      'The size of the banner image cannot exceed 1007KB!',
+      '预览图大小不能超过 1007KB!',
+      'warn'
+    )
     return false
   }
 
   if (!isValid(introduction, 100007)) {
     useMessage(
-      'Please enter at least one introduction, and ensure that the length of the introduction is not more than 100,007 characters.!',
+      'Please enter at least one introduction, and ensure that the length of the introduction is not more than 100,007 characters!',
       '请输入至少一个介绍, 并保证介绍长度不多于 100,007 个字符!',
       'warn'
     )

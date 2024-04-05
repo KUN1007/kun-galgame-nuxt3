@@ -36,14 +36,19 @@ export default defineEventHandler(async (event) => {
     upvote: user.upvote,
     like: user.like,
     dislike: user.dislike,
-    daily_topic_count: user.daily_topic_count,
+    dailyTopicCount: user.daily_topic_count,
 
     topic: user.topic,
     reply: user.reply,
     comment: user.comment,
+
     likeTopic: user.like_topic,
     upvoteTopic: user.upvote_topic,
-    favoriteTopic: user.favorite_topic
+    favoriteTopic: user.favorite_topic,
+
+    galgame: user.galgame,
+    contributeGalgame: user.contribute_galgame,
+    dailyGalgameCount: user.daily_galgame_count
   }
   return responseData
 })

@@ -12,7 +12,7 @@ const errorMessagesEN: Record<number, string> = {
   10108: `Invalid password format (-B)`,
   10109: `Invalid Email or Verification Code Format (-B)`,
   10110: `Avatar image upload error. The image is null or an array. (-B)`,
-  10111: `Avatar image upload error. The final compressed size of the image exceeds 50KB. (-B)`,
+  10111: `Avatar image upload error. The final compressed size of the image exceeds 1.007MB. (-B)`,
   10112: `In cooldown for login, two identical login attempts should have a 17 seconds interval. (-B)`,
   10113: `In cooldown for register, two identical register attempts should have a one-minute interval. (-B)`,
   10114: `Invalid user uid (-B)`,
@@ -65,7 +65,18 @@ const errorMessagesEN: Record<number, string> = {
   10507: `Insufficient parameters to get a request, or failed to parse the request (-B)`,
   10508: `Your moemoepoints are less than 1100, so you can't use the upvote reply feature (-B)`,
   10509: `You've already liked this reply. (-B)`,
-  10510: `You've already disliked this reply. (-B)`
+  10510: `You've already disliked this reply. (-B)`,
+
+  // Galgame Part
+  10601: `VNDB ID cannot be empty (-B)`,
+  10602: `Please enter the correct format of VNDB ID (-B)`,
+  10603: `Please enter at least one title, and ensure that the length of the title is not greater than 107 characters. (-B)`,
+  10604: `You must upload a visualnovel banner image (-B)`,
+  10605: `The size of the banner image cannot exceed 1007KB (-B)`,
+  10606: `Please enter at least one introduction, and ensure that the length of the introduction is not more than 100,007 characters. (-B)`,
+  10607: `Your daily galgame limit has been reached for today. (-B)`,
+  10608: `Banner image upload error. The final compressed size of the banner exceeds 1.007MB. (-B)`,
+  10609: `The game with this VNDB ID has already been published by someone else. (-B)`
 }
 
 const errorMessagesCN: Record<number, string> = {
@@ -79,7 +90,7 @@ const errorMessagesCN: Record<number, string> = {
   10108: `非法的密码格式 (-B)`,
   10109: `非法的邮箱或验证码格式 (-B)`,
   10110: `头像上传错误. 图片为空或数组 (-B)`,
-  10111: `头像上传错误. 图片最终压缩大小超过 50kb (-B)`,
+  10111: `头像上传错误. 图片最终压缩大小超过 1.007MB (-B)`,
   10112: `登陆冷却中，两次相同登陆时间间隔 17 秒 (-B)`,
   10113: `注册冷却中，两次相同注册时间间隔一分钟 (-B)`,
   10114: `非法的用户 UID (-B)`,
@@ -128,7 +139,17 @@ const errorMessagesCN: Record<number, string> = {
   10507: `获取请求参数不足, 或解析请求参数失败 (-B)`,
   10508: `您的萌萌点不足 1100, 无法使用推回复功能 (-B)`,
   10509: `您已经点赞过这个回复了 (-B)`,
-  10510: `您已经点踩过这个回复了 (-B)`
+  10510: `您已经点踩过这个回复了 (-B)`,
+
+  10601: `VNDB ID 不可为空 (-B)`,
+  10602: `请输入正确格式的 VNDB ID (-B)`,
+  10603: `请输入至少一个标题, 并保证标题长度不多于 107 个字符 (-B)`,
+  10604: `您必须上传一张 Galgame 预览图 (-B)`,
+  10605: `预览图大小不能超过 1007KB (-B)`,
+  10606: `请输入至少一个介绍, 并保证介绍长度不多于 100,007 个字符 (-B)`,
+  10607: `您今日可以发表的 Galgame 数已达上限 (-B)`,
+  10608: `预览图上传错误. 图片最终压缩大小超过 1.007MB  (-B)`,
+  10609: `该 VNDB 编号的游戏已经有人发布过了 (-B)`
 }
 
 export const getErrorMessageEN = (errorCode: number) => {

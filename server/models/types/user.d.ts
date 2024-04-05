@@ -15,17 +15,24 @@ export interface UserAttributes {
   dislike: number
 
   daily_topic_count: number
+  daily_galgame_count: number
   daily_image_count: number
   daily_check_in: number
 
   friend: number[]
   followed: number[]
   follower: number[]
-  topic: number[]
   reply: number[]
   comment: number[]
+
+  topic: number[]
   like_topic: number[]
   dislike_topic: number[]
   upvote_topic: number[]
   favorite_topic: number[]
+
+  galgame: number[]
+  like_galgame: number[]
+  favorite_galgame: number[]
+  contribute_galgame: number[]
 }
