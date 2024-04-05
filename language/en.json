@@ -291,7 +291,7 @@
       },
       "introduction": {
         "name": "Introduction",
-        "help": "At least one type of introduction is required. The English introduction can be automatically retrieved by clicking 'Fetch Data', but there is a chance it may not be available. For the Japanese introduction, you can click on the 'DLsite' website at the top of the page to enter the game details page, and the 'ストーリー' section on that page is the Japanese introduction. The Chinese introduction can be obtained from Bangumi or the Moegirl Wiki",
+        "help": "At least one type of introduction is required. The English introduction can be automatically retrieved by clicking 'Fetch Data', but there is a chance it may not be available. For the Japanese introduction, you can click on the 'DLsite' website at the top of the page to enter the game details page, and the 'ストーリー' section on that page is the Japanese introduction. The Chinese introduction can be obtained from Bangumi or the Moegirl Wiki. You can also discard the official visualnovel description and provide your own introduction to the visualnovel.",
         "en-us": "English",
         "ja-jp": "Japanese",
         "zh-cn": "Chinese"

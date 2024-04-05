@@ -1,8 +1,10 @@
 import type { KunLanguageFront } from '~/types/i18n'
 
-export const isValid = (i18nField: KunLanguageFront) => {
-  const valid = /^(?=.*[^\s]).{1,107}$/
-  return Object.values(i18nField).some((value) => valid.test(value))
+export const isValid = (i18nField: KunLanguageFront, maxLength: number) => {
+  const values = Object.values(i18nField)
+  const isNotEmpty = values.some((value) => value.trim() !== '')
+  const isWithinLengthLimit = values.every((value) => value.length <= maxLength)
+  return isNotEmpty && isWithinLengthLimit
 }
 
 export const VNDBPattern: RegExp = /^v\d{1,6}$/
@@ -27,7 +29,7 @@ export const checkGalgamePublish = (
     return false
   }
 
-  if (!isValid(name)) {
+  if (!isValid(name, 107)) {
     useMessage(
       'Please enter at least one title, and ensure that the length of the title is not more than 107 characters!',
       '请输入至少一个标题, 并保证标题长度不多于 107 个字符!',
@@ -50,7 +52,7 @@ export const checkGalgamePublish = (
     return false
   }
 
-  if (!isValid(introduction)) {
+  if (!isValid(introduction, 100007)) {
     useMessage(
       'Please enter at least one introduction, and ensure that the length of the introduction is not more than 100,007 characters.!',
       '请输入至少一个介绍, 并保证介绍长度不多于 100,007 个字符!',

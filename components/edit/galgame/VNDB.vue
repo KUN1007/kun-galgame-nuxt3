@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VNDBPattern } from '../utils/checkGalgamePublish'
-import type { VNDB, VNDBResponse } from './VNDB'
+import type { VNDB, VNDBResponse } from '../utils/VNDB'
 
 const { locale } = useI18n()
 const introductionLanguage = ref(locale.value as Language)
@@ -158,3 +158,4 @@ const handleGetVNData = async () => {
   }
 }
 </style>
+../utils/VNDB

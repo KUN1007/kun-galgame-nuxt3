@@ -1,4 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const initialImageUrl = ref('')
+
+onMounted(async () => {
+  const imageBlob = await getImage('kun-galgame-publish-banner')
+  if (imageBlob) {
+    initialImageUrl.value = URL.createObjectURL(imageBlob)
+  }
+})
+</script>
 
 <template>
   <KunHeader :size="2" :show-help="true">
@@ -8,6 +17,7 @@
   </KunHeader>
   <KunUpload
     class="upload"
+    :initial-image="initialImageUrl"
     width="300px"
     :size="1920"
     :aspect="16 / 9"

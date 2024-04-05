@@ -2,6 +2,7 @@
 import { checkImageValid, resizeImage } from './utils/handleFileChange'
 
 const props = defineProps<{
+  initialImage?: string
   width: string
   size: number
   aspect: number
@@ -11,9 +12,12 @@ const emits = defineEmits<{
   setImage: [img: Blob]
 }>()
 
+const input = ref<HTMLElement>()
 const uploadedImage = ref<Blob>()
 const selectedFileUrl = ref<string>('')
-const input = ref<HTMLElement>()
+const initialImage = computed(() =>
+  props.initialImage ? props.initialImage : ''
+)
 
 const uploadImage = async (file: File) => {
   const isFileValid = checkImageValid(file)
@@ -74,13 +78,13 @@ const handleClickUpload = () => {
     @dragover="handleDragOver"
     @click="handleClickUpload"
   >
-    <span class="plus" v-if="!selectedFileUrl"></span>
+    <span class="plus" v-if="!selectedFileUrl && !initialImage"></span>
     <NuxtImg
       :style="{ 'max-width': `calc(${props.width} - 10px)` }"
       class="preview"
-      :src="selectedFileUrl"
+      :src="selectedFileUrl || initialImage"
       alt="Uploaded Image"
-      v-if="selectedFileUrl"
+      v-if="selectedFileUrl || initialImage"
     />
     <input
       ref="input"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Title } from './VNDB'
+import type { Title } from '../utils/VNDB'
 
 defineProps<{
   titles: Title[]
@@ -93,3 +93,4 @@ const handleClickCopy = (title: string) => {
   }
 }
 </style>
+../utils/VNDB

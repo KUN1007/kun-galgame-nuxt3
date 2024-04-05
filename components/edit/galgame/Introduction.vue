@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { languageItems } from './items'
+import { languageItems } from '../utils/options'
 
 defineProps<{
   introductionLanguage: Language
