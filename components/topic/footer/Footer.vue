@@ -47,7 +47,11 @@ const handleClickShare = () => {
       )
     })
     .catch(() => {
-      useMessage('Share Link copied failed!', '分享链接复制失败!', 'error')
+      useMessage(
+        'Share Link copy failed! Please switch to a more modern browser!',
+        '分享链接复制失败! 请更换更现代的浏览器!',
+        'error'
+      )
     })
 }
 </script>

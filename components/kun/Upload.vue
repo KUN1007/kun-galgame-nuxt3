@@ -7,6 +7,10 @@ const props = defineProps<{
   aspect: number
 }>()
 
+const emits = defineEmits<{
+  setImage: [img: Blob]
+}>()
+
 const uploadedImage = ref<Blob>()
 const selectedFileUrl = ref<string>('')
 const input = ref<HTMLElement>()
@@ -24,6 +28,8 @@ const uploadImage = async (file: File) => {
   )
   uploadedImage.value = resizedFile
   selectedFileUrl.value = URL.createObjectURL(resizedFile)
+
+  emits('setImage', resizedFile)
 }
 
 const handleFileChange = (event: Event) => {

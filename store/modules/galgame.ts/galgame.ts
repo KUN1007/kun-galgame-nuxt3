@@ -2,20 +2,20 @@ import type { GalgameStorePersist } from '~/store/types/galgame/galgame'
 
 export const usePersistGalgameStore = defineStore({
   id: 'Galgame',
-  persist: true,
+  persist: {
+    storage: persistedState.localStorage
+  },
   state: (): GalgameStorePersist => ({
-    vndb_id: '',
+    vndbId: '',
     name: {
       'en-us': '',
       'ja-jp': '',
       'zh-cn': ''
     },
-    banner: '',
     introduction: {
       'en-us': '',
       'ja-jp': '',
       'zh-cn': ''
     }
-  }),
-  actions: {}
+  })
 })

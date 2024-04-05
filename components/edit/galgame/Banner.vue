@@ -6,7 +6,13 @@
 
     <template #help>{{ $t('edit.galgame.banner.help') }}</template>
   </KunHeader>
-  <KunUpload class="upload" width="300px" :size="1920" :aspect="16 / 9" />
+  <KunUpload
+    class="upload"
+    width="300px"
+    :size="1920"
+    :aspect="16 / 9"
+    @set-image="(img) => saveImage(img, 'kun-galgame-publish-banner')"
+  />
 </template>
 
 <style lang="scss" scoped>

@@ -229,7 +229,6 @@
       "word": "Word(s)",
       "tags": "Please input tags",
       "hint": "Hint: A single tag should be within 17 characters, choose at least one and up to 7 tags). You can enter text and press `Enter` to create a tag.",
-      "hot": "Popular Tags (Click to Select): ",
       "categories": "Please select categories and sections",
       "Galgame": "Visual Novel",
       "Technique": "Technique",
@@ -272,15 +271,11 @@
     "galgame": {
       "help": {
         "name": "Publish VN Help",
-        "tip": "Reference website (may require internet proxy)",
+        "reference": "Reference website (may require internet proxy)",
         "vndb": "VNDB",
         "erogamescape": "ErogameScape",
         "dlsite": "DLsite",
-        "wikipedia": "Wikipedia",
-        "bangumi": "Bangumi",
-        "moegirl": "Moegirlpedia",
-        "definition": "Our current definition of Visualnovel is based on games that can be found on VNDB. If a game cannot be found on VNDB, it is not considered a Visualnovel. For non-Visualnovel games that cannot be found in the search, please temporarily classify them under topic's Galgame -> Others category.",
-        "how": "How to search for Galgame through VNDB?"
+        "wikipedia": "Wikipedia"
       },
       "essential": "Essential information section",
       "vndb": {

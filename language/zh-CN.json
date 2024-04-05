@@ -229,7 +229,6 @@
       "word": "字",
       "tags": "请输入标签",
       "hint": "提示:（单个标签 17 个字符以内，至少选择一个、最多 7 个）, 您可以输入文字后按下 ' Enter ' 创建标签",
-      "hot": "热门标签（点击选择）:",
       "categories": "请选择分类和分区",
       "Galgame": "Galgame",
       "Technique": "技术交流",
@@ -274,15 +273,11 @@
     "galgame": {
       "help": {
         "name": "发布 Galgame 帮助",
-        "tip": "参考网站 (可能需要网络代理)",
+        "reference": "参考网站 (可能需要网络代理)",
         "vndb": "VNDB",
         "erogamescape": "批评空间",
         "dlsite": "DLsite",
-        "wikipedia": "维基百科",
-        "bangumi": "Bangumi 番组计划",
-        "moegirl": "萌娘百科",
-        "definition": "我们目前对 Galgame 的定义是，可以在 VNDB 检索到的游戏就是 Galgame, 否则就不是。对检索不到的非 Galgame 游戏, 请大家暂时发布在话题的 Galgame ->其它 分类。",
-        "how": "如何通过 VNDB 检索 Galgame?"
+        "wikipedia": "维基百科"
       },
       "essential": "必要信息部分",
       "vndb": {

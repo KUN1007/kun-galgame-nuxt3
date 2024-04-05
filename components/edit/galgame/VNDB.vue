@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { VNDBPattern } from '../utils/checkGalgamePublish'
 import type { VNDB, VNDBResponse } from './VNDB'
 
 const { locale } = useI18n()
 const introductionLanguage = ref(locale.value as Language)
 const isSuccess = ref(false)
+const isFetching = ref(false)
 
 const data = ref<VNDB>({
   title: '',
@@ -11,22 +13,44 @@ const data = ref<VNDB>({
   description: ''
 })
 
-const { vndb_id, name, banner, introduction } = storeToRefs(
-  usePersistGalgameStore()
-)
+const { vndbId, name, introduction } = storeToRefs(usePersistGalgameStore())
 
 const handleGetVNData = async () => {
+  if (!VNDBPattern.test(vndbId.value)) {
+    useMessage(
+      'Please enter the correct format of VNDB ID!',
+      '请输入正确格式的 VNDB ID!',
+      'warn'
+    )
+    return false
+  }
+
+  if (isFetching.value) {
+    return
+  } else {
+    isFetching.value = true
+    useMessage(
+      'Fetching data from VNDB...',
+      '正在从 VNDB 获取 Galgame 数据...',
+      'info'
+    )
+  }
+
   const { data: vndbData } = await useFetch<VNDBResponse>(
     `https://api.vndb.org/kana/vn`,
     {
       method: 'POST',
       body: {
-        filters: ['id', '=', vndb_id.value],
+        filters: ['id', '=', vndbId.value],
         fields: 'title, titles.title, description'
       }
     }
   )
+
   if (vndbData.value) {
+    isFetching.value = false
+    useMessage('Fetching data successfully!', '获取数据成功!', 'info')
+
     data.value = vndbData.value.results[0]
     name.value['en-us'] = data.value.title
     introduction.value['en-us'] = data.value.description ?? ''
@@ -57,7 +81,7 @@ const handleGetVNData = async () => {
 
     <div class="vndb">
       <KunInput
-        v-model="vndb_id"
+        v-model="vndbId"
         :placeholder="$t('edit.galgame.vndb.placeholder')"
       />
       <KunButton @click="handleGetVNData">
@@ -88,9 +112,7 @@ const handleGetVNData = async () => {
 
     <EditGalgameBanner />
 
-    <div class="confirm">
-      <KunButton>{{ $t('edit.galgame.confirm') }}</KunButton>
-    </div>
+    <EditGalgameFooter />
   </div>
 </template>
 
@@ -133,21 +155,6 @@ const handleGetVNData = async () => {
 
   input {
     margin-bottom: 7px;
-  }
-}
-
-.confirm {
-  width: 100%;
-  margin-top: 50px;
-  display: flex;
-
-  button {
-    height: 40px;
-    width: 200px;
-    font-size: 17px;
-    flex-shrink: 0;
-    border-radius: 10px;
-    margin-left: auto;
   }
 }
 </style>

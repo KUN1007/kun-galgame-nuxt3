@@ -38,8 +38,8 @@ export const checkTopicPublish = (
 
   if (textCount > 100007) {
     useMessage(
-      'Content maximum length is 100007!',
-      '内容最大长度为100007!',
+      'Content maximum length is 100,007!',
+      '内容最大长度为 100,007!',
       'warn'
     )
     return false
