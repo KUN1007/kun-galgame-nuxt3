@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const messageStore = useTempMessageStore()
 const { showKUNGalgameMessageBox } = storeToRefs(useTempSettingStore())
-const { autoRead } = storeToRefs(useKUNGalgameMessageStore())
+const { autoRead } = storeToRefs(usePersistMessageStore())
 
 const startX = ref(0)
 const startY = ref(0)

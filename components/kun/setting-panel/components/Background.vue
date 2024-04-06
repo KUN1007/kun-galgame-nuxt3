@@ -2,11 +2,11 @@
 import { backgroundImages } from './backgroundImage'
 
 const restoreBackground = async () => {
-  await useKUNGalgameSettingsStore().setSystemBackground(0)
+  await usePersistSettingsStore().setSystemBackground(0)
 }
 
 const handleChangeImage = async (index: number) => {
-  await useKUNGalgameSettingsStore().setSystemBackground(index)
+  await usePersistSettingsStore().setSystemBackground(index)
 }
 </script>
 

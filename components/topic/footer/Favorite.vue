@@ -5,7 +5,7 @@ const props = defineProps<{
   toUid: number
 }>()
 
-const { moemoeAccessToken, uid } = useKUNGalgameUserStore()
+const { moemoeAccessToken, uid } = usePersistUserStore()
 const isFavorite = ref(props.favorites.includes(uid))
 const favoritesCount = ref(props.favorites.length)
 

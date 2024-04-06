@@ -3,7 +3,7 @@ import { usePluginViewContext } from '@prosemirror-adapter/vue'
 
 const { textCount: textCountEditRewrite, isTopicRewriting } =
   storeToRefs(useTempEditStore())
-const { textCount: textCountEdit } = storeToRefs(useKUNGalgameEditStore())
+const { textCount: textCountEdit } = storeToRefs(usePersistEditTopicStore())
 const { textCount: textCountReplyRewrite, isReplyRewriting } =
   storeToRefs(useTempReplyStore())
 const { textCount: textCountReply } = storeToRefs(

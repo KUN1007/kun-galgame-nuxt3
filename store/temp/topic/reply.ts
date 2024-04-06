@@ -1,7 +1,7 @@
 import type { ReplyStoreTemp } from '~/store/types/topic/reply'
 
 export const useTempReplyStore = defineStore({
-  id: 'tempReply',
+  id: 'tempTopicReply',
   persist: false,
   state: (): ReplyStoreTemp => ({
     textCount: 0,
@@ -57,7 +57,7 @@ export const useTempReplyStore = defineStore({
     tempReplyRewrite: { rid: 0, content: '', tags: [''], edited: 0 }
   }),
   actions: {
-    resetRewriteReplyData () {
+    resetRewriteReplyData() {
       this.replyRewrite.tid = 0
       this.replyRewrite.rid = 0
       this.replyRewrite.content = ''
@@ -66,7 +66,7 @@ export const useTempReplyStore = defineStore({
       this.isReplyRewriting = false
     },
 
-    resetPageStatus () {
+    resetPageStatus() {
       this.replyRequest.page = 1
       this.isLoading = true
     }

@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 
 import type { TopicReply } from '~/types/api/reply'
 
-const { moemoeAccessToken } = useKUNGalgameUserStore()
+const { moemoeAccessToken } = usePersistUserStore()
 const { isLoading, scrollToReplyId, tempReplyRewrite } =
   storeToRefs(useTempReplyStore())
 

@@ -2,7 +2,7 @@
 const routeName = useRouteName()
 
 const { tags: rewriteTags, isTopicRewriting } = storeToRefs(useTempEditStore())
-const { tags: editTags } = storeToRefs(useKUNGalgameEditStore())
+const { tags: editTags } = storeToRefs(usePersistEditTopicStore())
 const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
 const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 

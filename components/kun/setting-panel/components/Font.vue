@@ -1,13 +1,13 @@
 <script setup lang="ts">
 const font = ref('')
-const { showKUNGalgameFontStyle } = storeToRefs(useKUNGalgameSettingsStore())
+const { showKUNGalgameFontStyle } = storeToRefs(usePersistSettingsStore())
 
 const setFont = () => {
   if (font.value) {
-    useKUNGalgameSettingsStore().setKUNGalgameFontStyle(font.value)
+    usePersistSettingsStore().setKUNGalgameFontStyle(font.value)
     font.value = ''
   } else {
-    useKUNGalgameSettingsStore().setKUNGalgameFontStyle('system-ui')
+    usePersistSettingsStore().setKUNGalgameFontStyle('system-ui')
   }
 }
 </script>

@@ -2,7 +2,7 @@
 import { checkCommentPublish } from '../utils/checkCommentPublish'
 import type { TopicComment } from '~/types/api/comment'
 
-const { name } = storeToRefs(useKUNGalgameUserStore())
+const { name } = storeToRefs(usePersistUserStore())
 const { tid, rid, toUid, toUsername, content, isShowCommentPanelRid } =
   storeToRefs(useTempCommentStore())
 const isPublishing = ref(false)

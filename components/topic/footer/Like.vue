@@ -7,7 +7,7 @@ const props = defineProps<{
   toUid: number
 }>()
 
-const { moemoeAccessToken } = useKUNGalgameUserStore()
+const { moemoeAccessToken } = usePersistUserStore()
 const isLiked = ref(props.likes.includes(props.uid))
 const likesCount = ref(props.likes.length)
 

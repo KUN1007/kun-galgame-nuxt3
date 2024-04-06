@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { title: rewriteTitle, isTopicRewriting } =
   storeToRefs(useTempEditStore())
-const { title: editTitle } = storeToRefs(useKUNGalgameEditStore())
+const { title: editTitle } = storeToRefs(usePersistEditTopicStore())
 
 const topicTitle = ref('')
 const maxInputLength = 40

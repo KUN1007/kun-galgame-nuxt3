@@ -4,7 +4,7 @@ import 'animate.css'
 const KUNGalgameUserInfo = defineAsyncComponent(() => import('./UserInfo.vue'))
 
 const { isShowSearch } = storeToRefs(useTempHomeStore())
-const { name, avatarMin } = storeToRefs(useKUNGalgameUserStore())
+const { name, avatarMin } = storeToRefs(usePersistUserStore())
 const { showKUNGalgamePanel, showKUNGalgameUserPanel, messageStatus } =
   storeToRefs(useTempSettingStore())
 </script>

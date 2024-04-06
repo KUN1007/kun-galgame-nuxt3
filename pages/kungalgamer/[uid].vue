@@ -13,7 +13,7 @@ const {
   avatar,
   avatarMin,
   moemoepoint
-} = storeToRefs(useKUNGalgameUserStore())
+} = storeToRefs(usePersistUserStore())
 
 const { data, refresh } = await useFetch(`/api/user/${uid.value}`, {
   method: 'GET',

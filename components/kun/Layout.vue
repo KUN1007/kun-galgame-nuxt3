@@ -1,16 +1,16 @@
 <script setup lang="ts">
-const { showKUNGalgameBackground } = storeToRefs(useKUNGalgameSettingsStore())
+const { showKUNGalgameBackground } = storeToRefs(usePersistSettingsStore())
 
 const imageURL = ref('')
 
 onMounted(async () => {
-  imageURL.value = await useKUNGalgameSettingsStore().getCurrentBackground()
+  imageURL.value = await usePersistSettingsStore().getCurrentBackground()
 })
 
 watch(
   () => showKUNGalgameBackground.value,
   async () => {
-    imageURL.value = await useKUNGalgameSettingsStore().getCurrentBackground()
+    imageURL.value = await usePersistSettingsStore().getCurrentBackground()
   }
 )
 </script>

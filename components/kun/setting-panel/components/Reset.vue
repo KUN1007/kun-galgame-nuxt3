@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const handleRecover = async () => {
-  await useKUNGalgameSettingsStore().setKUNGalgameSettingsRecover()
+  await usePersistSettingsStore().setKUNGalgameSettingsRecover()
 }
 </script>
 

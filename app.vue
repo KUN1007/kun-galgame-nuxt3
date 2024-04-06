@@ -2,7 +2,7 @@
 const { locale } = useI18n()
 const colorMode = useColorMode()
 const { showKUNGalgamePageTransparency } = storeToRefs(
-  useKUNGalgameSettingsStore()
+  usePersistSettingsStore()
 )
 
 useHead({
@@ -22,7 +22,7 @@ useSchemaOrg([
 ])
 
 onMounted(() => {
-  useKUNGalgameSettingsStore().setKUNGalgameTransparency(
+  usePersistSettingsStore().setKUNGalgameTransparency(
     showKUNGalgamePageTransparency.value,
     colorMode.value as 'dark' | 'light'
   )

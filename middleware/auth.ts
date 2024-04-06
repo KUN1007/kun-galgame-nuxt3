@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-  const { moemoeAccessToken } = useKUNGalgameUserStore()
+  const { moemoeAccessToken } = usePersistUserStore()
 
   const nuxt = useNuxtApp()
 

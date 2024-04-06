@@ -1,7 +1,7 @@
 import type { GalgameStorePersist } from '~/store/types/galgame/galgame'
 
-export const usePersistGalgameStore = defineStore({
-  id: 'Galgame',
+export const usePersistEditGalgameStore = defineStore({
+  id: 'KUNGalgameEditGalgame',
   persist: {
     storage: persistedState.localStorage
   },

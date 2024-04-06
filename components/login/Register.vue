@@ -57,7 +57,7 @@ const handleRegister = async () => {
   if (data.value) {
     info.info('AlertInfo.login.success')
     useMessage('Register successfully!', '注册成功！', 'success')
-    useKUNGalgameUserStore().setUserInfo(data.value)
+    usePersistUserStore().setUserInfo(data.value)
     navigateTo(localePath('/'))
   }
 

@@ -7,7 +7,7 @@ const props = defineProps<{
   pending: boolean
 }>()
 
-const { introduction } = storeToRefs(usePersistGalgameStore())
+const { introduction } = storeToRefs(usePersistEditGalgameStore())
 
 const saveMarkdown = debounce((editorMarkdown: string) => {
   introduction.value[props.lang] = editorMarkdown

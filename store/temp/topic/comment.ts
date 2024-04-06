@@ -1,7 +1,7 @@
 import type { CommentDraft } from '~/store/types/topic/comment'
 
 export const useTempCommentStore = defineStore({
-  id: 'tempComment',
+  id: 'tempTopicComment',
   persist: false,
   state: (): CommentDraft => ({
     tid: 0,

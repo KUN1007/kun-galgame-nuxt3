@@ -8,7 +8,7 @@ const {
   autosaveCount
 } = storeToRefs(useTempEditStore())
 
-const { content: editContent } = storeToRefs(useKUNGalgameEditStore())
+const { content: editContent } = storeToRefs(usePersistEditTopicStore())
 
 const valueMarkdown = ref('')
 

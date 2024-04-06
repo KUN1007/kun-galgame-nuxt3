@@ -1,6 +1,6 @@
-import { useKUNGalgameUserStore } from '~/store/modules/kungalgamer'
+import { usePersistUserStore } from '~/store/modules/kungalgamer'
 
 export const kungalgameStoreReset = () => {
-  const userStore = useKUNGalgameUserStore()
+  const userStore = usePersistUserStore()
   userStore.$reset()
 }

@@ -3,7 +3,7 @@ import type { KUNGalgameSettingsStore } from '../types/settings'
 const SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME: string = 'kun-galgame-custom-bg'
 const SETTINGS_DEFAULT_FONT_FAMILY: string = 'system-ui'
 
-export const useKUNGalgameSettingsStore = defineStore({
+export const usePersistSettingsStore = defineStore({
   id: 'KUNGalgameSettings',
   persist: true,
   state: (): KUNGalgameSettingsStore => ({

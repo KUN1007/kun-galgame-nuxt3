@@ -13,7 +13,7 @@ const handleFileChange = async (event: Event) => {
   }
 
   const file = input.files[0]
-  await useKUNGalgameSettingsStore().setCustomBackground(file)
+  await usePersistSettingsStore().setCustomBackground(file)
 }
 </script>
 

@@ -22,7 +22,7 @@ const props = defineProps<{
 
 const ridRef = ref(props.rid)
 const toUser = ref(props.toUser)
-const currentUserUid = useKUNGalgameUserStore().uid
+const currentUserUid = usePersistUserStore().uid
 
 const getComments = async () => {
   const data = await useFetch(`/api/topic/${props.tid}/comment`, {

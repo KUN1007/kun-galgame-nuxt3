@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { navBarRoute } from './utils/routeName'
 
-const { uid: storeUid, roles } = storeToRefs(useKUNGalgameUserStore())
+const { uid: storeUid, roles } = storeToRefs(usePersistUserStore())
 
 const props = defineProps<{
   uid: number

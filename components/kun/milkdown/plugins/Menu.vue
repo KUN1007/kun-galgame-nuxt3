@@ -64,7 +64,7 @@ const handleFileChange = async (event: Event) => {
 
   if (data.value) {
     const fileName = file.name.replace(/[^a-zA-Z0-9 ]/g, '')
-    const userName = useKUNGalgameUserStore().name
+    const userName = usePersistUserStore().name
     const imageName = `${userName}-${Date.now()}-${fileName}`
     call(insertImageCommand.key, {
       src: data.value ?? '',

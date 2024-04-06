@@ -7,7 +7,7 @@ const props = defineProps<{
   toUid: number
 }>()
 
-const { moemoeAccessToken } = useKUNGalgameUserStore()
+const { moemoeAccessToken } = usePersistUserStore()
 const isUpvote = ref(props.upvotes.includes(props.uid))
 const upvoteCount = ref(props.upvotes.length)
 
@@ -100,7 +100,7 @@ const handleClickUpvote = async () => {
     return
   }
 
-  if (useKUNGalgameUserStore().moemoepoint < 1100) {
+  if (usePersistUserStore().moemoepoint < 1100) {
     useMessage(
       `Your moemoepoints are less than 1100, so you can't use the upvote topic feature`,
       '您的萌萌点不足 1100, 无法使用推话题功能',

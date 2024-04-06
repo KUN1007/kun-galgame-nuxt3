@@ -1,7 +1,7 @@
 import type { ReplyStorePersist } from '~/store/types/topic/reply'
 
 export const usePersistKUNGalgameReplyStore = defineStore({
-  id: 'KUNGalgameReply',
+  id: 'KUNGalgameTopicReply',
   persist: true,
   state: (): ReplyStorePersist => ({
     textCount: 0,

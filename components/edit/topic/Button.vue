@@ -26,7 +26,7 @@ const {
   tags,
   category,
   section: editSection
-} = storeToRefs(useKUNGalgameEditStore())
+} = storeToRefs(usePersistEditTopicStore())
 
 const messageStore = useTempMessageStore()
 const isPublishing = ref(false)
@@ -68,7 +68,7 @@ const handlePublish = async () => {
     const tid = data.value
     navigateTo(localePath(`/topic/${tid}`))
     messageStore.info('AlertInfo.edit.publishSuccess')
-    useKUNGalgameEditStore().resetTopicData()
+    usePersistEditTopicStore().resetTopicData()
   }
 }
 

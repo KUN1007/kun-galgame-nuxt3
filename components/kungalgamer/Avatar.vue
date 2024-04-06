@@ -6,7 +6,7 @@ const uploadedImage = ref<Blob>()
 const selectedFileUrl = ref<string>('')
 const input = ref<HTMLElement>()
 const isUploading = ref(false)
-const { avatar, avatarMin } = storeToRefs(useKUNGalgameUserStore())
+const { avatar, avatarMin } = storeToRefs(usePersistUserStore())
 
 const uploadImage = async (file: File) => {
   const isFileValid = checkImageValid(file)
@@ -55,7 +55,7 @@ const handleChangeAvatar = async () => {
   }
 
   const formData = new FormData()
-  formData.append('avatar', uploadedImage.value, useKUNGalgameUserStore().name)
+  formData.append('avatar', uploadedImage.value, usePersistUserStore().name)
 
   isUploading.value = true
   useMessage('Uploading avatar image...', '正在上传头像图片...', 'info')

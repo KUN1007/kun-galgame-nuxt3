@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { moemoeAccessToken } = useKUNGalgameUserStore()
+const { moemoeAccessToken } = usePersistUserStore()
 const { isEdit } = storeToRefs(useTempReplyStore())
 const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 

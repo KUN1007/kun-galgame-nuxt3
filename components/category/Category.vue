@@ -1,7 +1,7 @@
 <script setup lang="ts">
 type Category = 'galgame' | 'technique' | 'others'
 const availableCategory: Category[] = ['galgame', 'technique', 'others']
-const { category } = storeToRefs(useKUNGalgameCategoryStore())
+const { category } = storeToRefs(usePersistCategoryStore())
 
 const { data, pending } = await useLazyFetch(`/api/category`, {
   method: 'GET',

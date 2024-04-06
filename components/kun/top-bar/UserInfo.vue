@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { uid, name, moemoepoint } = storeToRefs(useKUNGalgameUserStore())
+const { uid, name, moemoepoint } = storeToRefs(usePersistUserStore())
 const { showKUNGalgameMessageBox, messageStatus } = storeToRefs(
   useTempSettingStore()
 )

@@ -19,7 +19,7 @@ const {
   isTopicRewriting
 } = storeToRefs(useTempEditStore())
 const { category: editCategory, section: editSection } = storeToRefs(
-  useKUNGalgameEditStore()
+  usePersistEditTopicStore()
 )
 
 const isShowSection = computed(

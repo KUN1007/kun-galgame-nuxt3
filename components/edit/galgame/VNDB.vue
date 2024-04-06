@@ -13,7 +13,7 @@ const data = ref<VNDB>({
   description: ''
 })
 
-const { vndbId, name, introduction } = storeToRefs(usePersistGalgameStore())
+const { vndbId, name, introduction } = storeToRefs(usePersistEditGalgameStore())
 
 const handleGetVNData = async () => {
   if (!VNDBPattern.test(vndbId.value)) {

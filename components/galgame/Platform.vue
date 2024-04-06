@@ -2,7 +2,7 @@
 import { platformItems } from './items'
 
 // TODO:
-const { platform } = storeToRefs(usePersistGalgameStore())
+const { platform } = storeToRefs(usePersistEditGalgameStore())
 
 const handleSelectPlatform = (pl: string) => {
   if (platform.value.includes(pl)) {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { checkGalgamePublish } from '../utils/checkGalgamePublish'
 
-const { vndbId, name, introduction } = storeToRefs(usePersistGalgameStore())
+const { vndbId, name, introduction } = storeToRefs(usePersistEditGalgameStore())
 const localePath = useLocalePath()
 
 const messageStore = useTempMessageStore()
@@ -24,8 +24,8 @@ const handlePublishGalgame = async () => {
   } else {
     isPublishing.value = true
     useMessage(
-      'Publishing visualnovel => Uploading images may take a few seconds...',
-      '正在发布 Galgame => 因为需要上传图片，所以这可能会花费几秒...',
+      'Publishing visualnovel => Uploading images may take around 7 seconds...',
+      '正在发布 Galgame => 因为需要上传图片，所以这可能会花费 7 秒左右...',
       'info',
       7777
     )
@@ -49,7 +49,7 @@ const handlePublishGalgame = async () => {
     const gid = data.value
 
     await deleteImage('kun-galgame-publish-banner')
-    usePersistGalgameStore().resetGalgameData()
+    usePersistEditGalgameStore().resetGalgameData()
 
     navigateTo(localePath(`/galgame/${gid}`))
     messageStore.info('AlertInfo.edit.publishSuccess')

@@ -1,7 +1,7 @@
-import type { EditStorePersist } from '../types/edit'
+import type { EditStorePersist } from '~/store/types/edit'
 
-export const useKUNGalgameEditStore = defineStore({
-  id: 'KUNGalgameEdit',
+export const usePersistEditTopicStore = defineStore({
+  id: 'KUNGalgameEditTopic',
   persist: true,
   state: (): EditStorePersist => ({
     textCount: 0,

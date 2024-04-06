@@ -44,7 +44,7 @@ watch(
     })
     if (data.value) {
       info.info('AlertInfo.login.success')
-      useKUNGalgameUserStore().setUserInfo(data.value)
+      usePersistUserStore().setUserInfo(data.value)
       navigateTo(localePath('/'))
     }
 

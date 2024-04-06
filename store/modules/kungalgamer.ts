@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import type { KUNGalgamerStore } from '../types/kungalgamer'
 import type { LoginResponseData } from '~/types/api/user'
 
-export const useKUNGalgameUserStore = defineStore({
+export const usePersistUserStore = defineStore({
   id: 'KUNGalgameUser',
   persist: true,
   state: (): KUNGalgamerStore => ({
@@ -15,7 +15,7 @@ export const useKUNGalgameUserStore = defineStore({
     roles: 0
   }),
   actions: {
-    setUserInfo (user: LoginResponseData) {
+    setUserInfo(user: LoginResponseData) {
       this.uid = user.uid
       this.name = user.name
       this.avatar = user.avatar
@@ -25,15 +25,15 @@ export const useKUNGalgameUserStore = defineStore({
       this.moemoeAccessToken = user.token
     },
 
-    setToken (moemoeAccessToken: string) {
+    setToken(moemoeAccessToken: string) {
       this.moemoeAccessToken = moemoeAccessToken
     },
 
-    getToken () {
+    getToken() {
       return this.moemoeAccessToken
     },
 
-    removeToken () {
+    removeToken() {
       this.moemoeAccessToken = ''
     }
   }

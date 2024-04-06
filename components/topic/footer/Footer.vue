@@ -31,7 +31,7 @@ const toUser = computed(() => props.toUser)
  * this validation will become ineffective, but the validation logic is on the backend.
  */
 // Current user's UID
-const currUserUid = useKUNGalgameUserStore().uid
+const currUserUid = usePersistUserStore().uid
 
 // Share
 const handleClickShare = () => {
