@@ -4,7 +4,7 @@
   <div class="root">
     <GalgameCardNav />
 
-    <GalgameCard />
+    <GalgameCardContainer />
   </div>
 </template>
 
