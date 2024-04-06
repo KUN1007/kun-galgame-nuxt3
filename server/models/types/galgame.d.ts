@@ -20,6 +20,11 @@ export interface Galgame {
   likes: number[]
   favorites: number[]
 
+  resources: number[]
+  links: number[]
+  histories: number[]
+  comments: number[]
+
   // Some todo features
   alias: string[]
   official: string

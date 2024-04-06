@@ -1,68 +1,56 @@
-import TopicModel from '~/server/models/topic'
-import type {
-  SortOrder,
-  SortFieldPool,
-  PoolTopicsRequestData,
-  PoolTopic
-} from '~/types/api/pool'
+import GalgameModel from '~/server/models/galgame'
+import type { GalgamePageRequestData, GalgameCard } from '~/types/api/galgame'
 
-const getPoolTopics = async (
+const getGalgames = async (
   page: number,
   limit: number,
-  sortField: SortFieldPool,
   sortOrder: SortOrder
 ) => {
   const skip = (page - 1) * limit
 
-  const sortOptions: Record<string, 'asc' | 'desc'> = {
-    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
-  }
-
-  const topics = await TopicModel.find({ status: { $ne: 1 } })
-    .sort(sortOptions)
+  const galgames = await GalgameModel.find({ status: { $ne: 1 } })
+    .sort({ created: sortOrder })
     .skip(skip)
     .limit(limit)
     .populate('user', 'uid avatar name')
     .lean()
 
-  const data: PoolTopic[] = topics.map((topic) => ({
-    tid: topic.tid,
-    title: topic.title,
+  const data: GalgameCard[] = galgames.map((galgame) => ({
+    gid: galgame.gid,
+    name: galgame.name,
+    banner: galgame.banner,
     user: {
-      uid: topic.user[0].uid,
-      avatar: topic.user[0].avatar,
-      name: topic.user[0].name
+      uid: galgame.user[0].uid,
+      name: galgame.user[0].name,
+      avatar: galgame.user[0].avatar
     },
-    views: topic.views,
-    section: topic.section,
-    tags: topic.tags,
-    likes: topic.likes.length,
-    replies: topic.replies.length,
-    comments: topic.comments,
-    time: topic.time
+    views: galgame.views,
+    likes: galgame.likes.length,
+    favorites: galgame.favorites.length,
+    time: galgame.time,
+    platform: galgame.platform
   }))
 
   return data
 }
 
 export default defineEventHandler(async (event) => {
-  const { page, limit, sortField, sortOrder }: PoolTopicsRequestData =
+  const { page, limit, sortOrder }: GalgamePageRequestData =
     await getQuery(event)
-  if (!page || !limit || !sortField || !sortOrder) {
+  if (!page || !limit || !sortOrder) {
     kunError(event, 10507)
     return
   }
-  if (limit !== '12') {
+  if (limit !== '24') {
     kunError(event, 10209)
     return
   }
 
-  const topics = await getPoolTopics(
+  const galgames = await getGalgames(
     parseInt(page),
     parseInt(limit),
-    sortField as SortFieldPool,
     sortOrder as SortOrder
   )
 
-  return topics
+  return galgames
 })

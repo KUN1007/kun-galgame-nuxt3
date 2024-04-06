@@ -48,6 +48,16 @@ const handleGetVNData = async () => {
   )
 
   if (vndbData.value) {
+    if (!vndbData.value.results.length) {
+      isFetching.value = false
+      useMessage(
+        'No data retrieved. The game may not exist.',
+        '未获取到数据，可能是游戏不存在',
+        'error'
+      )
+      return
+    }
+
     isFetching.value = false
     useMessage('Fetching data successfully!', '获取数据成功!', 'info')
 

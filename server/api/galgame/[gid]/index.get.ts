@@ -1,7 +1,7 @@
 import GalgameModel from '~/server/models/galgame'
 import UserModel from '~/server/models/user'
 import mongoose from 'mongoose'
-import type { GalgameDetail } from '~/types/api/galgame'
+import type { GalgameContributor, GalgameDetail } from '~/types/api/galgame'
 
 export default defineEventHandler(async (event) => {
   const gid = getRouterParam(event, 'gid')
@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
       { uid: { $in: galgame.contributor } },
       'uid avatar'
     )
-    const contributor = contributorData.map((user) => ({
+    const contributor: GalgameContributor[] = contributorData.map((user) => ({
       uid: user.uid,
       avatar: user.avatar
     }))

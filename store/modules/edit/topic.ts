@@ -1,4 +1,4 @@
-import type { EditStorePersist } from '~/store/types/edit'
+import type { EditStorePersist } from '~/store/types/edit/topic'
 
 export const usePersistEditTopicStore = defineStore({
   id: 'KUNGalgameEditTopic',

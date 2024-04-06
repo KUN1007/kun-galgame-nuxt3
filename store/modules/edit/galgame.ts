@@ -1,4 +1,4 @@
-import type { GalgameStorePersist } from '~/store/types/galgame/galgame'
+import type { GalgameStorePersist } from '~/store/types/edit/galgame'
 
 export const usePersistEditGalgameStore = defineStore({
   id: 'KUNGalgameEditGalgame',

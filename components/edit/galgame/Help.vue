@@ -73,15 +73,19 @@ const siteList: Site[] = [
       you need to create the game first.
     </p>
     <p>
-      If the game already exists, you can add resource links on the
-      corresponding game page.
+      <strong>
+        If the game already exists, you can add resource links on the
+        corresponding game page.
+      </strong>
     </p>
     <p>
-      <strong>
-        The fetch VN data API is sourced from VNDB, and it has rate limits.
-        Please use it reasonably. If you cannot retrieve the data, please fill
-        it in manually.
-      </strong>
+      The fetch VN data API is sourced from VNDB, and it has rate limits. Please
+      use it reasonably. If you cannot retrieve the data, please fill it in
+      manually.
+    </p>
+    <p class="note">
+      Note that creating a VN resource means you will need to add a link to
+      access/download this VN resource on the VN resource details page later.
     </p>
   </div>
 
@@ -103,12 +107,18 @@ const siteList: Site[] = [
       您将会获得 5 萌萌点。
     </p>
     <p>如果您要发布 Galgame 资源, 游戏不存在的话，您需要先创建游戏。</p>
-    <p>如果游戏已存在, 可以到对应 Galgame 的界面添加 Galgame 资源链接。</p>
     <p>
       <strong>
-        获取 Galgame 数据的 API 来源于 VNDB, 该 API 有频率限制,
-        请大家合理使用。如果获取不到数据, 请大家手动填写。
+        如果游戏已存在, 可以到对应 Galgame 的界面添加 Galgame 资源链接。
       </strong>
+    </p>
+    <p>
+      获取 Galgame 数据的 API 来源于 VNDB, 该 API 有频率限制,
+      请大家合理使用。如果获取不到数据, 请大家手动填写。
+    </p>
+    <p class="note">
+      注意，创建 Galgame 资源意味着您稍后必须到 Galgame 资源详情页面，添加一条该
+      Galgame 资源的获取 / 下载链接。
     </p>
   </div>
 </template>
@@ -158,5 +168,9 @@ const siteList: Site[] = [
   p {
     margin-top: 10px;
   }
+}
+
+.note {
+  color: var(--kungalgame-red-5);
 }
 </style>

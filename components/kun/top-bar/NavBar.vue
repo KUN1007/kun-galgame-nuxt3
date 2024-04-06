@@ -40,11 +40,18 @@
       </template>
     </KunPopover>
 
+    <NuxtLinkLocale class="link" to="/galgame">
+      <span>
+        {{ $t('header.galgame') }}
+      </span>
+    </NuxtLinkLocale>
+
     <NuxtLinkLocale class="link" to="/kungalgame">
       <span>
         {{ $t('header.about') }}
       </span>
     </NuxtLinkLocale>
+
     <NuxtLinkLocale class="link" to="/">
       <span>
         {{ $t('header.home') }}

@@ -1,30 +1,38 @@
 <script setup lang="ts">
-const { page, limit, category, sortOrder } = storeToRefs(useTempPoolStore())
-const isLoadingComplete = ref(false)
+const { page, limit, sortOrder } = storeToRefs(usePersistGalgameStore())
 
-const getTopics = async () => {
-  const { data } = await useFetch(`/api/galgame`, {
-    method: 'GET',
-    query: { page, limit, sortField, sortOrder },
-    watch: false,
-    ...kungalgameResponseHandler
-  })
-  return data.value ?? []
-}
+const { data } = await useFetch(`/api/galgame`, {
+  method: 'GET',
+  query: { page, limit, sortOrder },
+  watch: false,
+  ...kungalgameResponseHandler
+})
 </script>
 
 <template>
-  <div class="galgame">
-    <div class="nav"></div>
-    <div class="container"></div>
+  <div class="root">
+    <div class="nav">
+      <div>
+        <span>平台</span>
+        <span>类型</span>
+        <span>语言</span>
+      </div>
+
+      <span>升序降序</span>
+    </div>
+
+    <GalgameCard v-if="data" :data="data" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.galgame {
-  height: calc(100dvh - 75px);
+.root {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  height: 100%;
+  min-height: calc(100dvh - 75px);
+  max-width: 64rem;
+  margin: 0 auto;
+  color: var(--kungalgame-font-color-3);
 }
 </style>

@@ -19,7 +19,7 @@ export const uploadGalgameBanner = async (
   const bucketName = `image/galgame/${gid}/banner`
 
   const res1 = await uploadImage(banner, 'banner.webp', bucketName)
-  const res2 = await uploadImage(miniBanner, 'banner-mini', bucketName)
+  const res2 = await uploadImage(miniBanner, 'banner-mini.webp', bucketName)
 
   return !!(res1 && res2)
 }
