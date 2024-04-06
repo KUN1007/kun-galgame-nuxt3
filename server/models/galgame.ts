@@ -6,18 +6,18 @@ import { Galgame } from './types/galgame'
 const GalgameSchema = new mongoose.Schema<Galgame>(
   {
     gid: { type: Number, unique: true },
-    vndb_id: { type: Number, required: true },
+    vndb_id: { type: String, required: true },
     uid: { type: Number, required: true, ref: 'user' },
     name: {
-      en_us: { type: String, default: '' },
-      ja_jp: { type: String, default: '' },
-      zh_cn: { type: String, default: '' }
+      'en-us': { type: String, default: '' },
+      'ja-jp': { type: String, default: '' },
+      'zh-cn': { type: String, default: '' }
     },
     banner: { type: String, default: '' },
     introduction: {
-      en_us: { type: String, default: '' },
-      ja_jp: { type: String, default: '' },
-      zh_cn: { type: String, default: '' }
+      'en-us': { type: String, default: '' },
+      'ja-jp': { type: String, default: '' },
+      'zh-cn': { type: String, default: '' }
     },
 
     time: { type: Number, default: 0 },

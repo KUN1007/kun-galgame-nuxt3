@@ -65,9 +65,13 @@ useHead({
       </div>
     </div>
 
-    <KunBlank info="user.notFound" v-if="!user && !isBanned"></KunBlank>
+    <KunBlank v-if="!user && !isBanned">
+      {{ $t('user.notFound') }}
+    </KunBlank>
 
-    <KunBlank info="user.banned" v-if="isBanned"></KunBlank>
+    <KunBlank v-if="isBanned">
+      {{ $t('user.banned') }}
+    </KunBlank>
 
     <KunFooter style="margin: 0 auto; padding-bottom: 17px" />
   </div>

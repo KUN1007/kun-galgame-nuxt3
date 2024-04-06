@@ -5,13 +5,25 @@ import UserModel from '~/server/models/user'
 import { checkGalgamePublish } from './utils/checkGalgamePublish'
 import { uploadGalgameBanner } from './utils/uploadGalgameBanner'
 import type { H3Event } from 'h3'
-import type { CreateGalgameRequestData } from '~/types/api/galgame'
+import { KunLanguage } from '~/types/i18n'
 
 const readGalgameData = async (event: H3Event) => {
-  const { vndbId, name, banner, introduction }: CreateGalgameRequestData =
-    await readBody(event)
+  const formData = await readFormData(event)
 
-  const res = checkGalgamePublish(vndbId, name, banner, introduction)
+  const vndbIdData = formData.get('vndbId')
+  const nameData = formData.get('name')
+  const introductionData = formData.get('introduction')
+  const bannerData = formData.get('banner')
+  if (!vndbIdData || !nameData || !introductionData || !bannerData) {
+    kunError(event, 10507)
+    return
+  }
+
+  const vndbId = vndbIdData.toString()
+  const name = JSON.parse(nameData.toString()) as KunLanguage
+  const introduction = JSON.parse(introductionData.toString()) as KunLanguage
+  const banner = await new Response(bannerData).arrayBuffer()
+  const res = checkGalgamePublish(vndbId, name, introduction)
   if (res) {
     kunError(event, res)
     return
@@ -19,7 +31,7 @@ const readGalgameData = async (event: H3Event) => {
 
   const galgame = await GalgameModel.findOne({ vndb_id: vndbId })
   if (galgame) {
-    kunError(event, 10609)
+    kunError(event, 10608)
     return
   }
 
@@ -64,7 +76,8 @@ export default defineEventHandler(async (event) => {
       vndb_id,
       uid,
       name,
-      introduction
+      introduction,
+      time: Date.now()
     })
 
     const savedGalgame = await newGalgame.save()
@@ -85,11 +98,7 @@ export default defineEventHandler(async (event) => {
       { $push: { contributor: uid } }
     )
 
-    const bannerArrayBuffer = await banner.arrayBuffer()
-    const res = await uploadGalgameBanner(
-      Buffer.from(bannerArrayBuffer),
-      savedGalgame.gid
-    )
+    const res = await uploadGalgameBanner(banner, savedGalgame.gid)
     if (!res) {
       kunError(event, 10116)
       return
@@ -99,7 +108,7 @@ export default defineEventHandler(async (event) => {
       return
     }
 
-    const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${savedGalgame.gid}/banner/avatar.webp`
+    const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${savedGalgame.gid}/banner/banner.webp`
     await GalgameModel.updateOne(
       { gid: savedGalgame.gid },
       { $set: { banner: imageLink } }

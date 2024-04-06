@@ -23,26 +23,36 @@ const handlePublishGalgame = async () => {
     return
   } else {
     isPublishing.value = true
-    useMessage('Publishing visualnovel...', '正在发布 Galgame...', 'info')
+    useMessage(
+      'Publishing visualnovel => Uploading images may take a few seconds...',
+      '正在发布 Galgame => 因为需要上传图片，所以这可能会花费几秒...',
+      'info',
+      7777
+    )
   }
+
+  const formData = new FormData()
+  formData.append('vndbId', vndbId.value)
+  formData.append('name', JSON.stringify(name.value))
+  formData.append('banner', banner!)
+  formData.append('introduction', JSON.stringify(introduction.value))
+
   const { data } = await useFetch('/api/galgame/create', {
     method: 'POST',
-    body: {
-      vndbId: vndbId.value,
-      name: name.value,
-      banner,
-      introduction: introduction.value
-    },
+    body: formData,
     watch: false,
     ...kungalgameResponseHandler
   })
   isPublishing.value = false
 
   if (data.value) {
-    const tid = data.value
-    navigateTo(localePath(`/topic/${tid}`))
+    const gid = data.value
+
+    await deleteImage('kun-galgame-publish-banner')
+    usePersistGalgameStore().resetGalgameData()
+
+    navigateTo(localePath(`/galgame/${gid}`))
     messageStore.info('AlertInfo.edit.publishSuccess')
-    useKUNGalgameEditStore().resetTopicData()
   }
 }
 </script>

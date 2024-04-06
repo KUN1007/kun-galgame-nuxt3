@@ -17,5 +17,20 @@ export const usePersistGalgameStore = defineStore({
       'ja-jp': '',
       'zh-cn': ''
     }
-  })
+  }),
+  actions: {
+    resetGalgameData() {
+      this.vndbId = ''
+      this.name = {
+        'en-us': '',
+        'ja-jp': '',
+        'zh-cn': ''
+      }
+      this.introduction = {
+        'en-us': '',
+        'ja-jp': '',
+        'zh-cn': ''
+      }
+    }
+  }
 })

@@ -1,6 +1,6 @@
-import type { KunLanguageFront } from '~/types/i18n'
+import type { KunLanguage } from '~/types/i18n'
 
-export const isValid = (i18nField: KunLanguageFront, maxLength: number) => {
+export const isValid = (i18nField: KunLanguage, maxLength: number) => {
   const values = Object.values(i18nField)
   const isNotEmpty = values.some((value) => value.trim() !== '')
   const isWithinLengthLimit = values.every((value) => value.length <= maxLength)
@@ -11,9 +11,9 @@ export const VNDBPattern: RegExp = /^v\d{1,6}$/
 
 export const checkGalgamePublish = (
   vndbId: string,
-  name: KunLanguageFront,
+  name: KunLanguage,
   banner: Blob | null,
-  introduction: KunLanguageFront
+  introduction: KunLanguage
 ): boolean => {
   if (!vndbId.trim()) {
     useMessage('VNDB ID cannot be empty!', 'VNDB ID 不可为空!', 'warn')

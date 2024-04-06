@@ -30,7 +30,7 @@ const getBalanceData = async (
   const responseData: Balance[] = data.map((balance) => ({
     bid: balance.bid,
     type: balance.type as BalanceType,
-    reason: balance.reason[language.replace(/-/g, '_') as LanguageBackend],
+    reason: balance.reason[language],
     time: balance.time,
     amount: balance.amount
   }))

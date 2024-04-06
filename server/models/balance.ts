@@ -7,9 +7,9 @@ const BalanceSchema = new mongoose.Schema<Balance>(
   {
     bid: { type: Number, unique: true },
     reason: {
-      en_us: { type: String, default: '' },
-      ja_jp: { type: String, default: '' },
-      zh_cn: { type: String, default: '' }
+      'en-us': { type: String, default: '' },
+      'ja-jp': { type: String, default: '' },
+      'zh-cn': { type: String, default: '' }
     },
     type: { type: String, default: '' },
     time: { type: Number, default: 0 },

@@ -1,15 +1,13 @@
 <script setup lang="ts">
-const props = defineProps<{
-  info: string
-}>()
-
 const localePath = useLocalePath()
 </script>
 
 <template>
   <div class="blank">
     <div class="container">
-      <h1>{{ $t(props.info) }}</h1>
+      <h1>
+        <slot />
+      </h1>
       <button @click="navigateTo(localePath('/'))">
         {{ $t('kungalgame.home') }}
       </button>

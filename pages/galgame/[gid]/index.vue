@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { TopicDetail } from '~/types/api/topic'
+import type { GalgameDetail } from '~/types/api/galgame'
 
-const topic = ref<TopicDetail>()
+const galgame = ref<GalgameDetail>()
 const route = useRoute()
 const isBanned = ref(false)
 const gid = computed(() => {
@@ -17,7 +17,7 @@ const { data } = await useFetch(`/api/galgame/${gid.value}`, {
 if (data.value === 'banned') {
   isBanned.value = true
 } else {
-  topic.value = data.value ?? undefined
+  galgame.value = data.value ?? undefined
 }
 
 // useHead({
@@ -37,21 +37,26 @@ if (data.value === 'banned') {
 
 <template>
   <div class="root">
-    <Topic v-if="topic" :tid="tid" :topic-data="topic" />
+    <Galgame v-if="galgame" :gid="gid" :galgame="galgame" />
 
-    <KunBlank info="topic.notFound" v-if="!topic && !isBanned" />
+    <!-- <KunBlank v-if="!galgame && !isBanned">
+      {{ $t('topic.notFound') }}
+    </KunBlank>
 
-    <KunBlank info="topic.banned" v-if="isBanned" />
-
-    <TopicBar />
+    <KunBlank v-if="isBanned">
+      {{ $t('topic.banned') }}
+    </KunBlank> -->
   </div>
 </template>
 
 <style lang="scss" scoped>
 .root {
-  min-height: calc(100dvh - 75px);
   display: flex;
-  flex-shrink: 0;
   flex-direction: column;
+  height: 100%;
+  min-height: calc(100dvh - 75px);
+  max-width: 64rem;
+  margin: 0 auto;
+  color: var(--kungalgame-font-color-3);
 }
 </style>

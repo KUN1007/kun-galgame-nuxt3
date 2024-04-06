@@ -16,7 +16,7 @@ const siteList: Site[] = [
     name: 'erogamescape'
   },
   {
-    url: 'https://www.dlsite.com/index.html',
+    url: 'https://www.dlsite.com/pro/',
     name: 'dlsite'
   },
   {

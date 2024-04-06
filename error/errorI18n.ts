@@ -71,12 +71,12 @@ const errorMessagesEN: Record<number, string> = {
   10601: `VNDB ID cannot be empty (-B)`,
   10602: `Please enter the correct format of VNDB ID (-B)`,
   10603: `Please enter at least one title, and ensure that the length of the title is not greater than 107 characters. (-B)`,
-  10604: `You must upload a visualnovel banner image (-B)`,
-  10605: `The size of the banner image cannot exceed 1007KB (-B)`,
+  10605: `Banner image upload error. The final compressed size of the banner exceeds 1.007MB. (-B)`,
   10606: `Please enter at least one introduction, and ensure that the length of the introduction is not more than 100,007 characters. (-B)`,
   10607: `Your daily galgame limit has been reached for today. (-B)`,
-  10608: `Banner image upload error. The final compressed size of the banner exceeds 1.007MB. (-B)`,
-  10609: `The game with this VNDB ID has already been published by someone else. (-B)`
+  10608: `The game with this VNDB ID has already been published by someone else. (-B)`,
+  10609: `Read Visualnovel ID failed. (-B)`,
+  10610: `Visualnovel not found. (-B)`
 }
 
 const errorMessagesCN: Record<number, string> = {
@@ -144,12 +144,12 @@ const errorMessagesCN: Record<number, string> = {
   10601: `VNDB ID 不可为空 (-B)`,
   10602: `请输入正确格式的 VNDB ID (-B)`,
   10603: `请输入至少一个标题, 并保证标题长度不多于 107 个字符 (-B)`,
-  10604: `您必须上传一张 Galgame 预览图 (-B)`,
-  10605: `预览图大小不能超过 1007KB (-B)`,
+  10605: `预览图上传错误. 图片最终压缩大小超过 1.007MB  (-B)`,
   10606: `请输入至少一个介绍, 并保证介绍长度不多于 100,007 个字符 (-B)`,
   10607: `您今日可以发表的 Galgame 数已达上限 (-B)`,
-  10608: `预览图上传错误. 图片最终压缩大小超过 1.007MB  (-B)`,
-  10609: `该 VNDB 编号的游戏已经有人发布过了 (-B)`
+  10608: `该 VNDB 编号的游戏已经有人发布过了 (-B)`,
+  10609: `读取 Galgame ID 失败 (-B)`,
+  10610: `未找到 Galgame (-B)`
 }
 
 export const getErrorMessageEN = (errorCode: number) => {
