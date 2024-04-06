@@ -1,27 +1,10 @@
-<script setup lang="ts">
-const { page, limit, sortOrder } = storeToRefs(usePersistGalgameStore())
-
-const { data } = await useFetch(`/api/galgame`, {
-  method: 'GET',
-  query: { page, limit, sortOrder },
-  watch: false,
-  ...kungalgameResponseHandler
-})
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="root">
-    <div class="nav">
-      <div>
-        <span>平台</span>
-        <span>类型</span>
-        <span>语言</span>
-      </div>
+    <GalgameCardNav />
 
-      <span>升序降序</span>
-    </div>
-
-    <GalgameCard v-if="data" :data="data" />
+    <GalgameCard />
   </div>
 </template>
 

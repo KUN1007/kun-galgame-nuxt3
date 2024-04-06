@@ -299,6 +299,14 @@
         "ja-jp": "日语",
         "zh-cn": "中文"
       },
+      "platform": {
+        "windows": "Windows",
+        "mac": "macOS",
+        "linux": "Linux",
+        "emulator": "模拟器",
+        "app": "应用直装",
+        "others": "其它"
+      },
       "banner": {
         "name": "预览图",
         "help": "Galgame 预览图请尽量在游戏内截取原始分辨率，不要拍屏，尽量不要包含设备窗口的边，宽度大于高度为好。预览图最终加载大小会变为不大于 1920 × 1080 分辨率"
@@ -524,6 +532,10 @@
     "others": "其它",
     "update": "页面数据十七分钟更新一次",
     "publish": "发布于"
+  },
+  "galgame": {
+    "asc": "升序",
+    "desc": "降序"
   },
   "page403":{
     "permission": "您没有权限访问这个页面",

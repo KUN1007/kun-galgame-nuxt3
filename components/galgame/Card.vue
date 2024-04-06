@@ -1,53 +1,75 @@
 <script setup lang="ts">
-import type { GalgameCard } from '~/types/api/galgame'
+const { page, limit, sortOrder } = storeToRefs(usePersistGalgameStore())
 
 const { locale } = useI18n()
 
-defineProps<{
-  data: GalgameCard[]
-}>()
+const { data, pending } = await useFetch(`/api/galgame`, {
+  method: 'GET',
+  query: { page, limit, sortOrder },
+  ...kungalgameResponseHandler
+})
 </script>
 
 <template>
   <div class="container">
-    <NuxtLinkLocale
-      class="card"
-      v-for="(gal, index) in data"
-      :key="index"
-      :to="`/galgame/${gal.gid}`"
-    >
-      <div class="banner">
-        <NuxtImg :src="gal.banner.replace(/\.webp$/, '-mini.webp')" />
-        <div class="mask">
-          <span>
-            <Icon name="lucide:mouse-pointer-click" />
-            <span>{{ gal.views }}</span>
-          </span>
+    <div class="card-container">
+      <NuxtLinkLocale
+        class="card"
+        v-for="(gal, index) in data?.galgames"
+        :key="index"
+        :to="`/galgame/${gal.gid}`"
+      >
+        <div class="banner">
+          <NuxtImg :src="gal.banner.replace(/\.webp$/, '-mini.webp')" />
+          <div class="mask">
+            <span>
+              <Icon name="lucide:mouse-pointer-click" />
+              <span>{{ gal.views }}</span>
+            </span>
 
-          <span>
-            <Icon name="lucide:thumbs-up" />
-            <span>{{ gal.likes }}</span>
+            <span>
+              <Icon name="lucide:thumbs-up" />
+              <span>{{ gal.likes }}</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="title">
+          {{ getPreferredLanguageText(gal.name, locale as Language) }}
+        </div>
+
+        <div class="publisher">
+          <KunAvatar :user="gal.user" size="30px" />
+          <span class="name">{{ gal.user.name }}</span>
+          <span class="time">
+            {{ formatTimeDifference(gal.time, locale) }}
           </span>
         </div>
-      </div>
+      </NuxtLinkLocale>
+    </div>
 
-      <div class="title">
-        {{ getPreferredLanguageText(gal.name, locale as Language) }}
-      </div>
-
-      <div class="publisher">
-        <KunAvatar :user="gal.user" size="30px" />
-        <span class="name">{{ gal.user.name }}</span>
-        <span class="time">
-          {{ formatTimeDifference(gal.time, locale) }}
-        </span>
-      </div>
-    </NuxtLinkLocale>
+    <KunPagination
+      class="pagination"
+      v-if="data?.totalCount"
+      :page="parseInt(page)"
+      :limit="parseInt(limit)"
+      :sum="data?.totalCount"
+      :loading="pending"
+      @set-page="(newPage) => (page = newPage.toString())"
+    />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .container {
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: var(--kungalgame-shadow-0);
+  padding: 17px;
+}
+
+.card-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 10px;

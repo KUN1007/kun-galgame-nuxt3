@@ -8,14 +8,18 @@ const getGalgames = async (
 ) => {
   const skip = (page - 1) * limit
 
-  const galgames = await GalgameModel.find({ status: { $ne: 1 } })
+  const totalCount = await GalgameModel.countDocuments({
+    status: { $ne: 1 }
+  })
+
+  const data = await GalgameModel.find({ status: { $ne: 1 } })
     .sort({ created: sortOrder })
     .skip(skip)
     .limit(limit)
     .populate('user', 'uid avatar name')
     .lean()
 
-  const data: GalgameCard[] = galgames.map((galgame) => ({
+  const galgames: GalgameCard[] = data.map((galgame) => ({
     gid: galgame.gid,
     name: galgame.name,
     banner: galgame.banner,
@@ -31,7 +35,7 @@ const getGalgames = async (
     platform: galgame.platform
   }))
 
-  return data
+  return { galgames, totalCount }
 }
 
 export default defineEventHandler(async (event) => {

@@ -297,6 +297,14 @@
         "ja-jp": "Japanese",
         "zh-cn": "Chinese"
       },
+      "platform": {
+        "windows": "Windows",
+        "mac": "macOS",
+        "linux": "Linux",
+        "emulator": "Emulator",
+        "app": "Mobile App",
+        "others": "Others"
+      },
       "banner": {
         "name": "Banner",
         "help": "Please try to capture the original resolution of the VN for the banner image instead of taking screenshots. Avoid including the edges of the device window, and it's preferable for the width to be greater than the height. The preview image will ultimately be resized to a resolution no larger than 1920 × 1080."
@@ -523,6 +531,10 @@
     "others": "Others",
     "update": "Page data updates every seventeen minutes.",
     "publish": "Published at"
+  },
+  "galgame": {
+    "asc": "Ascending",
+    "desc": "Descending"
   },
   "page403":{
     "permission": "You don't have permission to access this page",

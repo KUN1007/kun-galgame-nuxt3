@@ -80,7 +80,7 @@
 
 .top-bar {
   text-align: center;
-  width: 300px;
+  width: 333px;
   align-items: center;
   display: flex;
   margin-left: 30px;

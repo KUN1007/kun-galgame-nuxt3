@@ -88,6 +88,7 @@ const handleSetOption = (value: string, index: number) => {
   backdrop-filter: blur(10px);
   border-radius: 5px;
   box-shadow: var(--shadow);
+  z-index: 9999;
 
   & > span {
     font-size: 15px;

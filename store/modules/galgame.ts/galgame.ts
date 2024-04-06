@@ -6,6 +6,9 @@ export const usePersistGalgameStore = defineStore({
   state: (): GalgameStorePersist => ({
     page: '1',
     limit: '24',
+    type: 'game',
+    language: 'en-us',
+    platform: 'windows',
     sortOrder: 'desc'
   }),
   actions: {}

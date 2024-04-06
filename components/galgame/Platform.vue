@@ -48,4 +48,3 @@ const handleSelectPlatform = (pl: string) => {
   }
 }
 </style>
-../utils/items
