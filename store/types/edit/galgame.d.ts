@@ -4,4 +4,5 @@ export interface GalgameStorePersist {
   vndbId: string
   name: KunLanguage
   introduction: KunLanguage
+  aliases: string[]
 }

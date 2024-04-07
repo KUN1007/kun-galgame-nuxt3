@@ -13,8 +13,15 @@ const readGalgameData = async (event: H3Event) => {
   const vndbIdData = formData.get('vndbId')
   const nameData = formData.get('name')
   const introductionData = formData.get('introduction')
+  const aliasesData = formData.get('aliases')
   const bannerData = formData.get('banner')
-  if (!vndbIdData || !nameData || !introductionData || !bannerData) {
+  if (
+    !vndbIdData ||
+    !nameData ||
+    !introductionData ||
+    !aliasesData ||
+    !bannerData
+  ) {
     kunError(event, 10507)
     return
   }
@@ -22,8 +29,9 @@ const readGalgameData = async (event: H3Event) => {
   const vndbId = vndbIdData.toString()
   const name = JSON.parse(nameData.toString()) as KunLanguage
   const introduction = JSON.parse(introductionData.toString()) as KunLanguage
+  const aliases = JSON.parse(aliasesData.toString())
   const banner = await new Response(bannerData).arrayBuffer()
-  const res = checkGalgamePublish(vndbId, name, introduction)
+  const res = checkGalgamePublish(vndbId, name, introduction, aliases)
   if (res) {
     kunError(event, res)
     return
@@ -47,7 +55,8 @@ const readGalgameData = async (event: H3Event) => {
     vndb_id: vndbId,
     name,
     banner,
-    introduction
+    introduction,
+    aliases
   }
 }
 
@@ -56,7 +65,7 @@ export default defineEventHandler(async (event) => {
   if (!result) {
     return
   }
-  const { uid, vndb_id, name, banner, introduction } = result
+  const { uid, vndb_id, name, banner, introduction, aliases } = result
 
   const user = await UserModel.findOne({ uid })
   if (!user) {
@@ -77,6 +86,7 @@ export default defineEventHandler(async (event) => {
       uid,
       name,
       introduction,
+      alias: aliases,
       time: Date.now()
     })
 

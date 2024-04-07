@@ -76,7 +76,9 @@ const errorMessagesEN: Record<number, string> = {
   10607: `Your daily galgame limit has been reached for today. (-B)`,
   10608: `The game with this VNDB ID has already been published by someone else. (-B)`,
   10609: `Read Visualnovel ID failed. (-B)`,
-  10610: `Visualnovel not found. (-B)`
+  10610: `Visualnovel not found. (-B)`,
+  10611: `The alias for visualnovel should be no more than 17 items (-B)`,
+  10612: `The alias for visualnovel should be no longer than 107 characters (-B)`
 }
 
 const errorMessagesCN: Record<number, string> = {
@@ -149,7 +151,9 @@ const errorMessagesCN: Record<number, string> = {
   10607: `您今日可以发表的 Galgame 数已达上限 (-B)`,
   10608: `该 VNDB 编号的游戏已经有人发布过了 (-B)`,
   10609: `读取 Galgame ID 失败 (-B)`,
-  10610: `未找到 Galgame (-B)`
+  10610: `未找到 Galgame (-B)`,
+  10611: `Galgame 的别名最多 17 个 (-B)`,
+  10612: `Galgame 的别名最长 107 字 (-B)`
 }
 
 export const getErrorMessageEN = (errorCode: number) => {

@@ -16,7 +16,8 @@ export const usePersistEditGalgameStore = defineStore({
       'en-us': '',
       'ja-jp': '',
       'zh-cn': ''
-    }
+    },
+    aliases: []
   }),
   actions: {
     resetGalgameData() {
@@ -31,6 +32,7 @@ export const usePersistEditGalgameStore = defineStore({
         'ja-jp': '',
         'zh-cn': ''
       }
+      this.aliases = []
     }
   }
 })

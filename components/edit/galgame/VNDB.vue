@@ -10,10 +10,13 @@ const isFetching = ref(false)
 const data = ref<VNDB>({
   title: '',
   titles: [],
-  description: ''
+  description: '',
+  aliases: []
 })
 
-const { vndbId, name, introduction } = storeToRefs(usePersistEditGalgameStore())
+const { vndbId, name, introduction, aliases } = storeToRefs(
+  usePersistEditGalgameStore()
+)
 
 const handleGetVNData = async () => {
   if (!VNDBPattern.test(vndbId.value)) {
@@ -42,7 +45,7 @@ const handleGetVNData = async () => {
       method: 'POST',
       body: {
         filters: ['id', '=', vndbId.value],
-        fields: 'title, titles.title, description'
+        fields: 'title, titles.title, description, aliases'
       }
     }
   )
@@ -64,6 +67,7 @@ const handleGetVNData = async () => {
     data.value = vndbData.value.results[0]
     name.value['en-us'] = data.value.title
     introduction.value['en-us'] = data.value.description ?? ''
+    aliases.value = data.value.aliases
 
     // For reactivity
     if (introductionLanguage.value !== 'en-us') {

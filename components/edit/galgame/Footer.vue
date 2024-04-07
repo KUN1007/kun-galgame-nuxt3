@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { checkGalgamePublish } from '../utils/checkGalgamePublish'
 
-const { vndbId, name, introduction } = storeToRefs(usePersistEditGalgameStore())
+const { vndbId, name, introduction, aliases } = storeToRefs(
+  usePersistEditGalgameStore()
+)
 const localePath = useLocalePath()
 
 const messageStore = useTempMessageStore()
@@ -36,6 +38,7 @@ const handlePublishGalgame = async () => {
   formData.append('name', JSON.stringify(name.value))
   formData.append('banner', banner!)
   formData.append('introduction', JSON.stringify(introduction.value))
+  formData.append('aliases', JSON.stringify(aliases.value))
 
   const { data } = await useFetch('/api/galgame/create', {
     method: 'POST',
