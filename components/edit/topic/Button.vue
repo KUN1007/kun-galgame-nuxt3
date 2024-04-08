@@ -56,7 +56,7 @@ const handlePublish = async () => {
     isPublishing.value = true
     useMessage('Publishing...', '正在发布...', 'info')
   }
-  const { data } = await useFetch('/api/topic/create', {
+  const { data } = await useFetch('/api/topic', {
     method: 'POST',
     body: requestData,
     watch: false,

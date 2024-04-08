@@ -35,4 +35,6 @@ export interface UserAttributes {
   like_galgame: number[]
   favorite_galgame: number[]
   contribute_galgame: number[]
+
+  galgame_resource: number[]
 }

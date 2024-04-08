@@ -23,6 +23,8 @@ const GalgameSchema = new mongoose.Schema<Galgame>(
     time: { type: Number, default: 0 },
     status: { type: Number, default: 0 },
     views: { type: Number, default: 0 },
+    type: { type: [String], default: [] },
+    language: { type: [String], default: [] },
     platform: { type: [String], default: [] },
     contributor: { type: [Number], default: [] },
     likes: { type: [Number], default: [] },

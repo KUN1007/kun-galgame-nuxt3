@@ -1,4 +1,4 @@
-export interface GalgameResourceStorePersist {
+export interface GalgameResourceStoreTemp {
   type: string
   link: string
   language: string

@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import { typeOptions, languageOptions, platformOptions } from './options'
-import type { GalgameResourceStorePersist } from '~/store/types/galgame/resource'
+import { typeOptions, languageOptions, platformOptions } from '../utils/options'
+import { checkGalgameResourcePublish } from '../utils/checkGalgameResourcePublish'
+import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
 
 const { locale } = useI18n()
+const route = useRoute()
+const gid = computed(() => {
+  return parseInt((route.params as { gid: string }).gid)
+})
 
 const originalLink = {
   type: 'game',
@@ -16,21 +21,32 @@ const originalLink = {
   note: ''
 }
 
-const resourceLink = ref<GalgameResourceStorePersist>(originalLink)
+const resourceLink = ref<GalgameResourceStoreTemp>(originalLink)
 
-const { resources } = storeToRefs(usePersistGalgameResourceStore())
+const { resources } = storeToRefs(useTempGalgameResourceStore())
 
-const handleCreateResourceLink = () => {
-  if (resourceLink.value.link && resourceLink.value.size) {
-    resources.value = [...new Set([...resources.value, resourceLink.value])]
-    resourceLink.value = originalLink
+const handleCreateResourceLink = async () => {
+  if (!checkGalgameResourcePublish(resourceLink.value)) {
+    return
+  }
+
+  const { data } = await useFetch(`/api/galgame/${gid.value}/resource`, {
+    method: 'POST',
+    body: resourceLink.value,
+    watch: false,
+    ...kungalgameResponseHandler
+  })
+
+  if (data.value) {
+    resources.value.push(data.value)
   }
 }
 </script>
 
 <template>
-  <h2>{{ $t('edit.galgame.resource.name') }}</h2>
   <div class="resource">
+    <GalgameResourceLink :resources="resources" />
+
     <div class="link">
       <KunInput
         placeholder="资源链接 (网盘|磁链|网址) 等"
@@ -111,8 +127,6 @@ const handleCreateResourceLink = () => {
     </div>
 
     <KunButton @click="handleCreateResourceLink">创建资源链接</KunButton>
-
-    <EditGalgameResourceLink :resources="resources" />
   </div>
 </template>
 

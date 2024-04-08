@@ -105,7 +105,7 @@ export default defineEventHandler(async (event) => {
 
     await GalgameModel.updateOne(
       { gid: savedGalgame.gid },
-      { $push: { contributor: uid } }
+      { $addToSet: { contributor: uid } }
     )
 
     const res = await uploadGalgameBanner(banner, savedGalgame.gid)

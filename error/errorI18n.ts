@@ -78,7 +78,16 @@ const errorMessagesEN: Record<number, string> = {
   10609: `Read Visualnovel ID failed. (-B)`,
   10610: `Visualnovel not found. (-B)`,
   10611: `The alias for visualnovel should be no more than 17 items (-B)`,
-  10612: `The alias for visualnovel should be no longer than 107 characters (-B)`
+  10612: `The alias for visualnovel should be no longer than 107 characters (-B)`,
+  10613: `Please select the correct resource type (-B)`,
+  10614: `Resource link cannot be empty (-B)`,
+  10615: `The maximum length of resource link is 1007 (-B)`,
+  10616: `Please select the correct resource language (-B)`,
+  10617: `Please select the correct resource platform (-B)`,
+  10618: `Please enter the correct resource size, which must include MB or GB (-B)`,
+  10619: `The maximum length of resource link extraction code is 1007 (-B)`,
+  10620: `The maximum length of resource decompression code is 1007 (-B)`,
+  10621: `The maximum length of resource note is 1007 (-B)`
 }
 
 const errorMessagesCN: Record<number, string> = {
@@ -153,7 +162,16 @@ const errorMessagesCN: Record<number, string> = {
   10609: `读取 Galgame ID 失败 (-B)`,
   10610: `未找到 Galgame (-B)`,
   10611: `Galgame 的别名最多 17 个 (-B)`,
-  10612: `Galgame 的别名最长 107 字 (-B)`
+  10612: `Galgame 的别名最长 107 字 (-B)`,
+  10613: `请选择正确的资源类型 (-B)`,
+  10614: `资源链接不能为空 (-B)`,
+  10615: `资源链接最大长度为 1007 (-B)`,
+  10616: `请选择正确的资源语言 (-B)`,
+  10617: `请选择正确的资源平台 (-B)`,
+  10618: `请输入正确的资源大小，必须包含 MB 或 GB (-B)`,
+  10619: `资源提取码最大长度为 1007 (-B)`,
+  10620: `资源解压码最大长度为 1007 (-B)`,
+  10621: `资源备注最大长度为 1007 (-B)`
 }
 
 export const getErrorMessageEN = (errorCode: number) => {

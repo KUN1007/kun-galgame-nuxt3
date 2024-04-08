@@ -3,7 +3,7 @@ import {
   typeOptions,
   languageOptions,
   platformOptions
-} from '~/components/galgame/options'
+} from '~/components/galgame/utils/options'
 
 const { type, language, platform, sortOrder } = storeToRefs(
   usePersistGalgameStore()

@@ -1,7 +1,5 @@
-import {
-  isValid,
-  VNDBPattern
-} from '~/components/edit/utils/checkGalgamePublish'
+import { isValidKunLanguage } from '~/utils/validate'
+import { VNDBPattern } from '~/utils/pattern'
 import type { KunLanguage } from '~/types/i18n'
 
 export const checkGalgamePublish = (
@@ -18,11 +16,11 @@ export const checkGalgamePublish = (
     return 10602
   }
 
-  if (!isValid(name, 107)) {
+  if (!isValidKunLanguage(name, 107)) {
     return 10603
   }
 
-  if (!isValid(introduction, 100007)) {
+  if (!isValidKunLanguage(introduction, 100007)) {
     return 10606
   }
 

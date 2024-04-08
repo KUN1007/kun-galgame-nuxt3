@@ -40,7 +40,7 @@ const handlePublishGalgame = async () => {
   formData.append('introduction', JSON.stringify(introduction.value))
   formData.append('aliases', JSON.stringify(aliases.value))
 
-  const { data } = await useFetch('/api/galgame/create', {
+  const { data } = await useFetch('/api/galgame', {
     method: 'POST',
     body: formData,
     watch: false,

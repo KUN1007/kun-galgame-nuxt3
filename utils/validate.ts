@@ -1,3 +1,5 @@
+import type { KunLanguage } from '~/types/i18n'
+
 export const isValidTimestamp = (timestamp: number) => {
   return (
     timestamp.toString().length === 10 || timestamp.toString().length === 13
@@ -28,4 +30,14 @@ export const isValidPassword = (pwd: string) => {
 export const isValidMailConfirmCode = (code: string) => {
   const regex = /^[a-zA-Z0-9]{7}$/
   return regex.test(code)
+}
+
+export const isValidKunLanguage = (
+  language: KunLanguage,
+  maxLength: number
+) => {
+  const values = Object.values(language)
+  const isNotEmpty = values.some((value) => value.trim() !== '')
+  const isWithinLengthLimit = values.every((value) => value.length <= maxLength)
+  return isNotEmpty && isWithinLengthLimit
 }

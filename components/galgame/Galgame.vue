@@ -17,8 +17,7 @@ const props = defineProps<{
 
     <GalgameIntroduction :introduction="galgame.introduction" />
 
-    <!-- <h2>相关资源</h2>
-    <GalgameResourceLink /> -->
+    <!-- <GalgameResourceLink /> -->
 
     <GalgameResource />
 
