@@ -49,7 +49,7 @@ import markdown from 'refractor/lang/markdown'
 
 const props = defineProps<{
   valueMarkdown: string
-  editorHight: string
+  editorHeight: string
   isShowMenu: boolean
 }>()
 
@@ -57,7 +57,7 @@ const emits = defineEmits<{
   saveMarkdown: [editorMarkdown: string]
 }>()
 
-const editorHight = computed(() => props.editorHight + 'px')
+const editorHeight = computed(() => props.editorHeight + 'px')
 const valueMarkdown = computed(() => props.valueMarkdown)
 const isShowMenu = computed(() => props.isShowMenu)
 
@@ -192,7 +192,7 @@ const editorInfo = useEditor((root) =>
     & > div:nth-child(1) {
       transition: all 0.2s;
       margin: 0 auto;
-      min-height: v-bind(editorHight);
+      min-height: v-bind(editorHeight);
     }
 
     img {
@@ -282,7 +282,7 @@ const editorInfo = useEditor((root) =>
   justify-content: center;
   align-items: center;
   position: relative;
-  height: calc(v-bind(editorHight) + 61px);
+  height: calc(v-bind(editorHeight) + 61px);
 
   span {
     margin-left: 20px;
