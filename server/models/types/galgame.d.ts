@@ -28,4 +28,7 @@ export interface Galgame {
   official: string
 
   user: UserAttributes[]
+
+  created: Date
+  updated: Date
 }

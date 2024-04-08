@@ -6,4 +6,7 @@ export interface NonMoeAttributes {
   description_zh_cn: string
   time: number
   result: string | number
+
+  created: Date
+  updated: Date
 }

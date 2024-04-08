@@ -1,79 +1,163 @@
 <script setup lang="ts">
-import type { GalgameResourceStorePersist } from '~/store/types/galgame/resource'
+import type {
+  GalgameResource,
+  GalgameResourceDetails
+} from '~/types/api/galgame-resource'
 
 const props = defineProps<{
-  resources: GalgameResourceStorePersist[]
+  link: GalgameResource
 }>()
+
+const iconMap: Record<string, string> = {
+  game: 'lucide:box',
+  patch: 'lucide:puzzle',
+  collection: 'lucide:boxes',
+  voice: 'lucide:music-4',
+  image: 'lucide:image',
+  ai: 'simple-icons:openai',
+  others: 'lucide:ellipsis'
+}
+
+const details = ref<GalgameResourceDetails>()
+
+const handleGetDetail = async (grid: number) => {
+  const { data } = await useFetch(`/api/galgame/${props.link.gid}/resource`, {
+    query: { grid },
+    method: 'GET',
+    ...kungalgameResponseHandler
+  })
+  if (data.value) {
+    details.value = data.value
+  }
+}
 </script>
 
 <template>
-  <div class="links">
-    <div v-for="(resource, index) in resources" :key="index">
-      <div class="title">
-        <span class="link">{{ resource.link }}</span>
-        <span>提取码: {{ resource.code }}</span>
-        <span>解压码: {{ resource.password }}</span>
-      </div>
-
+  <div class="link">
+    <div class="base">
       <div class="info">
-        <span>{{ $t(`edit.galgame.resource.type.${resource.type}`) }}</span>
         <span>
-          {{ $t(`edit.galgame.resource.language.${resource.language}`) }}
+          <Icon :name="iconMap[link.type]" />
+          <span>{{ $t(`edit.galgame.resource.type.${link.type}`) }}</span>
         </span>
-        <span>{{ $t(`edit.galgame.platform.${resource.platform}`) }}</span>
-        <span>{{ resource.size }}</span>
+        <span>
+          <Icon name="lucide:database" />
+          <span>{{ link.size }}</span>
+        </span>
+        <span>
+          {{ $t(`edit.galgame.resource.language.${link.language}`) }}
+        </span>
+        <span>{{ $t(`edit.galgame.platform.${link.platform}`) }}</span>
       </div>
 
-      <div class="note">{{ resource.note }}</div>
+      <div class="status">
+        <KunButton @click="handleGetDetail(link.grid)">获取链接</KunButton>
+        <span>
+          <Icon class="icon" name="lucide:thumbs-up" />
+          <span v-if="link.likes">{{ link.likes }}</span>
+        </span>
+        <span class="status-dot" :class="`status-${link.status}`"></span>
+      </div>
+    </div>
+
+    <div class="more" v-if="details">
+      <div class="title">
+        <span class="link">{{ details.link }}</span>
+        <span>提取码: {{ details.code }}</span>
+        <span>解压码: {{ details.password }}</span>
+      </div>
+
+      <div class="note">{{ details.note }}</div>
 
       <div>
         <KunButton>编辑</KunButton>
         <KunButton>删除</KunButton>
       </div>
     </div>
+
+    <KunDivider margin="0 0 17px 0" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.links {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
+.link {
+  margin-top: 10px;
 }
 
-.title {
-  .link {
-    color: var(--kungalgame-blue-5);
-    font-weight: bold;
-    font-style: oblique;
-    font-size: large;
-  }
-
-  span {
-    margin-right: 17px;
-
-    &:first-child {
-      word-break: break-all;
-    }
-  }
+.base {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .info {
-  margin: 10px 0;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  font-size: small;
+  background-color: var(--kungalgame-trans-blue-0);
+  border-radius: 10px;
+  margin-bottom: 10px;
 
-  span {
+  & > span {
     padding: 3px 7px;
-    background-color: var(--kungalgame-trans-blue-0);
-    color: var(--kungalgame-blue-5);
     margin-right: 10px;
-    border-radius: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .icon {
+    font-size: medium;
+    margin-right: 5px;
   }
 }
 
-.note {
-  font-size: small;
+.status {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-left: auto;
+
+  & > span {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+
+  .kun-button {
+    margin-right: 17px;
+    padding: 3px 10px;
+  }
+
+  .icon {
+    margin-right: 3px;
+  }
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-0 {
+  width: 10px;
+  height: 10px;
+  background-color: var(--kungalgame-green-4);
+  border-radius: 50%;
+}
+
+.status-1 {
+  width: 10px;
+  height: 10px;
+  background-color: var(--kungalgame-gray-4);
+  border-radius: 50%;
+}
+
+.status-2 {
+  width: 10px;
+  height: 10px;
+  background-color: var(--kungalgame-red-4);
+  border-radius: 50%;
 }
 </style>

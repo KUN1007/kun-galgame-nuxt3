@@ -4,6 +4,7 @@ import GalgameResourceModel from '~/server/models/galgame-resource'
 import UserModel from '~/server/models/user'
 import { checkGalgameResourcePublish } from '../../utils/checkGalgameResourcePublish'
 import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
+import type { GalgameResource } from '~/types/api/galgame-resource'
 import type { H3Event } from 'h3'
 
 const getResourceData = async (event: H3Event) => {
@@ -83,7 +84,11 @@ export default defineEventHandler(async (event) => {
 
     await session.commitTransaction()
 
-    return savedGalgameResource
+    const resource: GalgameResource = {
+      ...savedGalgameResource,
+      likes: savedGalgameResource.likes.length
+    }
+    return resource
   } catch (error) {
     await session.abortTransaction()
   } finally {

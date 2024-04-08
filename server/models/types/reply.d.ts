@@ -21,4 +21,7 @@ export interface ReplyAttributes {
 
   r_user: UserAttributes[]
   to_user: UserAttributes[]
+
+  created: Date
+  updated: Date
 }

@@ -12,4 +12,7 @@ export interface GalgameLink {
   likes: number[]
 
   user: UserAttributes[]
+
+  created: Date
+  updated: Date
 }

@@ -5,4 +5,7 @@ export interface TodoAttributes {
   content_zh_cn: string
   time: number
   completed_time: number
+
+  created: Date
+  updated: Date
 }

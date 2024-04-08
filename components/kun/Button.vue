@@ -1,13 +1,13 @@
 <script setup lang="ts"></script>
 
 <template>
-  <button>
+  <button class="kun-button">
     <slot />
   </button>
 </template>
 
 <style lang="scss" scoped>
-button {
+.kun-button {
   border: 1px solid var(--kungalgame-blue-5);
   background-color: transparent;
   padding: 7px 10px;

@@ -87,7 +87,8 @@ const errorMessagesEN: Record<number, string> = {
   10618: `Please enter the correct resource size, which must include MB or GB (-B)`,
   10619: `The maximum length of resource link extraction code is 1007 (-B)`,
   10620: `The maximum length of resource decompression code is 1007 (-B)`,
-  10621: `The maximum length of resource note is 1007 (-B)`
+  10621: `The maximum length of resource note is 1007 (-B)`,
+  10622: `Resource link not found (-B)`
 }
 
 const errorMessagesCN: Record<number, string> = {
@@ -171,7 +172,8 @@ const errorMessagesCN: Record<number, string> = {
   10618: `请输入正确的资源大小，必须包含 MB 或 GB (-B)`,
   10619: `资源提取码最大长度为 1007 (-B)`,
   10620: `资源解压码最大长度为 1007 (-B)`,
-  10621: `资源备注最大长度为 1007 (-B)`
+  10621: `资源备注最大长度为 1007 (-B)`,
+  10622: `未找到资源链接 (-B)`
 }
 
 export const getErrorMessageEN = (errorCode: number) => {

@@ -12,4 +12,7 @@ export interface CommentAttributes {
 
   cuid: UserAttributes[]
   touid: UserAttributes[]
+
+  created: Date
+  updated: Date
 }

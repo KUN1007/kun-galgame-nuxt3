@@ -9,4 +9,7 @@ export interface GalgameHistory {
   note: string
 
   user: UserAttributes[]
+
+  created: Date
+  updated: Date
 }

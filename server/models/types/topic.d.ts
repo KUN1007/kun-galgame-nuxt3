@@ -28,4 +28,7 @@ export interface TopicAttributes {
   edited: number
 
   user: UserAttributes[]
+
+  created: Date
+  updated: Date
 }

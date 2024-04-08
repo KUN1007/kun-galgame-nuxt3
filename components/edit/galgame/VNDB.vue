@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { VNDBPattern } from '../utils/checkGalgamePublish'
 import type { VNDB, VNDBResponse } from '../utils/VNDB'
 
 const { locale } = useI18n()

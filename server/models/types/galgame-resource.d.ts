@@ -20,4 +20,7 @@ export interface GalgameResource {
   likes: number[]
 
   user: UserAttributes[]
+
+  created: Date
+  updated: Date
 }

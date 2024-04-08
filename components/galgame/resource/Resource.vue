@@ -9,124 +9,23 @@ const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
 
-const originalLink = {
-  type: 'game',
-  link: '',
-  language: locale.value,
-  platform: 'windows',
-  size: '',
-
-  code: '',
-  password: '',
-  note: ''
-}
-
-const resourceLink = ref<GalgameResourceStoreTemp>(originalLink)
-
-const { resources } = storeToRefs(useTempGalgameResourceStore())
-
-const handleCreateResourceLink = async () => {
-  if (!checkGalgameResourcePublish(resourceLink.value)) {
-    return
-  }
-
-  const { data } = await useFetch(`/api/galgame/${gid.value}/resource`, {
-    method: 'POST',
-    body: resourceLink.value,
-    watch: false,
+const { data: resourceData } = await useLazyFetch(
+  `/api/galgame/${gid.value}/resource/all`,
+  {
+    method: 'GET',
     ...kungalgameResponseHandler
-  })
-
-  if (data.value) {
-    resources.value.push(data.value)
   }
-}
+)
 </script>
 
 <template>
   <div class="resource">
-    <GalgameResourceLink :resources="resources" />
-
-    <div class="link">
-      <KunInput
-        placeholder="资源链接 (网盘|磁链|网址) 等"
-        v-model="resourceLink.link"
-      />
-
-      <div>
-        <KunInput
-          placeholder="资源体积 (MB 或 GB)"
-          v-model="resourceLink.size"
-        />
-        <KunInput
-          placeholder="资源提取码 (如果有)"
-          v-model="resourceLink.code"
-        />
-        <KunInput
-          placeholder="资源解压码 (如果有)"
-          v-model="resourceLink.password"
-        />
+    <h2>{{ $t('edit.galgame.resource.name') }}</h2>
+    <div class="links">
+      <div v-for="(resource, index) in resourceData" :key="index">
+        <GalgameResourceLink :link="resource" />
       </div>
     </div>
-
-    <div class="type">
-      <KunSelect
-        class="kun-select"
-        :styles="{ width: '200px' }"
-        :options="typeOptions"
-        i18n="edit.galgame.resource.type"
-        @set="(value) => (resourceLink.type = value)"
-        position="top"
-        default-value="game"
-      >
-        <div class="select">
-          <span>资源链接的类型</span>
-          <span v-if="resourceLink.type">
-            {{ $t(`edit.galgame.resource.type.${resourceLink.type}`) }}
-          </span>
-        </div>
-      </KunSelect>
-
-      <KunSelect
-        class="kun-select"
-        :styles="{ width: '200px' }"
-        :options="languageOptions"
-        i18n="edit.galgame.resource.language"
-        @set="(value) => (resourceLink.language = value)"
-        position="top"
-        :default-value="locale"
-      >
-        <div class="select">
-          <span>资源链接的语言</span>
-          <span v-if="resourceLink.language">
-            {{ $t(`edit.galgame.resource.language.${resourceLink.language}`) }}
-          </span>
-        </div>
-      </KunSelect>
-
-      <KunSelect
-        class="kun-select"
-        :styles="{ width: '200px' }"
-        :options="platformOptions"
-        i18n="edit.galgame.platform"
-        @set="(value) => (resourceLink.platform = value)"
-        position="top"
-        default-value="windows"
-      >
-        <div class="select">
-          <span>资源链接的平台</span>
-          <span v-if="resourceLink.platform">
-            {{ $t(`edit.galgame.platform.${resourceLink.platform}`) }}
-          </span>
-        </div>
-      </KunSelect>
-    </div>
-
-    <div class="note">
-      <KunInput placeholder="资源备注 (如果有)" v-model="resourceLink.note" />
-    </div>
-
-    <KunButton @click="handleCreateResourceLink">创建资源链接</KunButton>
   </div>
 </template>
 

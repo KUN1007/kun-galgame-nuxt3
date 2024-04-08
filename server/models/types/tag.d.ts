@@ -4,4 +4,7 @@ export interface TagAttributes {
   rid: number
   name: string
   category: string[]
+
+  created: Date
+  updated: Date
 }

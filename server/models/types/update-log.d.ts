@@ -5,4 +5,7 @@ export interface UpdateLogAttributes {
   content_zh_cn: string
   time: string
   version: string
+
+  created: Date
+  updated: Date
 }

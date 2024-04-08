@@ -11,4 +11,7 @@ export interface GalgameComment {
 
   cuid: UserAttributes[]
   touid: UserAttributes[]
+
+  created: Date
+  updated: Date
 }

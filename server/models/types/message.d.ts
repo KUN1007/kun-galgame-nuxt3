@@ -12,4 +12,7 @@ export interface MessageAttributes {
   type: MessageType
 
   user: UserAttributes[]
+
+  created: Date
+  updated: Date
 }
