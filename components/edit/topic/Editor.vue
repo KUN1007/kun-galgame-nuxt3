@@ -36,7 +36,7 @@ const saveMarkdown = debounce((editorMarkdown: string) => {
         <KunMilkdownEditor
           @save-markdown="saveMarkdown"
           :value-markdown="valueMarkdown"
-          editor-hight="300"
+          editor-height="300"
           :is-show-menu="true"
         />
       </ProsemirrorAdapterProvider>
