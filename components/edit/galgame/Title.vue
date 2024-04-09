@@ -4,25 +4,6 @@ import type { Title } from '../utils/VNDB'
 defineProps<{
   titles: Title[]
 }>()
-
-const handleClickCopy = (title: string) => {
-  navigator.clipboard
-    .writeText(title)
-    .then(() => {
-      useMessage(
-        `Title ${title} copied successfully!`,
-        `标题 ${title} 复制成功`,
-        'success'
-      )
-    })
-    .catch(() => {
-      useMessage(
-        'Title copy failed! Please switch to a more modern browser!',
-        '标题复制失败! 请更换更现代的浏览器!',
-        'error'
-      )
-    })
-}
 </script>
 
 <template>
@@ -37,7 +18,7 @@ const handleClickCopy = (title: string) => {
     <span
       v-for="(title, index) in titles"
       :key="index"
-      @click="handleClickCopy(title.title)"
+      @click="useKunCopy(title.title)"
     >
       {{ title.title }}
     </span>

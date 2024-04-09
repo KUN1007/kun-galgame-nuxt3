@@ -8,9 +8,11 @@ const props = defineProps<{
   messageCN: string
   messageEN: string
   type: `warn` | `success` | `error` | `info`
+  richText?: boolean
 }>()
 
 const message = ref('')
+const isRichText = computed(() => (props.richText ? props.richText : false))
 
 message.value = computed(() => {
   if (!locale) {
@@ -56,7 +58,8 @@ watch(
       <span class="icon" v-else-if="type === 'info'">
         <Icon icon="lucide:info" />
       </span>
-      <span v-html="message"></span>
+      <span class="message" v-if="!isRichText">{{ message }}</span>
+      <span v-if="isRichText" v-html="message"></span>
     </div>
   </div>
 </template>
@@ -91,6 +94,10 @@ watch(
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+
+  .message {
+    word-break: break-all;
   }
 }
 

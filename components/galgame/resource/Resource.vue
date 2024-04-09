@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import { typeOptions, languageOptions, platformOptions } from '../utils/options'
-import { checkGalgameResourcePublish } from '../utils/checkGalgameResourcePublish'
-import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
-
-const { locale } = useI18n()
 const route = useRoute()
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
 
-const { data: resourceData } = await useLazyFetch(
+const { isShowPublish } = storeToRefs(useTempGalgameResourceStore())
+
+const { data: resourceData, refresh } = await useLazyFetch(
   `/api/galgame/${gid.value}/resource/all`,
   {
     method: 'GET',
@@ -20,12 +17,23 @@ const { data: resourceData } = await useLazyFetch(
 
 <template>
   <div class="resource">
-    <h2>{{ $t('edit.galgame.resource.name') }}</h2>
-    <div class="links">
-      <div v-for="(resource, index) in resourceData" :key="index">
-        <GalgameResourceLink :link="resource" />
-      </div>
-    </div>
+    <KunHeader :size="2">
+      <template #header>
+        <span>{{ $t('edit.galgame.resource.name') }}</span>
+
+        <span class="contribute" @click="isShowPublish = !isShowPublish">
+          <Icon name="lucide:circle-plus" />
+        </span>
+      </template>
+    </KunHeader>
+
+    <GalgameResourcePublish v-if="isShowPublish" :refresh="refresh" />
+
+    <GalgameResourceLink
+      v-for="resource in resourceData"
+      :key="resource.grid"
+      :link="resource"
+    />
   </div>
 </template>
 
@@ -36,51 +44,11 @@ const { data: resourceData } = await useLazyFetch(
   flex-direction: column;
 }
 
-.link {
-  display: flex;
-  flex-direction: column;
-
-  & > div {
-    margin-top: 10px;
-
-    input {
-      margin-bottom: 10px;
-      margin-right: 10px;
-    }
-  }
-}
-
-.type {
-  flex-wrap: wrap;
-}
-
-.kun-select {
-  padding: 10px;
-  background-color: var(--kungalgame-trans-blue-0);
-  border-radius: 10px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-
-.select {
-  display: flex;
-  flex-direction: column;
-
-  span {
-    &:first-child {
-      font-size: small;
-      color: var(--kungalgame-font-color-0);
-    }
-  }
-}
-
-.type {
-  display: flex;
-}
-
-.note {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
+.contribute {
+  cursor: pointer;
+  margin-left: 17px;
+  padding: 3px;
+  border-radius: 20px;
+  color: var(--kungalgame-blue-5);
 }
 </style>

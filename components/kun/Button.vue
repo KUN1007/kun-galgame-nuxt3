@@ -1,7 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+withDefaults(defineProps<{ primary: boolean }>(), {
+  primary: false
+})
+</script>
 
 <template>
-  <button class="kun-button">
+  <button class="kun-button" :class="primary ? 'primary' : ''">
     <slot />
   </button>
 </template>
@@ -25,5 +29,10 @@
       var(--kungalgame-white) 0px 0px 0px 2px,
       var(--kungalgame-blue-5) 0px 0px 0px 4px;
   }
+}
+
+.primary {
+  background-color: var(--kungalgame-blue-5);
+  color: var(--kungalgame-white);
 }
 </style>

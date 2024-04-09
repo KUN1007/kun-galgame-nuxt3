@@ -3,6 +3,10 @@ import { typeOptions, languageOptions, platformOptions } from '../utils/options'
 import { checkGalgameResourcePublish } from '../utils/checkGalgameResourcePublish'
 import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
 
+const props = defineProps<{
+  refresh: () => {}
+}>()
+
 const { locale } = useI18n()
 const route = useRoute()
 const gid = computed(() => {
@@ -24,14 +28,6 @@ const originalLink = {
 
 const resourceLink = ref<GalgameResourceStoreTemp>(originalLink)
 
-const { data: resourceData } = await useLazyFetch(
-  `/api/galgame/${gid.value}/resource/all`,
-  {
-    method: 'GET',
-    ...kungalgameResponseHandler
-  }
-)
-
 const handleCreateResourceLink = async () => {
   if (!checkGalgameResourcePublish(resourceLink.value)) {
     return
@@ -47,7 +43,8 @@ const handleCreateResourceLink = async () => {
   isFetching.value = false
 
   if (data.value) {
-    resourceData.value?.push(data.value)
+    resourceLink.value = originalLink
+    props.refresh()
   }
 }
 </script>
@@ -123,19 +120,14 @@ const handleCreateResourceLink = async () => {
 
     <div class="note">
       <KunInput placeholder="资源备注 (如果有)" v-model="resourceLink.note" />
+      <KunButton @click="handleCreateResourceLink" :primary="true">
+        创建资源链接
+      </KunButton>
     </div>
-
-    <KunButton @click="handleCreateResourceLink">创建资源链接</KunButton>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.resource {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 .link {
   display: flex;
   flex-direction: column;
@@ -179,8 +171,13 @@ const handleCreateResourceLink = async () => {
 }
 
 .note {
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+
+  button {
+    margin: 17px 0;
+  }
 }
 </style>

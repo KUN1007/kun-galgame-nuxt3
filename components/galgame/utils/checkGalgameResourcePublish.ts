@@ -1,9 +1,7 @@
 import { typeOptions, languageOptions, platformOptions } from './options'
-import type { GalgameResourceStorePersist } from '~/store/types/galgame/resource'
+import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
 
-export const checkGalgameResourcePublish = (
-  link: GalgameResourceStorePersist
-) => {
+export const checkGalgameResourcePublish = (link: GalgameResourceStoreTemp) => {
   if (!typeOptions.includes(link.type)) {
     useMessage(
       'Please select the correct resource type!',

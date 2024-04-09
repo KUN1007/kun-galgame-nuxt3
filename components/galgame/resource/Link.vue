@@ -21,6 +21,9 @@ const iconMap: Record<string, string> = {
 const details = ref<GalgameResourceDetails>()
 
 const handleGetDetail = async (grid: number) => {
+  if (details.value) {
+    return
+  }
   const { data } = await useFetch(`/api/galgame/${props.link.gid}/resource`, {
     query: { grid },
     method: 'GET',
@@ -60,30 +63,13 @@ const handleGetDetail = async (grid: number) => {
       </div>
     </div>
 
-    <div class="more" v-if="details">
-      <div class="title">
-        <span class="link">{{ details.link }}</span>
-        <span>提取码: {{ details.code }}</span>
-        <span>解压码: {{ details.password }}</span>
-      </div>
-
-      <div class="note">{{ details.note }}</div>
-
-      <div>
-        <KunButton>编辑</KunButton>
-        <KunButton>删除</KunButton>
-      </div>
-    </div>
+    <GalgameResourceDetails v-if="details" :details="details" />
 
     <KunDivider margin="0 0 17px 0" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.link {
-  margin-top: 10px;
-}
-
 .base {
   display: flex;
   align-items: center;
