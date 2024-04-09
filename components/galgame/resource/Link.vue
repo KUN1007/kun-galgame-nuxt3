@@ -19,16 +19,20 @@ const iconMap: Record<string, string> = {
 }
 
 const details = ref<GalgameResourceDetails>()
+const isFetching = ref(false)
 
 const handleGetDetail = async (grid: number) => {
   if (details.value) {
     return
   }
+  isFetching.value = true
   const { data } = await useFetch(`/api/galgame/${props.link.gid}/resource`, {
     query: { grid },
     method: 'GET',
     ...kungalgameResponseHandler
   })
+  isFetching.value = false
+
   if (data.value) {
     details.value = data.value
   }
@@ -54,7 +58,9 @@ const handleGetDetail = async (grid: number) => {
       </div>
 
       <div class="status">
-        <KunButton @click="handleGetDetail(link.grid)">获取链接</KunButton>
+        <KunButton @click="handleGetDetail(link.grid)" :pending="isFetching">
+          获取链接
+        </KunButton>
         <span>
           <Icon class="icon" name="lucide:thumbs-up" />
           <span v-if="link.likes">{{ link.likes }}</span>

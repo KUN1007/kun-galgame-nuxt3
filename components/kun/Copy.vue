@@ -14,11 +14,11 @@ defineProps<{
 <style lang="scss" scoped>
 .kun-copy {
   cursor: pointer;
-  border: 1px solid var(--kungalgame-blue-5);
   color: var(--kungalgame-blue-5);
   padding: 3px 10px;
   font-weight: bold;
   border-radius: 10px;
+  word-break: break-all;
 
   &:hover {
     background-color: var(--kungalgame-trans-blue-0);

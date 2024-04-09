@@ -14,19 +14,18 @@ const gid = computed(() => {
 })
 const isFetching = ref(false)
 
-const originalLink = {
+const defaultResourceLink: GalgameResourceStoreTemp = {
   type: 'game',
   link: '',
   language: locale.value,
   platform: 'windows',
   size: '',
-
   code: '',
   password: '',
   note: ''
 }
 
-const resourceLink = ref<GalgameResourceStoreTemp>(originalLink)
+const resourceLink = ref<GalgameResourceStoreTemp>({ ...defaultResourceLink })
 
 const handleCreateResourceLink = async () => {
   if (!checkGalgameResourcePublish(resourceLink.value)) {
@@ -43,8 +42,8 @@ const handleCreateResourceLink = async () => {
   isFetching.value = false
 
   if (data.value) {
-    resourceLink.value = originalLink
     props.refresh()
+    resourceLink.value = { ...defaultResourceLink }
   }
 }
 </script>
@@ -120,7 +119,11 @@ const handleCreateResourceLink = async () => {
 
     <div class="note">
       <KunInput placeholder="资源备注 (如果有)" v-model="resourceLink.note" />
-      <KunButton @click="handleCreateResourceLink" :primary="true">
+      <KunButton
+        @click="handleCreateResourceLink"
+        type="primary"
+        :pending="isFetching"
+      >
         创建资源链接
       </KunButton>
     </div>

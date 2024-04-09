@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { GalgameResourceDetails } from '~/types/api/galgame-resource'
 
+const { locale } = useI18n()
+
+const { uid } = storeToRefs(usePersistUserStore())
+
 const props = defineProps<{
   details: GalgameResourceDetails
 }>()
@@ -34,11 +38,19 @@ const props = defineProps<{
       <div class="user-info">
         <KunAvatar :user="details.user" size="33px" />
         <span class="username">{{ details.user.name }}</span>
+        <span class="time">
+          {{ formatTimeDifferenceHint(details.time, locale) }}
+        </span>
       </div>
 
-      <div class="btn">
+      <div class="user-btn" v-if="details.user.uid === uid">
         <KunButton>编辑</KunButton>
-        <KunButton>删除</KunButton>
+        <KunButton type="danger">删除</KunButton>
+      </div>
+
+      <div class="other-btn" v-if="details.user.uid !== uid">
+        <KunButton>标记失效</KunButton>
+        <KunButton>举报链接</KunButton>
       </div>
     </div>
   </div>
@@ -97,11 +109,15 @@ const props = defineProps<{
     align-items: center;
 
     .username {
-      margin-left: 10px;
+      margin: 0 10px;
+    }
+
+    .time {
+      font-size: small;
     }
   }
 
-  .btn {
+  .user-btn {
     button:first-child {
       margin-right: 7px;
     }

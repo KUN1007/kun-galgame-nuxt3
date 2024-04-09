@@ -4,7 +4,9 @@ const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
 
-const { isShowPublish } = storeToRefs(useTempGalgameResourceStore())
+const { isShowPublish, isRewriting } = storeToRefs(
+  useTempGalgameResourceStore()
+)
 
 const { data: resourceData, refresh } = await useLazyFetch(
   `/api/galgame/${gid.value}/resource/all`,
