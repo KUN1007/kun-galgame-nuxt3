@@ -84,6 +84,15 @@ withDefaults(defineProps<{ type?: ButtonType; pending?: boolean }>(), {
   &:disabled {
     border: 1px solid var(--kungalgame-red-3);
     color: var(--kungalgame-red-3);
+
+    &:hover {
+      background-color: transparent;
+      color: var(--kungalgame-red-3);
+    }
+
+    &:active {
+      box-shadow: none;
+    }
   }
 }
 </style>

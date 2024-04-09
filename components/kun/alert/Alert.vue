@@ -80,7 +80,7 @@ const handleConfirm = () => {
   &:nth-child(2) {
     margin-left: 98px;
     background-color: var(--kungalgame-trans-white-9);
-    border: 1px solid var(--kungalgame-red-4);
+    border: 1px solid var(--kungalgame-red-5);
     color: var(--kungalgame-red-5);
   }
 

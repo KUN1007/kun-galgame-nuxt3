@@ -674,6 +674,11 @@
       "message1": "Za~~~ko~♡ zako~♡ Smelly zako ♡. Check-in successful, you haven't received anything today...",
       "message2": "Za~~~ko~♡. Check-in successful, you have earned {params} moemoepoints today.",
       "message3": "Zako~♡♡♡♡♡. Check-in successful, today's good luck has earned you {params} points!"
+    },
+    "galgame": {
+      "resource": {
+        "delete":"Are you sure you want to delete the visualnovel resource link? This action will deduct 5 Moe Moe Points that you earned from publishing the visualnovel resource, and it will also negate the impact of likes from other users on the resource link (reducing both MoeMoePoints and likes count by one). This action cannot be undone."
+      }
     }
   }
 }

@@ -6,6 +6,7 @@ import type {
 
 const props = defineProps<{
   link: GalgameResource
+  refresh: () => {}
 }>()
 
 const iconMap: Record<string, string> = {
@@ -86,7 +87,11 @@ const handleGetDetail = async (grid: number) => {
       </div>
     </div>
 
-    <GalgameResourceDetails v-if="details" :details="details" />
+    <GalgameResourceDetails
+      v-if="details"
+      :details="details"
+      :refresh="refresh"
+    />
 
     <KunDivider margin="0 0 17px 0" />
   </div>

@@ -7,7 +7,31 @@ const { uid } = storeToRefs(usePersistUserStore())
 
 const props = defineProps<{
   details: GalgameResourceDetails
+  refresh: () => {}
 }>()
+const isFetching = ref(false)
+
+const handleDeleteResource = async (gid: number, grid: number) => {
+  const res = await useTempMessageStore().alert(
+    'AlertInfo.galgame.resource.delete',
+    true
+  )
+  if (!res) {
+    return
+  }
+
+  isFetching.value = true
+  const { data } = await useFetch(`/api/galgame/${gid}/resource`, {
+    method: 'DELETE',
+    query: { grid },
+    watch: false
+  })
+  isFetching.value = false
+
+  if (data.value) {
+    props.refresh()
+  }
+}
 </script>
 
 <template>
@@ -45,7 +69,13 @@ const props = defineProps<{
 
       <div class="user-btn" v-if="details.user.uid === uid">
         <KunButton>编辑</KunButton>
-        <KunButton type="danger">删除</KunButton>
+        <KunButton
+          type="danger"
+          @click="handleDeleteResource(details.gid, details.grid)"
+          :pending="isFetching"
+        >
+          删除
+        </KunButton>
       </div>
 
       <div class="other-btn" v-if="details.user.uid !== uid">

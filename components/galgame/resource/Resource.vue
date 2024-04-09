@@ -35,6 +35,7 @@ const { data: resourceData, refresh } = await useLazyFetch(
       v-for="resource in resourceData"
       :key="resource.grid"
       :link="resource"
+      :refresh="refresh"
     />
   </div>
 </template>
