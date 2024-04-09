@@ -8,21 +8,23 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const data = await GalgameResourceModel.findOne({ grid, status: { $ne: 1 } })
-    .populate('user', 'uid avatar name')
-    .lean()
-  if (!data) {
+  const resource = await GalgameResourceModel.findOne({
+    grid,
+    status: { $ne: 1 }
+  }).lean()
+  if (!resource) {
     kunError(event, 10622)
     return
   }
 
-  const resource: GalgameResourceDetails = {
-    ...data,
-    user: {
-      uid: data.user[0].uid,
-      name: data.user[0].name,
-      avatar: data.user[0].avatar
-    }
+  const userInfo = await getCookieTokenInfo(event)
+  if (!userInfo) {
+    kunError(event, 10115, 205)
+    return
+  }
+  if (resource.uid !== userInfo.uid) {
+    kunError(event, 10623)
+    return
   }
 
   return resource

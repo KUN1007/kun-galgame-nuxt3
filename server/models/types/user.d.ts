@@ -37,6 +37,7 @@ export interface UserAttributes {
   contribute_galgame: number[]
 
   galgame_resource: number[]
+  like_galgame_resource: number[]
 
   created: Date
   updated: Date

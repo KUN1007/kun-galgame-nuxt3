@@ -42,7 +42,8 @@ const UserSchema = new mongoose.Schema<UserAttributes>(
     favorite_galgame: { type: [Number], default: [] },
     contribute_galgame: { type: [Number], default: [] },
 
-    galgame_resource: { type: [Number], default: [] }
+    galgame_resource: { type: [Number], default: [] },
+    like_galgame_resource: { type: [Number], default: [] }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )

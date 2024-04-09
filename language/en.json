@@ -64,7 +64,6 @@
       "auto": "Auto Read",
       "readAll": "Mark All Messages as Read",
       "deleteAll": "Delete All Messages",
-      "link": "Topic Link",
       "goto": "Goto user",
       "read": "Mark as read",
       "delete": "Delete message"

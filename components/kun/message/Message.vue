@@ -102,8 +102,12 @@ const handleDeleteMessage = async (mid: number) => {
       <div class="content" v-html="getMessageI18n(locale, msg)"></div>
 
       <div class="bottom">
-        <NuxtLinkLocale v-if="msg.tid" class="link" :to="`/topic/${msg.tid}`">
-          {{ $t('header.message.link') }}
+        <NuxtLinkLocale
+          v-if="msg.tid"
+          class="link"
+          :to="msg.tid > 0 ? `/topic/${msg.tid}` : `/galgame/${-msg.tid}`"
+        >
+          <Icon name="lucide:external-link" />
         </NuxtLinkLocale>
         <span
           class="more-btn"
@@ -192,11 +196,6 @@ const handleDeleteMessage = async (mid: number) => {
 .link {
   cursor: pointer;
   color: var(--kungalgame-pink-4);
-  border-bottom: 2px solid var(--kungalgame-trans-white-9);
-
-  &:hover {
-    border-bottom: 2px solid var(--kungalgame-pink-4);
-  }
 }
 
 .more-btn {
@@ -248,10 +247,6 @@ const handleDeleteMessage = async (mid: number) => {
 
   .link {
     color: var(--kungalgame-blue-5);
-
-    &:hover {
-      border-bottom: 2px solid var(--kungalgame-blue-5);
-    }
   }
 }
 

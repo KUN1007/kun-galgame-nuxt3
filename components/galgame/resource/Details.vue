@@ -49,8 +49,7 @@ const props = defineProps<{
       </div>
 
       <div class="other-btn" v-if="details.user.uid !== uid">
-        <KunButton>标记失效</KunButton>
-        <KunButton>举报链接</KunButton>
+        <KunButton type="danger">链接失效</KunButton>
       </div>
     </div>
   </div>

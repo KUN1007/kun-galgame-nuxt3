@@ -61,10 +61,27 @@ const handleGetDetail = async (grid: number) => {
         <KunButton @click="handleGetDetail(link.grid)" :pending="isFetching">
           获取链接
         </KunButton>
-        <span>
-          <Icon class="icon" name="lucide:thumbs-up" />
-          <span v-if="link.likes">{{ link.likes }}</span>
+
+        <GalgameResourceLike
+          :gid="link.gid"
+          :grid="link.grid"
+          :to-uid="link.uid"
+          :likes="link.likes"
+          v-tooltip="{
+            message: { en: 'Like', zh: '点赞' },
+            position: 'bottom'
+          }"
+        />
+
+        <span
+          v-tooltip="{
+            message: { en: 'Report violation', zh: '举报违规' },
+            position: 'bottom'
+          }"
+        >
+          <Icon name="lucide:triangle-alert" />
         </span>
+
         <span class="status-dot" :class="`status-${link.status}`"></span>
       </div>
     </div>
@@ -119,10 +136,6 @@ const handleGetDetail = async (grid: number) => {
   .kun-button {
     margin-right: 17px;
     padding: 3px 10px;
-  }
-
-  .icon {
-    margin-right: 3px;
   }
 }
 

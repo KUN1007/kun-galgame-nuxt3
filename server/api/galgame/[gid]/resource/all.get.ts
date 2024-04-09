@@ -14,13 +14,14 @@ export default defineEventHandler(async (event) => {
   const galgames: GalgameResource[] = data.map((galgame) => ({
     gid: galgame.gid,
     grid: galgame.grid,
+    uid: galgame.uid,
     type: galgame.type,
     language: galgame.language,
     platform: galgame.platform,
     size: galgame.size,
     time: galgame.time,
     status: galgame.status,
-    likes: galgame.likes.length
+    likes: galgame.likes
   }))
 
   return galgames

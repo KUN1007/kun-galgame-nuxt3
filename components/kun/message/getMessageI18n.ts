@@ -5,7 +5,7 @@ type Locale = 'en-us' | 'zh-cn' | string
 const zhMessageMap: Record<string, string> = {
   upvoted: '推了您！',
   liked: '点赞了您！',
-  favorite: '收藏了您的话题！',
+  favorite: '收藏了您！',
   replied: '回复了您！',
   commented: '评论了您！'
 }

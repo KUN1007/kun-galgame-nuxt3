@@ -7,13 +7,14 @@ interface User {
 export interface GalgameResource {
   gid: number
   grid: number
+  uid: number
   type: string
   language: string
   platform: string
   size: string
   time: number
   status: number
-  likes: number
+  likes: number[]
 }
 
 export interface GalgameResourceDetails extends GalgameResource {

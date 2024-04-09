@@ -84,10 +84,7 @@ export default defineEventHandler(async (event) => {
 
     await session.commitTransaction()
 
-    const resource: GalgameResource = {
-      ...savedGalgameResource,
-      likes: savedGalgameResource.likes.length
-    }
+    const resource: GalgameResource = { ...savedGalgameResource }
     return resource
   } catch (error) {
     await session.abortTransaction()
