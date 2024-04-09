@@ -6,7 +6,6 @@ const Tags = defineAsyncComponent(
   () => import('~/components/edit/topic/Tags.vue')
 )
 
-const messageStore = useTempMessageStore()
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
 const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
@@ -19,7 +18,11 @@ const position = computed(() => {
 
 const handleClosePanel = async () => {
   if (isReplyRewriting.value) {
-    const res = await messageStore.alert('AlertInfo.edit.closePanel', true)
+    const res = await useTempMessageStore().alert({
+      'en-us': 'Confirm closing the panel? Your changes will not be saved',
+      'ja-jp': '',
+      'zh-cn': '确认关闭面板吗？您的更改将不会被保存'
+    })
 
     if (res) {
       useTempReplyStore().resetRewriteReplyData()

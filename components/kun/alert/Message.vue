@@ -12,7 +12,7 @@ const props = defineProps<{
 }>()
 
 const message = ref('')
-const isRichText = computed(() => (props.richText ? props.richText : false))
+const isRichText = computed(() => props.richText ?? false)
 
 message.value = computed(() => {
   if (!locale) {

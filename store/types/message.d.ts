@@ -1,3 +1,5 @@
+import type { KunLanguage } from '~/types/i18n'
+
 export interface MessageStore {
   showInfo: boolean
   infoMsg: string
@@ -5,9 +7,9 @@ export interface MessageStore {
   durations: number
 
   showAlert: boolean
-  alertMsg: string
-  isShowCancel: boolean
-  confirm: boolean
+  alertTitle?: KunLanguage
+  alertMsg?: KunLanguage
+  isShowCancel?: boolean
 
   isShowCapture: boolean
   isCaptureSuccessful: boolean

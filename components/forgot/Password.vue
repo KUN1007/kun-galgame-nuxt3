@@ -45,10 +45,11 @@ const handleChangePassword = async () => {
     return
   }
 
-  const result = await useTempMessageStore().alert(
-    'AlertInfo.code.password',
-    true
-  )
+  const result = await useTempMessageStore().alert({
+    'en-us': 'Are you sure you want to change the password?',
+    'ja-jp': '',
+    'zh-cn': '您确定更改密码吗?'
+  })
   if (!result) {
     return
   }

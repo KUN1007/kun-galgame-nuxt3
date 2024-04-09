@@ -28,7 +28,6 @@ const {
   section: editSection
 } = storeToRefs(usePersistEditTopicStore())
 
-const messageStore = useTempMessageStore()
 const isPublishing = ref(false)
 const section = isTopicRewriting.value ? rewriteSection : editSection
 
@@ -45,7 +44,11 @@ const handlePublish = async () => {
     return
   }
 
-  const res = await messageStore.alert('AlertInfo.edit.publish', true)
+  const res = await useTempMessageStore().alert({
+    'en-us': 'Confirm to Publish?',
+    'ja-jp': '',
+    'zh-cn': '确定发布吗?'
+  })
   if (!res) {
     return
   }
@@ -67,7 +70,7 @@ const handlePublish = async () => {
   if (data.value) {
     const tid = data.value
     navigateTo(localePath(`/topic/${tid}`))
-    messageStore.info('AlertInfo.edit.publishSuccess')
+    useTempMessageStore().info('AlertInfo.edit.publishSuccess')
     usePersistEditTopicStore().resetTopicData()
   }
 }
@@ -86,7 +89,11 @@ const handleRewrite = async () => {
     return
   }
 
-  const res = await messageStore.alert('AlertInfo.edit.rewrite', true)
+  const res = await useTempMessageStore().alert({
+    'en-us': 'Confirm to Rewrite?',
+    'ja-jp': '',
+    'zh-cn': '确定 Rewrite 吗?'
+  })
   if (!res) {
     return
   }
@@ -107,7 +114,7 @@ const handleRewrite = async () => {
 
   if (data.value) {
     navigateTo(localePath(`/topic/${tid.value}`))
-    messageStore.info('AlertInfo.edit.rewriteSuccess')
+    useTempMessageStore().info('AlertInfo.edit.rewriteSuccess')
     useTempEditStore().resetRewriteTopicData()
   }
 }

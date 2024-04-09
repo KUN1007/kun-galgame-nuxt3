@@ -20,10 +20,12 @@ watch(
 )
 
 const upvoteTopic = async () => {
-  const res = await useTempMessageStore().alert(
-    'AlertInfo.edit.upvoteTopic',
-    true
-  )
+  const res = await useTempMessageStore().alert({
+    'en-us':
+      'Are you sure you want to upvote this topic? This will cost you 17 MoeMoePoints',
+    'ja-jp': '',
+    'zh-cn': '您确定推这个话题吗，这将会消耗您 17 萌萌点'
+  })
   if (!res) {
     return
   }
@@ -50,10 +52,12 @@ const upvoteTopic = async () => {
 }
 
 const upvoteReply = async () => {
-  const res = await useTempMessageStore().alert(
-    'AlertInfo.edit.upvoteReply',
-    true
-  )
+  const res = await useTempMessageStore().alert({
+    'en-us':
+      'Are you sure you want to upvote this reply? This will cost you 3 Moe Moe Points',
+    'ja-jp': '',
+    'zh-cn': '您确定推这个回复吗，这将会消耗您 3 萌萌点'
+  })
   if (!res) {
     return
   }

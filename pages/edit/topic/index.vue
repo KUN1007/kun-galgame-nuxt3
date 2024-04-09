@@ -65,7 +65,11 @@ onBeforeUnmount(() => {
 
 onBeforeRouteLeave(async (_, __, next) => {
   if (isTopicRewriting.value) {
-    const res = await useTempMessageStore().alert('AlertInfo.edit.leave', true)
+    const res = await useTempMessageStore().alert({
+      'en-us': 'Confirm leaving the page? Your changes will not be saved.',
+      'ja-jp': '',
+      'zh-cn': '确认离开界面吗？您的更改将不会保存'
+    })
     if (res) {
       useTempEditStore().resetRewriteTopicData()
       next()

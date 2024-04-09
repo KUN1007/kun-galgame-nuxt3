@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import type { MessageStore } from '../types/message'
+import type { KunLanguage } from '~/types/i18n'
 
 export const useTempMessageStore = defineStore({
   id: 'tempMessage',
@@ -11,25 +12,38 @@ export const useTempMessageStore = defineStore({
     durations: 0,
 
     showAlert: false,
-    alertMsg: '',
+    alertTitle: {
+      'en-us': '',
+      'ja-jp': '',
+      'zh-cn': ''
+    },
+    alertMsg: {
+      'en-us': '',
+      'ja-jp': '',
+      'zh-cn': ''
+    },
     isShowCancel: false,
-    confirm: false,
 
     isShowCapture: false,
     isCaptureSuccessful: false
   }),
   getters: {},
   actions: {
-    info (infoMsg: string, infoTranslateParams?: string, durations?: number) {
+    info(infoMsg: string, infoTranslateParams?: string, durations?: number) {
       this.showInfo = true
       this.infoMsg = infoMsg
       this.infoTranslateParams = infoTranslateParams ?? ''
       this.durations = durations ?? 3000
     },
 
-    alert (alertMsg: string, isShowCancel: boolean): Promise<boolean> {
+    alert(
+      alertTitle?: KunLanguage,
+      alertMsg?: KunLanguage,
+      isShowCancel?: boolean
+    ): Promise<boolean> {
       return new Promise<boolean>((resolve) => {
         this.showAlert = true
+        this.alertTitle = alertTitle
         this.alertMsg = alertMsg
         this.isShowCancel = isShowCancel
 
@@ -39,7 +53,7 @@ export const useTempMessageStore = defineStore({
       })
     },
 
-    handleClose () {},
-    handleConfirm () {}
+    handleClose() {},
+    handleConfirm() {}
   }
 })

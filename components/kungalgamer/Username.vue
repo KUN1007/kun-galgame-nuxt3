@@ -10,7 +10,12 @@ const handleChangeUsername = async () => {
     return
   }
 
-  const res = await message.alert('AlertInfo.user.username', true)
+  const res = await message.alert({
+    'en-us':
+      'Are you sure you want to change your username? This will cost you 17 moemoepoints.',
+    'ja-jp': '',
+    'zh-cn': '您确定更改用户名吗？这将会消耗您 17 萌萌点'
+  })
   if (!res) {
     return
   }

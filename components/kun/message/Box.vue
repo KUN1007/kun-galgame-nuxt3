@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const messageStore = useTempMessageStore()
 const { showKUNGalgameMessageBox } = storeToRefs(useTempSettingStore())
 const { autoRead } = storeToRefs(usePersistMessageStore())
 
@@ -39,7 +38,12 @@ const handleReadAllMessage = async () => {
 }
 
 const handleDeleteAllMessage = async () => {
-  const res = await messageStore.alert('AlertInfo.message.delete', true)
+  const res = await useTempMessageStore().alert({
+    'en-us':
+      'Are you sure you want to delete all messages? This action cannot be undone.',
+    'ja-jp': '',
+    'zh-cn': '您确定要删除所有消息吗？此操作不可撤销'
+  })
   if (!res) {
     return
   }

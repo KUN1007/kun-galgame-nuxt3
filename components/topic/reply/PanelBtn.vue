@@ -12,8 +12,6 @@ const isPublishing = ref(false)
 
 const { isEdit, tempReplyRewrite } = storeToRefs(useTempReplyStore())
 
-const messageStore = useTempMessageStore()
-
 const handlePublish = async () => {
   const requestData: TopicCreateReplyRequestData = {
     to_uid: replyDraft.value.toUid.toString(),
@@ -26,7 +24,11 @@ const handlePublish = async () => {
     return
   }
 
-  const res = await messageStore.alert('AlertInfo.edit.publish', true)
+  const res = await useTempMessageStore().alert({
+    'en-us': 'Confirm to publish?',
+    'ja-jp': '',
+    'zh-cn': '确认发布吗？'
+  })
   if (!res) {
     return
   }
@@ -76,7 +78,11 @@ const handleRewrite = async () => {
     return
   }
 
-  const res = await messageStore.alert('AlertInfo.edit.rewrite', true)
+  const res = await useTempMessageStore().alert({
+    'en-us': 'Confirm to Rewrite?',
+    'ja-jp': '',
+    'zh-cn': '确认 Rewrite 吗？'
+  })
   if (!res) {
     return
   }

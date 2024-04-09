@@ -6,7 +6,6 @@ const { vndbId, name, introduction, aliases } = storeToRefs(
 )
 const localePath = useLocalePath()
 
-const messageStore = useTempMessageStore()
 const isPublishing = ref(false)
 
 const handlePublishGalgame = async () => {
@@ -16,7 +15,20 @@ const handlePublishGalgame = async () => {
   ) {
     return
   }
-  const res = await messageStore.alert('AlertInfo.edit.publish', true)
+  const res = await useTempMessageStore().alert(
+    {
+      'en-us': 'Confirm to Publish Visualnovel?',
+      'ja-jp': '',
+      'zh-cn': '确定发布 Galgame 吗?'
+    },
+    {
+      'en-us':
+        'You are about to publish a visualnovel. To add visualnovel resources, you can go to the visualnovel details page later to add resource links.',
+      'ja-jp': '',
+      'zh-cn':
+        '您要发布的是 Galgame, 要发布 Galgame 资源, 您可以稍后到 Galgame 详情页面添加资源链接'
+    }
+  )
   if (!res) {
     return
   }
@@ -55,7 +67,7 @@ const handlePublishGalgame = async () => {
     usePersistEditGalgameStore().resetGalgameData()
 
     navigateTo(localePath(`/galgame/${gid}`))
-    messageStore.info('AlertInfo.edit.publishSuccess')
+    useTempMessageStore().info('AlertInfo.edit.publishSuccess')
   }
 }
 </script>

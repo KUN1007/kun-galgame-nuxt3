@@ -632,20 +632,8 @@
   },
   "AlertInfo":{
     "edit":{
-      "publish": "Confirm to publish?",
       "publishSuccess": "Publish Successfully",
-      "upvoteTopic":
-        "Are you sure you want to upvote this topic? This will cost you 17 Moe Moe Points",
-      "upvoteReply":
-        "Are you sure you want to upvote this reply? This will cost you 3 Moe Moe Points",
-      "rewrite": "Confirm to Rewrite?",
-      "rewriteSuccess": "Rewrite Successfully",
-      "closePanel": "Confirm closing the panel? Your changes will not be saved.",
-      "leave": "Confirm leaving the page? Your changes will not be saved.",
-      "logout": "Are you sure you want to log out?"
-    },
-    "message": {
-      "delete": "Are you sure you want to delete all messages? This action cannot be undone."
+      "rewriteSuccess": "Rewrite Successfully"
     },
     "login":{
       "invalidUsername": "Invalid username. Username should be 1 to 17 characters long with any characters",
@@ -667,18 +655,10 @@
       "code": "The verification code has been sent. You can check it in your email. Please check your spam folder. If you haven't received the email, you can try to resend the email verification code after 30 seconds.",
       "password": "Are you sure you want to change the password?"
     },
-    "user": {
-      "username": "Are you sure you want to change your username? This will cost you 17 moemoepoints."
-    },
     "check": {
       "message1": "Za~~~ko~♡ zako~♡ Smelly zako ♡. Check-in successful, you haven't received anything today...",
       "message2": "Za~~~ko~♡. Check-in successful, you have earned {params} moemoepoints today.",
       "message3": "Zako~♡♡♡♡♡. Check-in successful, today's good luck has earned you {params} points!"
-    },
-    "galgame": {
-      "resource": {
-        "delete":"Are you sure you want to delete the visualnovel resource link? This action will deduct 5 Moe Moe Points that you earned from publishing the visualnovel resource, and it will also negate the impact of likes from other users on the resource link (reducing both MoeMoePoints and likes count by one). This action cannot be undone."
-      }
     }
   }
 }

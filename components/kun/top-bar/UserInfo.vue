@@ -58,7 +58,11 @@ const handleCheckIn = async () => {
 }
 
 const logOut = async () => {
-  const res = await useTempMessageStore().alert('AlertInfo.edit.logout', true)
+  const res = await useTempMessageStore().alert({
+    'en-us': 'Are you sure you want to log out?',
+    'ja-jp': '',
+    'zh-cn': '您确定退出登录吗？'
+  })
   if (res) {
     kungalgameStoreReset()
     navigateTo(localePath('/login'))

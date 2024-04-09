@@ -1,5 +1,9 @@
 <script setup lang="ts">
-const { showAlert, alertMsg, isShowCancel } = storeToRefs(useTempMessageStore())
+const { showAlert, alertTitle, alertMsg, isShowCancel } = storeToRefs(
+  useTempMessageStore()
+)
+
+const { locale } = useI18n()
 
 const handleClose = () => {
   showAlert.value = false
@@ -18,11 +22,16 @@ const handleConfirm = () => {
       <div v-if="showAlert" class="mask">
         <div class="container">
           <div class="header">
-            <h3>{{ $t(`${alertMsg}`) }}</h3>
+            <h3 v-if="alertTitle">{{ alertTitle[locale as Language] }}</h3>
+            <p v-if="alertMsg">{{ alertMsg[locale as Language] }}</p>
           </div>
 
           <div class="footer">
-            <button v-if="isShowCancel" class="button" @click="handleClose">
+            <button
+              v-if="isShowCancel ?? true"
+              class="button"
+              @click="handleClose"
+            >
               {{ $t('ComponentAlert.cancel') }}
             </button>
             <button class="button" @click="handleConfirm">
@@ -57,6 +66,16 @@ const handleConfirm = () => {
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
+
+  .header {
+    h3 {
+      margin-bottom: 7px;
+    }
+
+    p {
+      font-size: small;
+    }
+  }
 }
 
 .footer {

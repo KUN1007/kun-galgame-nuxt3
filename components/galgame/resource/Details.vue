@@ -13,8 +13,18 @@ const isFetching = ref(false)
 
 const handleDeleteResource = async (gid: number, grid: number) => {
   const res = await useTempMessageStore().alert(
-    'AlertInfo.galgame.resource.delete',
-    true
+    {
+      'en-us': 'Are you sure you want to delete the visualnovel resource link?',
+      'ja-jp': '',
+      'zh-cn': '您确定删除 Galgame 资源链接吗？'
+    },
+    {
+      'en-us':
+        'This action will deduct 5 Moe Moe Points that you earned from publishing the visualnovel resource, and it will also negate the impact of likes from other users on the resource link (reducing both MoeMoePoints and likes count by one). This action cannot be undone.',
+      'ja-jp': '',
+      'zh-cn':
+        '这将会扣除您发布 Galgame 资源获得的 5 萌萌点，并且扣除其它人对资源链接的点赞影响（萌萌点和点赞数减一），此操作不可撤销'
+    }
   )
   if (!res) {
     return

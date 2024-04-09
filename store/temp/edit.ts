@@ -1,5 +1,5 @@
 import type { Ctx } from '@milkdown/ctx'
-import type { EditStoreTemp } from '~/store/types/edit'
+import type { EditStoreTemp } from '~/store/types/edit/topic'
 
 export const useTempEditStore = defineStore({
   id: 'tempEdit',
