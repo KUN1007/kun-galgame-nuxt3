@@ -109,11 +109,11 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
       </span>
 
       <div class="password">
-        <span>
+        <span v-if="details.code">
           <span>提取码:</span>
           <KunCopy :text="details.code" />
         </span>
-        <span>
+        <span v-if="details.password">
           <span>解压码:</span>
           <KunCopy :text="details.password" />
         </span>

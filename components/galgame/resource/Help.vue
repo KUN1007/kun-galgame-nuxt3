@@ -20,7 +20,12 @@ const { locale } = useI18n()
         All resource links must be related to the game on this page, must be
         free, and cannot require points or paid downloads
       </p>
-      <p>Resource links can be magnet links, cloud storage links, URLs, etc.</p>
+      <p>
+        Resource links can be magnet links, cloud storage links, URLs, etc. You
+        can contribute resource links repeatedly, but each person can only
+        contribute once for the same type of link (same cloud storage, URL,
+        etc.).
+      </p>
       <p>
         You are allowed to link to other websites, but the target website must
         allow open downloads (forbidden login to download)
@@ -38,7 +43,10 @@ const { locale } = useI18n()
       <p>每发布一个资源链接您可以获得 5 萌萌点</p>
       <p>资源链接被删除, 通过资源链接获得的萌萌点也会被扣除</p>
       <p>所有资源链接必须与该页面游戏相关, 必须免费, 不得付积分、付费下载</p>
-      <p>资源链接可以是磁链、网盘、网址等等</p>
+      <p>
+        资源链接可以是磁链、网盘、网址等等, 可以重复贡献资源链接, 但是同类型链接
+        (同种网盘, 网址等) 每人仅可贡献一次
+      </p>
       <p>
         允许将资源链接指向其它网址, 但是该网址必须开放下载 (禁止未登录无法下载)
       </p>
@@ -52,6 +60,7 @@ const { locale } = useI18n()
   border-left: 5px solid var(--kungalgame-blue-5);
   padding-left: 17px;
   margin-bottom: 17px;
+  font-size: small;
 
   p {
     margin-bottom: 7px;

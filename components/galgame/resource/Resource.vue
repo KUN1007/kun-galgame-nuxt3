@@ -46,6 +46,8 @@ watch(
       </template>
     </KunHeader>
 
+    <GalgameNull v-if="!resourceData?.length" />
+
     <GalgameResourcePublish v-if="isShowPublish" :refresh="refresh" />
 
     <GalgameResourceLink

@@ -37,7 +37,7 @@ if (data.value === 'banned') {
 
 <template>
   <div class="root">
-    <Galgame v-if="galgame" :gid="gid" :galgame="galgame" />
+    <Galgame v-if="galgame" :galgame="galgame" />
 
     <!-- TODO: -->
     <KunBlank v-if="!galgame && !isBanned">

@@ -99,9 +99,9 @@ onMounted(() => {
 
     <div>
       <KunInput placeholder="资源体积 (MB 或 GB)" v-model="resourceLink.size" />
-      <KunInput placeholder="资源提取码 (如果有)" v-model="resourceLink.code" />
+      <KunInput placeholder="资源提取码 (可选)" v-model="resourceLink.code" />
       <KunInput
-        placeholder="资源解压码 (如果有)"
+        placeholder="资源解压码 (可选)"
         v-model="resourceLink.password"
       />
     </div>
@@ -161,7 +161,7 @@ onMounted(() => {
   </div>
 
   <div class="note">
-    <KunInput placeholder="资源备注 (如果有)" v-model="resourceLink.note" />
+    <KunInput placeholder="资源备注 (可选)" v-model="resourceLink.note" />
   </div>
 
   <div class="btn">
