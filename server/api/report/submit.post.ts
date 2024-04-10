@@ -4,19 +4,27 @@ import ReportModel from '~/server/models/report'
 import type { ReportSubmitRequestData } from '~/types/api/report'
 
 export default defineEventHandler(async (event) => {
-  const { reason, reportType }: ReportSubmitRequestData = await readBody(event)
+  const { reason, type }: ReportSubmitRequestData = await readBody(event)
 
-  if (!reportSection.includes(reportType)) {
+  const userInfo = await getCookieTokenInfo(event)
+  if (!userInfo) {
+    return kunError(event, 10115, 205)
+  }
+
+  if (!reportSection.includes(type)) {
     return kunError(event, 10701)
   }
   if (!reason) {
     return kunError(event, 10702)
   }
+  if (reason.trim().length > 1007) {
+    return kunError(event, 10703)
+  }
 
-  ReportModel.create({
+  await ReportModel.create({
     reason,
-    reportType
+    type
   })
 
-  return 'Submit report successfully!'
+  return 'Moe Moe submit report successfully!'
 })

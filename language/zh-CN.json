@@ -537,6 +537,25 @@
     "asc": "升序",
     "desc": "降序"
   },
+  "report": {
+    "select": {
+      "title": "举报类型",
+      "section": {
+        "topic": "话题",
+        "reply": "回复",
+        "comment": "评论",
+        "user": "用户",
+        "galgame": "Galgame",
+        "galgameComment": "Galgame 评论"
+      }
+    },
+    "reason": {
+      "title": "举报理由",
+      "placeholder": "填写具体的违规内容，更容易举报成功哦"
+    },
+    "note": "该举报是完全匿名的, 在管理端以及数据库中不会留下任何用户记录, 请您放心举报",
+    "submit": "提交举报"
+  },
   "page403":{
     "permission": "您没有权限访问这个页面",
     "back": "点击返回主页"
@@ -632,7 +651,7 @@
       "description": "世界上最萌的 Galgame 论坛! Galgame 交流讨论, Galgame 技术交流。为营造最好的氛围而努力! 永远不会有广告! 永远免费!"
     },
     "report": {
-      "title": "举报页",
+      "title": "匿名举报",
       "description": "鲲 Galgame 论坛的举报页，这里可以提交论坛内的违规记录，希望大家不要违规"
     }
   },
@@ -670,23 +689,5 @@
       "message2": "杂~~~鱼~♡. 签到成功，您今日获得了 {params} 萌萌点",
       "message3": "杂鱼~♡♡♡♡♡. 签到成功, 您今日好运获得了 {params} 萌萌点哦!"
     }
-  },
-  "report": {
-    "select": {
-      "title": "请选择举报类型",
-      "section": {
-        "topic": "话题",
-        "reply": "回复",
-        "comment": "评论",
-        "user": "用户",
-        "galgame": "游戏",
-        "galgameComment": "游戏评论"
-      }
-    },
-    "reason": {
-      "title": "举报理由（必填）",
-      "placeholder": "填写具体的违规内容，更容易举报成功哦"
-    },
-    "submit": "提交举报"
   }
 }

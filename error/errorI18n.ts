@@ -94,7 +94,8 @@ const errorMessagesEN: Record<number, string> = {
 
   // Report Part
   10701: `Invalid Report type. (-B)`,
-  10702: `Report reason cannot be empty. (-B)`
+  10702: `Report reason cannot be empty. (-B)`,
+  10703: `The maximum length of the report content is 1007 characters (-B)`
 }
 
 const errorMessagesCN: Record<number, string> = {
@@ -184,7 +185,8 @@ const errorMessagesCN: Record<number, string> = {
   10624: `您已经点赞过这个 Galgame 资源了 (-B)`,
 
   10701: `不合法的举报类型. (-B)`,
-  10702: `举报理由不能空. (-B)`
+  10702: `举报理由不能空. (-B)`,
+  10703: `举报内容最多 1007 字 (-B)`
 }
 
 export const getErrorMessageEN = (errorCode: number) => {

@@ -5,15 +5,15 @@ import type { ReportAttributes } from './types/report'
 
 const ReportSchema = new mongoose.Schema<ReportAttributes>(
   {
-    bid: { type: Number, unique: true },
+    report_id: { type: Number, unique: true },
     reason: { type: String, default: '' },
-    reportType: { type: String, default: '' },
-    reasolved: { type: Boolean, default: false }
+    type: { type: String, default: '' },
+    status: { type: Number, default: 0 }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )
 
-ReportSchema.pre('save', increasingSequence('bid'))
+ReportSchema.pre('save', increasingSequence('report_id'))
 
 const ReportModel = mongoose.model<ReportAttributes>('report', ReportSchema)
 

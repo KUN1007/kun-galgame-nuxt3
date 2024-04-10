@@ -1,6 +1,9 @@
 export interface ReportAttributes {
-  bid: number
-  reportType: string
+  report_id: number
+  type: string
   reason: string
-  reasolved: boolean
+  status: number
+
+  created: Date
+  updated: Date
 }
