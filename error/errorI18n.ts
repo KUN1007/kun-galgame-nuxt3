@@ -89,7 +89,7 @@ const errorMessagesEN: Record<number, string> = {
   10620: `The maximum length of resource decompression code is 1007 (-B)`,
   10621: `The maximum length of resource note is 1007 (-B)`,
   10622: `Resource link not found (-B)`,
-  10623: `You do not have permission to delete this resource link (-B)`,
+  10623: `You do not have permission to operate this resource link (-B)`,
   10624: `You've already liked this visualnovel resource (-B)`,
   10625: `This resource link has been marked as expired (-B)`,
 
@@ -182,7 +182,7 @@ const errorMessagesCN: Record<number, string> = {
   10620: `资源解压码最大长度为 1007 (-B)`,
   10621: `资源备注最大长度为 1007 (-B)`,
   10622: `未找到资源链接 (-B)`,
-  10623: `您没有权限删除该资源链接 (-B)`,
+  10623: `您没有权限操作该资源链接 (-B)`,
   10624: `您已经点赞过这个 Galgame 资源了 (-B)`,
   10625: `该资源链接已被标记为失效 (-B)`,
 

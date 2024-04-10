@@ -11,6 +11,7 @@ const props = defineProps<{
 }>()
 
 const details = ref<GalgameResourceDetails>()
+const { uid } = usePersistUserStore()
 const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
 const isFetching = ref(false)
 
@@ -28,6 +29,37 @@ const handleGetDetail = async (grid: number) => {
 
   if (data.value) {
     details.value = data.value
+  }
+}
+
+const handleMarkValid = async (gid: number, grid: number) => {
+  const res = await useTempMessageStore().alert(
+    {
+      'en-us': 'Are you sure you want to re-mark the resource link as valid?',
+      'ja-jp': '',
+      'zh-cn': '您确定重新标记资源链接有效吗？'
+    },
+    {
+      'en-us':
+        'If you have fixed the resource links, you can re-mark the resource links as valid.',
+      'ja-jp': '',
+      'zh-cn': '若您修复了资源链接，您可以重新标记资源链接有效'
+    }
+  )
+  if (!res) {
+    return
+  }
+
+  const { data } = await useFetch(`/api/galgame/${gid}/resource/valid`, {
+    method: 'PUT',
+    query: { grid },
+    watch: false,
+    ...kungalgameResponseHandler
+  })
+
+  if (data.value) {
+    useMessage('Re-mark valid successfully!', '重新标记有效成功', 'success')
+    props.refresh()
   }
 }
 
@@ -65,6 +97,14 @@ watch(
       </div>
 
       <div class="status">
+        <KunButton
+          class="valid"
+          v-if="uid === link.uid && link.status === 1"
+          @click="handleMarkValid(link.gid, link.grid)"
+          :pending="isFetching"
+        >
+          标记有效
+        </KunButton>
         <KunButton
           v-if="link.grid !== rewriteResourceId"
           @click="handleGetDetail(link.grid)"

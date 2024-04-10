@@ -3,7 +3,7 @@ import type { GalgameResourceDetails } from '~/types/api/galgame-resource'
 
 const { locale } = useI18n()
 
-const { uid, moemoeAccessToken } = storeToRefs(usePersistUserStore())
+const { uid } = usePersistUserStore()
 const { resources, rewriteResourceId } = storeToRefs(
   useTempGalgameResourceStore()
 )
@@ -47,7 +47,7 @@ const handleDeleteResource = async (gid: number, grid: number) => {
 }
 
 const handleReportExpire = async (details: GalgameResourceDetails) => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(
       'Please login to report the resource link expired!',
       '请登录以报告资源链接失效!',
@@ -79,6 +79,7 @@ const handleReportExpire = async (details: GalgameResourceDetails) => {
     {
       method: 'PUT',
       query: { grid: details.grid },
+      watch: false,
       ...kungalgameResponseHandler
     }
   )
@@ -141,7 +142,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
         </KunButton>
       </div>
 
-      <div class="other-btn" v-if="details.user.uid !== uid && !details.status">
+      <div class="other-btn" v-if="uid !== details.user.uid && !details.status">
         <KunButton type="danger" @click="handleReportExpire(details)">
           报告失效
         </KunButton>
