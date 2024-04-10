@@ -3,10 +3,7 @@ import GalgameResourceModel from '~/server/models/galgame-resource'
 import mongoose from 'mongoose'
 
 const updateGalgameResourceLike = async (grid: number, uid: number) => {
-  const resource = await GalgameResourceModel.findOne({
-    grid,
-    status: { $ne: 1 }
-  }).lean()
+  const resource = await GalgameResourceModel.findOne({ grid }).lean()
   if (!resource) {
     return 10622
   }
@@ -55,21 +52,18 @@ const updateGalgameResourceLike = async (grid: number, uid: number) => {
 export default defineEventHandler(async (event) => {
   const { grid }: { grid: string } = await getQuery(event)
   if (!grid) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
 
   const result = await updateGalgameResourceLike(parseInt(grid), uid)
   if (typeof result === 'number') {
-    kunError(event, result)
-    return
+    return kunError(event, result)
   }
 
   return 'MOEMOE like galgame resource operation successfully!'

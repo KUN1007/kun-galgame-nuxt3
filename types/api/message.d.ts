@@ -4,6 +4,7 @@ export type MessageType =
   | 'favorite'
   | 'replied'
   | 'commented'
+  | 'expired'
   | 'mentioned'
   | 'admin'
 

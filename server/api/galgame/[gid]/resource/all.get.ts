@@ -4,10 +4,10 @@ import type { GalgameResource } from '~/types/api/galgame-resource'
 export default defineEventHandler(async (event) => {
   const gid = getRouterParam(event, 'gid')
   if (!gid) {
-    return
+    return kunError(event, 10507)
   }
 
-  const data = await GalgameResourceModel.find({ gid, status: { $ne: 1 } })
+  const data = await GalgameResourceModel.find({ gid })
     .sort({ created: -1 })
     .lean()
 

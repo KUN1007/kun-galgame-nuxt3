@@ -5,24 +5,20 @@ import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
 export default defineEventHandler(async (event) => {
   const result: GalgameResourceStoreTemp = await readBody(event)
   if (!result) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
   const res = checkGalgameResourcePublish(result)
   if (res) {
-    kunError(event, res)
-    return
+    return kunError(event, res)
   }
   const { grid }: { grid: string } = await getQuery(event)
   if (!grid) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
 

@@ -10,13 +10,11 @@ import type { H3Event } from 'h3'
 const getResourceData = async (event: H3Event) => {
   const result: GalgameResourceStoreTemp = await readBody(event)
   if (!result) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
   const res = checkGalgameResourcePublish(result)
   if (res) {
-    kunError(event, res)
-    return
+    return kunError(event, res)
   }
   const gid = getRouterParam(event, 'gid')
   if (!gid) {
@@ -25,14 +23,12 @@ const getResourceData = async (event: H3Event) => {
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
   const user = await UserModel.findOne({ uid })
   if (!user) {
-    kunError(event, 10101)
-    return
+    return kunError(event, 10101)
   }
 
   return {

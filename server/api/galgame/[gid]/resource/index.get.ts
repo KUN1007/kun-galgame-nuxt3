@@ -4,16 +4,14 @@ import type { GalgameResourceDetails } from '~/types/api/galgame-resource'
 export default defineEventHandler(async (event) => {
   const { grid }: { grid: string } = await getQuery(event)
   if (!grid) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
 
-  const data = await GalgameResourceModel.findOne({ grid, status: { $ne: 1 } })
+  const data = await GalgameResourceModel.findOne({ grid })
     .populate('user', 'uid avatar name')
     .lean()
   if (!data) {
-    kunError(event, 10622)
-    return
+    return kunError(event, 10622)
   }
 
   const resource: GalgameResourceDetails = {

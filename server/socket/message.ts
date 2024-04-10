@@ -81,5 +81,14 @@ export default defineIOHandler((io) => {
         commentedUserSocket.emit('commented', username)
       }
     })
+
+    socket.on('expired', (uid: number) => {
+      const expiredUserSocket = userSockets.get(uid)
+      const username = socket.payload?.name
+
+      if (expiredUserSocket) {
+        expiredUserSocket.emit('expired', username)
+      }
+    })
   })
 })

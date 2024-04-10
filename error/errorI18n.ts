@@ -91,6 +91,7 @@ const errorMessagesEN: Record<number, string> = {
   10622: `Resource link not found (-B)`,
   10623: `You do not have permission to delete this resource link (-B)`,
   10624: `You've already liked this visualnovel resource (-B)`,
+  10625: `This resource link has been marked as expired (-B)`,
 
   // Report Part
   10701: `Invalid Report type. (-B)`,
@@ -183,6 +184,7 @@ const errorMessagesCN: Record<number, string> = {
   10622: `未找到资源链接 (-B)`,
   10623: `您没有权限删除该资源链接 (-B)`,
   10624: `您已经点赞过这个 Galgame 资源了 (-B)`,
+  10625: `该资源链接已被标记为失效 (-B)`,
 
   10701: `不合法的举报类型. (-B)`,
   10702: `举报理由不能空. (-B)`,

@@ -7,7 +7,8 @@ const zhMessageMap: Record<string, string> = {
   liked: '点赞了您！',
   favorite: '收藏了您！',
   replied: '回复了您！',
-  commented: '评论了您！'
+  commented: '评论了您！',
+  expired: '报告了您的资源链接已过期!'
 }
 
 export const getMessageZH = (locale: Locale, content: string) => {
@@ -24,16 +25,27 @@ const getMentionedMessage = (locale: Locale, message: Message) => {
   return `${message.senderName} mentioned you!`
 }
 
-export const getMessageI18n = (locale: Locale, message: Message) => {
-  if (message.type === 'mentioned') {
-    return getMentionedMessage(locale, message)
+const getExpiredMessage = (locale: Locale, message: Message) => {
+  if (locale === 'zh-cn') {
+    return `${message.senderName} 报告了您的资源链接已过期！`
   }
+  return `${message.senderName} report for your resource link has expired!`
+}
 
+export const getMessageI18n = (locale: Locale, message: Message) => {
   if (message.type === 'admin') {
     if (locale === 'zh-cn') {
       return '系统消息'
     }
     return 'System message'
+  }
+
+  if (message.type === 'mentioned') {
+    return getMentionedMessage(locale, message)
+  }
+
+  if (message.type === 'expired') {
+    return getExpiredMessage(locale, message)
   }
 
   if (locale === 'zh-cn') {

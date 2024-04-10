@@ -3,7 +3,7 @@ import type { GalgameResourceDetails } from '~/types/api/galgame-resource'
 
 const { locale } = useI18n()
 
-const { uid } = storeToRefs(usePersistUserStore())
+const { uid, moemoeAccessToken } = storeToRefs(usePersistUserStore())
 const { resources, rewriteResourceId } = storeToRefs(
   useTempGalgameResourceStore()
 )
@@ -36,11 +36,57 @@ const handleDeleteResource = async (gid: number, grid: number) => {
   const { data } = await useFetch(`/api/galgame/${gid}/resource`, {
     method: 'DELETE',
     query: { grid },
-    watch: false
+    watch: false,
+    ...kungalgameResponseHandler
   })
   isFetching.value = false
 
   if (data.value) {
+    props.refresh()
+  }
+}
+
+const handleReportExpire = async (details: GalgameResourceDetails) => {
+  if (!moemoeAccessToken) {
+    useMessage(
+      'Please login to report the resource link expired!',
+      '请登录以报告资源链接失效!',
+      'warn'
+    )
+    return
+  }
+
+  const res = await useTempMessageStore().alert(
+    {
+      'en-us': 'Are you sure you want to report the resource link expired?',
+      'ja-jp': '',
+      'zh-cn': '您确定报告资源链接失效吗？'
+    },
+    {
+      'en-us':
+        "This will notify the resource publisher of the link's expiration and mark the link as invalid. If the resource publisher does not replace the link with a valid one within 17 days, the resource link will be deleted. Maliciously reporting expiration will result in punishment.",
+      'ja-jp': '',
+      'zh-cn':
+        '这将会通知资源发布者链接失效, 并将该链接标记为失效。若 17 天内资源发布者没有更换有效链接，该资源链接将会被删除。若恶意报告失效, 将会被处罚'
+    }
+  )
+  if (!res) {
+    return
+  }
+
+  const { data } = await useFetch(
+    `/api/galgame/${details.gid}/resource/expired`,
+    {
+      method: 'PUT',
+      query: { grid: details.grid },
+      ...kungalgameResponseHandler
+    }
+  )
+
+  if (data.value) {
+    const socket = useSocket()
+    socket.emit('like', details.uid)
+    useMessage('Report expired successfully!', '报告失效成功', 'success')
     props.refresh()
   }
 }
@@ -95,8 +141,10 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
         </KunButton>
       </div>
 
-      <div class="other-btn" v-if="details.user.uid !== uid">
-        <KunButton type="danger">报告失效</KunButton>
+      <div class="other-btn" v-if="details.user.uid !== uid && !details.status">
+        <KunButton type="danger" @click="handleReportExpire(details)">
+          报告失效
+        </KunButton>
       </div>
     </div>
   </div>

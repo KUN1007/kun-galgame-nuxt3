@@ -42,6 +42,9 @@ onMounted(async () => {
     .on('commented', (socket) => {
       messageStatus.value = 'new'
     })
+    .on('expired', (socket) => {
+      messageStatus.value = 'new'
+    })
 
   const { data } = await useFetch(`/api/message/unread`, {
     method: 'GET'

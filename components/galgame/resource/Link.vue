@@ -32,7 +32,7 @@ const handleGetDetail = async (grid: number) => {
 }
 
 watch(
-  () => rewriteResourceId.value,
+  () => [rewriteResourceId.value, props.link],
   () => {
     details.value = undefined
   }
@@ -94,7 +94,17 @@ watch(
           <Icon name="lucide:triangle-alert" />
         </NuxtLinkLocale>
 
-        <span class="status-dot" :class="`status-${link.status}`"></span>
+        <span
+          class="status-dot"
+          :class="`status-${link.status}`"
+          v-tooltip="{
+            message: {
+              en: link.status ? 'Link expired' : 'Link valid',
+              zh: link.status ? '链接过期' : '链接有效'
+            },
+            position: 'bottom'
+          }"
+        ></span>
       </div>
     </div>
 
@@ -176,13 +186,6 @@ watch(
 }
 
 .status-1 {
-  width: 10px;
-  height: 10px;
-  background-color: var(--kungalgame-gray-4);
-  border-radius: 50%;
-}
-
-.status-2 {
   width: 10px;
   height: 10px;
   background-color: var(--kungalgame-red-4);
