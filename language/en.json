@@ -625,6 +625,10 @@
     "home": {
       "title": "KUN Visual Novel Forum",
       "description": "The CUTEST Visual Novel Forum! Visual Novel Communication, Visual Novel Technique.To Create The Best Atmosphere! NO ADs Forever! Free Forever!"
+    },
+    "report": {
+      "title": "Report Page",
+      "description": "KUN Visual Novel's report page, where you can submit violation records in the forum. Hope everyone will not violate the rules."
     }
   },
   "ComponentAlert":{
@@ -661,5 +665,23 @@
       "message2": "Za~~~ko~♡. Check-in successful, you have earned {params} moemoepoints today.",
       "message3": "Zako~♡♡♡♡♡. Check-in successful, today's good luck has earned you {params} points!"
     }
+  },
+  "report": {
+    "select": {
+      "title": "Please select the type of report",
+      "section": {
+        "topic": "Topic",
+        "reply": "Reply",
+        "comment": "Comment",
+        "user": "User",
+        "galgame": "Galgame",
+        "galgameComment": "Galgame Comment"
+      }
+    },
+    "reason": {
+      "title": "Reason for reporting(Required)",
+      "placeholder": "填写具体的违规内容，更容易举报成功哦"
+    },
+    "submit": "Submit Report"
   }
 }
