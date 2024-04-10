@@ -136,6 +136,12 @@ const link: FooterInfoItem[] = [
     name: `xiayuge`,
     router: `https://xiayuge1.top/`,
     label: `夏轩阁是一个创建于2022年的一个主要与galgame有关的站点, 与大家分享、探讨自己喜欢的作品, 我们一直在提供公益服务, 接下来的路还很长, 希望能够与各位一起走完。`
+  },
+  {
+    index: 8,
+    name: `hikarinagi`,
+    router: `https://www.hikarinagi.com/`,
+    label: `Hikarinagi致力于为所有ACG爱好者提供一个交流和分享的平台! 你不仅可以找到汉化Galgame、小说、漫画等等超多资源, 还能和谐愉快地与大家互动!`
   }
 ]
 </script>
