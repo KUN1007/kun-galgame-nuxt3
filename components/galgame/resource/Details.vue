@@ -96,7 +96,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
       </div>
 
       <div class="other-btn" v-if="details.user.uid !== uid">
-        <KunButton type="danger">链接失效</KunButton>
+        <KunButton type="danger">报告失效</KunButton>
       </div>
     </div>
   </div>

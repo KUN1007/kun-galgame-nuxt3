@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { typeIconMap, platformIconMap } from '../utils/iconMap'
 import type {
   GalgameResource,
   GalgameResourceDetails
@@ -8,16 +9,6 @@ const props = defineProps<{
   link: GalgameResource
   refresh: () => {}
 }>()
-
-const iconMap: Record<string, string> = {
-  game: 'lucide:box',
-  patch: 'lucide:puzzle',
-  collection: 'lucide:boxes',
-  voice: 'lucide:music-4',
-  image: 'lucide:image',
-  ai: 'simple-icons:openai',
-  others: 'lucide:ellipsis'
-}
 
 const details = ref<GalgameResourceDetails>()
 const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
@@ -57,7 +48,7 @@ watch(
           <span>正在编辑中</span>
         </span>
         <span>
-          <Icon :name="iconMap[link.type]" />
+          <Icon :name="typeIconMap[link.type]" />
           <span>{{ $t(`edit.galgame.resource.type.${link.type}`) }}</span>
         </span>
         <span>
@@ -65,9 +56,12 @@ watch(
           <span>{{ link.size }}</span>
         </span>
         <span>
+          <Icon :name="platformIconMap[link.platform]" />
+          <span>{{ $t(`edit.galgame.platform.${link.platform}`) }}</span>
+        </span>
+        <span>
           {{ $t(`edit.galgame.resource.language.${link.language}`) }}
         </span>
-        <span>{{ $t(`edit.galgame.platform.${link.platform}`) }}</span>
       </div>
 
       <div class="status">

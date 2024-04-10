@@ -48,7 +48,6 @@ const handlePublishResourceLink = async (method: 'POST' | 'PUT') => {
 
   if (data.value) {
     if (!rewriteResourceId.value) {
-      await props.refresh()
       useMessage(
         'Publish resource link successfully!',
         '发布资源链接成功!',
@@ -62,6 +61,7 @@ const handlePublishResourceLink = async (method: 'POST' | 'PUT') => {
         'success'
       )
     }
+    await props.refresh()
     resourceLink.value = { ...defaultResourceLink }
   }
 }
