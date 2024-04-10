@@ -89,6 +89,8 @@ onMounted(() => {
 </script>
 
 <template>
+  <GalgameResourceHelp />
+
   <div class="link">
     <KunInput
       placeholder="资源链接 (网盘|磁链|网址) 等"
@@ -177,6 +179,7 @@ onMounted(() => {
     </KunButton>
 
     <KunButton
+      class="rewrite"
       @click="handlePublishResourceLink('PUT')"
       type="danger"
       :pending="isFetching"
@@ -245,10 +248,10 @@ onMounted(() => {
 
   button {
     width: 100%;
+  }
 
-    &:first-child {
-      margin-right: 10px;
-    }
+  .rewrite {
+    margin-left: 10px;
   }
 }
 </style>
