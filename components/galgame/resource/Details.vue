@@ -4,7 +4,9 @@ import type { GalgameResourceDetails } from '~/types/api/galgame-resource'
 const { locale } = useI18n()
 
 const { uid } = storeToRefs(usePersistUserStore())
-
+const { resources, rewriteResourceId } = storeToRefs(
+  useTempGalgameResourceStore()
+)
 const props = defineProps<{
   details: GalgameResourceDetails
   refresh: () => {}
@@ -42,6 +44,11 @@ const handleDeleteResource = async (gid: number, grid: number) => {
     props.refresh()
   }
 }
+
+const handleRewriteResource = (details: GalgameResourceDetails) => {
+  resources.value[0] = { ...details }
+  rewriteResourceId.value = details.grid
+}
 </script>
 
 <template>
@@ -78,7 +85,7 @@ const handleDeleteResource = async (gid: number, grid: number) => {
       </div>
 
       <div class="user-btn" v-if="details.user.uid === uid">
-        <KunButton>编辑</KunButton>
+        <KunButton @click="handleRewriteResource(details)">编辑</KunButton>
         <KunButton
           type="danger"
           @click="handleDeleteResource(details.gid, details.grid)"

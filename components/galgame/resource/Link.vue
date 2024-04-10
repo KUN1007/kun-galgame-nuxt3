@@ -20,6 +20,7 @@ const iconMap: Record<string, string> = {
 }
 
 const details = ref<GalgameResourceDetails>()
+const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
 const isFetching = ref(false)
 
 const handleGetDetail = async (grid: number) => {
@@ -38,12 +39,23 @@ const handleGetDetail = async (grid: number) => {
     details.value = data.value
   }
 }
+
+watch(
+  () => rewriteResourceId.value,
+  () => {
+    details.value = undefined
+  }
+)
 </script>
 
 <template>
   <div class="link">
     <div class="base">
       <div class="info">
+        <span class="rewrite" v-if="link.grid === rewriteResourceId">
+          <Icon name="svg-spinners:12-dots-scale-rotate" />
+          <span>正在编辑中</span>
+        </span>
         <span>
           <Icon :name="iconMap[link.type]" />
           <span>{{ $t(`edit.galgame.resource.type.${link.type}`) }}</span>
@@ -59,7 +71,11 @@ const handleGetDetail = async (grid: number) => {
       </div>
 
       <div class="status">
-        <KunButton @click="handleGetDetail(link.grid)" :pending="isFetching">
+        <KunButton
+          v-if="link.grid !== rewriteResourceId"
+          @click="handleGetDetail(link.grid)"
+          :pending="isFetching"
+        >
           获取链接
         </KunButton>
 
@@ -74,14 +90,15 @@ const handleGetDetail = async (grid: number) => {
           }"
         />
 
-        <span
+        <NuxtLinkLocale
+          to="/report"
           v-tooltip="{
             message: { en: 'Report violation', zh: '举报违规' },
             position: 'bottom'
           }"
         >
           <Icon name="lucide:triangle-alert" />
-        </span>
+        </NuxtLinkLocale>
 
         <span class="status-dot" :class="`status-${link.status}`"></span>
       </div>
@@ -124,6 +141,11 @@ const handleGetDetail = async (grid: number) => {
     font-size: medium;
     margin-right: 5px;
   }
+
+  .rewrite {
+    user-select: none;
+    color: var(--kungalgame-red-5);
+  }
 }
 
 .status {
@@ -132,7 +154,9 @@ const handleGetDetail = async (grid: number) => {
   margin-bottom: 10px;
   margin-left: auto;
 
-  & > span {
+  & > span,
+  a {
+    color: var(--kungalgame-font-color-3);
     display: flex;
     align-items: center;
     margin-right: 10px;

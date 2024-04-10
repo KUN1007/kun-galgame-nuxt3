@@ -4,7 +4,8 @@ import { checkGalgameResourcePublish } from '../utils/checkGalgameResourcePublis
 import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
 
 const props = defineProps<{
-  refresh: () => {}
+  // For simplicity, the type is set to unknown here.
+  refresh: () => Promise<unknown>
 }>()
 
 const { locale } = useI18n()
@@ -12,6 +13,9 @@ const route = useRoute()
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
+const { resources, rewriteResourceId } = storeToRefs(
+  useTempGalgameResourceStore()
+)
 const isFetching = ref(false)
 
 const defaultResourceLink: GalgameResourceStoreTemp = {
@@ -27,14 +31,15 @@ const defaultResourceLink: GalgameResourceStoreTemp = {
 
 const resourceLink = ref<GalgameResourceStoreTemp>({ ...defaultResourceLink })
 
-const handleCreateResourceLink = async () => {
+const handlePublishResourceLink = async (method: 'POST' | 'PUT') => {
   if (!checkGalgameResourcePublish(resourceLink.value)) {
     return
   }
 
   isFetching.value = true
   const { data } = await useFetch(`/api/galgame/${gid.value}/resource`, {
-    method: 'POST',
+    method,
+    query: rewriteResourceId.value ? { grid: rewriteResourceId.value } : {},
     body: resourceLink.value,
     watch: false,
     ...kungalgameResponseHandler
@@ -42,10 +47,45 @@ const handleCreateResourceLink = async () => {
   isFetching.value = false
 
   if (data.value) {
-    props.refresh()
+    if (!rewriteResourceId.value) {
+      await props.refresh()
+      useMessage(
+        'Publish resource link successfully!',
+        '发布资源链接成功!',
+        'success'
+      )
+    } else {
+      rewriteResourceId.value = 0
+      useMessage(
+        'Rewrite resource link successfully!',
+        'Rewrite 资源链接成功!',
+        'success'
+      )
+    }
     resourceLink.value = { ...defaultResourceLink }
   }
 }
+
+const handleCancel = () => {
+  rewriteResourceId.value = 0
+  resourceLink.value = { ...defaultResourceLink }
+  resources.value[0] = resourceLink.value
+}
+
+watch(
+  () => rewriteResourceId.value,
+  () => {
+    if (rewriteResourceId.value) {
+      resourceLink.value = resources.value[0]
+    }
+  }
+)
+
+onMounted(() => {
+  if (rewriteResourceId.value) {
+    resourceLink.value = resources.value[0]
+  }
+})
 </script>
 
 <template>
@@ -116,17 +156,34 @@ const handleCreateResourceLink = async () => {
         </span>
       </div>
     </KunSelect>
+  </div>
 
-    <div class="note">
-      <KunInput placeholder="资源备注 (如果有)" v-model="resourceLink.note" />
-      <KunButton
-        @click="handleCreateResourceLink"
-        type="primary"
-        :pending="isFetching"
-      >
-        创建资源链接
-      </KunButton>
-    </div>
+  <div class="note">
+    <KunInput placeholder="资源备注 (如果有)" v-model="resourceLink.note" />
+  </div>
+
+  <div class="btn">
+    <KunButton
+      @click="handlePublishResourceLink('POST')"
+      type="primary"
+      :pending="isFetching"
+      v-if="!rewriteResourceId"
+    >
+      创建资源链接
+    </KunButton>
+
+    <KunButton v-if="rewriteResourceId" @click="handleCancel">
+      取消 Rewrite
+    </KunButton>
+
+    <KunButton
+      @click="handlePublishResourceLink('PUT')"
+      type="danger"
+      :pending="isFetching"
+      v-if="rewriteResourceId"
+    >
+      Rewrite 资源链接
+    </KunButton>
   </div>
 </template>
 
@@ -146,6 +203,7 @@ const handleCreateResourceLink = async () => {
 }
 
 .type {
+  display: flex;
   flex-wrap: wrap;
 }
 
@@ -169,10 +227,6 @@ const handleCreateResourceLink = async () => {
   }
 }
 
-.type {
-  display: flex;
-}
-
 .note {
   width: 100%;
   display: flex;
@@ -181,6 +235,20 @@ const handleCreateResourceLink = async () => {
 
   button {
     margin: 17px 0;
+  }
+}
+
+.btn {
+  margin-bottom: 10px;
+  display: flex;
+  width: 100%;
+
+  button {
+    width: 100%;
+
+    &:first-child {
+      margin-right: 10px;
+    }
   }
 }
 </style>

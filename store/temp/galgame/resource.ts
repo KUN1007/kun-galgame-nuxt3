@@ -3,7 +3,7 @@ import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
 interface Store {
   resources: GalgameResourceStoreTemp[]
   isShowPublish: boolean
-  isRewriting: boolean
+  rewriteResourceId: number
 }
 
 export const useTempGalgameResourceStore = defineStore({
@@ -12,7 +12,7 @@ export const useTempGalgameResourceStore = defineStore({
   state: (): Store => ({
     resources: [],
     isShowPublish: false,
-    isRewriting: false
+    rewriteResourceId: 0
   }),
   actions: {}
 })

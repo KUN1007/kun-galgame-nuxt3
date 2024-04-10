@@ -4,7 +4,7 @@ const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
 
-const { isShowPublish, isRewriting } = storeToRefs(
+const { isShowPublish, rewriteResourceId } = storeToRefs(
   useTempGalgameResourceStore()
 )
 
@@ -15,6 +15,23 @@ const { data: resourceData, refresh } = await useLazyFetch(
     ...kungalgameResponseHandler
   }
 )
+
+const handleClickContribute = () => {
+  if (!rewriteResourceId.value) {
+    isShowPublish.value = !isShowPublish.value
+  }
+}
+
+watch(
+  () => rewriteResourceId.value,
+  () => {
+    if (rewriteResourceId.value) {
+      isShowPublish.value = true
+    } else {
+      isShowPublish.value = false
+    }
+  }
+)
 </script>
 
 <template>
@@ -23,7 +40,7 @@ const { data: resourceData, refresh } = await useLazyFetch(
       <template #header>
         <span>{{ $t('edit.galgame.resource.name') }}</span>
 
-        <span class="contribute" @click="isShowPublish = !isShowPublish">
+        <span class="contribute" @click="handleClickContribute">
           <Icon name="lucide:circle-plus" />
         </span>
       </template>
