@@ -5,8 +5,9 @@ export interface GalgameHistory {
   gid: number
   uid: number
   time: number
+  action: string
   type: string
-  note: string
+  content: string
 
   user: UserAttributes[]
 

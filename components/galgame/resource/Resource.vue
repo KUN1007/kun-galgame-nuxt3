@@ -46,7 +46,7 @@ watch(
       </template>
     </KunHeader>
 
-    <GalgameNull v-if="!resourceData?.length" />
+    <GalgameNull class="null" v-if="!resourceData?.length" />
 
     <GalgameResourcePublish v-if="isShowPublish" :refresh="refresh" />
 
@@ -72,5 +72,9 @@ watch(
   padding: 3px;
   border-radius: 20px;
   color: var(--kungalgame-blue-5);
+}
+
+.null {
+  margin-bottom: 17px;
 }
 </style>

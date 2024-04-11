@@ -25,11 +25,6 @@ const likeComment = async () => {
     return
   }
 
-  if (uid === props.toUid) {
-    useMessage('You cannot like yourself', '您不可以给自己点赞', 'warn')
-    return
-  }
-
   const { data } = await useFetch(`/api/galgame/${props.gid}/resource/like`, {
     method: 'PUT',
     query: { grid: props.grid },

@@ -124,6 +124,15 @@ export default defineEventHandler(async (event) => {
       { $set: { banner: imageLink } }
     )
 
+    await createGalgameHistory({
+      gid: savedGalgame.gid,
+      uid,
+      time: Date.now(),
+      action: 'created',
+      type: 'galgame',
+      content: ''
+    })
+
     await session.commitTransaction()
 
     return savedGalgame.gid

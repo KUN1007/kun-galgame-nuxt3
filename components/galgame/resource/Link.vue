@@ -114,6 +114,7 @@ watch(
         </KunButton>
 
         <GalgameResourceLike
+          v-if="uid !== link.uid"
           :gid="link.gid"
           :grid="link.grid"
           :to-uid="link.uid"
@@ -125,6 +126,7 @@ watch(
         />
 
         <NuxtLinkLocale
+          v-if="uid !== link.uid"
           to="/report"
           v-tooltip="{
             message: { en: 'Report violation', zh: '举报违规' },

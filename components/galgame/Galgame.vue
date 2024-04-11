@@ -18,7 +18,7 @@ defineProps<{
 
     <h2>相关链接</h2>
 
-    <h2>贡献历史</h2>
+    <GalgameHistory />
 
     <h2>贡献者</h2>
 
