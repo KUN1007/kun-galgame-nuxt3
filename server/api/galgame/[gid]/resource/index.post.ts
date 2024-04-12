@@ -26,10 +26,6 @@ const getResourceData = async (event: H3Event) => {
     return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
-  const user = await UserModel.findOne({ uid })
-  if (!user) {
-    return kunError(event, 10101)
-  }
 
   return {
     ...result,

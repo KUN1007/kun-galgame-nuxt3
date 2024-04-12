@@ -5,13 +5,11 @@ import { GalgameLink } from './types/galgame-link'
 
 const GalgameLinkSchema = new mongoose.Schema<GalgameLink>(
   {
-    glid: { type: Number, unique: true },
     gid: { type: Number, required: true },
+    glid: { type: Number, unique: true },
     uid: { type: Number, required: true, ref: 'user' },
-    type: { type: String, default: '' },
-    link: { type: String, default: '' },
-
-    likes: { type: [Number], default: [] }
+    name: { type: String, default: '' },
+    link: { type: String, default: '' }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )

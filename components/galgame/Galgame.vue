@@ -16,7 +16,7 @@ defineProps<{
 
     <GalgameResource />
 
-    <h2>相关链接</h2>
+    <GalgameLink />
 
     <GalgameHistory />
 

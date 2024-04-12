@@ -5,11 +5,8 @@ export interface GalgameLink {
   glid: number
   gid: number
   uid: number
-  type: string
+  name: string
   link: string
-
-  // Auto initialized features
-  likes: number[]
 
   user: UserAttributes[]
 

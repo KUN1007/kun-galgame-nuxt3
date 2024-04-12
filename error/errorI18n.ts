@@ -92,6 +92,8 @@ const errorMessagesEN: Record<number, string> = {
   10623: `You do not have permission to operate this resource link (-B)`,
   10624: `You've already liked this visualnovel resource (-B)`,
   10625: `This resource link has been marked as expired (-B)`,
+  10626: `The maximum length of the link name is 107 characters (-B)`,
+  10627: `The maximum length of the link is 233 characters (-B)`,
 
   // Report Part
   10701: `Invalid Report type. (-B)`,
@@ -185,6 +187,8 @@ const errorMessagesCN: Record<number, string> = {
   10623: `您没有权限操作该资源链接 (-B)`,
   10624: `您已经点赞过这个 Galgame 资源了 (-B)`,
   10625: `该资源链接已被标记为失效 (-B)`,
+  10626: `链接名最大长度为 107 个字符 (-B)`,
+  10627: `链接最大长度为 233 个字符 (-B)`,
 
   10701: `不合法的举报类型. (-B)`,
   10702: `举报理由不能空. (-B)`,
