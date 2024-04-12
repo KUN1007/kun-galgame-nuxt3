@@ -11,13 +11,14 @@ const getUpdateLogs = async (
   language: Language
 ) => {
   const skip = (page - 1) * limit
+  const totalCount = await UpdateLogModel.countDocuments().lean()
 
   const updateLogs = await UpdateLogModel.find()
     .sort({ upid: -1 })
     .skip(skip)
     .limit(limit)
 
-  const data: UpdateLog[] = updateLogs.map((log) => ({
+  const updates: UpdateLog[] = updateLogs.map((log) => ({
     upid: log.upid,
     type: log.type as UpdateType,
     content: language === 'en-us' ? log.content_en_us : log.content_zh_cn,
@@ -25,7 +26,7 @@ const getUpdateLogs = async (
     version: log.version
   }))
 
-  return data
+  return { updates, totalCount }
 }
 
 export default defineEventHandler(async (event) => {
@@ -35,8 +36,12 @@ export default defineEventHandler(async (event) => {
     kunError(event, 10507)
     return
   }
+  if (limit !== '10') {
+    kunError(event, 10209)
+    return
+  }
 
-  const topics = await getUpdateLogs(parseInt(page), parseInt(limit), language)
+  const updates = await getUpdateLogs(parseInt(page), parseInt(limit), language)
 
-  return topics
+  return updates
 })

@@ -5,18 +5,30 @@ const gid = computed(() => {
 })
 const { locale } = useI18n()
 
-const { data } = await useFetch(`/api/galgame/${gid.value}/history/all`, {
-  method: 'GET',
-  watch: false,
-  ...kungalgameResponseHandler
+const pageData = reactive({
+  page: 1,
+  limit: 7
 })
+
+const { data, pending } = await useFetch(
+  `/api/galgame/${gid.value}/history/all`,
+  {
+    method: 'GET',
+    query: pageData,
+    ...kungalgameResponseHandler
+  }
+)
 </script>
 
 <template>
   <h2>贡献历史</h2>
 
   <div class="container" v-if="data">
-    <div class="history" v-for="(history, index) in data" :key="index">
+    <div
+      class="history"
+      v-for="(history, index) in data.historyData"
+      :key="index"
+    >
       <NuxtLinkLocale :to="`/kungalgamer/${history.user.uid}/info`">
         <KunAvatar :user="history.user" size="40px" />
       </NuxtLinkLocale>
@@ -36,6 +48,16 @@ const { data } = await useFetch(`/api/galgame/${gid.value}/history/all`, {
         </div>
       </div>
     </div>
+
+    <KunPagination
+      class="pagination"
+      v-if="data?.totalCount > 7"
+      :page="pageData.page"
+      :limit="pageData.limit"
+      :sum="data?.totalCount"
+      :loading="pending"
+      @set-page="(newPage) => (pageData.page = newPage)"
+    />
   </div>
 </template>
 
@@ -47,7 +69,6 @@ h2 {
 .container {
   display: flex;
   flex-direction: column;
-  margin-bottom: 17px;
 }
 
 .history {

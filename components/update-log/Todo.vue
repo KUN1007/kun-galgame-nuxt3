@@ -10,17 +10,38 @@ const iconMap: Record<number, string> = {
   3: 'lucide:x'
 }
 
-const { data: todos } = await useFetch(`/api/update/todo`, {
+const pageData = ref({
+  page: 1,
+  limit: 10,
+  language: locale.value
+})
+
+const { data, pending } = await useFetch(`/api/update/todo`, {
   method: 'GET',
-  query: { page: 0, limit: 0, language: locale.value },
-  watch: false,
+  query: pageData,
   ...kungalgameResponseHandler
 })
+
+watch(
+  () => pending.value,
+  () => {
+    if (!pending.value) {
+      window?.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
+  }
+)
 </script>
 
 <template>
-  <ul class="todo-list" v-if="todos && todos.length">
-    <li :class="`status${kun.status}`" v-for="kun in todos" :key="kun.todoId">
+  <ul class="todo-list" v-if="data">
+    <li
+      :class="`status${kun.status}`"
+      v-for="kun in data.todos"
+      :key="kun.todoId"
+    >
       <p>{{ kun.content }}</p>
 
       <div class="status">
@@ -36,15 +57,21 @@ const { data: todos } = await useFetch(`/api/update/todo`, {
       </div>
     </li>
   </ul>
+
+  <KunPagination
+    class="pagination"
+    v-if="data && data.totalCount > 10"
+    :page="pageData.page"
+    :limit="pageData.limit"
+    :sum="data.totalCount"
+    :loading="pending"
+    @set-page="(newPage) => (pageData.page = newPage)"
+  />
 </template>
 
 <style lang="scss" scoped>
 .todo-list {
-  height: calc(100% - 80px);
   padding: 10px;
-  display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
 }
 
 li {

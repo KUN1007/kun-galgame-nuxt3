@@ -14,17 +14,15 @@ useHead({
 
 <template>
   <div class="root">
-    <div class="container">
-      <div class="content">
-        <div class="todo">
-          <div class="title">{{ $t('update.todo') }}</div>
-          <UpdateLogTodo />
-        </div>
+    <div class="content">
+      <div class="todo">
+        <div class="title">{{ $t('update.todo') }}</div>
+        <UpdateLogTodo />
+      </div>
 
-        <div class="history">
-          <div class="title">{{ $t('update.history') }}</div>
-          <UpdateLogHistory />
-        </div>
+      <div class="history">
+        <div class="title">{{ $t('update.history') }}</div>
+        <UpdateLogHistory />
       </div>
     </div>
 
@@ -34,27 +32,18 @@ useHead({
 
 <style lang="scss" scoped>
 .root {
-  height: calc(100dvh - 75px);
   display: flex;
   flex-direction: column;
-  min-height: 650px;
-}
-
-.container {
-  width: 100%;
   height: 100%;
+  min-height: calc(100dvh - 75px);
   max-width: 64rem;
-  position: relative;
-  margin: auto;
+  margin: 0 auto;
+  color: var(--kungalgame-font-color-3);
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
-  border-radius: 7px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-  color: var(--kungalgame-font-color-3);
+  border-radius: 10px;
   box-shadow: var(--kungalgame-shadow-0);
+  padding: 10px;
 }
 
 .content {
