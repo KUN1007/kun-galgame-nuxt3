@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
     kunError(event, 10609)
     return
   }
+  const userInfo = await getCookieTokenInfo(event)
 
   const session = await mongoose.startSession()
   session.startTransaction()
@@ -54,8 +55,14 @@ export default defineEventHandler(async (event) => {
       views: galgame.views,
       platform: galgame.platform,
       contributor,
-      likes: galgame.likes.length,
-      favorites: galgame.favorites.length,
+      likes: {
+        count: galgame.likes.length,
+        isLiked: galgame.likes.includes(userInfo?.uid || 0)
+      },
+      favorites: {
+        count: galgame.favorites.length,
+        isFavorite: galgame.favorites.includes(userInfo?.uid || 0)
+      },
       alias: galgame.alias,
       official: galgame.official
     }

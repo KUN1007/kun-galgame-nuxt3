@@ -19,7 +19,7 @@ watch(
   }
 )
 
-const likeComment = async () => {
+const likeResource = async () => {
   if (isLiked.value) {
     useMessage(`You've already liked it`, '您已经点过赞了', 'warn')
     return
@@ -47,7 +47,7 @@ const handleClickLike = async () => {
     useMessage('You need to login to like', '您需要登录以点赞', 'warn', 5000)
     return
   }
-  await likeComment()
+  await likeResource()
 }
 </script>
 

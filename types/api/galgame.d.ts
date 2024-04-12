@@ -22,8 +22,14 @@ export interface GalgameDetail {
   views: number
   platform: string[]
   contributor: GalgameContributor[]
-  likes: number
-  favorites: number
+  likes: {
+    count: number
+    isLiked: boolean
+  }
+  favorites: {
+    count: number
+    isFavorite: boolean
+  }
   alias: string[]
   official: string
 }

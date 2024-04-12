@@ -22,6 +22,15 @@ defineProps<{
 
     <GalgameContributor />
 
+    <div>
+      <GalgameLike
+        :gid="galgame.gid"
+        :to-uid="galgame.user.uid"
+        :likes-count="galgame.likes.count"
+        :is-liked="galgame.likes.isLiked"
+      />
+    </div>
+
     <KunDivider />
 
     <h2>评论</h2>

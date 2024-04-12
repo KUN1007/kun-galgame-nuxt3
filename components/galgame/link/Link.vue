@@ -86,7 +86,14 @@ const handleDeleteLink = async (gid: number, glid: number) => {
 
     <div class="links" v-if="data">
       <span class="link" v-for="(link, index) in data" :key="index">
-        <KunCopy :text="link.link" :name="link.name" />
+        <KunCopy
+          :text="link.link"
+          :name="link.name"
+          v-tooltip="{
+            message: `${link.link.slice(0, 30)}...`,
+            position: 'bottom'
+          }"
+        />
         <a :href="link.link" target="_blank" rel="noopener noreferrer">
           <Icon name="lucide:external-link" />
         </a>
