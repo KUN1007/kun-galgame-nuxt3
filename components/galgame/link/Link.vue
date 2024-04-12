@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import { checkGalgameLinkPublish } from '../utils/checkGalgameLinkPublish'
 
+const { uid } = usePersistUserStore()
 const route = useRoute()
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
 
 const isShowEdit = ref(false)
+const isFetching = ref(false)
 const linkModel = reactive({
   name: '',
   link: ''
 })
 
-const { data } = await useFetch(`/api/galgame/${gid.value}/link/all`, {
+const { data, refresh } = await useFetch(`/api/galgame/${gid.value}/link/all`, {
   method: 'GET',
   watch: false,
   ...kungalgameResponseHandler
@@ -23,17 +25,41 @@ const handlePublishLink = async () => {
     return
   }
 
+  isFetching.value = true
   const { data } = await useFetch(`/api/galgame/${gid.value}/link`, {
     method: 'POST',
     body: linkModel,
     watch: false,
     ...kungalgameResponseHandler
   })
+  isFetching.value = false
 
   if (data.value) {
     linkModel.name = ''
     linkModel.link = ''
-    console.log(data.value)
+    refresh()
+  }
+}
+
+const handleDeleteLink = async (gid: number, glid: number) => {
+  const res = await useTempMessageStore().alert({
+    'en-us': 'Are you sure you want to delete this visualnovel-related link?',
+    'ja-jp': '',
+    'zh-cn': '您确定删除该 Galgame 相关链接吗？'
+  })
+  if (!res) {
+    return
+  }
+
+  const { data } = await useFetch(`/api/galgame/${gid}/link`, {
+    method: 'DELETE',
+    query: { glid },
+    watch: false,
+    ...kungalgameResponseHandler
+  })
+
+  if (data.value) {
+    refresh()
   }
 }
 </script>
@@ -53,7 +79,9 @@ const handlePublishLink = async () => {
     <div class="link-edit" v-if="isShowEdit">
       <KunInput placeholder="链接名" v-model="linkModel.name" />
       <KunInput placeholder="链接地址" v-model="linkModel.link" />
-      <KunButton @click="handlePublishLink">确定发布</KunButton>
+      <KunButton @click="handlePublishLink" :pending="isFetching">
+        确定发布
+      </KunButton>
     </div>
 
     <div class="links" v-if="data">
@@ -62,6 +90,14 @@ const handlePublishLink = async () => {
         <a :href="link.link" target="_blank" rel="noopener noreferrer">
           <Icon name="lucide:external-link" />
         </a>
+        <span
+          v-if="uid === link.uid"
+          class="delete"
+          @click="handleDeleteLink(link.gid, link.glid)"
+          :pending="isFetching"
+        >
+          <Icon name="lucide:trash-2" />
+        </span>
       </span>
     </div>
 
@@ -112,6 +148,12 @@ const handlePublishLink = async () => {
       &:hover {
         color: var(--kungalgame-blue-5);
       }
+    }
+
+    .delete {
+      font-size: 20px;
+      color: var(--kungalgame-red-5);
+      margin-left: 10px;
     }
   }
 }

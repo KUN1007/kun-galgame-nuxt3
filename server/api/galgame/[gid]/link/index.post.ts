@@ -3,7 +3,6 @@ import GalgameModel from '~/server/models/galgame'
 import GalgameLinkModel from '~/server/models/galgame-link'
 import { checkGalgameLinkPublish } from '../../utils/checkGalgameLinkPublish'
 import type { H3Event } from 'h3'
-import type { GalgameLink } from '~/types/api/galgame-link'
 
 const getLinkData = async (event: H3Event) => {
   const { name, link }: { name: string; link: string } = await readBody(event)
@@ -42,7 +41,7 @@ export default defineEventHandler(async (event) => {
   const session = await mongoose.startSession()
   session.startTransaction()
   try {
-    const newGalgameLink = await GalgameLinkModel.create({ ...result })
+    await GalgameLinkModel.create({ ...result })
 
     await GalgameModel.updateOne(
       { gid: result.gid },
@@ -51,18 +50,16 @@ export default defineEventHandler(async (event) => {
 
     await session.commitTransaction()
 
-    const link: GalgameLink = { ...newGalgameLink }
-
     await createGalgameHistory({
       gid: parseInt(result.gid),
       uid: result.uid,
       time: Date.now(),
       action: 'created',
       type: 'link',
-      content: link.name
+      content: result.name
     })
 
-    return link
+    return 'MOEMOE create visualnovel-related link successfully!'
   } catch (error) {
     await session.abortTransaction()
   } finally {

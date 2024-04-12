@@ -137,7 +137,6 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
         </span>
         <span
           class="delete"
-          type="danger"
           @click="handleDeleteResource(details.gid, details.grid)"
           :pending="isFetching"
         >
