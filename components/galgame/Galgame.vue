@@ -20,7 +20,7 @@ defineProps<{
 
     <GalgameHistory />
 
-    <h2>贡献者</h2>
+    <GalgameContributor />
 
     <KunDivider />
 

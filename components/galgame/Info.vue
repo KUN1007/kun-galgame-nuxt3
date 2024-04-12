@@ -10,9 +10,9 @@ defineProps<{
   <h2>游戏信息</h2>
   <div class="name">
     <h3>游戏名</h3>
-    <KunCopy :text="galgame.name['en-us']" />
-    <KunCopy :text="galgame.name['ja-jp']" />
-    <KunCopy :text="galgame.name['zh-cn']" />
+    <KunCopy v-if="galgame.name['en-us']" :text="galgame.name['en-us']" />
+    <KunCopy v-if="galgame.name['ja-jp']" :text="galgame.name['ja-jp']" />
+    <KunCopy v-if="galgame.name['zh-cn']" :text="galgame.name['zh-cn']" />
   </div>
 
   <div class="alias">
