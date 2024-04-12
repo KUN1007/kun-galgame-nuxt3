@@ -2,38 +2,38 @@
 const props = defineProps<{
   gid: number
   toUid: number
-  likesCount: number
-  isLiked: boolean
+  favoritesCount: number
+  isFavorite: boolean
 }>()
 
 const { uid, moemoeAccessToken } = usePersistUserStore()
-const isLiked = ref(props.isLiked)
-const likesCount = ref(props.likesCount)
+const isFavorite = ref(props.isFavorite)
+const favoritesCount = ref(props.favoritesCount)
 
-const toggleLikeGalgame = async () => {
-  const { data } = await useFetch(`/api/galgame/${props.gid}/like`, {
+const toggleFavoriteGalgame = async () => {
+  const { data } = await useFetch(`/api/galgame/${props.gid}/favorite`, {
     method: 'PUT',
     watch: false,
     ...kungalgameResponseHandler
   })
 
   if (data.value) {
-    likesCount.value += isLiked.value ? -1 : 1
+    favoritesCount.value += isFavorite.value ? -1 : 1
 
-    if (!isLiked.value) {
-      useMessage('Like successfully!', '点赞成功！', 'success')
+    if (!isFavorite.value) {
+      useMessage('Favorite successfully!', '收藏成功！', 'success')
 
       const socket = useSocket()
       socket.emit('like', props.toUid)
     } else {
-      useMessage('Unlike successfully!', '取消点赞成功！', 'success')
+      useMessage('CancelUn favorite successfully!', '取消收藏成功！', 'success')
     }
 
-    isLiked.value = !isLiked.value
+    isFavorite.value = !isFavorite.value
   }
 }
 
-const handleClickLikeThrottled = throttle(toggleLikeGalgame, 1007, () =>
+const handleClickFavoriteThrottled = throttle(toggleFavoriteGalgame, 1007, () =>
   useMessage(
     'You can only perform one operation within 1007 milliseconds',
     '您在 1007 毫秒内只能进行一次操作',
@@ -41,7 +41,7 @@ const handleClickLikeThrottled = throttle(toggleLikeGalgame, 1007, () =>
   )
 )
 
-const handleClickLike = () => {
+const handleClickFavorite = () => {
   if (!moemoeAccessToken) {
     useMessage('You need to login to like', '您需要登录以点赞', 'warn', 5000)
     return
@@ -50,19 +50,23 @@ const handleClickLike = () => {
     useMessage('You cannot like yourself', '您不可以给自己点赞', 'warn')
     return
   }
-  handleClickLikeThrottled()
+  handleClickFavoriteThrottled()
 }
 </script>
 
 <template>
-  <span class="like" :class="isLiked ? 'active' : ''" @click="handleClickLike">
-    <Icon name="lucide:thumbs-up" />
-    <span v-if="likesCount">{{ likesCount }}</span>
+  <span
+    class="favorite"
+    :class="isFavorite ? 'active' : ''"
+    @click="handleClickFavorite"
+  >
+    <Icon class="icon" name="lucide:heart" />
+    <span v-if="favoritesCount">{{ favoritesCount }}</span>
   </span>
 </template>
 
 <style lang="scss" scoped>
-.like {
+.favorite {
   color: var(--kungalgame-font-color-2);
   cursor: pointer;
 

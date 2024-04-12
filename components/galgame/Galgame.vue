@@ -20,15 +20,24 @@ defineProps<{
 
     <GalgameHistory />
 
-    <GalgameContributor />
+    <GalgameContributor :views="galgame.views" />
 
-    <div>
+    <div class="footer">
       <GalgameLike
         :gid="galgame.gid"
         :to-uid="galgame.user.uid"
         :likes-count="galgame.likes.count"
         :is-liked="galgame.likes.isLiked"
       />
+
+      <GalgameFavorite
+        :gid="galgame.gid"
+        :to-uid="galgame.user.uid"
+        :favorites-count="galgame.favorites.count"
+        :is-favorite="galgame.favorites.isFavorite"
+      />
+
+      <GalgameRewrite />
     </div>
 
     <KunDivider />
@@ -38,4 +47,13 @@ defineProps<{
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.footer {
+  display: flex;
+  justify-content: flex-end;
+
+  span {
+    margin-right: 17px;
+  }
+}
+</style>

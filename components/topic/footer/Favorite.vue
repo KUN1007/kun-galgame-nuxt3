@@ -70,7 +70,7 @@ const handleClickFavoriteThrottled = throttle(
   throttleCallback
 )
 
-const handleClickLike = () => {
+const handleClickFavorite = () => {
   if (!moemoeAccessToken) {
     useMessage(
       'You need to login to favorite',
@@ -87,9 +87,9 @@ const handleClickLike = () => {
 <template>
   <li>
     <span
-      class="like"
+      class="favorite"
       :class="isFavorite ? 'active' : ''"
-      @click="handleClickLike"
+      @click="handleClickFavorite"
     >
       <Icon class="icon" name="lucide:heart" />
     </span>
@@ -112,7 +112,7 @@ li {
   }
 }
 
-.like {
+.favorite {
   font-size: 24px;
   color: var(--kungalgame-font-color-2);
   cursor: pointer;

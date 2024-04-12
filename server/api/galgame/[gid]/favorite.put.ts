@@ -2,7 +2,7 @@ import UserModel from '~/server/models/user'
 import GalgameModel from '~/server/models/galgame'
 import mongoose from 'mongoose'
 
-const updateGalgameLike = async (gid: number, uid: number) => {
+const updateGalgameFavorite = async (gid: number, uid: number) => {
   const galgame = await GalgameModel.findOne({ gid }).lean()
   if (!galgame) {
     return 10211
@@ -12,8 +12,8 @@ const updateGalgameLike = async (gid: number, uid: number) => {
     return
   }
 
-  const isLikedGalgame = galgame.likes.includes(uid)
-  const moemoepointAmount = isLikedGalgame ? -1 : 1
+  const isFavoriteGalgame = galgame.favorites.includes(uid)
+  const moemoepointAmount = isFavoriteGalgame ? -1 : 1
 
   const session = await mongoose.startSession()
   session.startTransaction()
@@ -21,24 +21,24 @@ const updateGalgameLike = async (gid: number, uid: number) => {
   try {
     await GalgameModel.updateOne(
       { gid },
-      { [isLikedGalgame ? '$pull' : '$addToSet']: { likes: uid } }
+      { [isFavoriteGalgame ? '$pull' : '$addToSet']: { favorites: uid } }
     )
 
     await UserModel.updateOne(
       { uid },
-      { [isLikedGalgame ? '$pull' : '$addToSet']: { like_galgame: gid } }
+      { [isFavoriteGalgame ? '$pull' : '$addToSet']: { favorite_galgame: gid } }
     )
 
     await UserModel.updateOne(
       { uid: galgame.uid },
-      { $inc: { moemoepoint: moemoepointAmount, like: moemoepointAmount } }
+      { $inc: { moemoepoint: moemoepointAmount } }
     )
 
-    if (!isLikedGalgame) {
+    if (!isFavoriteGalgame) {
       await createDedupMessage(
         uid,
         galgame.uid,
-        'liked',
+        'favorite',
         findNonNullProperty(galgame.name),
         -gid
       )
@@ -66,11 +66,10 @@ export default defineEventHandler(async (event) => {
   }
   const uid = userInfo.uid
 
-  const result = await updateGalgameLike(parseInt(gid), uid)
+  const result = await updateGalgameFavorite(parseInt(gid), uid)
   if (typeof result === 'number') {
-    kunError(event, result)
-    return
+    return kunError(event, result)
   }
 
-  return 'MOEMOE like galgame operation successfully!'
+  return 'MOEMOE favorite galgame operation successfully!'
 })

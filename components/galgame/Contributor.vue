@@ -1,4 +1,8 @@
 <script setup lang="ts">
+defineProps<{
+  views: number
+}>()
+
 const route = useRoute()
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
@@ -24,6 +28,18 @@ const { data } = await useFetch(`/api/galgame/${gid.value}/contributor`, {
         position: 'bottom'
       }"
     />
+
+    <span
+      v-if="views > 0"
+      class="views"
+      v-tooltip="{
+        message: { en: 'Views', zh: '浏览数' },
+        position: 'bottom'
+      }"
+    >
+      <span><Icon name="lucide:mouse-pointer-click" /></span>
+      <span>{{ views }}</span>
+    </span>
   </div>
 </template>
 
@@ -34,5 +50,23 @@ h2 {
 
 .contributor {
   display: flex;
+  margin-bottom: 17px;
+}
+
+.views {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+  user-select: none;
+
+  span {
+    display: flex;
+    margin-right: 3px;
+  }
+
+  &:nth-child(1) span {
+    color: var(--kungalgame-red-4);
+  }
 }
 </style>

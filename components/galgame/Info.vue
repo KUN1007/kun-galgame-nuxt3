@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { platformIconMap } from './utils/iconMap'
 import type { GalgameDetail } from '~/types/api/galgame'
 
 defineProps<{
@@ -33,6 +34,20 @@ defineProps<{
       {{ galgame.official }}
     </a>
   </div>
+
+  <div class="platform">
+    <h3>平台</h3>
+    <span
+      v-for="(platform, index) in galgame.platform"
+      :key="index"
+      v-tooltip="{
+        message: $t(`edit.galgame.platform.${platform}`),
+        position: 'bottom'
+      }"
+    >
+      <Icon :name="platformIconMap[platform]" />
+    </span>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -58,5 +73,22 @@ h3 {
 
 .official {
   margin-bottom: 17px;
+}
+
+.platform {
+  display: flex;
+  margin-bottom: 17px;
+
+  h3 {
+    margin-right: 17px;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: var(--kungalgame-font-color-2);
+    margin-right: 10px;
+  }
 }
 </style>
