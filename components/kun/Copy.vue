@@ -1,12 +1,12 @@
 <script setup lang="ts">
-defineProps<{
-  text: string
-}>()
+withDefaults(defineProps<{ text: string; name?: string }>(), {
+  name: ''
+})
 </script>
 
 <template>
   <span class="kun-copy" @click="useKunCopy(text)">
-    <span>{{ text }}</span>
+    <span>{{ name ? name : text }}</span>
     <Icon name="lucide:copy" />
   </span>
 </template>

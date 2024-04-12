@@ -12,6 +12,12 @@ const linkModel = reactive({
   link: ''
 })
 
+const { data } = await useFetch(`/api/galgame/${gid.value}/link/all`, {
+  method: 'GET',
+  watch: false,
+  ...kungalgameResponseHandler
+})
+
 const handlePublishLink = async () => {
   if (!checkGalgameLinkPublish(linkModel.name, linkModel.link)) {
     return
@@ -33,7 +39,7 @@ const handlePublishLink = async () => {
 </script>
 
 <template>
-  <div class="links">
+  <div class="container">
     <KunHeader :size="2">
       <template #header>
         <span>相关链接</span>
@@ -44,19 +50,27 @@ const handlePublishLink = async () => {
       </template>
     </KunHeader>
 
-    <!-- <div v-if="isShowEdit"> -->
-    <div>
+    <div class="link-edit" v-if="isShowEdit">
       <KunInput placeholder="链接名" v-model="linkModel.name" />
       <KunInput placeholder="链接地址" v-model="linkModel.link" />
       <KunButton @click="handlePublishLink">确定发布</KunButton>
     </div>
 
-    <!-- <GalgameNull class="null" v-if="!resourceData?.length" /> -->
+    <div class="links" v-if="data">
+      <span class="link" v-for="(link, index) in data" :key="index">
+        <KunCopy :text="link.link" :name="link.name" />
+        <a :href="link.link" target="_blank" rel="noopener noreferrer">
+          <Icon name="lucide:external-link" />
+        </a>
+      </span>
+    </div>
+
+    <GalgameNull class="null" v-if="!data?.length" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.links {
+.container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -72,5 +86,33 @@ const handlePublishLink = async () => {
 
 .null {
   margin-bottom: 17px;
+}
+
+.link-edit {
+  margin-bottom: 17px;
+
+  input {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.links {
+  .link {
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-right: 17px;
+    display: inline-block;
+
+    & > a {
+      margin-left: 10px;
+      font-size: 20px;
+      color: var(--kungalgame-font-color-0);
+
+      &:hover {
+        color: var(--kungalgame-blue-5);
+      }
+    }
+  }
 }
 </style>

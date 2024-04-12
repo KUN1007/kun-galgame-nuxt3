@@ -51,10 +51,16 @@ export default defineEventHandler(async (event) => {
 
     await session.commitTransaction()
 
-    const link: GalgameLink = {
-      ...newGalgameLink,
-      time: newGalgameLink.created
-    }
+    const link: GalgameLink = { ...newGalgameLink }
+
+    await createGalgameHistory({
+      gid: parseInt(result.gid),
+      uid: result.uid,
+      time: Date.now(),
+      action: 'created',
+      type: 'link',
+      content: link.name
+    })
 
     return link
   } catch (error) {

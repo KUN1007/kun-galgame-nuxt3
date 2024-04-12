@@ -13,6 +13,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const data = await GalgameHistoryModel.find({ gid })
+    .sort({ time: -1 })
     .populate('user', 'uid avatar name')
     .lean()
 

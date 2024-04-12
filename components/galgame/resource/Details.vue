@@ -132,14 +132,17 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
       </div>
 
       <div class="user-btn" v-if="details.user.uid === uid">
-        <KunButton @click="handleRewriteResource(details)">编辑</KunButton>
-        <KunButton
+        <span class="rewrite" @click="handleRewriteResource(details)">
+          <Icon name="lucide:pencil" />
+        </span>
+        <span
+          class="delete"
           type="danger"
           @click="handleDeleteResource(details.gid, details.grid)"
           :pending="isFetching"
         >
-          删除
-        </KunButton>
+          <Icon name="lucide:trash-2" />
+        </span>
       </div>
 
       <div class="other-btn" v-if="uid !== details.user.uid && !details.status">
@@ -213,8 +216,18 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
   }
 
   .user-btn {
-    button:first-child {
-      margin-right: 7px;
+    font-size: 17px;
+
+    span {
+      cursor: pointer;
+
+      &:first-child {
+        margin-right: 17px;
+      }
+
+      &:last-child {
+        color: var(--kungalgame-red-5);
+      }
     }
   }
 }

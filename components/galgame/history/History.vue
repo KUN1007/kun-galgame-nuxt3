@@ -53,6 +53,7 @@ h2 {
 .history {
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 
   .info {
     span {
