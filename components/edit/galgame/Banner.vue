@@ -1,10 +1,20 @@
 <script setup lang="ts">
+const props = defineProps<{
+  type: 'publish' | 'rewrite'
+}>()
+
 const initialImageUrl = ref('')
 
+const { rewriteDraft } = storeToRefs(useTempGalgameRewriteStore())
+
 onMounted(async () => {
-  const imageBlob = await getImage('kun-galgame-publish-banner')
-  if (imageBlob) {
-    initialImageUrl.value = URL.createObjectURL(imageBlob)
+  if (props.type === 'publish') {
+    const imageBlob = await getImage('kun-galgame-publish-banner')
+    if (imageBlob) {
+      initialImageUrl.value = URL.createObjectURL(imageBlob)
+    }
+  } else {
+    initialImageUrl.value = rewriteDraft.value[0].banner
   }
 })
 </script>
@@ -21,7 +31,7 @@ onMounted(async () => {
     width="300px"
     :size="1920"
     :aspect="16 / 9"
-    @set-image="(img) => saveImage(img, 'kun-galgame-publish-banner')"
+    @set-image="(img) => saveImage(img, `kun-galgame-${type}-banner`)"
   />
 </template>
 

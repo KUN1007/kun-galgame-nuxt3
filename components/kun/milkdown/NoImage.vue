@@ -48,7 +48,7 @@ import markdown from 'refractor/lang/markdown'
 const props = defineProps<{
   valueMarkdown: string
   language: Language
-  pending: boolean
+  pending?: boolean
 }>()
 
 const emits = defineEmits<{

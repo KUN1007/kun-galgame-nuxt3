@@ -3,7 +3,8 @@ import { languageItems } from '../utils/options'
 
 defineProps<{
   introductionLanguage: Language
-  isSuccess: boolean
+  type: 'publish' | 'rewrite'
+  isSuccess?: boolean
 }>()
 
 const emits = defineEmits<{
@@ -24,7 +25,11 @@ const emits = defineEmits<{
     :default-value="introductionLanguage"
     @set="(value) => emits('set', value as Language)"
   />
-  <EditGalgameEditor :lang="introductionLanguage" :pending="isSuccess" />
+  <EditGalgameEditor
+    :lang="introductionLanguage"
+    :type="type"
+    :pending="isSuccess"
+  />
 </template>
 
 <style lang="scss" scoped>

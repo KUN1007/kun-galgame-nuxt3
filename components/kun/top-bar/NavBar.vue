@@ -31,7 +31,7 @@
             </span>
           </NuxtLinkLocale>
 
-          <NuxtLinkLocale class="item" to="/edit/galgame">
+          <NuxtLinkLocale class="item" to="/edit/galgame?type=publish">
             <span>
               <span>{{ $t('header.publish.galgame') }}</span>
             </span>

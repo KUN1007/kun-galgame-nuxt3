@@ -22,19 +22,6 @@ const updateTopicFavorite = async (
   const moemoepointAmount = isPush ? 1 : -1
   const popularity = isPush ? 2 : -2
 
-  if (uid === to_uid) {
-    await TopicModel.findOneAndUpdate(
-      { tid },
-      { [isPush ? '$push' : '$pull']: { favorites: uid } }
-    )
-
-    await UserModel.updateOne(
-      { uid },
-      { [isPush ? '$push' : '$pull']: { favorite_topic: tid } }
-    )
-    return
-  }
-
   const session = await mongoose.startSession()
   session.startTransaction()
 
@@ -52,19 +39,21 @@ const updateTopicFavorite = async (
       { [isPush ? '$push' : '$pull']: { favorite_topic: tid } }
     )
 
-    await UserModel.updateOne(
-      { uid: to_uid },
-      { $inc: { moemoepoint: moemoepointAmount } }
-    )
-
-    if (isPush) {
-      await createDedupMessage(
-        uid,
-        to_uid,
-        'favorite',
-        topic?.content.slice(0, 233) ?? '',
-        tid
+    if (uid !== to_uid) {
+      await UserModel.updateOne(
+        { uid: to_uid },
+        { $inc: { moemoepoint: moemoepointAmount } }
       )
+
+      if (isPush) {
+        await createDedupMessage(
+          uid,
+          to_uid,
+          'favorite',
+          topic?.content.slice(0, 233) ?? '',
+          tid
+        )
+      }
     }
 
     await session.commitTransaction()

@@ -119,11 +119,12 @@ const handleGetVNData = async () => {
 
     <EditGalgameIntroduction
       :introduction-language="introductionLanguage"
+      type="publish"
       :is-success="isSuccess"
       @set="(value) => (introductionLanguage = value as Language)"
     />
 
-    <EditGalgameBanner />
+    <EditGalgameBanner type="publish" />
 
     <EditGalgameFooter />
   </div>
@@ -171,4 +172,3 @@ const handleGetVNData = async () => {
   }
 }
 </style>
-../utils/VNDB

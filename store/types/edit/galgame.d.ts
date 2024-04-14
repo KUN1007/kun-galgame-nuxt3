@@ -6,3 +6,10 @@ export interface GalgameStorePersist {
   introduction: KunLanguage
   aliases: string[]
 }
+
+export interface GalgameStoreTemp {
+  gid: number
+  name: KunLanguage
+  introduction: KunLanguage
+  banner: string
+}

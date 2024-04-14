@@ -4,6 +4,15 @@ import type { GalgameDetail } from '~/types/api/galgame'
 defineProps<{
   galgame: GalgameDetail
 }>()
+
+const localePath = useLocalePath()
+
+const { rewriteDraft } = storeToRefs(useTempGalgameRewriteStore())
+
+const handleRewriteGalgame = (galgame: GalgameDetail) => {
+  rewriteDraft.value.push({ ...galgame })
+  navigateTo(localePath(`/edit/galgame?type=rewrite&gid=${galgame.gid}`))
+}
 </script>
 
 <template>
@@ -37,7 +46,9 @@ defineProps<{
         :is-favorite="galgame.favorites.isFavorite"
       />
 
-      <GalgameRewrite />
+      <span class="rewrite" @click="handleRewriteGalgame(galgame)">
+        <Icon name="lucide:pencil" />
+      </span>
     </div>
 
     <KunDivider />
@@ -54,6 +65,15 @@ defineProps<{
 
   span {
     margin-right: 17px;
+  }
+}
+
+.rewrite {
+  color: var(--kungalgame-font-color-2);
+  cursor: pointer;
+
+  .icon {
+    font-size: 24px;
   }
 }
 </style>

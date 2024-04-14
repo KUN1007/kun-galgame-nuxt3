@@ -2,11 +2,14 @@
 definePageMeta({
   middleware: 'auth'
 })
+
+const type = computed(() => useRequestURL().searchParams.get('type'))
 </script>
 
 <template>
   <div class="root">
-    <EditGalgameVNDB />
+    <EditGalgame v-if="type === 'publish'" />
+    <EditGalgameRewrite v-if="type === 'rewrite'" />
   </div>
 </template>
 

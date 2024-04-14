@@ -74,4 +74,3 @@ defineProps<{
   }
 }
 </style>
-../utils/VNDB

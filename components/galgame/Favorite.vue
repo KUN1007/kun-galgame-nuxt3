@@ -6,7 +6,7 @@ const props = defineProps<{
   isFavorite: boolean
 }>()
 
-const { uid, moemoeAccessToken } = usePersistUserStore()
+const { moemoeAccessToken } = usePersistUserStore()
 const isFavorite = ref(props.isFavorite)
 const favoritesCount = ref(props.favoritesCount)
 
@@ -43,11 +43,12 @@ const handleClickFavoriteThrottled = throttle(toggleFavoriteGalgame, 1007, () =>
 
 const handleClickFavorite = () => {
   if (!moemoeAccessToken) {
-    useMessage('You need to login to like', '您需要登录以点赞', 'warn', 5000)
-    return
-  }
-  if (uid === props.toUid) {
-    useMessage('You cannot like yourself', '您不可以给自己点赞', 'warn')
+    useMessage(
+      'You need to login to favorite',
+      '您需要登录以收藏',
+      'warn',
+      5000
+    )
     return
   }
   handleClickFavoriteThrottled()

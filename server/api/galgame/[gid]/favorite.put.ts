@@ -8,10 +8,6 @@ const updateGalgameFavorite = async (gid: number, uid: number) => {
     return 10211
   }
 
-  if (uid === galgame.uid) {
-    return
-  }
-
   const isFavoriteGalgame = galgame.favorites.includes(uid)
   const moemoepointAmount = isFavoriteGalgame ? -1 : 1
 
@@ -29,19 +25,21 @@ const updateGalgameFavorite = async (gid: number, uid: number) => {
       { [isFavoriteGalgame ? '$pull' : '$addToSet']: { favorite_galgame: gid } }
     )
 
-    await UserModel.updateOne(
-      { uid: galgame.uid },
-      { $inc: { moemoepoint: moemoepointAmount } }
-    )
-
-    if (!isFavoriteGalgame) {
-      await createDedupMessage(
-        uid,
-        galgame.uid,
-        'favorite',
-        findNonNullProperty(galgame.name),
-        -gid
+    if (uid !== galgame.uid) {
+      await UserModel.updateOne(
+        { uid: galgame.uid },
+        { $inc: { moemoepoint: moemoepointAmount } }
       )
+
+      if (!isFavoriteGalgame) {
+        await createDedupMessage(
+          uid,
+          galgame.uid,
+          'favorite',
+          findNonNullProperty(galgame.name),
+          -gid
+        )
+      }
     }
 
     await session.commitTransaction()
