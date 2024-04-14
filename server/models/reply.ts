@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 import increasingSequence from '../utils/increasingSequence'
-
-import { ReplyAttributes } from './types/reply'
+import type { ReplyAttributes } from './types/reply'
 
 const ReplySchema = new mongoose.Schema<ReplyAttributes>(
   {

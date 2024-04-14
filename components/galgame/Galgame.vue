@@ -7,11 +7,11 @@ defineProps<{
 
 const localePath = useLocalePath()
 
-const { rewriteDraft } = storeToRefs(useTempGalgameRewriteStore())
+const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 
 const handleRewriteGalgame = (galgame: GalgameDetail) => {
-  rewriteDraft.value.push({ ...galgame })
-  navigateTo(localePath(`/edit/galgame?type=rewrite&gid=${galgame.gid}`))
+  galgamePR.value.push({ ...galgame })
+  navigateTo(localePath(`/edit/galgame?type=pr&gid=${galgame.gid}`))
 }
 </script>
 

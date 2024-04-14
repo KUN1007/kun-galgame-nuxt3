@@ -124,7 +124,7 @@ const handleGetVNData = async () => {
       @set="(value) => (introductionLanguage = value as Language)"
     />
 
-    <EditGalgameBanner type="publish" />
+    <EditGalgameBanner />
 
     <EditGalgameFooter />
   </div>

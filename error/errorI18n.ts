@@ -70,7 +70,7 @@ const errorMessagesEN: Record<number, string> = {
   // Galgame Part
   10601: `VNDB ID cannot be empty (-B)`,
   10602: `Please enter the correct format of VNDB ID (-B)`,
-  10603: `Please enter at least one title, and ensure that the length of the title is not greater than 107 characters. (-B)`,
+  10603: `Please enter at least one title, and ensure that the length of the title is not greater than 233 characters. (-B)`,
   10605: `Banner image upload error. The final compressed size of the banner exceeds 1.007MB. (-B)`,
   10606: `Please enter at least one introduction, and ensure that the length of the introduction is not more than 100,007 characters. (-B)`,
   10607: `Your daily galgame limit has been reached for today. (-B)`,
@@ -95,6 +95,7 @@ const errorMessagesEN: Record<number, string> = {
   10626: `The maximum length of the link name is 107 characters (-B)`,
   10627: `The maximum length of the link is 233 characters (-B)`,
   10628: `Visualnovel-related link not found (-B)`,
+  10629: `The maximum length of the official link is 233 (-B)`,
 
   // Report Part
   10701: `Invalid Report type. (-B)`,
@@ -166,7 +167,7 @@ const errorMessagesCN: Record<number, string> = {
 
   10601: `VNDB ID 不可为空 (-B)`,
   10602: `请输入正确格式的 VNDB ID (-B)`,
-  10603: `请输入至少一个标题, 并保证标题长度不多于 107 个字符 (-B)`,
+  10603: `请输入至少一个标题, 并保证标题长度不多于 233 个字符 (-B)`,
   10605: `预览图上传错误. 图片最终压缩大小超过 1.007MB  (-B)`,
   10606: `请输入至少一个介绍, 并保证介绍长度不多于 100,007 个字符 (-B)`,
   10607: `您今日可以发表的 Galgame 数已达上限 (-B)`,
@@ -191,6 +192,7 @@ const errorMessagesCN: Record<number, string> = {
   10626: `链接名最大长度为 107 个字符 (-B)`,
   10627: `链接最大长度为 233 个字符 (-B)`,
   10628: `未找到 Galgame 相关链接 (-B)`,
+  10629: `官网链接最大长度为 233 (-B)`,
 
   10701: `不合法的举报类型. (-B)`,
   10702: `举报理由不能空. (-B)`,

@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
 import increasingSequence from '../utils/increasingSequence'
-
 import type { TopicAttributes } from './types/topic'
 
 const TopicSchema = new mongoose.Schema<TopicAttributes>(

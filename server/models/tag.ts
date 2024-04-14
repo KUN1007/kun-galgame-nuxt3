@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 import increasingSequence from '../utils/increasingSequence'
-
-import { TagAttributes } from './types/tag'
+import type { TagAttributes } from './types/tag'
 
 const TagSchema = new mongoose.Schema<TagAttributes>(
   {

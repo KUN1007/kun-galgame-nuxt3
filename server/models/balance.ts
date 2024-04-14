@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 import increasingSequence from '../utils/increasingSequence'
-
-import { Balance } from './types/balance'
+import type { Balance } from './types/balance'
 
 const BalanceSchema = new mongoose.Schema<Balance>(
   {

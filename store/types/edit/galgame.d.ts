@@ -11,5 +11,6 @@ export interface GalgameStoreTemp {
   gid: number
   name: KunLanguage
   introduction: KunLanguage
-  banner: string
+  alias: string[]
+  official: string
 }

@@ -16,7 +16,7 @@ export const checkGalgamePublish = (
     return 10602
   }
 
-  if (!isValidKunLanguage(name, 107)) {
+  if (!isValidKunLanguage(name, 233)) {
     return 10603
   }
 

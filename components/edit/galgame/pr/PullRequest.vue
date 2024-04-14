@@ -7,12 +7,14 @@ const gid = useRequestURL().searchParams.get('gid')
 const { locale } = useI18n()
 const introductionLanguage = ref(locale.value as Language)
 
-const { rewriteDraft } = storeToRefs(useTempGalgameRewriteStore())
+const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 </script>
 
 <template>
   <div class="container">
-    <EditGalgameRewriteTitle :name="rewriteDraft[0].name" />
+    <h2>Pull Request</h2>
+
+    <EditGalgamePrTitle :name="galgamePR[0].name" />
 
     <EditGalgameIntroduction
       :introduction-language="introductionLanguage"
@@ -20,9 +22,7 @@ const { rewriteDraft } = storeToRefs(useTempGalgameRewriteStore())
       @set="(value) => (introductionLanguage = value as Language)"
     />
 
-    <EditGalgameBanner type="rewrite" />
-
-    <EditGalgameFooter />
+    <EditGalgamePrFooter />
   </div>
 </template>
 

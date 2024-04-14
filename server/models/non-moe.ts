@@ -1,7 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 import increasingSequence from '../utils/increasingSequence'
-
-import { NonMoeAttributes } from './types/non-moe'
+import type { NonMoeAttributes } from './types/non-moe'
 
 const NonMoeSchema = new mongoose.Schema<NonMoeAttributes>(
   {

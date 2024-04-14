@@ -1,20 +1,10 @@
 <script setup lang="ts">
-const props = defineProps<{
-  type: 'publish' | 'rewrite'
-}>()
-
 const initialImageUrl = ref('')
 
-const { rewriteDraft } = storeToRefs(useTempGalgameRewriteStore())
-
 onMounted(async () => {
-  if (props.type === 'publish') {
-    const imageBlob = await getImage('kun-galgame-publish-banner')
-    if (imageBlob) {
-      initialImageUrl.value = URL.createObjectURL(imageBlob)
-    }
-  } else {
-    initialImageUrl.value = rewriteDraft.value[0].banner
+  const imageBlob = await getImage('kun-galgame-publish-banner')
+  if (imageBlob) {
+    initialImageUrl.value = URL.createObjectURL(imageBlob)
   }
 })
 </script>
@@ -31,8 +21,9 @@ onMounted(async () => {
     width="300px"
     :size="1920"
     :aspect="16 / 9"
-    @set-image="(img) => saveImage(img, `kun-galgame-${type}-banner`)"
+    @set-image="(img) => saveImage(img, `kun-galgame-publish-banner`)"
   />
+  <p>注意, 预览图不能有 R18 内容</p>
 </template>
 
 <style lang="scss" scoped>

@@ -9,13 +9,13 @@ const props = defineProps<{
 }>()
 
 const { introduction } = storeToRefs(usePersistEditGalgameStore())
-const { rewriteDraft } = storeToRefs(useTempGalgameRewriteStore())
+const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 
 const valueMarkdown = computed(() => {
   if (props.type === 'publish') {
     return introduction.value[props.lang]
   } else {
-    return rewriteDraft.value[0].introduction[props.lang]
+    return galgamePR.value[0].introduction[props.lang]
   }
 })
 
@@ -23,7 +23,7 @@ const saveMarkdown = debounce((editorMarkdown: string) => {
   if (props.type === 'publish') {
     introduction.value[props.lang] = editorMarkdown
   } else {
-    rewriteDraft.value[0].introduction[props.lang] = editorMarkdown
+    galgamePR.value[0].introduction[props.lang] = editorMarkdown
   }
 }, 107)
 </script>

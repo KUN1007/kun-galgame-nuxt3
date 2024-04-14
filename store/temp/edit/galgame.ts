@@ -1,13 +1,13 @@
 import type { GalgameStoreTemp } from '~/store/types/edit/galgame'
 
 interface Store {
-  rewriteDraft: GalgameStoreTemp[]
+  galgamePR: GalgameStoreTemp[]
 }
 
-export const useTempGalgameRewriteStore = defineStore({
-  id: 'tempGalgameRewrite',
+export const useTempGalgamePRStore = defineStore({
+  id: 'tempGalgamePR',
   persist: false,
   state: (): Store => ({
-    rewriteDraft: []
+    galgamePR: []
   })
 })

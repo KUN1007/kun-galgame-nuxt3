@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
 import increasingSequence from '../utils/increasingSequence'
-
 import type { TodoAttributes } from './types/todo'
 
 const TodoSchema = new mongoose.Schema<TodoAttributes>(

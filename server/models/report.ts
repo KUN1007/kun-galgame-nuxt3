@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
 import increasingSequence from '../utils/increasingSequence'
-
 import type { ReportAttributes } from './types/report'
 
 const ReportSchema = new mongoose.Schema<ReportAttributes>(

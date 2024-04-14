@@ -20,10 +20,10 @@ export const checkGalgamePublish = (
     return false
   }
 
-  if (!isValidKunLanguage(name, 107)) {
+  if (!isValidKunLanguage(name, 233)) {
     useMessage(
       'Please enter at least one title, and ensure that the length of the title is not more than 107 characters!',
-      '请输入至少一个标题, 并保证标题长度不多于 107 个字符!',
+      '请输入至少一个标题, 并保证标题长度不多于 233 个字符!',
       'warn'
     )
     return false

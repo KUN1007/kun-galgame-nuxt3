@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 import increasingSequence from '../utils/increasingSequence'
-
-import { UpdateLogAttributes } from './types/update-log'
+import type { UpdateLogAttributes } from './types/update-log'
 
 const UpdateLogSchema = new mongoose.Schema<UpdateLogAttributes>(
   {

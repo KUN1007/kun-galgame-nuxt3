@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 import increasingSequence from '../utils/increasingSequence'
-
-import { GalgameResource } from './types/galgame-resource'
+import type { GalgameResource } from './types/galgame-resource'
 
 const GalgameResourceSchema = new mongoose.Schema<GalgameResource>(
   {

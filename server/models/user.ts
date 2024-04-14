@@ -1,6 +1,5 @@
 import mongoose from 'mongoose'
 import increasingSequence from '../utils/increasingSequence'
-
 import type { UserAttributes } from './types/user'
 
 const UserSchema = new mongoose.Schema<UserAttributes>(

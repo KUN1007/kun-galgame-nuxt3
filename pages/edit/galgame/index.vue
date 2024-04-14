@@ -9,7 +9,7 @@ const type = computed(() => useRequestURL().searchParams.get('type'))
 <template>
   <div class="root">
     <EditGalgame v-if="type === 'publish'" />
-    <EditGalgameRewrite v-if="type === 'rewrite'" />
+    <EditGalgamePrPullRequest v-if="type === 'pr'" />
   </div>
 </template>
 

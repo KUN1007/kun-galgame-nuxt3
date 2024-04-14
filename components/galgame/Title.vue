@@ -23,6 +23,7 @@ h1 {
 .banner {
   width: 100%;
   display: flex;
+  margin-bottom: 17px;
 
   img {
     max-width: 100%;

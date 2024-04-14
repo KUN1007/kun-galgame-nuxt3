@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 import increasingSequence from '../utils/increasingSequence'
-
-import { CommentAttributes } from './types/comment'
+import type { CommentAttributes } from './types/comment'
 
 const CommentSchema = new mongoose.Schema<CommentAttributes>(
   {
