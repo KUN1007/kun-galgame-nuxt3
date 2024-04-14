@@ -37,7 +37,11 @@ export default defineEventHandler(async (event) => {
     action: history.action as GalgameHistoryAction,
     type: history.type as GalgameHistoryType,
     content: history.content,
-    user: { ...history.user[0] }
+    user: {
+      uid: history.user[0].uid,
+      name: history.user[0].name,
+      avatar: history.user[0].avatar
+    }
   }))
 
   return { historyData, totalCount }

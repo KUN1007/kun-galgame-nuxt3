@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import type { KunLanguage } from '~/types/i18n'
-
-const props = defineProps<{
-  name: KunLanguage
-}>()
-
-const title = ref(props.name)
+const { galgamePR } = storeToRefs(useTempGalgamePRStore())
+const title = computed(() => galgamePR.value[0].name)
 </script>
 
 <template>

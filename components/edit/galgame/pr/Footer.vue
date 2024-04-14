@@ -11,7 +11,7 @@ const handlePublishGalgamePR = async () => {
     return
   }
   const res = await useTempMessageStore().alert({
-    'en-us': 'Confirm to publish visualnovel info pull request?',
+    'en-us': 'Confirm to publish visualnovel info update request?',
     'ja-jp': '',
     'zh-cn': '确定发布 Galgame 信息更新请求吗?'
   })
@@ -34,10 +34,8 @@ const handlePublishGalgamePR = async () => {
   isPublishing.value = false
 
   if (data.value) {
-    galgamePR.value = []
-
     navigateTo(localePath(`/galgame/${galgamePR.value[0].gid}`))
-    useTempMessageStore().info('AlertInfo.edit.publishSuccess')
+    useTempMessageStore().info('AlertInfo.edit.prSuccess')
   }
 }
 </script>

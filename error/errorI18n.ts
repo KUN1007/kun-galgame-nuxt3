@@ -96,6 +96,7 @@ const errorMessagesEN: Record<number, string> = {
   10627: `The maximum length of the link is 233 characters (-B)`,
   10628: `Visualnovel-related link not found (-B)`,
   10629: `The maximum length of the official link is 233 (-B)`,
+  10630: `Invalid visualnovel GID (-B)`,
 
   // Report Part
   10701: `Invalid Report type. (-B)`,
@@ -193,6 +194,7 @@ const errorMessagesCN: Record<number, string> = {
   10627: `链接最大长度为 233 个字符 (-B)`,
   10628: `未找到 Galgame 相关链接 (-B)`,
   10629: `官网链接最大长度为 233 (-B)`,
+  10630: `非法的 Galgame GID (-B)`,
 
   10701: `不合法的举报类型. (-B)`,
   10702: `举报理由不能空. (-B)`,

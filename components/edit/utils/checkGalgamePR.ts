@@ -19,5 +19,34 @@ export const checkGalgamePR = (galgame: GalgameStoreTemp): boolean => {
     return false
   }
 
+  if (galgame.alias.length > 17) {
+    useMessage(
+      'The alias for visualnovel should be no more than 17 items!',
+      'Galgame 的别名最多 17 个!',
+      'warn'
+    )
+    return false
+  }
+
+  for (const alias of galgame.alias) {
+    if (alias.length > 107) {
+      useMessage(
+        'The alias for visualnovel should be no longer than 107 characters!',
+        'Galgame 的别名最长 107 字!',
+        'warn'
+      )
+      return false
+    }
+  }
+
+  if (galgame.official.trim().length > 233) {
+    useMessage(
+      'The maximum length of the official link is 233 characters!',
+      '官网链接最大长度为 233 字!',
+      'warn'
+    )
+    return false
+  }
+
   return true
 }

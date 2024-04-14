@@ -14,6 +14,10 @@ export const checkGalgamePR = (galgame: GalgameStoreTemp) => {
     return 10606
   }
 
+  if (galgame.alias.length > 17) {
+    return 10611
+  }
+
   for (const alias of galgame.alias) {
     if (alias.length > 107) {
       return 10612

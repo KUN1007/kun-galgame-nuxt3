@@ -3,7 +3,7 @@ definePageMeta({
   middleware: 'auth'
 })
 
-const type = computed(() => useRequestURL().searchParams.get('type'))
+const type = useRequestURL().searchParams.get('type')
 </script>
 
 <template>

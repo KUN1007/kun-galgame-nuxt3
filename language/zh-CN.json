@@ -662,7 +662,8 @@
   "AlertInfo":{
     "edit":{
       "publishSuccess": "发布成功",
-      "rewriteSuccess": "Rewrite 成功"
+      "rewriteSuccess": "Rewrite 成功",
+      "prSuccess": "创建更新请求成功"
     },
     "login":{
       "invalidUsername": "非法的用户名，用户名为 1~17 位任意字符",

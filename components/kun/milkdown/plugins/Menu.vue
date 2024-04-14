@@ -175,6 +175,7 @@ const handleClickUploadImage = () => {
   flex-wrap: wrap;
   width: 100%;
   background-color: var(--kungalgame-trans-blue-0);
+  backdrop-filter: blur(10px);
   z-index: 999;
 
   div {

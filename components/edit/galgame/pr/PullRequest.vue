@@ -1,26 +1,23 @@
 <script setup lang="ts">
-import { languageItems } from '../../utils/options'
-import type { GalgameDetail } from '~/types/api/galgame'
-
-const gid = useRequestURL().searchParams.get('gid')
-
 const { locale } = useI18n()
 const introductionLanguage = ref(locale.value as Language)
-
-const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 </script>
 
 <template>
   <div class="container">
-    <h2>Pull Request</h2>
+    <EditGalgamePrHelp />
 
-    <EditGalgamePrTitle :name="galgamePR[0].name" />
+    <EditGalgamePrTitle />
 
     <EditGalgameIntroduction
       :introduction-language="introductionLanguage"
       type="rewrite"
       @set="(value) => (introductionLanguage = value as Language)"
     />
+
+    <EditGalgamePrOfficial />
+
+    <EditGalgamePrAlias />
 
     <EditGalgamePrFooter />
   </div>
@@ -35,9 +32,5 @@ const { galgamePR } = storeToRefs(useTempGalgamePRStore())
   box-shadow: var(--kungalgame-shadow-0);
   backdrop-filter: blur(10px);
   padding: 17px;
-}
-
-.nav {
-  margin-bottom: 17px;
 }
 </style>

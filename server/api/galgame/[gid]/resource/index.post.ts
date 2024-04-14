@@ -4,7 +4,6 @@ import GalgameResourceModel from '~/server/models/galgame-resource'
 import UserModel from '~/server/models/user'
 import { checkGalgameResourcePublish } from '../../utils/checkGalgameResourcePublish'
 import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
-import type { GalgameResource } from '~/types/api/galgame-resource'
 import type { H3Event } from 'h3'
 
 const getResourceData = async (event: H3Event) => {
@@ -43,18 +42,16 @@ export default defineEventHandler(async (event) => {
   const session = await mongoose.startSession()
   session.startTransaction()
   try {
-    const newGalgameResource = new GalgameResourceModel({
+    const resource = await GalgameResourceModel.create({
       ...result,
       time: Date.now()
     })
-
-    const savedGalgameResource = await newGalgameResource.save()
 
     await UserModel.updateOne(
       { uid: result.uid },
       {
         $addToSet: {
-          galgame_resource: savedGalgameResource.grid,
+          galgame_resource: resource.grid,
           contribute_galgame: result.gid
         },
         $inc: { daily_galgame_count: 1, moemoepoint: 5 }
@@ -66,7 +63,7 @@ export default defineEventHandler(async (event) => {
       {
         $addToSet: {
           contributor: result.uid,
-          resources: savedGalgameResource.grid,
+          resources: resource.grid,
           type: result.type,
           language: result.language,
           platform: result.platform
@@ -76,8 +73,7 @@ export default defineEventHandler(async (event) => {
 
     await session.commitTransaction()
 
-    const resource: GalgameResource = { ...savedGalgameResource }
-    return resource
+    return 'MOEMOE create galgame resource successfully!'
   } catch (error) {
     await session.abortTransaction()
   } finally {

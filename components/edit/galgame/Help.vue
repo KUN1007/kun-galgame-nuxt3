@@ -36,17 +36,7 @@ const siteList: Site[] = [
 
   <p>{{ $t('edit.galgame.help.reference') }}</p>
 
-  <div class="site">
-    <a
-      v-for="(site, index) in siteList"
-      :key="index"
-      :href="site.url"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {{ $t(`edit.galgame.help.${site.name}`) }}
-    </a>
-  </div>
+  <EditGalgameSite />
 
   <div class="definition" v-if="locale === 'en-us'">
     <p>

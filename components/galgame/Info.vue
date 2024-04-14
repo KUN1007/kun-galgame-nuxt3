@@ -17,13 +17,13 @@ defineProps<{
   </div>
 
   <div class="alias">
-    <h3>别名</h3>
+    <h3>游戏别名</h3>
     <GalgameNull v-if="!galgame.alias.length" />
     <TopicTags :tags="galgame.alias" :is-show-icon="false" />
   </div>
 
   <div class="official">
-    <h3>官网</h3>
+    <h3>游戏官网</h3>
     <GalgameNull v-if="!galgame.official" />
     <a
       v-if="galgame.official"
@@ -36,7 +36,7 @@ defineProps<{
   </div>
 
   <div class="platform">
-    <h3>平台</h3>
+    <h3>游戏平台</h3>
     <span
       v-for="(platform, index) in galgame.platform"
       :key="index"

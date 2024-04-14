@@ -657,7 +657,8 @@
   "AlertInfo":{
     "edit":{
       "publishSuccess": "Publish Successfully",
-      "rewriteSuccess": "Rewrite Successfully"
+      "rewriteSuccess": "Rewrite Successfully",
+      "prSuccess": "Create update request successfully"
     },
     "login":{
       "invalidUsername": "Invalid username. Username should be 1 to 17 characters long with any characters",

@@ -15,7 +15,20 @@ export default defineEventHandler(async (event) => {
   }
 
   const resource: GalgameResourceDetails = {
-    ...data,
+    gid: data.gid,
+    grid: data.grid,
+    uid: data.uid,
+    type: data.type,
+    language: data.language,
+    platform: data.platform,
+    size: data.size,
+    time: data.time,
+    status: data.status,
+    likes: data.likes,
+    link: data.link,
+    code: data.code,
+    password: data.password,
+    note: data.note,
     user: {
       uid: data.user[0].uid,
       name: data.user[0].name,
