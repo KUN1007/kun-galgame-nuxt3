@@ -97,6 +97,10 @@ watch(
       </div>
 
       <div class="status">
+        <span v-if="details" class="close" @click="details = undefined">
+          <Icon name="lucide:x" />
+        </span>
+
         <KunButton
           class="valid"
           v-if="uid === link.uid && link.status === 1"
@@ -106,7 +110,7 @@ watch(
           标记有效
         </KunButton>
         <KunButton
-          v-if="link.grid !== rewriteResourceId"
+          v-if="!details && link.grid !== rewriteResourceId"
           @click="handleGetDetail(link.grid)"
           :pending="isFetching"
         >
@@ -211,6 +215,12 @@ watch(
   .kun-button {
     margin-right: 17px;
     padding: 3px 10px;
+  }
+
+  .close {
+    cursor: pointer;
+    margin-right: 17px;
+    font-size: 20px;
   }
 }
 

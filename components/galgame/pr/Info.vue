@@ -15,17 +15,20 @@ const iconMap: Record<number, string> = {
 
 const { locale } = useI18n()
 const details = ref<Partial<GalgamePRDetails>>()
+const isFetching = ref(false)
 
 const handleGetDetails = async (gprid: number) => {
   if (details.value) {
     return
   }
+  isFetching.value = true
   const { data } = await useFetch(`/api/galgame/${props.gid}/pr`, {
     method: 'GET',
     query: { gprid },
     watch: false,
     ...kungalgameResponseHandler
   })
+  isFetching.value = false
 
   if (data.value) {
     details.value = data.value
@@ -56,9 +59,17 @@ const handleGetDetails = async (gprid: number) => {
     </div>
 
     <div class="btn">
-      <KunButton v-if="!details" @click="handleGetDetails(pr.gprid)">
-        查看请求
+      <KunButton
+        v-if="!details"
+        @click="handleGetDetails(pr.gprid)"
+        :pending="isFetching"
+      >
+        查看详情
       </KunButton>
+
+      <span v-if="details" class="close" @click="details = undefined">
+        <Icon name="lucide:x" />
+      </span>
     </div>
   </div>
 
@@ -112,6 +123,12 @@ const handleGetDetails = async (gprid: number) => {
   .kun-button {
     margin-right: 17px;
     padding: 3px 10px;
+  }
+
+  .close {
+    cursor: pointer;
+    margin-right: 17px;
+    font-size: 20px;
   }
 }
 

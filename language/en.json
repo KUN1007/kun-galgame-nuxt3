@@ -537,8 +537,8 @@
     "desc": "Descending",
     "pr": {
       "status0": "Ongoing",
-      "status1": "Finished",
-      "status2": "Obsoleted"
+      "status1": "Merged",
+      "status2": "Declined"
     }
   },
   "report": {

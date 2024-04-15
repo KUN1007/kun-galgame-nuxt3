@@ -535,7 +535,12 @@
   },
   "galgame": {
     "asc": "升序",
-    "desc": "降序"
+    "desc": "降序",
+    "pr": {
+      "status0": "进行中",
+      "status1": "已合并",
+      "status3": "已拒绝"
+    }
   },
   "report": {
     "select": {

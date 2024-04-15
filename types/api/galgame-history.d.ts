@@ -3,7 +3,7 @@ export type GalgameHistoryAction =
   | 'updated'
   | 'deleted'
   | 'merged'
-  | 'closed'
+  | 'declined'
 export type GalgameHistoryType = 'galgame' | 'banner' | 'link' | 'pr'
 
 interface User {

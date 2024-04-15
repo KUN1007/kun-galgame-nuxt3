@@ -24,8 +24,8 @@ const diff = computed(() => {
     </div>
 
     <div class="btn">
-      <KunButton type="danger">拒绝合并</KunButton>
-      <KunButton>合并请求</KunButton>
+      <KunButton type="danger">拒绝</KunButton>
+      <KunButton>合并</KunButton>
     </div>
   </div>
 </template>

@@ -38,7 +38,7 @@ provide<GalgameDetail>('galgame', props.galgame)
 
     <GalgameHistory />
 
-    <GalgamePrContainer :galgame="galgame" />
+    <GalgamePrContainer />
 
     <GalgameContributor :views="galgame.views" />
 
