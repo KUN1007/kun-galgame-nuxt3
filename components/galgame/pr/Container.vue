@@ -4,10 +4,13 @@ const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
 
-const { data } = await useLazyFetch(`/api/galgame/${gid.value}/pr/all`, {
-  method: 'GET',
-  ...kungalgameResponseHandler
-})
+const { data, pending, refresh } = await useLazyFetch(
+  `/api/galgame/${gid.value}/pr/all`,
+  {
+    method: 'GET',
+    ...kungalgameResponseHandler
+  }
+)
 </script>
 
 <template>
@@ -21,6 +24,8 @@ const { data } = await useLazyFetch(`/api/galgame/${gid.value}/pr/all`, {
       :key="index"
       :gid="gid"
       :pr="pr"
+      :pending="pending"
+      :refresh="refresh"
     />
   </div>
 </template>

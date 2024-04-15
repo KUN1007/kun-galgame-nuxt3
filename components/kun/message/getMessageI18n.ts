@@ -2,58 +2,44 @@ import type { Message } from '~/types/api/message'
 
 type Locale = 'en-us' | 'zh-cn' | string
 
-const zhMessageMap: Record<string, string> = {
-  upvoted: '推了您！',
-  liked: '点赞了您！',
-  favorite: '收藏了您！',
-  replied: '回复了您！',
-  commented: '评论了您！',
-  expired: '报告了您的资源链接已过期!'
+const messageTemplates: Record<string, Record<string, string>> = {
+  'zh-cn': {
+    upvoted: '{{senderName}} 推了您!',
+    liked: '{{senderName}} 点赞了您!',
+    favorite: '{{senderName}} 收藏了您!',
+    replied: '{{senderName}} 回复了您!',
+    commented: '{{senderName}} 评论了您!',
+    expired: '{{senderName}} 报告了您的资源链接已过期！',
+    merged: '您的更新请求已被 {{senderName}} 合并！',
+    declined: '您的更新请求被 {{senderName}} 拒绝！',
+    admin: '系统消息',
+    mentioned: '{{senderName}} 提到了您！'
+  },
+  'en-us': {
+    upvoted: '{{senderName}} upvoted you!',
+    liked: '{{senderName}} liked you!',
+    favorite: '{{senderName}} favorite you!',
+    replied: '{{senderName}} replied you!',
+    commented: '{{senderName}} commented you!',
+    expired: '{{senderName}} report for your resource link has expired!',
+    merged: 'Your update request has been merged by the {{senderName}}!',
+    declined: 'Your update request declined by the {{senderName}}!',
+    admin: 'System message',
+    mentioned: '{{senderName}} mentioned you!',
+    default: '{{senderName}} {{action}} you!'
+  }
 }
 
-export const getMessageZH = (locale: Locale, content: string) => {
-  if (locale === 'zh-cn') {
-    return zhMessageMap[content]
-  }
-  return content
-}
-
-const getMentionedMessage = (locale: Locale, message: Message) => {
-  if (locale === 'zh-cn') {
-    return `${message.senderName}提到了您！`
-  }
-  return `${message.senderName} mentioned you!`
-}
-
-const getExpiredMessage = (locale: Locale, message: Message) => {
-  if (locale === 'zh-cn') {
-    return `${message.senderName} 报告了您的资源链接已过期！`
-  }
-  return `${message.senderName} report for your resource link has expired!`
+const getMessageContent = (locale: Locale, message: Message): string => {
+  const template =
+    messageTemplates[locale][message.type] || messageTemplates[locale].default
+  return template.replace('{{senderName}}', message.senderName)
 }
 
 export const getMessageI18n = (locale: Locale, message: Message) => {
   if (message.type === 'admin') {
-    if (locale === 'zh-cn') {
-      return '系统消息'
-    }
-    return 'System message'
+    return messageTemplates[locale === 'zh-cn' ? 'zh' : 'en'].admin
   }
 
-  if (message.type === 'mentioned') {
-    return getMentionedMessage(locale, message)
-  }
-
-  if (message.type === 'expired') {
-    return getExpiredMessage(locale, message)
-  }
-
-  if (locale === 'zh-cn') {
-    const actionZH = getMessageZH(locale, message.type)
-    const messageContentZH = `${message.senderName} ${actionZH}`
-    return messageContentZH
-  }
-
-  const messageContentEN = `${message.senderName} ${message.type} you!`
-  return messageContentEN
+  return getMessageContent(locale, message)
 }

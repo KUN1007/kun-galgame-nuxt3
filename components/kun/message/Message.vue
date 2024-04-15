@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
-import { getMessageZH, getMessageI18n } from './getMessageI18n'
+import { getMessageI18n } from './getMessageI18n'
 import type { Message } from '~/types/api/message'
 
 const props = defineProps<{
@@ -40,10 +40,7 @@ const handelClickShowMoreOperation = async (mid: number) => {
 const handleGetMessageDetail = (message: Message) => {
   return computed(() => {
     const messageContent = markdownToText(messageMap.get(message.mid) ?? '')
-    return `${message.senderName} ${getMessageZH(
-      locale.value,
-      message.type
-    )}: ${messageContent}`
+    return `${getMessageI18n(locale.value, message)} => ${messageContent}`
   }).value
 }
 

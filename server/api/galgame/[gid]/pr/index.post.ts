@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 import GalgameModel from '~/server/models/galgame'
 import GalgamePRModel from '~/server/models/galgame-pr'
 import { checkGalgamePR } from '../../utils/checkGalgamePR'
@@ -31,11 +32,30 @@ export default defineEventHandler(async (event) => {
     official
   })
 
-  await GalgamePRModel.create({
-    gid: galgame.gid,
-    uid: userInfo.uid,
-    galgame: diffGalgame
-  })
+  const session = await mongoose.startSession()
+  session.startTransaction()
+  try {
+    await GalgamePRModel.create({
+      gid: galgame.gid,
+      uid: userInfo.uid,
+      galgame: diffGalgame
+    })
 
-  return 'MOEMOE commit galgame pull request successfully!'
+    await createGalgameHistory({
+      gid,
+      uid: userInfo.uid,
+      time: Date.now(),
+      action: 'created',
+      type: 'pr',
+      content: ''
+    })
+
+    await session.commitTransaction()
+
+    return 'MOEMOE committed galgame pull request successfully!'
+  } catch (error) {
+    await session.abortTransaction()
+  } finally {
+    await session.endSession()
+  }
 })

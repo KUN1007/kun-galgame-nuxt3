@@ -5,6 +5,8 @@ import type { GalgamePR, GalgamePRDetails } from '~/types/api/galgame-pr'
 const props = defineProps<{
   gid: number
   pr: GalgamePR
+  pending: boolean
+  refresh: () => {}
 }>()
 
 const iconMap: Record<number, string> = {
@@ -34,11 +36,20 @@ const handleGetDetails = async (gprid: number) => {
     details.value = data.value
   }
 }
+
+watch(
+  () => props.pending,
+  () => {
+    if (props.pending) {
+      details.value = undefined
+    }
+  }
+)
 </script>
 
 <template>
   <div class="pr">
-    <div class="info" :class="`status${pr.status}`">
+    <div class="info">
       <KunAvatar :user="pr.user" size="30px" />
       <NuxtLinkLocale :to="`/kungalgamer/${pr.user.uid}/info`">
         {{ pr.user.name }}
@@ -48,24 +59,26 @@ const handleGetDetails = async (gprid: number) => {
       <span class="time">
         {{ formatTimeDifferenceHint(pr.time, locale) }}
       </span>
+    </div>
 
-      <span class="description">
+    <div class="btn">
+      <span class="description" :class="`status${pr.status}`">
         <span v-if="pr.completedTime">
           {{ `${dayjs(pr.completedTime).format('MM/D - HH:mm')}` }}
         </span>
         <Icon class="icon" :name="iconMap[pr.status]" />
         <span>{{ $t(`galgame.pr.status${pr.status}`) }}</span>
       </span>
-    </div>
 
-    <div class="btn">
       <KunButton
-        v-if="!details"
+        v-if="!details && pr.status !== 2"
         @click="handleGetDetails(pr.gprid)"
         :pending="isFetching"
       >
         查看详情
       </KunButton>
+
+      <span v-if="pr.status == 2">{{ `#${pr.gprid}` }}</span>
 
       <span v-if="details" class="close" @click="details = undefined">
         <Icon name="lucide:x" />
@@ -73,7 +86,7 @@ const handleGetDetails = async (gprid: number) => {
     </div>
   </div>
 
-  <GalgamePrDetails v-if="details" :details="details" />
+  <GalgamePrDetails v-if="details" :details="details" :refresh="refresh" />
 </template>
 
 <style lang="scss" scoped>
@@ -100,12 +113,19 @@ const handleGetDetails = async (gprid: number) => {
     color: var(--kungalgame-font-color-1);
     margin-left: 10px;
   }
+}
+
+.btn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 
   .description {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 3px 10px;
+    font-size: 14px;
 
     span {
       &:nth-child(1) {
@@ -117,42 +137,26 @@ const handleGetDetails = async (gprid: number) => {
       margin-right: 5px;
     }
   }
-}
 
-.btn {
   .kun-button {
-    margin-right: 17px;
     padding: 3px 10px;
   }
 
   .close {
     cursor: pointer;
-    margin-right: 17px;
     font-size: 20px;
   }
 }
 
 .status0 {
-  .description {
-    color: var(--kungalgame-blue-5);
-  }
+  color: var(--kungalgame-blue-5);
 }
 
 .status1 {
-  .description {
-    color: var(--kungalgame-pink-4);
-  }
+  color: var(--kungalgame-green-4);
 }
 
 .status2 {
-  .description {
-    color: var(--kungalgame-green-4);
-  }
-}
-
-.status3 {
-  .description {
-    color: var(--kungalgame-gray-4);
-  }
+  color: var(--kungalgame-red-5);
 }
 </style>

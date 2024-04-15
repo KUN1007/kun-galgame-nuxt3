@@ -5,6 +5,8 @@ export type MessageType =
   | 'replied'
   | 'commented'
   | 'expired'
+  | 'merged'
+  | 'declined'
   | 'mentioned'
   | 'admin'
 
