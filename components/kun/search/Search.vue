@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { SearchTopic } from '~/types/api/home'
+import { useMagicKeys, whenever } from '@vueuse/core'
 
 const { search, isShowSearch } = storeToRefs(useTempHomeStore())
 
@@ -14,6 +15,15 @@ const searchTopics = async () => {
   })
   return data.value ? data.value : []
 }
+
+const { ctrl_k, cmd_k, escape } = useMagicKeys({
+  passive: false,
+  onEventFired(e) {
+    if (e.ctrlKey && (e.key === 'k' || e.key === 'K') && e.type === 'keydown') {
+      e.preventDefault() // 防止唤出浏览器地址栏搜索
+    }
+  }
+})
 
 watch(
   () => search.value.keywords,
@@ -36,6 +46,14 @@ watch(
     }
   }
 )
+
+watch([ctrl_k,cmd_k], () => {
+  isShowSearch.value = true
+})
+
+whenever(escape, () => {
+  isShowSearch.value = false
+})
 
 const scrollHandler = async () => {
   if (isScrollAtBottom() && search.value.isLoading && search.value.keywords) {
