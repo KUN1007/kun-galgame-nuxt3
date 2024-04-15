@@ -534,7 +534,12 @@
   },
   "galgame": {
     "asc": "Ascending",
-    "desc": "Descending"
+    "desc": "Descending",
+    "pr": {
+      "status0": "Ongoing",
+      "status1": "Finished",
+      "status2": "Obsoleted"
+    }
   },
   "report": {
     "select": {

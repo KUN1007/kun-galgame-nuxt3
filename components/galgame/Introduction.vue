@@ -2,7 +2,6 @@
 import { MilkdownProvider } from '@milkdown/vue'
 import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
 import { languageItems } from '~/components/edit/utils/options'
-import type { KunLanguage } from '~/types/i18n'
 
 const { locale } = useI18n()
 const introductionLanguage = ref(locale.value)

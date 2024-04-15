@@ -36,6 +36,8 @@ const handleRewriteGalgame = (galgame: GalgameDetail) => {
 
     <GalgameHistory />
 
+    <GalgamePrPullRequest />
+
     <GalgameContributor :views="galgame.views" />
 
     <div class="footer">

@@ -1,6 +1,5 @@
 import { isValidKunLanguage } from '~/utils/validate'
 import { VNDBPattern } from '~/utils/pattern'
-import type { KunLanguage } from '~/types/i18n'
 
 export const checkGalgamePublish = (
   vndb_id: string,

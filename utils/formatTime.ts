@@ -69,7 +69,7 @@ const replaceTimeUnits = (input: string, language: string) => {
 
 // Format time difference
 export const formatTimeDifference = (
-  pastTime: number | Date,
+  pastTime: number | Date | string,
   language: string
 ) => {
   const now = dayjs()
@@ -104,7 +104,7 @@ export const formatTimeDifference = (
 }
 
 export const formatTimeDifferenceHint = (
-  pastTime: number | Date,
+  pastTime: number | Date | string,
   language: string
 ) => {
   const result = formatTimeDifference(pastTime, language)

@@ -1,5 +1,3 @@
-import type { KunLanguage } from '~/types/i18n'
-
 export const isValidTimestamp = (timestamp: number) => {
   return (
     timestamp.toString().length === 10 || timestamp.toString().length === 13

@@ -5,7 +5,6 @@ import UserModel from '~/server/models/user'
 import { checkGalgamePublish } from './utils/checkGalgamePublish'
 import { uploadGalgameBanner } from './utils/uploadGalgameBanner'
 import type { H3Event } from 'h3'
-import { KunLanguage } from '~/types/i18n'
 
 const readGalgameData = async (event: H3Event) => {
   const formData = await readFormData(event)

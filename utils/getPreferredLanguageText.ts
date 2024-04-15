@@ -1,5 +1,3 @@
-import type { KunLanguage } from '~/types/i18n'
-
 export const getPreferredLanguageText = (
   language: KunLanguage,
   locale: Language

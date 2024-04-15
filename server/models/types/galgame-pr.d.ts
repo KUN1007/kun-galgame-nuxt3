@@ -11,6 +11,8 @@ export interface GalgamePR {
   gid: number
   uid: number
   status: number
+  note: string
+  completed_time: number
   galgame: GalgameStoreTemp
 
   user: UserAttributes[]

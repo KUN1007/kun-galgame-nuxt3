@@ -1,11 +1,3 @@
-import type { KunLanguage } from '../i18n'
-
-export interface GalgameUser {
-  uid: number
-  name: string
-  avatar: string
-}
-
 export interface GalgameContributor {
   uid: number
   avatar: string
@@ -14,7 +6,7 @@ export interface GalgameContributor {
 export interface GalgameDetail {
   gid: number
   vndbId: string
-  user: GalgameUser
+  user: KunUser
   name: KunLanguage
   banner: string
   introduction: KunLanguage
@@ -44,7 +36,7 @@ export interface GalgameCard {
   gid: number
   name: KunLanguage
   banner: string
-  user: GalgameUser
+  user: KunUser
 
   views: number
   likes: number

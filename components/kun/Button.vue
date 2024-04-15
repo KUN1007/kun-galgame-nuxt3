@@ -22,6 +22,7 @@ withDefaults(defineProps<{ type?: ButtonType; pending?: boolean }>(), {
   border-radius: 10px;
   color: var(--kungalgame-blue-5);
   cursor: pointer;
+  box-shadow: var(--shadow);
 
   &:hover {
     background-color: var(--kungalgame-blue-5);
@@ -29,9 +30,7 @@ withDefaults(defineProps<{ type?: ButtonType; pending?: boolean }>(), {
   }
 
   &:active {
-    box-shadow:
-      var(--kungalgame-white) 0px 0px 0px 2px,
-      var(--kungalgame-blue-5) 0px 0px 0px 4px;
+    transform: scale(0.97);
   }
 
   &:disabled {

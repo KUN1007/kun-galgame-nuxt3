@@ -1,4 +1,3 @@
-import { KunLanguage } from '~/types/i18n'
 import type { UserAttributes } from './user'
 
 export interface Galgame {

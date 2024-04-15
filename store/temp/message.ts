@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import type { MessageStore } from '../types/message'
-import type { KunLanguage } from '~/types/i18n'
 
 export const useTempMessageStore = defineStore({
   id: 'tempMessage',

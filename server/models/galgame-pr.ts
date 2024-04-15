@@ -8,6 +8,8 @@ const GalgamePRSchema = new mongoose.Schema<GalgamePR>(
     gid: { type: Number, required: true },
     uid: { type: Number, required: true, ref: 'user' },
     status: { type: Number, default: 0 },
+    completed_time: { type: Number, default: 0 },
+    note: { type: String, default: '' },
     galgame: {}
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
