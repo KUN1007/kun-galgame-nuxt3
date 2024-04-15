@@ -53,14 +53,12 @@ const updateGalgameFavorite = async (gid: number, uid: number) => {
 export default defineEventHandler(async (event) => {
   const gid = getRouterParam(event, 'gid')
   if (!gid) {
-    kunError(event, 10609)
-    return
+    return kunError(event, 10609)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
 

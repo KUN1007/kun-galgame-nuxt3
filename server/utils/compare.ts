@@ -10,43 +10,44 @@ export const compareStrings = (str1: string, str2: string) => {
     .toString()
 }
 
-export interface Difference<T extends object> {
-  oldValue: T | unknown
-  newValue: T | unknown
+interface _DiffObject {
+  [key: string]: any
 }
 
-export const compareObjects = <T extends object>(
-  obj1: T,
-  obj2: T
-): Record<string, Difference<T>> => {
-  const diff: Record<string, Difference<T>> = {}
+export const compareObjects = (
+  obj1: _DiffObject,
+  obj2: _DiffObject
+): _DiffObject => {
+  const diff: _DiffObject = {}
 
-  const keys1 = Object.keys(obj1)
-  const keys2 = Object.keys(obj2)
-  const allKeys = new Set([...keys1, ...keys2])
+  const traverse = (
+    currentObj1: _DiffObject,
+    currentObj2: _DiffObject,
+    currentDiff: _DiffObject,
+    path: string[] = []
+  ) => {
+    for (const key in currentObj1) {
+      const newPath = [...path, key]
 
-  allKeys.forEach((key) => {
-    const val1 = obj1[key as keyof T]
-    const val2 = obj2[key as keyof T]
-    if (val1 !== val2) {
-      if (
-        typeof val1 === 'object' &&
-        val1 !== null &&
-        typeof val2 === 'object' &&
-        val2 !== null
+      if (!(key in currentObj2)) {
+        currentDiff[key] = currentObj1[key]
+      } else if (
+        typeof currentObj1[key] === 'object' &&
+        currentObj1[key] !== null &&
+        typeof currentObj2[key] === 'object' &&
+        currentObj2[key] !== null
       ) {
-        diff[key] = {
-          oldValue: compareObjects(val1, val2),
-          newValue: undefined
+        currentDiff[key] = {}
+        traverse(currentObj1[key], currentObj2[key], currentDiff[key], newPath)
+        if (Object.keys(currentDiff[key]).length === 0) {
+          delete currentDiff[key]
         }
-      } else {
-        diff[key] = {
-          oldValue: val1,
-          newValue: val2
-        }
+      } else if (currentObj1[key] !== currentObj2[key]) {
+        currentDiff[key] = currentObj1[key]
       }
     }
-  })
+  }
 
+  traverse(obj1, obj2, diff)
   return diff
 }

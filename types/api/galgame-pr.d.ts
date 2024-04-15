@@ -4,12 +4,12 @@ export interface GalgamePR {
   gprid: number
   gid: number
   status: number
-  time: Date
+  time: Date | string
   completedTime: number
 
   user: KunUser
 }
 
 export interface GalgamePRDetails extends GalgamePR {
-  galgame: GalgameStoreTemp
+  galgame: Partial<GalgameStoreTemp>
 }

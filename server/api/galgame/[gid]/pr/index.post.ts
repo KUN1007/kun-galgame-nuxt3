@@ -1,3 +1,4 @@
+import GalgameModel from '~/server/models/galgame'
 import GalgamePRModel from '~/server/models/galgame-pr'
 import { checkGalgamePR } from '../../utils/checkGalgamePR'
 import type { GalgameStoreTemp } from '~/store/types/edit/galgame'
@@ -14,7 +15,27 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10115, 205)
   }
 
-  await GalgamePRModel.create({ gid: galgame.gid, uid: userInfo.uid, galgame })
+  const originalGalgame = await GalgameModel.findOne({
+    gid: galgame.gid
+  }).lean()
+  if (!originalGalgame) {
+    return kunError(event, 10610)
+  }
+  const { gid, name, introduction, alias, official } = originalGalgame
+
+  const diffGalgame = compareObjects(galgame, {
+    gid,
+    name,
+    introduction,
+    alias,
+    official
+  })
+
+  await GalgamePRModel.create({
+    gid: galgame.gid,
+    uid: userInfo.uid,
+    galgame: diffGalgame
+  })
 
   return 'MOEMOE commit galgame pull request successfully!'
 })

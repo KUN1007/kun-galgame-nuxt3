@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { GalgameDetail } from '~/types/api/galgame'
 
-defineProps<{
+const props = defineProps<{
   galgame: GalgameDetail
 }>()
 
@@ -20,6 +20,8 @@ const handleRewriteGalgame = (galgame: GalgameDetail) => {
   }
   navigateTo(localePath(`/edit/galgame?type=pr&gid=${galgame.gid}`))
 }
+
+provide<GalgameDetail>('galgame', props.galgame)
 </script>
 
 <template>
@@ -36,7 +38,7 @@ const handleRewriteGalgame = (galgame: GalgameDetail) => {
 
     <GalgameHistory />
 
-    <GalgamePrPullRequest />
+    <GalgamePrContainer :galgame="galgame" />
 
     <GalgameContributor :views="galgame.views" />
 

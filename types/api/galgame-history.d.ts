@@ -1,12 +1,10 @@
-export type GalgameHistoryAction = 'created' | 'updated' | 'deleted'
-export type GalgameHistoryType =
-  | 'galgame'
-  | 'name'
-  | 'banner'
-  | 'introduction'
-  | 'link'
-  | 'alias'
-  | 'official'
+export type GalgameHistoryAction =
+  | 'created'
+  | 'updated'
+  | 'deleted'
+  | 'merged'
+  | 'closed'
+export type GalgameHistoryType = 'galgame' | 'banner' | 'link' | 'pr'
 
 interface User {
   uid: number

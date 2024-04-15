@@ -13,7 +13,7 @@ export interface GalgamePR {
   status: number
   note: string
   completed_time: number
-  galgame: GalgameStoreTemp
+  galgame: Partial<GalgameStoreTemp>
 
   user: UserAttributes[]
 

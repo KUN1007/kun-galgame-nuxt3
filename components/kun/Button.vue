@@ -44,7 +44,7 @@ withDefaults(defineProps<{ type?: ButtonType; pending?: boolean }>(), {
     }
 
     &:active {
-      box-shadow: none;
+      transform: none;
     }
   }
 
@@ -74,12 +74,6 @@ withDefaults(defineProps<{ type?: ButtonType; pending?: boolean }>(), {
     color: var(--kungalgame-white);
   }
 
-  &:active {
-    box-shadow:
-      var(--kungalgame-white) 0px 0px 0px 2px,
-      var(--kungalgame-red-5) 0px 0px 0px 4px;
-  }
-
   &:disabled {
     border: 1px solid var(--kungalgame-red-3);
     color: var(--kungalgame-red-3);
@@ -90,7 +84,7 @@ withDefaults(defineProps<{ type?: ButtonType; pending?: boolean }>(), {
     }
 
     &:active {
-      box-shadow: none;
+      transform: none;
     }
   }
 }
