@@ -49,12 +49,10 @@ export default defineEventHandler(async (event) => {
   const { page, limit, sortField, sortOrder }: PoolTopicsRequestData =
     await getQuery(event)
   if (!page || !limit || !sortField || !sortOrder) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
   if (limit !== '12') {
-    kunError(event, 10209)
-    return
+    return kunError(event, 10209)
   }
 
   const topics = await getPoolTopics(

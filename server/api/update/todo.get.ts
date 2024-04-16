@@ -25,12 +25,10 @@ const getTodos = async (page: number, limit: number, language: Language) => {
 export default defineEventHandler(async (event) => {
   const { page, limit, language }: GetTodoRequestData = await getQuery(event)
   if (!page || !limit) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
   if (limit !== '10') {
-    kunError(event, 10209)
-    return
+    return kunError(event, 10209)
   }
 
   const todos = await getTodos(parseInt(page), parseInt(limit), language)

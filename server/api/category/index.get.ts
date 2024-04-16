@@ -58,8 +58,7 @@ export default defineEventHandler(async (event) => {
   const { category }: { category: string } = await getQuery(event)
   const availableCategory = ['galgame', 'technique', 'others']
   if (!availableCategory.includes(category)) {
-    kunError(event, 10220)
-    return
+    return kunError(event, 10220)
   }
 
   const capitalizeFirstLetter =

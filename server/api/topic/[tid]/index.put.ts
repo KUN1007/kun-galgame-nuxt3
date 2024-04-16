@@ -34,8 +34,7 @@ const updateTopic = async (
 export default defineEventHandler(async (event) => {
   const tid = getRouterParam(event, 'tid')
   if (!tid) {
-    kunError(event, 10210)
-    return
+    return kunError(event, 10210)
   }
 
   const {
@@ -56,14 +55,12 @@ export default defineEventHandler(async (event) => {
     parseInt(edited)
   )
   if (res) {
-    kunError(event, res)
-    return
+    return kunError(event, res)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
 

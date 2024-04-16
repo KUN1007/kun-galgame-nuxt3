@@ -39,15 +39,13 @@ export default defineEventHandler(async (event) => {
     !isValidMailConfirmCode(code) ||
     !isValidPassword(newPassword)
   ) {
-    kunError(event, 10303)
-    return
+    return kunError(event, 10303)
   }
 
   const result = await resetPasswordByEmail(email, code, newPassword)
 
   if (typeof result === 'number') {
-    kunError(event, result)
-    return
+    return kunError(event, result)
   }
 
   return 'MOEMOE reset password by email successfully!'

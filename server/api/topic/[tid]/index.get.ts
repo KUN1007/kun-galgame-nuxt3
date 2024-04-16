@@ -6,8 +6,7 @@ import type { TopicDetail } from '~/types/api/topic'
 export default defineEventHandler(async (event) => {
   const tid = getRouterParam(event, 'tid')
   if (!tid) {
-    kunError(event, 10210)
-    return
+    return kunError(event, 10210)
   }
 
   const session = await mongoose.startSession()
@@ -15,8 +14,7 @@ export default defineEventHandler(async (event) => {
   try {
     const topic = await TopicModel.findOne({ tid }).lean()
     if (!topic) {
-      kunError(event, 10211)
-      return
+      return kunError(event, 10211)
     }
 
     if (topic.status === 1) {
@@ -27,8 +25,7 @@ export default defineEventHandler(async (event) => {
 
     const user = await UserModel.findOne({ uid: topic.uid })
     if (!user) {
-      kunError(event, 10101)
-      return
+      return kunError(event, 10101)
     }
 
     const data: TopicDetail = {

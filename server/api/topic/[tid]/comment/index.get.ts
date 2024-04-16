@@ -3,8 +3,7 @@ import CommentModel from '~/server/models/comment'
 export default defineEventHandler(async (event) => {
   const { rid }: { rid: string } = await getQuery(event)
   if (!rid) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
 
   const comment = await CommentModel.find({ rid })

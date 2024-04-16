@@ -8,27 +8,23 @@ export default defineEventHandler(async (event) => {
     await readBody(event)
 
   if (!isValidPassword(oldPassword) || !isValidPassword(newPassword)) {
-    kunError(event, 10108)
-    return
+    return kunError(event, 10108)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
 
   const user = await UserModel.findOne({ uid })
   if (!user) {
-    kunError(event, 10101)
-    return
+    return kunError(event, 10101)
   }
 
   const isCorrectPassword = await compare(oldPassword, user.password)
   if (!isCorrectPassword) {
-    kunError(event, 10102)
-    return
+    return kunError(event, 10102)
   }
 
   const hashedPassword = await hash(newPassword, 7)

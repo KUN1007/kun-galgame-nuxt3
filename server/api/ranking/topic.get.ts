@@ -58,12 +58,10 @@ export default defineEventHandler(async (event) => {
   const { page, limit, sortField, sortOrder }: RankingGetTopicsRequestData =
     await getQuery(event)
   if (!page || !limit || !sortField || !sortOrder) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
   if (limit !== '30') {
-    kunError(event, 10209)
-    return
+    return kunError(event, 10209)
   }
 
   const rankingTopicCache: RankingTopics[] | null = await useStorage(

@@ -3,8 +3,7 @@ import MessageModel from '~/server/models/message'
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
 

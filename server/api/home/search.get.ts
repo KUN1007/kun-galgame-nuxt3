@@ -69,8 +69,7 @@ export default defineEventHandler(async (event) => {
   }: SearchTopicRequestData = await getQuery(event)
 
   if (limit !== '7') {
-    kunError(event, 10209)
-    return
+    return kunError(event, 10209)
   }
 
   const result = await searchTopics(

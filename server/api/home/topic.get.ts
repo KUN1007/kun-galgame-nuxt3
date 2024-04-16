@@ -67,8 +67,7 @@ export default defineEventHandler(async (event) => {
     await getQuery(event)
 
   if (limit !== '10') {
-    kunError(event, 10209)
-    return
+    return kunError(event, 10209)
   }
 
   // TODO: Schema hasn't been registered for model 'user', maybe it can be solved in the future

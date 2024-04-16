@@ -4,20 +4,17 @@ import type { UserInfo } from '~/types/api/user'
 export default defineEventHandler(async (event) => {
   const uid = getRouterParam(event, 'uid')
   if (!uid) {
-    kunError(event, 10101)
-    return
+    return kunError(event, 10101)
   }
 
   const uidNumber = parseInt(uid)
   if (uidNumber <= 0 && typeof uidNumber !== 'number') {
-    kunError(event, 10114)
-    return
+    return kunError(event, 10114)
   }
 
   const user = await UserModel.findOne({ uid })
   if (!user) {
-    kunError(event, 10114)
-    return
+    return kunError(event, 10114)
   }
 
   if (user.status === 1) {

@@ -42,12 +42,10 @@ export default defineEventHandler(async (event) => {
   const { page, limit, sortOrder }: GalgamePageRequestData =
     await getQuery(event)
   if (!page || !limit || !sortOrder) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
   if (limit !== '24') {
-    kunError(event, 10209)
-    return
+    return kunError(event, 10209)
   }
 
   const galgames = await getGalgames(

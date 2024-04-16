@@ -53,22 +53,19 @@ const updateReplyLike = async (
 export default defineEventHandler(async (event) => {
   const tid = getRouterParam(event, 'tid')
   if (!tid) {
-    kunError(event, 10210)
-    return
+    return kunError(event, 10210)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
 
   const { to_uid, rid, isPush }: TopicLikeReplyRequestData =
     await getQuery(event)
   if (!to_uid || !isPush) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
 
   if (uid.toString() === to_uid) {
@@ -83,8 +80,7 @@ export default defineEventHandler(async (event) => {
     isPush === 'true'
   )
   if (typeof result === 'number') {
-    kunError(event, result)
-    return
+    return kunError(event, result)
   }
 
   return 'MOEMOE like reply operation successfully!'

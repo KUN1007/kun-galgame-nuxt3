@@ -47,12 +47,10 @@ export default defineEventHandler(async (event) => {
   const { section, page, limit, order }: GetSectionRequestData =
     await getQuery(event)
   if (!section || !page || !limit || !order) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
   if (limit !== '10') {
-    kunError(event, 10209)
-    return
+    return kunError(event, 10209)
   }
 
   const res = await getSectionTopic(

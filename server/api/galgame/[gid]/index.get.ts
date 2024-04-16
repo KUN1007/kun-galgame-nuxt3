@@ -6,8 +6,7 @@ import type { GalgameContributor, GalgameDetail } from '~/types/api/galgame'
 export default defineEventHandler(async (event) => {
   const gid = getRouterParam(event, 'gid')
   if (!gid) {
-    kunError(event, 10609)
-    return
+    return kunError(event, 10609)
   }
   const userInfo = await getCookieTokenInfo(event)
 
@@ -16,8 +15,7 @@ export default defineEventHandler(async (event) => {
   try {
     const galgame = await GalgameModel.findOne({ gid }).lean()
     if (!galgame) {
-      kunError(event, 10610)
-      return
+      return kunError(event, 10610)
     }
     if (galgame.status === 1) {
       return 'banned'
@@ -27,8 +25,7 @@ export default defineEventHandler(async (event) => {
 
     const publisher = await UserModel.findOne({ uid: galgame.uid })
     if (!publisher) {
-      kunError(event, 10101)
-      return
+      return kunError(event, 10101)
     }
 
     const contributorData = await UserModel.find(

@@ -7,20 +7,17 @@ export default defineEventHandler(async (event) => {
     await readBody(event)
 
   if (!isValidEmail(email)) {
-    kunError(event, 10302)
-    return
+    return kunError(event, 10302)
   }
 
   const emailCounts = await UserModel.countDocuments({ email })
   if (emailCounts) {
-    kunError(event, 10104)
-    return
+    return kunError(event, 10104)
   }
 
   const result = await sendVerificationCodeEmail(event, email, 'reset')
   if (typeof result === 'number') {
-    kunError(event, result)
-    return
+    return kunError(event, result)
   }
 
   return 'MOEMOE send reset email verification code successfully!'

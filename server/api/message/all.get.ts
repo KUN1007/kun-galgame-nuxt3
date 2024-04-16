@@ -47,14 +47,12 @@ export default defineEventHandler(async (event) => {
   const { page, limit, type, sortField, sortOrder }: MessageRequestData =
     await getQuery(event)
   if (limit !== '10') {
-    kunError(event, 10209)
-    return
+    return kunError(event, 10209)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
 

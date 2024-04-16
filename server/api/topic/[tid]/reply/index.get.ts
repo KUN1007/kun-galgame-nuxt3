@@ -76,20 +76,17 @@ const getReplies = async (
 export default defineEventHandler(async (event) => {
   const tid = getRouterParam(event, 'tid')
   if (!tid) {
-    kunError(event, 10210)
-    return
+    return kunError(event, 10210)
   }
 
   const { page, limit, sortField, sortOrder }: TopicReplyRequestData =
     await getQuery(event)
   if (!page || !limit || !sortField || !sortOrder) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
 
   if (limit !== '3') {
-    kunError(event, 10209)
-    return
+    return kunError(event, 10209)
   }
 
   const result = await getReplies(
@@ -100,8 +97,7 @@ export default defineEventHandler(async (event) => {
     sortOrder
   )
   if (typeof result === 'number') {
-    kunError(event, result)
-    return
+    return kunError(event, result)
   }
 
   return result

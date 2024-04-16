@@ -6,20 +6,17 @@ export default defineEventHandler(async (event) => {
   const { email, code }: UserUpdateEmailRequestData = await readBody(event)
 
   if (!isValidEmail(email) || !isValidMailConfirmCode(code)) {
-    kunError(event, 10109)
-    return
+    return kunError(event, 10109)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
 
   const isCodeValid = await verifyVerificationCode(email, code)
   if (!isCodeValid) {
-    kunError(event, 10103)
-    return
+    return kunError(event, 10103)
   }
 
   await UserModel.updateOne({ uid: userInfo.uid }, { $set: { email } })

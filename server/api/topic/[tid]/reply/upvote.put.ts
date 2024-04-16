@@ -53,22 +53,19 @@ const updateReplyUpvote = async (
 export default defineEventHandler(async (event) => {
   const tid = getRouterParam(event, 'tid')
   if (!tid) {
-    kunError(event, 10210)
-    return
+    return kunError(event, 10210)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
 
   const { to_uid, rid, time }: TopicUpvoteReplyRequestData =
     await getQuery(event)
   if (!to_uid || !rid || !time) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
 
   if (uid.toString() === to_uid) {
@@ -76,8 +73,7 @@ export default defineEventHandler(async (event) => {
   }
 
   if (!isValidTimestamp(parseInt(time))) {
-    kunError(event, 10208)
-    return
+    return kunError(event, 10208)
   }
 
   const result = await updateReplyUpvote(
@@ -88,8 +84,7 @@ export default defineEventHandler(async (event) => {
     parseInt(time)
   )
   if (typeof result === 'number') {
-    kunError(event, result)
-    return
+    return kunError(event, result)
   }
 
   return 'MOEMOE upvote reply operation successfully!'

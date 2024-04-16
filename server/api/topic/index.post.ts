@@ -24,14 +24,12 @@ const readTopicData = async (event: H3Event) => {
     parseInt(time)
   )
   if (res) {
-    kunError(event, res)
-    return
+    return kunError(event, res)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
 
@@ -57,13 +55,11 @@ export default defineEventHandler(async (event) => {
 
   const user = await UserModel.findOne({ uid })
   if (!user) {
-    kunError(event, 10101)
-    return
+    return kunError(event, 10101)
   }
 
   if (user.moemoepoint / 10 < user.daily_topic_count) {
-    kunError(event, 10201)
-    return
+    return kunError(event, 10201)
   }
 
   const session = await mongoose.startSession()

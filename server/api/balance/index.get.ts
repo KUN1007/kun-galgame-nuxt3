@@ -48,8 +48,7 @@ export default defineEventHandler(async (event) => {
     sortOrder
   }: BalanceRequestData = await getQuery(event)
   if (!page || !limit || !sortField || !sortOrder) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
 
   const balanceData = await getBalanceData(

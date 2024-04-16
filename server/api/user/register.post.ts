@@ -22,16 +22,14 @@ const registerController = async (event: H3Event) => {
     !isValidPassword(password) ||
     !isValidMailConfirmCode(code)
   ) {
-    kunError(event, 10107)
-    return
+    return kunError(event, 10107)
   }
 
   const registerCD = await useStorage('redis').getItem(
     `login:register:cd:${name}`
   )
   if (registerCD) {
-    kunError(event, 10113)
-    return
+    return kunError(event, 10113)
   } else {
     useStorage('redis').setItem(`login:register:cd:${ip}`, ip, { ttl: 60 })
   }
@@ -48,22 +46,19 @@ export default defineEventHandler(async (event) => {
 
   const isCodeValid = await verifyVerificationCode(email, code)
   if (!isCodeValid) {
-    kunError(event, 10103)
-    return
+    return kunError(event, 10103)
   }
 
   const usernameCount = await UserModel.countDocuments({
     name: { $regex: new RegExp('^' + name + '$', 'i') }
   })
   if (usernameCount) {
-    kunError(event, 10105)
-    return
+    return kunError(event, 10105)
   }
 
   const emailCount = await UserModel.countDocuments({ email })
   if (emailCount) {
-    kunError(event, 10104)
-    return
+    return kunError(event, 10104)
   }
   const hashedPassword = await hash(password, 7)
 

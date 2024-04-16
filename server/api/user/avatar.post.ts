@@ -32,24 +32,20 @@ const resizeUserAvatar = async (name: string, avatar: Buffer, uid: number) => {
 export default defineEventHandler(async (event) => {
   const avatarFile = await readMultipartFormData(event)
   if (!avatarFile || !Array.isArray(avatarFile)) {
-    kunError(event, 10110)
-    return
+    return kunError(event, 10110)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
 
   const res = await resizeUserAvatar('avatar', avatarFile[0].data, userInfo.uid)
   if (!res) {
-    kunError(event, 10116)
-    return
+    return kunError(event, 10116)
   }
   if (typeof res === 'number') {
-    kunError(event, res)
-    return
+    return kunError(event, res)
   }
 
   const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/avatar/user_${userInfo.uid}/avatar.webp`

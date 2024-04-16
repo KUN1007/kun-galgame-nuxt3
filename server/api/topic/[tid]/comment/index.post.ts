@@ -14,27 +14,23 @@ const readReplyData = async (event: H3Event) => {
   const { rid, to_uid, content }: TopicCreateCommentRequestData =
     await readBody(event)
   if (!rid || !to_uid) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
 
   const res = checkCommentPublish(content)
   if (res) {
-    kunError(event, res)
-    return
+    return kunError(event, res)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
 
   const tid = getRouterParam(event, 'tid')
   if (!tid) {
-    kunError(event, 10210)
-    return
+    return kunError(event, 10210)
   }
 
   return {
@@ -73,8 +69,7 @@ export default defineEventHandler(async (event) => {
       { $addToSet: { comment: savedComment.cid } }
     )
     if (!commentUser) {
-      kunError(event, 10101)
-      return
+      return kunError(event, 10101)
     }
 
     const toUser = await UserModel.findOneAndUpdate(
@@ -84,8 +79,7 @@ export default defineEventHandler(async (event) => {
       { $inc: { moemoepoint: 1 } }
     )
     if (!toUser) {
-      kunError(event, 10101)
-      return
+      return kunError(event, 10101)
     }
 
     await TopicModel.updateOne(

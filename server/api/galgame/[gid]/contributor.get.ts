@@ -10,14 +10,12 @@ interface User {
 export default defineEventHandler(async (event) => {
   const gid = getRouterParam(event, 'gid')
   if (!gid) {
-    kunError(event, 10609)
-    return
+    return kunError(event, 10609)
   }
 
   const galgame = await GalgameModel.findOne({ gid }).lean()
   if (!galgame) {
-    kunError(event, 10610)
-    return
+    return kunError(event, 10610)
   }
 
   const users: User[] = await UserModel.find({

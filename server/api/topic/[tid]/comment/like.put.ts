@@ -6,15 +6,13 @@ import type { TopicLikeCommentRequestData } from '~/types/api/comment'
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
 
   const { cid, to_uid }: TopicLikeCommentRequestData = await getQuery(event)
   if (!cid || !to_uid) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
 
   if (uid.toString() === to_uid) {

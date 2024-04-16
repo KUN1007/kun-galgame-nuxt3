@@ -4,8 +4,7 @@ import type { HomeUserStatus } from '~/types/api/home'
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
 
   const user = await UserModel.findOne(
@@ -13,8 +12,7 @@ export default defineEventHandler(async (event) => {
     { moemoepoint: 1, daily_check_in: 1, _id: 0 }
   )
   if (!user) {
-    kunError(event, 10101)
-    return
+    return kunError(event, 10101)
   }
 
   const responseData: HomeUserStatus = {

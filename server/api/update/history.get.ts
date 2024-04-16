@@ -33,12 +33,10 @@ export default defineEventHandler(async (event) => {
   const { page, limit, language }: GetUpdateLogRequestData =
     await getQuery(event)
   if (!page || !limit) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
   if (limit !== '10') {
-    kunError(event, 10209)
-    return
+    return kunError(event, 10209)
   }
 
   const updates = await getUpdateLogs(parseInt(page), parseInt(limit), language)

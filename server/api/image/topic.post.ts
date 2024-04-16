@@ -25,39 +25,32 @@ const compressImage = async (name: string, image: Buffer, uid: number) => {
 export default defineEventHandler(async (event) => {
   const imageFile = await readMultipartFormData(event)
   if (!imageFile || !Array.isArray(imageFile)) {
-    kunError(event, 10216)
-    return
+    return kunError(event, 10216)
   }
   if (!checkBufferSize(imageFile[0].data, 10)) {
-    kunError(event, 10214)
-    return
+    return kunError(event, 10214)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const user = await UserModel.findOne({ uid: userInfo.uid })
   if (!user) {
-    kunError(event, 10101)
-    return
+    return kunError(event, 10101)
   }
   if (user.daily_image_count >= 50) {
-    kunError(event, 10217)
-    return
+    return kunError(event, 10217)
   }
 
   const newFileName = `${userInfo.name}-${Date.now()}`
 
   const res = await compressImage(newFileName, imageFile[0].data, userInfo.uid)
   if (!res) {
-    kunError(event, 10116)
-    return
+    return kunError(event, 10116)
   }
   if (typeof res === 'number') {
-    kunError(event, res)
-    return
+    return kunError(event, res)
   }
 
   await UserModel.updateOne(

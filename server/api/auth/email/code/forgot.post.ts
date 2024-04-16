@@ -7,20 +7,17 @@ export default defineEventHandler(async (event) => {
     await readBody(event)
 
   if (!isValidEmail(email)) {
-    kunError(event, 10302)
-    return
+    return kunError(event, 10302)
   }
 
   const emailCount = await UserModel.countDocuments({ email })
   if (!emailCount) {
-    kunError(event, 10304)
-    return
+    return kunError(event, 10304)
   }
 
   const result = await sendVerificationCodeEmail(event, email, 'forgot')
   if (typeof result === 'number') {
-    kunError(event, result)
-    return
+    return kunError(event, result)
   }
 
   return 'MOEMOE send forget password verification code successfully!'

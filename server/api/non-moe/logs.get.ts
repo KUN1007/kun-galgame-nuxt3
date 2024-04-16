@@ -30,12 +30,10 @@ const getNonMoeLogs = async (
 export default defineEventHandler(async (event) => {
   const { page, limit, language }: NonMoeLogRequestData = await getQuery(event)
   if (!page || !limit || !language) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
   if (limit !== '4') {
-    kunError(event, 10209)
-    return
+    return kunError(event, 10209)
   }
 
   const topics = await getNonMoeLogs(parseInt(page), parseInt(limit), language)

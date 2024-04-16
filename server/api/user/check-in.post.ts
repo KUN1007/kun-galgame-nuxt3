@@ -4,18 +4,15 @@ import { randomNum } from '~/utils/random'
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
 
   const user = await UserModel.findOne({ uid: userInfo.uid })
   if (!user) {
-    kunError(event, 10101)
-    return
+    return kunError(event, 10101)
   }
   if (user.daily_check_in) {
-    kunError(event, 10119)
-    return
+    return kunError(event, 10119)
   }
 
   const randomMoemoepoints = randomNum(0, 7)

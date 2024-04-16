@@ -12,14 +12,12 @@ const login = async (event: H3Event) => {
     !(isValidName(name) || isValidEmail(name)) ||
     !isValidPassword(password)
   ) {
-    kunError(event, 10107)
-    return
+    return kunError(event, 10107)
   }
 
   const loginCD = await useStorage('redis').getItem(`login:login:cd:${ip}`)
   if (loginCD) {
-    kunError(event, 10112)
-    return
+    return kunError(event, 10112)
   } else {
     useStorage('redis').setItem(`login:login:cd:${ip}`, ip, { ttl: 17 })
   }
@@ -36,18 +34,15 @@ export default defineEventHandler(async (event) => {
 
   const user = await UserModel.findOne({ $or: [{ name }, { email: name }] })
   if (!user) {
-    kunError(event, 10101)
-    return
+    return kunError(event, 10101)
   }
   if (user.status) {
-    kunError(event, 10120)
-    return
+    return kunError(event, 10120)
   }
 
   const isCorrectPassword = await compare(password, user.password)
   if (!isCorrectPassword) {
-    kunError(event, 10102)
-    return
+    return kunError(event, 10102)
   }
 
   const { token, refreshToken } = await createTokens(user.uid, user.name)

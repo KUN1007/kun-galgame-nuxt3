@@ -47,16 +47,14 @@ const updateReplyDislike = async (
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
 
   const { to_uid, rid, isPush }: TopicDislikeReplyRequestData =
     await getQuery(event)
   if (!to_uid || !isPush) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
 
   if (uid.toString() === to_uid) {
@@ -70,8 +68,7 @@ export default defineEventHandler(async (event) => {
     isPush === 'true'
   )
   if (typeof result === 'number') {
-    kunError(event, result)
-    return
+    return kunError(event, result)
   }
 
   return 'MOEMOE dislike reply operation successfully!'

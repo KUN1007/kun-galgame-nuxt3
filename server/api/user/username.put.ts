@@ -6,31 +6,26 @@ export default defineEventHandler(async (event) => {
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
 
   if (!isValidName(username)) {
-    kunError(event, 10117)
-    return
+    return kunError(event, 10117)
   }
 
   const user = await UserModel.findOne({ uid: userInfo.uid })
   if (!user) {
-    kunError(event, 10101)
-    return
+    return kunError(event, 10101)
   }
   if (user.moemoepoint < 1017) {
-    kunError(event, 10118)
-    return
+    return kunError(event, 10118)
   }
 
   const duplicatedNumber = await UserModel.countDocuments({
     name: { $regex: new RegExp('^' + username + '$', 'i') }
   })
   if (duplicatedNumber) {
-    kunError(event, 10105)
-    return
+    return kunError(event, 10105)
   }
 
   await UserModel.updateOne(

@@ -6,14 +6,12 @@ import type { TopicAside } from '~/types/api/topic'
 export default defineEventHandler(async (event) => {
   const tid = getRouterParam(event, 'tid')
   if (!tid) {
-    kunError(event, 10210)
-    return
+    return kunError(event, 10210)
   }
 
   const { uid }: { uid: string } = await getQuery(event)
   if (!uid) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
 
   const session = await mongoose.startSession()
@@ -21,8 +19,7 @@ export default defineEventHandler(async (event) => {
   try {
     const user = await UserModel.findOne({ uid })
     if (!user) {
-      kunError(event, 10101)
-      return
+      return kunError(event, 10101)
     }
     const popularTIDs = user.topic
     const popularTopics = await TopicModel.find({

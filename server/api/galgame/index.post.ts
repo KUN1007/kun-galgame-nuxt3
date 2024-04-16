@@ -21,8 +21,7 @@ const readGalgameData = async (event: H3Event) => {
     !aliasesData ||
     !bannerData
   ) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
 
   const vndbId = vndbIdData.toString()
@@ -32,20 +31,17 @@ const readGalgameData = async (event: H3Event) => {
   const banner = await new Response(bannerData).arrayBuffer()
   const res = checkGalgamePublish(vndbId, name, introduction, aliases)
   if (res) {
-    kunError(event, res)
-    return
+    return kunError(event, res)
   }
 
   const galgame = await GalgameModel.findOne({ vndb_id: vndbId })
   if (galgame) {
-    kunError(event, 10608)
-    return
+    return kunError(event, 10608)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
 
@@ -68,13 +64,11 @@ export default defineEventHandler(async (event) => {
 
   const user = await UserModel.findOne({ uid })
   if (!user) {
-    kunError(event, 10101)
-    return
+    return kunError(event, 10101)
   }
 
   if (user.moemoepoint / 10 < user.daily_galgame_count) {
-    kunError(event, 10607)
-    return
+    return kunError(event, 10607)
   }
 
   const session = await mongoose.startSession()
@@ -109,12 +103,10 @@ export default defineEventHandler(async (event) => {
 
     const res = await uploadGalgameBanner(banner, savedGalgame.gid)
     if (!res) {
-      kunError(event, 10116)
-      return
+      return kunError(event, 10116)
     }
     if (typeof res === 'number') {
-      kunError(event, res)
-      return
+      return kunError(event, res)
     }
 
     const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${savedGalgame.gid}/banner/banner.webp`
