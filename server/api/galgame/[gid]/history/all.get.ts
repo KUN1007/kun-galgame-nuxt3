@@ -13,19 +13,17 @@ export default defineEventHandler(async (event) => {
   }
   const { page, limit }: { page: string; limit: string } = await getQuery(event)
   if (!page || !limit) {
-    kunError(event, 10507)
-    return
+    return kunError(event, 10507)
   }
   if (limit !== '7') {
-    kunError(event, 10209)
-    return
+    return kunError(event, 10209)
   }
 
   const skip = (parseInt(page) - 1) * parseInt(limit)
   const totalCount = await GalgameHistoryModel.countDocuments({ gid }).lean()
 
   const data = await GalgameHistoryModel.find({ gid })
-    .sort({ time: -1 })
+    .sort({ created: -1 })
     .skip(skip)
     .limit(parseInt(limit))
     .populate('user', 'uid avatar name')

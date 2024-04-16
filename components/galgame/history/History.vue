@@ -51,10 +51,10 @@ const { data, pending } = await useFetch(
 
     <KunPagination
       class="pagination"
-      v-if="data?.totalCount > 7"
+      v-if="data.totalCount > 7"
       :page="pageData.page"
       :limit="pageData.limit"
-      :sum="data?.totalCount"
+      :sum="data.totalCount"
       :loading="pending"
       @set-page="(newPage) => (pageData.page = newPage)"
     />

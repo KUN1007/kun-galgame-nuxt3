@@ -7,8 +7,21 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10507)
   }
 
+  const { page, limit }: { page: string; limit: string } = await getQuery(event)
+  if (!page || !limit) {
+    return kunError(event, 10507)
+  }
+  if (limit !== '7') {
+    return kunError(event, 10209)
+  }
+
+  const skip = (parseInt(page) - 1) * parseInt(limit)
+  const totalCount = await GalgamePRModel.countDocuments({ gid }).lean()
+
   const data = await GalgamePRModel.find({ gid })
     .sort({ created: -1 })
+    .skip(skip)
+    .limit(parseInt(limit))
     .populate('user', 'uid avatar name')
     .lean()
 
@@ -26,5 +39,5 @@ export default defineEventHandler(async (event) => {
     }
   }))
 
-  return prs
+  return { prs, totalCount }
 })
