@@ -37,10 +37,27 @@ export const compareObjects = (
         typeof currentObj2[key] === 'object' &&
         currentObj2[key] !== null
       ) {
-        currentDiff[key] = {}
-        traverse(currentObj1[key], currentObj2[key], currentDiff[key], newPath)
-        if (Object.keys(currentDiff[key]).length === 0) {
-          delete currentDiff[key]
+        if (
+          Array.isArray(currentObj1[key]) &&
+          Array.isArray(currentObj2[key])
+        ) {
+          if (
+            JSON.stringify(currentObj1[key]) !==
+            JSON.stringify(currentObj2[key])
+          ) {
+            currentDiff[key] = currentObj1[key]
+          }
+        } else {
+          currentDiff[key] = {}
+          traverse(
+            currentObj1[key],
+            currentObj2[key],
+            currentDiff[key],
+            newPath
+          )
+          if (Object.keys(currentDiff[key]).length === 0) {
+            delete currentDiff[key]
+          }
         }
       } else if (currentObj1[key] !== currentObj2[key]) {
         currentDiff[key] = currentObj1[key]

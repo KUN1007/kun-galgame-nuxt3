@@ -5,16 +5,14 @@ export default defineEventHandler(async (event) => {
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
 
   if (bio.length > 107) {
-    kunError(event, 10106)
-    return
+    return kunError(event, 10106)
   }
 
   await UserModel.updateOne({ uid: userInfo.uid }, { $set: { bio } })
 
-  return 'Moe Moe'
+  return 'MoeMoe update bio successfully!'
 })

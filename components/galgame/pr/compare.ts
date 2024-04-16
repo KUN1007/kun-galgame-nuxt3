@@ -1,8 +1,8 @@
 import type { GalgameStoreTemp } from '~/store/types/edit/galgame'
 
 export const diffGalgame = (
-  oldGalgame: GalgameStoreTemp,
-  newGalgame: Partial<GalgameStoreTemp>
+  oldGalgame: Partial<Omit<GalgameStoreTemp, 'alias'> & { alias: string }>,
+  newGalgame: Partial<Omit<GalgameStoreTemp, 'alias'> & { alias: string }>
 ) => {
   const diffs: string[] = []
 
@@ -18,10 +18,10 @@ export const diffGalgame = (
         compareObjects(obj1[key], obj2[key], newPath)
       } else if (obj1[key] !== obj2[key]) {
         if (obj1[key] === undefined) {
-          diffs.push(`${newPath}<br/><br/><b>${obj2[key]}</b>`)
+          diffs.push(`<h3>${newPath}</h3><b>${obj2[key]}</b><br/><br/>`)
         } else if (obj2[key] !== undefined && obj1[key] !== undefined) {
           diffs.push(
-            `<h2>${newPath}</h2>${useDiff(obj2[key], obj1[key])}<br/><br/>`
+            `<h3>${newPath}</h3>${useDiff(obj2[key], obj1[key])}<br/><br/>`
           )
         }
       }

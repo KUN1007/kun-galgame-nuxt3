@@ -3,7 +3,7 @@ const value = defineModel<string>({ required: true })
 </script>
 
 <template>
-  <input class="kun-input" v-model="value" />
+  <input type="text" class="kun-input" v-model="value" />
 </template>
 
 <style lang="scss" scoped>

@@ -16,7 +16,7 @@ const { data, pending, refresh } = await useLazyFetch(
 <template>
   <div class="container" v-if="data && data.length">
     <KunHeader :size="2">
-      <template #header> 更新请求 </template>
+      <template #header>更新请求</template>
     </KunHeader>
 
     <GalgamePrInfo

@@ -25,14 +25,12 @@ defineProps<{
   <div class="official">
     <h3>游戏官网</h3>
     <GalgameNull v-if="!galgame.official" />
-    <a
-      v-if="galgame.official"
-      :href="galgame.official"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {{ galgame.official }}
-    </a>
+    <span class="link" v-if="galgame.official">
+      <KunCopy :text="galgame.official" />
+      <a :href="galgame.official" target="_blank" rel="noopener noreferrer">
+        <Icon name="lucide:external-link" />
+      </a>
+    </span>
   </div>
 
   <div class="platform">
@@ -73,6 +71,23 @@ h3 {
 
 .official {
   margin-bottom: 17px;
+
+  .link {
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-right: 17px;
+    display: inline-block;
+
+    & > a {
+      margin-left: 10px;
+      font-size: 20px;
+      color: var(--kungalgame-font-color-0);
+
+      &:hover {
+        color: var(--kungalgame-blue-5);
+      }
+    }
+  }
 }
 
 .platform {
