@@ -5,22 +5,6 @@ const props = defineProps<{
   galgame: GalgameDetail
 }>()
 
-const localePath = useLocalePath()
-
-const { galgamePR } = storeToRefs(useTempGalgamePRStore())
-
-const handleRewriteGalgame = (galgame: GalgameDetail) => {
-  const { gid, name, introduction, alias, official } = galgame
-  galgamePR.value[0] = {
-    gid,
-    name,
-    introduction,
-    alias,
-    official
-  }
-  navigateTo(localePath(`/edit/galgame?type=pr&gid=${galgame.gid}`))
-}
-
 provide<GalgameDetail>('galgame', props.galgame)
 </script>
 
@@ -57,9 +41,7 @@ provide<GalgameDetail>('galgame', props.galgame)
         :is-favorite="galgame.favorites.isFavorite"
       />
 
-      <span class="rewrite" @click="handleRewriteGalgame(galgame)">
-        <Icon name="lucide:pencil" />
-      </span>
+      <GalgameRewrite :galgame="galgame" />
     </div>
 
     <KunDivider />
@@ -76,15 +58,6 @@ provide<GalgameDetail>('galgame', props.galgame)
 
   span {
     margin-right: 17px;
-  }
-}
-
-.rewrite {
-  color: var(--kungalgame-font-color-2);
-  cursor: pointer;
-
-  .icon {
-    font-size: 24px;
   }
 }
 </style>

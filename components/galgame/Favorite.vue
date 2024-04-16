@@ -26,7 +26,7 @@ const toggleFavoriteGalgame = async () => {
       const socket = useSocket()
       socket.emit('like', props.toUid)
     } else {
-      useMessage('CancelUn favorite successfully!', '取消收藏成功！', 'success')
+      useMessage('Cancel favorite successfully!', '取消收藏成功！', 'success')
     }
 
     isFavorite.value = !isFavorite.value

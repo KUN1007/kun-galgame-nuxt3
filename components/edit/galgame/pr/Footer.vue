@@ -34,7 +34,9 @@ const handlePublishGalgamePR = async () => {
   isPublishing.value = false
 
   if (data.value) {
-    navigateTo(localePath(`/galgame/${galgamePR.value[0].gid}`))
+    navigateTo(localePath(`/galgame/${galgamePR.value[0].gid}`), {
+      replace: true
+    })
     useTempMessageStore().info('AlertInfo.edit.prSuccess')
   }
 }

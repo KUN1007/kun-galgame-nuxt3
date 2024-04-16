@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  middleware: 'auth'
+  middleware: ['auth', 'prevent']
 })
 
 const type = useRequestURL().searchParams.get('type')

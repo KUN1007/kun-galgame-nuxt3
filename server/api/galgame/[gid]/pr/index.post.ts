@@ -35,9 +35,16 @@ export default defineEventHandler(async (event) => {
   const session = await mongoose.startSession()
   session.startTransaction()
   try {
+    const maxIndexPR = await GalgamePRModel.findOne({ gid })
+      .sort({ index: -1 })
+      .lean()
+    const baseIndex = maxIndexPR ? maxIndexPR.index : 0
+    const index = baseIndex + 1
+
     await GalgamePRModel.create({
       gid: galgame.gid,
       uid: userInfo.uid,
+      index,
       galgame: diffGalgame
     })
 

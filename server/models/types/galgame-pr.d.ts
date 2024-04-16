@@ -11,6 +11,7 @@ export interface GalgamePR {
   gid: number
   uid: number
   status: number
+  index: number
   note: string
   completed_time: number
   galgame: Partial<GalgameStoreTemp>

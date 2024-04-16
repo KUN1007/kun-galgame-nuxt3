@@ -12,21 +12,18 @@ const readReplyData = async (event: H3Event) => {
 
   const res = checkReplyPublish(tags, content, parseInt(time))
   if (res) {
-    kunError(event, res)
-    return
+    return kunError(event, res)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, 10115, 205)
   }
   const uid = userInfo.uid
 
   const tid = getRouterParam(event, 'tid')
   if (!tid) {
-    kunError(event, 10210)
-    return
+    return kunError(event, 10210)
   }
 
   const deduplicatedTags = Array.from(new Set(tags))
@@ -58,7 +55,7 @@ export default defineEventHandler(async (event) => {
     const baseFloor = maxFloorReply ? maxFloorReply.floor : 0
     const floor = baseFloor + 1
 
-    const newReply = new ReplyModel({
+    const newReply = await ReplyModel.create({
       tid,
       r_uid,
       to_uid,
@@ -68,36 +65,33 @@ export default defineEventHandler(async (event) => {
       content,
       time
     })
-    const savedReply = await newReply.save()
 
     const replyUser = await UserModel.findOneAndUpdate(
-      { uid: savedReply.r_uid },
-      { $addToSet: { reply: savedReply.rid } }
+      { uid: newReply.r_uid },
+      { $addToSet: { reply: newReply.rid } }
     )
     if (!replyUser) {
-      kunError(event, 10101)
-      return
+      return kunError(event, 10101)
     }
 
     const replyToUser = await UserModel.findOneAndUpdate(
-      { uid: savedReply.to_uid },
+      { uid: newReply.to_uid },
       { $inc: { moemoepoint: 2 } }
     )
     if (!replyToUser) {
-      kunError(event, 10101)
-      return
+      return kunError(event, 10101)
     }
 
     await TopicModel.updateOne(
       { tid },
       {
-        $addToSet: { replies: savedReply.rid },
+        $addToSet: { replies: newReply.rid },
         $inc: { popularity: 5 }
       }
     )
 
     if (tags.length) {
-      await createTagsByTidAndRid(tid, savedReply.rid, tags, [])
+      await createTagsByTidAndRid(tid, newReply.rid, tags, [])
     }
 
     if (r_uid.toString() !== to_uid) {
@@ -105,16 +99,16 @@ export default defineEventHandler(async (event) => {
         r_uid,
         parseInt(to_uid),
         'replied',
-        savedReply.content.slice(0, 233),
+        newReply.content.slice(0, 233),
         tid
       )
     }
 
     const responseData: TopicReply = {
-      rid: savedReply.rid,
-      tid: savedReply.tid,
-      floor: savedReply.floor,
-      to_floor: savedReply.to_floor,
+      rid: newReply.rid,
+      tid: newReply.tid,
+      floor: newReply.floor,
+      to_floor: newReply.to_floor,
       r_user: {
         uid: replyUser.uid,
         name: replyUser.name,
@@ -125,15 +119,15 @@ export default defineEventHandler(async (event) => {
         uid: replyToUser.uid,
         name: replyToUser.name
       },
-      edited: savedReply.edited,
-      content: savedReply.content,
-      upvotes: savedReply.upvotes,
-      upvote_time: savedReply.upvote_time,
-      likes: savedReply.likes,
-      dislikes: savedReply.dislikes,
-      tags: savedReply.tags,
-      time: savedReply.time,
-      comment: savedReply.comment
+      edited: newReply.edited,
+      content: newReply.content,
+      upvotes: newReply.upvotes,
+      upvote_time: newReply.upvote_time,
+      likes: newReply.likes,
+      dislikes: newReply.dislikes,
+      tags: newReply.tags,
+      time: newReply.time,
+      comment: newReply.comment
     }
 
     await session.commitTransaction()

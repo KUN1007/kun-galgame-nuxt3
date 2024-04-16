@@ -15,8 +15,9 @@ export default defineEventHandler(async (event) => {
   }
 
   const details: GalgamePRDetails = {
-    gid: pr.gid,
     gprid: pr.gprid,
+    gid: pr.gid,
+    index: pr.index,
     status: pr.status,
     time: pr.created,
     completedTime: pr.completed_time,

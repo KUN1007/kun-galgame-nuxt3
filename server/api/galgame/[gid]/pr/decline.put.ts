@@ -66,7 +66,7 @@ export default defineEventHandler(async (event) => {
       time: Date.now(),
       action: 'declined',
       type: 'pr',
-      content: `#${gprid} ${note}`
+      content: `#${galgamePR.index} ${note}`
     })
 
     if (uid !== galgamePR.uid) {
@@ -74,7 +74,7 @@ export default defineEventHandler(async (event) => {
         uid,
         galgamePR.uid,
         'declined',
-        `#${gprid} ${note}`,
+        `#${galgamePR.index} ${note}`,
         -galgamePR.gid
       )
     }

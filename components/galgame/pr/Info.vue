@@ -78,7 +78,7 @@ watch(
         查看详情
       </KunButton>
 
-      <span v-if="pr.status == 2">{{ `#${pr.gprid}` }}</span>
+      <span v-if="pr.status == 2">{{ `#${pr.index}` }}</span>
 
       <span v-if="details" class="close" @click="details = undefined">
         <Icon name="lucide:x" />

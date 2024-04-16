@@ -13,8 +13,9 @@ export default defineEventHandler(async (event) => {
     .lean()
 
   const prs: GalgamePR[] = data.map((pr) => ({
-    gid: pr.gid,
     gprid: pr.gprid,
+    gid: pr.gid,
+    index: pr.index,
     status: pr.status,
     time: pr.created,
     completedTime: pr.completed_time,
