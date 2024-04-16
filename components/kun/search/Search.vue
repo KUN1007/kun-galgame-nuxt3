@@ -62,12 +62,25 @@ const isScrollAtBottom = () => {
   }
 }
 
+const onKeydown = (event: KeyboardEvent) => {
+  if (event.ctrlKey && event.key.toLowerCase() === 'k') {
+    event.preventDefault()
+    isShowSearch.value = true
+  } else if (event.key === 'Escape') {
+    isShowSearch.value = false
+  }
+}
+
+onMounted(() => window.addEventListener('keydown', onKeydown))
+
 onBeforeUnmount(() => {
   const element = container.value
   if (element) {
     element.removeEventListener('scroll', scrollHandler)
   }
 })
+
+onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 </script>
 
 <template>
