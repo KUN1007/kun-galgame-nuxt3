@@ -2,10 +2,11 @@
 import { checkImageValid, resizeImage } from './utils/handleFileChange'
 
 const props = defineProps<{
-  initialImage?: string
   width: string
   size: number
   aspect: number
+  initialImage?: string
+  hint?: string
 }>()
 
 const emits = defineEmits<{
@@ -72,13 +73,14 @@ const handleClickUpload = () => {
   <div
     ref="upload"
     tabindex="0"
-    class="upload"
+    class="kun-upload"
     :style="{ width: props.width, 'aspect-ratio': props.aspect }"
     @drop="handleDrop($event)"
     @dragover="handleDragOver"
     @click="handleClickUpload"
   >
     <span class="plus" v-if="!selectedFileUrl && !initialImage"></span>
+    <span class="hint" v-if="hint">{{ hint }}</span>
     <NuxtImg
       :style="{ 'max-width': `calc(${props.width} - 10px)` }"
       class="preview"
@@ -97,13 +99,14 @@ const handleClickUpload = () => {
 </template>
 
 <style lang="scss" scoped>
-.upload {
+.kun-upload {
   border: 1px solid var(--kungalgame-blue-5);
-  border-radius: 5px;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.2s;
+  user-select: none;
 
   &:hover {
     border: 1px solid var(--kungalgame-pink-3);
@@ -112,6 +115,13 @@ const handleClickUpload = () => {
     .plus::after {
       background: var(--kungalgame-pink-3);
     }
+  }
+
+  .hint {
+    position: absolute;
+    color: var(--kungalgame-font-color-0);
+    font-size: small;
+    font-style: oblique;
   }
 
   .plus {

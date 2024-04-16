@@ -3,7 +3,7 @@ const { locale } = useI18n()
 </script>
 
 <template>
-  <KunHeader :size="2">
+  <KunHeader :size="1">
     <template #header>提出更新请求</template>
   </KunHeader>
 
@@ -15,7 +15,7 @@ const { locale } = useI18n()
       当该请求被该 Galgame 资源的发布者、或萌萌点大于 1100
       的用户、或论坛管理员确认合并后, 该更新才会生效
     </p>
-    <p>若请求更新被合并, 将获得 2 萌萌点, 审核者获得 1 萌萌点</p>
+    <p>若请求更新被合并, 将获得 1 萌萌点, 请求提出者和审核者会被加入贡献者中</p>
   </div>
 </template>
 

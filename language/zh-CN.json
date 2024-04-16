@@ -539,7 +539,7 @@
     "pr": {
       "status0": "进行中",
       "status1": "已合并",
-      "status3": "已拒绝"
+      "status2": "已拒绝"
     }
   },
   "report": {

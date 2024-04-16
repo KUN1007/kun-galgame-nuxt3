@@ -21,9 +21,9 @@ onMounted(async () => {
     width="300px"
     :size="1920"
     :aspect="16 / 9"
+    hint="预览图不可包含 R18 等敏感内容"
     @set-image="(img) => saveImage(img, `kun-galgame-publish-banner`)"
   />
-  <p>注意, 预览图不能有 R18 内容</p>
 </template>
 
 <style lang="scss" scoped>
