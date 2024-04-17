@@ -14,11 +14,14 @@ const linkModel = reactive({
   link: ''
 })
 
-const { data, refresh } = await useFetch(`/api/galgame/${gid.value}/link/all`, {
-  method: 'GET',
-  watch: false,
-  ...kungalgameResponseHandler
-})
+const { data, pending, refresh } = await useLazyFetch(
+  `/api/galgame/${gid.value}/link/all`,
+  {
+    method: 'GET',
+    watch: false,
+    ...kungalgameResponseHandler
+  }
+)
 
 const handlePublishLink = async () => {
   if (!checkGalgameLinkPublish(linkModel.name, linkModel.link)) {
@@ -90,7 +93,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
       </KunButton>
     </div>
 
-    <div class="links" v-if="data">
+    <div class="links" v-if="data && !pending">
       <span class="link" v-for="(link, index) in data" :key="index">
         <KunCopy
           :text="link.link"
@@ -113,8 +116,9 @@ const handleDeleteLink = async (gid: number, glid: number) => {
         </span>
       </span>
     </div>
+    <KunSkeletonGalgameLink v-if="pending" />
 
-    <GalgameNull class="null" v-if="!data?.length" />
+    <GalgameNull class="null" v-if="!pending && !data?.length" />
   </div>
 </template>
 

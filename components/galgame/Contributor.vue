@@ -8,11 +8,14 @@ const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
 
-const { data } = await useFetch(`/api/galgame/${gid.value}/contributor`, {
-  method: 'GET',
-  watch: false,
-  ...kungalgameResponseHandler
-})
+const { data, pending } = await useLazyFetch(
+  `/api/galgame/${gid.value}/contributor`,
+  {
+    method: 'GET',
+    watch: false,
+    ...kungalgameResponseHandler
+  }
+)
 </script>
 
 <template>
@@ -21,7 +24,8 @@ const { data } = await useFetch(`/api/galgame/${gid.value}/contributor`, {
       {{ $t('galgame.contributors') }}
     </template>
   </KunHeader>
-  <div class="contributor" v-if="data">
+
+  <div class="contributor" v-if="data && !pending">
     <KunAvatar
       size="30px"
       v-for="(user, index) in data"
@@ -45,6 +49,7 @@ const { data } = await useFetch(`/api/galgame/${gid.value}/contributor`, {
       <span>{{ views }}</span>
     </span>
   </div>
+  <KunSkeletonGalgameContributor v-if="pending" />
 </template>
 
 <style lang="scss" scoped>

@@ -8,7 +8,7 @@ const { isShowPublish, rewriteResourceId } = storeToRefs(
   useTempGalgameResourceStore()
 )
 
-const { data: resourceData, refresh } = await useLazyFetch(
+const { data, pending, refresh } = await useLazyFetch(
   `/api/galgame/${gid.value}/resource/all`,
   {
     method: 'GET',
@@ -46,16 +46,19 @@ watch(
       </template>
     </KunHeader>
 
-    <GalgameNull class="null" v-if="!resourceData?.length" />
+    <GalgameNull class="null" v-if="!data?.length" />
 
     <GalgameResourcePublish v-if="isShowPublish" :refresh="refresh" />
 
-    <GalgameResourceLink
-      v-for="resource in resourceData"
-      :key="resource.grid"
-      :link="resource"
-      :refresh="refresh"
-    />
+    <div v-if="!pending">
+      <GalgameResourceLink
+        v-for="resource in data"
+        :key="resource.grid"
+        :link="resource"
+        :refresh="refresh"
+      />
+    </div>
+    <KunSkeletonGalgameResource v-if="pending" />
   </div>
 </template>
 

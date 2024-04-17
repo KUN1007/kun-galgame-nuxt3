@@ -21,7 +21,7 @@ const orderItems = [
   }
 ]
 
-const { data, pending, refresh } = await useFetch(
+const { data, pending, refresh } = await useLazyFetch(
   `/api/galgame/${gid.value}/comment/all`,
   {
     method: 'GET',
@@ -52,7 +52,7 @@ const { data, pending, refresh } = await useFetch(
       {{ $t('galgame.comment.sad') }}
     </div>
 
-    <div class="comments" v-if="data && data.totalCount">
+    <div class="comments" v-if="data && data.totalCount && !pending">
       <GalgameComment
         v-for="comment in data.commentData"
         :key="comment.gcid"
@@ -71,6 +71,7 @@ const { data, pending, refresh } = await useFetch(
         @set-page="(newPage) => (pageData.page = newPage)"
       />
     </div>
+    <KunSkeletonGalgameComment v-if="pending" />
   </div>
 </template>
 

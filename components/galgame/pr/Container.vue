@@ -27,14 +27,17 @@ const { data, pending, refresh } = await useLazyFetch(
       </template>
     </KunHeader>
 
-    <GalgamePrInfo
-      v-for="(pr, index) in data.prs"
-      :key="index"
-      :gid="gid"
-      :pr="pr"
-      :pending="pending"
-      :refresh="refresh"
-    />
+    <div v-if="!pending">
+      <GalgamePrInfo
+        v-for="(pr, index) in data.prs"
+        :key="index"
+        :gid="gid"
+        :pr="pr"
+        :pending="pending"
+        :refresh="refresh"
+      />
+    </div>
+    <KunSkeletonGalgameResource v-if="pending" />
 
     <KunPagination
       class="pagination"
