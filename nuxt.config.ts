@@ -23,8 +23,7 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     'nuxt-typed-router',
     'nuxt-schema-org',
-    '@nuxtjs/color-mode',
-    './modules/socket/module'
+    '@nuxtjs/color-mode'
   ],
   runtimeConfig: {
     MONGODB_URL: process.env.MONGODB_URL,
@@ -126,13 +125,6 @@ export default defineNuxtConfig({
     },
     client: {
       installPrompt: true
-    },
-    devOptions: {
-      enabled: true,
-      suppressWarnings: true,
-      navigateFallback: '/',
-      navigateFallbackAllowlist: [/^\/$/],
-      type: 'module'
     }
   }
 })

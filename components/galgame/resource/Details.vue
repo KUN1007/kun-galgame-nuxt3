@@ -85,8 +85,6 @@ const handleReportExpire = async (details: GalgameResourceDetails) => {
   )
 
   if (data.value) {
-    const socket = useSocket()
-    socket.emit('like', details.uid)
     useMessage('Report expired successfully!', '报告失效成功', 'success')
     props.refresh()
   }

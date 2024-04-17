@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.9.50",
+  "version": "2.10.1",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -70,8 +70,6 @@
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.1",
     "nodemailer": "^6.9.8",
-    "nodemailer-smtp-transport": "^2.7.4",
-    "socket.io": "^4.7.4",
-    "socket.io-client": "^4.7.4"
+    "nodemailer-smtp-transport": "^2.7.4"
   }
 }

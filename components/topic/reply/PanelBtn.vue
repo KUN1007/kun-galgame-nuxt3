@@ -54,9 +54,6 @@ const handlePublish = async () => {
 
     isEdit.value = false
     useMessage('Publish reply successfully!', '发布回复成功！', 'success')
-
-    const socket = useSocket()
-    socket.emit('reply', parseInt(requestData.to_uid))
   }
 }
 

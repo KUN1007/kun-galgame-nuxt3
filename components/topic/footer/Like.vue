@@ -79,9 +79,6 @@ const toggleLike = async () => {
 
     if (isPush) {
       useMessage('Like successfully!', '点赞成功！', 'success')
-
-      const socket = useSocket()
-      socket.emit('like', props.toUid)
     } else {
       useMessage('Unlike successfully!', '取消点赞成功！', 'success')
     }

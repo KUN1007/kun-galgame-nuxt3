@@ -55,9 +55,6 @@ const toggleFavorite = async () => {
 
     if (isPush) {
       useMessage('Favorite successfully!', '收藏成功！', 'success')
-
-      const socket = useSocket()
-      socket.emit('favorite', props.toUid)
     } else {
       useMessage('Cancel favorite successfully!', '取消收藏成功！', 'success')
     }
