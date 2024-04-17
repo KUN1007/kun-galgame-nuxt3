@@ -38,21 +38,21 @@ const handleClickMessage = () => {
 const handleCheckIn = async () => {
   isCheckIn.value = true
 
-  const { data } = await useFetch(`/api/user/check-in`, {
+  const result = await $fetch(`/api/user/check-in`, {
     method: 'POST',
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (typeof data.value === 'number') {
-    moemoepoint.value += data.value
+  if (result) {
+    moemoepoint.value += result
 
-    if (data.value === 0) {
+    if (result === 0) {
       messageStore.info('AlertInfo.check.message1', '', 5000)
-    } else if (data.value === 7) {
+    } else if (result === 7) {
       messageStore.info('AlertInfo.check.message3', '7', 5000)
     } else {
-      messageStore.info('AlertInfo.check.message2', data.value.toString(), 5000)
+      messageStore.info('AlertInfo.check.message2', result.toString(), 5000)
     }
   }
 }
@@ -73,15 +73,15 @@ const logOut = async () => {
 onMounted(async () => {
   container.value?.focus()
 
-  const { data } = await useFetch(`/api/user/status`, {
+  const result = await $fetch(`/api/user/status`, {
     method: 'GET',
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
-    isCheckIn.value = data.value.isCheckIn
-    moemoepoint.value = data.value.moemoepoints
+  if (result) {
+    isCheckIn.value = result.isCheckIn
+    moemoepoint.value = result.moemoepoints
   }
 })
 </script>

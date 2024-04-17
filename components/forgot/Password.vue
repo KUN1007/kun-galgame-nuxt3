@@ -54,13 +54,13 @@ const handleChangePassword = async () => {
     return
   }
 
-  const { data } = await useFetch('/api/auth/password/reset', {
+  const data = await $fetch('/api/auth/password/reset', {
     method: 'POST',
     body: input,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (data) {
     navigateTo(localePath('/login'))
     useMessage('Password change successfully!', '密码更改成功', 'success')
   }

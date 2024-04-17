@@ -15,13 +15,12 @@ watch(
 )
 
 onMounted(async () => {
-  const { data } = await useFetch(`/api/message/unread`, {
+  const result = await $fetch(`/api/message/unread`, {
     method: 'GET'
   })
-  if (data) {
+  if (result === 'Moe loli online!') {
     messageStatus.value = 'online'
-  }
-  if (data.value) {
+  } else {
     messageStatus.value = 'new'
   }
 })

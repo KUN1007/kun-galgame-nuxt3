@@ -25,7 +25,7 @@ const toUser = ref(props.toUser)
 const currentUserUid = usePersistUserStore().uid
 
 const getComments = async () => {
-  const data = await useFetch(`/api/topic/${props.tid}/comment`, {
+  const data = await $fetch(`/api/topic/${props.tid}/comment`, {
     method: 'GET',
     query: { rid: props.rid },
     watch: false,
@@ -34,15 +34,22 @@ const getComments = async () => {
   return data
 }
 
-const { data: commentsData } = await getComments()
+const { data: commentsData } = await useFetch(
+  `/api/topic/${props.tid}/comment`,
+  {
+    method: 'GET',
+    query: { rid: props.rid },
+    watch: false,
+    ...kungalgameResponseHandler
+  }
+)
 
 watch(
   () => props.rid,
   async () => {
     ridRef.value = props.rid
     toUser.value = props.toUser
-    const newComment = await getComments()
-    commentsData.value = newComment.data.value
+    commentsData.value = await getComments()
   }
 )
 

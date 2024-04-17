@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.10.1",
+  "version": "2.10.2",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -32,7 +32,7 @@
     "dayjs-nuxt": "^2.1.9",
     "eslint": "^8.57.0",
     "husky": "^9.0.11",
-    "nuxt": "^3.9.3",
+    "nuxt": "^3.11.2",
     "nuxt-icon": "^0.6.8",
     "nuxt-schema-org": "^3.3.6",
     "nuxt-typed-router": "^3.5.1",

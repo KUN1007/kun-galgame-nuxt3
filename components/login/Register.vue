@@ -47,17 +47,17 @@ const handleRegister = async () => {
     return
   }
 
-  const { data } = await useFetch('/api/user/register', {
+  const userInfo = await $fetch('/api/user/register', {
     method: 'POST',
     body: registerForm,
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (userInfo) {
     info.info('AlertInfo.login.success')
     useMessage('Register successfully!', '注册成功！', 'success')
-    usePersistUserStore().setUserInfo(data.value)
+    usePersistUserStore().setUserInfo(userInfo)
     navigateTo(localePath('/'))
   }
 

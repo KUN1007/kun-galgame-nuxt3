@@ -5,7 +5,7 @@ const content = ref<HTMLElement>()
 const isLoadingComplete = ref(false)
 
 const getTopics = async () => {
-  const { data } = await useFetch('/api/home/topic', {
+  const result = await $fetch('/api/home/topic', {
     method: 'GET',
     query: {
       category: topic.value.category,
@@ -16,7 +16,7 @@ const getTopics = async () => {
     },
     ...kungalgameResponseHandler
   })
-  return data.value ?? []
+  return result
 }
 
 if (!topics.value.length) {

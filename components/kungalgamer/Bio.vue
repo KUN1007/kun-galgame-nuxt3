@@ -23,14 +23,14 @@ const handleChangeBio = async () => {
     return
   }
 
-  const { data } = await useFetch('/api/user/bio', {
+  const result = await $fetch('/api/user/bio', {
     method: 'PUT',
     watch: false,
     body: { bio: bioValue.value },
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     useMessage('Rewrite bio successfully!', 'Rewrite 签名成功', 'success')
     bioValue.value = ''
     await refresh?.()

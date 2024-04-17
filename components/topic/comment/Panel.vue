@@ -33,7 +33,7 @@ const handlePublishComment = async () => {
     isPublishing.value = true
     useMessage('Publishing...', '正在发布...', 'info')
   }
-  const { data } = await useFetch(`/api/topic/${tid.value}/comment`, {
+  const comment = await $fetch(`/api/topic/${tid.value}/comment`, {
     method: 'POST',
     body: requestData,
     watch: false,
@@ -41,8 +41,8 @@ const handlePublishComment = async () => {
   })
   isPublishing.value = false
 
-  if (data.value) {
-    emits('getCommentEmits', data.value)
+  if (comment) {
+    emits('getCommentEmits', comment)
     useMessage('Comment published successfully!', '评论发布成功', 'success')
     handleCloseCommentPanel()
   }

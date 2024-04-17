@@ -39,26 +39,26 @@ const dislikeOperation = async (
       isPush,
       to_uid: toUid
     }
-    const { data } = await useFetch(`/api/topic/${tid}/dislike`, {
+    const result = await $fetch(`/api/topic/${tid}/dislike`, {
       method: 'PUT',
       query: queryData,
       watch: false,
       ...kungalgameResponseHandler
     })
-    return data
+    return result
   } else {
     const queryData = {
       isPush,
       rid: props.rid,
       to_uid: toUid
     }
-    const { data } = await useFetch(`/api/topic/${tid}/reply/dislike`, {
+    const result = await $fetch(`/api/topic/${tid}/reply/dislike`, {
       method: 'PUT',
       query: queryData,
       watch: false,
       ...kungalgameResponseHandler
     })
-    return data
+    return result
   }
 }
 
@@ -71,9 +71,9 @@ const toggleDislike = async () => {
   const { tid, rid, toUid } = props
   const isPush = !isDisliked.value
 
-  const data = await dislikeOperation(tid, rid, toUid, isPush)
+  const result = await dislikeOperation(tid, rid, toUid, isPush)
 
-  if (data.value) {
+  if (result) {
     isDisliked.value = isPush
     dislikesCount.value += isPush ? 1 : -1
 

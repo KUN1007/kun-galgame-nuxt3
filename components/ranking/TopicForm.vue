@@ -4,31 +4,11 @@ import { topicSortItem, topicIconMap } from './navSortItem'
 const { topic } = storeToRefs(useTempRankingStore())
 const isAscending = ref(false)
 
-const getTopics = async () => {
-  const data = await useFetch(`/api/ranking/topic`, {
-    method: 'GET',
-    query: {
-      page: topic.value.page,
-      limit: topic.value.limit,
-      sortField: topic.value.sortField,
-      sortOrder: topic.value.sortOrder
-    },
-    watch: false,
-    ...kungalgameResponseHandler
-  })
-  return data
-}
-
-const { data: topics } = await getTopics()
-
-watch(
-  () => topic.value,
-  async () => {
-    const newTopics = await getTopics()
-    topics.value = newTopics.data.value
-  },
-  { deep: true }
-)
+const { data } = await useFetch(`/api/ranking/topic`, {
+  method: 'GET',
+  query: topic,
+  ...kungalgameResponseHandler
+})
 
 const handleClickSortOrder = () => {
   isAscending.value = !isAscending.value
@@ -74,8 +54,8 @@ const handleClickSortOrder = () => {
       </div>
     </div>
 
-    <div class="container" v-if="topics">
-      <RankingTopic :field="topic.sortField" :topics="topics" />
+    <div class="container" v-if="data">
+      <RankingTopic :field="topic.sortField" :topics="data" />
     </div>
   </div>
 </template>

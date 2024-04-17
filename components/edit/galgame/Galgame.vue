@@ -38,19 +38,16 @@ const handleGetVNData = async () => {
     )
   }
 
-  const { data: vndbData } = await useFetch<VNDBResponse>(
-    `https://api.vndb.org/kana/vn`,
-    {
-      method: 'POST',
-      body: {
-        filters: ['id', '=', vndbId.value],
-        fields: 'title, titles.title, description, aliases'
-      }
+  const vndbData = await $fetch<VNDBResponse>(`https://api.vndb.org/kana/vn`, {
+    method: 'POST',
+    body: {
+      filters: ['id', '=', vndbId.value],
+      fields: 'title, titles.title, description, aliases'
     }
-  )
+  })
 
-  if (vndbData.value) {
-    if (!vndbData.value.results.length) {
+  if (vndbData) {
+    if (!vndbData.results.length) {
       isFetching.value = false
       useMessage(
         'No data retrieved. The game may not exist.',
@@ -63,7 +60,7 @@ const handleGetVNData = async () => {
     isFetching.value = false
     useMessage('Fetching data successfully!', '获取数据成功!', 'info')
 
-    data.value = vndbData.value.results[0]
+    data.value = vndbData.results[0]
     name.value['en-us'] = data.value.title
     introduction.value['en-us'] = data.value.description ?? ''
     aliases.value = data.value.aliases

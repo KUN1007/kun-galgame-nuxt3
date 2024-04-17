@@ -60,16 +60,16 @@ const handleChangeAvatar = async () => {
   isUploading.value = true
   useMessage('Uploading avatar image...', '正在上传头像图片...', 'info')
 
-  const { data } = await useFetch('/api/user/avatar', {
+  const avatarLink = await $fetch('/api/user/avatar', {
     method: 'POST',
     body: formData,
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
-    avatar.value = data.value
-    avatarMin.value = data.value.replace(/\.webp$/, '-100.webp')
+  if (avatarLink) {
+    avatar.value = avatarLink
+    avatarMin.value = avatarLink.replace(/\.webp$/, '-100.webp')
     selectedFileUrl.value = ''
     useMessage('Update avatar successfully!', '更新头像成功', 'success')
     await refresh?.()

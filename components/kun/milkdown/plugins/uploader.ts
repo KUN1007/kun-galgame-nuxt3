@@ -23,7 +23,7 @@ export const kunUploader: Uploader = async (files, schema) => {
       const formData = new FormData()
       formData.append('image', image)
 
-      const { data } = await useFetch('/api/image/topic', {
+      const result = await $fetch('/api/image/topic', {
         method: 'POST',
         body: formData,
         watch: false,
@@ -32,7 +32,7 @@ export const kunUploader: Uploader = async (files, schema) => {
 
       const alt = image.name
       return schema.nodes.image.createAndFill({
-        src: data.value,
+        src: result,
         alt
       }) as Node
     })

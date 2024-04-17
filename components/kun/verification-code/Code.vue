@@ -22,12 +22,12 @@ const sendCode = async () => {
       ? { email: props.email, name: props.name }
       : { email: props.email }
 
-  const { data } = await useFetch(url, {
+  const result = await $fetch(url, {
     method: 'POST',
     body,
     ...kungalgameResponseHandler
   })
-  return data
+  return result
 }
 
 watch(
@@ -45,9 +45,9 @@ watch(
         }
       }, 1000)
 
-      const data = await sendCode()
+      const result = await sendCode()
 
-      if (data.value) {
+      if (result) {
         info.info('AlertInfo.code.code')
       } else {
         isSending.value = false

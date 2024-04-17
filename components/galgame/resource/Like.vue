@@ -25,14 +25,14 @@ const likeResource = async () => {
     return
   }
 
-  const { data } = await useFetch(`/api/galgame/${props.gid}/resource/like`, {
+  const result = await $fetch(`/api/galgame/${props.gid}/resource/like`, {
     method: 'PUT',
     query: { grid: props.grid },
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     likesCount.value++
     isLiked.value = true
     useMessage('Like successfully!', '点赞成功', 'success')

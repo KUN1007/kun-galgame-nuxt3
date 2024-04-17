@@ -25,13 +25,13 @@ const handelClickShowMoreOperation = async (mid: number) => {
     if (messageMap.get(mid)) {
       return
     }
-    const { data } = await useFetch(`/api/message`, {
+    const result = await $fetch(`/api/message`, {
       method: 'GET',
       query: { mid },
       watch: false,
       ...kungalgameResponseHandler
     })
-    messageMap.set(mid, data.value)
+    messageMap.set(mid, result)
   } else {
     activeMessage.value = activeMessage.value.filter((item) => item !== mid)
   }
@@ -45,28 +45,28 @@ const handleGetMessageDetail = (message: Message) => {
 }
 
 const handleMarkAsRead = async (mid: number) => {
-  const { data } = await useFetch(`/api/message/read`, {
+  const result = await $fetch(`/api/message/read`, {
     method: 'PUT',
     query: { mid },
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     props.refresh()
     useMessage('Mark as read successfully!', '标记为已读成功', 'success')
   }
 }
 
 const handleDeleteMessage = async (mid: number) => {
-  const { data } = await useFetch(`/api/message/delete`, {
+  const result = await $fetch(`/api/message/delete`, {
     method: 'DELETE',
     query: { mid },
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     props.refresh()
     useMessage('Delete message successfully!', '删除消息成功', 'success')
   }

@@ -47,7 +47,7 @@ const handleSubmitReport = async () => {
   }
 
   isFetching.value = true
-  const { data } = await useFetch(`/api/report/submit`, {
+  const result = await $fetch(`/api/report/submit`, {
     method: 'POST',
     body: {
       type: selectReportType.value,
@@ -58,7 +58,7 @@ const handleSubmitReport = async () => {
   })
   isFetching.value = false
 
-  if (data.value) {
+  if (result) {
     useMessage('Report submitted successfully!', '举报提交成功!', 'success')
     reason.value = ''
   }

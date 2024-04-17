@@ -33,13 +33,13 @@ const handleSendCode = async () => {
     'info'
   )
 
-  const { data } = await useFetch('/api/auth/email/code/reset', {
+  const result = await $fetch('/api/auth/email/code/reset', {
     method: 'POST',
     body: { email: input.newEmail },
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     useMessage(
       'Reset email verification code sent successfully!',
       '重置邮箱验证码发送成功！',
@@ -53,13 +53,13 @@ const handleResetEmail = async () => {
     return
   }
 
-  const { data } = await useFetch('/api/user/email', {
+  const result = await $fetch('/api/user/email', {
     method: 'PUT',
     body: { email: input.newEmail, code: input.code },
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     input.newEmail = ''
     input.code = ''
     useMessage('Email change successful!', '邮箱更改成功', 'success')
@@ -78,22 +78,22 @@ const handleChangePassword = async () => {
     return
   }
 
-  const result = await useTempMessageStore().alert({
+  const res = await useTempMessageStore().alert({
     'en-us': 'Are you sure you want to change the password?',
     'ja-jp': '',
     'zh-cn': '确定更改密码吗?'
   })
-  if (!result) {
+  if (!res) {
     return
   }
 
-  const { data } = await useFetch('/api/user/password', {
+  const result = await $fetch('/api/user/password', {
     method: 'PUT',
     body: { oldPassword: input.oldPassword, newPassword: input.newPassword },
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     kungalgameStoreReset()
     navigateTo(localePath('/login'))
     useMessage('Password change successful!', '密码更改成功', 'success')

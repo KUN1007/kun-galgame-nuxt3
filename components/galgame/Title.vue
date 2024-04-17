@@ -44,14 +44,14 @@ const handleChangeBanner = async () => {
 
   useMessage('Uploading banner image...', '正在上传预览图片...', 'info')
 
-  const { data } = await useFetch(`/api/galgame/${gid.value}/banner`, {
+  const result = await $fetch(`/api/galgame/${gid.value}/banner`, {
     method: 'PUT',
     body: formData,
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     isShowUpload.value = false
     initialImageUrl.value = ''
     await deleteImage(`kun-galgame-rewrite-banner`)

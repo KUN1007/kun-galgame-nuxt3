@@ -4,31 +4,11 @@ import { userSortItem, userIconMap } from './navSortItem'
 const { user } = storeToRefs(useTempRankingStore())
 const isAscending = ref(false)
 
-const getUsers = async () => {
-  const data = await useFetch(`/api/ranking/user`, {
-    method: 'GET',
-    query: {
-      page: user.value.page,
-      limit: user.value.limit,
-      sortField: user.value.sortField,
-      sortOrder: user.value.sortOrder
-    },
-    watch: false,
-    ...kungalgameResponseHandler
-  })
-  return data
-}
-
-const { data: users } = await getUsers()
-
-watch(
-  () => user,
-  async () => {
-    const newUsers = await getUsers()
-    users.value = newUsers.data.value
-  },
-  { deep: true }
-)
+const { data } = await useFetch(`/api/ranking/user`, {
+  method: 'GET',
+  query: user,
+  ...kungalgameResponseHandler
+})
 
 const handleClickSortOrder = () => {
   isAscending.value = !isAscending.value
@@ -75,8 +55,8 @@ const handleClickSortOrder = () => {
       </div>
     </div>
 
-    <div class="container" v-if="users">
-      <RankingKUNGalgamer :field="user.sortField" :users="users" />
+    <div class="container" v-if="data">
+      <RankingKUNGalgamer :field="user.sortField" :users="data" />
     </div>
   </div>
 </template>

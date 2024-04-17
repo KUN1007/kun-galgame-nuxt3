@@ -36,15 +36,15 @@ watch(
       return
     }
 
-    const { data } = await useFetch('/api/user/login', {
+    const userInfo = await $fetch('/api/user/login', {
       method: 'POST',
       body: loginForm,
       watch: false,
       ...kungalgameResponseHandler
     })
-    if (data.value) {
+    if (userInfo) {
       info.info('AlertInfo.login.success')
-      usePersistUserStore().setUserInfo(data.value)
+      usePersistUserStore().setUserInfo(userInfo)
       navigateTo(localePath('/'))
     }
 

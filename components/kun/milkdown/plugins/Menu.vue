@@ -55,19 +55,19 @@ const handleFileChange = async (event: Event) => {
   formData.append('image', file)
 
   useMessage('Uploading in progress...', '正在上传中...', 'info')
-  const { data } = await useFetch('/api/image/topic', {
+  const result = await $fetch('/api/image/topic', {
     method: 'POST',
     body: formData,
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     const fileName = file.name.replace(/[^a-zA-Z0-9 ]/g, '')
     const userName = usePersistUserStore().name
     const imageName = `${userName}-${Date.now()}-${fileName}`
     call(insertImageCommand.key, {
-      src: data.value ?? '',
+      src: result ?? '',
       title: imageName,
       alt: imageName
     })

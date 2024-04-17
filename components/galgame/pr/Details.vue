@@ -52,18 +52,15 @@ const handleDeclineRequest = async () => {
   }
 
   isFetching.value = true
-  const { data } = await useFetch(
-    `/api/galgame/${props.details.gid}/pr/decline`,
-    {
-      method: 'PUT',
-      body: { gprid: props.details.gprid, note: declineInput.value.trim() },
-      watch: false,
-      ...kungalgameResponseHandler
-    }
-  )
+  const result = await $fetch(`/api/galgame/${props.details.gid}/pr/decline`, {
+    method: 'PUT',
+    body: { gprid: props.details.gprid, note: declineInput.value.trim() },
+    watch: false,
+    ...kungalgameResponseHandler
+  })
   isFetching.value = false
 
-  if (data.value) {
+  if (result) {
     useMessage(
       'Decline update request successfully!',
       '拒绝更新请求成功!',
@@ -92,18 +89,15 @@ const handleMergeRequest = async () => {
   }
 
   isFetching.value = true
-  const { data } = await useFetch(
-    `/api/galgame/${props.details.gid}/pr/merge`,
-    {
-      method: 'PUT',
-      body: { gprid: props.details.gprid },
-      watch: false,
-      ...kungalgameResponseHandler
-    }
-  )
+  const result = await $fetch(`/api/galgame/${props.details.gid}/pr/merge`, {
+    method: 'PUT',
+    body: { gprid: props.details.gprid },
+    watch: false,
+    ...kungalgameResponseHandler
+  })
   isFetching.value = false
 
-  if (data.value) {
+  if (result) {
     useMessage(
       'Merge update request successfully!',
       '合并更新请求成功!',

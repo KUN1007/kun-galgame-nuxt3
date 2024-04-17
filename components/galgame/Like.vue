@@ -11,13 +11,13 @@ const isLiked = ref(props.isLiked)
 const likesCount = ref(props.likesCount)
 
 const toggleLikeGalgame = async () => {
-  const { data } = await useFetch(`/api/galgame/${props.gid}/like`, {
+  const result = await $fetch(`/api/galgame/${props.gid}/like`, {
     method: 'PUT',
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     likesCount.value += isLiked.value ? -1 : 1
 
     if (!isLiked.value) {

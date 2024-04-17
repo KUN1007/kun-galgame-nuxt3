@@ -33,7 +33,7 @@ const handleDeleteResource = async (gid: number, grid: number) => {
   }
 
   isFetching.value = true
-  const { data } = await useFetch(`/api/galgame/${gid}/resource`, {
+  const result = await $fetch(`/api/galgame/${gid}/resource`, {
     method: 'DELETE',
     query: { grid },
     watch: false,
@@ -41,7 +41,7 @@ const handleDeleteResource = async (gid: number, grid: number) => {
   })
   isFetching.value = false
 
-  if (data.value) {
+  if (result) {
     props.refresh()
   }
 }
@@ -74,17 +74,14 @@ const handleReportExpire = async (details: GalgameResourceDetails) => {
     return
   }
 
-  const { data } = await useFetch(
-    `/api/galgame/${details.gid}/resource/expired`,
-    {
-      method: 'PUT',
-      query: { grid: details.grid },
-      watch: false,
-      ...kungalgameResponseHandler
-    }
-  )
+  const result = await $fetch(`/api/galgame/${details.gid}/resource/expired`, {
+    method: 'PUT',
+    query: { grid: details.grid },
+    watch: false,
+    ...kungalgameResponseHandler
+  })
 
-  if (data.value) {
+  if (result) {
     useMessage('Report expired successfully!', '报告失效成功', 'success')
     props.refresh()
   }

@@ -29,7 +29,7 @@ const handlePublishLink = async () => {
   }
 
   isFetching.value = true
-  const { data } = await useFetch(`/api/galgame/${gid.value}/link`, {
+  const result = await $fetch(`/api/galgame/${gid.value}/link`, {
     method: 'POST',
     body: linkModel,
     watch: false,
@@ -37,7 +37,7 @@ const handlePublishLink = async () => {
   })
   isFetching.value = false
 
-  if (data.value) {
+  if (result) {
     linkModel.name = ''
     linkModel.link = ''
     refresh()
@@ -54,14 +54,14 @@ const handleDeleteLink = async (gid: number, glid: number) => {
     return
   }
 
-  const { data } = await useFetch(`/api/galgame/${gid}/link`, {
+  const result = await $fetch(`/api/galgame/${gid}/link`, {
     method: 'DELETE',
     query: { glid },
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     refresh()
   }
 }

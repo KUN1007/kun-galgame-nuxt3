@@ -40,7 +40,7 @@ const handlePublish = async () => {
     isPublishing.value = true
     useMessage('Publishing...', '正在发布...', 'info')
   }
-  const { data } = await useFetch(`/api/topic/${replyDraft.value.tid}/reply`, {
+  const reply = await $fetch(`/api/topic/${replyDraft.value.tid}/reply`, {
     method: 'POST',
     body: requestData,
     watch: false,
@@ -48,8 +48,8 @@ const handlePublish = async () => {
   })
   isPublishing.value = false
 
-  if (data.value) {
-    useTempReplyStore().tempReply = data.value
+  if (reply) {
+    useTempReplyStore().tempReply = reply
     usePersistKUNGalgameReplyStore().resetReplyDraft()
 
     isEdit.value = false
@@ -90,7 +90,7 @@ const handleRewrite = async () => {
     isPublishing.value = true
     useMessage('Publishing...', '正在发布...', 'info')
   }
-  const { data } = await useFetch(`/api/topic/${replyDraft.value.tid}/reply`, {
+  const result = await $fetch(`/api/topic/${replyDraft.value.tid}/reply`, {
     method: 'PUT',
     body: requestData,
     watch: false,
@@ -98,7 +98,7 @@ const handleRewrite = async () => {
   })
   isPublishing.value = false
 
-  if (data.value) {
+  if (result) {
     useMessage('Reply rewrite successfully', '回复重新编辑成功', 'success')
     saveRewriteReply()
     useTempReplyStore().resetRewriteReplyData()

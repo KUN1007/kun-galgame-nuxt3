@@ -39,26 +39,26 @@ const likeOperation = async (
       isPush,
       to_uid: toUid
     }
-    const { data } = await useFetch(`/api/topic/${tid}/like`, {
+    const result = await $fetch(`/api/topic/${tid}/like`, {
       method: 'PUT',
       query: queryData,
       watch: false,
       ...kungalgameResponseHandler
     })
-    return data
+    return result
   } else {
     const queryData = {
       isPush,
       rid: props.rid,
       to_uid: toUid
     }
-    const { data } = await useFetch(`/api/topic/${tid}/reply/like`, {
+    const result = await $fetch(`/api/topic/${tid}/reply/like`, {
       method: 'PUT',
       query: queryData,
       watch: false,
       ...kungalgameResponseHandler
     })
-    return data
+    return result
   }
 }
 
@@ -71,9 +71,9 @@ const toggleLike = async () => {
   const { tid, rid, toUid } = props
   const isPush = !isLiked.value
 
-  const data = await likeOperation(tid, rid, toUid, isPush)
+  const result = await likeOperation(tid, rid, toUid, isPush)
 
-  if (data.value) {
+  if (result) {
     isLiked.value = isPush
     likesCount.value += isPush ? 1 : -1
 

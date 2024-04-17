@@ -59,7 +59,7 @@ const handlePublish = async () => {
     isPublishing.value = true
     useMessage('Publishing...', '正在发布...', 'info')
   }
-  const { data } = await useFetch('/api/topic', {
+  const tid = await $fetch('/api/topic', {
     method: 'POST',
     body: requestData,
     watch: false,
@@ -67,8 +67,7 @@ const handlePublish = async () => {
   })
   isPublishing.value = false
 
-  if (data.value) {
-    const tid = data.value
+  if (tid) {
     navigateTo(localePath(`/topic/${tid}`))
     useTempMessageStore().info('AlertInfo.edit.publishSuccess')
     usePersistEditTopicStore().resetTopicData()
@@ -104,7 +103,7 @@ const handleRewrite = async () => {
     isPublishing.value = true
     useMessage('Publishing...', '正在发布...', 'info')
   }
-  const { data } = await useFetch(`/api/topic/${tid.value}`, {
+  const result = await $fetch(`/api/topic/${tid.value}`, {
     method: 'PUT',
     body: requestData,
     watch: false,
@@ -112,7 +111,7 @@ const handleRewrite = async () => {
   })
   isPublishing.value = false
 
-  if (data.value) {
+  if (result) {
     navigateTo(localePath(`/topic/${tid.value}`))
     useTempMessageStore().info('AlertInfo.edit.rewriteSuccess')
     useTempEditStore().resetRewriteTopicData()

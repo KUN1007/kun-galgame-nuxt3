@@ -34,14 +34,14 @@ const upvoteTopic = async () => {
     to_uid: props.toUid,
     time: Date.now()
   }
-  const { data } = await useFetch(`/api/topic/${props.tid}/upvote`, {
+  const result = await $fetch(`/api/topic/${props.tid}/upvote`, {
     method: 'PUT',
     query: queryData,
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     upvoteCount.value++
     isUpvote.value = true
     useMessage('Topic upvote successfully', '推话题成功', 'success')
@@ -64,14 +64,14 @@ const upvoteReply = async () => {
     rid: props.rid,
     time: Date.now()
   }
-  const { data } = await useFetch(`/api/topic/${props.tid}/reply/upvote`, {
+  const result = await $fetch(`/api/topic/${props.tid}/reply/upvote`, {
     method: 'PUT',
     query: queryData,
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     upvoteCount.value++
     isUpvote.value = true
     useMessage('Reply upvote successfully', '推回复成功', 'success')

@@ -21,14 +21,14 @@ const handleChangeUsername = async () => {
   }
 
   useMessage('Changing username in progress...', '正在更改用户名...', 'info')
-  const { data } = await useFetch('/api/user/username', {
+  const result = await $fetch('/api/user/username', {
     method: 'PUT',
     watch: false,
     body: { username: inputValue.value },
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     useMessage('Username update successfully', '用户名更新成功', 'success')
     await refresh?.()
   }

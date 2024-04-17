@@ -52,7 +52,7 @@ const handlePublishGalgame = async () => {
   formData.append('introduction', JSON.stringify(introduction.value))
   formData.append('aliases', JSON.stringify(aliases.value))
 
-  const { data } = await useFetch('/api/galgame', {
+  const gid = await $fetch('/api/galgame', {
     method: 'POST',
     body: formData,
     watch: false,
@@ -60,9 +60,7 @@ const handlePublishGalgame = async () => {
   })
   isPublishing.value = false
 
-  if (data.value) {
-    const gid = data.value
-
+  if (gid) {
     await deleteImage('kun-galgame-publish-banner')
     usePersistEditGalgameStore().resetGalgameData()
 

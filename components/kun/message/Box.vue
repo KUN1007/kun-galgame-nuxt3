@@ -8,30 +8,26 @@ const currentX = ref(0)
 const isDragging = ref(false)
 const isShowFunction = ref(false)
 
-const getMessages = async () => {
-  const data = await useFetch(`/api/message/all`, {
-    method: 'GET',
-    query: {
-      page: '1',
-      limit: '10',
-      sortOrder: 'desc'
-    },
-    watch: false,
-    ...kungalgameResponseHandler
-  })
-  return data
-}
-
-const { data: messageData, refresh } = await getMessages()
+const { data: messageData, refresh } = await useFetch(`/api/message/all`, {
+  method: 'GET',
+  // TODO:
+  query: {
+    page: '1',
+    limit: '10',
+    sortOrder: 'desc'
+  },
+  watch: false,
+  ...kungalgameResponseHandler
+})
 
 const handleReadAllMessage = async () => {
-  const { data } = await useFetch(`/api/message/read/all`, {
+  const result = await $fetch(`/api/message/read/all`, {
     method: 'PUT',
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     refresh()
     useMessage('Read all messages successfully!', '已读所有消息成功', 'success')
   }
@@ -48,13 +44,13 @@ const handleDeleteAllMessage = async () => {
     return
   }
 
-  const { data } = await useFetch(`/api/message/delete/all`, {
+  const result = await $fetch(`/api/message/delete/all`, {
     method: 'DELETE',
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     refresh()
     useMessage(
       'Delete all messages successfully!',

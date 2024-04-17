@@ -21,7 +21,7 @@ const likeComment = async () => {
     return
   }
 
-  const { data } = await useFetch(
+  const result = await $fetch(
     `/api/galgame/${props.comment.gid}/comment/like`,
     {
       method: 'PUT',
@@ -31,7 +31,7 @@ const likeComment = async () => {
     }
   )
 
-  if (data.value) {
+  if (result) {
     likesCount.value++
     isLiked.value = true
     useMessage('Like successfully!', '点赞成功', 'success')

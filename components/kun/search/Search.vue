@@ -7,12 +7,12 @@ const topics = ref<SearchTopic[]>([])
 const container = ref<HTMLElement>()
 
 const searchTopics = async () => {
-  const { data } = await useFetch('/api/home/search', {
+  const result = await $fetch('/api/home/search', {
     query: search.value,
     watch: false,
     ...kungalgameResponseHandler
   })
-  return data.value ? data.value : []
+  return result
 }
 
 watch(

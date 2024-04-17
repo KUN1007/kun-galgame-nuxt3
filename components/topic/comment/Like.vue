@@ -35,14 +35,14 @@ const likeComment = async () => {
     cid: props.cid,
     to_uid: props.toUid
   }
-  const { data } = await useFetch(`/api/topic/${props.tid}/comment/like`, {
+  const result = await $fetch(`/api/topic/${props.tid}/comment/like`, {
     method: 'PUT',
     query: queryData,
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     likesCount.value++
     isLiked.value = true
     useMessage('Like successfully!', '点赞成功', 'success')

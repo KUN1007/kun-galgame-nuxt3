@@ -14,5 +14,7 @@ export default defineEventHandler(async (event) => {
 
   if (message) {
     return 'Find unread message'
+  } else {
+    return 'Moe loli online!'
   }
 })

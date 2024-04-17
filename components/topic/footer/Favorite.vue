@@ -34,22 +34,22 @@ const favoriteOperation = async (
     isPush,
     to_uid: toUid
   }
-  const { data } = await useFetch(`/api/topic/${tid}/favorite`, {
+  const result = await $fetch(`/api/topic/${tid}/favorite`, {
     method: 'PUT',
     query: queryData,
     watch: false,
     ...kungalgameResponseHandler
   })
-  return data
+  return result
 }
 
 const toggleFavorite = async () => {
   const { tid, toUid } = props
   const isPush = !isFavorite.value
 
-  const data = await favoriteOperation(tid, toUid, isPush)
+  const result = await favoriteOperation(tid, toUid, isPush)
 
-  if (data.value) {
+  if (result) {
     isFavorite.value = isPush
     favoritesCount.value += isPush ? 1 : -1
 

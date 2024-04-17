@@ -25,13 +25,13 @@ const {
 const isLoadingComplete = ref(false)
 
 const getTopics = async () => {
-  const { data } = await useFetch(`/api/pool/topic`, {
+  const result = await $fetch(`/api/pool/topic`, {
     method: 'GET',
     query: { page, limit, sortField, sortOrder },
     watch: false,
     ...kungalgameResponseHandler
   })
-  return data.value ?? []
+  return result
 }
 
 if (!topics.value.length) {

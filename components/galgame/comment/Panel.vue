@@ -31,7 +31,7 @@ const handlePublishComment = async () => {
   }
 
   isPublishing.value = true
-  const { data } = await useFetch(`/api/galgame/${gid.value}/comment`, {
+  const result = await $fetch(`/api/galgame/${gid.value}/comment`, {
     method: 'POST',
     body: { toUid: props.toUser?.uid, content },
     watch: false,
@@ -39,7 +39,7 @@ const handlePublishComment = async () => {
   })
   isPublishing.value = false
 
-  if (data.value) {
+  if (result) {
     content.value = ''
     useMessage('Publish comment successfully!', '发布评论成功', 'success')
     emits('close')

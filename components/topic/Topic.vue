@@ -28,34 +28,30 @@ const contentScrollHeight = ref(0)
 useTempReplyStore().resetPageStatus()
 
 const getReplies = async () => {
-  const data = await useFetch(`/api/topic/${tid.value}/reply`, {
+  const data = await $fetch(`/api/topic/${tid.value}/reply`, {
     method: 'GET',
-    query: {
-      page: replyRequest.value.page,
-      limit: replyRequest.value.limit,
-      sortField: replyRequest.value.sortField,
-      sortOrder: replyRequest.value.sortOrder
-    },
-    watch: false,
+    query: replyRequest,
     ...kungalgameResponseHandler
   })
   return data
 }
 
-const { data: repliesData } = await getReplies()
+const { data: repliesData } = await useFetch(`/api/topic/${tid.value}/reply`, {
+  method: 'GET',
+  query: replyRequest,
+  ...kungalgameResponseHandler
+})
+
 if (repliesData.value && repliesData.value.length < 3) {
   isLoading.value = false
 }
 
 watch(
   () => [replyRequest.value.sortOrder, replyRequest.value.sortField],
-  async () => {
+  () => {
     if (repliesData.value && repliesData.value?.length < 3) {
       isLoading.value = false
-      return
     }
-    const newReplies = await getReplies()
-    repliesData.value = newReplies.data.value
   }
 )
 
@@ -128,8 +124,8 @@ const handelScroll = debounce(async () => {
   if (isScrollAtBottom() && isLoading.value) {
     replyRequest.value.page++
 
-    const { data } = await getReplies()
-    const lazyLoadReplies = data.value ? data.value : []
+    const data = await getReplies()
+    const lazyLoadReplies = data ?? []
 
     if (!lazyLoadReplies.length) {
       isLoading.value = false

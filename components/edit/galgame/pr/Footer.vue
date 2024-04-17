@@ -25,7 +25,7 @@ const handlePublishGalgamePR = async () => {
     isPublishing.value = true
   }
 
-  const { data } = await useFetch(`/api/galgame/${galgamePR.value[0].gid}/pr`, {
+  const result = await $fetch(`/api/galgame/${galgamePR.value[0].gid}/pr`, {
     method: 'POST',
     body: galgamePR.value[0],
     watch: false,
@@ -33,7 +33,7 @@ const handlePublishGalgamePR = async () => {
   })
   isPublishing.value = false
 
-  if (data.value) {
+  if (result) {
     navigateTo(localePath(`/galgame/${galgamePR.value[0].gid}`), {
       replace: true
     })

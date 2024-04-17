@@ -24,7 +24,7 @@ const handleGetDetails = async (gprid: number) => {
     return
   }
   isFetching.value = true
-  const { data } = await useFetch(`/api/galgame/${props.gid}/pr`, {
+  const result = await $fetch(`/api/galgame/${props.gid}/pr`, {
     method: 'GET',
     query: { gprid },
     watch: false,
@@ -32,8 +32,8 @@ const handleGetDetails = async (gprid: number) => {
   })
   isFetching.value = false
 
-  if (data.value) {
-    details.value = data.value
+  if (result) {
+    details.value = result
   }
 }
 

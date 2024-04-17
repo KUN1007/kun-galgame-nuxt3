@@ -11,13 +11,13 @@ const isFavorite = ref(props.isFavorite)
 const favoritesCount = ref(props.favoritesCount)
 
 const toggleFavoriteGalgame = async () => {
-  const { data } = await useFetch(`/api/galgame/${props.gid}/favorite`, {
+  const result = await $fetch(`/api/galgame/${props.gid}/favorite`, {
     method: 'PUT',
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     favoritesCount.value += isFavorite.value ? -1 : 1
 
     if (!isFavorite.value) {

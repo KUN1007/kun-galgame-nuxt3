@@ -20,15 +20,15 @@ const handleGetDetail = async (grid: number) => {
     return
   }
   isFetching.value = true
-  const { data } = await useFetch(`/api/galgame/${props.link.gid}/resource`, {
+  const result = await $fetch(`/api/galgame/${props.link.gid}/resource`, {
     query: { grid },
     method: 'GET',
     ...kungalgameResponseHandler
   })
   isFetching.value = false
 
-  if (data.value) {
-    details.value = data.value
+  if (result) {
+    details.value = result
   }
 }
 
@@ -50,14 +50,14 @@ const handleMarkValid = async (gid: number, grid: number) => {
     return
   }
 
-  const { data } = await useFetch(`/api/galgame/${gid}/resource/valid`, {
+  const result = await $fetch(`/api/galgame/${gid}/resource/valid`, {
     method: 'PUT',
     query: { grid },
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  if (data.value) {
+  if (result) {
     useMessage('Re-mark valid successfully!', '重新标记有效成功', 'success')
     props.refresh()
   }

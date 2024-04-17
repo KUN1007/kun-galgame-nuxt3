@@ -37,7 +37,7 @@ const handlePublishResourceLink = async (method: 'POST' | 'PUT') => {
   }
 
   isFetching.value = true
-  const { data } = await useFetch(`/api/galgame/${gid.value}/resource`, {
+  const result = await $fetch(`/api/galgame/${gid.value}/resource`, {
     method,
     query: rewriteResourceId.value ? { grid: rewriteResourceId.value } : {},
     body: resourceLink.value,
@@ -46,7 +46,7 @@ const handlePublishResourceLink = async (method: 'POST' | 'PUT') => {
   })
   isFetching.value = false
 
-  if (data.value) {
+  if (result) {
     if (!rewriteResourceId.value) {
       useMessage(
         'Publish resource link successfully!',
