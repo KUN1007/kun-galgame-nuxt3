@@ -66,7 +66,7 @@ watch(
 
 <template>
   <KunHeader :size="2">
-    <template #header>游戏别名</template>
+    <template #header>{{ $t('edit.pr.alias.name') }}</template>
   </KunHeader>
 
   <div class="input-container">
@@ -85,7 +85,7 @@ watch(
       class="input"
       type="text"
       v-model="inputValue"
-      placeholder="请输入游戏别名"
+      :placeholder="`${$t('edit.pr.alias.placeholder')}`"
       @input="canDeleteAlias = false"
       @keyup.enter="handleAddAlias"
       @keyup.backspace="handleRemoveAlias"
@@ -97,7 +97,7 @@ watch(
     <div class="box2" :class="isInputFocus ? 'box-active' : ''"></div>
   </div>
 
-  <div class="hint">别名最多 17 个, 可以输入别名按下回车创建别名</div>
+  <div class="hint">{{ $t('edit.pr.alias.hint') }}</div>
 </template>
 
 <style lang="scss" scoped>

@@ -9,7 +9,23 @@ const { locale } = useI18n()
 
   <EditGalgameSite />
 
-  <div class="help">
+  <div class="help" v-if="locale === 'en-us'">
+    <p>
+      To update visualnovel information, you need to submit an update request.
+    </p>
+    <p>
+      When this request is confirmed for merge by the publisher of the
+      visualnovel resource, a user with more than 1100 MoeMoePoints, or a forum
+      administrator, the update will take effect.
+    </p>
+    <p>
+      If the update request is merged, you will receive 1 MoeMoePoint. The
+      requester and reviewer will be added to the contributors, but
+      self-modifications are not counted.
+    </p>
+  </div>
+
+  <div class="help" v-if="locale === 'zh-cn'">
     <p>要更新 Galgame 信息, 需要提出更新请求</p>
     <p>
       当该请求被该 Galgame 资源的发布者、或萌萌点大于 1100

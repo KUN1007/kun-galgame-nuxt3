@@ -12,7 +12,11 @@ defineProps<{
 </script>
 
 <template>
-  <h2>介绍</h2>
+  <KunHeader :size="2">
+    <template #header>
+      {{ $t('galgame.introduction.name') }}
+    </template>
+  </KunHeader>
 
   <KunNav
     class="nav"

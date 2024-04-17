@@ -309,7 +309,8 @@
       },
       "banner": {
         "name": "预览图",
-        "help": "Galgame 预览图请尽量在游戏内截取原始分辨率，不要拍屏，尽量不要包含设备窗口的边，宽度大于高度为好。预览图最终加载大小会变为不大于 1920 × 1080 分辨率"
+        "help": "Galgame 预览图请尽量在游戏内截取原始分辨率，不要拍屏，尽量不要包含设备窗口的边，宽度大于高度为好。预览图最终加载大小会变为不大于 1920 × 1080 分辨率",
+        "hint": "预览图不可包含 R18 等敏感内容"
       },
       "resource": {
         "name": "资源链接",
@@ -330,6 +331,19 @@
         }
       },
       "confirm": "确认发布 Galgame"
+    },
+    "pr": {
+      "name": "更新请求",
+      "official": {
+        "name": "官网",
+        "placeholder": "请输入官网链接"
+      },
+      "alias": {
+        "name": "别名",
+        "placeholder": "请输入游戏别名",
+        "hint": "别名最多 17 个, 可以输入别名按下回车创建别名"
+      },
+      "confirm": "确定发布"
     }
   },
   "login":{
@@ -536,11 +550,94 @@
   "galgame": {
     "asc": "升序",
     "desc": "降序",
+    "null": "该条目暂时为空",
+    "welcome": "欢迎贡献条目",
+    "banner": {
+      "change": "更改图片",
+      "confirm": "确定更改",
+      "hint": "预览图不可包含 R18 等敏感内容"
+    },
+    "introduction": {
+      "name": "介绍",
+      "en-us": "英语",
+      "ja-jp": "日语",
+      "zh-cn": "中文"
+    },
+    "info": {
+      "name": "信息",
+      "title": "标题",
+      "alias": "别名",
+      "official": "官网",
+      "platform": "平台"
+    },
+    "resource": {
+      "name": "资源链接",
+      "edit": "编辑中...",
+      "extract": "提取码",
+      "decompress": "解压码",
+      "expire": "报告过期",
+      "valid": "标记有效",
+      "fetch": "获取链接",
+      "placeholder": {
+        "link": "资源链接 (网盘|磁链|网址) 等",
+        "size": "资源体积 (MB 或 GB)",
+        "extract": "资源提取码 (可选)",
+        "decompress": "资源解压码 (可选)",
+        "note": "资源备注 (可选)"
+      },
+      "type": "资源链接的类型",
+      "language": "资源链接的语言",
+      "platform": "资源链接的平台",
+      "create": "创建资源链接",
+      "cancelRewrite": "取消 Rewrite",
+      "confirmRewrite": "确定 Rewrite"
+    },
+    "link": {
+      "name": "相关链接",
+      "label": "链接名",
+      "url": "链接地址",
+      "create": "创建"
+    },
+    "history": {
+      "name": "贡献历史",
+      "created": "创建了",
+      "updated": "更新了",
+      "deleted": "删除了",
+      "merged": "合并了",
+      "declined": "拒绝了",
+      "galgame": "Galgame",
+      "banner": "预览图",
+      "link": "相关链接",
+      "pr": "更新请求"
+    },
     "pr": {
+      "name": "更新请求",
+      "request": "提出更新请求",
+      "details": "详情",
       "status0": "进行中",
       "status1": "已合并",
-      "status2": "已拒绝"
-    }
+      "status2": "已拒绝",
+      "decline": "拒绝",
+      "merge": "合并",
+      "note": "请填写拒绝原因",
+      "confirm": "确定拒绝",
+      "hint": "要处理该请求, 需要资源的发布者、萌萌点大于 1100 的用户、或管理员",
+      "i18n": {
+        "name": {
+          "en-us": "英语标题",
+          "ja-jp": "日语标题",
+          "zh-cn": "中文标题"
+        },
+        "introduction": {
+          "en-us": "英语介绍",
+          "ja-jp": "日语介绍",
+          "zh-cn": "中文介绍"
+        },
+        "alias": "别名",
+        "official": "官网"
+      }
+    },
+    "contributors": "贡献者"
   },
   "report": {
     "select": {

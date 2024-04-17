@@ -59,6 +59,9 @@ export default defineEventHandler(async (event) => {
     if (!galgamePR) {
       return kunError(event, 10610)
     }
+    if (galgamePR.status !== 0) {
+      return kunError(event, 10633)
+    }
 
     await createGalgameHistory({
       gid: galgamePR.gid,

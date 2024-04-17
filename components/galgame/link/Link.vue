@@ -68,7 +68,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
   <div class="container">
     <KunHeader :size="2">
       <template #header>
-        <span>相关链接</span>
+        <span>{{ $t('galgame.link.name') }}</span>
 
         <span class="contribute" @click="isShowEdit = !isShowEdit">
           <Icon name="lucide:circle-plus" />
@@ -77,10 +77,16 @@ const handleDeleteLink = async (gid: number, glid: number) => {
     </KunHeader>
 
     <div class="link-edit" v-if="isShowEdit">
-      <KunInput placeholder="链接名" v-model="linkModel.name" />
-      <KunInput placeholder="链接地址" v-model="linkModel.link" />
+      <KunInput
+        :placeholder="`${$t('galgame.link.label')}`"
+        v-model="linkModel.name"
+      />
+      <KunInput
+        :placeholder="`${$t('galgame.link.url')}`"
+        v-model="linkModel.link"
+      />
       <KunButton @click="handlePublishLink" :pending="isFetching">
-        确定发布
+        {{ $t('galgame.link.create') }}
       </KunButton>
     </div>
 

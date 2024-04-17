@@ -1,10 +1,16 @@
+import type { GalgameDetail } from '~/types/api/galgame'
 import type { GalgameStoreTemp } from '~/store/types/edit/galgame'
 
+interface Diffs {
+  name: string
+  value: string
+}
+
 export const diffGalgame = (
-  oldGalgame: Partial<Omit<GalgameStoreTemp, 'alias'> & { alias: string }>,
-  newGalgame: Partial<Omit<GalgameStoreTemp, 'alias'> & { alias: string }>
+  oldGalgame: Partial<GalgameDetail>,
+  newGalgame: Partial<GalgameStoreTemp>
 ) => {
-  const diffs: string[] = []
+  const diffs: Diffs[] = []
 
   const compareObjects = (
     obj1: Record<string, any>,
@@ -18,12 +24,21 @@ export const diffGalgame = (
         compareObjects(obj1[key], obj2[key], newPath)
       } else if (obj1[key] !== obj2[key]) {
         if (obj1[key] === undefined) {
-          diffs.push(`<h3>${newPath}</h3><b>${obj2[key]}</b><br/><br/>`)
+          diffs.push({
+            name: newPath,
+            value: `<b>${obj2[key]}</b>`
+          })
         } else if (obj2[key] !== undefined && obj1[key] !== undefined) {
-          diffs.push(
-            `<h3>${newPath}</h3>${useDiff(obj2[key], obj1[key])}<br/><br/>`
-          )
+          diffs.push({
+            name: newPath,
+            value: `${useDiff(obj2[key], obj1[key])}`
+          })
         }
+      } else if (obj2[key] !== undefined) {
+        diffs.push({
+          name: newPath,
+          value: `<i>${obj2[key]}</i>`
+        })
       }
     }
   }
@@ -33,11 +48,14 @@ export const diffGalgame = (
       gid: oldGalgame.gid,
       name: oldGalgame.name,
       introduction: oldGalgame.introduction,
-      alias: oldGalgame.alias,
+      alias: oldGalgame.alias?.toString(),
       official: oldGalgame.official
     },
-    newGalgame
+    {
+      ...newGalgame,
+      alias: newGalgame.alias?.toString()
+    }
   )
 
-  return diffs.join('\n').replace(/\\/g, '')
+  return diffs
 }

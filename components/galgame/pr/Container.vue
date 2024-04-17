@@ -22,7 +22,9 @@ const { data, pending, refresh } = await useLazyFetch(
 <template>
   <div class="container" v-if="data && data.prs.length">
     <KunHeader :size="2">
-      <template #header>更新请求</template>
+      <template #header>
+        {{ $t('galgame.pr.name') }}
+      </template>
     </KunHeader>
 
     <GalgamePrInfo

@@ -20,25 +20,9 @@ const declineInput = ref('')
 
 const diff = computed(() => {
   if (!galgame || !props.details.galgame) {
-    return ''
+    return []
   }
-  return DOMPurify.sanitize(
-    diffGalgame(
-      props.details.status !== 1
-        ? {
-            gid: galgame.gid,
-            name: galgame.name,
-            introduction: galgame.introduction,
-            alias: galgame.alias?.toString(),
-            official: galgame.official
-          }
-        : {},
-      {
-        ...props.details.galgame,
-        alias: props.details.galgame.alias?.toString()
-      }
-    )
-  )
+  return diffGalgame(galgame, props.details.galgame)
 })
 
 const handleDeclineRequest = async () => {
@@ -133,32 +117,41 @@ const handleMergeRequest = async () => {
 <template>
   <div class="details">
     <div class="diff">
-      <div v-html="diff"></div>
+      <div v-for="(kun, index) in diff" :key="index">
+        <p class="name">{{ $t(`galgame.pr.i18n.${kun.name}`) }}</p>
+        <div
+          class="value"
+          v-html="DOMPurify.sanitize(kun.value.replace(/\\/g, ''))"
+        />
+      </div>
     </div>
 
-    <div class="btn" v-if="isShowButton && !details.status">
+    <div class="btn" v-if="!details.status && isShowButton">
       <KunButton
         @click="isShowReasonInput = !isShowReasonInput"
         :pending="isFetching"
       >
-        拒绝
+        {{ $t('galgame.pr.decline') }}
       </KunButton>
       <KunButton @click="handleMergeRequest" :pending="isFetching">
-        合并
+        {{ $t('galgame.pr.merge') }}
       </KunButton>
     </div>
-    <p class="hint" v-if="!isShowButton">
-      要处理该请求, 需要资源的发布者、萌萌点大于 1100 的用户、或管理员
+    <p class="hint" v-if="!details.status && !isShowButton">
+      {{ $t('galgame.pr.hint') }}
     </p>
 
     <div class="decline-input" v-if="isShowReasonInput">
-      <KunInput placeholder="请填写拒绝原因" v-model="declineInput" />
+      <KunInput
+        :placeholder="`${$t('galgame.pr.note')}`"
+        v-model="declineInput"
+      />
       <KunButton
         type="danger"
         @click="handleDeclineRequest"
         :pending="isFetching"
       >
-        确定拒绝
+        {{ $t('galgame.pr.confirm') }}
       </KunButton>
     </div>
   </div>
@@ -178,6 +171,19 @@ const handleMergeRequest = async () => {
   :deep(b) {
     color: var(--kungalgame-blue-5);
     background-color: var(--kungalgame-trans-blue-1);
+  }
+
+  :deep(i) {
+    color: var(--kungalgame-green-4);
+  }
+
+  .name {
+    margin-bottom: 7px;
+    font-weight: bold;
+  }
+
+  .value {
+    margin-bottom: 17px;
   }
 }
 

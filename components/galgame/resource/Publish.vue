@@ -93,15 +93,21 @@ onMounted(() => {
 
   <div class="link">
     <KunInput
-      placeholder="资源链接 (网盘|磁链|网址) 等"
+      :placeholder="`${$t('galgame.resource.placeholder.link')}`"
       v-model="resourceLink.link"
     />
 
     <div>
-      <KunInput placeholder="资源体积 (MB 或 GB)" v-model="resourceLink.size" />
-      <KunInput placeholder="资源提取码 (可选)" v-model="resourceLink.code" />
       <KunInput
-        placeholder="资源解压码 (可选)"
+        :placeholder="`${$t('galgame.resource.placeholder.size')}`"
+        v-model="resourceLink.size"
+      />
+      <KunInput
+        :placeholder="`${$t('galgame.resource.placeholder.extract')}`"
+        v-model="resourceLink.code"
+      />
+      <KunInput
+        :placeholder="`${$t('galgame.resource.placeholder.decompress')}`"
         v-model="resourceLink.password"
       />
     </div>
@@ -118,7 +124,7 @@ onMounted(() => {
       default-value="game"
     >
       <div class="select">
-        <span>资源链接的类型</span>
+        <span>{{ $t('galgame.resource.type') }}</span>
         <span v-if="resourceLink.type">
           {{ $t(`edit.galgame.resource.type.${resourceLink.type}`) }}
         </span>
@@ -135,7 +141,7 @@ onMounted(() => {
       :default-value="locale"
     >
       <div class="select">
-        <span>资源链接的语言</span>
+        <span>{{ $t('galgame.resource.language') }}</span>
         <span v-if="resourceLink.language">
           {{ $t(`edit.galgame.resource.language.${resourceLink.language}`) }}
         </span>
@@ -152,7 +158,7 @@ onMounted(() => {
       default-value="windows"
     >
       <div class="select">
-        <span>资源链接的平台</span>
+        <span>{{ $t('galgame.resource.platform') }}</span>
         <span v-if="resourceLink.platform">
           {{ $t(`edit.galgame.platform.${resourceLink.platform}`) }}
         </span>
@@ -161,7 +167,10 @@ onMounted(() => {
   </div>
 
   <div class="note">
-    <KunInput placeholder="资源备注 (可选)" v-model="resourceLink.note" />
+    <KunInput
+      :placeholder="`${$t('galgame.resource.placeholder.note')}`"
+      v-model="resourceLink.note"
+    />
   </div>
 
   <div class="btn">
@@ -171,11 +180,11 @@ onMounted(() => {
       :pending="isFetching"
       v-if="!rewriteResourceId"
     >
-      创建资源链接
+      {{ $t('galgame.resource.create') }}
     </KunButton>
 
     <KunButton v-if="rewriteResourceId" @click="handleCancel">
-      取消 Rewrite
+      {{ $t('galgame.resource.cancelRewrite') }}
     </KunButton>
 
     <KunButton
@@ -185,7 +194,7 @@ onMounted(() => {
       :pending="isFetching"
       v-if="rewriteResourceId"
     >
-      Rewrite 资源链接
+      {{ $t('galgame.resource.confirmRewrite') }}
     </KunButton>
   </div>
 </template>

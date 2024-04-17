@@ -55,7 +55,7 @@ const siteList: Site[] = [
     </p>
     <p>
       Before publishing a new visualnovel, please make sure there is no existing
-      visualnovel with the same title in the forum. You will earn 5 MoeMoePoints
+      visualnovel with the same title in the forum. You will earn 3 MoeMoePoints
       for publishing a new visualnovel.
     </p>
     <p>
@@ -94,7 +94,7 @@ const siteList: Site[] = [
     </p>
     <p>
       在发布 Galgame 前, 您需要确定论坛中没有同样的 Galgame, 发布新 Galgame
-      您将会获得 5 萌萌点。
+      您将会获得 3 萌萌点。
     </p>
     <p>如果您要发布 Galgame 资源, 游戏不存在的话，您需要先创建游戏。</p>
     <p>

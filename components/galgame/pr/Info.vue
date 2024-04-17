@@ -54,7 +54,7 @@ watch(
       <NuxtLinkLocale :to="`/kungalgamer/${pr.user.uid}/info`">
         {{ pr.user.name }}
       </NuxtLinkLocale>
-      <span>提出更新请求</span>
+      <span>{{ $t('galgame.pr.request') }}</span>
 
       <span class="time">
         {{ formatTimeDifferenceHint(pr.time, locale) }}
@@ -75,7 +75,7 @@ watch(
         @click="handleGetDetails(pr.gprid)"
         :pending="isFetching"
       >
-        查看详情
+        {{ $t('galgame.pr.details') }}
       </KunButton>
 
       <span v-if="pr.status == 2">{{ `#${pr.index}` }}</span>
@@ -105,7 +105,7 @@ watch(
   font-size: 14px;
 
   a {
-    margin-left: 10px;
+    margin: 0 10px;
     color: var(--kungalgame-blue-5);
   }
 

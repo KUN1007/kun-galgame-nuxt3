@@ -110,11 +110,11 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
 
       <div class="password">
         <span v-if="details.code">
-          <span>提取码:</span>
+          <span>{{ $t('galgame.resource.extract') }}: </span>
           <KunCopy :text="details.code" />
         </span>
         <span v-if="details.password">
-          <span>解压码:</span>
+          <span>{{ $t('galgame.resource.decompress') }}: </span>
           <KunCopy :text="details.password" />
         </span>
       </div>
@@ -146,7 +146,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
 
       <div class="other-btn" v-if="uid !== details.user.uid && !details.status">
         <KunButton type="danger" @click="handleReportExpire(details)">
-          报告失效
+          {{ $t('galgame.resource.expire') }}
         </KunButton>
       </div>
     </div>

@@ -77,7 +77,7 @@ watch(
       <div class="info">
         <span class="rewrite" v-if="link.grid === rewriteResourceId">
           <Icon name="svg-spinners:12-dots-scale-rotate" />
-          <span>正在编辑中</span>
+          <span>{{ $t('galgame.resource.edit') }}</span>
         </span>
         <span>
           <Icon :name="typeIconMap[link.type]" />
@@ -107,14 +107,14 @@ watch(
           @click="handleMarkValid(link.gid, link.grid)"
           :pending="isFetching"
         >
-          标记有效
+          {{ $t('galgame.resource.valid') }}
         </KunButton>
         <KunButton
           v-if="!details && link.grid !== rewriteResourceId"
           @click="handleGetDetail(link.grid)"
           :pending="isFetching"
         >
-          获取链接
+          {{ $t('galgame.resource.fetch') }}
         </KunButton>
 
         <GalgameResourceLike

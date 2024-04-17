@@ -81,12 +81,16 @@ onMounted(async () => {
         :initial-image="initialImageUrl"
         :size="1920"
         :aspect="16 / 9"
-        hint="预览图不可包含 R18 等敏感内容"
+        :placeholder="`${$t('galgame.banner.hint')}`"
         @set-image="(img) => saveImage(img, `kun-galgame-rewrite-banner`)"
       />
-      <span class="confirm" @click="handleChangeBanner">确定更改</span>
+      <span class="confirm" @click="handleChangeBanner">
+        {{ $t('galgame.banner.confirm') }}
+      </span>
     </div>
-    <span class="change" @click="isShowUpload = !isShowUpload">更改图片></span>
+    <span class="change" @click="isShowUpload = !isShowUpload">
+      {{ $t('galgame.banner.change') }}>
+    </span>
   </div>
 </template>
 

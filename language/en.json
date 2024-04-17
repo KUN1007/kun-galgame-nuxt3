@@ -307,7 +307,8 @@
       },
       "banner": {
         "name": "Banner",
-        "help": "Please try to capture the original resolution of the VN for the banner image instead of taking screenshots. Avoid including the edges of the device window, and it's preferable for the width to be greater than the height. The preview image will ultimately be resized to a resolution no larger than 1920 × 1080."
+        "help": "Please try to capture the original resolution of the VN for the banner image instead of taking screenshots. Avoid including the edges of the device window, and it's preferable for the width to be greater than the height. The preview image will ultimately be resized to a resolution no larger than 1920 × 1080.",
+        "hint": "Preview images cannot contain sensitive content such as R18"
       },
       "resource": {
         "name": "Resources Link",
@@ -328,6 +329,19 @@
         }
       },
       "confirm": "Confirm Publish VN"
+    },
+    "pr": {
+      "name": "Update Request",
+      "official": {
+        "name": "Official Site",
+        "placeholder": "Please enter the official website link"
+      },
+      "alias": {
+        "name": "Aliases",
+        "placeholder": "Please enter the game alias",
+        "hint": "Alias can be up to 17 characters long. Press Enter to create an alias."
+      },
+      "confirm": "Confirm Publish"
     }
   },
   "login":{
@@ -535,11 +549,94 @@
   "galgame": {
     "asc": "Ascending",
     "desc": "Descending",
+    "null": "This entry is currently empty.",
+    "welcome": "Contributions are welcome.",
+    "banner": {
+      "change": "Change Banner",
+      "confirm": "Confirm Change",
+      "hint": "Preview images cannot contain sensitive content such as R18"
+    },
+    "introduction": {
+      "name": "Introduction",
+      "en-us": "English Title",
+      "ja-jp": "Japanese Title",
+      "zh-cn": "Chinese Title"
+    },
+    "info": {
+      "name": "Information",
+      "title": "Title",
+      "alias": "Aliases",
+      "official": "Official Site",
+      "platform": "Platform"
+    },
+    "resource": {
+      "name": "Resources Links",
+      "edit": "Editing...",
+      "extract": "Extraction",
+      "decompress": "Decompression",
+      "expire": "Report Expiration",
+      "valid": "Mark Valid",
+      "fetch": "Get Link",
+      "placeholder": {
+        "link": "Resource link (cloud storage|magnet link|URL) etc.",
+        "size": "Resource size (MB or GB)",
+        "extract": "Resource extraction code (optional)",
+        "decompress": "Resource decompression code (optional)",
+        "note": "Resource notes (optional)"
+      },
+      "type": "Type of resource link",
+      "language": "Language of resource link",
+      "platform": "Platform of resource link",
+      "create": "Create resource link",
+      "cancelRewrite": "Cancel Rewrite",
+      "confirmRewrite": "Confirm Rewrite"
+    },
+    "link": {
+      "name": "Related Links",
+      "label": "Link name",
+      "url": "Link URL",
+      "create": "Create"
+    },
+    "history": {
+      "name": "Contribute History",
+      "created": "Created",
+      "updated": "Updated",
+      "deleted": "Deleted",
+      "merged": "Merged",
+      "declined": "Declined",
+      "galgame": "visualnovel",
+      "banner": "banner image",
+      "link": "related link",
+      "pr": "update request"
+    },
     "pr": {
+      "name": "Update Request",
+      "request": "Request for Update",
+      "details": "Details",
       "status0": "Ongoing",
       "status1": "Merged",
-      "status2": "Declined"
-    }
+      "status2": "Declined",
+      "decline": "Decline",
+      "merge": "Merge",
+      "note": "Please provide a reason for decline",
+      "confirm": "Confirm Decline",
+      "hint": "To handle this request, it requires the resource publisher, a user with more than 1100 MoeMoePoints, or an administrator.",
+      "i18n": {
+        "name": {
+          "en-us": "English Title",
+          "ja-jp": "Japanese Title",
+          "zh-cn": "Chinese Title"
+        },
+        "introduction": {
+          "en-us": "English Introduction",
+          "ja-jp": "Japanese Introduction",
+          "zh-cn": "Chinese Introduction"
+        },
+        "alias": "Aliases",
+        "official": "Official Site"
+      }
+    },
+    "contributors": "Contributors"
   },
   "report": {
     "select": {

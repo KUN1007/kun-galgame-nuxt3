@@ -8,22 +8,27 @@ defineProps<{
 </script>
 
 <template>
-  <h2>游戏信息</h2>
+  <KunHeader :size="2">
+    <template #header>
+      {{ $t('galgame.info.name') }}
+    </template>
+  </KunHeader>
+
   <div class="name">
-    <h3>游戏名</h3>
+    <h3>{{ $t('galgame.info.title') }}</h3>
     <KunCopy v-if="galgame.name['en-us']" :text="galgame.name['en-us']" />
     <KunCopy v-if="galgame.name['ja-jp']" :text="galgame.name['ja-jp']" />
     <KunCopy v-if="galgame.name['zh-cn']" :text="galgame.name['zh-cn']" />
   </div>
 
   <div class="alias">
-    <h3>游戏别名</h3>
+    <h3>{{ $t('galgame.info.alias') }}</h3>
     <GalgameNull v-if="!galgame.alias.length" />
     <TopicTags :tags="galgame.alias" :is-show-icon="false" />
   </div>
 
   <div class="official">
-    <h3>游戏官网</h3>
+    <h3>{{ $t('galgame.info.official') }}</h3>
     <GalgameNull v-if="!galgame.official" />
     <span class="link" v-if="galgame.official">
       <KunCopy :text="galgame.official" />
@@ -34,7 +39,7 @@ defineProps<{
   </div>
 
   <div class="platform">
-    <h3>游戏平台</h3>
+    <h3>{{ $t('galgame.info.platform') }}</h3>
     <span
       v-for="(platform, index) in galgame.platform"
       :key="index"

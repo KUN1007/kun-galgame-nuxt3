@@ -21,7 +21,11 @@ const { data, pending } = await useFetch(
 </script>
 
 <template>
-  <h2>贡献历史</h2>
+  <KunHeader :size="2">
+    <template #header>
+      {{ $t('galgame.history.name') }}
+    </template>
+  </KunHeader>
 
   <div class="container" v-if="data">
     <div
@@ -30,14 +34,14 @@ const { data, pending } = await useFetch(
       :key="index"
     >
       <NuxtLinkLocale :to="`/kungalgamer/${history.user.uid}/info`">
-        <KunAvatar :user="history.user" size="40px" />
+        <KunAvatar :user="history.user" size="30px" />
       </NuxtLinkLocale>
 
       <div class="info">
         <div>
           <span>{{ history.user.name }}</span>
-          <span>{{ history.action }}</span>
-          <span>{{ history.type }}</span>
+          <span>{{ $t(`galgame.history.${history.action}`) }}</span>
+          <span>{{ $t(`galgame.history.${history.type}`) }}</span>
           <span class="time">
             {{ formatTimeDifferenceHint(history.time, locale) }}
           </span>
@@ -75,6 +79,7 @@ h2 {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  font-size: small;
 
   .info {
     span {
@@ -82,13 +87,11 @@ h2 {
     }
 
     .time {
-      font-size: small;
       color: var(--kungalgame-font-color-0);
     }
   }
 
   .content {
-    font-size: small;
     margin-left: 7px;
     margin-top: 5px;
     color: var(--kungalgame-font-color-0);

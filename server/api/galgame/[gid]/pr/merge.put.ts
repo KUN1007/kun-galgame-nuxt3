@@ -36,7 +36,7 @@ const checkMerge = async (event: H3Event) => {
     return kunError(event, 10632)
   }
 
-  return { uid: userInfo.uid, gprid, gid }
+  return { uid: userInfo.uid, gprid, gid, galgame }
 }
 
 export default defineEventHandler(async (event) => {
@@ -44,7 +44,7 @@ export default defineEventHandler(async (event) => {
   if (!result) {
     return
   }
-  const { uid, gprid, gid } = result
+  const { uid, gprid, gid, galgame } = result
 
   const galgamePR = await GalgamePRModel.findOne({ gprid }).lean()
   if (!galgamePR) {
@@ -57,7 +57,10 @@ export default defineEventHandler(async (event) => {
   const session = await mongoose.startSession()
   session.startTransaction()
   try {
-    await GalgamePRModel.updateOne({ gprid }, { status: 1 })
+    await GalgamePRModel.updateOne(
+      { gprid },
+      { status: 1, completed_time: Date.now() }
+    )
 
     await createGalgameHistory({
       gid: galgamePR.gid,
@@ -68,13 +71,24 @@ export default defineEventHandler(async (event) => {
       content: `#${galgamePR.index}`
     })
 
+    await GalgameModel.updateOne(
+      { gid },
+      {
+        name: mergeLanguages(galgame.name, galgamePR.galgame?.name ?? {}),
+        introduction: mergeLanguages(
+          galgame.introduction,
+          galgamePR.galgame?.introduction ?? {}
+        ),
+        alias: galgamePR.galgame?.alias,
+        official: galgamePR.galgame?.official,
+        $addToSet: { contributor: uid }
+      }
+    )
+
     if (uid !== galgamePR.uid) {
       await GalgameModel.updateOne(
         { gid },
-        {
-          ...galgamePR.galgame,
-          $addToSet: { contributor: { $each: [galgamePR.uid, uid] } }
-        }
+        { $addToSet: { contributor: galgamePR.uid } }
       )
 
       await UserModel.updateOne(
@@ -89,8 +103,6 @@ export default defineEventHandler(async (event) => {
         `#${galgamePR.index}`,
         -galgamePR.gid
       )
-    } else {
-      await GalgameModel.updateOne({ gid }, { ...galgamePR.galgame })
     }
 
     await session.commitTransaction()

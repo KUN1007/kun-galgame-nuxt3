@@ -44,7 +44,9 @@ const handlePublishGalgamePR = async () => {
 
 <template>
   <div class="confirm">
-    <KunButton @click="handlePublishGalgamePR"> 确定发布 </KunButton>
+    <KunButton @click="handlePublishGalgamePR">
+      {{ $t('edit.pr.confirm') }}
+    </KunButton>
   </div>
 </template>
 

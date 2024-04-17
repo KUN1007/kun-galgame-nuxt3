@@ -16,7 +16,11 @@ const { data } = await useFetch(`/api/galgame/${gid.value}/contributor`, {
 </script>
 
 <template>
-  <h2>贡献者</h2>
+  <KunHeader :size="2">
+    <template #header>
+      {{ $t('galgame.contributors') }}
+    </template>
+  </KunHeader>
   <div class="contributor" v-if="data">
     <KunAvatar
       size="30px"

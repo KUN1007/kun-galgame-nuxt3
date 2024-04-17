@@ -20,9 +20,9 @@ provide<GalgameDetail>('galgame', props.galgame)
 
     <GalgameLink />
 
-    <GalgameHistory />
-
     <GalgamePrContainer />
+
+    <GalgameHistory />
 
     <GalgameContributor :views="galgame.views" />
 

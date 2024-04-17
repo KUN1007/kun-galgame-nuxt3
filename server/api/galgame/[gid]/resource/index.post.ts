@@ -54,7 +54,7 @@ export default defineEventHandler(async (event) => {
           galgame_resource: resource.grid,
           contribute_galgame: result.gid
         },
-        $inc: { daily_galgame_count: 1, moemoepoint: 5 }
+        $inc: { daily_galgame_count: 1, moemoepoint: 3 }
       }
     )
 

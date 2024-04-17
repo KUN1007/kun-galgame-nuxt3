@@ -11,7 +11,7 @@ const { locale } = useI18n()
           provide any download functionality
         </strong>
       </p>
-      <p>You can earn 5 moemoepoints for each resource link you publish</p>
+      <p>You can earn 3 moemoepoints for each resource link you publish</p>
       <p>
         If a resource link is deleted, the moemoepoints obtained through that
         link will also be deducted
@@ -40,7 +40,7 @@ const { locale } = useI18n()
       <p>
         <strong>所有链接为用户添加, 鲲 Galgame 论坛不提供任何下载功能</strong>
       </p>
-      <p>每发布一个资源链接您可以获得 5 萌萌点</p>
+      <p>每发布一个资源链接您可以获得 3 萌萌点</p>
       <p>资源链接被删除, 通过资源链接获得的萌萌点也会被扣除</p>
       <p>所有资源链接必须与该页面游戏相关, 必须免费, 不得付积分、付费下载</p>
       <p>
