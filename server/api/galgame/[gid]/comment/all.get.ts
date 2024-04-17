@@ -1,13 +1,19 @@
 import GalgameCommentModel from '~/server/models/galgame-comment'
 import type { GalgameComment } from '~/types/api/galgame-comment'
 
+interface RequestData {
+  page: string
+  limit: string
+  order: 'asc' | 'desc'
+}
+
 export default defineEventHandler(async (event) => {
   const gid = getRouterParam(event, 'gid')
   if (!gid) {
     kunError(event, 10609)
     return
   }
-  const { page, limit }: { page: string; limit: string } = await getQuery(event)
+  const { page, limit, order }: RequestData = await getQuery(event)
   if (!page || !limit) {
     return kunError(event, 10507)
   }
@@ -19,7 +25,7 @@ export default defineEventHandler(async (event) => {
   const totalCount = await GalgameCommentModel.countDocuments({ gid }).lean()
 
   const data = await GalgameCommentModel.find({ gid })
-    .sort({ created: -1 })
+    .sort({ created: order })
     .skip(skip)
     .limit(parseInt(limit))
     .populate('cuid', 'uid avatar name')

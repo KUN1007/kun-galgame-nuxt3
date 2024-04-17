@@ -636,7 +636,12 @@
         "official": "Official Site"
       }
     },
-    "contributors": "Contributors"
+    "contributors": "Contributors",
+    "comment": {
+      "name": "Comments",
+      "asc": "Ascending",
+      "desc": "Descending"
+    }
   },
   "report": {
     "select": {

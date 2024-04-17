@@ -53,6 +53,7 @@ const handlePublishComment = async () => {
     <textarea v-model="content" name="comment" rows="5" />
 
     <div class="footer">
+      <slot />
       <span v-if="toUser">
         <span>评论给</span>
         <NuxtLinkLocale :to="`/kungalgamer/${toUser.uid}/info`">

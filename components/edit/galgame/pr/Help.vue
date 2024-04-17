@@ -4,7 +4,9 @@ const { locale } = useI18n()
 
 <template>
   <KunHeader :size="1">
-    <template #header>提出更新请求</template>
+    <template #header>
+      {{ $t('edit.pr.name') }}
+    </template>
   </KunHeader>
 
   <EditGalgameSite />

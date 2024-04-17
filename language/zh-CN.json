@@ -637,7 +637,12 @@
         "official": "官网"
       }
     },
-    "contributors": "贡献者"
+    "contributors": "贡献者",
+    "comment": {
+      "name": "评论",
+      "asc": "升序",
+      "desc": "降序"
+    }
   },
   "report": {
     "select": {
