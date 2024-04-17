@@ -7,8 +7,8 @@ const GalgameCommentSchema = new mongoose.Schema<GalgameComment>(
     gcid: { type: Number, unique: true },
     gid: { type: Number, required: true },
     c_uid: { type: Number, required: true, ref: 'user' },
-    to_uid: { type: Number, required: true, ref: 'user' },
-    content: { type: String, default: '' },
+    to_uid: { type: Number, default: 0, ref: 'user' },
+    content: { type: String, default: '', maxlength: 1007 },
 
     likes: { type: [Number], default: [] }
   },

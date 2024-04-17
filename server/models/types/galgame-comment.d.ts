@@ -10,7 +10,7 @@ export interface GalgameComment {
   likes: number[]
 
   cuid: UserAttributes[]
-  touid: UserAttributes[]
+  touid?: UserAttributes[]
 
   created: Date
   updated: Date

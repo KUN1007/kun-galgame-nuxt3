@@ -100,6 +100,7 @@ const errorMessagesEN: Record<number, string> = {
   10631: `You must provide a reason for rejection, which should not exceed 1007 characters (-B)`,
   10632: `You do not have permission to handle update requests (-B)`,
   10633: `This update request has been processed (-B)`,
+  10634: `Comment length exceed 1007 characters (-B)`,
 
   // Report Part
   10701: `Invalid Report type. (-B)`,
@@ -201,6 +202,7 @@ const errorMessagesCN: Record<number, string> = {
   10631: `必须填写拒绝原因，拒绝原因不多于 1007 字 (-B)`,
   10632: `您没有权限处理更新请求 (-B)`,
   10633: `该更新请求已经被处理 (-B)`,
+  10634: `评论内容长度超过 1007 个字符 (-B)`,
 
   10701: `不合法的举报类型. (-B)`,
   10702: `举报理由不能空. (-B)`,

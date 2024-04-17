@@ -30,8 +30,7 @@ provide<GalgameDetail>('galgame', props.galgame)
 
     <KunDivider />
 
-    <h2>评论</h2>
-    <div>发布评论</div>
+    <GalgameCommentContainer />
   </div>
 </template>
 
