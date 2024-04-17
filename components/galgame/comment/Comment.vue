@@ -4,13 +4,16 @@ import type { GalgameComment } from '~/types/api/galgame-comment'
 
 defineProps<{
   comment: SerializeObject<GalgameComment>
+  refresh: () => {}
 }>()
+
+const { locale } = useI18n()
 
 const route = useRoute()
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
-const { locale } = useI18n()
+const isShowComment = ref(false)
 </script>
 
 <template>
@@ -22,9 +25,15 @@ const { locale } = useI18n()
         <span class="time">
           {{ formatTimeDifferenceHint(comment.time, locale) }}
         </span>
-        <span v-if="comment.toUser">{{ ` => ${comment.toUser.name}` }}</span>
 
-        <span class="reply">
+        <div v-if="comment.toUser">
+          <span>=> </span>
+          <NuxtLinkLocale :to="`/kungalgamer/${comment.toUser.uid}/info`">
+            {{ `${comment.toUser.name}` }}
+          </NuxtLinkLocale>
+        </div>
+
+        <span class="reply" @click="isShowComment = !isShowComment">
           <Icon name="lucide:reply" />
         </span>
       </div>
@@ -34,6 +43,13 @@ const { locale } = useI18n()
       </div>
     </div>
     <pre class="content">{{ comment.content }}</pre>
+
+    <GalgameCommentPanel
+      v-if="isShowComment"
+      :to-user="comment.user"
+      :refresh="refresh"
+      @close="isShowComment = false"
+    />
   </div>
 </template>
 
@@ -42,6 +58,7 @@ const { locale } = useI18n()
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 30px;
 }
 
 .info {
@@ -52,17 +69,22 @@ const { locale } = useI18n()
     display: flex;
     align-items: center;
 
+    a {
+      color: var(--kungalgame-blue-5);
+    }
+
     .kun-avatar {
       margin-right: 10px;
     }
 
     .time {
       font-size: small;
-      margin-left: 10px;
+      margin: 0 10px;
       color: var(--kungalgame-font-color-0);
     }
 
     .reply {
+      cursor: pointer;
       color: var(--kungalgame-blue-5);
       font-size: 20px;
       margin-left: 10px;
@@ -79,7 +101,6 @@ const { locale } = useI18n()
 
 .content {
   margin: 0;
-  margin-bottom: 17px;
   white-space: pre-wrap;
   word-break: break-all;
 }

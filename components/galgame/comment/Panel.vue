@@ -1,52 +1,64 @@
 <script setup lang="ts">
+const props = defineProps<{
+  toUser?: KunUser
+  refresh: () => {}
+}>()
+
+const emits = defineEmits<{
+  close: []
+}>()
+
+const content = ref('')
+
 const route = useRoute()
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
-
-const commentData = reactive({
-  toUid: 0,
-  content: ''
-})
 const isPublishing = ref(false)
-const pageData = reactive({
-  page: 1,
-  limit: 10
-})
-
-const { data, refresh } = await useFetch(
-  `/api/galgame/${gid.value}/comment/all`,
-  {
-    method: 'GET',
-    query: pageData,
-    ...kungalgameResponseHandler
-  }
-)
 
 const handlePublishComment = async () => {
+  if (!content.value.trim()) {
+    useMessage('Comment cannot be empty!', '评论不能为空', 'warn')
+    return
+  }
+  if (content.value.trim().length > 1007) {
+    useMessage(
+      'The maximum length of comment is 1007 characters!',
+      '评论最大长度为 1007 个字符',
+      'warn'
+    )
+    return
+  }
+
   isPublishing.value = true
   const { data } = await useFetch(`/api/galgame/${gid.value}/comment`, {
     method: 'POST',
-    body: commentData,
+    body: { toUid: props.toUser?.uid, content },
     watch: false,
     ...kungalgameResponseHandler
   })
   isPublishing.value = false
 
   if (data.value) {
-    commentData.toUid = 0
-    commentData.content = ''
+    content.value = ''
     useMessage('Publish comment successfully!', '发布评论成功', 'success')
-    refresh()
+    emits('close')
+    props.refresh()
   }
 }
 </script>
 
 <template>
   <div class="panel">
-    <textarea v-model="commentData.content" name="comment" rows="5" />
+    <textarea v-model="content" name="comment" rows="5" />
 
     <div class="footer">
+      <span v-if="toUser">
+        <span>评论给</span>
+        <NuxtLinkLocale :to="`/kungalgamer/${toUser.uid}/info`">
+          {{ toUser.name }}
+        </NuxtLinkLocale>
+      </span>
       <KunButton @click="handlePublishComment">发布评论</KunButton>
     </div>
   </div>
@@ -54,6 +66,8 @@ const handlePublishComment = async () => {
 
 <style lang="scss" scoped>
 .panel {
+  margin-bottom: 17px;
+
   textarea {
     color: var(--kungalgame-font-color-3);
     margin-bottom: 10px;
@@ -62,7 +76,7 @@ const handlePublishComment = async () => {
     background-color: var(--kungalgame-trans-white-9);
     border-radius: 10px;
     padding: 5px;
-    resize: none;
+    resize: vertical;
 
     &:focus {
       border: 1px solid var(--kungalgame-blue-5);
@@ -73,6 +87,10 @@ const handlePublishComment = async () => {
   .footer {
     width: 100%;
     display: flex;
+
+    a {
+      color: var(--kungalgame-blue-5);
+    }
 
     .kun-button {
       margin-left: auto;
