@@ -77,7 +77,7 @@ const handlePublishComment = async () => {
     background-color: var(--kungalgame-trans-white-9);
     border-radius: 10px;
     padding: 5px;
-    resize: none;
+    resize: vertical;
 
     &:focus {
       border: 1px solid var(--kungalgame-blue-5);

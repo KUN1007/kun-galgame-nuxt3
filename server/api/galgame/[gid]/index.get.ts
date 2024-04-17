@@ -54,11 +54,11 @@ export default defineEventHandler(async (event) => {
       contributor,
       likes: {
         count: galgame.likes.length,
-        isLiked: galgame.likes.includes(userInfo?.uid || 0)
+        isLiked: galgame.likes.includes(userInfo?.uid ?? 0)
       },
       favorites: {
         count: galgame.favorites.length,
-        isFavorite: galgame.favorites.includes(userInfo?.uid || 0)
+        isFavorite: galgame.favorites.includes(userInfo?.uid ?? 0)
       },
       alias: galgame.alias,
       official: galgame.official

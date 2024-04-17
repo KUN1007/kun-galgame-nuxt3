@@ -26,11 +26,16 @@ export default defineEventHandler(async (event) => {
     .populate('touid', 'uid name')
     .lean()
 
+  const userInfo = await getCookieTokenInfo(event)
   const commentData: GalgameComment[] = data.map((comment) => ({
     gcid: comment.gcid,
     gid: comment.gid,
     time: comment.created,
     content: comment.content,
+    likes: {
+      count: comment.likes.length,
+      isLiked: comment.likes.includes(userInfo?.uid ?? 0)
+    },
     user: {
       uid: comment.cuid[0].uid,
       name: comment.cuid[0].name,

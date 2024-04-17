@@ -23,15 +23,14 @@ const { locale } = useI18n()
           {{ formatTimeDifferenceHint(comment.time, locale) }}
         </span>
         <span v-if="comment.toUser">{{ ` => ${comment.toUser.name}` }}</span>
+
+        <span class="reply">
+          <Icon name="lucide:reply" />
+        </span>
       </div>
 
       <div class="action">
-        <span>
-          <Icon name="lucide:reply" />
-        </span>
-        <span>
-          <Icon name="lucide:thumbs-up" />
-        </span>
+        <GalgameCommentLike :comment="comment" />
       </div>
     </div>
     <pre class="content">{{ comment.content }}</pre>
@@ -47,11 +46,11 @@ const { locale } = useI18n()
 
 .info {
   display: flex;
+  margin-bottom: 10px;
 
   .user {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
 
     .kun-avatar {
       margin-right: 10px;
@@ -62,15 +61,19 @@ const { locale } = useI18n()
       margin-left: 10px;
       color: var(--kungalgame-font-color-0);
     }
+
+    .reply {
+      color: var(--kungalgame-blue-5);
+      font-size: 20px;
+      margin-left: 10px;
+    }
   }
 
   .action {
     margin-left: auto;
+    display: flex;
+    align-items: center;
     color: var(--kungalgame-font-color-2);
-
-    span {
-      margin-right: 10px;
-    }
   }
 }
 

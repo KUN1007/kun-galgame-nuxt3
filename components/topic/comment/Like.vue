@@ -20,14 +20,6 @@ watch(
   }
 )
 
-const throttleCallback = () => {
-  useMessage(
-    'You can only perform one operation within 1007 milliseconds',
-    '您在 1007 毫秒内只能进行一次操作',
-    'warn'
-  )
-}
-
 const likeComment = async () => {
   if (isLiked.value) {
     useMessage(`You've already liked it`, '您已经点过赞了', 'warn')
@@ -60,14 +52,12 @@ const likeComment = async () => {
   }
 }
 
-const handleClickLikeThrottled = throttle(likeComment, 1007, throttleCallback)
-
-const handleClickLike = () => {
+const handleClickLike = async () => {
   if (!moemoeAccessToken) {
     useMessage('You need to login to like', '您需要登录以点赞', 'warn', 5000)
     return
   }
-  handleClickLikeThrottled()
+  await likeComment()
 }
 </script>
 
