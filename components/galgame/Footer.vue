@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { GalgameDetail } from '~/types/api/galgame'
 
+const GalgameHistory = defineAsyncComponent(
+  () => import('./history/History.vue')
+)
+
 const isShowHistory = ref(false)
 
 const galgame = inject<GalgameDetail>('galgame')

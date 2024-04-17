@@ -43,32 +43,17 @@ const handlePublishComment = async () => {
 </script>
 
 <template>
-  <KunHeader :size="2">
-    <template #header>评论</template>
-  </KunHeader>
-  <div>
-    <div class="panel">
-      <textarea v-model="commentData.content" name="comment" rows="5" />
+  <div class="panel">
+    <textarea v-model="commentData.content" name="comment" rows="5" />
 
-      <div class="footer">
-        <KunButton @click="handlePublishComment">发布评论</KunButton>
-      </div>
-    </div>
-
-    <div class="comments" v-if="data && data.totalCount">
-      <GalgameComment
-        v-for="(comment, index) in data.commentData"
-        :key="index"
-        :comment="comment"
-      />
+    <div class="footer">
+      <KunButton @click="handlePublishComment">发布评论</KunButton>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .panel {
-  margin-bottom: 17px;
-
   textarea {
     color: var(--kungalgame-font-color-3);
     margin-bottom: 10px;

@@ -6,10 +6,10 @@ import type { H3Event } from 'h3'
 const readReplyData = async (event: H3Event) => {
   const { toUid, content }: { toUid: string; content: string } =
     await readBody(event)
-  if (!toUid || !content) {
+  if (!content) {
     return kunError(event, 10507)
   }
-  if (content.trim.length > 1007) {
+  if (content.trim().length > 1007) {
     return kunError(event, 10634)
   }
 
