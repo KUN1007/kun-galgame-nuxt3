@@ -22,27 +22,11 @@ provide<GalgameDetail>('galgame', props.galgame)
 
     <GalgamePrContainer />
 
-    <GalgameHistory />
+    <KunDivider />
 
     <GalgameContributor :views="galgame.views" />
 
-    <div class="footer">
-      <GalgameLike
-        :gid="galgame.gid"
-        :to-uid="galgame.user.uid"
-        :likes-count="galgame.likes.count"
-        :is-liked="galgame.likes.isLiked"
-      />
-
-      <GalgameFavorite
-        :gid="galgame.gid"
-        :to-uid="galgame.user.uid"
-        :favorites-count="galgame.favorites.count"
-        :is-favorite="galgame.favorites.isFavorite"
-      />
-
-      <GalgameRewrite :galgame="galgame" />
-    </div>
+    <GalgameFooter />
 
     <KunDivider />
 
@@ -51,13 +35,4 @@ provide<GalgameDetail>('galgame', props.galgame)
   </div>
 </template>
 
-<style lang="scss" scoped>
-.footer {
-  display: flex;
-  justify-content: flex-end;
-
-  span {
-    margin-right: 17px;
-  }
-}
-</style>
+<style lang="scss" scoped></style>
