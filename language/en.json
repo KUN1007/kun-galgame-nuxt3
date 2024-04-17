@@ -640,7 +640,10 @@
     "comment": {
       "name": "Comments",
       "asc": "Ascending",
-      "desc": "Descending"
+      "desc": "Descending",
+      "to": "Comment to",
+      "publish": "Publish Comment",
+      "sad": "No one commented. Does this mean no one want to love this visualnovel's moe and soft lass? Wail..."
     }
   },
   "report": {

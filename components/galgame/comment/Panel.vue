@@ -50,17 +50,24 @@ const handlePublishComment = async () => {
 
 <template>
   <div class="panel">
-    <textarea v-model="content" name="comment" rows="5" />
+    <textarea
+      placeholder="「恋だよ、恋。私に出来なかったことのひとつを、君に代わりにかなえてもらう」"
+      v-model="content"
+      name="comment"
+      rows="5"
+    />
 
     <div class="footer">
       <slot />
       <span v-if="toUser">
-        <span>评论给</span>
+        <span>{{ $t('galgame.comment.to') }}</span>
         <NuxtLinkLocale :to="`/kungalgamer/${toUser.uid}/info`">
           {{ toUser.name }}
         </NuxtLinkLocale>
       </span>
-      <KunButton @click="handlePublishComment">发布评论</KunButton>
+      <KunButton @click="handlePublishComment">
+        {{ $t('galgame.comment.publish') }}
+      </KunButton>
     </div>
   </div>
 </template>

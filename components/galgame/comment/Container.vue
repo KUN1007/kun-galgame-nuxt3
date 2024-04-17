@@ -33,7 +33,9 @@ const { data, pending, refresh } = await useFetch(
 
 <template>
   <KunHeader :size="2">
-    <template #header>评论</template>
+    <template #header>
+      {{ $t('galgame.comment.name') }}
+    </template>
   </KunHeader>
   <div>
     <GalgameCommentPanel :to-uid="0" :refresh="refresh">
@@ -47,7 +49,7 @@ const { data, pending, refresh } = await useFetch(
     </GalgameCommentPanel>
 
     <div v-if="!data?.totalCount">
-      没人评论, 是没人要这个游戏的小只可爱软萌妹子了吗, 呜呜呜...
+      {{ $t('galgame.comment.sad') }}
     </div>
 
     <div class="comments" v-if="data && data.totalCount">
