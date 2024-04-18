@@ -1,4 +1,5 @@
-import { TopicUserInfo, TopicToUserInfo } from './topic'
+import type { TopicUserInfo, TopicToUserInfo } from './topic'
+import type { TopicComment } from './galgame-comment'
 
 export interface TopicReplyRequestData {
   page: string
@@ -21,7 +22,7 @@ export interface TopicReply {
   dislikes: number[]
   tags: string[]
   time: number
-  comment: number[]
+  comment: TopicComment[]
 }
 
 export interface TopicCreateReplyRequestData {

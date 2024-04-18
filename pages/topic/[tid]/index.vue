@@ -9,6 +9,7 @@ const isBanned = ref(false)
 const tid = computed(() => {
   return parseInt((route.params as { tid: string }).tid)
 })
+provide<number>('tid', tid.value)
 
 const data = await useFetch(`/api/topic/${tid.value}`, {
   method: 'GET',

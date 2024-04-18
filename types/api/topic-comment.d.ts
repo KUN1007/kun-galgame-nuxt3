@@ -4,19 +4,19 @@ export interface TopicComment {
   cid: number
   rid: number
   tid: number
-  c_user: Omit<TopicUserInfo, 'moemoepoint'>
-  to_user: TopicToUserInfo
+  cUser: Omit<TopicUserInfo, 'moemoepoint'>
+  toUser: Omit<KunUser, 'avatar'>
   content: string
   likes: number[]
 }
 
 export interface TopicLikeCommentRequestData {
   cid: string
-  to_uid: string
+  toUid: string
 }
 
 export interface TopicCreateCommentRequestData {
   rid: string
-  to_uid: string
+  toUid: string
   content: string
 }

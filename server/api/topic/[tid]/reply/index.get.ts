@@ -1,7 +1,35 @@
 import TopicModel from '~/server/models/topic'
 import ReplyModel from '~/server/models/reply'
+import CommentModel from '~/server/models/comment'
 import mongoose from 'mongoose'
-import type { TopicReplyRequestData, TopicReply } from '~/types/api/reply'
+import type { TopicReplyRequestData, TopicReply } from '~/types/api/topic-reply'
+import type { TopicComment } from '~/types/api/topic-comment'
+
+const getComments = async (rid: number) => {
+  const comment = await CommentModel.find({ rid })
+    .populate('cuid', 'uid avatar name')
+    .populate('touid', 'uid name')
+    .lean()
+
+  const replyComments: TopicComment[] = comment.map((comment) => ({
+    cid: comment.cid,
+    rid: comment.rid,
+    tid: comment.tid,
+    cUser: {
+      uid: comment.cuid[0].uid,
+      avatar: comment.cuid[0].avatar,
+      name: comment.cuid[0].name
+    },
+    toUser: {
+      uid: comment.touid[0].uid,
+      name: comment.touid[0].name
+    },
+    content: comment.content,
+    likes: comment.likes
+  }))
+
+  return replyComments
+}
 
 const getReplies = async (
   tid: number,
@@ -31,31 +59,33 @@ const getReplies = async (
       .populate('to_user', 'uid name')
       .lean()
 
-    const repliesData: TopicReply[] = replyDetails.map((reply) => ({
-      rid: reply.rid,
-      tid: reply.tid,
-      floor: reply.floor,
-      to_floor: reply.to_floor,
-      r_user: {
-        uid: reply.r_user[0].uid,
-        name: reply.r_user[0].name,
-        avatar: reply.r_user[0].avatar,
-        moemoepoint: reply.r_user[0].moemoepoint
-      },
-      to_user: {
-        uid: reply.to_user[0].uid,
-        name: reply.to_user[0].name
-      },
-      edited: reply.edited,
-      content: reply.content,
-      upvotes: reply.upvotes,
-      upvote_time: reply.upvote_time,
-      likes: reply.likes,
-      dislikes: reply.dislikes,
-      tags: reply.tags,
-      time: reply.time,
-      comment: reply.comment
-    }))
+    const repliesData: TopicReply[] = await Promise.all(
+      replyDetails.map(async (reply) => ({
+        rid: reply.rid,
+        tid: reply.tid,
+        floor: reply.floor,
+        to_floor: reply.to_floor,
+        r_user: {
+          uid: reply.r_user[0].uid,
+          name: reply.r_user[0].name,
+          avatar: reply.r_user[0].avatar,
+          moemoepoint: reply.r_user[0].moemoepoint
+        },
+        to_user: {
+          uid: reply.to_user[0].uid,
+          name: reply.to_user[0].name
+        },
+        edited: reply.edited,
+        content: reply.content,
+        upvotes: reply.upvotes,
+        upvote_time: reply.upvote_time,
+        likes: reply.likes,
+        dislikes: reply.dislikes,
+        tags: reply.tags,
+        time: reply.time,
+        comment: await getComments(reply.rid)
+      }))
+    )
 
     await session.commitTransaction()
 

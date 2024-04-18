@@ -1,29 +1,36 @@
 <script setup lang="ts">
-import { checkCommentPublish } from '../utils/checkCommentPublish'
-import type { TopicComment } from '~/types/api/comment'
+import type { TopicComment } from '~/types/api/topic-comment'
 
-const { name } = storeToRefs(usePersistUserStore())
-const { tid, rid, toUid, toUsername, content, isShowCommentPanelRid } =
-  storeToRefs(useTempCommentStore())
-const isPublishing = ref(false)
-
-const emits = defineEmits<{
-  getCommentEmits: [newComment: TopicComment]
+const props = defineProps<{
+  rid: number
+  toUser: {
+    uid: number
+    name: string
+  }
 }>()
 
-const commentValue = ref('')
+const emits = defineEmits<{
+  getComment: [newComment: TopicComment]
+  close: []
+}>()
 
-const handleInputComment = debounce(() => {
-  content.value = commentValue.value
-}, 300)
+const { name } = storeToRefs(usePersistUserStore())
+const tid = inject<number>('tid')
+const commentValue = ref('')
+const isPublishing = ref(false)
 
 const handlePublishComment = async () => {
-  const requestData = {
-    rid: rid.value,
-    to_uid: toUid.value,
-    content: content.value
+  if (!commentValue.value.trim()) {
+    useMessage('Comment content cannot be empty!', '评论内容不能为空！', 'warn')
+    return
   }
-  if (!checkCommentPublish(requestData.content)) {
+
+  if (commentValue.value.trim().length > 1007) {
+    useMessage(
+      'The maximum length for comments should not exceed 1007 characters.',
+      '评论最大长度不可超过 1007 个字符',
+      'warn'
+    )
     return
   }
 
@@ -33,23 +40,23 @@ const handlePublishComment = async () => {
     isPublishing.value = true
     useMessage('Publishing...', '正在发布...', 'info')
   }
-  const comment = await $fetch(`/api/topic/${tid.value}/comment`, {
+  const comment = await $fetch(`/api/topic/${tid}/comment`, {
     method: 'POST',
-    body: requestData,
+    body: {
+      rid: props.rid,
+      toUid: props.toUser.uid,
+      content: commentValue.value
+    },
     watch: false,
     ...kungalgameResponseHandler
   })
   isPublishing.value = false
 
   if (comment) {
-    emits('getCommentEmits', comment)
+    emits('getComment', comment)
+    emits('close')
     useMessage('Comment published successfully!', '评论发布成功', 'success')
-    handleCloseCommentPanel()
   }
-}
-
-const handleCloseCommentPanel = () => {
-  isShowCommentPanelRid.value = 0
 }
 </script>
 
@@ -59,13 +66,13 @@ const handleCloseCommentPanel = () => {
       <div class="title">
         <span>{{ name }}</span>
         <span>{{ $t('topic.content.comment') }}</span>
-        <span>{{ toUsername }}</span>
+        <span>{{ toUser.name }}</span>
       </div>
       <div class="confirm">
         <button @click="handlePublishComment">
           {{ $t('topic.content.publish') }}
         </button>
-        <button @click="handleCloseCommentPanel">
+        <button @click="emits('close')">
           {{ $t('topic.content.close') }}
         </button>
       </div>
@@ -77,7 +84,6 @@ const handleCloseCommentPanel = () => {
         :placeholder="`${$t('topic.content.hint')}`"
         rows="5"
         v-model="commentValue"
-        @input="handleInputComment"
       >
       </textarea>
 
@@ -181,3 +187,4 @@ const handleCloseCommentPanel = () => {
   color: var(--kungalgame-font-color-1);
 }
 </style>
+~/types/api/topic-comment

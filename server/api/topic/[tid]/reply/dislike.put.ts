@@ -1,7 +1,7 @@
 import UserModel from '~/server/models/user'
 import ReplyModel from '~/server/models/reply'
 import mongoose from 'mongoose'
-import type { TopicDislikeReplyRequestData } from '~/types/api/reply'
+import type { TopicDislikeReplyRequestData } from '~/types/api/topic-reply'
 
 const updateReplyDislike = async (
   uid: number,

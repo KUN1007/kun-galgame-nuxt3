@@ -1,7 +1,7 @@
 import UserModel from '~/server/models/user'
 import CommentModel from '~/server/models/comment'
 import mongoose from 'mongoose'
-import type { TopicLikeCommentRequestData } from '~/types/api/comment'
+import type { TopicLikeCommentRequestData } from '~/types/api/topic-comment'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)

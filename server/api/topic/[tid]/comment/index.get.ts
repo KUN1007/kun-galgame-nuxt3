@@ -1,5 +1,6 @@
 import CommentModel from '~/server/models/comment'
 
+// @Deprecated API
 export default defineEventHandler(async (event) => {
   const { rid }: { rid: string } = await getQuery(event)
   if (!rid) {

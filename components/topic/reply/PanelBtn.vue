@@ -3,7 +3,7 @@ import { checkReplyPublish } from '../utils/checkReplyPublish'
 import type {
   TopicCreateReplyRequestData,
   TopicUpdateReplyRequestData
-} from '~/types/api/reply'
+} from '~/types/api/topic-reply'
 
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
@@ -199,3 +199,4 @@ const handleShowAdvance = () => {
   }
 }
 </style>
+~/types/api/topic-reply

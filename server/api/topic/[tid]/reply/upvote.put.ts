@@ -2,7 +2,7 @@ import UserModel from '~/server/models/user'
 import ReplyModel from '~/server/models/reply'
 import mongoose from 'mongoose'
 import { isValidTimestamp } from '~/utils/validate'
-import type { TopicUpvoteReplyRequestData } from '~/types/api/reply'
+import type { TopicUpvoteReplyRequestData } from '~/types/api/topic-reply'
 
 const updateReplyUpvote = async (
   uid: number,

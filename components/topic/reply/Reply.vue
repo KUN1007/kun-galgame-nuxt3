@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
 
-import type { TopicReply } from '~/types/api/reply'
+import type { TopicReply } from '~/types/api/topic-reply'
 
 const { moemoeAccessToken } = usePersistUserStore()
 const { scrollToReplyId } = storeToRefs(useTempReplyStore())
@@ -135,11 +135,7 @@ const handleClickComment = (
       </template>
     </TopicFooter>
 
-    <TopicComment
-      :tid="reply.tid"
-      :rid="reply.rid"
-      :to-user="{ uid: reply.r_user.uid, name: reply.r_user.name }"
-    />
+    <TopicComment :rid="reply.rid" :comments-data="reply.comment" />
   </div>
 </template>
 
@@ -317,3 +313,4 @@ const handleClickComment = (
   }
 }
 </style>
+~/types/api/topic-reply

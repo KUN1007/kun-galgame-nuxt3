@@ -1,99 +1,42 @@
 <script setup lang="ts">
-import type { TopicComment } from '~/types/api/comment'
+import type { TopicComment } from '~/types/api/topic-comment'
 
 const CommentPanel = defineAsyncComponent(() => import('./Panel.vue'))
 
-const {
-  tid: storeTid,
-  rid: storeRid,
-  toUid,
-  toUsername,
-  isShowCommentPanelRid
-} = storeToRefs(useTempCommentStore())
-
 const props = defineProps<{
-  tid: number
   rid: number
-  toUser: {
-    uid: number
-    name: string
-  }
+  commentsData: TopicComment[]
 }>()
+const comments = ref(props.commentsData)
+const toUser = ref()
 
-const ridRef = ref(props.rid)
-const toUser = ref(props.toUser)
 const currentUserUid = usePersistUserStore().uid
+const isShowPanel = ref(false)
 
-const getComments = async () => {
-  const data = await $fetch(`/api/topic/${props.tid}/comment`, {
-    method: 'GET',
-    query: { rid: props.rid },
-    watch: false,
-    ...kungalgameResponseHandler
-  })
-  return data
-}
-
-const { data: commentsData } = await useFetch(
-  `/api/topic/${props.tid}/comment`,
-  {
-    method: 'GET',
-    query: { rid: props.rid },
-    watch: false,
-    ...kungalgameResponseHandler
-  }
-)
-
-watch(
-  () => props.rid,
-  async () => {
-    ridRef.value = props.rid
-    toUser.value = props.toUser
-    commentsData.value = await getComments()
-  }
-)
-
-const getCommentEmits = (newComment: TopicComment) => {
-  commentsData.value?.push(newComment)
-}
-
-const handleClickComment = (
-  topicId: number,
-  replyId: number,
-  uid: number,
-  name: string
-) => {
+const handleClickComment = (comment: TopicComment) => {
   if (!currentUserUid) {
     useMessage('You need to login to comment', '您需要登录以评论', 'warn', 5000)
     return
   }
-  storeTid.value = topicId
-  storeRid.value = replyId
-  toUid.value = uid
-  toUsername.value = name
-
-  isShowCommentPanelRid.value = ridRef.value
+  toUser.value = comment.cUser
+  isShowPanel.value = !isShowPanel.value
 }
 </script>
 
 <template>
   <div class="comment-container">
-    <div class="container" v-if="commentsData?.length">
+    <div class="container" v-if="comments?.length">
       <div class="title">
         <span>{{ $t('topic.content.comments') }}</span>
       </div>
 
-      <div
-        class="comment"
-        v-for="(comment, index) in commentsData"
-        :key="index"
-      >
+      <div class="comment" v-for="(comment, index) in comments" :key="index">
         <NuxtLinkLocale
-          v-if="comment.c_user.avatar"
-          :to="`/kungalgamer/${comment.c_user.uid}/info`"
+          v-if="comment.cUser.avatar"
+          :to="`/kungalgamer/${comment.cUser.uid}/info`"
         >
           <img
-            :src="comment.c_user.avatar.replace(/\.webp$/, '-100.webp')"
+            :src="comment.cUser.avatar.replace(/\.webp$/, '-100.webp')"
             alt="KUN"
           />
         </NuxtLinkLocale>
@@ -101,32 +44,23 @@ const handleClickComment = (
         <div class="content">
           <div class="describe">
             <div class="name">
-              {{ `${comment.c_user.name} ${$t('topic.content.comment')}` }}
-              <NuxtLinkLocale :to="`/kungalgamer/${comment.to_user.uid}/info`">
-                {{ comment.to_user.name }}
+              {{ `${comment.cUser.name} ${$t('topic.content.comment')}` }}
+              <NuxtLinkLocale :to="`/kungalgamer/${comment.toUser.uid}/info`">
+                {{ comment.toUser.name }}
               </NuxtLinkLocale>
             </div>
 
             <div class="operate">
               <ul>
                 <TopicCommentLike
-                  :tid="props.tid"
+                  :tid="comment.tid"
                   :cid="comment.cid"
                   :uid="currentUserUid"
-                  :to-uid="comment.c_user.uid"
+                  :to-uid="comment.cUser.uid"
                   :likes="comment.likes"
                 />
 
-                <li
-                  @click="
-                    handleClickComment(
-                      comment.tid,
-                      comment.rid,
-                      comment.c_user.uid,
-                      comment.c_user.name
-                    )
-                  "
-                >
+                <li @click="handleClickComment(comment)">
                   <Icon class="icon" name="uil:comment-dots" />
                 </li>
               </ul>
@@ -139,8 +73,11 @@ const handleClickComment = (
     </div>
 
     <CommentPanel
-      @get-comment-emits="getCommentEmits"
-      v-if="isShowCommentPanelRid === ridRef"
+      v-if="isShowPanel"
+      :rid="rid"
+      :to-user="toUser"
+      @get-comment="(newComment) => comments.push(newComment)"
+      @close="isShowPanel = false"
     />
   </div>
 </template>
@@ -225,3 +162,4 @@ const handleClickComment = (
   word-break: break-all;
 }
 </style>
+~/types/api/topic-comment

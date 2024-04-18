@@ -8,12 +8,12 @@ import type { H3Event } from 'h3'
 import type {
   TopicComment,
   TopicCreateCommentRequestData
-} from '~/types/api/comment'
+} from '~/types/api/topic-comment'
 
 const readReplyData = async (event: H3Event) => {
-  const { rid, to_uid, content }: TopicCreateCommentRequestData =
+  const { rid, toUid, content }: TopicCreateCommentRequestData =
     await readBody(event)
-  if (!rid || !to_uid) {
+  if (!rid || !toUid) {
     return kunError(event, 10507)
   }
 
@@ -37,7 +37,7 @@ const readReplyData = async (event: H3Event) => {
     rid: parseInt(rid),
     tid: parseInt(tid),
     c_uid: uid,
-    to_uid: parseInt(to_uid),
+    to_uid: parseInt(toUid),
     content
   }
 }
@@ -100,12 +100,12 @@ export default defineEventHandler(async (event) => {
       cid: savedComment.cid,
       rid: savedComment.rid,
       tid: savedComment.tid,
-      c_user: {
+      cUser: {
         uid: commentUser.uid,
         name: commentUser.name,
         avatar: commentUser.avatar
       },
-      to_user: {
+      toUser: {
         uid: toUser.uid,
         name: toUser.name
       },
