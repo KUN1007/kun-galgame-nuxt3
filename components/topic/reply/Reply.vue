@@ -159,24 +159,23 @@ const handleClickComment = (
   backdrop-filter: blur(10px);
   border-radius: 10px;
   margin-bottom: 17px;
+  position: relative;
 }
 
 .floor {
+  position: absolute;
+  top: 0;
   width: 100%;
   display: flex;
   font-weight: bold;
   font-style: oblique;
   color: var(--kungalgame-red-3);
   border-bottom: none;
-  filter: drop-shadow(1px 2px 2px var(--kungalgame-trans-blue-4));
-  margin: 5px 0;
 
   span {
-    padding: 0 30px;
+    padding: 0 10px;
     text-align: center;
-    background-color: var(--kungalgame-trans-white-2);
     font-size: 20px;
-    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0 50%);
   }
 }
 
@@ -305,8 +304,8 @@ const handleClickComment = (
     flex-direction: column;
   }
 
-  .reply {
-    display: none;
+  .reply-to {
+    display: none !important;
   }
 
   .icon {

@@ -42,8 +42,9 @@ watch(
   () => {
     if (content.value) {
       scrollHeight.value = 0
-      content.value.scrollTo({
-        top: 0
+      window?.scrollTo({
+        top: 0,
+        behavior: 'smooth'
       })
       isScrollToTop.value = false
     }
@@ -58,14 +59,22 @@ watch(
         `#kungalgame-reply-${scrollToReplyId.value}`
       ) as HTMLElement
 
-      childElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      childElement.classList.add('active')
+      if (childElement) {
+        childElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        childElement.classList.add('active')
 
-      await new Promise((resolve) => {
-        setTimeout(resolve, 3000)
-      })
+        await new Promise((resolve) => {
+          setTimeout(resolve, 3000)
+        })
 
-      childElement.classList.remove('active')
+        childElement.classList.remove('active')
+      } else {
+        useMessage(
+          'This reply cannot be found temporarily. Please turn the page',
+          '暂时找不到该回复，请翻页',
+          'info'
+        )
+      }
       scrollToReplyId.value = -1
     }
   }
@@ -85,6 +94,21 @@ watch(
     <TopicMaster :topic-data="topic" />
 
     <div class="tool" id="tool">
+      <div class="page" v-if="data">
+        <button @click="pageData.page--" :disabled="pageData.page === 1">
+          <Icon name="lucide:chevron-left" />
+        </button>
+        <span>
+          {{ `${pageData.page} / ${Math.ceil(data.totalCount / 17)}` }}
+        </span>
+        <button
+          @click="pageData.page++"
+          :disabled="pageData.page === Math.ceil(data.totalCount / 17)"
+        >
+          <Icon name="lucide:chevron-right" />
+        </button>
+      </div>
+
       <div class="order">
         <span
           :class="pageData.sortOrder === 'asc' ? 'active' : ''"
@@ -140,11 +164,39 @@ watch(
   border-radius: 10px;
   backdrop-filter: blur(10px);
   margin-bottom: 17px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .page {
+    font-size: large;
+    user-select: none;
+
+    button {
+      padding: 5px 10px;
+      border-radius: 10px;
+      margin: 0 7px;
+      border: none;
+      background-color: transparent;
+      font-size: medium;
+      color: var(--kungalgame-font-color-3);
+
+      &:hover {
+        background-color: var(--kungalgame-trans-blue-1);
+      }
+
+      &:disabled {
+        &:hover {
+          cursor: not-allowed;
+          background-color: transparent;
+        }
+      }
+    }
+  }
 
   .order {
     display: flex;
     white-space: nowrap;
-    margin-left: auto;
 
     span {
       cursor: pointer;
