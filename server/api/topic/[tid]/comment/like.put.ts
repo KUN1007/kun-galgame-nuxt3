@@ -8,14 +8,17 @@ export default defineEventHandler(async (event) => {
   if (!userInfo) {
     return kunError(event, 10115, 205)
   }
-  const uid = userInfo.uid
 
-  const { cid, to_uid }: TopicLikeCommentRequestData = await getQuery(event)
-  if (!cid || !to_uid) {
+  const { cid }: TopicLikeCommentRequestData = await getQuery(event)
+  if (!cid) {
     return kunError(event, 10507)
   }
+  const comment = await CommentModel.findOne({ cid }).lean()
+  if (!comment) {
+    return kunError(event, 10224)
+  }
 
-  if (uid.toString() === to_uid) {
+  if (userInfo.uid === comment.c_uid) {
     return
   }
 
@@ -23,21 +26,21 @@ export default defineEventHandler(async (event) => {
   session.startTransaction()
 
   try {
-    const comment = await CommentModel.findOneAndUpdate(
+    await CommentModel.updateOne(
       { cid },
-      { $addToSet: { likes: uid } }
+      { $addToSet: { likes: userInfo.uid } }
     )
     await UserModel.updateOne(
-      { uid: to_uid },
+      { uid: comment.c_uid },
       { $inc: { like: 1, moemoepoint: 1 } }
     )
 
     if (comment) {
       await createMessage(
-        uid,
-        parseInt(to_uid),
+        userInfo.uid,
+        comment.c_uid,
         'liked',
-        comment.content,
+        comment.content.slice(0, 233),
         comment.tid
       )
     }

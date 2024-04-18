@@ -26,7 +26,6 @@ const readReplyData = async (event: H3Event) => {
   if (!userInfo) {
     return kunError(event, 10115, 205)
   }
-  const uid = userInfo.uid
 
   const tid = getRouterParam(event, 'tid')
   if (!tid) {
@@ -36,7 +35,7 @@ const readReplyData = async (event: H3Event) => {
   return {
     rid: parseInt(rid),
     tid: parseInt(tid),
-    c_uid: uid,
+    c_uid: userInfo.uid,
     to_uid: parseInt(toUid),
     content
   }
@@ -100,7 +99,7 @@ export default defineEventHandler(async (event) => {
       cid: savedComment.cid,
       rid: savedComment.rid,
       tid: savedComment.tid,
-      cUser: {
+      user: {
         uid: commentUser.uid,
         name: commentUser.name,
         avatar: commentUser.avatar
@@ -110,7 +109,10 @@ export default defineEventHandler(async (event) => {
         name: toUser.name
       },
       content: savedComment.content,
-      likes: savedComment.likes
+      likes: {
+        count: savedComment.likes.length,
+        isLiked: savedComment.likes.includes(c_uid)
+      }
     }
 
     await session.commitTransaction()

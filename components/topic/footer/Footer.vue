@@ -1,39 +1,13 @@
 <script setup lang="ts">
+import type { TopicDetail } from '~/types/api/topic'
+import type { TopicReply } from '~/types/api/topic-reply'
+
 const props = defineProps<{
-  info: {
-    tid: number
-    rid: number
-    likes: number[]
-    dislikes: number[]
-    upvotes: number[]
-  }
-  content: {
-    title: string
-    content: string
-    tags: string[]
-    category: string[]
-    section?: string[]
-  }
-  toUser: {
-    uid: number
-    name: string
-  }
-  toFloor: number
+  topic: TopicDetail
 }>()
 
-const info = computed(() => props.info)
-const content = computed(() => props.content)
-const toUser = computed(() => props.toUser)
-
-/**
- * For simplicity, we don't display the "rewrite" option here.
- * In reality, if users modify the information saved in local storage,
- * this validation will become ineffective, but the validation logic is on the backend.
- */
-// Current user's UID
 const currUserUid = usePersistUserStore().uid
 
-// Share
 const handleClickShare = () => {
   const shareLink = `${props.content.title}: https://www.kungal.com/topic/${props.info.tid}`
 
@@ -59,57 +33,52 @@ const handleClickShare = () => {
 <template>
   <div class="footer">
     <div class="left">
-      <ul>
-        <TopicFooterUpvote
-          :uid="currUserUid"
-          :tid="info.tid"
-          :rid="info.rid"
-          :upvotes="info.upvotes"
-          :to-uid="toUser.uid"
-          v-tooltip="{
-            message: { en: 'Upvote', zh: '推话题' },
-            position: 'bottom'
-          }"
-        />
+      <TopicFooterUpvote
+        :tid="topic.tid"
+        :to-uid="topic.user.uid"
+        :upvote-count="topic.upvotes.count"
+        :is-upvoted="topic.upvotes.isUpvoted"
+        v-tooltip="{
+          message: { en: 'Upvote', zh: '推' },
+          position: 'bottom'
+        }"
+      />
 
-        <!-- Like -->
-        <TopicFooterLike
-          :uid="currUserUid"
-          :tid="info.tid"
-          :rid="info.rid"
-          :likes="info.likes"
-          :to-uid="toUser.uid"
-          v-tooltip="{
-            message: { en: 'Like', zh: '点赞' },
-            position: 'bottom'
-          }"
-        />
+      <!-- Like -->
+      <TopicFooterLike
+        :tid="topic.tid"
+        :to-uid="topic.user.uid"
+        :likes-count="topic.likes.count"
+        :is-liked="topic.likes.isLiked"
+        v-tooltip="{
+          message: { en: 'Like', zh: '点赞' },
+          position: 'bottom'
+        }"
+      />
 
-        <!-- Dislike -->
-        <TopicFooterDislike
-          :uid="currUserUid"
-          :tid="info.tid"
-          :rid="info.rid"
-          :dislikes="info.dislikes"
-          :to-uid="toUser.uid"
-          v-tooltip="{
-            message: { en: 'Dislike', zh: '点踩' },
-            position: 'bottom'
-          }"
-        />
+      <!-- Dislike -->
+      <TopicFooterDislike
+        :tid="topic.tid"
+        :to-uid="topic.user.uid"
+        :dislikes-count="topic.dislikes.count"
+        :is-disliked="topic.dislikes.isDisliked"
+        v-tooltip="{
+          message: { en: 'Dislike', zh: '点踩' },
+          position: 'bottom'
+        }"
+      />
 
-        <!-- Favorite slot -->
-        <slot name="favorite" />
-      </ul>
+      <!-- Favorite slot -->
+      <slot name="favorite" />
     </div>
 
     <!-- Right part of the bottom (reply, comment, view only, edit) -->
     <div class="right">
       <TopicFooterReply
-        :tid="info.tid"
-        :to-user-name="toUser.name"
-        :to-uid="toUser.uid"
-        :to-floor="toFloor"
+        :tid="topic.tid"
+        :to-user-name="topic.user.name"
+        :to-uid="topic.user.uid"
+        :to-floor="0"
       />
 
       <!-- Share -->
@@ -129,15 +98,7 @@ const handleClickShare = () => {
 
       <!-- Edit -->
       <TopicFooterRewrite
-        :tid="info.tid"
-        :rid="info.rid"
-        :uid="currUserUid"
-        :title="content.title"
-        :content="content.content"
-        :tags="content.tags"
-        :category="content.category"
-        :section="content.section"
-        :to-uid="toUser.uid"
+        :topic="topic"
         v-tooltip="{
           message: { en: 'Rewrite', zh: 'Rewrite' },
           position: 'bottom'

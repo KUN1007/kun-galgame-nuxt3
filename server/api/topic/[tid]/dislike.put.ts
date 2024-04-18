@@ -1,30 +1,24 @@
+import mongoose from 'mongoose'
 import UserModel from '~/server/models/user'
 import TopicModel from '~/server/models/topic'
-import mongoose from 'mongoose'
-import type { TopicDislikeTopicRequestData } from '~/types/api/topic'
 
-const updateTopicDislike = async (
-  uid: number,
-  to_uid: number,
-  tid: number,
-  isPush: boolean
-) => {
-  if (uid === to_uid) {
-    return
-  }
-
+const updateTopicDislike = async (uid: number, tid: number) => {
   const topic = await TopicModel.findOne({ tid })
   if (!topic) {
     return 10211
   }
 
+  if (uid === topic.uid) {
+    return
+  }
+
   const isDislikedTopic = topic.dislikes.includes(uid)
-  if (isDislikedTopic && isPush) {
+  if (isDislikedTopic) {
     return 10213
   }
 
-  const amount = isPush ? 1 : -1
-  const popularity = isPush ? -5 : 5
+  const amount = isDislikedTopic ? -1 : 1
+  const popularity = isDislikedTopic ? 5 : -5
 
   const session = await mongoose.startSession()
   session.startTransaction()
@@ -34,16 +28,16 @@ const updateTopicDislike = async (
       { tid },
       {
         $inc: { popularity },
-        [isPush ? '$push' : '$pull']: { dislikes: uid }
+        [isDislikedTopic ? '$pull' : '$addToSet']: { dislikes: uid }
       }
     )
 
     await UserModel.updateOne(
       { uid },
-      { [isPush ? '$push' : '$pull']: { dislike_topic: tid } }
+      { [isDislikedTopic ? '$pull' : '$addToSet']: { dislike_topic: tid } }
     )
 
-    await UserModel.updateOne({ uid: to_uid }, { $inc: { dislike: amount } })
+    await UserModel.updateOne({ uid: topic.uid }, { $inc: { dislike: amount } })
 
     await session.commitTransaction()
   } catch (error) {
@@ -65,28 +59,12 @@ export default defineEventHandler(async (event) => {
     kunError(event, 10115, 205)
     return
   }
-  const uid = userInfo.uid
 
-  const { to_uid, isPush }: TopicDislikeTopicRequestData = await getQuery(event)
-  if (!to_uid || !isPush) {
-    kunError(event, 10507)
-    return
-  }
-
-  if (uid.toString() === to_uid) {
-    return
-  }
-
-  const result = await updateTopicDislike(
-    uid,
-    parseInt(to_uid),
-    parseInt(tid),
-    isPush === 'true'
-  )
+  const result = await updateTopicDislike(userInfo.uid, parseInt(tid))
   if (typeof result === 'number') {
     kunError(event, result)
     return
   }
 
-  return 'MOEMOE dislike topic operation successfully!'
+  return 'MOEMOE dislike topic successfully!'
 })

@@ -38,12 +38,21 @@ export interface TopicDetail {
   tid: number
   title: string
   views: number
-  likes: number[]
-  dislikes: number[]
+  likes: {
+    count: number
+    isLiked: boolean
+  }
+  dislikes: {
+    count: number
+    isDisliked: boolean
+  }
   favorites: number[]
   time: number
   content: string
-  upvotes: number[]
+  upvotes: {
+    count: number
+    isUpvoted: boolean
+  }
   tags: string[]
   edited: number
   user: TopicUserInfo
@@ -54,24 +63,4 @@ export interface TopicDetail {
   section: string[]
   popularity: number
   upvote_time: number
-}
-
-export interface TopicUpvoteTopicRequestData {
-  to_uid: string
-  time: string
-}
-
-export interface TopicLikeTopicRequestData {
-  to_uid: string
-  isPush: string
-}
-
-export interface TopicDislikeTopicRequestData {
-  to_uid: string
-  isPush: string
-}
-
-export interface TopicFavoriteTopicRequestData {
-  to_uid: string
-  isPush: string
 }

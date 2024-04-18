@@ -1,70 +1,41 @@
 <script setup lang="ts">
 const props = defineProps<{
   tid: number
-  favorites: number[]
   toUid: number
+  favoritesCount: number
+  isFavorite: boolean
 }>()
 
-const { moemoeAccessToken, uid } = usePersistUserStore()
-const isFavorite = ref(props.favorites.includes(uid))
-const favoritesCount = ref(props.favorites.length)
+const { moemoeAccessToken } = usePersistUserStore()
+const isFavorite = ref(props.isFavorite)
+const favoritesCount = ref(props.favoritesCount)
 
-watch(
-  () => props.favorites,
-  (newFavorites) => {
-    isFavorite.value = newFavorites.includes(uid)
-    favoritesCount.value = newFavorites.length
+const toggleFavoriteGalgame = async () => {
+  const result = await $fetch(`/api/topic/${props.tid}/favorite`, {
+    method: 'PUT',
+    watch: false,
+    ...kungalgameResponseHandler
+  })
+
+  if (result) {
+    favoritesCount.value += isFavorite.value ? -1 : 1
+
+    if (!isFavorite.value) {
+      useMessage('Favorite successfully!', '收藏成功！', 'success')
+    } else {
+      useMessage('Cancel favorite successfully!', '取消收藏成功！', 'success')
+    }
+
+    isFavorite.value = !isFavorite.value
   }
-)
+}
 
-const throttleCallback = () => {
+const handleClickFavoriteThrottled = throttle(toggleFavoriteGalgame, 1007, () =>
   useMessage(
     'You can only perform one operation within 1007 milliseconds',
     '您在 1007 毫秒内只能进行一次操作',
     'warn'
   )
-}
-
-const favoriteOperation = async (
-  tid: number,
-  toUid: number,
-  isPush: boolean
-) => {
-  const queryData = {
-    isPush,
-    to_uid: toUid
-  }
-  const result = await $fetch(`/api/topic/${tid}/favorite`, {
-    method: 'PUT',
-    query: queryData,
-    watch: false,
-    ...kungalgameResponseHandler
-  })
-  return result
-}
-
-const toggleFavorite = async () => {
-  const { tid, toUid } = props
-  const isPush = !isFavorite.value
-
-  const result = await favoriteOperation(tid, toUid, isPush)
-
-  if (result) {
-    isFavorite.value = isPush
-    favoritesCount.value += isPush ? 1 : -1
-
-    if (isPush) {
-      useMessage('Favorite successfully!', '收藏成功！', 'success')
-    } else {
-      useMessage('Cancel favorite successfully!', '取消收藏成功！', 'success')
-    }
-  }
-}
-
-const handleClickFavoriteThrottled = throttle(
-  toggleFavorite,
-  1007,
-  throttleCallback
 )
 
 const handleClickFavorite = () => {
@@ -82,46 +53,31 @@ const handleClickFavorite = () => {
 </script>
 
 <template>
-  <li>
-    <span
-      class="favorite"
-      :class="isFavorite ? 'active' : ''"
-      @click="handleClickFavorite"
-    >
-      <Icon class="icon" name="lucide:heart" />
-    </span>
+  <span
+    class="favorite"
+    :class="isFavorite ? 'active' : ''"
+    @click="handleClickFavorite"
+  >
+    <Icon class="icon" name="lucide:heart" />
     <span v-if="favoritesCount">{{ favoritesCount }}</span>
-  </li>
+  </span>
 </template>
 
 <style lang="scss" scoped>
-li {
+.favorite {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
-  margin: 17px;
   margin-right: 0;
+  color: var(--kungalgame-font-color-2);
 
-  span {
-    display: flex;
+  .icon {
+    font-size: 24px;
     margin-right: 3px;
   }
 }
 
-.favorite {
-  font-size: 24px;
-  color: var(--kungalgame-font-color-2);
-  cursor: pointer;
-}
-
 .active .icon {
   color: var(--kungalgame-red-4);
-}
-
-@media (max-width: 700px) {
-  .like {
-    font-size: initial;
-  }
 }
 </style>

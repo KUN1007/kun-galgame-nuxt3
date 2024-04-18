@@ -1,29 +1,23 @@
+import mongoose from 'mongoose'
 import UserModel from '~/server/models/user'
 import ReplyModel from '~/server/models/reply'
-import mongoose from 'mongoose'
-import type { TopicDislikeReplyRequestData } from '~/types/api/topic-reply'
 
-const updateReplyDislike = async (
-  uid: number,
-  to_uid: number,
-  rid: number,
-  isPush: boolean
-) => {
-  if (uid === to_uid) {
-    return
-  }
-
+const updateReplyDislike = async (uid: number, rid: number) => {
   const reply = await ReplyModel.findOne({ rid })
   if (!reply) {
     return 10506
   }
 
+  if (uid === reply.r_uid) {
+    return
+  }
+
   const isDislikedReply = reply.dislikes.includes(uid)
-  if (isDislikedReply && isPush) {
+  if (isDislikedReply) {
     return 10510
   }
 
-  const amount = isPush ? 1 : -1
+  const amount = isDislikedReply ? -1 : 1
 
   const session = await mongoose.startSession()
   session.startTransaction()
@@ -31,10 +25,13 @@ const updateReplyDislike = async (
   try {
     await ReplyModel.updateOne(
       { rid },
-      { [isPush ? '$push' : '$pull']: { dislikes: uid } }
+      { [isDislikedReply ? '$pull' : '$addToSet']: { dislikes: uid } }
     )
 
-    await UserModel.updateOne({ uid: to_uid }, { $inc: { dislike: amount } })
+    await UserModel.updateOne(
+      { uid: reply.r_uid },
+      { $inc: { dislike: amount } }
+    )
 
     await session.commitTransaction()
   } catch (error) {
@@ -49,27 +46,16 @@ export default defineEventHandler(async (event) => {
   if (!userInfo) {
     return kunError(event, 10115, 205)
   }
-  const uid = userInfo.uid
 
-  const { to_uid, rid, isPush }: TopicDislikeReplyRequestData =
-    await getQuery(event)
-  if (!to_uid || !isPush) {
+  const { rid }: { rid: string } = await getQuery(event)
+  if (!rid) {
     return kunError(event, 10507)
   }
 
-  if (uid.toString() === to_uid) {
-    return
-  }
-
-  const result = await updateReplyDislike(
-    uid,
-    parseInt(to_uid),
-    parseInt(rid),
-    isPush === 'true'
-  )
+  const result = await updateReplyDislike(userInfo.uid, parseInt(rid))
   if (typeof result === 'number') {
     return kunError(event, result)
   }
 
-  return 'MOEMOE dislike reply operation successfully!'
+  return 'MOEMOE dislike reply successfully!'
 })

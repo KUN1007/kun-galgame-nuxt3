@@ -1,24 +1,13 @@
 <script setup lang="ts">
-const props = defineProps<{
-  tid: number
-  cid: number
-  uid: number
-  toUid: number
+import type { TopicComment } from '~/types/api/topic-comment'
 
-  likes: number[]
+const props = defineProps<{
+  comment: TopicComment
 }>()
 
-const { moemoeAccessToken } = usePersistUserStore()
-const isLiked = ref(props.likes.includes(props.uid))
-const likesCount = ref(props.likes.length)
-
-watch(
-  () => props.likes,
-  (newLikes) => {
-    isLiked.value = newLikes.includes(props.uid)
-    likesCount.value = newLikes.length
-  }
-)
+const { uid, moemoeAccessToken } = usePersistUserStore()
+const isLiked = ref(props.comment.likes.isLiked)
+const likesCount = ref(props.comment.likes.count)
 
 const likeComment = async () => {
   if (isLiked.value) {
@@ -26,18 +15,14 @@ const likeComment = async () => {
     return
   }
 
-  if (props.uid === props.toUid) {
+  if (uid === props.comment.user.uid) {
     useMessage('You cannot like yourself', '您不可以给自己点赞', 'warn')
     return
   }
 
-  const queryData = {
-    cid: props.cid,
-    to_uid: props.toUid
-  }
-  const result = await $fetch(`/api/topic/${props.tid}/comment/like`, {
+  const result = await $fetch(`/api/topic/${props.comment.tid}/comment/like`, {
     method: 'PUT',
-    query: queryData,
+    query: { cid: props.comment.cid },
     watch: false,
     ...kungalgameResponseHandler
   })
@@ -59,23 +44,22 @@ const handleClickLike = async () => {
 </script>
 
 <template>
-  <li :class="isLiked ? 'active' : ''" @click="handleClickLike">
+  <span class="like" :class="isLiked ? 'active' : ''" @click="handleClickLike">
     <Icon class="icon" name="lucide:thumbs-up" />
     <span v-if="likesCount">{{ likesCount }}</span>
-  </li>
+  </span>
 </template>
 
 <style lang="scss" scoped>
-li {
+.like {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 10px;
 
   .icon {
     cursor: pointer;
     color: var(--kungalgame-font-color-2);
-    margin-right: 10px;
+    margin-right: 3px;
   }
 }
 

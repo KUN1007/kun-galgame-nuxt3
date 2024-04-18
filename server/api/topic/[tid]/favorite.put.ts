@@ -1,54 +1,48 @@
+import mongoose from 'mongoose'
 import UserModel from '~/server/models/user'
 import TopicModel from '~/server/models/topic'
-import mongoose from 'mongoose'
-import type { TopicFavoriteTopicRequestData } from '~/types/api/topic'
 
-const updateTopicFavorite = async (
-  uid: number,
-  to_uid: number,
-  tid: number,
-  isPush: boolean
-) => {
+const updateTopicFavorite = async (uid: number, tid: number) => {
   const topic = await TopicModel.findOne({ tid })
   if (!topic) {
     return 10211
   }
 
   const isFavoriteTopic = topic.favorites.includes(uid)
-  if (isFavoriteTopic && isPush) {
+  if (isFavoriteTopic) {
     return 10221
   }
 
-  const moemoepointAmount = isPush ? 1 : -1
-  const popularity = isPush ? 2 : -2
+  const moemoepointAmount = isFavoriteTopic ? -1 : 1
+  const popularity = isFavoriteTopic ? -2 : 2
 
   const session = await mongoose.startSession()
   session.startTransaction()
 
   try {
-    const topic = await TopicModel.findOneAndUpdate(
+    await TopicModel.updateOne(
       { tid },
       {
         $inc: { popularity },
-        [isPush ? '$push' : '$pull']: { favorites: uid }
+        [isFavoriteTopic ? '$pull' : '$addToSet']: { favorites: uid }
       }
     )
 
     await UserModel.updateOne(
       { uid },
-      { [isPush ? '$push' : '$pull']: { favorite_topic: tid } }
+      { [isFavoriteTopic ? '$pull' : '$addToSet']: { favorite_topic: tid } }
     )
 
-    if (uid !== to_uid) {
+    if (uid !== topic.uid) {
       await UserModel.updateOne(
-        { uid: to_uid },
+        { uid: topic.uid },
         { $inc: { moemoepoint: moemoepointAmount } }
       )
 
-      if (isPush) {
+      if (!isFavoriteTopic) {
         await createDedupMessage(
           uid,
-          to_uid,
+          topic.uid,
           'favorite',
           topic?.content.slice(0, 233) ?? '',
           tid
@@ -74,23 +68,11 @@ export default defineEventHandler(async (event) => {
   if (!userInfo) {
     return kunError(event, 10115, 205)
   }
-  const uid = userInfo.uid
 
-  const { to_uid, isPush }: TopicFavoriteTopicRequestData =
-    await getQuery(event)
-  if (!to_uid || !isPush) {
-    return kunError(event, 10507)
-  }
-
-  const result = await updateTopicFavorite(
-    uid,
-    parseInt(to_uid),
-    parseInt(tid),
-    isPush === 'true'
-  )
+  const result = await updateTopicFavorite(userInfo.uid, parseInt(tid))
   if (typeof result === 'number') {
     return kunError(event, result)
   }
 
-  return 'MOEMOE favorite topic operation successfully!'
+  return 'MOEMOE favorite topic successfully!'
 })

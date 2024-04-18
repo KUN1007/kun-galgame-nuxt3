@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { TopicDetail } from '~/types/api/topic'
+
 const {
   tid: storeTid,
   title: storeTitle,
@@ -14,15 +16,7 @@ const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
 const localePath = useLocalePath()
 
 const props = defineProps<{
-  tid: number
-  rid: number
-  uid: number
-  title: string
-  content: string
-  tags: string[]
-  category: string[]
-  section?: string[]
-  toUid: number
+  topic: TopicDetail
 }>()
 
 const isShowRewrite = ref(props.uid === props.toUid)

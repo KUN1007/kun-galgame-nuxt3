@@ -93,8 +93,8 @@ watch(
 
     <TopicMaster :topic-data="topic" />
 
-    <div class="tool" id="tool">
-      <div class="page" v-if="data">
+    <div class="tool" v-if="data && data.totalCount > 5" id="tool">
+      <div class="page">
         <button @click="pageData.page--" :disabled="pageData.page === 1">
           <Icon name="lucide:chevron-left" />
         </button>

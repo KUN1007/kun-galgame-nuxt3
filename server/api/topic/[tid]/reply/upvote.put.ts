@@ -1,16 +1,13 @@
+import mongoose from 'mongoose'
 import UserModel from '~/server/models/user'
 import ReplyModel from '~/server/models/reply'
-import mongoose from 'mongoose'
-import { isValidTimestamp } from '~/utils/validate'
-import type { TopicUpvoteReplyRequestData } from '~/types/api/topic-reply'
 
-const updateReplyUpvote = async (
-  uid: number,
-  to_uid: number,
-  rid: number,
-  tid: number,
-  time: number
-) => {
+const updateReplyUpvote = async (uid: number, rid: number) => {
+  const reply = await ReplyModel.findOne({ rid })
+  if (!reply) {
+    return 10506
+  }
+
   const userInfo = await UserModel.findOne({ uid })
   if (!userInfo) {
     return 10115
@@ -25,22 +22,28 @@ const updateReplyUpvote = async (
   session.startTransaction()
 
   try {
-    const reply = await ReplyModel.findOneAndUpdate(
+    await ReplyModel.updateOne(
       { rid },
       {
-        $set: { upvote_time: time },
+        $set: { upvote_time: Date.now() },
         $push: { upvotes: uid }
       }
     )
 
-    await UserModel.updateOne({ uid }, { $inc: { moemoepoint: -3 } })
+    await UserModel.updateOne({ uid }, { $inc: { moemoepoint: -2 } })
 
     await UserModel.updateOne(
-      { uid: to_uid },
+      { uid: reply.r_uid },
       { $inc: { moemoepoint: 1, upvote: 1 } }
     )
 
-    await createMessage(uid, to_uid, 'upvoted', reply?.content ?? '', tid)
+    await createMessage(
+      uid,
+      reply.r_uid,
+      'upvoted',
+      reply.content ?? '',
+      reply.tid
+    )
 
     await session.commitTransaction()
   } catch (error) {
@@ -60,29 +63,12 @@ export default defineEventHandler(async (event) => {
   if (!userInfo) {
     return kunError(event, 10115, 205)
   }
-  const uid = userInfo.uid
 
-  const { to_uid, rid, time }: TopicUpvoteReplyRequestData =
-    await getQuery(event)
-  if (!to_uid || !rid || !time) {
+  const { rid }: { rid: string } = await getQuery(event)
+  if (!rid) {
     return kunError(event, 10507)
   }
-
-  if (uid.toString() === to_uid) {
-    return
-  }
-
-  if (!isValidTimestamp(parseInt(time))) {
-    return kunError(event, 10208)
-  }
-
-  const result = await updateReplyUpvote(
-    uid,
-    parseInt(to_uid),
-    parseInt(rid),
-    parseInt(tid),
-    parseInt(time)
-  )
+  const result = await updateReplyUpvote(userInfo.uid, parseInt(rid))
   if (typeof result === 'number') {
     return kunError(event, result)
   }

@@ -43,7 +43,7 @@ const handleClickComment = (
 <template>
   <div
     class="reply"
-    :class="hourDiff(reply.upvote_time, 10) ? 'active-upvote' : ''"
+    :class="hourDiff(reply.upvoteTime, 10) ? 'active-upvote' : ''"
     :id="`kungalgame-reply-${reply.floor}`"
   >
     <div class="floor">
@@ -52,11 +52,11 @@ const handleClickComment = (
 
     <div class="content">
       <div class="article">
-        <TopicKUNGalgamerInfo :user="reply.r_user">
+        <TopicKUNGalgamerInfo :user="reply.user">
           <div class="reply-mobile">
             =>
-            <span @click="scrollToReplyId = reply.to_floor">
-              {{ reply.to_user.name }}
+            <span @click="scrollToReplyId = reply.toFloor">
+              {{ reply.toUser.name }}
             </span>
           </div>
         </TopicKUNGalgamerInfo>
@@ -64,8 +64,8 @@ const handleClickComment = (
         <div class="right">
           <div class="reply-to">
             {{ `${$t('topic.panel.to')} @` }}
-            <span @click="scrollToReplyId = reply.to_floor">
-              {{ reply.to_user.name }}
+            <span @click="scrollToReplyId = reply.toFloor">
+              {{ reply.toUser.name }}
             </span>
           </div>
 

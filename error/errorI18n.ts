@@ -45,15 +45,14 @@ const errorMessagesEN: Record<number, string> = {
   10220: `Request parameter error, we only support galgame, technique, others category. (-B)`,
   10221: `You've already favorite this topic. (-B)`,
   10222: `Please select a topic section that exists (-B)`,
+  10223: `Comment length exceed 1007 characters. Or empty. (-B)`,
+  10224: `Comment not found (-B)`,
 
   // Auth Part
   10301: `Sending emails too frequently, please waiting 30s (-B)`,
   10302: `Invalid Email Format (-B)`,
   10303: `Invalid Email, Password, or Verification Code Format (-B)`,
   10304: `Email address not registered. (-B)`,
-
-  // Comment Part
-  10401: `Comment length exceed 1007 characters. Or empty. (-B)`,
 
   // Reply Part
   10501: `Reply with a maximum of 7 tags. (-B)`,
@@ -151,13 +150,13 @@ const errorMessagesCN: Record<number, string> = {
   10220: `请求参数错误, 我们仅支持 Galgame, 技术交流, 其它分类 (-B)`,
   10221: `您已经收藏过这个话题了 (-B)`,
   10222: `请选择我们存在的话题分区 (-B)`,
+  10223: `评论内容长度超过 1007 个字符, 或为空 (-B)`,
+  10224: `评论未找到 (-B)`,
 
   10301: `发送邮件频率过快, 请等待 30 秒 (-B)`,
   10302: `非法的邮箱格式 (-B)`,
   10303: `非法的邮箱, 密码, 或验证码 (-B)`,
   10304: `该邮箱地址未注册 (-B)`,
-
-  10401: `评论内容长度超过 1007 个字符, 或为空 (-B)`,
 
   10501: `回复最多 7 个标签 (-B)`,
   10502: `单个标签最长 17 个字符 (-B)`,

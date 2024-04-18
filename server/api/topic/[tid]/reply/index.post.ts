@@ -4,13 +4,10 @@ import ReplyModel from '~/server/models/reply'
 import UserModel from '~/server/models/user'
 import { checkReplyPublish } from '../../utils/checkReplyPublish'
 import type { H3Event } from 'h3'
-import type {
-  TopicReply,
-  TopicCreateReplyRequestData
-} from '~/types/api/topic-reply'
+import type { TopicCreateReplyRequestData } from '~/types/api/topic-reply'
 
 const readReplyData = async (event: H3Event) => {
-  const { to_uid, to_floor, tags, content, time }: TopicCreateReplyRequestData =
+  const { toUid, toFloor, tags, content, time }: TopicCreateReplyRequestData =
     await readBody(event)
 
   const res = checkReplyPublish(tags, content, parseInt(time))
@@ -22,7 +19,6 @@ const readReplyData = async (event: H3Event) => {
   if (!userInfo) {
     return kunError(event, 10115, 205)
   }
-  const uid = userInfo.uid
 
   const tid = getRouterParam(event, 'tid')
   if (!tid) {
@@ -33,9 +29,9 @@ const readReplyData = async (event: H3Event) => {
 
   return {
     tid: parseInt(tid),
-    r_uid: uid,
-    to_uid,
-    to_floor,
+    uid: userInfo.uid,
+    toUid,
+    toFloor,
     tags: deduplicatedTags,
     content,
     time
@@ -47,7 +43,7 @@ export default defineEventHandler(async (event) => {
   if (!result) {
     return
   }
-  const { tid, r_uid, to_uid, to_floor, tags, content, time } = result
+  const { tid, uid, toUid, toFloor, tags, content, time } = result
 
   const session = await mongoose.startSession()
   session.startTransaction()
@@ -60,30 +56,24 @@ export default defineEventHandler(async (event) => {
 
     const newReply = await ReplyModel.create({
       tid,
-      r_uid,
-      to_uid,
-      to_floor,
+      r_uid: uid,
+      to_uid: toUid,
+      to_floor: toFloor,
       floor,
       tags,
       content,
       time
     })
 
-    const replyUser = await UserModel.findOneAndUpdate(
+    await UserModel.updateOne(
       { uid: newReply.r_uid },
       { $addToSet: { reply: newReply.rid } }
     )
-    if (!replyUser) {
-      return kunError(event, 10101)
-    }
 
-    const replyToUser = await UserModel.findOneAndUpdate(
+    await UserModel.updateOne(
       { uid: newReply.to_uid },
       { $inc: { moemoepoint: 2 } }
     )
-    if (!replyToUser) {
-      return kunError(event, 10101)
-    }
 
     await TopicModel.updateOne(
       { tid },
@@ -97,45 +87,19 @@ export default defineEventHandler(async (event) => {
       await createTagsByTidAndRid(tid, newReply.rid, tags, [])
     }
 
-    if (r_uid.toString() !== to_uid) {
+    if (uid.toString() !== toUid) {
       await createMessage(
-        r_uid,
-        parseInt(to_uid),
+        uid,
+        parseInt(toUid),
         'replied',
         newReply.content.slice(0, 233),
         tid
       )
     }
 
-    const responseData: TopicReply = {
-      rid: newReply.rid,
-      tid: newReply.tid,
-      floor: newReply.floor,
-      to_floor: newReply.to_floor,
-      r_user: {
-        uid: replyUser.uid,
-        name: replyUser.name,
-        avatar: replyUser.avatar,
-        moemoepoint: replyUser.moemoepoint
-      },
-      to_user: {
-        uid: replyToUser.uid,
-        name: replyToUser.name
-      },
-      edited: newReply.edited,
-      content: newReply.content,
-      upvotes: newReply.upvotes,
-      upvote_time: newReply.upvote_time,
-      likes: newReply.likes,
-      dislikes: newReply.dislikes,
-      tags: newReply.tags,
-      time: newReply.time,
-      comment: newReply.comment
-    }
-
     await session.commitTransaction()
 
-    return responseData
+    return 'MOEMOE create reply successfully!'
   } catch (error) {
     await session.abortTransaction()
   } finally {

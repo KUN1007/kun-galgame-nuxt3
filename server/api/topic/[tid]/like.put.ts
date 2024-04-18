@@ -1,57 +1,51 @@
 import UserModel from '~/server/models/user'
 import TopicModel from '~/server/models/topic'
 import mongoose from 'mongoose'
-import type { TopicLikeTopicRequestData } from '~/types/api/topic'
 
-const updateTopicLike = async (
-  uid: number,
-  to_uid: number,
-  tid: number,
-  isPush: boolean
-) => {
-  if (uid === to_uid) {
-    return
-  }
-
+const updateTopicLike = async (uid: number, tid: number) => {
   const topic = await TopicModel.findOne({ tid })
   if (!topic) {
     return 10211
   }
 
+  if (uid === topic.uid) {
+    return
+  }
+
   const isLikedTopic = topic.likes.includes(uid)
-  if (isLikedTopic && isPush) {
+  if (isLikedTopic) {
     return 10212
   }
 
-  const moemoepointAmount = isPush ? 1 : -1
-  const popularity = isPush ? 2 : -2
+  const moemoepointAmount = isLikedTopic ? -1 : 1
+  const popularity = isLikedTopic ? -2 : 2
 
   const session = await mongoose.startSession()
   session.startTransaction()
 
   try {
-    const topic = await TopicModel.findOneAndUpdate(
+    await TopicModel.updateOne(
       { tid },
       {
         $inc: { popularity },
-        [isPush ? '$push' : '$pull']: { likes: uid }
+        [isLikedTopic ? '$pull' : '$addToSet']: { likes: uid }
       }
     )
 
     await UserModel.updateOne(
       { uid },
-      { [isPush ? '$push' : '$pull']: { like_topic: tid } }
+      { [isLikedTopic ? '$pull' : '$addToSet']: { like_topic: tid } }
     )
 
     await UserModel.updateOne(
-      { uid: to_uid },
+      { uid: topic.uid },
       { $inc: { moemoepoint: moemoepointAmount, like: moemoepointAmount } }
     )
 
-    if (isPush) {
+    if (!isLikedTopic) {
       await createDedupMessage(
         uid,
-        to_uid,
+        topic.uid,
         'liked',
         topic?.content.slice(0, 233) ?? '',
         tid
@@ -76,27 +70,11 @@ export default defineEventHandler(async (event) => {
   if (!userInfo) {
     return kunError(event, 10115, 205)
   }
-  const uid = userInfo.uid
 
-  const { to_uid, isPush }: TopicLikeTopicRequestData = await getQuery(event)
-  if (!to_uid || !isPush) {
-    return kunError(event, 10507)
-  }
-
-  if (uid.toString() === to_uid) {
-    return
-  }
-
-  const result = await updateTopicLike(
-    uid,
-    parseInt(to_uid),
-    parseInt(tid),
-    isPush === 'true'
-  )
+  const result = await updateTopicLike(userInfo.uid, parseInt(tid))
   if (typeof result === 'number') {
-    kunError(event, result)
-    return
+    return kunError(event, result)
   }
 
-  return 'MOEMOE like topic operation successfully!'
+  return 'MOEMOE like topic successfully!'
 })

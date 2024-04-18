@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 import type { TopicReplyRequestData, TopicReply } from '~/types/api/topic-reply'
 import type { TopicComment } from '~/types/api/topic-comment'
 
-const getComments = async (rid: number) => {
+const getComments = async (uid: number, rid: number) => {
   const comment = await CommentModel.find({ rid })
     .populate('cuid', 'uid avatar name')
     .populate('touid', 'uid name')
@@ -15,7 +15,7 @@ const getComments = async (rid: number) => {
     cid: comment.cid,
     rid: comment.rid,
     tid: comment.tid,
-    cUser: {
+    user: {
       uid: comment.cuid[0].uid,
       avatar: comment.cuid[0].avatar,
       name: comment.cuid[0].name
@@ -25,13 +25,17 @@ const getComments = async (rid: number) => {
       name: comment.touid[0].name
     },
     content: comment.content,
-    likes: comment.likes
+    likes: {
+      count: comment.likes.length,
+      isLiked: comment.likes.includes(uid)
+    }
   }))
 
   return replyComments
 }
 
 const getReplies = async (
+  uid: number,
   tid: number,
   page: number,
   limit: number,
@@ -64,26 +68,35 @@ const getReplies = async (
         rid: reply.rid,
         tid: reply.tid,
         floor: reply.floor,
-        to_floor: reply.to_floor,
-        r_user: {
+        toFloor: reply.to_floor,
+        user: {
           uid: reply.r_user[0].uid,
           name: reply.r_user[0].name,
           avatar: reply.r_user[0].avatar,
           moemoepoint: reply.r_user[0].moemoepoint
         },
-        to_user: {
+        toUser: {
           uid: reply.to_user[0].uid,
           name: reply.to_user[0].name
         },
         edited: reply.edited,
         content: reply.content,
-        upvotes: reply.upvotes,
-        upvote_time: reply.upvote_time,
-        likes: reply.likes,
-        dislikes: reply.dislikes,
+        upvotes: {
+          count: reply.upvotes.length,
+          isUpvoted: reply.upvotes.includes(uid)
+        },
+        upvoteTime: reply.upvote_time,
+        likes: {
+          count: reply.likes.length,
+          isLiked: reply.likes.includes(uid)
+        },
+        dislikes: {
+          count: reply.dislikes.length,
+          isDisliked: reply.dislikes.includes(uid)
+        },
         tags: reply.tags,
         time: reply.time,
-        comment: await getComments(reply.rid)
+        comment: await getComments(uid, reply.rid)
       }))
     )
 
@@ -113,7 +126,9 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10209)
   }
 
+  const userInfo = await getCookieTokenInfo(event)
   const result = await getReplies(
+    userInfo?.uid ?? 0,
     parseInt(tid),
     parseInt(page),
     parseInt(limit),

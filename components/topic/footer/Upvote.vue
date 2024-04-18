@@ -1,82 +1,77 @@
 <script setup lang="ts">
 const props = defineProps<{
-  uid: number
   tid: number
-  rid: number
-  upvotes: number[]
   toUid: number
+  upvoteCount: number
+  isUpvoted: boolean
 }>()
 
-const { moemoeAccessToken } = usePersistUserStore()
-const isUpvote = ref(props.upvotes.includes(props.uid))
-const upvoteCount = ref(props.upvotes.length)
-
-watch(
-  () => props.upvotes,
-  (newUpvote) => {
-    isUpvote.value = props.upvotes.includes(props.uid)
-    upvoteCount.value = newUpvote.length
-  }
-)
+const { uid, moemoeAccessToken, moemoepoint } = usePersistUserStore()
+const isUpvoted = ref(props.isUpvoted)
+const upvoteCount = ref(props.upvoteCount)
 
 const upvoteTopic = async () => {
-  const res = await useTempMessageStore().alert({
-    'en-us':
-      'Are you sure you want to upvote this topic? This will cost you 17 MoeMoePoints',
-    'ja-jp': '',
-    'zh-cn': '您确定推这个话题吗，这将会消耗您 17 萌萌点'
-  })
+  const res = await useTempMessageStore().alert(
+    {
+      'en-us': 'Are you sure you want to upvote this topic?',
+      'ja-jp': '',
+      'zh-cn': '您确定推这个话题吗?'
+    },
+    {
+      'en-us':
+        'Upvote a topic will consume 7 MoeMoePoints from you and give the recipient 3 MoeMoePoints',
+      'ja-jp': '',
+      'zh-cn': '推话题将会消耗您 7 萌萌点, 并给被推者增加 3 萌萌点'
+    }
+  )
   if (!res) {
     return
   }
 
-  const queryData = {
-    to_uid: props.toUid,
-    time: Date.now()
-  }
   const result = await $fetch(`/api/topic/${props.tid}/upvote`, {
     method: 'PUT',
-    query: queryData,
     watch: false,
     ...kungalgameResponseHandler
   })
 
   if (result) {
     upvoteCount.value++
-    isUpvote.value = true
+    isUpvoted.value = true
     useMessage('Topic upvote successfully', '推话题成功', 'success')
   }
 }
 
-const upvoteReply = async () => {
-  const res = await useTempMessageStore().alert({
-    'en-us':
-      'Are you sure you want to upvote this reply? This will cost you 3 Moe Moe Points',
-    'ja-jp': '',
-    'zh-cn': '您确定推这个回复吗，这将会消耗您 3 萌萌点'
-  })
-  if (!res) {
-    return
-  }
+// const upvoteReply = async () => {
+//   const res = await useTempMessageStore().alert(
+//     {
+//       'en-us': 'Are you sure you want to upvote this reply?',
+//       'ja-jp': '',
+//       'zh-cn': '您确定推这个回复吗?'
+//     },
+//     {
+//       'en-us':
+//         'Upvote a reply will consume 2 MoeMoePoints from you and give the recipient 1 MoeMoePoints',
+//       'ja-jp': '',
+//       'zh-cn': '推回复将会消耗您 2 萌萌点, 并给被推者增加 1 萌萌点'
+//     }
+//   )
+//   if (!res) {
+//     return
+//   }
 
-  const queryData = {
-    to_uid: props.toUid,
-    rid: props.rid,
-    time: Date.now()
-  }
-  const result = await $fetch(`/api/topic/${props.tid}/reply/upvote`, {
-    method: 'PUT',
-    query: queryData,
-    watch: false,
-    ...kungalgameResponseHandler
-  })
+//   const result = await $fetch(`/api/topic/${props.tid}/reply/upvote`, {
+//     method: 'PUT',
+//     query: { rid: props.rid },
+//     watch: false,
+//     ...kungalgameResponseHandler
+//   })
 
-  if (result) {
-    upvoteCount.value++
-    isUpvote.value = true
-    useMessage('Reply upvote successfully', '推回复成功', 'success')
-  }
-}
+//   if (result) {
+//     upvoteCount.value++
+//     isUpvoted.value = true
+//     useMessage('Reply upvote successfully', '推回复成功', 'success')
+//   }
+// }
 
 const handleClickUpvote = async () => {
   if (!moemoeAccessToken) {
@@ -89,7 +84,7 @@ const handleClickUpvote = async () => {
     return
   }
 
-  if (props.uid === props.toUid) {
+  if (uid === props.toUid) {
     useMessage(
       'You cannot upvote your own topic',
       '您不可以推自己的话题',
@@ -98,52 +93,48 @@ const handleClickUpvote = async () => {
     return
   }
 
-  if (usePersistUserStore().moemoepoint < 1100) {
+  if (moemoepoint < 1100) {
     useMessage(
-      `Your moemoepoints are less than 1100, so you can't use the upvote topic feature`,
-      '您的萌萌点不足 1100, 无法使用推话题功能',
+      `Your moemoepoints are less than 1100, so you can't use the upvote feature`,
+      '您的萌萌点不足 1100, 无法使用推功能',
       'warn'
     )
     return
   }
 
-  if (props.rid === 0) {
-    await upvoteTopic()
-  } else {
-    await upvoteReply()
-  }
+  await upvoteTopic()
+
+  // if (props.rid === 0) {
+  //   await upvoteTopic()
+  // } else {
+  //   await upvoteReply()
+  // }
 }
 </script>
 
 <template>
-  <li>
-    <span
-      class="upvote"
-      :class="isUpvote ? 'active' : ''"
-      @click="handleClickUpvote"
-    >
-      <Icon class="icon" name="lucide:cherry" />
-    </span>
+  <span
+    class="upvote"
+    :class="isUpvoted ? 'active' : ''"
+    @click="handleClickUpvote"
+  >
+    <Icon class="icon" name="lucide:cherry" />
     <span v-if="upvoteCount">{{ upvoteCount }}</span>
-  </li>
+  </span>
 </template>
 
 <style lang="scss" scoped>
-li {
+.upvote {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
-  span {
-    display: flex;
+  margin-right: 0;
+  color: var(--kungalgame-font-color-2);
+
+  .icon {
+    font-size: 24px;
     margin-right: 3px;
   }
-}
-
-.upvote {
-  font-size: 24px;
-  color: var(--kungalgame-font-color-2);
-  cursor: pointer;
 }
 
 .active .icon {

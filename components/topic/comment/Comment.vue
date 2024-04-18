@@ -18,7 +18,7 @@ const handleClickComment = (comment: TopicComment) => {
     useMessage('You need to login to comment', '您需要登录以评论', 'warn', 5000)
     return
   }
-  toUser.value = comment.cUser
+  toUser.value = comment.user
   isShowPanel.value = !isShowPanel.value
 }
 </script>
@@ -32,11 +32,11 @@ const handleClickComment = (comment: TopicComment) => {
 
       <div class="comment" v-for="(comment, index) in comments" :key="index">
         <NuxtLinkLocale
-          v-if="comment.cUser.avatar"
-          :to="`/kungalgamer/${comment.cUser.uid}/info`"
+          v-if="comment.user.avatar"
+          :to="`/kungalgamer/${comment.user.uid}/info`"
         >
           <img
-            :src="comment.cUser.avatar.replace(/\.webp$/, '-100.webp')"
+            :src="comment.user.avatar.replace(/\.webp$/, '-100.webp')"
             alt="KUN"
           />
         </NuxtLinkLocale>
@@ -44,26 +44,18 @@ const handleClickComment = (comment: TopicComment) => {
         <div class="content">
           <div class="describe">
             <div class="name">
-              {{ `${comment.cUser.name} ${$t('topic.content.comment')}` }}
+              {{ `${comment.user.name} ${$t('topic.content.comment')}` }}
               <NuxtLinkLocale :to="`/kungalgamer/${comment.toUser.uid}/info`">
                 {{ comment.toUser.name }}
               </NuxtLinkLocale>
             </div>
 
             <div class="operate">
-              <ul>
-                <TopicCommentLike
-                  :tid="comment.tid"
-                  :cid="comment.cid"
-                  :uid="currentUserUid"
-                  :to-uid="comment.cUser.uid"
-                  :likes="comment.likes"
-                />
+              <TopicCommentLike :comment="comment" />
 
-                <li @click="handleClickComment(comment)">
-                  <Icon class="icon" name="uil:comment-dots" />
-                </li>
-              </ul>
+              <span @click="handleClickComment(comment)">
+                <Icon class="icon" name="uil:comment-dots" />
+              </span>
             </div>
           </div>
 
@@ -132,16 +124,10 @@ const handleClickComment = (comment: TopicComment) => {
     }
   }
 }
-.operate ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-  li {
+.operate {
+  display: flex;
+  span {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -162,4 +148,3 @@ const handleClickComment = (comment: TopicComment) => {
   word-break: break-all;
 }
 </style>
-~/types/api/topic-comment
