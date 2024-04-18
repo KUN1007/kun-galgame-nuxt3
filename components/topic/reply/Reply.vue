@@ -180,10 +180,11 @@ watch(
   align-items: center;
   padding: 10px;
   color: var(--kungalgame-font-color-3);
-
-  &:last-child {
-    margin-bottom: 20px;
-  }
+  box-shadow: var(--kungalgame-shadow-0);
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  margin-bottom: 17px;
 }
 
 .floor {
@@ -211,11 +212,6 @@ watch(
   flex-shrink: 0;
   flex-direction: column;
   border-radius: 5px;
-  border: 2px solid var(--kungalgame-trans-blue-2);
-
-  &:hover {
-    border: 2px solid var(--kungalgame-blue-5);
-  }
 }
 
 .content {
@@ -318,10 +314,10 @@ watch(
   border: 2px solid var(--kungalgame-red-4);
 }
 
-.active .container {
+.active {
   border: 2px solid var(--kungalgame-red-4);
   border-radius: 10px;
-  box-shadow: -3px 0 0 0 var(--kungalgame-red-4);
+  background-color: var(--kungalgame-trans-blue-0);
 }
 
 @media (max-width: 1000px) {

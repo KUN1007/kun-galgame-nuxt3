@@ -44,124 +44,119 @@ const loliStatus = computed(() => {
 </script>
 
 <template>
-  <div class="container" :id="`kungalgame-reply-0`">
-    <div class="content-container">
-      <div class="header">
-        <div class="title">
-          {{ title }}
+  <div class="master" :id="`kungalgame-reply-0`">
+    <div class="header">
+      <div class="title">
+        {{ title }}
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="top">
+        <div class="section">
+          <TopicSection :section="section" />
+          <TopicTags v-if="tags" :tags="tags" :is-show-icon="true" />
         </div>
+
+        <span class="time">
+          {{ dayjs(time).format('YYYY-MM-DD HH:mm:ss') }}
+        </span>
       </div>
 
-      <div class="content">
-        <div class="top">
-          <div class="section">
-            <TopicSection :section="section" />
-            <TopicTags v-if="tags" :tags="tags" :is-show-icon="true" />
-          </div>
-
-          <span class="time">
+      <div class="center">
+        <TopicKUNGalgamerInfo v-if="user" :user="user">
+          <span class="time-mobile">
             {{ dayjs(time).format('YYYY-MM-DD HH:mm:ss') }}
           </span>
-        </div>
+        </TopicKUNGalgamerInfo>
 
-        <div class="center">
-          <TopicKUNGalgamerInfo v-if="user" :user="user">
-            <span class="time-mobile">
-              {{ dayjs(time).format('YYYY-MM-DD HH:mm:ss') }}
-            </span>
-          </TopicKUNGalgamerInfo>
-
-          <TopicContent :content="content" />
-        </div>
-
-        <div class="bottom">
-          <div class="status">
-            <span>{{ `${$t('topic.content.status')}:` }}</span>
-            <span :class="loliStatus">
-              {{ $t(`topic.content.${loliStatus}`) }}
-            </span>
-          </div>
-
-          <span class="line"></span>
-
-          <span
-            v-if="views > 0"
-            class="views"
-            v-tooltip="{
-              message: { en: 'Views', zh: '浏览数' },
-              position: 'bottom'
-            }"
-          >
-            <span class="icon"><Icon name="lucide:mouse-pointer-click" /></span>
-            {{ views }}
-          </span>
-
-          <s
-            class="rewrite"
-            v-if="edited"
-            v-tooltip="{
-              message: { en: 'Rewrite Time', zh: 'Rewrite 时间' },
-              position: 'bottom'
-            }"
-          >
-            × {{ dayjs(edited).format('YYYY-MM-DD HH:mm:ss') }}
-          </s>
-        </div>
+        <TopicContent :content="content" />
       </div>
 
-      <TopicFooter
-        :info="{
-          tid,
-          rid: 0,
-          likes,
-          dislikes,
-          upvotes
-        }"
-        :content="{
-          title,
-          content,
-          tags,
-          category,
-          section
-        }"
-        :to-user="{
-          uid: user.uid,
-          name: user.name
-        }"
-        :to-floor="0"
-      >
-        <template #favorite>
-          <TopicFooterFavorite
-            :tid="tid"
-            :favorites="favorites"
-            :to-uid="user.uid"
-            v-tooltip="{
-              message: { en: 'Favorite', zh: '收藏' },
-              position: 'bottom'
-            }"
-          />
-        </template>
-      </TopicFooter>
+      <div class="bottom">
+        <div class="status">
+          <span>{{ `${$t('topic.content.status')}:` }}</span>
+          <span :class="loliStatus">
+            {{ $t(`topic.content.${loliStatus}`) }}
+          </span>
+        </div>
+
+        <span class="line"></span>
+
+        <span
+          v-if="views > 0"
+          class="views"
+          v-tooltip="{
+            message: { en: 'Views', zh: '浏览数' },
+            position: 'bottom'
+          }"
+        >
+          <span class="icon"><Icon name="lucide:mouse-pointer-click" /></span>
+          {{ views }}
+        </span>
+
+        <s
+          class="rewrite"
+          v-if="edited"
+          v-tooltip="{
+            message: { en: 'Rewrite Time', zh: 'Rewrite 时间' },
+            position: 'bottom'
+          }"
+        >
+          × {{ dayjs(edited).format('YYYY-MM-DD HH:mm:ss') }}
+        </s>
+      </div>
     </div>
+
+    <TopicFooter
+      :info="{
+        tid,
+        rid: 0,
+        likes,
+        dislikes,
+        upvotes
+      }"
+      :content="{
+        title,
+        content,
+        tags,
+        category,
+        section
+      }"
+      :to-user="{
+        uid: user.uid,
+        name: user.name
+      }"
+      :to-floor="0"
+    >
+      <template #favorite>
+        <TopicFooterFavorite
+          :tid="tid"
+          :favorites="favorites"
+          :to-uid="user.uid"
+          v-tooltip="{
+            message: { en: 'Favorite', zh: '收藏' },
+            position: 'bottom'
+          }"
+        />
+      </template>
+    </TopicFooter>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.container {
+.master {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
   color: var(--kungalgame-font-color-3);
-}
-
-.content-container {
-  flex-grow: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
+  box-shadow: var(--kungalgame-shadow-0);
+  background-color: var(--kungalgame-trans-white-5);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  margin-bottom: 17px;
 }
 
 .header {
@@ -307,7 +302,7 @@ const loliStatus = computed(() => {
   background-color: var(--kungalgame-pink-4);
 }
 
-.active .content-container {
+.active {
   box-shadow: 0 0 0 2px var(--kungalgame-red-4) inset;
   border-radius: 10px;
   background-color: var(--kungalgame-trans-blue-0);
