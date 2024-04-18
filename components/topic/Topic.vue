@@ -11,18 +11,31 @@ const content = ref<HTMLElement>()
 const isExecuteScrollToReplyAnimate = ref(false)
 const scrollHeight = ref(0)
 
-const replyRequest = reactive({
+const pageData = reactive({
   page: 1,
-  limit: '3',
-  sortField: 'floor',
+  limit: 17,
   sortOrder: 'asc'
 })
 
-const { data: repliesData } = await useFetch(`/api/topic/${props.tid}/reply`, {
+const { data, pending } = await useFetch(`/api/topic/${props.tid}/reply`, {
   method: 'GET',
-  query: replyRequest,
+  query: pageData,
   ...kungalgameResponseHandler
 })
+
+watch(
+  () => pending.value,
+  async () => {
+    if (!pending.value) {
+      await nextTick()
+      const replyTop = content.value?.querySelector(`#tool`) as HTMLElement
+      window?.scrollTo({
+        top: replyTop.offsetTop,
+        behavior: 'smooth'
+      })
+    }
+  }
+)
 
 watch(
   () => isScrollToTop.value,
@@ -45,22 +58,14 @@ watch(
         `#kungalgame-reply-${scrollToReplyId.value}`
       ) as HTMLElement
 
-      if (childElement) {
-        childElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        childElement.classList.add('active')
+      childElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      childElement.classList.add('active')
 
-        await new Promise((resolve) => {
-          setTimeout(resolve, 3000)
-        })
+      await new Promise((resolve) => {
+        setTimeout(resolve, 3000)
+      })
 
-        childElement.classList.remove('active')
-      } else {
-        useMessage(
-          'Unable to find the specified reply for now. Please scroll down.',
-          '暂时找不到指定回复，请下滑',
-          'info'
-        )
-      }
+      childElement.classList.remove('active')
       scrollToReplyId.value = -1
     }
   }
@@ -79,11 +84,44 @@ watch(
 
     <TopicMaster :topic-data="topic" />
 
-    <TopicReply
-      v-if="repliesData"
-      :replies-data="repliesData"
+    <div class="tool" id="tool">
+      <div class="order">
+        <span
+          :class="pageData.sortOrder === 'asc' ? 'active' : ''"
+          @click="pageData.sortOrder = 'asc'"
+        >
+          {{ $t('galgame.asc') }}
+        </span>
+        <span
+          :class="pageData.sortOrder === 'desc' ? 'active' : ''"
+          @click="pageData.sortOrder = 'desc'"
+        >
+          {{ $t('galgame.desc') }}
+        </span>
+      </div>
+    </div>
+
+    <div
+      v-if="data"
       :title="topic.title"
       :is-execute-scroll-to-reply-animate="isExecuteScrollToReplyAnimate"
+    >
+      <TopicReply
+        v-for="reply in data.repliesData"
+        :key="reply.rid"
+        :reply="reply"
+        :title="topic.title"
+      />
+    </div>
+
+    <KunPagination
+      class="pagination"
+      v-if="data && data.totalCount > 7"
+      :page="pageData.page"
+      :limit="pageData.limit"
+      :sum="data.totalCount"
+      :loading="pending"
+      @set-page="(newPage) => (pageData.page = newPage)"
     />
   </div>
 </template>
@@ -92,6 +130,35 @@ watch(
 .content {
   height: 100%;
   margin: 0 auto;
+}
+
+.tool {
+  padding: 10px;
+  color: var(--kungalgame-font-color-3);
+  box-shadow: var(--kungalgame-shadow-0);
+  background-color: var(--kungalgame-trans-white-5);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  margin-bottom: 17px;
+
+  .order {
+    display: flex;
+    white-space: nowrap;
+    margin-left: auto;
+
+    span {
+      cursor: pointer;
+      padding: 3px 10px;
+      margin-right: 5px;
+      border: 2px solid transparent;
+      border-radius: 10px;
+    }
+
+    .active {
+      border: 2px solid var(--kungalgame-blue-5);
+      background-color: var(--kungalgame-trans-blue-0);
+    }
+  }
 }
 
 .title-scroll {
@@ -109,6 +176,16 @@ watch(
   border: 1px solid var(--kungalgame-blue-5);
   border-radius: 10px;
   z-index: 1;
+}
+
+.pagination {
+  padding: 10px;
+  color: var(--kungalgame-font-color-3);
+  box-shadow: var(--kungalgame-shadow-0);
+  background-color: var(--kungalgame-trans-white-5);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  margin-bottom: 17px;
 }
 
 @media (max-width: 800px) {

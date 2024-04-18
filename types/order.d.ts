@@ -1,1 +1,1 @@
-type SortOrder = 'asc' | 'desc'
+type KunOrder = 'asc' | 'desc'

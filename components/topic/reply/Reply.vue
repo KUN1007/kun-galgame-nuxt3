@@ -4,19 +4,17 @@ import dayjs from 'dayjs'
 import type { TopicReply } from '~/types/api/reply'
 
 const { moemoeAccessToken } = usePersistUserStore()
-const { isLoading, scrollToReplyId, tempReplyRewrite } =
-  storeToRefs(useTempReplyStore())
+const { scrollToReplyId } = storeToRefs(useTempReplyStore())
 
 const { tid, rid, toUid, toUsername, isShowCommentPanelRid } = storeToRefs(
   useTempCommentStore()
 )
 
 const props = defineProps<{
-  repliesData: TopicReply[]
+  reply: TopicReply
   title: string
 }>()
 
-const replies = computed(() => props.repliesData)
 const isCommentPanelOpen = ref(false)
 
 const handleClickComment = (
@@ -40,137 +38,113 @@ const handleClickComment = (
     isShowCommentPanelRid.value = 0
   }
 }
-
-watch(
-  () => tempReplyRewrite.value.edited,
-  () => {
-    const index = replies.value.findIndex(
-      (replyItem) => replyItem.rid === tempReplyRewrite.value.rid
-    )
-
-    // Note: 0 is K1
-    if (index >= 0) {
-      replies.value[index].content = tempReplyRewrite.value.content
-      replies.value[index].tags = tempReplyRewrite.value.tags
-      replies.value[index].edited = tempReplyRewrite.value.edited
-    }
-  }
-)
 </script>
 
 <template>
-  <div>
-    <div
-      class="other-topic-container"
-      v-for="(reply, index) in replies"
-      :class="hourDiff(reply.upvote_time, 10) ? 'active-upvote' : ''"
-      :key="index"
-      :id="`kungalgame-reply-${reply.floor}`"
-    >
-      <div class="floor">
-        <span>K{{ reply.floor }}</span>
+  <div
+    class="reply"
+    :class="hourDiff(reply.upvote_time, 10) ? 'active-upvote' : ''"
+    :id="`kungalgame-reply-${reply.floor}`"
+  >
+    <div class="floor">
+      <span>K{{ reply.floor }}</span>
+    </div>
+
+    <div class="content">
+      <div class="article">
+        <TopicKUNGalgamerInfo :user="reply.r_user">
+          <div class="reply-mobile">
+            =>
+            <span @click="scrollToReplyId = reply.to_floor">
+              {{ reply.to_user.name }}
+            </span>
+          </div>
+        </TopicKUNGalgamerInfo>
+
+        <div class="right">
+          <div class="reply-to">
+            {{ `${$t('topic.panel.to')} @` }}
+            <span @click="scrollToReplyId = reply.to_floor">
+              {{ reply.to_user.name }}
+            </span>
+          </div>
+
+          <TopicContent :content="reply.content" />
+        </div>
       </div>
 
-      <div class="container">
-        <div class="content">
-          <div class="article">
-            <TopicKUNGalgamerInfo :user="reply.r_user">
-              <div class="reply-mobile">
-                =>
-                <span @click="scrollToReplyId = reply.to_floor">
-                  {{ reply.to_user.name }}
-                </span>
-              </div>
-            </TopicKUNGalgamerInfo>
+      <div class="bottom">
+        <TopicTags :tags="reply.tags" :is-show-icon="true" />
 
-            <div class="right">
-              <div class="reply">
-                {{ `${$t('topic.panel.to')} @` }}
-                <span @click="scrollToReplyId = reply.to_floor">
-                  {{ reply.to_user.name }}
-                </span>
-              </div>
-
-              <TopicContent :content="reply.content" />
-            </div>
-          </div>
-
-          <div class="bottom">
-            <TopicTags :tags="reply.tags" :is-show-icon="true" />
-
-            <p class="time">
-              <span>
-                {{ dayjs(reply.time).format('YYYY-MM-DD HH:mm:ss') }}
-              </span>
-              <s
-                class="rewrite"
-                v-if="reply.edited"
-                v-tooltip="{
-                  message: { en: 'Rewrite Time', zh: 'Rewrite 时间' },
-                  position: 'bottom'
-                }"
-              >
-                × {{ dayjs(reply.edited).format('YYYY-MM-DD HH:mm:ss') }}
-              </s>
-            </p>
-          </div>
-        </div>
-
-        <TopicFooter
-          :info="{
-            tid: reply.tid,
-            rid: reply.rid,
-            likes: reply.likes,
-            dislikes: reply.dislikes,
-            upvotes: reply.upvotes
-          }"
-          :content="{
-            title: props.title,
-            content: reply.content,
-            tags: reply.tags,
-            category: []
-          }"
-          :to-user="{
-            uid: reply.r_user.uid,
-            name: reply.r_user.name
-          }"
-          :to-floor="reply.floor"
-        >
-          <template #comment>
-            <span
-              @click="
-                handleClickComment(
-                  reply.tid,
-                  reply.rid,
-                  reply.r_user.uid,
-                  reply.r_user.name
-                )
-              "
-              class="comment"
-              v-tooltip="{
-                message: { en: 'Comment', zh: '评论' },
-                position: 'bottom'
-              }"
-            >
-              <Icon name="uil:comment-dots" />
-            </span>
-          </template>
-        </TopicFooter>
-
-        <TopicComment
-          :tid="reply.tid"
-          :rid="reply.rid"
-          :to-user="{ uid: reply.r_user.uid, name: reply.r_user.name }"
-        />
+        <p class="time">
+          <span>
+            {{ dayjs(reply.time).format('YYYY-MM-DD HH:mm:ss') }}
+          </span>
+          <s
+            class="rewrite"
+            v-if="reply.edited"
+            v-tooltip="{
+              message: { en: 'Rewrite Time', zh: 'Rewrite 时间' },
+              position: 'bottom'
+            }"
+          >
+            × {{ dayjs(reply.edited).format('YYYY-MM-DD HH:mm:ss') }}
+          </s>
+        </p>
       </div>
     </div>
 
-    <KunSkeletonTopicReply v-if="isLoading" />
+    <TopicFooter
+      :info="{
+        tid: reply.tid,
+        rid: reply.rid,
+        likes: reply.likes,
+        dislikes: reply.dislikes,
+        upvotes: reply.upvotes
+      }"
+      :content="{
+        title: props.title,
+        content: reply.content,
+        tags: reply.tags,
+        category: []
+      }"
+      :to-user="{
+        uid: reply.r_user.uid,
+        name: reply.r_user.name
+      }"
+      :to-floor="reply.floor"
+    >
+      <template #comment>
+        <span
+          @click="
+            handleClickComment(
+              reply.tid,
+              reply.rid,
+              reply.r_user.uid,
+              reply.r_user.name
+            )
+          "
+          class="comment"
+          v-tooltip="{
+            message: { en: 'Comment', zh: '评论' },
+            position: 'bottom'
+          }"
+        >
+          <Icon name="uil:comment-dots" />
+        </span>
+      </template>
+    </TopicFooter>
+
+    <TopicComment
+      :tid="reply.tid"
+      :rid="reply.rid"
+      :to-user="{ uid: reply.r_user.uid, name: reply.r_user.name }"
+    />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.other-topic-container {
+.reply {
   width: 100%;
   min-height: 300px;
   display: flex;
@@ -204,14 +178,6 @@ watch(
     font-size: 20px;
     clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0 50%);
   }
-}
-
-.container {
-  width: 100%;
-  display: flex;
-  flex-shrink: 0;
-  flex-direction: column;
-  border-radius: 5px;
 }
 
 .content {
@@ -251,32 +217,32 @@ watch(
   width: 100%;
   display: flex;
   flex-direction: column;
-}
 
-.reply {
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
-  letter-spacing: 1px;
-
-  span {
-    cursor: pointer;
+  .reply-to {
     display: flex;
     align-items: center;
-    color: var(--kungalgame-blue-5);
-    font-weight: bold;
-    margin-left: 5px;
+    margin: 10px 0;
+    letter-spacing: 1px;
 
-    &::after {
-      content: '➢';
-      color: var(--kungalgame-red-4);
-      margin-left: 10px;
-      transform: translateX(0);
-      transition: transform 0.2s ease;
-    }
+    span {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: var(--kungalgame-blue-5);
+      font-weight: bold;
+      margin-left: 5px;
 
-    &:hover::after {
-      transform: translateX(10px);
+      &::after {
+        content: '➢';
+        color: var(--kungalgame-red-4);
+        margin-left: 10px;
+        transform: translateX(0);
+        transition: transform 0.2s ease;
+      }
+
+      &:hover::after {
+        transform: translateX(10px);
+      }
     }
   }
 }

@@ -1,19 +1,13 @@
 import TopicModel from '~/server/models/topic'
 import ReplyModel from '~/server/models/reply'
 import mongoose from 'mongoose'
-import type {
-  TopicReplyRequestData,
-  TopicReply,
-  SortField,
-  SortOrder
-} from '~/types/api/reply'
+import type { TopicReplyRequestData, TopicReply } from '~/types/api/reply'
 
 const getReplies = async (
   tid: number,
   page: number,
   limit: number,
-  sortField: SortField,
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 ) => {
   const session = await mongoose.startSession()
   session.startTransaction()
@@ -25,19 +19,19 @@ const getReplies = async (
     const replyId = reply.replies
 
     const skip = (page - 1) * limit
-    const sortOptions: Record<string, 'asc' | 'desc'> = {
-      [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
-    }
 
+    const totalCount = await ReplyModel.countDocuments({
+      rid: { $in: replyId }
+    }).lean()
     const replyDetails = await ReplyModel.find({ rid: { $in: replyId } })
-      .sort(sortOptions)
+      .sort({ floor: sortOrder })
       .skip(skip)
       .limit(limit)
       .populate('r_user', 'uid avatar name moemoepoint')
       .populate('to_user', 'uid name')
       .lean()
 
-    const responseData: TopicReply[] = replyDetails.map((reply) => ({
+    const repliesData: TopicReply[] = replyDetails.map((reply) => ({
       rid: reply.rid,
       tid: reply.tid,
       floor: reply.floor,
@@ -65,7 +59,7 @@ const getReplies = async (
 
     await session.commitTransaction()
 
-    return responseData
+    return { repliesData, totalCount }
   } catch (error) {
     await session.abortTransaction()
   } finally {
@@ -79,13 +73,13 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10210)
   }
 
-  const { page, limit, sortField, sortOrder }: TopicReplyRequestData =
+  const { page, limit, sortOrder }: TopicReplyRequestData =
     await getQuery(event)
-  if (!page || !limit || !sortField || !sortOrder) {
+  if (!page || !limit || !sortOrder) {
     return kunError(event, 10507)
   }
 
-  if (limit !== '3') {
+  if (limit !== '17') {
     return kunError(event, 10209)
   }
 
@@ -93,7 +87,6 @@ export default defineEventHandler(async (event) => {
     parseInt(tid),
     parseInt(page),
     parseInt(limit),
-    sortField,
     sortOrder
   )
   if (typeof result === 'number') {

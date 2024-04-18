@@ -1,10 +1,4 @@
 <script setup lang="ts">
-import type { TopicDetail } from '~/types/api/topic'
-
-const ReplyPanel = defineAsyncComponent(
-  () => import('~/components/topic/reply/Panel.vue')
-)
-
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
 const { isEdit } = storeToRefs(useTempReplyStore())
@@ -83,8 +77,6 @@ onBeforeMount(() => {
 
 <template>
   <div class="root">
-    <ReplyPanel />
-
     <Topic v-if="data" :tid="tid" :topic="data" />
 
     <KunBlank v-if="!data">
