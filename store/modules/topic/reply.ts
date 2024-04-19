@@ -7,7 +7,6 @@ export const usePersistKUNGalgameReplyStore = defineStore({
     textCount: 0,
 
     replyDraft: {
-      tid: 0,
       toUserName: '',
       toUid: 0,
       content: '',
@@ -19,7 +18,6 @@ export const usePersistKUNGalgameReplyStore = defineStore({
     resetReplyDraft() {
       this.textCount = 0
 
-      this.replyDraft.tid = 0
       this.replyDraft.toUserName = ''
       this.replyDraft.toUid = 0
       this.replyDraft.content = ''

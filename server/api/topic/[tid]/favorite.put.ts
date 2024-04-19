@@ -9,10 +9,6 @@ const updateTopicFavorite = async (uid: number, tid: number) => {
   }
 
   const isFavoriteTopic = topic.favorites.includes(uid)
-  if (isFavoriteTopic) {
-    return 10221
-  }
-
   const moemoepointAmount = isFavoriteTopic ? -1 : 1
   const popularity = isFavoriteTopic ? -2 : 2
 

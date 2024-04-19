@@ -13,10 +13,6 @@ const updateTopicDislike = async (uid: number, tid: number) => {
   }
 
   const isDislikedTopic = topic.dislikes.includes(uid)
-  if (isDislikedTopic) {
-    return 10213
-  }
-
   const amount = isDislikedTopic ? -1 : 1
   const popularity = isDislikedTopic ? 5 : -5
 

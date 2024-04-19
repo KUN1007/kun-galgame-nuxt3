@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
-  tid: number
+  tid?: number
+  rid?: number
   toUid: number
   likesCount: number
   isLiked: boolean
@@ -10,14 +11,26 @@ const { uid, moemoeAccessToken } = usePersistUserStore()
 const isLiked = ref(props.isLiked)
 const likesCount = ref(props.likesCount)
 
-const toggleLikeTopic = async () => {
-  const result = await $fetch(`/api/topic/${props.tid}/like`, {
-    method: 'PUT',
-    watch: false,
-    ...kungalgameResponseHandler
-  })
+const toggleLike = async () => {
+  let res = ''
+  if (props.tid) {
+    const result = await $fetch(`/api/topic/${props.tid}/like`, {
+      method: 'PUT',
+      watch: false,
+      ...kungalgameResponseHandler
+    })
+    res = result ?? ''
+  } else {
+    const result = await $fetch(`/api/topic/${props.tid}/reply/like`, {
+      method: 'PUT',
+      query: { rid: props.rid },
+      watch: false,
+      ...kungalgameResponseHandler
+    })
+    res = result ?? ''
+  }
 
-  if (result) {
+  if (res) {
     likesCount.value += isLiked.value ? -1 : 1
 
     if (!isLiked.value) {
@@ -30,7 +43,7 @@ const toggleLikeTopic = async () => {
   }
 }
 
-const handleClickLikeThrottled = throttle(toggleLikeTopic, 1007, () =>
+const handleClickLikeThrottled = throttle(toggleLike, 1007, () =>
   useMessage(
     'You can only perform one operation within 1007 milliseconds',
     '您在 1007 毫秒内只能进行一次操作',
@@ -67,6 +80,7 @@ const handleClickLike = () => {
   color: var(--kungalgame-font-color-2);
 
   .icon {
+    cursor: pointer;
     font-size: 24px;
     margin-right: 3px;
   }
@@ -77,8 +91,10 @@ const handleClickLike = () => {
 }
 
 @media (max-width: 700px) {
-  .icon {
-    font-size: initial;
+  .like {
+    .icon {
+      font-size: initial;
+    }
   }
 }
 </style>

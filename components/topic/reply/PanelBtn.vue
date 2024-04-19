@@ -1,26 +1,19 @@
 <script setup lang="ts">
 import { checkReplyPublish } from '../utils/checkReplyPublish'
-import type {
-  TopicCreateReplyRequestData,
-  TopicUpdateReplyRequestData
-} from '~/types/api/topic-reply'
+
+const route = useRoute()
+const tid = computed(() => {
+  return parseInt((route.params as { tid: string }).tid)
+})
 
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
-const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
+const { isEdit, isReplyRewriting, replyRewrite, tempReply } =
+  storeToRefs(useTempReplyStore())
 const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 const isPublishing = ref(false)
 
-const { isEdit, tempReplyRewrite } = storeToRefs(useTempReplyStore())
-
 const handlePublish = async () => {
-  const requestData: TopicCreateReplyRequestData = {
-    to_uid: replyDraft.value.toUid.toString(),
-    to_floor: replyDraft.value.toFloor.toString(),
-    tags: replyDraft.value.tags,
-    content: replyDraft.value.content,
-    time: Date.now().toString()
-  }
-  if (!checkReplyPublish(requestData.tags, requestData.content)) {
+  if (!checkReplyPublish(replyDraft.value.tags, replyDraft.value.content)) {
     return
   }
 
@@ -32,7 +25,6 @@ const handlePublish = async () => {
   if (!res) {
     return
   }
-  useTempReplyStore().resetPageStatus()
 
   if (isPublishing.value) {
     return
@@ -40,38 +32,29 @@ const handlePublish = async () => {
     isPublishing.value = true
     useMessage('Publishing...', '正在发布...', 'info')
   }
-  const reply = await $fetch(`/api/topic/${replyDraft.value.tid}/reply`, {
+  const reply = await $fetch(`/api/topic/${tid.value}/reply`, {
     method: 'POST',
-    body: requestData,
+    body: { ...replyDraft, time: Date.now() },
     watch: false,
     ...kungalgameResponseHandler
   })
   isPublishing.value = false
 
   if (reply) {
-    useTempReplyStore().tempReply = reply
-    usePersistKUNGalgameReplyStore().resetReplyDraft()
-
     isEdit.value = false
+    tempReply.value.push(reply)
+    usePersistKUNGalgameReplyStore().resetReplyDraft()
     useMessage('Publish reply successfully!', '发布回复成功！', 'success')
   }
 }
 
-const saveRewriteReply = () => {
-  tempReplyRewrite.value.rid = replyRewrite.value.rid
-  tempReplyRewrite.value.content = replyRewrite.value.content
-  tempReplyRewrite.value.tags = replyRewrite.value.tags
-  tempReplyRewrite.value.edited = Date.now()
-}
-
 const handleRewrite = async () => {
-  const requestData: TopicUpdateReplyRequestData = {
-    rid: replyRewrite.value.rid.toString(),
-    tags: replyRewrite.value.tags,
-    content: replyRewrite.value.content,
-    edited: Date.now().toString()
-  }
-  if (!checkReplyPublish(requestData.tags, requestData.content)) {
+  if (
+    !checkReplyPublish(
+      replyRewrite.value[0].tags,
+      replyRewrite.value[0].content
+    )
+  ) {
     return
   }
 
@@ -90,9 +73,14 @@ const handleRewrite = async () => {
     isPublishing.value = true
     useMessage('Publishing...', '正在发布...', 'info')
   }
-  const result = await $fetch(`/api/topic/${replyDraft.value.tid}/reply`, {
+  const result = await $fetch(`/api/topic/${tid.value}/reply`, {
     method: 'PUT',
-    body: requestData,
+    body: {
+      rid: replyRewrite.value[0].rid,
+      content: replyRewrite.value[0].content,
+      tags: replyRewrite.value[0].tags,
+      edited: Date.now()
+    },
     watch: false,
     ...kungalgameResponseHandler
   })
@@ -100,7 +88,6 @@ const handleRewrite = async () => {
 
   if (result) {
     useMessage('Reply rewrite successfully', '回复重新编辑成功', 'success')
-    saveRewriteReply()
     useTempReplyStore().resetRewriteReplyData()
     isShowAdvance.value = false
     isEdit.value = false

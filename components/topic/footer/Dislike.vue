@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
-  tid: number
+  tid?: number
+  rid?: number
   toUid: number
   dislikesCount: number
   isDisliked: boolean
@@ -10,18 +11,30 @@ const { uid, moemoeAccessToken } = usePersistUserStore()
 const isDisliked = ref(props.isDisliked)
 const dislikesCount = ref(props.dislikesCount)
 
-const toggleDislikeTopic = async () => {
-  const result = await $fetch(`/api/topic/${props.tid}/dislike`, {
-    method: 'PUT',
-    watch: false,
-    ...kungalgameResponseHandler
-  })
+const toggleDislike = async () => {
+  let res = ''
+  if (props.tid) {
+    const result = await $fetch(`/api/topic/${props.tid}/dislike`, {
+      method: 'PUT',
+      watch: false,
+      ...kungalgameResponseHandler
+    })
+    res = result ?? ''
+  } else {
+    const result = await $fetch(`/api/topic/${props.tid}/reply/dislike`, {
+      method: 'PUT',
+      query: { rid: props.rid },
+      watch: false,
+      ...kungalgameResponseHandler
+    })
+    res = result ?? ''
+  }
 
-  if (result) {
-    dislikesCount.value += isDisliked ? -1 : 1
+  if (res) {
+    dislikesCount.value += isDisliked.value ? -1 : 1
 
-    if (!isDisliked) {
-      useMessage('Like successfully!', '点踩成功！', 'success')
+    if (!isDisliked.value) {
+      useMessage('Dislike successfully!', '点踩成功！', 'success')
     } else {
       useMessage('Cancel Dislike successfully!', '取消点踩成功！', 'success')
     }
@@ -30,7 +43,7 @@ const toggleDislikeTopic = async () => {
   }
 }
 
-const handleClickDislikeThrottled = throttle(toggleDislikeTopic, 1007, () =>
+const handleClickDislikeThrottled = throttle(toggleDislike, 1007, () =>
   useMessage(
     'You can only perform one operation within 1007 milliseconds',
     '您在 1007 毫秒内只能进行一次操作',
@@ -57,7 +70,7 @@ const handleClickDislike = () => {
     :class="isDisliked ? 'active' : ''"
     @click="handleClickDislike"
   >
-    <Icon class="icon" name="lucide:thumbs-up" />
+    <Icon class="icon" name="lucide:thumbs-down" />
     <span v-if="dislikesCount">{{ dislikesCount }}</span>
   </span>
 </template>
@@ -71,6 +84,7 @@ const handleClickDislike = () => {
   color: var(--kungalgame-font-color-2);
 
   .icon {
+    cursor: pointer;
     font-size: 24px;
     margin-right: 3px;
   }
@@ -81,8 +95,10 @@ const handleClickDislike = () => {
 }
 
 @media (max-width: 700px) {
-  .icon {
-    font-size: initial;
+  .dislike {
+    .icon {
+      font-size: initial;
+    }
   }
 }
 </style>

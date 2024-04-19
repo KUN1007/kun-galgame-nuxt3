@@ -2,34 +2,12 @@
 import dayjs from 'dayjs'
 import type { TopicDetail } from '~/types/api/topic'
 
-const topicData = defineProps<{
-  topicData: TopicDetail
+const props = defineProps<{
+  topic: TopicDetail
 }>()
 
-const {
-  tid,
-  title,
-  views,
-  likes,
-  dislikes,
-  favorites,
-  time,
-  content,
-  upvotes,
-  tags,
-  edited,
-  user,
-  replies,
-  status,
-  share,
-  category,
-  section,
-  popularity,
-  upvote_time
-} = topicData.topicData
-
 const loliStatus = computed(() => {
-  if (hourDiff(upvote_time, 10)) {
+  if (hourDiff(props.topic.upvoteTime, 10)) {
     return 'featured'
   }
 
@@ -39,7 +17,7 @@ const loliStatus = computed(() => {
     2: 'pinned',
     3: 'essential'
   }
-  return statusMap[status]
+  return statusMap[props.topic.status]
 })
 </script>
 
@@ -47,30 +25,34 @@ const loliStatus = computed(() => {
   <div class="master" :id="`kungalgame-reply-0`">
     <div class="header">
       <div class="title">
-        {{ title }}
+        {{ topic.title }}
       </div>
     </div>
 
     <div class="content">
       <div class="top">
         <div class="section">
-          <TopicSection :section="section" />
-          <TopicTags v-if="tags" :tags="tags" :is-show-icon="true" />
+          <TopicSection :section="topic.section" />
+          <TopicTags
+            v-if="topic.tags"
+            :tags="topic.tags"
+            :is-show-icon="true"
+          />
         </div>
 
         <span class="time">
-          {{ dayjs(time).format('YYYY-MM-DD HH:mm:ss') }}
+          {{ dayjs(topic.time).format('YYYY-MM-DD HH:mm:ss') }}
         </span>
       </div>
 
       <div class="center">
-        <TopicKUNGalgamerInfo v-if="user" :user="user">
+        <TopicKUNGalgamerInfo v-if="topic.user" :user="topic.user">
           <span class="time-mobile">
-            {{ dayjs(time).format('YYYY-MM-DD HH:mm:ss') }}
+            {{ dayjs(topic.time).format('YYYY-MM-DD HH:mm:ss') }}
           </span>
         </TopicKUNGalgamerInfo>
 
-        <TopicContent :content="content" />
+        <TopicContent :content="topic.content" />
       </div>
 
       <div class="bottom">
@@ -84,7 +66,7 @@ const loliStatus = computed(() => {
         <span class="line"></span>
 
         <span
-          v-if="views > 0"
+          v-if="topic.views > 0"
           class="views"
           v-tooltip="{
             message: { en: 'Views', zh: '浏览数' },
@@ -92,55 +74,23 @@ const loliStatus = computed(() => {
           }"
         >
           <span class="icon"><Icon name="lucide:mouse-pointer-click" /></span>
-          {{ views }}
+          {{ topic.views }}
         </span>
 
         <s
           class="rewrite"
-          v-if="edited"
+          v-if="topic.edited"
           v-tooltip="{
             message: { en: 'Rewrite Time', zh: 'Rewrite 时间' },
             position: 'bottom'
           }"
         >
-          × {{ dayjs(edited).format('YYYY-MM-DD HH:mm:ss') }}
+          × {{ dayjs(topic.edited).format('YYYY-MM-DD HH:mm:ss') }}
         </s>
       </div>
     </div>
 
-    <TopicFooter
-      :info="{
-        tid,
-        rid: 0,
-        likes,
-        dislikes,
-        upvotes
-      }"
-      :content="{
-        title,
-        content,
-        tags,
-        category,
-        section
-      }"
-      :to-user="{
-        uid: user.uid,
-        name: user.name
-      }"
-      :to-floor="0"
-    >
-      <template #favorite>
-        <TopicFooterFavorite
-          :tid="tid"
-          :favorites="favorites"
-          :to-uid="user.uid"
-          v-tooltip="{
-            message: { en: 'Favorite', zh: '收藏' },
-            position: 'bottom'
-          }"
-        />
-      </template>
-    </TopicFooter>
+    <TopicFooter :topic="topic" />
   </div>
 </template>
 

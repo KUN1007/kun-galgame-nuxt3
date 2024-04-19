@@ -13,10 +13,6 @@ const updateTopicLike = async (uid: number, tid: number) => {
   }
 
   const isLikedTopic = topic.likes.includes(uid)
-  if (isLikedTopic) {
-    return 10212
-  }
-
   const moemoepointAmount = isLikedTopic ? -1 : 1
   const popularity = isLikedTopic ? -2 : 2
 

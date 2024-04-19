@@ -35,7 +35,10 @@ export default defineEventHandler(async (event) => {
       count: topic.dislikes.length,
       isDisliked: topic.dislikes.includes(uid)
     },
-    favorites: topic.favorites,
+    favorites: {
+      count: topic.favorites.length,
+      isFavorite: topic.favorites.includes(uid)
+    },
     time: topic.time,
     content: topic.content,
     upvotes: {
@@ -56,7 +59,7 @@ export default defineEventHandler(async (event) => {
     category: topic.category,
     section: topic.section,
     popularity: topic.popularity,
-    upvote_time: topic.upvote_time
+    upvoteTime: topic.upvote_time
   }
 
   return data

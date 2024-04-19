@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
-  tid: number
+  tid?: number
+  rid?: number
   toUid: number
   upvoteCount: number
   isUpvoted: boolean
@@ -41,37 +42,37 @@ const upvoteTopic = async () => {
   }
 }
 
-// const upvoteReply = async () => {
-//   const res = await useTempMessageStore().alert(
-//     {
-//       'en-us': 'Are you sure you want to upvote this reply?',
-//       'ja-jp': '',
-//       'zh-cn': '您确定推这个回复吗?'
-//     },
-//     {
-//       'en-us':
-//         'Upvote a reply will consume 2 MoeMoePoints from you and give the recipient 1 MoeMoePoints',
-//       'ja-jp': '',
-//       'zh-cn': '推回复将会消耗您 2 萌萌点, 并给被推者增加 1 萌萌点'
-//     }
-//   )
-//   if (!res) {
-//     return
-//   }
+const upvoteReply = async () => {
+  const res = await useTempMessageStore().alert(
+    {
+      'en-us': 'Are you sure you want to upvote this reply?',
+      'ja-jp': '',
+      'zh-cn': '您确定推这个回复吗?'
+    },
+    {
+      'en-us':
+        'Upvote a reply will consume 2 MoeMoePoints from you and give the recipient 1 MoeMoePoints',
+      'ja-jp': '',
+      'zh-cn': '推回复将会消耗您 2 萌萌点, 并给被推者增加 1 萌萌点'
+    }
+  )
+  if (!res) {
+    return
+  }
 
-//   const result = await $fetch(`/api/topic/${props.tid}/reply/upvote`, {
-//     method: 'PUT',
-//     query: { rid: props.rid },
-//     watch: false,
-//     ...kungalgameResponseHandler
-//   })
+  const result = await $fetch(`/api/topic/${props.tid}/reply/upvote`, {
+    method: 'PUT',
+    query: { rid: props.rid },
+    watch: false,
+    ...kungalgameResponseHandler
+  })
 
-//   if (result) {
-//     upvoteCount.value++
-//     isUpvoted.value = true
-//     useMessage('Reply upvote successfully', '推回复成功', 'success')
-//   }
-// }
+  if (result) {
+    upvoteCount.value++
+    isUpvoted.value = true
+    useMessage('Reply upvote successfully', '推回复成功', 'success')
+  }
+}
 
 const handleClickUpvote = async () => {
   if (!moemoeAccessToken) {
@@ -104,11 +105,11 @@ const handleClickUpvote = async () => {
 
   await upvoteTopic()
 
-  // if (props.rid === 0) {
-  //   await upvoteTopic()
-  // } else {
-  //   await upvoteReply()
-  // }
+  if (props.rid === 0) {
+    await upvoteTopic()
+  } else {
+    await upvoteReply()
+  }
 }
 </script>
 
@@ -118,7 +119,7 @@ const handleClickUpvote = async () => {
     :class="isUpvoted ? 'active' : ''"
     @click="handleClickUpvote"
   >
-    <Icon class="icon" name="lucide:cherry" />
+    <Icon class="icon" name="lucide:sparkles" />
     <span v-if="upvoteCount">{{ upvoteCount }}</span>
   </span>
 </template>
@@ -132,6 +133,7 @@ const handleClickUpvote = async () => {
   color: var(--kungalgame-font-color-2);
 
   .icon {
+    cursor: pointer;
     font-size: 24px;
     margin-right: 3px;
   }
@@ -143,7 +145,9 @@ const handleClickUpvote = async () => {
 
 @media (max-width: 700px) {
   .upvote {
-    font-size: initial;
+    .icon {
+      font-size: initial;
+    }
   }
 }
 </style>

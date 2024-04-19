@@ -4,7 +4,10 @@ import ReplyModel from '~/server/models/reply'
 import UserModel from '~/server/models/user'
 import { checkReplyPublish } from '../../utils/checkReplyPublish'
 import type { H3Event } from 'h3'
-import type { TopicCreateReplyRequestData } from '~/types/api/topic-reply'
+import type {
+  TopicReply,
+  TopicCreateReplyRequestData
+} from '~/types/api/topic-reply'
 
 const readReplyData = async (event: H3Event) => {
   const { toUid, toFloor, tags, content, time }: TopicCreateReplyRequestData =
@@ -65,12 +68,12 @@ export default defineEventHandler(async (event) => {
       time
     })
 
-    await UserModel.updateOne(
+    const user = await UserModel.findOneAndUpdate(
       { uid: newReply.r_uid },
       { $addToSet: { reply: newReply.rid } }
     )
 
-    await UserModel.updateOne(
+    const toUser = await UserModel.findOneAndUpdate(
       { uid: newReply.to_uid },
       { $inc: { moemoepoint: 2 } }
     )
@@ -97,9 +100,44 @@ export default defineEventHandler(async (event) => {
       )
     }
 
+    const response: TopicReply = {
+      rid: newReply.rid,
+      tid: newReply.tid,
+      floor: newReply.floor,
+      toFloor: newReply.to_floor,
+      user: {
+        uid: user!.uid,
+        name: user!.name,
+        avatar: user!.avatar,
+        moemoepoint: user!.moemoepoint
+      },
+      toUser: {
+        uid: toUser!.uid,
+        name: toUser!.name
+      },
+      edited: newReply.edited,
+      content: newReply.content,
+      upvotes: {
+        count: 0,
+        isUpvoted: false
+      },
+      upvoteTime: newReply.upvote_time,
+      likes: {
+        count: 0,
+        isLiked: false
+      },
+      dislikes: {
+        count: 0,
+        isDisliked: false
+      },
+      tags: [],
+      time: newReply.time,
+      comment: []
+    }
+
     await session.commitTransaction()
 
-    return 'MOEMOE create reply successfully!'
+    return response
   } catch (error) {
     await session.abortTransaction()
   } finally {

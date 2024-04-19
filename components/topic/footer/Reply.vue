@@ -4,7 +4,6 @@ const { isEdit } = storeToRefs(useTempReplyStore())
 const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 
 const props = defineProps<{
-  tid: number
   toUserName: string
   toUid: number
   toFloor: number
@@ -16,7 +15,6 @@ const handleClickReply = () => {
     return
   }
 
-  replyDraft.value.tid = props.tid
   replyDraft.value.toUserName = props.toUserName
   replyDraft.value.toUid = props.toUid
   replyDraft.value.toFloor = props.toFloor

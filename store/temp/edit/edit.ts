@@ -21,13 +21,14 @@ export const useTempEditStore = defineStore({
   }),
   actions: {
     resetRewriteTopicData() {
-      this.textCount = 0
+      this.tid = 0
       this.title = ''
       this.content = ''
       this.tags = []
       this.category = []
       this.section = []
 
+      this.textCount = 0
       this.isTopicRewriting = false
 
       this.autosaveCount = 0

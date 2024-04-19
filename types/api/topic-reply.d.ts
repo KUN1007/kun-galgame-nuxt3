@@ -25,7 +25,7 @@ export interface TopicReply {
     count: number
     isLiked: boolean
   }
-  likes: {
+  dislikes: {
     count: number
     isDisliked: boolean
   }

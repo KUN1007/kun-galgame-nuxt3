@@ -2,7 +2,6 @@
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
 const { isEdit } = storeToRefs(useTempReplyStore())
-const { isShowCommentPanelRid } = storeToRefs(useTempCommentStore())
 
 const route = useRoute()
 const isBanned = ref(false)
@@ -45,7 +44,6 @@ if (data) {
 }
 
 const resetPanelStatus = () => {
-  isShowCommentPanelRid.value = 0
   isEdit.value = false
   isShowAdvance.value = false
 }

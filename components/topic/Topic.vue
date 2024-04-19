@@ -91,7 +91,7 @@ watch(
       </div>
     </Transition>
 
-    <TopicMaster :topic-data="topic" />
+    <TopicMaster :topic="topic" />
 
     <div class="tool" v-if="data && data.totalCount > 5" id="tool">
       <div class="page">

@@ -13,10 +13,6 @@ const updateReplyDislike = async (uid: number, rid: number) => {
   }
 
   const isDislikedReply = reply.dislikes.includes(uid)
-  if (isDislikedReply) {
-    return 10510
-  }
-
   const amount = isDislikedReply ? -1 : 1
 
   const session = await mongoose.startSession()

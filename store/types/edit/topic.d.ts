@@ -21,7 +21,6 @@ export interface EditStoreTemp {
 
   textCount: number
   isTopicRewriting: boolean
-
   autosaveCount: number
 
   editorContext: ShallowRef<Ctx | null>

@@ -13,14 +13,14 @@ const isShowMenu = computed(() => props.isShowMenu)
 const valueMarkdown = ref('')
 
 if (isReplyRewriting.value) {
-  valueMarkdown.value = replyRewrite.value.content
+  valueMarkdown.value = replyRewrite.value[0].content
 } else {
   valueMarkdown.value = replyDraft.value.content
 }
 
 const saveMarkdown = debounce((editorMarkdown: string) => {
   if (isReplyRewriting.value) {
-    replyRewrite.value.content = editorMarkdown
+    replyRewrite.value[0].content = editorMarkdown
   } else {
     replyDraft.value.content = editorMarkdown
   }

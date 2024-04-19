@@ -1,10 +1,6 @@
-export interface CommentDraft {
-  tid: number
+export interface TopicComment {
   rid: number
   toUid: number
   toUsername: string
   content: string
-
-  // Which reply's comment panel to display
-  isShowCommentPanelRid: number
 }

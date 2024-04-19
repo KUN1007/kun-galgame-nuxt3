@@ -72,6 +72,7 @@ const handleClickFavorite = () => {
   color: var(--kungalgame-font-color-2);
 
   .icon {
+    cursor: pointer;
     font-size: 24px;
     margin-right: 3px;
   }
@@ -79,5 +80,13 @@ const handleClickFavorite = () => {
 
 .active .icon {
   color: var(--kungalgame-red-4);
+}
+
+@media (max-width: 700px) {
+  .favorite {
+    .icon {
+      font-size: initial;
+    }
+  }
 }
 </style>

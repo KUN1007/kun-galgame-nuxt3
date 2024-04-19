@@ -13,17 +13,13 @@ const updateReplyLike = async (uid: number, rid: number) => {
   }
 
   const isLikedReply = reply.likes.includes(uid)
-  if (isLikedReply) {
-    return 10509
-  }
-
   const moemoepointAmount = isLikedReply ? -1 : 1
 
   const session = await mongoose.startSession()
   session.startTransaction()
 
   try {
-    ReplyModel.updateOne(
+    await ReplyModel.updateOne(
       { rid },
       { [isLikedReply ? '$pull' : '$addToSet']: { likes: uid } }
     )

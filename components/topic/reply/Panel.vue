@@ -9,7 +9,6 @@ const Tags = defineAsyncComponent(
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
 const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
-
 const { isEdit } = storeToRefs(useTempReplyStore())
 
 const position = computed(() => {

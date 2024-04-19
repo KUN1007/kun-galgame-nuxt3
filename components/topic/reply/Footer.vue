@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import type { TopicDetail } from '~/types/api/topic'
+import type { TopicReply } from '~/types/api/topic-reply'
 
 defineProps<{
-  topic: TopicDetail
+  title: string
+  reply: TopicReply
 }>()
 </script>
 
@@ -10,10 +11,10 @@ defineProps<{
   <div class="footer">
     <div class="left">
       <TopicFooterUpvote
-        :tid="topic.tid"
-        :to-uid="topic.user.uid"
-        :upvote-count="topic.upvotes.count"
-        :is-upvoted="topic.upvotes.isUpvoted"
+        :rid="reply.rid"
+        :to-uid="reply.user.uid"
+        :upvote-count="reply.upvotes.count"
+        :is-upvoted="reply.upvotes.isUpvoted"
         v-tooltip="{
           message: { en: 'Upvote', zh: '推' },
           position: 'bottom'
@@ -22,10 +23,10 @@ defineProps<{
 
       <!-- Like -->
       <TopicFooterLike
-        :tid="topic.tid"
-        :to-uid="topic.user.uid"
-        :likes-count="topic.likes.count"
-        :is-liked="topic.likes.isLiked"
+        :rid="reply.rid"
+        :to-uid="reply.user.uid"
+        :likes-count="reply.likes.count"
+        :is-liked="reply.likes.isLiked"
         v-tooltip="{
           message: { en: 'Like', zh: '点赞' },
           position: 'bottom'
@@ -34,43 +35,27 @@ defineProps<{
 
       <!-- Dislike -->
       <TopicFooterDislike
-        :tid="topic.tid"
-        :to-uid="topic.user.uid"
-        :dislikes-count="topic.dislikes.count"
-        :is-disliked="topic.dislikes.isDisliked"
+        :rid="reply.rid"
+        :to-uid="reply.user.uid"
+        :dislikes-count="reply.dislikes.count"
+        :is-disliked="reply.dislikes.isDisliked"
         v-tooltip="{
           message: { en: 'Dislike', zh: '点踩' },
           position: 'bottom'
         }"
       />
-
-      <TopicFooterFavorite
-        :tid="topic.tid"
-        :to-uid="topic.user.uid"
-        :favorites-count="topic.favorites.count"
-        :is-favorite="topic.favorites.isFavorite"
-        v-tooltip="{
-          message: { en: 'Favorite', zh: '收藏' },
-          position: 'bottom'
-        }"
-      />
     </div>
 
-    <!-- Right part of the bottom (reply, comment, view only, edit) -->
     <div class="right">
       <TopicFooterReply
-        :tid="topic.tid"
-        :to-user-name="topic.user.name"
-        :to-uid="topic.user.uid"
-        :to-floor="0"
+        :to-user-name="reply.user.name"
+        :to-uid="reply.user.uid"
+        :to-floor="reply.floor"
       />
 
-      <!-- Share -->
       <span
         @click="
-          useKunCopy(
-            `${topic.title}: https://www.kungal.com/topic/${topic.tid}`
-          )
+          useKunCopy(`${title}: https://www.kungal.com/topic/${reply.tid}`)
         "
         class="icon"
         v-tooltip="{
@@ -81,12 +66,8 @@ defineProps<{
         <Icon name="lucide:share-2" />
       </span>
 
-      <!-- View Only (TODO) -->
-      <!-- <span class="icon"><Icon icon="ph:user-focus-duotone" /></span> -->
-
-      <!-- Edit -->
-      <TopicFooterRewrite
-        :topic="topic"
+      <TopicReplyRewrite
+        :reply="reply"
         v-tooltip="{
           message: { en: 'Rewrite', zh: 'Rewrite' },
           position: 'bottom'

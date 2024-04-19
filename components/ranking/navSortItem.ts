@@ -37,7 +37,7 @@ export const topicSortItem: Topic[] = [
   },
   {
     index: 2,
-    icon: 'lucide:cherry',
+    icon: 'lucide:sparkles',
     name: 'upvote',
     sortField: 'upvotes'
   },
@@ -76,7 +76,7 @@ export const userSortItem: User[] = [
   },
   {
     index: 2,
-    icon: 'lucide:cherry',
+    icon: 'lucide:sparkles',
     name: 'upvote',
     sortField: 'upvote'
   },
@@ -108,7 +108,7 @@ export const userSortItem: User[] = [
 
 export const userIconMap: Record<string, string> = {
   moemoepoint: 'lucide:lollipop',
-  upvote: 'lucide:cherry',
+  upvote: 'lucide:sparkles',
   like: 'lucide:thumbs-up',
   topic: 'lucide:square-gantt-chart',
   reply: 'lucide:reply',
@@ -117,7 +117,7 @@ export const userIconMap: Record<string, string> = {
 
 export const topicIconMap: Record<string, string> = {
   popularity: 'lucide:flame',
-  upvotes: 'lucide:cherry',
+  upvotes: 'lucide:sparkles',
   views: 'lucide:mouse-pointer-click',
   likes: 'lucide:thumbs-up',
   replies: 'lucide:reply',

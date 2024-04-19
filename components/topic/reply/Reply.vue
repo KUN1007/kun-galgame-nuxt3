@@ -6,11 +6,9 @@ import type { TopicReply } from '~/types/api/topic-reply'
 const { moemoeAccessToken } = usePersistUserStore()
 const { scrollToReplyId } = storeToRefs(useTempReplyStore())
 
-const { tid, rid, toUid, toUsername, isShowCommentPanelRid } = storeToRefs(
-  useTempCommentStore()
-)
+const { rid, toUid, toUsername } = storeToRefs(useTempCommentStore())
 
-const props = defineProps<{
+defineProps<{
   reply: TopicReply
   title: string
 }>()
@@ -28,15 +26,10 @@ const handleClickComment = (
     return
   }
   isCommentPanelOpen.value = !isCommentPanelOpen.value
-  if (isCommentPanelOpen.value) {
-    tid.value = topicId
-    rid.value = replyIid
-    toUid.value = uid
-    toUsername.value = name
-    isShowCommentPanelRid.value = replyIid
-  } else {
-    isShowCommentPanelRid.value = 0
-  }
+
+  rid.value = replyIid
+  toUid.value = uid
+  toUsername.value = name
 }
 </script>
 
@@ -94,46 +87,7 @@ const handleClickComment = (
       </div>
     </div>
 
-    <TopicFooter
-      :info="{
-        tid: reply.tid,
-        rid: reply.rid,
-        likes: reply.likes,
-        dislikes: reply.dislikes,
-        upvotes: reply.upvotes
-      }"
-      :content="{
-        title: props.title,
-        content: reply.content,
-        tags: reply.tags,
-        category: []
-      }"
-      :to-user="{
-        uid: reply.r_user.uid,
-        name: reply.r_user.name
-      }"
-      :to-floor="reply.floor"
-    >
-      <template #comment>
-        <span
-          @click="
-            handleClickComment(
-              reply.tid,
-              reply.rid,
-              reply.r_user.uid,
-              reply.r_user.name
-            )
-          "
-          class="comment"
-          v-tooltip="{
-            message: { en: 'Comment', zh: '评论' },
-            position: 'bottom'
-          }"
-        >
-          <Icon name="uil:comment-dots" />
-        </span>
-      </template>
-    </TopicFooter>
+    <TopicReplyFooter :reply="reply" :title="title" />
 
     <TopicComment :rid="reply.rid" :comments-data="reply.comment" />
   </div>

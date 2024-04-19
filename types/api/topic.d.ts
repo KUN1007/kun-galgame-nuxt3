@@ -46,7 +46,10 @@ export interface TopicDetail {
     count: number
     isDisliked: boolean
   }
-  favorites: number[]
+  favorites: {
+    count: number
+    isFavorite: boolean
+  }
   time: number
   content: string
   upvotes: {
@@ -62,5 +65,5 @@ export interface TopicDetail {
   category: string[]
   section: string[]
   popularity: number
-  upvote_time: number
+  upvoteTime: number
 }
