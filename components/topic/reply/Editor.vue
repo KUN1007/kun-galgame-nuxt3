@@ -24,7 +24,7 @@ const saveMarkdown = debounce((editorMarkdown: string) => {
   } else {
     replyDraft.value.content = editorMarkdown
   }
-}, 1007)
+}, 107)
 </script>
 
 <template>

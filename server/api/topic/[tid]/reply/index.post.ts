@@ -13,7 +13,7 @@ const readReplyData = async (event: H3Event) => {
   const { toUid, toFloor, tags, content, time }: TopicCreateReplyRequestData =
     await readBody(event)
 
-  const res = checkReplyPublish(tags, content, parseInt(time))
+  const res = checkReplyPublish(tags, content, time)
   if (res) {
     return kunError(event, res)
   }
@@ -90,10 +90,10 @@ export default defineEventHandler(async (event) => {
       await createTagsByTidAndRid(tid, newReply.rid, tags, [])
     }
 
-    if (uid.toString() !== toUid) {
+    if (uid !== toUid) {
       await createMessage(
         uid,
-        parseInt(toUid),
+        toUid,
         'replied',
         newReply.content.slice(0, 233),
         tid

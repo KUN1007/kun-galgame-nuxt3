@@ -34,7 +34,7 @@ const handlePublish = async () => {
   }
   const reply = await $fetch(`/api/topic/${tid.value}/reply`, {
     method: 'POST',
-    body: { ...replyDraft, time: Date.now() },
+    body: { ...replyDraft.value, time: Date.now() },
     watch: false,
     ...kungalgameResponseHandler
   })

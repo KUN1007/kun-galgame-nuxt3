@@ -21,7 +21,7 @@ if (routeName.value === 'edit-topic') {
 
 if (routeName.value === 'topic-tid') {
   if (isReplyRewriting.value) {
-    selectedTags.value = replyRewrite.value.tags
+    selectedTags.value = replyRewrite.value[0].tags
   } else {
     selectedTags.value = replyDraft.value.tags
   }

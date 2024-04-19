@@ -35,11 +35,11 @@ export interface TopicReply {
 }
 
 export interface TopicCreateReplyRequestData {
-  toUid: string
-  toFloor: string
+  toUid: number
+  toFloor: number
   tags: string[]
   content: string
-  time: string
+  time: number
 }
 
 export interface TopicUpdateReplyRequestData {

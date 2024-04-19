@@ -19,6 +19,8 @@ export const useMessage = (
   duration?: number,
   richText?: boolean
 ) => {
+  let timeout: NodeJS.Timeout | null = null
+
   messageCount.value++
   render(null, document.body)
 
@@ -32,7 +34,10 @@ export const useMessage = (
 
   const time = duration || 3000
 
-  setTimeout(() => {
+  if (timeout) {
+    clearTimeout(timeout)
+  }
+  timeout = setTimeout(() => {
     messageCount.value--
 
     if (!messageCount.value) {

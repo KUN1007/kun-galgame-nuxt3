@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { TopicDetail } from '~/types/api/topic'
 
-const { isScrollToTop, scrollToReplyId } = storeToRefs(useTempReplyStore())
+const { isScrollToTop, scrollToReplyId, tempReply } =
+  storeToRefs(useTempReplyStore())
 
 const props = defineProps<{
   tid: number
@@ -51,31 +52,54 @@ watch(
   }
 )
 
+const scrollPage = (rid: number) => {
+  if (!content.value) {
+    return
+  }
+
+  let timeout: NodeJS.Timeout | null = null
+  const childElement = content.value.querySelector(
+    `#kungalgame-reply-${rid}`
+  ) as HTMLElement
+
+  if (childElement) {
+    childElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    childElement.classList.add('active')
+
+    if (timeout !== null) {
+      clearTimeout(timeout)
+    }
+    timeout = setTimeout(() => {
+      childElement.classList.remove('active')
+    }, 3000)
+  } else {
+    useMessage(
+      'This reply cannot be found temporarily. Please turn the page',
+      '暂时找不到该回复，请翻页',
+      'info'
+    )
+  }
+}
+
 watch(
   () => scrollToReplyId.value,
   async () => {
-    if (content.value && scrollToReplyId.value !== -1) {
-      const childElement = content.value.querySelector(
-        `#kungalgame-reply-${scrollToReplyId.value}`
-      ) as HTMLElement
-
-      if (childElement) {
-        childElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        childElement.classList.add('active')
-
-        await new Promise((resolve) => {
-          setTimeout(resolve, 3000)
-        })
-
-        childElement.classList.remove('active')
-      } else {
-        useMessage(
-          'This reply cannot be found temporarily. Please turn the page',
-          '暂时找不到该回复，请翻页',
-          'info'
-        )
-      }
+    if (scrollToReplyId.value !== -1) {
+      await nextTick()
+      scrollPage(scrollToReplyId.value)
       scrollToReplyId.value = -1
+    }
+  }
+)
+
+watch(
+  () => tempReply.value[0],
+  async () => {
+    if (tempReply.value[0]) {
+      data.value?.repliesData.push(tempReply.value[0])
+      await nextTick()
+      scrollPage(tempReply.value[0].floor)
+      tempReply.value = []
     }
   }
 )
