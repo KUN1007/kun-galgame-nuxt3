@@ -54,13 +54,13 @@ const handleClick = () => {
         :class="sortOrder === 'asc' ? 'active' : ''"
         @click="sortOrder = 'asc'"
       >
-        {{ $t('galgame.asc') }}
+        <Icon name="lucide:arrow-up" />
       </span>
       <span
         :class="sortOrder === 'desc' ? 'active' : ''"
         @click="sortOrder = 'desc'"
       >
-        {{ $t('galgame.desc') }}
+        <Icon name="lucide:arrow-down" />
       </span>
     </div>
   </div>
@@ -108,17 +108,19 @@ const handleClick = () => {
   padding: 10px 0;
   margin-left: auto;
 
+  .icon {
+    font-size: 20px;
+  }
+
   span {
     cursor: pointer;
     padding: 3px 10px;
     margin-right: 5px;
-    border: 2px solid transparent;
     border-radius: 10px;
   }
 
   .active {
-    border: 2px solid var(--kungalgame-blue-5);
-    background-color: var(--kungalgame-trans-blue-0);
+    box-shadow: var(--kungalgame-shadow-0);
   }
 }
 </style>

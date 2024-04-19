@@ -452,38 +452,6 @@
     "rePwd": "Confirm Password",
     "confirm": "Confirm"
   },
-  "router":{
-    "login": "Login",
-    "forget": "Forgot Password",
-    "contact": "Contact Us",
-    "donate": "Donate Us",
-    "agreement": "User Agreement",
-    "privacy": "Privacy",
-    "redirect": "Redirect",
-    "kungalgame403": "403 Permission Denied",
-    "kungalgame404": "404 Not Found",
-
-    "home": "Home",
-    "balance": "P & L",
-    "edit": "Edit",
-    "about": "About",
-    "userInfo": "Info",
-    "userSettings": "Settings",
-    "userPassword": "Password",
-    "userPublished": "Published Topic",
-    "userLiked": "Liked Topic",
-    "userUpvote": "Upvote Topic",
-    "userReply": "Reply",
-    "userComment": "Comment",
-    "nonMoe": "Non-MoeMoe!",
-    "pool": "Pool",
-    "ranking": "Ranking",
-    "regulations": "Regulations",
-    "technique": "Technique",
-    "thanks": "Thinks List",
-    "topics": "Topics",
-    "update": "Update Log"
-  },
   "ranking":{
     "asc": "Ascending",
     "desc": "Descending",
@@ -522,9 +490,9 @@
   "pool":{
     "load": "Click to Load More Topics",
     "complete": "Already there's nothing left...",
-    "view": "Sort by Views",
-    "like": "Sort by Likes",
-    "time": "Sort by Time"
+    "views": "Views",
+    "likes": "Likes",
+    "time": "Time"
   },
   "technique":{
     "prev": "Prev",

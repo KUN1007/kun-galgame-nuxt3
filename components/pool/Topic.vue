@@ -46,13 +46,19 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
   cursor: pointer;
   max-width: 300px;
   padding: 10px;
-  border: 2px solid var(--kungalgame-trans-blue-2);
   border-radius: 10px;
   backdrop-filter: blur(10px);
   background-color: var(--kungalgame-trans-white-5);
+  transition: all 0.2s;
 
   &:hover {
-    border: 2px solid var(--kungalgame-blue-5);
+    box-shadow: var(--kungalgame-shadow-0);
+    transform: translateY(-7px);
+    z-index: 1;
+
+    .title {
+      color: var(--kungalgame-blue-5);
+    }
   }
 }
 
@@ -64,8 +70,7 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
   -webkit-line-clamp: 2;
   margin: 0 auto;
   margin-bottom: 10px;
-  font-weight: bold;
-  color: var(--kungalgame-blue-5);
+  color: var(--kungalgame-font-color-3);
   flex-shrink: 0;
 }
 

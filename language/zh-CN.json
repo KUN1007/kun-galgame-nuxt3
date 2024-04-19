@@ -454,38 +454,6 @@
     "rePwd": "确认密码",
     "confirm": "确定更改"
   },
-  "router":{
-    "login": "登录",
-    "forget": "忘记密码",
-    "contact": "联系我们",
-    "donate": "赞助我们",
-    "agreement": "用户协议",
-    "privacy": "隐私政策",
-    "redirect": "重定向",
-    "kungalgame403": "403 无权访问",
-    "kungalgame404": "404 页面未找到",
-
-    "home": "主页",
-    "balance": "收支公示",
-    "edit": "编辑",
-    "about": "关于我们",
-    "userInfo": "个人信息",
-    "userSettings": "信息设置",
-    "userPassword": "邮箱密码",
-    "userPublished": "发的话题",
-    "userLiked": "赞的话题",
-    "userUpvote": "推的话题",
-    "userReply": "发的回复",
-    "userComment": "发的评论",
-    "nonMoe": "不萌萌!",
-    "pool": "话题池",
-    "ranking": "排行榜",
-    "regulations": "执行条例",
-    "technique": "技术交流",
-    "thanks": "感谢名单",
-    "topics": "话题",
-    "update": "更新日志"
-  },
   "ranking":{
     "asc": "升序",
     "desc": "降序",
@@ -524,9 +492,9 @@
   "pool":{
     "load": "点击继续加载话题",
     "complete": "已经。。。一滴也不剩了",
-    "view": "按浏览数排序",
-    "like": "按点赞数排序",
-    "time": "按照时间排序"
+    "views": "浏览",
+    "likes": "点赞",
+    "time": "时间"
   },
   "technique":{
     "prev": "上一页",

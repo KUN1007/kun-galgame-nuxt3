@@ -49,7 +49,7 @@ const handleSetOption = (value: string, index: number) => {
           :key="index"
           @click.stop.prevent="handleSetOption(kun, index)"
         >
-          <span>{{ $t(`${props.i18n}.${kun}`) }}</span>
+          <span>{{ $t(`${i18n}.${kun}`) }}</span>
           <span v-if="checkedValue === kun">
             <Icon name="lucide:check" />
           </span>

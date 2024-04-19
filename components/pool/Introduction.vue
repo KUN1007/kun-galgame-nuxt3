@@ -24,15 +24,8 @@ const props = defineProps<{
   .tags {
     margin: 3px;
     padding: 3px 17px;
-    background-color: var(--kungalgame-trans-blue-0);
     border: 1px solid var(--kungalgame-blue-5);
     border-radius: 14px;
-    cursor: pointer;
-
-    &:hover {
-      color: var(--kungalgame-white);
-      background-color: var(--kungalgame-blue-5);
-    }
   }
 }
 </style>

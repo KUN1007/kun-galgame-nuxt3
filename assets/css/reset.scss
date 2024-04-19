@@ -10,8 +10,6 @@
 /* Reset default CSS styles for all elements */
 * {
   box-sizing: border-box;
-  scrollbar-width: none;
-  scrollbar-color: var(--kungalgame-blue-5) var(--kungalgame-trans-white-9);
 
   &::selection {
     background-color: var(
@@ -22,6 +20,29 @@
 
   &:focus {
     outline: none;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--kungalgame-blue-5);
+  border-radius: 5px;
+}
+
+@media (max-width: 700px) {
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+
+  * {
+    scrollbar-color: var(--kungalgame-blue-5) var(--kungalgame-trans-white-9);
   }
 }
 
