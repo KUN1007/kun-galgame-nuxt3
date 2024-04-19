@@ -8,10 +8,8 @@ const props = defineProps<{
   tid: number
   topic: TopicDetail
 }>()
-const content = ref<HTMLElement>()
-const isExecuteScrollToReplyAnimate = ref(false)
-const scrollHeight = ref(0)
 
+const content = ref<HTMLElement>()
 const pageData = reactive({
   page: 1,
   limit: 17,
@@ -42,7 +40,6 @@ watch(
   () => isScrollToTop.value,
   () => {
     if (content.value) {
-      scrollHeight.value = 0
       window?.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -59,7 +56,7 @@ const scrollPage = (rid: number) => {
 
   let timeout: NodeJS.Timeout | null = null
   const childElement = content.value.querySelector(
-    `#kungalgame-reply-${rid}`
+    `#kungal-reply-${rid}`
   ) as HTMLElement
 
   if (childElement) {
@@ -107,14 +104,6 @@ watch(
 
 <template>
   <div ref="content">
-    <Transition
-      enter-active-class="animate__animated animate__fadeInDown animate__faster"
-    >
-      <div class="title-scroll" v-if="scrollHeight > 400">
-        {{ topic.title }}
-      </div>
-    </Transition>
-
     <TopicMaster :topic="topic" />
 
     <div class="tool" v-if="data && data.totalCount > 5" id="tool">
@@ -149,11 +138,7 @@ watch(
       </div>
     </div>
 
-    <div
-      v-if="data"
-      :title="topic.title"
-      :is-execute-scroll-to-reply-animate="isExecuteScrollToReplyAnimate"
-    >
+    <div v-if="data">
       <TopicReply
         v-for="reply in data.repliesData"
         :key="reply.rid"
@@ -237,23 +222,6 @@ watch(
       box-shadow: var(--kungalgame-shadow-0);
     }
   }
-}
-
-.title-scroll {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 17px;
-  font-weight: bold;
-  color: var(--kungalgame-font-color-3);
-  background-color: var(--kungalgame-trans-white-2);
-  border: 1px solid var(--kungalgame-blue-5);
-  border-radius: 10px;
-  z-index: 1;
 }
 
 .pagination {

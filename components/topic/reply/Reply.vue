@@ -14,10 +14,12 @@ defineProps<{
   <div
     class="reply"
     :class="hourDiff(reply.upvoteTime, 10) ? 'active-upvote' : ''"
-    :id="`kungalgame-reply-${reply.floor}`"
+    :id="`kungal-reply-${reply.floor}`"
   >
     <div class="floor">
-      <span>K{{ reply.floor }}</span>
+      <NuxtLinkLocale :to="`/topic/${reply.tid}#kungal-reply-${reply.floor}`">
+        K{{ reply.floor }}
+      </NuxtLinkLocale>
     </div>
 
     <div class="content">
@@ -96,10 +98,10 @@ defineProps<{
   display: flex;
   font-weight: bold;
   font-style: oblique;
-  color: var(--kungalgame-red-3);
   border-bottom: none;
 
-  span {
+  a {
+    color: var(--kungalgame-red-3);
     padding: 0 10px;
     text-align: center;
     font-size: 20px;
