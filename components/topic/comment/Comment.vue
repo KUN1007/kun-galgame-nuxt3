@@ -137,7 +137,6 @@ const handleClickComment = (comment: TopicComment) => {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 10px;
 
     .icon {
       cursor: pointer;

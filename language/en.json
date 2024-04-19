@@ -515,8 +515,6 @@
     "publish": "Published at"
   },
   "galgame": {
-    "asc": "Ascending",
-    "desc": "Descending",
     "null": "This entry is currently empty.",
     "welcome": "Contributions are welcome.",
     "banner": {
@@ -607,8 +605,6 @@
     "contributors": "Contributors",
     "comment": {
       "name": "Comments",
-      "asc": "Ascending",
-      "desc": "Descending",
       "to": "Comment to",
       "publish": "Publish Comment",
       "sad": "No one commented. Does this mean no one want to love this visualnovel's moe and soft lass? Wail..."

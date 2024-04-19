@@ -516,8 +516,6 @@
     "publish": "发布于"
   },
   "galgame": {
-    "asc": "升序",
-    "desc": "降序",
     "null": "该条目暂时为空",
     "welcome": "欢迎贡献条目",
     "banner": {
@@ -608,8 +606,6 @@
     "contributors": "贡献者",
     "comment": {
       "name": "评论",
-      "asc": "升序",
-      "desc": "降序",
       "to": "评论给",
       "publish": "发布评论",
       "sad": "没人评论, 是没人要这个 Galgame 的小只可爱软萌妹子了吗, 呜呜呜..."

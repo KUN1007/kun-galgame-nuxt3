@@ -55,6 +55,7 @@ const handleClickLike = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 10px;
 
   .icon {
     cursor: pointer;

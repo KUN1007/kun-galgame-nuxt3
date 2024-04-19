@@ -138,13 +138,13 @@ watch(
           :class="pageData.sortOrder === 'asc' ? 'active' : ''"
           @click="pageData.sortOrder = 'asc'"
         >
-          {{ $t('galgame.asc') }}
+          <Icon name="lucide:arrow-up" />
         </span>
         <span
           :class="pageData.sortOrder === 'desc' ? 'active' : ''"
           @click="pageData.sortOrder = 'desc'"
         >
-          {{ $t('galgame.desc') }}
+          <Icon name="lucide:arrow-down" />
         </span>
       </div>
     </div>
@@ -226,13 +226,15 @@ watch(
       cursor: pointer;
       padding: 3px 10px;
       margin-right: 5px;
-      border: 2px solid transparent;
       border-radius: 10px;
     }
 
+    .icon {
+      font-size: 20px;
+    }
+
     .active {
-      border: 2px solid var(--kungalgame-blue-5);
-      background-color: var(--kungalgame-trans-blue-0);
+      box-shadow: var(--kungalgame-shadow-0);
     }
   }
 }

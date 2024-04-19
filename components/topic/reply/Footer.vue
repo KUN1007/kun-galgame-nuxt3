@@ -126,10 +126,6 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
   }
 }
 
-.views {
-  margin-left: 17px;
-}
-
 .icon {
   font-size: 24px;
   color: var(--kungalgame-font-color-2);
@@ -144,6 +140,10 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
   span {
     display: flex;
     margin-right: 17px;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 
