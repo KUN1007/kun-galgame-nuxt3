@@ -19,7 +19,7 @@ export interface TopicLikeCommentRequestData {
 }
 
 export interface TopicCreateCommentRequestData {
-  rid: string
-  toUid: string
+  rid: number
+  toUid: number
   content: string
 }

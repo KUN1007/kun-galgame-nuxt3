@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
   const { rid, content, tags, edited }: TopicUpdateReplyRequestData =
     await readBody(event)
 
-  const result = checkReplyPublish(tags, content, parseInt(edited))
+  const result = checkReplyPublish(tags, content, edited)
   if (result) {
     return kunError(event, result)
   }
@@ -46,14 +46,7 @@ export default defineEventHandler(async (event) => {
   }
   const uid = userInfo.uid
 
-  await updateReply(
-    uid,
-    parseInt(tid),
-    parseInt(rid),
-    content,
-    tags,
-    parseInt(edited)
-  )
+  await updateReply(uid, parseInt(tid), rid, content, tags, edited)
 
   return 'MOEMOE update reply successfully!'
 })

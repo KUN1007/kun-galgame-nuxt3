@@ -43,8 +43,8 @@ export interface TopicCreateReplyRequestData {
 }
 
 export interface TopicUpdateReplyRequestData {
-  rid: string
+  rid: number
   content: string
   tags: string[]
-  edited: string
+  edited: number
 }

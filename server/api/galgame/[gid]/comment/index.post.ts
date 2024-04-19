@@ -4,7 +4,7 @@ import GalgameCommentModel from '~/server/models/galgame-comment'
 import type { H3Event } from 'h3'
 
 const readReplyData = async (event: H3Event) => {
-  const { toUid, content }: { toUid: string; content: string } =
+  const { toUid, content }: { toUid: number; content: string } =
     await readBody(event)
   if (!content) {
     return kunError(event, 10507)
@@ -27,7 +27,7 @@ const readReplyData = async (event: H3Event) => {
   return {
     gid: parseInt(gid),
     c_uid: uid,
-    to_uid: toUid ? parseInt(toUid) : 0,
+    to_uid: toUid,
     content
   }
 }

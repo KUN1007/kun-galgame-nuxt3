@@ -5,7 +5,7 @@ import UserModel from '~/server/models/user'
 import type { H3Event } from 'h3'
 
 const checkMerge = async (event: H3Event) => {
-  const { gprid }: { gprid: string } = await readBody(event)
+  const { gprid }: { gprid: number } = await readBody(event)
   if (!gprid) {
     return kunError(event, 10507)
   }

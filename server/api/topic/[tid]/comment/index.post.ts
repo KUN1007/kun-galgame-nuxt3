@@ -33,10 +33,10 @@ const readReplyData = async (event: H3Event) => {
   }
 
   return {
-    rid: parseInt(rid),
+    rid,
     tid: parseInt(tid),
     c_uid: userInfo.uid,
-    to_uid: parseInt(toUid),
+    to_uid: toUid,
     content
   }
 }

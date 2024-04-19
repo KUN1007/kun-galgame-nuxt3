@@ -13,6 +13,5 @@
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  scrollbar-width: thin;
 }
 </style>

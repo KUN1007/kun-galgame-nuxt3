@@ -8,11 +8,6 @@ defineProps<{
 }>()
 
 const { locale } = useI18n()
-
-const route = useRoute()
-const gid = computed(() => {
-  return parseInt((route.params as { gid: string }).gid)
-})
 const isShowComment = ref(false)
 </script>
 
@@ -32,13 +27,12 @@ const isShowComment = ref(false)
             {{ `${comment.toUser.name}` }}
           </NuxtLinkLocale>
         </div>
-
-        <span class="reply" @click="isShowComment = !isShowComment">
-          <Icon name="lucide:reply" />
-        </span>
       </div>
 
       <div class="action">
+        <span class="reply" @click="isShowComment = !isShowComment">
+          <Icon name="lucide:reply" />
+        </span>
         <GalgameCommentLike :comment="comment" />
       </div>
     </div>
@@ -82,13 +76,6 @@ const isShowComment = ref(false)
       margin: 0 10px;
       color: var(--kungalgame-font-color-0);
     }
-
-    .reply {
-      cursor: pointer;
-      color: var(--kungalgame-blue-5);
-      font-size: 20px;
-      margin-left: 10px;
-    }
   }
 
   .action {
@@ -96,6 +83,15 @@ const isShowComment = ref(false)
     display: flex;
     align-items: center;
     color: var(--kungalgame-font-color-2);
+
+    .reply {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: var(--kungalgame-blue-5);
+      font-size: 20px;
+      margin-right: 10px;
+    }
   }
 }
 

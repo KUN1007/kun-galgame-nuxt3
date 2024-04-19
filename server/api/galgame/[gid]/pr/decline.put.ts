@@ -5,7 +5,7 @@ import UserModel from '~/server/models/user'
 import type { H3Event } from 'h3'
 
 const checkUpdate = async (event: H3Event) => {
-  const { gprid, note }: { gprid: string; note: string } = await readBody(event)
+  const { gprid, note }: { gprid: number; note: string } = await readBody(event)
   if (!gprid || !note) {
     return kunError(event, 10507)
   }
