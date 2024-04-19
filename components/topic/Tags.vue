@@ -18,6 +18,7 @@ const props = defineProps<{
   flex-wrap: wrap;
   align-items: center;
   color: var(--kungalgame-font-color-3);
+  user-select: text;
 
   span {
     margin: 3px;

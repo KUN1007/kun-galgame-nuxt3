@@ -1,36 +1,13 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
-
 import type { TopicReply } from '~/types/api/topic-reply'
 
-const { moemoeAccessToken } = usePersistUserStore()
 const { scrollToReplyId } = storeToRefs(useTempReplyStore())
-
-const { rid, toUid, toUsername } = storeToRefs(useTempCommentStore())
 
 defineProps<{
   reply: TopicReply
   title: string
 }>()
-
-const isCommentPanelOpen = ref(false)
-
-const handleClickComment = (
-  topicId: number,
-  replyIid: number,
-  uid: number,
-  name: string
-) => {
-  if (!moemoeAccessToken) {
-    useMessage('You need to login to comment', '您需要登录以评论', 'warn', 5000)
-    return
-  }
-  isCommentPanelOpen.value = !isCommentPanelOpen.value
-
-  rid.value = replyIid
-  toUid.value = uid
-  toUsername.value = name
-}
 </script>
 
 <template>
@@ -230,7 +207,7 @@ const handleClickComment = (
 }
 
 .active {
-  border: 2px solid var(--kungalgame-red-4);
+  box-shadow: 0 0 0 2px var(--kungalgame-red-4) inset;
   border-radius: 10px;
   background-color: var(--kungalgame-trans-blue-0);
 }
@@ -267,4 +244,3 @@ const handleClickComment = (
   }
 }
 </style>
-~/types/api/topic-reply

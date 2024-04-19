@@ -5,6 +5,23 @@ defineProps<{
   title: string
   reply: TopicReply
 }>()
+
+const { moemoeAccessToken } = usePersistUserStore()
+const { rid, toUid, toUsername, isShowPanel } = storeToRefs(
+  useTempCommentStore()
+)
+
+const handleClickComment = (replyIid: number, uid: number, name: string) => {
+  if (!moemoeAccessToken) {
+    useMessage('You need to login to comment', '您需要登录以评论', 'warn', 5000)
+    return
+  }
+
+  rid.value = replyIid
+  toUid.value = uid
+  toUsername.value = name
+  isShowPanel.value = !isShowPanel.value
+}
 </script>
 
 <template>
@@ -73,6 +90,17 @@ defineProps<{
           position: 'bottom'
         }"
       />
+
+      <span
+        @click="handleClickComment(reply.rid, reply.user.uid, reply.user.name)"
+        class="comment"
+        v-tooltip="{
+          message: { en: 'Comment', zh: '评论' },
+          position: 'bottom'
+        }"
+      >
+        <Icon name="uil:comment-dots" />
+      </span>
     </div>
   </div>
 </template>

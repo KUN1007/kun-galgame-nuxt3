@@ -7,18 +7,26 @@ const props = defineProps<{
   rid: number
   commentsData: TopicComment[]
 }>()
+
 const comments = ref(props.commentsData)
-const toUser = ref()
 
 const currentUserUid = usePersistUserStore().uid
-const isShowPanel = ref(false)
+const {
+  rid: storeRid,
+  toUid,
+  toUsername,
+  isShowPanel
+} = storeToRefs(useTempCommentStore())
 
 const handleClickComment = (comment: TopicComment) => {
   if (!currentUserUid) {
     useMessage('You need to login to comment', '您需要登录以评论', 'warn', 5000)
     return
   }
-  toUser.value = comment.user
+
+  storeRid.value = props.rid
+  toUid.value = comment.user.uid
+  toUsername.value = comment.user.name
   isShowPanel.value = !isShowPanel.value
 }
 </script>
@@ -65,11 +73,9 @@ const handleClickComment = (comment: TopicComment) => {
     </div>
 
     <CommentPanel
-      v-if="isShowPanel"
+      v-if="isShowPanel && rid === storeRid"
       :rid="rid"
-      :to-user="toUser"
       @get-comment="(newComment) => comments.push(newComment)"
-      @close="isShowPanel = false"
     />
   </div>
 </template>

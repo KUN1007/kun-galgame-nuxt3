@@ -3,4 +3,6 @@ export interface TopicComment {
   toUid: number
   toUsername: string
   content: string
+
+  isShowPanel: boolean
 }

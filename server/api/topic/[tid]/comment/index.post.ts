@@ -51,7 +51,7 @@ export default defineEventHandler(async (event) => {
   const session = await mongoose.startSession()
   session.startTransaction()
   try {
-    const newComment = new CommentModel({
+    const newComment = await CommentModel.create({
       rid,
       tid,
       c_uid,
@@ -59,13 +59,11 @@ export default defineEventHandler(async (event) => {
       content
     })
 
-    const savedComment = await newComment.save()
-
     const commentUser = await UserModel.findOneAndUpdate(
       {
         uid: c_uid
       },
-      { $addToSet: { comment: savedComment.cid } }
+      { $addToSet: { comment: newComment.cid } }
     )
     if (!commentUser) {
       return kunError(event, 10101)
@@ -88,17 +86,17 @@ export default defineEventHandler(async (event) => {
 
     await ReplyModel.findOneAndUpdate(
       { rid },
-      { $addToSet: { comment: savedComment.cid } }
+      { $addToSet: { comment: newComment.cid } }
     ).lean()
 
     if (c_uid !== to_uid) {
-      await createMessage(c_uid, to_uid, 'commented', savedComment.content, tid)
+      await createMessage(c_uid, to_uid, 'commented', newComment.content, tid)
     }
 
     const responseData: TopicComment = {
-      cid: savedComment.cid,
-      rid: savedComment.rid,
-      tid: savedComment.tid,
+      cid: newComment.cid,
+      rid: newComment.rid,
+      tid: newComment.tid,
       user: {
         uid: commentUser.uid,
         name: commentUser.name,
@@ -108,10 +106,10 @@ export default defineEventHandler(async (event) => {
         uid: toUser.uid,
         name: toUser.name
       },
-      content: savedComment.content,
+      content: newComment.content,
       likes: {
-        count: savedComment.likes.length,
-        isLiked: savedComment.likes.includes(c_uid)
+        count: newComment.likes.length,
+        isLiked: newComment.likes.includes(c_uid)
       }
     }
 

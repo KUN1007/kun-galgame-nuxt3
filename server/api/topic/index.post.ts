@@ -65,7 +65,7 @@ export default defineEventHandler(async (event) => {
   const session = await mongoose.startSession()
   session.startTransaction()
   try {
-    const newTopic = new TopicModel({
+    const newTopic = await TopicModel.create({
       title,
       content,
       time,
@@ -75,21 +75,19 @@ export default defineEventHandler(async (event) => {
       uid
     })
 
-    const savedTopic = await newTopic.save()
-
     await UserModel.updateOne(
       { uid },
       {
-        $addToSet: { topic: savedTopic.tid },
+        $addToSet: { topic: newTopic.tid },
         $inc: { daily_topic_count: 1 }
       }
     )
 
-    await createTagsByTidAndRid(savedTopic.tid, 0, tags, category)
+    await createTagsByTidAndRid(newTopic.tid, 0, tags, category)
 
     await session.commitTransaction()
 
-    return savedTopic.tid
+    return newTopic.tid
   } catch (error) {
     await session.abortTransaction()
   } finally {

@@ -3,18 +3,14 @@ import type { TopicComment } from '~/types/api/topic-comment'
 
 const props = defineProps<{
   rid: number
-  toUser: {
-    uid: number
-    name: string
-  }
 }>()
 
 const emits = defineEmits<{
   getComment: [newComment: TopicComment]
-  close: []
 }>()
 
-const { name } = storeToRefs(usePersistUserStore())
+const { name } = usePersistUserStore()
+const { toUid, toUsername, isShowPanel } = storeToRefs(useTempCommentStore())
 const tid = inject<number>('tid')
 const commentValue = ref('')
 const isPublishing = ref(false)
@@ -44,7 +40,7 @@ const handlePublishComment = async () => {
     method: 'POST',
     body: {
       rid: props.rid,
-      toUid: props.toUser.uid,
+      toUid: toUid.value,
       content: commentValue.value
     },
     watch: false,
@@ -54,8 +50,8 @@ const handlePublishComment = async () => {
 
   if (comment) {
     emits('getComment', comment)
-    emits('close')
     useMessage('Comment published successfully!', '评论发布成功', 'success')
+    isShowPanel.value = false
   }
 }
 </script>
@@ -66,13 +62,13 @@ const handlePublishComment = async () => {
       <div class="title">
         <span>{{ name }}</span>
         <span>{{ $t('topic.content.comment') }}</span>
-        <span>{{ toUser.name }}</span>
+        <span>{{ toUsername }}</span>
       </div>
       <div class="confirm">
         <button @click="handlePublishComment">
           {{ $t('topic.content.publish') }}
         </button>
-        <button @click="emits('close')">
+        <button @click="isShowPanel = false">
           {{ $t('topic.content.close') }}
         </button>
       </div>
@@ -187,4 +183,3 @@ const handlePublishComment = async () => {
   color: var(--kungalgame-font-color-1);
 }
 </style>
-~/types/api/topic-comment
