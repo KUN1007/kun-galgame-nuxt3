@@ -17,37 +17,35 @@ const handleClick = () => {
 
 <template>
   <div class="nav">
-    <div class="type">
-      <KunSelect
-        :styles="{ width: '150px' }"
-        :options="typeOptions"
-        i18n="edit.galgame.resource.type"
-        @set="handleClick"
-        position="bottom"
-      >
-        {{ $t(`edit.galgame.resource.type.${type}`) }}
-      </KunSelect>
+    <KunSelect
+      :styles="{ width: '150px' }"
+      :options="typeOptions"
+      i18n="edit.galgame.resource.type"
+      @set="handleClick"
+      position="bottom"
+    >
+      {{ $t(`edit.galgame.resource.type.${type}`) }}
+    </KunSelect>
 
-      <KunSelect
-        :styles="{ width: '150px' }"
-        :options="languageOptions"
-        i18n="edit.galgame.resource.language"
-        @set="handleClick"
-        position="bottom"
-      >
-        {{ $t(`edit.galgame.resource.language.${language}`) }}
-      </KunSelect>
+    <KunSelect
+      :styles="{ width: '150px' }"
+      :options="languageOptions"
+      i18n="edit.galgame.resource.language"
+      @set="handleClick"
+      position="bottom"
+    >
+      {{ $t(`edit.galgame.resource.language.${language}`) }}
+    </KunSelect>
 
-      <KunSelect
-        :styles="{ width: '150px' }"
-        :options="platformOptions"
-        i18n="edit.galgame.platform"
-        @set="handleClick"
-        position="bottom"
-      >
-        {{ $t(`edit.galgame.platform.${platform}`) }}
-      </KunSelect>
-    </div>
+    <KunSelect
+      :styles="{ width: '150px' }"
+      :options="platformOptions"
+      i18n="edit.galgame.platform"
+      @set="handleClick"
+      position="bottom"
+    >
+      {{ $t(`edit.galgame.platform.${platform}`) }}
+    </KunSelect>
 
     <div class="order">
       <span
@@ -70,7 +68,6 @@ const handleClick = () => {
 .nav {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   background-color: var(--kungalgame-trans-white-5);
   border-radius: 10px;
   box-shadow: var(--kungalgame-shadow-0);
@@ -91,11 +88,6 @@ const handleClick = () => {
     border-radius: 10px;
     backdrop-filter: blur(10px);
   }
-}
-
-.type {
-  display: flex;
-  flex-wrap: wrap;
 
   .kun-select {
     padding: 10px 0;
@@ -104,7 +96,6 @@ const handleClick = () => {
 
 .order {
   display: flex;
-  white-space: nowrap;
   padding: 10px 0;
   margin-left: auto;
 

@@ -29,7 +29,7 @@ export interface GalgameDetail {
 export interface GalgamePageRequestData {
   page: string
   limit: string
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 }
 
 export interface GalgameCard {
@@ -42,4 +42,5 @@ export interface GalgameCard {
   likes: number
   time: number
   platform: string[]
+  language: string[]
 }

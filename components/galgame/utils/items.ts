@@ -17,30 +17,3 @@ export const languageItems: Item[] = [
     value: 'zh-cn'
   }
 ]
-
-export const platformItems: Item[] = [
-  {
-    i18n: '',
-    value: 'windows'
-  },
-  {
-    i18n: '',
-    value: 'mac'
-  },
-  {
-    i18n: '',
-    value: 'linux'
-  },
-  {
-    i18n: '',
-    value: 'emulator'
-  },
-  {
-    i18n: '',
-    value: 'app'
-  },
-  {
-    i18n: '',
-    value: 'others'
-  }
-]

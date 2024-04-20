@@ -1,6 +1,5 @@
 import TopicModel from '~/server/models/topic'
 import type {
-  SortOrder,
   SortFieldPool,
   PoolTopicsRequestData,
   PoolTopic
@@ -10,7 +9,7 @@ const getPoolTopics = async (
   page: number,
   limit: number,
   sortField: SortFieldPool,
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 ) => {
   const skip = (page - 1) * limit
 
@@ -59,7 +58,7 @@ export default defineEventHandler(async (event) => {
     parseInt(page),
     parseInt(limit),
     sortField as SortFieldPool,
-    sortOrder as SortOrder
+    sortOrder as KunOrder
   )
 
   return topics

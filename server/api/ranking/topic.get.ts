@@ -1,7 +1,6 @@
 import TopicModel from '~/server/models/topic'
 import type {
   TopicSortFieldRanking,
-  SortOrder,
   RankingGetTopicsRequestData,
   RankingTopics
 } from '~/types/api/ranking'
@@ -10,7 +9,7 @@ const getTopicRanking = async (
   page: number,
   limit: number,
   sortField: TopicSortFieldRanking,
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 ) => {
   const skip = (page - 1) * limit
 

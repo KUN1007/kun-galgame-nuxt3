@@ -490,6 +490,7 @@
     "publish": "Published at"
   },
   "galgame": {
+    "declaration": "We are not the providers of resources, we are just the guides to resources",
     "null": "This entry is currently empty.",
     "welcome": "Contributions are welcome.",
     "banner": {

@@ -8,8 +8,6 @@ export type SortField =
   | 'replies'
   | 'comments'
 
-export type SortOrder = 'asc' | 'desc'
-
 export type SortFieldRanking =
   | 'popularity'
   | 'views'

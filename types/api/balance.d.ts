@@ -1,5 +1,4 @@
 type SortField = 'time' | 'amount'
-type SortOrder = 'asc' | 'desc'
 export type BalanceType = 'income' | 'expenditure'
 
 export interface BalanceRequestData {
@@ -8,7 +7,7 @@ export interface BalanceRequestData {
   type: BalanceType
   language: Language
   sortField: SortField
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 }
 
 export interface Balance {

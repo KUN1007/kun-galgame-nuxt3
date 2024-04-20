@@ -2,7 +2,6 @@ import MessageModel from '~/server/models/message'
 import type {
   MessageType,
   SortField,
-  SortOrder,
   MessageRequestData,
   Message
 } from '~/types/api/message'
@@ -13,7 +12,7 @@ const getMessages = async (
   limit: number,
   type: MessageType | '',
   sortField: SortField,
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 ) => {
   const skip = (page - 1) * limit
 

@@ -12,6 +12,10 @@ const { data, pending } = await useFetch(`/api/galgame`, {
   <div class="container">
     <GalgameCard v-if="data?.galgames" :galgames="data?.galgames" />
 
+    <div class="declaration">
+      {{ $t('galgame.declaration') }}
+    </div>
+
     <KunPagination
       class="pagination"
       v-if="data?.totalCount"
@@ -31,5 +35,13 @@ const { data, pending } = await useFetch(`/api/galgame`, {
   border-radius: 10px;
   box-shadow: var(--kungalgame-shadow-0);
   padding: 17px;
+}
+
+.declaration {
+  user-select: none;
+  margin-top: 17px;
+  text-align: center;
+  font-size: small;
+  color: var(--kungalgame-font-color-0);
 }
 </style>

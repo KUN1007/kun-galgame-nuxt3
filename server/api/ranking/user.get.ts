@@ -1,7 +1,6 @@
 import UserModel from '~/server/models/user'
 import type {
   UserSortFieldRanking,
-  SortOrder,
   RankingGetUserRequestData,
   RankingUsers
 } from '~/types/api/ranking'
@@ -10,7 +9,7 @@ const getUserRanking = async (
   page: number,
   limit: number,
   sortField: UserSortFieldRanking,
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 ) => {
   const skip = (page - 1) * limit
 

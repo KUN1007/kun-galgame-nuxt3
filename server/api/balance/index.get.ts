@@ -1,7 +1,6 @@
 import BalanceModel from '~/server/models/balance'
 import type {
   SortField,
-  SortOrder,
   BalanceType,
   BalanceRequestData,
   Balance
@@ -13,7 +12,7 @@ const getBalanceData = async (
   type: BalanceType,
   language: Language,
   sortField: SortField,
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 ) => {
   const skip = (page - 1) * limit
 
@@ -57,7 +56,7 @@ export default defineEventHandler(async (event) => {
     type,
     language,
     sortField as SortField,
-    sortOrder as SortOrder
+    sortOrder as KunOrder
   )
 
   return balanceData

@@ -4,7 +4,7 @@ import type { GalgamePageRequestData, GalgameCard } from '~/types/api/galgame'
 const getGalgames = async (
   page: number,
   limit: number,
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 ) => {
   const skip = (page - 1) * limit
 
@@ -32,7 +32,8 @@ const getGalgames = async (
     likes: galgame.likes.length,
     favorites: galgame.favorites.length,
     time: galgame.time,
-    platform: galgame.platform
+    platform: galgame.platform,
+    language: galgame.language
   }))
 
   return { galgames, totalCount }
@@ -51,7 +52,7 @@ export default defineEventHandler(async (event) => {
   const galgames = await getGalgames(
     parseInt(page),
     parseInt(limit),
-    sortOrder as SortOrder
+    sortOrder as KunOrder
   )
 
   return galgames

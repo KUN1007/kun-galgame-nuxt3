@@ -8,8 +8,6 @@ export type SortField =
   | 'replies'
   | 'comments'
 
-export type SortOrder = 'asc' | 'desc'
-
 export type SortFieldRanking =
   | 'popularity'
   | 'views'
@@ -35,7 +33,7 @@ export interface SearchTopicRequestData {
   page: string
   limit: string
   sortField: SortField
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 }
 
 export interface HomeUserStatus {
@@ -61,7 +59,7 @@ export interface HomeTopicRequestData {
   page: string
   limit: string
   sortField: SortField
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 }
 
 export interface HomePinnedTopic {

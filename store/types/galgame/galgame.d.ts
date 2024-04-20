@@ -4,5 +4,5 @@ export interface GalgameStorePersist {
   type: string
   language: Language
   platform: string
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 }

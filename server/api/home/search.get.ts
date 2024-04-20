@@ -1,9 +1,5 @@
 import TopicModel from '~/server/models/topic'
-import type {
-  SortField,
-  SortOrder,
-  SearchTopicRequestData
-} from '~/types/api/home'
+import type { SortField, SearchTopicRequestData } from '~/types/api/home'
 
 const searchTopics = async (
   keywords: string,
@@ -11,7 +7,7 @@ const searchTopics = async (
   page: number,
   limit: number,
   sortField: SortField,
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 ) => {
   const skip = (page - 1) * limit
   const keywordsArray: string[] = keywords

@@ -14,14 +14,12 @@ export type MessageStatus = 'read' | 'unread'
 
 export type SortField = 'time'
 
-export type SortOrder = 'asc' | 'desc'
-
 export interface MessageRequestData {
   page: string
   limit: string
   type?: MessageType | ''
   sortField?: SortField
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 }
 
 export interface Message {

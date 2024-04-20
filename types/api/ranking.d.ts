@@ -1,5 +1,3 @@
-type SortOrder = 'asc' | 'desc'
-
 type TopicSortFieldRanking =
   | 'popularity'
   | 'views'
@@ -20,7 +18,7 @@ export interface RankingGetTopicsRequestData {
   page: string
   limit: string
   sortField: TopicSortFieldRanking
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 }
 
 export interface RankingTopics {
@@ -33,7 +31,7 @@ export interface RankingGetUserRequestData {
   page: string
   limit: string
   sortField: UserSortFieldRanking
-  sortOrder: SortOrder
+  sortOrder: KunOrder
 }
 
 export interface RankingUsers {
