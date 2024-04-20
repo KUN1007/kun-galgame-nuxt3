@@ -34,9 +34,10 @@ watch(
 
 <style lang="scss" scoped>
 .aside {
+  flex-shrink: 0;
   margin-right: 17px;
   width: v-bind('asideWidth');
-  height: 100%;
+  height: calc(100dvh - 75px);
   display: flex;
   flex-direction: column;
   transition: width 0.5s;

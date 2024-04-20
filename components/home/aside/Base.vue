@@ -3,7 +3,7 @@ import { asideItem } from '../utils/asideItem'
 </script>
 
 <template>
-  <div class="aside">
+  <div class="base">
     <span
       v-for="kun in asideItem"
       :key="kun.index"
@@ -25,11 +25,10 @@ import { asideItem } from '../utils/asideItem'
 </template>
 
 <style lang="scss" scoped>
-.aside {
+.base {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
   border-radius: 20px;
   background-color: var(--kungalgame-trans-white-5);
   box-shadow: var(--kungalgame-shadow-0);

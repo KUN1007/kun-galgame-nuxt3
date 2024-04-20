@@ -98,8 +98,6 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="content" ref="content">
-    <HomePinned :topics="data" v-if="data?.length" />
-
     <div class="tool">
       <KunNav
         class="nav"
@@ -118,6 +116,8 @@ onBeforeUnmount(() => {
         </NuxtLinkLocale>
       </div>
     </div>
+
+    <HomePinned :topics="data" v-if="data?.length" />
 
     <div
       v-for="(kun, index) in topics"
@@ -142,7 +142,8 @@ onBeforeUnmount(() => {
 @use '~/assets/css/effect/effect.scss';
 .content {
   width: 100%;
-  height: calc(100vh - 75px);
+  height: calc(100dvh - 75px);
+  min-height: 777px;
   padding: 17px;
   overflow-y: scroll;
   display: flex;

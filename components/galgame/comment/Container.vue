@@ -12,11 +12,11 @@ const pageData = reactive({
 
 const orderItems = [
   {
-    i18n: 'galgame.comment.asc',
+    icon: 'lucide:arrow-up',
     value: 'asc'
   },
   {
-    i18n: 'galgame.comment.desc',
+    icon: 'lucide:arrow-down',
     value: 'desc'
   }
 ]
