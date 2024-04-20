@@ -16,8 +16,13 @@
       "topic": "发布话题",
       "galgame": "发布 Galgame 资源"
     },
+    "about": {
+      "name": "关于",
+      "about": "关于我们",
+      "friends": "友情链接",
+      "contact": "联系我们"
+    },
     "galgame": "Gal",
-    "about": "关于",
     "home": "主页",
     "hamburger":{
       "name": "鲲 Galgame",
@@ -110,40 +115,6 @@
     "tool": {
       "topics": "话题",
       "resources": "Galgame 资源"
-    },
-    "footer":{
-      "title":{
-        "communicate": "其它交流",
-        "technique": "技术相关",
-        "about": "关于我们",
-        "friend": "友情链接"
-      },
-      "item":{
-        "daily": "日常交流",
-        "chat": "闲聊灌水",
-        "execute": "Galgame 运行相关",
-        "globalization": "Galgame 汉化相关",
-        "make": "Galgame 制作相关",
-        "privacy": "隐私政策",
-        "principle": "运营理念",
-        "balance": "收支公示",
-        "sticker": "鲲 Galgame 表情包",
-        "acgngame": "ACGNGAME",
-        "shinnku": "失落的小站",
-        "ymgal": "月幕 galgame",
-        "kun": "鲲的博客",
-        "ohmygpt": "OhMyGPT",
-        "galgamer": "Galgamer",
-        "xiayuge": "夏轩阁",
-        "hikarinagi": "Hikarinagi"
-      },
-      "describe":{
-        "title": "鲲 Galgame",
-        "kun1": "世界上最萌的 Galgame 论坛！",
-        "kun2": "鲲 Galgame 以营造最良好的氛围为理念",
-        "kun3": "鲲 Galgame 永远不会有广告",
-        "kun4": "鲲 Galgame 永远不会收费"
-      }
     }
   },
   "topic":{
@@ -633,6 +604,24 @@
     },
     "note": "该举报是完全匿名的, 在管理端以及数据库中不会留下任何用户记录, 请您放心举报",
     "submit": "提交举报"
+  },
+  "friends": {
+    "name": "友情链接",
+    "join": "加入我们",
+    "proud": "我们非常重视合作, 因为在我们网站的建设过程中, 受到了来自世界各地朋友的帮助",
+    "honor": "我们与下面的网站都是朋友关系, 我们衷心的为能和这些网站成为朋友感到荣幸",
+    "hint": "要加入我们, 请加入我们的群组, 提供您的网站链接",
+    "sticker": "鲲 Galgame 表情包",
+    "acgngame": "ACGNGAME",
+    "shinnku": "失落的小站",
+    "ymgal": "月幕 galgame",
+    "kun": "鲲的博客",
+    "galgamer": "Galgamer",
+    "xiayuge": "夏轩阁",
+    "hikarinagi": "Hikarinagi",
+    "qingju": "青桔网",
+    "ohmygpt": "OhMyGPT",
+    "koibumi": "Koibumi URL Shorten"
   },
   "page403":{
     "permission": "您没有权限访问这个页面",

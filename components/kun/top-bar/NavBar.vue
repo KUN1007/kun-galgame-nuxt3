@@ -40,15 +40,34 @@
       </template>
     </KunPopover>
 
+    <KunPopover>
+      <span class="nav">{{ $t('header.about.name') }}</span>
+      <template #content>
+        <div class="menu">
+          <NuxtLinkLocale class="item" to="/kungalgame">
+            <span>
+              {{ $t('header.about.about') }}
+            </span>
+          </NuxtLinkLocale>
+
+          <NuxtLinkLocale class="item" to="/friend-links">
+            <span>
+              <span>{{ $t('header.about.friends') }}</span>
+            </span>
+          </NuxtLinkLocale>
+
+          <NuxtLinkLocale class="item" to="/contact">
+            <span>
+              <span>{{ $t('header.about.contact') }}</span>
+            </span>
+          </NuxtLinkLocale>
+        </div>
+      </template>
+    </KunPopover>
+
     <NuxtLinkLocale class="link" to="/galgame">
       <span>
         {{ $t('header.galgame') }}
-      </span>
-    </NuxtLinkLocale>
-
-    <NuxtLinkLocale class="link" to="/kungalgame">
-      <span>
-        {{ $t('header.about') }}
       </span>
     </NuxtLinkLocale>
 

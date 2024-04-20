@@ -32,6 +32,7 @@ watch(
   background-attachment: fixed;
   background-color: var(--kungalgame-white);
   overflow: hidden;
+  background-color: var(--kungalgame-trans-blue-0);
 }
 
 .top-bar {

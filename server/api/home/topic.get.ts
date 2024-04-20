@@ -11,11 +11,12 @@ const getHomeTopics = async (page: number, limit: number, category: string) => {
   const searchQuery = {
     category: { $in: [category] },
     status: { $ne: 1 },
-    time: { $gte: seventeenDaysAgoTimestamp }
+    time: { $gte: seventeenDaysAgoTimestamp },
+    section: { $nin: ['g-other'] }
   }
 
   const topics = await TopicModel.find(searchQuery)
-    .sort({ time: -1 })
+    .sort({ updated: -1 })
     .skip(skip)
     .limit(limit)
     .populate('user', 'uid avatar name')

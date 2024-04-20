@@ -16,8 +16,13 @@
       "topic": "Publish Topic",
       "galgame": "Publish VN Resource"
     },
+    "about": {
+      "name": "About",
+      "about": "About Us",
+      "friends": "Friend Links",
+      "contact": "Contacts us"
+    },
     "galgame": "VNs",
-    "about": "About",
     "home": "Home",
     "hamburger":{
       "name": "KUN Visual Novel",
@@ -110,40 +115,6 @@
     "tool": {
       "topics": "Topics",
       "resources": "Resources"
-    },
-    "footer":{
-      "title":{
-        "communicate": "Other Topic",
-        "technique": "Technique",
-        "about": "About Us",
-        "friend": "Links"
-      },
-      "item":{
-        "daily": "Daily Communication",
-        "chat": "Chatting",
-        "execute": "Visual Novel Execute",
-        "globalization": "Visual Novel Globalization",
-        "make": "Visual Novel Making",
-        "privacy": "Privacy",
-        "principle": "Principle",
-        "balance": "Profit and Loss",
-        "sticker": "KUN Visualnovel Stickers",
-        "acgngame": "ACGNGAME",
-        "shinnku": "Shinnku's Visual Novel",
-        "ymgal": "YM galgame",
-        "kun": "KUN's Blog",
-        "ohmygpt": "OhMyGPT",
-        "galgamer": "Galgamer",
-        "xiayuge": "Xiayuge",
-        "hikarinagi": "Hikarinagi"
-      },
-      "describe":{
-        "title": "KUN Visual Novel",
-        "kun1": "The CUTEST Visual Novel Forum In The World!",
-        "kun2": "To Create The Best Atmosphere",
-        "kun3": "NO ADs Forever",
-        "kun4": "Free Forever"
-      }
     }
   },
   "topic":{
@@ -632,6 +603,24 @@
     },
     "note": "This report is completely anonymous, and no user records will be retained in the management system or the database. Please feel free to report.",
     "submit": "Submit Report"
+  },
+  "friends": {
+    "name": "Friend Links",
+    "proud": "We value collaboration greatly, as during the construction of our website, we received help from friends all over the world",
+    "honor": "We have friendly relationships with the following websites, and we sincerely feel honored to be friends with them",
+    "join": "Join Us",
+    "hint": "To join us, please contacts us and provide your website link",
+    "sticker": "KUN Visualnovel Stickers",
+    "acgngame": "ACGNGAME",
+    "shinnku": "Shinnku's Visual Novel",
+    "ymgal": "YM galgame",
+    "kun": "KUN's Blog",
+    "galgamer": "Galgamer",
+    "xiayuge": "Xiayuge",
+    "hikarinagi": "Hikarinagi",
+    "qingju": "Qingju",
+    "ohmygpt": "OhMyGPT",
+    "koibumi": "Koibumi URL Shorten"
   },
   "page403":{
     "permission": "You don't have permission to access this page",
