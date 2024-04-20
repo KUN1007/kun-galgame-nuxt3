@@ -95,7 +95,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
           <KunSearchResult :topics="topics" v-if="topics.length" />
 
           <span class="empty" v-if="!topics.length && search.keywords">
-            {{ $t('mainPage.header.emptyResult') }}
+            {{ $t('home.header.emptyResult') }}
           </span>
         </div>
       </div>

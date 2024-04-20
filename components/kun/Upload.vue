@@ -118,6 +118,7 @@ const handleClickUpload = () => {
   }
 
   .hint {
+    width: 200px;
     position: absolute;
     color: var(--kungalgame-font-color-0);
     font-size: small;

@@ -1,12 +1,14 @@
 <script setup lang="ts">
 interface Items {
-  i18n: string
+  i18n?: string
+  icon?: string
   value: string
 }
 
-const props = defineProps<{
+defineProps<{
   items: Items[]
   defaultValue: string
+  iconSize?: string
 }>()
 
 const emits = defineEmits<{
@@ -22,7 +24,10 @@ const emits = defineEmits<{
       :class="defaultValue === item.value ? 'active' : ''"
       @click="emits('set', item.value)"
     >
-      <span>
+      <span v-if="item.icon" :style="{ 'font-size': iconSize }">
+        <Icon :name="item.icon" />
+      </span>
+      <span v-if="item.i18n">
         {{ $t(`${item.i18n}`) }}
       </span>
     </span>

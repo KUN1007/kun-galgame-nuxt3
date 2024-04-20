@@ -1,19 +1,7 @@
-import UserModel from '~/server/models/user'
 import TopicModel from '~/server/models/topic'
-import type {
-  SortField,
-  SortOrder,
-  HomeTopicRequestData,
-  HomeTopic
-} from '~/types/api/home'
+import type { HomeTopicRequestData, HomeTopic } from '~/types/api/home'
 
-const getHomeTopics = async (
-  category: string[],
-  page: number,
-  limit: number,
-  sortField: SortField,
-  sortOrder: SortOrder
-) => {
+const getHomeTopics = async (page: number, limit: number, category: string) => {
   const skip = (page - 1) * limit
 
   const seventeenDaysAgo = new Date()
@@ -21,17 +9,13 @@ const getHomeTopics = async (
   const seventeenDaysAgoTimestamp = seventeenDaysAgo.getTime()
 
   const searchQuery = {
-    category: { $in: category },
+    category: { $in: [category] },
     status: { $ne: 1 },
     time: { $gte: seventeenDaysAgoTimestamp }
   }
 
-  const sortOptions: Record<string, 'asc' | 'desc'> = {
-    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
-  }
-
   const topics = await TopicModel.find(searchQuery)
-    .sort(sortOptions)
+    .sort({ time: -1 })
     .skip(skip)
     .limit(limit)
     .populate('user', 'uid avatar name')
@@ -63,22 +47,19 @@ const getHomeTopics = async (
 }
 
 export default defineEventHandler(async (event) => {
-  const { category, page, limit, sortField, sortOrder }: HomeTopicRequestData =
-    await getQuery(event)
-
+  const { page, limit, category }: HomeTopicRequestData = await getQuery(event)
   if (limit !== '10') {
     return kunError(event, 10209)
   }
-
-  // TODO: Schema hasn't been registered for model 'user', maybe it can be solved in the future
-  await UserModel.findOne()
+  const availableCategory = ['galgame', 'technique', 'others']
+  if (!availableCategory.includes(category)) {
+    return kunError(event, 10220)
+  }
 
   const result = await getHomeTopics(
-    [category],
     parseInt(page),
     parseInt(limit),
-    sortField,
-    sortOrder
+    category.charAt(0).toUpperCase() + category.slice(1)
   )
 
   return result

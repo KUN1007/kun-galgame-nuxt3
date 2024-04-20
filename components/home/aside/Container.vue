@@ -1,16 +1,16 @@
 <script setup lang="ts">
-const { isActiveMainPageAside } = storeToRefs(usePersistKUNGalgameHomeStore())
+const { isActiveHomeAside } = storeToRefs(usePersistKUNGalgameHomeStore())
 
 const asideWidth = ref('240px')
 
 const handleFold = () => {
-  isActiveMainPageAside.value = !isActiveMainPageAside.value
+  isActiveHomeAside.value = !isActiveHomeAside.value
 }
 
 watch(
-  () => isActiveMainPageAside.value,
+  () => isActiveHomeAside.value,
   () => {
-    asideWidth.value = isActiveMainPageAside.value ? '240px' : '40px'
+    asideWidth.value = isActiveHomeAside.value ? '240px' : '40px'
   },
   { immediate: true }
 )
@@ -19,24 +19,16 @@ watch(
 <template>
   <div class="aside">
     <div class="nav-aside" @click="handleFold">
-      <Icon
-        class="icon"
-        name="lucide:arrow-left"
-        v-if="isActiveMainPageAside"
-      />
-      <Icon
-        class="icon"
-        name="lucide:arrow-right"
-        v-if="!isActiveMainPageAside"
-      />
-      <span v-if="isActiveMainPageAside">
-        {{ $t('mainPage.asideActive.fold') }}
+      <Icon class="icon" name="lucide:arrow-left" v-if="isActiveHomeAside" />
+      <Icon class="icon" name="lucide:arrow-right" v-if="!isActiveHomeAside" />
+      <span v-if="isActiveHomeAside">
+        {{ $t('home.asideActive.fold') }}
       </span>
     </div>
 
-    <HomeAsideActive v-if="isActiveMainPageAside" />
+    <HomeAsideActive v-if="isActiveHomeAside" />
 
-    <HomeAsideBase v-if="!isActiveMainPageAside" />
+    <HomeAsideBase v-if="!isActiveHomeAside" />
   </div>
 </template>
 

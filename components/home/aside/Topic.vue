@@ -36,7 +36,7 @@ const { data, pending } = await useLazyFetch('/api/home/nav', {
         :class="typeToGet === icon.name ? 'active' : ''"
         @click="typeToGet = icon.name"
         v-tooltip="{
-          message: $t(`mainPage.asideActive.${icon.name}`),
+          message: $t(`home.asideActive.${icon.name}`),
           position: 'bottom'
         }"
       >

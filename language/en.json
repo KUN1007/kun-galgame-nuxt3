@@ -73,7 +73,7 @@
     "back": "Back",
     "home": "Home"
   },
-  "mainPage":{
+  "home":{
     "pinned": "Pinned",
     "header":{
       "filter": "Filter",
@@ -106,6 +106,10 @@
       "nonMoe": "Non-moe",
       "popularity": "Today's Hot Topic",
       "time": "Today's New Topic"
+    },
+    "tool": {
+      "topics": "Topics",
+      "resources": "Resources"
     },
     "footer":{
       "title":{

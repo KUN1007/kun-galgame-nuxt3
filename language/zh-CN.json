@@ -73,7 +73,7 @@
     "back": "返回",
     "home": "主页"
   },
-  "mainPage":{
+  "home":{
     "pinned": "置顶",
     "header":{
       "filter": "筛选",
@@ -106,6 +106,10 @@
       "nonMoe": "不萌记录",
       "popularity": "今日热门话题",
       "time": "今日最新话题"
+    },
+    "tool": {
+      "topics": "话题",
+      "resources": "Galgame 资源"
     },
     "footer":{
       "title":{

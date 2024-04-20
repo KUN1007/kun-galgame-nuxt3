@@ -8,12 +8,12 @@ import { asideItem } from '../utils/asideItem'
       v-for="kun in asideItem"
       :key="kun.index"
       v-tooltip="{
-        message: $t(`mainPage.asideActive.${kun.name}`),
+        message: $t(`home.asideActive.${kun.name}`),
         position: 'right'
       }"
     >
       <NuxtLinkLocale
-        :aria-label="$t(`mainPage.asideActive.${kun.name}`)"
+        :aria-label="$t(`home.asideActive.${kun.name}`)"
         :to="{ path: kun.router }"
       >
         <span>

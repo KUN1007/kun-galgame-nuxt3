@@ -155,13 +155,13 @@ const link: FooterInfoItem[] = [
       :class="kun.mobile"
     >
       <h2>
-        <span>{{ $t(`mainPage.footer.title.${kun.title}`) }}</span>
+        <span>{{ $t(`home.footer.title.${kun.title}`) }}</span>
       </h2>
 
       <ul class="function" v-for="yuyu in kun.list" :key="yuyu.index">
         <li>
           <NuxtLinkLocale :to="yuyu.router" :aria-label="yuyu.label">
-            {{ $t(`mainPage.footer.item.${yuyu.name}`) }}
+            {{ $t(`home.footer.item.${yuyu.name}`) }}
           </NuxtLinkLocale>
         </li>
       </ul>
@@ -170,7 +170,7 @@ const link: FooterInfoItem[] = [
     <div class="catalog">
       <h2>
         <span>
-          {{ $t(`mainPage.footer.title.friend`) }}
+          {{ $t(`home.footer.title.friend`) }}
           {{ `(${link.length})` }}
         </span>
       </h2>
@@ -178,7 +178,7 @@ const link: FooterInfoItem[] = [
       <ul class="function" v-for="kun in link" :key="kun.index">
         <li>
           <a :href="kun.router" target="_blank" :aria-label="kun.label">
-            {{ $t(`mainPage.footer.item.${kun.name}`) }}
+            {{ $t(`home.footer.item.${kun.name}`) }}
           </a>
         </li>
       </ul>

@@ -39,7 +39,7 @@ onMounted(() => {
       v-model="inputValue"
       type="search"
       class="input"
-      :placeholder="`${$t('mainPage.header.search')}`"
+      :placeholder="`${$t('home.header.search')}`"
       @input="debouncedSearch(inputValue)"
       @keydown.enter="debouncedSearch(inputValue)"
     />

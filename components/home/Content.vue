@@ -1,20 +1,10 @@
-<script setup lang="ts">
-const { data } = await useLazyFetch(`/api/home/pin`, {
-  method: 'GET'
-})
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="main">
     <HomeAsideContainer class="aside" />
 
-    <div class="container">
-      <div class="tool"></div>
-      <div class="article">
-        <HomePinned :topics="data" v-if="data?.length" />
-        <HomeContentArticle />
-      </div>
-    </div>
+    <HomeContentArticle />
   </div>
 </template>
 
@@ -28,20 +18,6 @@ const { data } = await useLazyFetch(`/api/home/pin`, {
   display: flex;
   align-items: center;
   margin: 0 auto;
-}
-
-.container {
-  height: 100%;
-  width: 1px;
-  flex-grow: 1;
-}
-
-.article {
-  height: calc(100vh - 75px);
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  border-radius: 10px;
-  box-shadow: var(--kungalgame-shadow-0);
 }
 
 @media (max-width: 1000px) {
@@ -58,10 +34,6 @@ const { data } = await useLazyFetch(`/api/home/pin`, {
 @media (max-width: 700px) {
   .aside {
     display: none;
-  }
-
-  .main {
-    width: 95%;
   }
 }
 </style>

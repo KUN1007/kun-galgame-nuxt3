@@ -24,7 +24,6 @@ const props = defineProps<{
 
 <style lang="scss" scoped>
 .pinned {
-  padding: 17px 10px 7px 17px;
   display: flex;
   flex-wrap: wrap;
 

@@ -18,9 +18,9 @@ const handleDeleteHistory = (historyIndex: number) => {
 <template>
   <div class="history">
     <div class="title">
-      <span>{{ $t('mainPage.header.history') }}</span>
+      <span>{{ $t('home.header.history') }}</span>
       <span @click="clearSearchHistory">
-        {{ $t('mainPage.header.clear') }}
+        {{ $t('home.header.clear') }}
       </span>
     </div>
 
@@ -43,7 +43,7 @@ const handleDeleteHistory = (historyIndex: number) => {
     </div>
 
     <span class="empty" v-if="!searchHistory.length">
-      {{ $t('mainPage.header.emptyHistory') }}
+      {{ $t('home.header.emptyHistory') }}
     </span>
   </div>
 </template>

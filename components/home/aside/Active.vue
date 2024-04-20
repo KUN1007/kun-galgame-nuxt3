@@ -7,7 +7,7 @@ import { asideItem } from '../utils/asideItem'
     <span v-for="kun in asideItem" :key="kun.index">
       <NuxtLinkLocale :to="{ path: kun.router }">
         <Icon class="icon" :name="kun.icon" />
-        {{ $t(`mainPage.asideActive.${kun.name}`) }}
+        {{ $t(`home.asideActive.${kun.name}`) }}
       </NuxtLinkLocale>
     </span>
   </div>
