@@ -103,12 +103,10 @@ const handleClickUpvote = async () => {
     return
   }
 
-  await upvoteTopic()
-
-  if (props.rid === 0) {
-    await upvoteTopic()
-  } else {
+  if (props.rid) {
     await upvoteReply()
+  } else {
+    await upvoteTopic()
   }
 }
 </script>

@@ -92,6 +92,8 @@ onBeforeUnmount(() => {
       <span></span>
 
       <HomeContentTopic :topic="kun" />
+
+      <KunDivider margin="7px" />
     </div>
 
     <KunSkeletonHomeTopic v-if="!isLoadingComplete" />
@@ -102,7 +104,7 @@ onBeforeUnmount(() => {
 @use '~/assets/css/effect/effect.scss';
 .topic-container {
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 75px);
   padding: 17px;
   overflow-y: scroll;
   display: flex;
@@ -117,6 +119,7 @@ onBeforeUnmount(() => {
   padding: 0;
   flex-shrink: 0;
   border: 2px solid var(--kungalgame-red-4);
+  margin-top: 10px;
 
   & > div {
     margin: 0 !important;

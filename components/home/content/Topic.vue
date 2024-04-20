@@ -61,8 +61,6 @@ const getRepliesCount = computed(() => {
       </div>
     </div>
   </NuxtLinkLocale>
-
-  <KunDivider margin="7px" />
 </template>
 
 <style lang="scss" scoped>

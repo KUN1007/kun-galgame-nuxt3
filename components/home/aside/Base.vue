@@ -16,7 +16,9 @@ import { asideItem } from '../utils/asideItem'
         :aria-label="$t(`mainPage.asideActive.${kun.name}`)"
         :to="{ path: kun.router }"
       >
-        <Icon :name="kun.icon" />
+        <span>
+          <Icon :name="kun.icon" />
+        </span>
       </NuxtLinkLocale>
     </span>
   </div>
@@ -44,22 +46,27 @@ import { asideItem } from '../utils/asideItem'
       display: flex;
       justify-content: center;
       align-items: center;
-      color: var(--kungalgame-blue-5);
+      color: var(--kungalgame-trans-blue-4);
+      transition: color 0.2s;
+
+      span {
+        height: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-left: 3px solid transparent;
+        border-right: 3px solid transparent;
+        transition: border 0.2s;
+      }
     }
 
     &:hover {
-      background-color: var(--kungalgame-blue-5);
-
-      &:first-child {
-        border-radius: 20px 20px 0 0;
-      }
-
-      &:last-child {
-        border-radius: 0 0 20px 20px;
-      }
-
       a {
-        color: var(--kungalgame-white);
+        color: var(--kungalgame-blue-5);
+
+        span {
+          border-left: 3px solid var(--kungalgame-blue-5);
+        }
       }
     }
   }

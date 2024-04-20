@@ -41,7 +41,7 @@ const updateTopicUpvote = async (uid: number, tid: number) => {
 
     await UserModel.updateOne(
       { uid: topic.uid },
-      { $inc: { moemoepoint: 7, upvote: 1 } }
+      { $inc: { moemoepoint: 3, upvote: 1 } }
     )
 
     await createMessage(
