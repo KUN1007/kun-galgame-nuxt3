@@ -34,9 +34,9 @@ watch(
       </span>
     </div>
 
-    <HomeContentAsideActive v-if="isActiveMainPageAside" />
+    <HomeAsideActive v-if="isActiveMainPageAside" />
 
-    <HomeContentAside v-if="!isActiveMainPageAside" />
+    <HomeAsideBase v-if="!isActiveMainPageAside" />
   </div>
 </template>
 

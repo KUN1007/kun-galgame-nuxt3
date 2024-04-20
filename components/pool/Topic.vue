@@ -55,10 +55,6 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
     box-shadow: var(--kungalgame-shadow-0);
     transform: translateY(-7px);
     z-index: 1;
-
-    .title {
-      color: var(--kungalgame-blue-5);
-    }
   }
 }
 

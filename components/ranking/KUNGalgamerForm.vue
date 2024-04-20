@@ -158,7 +158,10 @@ const handleClickSortOrder = () => {
   flex-direction: column;
   margin-left: 10px;
   overflow-y: scroll;
-  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
 }
 
 .order-enter-active,

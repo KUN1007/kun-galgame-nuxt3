@@ -6,7 +6,7 @@ const { data } = await useLazyFetch(`/api/home/pin`, {
 
 <template>
   <div class="main">
-    <HomeAside class="aside" />
+    <HomeAsideContainer class="aside" />
     <div class="article">
       <HomePinned :topics="data" v-if="data?.length" />
       <HomeContentArticle />

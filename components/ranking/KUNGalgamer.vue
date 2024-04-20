@@ -61,17 +61,20 @@ const users = computed(() => props.users)
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
   .avatar {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+
     img {
       height: 30px;
       width: 30px;
       border-radius: 50%;
     }
   }
+
   .name {
     margin-left: 10px;
   }

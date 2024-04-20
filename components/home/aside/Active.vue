@@ -12,7 +12,7 @@ import { asideItem } from '../utils/asideItem'
     </span>
   </div>
 
-  <HomeContentTopic />
+  <HomeAsideTopic />
 </template>
 
 <style lang="scss" scoped>

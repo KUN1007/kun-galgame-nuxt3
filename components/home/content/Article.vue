@@ -91,7 +91,7 @@ onBeforeUnmount(() => {
       <span></span>
       <span></span>
 
-      <HomeContentSingleTopic :topic="kun" />
+      <HomeContentTopic :topic="kun" />
     </div>
 
     <KunSkeletonHomeTopic v-if="!isLoadingComplete" />
@@ -111,17 +111,12 @@ onBeforeUnmount(() => {
   &::-webkit-scrollbar {
     width: 7px;
   }
-
-  & > div {
-    margin-bottom: 17px;
-  }
 }
 
 .kungalgame-comet-surround {
   padding: 0;
   flex-shrink: 0;
   border: 2px solid var(--kungalgame-red-4);
-  margin-top: 10px;
 
   & > div {
     margin: 0 !important;

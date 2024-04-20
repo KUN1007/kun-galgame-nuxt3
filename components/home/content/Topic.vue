@@ -1,170 +1,164 @@
 <script setup lang="ts">
-import type { TypeToGet } from '~/types/api/home'
+import type { HomeTopic } from '~/types/api/home'
+
+const props = defineProps<{
+  topic: HomeTopic
+}>()
 
 const { locale } = useI18n()
 
-const { typeToGet } = storeToRefs(usePersistKUNGalgameHomeStore())
-
-interface IconItem {
-  name: TypeToGet
-  icon: string
-}
-
-const iconItem: IconItem[] = [
-  {
-    name: 'time',
-    icon: 'lucide:calendar-heart'
-  },
-  {
-    name: 'popularity',
-    icon: 'lucide:flame'
-  }
-]
-
-const { data, pending } = await useLazyFetch('/api/home/nav', {
-  method: 'GET',
-  query: { type: typeToGet }
+const getRepliesCount = computed(() => {
+  return props.topic.replies + props.topic.comments
 })
 </script>
 
 <template>
-  <div class="topic-wrap">
-    <div class="title">
-      <span
-        v-for="(icon, index) in iconItem"
-        :key="index"
-        :class="typeToGet === icon.name ? 'active' : ''"
-        @click="typeToGet = icon.name"
-        v-tooltip="{
-          message: $t(`mainPage.asideActive.${icon.name}`),
-          position: 'bottom'
-        }"
-      >
-        <Icon :name="icon.icon" />
-      </span>
+  <NuxtLinkLocale class="container" :to="`/topic/${topic.tid}`">
+    <div class="topic">
+      <div class="title">
+        <span>{{ topic.title }}</span>
+        <span>{{ formatTimeDifferenceHint(topic.time, locale) }}</span>
+      </div>
+
+      <div class="info">
+        <HomeContentUser :user="topic.user">
+          <template #section>
+            <div class="section">
+              <TopicSection :section="topic.section" />
+              <TopicTags
+                class="tags"
+                :tags="topic.tags"
+                :is-show-icon="false"
+              />
+            </div>
+          </template>
+
+          <template #statistic>
+            <div class="status">
+              <span>
+                <Icon class="icon" name="lucide:mouse-pointer-click" />
+                <span>{{ topic.views }}</span>
+              </span>
+              <span>
+                <Icon class="icon" name="lucide:thumbs-up" />
+                <span>
+                  {{ topic.likes }}
+                </span>
+              </span>
+              <span>
+                <Icon class="icon" name="lucide:reply" />
+                <span>{{ getRepliesCount }}</span>
+              </span>
+            </div>
+          </template>
+        </HomeContentUser>
+      </div>
+
+      <div class="introduction">
+        <p>
+          {{ markdownToText(topic.content) }}
+        </p>
+      </div>
     </div>
+  </NuxtLinkLocale>
 
-    <div
-      class="content"
-      v-show="!pending"
-      v-for="(kun, index) in data"
-      :key="index"
-    >
-      <NuxtLinkLocale :to="`/topic/${kun.tid}`">
-        <div class="topic">
-          <div class="name">{{ kun.title }}</div>
-          <div class="hot" v-if="typeToGet === 'popularity'">
-            <Icon name="lucide:flame" />
-            <span>{{ Math.ceil(kun.popularity) }}</span>
-          </div>
-
-          <div class="new" v-if="typeToGet === 'time'">
-            <Icon name="lucide:clock-7" />
-            <span>{{ formatTimeDifference(kun.time, locale) }}</span>
-          </div>
-        </div>
-      </NuxtLinkLocale>
-    </div>
-
-    <KunSkeletonHomeAside v-show="pending" />
-  </div>
+  <KunDivider margin="7px" />
 </template>
 
 <style lang="scss" scoped>
-.topic-wrap {
-  height: 100%;
+.container {
   display: flex;
-  flex-direction: column;
-  background-color: var(--kungalgame-trans-white-5);
-  box-shadow: var(--kungalgame-shadow-0);
-  color: var(--kungalgame-font-color-3);
-  border-radius: 10px;
-  backdrop-filter: blur(10px);
   padding: 10px;
-}
+  border-radius: 10px;
+  transition: all 0.2s;
 
-.content {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-
-  a {
-    height: 100%;
-    width: 100%;
-    border-radius: 10px;
-
-    &:hover {
-      background-color: var(--kungalgame-trans-blue-1);
-    }
+  &:hover {
+    box-shadow: var(--shadow);
+    transform: scale(1.01);
+    background-color: var(--kungalgame-trans-blue-0);
   }
-}
-
-.title {
-  display: flex;
-  justify-content: space-around;
-  font-size: 20px;
-  padding-bottom: 10px;
-
-  span {
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
-  }
-}
-
-.active {
-  color: var(--kungalgame-blue-5);
-  border-bottom: 2px solid var(--kungalgame-blue-5);
 }
 
 .topic {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
   height: 100%;
+  display: flex;
+  flex-direction: column;
   color: var(--kungalgame-font-color-3);
-  align-items: center;
-  cursor: pointer;
 }
 
-.name {
+.title {
+  width: 100%;
+  font-size: 18px;
+  margin-bottom: 7px;
+
+  span {
+    &:first-child {
+      border-bottom: 2px solid transparent;
+    }
+
+    &:last-child {
+      color: var(--kungalgame-font-color-0);
+      font-size: small;
+      font-weight: initial;
+      margin-left: 17px;
+      white-space: nowrap;
+    }
+  }
+}
+
+.info {
+  width: 100%;
   display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.section {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: small;
+}
+
+.status {
+  display: flex;
+
+  .icon {
+    margin-right: 3px;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    margin-right: 7px;
+  }
+}
+
+.introduction {
+  width: 100%;
+  display: flex;
+  align-items: center;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  font-size: 13px;
-  padding: 0 10px;
-}
+  cursor: pointer;
 
-.hot {
-  margin-right: 10px;
-  display: flex;
-  white-space: nowrap;
-  align-items: center;
-  color: var(--kungalgame-red-4);
-
-  span {
-    font-size: small;
-    margin-left: 5px;
-    color: var(--kungalgame-font-color-3);
+  p {
+    width: 100%;
+    font-size: 14px;
+    color: var(--kungalgame-font-color-2);
   }
 }
 
-.new {
-  margin-right: 10px;
-  display: flex;
-  white-space: nowrap;
-  align-items: center;
-  color: var(--kungalgame-purple-4);
+@media (max-width: 700px) {
+  .time {
+    display: none;
+  }
 
-  span {
-    font-size: x-small;
-    margin-left: 5px;
-    color: var(--kungalgame-font-color-3);
+  .tags {
+    display: none;
   }
 }
 </style>
