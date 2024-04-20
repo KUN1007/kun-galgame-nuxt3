@@ -42,7 +42,7 @@ const topics = computed(() => props.topics)
     cursor: pointer;
 
     &:hover {
-      background-color: var(--kungalgame-trans-white-9);
+      background-color: transparent;
       border: 2px solid var(--kungalgame-blue-5);
     }
   }

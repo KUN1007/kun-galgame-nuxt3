@@ -226,7 +226,7 @@ const handleCloseCapture = () => {
     color: var(--kungalgame-blue-5);
     border: 1px solid var(--kungalgame-blue-5);
     border-radius: 5px;
-    background-color: var(--kungalgame-trans-white-9);
+    background-color: transparent;
     transition: all 0.2s;
     &:hover {
       color: var(--kungalgame-white);

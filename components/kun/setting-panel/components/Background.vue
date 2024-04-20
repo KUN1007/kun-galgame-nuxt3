@@ -112,7 +112,7 @@ const handleChangeImage = async (index: number) => {
   margin-top: 10px;
   color: var(--kungalgame-font-color-3);
   border: 1px solid var(--kungalgame-blue-5);
-  background-color: var(--kungalgame-trans-white-9);
+  background-color: transparent;
   color: var(--kungalgame-blue-5);
 
   &:hover {

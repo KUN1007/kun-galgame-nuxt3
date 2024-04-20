@@ -167,7 +167,7 @@ const handleSubmitReport = async () => {
     margin-bottom: 20px;
     width: 100%;
     border: 1px solid var(--kungalgame-blue-5);
-    background-color: var(--kungalgame-trans-white-9);
+    background-color: transparent;
     border-radius: 5px;
     padding: 5px;
 
@@ -201,7 +201,7 @@ const handleSubmitReport = async () => {
     flex-shrink: 0;
     border-radius: 10px;
     color: var(--kungalgame-blue-5);
-    background-color: var(--kungalgame-trans-white-9);
+    background-color: transparent;
     border: 1px solid var(--kungalgame-blue-5);
 
     &:hover {

@@ -57,7 +57,7 @@ const setFont = () => {
     padding-left: 7px;
     height: 30px;
     border: 1px solid var(--kungalgame-blue-5);
-    background-color: var(--kungalgame-trans-white-9);
+    background-color: transparent;
     color: var(--kungalgame-font-color-3);
 
     &:focus {
@@ -74,7 +74,7 @@ const setFont = () => {
     color: var(--kungalgame-font-color-3);
     border: 1px solid var(--kungalgame-blue-5);
     border-left: none;
-    background-color: var(--kungalgame-trans-white-9);
+    background-color: transparent;
     cursor: pointer;
 
     &:hover {

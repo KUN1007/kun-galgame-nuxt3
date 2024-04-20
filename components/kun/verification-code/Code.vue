@@ -74,7 +74,7 @@ button {
   width: 90px;
   height: 30px;
   border: none;
-  background-color: var(--kungalgame-trans-white-9);
+  background-color: transparent;
   cursor: pointer;
   color: var(--kungalgame-font-color-1);
   &:hover {

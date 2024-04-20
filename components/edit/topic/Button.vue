@@ -211,7 +211,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .confirm-btn {
   color: var(--kungalgame-blue-5);
-  background-color: var(--kungalgame-trans-white-9);
+  background-color: transparent;
   border: 1px solid var(--kungalgame-blue-5);
 
   &:hover {
@@ -222,7 +222,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .rewrite-btn {
   color: var(--kungalgame-pink-4);
-  background-color: var(--kungalgame-trans-white-9);
+  background-color: transparent;
   border: 1px solid var(--kungalgame-pink-4);
 
   &:hover {

@@ -136,7 +136,7 @@ watch(
 }
 
 .input {
-  background-color: var(--kungalgame-trans-white-9);
+  background-color: transparent;
   font-size: 17px;
   flex-grow: 1;
   border: none;

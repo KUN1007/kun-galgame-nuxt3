@@ -144,7 +144,7 @@ const handleShowAdvance = () => {
 
 .confirm-btn {
   color: var(--kungalgame-blue-5);
-  background-color: var(--kungalgame-trans-white-9);
+  background-color: transparent;
   border: 1px solid var(--kungalgame-blue-5);
 
   &:hover {
@@ -155,7 +155,7 @@ const handleShowAdvance = () => {
 
 .rewrite-btn {
   color: var(--kungalgame-red-4);
-  background-color: var(--kungalgame-trans-white-9);
+  background-color: transparent;
   border: 1px solid var(--kungalgame-red-4);
 
   &:hover {
@@ -166,7 +166,7 @@ const handleShowAdvance = () => {
 
 .advance-btn {
   color: var(--kungalgame-purple-4);
-  background-color: var(--kungalgame-trans-white-9);
+  background-color: transparent;
   border: 1px solid var(--kungalgame-purple-4);
 
   &:hover {

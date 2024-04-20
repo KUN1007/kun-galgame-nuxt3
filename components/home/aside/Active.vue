@@ -42,7 +42,7 @@ import { asideItem } from '../utils/asideItem'
     height: 100%;
     width: 100%;
     color: var(--kungalgame-font-color-2);
-    border-bottom: 2px solid var(--kungalgame-trans-white-9);
+    border-bottom: 2px solid transparent;
 
     .icon {
       color: var(--kungalgame-blue-5);

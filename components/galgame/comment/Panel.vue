@@ -81,7 +81,7 @@ const handlePublishComment = async () => {
     margin-bottom: 10px;
     width: 100%;
     border: 1px solid var(--kungalgame-trans-blue-2);
-    background-color: var(--kungalgame-trans-white-9);
+    background-color: transparent;
     border-radius: 10px;
     padding: 5px;
     resize: vertical;

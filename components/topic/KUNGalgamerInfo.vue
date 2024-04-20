@@ -81,7 +81,7 @@ const user = computed(() => props.user)
 
   a {
     color: var(--kungalgame-blue-5);
-    border-bottom: 2px solid var(--kungalgame-trans-white-9);
+    border-bottom: 2px solid transparent;
 
     &:hover {
       border-bottom: 2px solid var(--kungalgame-blue-5);

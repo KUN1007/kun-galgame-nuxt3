@@ -20,7 +20,7 @@ watch(
     <div class="top-bar">
       <KunTopBar />
     </div>
-    <slot></slot>
+    <slot />
   </div>
 </template>
 
@@ -32,7 +32,7 @@ watch(
   background-attachment: fixed;
   background-color: var(--kungalgame-white);
   overflow: hidden;
-  background-color: var(--kungalgame-trans-blue-0);
+  background-color: var(--kungalgame-blue-0);
 }
 
 .top-bar {

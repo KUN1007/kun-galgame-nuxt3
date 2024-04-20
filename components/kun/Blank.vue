@@ -45,7 +45,7 @@ const localePath = useLocalePath()
     padding: 7px 50px;
     border-radius: 5px;
     color: var(--kungalgame-blue-5);
-    background-color: var(--kungalgame-trans-white-9);
+    background-color: transparent;
 
     &:hover {
       background-color: var(--kungalgame-blue-5);

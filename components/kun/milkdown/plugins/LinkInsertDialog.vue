@@ -103,7 +103,7 @@ const handleLinkInsert = () => {
 }
 
 .input {
-  background-color: var(--kungalgame-trans-white-9);
+  background-color: transparent;
   border: 2px solid var(--kungalgame-trans-blue-2);
   border-radius: 5px;
   color: var(--kungalgame-font-color-3);
@@ -125,7 +125,7 @@ const handleLinkInsert = () => {
     padding: 7px 17px;
     border-radius: 5px;
     color: var(--kungalgame-blue-5);
-    background-color: var(--kungalgame-trans-white-9);
+    background-color: transparent;
     border: 1px solid var(--kungalgame-blue-5);
 
     &:last-child {

@@ -91,14 +91,14 @@ const handleConfirm = () => {
   border-radius: 2px;
 
   &:nth-child(1) {
-    background-color: var(--kungalgame-trans-white-9);
+    background-color: transparent;
     border: 1px solid var(--kungalgame-blue-5);
     color: var(--kungalgame-blue-5);
   }
 
   &:nth-child(2) {
     margin-left: 98px;
-    background-color: var(--kungalgame-trans-white-9);
+    background-color: transparent;
     border: 1px solid var(--kungalgame-red-5);
     color: var(--kungalgame-red-5);
   }

@@ -119,7 +119,7 @@ const handlePublishComment = async () => {
     &:nth-child(3) {
       cursor: pointer;
       color: var(--kungalgame-blue-5);
-      border-bottom: 2px solid var(--kungalgame-trans-white-9);
+      border-bottom: 2px solid transparent;
 
       &:hover {
         border-bottom: 2px solid var(--kungalgame-blue-5);
@@ -139,7 +139,7 @@ const handlePublishComment = async () => {
     padding: 5px 10px;
     border: 1px solid var(--kungalgame-blue-5);
     border-radius: 5px;
-    background-color: var(--kungalgame-trans-white-9);
+    background-color: transparent;
 
     &:hover {
       background-color: var(--kungalgame-blue-5);
@@ -162,7 +162,7 @@ const handlePublishComment = async () => {
     margin-bottom: 20px;
     width: 100%;
     border: 1px solid var(--kungalgame-blue-5);
-    background-color: var(--kungalgame-trans-white-9);
+    background-color: transparent;
     border-radius: 5px;
     padding: 5px;
 

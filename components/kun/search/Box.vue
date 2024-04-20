@@ -66,7 +66,7 @@ onMounted(() => {
   width: 100%;
   font-size: 16px;
   border: none;
-  background-color: var(--kungalgame-trans-white-9);
+  background-color: transparent;
   border: 2px solid var(--kungalgame-blue-5);
   border-radius: 17px;
   color: var(--kungalgame-font-color-3);
