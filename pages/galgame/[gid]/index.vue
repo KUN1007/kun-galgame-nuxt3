@@ -39,13 +39,12 @@ if (data.value === 'banned') {
   <div class="root">
     <Galgame v-if="galgame" :galgame="galgame" />
 
-    <!-- TODO: -->
     <KunBlank v-if="!galgame && !isBanned">
-      {{ $t('topic.notFound') }}
+      {{ $t('galgame.notFound') }}
     </KunBlank>
 
     <KunBlank v-if="isBanned">
-      {{ $t('topic.banned') }}
+      {{ $t('galgame.banned') }}
     </KunBlank>
   </div>
 </template>

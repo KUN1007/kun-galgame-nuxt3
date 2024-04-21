@@ -13,7 +13,10 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10609)
   }
 
-  const galgame = await GalgameModel.findOne({ gid }).lean()
+  const galgame = await GalgameModel.findOne(
+    { gid },
+    { status: { $ne: 1 } }
+  ).lean()
   if (!galgame) {
     return kunError(event, 10610)
   }

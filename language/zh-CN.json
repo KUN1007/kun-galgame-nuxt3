@@ -1,8 +1,8 @@
 {
   "head": {
     "title": "鲲 Galgame 论坛",
-    "description": "世界上最萌的 Galgame 论坛! Galgame 交流讨论, Galgame 技术交流。为营造最好的氛围而努力! 永远不会有广告! 永远免费!",
-    "keywords": "Galgame, 论坛, Galgame 下载, Galgame 评测, Galgame 数据分析, Galgame 新作动态, Galgame 汉化 / 国际化, Galgame 制作, Galgame 讨论, Galgame 制作, 技术交流, 其他交流"
+    "description": "世界上最萌的 Galgame 论坛! 现阶段世界上最先进的 Galgame 资源发布网站! 永远不会有广告! 永远免费! Galgame, 论坛, Galgame 下载, Galgame 资源网",
+    "keywords": "Galgame, 论坛, Galgame 下载, Galgame 资源, Galgame wiki, Galgame 评测, Galgame 数据分析, Galgame 新作动态, Galgame 汉化 / 国际化, Galgame 制作, Galgame 讨论, Galgame 制作, 技术交流, 其他交流"
   },
   "header":{
     "name": "鲲 Galgame",
@@ -494,6 +494,8 @@
     "publish": "发布于"
   },
   "galgame": {
+    "notFound": "该 Galgame 不存在",
+    "banned": "该 Galgame 已被封禁",
     "declaration": "我们不是资源的提供者，我们只是资源的指路人",
     "null": "该条目暂时为空",
     "welcome": "欢迎贡献条目",
@@ -719,11 +721,15 @@
     },
     "home": {
       "title": "鲲 Galgame 论坛",
-      "description": "世界上最萌的 Galgame 论坛! Galgame 交流讨论, Galgame 技术交流。为营造最好的氛围而努力! 永远不会有广告! 永远免费!"
+      "description": "世界上最萌的 Galgame 论坛! 现阶段世界上最先进的 Galgame 资源发布网站! Galgame 下载! 为营造最好的氛围而努力! 永远不会有广告! 永远免费!"
     },
     "report": {
       "title": "匿名举报",
       "description": "鲲 Galgame 论坛的举报页，这里可以提交论坛内的违规记录，希望大家不要违规"
+    },
+    "galgame": {
+      "title": "Galgame 资源",
+      "description": "鲲 Galgame 论坛 Galgame 资源页面, 提供各类 Galgame 下载, "
     }
   },
   "ComponentAlert":{

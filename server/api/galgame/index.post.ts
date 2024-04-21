@@ -92,7 +92,7 @@ export default defineEventHandler(async (event) => {
           galgame: savedGalgame.gid,
           contribute_galgame: savedGalgame.gid
         },
-        $inc: { daily_galgame_count: 1, moemoepoint: 3 }
+        $inc: { daily_galgame_count: 1, daily_image_count: 1, moemoepoint: 3 }
       }
     )
 

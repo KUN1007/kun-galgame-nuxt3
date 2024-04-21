@@ -1,8 +1,8 @@
 {
   "head": {
     "title": "KUN Visual Novel",
-    "description": "The CUTEST Visual Novel Forum! Visual Novel Communication, Visual Novel Technique.To Create The Best Atmosphere! NO ADs Forever! Free Forever!",
-    "keywords": "Visualnovel, visualnovel downloads, visualnovel reviews, visualnovel data analysis, visualnovel news, visualnovel translation/internationalization, visualnovel production, visualnovel discussions, visualnovel sources, technical exchanges, other discussions."
+    "description": "The CUTEST Visual Novel Forum! The most advanced visual novel resource publishing website in the world at the moment! NO ADs Forever! Free Forever!",
+    "keywords": "visualnovel, visual novel downloads, visual novel resources, visual novel wiki, visualnovel reviews, visualnovel data analysis, visualnovel news, visualnovel translation/internationalization, visualnovel production, visualnovel discussions, visualnovel sources, technical exchanges, other discussions."
   },
   "header":{
     "name": "KUN Visual Novel",
@@ -493,6 +493,8 @@
     "publish": "Published at"
   },
   "galgame": {
+    "notFound": "Visual Novel not found",
+    "banned": "Visual Novel has been banned",
     "declaration": "We are not the providers of resources, we are just the guides to resources",
     "null": "This entry is currently empty.",
     "welcome": "Contributions are welcome.",
@@ -714,7 +716,7 @@
     },
     "home": {
       "title": "KUN Visual Novel Forum",
-      "description": "The CUTEST Visual Novel Forum! Visual Novel Communication, Visual Novel Technique.To Create The Best Atmosphere! NO ADs Forever! Free Forever!"
+      "description": "The CUTEST Visual Novel Forum! The most advanced visual novel resource publishing website in the world at the moment! NO ADs Forever! Free Forever!"
     },
     "report": {
       "title": "Anonymous Report",

@@ -19,6 +19,14 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10115, 205)
   }
 
+  const galgame = await GalgameModel.findOne(
+    { gid },
+    { status: { $ne: 1 } }
+  ).lean()
+  if (!galgame) {
+    return kunError(event, 10610)
+  }
+
   const session = await mongoose.startSession()
   session.startTransaction()
   try {
