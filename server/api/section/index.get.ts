@@ -1,3 +1,4 @@
+import UserModel from '~/server/models/user'
 import TopicModel from '~/server/models/topic'
 import type { GetSectionRequestData, SectionTopic } from '~/types/api/section'
 
@@ -21,7 +22,7 @@ const getSectionTopic = async (
     .sort({ time: order })
     .skip(skip)
     .limit(limit)
-    .populate('user', 'uid avatar name')
+    .populate('user', 'uid avatar name', UserModel)
     .lean()
 
   const topics: SectionTopic[] = data.map((topic) => ({

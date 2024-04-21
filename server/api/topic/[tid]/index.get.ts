@@ -1,3 +1,4 @@
+import UserModel from '~/server/models/user'
 import TopicModel from '~/server/models/topic'
 import type { TopicDetail } from '~/types/api/topic'
 
@@ -11,7 +12,7 @@ export default defineEventHandler(async (event) => {
     { tid },
     { $inc: { views: 1, popularity: 0.1 } }
   )
-    .populate('user', 'uid name avatar moemoepoint')
+    .populate('user', 'uid name avatar moemoepoint', UserModel)
     .lean()
   if (!topic) {
     return kunError(event, 10211)

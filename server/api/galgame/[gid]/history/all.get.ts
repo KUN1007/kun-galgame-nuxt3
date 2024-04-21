@@ -1,3 +1,4 @@
+import UserModel from '~/server/models/user'
 import GalgameHistoryModel from '~/server/models/galgame-history'
 import type {
   GalgameHistoryAction,
@@ -26,7 +27,7 @@ export default defineEventHandler(async (event) => {
     .sort({ created: -1 })
     .skip(skip)
     .limit(parseInt(limit))
-    .populate('user', 'uid avatar name')
+    .populate('user', 'uid avatar name', UserModel)
     .lean()
 
   const historyData: GalgameHistory[] = data.map((history) => ({

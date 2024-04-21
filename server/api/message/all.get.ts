@@ -1,3 +1,4 @@
+import UserModel from '~/server/models/user'
 import MessageModel from '~/server/models/message'
 import type {
   MessageType,
@@ -25,7 +26,7 @@ const getMessages = async (
     .sort(sortOptions)
     .skip(skip)
     .limit(limit)
-    .populate('user', 'name')
+    .populate('user', 'name', UserModel)
     .lean()
 
   const responseData: Message[] = messages.map((message) => ({

@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.10.23",
+  "version": "2.10.24",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -20,6 +20,7 @@
     "@nuxtjs/color-mode": "^3.4.0",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/i18n": "8.0.0",
+    "@nuxtjs/sitemap": "^5.1.4",
     "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "@pinia/nuxt": "^0.5.1",
     "@types/bcrypt": "^5.0.2",

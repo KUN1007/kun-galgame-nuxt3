@@ -1,3 +1,4 @@
+import UserModel from '~/server/models/user'
 import TopicModel from '~/server/models/topic'
 import ReplyModel from '~/server/models/reply'
 import CommentModel from '~/server/models/comment'
@@ -7,8 +8,8 @@ import type { TopicComment } from '~/types/api/topic-comment'
 
 const getComments = async (uid: number, rid: number) => {
   const comment = await CommentModel.find({ rid })
-    .populate('cuid', 'uid avatar name')
-    .populate('touid', 'uid name')
+    .populate('cuid', 'uid avatar name', UserModel)
+    .populate('touid', 'uid name', UserModel)
     .lean()
 
   const replyComments: TopicComment[] = comment.map((comment) => ({
@@ -59,8 +60,8 @@ const getReplies = async (
       .sort({ floor: sortOrder })
       .skip(skip)
       .limit(limit)
-      .populate('r_user', 'uid avatar name moemoepoint')
-      .populate('to_user', 'uid name')
+      .populate('r_user', 'uid avatar name moemoepoint', UserModel)
+      .populate('to_user', 'uid name', UserModel)
       .lean()
 
     const repliesData: TopicReply[] = await Promise.all(

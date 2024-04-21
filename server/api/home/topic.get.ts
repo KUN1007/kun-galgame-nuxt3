@@ -1,3 +1,4 @@
+import UserModel from '~/server/models/user'
 import TopicModel from '~/server/models/topic'
 import type { HomeTopicRequestData, HomeTopic } from '~/types/api/home'
 
@@ -19,7 +20,7 @@ const getHomeTopics = async (page: number, limit: number, category: string) => {
     .sort({ updated: -1 })
     .skip(skip)
     .limit(limit)
-    .populate('user', 'uid avatar name')
+    .populate('user', 'uid avatar name', UserModel)
     .lean()
 
   const data: HomeTopic[] = topics.map((topic) => ({

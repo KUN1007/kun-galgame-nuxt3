@@ -1,3 +1,4 @@
+import UserModel from '~/server/models/user'
 import GalgamePRModel from '~/server/models/galgame-pr'
 import type { GalgamePRDetails } from '~/types/api/galgame-pr'
 
@@ -8,7 +9,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const pr = await GalgamePRModel.findOne({ gprid })
-    .populate('user', 'uid avatar name')
+    .populate('user', 'uid avatar name', UserModel)
     .lean()
   if (!pr) {
     return kunError(event, 10622)

@@ -1,3 +1,4 @@
+import UserModel from '~/server/models/user'
 import GalgameResourceModel from '~/server/models/galgame-resource'
 import type { GalgameResourceDetails } from '~/types/api/galgame-resource'
 
@@ -8,7 +9,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const data = await GalgameResourceModel.findOne({ grid })
-    .populate('user', 'uid avatar name')
+    .populate('user', 'uid avatar name', UserModel)
     .lean()
   if (!data) {
     return kunError(event, 10622)

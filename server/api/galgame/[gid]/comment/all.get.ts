@@ -1,3 +1,4 @@
+import UserModel from '~/server/models/user'
 import GalgameCommentModel from '~/server/models/galgame-comment'
 import type { GalgameComment } from '~/types/api/galgame-comment'
 
@@ -28,8 +29,8 @@ export default defineEventHandler(async (event) => {
     .sort({ created: order })
     .skip(skip)
     .limit(parseInt(limit))
-    .populate('cuid', 'uid avatar name')
-    .populate('touid', 'uid name')
+    .populate('cuid', 'uid avatar name', UserModel)
+    .populate('touid', 'uid name', UserModel)
     .lean()
 
   const userInfo = await getCookieTokenInfo(event)

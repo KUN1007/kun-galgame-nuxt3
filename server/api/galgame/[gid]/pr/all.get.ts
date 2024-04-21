@@ -1,3 +1,4 @@
+import UserModel from '~/server/models/user'
 import GalgamePRModel from '~/server/models/galgame-pr'
 import type { GalgamePR } from '~/types/api/galgame-pr'
 
@@ -22,7 +23,7 @@ export default defineEventHandler(async (event) => {
     .sort({ created: -1 })
     .skip(skip)
     .limit(parseInt(limit))
-    .populate('user', 'uid avatar name')
+    .populate('user', 'uid avatar name', UserModel)
     .lean()
 
   const prs: GalgamePR[] = data.map((pr) => ({

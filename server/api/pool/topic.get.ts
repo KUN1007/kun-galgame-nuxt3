@@ -1,3 +1,4 @@
+import UserModel from '~/server/models/user'
 import TopicModel from '~/server/models/topic'
 import type {
   SortFieldPool,
@@ -21,7 +22,7 @@ const getPoolTopics = async (
     .sort(sortOptions)
     .skip(skip)
     .limit(limit)
-    .populate('user', 'uid avatar name')
+    .populate('user', 'uid avatar name', UserModel)
     .lean()
 
   const data: PoolTopic[] = topics.map((topic) => ({

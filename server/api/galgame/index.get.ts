@@ -1,3 +1,4 @@
+import UserModel from '~/server/models/user'
 import GalgameModel from '~/server/models/galgame'
 import type { GalgamePageRequestData, GalgameCard } from '~/types/api/galgame'
 
@@ -16,7 +17,7 @@ const getGalgames = async (
     .sort({ created: sortOrder })
     .skip(skip)
     .limit(limit)
-    .populate('user', 'uid avatar name')
+    .populate('user', 'uid avatar name', UserModel)
     .lean()
 
   const galgames: GalgameCard[] = data.map((galgame) => ({

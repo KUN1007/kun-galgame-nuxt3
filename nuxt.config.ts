@@ -23,7 +23,8 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     'nuxt-typed-router',
     'nuxt-schema-org',
-    '@nuxtjs/color-mode'
+    '@nuxtjs/color-mode',
+    '@nuxtjs/sitemap'
   ],
   runtimeConfig: {
     MONGODB_URL: process.env.MONGODB_URL,
