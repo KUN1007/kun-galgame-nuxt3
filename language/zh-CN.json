@@ -14,7 +14,7 @@
     "publish": {
       "name": "发布",
       "topic": "发布话题",
-      "galgame": "发布 Galgame 资源"
+      "galgame": "发布 Galgame"
     },
     "about": {
       "name": "关于",
@@ -26,17 +26,20 @@
     "home": "主页",
     "hamburger":{
       "name": "鲲 Galgame",
+      "galgame": "Galgame",
       "pool": "所有话题",
       "category": "话题分类",
-      "create": "发布话题",
+      "createTopic": "发布话题",
+      "createGalgame": "发布 Galgame",
       "about": "关于我们",
+      "friends": "友情链接",
+      "join": "加入 / 联系",
       "ranking": "排行榜单",
       "update": "更新日志",
       "bylaw": "执行条例",
       "balance": "收支公示",
       "nonMoe": "不萌记录",
       "thanks": "感谢名单",
-      "join": "加入 / 联系",
       "donate": "赞助我们",
       "home": "返回主页"
     },

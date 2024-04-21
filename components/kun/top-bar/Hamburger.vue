@@ -11,8 +11,8 @@ const startX = ref(0)
 const startY = ref(0)
 const currentX = ref(0)
 const isDragging = ref(false)
-const item = ref<Hamburger[]>(hamburgerItem.slice(0, 5))
-const isShowSettings = computed(() => item.value.length > 5)
+const item = ref<Hamburger[]>(hamburgerItem.slice(0, 8))
+const isShowSettings = computed(() => item.value.length > 8)
 
 const handleTouchStart = (event: TouchEvent) => {
   startX.value = event.touches[0].clientX
@@ -48,10 +48,10 @@ const handleTouchEnd = () => {
 }
 
 const handleShowMore = () => {
-  if (item.value.length === 5) {
+  if (item.value.length === 8) {
     item.value = hamburgerItem
   } else {
-    item.value = hamburgerItem.slice(0, 5)
+    item.value = hamburgerItem.slice(0, 8)
   }
 }
 </script>

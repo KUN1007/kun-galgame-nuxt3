@@ -14,7 +14,7 @@
     "publish": {
       "name": "Publish",
       "topic": "Publish Topic",
-      "galgame": "Publish VN Resource"
+      "galgame": "Publish VN"
     },
     "about": {
       "name": "About",
@@ -26,17 +26,20 @@
     "home": "Home",
     "hamburger":{
       "name": "KUN Visual Novel",
+      "galgame": "Visual Novel",
       "pool": "Pool",
       "category": "Category",
-      "create": "Create Topic",
+      "createTopic": "Create Topic",
+      "createGalgame": "Create Visual Novel",
       "about": "About Us",
+      "friends": "Friend Links",
+      "join": "Join / Contacts",
       "ranking": "Ranking",
       "update": "Update Log",
       "bylaw": "Regulations",
       "balance": "P & L",
       "nonMoe": "Non-moe",
       "thanks": "Thanks List",
-      "join": "Join / Contacts",
       "donate": "Donate Us",
       "home": "Back Home"
     },

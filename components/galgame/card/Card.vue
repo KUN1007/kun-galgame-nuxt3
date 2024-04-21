@@ -102,12 +102,13 @@ defineProps<{
     bottom: 0;
     z-index: 1;
     width: 100%;
-    background: linear-gradient(transparent, var(--kungalgame-font-color-3));
+    background: linear-gradient(transparent, var(--kungalgame-font-color-0));
     color: var(--kungalgame-white);
     padding: 0 7px;
     padding-bottom: 3px;
     display: flex;
     justify-content: space-between;
+    font-size: small;
 
     .data {
       display: flex;
