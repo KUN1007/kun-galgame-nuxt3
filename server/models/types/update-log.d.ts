@@ -1,8 +1,7 @@
 export interface UpdateLogAttributes {
   upid: number
   type: string
-  content_en_us: string
-  content_zh_cn: string
+  content: KunLanguage
   time: string
   version: string
 

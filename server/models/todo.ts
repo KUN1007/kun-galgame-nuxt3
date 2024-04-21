@@ -6,8 +6,11 @@ const TodoSchema = new mongoose.Schema<TodoAttributes>(
   {
     todo_id: { type: Number, unique: true },
     status: { type: Number, default: 0 },
-    content_en_us: { type: String, require: true },
-    content_zh_cn: { type: String, require: true },
+    content: {
+      'en-us': { type: String, default: '' },
+      'ja-jp': { type: String, default: '' },
+      'zh-cn': { type: String, default: '' }
+    },
     time: { type: Number, default: Date.now() },
     completed_time: { type: Number, default: 0 }
   },

@@ -7,8 +7,11 @@ const NonMoeSchema = new mongoose.Schema<NonMoeAttributes>(
     nid: { type: Number, unique: true },
     uid: { type: Number, required: true },
     name: { type: String, require: true },
-    description_en_us: { type: String, required: true },
-    description_zh_cn: { type: String, required: true },
+    description: {
+      'en-us': { type: String, default: '' },
+      'ja-jp': { type: String, default: '' },
+      'zh-cn': { type: String, default: '' }
+    },
     time: { type: Number, default: Date.now() },
     result: { type: Schema.Types.Mixed, required: true }
   },
