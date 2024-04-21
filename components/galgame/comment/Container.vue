@@ -38,7 +38,7 @@ const { data, pending, refresh } = await useLazyFetch(
     </template>
   </KunHeader>
 
-  <div v-if="!pending">
+  <div>
     <GalgameCommentPanel :to-uid="0" :refresh="refresh">
       <KunNav
         class="nav"
@@ -49,11 +49,11 @@ const { data, pending, refresh } = await useLazyFetch(
       />
     </GalgameCommentPanel>
 
-    <div v-if="!data?.totalCount">
+    <div v-if="!data?.totalCount && !pending">
       {{ $t('galgame.comment.sad') }}
     </div>
 
-    <div class="comments" v-if="data && data.totalCount">
+    <div class="comments" v-if="!pending && data && data.totalCount">
       <GalgameComment
         v-for="comment in data.commentData"
         :key="comment.gcid"

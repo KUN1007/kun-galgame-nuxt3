@@ -1,4 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { t } = useI18n()
+
+useHead({
+  title: t('seo.galgame.title'),
+  meta: [
+    {
+      name: 'description',
+      content: t('seo.galgame.description')
+    }
+  ]
+})
+</script>
 
 <template>
   <div class="root">

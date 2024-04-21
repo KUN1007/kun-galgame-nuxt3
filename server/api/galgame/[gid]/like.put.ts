@@ -3,10 +3,7 @@ import GalgameModel from '~/server/models/galgame'
 import mongoose from 'mongoose'
 
 const updateGalgameLike = async (gid: number, uid: number) => {
-  const galgame = await GalgameModel.findOne(
-    { gid },
-    { status: { $ne: 1 } }
-  ).lean()
+  const galgame = await GalgameModel.findOne({ gid, status: { $ne: 1 } }).lean()
   if (!galgame) {
     return 10211
   }

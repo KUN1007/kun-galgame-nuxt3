@@ -4,6 +4,7 @@ const { isReplyRewriting } = storeToRefs(useTempReplyStore())
 const { isEdit } = storeToRefs(useTempReplyStore())
 
 const route = useRoute()
+
 const isBanned = ref(false)
 const tid = computed(() => {
   return parseInt((route.params as { tid: string }).tid)
@@ -22,26 +23,6 @@ const data = await useFetch(`/api/topic/${tid.value}`, {
     return data.value
   }
 })
-
-if (data) {
-  const content = computed(() =>
-    markdownToText(data.content).trim().replace(/\s+/g, ',').slice(0, 150)
-  )
-
-  useHead({
-    title: data.title,
-    meta: [
-      {
-        name: 'description',
-        content: content.value
-      },
-      {
-        name: 'keywords',
-        content: data.tags.toString()
-      }
-    ]
-  })
-}
 
 const resetPanelStatus = () => {
   isEdit.value = false
@@ -72,6 +53,58 @@ onBeforeRouteLeave(async (_, __, next) => {
 onBeforeMount(() => {
   resetPanelStatus()
 })
+
+if (data) {
+  const content = computed(() =>
+    markdownToText(data.content).trim().replace(/\s+/g, ',').slice(0, 233)
+  )
+
+  useHead({
+    title: data.title,
+    meta: [
+      {
+        name: 'description',
+        content: content.value
+      },
+      {
+        name: 'keywords',
+        content: data.tags.toString()
+      },
+      {
+        name: 'og:title',
+        content: data.title
+      },
+      {
+        name: 'og:description',
+        content: content.value
+      },
+      {
+        property: 'og:type',
+        content: 'article'
+      },
+      {
+        property: 'og:url',
+        content: useRequestURL().href
+      },
+      {
+        property: 'twitter:card',
+        content: content.value
+      },
+      {
+        name: 'twitter:title',
+        content: data.title
+      },
+      {
+        name: 'twitter:description',
+        content: content.value
+      },
+      {
+        property: 'twitter:url',
+        content: useRequestURL().href
+      }
+    ]
+  })
+}
 </script>
 
 <template>

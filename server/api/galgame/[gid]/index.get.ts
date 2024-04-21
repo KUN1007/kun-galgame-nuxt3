@@ -51,6 +51,7 @@ export default defineEventHandler(async (event) => {
       time: galgame.time,
       views: galgame.views,
       platform: galgame.platform,
+      language: galgame.language,
       contributor,
       likes: {
         count: galgame.likes.length,

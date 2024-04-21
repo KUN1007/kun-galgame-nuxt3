@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import type { GalgameDetail } from '~/types/api/galgame'
 
-const galgame = ref<GalgameDetail>()
+const { t, locale } = useI18n()
 const route = useRoute()
+
+const galgame = ref<GalgameDetail>()
 const isBanned = ref(false)
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
@@ -20,19 +22,88 @@ if (data.value === 'banned') {
   galgame.value = data.value ?? undefined
 }
 
-// useHead({
-//   title: topic.value?.title,
-//   meta: [
-//     {
-//       name: 'description',
-//       content: topicContentText.value
-//     },
-//     {
-//       name: 'keywords',
-//       content: topic.value?.tags.toString()
-//     }
-//   ]
-// })
+if (galgame.value) {
+  const title = Object.values(galgame.value.name)
+    .filter((val) => val !== '')
+    .join(' | ')
+  const description = markdownToText(
+    getPreferredLanguageText(
+      galgame.value.introduction,
+      locale.value as Language
+    )
+  )
+  const platforms = galgame.value.platform
+    .map((p) => t(`edit.galgame.platform.${p}`))
+    .join(', ')
+    .toString()
+  const languages = galgame.value.language
+    .map((l) => t(`edit.galgame.resource.language.${l}`))
+    .join(', ')
+    .toString()
+  const descriptionMeta = `${t('seo.galgame.support')} ${languages} | ${platforms} ${t('seo.galgame.download')} - ${description.slice(0, 233)}`
+
+  const keywords =
+    Object.values(galgame.value.name).join(', ') +
+    ', ' +
+    galgame.value.alias.toString()
+
+  useHead({
+    title,
+    htmlAttrs: {
+      lang: locale.value
+    },
+    meta: [
+      {
+        name: 'description',
+        content: descriptionMeta
+      },
+      {
+        name: 'keywords',
+        content: keywords
+      },
+      {
+        name: 'og:title',
+        content: title
+      },
+      {
+        name: 'og:description',
+        content: description
+      },
+      {
+        property: 'og:image',
+        content: galgame.value.banner
+      },
+      {
+        property: 'og:type',
+        content: 'website'
+      },
+      {
+        property: 'og:url',
+        content: useRequestURL().href
+      },
+      {
+        property: 'twitter:card',
+        content: description
+      },
+      {
+        name: 'twitter:title',
+        content: title
+      },
+      {
+        name: 'twitter:description',
+        content: description
+      },
+      {
+        property: 'twitter:image',
+        content: galgame.value.banner
+      },
+      {
+        property: 'twitter:url',
+        content: useRequestURL().href
+      }
+    ]
+  })
+}
 </script>
 
 <template>

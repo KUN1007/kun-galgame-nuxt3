@@ -1,4 +1,18 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { friends } from '~/components/friend-links/friends'
+
+const { t } = useI18n()
+
+useHead({
+  title: t('seo.friends.title'),
+  meta: [
+    {
+      name: 'description',
+      content: friends.map((friend) => t(`friends.${friend.name}`)).join(' | ')
+    }
+  ]
+})
+</script>
 
 <template>
   <div class="root">

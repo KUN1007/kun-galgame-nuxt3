@@ -15,7 +15,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: t('seo.category.description')
+      content: t(`seo.category.${section.value.toLocaleLowerCase()}`)
     }
   ]
 })

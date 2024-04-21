@@ -13,6 +13,7 @@ export interface GalgameDetail {
   time: number
   views: number
   platform: string[]
+  language: string[]
   contributor: GalgameContributor[]
   likes: {
     count: number

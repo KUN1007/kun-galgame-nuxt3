@@ -6,6 +6,7 @@ export interface Category {
 
 export const galgameSection = [
   'g-chatting',
+  'g-article',
   'g-walkthrough',
   'g-seeking',
   'g-news',
@@ -31,6 +32,8 @@ export const otherSection = [
   'o-comics',
   'o-music',
   'o-novel',
+  'o-essay',
+  'o-daily',
   'o-forum',
   'o-other'
 ]

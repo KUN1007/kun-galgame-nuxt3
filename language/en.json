@@ -215,10 +215,12 @@
       "section": {
         "g-walkthrough": "Walkthrough",
         "g-chatting": "Chatting",
+        "g-article": "Article",
         "g-seeking": "Resource Seeking",
         "g-news": "News",
         "g-releases": "New Releases",
         "g-other": "Other",
+
         "t-web": "Web",
         "t-languages": "Programming Languages",
         "t-practical": "Practical Technology",
@@ -229,10 +231,13 @@
         "t-adobe": "Adobe",
         "t-algorithm": "Algorithm",
         "t-other": "Other",
+
         "o-anime": "Animation",
         "o-comics": "Comic",
         "o-music": "Music",
         "o-novel": "Light Novel",
+        "o-daily": "Daily Stories",
+        "o-essay": "Personal Essays",
         "o-forum": "Forum-related",
         "o-other": "Other"
       },
@@ -659,8 +664,35 @@
         "description": "KUN Visual Novel bylaws, covering users, topics, and moemoepoints. The goal is to make the forum's operation more transparent; these are not rules, as we do not have strict rules."
     },
     "category": {
-      "title": "Topic Category",
-      "description": "Topic categories / sections,visualnovel walkthrough,visualnovel chatting,visualnovel seeking,visualnovel news,visualnovel releases, web,languages,linux,practical,ai,crack,android,adobe,algorithm, anime,comics,music,novel"
+      "title": "Topic Categories",
+      "description": "Topic categories / sections,visualnovel walkthrough,visualnovel chatting,visualnovel seeking,visualnovel news,visualnovel resources download,visualnovel releases, web,languages,linux,practical,ai,crack,android,adobe,algorithm, anime,comics,music,novel",
+      "g-walkthrough": "Visual Novel Walkthroughs, full CG archives, patches, and downloads related to visualnovels",
+      "g-chatting": "Visual Novel Chats, where you can freely discuss and post anything related to visualnovels",
+      "g-article": "Visual Novel Articles, longer articles about visualnovels, suitable for reflections and thoughts",
+      "g-seeking": "Visual Novel Resource Seekers, for finding and asking about visualnovel resources",
+      "g-news": "Visual Novel News, updates on new translations, dynamic information related to visualnovels",
+      "g-releases": "Visual Novel Releases, news on new game releases from different companies, where to buy them",
+      "g-other": "Anything else related to visualnovels, including games not covered by VNDB",
+
+      "t-web": "Web, Web app development, JavaScript / TypeScript, Node.js, React / Next.js, Vue / Nuxt, Angular, Solid, Svelte",
+      "t-languages": "Programming Languages, C language, JavaScript, C++ / cpp, Java, Python, Rust, C#",
+      "t-linux": "Linux, sudo pacman -Syu, chmod -R 777 /, dd if=/dev/zero of=/dev/sda, alias cd rm -rf ./*",
+      "t-practical": "Practical Technology, visualnovel translation techniques, practical software and website sharing, tips and tricks",
+      "t-ai": "AI, Self-supervised learning, GANs, Quantum Computing, Transformer, Deep Learning, Federated Learning, GNN, Explainable AI, etc.",
+      "t-crack": "Reverse Engineering, Windows Reverse, Android Reverse, IOS Reverse, Vulnerability Exploitation, Black Box Attacks, Data Breach Prediction, DDoS, SQL Injection, xss",
+      "t-android": "Android, Java, Kotlin, RxJava, Jetpack Compose, flutter",
+      "t-adobe": "Adobe, Adobe Photoshop(PS), Adobe Illustrator(AI), Adobe Premiere Pro(PR), Adobe Audition(AU), Adobe After Effects(AE)",
+      "t-algorithm": "Algorithms, Sort, DFS, BFS, A Search, Greedy, Union Find, Hashing, BT, BST, FT, Backtracking",
+      "t-other": "Others, Anything related to the technology you know, limited to medicine, agriculture, engineering, literature, business, cryptography, sociology, management, etc.",
+
+      "o-anime": "Anime, I love Rito the most in the whole universe! So from now on, I will work hard to make Rito like me too!",
+      "o-comics": "Comics, To be added",
+      "o-music": "Music, せーのっ! でもそんなんじゃ だめ",
+      "o-novel": "Light Novels, To be added",
+      "o-daily": "Daily Life, Record everyday stories from life",    
+      "o-essay": "Personal Essays, Write whatever comes to mind",
+      "o-forum": "Forum Related, Feedback, New Feature Requests, Anything related to this forum",
+      "o-other": "Other Content"
     },
     "contact": {
         "title": "Join / Contact Us",
@@ -721,6 +753,15 @@
     "report": {
       "title": "Anonymous Report",
       "description": "KUN Visual Novel's report page, where you can submit violation records in the forum. Hope everyone will not violate the rules."
+    },
+    "galgame": {
+      "title": "Galgame Resources",
+      "description": "KUN Visual Novel's resources page, providing various visualnovel downloads, Chinese, English, raw versions, Japanese, for Windows, macOS, PC, applications, direct installation, emulators, Android, Linux",
+      "support": "This visual novel resource supports",
+      "download": "Zero-threshold download"
+    },
+    "friends": {
+      "title": "Friend Links"
     }
   },
   "ComponentAlert":{
