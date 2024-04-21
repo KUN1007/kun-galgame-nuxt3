@@ -1,34 +1,14 @@
 <script setup lang="ts">
 const { locale } = useI18n()
-
-interface Site {
-  url: string
-  name: string
-}
-
-const siteList: Site[] = [
-  {
-    url: 'https://vndb.org/',
-    name: 'vndb'
-  },
-  {
-    url: 'https://erogamescape.dyndns.org/',
-    name: 'erogamescape'
-  },
-  {
-    url: 'https://www.dlsite.com/pro/',
-    name: 'dlsite'
-  },
-  {
-    url: 'https://www.wikipedia.org/',
-    name: 'wikipedia'
-  }
-]
 </script>
 
 <template>
   <h2 class="help">
-    <a href="http://" target="_blank" rel="noopener noreferrer">
+    <a
+      href="https://www.kungal.com/zh-cn/topic/1042"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <span>{{ $t('edit.galgame.help.name') }}</span>
       <Icon name="mingcute:external-link-line" />
     </a>
@@ -49,7 +29,11 @@ const siteList: Site[] = [
       temporarily classify them under topic's Galgame -> Others category.
     </p>
     <p>
-      <a href="http://" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://kungal.com/topic/1041"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         How to search for Galgame through VNDB?
       </a>
     </p>
@@ -88,7 +72,11 @@ const siteList: Site[] = [
       对检索不到的非 Galgame 游戏, 请大家暂时发布在话题的 Galgame ->其它 分类。
     </p>
     <p>
-      <a href="http://" target="_blank" rel="noopener noreferrer">
+      <a
+        href="http://"
+        target="https://www.kungal.com/zh-cn/topic/1040"
+        rel="noopener noreferrer"
+      >
         如何通过 VNDB 检索 Galgame?
       </a>
     </p>

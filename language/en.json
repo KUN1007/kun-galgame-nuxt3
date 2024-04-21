@@ -117,7 +117,7 @@
     },
     "tool": {
       "topics": "Topics",
-      "resources": "Resources"
+      "resources": "VNs"
     }
   },
   "topic":{
@@ -221,12 +221,13 @@
         "g-releases": "New Releases",
         "g-other": "Other",
 
+        "t-crack": "Reverse Engineering",
         "t-web": "Web",
         "t-languages": "Programming Languages",
         "t-practical": "Practical Technology",
+        "t-help": "Request Help",
         "t-linux": "Linux",
         "t-ai": "AI",
-        "t-crack": "Reverse Engineering",
         "t-android": "Android",
         "t-adobe": "Adobe",
         "t-algorithm": "Algorithm",
@@ -530,7 +531,7 @@
       "valid": "Mark Valid",
       "fetch": "Get Link",
       "placeholder": {
-        "link": "Resource link (cloud storage|magnet link|URL) etc.",
+        "link": "Resource link (cloud storage{'|'}magnet link{'|'}URL) etc.",
         "size": "Resource size (MB or GB)",
         "extract": "Resource extraction code (optional)",
         "decompress": "Resource decompression code (optional)",
@@ -676,6 +677,7 @@
 
       "t-web": "Web, Web app development, JavaScript / TypeScript, Node.js, React / Next.js, Vue / Nuxt, Angular, Solid, Svelte",
       "t-languages": "Programming Languages, C language, JavaScript, C++ / cpp, Java, Python, Rust, C#",
+      "t-help": "You can ask any questions you have or need assistance with here",
       "t-linux": "Linux, sudo pacman -Syu, chmod -R 777 /, dd if=/dev/zero of=/dev/sda, alias cd rm -rf ./*",
       "t-practical": "Practical Technology, visualnovel translation techniques, practical software and website sharing, tips and tricks",
       "t-ai": "AI, Self-supervised learning, GANs, Quantum Computing, Transformer, Deep Learning, Federated Learning, GNN, Explainable AI, etc.",

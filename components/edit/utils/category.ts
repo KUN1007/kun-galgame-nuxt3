@@ -18,6 +18,7 @@ export const techniqueSection = [
   't-crack',
   't-languages',
   't-practical',
+  't-help',
   't-linux',
   't-web',
   't-android',

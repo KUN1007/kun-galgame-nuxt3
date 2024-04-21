@@ -117,7 +117,7 @@
     },
     "tool": {
       "topics": "话题",
-      "resources": "Galgame 资源"
+      "resources": "Galgame"
     }
   },
   "topic":{
@@ -221,12 +221,13 @@
         "g-releases": "新作消息",
         "g-other": "其它",
         
+        "t-crack": "逆向工程",
         "t-web": "Web",
         "t-languages": "编程语言",
+        "t-help": "请求帮助",
         "t-linux": "Linux",
         "t-practical": "实用技术",
         "t-ai": "AI",
-        "t-crack": "逆向工程",
         "t-android": "Android",
         "t-adobe": "Adobe",
         "t-algorithm": "算法",
@@ -529,7 +530,7 @@
       "valid": "标记有效",
       "fetch": "获取链接",
       "placeholder": {
-        "link": "资源链接 (网盘|磁链|网址) 等",
+        "link": "资源链接 (网盘{'|'}磁链{'|'}网址) 等",
         "size": "资源体积 (MB 或 GB)",
         "extract": "资源提取码 (可选)",
         "decompress": "资源解压码 (可选)",
@@ -675,6 +676,7 @@
       
       "t-web": "Web, Web app development, JavaScript / TypeScript, Node.js, React / Next.js, Vue / Nuxt, Angular, Solid, Svelte",
       "t-languages": "编程语言, C 语言, JavaScript, C++ / cpp, Java, Python, Rust, C#",
+      "t-help": "您有任何需要解决的问题，都可以在这里提问",
       "t-linux": "Linux, sudo pacman -Syu, chmod -R 777 /, dd if=/dev/zero of=/dev/sda, alias cd rm -rf ./*",
       "t-practical": "实用技术, Galgame 汉化技术, 实用软件分享, 实用网站分享, 实用技巧分享",
       "t-ai": "AI, 自监督学习, GANs, 量子计算, Transformer, Deep Learning, Federated Learning, GNN, Explainable AI 等",
