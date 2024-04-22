@@ -21,9 +21,12 @@ const { data, pending, refresh } = await useLazyFetch(
 
 <template>
   <div class="container" v-if="data && data.prs.length">
-    <KunHeader :size="2">
+    <KunHeader :size="2" :show-help="true">
       <template #header>
         {{ $t('galgame.pr.name') }}
+      </template>
+      <template #help>
+        {{ $t('galgame.pr.help') }}
       </template>
     </KunHeader>
 

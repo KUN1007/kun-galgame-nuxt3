@@ -28,11 +28,7 @@ const checkMerge = async (event: H3Event) => {
     return kunError(event, 10610)
   }
 
-  if (
-    userInfo.uid !== galgame.uid &&
-    user.moemoepoint < 1100 &&
-    user.roles < 2
-  ) {
+  if (userInfo.uid !== galgame.uid && user.roles < 2) {
     return kunError(event, 10632)
   }
 

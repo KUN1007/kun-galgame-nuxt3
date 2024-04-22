@@ -565,6 +565,7 @@
     },
     "pr": {
       "name": "Update Request",
+      "help": "Blue represents addition, red represents deletion, visualnovel publisher or administrators can merge or reject requests",
       "request": "Request for Update",
       "details": "Details",
       "status0": "Ongoing",

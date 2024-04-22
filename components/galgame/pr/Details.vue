@@ -11,7 +11,7 @@ const props = defineProps<{
 
 const { uid, moemoepoint, roles } = usePersistUserStore()
 const isShowButton = computed(
-  () => props.details.user?.uid === uid || moemoepoint >= 1100 || roles >= 2
+  () => props.details.user?.uid === uid || roles >= 2
 )
 const galgame = inject<GalgameDetail>('galgame')
 const isFetching = ref(false)
@@ -131,9 +131,9 @@ const handleMergeRequest = async () => {
         {{ $t('galgame.pr.merge') }}
       </KunButton>
     </div>
-    <p class="hint" v-if="!details.status && !isShowButton">
+    <div class="hint" v-if="!details.status && !isShowButton">
       {{ $t('galgame.pr.hint') }}
-    </p>
+    </div>
 
     <div class="decline-input" v-if="isShowReasonInput">
       <KunInput

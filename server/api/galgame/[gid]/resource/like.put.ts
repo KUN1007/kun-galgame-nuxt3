@@ -37,7 +37,7 @@ const updateGalgameResourceLike = async (grid: number, uid: number) => {
       uid,
       resource.uid,
       'liked',
-      resource.link.slice(0, 233),
+      resource.link[0].slice(0, 233),
       -resource.gid
     )
 

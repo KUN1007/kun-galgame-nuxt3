@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
     uid,
     resource.uid,
     'expired',
-    resource.link.slice(0, 233),
+    resource.link[0].slice(0, 233),
     -resource.gid
   )
 
