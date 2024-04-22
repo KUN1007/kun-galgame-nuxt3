@@ -20,7 +20,7 @@ const isFetching = ref(false)
 
 const defaultResourceLink: GalgameResourceStoreTemp = {
   type: 'game',
-  link: '',
+  link: [],
   language: locale.value,
   platform: 'windows',
   size: '',
@@ -32,7 +32,13 @@ const defaultResourceLink: GalgameResourceStoreTemp = {
 const resourceLink = ref<GalgameResourceStoreTemp>({ ...defaultResourceLink })
 
 const handlePublishResourceLink = async (method: 'POST' | 'PUT') => {
-  if (!checkGalgameResourcePublish(resourceLink.value)) {
+  const linkArray = resourceLink.value.link
+    .toString()
+    .split(',')
+    .map((l) => l.trim())
+  if (
+    !checkGalgameResourcePublish({ ...resourceLink.value, link: linkArray })
+  ) {
     return
   }
 
@@ -40,7 +46,10 @@ const handlePublishResourceLink = async (method: 'POST' | 'PUT') => {
   const result = await $fetch(`/api/galgame/${gid.value}/resource`, {
     method,
     query: rewriteResourceId.value ? { grid: rewriteResourceId.value } : {},
-    body: resourceLink.value,
+    body: {
+      ...resourceLink.value,
+      link: linkArray
+    },
     watch: false,
     ...kungalgameResponseHandler
   })
@@ -92,7 +101,7 @@ onMounted(() => {
   <GalgameResourceHelp />
 
   <div class="link">
-    <KunInput
+    <KunTextarea
       :placeholder="`${$t('galgame.resource.placeholder.link')}`"
       v-model="resourceLink.link"
     />

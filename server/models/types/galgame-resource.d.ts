@@ -6,7 +6,7 @@ export interface GalgameResource {
   gid: number
   uid: number
   type: string
-  link: string
+  link: string[]
   language: string
   platform: string
   size: string

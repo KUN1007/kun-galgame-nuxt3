@@ -532,7 +532,7 @@
       "valid": "Mark Valid",
       "fetch": "Get Link",
       "placeholder": {
-        "link": "Resource link (cloud storage{'|'}magnet link{'|'}URL) etc.",
+        "link": "Resource link (cloud storage{'|'}magnet link{'|'}URL) etc. If there are multiple links for the same resource, please separate each link with a comma.",
         "size": "Resource size (MB or GB)",
         "extract": "Resource extraction code (optional)",
         "decompress": "Resource decompression code (optional)",

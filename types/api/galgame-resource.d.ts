@@ -19,7 +19,7 @@ export interface GalgameResource {
 
 export interface GalgameResourceDetails extends GalgameResource {
   user: User
-  link: string
+  link: string[]
   code: string
   password: string
   note: string

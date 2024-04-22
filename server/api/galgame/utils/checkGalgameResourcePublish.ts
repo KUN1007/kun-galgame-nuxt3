@@ -11,12 +11,14 @@ export const checkGalgameResourcePublish = (link: GalgameResourceStoreTemp) => {
     return 10613
   }
 
-  if (!link.link.trim()) {
+  if (!link.link.length || link.link.length > 107) {
     return 10614
   }
 
-  if (link.link.length > 1007) {
-    return 10615
+  for (const l of link.link) {
+    if (l.length > 1007) {
+      return 10615
+    }
   }
 
   if (!languageOptions.includes(link.language)) {

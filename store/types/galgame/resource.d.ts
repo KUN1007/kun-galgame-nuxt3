@@ -1,6 +1,6 @@
 export interface GalgameResourceStoreTemp {
   type: string
-  link: string
+  link: string[]
   language: string
   platform: string
   size: string

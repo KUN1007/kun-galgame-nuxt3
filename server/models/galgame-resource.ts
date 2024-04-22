@@ -8,7 +8,7 @@ const GalgameResourceSchema = new mongoose.Schema<GalgameResource>(
     gid: { type: Number, required: true },
     uid: { type: Number, required: true, ref: 'user' },
     type: { type: String, default: '' },
-    link: { type: String, default: '' },
+    link: { type: [String], default: [] },
     language: { type: String, default: '' },
     platform: { type: String, default: '' },
     size: { type: String, default: '' },

@@ -11,18 +11,24 @@ export const checkGalgameResourcePublish = (link: GalgameResourceStoreTemp) => {
     return false
   }
 
-  if (!link.link.trim()) {
-    useMessage('Resource link cannot be empty!', '资源链接不能为空!', 'warn')
-    return false
-  }
-
-  if (link.link.length > 1007) {
+  if (!link.link.length || link.link.length > 107) {
     useMessage(
-      'The maximum length of resource link is 1007!',
-      '资源链接最大长度为 1007!',
+      'Resource links cannot be empty, and there can be up to 107 links!',
+      '资源链接不能为空, 并且最多 107 个链接!',
       'warn'
     )
     return false
+  }
+
+  for (const l of link.link) {
+    if (l.length > 1007) {
+      useMessage(
+        'The maximum length of resource link is 1007!',
+        '资源链接最大长度为 1007!',
+        'warn'
+      )
+      return false
+    }
   }
 
   if (!languageOptions.includes(link.language)) {
