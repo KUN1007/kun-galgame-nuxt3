@@ -6,7 +6,7 @@ const getHomeTopics = async (page: number, limit: number, category: string) => {
   const skip = (page - 1) * limit
 
   const seventeenDaysAgo = new Date()
-  seventeenDaysAgo.setDate(seventeenDaysAgo.getDate() - 17)
+  seventeenDaysAgo.setDate(seventeenDaysAgo.getDate() - 30)
   const seventeenDaysAgoTimestamp = seventeenDaysAgo.getTime()
 
   const searchQuery = {

@@ -77,14 +77,17 @@ const handleShowMore = () => {
         </div>
 
         <div class="item-container">
-          <p v-for="kun in item" :key="kun.index" class="item">
+          <div v-for="(kun, index) in item" :key="index" class="item">
             <span class="icon-item">
               <Icon :name="kun.icon"></Icon>
             </span>
             <NuxtLinkLocale :to="kun.router">
               {{ $t(`header.hamburger.${kun.name}`) }}
             </NuxtLinkLocale>
-          </p>
+            <span class="new" v-if="kun.isNew">
+              {{ $t('header.hamburger.new') }}
+            </span>
+          </div>
         </div>
 
         <KunSettingPanelComponentsMode v-if="isShowSettings" />
@@ -178,6 +181,12 @@ const handleShowMore = () => {
 
   a {
     color: var(--kungalgame-blue-5);
+  }
+
+  .new {
+    color: var(--kungalgame-red-5);
+    margin-left: 17px;
+    font-size: small;
   }
 }
 

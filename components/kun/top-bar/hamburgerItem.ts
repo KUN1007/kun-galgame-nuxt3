@@ -1,89 +1,87 @@
 export interface Hamburger {
-  index: number
   icon: string
   name: string
   router: string
+  isNew: boolean
 }
 
 export const hamburgerItem: Hamburger[] = [
   {
-    index: 1,
     name: 'galgame',
     icon: 'lucide:gamepad-2',
-    router: '/galgame'
+    router: '/galgame',
+    isNew: false
   },
   {
-    index: 2,
     name: 'pool',
     icon: 'lucide:square-library',
-    router: '/pool'
+    router: '/pool',
+    isNew: false
   },
   {
-    index: 3,
     name: 'category',
     icon: 'lucide:layers-3',
-    router: '/category'
+    router: '/category',
+    isNew: false
   },
   {
-    index: 4,
     name: 'createTopic',
     icon: 'lucide:pencil',
-    router: '/edit/topic'
+    router: '/edit/topic',
+    isNew: false
   },
   {
-    index: 5,
     name: 'createGalgame',
     icon: 'lucide:wand',
-    router: '/edit/topic'
+    router: '/edit/galgame',
+    isNew: true
   },
   {
-    index: 6,
     name: 'about',
     icon: 'lucide:info',
-    router: '/kungalgame'
+    router: '/kungalgame',
+    isNew: false
   },
   {
-    index: 7,
     name: 'friends',
     icon: 'lucide:handshake',
-    router: '/friend-links'
+    router: '/friend-links',
+    isNew: false
   },
-  { index: 8, name: 'join', icon: 'ph:telegram-logo', router: '/contact' },
   {
-    index: 9,
     name: 'ranking',
     icon: 'lucide:align-end-horizontal',
-    router: '/ranking'
+    router: '/ranking',
+    isNew: false
   },
   {
-    index: 10,
     name: 'update',
     icon: 'lucide:arrow-big-up-dash',
-    router: '/update-log'
+    router: '/update-log',
+    isNew: false
   },
-  { index: 11, name: 'bylaw', icon: 'lucide:ruler', router: '/bylaw' },
   {
-    index: 12,
     name: 'balance',
     icon: 'lucide:circle-dollar-sign',
-    router: '/balance'
+    router: '/balance',
+    isNew: false
   },
   {
-    index: 13,
     name: 'nonMoe',
     icon: 'lucide:ban',
-    router: '/non-moe'
+    router: '/non-moe',
+    isNew: false
   },
   {
-    index: 14,
     name: 'thanks',
     icon: 'lucide:heart-handshake',
-    router: '/thanks-list'
+    router: '/thanks-list',
+    isNew: false
   },
   {
-    index: 15,
     name: 'donate',
     icon: 'lucide:hand-heart',
-    router: '/donate'
+    router: '/donate',
+    isNew: false
   }
 ]
