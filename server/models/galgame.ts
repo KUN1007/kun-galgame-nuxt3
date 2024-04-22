@@ -35,7 +35,8 @@ const GalgameSchema = new mongoose.Schema<Galgame>(
     comments: { type: [Number], default: [] },
 
     alias: { type: [String], default: [] },
-    official: { type: String, default: '' }
+    official: { type: String, default: '' },
+    engine: { type: [String], default: [] }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )

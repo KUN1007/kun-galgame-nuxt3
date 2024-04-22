@@ -9,7 +9,7 @@ const props = defineProps<{
   refresh: () => {}
 }>()
 
-const { uid, moemoepoint, roles } = usePersistUserStore()
+const { uid, roles } = usePersistUserStore()
 const isShowButton = computed(
   () => props.details.user?.uid === uid || roles >= 2
 )

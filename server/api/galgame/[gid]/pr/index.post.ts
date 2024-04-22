@@ -22,14 +22,15 @@ export default defineEventHandler(async (event) => {
   if (!originalGalgame) {
     return kunError(event, 10610)
   }
-  const { gid, name, introduction, alias, official } = originalGalgame
+  const { gid, name, introduction, alias, official, engine } = originalGalgame
 
   const diffGalgame = compareObjects(galgame, {
     gid,
     name,
     introduction,
     alias,
-    official
+    official,
+    engine
   })
 
   const session = await mongoose.startSession()

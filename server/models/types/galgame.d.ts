@@ -25,6 +25,7 @@ export interface Galgame {
 
   alias: string[]
   official: string
+  engine: string[]
 
   user: UserAttributes[]
 

@@ -17,6 +17,8 @@ const introductionLanguage = ref(locale.value as Language)
 
     <EditGalgamePrOfficial />
 
+    <EditGalgamePrEngine />
+
     <EditGalgamePrAlias />
 
     <EditGalgamePrFooter />

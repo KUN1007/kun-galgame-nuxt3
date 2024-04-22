@@ -11,4 +11,5 @@ export interface GalgameStoreTemp {
   introduction: KunLanguage
   alias: string[]
   official: string
+  engine: string[]
 }

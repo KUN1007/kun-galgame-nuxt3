@@ -77,6 +77,7 @@ export default defineEventHandler(async (event) => {
         ),
         alias: galgamePR.galgame?.alias,
         official: galgamePR.galgame?.official,
+        engine: galgamePR.galgame?.engine,
         $addToSet: { contributor: uid }
       }
     )

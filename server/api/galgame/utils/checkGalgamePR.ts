@@ -28,5 +28,11 @@ export const checkGalgamePR = (galgame: GalgameStoreTemp) => {
     return 10629
   }
 
+  for (const e of galgame.engine) {
+    if (e.length > 107) {
+      return 10635
+    }
+  }
+
   return 0
 }

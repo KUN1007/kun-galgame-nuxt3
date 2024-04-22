@@ -62,7 +62,8 @@ export default defineEventHandler(async (event) => {
         isFavorite: galgame.favorites.includes(userInfo?.uid ?? 0)
       },
       alias: galgame.alias,
-      official: galgame.official
+      official: galgame.official,
+      engine: galgame.engine
     }
 
     await session.commitTransaction()

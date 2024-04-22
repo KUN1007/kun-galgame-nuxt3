@@ -25,6 +25,7 @@ export interface GalgameDetail {
   }
   alias: string[]
   official: string
+  engine: string[]
 }
 
 export interface GalgamePageRequestData {

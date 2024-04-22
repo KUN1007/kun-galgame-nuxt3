@@ -15,20 +15,20 @@ defineProps<{
   </KunHeader>
 
   <div class="name">
-    <h3>{{ $t('galgame.info.title') }}</h3>
+    <h4>{{ $t('galgame.info.title') }}</h4>
     <KunCopy v-if="galgame.name['en-us']" :text="galgame.name['en-us']" />
     <KunCopy v-if="galgame.name['ja-jp']" :text="galgame.name['ja-jp']" />
     <KunCopy v-if="galgame.name['zh-cn']" :text="galgame.name['zh-cn']" />
   </div>
 
   <div class="alias">
-    <h3>{{ $t('galgame.info.alias') }}</h3>
+    <h4>{{ $t('galgame.info.alias') }}</h4>
     <GalgameNull v-if="!galgame.alias.length" />
     <TopicTags :tags="galgame.alias" :is-show-icon="false" />
   </div>
 
   <div class="official">
-    <h3>{{ $t('galgame.info.official') }}</h3>
+    <h4>{{ $t('galgame.info.official') }}</h4>
     <GalgameNull v-if="!galgame.official" />
     <span class="link" v-if="galgame.official">
       <KunCopy :text="galgame.official" />
@@ -39,7 +39,7 @@ defineProps<{
   </div>
 
   <div class="platform">
-    <h3>{{ $t('galgame.info.platform') }}</h3>
+    <h4>{{ $t('galgame.info.platform') }}</h4>
     <span
       v-for="(platform, index) in galgame.platform"
       :key="index"
@@ -51,15 +51,18 @@ defineProps<{
       <Icon :name="platformIconMap[platform]" />
     </span>
   </div>
+
+  <div class="engine" v-if="galgame.engine.length">
+    <h4>{{ $t('galgame.info.engine') }}</h4>
+    <span v-for="(engine, index) in galgame.engine" :key="index">
+      {{ engine }}
+    </span>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 h2 {
   margin-bottom: 17px;
-}
-
-h3 {
-  margin-bottom: 7px;
 }
 
 .name {
@@ -99,7 +102,7 @@ h3 {
   display: flex;
   margin-bottom: 17px;
 
-  h3 {
+  h4 {
     margin-right: 17px;
   }
 
@@ -107,6 +110,22 @@ h3 {
     display: flex;
     align-items: center;
     font-size: 20px;
+    color: var(--kungalgame-font-color-2);
+    margin-right: 10px;
+  }
+}
+
+.engine {
+  display: flex;
+  margin-bottom: 17px;
+
+  h4 {
+    margin-right: 17px;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
     color: var(--kungalgame-font-color-2);
     margin-right: 10px;
   }

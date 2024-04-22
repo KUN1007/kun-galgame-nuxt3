@@ -326,6 +326,10 @@
         "placeholder": "请输入游戏别名",
         "hint": "别名最多 17 个, 可以输入别名按下回车创建别名"
       },
+      "engine": {
+        "name": "游戏引擎",
+        "placeholder": "请输入游戏的引擎名，例如 KiriKiri, RUGP, Shiina Rio, 可以输入多个"
+      },
       "confirm": "确定发布"
     }
   },
@@ -520,7 +524,8 @@
       "title": "标题",
       "alias": "别名",
       "official": "官网",
-      "platform": "平台"
+      "platform": "平台",
+      "engine": "引擎"
     },
     "resource": {
       "name": "资源链接",
@@ -587,7 +592,8 @@
           "zh-cn": "中文介绍"
         },
         "alias": "别名",
-        "official": "官网"
+        "official": "官网",
+        "engine": "引擎"
       }
     },
     "contributors": "贡献者",

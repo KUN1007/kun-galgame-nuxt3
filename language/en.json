@@ -326,6 +326,10 @@
         "placeholder": "Please enter the game alias",
         "hint": "Alias can be up to 17 characters long. Press Enter to create an alias."
       },
+      "engine": {
+        "name": "Galgame Engine",
+        "placeholder": "Please enter the name of the game engine, for example, KiriKiri, RUGP, Shiina Rio. You can enter multiple."
+      },
       "confirm": "Confirm Publish"
     }
   },
@@ -521,7 +525,8 @@
       "title": "Title",
       "alias": "Aliases",
       "official": "Official Site",
-      "platform": "Platform"
+      "platform": "Platform",
+      "engine": "Engine"
     },
     "resource": {
       "name": "Resources Links",
@@ -588,7 +593,8 @@
           "zh-cn": "Chinese Introduction"
         },
         "alias": "Aliases",
-        "official": "Official Site"
+        "official": "Official Site",
+        "engine": "Engine"
       }
     },
     "contributors": "Contributors",

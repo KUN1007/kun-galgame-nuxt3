@@ -48,5 +48,16 @@ export const checkGalgamePR = (galgame: GalgameStoreTemp): boolean => {
     return false
   }
 
+  for (const e of galgame.engine) {
+    if (e.length > 107) {
+      useMessage(
+        'The engine name for visualnovel should be no longer than 107 characters!',
+        'Galgame 的引擎名最长 107 字!',
+        'warn'
+      )
+      return false
+    }
+  }
+
   return true
 }
