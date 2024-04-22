@@ -21,7 +21,7 @@ const getUpdateLogs = async (
   const updates: UpdateLog[] = updateLogs.map((log) => ({
     upid: log.upid,
     type: log.type as UpdateType,
-    content: language === 'en-us' ? log.content_en_us : log.content_zh_cn,
+    content: log.content[language],
     time: log.time,
     version: log.version
   }))

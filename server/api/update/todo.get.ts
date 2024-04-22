@@ -14,7 +14,7 @@ const getTodos = async (page: number, limit: number, language: Language) => {
   const todos: Todo[] = data.map((todo) => ({
     todoId: todo.todo_id,
     status: todo.status,
-    content: language === 'en-us' ? todo.content_en_us : todo.content_zh_cn,
+    content: todo.content[language],
     time: todo.time,
     completedTime: todo.completed_time
   }))
