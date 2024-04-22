@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import env from '~/server/env/dotenv'
 import GalgameModel from '~/server/models/galgame'
+import GalgameLinkModel from '~/server/models/galgame-link'
 import UserModel from '~/server/models/user'
 import { checkGalgamePublish } from './utils/checkGalgamePublish'
 import { uploadGalgameBanner } from './utils/uploadGalgameBanner'
@@ -74,7 +75,7 @@ export default defineEventHandler(async (event) => {
   const session = await mongoose.startSession()
   session.startTransaction()
   try {
-    const newGalgame = new GalgameModel({
+    const newGalgame = await GalgameModel.create({
       vndb_id,
       uid,
       name,
@@ -83,25 +84,23 @@ export default defineEventHandler(async (event) => {
       time: Date.now()
     })
 
-    const savedGalgame = await newGalgame.save()
-
     await UserModel.updateOne(
       { uid },
       {
         $addToSet: {
-          galgame: savedGalgame.gid,
-          contribute_galgame: savedGalgame.gid
+          galgame: newGalgame.gid,
+          contribute_galgame: newGalgame.gid
         },
         $inc: { daily_galgame_count: 1, daily_image_count: 1, moemoepoint: 3 }
       }
     )
 
     await GalgameModel.updateOne(
-      { gid: savedGalgame.gid },
+      { gid: newGalgame.gid },
       { $addToSet: { contributor: uid } }
     )
 
-    const res = await uploadGalgameBanner(banner, savedGalgame.gid)
+    const res = await uploadGalgameBanner(banner, newGalgame.gid)
     if (!res) {
       return kunError(event, 10116)
     }
@@ -109,14 +108,21 @@ export default defineEventHandler(async (event) => {
       return kunError(event, res)
     }
 
-    const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${savedGalgame.gid}/banner/banner.webp`
+    const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${newGalgame.gid}/banner/banner.webp`
     await GalgameModel.updateOne(
-      { gid: savedGalgame.gid },
+      { gid: newGalgame.gid },
       { $set: { banner: imageLink } }
     )
 
+    await GalgameLinkModel.create({
+      gid: newGalgame.gid,
+      uid,
+      name: 'VNDB',
+      link: `https://vndb.org/${vndb_id}`
+    })
+
     await createGalgameHistory({
-      gid: savedGalgame.gid,
+      gid: newGalgame.gid,
       uid,
       time: Date.now(),
       action: 'created',
@@ -126,7 +132,7 @@ export default defineEventHandler(async (event) => {
 
     await session.commitTransaction()
 
-    return savedGalgame.gid
+    return newGalgame.gid
   } catch (error) {
     await session.abortTransaction()
   } finally {
