@@ -10,7 +10,7 @@ const GalgameHistorySchema = new mongoose.Schema<GalgameHistory>(
     time: { type: Number, default: 0 },
     action: { type: String, default: '' },
     type: { type: String, default: '' },
-    content: { type: String, default: '' }
+    content: { type: String, default: '', max: 1007 }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )

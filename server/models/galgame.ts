@@ -8,15 +8,15 @@ const GalgameSchema = new mongoose.Schema<Galgame>(
     vndb_id: { type: String, required: true },
     uid: { type: Number, required: true, ref: 'user' },
     name: {
-      'en-us': { type: String, default: '' },
-      'ja-jp': { type: String, default: '' },
-      'zh-cn': { type: String, default: '' }
+      'en-us': { type: String, default: '', maxlength: 100007 },
+      'ja-jp': { type: String, default: '', maxlength: 100007 },
+      'zh-cn': { type: String, default: '', maxlength: 100007 }
     },
-    banner: { type: String, default: '' },
+    banner: { type: String, default: '', maxlength: 1007 },
     introduction: {
-      'en-us': { type: String, default: '' },
-      'ja-jp': { type: String, default: '' },
-      'zh-cn': { type: String, default: '' }
+      'en-us': { type: String, default: '', maxlength: 100007 },
+      'ja-jp': { type: String, default: '', maxlength: 100007 },
+      'zh-cn': { type: String, default: '', maxlength: 100007 }
     },
 
     time: { type: Number, default: 0 },
@@ -35,7 +35,7 @@ const GalgameSchema = new mongoose.Schema<Galgame>(
     comments: { type: [Number], default: [] },
 
     alias: { type: [String], default: [] },
-    official: { type: String, default: '' },
+    official: { type: String, default: '', maxlength: 233 },
     engine: { type: [String], default: [] }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }

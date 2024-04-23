@@ -41,7 +41,7 @@ const updateReplyUpvote = async (uid: number, rid: number) => {
       uid,
       reply.r_uid,
       'upvoted',
-      reply.content ?? '',
+      reply.content.slice(0, 233),
       reply.tid
     )
 

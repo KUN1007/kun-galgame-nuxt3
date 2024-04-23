@@ -13,7 +13,7 @@ const ReplySchema = new mongoose.Schema<ReplyAttributes>(
     tags: { type: [String], default: [] },
     time: { type: Number, default: 0 },
     edited: { type: Number, default: 0 },
-    content: { type: String, default: '' },
+    content: { type: String, default: '', maxlength: 10007 },
     upvote_time: { type: Number, default: 0 },
 
     upvotes: { type: [Number], default: [] },

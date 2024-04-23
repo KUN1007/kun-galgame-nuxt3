@@ -11,11 +11,11 @@ const GalgameResourceSchema = new mongoose.Schema<GalgameResource>(
     link: { type: [String], default: [] },
     language: { type: String, default: '' },
     platform: { type: String, default: '' },
-    size: { type: String, default: '' },
+    size: { type: String, default: '', maxlength: 107 },
 
-    code: { type: String, default: '' },
-    password: { type: String, default: '' },
-    note: { type: String, default: '' },
+    code: { type: String, default: '', maxlength: 1007 },
+    password: { type: String, default: '', maxlength: 1007 },
+    note: { type: String, default: '', maxlength: 1007 },
 
     time: { type: Number, default: 0 },
     status: { type: Number, default: 0 },

@@ -10,7 +10,7 @@ const GalgamePRSchema = new mongoose.Schema<GalgamePR>(
     status: { type: Number, default: 0 },
     index: { type: Number, default: 0 },
     completed_time: { type: Number, default: 0 },
-    note: { type: String, default: '' },
+    note: { type: String, default: '', maxlength: 1007 },
     galgame: {}
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }

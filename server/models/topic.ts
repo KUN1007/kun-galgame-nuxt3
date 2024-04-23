@@ -5,8 +5,8 @@ import type { TopicAttributes } from './types/topic'
 const TopicSchema = new mongoose.Schema<TopicAttributes>(
   {
     tid: { type: Number, unique: true },
-    title: { type: String, required: true },
-    content: { type: String, required: true },
+    title: { type: String, required: true, maxlength: 40 },
+    content: { type: String, required: true, maxlength: 100007 },
     uid: { type: Number, required: true, ref: 'user' },
     tags: { type: [String], required: true },
     category: { type: [String], required: true },

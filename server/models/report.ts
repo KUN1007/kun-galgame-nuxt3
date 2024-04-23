@@ -5,7 +5,7 @@ import type { ReportAttributes } from './types/report'
 const ReportSchema = new mongoose.Schema<ReportAttributes>(
   {
     report_id: { type: Number, unique: true },
-    reason: { type: String, default: '' },
+    reason: { type: String, default: '', maxlength: 1007 },
     type: { type: String, default: '' },
     status: { type: Number, default: 0 }
   },

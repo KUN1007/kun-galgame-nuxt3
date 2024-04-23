@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema<UserAttributes>(
     status: { type: Number, default: 0 },
     time: { type: Number, default: Date.now() },
     moemoepoint: { type: Number, default: 1007 },
-    bio: { type: String, default: '' },
+    bio: { type: String, default: '', maxlength: 107 },
     upvote: { type: Number, default: 0 },
     like: { type: Number, default: 0 },
     dislike: { type: Number, default: 0 },
