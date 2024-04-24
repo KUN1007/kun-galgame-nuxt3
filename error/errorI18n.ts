@@ -101,6 +101,7 @@ const errorMessagesEN: Record<number, string> = {
   10633: `This update request has been processed (-B)`,
   10634: `Comment length exceed 1007 characters (-B)`,
   10635: `The engine name for visualnovel should be no longer than 107 characters (-B)`,
+  10636: `Invalid URL link format (-B)`,
 
   // Report Part
   10701: `Invalid Report type. (-B)`,
@@ -204,6 +205,7 @@ const errorMessagesCN: Record<number, string> = {
   10633: `该更新请求已经被处理 (-B)`,
   10634: `评论内容长度超过 1007 个字符 (-B)`,
   10635: `Galgame 的引擎名最长 107 字 (-B)`,
+  10636: `非法的链接格式 (-B)`,
 
   10701: `不合法的举报类型. (-B)`,
   10702: `举报理由不能空. (-B)`,

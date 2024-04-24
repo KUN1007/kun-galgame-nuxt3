@@ -21,10 +21,19 @@ export const checkGalgameResourcePublish = (link: GalgameResourceStoreTemp) => {
   }
 
   for (const l of link.link) {
-    if (l.length > 1007) {
+    if (l.trim().length > 1007) {
       useMessage(
         'The maximum length of resource link is 1007!',
         '资源链接最大长度为 1007!',
+        'warn'
+      )
+      return false
+    }
+
+    if (!isValidURL(l.trim())) {
+      useMessage(
+        'Invalid link format, link must be pure URL!',
+        '非法的链接格式, 链接必须为纯 URL!',
         'warn'
       )
       return false

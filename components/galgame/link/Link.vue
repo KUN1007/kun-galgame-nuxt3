@@ -80,6 +80,8 @@ const handleDeleteLink = async (gid: number, glid: number) => {
     </KunHeader>
 
     <div class="link-edit" v-if="isShowEdit">
+      <GalgameLinkHelp />
+
       <KunInput
         :placeholder="`${$t('galgame.link.label')}`"
         v-model="linkModel.name"

@@ -17,8 +17,14 @@ const { locale } = useI18n()
         link will also be deducted
       </p>
       <p>
-        All resource links must be related to the game on this page, must be
-        free, and cannot require points or paid downloads
+        <strong>
+          All resource links must be related to the game on this page, must be
+          free, and cannot require points or paid downloads
+        </strong>
+      </p>
+      <p>
+        All links must be in hyperlink format, and cannot be mixed with other
+        non-hyperlink formatted text, such as cloud storage types
       </p>
       <p>
         Resource links can be magnet links, cloud storage links, URLs, etc. You
@@ -42,7 +48,12 @@ const { locale } = useI18n()
       </p>
       <p>每发布一个资源链接您可以获得 3 萌萌点</p>
       <p>资源链接被删除, 通过资源链接获得的萌萌点也会被扣除</p>
-      <p>所有资源链接必须与该页面游戏相关, 必须免费, 不得付积分、付费下载</p>
+      <p>
+        <strong>
+          所有资源链接必须与该页面游戏相关, 必须免费, 不得付积分、付费下载
+        </strong>
+      </p>
+      <p>所有链接必须为链接格式, 不能参杂其它非链接格式的文字, 例如网盘类型</p>
       <p>
         资源链接可以是磁链、网盘、网址等等, 可以重复贡献资源链接, 但是同类型链接
         (同种网盘, 网址等) 每人仅可贡献一次

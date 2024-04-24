@@ -1,3 +1,4 @@
+import { isValidURL } from '~/utils/validate'
 import {
   typeOptions,
   languageOptions,
@@ -16,8 +17,12 @@ export const checkGalgameResourcePublish = (link: GalgameResourceStoreTemp) => {
   }
 
   for (const l of link.link) {
-    if (l.length > 1007) {
+    if (l.trim().length > 1007) {
       return 10615
+    }
+
+    if (!isValidURL(l)) {
+      return 10636
     }
   }
 

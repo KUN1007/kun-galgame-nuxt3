@@ -9,6 +9,15 @@ export const checkGalgameLinkPublish = (name: string, link: string) => {
     return false
   }
 
+  if (!isValidURL(link.trim())) {
+    useMessage(
+      'Invalid link format, link must be pure URL!',
+      '非法的链接格式, 链接必须为纯 URL!',
+      'warn'
+    )
+    return false
+  }
+
   if (name.trim().length > 107) {
     useMessage(
       'The maximum length of the link name is 107 characters!',

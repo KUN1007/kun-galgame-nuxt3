@@ -123,6 +123,7 @@ const handleClickUpload = () => {
     color: var(--kungalgame-font-color-0);
     font-size: small;
     font-style: oblique;
+    text-align: center;
   }
 
   .plus {
