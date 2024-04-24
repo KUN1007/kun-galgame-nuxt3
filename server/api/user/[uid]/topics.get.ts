@@ -1,5 +1,5 @@
-import TopicModel from '~/server/models/topic'
 import UserModel from '~/server/models/user'
+import TopicModel from '~/server/models/topic'
 import type { UserTopic, UserGetTopicRequestData } from '~/types/api/user'
 
 export default defineEventHandler(async (event) => {

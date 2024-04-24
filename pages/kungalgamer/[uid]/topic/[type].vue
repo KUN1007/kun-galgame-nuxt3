@@ -9,7 +9,7 @@ const topicType = computed(
   () => (route.params as { type: string }).type as TopicType
 )
 
-const tidArray = computed(() => {
+const count = computed(() => {
   if (topicType.value === 'publish') {
     return props.user.topic
   }
@@ -30,6 +30,6 @@ const tidArray = computed(() => {
   <KungalgamerList>
     <KungalgamerTopic :uid="user.uid" :type="topicType" />
 
-    <KungalgamerEmpty v-if="!tidArray" />
+    <KungalgamerEmpty v-if="!count" />
   </KungalgamerList>
 </template>

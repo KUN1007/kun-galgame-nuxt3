@@ -50,6 +50,33 @@ export const navBarRoute: Ref<Nav[]> = ref([
     ]
   },
   {
+    name: 'galgame',
+    collapsed: true,
+    permission: [1, 2, 3, 4],
+    child: [
+      {
+        name: 'publish',
+        router: 'galgame/publish',
+        permission: [1, 2, 3, 4]
+      },
+      {
+        name: 'like',
+        router: 'galgame/like',
+        permission: [1, 2, 3, 4]
+      },
+      {
+        name: 'favorite',
+        router: 'galgame/favorite',
+        permission: [1, 2, 3, 4]
+      },
+      {
+        name: 'contribute',
+        router: 'galgame/contribute',
+        permission: [1, 2, 3, 4]
+      }
+    ]
+  },
+  {
     name: 'reply',
     router: 'reply',
     permission: [1, 2, 3, 4]

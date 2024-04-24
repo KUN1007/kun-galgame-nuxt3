@@ -372,10 +372,12 @@
       "settings": "信息设置",
       "email": "邮箱密码",
       "topic": "话题",
+      "galgame": "Galgame",
       "publish": "已发布",
       "like": "已点赞",
       "favorite": "已收藏",
       "upvote": "已推",
+      "contribute": "已贡献",
       "reply": "发的回复",
       "comment": "发的评论"
     },

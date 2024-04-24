@@ -372,10 +372,12 @@
       "settings": "Settings",
       "email": "Email",
       "topic": "Topics",
+      "galgame": "VNs",
       "publish": "Published",
       "like": "Liked",
       "favorite": "Favorite",
       "upvote": "Upvote",
+      "contribute": "Contributed",
       "reply": "Replies",
       "comment": "Comments"
     },
