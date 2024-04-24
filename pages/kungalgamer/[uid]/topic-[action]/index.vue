@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { UserInfo } from '~/types/api/user'
+import type { TopicType, UserInfo } from '~/types/api/user'
 
 const props = defineProps<{
   user: UserInfo
@@ -26,8 +26,8 @@ const tidArray = computed(() => {
 
 <template>
   <KungalgamerList>
-    <KungalgamerTopic :tid-array="tidArray" />
+    <KungalgamerTopic :uid="user.uid" :type="action as TopicType" />
 
-    <KungalgamerEmpty v-if="!tidArray.length" />
+    <KungalgamerEmpty v-if="!tidArray" />
   </KungalgamerList>
 </template>

@@ -1,3 +1,5 @@
+export type TopicType = 'published' | 'liked' | 'upvote' | 'favorite'
+
 export interface UserInfo {
   uid: number
   name: string
@@ -12,15 +14,15 @@ export interface UserInfo {
   dislike: number
   dailyTopicCount: number
 
-  topic: number[]
-  reply: number[]
-  comment: number[]
-  likeTopic: number[]
-  upvoteTopic: number[]
-  favoriteTopic: number[]
+  topic: number
+  reply: number
+  comment: number
+  likeTopic: number
+  upvoteTopic: number
+  favoriteTopic: number
 
-  galgame: number[]
-  contributeGalgame: number[]
+  galgame: number
+  contributeGalgame: number
   dailyGalgameCount: number
 }
 
@@ -50,9 +52,10 @@ export interface UserTopic {
   time: number
 }
 
-export interface UserGetUserTopicRequestData {
-  uid: number
-  tidArray: number[]
+export interface UserGetTopicRequestData {
+  page: string
+  limit: string
+  type: TopicType
 }
 
 export interface UserReply {

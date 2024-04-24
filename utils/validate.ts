@@ -5,9 +5,12 @@ export const isValidTimestamp = (timestamp: number) => {
 }
 
 export const isValidURL = (url: string) => {
-  const regex =
-    /^(https?|http):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*([a-zA-Z0-9-]+\.){1,}[a-zA-Z]{2,107}(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/
-  return regex.test(url)
+  try {
+    const _ = new URL(url)
+    return true
+  } catch (err) {
+    return false
+  }
 }
 
 export const isValidEmail = (email: string) => {

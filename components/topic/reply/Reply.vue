@@ -75,7 +75,6 @@ defineProps<{
 <style lang="scss" scoped>
 .reply {
   width: 100%;
-  min-height: 300px;
   display: flex;
   flex-shrink: 0;
   flex-direction: column;

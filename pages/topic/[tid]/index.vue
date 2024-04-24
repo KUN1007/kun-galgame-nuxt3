@@ -111,7 +111,7 @@ if (data) {
   <div class="root">
     <Topic v-if="data" :tid="tid" :topic="data" />
 
-    <KunBlank v-if="!data">
+    <KunBlank v-if="!data && !isBanned">
       {{ $t('topic.notFound') }}
     </KunBlank>
 

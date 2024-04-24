@@ -1,21 +1,28 @@
 <script setup lang="ts">
 import dayjs from 'dayjs'
+import type { TopicType } from '~/types/api/user'
 
 const props = defineProps<{
-  tidArray: number[]
+  uid: number
+  type: TopicType
 }>()
 
-const { data } = await useFetch('/api/user/topics', {
+const pageData = reactive({
+  page: 1,
+  limit: 50,
+  type: props.type
+})
+
+const { data, pending } = await useFetch(`/api/user/${props.uid}/topics`, {
   method: 'GET',
-  query: { tidArray: props.tidArray },
-  watch: false,
+  query: pageData,
   ...kungalgameResponseHandler
 })
 </script>
 
 <template>
-  <div class="topic" v-if="tidArray.length">
-    <div class="item" v-for="(topic, index) in data" :key="index">
+  <div class="topic" v-if="data && data.topics.length">
+    <div class="item" v-for="(topic, index) in data.topics" :key="index">
       <NuxtLinkLocale :to="`/topic/${topic.tid}`">
         <div class="title">
           {{ topic.title }}
@@ -25,6 +32,16 @@ const { data } = await useFetch('/api/user/topics', {
         </div>
       </NuxtLinkLocale>
     </div>
+
+    <KunPagination
+      class="pagination"
+      v-if="data.totalCount > 50"
+      :page="pageData.page"
+      :limit="pageData.limit"
+      :sum="data.totalCount"
+      :loading="pending"
+      @set-page="(newPage) => (pageData.page = newPage)"
+    />
   </div>
 </template>
 
