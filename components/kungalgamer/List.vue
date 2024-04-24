@@ -14,4 +14,10 @@
   flex-direction: column;
   overflow-y: scroll;
 }
+
+@media (max-width: 700px) {
+  .list {
+    padding-left: 3px;
+  }
+}
 </style>

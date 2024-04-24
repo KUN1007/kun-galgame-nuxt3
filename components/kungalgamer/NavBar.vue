@@ -11,6 +11,16 @@ const props = defineProps<{
 const localePath = useLocalePath()
 const currentPageUid = computed(() => props.uid)
 
+const iconMap: Record<string, string> = {
+  profile: 'lucide:user-round',
+  settings: 'lucide:settings',
+  email: 'lucide:mail',
+  topic: 'lucide:square-gantt-chart',
+  galgame: 'lucide:gamepad-2',
+  reply: 'lucide:reply',
+  comment: 'uil:comment-dots'
+}
+
 const currentPageUserRoles = computed(() => {
   if (!storeUid.value) {
     return 1
@@ -55,7 +65,10 @@ const handleCollapsed = (item: Nav) => {
         :class="activeClass(currentPageUid, kun)"
         @click="handleCollapsed(kun)"
       >
-        <span>{{ $t(`user.nav.${kun.name}`) }}</span>
+        <span class="nav-icon">
+          <Icon :name="iconMap[kun.name] ?? ''" />
+        </span>
+        <span class="name">{{ $t(`user.nav.${kun.name}`) }}</span>
         <span
           class="chevron"
           v-if="kun.collapsed !== undefined"
@@ -75,19 +88,20 @@ const handleCollapsed = (item: Nav) => {
 <style lang="scss" scoped>
 .nav {
   height: 100%;
-  width: 120px;
+  width: 130px;
   border-radius: 0 0 0 7px;
   border-right: 1px solid var(--kungalgame-blue-5);
   flex-shrink: 0;
+  overflow: scroll;
+  scrollbar-width: none;
 }
 
 .link {
-  padding: 10px 0;
+  padding: 10px;
   cursor: pointer;
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
   color: var(--kungalgame-blue-5);
 
@@ -95,10 +109,21 @@ const handleCollapsed = (item: Nav) => {
     background-color: var(--kungalgame-trans-blue-2);
   }
 
-  .chevron {
+  & > span {
     display: flex;
     margin-left: 7px;
-    transition: all 0.2s;
+
+    &:first-child {
+      font-size: 20px;
+    }
+
+    &:nth-child(2) {
+      font-size: small;
+    }
+
+    &:last-child {
+      transition: all 0.2s;
+    }
   }
 
   .active-chevron {
@@ -123,6 +148,32 @@ const handleCollapsed = (item: Nav) => {
   .nav {
     width: 70px;
     font-size: small;
+    border-right: none;
+  }
+
+  .link {
+    padding: 10px 7px;
+    border-radius: 10px;
+
+    .name {
+      display: none;
+    }
+  }
+
+  .submenu {
+    border-radius: 10px;
+
+    .link {
+      padding: 10px 0;
+
+      .nav-icon {
+        display: none;
+      }
+
+      .name {
+        display: block;
+      }
+    }
   }
 }
 </style>

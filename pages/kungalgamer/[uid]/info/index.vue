@@ -66,21 +66,19 @@ const statusName = () => {
           {{ $t('user.profile.today') }}: {{ user.dailyTopicCount }}
         </span>
 
-        <span>{{ $t('user.profile.topic') }}: {{ user.topic.length }}</span>
+        <span>{{ $t('user.profile.topic') }}: {{ user.topic }}</span>
 
-        <span>{{ $t('user.profile.reply') }}: {{ user.reply.length }}</span>
+        <span>{{ $t('user.profile.reply') }}: {{ user.reply }}</span>
 
-        <span>
-          {{ $t('user.profile.comment') }}: {{ user.comment.length }}
-        </span>
+        <span> {{ $t('user.profile.comment') }}: {{ user.comment }} </span>
 
         <span>
-          {{ $t('user.profile.galgame.galgame') }}: {{ user.galgame.length }}
+          {{ $t('user.profile.galgame.galgame') }}: {{ user.galgame }}
         </span>
 
         <span>
           {{ $t('user.profile.galgame.contribute') }}:
-          {{ user.contributeGalgame.length }}
+          {{ user.contributeGalgame }}
         </span>
 
         <span>
