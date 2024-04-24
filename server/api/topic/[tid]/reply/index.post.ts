@@ -73,10 +73,7 @@ export default defineEventHandler(async (event) => {
       { $addToSet: { reply: newReply.rid } }
     )
 
-    const toUser = await UserModel.findOneAndUpdate(
-      { uid: newReply.to_uid },
-      { $inc: { moemoepoint: 2 } }
-    )
+    const toUser = await UserModel.findOne({ uid: newReply.to_uid })
 
     await TopicModel.updateOne(
       { tid },
@@ -91,6 +88,11 @@ export default defineEventHandler(async (event) => {
     }
 
     if (uid !== toUid) {
+      await UserModel.updateOne(
+        { uid: newReply.to_uid },
+        { $inc: { moemoepoint: 2 } }
+      )
+
       await createMessage(
         uid,
         toUid,

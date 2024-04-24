@@ -60,21 +60,14 @@ export default defineEventHandler(async (event) => {
     })
 
     const commentUser = await UserModel.findOneAndUpdate(
-      {
-        uid: c_uid
-      },
+      { uid: c_uid },
       { $addToSet: { comment: newComment.cid } }
     )
     if (!commentUser) {
       return kunError(event, 10101)
     }
 
-    const toUser = await UserModel.findOneAndUpdate(
-      {
-        uid: to_uid
-      },
-      { $inc: { moemoepoint: 1 } }
-    )
+    const toUser = await UserModel.findOne({ uid: to_uid })
     if (!toUser) {
       return kunError(event, 10101)
     }
@@ -91,6 +84,7 @@ export default defineEventHandler(async (event) => {
 
     if (c_uid !== to_uid) {
       await createMessage(c_uid, to_uid, 'commented', newComment.content, tid)
+      await UserModel.updateOne({ uid: to_uid }, { $inc: { moemoepoint: 1 } })
     }
 
     const responseData: TopicComment = {
