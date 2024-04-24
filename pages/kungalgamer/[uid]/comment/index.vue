@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import type { UserInfo } from '~/types/api/user'
 
-const props = defineProps<{
+defineProps<{
   user: UserInfo
 }>()
-const comment = computed(() => props.user.comment)
 </script>
 
 <template>
   <KungalgamerList>
-    <KungalgamerComment :comment="comment" />
+    <KungalgamerComment :uid="user.uid" />
 
-    <KungalgamerEmpty v-if="!comment.length" />
+    <KungalgamerEmpty v-if="!user.comment" />
   </KungalgamerList>
 </template>

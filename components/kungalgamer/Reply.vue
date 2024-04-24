@@ -2,20 +2,24 @@
 import dayjs from 'dayjs'
 
 const props = defineProps<{
-  reply: number[]
+  uid: number
 }>()
 
-const { data } = await useFetch('/api/user/replies', {
+const pageData = reactive({
+  page: 1,
+  limit: 50
+})
+
+const { data, pending } = await useFetch(`/api/user/${props.uid}/replies`, {
   method: 'GET',
-  query: { ridArray: props.reply },
-  watch: false,
+  query: pageData,
   ...kungalgameResponseHandler
 })
 </script>
 
 <template>
-  <div class="reply" v-if="data">
-    <div class="item" v-for="(replyData, index) in data" :key="index">
+  <div class="reply" v-if="data && data.replies.length">
+    <div class="item" v-for="(replyData, index) in data.replies" :key="index">
       <NuxtLinkLocale :to="`/topic/${replyData.tid}`">
         <div class="title">
           {{ markdownToText(replyData.content) }}
@@ -25,6 +29,16 @@ const { data } = await useFetch('/api/user/replies', {
         </div>
       </NuxtLinkLocale>
     </div>
+
+    <KunPagination
+      class="pagination"
+      v-if="data.totalCount > 50"
+      :page="pageData.page"
+      :limit="pageData.limit"
+      :sum="data.totalCount"
+      :loading="pending"
+      @set-page="(newPage) => (pageData.page = newPage)"
+    />
   </div>
 </template>
 

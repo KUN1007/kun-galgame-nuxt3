@@ -1,25 +1,43 @@
 <script setup lang="ts">
 const props = defineProps<{
-  comment: number[]
+  uid: number
 }>()
 
-const { data } = await useFetch('/api/user/comments', {
+const pageData = reactive({
+  page: 1,
+  limit: 50
+})
+
+const { data, pending } = await useFetch(`/api/user/${props.uid}/comments`, {
   method: 'GET',
-  query: { cidArray: props.comment },
-  watch: false,
+  query: pageData,
   ...kungalgameResponseHandler
 })
 </script>
 
 <template>
-  <div class="comment" v-if="data">
-    <div class="item" v-for="(commentData, index) in data" :key="index">
+  <div class="comment" v-if="data && data.comments.length">
+    <div
+      class="item"
+      v-for="(commentData, index) in data.comments"
+      :key="index"
+    >
       <NuxtLinkLocale :to="`/topic/${commentData.tid}`">
         <div class="title">
           {{ commentData.content }}
         </div>
       </NuxtLinkLocale>
     </div>
+
+    <KunPagination
+      class="pagination"
+      v-if="data.totalCount > 50"
+      :page="pageData.page"
+      :limit="pageData.limit"
+      :sum="data.totalCount"
+      :loading="pending"
+      @set-page="(newPage) => (pageData.page = newPage)"
+    />
   </div>
 </template>
 

@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const { page, limit, type }: UserGetTopicRequestData = await getQuery(event)
-  if (!page || !limit) {
+  if (!page || !limit || !type) {
     return kunError(event, 10507)
   }
   if (limit !== '50') {
