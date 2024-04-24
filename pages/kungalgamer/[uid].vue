@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { navBarRoute } from '~/components/kungalgamer/utils/routeName'
 import type { UserInfo } from '~/types/api/user'
 
 const user = ref<UserInfo>()
@@ -60,7 +61,7 @@ useHead({
       />
 
       <div class="content">
-        <KungalgamerNavBar :uid="uid" />
+        <KungalgamerNavBar :uid="uid" :nav="navBarRoute" />
         <NuxtPage :user="user" />
       </div>
     </div>

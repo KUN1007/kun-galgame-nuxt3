@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { navBarRoute } from './utils/routeName'
+import type { Nav } from './utils/routeName'
 
 const { uid: storeUid, roles } = storeToRefs(usePersistUserStore())
 
 const props = defineProps<{
   uid: number
+  nav: Nav[]
 }>()
 
+const localePath = useLocalePath()
 const currentPageUid = computed(() => props.uid)
 
 const currentPageUserRoles = computed(() => {
@@ -21,31 +23,51 @@ const currentPageUserRoles = computed(() => {
   }
 })
 
-const isShowNavItem = (permission: number[]) =>
-  permission.includes(currentPageUserRoles.value)
-
-const activeClass = (currentPageUid: number, routeName: string) => {
+const activeClass = (currentPageUid: number, route: Nav) => {
   return useRouteFullPath().value ===
-    `/kungalgamer/${currentPageUid}/${routeName}`
+    `/kungalgamer/${currentPageUid}/${route.router}`
     ? 'active'
     : ''
+}
+
+const handleCollapsed = (item: Nav) => {
+  if (item.collapsed !== undefined) {
+    item.collapsed = !item.collapsed
+  } else {
+    navigateTo(
+      localePath(
+        `/kungalgamer/${currentPageUid.value}/${item.router}`.toString()
+      )
+    )
+  }
 }
 </script>
 
 <template>
   <div class="nav">
     <div
-      class="item"
-      v-for="kun in navBarRoute"
-      :key="kun.index"
-      :class="activeClass(currentPageUid, kun.router)"
-      v-show="isShowNavItem(kun.permission)"
+      v-for="(kun, index) in nav"
+      :key="index"
+      v-show="kun.permission?.includes(currentPageUserRoles)"
     >
-      <NuxtLinkLocale
-        :to="`/kungalgamer/${currentPageUid}/${kun.router}`.toString()"
+      <div
+        class="link"
+        :class="activeClass(currentPageUid, kun)"
+        @click="handleCollapsed(kun)"
       >
         <span>{{ $t(`user.nav.${kun.name}`) }}</span>
-      </NuxtLinkLocale>
+        <span
+          class="chevron"
+          v-if="kun.collapsed !== undefined"
+          :class="kun.collapsed ? '' : 'active-chevron'"
+        >
+          <Icon name="lucide:chevron-right" />
+        </span>
+      </div>
+
+      <div v-if="kun.child && !kun.collapsed" class="submenu">
+        <KungalgamerNavBar :uid="uid" :nav="kun.child" />
+      </div>
     </div>
   </div>
 </template>
@@ -56,39 +78,44 @@ const activeClass = (currentPageUid: number, routeName: string) => {
   width: 120px;
   border-radius: 0 0 0 7px;
   border-right: 1px solid var(--kungalgame-blue-5);
-  display: flex;
-  flex-direction: column;
   flex-shrink: 0;
 }
 
-.item {
-  height: 40px;
-  background-color: var(--kungalgame-trans-blue-0);
+.link {
+  padding: 10px 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--kungalgame-blue-5);
 
   &:hover {
     background-color: var(--kungalgame-trans-blue-2);
   }
 
-  a {
-    width: 100%;
-    height: 100%;
+  .chevron {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--kungalgame-blue-5);
+    margin-left: 7px;
+    transition: all 0.2s;
+  }
+
+  .active-chevron {
+    transform: rotate(90deg);
   }
 }
 
+.submenu {
+  background-color: var(--kungalgame-trans-blue-0);
+}
+
 .active {
+  color: var(--kungalgame-white);
   background-color: var(--kungalgame-blue-5);
 
   &:hover {
     background-color: var(--kungalgame-blue-5);
-  }
-
-  a {
-    color: var(--kungalgame-white);
   }
 }
 

@@ -24,8 +24,8 @@ export default defineEventHandler(async (event) => {
 
   const topicArray =
     {
-      published: user.topic,
-      liked: user.like_topic,
+      publish: user.topic,
+      like: user.like_topic,
       upvote: user.upvote_topic,
       favorite: user.favorite_topic
     }[type] || []

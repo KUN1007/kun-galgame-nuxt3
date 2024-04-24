@@ -112,7 +112,7 @@ const handleShowMore = () => {
         <KunSettingPanelComponentsReset v-if="isShowSettings" />
 
         <span class="more" :class="isShowSettings ? 'active' : ''">
-          <Icon @click="handleShowMore" name="lucide:chevron-down"></Icon>
+          <Icon @click="handleShowMore" name="lucide:chevron-down" />
         </span>
       </div>
     </div>

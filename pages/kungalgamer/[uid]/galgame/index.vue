@@ -5,13 +5,13 @@ const props = defineProps<{
   user: UserInfo
 }>()
 const route = useRoute()
-const action = computed(() => (route.params as { action: string }).action)
+const action = computed(() => (route.params as { action: TopicType }).action)
 
 const tidArray = computed(() => {
-  if (action.value === 'published') {
+  if (action.value === 'publish') {
     return props.user.topic
   }
-  if (action.value === 'liked') {
+  if (action.value === 'like') {
     return props.user.likeTopic
   }
   if (action.value === 'upvote') {
@@ -26,7 +26,7 @@ const tidArray = computed(() => {
 
 <template>
   <KungalgamerList>
-    <KungalgamerTopic :uid="user.uid" :type="action as TopicType" />
+    <KungalgamerTopic :uid="user.uid" :type="action" />
 
     <KungalgamerEmpty v-if="!tidArray" />
   </KungalgamerList>

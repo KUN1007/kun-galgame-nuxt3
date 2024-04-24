@@ -1,63 +1,62 @@
-interface nav {
-  index: number
+export interface Nav {
   name: string
-  router: string
-  permission: number[]
+  router?: string
+  collapsed?: boolean
+  permission?: number[]
+  child?: Nav[]
 }
 
-export const navBarRoute: nav[] = [
+export const navBarRoute: Ref<Nav[]> = ref([
   {
-    index: 1,
     name: 'profile',
     router: 'info',
     permission: [1, 2, 3, 4]
   },
   {
-    index: 2,
     name: 'settings',
     router: 'settings',
     permission: [4]
   },
   {
-    index: 3,
     name: 'email',
     router: 'password',
     permission: [4]
   },
   {
-    index: 4,
-    name: 'published',
-    router: 'topic-published',
-    permission: [1, 2, 3, 4]
+    name: 'topic',
+    collapsed: true,
+    permission: [1, 2, 3, 4],
+    child: [
+      {
+        name: 'publish',
+        router: 'topic/publish',
+        permission: [1, 2, 3, 4]
+      },
+      {
+        name: 'like',
+        router: 'topic/like',
+        permission: [1, 2, 3, 4]
+      },
+      {
+        name: 'upvote',
+        router: 'topic/upvote',
+        permission: [1, 2, 3, 4]
+      },
+      {
+        name: 'favorite',
+        router: 'topic/favorite',
+        permission: [1, 2, 3, 4]
+      }
+    ]
   },
   {
-    index: 5,
-    name: 'liked',
-    router: 'topic-liked',
-    permission: [1, 2, 3, 4]
-  },
-  {
-    index: 6,
-    name: 'upvote',
-    router: 'topic-upvote',
-    permission: [1, 2, 3, 4]
-  },
-  {
-    index: 6,
-    name: 'favorite',
-    router: 'topic-favorite',
-    permission: [1, 2, 3, 4]
-  },
-  {
-    index: 7,
     name: 'reply',
     router: 'reply',
     permission: [1, 2, 3, 4]
   },
   {
-    index: 8,
     name: 'comment',
     router: 'comment',
     permission: [1, 2, 3, 4]
   }
-]
+])

@@ -371,12 +371,13 @@
       "profile": "Profile",
       "settings": "Settings",
       "email": "Email",
-      "published": "Published",
-      "liked": "Liked",
-      "upvote": "Upvote",
+      "topic": "Topics",
+      "publish": "Published",
+      "like": "Liked",
       "favorite": "Favorite",
-      "reply": "Reply",
-      "comment": "Comment"
+      "upvote": "Upvote",
+      "reply": "Replies",
+      "comment": "Comments"
     },
     "profile":{
       "user": "User",

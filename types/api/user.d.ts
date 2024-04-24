@@ -1,4 +1,4 @@
-export type TopicType = 'published' | 'liked' | 'upvote' | 'favorite'
+export type TopicType = 'publish' | 'like' | 'upvote' | 'favorite'
 
 export interface UserInfo {
   uid: number
