@@ -1,6 +1,7 @@
 import type { KUNGalgameSettingsStore } from '../types/settings'
 
 const SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME: string = 'kun-galgame-custom-bg'
+const SETTINGS_PUBLISH_Banner_IMAGE_NAME: string = 'kun-galgame-publish-banner'
 const SETTINGS_DEFAULT_FONT_FAMILY: string = 'system-ui'
 
 export const usePersistSettingsStore = defineStore({
@@ -61,9 +62,9 @@ export const usePersistSettingsStore = defineStore({
     // Reset all settings; because it interacts with the document
     // , Pinia reactivity is not effective
     async setKUNGalgameSettingsRecover() {
-      this.$reset()
-      this.setKUNGalgameFontStyle(SETTINGS_DEFAULT_FONT_FAMILY)
+      kungalgameStoreReset()
       await deleteImage(SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME)
+      await deleteImage(SETTINGS_PUBLISH_Banner_IMAGE_NAME)
     }
   }
 })

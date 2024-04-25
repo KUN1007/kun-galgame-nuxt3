@@ -21,7 +21,7 @@ export const onResponse = (context: KunOnResponseContext) => {
   if (context.response.status === 205) {
     const navigateCookie = Cookies.get('kungalgame-is-navigate-to-login')
     if (!navigateCookie) {
-      kungalgameStoreReset()
+      usePersistUserStore().$reset()
       useMessage(
         'Login expired, please login again',
         '登录过期, 请重新登陆',

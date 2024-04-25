@@ -64,7 +64,7 @@ const logOut = async () => {
     'zh-cn': '您确定退出登录吗？'
   })
   if (res) {
-    kungalgameStoreReset()
+    usePersistUserStore().$reset()
     navigateTo(localePath('/login'))
     useMessage('Logout successfully!', '登出成功', 'success')
   }

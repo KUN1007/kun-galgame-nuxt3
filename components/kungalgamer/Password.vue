@@ -94,7 +94,7 @@ const handleChangePassword = async () => {
   })
 
   if (result) {
-    kungalgameStoreReset()
+    usePersistUserStore().$reset()
     navigateTo(localePath('/login'))
     useMessage('Password change successful!', '密码更改成功', 'success')
   }
