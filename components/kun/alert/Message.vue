@@ -15,10 +15,16 @@ const message = ref('')
 const isRichText = computed(() => props.richText ?? false)
 
 message.value = computed(() => {
-  if (!locale) {
-    return props.messageEN
+  if (locale) {
+    return locale === 'en-us' ? props.messageEN : props.messageCN
   }
-  return locale === 'en-us' ? props.messageEN : props.messageCN
+
+  const localeMatch = window?.location.href.match(/\/([a-z]{2}-[a-z]{2})\//)
+  if (localeMatch && localeMatch.length > 1) {
+    return localeMatch[1] === 'en-us' ? props.messageEN : props.messageCN
+  }
+
+  return props.messageEN
 }).value
 
 const messageClass = (type: string): string => {
