@@ -10,8 +10,15 @@ import type {
   PlatformOptions
 } from '~/components/galgame/utils/options'
 
-const { type, language, platform, sortOrder } = storeToRefs(
+const { page, type, language, platform, sortOrder } = storeToRefs(
   useTempGalgameStore()
+)
+
+watch(
+  () => [type.value, language.value, platform.value, sortOrder.value],
+  () => {
+    page.value = 1
+  }
 )
 </script>
 

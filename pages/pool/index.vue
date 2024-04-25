@@ -17,7 +17,6 @@ const isLoadingComplete = ref(false)
 
 const iconMap: Record<string, string> = {
   views: 'lucide:mouse-pointer-click',
-  likes: 'lucide:thumbs-up',
   time: 'lucide:calendar-heart'
 }
 
@@ -72,6 +71,7 @@ const isScrollAtBottom = () => {
 watch(
   () => [pageData.sortField, pageData.sortOrder],
   async () => {
+    pageData.page = 1
     isLoadingComplete.value = false
 
     pool.value?.scrollTo({
@@ -123,7 +123,7 @@ onBeforeUnmount(() => {
     <div class="tool" v-if="topics" id="tool">
       <KunSelect
         :styles="{ width: '150px' }"
-        :options="['views', 'likes', 'time']"
+        :options="['views', 'time']"
         :default-value="pageData.sortField"
         i18n="pool"
         @set="(value) => (pageData.sortField = value)"
@@ -201,7 +201,7 @@ onBeforeUnmount(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1;
+  z-index: 17;
 
   &::before {
     content: '';
