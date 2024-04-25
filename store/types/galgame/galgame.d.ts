@@ -1,8 +1,14 @@
-export interface GalgameStorePersist {
-  page: string
-  limit: string
-  type: string
-  language: Language
-  platform: string
+import {
+  TypeOptions,
+  LanguageOptions,
+  PlatformOptions
+} from '~/components/galgame/utils/options'
+
+export interface GalgameStoreTemp {
+  page: number
+  limit: number
+  type: TypeOptions
+  language: LanguageOptions
+  platform: PlatformOptions
   sortOrder: KunOrder
 }

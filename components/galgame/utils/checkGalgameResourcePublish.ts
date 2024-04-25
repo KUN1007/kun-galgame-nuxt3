@@ -2,7 +2,7 @@ import { typeOptions, languageOptions, platformOptions } from './options'
 import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
 
 export const checkGalgameResourcePublish = (link: GalgameResourceStoreTemp) => {
-  if (!typeOptions.includes(link.type)) {
+  if (!typeOptions.filter((item) => item !== 'all').includes(link.type)) {
     useMessage(
       'Please select the correct resource type!',
       '请选择正确的资源类型!',
@@ -40,7 +40,9 @@ export const checkGalgameResourcePublish = (link: GalgameResourceStoreTemp) => {
     }
   }
 
-  if (!languageOptions.includes(link.language)) {
+  if (
+    !languageOptions.filter((item) => item !== 'all').includes(link.language)
+  ) {
     useMessage(
       'Please select the correct resource language!',
       '请选择正确的资源语言!',
@@ -49,7 +51,9 @@ export const checkGalgameResourcePublish = (link: GalgameResourceStoreTemp) => {
     return false
   }
 
-  if (!platformOptions.includes(link.platform)) {
+  if (
+    !platformOptions.filter((item) => item !== 'all').includes(link.platform)
+  ) {
     useMessage(
       'Please select the correct resource platform!',
       '请选择正确的资源平台!',

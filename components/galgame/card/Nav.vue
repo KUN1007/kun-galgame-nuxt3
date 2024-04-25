@@ -4,15 +4,15 @@ import {
   languageOptions,
   platformOptions
 } from '~/components/galgame/utils/options'
+import type {
+  TypeOptions,
+  LanguageOptions,
+  PlatformOptions
+} from '~/components/galgame/utils/options'
 
 const { type, language, platform, sortOrder } = storeToRefs(
-  usePersistGalgameStore()
+  useTempGalgameStore()
 )
-
-// TODO:
-const handleClick = () => {
-  useMessage('The feature is under development', '该功能正在开发中', 'warn')
-}
 </script>
 
 <template>
@@ -20,31 +20,31 @@ const handleClick = () => {
     <KunSelect
       :styles="{ width: '150px' }"
       :options="typeOptions"
-      i18n="edit.galgame.resource.type"
-      @set="handleClick"
+      i18n="galgame.resource.type"
+      @set="(newVal) => (type = newVal as TypeOptions)"
       position="bottom"
     >
-      {{ $t(`edit.galgame.resource.type.${type}`) }}
+      {{ $t(`galgame.resource.type.${type}`) }}
     </KunSelect>
 
     <KunSelect
       :styles="{ width: '150px' }"
       :options="languageOptions"
-      i18n="edit.galgame.resource.language"
-      @set="handleClick"
+      i18n="galgame.resource.language"
+      @set="(newVal) => (language = newVal as LanguageOptions)"
       position="bottom"
     >
-      {{ $t(`edit.galgame.resource.language.${language}`) }}
+      {{ $t(`galgame.resource.language.${language}`) }}
     </KunSelect>
 
     <KunSelect
       :styles="{ width: '150px' }"
       :options="platformOptions"
-      i18n="edit.galgame.platform"
-      @set="handleClick"
+      i18n="galgame.resource.platform"
+      @set="(newVal) => (platform = newVal as PlatformOptions)"
       position="bottom"
     >
-      {{ $t(`edit.galgame.platform.${platform}`) }}
+      {{ $t(`galgame.resource.platform.${platform}`) }}
     </KunSelect>
 
     <div class="order">

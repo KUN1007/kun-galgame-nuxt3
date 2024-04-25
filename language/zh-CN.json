@@ -282,36 +282,10 @@
         "ja-jp": "日语",
         "zh-cn": "中文"
       },
-      "platform": {
-        "windows": "Windows",
-        "mac": "macOS",
-        "linux": "Linux",
-        "emulator": "模拟器",
-        "app": "应用直装",
-        "others": "其它"
-      },
       "banner": {
         "name": "预览图",
         "help": "Galgame 预览图请尽量在游戏内截取原始分辨率，不要拍屏，尽量不要包含设备窗口的边，宽度大于高度为好。预览图最终加载大小会变为不大于 1920 × 1080 分辨率",
         "hint": "预览图不可包含 R18 等敏感内容\n宽度大于高度为好"
-      },
-      "resource": {
-        "name": "资源链接",
-        "type": {
-          "game": "游戏本体",
-          "patch": "补丁",
-          "collection": "合集",
-          "voice": "音声相关",
-          "image": "图片相关",
-          "ai": "AI 相关",
-          "others": "其它"
-        },
-        "language": {
-          "ja-jp": "日语",
-          "en-us": "英语",
-          "zh-cn": "中文",
-          "others": "其它"
-        }
       },
       "confirm": "确认发布 Galgame"
     },
@@ -545,9 +519,35 @@
         "decompress": "资源解压码 (可选)",
         "note": "资源备注 (可选)"
       },
-      "type": "资源链接的类型",
-      "language": "资源链接的语言",
-      "platform": "资源链接的平台",
+      "type": {
+        "name": "资源链接的类型",
+        "all": "全部类型",
+        "game": "游戏本体",
+        "patch": "补丁",
+        "collection": "合集",
+        "voice": "音声相关",
+        "image": "图片相关",
+        "ai": "AI 相关",
+        "others": "其它"
+      },
+      "language": {
+        "name": "资源链接的语言",
+        "all": "全部语言",
+        "ja-jp": "日语",
+        "en-us": "英语",
+        "zh-cn": "中文",
+        "others": "其它"
+      },
+      "platform": {
+        "name": "资源链接的平台",
+        "all": "全部平台",
+        "windows": "Windows",
+        "mac": "macOS",
+        "linux": "Linux",
+        "emulator": "模拟器",
+        "app": "应用直装",
+        "others": "其它"
+      },
       "create": "创建资源链接",
       "cancelRewrite": "取消 Rewrite",
       "confirmRewrite": "确定 Rewrite"

@@ -86,10 +86,11 @@ onBeforeRouteLeave(async (_, __, next) => {
   <div class="root">
     <div class="container">
       <div ref="content" class="content">
-        <EditTopicTitle />
-        <EditTopicEditor :is-show-menu="true" />
-
-        <EditTopicFooter />
+        <ClientOnly>
+          <EditTopicTitle />
+          <EditTopicEditor :is-show-menu="true" />
+          <EditTopicFooter />
+        </ClientOnly>
       </div>
 
       <div

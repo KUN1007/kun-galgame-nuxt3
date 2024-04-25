@@ -8,7 +8,7 @@ import { ResourceSizePattern } from '~/utils/pattern'
 import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
 
 export const checkGalgameResourcePublish = (link: GalgameResourceStoreTemp) => {
-  if (!typeOptions.includes(link.type)) {
+  if (!typeOptions.filter((item) => item !== 'all').includes(link.type)) {
     return 10613
   }
 
@@ -26,11 +26,15 @@ export const checkGalgameResourcePublish = (link: GalgameResourceStoreTemp) => {
     }
   }
 
-  if (!languageOptions.includes(link.language)) {
+  if (
+    !languageOptions.filter((item) => item !== 'all').includes(link.language)
+  ) {
     return 10616
   }
 
-  if (!platformOptions.includes(link.platform)) {
+  if (
+    !platformOptions.filter((item) => item !== 'all').includes(link.platform)
+  ) {
     return 10617
   }
 

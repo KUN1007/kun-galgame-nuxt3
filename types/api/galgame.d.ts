@@ -1,3 +1,9 @@
+import type {
+  TypeOptions,
+  LanguageOptions,
+  PlatformOptions
+} from '~/components/galgame/utils/options'
+
 export interface GalgameContributor {
   uid: number
   avatar: string
@@ -31,6 +37,9 @@ export interface GalgameDetail {
 export interface GalgamePageRequestData {
   page: string
   limit: string
+  type: TypeOptions
+  language: LanguageOptions
+  platform: PlatformOptions
   sortOrder: KunOrder
 }
 

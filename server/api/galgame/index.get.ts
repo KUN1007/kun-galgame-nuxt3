@@ -1,19 +1,35 @@
 import UserModel from '~/server/models/user'
 import GalgameModel from '~/server/models/galgame'
+import type {
+  TypeOptions,
+  LanguageOptions,
+  PlatformOptions
+} from '~/components/galgame/utils/options'
 import type { GalgamePageRequestData, GalgameCard } from '~/types/api/galgame'
 
 const getGalgames = async (
   page: number,
   limit: number,
+  type: TypeOptions,
+  language: LanguageOptions,
+  platform: PlatformOptions,
   sortOrder: KunOrder
 ) => {
   const skip = (page - 1) * limit
 
-  const totalCount = await GalgameModel.countDocuments({
-    status: { $ne: 1 }
-  })
+  const queryData = {
+    status: { $ne: 1 },
+    ...(type !== 'all' ? { type: { $elemMatch: { $eq: type } } } : {}),
+    ...(language !== 'all'
+      ? { language: { $elemMatch: { $eq: language } } }
+      : {}),
+    ...(platform !== 'all'
+      ? { platform: { $elemMatch: { $eq: platform } } }
+      : {})
+  }
 
-  const data = await GalgameModel.find({ status: { $ne: 1 } })
+  const totalCount = await GalgameModel.countDocuments(queryData)
+  const data = await GalgameModel.find(queryData)
     .sort({ created: sortOrder })
     .skip(skip)
     .limit(limit)
@@ -41,8 +57,14 @@ const getGalgames = async (
 }
 
 export default defineEventHandler(async (event) => {
-  const { page, limit, sortOrder }: GalgamePageRequestData =
-    await getQuery(event)
+  const {
+    page,
+    limit,
+    type,
+    language,
+    platform,
+    sortOrder
+  }: GalgamePageRequestData = await getQuery(event)
   if (!page || !limit || !sortOrder) {
     return kunError(event, 10507)
   }
@@ -53,6 +75,9 @@ export default defineEventHandler(async (event) => {
   const galgames = await getGalgames(
     parseInt(page),
     parseInt(limit),
+    type,
+    language,
+    platform,
     sortOrder as KunOrder
   )
 

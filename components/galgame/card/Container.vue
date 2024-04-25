@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const { page, limit, sortOrder } = storeToRefs(usePersistGalgameStore())
+const pageData = storeToRefs(useTempGalgameStore())
 
 const { data, pending } = await useFetch(`/api/galgame`, {
   method: 'GET',
-  query: { page, limit, sortOrder },
+  query: pageData,
   ...kungalgameResponseHandler
 })
 </script>
@@ -19,11 +19,11 @@ const { data, pending } = await useFetch(`/api/galgame`, {
     <KunPagination
       class="pagination"
       v-if="data?.totalCount"
-      :page="parseInt(page)"
-      :limit="parseInt(limit)"
+      :page="pageData.page.value"
+      :limit="pageData.limit.value"
       :sum="data?.totalCount"
       :loading="pending"
-      @set-page="(newPage) => (page = newPage.toString())"
+      @set-page="(newPage) => (pageData.page.value = newPage)"
     />
   </div>
 </template>

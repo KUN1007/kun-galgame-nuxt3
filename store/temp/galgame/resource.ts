@@ -7,7 +7,7 @@ interface Store {
 }
 
 export const useTempGalgameResourceStore = defineStore({
-  id: 'KUNGalgameResource',
+  id: 'tempGalgameResource',
   persist: false,
   state: (): Store => ({
     resources: [],

@@ -81,7 +81,7 @@ watch(
         </span>
         <span>
           <Icon :name="typeIconMap[link.type]" />
-          <span>{{ $t(`edit.galgame.resource.type.${link.type}`) }}</span>
+          <span>{{ $t(`galgame.resource.type.${link.type}`) }}</span>
         </span>
         <span>
           <Icon name="lucide:database" />
@@ -89,10 +89,10 @@ watch(
         </span>
         <span>
           <Icon :name="platformIconMap[link.platform]" />
-          <span>{{ $t(`edit.galgame.platform.${link.platform}`) }}</span>
+          <span>{{ $t(`galgame.resource.platform.${link.platform}`) }}</span>
         </span>
         <span>
-          {{ $t(`edit.galgame.resource.language.${link.language}`) }}
+          {{ $t(`galgame.resource.language.${link.language}`) }}
         </span>
       </div>
 

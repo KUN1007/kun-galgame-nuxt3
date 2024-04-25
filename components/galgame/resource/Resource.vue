@@ -38,7 +38,7 @@ watch(
   <div class="resource">
     <KunHeader :size="2">
       <template #header>
-        <span>{{ $t('edit.galgame.resource.name') }}</span>
+        <span>{{ $t('galgame.resource.name') }}</span>
 
         <span class="contribute" @click="handleClickContribute">
           <Icon name="lucide:circle-plus" />

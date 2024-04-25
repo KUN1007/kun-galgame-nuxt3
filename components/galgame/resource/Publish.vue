@@ -126,16 +126,16 @@ onMounted(() => {
     <KunSelect
       class="kun-select"
       :styles="{ width: '200px' }"
-      :options="typeOptions"
-      i18n="edit.galgame.resource.type"
+      :options="typeOptions.filter((item) => item !== 'all')"
+      i18n="galgame.resource.type"
       @set="(value) => (resourceLink.type = value)"
       position="top"
       default-value="game"
     >
       <div class="select">
-        <span>{{ $t('galgame.resource.type') }}</span>
+        <span>{{ $t('galgame.resource.type.name') }}</span>
         <span v-if="resourceLink.type">
-          {{ $t(`edit.galgame.resource.type.${resourceLink.type}`) }}
+          {{ $t(`galgame.resource.type.${resourceLink.type}`) }}
         </span>
       </div>
     </KunSelect>
@@ -143,16 +143,16 @@ onMounted(() => {
     <KunSelect
       class="kun-select"
       :styles="{ width: '200px' }"
-      :options="languageOptions"
-      i18n="edit.galgame.resource.language"
+      :options="languageOptions.filter((item) => item !== 'all')"
+      i18n="galgame.resource.language"
       @set="(value) => (resourceLink.language = value)"
       position="top"
       :default-value="locale"
     >
       <div class="select">
-        <span>{{ $t('galgame.resource.language') }}</span>
+        <span>{{ $t('galgame.resource.language.name') }}</span>
         <span v-if="resourceLink.language">
-          {{ $t(`edit.galgame.resource.language.${resourceLink.language}`) }}
+          {{ $t(`galgame.resource.language.${resourceLink.language}`) }}
         </span>
       </div>
     </KunSelect>
@@ -160,16 +160,16 @@ onMounted(() => {
     <KunSelect
       class="kun-select"
       :styles="{ width: '200px' }"
-      :options="platformOptions"
-      i18n="edit.galgame.platform"
+      :options="platformOptions.filter((item) => item !== 'all')"
+      i18n="galgame.resource.platform"
       @set="(value) => (resourceLink.platform = value)"
       position="top"
       default-value="windows"
     >
       <div class="select">
-        <span>{{ $t('galgame.resource.platform') }}</span>
+        <span>{{ $t('galgame.resource.platform.name') }}</span>
         <span v-if="resourceLink.platform">
-          {{ $t(`edit.galgame.platform.${resourceLink.platform}`) }}
+          {{ $t(`galgame.resource.platform.${resourceLink.platform}`) }}
         </span>
       </div>
     </KunSelect>

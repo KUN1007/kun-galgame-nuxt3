@@ -44,7 +44,7 @@ defineProps<{
       v-for="(platform, index) in galgame.platform"
       :key="index"
       v-tooltip="{
-        message: $t(`edit.galgame.platform.${platform}`),
+        message: $t(`galgame.resource.platform.${platform}`),
         position: 'bottom'
       }"
     >

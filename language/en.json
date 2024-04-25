@@ -282,36 +282,10 @@
         "ja-jp": "Japanese",
         "zh-cn": "Chinese"
       },
-      "platform": {
-        "windows": "Windows",
-        "mac": "macOS",
-        "linux": "Linux",
-        "emulator": "Emulator",
-        "app": "Mobile App",
-        "others": "Others"
-      },
       "banner": {
         "name": "Banner",
         "help": "Please try to capture the original resolution of the VN for the banner image instead of taking screenshots. Avoid including the edges of the device window, and it's preferable for the width to be greater than the height. The preview image will ultimately be resized to a resolution no larger than 1920 × 1080.",
         "hint": "Preview images cannot contain sensitive content such as R18\nPreferable for the width to be greater than the height"
-      },
-      "resource": {
-        "name": "Resources Link",
-        "type": {
-          "game": "Main Game",
-          "patch": "Patch",
-          "collection": "Collection",
-          "voice": "Voice-related",
-          "image": "Image-related",
-          "ai": "AI-related",
-          "others": "Others"
-        },
-        "language": {
-          "ja-jp": "Japanese",
-          "en-us": "English",
-          "zh-cn": "Chinese",
-          "others": "Others"
-        }
       },
       "confirm": "Confirm Publish VN"
     },
@@ -546,9 +520,35 @@
         "decompress": "Resource decompression code (optional)",
         "note": "Resource notes (optional)"
       },
-      "type": "Type of resource link",
-      "language": "Language of resource link",
-      "platform": "Platform of resource link",
+      "type": {
+        "name": "Type of resource link",
+        "all": "All Types",
+        "game": "Main Game",
+        "patch": "Patch",
+        "collection": "Collection",
+        "voice": "Voice-related",
+        "image": "Image-related",
+        "ai": "AI-related",
+        "others": "Others"
+      },
+      "language": {
+        "name": "Language of resource link",
+        "all": "All Languages",
+        "ja-jp": "Japanese",
+        "en-us": "English",
+        "zh-cn": "Chinese",
+        "others": "Others"
+      },
+      "platform": {
+        "name": "Platform of resource link",
+        "all": "All Platforms",
+        "windows": "Windows",
+        "mac": "macOS",
+        "linux": "Linux",
+        "emulator": "Emulator",
+        "app": "Mobile App",
+        "others": "Others"
+      },
       "create": "Create resource link",
       "cancelRewrite": "Cancel Rewrite",
       "confirmRewrite": "Confirm Rewrite"

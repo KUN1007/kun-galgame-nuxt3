@@ -13,14 +13,14 @@ defineProps<{
   <div class="grid-card">
     <NuxtLinkLocale
       class="card"
-      v-for="(galgame, index) in galgames"
-      :key="index"
+      v-for="galgame in galgames"
+      :key="galgame.gid"
       :to="`/galgame/${galgame.gid}`"
     >
       <div class="banner">
         <NuxtImg
-          placeholder
           :src="galgame.banner.replace(/\.webp$/, '-mini.webp')"
+          placeholder="/placeholder.webp"
         />
         <div class="platform">
           <span v-for="(platform, i) in galgame.platform" :key="i">

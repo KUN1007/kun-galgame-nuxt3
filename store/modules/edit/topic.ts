@@ -2,7 +2,9 @@ import type { EditStorePersist } from '~/store/types/edit/topic'
 
 export const usePersistEditTopicStore = defineStore({
   id: 'KUNGalgameEditTopic',
-  persist: true,
+  persist: {
+    storage: persistedState.localStorage
+  },
   state: (): EditStorePersist => ({
     textCount: 0,
 
