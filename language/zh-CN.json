@@ -643,17 +643,10 @@
     "ohmygpt": "OhMyGPT",
     "koibumi": "Koibumi URL Shorten"
   },
-  "page403":{
-    "permission": "您没有权限访问这个页面",
-    "back": "点击返回主页"
-  },
-  "page404":{
-    "existent": "您访问了一个不存在的页面",
-    "back": "点击返回主页"
-  },
-  "redirect":{
-    "success": "登陆成功",
-    "home": "3 秒后你将会进入主页"
+  "pageError":{
+    "404": "杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面不见了 ~ 是不是被你吃了?!",
+    "error": "杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面出错了 ~ 是不是你干的?!",
+    "remake": "一键转生为萝莉"
   },
   "footer":{
     "copyright": "版权所有 © 2024 鲲 Galgame",

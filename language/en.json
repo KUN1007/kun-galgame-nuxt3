@@ -644,17 +644,10 @@
     "ohmygpt": "OhMyGPT",
     "koibumi": "Koibumi URL Shorten"
   },
-  "page403":{
-    "permission": "You don't have permission to access this page",
-    "back": "Click to return to the homepage"
-  },
-  "page404":{
-    "existent": "You've visited a non-existent page",
-    "back": "Click to return to the homepage"
-  },
-  "redirect":{
-    "success": "Login successful",
-    "home": "You will be redirected to the home page in 3 seconds"
+  "pageError":{
+    "404": "Za~~~ko~♡ zako~♡ Smelly zako ♡ The page is gone ~ Did you eat it?!",
+    "error": "Za~~~ko~♡ zako~♡ Smelly zako ♡ Something went wrong with the page ~ Did you do it?!",
+    "remake": "One-click Reincarnation to Loli"
   },
   "footer":{
     "copyright": "Copyright © 2024 KUN Visual Novel",
