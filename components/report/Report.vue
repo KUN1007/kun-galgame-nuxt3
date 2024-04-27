@@ -113,6 +113,7 @@ const handleSubmitReport = async () => {
   color: var(--kungalgame-font-color-3);
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
+  will-change: transform;
   padding: 20px 20px 60px;
   box-shadow: var(--kungalgame-shadow-0);
 }

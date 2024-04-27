@@ -143,6 +143,7 @@ const handleShowMore = () => {
   padding: 10px;
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
+  will-change: transform;
   border-right: 1px solid var(--kungalgame-blue-2);
   box-shadow: var(--shadow);
   border-radius: 0 5px 5px 0;

@@ -149,6 +149,7 @@ onMounted(async () => {
   width: 130px;
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
+  will-change: transform;
   border-radius: 5px;
   position: absolute;
   display: flex;

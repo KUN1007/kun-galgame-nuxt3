@@ -97,6 +97,7 @@ const handleUpdateLink = () => {
   border-radius: 5px;
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
+  will-change: transform;
 }
 
 .input {

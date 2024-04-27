@@ -33,7 +33,8 @@
     border-radius: 5px;
     box-shadow: var(--shadow);
     background: var(--kungalgame-trans-white-2);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
+    will-change: transform;
     color: var(--kungalgame-blue-5);
     z-index: 1000;
   }

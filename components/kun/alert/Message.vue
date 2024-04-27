@@ -87,7 +87,8 @@ watch(
   font-size: large;
   color: var(--kungalgame-font-color-2);
   background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
+  will-change: transform;
   border-radius: 5px;
   display: flex;
   align-items: center;

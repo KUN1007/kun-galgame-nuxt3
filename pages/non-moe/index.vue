@@ -87,6 +87,7 @@ const { data: logs, pending: listPending } = await useFetch(
   margin: auto;
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
+  will-change: transform;
   overflow: hidden;
   border-radius: 10px;
   display: flex;

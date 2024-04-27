@@ -95,6 +95,7 @@ useHead({
   max-width: 48rem;
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
+  will-change: transform;
   border: 1px solid var(--kungalgame-blue-5);
   box-shadow: var(--shadow);
   border-radius: 10px;

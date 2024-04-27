@@ -48,6 +48,7 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
   padding: 10px;
   border-radius: 10px;
   backdrop-filter: blur(10px);
+  will-change: transform;
   background-color: var(--kungalgame-trans-white-5);
   transition: all 0.2s;
 

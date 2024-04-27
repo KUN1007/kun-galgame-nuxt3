@@ -94,6 +94,7 @@ watch(
     z-index: -1;
     border-radius: 10px;
     backdrop-filter: blur(10px);
+    will-change: transform;
   }
 
   .kun-select {

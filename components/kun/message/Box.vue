@@ -157,6 +157,7 @@ onBeforeUnmount(async () => {
   border-radius: 5px 0 0 5px;
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
+  will-change: transform;
   color: var(--kungalgame-font-color-3);
 }
 

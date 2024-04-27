@@ -31,6 +31,7 @@ import { asideItem } from '../utils/asideItem'
   border-radius: 10px;
   padding: 17px;
   backdrop-filter: blur(10px);
+  will-change: transform;
 
   a {
     font-weight: bold;

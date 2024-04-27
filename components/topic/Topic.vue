@@ -172,6 +172,7 @@ watch(
   background-color: var(--kungalgame-trans-white-5);
   border-radius: 10px;
   backdrop-filter: blur(10px);
+  will-change: transform;
   margin-bottom: 17px;
   display: flex;
   justify-content: space-between;
@@ -231,6 +232,7 @@ watch(
   background-color: var(--kungalgame-trans-white-5);
   border-radius: 10px;
   backdrop-filter: blur(10px);
+  will-change: transform;
   margin-bottom: 17px;
 }
 

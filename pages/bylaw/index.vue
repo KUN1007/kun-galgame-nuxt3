@@ -42,6 +42,7 @@ useHead({
   background-color: var(--kungalgame-trans-white-5);
   border-radius: 10px;
   backdrop-filter: blur(10px);
+  will-change: transform;
   box-shadow: var(--kungalgame-shadow-0);
   color: var(--kungalgame-font-color-3);
   display: flex;

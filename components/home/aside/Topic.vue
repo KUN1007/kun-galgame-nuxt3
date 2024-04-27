@@ -80,6 +80,7 @@ const { data, pending } = await useLazyFetch('/api/home/nav', {
   color: var(--kungalgame-font-color-3);
   border-radius: 10px;
   backdrop-filter: blur(10px);
+  will-change: transform;
   padding: 10px;
 }
 

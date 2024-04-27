@@ -150,6 +150,7 @@ onBeforeUnmount(() => {
   flex-direction: column;
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
+  will-change: transform;
   border-radius: 10px;
   box-shadow: var(--kungalgame-shadow-0);
 

@@ -48,6 +48,7 @@ const { locale } = useI18n()
   background-color: var(--kungalgame-trans-white-5);
   box-shadow: var(--kungalgame-shadow-0);
   backdrop-filter: blur(10px);
+  will-change: transform;
   padding: 17px;
 }
 

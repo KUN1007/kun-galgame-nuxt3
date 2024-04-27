@@ -98,6 +98,7 @@ const { data: statement } = await useFetch(`/api/balance/statement`, {
   margin: auto;
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
+  will-change: transform;
   padding: 10px;
   border-radius: 7px;
   box-shadow: var(--kungalgame-shadow-0);

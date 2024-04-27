@@ -127,6 +127,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   color: var(--kungalgame-font-color-3);
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
+  will-change: transform;
   box-shadow: var(--kungalgame-shadow-0);
   border-radius: 17px;
   padding: 10px;

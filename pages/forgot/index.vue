@@ -41,6 +41,7 @@ useHead({
   height: 400px;
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
+  will-change: transform;
   border-radius: 10px;
   box-shadow: var(--shadow);
 }

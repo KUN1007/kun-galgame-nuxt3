@@ -31,7 +31,8 @@ const localePath = useLocalePath()
   width: 400px;
   height: 300px;
   background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
+  will-change: transform;
   border-radius: 5px;
 
   h1 {

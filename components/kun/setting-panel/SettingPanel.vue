@@ -68,7 +68,8 @@ const handelCloseSettingsPanel = () => {
   right: 0;
   position: absolute;
   background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
+  will-change: transform;
   box-shadow: var(--shadow);
   border-radius: 10px;
   display: flex;
