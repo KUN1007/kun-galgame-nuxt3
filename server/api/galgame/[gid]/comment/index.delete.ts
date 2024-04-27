@@ -1,8 +1,18 @@
 import mongoose from 'mongoose'
+import GalgameModel from '~/server/models/galgame'
 import GalgameCommentModel from '~/server/models/galgame-comment'
 import UserModel from '~/server/models/user'
 
 export default defineEventHandler(async (event) => {
+  const gid = getRouterParam(event, 'gid')
+  if (!gid) {
+    return kunError(event, 10507)
+  }
+  const galgame = await GalgameModel.findOne({ gid }).lean()
+  if (!galgame) {
+    return kunError(event, 10610)
+  }
+
   const { gcid }: { gcid: string } = await getQuery(event)
   if (!gcid) {
     return kunError(event, 10507)
@@ -22,7 +32,11 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10101)
   }
 
-  if (comment.c_uid !== user.uid && user.roles < 2) {
+  if (
+    comment.c_uid !== user.uid &&
+    galgame.uid !== user.uid &&
+    user.roles < 2
+  ) {
     return kunError(event, 10639)
   }
 

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import env from '~/server/env/dotenv'
+import UserModel from '~/server/models/user'
 import GalgameModel from '~/server/models/galgame'
 import { uploadGalgameBanner } from '../utils/uploadGalgameBanner'
 
@@ -18,10 +19,18 @@ export default defineEventHandler(async (event) => {
   if (!userInfo) {
     return kunError(event, 10115, 205)
   }
+  const user = await UserModel.findOne({ uid: userInfo.uid }).lean()
+  if (!user) {
+    return kunError(event, 10101)
+  }
 
   const galgame = await GalgameModel.findOne({ gid, status: { $ne: 1 } }).lean()
   if (!galgame) {
     return kunError(event, 10610)
+  }
+
+  if (userInfo.uid !== galgame.uid && user.roles < 2) {
+    return kunError(event, 10632)
   }
 
   const session = await mongoose.startSession()

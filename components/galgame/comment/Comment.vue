@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { SerializeObject } from 'nitropack'
+import type { GalgameDetail } from '~/types/api/galgame'
 import type { GalgameComment } from '~/types/api/galgame-comment'
 
 const props = defineProps<{
@@ -7,11 +8,15 @@ const props = defineProps<{
   refresh: () => {}
 }>()
 
+const galgame = inject<GalgameDetail>('galgame')
+
 const { uid, roles } = usePersistUserStore()
 const { locale } = useI18n()
+
 const isShowComment = ref(false)
 const isShowDelete = computed(
-  () => props.comment.user?.uid === uid || roles >= 2
+  () =>
+    props.comment.user?.uid === uid || galgame?.user.uid === uid || roles >= 2
 )
 
 const handleDeleteComment = async (gid: number, gcid: number) => {
