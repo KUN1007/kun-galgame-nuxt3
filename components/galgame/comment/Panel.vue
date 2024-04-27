@@ -65,7 +65,7 @@ const handlePublishComment = async () => {
           {{ toUser.name }}
         </NuxtLinkLocale>
       </span>
-      <KunButton @click="handlePublishComment">
+      <KunButton @click="handlePublishComment" :pending="isPublishing">
         {{ $t('galgame.comment.publish') }}
       </KunButton>
     </div>

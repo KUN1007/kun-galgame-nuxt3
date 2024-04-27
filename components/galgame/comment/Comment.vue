@@ -2,13 +2,40 @@
 import type { SerializeObject } from 'nitropack'
 import type { GalgameComment } from '~/types/api/galgame-comment'
 
-defineProps<{
+const props = defineProps<{
   comment: SerializeObject<GalgameComment>
   refresh: () => {}
 }>()
 
+const { uid, roles } = usePersistUserStore()
 const { locale } = useI18n()
 const isShowComment = ref(false)
+const isShowDelete = computed(
+  () => props.comment.user?.uid === uid || roles >= 2
+)
+
+const handleDeleteComment = async (gid: number, gcid: number) => {
+  const res = await useTempMessageStore().alert({
+    'en-us': 'Are you sure you want to delete the comment?',
+    'ja-jp': '',
+    'zh-cn': '您确定删除评论吗？'
+  })
+  if (!res) {
+    return
+  }
+
+  const result = await $fetch(`/api/galgame/${gid}/comment`, {
+    method: 'DELETE',
+    query: { gcid },
+    watch: false,
+    ...kungalgameResponseHandler
+  })
+
+  if (result) {
+    useMessage('Delete comment successfully!', '删除评论成功', 'success')
+    props.refresh()
+  }
+}
 </script>
 
 <template>
@@ -34,6 +61,13 @@ const isShowComment = ref(false)
           <Icon name="lucide:reply" />
         </span>
         <GalgameCommentLike :comment="comment" />
+        <span
+          class="delete"
+          v-if="isShowDelete"
+          @click="handleDeleteComment(comment.gid, comment.gcid)"
+        >
+          <Icon name="lucide:trash-2" />
+        </span>
       </div>
     </div>
     <pre class="content">{{ comment.content }}</pre>
@@ -91,6 +125,13 @@ const isShowComment = ref(false)
       color: var(--kungalgame-blue-5);
       font-size: 20px;
       margin-right: 10px;
+    }
+
+    .delete {
+      cursor: pointer;
+      margin-left: 5px;
+      margin-bottom: 3px;
+      color: var(--kungalgame-red-5);
     }
   }
 }

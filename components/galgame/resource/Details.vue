@@ -32,14 +32,12 @@ const handleDeleteResource = async (gid: number, grid: number) => {
     return
   }
 
-  isFetching.value = true
   const result = await $fetch(`/api/galgame/${gid}/resource`, {
     method: 'DELETE',
     query: { grid },
     watch: false,
     ...kungalgameResponseHandler
   })
-  isFetching.value = false
 
   if (result) {
     props.refresh()
@@ -74,12 +72,14 @@ const handleReportExpire = async (details: GalgameResourceDetails) => {
     return
   }
 
+  isFetching.value = true
   const result = await $fetch(`/api/galgame/${details.gid}/resource/expired`, {
     method: 'PUT',
     query: { grid: details.grid },
     watch: false,
     ...kungalgameResponseHandler
   })
+  isFetching.value = false
 
   if (result) {
     useMessage('Report expired successfully!', '报告失效成功', 'success')
@@ -133,14 +133,17 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
         <span
           class="delete"
           @click="handleDeleteResource(details.gid, details.grid)"
-          :pending="isFetching"
         >
           <Icon name="lucide:trash-2" />
         </span>
       </div>
 
       <div class="other-btn" v-if="uid !== details.user.uid && !details.status">
-        <KunButton type="danger" @click="handleReportExpire(details)">
+        <KunButton
+          type="danger"
+          @click="handleReportExpire(details)"
+          :pending="isFetching"
+        >
           {{ $t('galgame.resource.expire') }}
         </KunButton>
       </div>

@@ -104,6 +104,7 @@ const errorMessagesEN: Record<number, string> = {
   10636: `Invalid URL link format (-B)`,
   10637: `The official website for visualnovel should be no more than 17 items (-B)`,
   10638: `The engine for visualnovel should be no more than 17 items (-B)`,
+  10639: `You do not have permission to delete this comment (-B)`,
 
   // Report Part
   10701: `Invalid Report type. (-B)`,
@@ -210,6 +211,7 @@ const errorMessagesCN: Record<number, string> = {
   10636: `非法的链接格式 (-B)`,
   10637: `Galgame 的官网最多 17 个 (-B)`,
   10638: `Galgame 的引擎最多 17 个 (-B)`,
+  10639: `您没有权限删除此评论 (-B)`,
 
   10701: `不合法的举报类型. (-B)`,
   10702: `举报理由不能空. (-B)`,
