@@ -1,9 +1,10 @@
 <script setup lang="ts">
 const error = useError()
+const localePath = useLocalePath()
 
 const handleError = async () => {
   clearError({
-    redirect: '/'
+    redirect: localePath('/').toString()
   })
   await new Promise((resolve) => {
     setTimeout(resolve, 1007)
