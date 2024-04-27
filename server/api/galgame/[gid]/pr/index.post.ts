@@ -58,6 +58,16 @@ export default defineEventHandler(async (event) => {
       content: ''
     })
 
+    if (userInfo.uid !== originalGalgame.uid) {
+      await createMessage(
+        userInfo.uid,
+        originalGalgame.uid,
+        'requested',
+        JSON.stringify(diffGalgame).slice(0, 233),
+        -gid
+      )
+    }
+
     await session.commitTransaction()
 
     return 'MOEMOE committed galgame pull request successfully!'
