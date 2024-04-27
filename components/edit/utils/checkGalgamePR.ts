@@ -39,10 +39,30 @@ export const checkGalgamePR = (galgame: GalgameStoreTemp): boolean => {
     }
   }
 
-  if (galgame.official.trim().length > 233) {
+  if (galgame.official.length > 17) {
     useMessage(
-      'The maximum length of the official link is 233 characters!',
-      '官网链接最大长度为 233 字!',
+      'The official website for visualnovel should be no more than 17 items!',
+      'Galgame 的官网最多 17 个!',
+      'warn'
+    )
+    return false
+  }
+
+  for (const o of galgame.official) {
+    if (o.trim().length > 233) {
+      useMessage(
+        'The maximum length of the official link is 233 characters!',
+        '官网链接最大长度为 233 字!',
+        'warn'
+      )
+      return false
+    }
+  }
+
+  if (galgame.engine.length > 17) {
+    useMessage(
+      'The engine for visualnovel should be no more than 17 items!',
+      'Galgame 的引擎最多 17 个!',
       'warn'
     )
     return false

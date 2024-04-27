@@ -293,6 +293,7 @@
       "name": "Update Request",
       "official": {
         "name": "Official Site",
+        "hint": "If there are multiple official websites, please separate each link with a comma",
         "placeholder": "Please enter the official website link"
       },
       "alias": {
@@ -302,6 +303,7 @@
       },
       "engine": {
         "name": "Galgame Engine",
+        "hint": "If there are multiple engines, please separate each engine with a comma",
         "placeholder": "Please enter the name of the game engine, for example, KiriKiri, RUGP, Shiina Rio. You can enter multiple."
       },
       "confirm": "Confirm Publish"

@@ -30,7 +30,7 @@ export interface GalgameDetail {
     isFavorite: boolean
   }
   alias: string[]
-  official: string
+  official: string[]
   engine: string[]
 }
 

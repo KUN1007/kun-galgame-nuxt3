@@ -24,12 +24,22 @@ export const checkGalgamePR = (galgame: GalgameStoreTemp) => {
     }
   }
 
-  if (galgame.official.trim().length > 233) {
-    return 10629
+  if (galgame.official.length > 17) {
+    return 10637
+  }
+
+  for (const o of galgame.official) {
+    if (o.trim().length > 233) {
+      return 10629
+    }
+  }
+
+  if (galgame.engine.length > 17) {
+    return 10638
   }
 
   for (const e of galgame.engine) {
-    if (e.length > 107) {
+    if (e.trim().length > 107) {
       return 10635
     }
   }

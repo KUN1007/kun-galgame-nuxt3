@@ -24,7 +24,7 @@ export interface Galgame {
   comments: number[]
 
   alias: string[]
-  official: string
+  official: string[]
   engine: string[]
 
   user: UserAttributes[]

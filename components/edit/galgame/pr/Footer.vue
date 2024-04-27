@@ -7,7 +7,21 @@ const localePath = useLocalePath()
 const isPublishing = ref(false)
 
 const handlePublishGalgamePR = async () => {
-  if (!checkGalgamePR(galgamePR.value[0])) {
+  const officialArray = galgamePR.value[0].official
+    .toString()
+    .split(',')
+    .map((o) => o.trim())
+  const engineArray = galgamePR.value[0].engine
+    .toString()
+    .split(',')
+    .map((e) => e.trim())
+  const pullRequest = {
+    ...galgamePR.value[0],
+    official: officialArray,
+    engine: engineArray
+  }
+
+  if (!checkGalgamePR(pullRequest)) {
     return
   }
   const res = await useTempMessageStore().alert({
@@ -25,16 +39,16 @@ const handlePublishGalgamePR = async () => {
     isPublishing.value = true
   }
 
-  const result = await $fetch(`/api/galgame/${galgamePR.value[0].gid}/pr`, {
+  const result = await $fetch(`/api/galgame/${pullRequest.gid}/pr`, {
     method: 'POST',
-    body: galgamePR.value[0],
+    body: pullRequest,
     watch: false,
     ...kungalgameResponseHandler
   })
   isPublishing.value = false
 
   if (result) {
-    navigateTo(localePath(`/galgame/${galgamePR.value[0].gid}`), {
+    navigateTo(localePath(`/galgame/${pullRequest.gid}`), {
       replace: true
     })
     useTempMessageStore().info('AlertInfo.edit.prSuccess')

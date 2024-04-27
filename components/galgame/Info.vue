@@ -29,13 +29,15 @@ defineProps<{
 
   <div class="official">
     <h4>{{ $t('galgame.info.official') }}</h4>
-    <GalgameNull v-if="!galgame.official" />
-    <span class="link" v-if="galgame.official">
-      <KunCopy :text="galgame.official" />
-      <a :href="galgame.official" target="_blank" rel="noopener noreferrer">
-        <Icon name="lucide:external-link" />
-      </a>
-    </span>
+    <GalgameNull v-if="!galgame.official.length" />
+    <template v-if="galgame.official.length">
+      <span class="link" v-for="(kun, index) in galgame.official" :key="index">
+        <KunCopy :text="kun" />
+        <a :href="kun" target="_blank" rel="noopener noreferrer">
+          <Icon name="lucide:external-link" />
+        </a>
+      </span>
+    </template>
   </div>
 
   <div class="platform">

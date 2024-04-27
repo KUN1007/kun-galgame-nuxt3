@@ -293,6 +293,7 @@
       "name": "更新请求",
       "official": {
         "name": "官网",
+        "hint": "如果有多个官网，请用逗号分隔每个链接",
         "placeholder": "请输入官网链接"
       },
       "alias": {
@@ -302,6 +303,7 @@
       },
       "engine": {
         "name": "游戏引擎",
+        "hint": "如果有多个引擎, 请用逗号分隔每个引擎",
         "placeholder": "请输入游戏的引擎名，例如 KiriKiri, RUGP, Shiina Rio, 可以输入多个"
       },
       "confirm": "确定发布"
