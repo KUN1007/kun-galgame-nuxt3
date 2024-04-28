@@ -1,15 +1,26 @@
 <script setup lang="ts">
-import type { SearchTopic } from '~/types/api/home'
+import type { SearchResult } from '~/types/api/home'
 
+const { locale } = useI18n()
 const { search, isShowSearch } = storeToRefs(useTempHomeStore())
 
-const topics = ref<SearchTopic[]>([])
+const topics = ref<SearchResult[]>([])
 const container = ref<HTMLElement>()
+
+const typeItems = [
+  {
+    i18n: 'home.header.topicSearch',
+    value: 'topic'
+  },
+  {
+    i18n: 'home.header.galgameSearch',
+    value: 'galgame'
+  }
+]
 
 const searchTopics = async () => {
   const result = await $fetch('/api/home/search', {
-    query: search.value,
-    watch: false,
+    query: { ...search.value, language: locale.value },
     ...kungalgameResponseHandler
   })
   return result
@@ -88,6 +99,12 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     <Transition name="search">
       <div class="mask" v-if="isShowSearch" @click="isShowSearch = false">
         <div ref="container" class="container" @click.stop>
+          <KunNav
+            :items="typeItems"
+            :default-value="search.type"
+            @set="(value) => (search.type = value as 'topic' | 'galgame')"
+          />
+
           <KunSearchBox />
 
           <KunSearchHistory v-if="!search.keywords" />
@@ -138,6 +155,10 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   min-height: 200px;
   max-height: 600px;
   overflow-y: scroll;
+}
+
+.kun-nav {
+  margin-bottom: 17px;
 }
 
 .empty {

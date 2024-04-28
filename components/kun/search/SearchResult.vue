@@ -1,18 +1,23 @@
 <script setup lang="ts">
-import type { SearchTopic } from '~/types/api/home'
+import type { SearchResult } from '~/types/api/home'
 
 const localePath = useLocalePath()
 const { searchHistory } = storeToRefs(usePersistKUNGalgameHomeStore())
 const { search, isShowSearch } = storeToRefs(useTempHomeStore())
 
 const props = defineProps<{
-  topics: SearchTopic[]
+  topics: SearchResult[]
 }>()
 
 const topics = computed(() => props.topics)
 
 const handleClickTopic = (tid: number) => {
-  navigateTo(localePath(`/topic/${tid}`))
+  if (search.value.type === 'galgame') {
+    navigateTo(localePath(`/galgame/${-tid}`))
+  } else {
+    navigateTo(localePath(`/topic/${tid}`))
+  }
+
   if (!searchHistory.value.includes(search.value.keywords)) {
     searchHistory.value.push(search.value.keywords)
   }
@@ -25,7 +30,6 @@ const handleClickTopic = (tid: number) => {
     <div
       v-for="(topic, index) in topics"
       :key="index"
-      :to="`/topic/${topic.tid}`"
       class="topic"
       @click="handleClickTopic(topic.tid)"
     >

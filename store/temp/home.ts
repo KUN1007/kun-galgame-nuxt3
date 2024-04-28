@@ -7,7 +7,7 @@ export const useTempHomeStore = defineStore({
   state: (): HomeStoreTemp => ({
     search: {
       keywords: '',
-      category: ['Galgame', 'Technique', 'Others'],
+      type: 'topic',
       page: 1,
       limit: 7,
       sortField: 'updated',

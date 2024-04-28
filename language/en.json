@@ -98,6 +98,8 @@
       "likes": "Likes",
       "replies": "Replies",
       "comments": "Comments",
+      "topicSearch": "Topics",
+      "galgameSearch": "VNs",
       "search": "Input to Auto Search",
       "history": "Search History",
       "clear": "Clear all history",

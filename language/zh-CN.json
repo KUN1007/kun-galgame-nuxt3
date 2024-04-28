@@ -98,6 +98,8 @@
       "likes": "按点赞数排序",
       "replies": "按回复数排序",
       "comments": "按评论数排序",
+      "topicSearch": "话题",
+      "galgameSearch": "Galgame",
       "search": "输入内容以自动搜索",
       "history": "搜索历史",
       "clear": "清除所有历史",

@@ -2,7 +2,7 @@ import type { HomeTopic, TypeToGet } from '~/types/api/home'
 
 interface HomeSearchTemp {
   keywords: string
-  category: string[]
+  type: 'topic' | 'galgame'
   page: number
   limit: number
   sortField: string

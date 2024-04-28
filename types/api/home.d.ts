@@ -20,16 +20,16 @@ export type SortFieldPool = 'views' | 'likes' | 'time'
 
 export type TypeToGet = 'time' | 'popularity'
 
-export interface SearchTopic {
+export interface SearchResult {
   tid: number
   title: string
   content: string
-  category: string[]
 }
 
-export interface SearchTopicRequestData {
+export interface SearchRequestData {
   keywords: string
-  category: string[]
+  type: 'topic' | 'galgame'
+  language: Language
   page: string
   limit: string
   sortField: SortField
