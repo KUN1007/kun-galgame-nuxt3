@@ -55,5 +55,11 @@ export const friends: Friend[] = [
     name: 'koibumi',
     link: 'https://s.koid.cc/',
     label: 'A simple url shorten app'
+  },
+  {
+    name: 'fenghuaxueyue',
+    link: 'https://game.ziyuanshare.cc/',
+    label:
+      '风花雪月是一个集ACG游戏、动漫、电影、音乐、网络项目、热点资讯的免费分享平台'
   }
 ]

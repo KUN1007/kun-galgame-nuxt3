@@ -146,4 +146,8 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
   white-space: pre-wrap;
   word-break: break-all;
 }
+
+.panel {
+  margin-top: 10px;
+}
 </style>
