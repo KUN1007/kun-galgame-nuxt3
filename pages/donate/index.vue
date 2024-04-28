@@ -12,14 +12,7 @@ useHead({
   ]
 })
 
-const handleClickDonate = () => {
-  useMessage(
-    `Let's talk about it when we're in a loss, and first of all, thank you for your support.`,
-    '等我们亏钱再说啦，先感谢您的支持',
-    'info',
-    7777
-  )
-}
+const isShowOR = ref(false)
 </script>
 
 <template>
@@ -31,8 +24,25 @@ const handleClickDonate = () => {
         <span>{{ $t('donate.no') }}</span>
         {{ $t('donate.server') }}
       </p>
+
+      <div class="qr" v-if="isShowOR">
+        <div class="trc">
+          <NuxtImg src="/donate/TRC20.webp" />
+          <span>TRC20</span>
+          <KunCopy text="TYBoTkYJchunKZ86ctoL9Kf5VSvX7L5P1w" />
+        </div>
+
+        <div class="trc">
+          <NuxtImg src="/donate/ERC20.webp" />
+          <span>ERC20</span>
+          <KunCopy text="0x993f858D5B9e1f4Ee8C056C107391d1f670c1017" />
+        </div>
+      </div>
+
+      <p v-if="isShowOR" class="help">{{ $t('donate.help') }}</p>
+
       <div class="btn">
-        <span @click="handleClickDonate">{{ $t('donate.confirm') }}</span>
+        <span @click="isShowOR = !isShowOR">{{ $t('donate.confirm') }}</span>
         <span @click="navigateTo(localePath('/'))">
           {{ $t('donate.back') }}
         </span>
@@ -46,9 +56,10 @@ const handleClickDonate = () => {
 <style lang="scss" scoped>
 .root {
   height: calc(100vh - 75px);
-  width: 100vw;
+  max-width: 64rem;
   min-width: 500px;
   min-height: 500px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,11 +67,10 @@ const handleClickDonate = () => {
 }
 
 .container {
-  width: 400px;
-  height: 300px;
   margin: auto;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
   will-change: transform;
@@ -84,13 +94,41 @@ const handleClickDonate = () => {
   font-size: 30px;
 }
 
-.warning span {
-  text-transform: uppercase;
-  color: var(--kungalgame-red-5);
+.warning {
+  span {
+    text-transform: uppercase;
+    color: var(--kungalgame-red-5);
+  }
+}
+
+.qr {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+
+    .kun-copy {
+      text-align: center;
+    }
+  }
+}
+
+.help {
+  margin: 17px 0;
+  font-size: small;
+  color: var(--kungalgame-font-color-0);
 }
 
 .btn {
-  margin-top: 40px;
+  margin-top: 17px;
   display: flex;
   justify-content: space-between;
 
