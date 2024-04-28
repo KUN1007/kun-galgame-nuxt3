@@ -30,7 +30,7 @@ provide<GalgameDetail>('galgame', props.galgame)
 
     <KunDivider />
 
-    <GalgameCommentContainer />
+    <GalgameCommentContainer :to-user="galgame.user" />
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  toUser?: KunUser
+  toUser: KunUser
   refresh: () => {}
 }>()
 
@@ -33,7 +33,7 @@ const handlePublishComment = async () => {
   isPublishing.value = true
   const result = await $fetch(`/api/galgame/${gid.value}/comment`, {
     method: 'POST',
-    body: { toUid: props.toUser?.uid, content: content.value },
+    body: { toUid: props.toUser.uid, content: content.value },
     watch: false,
     ...kungalgameResponseHandler
   })

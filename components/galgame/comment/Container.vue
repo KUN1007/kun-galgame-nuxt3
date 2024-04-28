@@ -1,4 +1,8 @@
 <script setup lang="ts">
+defineProps<{
+  toUser: KunUser
+}>()
+
 const route = useRoute()
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
@@ -39,7 +43,7 @@ const { data, pending, refresh } = await useLazyFetch(
   </KunHeader>
 
   <div>
-    <GalgameCommentPanel :to-uid="0" :refresh="refresh">
+    <GalgameCommentPanel :to-user="toUser" :refresh="refresh">
       <KunNav
         class="nav"
         v-if="data && data.totalCount"

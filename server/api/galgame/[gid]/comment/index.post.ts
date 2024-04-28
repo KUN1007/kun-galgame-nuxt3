@@ -6,7 +6,7 @@ import type { H3Event } from 'h3'
 const readReplyData = async (event: H3Event) => {
   const { toUid, content }: { toUid: number; content: string } =
     await readBody(event)
-  if (!content) {
+  if (!toUid || !content) {
     return kunError(event, 10507)
   }
   if (content.trim().length > 1007) {
@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
   try {
     await GalgameCommentModel.create(result)
 
-    if (result.to_uid && result.c_uid !== result.to_uid) {
+    if (result.c_uid !== result.to_uid) {
       await UserModel.updateOne(
         { uid: result.to_uid },
         { $inc: { moemoepoint: 1 } }
