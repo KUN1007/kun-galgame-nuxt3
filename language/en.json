@@ -584,7 +584,7 @@
       "merge": "Merge",
       "note": "Please provide a reason for decline",
       "confirm": "Confirm Decline",
-      "hint": "To handle this request, it requires the resource publisher, a user with more than 1100 MoeMoePoints, or an administrator.",
+      "hint": "To handle this request, it requires the resource publisher, or an administrator.",
       "i18n": {
         "name": {
           "en-us": "English Title",

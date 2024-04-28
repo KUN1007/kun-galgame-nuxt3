@@ -8,12 +8,10 @@ const props = defineProps<{
   details: Partial<GalgamePRDetails>
   refresh: () => {}
 }>()
+const galgame = inject<GalgameDetail>('galgame')
 
 const { uid, roles } = usePersistUserStore()
-const isShowButton = computed(
-  () => props.details.user?.uid === uid || roles >= 2
-)
-const galgame = inject<GalgameDetail>('galgame')
+const isShowButton = computed(() => galgame?.user.uid === uid || roles >= 2)
 const isFetching = ref(false)
 const isShowReasonInput = ref(false)
 const declineInput = ref('')
