@@ -57,9 +57,9 @@ export const friends: Friend[] = [
     label: 'A simple url shorten app'
   },
   {
-    name: 'fenghuaxueyue',
+    name: 'xueyuefenghua',
     link: 'https://game.ziyuanshare.cc/',
     label:
-      '风花雪月是一个集ACG游戏、动漫、电影、音乐、网络项目、热点资讯的免费分享平台'
+      '雪月风花是一个集ACG游戏、动漫、电影、音乐、网络项目、热点资讯的免费分享平台'
   }
 ]
