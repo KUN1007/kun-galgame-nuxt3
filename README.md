@@ -128,4 +128,4 @@ Why offer suggestions? Because these are not "Moe" behaviors. If you'd like to l
 
 ## License
 
-This project follows the `GPL-3.0` open-source license.
+This project follows the `AGPL-3.0` open-source license.

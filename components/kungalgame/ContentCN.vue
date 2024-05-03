@@ -178,7 +178,7 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          GPL-3.0 协议
+          AGPL-3.0 协议
         </a>
       </span>
       , 完全开源免费, GitHub 项目开源地址为

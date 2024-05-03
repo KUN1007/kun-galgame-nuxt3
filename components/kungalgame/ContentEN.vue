@@ -200,7 +200,7 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          GPL-3.0 license
+          AGPL-3.0 license
         </a>
       </span>
       , fully open-source and free. The GitHub project's open-source repository
