@@ -270,7 +270,8 @@
         "name": "VNDB ID",
         "help": "We require that each VN must have a VNDB ID. The VNDB ID needs to be obtained from the VNDB official website (vndb.org) at the top of the page. When entering the page of the corresponding game, the ID in the game page URL (such as https://vndb.org/v19658) is the VNDB ID. After entering the ID, click 'Fetch Data', and the game's title and description (both in English) will be attempted to be retrieved from VNDB.",
         "placeholder": "For example: v19658",
-        "fetch": "Fetch Data"
+        "fetch": "Fetch Data",
+        "info": "While you fetch the data, we will automatically check for duplicate entries of the visualnovel."
       },
       "title": {
         "name": "Title",

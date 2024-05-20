@@ -107,6 +107,7 @@ const handleGetVNData = async () => {
         {{ $t('edit.galgame.vndb.fetch') }}
       </KunButton>
     </div>
+    <p class="info">{{ $t('edit.galgame.vndb.info') }}</p>
 
     <EditGalgameTitle :titles="data.titles">
       <KunInput
@@ -168,6 +169,13 @@ const handleGetVNData = async () => {
   input {
     margin-right: 17px;
   }
+}
+
+.info {
+  color: var(--kungalgame-font-color-0);
+  font-size: small;
+  font-style: oblique;
+  margin-bottom: 17px;
 }
 
 .titles {

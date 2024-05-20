@@ -270,7 +270,8 @@
         "name": "VNDB 编号",
         "help": "我们要求每一部游戏必须有 VNDB ID。VNDB ID 需要在页面上方的 VNDB 官网 (vndb.org) 获取，当进入对应游戏的页面，游戏页面的 URL (形如 https://vndb.org/v19658) 中的 v19658 就是 VNDB ID。输入 ID 后点击 '获取数据'，会根据该 ID 尝试从 VNDB 获取游戏的标题和介绍 (均为英语)",
         "placeholder": "例如: v19658",
-        "fetch": "获取数据"
+        "fetch": "获取数据",
+        "info": "在您获取数据时，我们会自动为您检查该游戏是否重复"
       },
       "title": {
         "name": "标题",

@@ -115,7 +115,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
       </div>
     </div>
 
-    <div class="note">{{ details.note }}</div>
+    <pre class="note">{{ details.note }}</pre>
 
     <div class="user">
       <div class="user-info">
@@ -188,7 +188,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
 }
 
 .note {
-  font-size: small;
+  margin: 0;
   margin-bottom: 10px;
   border-left: 5px solid var(--kungalgame-blue-5);
   padding-left: 10px;

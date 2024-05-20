@@ -176,7 +176,7 @@ onMounted(() => {
   </div>
 
   <div class="note">
-    <KunInput
+    <KunTextarea
       :placeholder="`${$t('galgame.resource.placeholder.note')}`"
       v-model="resourceLink.note"
     />
