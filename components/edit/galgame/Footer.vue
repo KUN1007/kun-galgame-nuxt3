@@ -55,7 +55,6 @@ const handlePublishGalgame = async () => {
   const gid = await $fetch('/api/galgame', {
     method: 'POST',
     body: formData,
-    watch: false,
     ...kungalgameResponseHandler
   })
   isPublishing.value = false

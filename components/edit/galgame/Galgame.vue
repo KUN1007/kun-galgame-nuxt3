@@ -24,7 +24,16 @@ const handleGetVNData = async () => {
       '请输入正确格式的 VNDB ID!',
       'warn'
     )
-    return false
+    return
+  }
+
+  const isDuplicate = await $fetch('/api/galgame/check', {
+    method: 'GET',
+    query: { vndbId: vndbId.value },
+    ...kungalgameResponseHandler
+  })
+  if (!isDuplicate) {
+    return
   }
 
   if (isFetching.value) {

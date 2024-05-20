@@ -106,6 +106,7 @@ const errorMessagesEN: Record<number, string> = {
   10638: `The engine for visualnovel should be no more than 17 items (-B)`,
   10639: `You do not have permission to delete this comment (-B)`,
   10640: `You do not have permission to update visualnovel banner (-B)`,
+  10641: `The Visual Novel already exists (-B)`,
 
   // Report Part
   10701: `Invalid Report type. (-B)`,
@@ -214,6 +215,7 @@ const errorMessagesCN: Record<number, string> = {
   10638: `Galgame 的引擎最多 17 个 (-B)`,
   10639: `您没有权限删除此评论 (-B)`,
   10640: `您没有权限更新 Galgame 预览图 (-B)`,
+  10641: `这个 Galgame 已经存在了 (-B)`,
 
   10701: `不合法的举报类型. (-B)`,
   10702: `举报理由不能空. (-B)`,
