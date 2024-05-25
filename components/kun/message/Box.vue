@@ -8,22 +8,21 @@ const currentX = ref(0)
 const isDragging = ref(false)
 const isShowFunction = ref(false)
 
-const { data: messageData, refresh } = await useFetch(`/api/message/all`, {
+const pageData = reactive({
+  page: 1,
+  limit: 10,
+  order: 'desc'
+})
+
+const { data, pending, refresh } = await useFetch(`/api/message/all`, {
   method: 'GET',
-  // TODO:
-  query: {
-    page: '1',
-    limit: '10',
-    sortOrder: 'desc'
-  },
-  watch: false,
+  query: pageData,
   ...kungalgameResponseHandler
 })
 
 const handleReadAllMessage = async () => {
   const result = await $fetch(`/api/message/read/all`, {
     method: 'PUT',
-    watch: false,
     ...kungalgameResponseHandler
   })
 
@@ -94,7 +93,7 @@ const handleTouchEnd = () => {
 }
 
 onBeforeUnmount(async () => {
-  const hasUnreadMessage = messageData.value?.some(
+  const hasUnreadMessage = data.value?.messages.some(
     (message) => message.status === 'unread'
   )
   if (autoRead.value && hasUnreadMessage) {
@@ -141,7 +140,21 @@ onBeforeUnmount(async () => {
       </div>
     </div>
 
-    <KunMessage v-if="messageData" :message="messageData" :refresh="refresh" />
+    <KunMessage
+      v-if="data?.messages"
+      :message="data.messages"
+      :refresh="refresh"
+    >
+      <KunPagination
+        class="pagination"
+        v-if="data?.totalCount"
+        :page="pageData.page"
+        :limit="pageData.limit"
+        :sum="data?.totalCount"
+        :loading="pending"
+        @set-page="(newPage) => (pageData.page = newPage)"
+      />
+    </KunMessage>
   </div>
 </template>
 
@@ -151,14 +164,14 @@ onBeforeUnmount(async () => {
   position: fixed;
   top: 0;
   right: 0;
-  width: 250px;
-  height: calc(100dvh + 217px);
+  height: 100%;
   border-left: 1px solid var(--kungalgame-blue-2);
   border-radius: 5px 0 0 5px;
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
   will-change: transform;
   color: var(--kungalgame-font-color-3);
+  overflow: scroll;
 }
 
 .title {
@@ -231,9 +244,7 @@ onBeforeUnmount(async () => {
   transition: transform 0.2s;
 }
 
-@media (max-width: 700px) {
-  .message-root {
-    height: calc(100dvh + 117px);
-  }
+.pagination {
+  padding-bottom: 20px;
 }
 </style>

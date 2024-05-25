@@ -20,16 +20,17 @@ const getMessages = async (
   const sortOptions: Record<string, 'asc' | 'desc'> = {
     [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
   }
-  const findOptions = type ? { receiver_uid: uid, type } : { receiver_uid: uid }
+  const queryData = type ? { receiver_uid: uid, type } : { receiver_uid: uid }
 
-  const messages = await MessageModel.find(findOptions)
+  const data = await MessageModel.find(queryData)
     .sort(sortOptions)
     .skip(skip)
     .limit(limit)
     .populate('user', 'name', UserModel)
     .lean()
 
-  const responseData: Message[] = messages.map((message) => ({
+  const totalCount = await MessageModel.countDocuments(queryData)
+  const messages: Message[] = data.map((message) => ({
     mid: message.mid,
     senderUid: message.sender_uid,
     senderName: message.user[0].name,
@@ -40,7 +41,7 @@ const getMessages = async (
     type: message.type
   }))
 
-  return responseData
+  return { messages, totalCount }
 }
 
 export default defineEventHandler(async (event) => {
