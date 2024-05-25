@@ -172,6 +172,7 @@ onBeforeUnmount(async () => {
   will-change: transform;
   color: var(--kungalgame-font-color-3);
   overflow: scroll;
+  max-width: 342px;
 }
 
 .title {
