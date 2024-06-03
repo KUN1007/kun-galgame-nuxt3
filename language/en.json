@@ -554,6 +554,10 @@
         "app": "Mobile App",
         "others": "Others"
       },
+      "sort": {
+        "views": "Views",
+        "time": "Time"
+      },
       "create": "Create resource link",
       "cancelRewrite": "Cancel Rewrite",
       "confirmRewrite": "Confirm Rewrite"

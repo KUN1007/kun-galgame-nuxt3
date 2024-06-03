@@ -10,5 +10,6 @@ export interface GalgameStoreTemp {
   type: TypeOptions
   language: LanguageOptions
   platform: PlatformOptions
+  sortField: 'time' | 'views'
   sortOrder: KunOrder
 }

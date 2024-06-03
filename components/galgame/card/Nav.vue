@@ -10,12 +10,18 @@ import type {
   PlatformOptions
 } from '~/components/galgame/utils/options'
 
-const { page, type, language, platform, sortOrder } = storeToRefs(
+const { page, type, language, platform, sortField, sortOrder } = storeToRefs(
   useTempGalgameStore()
 )
 
 watch(
-  () => [type.value, language.value, platform.value, sortOrder.value],
+  () => [
+    type.value,
+    language.value,
+    platform.value,
+    sortField.value,
+    sortOrder.value
+  ],
   () => {
     page.value = 1
   }
@@ -54,6 +60,17 @@ watch(
       {{ $t(`galgame.resource.platform.${platform}`) }}
     </KunSelect>
 
+    <KunSelect
+      :styles="{ width: '150px' }"
+      :options="['views', 'time']"
+      :default-value="sortField"
+      i18n="galgame.resource.sort"
+      @set="(value) => (sortField = value as 'time' | 'views')"
+      position="bottom"
+    >
+      <span>{{ $t(`galgame.resource.sort.${sortField}`) }}</span>
+    </KunSelect>
+
     <div class="order">
       <span
         :class="sortOrder === 'asc' ? 'active' : ''"
@@ -82,7 +99,7 @@ watch(
   z-index: 10;
   position: relative;
   max-width: 100%;
-  padding: 0 17px;
+  padding: 10px 17px;
 
   &::before {
     content: '';
@@ -96,15 +113,10 @@ watch(
     backdrop-filter: blur(10px);
     will-change: transform;
   }
-
-  .kun-select {
-    padding: 10px 0;
-  }
 }
 
 .order {
   display: flex;
-  padding: 10px 0;
   margin-left: auto;
 
   .icon {

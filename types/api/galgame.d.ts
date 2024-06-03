@@ -40,6 +40,7 @@ export interface GalgamePageRequestData {
   type: TypeOptions
   language: LanguageOptions
   platform: PlatformOptions
+  sortField: 'time' | 'views'
   sortOrder: KunOrder
 }
 

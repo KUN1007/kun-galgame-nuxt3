@@ -105,11 +105,11 @@ const handleSetOption = (value: string, index: number) => {
 }
 
 .top {
-  bottom: 27px;
+  bottom: 100%;
 }
 
 .bottom {
-  top: 27px;
+  top: 100%;
 }
 
 .top-enter-active,

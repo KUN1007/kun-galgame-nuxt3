@@ -192,6 +192,8 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
   margin-bottom: 10px;
   border-left: 5px solid var(--kungalgame-blue-5);
   padding-left: 10px;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 
 .user {

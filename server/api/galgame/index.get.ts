@@ -13,6 +13,7 @@ const getGalgames = async (
   type: TypeOptions,
   language: LanguageOptions,
   platform: PlatformOptions,
+  sortField: 'time' | 'views',
   sortOrder: KunOrder
 ) => {
   const skip = (page - 1) * limit
@@ -30,7 +31,7 @@ const getGalgames = async (
 
   const totalCount = await GalgameModel.countDocuments(queryData)
   const data = await GalgameModel.find(queryData)
-    .sort({ created: sortOrder })
+    .sort({ [sortField]: sortOrder })
     .skip(skip)
     .limit(limit)
     .populate('user', 'uid avatar name', UserModel)
@@ -63,9 +64,10 @@ export default defineEventHandler(async (event) => {
     type,
     language,
     platform,
+    sortField,
     sortOrder
   }: GalgamePageRequestData = await getQuery(event)
-  if (!page || !limit || !sortOrder) {
+  if (!page || !limit || !sortField || !sortOrder) {
     return kunError(event, 10507)
   }
   if (limit !== '24') {
@@ -78,6 +80,7 @@ export default defineEventHandler(async (event) => {
     type,
     language,
     platform,
+    sortField as 'time' | 'views',
     sortOrder as KunOrder
   )
 

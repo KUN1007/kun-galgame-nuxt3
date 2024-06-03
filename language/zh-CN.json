@@ -553,6 +553,10 @@
         "app": "应用直装",
         "others": "其它"
       },
+      "sort": {
+        "views": "浏览顺序",
+        "time": "时间顺序"
+      },
       "create": "创建资源链接",
       "cancelRewrite": "取消 Rewrite",
       "confirmRewrite": "确定 Rewrite"

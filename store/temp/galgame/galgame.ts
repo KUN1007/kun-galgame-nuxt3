@@ -9,6 +9,7 @@ export const useTempGalgameStore = defineStore({
     type: 'all',
     language: 'all',
     platform: 'all',
+    sortField: 'time',
     sortOrder: 'desc'
   }),
   actions: {}
