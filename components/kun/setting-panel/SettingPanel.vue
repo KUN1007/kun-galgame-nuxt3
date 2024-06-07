@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const localePath = useLocalePath()
+
 const isShowTransparency = ref(true)
 
 const emits = defineEmits<{
@@ -15,7 +17,14 @@ const handelCloseSettingsPanel = () => {
     <div class="container">
       <div class="title">
         <span>{{ $t('header.settings.name') }}</span>
-        <span><Icon class="settings-icon" name="uiw:setting-o" /></span>
+        <span>
+          <Icon
+            @click="navigateTo(localePath('/rss'))"
+            class="rss-icon"
+            name="lucide:rss"
+          />
+          <Icon class="settings-icon" name="uiw:setting-o" />
+        </span>
       </div>
 
       <KunSettingPanelComponentsMode />
@@ -93,10 +102,15 @@ const handelCloseSettingsPanel = () => {
     display: flex;
     align-items: center;
   }
-}
 
-.settings-icon {
-  animation: settings 3s linear infinite;
+  .rss-icon {
+    cursor: pointer;
+    margin-right: 17px;
+  }
+
+  .settings-icon {
+    animation: settings 3s linear infinite;
+  }
 }
 
 @keyframes settings {

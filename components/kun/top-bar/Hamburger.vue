@@ -71,49 +71,73 @@ const handleShowMore = () => {
         @touchmove.passive="handleTouchMove"
         @touchend="handleTouchEnd"
       >
-        <div class="kungalgame" @click="navigateTo(localePath('/'))">
-          <NuxtImg src="/favicon.webp" :alt="$t('head.title')" />
-          <span>{{ $t('header.name') }}</span>
-        </div>
-
-        <div class="item-container">
-          <div v-for="(kun, index) in item" :key="index" class="item">
-            <span class="icon-item">
-              <Icon :name="kun.icon"></Icon>
-            </span>
-            <NuxtLinkLocale :to="kun.router">
-              {{ $t(`header.hamburger.${kun.name}`) }}
-            </NuxtLinkLocale>
-            <span class="new" v-if="kun.isNew">
-              {{ $t('header.hamburger.new') }}
-            </span>
+        <div>
+          <div class="kungalgame" @click="navigateTo(localePath('/'))">
+            <NuxtImg src="/favicon.webp" :alt="$t('head.title')" />
+            <span>{{ $t('header.name') }}</span>
           </div>
+
+          <div class="item-container">
+            <div v-for="(kun, index) in item" :key="index" class="item">
+              <span class="icon-item">
+                <Icon :name="kun.icon"></Icon>
+              </span>
+              <NuxtLinkLocale :to="kun.router">
+                {{ $t(`header.hamburger.${kun.name}`) }}
+              </NuxtLinkLocale>
+              <span class="new" v-if="kun.isNew">
+                {{ $t('header.hamburger.new') }}
+              </span>
+            </div>
+          </div>
+
+          <KunSettingPanelComponentsMode v-if="isShowSettings" />
+
+          <KunSettingPanelComponentsSwitchLanguage v-if="isShowSettings" />
+
+          <KunSettingPanelComponentsCustomBackground
+            v-if="isShowSettings"
+            :is-mobile="true"
+          />
+
+          <KunSettingPanelComponentsTransparency
+            v-if="isShowSettings"
+            style="margin-top: 17px"
+          />
+
+          <KunSettingPanelComponentsFont
+            v-if="isShowSettings"
+            style="margin-top: 17px"
+          />
+
+          <KunSettingPanelComponentsReset v-if="isShowSettings" />
+
+          <span class="more" :class="isShowSettings ? 'active' : ''">
+            <Icon @click="handleShowMore" name="lucide:chevron-down" />
+          </span>
         </div>
 
-        <KunSettingPanelComponentsMode v-if="isShowSettings" />
+        <div class="links">
+          <NuxtLinkLocale to="/rss">
+            <Icon name="lucide:rss" />
+          </NuxtLinkLocale>
 
-        <KunSettingPanelComponentsSwitchLanguage v-if="isShowSettings" />
+          <a
+            aria-label="KUN Visual Novel Official Telegram Group"
+            href="https://t.me/kungalgame"
+            target="_blank"
+          >
+            <Icon name="ph:telegram-logo" />
+          </a>
 
-        <KunSettingPanelComponentsCustomBackground
-          v-if="isShowSettings"
-          :is-mobile="true"
-        />
-
-        <KunSettingPanelComponentsTransparency
-          v-if="isShowSettings"
-          style="margin-top: 17px"
-        />
-
-        <KunSettingPanelComponentsFont
-          v-if="isShowSettings"
-          style="margin-top: 17px"
-        />
-
-        <KunSettingPanelComponentsReset v-if="isShowSettings" />
-
-        <span class="more" :class="isShowSettings ? 'active' : ''">
-          <Icon @click="handleShowMore" name="lucide:chevron-down" />
-        </span>
+          <a
+            aria-label="KUN Visual Novel Open Source GitHub Repository | 鲲 Galgame 论坛开源 GitHub 仓库"
+            href="https://github.com/KUN1007/kun-galgame-nuxt3"
+            target="_blank"
+          >
+            <Icon name="lucide:github" />
+          </a>
+        </div>
       </div>
     </div>
   </Transition>
@@ -147,6 +171,9 @@ const handleShowMore = () => {
   border-right: 1px solid var(--kungalgame-blue-2);
   box-shadow: var(--shadow);
   border-radius: 0 5px 5px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .item-container {
@@ -181,7 +208,7 @@ const handleShowMore = () => {
   }
 
   a {
-    color: var(--kungalgame-blue-5);
+    color: var(--kungalgame-font-color-3);
   }
 
   .new {
@@ -195,6 +222,27 @@ const handleShowMore = () => {
   display: flex;
   justify-content: center;
   margin: 10px 0;
+}
+
+.links {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  font-size: 20px;
+  margin: 17px 0;
+
+  & > a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--kungalgame-blue-5);
+  }
+
+  span {
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
 }
 
 .active {

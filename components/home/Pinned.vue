@@ -55,6 +55,7 @@ const props = defineProps<{
 
     a {
       margin-right: 0;
+      font-size: 15px;
     }
   }
 }

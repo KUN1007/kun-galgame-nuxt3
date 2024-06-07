@@ -87,6 +87,8 @@ const getLink = (link: 'galgame' | 'topic') =>
         </div>
       </div>
 
+      <p class="hint">{{ $t('rss.update') }}</p>
+
       <div class="nav">
         <KunBackToPrevious />
         <KunBackToHome />
@@ -183,6 +185,16 @@ const getLink = (link: 'galgame' | 'topic') =>
       box-shadow: var(--shadow);
     }
   }
+}
+
+.hint {
+  display: flex;
+  justify-content: flex-end;
+  font-size: small;
+  font-style: oblique;
+  user-select: none;
+  color: var(--kungalgame-font-color-0);
+  margin-top: 17px;
 }
 
 .nav {

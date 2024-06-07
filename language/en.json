@@ -665,6 +665,7 @@
     "topic": "Topics",
     "galgame": "Visual Novels",
     "copy": "Copy RSS",
+    "update": "RSS data updates every seventeen minutes.",
     "language": {
       "en-us": "English",
       "zh-cn": "Chinese"
