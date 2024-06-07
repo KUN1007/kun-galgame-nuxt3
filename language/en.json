@@ -660,6 +660,16 @@
     "error": "Za~~~ko~♡ zako~♡ Smelly zako ♡ Something went wrong with the page ~ Did you do it?!",
     "remake": "One-click Reincarnation to Loli"
   },
+  "rss": {
+    "select": "Select the RSS languages",
+    "topic": "Topics",
+    "galgame": "Visual Novels",
+    "copy": "Copy RSS",
+    "language": {
+      "en-us": "English",
+      "zh-cn": "Chinese"
+    }
+  },
   "footer":{
     "copyright": "Copyright © 2024 KUN Visual Novel",
     "openSource": "GitHub Open Source",
@@ -771,10 +781,14 @@
       "description": "KUN Visual Novel's report page, where you can submit violation records in the forum. Hope everyone will not violate the rules."
     },
     "galgame": {
-      "title": "Galgame Resources",
+      "title": "Visual Novel Resources",
       "description": "KUN Visual Novel's resources page, providing various visualnovel downloads, Chinese, English, raw versions, Japanese, for Windows, macOS, PC, applications, direct installation, emulators, Android, Linux",
       "support": "This visual novel resource supports",
       "download": "Zero-threshold download"
+    },
+    "rss": {
+      "title": "Visual Novels and Topics RSS",
+      "description": "KUN Visual Novel Forum's visual novels and topics RSS, support English and Chinese simplified"
     },
     "friends": {
       "title": "Friend Links"

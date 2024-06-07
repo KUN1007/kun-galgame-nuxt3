@@ -129,10 +129,10 @@ useHead({
   font-style: italic;
   font-family: serif;
   cursor: pointer;
+  transition: 0.2s;
 
   &:hover {
     color: var(--kungalgame-blue-5);
-    transition: 0.2s;
   }
 }
 
@@ -162,11 +162,11 @@ useHead({
   color: var(--kungalgame-blue-5);
   cursor: pointer;
   text-align: center;
+  transition: 0.2s;
 
   &:hover {
     color: var(--kungalgame-red-4);
     transform: scale(1.2);
-    transition: 0.1s;
   }
 }
 

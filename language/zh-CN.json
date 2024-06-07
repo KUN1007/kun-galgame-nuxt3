@@ -659,6 +659,16 @@
     "error": "杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面出错了 ~ 是不是你干的?!",
     "remake": "一键转生为萝莉"
   },
+  "rss": {
+    "select": "选择订阅的语言",
+    "topic": "话题",
+    "galgame": "Galgame",
+    "copy": "复制 RSS",
+    "language": {
+      "en-us": "English",
+      "zh-cn": "简体中文"
+    }
+  },
   "footer":{
     "copyright": "版权所有 © 2024 鲲 Galgame",
     "openSource": "GitHub 开源",
@@ -778,6 +788,10 @@
       "description": "鲲 Galgame 论坛 Galgame 资源页面, 提供各类 Galgame 下载, Galgame 资源, 汉化, 英语, 生肉, 日语 Windows, macOS, PC, 应用, 直装, 模拟器, 安卓, Linux",
       "support": "该 Galgame 支持",
       "download": "零门槛下载"
+    },
+    "rss": {
+      "title": "Galgame 和话题订阅",
+      "description": "鲲 Galgame 论坛最新 Galgame 和话题的订阅, 支持英语及中文"
     },
     "friends": {
       "title": "友情链接"
