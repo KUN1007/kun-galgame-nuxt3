@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.11.25",
+  "version": "2.11.26",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -65,6 +65,7 @@
     "aws-sdk": "^2.1603.0",
     "bcrypt": "^5.1.1",
     "dompurify": "^3.1.0",
+    "feed": "^4.2.2",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "localforage": "^1.10.0",

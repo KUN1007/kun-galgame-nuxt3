@@ -56,3 +56,13 @@ export interface GalgameCard {
   platform: string[]
   language: string[]
 }
+
+export interface GalgameRSS {
+  gid: number
+  name: string
+  banner: string
+  user: KunUser
+
+  time: number
+  description: string
+}
