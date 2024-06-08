@@ -258,13 +258,17 @@ const handleCloseCapture = () => {
       font-weight: bold;
     }
   }
+
   .answer {
     width: 100%;
+
     div {
       font-size: 10px;
     }
+
     a {
       color: var(--kungalgame-blue-5);
+
       &:hover {
         text-decoration: underline;
       }

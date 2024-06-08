@@ -5,12 +5,8 @@
     <div class="title">Regulations (Trial)</div>
     <div class="tips">
       <p>
-        Tips: These are trial regulations, ✔ indicating implementation. The aim
-        is to make the forum's operation more transparent. It's not about rules;
-        we
-        <span>
-          <NuxtLinkLocale to="/kungalgame">have no rules</NuxtLinkLocale>
-        </span>
+        These are trial regulations, ✔ indicating implementation. The aim is to
+        make the forum's operation more transparent.
       </p>
     </div>
 
@@ -150,37 +146,18 @@ h2 {
 }
 
 .moemoepoint ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  text-decoration: none;
-  margin: 10px 0;
-  margin-left: 40px;
-
   li {
     margin: 5px 0;
   }
 }
 
 .kungalgamer > ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  text-decoration: none;
-  margin-left: 20px;
-
   li {
     margin: 5px 0;
   }
 }
 
 .topic > ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  text-decoration: none;
-  margin-left: 20px;
-
   li {
     margin: 5px 0;
   }

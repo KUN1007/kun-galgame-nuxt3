@@ -136,7 +136,6 @@ const handleClickForgotPassword = () => {
 
 .forget {
   cursor: pointer;
-  text-decoration: none;
   font-size: small;
   color: var(--kungalgame-blue-5);
   margin: 20px 0;

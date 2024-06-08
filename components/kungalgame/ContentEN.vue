@@ -302,8 +302,8 @@
     </p>
     <h3>2. To Create The Best Atmosphere</h3>
     <p>
-      Continuing from the previous point, before I started designing the entire
-      website, I wrote the following on the design drawing:
+      Continuing from the previous point, before we started designing the entire
+      website, we wrote the following on the design drawing:
     </p>
     <br />
     <ul class="list">
@@ -355,28 +355,55 @@
       .
     </p>
     <h2 id="stipulate">Forum Guidelines</h2>
-    <p>
-      Guidelines? No, we have
-      <strong>no guidelines</strong>. All guidelines depend on everyone's common
-      opinions.
-    </p>
-    <p>However, we hope to keep things kind and minimize hostility.</p>
-    <p style="margin-bottom: 10px">
-      To avoid having your account deleted prematurely,
-      <strong style="color: red">we offer these suggestions</strong>
-    </p>
+    <p>The following behaviors will be considered violations:</p>
+    <br />
     <ul class="list">
-      <li>1. No political discussions.</li>
-      <li>2. No advertising or solicitation.</li>
+      <li>Prohibition of political discussions</li>
+      <p>
+        Including, but not limited to, discussions that may cause political
+        disputes in any country worldwide
+      </p>
+      <br />
+      <li>Prohibition of advertising and traffic redirection</li>
+      <p>
+        If the redirection involves paid resources or other more severe actions,
+        it will be considered as advertising and traffic redirection
+      </p>
+      <br />
       <li>
-        3. For sensitive topics, please include a clear warning in the article
-        title, e.g., R18, R18-G, etc.
+        If sensitive topics or images are involved, please indicate in the
+        article title
       </li>
+      <p>For example, R18, R18-G, etc.</p>
+      <br />
+      <li>Malicious topic flooding, comments, and replies</li>
+      <p>
+        Even replying with one character counts as a meaningful reply, but if
+        there are continuous meaningless replies, once we collectively recognize
+        it as malicious comment flooding, it will be considered a violation.
+      </p>
+      <p>
+        However, if you believe your replies are meaningful, posting a thousand
+        at a time is also acceptable.
+      </p>
+      <br />
+      <li>Malicious abuse of others</li>
+      <p>
+        If you think someone's actions are problematic, feel free to abuse them,
+        and we will judge who is right or wrong based on the situation.
+      </p>
+      <p>If there is no valid reason, it will be considered malicious abuse.</p>
+      <br />
+      <li>Causing public outrage</li>
+      <p>
+        If we collectively determine that it has caused public anger and
+        disharmony
+      </p>
     </ul>
     <br />
     <p>
-      Why offer suggestions? Because these are not "Moe" behaviors. If you'd
-      like to learn more about posting etiquette, please see
+      Why offer guidelines? Because these are not "Moe" behaviors. If you'd like
+      to learn more about posting etiquette, please see
       <span class="skip">
         <NuxtLinkLocale to="/non-moe"> the Non-Moe Records </NuxtLinkLocale>
       </span>
@@ -395,8 +422,6 @@
 ul {
   margin: 0;
   padding: 0;
-  list-style: none;
-  text-decoration: none;
 }
 
 h1,

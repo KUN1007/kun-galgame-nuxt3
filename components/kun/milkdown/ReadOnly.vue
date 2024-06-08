@@ -187,11 +187,6 @@ watch(
       background-color: var(--kungalgame-trans-blue-1);
     }
 
-    ul li,
-    ol li {
-      color: var(--kungalgame-blue-5);
-    }
-
     .tableWrapper {
       color: var(--kungalgame-font-color-3);
       position: relative;

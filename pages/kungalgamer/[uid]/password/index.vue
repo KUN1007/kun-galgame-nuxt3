@@ -26,7 +26,6 @@ const localePath = useLocalePath()
 .forget {
   font-size: medium;
   cursor: pointer;
-  text-decoration: none;
   color: var(--kungalgame-blue-5);
 }
 

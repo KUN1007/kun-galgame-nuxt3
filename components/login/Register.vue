@@ -172,7 +172,6 @@ const handleRegister = async () => {
   bottom: 3%;
   font-size: x-small;
   color: var(--kungalgame-font-color-1);
-  text-decoration: none;
 
   span {
     color: var(--kungalgame-red-4);

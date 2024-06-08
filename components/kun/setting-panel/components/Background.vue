@@ -17,8 +17,8 @@ const handleChangeImage = async (index: number) => {
     </div>
 
     <ul class="kungalgame-background-container">
+      <span>{{ $t('header.settings.preset') }}</span>
       <li>
-        <span>{{ $t('header.settings.preset') }}</span>
         <ul class="kungalgame-restore-bg">
           <li
             v-for="kun in backgroundImages"
@@ -72,8 +72,6 @@ const handleChangeImage = async (index: number) => {
 .kungalgame-restore-bg {
   margin: 0;
   padding: 0;
-  list-style: none;
-  text-decoration: none;
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(3, 80px);
