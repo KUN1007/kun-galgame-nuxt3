@@ -41,23 +41,23 @@
             If a user's topic/reply/comment is liked, the user earns 1 MoeMoe
             Point ✔
           </li>
-          <li>Publishing a Galgame earns 3 MoeMoe Points ✔</li>
+          <li>Publishing a visual novel earns 3 MoeMoe Points ✔</li>
           <li>
-            If a published Galgame is liked, commented on, or bookmarked, the
-            publisher earns 1 MoeMoe Point ✔
+            If a published visual novel is liked, commented on, or bookmarked,
+            the publisher earns 1 MoeMoe Point ✔
           </li>
-          <li>Publishing a Galgame resource earns 3 MoeMoe Points ✔</li>
+          <li>Publishing a visual novel resource earns 3 MoeMoe Points ✔</li>
           <li>
-            If a Galgame merge request is accepted, the requester earns 1 MoeMoe
+            If a visual novel merge request is accepted, the requester earns 1
+            MoeMoe Point ✔
+          </li>
+          <li>
+            If a visual novel resource is liked, the publisher earns 1 MoeMoe
             Point ✔
           </li>
           <li>
-            If a Galgame resource is liked, the publisher earns 1 MoeMoe Point
-            ✔
-          </li>
-          <li>
-            If a Galgame comment receives a reply, the commenter earns 1 MoeMoe
-            Point ✔
+            If a visual novel comment receives a reply, the commenter earns 1
+            MoeMoe Point ✔
           </li>
         </ul>
       </div>
