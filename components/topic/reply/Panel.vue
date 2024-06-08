@@ -1,11 +1,6 @@
 <script setup lang="ts">
 import 'animate.css'
 
-const MilkdownEditor = defineAsyncComponent(() => import('./Editor.vue'))
-const Tags = defineAsyncComponent(
-  () => import('~/components/edit/topic/Tags.vue')
-)
-
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
 const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
@@ -55,11 +50,11 @@ const handleClosePanel = async () => {
           </div>
 
           <div class="content">
-            <MilkdownEditor :is-show-menu="isShowAdvance" />
+            <LazyTopicReplyEditor :is-show-menu="isShowAdvance" />
           </div>
 
           <div class="footer">
-            <Tags
+            <LazyEditTopicTags
               style="margin-top: 10px; padding: 10px"
               v-if="isShowAdvance"
             />

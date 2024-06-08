@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { TopicComment } from '~/types/api/topic-comment'
 
-const CommentPanel = defineAsyncComponent(() => import('./Panel.vue'))
-
 const props = defineProps<{
   rid: number
   commentsData: TopicComment[]
@@ -72,7 +70,7 @@ const handleClickComment = (comment: TopicComment) => {
       </div>
     </div>
 
-    <CommentPanel
+    <LazyTopicCommentPanel
       v-if="isShowPanel && rid === storeRid"
       :rid="rid"
       @get-comment="(newComment) => comments.push(newComment)"
