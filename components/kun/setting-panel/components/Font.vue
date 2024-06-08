@@ -47,16 +47,16 @@ const setFont = () => {
 
 .font-input {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 30px;
+  border: 1px solid var(--kungalgame-blue-5);
   color: var(--kungalgame-font-color-3);
-  padding-bottom: 10px;
+  margin-bottom: 10px;
 
   input {
-    width: 100%;
+    flex: 1;
+    width: 0;
     padding-left: 7px;
-    height: 30px;
-    border: 1px solid var(--kungalgame-blue-5);
+    border: none;
     background-color: transparent;
     color: var(--kungalgame-font-color-3);
 
@@ -67,13 +67,10 @@ const setFont = () => {
   }
 
   button {
-    flex-shrink: 0;
-    padding: 0 10px;
-    height: 30px;
     width: 70px;
     color: var(--kungalgame-font-color-3);
-    border: 1px solid var(--kungalgame-blue-5);
-    border-left: none;
+    border: none;
+    border-left: inherit;
     background-color: transparent;
     cursor: pointer;
 
