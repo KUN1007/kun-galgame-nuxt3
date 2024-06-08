@@ -7,13 +7,11 @@ import {
   editorViewOptionsCtx
 } from '@milkdown/core'
 import { Milkdown, useEditor } from '@milkdown/vue'
-import { commonmark } from '@milkdown/preset-commonmark'
+import { commonmark, linkAttr } from '@milkdown/preset-commonmark'
 import { gfm } from '@milkdown/preset-gfm'
 
 import { prism, prismConfig } from '@milkdown/plugin-prism'
 import { replaceAll } from '@milkdown/utils'
-import type { EditorView } from 'prosemirror-view'
-import type { Node } from '@milkdown/prose/model'
 
 import '~/assets/css/editor/index.scss'
 
@@ -38,7 +36,7 @@ import tsx from 'refractor/lang/tsx'
 import markdown from 'refractor/lang/markdown'
 
 // Open link on new tab
-import { handleClick } from './plugins/hyperlinkOpen'
+import { handleExternal } from './plugins/hyperlinkExternal'
 
 const props = defineProps<{
   isReadonly: boolean
@@ -61,21 +59,10 @@ const { get, loading } = useEditor((root) =>
 
       ctx.update(editorViewOptionsCtx, (prev) => ({
         ...prev,
-        editable,
-        handleClickOn: (view: EditorView, pos: number, node: Node) =>
-          handleClick(ctx, view, pos, node)
+        editable
       }))
 
-      // preventDefaultClick
-      const observer = new MutationObserver(() => {
-        const links = Array.from(root.querySelectorAll('a'))
-        links.forEach((link) => {
-          link.onclick = () => false
-        })
-      })
-      observer.observe(root, {
-        childList: true
-      })
+      ctx.set(linkAttr.key, handleExternal)
 
       ctx.set(prismConfig.key, {
         configureRefractor: (refractor) => {
