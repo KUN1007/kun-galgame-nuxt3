@@ -11,49 +11,74 @@
     </div>
 
     <div class="moemoepoint">
-      <h2>Moemoepoints</h2>
-
+      <h2>MoeMoe Points</h2>
       <div class="gain">
-        <h3>Acquisition Methods</h3>
+        <h3>Ways to Earn</h3>
         <ul>
-          <li>1. Each registered user initially has 1007 moemoepoints ✔</li>
+          <li>Each registered user starts with 1007 MoeMoe Points ✔</li>
           <li>
-            2. Gain random 0 to 7 moemoepoints daily upon check-in, and the
-            check-in refreshes every day at midnight. ✔
+            Daily check-in earns 0 to 7 random MoeMoe Points, refreshed at
+            midnight ✔
           </li>
           <li>
-            3. Users earn 1 moemoepoint when their topics/replies/comments are
-            liked ✔
+            If a topic receives a reply, the topic creator earns 2 MoeMoe Points
+            ✔
           </li>
           <li>
-            4. If someone replies to a user's topic, the user earns 2
-            moemoepoints ✔
+            If a topic is promoted, the topic creator earns 3 MoeMoe Points ✔
           </li>
           <li>
-            5. If someone comments on a user's reply, the original poster
-            receive 1 moemoepoint ✔
+            If a topic is bookmarked, the topic creator earns 1 MoeMoe Point ✔
           </li>
           <li>
-            6. If a user's topic/reply is promoted, they will receive 7
-            moemoepoints ✔
+            If a reply receives a comment, the reply creator earns 1 MoeMoe
+            Point ✔
+          </li>
+          <li>
+            If a reply is promoted, the reply creator earns 1 MoeMoe Point ✔
+          </li>
+          <li>
+            If a user's topic/reply/comment is liked, the user earns 1 MoeMoe
+            Point ✔
+          </li>
+          <li>Publishing a Galgame earns 3 MoeMoe Points ✔</li>
+          <li>
+            If a published Galgame is liked, commented on, or bookmarked, the
+            publisher earns 1 MoeMoe Point ✔
+          </li>
+          <li>Publishing a Galgame resource earns 3 MoeMoe Points ✔</li>
+          <li>
+            If a Galgame merge request is accepted, the requester earns 1 MoeMoe
+            Point ✔
+          </li>
+          <li>
+            If a Galgame resource is liked, the publisher earns 1 MoeMoe Point
+            ✔
+          </li>
+          <li>
+            If a Galgame comment receives a reply, the commenter earns 1 MoeMoe
+            Point ✔
           </li>
         </ul>
       </div>
-
       <div class="deduct">
-        <h3>Deduction Methods</h3>
+        <h3>Ways to Lose</h3>
         <ul>
           <li>
-            1. Users engaging in non-moe behavior will have points deducted (7,
-            17, 77, 177, 777 points depending on severity)
+            Users' non-moe behavior will result in deductions of 7, 17, 77, 177,
+            or 777 MoeMoe Points based on the severity.
           </li>
           <li>
-            2. If a single topic is disliked 10 times, and after verification,
-            100 moemoepoints will be deducted
+            Each topic downvoted 10 times, if verified, results in a deduction
+            of 100 MoeMoe Points.
           </li>
           <li>
-            3. Each time a user promotes a topic, they will be deducted 17
-            moemoepoints, but it can be done repeatedly ✔
+            Users promoting a topic will be deducted 7 MoeMoe Points per
+            promotion, and can promote multiple times ✔
+          </li>
+          <li>
+            Users promoting a reply will be deducted 2 MoeMoe Points per
+            promotion, and can promote multiple times ✔
           </li>
         </ul>
       </div>
