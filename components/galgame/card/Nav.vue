@@ -94,7 +94,7 @@ watch(
   flex-wrap: wrap;
   background-color: var(--kungalgame-trans-white-5);
   border-radius: 10px;
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
   margin-bottom: 10px;
   z-index: 10;
   position: relative;
@@ -131,7 +131,8 @@ watch(
   }
 
   .active {
-    box-shadow: var(--kungalgame-shadow-0);
+    box-shadow: var(--shadow);
+    color: var(--kungalgame-blue-5);
   }
 }
 </style>

@@ -160,15 +160,10 @@ watch(
 </template>
 
 <style lang="scss" scoped>
-.content {
-  height: 100%;
-  margin: 0 auto;
-}
-
 .tool {
   padding: 10px;
   color: var(--kungalgame-font-color-3);
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
   background-color: var(--kungalgame-trans-white-5);
   border-radius: 10px;
   backdrop-filter: blur(10px);
@@ -220,7 +215,8 @@ watch(
     }
 
     .active {
-      box-shadow: var(--kungalgame-shadow-0);
+      box-shadow: var(--shadow);
+      color: var(--kungalgame-blue-5);
     }
   }
 }
@@ -228,7 +224,7 @@ watch(
 .pagination {
   padding: 10px;
   color: var(--kungalgame-font-color-3);
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
   background-color: var(--kungalgame-trans-white-5);
   border-radius: 10px;
   backdrop-filter: blur(10px);

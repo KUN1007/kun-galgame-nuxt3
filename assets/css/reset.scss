@@ -23,8 +23,14 @@
   }
 }
 
+@-moz-document url-prefix() {
+  * {
+    scrollbar-width: none;
+  }
+}
+
 ::-webkit-scrollbar {
-  width: 0;
+  width: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -42,7 +48,7 @@
   }
 
   * {
-    scrollbar-color: var(--kungalgame-blue-5) transparent;
+    scrollbar-color: transparent;
   }
 }
 

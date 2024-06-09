@@ -29,7 +29,7 @@ import { asideBarItem } from './asideItem'
   backdrop-filter: blur(10px);
   will-change: transform;
   border-left: 5px solid var(--kungalgame-blue-5);
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
   border-radius: 10px;
   margin-right: 17px;
   padding: 17px;

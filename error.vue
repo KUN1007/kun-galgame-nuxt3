@@ -60,7 +60,7 @@ const stickerLink = computed(
   backdrop-filter: blur(10px);
   will-change: transform;
   border-radius: 10px;
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   justify-content: center;

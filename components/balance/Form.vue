@@ -61,7 +61,6 @@ const { isIncome, incomeData, expenditureData, statement } = toRefs(props)
     flex-grow: 1;
     padding: 10px;
     overflow-y: scroll;
-    scrollbar-width: thin;
   }
 
   .sum {

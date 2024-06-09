@@ -76,7 +76,7 @@ const { data, pending } = await useLazyFetch('/api/home/nav', {
   display: flex;
   flex-direction: column;
   background-color: var(--kungalgame-trans-white-5);
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
   color: var(--kungalgame-font-color-3);
   border-radius: 10px;
   backdrop-filter: blur(10px);

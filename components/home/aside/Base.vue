@@ -31,7 +31,7 @@ import { asideItem } from '../utils/asideItem'
   flex-direction: column;
   border-radius: 20px;
   background-color: var(--kungalgame-trans-white-5);
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
 
   span {
     width: 100%;

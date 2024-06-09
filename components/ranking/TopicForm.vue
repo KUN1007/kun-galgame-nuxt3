@@ -160,7 +160,7 @@ const handleClickSortOrder = () => {
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
-    width: 7px;
+    width: 0;
   }
 }
 

@@ -37,7 +37,7 @@ const { data, pending } = await useLazyFetch(`/api/category`, {
   height: 100%;
   border-radius: 10px;
   background-color: var(--kungalgame-trans-white-5);
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
   will-change: transform;
   padding: 17px;

@@ -11,7 +11,7 @@
   display: inline-block;
   position: relative;
   background: var(--kungalgame-blue-5);
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
   box-sizing: border-box;
   animation: animFw 8s linear infinite;
 }

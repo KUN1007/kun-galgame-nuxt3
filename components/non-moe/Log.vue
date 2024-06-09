@@ -80,6 +80,7 @@ const logs = computed(() => props.logs)
     color: var(--kungalgame-purple-4);
   }
 }
+
 .result {
   border-right: 4px solid var(--kungalgame-red-4);
   padding-right: 5px;

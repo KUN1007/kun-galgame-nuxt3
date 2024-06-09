@@ -46,7 +46,7 @@ useHead({
   backdrop-filter: blur(10px);
   will-change: transform;
   border-radius: 10px;
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
 }
 
 .title {

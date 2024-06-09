@@ -91,7 +91,7 @@ useHead({
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
   will-change: transform;
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   align-items: center;

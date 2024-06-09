@@ -27,7 +27,7 @@ import { asideItem } from '../utils/asideItem'
   background-color: var(--kungalgame-trans-white-5);
   margin-bottom: 17px;
   color: var(--kungalgame-font-color-3);
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
   border-radius: 10px;
   padding: 17px;
   backdrop-filter: blur(10px);

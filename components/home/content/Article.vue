@@ -152,11 +152,7 @@ onBeforeUnmount(() => {
   backdrop-filter: blur(10px);
   will-change: transform;
   border-radius: 10px;
-  box-shadow: var(--kungalgame-shadow-0);
-
-  &::-webkit-scrollbar {
-    width: 7px;
-  }
+  box-shadow: var(--shadow);
 
   .tool {
     margin-bottom: 17px;

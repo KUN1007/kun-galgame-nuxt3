@@ -115,7 +115,7 @@ const handleSubmitReport = async () => {
   backdrop-filter: blur(10px);
   will-change: transform;
   padding: 20px 20px 60px;
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
 }
 
 .select-container {

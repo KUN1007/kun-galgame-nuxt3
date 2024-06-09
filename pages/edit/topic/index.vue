@@ -163,7 +163,7 @@ onBeforeRouteLeave(async (_, __, next) => {
   will-change: transform;
   color: var(--kungalgame-font-color-3);
   border-radius: 10px;
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
   overflow-y: scroll;
 
   .content {
@@ -184,7 +184,7 @@ onBeforeRouteLeave(async (_, __, next) => {
     cursor: pointer;
     background-color: var(--kungalgame-blue-5);
     border-radius: 20px;
-    box-shadow: var(--kungalgame-shadow-0);
+    box-shadow: var(--shadow);
   }
 
   .top {

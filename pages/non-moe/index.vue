@@ -93,7 +93,7 @@ const { data: logs, pending: listPending } = await useFetch(
   display: flex;
   color: var(--kungalgame-font-color-3);
   position: relative;
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
 }
 
 .title {
@@ -137,9 +137,8 @@ const { data: logs, pending: listPending } = await useFetch(
 .content {
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
   padding: 0 10px;
-  scrollbar-width: thin;
+  overflow-y: scroll;
 }
 
 .empty {

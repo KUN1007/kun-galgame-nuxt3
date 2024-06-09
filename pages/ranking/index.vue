@@ -38,13 +38,17 @@ useHead({
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
   will-change: transform;
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
   border-radius: 10px;
   margin: auto;
   display: flex;
   padding: 10px;
   overflow-y: scroll;
   color: var(--kungalgame-font-color-3);
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 }
 
 @media (max-width: 700px) {

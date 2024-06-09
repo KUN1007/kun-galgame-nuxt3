@@ -34,7 +34,7 @@ const { data, pending } = await useFetch(`/api/galgame`, {
   backdrop-filter: blur(10px);
   will-change: transform;
   border-radius: 10px;
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
   padding: 17px;
 }
 

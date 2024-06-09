@@ -232,7 +232,8 @@ onBeforeUnmount(() => {
     }
 
     .active {
-      box-shadow: var(--kungalgame-shadow-0);
+      box-shadow: var(--shadow);
+      color: var(--kungalgame-blue-5);
     }
   }
 }

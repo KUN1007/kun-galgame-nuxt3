@@ -82,7 +82,7 @@ defineProps<{
   align-items: center;
   padding: 10px;
   color: var(--kungalgame-font-color-3);
-  box-shadow: var(--kungalgame-shadow-0);
+  box-shadow: var(--shadow);
   background-color: var(--kungalgame-trans-white-5);
   backdrop-filter: blur(10px);
   will-change: transform;
