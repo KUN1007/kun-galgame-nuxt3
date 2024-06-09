@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import 'animate.css'
 
-const KUNGalgameSettingsPanel = defineAsyncComponent(
-  () => import('../setting-panel/SettingPanel.vue')
-)
-
 const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 </script>
 
@@ -21,7 +17,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
       leave-active-class="animate__animated animate__fadeOutRight animate__faster"
     >
       <KeepAlive>
-        <KUNGalgameSettingsPanel
+        <LazyKunSettingPanel
           v-if="showKUNGalgamePanel"
           @close="showKUNGalgamePanel = false"
         />

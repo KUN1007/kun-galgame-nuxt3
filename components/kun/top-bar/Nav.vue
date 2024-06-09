@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import 'animate.css'
 
-const Hamburger = defineAsyncComponent(() => import('./Hamburger.vue'))
-const MessageBox = defineAsyncComponent(() => import('../message/Box.vue'))
-
 const { showKUNGalgameHamburger, showKUNGalgameMessageBox, messageStatus } =
   storeToRefs(useTempSettingStore())
 
@@ -35,11 +32,11 @@ onMounted(async () => {
         @click="showKUNGalgameHamburger = true"
       />
 
-      <Hamburger />
+      <LazyKunTopBarHamburger />
     </div>
 
     <Transition name="message">
-      <MessageBox v-if="showKUNGalgameMessageBox" />
+      <LazyKunMessageBox v-if="showKUNGalgameMessageBox" />
     </Transition>
 
     <div class="kungalgame">

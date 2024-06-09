@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import type { GalgameDetail } from '~/types/api/galgame'
 
-const GalgameHistory = defineAsyncComponent(
-  () => import('./history/History.vue')
-)
-
 const isShowHistory = ref(false)
 
 const galgame = inject<GalgameDetail>('galgame')
@@ -34,7 +30,7 @@ const galgame = inject<GalgameDetail>('galgame')
     </div>
   </div>
 
-  <GalgameHistory v-if="isShowHistory" />
+  <LazyGalgameHistory v-if="isShowHistory" />
 </template>
 
 <style lang="scss" scoped>

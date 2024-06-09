@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import 'animate.css'
 
-const KUNGalgameUserInfo = defineAsyncComponent(() => import('./UserInfo.vue'))
-
 const { isShowSearch } = storeToRefs(useTempHomeStore())
 const { name, avatarMin } = storeToRefs(usePersistUserStore())
 const { showKUNGalgamePanel, showKUNGalgameUserPanel, messageStatus } =
@@ -45,7 +43,7 @@ const { showKUNGalgamePanel, showKUNGalgameUserPanel, messageStatus } =
       </NuxtLinkLocale>
     </div>
 
-    <KUNGalgameUserInfo
+    <LazyKunTopBarUserInfo
       v-if="showKUNGalgameUserPanel"
       @close="showKUNGalgameUserPanel = false"
     />

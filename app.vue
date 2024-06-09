@@ -5,10 +5,6 @@ const { showKUNGalgamePageTransparency } = storeToRefs(
   usePersistSettingsStore()
 )
 
-const ReplyPanel = defineAsyncComponent(
-  () => import('~/components/topic/reply/Panel.vue')
-)
-
 useHead({
   htmlAttrs: {
     lang: locale.value
@@ -47,7 +43,7 @@ onMounted(() => {
   <KunSearch />
 
   <!-- ReplyPanel -->
-  <ReplyPanel />
+  <LazyTopicReplyPanel />
 
   <NuxtPwaManifest />
   <NuxtLoadingIndicator color="var(--kungalgame-blue-5)" />
