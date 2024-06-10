@@ -26,13 +26,13 @@ useHead({
       rel: 'alternative',
       href: `https://www.kungal.com/rss/galgame.xml?locale=${locale.value}`,
       type: 'application/rss+xml',
-      title: t('head.topicRSS')
+      title: t('head.galgameRSS')
     },
     {
       rel: 'feed',
       href: `https://www.kungal.com/rss/galgame.xml?locale=${locale.value}`,
       type: 'application/rss+xml',
-      title: t('head.topicRSS')
+      title: t('head.galgameRSS')
     }
   ]
 })
