@@ -2,7 +2,9 @@
   "head": {
     "title": "KUN Visual Novel",
     "description": "The CUTEST Visual Novel Forum! The most advanced visual novel resource publishing website in the world at the moment! NO ADs Forever! Free Forever!",
-    "keywords": "visualnovel, visual novel downloads, visual novel resources, visual novel wiki, visualnovel reviews, visualnovel data analysis, visualnovel news, visualnovel translation/internationalization, visualnovel production, visualnovel discussions, visualnovel sources, technical exchanges, other discussions."
+    "keywords": "visualnovel, visual novel downloads, visual novel resources, visual novel wiki, visualnovel reviews, visualnovel data analysis, visualnovel news, visualnovel translation/internationalization, visualnovel production, visualnovel discussions, visualnovel sources, technical exchanges, other discussions.",
+    "topicRSS": "KUN Visual Novel Forum Topic RSS",
+    "galgameRSS": "KUN Visual Novel Forum Visual Novel RSS"
   },
   "header":{
     "name": "KUN Visual Novel",

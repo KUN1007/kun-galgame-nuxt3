@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const colorMode = useColorMode()
 const { showKUNGalgamePageTransparency } = storeToRefs(
   usePersistSettingsStore()
@@ -8,7 +8,33 @@ const { showKUNGalgamePageTransparency } = storeToRefs(
 useHead({
   htmlAttrs: {
     lang: locale.value
-  }
+  },
+  link: [
+    {
+      rel: 'alternative',
+      href: `https://www.kungal.com/rss/topic.xml?locale=${locale.value}`,
+      type: 'application/rss+xml',
+      title: t('head.topicRSS')
+    },
+    {
+      rel: 'feed',
+      href: `https://www.kungal.com/rss/topic.xml?locale=${locale.value}`,
+      type: 'application/rss+xml',
+      title: t('head.topicRSS')
+    },
+    {
+      rel: 'alternative',
+      href: `https://www.kungal.com/rss/galgame.xml?locale=${locale.value}`,
+      type: 'application/rss+xml',
+      title: t('head.topicRSS')
+    },
+    {
+      rel: 'feed',
+      href: `https://www.kungal.com/rss/galgame.xml?locale=${locale.value}`,
+      type: 'application/rss+xml',
+      title: t('head.topicRSS')
+    }
+  ]
 })
 
 useSchemaOrg([
