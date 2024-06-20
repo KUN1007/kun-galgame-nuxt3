@@ -157,6 +157,7 @@ defineProps<{
 .publisher {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 
   .name {
     margin: 0 7px;
@@ -165,6 +166,13 @@ defineProps<{
   .time {
     color: var(--kungalgame-font-color-0);
     font-size: small;
+  }
+}
+
+@media (max-width: 700px) {
+  .grid-card {
+    grid-template-columns: repeat(2, minmax(100px, 233px));
+    gap: 7px;
   }
 }
 </style>
