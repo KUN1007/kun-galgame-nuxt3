@@ -53,6 +53,13 @@ export default defineNuxtConfig({
   // Frontend
   css: ['~/assets/css/index.scss'],
   vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "~/assets/css/mixins.scss" as *;'
+        }
+      }
+    },
     esbuild: {
       drop: ['console', 'debugger']
     }

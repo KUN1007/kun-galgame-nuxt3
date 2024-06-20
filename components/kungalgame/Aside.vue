@@ -25,14 +25,11 @@ import { asideBarItem } from './asideItem'
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
   border-left: 5px solid var(--kungalgame-blue-5);
-  box-shadow: var(--shadow);
-  border-radius: 10px;
   margin-right: 17px;
   padding: 17px;
+
+  @include kun-blur;
 
   & > span {
     display: flex;

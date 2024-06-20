@@ -85,22 +85,14 @@ watch(
 .kungalgame-message {
   margin: 0 auto;
   font-size: large;
-  color: var(--kungalgame-font-color-2);
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 1vh 10vw;
-  box-shadow: var(--shadow);
+
+  @include kun-blur;
+  @include kun-center;
 
   span {
-    display: flex;
+    @include kun-center;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
 
   .message {

@@ -24,16 +24,12 @@ const localePath = useLocalePath()
 }
 
 .container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
   width: 400px;
   height: 300px;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  border-radius: 5px;
+
+  @include kun-blur;
+  @include kun-center;
+  flex-direction: column;
 
   h1 {
     color: var(--kungalgame-red-5);

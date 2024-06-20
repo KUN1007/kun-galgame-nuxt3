@@ -88,17 +88,14 @@ watch(
 .container {
   min-height: 120px;
   width: 100%;
-  color: var(--kungalgame-font-color-3);
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  box-shadow: var(--shadow);
   border-top: 1px solid var(--kungalgame-blue-2);
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 9999;
+
+  @include kun-blur;
 }
 
 .lass {

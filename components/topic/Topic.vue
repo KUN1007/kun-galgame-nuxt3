@@ -162,16 +162,12 @@ watch(
 <style lang="scss" scoped>
 .tool {
   padding: 10px;
-  color: var(--kungalgame-font-color-3);
-  box-shadow: var(--shadow);
-  background-color: var(--kungalgame-trans-white-5);
-  border-radius: 10px;
-  backdrop-filter: blur(10px);
-  will-change: transform;
   margin-bottom: 17px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @include kun-blur;
 
   .page {
     font-size: large;
@@ -223,13 +219,9 @@ watch(
 
 .pagination {
   padding: 10px;
-  color: var(--kungalgame-font-color-3);
-  box-shadow: var(--shadow);
-  background-color: var(--kungalgame-trans-white-5);
-  border-radius: 10px;
-  backdrop-filter: blur(10px);
-  will-change: transform;
   margin-bottom: 17px;
+
+  @include kun-blur;
 }
 
 @media (max-width: 800px) {

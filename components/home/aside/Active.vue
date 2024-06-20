@@ -24,14 +24,10 @@ import { asideItem } from '../utils/asideItem'
   grid-template-rows: repeat(3, minmax(0, 1fr));
   gap: 17px;
   font-size: 14px;
-  background-color: var(--kungalgame-trans-white-5);
   margin-bottom: 17px;
-  color: var(--kungalgame-font-color-3);
-  box-shadow: var(--shadow);
-  border-radius: 10px;
   padding: 17px;
-  backdrop-filter: blur(10px);
-  will-change: transform;
+
+  @include kun-blur;
 
   a {
     font-weight: bold;

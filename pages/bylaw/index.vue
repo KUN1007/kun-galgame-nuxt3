@@ -39,17 +39,11 @@ useHead({
   width: 100%;
   max-width: 64rem;
   height: 100%;
-  background-color: var(--kungalgame-trans-white-5);
-  border-radius: 10px;
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  box-shadow: var(--shadow);
-  color: var(--kungalgame-font-color-3);
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   position: relative;
+
+  @include kun-blur;
+  @include kun-center;
 }
 
 @media (max-width: 1000px) {

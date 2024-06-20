@@ -48,7 +48,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
     right: 0;
     bottom: 0;
     z-index: -1;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(var(--kun-background-blur));
     will-change: transform;
   }
 }

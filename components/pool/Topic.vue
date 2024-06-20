@@ -42,15 +42,12 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
   display: flex;
   flex-direction: column;
   color: var(--kungalgame-font-color-3);
-  box-shadow: var(--shadow);
   cursor: pointer;
   max-width: 300px;
   padding: 10px;
-  border-radius: 10px;
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  background-color: var(--kungalgame-trans-white-5);
   transition: all 0.2s;
+
+  @include kun-blur;
 
   &:hover {
     box-shadow: var(--kungalgame-shadow-0);

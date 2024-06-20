@@ -39,16 +39,12 @@ useHead({
   max-width: 64rem;
   margin: 0 auto;
   position: relative;
-  border-radius: 7px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: var(--kungalgame-font-color-3);
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
   padding: 20px;
-  box-shadow: var(--shadow);
+
+  @include kun-blur;
 }
 
 .title {

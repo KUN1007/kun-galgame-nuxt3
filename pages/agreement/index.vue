@@ -87,16 +87,12 @@ useHead({
   max-width: 600px;
   margin: auto;
   position: relative;
-  border-radius: 7px;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: var(--kungalgame-font-color-3);
   padding: 20px;
+
+  @include kun-blur;
 
   &:hover {
     box-shadow: var(--kungalgame-shadow-1);

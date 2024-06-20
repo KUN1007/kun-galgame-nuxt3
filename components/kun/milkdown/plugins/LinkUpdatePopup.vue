@@ -94,10 +94,8 @@ const handleUpdateLink = () => {
   width: 350px;
   display: inline-flex;
   border: 1px solid var(--kungalgame-blue-5);
-  border-radius: 5px;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
+
+  @include kun-blur;
 }
 
 .input {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const localePath = useLocalePath()
 
-const isShowTransparency = ref(true)
+const showItemIndex = ref(1)
 
 const emits = defineEmits<{
   close: [showKUNGalgamePanel: boolean]
@@ -34,25 +34,35 @@ const handelCloseSettingsPanel = () => {
       <div class="switch">
         <div class="menu">
           <span
-            :class="isShowTransparency ? 'active' : ''"
-            @click="isShowTransparency = true"
+            :class="showItemIndex === 1 ? 'active' : ''"
+            @click="showItemIndex = 1"
           >
-            {{ $t('header.settings.trans') }}
+            <Icon name="mdi:circle-transparent" />
           </span>
           <span
-            :class="isShowTransparency ? '' : 'active'"
-            @click="isShowTransparency = false"
+            :class="showItemIndex === 2 ? 'active' : ''"
+            @click="showItemIndex = 2"
           >
-            {{ $t('header.settings.font') }}
+            <Icon name="tabler:blur" />
+          </span>
+          <span
+            :class="showItemIndex === 3 ? 'active' : ''"
+            @click="showItemIndex = 3"
+          >
+            <Icon name="ci:font" />
           </span>
         </div>
 
         <TransitionGroup name="item" tag="div">
-          <div class="item" v-if="isShowTransparency">
+          <div class="item" v-if="showItemIndex === 1">
             <KunSettingPanelComponentsTransparency />
           </div>
 
-          <div class="item" v-else-if="!isShowTransparency">
+          <div class="item" v-if="showItemIndex === 2">
+            <KunSettingPanelComponentsBlur />
+          </div>
+
+          <div class="item" v-else-if="showItemIndex === 3">
             <KunSettingPanelComponentsFont />
           </div>
         </TransitionGroup>
@@ -76,14 +86,11 @@ const handelCloseSettingsPanel = () => {
   top: 75px;
   right: 0;
   position: absolute;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  box-shadow: var(--shadow);
-  border-radius: 10px;
   display: flex;
-  color: var(--kungalgame-font-color-3);
   border: 1px solid var(--kungalgame-blue-2);
+
+  @include kun-blur;
+  backdrop-filter: blur(10px);
 }
 
 .container {
@@ -128,28 +135,21 @@ const handelCloseSettingsPanel = () => {
 
   .menu {
     display: flex;
-    justify-content: space-between;
     margin-bottom: 17px;
-    border: 1px solid var(--kungalgame-blue-5);
 
     span {
       cursor: pointer;
-      width: 100%;
-      padding: 2px;
-      display: flex;
-      font-size: 15px;
-      justify-content: center;
-      color: var(--kungalgame-blue-5);
-      transition: all 0.2s;
+      border-radius: 10px;
+      padding: 5px 7px;
+      font-size: 20px;
 
-      &:nth-child(1) {
-        border-right: 1px solid var(--kungalgame-blue-5);
-      }
+      @include kun-center;
     }
 
     .active {
-      background-color: var(--kungalgame-blue-5);
-      color: var(--kungalgame-white);
+      box-shadow: var(--shadow);
+      background-color: var(--kungalgame-trans-blue-0);
+      color: var(--kungalgame-blue-5);
     }
   }
 

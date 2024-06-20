@@ -55,17 +55,11 @@ const stickerLink = computed(
 
 .card {
   margin: 0 auto;
-  color: var(--kungalgame-font-color-3);
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 17px;
+
+  @include kun-center;
+  flex-direction: column;
+  @include kun-blur;
 
   h1 {
     color: var(--kungalgame-red-5);

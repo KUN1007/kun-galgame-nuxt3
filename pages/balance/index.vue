@@ -96,16 +96,13 @@ const { data: statement } = await useFetch(`/api/balance/statement`, {
 .article {
   min-height: 500px;
   margin: auto;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
   padding: 10px;
-  border-radius: 7px;
-  box-shadow: var(--shadow);
   display: flex;
   align-items: center;
   flex-direction: column;
   position: relative;
+
+  @include kun-blur;
 }
 
 .title {

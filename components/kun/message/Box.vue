@@ -166,13 +166,11 @@ onBeforeUnmount(async () => {
   right: 0;
   height: 100%;
   border-left: 1px solid var(--kungalgame-blue-2);
-  border-radius: 5px 0 0 5px;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  color: var(--kungalgame-font-color-3);
   overflow: scroll;
   max-width: 342px;
+
+  @include kun-blur;
+  border-radius: 5px 0 0 5px;
 
   &::-webkit-scrollbar {
     width: 0;

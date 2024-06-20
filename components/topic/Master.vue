@@ -101,13 +101,9 @@ const loliStatus = computed(() => {
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
-  color: var(--kungalgame-font-color-3);
-  box-shadow: var(--shadow);
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  border-radius: 10px;
   margin-bottom: 17px;
+
+  @include kun-blur;
 }
 
 .header {

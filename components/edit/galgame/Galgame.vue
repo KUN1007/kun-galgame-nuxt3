@@ -141,12 +141,9 @@ const handleGetVNData = async () => {
 .container {
   width: 100%;
   height: 100%;
-  border-radius: 10px;
-  background-color: var(--kungalgame-trans-white-5);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(10px);
-  will-change: transform;
   padding: 17px;
+
+  @include kun-blur;
 }
 
 :deep(h2) {

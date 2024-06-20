@@ -40,15 +40,12 @@ useHead({
 .content {
   height: 100%;
   overflow-y: scroll;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  box-shadow: var(--shadow);
-  border-radius: 7px;
   display: flex;
   flex-direction: column;
   position: relative;
   padding: 0 30px;
+
+  @include kun-blur;
 }
 
 @media (max-width: 1000px) {

@@ -75,20 +75,14 @@ defineProps<{
 <style lang="scss" scoped>
 .reply {
   width: 100%;
-  display: flex;
   flex-shrink: 0;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 10px;
-  color: var(--kungalgame-font-color-3);
-  box-shadow: var(--shadow);
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  border-radius: 10px;
   margin-bottom: 17px;
   position: relative;
+
+  @include kun-blur;
+  @include kun-center;
+  flex-direction: column;
 }
 
 .floor {

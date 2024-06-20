@@ -38,13 +38,9 @@ useHead({
   min-height: calc(100dvh - 75px);
   max-width: 64rem;
   margin: 0 auto;
-  color: var(--kungalgame-font-color-3);
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
   padding: 10px;
+
+  @include kun-blur;
 }
 
 .content {

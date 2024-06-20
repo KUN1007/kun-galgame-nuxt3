@@ -141,12 +141,6 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   align-items: center;
   white-space: nowrap;
   position: relative;
-  color: var(--kungalgame-font-color-3);
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  box-shadow: var(--kungalgame-shadow-0);
-  border-radius: 17px;
   padding: 10px;
   margin-top: 10vh;
   margin-bottom: auto;
@@ -155,6 +149,8 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   min-height: 200px;
   max-height: 600px;
   overflow-y: scroll;
+
+  @include kun-blur;
 }
 
 .kun-nav {

@@ -85,15 +85,11 @@ const { data: logs, pending: listPending } = await useFetch(
   width: 100%;
   max-width: 48rem;
   margin: auto;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
   overflow: hidden;
-  border-radius: 10px;
   display: flex;
-  color: var(--kungalgame-font-color-3);
   position: relative;
-  box-shadow: var(--shadow);
+
+  @include kun-blur;
 }
 
 .title {

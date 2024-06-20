@@ -147,14 +147,11 @@ onMounted(async () => {
   top: 16px;
   transform: translateX(-43%);
   width: 130px;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  border-radius: 5px;
   position: absolute;
   display: flex;
   flex-direction: column;
-  box-shadow: var(--shadow);
+
+  @include kun-blur;
 }
 
 .info {

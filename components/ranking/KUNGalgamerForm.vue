@@ -132,12 +132,9 @@ const handleClickSortOrder = () => {
   width: 100%;
   display: none;
   flex-direction: column;
-  border-radius: 5px;
   border: 1px solid var(--kungalgame-pink-0);
-  box-shadow: var(--shadow);
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
+
+  @include kun-blur;
 
   .item {
     transition: all 0.2s;

@@ -124,10 +124,8 @@ h1 {
     position: absolute;
     bottom: 0;
     right: 0;
-    background-color: var(--kungalgame-trans-white-5);
-    backdrop-filter: blur(10px);
-    will-change: transform;
-    border-radius: 10px;
+
+    @include kun-blur;
 
     .close {
       position: absolute;

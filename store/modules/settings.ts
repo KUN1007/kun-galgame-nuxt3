@@ -10,7 +10,8 @@ export const usePersistSettingsStore = defineStore({
   state: (): KUNGalgameSettingsStore => ({
     showKUNGalgamePageTransparency: 77,
     showKUNGalgameFontStyle: SETTINGS_DEFAULT_FONT_FAMILY,
-    showKUNGalgameBackground: 0
+    showKUNGalgameBackground: 0,
+    showKUNGalgameBackgroundBlur: 0
   }),
   actions: {
     // Set the font style, allowing users to set their own
@@ -19,6 +20,7 @@ export const usePersistSettingsStore = defineStore({
       this.showKUNGalgameFontStyle = font
       document.documentElement.style.setProperty('--font-family', font)
     },
+
     // Set the page transparency
     setKUNGalgameTransparency(trans: number, mode: 'dark' | 'light') {
       this.showKUNGalgamePageTransparency = trans
@@ -34,16 +36,28 @@ export const usePersistSettingsStore = defineStore({
         )
       }
     },
+
+    // Set the page background blur
+    setKUNGalgameBackgroundBlur(blur: number) {
+      this.showKUNGalgameBackgroundBlur = blur
+      document.documentElement.style.setProperty(
+        '--kun-background-blur',
+        `${blur}px`
+      )
+    },
+
     // Set the system background
     async setSystemBackground(index: number) {
       this.showKUNGalgameBackground = index
       await deleteImage(SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME)
     },
+
     // Set the image of custom
     async setCustomBackground(file: File) {
       await saveImage(file, SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME)
       this.showKUNGalgameBackground = -1
     },
+
     // Get the image of current setting option
     async getCurrentBackground() {
       const backgroundImageBlobData = await getImage(
@@ -59,6 +73,7 @@ export const usePersistSettingsStore = defineStore({
 
       return `/bg/bg${this.showKUNGalgameBackground}.webp`
     },
+
     // Reset all settings; because it interacts with the document
     // , Pinia reactivity is not effective
     async setKUNGalgameSettingsRecover() {

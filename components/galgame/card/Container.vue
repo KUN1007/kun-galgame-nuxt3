@@ -30,12 +30,9 @@ const { data, pending } = await useFetch(`/api/galgame`, {
 
 <style lang="scss" scoped>
 .container {
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
   padding: 17px;
+
+  @include kun-blur;
 }
 
 .declaration {

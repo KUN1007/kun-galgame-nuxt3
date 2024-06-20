@@ -52,13 +52,10 @@ onMounted(() => {
   top: 0;
   width: 100%;
   max-width: 777px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 17px;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
+
+  @include kun-blur;
+  @include kun-center;
+  box-shadow: none;
 }
 
 .input {
@@ -69,7 +66,7 @@ onMounted(() => {
   border: none;
   background-color: transparent;
   border: 2px solid var(--kungalgame-blue-5);
-  border-radius: 17px;
+  border-radius: 10px;
   color: var(--kungalgame-font-color-3);
   transition: all 0.2s;
 

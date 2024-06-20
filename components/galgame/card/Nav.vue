@@ -110,7 +110,7 @@ watch(
     bottom: 0;
     z-index: -1;
     border-radius: 10px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(var(--kun-background-blur));
     will-change: transform;
   }
 }

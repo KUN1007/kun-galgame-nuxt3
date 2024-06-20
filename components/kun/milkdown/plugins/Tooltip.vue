@@ -67,7 +67,6 @@ const call = <T,>(command: CmdKey<T>, payload?: T) => {
   border: 1px solid var(--kungalgame-blue-5);
   border-radius: 5px;
   backdrop-filter: blur(10px);
-  will-change: transform;
 
   button {
     cursor: pointer;

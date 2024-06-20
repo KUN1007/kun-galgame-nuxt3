@@ -114,15 +114,11 @@ const getLink = (link: 'galgame' | 'topic') =>
   width: 400px;
   height: 300px;
   margin: auto;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  box-shadow: var(--shadow);
-  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: var(--kungalgame-font-color-3);
+
+  @include kun-blur;
 }
 
 .title {

@@ -93,17 +93,13 @@ useHead({
   min-height: 700px;
   width: 100%;
   max-width: 48rem;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
   border: 1px solid var(--kungalgame-blue-5);
-  box-shadow: var(--shadow);
-  border-radius: 10px;
   margin: auto;
   display: flex;
   flex-direction: column;
-  color: var(--kungalgame-font-color-3);
   transition: all 0.2s;
+
+  @include kun-blur;
 }
 
 h1 {

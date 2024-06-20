@@ -14,6 +14,7 @@ export interface KUNGalgameSettingsStore {
   showKUNGalgamePageTransparency: number
   showKUNGalgameFontStyle: string
   showKUNGalgameBackground: number
+  showKUNGalgameBackgroundBlur: number
 }
 
 export interface TempSettingStore {

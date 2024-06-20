@@ -128,12 +128,8 @@ if (galgame.value) {
   min-height: calc(100dvh - 75px);
   max-width: 64rem;
   margin: 0 auto;
-  color: var(--kungalgame-font-color-3);
   padding: 17px;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
+
+  @include kun-blur;
 }
 </style>

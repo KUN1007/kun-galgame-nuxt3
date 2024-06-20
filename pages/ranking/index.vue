@@ -35,16 +35,12 @@ useHead({
   max-height: calc(100dvh - 100px);
   width: 100%;
   max-width: 64rem;
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  box-shadow: var(--shadow);
-  border-radius: 10px;
   margin: auto;
   display: flex;
   padding: 10px;
   overflow-y: scroll;
-  color: var(--kungalgame-font-color-3);
+
+  @include kun-blur;
 
   &::-webkit-scrollbar {
     width: 0;

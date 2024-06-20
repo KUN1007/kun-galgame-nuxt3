@@ -115,13 +115,10 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: var(--kungalgame-trans-white-5);
-    backdrop-filter: blur(10px);
-    will-change: transform;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
     white-space: nowrap;
     padding: 10px;
+
+    @include kun-blur;
 
     .item {
       display: flex;

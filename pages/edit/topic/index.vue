@@ -157,18 +157,15 @@ onBeforeRouteLeave(async (_, __, next) => {
   width: 100%;
   max-width: 64rem;
   margin: 0 auto;
-  box-shadow: var(--shadow);
-  background-color: var(--kungalgame-trans-white-5);
-  backdrop-filter: blur(10px);
-  will-change: transform;
-  color: var(--kungalgame-font-color-3);
-  border-radius: 10px;
-  box-shadow: var(--shadow);
   overflow-y: scroll;
+  scrollbar-width: none;
+
+  @include kun-blur;
 
   .content {
     height: 100%;
     overflow-y: scroll;
+    scrollbar-width: none;
   }
 
   .tool-button {
@@ -176,15 +173,14 @@ onBeforeRouteLeave(async (_, __, next) => {
     right: 20px;
     height: 40px;
     width: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 15px;
     color: var(--kungalgame-white);
     cursor: pointer;
     background-color: var(--kungalgame-blue-5);
     border-radius: 20px;
     box-shadow: var(--shadow);
+
+    @include kun-center;
   }
 
   .top {
