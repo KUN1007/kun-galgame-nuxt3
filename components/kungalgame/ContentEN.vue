@@ -376,6 +376,13 @@
       </li>
       <p>For example, R18, R18-G, etc.</p>
       <br />
+      <li>Real-person pornography prohibited</li>
+      <p>
+        If any content is collectively judged by us as real-person pornography
+        (including images, videos, audio, text, etc.), it will be considered a
+        violation.
+      </p>
+      <br />
       <li>Malicious topic flooding, comments, and replies</li>
       <p>
         Even replying with one character counts as a meaningful reply, but if
