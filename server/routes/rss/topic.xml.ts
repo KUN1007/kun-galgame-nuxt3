@@ -1,5 +1,5 @@
 import { useKunFeed } from '../_useI18nFeed'
-import type { TopicRSS } from '~/types/api/topic'
+import type { TopicRSS } from '~/types/api/rss'
 
 export default defineEventHandler(async (event) => {
   const { locale }: { locale: 'en-us' | 'zh-cn' | undefined } =
@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
   const feed = useKunFeed(baseUrl, language, 'topic')
 
   const topics = await $fetch<TopicRSS[]>(
-    `/api/topic/latest?language=${language}`,
+    `/api/rss/topic?language=${language}`,
     { method: 'GET' }
   )
 

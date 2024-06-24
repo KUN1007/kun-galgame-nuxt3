@@ -1,12 +1,14 @@
-import type { NonMoeLogRequestData } from '~/types/api/non-moe'
+interface NonMoeLogStore {
+  page: string
+  limit: string
+}
 
 export const useTempNonMoeStore = defineStore({
   id: 'tempNonMoe',
   persist: false,
-  state: (): NonMoeLogRequestData => ({
+  state: (): NonMoeLogStore => ({
     page: '1',
-    limit: '4',
-    language: 'en-us'
+    limit: '4'
   }),
   getters: {},
   actions: {}

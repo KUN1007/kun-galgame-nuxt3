@@ -67,12 +67,3 @@ export interface TopicDetail {
   popularity: number
   upvoteTime: number
 }
-
-export interface TopicRSS {
-  tid: number
-  name: string
-  user: KunUser
-
-  time: number
-  description: string
-}

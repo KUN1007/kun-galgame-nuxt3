@@ -1,5 +1,5 @@
 import { useKunFeed } from '../_useI18nFeed'
-import type { GalgameRSS } from '~/types/api/galgame'
+import type { GalgameRSS } from '~/types/api/rss'
 
 export default defineEventHandler(async (event) => {
   const { locale }: { locale: 'en-us' | 'zh-cn' | undefined } =
@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
   const feed = useKunFeed(baseUrl, language, 'galgame')
 
   const galgames = await $fetch<GalgameRSS[]>(
-    `/api/galgame/latest?language=${language}`,
+    `/api/rss/galgame?language=${language}`,
     { method: 'GET' }
   )
 

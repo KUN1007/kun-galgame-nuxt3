@@ -11,7 +11,7 @@ useHead({
   ]
 })
 
-const { page, limit, language } = useTempNonMoeStore()
+const { page, limit } = useTempNonMoeStore()
 
 const langClass = computed(() => {
   return locale.value === 'en-us' ? 'title-en' : 'title-cn'
@@ -32,7 +32,7 @@ const { data: logs, pending: listPending } = await useFetch(
   `/api/non-moe/logs`,
   {
     method: 'GET',
-    query: { page: pageCount, limit, language },
+    query: { page: pageCount, limit, language: locale.value },
     watch: [pageCount],
     ...kungalgameResponseHandler
   }

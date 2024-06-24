@@ -19,7 +19,9 @@ const getNonMoeLogs = async (
     uid: log.uid,
     name: log.name,
     description:
-      language === 'en-us' ? log.description_en_us : log.description_zh_cn,
+      language === 'en-us'
+        ? log.description['en-us']
+        : log.description['zh-cn'],
     time: log.time,
     result: log.result
   }))

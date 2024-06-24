@@ -1,6 +1,6 @@
 import UserModel from '~/server/models/user'
 import GalgameModel from '~/server/models/galgame'
-import type { GalgameRSS } from '~/types/api/galgame'
+import type { GalgameRSS } from '~/types/api/rss'
 
 export default defineEventHandler(async (event) => {
   const { language }: { language: 'en-us' | 'zh-cn' } = await getQuery(event)

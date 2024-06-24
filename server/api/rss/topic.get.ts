@@ -1,7 +1,6 @@
 import UserModel from '~/server/models/user'
 import TopicModel from '~/server/models/topic'
-// import { markdownToText } from '~/utils/markdownToText'
-import type { TopicRSS } from '~/types/api/topic'
+import type { TopicRSS } from '~/types/api/rss'
 
 export default defineEventHandler(async (event) => {
   const { language }: { language: 'en-us' | 'zh-cn' } = await getQuery(event)
