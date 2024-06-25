@@ -27,6 +27,22 @@ const isShowOR = ref(false)
 
       <div class="qr" v-if="isShowOR">
         <div class="trc">
+          <NuxtImg src="/donate/afdian.webp" />
+          <span>{{ $t('donate.afdian') }}</span>
+          <div>
+            <KunCopy text="https://afdian.net/a/kun1007" />
+            <a
+              class="link-open"
+              href="https://afdian.net/a/kun1007"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="lucide:external-link" />
+            </a>
+          </div>
+        </div>
+
+        <div class="trc">
           <NuxtImg src="/donate/TRC20.webp" />
           <span>TRC20</span>
           <KunCopy text="TYBoTkYJchunKZ86ctoL9Kf5VSvX7L5P1w" />
@@ -114,6 +130,12 @@ const isShowOR = ref(false)
 
     .kun-copy {
       text-align: center;
+    }
+
+    .link-open {
+      color: var(--kungalgame-font-color-1);
+      margin-left: 5px;
+      font-size: 20px;
     }
   }
 }
