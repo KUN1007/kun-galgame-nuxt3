@@ -1,9 +1,8 @@
 <script setup lang="ts">
 const { locale, t } = useI18n()
 const colorMode = useColorMode()
-const { showKUNGalgamePageTransparency } = storeToRefs(
-  usePersistSettingsStore()
-)
+const { showKUNGalgamePageTransparency, showKUNGalgameBackgroundBlur } =
+  storeToRefs(usePersistSettingsStore())
 
 useHead({
   htmlAttrs: {
@@ -51,6 +50,10 @@ onMounted(() => {
   usePersistSettingsStore().setKUNGalgameTransparency(
     showKUNGalgamePageTransparency.value,
     colorMode.value as 'dark' | 'light'
+  )
+
+  usePersistSettingsStore().setKUNGalgameBackgroundBlur(
+    showKUNGalgameBackgroundBlur.value
   )
 })
 </script>
