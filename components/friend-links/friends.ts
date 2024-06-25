@@ -61,5 +61,11 @@ export const friends: Friend[] = [
     link: 'https://game.ziyuanshare.cc/',
     label:
       '雪月风花是一个集ACG游戏、动漫、电影、音乐、网络项目、热点资讯的免费分享平台'
+  },
+  {
+    name: 'touchgal',
+    link: 'https://www.touchgal.me/',
+    label:
+      'TouchGAL是立足于分享快乐的一站式Galgame文化社区, 为Gal爱好者提供一片净土!'
   }
 ]

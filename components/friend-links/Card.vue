@@ -8,7 +8,7 @@ import { friends } from './friends'
       class="card"
       v-for="(friend, index) in friends"
       :key="index"
-      :href="friend.link"
+      :href="`${friend.link}?from=www.kungal.com`"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -76,6 +76,19 @@ import { friends } from './friends'
   p {
     font-size: small;
     text-align: center;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    grid-template-columns: repeat(2, minmax(100px, 233px));
+    gap: 7px;
+  }
+
+  .card {
+    .name {
+      font-size: 16px;
+    }
   }
 }
 </style>
