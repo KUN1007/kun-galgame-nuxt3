@@ -64,7 +64,7 @@ export const friends: Friend[] = [
   },
   {
     name: 'touchgal',
-    link: 'https://www.touchgal.me/',
+    link: 'https://www.touchgal.co/',
     label:
       'TouchGAL是立足于分享快乐的一站式Galgame文化社区, 为Gal爱好者提供一片净土!'
   }
