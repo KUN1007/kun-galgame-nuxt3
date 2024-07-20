@@ -30,10 +30,10 @@ const isShowOR = ref(false)
           <NuxtImg src="/donate/afdian.webp" />
           <span>{{ $t('donate.afdian') }}</span>
           <div>
-            <KunCopy text="https://afdian.net/a/kun1007" />
+            <KunCopy text="https://afdian.com/a/kun1007" />
             <a
               class="link-open"
-              href="https://afdian.net/a/kun1007"
+              href="https://afdian.com/a/kun1007"
               target="_blank"
               rel="noopener noreferrer"
             >
