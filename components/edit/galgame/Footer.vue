@@ -50,7 +50,7 @@ const handlePublishGalgame = async () => {
   formData.append('name', JSON.stringify(name.value))
   formData.append('banner', banner!)
   formData.append('introduction', JSON.stringify(introduction.value))
-  formData.append('aliases', JSON.stringify(aliases.value))
+  formData.append('aliases', JSON.stringify(aliases.value.slice(0, 17)))
 
   const gid = await $fetch('/api/galgame', {
     method: 'POST',
