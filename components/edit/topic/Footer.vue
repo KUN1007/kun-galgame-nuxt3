@@ -10,6 +10,8 @@
       <EditTopicSection />
     </div>
 
+    <EditInfoNotice />
+
     <EditTopicButton />
   </div>
 </template>
