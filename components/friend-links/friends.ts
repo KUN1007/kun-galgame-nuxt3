@@ -67,5 +67,10 @@ export const friends: Friend[] = [
     link: 'https://www.touchgal.co/',
     label:
       'TouchGAL是立足于分享快乐的一站式Galgame文化社区, 为Gal爱好者提供一片净土!'
+  },
+  {
+    name: 'galgamex',
+    link: 'https://www.galgamex.com/',
+    label: 'Galgamex -- 一个二次元和galgame游戏资源交流社区'
   }
 ]

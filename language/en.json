@@ -642,7 +642,8 @@
   "friends": {
     "name": "Friend Links",
     "proud": "We value collaboration greatly, as during the construction of our website, we received help from friends all over the world",
-    "honor": "We have friendly relationships with the following websites, and we sincerely feel honored to be friends with them",
+    "honor": "We have friendly relationships with the following websites, and we sincerely fel honored to be friends with them",
+    "note": "If any paid transactions occur on the following websites, please contact us to remove the affiliate links immediately!",
     "join": "Join Us",
     "hint": "To join us, please contacts us and provide your website link",
     "sticker": "KUN Visualnovel Stickers",
@@ -657,7 +658,8 @@
     "ohmygpt": "OhMyGPT",
     "koibumi": "Koibumi URL Shorten",
     "xueyuefenghua": "Xueyuefenghua",
-    "touchgal": "TouchGal"
+    "touchgal": "TouchGal",
+    "galgamex": "Galgamex"
   },
   "pageError":{
     "404": "Za~~~ko~♡ zako~♡ Smelly zako ♡ The page is gone ~ Did you eat it?!",

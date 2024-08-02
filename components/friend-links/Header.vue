@@ -14,6 +14,7 @@
     <p>
       {{ $t('friends.honor') }}
     </p>
+    <b>{{ $t(`friends.note`) }}</b>
   </div>
 </template>
 
