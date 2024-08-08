@@ -99,7 +99,6 @@
 
 .top-bar {
   text-align: center;
-  width: 333px;
   align-items: center;
   display: flex;
   margin-left: 30px;
@@ -109,6 +108,8 @@
     display: block;
     line-height: 58px;
     width: 100%;
+    padding: 0 17px;
+    white-space: nowrap;
   }
 
   .menu {
@@ -143,10 +144,12 @@
   display: block;
   line-height: 58px;
   width: 100%;
+  padding: 0 17px;
   position: relative;
   color: var(--kungalgame-blue-5);
 
   span {
+    white-space: nowrap;
     @include underline-hover;
   }
 

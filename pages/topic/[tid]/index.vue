@@ -1,9 +1,10 @@
 <script setup lang="ts">
+const { t } = useI18n()
+const route = useRoute()
+
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
 const { isEdit } = storeToRefs(useTempReplyStore())
-
-const route = useRoute()
 
 const isBanned = ref(false)
 const tid = computed(() => {
@@ -60,7 +61,7 @@ if (data) {
   )
 
   useHead({
-    title: data.title,
+    title: `${data.title} - ${t('head.title')}`,
     meta: [
       {
         name: 'description',
@@ -72,7 +73,7 @@ if (data) {
       },
       {
         name: 'og:title',
-        content: data.title
+        content: `${data.title} - ${t('head.title')}`
       },
       {
         name: 'og:description',
@@ -92,7 +93,7 @@ if (data) {
       },
       {
         name: 'twitter:title',
-        content: data.title
+        content: `${data.title} - ${t('head.title')}`
       },
       {
         name: 'twitter:description',

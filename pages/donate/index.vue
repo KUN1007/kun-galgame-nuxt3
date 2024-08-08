@@ -3,7 +3,7 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 
 useHead({
-  title: t('seo.donate.title'),
+  title: `${t('seo.donate.title')} - ${t('head.title')}`,
   meta: [
     {
       name: 'description',

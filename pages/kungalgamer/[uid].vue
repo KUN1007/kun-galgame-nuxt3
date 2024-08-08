@@ -4,7 +4,9 @@ import type { UserInfo } from '~/types/api/user'
 
 const user = ref<UserInfo>()
 const isBanned = ref(false)
+
 const route = useRoute()
+const { t } = useI18n()
 
 const uid = computed(() => {
   return parseInt((route.params as { uid: string }).uid)
@@ -41,7 +43,7 @@ onMounted(() => {
 })
 
 useHead({
-  title: user.value?.name,
+  title: `${user.value?.name} - ${t('head.title')}`,
   meta: [
     {
       name: 'description',

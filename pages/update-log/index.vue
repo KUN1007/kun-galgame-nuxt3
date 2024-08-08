@@ -2,7 +2,7 @@
 const { t } = useI18n()
 
 useHead({
-  title: t('seo.updateLog.title'),
+  title: `${t('seo.updateLog.title')} - ${t('head.title')}`,
   meta: [
     {
       name: 'description',

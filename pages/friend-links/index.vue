@@ -4,7 +4,7 @@ import { friends } from '~/components/friend-links/friends'
 const { t } = useI18n()
 
 useHead({
-  title: t('seo.friends.title'),
+  title: `${t('seo.friends.title')} - ${t('head.title')}`,
   meta: [
     {
       name: 'description',

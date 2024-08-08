@@ -2,7 +2,7 @@
 const { availableLocales, locale, t } = useI18n()
 
 useHead({
-  title: t('seo.rss.title'),
+  title: `${t('seo.rss.title')} - ${t('head.title')}`,
   meta: [
     {
       name: 'description',

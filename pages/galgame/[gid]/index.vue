@@ -23,9 +23,17 @@ if (data.value === 'banned') {
 }
 
 if (galgame.value) {
-  const title = Object.values(galgame.value.name)
-    .filter((val) => val !== '')
-    .join(' | ')
+  const titleBase = getPreferredLanguageText(
+    galgame.value.name,
+    locale.value as Language
+  )
+  const title = titleBase
+    .concat(
+      titleBase !== galgame.value.name['ja-jp'] && galgame.value.name['ja-jp']
+        ? ` | ${galgame.value.name['ja-jp']}`
+        : ''
+    )
+    .concat(` - ${t('head.title')}`)
   const description = markdownToText(
     getPreferredLanguageText(
       galgame.value.introduction,

@@ -2,7 +2,7 @@
 const { t, locale } = useI18n()
 
 useHead({
-  title: t('seo.balance.title'),
+  title: `${t('seo.balance.title')} - ${t('head.title')}`,
   meta: [
     {
       name: 'description',
@@ -15,19 +15,19 @@ const { balance } = storeToRefs(useTempBalanceStore())
 
 // TODO:
 
-const { data } = await useFetch(`/api/balance`, {
-  method: 'GET',
-  query: {
-    page: balance.value.page,
-    limit: balance.value.limit,
-    type: balance.value.type,
-    language: locale,
-    sortField: balance.value.sortField,
-    sortOrder: balance.value.sortOrder
-  },
-  watch: false,
-  ...kungalgameResponseHandler
-})
+// const { data } = await useFetch(`/api/balance`, {
+//   method: 'GET',
+//   query: {
+//     page: balance.value.page,
+//     limit: balance.value.limit,
+//     type: balance.value.type,
+//     language: locale,
+//     sortField: balance.value.sortField,
+//     sortOrder: balance.value.sortOrder
+//   },
+//   watch: false,
+//   ...kungalgameResponseHandler
+// })
 
 const { data: statement } = await useFetch(`/api/balance/statement`, {
   method: 'GET',
