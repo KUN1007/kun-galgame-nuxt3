@@ -38,11 +38,11 @@ useHead({
 
 useSchemaOrg([
   defineOrganization({
-    name: 'KUN Visual Novel',
+    name: t('head.name'),
     url: 'https://kungal.com',
     sameAs: ['https://github.com/KUNGalgame']
   }),
-  defineWebSite({ name: 'KUN Visual Novel' }),
+  defineWebSite({ name: t('head.name') }),
   defineWebPage()
 ])
 

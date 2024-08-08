@@ -1,6 +1,7 @@
 {
   "head": {
-    "title": "KUN Visual Novel Forum - Open Source, Concise Visual Novel Website",
+    "name": "KUN Visual Novel Forum - Open Source Visual Novel Website",
+    "title": "KUN Visual Novel Forum",
     "description": "The CUTEST Visual Novel Forum! The most advanced visual novel resource publishing website in the world at the moment! NO ADs Forever! Free Forever! Visual Novel resources website.",
     "keywords": "visualnovel, visual novel downloads, visual novel resources, visual novel wiki, visualnovel reviews, visualnovel data analysis, visualnovel news, visualnovel translation/internationalization, visualnovel production, visualnovel discussions, visualnovel sources, technical exchanges, other discussions.",
     "topicRSS": "KUN Visual Novel Forum Topic RSS",
@@ -514,7 +515,7 @@
       "engine": "Engine"
     },
     "resource": {
-      "name": "Resources Links",
+      "name": "Resource Links",
       "edit": "Editing...",
       "extract": "Extraction",
       "decompress": "Decompression",

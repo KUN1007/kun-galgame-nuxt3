@@ -3,7 +3,7 @@ const { t, locale } = useI18n()
 
 const config = useRuntimeConfig()
 useHead({
-  title: t('seo.home.title'),
+  title: t('head.name'),
   htmlAttrs: {
     lang: locale.value
   },
@@ -22,7 +22,7 @@ useHead({
     },
     {
       name: 'og:title',
-      content: t('head.title')
+      content: t('head.name')
     },
     {
       name: 'og:description',
@@ -46,7 +46,7 @@ useHead({
     },
     {
       name: 'twitter:title',
-      content: t('head.title')
+      content: t('head.name')
     },
     {
       name: 'twitter:description',
