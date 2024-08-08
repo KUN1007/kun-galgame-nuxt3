@@ -16,6 +16,8 @@ const isShowHelp = computed(() => props.showHelp ?? false)
     </span>
   </div>
 
+  <slot name="addition" />
+
   <p v-if="isShow" class="kun-header-help">
     <slot name="help" />
   </p>

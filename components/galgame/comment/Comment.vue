@@ -96,13 +96,16 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
 
 .info {
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 10px;
 
   .user {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
 
     a {
+      margin-right: 30px;
       color: var(--kungalgame-blue-5);
     }
 

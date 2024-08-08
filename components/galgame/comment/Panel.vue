@@ -59,12 +59,7 @@ const handlePublishComment = async () => {
 
     <div class="footer">
       <slot />
-      <span v-if="toUser">
-        <span>{{ $t('galgame.comment.to') }}</span>
-        <NuxtLinkLocale :to="`/kungalgamer/${toUser.uid}/info`">
-          {{ toUser.name }}
-        </NuxtLinkLocale>
-      </span>
+
       <KunButton @click="handlePublishComment" :pending="isPublishing">
         {{ $t('galgame.comment.publish') }}
       </KunButton>
@@ -95,10 +90,8 @@ const handlePublishComment = async () => {
   .footer {
     width: 100%;
     display: flex;
-
-    a {
-      color: var(--kungalgame-blue-5);
-    }
+    align-items: center;
+    flex-wrap: wrap;
 
     .kun-button {
       margin-left: auto;

@@ -40,6 +40,14 @@ const { data, pending, refresh } = await useLazyFetch(
     <template #header>
       {{ $t('galgame.comment.name') }}
     </template>
+    <template #addition>
+      <span class="to-user" v-if="toUser">
+        <span>{{ $t('galgame.comment.to') }}</span>
+        <NuxtLinkLocale :to="`/kungalgamer/${toUser.uid}/info`">
+          {{ toUser.name }}
+        </NuxtLinkLocale>
+      </span>
+    </template>
   </KunHeader>
 
   <div class="header">
@@ -83,4 +91,15 @@ const { data, pending, refresh } = await useLazyFetch(
   <KunSkeletonGalgameComment v-if="pending" />
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.to-user {
+  a {
+    margin-left: 10px;
+    color: var(--kungalgame-blue-5);
+  }
+}
+
+.header {
+  margin-top: 10px;
+}
+</style>
