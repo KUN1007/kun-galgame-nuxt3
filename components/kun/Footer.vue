@@ -5,7 +5,7 @@
     <div>{{ $t('footer.copyright') }}</div>
 
     <div>
-      <span>{{ $t('footer.openSource') }}</span>
+      <span>{{ $t('footer.openSource') }} -></span>
 
       <a
         href="http://github.com/KUN1007/kun-galgame-nuxt3"
@@ -47,9 +47,9 @@
       align-items: center;
       margin-left: 5px;
       color: var(--kungalgame-blue-5);
+      transition: transform all 0.2s;
 
       &:hover {
-        transition: all 0.2s;
         transform: scale(1.5);
       }
     }

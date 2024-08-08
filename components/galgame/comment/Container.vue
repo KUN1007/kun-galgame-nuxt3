@@ -42,7 +42,7 @@ const { data, pending, refresh } = await useLazyFetch(
     </template>
   </KunHeader>
 
-  <div>
+  <div class="header">
     <GalgameCommentPanel :to-user="toUser" :refresh="refresh">
       <KunNav
         class="nav"
@@ -77,6 +77,8 @@ const { data, pending, refresh } = await useLazyFetch(
       />
     </div>
   </div>
+
+  <KunFooter />
 
   <KunSkeletonGalgameComment v-if="pending" />
 </template>

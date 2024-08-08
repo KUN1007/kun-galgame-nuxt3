@@ -88,10 +88,10 @@ const handleChangeImage = async (index: number) => {
       cursor: pointer;
       width: 70px;
       position: relative;
+      transition: transform 0.2s;
 
       &:hover {
-        transform: scale(3);
-        transition: 0.2s;
+        transform: scale(1.7);
         z-index: 7;
       }
     }
