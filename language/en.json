@@ -124,7 +124,8 @@
     "tool": {
       "topics": "Topics",
       "resources": "VNs"
-    }
+    },
+    "all": "See all topics"
   },
   "topic":{
     "notFound": "Topic not found",

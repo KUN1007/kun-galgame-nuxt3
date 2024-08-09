@@ -47,7 +47,7 @@
       align-items: center;
       margin-left: 5px;
       color: var(--kungalgame-blue-5);
-      transition: transform all 0.2s;
+      transition: transform 0.2s;
 
       &:hover {
         transform: scale(1.5);

@@ -124,7 +124,8 @@
     "tool": {
       "topics": "话题",
       "resources": "Galgame"
-    }
+    },
+    "all": "查看全部话题"
   },
   "topic":{
     "notFound": "该话题不存在",

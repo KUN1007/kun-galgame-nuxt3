@@ -1,25 +1,11 @@
 <script setup lang="ts">
-const { topics, savedPosition } = storeToRefs(useTempHomeStore())
+import { navItems } from './navItems'
 
-const navItems = [
-  {
-    icon: 'lucide:gamepad-2',
-    value: 'galgame'
-  },
-  {
-    icon: 'lucide:drafting-compass',
-    value: 'technique'
-  },
-  {
-    icon: 'lucide:circle-ellipsis',
-    value: 'others'
-  }
-]
+const { topics, page, savedPosition } = storeToRefs(useTempHomeStore())
 
 const content = ref<HTMLElement>()
 const isLoadingComplete = ref(false)
 const pageData = reactive({
-  page: 1,
   limit: 10,
   category: 'galgame'
 })
@@ -27,7 +13,8 @@ const pageData = reactive({
 const getTopics = async () => {
   const result = await $fetch('/api/home/topic', {
     method: 'GET',
-    query: pageData,
+    query: { page: page.value, ...pageData },
+    watch: false,
     ...kungalgameResponseHandler
   })
   return result
@@ -44,14 +31,14 @@ const { data } = await useLazyFetch(`/api/home/pin`, {
 watch(
   () => pageData.category,
   async () => {
-    pageData.page = 1
+    page.value = 1
     topics.value = await getTopics()
   }
 )
 
 const scrollHandler = async () => {
   if (isScrollAtBottom() && !isLoadingComplete.value) {
-    pageData.page++
+    page.value++
 
     const newData = await getTopics()
 
@@ -71,7 +58,7 @@ const isScrollAtBottom = () => {
 
     savedPosition.value = scrollTop
 
-    const errorMargin = 1.007
+    const errorMargin = 300
     return Math.abs(scrollHeight - scrollTop - clientHeight) < errorMargin
   }
 }
@@ -135,6 +122,10 @@ onBeforeUnmount(() => {
     </div>
 
     <KunSkeletonHomeTopic v-if="!isLoadingComplete" />
+
+    <NuxtLinkLocale class="all" v-if="isLoadingComplete" to="/pool">
+      {{ $t('home.all') }}
+    </NuxtLinkLocale>
   </div>
 </template>
 
@@ -166,6 +157,18 @@ onBeforeUnmount(() => {
         color: var(--kungalgame-blue-5);
       }
     }
+  }
+}
+
+.all {
+  margin: 20px auto;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--kungalgame-blue-5);
+  border-bottom: 2px solid transparent;
+
+  &:hover {
+    border-bottom: 2px solid var(--kungalgame-blue-5);
   }
 }
 

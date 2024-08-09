@@ -12,7 +12,7 @@ useHead({
 })
 
 const pool = ref<HTMLElement>()
-const { savedPosition, topics } = storeToRefs(useTempPoolStore())
+const { savedPosition, page, topics } = storeToRefs(useTempPoolStore())
 const isLoadingComplete = ref(false)
 
 const iconMap: Record<string, string> = {
@@ -21,7 +21,6 @@ const iconMap: Record<string, string> = {
 }
 
 const pageData = reactive({
-  page: 1,
   limit: 12,
   sortField: 'time',
   sortOrder: 'desc'
@@ -30,7 +29,7 @@ const pageData = reactive({
 const getTopics = async () => {
   const result = await $fetch(`/api/pool/topic`, {
     method: 'GET',
-    query: pageData,
+    query: { page: page.value, ...pageData },
     watch: false,
     ...kungalgameResponseHandler
   })
@@ -43,11 +42,9 @@ if (!topics.value.length) {
 
 const scrollHandler = async () => {
   if (isScrollAtBottom() && !isLoadingComplete.value) {
-    pageData.page++
-
+    page.value++
     const newData = await getTopics()
-
-    if (newData.length < 10) {
+    if (newData.length < 12) {
       isLoadingComplete.value = true
     }
 
@@ -63,7 +60,7 @@ const isScrollAtBottom = () => {
 
     savedPosition.value = scrollTop
 
-    const errorMargin = 1.007
+    const errorMargin = 300
     return Math.abs(scrollHeight - scrollTop - clientHeight) < errorMargin
   }
 }
@@ -71,7 +68,7 @@ const isScrollAtBottom = () => {
 watch(
   () => [pageData.sortField, pageData.sortOrder],
   async () => {
-    pageData.page = 1
+    page.value = 1
     isLoadingComplete.value = false
 
     pool.value?.scrollTo({
@@ -79,20 +76,18 @@ watch(
     })
 
     useTempPoolStore().resetPageStatus()
-
     topics.value = await getTopics()
   }
 )
 
 const handleLoadTopics = async () => {
-  if (!topics.value || isLoadingComplete.value) {
+  if (isLoadingComplete.value) {
     return
   }
-
-  pageData.page++
+  page.value++
   const lazyLoadTopics = await getTopics()
 
-  if (lazyLoadTopics.length < 10) {
+  if (lazyLoadTopics.length < 12) {
     isLoadingComplete.value = true
   }
   topics.value = topics.value.concat(lazyLoadTopics)
@@ -161,9 +156,9 @@ onBeforeUnmount(() => {
     </div>
 
     <div class="load">
-      <span v-if="!isLoadingComplete" @click="handleLoadTopics">
+      <KunButton v-if="!isLoadingComplete" @click="handleLoadTopics">
         {{ $t('pool.load') }}
-      </span>
+      </KunButton>
 
       <span v-else-if="isLoadingComplete">
         {{ $t('pool.complete') }}
@@ -249,6 +244,11 @@ onBeforeUnmount(() => {
   justify-content: center;
   align-items: center;
   padding-top: 20px;
+
+  .kun-button {
+    margin-bottom: 17px;
+    font-size: medium;
+  }
 
   span {
     font-size: 20px;

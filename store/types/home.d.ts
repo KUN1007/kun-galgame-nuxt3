@@ -16,6 +16,8 @@ export interface HomeStoreTemp {
   topics: HomeTopic[]
 
   savedPosition: number
+  page: number
+
   isShowSearch: boolean
 }
 

@@ -5,12 +5,14 @@ export const useTempPoolStore = defineStore({
   persist: false,
   state: (): PoolStoreTemp => ({
     savedPosition: 0,
+    page: 1,
 
     topics: []
   }),
   actions: {
     resetPageStatus() {
       this.topics = []
+      this.page = 1
       this.savedPosition = 0
     }
   }
