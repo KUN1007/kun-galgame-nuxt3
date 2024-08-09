@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { locale } = useI18n()
+
 const iconMap: Record<string, string> = {
   upvoted: 'lucide:sparkles',
   replied: 'lucide:reply',
@@ -25,7 +27,8 @@ const { data } = await useLazyFetch(`/api/message/home`, {
           message.tid > 0 ? `/topic/${message.tid}` : `/galgame/${-message.tid}`
         "
       >
-        {{ message.content }}
+        <span>{{ message.content }}</span>
+        <span>{{ formatTimeDifferenceHint(message.time, locale) }}</span>
       </NuxtLinkLocale>
     </div>
   </div>
@@ -57,6 +60,13 @@ const { data } = await useLazyFetch(`/api/message/home`, {
 
   .link {
     color: var(--kungalgame-blue-5);
+
+    span:last-child {
+      color: var(--kungalgame-font-color-0);
+      font-size: 12px;
+      font-weight: initial;
+      margin-left: 7px;
+    }
   }
 }
 

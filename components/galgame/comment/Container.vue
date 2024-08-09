@@ -61,7 +61,7 @@ const { data, pending, refresh } = await useLazyFetch(
       />
     </GalgameCommentPanel>
 
-    <div v-if="!data?.totalCount && !pending">
+    <div class="sad" v-if="!data?.totalCount && !pending">
       {{ $t('galgame.comment.sad') }}
     </div>
 
@@ -101,5 +101,13 @@ const { data, pending, refresh } = await useLazyFetch(
 
 .header {
   margin-top: 10px;
+}
+
+.sad {
+  display: flex;
+  justify-content: center;
+  color: var(--kungalgame-blue-2);
+  font-style: oblique;
+  margin: 10px 0;
 }
 </style>

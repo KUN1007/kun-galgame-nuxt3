@@ -40,4 +40,5 @@ export interface HomeMessage {
   tid: number | undefined
   type: MessageType
   content: string
+  time: number
 }
