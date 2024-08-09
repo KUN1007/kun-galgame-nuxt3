@@ -44,16 +44,14 @@ const handleCheckIn = async () => {
     ...kungalgameResponseHandler
   })
 
-  if (result) {
-    moemoepoint.value += result
+  moemoepoint.value += result
 
-    if (result === 0) {
-      messageStore.info('AlertInfo.check.message1', '', 5000)
-    } else if (result === 7) {
-      messageStore.info('AlertInfo.check.message3', '7', 5000)
-    } else {
-      messageStore.info('AlertInfo.check.message2', result.toString(), 5000)
-    }
+  if (result === 0) {
+    messageStore.info('AlertInfo.check.message1', '', 5000)
+  } else if (result === 7) {
+    messageStore.info('AlertInfo.check.message3', '7', 5000)
+  } else {
+    messageStore.info('AlertInfo.check.message2', result.toString(), 5000)
   }
 }
 
