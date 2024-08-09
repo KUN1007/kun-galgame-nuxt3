@@ -44,6 +44,7 @@ const { data } = await useLazyFetch(`/api/message/home`, {
 
 .message {
   margin-bottom: 5px;
+  word-break: break-all;
 
   .user {
     margin-right: 5px;
