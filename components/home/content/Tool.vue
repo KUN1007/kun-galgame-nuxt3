@@ -42,4 +42,10 @@ defineProps<{ pageData: { limit: number; category: string } }>()
     }
   }
 }
+
+@media (max-width: 700px) {
+  .tool {
+    margin-bottom: 10px;
+  }
+}
 </style>

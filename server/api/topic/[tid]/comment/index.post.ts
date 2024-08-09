@@ -107,6 +107,8 @@ export default defineEventHandler(async (event) => {
       }
     }
 
+    await useStorage('redis').removeItem(`home:message`)
+
     await session.commitTransaction()
 
     return responseData

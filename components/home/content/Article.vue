@@ -83,8 +83,8 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="content" ref="content">
-    <HomeContentRecent />
     <HomeContentTool :page-data="pageData" />
+    <HomeContentRecent />
     <HomePinned :topics="data" v-if="data?.length" />
 
     <div
@@ -151,7 +151,7 @@ onBeforeUnmount(() => {
 
 @media (max-width: 700px) {
   .content {
-    padding: 17px 10px;
+    padding: 10px;
     margin: 0 5px;
   }
 }

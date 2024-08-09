@@ -33,3 +33,11 @@ export interface Message {
   status: MessageStatus
   type: MessageType
 }
+
+export interface HomeMessage {
+  uid: number
+  name: string
+  tid: number | undefined
+  type: MessageType
+  content: string
+}
