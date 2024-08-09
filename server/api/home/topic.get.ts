@@ -17,7 +17,7 @@ const getHomeTopics = async (page: number, limit: number, category: string) => {
   }
 
   const topics = await TopicModel.find(searchQuery)
-    .sort({ updated: -1 })
+    .sort({ time: -1 })
     .skip(skip)
     .limit(limit)
     .populate('user', 'uid avatar name', UserModel)

@@ -79,7 +79,8 @@ export default defineEventHandler(async (event) => {
       { tid },
       {
         $addToSet: { replies: newReply.rid },
-        $inc: { popularity: 5 }
+        $inc: { popularity: 5 },
+        $set: { time: Date.now() }
       }
     )
 
