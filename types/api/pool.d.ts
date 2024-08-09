@@ -16,7 +16,7 @@ export type SortFieldRanking =
   | 'replies'
   | 'comments'
 
-export type SortFieldPool = 'views' | 'likes' | 'time'
+export type SortFieldPool = 'views' | 'likes' | 'created'
 
 export interface PoolTopic {
   tid: number

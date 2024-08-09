@@ -466,7 +466,7 @@
     "load": "Click to Load More Topics",
     "complete": "Already there's nothing left...",
     "views": "Views",
-    "time": "Time"
+    "created": "Time"
   },
   "technique":{
     "prev": "Prev",

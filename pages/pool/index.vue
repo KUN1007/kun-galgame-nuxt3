@@ -17,12 +17,12 @@ const isLoadingComplete = ref(false)
 
 const iconMap: Record<string, string> = {
   views: 'lucide:mouse-pointer-click',
-  time: 'lucide:calendar-heart'
+  created: 'lucide:calendar-heart'
 }
 
 const pageData = reactive({
   limit: 12,
-  sortField: 'time',
+  sortField: 'created',
   sortOrder: 'desc'
 })
 
@@ -40,11 +40,15 @@ if (!topics.value.length) {
   topics.value = await getTopics()
 }
 
-const scrollHandler = async () => {
+const scrollHandler: () => Promise<void> = async () => {
   if (isScrollAtBottom() && !isLoadingComplete.value) {
     page.value++
     const newData = await getTopics()
-    if (newData.length < 12) {
+
+    if (newData.length < pageData.limit) {
+      if (newData.length === 0 && page.value <= 12) {
+        return scrollHandler()
+      }
       isLoadingComplete.value = true
     }
 
