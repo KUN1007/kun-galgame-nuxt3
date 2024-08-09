@@ -56,4 +56,10 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 .settings-panel {
   z-index: 999;
 }
+
+@media (max-width: 700px) {
+  .header {
+    margin-bottom: 5px;
+  }
+}
 </style>

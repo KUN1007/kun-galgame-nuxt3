@@ -31,7 +31,6 @@ useHead({
   border-radius: 7px;
   height: calc(100dvh - 75px);
   transition: width 0.2s;
-  width: 100%;
   max-width: 64rem;
   margin: auto;
   display: flex;
@@ -48,16 +47,9 @@ useHead({
   @include kun-blur;
 }
 
-@media (max-width: 1000px) {
-  .content-container {
-    width: 90%;
-    padding: 0;
-  }
-}
-
 @media (max-width: 700px) {
   .content-container {
-    width: 95%;
+    margin: 0 5px;
   }
 
   .aside {

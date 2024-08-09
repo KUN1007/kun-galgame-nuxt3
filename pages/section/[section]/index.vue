@@ -61,6 +61,10 @@ useHead({
 }
 
 @media (max-width: 700px) {
+  .root {
+    margin: 0 5px;
+  }
+
   .title {
     font-size: 23px;
 

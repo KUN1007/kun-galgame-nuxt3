@@ -25,6 +25,8 @@ const { data, pending } = await useFetch(`/api/galgame`, {
       :loading="pending"
       @set-page="(newPage) => (pageData.page.value = newPage)"
     />
+
+    <KunFooter />
   </div>
 </template>
 
@@ -41,5 +43,12 @@ const { data, pending } = await useFetch(`/api/galgame`, {
   text-align: center;
   font-size: small;
   color: var(--kungalgame-font-color-0);
+}
+
+@media (max-width: 700px) {
+  .container {
+    margin: 0 5px;
+    padding: 17px 10px;
+  }
 }
 </style>

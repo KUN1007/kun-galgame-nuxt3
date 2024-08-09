@@ -219,6 +219,10 @@ defineProps<{
 }
 
 @media (max-width: 700px) {
+  .reply {
+    margin-bottom: 7px;
+  }
+
   .other-topic-container {
     min-height: initial;
   }

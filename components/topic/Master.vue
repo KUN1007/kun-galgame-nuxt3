@@ -264,6 +264,10 @@ const loliStatus = computed(() => {
 }
 
 @media (max-width: 700px) {
+  .master {
+    margin-bottom: 7px;
+  }
+
   .top {
     .time {
       display: none;

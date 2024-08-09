@@ -44,11 +44,13 @@ const { data, pending } = await useLazyFetch(`/api/category`, {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+  flex-wrap: wrap;
   padding: 0 17px;
 
   span {
     font-size: 20px;
     cursor: pointer;
+    flex-wrap: nowrap;
 
     &:nth-child(2) {
       &::before {
@@ -81,5 +83,18 @@ const { data, pending } = await useLazyFetch(`/api/category`, {
   font-style: oblique;
   color: var(--kungalgame-font-color-0);
   margin: 10px 0;
+}
+
+@media (max-width: 700px) {
+  .category {
+    padding: 10px;
+  }
+
+  .title {
+    margin-bottom: 10px;
+    span {
+      font-size: 17px;
+    }
+  }
 }
 </style>

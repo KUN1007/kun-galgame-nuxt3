@@ -151,6 +151,10 @@ const getRepliesCount = computed(() => {
 }
 
 @media (max-width: 700px) {
+  .container {
+    padding: 0;
+  }
+
   .time {
     display: none;
   }

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { navItems } from './navItems'
-
 const { topics, page, savedPosition } = storeToRefs(useTempHomeStore())
 
 const content = ref<HTMLElement>()
@@ -85,25 +83,8 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="content" ref="content">
-    <div class="tool">
-      <KunNav
-        class="nav"
-        :items="navItems"
-        :default-value="pageData.category"
-        icon-size="20px"
-        @set="(value) => (pageData.category = value)"
-      />
-
-      <div class="link">
-        <NuxtLinkLocale to="/category">
-          {{ $t('home.tool.topics') }}
-        </NuxtLinkLocale>
-        <NuxtLinkLocale to="/galgame">
-          {{ $t('home.tool.resources') }}
-        </NuxtLinkLocale>
-      </div>
-    </div>
-
+    <HomeContentRecent />
+    <HomeContentTool :page-data="pageData" />
     <HomePinned :topics="data" v-if="data?.length" />
 
     <div
@@ -126,6 +107,8 @@ onBeforeUnmount(() => {
     <NuxtLinkLocale class="all" v-if="isLoadingComplete" to="/pool">
       {{ $t('home.all') }}
     </NuxtLinkLocale>
+
+    <KunFooter />
   </div>
 </template>
 
@@ -141,23 +124,6 @@ onBeforeUnmount(() => {
   flex-direction: column;
 
   @include kun-blur;
-
-  .tool {
-    margin-bottom: 17px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .link {
-      display: flex;
-      align-items: center;
-
-      a {
-        margin-left: 10px;
-        color: var(--kungalgame-blue-5);
-      }
-    }
-  }
 }
 
 .all {
@@ -186,6 +152,7 @@ onBeforeUnmount(() => {
 @media (max-width: 700px) {
   .content {
     padding: 17px 10px;
+    margin: 0 5px;
   }
 }
 </style>

@@ -135,4 +135,12 @@ watch(
     color: var(--kungalgame-blue-5);
   }
 }
+
+@media (max-width: 700px) {
+  .nav {
+    padding: 10px 5px;
+    margin: 0 5px;
+    margin-bottom: 5px;
+  }
+}
 </style>

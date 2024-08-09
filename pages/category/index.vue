@@ -28,4 +28,10 @@ useHead({
   margin: 0 auto;
   color: var(--kungalgame-font-color-3);
 }
+
+@media (max-width: 700px) {
+  .root {
+    margin: 0 5px;
+  }
+}
 </style>
