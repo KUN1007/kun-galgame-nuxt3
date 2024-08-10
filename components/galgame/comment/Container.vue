@@ -1,12 +1,14 @@
 <script setup lang="ts">
-defineProps<{
+const { userData, toUser } = defineProps<{
+  userData: KunUser[]
   toUser: KunUser
 }>()
 
 const route = useRoute()
-const gid = computed(() => {
-  return parseInt((route.params as { gid: string }).gid)
-})
+const { commentToUid } = storeToRefs(useTempGalgameResourceStore())
+
+const username = ref(toUser.name)
+const gid = parseInt((route.params as { gid: string }).gid)
 
 const pageData = reactive({
   page: 1,
@@ -26,13 +28,21 @@ const orderItems = [
 ]
 
 const { data, pending, refresh } = await useLazyFetch(
-  `/api/galgame/${gid.value}/comment/all`,
+  `/api/galgame/${gid}/comment/all`,
   {
     method: 'GET',
     query: pageData,
     ...kungalgameResponseHandler
   }
 )
+
+const handleSetUserInfo = (name: string) => {
+  username.value = name
+  commentToUid.value =
+    userData.find((user) => user.name === name)?.uid || toUser.uid
+}
+
+onMounted(() => (commentToUid.value = toUser.uid))
 </script>
 
 <template>
@@ -41,12 +51,19 @@ const { data, pending, refresh } = await useLazyFetch(
       {{ $t('galgame.comment.name') }}
     </template>
     <template #addition>
-      <span class="to-user" v-if="toUser">
-        <span>{{ $t('galgame.comment.to') }}</span>
-        <NuxtLinkLocale :to="`/kungalgamer/${toUser.uid}/info`">
-          {{ toUser.name }}
-        </NuxtLinkLocale>
-      </span>
+      <div class="to-user" v-if="toUser">
+        <div>{{ $t('galgame.comment.to') }}</div>
+        <KunSelect
+          :styles="{ width: '100%' }"
+          :chooser-styles="{ justifyContent: 'flex-start' }"
+          :options="userData.map((user) => user.name)"
+          :discard-i18n="true"
+          @set="handleSetUserInfo"
+          position="bottom"
+        >
+          {{ username }}
+        </KunSelect>
+      </div>
     </template>
   </KunHeader>
 
@@ -93,9 +110,12 @@ const { data, pending, refresh } = await useLazyFetch(
 
 <style lang="scss" scoped>
 .to-user {
-  a {
-    margin-left: 10px;
-    color: var(--kungalgame-blue-5);
+  display: flex;
+  align-items: center;
+
+  & > div {
+    white-space: nowrap;
+    margin-right: 10px;
   }
 }
 
@@ -109,5 +129,6 @@ const { data, pending, refresh } = await useLazyFetch(
   color: var(--kungalgame-blue-2);
   font-style: oblique;
   margin: 10px 0;
+  font-size: 15px;
 }
 </style>

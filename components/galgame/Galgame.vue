@@ -6,6 +6,15 @@ const props = defineProps<{
 }>()
 
 provide<GalgameDetail>('galgame', props.galgame)
+
+const { data, pending } = await useLazyFetch(
+  `/api/galgame/${props.galgame.gid}/contributor`,
+  {
+    method: 'GET',
+    watch: false,
+    ...kungalgameResponseHandler
+  }
+)
 </script>
 
 <template>
@@ -24,13 +33,22 @@ provide<GalgameDetail>('galgame', props.galgame)
 
     <KunDivider />
 
-    <GalgameContributor :views="galgame.views" />
+    <GalgameContributor
+      v-if="data"
+      :data="data"
+      :pending="pending"
+      :views="galgame.views"
+    />
 
     <GalgameFooter />
 
     <KunDivider />
 
-    <GalgameCommentContainer :to-user="galgame.user" />
+    <GalgameCommentContainer
+      v-if="data"
+      :user-data="data"
+      :to-user="galgame.user"
+    />
   </div>
 </template>
 

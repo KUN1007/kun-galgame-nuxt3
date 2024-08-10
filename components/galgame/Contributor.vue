@@ -1,5 +1,7 @@
 <script setup lang="ts">
 defineProps<{
+  data: KunUser[]
+  pending: boolean
   views: number
 }>()
 
@@ -7,15 +9,6 @@ const route = useRoute()
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
-
-const { data, pending } = await useLazyFetch(
-  `/api/galgame/${gid.value}/contributor`,
-  {
-    method: 'GET',
-    watch: false,
-    ...kungalgameResponseHandler
-  }
-)
 </script>
 
 <template>

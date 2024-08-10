@@ -3,8 +3,10 @@ import type { CSSProperties } from 'vue'
 
 const props = defineProps<{
   options: string[]
+  i18n?: string
+  discardI18n?: boolean
   styles?: CSSProperties
-  i18n: string
+  chooserStyles?: CSSProperties
   position?: 'top' | 'bottom'
   defaultValue?: string
 }>()
@@ -32,6 +34,7 @@ const handleSetOption = (value: string, index: number) => {
 <template>
   <div class="kun-select" :style="props.styles">
     <div
+      :style="props.chooserStyles"
       ref="container"
       tabindex="-1"
       @blur="isShowOptions = false"
@@ -49,7 +52,7 @@ const handleSetOption = (value: string, index: number) => {
           :key="index"
           @click.stop.prevent="handleSetOption(kun, index)"
         >
-          <span>{{ $t(`${i18n}.${kun}`) }}</span>
+          <span>{{ discardI18n ? kun : $t(`${i18n}.${kun}`) }}</span>
           <span v-if="checkedValue === kun">
             <Icon name="lucide:check" />
           </span>
@@ -76,6 +79,7 @@ const handleSetOption = (value: string, index: number) => {
   .icon {
     font-size: 18px;
     color: var(--kungalgame-blue-5);
+    margin-left: 7px;
   }
 }
 

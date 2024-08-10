@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const props = defineProps<{
-  toUser: KunUser
   refresh: () => {}
 }>()
 
@@ -8,9 +7,10 @@ const emits = defineEmits<{
   close: []
 }>()
 
-const content = ref('')
-
+const { commentToUid } = storeToRefs(useTempGalgameResourceStore())
 const route = useRoute()
+
+const content = ref('')
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
@@ -33,7 +33,7 @@ const handlePublishComment = async () => {
   isPublishing.value = true
   const result = await $fetch(`/api/galgame/${gid.value}/comment`, {
     method: 'POST',
-    body: { toUid: props.toUser.uid, content: content.value },
+    body: { toUid: commentToUid.value, content: content.value },
     watch: false,
     ...kungalgameResponseHandler
   })

@@ -1,12 +1,6 @@
 import GalgameModel from '~/server/models/galgame'
 import UserModel from '~/server/models/user'
 
-interface User {
-  uid: number
-  name: string
-  avatar: string
-}
-
 export default defineEventHandler(async (event) => {
   const gid = getRouterParam(event, 'gid')
   if (!gid) {
@@ -18,7 +12,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10610)
   }
 
-  const users: User[] = await UserModel.find({
+  const users: KunUser[] = await UserModel.find({
     uid: { $in: galgame.contributor }
   }).select({ _id: 0, uid: 1, name: 1, avatar: 1 })
 
