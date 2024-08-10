@@ -72,5 +72,10 @@ export const friends: Friend[] = [
     name: 'galgamex',
     link: 'https://www.galgamex.com/',
     label: 'Galgamex -- 一个二次元和galgame游戏资源交流社区'
+  },
+  {
+    name: 'vikacg',
+    link: 'https://www.vikacg.com/',
+    label: '维咔VikACG[V站] - 肥宅们的欢乐家园'
   }
 ]
