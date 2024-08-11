@@ -37,7 +37,7 @@ export default defineEventHandler(async (event) => {
   const commentData: GalgameComment[] = data.map((comment) => ({
     gcid: comment.gcid,
     gid: comment.gid,
-    time: comment.created,
+    time: new Date(comment.created).getTime(),
     content: comment.content,
     likes: {
       count: comment.likes.length,

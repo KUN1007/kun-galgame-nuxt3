@@ -1,7 +1,7 @@
 export interface GalgameComment {
   gcid: number
   gid: number
-  time: Date
+  time: number
   content: string
   likes: {
     count: number

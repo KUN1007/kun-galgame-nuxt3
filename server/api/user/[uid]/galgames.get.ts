@@ -38,14 +38,14 @@ export default defineEventHandler(async (event) => {
     gid: { $in: galgameArray },
     status: { $ne: 1 }
   })
-    .sort({ time: -1 })
+    .sort({ created: -1 })
     .skip(skip)
     .limit(parseInt(limit))
 
   const galgames: UserGalgame[] = data.map((galgame) => ({
     gid: galgame.gid,
     name: galgame.name,
-    time: galgame.time
+    time: new Date(galgame.time).getTime()
   }))
   return { galgames, totalCount }
 })

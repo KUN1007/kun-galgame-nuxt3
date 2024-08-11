@@ -38,14 +38,14 @@ export default defineEventHandler(async (event) => {
     tid: { $in: topicArray },
     status: { $ne: 1 }
   })
-    .sort({ time: -1 })
+    .sort({ created: -1 })
     .skip(skip)
     .limit(parseInt(limit))
 
   const topics: UserTopic[] = data.map((topic) => ({
     tid: topic.tid,
     title: topic.title,
-    time: topic.time
+    time: new Date(topic.created).getTime()
   }))
   return { topics, totalCount }
 })
