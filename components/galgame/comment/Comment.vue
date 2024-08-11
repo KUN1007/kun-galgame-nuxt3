@@ -10,6 +10,7 @@ const props = defineProps<{
 
 const galgame = inject<GalgameDetail>('galgame')
 
+const { commentToUid } = storeToRefs(useTempGalgameResourceStore())
 const { uid, roles } = usePersistUserStore()
 const { locale } = useI18n()
 
@@ -18,6 +19,11 @@ const isShowDelete = computed(
   () =>
     props.comment.user?.uid === uid || galgame?.user.uid === uid || roles >= 2
 )
+
+const handleClickComment = (uid: number) => {
+  isShowComment.value = !isShowComment.value
+  commentToUid.value = uid
+}
 
 const handleDeleteComment = async (gid: number, gcid: number) => {
   const res = await useTempMessageStore().alert({
@@ -62,7 +68,7 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
       </div>
 
       <div class="action">
-        <span class="reply" @click="isShowComment = !isShowComment">
+        <span class="reply" @click="handleClickComment(comment.user.uid)">
           <Icon name="lucide:reply" />
         </span>
         <GalgameCommentLike :comment="comment" />
@@ -79,7 +85,6 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
 
     <GalgameCommentPanel
       v-if="isShowComment"
-      :to-user="comment.user"
       :refresh="refresh"
       @close="isShowComment = false"
     />

@@ -122,7 +122,7 @@ onBeforeUnmount(() => {
     <div class="tool" v-if="topics" id="tool">
       <KunSelect
         :styles="{ width: '150px' }"
-        :options="['views', 'time']"
+        :options="['views', 'created']"
         :default-value="pageData.sortField"
         i18n="pool"
         @set="(value) => (pageData.sortField = value)"
