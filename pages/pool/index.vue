@@ -267,6 +267,10 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 700px) {
+  .pool {
+    height: calc(100dvh - 65px);
+  }
+
   .container {
     grid-template-columns: repeat(2, minmax(100px, 233px));
     gap: 7px;

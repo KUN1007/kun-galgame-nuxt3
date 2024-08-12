@@ -50,6 +50,7 @@ useHead({
 @media (max-width: 700px) {
   .content-container {
     margin: 0 5px;
+    height: calc(100dvh - 65px);
   }
 
   .aside {

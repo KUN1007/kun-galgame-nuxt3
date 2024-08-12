@@ -181,6 +181,7 @@ const isShowOR = ref(false)
 
 @media (max-width: 700px) {
   .root {
+    height: calc(100vh - 65px);
     min-width: 100%;
   }
 

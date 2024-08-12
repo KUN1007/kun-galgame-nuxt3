@@ -215,6 +215,10 @@ onBeforeRouteLeave(async (_, __, next) => {
 }
 
 @media (max-width: 1000px) {
+  .root {
+    height: calc(100vh - 65px);
+  }
+
   .container {
     width: 100%;
   }
