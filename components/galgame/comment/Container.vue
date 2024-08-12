@@ -51,23 +51,27 @@ onMounted(() => (commentToUid.value = toUser.uid))
       {{ $t('galgame.comment.name') }}
     </template>
     <template #addition>
-      <div class="to-user" v-if="toUser">
-        <div>{{ $t('galgame.comment.to') }}</div>
-        <KunSelect
-          :styles="{ width: '100%' }"
-          :chooser-styles="{ justifyContent: 'flex-start' }"
-          :options="userData.map((user) => user.name)"
-          :discard-i18n="true"
-          @set="handleSetUserInfo"
-          position="bottom"
-        >
-          {{ username }}
-        </KunSelect>
-      </div>
+      <NuxtLinkLocale class="notice" to="/topic/1482">
+        {{ $t('galgame.comment.notice') }}
+      </NuxtLinkLocale>
     </template>
   </KunHeader>
 
-  <div class="header">
+  <div class="to-user" v-if="toUser">
+    <div>{{ $t('galgame.comment.to') }}</div>
+    <KunSelect
+      :styles="{ width: '100%' }"
+      :chooser-styles="{ justifyContent: 'flex-start' }"
+      :options="userData.map((user) => user.name)"
+      :discard-i18n="true"
+      @set="handleSetUserInfo"
+      position="bottom"
+    >
+      {{ username }}
+    </KunSelect>
+  </div>
+
+  <div class="panel">
     <GalgameCommentPanel :to-user="toUser" :refresh="refresh">
       <KunNav
         class="nav"
@@ -112,6 +116,7 @@ onMounted(() => (commentToUid.value = toUser.uid))
 .to-user {
   display: flex;
   align-items: center;
+  margin-top: 17px;
 
   & > div {
     white-space: nowrap;
@@ -119,8 +124,17 @@ onMounted(() => (commentToUid.value = toUser.uid))
   }
 }
 
-.header {
+.panel {
   margin-top: 10px;
+}
+
+.notice {
+  color: var(--kungalgame-blue-5);
+  border-bottom: 2px solid transparent;
+
+  &:hover {
+    border-bottom: 2px solid var(--kungalgame-blue-5);
+  }
 }
 
 .sad {
