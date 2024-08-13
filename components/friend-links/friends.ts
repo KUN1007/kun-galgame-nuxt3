@@ -77,5 +77,11 @@ export const friends: Friend[] = [
     name: 'vikacg',
     link: 'https://www.vikacg.com/',
     label: '维咔VikACG[V站] - 肥宅们的欢乐家园'
+  },
+  {
+    name: 'tgnav',
+    link: 'https://tgnav.github.io/',
+    label:
+      'TGNAV - Telegram频道群组导航。收录Telegram上的优质频道和群组, 打造一个高质量Telegram导航'
   }
 ]
