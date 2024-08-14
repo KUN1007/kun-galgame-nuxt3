@@ -83,5 +83,10 @@ export const friends: Friend[] = [
     link: 'https://tgnav.github.io/',
     label:
       'TGNAV - Telegram频道群组导航。收录Telegram上的优质频道和群组, 打造一个高质量Telegram导航'
+  },
+  {
+    name: 'galzy',
+    link: 'https://galzy.eu.org/',
+    label: 'Galgame 资源站, 这里收录了大部分电脑端与手机端的汉化 Galgame'
   }
 ]
