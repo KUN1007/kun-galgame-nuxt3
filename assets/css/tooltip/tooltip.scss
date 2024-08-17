@@ -1,9 +1,9 @@
 [tooltip] {
+  position: relative;
+
   & > * {
     display: inline-block;
   }
-
-  position: relative;
 
   &:before,
   &:after {

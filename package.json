@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.12.31",
+  "version": "2.12.32",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -33,7 +33,7 @@
     "dayjs-nuxt": "^2.1.9",
     "eslint": "^8.57.0",
     "husky": "^9.0.11",
-    "nuxt": "^3.11.2",
+    "nuxt": "^3.12.4",
     "nuxt-icon": "^0.6.10",
     "nuxt-schema-org": "^3.3.6",
     "nuxt-typed-router": "^3.6.3",
@@ -45,6 +45,7 @@
   "dependencies": {
     "@milkdown/core": "7.3.2",
     "@milkdown/ctx": "7.3.2",
+    "@milkdown/plugin-automd": "^7.5.0",
     "@milkdown/plugin-clipboard": "7.3.2",
     "@milkdown/plugin-history": "7.3.2",
     "@milkdown/plugin-indent": "7.3.2",
