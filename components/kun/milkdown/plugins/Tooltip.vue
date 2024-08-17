@@ -62,11 +62,17 @@ const call = <T,>(command: CmdKey<T>, payload?: T) => {
 
 <style lang="scss" scoped>
 .tooltip {
+  position: absolute;
   display: flex;
   background-color: var(--kungalgame-trans-white-2);
   border: 1px solid var(--kungalgame-blue-5);
   border-radius: 5px;
   backdrop-filter: blur(10px);
+  z-index: 9999;
+
+  &[data-show='false'] {
+    display: none;
+  }
 
   button {
     cursor: pointer;
