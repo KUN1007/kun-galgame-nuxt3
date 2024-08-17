@@ -5,7 +5,6 @@ import { Milkdown, useEditor } from '@milkdown/vue'
 import { commonmark } from '@milkdown/preset-commonmark'
 import { gfm } from '@milkdown/preset-gfm'
 // Milkdown Plugins
-import { automd } from '@milkdown/plugin-automd'
 import { history } from '@milkdown/plugin-history'
 import { prism, prismConfig } from '@milkdown/plugin-prism'
 import { listener, listenerCtx } from '@milkdown/plugin-listener'
@@ -130,7 +129,6 @@ const editorInfo = useEditor((root) =>
         })
       })
     })
-    .use(automd)
     .use(history)
     .use(commonmark)
     .use(gfm)
