@@ -148,7 +148,7 @@ const statusName = () => {
     width: 100%;
     margin: 0;
     white-space: pre-wrap;
-    word-wrap: break-word;
+    word-break: break-all;
     overflow-wrap: break-word;
     font-size: large;
   }

@@ -517,6 +517,7 @@
     },
     "resource": {
       "name": "Resource Links",
+      "note": "Note: Some resource links may require a network proxy",
       "edit": "Editing...",
       "extract": "Extraction",
       "decompress": "Decompression",

@@ -46,6 +46,8 @@ watch(
       </template>
     </KunHeader>
 
+    <p class="note">{{ $t('galgame.resource.note') }}</p>
+
     <GalgameNull class="null" v-if="!data?.length" />
 
     <GalgameResourcePublish v-if="isShowPublish" :refresh="refresh" />
@@ -75,6 +77,13 @@ watch(
   padding: 3px;
   border-radius: 20px;
   color: var(--kungalgame-blue-5);
+}
+
+.note {
+  color: var(--kungalgame-font-color-0);
+  font-size: small;
+  font-style: oblique;
+  margin-bottom: 17px;
 }
 
 .null {
