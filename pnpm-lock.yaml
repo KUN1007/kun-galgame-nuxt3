@@ -105,6 +105,15 @@ importers:
       '@iconify-json/lucide':
         specifier: ^1.1.206
         version: 1.1.206
+      '@iconify-json/mingcute':
+        specifier: ^1.1.19
+        version: 1.1.19
+      '@iconify-json/ph':
+        specifier: ^1.1.14
+        version: 1.1.14
+      '@iconify-json/ri':
+        specifier: ^1.1.22
+        version: 1.1.22
       '@iconify-json/svg-spinners':
         specifier: ^1.1.3
         version: 1.1.3
@@ -127,7 +136,7 @@ importers:
         specifier: ^12.1.0
         version: 12.1.0(eslint@9.9.0(jiti@1.21.6))(typescript@5.5.4)
       '@nuxtjs/i18n':
-        specifier: 8.4.0
+        specifier: ^8.4.0
         version: 8.4.0(magicast@0.3.4)(rollup@4.20.0)(vue@3.4.38(typescript@5.5.4))
       '@nuxtjs/sitemap':
         specifier: 6.0.0-beta.2
@@ -1295,6 +1304,15 @@ packages:
 
   '@iconify-json/lucide@1.1.206':
     resolution: {integrity: sha512-NE8CZ3ZXP0eWDYglm8oBZ+HuFmWsCYfho2HTQb5CefXAzCFZdh6ShQrkrL+ZW6mleRBXlWTrV6WVVj9soTqycw==}
+
+  '@iconify-json/mingcute@1.1.19':
+    resolution: {integrity: sha512-O7h8mEQPUBfpsMagPI7ab/w5JzpijMMYmlabD43hyXyjh2LBfz+FlC+AcgSjQERx9+zb1dECb0FA34L5+VKs/Q==}
+
+  '@iconify-json/ph@1.1.14':
+    resolution: {integrity: sha512-s1hZVaxIpl40qLEhjqPRMcZl4A3M4fZ+77Fi+VuOb/eKkIHIMutAoBHIR+0a3l7psUweZQGj9hSyL2P5CIj6qA==}
+
+  '@iconify-json/ri@1.1.22':
+    resolution: {integrity: sha512-Pi0I54CFXYSfWlm4xIAGqyDvtibNEpSSyQvHrSrfxFgZgDtFum9tbtYmaTKK0wJWWzYzF3XIpIJTC9/KVYX3SQ==}
 
   '@iconify-json/svg-spinners@1.1.3':
     resolution: {integrity: sha512-sP7m+/1Z42ROH3MO21ZRoAnYPOtcVVWqTveDyEl8nUCUcGJozYr0awLVqhKT0lUqEg6y2U2UdpHXelyV8beJ1w==}
@@ -7283,6 +7301,18 @@ snapshots:
   '@humanwhocodes/retry@0.3.0': {}
 
   '@iconify-json/lucide@1.1.206':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/mingcute@1.1.19':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/ph@1.1.14':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/ri@1.1.22':
     dependencies:
       '@iconify/types': 2.0.0
 
