@@ -12,8 +12,7 @@ const getHomeTopics = async (page: number, limit: number, category: string) => {
   const searchQuery = {
     category: { $in: [category] },
     status: { $ne: 1 },
-    time: { $gte: seventeenDaysAgoTimestamp },
-    section: { $nin: ['g-other'] }
+    time: { $gte: seventeenDaysAgoTimestamp }
   }
 
   const topics = await TopicModel.find(searchQuery)
