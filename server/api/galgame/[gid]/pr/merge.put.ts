@@ -82,6 +82,11 @@ export default defineEventHandler(async (event) => {
       }
     )
 
+    await UserModel.updateOne(
+      { uid },
+      { $addToSet: { contribute_galgame: gid } }
+    )
+
     if (uid !== galgamePR.uid) {
       await GalgameModel.updateOne(
         { gid },
@@ -90,7 +95,10 @@ export default defineEventHandler(async (event) => {
 
       await UserModel.updateOne(
         { uid: galgamePR.uid },
-        { $inc: { moemoepoint: 1 } }
+        {
+          $inc: { moemoepoint: 1 },
+          $addToSet: { contribute_galgame: gid }
+        }
       )
 
       await createMessage(
