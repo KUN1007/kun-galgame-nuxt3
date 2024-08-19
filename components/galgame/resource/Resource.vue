@@ -80,7 +80,8 @@ watch(
 }
 
 .note {
-  color: var(--kungalgame-font-color-0);
+  color: var(--kungalgame-red-5);
+  font-weight: bold;
   font-size: small;
   font-style: oblique;
   margin-bottom: 17px;

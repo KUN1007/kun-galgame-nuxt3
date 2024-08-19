@@ -134,4 +134,10 @@ if (data) {
   margin: 0 auto;
   color: var(--kungalgame-font-color-3);
 }
+
+@media (max-width: 700px) {
+  .root {
+    min-height: calc(100dvh - 65px);
+  }
+}
 </style>

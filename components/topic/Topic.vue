@@ -137,7 +137,7 @@ watch(
   @include kun-blur;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
   .content {
     padding: 0 5px;
   }
