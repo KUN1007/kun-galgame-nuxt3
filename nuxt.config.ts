@@ -9,6 +9,9 @@ const appVersion = packageJson.version
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
+  experimental: {
+    scanPageMeta: true
+  },
   devServer: {
     host: '127.0.0.1',
     port: 1007
@@ -75,12 +78,12 @@ export default defineNuxtConfig({
     locales: [
       {
         code: 'en-us',
-        iso: 'en-US',
+        language: 'en-US',
         file: 'en.json'
       },
       {
         code: 'zh-cn',
-        iso: 'zh-CN',
+        language: 'zh-CN',
         file: 'zh-CN.json'
       }
     ],

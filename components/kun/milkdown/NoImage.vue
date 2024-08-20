@@ -13,6 +13,7 @@ import { indent } from '@milkdown/plugin-indent'
 import { trailing } from '@milkdown/plugin-trailing'
 import { usePluginViewFactory } from '@prosemirror-adapter/vue'
 import { insertLinkPlugin } from './plugins/hyperlinkInsert'
+import { automd } from '@milkdown/plugin-automd'
 // KUN Visual Novel Custom tooltip
 import { tooltipFactory } from '@milkdown/plugin-tooltip'
 import Tooltip from './plugins/Tooltip.vue'
@@ -130,6 +131,7 @@ const editorInfo = useEditor((root) =>
     .use(tooltip)
     .use(linkUpdatePopup)
     .use(insertLinkPlugin)
+    .use(automd)
     // Add custom plugin view, calculate markdown text size
     .use(
       $prose(

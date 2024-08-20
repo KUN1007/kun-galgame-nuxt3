@@ -15,6 +15,7 @@ import { usePluginViewFactory } from '@prosemirror-adapter/vue'
 import { upload, uploadConfig } from '@milkdown/plugin-upload'
 import { kunUploader, kunUploadWidgetFactory } from './plugins/uploader'
 import { insertLinkPlugin } from './plugins/hyperlinkInsert'
+import { automd } from '@milkdown/plugin-automd'
 // KUN Visual Novel Custom tooltip
 import { tooltipFactory } from '@milkdown/plugin-tooltip'
 import Tooltip from './plugins/Tooltip.vue'
@@ -141,6 +142,7 @@ const editorInfo = useEditor((root) =>
     .use(linkUpdatePopup)
     .use(upload)
     .use(insertLinkPlugin)
+    .use(automd)
     // Add custom plugin view, calculate markdown text size
     .use(
       $prose(

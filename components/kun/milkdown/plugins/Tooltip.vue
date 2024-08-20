@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CmdKey } from '@milkdown/core'
+import { Icon } from '#components'
 import { TooltipProvider } from '@milkdown/plugin-tooltip'
 import {
   toggleStrongCommand,
@@ -11,13 +11,18 @@ import { callCommand } from '@milkdown/utils'
 import { useInstance } from '@milkdown/vue'
 import { usePluginViewContext } from '@prosemirror-adapter/vue'
 import type { VNodeRef } from 'vue'
+import type { CmdKey } from '@milkdown/core'
 
 const { view, prevState } = usePluginViewContext()
 const [loading, get] = useInstance()
 
 const divRef = ref<VNodeRef>()
-
 let tooltipProvider: TooltipProvider
+
+const KunBold = h(Icon, { name: 'lucide:bold' })
+const KunItalic = h(Icon, { name: 'lucide:italic' })
+const KunStrikethrough = h(Icon, { name: 'lucide:strikethrough' })
+const KunCode = h(Icon, { name: 'lucide:code-xml' })
 
 onMounted(() => {
   tooltipProvider = new TooltipProvider({
@@ -43,30 +48,36 @@ const call = <T,>(command: CmdKey<T>, payload?: T) => {
 <template>
   <div v-if="loading" class="tooltip" ref="divRef">
     <button @click="call(toggleStrongCommand.key)">
-      <Icon name="lucide:bold" />
+      <KunBold name="lucide:bold" />
     </button>
 
     <button @click="call(toggleEmphasisCommand.key)">
-      <Icon name="lucide:italic" />
+      <KunItalic name="lucide:italic" />
     </button>
 
     <button @click="call(toggleStrikethroughCommand.key)">
-      <Icon name="lucide:strikethrough" />
+      <KunStrikethrough name="lucide:strikethrough" />
     </button>
 
     <button @click="call(toggleInlineCodeCommand.key)">
-      <Icon name="lucide:code-xml" />
+      <KunCode name="lucide:code-xml" />
     </button>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .tooltip {
+  position: absolute;
   display: flex;
   background-color: var(--kungalgame-trans-white-2);
   border: 1px solid var(--kungalgame-blue-5);
   border-radius: 5px;
   backdrop-filter: blur(10px);
+  z-index: 9999;
+
+  &[data-show='false'] {
+    display: none;
+  }
 
   button {
     cursor: pointer;
