@@ -2,86 +2,88 @@ export interface Hamburger {
   icon: string
   name: string
   router: string
-  isNew: boolean
+  hint?: string
+  external?: boolean
 }
 
 export const hamburgerItem: Hamburger[] = [
   {
     name: 'galgame',
     icon: 'lucide:gamepad-2',
-    router: '/galgame',
-    isNew: false
+    router: '/galgame'
   },
   {
     name: 'pool',
     icon: 'lucide:square-library',
-    router: '/pool',
-    isNew: false
+    router: '/pool'
   },
   {
     name: 'category',
     icon: 'lucide:layers-3',
-    router: '/category',
-    isNew: false
+    router: '/category'
   },
   {
     name: 'createTopic',
     icon: 'lucide:pencil',
-    router: '/edit/topic',
-    isNew: false
+    router: '/edit/topic'
   },
   {
     name: 'createGalgame',
     icon: 'lucide:wand',
     router: '/edit/galgame?type=publish',
-    isNew: true
+    hint: 'createHint'
   },
   {
     name: 'about',
     icon: 'lucide:info',
-    router: '/kungalgame',
-    isNew: false
+    router: '/kungalgame'
   },
   {
     name: 'friends',
     icon: 'lucide:handshake',
-    router: '/friend-links',
-    isNew: false
+    router: '/friend-links'
   },
   {
     name: 'ranking',
     icon: 'lucide:align-end-horizontal',
-    router: '/ranking',
-    isNew: false
+    router: '/ranking'
+  },
+  {
+    name: 'sticker',
+    icon: 'lucide:image',
+    router: 'https://sticker.kungal.com/',
+    external: true
+  },
+  {
+    name: 'nav',
+    icon: 'lucide:navigation',
+    router: 'https://nav.kungal.org/',
+    hint: 'navHint',
+    external: true
   },
   {
     name: 'update',
     icon: 'lucide:arrow-big-up-dash',
-    router: '/update-log',
-    isNew: false
+    router: '/update-log'
   },
   {
     name: 'balance',
     icon: 'lucide:circle-dollar-sign',
-    router: '/balance',
-    isNew: false
+    router: '/balance'
   },
   {
     name: 'nonMoe',
     icon: 'lucide:ban',
-    router: '/non-moe',
-    isNew: false
+    router: '/non-moe'
   },
   {
     name: 'thanks',
     icon: 'lucide:heart-handshake',
-    router: '/thanks-list',
-    isNew: false
+    router: '/thanks-list'
   },
   {
     name: 'donate',
     icon: 'lucide:hand-heart',
-    router: '/donate',
-    isNew: false
+    router: '/donate'
   }
 ]

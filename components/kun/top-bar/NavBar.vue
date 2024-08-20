@@ -61,6 +61,12 @@
               <span>{{ $t('header.about.contact') }}</span>
             </span>
           </NuxtLinkLocale>
+
+          <a href="https://nav.kungal.org" target="_blank" class="item">
+            <span>
+              <span>{{ $t('header.about.navigation') }}</span>
+            </span>
+          </a>
         </div>
       </template>
     </KunPopover>

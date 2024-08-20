@@ -11,8 +11,8 @@ const startX = ref(0)
 const startY = ref(0)
 const currentX = ref(0)
 const isDragging = ref(false)
-const item = ref<Hamburger[]>(hamburgerItem.slice(0, 8))
-const isShowSettings = computed(() => item.value.length > 8)
+const item = ref<Hamburger[]>(hamburgerItem.slice(0, 10))
+const isShowSettings = computed(() => item.value.length > 10)
 
 const handleTouchStart = (event: TouchEvent) => {
   startX.value = event.touches[0].clientX
@@ -48,10 +48,10 @@ const handleTouchEnd = () => {
 }
 
 const handleShowMore = () => {
-  if (item.value.length === 8) {
+  if (item.value.length === 10) {
     item.value = hamburgerItem
   } else {
-    item.value = hamburgerItem.slice(0, 8)
+    item.value = hamburgerItem.slice(0, 10)
   }
 }
 </script>
@@ -82,11 +82,14 @@ const handleShowMore = () => {
               <span class="icon-item">
                 <Icon :name="kun.icon"></Icon>
               </span>
-              <NuxtLinkLocale :to="kun.router">
+              <NuxtLinkLocale
+                :to="kun.router"
+                :target="isValidURL(kun.router) ? '_blank' : ''"
+              >
                 {{ $t(`header.hamburger.${kun.name}`) }}
               </NuxtLinkLocale>
-              <span class="new" v-if="kun.isNew">
-                {{ $t('header.hamburger.new') }}
+              <span class="hint" v-if="kun.hint">
+                {{ $t(`header.hamburger.${kun.hint}`) }}
               </span>
             </div>
           </div>
@@ -213,7 +216,7 @@ const handleShowMore = () => {
     color: var(--kungalgame-font-color-3);
   }
 
-  .new {
+  .hint {
     color: var(--kungalgame-red-5);
     margin-left: 17px;
     font-size: small;

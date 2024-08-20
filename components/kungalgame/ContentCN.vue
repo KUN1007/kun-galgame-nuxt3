@@ -36,6 +36,30 @@
         </span>
         （本论坛是完全开源的，开发文档将会全部公开在这里）
       </li>
+      <li>
+        <span class="skip">
+          <a
+            href="https://nav.kungal.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            鲲 Galgame 导航页面
+          </a>
+        </span>
+        （完全开源的导航站！ 可以前往鲲 Galgame 所有子网站！）
+      </li>
+      <li>
+        <span class="skip">
+          <a
+            href="https://down.kungal.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            鲲 Galgame 下线页面
+          </a>
+        </span>
+        （碰到不得不下线的时候, 我们会将论坛强制重定向到此页面）
+      </li>
     </ul>
     <br />
     <br />
@@ -258,7 +282,7 @@
     <br />
     <h3>1. 世界上最萌的 galgame 论坛</h3>
     <p>
-      这里的“萌”并不只是字面意义上的萌，而是指的世界上一切美好的事物，任何使你觉得美好令你觉得快乐的事物都可以被称之为萌，这意味着我们没有任何的规定，一切的规定取决于所有人共同的看法
+      这里的“萌”并不只是字面意义上的萌，而是指的世界上一切美好的事物，任何使你觉得美好令你觉得快乐的事物都可以被称之为萌
     </p>
     <br />
     <p>

@@ -38,6 +38,32 @@
         (this forum is entirely open source, and the development documentation
         will be publicly available here)
       </li>
+      <li>
+        <span class="skip">
+          <a
+            href="https://nav.kungal.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Kun Visual Novel Navigation Page
+          </a>
+        </span>
+        (A completely open-source navigation site! You can visit all Kun Visual
+        Novel subsites!)
+      </li>
+      <li>
+        <span class="skip">
+          <a
+            href="https://down.kungal.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Kun Visual Novel Forum Downtime Page
+          </a>
+        </span>
+        (In the event of unavoidable downtime, we will forcibly redirect the
+        forum to this page.)
+      </li>
     </ul>
     <br />
     <br />
@@ -286,8 +312,7 @@
     <p>
       Here, "cutest" doesn't just mean literally "cute / moe"; it refers to all
       the beautiful things in the world. Anything that makes you happy and feel
-      wonderful can be called "cute / moe." This means that we have no set
-      rules; all rules depend on everyone's common opinions.
+      wonderful can be called "cute / moe."
     </p>
     <br />
     <p>
