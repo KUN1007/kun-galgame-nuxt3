@@ -16,6 +16,7 @@ import { upload, uploadConfig } from '@milkdown/plugin-upload'
 import { kunUploader, kunUploadWidgetFactory } from './plugins/uploader'
 import { insertLinkPlugin } from './plugins/hyperlinkInsert'
 import { automd } from '@milkdown/plugin-automd'
+// import { math, katexOptionsCtx } from '@milkdown/plugin-math'
 // KUN Visual Novel Custom tooltip
 import { tooltipFactory } from '@milkdown/plugin-tooltip'
 import Tooltip from './plugins/Tooltip.vue'
@@ -25,6 +26,8 @@ import Footer from './plugins/Footer.vue'
 import { $prose } from '@milkdown/utils'
 import { Plugin } from '@milkdown/prose/state'
 
+// Milkdown Math plugin styles
+// import 'katex/dist/katex.min.css'
 // KUN Visual Novel style
 import '~/assets/css/editor/index.scss'
 
@@ -118,6 +121,16 @@ const editorInfo = useEditor((root) =>
 
       useTempEditStore().editorContext = ctx
 
+      // ctx.set(katexOptionsCtx.key, {
+      //   displayMode: true,
+      //   output: 'html',
+      //   macros: {
+      //     '\\RR': '\\mathbb{R}',
+      //     '\\vect': ['\\mathbf{#1}', 1]
+      //   },
+      //   errorColor: '#cf222e'
+      // })
+
       ctx.set(tooltip.key, {
         view: pluginViewFactory({
           component: Tooltip
@@ -143,6 +156,7 @@ const editorInfo = useEditor((root) =>
     .use(upload)
     .use(insertLinkPlugin)
     .use(automd)
+    // .use(math)
     // Add custom plugin view, calculate markdown text size
     .use(
       $prose(
@@ -185,7 +199,7 @@ const editorInfo = useEditor((root) =>
     padding: 10px;
     overflow: auto;
 
-    /* Silence css check */
+    /* Silence css check, not compatible katex */
     * {
       white-space: pre-wrap;
       word-break: break-word;
