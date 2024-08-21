@@ -32,6 +32,7 @@ import { Plugin } from '@milkdown/prose/state'
 import '~/assets/css/editor/index.scss'
 
 // Syntax highlight
+import bash from 'refractor/lang/bash'
 import c from 'refractor/lang/c'
 import cpp from 'refractor/lang/cpp'
 import csharp from 'refractor/lang/csharp'
@@ -99,6 +100,7 @@ const editorInfo = useEditor((root) =>
       ctx.set(prismConfig.key, {
         configureRefractor: (refractor) => {
           refractor.register(c)
+          refractor.register(bash)
           refractor.register(cpp)
           refractor.register(csharp)
           refractor.register(css)

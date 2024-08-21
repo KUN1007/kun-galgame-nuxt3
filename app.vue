@@ -32,6 +32,12 @@ useHead({
       href: `https://www.kungal.com/rss/galgame.xml?locale=${locale.value}`,
       type: 'application/rss+xml',
       title: t('head.galgameRSS')
+    },
+    {
+      rel: 'me',
+      href: `https://mastodon.social/@kungal`,
+      type: 'text/html',
+      title: 'Mastodon'
     }
   ]
 })

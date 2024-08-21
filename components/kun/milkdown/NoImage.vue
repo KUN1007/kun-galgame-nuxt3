@@ -20,13 +20,14 @@ import Tooltip from './plugins/Tooltip.vue'
 import LinkUpdatePopup from './plugins/LinkUpdatePopup.vue'
 // Custom text size calculate
 import Size from './plugins/Size.vue'
-import { $prose, replaceAll, getMarkdown } from '@milkdown/utils'
+import { $prose, replaceAll } from '@milkdown/utils'
 import { Plugin } from '@milkdown/prose/state'
 
 // KUN Visual Novel style
 import '~/assets/css/editor/index.scss'
 
 // Syntax highlight
+import bash from 'refractor/lang/bash'
 import c from 'refractor/lang/c'
 import cpp from 'refractor/lang/cpp'
 import csharp from 'refractor/lang/csharp'
@@ -85,6 +86,7 @@ const editorInfo = useEditor((root) =>
 
       ctx.set(prismConfig.key, {
         configureRefractor: (refractor) => {
+          refractor.register(bash)
           refractor.register(c)
           refractor.register(cpp)
           refractor.register(csharp)
