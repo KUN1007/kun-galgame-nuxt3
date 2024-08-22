@@ -14,10 +14,12 @@ export interface Galgame {
   type: string[]
   language: string[]
   platform: string[]
+  tags: string[]
   contributor: number[]
   likes: number[]
   favorites: number[]
 
+  series: number[]
   resources: number[]
   links: number[]
   histories: number[]

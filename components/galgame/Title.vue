@@ -72,7 +72,11 @@ onMounted(async () => {
 </script>
 
 <template>
-  <h1>{{ getPreferredLanguageText(galgame.name, locale as Language) }}</h1>
+  <KunHeader :size="1">
+    <template #header>
+      {{ getPreferredLanguageText(galgame.name, locale as Language) }}
+    </template>
+  </KunHeader>
   <div class="banner">
     <NuxtImg :src="galgame.banner" />
 
@@ -103,10 +107,6 @@ onMounted(async () => {
 </template>
 
 <style lang="scss" scoped>
-h1 {
-  margin-bottom: 17px;
-}
-
 .banner {
   width: 100%;
   display: flex;

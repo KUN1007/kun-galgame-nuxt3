@@ -37,14 +37,15 @@ import haskell from 'refractor/lang/haskell'
 import python from 'refractor/lang/python'
 import java from 'refractor/lang/java'
 import javascript from 'refractor/lang/javascript'
-import typescript from 'refractor/lang/typescript'
 import jsx from 'refractor/lang/jsx'
+import json from 'refractor/lang/json'
 import kotlin from 'refractor/lang/kotlin'
 import r from 'refractor/lang/r'
 import rust from 'refractor/lang/rust'
 import scala from 'refractor/lang/scala'
 import sql from 'refractor/lang/sql'
 import tsx from 'refractor/lang/tsx'
+import typescript from 'refractor/lang/typescript'
 import markdown from 'refractor/lang/markdown'
 
 const props = defineProps<{
@@ -97,7 +98,7 @@ const editorInfo = useEditor((root) =>
           refractor.register(markdown)
           refractor.register(java)
           refractor.register(javascript)
-          refractor.register(typescript)
+          refractor.register(json)
           refractor.register(jsx)
           refractor.register(kotlin)
           refractor.register(r)
@@ -105,6 +106,7 @@ const editorInfo = useEditor((root) =>
           refractor.register(scala)
           refractor.register(sql)
           refractor.register(tsx)
+          refractor.register(typescript)
         }
       })
 

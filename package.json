@@ -1,9 +1,9 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.12.42",
+  "version": "2.12.43",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build": "NODE_OPTIONS=--max-old-space-size=1007 nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",

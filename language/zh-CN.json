@@ -516,7 +516,8 @@
       "alias": "别名",
       "official": "官网",
       "platform": "平台",
-      "engine": "引擎"
+      "engine": "引擎",
+      "index": "序号"
     },
     "resource": {
       "name": "资源链接",

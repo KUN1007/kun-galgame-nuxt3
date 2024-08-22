@@ -60,28 +60,25 @@ defineProps<{
       {{ engine }}
     </span>
   </div>
+
+  <div class="index">
+    <h4>{{ $t('galgame.info.index') }}</h4>
+    <span>{{ galgame.gid }}</span>
+  </div>
 </template>
 
 <style lang="scss" scoped>
-h2 {
+div {
   margin-bottom: 17px;
 }
 
 .name {
-  margin-bottom: 17px;
-
   .kun-copy {
     font-size: large;
   }
 }
 
-.alias {
-  margin-bottom: 17px;
-}
-
 .official {
-  margin-bottom: 17px;
-
   .link {
     cursor: pointer;
     margin-bottom: 10px;
@@ -102,7 +99,6 @@ h2 {
 
 .platform {
   display: flex;
-  margin-bottom: 17px;
 
   h4 {
     margin-right: 17px;
@@ -119,7 +115,6 @@ h2 {
 
 .engine {
   display: flex;
-  margin-bottom: 17px;
 
   h4 {
     margin-right: 17px;
@@ -130,6 +125,14 @@ h2 {
     align-items: center;
     color: var(--kungalgame-font-color-2);
     margin-right: 10px;
+  }
+}
+
+.index {
+  display: flex;
+
+  span {
+    margin-left: 10px;
   }
 }
 </style>

@@ -517,7 +517,8 @@
       "alias": "Aliases",
       "official": "Official Site",
       "platform": "Platform",
-      "engine": "Engine"
+      "engine": "Engine",
+      "index": "Index"
     },
     "resource": {
       "name": "Resource Links",

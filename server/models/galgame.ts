@@ -25,10 +25,12 @@ const GalgameSchema = new mongoose.Schema<Galgame>(
     type: { type: [String], default: [] },
     language: { type: [String], default: [] },
     platform: { type: [String], default: [] },
+    tags: { type: [String], default: [] },
     contributor: { type: [Number], default: [] },
     likes: { type: [Number], default: [] },
     favorites: { type: [Number], default: [] },
 
+    series: { type: [Number], default: [] },
     resources: { type: [Number], default: [] },
     links: { type: [Number], default: [] },
     histories: { type: [Number], default: [] },
