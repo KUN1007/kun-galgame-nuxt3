@@ -107,6 +107,8 @@ const errorMessagesEN: Record<number, string> = {
   10639: `You do not have permission to delete this comment (-B)`,
   10640: `You do not have permission to update visualnovel banner (-B)`,
   10641: `The Visual Novel already exists (-B)`,
+  10642: `The tag for visualnovel should be no more than 107 items (-B)`,
+  10643: `The tag name for visualnovel should be no longer than 50 characters (-B)`,
 
   // Report Part
   10701: `Invalid Report type. (-B)`,

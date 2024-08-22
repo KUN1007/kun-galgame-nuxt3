@@ -69,7 +69,8 @@ const searchGalgame = async (
           {
             'introduction.zh-cn': { $regex: keywords.join('|'), $options: 'i' }
           },
-          { alias: { $in: keywords } }
+          { alias: { $in: keywords } },
+          { tags: { $in: keywords } }
         ]
       }
     ]

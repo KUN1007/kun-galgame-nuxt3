@@ -303,7 +303,7 @@
     "pr": {
       "name": "Update Request",
       "official": {
-        "name": "Official Site",
+        "name": "Official Sites",
         "hint": "If there are multiple official websites, please separate each link with a comma",
         "placeholder": "Please enter the official website link"
       },
@@ -313,9 +313,14 @@
         "hint": "Alias can be up to 17 characters long. Press Enter to create an alias."
       },
       "engine": {
-        "name": "Galgame Engine",
+        "name": "Galgame Engines",
         "hint": "If there are multiple engines, please separate each engine with a comma",
         "placeholder": "Please enter the name of the game engine, for example, KiriKiri, RUGP, Shiina Rio. You can enter multiple."
+      },
+      "tags": {
+        "name": "Galgame Tags",
+        "hint": "If there are multiple tags, please separate each tag with a comma.",
+        "placeholder": "Please enter game tags, such as romance, loli, sister, white hair, white stockings, etc."
       },
       "confirm": "Confirm Publish"
     }
@@ -514,6 +519,7 @@
     "info": {
       "name": "Information",
       "title": "Title",
+      "tags": "Tags",
       "alias": "Aliases",
       "official": "Official Site",
       "platform": "Platform",
@@ -615,6 +621,8 @@
           "ja-jp": "Japanese Introduction",
           "zh-cn": "Chinese Introduction"
         },
+        "tags": "Tags",
+        "series": "Series",
         "alias": "Aliases",
         "official": "Official Site",
         "engine": "Engine"

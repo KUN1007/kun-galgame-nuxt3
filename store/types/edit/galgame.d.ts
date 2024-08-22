@@ -9,7 +9,9 @@ export interface GalgameStoreTemp {
   gid: number
   name: KunLanguage
   introduction: KunLanguage
+  series: number[]
   alias: string[]
   official: string[]
   engine: string[]
+  tags: string[]
 }

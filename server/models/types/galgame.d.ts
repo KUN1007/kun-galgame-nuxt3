@@ -14,7 +14,6 @@ export interface Galgame {
   type: string[]
   language: string[]
   platform: string[]
-  tags: string[]
   contributor: number[]
   likes: number[]
   favorites: number[]
@@ -28,6 +27,7 @@ export interface Galgame {
   alias: string[]
   official: string[]
   engine: string[]
+  tags: string[]
 
   user: UserAttributes[]
 

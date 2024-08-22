@@ -15,10 +15,15 @@ const handlePublishGalgamePR = async () => {
     .toString()
     .split(',')
     .map((e) => e.trim())
+  const tagsArray = galgamePR.value[0].tags
+    .toString()
+    .split(',')
+    .map((t) => t.trim())
   const pullRequest = {
     ...galgamePR.value[0],
     official: officialArray,
-    engine: engineArray
+    engine: engineArray,
+    tags: tagsArray
   }
 
   if (!checkGalgamePR(pullRequest)) {

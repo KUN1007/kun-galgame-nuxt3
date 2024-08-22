@@ -79,5 +79,25 @@ export const checkGalgamePR = (galgame: GalgameStoreTemp): boolean => {
     }
   }
 
+  if (galgame.tags.length > 107) {
+    useMessage(
+      'The tags for visualnovel should be no more than 17 items!',
+      'Galgame 的标签最多 107 个!',
+      'warn'
+    )
+    return false
+  }
+
+  for (const t of galgame.tags) {
+    if (t.length > 107) {
+      useMessage(
+        'The tag name for visualnovel should be no longer than 50 characters!',
+        'Galgame 的标签名最长 50 字!',
+        'warn'
+      )
+      return false
+    }
+  }
+
   return true
 }

@@ -44,5 +44,15 @@ export const checkGalgamePR = (galgame: GalgameStoreTemp) => {
     }
   }
 
+  if (galgame.tags.length > 107) {
+    return 10642
+  }
+
+  for (const t of galgame.tags) {
+    if (t.trim().length > 50) {
+      return 10643
+    }
+  }
+
   return 0
 }

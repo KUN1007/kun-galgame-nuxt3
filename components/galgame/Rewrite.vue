@@ -10,14 +10,17 @@ const localePath = useLocalePath()
 const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 
 const handleRewriteGalgame = (galgame: GalgameDetail) => {
-  const { gid, name, introduction, alias, official, engine } = galgame
+  const { gid, name, introduction, series, alias, official, engine, tags } =
+    galgame
   galgamePR.value[0] = {
     gid,
     name,
     introduction,
+    series,
     alias,
     official,
-    engine
+    engine,
+    tags
   }
   navigateTo(localePath(`/edit/galgame?type=pr&gid=${galgame.gid}`))
 }

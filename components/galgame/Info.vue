@@ -21,7 +21,13 @@ defineProps<{
     <KunCopy v-if="galgame.name['zh-cn']" :text="galgame.name['zh-cn']" />
   </div>
 
-  <div class="alias">
+  <div>
+    <h4>{{ $t('galgame.info.tags') }}</h4>
+    <GalgameNull v-if="!galgame.tags.length" />
+    <TopicTags :tags="galgame.tags" :is-show-icon="false" />
+  </div>
+
+  <div>
     <h4>{{ $t('galgame.info.alias') }}</h4>
     <GalgameNull v-if="!galgame.alias.length" />
     <TopicTags :tags="galgame.alias" :is-show-icon="false" />
@@ -72,6 +78,10 @@ div {
   margin-bottom: 17px;
 }
 
+h4 {
+  margin-right: 17px;
+}
+
 .name {
   .kun-copy {
     font-size: large;
@@ -100,10 +110,6 @@ div {
 .platform {
   display: flex;
 
-  h4 {
-    margin-right: 17px;
-  }
-
   span {
     display: flex;
     align-items: center;
@@ -116,10 +122,6 @@ div {
 .engine {
   display: flex;
 
-  h4 {
-    margin-right: 17px;
-  }
-
   span {
     display: flex;
     align-items: center;
@@ -130,9 +132,5 @@ div {
 
 .index {
   display: flex;
-
-  span {
-    margin-left: 10px;
-  }
 }
 </style>

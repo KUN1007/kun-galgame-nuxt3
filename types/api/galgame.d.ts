@@ -32,6 +32,8 @@ export interface GalgameDetail {
   alias: string[]
   official: string[]
   engine: string[]
+  tags: string[]
+  series: number[]
 }
 
 export interface GalgamePageRequestData {
