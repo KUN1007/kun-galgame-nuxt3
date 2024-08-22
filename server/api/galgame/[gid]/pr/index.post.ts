@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import GalgameModel from '~/server/models/galgame'
 import GalgamePRModel from '~/server/models/galgame-pr'
+import { isDeepEmpty } from '~/utils/isDeepEmpty'
 import { checkGalgamePR } from '../../utils/checkGalgamePR'
 import type { GalgameStoreTemp } from '~/store/types/edit/galgame'
 
@@ -22,16 +23,23 @@ export default defineEventHandler(async (event) => {
   if (!originalGalgame) {
     return kunError(event, 10610)
   }
-  const { gid, name, introduction, alias, official, engine } = originalGalgame
+  const { gid, name, introduction, series, alias, official, engine, tags } =
+    originalGalgame
 
   const diffGalgame = compareObjects(galgame, {
     gid,
     name,
     introduction,
+    series: series.map((s) => s.toString()),
     alias,
     official,
-    engine
+    engine,
+    tags
   })
+
+  if (isDeepEmpty(diffGalgame)) {
+    return kunError(event, 10644)
+  }
 
   const session = await mongoose.startSession()
   session.startTransaction()

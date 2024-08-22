@@ -99,5 +99,25 @@ export const checkGalgamePR = (galgame: GalgameStoreTemp): boolean => {
     }
   }
 
+  if (galgame.series.length > 50) {
+    useMessage(
+      'The series for visualnovel should be no more than 50 items!',
+      'Galgame 的系列最多 50 个!',
+      'warn'
+    )
+    return false
+  }
+
+  for (const s of galgame.series) {
+    if (!/^\d{1,6}$/.test(s)) {
+      useMessage(
+        'Please enter the correct format of Visual Novel index!',
+        '请输入正确格式的 Galgame 序号!',
+        'warn'
+      )
+      return false
+    }
+  }
+
   return true
 }

@@ -15,6 +15,8 @@ const introductionLanguage = ref(locale.value as Language)
       @set="(value) => (introductionLanguage = value as Language)"
     />
 
+    <EditGalgamePrSeries />
+
     <EditGalgamePrOfficial />
 
     <EditGalgamePrEngine />

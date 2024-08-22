@@ -7,23 +7,32 @@ const localePath = useLocalePath()
 const isPublishing = ref(false)
 
 const handlePublishGalgamePR = async () => {
+  const seriesArray = galgamePR.value[0].series
+    .toString()
+    .split(',')
+    .map((o) => o.trim())
+    .filter((str) => str !== '')
   const officialArray = galgamePR.value[0].official
     .toString()
     .split(',')
     .map((o) => o.trim())
+    .filter((str) => str !== '')
   const engineArray = galgamePR.value[0].engine
     .toString()
     .split(',')
     .map((e) => e.trim())
+    .filter((str) => str !== '')
   const tagsArray = galgamePR.value[0].tags
     .toString()
     .split(',')
     .map((t) => t.trim())
+    .filter((str) => str !== '')
   const pullRequest = {
     ...galgamePR.value[0],
     official: officialArray,
     engine: engineArray,
-    tags: tagsArray
+    tags: tagsArray,
+    series: seriesArray
   }
 
   if (!checkGalgamePR(pullRequest)) {

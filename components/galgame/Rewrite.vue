@@ -16,7 +16,7 @@ const handleRewriteGalgame = (galgame: GalgameDetail) => {
     gid,
     name,
     introduction,
-    series,
+    series: series.map((s) => s.toString()),
     alias,
     official,
     engine,

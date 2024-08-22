@@ -75,10 +75,11 @@ export default defineEventHandler(async (event) => {
           galgame.introduction,
           galgamePR.galgame?.introduction ?? {}
         ),
-        alias: galgamePR.galgame?.alias,
-        official: galgamePR.galgame?.official,
-        engine: galgamePR.galgame?.engine,
-        tags: galgamePR.galgame?.tags,
+        alias: galgamePR.galgame?.alias?.filter((str) => str !== ''),
+        series: galgamePR.galgame?.series?.map((s) => parseInt(s)),
+        official: galgamePR.galgame?.official?.filter((str) => str !== ''),
+        engine: galgamePR.galgame?.engine?.filter((str) => str !== ''),
+        tags: galgamePR.galgame?.tags?.filter((str) => str !== ''),
         $addToSet: { contributor: uid }
       }
     )

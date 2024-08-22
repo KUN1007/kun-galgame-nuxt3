@@ -302,6 +302,11 @@
     },
     "pr": {
       "name": "Update Request",
+      "series": {
+        "name": "Visualnovel Series",
+        "hint": "If there are multiple games, please separate each number with an comma.",
+        "placeholder": "Please enter the game index (site-specific numbers, which can be found in the information section of an individual game page). For example, `Amairo Chocolata 1, Amairo Chocolata 2, Amairo Chocolata 3` is a series, so you would enter `18, 19, 20`."
+      },
       "official": {
         "name": "Official Sites",
         "hint": "If there are multiple official websites, please separate each link with a comma",
@@ -313,12 +318,12 @@
         "hint": "Alias can be up to 17 characters long. Press Enter to create an alias."
       },
       "engine": {
-        "name": "Galgame Engines",
+        "name": "Visualnovel Engines",
         "hint": "If there are multiple engines, please separate each engine with a comma",
         "placeholder": "Please enter the name of the game engine, for example, KiriKiri, RUGP, Shiina Rio. You can enter multiple."
       },
       "tags": {
-        "name": "Galgame Tags",
+        "name": "Visualnovel Tags",
         "hint": "If there are multiple tags, please separate each tag with a comma.",
         "placeholder": "Please enter game tags, such as romance, loli, sister, white hair, white stockings, etc."
       },

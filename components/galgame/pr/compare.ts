@@ -51,14 +51,16 @@ export const diffGalgame = (
       alias: oldGalgame.alias?.toString(),
       official: oldGalgame.official?.toString(),
       engine: oldGalgame.engine?.toString(),
-      tags: oldGalgame.tags?.toString()
+      tags: oldGalgame.tags?.toString(),
+      series: oldGalgame.series?.toString()
     },
     {
       ...newGalgame,
       alias: newGalgame.alias?.toString(),
       official: newGalgame.official?.toString(),
       engine: newGalgame.engine?.toString(),
-      tags: newGalgame.tags?.toString()
+      tags: newGalgame.tags?.toString(),
+      series: newGalgame.series?.toString()
     }
   )
 

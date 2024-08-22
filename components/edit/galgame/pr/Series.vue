@@ -5,17 +5,17 @@ const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 <template>
   <KunHeader :size="2">
     <template #header>
-      {{ $t('edit.pr.tags.name') }}
+      {{ $t('edit.pr.series.name') }}
     </template>
   </KunHeader>
 
   <div class="hint">
-    {{ $t('edit.pr.tags.hint') }}
+    {{ $t('edit.pr.series.hint') }}
   </div>
 
   <KunTextarea
-    :placeholder="`${$t('edit.pr.tags.placeholder')}`"
-    v-model="galgamePR[0].tags"
+    :placeholder="`${$t('edit.pr.series.placeholder')}`"
+    v-model="galgamePR[0].series"
   />
 </template>
 

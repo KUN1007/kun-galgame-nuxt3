@@ -27,6 +27,8 @@ const { data, pending } = await useLazyFetch(
 
     <GalgameResource />
 
+    <GalgameSeries v-if="galgame.series.length" />
+
     <GalgameLink />
 
     <GalgamePrContainer />

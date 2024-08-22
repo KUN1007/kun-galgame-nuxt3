@@ -109,6 +109,7 @@ const errorMessagesEN: Record<number, string> = {
   10641: `The Visual Novel already exists (-B)`,
   10642: `The tag for visualnovel should be no more than 107 items (-B)`,
   10643: `The tag name for visualnovel should be no longer than 50 characters (-B)`,
+  10644: `No changes detected, update request canceled (-B)`,
 
   // Report Part
   10701: `Invalid Report type. (-B)`,
@@ -218,6 +219,9 @@ const errorMessagesCN: Record<number, string> = {
   10639: `您没有权限删除此评论 (-B)`,
   10640: `您没有权限更新 Galgame 预览图 (-B)`,
   10641: `这个 Galgame 已经存在了 (-B)`,
+  10642: `Galgame 的标签最多 107 个 (-B)`,
+  10643: `Galgame 的标签名最长 50 字 (-B)`,
+  10644: `未检测到更改，更新请求取消 (-B)`,
 
   10701: `不合法的举报类型. (-B)`,
   10702: `举报理由不能空. (-B)`,
