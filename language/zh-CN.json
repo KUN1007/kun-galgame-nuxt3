@@ -583,6 +583,10 @@
       "cancelRewrite": "取消 Rewrite",
       "confirmRewrite": "确定 Rewrite"
     },
+    "series": {
+      "name": "游戏系列",
+      "help": "同一部作品的其它 Galgame, 例如 `巧克甜恋 1, 巧克甜恋 2, 巧克甜恋 3` 就是一个系列"
+    },
     "link": {
       "name": "相关链接",
       "label": "链接名",

@@ -584,6 +584,10 @@
       "cancelRewrite": "Cancel Rewrite",
       "confirmRewrite": "Confirm Rewrite"
     },
+    "series": {
+      "name": "Visualnovel Series",
+      "help": "Other visualnovels from the same work, `Amairo Chocolata 1, Amairo Chocolata 2, Amairo Chocolata 3` is a series"
+    },
     "link": {
       "name": "Related Links",
       "label": "Link name",

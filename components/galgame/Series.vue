@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
+const { locale } = useI18n()
+
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
@@ -16,16 +18,23 @@ const { data, pending } = await useLazyFetch(
 
 <template>
   <div class="container">
-    <KunHeader :size="2">
+    <KunHeader :size="2" :show-help="true">
       <template #header>
-        {{ $t('galgame.link.name') }}
+        {{ $t('galgame.series.name') }}
+      </template>
+      <template #help>
+        {{ $t('galgame.series.help') }}
       </template>
     </KunHeader>
 
     <div class="galgames" v-if="data && !pending">
-      <div class="galgame" v-for="(link, index) in data" :key="index">
-        <NuxtLinkLocale :to="`/galgame/${link.gid}`" />
-      </div>
+      <NuxtLinkLocale
+        v-for="(link, index) in data"
+        :key="index"
+        :to="`/galgame/${link.gid}`"
+      >
+        {{ getPreferredLanguageText(link.name, locale as Language) }}
+      </NuxtLinkLocale>
     </div>
     <KunSkeletonGalgameLink v-if="pending" />
   </div>
@@ -39,23 +48,17 @@ const { data, pending } = await useLazyFetch(
 }
 
 .galgames {
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 17px;
 
-  .galgame {
-    cursor: pointer;
-    margin-bottom: 10px;
+  a {
     margin-right: 17px;
-    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--kungalgame-blue-5);
+    border-bottom: 2px solid transparent;
 
-    & > a {
-      margin-left: 10px;
-      font-size: 20px;
-      color: var(--kungalgame-font-color-0);
-
-      &:hover {
-        color: var(--kungalgame-blue-5);
-      }
+    &:hover {
+      border-bottom: 2px solid var(--kungalgame-blue-5);
     }
   }
 }
