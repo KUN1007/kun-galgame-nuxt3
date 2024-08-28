@@ -88,5 +88,10 @@ export const friends: Friend[] = [
     name: 'galzy',
     link: 'https://galzy.eu.org/',
     label: 'Galgame 资源站, 这里收录了大部分电脑端与手机端的汉化 Galgame'
+  },
+  {
+    name: 'limulu',
+    link: 'https://limulu.cloud/',
+    label: '一个简洁美观的Gal网站'
   }
 ]

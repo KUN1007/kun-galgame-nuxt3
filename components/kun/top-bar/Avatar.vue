@@ -9,7 +9,14 @@ const { showKUNGalgamePanel, showKUNGalgameUserPanel, messageStatus } =
 
 <template>
   <div class="kungalgamer-info">
-    <span class="search" @click="isShowSearch = true">
+    <span
+      class="search"
+      v-tooltip="{
+        message: { en: 'Press Ctrl + K to search', zh: '按下 Ctrl + K 以搜索' },
+        position: 'bottom'
+      }"
+      @click="isShowSearch = true"
+    >
       <Icon name="lucide:search" />
     </span>
 
