@@ -51,6 +51,11 @@ const handleClickUpload = () => {
 
 const handleChangeAvatar = async () => {
   if (!uploadedImage.value) {
+    useMessage(
+      'Please select a valid avatar...',
+      '请选择有效的头像图片...',
+      'info'
+    )
     return
   }
 
@@ -111,13 +116,9 @@ const handleChangeAvatar = async () => {
           <span>{{ $t('user.settings.drag') }}</span>
           <span>{{ $t('user.settings.click') }}</span>
         </div>
-        <div class="support">
-          <span>{{ $t('user.settings.supportFormat') }}</span>
-        </div>
-
-        <button v-if="!isUploading" @click="handleChangeAvatar">
+        <KunButton :pending="isUploading" @click="handleChangeAvatar">
           {{ $t('user.settings.confirm') }}
-        </button>
+        </KunButton>
       </div>
     </div>
   </div>
@@ -136,7 +137,7 @@ const handleChangeAvatar = async () => {
 .container {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .avatar-upload {
@@ -199,35 +200,9 @@ const handleChangeAvatar = async () => {
   justify-content: space-around;
   align-items: center;
   font-size: small;
-
-  button {
-    cursor: pointer;
-    padding: 5px 17px;
-    border: 1px solid var(--kungalgame-blue-5);
-    background-color: transparent;
-    border-radius: 5px;
-    color: var(--kungalgame-blue-5);
-    transition: all 0.2s;
-
-    &:hover {
-      background-color: var(--kungalgame-blue-5);
-      color: var(--kungalgame-white);
-    }
-
-    &:active {
-      transform: scale(0.9);
-    }
-  }
 }
 
 .hint {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.support {
   display: flex;
   flex-direction: column;
   justify-content: center;

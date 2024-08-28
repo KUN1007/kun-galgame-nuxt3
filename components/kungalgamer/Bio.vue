@@ -45,76 +45,27 @@ onMounted(() => {
 <template>
   <div class="bio">
     <div class="title">{{ $t('user.settings.bio') }}</div>
-    <ClientOnly>
-      <textarea
-        name="bio"
-        :placeholder="`${$t('user.settings.hint')}`"
-        rows="5"
-        v-model="bioValue"
-      >
-      </textarea>
-    </ClientOnly>
+    <KunTextarea
+      name="bio"
+      :placeholder="`${$t('user.settings.hint')}`"
+      rows="5"
+      v-model="bioValue"
+    >
+    </KunTextarea>
 
-    <div class="help">
-      <span class="bioCount">
-        {{ $t('user.settings.count') }}: {{ bioValue.length }}
-      </span>
-      <button @click="handleChangeBio">
-        {{ $t('user.settings.confirm') }}
-      </button>
-    </div>
+    <KunButton @click="handleChangeBio">
+      {{ $t('user.settings.confirm') }}
+    </KunButton>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .bio {
   width: 100%;
-  display: flex;
-  flex-direction: column;
   margin-bottom: 20px;
-
-  textarea {
-    color: var(--kungalgame-font-color-3);
-    margin-bottom: 10px;
-    width: 100%;
-    border: 1px solid var(--kungalgame-blue-5);
-    background-color: transparent;
-    border-radius: 5px;
-    padding: 5px;
-    resize: none;
-
-    &:focus {
-      border: 1px solid var(--kungalgame-pink-3);
-    }
-  }
 }
 
 .title {
   margin-bottom: 10px;
-}
-
-.help {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  button {
-    cursor: pointer;
-    padding: 5px 17px;
-    border: 1px solid var(--kungalgame-blue-5);
-    background-color: transparent;
-    border-radius: 5px;
-    color: var(--kungalgame-blue-5);
-    transition: all 0.2s;
-
-    &:hover {
-      background-color: var(--kungalgame-blue-5);
-      color: var(--kungalgame-white);
-    }
-
-    &:active {
-      transform: scale(0.9);
-    }
-  }
 }
 </style>

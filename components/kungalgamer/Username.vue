@@ -38,50 +38,22 @@ const handleChangeUsername = async () => {
 <template>
   <div class="username">
     <div class="title">{{ $t('user.settings.username') }}</div>
-    <input type="text" v-model="inputValue" />
     <p>{{ $t('user.settings.usernameHint') }}</p>
-    <button @click="handleChangeUsername">
+    <KunInput type="text" v-model="inputValue" />
+    <KunButton @click="handleChangeUsername">
       {{ $t('user.settings.confirm') }}
-    </button>
+    </KunButton>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.username {
-  input {
-    margin-top: 10px;
-    height: 25px;
-    padding-left: 5px;
-    border: 1px solid var(--kungalgame-blue-5);
-    background-color: transparent;
-    color: var(--kungalgame-font-color-3);
+p {
+  margin: 10px 0;
+  font-size: 13px;
+}
 
-    &:focus {
-      background-color: var(--kungalgame-trans-blue-0);
-    }
-  }
-
-  p {
-    margin: 10px 0;
-    font-size: 13px;
-  }
-
-  button {
-    cursor: pointer;
-    padding: 5px 17px;
-    border: 1px solid var(--kungalgame-blue-5);
-    background-color: transparent;
-    border-radius: 5px;
-    color: var(--kungalgame-blue-5);
-    transition: all 0.2s;
-
-    &:hover {
-      background-color: var(--kungalgame-blue-5);
-      color: var(--kungalgame-white);
-    }
-    &:active {
-      transform: scale(0.9);
-    }
-  }
+input {
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 </style>
