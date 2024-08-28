@@ -77,16 +77,17 @@ const handleClickRegister = () => {
       </div>
     </div>
 
-    <KunFooter class="footer" />
+    <KunFooter />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .root {
-  align-items: center;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   height: calc(100vh - 75px);
-  place-items: center;
+  justify-content: center;
+  align-items: center;
   min-height: 500px;
   min-width: 800px;
   position: relative;
@@ -220,9 +221,8 @@ const handleClickRegister = () => {
   }
 }
 
-.footer {
-  position: absolute;
-  bottom: 2%;
+.kun-footer {
+  margin: 17px 0;
 }
 
 @keyframes show {
@@ -243,9 +243,11 @@ const handleClickRegister = () => {
   .switch {
     display: block;
   }
+
   .root {
     min-width: 0;
     width: 100%;
+    height: calc(100vh - 65px);
   }
 
   .container {
@@ -269,10 +271,6 @@ const handleClickRegister = () => {
       animation: none;
       transform: translateX(0);
     }
-  }
-
-  .footer {
-    position: relative;
   }
 }
 </style>
