@@ -68,7 +68,7 @@ const handelCloseSettingsPanel = () => {
         </TransitionGroup>
       </div>
 
-      <KunSettingPanelComponentsBackground />
+      <KunSettingPanelComponentsBackground class="background" />
 
       <KunSettingPanelComponentsReset />
     </div>
@@ -187,12 +187,6 @@ const handelCloseSettingsPanel = () => {
 @media (max-width: 1000px) {
   .root {
     display: none;
-  }
-}
-@media (max-height: 600px) {
-  .root {
-    right: -600px;
-    transition: 0.5s;
   }
 }
 </style>

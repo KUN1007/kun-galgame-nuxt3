@@ -167,7 +167,7 @@ onBeforeUnmount(async () => {
   height: 100%;
   border-left: 1px solid var(--kungalgame-blue-2);
   overflow: scroll;
-  max-width: 342px;
+  width: 342px;
 
   @include kun-blur;
   border-radius: 5px 0 0 5px;
