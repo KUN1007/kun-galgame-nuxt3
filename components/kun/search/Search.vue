@@ -97,8 +97,8 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 <template>
   <Teleport to="body" :disabled="isShowSearch">
     <Transition name="search">
-      <div class="mask" v-if="isShowSearch" @click="isShowSearch = false">
-        <div ref="container" class="container" @click.stop>
+      <div class="mask" v-if="isShowSearch" @mousedown="isShowSearch = false">
+        <div ref="container" class="container" @mousedown.stop>
           <KunNav
             :items="typeItems"
             :default-value="search.type"
