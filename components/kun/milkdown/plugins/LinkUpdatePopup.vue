@@ -9,11 +9,11 @@ import type { VNodeRef } from 'vue'
 
 const { view, prevState } = usePluginViewContext()
 
-const linkUpdPopRef = ref<VNodeRef>()
 const linkHref = ref('')
 const hide = ref(true)
 const [_, get] = useInstance()
 
+const linkUpdPopRef = ref<VNodeRef>()
 let tooltipProvider: TooltipProvider
 
 onMounted(() => {
@@ -25,7 +25,7 @@ onMounted(() => {
   tooltipProvider = new TooltipProvider({
     content: linkUpdPopRef.value as any,
     debounce: 50,
-    shouldShow: (view, prevState) => {
+    shouldShow: (view, _) => {
       if (!view.hasFocus() || !view.editable) {
         return false
       }
@@ -74,18 +74,16 @@ const handleUpdateLink = () => {
 </script>
 
 <template>
-  <div ref="linkUpdPopRef">
-    <div v-if="!hide" class="wrapper">
-      <input
-        class="input"
-        type="url"
-        @keydown.enter="handleUpdateLink"
-        v-model="linkHref"
-      />
-      <button class="confirm-btn" @click="handleUpdateLink">
-        {{ $t('edit.topic.link.confirmUpdate') }}
-      </button>
-    </div>
+  <div class="wrapper" ref="linkUpdPopRef">
+    <input
+      class="input"
+      type="url"
+      @keydown.enter="handleUpdateLink"
+      v-model="linkHref"
+    />
+    <button class="confirm-btn" @click="handleUpdateLink">
+      {{ $t('edit.topic.link.confirmUpdate') }}
+    </button>
   </div>
 </template>
 
@@ -93,9 +91,13 @@ const handleUpdateLink = () => {
 .wrapper {
   width: 350px;
   display: inline-flex;
+  position: absolute;
   border: 1px solid var(--kungalgame-blue-5);
+  background-color: var(--kungalgame-white);
 
-  @include kun-blur;
+  &[data-show='false'] {
+    display: none;
+  }
 }
 
 .input {

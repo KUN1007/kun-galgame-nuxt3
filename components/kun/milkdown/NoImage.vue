@@ -182,7 +182,6 @@ watch(
   :deep(.milkdown) {
     width: 100%;
     padding: 10px;
-    overflow: auto;
 
     /* Silence css check */
     * {

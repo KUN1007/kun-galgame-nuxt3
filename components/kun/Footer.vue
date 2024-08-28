@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="footer">
+  <div class="kun-footer">
     <div>{{ $t('footer.copyright') }}</div>
 
     <div>
@@ -27,7 +27,7 @@
 </template>
 
 <style lang="scss" scoped>
-.footer {
+.kun-footer {
   letter-spacing: 1px;
   color: var(--kungalgame-font-color-3);
   display: flex;

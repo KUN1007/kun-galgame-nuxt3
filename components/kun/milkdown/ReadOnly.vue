@@ -102,12 +102,17 @@ watch(
 
 <template>
   <div>
-    <div v-if="loading">{{ valueMarkdown }}</div>
+    <pre v-if="loading">{{ valueMarkdown }}</pre>
     <Milkdown ref="milkdownRef" class="editor" />
   </div>
 </template>
 
 <style lang="scss" scoped>
+pre {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
 .editor {
   :deep(.milkdown) {
     width: 100%;
