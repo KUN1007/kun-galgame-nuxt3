@@ -39,14 +39,6 @@ useHead({
       type: 'text/html',
       title: 'Mastodon'
     }
-  ],
-  script: [
-    // https://clarity.microsoft.com/
-    {
-      src: `/clarity.js`,
-      type: 'text/javascript',
-      async: true
-    }
   ]
 })
 
