@@ -34,10 +34,11 @@ watch(
   }
 )
 
+const isFetching = ref(false)
 const scrollHandler = async () => {
   if (isScrollAtBottom() && !isLoadingComplete.value) {
+    isFetching.value = true
     page.value++
-
     const newData = await getTopics()
 
     if (newData.length < 10) {
@@ -45,9 +46,9 @@ const scrollHandler = async () => {
     }
 
     topics.value = topics.value.concat(newData)
+    isFetching.value = false
   }
 }
-
 const isScrollAtBottom = () => {
   if (content.value) {
     const scrollHeight = content.value.scrollHeight
@@ -66,23 +67,11 @@ onMounted(() => {
     top: savedPosition.value,
     left: 0
   })
-
-  const element = content.value
-  if (element) {
-    element.addEventListener('scroll', scrollHandler)
-  }
-})
-
-onBeforeUnmount(() => {
-  const element = content.value
-  if (element) {
-    element.removeEventListener('scroll', scrollHandler)
-  }
 })
 </script>
 
 <template>
-  <div class="content" ref="content">
+  <div class="content" ref="content" @scroll="scrollHandler">
     <HomeContentTool :page-data="pageData" />
     <HomeContentRecent />
     <HomePinned :topics="data" v-if="data?.length" />

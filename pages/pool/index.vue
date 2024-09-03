@@ -40,19 +40,19 @@ if (!topics.value.length) {
   topics.value = await getTopics()
 }
 
-const scrollHandler: () => Promise<void> = async () => {
-  if (isScrollAtBottom() && !isLoadingComplete.value) {
+const isFetching = ref(false)
+const scrollHandler = async () => {
+  if (isScrollAtBottom() && !isLoadingComplete.value && !isFetching.value) {
+    isFetching.value = true
     page.value++
     const newData = await getTopics()
 
     if (newData.length < pageData.limit) {
-      if (newData.length === 0 && page.value <= 12) {
-        return scrollHandler()
-      }
       isLoadingComplete.value = true
     }
 
     topics.value = topics.value.concat(newData)
+    isFetching.value = false
   }
 }
 
@@ -102,23 +102,11 @@ onMounted(() => {
     top: savedPosition.value,
     left: 0
   })
-
-  const element = pool.value
-  if (element) {
-    element.addEventListener('scroll', scrollHandler)
-  }
-})
-
-onBeforeUnmount(() => {
-  const element = pool.value
-  if (element) {
-    element.removeEventListener('scroll', scrollHandler)
-  }
 })
 </script>
 
 <template>
-  <div class="pool" ref="pool">
+  <div class="pool" ref="pool" @scroll="scrollHandler">
     <div class="tool" v-if="topics" id="tool">
       <KunSelect
         :styles="{ width: '150px' }"
