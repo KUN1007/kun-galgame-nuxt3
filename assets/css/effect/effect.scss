@@ -23,7 +23,7 @@ Requires four <span> elements with the class .kungalgame-comet-surround */
         top: 0;
         left: 0;
         width: 100%;
-        height: 5px;
+        height: 3px;
         background: linear-gradient(
           90deg,
           transparent,
@@ -35,7 +35,7 @@ Requires four <span> elements with the class .kungalgame-comet-surround */
         filter: hue-rotate(60deg);
         top: -100%;
         right: 0;
-        width: 5px;
+        width: 3px;
         height: 100%;
         background: linear-gradient(
           180deg,
@@ -62,7 +62,7 @@ Requires four <span> elements with the class .kungalgame-comet-surround */
         filter: hue-rotate(300deg);
         bottom: -100%;
         left: 0;
-        width: 5px;
+        width: 3px;
         height: 100%;
         background: linear-gradient(
           360deg,
@@ -96,7 +96,7 @@ Requires four <span> elements with the class .kungalgame-comet-surround */
 @keyframes animate3 {
   0% {
     right: -100%;
-    height: 5px;
+    height: 3px;
   }
   50%,
   100% {

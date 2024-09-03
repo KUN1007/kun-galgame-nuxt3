@@ -51,7 +51,7 @@ const getLink = (link: 'galgame' | 'topic') =>
             <span>
               <Icon name="lucide:square-library" />
             </span>
-            <span>{{ $t('rss.topic') }}</span>
+            <span class="name">{{ $t('rss.topic') }}</span>
           </a>
 
           <KunCopy
@@ -73,7 +73,7 @@ const getLink = (link: 'galgame' | 'topic') =>
             <span>
               <Icon name="lucide:gamepad-2" />
             </span>
-            <span>{{ $t('rss.galgame') }}</span>
+            <span class="name">{{ $t('rss.galgame') }}</span>
           </a>
 
           <KunCopy
@@ -168,6 +168,10 @@ const getLink = (link: 'galgame' | 'topic') =>
     border-radius: 10px;
     color: var(--kungalgame-font-color-3);
     cursor: pointer;
+
+    .name {
+      white-space: nowrap;
+    }
 
     .icon {
       font-size: 30px;

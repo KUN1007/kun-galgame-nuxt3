@@ -68,11 +68,10 @@ const getRepliesCount = computed(() => {
   display: flex;
   padding: 10px;
   border-radius: 10px;
-  transition: all 0.2s;
+  border: 1px solid transparent;
 
   &:hover {
-    box-shadow: var(--shadow);
-    transform: scale(1.01);
+    border: 1px solid var(--kungalgame-trans-blue-2);
     background-color: var(--kungalgame-trans-blue-0);
   }
 }
