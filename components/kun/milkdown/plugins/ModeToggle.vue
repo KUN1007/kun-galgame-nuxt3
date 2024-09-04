@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const { mode } = storeToRefs(usePersistEditTopicStore())
+const { mode: topicMode } = storeToRefs(usePersistEditTopicStore())
+const { mode: replyMode } = storeToRefs(usePersistKUNGalgameReplyStore())
+
+const routeName = useRouteName()
 
 const modeItems = [
   {
@@ -11,13 +14,21 @@ const modeItems = [
     value: 'code'
   }
 ]
+
+const handleSetMode = (value: 'preview' | 'code') => {
+  if (routeName.value === 'edit-topic') {
+    topicMode.value = value
+  } else {
+    replyMode.value = value
+  }
+}
 </script>
 
 <template>
   <KunNav
     :items="modeItems"
-    :default-value="mode"
-    @set="(value) => (mode = value as 'preview' | 'code')"
+    :default-value="routeName === 'edit-topic' ? topicMode : replyMode"
+    @set="(value) => handleSetMode(value as 'preview' | 'code')"
   />
 </template>
 

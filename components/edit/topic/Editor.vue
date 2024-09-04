@@ -1,3 +1,4 @@
+<!-- Optimize required, remove duplicate codes -->
 <script setup lang="ts">
 import { MilkdownProvider } from '@milkdown/vue'
 import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
@@ -12,29 +13,16 @@ const { content: editContent } = storeToRefs(usePersistEditTopicStore())
 const { mode } = storeToRefs(usePersistEditTopicStore())
 const textarea = ref<HTMLTextAreaElement | null>(null)
 
+const valueMarkdown = ref(
+  isTopicRewriting.value ? rewriteContent.value : editContent.value
+)
+
 const autoResizeTextarea = () => {
   if (textarea.value) {
     textarea.value.style.height = 'auto'
     textarea.value.style.height = `${textarea.value.scrollHeight}px`
   }
 }
-
-onMounted(() => autoResizeTextarea())
-
-watch(
-  () => mode.value,
-  async () => {
-    await nextTick()
-
-    if (mode.value === 'code') {
-      autoResizeTextarea()
-    }
-  }
-)
-
-const valueMarkdown = ref(
-  isTopicRewriting.value ? rewriteContent.value : editContent.value
-)
 
 const saveMarkdown = (editorMarkdown: string) => {
   const targetContent = isTopicRewriting.value ? rewriteContent : editContent
@@ -49,6 +37,19 @@ const handleInputCodeMarkdown = (event: Event) => {
   autoResizeTextarea()
   saveMarkdown(target.value)
 }
+
+onMounted(() => autoResizeTextarea())
+
+watch(
+  () => mode.value,
+  async () => {
+    await nextTick()
+
+    if (mode.value === 'code') {
+      autoResizeTextarea()
+    }
+  }
+)
 </script>
 
 <template>

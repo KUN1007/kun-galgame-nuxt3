@@ -27,6 +27,7 @@ export interface ReplyStoreTemp {
 }
 
 export interface ReplyStorePersist {
+  mode: 'preview' | 'code'
   textCount: number
 
   replyDraft: ReplyDraft

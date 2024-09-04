@@ -4,6 +4,7 @@ export const usePersistKUNGalgameReplyStore = defineStore({
   id: 'KUNGalgameTopicReply',
   persist: true,
   state: (): ReplyStorePersist => ({
+    mode: 'preview',
     textCount: 0,
 
     replyDraft: {
