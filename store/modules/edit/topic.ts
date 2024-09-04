@@ -6,6 +6,7 @@ export const usePersistEditTopicStore = defineStore({
     storage: persistedState.localStorage
   },
   state: (): EditStorePersist => ({
+    mode: 'preview',
     textCount: 0,
 
     title: '',

@@ -31,12 +31,13 @@ export const checkTopicPublish = (
     return false
   }
 
-  if (!textCount) {
+  // Solve the conflict between code mode and preview mode
+  if (!textCount && !markdownToText(topicData.content).length) {
     useMessage('Content cannot be empty!', '内容不可为空！', 'warn')
     return false
   }
 
-  if (textCount > 100007) {
+  if (textCount > 100007 || markdownToText(topicData.content).length > 100007) {
     useMessage(
       'Content maximum length is 100,007!',
       '内容最大长度为 100,007!',

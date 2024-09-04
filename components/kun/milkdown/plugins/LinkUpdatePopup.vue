@@ -11,7 +11,7 @@ const { view, prevState } = usePluginViewContext()
 
 const linkHref = ref('')
 const hide = ref(true)
-const [_, get] = useInstance()
+const [loading, get] = useInstance()
 
 const linkUpdPopRef = ref<VNodeRef>()
 let tooltipProvider: TooltipProvider
@@ -74,7 +74,7 @@ const handleUpdateLink = () => {
 </script>
 
 <template>
-  <div class="wrapper" ref="linkUpdPopRef">
+  <div v-if="loading" class="wrapper" ref="linkUpdPopRef">
     <input
       class="input"
       type="url"

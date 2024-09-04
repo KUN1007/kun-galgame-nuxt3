@@ -14,7 +14,7 @@ import type { VNodeRef } from 'vue'
 import type { CmdKey } from '@milkdown/core'
 
 const { view, prevState } = usePluginViewContext()
-const [_, get] = useInstance()
+const [loading, get] = useInstance()
 
 const divRef = ref<VNodeRef>()
 let tooltipProvider: TooltipProvider
@@ -46,7 +46,7 @@ const call = <T,>(command: CmdKey<T>, payload?: T) => {
 </script>
 
 <template>
-  <div class="tooltip" ref="divRef">
+  <div v-if="loading" class="tooltip" ref="divRef">
     <button @click="call(toggleStrongCommand.key)">
       <KunBold name="lucide:bold" />
     </button>

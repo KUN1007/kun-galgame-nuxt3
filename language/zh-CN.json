@@ -213,6 +213,8 @@
       "title": "标题",
       "loading": "正在加载编辑器...",
       "uploading": "正在上传中...",
+      "preview": "预览",
+      "code": "代码",
       "clear": "清空内容",
       "rules": "规定",
       "save": "自动保存",

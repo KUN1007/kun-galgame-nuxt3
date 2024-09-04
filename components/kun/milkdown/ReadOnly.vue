@@ -111,6 +111,8 @@ watch(
 pre {
   white-space: pre-wrap;
   word-break: break-all;
+  font-size: normal;
+  font-family: inherit;
 }
 
 .editor {

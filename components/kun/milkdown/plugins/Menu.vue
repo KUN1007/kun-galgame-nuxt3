@@ -26,6 +26,7 @@ const props = defineProps<{
 const { get, loading } = props.editorInfo
 const input = ref<HTMLElement>()
 const isShowInsertLink = ref(false)
+const { mode } = storeToRefs(usePersistEditTopicStore())
 
 const call = <T,>(command: CmdKey<T>, payload?: T) => {
   return get()?.action(callCommand(command, payload))
@@ -82,12 +83,19 @@ const handleClickUploadImage = () => {
 
 <template>
   <div class="menu">
+    <KunMilkdownPluginsModeToggle />
+
     <!-- Mark Group -->
-    <div aria-label="kun-galgame-bold" @click="call(toggleStrongCommand.key)">
+    <div
+      class="btn"
+      aria-label="kun-galgame-bold"
+      @click="call(toggleStrongCommand.key)"
+    >
       <Icon name="lucide:bold" />
     </div>
 
     <div
+      class="btn"
       aria-label="kun-galgame-italic"
       @click="call(toggleEmphasisCommand.key)"
     >
@@ -95,6 +103,7 @@ const handleClickUploadImage = () => {
     </div>
 
     <div
+      class="btn"
       aria-label="kun-galgame-italic"
       @click="call(toggleStrikethroughCommand.key)"
     >
@@ -106,6 +115,7 @@ const handleClickUploadImage = () => {
     </div> -->
 
     <div
+      class="btn"
       aria-label="kun-galgame-list-bulleted"
       @click="call(wrapInBulletListCommand.key)"
     >
@@ -113,6 +123,7 @@ const handleClickUploadImage = () => {
     </div>
 
     <div
+      class="btn"
       aria-label="kun-galgame-list-numbered"
       @click="call(wrapInOrderedListCommand.key)"
     >
@@ -120,17 +131,26 @@ const handleClickUploadImage = () => {
     </div>
 
     <div
+      class="btn"
       aria-label="kun-galgame-quote"
       @click="call(wrapInBlockquoteCommand.key)"
     >
       <Icon name="lucide:quote" />
     </div>
 
-    <div aria-label="kun-galgame-horizontal" @click="call(insertHrCommand.key)">
+    <div
+      class="btn"
+      aria-label="kun-galgame-horizontal"
+      @click="call(insertHrCommand.key)"
+    >
       <Icon name="lucide:minus" />
     </div>
 
-    <div aria-label="kun-galgame-italic" @click="isShowInsertLink = true">
+    <div
+      class="btn"
+      aria-label="kun-galgame-italic"
+      @click="isShowInsertLink = true"
+    >
       <Icon name="lucide:link" />
       <KunMilkdownPluginsLinkInsertDialog
         :show="isShowInsertLink"
@@ -139,11 +159,16 @@ const handleClickUploadImage = () => {
       />
     </div>
 
-    <div aria-label="kun-galgame-italic" @click="handleClickCodeBlock">
+    <div
+      class="btn"
+      aria-label="kun-galgame-italic"
+      @click="handleClickCodeBlock"
+    >
       <Icon name="lucide:square-code" />
     </div>
 
     <div
+      class="btn"
       aria-label="kun-galgame-italic"
       @click="call(toggleInlineCodeCommand.key)"
     >
@@ -151,6 +176,7 @@ const handleClickUploadImage = () => {
     </div>
 
     <div
+      class="btn"
       aria-label="kun-galgame-upload-image"
       v-if="props.isShowUploadImage"
       @click="handleClickUploadImage"
@@ -178,7 +204,7 @@ const handleClickUploadImage = () => {
   backdrop-filter: blur(10px);
   z-index: 999;
 
-  div {
+  .btn {
     cursor: pointer;
     display: flex;
     justify-content: center;

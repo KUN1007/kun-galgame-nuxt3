@@ -2,6 +2,7 @@ import type { Ctx } from '@milkdown/ctx'
 import type { ShallowRef } from 'vue'
 
 export interface EditStorePersist {
+  mode: 'preview' | 'code'
   textCount: number
 
   title: string

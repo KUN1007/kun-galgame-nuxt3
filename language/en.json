@@ -213,6 +213,8 @@
       "title": "Title",
       "loading": "Loading editor...",
       "uploading": "Uploading in progress...",
+      "preview": "Preview",
+      "code": "Code",
       "clear": "Clear Content",
       "rules": "Rules",
       "save": "Auto save",
