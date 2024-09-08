@@ -45,7 +45,7 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
   cursor: pointer;
   max-width: 300px;
   padding: 10px;
-  transition: all 0.2s;
+  transition: transform 0.2s;
 
   @include kun-blur;
 

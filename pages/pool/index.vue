@@ -11,8 +11,7 @@ useHead({
   ]
 })
 
-const pool = ref<HTMLElement>()
-const { savedPosition, page, topics } = storeToRefs(useTempPoolStore())
+const { savedPosition, pageData, topics } = storeToRefs(useTempPoolStore())
 const isLoadingComplete = ref(false)
 
 const iconMap: Record<string, string> = {
@@ -20,16 +19,10 @@ const iconMap: Record<string, string> = {
   created: 'lucide:calendar-heart'
 }
 
-const pageData = reactive({
-  limit: 12,
-  sortField: 'created',
-  sortOrder: 'desc'
-})
-
 const getTopics = async () => {
   const result = await $fetch(`/api/pool/topic`, {
     method: 'GET',
-    query: { page: page.value, ...pageData },
+    query: pageData.value,
     watch: false,
     ...kungalgameResponseHandler
   })
@@ -44,10 +37,10 @@ const isFetching = ref(false)
 const scrollHandler = async () => {
   if (isScrollAtBottom() && !isLoadingComplete.value && !isFetching.value) {
     isFetching.value = true
-    page.value++
+    pageData.value.page++
     const newData = await getTopics()
 
-    if (newData.length < pageData.limit) {
+    if (newData.length < pageData.value.limit) {
       isLoadingComplete.value = true
     }
 
@@ -57,25 +50,22 @@ const scrollHandler = async () => {
 }
 
 const isScrollAtBottom = () => {
-  if (pool.value) {
-    const scrollHeight = pool.value.scrollHeight
-    const scrollTop = pool.value.scrollTop
-    const clientHeight = pool.value.clientHeight
+  const scrollHeight = document.documentElement.scrollHeight
+  const scrollTop = window.scrollY || document.documentElement.scrollTop
+  const clientHeight = document.documentElement.clientHeight
+  savedPosition.value = scrollTop
 
-    savedPosition.value = scrollTop
-
-    const errorMargin = 300
-    return Math.abs(scrollHeight - scrollTop - clientHeight) < errorMargin
-  }
+  const errorMargin = 500
+  return Math.abs(scrollHeight - scrollTop - clientHeight) < errorMargin
 }
 
 watch(
-  () => [pageData.sortField, pageData.sortOrder],
+  () => [pageData.value.sortField, pageData.value.sortOrder],
   async () => {
-    page.value = 1
+    pageData.value.page = 1
     isLoadingComplete.value = false
 
-    pool.value?.scrollTo({
+    window.scrollTo({
       top: 0
     })
 
@@ -88,25 +78,30 @@ const handleLoadTopics = async () => {
   if (isLoadingComplete.value) {
     return
   }
-  page.value++
+  pageData.value.page++
   const lazyLoadTopics = await getTopics()
 
-  if (lazyLoadTopics.length < 12) {
+  if (lazyLoadTopics.length < 24) {
     isLoadingComplete.value = true
   }
   topics.value = topics.value.concat(lazyLoadTopics)
 }
 
 onMounted(() => {
-  pool.value?.scrollTo({
+  window.scrollTo({
     top: savedPosition.value,
     left: 0
   })
+  window.addEventListener('scroll', scrollHandler)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', scrollHandler)
 })
 </script>
 
 <template>
-  <div class="pool" ref="pool" @scroll="scrollHandler">
+  <div class="pool" ref="pool">
     <div class="tool" v-if="topics" id="tool">
       <KunSelect
         :styles="{ width: '150px' }"
@@ -163,17 +158,12 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .pool {
-  height: calc(100dvh - 75px);
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  max-width: calc(64rem + 10px);
+  max-width: 64rem;
   margin: 0 auto;
   padding: 0 10px;
-
-  &::-webkit-scrollbar {
-    width: 7px;
-  }
 }
 
 .tool {
@@ -244,24 +234,28 @@ onMounted(() => {
 
   span {
     font-size: 20px;
-    cursor: pointer;
-    color: var(--kungalgame-blue-5);
-    border-bottom: 2px solid transparent;
-
-    &:hover {
-      border-bottom: 2px solid var(--kungalgame-blue-5);
-    }
+    color: var(--kungalgame-font-color-1);
+    margin-bottom: 17px;
   }
+}
+
+.kun-footer {
+  margin-bottom: 17px;
 }
 
 @media (max-width: 700px) {
   .pool {
     height: calc(100dvh - 65px);
+    padding: 0 5px;
   }
 
   .container {
     grid-template-columns: repeat(2, minmax(100px, 233px));
     gap: 7px;
+  }
+
+  .tool {
+    margin-bottom: 7px;
   }
 }
 </style>

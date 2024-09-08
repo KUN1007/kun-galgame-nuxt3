@@ -38,7 +38,7 @@ useHead({
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: calc(100dvh - 65px);
+  min-height: calc(100dvh - 75px);
   max-width: 64rem;
   margin: 0 auto;
 
@@ -62,6 +62,7 @@ useHead({
 
 @media (max-width: 700px) {
   .root {
+    min-height: calc(100dvh - 65px);
     margin: 0 5px;
   }
 

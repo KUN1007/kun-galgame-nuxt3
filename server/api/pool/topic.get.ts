@@ -51,7 +51,7 @@ export default defineEventHandler(async (event) => {
   if (!page || !limit || !sortField || !sortOrder) {
     return kunError(event, 10507)
   }
-  if (limit !== '12') {
+  if (limit !== '24') {
     return kunError(event, 10209)
   }
 

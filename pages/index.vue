@@ -99,6 +99,7 @@ useHead({
 
 @media (max-width: 1000px) {
   .root {
+    min-height: calc(100dvh - 65px);
     padding: 17px 10px;
   }
 }
