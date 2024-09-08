@@ -65,6 +65,7 @@ const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
         <NuxtLinkLocale
           v-if="uid !== link.uid"
           to="/report"
+          aria-label="Report violation"
           v-tooltip="{
             message: { en: 'Report violation', zh: '举报违规' },
             position: 'bottom'
