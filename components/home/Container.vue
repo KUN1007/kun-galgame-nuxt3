@@ -23,6 +23,7 @@ const { fold } = storeToRefs(usePersistKUNGalgameHomeStore())
       {{ $t('home.topics') }}
     </template>
   </KunHeader>
+  <HomeTopicContainer />
   <KunDivider margin="10px" />
 
   <KunHeader :size="2">

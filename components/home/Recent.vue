@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { HomeMessage } from '~/types/api/message'
+import type { HomeMessage } from '~/types/api/home'
 
 const { locale } = useI18n()
 

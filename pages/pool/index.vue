@@ -95,7 +95,7 @@ onUnmounted(() => {
 
 <template>
   <div class="pool" ref="pool">
-    <div class="tool" v-if="topics" id="tool">
+    <div class="tool" v-if="topics">
       <div class="sort">
         <KunSelect
           :styles="{ width: '100px' }"
