@@ -20,11 +20,15 @@ const { fold } = storeToRefs(usePersistKUNGalgameHomeStore())
 
   <KunHeader :size="2">
     <template #header>
-      {{ $t('home.topics') }}
+      <div class="header">
+        <span>{{ $t('home.topics') }}</span>
+        <span class="suffix" @click="fold.topics = !fold.topics">
+          {{ $t(`home.${fold.topics ? 'foldSection' : 'expandSection'}`) }}
+        </span>
+      </div>
     </template>
   </KunHeader>
-  <HomeTopicContainer />
-  <KunDivider margin="10px" />
+  <HomeTopicContainer v-if="fold.topics" />
 
   <KunHeader :size="2">
     <template #header>
