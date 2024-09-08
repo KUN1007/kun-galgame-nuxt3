@@ -1,9 +1,3 @@
-interface User {
-  uid: number
-  name: string
-  avatar: string
-}
-
 export interface GalgameResource {
   gid: number
   grid: number
@@ -18,7 +12,7 @@ export interface GalgameResource {
 }
 
 export interface GalgameResourceDetails extends GalgameResource {
-  user: User
+  user: KunUser
   link: string[]
   code: string
   password: string

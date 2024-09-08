@@ -1,3 +1,4 @@
+import type { GalgameResource } from './galgame-resource.d.ts'
 import type { MessageType } from './message.d.ts'
 
 export interface HomeMessage {
@@ -61,4 +62,9 @@ export interface HomeGalgame {
   contributors: number[]
   languages: string[]
   platforms: string[]
+}
+
+export interface HomeGalgameResources extends GalgameResource {
+  name: KunLanguage
+  time: number
 }

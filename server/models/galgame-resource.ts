@@ -30,6 +30,12 @@ GalgameResourceSchema.virtual('user', {
   foreignField: 'uid'
 })
 
+GalgameResourceSchema.virtual('game', {
+  ref: 'galgame',
+  localField: 'gid',
+  foreignField: 'gid'
+})
+
 GalgameResourceSchema.pre('save', increasingSequence('grid'))
 
 const GalgameResourceModel = mongoose.model<GalgameResource>(

@@ -1,6 +1,6 @@
 import UserModel from '~/server/models/user'
 import MessageModel from '~/server/models/message'
-import type { HomeMessage } from '~/types/api/message'
+import type { HomeMessage } from '~/types/api/home'
 
 const getMessages = async (page: number, limit: number) => {
   const skip = (page - 1) * limit

@@ -1,4 +1,5 @@
 import type { UserAttributes } from './user'
+import type { Galgame } from './galgame'
 
 export interface GalgameResource {
   // Essential features
@@ -20,6 +21,7 @@ export interface GalgameResource {
   likes: number[]
 
   user: UserAttributes[]
+  game: Galgame[]
 
   created: Date
   updated: Date
