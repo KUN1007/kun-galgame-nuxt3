@@ -90,21 +90,7 @@
     "home": "Home"
   },
   "home":{
-    "pinned": "Pinned",
     "header":{
-      "filter": "Filter",
-      "category": "Category",
-      "galgame": "Visual Novel",
-      "technique": "Technique",
-      "others": "Others",
-      "all": "All Topics",
-      "updated": "Default",
-      "time": "Time",
-      "popularity": "Popularity",
-      "views": "Views",
-      "likes": "Likes",
-      "replies": "Replies",
-      "comments": "Comments",
       "topicSearch": "Topics",
       "galgameSearch": "VNs",
       "search": "Input to Auto Search",
@@ -113,23 +99,10 @@
       "emptyHistory": "This loli hasn't searched for anything",
       "emptyResult": "No results found..."
     },
-    "asideActive":{
-      "fold": "Fold Aside",
-      "create": "CREATE TOPIC",
-      "update": "Update",
-      "balance": "P & L",
-      "ranking": "Ranking",
-      "bylaw": "Bylaw",
-      "contact": "Join Us",
-      "nonMoe": "Non-moe",
-      "popularity": "Today's Hot Topic",
-      "time": "Today's New Topic"
-    },
-    "tool": {
-      "topics": "Topics",
-      "resources": "VNs"
-    },
-    "all": "See all topics"
+    "updates": "Latest updates",
+    "load": "Load more",
+    "loading": "少女祈祷中...",
+    "fold": "Fold to initial state"
   },
   "topic":{
     "notFound": "Topic not found",

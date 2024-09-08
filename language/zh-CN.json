@@ -90,46 +90,19 @@
     "home": "主页"
   },
   "home":{
-    "pinned": "置顶",
     "header":{
-      "filter": "筛选",
-      "category": "分类",
-      "galgame": "Galgame",
-      "technique": "技术交流",
-      "others": "其它",
-      "all": "全部话题",
-      "updated": "恢复默认排序",
-      "time": "按照时间排序",
-      "popularity": "按热度值排序",
-      "views": "按浏览数排序",
-      "likes": "按点赞数排序",
-      "replies": "按回复数排序",
-      "comments": "按评论数排序",
       "topicSearch": "话题",
       "galgameSearch": "Galgame",
       "search": "输入内容以自动搜索",
       "history": "搜索历史",
       "clear": "清除所有历史",
-      "emptyHistory": "这只萝莉什么也没搜索过",
+      "emptyHistory": "这只笨萝莉什么也没搜索过",
       "emptyResult": "什么也没有搜索到。。。"
     },
-    "asideActive":{
-      "fold": "折叠左侧区域",
-      "create": "发布话题",
-      "update": "更新日志",
-      "balance": "收支公示",
-      "ranking": "排行榜单",
-      "bylaw": "执行条例",
-      "contact": "加入我们",
-      "nonMoe": "不萌记录",
-      "popularity": "今日热门话题",
-      "time": "今日最新话题"
-    },
-    "tool": {
-      "topics": "话题",
-      "resources": "Galgame"
-    },
-    "all": "查看全部话题"
+    "updates": "最新动态",
+    "load": "加载更多",
+    "loading": "少女祈祷中...",
+    "fold": "折叠为初始状态"
   },
   "topic":{
     "notFound": "该话题不存在",

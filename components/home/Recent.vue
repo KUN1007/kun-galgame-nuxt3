@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { HomeMessage } from '~/types/api/message'
+
 const { locale } = useI18n()
 
 const iconMap: Record<string, string> = {
@@ -8,20 +10,36 @@ const iconMap: Record<string, string> = {
   requested: 'lucide:git-pull-request-arrow'
 }
 
+const messageData = ref<HomeMessage[] | null>()
 const pageData = reactive({
   page: 1,
   limit: 10
 })
 
-const { data } = await useLazyFetch(`/api/home/message`, {
+const { data, pending } = await useFetch(`/api/home/message`, {
   method: 'GET',
   query: pageData
 })
+messageData.value = data.value
+
+watch(
+  () => [pageData.page, pending.value],
+  () => {
+    if (data.value && !pending.value && pageData.page > 1) {
+      messageData.value = messageData.value?.concat(data.value)
+    }
+  }
+)
+
+const handleClose = () => {
+  messageData.value = messageData.value?.slice(0, 10)
+  pageData.page = 1
+}
 </script>
 
 <template>
-  <div class="recent" v-if="data">
-    <div class="message" v-for="(message, index) in data" :key="index">
+  <div class="recent" v-if="messageData">
+    <div class="message" v-for="(message, index) in messageData" :key="index">
       <NuxtLinkLocale class="user" :to="`/kungalgamer/${message.uid}/info`">
         {{ message.name }}
       </NuxtLinkLocale>
@@ -38,6 +56,12 @@ const { data } = await useLazyFetch(`/api/home/message`, {
       </NuxtLinkLocale>
     </div>
   </div>
+
+  <HomeLoader v-model="pageData.page" :pending="pending">
+    <span v-if="pageData.page !== 1" class="close" @click="handleClose">
+      {{ $t('home.fold') }}
+    </span>
+  </HomeLoader>
 </template>
 
 <style lang="scss" scoped>
@@ -45,7 +69,6 @@ const { data } = await useLazyFetch(`/api/home/message`, {
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
-  margin-bottom: 17px;
   font-size: 15px;
 }
 
@@ -71,6 +94,16 @@ const { data } = await useLazyFetch(`/api/home/message`, {
       font-weight: initial;
       margin-left: 7px;
     }
+  }
+}
+
+.close {
+  margin-left: 17px;
+  cursor: pointer;
+  padding-right: 17px;
+
+  &:hover {
+    color: var(--kungalgame-blue-5);
   }
 }
 

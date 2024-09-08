@@ -2,7 +2,8 @@
 
 <template>
   <HomePinned />
-  <h2>最新动态</h2>
+  <KunDivider margin="10px" />
+  <h2>{{ $t('home.updates') }}</h2>
   <HomeRecent />
 </template>
 
