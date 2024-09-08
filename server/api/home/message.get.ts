@@ -2,18 +2,15 @@ import UserModel from '~/server/models/user'
 import MessageModel from '~/server/models/message'
 import type { HomeMessage } from '~/types/api/message'
 
-export default defineEventHandler(async (event) => {
-  const homeMessageCache: HomeMessage[] | null =
-    await useStorage('redis').getItem(`home:message`)
-  if (homeMessageCache) {
-    return homeMessageCache
-  }
+const getMessages = async (page: number, limit: number) => {
+  const skip = (page - 1) * limit
 
   const data = await MessageModel.find({
     type: { $in: ['upvoted', 'replied', 'commented', 'requested'] }
   })
     .sort({ time: -1 })
-    .limit(17)
+    .skip(skip)
+    .limit(limit)
     .populate('user', 'name', UserModel)
     .lean()
 
@@ -26,9 +23,16 @@ export default defineEventHandler(async (event) => {
     time: message.time
   }))
 
-  await useStorage('redis').setItem(`home:message`, messages, {
-    ttl: 60 * 60
-  })
+  return messages
+}
+
+export default defineEventHandler(async (event) => {
+  const { page, limit }: KunPagination = await getQuery(event)
+  if (limit !== '10') {
+    return kunError(event, 10209)
+  }
+
+  const messages = await getMessages(parseInt(page), parseInt(limit))
 
   return messages
 })

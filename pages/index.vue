@@ -80,25 +80,26 @@ useHead({
 
 <template>
   <div class="root">
-    <HomeAsideContainer class="aside" />
-    <HomeContentArticle />
+    <HomeContainer />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .root {
   display: flex;
-  align-items: center;
-  height: calc(100dvh - 75px);
-  min-height: 777px;
+  flex-direction: column;
+  height: 100%;
+  min-height: calc(100dvh - 75px);
   max-width: 64rem;
   margin: 0 auto;
-  color: var(--kungalgame-font-color-3);
+  padding: 17px;
+
+  @include kun-blur;
 }
 
 @media (max-width: 1000px) {
-  .aside {
-    display: none;
+  .root {
+    padding: 17px 10px;
   }
 }
 </style>

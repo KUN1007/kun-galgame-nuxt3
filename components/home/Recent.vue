@@ -8,8 +8,14 @@ const iconMap: Record<string, string> = {
   requested: 'lucide:git-pull-request-arrow'
 }
 
-const { data } = await useLazyFetch(`/api/message/home`, {
-  method: 'GET'
+const pageData = reactive({
+  page: 1,
+  limit: 10
+})
+
+const { data } = await useLazyFetch(`/api/home/message`, {
+  method: 'GET',
+  query: pageData
 })
 </script>
 
@@ -39,8 +45,6 @@ const { data } = await useLazyFetch(`/api/message/home`, {
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
-  height: 107px;
-  overflow-y: scroll;
   margin-bottom: 17px;
   font-size: 15px;
 }

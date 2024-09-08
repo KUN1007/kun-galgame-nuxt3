@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import type { HomePinnedTopic } from '~/types/api/home'
-
 const { locale } = useI18n()
 
-const props = defineProps<{
-  topics: HomePinnedTopic[]
-}>()
+const { data } = await useLazyFetch(`/api/home/pin`, {
+  method: 'GET'
+})
 </script>
 
 <template>
   <div class="pinned">
     <NuxtLinkLocale
-      v-for="(topic, index) in props.topics"
+      v-for="(topic, index) in data"
       :key="index"
       :to="`/topic/${topic.tid}`"
     >

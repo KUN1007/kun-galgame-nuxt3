@@ -76,7 +76,5 @@ export default defineEventHandler(async (event) => {
     return kunError(event, result)
   }
 
-  await useStorage('redis').removeItem(`home:message`)
-
   return 'MOEMOE upvote topic successfully!'
 })

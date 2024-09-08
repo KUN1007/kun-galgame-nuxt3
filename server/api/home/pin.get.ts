@@ -1,7 +1,7 @@
 import TopicModel from '~/server/models/topic'
 import type { HomePinnedTopic } from '~/types/api/home'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (_) => {
   const homePinnedTopicCache: HomePinnedTopic[] | null =
     await useStorage('redis').getItem(`home:pinned`)
   if (homePinnedTopicCache) {
