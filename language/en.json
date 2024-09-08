@@ -122,6 +122,12 @@
       "thanksList": "Thanks List",
       "updateLog": "Update Logs"
     },
+    "subsites": {
+      "sticker": "Stickers",
+      "nav": "Navigation",
+      "documentation": "Documentation",
+      "backup": "Backup Website"
+    },
     "updates": "Latest updates",
     "topics": "Latest topics",
     "galgames": "Latest Visual Novels",
@@ -131,7 +137,9 @@
     "expandSection": "Expand Section",
     "load": "Load more",
     "loading": "少女祈祷中...",
-    "fold": "Fold to initial state"
+    "fold": "Fold to initial state",
+    "copyright": "© 2024 KUN Visual Novel",
+    "openSource": "Open Source {'|'} Version"
   },
   "topic":{
     "notFound": "Topic not found",

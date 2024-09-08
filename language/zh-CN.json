@@ -122,6 +122,12 @@
       "thanksList": "感谢名单",
       "updateLog": "更新日志"
     },
+    "subsites": {
+      "sticker": "表情包",
+      "nav": "导航",
+      "documentation": "开发文档",
+      "backup": "备用站点"
+    },
     "updates": "最新动态",
     "topics": "最新话题",
     "galgames": "最新 Galgame",
@@ -131,7 +137,9 @@
     "expandSection": "展开板块",
     "load": "加载更多",
     "loading": "少女祈祷中...",
-    "fold": "折叠为初始状态"
+    "fold": "折叠为初始状态",
+    "copyright": "© 2024 鲲 Galgame",
+    "openSource": "开源 {'|'} 版本"
   },
   "topic":{
     "notFound": "该话题不存在",

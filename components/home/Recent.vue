@@ -69,7 +69,7 @@ const handleClose = () => {
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .message {
@@ -109,7 +109,7 @@ const handleClose = () => {
 
 @media (max-width: 700px) {
   .recent {
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 </style>

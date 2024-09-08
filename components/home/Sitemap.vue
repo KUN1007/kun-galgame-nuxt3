@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { sitemap } from './sitemap'
+import { sitemap } from './utils/sitemap'
 </script>
 
 <template>
