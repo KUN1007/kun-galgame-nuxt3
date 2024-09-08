@@ -52,3 +52,13 @@ export interface HomeTopic {
   status: number
   upvote_time: number
 }
+
+export interface HomeGalgame {
+  gid: number
+  name: KunLanguage
+  time: number
+  views: number
+  contributors: number[]
+  languages: string[]
+  platforms: string[]
+}

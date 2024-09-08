@@ -78,7 +78,7 @@ onMounted(async () => {
     </template>
   </KunHeader>
   <div class="banner">
-    <NuxtImg :src="galgame.banner" />
+    <NuxtImg :src="galgame.banner" loading="lazy" />
 
     <div class="upload" v-if="isShowUpload && hasPermission">
       <span class="close" @click="isShowUpload = false">

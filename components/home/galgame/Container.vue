@@ -1,37 +1,37 @@
 <script setup lang="ts">
-import type { HomeTopic } from '~/types/api/home'
+import type { HomeGalgame } from '~/types/api/home'
 
-const topicData = ref<HomeTopic[] | null>()
+const GalgameData = ref<HomeGalgame[] | null>()
 const pageData = reactive({
   page: 1,
   limit: 10
 })
 
-const { data, pending } = await useFetch(`/api/home/topic`, {
+const { data, pending } = await useFetch(`/api/home/galgame`, {
   method: 'GET',
   query: pageData
 })
-topicData.value = data.value
+GalgameData.value = data.value
 
 watch(
   () => [pageData.page, pending.value],
   () => {
     if (data.value && !pending.value && pageData.page > 1) {
-      topicData.value = topicData.value?.concat(data.value)
+      GalgameData.value = GalgameData.value?.concat(data.value)
     }
   }
 )
 
 const handleClose = () => {
-  topicData.value = topicData.value?.slice(0, 10)
+  GalgameData.value = GalgameData.value?.slice(0, 10)
   pageData.page = 1
 }
 </script>
 
 <template>
-  <div class="container" v-if="topicData">
-    <div v-for="(topic, index) in topicData" :key="index">
-      <HomeTopicCard :="topic" />
+  <div class="container" v-if="GalgameData">
+    <div v-for="(galgame, index) in GalgameData" :key="index">
+      <HomeGalgameCard :="galgame" />
 
       <KunDivider margin="0 7px" />
     </div>

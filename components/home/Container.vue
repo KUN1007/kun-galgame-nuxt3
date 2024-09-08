@@ -32,10 +32,15 @@ const { fold } = storeToRefs(usePersistKUNGalgameHomeStore())
 
   <KunHeader :size="2">
     <template #header>
-      {{ $t('home.galgames') }}
+      <div class="header">
+        <span>{{ $t('home.galgames') }}</span>
+        <span class="suffix" @click="fold.galgames = !fold.galgames">
+          {{ $t(`home.${fold.galgames ? 'foldSection' : 'expandSection'}`) }}
+        </span>
+      </div>
     </template>
   </KunHeader>
-  <KunDivider margin="10px" />
+  <HomeGalgameContainer v-if="fold.galgames" />
 
   <KunHeader :size="2">
     <template #header>

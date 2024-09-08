@@ -20,6 +20,7 @@ defineProps<{
       <div class="banner">
         <NuxtImg
           :src="galgame.banner.replace(/\.webp$/, '-mini.webp')"
+          loading="lazy"
           placeholder="/placeholder.webp"
         />
         <div class="platform">
