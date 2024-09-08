@@ -10,15 +10,23 @@ const getPoolTopics = async (
   page: number,
   limit: number,
   sortField: SortFieldPool,
-  sortOrder: KunOrder
+  sortOrder: KunOrder,
+  category: string
 ) => {
   const skip = (page - 1) * limit
+
+  const queryData = {
+    status: { $ne: 1 },
+    ...(category !== 'All'
+      ? { category: { $elemMatch: { $eq: category } } }
+      : {})
+  }
 
   const sortOptions: Record<string, 'asc' | 'desc'> = {
     [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
   }
 
-  const topics = await TopicModel.find({ status: { $ne: 1 } })
+  const topics = await TopicModel.find(queryData)
     .sort(sortOptions)
     .skip(skip)
     .limit(limit)
@@ -46,10 +54,14 @@ const getPoolTopics = async (
 }
 
 export default defineEventHandler(async (event) => {
-  const { page, limit, sortField, sortOrder }: PoolTopicsRequestData =
+  const { page, limit, sortField, sortOrder, category }: PoolTopicsRequestData =
     await getQuery(event)
-  if (!page || !limit || !sortField || !sortOrder) {
+  if (!page || !limit || !sortField || !sortOrder || !category) {
     return kunError(event, 10507)
+  }
+  const availableCategory = ['all', 'galgame', 'technique', 'others']
+  if (!availableCategory.includes(category)) {
+    return kunError(event, 10220)
   }
   if (limit !== '24') {
     return kunError(event, 10209)
@@ -59,7 +71,8 @@ export default defineEventHandler(async (event) => {
     parseInt(page),
     parseInt(limit),
     sortField as SortFieldPool,
-    sortOrder as KunOrder
+    sortOrder as KunOrder,
+    category.charAt(0).toUpperCase() + category.slice(1)
   )
 
   return topics

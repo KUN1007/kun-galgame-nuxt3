@@ -52,7 +52,7 @@ export default defineEventHandler(async (event) => {
   if (limit !== '10') {
     return kunError(event, 10209)
   }
-  const availableCategory = ['galgame', 'technique', 'others']
+  const availableCategory = ['all', 'galgame', 'technique', 'others']
   if (!availableCategory.includes(category)) {
     return kunError(event, 10220)
   }

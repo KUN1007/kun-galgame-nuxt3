@@ -8,14 +8,6 @@ export type SortField =
   | 'replies'
   | 'comments'
 
-export type SortFieldRanking =
-  | 'popularity'
-  | 'views'
-  | 'upvotes'
-  | 'likes'
-  | 'replies'
-  | 'comments'
-
 export type SortFieldPool = 'views' | 'likes' | 'time'
 
 export type TypeToGet = 'time' | 'popularity'

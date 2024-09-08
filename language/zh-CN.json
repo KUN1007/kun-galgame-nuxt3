@@ -481,7 +481,11 @@
     "load": "点击继续加载话题",
     "complete": "已经。。。一滴也不剩了",
     "views": "浏览",
-    "created": "时间"
+    "created": "时间",
+    "all": "全部分类",
+    "galgame": "Galgame",
+    "technique": "技术交流",
+    "others": "其它"
   },
   "technique":{
     "prev": "上一页",

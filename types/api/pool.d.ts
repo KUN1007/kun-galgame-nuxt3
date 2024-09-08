@@ -8,15 +8,7 @@ export type SortField =
   | 'replies'
   | 'comments'
 
-export type SortFieldRanking =
-  | 'popularity'
-  | 'views'
-  | 'upvotes'
-  | 'likes'
-  | 'replies'
-  | 'comments'
-
-export type SortFieldPool = 'views' | 'likes' | 'created'
+export type SortFieldPool = 'views' | 'created'
 
 export interface PoolTopic {
   tid: number
@@ -40,4 +32,5 @@ export interface PoolTopicsRequestData {
   limit: string
   sortField: string
   sortOrder: string
+  category: string
 }

@@ -9,7 +9,8 @@ export const useTempPoolStore = defineStore({
       page: 1,
       limit: 24,
       sortField: 'created',
-      sortOrder: 'desc'
+      sortOrder: 'desc',
+      category: 'all'
     },
 
     topics: []

@@ -481,7 +481,11 @@
     "load": "Click to Load More Topics",
     "complete": "Already there's nothing left...",
     "views": "Views",
-    "created": "Time"
+    "created": "Time",
+    "all": "All Categories",
+    "galgame": "Visual Novel",
+    "technique": "Technique",
+    "others": "Others"
   },
   "technique":{
     "prev": "Prev",

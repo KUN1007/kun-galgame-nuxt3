@@ -14,11 +14,6 @@ useHead({
 const { savedPosition, pageData, topics } = storeToRefs(useTempPoolStore())
 const isLoadingComplete = ref(false)
 
-const iconMap: Record<string, string> = {
-  views: 'lucide:mouse-pointer-click',
-  created: 'lucide:calendar-heart'
-}
-
 const getTopics = async () => {
   const result = await $fetch(`/api/pool/topic`, {
     method: 'GET',
@@ -60,15 +55,14 @@ const isScrollAtBottom = () => {
 }
 
 watch(
-  () => [pageData.value.sortField, pageData.value.sortOrder],
+  () => [
+    pageData.value.sortField,
+    pageData.value.sortOrder,
+    pageData.value.category
+  ],
   async () => {
     pageData.value.page = 1
     isLoadingComplete.value = false
-
-    window.scrollTo({
-      top: 0
-    })
-
     useTempPoolStore().resetPageStatus()
     topics.value = await getTopics()
   }
@@ -89,8 +83,7 @@ const handleLoadTopics = async () => {
 
 onMounted(() => {
   window.scrollTo({
-    top: savedPosition.value,
-    left: 0
+    top: savedPosition.value
   })
   window.addEventListener('scroll', scrollHandler)
 })
@@ -103,17 +96,36 @@ onUnmounted(() => {
 <template>
   <div class="pool" ref="pool">
     <div class="tool" v-if="topics" id="tool">
-      <KunSelect
-        :styles="{ width: '150px' }"
-        :options="['views', 'created']"
-        :default-value="pageData.sortField"
-        i18n="pool"
-        @set="(value) => (pageData.sortField = value)"
-        position="bottom"
-      >
-        <Icon :name="iconMap[pageData.sortField]" />
-        <span>{{ $t(`pool.${pageData.sortField}`) }}</span>
-      </KunSelect>
+      <div class="sort">
+        <KunSelect
+          :styles="{ width: '100px' }"
+          :options="['created', 'views']"
+          :default-value="pageData.sortField"
+          i18n="pool"
+          @set="(value) => (pageData.sortField = value as 'views' | 'created')"
+          position="bottom"
+        >
+          <span>{{ $t(`pool.${pageData.sortField}`) }}</span>
+        </KunSelect>
+
+        <KunSelect
+          :styles="{ width: '150px' }"
+          :options="['all', 'galgame', 'technique', 'others']"
+          :default-value="pageData.category"
+          i18n="pool"
+          @set="
+            (value) =>
+              (pageData.category = value as
+                | 'all'
+                | 'galgame'
+                | 'technique'
+                | 'others')
+          "
+          position="bottom"
+        >
+          <span>{{ $t(`pool.${pageData.category}`) }}</span>
+        </KunSelect>
+      </div>
 
       <div class="order">
         <span
@@ -179,6 +191,10 @@ onUnmounted(() => {
   justify-content: space-between;
   align-items: center;
   z-index: 17;
+
+  .sort {
+    display: flex;
+  }
 
   &::before {
     content: '';

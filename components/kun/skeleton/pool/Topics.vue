@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const count = 10
+const count = 24
 </script>
 
 <template>
@@ -38,7 +38,7 @@ ul {
     );
     border-radius: 3px;
     width: 100%;
-    height: 10px;
+    height: 16px;
     list-style: none;
     background-size: 400% 100%;
     margin-top: 10px;
@@ -48,7 +48,7 @@ ul {
     &:first-child {
       margin-top: 0;
       width: 50%;
-      height: 20px;
+      height: 30px;
     }
 
     &:last-child {
