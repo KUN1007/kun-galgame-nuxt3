@@ -27,6 +27,8 @@ const isShowHelp = computed(() => props.showHelp ?? false)
 .kun-header {
   margin-bottom: 17px;
   font-weight: bold;
+  display: flex;
+  align-items: center;
 
   &::before {
     content: '#';

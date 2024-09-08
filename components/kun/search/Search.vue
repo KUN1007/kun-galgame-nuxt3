@@ -6,6 +6,7 @@ const { search, isShowSearch } = storeToRefs(useTempHomeStore())
 
 const topics = ref<SearchResult[]>([])
 const container = ref<HTMLElement>()
+const isLoading = ref(false)
 
 const typeItems = [
   {
@@ -19,10 +20,12 @@ const typeItems = [
 ]
 
 const searchTopics = async () => {
+  isLoading.value = true
   const result = await $fetch('/api/home/search', {
     query: { ...search.value, language: locale.value },
     ...kungalgameResponseHandler
   })
+  isLoading.value = false
   return result
 }
 
@@ -111,8 +114,15 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
           <KunSearchResult :topics="topics" v-if="topics.length" />
 
-          <span class="empty" v-if="!topics.length && search.keywords">
+          <span
+            class="empty"
+            v-if="!topics.length && search.keywords && !isLoading"
+          >
             {{ $t('home.header.emptyResult') }}
+          </span>
+
+          <span class="loading" v-if="isLoading">
+            {{ $t('home.loading') }}
           </span>
         </div>
       </div>
@@ -160,8 +170,15 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 .empty {
   display: flex;
   justify-content: center;
-  color: var(--kungalgame-blue-2);
+  color: var(--kungalgame-font-color-1);
   font-style: oblique;
+  margin-top: 20px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  color: var(--kungalgame-blue-2);
   margin-top: 20px;
 }
 

@@ -5,10 +5,13 @@ export const usePersistKUNGalgameHomeStore = defineStore({
   id: 'KUNGalgameHome',
   persist: true,
   state: (): HomeStorePersist => ({
-    isActiveHomeAside: false,
+    searchHistory: [],
 
-    typeToGet: 'time',
-
-    searchHistory: []
+    fold: {
+      updates: true,
+      topics: true,
+      galgames: true,
+      resources: true
+    }
   })
 })

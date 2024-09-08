@@ -100,6 +100,11 @@
       "emptyResult": "什么也没有搜索到。。。"
     },
     "updates": "最新动态",
+    "topics": "最新话题",
+    "galgames": "最新 Galgame",
+    "resources": "最新 Galgame 资源",
+    "foldSection": "折叠板块",
+    "expandSection": "展开板块",
     "load": "加载更多",
     "loading": "少女祈祷中...",
     "fold": "折叠为初始状态"

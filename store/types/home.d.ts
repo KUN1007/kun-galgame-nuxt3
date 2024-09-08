@@ -1,5 +1,3 @@
-import type { HomeTopic, TypeToGet } from '~/types/api/home'
-
 interface HomeSearchTemp {
   keywords: string
   type: 'topic' | 'galgame'
@@ -13,17 +11,17 @@ interface HomeSearchTemp {
 
 export interface HomeStoreTemp {
   search: HomeSearchTemp
-  topics: HomeTopic[]
-
-  savedPosition: number
-  page: number
 
   isShowSearch: boolean
 }
 
 export interface HomeStorePersist {
-  isActiveHomeAside: boolean
-
-  typeToGet: TypeToGet
   searchHistory: string[]
+
+  fold: {
+    updates: boolean
+    topics: boolean
+    galgames: boolean
+    resources: boolean
+  }
 }

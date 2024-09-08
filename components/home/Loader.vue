@@ -8,13 +8,13 @@ const props = defineProps<{
 
 <template>
   <KunDivider margin="17px" padding="0 17px">
+    <slot />
     <span v-if="!props.pending" @click="pageNumber++" class="divider">
       {{ $t('home.load') }}
     </span>
     <span v-if="props.pending">
       {{ $t('home.loading') }}
     </span>
-    <slot />
   </KunDivider>
 </template>
 

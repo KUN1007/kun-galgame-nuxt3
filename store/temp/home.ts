@@ -15,10 +15,6 @@ export const useTempHomeStore = defineStore({
       isLoading: true
     },
 
-    topics: [],
-    savedPosition: 0,
-    page: 1,
-
     isShowSearch: false
   }),
   getters: {},
