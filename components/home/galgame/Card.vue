@@ -6,6 +6,7 @@ const { locale } = useI18n()
 
 const galgame = defineProps<HomeGalgame>()
 
+// TODO:
 const handleImageError = (event: Event) => {
   const target = event.target as HTMLImageElement
   target.src = 'https://image.kungal.com/avatar/user_552/avatar-100.webp'
@@ -35,7 +36,6 @@ const handleImageError = (event: Event) => {
           v-for="(uid, index) in galgame.contributors"
           :key="index"
           :src="`https://image.kungal.com/avatar/user_${uid}/avatar-100.webp`"
-          @error="handleImageError"
           alt="Moe loli galgamer"
           loading="lazy"
         />
@@ -104,6 +104,7 @@ const handleImageError = (event: Event) => {
 
     img {
       border-radius: 50%;
+      overflow: hidden;
       display: inline-block;
     }
 
