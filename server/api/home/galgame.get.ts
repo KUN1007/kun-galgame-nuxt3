@@ -1,3 +1,4 @@
+import UserModel from '~/server/models/user'
 import GalgameModel from '~/server/models/galgame'
 import type { HomeGalgame } from '~/types/api/home'
 
@@ -10,15 +11,30 @@ const getHomeGalgames = async (page: number, limit: number) => {
     .limit(limit)
     .lean()
 
-  const data: HomeGalgame[] = galgames.map((galgame) => ({
-    gid: galgame.gid,
-    name: galgame.name,
-    time: galgame.time,
-    views: galgame.views,
-    contributors: galgame.contributor,
-    languages: galgame.language,
-    platforms: galgame.platform
-  }))
+  const data: HomeGalgame[] = await Promise.all(
+    galgames.map(async (galgame) => {
+      const contributors = await Promise.all(
+        galgame.contributor.map(async (uid: number) => {
+          const user = await UserModel.findOne({ uid }).lean()
+          return {
+            uid,
+            name: user?.name || '',
+            avatar: user?.avatar || ''
+          }
+        })
+      )
+
+      return {
+        gid: galgame.gid,
+        name: galgame.name,
+        time: galgame.time,
+        views: galgame.views,
+        contributors,
+        languages: galgame.language,
+        platforms: galgame.platform
+      }
+    })
+  )
 
   return data
 }

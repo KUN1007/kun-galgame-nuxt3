@@ -5,12 +5,6 @@ import type { HomeGalgame } from '~/types/api/home'
 const { locale } = useI18n()
 
 const galgame = defineProps<HomeGalgame>()
-
-// TODO:
-const handleImageError = (event: Event) => {
-  const target = event.target as HTMLImageElement
-  target.src = 'https://image.kungal.com/avatar/user_552/avatar-100.webp'
-}
 </script>
 
 <template>
@@ -30,14 +24,11 @@ const handleImageError = (event: Event) => {
 
     <div class="info">
       <div class="contributors">
-        <img
-          height="30"
-          width="30"
-          v-for="(uid, index) in galgame.contributors"
+        <KunAvatar
+          v-for="(user, index) in galgame.contributors"
           :key="index"
-          :src="`https://image.kungal.com/avatar/user_${uid}/avatar-100.webp`"
-          alt="Moe loli galgamer"
-          loading="lazy"
+          :user="user"
+          size="30px"
         />
 
         <span class="views">

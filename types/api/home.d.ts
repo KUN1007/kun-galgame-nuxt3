@@ -59,7 +59,7 @@ export interface HomeGalgame {
   name: KunLanguage
   time: number
   views: number
-  contributors: number[]
+  contributors: KunUser[]
   languages: string[]
   platforms: string[]
 }
