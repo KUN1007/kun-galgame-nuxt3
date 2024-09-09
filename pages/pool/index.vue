@@ -261,7 +261,7 @@ onUnmounted(() => {
 
 @media (max-width: 700px) {
   .pool {
-    height: calc(100dvh - 65px);
+    height: calc(100dvh - 63px);
     padding: 0 5px;
   }
 

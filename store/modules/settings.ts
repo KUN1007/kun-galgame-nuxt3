@@ -11,7 +11,8 @@ export const usePersistSettingsStore = defineStore({
     showKUNGalgamePageTransparency: 77,
     showKUNGalgameFontStyle: SETTINGS_DEFAULT_FONT_FAMILY,
     showKUNGalgameBackground: 0,
-    showKUNGalgameBackgroundBlur: 0
+    showKUNGalgameBackgroundBlur: 0,
+    showKUNGalgameBackLoli: true
   }),
   actions: {
     // Set the font style, allowing users to set their own

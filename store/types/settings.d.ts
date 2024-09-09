@@ -15,6 +15,7 @@ export interface KUNGalgameSettingsStore {
   showKUNGalgameFontStyle: string
   showKUNGalgameBackground: number
   showKUNGalgameBackgroundBlur: number
+  showKUNGalgameBackLoli: boolean
 }
 
 export interface TempSettingStore {

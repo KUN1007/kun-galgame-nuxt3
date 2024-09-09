@@ -49,7 +49,9 @@
       "nonMoe": "不萌记录",
       "thanks": "感谢名单",
       "donate": "赞助我们",
-      "home": "返回主页"
+      "home": "返回主页",
+      "settings": "设置",
+      "loli": "展示萌萌的琥珀"
     },
     "settings":{
       "name": "设置面板",

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { showKUNGalgameBackLoli } = storeToRefs(usePersistSettingsStore())
 const localePath = useLocalePath()
 
 const showItemIndex = ref(1)
@@ -50,6 +51,18 @@ const handelCloseSettingsPanel = () => {
             @click="showItemIndex = 3"
           >
             <Icon name="ci:font" />
+          </span>
+
+          <span
+            v-tooltip="{
+              message: {
+                en: 'Whether to display Kohaku',
+                zh: '是否显示琥珀'
+              },
+              position: 'bottom'
+            }"
+          >
+            <KunSwitch v-model="showKUNGalgameBackLoli" />
           </span>
         </div>
 
@@ -135,6 +148,7 @@ const handelCloseSettingsPanel = () => {
 
   .menu {
     display: flex;
+    align-items: center;
     margin-bottom: 17px;
 
     span {

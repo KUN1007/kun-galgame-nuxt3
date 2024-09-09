@@ -75,4 +75,10 @@ onBeforeRouteLeave(async (_, __, next) => {
 .kun-footer {
   margin: 17px 0;
 }
+
+@media (max-width: 700px) {
+  .root {
+    height: calc(100vh - 63px);
+  }
+}
 </style>

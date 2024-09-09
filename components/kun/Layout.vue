@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const { showKUNGalgameBackground } = storeToRefs(usePersistSettingsStore())
+const { showKUNGalgameBackground, showKUNGalgameBackLoli } = storeToRefs(
+  usePersistSettingsStore()
+)
 
 const imageURL = ref('')
 
@@ -21,7 +23,12 @@ watch(
       <KunTopBar />
     </div>
     <slot />
-    <NuxtImg class="kohaku" src="/image/kohaku.webp" loading="lazy" />
+    <NuxtImg
+      v-if="showKUNGalgameBackLoli"
+      class="kohaku"
+      src="/image/kohaku.webp"
+      loading="lazy"
+    />
   </div>
 </template>
 

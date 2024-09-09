@@ -6,6 +6,7 @@ import type { Hamburger } from './hamburgerItem'
 const localePath = useLocalePath()
 
 const { showKUNGalgameHamburger } = storeToRefs(useTempSettingStore())
+const { showKUNGalgameBackLoli } = storeToRefs(usePersistSettingsStore())
 
 const startX = ref(0)
 const startY = ref(0)
@@ -120,14 +121,32 @@ const handleShowMore = () => {
 
           <KunSettingPanelComponentsReset v-if="isShowSettings" />
 
-          <span class="more" :class="isShowSettings ? 'active' : ''">
-            <Icon @click="handleShowMore" name="lucide:chevron-down" />
+          <div class="loli" v-if="isShowSettings">
+            <span>{{ $t('header.hamburger.loli') }}</span>
+            <KunSwitch v-model="showKUNGalgameBackLoli" />
+          </div>
+
+          <span class="more" @click="handleShowMore">
+            <span>{{ $t('header.hamburger.settings') }}</span>
+            <span :class="isShowSettings ? 'active' : ''">
+              <Icon name="lucide:chevron-down" />
+            </span>
           </span>
         </div>
 
         <div class="links">
+          <a
+            aria-label="KUN Visual Novel Open Source GitHub Repository | 鲲 Galgame 论坛开源 GitHub 仓库"
+            href="https://github.com/KUN1007/kun-galgame-nuxt3"
+            target="_blank"
+          >
+            <span><Icon name="lucide:github" /></span>
+            <span>GitHub</span>
+          </a>
+
           <NuxtLinkLocale to="/rss">
-            <Icon name="lucide:rss" />
+            <span><Icon name="lucide:rss" /></span>
+            <span>RSS</span>
           </NuxtLinkLocale>
 
           <a
@@ -135,15 +154,8 @@ const handleShowMore = () => {
             href="https://t.me/kungalgame"
             target="_blank"
           >
-            <Icon name="ph:telegram-logo" />
-          </a>
-
-          <a
-            aria-label="KUN Visual Novel Open Source GitHub Repository | 鲲 Galgame 论坛开源 GitHub 仓库"
-            href="https://github.com/KUN1007/kun-galgame-nuxt3"
-            target="_blank"
-          >
-            <Icon name="lucide:github" />
+            <span><Icon name="ph:telegram-logo" /></span>
+            <span>Telegram</span>
           </a>
         </div>
       </div>
@@ -223,10 +235,28 @@ const handleShowMore = () => {
   }
 }
 
+.loli {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
 .more {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 10px 0;
+
+  span {
+    display: flex;
+
+    &:first-child {
+      font-size: small;
+      margin-right: 7px;
+      color: var(--kungalgame-font-color-1);
+    }
+  }
 }
 
 .links {
@@ -245,8 +275,13 @@ const handleShowMore = () => {
   }
 
   span {
-    margin-bottom: 20px;
-    cursor: pointer;
+    &:first-child {
+      cursor: pointer;
+    }
+
+    &:last-child {
+      font-size: x-small;
+    }
   }
 }
 

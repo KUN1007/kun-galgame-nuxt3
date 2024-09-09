@@ -49,7 +49,9 @@
       "nonMoe": "Non-moe",
       "thanks": "Thanks List",
       "donate": "Donate Us",
-      "home": "Back Home"
+      "home": "Back Home",
+      "settings": "Settings",
+      "loli": "Show Moe Kohaku"
     },
     "settings":{
       "name": "Settings",
