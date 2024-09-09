@@ -21,6 +21,7 @@ watch(
       <KunTopBar />
     </div>
     <slot />
+    <NuxtImg class="kohaku" src="/image/kohaku.webp" loading="lazy" />
   </div>
 </template>
 
@@ -33,6 +34,15 @@ watch(
   background-color: var(--kungalgame-white);
   overflow: hidden;
   background-color: var(--kungalgame-blue-0);
+}
+
+.kohaku {
+  position: fixed;
+  pointer-events: none;
+  bottom: 0;
+  right: 0;
+  opacity: 0.17;
+  z-index: 0;
 }
 
 .top-bar {
