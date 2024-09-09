@@ -120,6 +120,8 @@ watch(
   position: absolute;
   margin-top: 10px;
   margin-left: 20px;
+  pointer-events: none;
+  user-select: none;
 
   img {
     height: 100px;

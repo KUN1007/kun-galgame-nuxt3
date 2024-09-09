@@ -38,6 +38,7 @@ watch(
 
 .kohaku {
   position: fixed;
+  user-select: none;
   pointer-events: none;
   bottom: 0;
   right: 0;

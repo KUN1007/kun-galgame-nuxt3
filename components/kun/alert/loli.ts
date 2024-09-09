@@ -1,7 +1,7 @@
 import { randomNum } from '~/utils/random'
 const getAssetsFile = (name: string) => `/alert/${name}.webp`
 
-const number = randomNum(0, 2)
+const number = randomNum(0, 3)
 
 let loli = ''
 let name = ''
@@ -13,8 +13,11 @@ if (number === 0) {
 } else if (number === 1) {
   name = 'こじかひわ'
   loli = getAssetsFile(name)
-} else {
+} else if (number === 2) {
   name = '雪々'
+  loli = getAssetsFile(name)
+} else {
+  name = '琥珀'
   loli = getAssetsFile(name)
 }
 
