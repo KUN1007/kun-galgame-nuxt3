@@ -27,7 +27,8 @@ const handleFileChange = async (event: Event) => {
       @change="handleFileChange($event)"
     />
     <span class="custom" @click="handleCustomBackground">
-      {{ $t('header.settings.custom') }}
+      <span class="custom-pc">{{ $t('header.settings.custom') }}</span>
+      <span class="custom-mobile">{{ $t('header.hamburger.background') }}</span>
     </span>
   </div>
 </template>
@@ -37,7 +38,7 @@ const handleFileChange = async (event: Event) => {
   display: flex;
   flex-direction: column;
 
-  span {
+  .custom {
     cursor: pointer;
     padding: 5px 10px;
     border-radius: 10px;
@@ -51,6 +52,20 @@ const handleFileChange = async (event: Event) => {
       color: var(--kungalgame-blue-5);
       background-color: var(--kungalgame-trans-blue-0);
     }
+  }
+}
+
+.custom-mobile {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .custom-pc {
+    display: none;
+  }
+
+  .custom-mobile {
+    display: block;
   }
 }
 </style>
