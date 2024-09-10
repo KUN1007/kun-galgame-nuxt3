@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import 'animate.css'
 
+const router = useRouter()
+const routeName = useRouteName()
+
 const { showKUNGalgameHamburger, showKUNGalgameMessageBox, messageStatus } =
   storeToRefs(useTempSettingStore())
 
@@ -25,6 +28,10 @@ onMounted(async () => {
 
 <template>
   <div class="nav-top">
+    <div class="return" v-if="routeName !== 'index'" @click="router.back()">
+      <Icon name="lucide:arrow-left" />
+    </div>
+
     <div class="hamburger">
       <Icon
         name="lucide:menu"
@@ -51,6 +58,7 @@ onMounted(async () => {
 </template>
 
 <style lang="scss" scoped>
+.return,
 .hamburger {
   display: none;
   margin-left: 20px;
@@ -101,6 +109,7 @@ onMounted(async () => {
   .kungalgame {
     display: none;
   }
+  .return,
   .hamburger {
     display: block;
   }
