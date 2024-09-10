@@ -26,9 +26,9 @@ const handleFileChange = async (event: Event) => {
       accept=".jpg, .jpeg, .png"
       @change="handleFileChange($event)"
     />
-    <button @click="handleCustomBackground">
+    <span class="custom" @click="handleCustomBackground">
       {{ $t('header.settings.custom') }}
-    </button>
+    </span>
   </div>
 </template>
 
@@ -37,19 +37,19 @@ const handleFileChange = async (event: Event) => {
   display: flex;
   flex-direction: column;
 
-  button {
-    font-size: 15px;
+  span {
     cursor: pointer;
-    height: 30px;
-    width: 100%;
+    padding: 5px 10px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
     color: var(--kungalgame-font-color-3);
-    border: 1px solid var(--kungalgame-blue-5);
-    background-color: transparent;
-    color: var(--kungalgame-blue-5);
+    transition: all 0.2s;
+
+    @include kun-center;
 
     &:hover {
-      color: var(--kungalgame-white);
-      background-color: var(--kungalgame-blue-5);
+      color: var(--kungalgame-blue-5);
+      background-color: var(--kungalgame-trans-blue-0);
     }
   }
 }

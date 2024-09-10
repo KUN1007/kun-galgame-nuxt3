@@ -65,10 +65,9 @@
       "default": "System Default",
       "fontInput": "Input font name here",
       "background": "Background Setting",
-      "preset": "Use our preset background",
-      "custom": "Custom Background",
       "confirm": "Confirm",
-      "restore": "Restore blank background",
+      "custom": "Custom",
+      "restore": "Restore",
       "recover": "Recover all settings to default"
     },
     "user":{

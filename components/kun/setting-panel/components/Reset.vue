@@ -41,7 +41,6 @@ const handleRecover = async () => {
 .reset {
   font-size: 15px;
   cursor: pointer;
-  margin-top: 20px;
   color: var(--kungalgame-red-5);
   border: 1px solid var(--kungalgame-red-5);
   background-color: transparent;

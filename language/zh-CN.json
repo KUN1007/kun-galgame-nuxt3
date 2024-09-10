@@ -65,10 +65,9 @@
       "default": "系统默认",
       "fontInput": "请在这里输入字体的名字",
       "background": "背景设置",
-      "preset": "点击使用我们预设的背景",
-      "custom": "自定义背景",
+      "custom": "自定义",
       "confirm": "确定",
-      "restore": "恢复空白背景",
+      "restore": "重置",
       "recover": "恢复所有设置为默认"
     },
     "user":{

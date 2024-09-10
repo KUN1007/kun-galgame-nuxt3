@@ -1,5 +1,29 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import { backgroundImages } from './backgroundImage'
+
+const itemsPerPage = 15
+const totalPages = Math.ceil(backgroundImages.length / itemsPerPage)
+
+const currentPage = ref(1)
+
+const paginatedImages = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage
+  const end = start + itemsPerPage
+  return backgroundImages.slice(start, end)
+})
+
+const nextPage = () => {
+  if (currentPage.value < totalPages) {
+    currentPage.value++
+  }
+}
+
+const prevPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--
+  }
+}
 
 const restoreBackground = async () => {
   await usePersistSettingsStore().setSystemBackground(0)
@@ -11,17 +35,35 @@ const handleChangeImage = async (index: number) => {
 </script>
 
 <template>
-  <div class="kungalgame-background">
+  <div class="background">
     <div class="bg-settings">
       {{ $t('header.settings.background') }}
     </div>
 
-    <ul class="kungalgame-background-container">
-      <span>{{ $t('header.settings.preset') }}</span>
+    <ul class="container">
+      <li class="options">
+        <div>
+          <span class="prev" @click="prevPage">
+            <Icon name="lucide:chevron-left" />
+          </span>
+        </div>
+        <div>
+          <span class="next" @click="nextPage">
+            <Icon name="lucide:chevron-right" />
+          </span>
+        </div>
+        <div>
+          <span @click="restoreBackground">
+            {{ $t('header.settings.restore') }}
+          </span>
+        </div>
+        <KunSettingPanelComponentsCustomBackground />
+      </li>
+
       <li>
         <ul class="kungalgame-restore-bg">
           <li
-            v-for="kun in backgroundImages"
+            v-for="kun in paginatedImages"
             :key="kun.index"
             v-tooltip="{ message: kun.message, position: 'bottom' }"
           >
@@ -29,24 +71,17 @@ const handleChangeImage = async (index: number) => {
               v-if="kun"
               :src="`bg/bg${kun.index}-m.webp`"
               @click="handleChangeImage(kun.index)"
+              loading="lazy"
             />
           </li>
         </ul>
-      </li>
-
-      <li>
-        <KunSettingPanelComponentsCustomBackground />
-
-        <button class="restore-bg" @click="restoreBackground">
-          {{ $t('header.settings.restore') }}
-        </button>
       </li>
     </ul>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.kungalgame-background-container {
+.container {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -57,11 +92,27 @@ const handleChangeImage = async (index: number) => {
   font-weight: normal;
   color: var(--kungalgame-font-color-3);
 
-  span {
-    height: 30px;
+  .options {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    margin-bottom: 5px;
+
+    span {
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      color: var(--kungalgame-font-color-3);
+      transition: all 0.2s;
+
+      @include kun-center;
+
+      &:hover {
+        color: var(--kungalgame-blue-5);
+        background-color: var(--kungalgame-trans-blue-0);
+      }
+    }
   }
 }
 
@@ -75,7 +126,7 @@ const handleChangeImage = async (index: number) => {
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(3, 80px);
-  grid-template-rows: repeat(3, 50px);
+  grid-template-rows: repeat(5, 50px);
   position: relative;
   margin-bottom: 10px;
 
@@ -99,23 +150,6 @@ const handleChangeImage = async (index: number) => {
     .image-detail {
       position: absolute;
     }
-  }
-}
-
-.restore-bg {
-  font-size: 15px;
-  cursor: pointer;
-  height: 30px;
-  width: 100%;
-  margin-top: 10px;
-  color: var(--kungalgame-font-color-3);
-  border: 1px solid var(--kungalgame-blue-5);
-  background-color: transparent;
-  color: var(--kungalgame-blue-5);
-
-  &:hover {
-    color: var(--kungalgame-white);
-    background-color: var(--kungalgame-blue-5);
   }
 }
 </style>

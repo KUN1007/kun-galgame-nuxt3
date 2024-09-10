@@ -54,6 +54,7 @@ const handelCloseSettingsPanel = () => {
           </span>
 
           <span
+            class="loli"
             v-tooltip="{
               message: {
                 en: 'Whether to display Kohaku',
@@ -158,6 +159,10 @@ const handelCloseSettingsPanel = () => {
       font-size: 20px;
 
       @include kun-center;
+    }
+
+    .loli {
+      margin-left: auto;
     }
 
     .active {
