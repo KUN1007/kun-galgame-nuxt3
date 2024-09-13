@@ -11,7 +11,8 @@ export const usePersistKUNGalgameHomeStore = defineStore({
       updates: true,
       topics: true,
       galgames: true,
-      resources: true
+      resources: true,
+      sitemaps: true
     }
   })
 })

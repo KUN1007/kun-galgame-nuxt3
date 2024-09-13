@@ -54,12 +54,17 @@ const { fold } = storeToRefs(usePersistKUNGalgameHomeStore())
   </KunHeader>
   <HomeResourceContainer v-if="fold.resources" />
 
-  <!-- <KunHeader :size="2">
+  <KunHeader :size="2">
     <template #header>
-      <span>{{ $t('home.sitemaps') }}</span>
+      <div class="header">
+        <span>{{ $t('home.sitemaps') }}</span>
+        <span class="suffix" @click="fold.sitemaps = !fold.sitemaps">
+          {{ $t(`home.${fold.sitemaps ? 'foldSection' : 'expandSection'}`) }}
+        </span>
+      </div>
     </template>
   </KunHeader>
-  <HomeSitemap /> -->
+  <HomeSitemap v-if="fold.sitemaps" />
 
   <HomeFooter />
 </template>

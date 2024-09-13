@@ -3,6 +3,7 @@ import 'animate.css'
 
 const router = useRouter()
 const routeName = useRouteName()
+const localePath = useLocalePath()
 
 const { showKUNGalgameHamburger, showKUNGalgameMessageBox, messageStatus } =
   storeToRefs(useTempSettingStore())
@@ -24,11 +25,19 @@ onMounted(async () => {
     messageStatus.value = 'new'
   }
 })
+
+const handleRouterBack = () => {
+  if (window.history.state.back) {
+    router.back()
+  } else {
+    navigateTo(localePath('/'))
+  }
+}
 </script>
 
 <template>
   <div class="nav-top">
-    <div class="return" v-if="routeName !== 'index'" @click="router.back()">
+    <div class="return" v-if="routeName !== 'index'" @click="handleRouterBack">
       <Icon name="lucide:arrow-left" />
     </div>
 

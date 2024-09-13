@@ -23,5 +23,6 @@ export interface HomeStorePersist {
     topics: boolean
     galgames: boolean
     resources: boolean
+    sitemaps: boolean
   }
 }
