@@ -135,6 +135,13 @@ pre {
 
     p {
       margin: 17px 0;
+
+      code {
+        margin: 0 5px;
+        background-color: var(--kungalgame-trans-blue-1);
+        padding: 2px 7px;
+        border-radius: 7px;
+      }
     }
 
     blockquote {
@@ -144,7 +151,6 @@ pre {
       border-radius: 10px;
       background-color: var(--kungalgame-trans-blue-0);
       color: var(--kungalgame-font-color-3);
-      font-style: oblique;
       line-height: 2rem;
 
       p {
@@ -168,13 +174,10 @@ pre {
 
     a {
       cursor: pointer;
-      font-style: oblique;
       font-weight: bold;
       color: var(--kungalgame-blue-5);
-
-      &:hover {
-        text-decoration: underline;
-      }
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     table {

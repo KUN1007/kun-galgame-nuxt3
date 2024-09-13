@@ -224,6 +224,13 @@ const editorInfo = useEditor((root) =>
 
     p {
       margin: 17px 0;
+
+      code {
+        background-color: var(--kungalgame-trans-blue-1);
+        padding: 2px 7px;
+        font-size: 13px;
+        border-radius: 7px;
+      }
     }
 
     blockquote {
@@ -257,13 +264,10 @@ const editorInfo = useEditor((root) =>
 
     a {
       cursor: pointer;
-      font-style: oblique;
       font-weight: bold;
       color: var(--kungalgame-blue-5);
-
-      &:hover {
-        text-decoration: underline;
-      }
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     table {
