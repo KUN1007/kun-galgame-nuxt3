@@ -1,9 +1,20 @@
 <script setup lang="ts">
-import 'animate.css'
+const localePath = useLocalePath()
 
 const { name, avatarMin } = storeToRefs(usePersistUserStore())
 const { showKUNGalgamePanel, showKUNGalgameUserPanel, messageStatus } =
   storeToRefs(useTempSettingStore())
+
+const onKeydown = (event: KeyboardEvent) => {
+  if (event.ctrlKey && event.key.toLowerCase() === 'k') {
+    event.preventDefault()
+    navigateTo(localePath('/search'))
+  }
+}
+
+onMounted(() => window.addEventListener('keydown', onKeydown))
+
+onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 </script>
 
 <template>

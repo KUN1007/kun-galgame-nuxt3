@@ -1,26 +1,26 @@
 <script setup lang="ts">
-const { search } = storeToRefs(useTempHomeStore())
+const { keywords } = storeToRefs(useTempSearchStore())
 
 const input = ref<HTMLElement | null>(null)
 const inputValue = ref('')
 
 onBeforeMount(() => {
-  search.value.keywords = ''
+  keywords.value = ''
 })
 
 const debouncedSearch = debounce((inputValue: string) => {
   if (inputValue.trim()) {
-    search.value.keywords = inputValue
+    keywords.value = inputValue
   } else {
-    search.value.keywords = ''
+    keywords.value = ''
   }
 }, 300)
 
 watch(
-  () => search.value.keywords,
+  () => keywords.value,
   () => {
     if (!inputValue.value) {
-      inputValue.value = search.value.keywords
+      inputValue.value = keywords.value
     }
   }
 )

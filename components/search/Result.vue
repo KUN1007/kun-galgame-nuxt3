@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { SearchResult } from '~/types/api/home'
+import type { SearchResult } from '~/types/api/search'
 
 const localePath = useLocalePath()
-const { searchHistory } = storeToRefs(usePersistKUNGalgameHomeStore())
-const { search, isShowSearch } = storeToRefs(useTempHomeStore())
+const { searchHistory } = storeToRefs(usePersistKUNGalgameSearchStore())
+const { keywords } = storeToRefs(useTempSearchStore())
 
 const props = defineProps<{
   topics: SearchResult[]
@@ -12,16 +12,15 @@ const props = defineProps<{
 const topics = computed(() => props.topics)
 
 const handleClickTopic = (tid: number) => {
-  if (search.value.type === 'galgame') {
-    navigateTo(localePath(`/galgame/${-tid}`))
-  } else {
-    navigateTo(localePath(`/topic/${tid}`))
-  }
+  // if (search.value.type === 'galgame') {
+  //   navigateTo(localePath(`/galgame/${-tid}`))
+  // } else {
+  //   navigateTo(localePath(`/topic/${tid}`))
+  // }
 
-  if (!searchHistory.value.includes(search.value.keywords)) {
-    searchHistory.value.push(search.value.keywords)
+  if (!searchHistory.value.includes(keywords.value)) {
+    searchHistory.value.push(keywords.value)
   }
-  isShowSearch.value = false
 }
 </script>
 

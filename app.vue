@@ -74,9 +74,6 @@ onMounted(() => {
   <!-- Global capture component -->
   <KunCapture />
 
-  <!-- Global search component -->
-  <KunSearch />
-
   <!-- ReplyPanel -->
   <LazyTopicReplyPanel />
 

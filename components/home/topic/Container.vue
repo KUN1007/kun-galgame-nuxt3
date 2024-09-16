@@ -9,7 +9,8 @@ const pageData = reactive({
 
 const { data, pending } = await useFetch(`/api/home/topic`, {
   method: 'GET',
-  query: pageData
+  query: pageData,
+  ...kungalgameResponseHandler
 })
 topicData.value = data.value
 

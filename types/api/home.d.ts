@@ -10,22 +10,6 @@ export interface HomeMessage {
   time: number
 }
 
-export interface SearchResult {
-  tid: number
-  title: string
-  content: string
-}
-
-export interface SearchRequestData {
-  keywords: string
-  type: 'topic' | 'galgame'
-  language: Language
-  page: string
-  limit: string
-  sortField: SortField
-  sortOrder: KunOrder
-}
-
 export interface HomeUserStatus {
   moemoepoints: number
   isCheckIn: boolean

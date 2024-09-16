@@ -1,16 +1,8 @@
-/* Search login will be refactor next year, temp file */
-
 import TopicModel from '~/server/models/topic'
 import GalgameModel from '~/server/models/galgame'
-import type { SortField, SearchRequestData } from '~/types/api/home'
+import type { SearchRequestData } from '~/types/api/search'
 
-const searchTopic = async (
-  keywords: string[],
-  skip: number,
-  limit: number,
-  sortField: SortField,
-  sortOrder: KunOrder
-) => {
+const searchTopic = async (keywords: string[], skip: number, limit: number) => {
   const searchQuery = {
     $and: [
       { status: { $ne: 1 } },
@@ -25,12 +17,8 @@ const searchTopic = async (
     ]
   }
 
-  const sortOptions: Record<string, 'asc' | 'desc'> = {
-    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
-  }
-
   const topics = await TopicModel.find(searchQuery)
-    .sort(sortOptions)
+    .sort({ time: -1 })
     .skip(skip)
     .limit(limit)
     .lean()
@@ -47,10 +35,7 @@ const searchTopic = async (
 const searchGalgame = async (
   keywords: string[],
   skip: number,
-  limit: number,
-  language: Language,
-  sortField: SortField,
-  sortOrder: KunOrder
+  limit: number
 ) => {
   const searchQuery = {
     $and: [
@@ -76,20 +61,19 @@ const searchGalgame = async (
     ]
   }
 
-  const sortOptions: Record<string, 'asc' | 'desc'> = {
-    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
-  }
-
   const data = await GalgameModel.find(searchQuery)
-    .sort(sortOptions)
+    .sort({ time: -1 })
     .skip(skip)
     .limit(limit)
     .lean()
 
   const galgames = data.map((galgame) => ({
     tid: -galgame.gid,
-    title: galgame.name[language],
-    content: galgame.introduction[language].slice(0, 107)
+    title: galgame.name,
+    content: Object.entries(galgame.introduction).map(([key, value]) => [
+      key,
+      value.slice(0, 107)
+    ])
   }))
 
   return galgames
@@ -98,11 +82,8 @@ const searchGalgame = async (
 const search = async (
   keywords: string,
   type: 'topic' | 'galgame',
-  language: Language,
   page: number,
-  limit: number,
-  sortField: SortField,
-  sortOrder: KunOrder
+  limit: number
 ) => {
   const skip = (page - 1) * limit
   const keywordsArray: string[] = keywords
@@ -116,37 +97,17 @@ const search = async (
   )
 
   if (type === 'topic') {
-    const result = await searchTopic(
-      escapedKeywords,
-      skip,
-      limit,
-      sortField,
-      sortOrder
-    )
+    const result = await searchTopic(escapedKeywords, skip, limit)
     return result
   } else {
-    const result = await searchGalgame(
-      escapedKeywords,
-      skip,
-      limit,
-      language,
-      sortField,
-      sortOrder
-    )
+    const result = await searchGalgame(escapedKeywords, skip, limit)
     return result
   }
 }
 
 export default defineEventHandler(async (event) => {
-  const {
-    keywords,
-    type,
-    language,
-    page,
-    limit,
-    sortField,
-    sortOrder
-  }: SearchRequestData = await getQuery(event)
+  const { keywords, type, page, limit }: SearchRequestData =
+    await getQuery(event)
 
   if (limit !== '7') {
     return kunError(event, 10209)
@@ -155,11 +116,8 @@ export default defineEventHandler(async (event) => {
   const result = await search(
     keywords.trim().slice(0, 40),
     type,
-    language,
     parseInt(page),
-    parseInt(limit),
-    sortField,
-    sortOrder
+    parseInt(limit)
   )
 
   return result

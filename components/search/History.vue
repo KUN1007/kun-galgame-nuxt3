@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const { searchHistory } = storeToRefs(usePersistKUNGalgameHomeStore())
-const { search } = storeToRefs(useTempHomeStore())
+const { searchHistory } = storeToRefs(usePersistKUNGalgameSearchStore())
+const { keywords } = storeToRefs(useTempSearchStore())
 
 const handleClickHistory = (index: number) => {
-  search.value.keywords = searchHistory.value[index]
+  keywords.value = searchHistory.value[index]
 }
 
 const clearSearchHistory = () => {

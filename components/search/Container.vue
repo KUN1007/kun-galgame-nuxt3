@@ -1,28 +1,33 @@
 <script setup lang="ts">
-import type { SearchResult } from '~/types/api/home'
+import type { SearchResult } from '~/types/api/search'
 
-const { locale } = useI18n()
-const { search, isShowSearch } = storeToRefs(useTempHomeStore())
+const { keywords } = storeToRefs(useTempSearchStore())
 
-const topics = ref<SearchResult[]>([])
+const results = ref<SearchResult[]>([])
 const container = ref<HTMLElement>()
 const isLoading = ref(false)
+const pageData = reactive({
+  type: 'galgame',
+  page: '1',
+  limit: '10'
+})
 
 const typeItems = [
   {
-    i18n: 'home.header.topicSearch',
+    i18n: 'search.topic',
     value: 'topic'
   },
   {
-    i18n: 'home.header.galgameSearch',
+    i18n: 'search.galgame',
     value: 'galgame'
   }
 ]
 
-const searchTopics = async () => {
+const searchQuery = async () => {
   isLoading.value = true
-  const result = await $fetch('/api/home/search', {
-    query: { ...search.value, language: locale.value },
+  const result = await $fetch('/api/search', {
+    method: 'GET',
+    query: pageData,
     ...kungalgameResponseHandler
   })
   isLoading.value = false
@@ -30,71 +35,16 @@ const searchTopics = async () => {
 }
 
 watch(
-  () => search.value.keywords,
+  () => keywords.value,
   async () => {
-    if (search.value.keywords) {
-      topics.value = await searchTopics()
+    if (keywords.value) {
+      results.value = await searchQuery()
     } else {
-      topics.value = []
-      useTempHomeStore().resetSearchStatus()
+      results.value = []
+      isLoading.value = false
     }
   }
 )
-
-watch(
-  () => container.value,
-  () => {
-    const element = container.value
-    if (element) {
-      element.addEventListener('scroll', scrollHandler)
-    }
-  }
-)
-
-const scrollHandler = async () => {
-  if (isScrollAtBottom() && search.value.isLoading && search.value.keywords) {
-    search.value.page++
-
-    const lazyLoadTopics = await searchTopics()
-
-    if (!lazyLoadTopics.length) {
-      search.value.isLoading = false
-    }
-
-    topics.value = [...topics.value, ...lazyLoadTopics]
-  }
-}
-
-const isScrollAtBottom = () => {
-  if (container.value) {
-    const scrollHeight = container.value.scrollHeight
-    const scrollTop = container.value.scrollTop
-    const clientHeight = container.value.clientHeight
-
-    const errorMargin = 1.007
-    return Math.abs(scrollHeight - scrollTop - clientHeight) < errorMargin
-  }
-}
-
-const onKeydown = (event: KeyboardEvent) => {
-  if (event.ctrlKey && event.key.toLowerCase() === 'k') {
-    event.preventDefault()
-    isShowSearch.value = true
-  } else if (event.key === 'Escape') {
-    isShowSearch.value = false
-  }
-}
-
-onMounted(() => window.addEventListener('keydown', onKeydown))
-
-onBeforeUnmount(() => {
-  const element = container.value
-  if (element) {
-    element.removeEventListener('scroll', scrollHandler)
-  }
-})
-
-onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 </script>
 
 <template>
@@ -107,17 +57,17 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   <div ref="container" class="container" @mousedown.stop>
     <KunNav
       :items="typeItems"
-      :default-value="search.type"
-      @set="(value) => (search.type = value as 'topic' | 'galgame')"
+      :default-value="pageData.type"
+      @set="(value) => (pageData.type = value)"
     />
 
     <SearchBox />
 
-    <SearchHistory v-if="!search.keywords" />
+    <SearchHistory v-if="!keywords" />
 
-    <SearchResult :topics="topics" v-if="topics.length" />
+    <SearchResult :topics="results" v-if="results.length" />
 
-    <span class="empty" v-if="!topics.length && search.keywords && !isLoading">
+    <span class="empty" v-if="!results.length && keywords && !isLoading">
       {{ $t('search.emptyResult') }}
     </span>
 
