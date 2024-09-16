@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import 'animate.css'
 
-const { isShowSearch } = storeToRefs(useTempHomeStore())
 const { name, avatarMin } = storeToRefs(usePersistUserStore())
 const { showKUNGalgamePanel, showKUNGalgameUserPanel, messageStatus } =
   storeToRefs(useTempSettingStore())
@@ -9,16 +8,16 @@ const { showKUNGalgamePanel, showKUNGalgameUserPanel, messageStatus } =
 
 <template>
   <div class="kungalgamer-info">
-    <span
+    <NuxtLinkLocale
       class="search"
       v-tooltip="{
         message: { en: 'Press Ctrl + K to search', zh: '按下 Ctrl + K 以搜索' },
         position: 'bottom'
       }"
-      @click="isShowSearch = true"
+      to="/search"
     >
       <Icon name="lucide:search" />
-    </span>
+    </NuxtLinkLocale>
 
     <span class="settings" @click="showKUNGalgamePanel = !showKUNGalgamePanel">
       <Icon name="uiw:setting-o" />

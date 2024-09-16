@@ -724,6 +724,17 @@
       "zh-cn": "Chinese"
     }
   },
+  "search": {
+    "name": "Search",
+    "topic": "Topics",
+    "galgame": "VNs",
+    "placeholder": "Input to Auto Search",
+    "history": "Search History",
+    "clear": "Clear all history",
+    "emptyHistory": "This loli hasn't searched for anything",
+    "emptyResult": "No results found...",
+    "loading": "少女祈祷中..."
+  },
   "footer":{
     "copyright": "Copyright © 2024 KUN Visual Novel",
     "openSource": "GitHub Open Source",
@@ -846,6 +857,10 @@
     },
     "friends": {
       "title": "Friend Links"
+    },
+    "search": {
+      "title": "Search",
+      "description": "Search visualnovels, visualnovel resources, topics, users, replies and comments"
     }
   },
   "ComponentAlert":{

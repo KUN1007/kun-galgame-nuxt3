@@ -723,6 +723,17 @@
       "zh-cn": "简体中文"
     }
   },
+  "search": {
+    "name": "搜索",
+    "topic": "话题",
+    "galgame": "Galgame",
+    "placeholder": "输入内容以自动搜索",
+    "history": "搜索历史",
+    "clear": "清除所有历史",
+    "emptyHistory": "这只笨萝莉什么也没搜索过",
+    "emptyResult": "什么也没有搜索到。。。",
+    "loading": "少女祈祷中..."
+  },
   "footer":{
     "copyright": "版权所有 © 2024 鲲 Galgame",
     "openSource": "GitHub 开源",
@@ -849,6 +860,10 @@
     },
     "friends": {
       "title": "友情链接"
+    },
+    "search": {
+      "title": "搜索",
+      "description": "搜索 Galgame, Galgame 资源, 话题, 用户, 回复, 评论等"
     }
   },
   "ComponentAlert":{
