@@ -5,12 +5,12 @@ import type { SearchType, SearchResult } from '~/types/api/search'
 const { keywords } = storeToRefs(useTempSearchStore())
 
 const results = ref<SearchResult[]>([])
-const container = ref<HTMLElement>()
 const isLoading = ref(false)
-const pageData = reactive<KunPagination & { type: SearchType }>({
-  type: 'topic',
-  page: '1',
-  limit: '10'
+const isLoadComplete = ref(false)
+const pageData = reactive({
+  type: 'topic' as SearchType,
+  page: 1,
+  limit: 10
 })
 
 const searchQuery = async () => {
@@ -19,6 +19,11 @@ const searchQuery = async () => {
     method: 'GET',
     query: { keywords: keywords.value, ...pageData }
   })
+
+  if (result.length < 10) {
+    isLoadComplete.value = true
+  }
+
   isLoading.value = false
   return result
 }
@@ -34,6 +39,12 @@ watch(
     }
   }
 )
+
+const handleLoadMore = async () => {
+  pageData.page++
+  const newData = await searchQuery()
+  results.value = results.value.concat(newData)
+}
 </script>
 
 <template>
@@ -43,7 +54,7 @@ watch(
     </template>
   </KunHeader>
 
-  <div ref="container" class="container" @mousedown.stop>
+  <div class="container">
     <KunNav
       :items="navItems"
       :default-value="pageData.type"
@@ -59,6 +70,23 @@ watch(
       :type="pageData.type"
       v-if="results.length"
     />
+
+    <KunDivider v-if="results.length >= 10" margin="30px" padding="0 17px">
+      <slot />
+      <span
+        class="loader"
+        v-if="!isLoading && !isLoadComplete"
+        @click="handleLoadMore"
+      >
+        {{ $t('search.load') }}
+      </span>
+      <span v-if="isLoading">
+        {{ $t('search.loading') }}
+      </span>
+      <span v-if="isLoadComplete">
+        {{ $t('search.complete') }}
+      </span>
+    </KunDivider>
 
     <span class="empty" v-if="!results.length && keywords && !isLoading">
       {{ $t('search.emptyResult') }}
@@ -76,11 +104,30 @@ watch(
   width: 100%;
   display: flex;
   flex-direction: column;
-  white-space: nowrap;
 }
 
 .kun-nav {
   margin-bottom: 17px;
+}
+
+.kun-divider {
+  span {
+    &:first-child {
+      padding-left: 17px;
+    }
+
+    &:last-child {
+      padding-right: 17px;
+    }
+  }
+
+  .loader {
+    cursor: pointer;
+
+    &:hover {
+      color: var(--kungalgame-blue-5);
+    }
+  }
 }
 
 .empty {

@@ -735,7 +735,9 @@
     "clear": "清除所有历史",
     "emptyHistory": "这只笨萝莉什么也没搜索过",
     "emptyResult": "什么也没有搜索到。。。",
-    "loading": "少女祈祷中..."
+    "load": "加载更多",
+    "loading": "少女祈祷中...",
+    "complete": "已经。。。一滴也不剩了"
   },
   "footer":{
     "copyright": "版权所有 © 2024 鲲 Galgame",

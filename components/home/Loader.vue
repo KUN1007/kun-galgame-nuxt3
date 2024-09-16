@@ -9,7 +9,7 @@ const props = defineProps<{
 <template>
   <KunDivider margin="30px" padding="0 17px">
     <slot />
-    <span v-if="!props.pending" @click="pageNumber++" class="divider">
+    <span v-if="!props.pending" @click="pageNumber++" class="loader">
       {{ $t('home.load') }}
     </span>
     <span v-if="props.pending">
@@ -29,7 +29,7 @@ span {
   }
 }
 
-.divider {
+.loader {
   cursor: pointer;
 
   &:hover {

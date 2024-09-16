@@ -736,7 +736,9 @@
     "clear": "Clear all history",
     "emptyHistory": "This loli hasn't searched for anything",
     "emptyResult": "No results found...",
-    "loading": "少女祈祷中..."
+    "load": "Load more",
+    "loading": "少女祈祷中...",
+    "complete": "Already there's nothing left..."
   },
   "footer":{
     "copyright": "Copyright © 2024 KUN Visual Novel",
