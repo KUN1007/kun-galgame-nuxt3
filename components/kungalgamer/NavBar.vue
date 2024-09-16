@@ -89,7 +89,6 @@ const handleCollapsed = (item: Nav) => {
 .nav {
   height: 100%;
   width: 130px;
-  border-radius: 0 0 0 7px;
   border-right: 1px solid var(--kungalgame-blue-5);
   flex-shrink: 0;
   overflow: scroll;

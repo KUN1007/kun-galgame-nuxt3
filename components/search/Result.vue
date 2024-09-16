@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SearchResult } from '~/types/api/search'
+import type { SearchType, SearchResult } from '~/types/api/search'
 
 const localePath = useLocalePath()
 const { searchHistory } = storeToRefs(usePersistKUNGalgameSearchStore())
@@ -7,6 +7,7 @@ const { keywords } = storeToRefs(useTempSearchStore())
 
 const props = defineProps<{
   topics: SearchResult[]
+  type: 'topic' | 'galgame' | 'user' | 'reply' | 'comment'
 }>()
 
 const topics = computed(() => props.topics)

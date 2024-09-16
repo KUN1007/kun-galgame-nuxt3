@@ -16,6 +16,12 @@ const CommentSchema = new mongoose.Schema<CommentAttributes>(
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )
 
+CommentSchema.virtual('topic', {
+  ref: 'topic',
+  localField: 'tid',
+  foreignField: 'tid'
+})
+
 CommentSchema.virtual('cuid', {
   ref: 'user',
   localField: 'c_uid',

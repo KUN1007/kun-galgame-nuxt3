@@ -1,34 +1,23 @@
 <script setup lang="ts">
-import type { SearchResult } from '~/types/api/search'
+import { navItems } from './items'
+import type { SearchType, SearchResult } from '~/types/api/search'
 
 const { keywords } = storeToRefs(useTempSearchStore())
 
 const results = ref<SearchResult[]>([])
 const container = ref<HTMLElement>()
 const isLoading = ref(false)
-const pageData = reactive({
-  type: 'galgame',
+const pageData = reactive<KunPagination & { type: SearchType }>({
+  type: 'topic',
   page: '1',
   limit: '10'
 })
-
-const typeItems = [
-  {
-    i18n: 'search.topic',
-    value: 'topic'
-  },
-  {
-    i18n: 'search.galgame',
-    value: 'galgame'
-  }
-]
 
 const searchQuery = async () => {
   isLoading.value = true
   const result = await $fetch('/api/search', {
     method: 'GET',
-    query: pageData,
-    ...kungalgameResponseHandler
+    query: { keywords: keywords.value, ...pageData }
   })
   isLoading.value = false
   return result
@@ -56,16 +45,20 @@ watch(
 
   <div ref="container" class="container" @mousedown.stop>
     <KunNav
-      :items="typeItems"
+      :items="navItems"
       :default-value="pageData.type"
-      @set="(value) => (pageData.type = value)"
+      @set="(value) => (pageData.type = value as SearchType)"
     />
 
     <SearchBox />
 
     <SearchHistory v-if="!keywords" />
 
-    <SearchResult :topics="results" v-if="results.length" />
+    <SearchResult
+      :topics="results"
+      :type="pageData.type"
+      v-if="results.length"
+    />
 
     <span class="empty" v-if="!results.length && keywords && !isLoading">
       {{ $t('search.emptyResult') }}

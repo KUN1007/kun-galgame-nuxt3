@@ -1,4 +1,5 @@
 import type { UserAttributes } from './user'
+import type { TopicAttributes } from './topic'
 
 export interface CommentAttributes {
   cid: number
@@ -10,6 +11,7 @@ export interface CommentAttributes {
 
   likes: number[]
 
+  topic: TopicAttributes[]
   cuid: UserAttributes[]
   touid: UserAttributes[]
 

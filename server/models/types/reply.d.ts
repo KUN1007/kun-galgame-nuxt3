@@ -1,4 +1,5 @@
 import type { UserAttributes } from './user'
+import type { TopicAttributes } from './topic'
 
 export interface ReplyAttributes {
   rid: number
@@ -19,6 +20,7 @@ export interface ReplyAttributes {
   share: number[]
   comment: number[]
 
+  topic: TopicAttributes[]
   r_user: UserAttributes[]
   to_user: UserAttributes[]
 

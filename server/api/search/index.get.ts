@@ -1,87 +1,15 @@
-import TopicModel from '~/server/models/topic'
-import GalgameModel from '~/server/models/galgame'
-import type { SearchRequestData } from '~/types/api/search'
-
-const searchTopic = async (keywords: string[], skip: number, limit: number) => {
-  const searchQuery = {
-    $and: [
-      { status: { $ne: 1 } },
-      {
-        $or: [
-          { title: { $regex: keywords.join('|'), $options: 'i' } },
-          { content: { $regex: keywords.join('|'), $options: 'i' } },
-          { category: { $in: keywords } },
-          { tags: { $in: keywords } }
-        ]
-      }
-    ]
-  }
-
-  const topics = await TopicModel.find(searchQuery)
-    .sort({ time: -1 })
-    .skip(skip)
-    .limit(limit)
-    .lean()
-
-  const data = topics.map((topic) => ({
-    tid: topic.tid,
-    title: topic.title,
-    content: topic.content.slice(0, 107)
-  }))
-
-  return data
-}
-
-const searchGalgame = async (
-  keywords: string[],
-  skip: number,
-  limit: number
-) => {
-  const searchQuery = {
-    $and: [
-      { status: { $ne: 1 } },
-      {
-        $or: [
-          { 'name.en-us': { $regex: keywords.join('|'), $options: 'i' } },
-          { 'name.ja-jp': { $regex: keywords.join('|'), $options: 'i' } },
-          { 'name.zh-cn': { $regex: keywords.join('|'), $options: 'i' } },
-          {
-            'introduction.en-us': { $regex: keywords.join('|'), $options: 'i' }
-          },
-          {
-            'introduction.ja-jp': { $regex: keywords.join('|'), $options: 'i' }
-          },
-          {
-            'introduction.zh-cn': { $regex: keywords.join('|'), $options: 'i' }
-          },
-          { alias: { $in: keywords } },
-          { tags: { $in: keywords } }
-        ]
-      }
-    ]
-  }
-
-  const data = await GalgameModel.find(searchQuery)
-    .sort({ time: -1 })
-    .skip(skip)
-    .limit(limit)
-    .lean()
-
-  const galgames = data.map((galgame) => ({
-    tid: -galgame.gid,
-    title: galgame.name,
-    content: Object.entries(galgame.introduction).map(([key, value]) => [
-      key,
-      value.slice(0, 107)
-    ])
-  }))
-
-  return galgames
-}
+import {
+  searchTopic,
+  searchGalgame,
+  searchComment,
+  searchReply,
+  searchUser
+} from './search'
+import type { SearchRequestData, SearchType } from '~/types/api/search'
 
 const search = async (
   keywords: string,
-  type: 'topic' | 'galgame',
+  type: SearchType,
   page: number,
   limit: number
 ) => {
@@ -97,11 +25,15 @@ const search = async (
   )
 
   if (type === 'topic') {
-    const result = await searchTopic(escapedKeywords, skip, limit)
-    return result
+    return await searchTopic(escapedKeywords, skip, limit)
+  } else if (type === 'galgame') {
+    return await searchGalgame(escapedKeywords, skip, limit)
+  } else if (type === 'user') {
+    return await searchUser(escapedKeywords.join(''), skip, limit)
+  } else if (type === 'reply') {
+    return await searchReply(escapedKeywords.join(''), skip, limit)
   } else {
-    const result = await searchGalgame(escapedKeywords, skip, limit)
-    return result
+    return await searchComment(escapedKeywords.join(''), skip, limit)
   }
 }
 
@@ -109,7 +41,7 @@ export default defineEventHandler(async (event) => {
   const { keywords, type, page, limit }: SearchRequestData =
     await getQuery(event)
 
-  if (limit !== '7') {
+  if (limit !== '10') {
     return kunError(event, 10209)
   }
 

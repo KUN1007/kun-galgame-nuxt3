@@ -25,6 +25,12 @@ const ReplySchema = new mongoose.Schema<ReplyAttributes>(
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )
 
+ReplySchema.virtual('topic', {
+  ref: 'topic',
+  localField: 'tid',
+  foreignField: 'tid'
+})
+
 ReplySchema.virtual('r_user', {
   ref: 'user',
   localField: 'r_uid',
