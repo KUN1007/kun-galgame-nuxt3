@@ -3,7 +3,9 @@ import type { HomeTopic } from '~/types/api/home'
 
 const { locale } = useI18n()
 
-const topic = defineProps<HomeTopic>()
+defineProps<{
+  topic: HomeTopic
+}>()
 </script>
 
 <template>

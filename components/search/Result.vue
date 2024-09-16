@@ -1,24 +1,23 @@
 <script setup lang="ts">
-import type { SearchType, SearchResult } from '~/types/api/search'
+import type {
+  SearchResultTopic,
+  SearchResultGalgame,
+  SearchResultUser,
+  SearchResultReply,
+  SearchResultComment,
+  SearchResult
+} from '~/types/api/search'
 
 const localePath = useLocalePath()
 const { searchHistory } = storeToRefs(usePersistKUNGalgameSearchStore())
 const { keywords } = storeToRefs(useTempSearchStore())
 
 const props = defineProps<{
-  topics: SearchResult[]
+  results: SearchResult[]
   type: 'topic' | 'galgame' | 'user' | 'reply' | 'comment'
 }>()
 
-const topics = computed(() => props.topics)
-
-const handleClickTopic = (tid: number) => {
-  // if (search.value.type === 'galgame') {
-  //   navigateTo(localePath(`/galgame/${-tid}`))
-  // } else {
-  //   navigateTo(localePath(`/topic/${tid}`))
-  // }
-
+const handleClick = (tid: number) => {
   if (!searchHistory.value.includes(keywords.value)) {
     searchHistory.value.push(keywords.value)
   }
@@ -27,14 +26,26 @@ const handleClickTopic = (tid: number) => {
 
 <template>
   <div class="result">
-    <div
-      v-for="(topic, index) in topics"
-      :key="index"
-      class="topic"
-      @click="handleClickTopic(topic.tid)"
-    >
-      <span class="title">{{ topic.title }}</span>
-      <span class="content">{{ topic.content }}</span>
+    <div class="container" v-if="props.type === 'topic'">
+      <div v-for="(topic, index) in results" :key="index">
+        <HomeTopicCard
+          @click="handleClick"
+          :topic="topic as SearchResultTopic"
+        />
+
+        <KunDivider margin="0 7px" />
+      </div>
+    </div>
+
+    <div class="container" v-if="props.type === 'galgame'">
+      <div v-for="(galgame, index) in results" :key="index">
+        <HomeGalgameCard
+          @click="handleClick"
+          :galgame="galgame as SearchResultGalgame"
+        />
+
+        <KunDivider margin="0 7px" />
+      </div>
     </div>
   </div>
 </template>
@@ -42,49 +53,6 @@ const handleClickTopic = (tid: number) => {
 <style lang="scss" scoped>
 .result {
   width: 100%;
-  top: 70px;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-
-  .topic {
-    color: var(--kungalgame-font-color-3);
-    border: 2px solid var(--kungalgame-trans-blue-2);
-    background-color: var(--kungalgame-trans-blue-0);
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 17px;
-    cursor: pointer;
-
-    &:first-child {
-      margin-top: 10px;
-    }
-
-    &:hover {
-      border: 2px solid var(--kungalgame-blue-5);
-    }
-  }
-
-  span {
-    &:nth-child(1) {
-      white-space: wrap;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
-      overflow: hidden;
-      -webkit-box-orient: vertical;
-      color: var(--kungalgame-blue-5);
-      margin-bottom: 10px;
-    }
-
-    &:nth-child(2) {
-      white-space: wrap;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-      -webkit-box-orient: vertical;
-    }
-  }
+  margin-top: 17px;
 }
 </style>

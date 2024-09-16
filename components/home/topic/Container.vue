@@ -32,7 +32,7 @@ const handleClose = () => {
 <template>
   <div class="container" v-if="topicData">
     <div v-for="(topic, index) in topicData" :key="index">
-      <HomeTopicCard :="topic" />
+      <HomeTopicCard :topic="topic" />
 
       <KunDivider margin="0 7px" />
     </div>

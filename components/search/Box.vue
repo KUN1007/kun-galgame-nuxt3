@@ -14,7 +14,7 @@ const debouncedSearch = debounce((inputValue: string) => {
   } else {
     keywords.value = ''
   }
-}, 300)
+}, 500)
 
 watch(
   () => keywords.value,

@@ -51,16 +51,11 @@ const handleDeleteHistory = (historyIndex: number) => {
 <style lang="scss" scoped>
 .history {
   width: 100%;
-  top: 70px;
-  left: 0;
-  flex-direction: column;
-  color: var(--kungalgame-font-color-3);
-  border-radius: 7px;
+  margin-top: 17px;
 }
 
 .title {
   display: flex;
-  margin: 10px;
   justify-content: space-between;
 
   span {

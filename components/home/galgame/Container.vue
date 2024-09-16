@@ -31,7 +31,7 @@ const handleClose = () => {
 <template>
   <div class="container" v-if="GalgameData">
     <div v-for="(galgame, index) in GalgameData" :key="index">
-      <HomeGalgameCard :="galgame" />
+      <HomeGalgameCard :galgame="galgame" />
 
       <KunDivider margin="0 7px" />
     </div>

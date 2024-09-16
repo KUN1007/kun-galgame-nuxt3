@@ -55,7 +55,7 @@ watch(
     <SearchHistory v-if="!keywords" />
 
     <SearchResult
-      :topics="results"
+      :results="results"
       :type="pageData.type"
       v-if="results.length"
     />

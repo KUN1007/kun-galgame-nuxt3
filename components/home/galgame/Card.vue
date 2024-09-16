@@ -4,7 +4,9 @@ import type { HomeGalgame } from '~/types/api/home'
 
 const { locale } = useI18n()
 
-const galgame = defineProps<HomeGalgame>()
+defineProps<{
+  galgame: HomeGalgame
+}>()
 </script>
 
 <template>
@@ -33,7 +35,7 @@ const galgame = defineProps<HomeGalgame>()
 
         <span class="views">
           <span><Icon name="lucide:mouse-pointer-click" /></span>
-          <span>{{ views }}</span>
+          <span>{{ galgame.views }}</span>
         </span>
       </div>
 
