@@ -43,6 +43,8 @@ const handleSetType = async (value: SearchType) => {
 watch(
   () => keywords.value,
   async () => {
+    pageData.page = 1
+
     if (keywords.value) {
       results.value = await searchQuery()
     } else {
