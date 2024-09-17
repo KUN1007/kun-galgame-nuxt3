@@ -6,7 +6,7 @@ const GalgameHistorySchema = new mongoose.Schema<GalgameHistory>(
   {
     ghid: { type: Number, unique: true },
     gid: { type: Number, required: true },
-    uid: { type: Number, required: true, ref: 'user' },
+    uid: { type: Number, required: true },
     time: { type: Number, default: 0 },
     action: { type: String, default: '' },
     type: { type: String, default: '' },

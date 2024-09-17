@@ -7,8 +7,8 @@ const CommentSchema = new mongoose.Schema<CommentAttributes>(
     cid: { type: Number, unique: true },
     rid: { type: Number, required: true },
     tid: { type: Number, required: true },
-    c_uid: { type: Number, required: true, ref: 'user' },
-    to_uid: { type: Number, required: true, ref: 'user' },
+    c_uid: { type: Number, required: true },
+    to_uid: { type: Number, required: true },
     content: { type: String, default: '', maxlength: 1007 },
 
     likes: { type: [Number], default: [] }

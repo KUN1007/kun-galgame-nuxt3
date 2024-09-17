@@ -6,7 +6,7 @@ const GalgamePRSchema = new mongoose.Schema<GalgamePR>(
   {
     gprid: { type: Number, unique: true },
     gid: { type: Number, required: true },
-    uid: { type: Number, required: true, ref: 'user' },
+    uid: { type: Number, required: true },
     status: { type: Number, default: 0 },
     index: { type: Number, default: 0 },
     completed_time: { type: Number, default: 0 },

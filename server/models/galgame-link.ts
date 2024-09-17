@@ -6,7 +6,7 @@ const GalgameLinkSchema = new mongoose.Schema<GalgameLink>(
   {
     gid: { type: Number, required: true },
     glid: { type: Number, unique: true },
-    uid: { type: Number, required: true, ref: 'user' },
+    uid: { type: Number, required: true },
     name: { type: String, default: '', maxlength: 107 },
     link: { type: String, default: '', maxlength: 233 }
   },

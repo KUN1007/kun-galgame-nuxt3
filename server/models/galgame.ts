@@ -6,7 +6,7 @@ const GalgameSchema = new mongoose.Schema<Galgame>(
   {
     gid: { type: Number, unique: true },
     vndb_id: { type: String, required: true },
-    uid: { type: Number, required: true, ref: 'user' },
+    uid: { type: Number, required: true },
     name: {
       'en-us': { type: String, default: '', maxlength: 100007 },
       'ja-jp': { type: String, default: '', maxlength: 100007 },

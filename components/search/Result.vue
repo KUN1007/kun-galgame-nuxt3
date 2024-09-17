@@ -52,6 +52,26 @@ const handleClick = () => {
         <KunDivider margin="0 17px" />
       </div>
     </div>
+
+    <div class="container" v-if="props.type === 'reply'">
+      <div v-for="(reply, index) in results" :key="index">
+        <SearchReplyCommentCard
+          :data="reply as SearchResultReply"
+          type="reply"
+        />
+        <KunDivider margin="0 17px" />
+      </div>
+    </div>
+
+    <div class="container" v-if="props.type === 'comment'">
+      <div v-for="(comment, index) in results" :key="index">
+        <SearchReplyCommentCard
+          :data="comment as SearchResultComment"
+          type="comment"
+        />
+        <KunDivider margin="0 17px" />
+      </div>
+    </div>
   </div>
 </template>
 

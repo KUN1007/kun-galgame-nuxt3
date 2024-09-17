@@ -7,7 +7,7 @@ const TopicSchema = new mongoose.Schema<TopicAttributes>(
     tid: { type: Number, unique: true },
     title: { type: String, required: true, maxlength: 40 },
     content: { type: String, required: true, maxlength: 100007 },
-    uid: { type: Number, required: true, ref: 'user' },
+    uid: { type: Number, required: true },
     tags: { type: [String], required: true },
     category: { type: [String], required: true },
     section: { type: [String], required: true },

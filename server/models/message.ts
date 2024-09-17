@@ -5,7 +5,7 @@ import type { MessageAttributes } from './types/message'
 const MessageSchema = new mongoose.Schema<MessageAttributes>(
   {
     mid: { type: Number, unique: true },
-    sender_uid: { type: Number, required: true, ref: 'user' },
+    sender_uid: { type: Number, required: true },
     receiver_uid: { type: Number, required: true },
     time: { type: Number, default: 0 },
     tid: { type: Number },

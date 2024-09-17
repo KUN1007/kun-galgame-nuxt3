@@ -76,10 +76,6 @@ defineProps<{
   margin-bottom: 7px;
 
   span {
-    &:first-child {
-      border-bottom: 2px solid transparent;
-    }
-
     &:last-child {
       color: var(--kungalgame-font-color-0);
       font-size: small;

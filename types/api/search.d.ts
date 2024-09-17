@@ -17,6 +17,7 @@ export interface SearchResultReply {
   title: string
   content: string
   user: KunUser
+  toUser: KunUser
   time: number
 }
 
@@ -25,6 +26,7 @@ export interface SearchResultComment {
   title: string
   content: string
   user: KunUser
+  toUser: KunUser
   time: number
 }
 

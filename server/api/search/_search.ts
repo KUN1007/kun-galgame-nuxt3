@@ -126,6 +126,7 @@ export const searchGalgame = async (
 export const searchUser = async (name: string, skip: number, limit: number) => {
   const regex = new RegExp(name, 'i')
   const users = await UserModel.find({ name: regex })
+    .sort({ time: -1 })
     .skip(skip)
     .limit(limit)
     .lean()
@@ -149,20 +150,27 @@ export const searchReply = async (
 ) => {
   const regex = new RegExp(content, 'i')
   const replies = await ReplyModel.find({ content: regex })
+    .sort({ time: -1 })
     .skip(skip)
     .limit(limit)
-    .populate('topic', 'title', UserModel)
+    .populate('topic', 'title', TopicModel)
     .populate('r_user', 'uid avatar name', UserModel)
+    .populate('to_user', 'uid avatar name', UserModel)
     .lean()
 
   const responseData: SearchResultReply[] = replies.map((reply) => ({
     tid: reply.tid,
     title: reply.topic[0].title,
-    content: reply.content,
+    content: reply.content.slice(0, 233),
     user: {
       uid: reply.r_user[0].uid,
       name: reply.r_user[0].name,
       avatar: reply.r_user[0].avatar
+    },
+    toUser: {
+      uid: reply.to_user[0].uid,
+      name: reply.to_user[0].name,
+      avatar: reply.to_user[0].avatar
     },
     time: reply.time
   }))
@@ -177,19 +185,27 @@ export const searchComment = async (
 ) => {
   const regex = new RegExp(content, 'i')
   const comments = await CommentModel.find({ content: regex })
+    .sort({ time: -1 })
     .skip(skip)
     .limit(limit)
+    .populate('topic', 'title', TopicModel)
     .populate('cuid', 'uid avatar name', UserModel)
+    .populate('touid', 'uid avatar name', UserModel)
     .lean()
 
   const responseData: SearchResultComment[] = comments.map((comment) => ({
     tid: comment.tid,
     title: comment.topic[0].title,
-    content: comment.content,
+    content: comment.content.slice(0, 233),
     user: {
       uid: comment.cuid[0].uid,
       avatar: comment.cuid[0].avatar,
       name: comment.cuid[0].name
+    },
+    toUser: {
+      uid: comment.touid[0].uid,
+      avatar: comment.touid[0].avatar,
+      name: comment.touid[0].name
     },
     time: new Date(comment.created).getTime()
   }))
