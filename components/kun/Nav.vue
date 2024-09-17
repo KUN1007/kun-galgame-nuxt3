@@ -43,6 +43,10 @@ const emits = defineEmits<{
     cursor: pointer;
     padding: 3px 10px;
 
+    &:hover {
+      color: var(--kungalgame-blue-5);
+    }
+
     &:first-child {
       padding-left: 0;
     }
@@ -56,7 +60,7 @@ const emits = defineEmits<{
   .active {
     span {
       color: var(--kungalgame-blue-5);
-      border-bottom: 2px solid var(--kungalgame-blue-5);
+      border-bottom: 3px solid var(--kungalgame-blue-5);
     }
   }
 }

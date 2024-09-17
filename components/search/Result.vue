@@ -17,7 +17,7 @@ const props = defineProps<{
   type: 'topic' | 'galgame' | 'user' | 'reply' | 'comment'
 }>()
 
-const handleClick = (tid: number) => {
+const handleClick = () => {
   if (!searchHistory.value.includes(keywords.value)) {
     searchHistory.value.push(keywords.value)
   }
@@ -38,6 +38,17 @@ const handleClick = (tid: number) => {
     </div>
 
     <div class="container" v-if="props.type === 'galgame'">
+      <div v-for="(galgame, index) in results" :key="index">
+        <HomeGalgameCard
+          @click="handleClick"
+          :galgame="galgame as SearchResultGalgame"
+        />
+
+        <KunDivider margin="0 7px" />
+      </div>
+    </div>
+
+    <div class="container" v-if="props.type === 'user'">
       <div v-for="(galgame, index) in results" :key="index">
         <HomeGalgameCard
           @click="handleClick"

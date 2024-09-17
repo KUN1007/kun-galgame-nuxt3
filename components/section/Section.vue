@@ -6,12 +6,16 @@ const localePath = useLocalePath()
 const props = defineProps<{
   section: string
 }>()
-
-const { page, limit } = storeToRefs(useTempSectionStore())
+const page = ref(1)
 
 const { data, pending } = await useFetch(`/api/section`, {
   method: 'GET',
-  query: { section: props.section, page, limit, order: 'desc' },
+  query: {
+    section: props.section,
+    order: 'desc',
+    page,
+    limit: 23
+  },
   ...kungalgameResponseHandler
 })
 
@@ -89,7 +93,7 @@ watch(
     class="pagination"
     v-if="data?.totalCount"
     :page="page"
-    :limit="limit"
+    :limit="23"
     :sum="data?.totalCount"
     :loading="pending"
     @set-page="(newPage) => (page = newPage)"

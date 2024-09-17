@@ -17,7 +17,7 @@ const handleDeleteHistory = (historyIndex: number) => {
 
 <template>
   <div class="history">
-    <div class="title">
+    <div class="title" v-if="searchHistory.length">
       <span>{{ $t('search.history') }}</span>
       <span @click="clearSearchHistory">
         {{ $t('search.clear') }}
@@ -74,18 +74,20 @@ const handleDeleteHistory = (historyIndex: number) => {
   display: flex;
   flex-direction: column;
   font-size: 13px;
-  margin: 10px;
+  margin-top: 10px;
 }
 
 .single-history {
   width: 100%;
   display: flex;
-  justify-content: space between;
-  padding: 7px 3px;
+  justify-content: space-between;
+  padding: 7px 17px;
   margin: 2px 0;
+  border-radius: 10px;
 
   &:hover {
     color: var(--kungalgame-blue-5);
+    background-color: var(--kungalgame-trans-blue-1);
 
     .delete {
       display: flex;
@@ -105,10 +107,7 @@ const handleDeleteHistory = (historyIndex: number) => {
 }
 
 .delete {
-  width: 30px;
-  right: 5px;
   font-size: 17px;
-  position: absolute;
   justify-content: center;
   align-items: center;
   cursor: pointer;

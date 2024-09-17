@@ -102,6 +102,8 @@ const handleClosePanel = async () => {
   padding-left: 20px;
 
   span {
+    user-select: none;
+
     &:nth-child(2) {
       margin: 0 5px;
       cursor: pointer;
@@ -114,7 +116,7 @@ const handleClosePanel = async () => {
     }
 
     &:nth-child(3) {
-      margin-left: 40px;
+      margin-left: 10px;
     }
 
     .emoji {
