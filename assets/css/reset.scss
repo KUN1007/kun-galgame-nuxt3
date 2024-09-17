@@ -32,6 +32,7 @@
 
 ::-webkit-scrollbar {
   width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -46,6 +47,7 @@
 @media (max-width: 700px) {
   ::-webkit-scrollbar {
     width: 0;
+    height: 0;
   }
 
   * {

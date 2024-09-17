@@ -79,5 +79,9 @@ export const sitemap: Sitemap[] = [
   {
     route: '/update-log',
     name: 'updateLog'
+  },
+  {
+    route: '/search',
+    name: 'search'
   }
 ]

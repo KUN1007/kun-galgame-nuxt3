@@ -67,11 +67,13 @@ const handleLoadMore = async () => {
   </KunHeader>
 
   <div class="container">
-    <KunNav
-      :items="navItems"
-      :default-value="pageData.type"
-      @set="(value) => handleSetType(value as SearchType)"
-    />
+    <div class="nav">
+      <KunNav
+        :items="navItems"
+        :default-value="pageData.type"
+        @set="(value) => handleSetType(value as SearchType)"
+      />
+    </div>
 
     <SearchBox />
 
@@ -118,8 +120,18 @@ const handleLoadMore = async () => {
   flex-direction: column;
 }
 
-.kun-nav {
+.nav {
   margin-bottom: 17px;
+  overflow-x: scroll;
+  height: 35px;
+
+  &::-webkit-scrollbar {
+    height: 1px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--kungalgame-gray-4);
+  }
 }
 
 .kun-divider {
