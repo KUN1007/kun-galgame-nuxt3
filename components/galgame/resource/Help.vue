@@ -37,6 +37,19 @@ const { locale } = useI18n()
         allow open downloads (forbidden login to download)
       </p>
       <p>
+        <strong>
+          Do not add links to cloud storage download sites. See
+          <a
+            href="https://www.kungal.com/zh-cn/galgame/819"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            this visualnovel's
+          </a>
+          comments for more details.
+        </strong>
+      </p>
+      <p>
         Violating resource links can be reported, and if you have other needs,
         please post a topic in Others -> Forum-related
       </p>
@@ -61,6 +74,19 @@ const { locale } = useI18n()
       <p>
         允许将资源链接指向其它网址, 但是该网址必须开放下载 (禁止未登录无法下载)
       </p>
+      <p>
+        <strong>
+          不要添加网盘下载站的页面链接, 详见
+          <a
+            href="https://www.kungal.com/zh-cn/galgame/819"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            此 Galgame
+          </a>
+          下的评论
+        </strong>
+      </p>
       <p>违规资源链接可举报, 若有其它需求, 请在 其它 -> 论坛相关 发布话题</p>
     </div>
   </div>
@@ -75,6 +101,14 @@ const { locale } = useI18n()
 
   p {
     margin-bottom: 7px;
+  }
+
+  a {
+    font-weight: bold;
+    color: var(--kungalgame-blue-5);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin: 0 7px;
   }
 }
 </style>

@@ -4,7 +4,7 @@ import {
   searchComment,
   searchReply,
   searchUser
-} from './search'
+} from './_search'
 import type { SearchRequestData, SearchType } from '~/types/api/search'
 
 const search = async (

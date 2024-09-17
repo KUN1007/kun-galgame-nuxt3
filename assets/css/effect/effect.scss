@@ -4,9 +4,7 @@ Requires four <span> elements with the class .kungalgame-comet-surround */
 .kungalgame-comet-surround {
   position: relative;
   padding: 7px 17px;
-  color: var(--kungalgame-blue-3);
   overflow: hidden;
-  border: 2px solid var(--kungalgame-blue-2);
   border-radius: 10px;
   filter: hue-rotate(0deg);
   transition: all 0.1s linear;
@@ -14,7 +12,7 @@ Requires four <span> elements with the class .kungalgame-comet-surround */
 
   &:hover {
     border: 2px solid transparent;
-    color: var(--kungalgame-red-3);
+
     & > span {
       position: absolute;
       display: block;

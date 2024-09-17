@@ -53,7 +53,7 @@ export const searchTopic = async (
       name: topic.user[0].name
     },
     status: topic.status,
-    upvote_time: topic.upvote_time
+    upvoteTime: topic.upvote_time
   }))
 
   return topics

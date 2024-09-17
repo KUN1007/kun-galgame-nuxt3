@@ -35,7 +35,7 @@ export interface HomeTopic {
   popularity: number
   user: Omit<KunUser, 'avatar'>
   status: number
-  upvote_time: number
+  upvoteTime: number
 }
 
 export interface HomeGalgame {

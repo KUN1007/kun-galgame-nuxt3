@@ -28,7 +28,7 @@ const getHomeTopics = async (page: number, limit: number) => {
       name: topic.user[0].name
     },
     status: topic.status,
-    upvote_time: topic.upvote_time
+    upvoteTime: topic.upvote_time
   }))
 
   return data
