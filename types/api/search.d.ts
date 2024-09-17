@@ -8,6 +8,7 @@ export interface SearchResultUser {
   name: string
   avatar: string
   bio: string
+  moemoepoint: number
   time: number
 }
 

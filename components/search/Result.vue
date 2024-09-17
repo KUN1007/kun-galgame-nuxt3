@@ -32,7 +32,6 @@ const handleClick = () => {
           @click="handleClick"
           :topic="topic as SearchResultTopic"
         />
-
         <KunDivider margin="0 7px" />
       </div>
     </div>
@@ -43,19 +42,14 @@ const handleClick = () => {
           @click="handleClick"
           :galgame="galgame as SearchResultGalgame"
         />
-
         <KunDivider margin="0 7px" />
       </div>
     </div>
 
     <div class="container" v-if="props.type === 'user'">
-      <div v-for="(galgame, index) in results" :key="index">
-        <HomeGalgameCard
-          @click="handleClick"
-          :galgame="galgame as SearchResultGalgame"
-        />
-
-        <KunDivider margin="0 7px" />
+      <div v-for="(user, index) in results" :key="index">
+        <SearchUserCard :user="user as SearchResultUser" />
+        <KunDivider margin="0 17px" />
       </div>
     </div>
   </div>

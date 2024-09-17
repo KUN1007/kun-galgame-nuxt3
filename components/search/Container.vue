@@ -28,6 +28,18 @@ const searchQuery = async () => {
   return result
 }
 
+const handleSetType = async (value: SearchType) => {
+  pageData.type = value
+  pageData.page = 1
+  results.value = []
+
+  if (keywords.value) {
+    results.value = await searchQuery()
+  } else {
+    isLoading.value = false
+  }
+}
+
 watch(
   () => keywords.value,
   async () => {
@@ -58,7 +70,7 @@ const handleLoadMore = async () => {
     <KunNav
       :items="navItems"
       :default-value="pageData.type"
-      @set="(value) => (pageData.type = value as SearchType)"
+      @set="(value) => handleSetType(value as SearchType)"
     />
 
     <SearchBox />

@@ -135,7 +135,8 @@ export const searchUser = async (name: string, skip: number, limit: number) => {
     name: user.name,
     avatar: user.avatar,
     bio: user.bio,
-    time: user.time
+    time: user.time,
+    moemoepoint: user.moemoepoint
   }))
 
   return responseData
