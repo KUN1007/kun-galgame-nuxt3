@@ -550,7 +550,8 @@
     },
     "resource": {
       "name": "Resource Links",
-      "note": "Note: Some resource links may require a network proxy",
+      "proxy": "Note: Some resource links may require a network proxy",
+      "alter": "If you can't find the resource link you're looking for, you can check out our friends",
       "edit": "Editing...",
       "extract": "Extraction",
       "decompress": "Decompression",
@@ -706,7 +707,8 @@
     "vikacg": "VikACG",
     "tgnav": "TGNAV",
     "galzy": "GalZY",
-    "limulu": "Lista"
+    "limulu": "Lista",
+    "zi0": "梓澪の妙妙屋"
   },
   "pageError":{
     "404": "Za~~~ko~♡ zako~♡ Smelly zako ♡ The page is gone ~ Did you eat it?!",

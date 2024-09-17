@@ -93,5 +93,10 @@ export const friends: Friend[] = [
     name: 'limulu',
     link: 'https://limulu.cloud/',
     label: '一个简洁美观的Gal网站'
+  },
+  {
+    name: 'zi0',
+    link: 'https://limulu.cloud/',
+    label: '梓澪のGalgame仓库'
   }
 ]

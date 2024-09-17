@@ -46,7 +46,19 @@ watch(
       </template>
     </KunHeader>
 
-    <p class="note">{{ $t('galgame.resource.note') }}</p>
+    <div class="note">
+      <div>{{ $t('galgame.resource.proxy') }}</div>
+      <div>
+        <span>{{ $t('galgame.resource.alter') }}</span>
+        <a href="https://zi6.cc/" target="_blank" rel="noopener noreferrer">
+          zi6.cc
+        </a>
+        |
+        <a href="https://zi0.cc/" target="_blank" rel="noopener noreferrer">
+          zi0.cc
+        </a>
+      </div>
+    </div>
 
     <GalgameNull class="null" v-if="!data?.length" />
 
@@ -80,11 +92,30 @@ watch(
 }
 
 .note {
-  color: var(--kungalgame-red-5);
-  font-weight: bold;
-  font-size: small;
-  font-style: oblique;
   margin-bottom: 17px;
+  font-size: small;
+
+  & > div {
+    display: block;
+
+    &:first-child {
+      color: var(--kungalgame-red-5);
+      font-weight: bold;
+      font-style: oblique;
+    }
+
+    &:last-child {
+      margin-top: 5px;
+    }
+  }
+
+  a {
+    font-weight: bold;
+    color: var(--kungalgame-blue-5);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    margin: 0 7px;
+  }
 }
 
 .null {

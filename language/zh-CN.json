@@ -549,7 +549,8 @@
     },
     "resource": {
       "name": "资源链接",
-      "note": "提示: 部分资源链接可能需要网络代理",
+      "proxy": "提示: 部分资源链接可能需要网络代理",
+      "alter": "如果您找不到想要的资源链接, 可以去看看友站",
       "edit": "编辑中...",
       "extract": "提取码",
       "decompress": "解压码",
@@ -705,7 +706,8 @@
     "vikacg": "维咔 VikACG",
     "tgnav": "TGNAV",
     "galzy": "紫缘社",
-    "limulu": "莉斯坦 Galgame"
+    "limulu": "莉斯坦 Galgame",
+    "zi0": "梓澪の妙妙屋"
   },
   "pageError":{
     "404": "杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面不见了 ~ 是不是被你吃了?!",
