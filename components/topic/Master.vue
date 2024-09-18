@@ -22,7 +22,7 @@ const loliStatus = computed(() => {
 </script>
 
 <template>
-  <div class="master" :id="`kungal-reply-0`">
+  <div class="master" id="k0">
     <div class="header">
       <div class="title">
         {{ topic.title }}
@@ -52,7 +52,8 @@ const loliStatus = computed(() => {
           </span>
         </TopicKUNGalgamerInfo>
 
-        <TopicContent :content="topic.content" />
+        <!-- <TopicContent :content="topic.content" /> -->
+        <div v-html="topic.content"></div>
       </div>
 
       <div class="bottom">

@@ -102,6 +102,7 @@ watch(
 
 <template>
   <div>
+    <!-- TODO: render on server -->
     <pre v-if="loading">{{ valueMarkdown }}</pre>
     <Milkdown ref="milkdownRef" class="editor" />
   </div>

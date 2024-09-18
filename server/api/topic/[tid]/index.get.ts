@@ -41,7 +41,7 @@ export default defineEventHandler(async (event) => {
       isFavorite: topic.favorites.includes(uid)
     },
     time: topic.created.toString(),
-    content: topic.content,
+    content: await markdownToHtml(topic.content),
     upvotes: {
       count: topic.upvotes.length,
       isUpvoted: topic.upvotes.includes(uid)

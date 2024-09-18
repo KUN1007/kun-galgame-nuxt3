@@ -55,9 +55,7 @@ const scrollPage = (rid: number) => {
   }
 
   let timeout: NodeJS.Timeout | null = null
-  const childElement = content.value.querySelector(
-    `#kungal-reply-${rid}`
-  ) as HTMLElement
+  const childElement = content.value.querySelector(`#k${rid}`) as HTMLElement
 
   if (childElement) {
     childElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
