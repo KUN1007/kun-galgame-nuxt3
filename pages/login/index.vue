@@ -247,7 +247,7 @@ const handleClickRegister = () => {
   .root {
     min-width: 0;
     width: 100%;
-    height: calc(100vh - 65px);
+    height: calc(100vh - 63px);
   }
 
   .container {

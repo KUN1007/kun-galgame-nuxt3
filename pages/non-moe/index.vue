@@ -149,7 +149,7 @@ const { data: logs, pending: listPending } = await useFetch(
 
 @media (max-width: 700px) {
   .root {
-    height: calc(100vh - 65px);
+    height: calc(100vh - 63px);
     width: 95%;
     margin: 0 auto;
   }

@@ -207,6 +207,10 @@ const getLink = (link: 'galgame' | 'topic') =>
 }
 
 @media (max-width: 700px) {
+  .root {
+    height: calc(100dvh - 63px);
+  }
+
   .container {
     width: 95%;
   }

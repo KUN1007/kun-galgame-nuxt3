@@ -198,6 +198,7 @@ const { data: statement } = await useFetch(`/api/balance/statement`, {
 @media (max-width: 700px) {
   .root {
     width: 95%;
+    height: calc(100dvh - 63px);
   }
   .content {
     width: 100%;

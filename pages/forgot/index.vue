@@ -59,4 +59,10 @@ useHead({
   justify-content: space-between;
   padding: 20px;
 }
+
+@media (max-width: 700px) {
+  .root {
+    min-height: calc(100dvh - 63px);
+  }
+}
 </style>

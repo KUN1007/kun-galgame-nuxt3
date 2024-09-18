@@ -84,6 +84,7 @@ onMounted(() => (isShowProgress.value = true))
   }
 
   span:nth-child(2) {
+    user-select: none;
     font-family: serif;
     position: absolute;
     right: 10px;
@@ -109,8 +110,6 @@ onMounted(() => (isShowProgress.value = true))
 .moemoepoint {
   height: 1px;
   flex-grow: 1;
-  border-top: 2px solid var(--kungalgame-blue-5);
-  border-bottom: 1px solid var(--kungalgame-blue-5);
   display: flex;
   align-items: center;
   z-index: 1;
@@ -142,7 +141,7 @@ onMounted(() => (isShowProgress.value = true))
   transition: width 0.5s;
   height: 100%;
   width: v-bind(mpWidth);
-  background-color: var(--kungalgame-trans-blue-2);
+  background-color: var(--kungalgame-trans-pink-1);
 }
 
 .progress-enter-active {

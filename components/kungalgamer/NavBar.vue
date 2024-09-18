@@ -89,7 +89,6 @@ const handleCollapsed = (item: Nav) => {
 .nav {
   height: 100%;
   width: 130px;
-  border-right: 1px solid var(--kungalgame-blue-5);
   flex-shrink: 0;
   overflow: scroll;
   scrollbar-width: none;
@@ -103,9 +102,10 @@ const handleCollapsed = (item: Nav) => {
   display: flex;
   align-items: center;
   color: var(--kungalgame-blue-5);
+  border-radius: 10px;
 
   &:hover {
-    background-color: var(--kungalgame-trans-blue-2);
+    background-color: var(--kungalgame-trans-blue-1);
   }
 
   & > span {
@@ -147,12 +147,10 @@ const handleCollapsed = (item: Nav) => {
   .nav {
     width: 70px;
     font-size: small;
-    border-right: none;
   }
 
   .link {
     padding: 10px 7px;
-    border-radius: 10px;
 
     .name {
       display: none;

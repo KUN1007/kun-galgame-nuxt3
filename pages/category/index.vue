@@ -32,6 +32,7 @@ useHead({
 @media (max-width: 700px) {
   .root {
     margin: 0 5px;
+    min-height: calc(100dvh - 63px);
   }
 }
 </style>

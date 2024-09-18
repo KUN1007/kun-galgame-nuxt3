@@ -142,6 +142,10 @@ useHead({
 }
 
 @media (max-width: 700px) {
+  .root {
+    height: calc(100vh - 63px);
+  }
+
   .container {
     width: 90%;
   }

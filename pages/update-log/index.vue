@@ -71,16 +71,20 @@ useHead({
   .root {
     min-width: 100%;
     min-height: 100%;
+    height: calc(100dvh - 63px);
   }
+
   .container {
     height: 100%;
     width: 95%;
     max-height: 100%;
     overflow-y: scroll;
   }
+
   .content {
     flex-direction: column;
   }
+
   .todo,
   .history {
     width: 100%;

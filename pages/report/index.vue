@@ -23,4 +23,10 @@ useHead({
   height: 100%;
   min-height: calc(100dvh - 75px);
 }
+
+@media (max-width: 700px) {
+  .root {
+    min-height: calc(100dvh - 63px);
+  }
+}
 </style>

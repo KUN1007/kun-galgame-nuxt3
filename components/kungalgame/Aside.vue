@@ -48,7 +48,8 @@ import { asideBarItem } from './asideItem'
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-bottom: 2px solid var(--kungalgame-trans-blue-2);
+    text-decoration: none;
+    text-underline-offset: 3px;
 
     .icon {
       font-size: 20px;
@@ -56,7 +57,7 @@ import { asideBarItem } from './asideItem'
     }
 
     &:hover {
-      border-bottom: 2px solid var(--kungalgame-blue-5);
+      text-decoration: underline;
     }
   }
 }

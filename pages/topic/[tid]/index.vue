@@ -137,7 +137,7 @@ if (data) {
 
 @media (max-width: 700px) {
   .root {
-    min-height: calc(100dvh - 65px);
+    min-height: calc(100dvh - 63px);
   }
 }
 </style>

@@ -95,21 +95,12 @@ useHead({
   min-height: 700px;
   width: 100%;
   max-width: 48rem;
-  border: 1px solid var(--kungalgame-blue-5);
   margin: auto;
   display: flex;
   flex-direction: column;
   transition: all 0.2s;
 
   @include kun-blur;
-}
-
-h1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  color: var(--kungalgame-red-5);
 }
 
 .content {

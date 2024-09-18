@@ -139,5 +139,9 @@ useHead({
   .article {
     width: 90%;
   }
+
+  .root {
+    height: calc(100dvh - 63px);
+  }
 }
 </style>
