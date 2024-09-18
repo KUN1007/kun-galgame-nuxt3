@@ -12,21 +12,35 @@ defineProps<{
     limit: number
     sortOrder: string
   }
+  pending: boolean
+}>()
+
+const emits = defineEmits<{
+  setPage: [value: number]
+  setSortOrder: [value: 'asc' | 'desc']
 }>()
 </script>
 
 <template>
   <div class="tool" v-if="data && data.totalCount > 5" id="tool">
     <div class="page">
-      <button @click="pageData.page--" :disabled="pageData.page === 1">
+      <button
+        @click="emits('setPage', -1)"
+        :disabled="pageData.page === 1 || pending"
+      >
         <Icon name="lucide:chevron-left" />
       </button>
       <span>
-        {{ `${pageData.page} / ${Math.ceil(data.totalCount / 17)}` }}
+        {{
+          `${pageData.page} / ${Math.ceil(data.totalCount / pageData.limit)}`
+        }}
       </span>
       <button
-        @click="pageData.page++"
-        :disabled="pageData.page === Math.ceil(data.totalCount / 17)"
+        @click="emits('setPage', 1)"
+        :disabled="
+          pageData.page === Math.ceil(data.totalCount / pageData.limit) ||
+            pending
+        "
       >
         <Icon name="lucide:chevron-right" />
       </button>
@@ -35,13 +49,13 @@ defineProps<{
     <div class="order">
       <span
         :class="pageData.sortOrder === 'asc' ? 'active' : ''"
-        @click="pageData.sortOrder = 'asc'"
+        @click="emits('setSortOrder', 'asc')"
       >
         <Icon name="lucide:arrow-up" />
       </span>
       <span
         :class="pageData.sortOrder === 'desc' ? 'active' : ''"
-        @click="pageData.sortOrder = 'desc'"
+        @click="emits('setSortOrder', 'desc')"
       >
         <Icon name="lucide:arrow-down" />
       </span>
@@ -104,6 +118,12 @@ defineProps<{
       box-shadow: var(--shadow);
       color: var(--kungalgame-blue-5);
     }
+  }
+}
+
+@media (max-width: 700px) {
+  .tool {
+    margin-bottom: 7px;
   }
 }
 </style>

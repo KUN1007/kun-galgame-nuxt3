@@ -124,8 +124,8 @@ const statusName = () => {
     width: 100%;
     height: 100%;
     padding: 10px;
-    @include kun-center;
     border-radius: 10px;
+    cursor: default;
 
     &:hover {
       background-color: var(--kungalgame-trans-blue-0);

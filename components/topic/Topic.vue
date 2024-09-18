@@ -106,7 +106,14 @@ watch(
   <div class="content" ref="content">
     <TopicMaster :topic="topic" />
 
-    <TopicTool v-if="data" :data="data" :page-data="pageData" />
+    <TopicTool
+      v-if="data"
+      :data="data"
+      :page-data="pageData"
+      @set-page="(value) => (pageData.page += value)"
+      @set-sort-order="(value) => (pageData.sortOrder = value)"
+      :pending="pending"
+    />
 
     <div v-if="data">
       <TopicReply

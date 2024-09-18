@@ -54,7 +54,7 @@ const handleChangeAvatar = async () => {
     useMessage(
       'Please select a valid avatar...',
       '请选择有效的头像图片...',
-      'info'
+      'warn'
     )
     return
   }

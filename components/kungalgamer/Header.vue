@@ -22,7 +22,6 @@ onMounted(() => (isShowProgress.value = true))
 
     <div class="name">
       <span>{{ props.name }}</span>
-      <span>KUNGalgame</span>
     </div>
 
     <div class="moemoepoint">
@@ -74,24 +73,13 @@ onMounted(() => (isShowProgress.value = true))
   border-radius: 10px 10px 0 0;
   align-items: center;
 
-  span:nth-child(1) {
+  span {
     font-family: serif;
     position: absolute;
     font-size: 22px;
     margin-left: 210px;
     margin-top: 60px;
     z-index: 1;
-  }
-
-  span:nth-child(2) {
-    user-select: none;
-    font-family: serif;
-    position: absolute;
-    right: 10px;
-    font-size: 100px;
-    color: var(--kungalgame-trans-white-5);
-    font-style: italic;
-    text-shadow: 2px 2px 2px var(--kungalgame-trans-white-5);
   }
 }
 

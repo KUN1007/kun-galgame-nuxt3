@@ -18,7 +18,7 @@ defineProps<{
   >
     <div class="floor">
       <NuxtLinkLocale :to="`/topic/${reply.tid}#kungal-reply-${reply.floor}`">
-        K{{ reply.floor }}
+        {{ reply.floor }}
       </NuxtLinkLocale>
     </div>
 
@@ -95,8 +95,8 @@ defineProps<{
   border-bottom: none;
 
   a {
-    color: var(--kungalgame-red-3);
-    padding: 0 10px;
+    color: var(--kungalgame-gray-4);
+    padding-left: 5px;
     text-align: center;
     font-size: 20px;
   }
