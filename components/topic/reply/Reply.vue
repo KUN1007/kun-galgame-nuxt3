@@ -14,10 +14,10 @@ defineProps<{
   <div
     class="reply"
     :class="hourDiff(reply.upvoteTime, 10) ? 'active-upvote' : ''"
-    :id="`kungal-reply-${reply.floor}`"
+    :id="`k${reply.floor}`"
   >
     <div class="floor">
-      <NuxtLinkLocale :to="`/topic/${reply.tid}#kungal-reply-${reply.floor}`">
+      <NuxtLinkLocale :to="`/topic/${reply.tid}#k${reply.floor}`">
         {{ reply.floor }}
       </NuxtLinkLocale>
     </div>

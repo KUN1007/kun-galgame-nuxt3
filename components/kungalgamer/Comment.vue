@@ -57,10 +57,11 @@ const { data, pending } = await useFetch(`/api/user/${props.uid}/comments`, {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: all 0.2s;
 
     &:hover {
-      color: var(--kungalgame-white);
-      background-color: var(--kungalgame-blue-5);
+      color: var(--kungalgame-blue-5);
+      background-color: var(--kungalgame-trans-blue-0);
     }
   }
 }

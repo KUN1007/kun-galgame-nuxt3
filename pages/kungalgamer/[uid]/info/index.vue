@@ -92,6 +92,8 @@ const statusName = () => {
         </span>
       </div>
 
+      <KunDivider margin="0 7px" />
+
       <div class="bio">
         <div>{{ $t('user.profile.bio') }}:</div>
         <pre v-if="user.bio">{{ user.bio }}</pre>

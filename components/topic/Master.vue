@@ -22,7 +22,7 @@ const loliStatus = computed(() => {
 </script>
 
 <template>
-  <div class="master" :id="`kungal-reply-0`">
+  <div class="master" id="k0">
     <div class="header">
       <div class="title">
         {{ topic.title }}
