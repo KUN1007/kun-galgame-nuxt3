@@ -615,6 +615,7 @@
     },
     "history": {
       "name": "Contribute History",
+      "operation": "Visualnovel Operations",
       "created": "Created",
       "updated": "Updated",
       "deleted": "Deleted",

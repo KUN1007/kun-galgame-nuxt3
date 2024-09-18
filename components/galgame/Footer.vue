@@ -11,12 +11,19 @@ const galgame = inject<GalgameDetail>('galgame')
     <span class="history" @click="isShowHistory = !isShowHistory">
       {{ $t('galgame.history.name') }}
     </span>
-    <div>
+    <div class="operation">
+      <span class="hint">
+        {{ $t('galgame.history.operation') }}
+      </span>
       <GalgameLike
         :gid="galgame.gid"
         :to-uid="galgame.user.uid"
         :likes-count="galgame.likes.count"
         :is-liked="galgame.likes.isLiked"
+        v-tooltip="{
+          message: { en: 'Like', zh: '点赞' },
+          position: 'bottom'
+        }"
       />
 
       <GalgameFavorite
@@ -24,9 +31,19 @@ const galgame = inject<GalgameDetail>('galgame')
         :to-uid="galgame.user.uid"
         :favorites-count="galgame.favorites.count"
         :is-favorite="galgame.favorites.isFavorite"
+        v-tooltip="{
+          message: { en: 'Favorite', zh: '收藏' },
+          position: 'bottom'
+        }"
       />
 
-      <GalgameRewrite :galgame="galgame" />
+      <GalgameRewrite
+        :galgame="galgame"
+        v-tooltip="{
+          message: 'Rewrite',
+          position: 'bottom'
+        }"
+      />
     </div>
   </div>
 
@@ -46,8 +63,24 @@ const galgame = inject<GalgameDetail>('galgame')
     color: var(--kungalgame-blue-5);
   }
 
-  span {
-    margin-right: 17px;
+  .favorite {
+    margin: 0 17px;
+  }
+}
+
+.operation {
+  position: relative;
+  margin-right: 17px;
+
+  .hint {
+    user-select: none;
+    white-space: nowrap;
+    position: absolute;
+    font-size: small;
+    top: -17px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--kungalgame-font-color-0);
   }
 }
 </style>

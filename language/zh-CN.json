@@ -614,6 +614,7 @@
     },
     "history": {
       "name": "贡献历史",
+      "operation": "Galgame 操作",
       "created": "创建了",
       "updated": "更新了",
       "deleted": "删除了",
