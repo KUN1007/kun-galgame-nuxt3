@@ -20,8 +20,6 @@
 
 <style lang="scss" scoped>
 .header {
-  padding: 17px;
-
   p {
     margin-bottom: 10px;
   }

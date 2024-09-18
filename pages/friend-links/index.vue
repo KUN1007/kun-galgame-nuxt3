@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { friends } from '~/components/friend-links/friends'
+import { friendArray } from '~/components/friend-links/friends'
 
 const { t } = useI18n()
 
@@ -8,7 +8,11 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: friends.map((friend) => t(`friends.${friend.name}`)).join(' | ')
+      content: friendArray
+        .flatMap((group) =>
+          group.value.map((friend) => t(`friends.${group.key}.${friend.name}`))
+        )
+        .join(' | ')
     }
   ]
 })
@@ -18,6 +22,7 @@ useHead({
   <div class="root">
     <FriendLinksHeader />
     <FriendLinksCard />
+    <KunFooter />
   </div>
 </template>
 
@@ -29,7 +34,12 @@ useHead({
   min-height: calc(100dvh - 75px);
   max-width: 64rem;
   margin: 0 auto;
+  padding: 17px;
 
   @include kun-blur;
+}
+
+.kun-footer {
+  margin-top: 30px;
 }
 </style>

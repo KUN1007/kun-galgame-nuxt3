@@ -1,27 +1,43 @@
 <script setup lang="ts">
-import { friends } from './friends'
+import { friendArray } from './friends'
 </script>
 
 <template>
-  <div class="container">
-    <a
-      class="card"
-      v-for="(friend, index) in friends"
-      :key="index"
-      :href="`${friend.link}?from=www.kungal.com`"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <div class="name">{{ $t(`friends.${friend.name}`) }}</div>
-      <div class="label">{{ friend.label.slice(0, 107) }}</div>
-      <NuxtImg :src="`/friends/${friend.name}.webp`" />
-    </a>
+  <template v-for="(friendGroup, index) in friendArray" :key="index">
+    <KunDivider margin="17px" />
 
-    <NuxtLinkLocale class="join" to="/contact">
-      <h3>{{ $t('friends.join') }}</h3>
-      <p>{{ $t('friends.hint') }}</p>
-    </NuxtLinkLocale>
-  </div>
+    <h2>
+      {{ $t(`friends.${friendGroup.key}.name`) }}
+    </h2>
+
+    <div class="container">
+      <a
+        class="card"
+        v-for="(friend, i) in friendGroup.value"
+        :key="i"
+        :href="friend.link"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div class="name">
+          {{ $t(`friends.${friendGroup.key}.${friend.name}`) }}
+        </div>
+        <div class="label">
+          {{
+            friend.label.length > 107
+              ? `${friend.label.slice(0, 107)}...`
+              : friend.label
+          }}
+        </div>
+        <NuxtImg :src="`/friends/${friend.name}.webp`" />
+      </a>
+    </div>
+  </template>
+
+  <NuxtLinkLocale class="join" to="/contact">
+    <h3>{{ $t('friends.join') }}</h3>
+    <p>{{ $t('friends.hint') }}</p>
+  </NuxtLinkLocale>
 </template>
 
 <style lang="scss" scoped>
@@ -29,7 +45,7 @@ import { friends } from './friends'
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 17px;
-  padding: 17px;
+  padding: 17px 0;
 }
 
 .card {
@@ -39,6 +55,7 @@ import { friends } from './friends'
   padding: 10px;
   border-radius: 10px;
   color: var(--kungalgame-font-color-3);
+  max-width: 269px;
 
   &:hover {
     transform: translateY(-10px);
@@ -51,7 +68,7 @@ import { friends } from './friends'
 
   .name {
     display: flex;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
   }
 
