@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { MilkdownProvider } from '@milkdown/vue'
-import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
 import { languageItems } from '~/components/edit/utils/options'
 
 const { locale } = useI18n()
@@ -25,21 +23,11 @@ defineProps<{
     @set="(value) => (introductionLanguage = value)"
   />
 
-  <div class="kungalgame-galgame-content">
-    <MilkdownProvider>
-      <ProsemirrorAdapterProvider>
-        <KunMilkdownReadOnly
-          :is-readonly="true"
-          :value-markdown="
-            getPreferredLanguageText(
-              introduction,
-              introductionLanguage as Language
-            )
-          "
-        />
-      </ProsemirrorAdapterProvider>
-    </MilkdownProvider>
-  </div>
+  <KunContent
+    :content="
+      getPreferredLanguageText(introduction, introductionLanguage as Language)
+    "
+  />
 </template>
 
 <style lang="scss" scoped>

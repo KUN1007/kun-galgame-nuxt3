@@ -81,7 +81,7 @@ const getReplies = async (
           name: reply.to_user[0].name
         },
         edited: reply.edited,
-        content: reply.content,
+        content: await markdownToHtml(reply.content),
         upvotes: {
           count: reply.upvotes.length,
           isUpvoted: reply.upvotes.includes(uid)

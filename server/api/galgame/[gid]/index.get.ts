@@ -3,6 +3,16 @@ import UserModel from '~/server/models/user'
 import mongoose from 'mongoose'
 import type { GalgameContributor, GalgameDetail } from '~/types/api/galgame'
 
+const convertIntroductionToHtml = async (
+  introduction: KunLanguage
+): Promise<KunLanguage> => {
+  return {
+    'en-us': await markdownToHtml(introduction['en-us']),
+    'ja-jp': await markdownToHtml(introduction['ja-jp']),
+    'zh-cn': await markdownToHtml(introduction['zh-cn'])
+  }
+}
+
 export default defineEventHandler(async (event) => {
   const gid = getRouterParam(event, 'gid')
   if (!gid) {
@@ -47,7 +57,7 @@ export default defineEventHandler(async (event) => {
       },
       name: galgame.name,
       banner: galgame.banner,
-      introduction: galgame.introduction,
+      introduction: await convertIntroductionToHtml(galgame.introduction),
       time: galgame.time,
       views: galgame.views,
       platform: galgame.platform,

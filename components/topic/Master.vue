@@ -52,8 +52,7 @@ const loliStatus = computed(() => {
           </span>
         </TopicKUNGalgamerInfo>
 
-        <!-- <TopicContent :content="topic.content" /> -->
-        <div v-html="topic.content"></div>
+        <KunContent :content="topic.content" />
       </div>
 
       <div class="bottom">

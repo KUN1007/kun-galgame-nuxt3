@@ -41,7 +41,7 @@ defineProps<{
             </span>
           </div>
 
-          <TopicContent :content="reply.content" />
+          <KunContent :content="reply.content" />
         </div>
       </div>
 
