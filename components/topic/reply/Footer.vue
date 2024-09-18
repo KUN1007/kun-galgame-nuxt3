@@ -72,7 +72,9 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
 
       <span
         @click="
-          useKunCopy(`${title}: https://www.kungal.com/topic/${reply.tid}`)
+          useKunCopy(
+            `${title}: https://www.kungal.com/topic/${reply.tid}#k${reply.floor}`
+          )
         "
         class="icon"
         v-tooltip="{
