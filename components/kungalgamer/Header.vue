@@ -22,6 +22,7 @@ onMounted(() => (isShowProgress.value = true))
 
     <div class="name">
       <span>{{ props.name }}</span>
+      <span>{{ props.name }}</span>
     </div>
 
     <div class="moemoepoint">
@@ -74,12 +75,37 @@ onMounted(() => (isShowProgress.value = true))
   align-items: center;
 
   span {
-    font-family: serif;
-    position: absolute;
-    font-size: 22px;
-    margin-left: 210px;
-    margin-top: 60px;
-    z-index: 1;
+    &:nth-child(1) {
+      font-family: serif;
+      position: absolute;
+      font-size: 22px;
+      margin-left: 210px;
+      margin-top: 60px;
+      z-index: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+    }
+
+    &:nth-child(2) {
+      user-select: none;
+      font-family: serif;
+      position: absolute;
+      text-align: right;
+      padding-right: 30px;
+      right: 0;
+      font-size: 77px;
+      color: var(--kungalgame-trans-white-5);
+      font-style: italic;
+      text-shadow: 2px 2px 2px var(--kungalgame-trans-white-5);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+    }
   }
 }
 
@@ -154,7 +180,7 @@ onMounted(() => (isShowProgress.value = true))
     }
 
     span:nth-child(2) {
-      bottom: 30%;
+      bottom: 35%;
       font-size: 50px;
     }
   }
