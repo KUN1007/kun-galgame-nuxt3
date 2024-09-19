@@ -114,6 +114,8 @@ const handleConfirmClipImage = async () => {
     img {
       user-select: none;
       margin: auto;
+      max-width: 1280px;
+      max-height: 720px;
     }
   }
 }
@@ -183,6 +185,17 @@ const handleConfirmClipImage = async () => {
     &:active {
       transform: scale(0.9);
       transition: 0.1s;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .kun-clipper {
+    .image-container {
+      img {
+        max-width: 300px;
+        max-height: 400px;
+      }
     }
   }
 }

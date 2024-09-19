@@ -13,15 +13,15 @@ const uploadImage = async (file: File) => {
   if (!isFileValid) {
     return
   }
-  const resizedFile = await resizeImage(file)
 
-  const res = await useComponentClipStore().clip(resizedFile)
+  const res = await useComponentClipStore().clip(file)
   if (!res.imageBlob) {
     return
   }
 
-  uploadedImage.value = res.imageBlob
-  selectedFileUrl.value = URL.createObjectURL(res.imageBlob)
+  const resizedFile = await resizeImage(res.imageBlob)
+  uploadedImage.value = resizedFile
+  selectedFileUrl.value = URL.createObjectURL(resizedFile)
 }
 
 const handleFileChange = (event: Event) => {

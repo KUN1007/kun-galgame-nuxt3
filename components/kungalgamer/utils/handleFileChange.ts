@@ -11,7 +11,7 @@ export const checkImageValid = (file: File) => {
   }
 }
 
-export const resizeImage = (file: File): Promise<Blob> => {
+export const resizeImage = (file: Blob): Promise<Blob> => {
   return new Promise((resolve, reject) => {
     const image = new Image()
     image.src = URL.createObjectURL(file)

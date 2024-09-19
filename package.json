@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.15.10",
+  "version": "2.15.11",
   "private": true,
   "scripts": {
     "build": "NODE_OPTIONS=--max-old-space-size=1007 nuxt build",
