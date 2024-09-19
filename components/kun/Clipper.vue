@@ -32,25 +32,37 @@ const handleConfirmClipImage = async () => {
     <Transition name="alert">
       <div v-if="isShowClipper" class="mask">
         <div class="kun-clipper">
-          <div class="image-container" @mousedown="handleMouseDown($event)">
+          <div
+            class="image-container"
+            @mousedown="handleMouseDown($event)"
+            @touchstart.passive="handleMouseDown($event)"
+          >
             <img v-if="imageBlob" :src="imageSrc" class="kun-clip-preview" />
 
             <div :style="croppingBoxStyle" class="cropping-box">
               <div
                 class="handle top-left"
                 @mousedown.stop="handleMouseDown($event, 'top-left')"
+                @touchstart.stop.passive="handleMouseDown($event, 'top-left')"
               />
               <div
                 class="handle top-right"
                 @mousedown.stop="handleMouseDown($event, 'top-right')"
+                @touchstart.stop.passive="handleMouseDown($event, 'top-right')"
               />
               <div
                 class="handle bottom-left"
                 @mousedown.stop="handleMouseDown($event, 'bottom-left')"
+                @touchstart.stop.passive="
+                  handleMouseDown($event, 'bottom-left')
+                "
               />
               <div
                 class="handle bottom-right"
                 @mousedown.stop="handleMouseDown($event, 'bottom-right')"
+                @touchstart.stop.passive="
+                  handleMouseDown($event, 'bottom-right')
+                "
               />
             </div>
           </div>

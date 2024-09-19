@@ -23,29 +23,62 @@ export const croppingBoxStyle = computed<CSSProperties>(() => {
   }
 })
 
-export const handleMouseDown = (event: MouseEvent, handle: string = '') => {
+export const handleMouseDown = (
+  event: MouseEvent | TouchEvent,
+  handle: string = ''
+) => {
   croppingBox.value.isDragging = true
   croppingBox.value.resizeHandle = handle
-  draggingStart.value = { x: event.clientX, y: event.clientY }
 
-  document.addEventListener('mousemove', handleMouseMove)
-  document.addEventListener('mouseup', handleMouseUp)
+  if (event instanceof TouchEvent) {
+    draggingStart.value = {
+      x: event.touches[0].clientX,
+      y: event.touches[0].clientY
+    }
+    document.addEventListener('touchmove', handleMouseMove)
+    document.addEventListener('touchend', handleMouseUp)
+  } else {
+    draggingStart.value = { x: event.clientX, y: event.clientY }
+    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('mouseup', handleMouseUp)
+  }
 }
 
-const handleMouseMove = (event: MouseEvent) => {
+const handleMouseMove = (event: MouseEvent | TouchEvent) => {
   if (!croppingBox.value.isDragging) {
     return
   }
 
-  const deltaX = event.clientX - draggingStart.value.x
-  const deltaY = event.clientY - draggingStart.value.y
-  draggingStart.value = { x: event.clientX, y: event.clientY }
+  let deltaX, deltaY
+  if (event instanceof TouchEvent) {
+    deltaX = event.touches[0].clientX - draggingStart.value.x
+    deltaY = event.touches[0].clientY - draggingStart.value.y
+    draggingStart.value = {
+      x: event.touches[0].clientX,
+      y: event.touches[0].clientY
+    }
+  } else {
+    deltaX = event.clientX - draggingStart.value.x
+    deltaY = event.clientY - draggingStart.value.y
+    draggingStart.value = { x: event.clientX, y: event.clientY }
+  }
 
   if (croppingBox.value.resizeHandle) {
     resizeCroppingBox(deltaX, deltaY)
   } else {
     moveCroppingBox(deltaX, deltaY)
   }
+}
+
+const handleMouseUp = () => {
+  croppingBox.value.isDragging = false
+  croppingBox.value.resizeHandle = ''
+
+  document.removeEventListener('mousemove', handleMouseMove)
+  document.removeEventListener('mouseup', handleMouseUp)
+
+  document.removeEventListener('touchmove', handleMouseMove)
+  document.removeEventListener('touchend', handleMouseUp)
 }
 
 const moveCroppingBox = (deltaX: number, deltaY: number) => {
@@ -117,13 +150,6 @@ const resizeCroppingBox = (deltaX: number, deltaY: number) => {
       croppingBox.value.width = croppingBox.value.height * aspectRatio
     }
   }
-}
-
-const handleMouseUp = () => {
-  croppingBox.value.isDragging = false
-  croppingBox.value.resizeHandle = ''
-  document.removeEventListener('mousemove', handleMouseMove)
-  document.removeEventListener('mouseup', handleMouseUp)
 }
 
 export const handleCrop = async (imageBlob: Blob) => {
