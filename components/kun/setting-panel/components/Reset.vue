@@ -2,7 +2,7 @@
 const localePath = useLocalePath()
 
 const handleRecover = async () => {
-  const res = await useTempMessageStore().alert(
+  const res = await useComponentMessageStore().alert(
     {
       'en-us': 'Are you sure you want to restore all settings?',
       'ja-jp': '',

@@ -33,7 +33,7 @@ const handleGetDetail = async (grid: number) => {
 }
 
 const handleMarkValid = async (gid: number, grid: number) => {
-  const res = await useTempMessageStore().alert(
+  const res = await useComponentMessageStore().alert(
     {
       'en-us': 'Are you sure you want to re-mark the resource link as valid?',
       'ja-jp': '',

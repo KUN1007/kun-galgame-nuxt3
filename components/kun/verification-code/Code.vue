@@ -5,8 +5,8 @@ const props = defineProps<{
   email: string
 }>()
 
-const { isCaptureSuccessful } = storeToRefs(useTempMessageStore())
-const info = useTempMessageStore()
+const { isCaptureSuccessful } = storeToRefs(useComponentMessageStore())
+const info = useComponentMessageStore()
 
 const isSendCode = ref(false)
 const isSending = ref(false)

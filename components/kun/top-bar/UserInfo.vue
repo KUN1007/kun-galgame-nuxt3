@@ -3,7 +3,7 @@ const { uid, name, moemoepoint } = storeToRefs(usePersistUserStore())
 const { showKUNGalgameMessageBox, messageStatus } = storeToRefs(
   useTempSettingStore()
 )
-const messageStore = useTempMessageStore()
+const messageStore = useComponentMessageStore()
 
 const localePath = useLocalePath()
 const container = ref<HTMLElement>()
@@ -56,7 +56,7 @@ const handleCheckIn = async () => {
 }
 
 const logOut = async () => {
-  const res = await useTempMessageStore().alert({
+  const res = await useComponentMessageStore().alert({
     'en-us': 'Are you sure you want to log out?',
     'ja-jp': '',
     'zh-cn': '您确定退出登录吗？'

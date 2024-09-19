@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { checkLoginForm } from './utils/checkLogin'
+import type { Pinia } from 'pinia'
 
 const localePath = useLocalePath()
 
@@ -7,9 +8,9 @@ const props = defineProps<{
   isLogin: boolean
 }>()
 
-const info = useTempMessageStore()
+const info = useComponentMessageStore()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
-  useTempMessageStore()
+  useComponentMessageStore()
 )
 
 const loginForm = reactive({
@@ -18,7 +19,7 @@ const loginForm = reactive({
 })
 
 const handleLogin = () => {
-  const checkLogin = checkLoginForm.asyncData(useNuxtApp().$pinia)
+  const checkLogin = checkLoginForm.asyncData(useNuxtApp().$pinia as Pinia)
   const result = checkLogin(loginForm.name, loginForm.password)
   if (!result) {
     return

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const message = useTempMessageStore()
+const message = useComponentMessageStore()
 
 const refresh = inject<() => Promise<void>>('refresh')
 const inputValue = ref('')

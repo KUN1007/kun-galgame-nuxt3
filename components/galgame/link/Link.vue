@@ -45,7 +45,7 @@ const handlePublishLink = async () => {
 }
 
 const handleDeleteLink = async (gid: number, glid: number) => {
-  const res = await useTempMessageStore().alert({
+  const res = await useComponentMessageStore().alert({
     'en-us': 'Are you sure you want to delete this visualnovel-related link?',
     'ja-jp': '',
     'zh-cn': '您确定删除该 Galgame 相关链接吗？'

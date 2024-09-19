@@ -78,7 +78,7 @@ const handleChangePassword = async () => {
     return
   }
 
-  const res = await useTempMessageStore().alert({
+  const res = await useComponentMessageStore().alert({
     'en-us': 'Are you sure you want to change the password?',
     'ja-jp': '',
     'zh-cn': '确定更改密码吗?'

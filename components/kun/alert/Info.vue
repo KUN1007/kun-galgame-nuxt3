@@ -3,7 +3,7 @@ import img from './loli'
 import 'animate.css'
 
 const { showInfo, infoMsg, infoTranslateParams, durations } = storeToRefs(
-  useTempMessageStore()
+  useComponentMessageStore()
 )
 
 const { loli, name } = img

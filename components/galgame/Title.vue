@@ -25,7 +25,7 @@ const handleChangeBanner = async () => {
     return
   }
 
-  const res = await useTempMessageStore().alert(
+  const res = await useComponentMessageStore().alert(
     {
       'en-us': 'Confirm to update banner?',
       'ja-jp': '',

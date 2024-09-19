@@ -1,18 +1,18 @@
 <script setup lang="ts">
 const { showAlert, alertTitle, alertMsg, isShowCancel } = storeToRefs(
-  useTempMessageStore()
+  useComponentMessageStore()
 )
 
 const { locale } = useI18n()
 
 const handleClose = () => {
   showAlert.value = false
-  useTempMessageStore().handleClose()
+  useComponentMessageStore().handleClose()
 }
 
 const handleConfirm = () => {
   showAlert.value = false
-  useTempMessageStore().handleConfirm()
+  useComponentMessageStore().handleConfirm()
 }
 </script>
 

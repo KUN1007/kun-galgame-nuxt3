@@ -12,7 +12,7 @@ const isUpvoted = ref(props.isUpvoted)
 const upvoteCount = ref(props.upvoteCount)
 
 const upvoteTopic = async () => {
-  const res = await useTempMessageStore().alert(
+  const res = await useComponentMessageStore().alert(
     {
       'en-us': 'Are you sure you want to upvote this topic?',
       'ja-jp': '',
@@ -43,7 +43,7 @@ const upvoteTopic = async () => {
 }
 
 const upvoteReply = async () => {
-  const res = await useTempMessageStore().alert(
+  const res = await useComponentMessageStore().alert(
     {
       'en-us': 'Are you sure you want to upvote this reply?',
       'ja-jp': '',

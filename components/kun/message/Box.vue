@@ -33,7 +33,7 @@ const handleReadAllMessage = async () => {
 }
 
 const handleDeleteAllMessage = async () => {
-  const res = await useTempMessageStore().alert({
+  const res = await useComponentMessageStore().alert({
     'en-us':
       'Are you sure you want to delete all messages? This action cannot be undone.',
     'ja-jp': '',

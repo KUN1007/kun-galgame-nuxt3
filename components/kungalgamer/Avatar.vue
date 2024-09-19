@@ -14,6 +14,18 @@ const uploadImage = async (file: File) => {
     return
   }
   const resizedFile = await resizeImage(file)
+
+  // TODO: Null image blob
+  // const res = await useComponentClipStore().clip(resizedFile)
+  // if (!res.imageBlob) {
+  //   console.log(res)
+
+  //   return
+  // }
+
+  // uploadedImage.value = res.imageBlob
+  // selectedFileUrl.value = URL.createObjectURL(res.imageBlob)
+
   uploadedImage.value = resizedFile
   selectedFileUrl.value = URL.createObjectURL(resizedFile)
 }
@@ -43,10 +55,6 @@ const handleDrop = (event: DragEvent) => {
 const handleDragOver = (event: DragEvent) => {
   event.preventDefault()
   event.dataTransfer!.dropEffect = 'copy'
-}
-
-const handleClickUpload = () => {
-  input.value?.click()
 }
 
 const handleChangeAvatar = async () => {
@@ -93,9 +101,9 @@ const handleChangeAvatar = async () => {
         class="avatar-upload"
         @drop="handleDrop($event)"
         @dragover="handleDragOver"
-        @click="handleClickUpload"
+        @click="input?.click()"
       >
-        <span class="plus" v-if="!selectedFileUrl"></span>
+        <span class="plus" v-if="!selectedFileUrl" />
         <NuxtImg
           class="avatar-preview"
           :src="selectedFileUrl"

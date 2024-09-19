@@ -1,10 +1,10 @@
-import { useTempMessageStore } from '~/store/temp/message'
+import { useComponentMessageStore } from '~/store/temp/components/message'
 import { isValidEmail, isValidName, isValidPassword } from '~/utils/validate'
-import type { Pinia } from '@pinia/nuxt/dist/runtime/composables'
+import type { Pinia } from 'pinia'
 
 export const checkLoginForm = {
-  asyncData ($pinia: Pinia) {
-    const info = useTempMessageStore($pinia)
+  asyncData($pinia: Pinia) {
+    const info = useComponentMessageStore($pinia)
 
     const checkUsername = (name: string) => {
       if (!name.trim()) {

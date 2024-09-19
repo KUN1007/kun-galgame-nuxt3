@@ -15,7 +15,7 @@ const handlePublishGalgame = async () => {
   ) {
     return
   }
-  const res = await useTempMessageStore().alert(
+  const res = await useComponentMessageStore().alert(
     {
       'en-us': 'Confirm to Publish Visualnovel?',
       'ja-jp': '',
@@ -64,7 +64,7 @@ const handlePublishGalgame = async () => {
     usePersistEditGalgameStore().resetGalgameData()
 
     navigateTo(localePath(`/galgame/${gid}`))
-    useTempMessageStore().info('AlertInfo.edit.publishSuccess')
+    useComponentMessageStore().info('AlertInfo.edit.publishSuccess')
   }
 }
 </script>

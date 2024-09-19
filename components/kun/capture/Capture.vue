@@ -5,7 +5,7 @@ import type { Question } from './questionsEN'
 
 const { locale } = useI18n()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
-  useTempMessageStore()
+  useComponentMessageStore()
 )
 const questions = ref<Question[]>([])
 questions.value = locale.value === 'en-us' ? questionsEN : questionsCN

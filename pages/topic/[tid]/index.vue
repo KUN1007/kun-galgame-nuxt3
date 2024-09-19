@@ -32,7 +32,7 @@ const resetPanelStatus = () => {
 
 onBeforeRouteLeave(async (_, __, next) => {
   if (isReplyRewriting.value) {
-    const res = await useTempMessageStore().alert({
+    const res = await useComponentMessageStore().alert({
       'en-us': 'Confirm leaving the page? Your changes will not be saved.',
       'ja-jp': '',
       'zh-cn': '确认离开界面吗？您的更改将不会保存'

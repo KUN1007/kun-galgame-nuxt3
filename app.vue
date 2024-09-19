@@ -74,6 +74,9 @@ onMounted(() => {
   <!-- Global capture component -->
   <KunCapture />
 
+  <!-- Global Clip component -->
+  <KunClipper />
+
   <!-- ReplyPanel -->
   <LazyTopicReplyPanel />
 

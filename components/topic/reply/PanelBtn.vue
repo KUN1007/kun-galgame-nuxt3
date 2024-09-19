@@ -17,7 +17,7 @@ const handlePublish = async () => {
     return
   }
 
-  const res = await useTempMessageStore().alert({
+  const res = await useComponentMessageStore().alert({
     'en-us': 'Confirm to publish?',
     'ja-jp': '',
     'zh-cn': '确认发布吗？'
@@ -58,7 +58,7 @@ const handleRewrite = async () => {
     return
   }
 
-  const res = await useTempMessageStore().alert({
+  const res = await useComponentMessageStore().alert({
     'en-us': 'Confirm to Rewrite?',
     'ja-jp': '',
     'zh-cn': '确认 Rewrite 吗？'

@@ -38,7 +38,7 @@ const handlePublishGalgamePR = async () => {
   if (!checkGalgamePR(pullRequest)) {
     return
   }
-  const res = await useTempMessageStore().alert({
+  const res = await useComponentMessageStore().alert({
     'en-us': 'Confirm to publish visualnovel info update request?',
     'ja-jp': '',
     'zh-cn': '确定发布 Galgame 信息更新请求吗?'
@@ -65,7 +65,7 @@ const handlePublishGalgamePR = async () => {
     navigateTo(localePath(`/galgame/${pullRequest.gid}`), {
       replace: true
     })
-    useTempMessageStore().info('AlertInfo.edit.prSuccess')
+    useComponentMessageStore().info('AlertInfo.edit.prSuccess')
   }
 }
 </script>

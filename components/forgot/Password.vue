@@ -2,7 +2,7 @@
 import { checkEmail, checkCode, checkPassword } from './check'
 
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
-  useTempMessageStore()
+  useComponentMessageStore()
 )
 
 const input = reactive({
@@ -45,7 +45,7 @@ const handleChangePassword = async () => {
     return
   }
 
-  const result = await useTempMessageStore().alert({
+  const result = await useComponentMessageStore().alert({
     'en-us': 'Are you sure you want to change the password?',
     'ja-jp': '',
     'zh-cn': '您确定更改密码吗?'

@@ -14,7 +14,7 @@ const props = defineProps<{
 const isFetching = ref(false)
 
 const handleDeleteResource = async (gid: number, grid: number) => {
-  const res = await useTempMessageStore().alert(
+  const res = await useComponentMessageStore().alert(
     {
       'en-us': 'Are you sure you want to delete the visualnovel resource link?',
       'ja-jp': '',
@@ -54,7 +54,7 @@ const handleReportExpire = async (details: GalgameResourceDetails) => {
     return
   }
 
-  const res = await useTempMessageStore().alert(
+  const res = await useComponentMessageStore().alert(
     {
       'en-us': 'Are you sure you want to report the resource link expired?',
       'ja-jp': '',

@@ -32,7 +32,7 @@ const handleDeclineRequest = async () => {
     )
     return
   }
-  const res = await useTempMessageStore().alert(
+  const res = await useComponentMessageStore().alert(
     {
       'en-us': 'Are you sure you want to decline the update request?',
       'ja-jp': '',
@@ -69,7 +69,7 @@ const handleDeclineRequest = async () => {
 }
 
 const handleMergeRequest = async () => {
-  const res = await useTempMessageStore().alert(
+  const res = await useComponentMessageStore().alert(
     {
       'en-us': 'Are you sure you want to merge the update request?',
       'ja-jp': '',

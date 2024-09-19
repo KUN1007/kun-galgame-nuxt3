@@ -44,7 +44,7 @@ const handlePublish = async () => {
     return
   }
 
-  const res = await useTempMessageStore().alert({
+  const res = await useComponentMessageStore().alert({
     'en-us': 'Confirm to Publish?',
     'ja-jp': '',
     'zh-cn': '确定发布吗?'
@@ -69,7 +69,7 @@ const handlePublish = async () => {
 
   if (tid) {
     navigateTo(localePath(`/topic/${tid}`))
-    useTempMessageStore().info('AlertInfo.edit.publishSuccess')
+    useComponentMessageStore().info('AlertInfo.edit.publishSuccess')
     usePersistEditTopicStore().resetTopicData()
   }
 }
@@ -88,7 +88,7 @@ const handleRewrite = async () => {
     return
   }
 
-  const res = await useTempMessageStore().alert({
+  const res = await useComponentMessageStore().alert({
     'en-us': 'Confirm to Rewrite?',
     'ja-jp': '',
     'zh-cn': '确定 Rewrite 吗?'
@@ -113,7 +113,7 @@ const handleRewrite = async () => {
 
   if (result) {
     navigateTo(localePath(`/topic/${tid.value}`))
-    useTempMessageStore().info('AlertInfo.edit.rewriteSuccess')
+    useComponentMessageStore().info('AlertInfo.edit.rewriteSuccess')
     useTempEditStore().resetRewriteTopicData()
   }
 }

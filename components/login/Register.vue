@@ -6,9 +6,9 @@ const props = defineProps<{
   isLogin: boolean
 }>()
 
-const info = useTempMessageStore()
+const info = useComponentMessageStore()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
-  useTempMessageStore()
+  useComponentMessageStore()
 )
 
 const { checkForm, checkRegister } = checkRegisterForm.asyncData(

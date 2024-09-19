@@ -26,7 +26,7 @@ const handleClickComment = (uid: number) => {
 }
 
 const handleDeleteComment = async (gid: number, gcid: number) => {
-  const res = await useTempMessageStore().alert({
+  const res = await useComponentMessageStore().alert({
     'en-us': 'Are you sure you want to delete the comment?',
     'ja-jp': '',
     'zh-cn': '您确定删除评论吗？'

@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
-import type { MessageStore } from '../types/message'
+import type { MessageStore } from '~/store/types/components/message'
 
-export const useTempMessageStore = defineStore({
-  id: 'tempMessage',
+export const useComponentMessageStore = defineStore({
+  id: 'tempComponentMessage',
   persist: false,
   state: (): MessageStore => ({
     showInfo: false,
