@@ -33,7 +33,7 @@ const handleConfirmClipImage = async () => {
       <div v-if="isShowClipper" class="mask">
         <div class="kun-clipper">
           <div class="image-container" @mousedown="handleMouseDown($event)">
-            <img v-if="imageBlob" :src="imageSrc" id="kun-clip-preview" />
+            <img v-if="imageBlob" :src="imageSrc" class="kun-clip-preview" />
 
             <div :style="croppingBoxStyle" class="cropping-box">
               <div
@@ -85,22 +85,38 @@ const handleConfirmClipImage = async () => {
 
 .kun-clipper {
   margin: auto;
+  background-color: var(--kungalgame-trans-white-2);
+  border-radius: 5px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all 0.3s ease;
+  padding: 17px;
+  box-sizing: border-box;
   position: relative;
+  user-select: none;
+  @include kun-center;
+  flex-direction: column;
+
+  .image-container {
+    display: flex;
+    position: relative;
+
+    img {
+      user-select: none;
+      margin: auto;
+    }
+  }
 }
 
 .cropping-box {
   position: absolute;
-  border: 2px solid var(--kungalgame-red-5);
-  background: var(--kungalgame-trans-pink-2);
+  border: 2px solid var(--kungalgame-pink-3);
+  background: var(--kungalgame-trans-pink-1);
   box-sizing: border-box;
 
   .handle {
     position: absolute;
     width: 10px;
     height: 10px;
-    background-color: var(--kungalgame-red-5);
+    background-color: var(--kungalgame-pink-4);
   }
 
   .top-left {
@@ -137,7 +153,7 @@ const handleConfirmClipImage = async () => {
     width: 70px;
     height: 30px;
     cursor: pointer;
-    border-radius: 2px;
+    border-radius: 5px;
 
     &:nth-child(1) {
       background-color: transparent;

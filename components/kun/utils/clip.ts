@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'vue'
 
-const croppingBox = ref({
+export const croppingBox = ref({
   x: 50,
   y: 50,
   width: 100,
@@ -19,7 +19,6 @@ export const croppingBoxStyle = computed<CSSProperties>(() => {
     width: `${croppingBox.value.width}px`,
     height: `${croppingBox.value.height}px`,
     position: 'absolute',
-    border: '2px solid red',
     cursor: croppingBox.value.isDragging ? 'move' : 'default'
   }
 })
@@ -50,8 +49,8 @@ const handleMouseMove = (event: MouseEvent) => {
 }
 
 const moveCroppingBox = (deltaX: number, deltaY: number) => {
-  const previewImage = document.getElementById(
-    'kun-clip-preview'
+  const previewImage = document.querySelector(
+    '.kun-clip-preview'
   ) as HTMLImageElement
   const containerWidth = previewImage.clientWidth
   const containerHeight = previewImage.clientHeight
@@ -73,8 +72,8 @@ const moveCroppingBox = (deltaX: number, deltaY: number) => {
 }
 
 const resizeCroppingBox = (deltaX: number, deltaY: number) => {
-  const previewImage = document.getElementById(
-    'kun-clip-preview'
+  const previewImage = document.querySelector(
+    '.kun-clip-preview'
   ) as HTMLImageElement
   const containerWidth = previewImage.clientWidth
   const containerHeight = previewImage.clientHeight
@@ -135,8 +134,8 @@ export const handleCrop = async (imageBlob: Blob) => {
   const img = new Image()
   img.src = imgUrl
 
-  const previewImage = document.getElementById(
-    'kun-clip-preview'
+  const previewImage = document.querySelector(
+    '.kun-clip-preview'
   ) as HTMLImageElement
   const containerWidth = previewImage.clientWidth
   const containerHeight = previewImage.clientHeight
