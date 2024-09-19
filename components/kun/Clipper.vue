@@ -16,10 +16,14 @@ const handleClose = () => {
   useComponentClipStore().handleClose()
 }
 
-const handleConfirmClipImage = () => {
-  isShowClipper.value = false
-  const imageBlob = handleCrop()
-  useComponentClipStore().handleConfirm(imageBlob)
+const handleConfirmClipImage = async () => {
+  if (imageBlob.value) {
+    const clippedImageBlob = await handleCrop(imageBlob.value)
+    useComponentClipStore().handleConfirm(clippedImageBlob)
+    isShowClipper.value = false
+  } else {
+    useMessage('Invalid image data', '错误的图片数据', 'warn')
+  }
 }
 </script>
 
@@ -29,12 +33,7 @@ const handleConfirmClipImage = () => {
       <div v-if="isShowClipper" class="mask">
         <div class="kun-clipper">
           <div class="image-container" @mousedown="handleMouseDown($event)">
-            <img
-              v-if="imageBlob"
-              ref="previewImage"
-              :src="imageSrc"
-              class="avatar-preview"
-            />
+            <img v-if="imageBlob" :src="imageSrc" id="kun-clip-preview" />
 
             <div :style="croppingBoxStyle" class="cropping-box">
               <div
@@ -84,9 +83,10 @@ const handleConfirmClipImage = () => {
   color: var(--kungalgame-font-color-3);
 }
 
-.avatar-preview {
-  max-width: 300px;
-  max-height: 300px;
+.kun-clipper {
+  margin: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
   position: relative;
 }
 

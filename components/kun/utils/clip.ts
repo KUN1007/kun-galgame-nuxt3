@@ -11,8 +11,6 @@ const croppingBox = ref({
 
 const draggingStart = ref({ x: 0, y: 0 })
 const aspectRatio = 1
-const previewImage = ref<HTMLImageElement | null>(null)
-const croppedImage = ref<Blob | null>(null)
 
 export const croppingBoxStyle = computed<CSSProperties>(() => {
   return {
@@ -52,43 +50,73 @@ const handleMouseMove = (event: MouseEvent) => {
 }
 
 const moveCroppingBox = (deltaX: number, deltaY: number) => {
-  croppingBox.value.x = Math.max(0, croppingBox.value.x + deltaX)
-  croppingBox.value.y = Math.max(0, croppingBox.value.y + deltaY)
+  const previewImage = document.getElementById(
+    'kun-clip-preview'
+  ) as HTMLImageElement
+  const containerWidth = previewImage.clientWidth
+  const containerHeight = previewImage.clientHeight
+
+  croppingBox.value.x = Math.max(
+    0,
+    Math.min(
+      croppingBox.value.x + deltaX,
+      containerWidth - croppingBox.value.width
+    )
+  )
+  croppingBox.value.y = Math.max(
+    0,
+    Math.min(
+      croppingBox.value.y + deltaY,
+      containerHeight - croppingBox.value.height
+    )
+  )
 }
 
 const resizeCroppingBox = (deltaX: number, deltaY: number) => {
-  const handle = croppingBox.value.resizeHandle
+  const previewImage = document.getElementById(
+    'kun-clip-preview'
+  ) as HTMLImageElement
+  const containerWidth = previewImage.clientWidth
+  const containerHeight = previewImage.clientHeight
   const minSize = 20
 
+  const handle = croppingBox.value.resizeHandle
+
   if (handle.includes('right')) {
-    croppingBox.value.width = Math.max(
-      minSize,
-      croppingBox.value.width + deltaX
+    croppingBox.value.width = Math.min(
+      Math.max(minSize, croppingBox.value.width + deltaX),
+      containerWidth - croppingBox.value.x
     )
   }
   if (handle.includes('bottom')) {
-    croppingBox.value.height = Math.max(
-      minSize,
-      croppingBox.value.height + deltaY
+    croppingBox.value.height = Math.min(
+      Math.max(minSize, croppingBox.value.height + deltaY),
+      containerHeight - croppingBox.value.y
     )
   }
   if (handle.includes('left')) {
-    croppingBox.value.width = Math.max(
-      minSize,
-      croppingBox.value.width - deltaX
-    )
-    croppingBox.value.x += deltaX
+    const newWidth = Math.max(minSize, croppingBox.value.width - deltaX)
+    const newX = croppingBox.value.x + deltaX
+    if (newX >= 0) {
+      croppingBox.value.x = newX
+      croppingBox.value.width = newWidth
+    }
   }
   if (handle.includes('top')) {
-    croppingBox.value.height = Math.max(
-      minSize,
-      croppingBox.value.height - deltaY
-    )
-    croppingBox.value.y += deltaY
+    const newHeight = Math.max(minSize, croppingBox.value.height - deltaY)
+    const newY = croppingBox.value.y + deltaY
+    if (newY >= 0) {
+      croppingBox.value.y = newY
+      croppingBox.value.height = newHeight
+    }
   }
 
   if (aspectRatio) {
     croppingBox.value.height = croppingBox.value.width / aspectRatio
+    if (croppingBox.value.y + croppingBox.value.height > containerHeight) {
+      croppingBox.value.height = containerHeight - croppingBox.value.y
+      croppingBox.value.width = croppingBox.value.height * aspectRatio
+    }
   }
 }
 
@@ -99,36 +127,50 @@ const handleMouseUp = () => {
   document.removeEventListener('mouseup', handleMouseUp)
 }
 
-export const handleCrop = () => {
+export const handleCrop = async (imageBlob: Blob) => {
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
 
-  if (previewImage.value && ctx) {
-    const { x, y, width, height } = croppingBox.value
-    const imgWidth = previewImage.value.naturalWidth
-    const imgHeight = previewImage.value.naturalHeight
+  const imgUrl = URL.createObjectURL(imageBlob)
+  const img = new Image()
+  img.src = imgUrl
 
-    canvas.width = width
-    canvas.height = height
+  const previewImage = document.getElementById(
+    'kun-clip-preview'
+  ) as HTMLImageElement
+  const containerWidth = previewImage.clientWidth
+  const containerHeight = previewImage.clientHeight
 
-    ctx.drawImage(
-      previewImage.value,
-      (x / 300) * imgWidth,
-      (y / 300) * imgHeight,
-      (width / 300) * imgWidth,
-      (height / 300) * imgHeight,
-      0,
-      0,
-      width,
-      height
-    )
+  const croppedImage = await new Promise<Blob | null>((resolve) => {
+    img.onload = () => {
+      if (ctx) {
+        const { x, y, width, height } = croppingBox.value
+        const scaleX = img.width / containerWidth
+        const scaleY = img.height / containerHeight
 
-    canvas.toBlob((blob) => {
-      if (blob) {
-        croppedImage.value = blob
+        canvas.width = width
+        canvas.height = height
+
+        ctx.drawImage(
+          img,
+          x * scaleX,
+          y * scaleY,
+          width * scaleX,
+          height * scaleY,
+          0,
+          0,
+          width,
+          height
+        )
+
+        canvas.toBlob((blob) => {
+          resolve(blob)
+        })
       }
-    })
-  }
 
-  return croppedImage.value
+      URL.revokeObjectURL(imgUrl)
+    }
+  })
+
+  return croppedImage
 }

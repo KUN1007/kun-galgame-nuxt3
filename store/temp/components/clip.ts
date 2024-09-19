@@ -24,6 +24,8 @@ export const useComponentClipStore = defineStore({
     },
 
     handleClose() {},
-    handleConfirm(_: Blob | null) {}
+    handleConfirm(tempImage: Blob | null) {
+      this.imageBlob = tempImage
+    }
   }
 })
