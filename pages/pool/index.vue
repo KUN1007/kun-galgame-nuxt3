@@ -125,6 +125,8 @@ onUnmounted(() => {
         >
           <span>{{ $t(`pool.${pageData.category}`) }}</span>
         </KunSelect>
+
+        <PoolSimpleMode />
       </div>
 
       <div class="order">
@@ -174,6 +176,7 @@ onUnmounted(() => {
   flex-direction: column;
   overflow-y: scroll;
   max-width: 64rem;
+  min-height: calc(100dvh - 75px);
   margin: 0 auto;
   padding: 0 10px;
 }
@@ -234,7 +237,8 @@ onUnmounted(() => {
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px;
+  padding: 10px;
+  @include kun-blur;
 }
 
 .load {
@@ -261,13 +265,13 @@ onUnmounted(() => {
 
 @media (max-width: 700px) {
   .pool {
-    height: calc(100dvh - 63px);
+    min-height: calc(100dvh - 63px);
     padding: 0 5px;
   }
 
   .container {
     grid-template-columns: repeat(2, minmax(100px, 233px));
-    gap: 7px;
+    padding: 10px 0;
   }
 
   .tool {

@@ -52,13 +52,13 @@ const handleClickAvatar = (event: MouseEvent) => {
 <style lang="scss" scoped>
 .user {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 
 .avatar {
   display: flex;
   justify-content: center;
+  margin-right: 10px;
 
   img {
     border-radius: 50%;

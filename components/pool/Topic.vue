@@ -5,18 +5,51 @@ const props = defineProps<{
   topic: PoolTopic
 }>()
 
+const { isSimpleMode } = storeToRefs(usePersistPoolStore())
+
 const actionsCount = computed(() => props.topic.replies + props.topic.comments)
+
+const iconMap: Record<string, string> = {
+  g: 'lucide:gamepad-2',
+  t: 'lucide:drafting-compass',
+  o: 'lucide:circle-ellipsis'
+}
 </script>
 
 <template>
-  <NuxtLinkLocale class="topic" :to="`/topic/${props.topic.tid}`">
+  <NuxtLinkLocale
+    class="topic"
+    :to="`/topic/${props.topic.tid}`"
+    v-kun-gradient="{
+      color: '--kungalgame-trans-blue-0',
+      radius: 70
+    }"
+  >
     <div class="title">
-      {{ topic.title }}
+      <template v-if="isSimpleMode">
+        <span
+          class="section"
+          v-for="(sec, index) in props.topic.section"
+          :key="index"
+          :class="sec.toLowerCase()[0]"
+        >
+          <Icon :name="iconMap[sec[0]]" />
+        </span>
+      </template>
+      <span>{{ topic.title }}</span>
     </div>
 
-    <PoolUser :user="props.topic.user" :time="props.topic.time" />
+    <PoolUser
+      v-if="!isSimpleMode"
+      :user="props.topic.user"
+      :time="props.topic.time"
+    />
 
-    <PoolIntroduction :section="props.topic.section" :tags="props.topic.tags" />
+    <PoolIntroduction
+      v-if="!isSimpleMode"
+      :section="props.topic.section"
+      :tags="props.topic.tags"
+    />
 
     <div class="status">
       <span>
@@ -45,27 +78,40 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
   cursor: pointer;
   max-width: 300px;
   padding: 10px;
-  transition: transform 0.2s;
-
-  @include kun-blur;
+  transition: all 0.2s;
+  border-radius: 10px;
 
   &:hover {
-    box-shadow: var(--kungalgame-shadow-0);
-    transform: translateY(-7px);
-    z-index: 1;
+    box-shadow: var(--shadow);
+
+    .title {
+      color: var(--kungalgame-blue-5);
+    }
   }
 }
 
 .title {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  margin: 0 auto;
-  margin-bottom: 10px;
   color: var(--kungalgame-font-color-3);
-  flex-shrink: 0;
+
+  .section {
+    margin-right: 5px;
+
+    .icon {
+      font-size: 17px;
+    }
+  }
+
+  .g {
+    color: var(--kungalgame-blue-5);
+  }
+
+  .t {
+    color: var(--kungalgame-green-4);
+  }
+
+  .o {
+    color: var(--kungalgame-pink-4);
+  }
 }
 
 .status {
@@ -74,7 +120,7 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
   justify-content: space-around;
   overflow: hidden;
   flex-wrap: wrap;
-  margin: 10px 0;
+  margin-top: 10px;
 
   span {
     display: flex;

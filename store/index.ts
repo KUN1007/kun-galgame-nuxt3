@@ -7,6 +7,7 @@ export const kungalgameStoreReset = () => {
   usePersistKUNGalgameHomeStore().$reset()
   usePersistUserStore().$reset()
   usePersistMessageStore().$reset()
+  usePersistPoolStore().$reset()
   usePersistSettingsStore().$reset()
 
   useTempEditStore().$reset()
