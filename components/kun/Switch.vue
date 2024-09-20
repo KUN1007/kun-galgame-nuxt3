@@ -1,10 +1,12 @@
 <script setup lang="ts">
 const model = defineModel<boolean>({ required: true })
+
+const id = ref(`switch-${Math.random().toString(36).slice(2, 9)}`)
 </script>
 
 <template>
-  <input type="checkbox" id="switch" v-model="model" />
-  <label for="switch"></label>
+  <input type="checkbox" :id="id" v-model="model" />
+  <label :for="id" />
 </template>
 
 <style lang="scss" scoped>

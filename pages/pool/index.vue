@@ -199,6 +199,10 @@ onUnmounted(() => {
     display: flex;
   }
 
+  .simple-mode {
+    margin-left: 10px;
+  }
+
   &::before {
     content: '';
     position: absolute;
@@ -276,6 +280,10 @@ onUnmounted(() => {
 
   .tool {
     margin-bottom: 7px;
+  }
+
+  .simple-mode {
+    display: none;
   }
 }
 </style>

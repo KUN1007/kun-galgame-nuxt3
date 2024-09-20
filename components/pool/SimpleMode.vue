@@ -11,7 +11,6 @@ const { isSimpleMode } = storeToRefs(usePersistPoolStore())
 
 <style lang="scss" scoped>
 .simple-mode {
-  margin-left: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
