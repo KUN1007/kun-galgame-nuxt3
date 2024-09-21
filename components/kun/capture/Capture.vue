@@ -1,19 +1,28 @@
 <script setup lang="ts">
 import { questionsEN } from './questionsEN'
+import { questionsJP } from './questionsJP'
 import { questionsCN } from './questionsCN'
+import { questionsTW } from './questionsTW'
 import type { Question } from './questionsEN'
 
 const { locale } = useI18n()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useComponentMessageStore()
 )
-const questions = ref<Question[]>([])
-questions.value = locale.value === 'en-us' ? questionsEN : questionsCN
+
+const questionsMap = {
+  'en-us': questionsEN,
+  'ja-jp': questionsJP,
+  'zh-cn': questionsCN,
+  'zh-tw': questionsTW
+}
+
+const questions = ref<Question[]>(questionsMap[locale.value as Language])
 
 watch(
   () => locale.value,
   () => {
-    questions.value = locale.value === 'en-us' ? questionsEN : questionsCN
+    questions.value = questionsMap[locale.value as Language]
   }
 )
 

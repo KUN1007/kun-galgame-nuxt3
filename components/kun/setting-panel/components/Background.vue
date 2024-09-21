@@ -2,9 +2,10 @@
 import { ref, computed } from 'vue'
 import { backgroundImages } from './backgroundImage'
 
+const { locale } = useI18n()
+
 const itemsPerPage = 15
 const totalPages = Math.ceil(backgroundImages.length / itemsPerPage)
-
 const currentPage = ref(1)
 
 const paginatedImages = computed(() => {
@@ -65,7 +66,10 @@ const handleChangeImage = async (index: number) => {
           <li
             v-for="kun in paginatedImages"
             :key="kun.index"
-            v-tooltip="{ message: kun.message, position: 'bottom' }"
+            v-tooltip="{
+              message: kun.message[locale as Language],
+              position: 'bottom'
+            }"
           >
             <NuxtImg
               v-if="kun"
