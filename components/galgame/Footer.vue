@@ -21,7 +21,12 @@ const galgame = inject<GalgameDetail>('galgame')
         :likes-count="galgame.likes.count"
         :is-liked="galgame.likes.isLiked"
         v-tooltip="{
-          message: { en: 'Like', zh: '点赞' },
+          message: {
+            'en-us': 'Like',
+            'ja-jp': 'いいね',
+            'zh-cn': '点赞',
+            'zh-tw': '點贊'
+          },
           position: 'bottom'
         }"
       />
@@ -32,7 +37,12 @@ const galgame = inject<GalgameDetail>('galgame')
         :favorites-count="galgame.favorites.count"
         :is-favorite="galgame.favorites.isFavorite"
         v-tooltip="{
-          message: { en: 'Favorite', zh: '收藏' },
+          message: {
+            'en-us': 'Favorite',
+            'ja-jp': 'お気に入り',
+            'zh-cn': '收藏',
+            'zh-tw': '收藏'
+          },
           position: 'bottom'
         }"
       />

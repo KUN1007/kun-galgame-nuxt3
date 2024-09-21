@@ -1,12 +1,7 @@
 import Cookies from 'js-cookie'
 import type { DirectiveBinding } from 'vue'
 
-type Message =
-  | string
-  | {
-      en: string
-      zh: string
-    }
+type Message = string | KunLanguage
 
 interface TooltipBinding {
   message: Message
@@ -26,19 +21,25 @@ const initializeTooltip = (element: HTMLElement, binding: DirectiveBinding) => {
   }
 
   const localeCookies = Cookies.get('kungalgame-language')
-  const locale = localeCookies || 'en-us'
-  const messageI18n = locale === 'en-us' ? message.en : message.zh
+  const getDefaultLocale = () =>
+    window?.location.href.match(/\/([a-z]{2}-[a-z]{2})\//)?.[1] ?? 'en-us'
+  const locale = localeCookies || getDefaultLocale()
 
-  element.setAttribute('tooltip', messageI18n)
+  if (typeof message === 'string') {
+    element.setAttribute('tooltip', message)
+  } else {
+    element.setAttribute('tooltip', message[locale as Language])
+  }
+
   element.setAttribute('position', position)
 }
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.directive('tooltip', {
-    mounted (element: HTMLElement, binding: DirectiveBinding) {
+    mounted(element: HTMLElement, binding: DirectiveBinding) {
       initializeTooltip(element, binding)
     },
-    updated (element: HTMLElement, binding: DirectiveBinding) {
+    updated(element: HTMLElement, binding: DirectiveBinding) {
       initializeTooltip(element, binding)
     }
   })

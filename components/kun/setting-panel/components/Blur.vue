@@ -15,8 +15,12 @@ watch(
   <div
     v-tooltip="{
       message: {
-        en: 'This setting may cause the website sluggish on low-performance devices',
-        zh: '该设置项可能会使网站在低性能设备卡顿'
+        'en-us':
+          'This setting may cause the website sluggish on low-performance devices',
+        'ja-jp':
+          'この設定は、低性能のデバイスでウェブサイトが遅くなる可能性があります。',
+        'zh-cn': '该设置项可能会使网站在低性能设备卡顿',
+        'zh-tw': '該設置項可能會使網站在低性能設備卡頓'
       },
       position: 'bottom'
     }"

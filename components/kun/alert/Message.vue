@@ -15,8 +15,6 @@ const isRichText = computed(() => props.richText ?? false)
 const getDefaultLocale = () =>
   window?.location.href.match(/\/([a-z]{2}-[a-z]{2})\//)?.[1] ?? 'en-us'
 
-console.log(locale)
-
 const messageRef = computed(() => {
   const currentLocale = locale || getDefaultLocale()
   return (

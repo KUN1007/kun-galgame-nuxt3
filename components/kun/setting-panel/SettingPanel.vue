@@ -57,8 +57,10 @@ const handelCloseSettingsPanel = () => {
             class="loli"
             v-tooltip="{
               message: {
-                en: 'Whether to display Kohaku',
-                zh: '是否显示琥珀'
+                'en-us': 'Whether to display Kohaku',
+                'ja-jp': '琥珀を表示しますか？',
+                'zh-cn': '是否显示琥珀',
+                'zh-tw': '是否顯示琥珀'
               },
               position: 'bottom'
             }"

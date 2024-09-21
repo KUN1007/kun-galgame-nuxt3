@@ -58,7 +58,7 @@ const isShowRequestHelpNotice = computed(() => {
       </p>
     </div>
 
-    <div class="zh" v-if="locale === 'zh-cn'">
+    <div class="zh" v-if="locale === 'ja-jp'">
       <h2>注意</h2>
       <br />
       <p>

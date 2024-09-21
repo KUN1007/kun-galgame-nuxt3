@@ -33,7 +33,12 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
         :upvote-count="reply.upvotes.count"
         :is-upvoted="reply.upvotes.isUpvoted"
         v-tooltip="{
-          message: { en: 'Upvote', zh: '推' },
+          message: {
+            'en-us': 'Upvote',
+            'ja-jp': '推す',
+            'zh-cn': '推',
+            'zh-tw': '推'
+          },
           position: 'bottom'
         }"
       />
@@ -45,7 +50,12 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
         :likes-count="reply.likes.count"
         :is-liked="reply.likes.isLiked"
         v-tooltip="{
-          message: { en: 'Like', zh: '点赞' },
+          message: {
+            'en-us': 'Like',
+            'ja-jp': 'いいね',
+            'zh-cn': '点赞',
+            'zh-tw': '點贊'
+          },
           position: 'bottom'
         }"
       />
@@ -57,7 +67,12 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
         :dislikes-count="reply.dislikes.count"
         :is-disliked="reply.dislikes.isDisliked"
         v-tooltip="{
-          message: { en: 'Dislike', zh: '点踩' },
+          message: {
+            'en-us': 'Dislike',
+            'ja-jp': '低評価',
+            'zh-cn': '点踩',
+            'zh-tw': '點踩'
+          },
           position: 'bottom'
         }"
       />
@@ -78,7 +93,12 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
         "
         class="icon"
         v-tooltip="{
-          message: { en: 'Share', zh: '分享' },
+          message: {
+            'en-us': 'Share',
+            'ja-jp': '共有',
+            'zh-cn': '分享',
+            'zh-tw': '分享'
+          },
           position: 'bottom'
         }"
       >
@@ -88,7 +108,7 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
       <TopicReplyRewrite
         :reply="reply"
         v-tooltip="{
-          message: { en: 'Rewrite', zh: 'Rewrite' },
+          message: 'Rewrite',
           position: 'bottom'
         }"
       />
@@ -97,7 +117,12 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
         @click="handleClickComment(reply.rid, reply.user.uid, reply.user.name)"
         class="comment"
         v-tooltip="{
-          message: { en: 'Comment', zh: '评论' },
+          message: {
+            'en-us': 'Comment',
+            'ja-jp': 'コメント',
+            'zh-cn': '评论',
+            'zh-tw': '評論'
+          },
           position: 'bottom'
         }"
       >

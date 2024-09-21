@@ -34,7 +34,12 @@ const gid = computed(() => {
       v-if="views > 0"
       class="views"
       v-tooltip="{
-        message: { en: 'Views', zh: '浏览数' },
+        message: {
+          'en-us': 'Views',
+          'ja-jp': '閲覧数',
+          'zh-cn': '浏览数',
+          'zh-tw': '瀏覽數'
+        },
         position: 'bottom'
       }"
     >

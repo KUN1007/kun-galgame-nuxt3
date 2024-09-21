@@ -22,7 +22,12 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     <NuxtLinkLocale
       class="search"
       v-tooltip="{
-        message: { en: 'Press Ctrl + K to search', zh: '按下 Ctrl + K 以搜索' },
+        message: {
+          'en-us': 'Press Ctrl + K to search',
+          'ja-jp': 'Ctrl + K を押して検索',
+          'zh-cn': '按下 Ctrl + K 以搜索',
+          'zh-tw': '按下 Ctrl + K 以搜索'
+        },
         position: 'bottom'
       }"
       to="/search"

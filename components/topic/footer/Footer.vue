@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { TopicDetail } from '~/types/api/topic'
 
+const { locale } = useI18n()
+
 defineProps<{
   topic: TopicDetail
 }>()
@@ -15,7 +17,12 @@ defineProps<{
         :upvote-count="topic.upvotes.count"
         :is-upvoted="topic.upvotes.isUpvoted"
         v-tooltip="{
-          message: { en: 'Upvote', zh: '推' },
+          message: {
+            'en-us': 'Upvote',
+            'ja-jp': '推す',
+            'zh-cn': '推',
+            'zh-tw': '推'
+          },
           position: 'bottom'
         }"
       />
@@ -27,7 +34,12 @@ defineProps<{
         :likes-count="topic.likes.count"
         :is-liked="topic.likes.isLiked"
         v-tooltip="{
-          message: { en: 'Like', zh: '点赞' },
+          message: {
+            'en-us': 'Like',
+            'ja-jp': 'いいね',
+            'zh-cn': '点赞',
+            'zh-tw': '點贊'
+          },
           position: 'bottom'
         }"
       />
@@ -39,7 +51,12 @@ defineProps<{
         :dislikes-count="topic.dislikes.count"
         :is-disliked="topic.dislikes.isDisliked"
         v-tooltip="{
-          message: { en: 'Dislike', zh: '点踩' },
+          message: {
+            'en-us': 'Dislike',
+            'ja-jp': '低評価',
+            'zh-cn': '点踩',
+            'zh-tw': '點踩'
+          },
           position: 'bottom'
         }"
       />
@@ -50,7 +67,12 @@ defineProps<{
         :favorites-count="topic.favorites.count"
         :is-favorite="topic.favorites.isFavorite"
         v-tooltip="{
-          message: { en: 'Favorite', zh: '收藏' },
+          message: {
+            'en-us': 'Favorite',
+            'ja-jp': 'お気に入り',
+            'zh-cn': '收藏',
+            'zh-tw': '收藏'
+          },
           position: 'bottom'
         }"
       />
@@ -69,12 +91,17 @@ defineProps<{
       <span
         @click="
           useKunCopy(
-            `${topic.title}: https://www.kungal.com/topic/${topic.tid}`
+            `${topic.title}: https://www.kungal.com/${locale}/topic/${topic.tid}`
           )
         "
         class="icon"
         v-tooltip="{
-          message: { en: 'Share', zh: '分享' },
+          message: {
+            'en-us': 'Share',
+            'ja-jp': '共有',
+            'zh-cn': '分享',
+            'zh-tw': '分享'
+          },
           position: 'bottom'
         }"
       >
@@ -88,7 +115,7 @@ defineProps<{
       <TopicFooterRewrite
         :topic="topic"
         v-tooltip="{
-          message: { en: 'Rewrite', zh: 'Rewrite' },
+          message: 'Rewrite',
           position: 'bottom'
         }"
       />

@@ -69,7 +69,12 @@ const loliStatus = computed(() => {
           v-if="topic.views > 0"
           class="views"
           v-tooltip="{
-            message: { en: 'Views', zh: '浏览数' },
+            message: {
+              'en-us': 'Views',
+              'ja-jp': '閲覧数',
+              'zh-cn': '浏览数',
+              'zh-tw': '瀏覽數'
+            },
             position: 'bottom'
           }"
         >
@@ -81,7 +86,12 @@ const loliStatus = computed(() => {
           class="rewrite"
           v-if="topic.edited"
           v-tooltip="{
-            message: { en: 'Rewrite Time', zh: 'Rewrite 时间' },
+            message: {
+              'en-us': 'Rewrite Time',
+              'ja-jp': 'Rewrite 時間',
+              'zh-cn': 'Rewrite 时间',
+              'zh-tw': 'Rewrite 時間'
+            },
             position: 'bottom'
           }"
         >

@@ -57,7 +57,12 @@ const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
           :to-uid="link.uid"
           :likes="link.likes"
           v-tooltip="{
-            message: { en: 'Like', zh: '点赞' },
+            message: {
+              'en-us': 'Like',
+              'ja-jp': 'いいね',
+              'zh-cn': '点赞',
+              'zh-tw': '點贊'
+            },
             position: 'bottom'
           }"
         />
@@ -67,7 +72,12 @@ const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
           to="/report"
           aria-label="Report violation"
           v-tooltip="{
-            message: { en: 'Report violation', zh: '举报违规' },
+            message: {
+              'en-us': 'Report violation',
+              'ja-jp': '違反の報告',
+              'zh-cn': '举报违规',
+              'zh-tw': '舉報違規'
+            },
             position: 'bottom'
           }"
         >
@@ -79,8 +89,12 @@ const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
           :class="`status-${link.status}`"
           v-tooltip="{
             message: {
-              en: link.status ? 'Link expired' : 'Link valid',
-              zh: link.status ? '链接过期' : '链接有效'
+              'en-us': link.status ? 'Link expired' : 'Link valid',
+              'ja-jp': link.status
+                ? 'リンクが期限切れです'
+                : 'リンクは有効です',
+              'zh-cn': link.status ? '链接过期' : '链接有效',
+              'zh-tw': link.status ? '鏈接過期' : '鏈接有效'
             },
             position: 'bottom'
           }"

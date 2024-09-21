@@ -56,7 +56,12 @@ defineProps<{
             class="rewrite"
             v-if="reply.edited"
             v-tooltip="{
-              message: { en: 'Rewrite Time', zh: 'Rewrite 时间' },
+              message: {
+                'en-us': 'Rewrite Time',
+                'ja-jp': 'Rewrite 時間',
+                'zh-cn': 'Rewrite 时间',
+                'zh-tw': 'Rewrite 時間'
+              },
               position: 'bottom'
             }"
           >
