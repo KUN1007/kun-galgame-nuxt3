@@ -84,7 +84,7 @@ export default defineNuxtConfig({
       {
         code: 'ja-jp',
         language: 'ja-JP',
-        file: 'ja-jp.json'
+        file: 'ja-JP.json'
       },
       {
         code: 'zh-cn',
