@@ -15,9 +15,11 @@ useHead({
 <template>
   <div class="root">
     <div class="container">
-      <BylawContentEN v-if="locale === 'en-us'" />
-
-      <BylawContentCN v-if="locale === 'zh-cn'" />
+      <!-- TODO: -->
+      <I18nBylawContentEN v-if="locale === 'en-us'" />
+      <I18nBylawContentJP v-if="locale === 'ja-jp'" />
+      <I18nBylawContentCN v-if="locale === 'zh-cn'" />
+      <I18nBylawContentTW v-if="locale === 'zh-tw'" />
 
       <KunFooter style="position: absolute; bottom: 2%" />
     </div>

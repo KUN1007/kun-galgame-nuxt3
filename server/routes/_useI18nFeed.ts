@@ -22,6 +22,20 @@ const contentMap: Record<Language, Record<'topic' | 'galgame', I18nContent>> = {
       copyright: `Copyright © 2024 KUN Visual Novel All Rights Reserved`
     }
   },
+  'ja-jp': {
+    topic: {
+      title: '鯤 ギャルゲーム - 新しいトピックRSS',
+      description: 'トピックに関するニュースと更新情報',
+      generator: '萌えRSSジェネレーター',
+      copyright: `著作権 © 2024 KUN ギャルゲーム 全著作権所有`
+    },
+    galgame: {
+      title: '鯤 ギャルゲーム - 新しいギャルゲームRSS',
+      description: 'ギャルゲームに関するニュースと更新情報',
+      generator: '萌えRSSジェネレーター',
+      copyright: `著作権 © 2024 KUN ギャルゲーム 全著作権所有`
+    }
+  },
   'zh-cn': {
     topic: {
       title: '鲲 Galgame 论坛 - 新话题订阅',
@@ -48,20 +62,6 @@ const contentMap: Record<Language, Record<'topic' | 'galgame', I18nContent>> = {
       description: '最新更新的 Galgame',
       generator: '萌萌 RSS 生成器',
       copyright: `版權所有 © 2024 鯤 Galgame 保留所有權利`
-    }
-  },
-  'ja-jp': {
-    topic: {
-      title: '鯤 ギャルゲーム - 新しいトピックRSS',
-      description: 'トピックに関するニュースと更新情報',
-      generator: '萌えRSSジェネレーター',
-      copyright: `著作権 © 2024 KUN ギャルゲーム 全著作権所有`
-    },
-    galgame: {
-      title: '鯤 ギャルゲーム - 新しいギャルゲームRSS',
-      description: 'ギャルゲームに関するニュースと更新情報',
-      generator: '萌えRSSジェネレーター',
-      copyright: `著作権 © 2024 KUN ギャルゲーム 全著作権所有`
     }
   }
 }

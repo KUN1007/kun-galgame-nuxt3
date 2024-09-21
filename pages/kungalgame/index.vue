@@ -17,9 +17,10 @@ useHead({
     <KungalgameAside class="aside" />
 
     <div class="content">
-      <KungalgameContentEN v-if="locale === 'en-us'" />
-
-      <KungalgameContentCN v-if="locale === 'zh-cn'" />
+      <I18nKungalgameContentEN v-if="locale === 'en-us'" />
+      <I18nKungalgameContentJP v-if="locale === 'ja-jp'" />
+      <I18nKungalgameContentCN v-if="locale === 'zh-cn'" />
+      <I18nKungalgameContentTW v-if="locale === 'zh-tw'" />
 
       <KunFooter style="padding-bottom: 20px" />
     </div>

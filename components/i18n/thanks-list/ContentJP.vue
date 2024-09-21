@@ -3,31 +3,39 @@
 <template>
   <div class="article">
     <p>
-      在 KUNGalgame 网站的设计中，我们参考了以下优秀网站的界面设计，其中有：
+      鯤 ギャルゲーム
+      ウェブサイトのデザインにおいて、私たちは以下の優れたウェブサイトのインターフェースデザインを参考にしました：
     </p>
     <br />
     <br />
     <ul class="list">
-      <li>Twitter（推特） - 半透明设计、无限高度弹性盒</li>
-      <li>Github（github） - 配色</li>
-      <li>bbs.kfmax.com（绯月） - 用户信息分类</li>
-      <li>StackOverflow （StackOverflow） - 页面板块的阴影</li>
-      <li>ChatGPT （OpenAI ChatGPT） - 各种技术问题</li>
-      <li>Google（谷歌） - 话题详情页面</li>
-      <li>YouTube （油管） - 技术交流页面</li>
-      <li>Adobe （Adobe） - 底部 Footer</li>
-      <li>Codepen 中的众多案例 – 全部页面均有涉及</li>
-      <li>Bilibili （B 站） - 头部导航条</li>
-      <li>Ymgal（月幕 Galgame） - 头部导航条</li>
+      <li>
+        Twitter（ツイッター） - 半透明デザイン、無限の高さのフレキシブルボックス
+      </li>
+      <li>Github（ギットハブ） - カラースキーム</li>
+      <li>bbs.kfmax.com（緋月） - ユーザー情報の分類</li>
+      <li>
+        StackOverflow（スタックオーバーフロー） - ページセクションのシャドウ
+      </li>
+      <li>ChatGPT（OpenAI ChatGPT） - 様々な技術的問題</li>
+      <li>Google（グーグル） - トピック詳細ページ</li>
+      <li>YouTube（ユーチューブ） - 技術交流ページ</li>
+      <li>Adobe（アドビ） - フッターのデザイン</li>
+      <li>Codepen の多数の事例 – すべてのページが含まれています</li>
+      <li>Bilibili（ビリビリ） - ヘッダーナビゲーションバー</li>
+      <li>Ymgal（月幕 Galgame） - ヘッダーナビゲーションバー</li>
     </ul>
     <br />
     <br />
     <p>
-      在设计之初我们浏览了大量设计优秀的网页，可能还参考了众多网站的设计，但由于在大量的浏览时没有做相关记录，所以无法展示
+      デザインの初期段階で、私たちは優れたデザインのウェブページを大量に閲覧し、数多くのウェブサイトのデザインを参考にしましたが、大量の閲覧時に関連記録を取っていなかったため、具体的な例を示すことができません。
     </p>
     <br />
     <br />
-    <p>在 KUNGalgame 网站的建设中，我们得到了以下人员的大力支持，其中有：</p>
+    <p>
+      鯤 ギャルゲーム
+      ウェブサイトの構築にあたり、以下の方々から大変な支援を受けました：
+    </p>
     <br />
     <br />
     <ul class="list">
@@ -41,7 +49,7 @@
             ACGNGAME
           </a>
         </span>
-        （Galworld）站长。老羽！上号！
+        （Galworld）管理者。老羽さん！ログインして！
       </li>
       <li>
         <span class="skip">
@@ -53,7 +61,7 @@
             Shinnku
           </a>
         </span>
-        （失落的小站）站长。世界第一可爱美少女真红姐姐！无敌！
+        （失われた小さな場所）管理者。世界一可愛い美少女真紅お姉さん！無敵！
       </li>
       <li>
         <span class="skip">
@@ -65,7 +73,7 @@
             Ymgal
           </a>
         </span>
-        （月幕 Galgame）站长。站长！太强了！
+        （月幕 Galgame）管理者。管理者！強すぎる！
       </li>
       <li>
         <span class="skip">
@@ -77,7 +85,7 @@
             yurzhang
           </a>
         </span>
-        （yur!）as the Night's, Reincarnation！
+        （yur!）夜の、転生！
       </li>
       <li>
         <span class="skip">
@@ -85,7 +93,7 @@
             Haruki
           </a>
         </span>
-        （Haruki 桑！）一个非常非常聪明的人！数学天才！
+        （Haruki さん！）非常に非常に賢い人！数学の天才！
       </li>
       <li>
         <span class="skip">
@@ -97,19 +105,19 @@
             Asuka Minato
           </a>
         </span>
-        （湊妈！）他太强了！我哭死！
+        （湊ママ！）彼は強すぎる！私は泣きます！
       </li>
     </ul>
     <br />
     <br />
     <p>
-      以及<span class="skip">
+      また、<span class="skip">
         <a
           href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=l8kixeJ-RCfIgpzM63QT7G8H44KkpC7q&authKey=X2IAU3zT2wOOQBCl4mwkYeTGNktTIs%2F5XhtVdKTUuyvPjRkdXjOhEhBT8l3kkSSX&noverify=0&group_code=871857690"
           target="_blank"
           rel="noopener noreferrer"
         >
-          鲲的 galgame 交流群(Tencent QQ)
+          鯤のギャルゲーム交流群（Tencent QQ）
         </a>
       </span>
       ,
@@ -119,7 +127,7 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          鲲的 galgame 交流群(Telegram)
+          鯤のギャルゲーム交流群（Telegram）
         </a>
       </span>
       ,
@@ -129,7 +137,7 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          KUN Visual Novel Forum Dev Team(Tencent QQ)
+          鯤ビジュアルノベルフォーラム開発チーム（Tencent QQ）
         </a>
       </span>
       ,
@@ -139,28 +147,30 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          KUN Visual Novel Forum Dev Team(Telegram)
+          鯤ビジュアルノベルフォーラム開発チーム（Telegram）
         </a>
       </span>
-      ，以及其它众多人员的相关支持，在这里我们对他们的建议和纠错表示衷心的感谢。
+      , 及びその他多くの方々からの関連サポートに心より感謝いたします。
     </p>
     <br />
     <br />
     <p>
-      我们的网站会秉承萌萌（美好）、开源、免费的
-      <span class="skip">
-        <NuxtLinkLocale to="/kungalgame">建立原则</NuxtLinkLocale>
+      私たちのウェブサイトは、萌え（素晴らしい）、オープンソース、無料の<span
+        class="skip"
+      >
+        <NuxtLinkLocale to="/kungalgame">構築原則</NuxtLinkLocale>
       </span>
-      ，不断完善和更新，您可以在 github 看到我们的项目：
+      を遵守し、不断の改善と更新を行います。私たちのプロジェクトは GitHub
+      でご覧いただけます：
     </p>
     <br />
     <br />
 
     <p>
-      当前版本论坛 (V2):
+      現在のフォーラムバージョン (V2):
       <br />
       <br />
-      Nuxt3 + mongodb 全栈实现
+      Nuxt3 + MongoDB フルスタック実装
       <span class="skip">
         <a
           href="https://github.com/KUN1007/kun-galgame-nuxt3"
@@ -176,10 +186,10 @@
     <br />
 
     <p>
-      前后端分离式论坛 (V1):
+      フロントエンドとバックエンドを分離したフォーラム (V1):
       <br />
       <br />
-      前端 Vue3 + Vite + Typescript + Pinia 实现：
+      フロントエンド Vue3 + Vite + TypeScript + Pinia 実装：
       <span class="skip">
         <a
           href="https://github.com/KUN1007/kun-galgame-vue"
@@ -191,7 +201,7 @@
       </span>
     </p>
     <p>
-      后端 Koa2 + Redis + Mongoose + Mongodb 实现：
+      バックエンド Koa2 + Redis + Mongoose + MongoDB 実装：
       <span class="skip">
         <a
           href="https://github.com/KUN1007/kun-galgame-koa"
@@ -207,10 +217,10 @@
     <br />
 
     <p>
-      论坛最初始设计稿:
+      フォーラムの初期設計案:
       <br />
       <br />
-      纯 HTML + CSS 实现：
+      純粋な HTML + CSS 実装：
       <span class="skip">
         <a
           href="https://github.com/KUN1007/kungalgame-pure-css"
@@ -225,7 +235,10 @@
     <br />
     <br />
     <br />
-    <p>不嫌弃的话，您可以给我们的 GitHub 项目点一个 star，当作对我们的支持。</p>
+    <p>
+      ご迷惑でなければ、私たちの GitHub
+      プロジェクトにスターをつけて、サポートの意味を込めていただければ幸いです。
+    </p>
   </div>
 </template>
 

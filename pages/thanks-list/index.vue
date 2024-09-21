@@ -17,9 +17,10 @@ useHead({
     <div class="container">
       <div class="title">{{ $t('kungalgame.thanks') }}</div>
 
-      <ThanksListEN v-if="locale === 'en-us'" />
-
-      <ThanksListCN v-if="locale === 'zh-cn'" />
+      <I18nThanksListContentEN v-if="locale === 'en-us'" />
+      <I18nThanksListContentJP v-if="locale === 'ja-jp'" />
+      <I18nThanksListContentCN v-if="locale === 'zh-cn'" />
+      <I18nThanksListContentTW v-if="locale === 'zh-tw'" />
 
       <KunFooter style="margin-top: 60px" />
     </div>
