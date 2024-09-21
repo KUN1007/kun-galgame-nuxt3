@@ -123,7 +123,7 @@ export const questionsJP: Question[] = reactive([
   },
   {
     id: 11,
-    text: '「草薙尚哉」の名前が登場する作品はどれですか？',
+    text: '「草薙 直哉」の名前が登場する作品はどれですか？',
     options: [
       '向日葵の教会と長い夏休み',
       'いきなりあなたに恋している',
