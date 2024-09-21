@@ -41,7 +41,7 @@ const upvoteTopic = async () => {
   if (result) {
     upvoteCount.value++
     isUpvoted.value = true
-    useMessage('Topic upvote successfully', '推话题成功', 'success')
+    useMessage(10238, 'success')
   }
 }
 
@@ -76,36 +76,23 @@ const upvoteReply = async () => {
   if (result) {
     upvoteCount.value++
     isUpvoted.value = true
-    useMessage('Reply upvote successfully', '推回复成功', 'success')
+    useMessage(10239, 'success')
   }
 }
 
 const handleClickUpvote = async () => {
   if (!moemoeAccessToken) {
-    useMessage(
-      'You need to login to use upvote feature',
-      '您需要登录使用推功能',
-      'warn',
-      5000
-    )
+    useMessage(10240, 'warn', 5000)
     return
   }
 
   if (uid === props.toUid) {
-    useMessage(
-      'You cannot upvote your own topic',
-      '您不可以推自己的话题',
-      'warn'
-    )
+    useMessage(10241, 'warn')
     return
   }
 
   if (moemoepoint < 1100) {
-    useMessage(
-      `Your moemoepoints are less than 1100, so you can't use the upvote feature`,
-      '您的萌萌点不足 1100, 无法使用推功能',
-      'warn'
-    )
+    useMessage(10242, 'warn')
     return
   }
 

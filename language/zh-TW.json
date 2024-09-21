@@ -2,7 +2,7 @@
   "head": {
     "name": "鯤 Galgame 論壇 - 開源 Galgame 網站",
     "title": "鯤 Galgame 論壇",
-    "description": "世界上最萌的 Galgame 論壇! 現階段世界上最先進的 Galgame 資源PO網站! 永遠不會有廣告! 永遠免費! Galgame 下載, Galgame 資源網站",
+    "description": "世界上最萌的 Galgame 論壇! 現階段世界上最先進的 Galgame 資源發佈網站! 永遠不會有廣告! 永遠免費! Galgame 下載, Galgame 資源網站",
     "keywords": "Galgame, 論壇, Galgame 下載, Galgame 資源, Galgame wiki, Galgame 評測, Galgame 數據分析, Galgame 新作動態, Galgame 漢化 / 國際化, Galgame 制作, Galgame 討論, Galgame 制作, 技術交流, 其他交流",
     "topicRSS": "鯤 Galgame 論壇話題訂閱",
     "galgameRSS": "鯤 Galgame 論壇 Galgame 訂閱"
@@ -15,9 +15,9 @@
       "category": "話題分類"
     },
     "publish": {
-      "name": "PO",
-      "topic": "PO話題",
-      "galgame": "PO Galgame"
+      "name": "發佈",
+      "topic": "發佈話題",
+      "galgame": "發佈 Galgame"
     },
     "about": {
       "name": "關於",
@@ -33,8 +33,8 @@
       "galgame": "Galgame",
       "pool": "所有話題",
       "category": "話題分類",
-      "createTopic": "PO話題",
-      "createGalgame": "PO Galgame",
+      "createTopic": "發佈話題",
+      "createGalgame": "發佈 Galgame",
       "createHint": "新",
       "about": "關於我們",
       "friends": "友情鏈接",
@@ -168,7 +168,7 @@
       "reply": "回復",
       "comments": "評論",
       "comment": "評論",
-      "publish": "PO評論",
+      "publish": "發佈評論",
       "close": "關閉",
       "hint": "請輸入您的評論, 最大字數為1007"
     },
@@ -177,7 +177,7 @@
       "master": "狗修金",
       "reply": "雜魚~♡",
       "advance": "高級選項",
-      "confirm": "確認PO",
+      "confirm": "確認發佈",
       "rewrite": "確認 Rewrite",
       "clear": "清空內容"
     }
@@ -276,12 +276,12 @@
         "cancelInsert": "取消",
         "confirmUpdate": "更新"
       },
-      "publish": "確認PO",
+      "publish": "確認發佈",
       "rewrite": "確認 Rewrite"
     },
     "galgame": {
       "help": {
-        "name": "PO Galgame 幫助",
+        "name": "發佈 Galgame 幫助",
         "reference": "參考網站 (可能需要網路代理)",
         "vndb": "VNDB",
         "erogamescape": "批評空間",
@@ -313,7 +313,7 @@
         "help": "Galgame 預覽圖請盡量在遊戲內截取原始分辨率，不要拍屏，盡量不要包含設備視窗的邊，寬度大於高度為好。預覽圖最終加載大小會變為不大於 1920 × 1080 分辨率",
         "hint": "預覽圖不可包含 R18 等敏感內容\n寬度大於高度為好"
       },
-      "confirm": "確認PO Galgame"
+      "confirm": "確認發佈 Galgame"
     },
     "pr": {
       "name": "更新請求",
@@ -342,7 +342,7 @@
         "hint": "如果有多個標簽, 請用英語逗號分隔每個標簽",
         "placeholder": "請輸入遊戲標簽, 例如純愛, 蘿莉, 妹妹, 白毛, 白絲, 等等"
       },
-      "confirm": "確定PO"
+      "confirm": "確定發佈"
     }
   },
   "login": {
@@ -385,7 +385,7 @@
       "email": "信箱密碼",
       "topic": "話題",
       "galgame": "Galgame",
-      "publish": "已PO",
+      "publish": "已發佈",
       "like": "已點贊",
       "favorite": "已收藏",
       "upvote": "已推",
@@ -412,9 +412,9 @@
       "reply": "回復",
       "comment": "評論",
       "galgame": {
-        "galgame": "PO Galgame",
+        "galgame": "發佈 Galgame",
         "contribute": "貢獻 Galgame",
-        "daily": "今日PO Galgame"
+        "daily": "今日發佈 Galgame"
       },
       "time": "註冊時間",
       "bio": "簽名",
@@ -509,7 +509,7 @@
   "donate": {
     "donate": "贊助我們",
     "no": "沒有任何的萌萌點獎勵",
-    "server": "，不過可以幫我們紓解一部分服務器的費用，您確定要贊助嗎？",
+    "server": "，不過可以幫我們紓解一部分伺服器的費用，您確定要贊助嗎？",
     "confirm": "確定贊助",
     "afdian": "愛發電",
     "help": "如果您不知道如何使用加密貨幣, 就不用捐贈啦, 我們謝謝您的好意",
@@ -520,7 +520,7 @@
     "technique": "技術交流",
     "others": "其它",
     "update": "頁面數據十七分鐘更新一次",
-    "publish": "PO於"
+    "publish": "發佈於"
   },
   "galgame": {
     "notFound": "該 Galgame 不存在",
@@ -628,7 +628,7 @@
     },
     "pr": {
       "name": "更新請求",
-      "help": "藍色代錶增加, 紅色代錶刪減, 遊戲PO者或管理員可以合併或拒絕請求",
+      "help": "藍色代錶增加, 紅色代錶刪減, 遊戲者或管理員可以合併或拒絕請求",
       "request": "提出更新請求",
       "details": "詳情",
       "status0": "進行中",
@@ -638,7 +638,7 @@
       "merge": "合併",
       "note": "請填寫拒絕原因",
       "confirm": "確定拒絕",
-      "hint": "要處理該請求, 需要資源的PO者、或管理員",
+      "hint": "要處理該請求, 需要資源的發佈者、或管理員",
       "i18n": {
         "name": {
           "en-us": "英語標題",
@@ -662,7 +662,7 @@
       "name": "評論",
       "notice": "Galgame 評論註意事項, 資源失效, 解壓密碼錯誤等問題反饋",
       "to": "評論給",
-      "publish": "PO評論",
+      "publish": "發佈評論",
       "sad": "沒人評論, 是沒人要這個 Galgame 的小只可愛軟萌妹子了嗎, 嗚嗚嗚..."
     }
   },
@@ -767,7 +767,7 @@
     },
     "balance": {
       "title": "收支公示",
-      "description": "鯤 Galgame 收支公示, 鯤 Galgame 是一個完全免費的論壇, 收入來源於捐贈, 支出來自於服務器, 域名, 信箱服務, 圖床服務"
+      "description": "鯤 Galgame 收支公示, 鯤 Galgame 是一個完全免費的論壇, 收入來源於捐贈, 支出來自於伺服器, 域名, 信箱服務, 圖床服務"
     },
     "bylaw": {
       "title": "執行條例",
@@ -777,11 +777,11 @@
       "title": "話題分類",
       "description": "話題分類 / 分區,Galgame攻略,Galgame閑聊,Galgame尋求資源,Galgame資訊,Galgame新作消息,Galgame資源下載 Web,編程語言,Linux,實用技術,AI,逆嚮專案,Android,Adobe,算法, 動漫,漫畫,音樂,輕小說",
       "g-walkthrough": "Galgame 攻略, galgame 攻略, 全 CG 存檔, 補丁, 以及其下載等",
-      "g-chatting": "Galgame 閑聊, 可以隨意發電, PO與 Galgame 相關的一切",
+      "g-chatting": "Galgame 閑聊, 可以隨意發電, 發佈與 Galgame 相關的一切",
       "g-article": "Galgame 文章, 一些長 Galgame 文章, 適合感想等文章",
       "g-seeking": "Galgame 尋求資源, 找資源, 可以提問找不到的 Galgame 資源",
       "g-news": "Galgame 資訊, 新漢化信息, 新動態信息等與 Galgame 相關信息",
-      "g-releases": "Galgame 新作消息, 有哪些新會社PO了哪些新遊戲, 在哪裏PO, 如何購買",
+      "g-releases": "Galgame 新作消息, 有哪些新會社發佈了哪些新遊戲, 在哪裏發佈, 如何購買",
       "g-other": "與 Galgame 相關的一切內容, 包括一些不被納入 VNDB 範圍內的遊戲",
 
       "t-web": "Web, Web app development, JavaScript / TypeScript, Node.js, React / Next.js, Vue / Nuxt, Angular, Solid, Svelte",
@@ -814,8 +814,8 @@
       "description": "贊助鯤 Galgame 論壇, 紓解我們的營運壓力"
     },
     "edit": {
-      "title": "PO話題",
-      "description": "在鯤 Galgame PO話題, 不限類型, 可以是 Galgame 相關的一切, Galgame 下載, Galgame 感想等等"
+      "title": "發佈話題",
+      "description": "在鯤 Galgame 發佈話題, 不限類型, 可以是 Galgame 相關的一切, Galgame 下載, Galgame 感想等等"
     },
     "forgot": {
       "title": "忘記密碼",
@@ -851,7 +851,7 @@
     },
     "technique": {
       "title": "技術交流",
-      "description": "鯤 Galgame 技術交流. Galgame 破解, Galgame 漢化, 制作 Galgame, Galgame 高階玩法，也許妳也可以開發出一個高性能的 Galgame 網站, 不僅限於 Galgame, 我們鼓勵一切技術類的探索, 例如, 編程, Adobe 繫列, SAI 繪畫, Auto CAD 制圖, 黑科技, 刷機, 防火墻, 服務器, DDos 原理"
+      "description": "鯤 Galgame 技術交流. Galgame 破解, Galgame 漢化, 制作 Galgame, Galgame 高階玩法，也許妳也可以開發出一個高性能的 Galgame 網站, 不僅限於 Galgame, 我們鼓勵一切技術類的探索, 例如, 編程, Adobe 繫列, SAI 繪畫, Auto CAD 制圖, 黑科技, 刷機, 防火墻, 伺服器, DDos 原理"
     },
     "thanksList": {
       "title": "感謝名單",
@@ -863,7 +863,7 @@
     },
     "home": {
       "title": "鯤 Galgame 論壇",
-      "description": "世界上最萌的 Galgame 論壇! 現階段世界上最先進的 Galgame 資源PO網站! Galgame 下載! 為營造最好的氛圍而努力! 永遠不會有廣告! 永遠免費!"
+      "description": "世界上最萌的 Galgame 論壇! 現階段世界上最先進的 Galgame 資源發佈網站! Galgame 下載! 為營造最好的氛圍而努力! 永遠不會有廣告! 永遠免費!"
     },
     "report": {
       "title": "匿名舉報",
@@ -893,7 +893,7 @@
   },
   "AlertInfo": {
     "edit": {
-      "publishSuccess": "PO成功",
+      "publishSuccess": "發佈成功",
       "rewriteSuccess": "Rewrite 成功",
       "prSuccess": "創建更新請求成功"
     },

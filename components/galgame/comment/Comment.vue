@@ -44,7 +44,7 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
   })
 
   if (result) {
-    useMessage('Delete comment successfully!', '删除评论成功', 'success')
+    useMessage(10538, 'success')
     props.refresh()
   }
 }

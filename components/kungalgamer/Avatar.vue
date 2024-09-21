@@ -53,11 +53,7 @@ const handleDragOver = (event: DragEvent) => {
 
 const handleChangeAvatar = async () => {
   if (!uploadedImage.value) {
-    useMessage(
-      'Please select a valid avatar...',
-      '请选择有效的头像图片...',
-      'warn'
-    )
+    useMessage(10113, 'warn')
     return
   }
 
@@ -65,7 +61,7 @@ const handleChangeAvatar = async () => {
   formData.append('avatar', uploadedImage.value, usePersistUserStore().name)
 
   isUploading.value = true
-  useMessage('Uploading avatar image...', '正在上传头像图片...', 'info')
+  useMessage(10114, 'info')
 
   const avatarLink = await $fetch('/api/user/avatar', {
     method: 'POST',
@@ -78,7 +74,7 @@ const handleChangeAvatar = async () => {
     avatar.value = avatarLink
     avatarMin.value = avatarLink.replace(/\.webp$/, '-100.webp')
     selectedFileUrl.value = ''
-    useMessage('Update avatar successfully!', '更新头像成功', 'success')
+    useMessage(10115, 'success')
     await refresh?.()
   }
 }

@@ -20,29 +20,17 @@ const isFetching = ref(false)
 
 const handleSubmitReport = async () => {
   if (!moemoeAccessToken) {
-    useMessage(
-      'Please login to use the reporting function',
-      '请登录以使用举报功能',
-      'warn'
-    )
+    useMessage(10142, 'warn')
     return
   }
 
   if (!reason.value.trim()) {
-    useMessage(
-      'Please fill in the reason for reporting',
-      '请填写举报理由',
-      'warn'
-    )
+    useMessage(10143, 'warn')
     return
   }
 
   if (reason.value.trim().length > 1007) {
-    useMessage(
-      'The maximum length of the report content is 1007 characters.',
-      '举报内容最多 1007 字',
-      'warn'
-    )
+    useMessage(10144, 'warn')
     return
   }
 
@@ -59,7 +47,7 @@ const handleSubmitReport = async () => {
   isFetching.value = false
 
   if (result) {
-    useMessage('Report submitted successfully!', '举报提交成功!', 'success')
+    useMessage(10145, 'success')
     reason.value = ''
   }
 }

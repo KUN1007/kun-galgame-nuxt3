@@ -21,9 +21,9 @@ const toggleFavoriteGalgame = async () => {
     favoritesCount.value += isFavorite.value ? -1 : 1
 
     if (!isFavorite.value) {
-      useMessage('Favorite successfully!', '收藏成功！', 'success')
+      useMessage(10230, 'success')
     } else {
-      useMessage('Cancel favorite successfully!', '取消收藏成功！', 'success')
+      useMessage(10231, 'success')
     }
 
     isFavorite.value = !isFavorite.value
@@ -31,21 +31,12 @@ const toggleFavoriteGalgame = async () => {
 }
 
 const handleClickFavoriteThrottled = throttle(toggleFavoriteGalgame, 1007, () =>
-  useMessage(
-    'You can only perform one operation within 1007 milliseconds',
-    '您在 1007 毫秒内只能进行一次操作',
-    'warn'
-  )
+  useMessage(10227, 'warn')
 )
 
 const handleClickFavorite = () => {
   if (!moemoeAccessToken) {
-    useMessage(
-      'You need to login to favorite',
-      '您需要登录以收藏',
-      'warn',
-      5000
-    )
+    useMessage(10232, 'warn', 5000)
     return
   }
   handleClickFavoriteThrottled()

@@ -18,15 +18,11 @@ const isPublishing = ref(false)
 
 const handlePublishComment = async () => {
   if (!content.value.trim()) {
-    useMessage('Comment cannot be empty!', '评论不能为空', 'warn')
+    useMessage(10540, 'warn')
     return
   }
   if (content.value.trim().length > 1007) {
-    useMessage(
-      'The maximum length of comment is 1007 characters!',
-      '评论最大长度为 1007 个字符',
-      'warn'
-    )
+    useMessage(10541, 'warn')
     return
   }
 
@@ -41,7 +37,7 @@ const handlePublishComment = async () => {
 
   if (result) {
     content.value = ''
-    useMessage('Publish comment successfully!', '发布评论成功', 'success')
+    useMessage(10542, 'success')
     emits('close')
     props.refresh()
   }

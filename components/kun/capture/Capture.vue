@@ -66,27 +66,15 @@ const submitAnswer = () => {
   if (userAnswers.value === correctOption) {
     isCaptureSuccessful.value = true
     isShowCapture.value = false
-    useMessage(
-      'Human-machine identity verification successful ~',
-      '人机身份验证通过 ~',
-      'success'
-    )
+    useMessage(10309, 'success')
     resetStatus()
   } else {
     errorCounter.value++
 
     if (currentQuestion.value.isHard) {
-      useMessage(
-        `Zako ojisan♡ If you can't answer today, you won't be rewarded. Smelly zako ♡`,
-        '杂鱼大叔♡ 答不出来今天就不奖励你了♡ 臭杂鱼♡',
-        'warn'
-      )
+      useMessage(10310, 'warn')
     } else {
-      useMessage(
-        `Zako ojisan♡ Can't even answer such a simple question. Smelly zako ♡`,
-        '杂鱼大叔♡ 这么简单都答不出来♡ 臭杂鱼♡',
-        'warn'
-      )
+      useMessage(10311, 'warn')
     }
 
     nextQuestion()

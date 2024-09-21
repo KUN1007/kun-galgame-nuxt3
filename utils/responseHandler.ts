@@ -22,12 +22,7 @@ export const onResponse = (context: KunOnResponseContext) => {
     const navigateCookie = Cookies.get('kungalgame-is-navigate-to-login')
     if (!navigateCookie) {
       usePersistUserStore().$reset()
-      useMessage(
-        'Login expired, please login again',
-        '登录过期, 请重新登陆',
-        'error',
-        7777
-      )
+      useMessage(10250, 'error', 7777)
 
       const nuxt = useNuxtApp()
       navigateTo(nuxt.$localePath('/login'))

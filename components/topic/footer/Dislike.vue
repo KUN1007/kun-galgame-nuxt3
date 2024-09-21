@@ -34,9 +34,9 @@ const toggleDislike = async () => {
     dislikesCount.value += isDisliked.value ? -1 : 1
 
     if (!isDisliked.value) {
-      useMessage('Dislike successfully!', '点踩成功！', 'success')
+      useMessage(10225, 'success')
     } else {
-      useMessage('Cancel Dislike successfully!', '取消点踩成功！', 'success')
+      useMessage(10227, 'success')
     }
 
     isDisliked.value = !isDisliked.value
@@ -44,20 +44,16 @@ const toggleDislike = async () => {
 }
 
 const handleClickDislikeThrottled = throttle(toggleDislike, 1007, () =>
-  useMessage(
-    'You can only perform one operation within 1007 milliseconds',
-    '您在 1007 毫秒内只能进行一次操作',
-    'warn'
-  )
+  useMessage(10227, 'warn')
 )
 
 const handleClickDislike = () => {
   if (!moemoeAccessToken) {
-    useMessage('You need to login to dislike', '您需要登录以点踩', 'warn', 5000)
+    useMessage(10228, 'warn', 5000)
     return
   }
   if (uid === props.toUid) {
-    useMessage('You cannot dislike yourself', '您不可以给自己点踩', 'warn')
+    useMessage(10229, 'warn')
     return
   }
   handleClickDislikeThrottled()

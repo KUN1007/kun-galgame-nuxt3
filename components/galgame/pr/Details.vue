@@ -25,11 +25,7 @@ const diff = computed(() => {
 
 const handleDeclineRequest = async () => {
   if (!declineInput.value.trim() || declineInput.value.trim().length > 1007) {
-    useMessage(
-      'You must provide a reason for rejection, which should not exceed 1007 characters!',
-      '您必须填写拒绝原因, 拒绝原因不多于 1007 字!',
-      'warn'
-    )
+    useMessage(10543, 'warn')
     return
   }
   const res = await useComponentMessageStore().alert(
@@ -62,11 +58,7 @@ const handleDeclineRequest = async () => {
   isFetching.value = false
 
   if (result) {
-    useMessage(
-      'Decline update request successfully!',
-      '拒绝更新请求成功!',
-      'success'
-    )
+    useMessage(10544, 'success')
     props.refresh()
   }
 }
@@ -102,11 +94,7 @@ const handleMergeRequest = async () => {
   isFetching.value = false
 
   if (result) {
-    useMessage(
-      'Merge update request successfully!',
-      '合并更新请求成功!',
-      'success'
-    )
+    useMessage(10545, 'success')
     props.refresh()
   }
 }

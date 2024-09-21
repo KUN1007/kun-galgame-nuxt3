@@ -8,7 +8,7 @@ export const checkLoginForm = {
 
     const checkUsername = (name: string) => {
       if (!name.trim()) {
-        useMessage('Username cannot be empty', '用户名不可为空', 'warn')
+        useMessage(10136, 'warn')
         return false
       }
 
@@ -22,7 +22,7 @@ export const checkLoginForm = {
 
     const checkPassword = (password: string) => {
       if (!password.trim()) {
-        useMessage('Password cannot be empty', '密码不可为空', 'warn')
+        useMessage(10137, 'warn')
         return false
       }
       if (!isValidPassword(password)) {

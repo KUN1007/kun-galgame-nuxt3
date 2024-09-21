@@ -22,7 +22,7 @@ const handleConfirmClipImage = async () => {
     useComponentClipStore().handleConfirm(clippedImageBlob)
     isShowClipper.value = false
   } else {
-    useMessage('Invalid image data', '错误的图片数据', 'warn')
+    useMessage(10102, 'warn')
   }
 }
 </script>

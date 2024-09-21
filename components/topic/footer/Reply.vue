@@ -11,7 +11,7 @@ const props = defineProps<{
 
 const handleClickReply = () => {
   if (!moemoeAccessToken) {
-    useMessage('You need to login to reply', '您需要登录以回复', 'warn', 5000)
+    useMessage(10237, 'warn', 5000)
     return
   }
 

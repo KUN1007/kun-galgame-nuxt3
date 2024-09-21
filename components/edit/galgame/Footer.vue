@@ -30,7 +30,7 @@ const handlePublishGalgame = async () => {
       'zh-cn':
         '您要发布的是 Galgame, 要发布 Galgame 资源, 您可以稍后到 Galgame 详情页面添加资源链接。',
       'zh-tw':
-        '您要發布的是 Galgame，若要發布 Galgame 資源，您可以稍後到 Galgame 詳情頁面添加資源鏈接。'
+        '您要發布的是 Galgame, 若要發布 Galgame 資源，您可以稍後到 Galgame 詳情頁面添加資源鏈接。'
     }
   )
   if (!res) {
@@ -41,12 +41,7 @@ const handlePublishGalgame = async () => {
     return
   } else {
     isPublishing.value = true
-    useMessage(
-      'Publishing visualnovel => Uploading images may take around 7 seconds...',
-      '正在发布 Galgame => 因为需要上传图片，所以这可能会花费 7 秒左右...',
-      'info',
-      7777
-    )
+    useMessage(10525, 'info', 7777)
   }
 
   const formData = new FormData()

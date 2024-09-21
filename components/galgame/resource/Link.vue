@@ -61,7 +61,7 @@ const handleMarkValid = async (gid: number, grid: number) => {
   })
 
   if (result) {
-    useMessage('Re-mark valid successfully!', '重新标记有效成功', 'success')
+    useMessage(10548, 'success')
     props.refresh()
   }
 }

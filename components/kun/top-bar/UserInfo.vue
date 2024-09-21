@@ -65,7 +65,7 @@ const logOut = async () => {
   if (res) {
     usePersistUserStore().$reset()
     navigateTo(localePath('/login'))
-    useMessage('Logout successfully!', '登出成功', 'success')
+    useMessage(10110, 'success')
   }
 }
 

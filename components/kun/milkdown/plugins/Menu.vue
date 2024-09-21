@@ -55,7 +55,7 @@ const handleFileChange = async (event: Event) => {
   const formData = new FormData()
   formData.append('image', file)
 
-  useMessage('Uploading in progress...', '正在上传中...', 'info')
+  useMessage(10107, 'info')
   const result = await $fetch('/api/image/topic', {
     method: 'POST',
     body: formData,
@@ -72,7 +72,7 @@ const handleFileChange = async (event: Event) => {
       title: imageName,
       alt: imageName
     })
-    useMessage('Image upload successfully!', '图片上传成功!', 'success')
+    useMessage(10108, 'success')
   }
 }
 

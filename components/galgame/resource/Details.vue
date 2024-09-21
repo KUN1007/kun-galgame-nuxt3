@@ -50,11 +50,7 @@ const handleDeleteResource = async (gid: number, grid: number) => {
 
 const handleReportExpire = async (details: GalgameResourceDetails) => {
   if (!uid) {
-    useMessage(
-      'Please login to report the resource link expired!',
-      '请登录以报告资源链接失效!',
-      'warn'
-    )
+    useMessage(10546, 'warn')
     return
   }
 
@@ -90,7 +86,7 @@ const handleReportExpire = async (details: GalgameResourceDetails) => {
   isFetching.value = false
 
   if (result) {
-    useMessage('Report expired successfully!', '报告失效成功', 'success')
+    useMessage(10547, 'success')
     props.refresh()
   }
 }

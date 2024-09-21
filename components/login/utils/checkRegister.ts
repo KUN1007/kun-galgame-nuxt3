@@ -12,11 +12,7 @@ export const checkRegisterForm = {
       password: string
     ): boolean => {
       if (!name.trim() || !email.trim() || !password.trim()) {
-        useMessage(
-          'Username, email, password field cannot be empty!',
-          '用户名，邮箱，密码字段不可为空！',
-          'warn'
-        )
+        useMessage(10138, 'warn')
         return false
       }
 
@@ -26,7 +22,7 @@ export const checkRegisterForm = {
       }
 
       if (!isValidEmail(email)) {
-        useMessage('Invalid email format!', '非法的邮箱格式！', 'warn')
+        useMessage(10139, 'warn')
         return false
       }
 
@@ -40,20 +36,12 @@ export const checkRegisterForm = {
 
     const checkRegister = (isSendCode: boolean, code: string) => {
       if (!isSendCode) {
-        useMessage(
-          'Need to send an email verification code',
-          '需要发送邮箱验证码',
-          'warn'
-        )
+        useMessage(10140, 'warn')
         return false
       }
 
       if (!code.trim()) {
-        useMessage(
-          'Email verification code cannot be empty',
-          '邮箱验证码不可为空',
-          'warn'
-        )
+        useMessage(10141, 'warn')
         return false
       }
 

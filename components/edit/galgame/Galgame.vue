@@ -19,11 +19,7 @@ const { vndbId, name, introduction, aliases } = storeToRefs(
 
 const handleGetVNData = async () => {
   if (!VNDBPattern.test(vndbId.value)) {
-    useMessage(
-      'Please enter the correct format of VNDB ID!',
-      '请输入正确格式的 VNDB ID!',
-      'warn'
-    )
+    useMessage(10501, 'warn')
     return
   }
 
@@ -40,11 +36,7 @@ const handleGetVNData = async () => {
     return
   } else {
     isFetching.value = true
-    useMessage(
-      'Fetching data from VNDB...',
-      '正在从 VNDB 获取 Galgame 数据...',
-      'info'
-    )
+    useMessage(10502, 'info')
   }
 
   const vndbData = await $fetch<VNDBResponse>(`https://api.vndb.org/kana/vn`, {
@@ -58,16 +50,12 @@ const handleGetVNData = async () => {
   if (vndbData) {
     if (!vndbData.results.length) {
       isFetching.value = false
-      useMessage(
-        'No data retrieved. The game may not exist.',
-        '未获取到数据，可能是游戏不存在',
-        'error'
-      )
+      useMessage(10503, 'error')
       return
     }
 
     isFetching.value = false
-    useMessage('Fetching data successfully!', '获取数据成功!', 'info')
+    useMessage(10504, 'info')
 
     data.value = vndbData.results[0]
     name.value['en-us'] = data.value.title

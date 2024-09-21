@@ -34,9 +34,9 @@ const toggleLike = async () => {
     likesCount.value += isLiked.value ? -1 : 1
 
     if (!isLiked.value) {
-      useMessage('Like successfully!', '点赞成功！', 'success')
+      useMessage(10233, 'success')
     } else {
-      useMessage('Unlike successfully!', '取消点赞成功！', 'success')
+      useMessage(10234, 'success')
     }
 
     isLiked.value = !isLiked.value
@@ -44,20 +44,16 @@ const toggleLike = async () => {
 }
 
 const handleClickLikeThrottled = throttle(toggleLike, 1007, () =>
-  useMessage(
-    'You can only perform one operation within 1007 milliseconds',
-    '您在 1007 毫秒内只能进行一次操作',
-    'warn'
-  )
+  useMessage(10227, 'warn')
 )
 
 const handleClickLike = () => {
   if (!moemoeAccessToken) {
-    useMessage('You need to login to like', '您需要登录以点赞', 'warn', 5000)
+    useMessage(10235, 'warn', 5000)
     return
   }
   if (uid === props.toUid) {
-    useMessage('You cannot like yourself', '您不可以给自己点赞', 'warn')
+    useMessage(10236, 'warn')
     return
   }
   handleClickLikeThrottled()

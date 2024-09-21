@@ -13,7 +13,7 @@ const { rid, toUid, toUsername, isShowPanel } = storeToRefs(
 
 const handleClickComment = (replyIid: number, uid: number, name: string) => {
   if (!moemoeAccessToken) {
-    useMessage('You need to login to comment', '您需要登录以评论', 'warn', 5000)
+    useMessage(10216, 'warn', 5000)
     return
   }
 

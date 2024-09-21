@@ -21,7 +21,7 @@ const hasPermission = computed(
 const handleChangeBanner = async () => {
   const imageBlob = await getImage('kun-galgame-rewrite-banner')
   if (!imageBlob) {
-    useMessage('Please upload the image first', '请先上传图片', 'warn')
+    useMessage(10535, 'warn')
     return
   }
 
@@ -50,7 +50,7 @@ const handleChangeBanner = async () => {
   const formData = new FormData()
   formData.append('avatar', imageBlob)
 
-  useMessage('Uploading banner image...', '正在上传预览图片...', 'info')
+  useMessage(10536, 'info')
 
   const result = await $fetch(`/api/galgame/${gid.value}/banner`, {
     method: 'PUT',
@@ -63,7 +63,7 @@ const handleChangeBanner = async () => {
     isShowUpload.value = false
     initialImageUrl.value = ''
     await deleteImage(`kun-galgame-rewrite-banner`)
-    useMessage('Upload image successfully!', '上传图片成功!', 'success')
+    useMessage(10537, 'success')
   }
 }
 

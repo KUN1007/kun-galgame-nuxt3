@@ -1,10 +1,6 @@
 <script setup lang="ts">
 const handleClickContribute = () => {
-  useMessage(
-    'Please click the edit button to the right of "Favorite"',
-    '请点击收藏右边的编辑按钮',
-    'info'
-  )
+  useMessage(10534, 'info')
 }
 </script>
 

@@ -20,11 +20,7 @@ const handleAddAlias = () => {
     .includes(AliasName)
 
   if (isIncludes) {
-    useMessage(
-      'Alias already exists, please choose another one',
-      '别名已存在, 请更换',
-      'warn'
-    )
+    useMessage(10505, 'warn')
     return
   }
 

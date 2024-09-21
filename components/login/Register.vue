@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { registerFormItem } from './utils/registerFormItem'
 import { checkRegisterForm } from './utils/checkRegister'
+import type { Pinia } from 'pinia'
 
-const props = defineProps<{
+defineProps<{
   isLogin: boolean
 }>()
 
@@ -12,7 +13,7 @@ const { isShowCapture, isCaptureSuccessful } = storeToRefs(
 )
 
 const { checkForm, checkRegister } = checkRegisterForm.asyncData(
-  useNuxtApp().$pinia
+  useNuxtApp().$pinia as Pinia
 )
 
 const localePath = useLocalePath()
@@ -56,7 +57,7 @@ const handleRegister = async () => {
 
   if (userInfo) {
     info.info('AlertInfo.login.success')
-    useMessage('Register successfully!', '注册成功！', 'success')
+    useMessage(10135, 'success')
     usePersistUserStore().setUserInfo(userInfo)
     navigateTo(localePath('/'))
   }

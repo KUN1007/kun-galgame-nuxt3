@@ -27,11 +27,7 @@ const handleSendCode = async () => {
   }
 
   hasSentCodeEmail.value = input.newEmail
-  useMessage(
-    'The email verification code is being sent ~~~',
-    '邮箱验证码正在发送 ~~~',
-    'info'
-  )
+  useMessage(10118, 'info')
 
   const result = await $fetch('/api/auth/email/code/reset', {
     method: 'POST',
@@ -40,11 +36,7 @@ const handleSendCode = async () => {
   })
 
   if (result) {
-    useMessage(
-      'Reset email verification code sent successfully!',
-      '重置邮箱验证码发送成功！',
-      'success'
-    )
+    useMessage(10119, 'success')
   }
 }
 
@@ -62,7 +54,7 @@ const handleResetEmail = async () => {
   if (result) {
     input.newEmail = ''
     input.code = ''
-    useMessage('Email change successful!', '邮箱更改成功', 'success')
+    useMessage(10120, 'success')
     refresh()
   }
 }
@@ -97,7 +89,7 @@ const handleChangePassword = async () => {
   if (result) {
     usePersistUserStore().$reset()
     navigateTo(localePath('/login'))
-    useMessage('Password change successful!', '密码更改成功', 'success')
+    useMessage(10121, 'success')
   }
 }
 </script>

@@ -18,7 +18,7 @@ const {
 
 const handleClickComment = (comment: TopicComment) => {
   if (!currentUserUid) {
-    useMessage('You need to login to comment', '您需要登录以评论', 'warn', 5000)
+    useMessage(10216, 'warn', 5000)
     return
   }
 

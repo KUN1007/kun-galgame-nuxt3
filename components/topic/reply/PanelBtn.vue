@@ -31,7 +31,7 @@ const handlePublish = async () => {
     return
   } else {
     isPublishing.value = true
-    useMessage('Publishing...', '正在发布...', 'info')
+    useMessage(10201, 'info')
   }
   const reply = await $fetch(`/api/topic/${tid.value}/reply`, {
     method: 'POST',
@@ -45,7 +45,7 @@ const handlePublish = async () => {
     isEdit.value = false
     tempReply.value.push(reply)
     usePersistKUNGalgameReplyStore().resetReplyDraft()
-    useMessage('Publish reply successfully!', '发布回复成功！', 'success')
+    useMessage(10243, 'success')
   }
 }
 
@@ -73,7 +73,7 @@ const handleRewrite = async () => {
     return
   } else {
     isPublishing.value = true
-    useMessage('Publishing...', '正在发布...', 'info')
+    useMessage(10201, 'info')
   }
   const result = await $fetch(`/api/topic/${tid.value}/reply`, {
     method: 'PUT',
@@ -89,7 +89,7 @@ const handleRewrite = async () => {
   isPublishing.value = false
 
   if (result) {
-    useMessage('Reply rewrite successfully', '回复重新编辑成功', 'success')
+    useMessage(10244, 'success')
     useTempReplyStore().resetRewriteReplyData()
     isShowAdvance.value = false
     isEdit.value = false

@@ -28,7 +28,7 @@ const handleReadAllMessage = async () => {
 
   if (result) {
     refresh()
-    useMessage('Read all messages successfully!', '已读所有消息成功', 'success')
+    useMessage(10103, 'success')
   }
 }
 
@@ -53,11 +53,7 @@ const handleDeleteAllMessage = async () => {
 
   if (result) {
     refresh()
-    useMessage(
-      'Delete all messages successfully!',
-      '删除所有消息成功',
-      'success'
-    )
+    useMessage(10104, 'success')
   }
 }
 

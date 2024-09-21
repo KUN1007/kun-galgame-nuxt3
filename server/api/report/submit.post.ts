@@ -12,13 +12,13 @@ export default defineEventHandler(async (event) => {
   }
 
   if (!reportSection.includes(type)) {
-    return kunError(event, 10701)
+    return kunError(event, 10121)
   }
   if (!reason) {
-    return kunError(event, 10702)
+    return kunError(event, 10122)
   }
   if (reason.trim().length > 1007) {
-    return kunError(event, 10703)
+    return kunError(event, 10123)
   }
 
   await ReportModel.create({

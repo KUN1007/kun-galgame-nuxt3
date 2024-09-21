@@ -5,67 +5,54 @@ import 'animate.css'
 const locale = useCookie('kungalgame-language').value
 
 const props = defineProps<{
-  messageCN: string
-  messageEN: string
-  type: `warn` | `success` | `error` | `info`
+  message: KunLanguage
+  type: 'warn' | 'success' | 'error' | 'info'
   richText?: boolean
 }>()
 
-const message = ref('')
 const isRichText = computed(() => props.richText ?? false)
 
-message.value = computed(() => {
-  if (locale) {
-    return locale === 'en-us' ? props.messageEN : props.messageCN
-  }
+const getDefaultLocale = () =>
+  window?.location.href.match(/\/([a-z]{2}-[a-z]{2})\//)?.[1] ?? 'en-us'
 
-  const localeMatch = window?.location.href.match(/\/([a-z]{2}-[a-z]{2})\//)
-  if (localeMatch && localeMatch.length > 1) {
-    return localeMatch[1] === 'en-us' ? props.messageEN : props.messageCN
-  }
+console.log(locale)
 
-  return props.messageEN
-}).value
+const messageRef = computed(() => {
+  const currentLocale = locale || getDefaultLocale()
+  return (
+    props.message[currentLocale as keyof KunLanguage] || props.message['en-us']
+  )
+})
 
-const messageClass = (type: string): string => {
-  if (type === 'warn') {
-    return `animate__animated animate__headShake ${type}`
-  } else if (type === 'success') {
-    return `animate__animated animate__bounceInDown ${type}`
-  } else if (type === 'error') {
-    return `animate__animated animate__tada ${type}`
-  } else if (type === 'info') {
-    return `animate__animated animate__bounce ${type}`
-  } else {
-    return ''
-  }
+const messageClassMap = {
+  warn: 'animate__animated animate__headShake',
+  success: 'animate__animated animate__bounceInDown',
+  error: 'animate__animated animate__tada',
+  info: 'animate__animated animate__bounce'
 }
 
-watch(
-  () => locale,
-  () => {
-    message.value = locale === 'en-us' ? props.messageEN : props.messageCN
-  }
+const messageClass = computed(
+  () => `${messageClassMap[props.type]} ${props.type}`
 )
 </script>
 
 <template>
   <div class="kungalgame-message-container">
-    <div class="kungalgame-message" :class="messageClass(type)">
-      <span class="icon" v-if="type === 'warn'">
-        <Icon icon="lucide:triangle-alert" />
-      </span>
-      <span class="icon" v-else-if="type === 'success'">
-        <Icon icon="lucide:check" />
-      </span>
-      <span class="icon" v-else-if="type === 'error'">
-        <Icon icon="lucide:x" />
-      </span>
-      <span class="icon" v-else-if="type === 'info'">
-        <Icon icon="lucide:info" />
-      </span>
-      <span class="message" v-if="!isRichText">{{ message }}</span>
-      <span v-if="isRichText" v-html="message"></span>
+    <div class="kungalgame-message" :class="messageClass">
+      <Icon
+        :icon="`lucide:${
+          {
+            warn: 'triangle-alert',
+            success: 'check',
+            error: 'x',
+            info: 'info'
+          }[type]
+        }`"
+        class="icon"
+      />
+
+      <span v-if="!isRichText" class="message">{{ messageRef }}</span>
+      <span v-if="isRichText" v-html="messageRef"></span>
     </div>
   </div>
 </template>

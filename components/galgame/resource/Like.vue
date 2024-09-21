@@ -21,7 +21,7 @@ watch(
 
 const likeResource = async () => {
   if (isLiked.value) {
-    useMessage(`You've already liked it`, '您已经点过赞了', 'warn')
+    useMessage(10539, 'warn')
     return
   }
 
@@ -35,13 +35,13 @@ const likeResource = async () => {
   if (result) {
     likesCount.value++
     isLiked.value = true
-    useMessage('Like successfully!', '点赞成功', 'success')
+    useMessage(10530, 'success')
   }
 }
 
 const handleClickLike = async () => {
   if (!moemoeAccessToken) {
-    useMessage('You need to login to like', '您需要登录以点赞', 'warn', 5000)
+    useMessage(10532, 'warn', 5000)
     return
   }
   await likeResource()

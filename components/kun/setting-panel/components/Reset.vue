@@ -26,11 +26,7 @@ const handleRecover = async () => {
 
   await usePersistSettingsStore().setKUNGalgameSettingsRecover()
 
-  useMessage(
-    'Restore all settings successfully!',
-    '恢复所有设置成功!',
-    'success'
-  )
+  useMessage(10109, 'success')
   navigateTo(localePath('/login'))
 }
 </script>

@@ -63,7 +63,7 @@ const handleChangePassword = async () => {
 
   if (data) {
     navigateTo(localePath('/login'))
-    useMessage('Password change successfully!', '密码更改成功', 'success')
+    useMessage(10101, 'success')
   }
 }
 </script>

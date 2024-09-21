@@ -41,11 +41,7 @@ const handleAddTag = () => {
     .includes(tagName)
 
   if (isIncludes) {
-    useMessage(
-      'Tag already exists, please choose another one',
-      '标签已存在，请更换',
-      'warn'
-    )
+    useMessage(10202, 'warn')
     return
   }
 

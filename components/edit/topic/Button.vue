@@ -58,7 +58,7 @@ const handlePublish = async () => {
     return
   } else {
     isPublishing.value = true
-    useMessage('Publishing...', '正在发布...', 'info')
+    useMessage(10201, 'info')
   }
   const tid = await $fetch('/api/topic', {
     method: 'POST',
@@ -103,7 +103,7 @@ const handleRewrite = async () => {
     return
   } else {
     isPublishing.value = true
-    useMessage('Publishing...', '正在发布...', 'info')
+    useMessage(10201, 'info')
   }
   const result = await $fetch(`/api/topic/${tid.value}`, {
     method: 'PUT',

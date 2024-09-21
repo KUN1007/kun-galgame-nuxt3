@@ -17,16 +17,12 @@ const isPublishing = ref(false)
 
 const handlePublishComment = async () => {
   if (!commentValue.value.trim()) {
-    useMessage('Comment content cannot be empty!', '评论内容不能为空！', 'warn')
+    useMessage(10221, 'warn')
     return
   }
 
   if (commentValue.value.trim().length > 1007) {
-    useMessage(
-      'The maximum length for comments should not exceed 1007 characters.',
-      '评论最大长度不可超过 1007 个字符',
-      'warn'
-    )
+    useMessage(10222, 'warn')
     return
   }
 
@@ -34,7 +30,7 @@ const handlePublishComment = async () => {
     return
   } else {
     isPublishing.value = true
-    useMessage('Publishing...', '正在发布...', 'info')
+    useMessage(10223, 'info')
   }
   const comment = await $fetch(`/api/topic/${tid}/comment`, {
     method: 'POST',
@@ -50,7 +46,7 @@ const handlePublishComment = async () => {
 
   if (comment) {
     emits('getComment', comment)
-    useMessage('Comment published successfully!', '评论发布成功', 'success')
+    useMessage(10224, 'success')
     isShowPanel.value = false
   }
 }

@@ -54,7 +54,7 @@ const handleMarkAsRead = async (mid: number) => {
 
   if (result) {
     props.refresh()
-    useMessage('Mark as read successfully!', '标记为已读成功', 'success')
+    useMessage(10105, 'success')
   }
 }
 
@@ -68,7 +68,7 @@ const handleDeleteMessage = async (mid: number) => {
 
   if (result) {
     props.refresh()
-    useMessage('Delete message successfully!', '删除消息成功', 'success')
+    useMessage(10106, 'success')
   }
 }
 </script>

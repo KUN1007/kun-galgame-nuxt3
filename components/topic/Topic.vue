@@ -68,11 +68,7 @@ const scrollPage = (rid: number) => {
       childElement.classList.remove('active')
     }, 3000)
   } else {
-    useMessage(
-      'This reply cannot be found temporarily. Please turn the page',
-      '暂时找不到该回复，请翻页',
-      'info'
-    )
+    useMessage(10215, 'info')
   }
 }
 

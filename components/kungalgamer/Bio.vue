@@ -15,11 +15,7 @@ const handleChangeBio = async () => {
   }
 
   if (bioValue.value.length > 107) {
-    useMessage(
-      'Bio must not exceed a maximum length of 107 characters',
-      '签名的最大长度不可超过 107 个字符',
-      'warn'
-    )
+    useMessage(10116, 'warn')
     return
   }
 
@@ -31,7 +27,7 @@ const handleChangeBio = async () => {
   })
 
   if (result) {
-    useMessage('Rewrite bio successfully!', 'Rewrite 签名成功', 'success')
+    useMessage(10117, 'success')
     bioValue.value = ''
     await refresh?.()
   }
