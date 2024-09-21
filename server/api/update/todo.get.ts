@@ -1,7 +1,7 @@
 import TodoModel from '~/server/models/todo'
 import type { GetTodoRequestData, Todo } from '~/types/api/update-log'
 
-const getTodos = async (page: number, limit: number, language: Language) => {
+const getTodos = async (page: number, limit: number) => {
   const skip = (page - 1) * limit
   const totalCount = await TodoModel.countDocuments().lean()
 
@@ -14,7 +14,7 @@ const getTodos = async (page: number, limit: number, language: Language) => {
   const todos: Todo[] = data.map((todo) => ({
     todoId: todo.todo_id,
     status: todo.status,
-    content: todo.content[language],
+    content: todo.content,
     time: todo.time,
     completedTime: todo.completed_time
   }))
@@ -23,7 +23,7 @@ const getTodos = async (page: number, limit: number, language: Language) => {
 }
 
 export default defineEventHandler(async (event) => {
-  const { page, limit, language }: GetTodoRequestData = await getQuery(event)
+  const { page, limit }: GetTodoRequestData = await getQuery(event)
   if (!page || !limit) {
     return kunError(event, 10507)
   }
@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10209)
   }
 
-  const todos = await getTodos(parseInt(page), parseInt(limit), language)
+  const todos = await getTodos(parseInt(page), parseInt(limit))
 
   return todos
 })

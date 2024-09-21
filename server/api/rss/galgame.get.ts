@@ -1,5 +1,6 @@
 import UserModel from '~/server/models/user'
 import GalgameModel from '~/server/models/galgame'
+import { getPreferredLanguageText } from '~/utils/getPreferredLanguageText'
 import type { GalgameRSS } from '~/types/api/rss'
 
 export default defineEventHandler(async (event) => {
@@ -24,7 +25,10 @@ export default defineEventHandler(async (event) => {
       avatar: galgame.user[0].avatar
     },
     time: galgame.time,
-    description: galgame.introduction[language].slice(0, 233)
+    description: getPreferredLanguageText(galgame.introduction, language).slice(
+      0,
+      233
+    )
   }))
 
   return galgames

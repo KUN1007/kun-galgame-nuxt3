@@ -10,13 +10,13 @@ interface I18nContent {
 const contentMap: Record<Language, Record<'topic' | 'galgame', I18nContent>> = {
   'en-us': {
     topic: {
-      title: 'KUN Visual Novel - New Topics RSS',
+      title: 'KUN Visual Novel Forum - New Topics RSS',
       description: 'News and updates about Topics',
       generator: 'Moe RSS generator',
       copyright: `Copyright © 2024 KUN Visual Novel All Rights Reserved`
     },
     galgame: {
-      title: 'KUN Visual Novel - New Visual Novel RSS',
+      title: 'KUN Visual Novel Forum - New Visual Novel RSS',
       description: 'News and updates about Visual Novels',
       generator: 'Moe RSS generator',
       copyright: `Copyright © 2024 KUN Visual Novel All Rights Reserved`
@@ -52,16 +52,16 @@ const contentMap: Record<Language, Record<'topic' | 'galgame', I18nContent>> = {
   },
   'ja-jp': {
     topic: {
-      title: 'KUN ビジュアルノベル - 新しいトピックRSS',
+      title: '鯤 ギャルゲーム - 新しいトピックRSS',
       description: 'トピックに関するニュースと更新情報',
       generator: '萌えRSSジェネレーター',
-      copyright: `著作権 © 2024 KUN ビジュアルノベル 全著作権所有`
+      copyright: `著作権 © 2024 KUN ギャルゲーム 全著作権所有`
     },
     galgame: {
-      title: 'KUN ビジュアルノベル - 新しいビジュアルノベルRSS',
-      description: 'ビジュアルノベルに関するニュースと更新情報',
+      title: '鯤 ギャルゲーム - 新しいギャルゲームRSS',
+      description: 'ギャルゲームに関するニュースと更新情報',
       generator: '萌えRSSジェネレーター',
-      copyright: `著作権 © 2024 KUN ビジュアルノベル 全著作権所有`
+      copyright: `著作権 © 2024 KUN ギャルゲーム 全著作権所有`
     }
   }
 }

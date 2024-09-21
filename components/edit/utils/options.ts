@@ -15,6 +15,10 @@ export const languageItems: Item[] = [
   {
     i18n: 'edit.galgame.introduction.zh-cn',
     value: 'zh-cn'
+  },
+  {
+    i18n: 'edit.galgame.introduction.zh-tw',
+    value: 'zh-tw'
   }
 ]
 
@@ -27,7 +31,7 @@ export const typeOptions = [
   'ai',
   'others'
 ]
-export const languageOptions = ['ja-jp', 'en-us', 'zh-cn', 'others']
+export const languageOptions = ['ja-jp', 'en-us', 'zh-cn', 'zh-tw', 'others']
 export const platformOptions = [
   'windows',
   'mac',

@@ -5,11 +5,7 @@ import type {
   UpdateLog
 } from '~/types/api/update-log'
 
-const getUpdateLogs = async (
-  page: number,
-  limit: number,
-  language: Language
-) => {
+const getUpdateLogs = async (page: number, limit: number) => {
   const skip = (page - 1) * limit
   const totalCount = await UpdateLogModel.countDocuments().lean()
 
@@ -21,7 +17,7 @@ const getUpdateLogs = async (
   const updates: UpdateLog[] = updateLogs.map((log) => ({
     upid: log.upid,
     type: log.type as UpdateType,
-    content: log.content[language],
+    content: log.content,
     time: log.time,
     version: log.version
   }))
@@ -30,8 +26,7 @@ const getUpdateLogs = async (
 }
 
 export default defineEventHandler(async (event) => {
-  const { page, limit, language }: GetUpdateLogRequestData =
-    await getQuery(event)
+  const { page, limit }: GetUpdateLogRequestData = await getQuery(event)
   if (!page || !limit) {
     return kunError(event, 10507)
   }
@@ -39,7 +34,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10209)
   }
 
-  const updates = await getUpdateLogs(parseInt(page), parseInt(limit), language)
+  const updates = await getUpdateLogs(parseInt(page), parseInt(limit))
 
   return updates
 })

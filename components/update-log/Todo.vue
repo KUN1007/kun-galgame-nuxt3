@@ -42,7 +42,7 @@ watch(
       v-for="kun in data.todos"
       :key="kun.todoId"
     >
-      <p>{{ kun.content }}</p>
+      <pre>{{ getPreferredLanguageText(kun.content, locale as Language) }}</pre>
 
       <div class="status">
         <span class="time">{{ dayjs(kun.time).format('MM/D - HH:mm') }}</span>
@@ -86,8 +86,9 @@ li {
   }
 }
 
-p {
-  word-break: break-all;
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .status {

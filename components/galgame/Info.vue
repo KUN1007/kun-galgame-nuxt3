@@ -19,6 +19,7 @@ defineProps<{
     <KunCopy v-if="galgame.name['en-us']" :text="galgame.name['en-us']" />
     <KunCopy v-if="galgame.name['ja-jp']" :text="galgame.name['ja-jp']" />
     <KunCopy v-if="galgame.name['zh-cn']" :text="galgame.name['zh-cn']" />
+    <KunCopy v-if="galgame.name['zh-tw']" :text="galgame.name['zh-tw']" />
   </div>
 
   <div>

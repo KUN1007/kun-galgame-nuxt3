@@ -30,7 +30,7 @@ watch(
   <ul class="history-list" v-if="data">
     <li v-for="kun in data.updates" :key="kun.upid">
       <span class="type">{{ $t(`update.${kun.type}`) }}</span>
-      <pre>{{ kun.content }}</pre>
+      <pre>{{ getPreferredLanguageText(kun.content, locale as Language) }}</pre>
       <span class="time">{{ kun.time }} - Version {{ kun.version }}</span>
     </li>
   </ul>
