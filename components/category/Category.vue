@@ -92,6 +92,8 @@ const { data, pending } = await useLazyFetch(`/api/category`, {
 
   .title {
     margin-bottom: 10px;
+    padding: 0 10px;
+
     span {
       font-size: 17px;
     }

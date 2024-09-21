@@ -8,7 +8,8 @@ const BalanceSchema = new mongoose.Schema<Balance>(
     reason: {
       'en-us': { type: String, default: '' },
       'ja-jp': { type: String, default: '' },
-      'zh-cn': { type: String, default: '' }
+      'zh-cn': { type: String, default: '' },
+      'zh-tw': { type: String, default: '' }
     },
     type: { type: String, default: '' },
     time: { type: Number, default: 0 },

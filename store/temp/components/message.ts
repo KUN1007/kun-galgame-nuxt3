@@ -14,12 +14,14 @@ export const useComponentMessageStore = defineStore({
     alertTitle: {
       'en-us': '',
       'ja-jp': '',
-      'zh-cn': ''
+      'zh-cn': '',
+      'zh-tw': ''
     },
     alertMsg: {
       'en-us': '',
       'ja-jp': '',
-      'zh-cn': ''
+      'zh-cn': '',
+      'zh-tw': ''
     },
     isShowCancel: false,
 

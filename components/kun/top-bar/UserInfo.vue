@@ -58,8 +58,9 @@ const handleCheckIn = async () => {
 const logOut = async () => {
   const res = await useComponentMessageStore().alert({
     'en-us': 'Are you sure you want to log out?',
-    'ja-jp': '',
-    'zh-cn': '您确定退出登录吗？'
+    'ja-jp': 'ログアウトしてもよろしいですか？',
+    'zh-cn': '您确定退出登录吗？',
+    'zh-tw': '您確定退出登錄嗎？'
   })
   if (res) {
     usePersistUserStore().$reset()

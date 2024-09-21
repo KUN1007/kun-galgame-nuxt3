@@ -22,8 +22,9 @@ onBeforeRouteLeave(async (_, __, next) => {
   if (isTopicRewriting.value) {
     const res = await useComponentMessageStore().alert({
       'en-us': 'Confirm leaving the page? Your changes will not be saved.',
-      'ja-jp': '',
-      'zh-cn': '确认离开界面吗？您的更改将不会保存'
+      'ja-jp': 'ページを離れてもよろしいですか？変更は保存されません。',
+      'zh-cn': '确认离开界面吗？您的更改将不会保存。',
+      'zh-tw': '確認離開介面嗎？您的更改將不會保存。'
     })
     if (res) {
       useTempEditStore().resetRewriteTopicData()

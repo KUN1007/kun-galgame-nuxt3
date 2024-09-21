@@ -40,8 +40,9 @@ const handlePublishGalgamePR = async () => {
   }
   const res = await useComponentMessageStore().alert({
     'en-us': 'Confirm to publish visualnovel info update request?',
-    'ja-jp': '',
-    'zh-cn': '确定发布 Galgame 信息更新请求吗?'
+    'ja-jp': 'ギャルゲームの情報更新リクエストを公開しますか？',
+    'zh-cn': '确定发布 Galgame 信息更新请求吗?',
+    'zh-tw': '確定發布 Galgame 信息更新請求嗎？'
   })
   if (!res) {
     return

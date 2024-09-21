@@ -10,7 +10,8 @@ const NonMoeSchema = new mongoose.Schema<NonMoeAttributes>(
     description: {
       'en-us': { type: String, default: '' },
       'ja-jp': { type: String, default: '' },
-      'zh-cn': { type: String, default: '' }
+      'zh-cn': { type: String, default: '' },
+      'zh-tw': { type: String, default: '' }
     },
     time: { type: Number, default: Date.now() },
     result: { type: Schema.Types.Mixed, required: true }

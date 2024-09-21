@@ -36,8 +36,10 @@ const handleDeleteAllMessage = async () => {
   const res = await useComponentMessageStore().alert({
     'en-us':
       'Are you sure you want to delete all messages? This action cannot be undone.',
-    'ja-jp': '',
-    'zh-cn': '您确定要删除所有消息吗？此操作不可撤销'
+    'ja-jp':
+      'すべてのメッセージを削除してもよろしいですか？この操作は元に戻せません。',
+    'zh-cn': '您确定要删除所有消息吗？此操作不可撤销。',
+    'zh-tw': '您確定要刪除所有消息嗎？此操作不可撤銷。'
   })
   if (!res) {
     return

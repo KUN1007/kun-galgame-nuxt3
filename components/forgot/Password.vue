@@ -47,8 +47,9 @@ const handleChangePassword = async () => {
 
   const result = await useComponentMessageStore().alert({
     'en-us': 'Are you sure you want to change the password?',
-    'ja-jp': '',
-    'zh-cn': '您确定更改密码吗?'
+    'ja-jp': 'パスワードを変更してもよろしいですか？',
+    'zh-cn': '您确定更改密码吗?',
+    'zh-tw': '您確定更改密碼嗎？'
   })
   if (!result) {
     return

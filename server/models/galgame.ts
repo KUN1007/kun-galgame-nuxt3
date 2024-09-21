@@ -10,13 +10,15 @@ const GalgameSchema = new mongoose.Schema<Galgame>(
     name: {
       'en-us': { type: String, default: '', maxlength: 100007 },
       'ja-jp': { type: String, default: '', maxlength: 100007 },
-      'zh-cn': { type: String, default: '', maxlength: 100007 }
+      'zh-cn': { type: String, default: '', maxlength: 100007 },
+      'zh-tw': { type: String, default: '', maxlength: 100007 }
     },
     banner: { type: String, default: '', maxlength: 1007 },
     introduction: {
       'en-us': { type: String, default: '', maxlength: 100007 },
       'ja-jp': { type: String, default: '', maxlength: 100007 },
-      'zh-cn': { type: String, default: '', maxlength: 100007 }
+      'zh-cn': { type: String, default: '', maxlength: 100007 },
+      'zh-tw': { type: String, default: '', maxlength: 100007 }
     },
 
     time: { type: Number, default: 0 },

@@ -7,7 +7,7 @@
     "topicRSS": "鲲 Galgame 论坛话题订阅",
     "galgameRSS": "鲲 Galgame 论坛 Galgame 订阅"
   },
-  "header":{
+  "header": {
     "name": "鲲 Galgame",
     "topic": {
       "name": "话题",
@@ -28,7 +28,7 @@
     },
     "galgame": "Galgame",
     "home": "主页",
-    "hamburger":{
+    "hamburger": {
       "name": "鲲 Galgame",
       "galgame": "Galgame",
       "pool": "所有话题",
@@ -54,12 +54,14 @@
       "background": "自定义背景",
       "loli": "展示萌萌的琥珀"
     },
-    "settings":{
+    "settings": {
       "name": "设置面板",
       "mode": "模式切换",
       "language": "网站语言设置",
       "en-us": "English",
+      "ja-jp": "日本語",
       "zh-cn": "简体中文",
+      "zh-tw": "繁體中文",
       "trans": "页面透明度",
       "blur": "页面模糊度",
       "font": "字体样式",
@@ -71,13 +73,13 @@
       "restore": "重置",
       "recover": "恢复所有设置为默认"
     },
-    "user":{
+    "user": {
       "profile": "个人主页",
       "message": "我的消息",
       "check": "每日签到",
       "logout": "退出登录"
     },
-    "message":{
+    "message": {
       "message": "消息",
       "auto": "自动已读",
       "readAll": "标记所有消息为已读",
@@ -87,12 +89,12 @@
       "delete": "删除消息"
     }
   },
-  "back":{
+  "back": {
     "back": "返回",
     "home": "主页"
   },
-  "home":{
-    "header":{
+  "home": {
+    "header": {
       "topicSearch": "话题",
       "galgameSearch": "Galgame",
       "search": "输入内容以自动搜索",
@@ -144,10 +146,10 @@
     "copyright": "© 2024 鲲 Galgame",
     "openSource": "开源 {'|'} 版本"
   },
-  "topic":{
+  "topic": {
     "notFound": "该话题不存在",
     "banned": "该话题已被封禁",
-    "aside":{
+    "aside": {
       "floor": "按照楼层数排序",
       "like": "按照点赞数排序",
       "comment": "按照评论数排序",
@@ -156,7 +158,7 @@
       "master": "楼主的其它话题",
       "masterEmpty": "楼主暂无其它话题"
     },
-    "content":{
+    "content": {
       "status": "话题状态",
       "featured": "被推",
       "normal": "正常",
@@ -170,7 +172,7 @@
       "close": "关闭",
       "hint": "请输入您的评论, 最大字数为1007"
     },
-    "panel":{
+    "panel": {
       "to": "回复给",
       "master": "狗修金",
       "reply": "杂鱼~♡",
@@ -180,7 +182,7 @@
       "clear": "清空内容"
     }
   },
-  "update":{
+  "update": {
     "todo": "待办列表",
     "status0": "待处理",
     "status1": "进行中",
@@ -198,7 +200,7 @@
     "docs": "文档修改",
     "test": "测试用例"
   },
-  "balance":{
+  "balance": {
     "pl": "收支公示",
     "income": "收入",
     "totalIncome": "总收入",
@@ -210,7 +212,7 @@
     "surplusStatus": "盈余",
     "surplusAmount": "盈余金额"
   },
-  "nonMoe":{
+  "nonMoe": {
     "log": "不萌记录",
     "title": "这里记录了迄今为止所有被处罚的记录，希望大家不要这样做",
     "reason": "原因",
@@ -218,10 +220,10 @@
     "moemoepoint": "萌萌点",
     "empty": "暂无不萌记录"
   },
-  "contact":{
+  "contact": {
     "title": "加入 / 联系我们"
   },
-  "edit":{
+  "edit": {
     "topic": {
       "title": "标题",
       "loading": "正在加载编辑器...",
@@ -246,7 +248,6 @@
         "g-news": "资讯",
         "g-releases": "新作消息",
         "g-other": "其它",
-        
         "t-crack": "逆向工程",
         "t-web": "Web",
         "t-languages": "编程语言",
@@ -258,7 +259,6 @@
         "t-adobe": "Adobe",
         "t-algorithm": "算法",
         "t-other": "其它",
-        
         "o-anime": "动漫",
         "o-comics": "漫画",
         "o-music": "音乐",
@@ -345,14 +345,14 @@
       "confirm": "确定发布"
     }
   },
-  "login":{
-    "login":{
+  "login": {
+    "login": {
       "loginTitle": "登录",
       "forget": "忘记密码?",
       "loginUsername": "用户名或邮箱",
       "loginPassword": "密码"
     },
-    "overlay":{
+    "overlay": {
       "title": "欢迎注册鲲 Galgame 论坛",
       "world": "世界上最",
       "moe": "萌",
@@ -363,7 +363,7 @@
       "hug": "最温暖的拥抱",
       "register": "注册"
     },
-    "register":{
+    "register": {
       "title": "注册",
       "name": "用户名",
       "email": "邮箱",
@@ -376,10 +376,10 @@
       "privacy": "隐私政策"
     }
   },
-  "user":{
+  "user": {
     "notFound": "该用户不存在",
     "banned": "该用户已被封禁",
-    "nav":{
+    "nav": {
       "profile": "个人信息",
       "settings": "信息设置",
       "email": "邮箱密码",
@@ -390,10 +390,10 @@
       "favorite": "已收藏",
       "upvote": "已推",
       "contribute": "已贡献",
-      "reply": "发的回复",
-      "comment": "发的评论"
+      "reply": "回复",
+      "comment": "评论"
     },
-    "profile":{
+    "profile": {
       "user": "用户",
       "admin": "管理员",
       "SU": "超级管理员",
@@ -420,7 +420,7 @@
       "bio": "签名",
       "null": "请填满这只萝莉吧，因为她什么都没留下"
     },
-    "settings":{
+    "settings": {
       "avatar": "更改头像",
       "drag": "拖拽图片到方框内或",
       "click": "点击方框上传",
@@ -431,7 +431,7 @@
       "username": "更改用户名",
       "usernameHint": "用户名为 1~17 位任意字符, 用户名不可重复，更改用户名将会消耗您 17 萌萌点"
     },
-    "email":{
+    "email": {
       "email": "更改邮箱",
       "current": "您当前的邮箱是",
       "newEmail": "请输入您的新邮箱",
@@ -445,7 +445,7 @@
       "confirmPwd": "确定更改密码"
     }
   },
-  "forgot":{
+  "forgot": {
     "title": "忘记密码",
     "email": "您的邮箱",
     "code": "验证码",
@@ -455,7 +455,7 @@
     "rePwd": "确认密码",
     "confirm": "确定更改"
   },
-  "ranking":{
+  "ranking": {
     "asc": "升序",
     "desc": "降序",
     "filter": "筛选",
@@ -478,8 +478,8 @@
       "comments": "评论数"
     }
   },
-  "kungalgame":{
-    "agreement":"用户协议",
+  "kungalgame": {
+    "agreement": "用户协议",
     "privacy": "隐私政策",
     "bylaw": "执行条例",
     "update": "更新日志",
@@ -490,7 +490,7 @@
     "donate": "赞助我们",
     "home": "返回主页"
   },
-  "pool":{
+  "pool": {
     "load": "点击继续加载话题",
     "complete": "已经。。。一滴也不剩了",
     "views": "浏览",
@@ -501,12 +501,12 @@
     "others": "其它",
     "simpleMode": "简洁模式"
   },
-  "technique":{
+  "technique": {
     "prev": "上一页",
     "next": "下一页",
     "KKKKK": "我们不知道这个页面怎么写了，如果有建议，请联系我们"
   },
-  "donate":{
+  "donate": {
     "donate": "赞助我们",
     "no": "没有任何的萌萌点奖励",
     "server": "，不过可以帮我们缓解一部分服务器的费用，您确定要赞助吗？",
@@ -723,7 +723,7 @@
       "tgnav": "TGNAV"
     }
   },
-  "pageError":{
+  "pageError": {
     "404": "杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面不见了 ~ 是不是被你吃了?!",
     "error": "杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面出错了 ~ 是不是你干的?!",
     "remake": "一键转生为萝莉"
@@ -755,7 +755,7 @@
     "loading": "少女祈祷中...",
     "complete": "已经。。。一滴也不剩了"
   },
-  "footer":{
+  "footer": {
     "copyright": "版权所有 © 2024 鲲 Galgame",
     "openSource": "GitHub 开源",
     "reserved": "保留所有权利 {'|'} 版本"
@@ -783,7 +783,7 @@
       "g-news": "Galgame 资讯, 新汉化信息, 新动态信息等与 Galgame 相关信息",
       "g-releases": "Galgame 新作消息, 有哪些新会社发布了哪些新游戏, 在哪里发布, 如何购买",
       "g-other": "与 Galgame 相关的一切内容, 包括一些不被纳入 VNDB 范围内的游戏",
-      
+
       "t-web": "Web, Web app development, JavaScript / TypeScript, Node.js, React / Next.js, Vue / Nuxt, Angular, Solid, Svelte",
       "t-languages": "编程语言, C 语言, JavaScript, C++ / cpp, Java, Python, Rust, C#",
       "t-help": "您有任何需要解决的问题，都可以在这里提问",
@@ -795,7 +795,7 @@
       "t-adobe": "Adobe, Adobe Photoshop(PS), Adobe Illustrator(AI), Adobe Premiere Pro(PR), Adobe Audition(AU), Adobe After Effects(AE)",
       "t-algorithm": "算法, Sort, DFS, BFS, A Search, Greedy, Union Find, Hashing, BT, BST, FT, Backtracking",
       "t-other": "其它, 和你所知道技术的有关的一切, 限于医学, 农学, 工学, 文学, 工商学, 密码学, 社会学, 管理学等等一切",
-      
+
       "o-anime": "动漫, 我，喜欢梨斗，全宇宙最喜欢梨斗了！所以今后我也要加油让梨斗喜欢上我！",
       "o-comics": "漫画, 尚待补充",
       "o-music": "音乐, せーのっ! でもそんなんじゃ だめ",
@@ -887,23 +887,23 @@
       "description": "搜索 Galgame, Galgame 资源, 话题, 用户, 回复, 评论等"
     }
   },
-  "ComponentAlert":{
+  "ComponentAlert": {
     "confirm": "确定",
     "cancel": "取消"
   },
-  "AlertInfo":{
-    "edit":{
+  "AlertInfo": {
+    "edit": {
       "publishSuccess": "发布成功",
       "rewriteSuccess": "Rewrite 成功",
       "prSuccess": "创建更新请求成功"
     },
-    "login":{
+    "login": {
       "invalidUsername": "非法的用户名，用户名为 1~17 位任意字符",
       "invalidPassword": "非法的密码格式，密码的长度为 6 到 107 位，必须包含至少一个英文字符和一个数字，可以选择性的包含 {'@'}!#$%^&*()_-+=\\/ 等特殊字符",
       "invalidCode": "非法的邮箱验证码格式，邮箱验证码必须为 7 位数字或字母",
       "success": "登陆成功! 欢迎来到鲲 Galgame! "
     },
-    "capture":{
+    "capture": {
       "title": "请回答下面的问题",
       "submit": "提交",
       "close": "关闭",
@@ -913,7 +913,7 @@
       "hint4": "杂~~~鱼~♡杂鱼~♡你就看吧，最后害的还是你自己",
       "answer": "答案"
     },
-    "code":{
+    "code": {
       "code": "验证码已发送，您可以在邮箱中查看，注意查看垃圾邮件，如果未收到邮件，您可以在 30 秒后尝试重新发送邮箱验证码",
       "password": "确定更改密码吗?"
     },

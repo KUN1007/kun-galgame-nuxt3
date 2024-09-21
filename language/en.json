@@ -7,7 +7,7 @@
     "topicRSS": "KUN Visual Novel Forum Topic RSS",
     "galgameRSS": "KUN Visual Novel Forum Visual Novel RSS"
   },
-  "header":{
+  "header": {
     "name": "KUN Visual Novel",
     "topic": {
       "name": "Topic",
@@ -28,7 +28,7 @@
     },
     "galgame": "Visual Novel",
     "home": "Home",
-    "hamburger":{
+    "hamburger": {
       "name": "KUN Visual Novel",
       "galgame": "Visual Novel",
       "pool": "Pool",
@@ -54,12 +54,14 @@
       "background": "Custom Background",
       "loli": "Show Moe Kohaku"
     },
-    "settings":{
+    "settings": {
       "name": "Settings",
       "mode": "Mode",
       "language": "Language",
       "en-us": "English",
+      "ja-jp": "日本語",
       "zh-cn": "简体中文",
+      "zh-tw": "繁體中文",
       "trans": "Transparency",
       "blur": "Page Blur",
       "font": "Font Style",
@@ -71,13 +73,13 @@
       "restore": "Restore",
       "recover": "Recover all settings to default"
     },
-    "user":{
+    "user": {
       "profile": "Profile Page",
       "message": "Message",
       "check": "Daily Check",
       "logout": "Log out"
     },
-    "message":{
+    "message": {
       "message": "Message",
       "auto": "Auto Read",
       "readAll": "Mark All Messages as Read",
@@ -87,12 +89,12 @@
       "delete": "Delete message"
     }
   },
-  "back":{
+  "back": {
     "back": "Back",
     "home": "Home"
   },
-  "home":{
-    "header":{
+  "home": {
+    "header": {
       "topicSearch": "Topics",
       "galgameSearch": "VNs",
       "search": "Input to Auto Search",
@@ -144,10 +146,10 @@
     "copyright": "© 2024 KUN Visual Novel",
     "openSource": "Open Source {'|'} Version"
   },
-  "topic":{
+  "topic": {
     "notFound": "Topic not found",
     "banned": "Topic has been banned",
-    "aside":{
+    "aside": {
       "floor": "Sort by Floor Number",
       "like": "Sort by Likes Count",
       "comment": "Sort by Comment Count",
@@ -156,7 +158,7 @@
       "master": "Other Topics of The Master",
       "masterEmpty": "Master currently has no other topics"
     },
-    "content":{
+    "content": {
       "status": "Topic status",
       "featured": "Featured",
       "normal": "Normal",
@@ -170,7 +172,7 @@
       "close": "Close",
       "hint": "Please enter your comment, maximum 1007 characters."
     },
-    "panel":{
+    "panel": {
       "to": "Replied To",
       "master": "ご主人",
       "reply": "zako~♡",
@@ -180,7 +182,7 @@
       "clear": "Clear Content"
     }
   },
-  "update":{
+  "update": {
     "todo": "Todo List",
     "status0": "Pending",
     "status1": "Ongoing",
@@ -198,7 +200,7 @@
     "docs": "Documentation Changes",
     "test": "Test Cases"
   },
-  "balance":{
+  "balance": {
     "pl": "Income and Expenditure Statement",
     "income": "INCOME",
     "totalIncome": "Total Income",
@@ -210,7 +212,7 @@
     "surplusStatus": "Surplus",
     "surplusAmount": "Surplus Amount"
   },
-  "nonMoe":{
+  "nonMoe": {
     "log": "Non-moe Record",
     "title": "All the non-moe behavior were recorded here, don't do that",
     "reason": "reason",
@@ -218,10 +220,10 @@
     "moemoepoint": "moemoepoint",
     "empty": "No records of non-moe at the moment"
   },
-  "contact":{
+  "contact": {
     "title": "Join / Contact Us"
   },
-  "edit":{
+  "edit": {
     "topic": {
       "title": "Title",
       "loading": "Loading editor...",
@@ -345,14 +347,14 @@
       "confirm": "Confirm Publish"
     }
   },
-  "login":{
-    "login":{
+  "login": {
+    "login": {
       "loginTitle": "Login",
       "forget": "Forgot your password?",
       "loginUsername": "Username or email",
       "loginPassword": "Password"
     },
-    "overlay":{
+    "overlay": {
       "title": "Welcome to KUN Visual Novel Registration",
       "world": "The World's",
       "moe": "Cutest",
@@ -363,7 +365,7 @@
       "hug": "The Warmest Hug",
       "register": "Register"
     },
-    "register":{
+    "register": {
       "title": "Register",
       "name": "username",
       "email": "email",
@@ -376,10 +378,10 @@
       "privacy": "Privacy Policy"
     }
   },
-  "user":{
+  "user": {
     "notFound": "User not found",
     "banned": "User has been banned",
-    "nav":{
+    "nav": {
       "profile": "Profile",
       "settings": "Settings",
       "email": "Email",
@@ -393,7 +395,7 @@
       "reply": "Replies",
       "comment": "Comments"
     },
-    "profile":{
+    "profile": {
       "user": "User",
       "admin": "Administrator",
       "SU": "Super Admin",
@@ -420,7 +422,7 @@
       "bio": "Bio",
       "null": "Please fill this loli in because she hasn't left anything"
     },
-    "settings":{
+    "settings": {
       "avatar": "Change Avatar",
       "drag": "Drag and drop an image into the box OR",
       "click": "Click the box to upload",
@@ -429,9 +431,9 @@
       "hint": "Please enter your new signature, up to 107 characters",
       "count": "Character count",
       "username": "Change Username",
-      "usernameHint": "Username should be 1 to 17 characters long with any characters. Usernames must be unique, changing your username will cost you 17 moemoepoints"      
+      "usernameHint": "Username should be 1 to 17 characters long with any characters. Usernames must be unique, changing your username will cost you 17 moemoepoints"
     },
-    "email":{
+    "email": {
       "email": "Change Email",
       "current": "Your current email is",
       "newEmail": "Please enter your new email",
@@ -445,7 +447,7 @@
       "confirmPwd": "Confirm Password Change"
     }
   },
-  "forgot":{
+  "forgot": {
     "title": "Forgot Password",
     "email": "Your Email",
     "code": "Code",
@@ -455,7 +457,7 @@
     "rePwd": "Confirm Password",
     "confirm": "Confirm"
   },
-  "ranking":{
+  "ranking": {
     "asc": "Ascending",
     "desc": "Descending",
     "filter": "Filter",
@@ -478,8 +480,8 @@
       "comments": "Comments"
     }
   },
-  "kungalgame":{
-    "agreement":"User Agreement",
+  "kungalgame": {
+    "agreement": "User Agreement",
     "privacy": "Privacy",
     "bylaw": "Bylaws",
     "update": "Update Log",
@@ -490,7 +492,7 @@
     "donate": "Donate Us",
     "home": "Back Home"
   },
-  "pool":{
+  "pool": {
     "load": "Click to Load More Topics",
     "complete": "Already there's nothing left...",
     "views": "Views",
@@ -501,16 +503,15 @@
     "others": "Others",
     "simpleMode": "Simple Mode"
   },
-  "technique":{
+  "technique": {
     "prev": "Prev",
     "next": "Next",
     "KKKKK": "We're not sure how this page should be written. If you have any suggestions, please contact us."
   },
-  "donate":{
+  "donate": {
     "donate": "Donate Us",
     "no": "comes with no Moemoepoint rewards",
-    "server":
-      ", but it can help us cover some server expenses. Are you sure you want to sponsor us?",
+    "server": ", but it can help us cover some server expenses. Are you sure you want to sponsor us?",
     "confirm": "Confirm Donate",
     "afdian": "AFDIAN",
     "help": "If you don't know how to use cryptocurrency, you don't need to donate. We appreciate your kindness.",
@@ -724,7 +725,7 @@
       "tgnav": "TGNAV"
     }
   },
-  "pageError":{
+  "pageError": {
     "404": "Za~~~ko~♡ zako~♡ Smelly zako ♡ The page is gone ~ Did you eat it?!",
     "error": "Za~~~ko~♡ zako~♡ Smelly zako ♡ Something went wrong with the page ~ Did you do it?!",
     "remake": "One-click Reincarnation to Loli"
@@ -756,23 +757,23 @@
     "loading": "少女祈祷中...",
     "complete": "Already there's nothing left..."
   },
-  "footer":{
+  "footer": {
     "copyright": "Copyright © 2024 KUN Visual Novel",
     "openSource": "GitHub Open Source",
     "reserved": "All rights reserved {'|'} Version"
   },
   "seo": {
     "agreement": {
-        "title": "User Agreement",
-        "description": "1. All statements made by users are not related to KUN Visual Novel. 2. KUN Visual Novel is merely an open-source collaborative web development project designed for everyone to learn web knowledge. 3. We reserve the right to ban users who engage in actions detrimental to the maintenance of our open-source project. 4. KUN Visual Novel is not responsible for any losses caused by issues such as user account theft."
+      "title": "User Agreement",
+      "description": "1. All statements made by users are not related to KUN Visual Novel. 2. KUN Visual Novel is merely an open-source collaborative web development project designed for everyone to learn web knowledge. 3. We reserve the right to ban users who engage in actions detrimental to the maintenance of our open-source project. 4. KUN Visual Novel is not responsible for any losses caused by issues such as user account theft."
     },
     "balance": {
-        "title": "Financial Disclosure",
-        "description": "KUN Visual Novel's financial disclosure, KUN Visual Novel is a completely free forum. Income comes from donations, and expenses include servers, domains, email services, and image hosting services."
+      "title": "Financial Disclosure",
+      "description": "KUN Visual Novel's financial disclosure, KUN Visual Novel is a completely free forum. Income comes from donations, and expenses include servers, domains, email services, and image hosting services."
     },
     "bylaw": {
-        "title": "Bylaws",
-        "description": "KUN Visual Novel bylaws, covering users, topics, and moemoepoints. The goal is to make the forum's operation more transparent; these are not rules, as we do not have strict rules."
+      "title": "Bylaws",
+      "description": "KUN Visual Novel bylaws, covering users, topics, and moemoepoints. The goal is to make the forum's operation more transparent; these are not rules, as we do not have strict rules."
     },
     "category": {
       "title": "Topic Categories",
@@ -801,62 +802,62 @@
       "o-comics": "Comics, To be added",
       "o-music": "Music, せーのっ! でもそんなんじゃ だめ",
       "o-novel": "Light Novels, To be added",
-      "o-daily": "Daily Life, Record everyday stories from life",    
+      "o-daily": "Daily Life, Record everyday stories from life",
       "o-essay": "Personal Essays, Write whatever comes to mind",
       "o-forum": "Forum Related, Feedback, New Feature Requests, Anything related to this forum",
       "o-other": "Other Content"
     },
     "contact": {
-        "title": "Join / Contact Us",
-        "description": "Join the official KUN Visual Novel Telegram group, official Twitter / X subscription, official GitHub project, official Discord discussion group, official YouTube channel, official Bilibili."
+      "title": "Join / Contact Us",
+      "description": "Join the official KUN Visual Novel Telegram group, official Twitter / X subscription, official GitHub project, official Discord discussion group, official YouTube channel, official Bilibili."
     },
     "donate": {
-        "title": "Sponsor / Donate Us",
-        "description": "Sponsor KUN Visual Novel forum to relieve our operational pressure."
+      "title": "Sponsor / Donate Us",
+      "description": "Sponsor KUN Visual Novel forum to relieve our operational pressure."
     },
     "edit": {
-        "title": "Post Topic",
-        "description": "Post a topic on KUN Visual Novel, any type is allowed, including visualnovel-related content, visualnovel downloads, visualnovel impressions, etc."
+      "title": "Post Topic",
+      "description": "Post a topic on KUN Visual Novel, any type is allowed, including visualnovel-related content, visualnovel downloads, visualnovel impressions, etc."
     },
     "forgot": {
-        "title": "Forgot Password",
-        "description": "Forgot password on KUN Visual Novel, recover your password if forgotten."
+      "title": "Forgot Password",
+      "description": "Forgot password on KUN Visual Novel, recover your password if forgotten."
     },
     "kungalgame": {
-        "title": "About Us",
-        "description": "KUN Visual Novel is a visualnovel forum that will become a website integrating all things visualnovel, including visualnovel downloads, visualnovel reviews, visualnovel data analysis, visualnovel news, visualnovel translation/internationalization, visualnovel production, and more. Our ultimate goal is to be the world's best visualnovel forum!"
+      "title": "About Us",
+      "description": "KUN Visual Novel is a visualnovel forum that will become a website integrating all things visualnovel, including visualnovel downloads, visualnovel reviews, visualnovel data analysis, visualnovel news, visualnovel translation/internationalization, visualnovel production, and more. Our ultimate goal is to be the world's best visualnovel forum!"
     },
     "login": {
-        "title": "Login / Register KUN Visual Novel Forum",
-        "description": "Login / Register KUN Visual Novel Forum, the world's cutest visualnovel forum! Visualnovel discussions, technical exchanges. Striving to create the best atmosphere! No advertisements ever! Always free!"
+      "title": "Login / Register KUN Visual Novel Forum",
+      "description": "Login / Register KUN Visual Novel Forum, the world's cutest visualnovel forum! Visualnovel discussions, technical exchanges. Striving to create the best atmosphere! No advertisements ever! Always free!"
     },
     "nonMoe": {
-        "title": "Non-moe Record",
-        "description": "KUN Visual Novel's records of user violations. This section records all penalties imposed so far. We hope everyone will not engage in such behavior."
+      "title": "Non-moe Record",
+      "description": "KUN Visual Novel's records of user violations. This section records all penalties imposed so far. We hope everyone will not engage in such behavior."
     },
     "pool": {
-        "title": "Topic Pool",
-        "description": "KUN Visual Novel topic pool, visualnovel discussions, technical exchanges, and other discussions."
+      "title": "Topic Pool",
+      "description": "KUN Visual Novel topic pool, visualnovel discussions, technical exchanges, and other discussions."
     },
     "privacy": {
-        "title": "Privacy Policy",
-        "description": "KUN Visual Novel privacy policy. KUN Visual Novel is a completely free, ad-free visualnovel forum. We will never use your personal information for anything other than this site. We do not operate for profit. Email, registration time, etc., are used for password recovery. Through cookies, Local Storage, etc., we provide optimized experiences such as search history, image caching. Device date, operating system information, etc."
+      "title": "Privacy Policy",
+      "description": "KUN Visual Novel privacy policy. KUN Visual Novel is a completely free, ad-free visualnovel forum. We will never use your personal information for anything other than this site. We do not operate for profit. Email, registration time, etc., are used for password recovery. Through cookies, Local Storage, etc., we provide optimized experiences such as search history, image caching. Device date, operating system information, etc."
     },
     "ranking": {
-        "title": "Rankings",
-        "description": "KUN Visual Novel rankings, user rankings, topic rankings, popularity rankings, moemoepoints rankings."
+      "title": "Rankings",
+      "description": "KUN Visual Novel rankings, user rankings, topic rankings, popularity rankings, moemoepoints rankings."
     },
     "technique": {
-        "title": "Technical Exchange",
-        "description": "KUN Visual Novel technical exchange. visualnovel cracking, visualnovel translation, visualnovel production, advanced visualnovel. Perhaps you can develop a high-performance visualnovel website. Not limited to visualnovel, we encourage exploration of all technical aspects, such as programming, Adobe series, SAI drawing, Auto CAD mapping, high-tech, rooting, firewalls, servers, DDoS principles."
+      "title": "Technical Exchange",
+      "description": "KUN Visual Novel technical exchange. visualnovel cracking, visualnovel translation, visualnovel production, advanced visualnovel. Perhaps you can develop a high-performance visualnovel website. Not limited to visualnovel, we encourage exploration of all technical aspects, such as programming, Adobe series, SAI drawing, Auto CAD mapping, high-tech, rooting, firewalls, servers, DDoS principles."
     },
     "thanksList": {
-        "title": "Thanks List",
-        "description": "KUN Visual Novel thank you list. Thanks to ACGNGAME (Old Yu), shinnku (shinnku-sister), YM Galgame (Cang Lin), yurzhang (yur), Haruki (Haruki Nikaido), Asuka Minato (Asuka-san), Kun's Galgame discussion group Telegram, Kun's Galgame discussion group QQ, and everyone for their help."
+      "title": "Thanks List",
+      "description": "KUN Visual Novel thank you list. Thanks to ACGNGAME (Old Yu), shinnku (shinnku-sister), YM Galgame (Cang Lin), yurzhang (yur), Haruki (Haruki Nikaido), Asuka Minato (Asuka-san), Kun's Galgame discussion group Telegram, Kun's Galgame discussion group QQ, and everyone for their help."
     },
     "updateLog": {
-        "title": "Update Log",
-        "description": "Update log of KUN Visual Novel forum's open-source GitHub repository, documenting everything from the forum's inception."
+      "title": "Update Log",
+      "description": "Update log of KUN Visual Novel forum's open-source GitHub repository, documenting everything from the forum's inception."
     },
     "home": {
       "title": "KUN Visual Novel Forum",
@@ -884,23 +885,23 @@
       "description": "Search visualnovels, visualnovel resources, topics, users, replies and comments"
     }
   },
-  "ComponentAlert":{
+  "ComponentAlert": {
     "confirm": "OK",
     "cancel": "Cancel"
   },
-  "AlertInfo":{
-    "edit":{
+  "AlertInfo": {
+    "edit": {
       "publishSuccess": "Publish Successfully",
       "rewriteSuccess": "Rewrite Successfully",
       "prSuccess": "Create update request successfully"
     },
-    "login":{
+    "login": {
       "invalidUsername": "Invalid username. Username should be 1 to 17 characters long with any characters",
       "invalidPassword": "Invalid password format. Password must be 6 to 107 characters long and must include at least one letter and one number. It can optionally include special characters such as {'@'}!#$%^&*()_-+=\\/",
       "invalidCode": "Invalid email verification code format. The email verification code must consist of 7 digits or letters.",
       "success": "Login Successfully! Welcome to KUN Visual Novel"
     },
-    "capture":{
+    "capture": {
       "title": "Answer Question(s)",
       "submit": "Submit",
       "close": "Close",
@@ -910,7 +911,7 @@
       "hint4": "Za~~~ko~♡ zako~♡ Just you wait, you'll regret it in the end",
       "answer": "Answer"
     },
-    "code":{
+    "code": {
       "code": "The verification code has been sent. You can check it in your email. Please check your spam folder. If you haven't received the email, you can try to resend the email verification code after 30 seconds.",
       "password": "Are you sure you want to change the password?"
     },

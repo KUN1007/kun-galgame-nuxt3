@@ -82,9 +82,19 @@ export default defineNuxtConfig({
         file: 'en.json'
       },
       {
+        code: 'ja-jp',
+        language: 'ja-JP',
+        file: 'ja-jp.json'
+      },
+      {
         code: 'zh-cn',
         language: 'zh-CN',
         file: 'zh-CN.json'
+      },
+      {
+        code: 'zh-tw',
+        language: 'zh-TW',
+        file: 'zh-TW.json'
       }
     ],
     baseUrl: process.env.KUN_GALGAME_URL,

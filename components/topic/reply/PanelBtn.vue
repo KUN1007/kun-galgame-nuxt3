@@ -19,8 +19,9 @@ const handlePublish = async () => {
 
   const res = await useComponentMessageStore().alert({
     'en-us': 'Confirm to publish?',
-    'ja-jp': '',
-    'zh-cn': '确认发布吗？'
+    'ja-jp': '公開を確定しますか？',
+    'zh-cn': '确认发布吗？',
+    'zh-tw': '確認發布嗎？'
   })
   if (!res) {
     return
@@ -60,8 +61,9 @@ const handleRewrite = async () => {
 
   const res = await useComponentMessageStore().alert({
     'en-us': 'Confirm to Rewrite?',
-    'ja-jp': '',
-    'zh-cn': '确认 Rewrite 吗？'
+    'ja-jp': 'リライトしますか？',
+    'zh-cn': '确认 Rewrite 吗？',
+    'zh-tw': '確認 Rewrite 嗎？'
   })
   if (!res) {
     return

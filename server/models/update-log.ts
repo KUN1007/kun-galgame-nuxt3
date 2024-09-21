@@ -9,7 +9,8 @@ const UpdateLogSchema = new mongoose.Schema<UpdateLogAttributes>(
     content: {
       'en-us': { type: String, default: '' },
       'ja-jp': { type: String, default: '' },
-      'zh-cn': { type: String, default: '' }
+      'zh-cn': { type: String, default: '' },
+      'zh-tw': { type: String, default: '' }
     },
     time: { type: String, default: '' },
     version: { type: String, default: '' }
