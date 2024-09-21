@@ -126,7 +126,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
         <KunAvatar :user="details.user" size="33px" />
         <span class="username">{{ details.user.name }}</span>
         <span class="time">
-          {{ formatTimeDifferenceHint(details.time, locale) }}
+          {{ formatTimeDifference(details.time, locale) }}
         </span>
       </div>
 

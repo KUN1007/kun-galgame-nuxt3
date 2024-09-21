@@ -2,8 +2,7 @@ import { useKunFeed } from '../_useI18nFeed'
 import type { TopicRSS } from '~/types/api/rss'
 
 export default defineEventHandler(async (event) => {
-  const { locale }: { locale: 'en-us' | 'zh-cn' | undefined } =
-    await getQuery(event)
+  const { locale }: { locale: Language } = await getQuery(event)
   const language = locale ?? 'en-us'
 
   const baseUrl = useRuntimeConfig().public.KUN_GALGAME_URL

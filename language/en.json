@@ -105,7 +105,9 @@
     },
     "route": {
       "homeEn": "Home page (English)",
-      "homeZh": "Home page (Chinese)",
+      "homeJp": "Home page (Japanese)",
+      "homeZh": "Home page (Chinese Simplified)",
+      "homeTw": "Home page (Chinese Traditional)",
       "agreement": "User Agreement",
       "balance": "P & L",
       "bylaw": "Bylaws",
@@ -308,7 +310,8 @@
         "help": "At least one type of introduction is required. The English introduction can be automatically retrieved by clicking 'Fetch Data', but there is a chance it may not be available. For the Japanese introduction, you can click on the 'DLsite' website at the top of the page to enter the game details page, and the 'ストーリー' section on that page is the Japanese introduction. The Chinese introduction can be obtained from Bangumi or the Moegirl Wiki. You can also discard the official visualnovel description and provide your own introduction to the visualnovel.",
         "en-us": "English",
         "ja-jp": "Japanese",
-        "zh-cn": "Chinese"
+        "zh-cn": "Chinese",
+        "zh-tw": "Chinese(T)"
       },
       "banner": {
         "name": "Banner",
@@ -539,7 +542,8 @@
       "name": "Introduction",
       "en-us": "English Title",
       "ja-jp": "Japanese Title",
-      "zh-cn": "Chinese Title"
+      "zh-cn": "Chinese Title",
+      "zh-tw": "Chinese(T) Title"
     },
     "info": {
       "name": "Information",
@@ -585,6 +589,7 @@
         "ja-jp": "Japanese",
         "en-us": "English",
         "zh-cn": "Chinese",
+        "zh-tw": "Chinese(T)",
         "others": "Others"
       },
       "platform": {
@@ -645,12 +650,14 @@
         "name": {
           "en-us": "English Title",
           "ja-jp": "Japanese Title",
-          "zh-cn": "Chinese Title"
+          "zh-cn": "Simplified Chinese",
+          "zh-tw": "Traditional Chinese"
         },
         "introduction": {
           "en-us": "English Introduction",
           "ja-jp": "Japanese Introduction",
-          "zh-cn": "Chinese Introduction"
+          "zh-cn": "Simplified Chinese",
+          "zh-tw": "Traditional Chinese"
         },
         "tags": "Tags",
         "series": "Series",
@@ -738,7 +745,9 @@
     "update": "RSS data updates every seventeen minutes.",
     "language": {
       "en-us": "English",
-      "zh-cn": "Chinese"
+      "ja-jp": "Japanese",
+      "zh-cn": "Simplified Chinese",
+      "zh-tw": "Traditional Chinese"
     }
   },
   "search": {

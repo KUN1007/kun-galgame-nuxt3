@@ -8,7 +8,7 @@ export interface NonMoeLog {
   nid: number
   uid: number
   name: string
-  description: string
+  description: KunLanguage
   time: number
   result: string | number
 }

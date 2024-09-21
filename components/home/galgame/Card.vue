@@ -20,7 +20,7 @@ defineProps<{
         {{ getPreferredLanguageText(galgame.name, locale as Language) }}
       </span>
       <span class="time">
-        {{ formatTimeDifferenceHint(galgame.time, locale) }}
+        {{ formatTimeDifference(galgame.time, locale) }}
       </span>
     </div>
 

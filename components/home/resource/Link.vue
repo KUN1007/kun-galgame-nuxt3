@@ -21,7 +21,7 @@ const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
       {{ getPreferredLanguageText(link.name, locale as Language) }}
     </NuxtLinkLocale>
     <span class="time">
-      {{ formatTimeDifferenceHint(link.time, locale) }}
+      {{ formatTimeDifference(link.time, locale) }}
     </span>
   </div>
 

@@ -43,7 +43,7 @@ const { data, pending } = await useFetch(
           <span>{{ $t(`galgame.history.${history.action}`) }}</span>
           <span>{{ $t(`galgame.history.${history.type}`) }}</span>
           <span class="time">
-            {{ formatTimeDifferenceHint(history.time, locale) }}
+            {{ formatTimeDifference(history.time, locale) }}
           </span>
         </div>
 

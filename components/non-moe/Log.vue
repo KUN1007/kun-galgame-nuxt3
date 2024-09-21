@@ -6,6 +6,8 @@ const props = defineProps<{
   logs: NonMoeLog[]
 }>()
 
+const { locale } = useI18n()
+
 const logs = computed(() => props.logs)
 </script>
 
@@ -18,7 +20,10 @@ const logs = computed(() => props.logs)
       </NuxtLinkLocale>
     </div>
 
-    <div class="reason" v-html="kun.description"></div>
+    <div
+      class="reason"
+      v-html="getPreferredLanguageText(kun.description, locale as Language)"
+    />
 
     <div class="footer">
       <div class="time">

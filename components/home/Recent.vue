@@ -52,7 +52,7 @@ const handleClose = () => {
         "
       >
         <span>{{ message.content }}</span>
-        <span>{{ formatTimeDifferenceHint(message.time, locale) }}</span>
+        <span>{{ formatTimeDifference(message.time, locale) }}</span>
       </NuxtLinkLocale>
     </div>
   </div>

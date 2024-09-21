@@ -22,7 +22,7 @@ defineProps<{
 
     <div class="title">
       <span>{{ topic.title }}</span>
-      <span>{{ formatTimeDifferenceHint(topic.time, locale) }}</span>
+      <span>{{ formatTimeDifference(topic.time, locale) }}</span>
     </div>
 
     <div class="info">

@@ -20,6 +20,22 @@ const languageOptions = {
     year: 'year',
     years: 'years'
   },
+  'ja-jp': {
+    second: '秒',
+    seconds: '秒',
+    minute: '分',
+    minutes: '分',
+    hour: '時間',
+    hours: '時間',
+    day: '日',
+    days: '日',
+    week: '週',
+    weeks: '週',
+    month: '月',
+    months: '月',
+    year: '年',
+    years: '年'
+  },
   'zh-cn': {
     second: '秒',
     seconds: '秒',
@@ -31,6 +47,22 @@ const languageOptions = {
     days: '天',
     week: '周',
     weeks: '周',
+    month: '月',
+    months: '月',
+    year: '年',
+    years: '年'
+  },
+  'zh-tw': {
+    second: '秒',
+    seconds: '秒',
+    minute: '分鐘',
+    minutes: '分鐘',
+    hour: '小時',
+    hours: '小時',
+    day: '天',
+    days: '天',
+    week: '週',
+    weeks: '週',
     month: '月',
     months: '月',
     year: '年',
@@ -67,7 +99,6 @@ const replaceTimeUnits = (input: string, language: string) => {
   return input.replace(regex, (matched) => replacements[matched])
 }
 
-// Format time difference
 export const formatTimeDifference = (
   pastTime: number | Date | string,
   language: string
@@ -75,7 +106,6 @@ export const formatTimeDifference = (
   const now = dayjs()
   const diffInSeconds = now.diff(pastTime, 'second')
 
-  // Use the relativeTime plugin of dayjs to format relative time
   const time = () => {
     if (diffInSeconds < 60) {
       return now.to(pastTime, true)
@@ -93,21 +123,9 @@ export const formatTimeDifference = (
   }
 
   if (time() === 'a few seconds') {
-    return language === 'en-us' ? 'a few secs' : '几秒'
+    return language === 'en-us' ? 'a few secs' : '数秒前'
   }
 
-  const cnTime = replaceTimeUnits(time(), language).replace(/s\b/g, '')
-
-  const enTime = replaceTimeUnits(time(), language)
-
-  return language === 'en-us' ? enTime : cnTime
-}
-
-export const formatTimeDifferenceHint = (
-  pastTime: number | Date | string,
-  language: string
-) => {
-  const result = formatTimeDifference(pastTime, language)
-  const hintBack = language === 'en-us' ? ' ago' : '前'
-  return `${result}${hintBack}`
+  const localizedTime = replaceTimeUnits(time(), language).replace(/s\b/g, '')
+  return localizedTime
 }

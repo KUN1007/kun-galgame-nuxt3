@@ -110,6 +110,10 @@ const handleGetVNData = async () => {
         :placeholder="$t('edit.galgame.introduction.zh-cn')"
         v-model="name['zh-cn']"
       />
+      <KunInput
+        :placeholder="$t('edit.galgame.introduction.zh-tw')"
+        v-model="name['zh-tw']"
+      />
     </EditGalgameTitle>
 
     <EditGalgameIntroduction

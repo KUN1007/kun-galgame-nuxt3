@@ -57,7 +57,7 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
         <KunAvatar :user="comment.user" size="30px" />
         <span>{{ comment.user.name }}</span>
         <span class="time">
-          {{ formatTimeDifferenceHint(comment.time, locale) }}
+          {{ formatTimeDifference(comment.time, locale) }}
         </span>
 
         <div v-if="comment.toUser">

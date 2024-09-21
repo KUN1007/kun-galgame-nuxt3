@@ -23,6 +23,10 @@ const title = computed(() => galgamePR.value[0].name)
       :placeholder="$t('edit.galgame.introduction.zh-cn')"
       v-model="title['zh-cn']"
     />
+    <KunInput
+      :placeholder="$t('edit.galgame.introduction.zh-tw')"
+      v-model="title['zh-tw']"
+    />
   </div>
 </template>
 

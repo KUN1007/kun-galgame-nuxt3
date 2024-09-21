@@ -72,6 +72,7 @@ export const searchGalgame = async (
           { 'name.en-us': { $regex: keywords.join('|'), $options: 'i' } },
           { 'name.ja-jp': { $regex: keywords.join('|'), $options: 'i' } },
           { 'name.zh-cn': { $regex: keywords.join('|'), $options: 'i' } },
+          { 'name.zh-tw': { $regex: keywords.join('|'), $options: 'i' } },
           {
             'introduction.en-us': { $regex: keywords.join('|'), $options: 'i' }
           },
@@ -80,6 +81,9 @@ export const searchGalgame = async (
           },
           {
             'introduction.zh-cn': { $regex: keywords.join('|'), $options: 'i' }
+          },
+          {
+            'introduction.zh-tw': { $regex: keywords.join('|'), $options: 'i' }
           },
           { alias: { $in: keywords } },
           { tags: { $in: keywords } },

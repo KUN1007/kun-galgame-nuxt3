@@ -22,7 +22,7 @@ const content = computed(() =>
         <Icon :name="type === 'reply' ? 'lucide:reply' : 'uil:comment-dots'" />
       </span>
       <span>{{ data.title }}</span>
-      <span>{{ formatTimeDifferenceHint(data.time, locale) }}</span>
+      <span>{{ formatTimeDifference(data.time, locale) }}</span>
     </div>
 
     <div class="content">

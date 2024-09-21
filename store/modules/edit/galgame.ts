@@ -10,12 +10,14 @@ export const usePersistEditGalgameStore = defineStore({
     name: {
       'en-us': '',
       'ja-jp': '',
-      'zh-cn': ''
+      'zh-cn': '',
+      'zh-tw': ''
     },
     introduction: {
       'en-us': '',
       'ja-jp': '',
-      'zh-cn': ''
+      'zh-cn': '',
+      'zh-tw': ''
     },
     aliases: []
   }),
@@ -25,12 +27,14 @@ export const usePersistEditGalgameStore = defineStore({
       this.name = {
         'en-us': '',
         'ja-jp': '',
-        'zh-cn': ''
+        'zh-cn': '',
+        'zh-tw': ''
       }
       this.introduction = {
         'en-us': '',
         'ja-jp': '',
-        'zh-cn': ''
+        'zh-cn': '',
+        'zh-tw': ''
       }
       this.aliases = []
     }

@@ -57,7 +57,7 @@ watch(
       <span>{{ $t('galgame.pr.request') }}</span>
 
       <span class="time">
-        {{ formatTimeDifferenceHint(pr.time, locale) }}
+        {{ formatTimeDifference(pr.time, locale) }}
       </span>
     </div>
 

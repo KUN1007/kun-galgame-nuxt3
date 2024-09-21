@@ -15,5 +15,9 @@ export const languageItems: Item[] = [
   {
     i18n: 'edit.galgame.introduction.zh-cn',
     value: 'zh-cn'
+  },
+  {
+    i18n: 'edit.galgame.introduction.zh-tw',
+    value: 'zh-tw'
   }
 ]

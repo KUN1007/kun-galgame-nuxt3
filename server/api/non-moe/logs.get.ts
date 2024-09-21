@@ -1,11 +1,7 @@
 import NonMoeModel from '~/server/models/non-moe'
 import type { NonMoeLogRequestData, NonMoeLog } from '~/types/api/non-moe'
 
-const getNonMoeLogs = async (
-  page: number,
-  limit: number,
-  language: Language
-) => {
+const getNonMoeLogs = async (page: number, limit: number) => {
   const skip = (page - 1) * limit
 
   const nonMoeLogs = await NonMoeModel.find()
@@ -18,10 +14,7 @@ const getNonMoeLogs = async (
     nid: log.nid,
     uid: log.uid,
     name: log.name,
-    description:
-      language === 'en-us'
-        ? log.description['en-us']
-        : log.description['zh-cn'],
+    description: log.description,
     time: log.time,
     result: log.result
   }))
@@ -38,7 +31,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10209)
   }
 
-  const topics = await getNonMoeLogs(parseInt(page), parseInt(limit), language)
+  const topics = await getNonMoeLogs(parseInt(page), parseInt(limit))
 
   return topics
 })

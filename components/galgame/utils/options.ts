@@ -8,7 +8,14 @@ export const typeOptions = [
   'ai',
   'others'
 ]
-export const languageOptions = ['all', 'ja-jp', 'en-us', 'zh-cn', 'others']
+export const languageOptions = [
+  'all',
+  'ja-jp',
+  'en-us',
+  'zh-cn',
+  'zh-tw',
+  'others'
+]
 export const platformOptions = [
   'all',
   'windows',
@@ -29,7 +36,13 @@ export type TypeOptions =
   | 'ai'
   | 'others'
 
-export type LanguageOptions = 'all' | 'ja-jp' | 'en-us' | 'zh-cn' | 'others'
+export type LanguageOptions =
+  | 'all'
+  | 'ja-jp'
+  | 'en-us'
+  | 'zh-cn'
+  | 'zh-tw'
+  | 'others'
 
 export type PlatformOptions =
   | 'all'

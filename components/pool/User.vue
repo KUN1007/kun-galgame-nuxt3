@@ -11,15 +11,7 @@ const props = defineProps<{
 }>()
 const user = computed(() => props.user)
 
-const { locale } = useI18n()
 const localePath = useLocalePath()
-
-const time = computed(() => {
-  if (locale.value === 'zh-cn') {
-    return dayjs(props.time).format('MM/D - HH:mm')
-  }
-  return dayjs(props.time).format('D/MM - HH:mm')
-})
 
 const handleClickAvatar = (event: MouseEvent) => {
   event.preventDefault()
@@ -44,7 +36,7 @@ const handleClickAvatar = (event: MouseEvent) => {
 
     <div class="info">
       <span>{{ user.name }}</span>
-      <span class="time">{{ time }}</span>
+      <span class="time">{{ dayjs(props.time).format('D/MM - HH:mm') }}</span>
     </div>
   </div>
 </template>

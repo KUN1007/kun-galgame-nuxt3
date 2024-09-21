@@ -1,21 +1,8 @@
 import type { Message } from '~/types/api/message'
 
-type Locale = 'en-us' | 'zh-cn' | string
+type Locale = 'en-us' | 'ja=jp' | 'zh-cn' | 'zh-tw'
 
 const messageTemplates: Record<string, Record<string, string>> = {
-  'zh-cn': {
-    upvoted: '{{senderName}} 推了您!',
-    liked: '{{senderName}} 点赞了您!',
-    favorite: '{{senderName}} 收藏了您!',
-    replied: '{{senderName}} 回复了您!',
-    commented: '{{senderName}} 评论了您!',
-    expired: '{{senderName}} 报告了您的资源链接已过期！',
-    requested: '{{senderName}} 向您提出更新请求！',
-    merged: '您的更新请求已被 {{senderName}} 合并！',
-    declined: '您的更新请求被 {{senderName}} 拒绝！',
-    admin: '系统消息',
-    mentioned: '{{senderName}} 提到了您！'
-  },
   'en-us': {
     upvoted: '{{senderName}} upvoted you!',
     liked: '{{senderName}} liked you!',
@@ -29,6 +16,48 @@ const messageTemplates: Record<string, Record<string, string>> = {
     admin: 'System message',
     mentioned: '{{senderName}} mentioned you!',
     default: '{{senderName}} {{action}} you!'
+  },
+  'ja-jp': {
+    upvoted: '{{senderName}} があなたを推しました！',
+    liked: '{{senderName}} があなたに「いいね！」をしました！',
+    favorite: '{{senderName}} があなたをお気に入りに追加しました！',
+    replied: '{{senderName}} があなたに返信しました！',
+    commented: '{{senderName}} があなたにコメントしました！',
+    expired:
+      '{{senderName}} があなたのリソースリンクの期限切れを報告しました！',
+    requested: '{{senderName}} があなたに更新リクエストを送信しました！',
+    merged:
+      'あなたの更新リクエストが {{senderName}} によってマージされました！',
+    declined:
+      'あなたの更新リクエストが {{senderName}} によって拒否されました！',
+    admin: 'システムメッセージ',
+    mentioned: '{{senderName}} があなたをメンションしました！'
+  },
+  'zh-cn': {
+    upvoted: '{{senderName}} 推了您!',
+    liked: '{{senderName}} 点赞了您!',
+    favorite: '{{senderName}} 收藏了您!',
+    replied: '{{senderName}} 回复了您!',
+    commented: '{{senderName}} 评论了您!',
+    expired: '{{senderName}} 报告了您的资源链接已过期！',
+    requested: '{{senderName}} 向您提出更新请求！',
+    merged: '您的更新请求已被 {{senderName}} 合并！',
+    declined: '您的更新请求被 {{senderName}} 拒绝！',
+    admin: '系统消息',
+    mentioned: '{{senderName}} 提到了您！'
+  },
+  'zh-tw': {
+    upvoted: '{{senderName}} 推了您!',
+    liked: '{{senderName}} 點贊了您!',
+    favorite: '{{senderName}} 收藏了您!',
+    replied: '{{senderName}} 回復了您!',
+    commented: '{{senderName}} 評論了您!',
+    expired: '{{senderName}} 報告了您的資源鏈接已過期！',
+    requested: '{{senderName}} 嚮您提出更新請求！',
+    merged: '您的更新請求已被 {{senderName}} 合併！',
+    declined: '您的更新請求被 {{senderName}} 拒絕！',
+    admin: '繫統消息',
+    mentioned: '{{senderName}} 提到了您！'
   }
 }
 
@@ -40,7 +69,7 @@ const getMessageContent = (locale: Locale, message: Message): string => {
 
 export const getMessageI18n = (locale: Locale, message: Message) => {
   if (message.type === 'admin') {
-    return messageTemplates[locale === 'zh-cn' ? 'zh' : 'en'].admin
+    return messageTemplates[locale].admin
   }
 
   return getMessageContent(locale, message)

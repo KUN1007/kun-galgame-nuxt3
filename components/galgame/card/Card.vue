@@ -57,7 +57,7 @@ defineProps<{
         <KunAvatar :user="galgame.user" size="30px" />
         <span class="name">{{ galgame.user.name }}</span>
         <span class="time">
-          {{ formatTimeDifferenceHint(galgame.time, locale) }}
+          {{ formatTimeDifference(galgame.time, locale) }}
         </span>
       </div>
     </NuxtLinkLocale>

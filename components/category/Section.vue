@@ -26,7 +26,7 @@ const props = defineProps<{
         </span>
         <p>
           {{ $t('category.publish') }}
-          {{ formatTimeDifferenceHint(sec.topic.time, locale) }}
+          {{ formatTimeDifference(sec.topic.time, locale) }}
         </p>
       </div>
 
