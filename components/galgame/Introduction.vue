@@ -25,6 +25,13 @@ defineProps<{
     @set="(value) => (introductionLanguage = value)"
   />
 
+  <div
+    class="hint"
+    v-if="introduction[introductionLanguage as Language] === ''"
+  >
+    {{ $t('galgame.introduction.hint') }}
+  </div>
+
   <div class="kungalgame-galgame-content">
     <MilkdownProvider>
       <ProsemirrorAdapterProvider>
@@ -45,6 +52,14 @@ defineProps<{
 <style lang="scss" scoped>
 h2 {
   margin: 17px 0;
+}
+
+.hint {
+  margin-top: 17px;
+  color: var(--kungalgame-white);
+  background-color: var(--kungalgame-blue-5);
+  font-size: 15px;
+  padding: 5px 10px;
 }
 
 .kungalgame-galgame-content {

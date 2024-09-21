@@ -543,7 +543,8 @@
       "en-us": "English Title",
       "ja-jp": "Japanese Title",
       "zh-cn": "Chinese Title",
-      "zh-tw": "Chinese(T) Title"
+      "zh-tw": "Chinese(T) Title",
+      "hint": "No corresponding translation available. We've found the closest similar language. Contributions for translations are welcome."
     },
     "info": {
       "name": "Information",

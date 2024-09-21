@@ -541,7 +541,8 @@
       "en-us": "英語",
       "ja-jp": "日語",
       "zh-cn": "简體中文",
-      "zh-tw": "繁體中文"
+      "zh-tw": "繁體中文",
+      "hint": "暫無對應翻譯, 為您找到最近似的語言, 歡迎貢獻翻譯"
     },
     "info": {
       "name": "信息",
@@ -596,7 +597,7 @@
         "windows": "Windows",
         "mac": "macOS",
         "linux": "Linux",
-        "emulator": "類比器",
+        "emulator": "模擬器",
         "app": "應用直裝",
         "others": "其它"
       },
@@ -716,7 +717,7 @@
       "qingju": "青桔網",
       "touchgal": "TouchGal",
       "galgamex": "Galgamex",
-      "vikacg": "維哢 ACG",
+      "vikacg": "维咔 ACG",
       "galzy": "紫緣社",
       "limulu": "莉斯坦 Galgame",
       "zi0": "梓澪の妙妙屋",
@@ -880,7 +881,7 @@
     },
     "galgame": {
       "title": "Galgame 資源",
-      "description": "鯤 Galgame 論壇 Galgame 資源頁面, 提供各類 Galgame 下載, Galgame 資源, 漢化, 英語, 生肉, 日語 Windows, macOS, PC, 應用, 直裝, 類比器, 安卓, Linux",
+      "description": "鯤 Galgame 論壇 Galgame 資源頁面, 提供各類 Galgame 下載, Galgame 資源, 漢化, 英語, 生肉, 日語 Windows, macOS, PC, 應用, 直裝, 模擬器, 安卓, Linux",
       "support": "該 Galgame 支援",
       "download": "零門檻下載"
     },
