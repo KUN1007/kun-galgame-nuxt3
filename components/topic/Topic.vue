@@ -65,6 +65,7 @@ watch(
   async (newValue, oldValue) => {
     if (newValue[1] !== oldValue[1]) {
       pageData.page = 1
+      isLoadComplete.value = false
     }
 
     if (pending.value) {
