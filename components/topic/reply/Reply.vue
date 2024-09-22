@@ -8,6 +8,21 @@ defineProps<{
   reply: TopicReply
   title: string
 }>()
+
+const emits = defineEmits<{
+  scrollPage: [scrollToReplyId: number]
+}>()
+
+watch(
+  () => scrollToReplyId.value,
+  async () => {
+    if (scrollToReplyId.value !== -1) {
+      await nextTick()
+      emits('scrollPage', scrollToReplyId.value)
+      scrollToReplyId.value = -1
+    }
+  }
+)
 </script>
 
 <template>

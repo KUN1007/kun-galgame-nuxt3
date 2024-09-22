@@ -1,5 +1,16 @@
 <script setup lang="ts">
 const { isScrollToTop } = storeToRefs(useTempReplyStore())
+
+watch(
+  () => isScrollToTop.value,
+  () => {
+    window?.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+    isScrollToTop.value = false
+  }
+)
 </script>
 
 <template>

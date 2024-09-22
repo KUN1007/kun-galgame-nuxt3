@@ -53,9 +53,6 @@ const getReplies = async (
 
     const skip = (page - 1) * limit
 
-    const totalCount = await ReplyModel.countDocuments({
-      rid: { $in: replyId }
-    }).lean()
     const replyDetails = await ReplyModel.find({ rid: { $in: replyId } })
       .sort({ floor: sortOrder })
       .skip(skip)
@@ -103,7 +100,7 @@ const getReplies = async (
 
     await session.commitTransaction()
 
-    return { repliesData, totalCount }
+    return repliesData
   } catch (error) {
     await session.abortTransaction()
   } finally {
@@ -123,7 +120,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10507)
   }
 
-  if (limit !== '17') {
+  if (limit !== '30') {
     return kunError(event, 10209)
   }
 

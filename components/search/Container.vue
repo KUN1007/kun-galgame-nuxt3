@@ -137,6 +137,8 @@ const handleLoadMore = async () => {
 }
 
 .kun-divider {
+  font-size: 16px;
+
   span {
     &:first-child {
       padding-left: 17px;

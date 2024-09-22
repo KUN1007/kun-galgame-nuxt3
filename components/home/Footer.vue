@@ -27,7 +27,7 @@ const { locale } = useI18n()
         {{ $t('home.subsites.documentation') }}
       </a>
       <a
-        :href="`https://www.kungal.org${locale ? locale : ''}`"
+        :href="`https://www.kungal.org/${locale ? locale : ''}`"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -38,7 +38,7 @@ const { locale } = useI18n()
     <div class="copyright">
       <div>
         <a
-          :href="`https://www.kungal.org${locale ? locale : ''}`"
+          :href="`https://www.kungal.org/${locale ? locale : ''}`"
           target="_blank"
           rel="noopener noreferrer"
         >

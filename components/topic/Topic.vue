@@ -1,61 +1,36 @@
 <script setup lang="ts">
 import type { TopicDetail } from '~/types/api/topic'
+import type { TopicReply } from '~/types/api/topic-reply'
 
-const { isScrollToTop, scrollToReplyId, tempReply } =
-  storeToRefs(useTempReplyStore())
+const { tempReply } = storeToRefs(useTempReplyStore())
 
 const props = defineProps<{
   tid: number
   topic: TopicDetail
 }>()
 
-const content = ref<HTMLElement>()
+const replyData = ref<TopicReply[] | null>()
+const isLoadComplete = ref(false)
 const pageData = reactive({
   page: 1,
-  limit: 17,
-  sortOrder: 'asc'
+  limit: 30,
+  sortOrder: 'asc' as 'asc' | 'desc'
 })
 
-const { data, pending } = await useFetch(`/api/topic/${props.tid}/reply`, {
-  method: 'GET',
-  query: pageData,
-  ...kungalgameResponseHandler
-})
-
-watch(
-  () => pending.value,
-  async () => {
-    if (!pending.value) {
-      await nextTick()
-      const replyTop = content.value?.querySelector(`#tool`) as HTMLElement
-      window?.scrollTo({
-        top: replyTop.offsetTop,
-        behavior: 'smooth'
-      })
-    }
+const { data, pending, refresh } = await useFetch(
+  `/api/topic/${props.tid}/reply`,
+  {
+    method: 'GET',
+    query: pageData,
+    watch: false,
+    ...kungalgameResponseHandler
   }
 )
+replyData.value = data.value
 
-watch(
-  () => isScrollToTop.value,
-  () => {
-    if (content.value) {
-      window?.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      })
-      isScrollToTop.value = false
-    }
-  }
-)
-
-const scrollPage = (rid: number) => {
-  if (!content.value) {
-    return
-  }
-
+const scrollPage = throttle((rid: number) => {
   let timeout: NodeJS.Timeout | null = null
-  const childElement = content.value.querySelector(`#k${rid}`) as HTMLElement
+  const childElement = document.querySelector(`#k${rid}`) as HTMLElement
 
   if (childElement) {
     childElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
@@ -70,63 +45,84 @@ const scrollPage = (rid: number) => {
   } else {
     useMessage(10215, 'info')
   }
-}
-
-watch(
-  () => scrollToReplyId.value,
-  async () => {
-    if (scrollToReplyId.value !== -1) {
-      await nextTick()
-      scrollPage(scrollToReplyId.value)
-      scrollToReplyId.value = -1
-    }
-  }
-)
+}, 1000)
 
 watch(
   () => tempReply.value[0],
   async () => {
     if (tempReply.value[0]) {
-      data.value?.repliesData.push(tempReply.value[0])
+      replyData.value?.push(tempReply.value[0])
       await nextTick()
       scrollPage(tempReply.value[0].floor)
       tempReply.value = []
     }
   }
 )
+
+watch(
+  () => [pageData.page, pageData.sortOrder],
+  async (newValue, oldValue) => {
+    await refresh()
+
+    if (!data.value) {
+      return
+    }
+
+    if (newValue[0] !== oldValue[0]) {
+      replyData.value = replyData.value?.concat(data.value)
+    } else if (newValue[1] !== oldValue[1]) {
+      replyData.value = data.value
+    }
+
+    if (data.value.length < 30) {
+      isLoadComplete.value = true
+    }
+  }
+)
 </script>
 
 <template>
-  <div class="content" ref="content">
+  <div class="content">
     <TopicMaster :topic="topic" />
 
     <TopicTool
-      v-if="data"
-      :data="data"
-      :page-data="pageData"
-      @set-page="(value) => (pageData.page += value)"
-      @set-sort-order="(value) => (pageData.sortOrder = value)"
+      v-if="replyData"
+      :reply-data="replyData"
       :pending="pending"
+      :sort-order="pageData.sortOrder"
+      @set-sort-order="(value) => (pageData.sortOrder = value)"
     />
 
-    <div v-if="data">
+    <template v-if="replyData">
       <TopicReply
-        v-for="reply in data.repliesData"
+        v-for="reply in replyData"
         :key="reply.rid"
         :reply="reply"
         :title="topic.title"
+        @scroll-page="(value) => scrollPage(value)"
       />
-    </div>
+    </template>
 
-    <KunPagination
-      class="pagination"
-      v-if="data && data.totalCount > 7"
-      :page="pageData.page"
-      :limit="pageData.limit"
-      :sum="data.totalCount"
-      :loading="pending"
-      @set-page="(newPage) => (pageData.page = newPage)"
-    />
+    <KunDivider
+      v-if="replyData && replyData.length >= 30"
+      margin="30px"
+      padding="0 17px"
+    >
+      <slot />
+      <span
+        class="loader"
+        v-if="!pending && !isLoadComplete"
+        @click="pageData.page++"
+      >
+        {{ $t('search.load') }}
+      </span>
+      <span v-if="pending">
+        {{ $t('search.loading') }}
+      </span>
+      <span v-if="isLoadComplete">
+        {{ $t('search.complete') }}
+      </span>
+    </KunDivider>
   </div>
 </template>
 
@@ -136,6 +132,28 @@ watch(
   margin-bottom: 17px;
 
   @include kun-blur;
+}
+
+.kun-divider {
+  font-size: 16px;
+
+  span {
+    &:first-child {
+      padding-left: 17px;
+    }
+
+    &:last-child {
+      padding-right: 17px;
+    }
+  }
+
+  .loader {
+    cursor: pointer;
+
+    &:hover {
+      color: var(--kungalgame-blue-5);
+    }
+  }
 }
 
 @media (max-width: 700px) {

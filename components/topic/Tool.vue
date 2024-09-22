@@ -1,60 +1,28 @@
 <script setup lang="ts">
-import type { SerializeObject } from 'nitropack'
 import type { TopicReply } from '~/types/api/topic-reply'
 
 defineProps<{
-  data: {
-    totalCount: number
-    repliesData: SerializeObject<TopicReply>[]
-  }
-  pageData: {
-    page: number
-    limit: number
-    sortOrder: string
-  }
+  replyData: TopicReply[]
   pending: boolean
+  sortOrder: 'asc' | 'desc'
 }>()
 
 const emits = defineEmits<{
-  setPage: [value: number]
   setSortOrder: [value: 'asc' | 'desc']
 }>()
 </script>
 
 <template>
-  <div class="tool" v-if="data && data.totalCount > 5" id="tool">
-    <div class="page">
-      <button
-        @click="emits('setPage', -1)"
-        :disabled="pageData.page === 1 || pending"
-      >
-        <Icon name="lucide:chevron-left" />
-      </button>
-      <span>
-        {{
-          `${pageData.page} / ${Math.ceil(data.totalCount / pageData.limit)}`
-        }}
-      </span>
-      <button
-        @click="emits('setPage', 1)"
-        :disabled="
-          pageData.page === Math.ceil(data.totalCount / pageData.limit) ||
-            pending
-        "
-      >
-        <Icon name="lucide:chevron-right" />
-      </button>
-    </div>
-
+  <div class="tool" v-if="replyData && replyData.length > 5">
     <div class="order">
       <span
-        :class="pageData.sortOrder === 'asc' ? 'active' : ''"
+        :class="sortOrder === 'asc' ? 'active' : ''"
         @click="emits('setSortOrder', 'asc')"
       >
         <Icon name="lucide:arrow-up" />
       </span>
       <span
-        :class="pageData.sortOrder === 'desc' ? 'active' : ''"
+        :class="sortOrder === 'desc' ? 'active' : ''"
         @click="emits('setSortOrder', 'desc')"
       >
         <Icon name="lucide:arrow-down" />
@@ -72,32 +40,6 @@ const emits = defineEmits<{
   align-items: center;
 
   @include kun-blur;
-
-  .page {
-    font-size: large;
-    user-select: none;
-
-    button {
-      padding: 5px 10px;
-      border-radius: 10px;
-      margin: 0 7px;
-      border: none;
-      background-color: transparent;
-      font-size: medium;
-      color: var(--kungalgame-font-color-3);
-
-      &:hover {
-        background-color: var(--kungalgame-trans-blue-1);
-      }
-
-      &:disabled {
-        &:hover {
-          cursor: not-allowed;
-          background-color: transparent;
-        }
-      }
-    }
-  }
 
   .order {
     display: flex;

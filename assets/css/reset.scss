@@ -31,7 +31,7 @@
 }
 
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 10px;
   height: 7px;
 }
 
@@ -40,7 +40,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--kungalgame-blue-5);
+  background: var(--kungalgame-trans-blue-3);
   border-radius: 5px;
 }
 
