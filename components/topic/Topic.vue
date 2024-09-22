@@ -59,9 +59,18 @@ watch(
   }
 )
 
+// TODO:
 watch(
   () => [pageData.page, pageData.sortOrder],
   async (newValue, oldValue) => {
+    if (newValue[1] !== oldValue[1]) {
+      pageData.page = 1
+    }
+
+    if (pending.value) {
+      return
+    }
+
     await refresh()
 
     if (!data.value) {
