@@ -28,6 +28,10 @@ const emits = defineEmits<{
         <Icon name="lucide:arrow-down" />
       </span>
     </div>
+
+    <span class="pending" v-if="pending">
+      {{ $t('search.loading') }}
+    </span>
   </div>
 </template>
 
@@ -36,31 +40,36 @@ const emits = defineEmits<{
   padding: 10px;
   margin-bottom: 17px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 
   @include kun-blur;
+}
 
-  .order {
-    display: flex;
-    white-space: nowrap;
+.order {
+  display: flex;
+  white-space: nowrap;
 
-    span {
-      cursor: pointer;
-      padding: 3px 10px;
-      margin-right: 5px;
-      border-radius: 10px;
-    }
-
-    .icon {
-      font-size: 20px;
-    }
-
-    .active {
-      box-shadow: var(--shadow);
-      color: var(--kungalgame-blue-5);
-    }
+  span {
+    cursor: pointer;
+    padding: 3px 10px;
+    margin-right: 5px;
+    border-radius: 10px;
   }
+
+  .icon {
+    font-size: 20px;
+  }
+
+  .active {
+    box-shadow: var(--shadow);
+    color: var(--kungalgame-blue-5);
+  }
+}
+
+.pending {
+  margin-left: 10px;
+  color: var(--kungalgame-font-color-0);
+  user-select: none;
 }
 
 @media (max-width: 700px) {
