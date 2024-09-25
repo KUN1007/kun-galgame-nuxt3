@@ -214,6 +214,15 @@ const editorInfo = useEditor((root) =>
       min-height: v-bind(editorHeight);
     }
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 17px 0;
+    }
+
     img {
       max-width: 100%;
     }

@@ -15,13 +15,24 @@ defineProps<{
   padding-right: 17px;
 
   * {
-    white-space: pre-wrap;
-    word-break: break-word;
+    &:not(ul, ol, li, blockquote) {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
   }
 
   code[class*='language-'],
   pre[class*='language-'] {
     color: var(--kungalgame-font-color-3);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 17px 0;
   }
 
   img {
@@ -34,6 +45,7 @@ defineProps<{
 
   p {
     margin: 17px 0;
+
     code {
       margin: 0 5px;
       background-color: var(--kungalgame-trans-blue-1);
