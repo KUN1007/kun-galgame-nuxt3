@@ -176,7 +176,6 @@ onUnmounted(() => {
   flex-direction: column;
   overflow-y: scroll;
   max-width: 64rem;
-  min-height: calc(100dvh - 75px);
   margin: 0 auto;
   padding: 0 10px;
 }
@@ -269,7 +268,6 @@ onUnmounted(() => {
 
 @media (max-width: 700px) {
   .pool {
-    min-height: calc(100dvh - 63px);
     padding: 0 5px;
   }
 

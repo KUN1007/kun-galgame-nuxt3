@@ -41,6 +41,7 @@ watch(
   background-color: var(--kungalgame-white);
   overflow: hidden;
   background-color: var(--kungalgame-blue-0);
+  min-height: 100dvh;
 }
 
 .kohaku {

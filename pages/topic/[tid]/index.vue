@@ -130,15 +130,8 @@ if (data) {
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: calc(100dvh - 75px);
   max-width: 64rem;
   margin: 0 auto;
   color: var(--kungalgame-font-color-3);
-}
-
-@media (max-width: 700px) {
-  .root {
-    min-height: calc(100dvh - 63px);
-  }
 }
 </style>

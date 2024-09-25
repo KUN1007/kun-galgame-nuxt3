@@ -29,7 +29,6 @@ useHead({
 <style lang="scss" scoped>
 .root {
   height: 100%;
-  min-height: calc(100vh - 75px);
   display: flex;
   flex-direction: column;
 }
@@ -55,9 +54,6 @@ useHead({
 }
 
 @media (max-width: 700px) {
-  .root {
-    height: calc(100dvh - 63px);
-  }
   .container {
     width: 95%;
   }

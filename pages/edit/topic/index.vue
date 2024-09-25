@@ -57,7 +57,6 @@ onBeforeRouteLeave(async (_, __, next) => {
 <style lang="scss" scoped>
 .root {
   position: relative;
-  height: calc(100vh - 75px);
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
@@ -75,11 +74,5 @@ onBeforeRouteLeave(async (_, __, next) => {
 
 .kun-footer {
   margin: 17px 0;
-}
-
-@media (max-width: 700px) {
-  .root {
-    height: calc(100vh - 63px);
-  }
 }
 </style>
