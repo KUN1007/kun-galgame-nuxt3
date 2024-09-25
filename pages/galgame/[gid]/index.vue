@@ -40,15 +40,6 @@ if (galgame.value) {
       locale.value as Language
     )
   )
-  const platforms = galgame.value.platform
-    .map((p) => t(`galgame.resource.platform.${p}`))
-    .join(', ')
-    .toString()
-  const languages = galgame.value.language
-    .map((l) => t(`galgame.resource.language.${l}`))
-    .join(', ')
-    .toString()
-  const descriptionMeta = `${t('seo.galgame.support')} ${languages} | ${platforms} ${t('seo.galgame.download')} - ${description.slice(0, 233)}`
 
   const keywords =
     Object.values(galgame.value.name).join(', ') +
@@ -63,7 +54,7 @@ if (galgame.value) {
     meta: [
       {
         name: 'description',
-        content: descriptionMeta
+        content: description
       },
       {
         name: 'keywords',

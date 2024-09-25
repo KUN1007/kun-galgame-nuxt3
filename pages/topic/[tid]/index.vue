@@ -56,9 +56,16 @@ onBeforeMount(() => {
   resetPanelStatus()
 })
 
+const getFirstImageSrc = (htmlString: string) => {
+  const imgRegex = /<img[^>]+src="([^">]+)"/i
+  const match = htmlString.match(imgRegex)
+
+  return match ? match[1] : 'https://www.kungal.com/kungalgame.webp'
+}
+
 if (data) {
   const content = computed(() =>
-    markdownToText(data.content).trim().replace(/\s+/g, ',').slice(0, 233)
+    markdownToText(data.markdown).trim().replace(/\s+/g, ',').slice(0, 233)
   )
 
   useHead({
@@ -79,6 +86,10 @@ if (data) {
       {
         name: 'og:description',
         content: content.value
+      },
+      {
+        property: 'og:image',
+        content: getFirstImageSrc(data.content)
       },
       {
         property: 'og:type',
@@ -103,6 +114,10 @@ if (data) {
       {
         property: 'twitter:url',
         content: useRequestURL().href
+      },
+      {
+        property: 'twitter:image',
+        content: getFirstImageSrc(data.content)
       }
     ]
   })
