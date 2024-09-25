@@ -24,9 +24,9 @@ const loliStatus = computed(() => {
 <template>
   <div class="master" id="k0">
     <div class="header">
-      <div class="title">
+      <h1 class="title">
         {{ topic.title }}
-      </div>
+      </h1>
     </div>
 
     <div class="content">
@@ -118,7 +118,7 @@ const loliStatus = computed(() => {
 
 .header {
   width: 100%;
-  min-height: 70px;
+  min-height: 100px;
   padding: 10px;
   display: flex;
   align-items: center;
@@ -128,9 +128,14 @@ const loliStatus = computed(() => {
 }
 
 .title {
-  font-size: 17px;
+  font-size: 24px;
   font-weight: bold;
   letter-spacing: 1px;
+
+  &::before {
+    content: '';
+    margin: 0;
+  }
 }
 
 .content {

@@ -10,12 +10,11 @@ const localePath = useLocalePath()
 const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 
 const handleRewriteGalgame = (galgame: GalgameDetail) => {
-  const { gid, name, introduction, series, alias, official, engine, tags } =
-    galgame
+  const { gid, name, markdown, series, alias, official, engine, tags } = galgame
   galgamePR.value[0] = {
     gid,
     name,
-    introduction,
+    introduction: markdown,
     series: series.map((s) => s.toString()),
     alias,
     official,

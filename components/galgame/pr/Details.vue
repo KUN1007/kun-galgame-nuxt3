@@ -169,6 +169,7 @@ const handleMergeRequest = async () => {
   }
 
   .value {
+    word-break: break-word;
     margin-bottom: 17px;
   }
 }

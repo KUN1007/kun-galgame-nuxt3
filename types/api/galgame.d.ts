@@ -16,6 +16,7 @@ export interface GalgameDetail {
   name: KunLanguage
   banner: string
   introduction: KunLanguage
+  markdown: KunLanguage
   time: number
   views: number
   platform: string[]

@@ -4,11 +4,6 @@ defineProps<{
   pending: boolean
   views: number
 }>()
-
-const route = useRoute()
-const gid = computed(() => {
-  return parseInt((route.params as { gid: string }).gid)
-})
 </script>
 
 <template>

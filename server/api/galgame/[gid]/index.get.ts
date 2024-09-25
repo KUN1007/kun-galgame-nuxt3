@@ -37,6 +37,13 @@ export default defineEventHandler(async (event) => {
       avatar: user.avatar
     }))
 
+    const introductionHtml: KunLanguage = {} as KunLanguage
+    for (const key of Object.keys(galgame.introduction) as Array<
+      keyof KunLanguage
+    >) {
+      introductionHtml[key] = await markdownToHtml(galgame.introduction[key])
+    }
+
     const data: GalgameDetail = {
       gid: galgame.gid,
       vndbId: galgame.vndb_id,
@@ -47,7 +54,8 @@ export default defineEventHandler(async (event) => {
       },
       name: galgame.name,
       banner: galgame.banner,
-      introduction: galgame.introduction,
+      introduction: introductionHtml,
+      markdown: galgame.introduction,
       time: galgame.time,
       views: galgame.views,
       platform: galgame.platform,

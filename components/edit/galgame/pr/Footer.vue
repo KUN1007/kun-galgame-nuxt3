@@ -28,7 +28,10 @@ const handlePublishGalgamePR = async () => {
     .map((t) => t.trim())
     .filter((str) => str !== '')
   const pullRequest = {
-    ...galgamePR.value[0],
+    gid: galgamePR.value[0].gid,
+    name: galgamePR.value[0].name,
+    introduction: galgamePR.value[0].introduction,
+    alias: galgamePR.value[0].alias,
     official: officialArray,
     engine: engineArray,
     tags: tagsArray,

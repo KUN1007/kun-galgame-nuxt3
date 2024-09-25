@@ -48,7 +48,7 @@ const user = computed(() => props.user)
 .kungalgamer {
   display: flex;
   flex-direction: column;
-  padding: 0 20px;
+  padding: 0 17px;
   margin-bottom: 20px;
   color: var(--kungalgame-font-color-3);
 }
@@ -111,6 +111,7 @@ const user = computed(() => props.user)
   .kungalgamer {
     flex-direction: row;
     margin-bottom: 0;
+    padding: 0 10px;
   }
 
   .avatar {
