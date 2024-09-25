@@ -21,6 +21,7 @@ defineProps<{
         <NuxtImg
           :src="galgame.banner.replace(/\.webp$/, '-mini.webp')"
           loading="lazy"
+          :alt="getPreferredLanguageText(galgame.name, locale as Language)"
           placeholder="/placeholder.webp"
         />
         <div class="platform">

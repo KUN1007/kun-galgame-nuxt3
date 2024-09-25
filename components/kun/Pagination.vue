@@ -55,7 +55,11 @@ const prevPage = () => {
 
 <template>
   <div class="pagination">
-    <button @click="prevPage" :disabled="currentPage === 1">
+    <button
+      @click="prevPage"
+      :disabled="currentPage === 1"
+      aria-label="previous"
+    >
       <Icon name="lucide:chevron-left" />
     </button>
 
@@ -83,7 +87,11 @@ const prevPage = () => {
       {{ totalPages }}
     </button>
 
-    <button @click="nextPage" :disabled="currentPage === totalPages">
+    <button
+      @click="nextPage"
+      :disabled="currentPage === totalPages"
+      aria-label="next"
+    >
       <Icon name="lucide:chevron-right" />
     </button>
 

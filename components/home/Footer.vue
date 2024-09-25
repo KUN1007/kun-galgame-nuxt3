@@ -42,7 +42,11 @@ const { locale } = useI18n()
           target="_blank"
           rel="noopener noreferrer"
         >
-          <NuxtImg src="/favicon.webp" />
+          <NuxtImg
+            src="/favicon.webp"
+            :aria-label="$t('head.title')"
+            :alt="$t('head.title')"
+          />
         </a>
         <span>{{ $t('home.copyright') }}</span>
       </div>

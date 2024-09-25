@@ -21,6 +21,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   <div class="kungalgamer-info">
     <NuxtLinkLocale
       class="search"
+      aria-label="search"
       v-tooltip="{
         message: {
           'en-us': 'Press Ctrl + K to search',

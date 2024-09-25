@@ -28,6 +28,7 @@ watch(
       class="kohaku"
       src="/image/kohaku.webp"
       loading="lazy"
+      alt="kohaku"
     />
   </div>
 </template>
