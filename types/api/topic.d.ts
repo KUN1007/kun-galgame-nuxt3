@@ -52,6 +52,7 @@ export interface TopicDetail {
   }
   time: string
   content: string
+  markdown: string
   upvotes: {
     count: number
     isUpvoted: boolean

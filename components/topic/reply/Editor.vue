@@ -14,7 +14,7 @@ const textarea = ref<HTMLTextAreaElement | null>(null)
 
 const valueMarkdown = ref(
   isReplyRewriting.value
-    ? replyRewrite.value[0].content
+    ? replyRewrite.value[0].markdown
     : replyDraft.value.content
 )
 
@@ -27,7 +27,7 @@ const autoResizeTextarea = () => {
 
 const saveMarkdown = (editorMarkdown: string) => {
   if (isReplyRewriting.value) {
-    replyRewrite.value[0].content = editorMarkdown
+    replyRewrite.value[0].markdown = editorMarkdown
   } else {
     replyDraft.value.content = editorMarkdown
   }

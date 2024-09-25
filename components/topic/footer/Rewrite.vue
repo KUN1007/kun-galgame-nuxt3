@@ -15,7 +15,7 @@ const isShowRewrite = computed(() => uid === props.topic.user.uid)
 const rewriteTopic = () => {
   tid.value = props.topic.tid
   title.value = props.topic.title
-  content.value = props.topic.content
+  content.value = props.topic.markdown
   tags.value = props.topic.tags
   category.value = props.topic.category
   section.value = props.topic.section ?? []

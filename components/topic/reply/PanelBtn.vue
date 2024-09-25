@@ -53,7 +53,7 @@ const handleRewrite = async () => {
   if (
     !checkReplyPublish(
       replyRewrite.value[0].tags,
-      replyRewrite.value[0].content
+      replyRewrite.value[0].markdown
     )
   ) {
     return
@@ -79,7 +79,7 @@ const handleRewrite = async () => {
     method: 'PUT',
     body: {
       rid: replyRewrite.value[0].rid,
-      content: replyRewrite.value[0].content,
+      content: replyRewrite.value[0].markdown,
       tags: replyRewrite.value[0].tags,
       edited: Date.now()
     },

@@ -63,6 +63,7 @@ export default defineEventHandler(async (event) => {
     return 'MOEMOE publish galgame comment successfully!'
   } catch (error) {
     await session.abortTransaction()
+    throw error
   } finally {
     await session.endSession()
   }

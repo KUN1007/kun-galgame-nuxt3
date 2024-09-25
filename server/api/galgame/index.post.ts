@@ -135,6 +135,7 @@ export default defineEventHandler(async (event) => {
     return newGalgame.gid
   } catch (error) {
     await session.abortTransaction()
+    throw error
   } finally {
     await session.endSession()
   }

@@ -38,6 +38,7 @@ const updateTopicDislike = async (uid: number, tid: number) => {
     await session.commitTransaction()
   } catch (error) {
     await session.abortTransaction()
+    throw error
   } finally {
     await session.endSession()
   }

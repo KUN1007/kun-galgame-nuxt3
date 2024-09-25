@@ -40,6 +40,7 @@ const updateReplyLike = async (uid: number, rid: number) => {
     await session.commitTransaction()
   } catch (error) {
     await session.abortTransaction()
+    throw error
   } finally {
     await session.endSession()
   }

@@ -73,6 +73,7 @@ export default defineEventHandler(async (event) => {
     return data
   } catch (error) {
     await session.abortTransaction()
+    throw error
   } finally {
     await session.endSession()
   }

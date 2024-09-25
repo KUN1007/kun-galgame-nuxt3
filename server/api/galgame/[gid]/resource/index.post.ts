@@ -76,6 +76,7 @@ export default defineEventHandler(async (event) => {
     return 'MOEMOE create galgame resource successfully!'
   } catch (error) {
     await session.abortTransaction()
+    throw error
   } finally {
     await session.endSession()
   }

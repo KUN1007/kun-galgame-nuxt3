@@ -62,6 +62,7 @@ export default defineEventHandler(async (event) => {
     return 'MOEMOE create visualnovel-related link successfully!'
   } catch (error) {
     await session.abortTransaction()
+    throw error
   } finally {
     await session.endSession()
   }

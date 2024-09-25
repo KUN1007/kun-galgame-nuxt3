@@ -42,6 +42,7 @@ export default defineEventHandler(async (event) => {
     },
     time: topic.created.toString(),
     content: await markdownToHtml(topic.content),
+    markdown: topic.content,
     upvotes: {
       count: topic.upvotes.length,
       isUpvoted: topic.upvotes.includes(uid)

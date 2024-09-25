@@ -82,6 +82,7 @@ export default defineEventHandler(async (event) => {
     return 'MOEMOE declined galgame pull request successfully!'
   } catch (error) {
     await session.abortTransaction()
+    throw error
   } finally {
     await session.endSession()
   }

@@ -79,6 +79,7 @@ const getReplies = async (
         },
         edited: reply.edited,
         content: await markdownToHtml(reply.content),
+        markdown: reply.content,
         upvotes: {
           count: reply.upvotes.length,
           isUpvoted: reply.upvotes.includes(uid)
@@ -103,6 +104,7 @@ const getReplies = async (
     return repliesData
   } catch (error) {
     await session.abortTransaction()
+    throw error
   } finally {
     await session.endSession()
   }

@@ -16,6 +16,7 @@ export interface TopicReply {
   toUser: TopicToUserInfo
   edited: number
   content: string
+  markdown: string
   upvotes: {
     count: number
     isUpvoted: boolean

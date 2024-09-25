@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import BalanceModel from '~/server/models/balance'
 import type { PLStatement } from '~/types/api/balance'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   const session = await mongoose.startSession()
   session.startTransaction()
   try {
@@ -51,6 +51,7 @@ export default defineEventHandler(async (event) => {
     return responseData
   } catch (error) {
     await session.abortTransaction()
+    throw error
   } finally {
     await session.endSession()
   }

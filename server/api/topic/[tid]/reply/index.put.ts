@@ -21,6 +21,7 @@ const updateReply = async (
     await session.commitTransaction()
   } catch (error) {
     await session.abortTransaction()
+    throw error
   } finally {
     await session.endSession()
   }

@@ -90,6 +90,7 @@ export default defineEventHandler(async (event) => {
     return newTopic.tid
   } catch (error) {
     await session.abortTransaction()
+    throw error
   } finally {
     await session.endSession()
   }
