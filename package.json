@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.16.17",
+  "version": "2.16.18",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -79,6 +79,11 @@
     "mongodb": "^6.5.0",
     "mongoose": "^8.3.2",
     "nodemailer": "^6.9.13",
-    "nodemailer-smtp-transport": "^2.7.4"
+    "nodemailer-smtp-transport": "^2.7.4",
+    "rehype-prism": "^2.3.2",
+    "rehype-sanitize": "^6.0.0",
+    "rehype-stringify": "^10.0.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-rehype": "^11.1.1"
   }
 }

@@ -6,7 +6,6 @@ pre[class*='language-'] {
   word-break: normal;
   word-wrap: normal;
   color: var(--kungalgame-pink-0);
-  background: var(--kungalgame-font-color-0);
   font-family:
     Roboto Mono,
     monospace;
@@ -26,17 +25,9 @@ pre[class*='language-'] {
 code[class*='language-']::-moz-selection,
 pre[class*='language-']::-moz-selection,
 code[class*='language-'] ::-moz-selection,
-pre[class*='language-'] ::-moz-selection {
-  background: var(--kungalgame-font-color-0);
-}
-
 code[class*='language-']::selection,
 pre[class*='language-']::selection,
 code[class*='language-'] ::selection,
-pre[class*='language-'] ::selection {
-  background: var(--kungalgame-font-color-0);
-}
-
 :not(pre) > code[class*='language-'] {
   white-space: normal;
   border-radius: 0.2em;
