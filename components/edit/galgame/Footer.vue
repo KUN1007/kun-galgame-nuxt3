@@ -24,13 +24,13 @@ const handlePublishGalgame = async () => {
     },
     {
       'en-us':
-        'You are about to publish a visualnovel. To add visualnovel resources, you can go to the visualnovel details page later to add resource links.',
+        'You are about to publish a visualnovel. After publishing, you must go to the resource details page of the visualnovel you published and add a link for obtaining/downloading that visualnovel resource.',
       'ja-jp':
-        'ギャルゲームを公開しようとしています。リソースを追加するには、後でギャルゲームの詳細ページでリソースリンクを追加できます。',
+        'あなたはギャルゲームを公開しようとしています。公開後は、公開したギャルゲームのリソース詳細ページに移動し、そのギャルゲームリソースの取得/ダウンロードリンクを追加する必要があります。',
       'zh-cn':
-        '您要发布的是 Galgame, 要发布 Galgame 资源, 您可以稍后到 Galgame 详情页面添加资源链接。',
+        '您要发布的是 Galgame。发布后, 您必须到您发布完成的 Galgame 资源详情页, 添加一条该Galgame 资源的获取 / 下载链接。',
       'zh-tw':
-        '您要發布的是 Galgame, 若要發布 Galgame 資源，您可以稍後到 Galgame 詳情頁面添加資源鏈接。'
+        '您要發佈的是 Galgame。發佈後, 您必須到您發佈完成的 Galgame 資源詳情頁, 添加一條該Galgame 資源的獲取 / 下載鏈接。'
     }
   )
   if (!res) {
