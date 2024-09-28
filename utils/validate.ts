@@ -9,6 +9,7 @@ export const isValidURL = (url: string) => {
     const _ = new URL(url)
     return true
   } catch (err) {
+    console.log(err)
     return false
   }
 }
@@ -19,12 +20,12 @@ export const isValidEmail = (email: string) => {
 }
 
 export const isValidName = (name: string) => {
-  const regex = /^[\p{L}\p{N}~_]{1,17}$/u
+  const regex = /^[\p{L}\p{N}!~_@#$%^&*()+=-]{1,17}$/u
   return regex.test(name)
 }
 
 export const isValidPassword = (pwd: string) => {
-  const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])[\w!@#$%^&*()-+=\\/]{6,107}$/
+  const regex = /^(?=.*[a-zA-Z])(?=.*[0-9])[\w!@#$%^&*()+=\\/-]{6,107}$/
   return regex.test(pwd)
 }
 
