@@ -105,6 +105,12 @@ export const galgame: Friend[] = [
     link: 'https://www.nekotaku.xyz/',
     label:
       '喵源领域（原神域同萌）是一家致力于让二次元爱好者更便捷地获取信息和找到自己所需内容的综合二次元内容站点，欢迎您的访问！'
+  },
+  {
+    name: 'xiuren',
+    link: 'https://xiuren.cyou/',
+    label:
+      '分享galgame, SLG, RPG等资源'
   }
 ]
 
