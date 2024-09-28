@@ -102,7 +102,7 @@ const handleCloseCapture = () => {
 </script>
 
 <template>
-  <Teleport to="body" :disabled="isShowCapture">
+  <Teleport to="body" :disabled="!isShowCapture">
     <Transition name="capture">
       <div
         class="mask"

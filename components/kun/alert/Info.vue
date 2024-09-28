@@ -45,7 +45,7 @@ watch(
 </script>
 
 <template>
-  <Teleport to="body" :disabled="showInfo">
+  <Teleport to="body" :disabled="!showInfo">
     <Transition
       enter-active-class="animate__animated animate__fadeInUp animate__faster"
       leave-active-class="animate__animated animate__fadeOutDown animate__faster"
