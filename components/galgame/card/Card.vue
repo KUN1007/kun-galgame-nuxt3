@@ -25,8 +25,13 @@ defineProps<{
           placeholder="/placeholder.webp"
         />
         <div class="platform">
-          <span v-for="(platform, i) in galgame.platform" :key="i">
-            <Icon :name="platformIconMap[platform]" />
+          <template v-if="galgame.platform.length">
+            <span v-for="(platform, i) in galgame.platform" :key="i">
+              <Icon :name="platformIconMap[platform]" />
+            </span>
+          </template>
+          <span v-if="!galgame.platform.length" class="preparing">
+            {{ $t('galgame.preparing') }}
           </span>
         </div>
         <div class="mask">
@@ -96,7 +101,25 @@ defineProps<{
     top: 0;
     z-index: 1;
     color: var(--kungalgame-font-color-0);
-    margin-left: 5px;
+    background-color: var(--kungalgame-trans-white-5);
+    border-radius: 10px;
+    padding: 5px 7px;
+    @include kun-center;
+
+    span {
+      display: flex;
+      margin-right: 3px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    .preparing {
+      color: var(--kungalgame-pink-4);
+      font-weight: bold;
+      font-size: small;
+    }
   }
 
   .mask {
