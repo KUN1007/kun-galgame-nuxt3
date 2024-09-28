@@ -2,7 +2,6 @@
 import { callCommand } from '@milkdown/utils'
 import {
   createCodeBlockCommand,
-  updateCodeBlockLanguageCommand,
   toggleEmphasisCommand,
   toggleStrongCommand,
   wrapInBlockquoteCommand,
@@ -10,8 +9,7 @@ import {
   wrapInOrderedListCommand,
   insertHrCommand,
   insertImageCommand,
-  toggleInlineCodeCommand,
-  toggleLinkCommand
+  toggleInlineCodeCommand
 } from '@milkdown/preset-commonmark'
 import { toggleStrikethroughCommand } from '@milkdown/preset-gfm'
 import type { UseEditorReturn } from '@milkdown/vue'
@@ -26,23 +24,13 @@ const props = defineProps<{
 const { get, loading } = props.editorInfo
 const input = ref<HTMLElement>()
 const isShowInsertLink = ref(false)
-const { mode } = storeToRefs(usePersistEditTopicStore())
 
-const call = <T,>(command: CmdKey<T>, payload?: T) => {
-  return get()?.action(callCommand(command, payload))
-}
-
-const handelInsertLink = (href: string, text: string) => {
-  call(insertLinkPlugin.key, { href, text })
-  isShowInsertLink.value = false
-}
-
-// Select a language TODO:
-const selectLanguage = () => {}
-
-// Create code block
-const handleClickCodeBlock = () => {
-  call(createCodeBlockCommand.key, 'javascript')
+const call = <T,>(command: CmdKey<T>, payload?: T, callback?: () => void) => {
+  const result = get()?.action(callCommand(command, payload))
+  if (callback) {
+    callback()
+  }
+  return result
 }
 
 const handleFileChange = async (event: Event) => {
@@ -75,21 +63,36 @@ const handleFileChange = async (event: Event) => {
     useMessage(10108, 'success')
   }
 }
-
-const handleClickUploadImage = () => {
-  input.value?.click()
-}
 </script>
 
 <template>
   <div class="menu">
-    <KunMilkdownPluginsModeToggle />
+    <KunMilkdownPluginsModeToggle
+      v-tooltip="{
+        message: {
+          'en-us': 'Text Mode / WYSIWYG mode',
+          'ja-jp': 'テキストモード / WYSIWYGモード',
+          'zh-cn': '文本模式 / 所见即所得模式',
+          'zh-tw': '文本模式 / 所見即所得模式'
+        },
+        position: 'bottom'
+      }"
+    />
 
     <!-- Mark Group -->
     <div
       class="btn"
       aria-label="kun-galgame-bold"
       @click="call(toggleStrongCommand.key)"
+      v-tooltip="{
+        message: {
+          'en-us': 'Bold',
+          'ja-jp': '太字',
+          'zh-cn': '加粗',
+          'zh-tw': '加粗'
+        },
+        position: 'bottom'
+      }"
     >
       <Icon name="lucide:bold" />
     </div>
@@ -98,26 +101,49 @@ const handleClickUploadImage = () => {
       class="btn"
       aria-label="kun-galgame-italic"
       @click="call(toggleEmphasisCommand.key)"
+      v-tooltip="{
+        message: {
+          'en-us': 'Italic',
+          'ja-jp': '斜体',
+          'zh-cn': '斜体',
+          'zh-tw': '斜體'
+        },
+        position: 'bottom'
+      }"
     >
       <Icon name="lucide:italic" />
     </div>
 
     <div
       class="btn"
-      aria-label="kun-galgame-italic"
+      aria-label="kun-galgame-strikethrough"
       @click="call(toggleStrikethroughCommand.key)"
+      v-tooltip="{
+        message: {
+          'en-us': 'Strikethrough',
+          'ja-jp': '打消し線',
+          'zh-cn': '删除线',
+          'zh-tw': '刪除線'
+        },
+        position: 'bottom'
+      }"
     >
       <Icon name="lucide:strikethrough" />
     </div>
-
-    <!-- <div aria-label="kun-galgame-table" @click="call(insertTableCommand.key)">
-      <Icon name="lucide:table" />
-    </div> -->
 
     <div
       class="btn"
       aria-label="kun-galgame-list-bulleted"
       @click="call(wrapInBulletListCommand.key)"
+      v-tooltip="{
+        message: {
+          'en-us': 'Bulleted List',
+          'ja-jp': '箇条書き',
+          'zh-cn': '无序列表',
+          'zh-tw': '無序列錶'
+        },
+        position: 'bottom'
+      }"
     >
       <Icon name="lucide:list" />
     </div>
@@ -126,6 +152,15 @@ const handleClickUploadImage = () => {
       class="btn"
       aria-label="kun-galgame-list-numbered"
       @click="call(wrapInOrderedListCommand.key)"
+      v-tooltip="{
+        message: {
+          'en-us': 'Ordered List',
+          'ja-jp': '番号付きリスト',
+          'zh-cn': '有序列表',
+          'zh-tw': '有序列錶'
+        },
+        position: 'bottom'
+      }"
     >
       <Icon name="lucide:list-ordered" />
     </div>
@@ -134,6 +169,15 @@ const handleClickUploadImage = () => {
       class="btn"
       aria-label="kun-galgame-quote"
       @click="call(wrapInBlockquoteCommand.key)"
+      v-tooltip="{
+        message: {
+          'en-us': 'Quote Block',
+          'ja-jp': '引用ブロック',
+          'zh-cn': '引用块',
+          'zh-tw': '引用塊'
+        },
+        position: 'bottom'
+      }"
     >
       <Icon name="lucide:quote" />
     </div>
@@ -142,35 +186,77 @@ const handleClickUploadImage = () => {
       class="btn"
       aria-label="kun-galgame-horizontal"
       @click="call(insertHrCommand.key)"
+      v-tooltip="{
+        message: {
+          'en-us': 'Horizontal Line',
+          'ja-jp': '水平線',
+          'zh-cn': '水平线',
+          'zh-tw': '水平線'
+        },
+        position: 'bottom'
+      }"
     >
       <Icon name="lucide:minus" />
     </div>
 
     <div
       class="btn"
-      aria-label="kun-galgame-italic"
+      aria-label="kun-galgame-insert-link"
       @click="isShowInsertLink = true"
+      v-tooltip="{
+        message: {
+          'en-us': 'Insert Link',
+          'ja-jp': 'リンク挿入',
+          'zh-cn': '插入链接',
+          'zh-tw': '插入鏈接'
+        },
+        position: 'bottom'
+      }"
     >
       <Icon name="lucide:link" />
       <KunMilkdownPluginsLinkInsertDialog
         :show="isShowInsertLink"
-        @insert="handelInsertLink"
+        @insert="
+          call(
+            insertLinkPlugin.key,
+            undefined,
+            () => (isShowInsertLink = false)
+          )
+        "
         @cancel="isShowInsertLink = false"
       />
     </div>
 
     <div
       class="btn"
-      aria-label="kun-galgame-italic"
-      @click="handleClickCodeBlock"
+      aria-label="kun-galgame-code-block"
+      @click="call(createCodeBlockCommand.key, 'javascript')"
+      v-tooltip="{
+        message: {
+          'en-us': 'Code Block',
+          'ja-jp': 'コードブロック',
+          'zh-cn': '代码块',
+          'zh-tw': '代碼塊'
+        },
+        position: 'bottom'
+      }"
     >
       <Icon name="lucide:square-code" />
     </div>
 
     <div
       class="btn"
-      aria-label="kun-galgame-italic"
+      aria-label="kun-galgame-code"
       @click="call(toggleInlineCodeCommand.key)"
+      v-tooltip="{
+        message: {
+          'en-us': 'Inline Code',
+          'ja-jp': 'インラインコード',
+          'zh-cn': '行内代码',
+          'zh-tw': '行內代碼'
+        },
+        position: 'bottom'
+      }"
     >
       <Icon name="lucide:code-xml" />
     </div>
@@ -179,12 +265,20 @@ const handleClickUploadImage = () => {
       class="btn"
       aria-label="kun-galgame-upload-image"
       v-if="props.isShowUploadImage"
-      @click="handleClickUploadImage"
+      @click="input?.click()"
+      v-tooltip="{
+        message: {
+          'en-us': 'Upload Image',
+          'ja-jp': '画像アップロード',
+          'zh-cn': '上传图片',
+          'zh-tw': '上傳圖片'
+        },
+        position: 'bottom'
+      }"
     >
       <Icon name="lucide:image-plus" />
       <input
         ref="input"
-        hidden
         type="file"
         accept=".jpg, .jpeg, .png, .webp"
         @change="handleFileChange($event)"
@@ -223,5 +317,9 @@ const handleClickUploadImage = () => {
       color: var(--kungalgame-blue-5);
     }
   }
+}
+
+input {
+  display: none;
 }
 </style>

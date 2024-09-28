@@ -2,7 +2,7 @@
 const props = defineProps<{
   show: boolean
 }>()
-const emit = defineEmits<{
+const emits = defineEmits<{
   insert: [href: string, text: string]
   cancel: []
 }>()
@@ -23,7 +23,7 @@ const handleLinkInsert = () => {
     return
   }
   const text = inputText.value.length === 0 ? inputHref.value : inputText.value
-  emit('insert', inputHref.value, text)
+  emits('insert', inputHref.value, text)
 }
 </script>
 
@@ -33,10 +33,9 @@ const handleLinkInsert = () => {
       <div
         class="mask"
         tabindex="0"
-        @click="emit('cancel')"
         v-if="show"
         @keydown.enter="handleLinkInsert"
-        @keydown.esc="emit('cancel')"
+        @keydown.esc="emits('cancel')"
       >
         <div class="dialog" @click.stop>
           <h2 class="title">{{ $t('edit.topic.link.title') }}</h2>
@@ -57,7 +56,7 @@ const handleLinkInsert = () => {
           />
 
           <div class="button-group">
-            <button @click="emit('cancel')" class="cancel-btn">
+            <button @click="emits('cancel')" class="cancel-btn">
               {{ $t('edit.topic.link.cancelInsert') }}
             </button>
 
