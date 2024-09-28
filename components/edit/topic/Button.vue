@@ -147,18 +147,23 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
       </span>
     </p>
 
-    <button
+    <KunButton
       v-if="!isTopicRewriting"
       class="confirm-btn"
       @click="handlePublish"
       :disabled="isPublishing"
     >
       {{ $t('edit.topic.publish') }}
-    </button>
+    </KunButton>
 
-    <button v-if="isTopicRewriting" class="rewrite-btn" @click="handleRewrite">
+    <KunButton
+      type="danger"
+      v-if="isTopicRewriting"
+      class="rewrite-btn"
+      @click="handleRewrite"
+    >
       {{ $t('edit.topic.rewrite') }}
-    </button>
+    </KunButton>
   </div>
 </template>
 
@@ -175,14 +180,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     width: 200px;
     font-size: 17px;
     white-space: nowrap;
-    overflow: hidden;
-    cursor: pointer;
     flex-shrink: 0;
-    border-radius: 10px;
-
-    &:hover {
-      color: var(--kungalgame-white);
-    }
   }
 }
 
@@ -208,27 +206,6 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     display: flex;
     align-items: center;
     user-select: none;
-  }
-}
-
-.confirm-btn {
-  color: var(--kungalgame-blue-5);
-  background-color: transparent;
-  border: 1px solid var(--kungalgame-blue-5);
-
-  &:hover {
-    transition: 0.2s;
-    background-color: var(--kungalgame-blue-5);
-  }
-}
-
-.rewrite-btn {
-  color: var(--kungalgame-pink-4);
-  background-color: transparent;
-  border: 1px solid var(--kungalgame-pink-4);
-
-  &:hover {
-    background-color: var(--kungalgame-pink-4);
   }
 }
 

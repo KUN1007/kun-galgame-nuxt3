@@ -67,17 +67,7 @@ const handleFileChange = async (event: Event) => {
 
 <template>
   <div class="menu">
-    <KunMilkdownPluginsModeToggle
-      v-tooltip="{
-        message: {
-          'en-us': 'Text Mode / WYSIWYG mode',
-          'ja-jp': 'テキストモード / WYSIWYGモード',
-          'zh-cn': '文本模式 / 所见即所得模式',
-          'zh-tw': '文本模式 / 所見即所得模式'
-        },
-        position: 'bottom'
-      }"
-    />
+    <KunMilkdownPluginsModeToggle />
 
     <!-- Mark Group -->
     <div

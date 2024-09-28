@@ -1,50 +1,16 @@
 <script setup lang="ts">
-import 'animate.css'
-
 const { autosaveCount } = storeToRefs(useTempEditStore())
-const isShowSettingsMenu = ref(false)
-const settingsPanelActive = ref('')
-
-const handelClickSettings = () => {
-  isShowSettingsMenu.value = !isShowSettingsMenu.value
-  if (isShowSettingsMenu.value) {
-    settingsPanelActive.value = 'settings-icon-active'
-  } else {
-    settingsPanelActive.value = ''
-  }
-}
-
-const handelCloseSettingsMenu = () => {
-  isShowSettingsMenu.value = false
-  settingsPanelActive.value = ''
-}
 </script>
 
 <template>
-  <div class="container">
-    <div class="settings">
-      <span
-        @click="handelClickSettings"
-        class="settings-icon"
-        :class="settingsPanelActive"
-      >
-        <Icon name="uiw:setting-o" />
-      </span>
+  <div class="settings">
+    <NuxtLinkLocale to="/topic/280" class="rules">
+      {{ $t(`edit.topic.rules`) }}
+    </NuxtLinkLocale>
 
-      <NuxtLinkLocale to="/topic/280" class="rules">
-        {{ $t(`edit.topic.rules`) }}
-      </NuxtLinkLocale>
-
-      <span class="save">
-        {{ `${$t('edit.topic.save')} × ${autosaveCount}` }}
-      </span>
-    </div>
-
-    <!-- TODO: -->
-    <!-- <KunMilkdownComponentsMenu
-      @close="handelCloseSettingsMenu"
-      :is-show-settings-menu="isShowSettingsMenu"
-    /> -->
+    <span class="save">
+      {{ `${$t('edit.topic.save')} × ${autosaveCount}` }}
+    </span>
   </div>
 </template>
 
@@ -57,45 +23,20 @@ const handelCloseSettingsMenu = () => {
 
 .settings {
   color: var(--kungalgame-font-color-1);
-  font-size: 20px;
+  font-size: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  .settings-icon {
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .rules,
-  .save {
-    margin-left: 17px;
-    font-size: 15px;
-  }
-
   .rules {
     text-transform: uppercase;
     color: var(--kungalgame-blue-5);
-
-    &:hover {
-      text-decoration: underline;
-    }
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
-}
 
-.settings-icon-active {
-  color: var(--kungalgame-blue-5);
-  animation: settings 3s linear infinite;
-}
-
-@keyframes settings {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
+  .save {
+    margin-left: 17px;
   }
 }
 </style>

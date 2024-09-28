@@ -1,28 +1,36 @@
 <script setup lang="ts">
+import { useRipple } from './utils/useRipple'
+
 type ButtonType = 'primary' | 'danger' | ''
 
 withDefaults(defineProps<{ type?: ButtonType; pending?: boolean }>(), {
   type: '',
   pending: false
 })
+
+const { ripples, onClick } = useRipple()
 </script>
 
 <template>
-  <button class="kun-button" :class="type" :disabled="pending">
+  <button class="kun-button" @click="onClick" :class="type" :disabled="pending">
     <Icon v-if="pending" name="svg-spinners:12-dots-scale-rotate" />
     <slot />
+    <KunUtilsRipple :ripples="ripples" />
   </button>
 </template>
 
 <style lang="scss" scoped>
 .kun-button {
-  border: 1px solid var(--kungalgame-blue-5);
+  border: 1.5px solid var(--kungalgame-blue-5);
   background-color: transparent;
   padding: 7px 10px;
   border-radius: 10px;
   color: var(--kungalgame-blue-5);
   cursor: pointer;
-  box-shadow: var(--shadow);
+  transition: background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.23s;
 
   &:hover {
     background-color: var(--kungalgame-blue-5);
@@ -35,16 +43,12 @@ withDefaults(defineProps<{ type?: ButtonType; pending?: boolean }>(), {
 
   &:disabled {
     cursor: not-allowed;
-    border: 1px solid var(--kungalgame-blue-3);
+    border: 1.5px solid var(--kungalgame-blue-3);
     color: var(--kungalgame-blue-3);
 
     &:hover {
       background-color: transparent;
       color: var(--kungalgame-blue-3);
-    }
-
-    &:active {
-      transform: none;
     }
   }
 
@@ -59,14 +63,14 @@ withDefaults(defineProps<{ type?: ButtonType; pending?: boolean }>(), {
   color: var(--kungalgame-white);
 
   &:disabled {
-    border: 1px solid var(--kungalgame-blue-3);
+    border: 1.5px solid var(--kungalgame-blue-3);
     background-color: var(--kungalgame-blue-3);
     color: var(--kungalgame-white);
   }
 }
 
 .danger {
-  border: 1px solid var(--kungalgame-red-5);
+  border: 1.5px solid var(--kungalgame-red-5);
   color: var(--kungalgame-red-5);
 
   &:hover {
@@ -75,7 +79,7 @@ withDefaults(defineProps<{ type?: ButtonType; pending?: boolean }>(), {
   }
 
   &:disabled {
-    border: 1px solid var(--kungalgame-red-3);
+    border: 1.5px solid var(--kungalgame-red-3);
     color: var(--kungalgame-red-3);
 
     &:hover {

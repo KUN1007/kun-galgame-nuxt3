@@ -29,12 +29,24 @@ const handleSetMode = (value: 'preview' | 'code') => {
     :items="modeItems"
     :default-value="routeName === 'edit-topic' ? topicMode : replyMode"
     @set="(value) => handleSetMode(value as 'preview' | 'code')"
+    v-tooltip="{
+      message: {
+        'en-us': 'Text Mode / WYSIWYG mode',
+        'ja-jp': 'テキストモード / WYSIWYGモード',
+        'zh-cn': '文本模式 / 所见即所得模式',
+        'zh-tw': '文本模式 / 所見即所得模式'
+      },
+      position: 'bottom'
+    }"
   />
 </template>
 
 <style lang="scss" scoped>
 .kun-nav {
+  display: inline-block;
   height: 43px;
+  line-height: 37px;
+  vertical-align: middle;
   font-size: 16px;
   margin-left: 17px;
 }

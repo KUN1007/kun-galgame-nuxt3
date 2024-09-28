@@ -69,7 +69,6 @@ onBeforeRouteLeave(async (_, __, next) => {
   margin: 0 auto;
 
   @include kun-blur;
-  border-radius: 0;
 }
 
 .kun-footer {

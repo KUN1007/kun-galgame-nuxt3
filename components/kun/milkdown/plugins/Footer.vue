@@ -52,7 +52,7 @@ onMounted(() => {
 <template>
   <div class="footer">
     <KunMilkdownComponentsSettings />
-    <span> {{ size + ` ${$t('edit.topic.word')}` }} </span>
+    <span class="size"> {{ size + ` ${$t('edit.topic.word')}` }} </span>
   </div>
 </template>
 
@@ -62,5 +62,10 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.size {
+  font-size: 15px;
+  color: var(--kungalgame-font-color-0);
 }
 </style>
