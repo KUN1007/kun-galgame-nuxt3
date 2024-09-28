@@ -103,7 +103,10 @@ export const infoMessagesEN: Record<number, string> = {
   10246: 'Single tag maximum length is 17 characters',
   10247: 'Reply content cannot be empty',
   10248: 'Reply maximum length is 10007 characters',
-  10249: 'Login expired, please login again',
+  10249: 'You need to login to continue',
+  10250: 'Login expired, please login again',
+  10251: 'URL parse failed, please try again',
+  10252: 'URL must end with .md',
 
   10301: 'Email can not be empty!',
   10302: 'The email length exceeds the limit!',
@@ -242,7 +245,7 @@ export const infoMessagesJP: Record<number, string> = {
 
   10201: '投稿中...',
   10202: 'タグは既に存在します。別のタグを選んでください',
-  10203: 'トピック ID を解析できませんでした',
+  10203: 'トピックを解決できませんでした',
   10204: 'タイトルを入力してください！',
   10205: 'タイトルの最大長は 40 文字です！',
   10206: '内容を入力してください！',
@@ -290,6 +293,8 @@ export const infoMessagesJP: Record<number, string> = {
   10248: '返信内容の最大長は 10007 文字です',
   10249: '操作を続行するにはログインが必要です',
   10250: 'ログインの有効期限が切れました。再度ログインしてください',
+  10251: 'URLの解析に失敗しました。もう一度お試しください。',
+  10252: 'URLは.mdで終わる必要があります。',
 
   10301: 'メールアドレスは空にできません',
   10302: 'メールアドレスの長さが制限を超えています',
@@ -474,6 +479,8 @@ export const infoMessagesCN: Record<number, string> = {
   10248: '回复内容最大长度为 10007 个字符',
   10249: '您需要登录以继续操作',
   10250: '登录过期, 请重新登陆',
+  10251: 'URL 解析失败, 请重试',
+  10252: 'URL 必须以 .md 结尾',
 
   10301: '邮箱不能为空',
   10302: '邮箱长度超出限制',
@@ -651,6 +658,8 @@ export const infoMessagesTW: Record<number, string> = {
   10248: '回復內容最大長度為 10007 個字符',
   10249: '您需要登錄以繼續操作',
   10250: '登錄過期, 請重新登陸',
+  10251: 'URL 解析失敗, 請重試',
+  10252: 'URL 必須以 .md 結尾',
 
   10301: '郵箱不能為空',
   10302: '郵箱長度超出限制',

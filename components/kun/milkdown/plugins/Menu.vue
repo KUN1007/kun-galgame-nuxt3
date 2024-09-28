@@ -2,7 +2,6 @@
 import { callCommand } from '@milkdown/utils'
 import {
   createCodeBlockCommand,
-  updateCodeBlockLanguageCommand,
   toggleEmphasisCommand,
   toggleStrongCommand,
   wrapInBlockquoteCommand,
@@ -10,8 +9,7 @@ import {
   wrapInOrderedListCommand,
   insertHrCommand,
   insertImageCommand,
-  toggleInlineCodeCommand,
-  toggleLinkCommand
+  toggleInlineCodeCommand
 } from '@milkdown/preset-commonmark'
 import { toggleStrikethroughCommand } from '@milkdown/preset-gfm'
 import type { UseEditorReturn } from '@milkdown/vue'
@@ -26,23 +24,14 @@ const props = defineProps<{
 const { get, loading } = props.editorInfo
 const input = ref<HTMLElement>()
 const isShowInsertLink = ref(false)
-const { mode } = storeToRefs(usePersistEditTopicStore())
+const isShowFetchMarkdown = ref(false)
 
-const call = <T,>(command: CmdKey<T>, payload?: T) => {
-  return get()?.action(callCommand(command, payload))
-}
-
-const handelInsertLink = (href: string, text: string) => {
-  call(insertLinkPlugin.key, { href, text })
-  isShowInsertLink.value = false
-}
-
-// Select a language TODO:
-const selectLanguage = () => {}
-
-// Create code block
-const handleClickCodeBlock = () => {
-  call(createCodeBlockCommand.key, 'javascript')
+const call = <T,>(command: CmdKey<T>, payload?: T, callback?: () => void) => {
+  const result = get()?.action(callCommand(command, payload))
+  if (callback) {
+    callback()
+  }
+  return result
 }
 
 const handleFileChange = async (event: Event) => {
@@ -85,7 +74,6 @@ const handleClickUploadImage = () => {
   <div class="menu">
     <KunMilkdownPluginsModeToggle />
 
-    <!-- Mark Group -->
     <div
       class="btn"
       aria-label="kun-galgame-bold"
@@ -104,15 +92,11 @@ const handleClickUploadImage = () => {
 
     <div
       class="btn"
-      aria-label="kun-galgame-italic"
+      aria-label="kun-galgame-strikethrough"
       @click="call(toggleStrikethroughCommand.key)"
     >
       <Icon name="lucide:strikethrough" />
     </div>
-
-    <!-- <div aria-label="kun-galgame-table" @click="call(insertTableCommand.key)">
-      <Icon name="lucide:table" />
-    </div> -->
 
     <div
       class="btn"
@@ -148,21 +132,27 @@ const handleClickUploadImage = () => {
 
     <div
       class="btn"
-      aria-label="kun-galgame-italic"
+      aria-label="kun-galgame-link-insert"
       @click="isShowInsertLink = true"
     >
       <Icon name="lucide:link" />
       <KunMilkdownPluginsLinkInsertDialog
         :show="isShowInsertLink"
-        @insert="handelInsertLink"
+        @insert="
+          call(
+            insertLinkPlugin.key,
+            undefined,
+            () => (isShowInsertLink = false)
+          )
+        "
         @cancel="isShowInsertLink = false"
       />
     </div>
 
     <div
       class="btn"
-      aria-label="kun-galgame-italic"
-      @click="handleClickCodeBlock"
+      aria-label="kun-galgame-code"
+      @click="call(createCodeBlockCommand.key, 'javascript')"
     >
       <Icon name="lucide:square-code" />
     </div>
@@ -188,6 +178,20 @@ const handleClickUploadImage = () => {
         type="file"
         accept=".jpg, .jpeg, .png, .webp"
         @change="handleFileChange($event)"
+      />
+    </div>
+
+    <div
+      class="btn"
+      aria-label="kun-galgame-github-markdown-fetch"
+      @click="isShowFetchMarkdown = true"
+    >
+      <Icon name="lucide:github" />
+      <KunMilkdownPluginsFetchMarkdownDialog
+        :editor-info="editorInfo"
+        :show="isShowFetchMarkdown"
+        @insert="isShowFetchMarkdown = false"
+        @cancel="isShowFetchMarkdown = false"
       />
     </div>
   </div>

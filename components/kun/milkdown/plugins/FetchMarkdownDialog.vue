@@ -1,5 +1,13 @@
 <script setup lang="ts">
+import type { UseEditorReturn } from '@milkdown/vue'
+import type { FetchConfig } from './fetchGitHubMarkdown'
+import { fetchGitHubMarkdown } from './fetchGitHubMarkdown'
+
+const EXAMPLE_URL =
+  'https://github.com/KUN1007/kun-galgame-nuxt3/blob/master/README.md'
+
 const props = defineProps<{
+  editorInfo: UseEditorReturn
   show: boolean
 }>()
 
@@ -8,25 +16,18 @@ const emits = defineEmits<{
   cancel: []
 }>()
 
-const inputHref = ref('')
-const inputText = ref('')
-const exampleURL = useRuntimeConfig().public.KUN_GALGAME_URL
+const { get, loading } = props.editorInfo
+const fetchUrl = ref('')
+const fetchConfig = reactive<FetchConfig>({
+  username: '',
+  repository: '',
+  branch: '',
+  filename: ''
+})
 
-watch(
-  () => props.show,
-  () => {
-    inputHref.value = ''
-    inputText.value = ''
-  }
-)
-
-const handleLinkInsert = () => {
-  if (inputHref.value.trim().length === 0) {
-    return
-  }
-  const text =
-    inputText.value.trim().length === 0 ? inputHref.value : inputText.value
-  emits('insert', inputHref.value.trim(), text)
+const handleFetchMarkdown = async () => {
+  const markdown = await fetchGitHubMarkdown(fetchUrl.value)
+  console.log(markdown)
 }
 </script>
 
@@ -37,33 +38,34 @@ const handleLinkInsert = () => {
         class="mask"
         tabindex="0"
         v-if="show"
-        @keydown.enter="handleLinkInsert"
+        @keydown.enter="handleFetchMarkdown"
         @keydown.esc="emits('cancel')"
       >
         <div class="dialog" @click.stop>
-          <h2 class="title">{{ $t('edit.topic.link.title') }}</h2>
+          <h2 class="title">从 GitHub 导入 Markdown</h2>
+          <pre>
+            https://raw.githubusercontent.com/KUN1007/kun-galgame-vue/SSR/SSR/docs/zh/README.md
+            https://github.com/KUN1007/tenshi-patch-fix/blob/main/README.md
+            https://github.com/KUN1007/kun-galgame-vue/blob/SSR/docs/zh/README.md
+            https://github.com/Dir-A/Dir-A_Essays_MD/blob/main/Reverse/%5BQLIE%5D%20%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90/%5BQLIE%5D%20%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%20%5BP1%E5%87%86%E5%A4%87%5D.md
+          </pre>
 
           <input
             id="LinkURLInput"
             type="url"
-            v-model="inputHref"
-            :placeholder="`${$t('edit.topic.link.URLLabel')} (${exampleURL})`"
+            v-model="fetchUrl"
+            :placeholder="EXAMPLE_URL"
             class="input"
           />
-          <input
-            id="LinkTextInput"
-            type="text"
-            v-model="inputText"
-            :placeholder="$t('edit.topic.link.textLabel')"
-            class="input"
-          />
+
+          <pre v-if="fetchConfig">{{ fetchConfig }}</pre>
 
           <div class="button-group">
             <button @click="emits('cancel')" class="cancel-btn">
               {{ $t('edit.topic.link.cancelInsert') }}
             </button>
 
-            <button @click="handleLinkInsert" class="confirm-btn">
+            <button @click="handleFetchMarkdown" class="confirm-btn">
               {{ $t('edit.topic.link.confirmInsert') }}
             </button>
           </div>
