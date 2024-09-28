@@ -35,10 +35,10 @@ const handleTagClose = (tag: string) => {
 }
 
 const handleAddTag = () => {
-  const tagName = inputValue.value.trim().slice(0, 17).toLowerCase()
+  const tagName = inputValue.value.trim().slice(0, 17)
   const isIncludes = selectedTags.value
     .map((tag) => tag.toLowerCase())
-    .includes(tagName)
+    .includes(tagName.toLowerCase())
 
   if (isIncludes) {
     useMessage(10202, 'warn')
