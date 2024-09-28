@@ -9,26 +9,32 @@ const appVersion = packageJson.version
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
+
   experimental: {
     scanPageMeta: true
   },
+
+  compatibilityDate: '2024-09-29',
+
   devServer: {
     host: '127.0.0.1',
     port: 1007
   },
+
   modules: [
-    '@pinia/nuxt',
     '@nuxt/image',
+    '@nuxt/icon',
     '@nuxtjs/i18n',
-    '@pinia-plugin-persistedstate/nuxt',
-    'dayjs-nuxt',
-    'nuxt-icon',
-    '@vite-pwa/nuxt',
-    'nuxt-typed-router',
-    'nuxt-schema-org',
     '@nuxtjs/color-mode',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+    '@vite-pwa/nuxt',
+    'dayjs-nuxt',
+    'nuxt-typed-router',
+    'nuxt-schema-org'
   ],
+
   runtimeConfig: {
     MONGODB_URL: process.env.MONGODB_URL,
 
@@ -46,19 +52,23 @@ export default defineNuxtConfig({
       KUN_VISUAL_NOVEL_VERSION: appVersion
     }
   },
+
   imports: {
     dirs: ['./composables', './utils', './store/**/*.ts']
   },
+
   site: {
     url: process.env.KUN_GALGAME_URL
   },
 
   // Frontend
   css: ['~/assets/css/index.scss'],
+
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
+          api: 'modern-compiler',
           additionalData: '@use "~/assets/css/mixins.scss" as *;'
         }
       }
@@ -67,12 +77,14 @@ export default defineNuxtConfig({
       drop: ['console', 'debugger']
     }
   },
+
   piniaPersistedstate: {
     cookieOptions: {
       maxAge: 60 * 60 * 24 * 7,
       sameSite: 'strict'
     }
   },
+
   i18n: {
     langDir: './language',
     locales: [
@@ -106,6 +118,7 @@ export default defineNuxtConfig({
       redirectOn: 'root'
     }
   },
+
   colorMode: {
     preference: 'system',
     fallback: 'light',
@@ -116,6 +129,7 @@ export default defineNuxtConfig({
     classSuffix: '-mode',
     storageKey: 'kungalgame-color-mode'
   },
+
   pwa: {
     registerType: 'autoUpdate',
     // Disable pwa in development environment
