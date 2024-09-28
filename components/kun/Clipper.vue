@@ -28,74 +28,53 @@ const handleConfirmClipImage = async () => {
 </script>
 
 <template>
-  <Teleport to="body" :disabled="isShowClipper">
-    <Transition name="alert">
-      <div v-if="isShowClipper" class="mask">
-        <div class="kun-clipper">
+  <KunDialog :is-show-dialog="isShowClipper">
+    <div class="container">
+      <div
+        class="kun-clipper"
+        @mousedown="handleMouseDown($event)"
+        @touchstart.passive="handleMouseDown($event)"
+      >
+        <img v-if="imageBlob" :src="imageSrc" class="kun-clip-preview" />
+
+        <div :style="croppingBoxStyle" class="cropping-box">
           <div
-            class="image-container"
-            @mousedown="handleMouseDown($event)"
-            @touchstart.passive="handleMouseDown($event)"
-          >
-            <img v-if="imageBlob" :src="imageSrc" class="kun-clip-preview" />
-
-            <div :style="croppingBoxStyle" class="cropping-box">
-              <div
-                class="handle top-left"
-                @mousedown.stop="handleMouseDown($event, 'top-left')"
-                @touchstart.stop.passive="handleMouseDown($event, 'top-left')"
-              />
-              <div
-                class="handle top-right"
-                @mousedown.stop="handleMouseDown($event, 'top-right')"
-                @touchstart.stop.passive="handleMouseDown($event, 'top-right')"
-              />
-              <div
-                class="handle bottom-left"
-                @mousedown.stop="handleMouseDown($event, 'bottom-left')"
-                @touchstart.stop.passive="
-                  handleMouseDown($event, 'bottom-left')
-                "
-              />
-              <div
-                class="handle bottom-right"
-                @mousedown.stop="handleMouseDown($event, 'bottom-right')"
-                @touchstart.stop.passive="
-                  handleMouseDown($event, 'bottom-right')
-                "
-              />
-            </div>
-          </div>
-
-          <div class="footer">
-            <button @click="handleClose">
-              {{ $t('ComponentAlert.cancel') }}
-            </button>
-            <button @click="handleConfirmClipImage">
-              {{ $t('ComponentAlert.confirm') }}
-            </button>
-          </div>
+            class="handle top-left"
+            @mousedown.stop="handleMouseDown($event, 'top-left')"
+            @touchstart.stop.passive="handleMouseDown($event, 'top-left')"
+          />
+          <div
+            class="handle top-right"
+            @mousedown.stop="handleMouseDown($event, 'top-right')"
+            @touchstart.stop.passive="handleMouseDown($event, 'top-right')"
+          />
+          <div
+            class="handle bottom-left"
+            @mousedown.stop="handleMouseDown($event, 'bottom-left')"
+            @touchstart.stop.passive="handleMouseDown($event, 'bottom-left')"
+          />
+          <div
+            class="handle bottom-right"
+            @mousedown.stop="handleMouseDown($event, 'bottom-right')"
+            @touchstart.stop.passive="handleMouseDown($event, 'bottom-right')"
+          />
         </div>
       </div>
-    </Transition>
-  </Teleport>
+
+      <div class="footer">
+        <button @click="handleClose">
+          {{ $t('ComponentAlert.cancel') }}
+        </button>
+        <button @click="handleConfirmClipImage">
+          {{ $t('ComponentAlert.confirm') }}
+        </button>
+      </div>
+    </div>
+  </KunDialog>
 </template>
 
 <style lang="scss" scoped>
-.mask {
-  position: fixed;
-  z-index: 9999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--kungalgame-mask-color-0);
-  display: flex;
-  transition: opacity 0.3s ease;
-  color: var(--kungalgame-font-color-3);
-}
-
-.kun-clipper {
+.container {
   margin: auto;
   background-color: var(--kungalgame-trans-white-2);
   border-radius: 5px;
@@ -104,10 +83,12 @@ const handleConfirmClipImage = async () => {
   box-sizing: border-box;
   position: relative;
   user-select: none;
+  transition: all 0.3s ease;
+
   @include kun-center;
   flex-direction: column;
 
-  .image-container {
+  .kun-clipper {
     display: flex;
     position: relative;
 
@@ -190,27 +171,13 @@ const handleConfirmClipImage = async () => {
 }
 
 @media (max-width: 700px) {
-  .kun-clipper {
-    .image-container {
+  .container {
+    .kun-clipper {
       img {
         max-width: 300px;
         max-height: 400px;
       }
     }
   }
-}
-
-.alert-enter-from {
-  opacity: 0;
-}
-
-.alert-leave-to {
-  opacity: 0;
-}
-
-.alert-enter-from .container,
-.alert-leave-to .container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
 }
 </style>

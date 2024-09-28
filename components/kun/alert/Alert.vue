@@ -17,47 +17,26 @@ const handleConfirm = () => {
 </script>
 
 <template>
-  <Teleport to="body" :disabled="showAlert">
-    <Transition name="alert">
-      <div v-if="showAlert" class="mask">
-        <div class="container">
-          <div class="header">
-            <h3 v-if="alertTitle">{{ alertTitle[locale as Language] }}</h3>
-            <p v-if="alertMsg">{{ alertMsg[locale as Language] }}</p>
-          </div>
-
-          <div class="footer">
-            <button
-              v-if="isShowCancel ?? true"
-              class="button"
-              @click="handleClose"
-            >
-              {{ $t('ComponentAlert.cancel') }}
-            </button>
-            <button class="button" @click="handleConfirm">
-              {{ $t('ComponentAlert.confirm') }}
-            </button>
-          </div>
-        </div>
+  <KunDialog :is-show-dialog="showAlert">
+    <div class="container">
+      <div class="header">
+        <h3 v-if="alertTitle">{{ alertTitle[locale as Language] }}</h3>
+        <p v-if="alertMsg">{{ alertMsg[locale as Language] }}</p>
       </div>
-    </Transition>
-  </Teleport>
+
+      <div class="footer">
+        <button v-if="isShowCancel ?? true" class="button" @click="handleClose">
+          {{ $t('ComponentAlert.cancel') }}
+        </button>
+        <button class="button" @click="handleConfirm">
+          {{ $t('ComponentAlert.confirm') }}
+        </button>
+      </div>
+    </div>
+  </KunDialog>
 </template>
 
 <style lang="scss" scoped>
-.mask {
-  position: fixed;
-  z-index: 9999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--kungalgame-mask-color-0);
-  display: flex;
-  transition: opacity 0.3s ease;
-  color: var(--kungalgame-font-color-3);
-}
-
 .container {
   width: 300px;
   margin: auto;
@@ -107,19 +86,5 @@ const handleConfirm = () => {
     transform: scale(0.9);
     transition: 0.1s;
   }
-}
-
-.alert-enter-from {
-  opacity: 0;
-}
-
-.alert-leave-to {
-  opacity: 0;
-}
-
-.alert-enter-from .container,
-.alert-leave-to .container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
 }
 </style>

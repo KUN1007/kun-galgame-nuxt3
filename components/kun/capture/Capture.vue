@@ -56,7 +56,7 @@ const nextQuestion = () => {
 }
 
 const checkKeyPress = (event: KeyboardEvent) => {
-  const pressedKey = event.key
+  const pressedKey = event.key.toLowerCase()
 
   if (pressedKey === expectedKeys.value[currentIndex.value]) {
     if (currentIndex.value === expectedKeys.value.length - 1) {
@@ -149,13 +149,7 @@ const handleCloseCapture = () => {
             </div>
             <div v-if="isShowAnswer" class="answer">
               <div>{{ $t('AlertInfo.capture.hint4') }}</div>
-              <a
-                href="https://github.com/KUN1007/kun-galgame-nuxt3/tree/remove-server/src/components/capture"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {{ $t('AlertInfo.capture.answer') }}
-              </a>
+              <p>{{ questions[currentQuestionIndex].correctOption }}</p>
             </div>
           </div>
         </div>
@@ -240,6 +234,7 @@ const handleCloseCapture = () => {
   align-items: flex-end;
   justify-content: flex-end;
   font-style: oblique;
+  user-select: none;
 
   .hard {
     color: var(--kungalgame-red-5);
@@ -263,12 +258,8 @@ const handleCloseCapture = () => {
       font-size: 10px;
     }
 
-    a {
-      color: var(--kungalgame-blue-5);
-
-      &:hover {
-        text-decoration: underline;
-      }
+    p {
+      color: var(--kungalgame-pink-4);
     }
   }
 }

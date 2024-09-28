@@ -28,89 +28,54 @@ const handleLinkInsert = () => {
 </script>
 
 <template>
-  <Teleport to="body">
-    <Transition name="insert">
-      <div
-        class="mask"
-        tabindex="0"
-        v-if="show"
-        @keydown.enter="handleLinkInsert"
-        @keydown.esc="emits('cancel')"
-      >
-        <div class="dialog" @click.stop>
-          <h2 class="title">{{ $t('edit.topic.link.title') }}</h2>
+  <KunDialog :is-show-dialog="show">
+    <div class="container">
+      <h2 class="title">{{ $t('edit.topic.link.title') }}</h2>
 
-          <input
-            id="LinkURLInput"
-            type="url"
-            v-model="inputHref"
-            :placeholder="`${$t('edit.topic.link.URLLabel')} (${exampleURL})`"
-            class="input"
-          />
-          <input
-            id="LinkTextInput"
-            type="text"
-            v-model="inputText"
-            :placeholder="$t('edit.topic.link.textLabel')"
-            class="input"
-          />
+      <KunInput
+        type="url"
+        v-model="inputHref"
+        :placeholder="`${$t('edit.topic.link.URLLabel')} (${exampleURL})`"
+        class="input"
+      />
+      <KunInput
+        type="text"
+        v-model="inputText"
+        :placeholder="$t('edit.topic.link.textLabel')"
+        class="input"
+      />
 
-          <div class="button-group">
-            <button @click="emits('cancel')" class="cancel-btn">
-              {{ $t('edit.topic.link.cancelInsert') }}
-            </button>
+      <div class="button-group">
+        <KunButton @click="emits('cancel')">
+          {{ $t('edit.topic.link.cancelInsert') }}
+        </KunButton>
 
-            <button @click="handleLinkInsert" class="confirm-btn">
-              {{ $t('edit.topic.link.confirmInsert') }}
-            </button>
-          </div>
-        </div>
+        <KunButton @click="handleLinkInsert">
+          {{ $t('edit.topic.link.confirmInsert') }}
+        </KunButton>
       </div>
-    </Transition>
-  </Teleport>
+    </div>
+  </KunDialog>
 </template>
 
 <style lang="scss" scoped>
-.mask {
-  position: fixed;
-  z-index: 9999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--kungalgame-mask-color-0);
-  transition: opacity 0.3s ease;
-  color: var(--kungalgame-font-color-3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.dialog {
+.container {
   width: 600px;
+  margin: auto;
   padding: 17px;
   background-color: var(--kungalgame-white);
   border-radius: 5px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  transition: all 0.3s ease;
 
   h2 {
     margin-bottom: 17px;
   }
-}
 
-.input {
-  background-color: transparent;
-  border: 2px solid var(--kungalgame-trans-blue-2);
-  border-radius: 5px;
-  color: var(--kungalgame-font-color-3);
-  padding: 8px;
-  margin-bottom: 17px;
-
-  &:focus {
-    border: 2px solid var(--kungalgame-blue-5);
+  input {
+    margin-bottom: 17px;
   }
 }
 
@@ -121,40 +86,15 @@ const handleLinkInsert = () => {
   flex-direction: row;
 
   button {
-    padding: 7px 17px;
-    border-radius: 5px;
-    color: var(--kungalgame-blue-5);
-    background-color: transparent;
-    border: 1px solid var(--kungalgame-blue-5);
-
     &:last-child {
       margin-left: 10px;
-    }
-
-    &:hover {
-      color: var(--kungalgame-white);
-      background-color: var(--kungalgame-blue-5);
     }
   }
 }
 
-.insert-enter-from {
-  opacity: 0;
-}
-
-.insert-leave-to {
-  opacity: 0;
-}
-
-.insert-enter-from .container,
-.insert-leave-to .container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-
 @media (max-width: 700px) {
-  .dialog {
-    margin: 0 17px;
+  .container {
+    margin: auto 17px;
   }
 }
 </style>
