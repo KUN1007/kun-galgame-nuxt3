@@ -27,7 +27,6 @@ defineProps<{
         }"
       />
 
-      <!-- Like -->
       <TopicFooterLike
         :tid="topic.tid"
         :to-uid="topic.user.uid"
@@ -44,7 +43,6 @@ defineProps<{
         }"
       />
 
-      <!-- Dislike -->
       <TopicFooterDislike
         :tid="topic.tid"
         :to-uid="topic.user.uid"
@@ -78,7 +76,6 @@ defineProps<{
       />
     </div>
 
-    <!-- Right part of the bottom (reply, comment, view only, edit) -->
     <div class="right">
       <TopicFooterReply
         :tid="topic.tid"
@@ -87,7 +84,6 @@ defineProps<{
         :to-floor="0"
       />
 
-      <!-- Share -->
       <span
         @click="
           useKunCopy(
@@ -105,13 +101,9 @@ defineProps<{
           position: 'bottom'
         }"
       >
-        <Icon name="lucide:share-2" />
+        <Icon class="icon" name="lucide:share-2" />
       </span>
 
-      <!-- View Only (TODO) -->
-      <!-- <span class="icon"><Icon icon="ph:user-focus-duotone" /></span> -->
-
-      <!-- Edit -->
       <TopicFooterRewrite
         :topic="topic"
         v-tooltip="{

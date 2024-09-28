@@ -86,7 +86,7 @@ onMounted(async () => {
 
     <div class="upload" v-if="isShowUpload && hasPermission">
       <span class="close" @click="isShowUpload = false">
-        <Icon name="lucide:x" />
+        <Icon class="icon" name="lucide:x" />
       </span>
       <KunUpload
         width="300px"

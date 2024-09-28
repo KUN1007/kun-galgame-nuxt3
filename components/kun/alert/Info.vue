@@ -75,7 +75,7 @@ watch(
         </Transition>
 
         <div class="close" @click="handleClose">
-          <Icon name="lucide:x" />
+          <Icon class="icon" name="lucide:x" />
         </div>
 
         <span class="progress"></span>

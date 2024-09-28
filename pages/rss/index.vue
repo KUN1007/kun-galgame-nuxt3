@@ -22,7 +22,7 @@ const getLink = (link: 'galgame' | 'topic') =>
     <div class="container">
       <div class="title">
         <div class="rss-icon">
-          <Icon name="lucide:rss" />
+          <Icon class="icon" name="lucide:rss" />
         </div>
 
         <div class="language">
@@ -49,7 +49,7 @@ const getLink = (link: 'galgame' | 'topic') =>
             rel="noopener noreferrer"
           >
             <span>
-              <Icon name="lucide:square-library" />
+              <Icon class="icon" name="lucide:square-library" />
             </span>
             <span class="name">{{ $t('rss.topic') }}</span>
           </a>
@@ -71,7 +71,7 @@ const getLink = (link: 'galgame' | 'topic') =>
             rel="noopener noreferrer"
           >
             <span>
-              <Icon name="lucide:gamepad-2" />
+              <Icon class="icon" name="lucide:gamepad-2" />
             </span>
             <span class="name">{{ $t('rss.galgame') }}</span>
           </a>

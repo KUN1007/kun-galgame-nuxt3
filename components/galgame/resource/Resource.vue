@@ -41,7 +41,7 @@ watch(
         <span>{{ $t('galgame.resource.name') }}</span>
 
         <span class="contribute" @click="handleClickContribute">
-          <Icon name="lucide:circle-plus" />
+          <Icon class="icon" name="lucide:circle-plus" />
         </span>
       </template>
     </KunHeader>

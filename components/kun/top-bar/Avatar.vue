@@ -33,11 +33,11 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
       }"
       to="/search"
     >
-      <Icon name="lucide:search" />
+      <Icon class="icon" name="lucide:search" />
     </NuxtLinkLocale>
 
     <span class="settings" @click="showKUNGalgamePanel = !showKUNGalgamePanel">
-      <Icon name="uiw:setting-o" />
+      <Icon class="icon" name="uiw:setting-o" />
     </span>
 
     <div class="avatar" v-if="name">

@@ -134,13 +134,13 @@ onUnmounted(() => {
           :class="pageData.sortOrder === 'asc' ? 'active' : ''"
           @click="pageData.sortOrder = 'asc'"
         >
-          <Icon name="lucide:arrow-up" />
+          <Icon class="icon" name="lucide:arrow-up" />
         </span>
         <span
           :class="pageData.sortOrder === 'desc' ? 'active' : ''"
           @click="pageData.sortOrder = 'desc'"
         >
-          <Icon name="lucide:arrow-down" />
+          <Icon class="icon" name="lucide:arrow-down" />
         </span>
       </div>
     </div>

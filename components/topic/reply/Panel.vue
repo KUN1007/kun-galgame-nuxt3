@@ -41,13 +41,15 @@ const handleClosePanel = async () => {
           <div class="title">
             <h3>
               <span>{{ $t('topic.panel.to') + ' @' }}</span>
-              <span>{{ replyDraft.toUserName }}</span>
+              <span class="username">{{ replyDraft.toUserName }}</span>
               <span>
                 <span class="emoji">(⋈◍＞◡＜◍)。✧♡ </span>
                 {{ `${$t(`topic.panel.${position}`)} ${replyDraft.toFloor}` }}
               </span>
             </h3>
-            <Icon @click="handleClosePanel" class="close" name="lucide:x" />
+            <span class="close">
+              <Icon class="icon" @click="handleClosePanel" name="lucide:x" />
+            </span>
           </div>
 
           <div class="content">
@@ -68,12 +70,6 @@ const handleClosePanel = async () => {
 </template>
 
 <style lang="scss" scoped>
-.close {
-  font-size: 30px;
-  cursor: pointer;
-  color: var(--kungalgame-font-color-1);
-}
-
 .root {
   position: fixed;
   bottom: 0;
@@ -93,6 +89,12 @@ const handleClosePanel = async () => {
   border: 1px solid var(--kungalgame-blue-5);
 
   @include kun-blur;
+
+  .close {
+    font-size: 30px;
+    cursor: pointer;
+    color: var(--kungalgame-font-color-1);
+  }
 }
 
 .title {
@@ -105,23 +107,23 @@ const handleClosePanel = async () => {
   span {
     user-select: none;
 
-    &:nth-child(2) {
-      margin: 0 5px;
-      cursor: pointer;
-      color: var(--kungalgame-blue-5);
-      border-bottom: 2px solid var(--kungalgame-white-9);
-
-      &:hover {
-        border-bottom: 2px solid var(--kungalgame-blue-5);
-      }
-    }
-
     &:nth-child(3) {
       margin-left: 10px;
     }
 
     .emoji {
       color: var(--kungalgame-pink-3);
+    }
+  }
+
+  .username {
+    margin: 0 5px;
+    cursor: pointer;
+    color: var(--kungalgame-blue-5);
+    border-bottom: 2px solid var(--kungalgame-white-9);
+
+    &:hover {
+      border-bottom: 2px solid var(--kungalgame-blue-5);
     }
   }
 }

@@ -3,7 +3,7 @@
 <template>
   <div class="skeleton">
     <ul>
-      <li><Icon name="line-md:image" /></li>
+      <li><Icon class="icon" name="line-md:image" /></li>
     </ul>
   </div>
 </template>

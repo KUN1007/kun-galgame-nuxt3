@@ -41,7 +41,7 @@ defineProps<{
       <span class="link" v-for="(kun, index) in galgame.official" :key="index">
         <KunCopy :text="kun" />
         <a :href="kun" target="_blank" rel="noopener noreferrer">
-          <Icon name="lucide:external-link" />
+          <Icon class="icon" name="lucide:external-link" />
         </a>
       </span>
     </template>
@@ -57,7 +57,7 @@ defineProps<{
         position: 'bottom'
       }"
     >
-      <Icon :name="platformIconMap[platform]" />
+      <Icon class="icon" :name="platformIconMap[platform]" />
     </span>
   </div>
 

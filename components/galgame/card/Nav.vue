@@ -76,13 +76,13 @@ watch(
         :class="sortOrder === 'asc' ? 'active' : ''"
         @click="sortOrder = 'asc'"
       >
-        <Icon name="lucide:arrow-up" />
+        <Icon class="icon" name="lucide:arrow-up" />
       </span>
       <span
         :class="sortOrder === 'desc' ? 'active' : ''"
         @click="sortOrder = 'desc'"
       >
-        <Icon name="lucide:arrow-down" />
+        <Icon class="icon" name="lucide:arrow-down" />
       </span>
     </div>
   </div>

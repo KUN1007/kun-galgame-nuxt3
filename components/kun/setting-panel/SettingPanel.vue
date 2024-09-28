@@ -38,19 +38,19 @@ const handelCloseSettingsPanel = () => {
             :class="showItemIndex === 1 ? 'active' : ''"
             @click="showItemIndex = 1"
           >
-            <Icon name="mdi:circle-transparent" />
+            <Icon class="icon" name="mdi:circle-transparent" />
           </span>
           <span
             :class="showItemIndex === 2 ? 'active' : ''"
             @click="showItemIndex = 2"
           >
-            <Icon name="tabler:blur" />
+            <Icon class="icon" name="tabler:blur" />
           </span>
           <span
             :class="showItemIndex === 3 ? 'active' : ''"
             @click="showItemIndex = 3"
           >
-            <Icon name="ci:font" />
+            <Icon class="icon" name="ci:font" />
           </span>
 
           <span
@@ -92,7 +92,7 @@ const handelCloseSettingsPanel = () => {
     <KunSettingPanelComponentsLoli class="loli" />
 
     <div class="close">
-      <Icon @click="handelCloseSettingsPanel" name="lucide:x" />
+      <Icon class="icon" @click="handelCloseSettingsPanel" name="lucide:x" />
     </div>
   </div>
 </template>

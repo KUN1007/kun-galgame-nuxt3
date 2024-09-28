@@ -33,7 +33,7 @@ const iconMap: Record<string, string> = {
           :key="index"
           :class="sec.toLowerCase()[0]"
         >
-          <Icon :name="iconMap[sec[0]]" />
+          <Icon class="icon" :name="iconMap[sec[0]]" />
         </span>
       </template>
       <span>{{ topic.title }}</span>
@@ -53,17 +53,17 @@ const iconMap: Record<string, string> = {
 
     <div class="status">
       <span>
-        <Icon name="lucide:mouse-pointer-click" />
+        <Icon class="icon" name="lucide:mouse-pointer-click" />
         <span>{{ props.topic.views }}</span>
       </span>
 
       <span>
-        <Icon name="lucide:thumbs-up" />
+        <Icon class="icon" name="lucide:thumbs-up" />
         <span v-if="props.topic.likes">{{ props.topic.likes }}</span>
       </span>
 
       <span>
-        <Icon name="lucide:reply" />
+        <Icon class="icon" name="lucide:reply" />
         <span v-if="actionsCount">{{ actionsCount }}</span>
       </span>
     </div>

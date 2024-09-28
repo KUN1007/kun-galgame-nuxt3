@@ -21,7 +21,7 @@ const rewriteReply = () => {
 
 <template>
   <span v-if="isShowRewrite" @click="rewriteReply" class="icon">
-    <Icon name="lucide:pencil" />
+    <Icon class="icon" name="lucide:pencil" />
   </span>
 </template>
 

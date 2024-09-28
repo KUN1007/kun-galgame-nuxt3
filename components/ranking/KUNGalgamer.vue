@@ -25,8 +25,8 @@ const users = computed(() => props.users)
       </div>
 
       <div class="detail">
-        <Icon :name="userIconMap[props.field]" />
-        <span>{{ Math.ceil(user.field) }}</span>
+        <Icon class="icon" :name="userIconMap[props.field]" />
+        <span class="title">{{ Math.ceil(user.field) }}</span>
       </div>
     </NuxtLinkLocale>
   </div>
@@ -84,7 +84,12 @@ const users = computed(() => props.users)
   display: flex;
   align-items: center;
   color: var(--kungalgame-pink-4);
-  span {
+
+  .icon {
+    z-index: -1;
+  }
+
+  .title {
     color: var(--kungalgame-font-color-3);
     margin-left: 10px;
   }

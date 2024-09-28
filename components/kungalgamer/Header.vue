@@ -30,7 +30,7 @@ onMounted(() => (isShowProgress.value = true))
         <div v-if="isShowProgress" class="mp-progress"></div>
       </Transition>
       <p>
-        <span><Icon name="lucide:lollipop"></Icon></span>
+        <span><Icon class="icon" name="lucide:lollipop" /></span>
         <span>{{ props.moemoepoint }}</span>
       </p>
     </div>

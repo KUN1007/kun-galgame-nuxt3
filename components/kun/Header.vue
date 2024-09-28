@@ -12,7 +12,7 @@ const isShowHelp = computed(() => props.showHelp ?? false)
   <div class="kun-header" :class="`size-${size}`">
     <slot name="header" />
     <span v-if="isShowHelp" @click="isShow = !isShow">
-      <Icon name="lucide:circle-help" />
+      <Icon class="icon" name="lucide:circle-help" />
     </span>
   </div>
 

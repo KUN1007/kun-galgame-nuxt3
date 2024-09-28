@@ -25,7 +25,7 @@ const emits = defineEmits<{
       @click="emits('set', item.value)"
     >
       <span v-if="item.icon" :style="{ 'font-size': iconSize }">
-        <Icon :name="item.icon" />
+        <Icon class="icon" :name="item.icon" />
       </span>
       <span v-if="item.i18n">
         {{ $t(`${item.i18n}`) }}

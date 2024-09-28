@@ -84,7 +84,7 @@ const handleFileChange = async (event: Event) => {
         position: 'bottom'
       }"
     >
-      <Icon name="lucide:bold" />
+      <Icon class="icon" name="lucide:bold" />
     </div>
 
     <div
@@ -101,7 +101,7 @@ const handleFileChange = async (event: Event) => {
         position: 'bottom'
       }"
     >
-      <Icon name="lucide:italic" />
+      <Icon class="icon" name="lucide:italic" />
     </div>
 
     <div
@@ -118,7 +118,7 @@ const handleFileChange = async (event: Event) => {
         position: 'bottom'
       }"
     >
-      <Icon name="lucide:strikethrough" />
+      <Icon class="icon" name="lucide:strikethrough" />
     </div>
 
     <div
@@ -135,7 +135,7 @@ const handleFileChange = async (event: Event) => {
         position: 'bottom'
       }"
     >
-      <Icon name="lucide:list" />
+      <Icon class="icon" name="lucide:list" />
     </div>
 
     <div
@@ -152,7 +152,7 @@ const handleFileChange = async (event: Event) => {
         position: 'bottom'
       }"
     >
-      <Icon name="lucide:list-ordered" />
+      <Icon class="icon" name="lucide:list-ordered" />
     </div>
 
     <div
@@ -169,7 +169,7 @@ const handleFileChange = async (event: Event) => {
         position: 'bottom'
       }"
     >
-      <Icon name="lucide:quote" />
+      <Icon class="icon" name="lucide:quote" />
     </div>
 
     <div
@@ -186,7 +186,7 @@ const handleFileChange = async (event: Event) => {
         position: 'bottom'
       }"
     >
-      <Icon name="lucide:minus" />
+      <Icon class="icon" name="lucide:minus" />
     </div>
 
     <div
@@ -203,7 +203,7 @@ const handleFileChange = async (event: Event) => {
         position: 'bottom'
       }"
     >
-      <Icon name="lucide:link" />
+      <Icon class="icon" name="lucide:link" />
       <KunMilkdownPluginsLinkInsertDialog
         :show="isShowInsertLink"
         @insert="
@@ -231,7 +231,7 @@ const handleFileChange = async (event: Event) => {
         position: 'bottom'
       }"
     >
-      <Icon name="lucide:square-code" />
+      <Icon class="icon" name="lucide:square-code" />
     </div>
 
     <div
@@ -248,7 +248,7 @@ const handleFileChange = async (event: Event) => {
         position: 'bottom'
       }"
     >
-      <Icon name="lucide:code-xml" />
+      <Icon class="icon" name="lucide:code-xml" />
     </div>
 
     <div
@@ -266,7 +266,7 @@ const handleFileChange = async (event: Event) => {
         position: 'bottom'
       }"
     >
-      <Icon name="lucide:image-plus" />
+      <Icon class="icon" name="lucide:image-plus" />
       <input
         ref="input"
         type="file"

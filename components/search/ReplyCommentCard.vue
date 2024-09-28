@@ -19,7 +19,10 @@ const content = computed(() =>
   <NuxtLinkLocale :to="`/topic/${data.tid}`" v-kun-gradient>
     <div class="title">
       <span>
-        <Icon :name="type === 'reply' ? 'lucide:reply' : 'uil:comment-dots'" />
+        <Icon
+          class="icon"
+          :name="type === 'reply' ? 'lucide:reply' : 'uil:comment-dots'"
+        />
       </span>
       <span>{{ data.title }}</span>
       <span>{{ formatTimeDifference(data.time, locale) }}</span>

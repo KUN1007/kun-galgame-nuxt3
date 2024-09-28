@@ -54,7 +54,7 @@ const handleSetOption = (value: string, index: number) => {
         >
           <span>{{ discardI18n ? kun : $t(`${i18n}.${kun}`) }}</span>
           <span v-if="checkedValue === kun">
-            <Icon name="lucide:check" />
+            <Icon class="icon" name="lucide:check" />
           </span>
         </span>
       </div>

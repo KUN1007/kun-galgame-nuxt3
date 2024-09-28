@@ -81,7 +81,7 @@ watch(
       <span v-if="pr.status == 2">{{ `#${pr.index}` }}</span>
 
       <span v-if="details" class="close" @click="details = undefined">
-        <Icon name="lucide:x" />
+        <Icon class="icon" name="lucide:x" />
       </span>
     </div>
   </div>

@@ -50,7 +50,7 @@ const handleClickLike = async () => {
 
 <template>
   <span class="like" :class="isLiked ? 'active' : ''" @click="handleClickLike">
-    <Icon name="lucide:thumbs-up" />
+    <Icon class="icon" name="lucide:thumbs-up" />
     <span v-if="likesCount">{{ likesCount }}</span>
   </span>
 </template>

@@ -78,7 +78,9 @@ const loliStatus = computed(() => {
             position: 'bottom'
           }"
         >
-          <span class="icon"><Icon name="lucide:mouse-pointer-click" /></span>
+          <span class="icon"
+            ><Icon class="icon" name="lucide:mouse-pointer-click"
+          /></span>
           {{ topic.views }}
         </span>
 

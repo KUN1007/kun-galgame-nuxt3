@@ -38,13 +38,13 @@ const handleRouterBack = () => {
 <template>
   <div class="nav-top">
     <div class="return" v-if="routeName !== 'index'" @click="handleRouterBack">
-      <Icon name="lucide:arrow-left" />
+      <Icon class="icon" name="lucide:arrow-left" />
     </div>
 
     <div class="hamburger">
       <Icon
-        name="lucide:menu"
         class="icon"
+        name="lucide:menu"
         @click="showKUNGalgameHamburger = true"
       />
 

@@ -70,7 +70,7 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
 
       <div class="action">
         <span class="reply" @click="handleClickComment(comment.user.uid)">
-          <Icon name="lucide:reply" />
+          <Icon class="icon" name="lucide:reply" />
         </span>
         <GalgameCommentLike :comment="comment" />
         <span
@@ -78,7 +78,7 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
           v-if="isShowDelete"
           @click="handleDeleteComment(comment.gid, comment.gcid)"
         >
-          <Icon name="lucide:trash-2" />
+          <Icon class="icon" name="lucide:trash-2" />
         </span>
       </div>
     </div>

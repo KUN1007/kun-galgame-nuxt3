@@ -60,7 +60,7 @@ const prevPage = () => {
       :disabled="currentPage === 1"
       aria-label="previous"
     >
-      <Icon name="lucide:chevron-left" />
+      <Icon class="icon" name="lucide:chevron-left" />
     </button>
 
     <button @click="gotoPage(1)" :class="{ active: currentPage === 1 }">
@@ -92,7 +92,7 @@ const prevPage = () => {
       :disabled="currentPage === totalPages"
       aria-label="next"
     >
-      <Icon name="lucide:chevron-right" />
+      <Icon class="icon" name="lucide:chevron-right" />
     </button>
 
     <div class="loading" v-if="props.status === 'pending'"></div>

@@ -13,7 +13,7 @@
         rel="noopener noreferrer"
         aria-label="KUN Visual Novel Open Source GitHub Repository. 鲲 Galgame 开源 GitHub 仓库."
       >
-        <Icon name="lucide:github" />
+        <Icon class="icon" name="lucide:github" />
       </a>
     </div>
 

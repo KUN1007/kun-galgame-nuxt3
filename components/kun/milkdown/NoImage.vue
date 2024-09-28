@@ -169,7 +169,9 @@ watch(
     <Milkdown class="editor" />
 
     <div class="loading" v-if="editorInfo.loading.value">
-      <span><Icon name="svg-spinners:12-dots-scale-rotate" /></span>
+      <span
+        ><Icon class="icon" name="svg-spinners:12-dots-scale-rotate"
+      /></span>
       <span>{{ $t('edit.topic.loading') }}</span>
     </div>
   </div>

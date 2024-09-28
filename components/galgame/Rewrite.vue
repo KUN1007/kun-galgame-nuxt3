@@ -27,7 +27,7 @@ const handleRewriteGalgame = (galgame: GalgameDetail) => {
 
 <template>
   <span class="rewrite" @click="handleRewriteGalgame(galgame)">
-    <Icon name="lucide:pencil" />
+    <Icon class="icon" name="lucide:pencil" />
   </span>
 </template>
 

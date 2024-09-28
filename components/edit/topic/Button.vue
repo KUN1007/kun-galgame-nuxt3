@@ -140,7 +140,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     <p class="section">
       <Icon class="icon" name="lucide:layout-grid" />
       <span v-for="(kun, index) in section" :key="index">
-        <Icon :name="iconMap[kun[0]]" />
+        <Icon class="icon" :name="iconMap[kun[0]]" />
         <span>
           {{ $t(`edit.topic.section.${kun}`) }}
         </span>

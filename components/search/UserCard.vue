@@ -18,7 +18,7 @@ defineProps<{
     </div>
     <div class="addition">
       <span class="moemoepoint">
-        <span><Icon name="lucide:lollipop"></Icon></span>
+        <span><Icon class="icon" name="lucide:lollipop" /></span>
         <span>{{ user.moemoepoint }}</span>
       </span>
       <span>{{ dayjs(user.time).format('YYYY/MM/DD') }}</span>

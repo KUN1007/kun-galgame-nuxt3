@@ -34,7 +34,7 @@ defineProps<{
         />
 
         <span class="views">
-          <span><Icon name="lucide:mouse-pointer-click" /></span>
+          <span><Icon class="icon" name="lucide:mouse-pointer-click" /></span>
           <span>{{ galgame.views }}</span>
         </span>
       </div>
@@ -42,7 +42,7 @@ defineProps<{
       <div class="status">
         <div class="platform">
           <span v-for="(platform, i) in galgame.platforms" :key="i">
-            <Icon :name="platformIconMap[platform]" />
+            <Icon class="icon" :name="platformIconMap[platform]" />
           </span>
         </div>
 

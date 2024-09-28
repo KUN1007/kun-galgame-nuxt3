@@ -26,7 +26,7 @@ useHead({
           href="https://t.me/kungalgame"
           target="_blank"
         >
-          <Icon name="ph:telegram-logo" />
+          <Icon class="icon" name="ph:telegram-logo" />
         </a>
 
         <a
@@ -34,7 +34,7 @@ useHead({
           href="https://twitter.com/kungalgame"
           target="_blank"
         >
-          <Icon name="ri:twitter-x-line" />
+          <Icon class="icon" name="ri:twitter-x-line" />
         </a>
 
         <a
@@ -42,7 +42,7 @@ useHead({
           href="https://github.com/KUN1007/kun-galgame-nuxt3"
           target="_blank"
         >
-          <Icon name="lucide:github" />
+          <Icon class="icon" name="lucide:github" />
         </a>
 
         <a
@@ -50,7 +50,7 @@ useHead({
           href="https://discord.com/invite/5F4FS2cXhX"
           target="_blank"
         >
-          <Icon name="mingcute:discord-line" />
+          <Icon class="icon" name="mingcute:discord-line" />
         </a>
 
         <a
@@ -58,7 +58,7 @@ useHead({
           href="https://youtube.com/@kungalgame"
           target="_blank"
         >
-          <Icon name="lucide:youtube" />
+          <Icon class="icon" name="lucide:youtube" />
         </a>
 
         <a
@@ -138,17 +138,8 @@ useHead({
   justify-content: space-around;
   font-size: 20px;
 
-  & > a {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  a {
     color: var(--kungalgame-font-color-3);
-  }
-
-  span {
-    margin-bottom: 20px;
-    cursor: pointer;
   }
 }
 
@@ -159,6 +150,7 @@ useHead({
   cursor: pointer;
   text-align: center;
   transition: 0.2s;
+  flex-shrink: 0;
 
   &:hover {
     color: var(--kungalgame-red-4);

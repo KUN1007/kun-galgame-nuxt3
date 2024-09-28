@@ -45,12 +45,12 @@ const handleChangeImage = async (index: number) => {
       <li class="options">
         <div>
           <span class="prev" @click="prevPage">
-            <Icon name="lucide:chevron-left" />
+            <Icon class="icon" name="lucide:chevron-left" />
           </span>
         </div>
         <div>
           <span class="next" @click="nextPage">
-            <Icon name="lucide:chevron-right" />
+            <Icon class="icon" name="lucide:chevron-right" />
           </span>
         </div>
         <div>

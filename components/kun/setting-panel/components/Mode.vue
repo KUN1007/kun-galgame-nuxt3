@@ -45,7 +45,7 @@ watch(
         :class="$colorMode.preference === mode.name ? 'active' : ''"
       >
         <Icon
-          class="sun"
+          class="icon"
           :name="mode.icon"
           @click="$colorMode.preference = mode.name"
         />
@@ -69,23 +69,23 @@ watch(
   justify-content: space-around;
   align-items: center;
 
-  span {
+  & > span {
     display: flex;
     cursor: pointer;
     align-items: center;
     padding-bottom: 2px;
-  }
 
-  span:nth-child(1) {
-    color: var(--kungalgame-red-4);
-  }
+    &:nth-child(1) {
+      color: var(--kungalgame-red-4);
+    }
 
-  span:nth-child(2) {
-    color: var(--kungalgame-blue-5);
-  }
+    &:nth-child(2) {
+      color: var(--kungalgame-blue-5);
+    }
 
-  span:nth-child(3) {
-    color: var(--kungalgame-purple-4);
+    &:nth-child(3) {
+      color: var(--kungalgame-purple-4);
+    }
   }
 }
 

@@ -27,7 +27,7 @@ const rewriteTopic = () => {
 
 <template>
   <span v-if="isShowRewrite" @click="rewriteTopic" class="icon">
-    <Icon name="lucide:pencil" />
+    <Icon class="icon" name="lucide:pencil" />
   </span>
 </template>
 

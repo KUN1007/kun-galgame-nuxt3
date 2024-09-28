@@ -40,7 +40,7 @@ const handelClickShowMoreOperation = async (mid: number) => {
 const handleGetMessageDetail = (message: Message) => {
   return computed(() => {
     const messageContent = markdownToText(messageMap.get(message.mid) ?? '')
-    return `${getMessageI18n(locale.value, message)} => ${messageContent}`
+    return `${getMessageI18n(locale.value as Language, message)} => ${messageContent}`
   }).value
 }
 
@@ -84,10 +84,10 @@ const handleDeleteMessage = async (mid: number) => {
       <div class="top">
         <div class="status">
           <span class="unread" v-if="msg.status === 'unread'">
-            <Icon name="lucide:info" />
+            <Icon class="icon" name="lucide:info" />
           </span>
           <span class="read" v-if="msg.status === 'read'">
-            <Icon name="lucide:check-check" />
+            <Icon class="icon" name="lucide:check-check" />
           </span>
         </div>
 
@@ -96,7 +96,7 @@ const handleDeleteMessage = async (mid: number) => {
         </span>
       </div>
 
-      <div class="content" v-html="getMessageI18n(locale, msg)"></div>
+      <div class="content" v-html="getMessageI18n(locale as Language, msg)" />
 
       <div class="bottom">
         <NuxtLinkLocale
@@ -104,14 +104,14 @@ const handleDeleteMessage = async (mid: number) => {
           class="link"
           :to="msg.tid > 0 ? `/topic/${msg.tid}` : `/galgame/${-msg.tid}`"
         >
-          <Icon name="lucide:external-link" />
+          <Icon class="icon" name="lucide:external-link" />
         </NuxtLinkLocale>
         <span
           class="more-btn"
           :class="isShowMoreOperation(msg.mid) ? 'more-btn-active' : ''"
           @click="handelClickShowMoreOperation(msg.mid)"
         >
-          <Icon name="lucide:chevron-right" />
+          <Icon class="icon" name="lucide:chevron-right" />
         </span>
       </div>
 

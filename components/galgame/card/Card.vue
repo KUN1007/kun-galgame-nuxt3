@@ -27,7 +27,7 @@ defineProps<{
         <div class="platform">
           <template v-if="galgame.platform.length">
             <span v-for="(platform, i) in galgame.platform" :key="i">
-              <Icon :name="platformIconMap[platform]" />
+              <Icon class="icon" :name="platformIconMap[platform]" />
             </span>
           </template>
           <span v-if="!galgame.platform.length" class="preparing">
@@ -37,12 +37,12 @@ defineProps<{
         <div class="mask">
           <div class="data">
             <span>
-              <Icon name="lucide:mouse-pointer-click" />
+              <Icon class="icon" name="lucide:mouse-pointer-click" />
               <span>{{ galgame.views }}</span>
             </span>
 
             <span>
-              <Icon name="lucide:thumbs-up" />
+              <Icon class="icon" name="lucide:thumbs-up" />
               <span>{{ galgame.likes }}</span>
             </span>
           </div>

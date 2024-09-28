@@ -19,13 +19,13 @@ const emits = defineEmits<{
         :class="sortOrder === 'asc' ? 'active' : ''"
         @click="emits('setSortOrder', 'asc')"
       >
-        <Icon name="lucide:arrow-up" />
+        <Icon class="icon" name="lucide:arrow-up" />
       </span>
       <span
         :class="sortOrder === 'desc' ? 'active' : ''"
         @click="emits('setSortOrder', 'desc')"
       >
-        <Icon name="lucide:arrow-down" />
+        <Icon class="icon" name="lucide:arrow-down" />
       </span>
     </div>
 

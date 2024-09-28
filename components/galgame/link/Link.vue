@@ -75,7 +75,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
         <span>{{ $t('galgame.link.name') }}</span>
 
         <span class="contribute" @click="isShowEdit = !isShowEdit">
-          <Icon name="lucide:circle-plus" />
+          <Icon class="icon" name="lucide:circle-plus" />
         </span>
       </template>
     </KunHeader>
@@ -107,7 +107,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
           }"
         />
         <a :href="link.link" target="_blank" rel="noopener noreferrer">
-          <Icon name="lucide:external-link" />
+          <Icon class="icon" name="lucide:external-link" />
         </a>
         <span
           v-if="uid === link.uid"
@@ -115,7 +115,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
           @click="handleDeleteLink(link.gid, link.glid)"
           :pending="isFetching"
         >
-          <Icon name="lucide:trash-2" />
+          <Icon class="icon" name="lucide:trash-2" />
         </span>
       </span>
     </div>

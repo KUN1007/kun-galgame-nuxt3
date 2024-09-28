@@ -38,6 +38,7 @@ const messageClass = computed(
   <div class="kungalgame-message-container">
     <div class="kungalgame-message" :class="messageClass">
       <Icon
+        class="icon"
         :icon="`lucide:${
           {
             warn: 'triangle-alert',
@@ -46,7 +47,6 @@ const messageClass = computed(
             info: 'info'
           }[type]
         }`"
-        class="icon"
       />
 
       <span v-if="!isRichText" class="message">{{ messageRef }}</span>

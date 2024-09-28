@@ -82,7 +82,7 @@ const handleShowMore = () => {
           <div class="item-container">
             <div v-for="(kun, index) in item" :key="index" class="item">
               <span class="icon-item">
-                <Icon :name="kun.icon"></Icon>
+                <Icon class="icon" :name="kun.icon"></Icon>
               </span>
               <NuxtLinkLocale
                 :to="kun.router"
@@ -132,7 +132,7 @@ const handleShowMore = () => {
           <span class="more" @click="handleShowMore">
             <span>{{ $t('header.hamburger.settings') }}</span>
             <span :class="isShowSettings ? 'active' : ''">
-              <Icon name="lucide:chevron-down" />
+              <Icon class="icon" name="lucide:chevron-down" />
             </span>
           </span>
         </div>
@@ -143,12 +143,12 @@ const handleShowMore = () => {
             href="https://github.com/KUN1007/kun-galgame-nuxt3"
             target="_blank"
           >
-            <span><Icon name="lucide:github" /></span>
+            <span><Icon class="icon" name="lucide:github" /></span>
             <span>GitHub</span>
           </a>
 
           <NuxtLinkLocale to="/rss">
-            <span><Icon name="lucide:rss" /></span>
+            <span><Icon class="icon" name="lucide:rss" /></span>
             <span>RSS</span>
           </NuxtLinkLocale>
 
@@ -157,7 +157,7 @@ const handleShowMore = () => {
             href="https://t.me/kungalgame"
             target="_blank"
           >
-            <span><Icon name="ph:telegram-logo" /></span>
+            <span><Icon class="icon" name="ph:telegram-logo" /></span>
             <span>Telegram</span>
           </a>
         </div>

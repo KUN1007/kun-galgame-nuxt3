@@ -27,11 +27,11 @@ const logs = computed(() => props.logs)
 
     <div class="footer">
       <div class="time">
-        <Icon class="hourglass" name="lucide:clock-7" />
+        <Icon class="icon" class="hourglass" name="lucide:clock-7" />
         <span>{{ dayjs(kun.time).format('YYYY/MM/DD') }}</span>
       </div>
       <div class="result">
-        <Icon class="warning" name="lucide:triangle-alert" />
+        <Icon class="icon" class="warning" name="lucide:triangle-alert" />
         <span v-if="typeof kun.result === 'number'">
           {{ $t('nonMoe.moemoepoint') }} - {{ kun.result }}
         </span>

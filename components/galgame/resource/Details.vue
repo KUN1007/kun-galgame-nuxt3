@@ -103,7 +103,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
       <span class="link" v-for="(kun, index) in details.link" :key="index">
         <KunCopy :text="kun" />
         <a :href="kun" target="_blank" rel="noopener noreferrer">
-          <Icon name="lucide:external-link" />
+          <Icon class="icon" name="lucide:external-link" />
         </a>
       </span>
 
@@ -132,13 +132,13 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
 
       <div class="user-btn" v-if="details.user.uid === uid">
         <span class="rewrite" @click="handleRewriteResource(details)">
-          <Icon name="lucide:pencil" />
+          <Icon class="icon" name="lucide:pencil" />
         </span>
         <span
           class="delete"
           @click="handleDeleteResource(details.gid, details.grid)"
         >
-          <Icon name="lucide:trash-2" />
+          <Icon class="icon" name="lucide:trash-2" />
         </span>
       </div>
 

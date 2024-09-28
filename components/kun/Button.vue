@@ -13,7 +13,11 @@ const { ripples, onClick } = useRipple()
 
 <template>
   <button class="kun-button" @click="onClick" :class="type" :disabled="pending">
-    <Icon v-if="pending" name="svg-spinners:12-dots-scale-rotate" />
+    <Icon
+      class="icon"
+      v-if="pending"
+      name="svg-spinners:12-dots-scale-rotate"
+    />
     <slot />
     <KunUtilsRipple :ripples="ripples" />
   </button>

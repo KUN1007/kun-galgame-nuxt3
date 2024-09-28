@@ -126,7 +126,7 @@ const handleClickSortOrder = () => {
 }
 
 .submenu {
-  top: 40px;
+  top: 38px;
   position: absolute;
   width: 100%;
   display: none;

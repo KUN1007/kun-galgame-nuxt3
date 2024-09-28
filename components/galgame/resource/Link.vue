@@ -79,19 +79,19 @@ watch(
     <div class="base">
       <div class="info">
         <span class="rewrite" v-if="link.grid === rewriteResourceId">
-          <Icon name="svg-spinners:12-dots-scale-rotate" />
+          <Icon class="icon" name="svg-spinners:12-dots-scale-rotate" />
           <span>{{ $t('galgame.resource.edit') }}</span>
         </span>
         <span>
-          <Icon :name="typeIconMap[link.type]" />
+          <Icon class="icon" :name="typeIconMap[link.type]" />
           <span>{{ $t(`galgame.resource.type.${link.type}`) }}</span>
         </span>
         <span>
-          <Icon name="lucide:database" />
+          <Icon class="icon" name="lucide:database" />
           <span>{{ link.size }}</span>
         </span>
         <span>
-          <Icon :name="platformIconMap[link.platform]" />
+          <Icon class="icon" :name="platformIconMap[link.platform]" />
           <span>{{ $t(`galgame.resource.platform.${link.platform}`) }}</span>
         </span>
         <span>
@@ -101,7 +101,7 @@ watch(
 
       <div class="status">
         <span v-if="details" class="close" @click="details = undefined">
-          <Icon name="lucide:x" />
+          <Icon class="icon" name="lucide:x" />
         </span>
 
         <KunButton
@@ -150,7 +150,7 @@ watch(
             position: 'bottom'
           }"
         >
-          <Icon name="lucide:triangle-alert" />
+          <Icon class="icon" name="lucide:triangle-alert" />
         </NuxtLinkLocale>
 
         <span

@@ -94,7 +94,7 @@ onMounted(async () => {
       <div class="info">
         <p>{{ name }}</p>
         <p>
-          <span><Icon name="lucide:lollipop"></Icon></span>
+          <span><Icon class="icon" name="lucide:lollipop" /></span>
           <span>{{ moemoepoint }}</span>
         </p>
       </div>

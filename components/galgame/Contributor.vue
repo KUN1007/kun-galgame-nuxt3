@@ -38,7 +38,7 @@ defineProps<{
         position: 'bottom'
       }"
     >
-      <span><Icon name="lucide:mouse-pointer-click" /></span>
+      <span><Icon class="icon" name="lucide:mouse-pointer-click" /></span>
       <span>{{ views }}</span>
     </span>
   </div>

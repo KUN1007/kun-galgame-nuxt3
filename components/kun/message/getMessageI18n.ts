@@ -1,7 +1,5 @@
 import type { Message } from '~/types/api/message'
 
-type Locale = 'en-us' | 'ja=jp' | 'zh-cn' | 'zh-tw'
-
 const messageTemplates: Record<string, Record<string, string>> = {
   'en-us': {
     upvoted: '{{senderName}} upvoted you!',
@@ -61,13 +59,13 @@ const messageTemplates: Record<string, Record<string, string>> = {
   }
 }
 
-const getMessageContent = (locale: Locale, message: Message): string => {
+const getMessageContent = (locale: Language, message: Message): string => {
   const template =
     messageTemplates[locale][message.type] || messageTemplates[locale].default
   return template.replace('{{senderName}}', message.senderName)
 }
 
-export const getMessageI18n = (locale: Locale, message: Message) => {
+export const getMessageI18n = (locale: Language, message: Message) => {
   if (message.type === 'admin') {
     return messageTemplates[locale].admin
   }

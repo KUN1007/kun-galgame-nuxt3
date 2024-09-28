@@ -18,8 +18,8 @@ const topics = computed(() => props.topics)
       </div>
 
       <div class="detail">
-        <Icon :name="topicIconMap[props.field]" />
-        <span>{{ Math.ceil(topic.field) }}</span>
+        <Icon class="icon" :name="topicIconMap[props.field]" />
+        <span class="title">{{ Math.ceil(topic.field) }}</span>
       </div>
     </NuxtLinkLocale>
   </div>
@@ -59,7 +59,11 @@ const topics = computed(() => props.topics)
   align-items: center;
   color: var(--kungalgame-blue-5);
 
-  span {
+  .icon {
+    z-index: -1;
+  }
+
+  .title {
     color: var(--kungalgame-font-color-3);
     margin-left: 10px;
   }

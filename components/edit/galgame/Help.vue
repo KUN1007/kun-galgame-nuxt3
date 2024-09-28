@@ -10,7 +10,7 @@ const { locale } = useI18n()
       rel="noopener noreferrer"
     >
       <span>{{ $t('edit.galgame.help.name') }}</span>
-      <Icon name="mingcute:external-link-line" />
+      <Icon class="icon" name="mingcute:external-link-line" />
     </a>
   </h2>
 

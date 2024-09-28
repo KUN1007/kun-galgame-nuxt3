@@ -7,8 +7,12 @@ const props = defineProps<{
 
 <template>
   <span class="tags" v-if="$props.tags.length">
-    <Icon v-if="props.isShowIcon" class="tag" name="lucide:tags" />
-    <span v-for="(tag, index) in tags" :key="index">{{ tag }}</span>
+    <span v-if="props.isShowIcon" class="label">
+      <Icon class="icon" name="lucide:tags" />
+    </span>
+    <span class="tag-list" v-for="(tag, index) in tags" :key="index">
+      {{ tag }}
+    </span>
   </span>
 </template>
 
@@ -20,7 +24,7 @@ const props = defineProps<{
   color: var(--kungalgame-font-color-3);
   user-select: text;
 
-  span {
+  .tag-list {
     margin: 3px;
     font-size: small;
     padding: 3px 17px;
@@ -30,7 +34,7 @@ const props = defineProps<{
   }
 }
 
-.tag {
+.label {
   font-size: 23px;
   margin: 0 20px;
   color: var(--kungalgame-blue-5);

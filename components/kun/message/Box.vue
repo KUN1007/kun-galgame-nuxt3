@@ -110,7 +110,7 @@ onBeforeUnmount(async () => {
     <div class="title">
       <span class="name">{{ $t('header.message.message') }}</span>
       <span class="icon-item" @click="showKUNGalgameMessageBox = false">
-        <Icon name="lucide:x" />
+        <Icon class="icon" name="lucide:x" />
       </span>
     </div>
 
@@ -125,7 +125,7 @@ onBeforeUnmount(async () => {
         :class="isShowFunction ? 'func-icon-active' : ''"
         @click="isShowFunction = !isShowFunction"
       >
-        <Icon name="lucide:chevron-right" />
+        <Icon class="icon" name="lucide:chevron-right" />
       </span>
 
       <div class="func-container" v-if="isShowFunction">

@@ -66,7 +66,7 @@ const handleCollapsed = (item: Nav) => {
         @click="handleCollapsed(kun)"
       >
         <span class="nav-icon">
-          <Icon :name="iconMap[kun.name] ?? ''" />
+          <Icon class="icon" :name="iconMap[kun.name] ?? ''" />
         </span>
         <span class="name">{{ $t(`user.nav.${kun.name}`) }}</span>
         <span
@@ -74,7 +74,7 @@ const handleCollapsed = (item: Nav) => {
           v-if="kun.collapsed !== undefined"
           :class="kun.collapsed ? '' : 'active-chevron'"
         >
-          <Icon name="lucide:chevron-right" />
+          <Icon class="icon" name="lucide:chevron-right" />
         </span>
       </div>
 

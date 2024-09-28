@@ -37,7 +37,7 @@ const isShowOR = ref(false)
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Icon name="lucide:external-link" />
+              <Icon class="icon" name="lucide:external-link" />
             </a>
           </div>
         </div>

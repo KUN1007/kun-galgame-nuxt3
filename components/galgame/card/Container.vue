@@ -22,7 +22,7 @@ const { data, status } = await useFetch(`/api/galgame`, {
       :page="pageData.page.value"
       :limit="pageData.limit.value"
       :sum="data?.totalCount"
-      :loading="pending"
+      :status="status"
       @set-page="(newPage) => (pageData.page.value = newPage)"
     />
 

@@ -102,7 +102,7 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
           position: 'bottom'
         }"
       >
-        <Icon name="lucide:share-2" />
+        <Icon class="icon" name="lucide:share-2" />
       </span>
 
       <TopicReplyRewrite
@@ -126,7 +126,7 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
           position: 'bottom'
         }"
       >
-        <Icon name="uil:comment-dots" />
+        <Icon class="icon" name="uil:comment-dots" />
       </span>
     </div>
   </div>

@@ -43,7 +43,7 @@ const handleClose = () => {
       <NuxtLinkLocale class="user" :to="`/kungalgamer/${message.uid}/info`">
         {{ message.name }}
       </NuxtLinkLocale>
-      <span><Icon :name="iconMap[message.type]" /></span>
+      <span><Icon class="icon" :name="iconMap[message.type]" /></span>
       <NuxtLinkLocale
         v-if="message.tid"
         class="link"
