@@ -5,7 +5,7 @@ import type { GalgamePR, GalgamePRDetails } from '~/types/api/galgame-pr'
 const props = defineProps<{
   gid: number
   pr: GalgamePR
-  pending: boolean
+  status: UseFetchStatus
   refresh: () => {}
 }>()
 
@@ -38,9 +38,9 @@ const handleGetDetails = async (gprid: number) => {
 }
 
 watch(
-  () => props.pending,
+  () => props.status,
   () => {
-    if (props.pending) {
+    if (props.status === 'pending') {
       details.value = undefined
     }
   }

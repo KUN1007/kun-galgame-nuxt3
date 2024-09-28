@@ -27,7 +27,7 @@ const orderItems = [
   }
 ]
 
-const { data, pending, refresh } = await useLazyFetch(
+const { data, status, refresh } = await useLazyFetch(
   `/api/galgame/${gid}/comment/all`,
   {
     method: 'GET',
@@ -82,11 +82,14 @@ onMounted(() => (commentToUid.value = toUser.uid))
       />
     </GalgameCommentPanel>
 
-    <div class="sad" v-if="!data?.totalCount && !pending">
+    <div class="sad" v-if="!data?.totalCount && status !== 'pending'">
       {{ $t('galgame.comment.sad') }}
     </div>
 
-    <div class="comments" v-if="!pending && data && data.totalCount">
+    <div
+      class="comments"
+      v-if="status !== 'pending' && data && data.totalCount"
+    >
       <GalgameComment
         v-for="comment in data.commentData"
         :key="comment.gcid"
@@ -101,7 +104,7 @@ onMounted(() => (commentToUid.value = toUser.uid))
         :page="pageData.page"
         :limit="pageData.limit"
         :sum="data.totalCount"
-        :loading="pending"
+        :status="status"
         @set-page="(newPage) => (pageData.page = newPage)"
       />
     </div>
@@ -109,7 +112,7 @@ onMounted(() => (commentToUid.value = toUser.uid))
 
   <KunFooter />
 
-  <KunSkeletonGalgameComment v-if="pending" />
+  <KunSkeletonGalgameComment v-if="status === 'pending'" />
 </template>
 
 <style lang="scss" scoped>

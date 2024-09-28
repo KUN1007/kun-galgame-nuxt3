@@ -7,16 +7,16 @@ const pageData = ref({
   language: locale.value
 })
 
-const { data, pending } = await useFetch(`/api/update/history`, {
+const { data, status } = await useFetch(`/api/update/history`, {
   method: 'GET',
   query: pageData,
   ...kungalgameResponseHandler
 })
 
 watch(
-  () => pending.value,
+  () => status.value,
   () => {
-    if (!pending.value) {
+    if (status.value === 'success') {
       window?.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -41,7 +41,7 @@ watch(
     :page="pageData.page"
     :limit="pageData.limit"
     :sum="data.totalCount"
-    :loading="pending"
+    :status="status"
     @set-page="(newPage) => (pageData.page = newPage)"
   />
 </template>

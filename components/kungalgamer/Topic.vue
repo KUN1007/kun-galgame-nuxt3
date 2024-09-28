@@ -13,7 +13,7 @@ const pageData = reactive({
   type: props.type
 })
 
-const { data, pending } = await useFetch(`/api/user/${props.uid}/topics`, {
+const { data, status } = await useFetch(`/api/user/${props.uid}/topics`, {
   method: 'GET',
   query: pageData,
   ...kungalgameResponseHandler
@@ -39,7 +39,7 @@ const { data, pending } = await useFetch(`/api/user/${props.uid}/topics`, {
       :page="pageData.page"
       :limit="pageData.limit"
       :sum="data.totalCount"
-      :loading="pending"
+      :status="status"
       @set-page="(newPage) => (pageData.page = newPage)"
     />
   </div>

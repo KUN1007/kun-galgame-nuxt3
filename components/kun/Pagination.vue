@@ -3,7 +3,7 @@ interface PaginationProps {
   page: number
   limit: number
   sum: number
-  loading: boolean
+  status: UseFetchStatus
 }
 
 const props = defineProps<PaginationProps>()
@@ -95,7 +95,7 @@ const prevPage = () => {
       <Icon name="lucide:chevron-right" />
     </button>
 
-    <div class="loading" v-if="props.loading"></div>
+    <div class="loading" v-if="props.status === 'pending'"></div>
   </div>
 </template>
 

@@ -10,7 +10,7 @@ const pageData = reactive({
   limit: 7
 })
 
-const { data, pending } = await useFetch(
+const { data, status } = await useFetch(
   `/api/galgame/${gid.value}/history/all`,
   {
     method: 'GET',
@@ -59,7 +59,7 @@ const { data, pending } = await useFetch(
       :page="pageData.page"
       :limit="pageData.limit"
       :sum="data.totalCount"
-      :loading="pending"
+      :status="status"
       @set-page="(newPage) => (pageData.page = newPage)"
     />
   </div>

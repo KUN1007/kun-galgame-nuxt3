@@ -14,7 +14,7 @@ const pageData = reactive({
   order: 'desc'
 })
 
-const { data, pending, refresh } = await useFetch(`/api/message/all`, {
+const { data, status, refresh } = await useFetch(`/api/message/all`, {
   method: 'GET',
   query: pageData,
   ...kungalgameResponseHandler
@@ -149,7 +149,7 @@ onBeforeUnmount(async () => {
         :page="pageData.page"
         :limit="pageData.limit"
         :sum="data?.totalCount"
-        :loading="pending"
+        :status="status"
         @set-page="(newPage) => (pageData.page = newPage)"
       />
     </KunMessage>

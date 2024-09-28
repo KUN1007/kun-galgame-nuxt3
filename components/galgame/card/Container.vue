@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const pageData = storeToRefs(useTempGalgameStore())
 
-const { data, pending } = await useFetch(`/api/galgame`, {
+const { data, status } = await useFetch(`/api/galgame`, {
   method: 'GET',
   query: pageData,
   ...kungalgameResponseHandler

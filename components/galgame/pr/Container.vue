@@ -9,7 +9,7 @@ const pageData = reactive({
   limit: 7
 })
 
-const { data, pending, refresh } = await useLazyFetch(
+const { data, status, refresh } = await useLazyFetch(
   `/api/galgame/${gid.value}/pr/all`,
   {
     method: 'GET',
@@ -30,17 +30,17 @@ const { data, pending, refresh } = await useLazyFetch(
       </template>
     </KunHeader>
 
-    <div v-if="!pending">
+    <div v-if="status === 'success'">
       <GalgamePrInfo
         v-for="(pr, index) in data.prs"
         :key="index"
         :gid="gid"
         :pr="pr"
-        :pending="pending"
+        :status="status"
         :refresh="refresh"
       />
     </div>
-    <KunSkeletonGalgameResource v-if="pending" />
+    <KunSkeletonGalgameResource v-if="status === 'pending'" />
 
     <KunPagination
       class="pagination"
@@ -48,7 +48,7 @@ const { data, pending, refresh } = await useLazyFetch(
       :page="pageData.page"
       :limit="pageData.limit"
       :sum="data.totalCount"
-      :loading="pending"
+      :status="status"
       @set-page="(newPage) => (pageData.page = newPage)"
     />
   </div>

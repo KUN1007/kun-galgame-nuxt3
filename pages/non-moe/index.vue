@@ -19,7 +19,7 @@ const langClass = computed(() => {
 
 const pageCount = ref(parseInt(page))
 
-const { data: totalLength, pending: totalPending } = await useFetch(
+const { data: totalLength, status: totalStatus } = await useFetch(
   `/api/non-moe/total`,
   {
     method: 'GET',
@@ -28,15 +28,12 @@ const { data: totalLength, pending: totalPending } = await useFetch(
   }
 )
 
-const { data: logs, pending: listPending } = await useFetch(
-  `/api/non-moe/logs`,
-  {
-    method: 'GET',
-    query: { page: pageCount, limit, language: locale.value },
-    watch: [pageCount],
-    ...kungalgameResponseHandler
-  }
-)
+const { data: logs, status: listStatus } = await useFetch(`/api/non-moe/logs`, {
+  method: 'GET',
+  query: { page: pageCount, limit, language: locale.value },
+  watch: [pageCount],
+  ...kungalgameResponseHandler
+})
 </script>
 
 <template>
@@ -60,7 +57,7 @@ const { data: logs, pending: listPending } = await useFetch(
             :page="pageCount"
             :limit="parseInt(limit)"
             :sum="totalLength || 0"
-            :loading="listPending || totalPending"
+            :status="listStatus || totalStatus"
             @set-page="(newPage) => (pageCount = newPage)"
           />
         </div>

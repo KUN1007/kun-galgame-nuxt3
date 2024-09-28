@@ -8,7 +8,7 @@ const props = defineProps<{
 }>()
 const page = ref(1)
 
-const { data, pending } = await useFetch(`/api/section`, {
+const { data, status } = await useFetch(`/api/section`, {
   method: 'GET',
   query: {
     section: props.section,
@@ -20,9 +20,9 @@ const { data, pending } = await useFetch(`/api/section`, {
 })
 
 watch(
-  () => pending.value,
+  () => status.value,
   () => {
-    if (!pending.value) {
+    if (status.value === 'success') {
       window?.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -95,7 +95,7 @@ watch(
     :page="page"
     :limit="23"
     :sum="data?.totalCount"
-    :loading="pending"
+    :status="status"
     @set-page="(newPage) => (page = newPage)"
   />
 </template>
