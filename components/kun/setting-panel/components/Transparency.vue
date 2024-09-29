@@ -24,15 +24,15 @@ watch(
 
     <div class="scroll">
       <span>10%</span>
-      <input
+
+      <KunSlider
         class="main"
-        min="10"
-        max="90"
-        step="1"
-        type="range"
+        :min="10"
+        :max="90"
+        :step="1"
         v-model="showKUNGalgamePageTransparency"
-        @touchmove.stop.passive
       />
+
       <span>90%</span>
     </div>
   </div>
@@ -43,16 +43,12 @@ watch(
   width: 100%;
   font-size: 15px;
   display: flex;
-
-  span {
-    margin-top: 15px;
-  }
+  align-items: center;
 }
 
 .main {
   width: 100%;
-  height: 10px;
-  margin: 20px 0;
+  margin: 20px 10px;
 }
 
 .container {

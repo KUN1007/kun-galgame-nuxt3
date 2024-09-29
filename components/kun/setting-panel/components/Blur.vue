@@ -32,14 +32,12 @@ watch(
 
     <div class="scroll">
       <span>0px</span>
-      <input
+      <KunSlider
         class="main"
-        min="0"
-        max="17"
-        step="1"
-        type="range"
+        :min="0"
+        :max="17"
+        :step="1"
         v-model="showKUNGalgameBackgroundBlur"
-        @touchmove.stop.passive
       />
       <span>17px</span>
     </div>
@@ -51,16 +49,12 @@ watch(
   width: 100%;
   font-size: 15px;
   display: flex;
-
-  span {
-    margin-top: 15px;
-  }
+  align-items: center;
 }
 
 .main {
   width: 100%;
-  height: 10px;
-  margin: 20px 0;
+  margin: 20px 10px;
 }
 
 .container {

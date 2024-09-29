@@ -279,15 +279,15 @@ const handleShowMore = () => {
     justify-content: center;
     align-items: center;
     color: var(--kungalgame-blue-5);
-  }
 
-  span {
-    &:first-child {
-      cursor: pointer;
-    }
+    & > span {
+      &:first-child {
+        cursor: pointer;
+      }
 
-    &:last-child {
-      font-size: x-small;
+      &:last-child {
+        font-size: x-small;
+      }
     }
   }
 }
