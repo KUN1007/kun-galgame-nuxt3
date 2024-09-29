@@ -72,7 +72,7 @@ export const galgame: Friend[] = [
   },
   {
     name: 'galgamex',
-    link: 'https://www.galgamex.com/',
+    link: 'https://www.galgamex.org/',
     label: 'Galgamex -- 一个二次元和galgame游戏资源交流社区'
   },
   {
@@ -109,8 +109,7 @@ export const galgame: Friend[] = [
   {
     name: 'xiuren',
     link: 'https://xiuren.cyou/',
-    label:
-      '分享galgame, SLG, RPG等资源'
+    label: '分享galgame, SLG, RPG等资源'
   }
 ]
 
