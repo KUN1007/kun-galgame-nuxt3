@@ -72,7 +72,8 @@ export default defineEventHandler(async (event) => {
         originalGalgame.uid,
         'requested',
         JSON.stringify(diffGalgame).slice(0, 233),
-        -gid
+        0,
+        gid
       )
     }
 

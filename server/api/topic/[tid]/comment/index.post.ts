@@ -83,7 +83,14 @@ export default defineEventHandler(async (event) => {
     ).lean()
 
     if (c_uid !== to_uid) {
-      await createMessage(c_uid, to_uid, 'commented', newComment.content, tid)
+      await createMessage(
+        c_uid,
+        to_uid,
+        'commented',
+        newComment.content,
+        tid,
+        0
+      )
       await UserModel.updateOne({ uid: to_uid }, { $inc: { moemoepoint: 1 } })
     }
 

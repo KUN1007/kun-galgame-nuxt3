@@ -54,7 +54,8 @@ export default defineEventHandler(async (event) => {
         result.to_uid,
         'commented',
         result.content.slice(0, 233),
-        -result.gid
+        0,
+        result.gid
       )
     }
 

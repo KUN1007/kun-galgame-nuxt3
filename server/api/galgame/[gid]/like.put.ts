@@ -40,7 +40,8 @@ const updateGalgameLike = async (gid: number, uid: number) => {
         galgame.uid,
         'liked',
         findNonNullProperty(galgame.name),
-        -gid
+        0,
+        gid
       )
     }
 

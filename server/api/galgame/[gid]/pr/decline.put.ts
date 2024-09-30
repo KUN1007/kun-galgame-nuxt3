@@ -74,7 +74,8 @@ export default defineEventHandler(async (event) => {
         galgamePR.uid,
         'declined',
         `#${galgamePR.index} ${note}`,
-        -galgamePR.gid
+        0,
+        galgamePR.gid
       )
     }
 

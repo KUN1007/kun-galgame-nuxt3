@@ -27,7 +27,8 @@ export default defineEventHandler(async (event) => {
     resource.uid,
     'expired',
     resource.link[0].slice(0, 233),
-    -resource.gid
+    0,
+    resource.gid
   )
 
   return 'MOEMOE expired galgame resource link successfully!'

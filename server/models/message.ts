@@ -8,7 +8,8 @@ const MessageSchema = new mongoose.Schema<MessageAttributes>(
     sender_uid: { type: Number, required: true },
     receiver_uid: { type: Number, required: true },
     time: { type: Number, default: 0 },
-    tid: { type: Number },
+    tid: { type: Number, default: 0 },
+    gid: { type: Number, default: 0 },
     content: { type: String, default: '', maxlength: 233 },
     status: { type: String, default: 'unread' },
     type: { type: String, required: true }

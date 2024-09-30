@@ -30,7 +30,8 @@ const updateGalgameCommentLike = async (gcid: number, uid: number) => {
       comment.c_uid,
       'liked',
       comment.content.slice(0, 233),
-      -comment.gid
+      0,
+      comment.gid
     )
 
     await session.commitTransaction()

@@ -38,7 +38,8 @@ const updateGalgameResourceLike = async (grid: number, uid: number) => {
       resource.uid,
       'liked',
       resource.link[0].slice(0, 233),
-      -resource.gid
+      0,
+      resource.gid
     )
 
     await session.commitTransaction()

@@ -49,7 +49,8 @@ const updateTopicUpvote = async (uid: number, tid: number) => {
       topic.uid,
       'upvoted',
       topic.content.slice(0, 233),
-      tid
+      tid,
+      0
     )
 
     await session.commitTransaction()

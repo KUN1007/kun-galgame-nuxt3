@@ -41,7 +41,8 @@ const updateTopicFavorite = async (uid: number, tid: number) => {
           topic.uid,
           'favorite',
           topic?.content.slice(0, 233) ?? '',
-          tid
+          tid,
+          0
         )
       }
     }

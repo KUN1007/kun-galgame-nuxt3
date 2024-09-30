@@ -6,7 +6,8 @@ export const createMessage = async (
   receiverUid: number,
   type: MessageType,
   content: string,
-  tid?: number
+  tid: number,
+  gid: number
 ) => {
   const newTopic = new MessageModel({
     sender_uid: senderUid,
@@ -14,7 +15,8 @@ export const createMessage = async (
     time: Date.now(),
     type,
     content,
-    tid
+    tid,
+    gid
   })
 
   return await newTopic.save()
@@ -26,14 +28,16 @@ export const createDedupMessage = async (
   receiverUid: number,
   type: MessageType,
   content: string,
-  tid?: number
+  tid: number,
+  gid: number
 ) => {
   const duplicatedMessage = await MessageModel.findOne({
     sender_uid: senderUid,
     receiver_uid: receiverUid,
     type,
     content,
-    tid
+    tid,
+    gid
   })
   if (duplicatedMessage) {
     return
@@ -45,7 +49,8 @@ export const createDedupMessage = async (
     time: Date.now(),
     type,
     content,
-    tid
+    tid,
+    gid
   })
 
   return await newTopic.save()

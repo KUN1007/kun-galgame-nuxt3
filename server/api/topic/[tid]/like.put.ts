@@ -44,7 +44,8 @@ const updateTopicLike = async (uid: number, tid: number) => {
         topic.uid,
         'liked',
         topic?.content.slice(0, 233) ?? '',
-        tid
+        tid,
+        0
       )
     }
 

@@ -34,7 +34,8 @@ const updateReplyLike = async (uid: number, rid: number) => {
       reply.r_uid,
       'liked',
       reply.content.slice(0, 233),
-      reply.tid
+      reply.tid,
+      0
     )
 
     await session.commitTransaction()

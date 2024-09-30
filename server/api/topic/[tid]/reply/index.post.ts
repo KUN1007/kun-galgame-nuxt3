@@ -99,7 +99,8 @@ export default defineEventHandler(async (event) => {
         toUid,
         'replied',
         newReply.content.slice(0, 233),
-        tid
+        tid,
+        0
       )
     }
 
@@ -119,7 +120,8 @@ export default defineEventHandler(async (event) => {
         name: toUser!.name
       },
       edited: newReply.edited,
-      content: newReply.content,
+      content: await markdownToHtml(newReply.content),
+      markdown: newReply.content,
       upvotes: {
         count: 0,
         isUpvoted: false

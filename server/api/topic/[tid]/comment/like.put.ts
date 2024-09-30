@@ -41,7 +41,8 @@ export default defineEventHandler(async (event) => {
         comment.c_uid,
         'liked',
         comment.content.slice(0, 233),
-        comment.tid
+        comment.tid,
+        0
       )
     }
 

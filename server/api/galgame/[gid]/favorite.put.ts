@@ -37,7 +37,8 @@ const updateGalgameFavorite = async (gid: number, uid: number) => {
           galgame.uid,
           'favorite',
           findNonNullProperty(galgame.name),
-          -gid
+          0,
+          gid
         )
       }
     }

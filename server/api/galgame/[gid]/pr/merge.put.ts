@@ -108,7 +108,8 @@ export default defineEventHandler(async (event) => {
         galgamePR.uid,
         'merged',
         `#${galgamePR.index}`,
-        -galgamePR.gid
+        0,
+        galgamePR.gid
       )
     }
 

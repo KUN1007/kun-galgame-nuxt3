@@ -6,7 +6,8 @@ export interface MessageAttributes {
   sender_uid: number
   receiver_uid: number
   time: number
-  tid?: number
+  tid: number
+  gid: number
   content: string
   status: MessageStatus
   type: MessageType

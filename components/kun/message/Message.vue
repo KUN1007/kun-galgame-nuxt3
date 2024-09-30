@@ -11,9 +11,6 @@ const props = defineProps<{
 const localePath = useLocalePath()
 const { locale } = useI18n()
 
-const activeMessage = ref<number[]>([])
-const messageMap = reactive(new Map<number, string | null>())
-
 const isShowMoreOperation = (mid: number) => {
   return activeMessage.value.includes(mid)
 }
@@ -96,7 +93,9 @@ const handleDeleteMessage = async (mid: number) => {
         </span>
       </div>
 
-      <div class="content" v-html="getMessageI18n(locale as Language, msg)" />
+      <div class="content">
+        {{ getMessageI18n(locale as Language, msg) }}
+      </div>
 
       <div class="bottom">
         <NuxtLinkLocale
