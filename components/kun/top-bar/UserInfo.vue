@@ -106,14 +106,14 @@ onMounted(async () => {
           </NuxtLinkLocale>
         </span>
 
-        <span @click="handleClickMessage">
-          <text>{{ $t('header.user.message') }}</text>
-          <text v-if="isShowMessageDot" class="message-dot"></text>
-        </span>
+        <NuxtLinkLocale to="/message">
+          <span>{{ $t('header.user.message') }}</span>
+          <span v-if="isShowMessageDot" class="message-dot"></span>
+        </NuxtLinkLocale>
 
         <span v-if="!isCheckIn" @click="handleCheckIn">
-          <text>{{ $t('header.user.check') }}</text>
-          <text class="message-dot"></text>
+          <span>{{ $t('header.user.check') }}</span>
+          <span class="message-dot"></span>
         </span>
 
         <span @click="logOut">{{ $t('header.user.logout') }}</span>
@@ -180,7 +180,8 @@ onMounted(async () => {
 }
 
 .func {
-  span {
+  & > span,
+  a {
     position: relative;
     cursor: pointer;
     color: var(--kungalgame-blue-5);
