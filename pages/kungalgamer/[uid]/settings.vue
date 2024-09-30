@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import type { UserInfo } from '~/types/api/user'
-
 definePageMeta({
-  layout: 'kungalgamer',
-  middleware: ['auth', 'deliver-uid']
+  middleware: 'auth'
 })
+
+import type { UserInfo } from '~/types/api/user'
 
 const props = defineProps<{
   user: UserInfo

@@ -5,10 +5,12 @@ import type { UserInfo } from '~/types/api/user'
 const user = ref<UserInfo>()
 const isBanned = ref(false)
 
+const route = useRoute()
 const { t } = useI18n()
 
-const uid = parseInt(useState<string>('routeParamUid').value)
-
+const uid = computed(() => {
+  return parseInt((route.params as { uid: string }).uid)
+})
 const {
   uid: currentUserUid,
   avatar,
@@ -16,7 +18,7 @@ const {
   moemoepoint
 } = storeToRefs(usePersistUserStore())
 
-const { data, refresh } = await useFetch(`/api/user/${uid}`, {
+const { data, refresh } = await useFetch(`/api/user/${uid.value}`, {
   method: 'GET',
   ...kungalgameResponseHandler
 })
@@ -30,7 +32,7 @@ if (data.value === 'banned') {
 provide('refresh', refresh)
 
 onMounted(() => {
-  if (!user.value || currentUserUid.value !== uid) {
+  if (!user.value || currentUserUid.value !== uid.value) {
     return
   }
   if (user.value.avatar) {
@@ -66,9 +68,7 @@ useHead({
       </div>
     </div>
 
-    <KunBlank v-if="!user && !isBanned">
-      {{ $t('user.notFound') }}
-    </KunBlank>
+    <KunNull :condition="!user && !isBanned" type="404" />
 
     <KunBlank v-if="isBanned">
       {{ $t('user.banned') }}

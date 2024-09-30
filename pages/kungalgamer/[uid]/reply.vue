@@ -1,8 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'kungalgamer'
-})
-
 import type { UserInfo } from '~/types/api/user'
 
 defineProps<{
