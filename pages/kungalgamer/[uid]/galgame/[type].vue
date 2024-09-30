@@ -33,6 +33,6 @@ const count = computed(() => {
   <KungalgamerList>
     <KungalgamerGalgame :uid="user.uid" :type="galgameType" />
 
-    <KungalgamerEmpty v-if="!count" />
+    <KunNull :condition="!count" type="null" />
   </KungalgamerList>
 </template>

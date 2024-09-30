@@ -762,8 +762,7 @@
     "complete": "Already there's nothing left..."
   },
   "message": {
-    "name": "Message",
-    "null": "Please fill this loli in because she hasn't any messages."
+    "name": "Message"
   },
   "footer": {
     "copyright": "Copyright © 2024 KUN Visual Novel",
@@ -927,5 +926,8 @@
       "message2": "Za~~~ko~♡. Check-in successful, you have earned {params} moemoepoints today.",
       "message3": "Zako~♡♡♡♡♡. Check-in successful, today's good luck has earned you {params} points!"
     }
+  },
+  "Null": {
+    "null": "Please fill this loli in because it is empty here."
   }
 }

@@ -42,9 +42,7 @@ const handleDeleteHistory = (historyIndex: number) => {
       </div>
     </div>
 
-    <span class="empty" v-if="!searchHistory.length">
-      {{ $t('search.emptyHistory') }}
-    </span>
+    <KunNull :condition="!searchHistory.length" type="null" />
   </div>
 </template>
 
@@ -113,12 +111,5 @@ const handleDeleteHistory = (historyIndex: number) => {
   cursor: pointer;
   color: var(--kungalgame-font-color-0);
   display: none;
-}
-
-.empty {
-  display: flex;
-  justify-content: center;
-  color: var(--kungalgame-blue-2);
-  font-style: oblique;
 }
 </style>

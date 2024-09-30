@@ -102,7 +102,8 @@ const statusName = () => {
       <div class="bio">
         <div>{{ $t('user.profile.bio') }}:</div>
         <pre v-if="user.bio">{{ user.bio }}</pre>
-        <div v-if="!user.bio" class="null">{{ $t('user.profile.null') }}</div>
+
+        <KunNull :condition="!user.bio" type="null" :is-show-sticker="false" />
       </div>
     </div>
   </div>

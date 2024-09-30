@@ -49,10 +49,7 @@ onMounted(async () => {
       <KunDivider margin="7px 0" />
     </template>
 
-    <div class="null" v-if="!data.totalCount">
-      <NuxtImg :src="useRandomSticker" />
-      <span>{{ $t('message.null') }}</span>
-    </div>
+    <KunNull :condition="!data.totalCount" type="null" />
 
     <KunPagination
       class="pagination"
@@ -87,24 +84,6 @@ header {
       content: '';
       margin: 0;
     }
-  }
-}
-
-.null {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  img {
-    width: 150px;
-    height: 150px;
-    margin: 10px 0;
-  }
-
-  span {
-    color: var(--kungalgame-pink-4);
-    font-weight: bold;
   }
 }
 

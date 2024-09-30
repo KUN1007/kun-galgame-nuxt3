@@ -14,6 +14,6 @@ defineProps<{
   <KungalgamerList>
     <KungalgamerComment :uid="user.uid" />
 
-    <KungalgamerEmpty v-if="!user.comment" />
+    <KunNull :condition="!user.comment" type="null" />
   </KungalgamerList>
 </template>

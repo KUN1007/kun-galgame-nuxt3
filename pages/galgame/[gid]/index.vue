@@ -109,9 +109,7 @@ if (galgame.value) {
   <div class="root">
     <Galgame v-if="galgame" :galgame="galgame" />
 
-    <KunBlank v-if="!galgame && !isBanned">
-      {{ $t('galgame.notFound') }}
-    </KunBlank>
+    <KunNull :condition="!galgame && !isBanned" type="404" />
 
     <KunBlank v-if="isBanned">
       {{ $t('galgame.banned') }}
