@@ -1,18 +1,18 @@
 <script setup lang="ts">
 const pageNumber = defineModel<number>({ required: true })
 
-const props = defineProps<{
-  pending: boolean
+defineProps<{
+  status: UseFetchStatus
 }>()
 </script>
 
 <template>
   <KunDivider margin="30px" padding="0 17px">
     <slot />
-    <span v-if="!props.pending" @click="pageNumber++" class="loader">
+    <span v-if="status !== 'pending'" @click="pageNumber++" class="loader">
       {{ $t('home.load') }}
     </span>
-    <span v-if="props.pending">
+    <span v-if="status === 'pending'">
       {{ $t('home.loading') }}
     </span>
   </KunDivider>

@@ -18,6 +18,7 @@ const getMessages = async (page: number, limit: number) => {
     uid: message.sender_uid,
     name: message.user[0].name,
     tid: message.tid,
+    gid: message.gid,
     type: message.type,
     content: message.content.slice(0, 50),
     time: message.time

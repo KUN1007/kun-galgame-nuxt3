@@ -7,16 +7,16 @@ const pageData = reactive({
   limit: 10
 })
 
-const { data, pending } = await useFetch(`/api/home/galgame`, {
+const { data, status } = await useFetch(`/api/home/galgame`, {
   method: 'GET',
   query: pageData
 })
 GalgameData.value = data.value
 
 watch(
-  () => [pageData.page, pending.value],
+  () => [pageData.page, status.value],
   () => {
-    if (data.value && !pending.value && pageData.page > 1) {
+    if (data.value && status.value !== 'pending' && pageData.page > 1) {
       GalgameData.value = GalgameData.value?.concat(data.value)
     }
   }
@@ -37,7 +37,7 @@ const handleClose = () => {
     </div>
   </div>
 
-  <HomeLoader v-model="pageData.page" :pending="pending">
+  <HomeLoader v-model="pageData.page" :status="status">
     <span v-if="pageData.page !== 1" class="close" @click="handleClose">
       {{ $t('home.fold') }}
     </span>

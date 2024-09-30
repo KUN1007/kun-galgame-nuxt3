@@ -16,16 +16,16 @@ const pageData = reactive({
   limit: 10
 })
 
-const { data, pending } = await useFetch(`/api/home/message`, {
+const { data, status } = await useFetch(`/api/home/message`, {
   method: 'GET',
   query: pageData
 })
 messageData.value = data.value
 
 watch(
-  () => [pageData.page, pending.value],
+  () => [pageData.page, status.value],
   () => {
-    if (data.value && !pending.value && pageData.page > 1) {
+    if (data.value && status.value !== 'pending' && pageData.page > 1) {
       messageData.value = messageData.value?.concat(data.value)
     }
   }
@@ -45,11 +45,8 @@ const handleClose = () => {
       </NuxtLinkLocale>
       <span><Icon class="icon" :name="iconMap[message.type]" /></span>
       <NuxtLinkLocale
-        v-if="message.tid"
         class="link"
-        :to="
-          message.tid > 0 ? `/topic/${message.tid}` : `/galgame/${-message.tid}`
-        "
+        :to="message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`"
       >
         <span>{{ message.content }}</span>
         <span>{{ formatTimeDifference(message.time, locale) }}</span>
@@ -57,7 +54,7 @@ const handleClose = () => {
     </div>
   </div>
 
-  <HomeLoader v-model="pageData.page" :pending="pending">
+  <HomeLoader v-model="pageData.page" :status="status">
     <span v-if="pageData.page !== 1" class="close" @click="handleClose">
       {{ $t('home.fold') }}
     </span>

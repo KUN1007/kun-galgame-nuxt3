@@ -5,8 +5,9 @@ const router = useRouter()
 const routeName = useRouteName()
 const localePath = useLocalePath()
 
-const { showKUNGalgameHamburger, showKUNGalgameMessageBox, messageStatus } =
-  storeToRefs(useTempSettingStore())
+const { showKUNGalgameHamburger, messageStatus } = storeToRefs(
+  useTempSettingStore()
+)
 
 watch(
   () => useRouteName().value,
@@ -50,10 +51,6 @@ const handleRouterBack = () => {
 
       <LazyKunTopBarHamburger />
     </div>
-
-    <Transition name="message">
-      <LazyKunMessageBox v-if="showKUNGalgameMessageBox" />
-    </Transition>
 
     <div class="kungalgame">
       <NuxtLinkLocale to="/">

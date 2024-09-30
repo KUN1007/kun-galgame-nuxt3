@@ -25,11 +25,12 @@ export interface MessageRequestData {
 
 export interface Message {
   mid: number
-  senderUid: number
-  senderName: string
+  sender: KunUser
   receiverUid: number
   time: number
-  tid?: number
+  tid: number
+  gid: number
+  content: string
   status: MessageStatus
   type: MessageType
 }

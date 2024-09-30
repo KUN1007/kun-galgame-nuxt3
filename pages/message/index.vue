@@ -4,6 +4,7 @@ definePageMeta({
 })
 
 const { t } = useI18n()
+const { messageStatus } = storeToRefs(useTempSettingStore())
 
 useHead({
   title: `${t('seo.kungalgame.title')} - ${t('head.title')}`,
@@ -14,6 +15,8 @@ useHead({
     }
   ]
 })
+
+onMounted(() => (messageStatus.value = 'online'))
 </script>
 
 <template>

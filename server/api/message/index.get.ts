@@ -26,17 +26,21 @@ const getMessages = async (
     .sort(sortOptions)
     .skip(skip)
     .limit(limit)
-    .populate('user', 'name', UserModel)
+    .populate('user', 'uid name avatar', UserModel)
     .lean()
 
   const totalCount = await MessageModel.countDocuments(queryData)
   const messages: Message[] = data.map((message) => ({
     mid: message.mid,
-    senderUid: message.sender_uid,
-    senderName: message.user[0].name,
+    sender: {
+      uid: message.user[0].uid,
+      name: message.user[0].name,
+      avatar: message.user[0].avatar
+    },
     receiverUid: message.receiver_uid,
     time: message.time,
     tid: message.tid,
+    gid: message.gid,
     content: message.content,
     status: message.status,
     type: message.type

@@ -27,7 +27,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 0 30px;
+  padding: 10px;
 
   @include kun-blur;
 }

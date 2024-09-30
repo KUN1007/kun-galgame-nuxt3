@@ -7,16 +7,16 @@ const pageData = reactive({
   limit: 10
 })
 
-const { data, pending } = await useFetch(`/api/home/resource`, {
+const { data, status } = await useFetch(`/api/home/resource`, {
   method: 'GET',
   query: pageData
 })
 resourceData.value = data.value
 
 watch(
-  () => [pageData.page, pending.value],
+  () => [pageData.page, status.value],
   () => {
-    if (data.value && !pending.value && pageData.page > 1) {
+    if (data.value && status.value !== 'pending' && pageData.page > 1) {
       resourceData.value = resourceData.value?.concat(data.value)
     }
   }
@@ -37,7 +37,7 @@ const handleClose = () => {
     />
   </div>
 
-  <HomeLoader v-model="pageData.page" :pending="pending">
+  <HomeLoader v-model="pageData.page" :status="status">
     <span v-if="pageData.page !== 1" class="close" @click="handleClose">
       {{ $t('home.fold') }}
     </span>

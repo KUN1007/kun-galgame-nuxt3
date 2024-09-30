@@ -1,8 +1,6 @@
 <script setup lang="ts">
 const { uid, name, moemoepoint } = storeToRefs(usePersistUserStore())
-const { showKUNGalgameMessageBox, messageStatus } = storeToRefs(
-  useTempSettingStore()
-)
+const { messageStatus } = storeToRefs(useTempSettingStore())
 const messageStore = useComponentMessageStore()
 
 const localePath = useLocalePath()
@@ -10,7 +8,7 @@ const container = ref<HTMLElement>()
 const isCheckIn = ref(true)
 
 const isShowMessageDot = computed(() => {
-  if (messageStatus.value === 'new' || messageStatus.value === 'admin') {
+  if (messageStatus.value === 'new') {
     return true
   }
   return false
@@ -25,14 +23,6 @@ const handlePanelBlur = async () => {
     setTimeout(resolve, 107)
   })
   emits('close')
-}
-
-const handleClickMessage = () => {
-  showKUNGalgameMessageBox.value = true
-
-  if (messageStatus.value === 'new' || messageStatus.value === 'admin') {
-    messageStatus.value = 'online'
-  }
 }
 
 const handleCheckIn = async () => {

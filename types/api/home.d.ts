@@ -4,7 +4,8 @@ import type { MessageType } from './message.d.ts'
 export interface HomeMessage {
   uid: number
   name: string
-  tid: number | undefined
+  tid: number
+  gid: number
   type: MessageType
   content: string
   time: number
