@@ -3,6 +3,8 @@ definePageMeta({
   layout: 'message'
 })
 
+const router = useRouter()
+
 const pageData = reactive({
   page: 1,
   limit: 10,
@@ -30,18 +32,34 @@ onMounted(async () => {
 
 <template>
   <div class="container" v-if="data">
-    <template v-for="(message, index) in data.messages" :key="index">
+    <header>
+      <Icon @click="router.back()" class="icon" name="lucide:chevron-left" />
+      <h2>{{ $t('message.name') }}</h2>
+    </header>
+
+    <KunDivider margin="7px 0" />
+
+    <template
+      v-show="data.totalCount"
+      v-for="(message, index) in data.messages"
+      :key="index"
+    >
       <MessageNotice :message="message" :refresh="refresh" />
 
       <KunDivider margin="7px 0" />
     </template>
 
+    <div class="null" v-if="!data.totalCount">
+      <NuxtImg :src="useRandomSticker" />
+      <span>{{ $t('message.null') }}</span>
+    </div>
+
     <KunPagination
       class="pagination"
-      v-if="data?.totalCount"
+      v-if="data.totalCount"
       :page="pageData.page"
       :limit="pageData.limit"
-      :sum="data?.totalCount"
+      :sum="data.totalCount"
       :status="status"
       @set-page="(newPage) => (pageData.page = newPage)"
     />
@@ -49,6 +67,47 @@ onMounted(async () => {
 </template>
 
 <style lang="scss" scoped>
+header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  span {
+    cursor: pointer;
+    font-size: 24px;
+    margin-right: 10px;
+
+    &:hover {
+      color: var(--kungalgame-blue-5);
+    }
+  }
+
+  h2 {
+    &::before {
+      content: '';
+      margin: 0;
+    }
+  }
+}
+
+.null {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    width: 150px;
+    height: 150px;
+    margin: 10px 0;
+  }
+
+  span {
+    color: var(--kungalgame-pink-4);
+    font-weight: bold;
+  }
+}
+
 .container {
   width: 100%;
 }

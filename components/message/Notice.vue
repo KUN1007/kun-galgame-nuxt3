@@ -40,12 +40,16 @@ const handleDeleteMessage = async (mid: number) => {
   <div class="message" :class="message.status === 'read' ? 'message-read' : ''">
     <div class="title">
       <div class="status">
-        <span class="unread" v-if="message.status === 'unread'">
-          <Icon class="icon" name="lucide:info" />
-        </span>
-        <span class="read" v-if="message.status === 'read'">
-          <Icon class="icon" name="lucide:check-check" />
-        </span>
+        <Icon
+          class="unread"
+          v-if="message.status === 'unread'"
+          name="lucide:info"
+        />
+        <Icon
+          class="read"
+          v-if="message.status === 'read'"
+          name="lucide:check-check"
+        />
       </div>
       <div>
         <NuxtLinkLocale :to="`/kungalgamer/${message.sender.uid}/info`">
@@ -89,6 +93,7 @@ const handleDeleteMessage = async (mid: number) => {
     align-items: center;
 
     .status {
+      display: flex;
       margin-right: 10px;
       font-size: 18px;
 

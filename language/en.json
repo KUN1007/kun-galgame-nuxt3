@@ -78,15 +78,6 @@
       "message": "Message",
       "check": "Daily Check",
       "logout": "Log out"
-    },
-    "message": {
-      "message": "Message",
-      "auto": "Auto Read",
-      "readAll": "Mark All Messages as Read",
-      "deleteAll": "Delete All Messages",
-      "goto": "Goto user",
-      "read": "Mark as read",
-      "delete": "Delete message"
     }
   },
   "back": {
@@ -769,6 +760,10 @@
     "load": "Load more",
     "loading": "少女祈祷中...",
     "complete": "Already there's nothing left..."
+  },
+  "message": {
+    "name": "Message",
+    "null": "Please fill this loli in because she hasn't any messages."
   },
   "footer": {
     "copyright": "Copyright © 2024 KUN Visual Novel",

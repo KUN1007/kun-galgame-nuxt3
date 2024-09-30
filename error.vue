@@ -11,13 +11,6 @@ const handleError = async () => {
   })
   location.reload()
 }
-
-const randomPackIndex = randomNum(1, 5)
-const randomStickerIndex = randomNum(1, 80)
-const stickerLink = computed(
-  () =>
-    `https://sticker.kungal.com/stickers/KUNgal${randomPackIndex}/${randomStickerIndex}.webp`
-)
 </script>
 
 <template>
@@ -25,7 +18,7 @@ const stickerLink = computed(
     <div class="root" v-if="error">
       <div class="card" v-if="error.statusCode === 404">
         <h1>404</h1>
-        <NuxtImg :src="stickerLink" />
+        <NuxtImg :src="useRandomSticker" />
         <p>{{ $t('pageError.404') }}</p>
         <KunButton type="danger" @click="handleError">
           {{ $t('pageError.remake') }}

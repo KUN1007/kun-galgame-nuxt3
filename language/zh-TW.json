@@ -78,15 +78,6 @@
       "message": "我的消息",
       "check": "每日簽到",
       "logout": "退出登入"
-    },
-    "message": {
-      "message": "消息",
-      "auto": "自動已讀",
-      "readAll": "標記所有消息為已讀",
-      "deleteAll": "刪除所有消息",
-      "goto": "前往用戶",
-      "read": "標記為已讀",
-      "delete": "刪除消息"
     }
   },
   "back": {
@@ -767,6 +758,10 @@
     "load": "加載更多",
     "loading": "少女祈禱中...",
     "complete": "已經。。。一滴也不剩了"
+  },
+  "message": {
+    "name": "消息",
+    "null": "請填滿這只蘿莉吧, 因為她沒有收到任何消息"
   },
   "footer": {
     "copyright": "版權所有 © 2024 鯤 Galgame",

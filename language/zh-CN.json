@@ -78,15 +78,6 @@
       "message": "我的消息",
       "check": "每日签到",
       "logout": "退出登录"
-    },
-    "message": {
-      "message": "消息",
-      "auto": "自动已读",
-      "readAll": "标记所有消息为已读",
-      "deleteAll": "删除所有消息",
-      "goto": "前往用户",
-      "read": "标记为已读",
-      "delete": "删除消息"
     }
   },
   "back": {
@@ -767,6 +758,10 @@
     "load": "加载更多",
     "loading": "少女祈祷中...",
     "complete": "已经。。。一滴也不剩了"
+  },
+  "message": {
+    "name": "消息",
+    "null": "请填满这只萝莉吧, 因为她没有收到任何消息"
   },
   "footer": {
     "copyright": "版权所有 © 2024 鲲 Galgame",
