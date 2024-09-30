@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: 'kungalgamer'
+})
+
 import type { UserInfo } from '~/types/api/user'
 
 defineProps<{
@@ -8,8 +12,8 @@ defineProps<{
 
 <template>
   <KungalgamerList>
-    <KungalgamerComment :uid="user.uid" />
+    <KungalgamerReply :uid="user.uid" />
 
-    <KungalgamerEmpty v-if="!user.comment" />
+    <KungalgamerEmpty v-if="!user.reply" />
   </KungalgamerList>
 </template>

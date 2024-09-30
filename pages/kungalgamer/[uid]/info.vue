@@ -1,4 +1,9 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: 'kungalgamer',
+  middleware: 'deliver-uid'
+})
+
 import dayjs from 'dayjs'
 import type { UserInfo } from '~/types/api/user'
 

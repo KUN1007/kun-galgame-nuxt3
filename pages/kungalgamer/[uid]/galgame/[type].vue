@@ -1,4 +1,9 @@
 <script setup lang="ts">
+definePageMeta({
+  layout: 'kungalgamer',
+  middleware: 'deliver-uid'
+})
+
 import type { GalgameType, UserInfo } from '~/types/api/user'
 
 const props = defineProps<{

@@ -1,12 +1,12 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="aside">
+  <aside class="aside">
     <h2>Message</h2>
 
     <KunDivider margin="10px 0" />
 
-    <div class="item">
+    <NuxtLinkLocale class="item" to="/message/notice">
       <NuxtImg src="/apple-touch-icon.png" />
       <div class="info">
         <div class="title">
@@ -18,9 +18,9 @@
           <span>17</span>
         </div>
       </div>
-    </div>
+    </NuxtLinkLocale>
 
-    <div class="item">
+    <NuxtLinkLocale class="item" to="/message/system">
       <NuxtImg src="/apple-touch-icon.png" />
       <div class="info">
         <div class="title">
@@ -32,8 +32,8 @@
           <span>1007</span>
         </div>
       </div>
-    </div>
-  </div>
+    </NuxtLinkLocale>
+  </aside>
 </template>
 
 <style lang="scss" scoped>
@@ -53,7 +53,7 @@
   width: 20rem;
   border-radius: 10px;
   cursor: pointer;
-
+  color: var(--kungalgame-font-color-3);
   img {
     height: 50px;
     width: 50px;

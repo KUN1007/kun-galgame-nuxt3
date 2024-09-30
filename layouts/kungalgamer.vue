@@ -5,12 +5,10 @@ import type { UserInfo } from '~/types/api/user'
 const user = ref<UserInfo>()
 const isBanned = ref(false)
 
-const route = useRoute()
 const { t } = useI18n()
 
-const uid = computed(() => {
-  return parseInt((route.params as { uid: string }).uid)
-})
+const uid = parseInt(useState<string>('routeParamUid').value)
+
 const {
   uid: currentUserUid,
   avatar,
@@ -18,7 +16,7 @@ const {
   moemoepoint
 } = storeToRefs(usePersistUserStore())
 
-const { data, refresh } = await useFetch(`/api/user/${uid.value}`, {
+const { data, refresh } = await useFetch(`/api/user/${uid}`, {
   method: 'GET',
   ...kungalgameResponseHandler
 })
@@ -32,7 +30,7 @@ if (data.value === 'banned') {
 provide('refresh', refresh)
 
 onMounted(() => {
-  if (!user.value || currentUserUid.value !== uid.value) {
+  if (!user.value || currentUserUid.value !== uid) {
     return
   }
   if (user.value.avatar) {

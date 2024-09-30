@@ -83,7 +83,5 @@ onMounted(() => {
   <NuxtPwaManifest />
   <NuxtLoadingIndicator color="var(--kungalgame-blue-5)" />
 
-  <KunLayout>
-    <NuxtPage />
-  </KunLayout>
+  <KunLayout />
 </template>

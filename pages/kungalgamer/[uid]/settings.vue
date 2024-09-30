@@ -2,7 +2,8 @@
 import type { UserInfo } from '~/types/api/user'
 
 definePageMeta({
-  middleware: 'auth'
+  layout: 'kungalgamer',
+  middleware: ['auth', 'deliver-uid']
 })
 
 const props = defineProps<{

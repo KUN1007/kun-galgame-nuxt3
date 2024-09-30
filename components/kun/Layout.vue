@@ -22,7 +22,11 @@ watch(
     <div class="top-bar">
       <KunTopBar />
     </div>
-    <slot />
+
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+
     <NuxtImg
       v-if="showKUNGalgameBackLoli"
       class="kohaku"
