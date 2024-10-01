@@ -760,7 +760,9 @@
     "complete": "已經。。。一滴也不剩了"
   },
   "message": {
-    "name": "消息"
+    "name": "消息",
+    "notice": "通知",
+    "system": "繫統消息"
   },
   "footer": {
     "copyright": "版權所有 © 2024 鯤 Galgame",

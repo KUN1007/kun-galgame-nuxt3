@@ -760,7 +760,9 @@
     "complete": "已经。。。一滴也不剩了"
   },
   "message": {
-    "name": "消息"
+    "name": "消息",
+    "notice": "通知",
+    "system": "系统消息"
   },
   "footer": {
     "copyright": "版权所有 © 2024 鲲 Galgame",
