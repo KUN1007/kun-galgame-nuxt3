@@ -35,7 +35,7 @@ onMounted(async () => {
   <div class="container" v-if="data">
     <header>
       <Icon @click="router.back()" class="icon" name="lucide:chevron-left" />
-      <h2>{{ $t('message.name') }}</h2>
+      <h2>{{ $t('message.notice') }}</h2>
     </header>
 
     <KunDivider margin="7px 0" />

@@ -35,16 +35,14 @@ export interface Message {
   type: MessageType
 }
 
+export interface AsideItem {
+  content: string
+  time: number
+  count: number
+  unreadCount: number
+}
+
 export interface MessageAsideStatus {
-  notice: {
-    content: string
-    time: number
-    count: number
-    unreadCount: number
-  }
-  system: {
-    time: number
-    count: number
-    unreadCount: number
-  }
+  notice: AsideItem
+  system: Omit<AsideItem, 'content'>
 }
