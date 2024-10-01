@@ -764,7 +764,8 @@
   "message": {
     "name": "Message",
     "notice": "Notice",
-    "system": "System Messages"
+    "system": "System Messages",
+    "new": "New Message"
   },
   "footer": {
     "copyright": "Copyright © 2024 KUN Visual Novel",

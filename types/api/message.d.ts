@@ -34,3 +34,17 @@ export interface Message {
   status: MessageStatus
   type: MessageType
 }
+
+export interface MessageAsideStatus {
+  notice: {
+    content: string
+    time: number
+    count: number
+    unreadCount: number
+  }
+  system: {
+    time: number
+    count: number
+    unreadCount: number
+  }
+}

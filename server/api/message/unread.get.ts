@@ -1,4 +1,5 @@
 import MessageModel from '~/server/models/message'
+import MessageAdminModel from '~/server/models/message-admin'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
@@ -12,7 +13,11 @@ export default defineEventHandler(async (event) => {
     status: 'unread'
   })
 
-  if (message) {
+  const messageAdmin = await MessageAdminModel.findOne({
+    status: 'unread'
+  })
+
+  if (message || messageAdmin) {
     return 'Find unread message'
   } else {
     return 'Moe loli online!'

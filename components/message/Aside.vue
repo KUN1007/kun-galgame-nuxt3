@@ -1,4 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { locale } = useI18n()
+
+const { data } = await useFetch(`/api/message/status`, {
+  method: 'GET',
+  ...kungalgameResponseHandler
+})
+</script>
 
 <template>
   <aside class="aside">
@@ -6,30 +13,52 @@
 
     <KunDivider margin="10px 0" />
 
-    <NuxtLinkLocale class="item" to="/message/notice">
+    <NuxtLinkLocale class="item" to="/message/notice" v-if="data">
       <NuxtImg src="/apple-touch-icon.png" />
       <div class="info">
         <div class="title">
-          <span>Notice</span>
-          <span>1/10/2024</span>
+          <span>{{ $t('message.notice') }}</span>
+          <span>
+            {{ formatTimeDifference(data.notice.time, locale) }}
+          </span>
         </div>
         <div class="content">
-          <span>KUN IS THE CUTEST!!!!!!!!!!</span>
-          <span>17</span>
+          <span>
+            {{ markdownToText(data.notice.content) }}
+          </span>
+          <span v-if="data.notice.unreadCount" class="unread">
+            {{ data.notice.unreadCount }}
+          </span>
+          <span v-if="!data.notice.unreadCount" class="read">
+            {{ data.notice.count }}
+          </span>
         </div>
       </div>
     </NuxtLinkLocale>
 
-    <NuxtLinkLocale class="item" to="/message/system">
+    <NuxtLinkLocale class="item" to="/message/system" v-if="data">
       <NuxtImg src="/apple-touch-icon.png" />
       <div class="info">
         <div class="title">
-          <span>System</span>
-          <span>1/10/2024</span>
+          <span>{{ $t('message.system') }}</span>
+          <span>
+            {{ formatTimeDifference(data.system.time, locale) }}
+          </span>
         </div>
         <div class="content">
-          <span>Content</span>
-          <span>1007</span>
+          <span>
+            {{
+              data.system.unreadCount
+                ? $t('message.new')
+                : $t('topic.panel.reply')
+            }}
+          </span>
+          <span v-if="data.system.unreadCount" class="unread">
+            {{ data.system.unreadCount }}
+          </span>
+          <span v-if="!data.system.unreadCount" class="read">
+            {{ data.system.count }}
+          </span>
         </div>
       </div>
     </NuxtLinkLocale>
@@ -104,14 +133,20 @@
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1;
       }
+    }
 
-      &:last-child {
-        font-size: 12px;
-        background-color: var(--kungalgame-blue-5);
-        color: var(--kungalgame-white);
-        border-radius: 10px;
-        padding: 2px 4px;
-      }
+    .read,
+    .unread {
+      margin-left: auto;
+      font-size: 12px;
+      background-color: var(--kungalgame-gray-4);
+      color: var(--kungalgame-white);
+      border-radius: 10px;
+      padding: 2px 4px;
+    }
+
+    .unread {
+      background-color: var(--kungalgame-red-5);
     }
   }
 }
