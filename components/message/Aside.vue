@@ -48,6 +48,8 @@ const getMessageItem = (
         </span>
       </template>
     </MessageItem>
+
+    <MessagePmUser />
   </aside>
 </template>
 

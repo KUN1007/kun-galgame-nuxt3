@@ -24,6 +24,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/image',
     '@nuxt/icon',
+    '@nuxt/eslint',
     '@nuxtjs/i18n',
     '@nuxtjs/color-mode',
     '@nuxtjs/sitemap',
@@ -75,6 +76,12 @@ export default defineNuxtConfig({
     },
     esbuild: {
       drop: ['console', 'debugger']
+    }
+  },
+
+  eslint: {
+    config: {
+      standalone: false
     }
   },
 
@@ -130,6 +137,7 @@ export default defineNuxtConfig({
     storageKey: 'kungalgame-color-mode'
   },
 
+  // Backend
   pwa: {
     registerType: 'autoUpdate',
     // Disable pwa in development environment
@@ -163,6 +171,12 @@ export default defineNuxtConfig({
     },
     client: {
       installPrompt: true
+    }
+  },
+
+  nitro: {
+    experimental: {
+      websocket: true
     }
   }
 })
