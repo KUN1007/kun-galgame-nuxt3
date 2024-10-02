@@ -57,6 +57,7 @@ useHead({
   <div class="root">
     <div class="container" v-if="user">
       <KungalgamerHeader
+        :uid="user.uid"
         :name="user.name"
         :avatar="user.avatar"
         :moemoepoint="user.moemoepoint"

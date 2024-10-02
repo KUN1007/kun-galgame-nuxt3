@@ -16,11 +16,13 @@ defineProps<{
     <div class="info">
       <div class="title">
         <span>{{ title }}</span>
-        <span>{{ formatTimeDifference(data.time, locale) }}</span>
+        <span v-if="data.time">{{
+          formatTimeDifference(data.time, locale)
+        }}</span>
       </div>
       <div class="content">
         <slot name="system" />
-        <span class="preview" v-if="data.content">
+        <span class="preview">
           {{ markdownToText(data.content) }}
         </span>
         <span v-if="data.unreadCount" class="unread">

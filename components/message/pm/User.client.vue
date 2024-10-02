@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { socket } from './socket'
-
 const isConnected = ref(false)
 const transport = ref('N/A')
+
+const socket = useSocketIO()
 
 const onConnect = () => {
   isConnected.value = true

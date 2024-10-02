@@ -1,26 +1,31 @@
 <script setup lang="ts">
 const props = defineProps<{
-  name?: string
-  avatar?: string
-  moemoepoint?: number
+  uid: number
+  name: string
+  avatar: string
+  moemoepoint: number
 }>()
 
+const currentUserUid = usePersistUserStore().uid
 const isShowProgress = ref(false)
-
-const mpWidth = computed(() => {
-  return props.moemoepoint ? `${props.moemoepoint % 100}%` : '0%'
-})
+const mpWidth = computed(() => `${props.moemoepoint % 100}%`)
 
 onMounted(() => (isShowProgress.value = true))
 </script>
 
 <template>
   <div class="header">
-    <div class="avatar" v-if="props.avatar">
+    <div class="avatar">
       <NuxtImg :src="props.avatar" :alt="props.name" />
     </div>
 
     <div class="name">
+      <!-- TODO: -->
+      <NuxtLinkLocale
+        v-if="currentUserUid !== props.uid"
+        :to="`/message/user/${props.uid}`"
+        >Message</NuxtLinkLocale
+      >
       <span>{{ props.name }}</span>
       <span>{{ props.name }}</span>
     </div>
@@ -30,7 +35,7 @@ onMounted(() => (isShowProgress.value = true))
         <div v-if="isShowProgress" class="mp-progress"></div>
       </Transition>
       <p>
-        <span><Icon class="icon" name="lucide:lollipop" /></span>
+        <Icon class="icon" name="lucide:lollipop" />
         <span>{{ props.moemoepoint }}</span>
       </p>
     </div>
