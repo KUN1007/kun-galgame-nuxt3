@@ -1,6 +1,7 @@
 import UserModel from '~/server/models/user'
 import ChatRoomModel from '~/server/models/chat-room'
 import ChatMessageModel from '~/server/models/chat-message'
+import type { Message } from '~/types/api/chat-message'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
@@ -9,9 +10,9 @@ export default defineEventHandler(async (event) => {
   }
   const uid = userInfo.uid.toString()
 
-  const { crid, receiverUid }: { crid: number; receiverUid: string } =
-    getQuery(event)
-  if (!receiverUid) {
+  const { receiverUid }: { receiverUid: string } = getQuery(event)
+  const receiverUidNumber = parseInt(receiverUid)
+  if (!receiverUidNumber) {
     return 'receiverUid not found'
   }
 
@@ -19,27 +20,45 @@ export default defineEventHandler(async (event) => {
   if (parseInt(receiverUid) === userInfo.uid) {
     return 'you cannot send message to yourself'
   }
+
+  const user = await UserModel.findOne({ uid }).lean()
+
   const roomId = generateRoomId(parseInt(receiverUid), userInfo.uid)
+  const room = await ChatRoomModel.findOneAndUpdate(
+    { name: roomId },
+    {
+      last_message: {
+        content,
+        time: Date.now(),
+        sender_uid: uid,
+        sender_name: user!.name
+      }
+    }
+  )
 
   const message = await ChatMessageModel.create({
-    crid,
+    crid: room!.crid,
     sender_uid: uid,
+    revecer_uid: parseInt(receiverUid),
     content
   })
 
-  await ChatRoomModel.updateOne(
-    { name: roomId },
-    { lastMessageTime: Date.now() }
-  )
-
-  const sender = await UserModel.findOne({ uid }).lean()
-
-  return {
-    ...message,
+  const responseData: Message = {
+    cmid: message.cmid,
     sender: {
-      uid: sender!.uid,
-      name: sender!.name,
-      avatar: sender!.avatar
-    }
+      uid: user!.uid,
+      name: user!.name,
+      avatar: user!.avatar
+    },
+    receiverUid: parseInt(receiverUid),
+    content: message.content,
+    time: message.time,
+    status: message.status,
+    isRecalled: message.is_recalled,
+    recalledTime: message.recalled_time,
+    readBy: message.read_by,
+    reactions: message.reactions
   }
+
+  return responseData
 })

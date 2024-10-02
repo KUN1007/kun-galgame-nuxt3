@@ -1,11 +1,11 @@
 import type { UserAttributes } from './user'
 
-interface MessageRead {
+export interface MessageRead {
   uid: number
   read_time: number
 }
 
-interface MessageReaction {
+export interface MessageReaction {
   uid: number
   reaction: string
 }
@@ -14,6 +14,7 @@ export interface ChatMessageAttributes {
   cmid: number
   crid: number
   sender_uid: number
+  revecer_uid: number
   content: string
   to_uid: number
   time: number

@@ -16,7 +16,8 @@ export default defineEventHandler(async (event) => {
     return 'Message not found'
   }
 
-  if (!message.read_by.includes(userInfo.uid)) {
+  const readUserArray = message.read_by.map((read) => read.uid)
+  if (!readUserArray.includes(userInfo.uid)) {
     await ChatMessageModel.updateOne(
       { cmid },
       { $addToSet: { read_by: userInfo.uid } }

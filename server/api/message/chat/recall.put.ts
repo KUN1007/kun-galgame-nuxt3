@@ -1,5 +1,4 @@
 import ChatMessageModel from '~/server/models/chat-message'
-import socketServer from '~/server/socket/socket'
 
 export default defineEventHandler(async (event) => {
   const { cmid }: { cmid: string } = getQuery(event)
@@ -21,8 +20,6 @@ export default defineEventHandler(async (event) => {
       }
     )
   }
-
-  socketServer.io?.to(message.crid).emit('message_recalled', cmid)
 
   return 'Successfully recalled the message'
 })

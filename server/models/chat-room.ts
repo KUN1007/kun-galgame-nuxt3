@@ -9,7 +9,12 @@ const ChatRoomSchema = new mongoose.Schema<ChatRoomAttributes>(
     type: { type: String, required: true },
     participants: { type: [Number], required: true },
     admins: { type: [Number], default: [] },
-    last_message_time: { type: Number, default: 0 }
+    last_message: {
+      content: { type: String },
+      time: { type: Number },
+      sender_uid: { type: Number },
+      sender_name: { type: String }
+    }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }
 )
