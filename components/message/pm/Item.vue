@@ -46,10 +46,14 @@ const { locale } = useI18n()
     display: flex;
     align-items: end;
   }
+
+  .username {
+    color: var(--kungalgame-pink-4);
+  }
 }
 
 .content-container {
-  background-color: var(--kungalgame-white);
+  background-color: var(--kungalgame-trans-white-5);
   padding: 10px 15px;
   border-radius: 18px;
   max-width: 75%;
@@ -87,6 +91,10 @@ const { locale } = useI18n()
 
   .content-container {
     background-color: var(--kungalgame-trans-blue-2);
+  }
+
+  .username {
+    color: var(--kungalgame-blue-5);
   }
 }
 </style>

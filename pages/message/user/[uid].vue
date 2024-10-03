@@ -9,6 +9,7 @@ definePageMeta({
 const route = useRoute()
 const socket = useSocketIO()
 
+const historyContainer = ref<HTMLDivElement | null>(null)
 const messageInput = ref('')
 const messages = ref<Message[]>([])
 const uid = parseInt((route.params as { uid: string }).uid)
@@ -35,6 +36,12 @@ const sendMessage = async () => {
     socket.emit('sendingMessage', newMessage)
     messageInput.value = ''
   }
+
+  nextTick(() => {
+    if (historyContainer.value) {
+      historyContainer.value.scrollTop = historyContainer.value.scrollHeight
+    }
+  })
 }
 
 const getMessageHistory = async () => {
@@ -46,6 +53,15 @@ const getMessageHistory = async () => {
   })
   return Array.isArray(histories) ? histories : []
 }
+
+watch(
+  () => messages.value,
+  () => {
+    if (historyContainer.value) {
+      historyContainer.value.scrollTop = historyContainer.value.scrollHeight
+    }
+  }
+)
 
 onMounted(async () => {
   messages.value = await getMessageHistory()
@@ -72,7 +88,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 <template>
   <MessagePmHeader :uid="uid" />
 
-  <div class="history">
+  <div ref="historyContainer" class="history">
     <template v-if="messages.length">
       <MessagePmItem
         v-for="(message, index) in messages"
@@ -98,7 +114,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin: 24px 0;
+  margin-bottom: 24px;
 
   .kun-input {
     width: 100%;
@@ -110,5 +126,11 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     font-size: 24px;
     @include kun-center;
   }
+}
+
+.history {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  padding-bottom: 16px;
 }
 </style>

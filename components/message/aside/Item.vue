@@ -16,9 +16,9 @@ defineProps<{
     <div class="info">
       <div class="title">
         <span>{{ title }}</span>
-        <span v-if="data.time">{{
-          formatTimeDifference(data.time, locale)
-        }}</span>
+        <span v-if="data.time">
+          {{ formatTimeDifference(data.time, locale) }}
+        </span>
       </div>
       <div class="content">
         <slot name="system" />
@@ -42,6 +42,7 @@ defineProps<{
   border-radius: 10px;
   cursor: pointer;
   color: var(--kungalgame-font-color-3);
+
   img {
     height: 50px;
     width: 50px;
