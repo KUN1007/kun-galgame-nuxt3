@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
       name: roomId,
       type: 'private',
       participants: [uid, receiverUid],
-      last_message_time: Date.now()
+      last_message: { time: Date.now() }
     })
 
     return []

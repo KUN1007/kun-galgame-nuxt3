@@ -4,36 +4,30 @@ import type { AsideItem } from '~/types/api/message'
 const { locale } = useI18n()
 
 defineProps<{
-  room: AsideItem
+  title: string
+  data: AsideItem
 }>()
 </script>
 
 <template>
-  <NuxtLinkLocale class="item" :to="`/message/user/${room.route}`">
-    <KunAvatar
-      :user="{
-        uid: parseInt(room.route),
-        name: room.title,
-        avatar: room.avatar
-      }"
-      size="50px"
-    />
+  <NuxtLinkLocale class="item" :to="`/message/${data.route}`">
+    <NuxtImg src="/apple-touch-icon.png" />
     <div class="info">
       <div class="title">
-        <span>{{ room.title }}</span>
-        <span v-if="room.time">
-          {{ formatTimeDifference(room.time, locale) }}
+        <span>{{ title }}</span>
+        <span v-if="data.time">
+          {{ formatTimeDifference(data.time, locale) }}
         </span>
       </div>
       <div class="content">
         <slot name="system" />
         <span class="preview">
-          {{ markdownToText(room.content) }}
+          {{ markdownToText(data.content) }}
         </span>
-        <span v-if="room.unreadCount" class="unread">
-          {{ room.unreadCount }}
+        <span v-if="data.unreadCount" class="unread">
+          {{ data.unreadCount }}
         </span>
-        <span v-if="!room.unreadCount" class="read">{{ room.count }}</span>
+        <span v-if="!data.unreadCount" class="read">{{ data.count }}</span>
       </div>
     </div>
   </NuxtLinkLocale>
@@ -47,6 +41,11 @@ defineProps<{
   border-radius: 10px;
   cursor: pointer;
   color: var(--kungalgame-font-color-3);
+
+  img {
+    height: 50px;
+    width: 50px;
+  }
 
   &:hover {
     background-color: var(--kungalgame-trans-blue-0);

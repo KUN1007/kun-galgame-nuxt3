@@ -6,14 +6,15 @@ const ChatRoomSchema = new mongoose.Schema<ChatRoomAttributes>(
   {
     crid: { type: Number, unique: true },
     name: { type: String, default: '' },
+    avatar: { type: String, default: '' },
     type: { type: String, required: true },
     participants: { type: [Number], required: true },
     admins: { type: [Number], default: [] },
     last_message: {
-      content: { type: String },
-      time: { type: Number },
-      sender_uid: { type: Number },
-      sender_name: { type: String }
+      content: { type: String, default: '' },
+      time: { type: Number, default: 0 },
+      sender_uid: { type: Number, default: 0 },
+      sender_name: { type: String, default: '' }
     }
   },
   { timestamps: { createdAt: 'created', updatedAt: 'updated' } }

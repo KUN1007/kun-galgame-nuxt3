@@ -40,9 +40,7 @@ export interface AsideItem {
   time: number
   count: number
   unreadCount: number
-}
-
-export interface MessageAsideStatus {
-  notice: AsideItem
-  system: Omit<AsideItem, 'content'>
+  route: string
+  title: string
+  avatar: string
 }

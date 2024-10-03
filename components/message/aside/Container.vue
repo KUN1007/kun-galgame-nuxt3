@@ -1,23 +1,13 @@
 <script setup lang="ts">
-import type { MessageAsideStatus, AsideItem } from '~/types/api/message'
-
-const { data } = await useFetch(`/api/message/status`, {
+const { data: system } = await useFetch(`/api/message/nav/system`, {
   method: 'GET',
   ...kungalgameResponseHandler
 })
 
-const getMessageItem = (
-  data: MessageAsideStatus,
-  type: 'notice' | 'system'
-): AsideItem => {
-  const item = data[type]
-  return {
-    time: item.time,
-    content: 'content' in item ? item.content : '',
-    unreadCount: item.unreadCount,
-    count: item.count
-  }
-}
+const { data: contact } = await useFetch(`/api/message/nav/contact`, {
+  method: 'GET',
+  ...kungalgameResponseHandler
+})
 </script>
 
 <template>
@@ -26,28 +16,34 @@ const getMessageItem = (
 
     <KunDivider margin="10px 0" />
 
-    <MessageAsideItem
-      v-if="data"
-      type="notice"
+    <MessageAsideSystemItem
+      v-if="system"
       :title="$t('message.notice')"
-      :data="getMessageItem(data, 'notice')"
+      :data="system[0]"
     />
 
-    <MessageAsideItem
-      v-if="data"
-      type="system"
+    <MessageAsideSystemItem
+      v-if="system"
       :title="$t('message.system')"
-      :data="getMessageItem(data, 'system')"
+      :data="system[1]"
     >
       <template #system>
-        <span v-if="!data.system.unreadCount" class="zako">
+        <span v-if="!system[1].unreadCount" class="zako">
           {{ $t('topic.panel.reply') }}
         </span>
-        <span v-if="data.system.unreadCount" class="new">
+        <span v-if="system[1].unreadCount" class="new">
           {{ `「 ${$t('message.new')} 」` }}
         </span>
       </template>
-    </MessageAsideItem>
+    </MessageAsideSystemItem>
+
+    <template v-if="contact">
+      <MessageAsideItem
+        v-for="(room, index) in contact"
+        :key="index"
+        :room="room"
+      />
+    </template>
   </aside>
 </template>
 

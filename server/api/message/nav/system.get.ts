@@ -1,6 +1,6 @@
 import MessageModel from '~/server/models/message'
 import MessageAdminModel from '~/server/models/message-admin'
-import type { MessageAsideStatus } from '~/types/api/message'
+import type { AsideItem } from '~/types/api/message'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
@@ -25,19 +25,26 @@ export default defineEventHandler(async (event) => {
     MessageAdminModel.countDocuments({ status: 'unread' })
   ])
 
-  const responseData: MessageAsideStatus = {
-    notice: {
+  const responseData: AsideItem[] = [
+    {
       content: message ? message.content.slice(0, 100) : '',
       time: message?.time || 0,
       count: messageCount,
-      unreadCount: messageUnreadCount
+      unreadCount: messageUnreadCount,
+      route: 'notice',
+      title: 'zako~',
+      avatar: ''
     },
-    system: {
+    {
+      content: '',
       time: messageAdmin?.time || 0,
       count: messageAdminCount,
-      unreadCount: messageAdminUnreadCount
+      unreadCount: messageAdminUnreadCount,
+      route: 'system',
+      title: 'zako~',
+      avatar: ''
     }
-  }
+  ]
 
   return responseData
 })
