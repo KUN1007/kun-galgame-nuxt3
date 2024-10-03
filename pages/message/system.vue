@@ -45,7 +45,7 @@ onMounted(async () => {
       v-for="(message, index) in data"
       :key="index"
     >
-      <MessageSystem :message="message" />
+      <MessageAsideSystem :message="message" />
 
       <KunDivider margin="7px 0" />
     </template>

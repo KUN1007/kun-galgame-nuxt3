@@ -2,7 +2,7 @@
 
 <template>
   <div class="content-container">
-    <MessageAside />
+    <MessageAsideContainer />
 
     <div class="content">
       <NuxtPage />

@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
   const message = await ChatMessageModel.create({
     crid: room!.crid,
     sender_uid: uid,
-    revecer_uid: parseInt(receiverUid),
+    receiver_uid: parseInt(receiverUid),
     content
   })
 

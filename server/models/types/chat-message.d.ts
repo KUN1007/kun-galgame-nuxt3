@@ -14,7 +14,7 @@ export interface ChatMessageAttributes {
   cmid: number
   crid: number
   sender_uid: number
-  revecer_uid: number
+  receiver_uid: number
   content: string
   to_uid: number
   time: number

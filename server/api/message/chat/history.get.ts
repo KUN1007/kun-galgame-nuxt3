@@ -27,10 +27,12 @@ export default defineEventHandler(async (event) => {
       participants: [uid, receiverUid],
       last_message_time: Date.now()
     })
+
+    return []
   }
 
   const skip = (parseInt(page) - 1) * parseInt(limit)
-  const histories = await ChatMessageModel.find({ uid })
+  const histories = await ChatMessageModel.find({ crid: room.crid })
     .sort({ cmid: -1 })
     .skip(skip)
     .limit(parseInt(limit))

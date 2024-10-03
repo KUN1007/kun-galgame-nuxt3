@@ -45,7 +45,7 @@ onMounted(async () => {
       v-for="(message, index) in data.messages"
       :key="index"
     >
-      <MessageNotice :message="message" :refresh="refresh" />
+      <MessageAsideNotice :message="message" :refresh="refresh" />
 
       <KunDivider margin="7px 0" />
     </template>

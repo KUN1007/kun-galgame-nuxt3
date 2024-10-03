@@ -7,10 +7,11 @@ definePageMeta({
 })
 
 const route = useRoute()
-const router = useRouter()
 const socket = useSocketIO()
+const { locale } = useI18n()
 
-const message = ref('')
+const messageInput = ref('')
+const messages = ref<Message[]>([])
 const uid = parseInt((route.params as { uid: string }).uid)
 const pageData = reactive({
   page: 1,
@@ -21,14 +22,16 @@ const sendMessage = async () => {
   const newMessage = await $fetch(`/api/message/chat/private`, {
     method: 'POST',
     query: { receiverUid: uid },
-    body: { content: message.value },
+    body: { content: messageInput.value },
     watch: false,
     ...kungalgameResponseHandler
   })
 
-  socket.emit('sendingMessage', newMessage)
-
-  message.value = ''
+  if (typeof newMessage !== 'string') {
+    messages.value.push(newMessage)
+    socket.emit('sendingMessage', newMessage)
+    messageInput.value = ''
+  }
 }
 
 const getMessageHistory = async () => {
@@ -38,54 +41,53 @@ const getMessageHistory = async () => {
     watch: false,
     ...kungalgameResponseHandler
   })
-  return histories
+  return Array.isArray(histories) ? histories : []
 }
 
 onMounted(async () => {
+  messages.value = await getMessageHistory()
+
   socket.emit('register')
 
-  socket.on('sentMessage', (msg) => {
-    alert(JSON.stringify(msg))
+  socket.on('sentMessage', (msg: Message) => {
+    messages.value.push(msg)
   })
 })
 </script>
 
 <template>
   <div class="container">
-    <header>
-      <Icon @click="router.back()" class="icon" name="lucide:chevron-left" />
-      <h2>{{ $t('message.notice') }}</h2>
-    </header>
+    <MessagePmHeader :uid="uid" />
 
-    <input v-model="message" placeholder="Input message" />
+    <div class="history">
+      <template v-if="messages.length">
+        <div class="item" v-for="(message, index) in messages" :key="index">
+          <KunAvatar :user="message.sender" size="30px" />
+
+          <div class="content-container">
+            <div class="top">{{ message.sender.name }}</div>
+            <div class="content">{{ message.content }}</div>
+            <div class="footer">
+              <span class="time">
+                {{ formatTimeDifference(message.time, locale as Language) }}
+              </span>
+              <span class="read">
+                {{ message.readBy }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <KunNull :condition="!messages.length" type="null" />
+    </div>
+
+    <input v-model="messageInput" placeholder="Input message" />
     <button @click="sendMessage">Send</button>
   </div>
 </template>
 
 <style lang="scss" scoped>
-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-
-  span {
-    cursor: pointer;
-    font-size: 24px;
-    margin-right: 10px;
-
-    &:hover {
-      color: var(--kungalgame-blue-5);
-    }
-  }
-
-  h2 {
-    &::before {
-      content: '';
-      margin: 0;
-    }
-  }
-}
-
 .container {
   width: 100%;
 }

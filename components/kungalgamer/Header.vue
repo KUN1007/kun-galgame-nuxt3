@@ -23,7 +23,7 @@ onMounted(() => (isShowProgress.value = true))
       <!-- TODO: -->
       <NuxtLinkLocale
         v-if="currentUserUid !== props.uid"
-        :to="`/message/user/${props.uid}`"
+        :to="`/message/user/${props.uid}?username=${props.name}`"
         >Message</NuxtLinkLocale
       >
       <span>{{ props.name }}</span>

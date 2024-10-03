@@ -26,14 +26,14 @@ const getMessageItem = (
 
     <KunDivider margin="10px 0" />
 
-    <MessageItem
+    <MessageAsideItem
       v-if="data"
       type="notice"
       :title="$t('message.notice')"
       :data="getMessageItem(data, 'notice')"
     />
 
-    <MessageItem
+    <MessageAsideItem
       v-if="data"
       type="system"
       :title="$t('message.system')"
@@ -47,9 +47,7 @@ const getMessageItem = (
           {{ `「 ${$t('message.new')} 」` }}
         </span>
       </template>
-    </MessageItem>
-
-    <MessagePmUser />
+    </MessageAsideItem>
   </aside>
 </template>
 
