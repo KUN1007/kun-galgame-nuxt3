@@ -22,12 +22,12 @@ const handleClickAvatar = (event: MouseEvent) => {
     <NuxtImg
       :height="size"
       :width="size"
-      v-if="props.user.avatar"
+      v-if="user.avatar"
       :src="user.avatar.replace(/\.webp$/, '-100.webp')"
       :alt="user.name"
     />
-    <span v-if="!props.user.avatar">
-      {{ props.user.name.slice(0, 1).toUpperCase() }}
+    <span v-if="!user.avatar">
+      {{ user.name.slice(0, 1).toUpperCase() }}
     </span>
   </div>
 </template>

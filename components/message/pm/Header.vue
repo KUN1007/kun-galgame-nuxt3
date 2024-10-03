@@ -6,22 +6,16 @@ const props = defineProps<{
 const socket = useSocketIO()
 const router = useRouter()
 
-const user = ref<KunUser>({
-  uid: props.uid,
-  name: '',
-  avatar: '/favicon.webp'
+const res = await $fetch(`/api/user/${props.uid}`, {
+  method: 'GET',
+  ...kungalgameResponseHandler
 })
 
-onMounted(async () => {
-  const res = await $fetch(`/api/user/${props.uid}`, {
-    method: 'GET',
-    ...kungalgameResponseHandler
-  })
-  if (typeof res !== 'string') {
-    user.value.name = res.name
-    res.avatar ? (user.value.avatar = res.avatar) : ''
-  }
-})
+const user = {
+  uid: props.uid,
+  name: typeof res !== 'string' ? res.name : '',
+  avatar: typeof res !== 'string' ? res.avatar : ''
+}
 
 const handleReload = () => location.reload()
 </script>
@@ -42,10 +36,10 @@ const handleReload = () => location.reload()
         @click="handleReload"
         v-tooltip="{
           message: {
-            'en-us': 'Click to refresh the page',
-            'ja-jp': 'クリックしてページを更新してください',
-            'zh-cn': '点击刷新页面',
-            'zh-tw': '點擊刷新頁面'
+            'en-us': `Click to refresh the page, but it's okay if you don't refresh it.`,
+            'ja-jp': 'クリックしてページを更新、更新しなくても大丈夫です',
+            'zh-cn': '点击刷新页面, 不刷新也可以',
+            'zh-tw': '點擊刷新頁面, 不刷新也可以'
           },
           position: 'bottom'
         }"
@@ -60,6 +54,7 @@ const handleReload = () => location.reload()
 <style lang="scss" scoped>
 header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   margin-bottom: 10px;
   height: 32px;

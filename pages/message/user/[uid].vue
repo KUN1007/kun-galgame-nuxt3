@@ -77,7 +77,7 @@ watch(
 onMounted(async () => {
   messages.value = await getMessageHistory()
 
-  socket.emit('register')
+  socket.emit('joinChat', uid)
 
   socket.on('receivedMessage', (msg: Message) => {
     messages.value.push(msg)
@@ -96,7 +96,10 @@ const onKeydown = async (event: KeyboardEvent) => {
   }
 }
 
-onUnmounted(() => window.removeEventListener('keydown', onKeydown))
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', onKeydown)
+  socket.emit('leaveChat', uid)
+})
 
 const handleLoadHistoryMessages = async () => {
   if (!historyContainer.value) {
@@ -127,7 +130,9 @@ const handleLoadHistoryMessages = async () => {
 </script>
 
 <template>
-  <MessagePmHeader :uid="uid" />
+  <ClientOnly>
+    <MessagePmHeader :uid="uid" />
+  </ClientOnly>
 
   <div ref="historyContainer" class="history">
     <div class="loader" v-if="isShowLoader" @click="handleLoadHistoryMessages">

@@ -11,7 +11,10 @@ export default defineEventHandler(async (event) => {
 
   const userId = userInfo.uid
 
-  const chatRooms = await ChatRoomModel.find({ participants: userId }).sort({
+  const chatRooms = await ChatRoomModel.find({
+    participants: userId,
+    'last_message.sender_uid': { $ne: 0 }
+  }).sort({
     'last_message.time': -1
   })
 
