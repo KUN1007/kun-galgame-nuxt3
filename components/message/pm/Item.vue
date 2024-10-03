@@ -60,13 +60,14 @@ const { locale } = useI18n()
   box-shadow: var(--shadow);
 
   .time {
+    font-size: 12px;
     margin-left: 10px;
     margin-right: 5px;
     color: var(--kungalgame-font-color-1);
   }
 
   .icon {
-    transform: translateY(2px);
+    transform: translateY(3px);
     color: var(--kungalgame-font-color-1);
   }
 }

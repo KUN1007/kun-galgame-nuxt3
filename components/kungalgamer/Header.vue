@@ -20,14 +20,24 @@ onMounted(() => (isShowProgress.value = true))
     </div>
 
     <div class="name">
-      <!-- TODO: -->
-      <NuxtLinkLocale
-        v-if="currentUserUid !== props.uid"
-        :to="`/message/user/${props.uid}?username=${props.name}`"
-        >Message</NuxtLinkLocale
-      >
-      <span>{{ props.name }}</span>
-      <span>{{ props.name }}</span>
+      <div class="username">
+        <span>{{ props.name }}</span>
+        <NuxtLinkLocale
+          v-if="currentUserUid !== props.uid"
+          :to="`/message/user/${props.uid}`"
+          v-tooltip="{
+            message: {
+              'en-us': 'Message',
+              'ja-jp': 'メッセージ',
+              'zh-cn': '私信',
+              'zh-tw': '私信'
+            },
+            position: 'bottom'
+          }"
+        >
+          <Icon class="icon" name="lucide:send" />
+        </NuxtLinkLocale>
+      </div>
     </div>
 
     <div class="moemoepoint">
@@ -47,7 +57,9 @@ onMounted(() => (isShowProgress.value = true))
   height: 150px;
   position: relative;
   display: flex;
+  flex-shrink: 0;
   flex-direction: column;
+  width: 100%;
 }
 
 .avatar {
@@ -77,39 +89,19 @@ onMounted(() => (isShowProgress.value = true))
   width: 100%;
   background-color: var(--kungalgame-trans-blue-0);
   border-radius: 10px 10px 0 0;
-  align-items: center;
+  display: flex;
+  align-items: end;
+  padding-left: 233px;
 
-  span {
-    &:nth-child(1) {
-      font-family: serif;
-      position: absolute;
-      font-size: 22px;
-      margin-left: 210px;
-      margin-top: 60px;
-      z-index: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
-    }
+  .username {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
 
-    &:nth-child(2) {
-      user-select: none;
-      font-family: serif;
-      position: absolute;
-      text-align: right;
-      padding-right: 30px;
-      right: 0;
-      font-size: 77px;
-      color: var(--kungalgame-trans-white-5);
-      font-style: italic;
-      text-shadow: 2px 2px 2px var(--kungalgame-trans-white-5);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
+    a {
+      display: flex;
+      color: var(--kungalgame-blue-5);
+      margin-left: 8px;
     }
   }
 }
@@ -127,7 +119,6 @@ onMounted(() => (isShowProgress.value = true))
 }
 
 .moemoepoint {
-  height: 1px;
   flex-grow: 1;
   display: flex;
   align-items: center;
@@ -179,15 +170,7 @@ onMounted(() => (isShowProgress.value = true))
   }
 
   .name {
-    span:nth-child(1) {
-      margin-left: 150px;
-      margin-top: 40px;
-    }
-
-    span:nth-child(2) {
-      bottom: 35%;
-      font-size: 50px;
-    }
+    padding-left: 150px;
   }
 }
 </style>

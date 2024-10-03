@@ -55,8 +55,9 @@ useHead({
 
 <template>
   <div class="root">
-    <div class="container" v-if="user">
+    <div class="container">
       <KungalgamerHeader
+        v-if="user"
         :uid="user.uid"
         :name="user.name"
         :avatar="user.avatar"
@@ -75,49 +76,40 @@ useHead({
       {{ $t('user.banned') }}
     </KunBlank>
 
-    <KunFooter style="margin: 0 auto; padding-bottom: 17px" />
+    <KunFooter />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .root {
   height: calc(100vh - 75px);
+  margin: 0 auto;
   min-height: 800px;
-  width: 100vw;
+  max-width: 64rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .container {
-  width: 60%;
-  height: 70%;
-  min-height: 700px;
   width: 100%;
-  max-width: 48rem;
   margin: auto;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.2s;
 
   @include kun-blur;
 }
 
 .content {
-  height: 1px;
-  flex-grow: 1;
+  min-height: 700px;
   display: flex;
 }
 
-@media (max-width: 1000px) {
-  .container {
-    width: 90%;
-  }
+.kun-footer {
+  margin: 16px 0;
 }
 
 @media (max-width: 700px) {
-  .container {
-    width: 97%;
-    height: 90%;
+  .root {
+    padding: 0 5px;
   }
 }
 </style>
