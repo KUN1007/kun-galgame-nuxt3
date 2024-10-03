@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
 
   const skip = (parseInt(page) - 1) * parseInt(limit)
   const histories = await ChatMessageModel.find({ crid: room.crid })
-    .sort({ cmid: 1 })
+    .sort({ cmid: -1 })
     .skip(skip)
     .limit(parseInt(limit))
     .populate('user', 'uid avatar name', UserModel)
@@ -56,5 +56,5 @@ export default defineEventHandler(async (event) => {
     reactions: message.reactions
   }))
 
-  return messages
+  return messages.reverse()
 })

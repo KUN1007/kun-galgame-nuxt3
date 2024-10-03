@@ -12,6 +12,16 @@ const socket = useSocketIO()
 const historyContainer = ref<HTMLDivElement | null>(null)
 const messageInput = ref('')
 const messages = ref<Message[]>([])
+const isLoadHistoryMessageComplete = ref(false)
+const isShowLoader = computed(() => {
+  if (isLoadHistoryMessageComplete.value) {
+    return false
+  }
+  if (messages.value.length < 30) {
+    return false
+  }
+  return true
+})
 const uid = parseInt((route.params as { uid: string }).uid)
 const pageData = reactive({
   page: 1,
@@ -66,8 +76,9 @@ onMounted(async () => {
 
   socket.emit('register')
 
-  socket.on('sentMessage', (msg: Message) => {
+  socket.on('receivedMessage', (msg: Message) => {
     messages.value.push(msg)
+    nextTick(() => scrollToBottom())
   })
 
   window.addEventListener('keydown', onKeydown)
@@ -83,12 +94,44 @@ const onKeydown = async (event: KeyboardEvent) => {
 }
 
 onUnmounted(() => window.removeEventListener('keydown', onKeydown))
+
+const handleLoadHistoryMessages = async () => {
+  if (!historyContainer.value) {
+    return
+  }
+
+  const previousScrollHeight = historyContainer.value.scrollHeight
+  const previousScrollTop = historyContainer.value.scrollTop
+
+  pageData.page += 1
+  const histories = await getMessageHistory()
+
+  if (histories.length > 0) {
+    messages.value.unshift(...histories)
+
+    nextTick(() => {
+      if (historyContainer.value) {
+        const newScrollHeight = historyContainer.value.scrollHeight
+        historyContainer.value.scrollTop =
+          previousScrollTop + (newScrollHeight - previousScrollHeight)
+      }
+    })
+  } else {
+    isLoadHistoryMessageComplete.value = true
+  }
+}
 </script>
 
 <template>
   <MessagePmHeader :uid="uid" />
 
   <div ref="historyContainer" class="history">
+    <div class="loader" v-if="isShowLoader" @click="handleLoadHistoryMessages">
+      {{ $t('message.history') }}
+    </div>
+
+    <KunNull :condition="!isShowLoader && messages.length > 30" type="null" />
+
     <template v-if="messages.length">
       <MessagePmItem
         v-for="(message, index) in messages"
@@ -130,7 +173,18 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .history {
   overflow-y: scroll;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   padding-bottom: 16px;
+
+  .loader {
+    margin: 16px 0;
+    color: var(--kungalgame-font-color-0);
+    cursor: pointer;
+    @include kun-center;
+
+    &:hover {
+      color: var(--kungalgame-blue-5);
+    }
+  }
 }
 </style>

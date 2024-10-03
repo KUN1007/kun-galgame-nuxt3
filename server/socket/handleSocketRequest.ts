@@ -13,7 +13,7 @@ export const handleSocketRequest = (socket: KUNGalgameSocket) => {
     const sendingMessageUserSocket = userSockets.get(message.receiverUid)
 
     if (sendingMessageUserSocket) {
-      sendingMessageUserSocket.emit('sentMessage', message)
+      sendingMessageUserSocket.emit('receivedMessage', message)
     }
   })
 }

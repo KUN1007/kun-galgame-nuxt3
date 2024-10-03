@@ -764,7 +764,8 @@
     "notice": "通知",
     "system": "繫統消息",
     "new": "新消息",
-    "offline": "您已離線"
+    "offline": "您已離線",
+    "history": "加載歴史消息"
   },
   "footer": {
     "copyright": "版權所有 © 2024 鯤 Galgame",
