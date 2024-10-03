@@ -765,7 +765,8 @@
     "name": "Message",
     "notice": "Notice",
     "system": "System Messages",
-    "new": "New Message"
+    "new": "New Message",
+    "offline": "You are offline"
   },
   "footer": {
     "copyright": "Copyright © 2024 KUN Visual Novel",

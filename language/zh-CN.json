@@ -763,7 +763,8 @@
     "name": "消息",
     "notice": "通知",
     "system": "系统消息",
-    "new": "新消息"
+    "new": "新消息",
+    "offline": "您已离线"
   },
   "footer": {
     "copyright": "版权所有 © 2024 鲲 Galgame",

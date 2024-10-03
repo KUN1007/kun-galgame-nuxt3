@@ -18,6 +18,12 @@ const pageData = reactive({
   limit: 30
 })
 
+const scrollToBottom = () => {
+  if (historyContainer.value) {
+    historyContainer.value.scrollTop = historyContainer.value.scrollHeight
+  }
+}
+
 const sendMessage = async () => {
   if (!messageInput.value.trim()) {
     return
@@ -37,11 +43,7 @@ const sendMessage = async () => {
     messageInput.value = ''
   }
 
-  nextTick(() => {
-    if (historyContainer.value) {
-      historyContainer.value.scrollTop = historyContainer.value.scrollHeight
-    }
-  })
+  nextTick(() => scrollToBottom())
 }
 
 const getMessageHistory = async () => {
@@ -56,11 +58,7 @@ const getMessageHistory = async () => {
 
 watch(
   () => messages.value,
-  () => {
-    if (historyContainer.value) {
-      historyContainer.value.scrollTop = historyContainer.value.scrollHeight
-    }
-  }
+  () => scrollToBottom()
 )
 
 onMounted(async () => {
@@ -73,6 +71,8 @@ onMounted(async () => {
   })
 
   window.addEventListener('keydown', onKeydown)
+
+  nextTick(() => scrollToBottom())
 })
 
 const onKeydown = async (event: KeyboardEvent) => {

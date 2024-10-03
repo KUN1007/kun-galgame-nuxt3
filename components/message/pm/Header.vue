@@ -22,6 +22,8 @@ onMounted(async () => {
     res.avatar ? (user.value.avatar = res.avatar) : ''
   }
 })
+
+const handleReload = () => location.reload()
 </script>
 
 <template>
@@ -34,6 +36,23 @@ onMounted(async () => {
         class="status"
         :class="socket.connected ? 'connected' : 'disconnected'"
       />
+      <span
+        class="offline"
+        v-if="!socket.connected"
+        @click="handleReload"
+        v-tooltip="{
+          message: {
+            'en-us': 'Click to refresh the page',
+            'ja-jp': 'クリックしてページを更新してください',
+            'zh-cn': '点击刷新页面',
+            'zh-tw': '點擊刷新頁面'
+          },
+          position: 'bottom'
+        }"
+      >
+        <span>{{ $t('message.offline') }}</span>
+        <Icon name="lucide:refresh-ccw" />
+      </span>
     </h2>
   </header>
 </template>
@@ -81,6 +100,20 @@ header {
 
   .disconnected {
     background-color: var(--kungalgame-red-4);
+  }
+
+  .offline {
+    margin-left: 10px;
+    font-size: initial;
+    font-weight: 500;
+    color: var(--kungalgame-font-color-0);
+    cursor: pointer;
+
+    span {
+      &:last-child {
+        margin-left: 4px;
+      }
+    }
   }
 }
 </style>
