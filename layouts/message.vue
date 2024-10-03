@@ -6,6 +6,8 @@
 
     <div class="content">
       <NuxtPage />
+
+      <KunFooter />
     </div>
   </div>
 </template>
@@ -30,5 +32,9 @@
   padding: 10px;
 
   @include kun-blur;
+}
+
+.kun-footer {
+  margin: 16px 0;
 }
 </style>

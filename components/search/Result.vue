@@ -8,7 +8,6 @@ import type {
   SearchResult
 } from '~/types/api/search'
 
-const localePath = useLocalePath()
 const { searchHistory } = storeToRefs(usePersistKUNGalgameSearchStore())
 const { keywords } = storeToRefs(useTempSearchStore())
 

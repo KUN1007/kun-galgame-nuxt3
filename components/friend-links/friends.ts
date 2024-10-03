@@ -87,12 +87,12 @@ export const galgame: Friend[] = [
   },
   {
     name: 'limulu',
-    link: 'https://limulu.cloud/',
+    link: 'www.listan.top',
     label: '一个简洁美观的Gal网站'
   },
   {
     name: 'zi0',
-    link: 'https://limulu.cloud/',
+    link: 'https://zi0.cc/',
     label: '梓澪のGalgame仓库'
   },
   {
