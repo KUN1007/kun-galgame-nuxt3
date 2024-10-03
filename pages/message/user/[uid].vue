@@ -30,7 +30,10 @@ const pageData = reactive({
 
 const scrollToBottom = () => {
   if (historyContainer.value) {
-    historyContainer.value.scrollTop = historyContainer.value.scrollHeight
+    historyContainer.value.scrollTo({
+      top: historyContainer.value.scrollHeight,
+      behavior: 'smooth'
+    })
   }
 }
 
@@ -112,8 +115,9 @@ const handleLoadHistoryMessages = async () => {
     nextTick(() => {
       if (historyContainer.value) {
         const newScrollHeight = historyContainer.value.scrollHeight
-        historyContainer.value.scrollTop =
-          previousScrollTop + (newScrollHeight - previousScrollHeight)
+        historyContainer.value.scrollTo({
+          top: previousScrollTop + (newScrollHeight - previousScrollHeight)
+        })
       }
     })
   } else {
@@ -173,7 +177,6 @@ const handleLoadHistoryMessages = async () => {
 
 .history {
   overflow-y: scroll;
-  scroll-behavior: auto;
   padding-bottom: 16px;
 
   .loader {
