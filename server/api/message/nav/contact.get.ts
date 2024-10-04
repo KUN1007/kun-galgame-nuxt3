@@ -1,7 +1,7 @@
 import UserModel from '~/server/models/user'
 import ChatRoomModel from '~/server/models/chat-room'
 import ChatMessageModel from '~/server/models/chat-message'
-import type { AsideItem } from '~/types/api/message'
+import type { AsideItem } from '~/types/api/chat-message'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
@@ -45,6 +45,7 @@ export default defineEventHandler(async (event) => {
         chatRoom.type === 'private' ? receiver!.avatar : chatRoom.avatar
 
       return {
+        chatroomName: chatRoom.name,
         content: lastMessage.content,
         time: lastMessage.time,
         count: readCount,

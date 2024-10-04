@@ -34,13 +34,3 @@ export interface Message {
   status: MessageStatus
   type: MessageType
 }
-
-export interface AsideItem {
-  content: string
-  time: number
-  count: number
-  unreadCount: number
-  route: string
-  title: string
-  avatar: string
-}

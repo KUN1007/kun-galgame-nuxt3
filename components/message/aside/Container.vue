@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { asideItems } from './asideItemStore'
+
 const { data: system } = await useFetch(`/api/message/nav/system`, {
   method: 'GET',
   ...kungalgameResponseHandler
@@ -8,6 +10,8 @@ const { data: contact } = await useFetch(`/api/message/nav/contact`, {
   method: 'GET',
   ...kungalgameResponseHandler
 })
+
+asideItems.value = contact.value ? contact.value : []
 </script>
 
 <template>
@@ -37,13 +41,11 @@ const { data: contact } = await useFetch(`/api/message/nav/contact`, {
       </template>
     </MessageAsideSystemItem>
 
-    <template v-if="contact">
-      <MessageAsideItem
-        v-for="(room, index) in contact"
-        :key="index"
-        :room="room"
-      />
-    </template>
+    <MessageAsideItem
+      v-for="(room, index) in asideItems"
+      :key="index"
+      :room="room"
+    />
   </aside>
 </template>
 

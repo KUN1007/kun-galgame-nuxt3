@@ -46,6 +46,7 @@ export default defineEventHandler(async (event) => {
 
   const responseData: Message = {
     cmid: message.cmid,
+    chatroomName: message.chatroom_name,
     sender: {
       uid: user!.uid,
       name: user!.name,

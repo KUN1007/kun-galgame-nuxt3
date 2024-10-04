@@ -9,8 +9,20 @@ export interface MessageHistoryRequest {
   limit: string
 }
 
+export interface AsideItem {
+  chatroomName: string
+  content: string
+  time: number
+  count: number
+  unreadCount: number
+  route: string
+  title: string
+  avatar: string
+}
+
 export interface Message {
   cmid: number
+  chatroomName: string
   sender: KunUser
   receiverUid: number
   content: string

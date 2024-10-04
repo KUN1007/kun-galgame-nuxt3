@@ -1,7 +1,7 @@
 import UserModel from '~/server/models/user'
 import ChatMessageModel from '~/server/models/chat-message'
 import ChatRoomModel from '~/server/models/chat-room'
-import type { MessageHistoryRequest } from '~/types/api/chat-message'
+import type { MessageHistoryRequest, Message } from '~/types/api/chat-message'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
@@ -42,8 +42,9 @@ export default defineEventHandler(async (event) => {
     .populate('user', 'uid avatar name', UserModel)
     .lean()
 
-  const messages = histories.map((message) => ({
+  const messages: Message[] = histories.map((message) => ({
     cmid: message.cmid,
+    chatroomName: message.chatroom_name,
     sender: {
       uid: message.user[0].uid,
       name: message.user[0].name,

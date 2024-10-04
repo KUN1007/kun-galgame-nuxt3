@@ -1,17 +1,11 @@
 <script setup lang="ts">
-import type { AsideItem } from '~/types/api/message'
+import type { AsideItem } from '~/types/api/chat-message'
 
 const { locale } = useI18n()
 
 defineProps<{
   room: AsideItem
 }>()
-
-// const itemData = reactive({})
-
-// onMounted(async () => {
-//   socket.on('receivedMessage', (msg: Message) => {})
-// })
 </script>
 
 <template>

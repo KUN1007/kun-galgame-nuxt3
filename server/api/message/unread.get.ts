@@ -1,5 +1,6 @@
 import MessageModel from '~/server/models/message'
 import MessageAdminModel from '~/server/models/message-admin'
+import ChatMessageModel from '~/server/models/chat-message'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
@@ -17,7 +18,12 @@ export default defineEventHandler(async (event) => {
     status: 'unread'
   })
 
-  if (message || messageAdmin) {
+  const chatMessage = await ChatMessageModel.findOne({
+    receiver_uid: uid,
+    'read_by.uid': { $ne: uid }
+  })
+
+  if (message || messageAdmin || chatMessage) {
     return 'Find unread message'
   } else {
     return 'Moe loli online!'

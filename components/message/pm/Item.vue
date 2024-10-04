@@ -10,7 +10,7 @@ const { locale } = useI18n()
 </script>
 
 <template>
-  <div class="item" :class="isSent ? 'sent' : 'others'">
+  <div class="message-item" :class="isSent ? 'sent' : 'others'">
     <KunAvatar :user="message.sender" size="30px" />
 
     <div class="content-container">
@@ -35,7 +35,7 @@ const { locale } = useI18n()
 </template>
 
 <style lang="scss" scoped>
-.item {
+.message-item {
   display: flex;
   width: 100%;
 
@@ -77,7 +77,7 @@ const { locale } = useI18n()
   }
 }
 
-.item + .item {
+.message-item + .message-item {
   margin-top: 5px;
 }
 

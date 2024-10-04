@@ -1,6 +1,6 @@
 import MessageModel from '~/server/models/message'
 import MessageAdminModel from '~/server/models/message-admin'
-import type { AsideItem } from '~/types/api/message'
+import type { AsideItem } from '~/types/api/chat-message'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
@@ -27,6 +27,7 @@ export default defineEventHandler(async (event) => {
 
   const responseData: AsideItem[] = [
     {
+      chatroomName: '',
       content: message ? message.content.slice(0, 100) : '',
       time: message?.time || 0,
       count: messageCount,
@@ -36,6 +37,7 @@ export default defineEventHandler(async (event) => {
       avatar: ''
     },
     {
+      chatroomName: '',
       content: '',
       time: messageAdmin?.time || 0,
       count: messageAdminCount,
