@@ -17,5 +17,13 @@ export const markdownToHtml = async (markdown: string) => {
     .use(rehypePrism)
     .use(rehypeStringify)
     .process(markdown)
-  return htmlVFile.toString()
+
+  let htmlContent = htmlVFile.toString()
+
+  const videoLinkRegex = /kv:<a href="(https?:\/\/[^\s]+?\.(mp4))">[^<]+<\/a>/g
+  htmlContent = htmlContent.replace(videoLinkRegex, (match, videoUrl) => {
+    return `<video controls loop playsinline width="100%" src="${videoUrl}"></video>`
+  })
+
+  return htmlContent
 }

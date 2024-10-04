@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import DOMPurify from 'dompurify'
+
 defineProps<{
   content: string
 }>()
 </script>
+
 <template>
-  <div class="kungalgame-content" v-html="content" />
+  <div class="kungalgame-content" v-html="DOMPurify.sanitize(content)" />
 </template>
+
 <style lang="scss">
 @use '~/assets/css/editor/index.scss';
 
