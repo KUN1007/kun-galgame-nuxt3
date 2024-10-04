@@ -22,6 +22,7 @@ const isShowLoader = computed(() => {
   }
   return true
 })
+const currentUserUid = usePersistUserStore().uid
 const uid = parseInt((route.params as { uid: string }).uid)
 const pageData = reactive({
   page: 1,
@@ -52,12 +53,19 @@ const sendMessage = async () => {
 
   if (typeof newMessage !== 'string') {
     messages.value.push(newMessage)
-    socket.emit('sendingMessage', newMessage)
+    socket.emit('message:sending', newMessage)
     messageInput.value = ''
   }
 
   nextTick(() => scrollToBottom())
 }
+
+const readMessageArray = (messages: Message[]) => {
+  const cmidArray = messages.map((message) => message.cmid)
+  socket.emit('message:read', uid, cmidArray)
+}
+
+const onWindowFocus = () => readMessageArray(messages.value)
 
 const getMessageHistory = async () => {
   const histories = await $fetch(`/api/message/chat/history`, {
@@ -66,7 +74,9 @@ const getMessageHistory = async () => {
     watch: false,
     ...kungalgameResponseHandler
   })
-  return Array.isArray(histories) ? histories : []
+  const results = Array.isArray(histories) ? histories : []
+  readMessageArray(results)
+  return results
 }
 
 watch(
@@ -75,18 +85,32 @@ watch(
 )
 
 onMounted(async () => {
-  messages.value = await getMessageHistory()
+  socket.emit('private:join', uid)
 
-  socket.emit('joinChat', uid)
-
-  socket.on('receivedMessage', (msg: Message) => {
+  socket.on('message:received', (msg: Message) => {
     messages.value.push(msg)
+    readMessageArray([msg])
     nextTick(() => scrollToBottom())
   })
 
+  socket.on('message:read:update', (cmidArray: number[]) => {
+    messages.value
+      .filter((message) => cmidArray.includes(message.cmid))
+      .forEach((message) => {
+        if (message.receiverUid !== currentUserUid) {
+          message.readBy.push({ uid: currentUserUid, read_time: Date.now() })
+        }
+      })
+  })
+
+  messages.value = await getMessageHistory()
+
+  window.addEventListener('focus', onWindowFocus)
   window.addEventListener('keydown', onKeydown)
 
-  nextTick(() => scrollToBottom())
+  nextTick(() => {
+    scrollToBottom()
+  })
 })
 
 const onKeydown = async (event: KeyboardEvent) => {
@@ -97,8 +121,9 @@ const onKeydown = async (event: KeyboardEvent) => {
 }
 
 onBeforeUnmount(() => {
+  window.removeEventListener('focus', onWindowFocus)
   window.removeEventListener('keydown', onKeydown)
-  socket.emit('leaveChat', uid)
+  socket.emit('private:leave')
 })
 
 const handleLoadHistoryMessages = async () => {

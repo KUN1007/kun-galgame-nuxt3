@@ -25,6 +25,7 @@ const { locale } = useI18n()
           {{ formatTimeDifference(message.time, locale as Language) }}
         </span>
         <Icon
+          v-if="isSent"
           :name="message.readBy.length ? 'lucide:check-check' : 'lucide:check'"
           class="icon"
         />

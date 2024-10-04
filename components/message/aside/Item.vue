@@ -6,6 +6,12 @@ const { locale } = useI18n()
 defineProps<{
   room: AsideItem
 }>()
+
+// const itemData = reactive({})
+
+// onMounted(async () => {
+//   socket.on('receivedMessage', (msg: Message) => {})
+// })
 </script>
 
 <template>

@@ -17,6 +17,9 @@ export default defineEventHandler(async (event) => {
   if (parseInt(receiverUid) === userInfo.uid) {
     return 'you cannot send message to yourself'
   }
+  if (limit !== '30') {
+    return kunError(event, 10209)
+  }
   const roomId = generateRoomId(parseInt(receiverUid), uid)
 
   const room = await ChatRoomModel.findOne({ name: roomId }).lean()
@@ -32,7 +35,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const skip = (parseInt(page) - 1) * parseInt(limit)
-  const histories = await ChatMessageModel.find({ crid: room.crid })
+  const histories = await ChatMessageModel.find({ chatroom_name: roomId })
     .sort({ cmid: -1 })
     .skip(skip)
     .limit(parseInt(limit))

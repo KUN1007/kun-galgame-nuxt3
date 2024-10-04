@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
   const user = await UserModel.findOne({ uid }).lean()
 
   const roomId = generateRoomId(parseInt(receiverUid), userInfo.uid)
-  const room = await ChatRoomModel.findOneAndUpdate(
+  await ChatRoomModel.findOneAndUpdate(
     { name: roomId },
     {
       last_message: {
@@ -37,10 +37,11 @@ export default defineEventHandler(async (event) => {
   )
 
   const message = await ChatMessageModel.create({
-    crid: room!.crid,
+    chatroom_name: roomId,
     sender_uid: uid,
     receiver_uid: parseInt(receiverUid),
-    content
+    content,
+    status: 'sent'
   })
 
   const responseData: Message = {

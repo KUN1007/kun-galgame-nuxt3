@@ -27,11 +27,11 @@ export default defineEventHandler(async (event) => {
       const lastMessage = chatRoom.last_message
 
       const readCount = await ChatMessageModel.countDocuments({
-        crid: chatRoom.crid
+        chatroom_name: chatRoom.name
       })
 
       const unreadCount = await ChatMessageModel.countDocuments({
-        crid: chatRoom.crid,
+        chatroom_name: chatRoom.name,
         sender_uid: { $ne: userId },
         'read_by.uid': { $ne: userId }
       })

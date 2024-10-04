@@ -5,7 +5,7 @@ import type { ChatMessageAttributes } from './types/chat-message'
 const ChatMessageSchema = new mongoose.Schema<ChatMessageAttributes>(
   {
     cmid: { type: Number, unique: true },
-    crid: { type: Number, required: true },
+    chatroom_name: { type: String, required: true },
     sender_uid: { type: Number, required: true },
     receiver_uid: { type: Number, default: 0 },
     content: { type: String, default: '', maxlength: 1000 },

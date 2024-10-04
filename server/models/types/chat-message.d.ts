@@ -12,7 +12,7 @@ export interface MessageReaction {
 
 export interface ChatMessageAttributes {
   cmid: number
-  crid: number
+  chatroom_name: string
   sender_uid: number
   receiver_uid: number
   content: string
