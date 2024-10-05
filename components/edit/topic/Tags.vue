@@ -11,9 +11,7 @@ const isInputFocus = ref(false)
 const inputValue = ref('')
 const canDeleteTag = ref(false)
 
-onMounted(() => alert(JSON.stringify(route)))
-
-if (route.path.startsWith('edit')) {
+if (route.path.startsWith('/edit')) {
   if (isTopicRewriting.value) {
     selectedTags.value = rewriteTags.value
   } else {
@@ -78,6 +76,7 @@ const validateTagName = (tagName: string) => {
 watch(
   () => selectedTags.value,
   () => {
+    alert(route.path)
     if (route.path.startsWith('/topic') && !isReplyRewriting.value) {
       replyDraft.value.tags = selectedTags.value
     }

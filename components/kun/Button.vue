@@ -35,6 +35,9 @@ const { ripples, onClick } = useRipple()
   position: relative;
   overflow: hidden;
   transition: all 0.23s;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
     background-color: var(--kungalgame-blue-5);

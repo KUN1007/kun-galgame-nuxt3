@@ -49,15 +49,16 @@ const emits = defineEmits<{
   display: flex;
   white-space: nowrap;
 
-  span {
+  .icon {
+    font-size: 20px;
+  }
+
+  & > span {
+    display: flex;
     cursor: pointer;
     padding: 3px 10px;
     margin-right: 5px;
     border-radius: 10px;
-  }
-
-  .icon {
-    font-size: 20px;
   }
 
   .active {

@@ -48,6 +48,7 @@ export default defineNitroPlugin((nitroApp: NitroApp) => {
       },
       websocket: {
         open(peer) {
+          // @ts-expect-error private method
           const nodeContext = peer.ctx.node
           const req = nodeContext.req
 

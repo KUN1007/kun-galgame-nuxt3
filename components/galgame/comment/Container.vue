@@ -132,12 +132,11 @@ onMounted(() => (commentToUid.value = toUser.uid))
 }
 
 .notice {
+  font-size: small;
   color: var(--kungalgame-blue-5);
-  border-bottom: 2px solid transparent;
-
-  &:hover {
-    border-bottom: 2px solid var(--kungalgame-blue-5);
-  }
+  color: var(--kungalgame-blue-5);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .sad {

@@ -40,10 +40,10 @@ const handleClose = () => {
 <template>
   <div class="recent" v-if="messageData">
     <div class="message" v-for="(message, index) in messageData" :key="index">
+      <Icon class="icon" :name="iconMap[message.type]" />
       <NuxtLinkLocale class="user" :to="`/kungalgamer/${message.uid}/info`">
         {{ message.name }}
       </NuxtLinkLocale>
-      <span><Icon class="icon" :name="iconMap[message.type]" /></span>
       <NuxtLinkLocale
         class="link"
         :to="message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`"
@@ -70,23 +70,32 @@ const handleClose = () => {
 }
 
 .message {
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   word-break: break-all;
 
   .user {
-    margin-right: 5px;
-    color: var(--kungalgame-blue-5);
+    color: var(--kungalgame-font-color-3);
+
+    &::after {
+      content: '-';
+      color: var(--kungalgame-gray-4);
+      margin: 0 4px;
+    }
   }
 
   .icon {
     margin-right: 5px;
+    color: var(--kungalgame-blue-5);
   }
 
   .link {
-    color: var(--kungalgame-blue-5);
+    color: var(--kungalgame-font-color-0);
+
+    &:hover {
+      color: var(--kungalgame-blue-5);
+    }
 
     span:last-child {
-      color: var(--kungalgame-font-color-0);
       font-size: 12px;
       font-weight: initial;
       margin-left: 7px;

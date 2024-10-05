@@ -198,12 +198,21 @@ watch(
     }
 
     h1,
-    h2,
+    h2 {
+      padding-top: 16px;
+      margin-bottom: 24px;
+      margin-top: 48px;
+      border-top: 1px solid var(--kungalgame-trans-blue-2);
+    }
+
     h3,
-    h4,
+    h4 {
+      margin: 16px 0;
+    }
+
     h5,
     h6 {
-      margin: 17px 0;
+      margin: 8px 0;
     }
 
     img {
