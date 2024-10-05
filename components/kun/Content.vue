@@ -7,7 +7,10 @@ defineProps<{
 </script>
 
 <template>
-  <div class="kungalgame-content" v-html="DOMPurify.sanitize(content)" />
+  <div
+    class="kungalgame-content"
+    v-html="DOMPurify.sanitize(content, { ADD_ATTR: ['line'] })"
+  />
 </template>
 
 <style lang="scss">
@@ -40,12 +43,18 @@ defineProps<{
 
   h3,
   h4 {
-    margin: 16px 0;
+    margin-top: 32px;
+    margin-bottom: 16px;
   }
 
   h5,
   h6 {
     margin: 8px 0;
+  }
+
+  ul,
+  ol {
+    line-height: 2rem;
   }
 
   img {
@@ -83,15 +92,54 @@ defineProps<{
 
   pre {
     margin: 17px 0;
-    border: 1px solid var(--kungalgame-blue-5);
     border-radius: 5px;
     padding: 17px;
     background-color: var(--kungalgame-trans-white-5);
     position: relative;
+    box-shadow: var(--shadow);
+    overflow-x: auto;
 
     code {
       font-size: 15px;
       font-family: monospace;
+      float: left;
+      min-width: 100%;
+
+      .code-line {
+        display: block;
+        padding-left: 16px;
+        padding-right: 16px;
+        margin-left: -16px;
+        margin-right: -16px;
+        border-left: 4px solid transparent;
+      }
+
+      .code-line.inserted {
+        color: var(--kungalgame-white-5);
+        background-color: var(--kungalgame-green-4);
+      }
+
+      .code-line.deleted {
+        color: var(--kungalgame-white-5);
+        background-color: var(--kungalgame-red-5);
+      }
+
+      .highlight-line {
+        margin-left: -16px;
+        margin-right: -16px;
+        background-color: var(--kungalgame-trans-blue-1);
+        border-left: 4px solid var(--kungalgame-blue-5);
+      }
+
+      .line-number::before {
+        display: inline-block;
+        width: 1rem;
+        text-align: right;
+        margin-right: 16px;
+        margin-left: -8px;
+        color: var(--kungalgame-gray-4);
+        content: attr(line);
+      }
     }
   }
 

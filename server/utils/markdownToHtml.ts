@@ -4,7 +4,7 @@ import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
-import rehypePrism from 'rehype-prism'
+import rehypePrism from 'rehype-prism-plus'
 import { unified } from 'unified'
 
 export const markdownToHtml = async (markdown: string) => {

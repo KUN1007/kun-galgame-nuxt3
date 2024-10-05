@@ -270,11 +270,11 @@ const editorInfo = useEditor((root) =>
 
     pre {
       margin: 17px 0;
-      border: 1px solid var(--kungalgame-blue-5);
       border-radius: 5px;
       padding: 17px;
-      background-color: var(--kungalgame-trans-white-2);
+      background-color: var(--kungalgame-trans-white-5);
       position: relative;
+      box-shadow: var(--shadow);
 
       code {
         font-size: 15px;
