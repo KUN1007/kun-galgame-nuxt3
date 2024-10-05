@@ -8,11 +8,11 @@ const { t } = useI18n()
 const { messageStatus } = storeToRefs(useTempSettingStore())
 
 useHead({
-  title: `${t('seo.kungalgame.title')} - ${t('head.title')}`,
+  title: `${t('seo.message.title')} - ${t('head.title')}`,
   meta: [
     {
       name: 'description',
-      content: t('seo.kungalgame.description')
+      content: t('seo.message.description')
     }
   ]
 })
@@ -21,7 +21,7 @@ onMounted(() => (messageStatus.value = 'online'))
 </script>
 
 <template>
-  <div>Default Page</div>
+  <MessageNotice />
 </template>
 
 <style lang="scss" scoped></style>

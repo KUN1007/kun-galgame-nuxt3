@@ -897,6 +897,10 @@
     "search": {
       "title": "搜索",
       "description": "搜索 Galgame, Galgame 資源, 話題, 用戶, 回復, 評論等"
+    },
+    "message": {
+      "title": "消息",
+      "description": "鯤 Galgame 論壇消息系統，系統通知，消息，私聊，Galgame 群聊等"
     }
   },
   "ComponentAlert": {

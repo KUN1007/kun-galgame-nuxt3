@@ -46,6 +46,10 @@ asideItems.value = contact.value ? contact.value : []
       :key="index"
       :room="room"
     />
+
+    <div class="notice">
+      <MessageNotice />
+    </div>
   </aside>
 </template>
 
@@ -69,5 +73,15 @@ span {
 
 .new {
   color: var(--kungalgame-red-5);
+}
+
+.notice {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .notice {
+    display: block;
+  }
 }
 </style>
