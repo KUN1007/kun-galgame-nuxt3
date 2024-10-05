@@ -11,11 +11,11 @@ export default defineEventHandler(async (event) => {
   const uid = userInfo.uid
 
   const { receiverUid, page, limit }: MessageHistoryRequest = getQuery(event)
-  if (!receiverUid) {
-    return 'receiverUid not found'
+  if (!receiverUid || !page || !limit) {
+    return kunError(event, 10507)
   }
   if (parseInt(receiverUid) === userInfo.uid) {
-    return 'you cannot send message to yourself'
+    return kunError(event, 10401)
   }
   if (limit !== '30') {
     return kunError(event, 10209)

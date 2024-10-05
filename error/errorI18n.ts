@@ -57,6 +57,9 @@ const errorMessagesEN: Record<number, string> = {
   10303: `Invalid Email, Password, or Verification Code Format (-B)`,
   10304: `Email address not registered. (-B)`,
 
+  // Message Part
+  10401: `Cannot send a message to yourself. (-B)`,
+
   // Reply Part
   10501: `Reply with a maximum of 7 tags. (-B)`,
   10502: `Single tag maximum length is 17 characters (-B)`,
@@ -169,6 +172,8 @@ const errorMessagesJP: Record<number, string> = {
   10303: `無効なメール、パスワード、または認証コードです (-B)`,
   10304: `このメールアドレスは登録されていません (-B)`,
 
+  10401: `自分にメッセージを送信することはできません。(-B)`,
+
   10501: `返信には最大7つのタグが必要です (-B)`,
   10502: `1つのタグの最大文字数は17文字です (-B)`,
   10503: `返信内容は空にできません (-B)`,
@@ -279,6 +284,8 @@ const errorMessagesCN: Record<number, string> = {
   10303: `非法的邮箱, 密码, 或验证码 (-B)`,
   10304: `该邮箱地址未注册 (-B)`,
 
+  10401: `不能给自己发送消息。(-B)`,
+
   10501: `回复最多 7 个标签 (-B)`,
   10502: `单个标签最长 17 个字符 (-B)`,
   10503: `回复内容不可为空 (-B)`,
@@ -388,6 +395,8 @@ const errorMessagesTW: Record<number, string> = {
   10302: `非法的郵箱格式 (-B)`,
   10303: `非法的郵箱, 密碼, 或驗證碼 (-B)`,
   10304: `該郵箱地址未註冊 (-B)`,
+
+  10401: `不能傳送訊息給自己。(-B)`,
 
   10501: `回復最多 7 個標簽 (-B)`,
   10502: `單個標簽最長 17 個字符 (-B)`,

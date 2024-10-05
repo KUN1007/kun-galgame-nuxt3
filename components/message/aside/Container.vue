@@ -16,7 +16,7 @@ asideItems.value = contact.value ? contact.value : []
 
 <template>
   <aside class="aside">
-    <h2>Message</h2>
+    <h2>{{ $t('message.name') }}</h2>
 
     <KunDivider margin="10px 0" />
 
