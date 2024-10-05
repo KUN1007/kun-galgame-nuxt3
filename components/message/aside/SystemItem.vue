@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AsideItem } from '~/types/api/message'
+import type { AsideItem } from '~/types/api/chat-message'
 
 const { locale } = useI18n()
 
@@ -10,12 +10,15 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLinkLocale class="item" :to="`/message/${data.route}`">
+  <NuxtLinkLocale
+    class="item"
+    :to="`/message/${data.route as 'system' | 'notice'}`"
+  >
     <NuxtImg src="/apple-touch-icon.png" />
     <div class="info">
       <div class="title">
-        <span>{{ title }}</span>
-        <span v-if="data.time">
+        <span class="name">{{ title }}</span>
+        <span class="time" v-if="data.time">
           {{ formatTimeDifference(data.time, locale) }}
         </span>
       </div>
@@ -64,15 +67,13 @@ defineProps<{
     align-items: center;
     justify-content: space-between;
 
-    span {
-      &:first-child {
-        font-weight: bold;
-      }
+    .name {
+      font-weight: bold;
+    }
 
-      &:last-child {
-        font-size: small;
-        color: var(--kungalgame-font-color-0);
-      }
+    .time {
+      font-size: small;
+      color: var(--kungalgame-font-color-0);
     }
   }
 
@@ -107,6 +108,12 @@ defineProps<{
     .unread {
       background-color: var(--kungalgame-blue-5);
     }
+  }
+}
+
+@media (max-width: 700px) {
+  .item {
+    width: 100%;
   }
 }
 </style>

@@ -4,7 +4,6 @@ const props = defineProps<{
 }>()
 
 const socket = useSocketIO()
-const router = useRouter()
 
 const res = await $fetch(`/api/user/${props.uid}`, {
   method: 'GET',
@@ -22,7 +21,9 @@ const handleReload = () => location.reload()
 
 <template>
   <header>
-    <Icon @click="router.back()" class="icon" name="lucide:chevron-left" />
+    <NuxtLinkLocale to="/message">
+      <Icon class="icon" name="lucide:chevron-left" />
+    </NuxtLinkLocale>
     <KunAvatar :user="user" size="30px" />
     <h2 class="username">
       <span>{{ user.name }}</span>
@@ -59,10 +60,11 @@ header {
   margin-bottom: 10px;
   height: 32px;
 
-  .icon {
-    cursor: pointer;
+  a {
     font-size: 24px;
     margin-right: 10px;
+    color: var(--kungalgame-font-color-3);
+    @include kun-center;
 
     &:hover {
       color: var(--kungalgame-blue-5);

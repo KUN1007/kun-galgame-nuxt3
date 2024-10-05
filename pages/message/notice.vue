@@ -23,7 +23,7 @@ onMounted(async () => {
     (message) => message.status === 'unread'
   )
   if (hasUnreadMessage) {
-    await $fetch(`/api/message/read/all`, {
+    await $fetch(`/api/message/system/read`, {
       method: 'PUT',
       ...kungalgameResponseHandler
     })
@@ -34,7 +34,9 @@ onMounted(async () => {
 <template>
   <div class="container" v-if="data">
     <header>
-      <Icon @click="router.back()" class="icon" name="lucide:chevron-left" />
+      <NuxtLinkLocale to="/message">
+        <Icon class="icon" name="lucide:chevron-left" />
+      </NuxtLinkLocale>
       <h2>{{ $t('message.notice') }}</h2>
     </header>
 
@@ -70,10 +72,11 @@ header {
   align-items: center;
   margin-bottom: 10px;
 
-  span {
-    cursor: pointer;
+  a {
     font-size: 24px;
     margin-right: 10px;
+    color: var(--kungalgame-font-color-3);
+    @include kun-center;
 
     &:hover {
       color: var(--kungalgame-blue-5);

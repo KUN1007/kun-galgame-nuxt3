@@ -110,4 +110,10 @@ defineProps<{
     }
   }
 }
+
+@media (max-width: 700px) {
+  .item {
+    width: 100%;
+  }
+}
 </style>

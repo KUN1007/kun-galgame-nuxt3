@@ -55,7 +55,6 @@ asideItems.value = contact.value ? contact.value : []
   color: var(--kungalgame-font-color-3);
   display: flex;
   flex-direction: column;
-  margin-right: 16px;
   padding: 10px;
   @include kun-blur;
 }
