@@ -139,12 +139,12 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   <div class="btn-container">
     <p class="section">
       <Icon class="icon" name="lucide:layout-grid" />
-      <span v-for="(kun, index) in section" :key="index">
+      <p v-for="(kun, index) in section" :key="index">
         <Icon class="icon" :name="iconMap[kun[0]]" />
         <span>
           {{ $t(`edit.topic.section.${kun}`) }}
         </span>
-      </span>
+      </p>
     </p>
 
     <KunButton
@@ -192,11 +192,11 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   color: var(--kungalgame-font-color-1);
 
   .icon {
-    font-size: 17px;
+    font-size: 20px;
     margin-right: 10px;
   }
 
-  & > span {
+  p {
     margin: 3px;
     padding: 3px 17px;
     background-color: var(--kungalgame-trans-blue-0);

@@ -123,7 +123,8 @@ watch(
     font-size: 20px;
   }
 
-  span {
+  & > span {
+    display: flex;
     cursor: pointer;
     padding: 3px 10px;
     margin-right: 5px;

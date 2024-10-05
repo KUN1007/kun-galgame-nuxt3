@@ -223,7 +223,8 @@ onUnmounted(() => {
     display: flex;
     white-space: nowrap;
 
-    span {
+    & > span {
+      display: flex;
       cursor: pointer;
       padding: 3px 10px;
       margin-right: 5px;
