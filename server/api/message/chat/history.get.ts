@@ -42,6 +42,16 @@ export default defineEventHandler(async (event) => {
     .populate('user', 'uid avatar name', UserModel)
     .lean()
 
+  const cmidArray = histories
+    .filter((message) => !message.read_by.some((read) => read.uid === uid))
+    .map((message) => message.cmid)
+  if (cmidArray.length > 0) {
+    await ChatMessageModel.updateMany(
+      { cmid: { $in: cmidArray }, 'read_by.uid': { $ne: uid } },
+      { $push: { read_by: { uid, read_time: Date.now() } } }
+    )
+  }
+
   const messages: Message[] = histories.map((message) => ({
     cmid: message.cmid,
     chatroomName: message.chatroom_name,
@@ -53,11 +63,7 @@ export default defineEventHandler(async (event) => {
     receiverUid: parseInt(receiverUid),
     content: message.content,
     time: message.time,
-    status: message.status,
-    isRecalled: message.is_recalled,
-    recalledTime: message.recalled_time,
-    readBy: message.read_by,
-    reactions: message.reactions
+    status: message.status
   }))
 
   return messages.reverse()

@@ -28,8 +28,4 @@ export interface Message {
   content: string
   time: number
   status: string
-  isRecalled: boolean
-  recalledTime: number
-  readBy: MessageRead[]
-  reactions: MessageReaction[]
 }

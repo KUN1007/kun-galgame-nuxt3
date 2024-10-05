@@ -1,52 +1,44 @@
-import ChatMessageModel from '~/server/models/chat-message'
 import { KUNGalgameSocket } from '../plugins/socket.io'
-import type { Message } from '~/types/api/chat-message'
+import { sendingMessage } from './service/message-sending'
+import { ERROR_CODES } from './error'
 
 const userSockets = new Map<number | undefined, KUNGalgameSocket>()
 
 export const handleSocketRequest = (socket: KUNGalgameSocket) => {
   socket.on('private:join', (receiverUid: number) => {
     const uid = socket.payload?.uid
-    userSockets.set(uid, socket)
-
-    if (uid) {
-      const roomId = generateRoomId(uid, receiverUid)
-      socket.join(roomId)
+    if (!uid) {
+      socket.emit(ERROR_CODES.MISSING_UID)
+      return
     }
+
+    userSockets.set(uid, socket)
+    const roomId = generateRoomId(uid, receiverUid)
+    socket.join(roomId)
   })
 
-  socket.on(
-    'message:read',
-    async (receiverUid: number, cmidArray: number[]) => {
-      const uid = socket.payload?.uid
-      const sendingMessageUserSocket = userSockets.get(uid)
-      if (!uid || !sendingMessageUserSocket) {
-        return
-      }
-      const roomId = generateRoomId(uid, receiverUid)
-
-      await ChatMessageModel.updateMany(
-        {
-          cmid: { $in: cmidArray },
-          'read_by.uid': { $ne: uid }
-        },
-        {
-          $push: { read_by: { uid: uid, read_time: Date.now() } }
-        }
-      )
-
-      socket.to(roomId).emit('message:read:update', cmidArray)
-    }
-  )
-
-  socket.on('message:sending', async (message: Message) => {
+  socket.on('message:sending', async (receiverUid: number, content: string) => {
     const uid = socket.payload?.uid
     const sendingMessageUserSocket = userSockets.get(uid)
 
-    if (sendingMessageUserSocket && uid) {
-      const roomId = generateRoomId(uid, message.receiverUid)
-      sendingMessageUserSocket.to(roomId).emit('message:received', message)
+    if (!uid) {
+      socket.emit(ERROR_CODES.MISSING_UID)
+      return false
     }
+    if (uid === receiverUid) {
+      socket.emit(ERROR_CODES.CANNOT_SEND_MESSAGE_TO_YOURSELF)
+      return false
+    }
+    if (!sendingMessageUserSocket) {
+      socket.emit(ERROR_CODES.INVALID_SOCKET)
+      return false
+    }
+
+    const message = await sendingMessage(uid, receiverUid, content)
+
+    const roomId = generateRoomId(uid, receiverUid)
+    sendingMessageUserSocket.emit('message:sent', message)
+    sendingMessageUserSocket.to(roomId).emit('message:received', message)
   })
 
   socket.on('private:leave', async () => {

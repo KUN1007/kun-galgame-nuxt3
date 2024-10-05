@@ -3,27 +3,14 @@ import ChatRoomModel from '~/server/models/chat-room'
 import ChatMessageModel from '~/server/models/chat-message'
 import type { Message } from '~/types/api/chat-message'
 
-export default defineEventHandler(async (event) => {
-  const userInfo = await getCookieTokenInfo(event)
-  if (!userInfo) {
-    return kunError(event, 10115, 205)
-  }
-  const uid = userInfo.uid.toString()
-
-  const { receiverUid }: { receiverUid: string } = getQuery(event)
-  const receiverUidNumber = parseInt(receiverUid)
-  if (!receiverUidNumber) {
-    return 'receiverUid not found'
-  }
-
-  const { content } = await readBody(event)
-  if (parseInt(receiverUid) === userInfo.uid) {
-    return 'you cannot send message to yourself'
-  }
-
+export const sendingMessage = async (
+  uid: number,
+  receiverUid: number,
+  content: string
+) => {
   const user = await UserModel.findOne({ uid }).lean()
 
-  const roomId = generateRoomId(parseInt(receiverUid), userInfo.uid)
+  const roomId = generateRoomId(receiverUid, uid)
   await ChatRoomModel.findOneAndUpdate(
     { name: roomId },
     {
@@ -39,7 +26,7 @@ export default defineEventHandler(async (event) => {
   const message = await ChatMessageModel.create({
     chatroom_name: roomId,
     sender_uid: uid,
-    receiver_uid: parseInt(receiverUid),
+    receiver_uid: receiverUid,
     content,
     status: 'sent'
   })
@@ -52,15 +39,11 @@ export default defineEventHandler(async (event) => {
       name: user!.name,
       avatar: user!.avatar
     },
-    receiverUid: parseInt(receiverUid),
+    receiverUid: receiverUid,
     content: message.content,
     time: message.time,
-    status: message.status,
-    isRecalled: message.is_recalled,
-    recalledTime: message.recalled_time,
-    readBy: message.read_by,
-    reactions: message.reactions
+    status: message.status
   }
 
   return responseData
-})
+}

@@ -7,6 +7,7 @@ const props = defineProps<{
 }>()
 
 const socket = useSocketIO()
+useSocketIOErrorHandler()
 
 const historyContainer = ref<HTMLDivElement | null>(null)
 const messageInput = ref('')
@@ -41,54 +42,7 @@ const sendMessage = async () => {
   if (!messageInput.value.trim()) {
     return
   }
-
-  const newMessage = await $fetch(`/api/message/chat/private`, {
-    method: 'POST',
-    query: { receiverUid: uid },
-    body: { content: messageInput.value },
-    watch: false,
-    ...kungalgameResponseHandler
-  })
-
-  if (typeof newMessage !== 'string') {
-    messages.value.push(newMessage)
-    replaceAsideItem(newMessage)
-    socket.emit('message:sending', newMessage)
-    messageInput.value = ''
-  }
-
-  nextTick(() => scrollToBottom())
-}
-
-const readMessageArray = (messages: Message[]) => {
-  const cmidArray = messages
-    .filter(
-      (message) => !message.readBy.some((read) => read.uid === currentUserUid)
-    )
-    .map((message) => message.cmid)
-
-  if (!cmidArray.length) {
-    return
-  }
-
-  socket.emit('message:read', uid, cmidArray)
-}
-
-const setupObserver = () => {
-  if (!historyContainer.value) {
-    return
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting && messages.value.length) {
-        readMessageArray(messages.value)
-      }
-    })
-  })
-
-  const messageElements = historyContainer.value.querySelectorAll('.item')
-  messageElements.forEach((el) => observer.observe(el))
+  socket.emit('message:sending', uid, messageInput.value)
 }
 
 const getMessageHistory = async () => {
@@ -99,7 +53,6 @@ const getMessageHistory = async () => {
     ...kungalgameResponseHandler
   })
   const results = Array.isArray(histories) ? histories : []
-  readMessageArray(results)
   return results
 }
 
@@ -111,30 +64,28 @@ watch(
 onMounted(async () => {
   socket.emit('private:join', uid)
 
-  socket.on('message:received', (msg: Message) => {
-    messages.value.push(msg)
-    replaceAsideItem(msg)
-    readMessageArray([msg])
+  socket.on('message:sent', (newMessage: Message) => {
+    messages.value.push(newMessage)
+    replaceAsideItem(newMessage)
+    messageInput.value = ''
     nextTick(() => scrollToBottom())
   })
 
-  socket.on('message:read:update', (cmidArray: number[]) => {
-    messages.value
-      .filter((message) => cmidArray.includes(message.cmid))
-      .forEach((message) => {
-        if (message.receiverUid !== currentUserUid) {
-          message.readBy.push({ uid: currentUserUid, read_time: Date.now() })
-        }
+  socket.on('message:received', (msg: Message) => {
+    if (msg.receiverUid === currentUserUid && msg.sender.uid === uid) {
+      messages.value.push(msg)
+      replaceAsideItem(msg)
+      nextTick(() => {
+        scrollToBottom()
       })
+    }
   })
 
   messages.value = await getMessageHistory()
-
   window.addEventListener('keydown', onKeydown)
 
   nextTick(() => {
     scrollToBottom()
-    setupObserver()
   })
 })
 
