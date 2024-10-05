@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DOMPurify from 'dompurify'
+import DOMPurify from 'isomorphic-dompurify'
 
 defineProps<{
   content: string

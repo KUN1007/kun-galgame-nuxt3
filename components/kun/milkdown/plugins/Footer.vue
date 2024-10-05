@@ -12,7 +12,7 @@ const { textCount: textCountReply } = storeToRefs(
 
 const { view } = usePluginViewContext()
 
-const routeName = useRouteName()
+const route = useRoute()
 
 const size = computed(() => {
   return view.value.state.doc.textContent.length
@@ -21,29 +21,29 @@ const size = computed(() => {
 watch(
   () => size.value,
   () => {
-    if (routeName.value === 'edit-topic' && isTopicRewriting.value) {
+    if (route.path.startsWith('/edit') && isTopicRewriting.value) {
       textCountEditRewrite.value = size.value
       return
     }
-    if (routeName.value === 'topic-tid' && isReplyRewriting.value) {
+    if (route.path.startsWith('/topic') && isReplyRewriting.value) {
       textCountReplyRewrite.value = size.value
       return
     }
-    if (routeName.value === 'edit-topic') {
+    if (route.path.startsWith('/edit')) {
       textCountEdit.value = size.value
     }
-    if (routeName.value === 'topic-tid') {
+    if (route.path.startsWith('/topic')) {
       textCountReply.value = size.value
     }
   }
 )
 
 onMounted(() => {
-  if (routeName.value === 'edit-topic' && isTopicRewriting.value) {
+  if (route.path.startsWith('/edit') && isTopicRewriting.value) {
     textCountEditRewrite.value = size.value
     return
   }
-  if (routeName.value === 'topic-tid' && isReplyRewriting.value) {
+  if (route.path.startsWith('/topic') && isReplyRewriting.value) {
     textCountReplyRewrite.value = size.value
   }
 })

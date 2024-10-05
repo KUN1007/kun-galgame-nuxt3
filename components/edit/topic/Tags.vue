@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const routeName = useRouteName()
+const route = useRoute()
 
 const { tags: rewriteTags, isTopicRewriting } = storeToRefs(useTempEditStore())
 const { tags: editTags } = storeToRefs(usePersistEditTopicStore())
@@ -11,7 +11,9 @@ const isInputFocus = ref(false)
 const inputValue = ref('')
 const canDeleteTag = ref(false)
 
-if (routeName.value === 'edit-topic') {
+onMounted(() => alert(JSON.stringify(route)))
+
+if (route.path.startsWith('edit')) {
   if (isTopicRewriting.value) {
     selectedTags.value = rewriteTags.value
   } else {
@@ -19,7 +21,7 @@ if (routeName.value === 'edit-topic') {
   }
 }
 
-if (routeName.value === 'topic-tid') {
+if (route.path.startsWith('/topic')) {
   if (isReplyRewriting.value) {
     selectedTags.value = replyRewrite.value[0].tags
   } else {
@@ -76,10 +78,10 @@ const validateTagName = (tagName: string) => {
 watch(
   () => selectedTags.value,
   () => {
-    if (routeName.value === 'topic-tid' && !isReplyRewriting.value) {
+    if (route.path.startsWith('/topic') && !isReplyRewriting.value) {
       replyDraft.value.tags = selectedTags.value
     }
-    if (routeName.value === 'edit-topic' && !isReplyRewriting.value) {
+    if (route.path.startsWith('/edit') && !isReplyRewriting.value) {
       editTags.value = selectedTags.value
     }
   }

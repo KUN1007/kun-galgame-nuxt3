@@ -2,7 +2,7 @@
 const { mode: topicMode } = storeToRefs(usePersistEditTopicStore())
 const { mode: replyMode } = storeToRefs(usePersistKUNGalgameReplyStore())
 
-const routeName = useRouteName()
+const route = useRoute()
 
 const modeItems = [
   {
@@ -16,7 +16,7 @@ const modeItems = [
 ]
 
 const handleSetMode = (value: 'preview' | 'code') => {
-  if (routeName.value === 'edit-topic') {
+  if (route.path.startsWith('/edit')) {
     topicMode.value = value
   } else {
     replyMode.value = value
@@ -27,7 +27,7 @@ const handleSetMode = (value: 'preview' | 'code') => {
 <template>
   <KunNav
     :items="modeItems"
-    :default-value="routeName === 'edit-topic' ? topicMode : replyMode"
+    :default-value="route.path.startsWith('/edit') ? topicMode : replyMode"
     @set="(value) => handleSetMode(value as 'preview' | 'code')"
     v-tooltip="{
       message: {

@@ -2,7 +2,7 @@
 import 'animate.css'
 
 const router = useRouter()
-const routeName = useRouteName()
+const route = useRoute()
 const localePath = useLocalePath()
 
 const { showKUNGalgameHamburger, messageStatus } = storeToRefs(
@@ -10,7 +10,7 @@ const { showKUNGalgameHamburger, messageStatus } = storeToRefs(
 )
 
 watch(
-  () => useRouteName().value,
+  () => route.path,
   () => {
     useTempSettingStore().reset()
   }
@@ -38,7 +38,7 @@ const handleRouterBack = () => {
 
 <template>
   <div class="nav-top">
-    <div class="return" v-if="routeName !== 'index'" @click="handleRouterBack">
+    <div class="return" v-if="route.path !== '/'" @click="handleRouterBack">
       <Icon class="icon" name="lucide:arrow-left" />
     </div>
 

@@ -8,8 +8,13 @@ const props = defineProps<{
   nav: Nav[]
 }>()
 
+const route = useRoute()
+
 const localePath = useLocalePath()
 const currentPageUid = computed(() => props.uid)
+const fullPath = computed(() =>
+  route.fullPath.replace(/^\/[a-z]{2}-[a-z]{2}\//, '/')
+)
 
 const iconMap: Record<string, string> = {
   profile: 'lucide:user-round',
@@ -34,8 +39,7 @@ const currentPageUserRoles = computed(() => {
 })
 
 const activeClass = (currentPageUid: number, route: Nav) => {
-  return useRouteFullPath().value ===
-    `/kungalgamer/${currentPageUid}/${route.router}`
+  return fullPath.value === `/kungalgamer/${currentPageUid}/${route.router}`
     ? 'active'
     : ''
 }

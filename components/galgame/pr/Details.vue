@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DOMPurify from 'dompurify'
+import DOMPurify from 'isomorphic-dompurify'
 import { diffGalgame } from './compare'
 import type { GalgamePRDetails } from '~/types/api/galgame-pr'
 import type { GalgameDetail } from '~/types/api/galgame'

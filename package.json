@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.18.3",
+  "version": "2.18.4",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -36,7 +36,6 @@
     "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
     "@pinia/nuxt": "^0.5.5",
     "@types/bcrypt": "^5.0.2",
-    "@types/dompurify": "^3.0.5",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^22.7.4",
     "@types/nodemailer": "^6.4.16",
@@ -78,9 +77,9 @@
     "animate.css": "^4.1.1",
     "aws-sdk": "^2.1691.0",
     "bcrypt": "^5.1.1",
-    "dompurify": "^3.1.7",
     "engine.io": "^6.6.1",
     "feed": "^4.2.2",
+    "isomorphic-dompurify": "^2.16.0",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "localforage": "^1.10.0",
