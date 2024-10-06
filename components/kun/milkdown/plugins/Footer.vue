@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { usePluginViewContext } from '@prosemirror-adapter/vue'
 
+const route = useRoute()
+const getRouteBaseName = useRouteBaseName()
+const baseRouteName = computed(() => {
+  return getRouteBaseName(route)
+})
+
 const { textCount: textCountEditRewrite, isTopicRewriting } =
   storeToRefs(useTempEditStore())
 const { textCount: textCountEdit } = storeToRefs(usePersistEditTopicStore())
@@ -12,8 +18,6 @@ const { textCount: textCountReply } = storeToRefs(
 
 const { view } = usePluginViewContext()
 
-const route = useRoute()
-
 const size = computed(() => {
   return view.value.state.doc.textContent.length
 })
@@ -21,29 +25,29 @@ const size = computed(() => {
 watch(
   () => size.value,
   () => {
-    if (route.path.startsWith('/edit') && isTopicRewriting.value) {
+    if (baseRouteName.value === 'edit-topic' && isTopicRewriting.value) {
       textCountEditRewrite.value = size.value
       return
     }
-    if (route.path.startsWith('/topic') && isReplyRewriting.value) {
+    if (baseRouteName.value === 'topic-tid' && isReplyRewriting.value) {
       textCountReplyRewrite.value = size.value
       return
     }
-    if (route.path.startsWith('/edit')) {
+    if (baseRouteName.value === 'edit-topic') {
       textCountEdit.value = size.value
     }
-    if (route.path.startsWith('/topic')) {
+    if (baseRouteName.value === 'topic-tid') {
       textCountReply.value = size.value
     }
   }
 )
 
 onMounted(() => {
-  if (route.path.startsWith('/edit') && isTopicRewriting.value) {
+  if (baseRouteName.value === 'edit-topic' && isTopicRewriting.value) {
     textCountEditRewrite.value = size.value
     return
   }
-  if (route.path.startsWith('/topic') && isReplyRewriting.value) {
+  if (baseRouteName.value === 'topic-tid' && isReplyRewriting.value) {
     textCountReplyRewrite.value = size.value
   }
 })

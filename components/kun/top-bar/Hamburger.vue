@@ -5,6 +5,10 @@ import type { Hamburger } from './hamburgerItem'
 
 const localePath = useLocalePath()
 const route = useRoute()
+const getRouteBaseName = useRouteBaseName()
+const baseRouteName = computed(() => {
+  return getRouteBaseName(route)
+})
 
 const { showKUNGalgameHamburger } = storeToRefs(useTempSettingStore())
 const { showKUNGalgameBackLoli } = storeToRefs(usePersistSettingsStore())
@@ -82,7 +86,7 @@ const handleShowMore = () => {
           <div class="item-container">
             <div v-for="(kun, index) in item" :key="index" class="item">
               <span class="icon-item">
-                <Icon class="icon" :name="kun.icon"></Icon>
+                <Icon class="icon" :name="kun.icon" />
               </span>
               <NuxtLinkLocale
                 :to="kun.router"
@@ -127,7 +131,7 @@ const handleShowMore = () => {
             <KunSwitch v-model="showKUNGalgameBackLoli" />
           </div>
 
-          <PoolSimpleMode v-if="route.path.startsWith('/pool')" />
+          <PoolSimpleMode v-if="baseRouteName === 'pool'" />
 
           <span class="more" @click="handleShowMore">
             <span>{{ $t('header.hamburger.settings') }}</span>

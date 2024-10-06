@@ -32,7 +32,6 @@ export default defineNuxtConfig({
     '@pinia-plugin-persistedstate/nuxt',
     '@vite-pwa/nuxt',
     'dayjs-nuxt',
-    'nuxt-typed-router',
     'nuxt-schema-org'
   ],
 

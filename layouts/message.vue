@@ -1,44 +1,35 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-
 const route = useRoute()
-const { finish } = useLoadingIndicator()
+const getRouteBaseName = useRouteBaseName()
+const baseRouteName = computed(() => {
+  return getRouteBaseName(route)
+})
 
 const isMobile = ref(false)
 
-const handleResize = () => {
-  isMobile.value = window.innerWidth <= 700
-}
-
 onMounted(() => {
-  handleResize()
-  window.addEventListener('resize', handleResize)
+  isMobile.value = window.innerWidth < 700
 })
 
-// TODO: A problem that when switch to '/message' page, <NuxtLoadingIndicator /> not finish
-watch(
-  () => route.name,
-  () => {
-    if (route.path === '/message') {
-      finish()
-    }
+const isShowAside = computed(() => {
+  if (isMobile.value && baseRouteName.value !== 'message') {
+    return false
   }
-)
-
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', handleResize)
+  return true
 })
 
-const isMessageRoute = computed(() => route.path === '/message')
-const isOtherRoute = computed(() => !isMessageRoute.value)
+const isShowContent = computed(() => {
+  return (
+    !isMobile.value || (isMobile.value && baseRouteName.value !== 'message')
+  )
+})
 </script>
 
 <template>
   <div class="content-container">
-    <MessageAsideContainer v-if="isMessageRoute || !isMobile" class="aside" />
+    <MessageAsideContainer v-show="isShowAside" class="aside" />
 
-    <div v-if="isOtherRoute || !isMobile" class="content">
+    <div v-show="isShowContent" class="content">
       <NuxtPage />
       <KunFooter />
     </div>

@@ -45,22 +45,6 @@ export default defineNitroPlugin((nitroApp: NitroApp) => {
         // @ts-expect-error private method
         engine.handleRequest(event.node.req, event.node.res)
         event._handled = true
-      },
-      websocket: {
-        open(peer) {
-          // @ts-expect-error private method
-          const nodeContext = peer.ctx.node
-          const req = nodeContext.req
-
-          // @ts-expect-error private method
-          engine.prepare(req)
-
-          const rawSocket = nodeContext.req.socket
-          const websocket = nodeContext.ws
-
-          // @ts-expect-error private method
-          engine.onWebSocket(req, rawSocket, websocket)
-        }
       }
     })
   )
