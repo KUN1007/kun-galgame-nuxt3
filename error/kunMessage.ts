@@ -118,6 +118,9 @@ export const infoMessagesEN: Record<number, string> = {
   10310: `Zako ojisan♡ If you can't answer today, you won't be rewarded. Smelly zako ♡`,
   10311: `Zako ojisan♡ Can't even answer such a simple question. Smelly zako ♡`,
 
+  10401: 'Message content cannot be empty',
+  10402: 'The maximum message length cannot exceed 1007 characters',
+
   10501: 'Please enter the correct format of VNDB ID!',
   10502: 'Fetching data from VNDB...',
   10503: 'No data retrieved. The game may not exist.',
@@ -304,6 +307,9 @@ export const infoMessagesJP: Record<number, string> = {
   10310: '雑魚おじさん♡ 今日は答えられないと報酬はなしだよ♡ 臭い雑魚♡',
   10311: '雑魚おじさん♡ こんなに簡単なのに答えられないの？♡ 臭い雑魚♡',
 
+  10401: 'メッセージの内容は空にできません',
+  10402: 'メッセージの最大長は1007文字を超えてはなりません',
+
   10501: '正しい形式の VNDB ID を入力してください！',
   10502: 'VNDB から Galgame データを取得しています...',
   10503: 'データが取得できませんでした。ゲームが存在しない可能性があります。',
@@ -488,6 +494,9 @@ export const infoMessagesCN: Record<number, string> = {
   10310: '杂鱼大叔♡ 答不出来今天就不奖励你了♡ 臭杂鱼♡',
   10311: '杂鱼大叔♡ 这么简单都答不出来♡ 臭杂鱼♡',
 
+  10401: '消息内容不可为空',
+  10402: '消息最大长度不可超过 1007 个字符',
+
   10501: '请输入正确格式的 VNDB ID!',
   10502: '正在从 VNDB 获取 Galgame 数据...',
   10503: '未获取到数据，可能是游戏不存在',
@@ -664,6 +673,9 @@ export const infoMessagesTW: Record<number, string> = {
   10309: '人機身份驗證通過 ~',
   10310: '雜魚大叔♡ 答不出來今天就不獎勵妳了♡ 臭雜魚♡',
   10311: '雜魚大叔♡ 這麽簡單都答不出來♡ 臭雜魚♡',
+
+  10401: '訊息內容不可為空',
+  10402: '訊息的最大長度不可超過 1007 個字元',
 
   10501: '請輸入正確格式的 VNDB ID!',
   10502: '正在從 VNDB 獲取 Galgame 數據...',

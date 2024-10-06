@@ -40,6 +40,11 @@ const scrollToBottom = () => {
 
 const sendMessage = () => {
   if (!messageInput.value.trim()) {
+    useMessage(10401, 'warn')
+    return
+  }
+  if (messageInput.value.length > 1007) {
+    useMessage(10402, 'warn')
     return
   }
   socket.emit('message:sending', uid, messageInput.value)

@@ -29,6 +29,10 @@ export const handleSocketRequest = (socket: KUNGalgameSocket) => {
       socket.emit(ERROR_CODES.CANNOT_SEND_MESSAGE_TO_YOURSELF)
       return false
     }
+    if (!content.trim().length || content.length > 1007) {
+      socket.emit(ERROR_CODES.CONTENT_TOO_LONG)
+      return false
+    }
     if (!sendingMessageUserSocket) {
       socket.emit(ERROR_CODES.INVALID_SOCKET)
       return false
