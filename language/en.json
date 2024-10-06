@@ -375,6 +375,7 @@
   "user": {
     "notFound": "User not found",
     "banned": "User has been banned",
+    "chat": "Chatting",
     "nav": {
       "profile": "Profile",
       "settings": "Settings",

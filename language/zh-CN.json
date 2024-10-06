@@ -373,6 +373,7 @@
   "user": {
     "notFound": "该用户不存在",
     "banned": "该用户已被封禁",
+    "chat": "聊天",
     "nav": {
       "profile": "个人信息",
       "settings": "信息设置",

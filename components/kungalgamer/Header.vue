@@ -20,25 +20,15 @@ onMounted(() => (isShowProgress.value = true))
       <NuxtImg :src="props.avatar" :alt="props.name" />
     </div>
 
-    <div class="name">
-      <div class="username">
-        <span>{{ props.name }}</span>
-        <NuxtLinkLocale
-          v-if="currentUserUid !== props.uid"
-          :to="`/message/user/${props.uid}`"
-          v-tooltip="{
-            message: {
-              'en-us': 'Message',
-              'ja-jp': 'メッセージ',
-              'zh-cn': '私信',
-              'zh-tw': '私信'
-            },
-            position: 'bottom'
-          }"
-        >
-          <Icon class="icon" name="lucide:send" />
-        </NuxtLinkLocale>
-      </div>
+    <div class="username">
+      <NuxtLinkLocale
+        v-if="currentUserUid !== props.uid"
+        :to="`/message/user/${props.uid}`"
+      >
+        <Icon class="icon" name="lucide:message-circle" />
+        <span>{{ $t('user.chat') }}</span>
+      </NuxtLinkLocale>
+      <span>{{ props.name }}</span>
     </div>
 
     <div class="moemoepoint">
@@ -85,24 +75,26 @@ onMounted(() => (isShowProgress.value = true))
   }
 }
 
-.name {
+.username {
   flex-grow: 2;
   width: 100%;
   background-color: var(--kungalgame-trans-blue-0);
   border-radius: 10px 10px 0 0;
   display: flex;
-  align-items: end;
   padding-left: 233px;
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 
-  .username {
-    font-size: 24px;
+  a {
     display: flex;
     align-items: center;
+    color: var(--kungalgame-blue-5);
+    font-size: 16px;
 
-    a {
-      display: flex;
-      color: var(--kungalgame-blue-5);
-      margin-left: 8px;
+    .icon {
+      margin-right: 4px;
     }
   }
 }
@@ -170,7 +162,7 @@ onMounted(() => (isShowProgress.value = true))
     height: 100px;
   }
 
-  .name {
+  .username {
     padding-left: 150px;
   }
 }

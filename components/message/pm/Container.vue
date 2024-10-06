@@ -38,7 +38,7 @@ const scrollToBottom = () => {
   }
 }
 
-const sendMessage = async () => {
+const sendMessage = () => {
   if (!messageInput.value.trim()) {
     return
   }
