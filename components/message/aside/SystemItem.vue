@@ -40,7 +40,6 @@ defineProps<{
 .item {
   display: flex;
   padding: 10px;
-  width: 20rem;
   border-radius: 10px;
   cursor: pointer;
   color: var(--kungalgame-font-color-3);

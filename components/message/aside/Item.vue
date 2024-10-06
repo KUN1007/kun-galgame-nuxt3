@@ -43,7 +43,6 @@ defineProps<{
 .item {
   display: flex;
   padding: 10px;
-  width: 20rem;
   border-radius: 10px;
   cursor: pointer;
   color: var(--kungalgame-font-color-3);
@@ -108,12 +107,6 @@ defineProps<{
     .unread {
       background-color: var(--kungalgame-blue-5);
     }
-  }
-}
-
-@media (max-width: 700px) {
-  .item {
-    width: 100%;
   }
 }
 </style>

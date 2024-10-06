@@ -56,11 +56,17 @@ asideItems.value = contact.value ? contact.value : []
 <style lang="scss" scoped>
 .aside {
   height: 100%;
+  width: 32rem;
   color: var(--kungalgame-font-color-3);
   display: flex;
   flex-direction: column;
   padding: 10px;
-  overflow-y: scroll;
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+
   @include kun-blur;
 }
 
@@ -81,6 +87,10 @@ span {
 }
 
 @media (max-width: 700px) {
+  .aside {
+    width: 100%;
+  }
+
   .notice {
     display: block;
   }
