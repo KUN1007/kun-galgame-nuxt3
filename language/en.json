@@ -695,6 +695,11 @@
     "note": "If any paid transactions occur on the following websites, please contact us to remove the affiliate links immediately!",
     "join": "Join Us",
     "hint": "To join us, please contacts us and provide your website link",
+    "status": {
+      "normal": "Normal",
+      "essential": "Essential",
+      "down": "Offline"
+    },
     "official": {
       "name": "Official Sites",
       "kunSticker": "KUN Visual Novel Stickers",

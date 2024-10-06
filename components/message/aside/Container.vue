@@ -60,6 +60,7 @@ asideItems.value = contact.value ? contact.value : []
   display: flex;
   flex-direction: column;
   padding: 10px;
+  overflow-y: scroll;
   @include kun-blur;
 }
 

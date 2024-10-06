@@ -2,6 +2,7 @@ interface Friend {
   name: string
   link: string
   label: string
+  status?: 'normal' | 'essential' | 'down'
 }
 
 export const official: Friend[] = [
@@ -29,7 +30,8 @@ export const galgame: Friend[] = [
   {
     name: 'acgngame',
     link: 'https://acgngames.net',
-    label: 'ACGNGAME, Gal World, Galgame 游戏爱好者之家'
+    label: 'ACGNGAME, Gal World, Galgame 游戏爱好者之家',
+    status: 'down'
   },
   {
     name: 'shinnku',
@@ -87,7 +89,7 @@ export const galgame: Friend[] = [
   },
   {
     name: 'limulu',
-    link: 'www.listan.top',
+    link: 'https://listan.top/',
     label: '一个简洁美观的Gal网站'
   },
   {

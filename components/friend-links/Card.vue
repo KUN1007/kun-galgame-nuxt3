@@ -20,7 +20,10 @@ import { friendArray } from './friends'
         rel="noopener noreferrer"
       >
         <div class="name">
-          {{ $t(`friends.${friendGroup.key}.${friend.name}`) }}
+          <span>{{ $t(`friends.${friendGroup.key}.${friend.name}`) }}</span>
+          <span class="status" v-if="friend.status">
+            {{ $t(`friends.status.${friend.status}`) }}
+          </span>
         </div>
         <div class="label">
           {{
@@ -68,8 +71,15 @@ import { friendArray } from './friends'
 
   .name {
     display: flex;
+    align-items: center;
     font-size: 18px;
     font-weight: bold;
+
+    .status {
+      font-size: small;
+      margin-left: 8px;
+      font-weight: normal;
+    }
   }
 
   .label {
