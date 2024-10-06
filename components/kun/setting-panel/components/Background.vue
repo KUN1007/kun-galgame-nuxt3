@@ -102,7 +102,7 @@ const handleChangeImage = async (index: number) => {
     align-items: center;
     margin-bottom: 5px;
 
-    span {
+    div > span {
       cursor: pointer;
       padding: 5px 10px;
       border-radius: 10px;

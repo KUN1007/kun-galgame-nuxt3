@@ -14,7 +14,7 @@ const { showKUNGalgameHamburger, messageStatus } = storeToRefs(
 )
 
 watch(
-  () => route.path,
+  () => baseRouteName.value,
   () => {
     useTempSettingStore().reset()
   }

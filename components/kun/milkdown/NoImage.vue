@@ -215,6 +215,11 @@ watch(
       margin: 8px 0;
     }
 
+    ul,
+    ol {
+      line-height: 2rem;
+    }
+
     img {
       max-width: 100%;
     }
