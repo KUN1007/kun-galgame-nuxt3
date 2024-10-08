@@ -11,36 +11,29 @@ const emit = defineEmits<{
   setPage: [page: number]
 }>()
 
+const pageInput = ref(props.page)
 const currentPage = ref(props.page)
 const totalPages = computed(() => Math.ceil(props.sum / props.limit))
-const visiblePages = computed(() => {
-  const pages: number[] = []
-  const pageCount = 5
-
-  let start = Math.max(1, currentPage.value - Math.floor(pageCount / 2))
-  const end = Math.min(totalPages.value, start + pageCount - 1)
-
-  if (end - start + 1 < pageCount) {
-    start = Math.max(1, end - pageCount + 1)
-  }
-
-  for (let i = start; i <= end; i++) {
-    pages.push(i)
-  }
-
-  return pages
-})
 
 const gotoPage = (page: number) => {
   if (page >= 1 && page <= totalPages.value) {
     currentPage.value = page
+    pageInput.value = page
     emit('setPage', currentPage.value)
+  }
+}
+
+const handlePageInput = () => {
+  const page = parseInt(pageInput.value.toString(), 10)
+  if (!isNaN(page)) {
+    gotoPage(page)
   }
 }
 
 const nextPage = () => {
   if (currentPage.value < totalPages.value) {
     currentPage.value++
+    pageInput.value = currentPage.value
     emit('setPage', currentPage.value)
   }
 }
@@ -48,6 +41,7 @@ const nextPage = () => {
 const prevPage = () => {
   if (currentPage.value > 1) {
     currentPage.value--
+    pageInput.value = currentPage.value
     emit('setPage', currentPage.value)
   }
 }
@@ -63,29 +57,18 @@ const prevPage = () => {
       <Icon class="icon" name="lucide:chevron-left" />
     </button>
 
-    <button @click="gotoPage(1)" :class="{ active: currentPage === 1 }">
-      1
-    </button>
-
-    <template
-      v-for="pageNumber in visiblePages.slice(1, visiblePages.length - 1)"
-      :key="pageNumber"
-    >
-      <button
-        @click="gotoPage(pageNumber)"
-        :class="{ active: currentPage === pageNumber }"
-      >
-        {{ pageNumber }}
-      </button>
-    </template>
-
-    <button
-      v-if="totalPages !== 1"
-      @click="gotoPage(totalPages)"
-      :class="{ active: currentPage === totalPages }"
-    >
-      {{ totalPages }}
-    </button>
+    <div class="page">
+      <input
+        v-model="pageInput"
+        @keyup.enter="handlePageInput"
+        @blur="handlePageInput"
+        type="number"
+        :min="1"
+        :max="totalPages"
+      />
+      <span class="separator">/</span>
+      <span>{{ totalPages }}</span>
+    </div>
 
     <button
       @click="nextPage"
@@ -116,6 +99,7 @@ const prevPage = () => {
     background-color: transparent;
     font-size: medium;
     color: var(--kungalgame-font-color-3);
+    @include kun-center;
 
     &:hover {
       background-color: var(--kungalgame-trans-blue-1);
@@ -129,34 +113,44 @@ const prevPage = () => {
     }
   }
 
-  .active {
-    background-color: var(--kungalgame-blue-5);
-    color: var(--kungalgame-white);
+  .page {
+    padding: 8px 12px;
+    border: 1.5px solid var(--kungalgame-trans-blue-2);
+    border-radius: 10px;
 
-    &:hover {
-      background-color: var(--kungalgame-blue-5);
+    input {
+      color: var(--kungalgame-font-color-3);
+      width: 50px;
+      font-size: 16px;
+      border: none;
+      background-color: transparent;
+      padding: 0;
+    }
+
+    .separator {
+      margin-right: 10px;
     }
   }
-}
 
-.loading {
-  position: absolute;
-  bottom: -10px;
-  width: 300px;
-  border: 2px dotted var(--kungalgame-blue-5);
-  animation: scaleXAnimation 1s infinite alternate;
-
-  span {
+  .loading {
     position: absolute;
-  }
-}
+    bottom: -10px;
+    width: 300px;
+    border: 2px dotted var(--kungalgame-blue-5);
+    animation: scaleXAnimation 1s infinite alternate;
 
-@keyframes scaleXAnimation {
-  0% {
-    transform: scaleX(0);
+    span {
+      position: absolute;
+    }
   }
-  100% {
-    transform: scaleX(1);
+
+  @keyframes scaleXAnimation {
+    0% {
+      transform: scaleX(0);
+    }
+    100% {
+      transform: scaleX(1);
+    }
   }
 }
 </style>
