@@ -65,7 +65,7 @@ export const usePersistSettingsStore = defineStore({
         SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME
       )
       if (this.showKUNGalgameBackground === 0) {
-        return 'none'
+        return ''
       }
 
       if (this.showKUNGalgameBackground === -1 && backgroundImageBlobData) {

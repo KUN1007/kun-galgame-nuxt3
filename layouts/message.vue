@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import DefaultLayout from './default.vue'
+
 const route = useRoute()
 const getRouteBaseName = useRouteBaseName()
 const baseRouteName = computed(() => {
@@ -26,14 +28,16 @@ const isShowContent = computed(() => {
 </script>
 
 <template>
-  <div class="content-container">
-    <MessageAsideContainer v-show="isShowAside" class="aside" />
+  <DefaultLayout>
+    <div class="content-container">
+      <MessageAsideContainer v-show="isShowAside" class="aside" />
 
-    <div v-show="isShowContent" class="content">
-      <NuxtPage />
-      <KunFooter />
+      <div v-show="isShowContent" class="content">
+        <slot />
+        <KunFooter />
+      </div>
     </div>
-  </div>
+  </DefaultLayout>
 </template>
 
 <style lang="scss" scoped>
