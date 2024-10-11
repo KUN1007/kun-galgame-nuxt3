@@ -25,6 +25,10 @@ const handlePanelBlur = async () => {
   emits('close')
 }
 
+const handleMouseDown = (event: MouseEvent | TouchEvent) => {
+  container.value?.focus() // 重新聚焦
+}
+
 const handleCheckIn = async () => {
   isCheckIn.value = true
 
@@ -76,7 +80,14 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div ref="container" tabindex="-1" class="container" @blur="handlePanelBlur">
+  <div
+    ref="container"
+    tabindex="-1"
+    class="container"
+    @blur="handlePanelBlur"
+    @mousedown.prevent="handleMouseDown"
+    @touchstart.prevent="handleMouseDown"
+  >
     <span class="triangle1"></span>
     <span class="triangle2"></span>
 
