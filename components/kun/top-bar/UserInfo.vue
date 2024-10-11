@@ -25,7 +25,7 @@ const handlePanelBlur = async () => {
   emits('close')
 }
 
-const handleMouseDown = (event: MouseEvent | TouchEvent) => {
+const handleMouseDown = (event: MouseEvent) => {
   container.value?.focus() // 重新聚焦
 }
 
@@ -86,7 +86,6 @@ onMounted(async () => {
     class="container"
     @blur="handlePanelBlur"
     @mousedown.prevent="handleMouseDown"
-    @touchstart.prevent="handleMouseDown"
   >
     <span class="triangle1"></span>
     <span class="triangle2"></span>
