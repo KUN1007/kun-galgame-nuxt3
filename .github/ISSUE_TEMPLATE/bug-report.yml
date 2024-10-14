@@ -1,8 +1,11 @@
 name: Bug Report
 description: Create a BUG report to help us improve
 title: "[BUG]: "
-labels: ["bug", "enhancement"]
-assignees: ['KUN1007']
+labels: 
+  - "bug"
+  - "enhancement"
+assignees: 
+  - "KUN1007"
 
 body:
   - type: markdown
