@@ -1,7 +1,7 @@
 {
   "packageRules": [
     {
-      "managers": ["npm", "pnpm"],
+      "managers": ["npm"],
       "packageNames": ["pnpm"],
       "enabled": true,
       "rangeStrategy": "bump"
