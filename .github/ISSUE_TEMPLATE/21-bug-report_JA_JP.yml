@@ -1,0 +1,50 @@
+name: "🐞 バグ報告"
+description: "改善のためにバグ報告を作成してください"
+title: "[BUG]: "
+labels:
+  - "bug"
+  - "enhancement"
+assignees:
+  - "KUN1007"
+
+body:
+  - type: textarea
+    id: describe-the-bug
+    attributes:
+      label: "バグの説明"
+      description: "バグの内容を明確かつ簡潔に説明してください。"
+      placeholder: "ここにバグの説明を入力してください。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: "再現手順"
+      description: "バグを再現する手順を提供してください。"
+      placeholder: "1. 「...」に移動する\n2. 「....」をクリックする\n3. 「....」までスクロールする\n4. エラーを確認"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: "期待される動作"
+      description: "期待される動作について明確かつ簡潔に説明してください。"
+      placeholder: "期待される動作を説明してください。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: "スクリーンショット"
+      description: "可能であれば、問題を説明するスクリーンショットを追加してください。"
+      placeholder: "可能であればスクリーンショットをアップロードしてください。"
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: "追加の情報"
+      description: "問題に関するその他の情報をここに追加してください。"
+      placeholder: "問題を理解するための追加情報があればご記入ください。"

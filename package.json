@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.18.26",
+  "version": "2.18.27",
   "private": true,
   "scripts": {
     "build": "nuxt build",

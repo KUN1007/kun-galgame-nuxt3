@@ -1,0 +1,40 @@
+name: "✨ 機能リクエスト"
+description: "アイデアや機能強化を提案する"
+title: "[機能リクエスト]: "
+labels:
+  - "機能リクエスト"
+assignees:
+  - "KUN1007"
+
+body:
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: "この機能リクエストは何かの問題に関連していますか？説明してください。"
+      description: "問題やニーズを明確かつ簡潔に説明してください。例えば、「私はいつも...で困っています」"
+      placeholder: "ここに問題やニーズを説明してください。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution-description
+    attributes:
+      label: "希望する解決策を説明してください"
+      description: "実現したいことを明確かつ簡潔に説明してください。"
+      placeholder: "ここに提案する解決策を説明してください。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives-description
+    attributes:
+      label: "検討した代替案を説明してください"
+      description: "検討した他の解決策や機能を明確かつ簡潔に説明してください。"
+      placeholder: "ここに他の解決策や機能をリストしてください。"
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: "追加のコンテキスト"
+      description: "機能リクエストに関する追加のコンテキストやスクリーンショットをここに追加してください。"
+      placeholder: "追加情報があれば提供してください。"

@@ -1,0 +1,40 @@
+name: "✨ 功能请求"
+description: "建议一个想法或增强功能"
+title: "[功能请求]: "
+labels:
+  - "功能请求"
+assignees:
+  - "KUN1007"
+
+body:
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: "您的功能请求是否与某个问题相关？请描述。"
+      description: "清晰简洁地描述问题或需求。例如，'我总是感到沮丧，当...'"
+      placeholder: "在这里描述问题或需求。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution-description
+    attributes:
+      label: "描述您希望的解决方案"
+      description: "清晰简洁地描述您希望发生的事情。"
+      placeholder: "在这里描述您提出的解决方案。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives-description
+    attributes:
+      label: "描述您考虑过的替代方案"
+      description: "清晰简洁地描述您考虑过的任何替代解决方案或功能。"
+      placeholder: "在这里列出任何替代解决方案或功能。"
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: "附加信息"
+      description: "在这里添加有关功能请求的其他上下文或截图。"
+      placeholder: "如果有，请提供附加信息。"

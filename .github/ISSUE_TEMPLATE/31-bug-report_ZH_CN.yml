@@ -1,0 +1,50 @@
+name: "🐞 Bug 报告"
+description: "创建一个错误报告来帮助我们改进"
+title: "[BUG]: "
+labels:
+  - "bug"
+  - "enhancement"
+assignees:
+  - "KUN1007"
+
+body:
+  - type: textarea
+    id: describe-the-bug
+    attributes:
+      label: "描述错误"
+      description: "对错误进行清晰简明的描述。"
+      placeholder: "请在此描述错误。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: "重现步骤"
+      description: "提供重现该错误的步骤。"
+      placeholder: "1. 进入 '...'\n2. 点击 '....'\n3. 向下滚动到 '....'\n4. 查看错误"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: "预期行为"
+      description: "对预期发生的事情进行清晰简明的描述。"
+      placeholder: "描述您期望发生的情况。"
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: "截图"
+      description: "如果适用，请添加截图以帮助解释您的问题。"
+      placeholder: "如果可能，请上传截图。"
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: "附加信息"
+      description: "在此处添加有关问题的任何其他上下文信息。"
+      placeholder: "任何可以帮助理解问题的附加信息。"
