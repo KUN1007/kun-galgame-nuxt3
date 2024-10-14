@@ -1,23 +1,40 @@
-name: Feature Request
-description: Suggest an idea or enhancement
+name: "✨ Feature Request"
+description: "Suggest an idea or enhancement"
 title: "[Feature Request]: "
-labels: 
+labels:
   - "feature request"
-assignees: 
+assignees:
   - "KUN1007"
 
 body:
-  - type: markdown
+  - type: textarea
+    id: problem-description
     attributes:
-      value: |
-        **Is your feature request related to a problem? Please describe.**
-        A clear and concise description of the problem or need. Ex. I'm always frustrated when [...]
+      label: "Is your feature request related to a problem? Please describe."
+      description: "A clear and concise description of the problem or need. For example, 'I'm always frustrated when...'"
+      placeholder: "Describe the problem or need here."
+    validations:
+      required: true
 
-        **Describe the solution you'd like**
-        A clear and concise description of what you want to happen.
+  - type: textarea
+    id: solution-description
+    attributes:
+      label: "Describe the solution you'd like"
+      description: "A clear and concise description of what you want to happen."
+      placeholder: "Describe the solution you propose here."
+    validations:
+      required: true
 
-        **Describe alternatives you've considered**
-        A clear and concise description of any alternative solutions or features you've considered.
-
-        **Additional context**
-        Add any other context or screenshots about the feature request here.
+  - type: textarea
+    id: alternatives-description
+    attributes:
+      label: "Describe alternatives you've considered"
+      description: "A clear and concise description of any alternative solutions or features you've considered."
+      placeholder: "List any alternative solutions or features here."
+  
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: "Additional context"
+      description: "Add any other context or screenshots about the feature request here."
+      placeholder: "Provide additional information, if any."
