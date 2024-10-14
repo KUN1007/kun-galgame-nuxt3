@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.18.31",
+  "version": "2.18.32",
   "packageManager": "pnpm@9.12.1",
   "private": true,
   "scripts": {
@@ -9,13 +9,14 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
     "start": "pm2 start ecosystem.config.js",
     "stop": "pm2 delete kun-visual-novel",
     "prepare": "husky",
-    "precommit": "node ./.husky/scripts/bumpAppVersion.js && git add package.json"
+    "precommit": "node ./.husky/scripts/bumpAppVersion.js && git add package.json",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@iconify-json/ci": "^1.2.1",
