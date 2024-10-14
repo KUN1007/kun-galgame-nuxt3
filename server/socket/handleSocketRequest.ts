@@ -1,4 +1,4 @@
-import { KUNGalgameSocket } from '../plugins/socket.io'
+import type { KUNGalgameSocket } from '../plugins/socket.io'
 import { sendingMessage } from './service/message-sending'
 import { ERROR_CODES } from './error'
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  refresh: () => {}
+  refresh: () => void
 }>()
 
 const emits = defineEmits<{

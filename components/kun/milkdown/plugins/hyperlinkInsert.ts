@@ -5,7 +5,7 @@ export const insertLinkPlugin = $command(
   'InsertLink',
   (ctx) =>
     (payload: { href: string; text: string } | undefined) =>
-    /* eslint-disable indent */
+     
     (state, dispatch?) => {
       if (!dispatch || !payload) {
         return false

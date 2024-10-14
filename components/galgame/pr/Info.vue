@@ -5,7 +5,7 @@ const props = defineProps<{
   gid: number
   pr: GalgamePR
   status: UseFetchStatus
-  refresh: () => {}
+  refresh: () => void
 }>()
 
 const iconMap: Record<number, string> = {

@@ -13,7 +13,9 @@ export const diffGalgame = (
   const diffs: Diffs[] = []
 
   const compareObjects = (
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     obj1: Record<string, any>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     obj2: Record<string, any>,
     path = ''
   ) => {

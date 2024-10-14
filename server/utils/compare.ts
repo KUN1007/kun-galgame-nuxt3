@@ -1,4 +1,5 @@
 interface _DiffObject {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 }
 
@@ -44,6 +45,7 @@ export const compareObjects = (
             newPath
           )
           if (Object.keys(currentDiff[key]).length === 0) {
+            // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
             delete currentDiff[key]
           }
         }

@@ -1,4 +1,4 @@
-import { Mark } from '@milkdown/prose/model'
+import type { Mark } from '@milkdown/prose/model'
 
 const hasURLProtocol = (url: string) => {
   return (

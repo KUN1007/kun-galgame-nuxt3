@@ -9,7 +9,7 @@ const { resources, rewriteResourceId } = storeToRefs(
 )
 const props = defineProps<{
   details: GalgameResourceDetails
-  refresh: () => {}
+  refresh: () => void
 }>()
 const isFetching = ref(false)
 

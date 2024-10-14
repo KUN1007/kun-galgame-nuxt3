@@ -4,7 +4,7 @@ import type { Message } from '~/types/api/message'
 
 const props = defineProps<{
   message: Message
-  refresh: () => {}
+  refresh: () => void
 }>()
 
 const { locale } = useI18n()

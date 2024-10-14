@@ -7,7 +7,7 @@ import type {
 
 const props = defineProps<{
   link: GalgameResource
-  refresh: () => {}
+  refresh: () => void
 }>()
 
 const details = ref<GalgameResourceDetails>()

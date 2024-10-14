@@ -137,7 +137,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 <template>
   <div class="btn-container">
-    <p class="section">
+    <div class="section">
       <Icon class="icon" name="lucide:layout-grid" />
       <p v-for="(kun, index) in section" :key="index">
         <Icon class="icon" :name="iconMap[kun[0]]" />
@@ -145,7 +145,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
           {{ $t(`edit.topic.section.${kun}`) }}
         </span>
       </p>
-    </p>
+    </div>
 
     <KunButton
       v-if="!isTopicRewriting"

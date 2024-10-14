@@ -23,7 +23,7 @@ onMounted(() => {
   }
 
   tooltipProvider = new TooltipProvider({
-    content: linkUpdPopRef.value as any,
+    content: linkUpdPopRef.value as unknown as HTMLElement,
     debounce: 50,
     shouldShow: (view, _) => {
       if (!view.hasFocus() || !view.editable) {

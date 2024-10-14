@@ -26,7 +26,7 @@ const KunCode = h(Icon, { name: 'lucide:code-xml' })
 
 onMounted(() => {
   tooltipProvider = new TooltipProvider({
-    content: divRef.value as any
+    content: divRef.value as unknown as HTMLElement
   })
 
   tooltipProvider.update(view.value, prevState.value)

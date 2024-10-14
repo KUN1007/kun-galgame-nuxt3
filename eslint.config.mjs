@@ -1,11 +1,6 @@
 import withNuxt from './.nuxt/eslint.config.mjs'
 
 export default withNuxt({
-  root: true,
-  parserOptions: {
-    sourceType: 'module'
-  },
-  extends: ['@nuxtjs/eslint-config-typescript'],
   rules: {
     'no-console': 'off',
     camelcase: 'off',

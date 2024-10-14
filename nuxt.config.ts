@@ -80,7 +80,7 @@ export default defineNuxtConfig({
 
   eslint: {
     config: {
-      standalone: false
+      stylistic: false
     }
   },
 

@@ -4,8 +4,6 @@ definePageMeta({
   middleware: 'auth'
 })
 
-const router = useRouter()
-
 const pageData = reactive({
   page: 1,
   limit: 10,
@@ -42,11 +40,7 @@ onMounted(async () => {
 
     <KunDivider margin="7px 0" />
 
-    <template
-      v-show="data.totalCount"
-      v-for="(message, index) in data.messages"
-      :key="index"
-    >
+    <template v-for="(message, index) in data.messages" :key="index">
       <MessageAsideNotice :message="message" :refresh="refresh" />
 
       <KunDivider margin="7px 0" />

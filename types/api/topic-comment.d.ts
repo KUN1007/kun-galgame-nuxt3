@@ -1,4 +1,4 @@
-import { TopicUserInfo, TopicToUserInfo } from './topic'
+import type { TopicUserInfo, TopicToUserInfo } from './topic'
 
 export interface TopicComment {
   cid: number

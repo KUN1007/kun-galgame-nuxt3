@@ -329,5 +329,6 @@
     "Zutto"
   ],
   "i18n-ally.localesPaths": ["language"],
-  "i18n-ally.keystyle": "nested"
+  "i18n-ally.keystyle": "nested",
+  "eslint.useFlatConfig": true
 }

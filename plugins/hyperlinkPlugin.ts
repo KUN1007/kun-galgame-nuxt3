@@ -1,6 +1,6 @@
 export default defineNuxtPlugin((_) => {
   const { showKUNGalgameFontStyle } = usePersistSettingsStore()
-  if (process.client) {
+  if (import.meta.client) {
     document.documentElement.style.setProperty(
       '--font-family',
       showKUNGalgameFontStyle

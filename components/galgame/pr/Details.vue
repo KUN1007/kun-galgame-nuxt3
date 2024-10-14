@@ -6,7 +6,7 @@ import type { GalgameDetail } from '~/types/api/galgame'
 
 const props = defineProps<{
   details: Partial<GalgamePRDetails>
-  refresh: () => {}
+  refresh: () => void
 }>()
 const galgame = inject<GalgameDetail>('galgame')
 

@@ -14,6 +14,7 @@ type PreSaveMiddleware<T extends Document> = (
 function increasingSequence(
   fieldName: string,
   startSeq = 1
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): PreSaveMiddleware<any> {
   return async function (next) {
     if (!this.isNew) {

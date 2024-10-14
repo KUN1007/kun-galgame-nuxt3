@@ -9,6 +9,7 @@
  * @param {number} delay - Throttle time interval.
  * @param {T | undefined} delayedCallback - Callback generated when the execute function is executed before the throttle time interval.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function throttle<T extends (...args: any[]) => void>(
   executeCallback: T,
   delay: number,

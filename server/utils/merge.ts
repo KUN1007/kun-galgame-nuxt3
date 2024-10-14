@@ -1,8 +1,10 @@
 type AnyObject = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 }
 
 export const deepMergeObjects = <T extends AnyObject>(...objects: T[]): T => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const isObject = (obj: any) => obj && typeof obj === 'object'
 
   return objects.reduce((acc, obj) => {

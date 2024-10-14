@@ -9,6 +9,7 @@ export const useFlatten = <T extends object>(obj: T): FlattenObject<T> => {
 
   const flattened: Partial<Flattened> = {}
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function flattenHelper(prefix: string, value: any) {
     if (typeof value === 'object' && value !== null) {
       for (const key in value) {
@@ -17,6 +18,7 @@ export const useFlatten = <T extends object>(obj: T): FlattenObject<T> => {
         }
       }
     } else {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ;(flattened as any)[prefix] = value
     }
   }

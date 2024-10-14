@@ -95,7 +95,6 @@ onMounted(() => (commentToUid.value = toUser.uid))
         :key="comment.gcid"
         :comment="comment"
         :refresh="refresh"
-        @close="() => {}"
       />
 
       <KunPagination

@@ -72,6 +72,7 @@ const languageOptions = {
 
 const replaceTimeUnits = (input: string, language: string) => {
   const languageOption =
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (languageOptions as Record<string, any>)[language] ||
     languageOptions['en-us']
 

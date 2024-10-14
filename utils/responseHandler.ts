@@ -9,6 +9,7 @@ interface ResponseMap {
 }
 type ResponseType = keyof ResponseMap | 'json'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type KunOnResponseContext = FetchContext<any, ResponseType> & {
   response: FetchResponse<ResponseType>
 }

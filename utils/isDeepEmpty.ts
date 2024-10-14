@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isDeepEmpty = (obj: any): boolean => {
   if (obj == null) {
     return true

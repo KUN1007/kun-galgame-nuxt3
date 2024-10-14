@@ -5,7 +5,7 @@ import type { GalgameComment } from '~/types/api/galgame-comment'
 
 const props = defineProps<{
   comment: SerializeObject<GalgameComment>
-  refresh: () => {}
+  refresh: () => void
 }>()
 
 const galgame = inject<GalgameDetail>('galgame')

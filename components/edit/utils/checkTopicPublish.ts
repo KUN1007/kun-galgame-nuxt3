@@ -3,6 +3,7 @@ import type {
   EditUpdateTopicRequestData
 } from '~/types/api/topic'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isEditUpdateTopicData = (data: any): data is EditUpdateTopicRequestData =>
   typeof data.tid !== 'undefined'
 

@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.18.20",
+  "version": "2.18.21",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -9,6 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
     "start": "pm2 start ecosystem.config.js",
     "stop": "pm2 delete kun-visual-novel",

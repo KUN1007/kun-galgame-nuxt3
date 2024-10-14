@@ -26,7 +26,7 @@ watch(
 )
 
 onMounted(() => {
-  if (input) {
+  if (input.value) {
     input.value?.focus()
   }
 })
