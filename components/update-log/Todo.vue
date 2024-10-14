@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
-
 const { locale } = useI18n()
 
 const iconMap: Record<number, string> = {
@@ -45,11 +43,21 @@ watch(
       <pre>{{ getPreferredLanguageText(kun.content, locale as Language) }}</pre>
 
       <div class="status">
-        <span class="time">{{ dayjs(kun.time).format('MM/D - HH:mm') }}</span>
+        <span class="time">
+          {{
+            formatDate(kun.time, locale, {
+              isPrecise: true
+            })
+          }}
+        </span>
 
         <span class="description">
           <span v-if="kun.completedTime">
-            {{ `${dayjs(kun.completedTime).format('MM/D - HH:mm')}` }}
+            {{
+              formatDate(kun.completedTime, locale, {
+                isPrecise: true
+              })
+            }}
           </span>
           <Icon class="icon" :name="iconMap[kun.status]" />
           <span>{{ $t(`update.status${kun.status}`) }}</span>

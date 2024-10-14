@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
-
 const props = defineProps<{
   user: {
     uid: number
@@ -11,6 +9,7 @@ const props = defineProps<{
 }>()
 const user = computed(() => props.user)
 
+const { locale } = useI18n()
 const localePath = useLocalePath()
 
 const handleClickAvatar = (event: MouseEvent) => {
@@ -36,7 +35,9 @@ const handleClickAvatar = (event: MouseEvent) => {
 
     <div class="info">
       <span>{{ user.name }}</span>
-      <span class="time">{{ dayjs(props.time).format('D/MM - HH:mm') }}</span>
+      <span class="time">
+        {{ formatDate(props.time, locale, { isPrecise: true }) }}
+      </span>
     </div>
   </div>
 </template>

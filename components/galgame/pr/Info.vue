@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
 import type { GalgamePR, GalgamePRDetails } from '~/types/api/galgame-pr'
 
 const props = defineProps<{
@@ -64,7 +63,12 @@ watch(
     <div class="btn">
       <span class="description" :class="`status${pr.status}`">
         <span v-if="pr.completedTime">
-          {{ `${dayjs(pr.completedTime).format('MM/D - HH:mm')}` }}
+          {{
+            formatDate(pr.completedTime, locale, {
+              isShowYear: true,
+              isPrecise: true
+            })
+          }}
         </span>
         <Icon class="icon" :name="iconMap[pr.status]" />
         <span>{{ $t(`galgame.pr.status${pr.status}`) }}</span>

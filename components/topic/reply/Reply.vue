@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
 import type { TopicReply } from '~/types/api/topic-reply'
 
 const { scrollToReplyId } = storeToRefs(useTempReplyStore())
@@ -8,6 +7,8 @@ defineProps<{
   reply: TopicReply
   title: string
 }>()
+
+const { locale } = useI18n()
 
 const emits = defineEmits<{
   scrollPage: [scrollToReplyId: number]
@@ -65,7 +66,12 @@ watch(
 
         <p class="time">
           <span>
-            {{ dayjs(reply.time).format('YYYY-MM-DD HH:mm:ss') }}
+            {{
+              formatDate(reply.time, locale, {
+                isShowYear: true,
+                isPrecise: true
+              })
+            }}
           </span>
           <s
             class="rewrite"
@@ -80,7 +86,13 @@ watch(
               position: 'bottom'
             }"
           >
-            × {{ dayjs(reply.edited).format('YYYY-MM-DD HH:mm:ss') }}
+            ×
+            {{
+              formatDate(reply.edited, locale, {
+                isShowYear: true,
+                isPrecise: true
+              })
+            }}
           </s>
         </p>
       </div>

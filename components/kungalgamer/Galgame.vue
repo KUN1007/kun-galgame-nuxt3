@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
 import type { GalgameType } from '~/types/api/user'
 
 const props = defineProps<{
@@ -29,7 +28,7 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/galgames`, {
           {{ getPreferredLanguageText(galgame.name, locale as Language) }}
         </div>
         <div class="time">
-          {{ dayjs(galgame.time).format('YYYY/MM/DD') }}
+          {{ formatDate(galgame.time, locale, { isShowYear: true }) }}
         </div>
       </NuxtLinkLocale>
     </div>

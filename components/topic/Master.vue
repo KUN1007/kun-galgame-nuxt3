@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
 import type { TopicDetail } from '~/types/api/topic'
 
 const props = defineProps<{
   topic: TopicDetail
 }>()
+
+const { locale } = useI18n()
 
 const loliStatus = computed(() => {
   if (hourDiff(props.topic.upvoteTime, 10)) {
@@ -41,14 +42,24 @@ const loliStatus = computed(() => {
         </div>
 
         <span class="time">
-          {{ dayjs(topic.time).format('YYYY-MM-DD HH:mm:ss') }}
+          {{
+            formatDate(topic.time, locale, {
+              isShowYear: true,
+              isPrecise: true
+            })
+          }}
         </span>
       </div>
 
       <div class="center">
         <TopicKUNGalgamerInfo v-if="topic.user" :user="topic.user">
           <span class="time-mobile">
-            {{ dayjs(topic.time).format('YYYY-MM-DD HH:mm:ss') }}
+            {{
+              formatDate(topic.time, locale, {
+                isShowYear: true,
+                isPrecise: true
+              })
+            }}
           </span>
         </TopicKUNGalgamerInfo>
 
@@ -97,7 +108,13 @@ const loliStatus = computed(() => {
             position: 'bottom'
           }"
         >
-          × {{ dayjs(topic.edited).format('YYYY-MM-DD HH:mm:ss') }}
+          ×
+          {{
+            formatDate(topic.edited, locale, {
+              isShowYear: true,
+              isPrecise: true
+            })
+          }}
         </s>
       </div>
     </div>

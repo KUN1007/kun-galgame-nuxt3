@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
 import type { NonMoeLog } from '~/types/api/non-moe'
 
 const props = defineProps<{
@@ -28,7 +27,7 @@ const logs = computed(() => props.logs)
     <div class="footer">
       <div class="time">
         <Icon class="hourglass" name="lucide:clock-7" />
-        <span>{{ dayjs(kun.time).format('YYYY/MM/DD') }}</span>
+        <span>{{ formatDate(kun.time, locale, { isShowYear: true }) }}</span>
       </div>
       <div class="result">
         <Icon class="warning" name="lucide:triangle-alert" />

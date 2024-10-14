@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
 import type { SearchResultUser } from '~/types/api/search'
 
 defineProps<{
   user: SearchResultUser
 }>()
+
+const { locale } = useI18n()
 </script>
 
 <template>
@@ -21,7 +22,7 @@ defineProps<{
         <span><Icon class="icon" name="lucide:lollipop" /></span>
         <span>{{ user.moemoepoint }}</span>
       </span>
-      <span>{{ dayjs(user.time).format('YYYY/MM/DD') }}</span>
+      <span>{{ formatDate(user.time, locale, { isShowYear: true }) }}</span>
     </div>
   </NuxtLinkLocale>
 </template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
-
+const { locale } = useI18n()
 const localePath = useLocalePath()
 
 const props = defineProps<{
@@ -61,7 +60,9 @@ watch(
       <div class="user">
         <div class="name">{{ sec.user.name }}</div>
         <div class="time">
-          {{ dayjs(sec.time).format('YYYY-MM-DD HH:mm:ss') }}
+          {{
+            formatDate(sec.time, locale, { isShowYear: true, isPrecise: true })
+          }}
         </div>
       </div>
 

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
 import type { UserInfo } from '~/types/api/user'
 
 const props = defineProps<{
   user: UserInfo
 }>()
 
+const { locale } = useI18n()
 const user = computed(() => props.user)
 
 const rolesName = () => {
@@ -88,7 +88,12 @@ const statusName = () => {
 
         <span>
           {{ $t('user.profile.time') }}:
-          {{ dayjs(user.time).format('YYYY/MM/DD') }}
+          {{
+            formatDate(user.time, locale, {
+              isShowYear: true,
+              isPrecise: true
+            })
+          }}
         </span>
       </div>
 

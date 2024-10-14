@@ -50,7 +50,7 @@ export interface TopicDetail {
     count: number
     isFavorite: boolean
   }
-  time: string
+  time: number
   content: string
   markdown: string
   upvotes: {

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
 import type { TopicType } from '~/types/api/user'
+
+const { locale } = useI18n()
 
 const props = defineProps<{
   uid: number
@@ -28,7 +29,7 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/topics`, {
           {{ topic.title }}
         </div>
         <div class="time">
-          {{ dayjs(topic.time).format('YYYY/MM/DD') }}
+          {{ formatDate(topic.time, locale, { isShowYear: true }) }}
         </div>
       </NuxtLinkLocale>
     </div>

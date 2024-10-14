@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
 import { getMessageI18n } from '../utils/getMessageI18n'
 import type { Message } from '~/types/api/message'
 
@@ -72,7 +71,12 @@ const handleDeleteMessage = async (mid: number) => {
 
     <div class="bottom">
       <span class="time">
-        {{ dayjs(message.time).format('MM-D-YYYY - HH:mm:ss') }}
+        {{
+          formatDate(message.time, locale, {
+            isShowYear: true,
+            isPrecise: true
+          })
+        }}
       </span>
 
       <span @click="handleDeleteMessage(message.mid)">

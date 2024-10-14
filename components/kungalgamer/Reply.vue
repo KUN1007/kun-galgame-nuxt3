@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import dayjs from 'dayjs'
+const { locale } = useI18n()
 
 const props = defineProps<{
   uid: number
@@ -25,7 +25,7 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/replies`, {
           {{ markdownToText(replyData.content) }}
         </div>
         <div class="time">
-          {{ dayjs(replyData.time).format('MM/DD/YYYY') }}
+          {{ formatDate(replyData.time, locale, { isShowYear: true }) }}
         </div>
       </NuxtLinkLocale>
     </div>
