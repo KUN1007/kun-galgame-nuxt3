@@ -1,5 +1,5 @@
 import { render, h } from 'vue'
-import KunClipper from '@/components/kun/Clipper.vue'
+import KunClipper from '~/components/kun/Clipper.vue'
 
 export const useKunClip = (imageUrl: string, isShowClipper: boolean) => {
   const messageNode = h(KunClipper, {
