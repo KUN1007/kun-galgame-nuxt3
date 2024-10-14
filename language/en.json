@@ -45,7 +45,6 @@
       "navHint": "Stay connected",
       "update": "Update Log",
       "bylaw": "Regulations",
-      "balance": "P & L",
       "nonMoe": "Non-moe",
       "thanks": "Thanks List",
       "donate": "Donate Us",
@@ -100,7 +99,6 @@
       "homeZh": "Home page (Chinese Simplified)",
       "homeTw": "Home page (Chinese Traditional)",
       "agreement": "User Agreement",
-      "balance": "P & L",
       "bylaw": "Bylaws",
       "category": "Topic Categories",
       "contact": "Contact / Join us",
@@ -192,18 +190,6 @@
     "refactor": "Code Refactoring",
     "docs": "Documentation Changes",
     "test": "Test Cases"
-  },
-  "balance": {
-    "pl": "Income and Expenditure Statement",
-    "income": "INCOME",
-    "totalIncome": "Total Income",
-    "expenditure": "EXPENDITURE",
-    "totalExpenditure": "Total Expenditure",
-    "status": "Economic Status",
-    "deficitStatus": "DEFICIT",
-    "deficitAmount": "Deficit Amount",
-    "surplusStatus": "Surplus",
-    "surplusAmount": "Surplus Amount"
   },
   "nonMoe": {
     "log": "Non-moe Record",
@@ -784,10 +770,6 @@
     "agreement": {
       "title": "User Agreement",
       "description": "1. All statements made by users are not related to KUN Visual Novel. 2. KUN Visual Novel is merely an open-source collaborative web development project designed for everyone to learn web knowledge. 3. We reserve the right to ban users who engage in actions detrimental to the maintenance of our open-source project. 4. KUN Visual Novel is not responsible for any losses caused by issues such as user account theft."
-    },
-    "balance": {
-      "title": "Financial Disclosure",
-      "description": "KUN Visual Novel's financial disclosure, KUN Visual Novel is a completely free forum. Income comes from donations, and expenses include servers, domains, email services, and image hosting services."
     },
     "bylaw": {
       "title": "Bylaws",

@@ -45,7 +45,6 @@
       "navHint": "防失聯",
       "update": "更新日誌",
       "bylaw": "執行條例",
-      "balance": "收支公示",
       "nonMoe": "不萌記錄",
       "thanks": "感謝名單",
       "donate": "贊助我們",
@@ -100,7 +99,6 @@
       "homeZh": "網站主頁 (簡體中文)",
       "homeTw": "網站主頁 (繁體中文)",
       "agreement": "用戶協議",
-      "balance": "收支公示",
       "bylaw": "執行條例",
       "category": "話題分類",
       "contact": "聯繫 / 加入我們",
@@ -192,18 +190,6 @@
     "refactor": "代碼重構",
     "docs": "文檔修改",
     "test": "測試用例"
-  },
-  "balance": {
-    "pl": "收支公示",
-    "income": "收入",
-    "totalIncome": "總收入",
-    "expenditure": "支出",
-    "totalExpenditure": "總支出",
-    "status": "經濟狀態",
-    "deficitStatus": "虧損",
-    "deficitAmount": "虧損金額",
-    "surplusStatus": "盈余",
-    "surplusAmount": "盈余金額"
   },
   "nonMoe": {
     "log": "不萌記錄",
@@ -782,10 +768,6 @@
     "agreement": {
       "title": "用戶協議",
       "description": "1. 用戶所發錶的一切言論與鯤 Galgame 沒有任何關繫, 2. 鯤 Galgame 只是一個開源的、合作的 Web 開發項目，目的是供所有人學習 Web 知識, 3. 用戶做出不利於我們開源項目維護的行為時，我們有權對用戶進行封禁 4. 因用戶賬號被盜等造成的損失, 鯤 Galgame 概不承擔"
-    },
-    "balance": {
-      "title": "收支公示",
-      "description": "鯤 Galgame 收支公示, 鯤 Galgame 是一個完全免費的論壇, 收入來源於捐贈, 支出來自於伺服器, 域名, 信箱服務, 圖床服務"
     },
     "bylaw": {
       "title": "執行條例",

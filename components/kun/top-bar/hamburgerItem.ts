@@ -67,11 +67,6 @@ export const hamburgerItem: Hamburger[] = [
     router: '/update-log'
   },
   {
-    name: 'balance',
-    icon: 'lucide:circle-dollar-sign',
-    router: '/balance'
-  },
-  {
     name: 'nonMoe',
     icon: 'lucide:ban',
     router: '/non-moe'

@@ -36,13 +36,6 @@ export const asideBarItem: asideBar[] = [
     label: 'KUN Visual Novel Update Log | 鲲 Galgame 更新日志'
   },
   {
-    index: 5,
-    name: 'pl',
-    icon: 'lucide:circle-dollar-sign',
-    router: '/balance',
-    label: 'KUN Visual Novel Balance | 鲲 Galgame 收支公示'
-  },
-  {
     index: 6,
     name: 'nonMoe',
     icon: 'lucide:ban',

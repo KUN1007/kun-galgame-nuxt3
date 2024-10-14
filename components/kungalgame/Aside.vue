@@ -5,12 +5,8 @@ import { asideBarItem } from './asideItem'
 <template>
   <div class="aside">
     <span class="skip" v-for="kun in asideBarItem" :key="kun.index">
-      <NuxtLinkLocale
-        style="color: var(--kungalgame-blue-5)"
-        :to="{ path: kun.router }"
-        :aria-label="kun.label"
-      >
-        <Icon class="icon" :name="kun.icon"></Icon>
+      <NuxtLinkLocale :to="{ path: kun.router }" :aria-label="kun.label">
+        <Icon class="icon" :name="kun.icon" />
         {{ $t(`kungalgame.${kun.name}`) }}
       </NuxtLinkLocale>
     </span>
@@ -42,7 +38,6 @@ import { asideBarItem } from './asideItem'
 .skip {
   width: 100%;
   height: 100%;
-  color: var(--kungalgame-blue-5);
 
   a {
     display: flex;
@@ -50,6 +45,7 @@ import { asideBarItem } from './asideItem'
     align-items: center;
     text-decoration: none;
     text-underline-offset: 3px;
+    color: var(--kungalgame-blue-5);
 
     .icon {
       font-size: 20px;
