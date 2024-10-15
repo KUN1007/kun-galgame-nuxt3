@@ -62,7 +62,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
     <div class="login" v-if="!name">
       <NuxtLinkLocale to="/login">
-        {{ $t('login.login.loginTitle') }}
+        {{ $t('login.title') }}
       </NuxtLinkLocale>
     </div>
 
