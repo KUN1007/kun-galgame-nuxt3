@@ -20,6 +20,7 @@ const iconMap: Record<string, string> = {
   profile: 'lucide:user-round',
   settings: 'lucide:settings',
   email: 'lucide:mail',
+  password: 'lucide:key-round',
   topic: 'lucide:square-gantt-chart',
   galgame: 'lucide:gamepad-2',
   reply: 'lucide:reply',

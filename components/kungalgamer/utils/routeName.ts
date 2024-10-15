@@ -19,6 +19,11 @@ export const navBarRoute: Ref<Nav[]> = ref([
   },
   {
     name: 'email',
+    router: 'email',
+    permission: [4]
+  },
+  {
+    name: 'password',
     router: 'password',
     permission: [4]
   },

@@ -351,7 +351,8 @@
     "nav": {
       "profile": "个人信息",
       "settings": "信息设置",
-      "email": "邮箱密码",
+      "email": "邮箱设置",
+      "password": "密码设置",
       "topic": "话题",
       "galgame": "Galgame",
       "publish": "已发布",
