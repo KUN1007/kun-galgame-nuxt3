@@ -166,27 +166,29 @@ watch(
       :is-show-upload-image="false"
     />
 
-    <Milkdown class="editor" />
+    <Milkdown class="kungalgame-content" />
 
     <div class="loading" v-if="editorInfo.loading.value">
-      <span
-        ><Icon class="icon" name="svg-spinners:12-dots-scale-rotate"
-      /></span>
+      <Icon class="icon" name="svg-spinners:12-dots-scale-rotate" />
       <span>{{ $t('edit.topic.loading') }}</span>
     </div>
   </div>
 </template>
 
+<style lang="scss">
+@use '~/assets/css/editor/kun-content.scss';
+</style>
+
 <style lang="scss" scoped>
-.editor {
+.kungalgame-content {
   position: relative;
 
   :deep(.milkdown) {
     width: 100%;
     padding: 10px;
 
-    /* Silence css check */
-    * {
+    /* Silence css check, not compatible katex */
+    * &:not(.katex-html) {
       white-space: pre-wrap;
       word-break: break-word;
     }
@@ -194,109 +196,6 @@ watch(
     & > div:nth-child(1) {
       transition: all 0.2s;
       margin: 0 auto;
-      min-height: 300px;
-    }
-
-    h1,
-    h2 {
-      padding-top: 16px;
-      margin-bottom: 24px;
-      margin-top: 48px;
-      border-top: 1px solid var(--kungalgame-trans-blue-2);
-    }
-
-    h3,
-    h4 {
-      margin: 16px 0;
-    }
-
-    h5,
-    h6 {
-      margin: 8px 0;
-    }
-
-    ul,
-    ol {
-      line-height: 2rem;
-    }
-
-    img {
-      max-width: 100%;
-    }
-
-    del {
-      text-decoration: line-through;
-    }
-
-    p {
-      margin: 17px 0;
-
-      code {
-        background-color: var(--kungalgame-trans-blue-1);
-        padding: 2px 7px;
-        font-size: 13px;
-        border-radius: 7px;
-      }
-    }
-
-    blockquote {
-      margin: 17px 0;
-      padding: 17px;
-      border-left: 5px solid var(--kungalgame-blue-5);
-      border-radius: 10px;
-      background-color: var(--kungalgame-trans-blue-0);
-      color: var(--kungalgame-font-color-3);
-      font-style: oblique;
-      line-height: 2rem;
-
-      p {
-        margin: 0;
-      }
-    }
-
-    pre {
-      margin: 17px 0;
-      border: 1px solid var(--kungalgame-blue-5);
-      border-radius: 5px;
-      padding: 17px;
-      background-color: var(--kungalgame-trans-white-2);
-      position: relative;
-
-      code {
-        font-size: 15px;
-        font-family: monospace;
-      }
-    }
-
-    a {
-      cursor: pointer;
-      font-weight: bold;
-      color: var(--kungalgame-blue-5);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    table {
-      border: 1px solid var(--kungalgame-blue-5);
-      border-radius: 5px;
-      white-space: nowrap;
-    }
-
-    th,
-    td {
-      border: 1px solid var(--kungalgame-blue-5);
-      padding: 3px;
-      text-align: left;
-    }
-
-    tr:nth-child(even) {
-      background-color: var(--kungalgame-trans-blue-1);
-    }
-
-    .tableWrapper {
-      color: var(--kungalgame-font-color-3);
-      position: relative;
-      overflow-x: auto;
     }
   }
 }
@@ -306,7 +205,6 @@ watch(
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 374px;
 
   span {
     margin-left: 20px;

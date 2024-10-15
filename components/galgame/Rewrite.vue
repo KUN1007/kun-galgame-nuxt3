@@ -35,6 +35,7 @@ const handleRewriteGalgame = (galgame: GalgameDetail) => {
 .rewrite {
   color: var(--kungalgame-font-color-2);
   cursor: pointer;
+  display: flex;
 
   .icon {
     font-size: 24px;

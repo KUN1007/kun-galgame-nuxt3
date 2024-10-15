@@ -58,6 +58,7 @@ const handleClickFavorite = () => {
 .favorite {
   color: var(--kungalgame-font-color-2);
   cursor: pointer;
+  @include kun-center;
 
   .icon {
     font-size: 24px;

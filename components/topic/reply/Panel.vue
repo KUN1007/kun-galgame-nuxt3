@@ -86,8 +86,6 @@ const handleClosePanel = async () => {
   max-width: 60rem;
   max-height: 77vh;
   overflow-y: scroll;
-  border: 1px solid var(--kungalgame-blue-5);
-
   @include kun-blur;
 
   .close {

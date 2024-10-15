@@ -81,13 +81,14 @@ const galgame = inject<GalgameDetail>('galgame')
 .operation {
   position: relative;
   margin-right: 17px;
+  display: flex;
 
   .hint {
     user-select: none;
     white-space: nowrap;
     position: absolute;
     font-size: small;
-    top: -17px;
+    top: 37px;
     left: 50%;
     transform: translate(-50%, -50%);
     color: var(--kungalgame-font-color-0);

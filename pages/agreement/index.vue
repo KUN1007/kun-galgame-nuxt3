@@ -15,7 +15,7 @@ useHead({
 <template>
   <div class="root">
     <div class="article">
-      <div class="title">用户协议</div>
+      <div class="title">{{ t('seo.agreement.title') }}</div>
 
       <I18nAgreementContentEN v-if="locale === 'en-us'" />
       <I18nAgreementContentJP v-if="locale === 'ja-jp'" />
