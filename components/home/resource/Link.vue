@@ -98,11 +98,11 @@ const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
             },
             position: 'bottom'
           }"
-        ></span>
+        />
       </div>
     </div>
 
-    <KunDivider margin="0 0 17px 0" />
+    <KunDivider margin="0 0 17px 0" color="var(--kungalgame-trans-blue-1)" />
   </div>
 </template>
 

@@ -33,7 +33,7 @@ const handleClose = () => {
     <div v-for="(galgame, index) in GalgameData" :key="index">
       <HomeGalgameCard :galgame="galgame" />
 
-      <KunDivider margin="0 7px" />
+      <KunDivider margin="0 7px" color="var(--kungalgame-trans-blue-1)" />
     </div>
   </div>
 

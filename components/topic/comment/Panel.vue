@@ -61,26 +61,21 @@ const handlePublishComment = async () => {
         <span>{{ toUsername }}</span>
       </div>
       <div class="confirm">
-        <button @click="handlePublishComment">
+        <KunButton @click="handlePublishComment">
           {{ $t('topic.content.publish') }}
-        </button>
-        <button @click="isShowPanel = false">
+        </KunButton>
+        <KunButton @click="isShowPanel = false">
           {{ $t('topic.content.close') }}
-        </button>
+        </KunButton>
       </div>
     </div>
 
-    <div class="container">
-      <textarea
-        name="comment"
-        :placeholder="`${$t('topic.content.hint')}`"
-        rows="5"
-        v-model="commentValue"
-      >
-      </textarea>
-
-      <div class="count">{{ commentValue.length }}</div>
-    </div>
+    <KunTextarea
+      name="comment"
+      :placeholder="`${$t('topic.content.hint')}`"
+      rows="5"
+      v-model="commentValue"
+    />
   </div>
 </template>
 
@@ -129,53 +124,10 @@ const handlePublishComment = async () => {
   justify-content: center;
   align-items: center;
 
-  button {
-    cursor: pointer;
-    color: var(--kungalgame-blue-5);
-    padding: 5px 10px;
-    border: 1px solid var(--kungalgame-blue-5);
-    border-radius: 5px;
-    background-color: transparent;
-
-    &:hover {
-      background-color: var(--kungalgame-blue-5);
-      color: var(--kungalgame-white);
-    }
-
-    &:nth-child(2) {
-      margin-left: 5px;
+  .kun-button {
+    &:first-child {
+      margin-right: 8px;
     }
   }
-}
-
-.container {
-  position: relative;
-  display: flex;
-
-  textarea {
-    color: var(--kungalgame-font-color-3);
-    flex: 1;
-    margin-bottom: 20px;
-    width: 100%;
-    border: 1px solid var(--kungalgame-blue-5);
-    background-color: transparent;
-    border-radius: 5px;
-    padding: 5px;
-
-    &::placeholder {
-      color: var(--kungalgame-font-color-1);
-    }
-
-    &:focus {
-      border: 1px solid var(--kungalgame-pink-3);
-    }
-  }
-}
-
-.count {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  color: var(--kungalgame-font-color-1);
 }
 </style>

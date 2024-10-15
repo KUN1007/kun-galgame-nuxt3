@@ -89,9 +89,7 @@ const loliStatus = computed(() => {
             position: 'bottom'
           }"
         >
-          <span class="icon"
-            ><Icon class="icon" name="lucide:mouse-pointer-click"
-          /></span>
+          <Icon class="icon" name="lucide:mouse-pointer-click" />
           {{ topic.views }}
         </span>
 
@@ -223,8 +221,7 @@ const loliStatus = computed(() => {
       }
 
       &:nth-child(2) {
-        width: 50px;
-        padding: 1px;
+        padding: 1px 4px;
         color: var(--kungalgame-white);
         display: flex;
         justify-content: center;
@@ -236,7 +233,7 @@ const loliStatus = computed(() => {
   .line {
     width: 100%;
     height: 1px;
-    background-color: var(--kungalgame-blue-5);
+    background-color: var(--kungalgame-trans-blue-2);
   }
 
   .views {

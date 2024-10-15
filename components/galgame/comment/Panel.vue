@@ -46,7 +46,7 @@ const handlePublishComment = async () => {
 
 <template>
   <div class="panel">
-    <textarea
+    <KunTextarea
       placeholder="「恋だよ、恋。私に出来なかったことのひとつを、君に代わりにかなえてもらう」"
       v-model="content"
       name="comment"
@@ -66,22 +66,6 @@ const handlePublishComment = async () => {
 <style lang="scss" scoped>
 .panel {
   margin-bottom: 17px;
-
-  textarea {
-    color: var(--kungalgame-font-color-3);
-    margin-bottom: 10px;
-    width: 100%;
-    border: 1px solid var(--kungalgame-trans-blue-2);
-    background-color: transparent;
-    border-radius: 10px;
-    padding: 5px;
-    resize: vertical;
-
-    &:focus {
-      border: 1px solid var(--kungalgame-blue-5);
-      background-color: var(--kungalgame-trans-blue-0);
-    }
-  }
 
   .footer {
     width: 100%;

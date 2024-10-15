@@ -1,9 +1,16 @@
 <script setup lang="ts">
-const props = defineProps<{
-  margin?: string
-}>()
+const props = withDefaults(
+  defineProps<{
+    margin?: string
+    color?: string
+  }>(),
+  {
+    margin: '33px 0',
+    color: 'var(--kungalgame-trans-blue-2)'
+  }
+)
 
-const margin = computed(() => props.margin ?? '33px 0')
+const { margin, color } = toRefs(props)
 </script>
 
 <template>
@@ -24,7 +31,7 @@ const margin = computed(() => props.margin ?? '33px 0')
   margin: v-bind(margin);
 
   &::before {
-    color: var(--kungalgame-trans-blue-2);
+    color: v-bind(color);
     content: '';
     position: relative;
     width: 50%;
@@ -35,7 +42,7 @@ const margin = computed(() => props.margin ?? '33px 0')
   }
 
   &::after {
-    color: var(--kungalgame-trans-blue-2);
+    color: v-bind(color);
     content: '';
     position: relative;
     width: 50%;

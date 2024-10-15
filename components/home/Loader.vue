@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <KunDivider margin="30px" padding="0 17px">
+  <KunDivider margin="30px" color="var(--kungalgame-gray-4)">
     <slot />
     <span v-if="status !== 'pending'" @click="pageNumber++" class="loader">
       {{ $t('home.load') }}

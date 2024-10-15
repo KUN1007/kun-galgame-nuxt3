@@ -9,17 +9,7 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLinkLocale
-    class="topic"
-    :class="hourDiff(topic.upvoteTime, 10) ? 'kungalgame-comet-surround' : ''"
-    :to="`/topic/${topic.tid}`"
-    v-kun-gradient
-  >
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-
+  <NuxtLinkLocale class="topic" :to="`/topic/${topic.tid}`" v-kun-gradient>
     <div class="title">
       <span>{{ topic.title }}</span>
       <span>{{ formatTimeDifference(topic.time, locale) }}</span>
@@ -49,12 +39,14 @@ defineProps<{
         </span>
       </div>
     </div>
+
+    <div v-if="hourDiff(topic.upvoteTime, 10)" class="featured">
+      <Icon name="lucide:sparkles" />
+    </div>
   </NuxtLinkLocale>
 </template>
 
 <style lang="scss" scoped>
-@use '~/assets/css/effect/effect.scss';
-
 .topic {
   width: 100%;
   height: 100%;
@@ -64,10 +56,7 @@ defineProps<{
   padding: 10px;
   padding-bottom: 0;
   border-radius: 10px;
-}
-
-.kungalgame-comet-surround {
-  border: 2px solid var(--kungalgame-red-4);
+  position: relative;
 }
 
 .title {
@@ -124,6 +113,14 @@ defineProps<{
     align-items: center;
     margin-right: 7px;
   }
+}
+
+.featured {
+  position: absolute;
+  right: 10px;
+  font-size: 36px;
+  color: var(--kungalgame-trans-blue-2);
+  @include kun-center;
 }
 
 @media (max-width: 700px) {

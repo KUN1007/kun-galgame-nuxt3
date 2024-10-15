@@ -73,7 +73,7 @@ const handleSubmitReport = async () => {
     <div>
       <span class="title">{{ t('report.reason.title') }}</span>
       <div class="textarea-container">
-        <textarea
+        <KunTextarea
           name="comment"
           :placeholder="t('report.reason.placeholder')"
           rows="10"

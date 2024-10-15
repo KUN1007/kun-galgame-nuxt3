@@ -34,7 +34,7 @@ const handleClose = () => {
     <div v-for="(topic, index) in topicData" :key="index">
       <HomeTopicCard :topic="topic" />
 
-      <KunDivider margin="0 7px" />
+      <KunDivider margin="0 7px" color="var(--kungalgame-trans-blue-1)" />
     </div>
   </div>
 
