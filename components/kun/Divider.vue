@@ -5,7 +5,7 @@ const props = withDefaults(
     color?: string
   }>(),
   {
-    margin: '33px 0',
+    margin: '32px 0',
     color: 'var(--kungalgame-trans-blue-2)'
   }
 )

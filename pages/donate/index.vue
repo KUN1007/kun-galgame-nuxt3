@@ -152,7 +152,7 @@ const isShowOR = ref(false)
   justify-content: space-between;
 
   span {
-    padding: 7px 10px;
+    padding: 8px 12px;
     border-radius: 5px;
 
     &:nth-child(1) {

@@ -8,7 +8,7 @@ const value = defineModel<string | number>({ required: true })
 
 <style lang="scss" scoped>
 .kun-input {
-  padding: 7px 10px;
+  padding: 8px 12px;
   border: 1px solid var(--kungalgame-trans-blue-2);
   color: var(--kungalgame-font-color-3);
   border-radius: 10px;

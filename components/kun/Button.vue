@@ -27,7 +27,7 @@ const { ripples, onClick } = useRipple()
 .kun-button {
   border: 1.5px solid var(--kungalgame-blue-5);
   background-color: transparent;
-  padding: 7px 10px;
+  padding: 8px 12px;
   border-radius: 10px;
   color: var(--kungalgame-blue-5);
   cursor: pointer;

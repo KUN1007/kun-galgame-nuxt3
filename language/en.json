@@ -328,6 +328,7 @@
     }
   },
   "login": {
+    "or": "OR",
     "login": {
       "loginTitle": "Login",
       "forget": "Forgot your password?",

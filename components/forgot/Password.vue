@@ -165,7 +165,7 @@ const handleChangePassword = async () => {
     cursor: pointer;
     width: 110px;
     height: 33px;
-    padding: 7px 10px;
+    padding: 8px 12px;
     border: 1px solid var(--kungalgame-blue-5);
     border-radius: 5px;
     background-color: transparent;

@@ -326,6 +326,7 @@
     }
   },
   "login": {
+    "or": "或",
     "login": {
       "loginTitle": "登录",
       "forget": "忘记密码?",
