@@ -70,31 +70,47 @@ const handleChangePassword = async () => {
 
 <template>
   <Transition mode="out-in" name="slide">
-    <div class="email" v-if="flag">
-      <div class="input">
-        <span>{{ $t('forgot.email') }}: </span>
-        <input v-model="input.email" type="text" autocomplete="email" />
+    <form class="email" v-if="flag" @submit.prevent>
+      <div class="input-container">
+        <label for="email">
+          {{ $t('forgot.email') }}
+        </label>
+        <KunInput
+          id="email"
+          v-model="input.email"
+          autocomplete="email"
+          type="text"
+        />
       </div>
 
-      <div class="input">
-        <span>{{ $t('forgot.code') }}: </span>
-        <input v-model="input.code" type="text" />
+      <div class="input-container">
+        <label for="code">
+          {{ $t('forgot.code') }}
+        </label>
+        <KunInput id="code" v-model="input.code" type="text" />
       </div>
-    </div>
+    </form>
 
     <form class="password" v-else-if="!flag" @submit.prevent>
       <input autocomplete="username" type="text" hidden />
-      <div class="input">
-        <span>{{ $t('forgot.new') }}: </span>
-        <input
+
+      <div class="input-container">
+        <label for="new-password">
+          {{ $t('forgot.new') }}
+        </label>
+        <KunInput
+          id="new-password"
           v-model="input.newPassword"
           autocomplete="new-password"
           type="password"
         />
       </div>
-      <div class="input">
-        <span>{{ $t('forgot.rePwd') }}: </span>
-        <input
+      <div class="input-container">
+        <label for="new-password">
+          {{ $t('forgot.rePwd') }}
+        </label>
+        <KunInput
+          id="password"
           v-model="input.confirmPassword"
           autocomplete="new-password"
           type="password"
@@ -113,23 +129,22 @@ const handleChangePassword = async () => {
       to="forgot"
     />
 
-    <button v-if="flag" @click="handleClickNext">
+    <KunButton v-if="flag" @click="handleClickNext">
       {{ $t('forgot.next') }}
-    </button>
+    </KunButton>
 
-    <button v-if="!flag" @click="handleClickPrev">
+    <KunButton v-if="!flag" @click="handleClickPrev">
       {{ $t('forgot.prev') }}
-    </button>
+    </KunButton>
 
-    <button v-if="!flag" @click="handleChangePassword">
+    <KunButton v-if="!flag" @click="handleChangePassword">
       {{ $t('forgot.confirm') }}
-    </button>
+    </KunButton>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.email,
-.password {
+form {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -137,41 +152,25 @@ const handleChangePassword = async () => {
   margin-top: 50px;
 }
 
-.input {
+.input-container {
   padding: 0 10px;
-  display: flex;
   margin-bottom: 30px;
-  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
 
-  input {
-    border: none;
-    color: var(--kungalgame-font-color-3);
-    border-bottom: 1.5px solid var(--kungalgame-blue-2);
-    background-color: var(--kungalgame-trans-white-9-white);
-    transition: all 0.2s;
+  label {
+    font-size: 14px;
+  }
 
-    &:focus {
-      border-bottom: 1.5px solid var(--kungalgame-blue-5);
-    }
+  .kun-input {
+    margin-top: 8px;
   }
 }
 
 .btn {
-  width: 100%;
   display: flex;
-  justify-content: center;
-
-  button {
-    cursor: pointer;
-    width: 110px;
-    height: 33px;
-    padding: 8px 12px;
-    border: 1px solid var(--kungalgame-blue-5);
-    border-radius: 5px;
-    background-color: transparent;
-    margin: 10px;
-    color: var(--kungalgame-blue-5);
-  }
+  justify-content: space-around;
+  align-items: center;
 }
 
 .slide-enter-active,

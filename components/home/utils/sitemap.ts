@@ -45,6 +45,10 @@ export const sitemap: Sitemap[] = [
     name: 'login'
   },
   {
+    route: '/register',
+    name: 'register'
+  },
+  {
     route: '/non-moe',
     name: 'nonMoe'
   },

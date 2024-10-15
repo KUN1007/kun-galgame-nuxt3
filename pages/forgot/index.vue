@@ -37,9 +37,7 @@ useHead({
 
 .container {
   margin: auto;
-  width: 300px;
-  height: 400px;
-
+  width: 360px;
   @include kun-blur;
 }
 
