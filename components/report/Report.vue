@@ -72,23 +72,19 @@ const handleSubmitReport = async () => {
 
     <div>
       <span class="title">{{ t('report.reason.title') }}</span>
-      <div class="textarea-container">
-        <KunTextarea
-          name="comment"
-          :placeholder="t('report.reason.placeholder')"
-          rows="10"
-          v-model="reason"
-        />
-      </div>
+      <KunTextarea
+        name="comment"
+        :placeholder="t('report.reason.placeholder')"
+        rows="10"
+        v-model="reason"
+      />
 
       <div class="note">{{ t('report.note') }}</div>
     </div>
 
-    <div class="confirm-container">
-      <KunButton @click="handleSubmitReport" :pending="isFetching">
-        {{ t('report.submit') }}
-      </KunButton>
-    </div>
+    <KunButton @click="handleSubmitReport" :pending="isFetching">
+      {{ t('report.submit') }}
+    </KunButton>
   </div>
 </template>
 
@@ -106,31 +102,6 @@ const handleSubmitReport = async () => {
   display: flex;
   justify-content: space-between;
   margin-bottom: 17px;
-
-  .section {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    color: var(--kungalgame-font-color-1);
-
-    .icon {
-      font-size: 17px;
-      margin-right: 10px;
-    }
-
-    & > span {
-      margin: 3px;
-      padding: 3px 17px;
-      background-color: var(--kungalgame-trans-blue-0);
-      border: 1px solid var(--kungalgame-blue-5);
-      color: var(--kungalgame-blue-5);
-      border-radius: 7px;
-      display: flex;
-      align-items: center;
-      user-select: none;
-    }
-  }
 }
 
 .title {
@@ -141,59 +112,13 @@ const handleSubmitReport = async () => {
   }
 }
 
-.textarea-container {
-  position: relative;
-  display: flex;
-  margin-top: 17px;
-
-  textarea {
-    color: var(--kungalgame-font-color-3);
-    flex: 1;
-    margin-bottom: 20px;
-    width: 100%;
-    border: 1px solid var(--kungalgame-blue-5);
-    background-color: transparent;
-    border-radius: 5px;
-    padding: 5px;
-
-    &::placeholder {
-      color: var(--kungalgame-font-color-1);
-    }
-
-    &:focus {
-      border: 1px solid var(--kungalgame-pink-3);
-    }
-  }
+.kun-textarea {
+  margin-top: 16px;
 }
 
 .note {
   color: var(--kungalgame-font-color-0);
   font-size: small;
   margin-bottom: 17px;
-}
-
-.confirm-container {
-  display: flex;
-  justify-content: flex-end;
-
-  .confirm-btn {
-    height: 40px;
-    width: 200px;
-    font-size: 17px;
-    white-space: nowrap;
-    overflow: hidden;
-    cursor: pointer;
-    flex-shrink: 0;
-    border-radius: 10px;
-    color: var(--kungalgame-blue-5);
-    background-color: transparent;
-    border: 1px solid var(--kungalgame-blue-5);
-
-    &:hover {
-      transition: 0.2s;
-      color: var(--kungalgame-white);
-      background-color: var(--kungalgame-blue-5);
-    }
-  }
 }
 </style>

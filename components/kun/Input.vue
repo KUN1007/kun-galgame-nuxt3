@@ -18,6 +18,7 @@ const value = defineModel<string | number>({ required: true })
   &:focus {
     border: 1px solid var(--kungalgame-blue-5);
     background-color: var(--kungalgame-trans-blue-0);
+    box-shadow: 0 0 0 0.5px var(--kungalgame-blue-5);
   }
 }
 </style>
