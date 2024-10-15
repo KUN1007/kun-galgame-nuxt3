@@ -14,7 +14,7 @@ useHead({
 
 <template>
   <div class="root">
-    <Login class="login" />
+    <Login />
 
     <KunFooter />
   </div>

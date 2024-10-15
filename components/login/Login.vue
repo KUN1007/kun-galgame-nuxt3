@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { checkLoginForm } from './utils/checkLogin'
+import { checkLoginForm } from './checkLogin'
 import type { Pinia } from 'pinia'
 
 const localePath = useLocalePath()
@@ -52,8 +52,6 @@ watch(
 
 <template>
   <div class="login">
-    <slot />
-
     <form class="form" @submit.prevent>
       <NuxtImg
         preload

@@ -1,0 +1,190 @@
+<script setup lang="ts">
+import { registerFormItem } from './registerFormItem'
+import { checkRegisterForm } from './checkRegister'
+import type { Pinia } from 'pinia'
+
+const info = useComponentMessageStore()
+const { isShowCapture, isCaptureSuccessful } = storeToRefs(
+  useComponentMessageStore()
+)
+
+const { checkForm, checkRegister } = checkRegisterForm.asyncData(
+  useNuxtApp().$pinia as Pinia
+)
+
+const localePath = useLocalePath()
+const isSendCode = ref(false)
+
+const registerForm = reactive<Record<string, string>>({
+  name: '',
+  email: '',
+  password: '',
+  code: ''
+})
+
+const handleSendCode = () => {
+  const result = checkForm(
+    registerForm.name,
+    registerForm.email,
+    registerForm.password
+  )
+  if (!result) {
+    return
+  }
+
+  if (!isCaptureSuccessful.value) {
+    isShowCapture.value = true
+    return
+  }
+  isSendCode.value = true
+}
+
+const handleRegister = async () => {
+  if (!checkRegister(isSendCode.value, registerForm.code)) {
+    return
+  }
+
+  const userInfo = await $fetch('/api/user/register', {
+    method: 'POST',
+    body: registerForm,
+    watch: false,
+    ...kungalgameResponseHandler
+  })
+
+  if (userInfo) {
+    info.info('AlertInfo.login.success')
+    useMessage(10135, 'success')
+    usePersistUserStore().setUserInfo(userInfo)
+    navigateTo(localePath('/'))
+  }
+
+  isCaptureSuccessful.value = false
+}
+</script>
+
+<template>
+  <div class="register">
+    <form class="form" @submit.prevent>
+      <NuxtImg
+        preload
+        src="/placeholder.webp"
+        placeholder="/placeholder.webp"
+      />
+
+      <div
+        class="input-container"
+        v-for="item in registerFormItem"
+        :key="item.index"
+      >
+        <label :for="item.value">
+          {{ $t(`login.register.${item.placeholder}`) }}
+        </label>
+        <KunInput
+          :id="item.value"
+          v-model="registerForm[item.value]"
+          :autocomplete="item.autocomplete"
+          :type="item.type"
+          :class="item.class"
+        />
+      </div>
+
+      <KunVerificationCode
+        @click="handleSendCode"
+        class="code"
+        :name="registerForm.name"
+        :email="registerForm.email"
+        to="register"
+      />
+
+      <KunButton @click="handleRegister">
+        {{ $t('login.register.title') }}
+      </KunButton>
+    </form>
+
+    <KunDivider margin="16px 0">
+      <span>{{ $t('login.or') }}</span>
+    </KunDivider>
+
+    <div class="more">
+      <NuxtLinkLocale to="/login">
+        {{ $t('login.login.loginTitle') }}
+      </NuxtLinkLocale>
+
+      <NuxtLinkLocale to="/forgot">
+        {{ $t('login.login.forget') }}
+      </NuxtLinkLocale>
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.register {
+  width: 360px;
+  padding: 32px;
+  margin-bottom: 32px;
+  user-select: none;
+  @include kun-blur;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+
+  img {
+    width: 100%;
+  }
+
+  .input-container {
+    width: 100%;
+
+    label {
+      font-size: 14px;
+    }
+  }
+
+  .kun-input {
+    width: 100%;
+    margin-bottom: 16px;
+    margin-top: 8px;
+    padding: 12px;
+  }
+
+  .code {
+    position: absolute;
+    bottom: 60px;
+    right: 16px;
+  }
+
+  .kun-button {
+    width: 100%;
+    background-color: var(--kungalgame-blue-5);
+    color: var(--kungalgame-white);
+    font-size: 16px;
+    border-radius: 24px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+}
+
+.kun-divider {
+  span {
+    margin: 0 8px;
+  }
+}
+
+.more {
+  display: flex;
+  flex-direction: column;
+
+  a {
+    margin-bottom: 16px;
+    color: var(--kungalgame-blue-5);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+</style>
