@@ -54,6 +54,7 @@ export const infoMessagesEN: Record<number, string> = {
   10144: 'The maximum length of the report content is 1007 characters.',
   10145: 'Report submitted successfully!',
   10146: 'You need to login to continue your operation',
+  10147: 'Please click to agree to our User Agreement and Privacy Policy.',
 
   10201: 'Publishing...',
   10202: 'Tag already exists, please choose another one',
@@ -242,6 +243,9 @@ export const infoMessagesJP: Record<number, string> = {
   10143: '通報理由を記入してください',
   10144: '通報内容は最大 1007 文字です',
   10145: '通報の送信に成功しました！',
+  10146: '操作を続行するにはログインが必要です',
+  10147:
+    'ユーザー契約とプライバシーポリシーに同意するためにクリックしてください。',
 
   10201: '投稿中...',
   10202: 'タグは既に存在します。別のタグを選んでください',
@@ -429,6 +433,8 @@ export const infoMessagesCN: Record<number, string> = {
   10143: '请填写举报理由',
   10144: '举报内容最多 1007 字',
   10145: '举报提交成功!',
+  10146: '您需要登录才能继续操作',
+  10147: '请点击同意我们的用户协议和隐私政策',
 
   10201: '正在发布...',
   10202: '标签已存在，请更换',
@@ -609,6 +615,8 @@ export const infoMessagesTW: Record<number, string> = {
   10143: '請填寫舉報理由',
   10144: '舉報內容最多 1007 字',
   10145: '舉報提交成功!',
+  10146: '您需要登入才能繼續操作',
+  10147: '請點擊同意我們的用戶協議和隱私政策。',
 
   10201: '正在發佈...',
   10202: '標簽已存在，請更換',

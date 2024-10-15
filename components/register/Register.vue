@@ -14,6 +14,7 @@ const { checkForm, checkRegister } = checkRegisterForm.asyncData(
 
 const localePath = useLocalePath()
 const isSendCode = ref(false)
+const isAgree = ref(false)
 
 const registerForm = reactive<Record<string, string>>({
   name: '',
@@ -29,6 +30,11 @@ const handleSendCode = () => {
     registerForm.password
   )
   if (!result) {
+    return
+  }
+
+  if (!isAgree.value) {
+    useMessage(10147, 'warn')
     return
   }
 
@@ -77,7 +83,7 @@ const handleRegister = async () => {
         :key="item.index"
       >
         <label :for="item.value">
-          {{ $t(`login.register.${item.placeholder}`) }}
+          {{ $t(`register.${item.placeholder}`) }}
         </label>
         <KunInput
           :id="item.value"
@@ -96,8 +102,18 @@ const handleRegister = async () => {
         to="register"
       />
 
+      <KunCheckBox v-model="isAgree">
+        <span>{{ $t('register.agree') }}</span>
+        <NuxtLinkLocale to="/agreement">
+          {{ $t('register.agreement') }}
+        </NuxtLinkLocale>
+        <NuxtLinkLocale to="/privacy">
+          {{ $t('register.privacy') }}
+        </NuxtLinkLocale>
+      </KunCheckBox>
+
       <KunButton @click="handleRegister">
-        {{ $t('login.register.title') }}
+        {{ $t('register.title') }}
       </KunButton>
     </form>
 
@@ -107,11 +123,11 @@ const handleRegister = async () => {
 
     <div class="more">
       <NuxtLinkLocale to="/login">
-        {{ $t('login.login.loginTitle') }}
+        {{ $t('login.title') }}
       </NuxtLinkLocale>
 
       <NuxtLinkLocale to="/forgot">
-        {{ $t('login.login.forget') }}
+        {{ $t('login.forgot') }}
       </NuxtLinkLocale>
     </div>
   </div>
@@ -155,8 +171,22 @@ const handleRegister = async () => {
 
   .code {
     position: absolute;
-    bottom: 60px;
+    bottom: 94px;
     right: 16px;
+  }
+
+  .kun-checkbox {
+    display: flex;
+    align-items: center;
+    font-size: small;
+    margin-bottom: 16px;
+
+    a {
+      color: var(--kungalgame-blue-5);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      margin-left: 4px;
+    }
   }
 
   .kun-button {

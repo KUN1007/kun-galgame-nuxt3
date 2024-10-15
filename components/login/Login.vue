@@ -61,7 +61,7 @@ watch(
 
       <div>
         <label for="username">
-          {{ $t('login.login.loginUsername') }}
+          {{ $t('login.email') }}
         </label>
         <KunInput
           id="username"
@@ -73,7 +73,7 @@ watch(
 
       <div>
         <label for="password">
-          {{ $t('login.login.loginPassword') }}
+          {{ $t('login.password') }}
         </label>
         <KunInput
           id="password"
@@ -84,7 +84,7 @@ watch(
       </div>
 
       <KunButton @click="handleLogin" class="btn">
-        {{ $t('login.login.loginTitle') }}
+        {{ $t('login.title') }}
       </KunButton>
     </form>
 
@@ -94,11 +94,11 @@ watch(
 
     <div class="more">
       <NuxtLinkLocale to="/register">
-        {{ $t('login.register.title') }}
+        {{ $t('register.title') }}
       </NuxtLinkLocale>
 
       <NuxtLinkLocale to="/forgot">
-        {{ $t('login.login.forget') }}
+        {{ $t('login.forgot') }}
       </NuxtLinkLocale>
     </div>
   </div>

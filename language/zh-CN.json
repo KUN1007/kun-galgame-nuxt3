@@ -107,7 +107,8 @@
       "friendLinks": "友情链接",
       "galgame": "Galgame 资源",
       "kungalgame": "关于我们",
-      "login": "登录 / 注册",
+      "login": "登录",
+      "register": "注册",
       "nonMoe": "不萌记录",
       "pool": "全部话题",
       "privacy": "隐私政策",
@@ -326,36 +327,22 @@
     }
   },
   "login": {
-    "or": "或",
-    "login": {
-      "loginTitle": "登录",
-      "forget": "忘记密码?",
-      "loginUsername": "用户名或邮箱",
-      "loginPassword": "密码"
-    },
-    "overlay": {
-      "title": "欢迎注册鲲 Galgame 论坛",
-      "world": "世界上最",
-      "moe": "萌",
-      "forum": "的 Galgame 论坛",
-      "login": "登录",
-      "home": "欢迎回家",
-      "kun": "鲲 Galgame 论坛给你",
-      "hug": "最温暖的拥抱",
-      "register": "注册"
-    },
-    "register": {
-      "title": "注册",
-      "name": "用户名",
-      "email": "邮箱",
-      "password": "密码",
-      "code": "邮箱验证码",
-      "send": "发送验证码",
-      "click": "点击注册表示您已经同意我们的",
-      "agreement": "用户协议",
-      "and": "和",
-      "privacy": "隐私政策"
-    }
+    "title": "登录",
+    "forgot": "忘记密码?",
+    "email": "用户名或邮箱",
+    "password": "密码",
+    "or": "或"
+  },
+  "register": {
+    "title": "注册",
+    "name": "用户名",
+    "email": "邮箱",
+    "password": "密码",
+    "code": "邮箱验证码",
+    "send": "发送验证码",
+    "agree": "我同意",
+    "agreement": "用户协议",
+    "privacy": "隐私政策"
   },
   "user": {
     "notFound": "该用户不存在",
@@ -831,8 +818,12 @@
       "description": "鲲 Galgame 用户, 用户信息, 用户头像, 用户名, 用户萌萌点, 用户话题, 用户回复, 用户评论, 用户点赞, 用户推, 用户签名"
     },
     "login": {
-      "title": "登录 / 注册 鲲 Galgame 论坛",
-      "description": "登录 / 注册 鲲 Galgame 论坛, 世界上最萌的 Galgame 论坛! Galgame 交流讨论, Galgame 技术交流。为营造最好的氛围而努力! 永远不会有广告! 永远免费!"
+      "title": "登录 鲲 Galgame 论坛",
+      "description": "登录 鲲 Galgame 论坛, 世界上最萌的 Galgame 论坛! 欢迎回家!"
+    },
+    "register": {
+      "title": "注册 鲲 Galgame 论坛",
+      "description": "注册 鲲 Galgame 论坛, 世界上最萌的 Galgame 论坛! Galgame 交流讨论, Galgame 技术交流。为营造最好的氛围而努力! 永远不会有广告! 永远免费!"
     },
     "nonMoe": {
       "title": "不萌记录",

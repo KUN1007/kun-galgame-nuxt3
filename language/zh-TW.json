@@ -107,7 +107,8 @@
       "friendLinks": "友情鏈接",
       "galgame": "Galgame 資源",
       "kungalgame": "關於我們",
-      "login": "登入 / 註冊",
+      "login": "登入",
+      "register": "註冊",
       "nonMoe": "不萌記錄",
       "pool": "全部話題",
       "privacy": "隱私政策",
@@ -326,36 +327,22 @@
     }
   },
   "login": {
-    "or": "或",
-    "login": {
-      "loginTitle": "登入",
-      "forget": "忘記密碼?",
-      "loginUsername": "用戶名或信箱",
-      "loginPassword": "密碼"
-    },
-    "overlay": {
-      "title": "歡迎註冊鯤 Galgame 論壇",
-      "world": "世界上最",
-      "moe": "萌",
-      "forum": "的 Galgame 論壇",
-      "login": "登入",
-      "home": "歡迎回家",
-      "kun": "鯤 Galgame 論壇給妳",
-      "hug": "最溫暖的擁抱",
-      "register": "註冊"
-    },
-    "register": {
-      "title": "註冊",
-      "name": "用戶名",
-      "email": "信箱",
-      "password": "密碼",
-      "code": "信箱驗證碼",
-      "send": "發送驗證碼",
-      "click": "點選註冊錶示您已經同意我們的",
-      "agreement": "用戶協議",
-      "and": "和",
-      "privacy": "隱私政策"
-    }
+    "title": "登入",
+    "forgot": "忘記密碼?",
+    "email": "用戶名或信箱",
+    "password": "密碼",
+    "or": "或"
+  },
+  "register": {
+    "title": "註冊",
+    "name": "用戶名",
+    "email": "信箱",
+    "password": "密碼",
+    "code": "信箱驗證碼",
+    "send": "發送驗證碼",
+    "agree": "我同意",
+    "agreement": "用戶協議",
+    "privacy": "隱私政策"
   },
   "user": {
     "notFound": "該用戶不存在",
@@ -784,7 +771,6 @@
       "g-news": "Galgame 資訊, 新漢化信息, 新動態信息等與 Galgame 相關信息",
       "g-releases": "Galgame 新作消息, 有哪些新會社發佈了哪些新遊戲, 在哪裏發佈, 如何購買",
       "g-other": "與 Galgame 相關的一切內容, 包括一些不被納入 VNDB 範圍內的遊戲",
-
       "t-web": "Web, Web app development, JavaScript / TypeScript, Node.js, React / Next.js, Vue / Nuxt, Angular, Solid, Svelte",
       "t-languages": "編程語言, C 語言, JavaScript, C++ / cpp, Java, Python, Rust, C#",
       "t-help": "您有任何需要解決的問題，都可以在這裏提問",
@@ -796,7 +782,6 @@
       "t-adobe": "Adobe, Adobe Photoshop(PS), Adobe Illustrator(AI), Adobe Premiere Pro(PR), Adobe Audition(AU), Adobe After Effects(AE)",
       "t-algorithm": "算法, Sort, DFS, BFS, A Search, Greedy, Union Find, Hashing, BT, BST, FT, Backtracking",
       "t-other": "其它, 和妳所知道技術的有關的一切, 限於醫學, 農學, 工學, 文學, 工商學, 密碼學, 社會學, 管理學等等一切",
-
       "o-anime": "動漫, 我，喜歡梨鬥，全宇宙最喜歡梨鬥了！所以今後我也要加油讓梨鬥喜歡上我！",
       "o-comics": "漫畫, 尚待補充",
       "o-music": "音樂, せーのっ! でもそんなんじゃ だめ",
@@ -831,8 +816,12 @@
       "description": "鯤 Galgame 用戶, 用戶信息, 用戶頭像, 用戶名, 用戶萌萌點, 用戶話題, 用戶回復, 用戶評論, 用戶點贊, 用戶推, 用戶簽名"
     },
     "login": {
-      "title": "登入 / 註冊 鯤 Galgame 論壇",
-      "description": "登入 / 註冊 鯤 Galgame 論壇, 世界上最萌的 Galgame 論壇! Galgame 交流討論, Galgame 技術交流。為營造最好的氛圍而努力! 永遠不會有廣告! 永遠免費!"
+      "title": "登入 鯤 Galgame 論壇",
+      "description": "登入 鯤 Galgame 論壇, 世界上最萌的 Galgame 論壇! 歡迎回家!"
+    },
+    "register": {
+      "title": "註冊 鯤 Galgame 論壇",
+      "description": "註冊 鯤 Galgame 論壇, 世界上最萌的 Galgame 論壇! Galgame 交流討論, Galgame 技術交流。為營造最好的氛圍而努力! 永遠不會有廣告! 永遠免費!"
     },
     "nonMoe": {
       "title": "不萌記錄",

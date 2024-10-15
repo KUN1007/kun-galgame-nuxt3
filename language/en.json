@@ -107,7 +107,8 @@
       "friendLinks": "Friend Links",
       "galgame": "Visual Novels",
       "kungalgame": "About Us",
-      "login": "Login / Register",
+      "login": "Login",
+      "register": "Register",
       "nonMoe": "Non-Moe",
       "pool": "All Topics",
       "privacy": "Privacy Policy",
@@ -329,35 +330,21 @@
   },
   "login": {
     "or": "OR",
-    "login": {
-      "loginTitle": "Login",
-      "forget": "Forgot your password?",
-      "loginUsername": "Username or email",
-      "loginPassword": "Password"
-    },
-    "overlay": {
-      "title": "Welcome to KUN Visual Novel Registration",
-      "world": "The World's",
-      "moe": "Cutest",
-      "forum": "Galgame Forum",
-      "login": "Login",
-      "home": "Welcome Back",
-      "kun": "KUN Visual Novel Gives You",
-      "hug": "The Warmest Hug",
-      "register": "Register"
-    },
-    "register": {
-      "title": "Register",
-      "name": "username",
-      "email": "email",
-      "password": "password",
-      "code": "Email verification code",
-      "send": "Send code",
-      "click": "Clicking Register means you have agreed to our",
-      "agreement": "User Agreement",
-      "and": "and",
-      "privacy": "Privacy Policy"
-    }
+    "title": "Login",
+    "forgot": "Forgot your password?",
+    "email": "Username or email",
+    "password": "Password"
+  },
+  "register": {
+    "title": "Register",
+    "name": "Username",
+    "email": "Email",
+    "password": "Password",
+    "code": "Email verification code",
+    "send": "Send code",
+    "agree": "I agree",
+    "agreement": "User Agreement",
+    "privacy": "Privacy Policy"
   },
   "user": {
     "notFound": "User not found",
@@ -829,8 +816,12 @@
       "description": "KUN Visual Novel is a visualnovel forum that will become a website integrating all things visualnovel, including visualnovel downloads, visualnovel reviews, visualnovel data analysis, visualnovel news, visualnovel translation/internationalization, visualnovel production, and more. Our ultimate goal is to be the world's best visualnovel forum!"
     },
     "login": {
-      "title": "Login / Register KUN Visual Novel Forum",
-      "description": "Login / Register KUN Visual Novel Forum, the world's cutest visualnovel forum! Visualnovel discussions, technical exchanges. Striving to create the best atmosphere! No advertisements ever! Always free!"
+      "title": "Login the KUN Visual Novel Forum",
+      "description": "Login the KUN Visual Novel Forum, the world's cutest visualnovel forum! Welcome home!"
+    },
+    "register": {
+      "title": "Register the KUN Visual Novel Forum",
+      "description": "Register the KUN Visual Novel Forum, the world's cutest visualnovel forum! Visualnovel discussions, technical exchanges. Striving to create the best atmosphere! No advertisements ever! Always free!"
     },
     "nonMoe": {
       "title": "Non-moe Record",
