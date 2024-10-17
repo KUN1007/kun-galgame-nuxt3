@@ -178,8 +178,8 @@ importers:
         specifier: 8.5.5
         version: 8.5.5(magicast@0.3.5)(rollup@4.24.0)(vue@3.5.12(typescript@5.6.3))
       '@nuxtjs/sitemap':
-        specifier: 6.1.1
-        version: 6.1.1(h3@1.13.0)(magicast@0.3.5)(rollup@4.24.0)(vite@5.4.9(@types/node@22.7.5)(sass@1.79.5)(terser@5.34.1))(vue@3.5.12(typescript@5.6.3))
+        specifier: 6.1.2
+        version: 6.1.2(h3@1.13.0)(magicast@0.3.5)(rollup@4.24.0)(vite@5.4.9(@types/node@22.7.5)(sass@1.79.5)(terser@5.34.1))(vue@3.5.12(typescript@5.6.3))
       '@pinia-plugin-persistedstate/nuxt':
         specifier: ^1.2.1
         version: 1.2.1(@pinia/nuxt@0.5.5(magicast@0.3.5)(rollup@4.24.0)(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3)))(magicast@0.3.5)(pinia@2.2.4(typescript@5.6.3)(vue@3.5.12(typescript@5.6.3)))(rollup@4.24.0)
@@ -1678,8 +1678,8 @@ packages:
     resolution: {integrity: sha512-HVXRy61VBACIwmap1WxuhT9nNf6liU9L9LQSB6D7LDJ+8w57Cc6qWHRJ7dNI9sI/IQ2FQWk7PkTWriybAd3MlQ==}
     engines: {node: ^14.16.0 || >=16.11.0}
 
-  '@nuxtjs/sitemap@6.1.1':
-    resolution: {integrity: sha512-wjvaqLm+kecH7K22E9eKzxolfWlcBL3Nw1/UHJUz7UcLMfFNl8T28MMx7xeVKR5oNeFYCHJTWbqNJ+ZXjb727g==}
+  '@nuxtjs/sitemap@6.1.2':
+    resolution: {integrity: sha512-g0sUijQMG+i/UusOORP2NnRqQdQfEqFe1B4TPgtn8/I4sAw3Lx30dxnNZOI2KLnLMajAOmyHbJGQ3dq5UbAy6w==}
     engines: {node: '>=18.0.0'}
 
   '@parcel/watcher-android-arm64@2.4.1':
@@ -5482,6 +5482,10 @@ packages:
     resolution: {integrity: sha512-94Bdh3cC2PKrbgSOUqTiGPWVZeSiXfKOVZNJniWoqrWrRkB1CJzBU3NEbiTsPcYy1lDsANA/THzS+9WBiy5nfQ==}
     engines: {node: '>= 10'}
 
+  sirv@3.0.0:
+    resolution: {integrity: sha512-BPwJGUeDaDCHihkORDchNyyTvWFhcusy1XMmhEVTQTwGeybFbp8YEmB+njbPnth1FibULBSBVwCQni25XlCUDg==}
+    engines: {node: '>=18'}
+
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
 
@@ -8343,7 +8347,7 @@ snapshots:
       - vue-i18n-bridge
       - webpack-sources
 
-  '@nuxtjs/sitemap@6.1.1(h3@1.13.0)(magicast@0.3.5)(rollup@4.24.0)(vite@5.4.9(@types/node@22.7.5)(sass@1.79.5)(terser@5.34.1))(vue@3.5.12(typescript@5.6.3))':
+  '@nuxtjs/sitemap@6.1.2(h3@1.13.0)(magicast@0.3.5)(rollup@4.24.0)(vite@5.4.9(@types/node@22.7.5)(sass@1.79.5)(terser@5.34.1))(vue@3.5.12(typescript@5.6.3))':
     dependencies:
       '@nuxt/devtools-kit': 1.6.0(magicast@0.3.5)(rollup@4.24.0)(vite@5.4.9(@types/node@22.7.5)(sass@1.79.5)(terser@5.34.1))
       '@nuxt/kit': 3.13.2(magicast@0.3.5)(rollup@4.24.0)
@@ -8357,7 +8361,7 @@ snapshots:
       pkg-types: 1.2.1
       radix3: 1.1.2
       semver: 7.6.3
-      sirv: 2.0.4
+      sirv: 3.0.0
       site-config-stack: 2.2.18(vue@3.5.12(typescript@5.6.3))
       ufo: 1.5.4
     transitivePeerDependencies:
@@ -13130,6 +13134,12 @@ snapshots:
     optional: true
 
   sirv@2.0.4:
+    dependencies:
+      '@polka/url': 1.0.0-next.28
+      mrmime: 2.0.0
+      totalist: 3.0.1
+
+  sirv@3.0.0:
     dependencies:
       '@polka/url': 1.0.0-next.28
       mrmime: 2.0.0
