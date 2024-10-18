@@ -107,7 +107,6 @@ onUnmounted(() => {
 .pool {
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
   max-width: 64rem;
   margin: 0 auto;
   padding: 0 10px;

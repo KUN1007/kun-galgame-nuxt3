@@ -35,6 +35,10 @@
   height: 7px;
 }
 
+::-webkit-scrollbar-track {
+  background: var(--kungalgame-blue-0);
+}
+
 ::-webkit-scrollbar-thumb {
   background: var(--kungalgame-trans-blue-3);
   border-radius: 5px;

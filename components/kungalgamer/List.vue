@@ -12,7 +12,6 @@
   padding: 7px 17px;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
 }
 
 @media (max-width: 700px) {
