@@ -10,6 +10,7 @@ const resizeUserAvatar = async (name: string, avatar: Buffer, uid: number) => {
       fit: 'contain',
       background: { r: 0, g: 0, b: 0, alpha: 0 }
     })
+    .webp({ quality: 77 })
     .toBuffer()
 
   if (!checkBufferSize(miniAvatar, 1.007)) {
