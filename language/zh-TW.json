@@ -44,7 +44,6 @@
       "nav": "導航網站",
       "navHint": "防失聯",
       "update": "更新日誌",
-      "bylaw": "執行條例",
       "nonMoe": "不萌記錄",
       "thanks": "感謝名單",
       "donate": "贊助我們",
@@ -99,7 +98,6 @@
       "homeZh": "網站主頁 (簡體中文)",
       "homeTw": "網站主頁 (繁體中文)",
       "agreement": "用戶協議",
-      "bylaw": "執行條例",
       "category": "話題分類",
       "contact": "聯繫 / 加入我們",
       "donate": "贊助我們",
@@ -440,7 +438,6 @@
     },
     "topic": {
       "name": "萌萌話題排行",
-      "popularity": "熱度值",
       "upvote": "推數",
       "views": "瀏覽數",
       "likes": "點贊數",
@@ -451,7 +448,6 @@
   "kungalgame": {
     "agreement": "用戶協議",
     "privacy": "隱私政策",
-    "bylaw": "執行條例",
     "update": "更新日誌",
     "pl": "收支公示",
     "nonMoe": "不萌記錄",
@@ -757,10 +753,6 @@
       "title": "用戶協議",
       "description": "1. 用戶所發錶的一切言論與鯤 Galgame 沒有任何關繫, 2. 鯤 Galgame 只是一個開源的、合作的 Web 開發項目，目的是供所有人學習 Web 知識, 3. 用戶做出不利於我們開源項目維護的行為時，我們有權對用戶進行封禁 4. 因用戶賬號被盜等造成的損失, 鯤 Galgame 概不承擔"
     },
-    "bylaw": {
-      "title": "執行條例",
-      "description": "鯤 Galgame 執行條例, 涉及用戶, 話題, 萌萌點相關, 目的是讓論壇的運行機制更加透明，併不是規矩，我們沒有規矩"
-    },
     "category": {
       "title": "話題分類",
       "description": "話題分類 / 分區,Galgame攻略,Galgame閑聊,Galgame尋求資源,Galgame資訊,Galgame新作消息,Galgame資源下載 Web,編程語言,Linux,實用技術,AI,逆嚮專案,Android,Adobe,算法, 動漫,漫畫,音樂,輕小說",
@@ -837,7 +829,7 @@
     },
     "ranking": {
       "title": "排行榜單",
-      "description": "鯤 Galgame 排行榜單, 用戶排行, 話題排行, 熱度排行, 萌萌點排行"
+      "description": "鯤 Galgame 排行榜單, 用戶排行, 話題排行, 萌萌點排行"
     },
     "technique": {
       "title": "技術交流",

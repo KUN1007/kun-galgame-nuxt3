@@ -44,7 +44,6 @@
       "nav": "Navigation",
       "navHint": "Stay connected",
       "update": "Update Log",
-      "bylaw": "Regulations",
       "nonMoe": "Non-moe",
       "thanks": "Thanks List",
       "donate": "Donate Us",
@@ -99,7 +98,6 @@
       "homeZh": "Home page (Chinese Simplified)",
       "homeTw": "Home page (Chinese Traditional)",
       "agreement": "User Agreement",
-      "bylaw": "Bylaws",
       "category": "Topic Categories",
       "contact": "Contact / Join us",
       "donate": "Donate Us",
@@ -442,7 +440,6 @@
     },
     "topic": {
       "name": "Moe Moe Topic Ranking",
-      "popularity": "Popularity",
       "upvote": "Upvote",
       "views": "Views",
       "likes": "Likes",
@@ -453,7 +450,6 @@
   "kungalgame": {
     "agreement": "User Agreement",
     "privacy": "Privacy",
-    "bylaw": "Bylaws",
     "update": "Update Log",
     "pl": "Profit & Loss",
     "nonMoe": "Non-Moe",
@@ -759,10 +755,6 @@
       "title": "User Agreement",
       "description": "1. All statements made by users are not related to KUN Visual Novel. 2. KUN Visual Novel is merely an open-source collaborative web development project designed for everyone to learn web knowledge. 3. We reserve the right to ban users who engage in actions detrimental to the maintenance of our open-source project. 4. KUN Visual Novel is not responsible for any losses caused by issues such as user account theft."
     },
-    "bylaw": {
-      "title": "Bylaws",
-      "description": "KUN Visual Novel bylaws, covering users, topics, and moemoepoints. The goal is to make the forum's operation more transparent; these are not rules, as we do not have strict rules."
-    },
     "category": {
       "title": "Topic Categories",
       "description": "Topic categories / sections,visualnovel walkthrough,visualnovel chatting,visualnovel seeking,visualnovel news,visualnovel resources download,visualnovel releases, web,languages,linux,practical,ai,crack,android,adobe,algorithm, anime,comics,music,novel",
@@ -837,7 +829,7 @@
     },
     "ranking": {
       "title": "Rankings",
-      "description": "KUN Visual Novel rankings, user rankings, topic rankings, popularity rankings, moemoepoints rankings."
+      "description": "KUN Visual Novel rankings, user rankings, topic rankings moemoepoints rankings."
     },
     "technique": {
       "title": "Technical Exchange",

@@ -22,13 +22,6 @@ export const asideBarItem: asideBar[] = [
     label: 'KUN Visual Novel Privacy | 鲲 Galgame 隐私政策'
   },
   {
-    index: 3,
-    name: 'bylaw',
-    icon: 'lucide:ruler',
-    router: '/bylaw',
-    label: 'KUN Visual Novel Bylaw | 鲲 Galgame 执行条例'
-  },
-  {
     index: 4,
     name: 'update',
     icon: 'lucide:arrow-big-up-dash',

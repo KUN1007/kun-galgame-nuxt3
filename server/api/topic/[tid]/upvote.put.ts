@@ -26,8 +26,7 @@ const updateTopicUpvote = async (uid: number, tid: number) => {
       { tid },
       {
         $set: { upvote_time: Date.now() },
-        $push: { upvotes: uid },
-        $inc: { popularity: 17 }
+        $push: { upvotes: uid }
       }
     )
 

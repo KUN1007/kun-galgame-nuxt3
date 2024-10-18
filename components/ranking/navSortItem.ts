@@ -1,5 +1,4 @@
 type TopicSortFieldRanking =
-  | 'popularity'
   | 'views'
   | 'upvotes'
   | 'likes'
@@ -31,21 +30,21 @@ interface User {
 export const topicSortItem: Topic[] = [
   {
     index: 1,
-    icon: 'lucide:flame',
-    name: 'popularity',
-    sortField: 'popularity'
-  },
-  {
-    index: 2,
-    icon: 'lucide:sparkles',
-    name: 'upvote',
-    sortField: 'upvotes'
-  },
-  {
-    index: 3,
     icon: 'lucide:mouse-pointer-click',
     name: 'views',
     sortField: 'views'
+  },
+  {
+    index: 2,
+    icon: 'lucide:reply',
+    name: 'replies',
+    sortField: 'replies'
+  },
+  {
+    index: 3,
+    icon: 'uil:comment-dots',
+    name: 'comments',
+    sortField: 'comments'
   },
   {
     index: 4,
@@ -55,15 +54,9 @@ export const topicSortItem: Topic[] = [
   },
   {
     index: 5,
-    icon: 'lucide:reply',
-    name: 'replies',
-    sortField: 'replies'
-  },
-  {
-    index: 6,
-    icon: 'uil:comment-dots',
-    name: 'comments',
-    sortField: 'comments'
+    icon: 'lucide:sparkles',
+    name: 'upvote',
+    sortField: 'upvotes'
   }
 ]
 
@@ -116,7 +109,6 @@ export const userIconMap: Record<string, string> = {
 }
 
 export const topicIconMap: Record<string, string> = {
-  popularity: 'lucide:flame',
   upvotes: 'lucide:sparkles',
   views: 'lucide:mouse-pointer-click',
   likes: 'lucide:thumbs-up',

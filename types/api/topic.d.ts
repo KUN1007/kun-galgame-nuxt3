@@ -65,6 +65,5 @@ export interface TopicDetail {
   share: number[]
   category: string[]
   section: string[]
-  popularity: number
   upvoteTime: number
 }

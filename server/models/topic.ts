@@ -13,7 +13,6 @@ const TopicSchema = new mongoose.Schema<TopicAttributes>(
     section: { type: [String], required: true },
     time: { type: Number, default: Date.now() },
 
-    popularity: { type: Number, default: 0 },
     views: { type: Number, default: 0 },
     comments: { type: Number, default: 0 },
     upvote_time: { type: Number, default: 0 },

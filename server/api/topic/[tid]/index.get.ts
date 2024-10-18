@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
 
   const topic = await TopicModel.findOneAndUpdate(
     { tid },
-    { $inc: { views: 1, popularity: 0.1 } }
+    { $inc: { views: 1 } }
   )
     .populate('user', 'uid name avatar moemoepoint', UserModel)
     .lean()
@@ -60,7 +60,6 @@ export default defineEventHandler(async (event) => {
     share: topic.share,
     category: topic.category,
     section: topic.section,
-    popularity: topic.popularity,
     upvoteTime: topic.upvote_time
   }
 

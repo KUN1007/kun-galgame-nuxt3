@@ -72,10 +72,7 @@ export default defineEventHandler(async (event) => {
       return kunError(event, 10101)
     }
 
-    await TopicModel.updateOne(
-      { tid },
-      { $inc: { popularity: 2, comments: 1 } }
-    ).lean()
+    await TopicModel.updateOne({ tid }, { $inc: { comments: 1 } }).lean()
 
     await ReplyModel.findOneAndUpdate(
       { rid },

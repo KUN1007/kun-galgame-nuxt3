@@ -9,10 +9,6 @@ export const sitemap: Sitemap[] = [
     name: 'agreement'
   },
   {
-    route: '/bylaw',
-    name: 'bylaw'
-  },
-  {
     route: '/category',
     name: 'category'
   },

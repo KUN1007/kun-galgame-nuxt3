@@ -44,7 +44,6 @@
       "nav": "导航网站",
       "navHint": "防失联",
       "update": "更新日志",
-      "bylaw": "执行条例",
       "nonMoe": "不萌记录",
       "thanks": "感谢名单",
       "donate": "赞助我们",
@@ -99,7 +98,6 @@
       "homeZh": "网站主页 (简体中文)",
       "homeTw": "网站主页 (繁体中文)",
       "agreement": "用户协议",
-      "bylaw": "执行条例",
       "category": "话题分类",
       "contact": "联系 / 加入我们",
       "donate": "赞助我们",
@@ -440,7 +438,6 @@
     },
     "topic": {
       "name": "萌萌话题排行",
-      "popularity": "热度值",
       "upvote": "推数",
       "views": "浏览数",
       "likes": "点赞数",
@@ -451,7 +448,6 @@
   "kungalgame": {
     "agreement": "用户协议",
     "privacy": "隐私政策",
-    "bylaw": "执行条例",
     "update": "更新日志",
     "pl": "收支公示",
     "nonMoe": "不萌记录",
@@ -757,10 +753,6 @@
       "title": "用户协议",
       "description": "1. 用户所发表的一切言论与鲲 Galgame 没有任何关系, 2. 鲲 Galgame 只是一个开源的、合作的 Web 开发项目，目的是供所有人学习 Web 知识, 3. 用户做出不利于我们开源项目维护的行为时，我们有权对用户进行封禁 4. 因用户账号被盗等造成的损失, 鲲 Galgame 概不承担"
     },
-    "bylaw": {
-      "title": "执行条例",
-      "description": "鲲 Galgame 执行条例, 涉及用户, 话题, 萌萌点相关, 目的是让论坛的运行机制更加透明，并不是规矩，我们没有规矩"
-    },
     "category": {
       "title": "话题分类",
       "description": "话题分类 / 分区,Galgame攻略,Galgame闲聊,Galgame寻求资源,Galgame资讯,Galgame新作消息,Galgame资源下载 Web,编程语言,Linux,实用技术,AI,逆向工程,Android,Adobe,算法, 动漫,漫画,音乐,轻小说",
@@ -839,7 +831,7 @@
     },
     "ranking": {
       "title": "排行榜单",
-      "description": "鲲 Galgame 排行榜单, 用户排行, 话题排行, 热度排行, 萌萌点排行"
+      "description": "鲲 Galgame 排行榜单, 用户排行, 话题排行, 萌萌点排行"
     },
     "technique": {
       "title": "技术交流",

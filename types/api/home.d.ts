@@ -33,7 +33,6 @@ export interface HomeTopic {
   time: number
   tags: string[]
   section: string[]
-  popularity: number
   user: KunUser
   status: number
   upvoteTime: number

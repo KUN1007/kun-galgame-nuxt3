@@ -1,5 +1,4 @@
 type TopicSortFieldRanking =
-  | 'popularity'
   | 'views'
   | 'upvotes'
   | 'likes'

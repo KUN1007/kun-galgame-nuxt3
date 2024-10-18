@@ -12,7 +12,6 @@ export interface TopicAttributes {
   section: string[]
   time: number
 
-  popularity: number
   views: number
   upvote_time: number
 

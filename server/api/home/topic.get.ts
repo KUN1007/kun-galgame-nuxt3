@@ -22,7 +22,6 @@ const getHomeTopics = async (page: number, limit: number) => {
     time: topic.time,
     tags: topic.tags,
     section: topic.section,
-    popularity: topic.popularity,
     user: {
       uid: topic.user[0].uid,
       name: topic.user[0].name,

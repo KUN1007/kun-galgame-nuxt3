@@ -10,7 +10,6 @@ const updateTopicFavorite = async (uid: number, tid: number) => {
 
   const isFavoriteTopic = topic.favorites.includes(uid)
   const moemoepointAmount = isFavoriteTopic ? -1 : 1
-  const popularity = isFavoriteTopic ? -2 : 2
 
   const session = await mongoose.startSession()
   session.startTransaction()
@@ -18,10 +17,7 @@ const updateTopicFavorite = async (uid: number, tid: number) => {
   try {
     await TopicModel.updateOne(
       { tid },
-      {
-        $inc: { popularity },
-        [isFavoriteTopic ? '$pull' : '$addToSet']: { favorites: uid }
-      }
+      { [isFavoriteTopic ? '$pull' : '$addToSet']: { favorites: uid } }
     )
 
     await UserModel.updateOne(

@@ -3,7 +3,6 @@ import type { HomeTopic, HomeGalgame } from './home'
 export type SortField =
   | 'updated'
   | 'time'
-  | 'popularity'
   | 'views'
   | 'upvotes'
   | 'likes'

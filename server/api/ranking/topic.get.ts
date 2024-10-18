@@ -17,7 +17,7 @@ const getTopicRanking = async (
     [sortField]: sortOrder === 'asc' ? 1 : -1
   }
 
-  const numberField = ['popularity', 'views', 'comments']
+  const numberField = ['views', 'comments']
   if (numberField.includes(sortField)) {
     const topics = await TopicModel.find()
       .sort(sortOptions)

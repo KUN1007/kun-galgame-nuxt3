@@ -15,7 +15,6 @@ export const useTempRankingStore = defineStore({
     topic: {
       page: '1',
       limit: '30',
-      sortField: 'popularity',
       sortOrder: 'desc'
     },
     user: {

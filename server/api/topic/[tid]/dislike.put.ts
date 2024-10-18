@@ -14,7 +14,6 @@ const updateTopicDislike = async (uid: number, tid: number) => {
 
   const isDislikedTopic = topic.dislikes.includes(uid)
   const amount = isDislikedTopic ? -1 : 1
-  const popularity = isDislikedTopic ? 5 : -5
 
   const session = await mongoose.startSession()
   session.startTransaction()
@@ -22,10 +21,7 @@ const updateTopicDislike = async (uid: number, tid: number) => {
   try {
     await TopicModel.updateOne(
       { tid },
-      {
-        $inc: { popularity },
-        [isDislikedTopic ? '$pull' : '$addToSet']: { dislikes: uid }
-      }
+      { [isDislikedTopic ? '$pull' : '$addToSet']: { dislikes: uid } }
     )
 
     await UserModel.updateOne(
