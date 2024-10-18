@@ -21,5 +21,4 @@ export const kungalgameStoreReset = () => {
   useTempRankingStore().$reset()
   useTempSectionStore().$reset()
   useTempSettingStore().$reset()
-  useTempTechniqueStore().$reset()
 }

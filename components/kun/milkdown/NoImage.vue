@@ -182,6 +182,7 @@ watch(
 <style lang="scss" scoped>
 .kungalgame-content {
   position: relative;
+  width: 100%;
 
   :deep(.milkdown) {
     width: 100%;

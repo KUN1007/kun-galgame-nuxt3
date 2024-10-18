@@ -18,7 +18,7 @@ defineProps<{
 @use '~/assets/css/editor/kun-content.scss';
 
 .kungalgame-content {
-  width: 100%;
+  width: calc(100% - 134px);
   padding-top: 10px;
   padding-right: 17px;
 
@@ -31,6 +31,7 @@ defineProps<{
 @media (max-width: 700px) {
   .kungalgame-content {
     padding: 10px;
+    width: 100%;
   }
 }
 </style>

@@ -41,8 +41,8 @@ const handleChangeImage = async (index: number) => {
       {{ $t('header.settings.background') }}
     </div>
 
-    <ul class="container">
-      <li class="options">
+    <div class="container">
+      <div class="options">
         <div>
           <span class="prev" @click="prevPage">
             <Icon class="icon" name="lucide:chevron-left" />
@@ -59,9 +59,9 @@ const handleChangeImage = async (index: number) => {
           </span>
         </div>
         <KunSettingPanelComponentsCustomBackground />
-      </li>
+      </div>
 
-      <li>
+      <div>
         <ul class="kungalgame-restore-bg">
           <li
             v-for="kun in paginatedImages"
@@ -79,8 +79,8 @@ const handleChangeImage = async (index: number) => {
             />
           </li>
         </ul>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -109,7 +109,6 @@ const handleChangeImage = async (index: number) => {
       box-shadow: var(--shadow);
       color: var(--kungalgame-font-color-3);
       transition: all 0.2s;
-
       @include kun-center;
 
       &:hover {

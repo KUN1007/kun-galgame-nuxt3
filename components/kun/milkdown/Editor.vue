@@ -188,9 +188,9 @@ const editorInfo = useEditor((root) =>
     <Milkdown class="kungalgame-content" />
 
     <div class="loading" v-if="editorInfo.loading.value">
-      <span
-        ><Icon class="icon" name="svg-spinners:12-dots-scale-rotate"
-      /></span>
+      <span>
+        <Icon class="icon" name="svg-spinners:12-dots-scale-rotate" />
+      </span>
       <span>{{ $t('edit.topic.loading') }}</span>
     </div>
   </div>
@@ -203,6 +203,7 @@ const editorInfo = useEditor((root) =>
 <style lang="scss" scoped>
 .kungalgame-content {
   position: relative;
+  width: 100%;
 
   :deep(.milkdown) {
     width: 100%;

@@ -274,6 +274,11 @@ const handleFileChange = async (event: Event) => {
         @change="handleFileChange($event)"
       />
     </div>
+
+    <div class="btn emoji" aria-label="kun-galgame-emoji">
+      <Icon class="icon" name="lucide:smile-plus" />
+      <KunMilkdownPluginsEmojiContainer :editor-info="editorInfo" />
+    </div>
   </div>
 </template>
 
@@ -305,6 +310,20 @@ const handleFileChange = async (event: Event) => {
     &:hover {
       border: 1px solid var(--kungalgame-blue-5);
       color: var(--kungalgame-blue-5);
+    }
+  }
+}
+
+.emoji {
+  position: relative;
+
+  .emoji-container {
+    display: none;
+  }
+
+  &:hover {
+    .emoji-container {
+      display: flex;
     }
   }
 }
