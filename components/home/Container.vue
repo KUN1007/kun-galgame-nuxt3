@@ -78,7 +78,7 @@ const { fold } = storeToRefs(usePersistKUNGalgameHomeStore())
 
   .suffix {
     cursor: pointer;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
     color: var(--kungalgame-font-color-1);
 

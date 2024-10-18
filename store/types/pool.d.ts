@@ -14,3 +14,7 @@ export interface PoolStoreTemp {
 
   topics: PoolTopic[]
 }
+
+export interface PoolStorePersist {
+  layout: 'grid' | 'list'
+}

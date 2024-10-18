@@ -36,18 +36,21 @@ const getPoolTopics = async (
   const data: PoolTopic[] = topics.map((topic) => ({
     tid: topic.tid,
     title: topic.title,
-    user: {
-      uid: topic.user[0].uid,
-      avatar: topic.user[0].avatar,
-      name: topic.user[0].name
-    },
     views: topic.views,
-    section: topic.section,
-    tags: topic.tags,
     likes: topic.likes.length,
     replies: topic.replies.length,
     comments: topic.comments,
-    time: topic.time
+    time: topic.time,
+    tags: topic.tags,
+    section: topic.section,
+    popularity: topic.popularity,
+    user: {
+      uid: topic.user[0].uid,
+      name: topic.user[0].name,
+      avatar: topic.user[0].avatar
+    },
+    status: topic.status,
+    upvoteTime: topic.upvote_time
   }))
 
   return data

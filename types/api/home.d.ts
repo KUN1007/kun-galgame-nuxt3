@@ -34,7 +34,7 @@ export interface HomeTopic {
   tags: string[]
   section: string[]
   popularity: number
-  user: Omit<KunUser, 'avatar'>
+  user: KunUser
   status: number
   upvoteTime: number
 }

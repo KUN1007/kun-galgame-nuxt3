@@ -119,7 +119,7 @@ defineProps<{
   position: absolute;
   right: 10px;
   font-size: 36px;
-  color: var(--kungalgame-trans-blue-2);
+  color: var(--kungalgame-yellow-2);
   @include kun-center;
 }
 

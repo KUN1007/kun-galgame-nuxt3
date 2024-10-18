@@ -4,11 +4,6 @@ import { hamburgerItem } from './hamburgerItem'
 import type { Hamburger } from './hamburgerItem'
 
 const localePath = useLocalePath()
-const route = useRoute()
-const getRouteBaseName = useRouteBaseName()
-const baseRouteName = computed(() => {
-  return getRouteBaseName(route)
-})
 
 const { showKUNGalgameHamburger } = storeToRefs(useTempSettingStore())
 const { showKUNGalgameBackLoli } = storeToRefs(usePersistSettingsStore())
@@ -130,8 +125,6 @@ const handleShowMore = () => {
             <span>{{ $t('header.hamburger.loli') }}</span>
             <KunSwitch v-model="showKUNGalgameBackLoli" />
           </div>
-
-          <PoolSimpleMode v-if="baseRouteName === 'pool'" />
 
           <span class="more" @click="handleShowMore">
             <span>{{ $t('header.hamburger.settings') }}</span>

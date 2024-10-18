@@ -50,7 +50,8 @@ export const searchTopic = async (
     popularity: topic.popularity,
     user: {
       uid: topic.user[0].uid,
-      name: topic.user[0].name
+      name: topic.user[0].name,
+      avatar: topic.user[0].avatar
     },
     status: topic.status,
     upvoteTime: topic.upvote_time

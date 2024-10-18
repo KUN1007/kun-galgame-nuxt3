@@ -470,8 +470,7 @@
     "all": "All Categories",
     "galgame": "Visual Novel",
     "technique": "Technique",
-    "others": "Others",
-    "simpleMode": "Simple Mode"
+    "others": "Others"
   },
   "technique": {
     "prev": "Prev",

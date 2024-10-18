@@ -12,6 +12,7 @@ useHead({
 })
 
 const { savedPosition, pageData, topics } = storeToRefs(useTempPoolStore())
+const { layout } = storeToRefs(usePersistPoolStore())
 const isLoadingComplete = ref(false)
 
 const getTopics = async () => {
@@ -125,11 +126,21 @@ onUnmounted(() => {
         >
           <span>{{ $t(`pool.${pageData.category}`) }}</span>
         </KunSelect>
-
-        <PoolSimpleMode />
       </div>
 
-      <div class="order">
+      <div class="func">
+        <span
+          :class="layout === 'grid' ? 'active' : ''"
+          @click="layout = 'grid'"
+        >
+          <Icon class="icon" name="lucide:layout-grid" />
+        </span>
+        <span
+          :class="layout === 'list' ? 'active' : ''"
+          @click="layout = 'list'"
+        >
+          <Icon class="icon" name="lucide:list" />
+        </span>
         <span
           :class="pageData.sortOrder === 'asc' ? 'active' : ''"
           @click="pageData.sortOrder = 'asc'"
@@ -145,16 +156,7 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <div class="container">
-      <PoolTopic
-        v-for="(kun, index) in topics"
-        :key="index"
-        class="item"
-        :topic="kun"
-      />
-
-      <KunSkeletonPoolTopics v-if="topics && !topics.length" />
-    </div>
+    <PoolLayout :topics="topics" />
 
     <div class="load">
       <KunButton v-if="!isLoadingComplete" @click="handleLoadTopics">
@@ -181,45 +183,27 @@ onUnmounted(() => {
 }
 
 .tool {
-  position: sticky;
-  top: 0;
   padding: 10px;
   color: var(--kungalgame-font-color-3);
   box-shadow: var(--shadow);
   background-color: var(--kungalgame-trans-white-5);
   border-radius: 10px;
-  margin-bottom: 17px;
+  margin-bottom: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   z-index: 17;
 
   .sort {
     display: flex;
   }
 
-  .simple-mode {
-    margin-left: 10px;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    border-radius: 10px;
-    backdrop-filter: blur(var(--kun-background-blur));
-    will-change: transform;
-  }
-
   .icon {
     font-size: 20px;
   }
 
-  .order {
+  .func {
     display: flex;
     white-space: nowrap;
 
@@ -236,13 +220,6 @@ onUnmounted(() => {
       color: var(--kungalgame-blue-5);
     }
   }
-}
-
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  padding: 10px;
-  @include kun-blur;
 }
 
 .load {
@@ -272,17 +249,14 @@ onUnmounted(() => {
     padding: 0 5px;
   }
 
-  .container {
-    grid-template-columns: repeat(2, minmax(100px, 233px));
-    padding: 10px 0;
-  }
-
   .tool {
-    margin-bottom: 7px;
-  }
+    .sort {
+      margin-bottom: 8px;
+    }
 
-  .simple-mode {
-    display: none;
+    .icon {
+      font-size: 16px;
+    }
   }
 }
 </style>

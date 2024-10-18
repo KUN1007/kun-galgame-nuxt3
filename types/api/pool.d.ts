@@ -1,3 +1,5 @@
+import type { HomeTopic, HomeGalgame } from './home'
+
 export type SortField =
   | 'updated'
   | 'time'
@@ -10,22 +12,7 @@ export type SortField =
 
 export type SortFieldPool = 'views' | 'created'
 
-export interface PoolTopic {
-  tid: number
-  title: string
-  user: {
-    uid: number
-    avatar: string
-    name: string
-  }
-  views: number
-  section: string[]
-  tags: string[]
-  likes: number
-  replies: number
-  comments: number
-  time: number
-}
+export type PoolTopic = HomeTopic
 
 export interface PoolTopicsRequestData {
   page: string

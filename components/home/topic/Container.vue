@@ -47,9 +47,9 @@ const handleClose = () => {
 
 <style lang="scss" scoped>
 .close {
-  margin-left: 17px;
+  margin-left: 16px;
   cursor: pointer;
-  padding-right: 17px;
+  padding-right: 16px;
 
   &:hover {
     color: var(--kungalgame-blue-5);
