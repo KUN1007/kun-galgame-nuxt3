@@ -15,11 +15,5 @@ export const useTempPoolStore = defineStore({
 
     topics: []
   }),
-  actions: {
-    resetPageStatus() {
-      this.topics = []
-      this.pageData.page = 1
-      this.savedPosition = 0
-    }
-  }
+  actions: {}
 })

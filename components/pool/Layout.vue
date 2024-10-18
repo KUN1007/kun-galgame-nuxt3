@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PoolTopic } from '~/types/api/pool'
 
-const props = defineProps<{
+defineProps<{
   topics: PoolTopic[]
 }>()
 
