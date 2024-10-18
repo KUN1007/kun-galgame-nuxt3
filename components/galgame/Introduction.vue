@@ -31,6 +31,7 @@ defineProps<{
   </div>
 
   <KunContent
+    class="kun-content"
     :content="
       getPreferredLanguageText(introduction, introductionLanguage as Language)
     "
@@ -48,5 +49,9 @@ h2 {
   background-color: var(--kungalgame-blue-5);
   font-size: 15px;
   padding: 5px 10px;
+}
+
+.kun-content {
+  width: 100%;
 }
 </style>
