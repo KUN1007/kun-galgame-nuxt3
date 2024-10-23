@@ -6,7 +6,7 @@ withDefaults(defineProps<{ text: string; name?: string }>(), {
 
 <template>
   <span class="kun-copy" @click="useKunCopy(text)">
-    <span>{{ name ? name : text }}</span>
+    <span>{{ decodeIfEncoded(name ? name : text) }}</span>
     <Icon class="icon" name="lucide:copy" />
   </span>
 </template>

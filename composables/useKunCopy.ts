@@ -1,4 +1,6 @@
-export const useKunCopy = (text: string) => {
+export const useKunCopy = (originText: string) => {
+  const text = decodeIfEncoded(originText)
+
   navigator.clipboard
     .writeText(text)
     .then(() => {

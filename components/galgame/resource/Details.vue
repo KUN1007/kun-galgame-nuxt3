@@ -101,7 +101,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
   <div class="more" v-if="details">
     <div class="title">
       <span class="link" v-for="(kun, index) in details.link" :key="index">
-        <KunCopy :text="decodeURI(kun)" />
+        <KunCopy :text="kun" />
         <a :href="kun" target="_blank" rel="noopener noreferrer">
           <Icon class="icon" name="lucide:external-link" />
         </a>
