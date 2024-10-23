@@ -39,6 +39,11 @@ useHead({
   max-width: 64rem;
   margin: 0 auto;
   padding: 10px;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 
   @include kun-blur;
 }
