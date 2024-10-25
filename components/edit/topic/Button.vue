@@ -173,7 +173,6 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
 
   button {
     height: 40px;

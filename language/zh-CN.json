@@ -218,6 +218,7 @@
       "Galgame": "Galgame",
       "Technique": "技术交流",
       "Others": "其它",
+      "note": "请不要在话题中发布除了 Galgame 以外的 R18 黄游 (例如: SLG) 资源",
       "section": {
         "g-walkthrough": "攻略",
         "g-chatting": "闲聊",
@@ -606,8 +607,9 @@
       "status2": "已拒绝",
       "decline": "拒绝",
       "merge": "合并",
-      "note": "请填写拒绝原因",
+      "reason": "请填写拒绝原因",
       "confirm": "确定拒绝",
+      "note": "您可以自己合并自己提出的更新请求",
       "hint": "要处理该请求, 需要资源的发布者、或管理员",
       "i18n": {
         "name": {

@@ -218,6 +218,7 @@
       "Galgame": "ギャルゲーム",
       "Technique": "技術交流",
       "Others": "その他",
+      "note": "ギャルゲー以外のR18のアダルトゲーム（e.g. SLG）リソースをトピックに投稿しないでください。",
       "section": {
         "g-walkthrough": "攻略",
         "g-chatting": "雑談",
@@ -606,8 +607,9 @@
       "status2": "拒否されました",
       "decline": "拒否",
       "merge": "統合",
-      "note": "拒否理由を記入してください",
+      "reason": "提出した更新リクエストを自分でマージできます。",
       "confirm": "拒否を確認",
+      "note": "You can merge your own pull requests.",
       "hint": "このリクエストを処理するには、リソースの発行者または管理者が必要です",
       "i18n": {
         "name": {

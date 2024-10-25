@@ -218,6 +218,7 @@
       "Galgame": "Visual Novel",
       "Technique": "Technique",
       "Others": "Others",
+      "note": "Please do not post any R18 adult game resources other (e.g. SLG) than Visualnovel in this topic",
       "section": {
         "g-walkthrough": "Walkthrough",
         "g-chatting": "Chatting",
@@ -608,8 +609,9 @@
       "status2": "Declined",
       "decline": "Decline",
       "merge": "Merge",
-      "note": "Please provide a reason for decline",
+      "reason": "Please provide a reason for decline",
       "confirm": "Confirm Decline",
+      "note": "You can merge your own pull requests.",
       "hint": "To handle this request, it requires the resource publisher, or an administrator.",
       "i18n": {
         "name": {

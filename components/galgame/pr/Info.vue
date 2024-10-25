@@ -15,6 +15,7 @@ const iconMap: Record<number, string> = {
 }
 
 const { locale } = useI18n()
+const { uid } = usePersistUserStore()
 const details = ref<Partial<GalgamePRDetails>>()
 const isFetching = ref(false)
 
@@ -90,6 +91,10 @@ watch(
     </div>
   </div>
 
+  <p class="note" v-if="uid === props.pr.user.uid && props.pr.status === 0">
+    {{ $t('galgame.pr.note') }}
+  </p>
+
   <GalgamePrDetails v-if="details" :details="details" :refresh="refresh" />
 </template>
 
@@ -150,6 +155,12 @@ watch(
     cursor: pointer;
     font-size: 20px;
   }
+}
+
+.note {
+  margin-bottom: 17px;
+  font-weight: bold;
+  color: var(--kungalgame-red-5);
 }
 
 .status0 {

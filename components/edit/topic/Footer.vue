@@ -13,6 +13,10 @@
     <EditInfoNotice />
 
     <EditTopicButton />
+
+    <NuxtLinkLocale to="/topic/1712">
+      {{ $t('edit.topic.note') }}
+    </NuxtLinkLocale>
   </div>
 </template>
 
@@ -32,5 +36,12 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+}
+
+a {
+  margin: 16px 0;
+  color: var(--kungalgame-blue-5);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 </style>
