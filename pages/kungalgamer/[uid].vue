@@ -84,7 +84,7 @@ useHead({
 .root {
   margin: 0 auto;
   min-height: 800px;
-  max-width: 64rem;
+  max-width: 80rem;
   display: flex;
   flex-direction: column;
   align-items: center;

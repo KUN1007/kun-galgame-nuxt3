@@ -19,7 +19,7 @@ const type = useRequestURL().searchParams.get('type')
   flex-direction: column;
   height: 100%;
   min-height: calc(100dvh - 75px);
-  max-width: 64rem;
+  max-width: 80rem;
   margin: 0 auto;
   color: var(--kungalgame-font-color-3);
 }

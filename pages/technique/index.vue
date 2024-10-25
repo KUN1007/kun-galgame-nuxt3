@@ -35,7 +35,7 @@ useHead({
   height: 100%;
   transition: width 0.2s;
   width: 100%;
-  max-width: 64rem;
+  max-width: 80rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

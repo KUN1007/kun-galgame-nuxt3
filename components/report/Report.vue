@@ -91,7 +91,7 @@ const handleSubmitReport = async () => {
 <style lang="scss" scoped>
 .container {
   width: 100%;
-  max-width: 64rem;
+  max-width: 80rem;
   margin: 0 auto;
   padding: 20px 20px 60px;
 

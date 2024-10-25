@@ -32,7 +32,7 @@ useHead({
   border-radius: 7px;
   height: calc(100dvh - 75px);
   transition: width 0.2s;
-  max-width: 64rem;
+  max-width: 80rem;
   margin: auto;
   display: flex;
 }

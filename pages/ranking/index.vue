@@ -34,7 +34,7 @@ useHead({
 .article {
   max-height: calc(100dvh - 100px);
   width: 100%;
-  max-width: 64rem;
+  max-width: 80rem;
   margin: auto;
   display: flex;
   padding: 10px;

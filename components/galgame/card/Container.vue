@@ -31,15 +31,9 @@ const { data, status } = await useFetch(`/api/galgame`, {
 </template>
 
 <style lang="scss" scoped>
-.container {
-  padding: 17px;
-
-  @include kun-blur;
-}
-
 .declaration {
   user-select: none;
-  margin-top: 17px;
+  margin-top: 16px;
   text-align: center;
   font-size: small;
   color: var(--kungalgame-font-color-0);
@@ -48,7 +42,6 @@ const { data, status } = await useFetch(`/api/galgame`, {
 @media (max-width: 700px) {
   .container {
     margin: 0 5px;
-    padding: 17px 10px;
   }
 }
 </style>

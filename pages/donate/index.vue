@@ -72,7 +72,7 @@ const isShowOR = ref(false)
 <style lang="scss" scoped>
 .root {
   height: calc(100vh - 75px);
-  max-width: 64rem;
+  max-width: 80rem;
   min-width: 500px;
   min-height: 500px;
   margin: 0 auto;

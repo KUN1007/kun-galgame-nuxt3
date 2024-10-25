@@ -37,7 +37,7 @@ useHead({
 
 .container {
   width: 100%;
-  max-width: 64rem;
+  max-width: 80rem;
   margin: 0 auto;
   position: relative;
   display: flex;

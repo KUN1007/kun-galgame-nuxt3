@@ -75,7 +75,7 @@ defineProps<{
 <style lang="scss" scoped>
 .grid-card {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
   gap: 10px;
 }
 
@@ -86,7 +86,8 @@ defineProps<{
   color: var(--kungalgame-font-color-3);
   border-radius: 8px;
   box-shadow: var(--shadow);
-  border: 1px solid var(--kungalgame-blue-3);
+  overflow: hidden;
+  @include kun-blur;
 }
 
 .banner {
@@ -134,15 +135,12 @@ defineProps<{
     left: 0;
     right: 0;
     padding: 8px 8px;
-    background: linear-gradient(
-      transparent,
-      rgba(0, 0, 0, 0.7)
-    );
-    color: white;
+    background: linear-gradient(transparent, var(--kungalgame-mask-color-0));
+    color: var(--kungalgame-white-solid);
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    font-size: x-small;
+    font-size: small;
 
     .data {
       display: flex;
@@ -158,10 +156,10 @@ defineProps<{
     .language {
       display: flex;
       gap: 8px;
-      
+
       span {
         padding: 2px 4px;
-        background: rgba(255, 255, 255, 0.2);
+        background: var(rgba(255, 255, 255, 0.2));
         border-radius: 4px;
       }
     }
@@ -180,6 +178,11 @@ defineProps<{
   color: var(--kungalgame-blue-5);
   font-weight: bold;
   margin: 7px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .publisher {

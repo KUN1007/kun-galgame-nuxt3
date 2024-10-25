@@ -31,7 +31,7 @@ useHead({
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-width: 64rem;
+  max-width: 80rem;
   margin: 0 auto;
   padding: 17px;
 
