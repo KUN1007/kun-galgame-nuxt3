@@ -34,14 +34,14 @@ defineProps<{
             {{ $t('galgame.preparing') }}
           </span>
         </div>
-        <div class="mask">
+        <div class="overlay">
           <div class="data">
-            <span>
+            <span class="stat">
               <Icon class="icon" name="lucide:mouse-pointer-click" />
               <span>{{ galgame.views }}</span>
             </span>
 
-            <span>
+            <span class="stat">
               <Icon class="icon" name="lucide:thumbs-up" />
               <span>{{ galgame.likes }}</span>
             </span>
@@ -55,16 +55,18 @@ defineProps<{
         </div>
       </div>
 
-      <div class="title">
-        {{ getPreferredLanguageText(galgame.name, locale as Language) }}
-      </div>
+      <div class="card-content">
+        <h3 class="title">
+          {{ getPreferredLanguageText(galgame.name, locale as Language) }}
+        </h3>
 
-      <div class="publisher">
-        <KunAvatar :user="galgame.user" size="30px" />
-        <span class="name">{{ galgame.user.name }}</span>
-        <span class="time">
-          {{ formatTimeDifference(galgame.time, locale) }}
-        </span>
+        <div class="publisher">
+          <KunAvatar :user="galgame.user" size="30px" />
+          <span class="name">{{ galgame.user.name }}</span>
+          <span class="time">
+            {{ formatTimeDifference(galgame.time, locale) }}
+          </span>
+        </div>
       </div>
     </NuxtLinkLocale>
   </div>
@@ -73,7 +75,7 @@ defineProps<{
 <style lang="scss" scoped>
 .grid-card {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 10px;
 }
 
@@ -82,6 +84,9 @@ defineProps<{
   flex-direction: column;
   cursor: pointer;
   color: var(--kungalgame-font-color-3);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--kungalgame-blue-3);
 }
 
 .banner {
@@ -93,12 +98,13 @@ defineProps<{
     height: 100%;
     object-fit: cover;
     max-width: 100%;
-    transition: transform 0.5s;
+    transition: transform 0.5s ease;
   }
 
   .platform {
     position: absolute;
-    top: 0;
+    top: 8px;
+    left: 8px;
     z-index: 1;
     color: var(--kungalgame-font-color-0);
     background-color: var(--kungalgame-trans-white-5);
@@ -122,55 +128,52 @@ defineProps<{
     }
   }
 
-  .mask {
+  .overlay {
     position: absolute;
     bottom: 0;
-    z-index: 1;
-    width: 100%;
-    background: linear-gradient(transparent, var(--kungalgame-font-color-0));
-    color: var(--kungalgame-white);
-    padding: 0 7px;
-    padding-bottom: 3px;
+    left: 0;
+    right: 0;
+    padding: 8px 8px;
+    background: linear-gradient(
+      transparent,
+      rgba(0, 0, 0, 0.7)
+    );
+    color: white;
     display: flex;
     justify-content: space-between;
-    font-size: small;
+    align-items: flex-end;
+    font-size: x-small;
 
     .data {
       display: flex;
+      gap: 8px;
 
-      & > span {
+      .stat {
         display: flex;
         align-items: center;
-        margin-right: 7px;
-
-        .icon {
-          margin-right: 3px;
-        }
+        gap: 6px;
       }
     }
 
     .language {
-      & > span {
-        &::after {
-          content: '|';
-          margin: 0 3px;
-        }
-
-        &:last-child {
-          &::after {
-            content: '';
-            margin: 0;
-          }
-        }
+      display: flex;
+      gap: 8px;
+      
+      span {
+        padding: 2px 4px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
       }
     }
   }
 }
 
-.card:hover .banner {
-  img {
-    transform: scale(1.07);
-  }
+.card:hover .banner img {
+  transform: scale(1.1);
+}
+
+.card-content {
+  padding: 7px;
 }
 
 .title {
@@ -182,7 +185,6 @@ defineProps<{
 .publisher {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
 
   .name {
     margin: 0 7px;
@@ -196,7 +198,7 @@ defineProps<{
 
 @media (max-width: 700px) {
   .grid-card {
-    grid-template-columns: repeat(2, minmax(100px, 233px));
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
     gap: 7px;
   }
 }
