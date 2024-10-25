@@ -62,7 +62,7 @@ watch(
 
     <KunSelect
       :styles="{ width: '150px' }"
-      :options="['views', 'time']"
+      :options="['time', 'created', 'views']"
       :default-value="sortField"
       i18n="galgame.resource.sort"
       @set="(value) => (sortField = value as 'time' | 'views')"

@@ -13,7 +13,7 @@ const getGalgames = async (
   type: TypeOptions,
   language: LanguageOptions,
   platform: PlatformOptions,
-  sortField: 'time' | 'views',
+  sortField: 'time' | 'created' | 'views',
   sortOrder: KunOrder
 ) => {
   const skip = (page - 1) * limit
@@ -80,7 +80,7 @@ export default defineEventHandler(async (event) => {
     type,
     language,
     platform,
-    sortField as 'time' | 'views',
+    sortField as 'time' | 'created' | 'views',
     sortOrder as KunOrder
   )
 

@@ -132,6 +132,9 @@ importers:
       '@iconify-json/ci':
         specifier: ^1.2.1
         version: 1.2.1
+      '@iconify-json/iconoir':
+        specifier: ^1.2.2
+        version: 1.2.2
       '@iconify-json/line-md':
         specifier: ^1.2.2
         version: 1.2.2
@@ -1303,6 +1306,9 @@ packages:
 
   '@iconify-json/ci@1.2.1':
     resolution: {integrity: sha512-uQSNwCTuorjgH7rQ7dFXfJ4fqUMHP8cqOmm8m/ibHM4/WQTih4Dkaq3i6e7X4Wji3kFR6R1bAkjDxLYmTD6KGA==}
+
+  '@iconify-json/iconoir@1.2.2':
+    resolution: {integrity: sha512-ytC2V7WeIHsQSyd5r+Iq/ExNb/yM45iR0jhbKNqFFSWhJvuanfIyuTHH/SQJpPYwV1grGtIx7v+kZ7xIjltdpA==}
 
   '@iconify-json/line-md@1.2.2':
     resolution: {integrity: sha512-UCYTTO5aARoVbOOPCaomOoXDC8maSolIV8KVDmK9VuzfjpqkMg/vJo/nWaoQPIf310SZjdvAqHvIwsbzr6J+sw==}
@@ -7531,6 +7537,10 @@ snapshots:
   '@humanwhocodes/retry@0.3.1': {}
 
   '@iconify-json/ci@1.2.1':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/iconoir@1.2.2':
     dependencies:
       '@iconify/types': 2.0.0
 

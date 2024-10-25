@@ -45,7 +45,10 @@ export default defineEventHandler(async (event) => {
 
     await GalgameModel.updateOne(
       { gid: result.gid },
-      { $addToSet: { contributor: result.uid } }
+      {
+        $set: { time: Date.now() },
+        $addToSet: { contributor: result.uid }
+      }
     )
 
     await session.commitTransaction()

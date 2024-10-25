@@ -566,7 +566,8 @@
       },
       "sort": {
         "views": "瀏覽順序",
-        "time": "時間順序"
+        "time": "更新順序",
+        "created": "創建順序"
       },
       "create": "創建資源鏈接",
       "cancelRewrite": "取消 Rewrite",

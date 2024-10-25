@@ -566,7 +566,8 @@
       },
       "sort": {
         "views": "浏览顺序",
-        "time": "时间顺序"
+        "time": "更新顺序",
+        "created": "创建顺序"
       },
       "create": "创建资源链接",
       "cancelRewrite": "取消 Rewrite",

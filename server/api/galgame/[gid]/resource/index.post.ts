@@ -61,6 +61,7 @@ export default defineEventHandler(async (event) => {
     await GalgameModel.updateOne(
       { gid: result.gid },
       {
+        $set: { time: Date.now() },
         $addToSet: {
           contributor: result.uid,
           resources: resource.grid,

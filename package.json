@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.19.14",
+  "version": "2.19.15",
   "packageManager": "pnpm@9.12.1",
   "private": true,
   "scripts": {
@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@iconify-json/ci": "^1.2.1",
+    "@iconify-json/iconoir": "^1.2.2",
     "@iconify-json/line-md": "^1.2.2",
     "@iconify-json/lucide": "^1.2.9",
     "@iconify-json/mdi": "^1.2.1",

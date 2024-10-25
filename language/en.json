@@ -568,7 +568,8 @@
       },
       "sort": {
         "views": "Views",
-        "time": "Time"
+        "time": "Update",
+        "created": "Created"
       },
       "create": "Create resource link",
       "cancelRewrite": "Cancel Rewrite",
