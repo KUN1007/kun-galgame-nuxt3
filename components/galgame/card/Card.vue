@@ -56,16 +56,19 @@ defineProps<{
       </div>
 
       <div class="card-content">
-        <h3 class="title">
+        <div class="title">
           {{ getPreferredLanguageText(galgame.name, locale as Language) }}
-        </h3>
+        </div>
 
         <div class="publisher">
           <KunAvatar :user="galgame.user" size="30px" />
-          <span class="name">{{ galgame.user.name }}</span>
-          <span class="time">
-            {{ formatTimeDifference(galgame.time, locale) }}
-          </span>
+
+          <div class="info">
+            <span class="name">{{ galgame.user.name }}</span>
+            <span class="time">
+              {{ formatTimeDifference(galgame.time, locale) }}
+            </span>
+          </div>
         </div>
       </div>
     </NuxtLinkLocale>
@@ -189,13 +192,20 @@ defineProps<{
   display: flex;
   align-items: center;
 
-  .name {
-    margin: 0 7px;
-  }
+  .info {
+    display: flex;
+    flex-direction: column;
 
-  .time {
-    color: var(--kungalgame-font-color-0);
-    font-size: small;
+    .name {
+      margin: 0 7px;
+      font-size: small;
+    }
+
+    .time {
+      color: var(--kungalgame-font-color-0);
+      font-size: small;
+      margin: 0 7px;
+    }
   }
 }
 
