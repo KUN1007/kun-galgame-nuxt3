@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
 
   const galgames: GalgameRSS[] = data.map((galgame) => ({
     gid: galgame.gid,
-    name: galgame.name[language],
+    name: getPreferredLanguageText(galgame.name, language),
     banner: galgame.banner,
     user: {
       uid: galgame.user[0].uid,
