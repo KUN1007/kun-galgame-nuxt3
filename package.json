@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.19.19",
+  "version": "2.19.20",
   "packageManager": "pnpm@9.12.1",
   "private": true,
   "scripts": {
@@ -19,18 +19,6 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@iconify-json/ci": "^1.2.1",
-    "@iconify-json/iconoir": "^1.2.2",
-    "@iconify-json/line-md": "^1.2.2",
-    "@iconify-json/lucide": "^1.2.9",
-    "@iconify-json/mdi": "^1.2.1",
-    "@iconify-json/mingcute": "^1.2.1",
-    "@iconify-json/ph": "^1.2.1",
-    "@iconify-json/ri": "^1.2.1",
-    "@iconify-json/svg-spinners": "^1.2.1",
-    "@iconify-json/tabler": "^1.2.5",
-    "@iconify-json/uil": "^1.2.1",
-    "@iconify-json/uiw": "^1.2.1",
     "@nuxt/eslint": "^0.6.0",
     "@nuxt/icon": "^1.5.6",
     "@nuxt/image": "^1.8.1",

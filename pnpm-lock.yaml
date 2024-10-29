@@ -129,42 +129,6 @@ importers:
         specifier: ^4.8.0
         version: 4.8.0
     devDependencies:
-      '@iconify-json/ci':
-        specifier: ^1.2.1
-        version: 1.2.1
-      '@iconify-json/iconoir':
-        specifier: ^1.2.2
-        version: 1.2.2
-      '@iconify-json/line-md':
-        specifier: ^1.2.2
-        version: 1.2.2
-      '@iconify-json/lucide':
-        specifier: ^1.2.9
-        version: 1.2.9
-      '@iconify-json/mdi':
-        specifier: ^1.2.1
-        version: 1.2.1
-      '@iconify-json/mingcute':
-        specifier: ^1.2.1
-        version: 1.2.1
-      '@iconify-json/ph':
-        specifier: ^1.2.1
-        version: 1.2.1
-      '@iconify-json/ri':
-        specifier: ^1.2.1
-        version: 1.2.1
-      '@iconify-json/svg-spinners':
-        specifier: ^1.2.1
-        version: 1.2.1
-      '@iconify-json/tabler':
-        specifier: ^1.2.5
-        version: 1.2.5
-      '@iconify-json/uil':
-        specifier: ^1.2.1
-        version: 1.2.1
-      '@iconify-json/uiw':
-        specifier: ^1.2.1
-        version: 1.2.1
       '@nuxt/eslint':
         specifier: ^0.6.0
         version: 0.6.0(eslint@9.12.0(jiti@2.3.3))(magicast@0.3.5)(rollup@4.24.0)(typescript@5.6.3)(vite@5.4.9(@types/node@22.7.5)(sass@1.79.5)(terser@5.34.1))
@@ -1303,42 +1267,6 @@ packages:
   '@humanwhocodes/retry@0.3.1':
     resolution: {integrity: sha512-JBxkERygn7Bv/GbN5Rv8Ul6LVknS+5Bp6RgDC/O8gEBU/yeH5Ui5C/OlWrTb6qct7LjjfT6Re2NxB0ln0yYybA==}
     engines: {node: '>=18.18'}
-
-  '@iconify-json/ci@1.2.1':
-    resolution: {integrity: sha512-uQSNwCTuorjgH7rQ7dFXfJ4fqUMHP8cqOmm8m/ibHM4/WQTih4Dkaq3i6e7X4Wji3kFR6R1bAkjDxLYmTD6KGA==}
-
-  '@iconify-json/iconoir@1.2.2':
-    resolution: {integrity: sha512-ytC2V7WeIHsQSyd5r+Iq/ExNb/yM45iR0jhbKNqFFSWhJvuanfIyuTHH/SQJpPYwV1grGtIx7v+kZ7xIjltdpA==}
-
-  '@iconify-json/line-md@1.2.2':
-    resolution: {integrity: sha512-UCYTTO5aARoVbOOPCaomOoXDC8maSolIV8KVDmK9VuzfjpqkMg/vJo/nWaoQPIf310SZjdvAqHvIwsbzr6J+sw==}
-
-  '@iconify-json/lucide@1.2.9':
-    resolution: {integrity: sha512-4gTg74GLiIPJtt4HrAoQuxRLana085kXBf2BhGDzSpPPg8xkgRemRKhhiZE0qasKyBt/nif67Rvuz/NUFWtvDg==}
-
-  '@iconify-json/mdi@1.2.1':
-    resolution: {integrity: sha512-dSkQU78gsZV6Yxnq78+LuX7jzeFC/5NAmz7O3rh558GimGFcwMVY/OtqRowIzjqJBmMmWZft7wkFV4TrwRXjlg==}
-
-  '@iconify-json/mingcute@1.2.1':
-    resolution: {integrity: sha512-rv682dBsjKUs1/AVg5tOegAunjCLuqyQufXU0D6Kbmgg5jMoUcl/9K2C+9MAiepBP0Eyb05YwXQvGaXMLPu/YA==}
-
-  '@iconify-json/ph@1.2.1':
-    resolution: {integrity: sha512-x0DNfwWrS18dbsBYOq3XGiZnGz4CgRyC+YSl/TZvMQiKhIUl1woWqUbMYqqfMNUBzjyk7ulvaRovpRsIlqIf8g==}
-
-  '@iconify-json/ri@1.2.1':
-    resolution: {integrity: sha512-xI3+xZHBI+wlhQqd6jRRcLD5K8B8vQNyxcSB43myxNZ/SfXIn7Ny28h0jyPo9e0gT8fGhqx6R5PeLz/UBB8jwQ==}
-
-  '@iconify-json/svg-spinners@1.2.1':
-    resolution: {integrity: sha512-QZNA4YzFD2zqdC6nIBJM6WlAGakUCjvMt92Ks1R4XFxkd76Ps3rdiauYWESDRZvNYURAByp2b9cwZarFula65g==}
-
-  '@iconify-json/tabler@1.2.5':
-    resolution: {integrity: sha512-BDDLgDCbJ2btwi6cPmBL04QyPyNmWy6H13ynUAX48xxpxqUuG+hT+yrqL+RCugFimrvuhcecbSfEKnFc0BW1Ng==}
-
-  '@iconify-json/uil@1.2.1':
-    resolution: {integrity: sha512-bQPtDp1nVaDL+ejECPENHJalspCQCZreCJ2LHWazm0pfoz34afKAQKMSb1mH8K/CPnibCQTM29AvXrHMpyjbtg==}
-
-  '@iconify-json/uiw@1.2.1':
-    resolution: {integrity: sha512-q1FyY9N2hkKeisjkHYVoSLv8E9Gg5oHxcVo4VPy4EY7e0RVJAH93dnHyCkTcU4OXp8ExZcgzuevcdldnLQBFjA==}
 
   '@iconify/collections@1.0.471':
     resolution: {integrity: sha512-R1rjlg4ym/9vvJ9Fg9iNfdDpb9BRkMy8950MV/D9SssbOKFR+JW1fcm7h4D6RtipWbHAJRkuJOww2pWfN85cCA==}
@@ -7535,54 +7463,6 @@ snapshots:
   '@humanwhocodes/module-importer@1.0.1': {}
 
   '@humanwhocodes/retry@0.3.1': {}
-
-  '@iconify-json/ci@1.2.1':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/iconoir@1.2.2':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/line-md@1.2.2':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/lucide@1.2.9':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/mdi@1.2.1':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/mingcute@1.2.1':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/ph@1.2.1':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/ri@1.2.1':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/svg-spinners@1.2.1':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/tabler@1.2.5':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/uil@1.2.1':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/uiw@1.2.1':
-    dependencies:
-      '@iconify/types': 2.0.0
 
   '@iconify/collections@1.0.471':
     dependencies:
