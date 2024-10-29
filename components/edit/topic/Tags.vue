@@ -116,6 +116,10 @@ watch(
         @blur="isInputFocus = false"
       />
 
+      <span v-if="inputValue" class="add-tag" @click="handleAddTag">
+        <Icon name="lucide:plus" />
+      </span>
+
       <div class="box1"></div>
       <div class="box2" :class="isInputFocus ? 'box-active' : ''"></div>
     </div>
@@ -135,11 +139,22 @@ watch(
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 10px;
-}
 
-.tags-container {
-  display: flex;
-  flex-wrap: wrap;
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .add-tag {
+    height: 32px;
+    width: 32px;
+    @include kun-center;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 10px;
+    background-color: var(--kungalgame-blue-5);
+    color: var(--kungalgame-white);
+  }
 }
 
 .selected-tag {
