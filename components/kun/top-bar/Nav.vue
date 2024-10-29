@@ -75,12 +75,15 @@ const handleRouterBack = () => {
 .return,
 .hamburger {
   display: none;
-  margin-left: 20px;
   cursor: pointer;
 
   .icon {
     font-size: 20px;
   }
+}
+
+.return {
+  margin-right: 16px;
 }
 
 .nav-top {
@@ -92,7 +95,6 @@ const handleRouterBack = () => {
 .kungalgame {
   display: flex;
   align-items: center;
-  margin-left: 50px;
 
   a {
     display: flex;
@@ -127,19 +129,5 @@ const handleRouterBack = () => {
   .hamburger {
     display: block;
   }
-}
-
-.message-enter-active {
-  transition: all 0.3s;
-}
-
-.message-leave-active {
-  transition: all 0.3s;
-}
-
-.message-enter-from,
-.message-leave-to {
-  transform: translateX(100%);
-  opacity: 0;
 }
 </style>

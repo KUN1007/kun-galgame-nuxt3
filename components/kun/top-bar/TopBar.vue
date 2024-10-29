@@ -39,6 +39,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
   margin-bottom: 17px;
   flex-shrink: 0;
   color: var(--kungalgame-font-color-3);
+  padding: 0 50px;
 
   &::before {
     content: '';
@@ -60,6 +61,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 @media (max-width: 700px) {
   .header {
     margin-bottom: 5px;
+    padding: 0 16px;
   }
 }
 </style>

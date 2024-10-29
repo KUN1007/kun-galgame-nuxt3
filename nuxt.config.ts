@@ -84,6 +84,12 @@ export default defineNuxtConfig({
     }
   },
 
+  icon: {
+    fetchTimeout: 7777,
+    provider: 'iconify',
+    serverBundle: false
+  },
+
   piniaPersistedstate: {
     cookieOptions: {
       maxAge: 60 * 60 * 24 * 7,

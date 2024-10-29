@@ -78,7 +78,6 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 50px;
 
   .search {
     display: flex;
@@ -193,10 +192,6 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 }
 
 @media (max-width: 700px) {
-  .kungalgamer-info {
-    margin-right: 30px;
-  }
-
   .avatar {
     .avatar-image {
       margin-left: 0;
