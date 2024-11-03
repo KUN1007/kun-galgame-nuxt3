@@ -14,7 +14,7 @@ export const markdownToHtml = async (markdown: string) => {
     .use(rehypeSanitize)
     .use(remarkFrontmatter)
     .use(remarkGfm)
-    .use(rehypePrism)
+    .use(rehypePrism, { ignoreMissing: true })
     .use(rehypeStringify)
     .process(markdown)
 

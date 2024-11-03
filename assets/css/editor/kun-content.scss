@@ -132,24 +132,17 @@
 
   table {
     border: 1px solid var(--kungalgame-blue-5);
-    border-radius: 5px;
-    white-space: nowrap;
-  }
+    white-space: pre-wrap;
 
-  th,
-  td {
-    border: 1px solid var(--kungalgame-blue-5);
-    padding: 3px;
-    text-align: left;
-  }
+    th,
+    td {
+      border: 1px solid var(--kungalgame-blue-5);
+      padding: 3px;
+      text-align: left;
+    }
 
-  tr:nth-child(even) {
-    background-color: var(--kungalgame-trans-blue-1);
-  }
-
-  .tableWrapper {
-    color: var(--kungalgame-font-color-3);
-    position: relative;
-    overflow-x: auto;
+    tr:nth-child(even) {
+      background-color: var(--kungalgame-trans-blue-1);
+    }
   }
 }

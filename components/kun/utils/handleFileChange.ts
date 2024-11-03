@@ -40,7 +40,7 @@ export const resizeImage = (
       ctx?.drawImage(image, 0, 0, newWidth, newHeight)
       const resizedFile = dataURItoBlob(canvas.toDataURL('image/webp', 0.77))
 
-      if (resizedFile.size > 1007 * 1024) {
+      if (resizedFile.size > 1.007 * 1024 * 1024) {
         useMessage(10112, 'warn')
         reject(new Error('Image is too large.'))
       } else {
