@@ -112,6 +112,12 @@ export const galgame: Friend[] = [
     name: 'xiuren',
     link: 'https://xiuren.cyou/',
     label: '分享galgame, SLG, RPG等资源'
+  },
+  {
+    name: 'sayafx',
+    link: 'https://www.sayafx.top/',
+    label:
+      'Galgame,月谣,月谣分享,Galgame月谣,Galgame下载,免费Galgame,Galgame资讯'
   }
 ]
 

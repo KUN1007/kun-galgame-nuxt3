@@ -17,7 +17,6 @@ import { friendArray } from './friends'
         :key="i"
         :href="friend.link"
         target="_blank"
-        rel="noopener noreferrer"
       >
         <div class="name">
           <span>{{ $t(`friends.${friendGroup.key}.${friend.name}`) }}</span>
