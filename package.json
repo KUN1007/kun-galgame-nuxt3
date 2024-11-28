@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "2.19.22",
+  "version": "2.19.23",
   "packageManager": "pnpm@9.12.1",
   "private": true,
   "scripts": {
@@ -85,5 +85,18 @@
     "remark-rehype": "^11.1.1",
     "socket.io": "^4.8.0",
     "socket.io-client": "^4.8.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "is-arguments": "npm:@nolyfill/is-arguments@^1",
+      "is-core-module": "npm:@nolyfill/is-core-module@^1",
+      "is-generator-function": "npm:@nolyfill/is-generator-function@^1",
+      "is-typed-array": "npm:@nolyfill/is-typed-array@^1",
+      "isarray": "npm:@nolyfill/isarray@^1",
+      "safe-buffer": "npm:@nolyfill/safe-buffer@^1",
+      "safer-buffer": "npm:@nolyfill/safer-buffer@^1",
+      "string.prototype.matchall": "npm:@nolyfill/string.prototype.matchall@^1",
+      "which-typed-array": "npm:@nolyfill/which-typed-array@^1"
+    }
   }
 }
