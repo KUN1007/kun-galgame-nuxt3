@@ -247,6 +247,7 @@
         "o-daily": "Daily Stories",
         "o-essay": "Personal Essays",
         "o-forum": "Forum-related",
+        "o-patch": "Patch-Website",
         "o-other": "Other"
       },
       "link": {
@@ -789,6 +790,7 @@
       "o-daily": "Daily Life, Record everyday stories from life",
       "o-essay": "Personal Essays, Write whatever comes to mind",
       "o-forum": "Forum Related, Feedback, New Feature Requests, Anything related to this forum",
+      "o-patch": "KUN Visual Novel Patch Related, https://www.moyu.moe, feedback and support services",
       "o-other": "Other Content"
     },
     "contact": {

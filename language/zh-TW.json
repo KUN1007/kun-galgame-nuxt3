@@ -245,6 +245,7 @@
         "o-daily": "日常",
         "o-essay": "個人隨筆",
         "o-forum": "論壇相關",
+        "o-patch": "補丁網站",
         "o-other": "其它"
       },
       "link": {
@@ -785,6 +786,7 @@
       "o-daily": "日常, 記錄一下生活中的日常故事",
       "o-essay": "個人隨筆, 隨便寫點什麽, 想到什麽說什麽吧",
       "o-forum": "論壇相關, 問題反饋, 新功能請求, 與這個論壇相關的一切",
+      "o-patch": "鯤 Galgame 補丁 相關, https://www.moyu.moe, 反饋和支援服務",
       "o-other": "其它內容"
     },
     "contact": {
