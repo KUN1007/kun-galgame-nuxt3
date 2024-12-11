@@ -104,9 +104,9 @@ export const galgame: Friend[] = [
   },
   {
     name: 'nekotaku',
-    link: 'https://www.nekotaku.xyz/',
+    link: 'https://www.nekotaku.me/',
     label:
-      '喵源领域（原神域同萌）是一家致力于让二次元爱好者更便捷地获取信息和找到自己所需内容的综合二次元内容站点，欢迎您的访问！'
+      '喵源领域是一个专注于高质量的Galgame文化分享网站, 提供最新最全的Galgame相关文件下载服务, 助力将Galgame游戏文化推向世界!'
   },
   {
     name: 'xiuren',
