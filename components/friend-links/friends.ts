@@ -117,12 +117,18 @@ export const galgame: Friend[] = [
     name: 'sayafx',
     link: 'https://www.sayafx.top/',
     label:
-      'Galgame,月谣,月谣分享,Galgame月谣,Galgame下载,免费Galgame,Galgame资讯'
+      'Galgame, 月谣, 月谣分享, Galgame 月谣, Galgame 下载, 免费 Galgame, Galgame 资讯'
   },
   {
     name: 'moeli',
     link: 'https://moeli-desu.com/',
-    label: '梦璃, 一个ACG综合资源分享平台, 一处为阁下提供分享 COSAV 的净土'
+    label: '梦璃, 一个 ACG 综合资源分享平台, 一处为阁下提供分享 COSAV 的净土'
+  },
+  {
+    name: 'acgbox',
+    link: 'https://www.acgbox.link/',
+    label:
+      'ACG 盒子, ACG 二次元导航网站, 收录 ACG 二次元相关的网站, 打造一个 ACG 二次元专属的网站。'
   }
 ]
 
