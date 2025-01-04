@@ -20,6 +20,11 @@ export const isValidEmail = (email: string) => {
 }
 
 export const isValidName = (name: string) => {
+  const invisibleCharRegex =
+    /[\x09\x20\xA0\xAD\u034F\u061C\u115F\u1160\u17B4\u17B5\u180E\u2000-\u200F\u202F\u205F\u2060-\u206F\u3000\u2800\u3164\uFEFF\uFFA0\uD800-\uDBFF\uDC00-\uDFFF\u1D159\u1D173-\u1D179\u1D17A\uE0020]+/g
+  if (invisibleCharRegex.test(name)) {
+    return false
+  }
   const regex = /^[\p{L}\p{N}!~_@#$%^&*()+=-]{1,17}$/u
   return regex.test(name)
 }
