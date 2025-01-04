@@ -118,6 +118,11 @@ export const galgame: Friend[] = [
     link: 'https://www.sayafx.top/',
     label:
       'Galgame,月谣,月谣分享,Galgame月谣,Galgame下载,免费Galgame,Galgame资讯'
+  },
+  {
+    name: 'moeli',
+    link: 'https://moeli-desu.com/',
+    label: '梦璃, 一个ACG综合资源分享平台, 一处为阁下提供分享 COSAV 的净土'
   }
 ]
 
