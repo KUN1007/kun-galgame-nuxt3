@@ -32,7 +32,7 @@ export const checkGalgamePublish = (
   }
 
   for (const alias of aliases) {
-    if (alias.length > 107) {
+    if (alias.length > 500) {
       return 10612
     }
   }

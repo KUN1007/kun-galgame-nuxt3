@@ -132,7 +132,7 @@ export const infoMessagesEN: Record<number, string> = {
   10507:
     'Please enter at least one introduction, and ensure that the length of the introduction is not more than 100,007 characters!',
   10508: 'The alias for visualnovel should be no more than 17 items!',
-  10509: 'The alias for visualnovel should be no longer than 107 characters!',
+  10509: 'The alias for visualnovel should be no longer than 500 characters!',
   10510:
     'The official website for visualnovel should be no more than 17 items!',
   10511: 'The maximum length of the official link is 233 characters!',
@@ -324,7 +324,7 @@ export const infoMessagesJP: Record<number, string> = {
   10507:
     '少なくとも 1 つの紹介文を入力し、紹介文の長さが 100,007 文字以下であることを確認してください！',
   10508: 'Galgame の別名は最大 17 個までです！',
-  10509: 'Galgame の別名は最大 107 文字までです！',
+  10509: 'Galgame の別名は最大 500 文字までです！',
   10510: 'Galgame の公式サイトは最大 17 個までです！',
   10511: '公式サイトのリンクの最大長は 233 文字です！',
   10512: 'Galgame のエンジンは最大 17 個までです！',
@@ -511,7 +511,7 @@ export const infoMessagesCN: Record<number, string> = {
   10506: '请输入至少一个标题, 并保证标题长度不多于 233 个字符!',
   10507: '请输入至少一个介绍, 并保证介绍长度不多于 100,007 个字符!',
   10508: 'Galgame 的别名最多 17 个!',
-  10509: 'Galgame 的别名最长 107 字!',
+  10509: 'Galgame 的别名最长 500 字!',
   10510: 'Galgame 的官网最多 17 个!',
   10511: '官网链接最大长度为 233 字!',
   10512: 'Galgame 的引擎最多 17 个!',
@@ -693,7 +693,7 @@ export const infoMessagesTW: Record<number, string> = {
   10506: '請輸入至少一個標題, 併保證標題長度不多於 233 個字符!',
   10507: '請輸入至少一個介紹, 併保證介紹長度不多於 100,007 個字符!',
   10508: 'Galgame 的別名最多 17 個!',
-  10509: 'Galgame 的別名最長 107 字!',
+  10509: 'Galgame 的別名最長 500 字!',
   10510: 'Galgame 的官網最多 17 個!',
   10511: '官網鏈接最大長度為 233 字!',
   10512: 'Galgame 的引擎最多 17 個!',

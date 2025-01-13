@@ -17,7 +17,7 @@ export const checkGalgamePR = (galgame: GalgameStoreTemp): boolean => {
   }
 
   for (const alias of galgame.alias) {
-    if (alias.length > 107) {
+    if (alias.length > 500) {
       useMessage(10509, 'warn')
       return false
     }
