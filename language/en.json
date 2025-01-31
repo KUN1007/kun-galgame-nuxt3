@@ -699,8 +699,6 @@
       "nekotaku": "Nekotaku",
       "xiuren": "Moye ACG",
       "sayafx": "Galgame YueYao",
-      "moeli": "Moeli-desu",
-      "acgbox": "ACGBox",
       "lzacg": "LZ ACG"
     },
     "others": {
@@ -708,7 +706,9 @@
       "ohmygpt": "OhMyGPT",
       "koibumi": "Koibumi URL Shorten",
       "xueyuefenghua": "Xueyuefenghua",
-      "tgnav": "TGNAV"
+      "tgnav": "TGNAV",
+      "moeli": "Moeli-desu",
+      "acgbox": "ACGBox"
     }
   },
   "pageError": {

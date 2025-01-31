@@ -697,8 +697,6 @@
       "nekotaku": "喵源领域",
       "xiuren": "莫邪游戏资源分享网",
       "sayafx": "Galgame 月谣",
-      "moeli": "梦璃",
-      "acgbox": "ACG 盒子",
       "lzacg": "量子 ACG"
     },
     "others": {
@@ -706,7 +704,9 @@
       "ohmygpt": "OhMyGPT",
       "koibumi": "Koibumi URL Shorten",
       "xueyuefenghua": "雪月風花",
-      "tgnav": "TGNAV"
+      "tgnav": "TGNAV",
+      "moeli": "梦璃",
+      "acgbox": "ACG 盒子"
     }
   },
   "pageError": {
