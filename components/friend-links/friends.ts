@@ -120,15 +120,9 @@ export const galgame: Friend[] = [
       'Galgame, 月谣, 月谣分享, Galgame 月谣, Galgame 下载, 免费 Galgame, Galgame 资讯'
   },
   {
-    name: 'moeli',
-    link: 'https://moeli-desu.com/',
-    label: '梦璃, 一个 ACG 综合资源分享平台, 一处为阁下提供分享 COSAV 的净土'
-  },
-  {
-    name: 'acgbox',
-    link: 'https://www.acgbox.link/',
-    label:
-      'ACG 盒子, ACG 二次元导航网站, 收录 ACG 二次元相关的网站, 打造一个 ACG 二次元专属的网站。'
+    name: 'lzacg',
+    link: 'https://www.lzacg.top/',
+    label: '量子ACG是一个以游戏为主, 进而推动日语学习的网站'
   }
 ]
 
@@ -155,6 +149,17 @@ export const others: Friend[] = [
     link: 'https://tgnav.github.io/',
     label:
       'TGNAV - Telegram频道群组导航。收录Telegram上的优质频道和群组, 打造一个高质量Telegram导航'
+  },
+  {
+    name: 'moeli',
+    link: 'https://moeli-desu.com/',
+    label: '梦璃, 一个 ACG 综合资源分享平台, 一处为阁下提供分享 COSAV 的净土'
+  },
+  {
+    name: 'acgbox',
+    link: 'https://www.acgbox.link/',
+    label:
+      'ACG 盒子, ACG 二次元导航网站, 收录 ACG 二次元相关的网站, 打造一个 ACG 二次元专属的网站。'
   }
 ]
 
