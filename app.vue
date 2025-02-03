@@ -61,6 +61,14 @@ onMounted(() => {
   usePersistSettingsStore().setKUNGalgameBackgroundBlur(
     showKUNGalgameBackgroundBlur.value
   )
+
+  // Disable pinia console info for dev
+  if (process.env.NODE_ENV === 'development') {
+    localStorage.setItem(
+      '__VUE_DEVTOOLS_NEXT_PLUGIN_SETTINGS__dev.esm.pinia__',
+      '{"logStoreChanges":false}'
+    )
+  }
 })
 </script>
 
