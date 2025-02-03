@@ -36,10 +36,10 @@ import { friendArray } from './friends'
     </div>
   </template>
 
-  <NuxtLinkLocale class="join" to="/contact">
+  <NuxtLink class="join" to="/contact">
     <h3>{{ $t('friends.join') }}</h3>
     <p>{{ $t('friends.hint') }}</p>
-  </NuxtLinkLocale>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>

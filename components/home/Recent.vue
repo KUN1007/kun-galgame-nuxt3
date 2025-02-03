@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { HomeMessage } from '~/types/api/home'
 
-const { locale } = useI18n()
-
 const iconMap: Record<string, string> = {
   upvoted: 'lucide:sparkles',
   replied: 'lucide:reply',
@@ -41,22 +39,22 @@ const handleClose = () => {
   <div class="recent" v-if="messageData">
     <div class="message" v-for="(message, index) in messageData" :key="index">
       <Icon class="icon" :name="iconMap[message.type]" />
-      <NuxtLinkLocale class="user" :to="`/kungalgamer/${message.uid}/info`">
+      <NuxtLink class="user" :to="`/kungalgamer/${message.uid}/info`">
         {{ message.name }}
-      </NuxtLinkLocale>
-      <NuxtLinkLocale
+      </NuxtLink>
+      <NuxtLink
         class="link"
         :to="message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`"
       >
         <span>{{ message.content }}</span>
-        <span>{{ formatTimeDifference(message.time, locale) }}</span>
-      </NuxtLinkLocale>
+        <span>{{ formatTimeDifference(message.time) }}</span>
+      </NuxtLink>
     </div>
   </div>
 
   <HomeLoader v-model="pageData.page" :status="status">
     <span v-if="pageData.page !== 1" class="close" @click="handleClose">
-      {{ $t('home.fold') }}
+      折叠为初始状态
     </span>
   </HomeLoader>
 </template>

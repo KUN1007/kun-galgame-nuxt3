@@ -39,7 +39,7 @@ const handleClose = () => {
 
   <HomeLoader v-model="pageData.page" :status="status">
     <span v-if="pageData.page !== 1" class="close" @click="handleClose">
-      {{ $t('home.fold') }}
+      折叠为初始状态
     </span>
   </HomeLoader>
 </template>

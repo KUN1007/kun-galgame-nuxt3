@@ -17,7 +17,7 @@ const props = defineProps<{
       </span>
     </div>
 
-    <NuxtLinkLocale :to="`/section/${sec.section}`" class="content">
+    <NuxtLink :to="`/section/${sec.section}`" class="content">
       <div class="topic">
         <span
           @click.prevent="navigateTo(localePath(`/topic/${sec.topic.tid}`))"
@@ -41,7 +41,7 @@ const props = defineProps<{
           <span>{{ formatNumberWithCommas(sec.views) }}</span>
         </div>
       </div>
-    </NuxtLinkLocale>
+    </NuxtLink>
   </section>
 </template>
 

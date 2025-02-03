@@ -137,7 +137,7 @@ watch(
           }"
         />
 
-        <NuxtLinkLocale
+        <NuxtLink
           v-if="uid !== link.uid"
           to="/report"
           v-tooltip="{
@@ -151,7 +151,7 @@ watch(
           }"
         >
           <Icon class="icon" name="lucide:triangle-alert" />
-        </NuxtLinkLocale>
+        </NuxtLink>
 
         <span
           class="status-dot"

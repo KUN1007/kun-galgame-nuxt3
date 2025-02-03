@@ -10,11 +10,7 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLinkLocale
-    class="galgame"
-    :to="`/galgame/${galgame.gid}`"
-    v-kun-gradient
-  >
+  <NuxtLink class="galgame" :to="`/galgame/${galgame.gid}`" v-kun-gradient>
     <div class="title">
       <span>
         {{ getPreferredLanguageText(galgame.name, locale as Language) }}
@@ -53,7 +49,7 @@ defineProps<{
         </div>
       </div>
     </div>
-  </NuxtLinkLocale>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>

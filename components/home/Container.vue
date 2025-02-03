@@ -9,9 +9,9 @@ const { fold } = storeToRefs(usePersistKUNGalgameHomeStore())
   <KunHeader :size="2">
     <template #header>
       <div class="header">
-        <span>{{ $t('home.updates') }}</span>
+        <span>最新动态</span>
         <span class="suffix" @click="fold.updates = !fold.updates">
-          {{ $t(`home.${fold.updates ? 'foldSection' : 'expandSection'}`) }}
+          {{ fold.updates ? '折叠板块' : '展开板块' }}
         </span>
       </div>
     </template>
@@ -21,9 +21,9 @@ const { fold } = storeToRefs(usePersistKUNGalgameHomeStore())
   <KunHeader :size="2">
     <template #header>
       <div class="header">
-        <span>{{ $t('home.topics') }}</span>
+        <span>最新话题</span>
         <span class="suffix" @click="fold.topics = !fold.topics">
-          {{ $t(`home.${fold.topics ? 'foldSection' : 'expandSection'}`) }}
+          {{ fold.topics ? '折叠板块' : '展开板块' }}
         </span>
       </div>
     </template>
@@ -33,9 +33,9 @@ const { fold } = storeToRefs(usePersistKUNGalgameHomeStore())
   <KunHeader :size="2">
     <template #header>
       <div class="header">
-        <span>{{ $t('home.galgames') }}</span>
+        <span>最新 Galgame</span>
         <span class="suffix" @click="fold.galgames = !fold.galgames">
-          {{ $t(`home.${fold.galgames ? 'foldSection' : 'expandSection'}`) }}
+          {{ fold.galgames ? '折叠板块' : '展开板块' }}
         </span>
       </div>
     </template>
@@ -45,9 +45,9 @@ const { fold } = storeToRefs(usePersistKUNGalgameHomeStore())
   <KunHeader :size="2">
     <template #header>
       <div class="header">
-        <span>{{ $t('home.resources') }}</span>
+        <span>最新 Galgame 资源</span>
         <span class="suffix" @click="fold.resources = !fold.resources">
-          {{ $t(`home.${fold.resources ? 'foldSection' : 'expandSection'}`) }}
+          {{ fold.resources ? '折叠板块' : '展开板块' }}
         </span>
       </div>
     </template>
@@ -57,9 +57,9 @@ const { fold } = storeToRefs(usePersistKUNGalgameHomeStore())
   <KunHeader :size="2">
     <template #header>
       <div class="header">
-        <span>{{ $t('home.sitemaps') }}</span>
+        <span>站点地图</span>
         <span class="suffix" @click="fold.sitemaps = !fold.sitemaps">
-          {{ $t(`home.${fold.sitemaps ? 'foldSection' : 'expandSection'}`) }}
+          {{ fold.sitemaps ? '折叠板块' : '展开板块' }}
         </span>
       </div>
     </template>

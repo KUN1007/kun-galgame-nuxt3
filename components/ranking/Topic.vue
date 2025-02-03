@@ -12,7 +12,7 @@ const topics = computed(() => props.topics)
 
 <template>
   <div class="single-topic" v-for="topic in topics" :key="topic.tid">
-    <NuxtLinkLocale :to="`/topic/${topic.tid}`">
+    <NuxtLink :to="`/topic/${topic.tid}`">
       <div class="topic-name">
         {{ topic.title }}
       </div>
@@ -21,7 +21,7 @@ const topics = computed(() => props.topics)
         <Icon class="icon" :name="topicIconMap[props.field]" />
         <span class="title">{{ Math.ceil(topic.field) }}</span>
       </div>
-    </NuxtLinkLocale>
+    </NuxtLink>
   </div>
 </template>
 

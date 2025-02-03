@@ -51,9 +51,9 @@ const handleDeleteMessage = async (mid: number) => {
         />
       </div>
       <div>
-        <NuxtLinkLocale :to="`/kungalgamer/${message.sender.uid}/info`">
+        <NuxtLink :to="`/kungalgamer/${message.sender.uid}/info`">
           {{ message.sender.name }}
-        </NuxtLinkLocale>
+        </NuxtLink>
         <span>{{ getMessageI18n(locale as Language, message) }}</span>
       </div>
     </div>
@@ -61,12 +61,12 @@ const handleDeleteMessage = async (mid: number) => {
     <div class="content">
       <KunAvatar :user="message.sender" size="32px" />
 
-      <NuxtLinkLocale
+      <NuxtLink
         class="link"
         :to="message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`"
       >
         <pre class="detail">{{ markdownToText(message.content) }}</pre>
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
 
     <div class="bottom">

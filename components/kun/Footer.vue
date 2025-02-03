@@ -2,10 +2,10 @@
 
 <template>
   <div class="kun-footer">
-    <div>{{ $t('footer.copyright') }}</div>
+    <div>{{ `© 2025 ${kungal.titleShort}` }}</div>
 
     <div>
-      <span>{{ $t('footer.openSource') }} -></span>
+      <span>GitHub 开源 -></span>
 
       <a
         href="http://github.com/KUN1007/kun-galgame-nuxt3"
@@ -19,8 +19,9 @@
 
     <div>
       <span>
-        {{ $t('footer.reserved') }}
-        {{ useRuntimeConfig().public.KUN_VISUAL_NOVEL_VERSION }}
+        {{
+          `保留所有权利 | 版本 ${useRuntimeConfig().public.KUN_VISUAL_NOVEL_VERSION}`
+        }}
       </span>
     </div>
   </div>

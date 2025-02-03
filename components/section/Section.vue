@@ -32,7 +32,7 @@ watch(
 </script>
 
 <template>
-  <NuxtLinkLocale
+  <NuxtLink
     class="section"
     v-for="(sec, index) in data?.topics"
     :to="`/topic/${sec.tid}`"
@@ -88,7 +88,7 @@ watch(
         </span>
       </div>
     </div>
-  </NuxtLinkLocale>
+  </NuxtLink>
 
   <KunPagination
     class="pagination"

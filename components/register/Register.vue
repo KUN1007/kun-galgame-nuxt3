@@ -104,12 +104,12 @@ const handleRegister = async () => {
 
       <KunCheckBox v-model="isAgree">
         <span>{{ $t('register.agree') }}</span>
-        <NuxtLinkLocale to="/agreement">
+        <NuxtLink to="/agreement">
           {{ $t('register.agreement') }}
-        </NuxtLinkLocale>
-        <NuxtLinkLocale to="/privacy">
+        </NuxtLink>
+        <NuxtLink to="/privacy">
           {{ $t('register.privacy') }}
-        </NuxtLinkLocale>
+        </NuxtLink>
       </KunCheckBox>
 
       <KunButton @click="handleRegister">
@@ -122,13 +122,13 @@ const handleRegister = async () => {
     </KunDivider>
 
     <div class="more">
-      <NuxtLinkLocale to="/login">
+      <NuxtLink to="/login">
         {{ $t('login.title') }}
-      </NuxtLinkLocale>
+      </NuxtLink>
 
-      <NuxtLinkLocale to="/forgot">
+      <NuxtLink to="/forgot">
         {{ $t('login.forgot') }}
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
   </div>
 </template>

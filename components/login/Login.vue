@@ -93,13 +93,13 @@ watch(
     </KunDivider>
 
     <div class="more">
-      <NuxtLinkLocale to="/register">
+      <NuxtLink to="/register">
         {{ $t('register.title') }}
-      </NuxtLinkLocale>
+      </NuxtLink>
 
-      <NuxtLinkLocale to="/forgot">
+      <NuxtLink to="/forgot">
         {{ $t('login.forgot') }}
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
   </div>
 </template>

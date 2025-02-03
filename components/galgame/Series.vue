@@ -28,13 +28,13 @@ const { data, pending } = await useLazyFetch(
     </KunHeader>
 
     <div class="galgames" v-if="data && !pending">
-      <NuxtLinkLocale
+      <NuxtLink
         v-for="(link, index) in data"
         :key="index"
         :to="`/galgame/${link.gid}`"
       >
         {{ getPreferredLanguageText(link.name, locale as Language) }}
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
     <KunSkeletonGalgameLink v-if="pending" />
   </div>

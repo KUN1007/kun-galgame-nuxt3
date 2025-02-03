@@ -11,7 +11,7 @@ defineProps<{
 
 <template>
   <div class="grid-card">
-    <NuxtLinkLocale
+    <NuxtLink
       class="card"
       v-for="galgame in galgames"
       :key="galgame.gid"
@@ -71,7 +71,7 @@ defineProps<{
           </div>
         </div>
       </div>
-    </NuxtLinkLocale>
+    </NuxtLink>
   </div>
 </template>
 

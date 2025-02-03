@@ -1,6 +1,7 @@
 import type { KunSiteConfig } from './config'
 
-const KUN_SITE_NAME = '鲲 Galgame 论坛'
+const KUN_SITE_NAME = '鲲 Galgame'
+const KUN_SITE_SHORT = '鲲 Galgame 论坛'
 const KUN_SITE_MENTION = '@kungalgame'
 const KUN_SITE_TITLE = '鲲 Galgame 论坛 - 开源 Galgame 网站'
 const KUN_SITE_DESCRIPTION =
@@ -42,8 +43,9 @@ const KUN_SITE_KEYWORDS = [
 ]
 
 export const kungal: KunSiteConfig = {
+  name: KUN_SITE_NAME,
   title: KUN_SITE_TITLE,
-  titleShort: KUN_SITE_NAME,
+  titleShort: KUN_SITE_SHORT,
   titleTemplate: '%s | 开源 Galgame 网站',
   description: KUN_SITE_DESCRIPTION,
   keywords: KUN_SITE_KEYWORDS,
@@ -57,12 +59,12 @@ export const kungal: KunSiteConfig = {
     ...KUN_SITE_LIST
   ],
   creator: {
-    name: KUN_SITE_NAME,
+    name: KUN_SITE_SHORT,
     mention: KUN_SITE_MENTION,
     url: KUN_SITE_URL
   },
   publisher: {
-    name: KUN_SITE_NAME,
+    name: KUN_SITE_SHORT,
     mention: KUN_SITE_MENTION,
     url: KUN_SITE_URL
   },

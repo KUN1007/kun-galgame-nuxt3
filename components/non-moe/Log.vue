@@ -14,9 +14,9 @@ const logs = computed(() => props.logs)
   <div class="log" v-for="(kun, index) in logs" :key="index">
     <div class="kungalgamer">
       @
-      <NuxtLinkLocale :to="`/kungalgamer/${kun.uid}/info`" target="_blank">
+      <NuxtLink :to="`/kungalgamer/${kun.uid}/info`" target="_blank">
         {{ kun.name }}
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
 
     <div

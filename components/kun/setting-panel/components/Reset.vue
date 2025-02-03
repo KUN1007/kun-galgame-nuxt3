@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const localePath = useLocalePath()
-
 const handleRecover = async () => {
   const res = await useComponentMessageStore().alert(
     {
@@ -27,14 +25,12 @@ const handleRecover = async () => {
   await usePersistSettingsStore().setKUNGalgameSettingsRecover()
 
   useMessage(10109, 'success')
-  navigateTo(localePath('/login'))
+  navigateTo('/login')
 }
 </script>
 
 <template>
-  <button class="reset" @click="handleRecover">
-    {{ $t('header.settings.recover') }}
-  </button>
+  <button class="reset" @click="handleRecover">恢复所有设置为默认</button>
 </template>
 
 <style lang="scss" scoped>

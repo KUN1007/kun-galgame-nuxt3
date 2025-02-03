@@ -10,10 +10,7 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLinkLocale
-    class="item"
-    :to="`/message/${data.route as 'system' | 'notice'}`"
-  >
+  <NuxtLink class="item" :to="`/message/${data.route as 'system' | 'notice'}`">
     <NuxtImg src="/apple-touch-icon.png" />
     <div class="info">
       <div class="title">
@@ -33,7 +30,7 @@ defineProps<{
         <span v-if="!data.unreadCount" class="read">{{ data.count }}</span>
       </div>
     </div>
-  </NuxtLinkLocale>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>

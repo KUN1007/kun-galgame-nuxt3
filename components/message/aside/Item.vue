@@ -9,7 +9,7 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLinkLocale class="item" :to="`/message/user/${room.route}`">
+  <NuxtLink class="item" :to="`/message/user/${room.route}`">
     <KunAvatar
       :user="{
         uid: parseInt(room.route),
@@ -36,7 +36,7 @@ defineProps<{
         <span v-if="!room.unreadCount" class="read">{{ room.count }}</span>
       </div>
     </div>
-  </NuxtLinkLocale>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>

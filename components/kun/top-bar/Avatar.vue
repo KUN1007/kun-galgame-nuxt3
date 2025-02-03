@@ -19,7 +19,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 <template>
   <div class="kungalgamer-info">
-    <NuxtLinkLocale
+    <NuxtLink
       class="search"
       aria-label="search"
       v-tooltip="{
@@ -34,7 +34,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
       to="/search"
     >
       <Icon class="icon" name="lucide:search" />
-    </NuxtLinkLocale>
+    </NuxtLink>
 
     <span class="settings" @click="showKUNGalgamePanel = !showKUNGalgamePanel">
       <Icon class="icon" name="uiw:setting-o" />
@@ -61,9 +61,9 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     </div>
 
     <div class="login" v-if="!name">
-      <NuxtLinkLocale to="/login">
+      <NuxtLink to="/login">
         {{ $t('login.title') }}
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
 
     <LazyKunTopBarUserInfo

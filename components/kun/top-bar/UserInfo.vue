@@ -3,7 +3,6 @@ const { uid, name, moemoepoint } = storeToRefs(usePersistUserStore())
 const { messageStatus } = storeToRefs(useTempSettingStore())
 const messageStore = useComponentMessageStore()
 
-const localePath = useLocalePath()
 const container = ref<HTMLElement>()
 const isCheckIn = ref(true)
 
@@ -54,7 +53,7 @@ const logOut = async () => {
   })
   if (res) {
     usePersistUserStore().$reset()
-    navigateTo(localePath('/login'))
+    navigateTo('/login')
     useMessage(10110, 'success')
   }
 }
@@ -97,22 +96,20 @@ onMounted(async () => {
 
       <div class="func">
         <span>
-          <NuxtLinkLocale :to="`/kungalgamer/${uid}/info`">
-            {{ $t('header.user.profile') }}
-          </NuxtLinkLocale>
+          <NuxtLink :to="`/kungalgamer/${uid}/info`">个人主页</NuxtLink>
         </span>
 
-        <NuxtLinkLocale to="/message">
-          <span>{{ $t('header.user.message') }}</span>
+        <NuxtLink to="/message">
+          <span>我的消息</span>
           <span v-if="isShowMessageDot" class="message-dot"></span>
-        </NuxtLinkLocale>
+        </NuxtLink>
 
         <span v-if="!isCheckIn" @click="handleCheckIn">
-          <span>{{ $t('header.user.check') }}</span>
+          <span>每日签到</span>
           <span class="message-dot"></span>
         </span>
 
-        <span @click="logOut">{{ $t('header.user.logout') }}</span>
+        <span @click="logOut">退出登录</span>
       </div>
     </div>
   </div>

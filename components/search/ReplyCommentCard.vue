@@ -16,7 +16,7 @@ const content = computed(() =>
 </script>
 
 <template>
-  <NuxtLinkLocale :to="`/topic/${data.tid}`" v-kun-gradient>
+  <NuxtLink :to="`/topic/${data.tid}`" v-kun-gradient>
     <div class="title">
       <span>
         <Icon
@@ -43,7 +43,7 @@ const content = computed(() =>
         <span class="username">{{ data.toUser.name }}</span>
       </div>
     </div>
-  </NuxtLinkLocale>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>

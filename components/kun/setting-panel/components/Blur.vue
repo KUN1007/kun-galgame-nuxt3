@@ -26,7 +26,7 @@ watch(
     }"
   >
     <div class="container">
-      <span>{{ $t('header.settings.blur') }}</span>
+      <span>页面模糊度</span>
       <span>{{ showKUNGalgameBackgroundBlur }}px</span>
     </div>
 

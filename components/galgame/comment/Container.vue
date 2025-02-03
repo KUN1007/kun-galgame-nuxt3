@@ -51,9 +51,9 @@ onMounted(() => (commentToUid.value = toUser.uid))
       {{ $t('galgame.comment.name') }}
     </template>
     <template #addition>
-      <NuxtLinkLocale class="notice" to="/topic/1482">
+      <NuxtLink class="notice" to="/topic/1482">
         {{ $t('galgame.comment.notice') }}
-      </NuxtLinkLocale>
+      </NuxtLink>
     </template>
   </KunHeader>
 

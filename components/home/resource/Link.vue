@@ -17,9 +17,9 @@ const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
 
 <template>
   <div class="title">
-    <NuxtLinkLocale :to="`/galgame/${link.gid}`">
+    <NuxtLink :to="`/galgame/${link.gid}`">
       {{ getPreferredLanguageText(link.name, locale as Language) }}
-    </NuxtLinkLocale>
+    </NuxtLink>
     <span class="time">
       {{ formatTimeDifference(link.time, locale) }}
     </span>
@@ -67,7 +67,7 @@ const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
           }"
         />
 
-        <NuxtLinkLocale
+        <NuxtLink
           v-if="uid !== link.uid"
           to="/report"
           aria-label="Report violation"
@@ -82,7 +82,7 @@ const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
           }"
         >
           <Icon class="icon" name="lucide:triangle-alert" />
-        </NuxtLinkLocale>
+        </NuxtLink>
 
         <span
           class="status-dot"

@@ -14,9 +14,9 @@
 
     <EditTopicButton />
 
-    <NuxtLinkLocale to="/topic/1712">
+    <NuxtLink to="/topic/1712">
       {{ $t('edit.topic.note') }}
-    </NuxtLinkLocale>
+    </NuxtLink>
   </div>
 </template>
 

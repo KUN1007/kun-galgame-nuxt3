@@ -33,9 +33,9 @@ watch(
     :id="`k${reply.floor}`"
   >
     <div class="floor">
-      <NuxtLinkLocale :to="`/topic/${reply.tid}#k${reply.floor}`">
+      <NuxtLink :to="`/topic/${reply.tid}#k${reply.floor}`">
         {{ reply.floor }}
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
 
     <div class="content">

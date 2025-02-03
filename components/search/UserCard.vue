@@ -9,7 +9,7 @@ const { locale } = useI18n()
 </script>
 
 <template>
-  <NuxtLinkLocale :to="`/kungalgamer/${user.uid}/info`" v-kun-gradient>
+  <NuxtLink :to="`/kungalgamer/${user.uid}/info`" v-kun-gradient>
     <div class="info">
       <KunAvatar :user="user" size="30px" />
       <span>{{ user.name }}</span>
@@ -24,7 +24,7 @@ const { locale } = useI18n()
       </span>
       <span>{{ formatDate(user.time, locale, { isShowYear: true }) }}</span>
     </div>
-  </NuxtLinkLocale>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>

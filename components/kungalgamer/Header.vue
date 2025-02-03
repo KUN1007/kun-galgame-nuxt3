@@ -21,13 +21,13 @@ onMounted(() => (isShowProgress.value = true))
     </div>
 
     <div class="username">
-      <NuxtLinkLocale
+      <NuxtLink
         v-if="currentUserUid !== props.uid"
         :to="`/message/user/${props.uid}`"
       >
         <Icon class="icon" name="lucide:message-circle" />
         <span>{{ $t('user.chat') }}</span>
-      </NuxtLinkLocale>
+      </NuxtLink>
       <span>{{ props.name }}</span>
     </div>
 

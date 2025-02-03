@@ -1,20 +1,15 @@
 <script setup lang="ts">
 import 'animate.css'
 
-const localePath = useLocalePath()
 const router = useRouter()
 const route = useRoute()
-const getRouteBaseName = useRouteBaseName()
-const baseRouteName = computed(() => {
-  return getRouteBaseName(route)
-})
 
 const { showKUNGalgameHamburger, messageStatus } = storeToRefs(
   useTempSettingStore()
 )
 
 watch(
-  () => baseRouteName.value,
+  () => route.name,
   () => {
     useTempSettingStore().reset()
   }
@@ -30,26 +25,10 @@ onMounted(async () => {
     messageStatus.value = 'new'
   }
 })
-
-const handleRouterBack = () => {
-  if (window.history.state.back) {
-    router.back()
-  } else {
-    navigateTo(localePath('/'))
-  }
-}
 </script>
 
 <template>
   <div class="nav-top">
-    <div
-      class="return"
-      v-if="baseRouteName !== 'index'"
-      @click="handleRouterBack"
-    >
-      <Icon class="icon" name="lucide:arrow-left" />
-    </div>
-
     <div class="hamburger">
       <Icon
         class="icon"
@@ -61,10 +40,10 @@ const handleRouterBack = () => {
     </div>
 
     <div class="kungalgame">
-      <NuxtLinkLocale to="/">
+      <NuxtLink to="/">
         <NuxtImg src="/favicon.webp" alt="KUN Visual Novel | 鲲 Galgame" />
-        <span>{{ $t('header.name') }}</span>
-      </NuxtLinkLocale>
+        <span>{{ kungal.title }}</span>
+      </NuxtLink>
     </div>
 
     <KunTopBarNavBar />

@@ -36,6 +36,7 @@ export interface KunSiteImage {
 }
 
 export interface KunSiteConfig {
+  name: string
   title: string
   titleShort: string
   titleTemplate: string

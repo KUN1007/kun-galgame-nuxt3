@@ -51,9 +51,9 @@ watch(
   <div class="pr">
     <div class="info">
       <KunAvatar :user="pr.user" size="30px" />
-      <NuxtLinkLocale :to="`/kungalgamer/${pr.user.uid}/info`">
+      <NuxtLink :to="`/kungalgamer/${pr.user.uid}/info`">
         {{ pr.user.name }}
-      </NuxtLinkLocale>
+      </NuxtLink>
       <span>{{ $t('galgame.pr.request') }}</span>
 
       <span class="time">

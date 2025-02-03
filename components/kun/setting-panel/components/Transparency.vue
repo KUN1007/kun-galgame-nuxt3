@@ -18,7 +18,7 @@ watch(
 <template>
   <div>
     <div class="container">
-      <span>{{ $t('header.settings.trans') }}</span>
+      <span>页面透明度</span>
       <span>{{ showKUNGalgamePageTransparency }}%</span>
     </div>
 

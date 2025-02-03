@@ -21,9 +21,9 @@ const handleReload = () => location.reload()
 
 <template>
   <header>
-    <NuxtLinkLocale to="/message">
+    <NuxtLink to="/message">
       <Icon class="icon" name="lucide:chevron-left" />
-    </NuxtLinkLocale>
+    </NuxtLink>
     <KunAvatar :user="user" size="30px" />
     <h2 class="username">
       <span>{{ user.name }}</span>
