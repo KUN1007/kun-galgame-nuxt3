@@ -1,5 +1,9 @@
 <script setup lang="ts">
-const { availableLocales, locale, setLocale } = useI18n()
+const { locale, locales, setLocale } = useI18n()
+
+const availableLocales = computed(() => {
+  return locales.value.filter((i) => i.code !== locale.value)
+})
 </script>
 
 <template>

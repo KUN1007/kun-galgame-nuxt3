@@ -1,37 +1,33 @@
 <script setup lang="ts">
-const { locale, t } = useI18n()
 const colorMode = useColorMode()
 const { showKUNGalgamePageTransparency, showKUNGalgameBackgroundBlur } =
   storeToRefs(usePersistSettingsStore())
 
 useHead({
-  htmlAttrs: {
-    lang: locale.value
-  },
   link: [
     {
       rel: 'alternative',
-      href: `https://www.kungal.com/rss/topic.xml?locale=${locale.value}`,
+      href: `https://www.kungal.com/rss/topic.xml`,
       type: 'application/rss+xml',
-      title: t('head.topicRSS')
+      title: '鲲 Galgame 论坛话题订阅'
     },
     {
       rel: 'feed',
-      href: `https://www.kungal.com/rss/topic.xml?locale=${locale.value}`,
+      href: `https://www.kungal.com/rss/topic.xml`,
       type: 'application/rss+xml',
-      title: t('head.topicRSS')
+      title: '鲲 Galgame 论坛话题订阅'
     },
     {
       rel: 'alternative',
-      href: `https://www.kungal.com/rss/galgame.xml?locale=${locale.value}`,
+      href: `https://www.kungal.com/rss/galgame.xml`,
       type: 'application/rss+xml',
-      title: t('head.galgameRSS')
+      title: '鲲 Galgame 论坛 Galgame 订阅'
     },
     {
       rel: 'feed',
-      href: `https://www.kungal.com/rss/galgame.xml?locale=${locale.value}`,
+      href: `https://www.kungal.com/rss/galgame.xml`,
       type: 'application/rss+xml',
-      title: t('head.galgameRSS')
+      title: '鲲 Galgame 论坛 Galgame 订阅'
     },
     {
       rel: 'me',
@@ -44,11 +40,11 @@ useHead({
 
 useSchemaOrg([
   defineOrganization({
-    name: t('head.name'),
-    url: 'https://kungal.com',
-    sameAs: ['https://github.com/KUNGalgame']
+    name: kungal.titleShort,
+    url: kungal.domain.main,
+    sameAs: [kungal.github]
   }),
-  defineWebSite({ name: t('head.name') }),
+  defineWebSite({ name: kungal.titleShort }),
   defineWebPage()
 ])
 

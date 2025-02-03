@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import { kungal } from './config/kungal'
 
 const packageJson = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, 'package.json'), 'utf-8')
@@ -21,11 +22,37 @@ export default defineNuxtConfig({
     port: 1007
   },
 
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'zh-Hans'
+      },
+      titleTemplate: kungal.titleTemplate,
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'format-detection', content: 'telephone=no' },
+        {
+          name: 'description',
+          content: kungal.description
+        },
+        { name: 'theme-color', content: kungal.themeColor },
+        { property: 'og:site_name', content: kungal.titleShort },
+        { property: 'og:type', content: 'website' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:site', content: kungal.creator.mention }
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'canonical', href: kungal.domain.main }
+      ]
+    }
+  },
+
   modules: [
     '@nuxt/image',
     '@nuxt/icon',
     '@nuxt/eslint',
-    '@nuxtjs/i18n',
     '@nuxtjs/color-mode',
     '@nuxtjs/sitemap',
     '@pinia/nuxt',
@@ -54,7 +81,7 @@ export default defineNuxtConfig({
   },
 
   imports: {
-    dirs: ['./composables', './utils', './store/**/*.ts']
+    dirs: ['./composables', './config', './utils', './store/**/*.ts']
   },
 
   site: {
