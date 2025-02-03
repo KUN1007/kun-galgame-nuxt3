@@ -124,40 +124,6 @@ export default defineNuxtConfig({
     }
   },
 
-  i18n: {
-    langDir: './locales',
-    locales: [
-      {
-        code: 'en-us',
-        language: 'en-US',
-        file: 'en.json'
-      },
-      {
-        code: 'ja-jp',
-        language: 'ja-JP',
-        file: 'ja-JP.json'
-      },
-      {
-        code: 'zh-cn',
-        language: 'zh-CN',
-        file: 'zh-CN.json'
-      },
-      {
-        code: 'zh-tw',
-        language: 'zh-TW',
-        file: 'zh-TW.json'
-      }
-    ],
-    baseUrl: process.env.KUN_GALGAME_URL,
-    defaultLocale: 'en-us',
-    strategy: 'prefix_except_default',
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'kungalgame-language',
-      redirectOn: 'root'
-    }
-  },
-
   colorMode: {
     preference: 'system',
     fallback: 'light',

@@ -74,7 +74,8 @@ export const kungal: KunSiteConfig = {
     patch: KUN_SITE_PATCH,
     backup: KUN_SITE_URL_BACKUP,
     sticker: KUN_SITE_STICKER,
-    nav: KUN_SITE_NAV
+    nav: KUN_SITE_NAV,
+    doc: KUN_SITE_DEVELOPMENT_DOCUMENTATION
   },
   og: {
     title: KUN_SITE_TITLE,

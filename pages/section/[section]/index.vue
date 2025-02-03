@@ -11,7 +11,7 @@ const categoryMap: Record<string, string> = {
 }
 
 useHead({
-  title: `${t('seo.category.title')} - ${t('head.title')}`,
+  title: `${t('seo.category.title')} - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',

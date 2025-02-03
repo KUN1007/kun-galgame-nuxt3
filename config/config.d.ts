@@ -7,6 +7,7 @@ export interface KunSiteDomain {
   backup: string
   sticker: string
   nav: string
+  doc: string
 }
 
 export interface KunSiteAuthor {

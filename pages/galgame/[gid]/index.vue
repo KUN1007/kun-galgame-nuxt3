@@ -33,7 +33,7 @@ if (galgame.value) {
         ? ` | ${galgame.value.name['ja-jp']}`
         : ''
     )
-    .concat(` - ${t('head.title')}`)
+    .concat(` - ${kungal.titleShort}`)
   const description = markdownToText(
     getPreferredLanguageText(
       galgame.value.introduction,

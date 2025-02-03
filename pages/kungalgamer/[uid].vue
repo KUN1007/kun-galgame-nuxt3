@@ -43,7 +43,7 @@ onMounted(() => {
 })
 
 useHead({
-  title: `${user.value?.name} - ${t('head.title')}`,
+  title: `${user.value?.name} - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',

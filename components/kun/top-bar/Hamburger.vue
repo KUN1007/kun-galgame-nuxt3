@@ -74,8 +74,8 @@ const handleShowMore = () => {
       >
         <div>
           <div class="kungalgame" @click="navigateTo(localePath('/'))">
-            <NuxtImg src="/favicon.webp" :alt="$t('head.title')" />
-            <span>{{ $t('header.name') }}</span>
+            <NuxtImg src="/favicon.webp" :alt="kungal.titleShort" />
+            <span>{{ kungal.titleShort }}</span>
           </div>
 
           <div class="item-container">

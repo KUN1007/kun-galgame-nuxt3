@@ -4,7 +4,7 @@ import { friendArray } from '~/components/friend-links/friends'
 const { t } = useI18n()
 
 useHead({
-  title: `${t('seo.friends.title')} - ${t('head.title')}`,
+  title: `${t('seo.friends.title')} - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',

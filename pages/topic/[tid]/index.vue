@@ -69,7 +69,7 @@ if (data) {
   )
 
   useHead({
-    title: `${data.title} - ${t('head.title')}`,
+    title: `${data.title} - ${kungal.titleShort}`,
     meta: [
       {
         name: 'description',
@@ -81,7 +81,7 @@ if (data) {
       },
       {
         name: 'og:title',
-        content: `${data.title} - ${t('head.title')}`
+        content: `${data.title} - ${kungal.titleShort}`
       },
       {
         name: 'og:description',
@@ -105,7 +105,7 @@ if (data) {
       },
       {
         name: 'twitter:title',
-        content: `${data.title} - ${t('head.title')}`
+        content: `${data.title} - ${kungal.titleShort}`
       },
       {
         name: 'twitter:description',

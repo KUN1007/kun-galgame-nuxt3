@@ -2,7 +2,7 @@
 const { t } = useI18n()
 
 useHead({
-  title: `${t('seo.technique.title')} - ${t('head.title')}`,
+  title: `${t('seo.technique.title')} - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',

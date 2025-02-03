@@ -8,7 +8,7 @@ const { t } = useI18n()
 const { messageStatus } = storeToRefs(useTempSettingStore())
 
 useHead({
-  title: `${t('seo.message.title')} - ${t('head.title')}`,
+  title: `${t('seo.message.title')} - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
