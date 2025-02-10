@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { locale } = useI18n()
-
 const iconMap: Record<number, string> = {
   0: 'lucide:circle-divide',
   1: 'lucide:loader',
@@ -11,7 +9,7 @@ const iconMap: Record<number, string> = {
 const pageData = ref({
   page: 1,
   limit: 10,
-  language: locale.value
+  language: 'zh-cn'
 })
 
 const { data, status } = await useFetch(`/api/update/todo`, {
@@ -40,12 +38,12 @@ watch(
       v-for="kun in data.todos"
       :key="kun.todoId"
     >
-      <pre>{{ getPreferredLanguageText(kun.content, locale as Language) }}</pre>
+      <pre>{{ kun.content['zh-cn'] }}</pre>
 
       <div class="status">
         <span class="time">
           {{
-            formatDate(kun.time, locale, {
+            formatDate(kun.time, {
               isPrecise: true
             })
           }}
@@ -54,7 +52,7 @@ watch(
         <span class="description">
           <span v-if="kun.completedTime">
             {{
-              formatDate(kun.completedTime, locale, {
+              formatDate(kun.completedTime, {
                 isPrecise: true
               })
             }}

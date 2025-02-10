@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { checkChangePassword } from './utils/check'
 
-const localePath = useLocalePath()
-
 const input = reactive({
   oldPassword: '',
   newPassword: '',
@@ -20,12 +18,7 @@ const handleChangePassword = async () => {
     return
   }
 
-  const res = await useComponentMessageStore().alert({
-    'en-us': 'Are you sure you want to change the password?',
-    'ja-jp': 'パスワードを変更してもよろしいですか？',
-    'zh-cn': '确定更改密码吗?',
-    'zh-tw': '確定更改密碼嗎？'
-  })
+  const res = await useComponentMessageStore().alert('确定更改密码吗?')
   if (!res) {
     return
   }

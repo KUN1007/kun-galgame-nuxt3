@@ -16,7 +16,7 @@ const handleAliasClose = (Alias: string) => {
 const handleAddAlias = () => {
   const AliasName = inputValue.value.trim().slice(0, 17).toLowerCase()
   const isIncludes = selectedAlias.value
-    .map((Alias) => Alias.toLowerCase())
+    .map((Alias: string) => Alias.toLowerCase())
     .includes(AliasName)
 
   if (isIncludes) {
@@ -62,7 +62,7 @@ watch(
 
 <template>
   <KunHeader :size="2">
-    <template #header>{{ $t('edit.pr.alias.name') }}</template>
+    <template #header>别名</template>
   </KunHeader>
 
   <div class="input-container">
@@ -81,7 +81,7 @@ watch(
       class="input"
       type="text"
       v-model="inputValue"
-      :placeholder="`${$t('edit.pr.alias.placeholder')}`"
+      placeholder="请输入游戏别名"
       @input="canDeleteAlias = false"
       @keyup.enter="handleAddAlias"
       @keyup.backspace="handleRemoveAlias"
@@ -93,7 +93,7 @@ watch(
     <div class="box2" :class="isInputFocus ? 'box-active' : ''"></div>
   </div>
 
-  <div class="hint">{{ $t('edit.pr.alias.hint') }}</div>
+  <div class="hint">别名最多 17 个, 可以输入别名按下回车创建别名</div>
 </template>
 
 <style lang="scss" scoped>

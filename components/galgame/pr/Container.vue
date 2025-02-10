@@ -22,11 +22,9 @@ const { data, status, refresh } = await useLazyFetch(
 <template>
   <div class="container" v-if="data && data.prs.length">
     <KunHeader :size="2" :show-help="true">
-      <template #header>
-        {{ $t('galgame.pr.name') }}
-      </template>
+      <template #header>更新请求</template>
       <template #help>
-        {{ $t('galgame.pr.help') }}
+        蓝色代表增加, 红色代表删减, 游戏发布者或管理员可以合并或拒绝请求
       </template>
     </KunHeader>
 

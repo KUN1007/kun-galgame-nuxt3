@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import 'animate.css'
 import { hamburgerItem } from './hamburgerItem'
 import type { Hamburger } from './hamburgerItem'
 

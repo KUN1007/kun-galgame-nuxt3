@@ -5,8 +5,6 @@ const props = defineProps<{
   logs: NonMoeLog[]
 }>()
 
-const { locale } = useI18n()
-
 const logs = computed(() => props.logs)
 </script>
 
@@ -19,15 +17,12 @@ const logs = computed(() => props.logs)
       </NuxtLink>
     </div>
 
-    <div
-      class="reason"
-      v-html="getPreferredLanguageText(kun.description, locale as Language)"
-    />
+    <div class="reason" v-html="kun.description['zh-cn']" />
 
     <div class="footer">
       <div class="time">
         <Icon class="hourglass" name="lucide:clock-7" />
-        <span>{{ formatDate(kun.time, locale, { isShowYear: true }) }}</span>
+        <span>{{ formatDate(kun.time, { isShowYear: true }) }}</span>
       </div>
       <div class="result">
         <Icon class="warning" name="lucide:triangle-alert" />

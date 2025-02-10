@@ -8,9 +8,7 @@ defineProps<{
 
 <template>
   <KunHeader :size="2">
-    <template #header>
-      {{ $t('galgame.contributors') }}
-    </template>
+    <template #header>贡献者</template>
   </KunHeader>
 
   <div class="contributor" v-if="data && !pending">
@@ -29,12 +27,7 @@ defineProps<{
       v-if="views > 0"
       class="views"
       v-tooltip="{
-        message: {
-          'en-us': 'Views',
-          'ja-jp': '閲覧数',
-          'zh-cn': '浏览数',
-          'zh-tw': '瀏覽數'
-        },
+        message: '浏览数',
         position: 'bottom'
       }"
     >

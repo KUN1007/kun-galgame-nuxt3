@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "packageManager": "pnpm@9.12.1",
   "private": true,
   "scripts": {
@@ -62,6 +62,7 @@
     "@milkdown/transformer": "7.6.2",
     "@milkdown/utils": "7.6.2",
     "@milkdown/vue": "7.6.2",
+    "@nuxtjs/i18n": "^9.1.5",
     "@prosemirror-adapter/vue": "^0.4.0",
     "@types/jsonwebtoken": "^9.0.8",
     "animate.css": "^4.1.1",

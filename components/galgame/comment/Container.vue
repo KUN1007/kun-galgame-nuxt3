@@ -47,18 +47,16 @@ onMounted(() => (commentToUid.value = toUser.uid))
 
 <template>
   <KunHeader :size="2">
-    <template #header>
-      {{ $t('galgame.comment.name') }}
-    </template>
+    <template #header>评论</template>
     <template #addition>
       <NuxtLink class="notice" to="/topic/1482">
-        {{ $t('galgame.comment.notice') }}
+        Galgame 评论注意事项, 资源失效, 解压密码错误等问题反馈
       </NuxtLink>
     </template>
   </KunHeader>
 
   <div class="to-user" v-if="toUser">
-    <div>{{ $t('galgame.comment.to') }}</div>
+    <div>评论给</div>
     <KunSelect
       :styles="{ width: '100%' }"
       :chooser-styles="{ justifyContent: 'flex-start' }"
@@ -83,7 +81,7 @@ onMounted(() => (commentToUid.value = toUser.uid))
     </GalgameCommentPanel>
 
     <div class="sad" v-if="!data?.totalCount && status !== 'pending'">
-      {{ $t('galgame.comment.sad') }}
+      没人评论, 是没人要这个 Galgame 的小只可爱软萌妹子了吗, 呜呜呜...
     </div>
 
     <div

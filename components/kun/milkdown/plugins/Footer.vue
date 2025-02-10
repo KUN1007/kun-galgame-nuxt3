@@ -2,10 +2,6 @@
 import { usePluginViewContext } from '@prosemirror-adapter/vue'
 
 const route = useRoute()
-const getRouteBaseName = useRouteBaseName()
-const baseRouteName = computed(() => {
-  return getRouteBaseName(route)
-})
 
 const { textCount: textCountEditRewrite, isTopicRewriting } =
   storeToRefs(useTempEditStore())
@@ -25,29 +21,29 @@ const size = computed(() => {
 watch(
   () => size.value,
   () => {
-    if (baseRouteName.value === 'edit-topic' && isTopicRewriting.value) {
+    if (route.name === 'edit-topic' && isTopicRewriting.value) {
       textCountEditRewrite.value = size.value
       return
     }
-    if (baseRouteName.value === 'topic-tid' && isReplyRewriting.value) {
+    if (route.name === 'topic-tid' && isReplyRewriting.value) {
       textCountReplyRewrite.value = size.value
       return
     }
-    if (baseRouteName.value === 'edit-topic') {
+    if (route.name === 'edit-topic') {
       textCountEdit.value = size.value
     }
-    if (baseRouteName.value === 'topic-tid') {
+    if (route.name === 'topic-tid') {
       textCountReply.value = size.value
     }
   }
 )
 
 onMounted(() => {
-  if (baseRouteName.value === 'edit-topic' && isTopicRewriting.value) {
+  if (route.name === 'edit-topic' && isTopicRewriting.value) {
     textCountEditRewrite.value = size.value
     return
   }
-  if (baseRouteName.value === 'topic-tid' && isReplyRewriting.value) {
+  if (route.name === 'topic-tid' && isReplyRewriting.value) {
     textCountReplyRewrite.value = size.value
   }
 })
@@ -56,7 +52,7 @@ onMounted(() => {
 <template>
   <div class="footer">
     <KunMilkdownComponentsSettings />
-    <span class="size"> {{ size + ` ${$t('edit.topic.word')}` }} </span>
+    <span class="size"> {{ `${size} 字` }} </span>
   </div>
 </template>
 

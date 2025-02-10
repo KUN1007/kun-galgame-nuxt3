@@ -4,8 +4,6 @@ import type { SearchResultUser } from '~/types/api/search'
 defineProps<{
   user: SearchResultUser
 }>()
-
-const { locale } = useI18n()
 </script>
 
 <template>
@@ -22,7 +20,7 @@ const { locale } = useI18n()
         <span><Icon class="icon" name="lucide:lollipop" /></span>
         <span>{{ user.moemoepoint }}</span>
       </span>
-      <span>{{ formatDate(user.time, locale, { isShowYear: true }) }}</span>
+      <span>{{ formatDate(user.time, { isShowYear: true }) }}</span>
     </div>
   </NuxtLink>
 </template>

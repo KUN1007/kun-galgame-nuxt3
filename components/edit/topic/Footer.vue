@@ -4,7 +4,7 @@
   <div class="footer">
     <EditTopicTags />
 
-    <p class="hint">{{ $t('edit.topic.categories') }}</p>
+    <p class="hint">请选择分类和分区</p>
     <div class="partition">
       <EditTopicCategory />
       <EditTopicSection />
@@ -15,7 +15,7 @@
     <EditTopicButton />
 
     <NuxtLink to="/topic/1712">
-      {{ $t('edit.topic.note') }}
+      请不要在话题中发布除了 Galgame 以外的 R18 黄游 (例如: SLG) 资源
     </NuxtLink>
   </div>
 </template>

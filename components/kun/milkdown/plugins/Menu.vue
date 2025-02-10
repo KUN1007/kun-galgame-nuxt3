@@ -14,7 +14,6 @@ import {
 import { toggleStrikethroughCommand } from '@milkdown/preset-gfm'
 import type { UseEditorReturn } from '@milkdown/vue'
 import type { CmdKey } from '@milkdown/core'
-import { insertLinkPlugin } from './hyperlinkInsert'
 
 const props = defineProps<{
   editorInfo: UseEditorReturn

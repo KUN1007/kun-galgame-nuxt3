@@ -3,8 +3,6 @@ const { showAlert, alertTitle, alertMsg, isShowCancel } = storeToRefs(
   useComponentMessageStore()
 )
 
-const { locale } = useI18n()
-
 const handleClose = () => {
   showAlert.value = false
   useComponentMessageStore().handleClose()
@@ -20,17 +18,15 @@ const handleConfirm = () => {
   <KunDialog :is-show-dialog="showAlert">
     <div class="container">
       <div class="header">
-        <h3 v-if="alertTitle">{{ alertTitle[locale as Language] }}</h3>
-        <p v-if="alertMsg">{{ alertMsg[locale as Language] }}</p>
+        <h3 v-if="alertTitle">{{ alertTitle }}</h3>
+        <p v-if="alertMsg">{{ alertMsg }}</p>
       </div>
 
       <div class="footer">
         <button v-if="isShowCancel ?? true" class="button" @click="handleClose">
-          {{ $t('ComponentAlert.cancel') }}
+          取消
         </button>
-        <button class="button" @click="handleConfirm">
-          {{ $t('ComponentAlert.confirm') }}
-        </button>
+        <button class="button" @click="handleConfirm">确定</button>
       </div>
     </div>
   </KunDialog>

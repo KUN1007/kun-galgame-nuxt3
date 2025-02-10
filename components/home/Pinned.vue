@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { locale } = useI18n()
-
 const { data } = await useLazyFetch(`/api/home/pin`, {
   method: 'GET'
 })
@@ -15,7 +13,7 @@ const { data } = await useLazyFetch(`/api/home/pin`, {
     >
       <Icon class="icon" name="lucide:pin" />
       <span>{{ topic.title }}</span>
-      <span>{{ formatTimeDifference(topic.time, locale) }}</span>
+      <span>{{ formatTimeDifference(topic.time) }}</span>
     </NuxtLink>
   </div>
 </template>

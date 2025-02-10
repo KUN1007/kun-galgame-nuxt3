@@ -7,16 +7,10 @@ const props = defineProps<{
   refresh: () => void
 }>()
 
-const { locale } = useI18n()
-
 const handleDeleteMessage = async (mid: number) => {
-  const res = await useComponentMessageStore().alert({
-    'en-us':
-      'Are you sure you want to delete this message? This action cannot be undone.',
-    'ja-jp': 'メッセージを削除してもよろしいですか？この操作は元に戻せません。',
-    'zh-cn': '您确定要删除这条消息吗？此操作不可撤销。',
-    'zh-tw': '您確定要刪除这条消息嗎？此操作不可撤銷。'
-  })
+  const res = await useComponentMessageStore().alert(
+    '您确定要删除这条消息吗？此操作不可撤销。'
+  )
   if (!res) {
     return
   }
@@ -54,7 +48,7 @@ const handleDeleteMessage = async (mid: number) => {
         <NuxtLink :to="`/kungalgamer/${message.sender.uid}/info`">
           {{ message.sender.name }}
         </NuxtLink>
-        <span>{{ getMessageI18n(locale as Language, message) }}</span>
+        <span>{{ getMessageI18n(message) }}</span>
       </div>
     </div>
 
@@ -72,7 +66,7 @@ const handleDeleteMessage = async (mid: number) => {
     <div class="bottom">
       <span class="time">
         {{
-          formatDate(message.time, locale, {
+          formatDate(message.time, {
             isShowYear: true,
             isPrecise: true
           })

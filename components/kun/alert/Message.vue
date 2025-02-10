@@ -1,26 +1,15 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { Icon } from '@iconify/vue'
 import 'animate.css'
 
-const locale = useCookie('kungalgame-language').value
-
 const props = defineProps<{
-  message: KunLanguage
+  message: string
   type: 'warn' | 'success' | 'error' | 'info'
   richText?: boolean
 }>()
 
 const isRichText = computed(() => props.richText ?? false)
-
-const getDefaultLocale = () =>
-  window?.location.href.match(/\/([a-z]{2}-[a-z]{2})\//)?.[1] ?? 'en-us'
-
-const messageRef = computed(() => {
-  const currentLocale = locale || getDefaultLocale()
-  return (
-    props.message[currentLocale as keyof KunLanguage] || props.message['en-us']
-  )
-})
 
 const messageClassMap = {
   warn: 'animate__animated animate__headShake',
@@ -49,8 +38,8 @@ const messageClass = computed(
         }`"
       />
 
-      <span v-if="!isRichText" class="message">{{ messageRef }}</span>
-      <span v-if="isRichText" v-html="messageRef"></span>
+      <span v-if="!isRichText" class="message">{{ message }}</span>
+      <span v-if="isRichText" v-html="message"></span>
     </div>
   </div>
 </template>

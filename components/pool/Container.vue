@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { PoolTopic } from '~/types/api/pool'
 import { pageData } from './pageData'
+import type { PoolTopic } from '~/types/api/pool'
 
 const isLoadingComplete = ref(false)
 const topics = ref<PoolTopic[]>([])

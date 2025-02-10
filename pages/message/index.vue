@@ -4,7 +4,6 @@ definePageMeta({
   middleware: 'auth'
 })
 
-const { t } = useI18n()
 const { messageStatus } = storeToRefs(useTempSettingStore())
 
 useHead({

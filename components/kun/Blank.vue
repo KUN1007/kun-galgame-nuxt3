@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const localePath = useLocalePath()
+import { navigateTo } from '#app'
 </script>
 
 <template>
@@ -8,7 +8,7 @@ const localePath = useLocalePath()
       <h1>
         <slot />
       </h1>
-      <button @click="navigateTo(localePath('/'))">
+      <button @click="navigateTo('/')">
         {{ $t('kungalgame.home') }}
       </button>
     </div>

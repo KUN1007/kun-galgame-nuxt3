@@ -5,7 +5,6 @@ const props = defineProps<{
   user: UserInfo
 }>()
 
-const { locale } = useI18n()
 const user = computed(() => props.user)
 
 const rolesName = () => {
@@ -89,7 +88,7 @@ const statusName = () => {
         <span>
           {{ $t('user.profile.time') }}:
           {{
-            formatDate(user.time, locale, {
+            formatDate(user.time, {
               isShowYear: true,
               isPrecise: true
             })

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { platformIconMap } from './utils/iconMap'
+import { KUN_GALGAME_RESOURCE_PLATFORM_MAP } from '~/constants/galgame'
 import type { GalgameDetail } from '~/types/api/galgame'
 
 defineProps<{
@@ -9,13 +10,11 @@ defineProps<{
 
 <template>
   <KunHeader :size="2">
-    <template #header>
-      {{ $t('galgame.info.name') }}
-    </template>
+    <template #header>信息</template>
   </KunHeader>
 
   <div class="name">
-    <h4>{{ $t('galgame.info.title') }}</h4>
+    <h4>标题</h4>
     <KunCopy v-if="galgame.name['en-us']" :text="galgame.name['en-us']" />
     <KunCopy v-if="galgame.name['ja-jp']" :text="galgame.name['ja-jp']" />
     <KunCopy v-if="galgame.name['zh-cn']" :text="galgame.name['zh-cn']" />
@@ -23,19 +22,19 @@ defineProps<{
   </div>
 
   <div>
-    <h4>{{ $t('galgame.info.tags') }}</h4>
+    <h4>标签</h4>
     <GalgameNull v-if="!galgame.tags.length" />
     <TopicTags :tags="galgame.tags" :is-show-icon="false" />
   </div>
 
   <div>
-    <h4>{{ $t('galgame.info.alias') }}</h4>
+    <h4>别名</h4>
     <GalgameNull v-if="!galgame.alias.length" />
     <TopicTags :tags="galgame.alias" :is-show-icon="false" />
   </div>
 
   <div class="official">
-    <h4>{{ $t('galgame.info.official') }}</h4>
+    <h4>官网</h4>
     <GalgameNull v-if="!galgame.official.length" />
     <template v-if="galgame.official.length">
       <span class="link" v-for="(kun, index) in galgame.official" :key="index">
@@ -48,12 +47,12 @@ defineProps<{
   </div>
 
   <div class="platform">
-    <h4>{{ $t('galgame.info.platform') }}</h4>
+    <h4>平台</h4>
     <span
       v-for="(platform, index) in galgame.platform"
       :key="index"
       v-tooltip="{
-        message: $t(`galgame.resource.platform.${platform}`),
+        message: KUN_GALGAME_RESOURCE_PLATFORM_MAP[platform],
         position: 'bottom'
       }"
     >
@@ -62,14 +61,14 @@ defineProps<{
   </div>
 
   <div class="engine" v-if="galgame.engine.length">
-    <h4>{{ $t('galgame.info.engine') }}</h4>
+    <h4>引擎</h4>
     <span v-for="(engine, index) in galgame.engine" :key="index">
       {{ engine }}
     </span>
   </div>
 
   <div class="index">
-    <h4>{{ $t('galgame.info.index') }}</h4>
+    <h4>序号</h4>
     <span>{{ galgame.gid }}</span>
   </div>
 </template>

@@ -45,12 +45,9 @@ const handlePublishLink = async () => {
 }
 
 const handleDeleteLink = async (gid: number, glid: number) => {
-  const res = await useComponentMessageStore().alert({
-    'en-us': 'Are you sure you want to delete this visualnovel-related link?',
-    'ja-jp': 'このギャルゲーム関連リンクを削除してもよろしいですか？',
-    'zh-cn': '您确定删除该 Galgame 相关链接吗？',
-    'zh-tw': '您確定刪除該 Galgame 相關鏈接嗎？'
-  })
+  const res = await useComponentMessageStore().alert(
+    '您确定删除该 Galgame 相关链接吗？'
+  )
   if (!res) {
     return
   }
@@ -72,7 +69,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
   <div class="container">
     <KunHeader :size="2">
       <template #header>
-        <span>{{ $t('galgame.link.name') }}</span>
+        <span>相关链接</span>
 
         <span class="contribute" @click="isShowEdit = !isShowEdit">
           <Icon class="icon" name="lucide:circle-plus" />
@@ -83,16 +80,10 @@ const handleDeleteLink = async (gid: number, glid: number) => {
     <div class="link-edit" v-if="isShowEdit">
       <GalgameLinkHelp />
 
-      <KunInput
-        :placeholder="`${$t('galgame.link.label')}`"
-        v-model="linkModel.name"
-      />
-      <KunInput
-        :placeholder="`${$t('galgame.link.url')}`"
-        v-model="linkModel.link"
-      />
+      <KunInput placeholder="链接名" v-model="linkModel.name" />
+      <KunInput placeholder="链接地址" v-model="linkModel.link" />
       <KunButton @click="handlePublishLink" :pending="isFetching">
-        {{ $t('galgame.link.create') }}
+        创建
       </KunButton>
     </div>
 

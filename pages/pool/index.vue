@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 useHead({
   title: `${t('seo.pool.title')} - ${kungal.titleShort}`,
   meta: [

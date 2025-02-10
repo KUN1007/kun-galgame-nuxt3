@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 const route = useRoute()
 const section = computed(() => (route.params as { section: string }).section)
 

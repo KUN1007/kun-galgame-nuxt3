@@ -12,12 +12,9 @@ const position = computed(() => {
 
 const handleClosePanel = async () => {
   if (isReplyRewriting.value) {
-    const res = await useComponentMessageStore().alert({
-      'en-us': 'Confirm closing the panel? Your changes will not be saved.',
-      'ja-jp': 'パネルを閉じてもよろしいですか？変更は保存されません。',
-      'zh-cn': '确认关闭面板吗？您的更改将不会被保存。',
-      'zh-tw': '確認關閉面板嗎？您的更改將不會被保存。'
-    })
+    const res = await useComponentMessageStore().alert(
+      '确认关闭面板吗？您的更改将不会被保存。'
+    )
 
     if (res) {
       useTempReplyStore().resetRewriteReplyData()

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { REFERENCE_SITE_MAP } from '~/constants/edit'
+
 interface Site {
   url: string
   name: string
@@ -33,7 +35,7 @@ const siteList: Site[] = [
       target="_blank"
       rel="noopener noreferrer"
     >
-      {{ $t(`edit.galgame.help.${site.name}`) }}
+      {{ REFERENCE_SITE_MAP[site.name] }}
     </a>
   </div>
 </template>

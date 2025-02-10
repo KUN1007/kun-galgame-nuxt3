@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { locale } = useI18n()
-
 const props = defineProps<{
   uid: number
 }>()
@@ -25,7 +23,7 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/replies`, {
           {{ markdownToText(replyData.content) }}
         </div>
         <div class="time">
-          {{ formatDate(replyData.time, locale, { isShowYear: true }) }}
+          {{ formatDate(replyData.time, { isShowYear: true }) }}
         </div>
       </NuxtLink>
     </div>

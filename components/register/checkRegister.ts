@@ -1,5 +1,4 @@
 import { useComponentMessageStore } from '~/store/temp/components/message'
-import { isValidEmail, isValidName, isValidPassword } from '~/utils/validate'
 import type { Pinia } from 'pinia'
 
 export const checkRegisterForm = {

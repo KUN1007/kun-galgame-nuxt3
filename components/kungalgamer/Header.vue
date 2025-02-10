@@ -11,6 +11,7 @@ const isShowProgress = ref(false)
 const mpWidth = computed(() => {
   return props.moemoepoint ? `${props.moemoepoint % 100}%` : '0%'
 })
+
 onMounted(() => (isShowProgress.value = true))
 </script>
 

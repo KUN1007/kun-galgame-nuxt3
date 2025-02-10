@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import { friendArray } from './friends'
+import { friendArray } from '~/config/friend'
 </script>
 
 <template>
   <template v-for="(friendGroup, index) in friendArray" :key="index">
     <KunDivider margin="17px" />
 
-    <h2>
-      {{ $t(`friends.${friendGroup.key}.name`) }}
-    </h2>
+    <h2>{{ friendGroup.label }}</h2>
 
     <div class="container">
       <a
@@ -19,9 +17,9 @@ import { friendArray } from './friends'
         target="_blank"
       >
         <div class="name">
-          <span>{{ $t(`friends.${friendGroup.key}.${friend.name}`) }}</span>
+          <span>{{ friend.name }}</span>
           <span class="status" v-if="friend.status">
-            {{ $t(`friends.status.${friend.status}`) }}
+            {{ friend.status }}
           </span>
         </div>
         <div class="label">
@@ -37,8 +35,8 @@ import { friendArray } from './friends'
   </template>
 
   <NuxtLink class="join" to="/contact">
-    <h3>{{ $t('friends.join') }}</h3>
-    <p>{{ $t('friends.hint') }}</p>
+    <h3>加入我们</h3>
+    <p>要加入我们, 请加入我们的群组, 提供您的网站链接</p>
   </NuxtLink>
 </template>
 

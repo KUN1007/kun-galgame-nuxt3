@@ -12,7 +12,6 @@ const { checkForm, checkRegister } = checkRegisterForm.asyncData(
   useNuxtApp().$pinia as Pinia
 )
 
-const localePath = useLocalePath()
 const isSendCode = ref(false)
 const isAgree = ref(false)
 
@@ -61,7 +60,7 @@ const handleRegister = async () => {
     info.info('AlertInfo.login.success')
     useMessage(10135, 'success')
     usePersistUserStore().setUserInfo(userInfo)
-    navigateTo(localePath('/'))
+    navigateTo('/')
   }
 
   isCaptureSuccessful.value = false

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const localePath = useLocalePath()
-
 const { name, avatarMin } = storeToRefs(usePersistUserStore())
 const { showKUNGalgamePanel, showKUNGalgameUserPanel, messageStatus } =
   storeToRefs(useTempSettingStore())
@@ -8,7 +6,7 @@ const { showKUNGalgamePanel, showKUNGalgameUserPanel, messageStatus } =
 const onKeydown = (event: KeyboardEvent) => {
   if (event.ctrlKey && event.key.toLowerCase() === 'k') {
     event.preventDefault()
-    navigateTo(localePath('/search'))
+    navigateTo('/search')
   }
 }
 

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { AsideItem } from '~/types/api/chat-message'
 
-const { locale } = useI18n()
-
 defineProps<{
   room: AsideItem
 }>()
@@ -22,7 +20,7 @@ defineProps<{
       <div class="title">
         <span>{{ room.title }}</span>
         <span v-if="room.time">
-          {{ formatTimeDifference(room.time, locale) }}
+          {{ formatTimeDifference(room.time) }}
         </span>
       </div>
       <div class="content">

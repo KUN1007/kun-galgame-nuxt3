@@ -6,10 +6,8 @@ const handleClickContribute = () => {
 
 <template>
   <div class="null">
-    <span>{{ $t('galgame.null') }}</span>
-    <span @click="handleClickContribute">
-      {{ ` ${$t('galgame.welcome')}` }}
-    </span>
+    <span>该条目暂时为空</span>
+    <span @click="handleClickContribute">欢迎贡献条目</span>
   </div>
 </template>
 

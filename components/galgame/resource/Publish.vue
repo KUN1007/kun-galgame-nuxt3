@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { typeOptions, languageOptions, platformOptions } from '../utils/options'
 import { checkGalgameResourcePublish } from '../utils/checkGalgameResourcePublish'
+import {
+  KUN_GALGAME_RESOURCE_TYPE_MAP,
+  KUN_GALGAME_RESOURCE_LANGUAGE_MAP,
+  KUN_GALGAME_RESOURCE_PLATFORM_MAP
+} from '~/constants/galgame'
 import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
 
 const props = defineProps<{
@@ -8,7 +13,6 @@ const props = defineProps<{
   refresh: () => Promise<unknown>
 }>()
 
-const { locale } = useI18n()
 const route = useRoute()
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
@@ -21,7 +25,7 @@ const isFetching = ref(false)
 const defaultResourceLink: GalgameResourceStoreTemp = {
   type: 'game',
   link: [],
-  language: locale.value,
+  language: 'zh-cn',
   platform: 'windows',
   size: '',
   code: '',
@@ -94,21 +98,15 @@ onMounted(() => {
 
   <div class="link">
     <KunTextarea
-      :placeholder="`${$t('galgame.resource.placeholder.link')}`"
+      placeholder="资源链接 (网盘 | 磁链 | 网址) 等, 如果同一资源有多个链接，请用英语逗号分隔每个链接"
       v-model="resourceLink.link"
     />
 
     <div>
+      <KunInput placeholder="资源体积 (MB 或 GB)" v-model="resourceLink.size" />
+      <KunInput placeholder="资源提取码 (可选)" v-model="resourceLink.code" />
       <KunInput
-        :placeholder="`${$t('galgame.resource.placeholder.size')}`"
-        v-model="resourceLink.size"
-      />
-      <KunInput
-        :placeholder="`${$t('galgame.resource.placeholder.extract')}`"
-        v-model="resourceLink.code"
-      />
-      <KunInput
-        :placeholder="`${$t('galgame.resource.placeholder.decompress')}`"
+        placeholder="资源解压码 (可选)"
         v-model="resourceLink.password"
       />
     </div>
@@ -125,9 +123,9 @@ onMounted(() => {
       default-value="game"
     >
       <div class="select">
-        <span>{{ $t('galgame.resource.type.name') }}</span>
+        <span>资源链接的类型</span>
         <span v-if="resourceLink.type">
-          {{ $t(`galgame.resource.type.${resourceLink.type}`) }}
+          {{ KUN_GALGAME_RESOURCE_TYPE_MAP[resourceLink.type] }}
         </span>
       </div>
     </KunSelect>
@@ -139,12 +137,12 @@ onMounted(() => {
       i18n="galgame.resource.language"
       @set="(value) => (resourceLink.language = value)"
       position="top"
-      :default-value="locale"
+      default-value="zh-cn"
     >
       <div class="select">
-        <span>{{ $t('galgame.resource.language.name') }}</span>
+        <span>资源链接的语言</span>
         <span v-if="resourceLink.language">
-          {{ $t(`galgame.resource.language.${resourceLink.language}`) }}
+          {{ KUN_GALGAME_RESOURCE_LANGUAGE_MAP[resourceLink.language] }}
         </span>
       </div>
     </KunSelect>
@@ -159,19 +157,16 @@ onMounted(() => {
       default-value="windows"
     >
       <div class="select">
-        <span>{{ $t('galgame.resource.platform.name') }}</span>
+        <span>资源链接的平台</span>
         <span v-if="resourceLink.platform">
-          {{ $t(`galgame.resource.platform.${resourceLink.platform}`) }}
+          {{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[resourceLink.platform] }}
         </span>
       </div>
     </KunSelect>
   </div>
 
   <div class="note">
-    <KunTextarea
-      :placeholder="`${$t('galgame.resource.placeholder.note')}`"
-      v-model="resourceLink.note"
-    />
+    <KunTextarea placeholder="资源备注 (可选)" v-model="resourceLink.note" />
   </div>
 
   <div class="btn">
@@ -181,11 +176,11 @@ onMounted(() => {
       :pending="isFetching"
       v-if="!rewriteResourceId"
     >
-      {{ $t('galgame.resource.create') }}
+      创建资源链接
     </KunButton>
 
     <KunButton v-if="rewriteResourceId" @click="handleCancel">
-      {{ $t('galgame.resource.cancelRewrite') }}
+      取消 Rewrite
     </KunButton>
 
     <KunButton
@@ -195,7 +190,7 @@ onMounted(() => {
       :pending="isFetching"
       v-if="rewriteResourceId"
     >
-      {{ $t('galgame.resource.confirmRewrite') }}
+      确定 Rewrite
     </KunButton>
   </div>
 </template>

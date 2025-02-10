@@ -1,9 +1,5 @@
 <script setup lang="ts">
 const route = useRoute()
-const getRouteBaseName = useRouteBaseName()
-const baseRouteName = computed(() => {
-  return getRouteBaseName(route)
-})
 
 const { tags: rewriteTags, isTopicRewriting } = storeToRefs(useTempEditStore())
 const { tags: editTags } = storeToRefs(usePersistEditTopicStore())
@@ -15,7 +11,7 @@ const isInputFocus = ref(false)
 const inputValue = ref('')
 const canDeleteTag = ref(false)
 
-if (baseRouteName.value === 'edit-topic') {
+if (route.name === 'edit-topic') {
   if (isTopicRewriting.value) {
     selectedTags.value = rewriteTags.value
   } else {
@@ -23,7 +19,7 @@ if (baseRouteName.value === 'edit-topic') {
   }
 }
 
-if (baseRouteName.value === 'topic-tid') {
+if (route.name === 'topic-tid') {
   if (isReplyRewriting.value) {
     selectedTags.value = replyRewrite.value[0].tags
   } else {
@@ -80,10 +76,10 @@ const validateTagName = (tagName: string) => {
 watch(
   () => selectedTags.value,
   () => {
-    if (baseRouteName.value === 'topic-tid' && !isReplyRewriting.value) {
+    if (route.name === 'topic-tid' && !isReplyRewriting.value) {
       replyDraft.value.tags = selectedTags.value
     }
-    if (baseRouteName.value === 'edit-topic' && !isReplyRewriting.value) {
+    if (route.name === 'edit-topic' && !isReplyRewriting.value) {
       editTags.value = selectedTags.value
     }
   }
@@ -108,7 +104,7 @@ watch(
         class="input"
         type="text"
         v-model="inputValue"
-        :placeholder="`${$t('edit.topic.tags')}`"
+        placeholder="请输入标签"
         @input="canDeleteTag = false"
         @keyup.enter="handleAddTag"
         @keyup.backspace="handleRemoveTag"
@@ -124,7 +120,10 @@ watch(
       <div class="box2" :class="isInputFocus ? 'box-active' : ''"></div>
     </div>
 
-    <div class="hint">{{ $t('edit.topic.hint') }}</div>
+    <div class="hint">
+      提示:（单个标签 17 个字符以内，至少选择一个、最多 7 个）,
+      您可以输入文字后按下 ' Enter ' 创建标签
+    </div>
   </div>
 </template>
 

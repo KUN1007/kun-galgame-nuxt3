@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import { typeIconMap, platformIconMap } from '../utils/iconMap'
+import {
+  KUN_GALGAME_RESOURCE_TYPE_MAP,
+  KUN_GALGAME_RESOURCE_LANGUAGE_MAP,
+  KUN_GALGAME_RESOURCE_PLATFORM_MAP,
+  KUN_GALGAME_RESOURCE_SORT_FIELD_MAP
+} from '~/constants/galgame'
 import type {
   GalgameResource,
   GalgameResourceDetails
@@ -80,11 +86,11 @@ watch(
       <div class="info">
         <span class="rewrite" v-if="link.grid === rewriteResourceId">
           <Icon class="icon" name="svg-spinners:12-dots-scale-rotate" />
-          <span>{{ $t('galgame.resource.edit') }}</span>
+          <span>编辑中...</span>
         </span>
         <span>
           <Icon class="icon" :name="typeIconMap[link.type]" />
-          <span>{{ $t(`galgame.resource.type.${link.type}`) }}</span>
+          <span>{{ KUN_GALGAME_RESOURCE_TYPE_MAP[link.type] }}</span>
         </span>
         <span>
           <Icon class="icon" name="lucide:database" />
@@ -92,10 +98,10 @@ watch(
         </span>
         <span>
           <Icon class="icon" :name="platformIconMap[link.platform]" />
-          <span>{{ $t(`galgame.resource.platform.${link.platform}`) }}</span>
+          <span>{{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[link.platform] }}</span>
         </span>
         <span>
-          {{ $t(`galgame.resource.language.${link.language}`) }}
+          {{ KUN_GALGAME_RESOURCE_LANGUAGE_MAP[link.language] }}
         </span>
       </div>
 
@@ -110,14 +116,14 @@ watch(
           @click="handleMarkValid(link.gid, link.grid)"
           :pending="isFetching"
         >
-          {{ $t('galgame.resource.valid') }}
+          标记有效
         </KunButton>
         <KunButton
           v-if="!details && link.grid !== rewriteResourceId"
           @click="handleGetDetail(link.grid)"
           :pending="isFetching"
         >
-          {{ $t('galgame.resource.fetch') }}
+          获取链接
         </KunButton>
 
         <GalgameResourceLike
@@ -127,12 +133,7 @@ watch(
           :to-uid="link.uid"
           :likes="link.likes"
           v-tooltip="{
-            message: {
-              'en-us': 'Like',
-              'ja-jp': 'いいね',
-              'zh-cn': '点赞',
-              'zh-tw': '點贊'
-            },
+            message: '点赞',
             position: 'bottom'
           }"
         />
@@ -141,12 +142,7 @@ watch(
           v-if="uid !== link.uid"
           to="/report"
           v-tooltip="{
-            message: {
-              'en-us': 'Report violation',
-              'ja-jp': '違反の報告',
-              'zh-cn': '举报违规',
-              'zh-tw': '舉報違規'
-            },
+            message: '举报违规',
             position: 'bottom'
           }"
         >
@@ -157,14 +153,7 @@ watch(
           class="status-dot"
           :class="`status-${link.status}`"
           v-tooltip="{
-            message: {
-              'en-us': link.status ? 'Link expired' : 'Link valid',
-              'ja-jp': link.status
-                ? 'リンクが期限切れです'
-                : 'リンクは有効です',
-              'zh-cn': link.status ? '链接过期' : '链接有效',
-              'zh-tw': link.status ? '鏈接過期' : '鏈接有效'
-            },
+            message: link.status ? '链接过期' : '链接有效',
             position: 'bottom'
           }"
         />

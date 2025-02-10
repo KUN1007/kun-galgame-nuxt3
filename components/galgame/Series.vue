@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const route = useRoute()
-const { locale } = useI18n()
 
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
@@ -19,11 +18,10 @@ const { data, pending } = await useLazyFetch(
 <template>
   <div class="container">
     <KunHeader :size="2" :show-help="true">
-      <template #header>
-        {{ $t('galgame.series.name') }}
-      </template>
+      <template #header>游戏系列</template>
       <template #help>
-        {{ $t('galgame.series.help') }}
+        同一部作品的其它 Galgame, 例如 `巧克甜恋 1, 巧克甜恋 2, 巧克甜恋 3`
+        就是一个系列
       </template>
     </KunHeader>
 
@@ -33,7 +31,7 @@ const { data, pending } = await useLazyFetch(
         :key="index"
         :to="`/galgame/${link.gid}`"
       >
-        {{ getPreferredLanguageText(link.name, locale as Language) }}
+        {{ link.name['zh-cn'] }}
       </NuxtLink>
     </div>
     <KunSkeletonGalgameLink v-if="pending" />

@@ -5,28 +5,19 @@ const title = computed(() => galgamePR.value[0].name)
 
 <template>
   <KunHeader :size="2" :show-help="true">
-    <template #header>{{ $t('edit.galgame.title.name') }}</template>
+    <template #header>标题</template>
 
-    <template #help>{{ $t('edit.galgame.title.help') }}</template>
+    <template #help>
+      标题要求至少写一种, 非常建议全部填写 (如果游戏没有对应翻译可以不填写,
+      英语标题可以从 VNDB 自动获取到)
+    </template>
   </KunHeader>
 
   <div class="titles">
-    <KunInput
-      :placeholder="$t('edit.galgame.introduction.en-us')"
-      v-model="title['en-us']"
-    />
-    <KunInput
-      :placeholder="$t('edit.galgame.introduction.ja-jp')"
-      v-model="title['ja-jp']"
-    />
-    <KunInput
-      :placeholder="$t('edit.galgame.introduction.zh-cn')"
-      v-model="title['zh-cn']"
-    />
-    <KunInput
-      :placeholder="$t('edit.galgame.introduction.zh-tw')"
-      v-model="title['zh-tw']"
-    />
+    <KunInput placeholder="英语" v-model="title['en-us']" />
+    <KunInput placeholder="日语" v-model="title['ja-jp']" />
+    <KunInput placeholder="简体中文" v-model="title['zh-cn']" />
+    <KunInput placeholder="繁体中文" v-model="title['zh-tw']" />
   </div>
 </template>
 

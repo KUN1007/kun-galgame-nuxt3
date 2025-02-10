@@ -2,8 +2,6 @@
 import { checkLoginForm } from './checkLogin'
 import type { Pinia } from 'pinia'
 
-const localePath = useLocalePath()
-
 const info = useComponentMessageStore()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useComponentMessageStore()
@@ -42,7 +40,7 @@ watch(
     if (userInfo) {
       info.info('AlertInfo.login.success')
       usePersistUserStore().setUserInfo(userInfo)
-      navigateTo(localePath('/'))
+      navigateTo('/')
     }
 
     isCaptureSuccessful.value = false

@@ -62,10 +62,10 @@ const getMessageContent = (locale: Language, message: Message): string => {
   return template
 }
 
-export const getMessageI18n = (locale: Language, message: Message) => {
+export const getMessageI18n = (message: Message) => {
   if (message.type === 'admin') {
-    return messageTemplates[locale].admin
+    return messageTemplates['zh-cn'].admin
   }
 
-  return getMessageContent(locale, message)
+  return getMessageContent('zh-cn', message)
 }

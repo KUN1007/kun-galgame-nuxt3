@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import { usePersistUserStore } from '~/store/modules/kungalgamer'
 import { reportSection } from './constant'
 
-const { t } = useI18n()
-
 useHead({
-  title: t('seo.report.title'),
+  title: '匿名举报',
   meta: [
     {
       name: 'description',

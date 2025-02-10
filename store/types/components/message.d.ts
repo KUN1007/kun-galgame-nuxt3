@@ -5,8 +5,8 @@ export interface MessageStore {
   durations: number
 
   showAlert: boolean
-  alertTitle?: KunLanguage
-  alertMsg?: KunLanguage
+  alertTitle?: string
+  alertMsg?: string
   isShowCancel?: boolean
 
   isShowCapture: boolean

@@ -1,10 +1,8 @@
 <script setup lang="ts">
-const { locale } = useI18n()
-
 const pageData = ref({
   page: 1,
   limit: 10,
-  language: locale.value
+  language: 'zh-cn'
 })
 
 const { data, status } = await useFetch(`/api/update/history`, {
@@ -30,7 +28,7 @@ watch(
   <ul class="history-list" v-if="data">
     <li v-for="kun in data.updates" :key="kun.upid">
       <span class="type">{{ $t(`update.${kun.type}`) }}</span>
-      <pre>{{ getPreferredLanguageText(kun.content, locale as Language) }}</pre>
+      <pre>{{ kun.content['zh-cn'] }}</pre>
       <span class="time">{{ kun.time }} - Version {{ kun.version }}</span>
     </li>
   </ul>

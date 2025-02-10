@@ -11,18 +11,8 @@ export const useComponentMessageStore = defineStore({
     durations: 0,
 
     showAlert: false,
-    alertTitle: {
-      'en-us': '',
-      'ja-jp': '',
-      'zh-cn': '',
-      'zh-tw': ''
-    },
-    alertMsg: {
-      'en-us': '',
-      'ja-jp': '',
-      'zh-cn': '',
-      'zh-tw': ''
-    },
+    alertTitle: '',
+    alertMsg: '',
     isShowCancel: false,
 
     isShowCapture: false,
@@ -38,8 +28,8 @@ export const useComponentMessageStore = defineStore({
     },
 
     alert(
-      alertTitle?: KunLanguage,
-      alertMsg?: KunLanguage,
+      alertTitle?: string,
+      alertMsg?: string,
       isShowCancel?: boolean
     ): Promise<boolean> {
       return new Promise<boolean>((resolve) => {

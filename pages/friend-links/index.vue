@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { friendArray } from '~/components/friend-links/friends'
 
-const { t } = useI18n()
-
 useHead({
   title: `${t('seo.friends.title')} - ${kungal.titleShort}`,
   meta: [

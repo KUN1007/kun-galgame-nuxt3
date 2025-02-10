@@ -57,7 +57,7 @@ const handlePublishComment = async () => {
       <slot />
 
       <KunButton @click="handlePublishComment" :pending="isPublishing">
-        {{ $t('galgame.comment.publish') }}
+        发布评论
       </KunButton>
     </div>
   </div>

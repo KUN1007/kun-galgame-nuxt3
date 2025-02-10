@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { TopicDetail } from '~/types/api/topic'
 
-const { locale } = useI18n()
-
 defineProps<{
   topic: TopicDetail
 }>()

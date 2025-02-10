@@ -8,12 +8,11 @@ const props = defineProps<{
   size: string
 }>()
 
-const localePath = useLocalePath()
 const user = computed(() => props.user)
 
 const handleClickAvatar = (event: MouseEvent) => {
   event.preventDefault()
-  navigateTo(localePath(`/kungalgamer/${user.value.uid}/info`))
+  navigateTo(`/kungalgamer/${user.value.uid}/info`)
 }
 </script>
 

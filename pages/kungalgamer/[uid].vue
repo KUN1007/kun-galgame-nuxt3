@@ -6,7 +6,6 @@ const user = ref<UserInfo>()
 const isBanned = ref(false)
 
 const route = useRoute()
-const { t } = useI18n()
 
 const uid = computed(() => {
   return parseInt((route.params as { uid: string }).uid)

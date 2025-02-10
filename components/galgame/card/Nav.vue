@@ -9,6 +9,12 @@ import type {
   LanguageOptions,
   PlatformOptions
 } from '~/components/galgame/utils/options'
+import {
+  KUN_GALGAME_RESOURCE_TYPE_MAP,
+  KUN_GALGAME_RESOURCE_LANGUAGE_MAP,
+  KUN_GALGAME_RESOURCE_PLATFORM_MAP,
+  KUN_GALGAME_RESOURCE_SORT_FIELD_MAP
+} from '~/constants/galgame'
 
 const { page, type, language, platform, sortField, sortOrder } = storeToRefs(
   useTempGalgameStore()
@@ -37,7 +43,7 @@ watch(
       @set="(newVal) => (type = newVal as TypeOptions)"
       position="bottom"
     >
-      {{ $t(`galgame.resource.type.${type}`) }}
+      {{ KUN_GALGAME_RESOURCE_TYPE_MAP[type] }}
     </KunSelect>
 
     <KunSelect
@@ -47,7 +53,7 @@ watch(
       @set="(newVal) => (language = newVal as LanguageOptions)"
       position="bottom"
     >
-      {{ $t(`galgame.resource.language.${language}`) }}
+      {{ KUN_GALGAME_RESOURCE_LANGUAGE_MAP[language] }}
     </KunSelect>
 
     <KunSelect
@@ -57,7 +63,7 @@ watch(
       @set="(newVal) => (platform = newVal as PlatformOptions)"
       position="bottom"
     >
-      {{ $t(`galgame.resource.platform.${platform}`) }}
+      {{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[platform] }}
     </KunSelect>
 
     <KunSelect
@@ -68,7 +74,7 @@ watch(
       @set="(value) => (sortField = value as 'time' | 'views')"
       position="bottom"
     >
-      <span>{{ $t(`galgame.resource.sort.${sortField}`) }}</span>
+      <span>{{ KUN_GALGAME_RESOURCE_SORT_FIELD_MAP[sortField] }}</span>
     </KunSelect>
 
     <div class="order">

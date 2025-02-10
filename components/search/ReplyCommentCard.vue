@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { SearchResultReply, SearchResultComment } from '~/types/api/search'
 
-const { locale } = useI18n()
-
 const props = defineProps<{
   data: SearchResultReply | SearchResultComment
   type: 'reply' | 'comment'
@@ -25,7 +23,7 @@ const content = computed(() =>
         />
       </span>
       <span>{{ data.title }}</span>
-      <span>{{ formatTimeDifference(data.time, locale) }}</span>
+      <span>{{ formatTimeDifference(data.time) }}</span>
     </div>
 
     <div class="content">

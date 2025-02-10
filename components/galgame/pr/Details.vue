@@ -117,19 +117,19 @@ const handleMergeRequest = async () => {
         @click="isShowReasonInput = !isShowReasonInput"
         :pending="isFetching"
       >
-        {{ $t('galgame.pr.decline') }}
+        拒绝
       </KunButton>
       <KunButton @click="handleMergeRequest" :pending="isFetching">
-        {{ $t('galgame.pr.merge') }}
+        合并
       </KunButton>
     </div>
     <div class="hint" v-if="!details.status && !isShowButton">
-      {{ $t('galgame.pr.hint') }}
+      要处理该请求, 需要资源的发布者、或管理员
     </div>
 
     <div class="decline-input" v-if="isShowReasonInput">
       <KunInput
-        :placeholder="`${$t('galgame.pr.note')}`"
+        placeholder="您可以自己合并自己提出的更新请求"
         v-model="declineInput"
       />
       <KunButton
@@ -137,7 +137,7 @@ const handleMergeRequest = async () => {
         @click="handleDeclineRequest"
         :pending="isFetching"
       >
-        {{ $t('galgame.pr.confirm') }}
+        确定拒绝
       </KunButton>
     </div>
   </div>

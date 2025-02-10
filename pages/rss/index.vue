@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { availableLocales, locale, t } = useI18n()
-
 useHead({
   title: `${t('seo.rss.title')} - ${kungal.titleShort}`,
   meta: [
@@ -11,10 +9,8 @@ useHead({
   ]
 })
 
-const rssLocale = ref(locale.value)
-
 const getLink = (link: 'galgame' | 'topic') =>
-  `${useRuntimeConfig().public.KUN_GALGAME_URL}/rss/${link}.xml?locale=${rssLocale.value}`
+  `${useRuntimeConfig().public.KUN_GALGAME_URL}/rss/${link}.xml`
 </script>
 
 <template>

@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { languageItems } from '~/components/edit/utils/options'
 
-const { locale } = useI18n()
-const introductionLanguage = ref(locale.value)
+const introductionLanguage = ref('zh-cn')
 
 defineProps<{
   introduction: KunLanguage
@@ -11,9 +10,7 @@ defineProps<{
 
 <template>
   <KunHeader :size="2">
-    <template #header>
-      {{ $t('galgame.introduction.name') }}
-    </template>
+    <template #header>介绍</template>
   </KunHeader>
 
   <KunNav
@@ -27,15 +24,10 @@ defineProps<{
     class="hint"
     v-if="introduction[introductionLanguage as Language] === ''"
   >
-    {{ $t('galgame.introduction.hint') }}
+    暂无对应翻译, 为您找到最近似的语言, 欢迎贡献翻译
   </div>
 
-  <KunContent
-    class="kun-content"
-    :content="
-      getPreferredLanguageText(introduction, introductionLanguage as Language)
-    "
-  />
+  <KunContent class="kun-content" :content="introduction['zh-cn']" />
 </template>
 
 <style lang="scss" scoped>

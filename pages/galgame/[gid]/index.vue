@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { GalgameDetail } from '~/types/api/galgame'
 
-const { t, locale } = useI18n()
 const route = useRoute()
 
 const galgame = ref<GalgameDetail>()
@@ -23,10 +22,7 @@ if (data.value === 'banned') {
 }
 
 if (galgame.value) {
-  const titleBase = getPreferredLanguageText(
-    galgame.value.name,
-    locale.value as Language
-  )
+  const titleBase = galgame.value.name['zh-cn']
   const title = titleBase
     .concat(
       titleBase !== galgame.value.name['ja-jp'] && galgame.value.name['ja-jp']
@@ -34,12 +30,7 @@ if (galgame.value) {
         : ''
     )
     .concat(` - ${kungal.titleShort}`)
-  const description = markdownToText(
-    getPreferredLanguageText(
-      galgame.value.introduction,
-      locale.value as Language
-    )
-  )
+  const description = markdownToText(galgame.value.introduction['zh-cn'])
 
   const keywords =
     Object.values(galgame.value.name).join(', ') +
@@ -48,9 +39,6 @@ if (galgame.value) {
 
   useHead({
     title,
-    htmlAttrs: {
-      lang: locale.value
-    },
     meta: [
       {
         name: 'description',

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { TopicType } from '~/types/api/user'
 
-const { locale } = useI18n()
-
 const props = defineProps<{
   uid: number
   type: TopicType
@@ -29,7 +27,7 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/topics`, {
           {{ topic.title }}
         </div>
         <div class="time">
-          {{ formatDate(topic.time, locale, { isShowYear: true }) }}
+          {{ formatDate(topic.time, { isShowYear: true }) }}
         </div>
       </NuxtLink>
     </div>
