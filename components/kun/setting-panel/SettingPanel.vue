@@ -102,7 +102,6 @@ const handelCloseSettingsPanel = () => {
   display: flex;
   border: 1px solid var(--kungalgame-blue-2);
 
-  @include kun-blur;
   backdrop-filter: blur(10px);
 }
 
@@ -157,8 +156,7 @@ const handelCloseSettingsPanel = () => {
       padding: 5px 7px;
       font-size: 20px;
 
-      @include kun-center;
-    }
+        }
 
     .loli {
       margin-left: auto;

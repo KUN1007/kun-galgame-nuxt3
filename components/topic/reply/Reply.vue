@@ -110,8 +110,6 @@ watch(
   margin-bottom: 17px;
   position: relative;
 
-  @include kun-blur;
-  @include kun-center;
   flex-direction: column;
 }
 

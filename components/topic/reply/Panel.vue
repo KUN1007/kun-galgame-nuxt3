@@ -86,7 +86,6 @@ const handleClosePanel = async () => {
   max-width: 60rem;
   max-height: 77vh;
   overflow-y: scroll;
-  @include kun-blur;
 
   .close {
     font-size: 30px;

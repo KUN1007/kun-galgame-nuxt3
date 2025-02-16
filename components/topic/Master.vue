@@ -118,8 +118,6 @@ const loliStatus = computed(() => {
   align-items: center;
   flex-shrink: 0;
   margin-bottom: 17px;
-
-  @include kun-blur;
 }
 
 .header {

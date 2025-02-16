@@ -36,7 +36,6 @@ useHead({
 .container {
   margin: auto;
   width: 360px;
-  @include kun-blur;
 }
 
 .title {

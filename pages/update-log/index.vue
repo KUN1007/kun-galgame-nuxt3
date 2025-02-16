@@ -45,8 +45,6 @@ useHead({
   &::-webkit-scrollbar {
     width: 0;
   }
-
-  @include kun-blur;
 }
 
 .content {

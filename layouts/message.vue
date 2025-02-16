@@ -53,8 +53,6 @@ const isShowContent = computed(() => {
   position: relative;
   padding: 10px;
   margin-left: 16px;
-
-  @include kun-blur;
 }
 
 .kun-footer {

@@ -1,11 +1,8 @@
 <script setup lang="ts">
 const error = useError()
-const localePath = useLocalePath()
 
 const handleError = async () => {
-  clearError({
-    redirect: localePath('/').toString()
-  })
+  clearError({ redirect: '/' })
   await new Promise((resolve) => {
     setTimeout(resolve, 1007)
   })
@@ -50,9 +47,7 @@ const handleError = async () => {
   margin: 0 auto;
   padding: 17px;
 
-  @include kun-center;
   flex-direction: column;
-  @include kun-blur;
 
   h1 {
     color: var(--kungalgame-red-5);

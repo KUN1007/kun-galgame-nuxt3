@@ -184,7 +184,6 @@ const handleShowMore = () => {
   flex-direction: column;
   justify-content: space-between;
 
-  @include kun-blur;
   border-radius: 0 5px 5px 0;
 }
 

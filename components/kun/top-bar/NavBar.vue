@@ -113,8 +113,6 @@
     white-space: nowrap;
     padding: 10px;
 
-    @include kun-blur;
-
     .item {
       display: flex;
       justify-content: flex-start;

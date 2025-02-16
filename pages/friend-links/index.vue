@@ -32,8 +32,6 @@ useHead({
   max-width: 80rem;
   margin: 0 auto;
   padding: 17px;
-
-  @include kun-blur;
 }
 
 .kun-footer {

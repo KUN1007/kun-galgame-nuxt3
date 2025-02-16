@@ -24,7 +24,7 @@ import { $prose, replaceAll } from '@milkdown/utils'
 import { Plugin } from '@milkdown/prose/state'
 
 // KUN Visual Novel style
-import '~/assets/css/editor/index.scss'
+import '~/styles/editor/index.scss'
 
 // Syntax highlight
 import bash from 'refractor/lang/bash'
@@ -176,7 +176,7 @@ watch(
 </template>
 
 <style lang="scss">
-@use '~/assets/css/editor/kun-content.scss';
+@use '~/styles/editor/kun-content.scss';
 </style>
 
 <style lang="scss" scoped>

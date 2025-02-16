@@ -147,7 +147,7 @@ watch(
   .add-tag {
     height: 32px;
     width: 32px;
-    @include kun-center;
+
     cursor: pointer;
     font-size: 24px;
     border-radius: 10px;

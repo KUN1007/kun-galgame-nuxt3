@@ -98,7 +98,6 @@ watch(
   padding: 32px;
   margin-bottom: 32px;
   user-select: none;
-  @include kun-blur;
 }
 
 .form {

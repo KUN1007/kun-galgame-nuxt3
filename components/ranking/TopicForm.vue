@@ -134,8 +134,6 @@ const handleClickSortOrder = () => {
   flex-direction: column;
   border: 1px solid var(--kungalgame-blue-2);
 
-  @include kun-blur;
-
   .item {
     transition: all 0.2s;
     height: 40px;

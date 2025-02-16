@@ -1,3 +1,4 @@
+import tailwindcss from '@tailwindcss/vite'
 import fs from 'fs'
 import path from 'path'
 import { kungal } from './config/kungal'
@@ -89,17 +90,10 @@ export default defineNuxtConfig({
   },
 
   // Frontend
-  css: ['~/assets/css/index.scss'],
+  css: ['~/styles/tailwindcss.css'],
 
   vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: 'modern-compiler',
-          additionalData: '@use "~/assets/css/mixins.scss" as *;'
-        }
-      }
-    },
+    plugins: [tailwindcss()],
     esbuild: {
       drop: ['console', 'debugger']
     }

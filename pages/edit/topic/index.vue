@@ -56,8 +56,6 @@ onBeforeRouteLeave(async (_, __, next) => {
   width: 100%;
   max-width: 80rem;
   margin: 0 auto;
-
-  @include kun-blur;
 }
 
 .kun-footer {

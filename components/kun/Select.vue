@@ -88,8 +88,6 @@ const handleSetOption = (value: string, index: number) => {
   border: 1px solid var(--kungalgame-trans-blue-1);
   z-index: 9999;
 
-  @include kun-blur;
-
   & > span {
     font-size: 15px;
     display: flex;

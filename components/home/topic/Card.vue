@@ -118,7 +118,6 @@ defineProps<{
   right: 10px;
   font-size: 36px;
   color: var(--kungalgame-yellow-2);
-  @include kun-center;
 }
 
 @media (max-width: 700px) {

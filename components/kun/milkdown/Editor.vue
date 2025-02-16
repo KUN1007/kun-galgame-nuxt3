@@ -29,7 +29,7 @@ import { Plugin } from '@milkdown/prose/state'
 // Milkdown Math plugin styles
 // import 'katex/dist/katex.min.css'
 // KUN Visual Novel style
-import '~/assets/css/editor/index.scss'
+import '~/styles/editor/index.scss'
 
 // Syntax highlight
 import bash from 'refractor/lang/bash'
@@ -197,7 +197,7 @@ const editorInfo = useEditor((root) =>
 </template>
 
 <style lang="scss">
-@use '~/assets/css/editor/kun-content.scss';
+@use '~/styles/editor/kun-content.scss';
 </style>
 
 <style lang="scss" scoped>

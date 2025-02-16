@@ -89,7 +89,6 @@ defineProps<{
   border-radius: 8px;
   box-shadow: var(--shadow);
   overflow: hidden;
-  @include kun-blur;
 }
 
 .banner {
@@ -113,7 +112,6 @@ defineProps<{
     background-color: var(--kungalgame-trans-white-5);
     border-radius: 10px;
     padding: 5px 7px;
-    @include kun-center;
 
     span {
       display: flex;

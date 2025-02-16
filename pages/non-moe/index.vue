@@ -80,8 +80,6 @@ const { data: logs, status: listStatus } = await useFetch(`/api/non-moe/logs`, {
   overflow: hidden;
   display: flex;
   position: relative;
-
-  @include kun-blur;
 }
 
 .title {

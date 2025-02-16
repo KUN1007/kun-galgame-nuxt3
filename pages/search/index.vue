@@ -26,8 +26,6 @@ useHead({
   margin: 0 auto;
   color: var(--kungalgame-font-color-3);
   padding: 17px;
-
-  @include kun-blur;
 }
 
 @media (max-width: 700px) {

@@ -43,8 +43,6 @@ useHead({
   min-height: calc(100dvh - 75px);
   max-width: 80rem;
   margin: 0 auto;
-
-  @include kun-blur;
 }
 
 .title {

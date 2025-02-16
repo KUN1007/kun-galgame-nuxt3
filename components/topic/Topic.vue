@@ -136,8 +136,6 @@ watch(
 .pagination {
   padding: 10px;
   margin-bottom: 17px;
-
-  @include kun-blur;
 }
 
 .kun-divider {

@@ -81,7 +81,6 @@ const handleConfirmClipImage = async () => {
   user-select: none;
   transition: all 0.3s ease;
 
-  @include kun-center;
   flex-direction: column;
 
   .kun-clipper {

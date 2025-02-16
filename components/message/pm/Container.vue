@@ -178,7 +178,6 @@ const handleLoadHistoryMessages = async () => {
 
   .icon {
     font-size: 24px;
-    @include kun-center;
   }
 }
 
@@ -190,7 +189,6 @@ const handleLoadHistoryMessages = async () => {
     margin: 16px 0;
     color: var(--kungalgame-font-color-0);
     cursor: pointer;
-    @include kun-center;
 
     &:hover {
       color: var(--kungalgame-blue-5);

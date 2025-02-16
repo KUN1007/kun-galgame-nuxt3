@@ -99,7 +99,6 @@ const prevPage = () => {
     background-color: transparent;
     font-size: medium;
     color: var(--kungalgame-font-color-3);
-    @include kun-center;
 
     &:hover {
       background-color: var(--kungalgame-trans-blue-1);

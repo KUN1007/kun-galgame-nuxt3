@@ -70,7 +70,6 @@ header {
     font-size: 24px;
     margin-right: 10px;
     color: var(--kungalgame-font-color-3);
-    @include kun-center;
 
     &:hover {
       color: var(--kungalgame-blue-5);

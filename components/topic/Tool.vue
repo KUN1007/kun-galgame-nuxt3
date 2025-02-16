@@ -39,8 +39,6 @@ const emits = defineEmits<{
   margin-bottom: 17px;
   display: flex;
   align-items: center;
-
-  @include kun-blur;
 }
 
 .order {

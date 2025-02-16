@@ -90,8 +90,6 @@ useHead({
 .container {
   width: 100%;
   margin: auto;
-
-  @include kun-blur;
 }
 
 .content {

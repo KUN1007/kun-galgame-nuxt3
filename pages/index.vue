@@ -25,8 +25,6 @@ useHead({
   max-width: 80rem;
   margin: 0 auto;
   padding: 17px;
-
-  @include kun-blur;
 }
 
 @media (max-width: 1000px) {

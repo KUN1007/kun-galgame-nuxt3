@@ -97,8 +97,6 @@ const handleSubmitReport = async () => {
   max-width: 80rem;
   margin: 0 auto;
   padding: 20px 20px 60px;
-
-  @include kun-blur;
 }
 
 .select-container {

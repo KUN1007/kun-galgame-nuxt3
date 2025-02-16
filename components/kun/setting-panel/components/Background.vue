@@ -103,7 +103,6 @@ const handleChangeImage = async (index: number) => {
       box-shadow: var(--shadow);
       color: var(--kungalgame-font-color-3);
       transition: all 0.2s;
-      @include kun-center;
 
       &:hover {
         color: var(--kungalgame-blue-5);

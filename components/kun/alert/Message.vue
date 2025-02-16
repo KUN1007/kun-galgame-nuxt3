@@ -61,11 +61,7 @@ const messageClass = computed(
   font-size: large;
   padding: 1vh 10vw;
 
-  @include kun-blur;
-  @include kun-center;
-
   span {
-    @include kun-center;
     flex-direction: column;
   }
 

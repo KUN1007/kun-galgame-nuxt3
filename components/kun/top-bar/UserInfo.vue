@@ -146,8 +146,6 @@ onMounted(async () => {
   position: absolute;
   display: flex;
   flex-direction: column;
-
-  @include kun-blur;
 }
 
 .info {

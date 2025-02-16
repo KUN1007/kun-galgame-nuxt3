@@ -112,8 +112,6 @@ onMounted(async () => {
     bottom: 0;
     right: 0;
 
-    @include kun-blur;
-
     .close {
       position: absolute;
       top: 3px;

@@ -40,8 +40,6 @@ const { data, pending } = await useLazyFetch(`/api/category`, {
   width: 100%;
   height: 100%;
   padding: 17px;
-
-  @include kun-blur;
 }
 
 .title {

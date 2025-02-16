@@ -100,8 +100,6 @@ const getLink = (link: 'galgame' | 'topic') =>
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @include kun-blur;
 }
 
 .title {

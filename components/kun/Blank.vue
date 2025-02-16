@@ -25,8 +25,6 @@ import { navigateTo } from '#app'
   width: 400px;
   height: 300px;
 
-  @include kun-blur;
-  @include kun-center;
   flex-direction: column;
 
   h1 {

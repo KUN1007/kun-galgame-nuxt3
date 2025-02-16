@@ -56,8 +56,6 @@ asideItems.value = contact.value ? contact.value : []
   &::-webkit-scrollbar {
     width: 0;
   }
-
-  @include kun-blur;
 }
 
 span {
