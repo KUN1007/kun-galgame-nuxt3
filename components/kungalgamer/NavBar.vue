@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { KUN_USER_PAGE_NAV_MAP } from '~/contents/user'
+import { KUN_USER_PAGE_NAV_MAP } from '~/constants/user'
 import type { Nav } from './utils/routeName'
 
 const { uid: storeUid, roles } = storeToRefs(usePersistUserStore())

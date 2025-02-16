@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { KUN_REGISTER_FORM_FIELD_MAP } from '~/contents/auth'
+import { KUN_REGISTER_FORM_FIELD_MAP } from '~/constants/auth'
 import { registerFormItem } from './registerFormItem'
 import { checkRegisterForm } from './checkRegister'
 import type { Pinia } from 'pinia'

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { KUN_TOPIC_SECTION } from '~/contents/topic'
+import { KUN_TOPIC_SECTION } from '~/constants/topic'
 
 const props = defineProps<{
   section: string[]

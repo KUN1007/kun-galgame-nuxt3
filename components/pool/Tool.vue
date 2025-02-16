@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { KUN_TOPIC_PAGE_SORT_FIELD, KUN_TOPIC_CATEGORY } from '~/contents/topic'
+import {
+  KUN_TOPIC_PAGE_SORT_FIELD,
+  KUN_TOPIC_CATEGORY
+} from '~/constants/topic'
 import { pageData } from './pageData'
 
 const { layout } = storeToRefs(usePersistPoolStore())

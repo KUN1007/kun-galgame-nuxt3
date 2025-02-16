@@ -20,20 +20,7 @@ const getLink = (link: 'galgame' | 'topic') =>
         <div class="rss-icon">
           <Icon class="icon" name="lucide:rss" />
         </div>
-
-        <div class="language">
-          <span>选择订阅的语言</span>
-          <KunSelect
-            :options="availableLocales"
-            :default-value="locale"
-            :styles="{ width: '110px' }"
-            i18n="rss.language"
-            @set="(newVal) => (rssLocale = newVal)"
-            position="bottom"
-          >
-            {{ rssLocale }}
-          </KunSelect>
-        </div>
+        <span>论坛目前支持话题与 Galgame 资源 RSS 订阅</span>
       </div>
 
       <div class="subscribe">
@@ -133,16 +120,6 @@ const getLink = (link: 'galgame' | 'topic') =>
     &:hover {
       color: var(--kungalgame-red-4);
       transform: scale(1.2);
-    }
-  }
-
-  .language {
-    display: flex;
-    margin-left: 17px;
-    align-items: center;
-
-    span {
-      margin-right: 10px;
     }
   }
 }
