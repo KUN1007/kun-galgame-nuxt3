@@ -35,7 +35,7 @@ onMounted(async () => {
       <NuxtLink to="/message">
         <Icon class="icon" name="lucide:chevron-left" />
       </NuxtLink>
-      <h2>{{ $t('message.system') }}</h2>
+      <h2>系统消息</h2>
     </header>
 
     <KunDivider margin="7px 0" />

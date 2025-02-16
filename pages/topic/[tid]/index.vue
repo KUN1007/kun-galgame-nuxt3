@@ -127,9 +127,7 @@ if (data) {
 
     <KunNull :condition="!data && !isBanned" type="404" />
 
-    <KunBlank v-if="isBanned">
-      {{ $t('topic.banned') }}
-    </KunBlank>
+    <KunBlank v-if="isBanned">此话题已被封禁</KunBlank>
 
     <TopicBar />
   </div>

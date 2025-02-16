@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 definePageMeta({
   layout: 'message',
   middleware: 'auth'
@@ -36,7 +35,7 @@ onMounted(async () => {
       <NuxtLink to="/message">
         <Icon class="icon" name="lucide:chevron-left" />
       </NuxtLink>
-      <h2>{{ $t('message.notice') }}</h2>
+      <h2>通知</h2>
     </header>
 
     <KunDivider margin="7px 0" />

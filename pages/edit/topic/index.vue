@@ -7,15 +7,7 @@ const content = ref<HTMLElement | null>(null)
 
 const { isTopicRewriting } = storeToRefs(useTempEditStore())
 
-useHead({
-  title: t('seo.edit.title'),
-  meta: [
-    {
-      name: 'description',
-      content: t('seo.edit.description')
-    }
-  ]
-})
+useHead({ title: '发布话题' })
 
 onBeforeRouteLeave(async (_, __, next) => {
   if (isTopicRewriting.value) {

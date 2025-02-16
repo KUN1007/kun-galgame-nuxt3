@@ -63,9 +63,7 @@ const handleLoadMore = async () => {
 
 <template>
   <KunHeader :size="2">
-    <template #header>
-      {{ $t('search.name') }}
-    </template>
+    <template #header>搜索</template>
   </KunHeader>
 
   <div class="container">
@@ -94,23 +92,17 @@ const handleLoadMore = async () => {
         v-if="!isLoading && !isLoadComplete"
         @click="handleLoadMore"
       >
-        {{ $t('search.load') }}
+        加载更多
       </span>
-      <span v-if="isLoading">
-        {{ $t('search.loading') }}
-      </span>
-      <span v-if="isLoadComplete">
-        {{ $t('search.complete') }}
-      </span>
+      <span v-if="isLoading">少女祈祷中...</span>
+      <span v-if="isLoadComplete">被榨干了呜呜呜呜呜, 一滴也不剩了</span>
     </KunDivider>
 
     <span class="empty" v-if="!results.length && keywords && !isLoading">
-      {{ $t('search.emptyResult') }}
+      杂鱼杂鱼杂鱼~什么也没有搜索到
     </span>
 
-    <span class="loading" v-if="isLoading">
-      {{ $t('search.loading') }}
-    </span>
+    <span class="loading" v-if="isLoading">少女祈祷中...</span>
   </div>
   <KunFooter />
 </template>

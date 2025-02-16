@@ -33,7 +33,7 @@ const handleClickComment = (comment: TopicComment) => {
   <div class="comment-container">
     <div class="container" v-if="comments?.length">
       <div class="title">
-        <span>{{ $t('topic.content.comments') }}</span>
+        <span>评论</span>
       </div>
 
       <div class="comment" v-for="(comment, index) in comments" :key="index">
@@ -50,7 +50,7 @@ const handleClickComment = (comment: TopicComment) => {
         <div class="content">
           <div class="describe">
             <div class="name">
-              {{ `${comment.user.name} ${$t('topic.content.comment')}` }}
+              {{ `${comment.user.name} 评论` }}
               <NuxtLink :to="`/kungalgamer/${comment.toUser.uid}/info`">
                 {{ comment.toUser.name }}
               </NuxtLink>

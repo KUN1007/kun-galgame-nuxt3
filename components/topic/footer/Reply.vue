@@ -24,9 +24,7 @@ const handleClickReply = () => {
 </script>
 
 <template>
-  <div @click="handleClickReply" class="reply">
-    {{ $t('topic.content.reply') }}
-  </div>
+  <div @click="handleClickReply" class="reply">回复</div>
 </template>
 
 <style lang="scss" scoped>

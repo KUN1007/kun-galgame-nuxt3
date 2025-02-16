@@ -49,7 +49,7 @@ watch(
 
         <div class="right">
           <div class="reply-to">
-            {{ `${$t('topic.panel.to')} @` }}
+            回复给 @
             <span @click="scrollToReplyId = reply.toFloor">
               {{ reply.toUser.name }}
             </span>

@@ -62,12 +62,8 @@ const handleConfirmClipImage = async () => {
       </div>
 
       <div class="footer">
-        <button @click="handleClose">
-          {{ $t('ComponentAlert.cancel') }}
-        </button>
-        <button @click="handleConfirmClipImage">
-          {{ $t('ComponentAlert.confirm') }}
-        </button>
+        <button @click="handleClose">取消</button>
+        <button @click="handleConfirmClipImage">确定</button>
       </div>
     </div>
   </KunDialog>

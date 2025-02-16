@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { KUN_TOPIC_SECTION } from '~/contents/topic'
+
 const props = defineProps<{
   section: string[]
 }>()
@@ -18,7 +20,7 @@ const iconMap: Record<string, string> = {
     :class="sec.toLowerCase()[0]"
   >
     <Icon class="icon" :name="iconMap[sec[0]]" />
-    <span>{{ $t(`edit.topic.section.${sec}`) }}</span>
+    <span>{{ KUN_TOPIC_SECTION[sec] }}</span>
   </span>
 </template>
 

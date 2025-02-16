@@ -58,7 +58,7 @@ watch(
             }}
           </span>
           <Icon class="icon" :name="iconMap[kun.status]" />
-          <span>{{ $t(`update.status${kun.status}`) }}</span>
+          <span>{{ KUN_UPDATE_LOG_STATUS_MAP[kun.status] }}</span>
         </span>
       </div>
     </li>

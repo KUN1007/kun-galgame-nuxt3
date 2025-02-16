@@ -6,15 +6,7 @@ definePageMeta({
 
 const { messageStatus } = storeToRefs(useTempSettingStore())
 
-useHead({
-  title: `${t('seo.message.title')} - ${kungal.titleShort}`,
-  meta: [
-    {
-      name: 'description',
-      content: t('seo.message.description')
-    }
-  ]
-})
+useHead({ title: `消息 - ${kungal.titleShort}` })
 
 onMounted(() => (messageStatus.value = 'online'))
 </script>

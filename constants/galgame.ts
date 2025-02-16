@@ -44,3 +44,47 @@ export const KUN_GALGAME_RESOURCE_PULL_REQUEST_STATUS_MAP: Record<
   1: '已合并',
   2: '已拒绝'
 }
+
+export const KUN_GALGAME_RESOURCE_PULL_REQUEST_ACTION_MAP: Record<
+  string,
+  string
+> = {
+  created: '创建了',
+  updated: '更新了',
+  deleted: '删除了',
+  merged: '合并了',
+  declined: '拒绝了'
+}
+
+export const KUN_GALGAME_RESOURCE_PULL_REQUEST_TYPE_MAP: Record<
+  string,
+  string
+> = {
+  galgame: 'Galgame',
+  banner: '预览图',
+  link: '相关链接',
+  pr: '更新请求'
+}
+
+export const KUN_GALGAME_RESOURCE_PULL_REQUEST_I18N_FIELD_MAP: Record<
+  string,
+  string | KunLanguage
+> = {
+  name: {
+    'en-us': '英语标题',
+    'ja-jp': '日语标题',
+    'zh-cn': '简体中文',
+    'zh-tw': '繁体中文'
+  },
+  introduction: {
+    'en-us': '英语介绍',
+    'ja-jp': '日语介绍',
+    'zh-cn': '简体中文',
+    'zh-tw': '繁体中文'
+  },
+  tags: '标签',
+  series: '系列',
+  alias: '别名',
+  official: '官网',
+  engine: '引擎'
+}

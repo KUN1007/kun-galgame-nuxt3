@@ -2,7 +2,7 @@
 import { friendArray } from '~/components/friend-links/friends'
 
 useHead({
-  title: `${t('seo.friends.title')} - ${kungal.titleShort}`,
+  title: `友情链接 - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',

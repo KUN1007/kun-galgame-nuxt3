@@ -54,9 +54,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     </div>
 
     <div class="login" v-if="!name">
-      <NuxtLink to="/login">
-        {{ $t('login.title') }}
-      </NuxtLink>
+      <NuxtLink to="/login">登录</NuxtLink>
     </div>
 
     <LazyKunTopBarUserInfo

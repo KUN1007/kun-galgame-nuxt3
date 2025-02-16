@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Items {
-  i18n?: string
+  textValue?: string
   icon?: string
   value: string
 }
@@ -27,8 +27,8 @@ const emits = defineEmits<{
       <span v-if="item.icon" :style="{ 'font-size': iconSize }">
         <Icon class="icon" :name="item.icon" />
       </span>
-      <span v-if="item.i18n">
-        {{ $t(`${item.i18n}`) }}
+      <span v-if="item.textValue">
+        {{ item.textValue }}
       </span>
     </span>
   </div>

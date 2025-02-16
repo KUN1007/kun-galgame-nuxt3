@@ -57,22 +57,18 @@ const handlePublishComment = async () => {
     <div class="top">
       <div class="title">
         <span>{{ name }}</span>
-        <span>{{ $t('topic.content.comment') }}</span>
+        <span>评论</span>
         <span>{{ toUsername }}</span>
       </div>
       <div class="confirm">
-        <KunButton @click="handlePublishComment">
-          {{ $t('topic.content.publish') }}
-        </KunButton>
-        <KunButton @click="isShowPanel = false">
-          {{ $t('topic.content.close') }}
-        </KunButton>
+        <KunButton @click="handlePublishComment">发布评论</KunButton>
+        <KunButton @click="isShowPanel = false">关闭</KunButton>
       </div>
     </div>
 
     <KunTextarea
       name="comment"
-      :placeholder="`${$t('topic.content.hint')}`"
+      placeholder="请输入您的评论, 最大字数为1007"
       rows="5"
       v-model="commentValue"
     />

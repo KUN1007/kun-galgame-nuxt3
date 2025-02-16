@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import 'animate.css'
+import { KUN_TOPIC_REPLY_PANEL_POSITION_MAP } from '~/constants/topic'
 
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
@@ -37,11 +38,13 @@ const handleClosePanel = async () => {
         <div class="container">
           <div class="title">
             <h3>
-              <span>{{ $t('topic.panel.to') + ' @' }}</span>
+              <span>回复给 @</span>
               <span class="username">{{ replyDraft.toUserName }}</span>
               <span>
                 <span class="emoji">(⋈◍＞◡＜◍)。✧♡ </span>
-                {{ `${$t(`topic.panel.${position}`)} ${replyDraft.toFloor}` }}
+                {{
+                  `${KUN_TOPIC_REPLY_PANEL_POSITION_MAP[position]} ${replyDraft.toFloor}`
+                }}
               </span>
             </h3>
             <span class="close">

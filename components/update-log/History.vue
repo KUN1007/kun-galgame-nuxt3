@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { KUN_UPDATE_LOG_TYPE_MAP } from '~/constants/update-log'
+
 const pageData = ref({
   page: 1,
   limit: 10,
@@ -27,7 +29,7 @@ watch(
 <template>
   <ul class="history-list" v-if="data">
     <li v-for="kun in data.updates" :key="kun.upid">
-      <span class="type">{{ $t(`update.${kun.type}`) }}</span>
+      <span class="type">{{ KUN_UPDATE_LOG_TYPE_MAP[kun.type] }}</span>
       <pre>{{ kun.content['zh-cn'] }}</pre>
       <span class="time">{{ kun.time }} - Version {{ kun.version }}</span>
     </li>

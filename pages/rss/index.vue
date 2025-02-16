@@ -1,10 +1,10 @@
 <script setup lang="ts">
 useHead({
-  title: `${t('seo.rss.title')} - ${kungal.titleShort}`,
+  title: `Galgame 和话题订阅 - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
-      content: t('seo.rss.description')
+      content: '鲲 Galgame 论坛最新 Galgame 和话题的订阅, 支持英语及中文'
     }
   ]
 })
@@ -22,7 +22,7 @@ const getLink = (link: 'galgame' | 'topic') =>
         </div>
 
         <div class="language">
-          <span>{{ $t('rss.select') }}</span>
+          <span>选择订阅的语言</span>
           <KunSelect
             :options="availableLocales"
             :default-value="locale"
@@ -31,7 +31,7 @@ const getLink = (link: 'galgame' | 'topic') =>
             @set="(newVal) => (rssLocale = newVal)"
             position="bottom"
           >
-            {{ $t(`rss.language.${rssLocale}`) }}
+            {{ rssLocale }}
           </KunSelect>
         </div>
       </div>
@@ -47,12 +47,12 @@ const getLink = (link: 'galgame' | 'topic') =>
             <span>
               <Icon class="icon" name="lucide:square-library" />
             </span>
-            <span class="name">{{ $t('rss.topic') }}</span>
+            <span class="name">话题</span>
           </a>
 
           <KunCopy
             :text="getLink('topic')"
-            :name="$t('rss.copy')"
+            name="复制 RSS"
             v-tooltip="{
               message: `${getLink('topic').slice(0, 30)}...`,
               position: 'bottom'
@@ -69,12 +69,12 @@ const getLink = (link: 'galgame' | 'topic') =>
             <span>
               <Icon class="icon" name="lucide:gamepad-2" />
             </span>
-            <span class="name">{{ $t('rss.galgame') }}</span>
+            <span class="name">Galgame</span>
           </a>
 
           <KunCopy
             :text="getLink('galgame')"
-            :name="$t('rss.copy')"
+            name="复制 RSS"
             v-tooltip="{
               message: `${getLink('galgame').slice(0, 30)}...`,
               position: 'bottom'
@@ -83,7 +83,7 @@ const getLink = (link: 'galgame' | 'topic') =>
         </div>
       </div>
 
-      <p class="hint">{{ $t('rss.update') }}</p>
+      <p class="hint">RSS 数据十七分钟更新一次</p>
 
       <div class="nav">
         <KunBackToPrevious />

@@ -103,16 +103,14 @@ const handleShowAdvance = () => {
 
 <template>
   <div class="btn-container">
-    <button class="advance-btn" @click="handleShowAdvance">
-      {{ $t('topic.panel.advance') }}
-    </button>
+    <button class="advance-btn" @click="handleShowAdvance">高级选项</button>
 
     <button v-if="!isReplyRewriting" class="confirm-btn" @click="handlePublish">
-      {{ $t('topic.panel.confirm') }}
+      确认发布
     </button>
 
     <button v-if="isReplyRewriting" class="rewrite-btn" @click="handleRewrite">
-      {{ $t('topic.panel.rewrite') }}
+      确定编辑
     </button>
   </div>
 </template>

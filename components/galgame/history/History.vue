@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { KUN_GALGAME_RESOURCE_PULL_REQUEST_ACTION_MAP } from '~/constants/galgame'
+
 const route = useRoute()
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
@@ -37,8 +39,12 @@ const { data, status } = await useFetch(
       <div class="info">
         <div>
           <span>{{ history.user.name }}</span>
-          <span>{{ $t(`galgame.history.${history.action}`) }}</span>
-          <span>{{ $t(`galgame.history.${history.type}`) }}</span>
+          <span>
+            {{ KUN_GALGAME_RESOURCE_PULL_REQUEST_ACTION_MAP[history.action] }}
+          </span>
+          <span>
+            {{ KUN_GALGAME_RESOURCE_PULL_REQUEST_TYPE_MAP[history.type] }}
+          </span>
           <span class="time">
             {{ formatTimeDifference(history.time) }}
           </span>

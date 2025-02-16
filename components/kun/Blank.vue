@@ -8,9 +8,7 @@ import { navigateTo } from '#app'
       <h1>
         <slot />
       </h1>
-      <button @click="navigateTo('/')">
-        {{ $t('kungalgame.home') }}
-      </button>
+      <button @click="navigateTo('/')">返回主页</button>
     </div>
   </div>
 </template>

@@ -40,7 +40,7 @@ const handleReload = () => location.reload()
           position: 'bottom'
         }"
       >
-        <span>{{ $t('message.offline') }}</span>
+        <span>您已离线</span>
         <Icon name="lucide:refresh-ccw" />
       </span>
     </h2>

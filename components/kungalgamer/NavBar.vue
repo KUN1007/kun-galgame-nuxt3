@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { KUN_USER_PAGE_NAV_MAP } from '~/contents/user'
 import type { Nav } from './utils/routeName'
 
 const { uid: storeUid, roles } = storeToRefs(usePersistUserStore())
@@ -68,7 +69,7 @@ const handleCollapsed = (item: Nav) => {
         <span class="nav-icon">
           <Icon class="icon" :name="iconMap[kun.name] ?? ''" />
         </span>
-        <span class="name">{{ $t(`user.nav.${kun.name}`) }}</span>
+        <span class="name">{{ KUN_USER_PAGE_NAV_MAP[kun.name] }}</span>
         <span
           class="chevron"
           v-if="kun.collapsed !== undefined"

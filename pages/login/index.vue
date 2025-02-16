@@ -1,10 +1,10 @@
 <script setup lang="ts">
 useHead({
-  title: `${t('seo.login.title')} - ${kungal.titleShort}`,
+  title: `登录 - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
-      content: t('seo.login.description')
+      content: '登录 鲲 Galgame 论坛, 世界上最萌的 Galgame 论坛! 欢迎回家!'
     }
   ]
 })

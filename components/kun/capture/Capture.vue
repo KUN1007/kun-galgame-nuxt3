@@ -104,7 +104,7 @@ const handleCloseCapture = () => {
       >
         <div class="validate">
           <div class="title">
-            <h2>{{ $t('AlertInfo.capture.title') }}</h2>
+            <h2>请回答下面的问题</h2>
           </div>
 
           <p class="question">{{ currentQuestion.text }}</p>
@@ -120,27 +120,23 @@ const handleCloseCapture = () => {
           </div>
 
           <div class="btn">
-            <button @click="submitAnswer">
-              {{ $t('AlertInfo.capture.submit') }}
-            </button>
-            <button @click="handleCloseCapture">
-              {{ $t('AlertInfo.capture.close') }}
-            </button>
+            <button @click="submitAnswer">提交</button>
+            <button @click="handleCloseCapture">关闭</button>
           </div>
 
           <div class="hint-container">
             <div class="hard" v-if="currentQuestion.isHard">HARD</div>
 
             <div v-if="isShowHint" class="hint">
-              <div>{{ $t('AlertInfo.capture.hint1') }}</div>
+              <div>真是杂鱼呢~♡这都答不出来~杂鱼~♡杂鱼~♡</div>
               <div>
-                {{ $t('AlertInfo.capture.hint2') }}
+                臭杂鱼♡，试试在页面上敲击
                 <span>kun</span>
-                {{ $t('AlertInfo.capture.hint3') }}
+                呢，杂鱼~♡杂鱼~♡3
               </div>
             </div>
             <div v-if="isShowAnswer" class="answer">
-              <div>{{ $t('AlertInfo.capture.hint4') }}</div>
+              <div>杂~~~鱼~♡杂鱼~♡你就看吧，最后害的还是你自己</div>
               <p>{{ questions[currentQuestionIndex].correctOption }}</p>
             </div>
           </div>

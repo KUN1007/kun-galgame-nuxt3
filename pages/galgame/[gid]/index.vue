@@ -99,9 +99,7 @@ if (galgame.value) {
 
     <KunNull :condition="!galgame && !isBanned" type="404" />
 
-    <KunBlank v-if="isBanned">
-      {{ $t('galgame.banned') }}
-    </KunBlank>
+    <KunBlank v-if="isBanned">此 Galgame 已被封禁</KunBlank>
   </div>
 </template>
 

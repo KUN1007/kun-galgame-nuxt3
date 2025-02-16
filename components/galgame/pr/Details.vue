@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import DOMPurify from 'isomorphic-dompurify'
 import { diffGalgame } from './compare'
+import { KUN_GALGAME_RESOURCE_PULL_REQUEST_I18N_FIELD_MAP } from '~/constants/galgame'
 import type { GalgamePRDetails } from '~/types/api/galgame-pr'
 import type { GalgameDetail } from '~/types/api/galgame'
 
@@ -104,7 +105,9 @@ const handleMergeRequest = async () => {
   <div class="details">
     <div class="diff">
       <div v-for="(kun, index) in diff" :key="index">
-        <p class="name">{{ $t(`galgame.pr.i18n.${kun.name}`) }}</p>
+        <p class="name">
+          {{ KUN_GALGAME_RESOURCE_PULL_REQUEST_I18N_FIELD_MAP[kun.name] }}
+        </p>
         <div
           class="value"
           v-html="DOMPurify.sanitize(kun.value.replace(/\\/g, ''))"

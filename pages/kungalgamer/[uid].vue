@@ -71,9 +71,7 @@ useHead({
 
     <KunNull :condition="!user && !isBanned" type="404" />
 
-    <KunBlank v-if="isBanned">
-      {{ $t('user.banned') }}
-    </KunBlank>
+    <KunBlank v-if="isBanned">此用户已被封禁</KunBlank>
 
     <KunFooter />
   </div>

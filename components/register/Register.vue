@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { KUN_REGISTER_FORM_FIELD_MAP } from '~/contents/auth'
 import { registerFormItem } from './registerFormItem'
 import { checkRegisterForm } from './checkRegister'
 import type { Pinia } from 'pinia'
@@ -82,7 +83,7 @@ const handleRegister = async () => {
         :key="item.index"
       >
         <label :for="item.value">
-          {{ $t(`register.${item.placeholder}`) }}
+          {{ KUN_REGISTER_FORM_FIELD_MAP[item.placeholder] }}
         </label>
         <KunInput
           :id="item.value"
@@ -102,32 +103,22 @@ const handleRegister = async () => {
       />
 
       <KunCheckBox v-model="isAgree">
-        <span>{{ $t('register.agree') }}</span>
-        <NuxtLink to="/agreement">
-          {{ $t('register.agreement') }}
-        </NuxtLink>
-        <NuxtLink to="/privacy">
-          {{ $t('register.privacy') }}
-        </NuxtLink>
+        <span>我同意</span>
+        <NuxtLink to="/agreement">用户协议</NuxtLink>
+        <NuxtLink to="/privacy">隐私政策</NuxtLink>
       </KunCheckBox>
 
-      <KunButton @click="handleRegister">
-        {{ $t('register.title') }}
-      </KunButton>
+      <KunButton @click="handleRegister">注册</KunButton>
     </form>
 
     <KunDivider margin="16px 0">
-      <span>{{ $t('login.or') }}</span>
+      <span>或</span>
     </KunDivider>
 
     <div class="more">
-      <NuxtLink to="/login">
-        {{ $t('login.title') }}
-      </NuxtLink>
+      <NuxtLink to="/login">登录</NuxtLink>
 
-      <NuxtLink to="/forgot">
-        {{ $t('login.forgot') }}
-      </NuxtLink>
+      <NuxtLink to="/forgot">忘记密码</NuxtLink>
     </div>
   </div>
 </template>

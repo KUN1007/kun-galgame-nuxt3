@@ -33,3 +33,22 @@ export const KUN_TOPIC_SECTION: Record<string, string> = {
   'o-patch': '补丁网站',
   'o-other': '其它'
 }
+
+export const KUN_TOPIC_PAGE_SORT_FIELD: Record<string, string> = {
+  views: '浏览',
+  created: '时间',
+  all: '全部分类'
+}
+
+export const KUN_TOPIC_DETAIL_STATUS: Record<string, string> = {
+  featured: '被推',
+  normal: '正常',
+  banned: '封禁',
+  pinned: '置顶',
+  essential: '精华'
+}
+
+export const KUN_TOPIC_REPLY_PANEL_POSITION_MAP: Record<string, string> = {
+  master: '狗修金',
+  reply: '杂鱼~♡'
+}
