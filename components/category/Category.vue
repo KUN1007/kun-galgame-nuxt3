@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import { KUN_TOPIC_CATEGORY } from '~/constants/topic'
+
 type Category = 'galgame' | 'technique' | 'others'
+
 const availableCategory: Category[] = ['galgame', 'technique', 'others']
+
 const { category } = storeToRefs(usePersistCategoryStore())
 
 const { data, pending } = await useLazyFetch(`/api/category`, {
@@ -19,14 +23,14 @@ const { data, pending } = await useLazyFetch(`/api/category`, {
         @click="category = cat"
         :class="category === cat ? 'active' : ''"
       >
-        {{ $t(`category.${cat}`) }}
+        {{ KUN_TOPIC_CATEGORY[cat] }}
       </span>
     </div>
 
     <CategorySection v-if="data && !pending" :sections="data" />
     <KunSkeletonCategory v-if="pending" />
 
-    <p class="hint">{{ $t('category.update') }}</p>
+    <p class="hint">页面数据十七分钟更新一次</p>
     <KunFooter />
   </div>
 </template>

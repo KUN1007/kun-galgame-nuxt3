@@ -10,11 +10,9 @@ defineProps<{
   <KunDivider margin="30px" color="var(--kungalgame-gray-4)">
     <slot />
     <span v-if="status !== 'pending'" @click="pageNumber++" class="loader">
-      {{ $t('home.load') }}
+      加载更多
     </span>
-    <span v-if="status === 'pending'">
-      {{ $t('home.loading') }}
-    </span>
+    <span v-if="status === 'pending'">少女祈祷中...</span>
   </KunDivider>
 </template>
 

@@ -3,8 +3,6 @@ import type { CSSProperties } from 'vue'
 
 const props = defineProps<{
   options: string[]
-  i18n?: string
-  discardI18n?: boolean
   styles?: CSSProperties
   chooserStyles?: CSSProperties
   position?: 'top' | 'bottom'
@@ -52,7 +50,7 @@ const handleSetOption = (value: string, index: number) => {
           :key="index"
           @click.stop.prevent="handleSetOption(kun, index)"
         >
-          <span>{{ discardI18n ? kun : $t(`${i18n}.${kun}`) }}</span>
+          <span>{{ kun }}</span>
           <span v-if="checkedValue === kun">
             <Icon class="icon" name="lucide:check" />
           </span>

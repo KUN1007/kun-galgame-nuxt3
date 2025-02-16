@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 const route = useRoute()
 const section = computed(() => (route.params as { section: string }).section)
 
@@ -11,7 +9,7 @@ const categoryMap: Record<string, string> = {
 }
 
 useHead({
-  title: `${t('seo.category.title')} - ${t('head.title')}`,
+  title: `${t('seo.category.title')} - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',

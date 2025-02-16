@@ -37,7 +37,7 @@ watch(
 
 <template>
   <div class="mode">
-    <span>{{ $t('header.settings.mode') }}</span>
+    <span>模式切换</span>
     <div class="mode-container">
       <span
         v-for="(mode, index) in modeItem"

@@ -1,18 +1,16 @@
 <script setup lang="ts">
 import type { HomeTopic } from '~/types/api/home'
 
-const { locale } = useI18n()
-
 defineProps<{
   topic: HomeTopic
 }>()
 </script>
 
 <template>
-  <NuxtLinkLocale class="topic" :to="`/topic/${topic.tid}`" v-kun-gradient>
+  <NuxtLink class="topic" :to="`/topic/${topic.tid}`" v-kun-gradient>
     <div class="title">
       <span>{{ topic.title }}</span>
-      <span>{{ formatTimeDifference(topic.time, locale) }}</span>
+      <span>{{ formatTimeDifference(topic.time) }}</span>
     </div>
 
     <div class="info">
@@ -43,7 +41,7 @@ defineProps<{
     <div v-if="hourDiff(topic.upvoteTime, 10)" class="featured">
       <Icon name="lucide:sparkles" />
     </div>
-  </NuxtLinkLocale>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>

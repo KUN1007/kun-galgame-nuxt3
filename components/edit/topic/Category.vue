@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { topicCategory } from '../utils/category'
+import { KUN_TOPIC_CATEGORY } from '~/constants/topic'
 import type { Category } from '../utils/category'
 
 const {
@@ -55,7 +56,7 @@ const handleClickCategory = (kun: Category) => {
       @click="handleClickCategory(kun)"
       :class="{ active: selectedCategories.includes(kun.name) }"
     >
-      {{ $t(`edit.topic.${kun.name}`) }}
+      {{ KUN_TOPIC_CATEGORY[kun.name] }}
     </span>
   </div>
 </template>

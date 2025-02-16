@@ -4,7 +4,6 @@ import { checkGalgamePublish } from '../utils/checkGalgamePublish'
 const { vndbId, name, introduction, aliases } = storeToRefs(
   usePersistEditGalgameStore()
 )
-const localePath = useLocalePath()
 
 const isPublishing = ref(false)
 
@@ -62,7 +61,7 @@ const handlePublishGalgame = async () => {
     await deleteImage('kun-galgame-publish-banner')
     usePersistEditGalgameStore().resetGalgameData()
 
-    navigateTo(localePath(`/galgame/${gid}`))
+    navigateTo(`/galgame/${gid}`)
     useComponentMessageStore().info('AlertInfo.edit.publishSuccess')
   }
 }
@@ -70,9 +69,7 @@ const handlePublishGalgame = async () => {
 
 <template>
   <div class="confirm">
-    <KunButton @click="handlePublishGalgame">
-      {{ $t('edit.galgame.confirm') }}
-    </KunButton>
+    <KunButton @click="handlePublishGalgame">确认发布 Galgame</KunButton>
   </div>
 </template>
 

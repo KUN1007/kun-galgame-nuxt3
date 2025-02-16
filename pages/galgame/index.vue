@@ -1,8 +1,6 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 useHead({
-  title: `${t('seo.galgame.title')} - ${t('head.title')}`,
+  title: `${t('seo.galgame.title')} - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',

@@ -5,8 +5,6 @@ const props = defineProps<{
   topic: TopicDetail
 }>()
 
-const { locale } = useI18n()
-
 const loliStatus = computed(() => {
   if (hourDiff(props.topic.upvoteTime, 10)) {
     return 'featured'
@@ -43,7 +41,7 @@ const loliStatus = computed(() => {
 
         <span class="time">
           {{
-            formatDate(topic.time, locale, {
+            formatDate(topic.time, {
               isShowYear: true,
               isPrecise: true
             })
@@ -55,7 +53,7 @@ const loliStatus = computed(() => {
         <TopicKUNGalgamerInfo v-if="topic.user" :user="topic.user">
           <span class="time-mobile">
             {{
-              formatDate(topic.time, locale, {
+              formatDate(topic.time, {
                 isShowYear: true,
                 isPrecise: true
               })
@@ -108,7 +106,7 @@ const loliStatus = computed(() => {
         >
           ×
           {{
-            formatDate(topic.edited, locale, {
+            formatDate(topic.edited, {
               isShowYear: true,
               isPrecise: true
             })

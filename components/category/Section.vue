@@ -1,8 +1,6 @@
 <script setup lang="ts">
+import { KUN_TOPIC_SECTION } from '~/constants/topic'
 import type { CategoryResponseData } from '~/types/api/category'
-
-const localePath = useLocalePath()
-const { locale } = useI18n()
 
 const props = defineProps<{
   sections: CategoryResponseData[]
@@ -13,35 +11,32 @@ const props = defineProps<{
   <section class="section" v-for="(sec, index) in props.sections" :key="index">
     <div class="section-title">
       <span>
-        {{ $t(`edit.topic.section.${sec.section}`) }}
+        {{ KUN_TOPIC_SECTION[sec.section] }}
       </span>
     </div>
 
-    <NuxtLinkLocale :to="`/section/${sec.section}`" class="content">
+    <NuxtLink :to="`/section/${sec.section}`" class="content">
       <div class="topic">
-        <span
-          @click.prevent="navigateTo(localePath(`/topic/${sec.topic.tid}`))"
-        >
+        <span @click.prevent="navigateTo(`/topic/${sec.topic.tid}`)">
           {{ sec.topic.title }}
         </span>
         <p>
-          {{ $t('category.publish') }}
-          {{ formatTimeDifference(sec.topic.time, locale) }}
+          {{ `发布于 ${formatTimeDifference(sec.topic.time)}` }}
         </p>
       </div>
 
       <div class="statistic">
         <div class="count">
-          <span>Topics</span>
+          <span>话题数</span>
           <span>{{ formatNumberWithCommas(sec.topics) }}</span>
         </div>
 
         <div class="views">
-          <span>Views</span>
+          <span>浏览数</span>
           <span>{{ formatNumberWithCommas(sec.views) }}</span>
         </div>
       </div>
-    </NuxtLinkLocale>
+    </NuxtLink>
   </section>
 </template>
 

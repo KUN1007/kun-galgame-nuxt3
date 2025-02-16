@@ -2,7 +2,6 @@
 import { checkGalgamePR } from '../../utils/checkGalgamePR'
 
 const { galgamePR } = storeToRefs(useTempGalgamePRStore())
-const localePath = useLocalePath()
 
 const isPublishing = ref(false)
 
@@ -10,23 +9,23 @@ const handlePublishGalgamePR = async () => {
   const seriesArray = galgamePR.value[0].series
     .toString()
     .split(',')
-    .map((o) => o.trim())
-    .filter((str) => str !== '')
+    .map((o: string) => o.trim())
+    .filter((str: string) => str !== '')
   const officialArray = galgamePR.value[0].official
     .toString()
     .split(',')
-    .map((o) => o.trim())
-    .filter((str) => str !== '')
+    .map((o: string) => o.trim())
+    .filter((str: string) => str !== '')
   const engineArray = galgamePR.value[0].engine
     .toString()
     .split(',')
-    .map((e) => e.trim())
-    .filter((str) => str !== '')
+    .map((e: string) => e.trim())
+    .filter((str: string) => str !== '')
   const tagsArray = galgamePR.value[0].tags
     .toString()
     .split(',')
-    .map((t) => t.trim())
-    .filter((str) => str !== '')
+    .map((t: string) => t.trim())
+    .filter((str: string) => str !== '')
   const pullRequest = {
     gid: galgamePR.value[0].gid,
     name: galgamePR.value[0].name,
@@ -41,12 +40,9 @@ const handlePublishGalgamePR = async () => {
   if (!checkGalgamePR(pullRequest)) {
     return
   }
-  const res = await useComponentMessageStore().alert({
-    'en-us': 'Confirm to publish visualnovel info update request?',
-    'ja-jp': 'ギャルゲームの情報更新リクエストを公開しますか？',
-    'zh-cn': '确定发布 Galgame 信息更新请求吗?',
-    'zh-tw': '確定發布 Galgame 信息更新請求嗎？'
-  })
+  const res = await useComponentMessageStore().alert(
+    '确定发布 Galgame 信息更新请求吗?'
+  )
   if (!res) {
     return
   }
@@ -66,7 +62,7 @@ const handlePublishGalgamePR = async () => {
   isPublishing.value = false
 
   if (result) {
-    navigateTo(localePath(`/galgame/${pullRequest.gid}`), {
+    navigateTo(`/galgame/${pullRequest.gid}`, {
       replace: true
     })
     useComponentMessageStore().info('AlertInfo.edit.prSuccess')
@@ -76,9 +72,7 @@ const handlePublishGalgamePR = async () => {
 
 <template>
   <div class="confirm">
-    <KunButton @click="handlePublishGalgamePR">
-      {{ $t('edit.pr.confirm') }}
-    </KunButton>
+    <KunButton @click="handlePublishGalgamePR">确定发布</KunButton>
   </div>
 </template>
 

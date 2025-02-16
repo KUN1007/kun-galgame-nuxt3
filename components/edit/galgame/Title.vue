@@ -8,13 +8,16 @@ defineProps<{
 
 <template>
   <KunHeader :size="2" :show-help="true">
-    <template #header>{{ $t('edit.galgame.title.name') }}</template>
+    <template #header>标题</template>
 
-    <template #help>{{ $t('edit.galgame.title.help') }}</template>
+    <template #help>
+      标题要求至少写一种, 非常建议全部填写 (如果游戏没有对应翻译可以不填写,
+      英语标题可以从 VNDB 自动获取到)
+    </template>
   </KunHeader>
 
   <div class="reference" v-if="titles.length">
-    <b>{{ $t('edit.galgame.title.reference') }}</b>
+    <b>参考标题（点击复制）</b>
     <span
       v-for="(title, index) in titles"
       :key="index"

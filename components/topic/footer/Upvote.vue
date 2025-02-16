@@ -13,20 +13,8 @@ const upvoteCount = ref(props.upvoteCount)
 
 const upvoteTopic = async () => {
   const res = await useComponentMessageStore().alert(
-    {
-      'en-us': 'Are you sure you want to upvote this topic?',
-      'ja-jp': 'このトピックを推しますか？',
-      'zh-cn': '您确定推这个话题吗?',
-      'zh-tw': '您確定推這個話題嗎？'
-    },
-    {
-      'en-us':
-        'Upvote a topic will consume 7 MoeMoePoints from you and give the recipient 3 MoeMoePoints.',
-      'ja-jp':
-        'トピックを推すと、7モエモエポイントが消費され、相手には3モエモエポイントが加算されます。',
-      'zh-cn': '推话题将会消耗您 7 萌萌点, 并给被推者增加 3 萌萌点。',
-      'zh-tw': '推話題將會消耗您 7 萌萌點，並給被推者增加 3 萌萌點。'
-    }
+    '您确定推这个话题吗?',
+    '推话题将会消耗您 7 萌萌点, 并给被推者增加 3 萌萌点。'
   )
   if (!res) {
     return
@@ -47,20 +35,8 @@ const upvoteTopic = async () => {
 
 const upvoteReply = async () => {
   const res = await useComponentMessageStore().alert(
-    {
-      'en-us': 'Are you sure you want to upvote this reply?',
-      'ja-jp': 'この返信を推しますか？',
-      'zh-cn': '您确定推这个回复吗?',
-      'zh-tw': '您確定推這個回覆嗎？'
-    },
-    {
-      'en-us':
-        'Upvote a reply will consume 2 MoeMoePoints from you and give the recipient 1 MoeMoePoints.',
-      'ja-jp':
-        '返信を推すと、2モエモエポイントが消費され、相手には1モエモエポイントが加算されます。',
-      'zh-cn': '推回复将会消耗您 2 萌萌点, 并给被推者增加 1 萌萌点。',
-      'zh-tw': '推回覆將會消耗您 2 萌萌點，並給被推者增加 1 萌萌點。'
-    }
+    '您确定推这个回复吗?',
+    '推回复将会消耗您 2 萌萌点, 并给被推者增加 1 萌萌点。'
   )
   if (!res) {
     return

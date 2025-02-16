@@ -38,7 +38,7 @@ watch(
   <div class="resource">
     <KunHeader :size="2">
       <template #header>
-        <span>{{ $t('galgame.resource.name') }}</span>
+        <span>资源链接</span>
 
         <span class="contribute" @click="handleClickContribute">
           <Icon class="icon" name="lucide:circle-plus" />
@@ -47,16 +47,10 @@ watch(
     </KunHeader>
 
     <div class="note">
-      <div>{{ $t('galgame.resource.proxy') }}</div>
+      <div>提示: 部分资源链接可能需要网络代理</div>
       <div>
-        <span>{{ $t('galgame.resource.alter') }}</span>
-        <a href="https://zi6.cc/" target="_blank" rel="noopener noreferrer">
-          zi6.cc
-        </a>
-        |
-        <a href="https://zi0.cc/" target="_blank" rel="noopener noreferrer">
-          zi0.cc
-        </a>
+        <span>如果您找不到想要的资源链接, 可以去看看友站</span>
+        <a href="https://www.touchgal.io/" target="_blank"> TouchGal</a>
       </div>
     </div>
 

@@ -170,7 +170,7 @@ watch(
 
     <div class="loading" v-if="editorInfo.loading.value">
       <Icon class="icon" name="svg-spinners:12-dots-scale-rotate" />
-      <span>{{ $t('edit.topic.loading') }}</span>
+      <span>正在加载编辑器...</span>
     </div>
   </div>
 </template>

@@ -6,6 +6,7 @@ import {
   topicCategory
 } from '../utils/category'
 import { intersection } from '../utils/intersection'
+import { KUN_TOPIC_SECTION } from '~/constants/topic'
 
 const sectionMap: Record<string, string[]> = {
   Galgame: galgameSection,
@@ -39,7 +40,7 @@ const handleSetSection = (name: string, value: string) => {
       rewriteSection.value.push(value)
     } else if (!rewriteSection.value.includes(value)) {
       rewriteSection.value = rewriteSection.value.filter(
-        (item) => item !== section[0]
+        (item: string) => item !== section[0]
       )
       rewriteSection.value.push(value)
     }
@@ -49,7 +50,7 @@ const handleSetSection = (name: string, value: string) => {
       editSection.value.push(value)
     } else if (!editSection.value.includes(value)) {
       editSection.value = editSection.value.filter(
-        (item) => item !== section[0]
+        (item: string) => item !== section[0]
       )
       editSection.value.push(value)
     }
@@ -72,7 +73,7 @@ const handleSetSection = (name: string, value: string) => {
         @set="(value) => handleSetSection(select.name, value)"
         position="top"
       >
-        <span>{{ $t(`edit.topic.${select.name}`) }}</span>
+        <span>{{ KUN_TOPIC_SECTION[select.name] }}</span>
       </KunSelect>
     </div>
   </div>

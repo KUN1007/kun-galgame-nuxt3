@@ -3,7 +3,6 @@ const { uid, name, moemoepoint } = storeToRefs(usePersistUserStore())
 const { messageStatus } = storeToRefs(useTempSettingStore())
 const messageStore = useComponentMessageStore()
 
-const localePath = useLocalePath()
 const container = ref<HTMLElement>()
 const isCheckIn = ref(true)
 
@@ -37,24 +36,28 @@ const handleCheckIn = async () => {
   moemoepoint.value += result
 
   if (result === 0) {
-    messageStore.info('AlertInfo.check.message1', '', 5000)
+    messageStore.info(
+      '杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡. 签到成功，您今日什么也没获得...',
+      5000
+    )
   } else if (result === 7) {
-    messageStore.info('AlertInfo.check.message3', '7', 5000)
+    messageStore.info(
+      '杂鱼~♡♡♡♡♡. 签到成功, 您今日好运获得了 7 萌萌点哦!',
+      5000
+    )
   } else {
-    messageStore.info('AlertInfo.check.message2', result.toString(), 5000)
+    messageStore.info(
+      `杂~~~鱼~♡. 签到成功，您今日获得了 ${result} 萌萌点`,
+      5000
+    )
   }
 }
 
 const logOut = async () => {
-  const res = await useComponentMessageStore().alert({
-    'en-us': 'Are you sure you want to log out?',
-    'ja-jp': 'ログアウトしてもよろしいですか？',
-    'zh-cn': '您确定退出登录吗？',
-    'zh-tw': '您確定退出登錄嗎？'
-  })
+  const res = await useComponentMessageStore().alert('您确定退出登录吗？')
   if (res) {
     usePersistUserStore().$reset()
-    navigateTo(localePath('/login'))
+    navigateTo('/login')
     useMessage(10110, 'success')
   }
 }
@@ -97,22 +100,20 @@ onMounted(async () => {
 
       <div class="func">
         <span>
-          <NuxtLinkLocale :to="`/kungalgamer/${uid}/info`">
-            {{ $t('header.user.profile') }}
-          </NuxtLinkLocale>
+          <NuxtLink :to="`/kungalgamer/${uid}/info`">个人主页</NuxtLink>
         </span>
 
-        <NuxtLinkLocale to="/message">
-          <span>{{ $t('header.user.message') }}</span>
+        <NuxtLink to="/message">
+          <span>我的消息</span>
           <span v-if="isShowMessageDot" class="message-dot"></span>
-        </NuxtLinkLocale>
+        </NuxtLink>
 
         <span v-if="!isCheckIn" @click="handleCheckIn">
-          <span>{{ $t('header.user.check') }}</span>
+          <span>每日签到</span>
           <span class="message-dot"></span>
         </span>
 
-        <span @click="logOut">{{ $t('header.user.logout') }}</span>
+        <span @click="logOut">退出登录</span>
       </div>
     </div>
   </div>

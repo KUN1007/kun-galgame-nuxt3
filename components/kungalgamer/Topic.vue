@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { TopicType } from '~/types/api/user'
 
-const { locale } = useI18n()
-
 const props = defineProps<{
   uid: number
   type: TopicType
@@ -24,14 +22,14 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/topics`, {
 <template>
   <div class="topic" v-if="data && data.topics.length">
     <div class="item" v-for="(topic, index) in data.topics" :key="index">
-      <NuxtLinkLocale :to="`/topic/${topic.tid}`">
+      <NuxtLink :to="`/topic/${topic.tid}`">
         <div class="title">
           {{ topic.title }}
         </div>
         <div class="time">
-          {{ formatDate(topic.time, locale, { isShowYear: true }) }}
+          {{ formatDate(topic.time, { isShowYear: true }) }}
         </div>
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
 
     <KunPagination

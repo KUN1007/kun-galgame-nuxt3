@@ -10,7 +10,6 @@ const props = defineProps<{
 
 const route = useRoute()
 
-const localePath = useLocalePath()
 const currentPageUid = computed(() => props.uid)
 const fullPath = computed(() =>
   route.fullPath.replace(/^\/[a-z]{2}-[a-z]{2}\//, '/')
@@ -49,11 +48,7 @@ const handleCollapsed = (item: Nav) => {
   if (item.collapsed !== undefined) {
     item.collapsed = !item.collapsed
   } else {
-    navigateTo(
-      localePath(
-        `/kungalgamer/${currentPageUid.value}/${item.router}`.toString()
-      )
-    )
+    navigateTo(`/kungalgamer/${currentPageUid.value}/${item.router}`.toString())
   }
 }
 </script>

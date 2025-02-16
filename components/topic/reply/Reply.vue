@@ -8,8 +8,6 @@ defineProps<{
   title: string
 }>()
 
-const { locale } = useI18n()
-
 const emits = defineEmits<{
   scrollPage: [scrollToReplyId: number]
 }>()
@@ -33,9 +31,9 @@ watch(
     :id="`k${reply.floor}`"
   >
     <div class="floor">
-      <NuxtLinkLocale :to="`/topic/${reply.tid}#k${reply.floor}`">
+      <NuxtLink :to="`/topic/${reply.tid}#k${reply.floor}`">
         {{ reply.floor }}
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
 
     <div class="content">
@@ -67,7 +65,7 @@ watch(
         <p class="time">
           <span>
             {{
-              formatDate(reply.time, locale, {
+              formatDate(reply.time, {
                 isShowYear: true,
                 isPrecise: true
               })
@@ -88,7 +86,7 @@ watch(
           >
             ×
             {{
-              formatDate(reply.edited, locale, {
+              formatDate(reply.edited, {
                 isShowYear: true,
                 isPrecise: true
               })

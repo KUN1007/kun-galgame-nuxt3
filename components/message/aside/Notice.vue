@@ -7,16 +7,10 @@ const props = defineProps<{
   refresh: () => void
 }>()
 
-const { locale } = useI18n()
-
 const handleDeleteMessage = async (mid: number) => {
-  const res = await useComponentMessageStore().alert({
-    'en-us':
-      'Are you sure you want to delete this message? This action cannot be undone.',
-    'ja-jp': 'メッセージを削除してもよろしいですか？この操作は元に戻せません。',
-    'zh-cn': '您确定要删除这条消息吗？此操作不可撤销。',
-    'zh-tw': '您確定要刪除这条消息嗎？此操作不可撤銷。'
-  })
+  const res = await useComponentMessageStore().alert(
+    '您确定要删除这条消息吗？此操作不可撤销。'
+  )
   if (!res) {
     return
   }
@@ -51,28 +45,28 @@ const handleDeleteMessage = async (mid: number) => {
         />
       </div>
       <div>
-        <NuxtLinkLocale :to="`/kungalgamer/${message.sender.uid}/info`">
+        <NuxtLink :to="`/kungalgamer/${message.sender.uid}/info`">
           {{ message.sender.name }}
-        </NuxtLinkLocale>
-        <span>{{ getMessageI18n(locale as Language, message) }}</span>
+        </NuxtLink>
+        <span>{{ getMessageI18n(message) }}</span>
       </div>
     </div>
 
     <div class="content">
       <KunAvatar :user="message.sender" size="32px" />
 
-      <NuxtLinkLocale
+      <NuxtLink
         class="link"
         :to="message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`"
       >
         <pre class="detail">{{ markdownToText(message.content) }}</pre>
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
 
     <div class="bottom">
       <span class="time">
         {{
-          formatDate(message.time, locale, {
+          formatDate(message.time, {
             isShowYear: true,
             isPrecise: true
           })

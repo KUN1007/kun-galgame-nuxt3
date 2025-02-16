@@ -3,85 +3,73 @@
 <template>
   <div class="top-bar">
     <KunPopover>
-      <span class="nav">{{ $t('header.topic.name') }}</span>
+      <span class="nav">话题</span>
       <template #content>
         <div class="menu">
-          <NuxtLinkLocale class="item" to="/pool">
-            <span>
-              {{ $t('header.topic.all') }}
-            </span>
-          </NuxtLinkLocale>
+          <NuxtLink class="item" to="/pool">
+            <span>所有话题</span>
+          </NuxtLink>
 
-          <NuxtLinkLocale class="item" to="/category">
-            <span>
-              <span>{{ $t('header.topic.category') }}</span>
-            </span>
-          </NuxtLinkLocale>
+          <NuxtLink class="item" to="/category">
+            <span>话题分类</span>
+          </NuxtLink>
         </div>
       </template>
     </KunPopover>
 
     <KunPopover>
-      <span class="nav">{{ $t('header.publish.name') }}</span>
+      <span class="nav">发布</span>
       <template #content>
         <div class="menu">
-          <NuxtLinkLocale class="item" to="/edit/topic">
-            <span>
-              {{ $t('header.publish.topic') }}
-            </span>
-          </NuxtLinkLocale>
+          <NuxtLink class="item" to="/edit/topic">
+            <span>发布话题</span>
+          </NuxtLink>
 
-          <NuxtLinkLocale class="item" to="/edit/galgame?type=publish">
+          <NuxtLink class="item" to="/edit/galgame?type=publish">
             <span>
-              <span>{{ $t('header.publish.galgame') }}</span>
+              <span>发布 Galgame</span>
             </span>
-          </NuxtLinkLocale>
+          </NuxtLink>
         </div>
       </template>
     </KunPopover>
 
     <KunPopover>
-      <span class="nav">{{ $t('header.about.name') }}</span>
+      <span class="nav">关于</span>
       <template #content>
         <div class="menu">
-          <NuxtLinkLocale class="item" to="/kungalgame">
-            <span>
-              {{ $t('header.about.about') }}
-            </span>
-          </NuxtLinkLocale>
+          <NuxtLink class="item" to="/kungalgame">
+            <span>关于我们</span>
+          </NuxtLink>
 
-          <NuxtLinkLocale class="item" to="/friend-links">
+          <NuxtLink class="item" to="/friend-links">
             <span>
-              <span>{{ $t('header.about.friends') }}</span>
+              <span>友情链接</span>
             </span>
-          </NuxtLinkLocale>
+          </NuxtLink>
 
-          <NuxtLinkLocale class="item" to="/contact">
+          <NuxtLink class="item" to="/contact">
             <span>
-              <span>{{ $t('header.about.contact') }}</span>
+              <span>加入群组</span>
             </span>
-          </NuxtLinkLocale>
+          </NuxtLink>
 
           <a href="https://nav.kungal.org" target="_blank" class="item">
             <span>
-              <span>{{ $t('header.about.navigation') }}</span>
+              <span>导航页面</span>
             </span>
           </a>
         </div>
       </template>
     </KunPopover>
 
-    <NuxtLinkLocale class="link" to="/galgame">
-      <span>
-        {{ $t('header.galgame') }}
-      </span>
-    </NuxtLinkLocale>
+    <NuxtLink class="link" to="/galgame">
+      <span>Galgame</span>
+    </NuxtLink>
 
-    <NuxtLinkLocale class="link" to="/">
-      <span>
-        {{ $t('header.home') }}
-      </span>
-    </NuxtLinkLocale>
+    <NuxtLink class="link" to="/">
+      <span>主页</span>
+    </NuxtLink>
   </div>
 </template>
 

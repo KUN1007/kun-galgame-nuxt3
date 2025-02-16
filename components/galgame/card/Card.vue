@@ -2,16 +2,15 @@
 import { platformIconMap } from '../utils/iconMap'
 import type { GalgameCard } from '~/types/api/galgame'
 
-const { locale } = useI18n()
-
 defineProps<{
   galgames: GalgameCard[]
 }>()
+// TODO: Galgame name
 </script>
 
 <template>
   <div class="grid-card">
-    <NuxtLinkLocale
+    <NuxtLink
       class="card"
       v-for="galgame in galgames"
       :key="galgame.gid"
@@ -21,7 +20,7 @@ defineProps<{
         <NuxtImg
           :src="galgame.banner.replace(/\.webp$/, '-mini.webp')"
           loading="lazy"
-          :alt="getPreferredLanguageText(galgame.name, locale as Language)"
+          :alt="galgame.name['zh-cn']"
           placeholder="/placeholder.webp"
         />
         <div class="platform">
@@ -31,7 +30,7 @@ defineProps<{
             </span>
           </template>
           <span v-if="!galgame.platform.length" class="preparing">
-            {{ $t('galgame.preparing') }}
+            准备中
           </span>
         </div>
         <div class="overlay">
@@ -57,7 +56,7 @@ defineProps<{
 
       <div class="card-content">
         <div class="title">
-          {{ getPreferredLanguageText(galgame.name, locale as Language) }}
+          {{ galgame.name['zh-cn'] }}
         </div>
 
         <div class="publisher">
@@ -66,12 +65,12 @@ defineProps<{
           <div class="info">
             <span class="name">{{ galgame.user.name }}</span>
             <span class="time">
-              {{ formatTimeDifference(galgame.time, locale) }}
+              {{ formatTimeDifference(galgame.time) }}
             </span>
           </div>
         </div>
       </div>
-    </NuxtLinkLocale>
+    </NuxtLink>
   </div>
 </template>
 

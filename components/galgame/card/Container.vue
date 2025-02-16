@@ -12,9 +12,7 @@ const { data, status } = await useFetch(`/api/galgame`, {
   <div class="container">
     <GalgameCard v-if="data?.galgames" :galgames="data?.galgames" />
 
-    <div class="declaration">
-      {{ $t('galgame.declaration') }}
-    </div>
+    <div class="declaration">我们不是资源的提供者, 我们只是资源的指路人</div>
 
     <KunPagination
       class="pagination"

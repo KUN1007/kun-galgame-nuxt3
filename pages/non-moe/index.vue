@@ -1,8 +1,6 @@
 <script setup lang="ts">
-const { t, locale } = useI18n()
-
 useHead({
-  title: `${t('seo.nonMoe.title')} - ${t('head.title')}`,
+  title: `${t('seo.nonMoe.title')} - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',

@@ -12,7 +12,6 @@ const { checkForm, checkRegister } = checkRegisterForm.asyncData(
   useNuxtApp().$pinia as Pinia
 )
 
-const localePath = useLocalePath()
 const isSendCode = ref(false)
 const isAgree = ref(false)
 
@@ -58,10 +57,10 @@ const handleRegister = async () => {
   })
 
   if (userInfo) {
-    info.info('AlertInfo.login.success')
+    info.info(`登陆成功! 欢迎来到 ${kungal.name}`)
     useMessage(10135, 'success')
     usePersistUserStore().setUserInfo(userInfo)
-    navigateTo(localePath('/'))
+    navigateTo('/')
   }
 
   isCaptureSuccessful.value = false
@@ -104,12 +103,12 @@ const handleRegister = async () => {
 
       <KunCheckBox v-model="isAgree">
         <span>{{ $t('register.agree') }}</span>
-        <NuxtLinkLocale to="/agreement">
+        <NuxtLink to="/agreement">
           {{ $t('register.agreement') }}
-        </NuxtLinkLocale>
-        <NuxtLinkLocale to="/privacy">
+        </NuxtLink>
+        <NuxtLink to="/privacy">
           {{ $t('register.privacy') }}
-        </NuxtLinkLocale>
+        </NuxtLink>
       </KunCheckBox>
 
       <KunButton @click="handleRegister">
@@ -122,13 +121,13 @@ const handleRegister = async () => {
     </KunDivider>
 
     <div class="more">
-      <NuxtLinkLocale to="/login">
+      <NuxtLink to="/login">
         {{ $t('login.title') }}
-      </NuxtLinkLocale>
+      </NuxtLink>
 
-      <NuxtLinkLocale to="/forgot">
+      <NuxtLink to="/forgot">
         {{ $t('login.forgot') }}
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
   </div>
 </template>

@@ -4,17 +4,13 @@ const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 
 <template>
   <KunHeader :size="2">
-    <template #header>
-      {{ $t('edit.pr.engine.name') }}
-    </template>
+    <template #header>游戏引擎</template>
   </KunHeader>
 
-  <div class="hint">
-    {{ $t('edit.pr.engine.hint') }}
-  </div>
+  <div class="hint">如果有多个引擎, 请用英语逗号分隔每个引擎</div>
 
   <KunTextarea
-    :placeholder="`${$t('edit.pr.engine.placeholder')}`"
+    placeholder="请输入游戏的引擎名，例如 KiriKiri, RUGP, Shiina Rio, 可以输入多个"
     v-model="galgamePR[0].engine"
   />
 </template>

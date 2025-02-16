@@ -40,18 +40,16 @@ onMounted(() => {
 
 <template>
   <div class="bio">
-    <div class="title">{{ $t('user.settings.bio') }}</div>
+    <div class="title">更改签名 (107 字之内)</div>
     <KunTextarea
       name="bio"
-      :placeholder="`${$t('user.settings.hint')}`"
+      placeholder="输入您的新签名，最大 107 个字符"
       rows="5"
       v-model="bioValue"
     >
     </KunTextarea>
 
-    <KunButton @click="handleChangeBio">
-      {{ $t('user.settings.confirm') }}
-    </KunButton>
+    <KunButton @click="handleChangeBio">确定更改</KunButton>
   </div>
 </template>
 

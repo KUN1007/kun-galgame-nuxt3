@@ -27,8 +27,8 @@ const handleFileChange = async (event: Event) => {
       @change="handleFileChange($event)"
     />
     <span class="custom" @click="handleCustomBackground">
-      <span class="custom-pc">{{ $t('header.settings.custom') }}</span>
-      <span class="custom-mobile">{{ $t('header.hamburger.background') }}</span>
+      <span class="custom-pc">自定义</span>
+      <span class="custom-mobile">自定义背景</span>
     </span>
   </div>
 </template>

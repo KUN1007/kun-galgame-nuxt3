@@ -82,7 +82,7 @@ const handleChangeAvatar = async () => {
 
 <template>
   <div class="avatar">
-    <div class="title">{{ $t('user.settings.avatar') }}</div>
+    <div class="title">更改头像</div>
 
     <div class="container">
       <div
@@ -111,11 +111,11 @@ const handleChangeAvatar = async () => {
 
       <div class="help">
         <div class="hint">
-          <span>{{ $t('user.settings.drag') }}</span>
-          <span>{{ $t('user.settings.click') }}</span>
+          <span>拖拽图片到方框内或</span>
+          <span>点击方框上传</span>
         </div>
         <KunButton :pending="isUploading" @click="handleChangeAvatar">
-          {{ $t('user.settings.confirm') }}
+          确定更改
         </KunButton>
       </div>
     </div>

@@ -32,9 +32,9 @@ onMounted(async () => {
 <template>
   <div class="container" v-if="data">
     <header>
-      <NuxtLinkLocale to="/message">
+      <NuxtLink to="/message">
         <Icon class="icon" name="lucide:chevron-left" />
-      </NuxtLinkLocale>
+      </NuxtLink>
       <h2>{{ $t('message.system') }}</h2>
     </header>
 

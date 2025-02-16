@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { GalgameResourceDetails } from '~/types/api/galgame-resource'
 
-const { locale } = useI18n()
-
 const { uid } = usePersistUserStore()
 const { resources, rewriteResourceId } = storeToRefs(
   useTempGalgameResourceStore()
@@ -109,11 +107,11 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
 
       <div class="password">
         <span v-if="details.code">
-          <span>{{ $t('galgame.resource.extract') }}: </span>
+          <span>提取码: </span>
           <KunCopy :text="details.code" />
         </span>
         <span v-if="details.password">
-          <span>{{ $t('galgame.resource.decompress') }}: </span>
+          <span>解压码: </span>
           <KunCopy :text="details.password" />
         </span>
       </div>
@@ -126,7 +124,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
         <KunAvatar :user="details.user" size="33px" />
         <span class="username">{{ details.user.name }}</span>
         <span class="time">
-          {{ formatTimeDifference(details.time, locale) }}
+          {{ formatTimeDifference(details.time) }}
         </span>
       </div>
 
@@ -148,7 +146,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
           @click="handleReportExpire(details)"
           :pending="isFetching"
         >
-          {{ $t('galgame.resource.expire') }}
+          报告过期
         </KunButton>
       </div>
     </div>

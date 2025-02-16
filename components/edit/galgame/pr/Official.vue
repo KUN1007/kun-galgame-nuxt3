@@ -4,19 +4,12 @@ const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 
 <template>
   <KunHeader :size="2">
-    <template #header>
-      {{ $t('edit.pr.official.name') }}
-    </template>
+    <template #header>官网</template>
   </KunHeader>
 
-  <div class="hint">
-    {{ $t('edit.pr.official.hint') }}
-  </div>
+  <div class="hint">如果有多个官网，请用英语逗号分隔每个链接</div>
 
-  <KunTextarea
-    :placeholder="`${$t('edit.pr.official.placeholder')}`"
-    v-model="galgamePR[0].official"
-  />
+  <KunTextarea placeholder="请输入官网链接" v-model="galgamePR[0].official" />
 </template>
 
 <style lang="scss" scoped>

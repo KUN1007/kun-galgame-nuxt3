@@ -6,7 +6,6 @@ const props = defineProps<{
 }>()
 
 const { uid, roles } = usePersistUserStore()
-const { locale } = useI18n()
 
 const initialImageUrl = ref('')
 const isShowUpload = ref(false)
@@ -78,7 +77,7 @@ onMounted(async () => {
 <template>
   <KunHeader :size="1">
     <template #header>
-      {{ getPreferredLanguageText(galgame.name, locale as Language) }}
+      {{ galgame.name['zh-cn'] }}
     </template>
   </KunHeader>
   <div class="banner">
@@ -93,19 +92,17 @@ onMounted(async () => {
         :initial-image="initialImageUrl"
         :size="1920"
         :aspect="16 / 9"
-        :placeholder="`${$t('galgame.banner.hint')}`"
+        placeholder="预览图不可包含 R18 等敏感内容\n宽度大于高度为好"
         @set-image="(img) => saveImage(img, `kun-galgame-rewrite-banner`)"
       />
-      <span class="confirm" @click="handleChangeBanner">
-        {{ $t('galgame.banner.confirm') }}
-      </span>
+      <span class="confirm" @click="handleChangeBanner">确定更改</span>
     </div>
     <span
       v-if="hasPermission"
       class="change"
       @click="isShowUpload = !isShowUpload"
     >
-      {{ $t('galgame.banner.change') }}>
+      更改图片 >
     </span>
   </div>
 </template>

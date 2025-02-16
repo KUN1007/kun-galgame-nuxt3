@@ -5,8 +5,6 @@ const props = defineProps<{
   logs: NonMoeLog[]
 }>()
 
-const { locale } = useI18n()
-
 const logs = computed(() => props.logs)
 </script>
 
@@ -14,25 +12,22 @@ const logs = computed(() => props.logs)
   <div class="log" v-for="(kun, index) in logs" :key="index">
     <div class="kungalgamer">
       @
-      <NuxtLinkLocale :to="`/kungalgamer/${kun.uid}/info`" target="_blank">
+      <NuxtLink :to="`/kungalgamer/${kun.uid}/info`" target="_blank">
         {{ kun.name }}
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
 
-    <div
-      class="reason"
-      v-html="getPreferredLanguageText(kun.description, locale as Language)"
-    />
+    <div class="reason" v-html="kun.description['zh-cn']" />
 
     <div class="footer">
       <div class="time">
         <Icon class="hourglass" name="lucide:clock-7" />
-        <span>{{ formatDate(kun.time, locale, { isShowYear: true }) }}</span>
+        <span>{{ formatDate(kun.time, { isShowYear: true }) }}</span>
       </div>
       <div class="result">
         <Icon class="warning" name="lucide:triangle-alert" />
         <span v-if="typeof kun.result === 'number'">
-          {{ $t('nonMoe.moemoepoint') }} - {{ kun.result }}
+          {{ `萌萌点 - ${kun.result}` }}
         </span>
         <span v-else> {{ kun.result }} </span>
       </div>

@@ -5,7 +5,6 @@ import { questionsCN } from './questionsCN'
 import { questionsTW } from './questionsTW'
 import type { Question } from './questionsEN'
 
-const { locale } = useI18n()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useComponentMessageStore()
 )
@@ -17,14 +16,7 @@ const questionsMap = {
   'zh-tw': questionsTW
 }
 
-const questions = ref<Question[]>(questionsMap[locale.value as Language])
-
-watch(
-  () => locale.value,
-  () => {
-    questions.value = questionsMap[locale.value as Language]
-  }
-)
+const questions = ref<Question[]>(questionsMap['zh-cn'])
 
 const randomizeQuestion = () => {
   return randomNum(0, questions.value.length - 1)

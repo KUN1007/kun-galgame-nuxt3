@@ -10,14 +10,7 @@ const handleChangeUsername = async () => {
     return
   }
 
-  const res = await message.alert({
-    'en-us':
-      'Are you sure you want to change your username? This will cost you 17 moemoepoints.',
-    'ja-jp':
-      'ユーザー名を変更してもよろしいですか？これには 17 萌萌ポイントが必要です。',
-    'zh-cn': '您确定更改用户名吗？这将会消耗您 17 萌萌点',
-    'zh-tw': '您確定要更改用戶名嗎？這將會消耗您 17 萌萌點'
-  })
+  const res = await message.alert('您确定更改用户名吗？这将会消耗您 17 萌萌点')
   if (!res) {
     return
   }
@@ -39,12 +32,12 @@ const handleChangeUsername = async () => {
 
 <template>
   <div class="username">
-    <div class="title">{{ $t('user.settings.username') }}</div>
-    <p>{{ $t('user.settings.usernameHint') }}</p>
+    <div class="title">更改用户名</div>
+    <p>
+      用户名为 1~17 位任意字符, 用户名不可重复，更改用户名将会消耗您 17 萌萌点
+    </p>
     <KunInput type="text" v-model="inputValue" />
-    <KunButton @click="handleChangeUsername">
-      {{ $t('user.settings.confirm') }}
-    </KunButton>
+    <KunButton @click="handleChangeUsername">确定更改</KunButton>
   </div>
 </template>
 

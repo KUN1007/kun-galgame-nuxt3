@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 definePageMeta({
   layout: 'message',
   middleware: 'auth'
@@ -32,9 +33,9 @@ onMounted(async () => {
 <template>
   <div class="container" v-if="data">
     <header>
-      <NuxtLinkLocale to="/message">
+      <NuxtLink to="/message">
         <Icon class="icon" name="lucide:chevron-left" />
-      </NuxtLinkLocale>
+      </NuxtLink>
       <h2>{{ $t('message.notice') }}</h2>
     </header>
 

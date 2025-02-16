@@ -4,12 +4,10 @@ const { autosaveCount } = storeToRefs(useTempEditStore())
 
 <template>
   <div class="settings">
-    <NuxtLinkLocale to="/topic/280" class="rules">
-      {{ $t(`edit.topic.rules`) }}
-    </NuxtLinkLocale>
+    <NuxtLink to="/topic/280" class="rules">发布规定</NuxtLink>
 
     <span class="save">
-      {{ `${$t('edit.topic.save')} × ${autosaveCount}` }}
+      {{ `自动保存 × ${autosaveCount}` }}
     </span>
   </div>
 </template>

@@ -73,6 +73,9 @@ importers:
       '@milkdown/vue':
         specifier: 7.6.2
         version: 7.6.2(@codemirror/language@6.10.8)(@codemirror/state@6.5.1)(@codemirror/view@6.36.2)(element-internals-polyfill@0.1.55)(vue@3.5.13(typescript@5.7.3))
+      '@nuxtjs/i18n':
+        specifier: ^9.1.5
+        version: 9.1.5(@vue/compiler-dom@3.5.13)(eslint@9.19.0(jiti@2.4.2))(magicast@0.3.5)(rollup@4.32.1)(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
       '@prosemirror-adapter/vue':
         specifier: ^0.4.0
         version: 0.4.0(vue@3.5.13(typescript@5.7.3))
@@ -155,9 +158,6 @@ importers:
       '@nuxtjs/color-mode':
         specifier: ^3.5.2
         version: 3.5.2(magicast@0.3.5)(rollup@4.32.1)
-      '@nuxtjs/i18n':
-        specifier: 9.1.4
-        version: 9.1.4(@vue/compiler-dom@3.5.13)(eslint@9.19.0(jiti@2.4.2))(magicast@0.3.5)(rollup@4.32.1)(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))
       '@nuxtjs/sitemap':
         specifier: 7.2.4
         version: 7.2.4(h3@1.14.0)(magicast@0.3.5)(rollup@4.32.1)(vite@6.0.11(@types/node@22.12.0)(jiti@2.4.2)(sass@1.83.4)(terser@5.37.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.7.3))
@@ -1834,8 +1834,8 @@ packages:
   '@nuxtjs/color-mode@3.5.2':
     resolution: {integrity: sha512-cC6RfgZh3guHBMLLjrBB2Uti5eUoGM9KyauOaYS9ETmxNWBMTvpgjvSiSJp1OFljIXPIqVTJ3xtJpSNZiO3ZaA==}
 
-  '@nuxtjs/i18n@9.1.4':
-    resolution: {integrity: sha512-MifuWAzgCDAePtaHO0IGxzluNI7gmLBEWADS9KECYy6Lk+H7Oy8XguDcBf3Rv196kWsCt3szxguqkYpZf33lRg==}
+  '@nuxtjs/i18n@9.1.5':
+    resolution: {integrity: sha512-dFbo3etm5xqG3vF4sLeVrR+wXVcxBszDCds5xtJBSESS7riJBtW83BujSMUnalbRxvGOLhJj+b6Qb8vj7Im/9Q==}
     engines: {node: ^14.16.0 || >=16.11.0}
 
   '@nuxtjs/sitemap@7.2.4':
@@ -8990,7 +8990,7 @@ snapshots:
       - rollup
       - supports-color
 
-  '@nuxtjs/i18n@9.1.4(@vue/compiler-dom@3.5.13)(eslint@9.19.0(jiti@2.4.2))(magicast@0.3.5)(rollup@4.32.1)(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))':
+  '@nuxtjs/i18n@9.1.5(@vue/compiler-dom@3.5.13)(eslint@9.19.0(jiti@2.4.2))(magicast@0.3.5)(rollup@4.32.1)(typescript@5.7.3)(vue@3.5.13(typescript@5.7.3))':
     dependencies:
       '@intlify/h3': 0.6.1
       '@intlify/shared': 10.0.5

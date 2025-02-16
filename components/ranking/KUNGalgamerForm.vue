@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { userSortItem, userIconMap } from './navSortItem'
+import { KUN_RANKING_USER_MAP } from '~/constants/ranking'
 
 const { user } = storeToRefs(useTempRankingStore())
 const isAscending = ref(false)
@@ -22,17 +23,17 @@ const handleClickSortOrder = () => {
 
 <template>
   <div class="user">
-    <div class="title">{{ $t('ranking.user.name') }}</div>
+    <div class="title">萌萌用户排行</div>
     <div class="nav">
       <div class="order" @click="handleClickSortOrder">
         <Transition name="order" mode="out-in">
           <div v-if="isAscending">
-            <span>{{ $t('ranking.asc') }}</span>
+            <span>升序</span>
             <Icon class="icon" name="lucide:arrow-up" />
           </div>
 
           <div v-else-if="!isAscending">
-            <span>{{ $t('ranking.desc') }}</span>
+            <span>降序</span>
             <Icon class="icon" name="lucide:arrow-down" />
           </div>
         </Transition>
@@ -40,7 +41,7 @@ const handleClickSortOrder = () => {
 
       <div class="sort">
         <Icon class="icon" :name="userIconMap[user.sortField]" />
-        <span>{{ $t('ranking.filter') }}</span>
+        <span>筛选</span>
         <div class="submenu">
           <div
             class="item"
@@ -49,7 +50,7 @@ const handleClickSortOrder = () => {
             @click="user.sortField = kun.sortField"
           >
             <span><Icon class="icon" :name="kun.icon" /></span>
-            <span>{{ $t(`ranking.user.${kun.name}`) }}</span>
+            <span>{{ KUN_RANKING_USER_MAP[kun.name] }}</span>
           </div>
         </div>
       </div>

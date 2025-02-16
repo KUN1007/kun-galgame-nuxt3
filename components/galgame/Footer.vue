@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { inject, ref } from 'vue'
 import type { GalgameDetail } from '~/types/api/galgame'
 
 const isShowHistory = ref(false)
@@ -9,24 +10,17 @@ const galgame = inject<GalgameDetail>('galgame')
 <template>
   <div class="footer" v-if="galgame">
     <span class="history" @click="isShowHistory = !isShowHistory">
-      {{ $t('galgame.history.name') }}
+      贡献历史
     </span>
     <div class="operation">
-      <span class="hint">
-        {{ $t('galgame.history.operation') }}
-      </span>
+      <span class="hint">Galgame 操作</span>
       <GalgameLike
         :gid="galgame.gid"
         :to-uid="galgame.user.uid"
         :likes-count="galgame.likes.count"
         :is-liked="galgame.likes.isLiked"
         v-tooltip="{
-          message: {
-            'en-us': 'Like',
-            'ja-jp': 'いいね',
-            'zh-cn': '点赞',
-            'zh-tw': '點贊'
-          },
+          message: '点赞',
           position: 'bottom'
         }"
       />
@@ -37,12 +31,7 @@ const galgame = inject<GalgameDetail>('galgame')
         :favorites-count="galgame.favorites.count"
         :is-favorite="galgame.favorites.isFavorite"
         v-tooltip="{
-          message: {
-            'en-us': 'Favorite',
-            'ja-jp': 'お気に入り',
-            'zh-cn': '收藏',
-            'zh-tw': '收藏'
-          },
+          message: '收藏',
           position: 'bottom'
         }"
       />

@@ -2,15 +2,13 @@
 definePageMeta({
   middleware: 'auth'
 })
-
-const localePath = useLocalePath()
 </script>
 
 <template>
   <div class="article">
     <KungalgamerPassword />
 
-    <span @click="navigateTo(localePath('/forgot'))" class="forget">
+    <span @click="navigateTo('/forgot')" class="forget">
       {{ $t('login.forgot') }}
     </span>
   </div>

@@ -6,7 +6,6 @@ const props = defineProps<{
   type: GalgameType
 }>()
 
-const { locale } = useI18n()
 const pageData = reactive({
   page: 1,
   limit: 50,
@@ -23,14 +22,14 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/galgames`, {
 <template>
   <div class="topic" v-if="data && data.galgames.length">
     <div class="item" v-for="(galgame, index) in data.galgames" :key="index">
-      <NuxtLinkLocale :to="`/galgame/${galgame.gid}`">
+      <NuxtLink :to="`/galgame/${galgame.gid}`">
         <div class="title">
-          {{ getPreferredLanguageText(galgame.name, locale as Language) }}
+          {{ galgame.name['zh-cn'] }}
         </div>
         <div class="time">
-          {{ formatDate(galgame.time, locale, { isShowYear: true }) }}
+          {{ formatDate(galgame.time, { isShowYear: true }) }}
         </div>
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
 
     <KunPagination
