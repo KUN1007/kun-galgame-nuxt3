@@ -46,7 +46,7 @@ export const kungal: KunSiteConfig = {
   name: KUN_SITE_NAME,
   title: KUN_SITE_TITLE,
   titleShort: KUN_SITE_SHORT,
-  titleTemplate: '%s | 开源 Galgame 网站',
+  titleTemplate: `%s | ${KUN_SITE_TITLE}`,
   description: KUN_SITE_DESCRIPTION,
   keywords: KUN_SITE_KEYWORDS,
   canonical: KUN_SITE_URL,

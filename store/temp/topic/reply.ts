@@ -1,7 +1,6 @@
 import type { ReplyStoreTemp } from '~/store/types/topic/reply'
 
-export const useTempReplyStore = defineStore({
-  id: 'tempTopicReply',
+export const useTempReplyStore = defineStore('tempTopicReply', {
   persist: false,
   state: (): ReplyStoreTemp => ({
     textCount: 0,

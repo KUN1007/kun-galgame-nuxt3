@@ -1,9 +1,8 @@
 import type { GalgameStorePersist } from '~/store/types/edit/galgame'
 
-export const usePersistEditGalgameStore = defineStore({
-  id: 'KUNGalgameEditGalgame',
+export const usePersistEditGalgameStore = defineStore('KUNGalgameEditGalgame', {
   persist: {
-    storage: persistedState.localStorage
+    storage: piniaPluginPersistedstate.localStorage()
   },
   state: (): GalgameStorePersist => ({
     vndbId: '',

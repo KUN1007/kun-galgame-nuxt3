@@ -4,8 +4,7 @@ interface Store {
   galgamePR: GalgameStoreTemp[]
 }
 
-export const useTempGalgamePRStore = defineStore({
-  id: 'tempGalgamePR',
+export const useTempGalgamePRStore = defineStore('tempGalgamePR', {
   persist: false,
   state: (): Store => ({
     galgamePR: []

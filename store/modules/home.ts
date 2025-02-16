@@ -1,7 +1,6 @@
 import type { HomeStorePersist } from '../types/home'
 
-export const usePersistKUNGalgameHomeStore = defineStore({
-  id: 'KUNGalgameHome',
+export const usePersistKUNGalgameHomeStore = defineStore('KUNGalgameHome', {
   persist: true,
   state: (): HomeStorePersist => ({
     fold: {

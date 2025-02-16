@@ -1,5 +1,4 @@
-export const usePersistKUNGalgameSearchStore = defineStore({
-  id: 'KUNGalgameSearch',
+export const usePersistKUNGalgameSearchStore = defineStore('KUNGalgameSearch', {
   persist: true,
   state: () => ({
     searchHistory: [] as string[]

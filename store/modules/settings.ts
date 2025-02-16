@@ -4,8 +4,7 @@ const SETTINGS_CUSTOM_BACKGROUND_IMAGE_NAME: string = 'kun-galgame-custom-bg'
 const SETTINGS_PUBLISH_Banner_IMAGE_NAME: string = 'kun-galgame-publish-banner'
 const SETTINGS_DEFAULT_FONT_FAMILY: string = 'system-ui'
 
-export const usePersistSettingsStore = defineStore({
-  id: 'KUNGalgameSettings',
+export const usePersistSettingsStore = defineStore('KUNGalgameSettings', {
   persist: true,
   state: (): KUNGalgameSettingsStore => ({
     showKUNGalgamePageTransparency: 77,

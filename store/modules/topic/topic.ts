@@ -1,7 +1,6 @@
 import type { TopicStorePersist } from '~/store/types/topic/topic'
 
-export const usePersistKUNGalgameTopicStore = defineStore({
-  id: 'KUNGalgameTopic',
+export const usePersistKUNGalgameTopicStore = defineStore('KUNGalgameTopic', {
   persist: true,
   state: (): TopicStorePersist => ({
     isShowAdvance: false,

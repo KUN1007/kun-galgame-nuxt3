@@ -7,8 +7,7 @@ interface Store {
   commentToUid: number
 }
 
-export const useTempGalgameResourceStore = defineStore({
-  id: 'tempGalgameResource',
+export const useTempGalgameResourceStore = defineStore('tempGalgameResource', {
   persist: false,
   state: (): Store => ({
     resources: [],

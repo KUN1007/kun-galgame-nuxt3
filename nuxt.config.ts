@@ -56,8 +56,8 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxtjs/sitemap',
     '@pinia/nuxt',
-    '@pinia-plugin-persistedstate/nuxt',
     '@vite-pwa/nuxt',
+    'pinia-plugin-persistedstate/nuxt',
     'dayjs-nuxt',
     'nuxt-schema-org'
   ],
@@ -81,7 +81,7 @@ export default defineNuxtConfig({
   },
 
   imports: {
-    dirs: ['./composables', './config', './utils', './store/**/*.ts']
+    dirs: ['./composables', './config', './utils']
   },
 
   site: {
@@ -117,7 +117,12 @@ export default defineNuxtConfig({
     serverBundle: false
   },
 
-  piniaPersistedstate: {
+  // Pinia store functions auto imports
+  pinia: {
+    storesDirs: ['./store/**']
+  },
+
+  piniaPluginPersistedstate: {
     cookieOptions: {
       maxAge: 60 * 60 * 24 * 7,
       sameSite: 'strict'

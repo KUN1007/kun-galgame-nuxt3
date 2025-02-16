@@ -1,8 +1,7 @@
 import type { Ctx } from '@milkdown/ctx'
 import type { EditStoreTemp } from '~/store/types/edit/topic'
 
-export const useTempEditStore = defineStore({
-  id: 'tempEdit',
+export const useTempEditStore = defineStore('tempEdit', {
   persist: false,
   state: (): EditStoreTemp => ({
     tid: 0,
