@@ -9,8 +9,7 @@ interface ResponseMap {
 }
 type ResponseType = keyof ResponseMap | 'json'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type KunOnResponseContext = FetchContext<any, ResponseType> & {
+type KunOnResponseContext = FetchContext<unknown, ResponseType> & {
   response: FetchResponse<ResponseType>
 }
 type KunOnResponseErrorContext<R extends ResponseType = 'json'> =
@@ -25,8 +24,7 @@ export const onResponse = (context: KunOnResponseContext) => {
       usePersistUserStore().$reset()
       useMessage(10250, 'error', 7777)
 
-      const nuxt = useNuxtApp()
-      navigateTo(nuxt.$localePath('/login'))
+      navigateTo('/login')
       Cookies.set('kungalgame-is-navigate-to-login', 'navigated')
       return
     }
@@ -37,6 +35,6 @@ export const onResponse = (context: KunOnResponseContext) => {
   }
 }
 
-const onResponseError = (context: KunOnResponseErrorContext) => {}
+const onResponseError = (_: KunOnResponseErrorContext) => {}
 
 export const kungalgameResponseHandler = { onResponse, onResponseError }
