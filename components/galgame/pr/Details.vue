@@ -30,20 +30,8 @@ const handleDeclineRequest = async () => {
     return
   }
   const res = await useComponentMessageStore().alert(
-    {
-      'en-us': 'Are you sure you want to decline the update request?',
-      'ja-jp': '更新リクエストを拒否してもよろしいですか？',
-      'zh-cn': '您确定拒绝更新请求吗？',
-      'zh-tw': '您確定拒絕更新請求嗎？'
-    },
-    {
-      'en-us':
-        'This action will not merge this update into the current visualnovel information',
-      'ja-jp':
-        'この操作では、この更新は現在のギャルゲーム情報にマージされません。',
-      'zh-cn': '这将不会将该更新合并至当前的 Galgame 信息中。',
-      'zh-tw': '這將不會將該更新合併至當前的 Galgame 信息中。'
-    }
+    '您确定拒绝更新请求吗？',
+    '这将不会将该更新合并至当前的 Galgame 信息中。'
   )
   if (!res) {
     return
@@ -66,20 +54,8 @@ const handleDeclineRequest = async () => {
 
 const handleMergeRequest = async () => {
   const res = await useComponentMessageStore().alert(
-    {
-      'en-us': 'Are you sure you want to merge the update request?',
-      'ja-jp': '更新リクエストをマージしてもよろしいですか？',
-      'zh-cn': '您确定合并更新请求吗？',
-      'zh-tw': '您確定合併更新請求嗎？'
-    },
-    {
-      'en-us':
-        'This will immediately merge the content from the update request into the current visualnovel',
-      'ja-jp':
-        'これにより、更新リクエストの内容が直ちに現在のギャルゲームにマージされます。',
-      'zh-cn': '这将会立即将更新请求中的内容合并到当前 Galgame 中。',
-      'zh-tw': '這將會立即將更新請求中的內容合併到當前 Galgame 中。'
-    }
+    '您确定合并更新请求吗？',
+    '这将会立即将更新请求中的内容合并到当前 Galgame 中。'
   )
   if (!res) {
     return

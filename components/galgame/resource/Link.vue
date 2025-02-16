@@ -40,20 +40,8 @@ const handleGetDetail = async (grid: number) => {
 
 const handleMarkValid = async (gid: number, grid: number) => {
   const res = await useComponentMessageStore().alert(
-    {
-      'en-us': 'Are you sure you want to re-mark the resource link as valid?',
-      'ja-jp': 'リソースリンクを有効として再マークしますか？',
-      'zh-cn': '您确定重新标记资源链接有效吗？',
-      'zh-tw': '您確定重新標記資源鏈接有效嗎？'
-    },
-    {
-      'en-us':
-        'If you have fixed the resource links, you can re-mark the resource links as valid.',
-      'ja-jp':
-        'リソースリンクを修正した場合、リンクを有効として再マークできます。',
-      'zh-cn': '若您修复了资源链接，您可以重新标记资源链接有效。',
-      'zh-tw': '若您修復了資源鏈接，您可以重新標記資源鏈接有效。'
-    }
+    '您确定重新标记资源链接有效吗？',
+    '若您修复了资源链接，您可以重新标记资源链接有效。'
   )
   if (!res) {
     return

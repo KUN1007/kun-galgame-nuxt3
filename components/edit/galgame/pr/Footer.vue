@@ -65,7 +65,7 @@ const handlePublishGalgamePR = async () => {
     navigateTo(`/galgame/${pullRequest.gid}`, {
       replace: true
     })
-    useComponentMessageStore().info('AlertInfo.edit.prSuccess')
+    useComponentMessageStore().info('创建更新请求成功')
   }
 }
 </script>

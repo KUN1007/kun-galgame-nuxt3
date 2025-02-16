@@ -64,7 +64,7 @@ const handlePublish = async () => {
 
   if (tid) {
     navigateTo(`/topic/${tid}`)
-    useComponentMessageStore().info('AlertInfo.edit.publishSuccess')
+    useComponentMessageStore().info('发布成功')
     usePersistEditTopicStore().resetTopicData()
   }
 }
@@ -83,7 +83,7 @@ const handleRewrite = async () => {
     return
   }
 
-  const res = await useComponentMessageStore().alert('确定 Rewrite 吗?')
+  const res = await useComponentMessageStore().alert('确定提交吗?')
   if (!res) {
     return
   }
@@ -104,7 +104,7 @@ const handleRewrite = async () => {
 
   if (result) {
     navigateTo(`/topic/${tid.value}`)
-    useComponentMessageStore().info('AlertInfo.edit.rewriteSuccess')
+    useComponentMessageStore().info('重新编辑成功')
     useTempEditStore().resetRewriteTopicData()
   }
 }

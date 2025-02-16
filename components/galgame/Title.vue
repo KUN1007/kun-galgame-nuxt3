@@ -25,22 +25,8 @@ const handleChangeBanner = async () => {
   }
 
   const res = await useComponentMessageStore().alert(
-    {
-      'en-us': 'Confirm to update banner?',
-      'ja-jp': 'バナーを更新しますか？',
-      'zh-cn': '确定更新预览图吗?',
-      'zh-tw': '確定更新預覽圖嗎？'
-    },
-    {
-      'en-us':
-        'Due to network caching, your new image may take some time to take effect. You can use Ctrl + F5 to refresh the page cache',
-      'ja-jp':
-        'ネットワークキャッシュのため、新しい画像が反映されるまでに時間がかかる場合があります。ページキャッシュを更新するには、Ctrl + F5 を使用してください。',
-      'zh-cn':
-        '由于网络缓存, 您的新图片可能需要一段时间才会生效, 可以使用 Ctrl + F5 刷新页面缓存。',
-      'zh-tw':
-        '由於網絡緩存，您的新圖片可能需要一些時間才能生效，可以使用 Ctrl + F5 刷新頁面緩存。'
-    }
+    '确定更新预览图吗?',
+    '由于网络缓存, 您的新图片可能需要一段时间才会生效, 可以使用 Ctrl + F5 刷新页面缓存。'
   )
   if (!res) {
     return
