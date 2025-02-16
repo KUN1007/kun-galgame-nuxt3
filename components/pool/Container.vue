@@ -91,11 +91,11 @@ onUnmounted(() => {
 
     <div class="load">
       <span class="loader" v-if="!isLoadingComplete" @click="handleLoadTopics">
-        {{ $t('pool.load') }}
+        点击继续加载话题
       </span>
 
       <span class="complete" v-else-if="isLoadingComplete">
-        {{ $t('pool.complete') }}
+        已经。。。一滴也不剩了
       </span>
     </div>
 

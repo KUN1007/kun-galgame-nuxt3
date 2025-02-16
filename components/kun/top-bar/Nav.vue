@@ -40,7 +40,7 @@ onMounted(async () => {
 
     <div class="kungalgame">
       <NuxtLink to="/">
-        <NuxtImg src="/favicon.webp" alt="KUN Visual Novel | 鲲 Galgame" />
+        <NuxtImg src="/favicon.webp" :alt="kungal.titleShort" />
         <span>{{ kungal.title }}</span>
       </NuxtLink>
     </div>

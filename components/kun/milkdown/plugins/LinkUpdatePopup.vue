@@ -81,9 +81,7 @@ const handleUpdateLink = () => {
       @keydown.enter="handleUpdateLink"
       v-model="linkHref"
     />
-    <button class="confirm-btn" @click="handleUpdateLink">
-      {{ $t('edit.topic.link.confirmUpdate') }}
-    </button>
+    <button class="confirm-btn" @click="handleUpdateLink">更新</button>
   </div>
 </template>
 

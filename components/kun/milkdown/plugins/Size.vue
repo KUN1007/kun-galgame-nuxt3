@@ -10,7 +10,7 @@ const size = computed(() => {
 
 <template>
   <div class="footer">
-    <span> {{ size + ` ${$t('edit.topic.word')}` }} </span>
+    <span> {{ `${size} 字` }} </span>
   </div>
 </template>
 

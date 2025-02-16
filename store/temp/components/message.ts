@@ -20,10 +20,9 @@ export const useComponentMessageStore = defineStore({
   }),
   getters: {},
   actions: {
-    info(infoMsg: string, infoTranslateParams?: string, durations?: number) {
+    info(infoMsg: string, durations?: number) {
       this.showInfo = true
       this.infoMsg = infoMsg
-      this.infoTranslateParams = infoTranslateParams ?? ''
       this.durations = durations ?? 3000
     },
 

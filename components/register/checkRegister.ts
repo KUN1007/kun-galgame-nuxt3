@@ -16,7 +16,7 @@ export const checkRegisterForm = {
       }
 
       if (!isValidName(name)) {
-        info.info('AlertInfo.login.invalidUsername')
+        info.info('非法的用户名，用户名为 1~17 位任意字符')
         return false
       }
 
@@ -26,7 +26,9 @@ export const checkRegisterForm = {
       }
 
       if (!isValidPassword(password)) {
-        info.info('AlertInfo.login.invalidPassword')
+        info.info(
+          '非法的密码格式，密码的长度为 6 到 107 位，必须包含至少一个英文字符和一个数字，可以选择性的包含 @!#$%^&*()_-+=\\/ 等特殊字符'
+        )
         return false
       }
 
@@ -45,7 +47,7 @@ export const checkRegisterForm = {
       }
 
       if (!isValidMailConfirmCode(code)) {
-        info.info('AlertInfo.login.invalidCode')
+        info.info('非法的邮箱验证码格式，邮箱验证码必须为 7 位数字或字母')
         return false
       }
 

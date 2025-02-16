@@ -11,7 +11,6 @@ const { layout } = storeToRefs(usePersistPoolStore())
         :styles="{ width: '100px' }"
         :options="['created', 'views']"
         :default-value="pageData.sortField"
-        i18n="pool"
         @set="(value) => (pageData.sortField = value as 'views' | 'created')"
         position="bottom"
       >
@@ -22,7 +21,6 @@ const { layout } = storeToRefs(usePersistPoolStore())
         :styles="{ width: '150px' }"
         :options="['all', 'galgame', 'technique', 'others']"
         :default-value="pageData.category"
-        i18n="pool"
         @set="
           (value) =>
             (pageData.category = value as

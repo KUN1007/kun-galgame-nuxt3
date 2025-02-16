@@ -38,7 +38,7 @@ watch(
       ...kungalgameResponseHandler
     })
     if (userInfo) {
-      info.info('AlertInfo.login.success')
+      info.info(`登陆成功! 欢迎来到 ${kungal.name}`)
       usePersistUserStore().setUserInfo(userInfo)
       navigateTo('/')
     }
@@ -58,9 +58,7 @@ watch(
       />
 
       <div>
-        <label for="username">
-          {{ $t('login.email') }}
-        </label>
+        <label for="username">用户名或邮箱</label>
         <KunInput
           id="username"
           v-model="loginForm.name"
@@ -70,9 +68,7 @@ watch(
       </div>
 
       <div>
-        <label for="password">
-          {{ $t('login.password') }}
-        </label>
+        <label for="password">密码</label>
         <KunInput
           id="password"
           v-model="loginForm.password"
@@ -81,23 +77,17 @@ watch(
         />
       </div>
 
-      <KunButton @click="handleLogin" class="btn">
-        {{ $t('login.title') }}
-      </KunButton>
+      <KunButton @click="handleLogin" class="btn">登录</KunButton>
     </form>
 
     <KunDivider margin="16px 0">
-      <span>{{ $t('login.or') }}</span>
+      <span>或</span>
     </KunDivider>
 
     <div class="more">
-      <NuxtLink to="/register">
-        {{ $t('register.title') }}
-      </NuxtLink>
+      <NuxtLink to="/register">注册</NuxtLink>
 
-      <NuxtLink to="/forgot">
-        {{ $t('login.forgot') }}
-      </NuxtLink>
+      <NuxtLink to="/forgot">忘记密码?</NuxtLink>
     </div>
   </div>
 </template>

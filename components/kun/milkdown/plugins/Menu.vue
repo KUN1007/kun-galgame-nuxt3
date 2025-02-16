@@ -12,6 +12,7 @@ import {
   toggleInlineCodeCommand
 } from '@milkdown/preset-commonmark'
 import { toggleStrikethroughCommand } from '@milkdown/preset-gfm'
+import { insertLinkPlugin } from './hyperlinkInsert'
 import type { UseEditorReturn } from '@milkdown/vue'
 import type { CmdKey } from '@milkdown/core'
 
@@ -74,12 +75,7 @@ const handleFileChange = async (event: Event) => {
       aria-label="kun-galgame-bold"
       @click="call(toggleStrongCommand.key)"
       v-tooltip="{
-        message: {
-          'en-us': 'Bold',
-          'ja-jp': '太字',
-          'zh-cn': '加粗',
-          'zh-tw': '加粗'
-        },
+        message: '加粗',
         position: 'bottom'
       }"
     >
@@ -91,12 +87,7 @@ const handleFileChange = async (event: Event) => {
       aria-label="kun-galgame-italic"
       @click="call(toggleEmphasisCommand.key)"
       v-tooltip="{
-        message: {
-          'en-us': 'Italic',
-          'ja-jp': '斜体',
-          'zh-cn': '斜体',
-          'zh-tw': '斜體'
-        },
+        message: '斜体',
         position: 'bottom'
       }"
     >
@@ -108,12 +99,7 @@ const handleFileChange = async (event: Event) => {
       aria-label="kun-galgame-strikethrough"
       @click="call(toggleStrikethroughCommand.key)"
       v-tooltip="{
-        message: {
-          'en-us': 'Strikethrough',
-          'ja-jp': '打消し線',
-          'zh-cn': '删除线',
-          'zh-tw': '刪除線'
-        },
+        message: '删除线',
         position: 'bottom'
       }"
     >
@@ -125,12 +111,7 @@ const handleFileChange = async (event: Event) => {
       aria-label="kun-galgame-list-bulleted"
       @click="call(wrapInBulletListCommand.key)"
       v-tooltip="{
-        message: {
-          'en-us': 'Bulleted List',
-          'ja-jp': '箇条書き',
-          'zh-cn': '无序列表',
-          'zh-tw': '無序列錶'
-        },
+        message: '无序列表',
         position: 'bottom'
       }"
     >
@@ -142,12 +123,7 @@ const handleFileChange = async (event: Event) => {
       aria-label="kun-galgame-list-numbered"
       @click="call(wrapInOrderedListCommand.key)"
       v-tooltip="{
-        message: {
-          'en-us': 'Ordered List',
-          'ja-jp': '番号付きリスト',
-          'zh-cn': '有序列表',
-          'zh-tw': '有序列錶'
-        },
+        message: '有序列表',
         position: 'bottom'
       }"
     >
@@ -159,12 +135,7 @@ const handleFileChange = async (event: Event) => {
       aria-label="kun-galgame-quote"
       @click="call(wrapInBlockquoteCommand.key)"
       v-tooltip="{
-        message: {
-          'en-us': 'Quote Block',
-          'ja-jp': '引用ブロック',
-          'zh-cn': '引用块',
-          'zh-tw': '引用塊'
-        },
+        message: '引用块',
         position: 'bottom'
       }"
     >
@@ -176,12 +147,7 @@ const handleFileChange = async (event: Event) => {
       aria-label="kun-galgame-horizontal"
       @click="call(insertHrCommand.key)"
       v-tooltip="{
-        message: {
-          'en-us': 'Horizontal Line',
-          'ja-jp': '水平線',
-          'zh-cn': '水平线',
-          'zh-tw': '水平線'
-        },
+        message: '水平线',
         position: 'bottom'
       }"
     >
@@ -193,12 +159,7 @@ const handleFileChange = async (event: Event) => {
       aria-label="kun-galgame-insert-link"
       @click="isShowInsertLink = true"
       v-tooltip="{
-        message: {
-          'en-us': 'Insert Link',
-          'ja-jp': 'リンク挿入',
-          'zh-cn': '插入链接',
-          'zh-tw': '插入鏈接'
-        },
+        message: '插入链接',
         position: 'bottom'
       }"
     >
@@ -221,12 +182,7 @@ const handleFileChange = async (event: Event) => {
       aria-label="kun-galgame-code-block"
       @click="call(createCodeBlockCommand.key, 'javascript')"
       v-tooltip="{
-        message: {
-          'en-us': 'Code Block',
-          'ja-jp': 'コードブロック',
-          'zh-cn': '代码块',
-          'zh-tw': '代碼塊'
-        },
+        message: '代码块',
         position: 'bottom'
       }"
     >
@@ -238,12 +194,7 @@ const handleFileChange = async (event: Event) => {
       aria-label="kun-galgame-code"
       @click="call(toggleInlineCodeCommand.key)"
       v-tooltip="{
-        message: {
-          'en-us': 'Inline Code',
-          'ja-jp': 'インラインコード',
-          'zh-cn': '行内代码',
-          'zh-tw': '行內代碼'
-        },
+        message: '行内代码',
         position: 'bottom'
       }"
     >
@@ -256,12 +207,7 @@ const handleFileChange = async (event: Event) => {
       v-if="props.isShowUploadImage"
       @click="input?.click()"
       v-tooltip="{
-        message: {
-          'en-us': 'Upload Image',
-          'ja-jp': '画像アップロード',
-          'zh-cn': '上传图片',
-          'zh-tw': '上傳圖片'
-        },
+        message: '上传图片',
         position: 'bottom'
       }"
     >

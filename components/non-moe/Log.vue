@@ -27,7 +27,7 @@ const logs = computed(() => props.logs)
       <div class="result">
         <Icon class="warning" name="lucide:triangle-alert" />
         <span v-if="typeof kun.result === 'number'">
-          {{ $t('nonMoe.moemoepoint') }} - {{ kun.result }}
+          {{ `萌萌点 - ${kun.result}` }}
         </span>
         <span v-else> {{ kun.result }} </span>
       </div>

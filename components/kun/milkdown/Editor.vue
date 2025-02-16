@@ -191,7 +191,7 @@ const editorInfo = useEditor((root) =>
       <span>
         <Icon class="icon" name="svg-spinners:12-dots-scale-rotate" />
       </span>
-      <span>{{ $t('edit.topic.loading') }}</span>
+      <span>正在加载编辑器...</span>
     </div>
   </div>
 </template>

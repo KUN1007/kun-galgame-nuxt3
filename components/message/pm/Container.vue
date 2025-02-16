@@ -137,7 +137,7 @@ const handleLoadHistoryMessages = async () => {
 <template>
   <div ref="historyContainer" class="history">
     <div class="loader" v-if="isShowLoader" @click="handleLoadHistoryMessages">
-      {{ $t('message.history') }}
+      加载历史消息
     </div>
 
     <KunNull :condition="!isShowLoader && messages.length > 30" type="null" />

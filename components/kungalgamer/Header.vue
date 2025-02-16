@@ -27,7 +27,7 @@ onMounted(() => (isShowProgress.value = true))
         :to="`/message/user/${props.uid}`"
       >
         <Icon class="icon" name="lucide:message-circle" />
-        <span>{{ $t('user.chat') }}</span>
+        <span>聊天</span>
       </NuxtLink>
       <span>{{ props.name }}</span>
     </div>

@@ -57,7 +57,7 @@ const handleRegister = async () => {
   })
 
   if (userInfo) {
-    info.info('AlertInfo.login.success')
+    info.info(`登陆成功! 欢迎来到 ${kungal.name}`)
     useMessage(10135, 'success')
     usePersistUserStore().setUserInfo(userInfo)
     navigateTo('/')

@@ -32,12 +32,12 @@ const handleChangeUsername = async () => {
 
 <template>
   <div class="username">
-    <div class="title">{{ $t('user.settings.username') }}</div>
-    <p>{{ $t('user.settings.usernameHint') }}</p>
+    <div class="title">更改用户名</div>
+    <p>
+      用户名为 1~17 位任意字符, 用户名不可重复，更改用户名将会消耗您 17 萌萌点
+    </p>
     <KunInput type="text" v-model="inputValue" />
-    <KunButton @click="handleChangeUsername">
-      {{ $t('user.settings.confirm') }}
-    </KunButton>
+    <KunButton @click="handleChangeUsername">确定更改</KunButton>
   </div>
 </template>
 

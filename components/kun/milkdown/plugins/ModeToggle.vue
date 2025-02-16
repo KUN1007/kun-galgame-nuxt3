@@ -30,12 +30,7 @@ const handleSetMode = (value: 'preview' | 'code') => {
     :default-value="route.name === 'edit-topic' ? topicMode : replyMode"
     @set="(value) => handleSetMode(value as 'preview' | 'code')"
     v-tooltip="{
-      message: {
-        'en-us': 'Text Mode / WYSIWYG mode',
-        'ja-jp': 'テキストモード / WYSIWYGモード',
-        'zh-cn': '文本模式 / 所见即所得模式',
-        'zh-tw': '文本模式 / 所見即所得模式'
-      },
+      message: '文本模式 / 所见即所得模式',
       position: 'bottom'
     }"
   />

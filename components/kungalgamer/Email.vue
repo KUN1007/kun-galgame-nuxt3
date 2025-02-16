@@ -54,29 +54,27 @@ const handleResetEmail = async () => {
 
 <template>
   <form class="email" @submit.prevent>
-    <div class="title">{{ $t('user.email.email') }}</div>
+    <div class="title">更改邮箱</div>
 
     <div class="current-email">
-      {{ $t('user.email.current') }} -> {{ data }}
+      {{ `您当前的邮箱是 -> ${data}` }}
     </div>
 
     <div class="input-container">
-      <label for="email">{{ $t('user.email.newEmail') }}</label>
+      <label for="email">请输入您的新邮箱</label>
       <KunInput id="email" v-model="input.newEmail" type="text" />
     </div>
 
     <div class="input-container">
-      <label for="code">{{ $t('user.email.code') }}</label>
+      <label for="code">请输入您的验证码</label>
       <KunInput id="code" v-model="input.code" type="text" />
     </div>
 
     <div class="btn">
       <KunButton @click="handleSendCode" v-if="!hasSentCodeEmail">
-        {{ $t('user.email.send') }}
+        发送验证码
       </KunButton>
-      <KunButton @click="handleResetEmail">
-        {{ $t('user.email.confirmEmail') }}
-      </KunButton>
+      <KunButton @click="handleResetEmail">确定更改邮箱</KunButton>
     </div>
   </form>
 </template>
