@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "3.0.10",
+  "version": "3.0.11",
   "packageManager": "pnpm@9.12.1",
   "private": true,
   "scripts": {
@@ -37,7 +37,6 @@
     "nuxt": "^3.15.4",
     "nuxt-schema-org": "^4.1.1",
     "prettier": "^3.5.1",
-    "sass": "^1.85.0",
     "typescript": "^5.7.3",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
@@ -63,6 +62,7 @@
     "@milkdown/vue": "7.6.2",
     "@nuxtjs/i18n": "^9.2.0",
     "@prosemirror-adapter/vue": "^0.4.0",
+    "@tailwindcss/postcss": "^4.0.6",
     "@tailwindcss/vite": "^4.0.6",
     "@types/jsonwebtoken": "^9.0.8",
     "animate.css": "^4.1.1",
@@ -80,6 +80,7 @@
     "nodemailer-smtp-transport": "^2.7.4",
     "pinia": "^3.0.1",
     "pinia-plugin-persistedstate": "^4.2.0",
+    "postcss": "^8.5.2",
     "rehype-prism-plus": "^2.0.0",
     "rehype-sanitize": "^6.0.0",
     "rehype-stringify": "^10.0.1",

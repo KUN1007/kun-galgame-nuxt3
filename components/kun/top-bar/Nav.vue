@@ -78,7 +78,6 @@ onMounted(async () => {
     display: flex;
     align-items: center;
     font-size: 20px;
-    color: var(--kungalgame-font-color-3);
 
     img {
       width: 50px;
