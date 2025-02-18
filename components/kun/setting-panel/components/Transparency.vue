@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const colorMode = useColorMode()
 const { showKUNGalgamePageTransparency } = storeToRefs(
   usePersistSettingsStore()
 )
@@ -8,8 +7,7 @@ watch(
   () => showKUNGalgamePageTransparency.value,
   debounce(() => {
     usePersistSettingsStore().setKUNGalgameTransparency(
-      showKUNGalgamePageTransparency.value,
-      colorMode.value as 'dark' | 'light'
+      showKUNGalgamePageTransparency.value
     )
   }, 300)
 )

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const colorMode = useColorMode()
 const { showKUNGalgamePageTransparency, showKUNGalgameBackgroundBlur } =
   storeToRefs(usePersistSettingsStore())
 
@@ -50,8 +49,7 @@ useSchemaOrg([
 
 onMounted(() => {
   usePersistSettingsStore().setKUNGalgameTransparency(
-    showKUNGalgamePageTransparency.value,
-    colorMode.value as 'dark' | 'light'
+    showKUNGalgamePageTransparency.value
   )
 
   usePersistSettingsStore().setKUNGalgameBackgroundBlur(

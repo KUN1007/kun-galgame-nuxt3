@@ -22,19 +22,12 @@ export const usePersistSettingsStore = defineStore('KUNGalgameSettings', {
     },
 
     // Set the page transparency
-    setKUNGalgameTransparency(trans: number, mode: 'dark' | 'light') {
+    setKUNGalgameTransparency(trans: number) {
       this.showKUNGalgamePageTransparency = trans
-      if (mode === 'light') {
-        document.documentElement.style.setProperty(
-          '--kungalgame-trans-white-5',
-          `rgba(255, 255, 255, ${trans / 100})`
-        )
-      } else {
-        document.documentElement.style.setProperty(
-          '--kungalgame-trans-white-5',
-          `rgba(15,37,61, ${trans / 100})`
-        )
-      }
+      document.documentElement.style.setProperty(
+        '--kun-global-opacity',
+        `${trans / 100}`
+      )
     },
 
     // Set the page background blur

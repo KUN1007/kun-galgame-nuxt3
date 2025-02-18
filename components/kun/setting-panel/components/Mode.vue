@@ -28,8 +28,7 @@ watch(
   () => colorMode.value,
   () => {
     usePersistSettingsStore().setKUNGalgameTransparency(
-      showKUNGalgamePageTransparency.value,
-      colorMode.value as 'dark' | 'light'
+      showKUNGalgamePageTransparency.value
     )
   }
 )

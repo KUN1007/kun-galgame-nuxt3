@@ -155,8 +155,7 @@ const handelCloseSettingsPanel = () => {
       border-radius: 10px;
       padding: 5px 7px;
       font-size: 20px;
-
-        }
+    }
 
     .loli {
       margin-left: auto;

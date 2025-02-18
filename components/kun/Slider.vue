@@ -73,10 +73,13 @@ onUnmounted(() => {
     @mousedown.passive="startDrag"
     @touchstart.passive.stop="startDrag"
   >
-    <div class="slider-track">
-      <div class="slider-filler" :style="{ width: fillerWidth }" />
+    <div class="bg-default-500 relative h-2 w-full rounded-full">
       <div
-        class="slider-thumb"
+        class="bg-primary-500 absolute h-full rounded-full"
+        :style="{ width: fillerWidth }"
+      />
+      <div
+        class="bg-background border-primary-500 absolute top-[50%] size-5 cursor-grab rounded-full border-2 shadow active:cursor-grabbing active:border-3"
         role="slider"
         :style="thumbStyle"
         @mousedown.passive="startDrag"
@@ -90,38 +93,3 @@ onUnmounted(() => {
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.slider-track {
-  position: relative;
-  background-color: var(--kungalgame-gray-4);
-  border-radius: 9999px;
-  width: 100%;
-  height: 7px;
-}
-
-.slider-filler {
-  position: absolute;
-  background-color: var(--kungalgame-blue-5);
-  height: 100%;
-  border-radius: inherit;
-}
-
-.slider-thumb {
-  position: absolute;
-  top: 50%;
-  width: 20px;
-  height: 20px;
-  background-color: var(--kungalgame-white);
-  border: 3px solid var(--kungalgame-blue-5);
-  border-radius: 50%;
-  cursor: grab;
-  box-shadow: var(--shadow);
-  transition: border 0.1s;
-
-  &:active {
-    cursor: grabbing;
-    border: 4px solid var(--kungalgame-blue-5);
-  }
-}
-</style>
