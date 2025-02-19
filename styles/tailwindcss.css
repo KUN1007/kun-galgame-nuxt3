@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(.kun-dark-mode *));
 
 :root {
   --kun-global-opacity: 0.7;
@@ -8,7 +8,7 @@
 
 @theme {
   --color-background: hsla(var(--background), var(--kun-global-opacity));
-  --color-foreground: hsla(var(--foreground), var(--kun-global-opacity));
+  --color-foreground: hsl(var(--foreground));
   --color-content1: hsl(var(--content1));
   --color-content2: hsl(var(--content2));
   --color-content3: hsl(var(--content3));
@@ -204,7 +204,7 @@
     --radius: 0.5rem;
   }
 
-  .dark {
+  .kun-dark-mode {
     /* Content color */
     --background: 0, 0%, 0%;
     --foreground: 210, 6%, 93%;
@@ -318,6 +318,7 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-default-200, currentColor);
+    color: var(--color-foreground);
   }
 }
 
@@ -334,10 +335,14 @@
       Microsoft YaHei,
       sans-serif !important;
   }
-}
 
-/* @layer base {
-  body {
-    @apply bg-background text-foreground;
+  // Custom scrollbar-hide syntax
+  .scrollbar-hide {
+    -ms-overflow-style: 'none';
+    scrollbar-width: 'none';
   }
-} */
+  .scrollbar-hide::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}

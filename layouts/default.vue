@@ -18,8 +18,11 @@ watch(
 </script>
 
 <template>
-  <div class="app" :style="{ backgroundImage: `url(${imageURL})` }">
-    <div class="top-bar">
+  <div
+    class="bg-background min-h-dvh overflow-hidden bg-cover bg-fixed bg-center bg-no-repeat"
+    :style="{ backgroundImage: `url(${imageURL})` }"
+  >
+    <div class="sticky top-[0] z-1007">
       <KunTopBar />
     </div>
 
@@ -27,39 +30,10 @@ watch(
 
     <NuxtImg
       v-if="showKUNGalgameBackLoli"
-      class="kohaku"
+      class="pointer-events-none fixed right-px bottom-px z-0 opacity-17 select-none"
       src="/image/kohaku.webp"
       loading="lazy"
       alt="kohaku"
     />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.app {
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
-  background-color: var(--kungalgame-white);
-  overflow: hidden;
-  background-color: var(--kungalgame-blue-0);
-  min-height: 100dvh;
-}
-
-.kohaku {
-  position: fixed;
-  user-select: none;
-  pointer-events: none;
-  bottom: 0;
-  right: 0;
-  opacity: 0.17;
-  z-index: 0;
-}
-
-.top-bar {
-  position: sticky;
-  top: 0;
-  z-index: 1007;
-}
-</style>

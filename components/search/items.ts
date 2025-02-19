@@ -1,29 +1,29 @@
 import type { SearchType } from '~/types/api/search'
 
 interface NavItem {
-  i18n: string
+  textValue: string
   value: SearchType
 }
 
 export const navItems: NavItem[] = [
   {
-    i18n: 'search.topic',
+    textValue: '话题',
     value: 'topic'
   },
   {
-    i18n: 'search.galgame',
+    textValue: 'Galgame',
     value: 'galgame'
   },
   {
-    i18n: 'search.user',
+    textValue: '用户',
     value: 'user'
   },
   {
-    i18n: 'search.reply',
+    textValue: '回复',
     value: 'reply'
   },
   {
-    i18n: 'search.comment',
+    textValue: '评论',
     value: 'comment'
   }
 ]

@@ -17,38 +17,21 @@ const handleClickAvatar = (event: MouseEvent) => {
 </script>
 
 <template>
-  <div class="kun-avatar" @click="handleClickAvatar($event)">
+  <div class="flex justify-center" @click="handleClickAvatar($event)">
     <NuxtImg
+      class="inline-block rounded-full"
       :height="size"
       :width="size"
       v-if="user.avatar"
       :src="user.avatar.replace(/\.webp$/, '-100.webp')"
       :alt="user.name"
     />
-    <span v-if="!user.avatar">
+    <span
+      :style="{ height: size, width: size }"
+      class="bg-primary-500 flex shrink-0 items-center justify-center rounded-full text-white"
+      v-if="!user.avatar"
+    >
       {{ user.name.slice(0, 1).toUpperCase() }}
     </span>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.kun-avatar {
-  display: flex;
-  justify-content: center;
-
-  img {
-    border-radius: 50%;
-    display: inline-block;
-  }
-
-  span {
-    height: v-bind(size);
-    width: v-bind(size);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--kungalgame-blue-5);
-    font-weight: bold;
-  }
-}
-</style>

@@ -114,20 +114,6 @@ const handleLoadMore = async () => {
   flex-direction: column;
 }
 
-.nav {
-  margin-bottom: 17px;
-  overflow-x: scroll;
-  height: 35px;
-
-  &::-webkit-scrollbar {
-    height: 1px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--kungalgame-gray-4);
-  }
-}
-
 .kun-divider {
   font-size: 16px;
 

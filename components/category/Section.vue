@@ -14,22 +14,22 @@ const props = defineProps<{
         <thead class="bg-default-50">
           <tr>
             <th
-              class="text-default-500 px-6 py-3 text-left text-xs font-medium tracking-wider uppercase"
+              class="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase"
             >
               分区
             </th>
             <th
-              class="text-default-500 px-6 py-3 text-left text-xs font-medium tracking-wider uppercase"
+              class="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase"
             >
               最新话题
             </th>
             <th
-              class="text-default-500 px-6 py-3 text-left text-xs font-medium tracking-wider uppercase"
+              class="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase"
             >
               话题总数
             </th>
             <th
-              class="text-default-500 px-6 py-3 text-left text-xs font-medium tracking-wider uppercase"
+              class="px-6 py-3 text-left text-xs font-medium tracking-wider uppercase"
             >
               浏览总数
             </th>
@@ -46,7 +46,7 @@ const props = defineProps<{
               <div class="text-default-900 text-sm">
                 {{ category.topic.title }}
               </div>
-              <div class="text-default-500 text-sm">
+              <div class="text-sm">
                 {{ new Date(category.topic.time * 1000).toLocaleString() }}
               </div>
             </td>
