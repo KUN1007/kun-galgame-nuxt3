@@ -47,7 +47,12 @@ const props = defineProps<{
                 {{ category.topic.title }}
               </div>
               <div class="text-sm">
-                {{ new Date(category.topic.time * 1000).toLocaleString() }}
+                {{
+                  formatDate(category.topic.time, {
+                    isPrecise: true,
+                    isShowYear: true
+                  })
+                }}
               </div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">

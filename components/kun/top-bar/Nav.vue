@@ -27,8 +27,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="nav-top">
-    <div class="hamburger">
+  <div class="nav-top flex h-full items-center">
+    <div class="cursor-pointer sm:hidden">
       <Icon
         class="icon"
         name="lucide:menu"
@@ -38,73 +38,6 @@ onMounted(async () => {
       <LazyKunTopBarHamburger />
     </div>
 
-    <div class="kungalgame">
-      <NuxtLink to="/">
-        <NuxtImg src="/favicon.webp" :alt="kungal.titleShort" />
-        <span>{{ kungal.titleShort }}</span>
-      </NuxtLink>
-    </div>
-
     <KunTopBarNavBar />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.return,
-.hamburger {
-  display: none;
-  cursor: pointer;
-
-  .icon {
-    font-size: 20px;
-  }
-}
-
-.return {
-  margin-right: 16px;
-}
-
-.nav-top {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.kungalgame {
-  display: flex;
-  align-items: center;
-
-  a {
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-
-    img {
-      width: 50px;
-      height: 50px;
-      margin-right: 30px;
-    }
-  }
-}
-
-@media (max-width: 1000px) {
-  .kungalgame {
-    span {
-      display: none;
-    }
-    img {
-      margin-right: 0 !important;
-    }
-  }
-}
-
-@media (max-width: 1000px) {
-  .kungalgame {
-    display: none;
-  }
-  .return,
-  .hamburger {
-    display: block;
-  }
-}
-</style>

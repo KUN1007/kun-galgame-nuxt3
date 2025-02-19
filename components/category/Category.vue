@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import { KUN_TOPIC_CATEGORY } from '~/constants/topic'
-
-type Category = 'galgame' | 'technique' | 'others'
-
-const availableCategory: Category[] = ['galgame', 'technique', 'others']
+import { kunCategoryAvailableItem, type Category } from '~/constants/category'
 
 const { category } = storeToRefs(usePersistCategoryStore())
 
-const { data, pending } = await useLazyFetch(`/api/category`, {
+const { data } = await useFetch(`/api/category`, {
   method: 'GET',
   query: { category },
   ...kungalgameResponseHandler
@@ -16,21 +12,14 @@ const { data, pending } = await useLazyFetch(`/api/category`, {
 
 <template>
   <div class="flex flex-col space-y-4">
-    <div>
-      <span
-        v-for="(cat, index) in availableCategory"
-        :key="index"
-        @click="category = cat"
-        :class="category === cat ? 'active' : ''"
-      >
-        {{ KUN_TOPIC_CATEGORY[cat] }}
-      </span>
-    </div>
+    <KunNav
+      :items="kunCategoryAvailableItem"
+      :default-value="category"
+      @set="(value) => (category = value as Category)"
+    />
 
-    <CategorySection v-if="data && !pending" :categories="data" />
-    <KunSkeletonCategory v-if="pending" />
+    <CategorySection v-if="data" :categories="data" />
 
-    <p class="hint">页面数据十七分钟更新一次</p>
     <KunFooter />
   </div>
 </template>
