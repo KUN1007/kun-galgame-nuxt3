@@ -1,5 +1,6 @@
 import UserModel from '~/server/models/user'
 import { isValidEmail } from '~/utils/validate'
+import { KUN_ALLOW_REGISTER_EMAIL } from '~/config/email-whitelist'
 import type { RegisterVerificationCodeRequestData } from '~/types/api/auth'
 
 export default defineEventHandler(async (event) => {
@@ -8,6 +9,14 @@ export default defineEventHandler(async (event) => {
 
   if (!isValidEmail(email)) {
     return kunError(event, 10302)
+  }
+
+  const emailDomain = email.split('@')[1]
+  const isEmailAllowed = KUN_ALLOW_REGISTER_EMAIL.some(
+    (whitelistedDomain) => whitelistedDomain === emailDomain
+  )
+  if (!isEmailAllowed) {
+    return kunError(event, 10305)
   }
 
   const usernameCount = await UserModel.countDocuments({
