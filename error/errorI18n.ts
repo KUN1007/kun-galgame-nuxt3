@@ -57,6 +57,8 @@ const errorMessagesEN: Record<number, string> = {
   10303: `Invalid Email, Password, or Verification Code Format (-B)`,
   10304: `Email address not registered. (-B)`,
   10305: `Your email has been banned. Please try using a different one. If you have any questions, feel free to contact us. (-B)`,
+  10306: `Your email has been permanently banned. (-B)`,
+  10307: `Your IP address has been permanently banned. (-B)`,
 
   // Message Part
   10401: `Cannot send a message to yourself. (-B)`,
@@ -173,6 +175,8 @@ const errorMessagesJP: Record<number, string> = {
   10303: `無効なメール、パスワード、または認証コードです (-B)`,
   10304: `このメールアドレスは登録されていません (-B)`,
   10305: `あなたのメールアドレスは禁止されています。別のものをお試しください。ご質問がある場合は、お気軽にお問い合わせください。 (-B)`,
+  10306: `あなたのメールアドレスは永久的に禁止され (-B)`,
+  10307: `あなたのIPアドレスも永久的に禁止されました。 (-B)`,
 
   10401: `自分にメッセージを送信することはできません。(-B)`,
 
@@ -286,6 +290,8 @@ const errorMessagesCN: Record<number, string> = {
   10303: `非法的邮箱, 密码, 或验证码 (-B)`,
   10304: `该邮箱地址未注册 (-B)`,
   10305: `您的邮箱已被封禁, 请换一个试试, 如果您有任何问题, 欢迎联系我们 (-B)`,
+  10306: `您的郵箱已被永久封禁 (-B)`,
+  10307: `您的 IP 地址已被永久封禁 (-B)`,
 
   10401: `不能给自己发送消息。(-B)`,
 
@@ -399,6 +405,8 @@ const errorMessagesTW: Record<number, string> = {
   10303: `非法的郵箱, 密碼, 或驗證碼 (-B)`,
   10304: `該郵箱地址未註冊 (-B)`,
   10305: `您的郵箱已被封禁，請換一個試試。如果您有任何問題，歡迎聯繫我們。 (-B)`,
+  10306: `您的邮箱已被永久封禁 (-B)`,
+  10307: `您的 IP 地址已被永久封禁 (-B)`,
 
   10401: `不能傳送訊息給自己。(-B)`,
 

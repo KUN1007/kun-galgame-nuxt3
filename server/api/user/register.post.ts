@@ -1,4 +1,3 @@
-import mongoose from 'mongoose'
 import { hash } from 'bcrypt'
 import UserModel from '~/server/models/user'
 import {
