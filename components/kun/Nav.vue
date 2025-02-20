@@ -34,8 +34,8 @@ const emits = defineEmits<{
           :class="
             cn(
               defaultValue === item.value
-                ? 'bg-primary-500 text-white'
-                : 'hover:text-primary-500',
+                ? 'bg-primary text-white'
+                : 'hover:text-primary',
               'cursor-pointer rounded-lg px-3 py-2 transition-colors'
             )
           "

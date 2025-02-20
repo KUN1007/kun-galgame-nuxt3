@@ -28,7 +28,7 @@ const handleClickAvatar = (event: MouseEvent) => {
     />
     <span
       :style="{ height: size, width: size }"
-      class="bg-primary-500 flex shrink-0 items-center justify-center rounded-full text-white"
+      class="bg-primary flex shrink-0 items-center justify-center rounded-full text-white"
       v-if="!user.avatar"
     >
       {{ user.name.slice(0, 1).toUpperCase() }}

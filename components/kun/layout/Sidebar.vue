@@ -1,135 +1,83 @@
 <script setup lang="ts">
 import { kunLayoutItem } from '~/constants/layout'
+
+const route = useRoute()
 </script>
 
 <template>
   <div
-    class="scrollbar-hide bg-default-100 fixed flex h-full w-3xs shrink-0 flex-col justify-between overflow-y-scroll p-3"
+    class="scrollbar-hide bg-default-100 fixed flex h-full w-3xs shrink-0 flex-col justify-between overflow-y-scroll"
     @click.stop
   >
     <div>
-      <div class="kungalgame" @click="navigateTo('/')">
-        <NuxtImg src="/favicon.webp" :alt="kungal.titleShort" />
-        <span>{{ kungal.titleShort }}</span>
+      <div
+        class="flex cursor-pointer items-center gap-3 p-3"
+        @click="navigateTo('/')"
+      >
+        <NuxtImg class="size-10" src="/favicon.webp" :alt="kungal.titleShort" />
+        <span class="text-xl">{{ kungal.name }}</span>
+        <span
+          class="bg-primary-100 text-primary rounded-full px-3 py-1 text-sm"
+        >
+          论坛
+        </span>
       </div>
 
-      <div class="mt-6 flex flex-col justify-center gap-6 border-y py-6">
-        <div
-          v-for="(kun, index) in kunLayoutItem"
+      <div class="mt-3 flex flex-col justify-center gap-3 border-y py-6">
+        <NuxtLink
+          v-for="(item, index) in kunLayoutItem"
+          :to="item.router"
+          :target="isValidURL(item.router) ? '_blank' : ''"
           :key="index"
-          class="flex items-center"
+          :class="
+            cn(
+              'flex items-center px-3 py-1',
+              route.fullPath === item.router
+                ? 'bg-primary-100 text-primary rounded-r-full'
+                : ''
+            )
+          "
         >
-          <span class="mr-3 flex items-center justify-center text-xl">
-            <Icon class="icon" :name="kun.icon" />
-          </span>
-          <NuxtLink
-            :to="kun.router"
-            :target="isValidURL(kun.router) ? '_blank' : ''"
+          <span
+            class="mr-3 flex items-center justify-center text-xl text-inherit"
           >
-            {{ kun.label }}
-          </NuxtLink>
-          <span class="text-secondary-500 ml-4 text-xs" v-if="kun.hint">
-            {{ kun.hint }}
+            <Icon class="icon text-inherit" :name="item.icon" />
           </span>
-        </div>
+          <span class="text-inherit">
+            {{ item.label }}
+          </span>
+          <span class="text-secondary ml-4 text-xs" v-if="item.hint">
+            {{ item.hint }}
+          </span>
+        </NuxtLink>
       </div>
     </div>
 
-    <div class="links">
+    <div class="my-4 flex w-full justify-around">
       <a
+        class="flex flex-col items-center justify-center"
         aria-label="KUN Visual Novel Open Source GitHub Repository | 鲲 Galgame 论坛开源 GitHub 仓库"
         :href="kungal.github"
         target="_blank"
       >
         <span><Icon class="icon" name="lucide:github" /></span>
-        <span>GitHub</span>
+        <span class="text-xs">GitHub</span>
       </a>
 
-      <NuxtLink to="/rss">
+      <NuxtLink class="flex flex-col items-center justify-center" to="/rss">
         <span><Icon class="icon" name="lucide:rss" /></span>
-        <span>RSS</span>
+        <span class="text-xs">RSS</span>
       </NuxtLink>
 
       <a
+        class="flex flex-col items-center justify-center"
         aria-label="KUN Visual Novel Official Telegram Group"
         :href="kungal.domain.telegram_group"
         target="_blank"
       >
         <span><Icon class="icon" name="ph:telegram-logo" /></span>
-        <span>Telegram</span>
+        <span class="text-xs">Telegram</span>
       </a>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.links {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  font-size: 20px;
-  margin: 17px 0;
-
-  & > a {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: var(--kungalgame-blue-5);
-
-    & > span {
-      &:first-child {
-        cursor: pointer;
-      }
-
-      &:last-child {
-        font-size: x-small;
-      }
-    }
-  }
-}
-
-.active {
-  transform: rotate(180deg);
-  transition: transform 0.2s;
-}
-
-.kungalgame {
-  display: flex;
-  align-items: center;
-
-  img {
-    height: 40px;
-    margin-right: 10px;
-  }
-
-  span {
-    font-size: 20px;
-  }
-}
-
-.slide-enter-active,
-.slide-leave-active {
-  transition: all 0.3s ease-in-out;
-}
-
-.slide-leave-active {
-  transition-delay: 0.25s;
-}
-
-.slide-enter-from,
-.slide-leave-to {
-  opacity: 0;
-}
-
-.slide-enter-active .container,
-.slide-leave-active .container {
-  transition: all 0.3s ease-in-out;
-}
-
-.slide-enter-from .container,
-.slide-leave-to .container {
-  transform: translateX(-100%);
-  opacity: 0;
-}
-</style>

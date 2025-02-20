@@ -73,13 +73,13 @@ onUnmounted(() => {
     @mousedown.passive="startDrag"
     @touchstart.passive.stop="startDrag"
   >
-    <div class="bg-default-500 relative h-2 w-full rounded-full">
+    <div class="bg-default relative h-2 w-full rounded-full">
       <div
-        class="bg-primary-500 absolute h-full rounded-full"
+        class="bg-primary absolute h-full rounded-full"
         :style="{ width: fillerWidth }"
       />
       <div
-        class="bg-background border-primary-500 absolute top-[50%] size-5 cursor-grab rounded-full border-2 shadow active:cursor-grabbing active:border-3"
+        class="bg-background border-primary absolute top-[50%] size-5 cursor-grab rounded-full border-2 shadow active:cursor-grabbing active:border-3"
         role="slider"
         :style="thumbStyle"
         @mousedown.passive="startDrag"

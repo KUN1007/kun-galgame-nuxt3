@@ -14,6 +14,14 @@
   --color-content3: hsl(var(--content3));
   --color-content4: hsl(var(--content4));
 
+  --color-default: hsla(var(--default-500));
+  --color-primary: hsl(var(--primary-500));
+  --color-secondary: hsl(var(--secondary-500));
+  --color-success: hsl(var(--success-500));
+  --color-warning: hsl(var(--warning-500));
+  --color-danger: hsl(var(--danger-500));
+  --color-info: hsl(var(--info-500));
+
   --color-default-50: hsla(var(--default-50), var(--kun-global-opacity));
   --color-default-100: hsla(var(--default-100), var(--kun-global-opacity));
   --color-default-200: hsla(var(--default-200), var(--kun-global-opacity));
