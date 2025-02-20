@@ -3,7 +3,8 @@ import { isValidEmail } from '~/utils/validate'
 import { KUN_ALLOW_REGISTER_EMAIL } from '~/config/email-whitelist'
 import {
   ADMIN_DELETE_EMAIL_CACHE_KEY,
-  ADMIN_DELETE_IP_CACHE_KEY
+  ADMIN_DELETE_IP_CACHE_KEY,
+  KUN_FORUM_DISABLE_REGISTER_KEY
 } from '~/config/admin'
 import type { RegisterVerificationCodeRequestData } from '~/types/api/auth'
 
@@ -12,6 +13,13 @@ export default defineEventHandler(async (event) => {
     await readBody(event)
   if (!isValidEmail(email)) {
     return kunError(event, 10302)
+  }
+
+  const isDisableRegister = await useStorage('redis').getItem(
+    KUN_FORUM_DISABLE_REGISTER_KEY
+  )
+  if (isDisableRegister) {
+    return kunError(event, 10308)
   }
 
   const isDeletedUserEmail = await useStorage('redis').getItem(

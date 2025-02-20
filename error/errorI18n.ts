@@ -56,9 +56,10 @@ const errorMessagesEN: Record<number, string> = {
   10302: `Invalid Email Format (-B)`,
   10303: `Invalid Email, Password, or Verification Code Format (-B)`,
   10304: `Email address not registered. (-B)`,
-  10305: `Your email has been banned. Please try using a different one. If you have any questions, feel free to contact us. (-B)`,
+  10305: `Your email address is temporarily unsupported. Please try using a different one. If you have any questions, feel free to contact us. (-B)`,
   10306: `Your email has been permanently banned. (-B)`,
   10307: `Your IP address has been permanently banned. (-B)`,
+  10308: `Due to a recent surge in website attacks, registration is not available at this moment. Please try again tomorrow afternoon. Make sure to come back! (-B)`,
 
   // Message Part
   10401: `Cannot send a message to yourself. (-B)`,
@@ -174,9 +175,10 @@ const errorMessagesJP: Record<number, string> = {
   10302: `無効なメール形式です (-B)`,
   10303: `無効なメール、パスワード、または認証コードです (-B)`,
   10304: `このメールアドレスは登録されていません (-B)`,
-  10305: `あなたのメールアドレスは禁止されています。別のものをお試しください。ご質問がある場合は、お気軽にお問い合わせください。 (-B)`,
+  10305: `現在、お客様のメールアドレスは一時的にサポートされていません。別のものをお試しください。ご質問がある場合は、お気軽にお問い合わせください。 (-B)`,
   10306: `あなたのメールアドレスは永久的に禁止され (-B)`,
   10307: `あなたのIPアドレスも永久的に禁止されました。 (-B)`,
+  10308: `最近、ウェブサイトが大量の攻撃を受けているため、現在の時間帯では登録できません。明日の午後にもう一度お試しください。ぜひお越しくださいね。 (-B)`,
 
   10401: `自分にメッセージを送信することはできません。(-B)`,
 
@@ -289,9 +291,10 @@ const errorMessagesCN: Record<number, string> = {
   10302: `非法的邮箱格式 (-B)`,
   10303: `非法的邮箱, 密码, 或验证码 (-B)`,
   10304: `该邮箱地址未注册 (-B)`,
-  10305: `您的邮箱已被封禁, 请换一个试试, 如果您有任何问题, 欢迎联系我们 (-B)`,
-  10306: `您的郵箱已被永久封禁 (-B)`,
+  10305: `您的邮箱地址暂时不支持, 请换一个试试, 如果您有任何问题, 欢迎联系我们 (-B)`,
+  10306: `您的邮箱已被永久封禁 (-B)`,
   10307: `您的 IP 地址已被永久封禁 (-B)`,
+  10308: `由于网站近日遭受大量攻击，当前时间段暂时不可注册，请明天下午再来，一定要来哦 (-B)`,
 
   10401: `不能给自己发送消息。(-B)`,
 
@@ -404,9 +407,10 @@ const errorMessagesTW: Record<number, string> = {
   10302: `非法的郵箱格式 (-B)`,
   10303: `非法的郵箱, 密碼, 或驗證碼 (-B)`,
   10304: `該郵箱地址未註冊 (-B)`,
-  10305: `您的郵箱已被封禁，請換一個試試。如果您有任何問題，歡迎聯繫我們。 (-B)`,
+  10305: `您的郵箱地址暫時不支持，請換一個試試。如果您有任何問題，歡迎聯繫我們。 (-B)`,
   10306: `您的邮箱已被永久封禁 (-B)`,
   10307: `您的 IP 地址已被永久封禁 (-B)`,
+  10308: `由於網站近日遭受大量攻擊，當前時間段暫時無法註冊，請明天下午再來，記得一定要來哦！ (-B)`,
 
   10401: `不能傳送訊息給自己。(-B)`,
 

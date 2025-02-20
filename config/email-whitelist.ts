@@ -1,4 +1,8 @@
 export const KUN_ALLOW_REGISTER_EMAIL = [
+  'qq.com',
+  '163.com',
+  'gmail.com',
+  'outlook.com'
   // '123mail.org',
   // '126.com',
   // '139.com',
@@ -135,7 +139,7 @@ export const KUN_ALLOW_REGISTER_EMAIL = [
   // 'postpro.net',
   // 'proinbox.com',
   // 'promessage.com',
-  'qq.com'
+  // 'qq.com'
   // 'realemail.net',
   // 'reallyfast.biz',
   // 'reallyfast.info',
