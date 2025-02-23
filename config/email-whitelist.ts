@@ -1,6 +1,6 @@
 export const KUN_ALLOW_REGISTER_EMAIL = [
   'qq.com',
-  '163.com',
+  // '163.com',
   'gmail.com',
   'outlook.com'
   // '123mail.org',

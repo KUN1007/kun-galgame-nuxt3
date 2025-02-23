@@ -89,8 +89,8 @@ export const galgame: Friend[] = [
   },
   {
     name: 'limulu',
-    link: 'https://listan.top/',
-    label: '一个简洁美观的Gal网站'
+    link: 'https://www.limulu.moe/',
+    label: '莉斯坦ACG – 一个简洁美观人性化的ACG资源站'
   },
   {
     name: 'zi0',
