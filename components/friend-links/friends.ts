@@ -90,7 +90,7 @@ export const galgame: Friend[] = [
   {
     name: 'limulu',
     link: 'https://www.limulu.moe/',
-    label: '莉斯坦ACG – 一个简洁美观人性化的ACG资源站'
+    label: '莉斯坦ACG - 一个简洁美观人性化的ACG资源站'
   },
   {
     name: 'zi0',
@@ -160,6 +160,11 @@ export const others: Friend[] = [
     link: 'https://www.acgbox.link/',
     label:
       'ACG 盒子, ACG 二次元导航网站, 收录 ACG 二次元相关的网站, 打造一个 ACG 二次元专属的网站。'
+  },
+  {
+    name: 'chooiin',
+    link: 'https://www.chooiin.com/',
+    label: '最初的声音，无限的未来。'
   }
 ]
 
