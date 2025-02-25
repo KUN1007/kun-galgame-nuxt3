@@ -1,7 +1,7 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "3.0.15",
-  "packageManager": "pnpm@9.12.1",
+  "version": "3.0.16",
+  "packageManager": "pnpm@10.4.1",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -104,6 +104,13 @@
       "safer-buffer": "npm:@nolyfill/safer-buffer@^1",
       "string.prototype.matchall": "npm:@nolyfill/string.prototype.matchall@^1",
       "which-typed-array": "npm:@nolyfill/which-typed-array@^1"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "aws-sdk",
+      "bcrypt",
+      "esbuild",
+      "sharp"
+    ]
   }
 }

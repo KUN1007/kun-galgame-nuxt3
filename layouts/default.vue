@@ -24,7 +24,7 @@ watch(
   >
     <KunLayoutSidebar />
 
-    <div class="w-full pl-0 md:pl-64">
+    <div class="max-w-7xl w-full mx-auto pl-0 md:pl-64">
       <div class="sticky top-[0] z-1007">
         <KunTopBar />
       </div>

@@ -8,7 +8,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
   <div
     class="bg-background z-10 mb-4 flex h-16 shrink-0 items-center justify-between"
   >
-    <div>通知文本</div>
+    <HomePinned />
     <KunTopBarAvatar />
   </div>
 

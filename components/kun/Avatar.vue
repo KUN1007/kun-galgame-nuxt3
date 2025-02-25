@@ -17,7 +17,7 @@ const handleClickAvatar = (event: MouseEvent) => {
 </script>
 
 <template>
-  <div class="flex justify-center" @click="handleClickAvatar($event)">
+  <div class="flex justify-center shrink-0" @click="handleClickAvatar($event)">
     <NuxtImg
       class="inline-block rounded-full"
       :height="size"

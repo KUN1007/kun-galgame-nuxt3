@@ -14,16 +14,17 @@ const route = useRoute()
         class="flex cursor-pointer items-center gap-3 p-3"
         @click="navigateTo('/')"
       >
-        <NuxtImg class="size-10" src="/favicon.webp" :alt="kungal.titleShort" />
+        <!-- <NuxtImg class="size-10" src="/favicon.webp" :alt="kungal.titleShort" />
         <span class="text-xl">{{ kungal.name }}</span>
         <span
           class="bg-primary-100 text-primary rounded-full px-3 py-1 text-sm"
         >
           论坛
-        </span>
+        </span> -->
+        ACME
       </div>
 
-      <div class="mt-3 flex flex-col justify-center gap-3 border-y py-6">
+      <div class="mt-3 flex flex-col justify-center gap-3 border-y py-6 pr-3">
         <NuxtLink
           v-for="(item, index) in kunLayoutItem"
           :to="item.router"
@@ -33,7 +34,7 @@ const route = useRoute()
             cn(
               'flex items-center px-3 py-1',
               route.fullPath === item.router
-                ? 'bg-primary-100 text-primary rounded-r-full'
+                ? 'bg-primary-100 font-bold text-primary rounded-r-full'
                 : ''
             )
           "
@@ -46,7 +47,7 @@ const route = useRoute()
           <span class="text-inherit">
             {{ item.label }}
           </span>
-          <span class="text-secondary ml-4 text-xs" v-if="item.hint">
+          <span class="text-primary ml-4 text-xs" v-if="item.hint">
             {{ item.hint }}
           </span>
         </NuxtLink>
