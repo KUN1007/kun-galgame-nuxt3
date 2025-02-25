@@ -8506,7 +8506,7 @@ snapshots:
 
   '@marijn/find-cluster-break@1.0.2': {}
 
-  '@milkdown/components@7.6.2(zpeiyv7no3t5ace3unb6je5cd4)':
+  '@milkdown/components@7.6.2(946f2aa620cc26f5c7dfe3e7c747118c)':
     dependencies:
       '@atomico/hooks': 4.4.1(atomico@1.79.2)(element-internals-polyfill@0.1.55)
       '@codemirror/language': 6.10.8
@@ -8586,7 +8586,7 @@ snapshots:
 
   '@milkdown/kit@7.6.2(@codemirror/language@6.10.8)(@codemirror/state@6.5.2)(@codemirror/view@6.36.2)(element-internals-polyfill@0.1.55)':
     dependencies:
-      '@milkdown/components': 7.6.2(zpeiyv7no3t5ace3unb6je5cd4)
+      '@milkdown/components': 7.6.2(946f2aa620cc26f5c7dfe3e7c747118c)
       '@milkdown/core': 7.6.2(@milkdown/ctx@7.6.2)(@milkdown/prose@7.6.2)(@milkdown/transformer@7.6.2(@milkdown/prose@7.6.2))
       '@milkdown/ctx': 7.6.2
       '@milkdown/plugin-block': 7.6.2(@milkdown/core@7.6.2(@milkdown/ctx@7.6.2)(@milkdown/prose@7.6.2)(@milkdown/transformer@7.6.2(@milkdown/prose@7.6.2)))(@milkdown/ctx@7.6.2)(@milkdown/prose@7.6.2)(@milkdown/transformer@7.6.2(@milkdown/prose@7.6.2))

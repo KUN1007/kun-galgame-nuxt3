@@ -34,7 +34,7 @@ watch(
   <div v-if="messageData" class="w-3xs shrink-0 space-y-3 rounded-lg">
     <h2 class="text-xl font-semibold">最新动态</h2>
 
-    <div class="space-y-4 rounded-lg border shadow">
+    <div class="rounded-lg border shadow">
       <div
         v-for="(message, index) in messageData"
         :key="index"
@@ -51,7 +51,7 @@ watch(
             :to="
               message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`
             "
-            class="hover:text-primary block break-all underline-offset-4 transition-colors"
+            class="hover:text-primary block break-all transition-colors"
           >
             {{ message.content }}
           </NuxtLink>
