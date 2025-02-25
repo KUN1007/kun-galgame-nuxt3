@@ -31,14 +31,14 @@ watch(
 </script>
 
 <template>
-  <div v-if="messageData" class="w-3xs shrink-0 rounded-lg bg-white">
-    <h2 class="mb-6 text-xl font-semibold">最新动态</h2>
+  <div v-if="messageData" class="w-3xs shrink-0 space-y-3 rounded-lg">
+    <h2 class="text-xl font-semibold">最新动态</h2>
 
-    <div class="space-y-4">
+    <div class="space-y-4 rounded-lg border shadow">
       <div
         v-for="(message, index) in messageData"
         :key="index"
-        class="group hover:bg-default-100 flex items-start space-x-3 rounded-lg p-3 transition-colors"
+        class="group flex items-start space-x-3 rounded-lg p-3 transition-colors"
       >
         <div
           class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
@@ -51,7 +51,7 @@ watch(
             :to="
               message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`
             "
-            class="block underline-offset-4 transition-colors hover:underline"
+            class="hover:text-primary block break-all underline-offset-4 transition-colors"
           >
             {{ message.content }}
           </NuxtLink>
@@ -59,7 +59,7 @@ watch(
           <div class="flex items-center space-x-2">
             <NuxtLink
               :to="`/kungalgamer/${message.uid}/info`"
-              class="hover:text-primary text-sm font-medium text-gray-600 transition-colors"
+              class="hover:text-foreground text-sm font-medium text-gray-600 transition-colors"
             >
               {{ message.name }}
             </NuxtLink>

@@ -3,18 +3,8 @@ const { fold } = storeToRefs(usePersistKUNGalgameHomeStore())
 </script>
 
 <template>
-  <div class="flex justify-between gap-2">
+  <div class="bg-background flex justify-between gap-3 rounded-lg p-3">
     <div>
-      <KunHeader :size="2">
-        <template #header>
-          <div class="header">
-            <span>最新话题</span>
-            <span class="suffix" @click="fold.topics = !fold.topics">
-              {{ fold.topics ? '折叠板块' : '展开板块' }}
-            </span>
-          </div>
-        </template>
-      </KunHeader>
       <HomeTopicContainer v-if="fold.topics" />
 
       <KunHeader :size="2">

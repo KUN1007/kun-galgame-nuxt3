@@ -6,9 +6,10 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 
 <template>
   <div
-    class="bg-background z-10 mb-4 flex h-16 shrink-0 items-center justify-between"
+    class="bg-background z-10 mb-4 flex h-16 shrink-0 items-center justify-between rounded-b-lg px-3"
   >
-    <HomePinned />
+    <!-- <HomePinned /> -->
+    <span>占位文本</span>
     <KunTopBarAvatar />
   </div>
 

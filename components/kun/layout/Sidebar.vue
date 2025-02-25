@@ -34,7 +34,7 @@ const route = useRoute()
             cn(
               'flex items-center px-3 py-1',
               route.fullPath === item.router
-                ? 'bg-primary-100 font-bold text-primary rounded-r-full'
+                ? 'bg-primary-100 rounded-r-full font-bold'
                 : ''
             )
           "

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { KUN_TOPIC_SECTION } from '~/constants/topic'
 
-const props = defineProps<{
+defineProps<{
   section: string[]
 }>()
 
@@ -10,49 +10,43 @@ const iconMap: Record<string, string> = {
   t: 'lucide:drafting-compass',
   o: 'lucide:circle-ellipsis'
 }
-</script>
 
-<template>
-  <span
-    class="section"
-    v-for="(sec, index) in props.section"
-    :key="index"
-    :class="sec.toLowerCase()[0]"
-  >
-    <Icon class="icon" :name="iconMap[sec[0]]" />
-    <span>{{ KUN_TOPIC_SECTION[sec] }}</span>
-  </span>
-</template>
-
-<style lang="scss" scoped>
-.section {
-  margin: 3px;
-  display: flex;
-  align-items: center;
-  padding: 3px 10px;
-  border-radius: 7px;
-  margin-right: 5px;
-  font-size: small;
-  font-weight: bold;
-
-  .icon {
-    font-size: 17px;
-    margin-right: 5px;
+const sectionColors: Record<string, { bg: string; text: string }> = {
+  g: {
+    bg: 'bg-primary-100',
+    text: 'text-primary-800'
+  },
+  t: {
+    bg: 'bg-success-100',
+    text: 'text-success-800'
+  },
+  o: {
+    bg: 'bg-secondary-100',
+    text: 'text-secondary-800'
   }
 }
 
-.g {
-  color: var(--kungalgame-blue-5);
-  border: 1.5px solid var(--kungalgame-blue-5);
+const getSectionStyle = (section: string) => {
+  const key = section.toLowerCase()[0]
+  return (
+    sectionColors[key] || { bg: 'bg-default-100', text: 'text-default-800' }
+  )
 }
+</script>
 
-.t {
-  color: var(--kungalgame-green-4);
-  border: 1.5px solid var(--kungalgame-green-4);
-}
-
-.o {
-  color: var(--kungalgame-pink-4);
-  border: 1.5px solid var(--kungalgame-pink-4);
-}
-</style>
+<template>
+  <span class="flex gap-1">
+    <span
+      v-for="(sec, index) in section"
+      :key="index"
+      :class="[
+        getSectionStyle(sec).bg,
+        getSectionStyle(sec).text,
+        'inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium'
+      ]"
+    >
+      <Icon :name="iconMap[sec.toLowerCase()[0]]" class="h-3 w-3" />
+      {{ KUN_TOPIC_SECTION[sec] }}
+    </span>
+  </span>
+</template>

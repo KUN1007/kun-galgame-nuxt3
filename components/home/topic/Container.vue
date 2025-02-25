@@ -22,37 +22,19 @@ watch(
     }
   }
 )
-
-const handleClose = () => {
-  topicData.value = topicData.value?.slice(0, 10)
-  pageData.page = 1
-}
 </script>
 
 <template>
-  <div class="container" v-if="topicData">
-    <div v-for="(topic, index) in topicData" :key="index">
-      <HomeTopicCard :topic="topic" />
-
-      <KunDivider margin="0 7px" color="var(--kungalgame-trans-blue-1)" />
+  <div class="space-y-3" v-if="topicData">
+    <div class="flex items-center gap-3">
+      <h2 class="text-xl font-semibold">最新话题</h2>
+      <NuxtLink class="text-default-600 hover:text-primary text-sm" to="/topic">
+        查看更多 >
+      </NuxtLink>
     </div>
+
+    <template v-for="(topic, index) in topicData" :key="index">
+      <HomeTopicCard :topic="topic" />
+    </template>
   </div>
-
-  <HomeLoader v-model="pageData.page" :status="status">
-    <span v-if="pageData.page !== 1" class="close" @click="handleClose">
-      折叠为初始状态
-    </span>
-  </HomeLoader>
 </template>
-
-<style lang="scss" scoped>
-.close {
-  margin-left: 16px;
-  cursor: pointer;
-  padding-right: 16px;
-
-  &:hover {
-    color: var(--kungalgame-blue-5);
-  }
-}
-</style>

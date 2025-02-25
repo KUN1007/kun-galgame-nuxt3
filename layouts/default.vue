@@ -19,12 +19,17 @@ watch(
 
 <template>
   <div
-    class="bg-background flex min-h-dvh overflow-hidden bg-cover bg-fixed bg-center bg-no-repeat"
+    class="fixed size-full bg-cover bg-fixed bg-center bg-no-repeat brightness-70 dark:brightness-30"
     :style="{ backgroundImage: `url(${imageURL})` }"
-  >
-    <KunLayoutSidebar />
+  />
 
-    <div class="max-w-7xl w-full mx-auto pl-0 md:pl-64">
+  <KunLayoutSidebar />
+
+  <div
+    class="flex min-h-dvh justify-center overflow-hidden"
+    :style="{ 'background-color': 'hsl(var(--background))' }"
+  >
+    <div class="z-10 m-0 w-full max-w-7xl md:mr-3 md:ml-68">
       <div class="sticky top-[0] z-1007">
         <KunTopBar />
       </div>
