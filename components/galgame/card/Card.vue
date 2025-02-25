@@ -5,66 +5,89 @@ import type { GalgameCard } from '~/types/api/galgame'
 defineProps<{
   galgames: GalgameCard[]
 }>()
-// TODO: Galgame name
 </script>
 
 <template>
-  <div class="grid-card">
+  <div
+    class="mx-auto mb-8 grid grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4"
+  >
     <NuxtLink
-      class="card"
+      class="group bg-background relative flex flex-col overflow-hidden rounded-lg border shadow"
       v-for="galgame in galgames"
       :key="galgame.gid"
       :to="`/galgame/${galgame.gid}`"
     >
-      <div class="banner">
+      <div class="relative overflow-hidden">
         <NuxtImg
           :src="galgame.banner.replace(/\.webp$/, '-mini.webp')"
           loading="lazy"
           :alt="galgame.name['zh-cn']"
           placeholder="/placeholder.webp"
+          class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        <div class="platform">
+
+        <div class="absolute top-2 left-2 flex gap-1">
           <template v-if="galgame.platform.length">
-            <span v-for="(platform, i) in galgame.platform" :key="i">
-              <Icon class="icon" :name="platformIconMap[platform]" />
+            <span
+              v-for="(platform, i) in galgame.platform"
+              :key="i"
+              class="flex size-6 items-center justify-center rounded-full bg-black/50 p-1.5 text-xs backdrop-blur-sm sm:size-8 sm:text-sm"
+            >
+              <Icon
+                :name="platformIconMap[platform]"
+                class="h-full w-full text-white"
+              />
             </span>
           </template>
-          <span v-if="!galgame.platform.length" class="preparing">
+          <span
+            v-else
+            class="rounded-full bg-black/50 px-3 py-1 text-xs text-white backdrop-blur-sm sm:text-sm"
+          >
             准备中
           </span>
         </div>
-        <div class="overlay">
-          <div class="data">
-            <span class="stat">
-              <Icon class="icon" name="lucide:mouse-pointer-click" />
-              <span>{{ galgame.views }}</span>
+
+        <div
+          class="absolute right-0 bottom-0 left-0 flex items-center justify-between bg-gradient-to-t from-black/60 to-transparent p-2 text-xs transition-opacity duration-300 sm:text-sm"
+        >
+          <div class="flex gap-3">
+            <span class="flex items-center gap-1">
+              <Icon class="text-white" name="lucide:mouse-pointer-click" />
+              <span class="text-white">{{ galgame.views }}</span>
             </span>
 
-            <span class="stat">
-              <Icon class="icon" name="lucide:thumbs-up" />
-              <span>{{ galgame.likes }}</span>
+            <span class="flex items-center gap-1">
+              <Icon class="text-white" name="lucide:thumbs-up" />
+              <span class="text-white">{{ galgame.likes }}</span>
             </span>
           </div>
 
-          <div class="language">
-            <span v-for="(lang, i) in galgame.language" :key="i">
+          <div class="flex gap-2">
+            <span
+              class="text-white"
+              v-for="(lang, i) in galgame.language"
+              :key="i"
+            >
               {{ lang.substring(0, 2).toUpperCase() }}
             </span>
           </div>
         </div>
       </div>
 
-      <div class="card-content">
-        <div class="title">
-          {{ galgame.name['zh-cn'] }}
-        </div>
+      <div class="flex flex-auto flex-col justify-between p-3">
+        <h3
+          class="text-middle hover:text-primary mb-3 line-clamp-2 font-medium transition-colors sm:text-lg"
+        >
+          {{ getPreferredLanguageText(galgame.name) }}
+        </h3>
 
-        <div class="publisher">
-          <KunAvatar :user="galgame.user" size="30px" />
-
-          <div class="info">
-            <span class="name">{{ galgame.user.name }}</span>
-            <span class="time">
+        <div class="flex items-center gap-3">
+          <KunAvatar :user="galgame.user" size="30px" class="rounded-full" />
+          <div class="flex flex-col">
+            <span class="text-sm font-medium">
+              {{ galgame.user.name }}
+            </span>
+            <span class="text-default-600 text-xs">
               {{ formatTimeDifference(galgame.time) }}
             </span>
           </div>
@@ -73,143 +96,3 @@ defineProps<{
     </NuxtLink>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.grid-card {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
-  gap: 10px;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  color: var(--kungalgame-font-color-3);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
-
-.banner {
-  position: relative;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    max-width: 100%;
-    transition: transform 0.5s ease;
-  }
-
-  .platform {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    z-index: 1;
-    color: var(--kungalgame-font-color-0);
-    background-color: var(--kungalgame-trans-white-5);
-    border-radius: 10px;
-    padding: 5px 7px;
-
-    span {
-      display: flex;
-      margin-right: 3px;
-
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-
-    .preparing {
-      color: var(--kungalgame-pink-4);
-      font-weight: bold;
-      font-size: small;
-    }
-  }
-
-  .overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 8px 8px;
-    background: linear-gradient(transparent, var(--kungalgame-mask-color-0));
-    color: var(--kungalgame-white-solid);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    font-size: small;
-
-    .data {
-      display: flex;
-      gap: 8px;
-
-      .stat {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-    }
-
-    .language {
-      display: flex;
-      gap: 8px;
-
-      span {
-        padding: 2px 4px;
-        background: var(rgba(255, 255, 255, 0.2));
-        border-radius: 4px;
-      }
-    }
-  }
-}
-
-.card:hover .banner img {
-  transform: scale(1.1);
-}
-
-.card-content {
-  padding: 7px;
-}
-
-.title {
-  color: var(--kungalgame-blue-5);
-  font-weight: bold;
-  margin: 7px 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-
-.publisher {
-  display: flex;
-  align-items: center;
-
-  .info {
-    display: flex;
-    flex-direction: column;
-
-    .name {
-      margin: 0 7px;
-      font-size: small;
-    }
-
-    .time {
-      color: var(--kungalgame-font-color-0);
-      font-size: small;
-      margin: 0 7px;
-    }
-  }
-}
-
-@media (max-width: 700px) {
-  .grid-card {
-    grid-template-columns: repeat(2, minmax(100px, 1fr));
-    gap: 7px;
-  }
-}
-</style>

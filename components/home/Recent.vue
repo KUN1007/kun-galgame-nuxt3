@@ -51,7 +51,7 @@ watch(
             :to="
               message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`
             "
-            class="hover:text-primary block break-all transition-colors"
+            class="hover:text-primary line-clamp-3 break-all transition-colors"
           >
             {{ message.content }}
           </NuxtLink>

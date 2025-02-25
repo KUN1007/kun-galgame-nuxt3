@@ -1,7 +1,4 @@
-export const getPreferredLanguageText = (
-  language: KunLanguage,
-  locale: Language
-): string => {
+export const getPreferredLanguageText = (language: KunLanguage): string => {
   const languagePriority: Record<Language, Language[]> = {
     'en-us': ['en-us', 'ja-jp', 'zh-tw', 'zh-cn'],
     'ja-jp': ['ja-jp', 'en-us', 'zh-tw', 'zh-cn'],
@@ -9,7 +6,7 @@ export const getPreferredLanguageText = (
     'zh-tw': ['zh-tw', 'zh-cn', 'ja-jp', 'en-us']
   }
 
-  const priorities = languagePriority[locale]
+  const priorities = languagePriority['zh-cn']
 
   for (const lang of priorities) {
     if (language[lang]) {

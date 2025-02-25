@@ -12,20 +12,9 @@ useHead({
 </script>
 
 <template>
-  <div class="root">
+  <div class="flex flex-col">
     <GalgameCardNav />
 
     <GalgameCardContainer />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.root {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
-  color: var(--kungalgame-font-color-3);
-}
-</style>

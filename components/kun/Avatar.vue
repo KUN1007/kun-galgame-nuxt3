@@ -17,7 +17,7 @@ const handleClickAvatar = (event: MouseEvent) => {
 </script>
 
 <template>
-  <div class="flex justify-center shrink-0" @click="handleClickAvatar($event)">
+  <div class="flex shrink-0 justify-center" @click="handleClickAvatar($event)">
     <NuxtImg
       class="inline-block rounded-full"
       :height="size"
@@ -28,7 +28,7 @@ const handleClickAvatar = (event: MouseEvent) => {
     />
     <span
       :style="{ height: size, width: size }"
-      class="bg-primary flex shrink-0 items-center justify-center rounded-full text-white"
+      class="bg-default flex shrink-0 items-center justify-center rounded-full text-white"
       v-if="!user.avatar"
     >
       {{ user.name.slice(0, 1).toUpperCase() }}
