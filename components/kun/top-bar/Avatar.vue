@@ -33,34 +33,30 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
       <Icon class="icon" name="uiw:setting-o" />
     </span>
 
-    <div class="avatar" v-if="name">
-      <div>
-        <NuxtImg
-          class="avatar-image"
-          v-if="avatarMin"
-          @click="showKUNGalgameUserPanel = true"
-          :src="avatarMin"
-          :alt="name"
-        />
-        <div class="status" :class="messageStatus"></div>
-      </div>
-      <span
-        class="guest"
-        @click="showKUNGalgameUserPanel = true"
-        v-if="!avatarMin"
-      >
-        {{ name }}
-      </span>
-    </div>
+    <KunPopover position="bottom-end">
+      <template #trigger>
+        <div class="avatar" v-if="name">
+          <div>
+            <NuxtImg
+              class="avatar-image"
+              v-if="avatarMin"
+              :src="avatarMin"
+              :alt="name"
+            />
+            <div class="status" :class="messageStatus"></div>
+          </div>
+          <span class="guest" v-if="!avatarMin">
+            {{ name }}
+          </span>
+        </div>
+      </template>
+
+      <LazyKunTopBarUserInfo />
+    </KunPopover>
 
     <div class="login" v-if="!name">
       <NuxtLink to="/login">登录</NuxtLink>
     </div>
-
-    <LazyKunTopBarUserInfo
-      v-if="showKUNGalgameUserPanel"
-      @close="showKUNGalgameUserPanel = false"
-    />
   </div>
 </template>
 

@@ -62,7 +62,6 @@ const selectOption = (value: string | number, index: number) => {
 
 <template>
   <div class="relative w-full">
-    <!-- Label -->
     <label
       v-if="label"
       :for="computedId"
@@ -71,7 +70,6 @@ const selectOption = (value: string | number, index: number) => {
       {{ label }}
     </label>
 
-    <!-- Select Button -->
     <button
       :id="computedId"
       type="button"
@@ -96,7 +94,6 @@ const selectOption = (value: string | number, index: number) => {
       />
     </button>
 
-    <!-- Options Dropdown -->
     <Transition name="fadeIn">
       <div
         v-show="isOpen"
@@ -118,7 +115,6 @@ const selectOption = (value: string | number, index: number) => {
               {{ option.label }}
             </span>
 
-            <!-- Selected checkmark -->
             <Icon
               v-if="modelValue === option.value"
               class="flex items-center pr-4"

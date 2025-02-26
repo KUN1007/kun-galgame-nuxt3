@@ -19,7 +19,7 @@ watch(
 
 <template>
   <div
-    class="fixed size-full bg-cover bg-fixed bg-center bg-no-repeat brightness-70 dark:brightness-30"
+    class="fixed size-full bg-cover bg-fixed bg-center bg-no-repeat brightness-50 dark:brightness-30"
     :style="{ backgroundImage: `url(${imageURL})` }"
   />
 
