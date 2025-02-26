@@ -26,13 +26,10 @@ const isRecentlyUpvoted = computed(() => {
       </h3>
 
       <div class="flex items-center gap-3">
-        <span
-          v-if="isRecentlyUpvoted"
-          class="flex items-center gap-1 rounded-full bg-yellow-100 px-2 py-1 text-xs font-medium text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-200"
-        >
-          <Icon name="lucide:sparkles" class="h-3 w-3" />
-          <span>该话题被推</span>
-        </span>
+        <KunBadge color="warning" v-if="isRecentlyUpvoted">
+          <Icon name="lucide:sparkles" class="size-4 text-inherit" />
+          <span class="text-inherit">该话题被推</span>
+        </KunBadge>
         <span class="shrink-0 text-sm text-gray-500 dark:text-gray-400">
           {{ formatTimeDifference(topic.time) }}
         </span>
@@ -45,7 +42,11 @@ const isRecentlyUpvoted = computed(() => {
     >
       <div class="flex flex-wrap items-center gap-2">
         <TopicSection :section="topic.section" />
-        <TopicTags :tags="topic.tags" :is-show-icon="false" />
+        <template v-if="topic.tags.length">
+          <KunBadge v-for="(tag, index) in topic.tags" :key="index">
+            {{ tag }}
+          </KunBadge>
+        </template>
       </div>
 
       <!-- Engagement Stats -->
