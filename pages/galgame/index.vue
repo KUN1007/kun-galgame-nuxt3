@@ -12,9 +12,5 @@ useHead({
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <GalgameCardNav />
-
-    <GalgameCardContainer />
-  </div>
+  <GalgameCardContainer />
 </template>

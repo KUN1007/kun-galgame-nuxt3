@@ -2,7 +2,8 @@
 import {
   typeOptions,
   languageOptions,
-  platformOptions
+  platformOptions,
+  sortFieldOptions
 } from '~/components/galgame/utils/options'
 import type {
   TypeOptions,
@@ -35,92 +36,71 @@ watch(
 </script>
 
 <template>
-  <div class="nav">
-    <KunSelect
-      :styles="{ width: '150px' }"
-      :options="typeOptions"
-      i18n="galgame.resource.type"
-      @set="(newVal) => (type = newVal as TypeOptions)"
-      position="bottom"
+  <div
+    class="bg-background z-10 flex w-full shrink-0 items-center justify-start rounded-lg border p-3 shadow"
+  >
+    <div
+      class="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
     >
-      {{ KUN_GALGAME_RESOURCE_TYPE_MAP[type] }}
-    </KunSelect>
-
-    <KunSelect
-      :styles="{ width: '150px' }"
-      :options="languageOptions"
-      i18n="galgame.resource.language"
-      @set="(newVal) => (language = newVal as LanguageOptions)"
-      position="bottom"
-    >
-      {{ KUN_GALGAME_RESOURCE_LANGUAGE_MAP[language] }}
-    </KunSelect>
-
-    <KunSelect
-      :styles="{ width: '150px' }"
-      :options="platformOptions"
-      i18n="galgame.resource.platform"
-      @set="(newVal) => (platform = newVal as PlatformOptions)"
-      position="bottom"
-    >
-      {{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[platform] }}
-    </KunSelect>
-
-    <KunSelect
-      :styles="{ width: '150px' }"
-      :options="['time', 'created', 'views']"
-      :default-value="sortField"
-      i18n="galgame.resource.sort"
-      @set="(value) => (sortField = value as 'time' | 'views')"
-      position="bottom"
-    >
-      <span>{{ KUN_GALGAME_RESOURCE_SORT_FIELD_MAP[sortField] }}</span>
-    </KunSelect>
-
-    <div class="order">
-      <span
-        :class="sortOrder === 'asc' ? 'active' : ''"
-        @click="sortOrder = 'asc'"
+      <KunSelect
+        label="游戏类型"
+        :model-value="type"
+        :options="typeOptions"
+        @set="(newVal) => (type = newVal as TypeOptions)"
+        position="bottom"
       >
-        <Icon class="icon" name="lucide:arrow-up" />
-      </span>
-      <span
-        :class="sortOrder === 'desc' ? 'active' : ''"
-        @click="sortOrder = 'desc'"
+        {{ KUN_GALGAME_RESOURCE_TYPE_MAP[type] }}
+      </KunSelect>
+
+      <KunSelect
+        label="游戏语言"
+        :options="languageOptions"
+        :model-value="language"
+        @set="(newVal) => (language = newVal as LanguageOptions)"
+        position="bottom"
       >
-        <Icon class="icon" name="lucide:arrow-down" />
-      </span>
+        {{ KUN_GALGAME_RESOURCE_LANGUAGE_MAP[language] }}
+      </KunSelect>
+
+      <KunSelect
+        label="游戏平台"
+        :options="platformOptions"
+        :model-value="platform"
+        @set="(newVal) => (platform = newVal as PlatformOptions)"
+        position="bottom"
+      >
+        {{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[platform] }}
+      </KunSelect>
+
+      <KunSelect
+        label="排序"
+        :options="sortFieldOptions"
+        :model-value="sortField"
+        @set="(value) => (sortField = value as 'time' | 'views')"
+        position="bottom"
+      >
+        <span>{{ KUN_GALGAME_RESOURCE_SORT_FIELD_MAP[sortField] }}</span>
+      </KunSelect>
+
+      <div class="order">
+        <span
+          :class="sortOrder === 'asc' ? 'active' : ''"
+          @click="sortOrder = 'asc'"
+        >
+          <Icon class="icon" name="lucide:arrow-up" />
+        </span>
+        <span
+          :class="sortOrder === 'desc' ? 'active' : ''"
+          @click="sortOrder = 'desc'"
+        >
+          <Icon class="icon" name="lucide:arrow-down" />
+        </span>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.nav {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: var(--kungalgame-trans-white-5);
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-  margin-bottom: 10px;
-  z-index: 10;
-  position: relative;
-  max-width: 100%;
-  padding: 10px 17px;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    border-radius: 10px;
-    backdrop-filter: blur(var(--kun-background-blur));
-    will-change: transform;
-  }
-}
-
 .order {
   display: flex;
   margin-left: auto;

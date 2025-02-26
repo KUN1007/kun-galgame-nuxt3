@@ -1,133 +1,147 @@
 <script setup lang="ts">
-import type { CSSProperties } from 'vue'
-
-const props = defineProps<{
-  options: string[]
-  styles?: CSSProperties
-  chooserStyles?: CSSProperties
-  position?: 'top' | 'bottom'
-  defaultValue?: string
-}>()
-const position = computed(() => (props.position ? props.position : 'bottom'))
-
-const container = ref<HTMLElement>()
-const isShowOptions = ref(false)
-const checkedValue = ref(props.defaultValue ?? '')
-
-const emit = defineEmits<{
-  set: [value: string, index: number]
-}>()
-
-const handleClickShowLanguage = () => {
-  isShowOptions.value = true
-  container.value?.focus()
+interface Option {
+  value: string | number
+  label: string
 }
 
-const handleSetOption = (value: string, index: number) => {
+interface Props {
+  modelValue: string | number
+  options: Option[]
+  label: string
+  placeholder?: string
+  error?: string
+  disabled?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  placeholder: '',
+  disabled: false,
+  error: ''
+})
+
+const emit = defineEmits<{
+  set: [value: string | number, index: number]
+}>()
+
+const stableId = useId()
+const computedId = computed(() => `select-${stableId}`)
+const isOpen = ref(false)
+const selectedLabel = computed(() => {
+  const selected = props.options.find(
+    (option) => option.value === props.modelValue
+  )
+  return selected?.label
+})
+
+const closeOnClickOutside = (e: MouseEvent) => {
+  const target = e.target as HTMLElement
+  if (!target.closest(`#${computedId.value}`)) {
+    isOpen.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', closeOnClickOutside)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', closeOnClickOutside)
+})
+
+const toggle = () => {
+  if (!props.disabled) {
+    isOpen.value = !isOpen.value
+  }
+}
+
+const selectOption = (value: string | number, index: number) => {
   emit('set', value, index)
-  checkedValue.value = value
+  isOpen.value = false
 }
 </script>
 
 <template>
-  <div class="kun-select" :style="props.styles">
-    <div
-      :style="props.chooserStyles"
-      ref="container"
-      tabindex="-1"
-      @blur="isShowOptions = false"
-      class="kun-chooser"
-      @click="handleClickShowLanguage"
+  <div class="relative w-full">
+    <!-- Label -->
+    <label
+      v-if="label"
+      :for="computedId"
+      class="mb-2 block text-sm font-medium"
     >
-      <slot />
-      <Icon class="icon" name="lucide:chevron-down" />
-    </div>
+      {{ label }}
+    </label>
 
-    <Transition :name="position">
-      <div v-if="isShowOptions" class="options" :class="position">
-        <span
-          v-for="(kun, index) in props.options"
-          :key="index"
-          @click.stop.prevent="handleSetOption(kun, index)"
+    <!-- Select Button -->
+    <button
+      :id="computedId"
+      type="button"
+      class="bg-background focus:border-primary-500 focus:ring-primary-500 flex w-full cursor-pointer items-center justify-between rounded-lg border px-3 py-2 text-left focus:ring-2 focus:outline-none sm:text-sm"
+      :class="{
+        'border-default-300': !error,
+        'border-danger-500': error,
+        'bg-default-100': disabled
+      }"
+      @click="toggle"
+      :disabled="disabled"
+    >
+      <span class="block truncate">
+        {{ selectedLabel || placeholder }}
+      </span>
+      <Icon
+        name="lucide:chevron-down"
+        class="pointer-events-none"
+        :class="
+          cn('text-inherit transition-transform', isOpen ? 'rotate-180' : '')
+        "
+      />
+    </button>
+
+    <!-- Options Dropdown -->
+    <Transition name="fadeIn">
+      <div
+        v-show="isOpen"
+        class="bg-background absolute z-10 mt-1 w-full rounded-md border p-1 shadow-lg"
+      >
+        <ul
+          class="scrollbar-hide max-h-60 overflow-auto rounded-md text-base focus:outline-none sm:text-sm"
+          tabindex="-1"
+          role="listbox"
         >
-          <span>{{ kun }}</span>
-          <span v-if="checkedValue === kun">
-            <Icon class="icon" name="lucide:check" />
-          </span>
-        </span>
+          <li
+            v-for="(option, index) in options"
+            :key="option.value"
+            class="hover:bg-default-100 text-foreground relative flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 select-none"
+            @click="selectOption(option.value, index)"
+            role="option"
+          >
+            <span class="block truncate">
+              {{ option.label }}
+            </span>
+
+            <!-- Selected checkmark -->
+            <Icon
+              v-if="modelValue === option.value"
+              class="flex items-center pr-4"
+              name="lucide:check"
+            />
+          </li>
+        </ul>
       </div>
     </Transition>
+
+    <p v-if="error" class="text-danger mt-2 text-sm">{{ error }}</p>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.kun-select {
-  position: relative;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-}
-
-.kun-chooser {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  .icon {
-    font-size: 18px;
-    color: var(--kungalgame-blue-5);
-    margin-left: 7px;
-  }
-}
-
-.options {
-  width: 100%;
-  position: absolute;
-  padding: 7px;
-  border: 1px solid var(--kungalgame-trans-blue-1);
-  z-index: 9999;
-
-  & > span {
-    font-size: 15px;
-    display: flex;
-    justify-content: space-between;
-    padding: 5px;
-    border-radius: 5px;
-
-    &:hover {
-      background-color: var(--kungalgame-blue-0);
-    }
-  }
-}
-
-.top {
-  bottom: 100%;
-}
-
-.bottom {
-  top: 100%;
-}
-
-.top-enter-active,
-.top-leave-active {
+.fadeIn-enter-active,
+.fadeIn-leave-active {
   transition: all 0.2s ease-in-out;
 }
 
-.top-enter-from,
-.top-leave-to {
-  transform: translateY(10px);
-  opacity: 0;
-}
-
-.bottom-enter-active,
-.bottom-leave-active {
-  transition: all 0.2s ease-in-out;
-}
-
-.bottom-enter-from,
-.bottom-leave-to {
-  transform: translateY(-10px);
+.fadeIn-enter-from,
+.fadeIn-leave-to {
+  transform: translateY(-8px);
   opacity: 0;
 }
 </style>

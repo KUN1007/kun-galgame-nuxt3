@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
   <div
-    class="mx-auto mb-8 grid grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4"
+    class="grid grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4"
   >
     <NuxtLink
       class="group bg-background relative flex flex-col overflow-hidden rounded-lg border shadow"
