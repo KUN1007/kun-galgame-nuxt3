@@ -13,7 +13,7 @@ const props = defineProps({
 const isOpen = ref(false)
 const triggerRef = ref<HTMLElement | null>(null)
 const popoverRef = ref<HTMLElement | null>(null)
-const popoverId = `popover-${useId()}`
+const popoverId = `kun-popover-${useId()}`
 
 const positionClass = computed(() => {
   switch (props.position) {
@@ -48,36 +48,6 @@ useEventListener('keydown', (e: KeyboardEvent) => {
 })
 
 useEventListener(document, 'click', close)
-
-const handleTab = (e: KeyboardEvent) => {
-  if (!isOpen.value || !popoverRef.value) return
-
-  const focusableElements = popoverRef.value.querySelectorAll(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-  )
-  const firstElement = focusableElements[0] as HTMLElement
-  const lastElement = focusableElements[
-    focusableElements.length - 1
-  ] as HTMLElement
-
-  if (e.shiftKey) {
-    if (document.activeElement === firstElement) {
-      lastElement?.focus()
-      e.preventDefault()
-    }
-  } else {
-    if (document.activeElement === lastElement) {
-      firstElement?.focus()
-      e.preventDefault()
-    }
-  }
-}
-
-useEventListener('keydown', (e: KeyboardEvent) => {
-  if (e.key === 'Tab') {
-    handleTab(e)
-  }
-})
 </script>
 
 <template>

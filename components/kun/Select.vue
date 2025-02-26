@@ -24,7 +24,7 @@ const emit = defineEmits<{
 }>()
 
 const stableId = useId()
-const computedId = computed(() => `select-${stableId}`)
+const computedId = computed(() => `kun-select-${stableId}`)
 const isOpen = ref(false)
 const selectedLabel = computed(() => {
   const selected = props.options.find(
