@@ -27,6 +27,7 @@ useEventListener('keydown', (e: KeyboardEvent) => {
       >
         <div
           class="bg-background m-auto min-w-80 rounded-lg border p-6 shadow-lg transition-all"
+          @click.stop
         >
           <slot />
         </div>
