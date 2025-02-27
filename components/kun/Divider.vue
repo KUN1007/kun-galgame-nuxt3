@@ -1,55 +1,31 @@
 <script setup lang="ts">
-const props = withDefaults(
+withDefaults(
   defineProps<{
     margin?: string
     color?: string
+    textColor?: string
   }>(),
   {
-    margin: '32px 0',
-    color: 'var(--kungalgame-trans-blue-2)'
+    margin: 'my-8',
+    color: 'gray-300',
+    textColor: 'gray-600'
   }
 )
-
-const { margin, color } = toRefs(props)
 </script>
 
 <template>
-  <div class="kun-divider">
-    <slot />
+  <div
+    :class="
+      cn(
+        'flex items-center text-center text-sm font-normal whitespace-nowrap',
+        margin
+      )
+    "
+  >
+    <div :class="['bg- h-px flex-grow' + color]"></div>
+    <div v-if="$slots.default" :class="['px-3', 'text-' + textColor]">
+      <slot />
+    </div>
+    <div :class="['bg- h-px flex-grow' + color]"></div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.kun-divider {
-  color: var(--kungalgame-font-color-0);
-  font-weight: normal;
-  font-size: small;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  text-align: center;
-  margin: v-bind(margin);
-
-  &::before {
-    color: v-bind(color);
-    content: '';
-    position: relative;
-    width: 50%;
-    border-block-start: 1px solid transparent;
-    border-block-start-color: inherit;
-    border-block-end: 0;
-    transform: translateY(50%);
-  }
-
-  &::after {
-    color: v-bind(color);
-    content: '';
-    position: relative;
-    width: 50%;
-    border-block-start: 1px solid transparent;
-    border-block-start-color: inherit;
-    border-block-end: 0;
-    transform: translateY(50%);
-  }
-}
-</style>

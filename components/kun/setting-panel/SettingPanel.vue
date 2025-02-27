@@ -30,22 +30,37 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
         <div class="flex flex-col space-y-4">
           <div class="flex items-center">
             <span
-              :class="showItemIndex === 1 ? 'active' : ''"
+              :class="
+                cn(
+                  'flex rounded-lg p-2 transition-colors',
+                  showItemIndex === 1 ? 'bg-primary-50 text-primary shadow' : ''
+                )
+              "
               @click="showItemIndex = 1"
             >
-              <Icon class="icon" name="mdi:circle-transparent" />
+              <Icon class="text-inherit" name="mdi:circle-transparent" />
             </span>
             <span
-              :class="showItemIndex === 2 ? 'active' : ''"
+              :class="
+                cn(
+                  'flex rounded-lg p-2 transition-colors',
+                  showItemIndex === 2 ? 'bg-primary-50 text-primary shadow' : ''
+                )
+              "
               @click="showItemIndex = 2"
             >
-              <Icon class="icon" name="tabler:blur" />
+              <Icon class="text-inherit" name="tabler:blur" />
             </span>
             <span
-              :class="showItemIndex === 3 ? 'active' : ''"
+              :class="
+                cn(
+                  'flex rounded-lg p-2 transition-colors',
+                  showItemIndex === 3 ? 'bg-primary-50 text-primary shadow' : ''
+                )
+              "
               @click="showItemIndex = 3"
             >
-              <Icon class="icon" name="ci:font" />
+              <Icon class="text-inherit" name="ci:font" />
             </span>
 
             <span

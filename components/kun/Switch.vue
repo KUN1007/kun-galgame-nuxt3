@@ -1,57 +1,63 @@
 <script setup lang="ts">
-const model = defineModel<boolean>({ required: true })
+withDefaults(
+  defineProps<{
+    modelValue: boolean
+    label?: string
+    disabled?: boolean
+  }>(),
+  { label: '', disabled: false }
+)
 
-const id = ref(`switch-${Math.random().toString(36).slice(2, 9)}`)
+const stableId = useId()
+const computedId = computed(() => `kun-switch-${stableId}`)
+
+defineEmits<{
+  'update:modelValue': [value: boolean]
+}>()
 </script>
 
 <template>
-  <input type="checkbox" :id="id" v-model="model" />
-  <label :for="id" />
+  <div class="inline-flex items-center">
+    <label
+      :for="computedId"
+      class="relative inline-flex cursor-pointer items-center"
+    >
+      <input
+        :id="computedId"
+        type="checkbox"
+        class="peer sr-only"
+        :checked="modelValue"
+        @change="
+          (event) =>
+            $emit(
+              'update:modelValue',
+              (event.target as HTMLInputElement).checked
+            )
+        "
+        :disabled="disabled"
+      />
+      <div
+        class="h-6 w-11 rounded-full transition-colors duration-200 ease-in-out"
+        :class="[
+          modelValue ? 'bg-primary-600' : 'bg-gray-200',
+          disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
+          modelValue && disabled ? 'bg-primary-400' : ''
+        ]"
+      />
+      <div
+        class="absolute top-0.5 left-0.5 h-5 w-5 transform rounded-full bg-white shadow-md transition-transform duration-200 ease-in-out"
+        :class="[
+          modelValue ? 'translate-x-5' : 'translate-x-0',
+          disabled ? 'cursor-not-allowed' : 'cursor-pointer'
+        ]"
+      />
+    </label>
+    <span
+      v-if="label"
+      class="ml-3 text-sm font-medium"
+      :class="[disabled ? 'text-gray-400' : 'text-gray-900']"
+    >
+      {{ label }}
+    </span>
+  </div>
 </template>
-
-<style lang="scss" scoped>
-input {
-  height: 0;
-  width: 0;
-  visibility: hidden;
-}
-
-label {
-  cursor: pointer;
-  text-indent: -9999px;
-  width: 47px;
-  height: 24px;
-  background: var(--kungalgame-trans-blue-2);
-  display: block;
-  border-radius: 100px;
-  position: relative;
-}
-
-label:after {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 20px;
-  height: 20px;
-  background: var(--kungalgame-white);
-  border-radius: 15px;
-  transition: 0.3s;
-}
-
-input:checked + label {
-  background: var(--kungalgame-blue-5);
-}
-
-input:checked + label:after {
-  left: calc(100% - 2px);
-  transform: translateX(-100%);
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-</style>
