@@ -33,11 +33,11 @@ const handleClickComment = (comment: TopicComment) => {
   <div class="comment-container">
     <div class="container" v-if="comments?.length">
       <div class="title">
-        <span>{{ $t('topic.content.comments') }}</span>
+        <span>评论</span>
       </div>
 
       <div class="comment" v-for="(comment, index) in comments" :key="index">
-        <NuxtLinkLocale
+        <NuxtLink
           v-if="comment.user.avatar"
           :to="`/kungalgamer/${comment.user.uid}/info`"
         >
@@ -45,15 +45,15 @@ const handleClickComment = (comment: TopicComment) => {
             :src="comment.user.avatar.replace(/\.webp$/, '-100.webp')"
             alt="KUN"
           />
-        </NuxtLinkLocale>
+        </NuxtLink>
 
         <div class="content">
           <div class="describe">
             <div class="name">
-              {{ `${comment.user.name} ${$t('topic.content.comment')}` }}
-              <NuxtLinkLocale :to="`/kungalgamer/${comment.toUser.uid}/info`">
+              {{ `${comment.user.name} 评论` }}
+              <NuxtLink :to="`/kungalgamer/${comment.toUser.uid}/info`">
                 {{ comment.toUser.name }}
-              </NuxtLinkLocale>
+              </NuxtLink>
             </div>
 
             <div class="operate">

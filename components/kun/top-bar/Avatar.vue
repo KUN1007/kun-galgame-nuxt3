@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const localePath = useLocalePath()
-
 const { name, avatarMin } = storeToRefs(usePersistUserStore())
 const { showKUNGalgamePanel, showKUNGalgameUserPanel, messageStatus } =
   storeToRefs(useTempSettingStore())
@@ -8,7 +6,7 @@ const { showKUNGalgamePanel, showKUNGalgameUserPanel, messageStatus } =
 const onKeydown = (event: KeyboardEvent) => {
   if (event.ctrlKey && event.key.toLowerCase() === 'k') {
     event.preventDefault()
-    navigateTo(localePath('/search'))
+    navigateTo('/search')
   }
 }
 
@@ -19,57 +17,46 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 <template>
   <div class="kungalgamer-info">
-    <NuxtLinkLocale
+    <NuxtLink
       class="search"
       aria-label="search"
       v-tooltip="{
-        message: {
-          'en-us': 'Press Ctrl + K to search',
-          'ja-jp': 'Ctrl + K を押して検索',
-          'zh-cn': '按下 Ctrl + K 以搜索',
-          'zh-tw': '按下 Ctrl + K 以搜索'
-        },
+        message: '按下 Ctrl + K 以搜索',
         position: 'bottom'
       }"
       to="/search"
     >
       <Icon class="icon" name="lucide:search" />
-    </NuxtLinkLocale>
+    </NuxtLink>
 
     <span class="settings" @click="showKUNGalgamePanel = !showKUNGalgamePanel">
       <Icon class="icon" name="uiw:setting-o" />
     </span>
 
-    <div class="avatar" v-if="name">
-      <div>
-        <NuxtImg
-          class="avatar-image"
-          v-if="avatarMin"
-          @click="showKUNGalgameUserPanel = true"
-          :src="avatarMin"
-          :alt="name"
-        />
-        <div class="status" :class="messageStatus"></div>
-      </div>
-      <span
-        class="guest"
-        @click="showKUNGalgameUserPanel = true"
-        v-if="!avatarMin"
-      >
-        {{ name }}
-      </span>
-    </div>
+    <KunPopover position="bottom-end">
+      <template #trigger>
+        <div class="avatar" v-if="name">
+          <div>
+            <NuxtImg
+              class="avatar-image"
+              v-if="avatarMin"
+              :src="avatarMin"
+              :alt="name"
+            />
+            <div class="status" :class="messageStatus"></div>
+          </div>
+          <span class="guest" v-if="!avatarMin">
+            {{ name }}
+          </span>
+        </div>
+      </template>
+
+      <LazyKunTopBarUserInfo />
+    </KunPopover>
 
     <div class="login" v-if="!name">
-      <NuxtLinkLocale to="/login">
-        {{ $t('login.title') }}
-      </NuxtLinkLocale>
+      <NuxtLink to="/login">登录</NuxtLink>
     </div>
-
-    <LazyKunTopBarUserInfo
-      v-if="showKUNGalgameUserPanel"
-      @close="showKUNGalgameUserPanel = false"
-    />
   </div>
 </template>
 

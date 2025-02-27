@@ -5,13 +5,15 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 </script>
 
 <template>
-  <div class="header">
-    <KunTopBarNav />
-
+  <div
+    class="bg-background z-10 mb-4 flex h-16 shrink-0 items-center justify-between rounded-b-lg px-3"
+  >
+    <!-- <HomePinned /> -->
+    <span>占位文本</span>
     <KunTopBarAvatar />
   </div>
 
-  <div class="settings-panel">
+  <div class="settings-panel z-50">
     <Transition
       enter-active-class="animate__animated animate__jackInTheBox animate__faster"
       leave-active-class="animate__animated animate__fadeOutRight animate__faster"
@@ -25,43 +27,3 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
     </Transition>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.header {
-  height: 58px;
-  box-shadow: 0 2px 4px 0 var(--kungalgame-trans-blue-1);
-  background-color: var(--kungalgame-trans-white-5);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  z-index: 1;
-  margin-bottom: 17px;
-  flex-shrink: 0;
-  color: var(--kungalgame-font-color-3);
-  padding: 0 50px;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    backdrop-filter: blur(var(--kun-background-blur));
-    will-change: transform;
-  }
-}
-
-.settings-panel {
-  z-index: 999;
-}
-
-@media (max-width: 700px) {
-  .header {
-    margin-bottom: 5px;
-    padding: 0 16px;
-  }
-}
-</style>

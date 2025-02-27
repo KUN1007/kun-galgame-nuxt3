@@ -1,12 +1,10 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 useHead({
-  title: `${t('seo.pool.title')} - ${t('head.title')}`,
+  title: `全部话题 - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
-      content: t('seo.pool.description')
+      content: '鲲 Galgame 全部话题列表, Galgame 交流, 技术交流, 其它交流'
     }
   ]
 })

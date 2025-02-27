@@ -4,18 +4,9 @@ definePageMeta({
   middleware: 'auth'
 })
 
-const { t } = useI18n()
 const { messageStatus } = storeToRefs(useTempSettingStore())
 
-useHead({
-  title: `${t('seo.message.title')} - ${t('head.title')}`,
-  meta: [
-    {
-      name: 'description',
-      content: t('seo.message.description')
-    }
-  ]
-})
+useHead({ title: `消息 - ${kungal.titleShort}` })
 
 onMounted(() => (messageStatus.value = 'online'))
 </script>

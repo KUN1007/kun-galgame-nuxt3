@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { KUN_USER_PAGE_NAV_MAP } from '~/constants/user'
 import type { Nav } from './utils/routeName'
 
 const { uid: storeUid, roles } = storeToRefs(usePersistUserStore())
@@ -10,7 +11,6 @@ const props = defineProps<{
 
 const route = useRoute()
 
-const localePath = useLocalePath()
 const currentPageUid = computed(() => props.uid)
 const fullPath = computed(() =>
   route.fullPath.replace(/^\/[a-z]{2}-[a-z]{2}\//, '/')
@@ -49,11 +49,7 @@ const handleCollapsed = (item: Nav) => {
   if (item.collapsed !== undefined) {
     item.collapsed = !item.collapsed
   } else {
-    navigateTo(
-      localePath(
-        `/kungalgamer/${currentPageUid.value}/${item.router}`.toString()
-      )
-    )
+    navigateTo(`/kungalgamer/${currentPageUid.value}/${item.router}`.toString())
   }
 }
 </script>
@@ -73,7 +69,7 @@ const handleCollapsed = (item: Nav) => {
         <span class="nav-icon">
           <Icon class="icon" :name="iconMap[kun.name] ?? ''" />
         </span>
-        <span class="name">{{ $t(`user.nav.${kun.name}`) }}</span>
+        <span class="name">{{ KUN_USER_PAGE_NAV_MAP[kun.name] }}</span>
         <span
           class="chevron"
           v-if="kun.collapsed !== undefined"

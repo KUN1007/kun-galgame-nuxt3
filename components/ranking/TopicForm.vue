@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { topicSortItem, topicIconMap } from './navSortItem'
+import { KUN_RANKING_TOPIC_MAP } from '~/constants/ranking'
 
 const { topic } = storeToRefs(useTempRankingStore())
 const isAscending = ref(false)
@@ -22,16 +23,16 @@ const handleClickSortOrder = () => {
 
 <template>
   <div class="topic">
-    <div class="title">{{ $t('ranking.topic.name') }}</div>
+    <div class="title">萌萌话题排行</div>
     <div class="nav">
       <div class="order" @click="handleClickSortOrder">
         <Transition name="order" mode="out-in">
           <div v-if="isAscending">
-            <span>{{ $t('ranking.asc') }}</span>
+            <span>升序</span>
             <Icon class="icon" name="lucide:arrow-up" />
           </div>
           <div v-else-if="!isAscending">
-            <span>{{ $t('ranking.desc') }}</span>
+            <span>降序</span>
             <Icon class="icon" name="lucide:arrow-down" />
           </div>
         </Transition>
@@ -39,7 +40,7 @@ const handleClickSortOrder = () => {
 
       <div class="sort">
         <Icon class="icon" :name="topicIconMap[topic.sortField]" />
-        <span>{{ $t('ranking.filter') }}</span>
+        <span>筛选</span>
         <div class="submenu">
           <div
             class="item"
@@ -48,7 +49,7 @@ const handleClickSortOrder = () => {
             @click="topic.sortField = kun.sortField"
           >
             <span><Icon class="icon" :name="kun.icon" /></span>
-            <span>{{ $t(`ranking.topic.${kun.name}`) }}</span>
+            <span>{{ KUN_RANKING_TOPIC_MAP[kun.name] }}</span>
           </div>
         </div>
       </div>
@@ -132,8 +133,6 @@ const handleClickSortOrder = () => {
   display: none;
   flex-direction: column;
   border: 1px solid var(--kungalgame-blue-2);
-
-  @include kun-blur;
 
   .item {
     transition: all 0.2s;

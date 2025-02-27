@@ -1,12 +1,11 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 useHead({
-  title: `${t('seo.report.title')} - ${t('head.title')}`,
+  title: `匿名举报 - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
-      content: t('seo.report.description')
+      content:
+        '鲲 Galgame 论坛的举报页，这里可以提交论坛内的违规记录，希望大家不要违规'
     }
   ]
 })

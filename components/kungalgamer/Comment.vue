@@ -22,11 +22,11 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/comments`, {
       v-for="(commentData, index) in data.comments"
       :key="index"
     >
-      <NuxtLinkLocale :to="`/topic/${commentData.tid}`">
+      <NuxtLink :to="`/topic/${commentData.tid}`">
         <div class="title">
           {{ commentData.content }}
         </div>
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
 
     <KunPagination

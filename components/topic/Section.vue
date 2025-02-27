@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const props = defineProps<{
+import { KUN_TOPIC_SECTION } from '~/constants/topic'
+
+defineProps<{
   section: string[]
 }>()
 
@@ -8,49 +10,23 @@ const iconMap: Record<string, string> = {
   t: 'lucide:drafting-compass',
   o: 'lucide:circle-ellipsis'
 }
+
+const sectionColors: Record<string, string> = {
+  g: 'primary',
+  t: 'success',
+  o: 'secondary'
+}
 </script>
 
 <template>
-  <span
-    class="section"
-    v-for="(sec, index) in props.section"
-    :key="index"
-    :class="sec.toLowerCase()[0]"
-  >
-    <Icon class="icon" :name="iconMap[sec[0]]" />
-    <span>{{ $t(`edit.topic.section.${sec}`) }}</span>
+  <span class="flex gap-1">
+    <KunBadge
+      v-for="(sec, index) in section"
+      :key="index"
+      :color="sectionColors[sec.toLowerCase()[0]]"
+    >
+      <Icon :name="iconMap[sec.toLowerCase()[0]]" class="size-4 text-inherit" />
+      {{ KUN_TOPIC_SECTION[sec] }}
+    </KunBadge>
   </span>
 </template>
-
-<style lang="scss" scoped>
-.section {
-  margin: 3px;
-  display: flex;
-  align-items: center;
-  padding: 3px 10px;
-  border-radius: 7px;
-  margin-right: 5px;
-  font-size: small;
-  font-weight: bold;
-
-  .icon {
-    font-size: 17px;
-    margin-right: 5px;
-  }
-}
-
-.g {
-  color: var(--kungalgame-blue-5);
-  border: 1.5px solid var(--kungalgame-blue-5);
-}
-
-.t {
-  color: var(--kungalgame-green-4);
-  border: 1.5px solid var(--kungalgame-green-4);
-}
-
-.o {
-  color: var(--kungalgame-pink-4);
-  border: 1.5px solid var(--kungalgame-pink-4);
-}
-</style>

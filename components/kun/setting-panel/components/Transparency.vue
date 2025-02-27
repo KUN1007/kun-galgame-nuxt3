@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const colorMode = useColorMode()
 const { showKUNGalgamePageTransparency } = storeToRefs(
   usePersistSettingsStore()
 )
@@ -8,8 +7,7 @@ watch(
   () => showKUNGalgamePageTransparency.value,
   debounce(() => {
     usePersistSettingsStore().setKUNGalgameTransparency(
-      showKUNGalgamePageTransparency.value,
-      colorMode.value as 'dark' | 'light'
+      showKUNGalgamePageTransparency.value
     )
   }, 300)
 )
@@ -18,7 +16,7 @@ watch(
 <template>
   <div>
     <div class="container">
-      <span>{{ $t('header.settings.trans') }}</span>
+      <span>页面透明度</span>
       <span>{{ showKUNGalgamePageTransparency }}%</span>
     </div>
 

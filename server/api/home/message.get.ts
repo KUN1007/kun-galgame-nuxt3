@@ -1,5 +1,6 @@
 import UserModel from '~/server/models/user'
 import MessageModel from '~/server/models/message'
+import { markdownToText } from '~/utils/markdownToText'
 import type { HomeMessage } from '~/types/api/home'
 
 const getMessages = async (page: number, limit: number) => {
@@ -20,7 +21,7 @@ const getMessages = async (page: number, limit: number) => {
     tid: message.tid,
     gid: message.gid,
     type: message.type,
-    content: message.content.slice(0, 50),
+    content: markdownToText(message.content).slice(0, 50),
     time: message.time
   }))
 

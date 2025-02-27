@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { friendArray } from '~/components/friend-links/friends'
 
-const { t } = useI18n()
-
 useHead({
-  title: `${t('seo.friends.title')} - ${t('head.title')}`,
+  title: `友情链接 - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
@@ -34,8 +32,6 @@ useHead({
   max-width: 80rem;
   margin: 0 auto;
   padding: 17px;
-
-  @include kun-blur;
 }
 
 .kun-footer {

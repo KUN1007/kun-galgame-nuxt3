@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import {
+  KUN_TOPIC_PAGE_SORT_FIELD,
+  KUN_TOPIC_CATEGORY
+} from '~/constants/topic'
 import { pageData } from './pageData'
 
 const { layout } = storeToRefs(usePersistPoolStore())
@@ -11,18 +15,16 @@ const { layout } = storeToRefs(usePersistPoolStore())
         :styles="{ width: '100px' }"
         :options="['created', 'views']"
         :default-value="pageData.sortField"
-        i18n="pool"
         @set="(value) => (pageData.sortField = value as 'views' | 'created')"
         position="bottom"
       >
-        <span>{{ $t(`pool.${pageData.sortField}`) }}</span>
+        <span>{{ KUN_TOPIC_PAGE_SORT_FIELD[pageData.sortField] }}</span>
       </KunSelect>
 
       <KunSelect
         :styles="{ width: '150px' }"
         :options="['all', 'galgame', 'technique', 'others']"
         :default-value="pageData.category"
-        i18n="pool"
         @set="
           (value) =>
             (pageData.category = value as
@@ -33,7 +35,7 @@ const { layout } = storeToRefs(usePersistPoolStore())
         "
         position="bottom"
       >
-        <span>{{ $t(`pool.${pageData.category}`) }}</span>
+        <span>{{ KUN_TOPIC_CATEGORY[pageData.category] }}</span>
       </KunSelect>
     </div>
 

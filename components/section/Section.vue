@@ -1,7 +1,4 @@
 <script setup lang="ts">
-const { locale } = useI18n()
-const localePath = useLocalePath()
-
 const props = defineProps<{
   section: string
 }>()
@@ -32,7 +29,7 @@ watch(
 </script>
 
 <template>
-  <NuxtLinkLocale
+  <NuxtLink
     class="section"
     v-for="(sec, index) in data?.topics"
     :to="`/topic/${sec.tid}`"
@@ -40,9 +37,7 @@ watch(
   >
     <div
       class="avatar"
-      @click.prevent="
-        navigateTo(localePath(`/kungalgamer/${sec.user.uid}/info`))
-      "
+      @click.prevent="navigateTo(`/kungalgamer/${sec.user.uid}/info`)"
     >
       <NuxtImg
         height="50"
@@ -60,9 +55,7 @@ watch(
       <div class="user">
         <div class="name">{{ sec.user.name }}</div>
         <div class="time">
-          {{
-            formatDate(sec.time, locale, { isShowYear: true, isPrecise: true })
-          }}
+          {{ formatDate(sec.time, { isShowYear: true, isPrecise: true }) }}
         </div>
       </div>
 
@@ -88,7 +81,7 @@ watch(
         </span>
       </div>
     </div>
-  </NuxtLinkLocale>
+  </NuxtLink>
 
   <KunPagination
     class="pagination"

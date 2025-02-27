@@ -72,7 +72,7 @@ onMounted(async () => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .loli-container {
   top: -270px;
   left: 130px;
@@ -80,7 +80,7 @@ onMounted(async () => {
 
 .loli {
   cursor: pointer;
-  width: 0;
+  width: 100%;
   position: absolute;
   z-index: 9999;
 }

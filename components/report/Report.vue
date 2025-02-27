@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { KUN_REPORT_SECTION_MAP } from '~/constants/report'
+import { usePersistUserStore } from '~/store/modules/kungalgamer'
 import { reportSection } from './constant'
 
-const { t } = useI18n()
-
 useHead({
-  title: t('seo.report.title'),
+  title: '匿名举报',
   meta: [
     {
       name: 'description',
@@ -56,7 +56,7 @@ const handleSubmitReport = async () => {
 <template>
   <div class="container">
     <div class="select-container">
-      <span class="title">{{ t('report.select.title') }}</span>
+      <span class="title">举报类型</span>
 
       <KunSelect
         :styles="{ width: '180px' }"
@@ -66,24 +66,27 @@ const handleSubmitReport = async () => {
         @set="(value) => (selectReportType = value)"
         position="bottom"
       >
-        <span>{{ $t(`report.select.section.${selectReportType}`) }}</span>
+        <span>{{ KUN_REPORT_SECTION_MAP[selectReportType] }}</span>
       </KunSelect>
     </div>
 
     <div>
-      <span class="title">{{ t('report.reason.title') }}</span>
+      <span class="title">举报理由</span>
       <KunTextarea
         name="comment"
-        :placeholder="t('report.reason.placeholder')"
+        placeholder="填写具体的违规内容，更容易举报成功哦"
         rows="10"
         v-model="reason"
       />
 
-      <div class="note">{{ t('report.note') }}</div>
+      <div class="note">
+        该举报是完全匿名的, 在管理端以及数据库中不会留下任何用户记录,
+        请您放心举报
+      </div>
     </div>
 
     <KunButton @click="handleSubmitReport" :pending="isFetching">
-      {{ t('report.submit') }}
+      提交举报
     </KunButton>
   </div>
 </template>
@@ -94,8 +97,6 @@ const handleSubmitReport = async () => {
   max-width: 80rem;
   margin: 0 auto;
   padding: 20px 20px 60px;
-
-  @include kun-blur;
 }
 
 .select-container {

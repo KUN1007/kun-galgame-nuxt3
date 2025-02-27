@@ -12,7 +12,6 @@ const input = reactive({
   confirmPassword: ''
 })
 
-const localePath = useLocalePath()
 const flag = ref(true)
 const isSendCode = ref(false)
 
@@ -45,12 +44,7 @@ const handleChangePassword = async () => {
     return
   }
 
-  const result = await useComponentMessageStore().alert({
-    'en-us': 'Are you sure you want to change the password?',
-    'ja-jp': 'パスワードを変更してもよろしいですか？',
-    'zh-cn': '您确定更改密码吗?',
-    'zh-tw': '您確定更改密碼嗎？'
-  })
+  const result = await useComponentMessageStore().alert('您确定更改密码吗?')
   if (!result) {
     return
   }
@@ -62,7 +56,7 @@ const handleChangePassword = async () => {
   })
 
   if (data) {
-    navigateTo(localePath('/login'))
+    navigateTo('/login')
     useMessage(10101, 'success')
   }
 }
@@ -72,9 +66,7 @@ const handleChangePassword = async () => {
   <Transition mode="out-in" name="slide">
     <form class="email" v-if="flag" @submit.prevent>
       <div class="input-container">
-        <label for="email">
-          {{ $t('forgot.email') }}
-        </label>
+        <label for="email">您的邮箱</label>
         <KunInput
           id="email"
           v-model="input.email"
@@ -84,9 +76,7 @@ const handleChangePassword = async () => {
       </div>
 
       <div class="input-container">
-        <label for="code">
-          {{ $t('forgot.code') }}
-        </label>
+        <label for="code">验证码</label>
         <KunInput id="code" v-model="input.code" type="text" />
       </div>
     </form>
@@ -95,9 +85,7 @@ const handleChangePassword = async () => {
       <input autocomplete="username" type="text" hidden />
 
       <div class="input-container">
-        <label for="new-password">
-          {{ $t('forgot.new') }}
-        </label>
+        <label for="new-password">新密码</label>
         <KunInput
           id="new-password"
           v-model="input.newPassword"
@@ -106,9 +94,7 @@ const handleChangePassword = async () => {
         />
       </div>
       <div class="input-container">
-        <label for="new-password">
-          {{ $t('forgot.rePwd') }}
-        </label>
+        <label for="new-password">确认密码</label>
         <KunInput
           id="password"
           v-model="input.confirmPassword"
@@ -129,17 +115,11 @@ const handleChangePassword = async () => {
       to="forgot"
     />
 
-    <KunButton v-if="flag" @click="handleClickNext">
-      {{ $t('forgot.next') }}
-    </KunButton>
+    <KunButton v-if="flag" @click="handleClickNext">下一步</KunButton>
 
-    <KunButton v-if="!flag" @click="handleClickPrev">
-      {{ $t('forgot.prev') }}
-    </KunButton>
+    <KunButton v-if="!flag" @click="handleClickPrev">上一步</KunButton>
 
-    <KunButton v-if="!flag" @click="handleChangePassword">
-      {{ $t('forgot.confirm') }}
-    </KunButton>
+    <KunButton v-if="!flag" @click="handleChangePassword">确定更改</KunButton>
   </div>
 </template>
 

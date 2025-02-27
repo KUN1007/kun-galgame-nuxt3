@@ -12,7 +12,7 @@ const users = computed(() => props.users)
 
 <template>
   <div class="single-user" v-for="user in users" :key="user.uid">
-    <NuxtLinkLocale :to="`/kungalgamer/${user.uid}/info`">
+    <NuxtLink :to="`/kungalgamer/${user.uid}/info`">
       <div class="info">
         <span class="avatar">
           <img
@@ -28,7 +28,7 @@ const users = computed(() => props.users)
         <Icon class="icon" :name="userIconMap[props.field]" />
         <span class="title">{{ Math.ceil(user.field) }}</span>
       </div>
-    </NuxtLinkLocale>
+    </NuxtLink>
   </div>
 </template>
 

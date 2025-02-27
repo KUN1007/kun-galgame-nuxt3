@@ -1,12 +1,10 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 useHead({
-  title: `${t('seo.ranking.title')} - ${t('head.title')}`,
+  title: `排行榜单 - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
-      content: t('seo.ranking.description')
+      content: '鲲 Galgame 排行榜单, 用户排行, 话题排行, 萌萌点排行'
     }
   ]
 })
@@ -39,8 +37,6 @@ useHead({
   display: flex;
   padding: 10px;
   overflow-y: scroll;
-
-  @include kun-blur;
 
   &::-webkit-scrollbar {
     width: 0;

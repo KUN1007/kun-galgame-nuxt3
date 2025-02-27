@@ -30,29 +30,25 @@ const handleLinkInsert = () => {
 <template>
   <KunDialog :is-show-dialog="show">
     <div class="container">
-      <h2 class="title">{{ $t('edit.topic.link.title') }}</h2>
+      <h2 class="title">插入超链接</h2>
 
       <KunInput
         type="url"
         v-model="inputHref"
-        :placeholder="`${$t('edit.topic.link.URLLabel')} (${exampleURL})`"
+        :placeholder="`链接 URL (${exampleURL})`"
         class="input"
       />
       <KunInput
         type="text"
         v-model="inputText"
-        :placeholder="$t('edit.topic.link.textLabel')"
+        placeholder="链接文字 (可选)"
         class="input"
       />
 
       <div class="button-group">
-        <KunButton @click="emits('cancel')">
-          {{ $t('edit.topic.link.cancelInsert') }}
-        </KunButton>
+        <KunButton @click="emits('cancel')">取消</KunButton>
 
-        <KunButton @click="handleLinkInsert">
-          {{ $t('edit.topic.link.confirmInsert') }}
-        </KunButton>
+        <KunButton @click="handleLinkInsert">插入</KunButton>
       </div>
     </div>
   </KunDialog>

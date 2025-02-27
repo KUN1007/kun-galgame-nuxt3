@@ -1,12 +1,10 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 useHead({
-  title: `${t('seo.login.title')} - ${t('head.title')}`,
+  title: `登录 - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
-      content: t('seo.login.description')
+      content: '登录 鲲 Galgame 论坛, 世界上最萌的 Galgame 论坛! 欢迎回家!'
     }
   ]
 })
@@ -27,6 +25,5 @@ useHead({
   min-height: calc(100dvh - 75px);
   max-width: 80rem;
   margin: 0 auto;
-  @include kun-center;
 }
 </style>

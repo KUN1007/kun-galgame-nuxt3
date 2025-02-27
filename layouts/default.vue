@@ -18,48 +18,31 @@ watch(
 </script>
 
 <template>
-  <div class="app" :style="{ backgroundImage: `url(${imageURL})` }">
-    <div class="top-bar">
-      <KunTopBar />
+  <div
+    class="fixed size-full bg-cover bg-fixed bg-center bg-no-repeat brightness-50 dark:brightness-30"
+    :style="{ backgroundImage: `url(${imageURL})` }"
+  />
+
+  <KunLayoutSidebar />
+
+  <div
+    class="flex min-h-dvh justify-center overflow-hidden"
+    :style="{ 'background-color': 'hsl(var(--background))' }"
+  >
+    <div class="z-10 m-0 w-full max-w-7xl md:mr-3 md:ml-68">
+      <div class="sticky top-[0] z-1007">
+        <KunTopBar />
+      </div>
+
+      <slot />
+
+      <NuxtImg
+        v-if="showKUNGalgameBackLoli"
+        class="pointer-events-none fixed right-px bottom-px z-0 opacity-17 select-none"
+        src="/image/kohaku.webp"
+        loading="lazy"
+        alt="kohaku"
+      />
     </div>
-
-    <slot />
-
-    <NuxtImg
-      v-if="showKUNGalgameBackLoli"
-      class="kohaku"
-      src="/image/kohaku.webp"
-      loading="lazy"
-      alt="kohaku"
-    />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.app {
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
-  background-color: var(--kungalgame-white);
-  overflow: hidden;
-  background-color: var(--kungalgame-blue-0);
-  min-height: 100dvh;
-}
-
-.kohaku {
-  position: fixed;
-  user-select: none;
-  pointer-events: none;
-  bottom: 0;
-  right: 0;
-  opacity: 0.17;
-  z-index: 0;
-}
-
-.top-bar {
-  position: sticky;
-  top: 0;
-  z-index: 1007;
-}
-</style>

@@ -69,7 +69,7 @@ const selectEmoji = (emoji: string) => {
   align-items: center;
   position: absolute;
   top: 32px;
-  @include kun-blur;
+
   padding: 8px;
 }
 
@@ -101,8 +101,7 @@ const selectEmoji = (emoji: string) => {
     box-shadow: var(--shadow);
     color: var(--kungalgame-font-color-3);
     transition: all 0.2s;
-    @include kun-center;
-
+  
     &:first-child {
       margin-right: 8px;
     }

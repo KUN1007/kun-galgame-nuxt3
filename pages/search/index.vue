@@ -1,12 +1,10 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 useHead({
-  title: `${t('seo.search.title')} - ${t('head.title')}`,
+  title: `搜索 Galgame, Galgame 资源, 话题, 用户, 回复, 评论 - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
-      content: t('seo.search.description')
+      content: '搜索 Galgame, Galgame 资源, 话题, 用户, 回复, 评论等'
     }
   ]
 })
@@ -28,8 +26,6 @@ useHead({
   margin: 0 auto;
   color: var(--kungalgame-font-color-3);
   padding: 17px;
-
-  @include kun-blur;
 }
 
 @media (max-width: 700px) {

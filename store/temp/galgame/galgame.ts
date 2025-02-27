@@ -1,7 +1,6 @@
 import type { GalgameStoreTemp } from '~/store/types/galgame/galgame'
 
-export const useTempGalgameStore = defineStore({
-  id: 'tempGalgame',
+export const useTempGalgameStore = defineStore('tempGalgame', {
   persist: false,
   state: (): GalgameStoreTemp => ({
     page: 1,

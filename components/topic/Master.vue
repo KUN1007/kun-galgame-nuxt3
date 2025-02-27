@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import { KUN_TOPIC_DETAIL_STATUS } from '~/constants/topic'
 import type { TopicDetail } from '~/types/api/topic'
 
 const props = defineProps<{
   topic: TopicDetail
 }>()
-
-const { locale } = useI18n()
 
 const loliStatus = computed(() => {
   if (hourDiff(props.topic.upvoteTime, 10)) {
@@ -43,7 +42,7 @@ const loliStatus = computed(() => {
 
         <span class="time">
           {{
-            formatDate(topic.time, locale, {
+            formatDate(topic.time, {
               isShowYear: true,
               isPrecise: true
             })
@@ -55,7 +54,7 @@ const loliStatus = computed(() => {
         <TopicKUNGalgamerInfo v-if="topic.user" :user="topic.user">
           <span class="time-mobile">
             {{
-              formatDate(topic.time, locale, {
+              formatDate(topic.time, {
                 isShowYear: true,
                 isPrecise: true
               })
@@ -68,9 +67,9 @@ const loliStatus = computed(() => {
 
       <div class="bottom">
         <div class="status">
-          <span>{{ `${$t('topic.content.status')}:` }}</span>
+          <span>话题状态</span>
           <span :class="loliStatus">
-            {{ $t(`topic.content.${loliStatus}`) }}
+            {{ KUN_TOPIC_DETAIL_STATUS[loliStatus] }}
           </span>
         </div>
 
@@ -80,12 +79,7 @@ const loliStatus = computed(() => {
           v-if="topic.views > 0"
           class="views"
           v-tooltip="{
-            message: {
-              'en-us': 'Views',
-              'ja-jp': '閲覧数',
-              'zh-cn': '浏览数',
-              'zh-tw': '瀏覽數'
-            },
+            message: '浏览数',
             position: 'bottom'
           }"
         >
@@ -97,18 +91,13 @@ const loliStatus = computed(() => {
           class="rewrite"
           v-if="topic.edited"
           v-tooltip="{
-            message: {
-              'en-us': 'Rewrite Time',
-              'ja-jp': 'Rewrite 時間',
-              'zh-cn': 'Rewrite 时间',
-              'zh-tw': 'Rewrite 時間'
-            },
+            message: '重新编辑时间',
             position: 'bottom'
           }"
         >
           ×
           {{
-            formatDate(topic.edited, locale, {
+            formatDate(topic.edited, {
               isShowYear: true,
               isPrecise: true
             })
@@ -129,8 +118,6 @@ const loliStatus = computed(() => {
   align-items: center;
   flex-shrink: 0;
   margin-bottom: 17px;
-
-  @include kun-blur;
 }
 
 .header {

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const { locale } = useI18n()
-const introductionLanguage = ref(locale.value as Language)
+const introductionLanguage = ref<Language>('zh-cn')
 </script>
 
 <template>
@@ -34,7 +33,5 @@ const introductionLanguage = ref(locale.value as Language)
   width: 100%;
   height: 100%;
   padding: 17px;
-
-  @include kun-blur;
 }
 </style>

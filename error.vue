@@ -1,11 +1,8 @@
 <script setup lang="ts">
 const error = useError()
-const localePath = useLocalePath()
 
 const handleError = async () => {
-  clearError({
-    redirect: localePath('/').toString()
-  })
+  clearError({ redirect: '/' })
   await new Promise((resolve) => {
     setTimeout(resolve, 1007)
   })
@@ -19,17 +16,17 @@ const handleError = async () => {
       <div class="card" v-if="error.statusCode === 404">
         <h1>404</h1>
         <NuxtImg :src="useRandomSticker" />
-        <p>{{ $t('pageError.404') }}</p>
+        <p>杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面不见了 ~ 是不是被你吃了?!</p>
         <KunButton type="danger" @click="handleError">
-          {{ $t('pageError.remake') }}
+          一键转生为萝莉
         </KunButton>
       </div>
 
       <div class="card" v-else>
         <h1>{{ error.message }}</h1>
-        <p>{{ $t('pageError.error') }}</p>
+        <p>杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面出错了 ~ 是不是你干的?!</p>
         <KunButton type="danger" @click="handleError">
-          {{ $t('pageError.remake') }}
+          一键转生为萝莉
         </KunButton>
       </div>
     </div>
@@ -50,9 +47,7 @@ const handleError = async () => {
   margin: 0 auto;
   padding: 17px;
 
-  @include kun-center;
   flex-direction: column;
-  @include kun-blur;
 
   h1 {
     color: var(--kungalgame-red-5);

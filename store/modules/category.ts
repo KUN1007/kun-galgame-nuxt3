@@ -4,8 +4,7 @@ interface CategoryStorePersist {
   category: 'galgame' | 'technique' | 'others'
 }
 
-export const usePersistCategoryStore = defineStore({
-  id: 'KUNGalgameCategory',
+export const usePersistCategoryStore = defineStore('KUNGalgameCategory', {
   persist: true,
   state: (): CategoryStorePersist => ({
     category: 'galgame'

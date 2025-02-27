@@ -14,23 +14,23 @@ const user = computed(() => props.user)
 <template>
   <div class="kungalgamer">
     <div class="avatar" v-if="user.avatar">
-      <NuxtLinkLocale
+      <NuxtLink
         :aria-label="`KUN Visual Novel, 鲲 Galgame, User ${props.user.name}`"
         :to="`/kungalgamer/${user.uid}/info`"
       >
         <img :src="user.avatar" :alt="user.name" />
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
 
     <div class="info">
       <div class="replier">
         <p class="name">
-          <NuxtLinkLocale
+          <NuxtLink
             :aria-label="`KUN Visual Novel, 鲲 Galgame, User ${props.user.name}`"
             :to="`/kungalgamer/${user.uid}/info`"
           >
             {{ user.name }}
-          </NuxtLinkLocale>
+          </NuxtLink>
         </p>
 
         <p class="moemoepoint">

@@ -3,70 +3,51 @@ const { fold } = storeToRefs(usePersistKUNGalgameHomeStore())
 </script>
 
 <template>
-  <HomePinned />
-  <KunDivider margin="10px" />
+  <div class="bg-background flex justify-between gap-3 rounded-lg p-3">
+    <div>
+      <HomeTopicContainer v-if="fold.topics" />
 
-  <KunHeader :size="2">
-    <template #header>
-      <div class="header">
-        <span>{{ $t('home.updates') }}</span>
-        <span class="suffix" @click="fold.updates = !fold.updates">
-          {{ $t(`home.${fold.updates ? 'foldSection' : 'expandSection'}`) }}
-        </span>
-      </div>
-    </template>
-  </KunHeader>
-  <HomeRecent v-if="fold.updates" />
+      <KunHeader :size="2">
+        <template #header>
+          <div class="header">
+            <span>最新 Galgame</span>
+            <span class="suffix" @click="fold.galgames = !fold.galgames">
+              {{ fold.galgames ? '折叠板块' : '展开板块' }}
+            </span>
+          </div>
+        </template>
+      </KunHeader>
+      <HomeGalgameContainer v-if="fold.galgames" />
 
-  <KunHeader :size="2">
-    <template #header>
-      <div class="header">
-        <span>{{ $t('home.topics') }}</span>
-        <span class="suffix" @click="fold.topics = !fold.topics">
-          {{ $t(`home.${fold.topics ? 'foldSection' : 'expandSection'}`) }}
-        </span>
-      </div>
-    </template>
-  </KunHeader>
-  <HomeTopicContainer v-if="fold.topics" />
+      <KunHeader :size="2">
+        <template #header>
+          <div class="header">
+            <span>最新 Galgame 资源</span>
+            <span class="suffix" @click="fold.resources = !fold.resources">
+              {{ fold.resources ? '折叠板块' : '展开板块' }}
+            </span>
+          </div>
+        </template>
+      </KunHeader>
+      <HomeResourceContainer v-if="fold.resources" />
 
-  <KunHeader :size="2">
-    <template #header>
-      <div class="header">
-        <span>{{ $t('home.galgames') }}</span>
-        <span class="suffix" @click="fold.galgames = !fold.galgames">
-          {{ $t(`home.${fold.galgames ? 'foldSection' : 'expandSection'}`) }}
-        </span>
-      </div>
-    </template>
-  </KunHeader>
-  <HomeGalgameContainer v-if="fold.galgames" />
+      <KunHeader :size="2">
+        <template #header>
+          <div class="header">
+            <span>站点地图</span>
+            <span class="suffix" @click="fold.sitemaps = !fold.sitemaps">
+              {{ fold.sitemaps ? '折叠板块' : '展开板块' }}
+            </span>
+          </div>
+        </template>
+      </KunHeader>
+      <HomeSitemap v-if="fold.sitemaps" />
 
-  <KunHeader :size="2">
-    <template #header>
-      <div class="header">
-        <span>{{ $t('home.resources') }}</span>
-        <span class="suffix" @click="fold.resources = !fold.resources">
-          {{ $t(`home.${fold.resources ? 'foldSection' : 'expandSection'}`) }}
-        </span>
-      </div>
-    </template>
-  </KunHeader>
-  <HomeResourceContainer v-if="fold.resources" />
+      <HomeFooter />
+    </div>
 
-  <KunHeader :size="2">
-    <template #header>
-      <div class="header">
-        <span>{{ $t('home.sitemaps') }}</span>
-        <span class="suffix" @click="fold.sitemaps = !fold.sitemaps">
-          {{ $t(`home.${fold.sitemaps ? 'foldSection' : 'expandSection'}`) }}
-        </span>
-      </div>
-    </template>
-  </KunHeader>
-  <HomeSitemap v-if="fold.sitemaps" />
-
-  <HomeFooter />
+    <HomeRecent v-if="fold.updates" />
+  </div>
 </template>
 
 <style lang="scss" scoped>

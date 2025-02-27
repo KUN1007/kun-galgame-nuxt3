@@ -5,8 +5,6 @@ defineProps<{
   message: Message
   isSent: boolean
 }>()
-
-const { locale } = useI18n()
 </script>
 
 <template>
@@ -22,7 +20,7 @@ const { locale } = useI18n()
       <div class="content">
         <span>{{ message.content }}</span>
         <span class="time">
-          {{ formatTimeDifference(message.time, locale as Language) }}
+          {{ formatTimeDifference(message.time) }}
         </span>
       </div>
     </div>

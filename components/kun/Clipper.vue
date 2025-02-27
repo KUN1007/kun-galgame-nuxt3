@@ -62,12 +62,8 @@ const handleConfirmClipImage = async () => {
       </div>
 
       <div class="footer">
-        <button @click="handleClose">
-          {{ $t('ComponentAlert.cancel') }}
-        </button>
-        <button @click="handleConfirmClipImage">
-          {{ $t('ComponentAlert.confirm') }}
-        </button>
+        <button @click="handleClose">取消</button>
+        <button @click="handleConfirmClipImage">确定</button>
       </div>
     </div>
   </KunDialog>
@@ -85,7 +81,6 @@ const handleConfirmClipImage = async () => {
   user-select: none;
   transition: all 0.3s ease;
 
-  @include kun-center;
   flex-direction: column;
 
   .kun-clipper {

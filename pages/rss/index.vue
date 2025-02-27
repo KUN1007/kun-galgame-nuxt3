@@ -1,20 +1,16 @@
 <script setup lang="ts">
-const { availableLocales, locale, t } = useI18n()
-
 useHead({
-  title: `${t('seo.rss.title')} - ${t('head.title')}`,
+  title: `Galgame 和话题订阅 - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
-      content: t('seo.rss.description')
+      content: '鲲 Galgame 论坛最新 Galgame 和话题的订阅, 支持英语及中文'
     }
   ]
 })
 
-const rssLocale = ref(locale.value)
-
 const getLink = (link: 'galgame' | 'topic') =>
-  `${useRuntimeConfig().public.KUN_GALGAME_URL}/rss/${link}.xml?locale=${rssLocale.value}`
+  `${useRuntimeConfig().public.KUN_GALGAME_URL}/rss/${link}.xml`
 </script>
 
 <template>
@@ -24,20 +20,7 @@ const getLink = (link: 'galgame' | 'topic') =>
         <div class="rss-icon">
           <Icon class="icon" name="lucide:rss" />
         </div>
-
-        <div class="language">
-          <span>{{ $t('rss.select') }}</span>
-          <KunSelect
-            :options="availableLocales"
-            :default-value="locale"
-            :styles="{ width: '110px' }"
-            i18n="rss.language"
-            @set="(newVal) => (rssLocale = newVal)"
-            position="bottom"
-          >
-            {{ $t(`rss.language.${rssLocale}`) }}
-          </KunSelect>
-        </div>
+        <span>论坛目前支持话题与 Galgame 资源 RSS 订阅</span>
       </div>
 
       <div class="subscribe">
@@ -51,12 +34,12 @@ const getLink = (link: 'galgame' | 'topic') =>
             <span>
               <Icon class="icon" name="lucide:square-library" />
             </span>
-            <span class="name">{{ $t('rss.topic') }}</span>
+            <span class="name">话题</span>
           </a>
 
           <KunCopy
             :text="getLink('topic')"
-            :name="$t('rss.copy')"
+            name="复制 RSS"
             v-tooltip="{
               message: `${getLink('topic').slice(0, 30)}...`,
               position: 'bottom'
@@ -73,12 +56,12 @@ const getLink = (link: 'galgame' | 'topic') =>
             <span>
               <Icon class="icon" name="lucide:gamepad-2" />
             </span>
-            <span class="name">{{ $t('rss.galgame') }}</span>
+            <span class="name">Galgame</span>
           </a>
 
           <KunCopy
             :text="getLink('galgame')"
-            :name="$t('rss.copy')"
+            name="复制 RSS"
             v-tooltip="{
               message: `${getLink('galgame').slice(0, 30)}...`,
               position: 'bottom'
@@ -87,7 +70,7 @@ const getLink = (link: 'galgame' | 'topic') =>
         </div>
       </div>
 
-      <p class="hint">{{ $t('rss.update') }}</p>
+      <p class="hint">RSS 数据十七分钟更新一次</p>
 
       <div class="nav">
         <KunBackToPrevious />
@@ -117,8 +100,6 @@ const getLink = (link: 'galgame' | 'topic') =>
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @include kun-blur;
 }
 
 .title {
@@ -137,16 +118,6 @@ const getLink = (link: 'galgame' | 'topic') =>
     &:hover {
       color: var(--kungalgame-red-4);
       transform: scale(1.2);
-    }
-  }
-
-  .language {
-    display: flex;
-    margin-left: 17px;
-    align-items: center;
-
-    span {
-      margin-right: 10px;
     }
   }
 }

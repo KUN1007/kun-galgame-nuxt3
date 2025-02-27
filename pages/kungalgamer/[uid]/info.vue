@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { KUN_USER_ROLE_MAP, KUN_USER_STATUS_MAP } from '~/constants/user'
 import type { UserInfo } from '~/types/api/user'
 
 const props = defineProps<{
   user: UserInfo
 }>()
 
-const { locale } = useI18n()
 const user = computed(() => props.user)
 
 const rolesName = () => {
@@ -38,71 +38,32 @@ const statusName = () => {
   <div class="article" v-if="user">
     <div class="info">
       <div class="basic">
-        <span>{{ $t('user.profile.name') }}: {{ user.name }}</span>
-
+        <span>用户名: {{ user.name }}</span>
+        <span>萌萌点: {{ user.moemoepoint }}</span>
+        <span>注册序号: {{ user.uid }}</span>
+        <span>角色: {{ KUN_USER_ROLE_MAP[rolesName()] }}</span>
+        <span>状态: {{ KUN_USER_STATUS_MAP[statusName()] }}</span>
+        <span>被推: {{ user.upvote }}</span>
+        <span>被赞: {{ user.like }}</span>
+        <span>被踩: {{ user.dislike }}</span>
+        <span>今日发布话题: {{ user.dailyTopicCount }}</span>
+        <span>话题: {{ user.topic }}</span>
+        <span>回复: {{ user.reply }}</span>
+        <span>评论: {{ user.comment }}</span>
+        <span>发布 Galgame: {{ user.galgame }}</span>
+        <span>贡献 Galgame :{{ user.contributeGalgame }}</span>
+        <span>今日发布 Galgame :{{ user.dailyGalgameCount }}</span>
         <span>
-          {{ $t('user.profile.moemoepoint') }}: {{ user.moemoepoint }}
-        </span>
-
-        <span>{{ $t('user.profile.register') }}: {{ user.uid }}</span>
-
-        <span>
-          {{ $t('user.profile.roles') }}:
-          {{ $t(`user.profile.${rolesName()}`) }}
-        </span>
-
-        <span>
-          {{ $t('user.profile.status') }}:
-          {{ $t(`user.profile.${statusName()}`) }}
-        </span>
-
-        <span>{{ $t('user.profile.upvote') }}: {{ user.upvote }}</span>
-
-        <span>{{ $t('user.profile.like') }}: {{ user.like }}</span>
-
-        <span>{{ $t('user.profile.dislike') }}: {{ user.dislike }}</span>
-
-        <span>
-          {{ $t('user.profile.today') }}: {{ user.dailyTopicCount }}
-        </span>
-
-        <span>{{ $t('user.profile.topic') }}: {{ user.topic }}</span>
-
-        <span>{{ $t('user.profile.reply') }}: {{ user.reply }}</span>
-
-        <span> {{ $t('user.profile.comment') }}: {{ user.comment }} </span>
-
-        <span>
-          {{ $t('user.profile.galgame.galgame') }}: {{ user.galgame }}
-        </span>
-
-        <span>
-          {{ $t('user.profile.galgame.contribute') }}:
-          {{ user.contributeGalgame }}
-        </span>
-
-        <span>
-          {{ $t('user.profile.galgame.daily') }}:
-          {{ user.dailyGalgameCount }}
-        </span>
-
-        <span>
-          {{ $t('user.profile.time') }}:
-          {{
-            formatDate(user.time, locale, {
-              isShowYear: true,
-              isPrecise: true
-            })
-          }}
+          注册时间 :
+          {{ formatDate(user.time, { isShowYear: true, isPrecise: true }) }}
         </span>
       </div>
 
       <KunDivider margin="0 7px" />
 
       <div class="bio">
-        <div>{{ $t('user.profile.bio') }}:</div>
+        <div>签名:</div>
         <pre v-if="user.bio">{{ user.bio }}</pre>
-
         <KunNull :condition="!user.bio" type="null" :is-show-sticker="false" />
       </div>
     </div>

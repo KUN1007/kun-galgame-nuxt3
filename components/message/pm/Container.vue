@@ -137,7 +137,7 @@ const handleLoadHistoryMessages = async () => {
 <template>
   <div ref="historyContainer" class="history">
     <div class="loader" v-if="isShowLoader" @click="handleLoadHistoryMessages">
-      {{ $t('message.history') }}
+      加载历史消息
     </div>
 
     <KunNull :condition="!isShowLoader && messages.length > 30" type="null" />
@@ -178,7 +178,6 @@ const handleLoadHistoryMessages = async () => {
 
   .icon {
     font-size: 24px;
-    @include kun-center;
   }
 }
 
@@ -190,7 +189,6 @@ const handleLoadHistoryMessages = async () => {
     margin: 16px 0;
     color: var(--kungalgame-font-color-0);
     cursor: pointer;
-    @include kun-center;
 
     &:hover {
       color: var(--kungalgame-blue-5);

@@ -81,6 +81,7 @@
     "Hana",
     "Hanasaki",
     "Haruki",
+    "heroui",
     "hexcode",
     "Hikari",
     "hikarinagi",
@@ -163,6 +164,7 @@
     "Moegirlpedia",
     "Moegirlwiki",
     "moeli",
+    "moely",
     "moemoe",
     "moemoepoint",
     "moemoepoints",
@@ -310,6 +312,7 @@
     "VNDB",
     "vnode",
     "vueup",
+    "vueuse",
     "Wahhh",
     "waifu",
     "Wataridori",
@@ -334,7 +337,9 @@
     "zako",
     "Zutto"
   ],
-  "i18n-ally.localesPaths": ["language"],
+  "i18n-ally.localesPaths": ["i18n/locales"],
   "i18n-ally.keystyle": "nested",
-  "eslint.useFlatConfig": true
+  "i18n-ally.displayLanguage": "zh-CN",
+  "eslint.useFlatConfig": true,
+  "css.customData": [".vscode/tailwind.json"]
 }

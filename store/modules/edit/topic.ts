@@ -1,9 +1,8 @@
 import type { EditStorePersist } from '~/store/types/edit/topic'
 
-export const usePersistEditTopicStore = defineStore({
-  id: 'KUNGalgameEditTopic',
+export const usePersistEditTopicStore = defineStore('KUNGalgameEditTopic', {
   persist: {
-    storage: persistedState.localStorage
+    storage: piniaPluginPersistedstate.localStorage()
   },
   state: (): EditStorePersist => ({
     mode: 'preview',

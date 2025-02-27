@@ -1,4 +1,7 @@
 {
+  "compilerOptions": {
+    "module": "esnext"
+  },
   // https://nuxt.com/docs/guide/concepts/typescript
   "exclude": ["**/backup/**", "**/dist/**", "**/node_modules/**"],
   "extends": "./.nuxt/tsconfig.json"

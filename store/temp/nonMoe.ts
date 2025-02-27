@@ -3,8 +3,7 @@ interface NonMoeLogStore {
   limit: string
 }
 
-export const useTempNonMoeStore = defineStore({
-  id: 'tempNonMoe',
+export const useTempNonMoeStore = defineStore('tempNonMoe', {
   persist: false,
   state: (): NonMoeLogStore => ({
     page: '1',

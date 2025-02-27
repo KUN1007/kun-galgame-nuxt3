@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const { t } = useI18n()
+import { KUN_TOPIC_CATEGORY, KUN_TOPIC_SECTION } from '~/constants/topic'
+import { KUN_TOPIC_SECTION_DESCRIPTION_MAP } from '~/constants/section'
 
 const route = useRoute()
 const section = computed(() => (route.params as { section: string }).section)
@@ -11,11 +12,12 @@ const categoryMap: Record<string, string> = {
 }
 
 useHead({
-  title: `${t('seo.category.title')} - ${t('head.title')}`,
+  title: `话题分类 - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
-      content: t(`seo.category.${section.value.toLocaleLowerCase()}`)
+      content:
+        KUN_TOPIC_SECTION_DESCRIPTION_MAP[section.value.toLocaleLowerCase()]
     }
   ]
 })
@@ -24,9 +26,9 @@ useHead({
 <template>
   <div class="root">
     <div class="title" :class="section[0]">
-      <span>{{ $t(`edit.topic.${categoryMap[section[0]]}`) }}</span>
+      <span>{{ KUN_TOPIC_CATEGORY[categoryMap[section[0]]] }}</span>
       >
-      <span>{{ $t(`edit.topic.section.${section}`) }}</span>
+      <span>{{ KUN_TOPIC_SECTION[section] }}</span>
     </div>
 
     <Section :section="section" />
@@ -41,8 +43,6 @@ useHead({
   min-height: calc(100dvh - 75px);
   max-width: 80rem;
   margin: 0 auto;
-
-  @include kun-blur;
 }
 
 .title {

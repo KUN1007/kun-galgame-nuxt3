@@ -18,10 +18,8 @@ const handleDeleteHistory = (historyIndex: number) => {
 <template>
   <div class="history">
     <div class="title" v-if="searchHistory.length">
-      <span>{{ $t('search.history') }}</span>
-      <span @click="clearSearchHistory">
-        {{ $t('search.clear') }}
-      </span>
+      <span>搜索历史</span>
+      <span @click="clearSearchHistory">清除所有历史</span>
     </div>
 
     <div class="history-container" v-if="searchHistory.length">

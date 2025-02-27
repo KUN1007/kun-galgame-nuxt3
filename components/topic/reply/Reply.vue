@@ -8,8 +8,6 @@ defineProps<{
   title: string
 }>()
 
-const { locale } = useI18n()
-
 const emits = defineEmits<{
   scrollPage: [scrollToReplyId: number]
 }>()
@@ -33,9 +31,9 @@ watch(
     :id="`k${reply.floor}`"
   >
     <div class="floor">
-      <NuxtLinkLocale :to="`/topic/${reply.tid}#k${reply.floor}`">
+      <NuxtLink :to="`/topic/${reply.tid}#k${reply.floor}`">
         {{ reply.floor }}
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
 
     <div class="content">
@@ -51,7 +49,7 @@ watch(
 
         <div class="right">
           <div class="reply-to">
-            {{ `${$t('topic.panel.to')} @` }}
+            回复给 @
             <span @click="scrollToReplyId = reply.toFloor">
               {{ reply.toUser.name }}
             </span>
@@ -67,7 +65,7 @@ watch(
         <p class="time">
           <span>
             {{
-              formatDate(reply.time, locale, {
+              formatDate(reply.time, {
                 isShowYear: true,
                 isPrecise: true
               })
@@ -88,7 +86,7 @@ watch(
           >
             ×
             {{
-              formatDate(reply.edited, locale, {
+              formatDate(reply.edited, {
                 isShowYear: true,
                 isPrecise: true
               })
@@ -112,8 +110,6 @@ watch(
   margin-bottom: 17px;
   position: relative;
 
-  @include kun-blur;
-  @include kun-center;
   flex-direction: column;
 }
 

@@ -3,8 +3,7 @@ interface SectionStore {
   limit: number
 }
 
-export const useTempSectionStore = defineStore({
-  id: 'tempSection',
+export const useTempSectionStore = defineStore('tempSection', {
   persist: false,
   state: (): SectionStore => ({
     page: 1,

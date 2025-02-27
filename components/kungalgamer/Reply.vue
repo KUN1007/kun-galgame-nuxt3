@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { locale } = useI18n()
-
 const props = defineProps<{
   uid: number
 }>()
@@ -20,14 +18,14 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/replies`, {
 <template>
   <div class="reply" v-if="data && data.replies.length">
     <div class="item" v-for="(replyData, index) in data.replies" :key="index">
-      <NuxtLinkLocale :to="`/topic/${replyData.tid}`">
+      <NuxtLink :to="`/topic/${replyData.tid}`">
         <div class="title">
           {{ markdownToText(replyData.content) }}
         </div>
         <div class="time">
-          {{ formatDate(replyData.time, locale, { isShowYear: true }) }}
+          {{ formatDate(replyData.time, { isShowYear: true }) }}
         </div>
-      </NuxtLinkLocale>
+      </NuxtLink>
     </div>
 
     <KunPagination

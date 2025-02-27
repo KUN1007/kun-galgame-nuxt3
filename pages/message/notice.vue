@@ -32,10 +32,10 @@ onMounted(async () => {
 <template>
   <div class="container" v-if="data">
     <header>
-      <NuxtLinkLocale to="/message">
+      <NuxtLink to="/message">
         <Icon class="icon" name="lucide:chevron-left" />
-      </NuxtLinkLocale>
-      <h2>{{ $t('message.notice') }}</h2>
+      </NuxtLink>
+      <h2>通知</h2>
     </header>
 
     <KunDivider margin="7px 0" />
@@ -70,7 +70,6 @@ header {
     font-size: 24px;
     margin-right: 10px;
     color: var(--kungalgame-font-color-3);
-    @include kun-center;
 
     &:hover {
       color: var(--kungalgame-blue-5);

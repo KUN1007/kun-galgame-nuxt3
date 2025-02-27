@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { checkTopicPublish } from '../utils/checkTopicPublish'
 import { iconMap } from '../utils/category'
+import { KUN_TOPIC_SECTION } from '~/constants/topic'
 import type {
   EditCreateTopicRequestData,
   EditUpdateTopicRequestData
 } from '~/types/api/topic'
-
-const localePath = useLocalePath()
 
 const {
   tid,
@@ -44,12 +43,7 @@ const handlePublish = async () => {
     return
   }
 
-  const res = await useComponentMessageStore().alert({
-    'en-us': 'Confirm to Publish?',
-    'ja-jp': '公開を確定しますか？',
-    'zh-cn': '确定发布吗?',
-    'zh-tw': '確定發布嗎？'
-  })
+  const res = await useComponentMessageStore().alert('确定发布吗?')
   if (!res) {
     return
   }
@@ -69,8 +63,8 @@ const handlePublish = async () => {
   isPublishing.value = false
 
   if (tid) {
-    navigateTo(localePath(`/topic/${tid}`))
-    useComponentMessageStore().info('AlertInfo.edit.publishSuccess')
+    navigateTo(`/topic/${tid}`)
+    useComponentMessageStore().info('发布成功')
     usePersistEditTopicStore().resetTopicData()
   }
 }
@@ -89,12 +83,7 @@ const handleRewrite = async () => {
     return
   }
 
-  const res = await useComponentMessageStore().alert({
-    'en-us': 'Confirm to Rewrite?',
-    'ja-jp': 'リライトしますか？',
-    'zh-cn': '确定 Rewrite 吗?',
-    'zh-tw': '確定 Rewrite 嗎？'
-  })
+  const res = await useComponentMessageStore().alert('确定提交吗?')
   if (!res) {
     return
   }
@@ -114,8 +103,8 @@ const handleRewrite = async () => {
   isPublishing.value = false
 
   if (result) {
-    navigateTo(localePath(`/topic/${tid.value}`))
-    useComponentMessageStore().info('AlertInfo.edit.rewriteSuccess')
+    navigateTo(`/topic/${tid.value}`)
+    useComponentMessageStore().info('重新编辑成功')
     useTempEditStore().resetRewriteTopicData()
   }
 }
@@ -142,7 +131,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
       <p v-for="(kun, index) in section" :key="index">
         <Icon class="icon" :name="iconMap[kun[0]]" />
         <span>
-          {{ $t(`edit.topic.section.${kun}`) }}
+          {{ KUN_TOPIC_SECTION[kun] }}
         </span>
       </p>
     </div>
@@ -153,7 +142,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
       @click="handlePublish"
       :disabled="isPublishing"
     >
-      {{ $t('edit.topic.publish') }}
+      确认发布
     </KunButton>
 
     <KunButton
@@ -162,7 +151,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
       class="rewrite-btn"
       @click="handleRewrite"
     >
-      {{ $t('edit.topic.rewrite') }}
+      确认 Rewrite
     </KunButton>
   </div>
 </template>

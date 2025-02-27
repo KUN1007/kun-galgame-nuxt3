@@ -4,7 +4,7 @@ const router = useRouter()
 
 <template>
   <div class="return" @click="router.back()">
-    <span>{{ `< ${$t('back.back')}` }}</span>
+    <span>{{ `< 返回` }}</span>
   </div>
 </template>
 

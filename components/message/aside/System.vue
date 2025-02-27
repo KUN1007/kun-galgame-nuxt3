@@ -4,8 +4,6 @@ import type { MessageAdmin } from '~/types/api/message-admin'
 defineProps<{
   message: MessageAdmin
 }>()
-
-const { locale } = useI18n()
 </script>
 
 <template>
@@ -25,14 +23,11 @@ const { locale } = useI18n()
       </div>
       <KunAvatar :user="message.admin" size="32px" />
       <span class="time">
-        {{ formatTimeDifference(message.time, locale) }}
+        {{ formatTimeDifference(message.time) }}
       </span>
     </div>
 
-    <div
-      class="content"
-      v-html="getPreferredLanguageText(message.content, locale as Language)"
-    />
+    <div class="content" v-html="message.content['zh-cn']" />
   </div>
 </template>
 

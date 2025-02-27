@@ -1,69 +1,45 @@
 <script setup lang="ts">
-const { locale } = useI18n()
+const siteList = [
+  { name: '补丁', href: kungal.domain.patch },
+  { name: '表情包', href: kungal.domain.sticker },
+  { name: '导航网站', href: kungal.domain.nav },
+  { name: '开发文档', href: kungal.domain.doc }
+]
 </script>
 
 <template>
   <footer>
     <div class="subsites">
       <a
-        href="https://sticker.kungal.com/"
+        v-for="(site, index) in siteList"
+        :key="index"
+        :href="site.href"
         target="_blank"
-        rel="noopener noreferrer"
       >
-        {{ $t('home.subsites.sticker') }}
-      </a>
-      <a
-        href="https://nav.kungal.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {{ $t('home.subsites.nav') }}
-      </a>
-      <a
-        href="https://soft.moe/kun-visualnovel-docs/kun-forum.html"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {{ $t('home.subsites.documentation') }}
-      </a>
-      <a
-        :href="`https://www.kungal.org/${locale ? locale : ''}`"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {{ $t('home.subsites.backup') }}
+        {{ site.name }}
       </a>
     </div>
 
     <div class="copyright">
       <div>
-        <a
-          :href="`https://www.kungal.org/${locale ? locale : ''}`"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a :href="kungal.domain.main" target="_blank">
           <NuxtImg
             src="/favicon.webp"
-            :aria-label="$t('head.title')"
-            :alt="$t('head.title')"
+            :aria-label="kungal.titleShort"
+            :alt="kungal.titleShort"
           />
         </a>
-        <span>{{ $t('home.copyright') }}</span>
+        <span>{{ `© 2024 ${kungal.titleShort}` }}</span>
       </div>
 
-      <div>
-        <span>
-          <a
-            href="https://github.com/KUN1007/kun-galgame-nuxt3"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
-          </a>
-          {{ $t('home.openSource') }}
-          {{ useRuntimeConfig().public.KUN_VISUAL_NOVEL_VERSION }}
-        </span>
-      </div>
+      <span>
+        <a :href="kungal.github" target="_blank" rel="noopener noreferrer">
+          GitHub
+        </a>
+        {{
+          `开源 | 版本 ${useRuntimeConfig().public.KUN_VISUAL_NOVEL_VERSION}`
+        }}
+      </span>
     </div>
   </footer>
 </template>

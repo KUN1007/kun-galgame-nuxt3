@@ -1,12 +1,11 @@
 <script setup lang="ts">
-const { t, locale } = useI18n()
-
 useHead({
-  title: `${t('seo.nonMoe.title')} - ${t('head.title')}`,
+  title: `不萌记录 - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
-      content: t('seo.nonMoe.description')
+      content:
+        '鲲 Galgame 的用户违规记录, 这里记录了迄今为止所有被处罚的记录，希望大家不要这样做'
     }
   ]
 })
@@ -39,19 +38,15 @@ const { data: logs, status: listStatus } = await useFetch(`/api/non-moe/logs`, {
 <template>
   <div class="root">
     <div class="container">
-      <div class="title" :class="langClass">{{ $t('nonMoe.log') }}</div>
+      <div class="title" :class="langClass">不萌记录</div>
       <div class="article">
         <div class="article-title">
-          {{ $t('nonMoe.title') }}
+          这里记录了迄今为止所有被处罚的记录，希望大家不要这样做
         </div>
 
         <div class="content" v-if="logs">
           <NonMoeLog v-if="logs.length" :logs="logs" />
-
-          <span class="empty" v-if="!logs.length">
-            {{ $t('nonMoe.empty') }}
-          </span>
-
+          <span class="empty" v-if="!logs.length">暂无不萌记录</span>
           <KunPagination
             v-if="totalLength && totalLength > 4"
             :page="pageCount"
@@ -85,8 +80,6 @@ const { data: logs, status: listStatus } = await useFetch(`/api/non-moe/logs`, {
   overflow: hidden;
   display: flex;
   position: relative;
-
-  @include kun-blur;
 }
 
 .title {

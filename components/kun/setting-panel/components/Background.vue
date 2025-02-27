@@ -2,8 +2,6 @@
 import { ref, computed } from 'vue'
 import { backgroundImages } from './backgroundImage'
 
-const { locale } = useI18n()
-
 const itemsPerPage = 15
 const totalPages = Math.ceil(backgroundImages.length / itemsPerPage)
 const currentPage = ref(1)
@@ -37,9 +35,7 @@ const handleChangeImage = async (index: number) => {
 
 <template>
   <div class="background">
-    <div class="bg-settings">
-      {{ $t('header.settings.background') }}
-    </div>
+    <div class="bg-settings">背景设置</div>
 
     <div class="container">
       <div class="options">
@@ -54,9 +50,7 @@ const handleChangeImage = async (index: number) => {
           </span>
         </div>
         <div>
-          <span @click="restoreBackground">
-            {{ $t('header.settings.restore') }}
-          </span>
+          <span @click="restoreBackground">重置</span>
         </div>
         <KunSettingPanelComponentsCustomBackground />
       </div>
@@ -67,7 +61,7 @@ const handleChangeImage = async (index: number) => {
             v-for="kun in paginatedImages"
             :key="kun.index"
             v-tooltip="{
-              message: kun.message[locale as Language],
+              message: kun.message['zh-cn'],
               position: 'bottom'
             }"
           >
@@ -109,7 +103,6 @@ const handleChangeImage = async (index: number) => {
       box-shadow: var(--shadow);
       color: var(--kungalgame-font-color-3);
       transition: all 0.2s;
-      @include kun-center;
 
       &:hover {
         color: var(--kungalgame-blue-5);
@@ -142,7 +135,9 @@ const handleChangeImage = async (index: number) => {
       cursor: pointer;
       width: 70px;
       position: relative;
-      transition: transform 0.2s, z-index 0.2s;
+      transition:
+        transform 0.2s,
+        z-index 0.2s;
       z-index: 0;
 
       &:hover {

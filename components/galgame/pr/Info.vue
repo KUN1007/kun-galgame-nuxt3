@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { KUN_GALGAME_RESOURCE_PULL_REQUEST_STATUS_MAP } from '~/constants/galgame'
 import type { GalgamePR, GalgamePRDetails } from '~/types/api/galgame-pr'
 
 const props = defineProps<{
@@ -14,7 +15,6 @@ const iconMap: Record<number, string> = {
   2: 'lucide:x'
 }
 
-const { locale } = useI18n()
 const { uid } = usePersistUserStore()
 const details = ref<Partial<GalgamePRDetails>>()
 const isFetching = ref(false)
@@ -51,13 +51,13 @@ watch(
   <div class="pr">
     <div class="info">
       <KunAvatar :user="pr.user" size="30px" />
-      <NuxtLinkLocale :to="`/kungalgamer/${pr.user.uid}/info`">
+      <NuxtLink :to="`/kungalgamer/${pr.user.uid}/info`">
         {{ pr.user.name }}
-      </NuxtLinkLocale>
-      <span>{{ $t('galgame.pr.request') }}</span>
+      </NuxtLink>
+      <span>提出更新请求</span>
 
       <span class="time">
-        {{ formatTimeDifference(pr.time, locale) }}
+        {{ formatTimeDifference(pr.time) }}
       </span>
     </div>
 
@@ -65,14 +65,16 @@ watch(
       <span class="description" :class="`status${pr.status}`">
         <span v-if="pr.completedTime">
           {{
-            formatDate(pr.completedTime, locale, {
+            formatDate(pr.completedTime, {
               isShowYear: true,
               isPrecise: true
             })
           }}
         </span>
         <Icon class="icon" :name="iconMap[pr.status]" />
-        <span>{{ $t(`galgame.pr.status${pr.status}`) }}</span>
+        <span>
+          {{ KUN_GALGAME_RESOURCE_PULL_REQUEST_STATUS_MAP[pr.status] }}
+        </span>
       </span>
 
       <KunButton
@@ -80,7 +82,7 @@ watch(
         @click="handleGetDetails(pr.gprid)"
         :pending="isFetching"
       >
-        {{ $t('galgame.pr.details') }}
+        详情
       </KunButton>
 
       <span v-if="pr.status == 2">{{ `#${pr.index}` }}</span>
@@ -92,7 +94,7 @@ watch(
   </div>
 
   <p class="note" v-if="uid === props.pr.user.uid && props.pr.status === 0">
-    {{ $t('galgame.pr.note') }}
+    您可以自己合并自己提出的更新请求
   </p>
 
   <GalgamePrDetails v-if="details" :details="details" :refresh="refresh" />

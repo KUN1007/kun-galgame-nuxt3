@@ -14,8 +14,8 @@ defineProps<{
 </template>
 
 <style lang="scss">
-@use '~/assets/css/editor/index.scss';
-@use '~/assets/css/editor/kun-content.scss';
+@use '~/styles/editor/index.scss';
+@use '~/styles/editor/kun-content.scss';
 
 .kungalgame-content {
   width: calc(100% - 134px);

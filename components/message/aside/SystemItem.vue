@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { AsideItem } from '~/types/api/chat-message'
 
-const { locale } = useI18n()
-
 defineProps<{
   title: string
   data: AsideItem
@@ -10,16 +8,13 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLinkLocale
-    class="item"
-    :to="`/message/${data.route as 'system' | 'notice'}`"
-  >
+  <NuxtLink class="item" :to="`/message/${data.route as 'system' | 'notice'}`">
     <NuxtImg src="/apple-touch-icon.png" />
     <div class="info">
       <div class="title">
         <span class="name">{{ title }}</span>
         <span class="time" v-if="data.time">
-          {{ formatTimeDifference(data.time, locale) }}
+          {{ formatTimeDifference(data.time) }}
         </span>
       </div>
       <div class="content">
@@ -33,7 +28,7 @@ defineProps<{
         <span v-if="!data.unreadCount" class="read">{{ data.count }}</span>
       </div>
     </div>
-  </NuxtLinkLocale>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>

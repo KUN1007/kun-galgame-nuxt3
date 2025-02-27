@@ -5,8 +5,6 @@ const props = defineProps<{
   topic: TopicDetail
 }>()
 
-const localePath = useLocalePath()
-
 const { tid, title, content, tags, category, section, isTopicRewriting } =
   storeToRefs(useTempEditStore())
 const { uid } = usePersistUserStore()
@@ -21,7 +19,7 @@ const rewriteTopic = () => {
   section.value = props.topic.section ?? []
   isTopicRewriting.value = true
 
-  navigateTo(localePath('/edit/topic'))
+  navigateTo('/edit/topic')
 }
 </script>
 

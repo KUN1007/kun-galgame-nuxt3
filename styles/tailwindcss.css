@@ -1,0 +1,359 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.kun-dark-mode *));
+
+:root {
+  --kun-global-opacity: 0.7;
+}
+
+@theme {
+  --color-background: hsla(var(--background), var(--kun-global-opacity));
+  --color-foreground: hsl(var(--foreground));
+  --color-content1: hsl(var(--content1));
+  --color-content2: hsl(var(--content2));
+  --color-content3: hsl(var(--content3));
+  --color-content4: hsl(var(--content4));
+
+  --color-default: hsla(var(--default-500));
+  --color-primary: hsl(var(--primary-500));
+  --color-secondary: hsl(var(--secondary-500));
+  --color-success: hsl(var(--success-500));
+  --color-warning: hsl(var(--warning-500));
+  --color-danger: hsl(var(--danger-500));
+  --color-info: hsl(var(--info-500));
+
+  --color-default-50: hsla(var(--default-50), var(--kun-global-opacity));
+  --color-default-100: hsla(var(--default-100), var(--kun-global-opacity));
+  --color-default-200: hsla(var(--default-200), var(--kun-global-opacity));
+  --color-default-300: hsla(var(--default-300), var(--kun-global-opacity));
+  --color-default-400: hsla(var(--default-400), var(--kun-global-opacity));
+  --color-default-500: hsla(var(--default-500), var(--kun-global-opacity));
+  --color-default-600: hsla(var(--default-600), var(--kun-global-opacity));
+  --color-default-700: hsla(var(--default-700), var(--kun-global-opacity));
+  --color-default-800: hsla(var(--default-800), var(--kun-global-opacity));
+  --color-default-900: hsla(var(--default-900), var(--kun-global-opacity));
+  --color-default-950: hsla(var(--default-950), var(--kun-global-opacity));
+  --color-primary-50: hsl(var(--primary-50));
+  --color-primary-100: hsl(var(--primary-100));
+  --color-primary-200: hsl(var(--primary-200));
+  --color-primary-300: hsl(var(--primary-300));
+  --color-primary-400: hsl(var(--primary-400));
+  --color-primary-500: hsl(var(--primary-500));
+  --color-primary-600: hsl(var(--primary-600));
+  --color-primary-700: hsl(var(--primary-700));
+  --color-primary-800: hsl(var(--primary-800));
+  --color-primary-900: hsl(var(--primary-900));
+  --color-primary-950: hsl(var(--primary-950));
+  --color-secondary-50: hsl(var(--secondary-50));
+  --color-secondary-100: hsl(var(--secondary-100));
+  --color-secondary-200: hsl(var(--secondary-200));
+  --color-secondary-300: hsl(var(--secondary-300));
+  --color-secondary-400: hsl(var(--secondary-400));
+  --color-secondary-500: hsl(var(--secondary-500));
+  --color-secondary-600: hsl(var(--secondary-600));
+  --color-secondary-700: hsl(var(--secondary-700));
+  --color-secondary-800: hsl(var(--secondary-800));
+  --color-secondary-900: hsl(var(--secondary-900));
+  --color-secondary-950: hsl(var(--secondary-950));
+  --color-success-50: hsl(var(--success-50));
+  --color-success-100: hsl(var(--success-100));
+  --color-success-200: hsl(var(--success-200));
+  --color-success-300: hsl(var(--success-300));
+  --color-success-400: hsl(var(--success-400));
+  --color-success-500: hsl(var(--success-500));
+  --color-success-600: hsl(var(--success-600));
+  --color-success-700: hsl(var(--success-700));
+  --color-success-800: hsl(var(--success-800));
+  --color-success-900: hsl(var(--success-900));
+  --color-success-950: hsl(var(--success-950));
+  --color-warning-50: hsl(var(--warning-50));
+  --color-warning-100: hsl(var(--warning-100));
+  --color-warning-200: hsl(var(--warning-200));
+  --color-warning-300: hsl(var(--warning-300));
+  --color-warning-400: hsl(var(--warning-400));
+  --color-warning-500: hsl(var(--warning-500));
+  --color-warning-600: hsl(var(--warning-600));
+  --color-warning-700: hsl(var(--warning-700));
+  --color-warning-800: hsl(var(--warning-800));
+  --color-warning-900: hsl(var(--warning-900));
+  --color-warning-950: hsl(var(--warning-950));
+  --color-danger-50: hsl(var(--danger-50));
+  --color-danger-100: hsl(var(--danger-100));
+  --color-danger-200: hsl(var(--danger-200));
+  --color-danger-300: hsl(var(--danger-300));
+  --color-danger-400: hsl(var(--danger-400));
+  --color-danger-500: hsl(var(--danger-500));
+  --color-danger-600: hsl(var(--danger-600));
+  --color-danger-700: hsl(var(--danger-700));
+  --color-danger-800: hsl(var(--danger-800));
+  --color-danger-900: hsl(var(--danger-900));
+  --color-danger-950: hsl(var(--danger-950));
+  --color-info-50: hsl(var(--info-50));
+  --color-info-100: hsl(var(--info-100));
+  --color-info-200: hsl(var(--info-200));
+  --color-info-300: hsl(var(--info-300));
+  --color-info-400: hsl(var(--info-400));
+  --color-info-500: hsl(var(--info-500));
+  --color-info-600: hsl(var(--info-600));
+  --color-info-700: hsl(var(--info-700));
+  --color-info-800: hsl(var(--info-800));
+  --color-info-900: hsl(var(--info-900));
+  --color-info-950: hsl(var(--info-950));
+}
+
+@layer base {
+  :root {
+    /* Content color */
+    --background: 0, 0%, 100%;
+    --foreground: 202, 24%, 9%;
+
+    --content1: 0, 0%, 100%;
+    --content2: 240, 5%, 96%;
+    --content3: 240, 6%, 90%;
+    --content4: 240, 5%, 84%;
+
+    /* Primary colors - Blue */
+    --primary-50: 213, 92%, 95%;
+    --primary-100: 212, 92%, 90%;
+    --primary-200: 212, 92%, 79%;
+    --primary-300: 212, 92%, 69%;
+    --primary-400: 212, 92%, 58%;
+    --primary-500: 212, 100%, 47%;
+    --primary-600: 212, 100%, 38%;
+    --primary-700: 212, 100%, 29%;
+    --primary-800: 212, 100%, 19%;
+    --primary-900: 212, 100%, 10%;
+
+    /* Info colors - Cyan */
+    --info-50: 192, 100%, 97%;
+    --info-100: 190, 92%, 95%;
+    --info-200: 189, 95%, 92%;
+    --info-300: 189, 94%, 88%;
+    --info-400: 190, 96%, 82%;
+    --info-500: 190, 95%, 74%;
+    --info-600: 190, 95%, 44%;
+    --info-700: 191, 92%, 42%;
+    --info-800: 192, 85%, 36%;
+    --info-900: 192, 87%, 15%;
+
+    /* Success colors - Green */
+    --success-50: 147, 64%, 95%;
+    --success-100: 146, 61%, 89%;
+    --success-200: 146, 62%, 77%;
+    --success-300: 146, 63%, 66%;
+    --success-400: 146, 62%, 55%;
+    --success-500: 146, 79%, 44%;
+    --success-600: 146, 80%, 35%;
+    --success-700: 146, 79%, 26%;
+    --success-800: 146, 80%, 17%;
+    --success-900: 146, 78%, 9%;
+
+    /* Secondary colors - Pink */
+    --secondary-50: 317, 100%, 96%;
+    --secondary-100: 317, 100%, 93%;
+    --secondary-200: 317, 100%, 86%;
+    --secondary-300: 317, 100%, 79%;
+    --secondary-400: 317, 100%, 72%;
+    --secondary-500: 317, 100%, 65%;
+    --secondary-600: 317, 58%, 52%;
+    --secondary-700: 317, 53%, 39%;
+    --secondary-800: 317, 53%, 26%;
+    --secondary-900: 317, 52%, 13%;
+
+    /* Default colors - Purple */
+    --default-50: 270, 62%, 95%;
+    --default-100: 270, 59%, 89%;
+    --default-200: 270, 59%, 79%;
+    --default-300: 270, 59%, 68%;
+    --default-400: 270, 59%, 58%;
+    --default-500: 270, 67%, 47%;
+    --default-600: 270, 67%, 38%;
+    --default-700: 270, 67%, 28%;
+    --default-800: 270, 67%, 19%;
+    --default-900: 270, 67%, 9%;
+
+    /* Danger colors - Red */
+    --danger-50: 339, 92%, 95%;
+    --danger-100: 340, 92%, 90%;
+    --danger-200: 339, 90%, 80%;
+    --danger-300: 339, 91%, 71%;
+    --danger-400: 339, 90%, 61%;
+    --danger-500: 339, 90%, 51%;
+    --danger-600: 339, 87%, 41%;
+    --danger-700: 339, 86%, 31%;
+    --danger-800: 339, 87%, 20%;
+    --danger-900: 340, 85%, 10%;
+
+    /* Warning colors - Yellow */
+    --warning-50: 55, 92%, 95%;
+    --warning-100: 37, 91%, 91%;
+    --warning-200: 37, 91%, 82%;
+    --warning-300: 37, 91%, 73%;
+    --warning-400: 37, 91%, 64%;
+    --warning-500: 37, 91%, 55%;
+    --warning-600: 37, 74%, 44%;
+    --warning-700: 37, 74%, 33%;
+    --warning-800: 37, 75%, 22%;
+    --warning-900: 37, 75%, 11%;
+
+    /* Default colors - Zinc */
+    --default-50: 0, 0%, 98%;
+    --default-100: 240, 5%, 96%;
+    --default-200: 240, 6%, 90%;
+    --default-300: 240, 5%, 84%;
+    --default-400: 240, 5%, 65%;
+    --default-500: 240, 4%, 46%;
+    --default-600: 240, 5%, 34%;
+    --default-700: 240, 5%, 26%;
+    --default-800: 240, 4%, 16%;
+    --default-900: 240, 6%, 10%;
+
+    /* Radius */
+    --radius: 0.5rem;
+  }
+
+  .kun-dark-mode {
+    /* Content color */
+    --background: 0, 0%, 0%;
+    --foreground: 210, 6%, 93%;
+    --content1: 240, 6%, 10%;
+    --content2: 240, 4%, 16%;
+    --content3: 240, 5%, 26%;
+    --content4: 240, 5%, 34%;
+
+    /* Primary colors - Blue */
+    --primary-50: 212, 100%, 10%;
+    --primary-100: 212, 100%, 19%;
+    --primary-200: 212, 100%, 29%;
+    --primary-300: 212, 100%, 38%;
+    --primary-400: 212, 100%, 47%;
+    --primary-500: 212, 92%, 58%;
+    --primary-600: 212, 92%, 69%;
+    --primary-700: 212, 92%, 79%;
+    --primary-800: 212, 92%, 90%;
+    --primary-900: 213, 92%, 95%;
+
+    /* Info colors - Cyan */
+    --info-50: 192, 87%, 15%;
+    --info-100: 192, 85%, 36%;
+    --info-200: 191, 92%, 42%;
+    --info-300: 190, 95%, 44%;
+    --info-400: 190, 95%, 74%;
+    --info-500: 190, 96%, 82%;
+    --info-600: 189, 94%, 88%;
+    --info-700: 189, 95%, 92%;
+    --info-800: 190, 92%, 95%;
+    --info-900: 192, 100%, 97%;
+
+    /* Success colors - Green */
+    --success-50: 146, 78%, 9%;
+    --success-100: 146, 80%, 17%;
+    --success-200: 146, 79%, 26%;
+    --success-300: 146, 80%, 35%;
+    --success-400: 146, 79%, 44%;
+    --success-500: 146, 62%, 55%;
+    --success-600: 146, 63%, 66%;
+    --success-700: 146, 62%, 77%;
+    --success-800: 146, 61%, 89%;
+    --success-900: 147, 64%, 95%;
+
+    /* Secondary colors - Pink */
+    --secondary-50: 317, 52%, 13%;
+    --secondary-100: 317, 53%, 26%;
+    --secondary-200: 317, 53%, 39%;
+    --secondary-300: 317, 58%, 52%;
+    --secondary-400: 317, 100%, 65%;
+    --secondary-500: 317, 100%, 72%;
+    --secondary-600: 317, 100%, 79%;
+    --secondary-700: 317, 100%, 86%;
+    --secondary-800: 317, 100%, 93%;
+    --secondary-900: 317, 100%, 96%;
+
+    /* Default colors - Purple */
+    --default-50: 270, 67%, 9%;
+    --default-100: 270, 67%, 19%;
+    --default-200: 270, 67%, 28%;
+    --default-300: 270, 67%, 38%;
+    --default-400: 270, 67%, 47%;
+    --default-500: 270, 59%, 58%;
+    --default-600: 270, 59%, 68%;
+    --default-700: 270, 59%, 79%;
+    --default-800: 270, 59%, 89%;
+    --default-900: 270, 62%, 95%;
+
+    /* Danger colors - Red */
+    --danger-50: 340, 85%, 10%;
+    --danger-100: 339, 87%, 20%;
+    --danger-200: 339, 86%, 31%;
+    --danger-300: 339, 87%, 41%;
+    --danger-400: 339, 90%, 51%;
+    --danger-500: 339, 90%, 61%;
+    --danger-600: 339, 91%, 71%;
+    --danger-700: 339, 90%, 80%;
+    --danger-800: 340, 92%, 90%;
+    --danger-900: 339, 92%, 95%;
+
+    /* Warning colors - Yellow */
+    --warning-50: 37, 75%, 11%;
+    --warning-100: 37, 75%, 22%;
+    --warning-200: 37, 74%, 33%;
+    --warning-300: 37, 74%, 44%;
+    --warning-400: 37, 91%, 55%;
+    --warning-500: 37, 91%, 64%;
+    --warning-600: 37, 91%, 73%;
+    --warning-700: 37, 91%, 82%;
+    --warning-800: 37, 91%, 91%;
+    --warning-900: 55, 92%, 95%;
+
+    /* Default colors - Zinc */
+    --default-50: 240, 6%, 10%;
+    --default-100: 240, 4%, 16%;
+    --default-200: 240, 5%, 26%;
+    --default-300: 240, 5%, 34%;
+    --default-400: 240, 4%, 46%;
+    --default-500: 240, 5%, 65%;
+    --default-600: 240, 5%, 84%;
+    --default-700: 240, 6%, 90%;
+    --default-800: 240, 5%, 96%;
+    --default-900: 0, 0%, 98%;
+  }
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-default-200, currentColor);
+    color: var(--color-foreground);
+  }
+  *:focus {
+    outline: none;
+  }
+}
+
+@layer utilities {
+  body {
+    font-family:
+      -apple-system,
+      BlinkMacSystemFont,
+      Helvetica Neue,
+      Helvetica,
+      Arial,
+      PingFang SC,
+      Hiragino Sans GB,
+      Microsoft YaHei,
+      sans-serif !important;
+  }
+
+  // Custom scrollbar-hide syntax
+  .scrollbar-hide {
+    -ms-overflow-style: 'none';
+    scrollbar-width: 'none';
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}

@@ -1,32 +1,16 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 useHead({
-  title: `${t('seo.galgame.title')} - ${t('head.title')}`,
+  title: `Galgame 资源 - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
-      content: t('seo.galgame.description')
+      content:
+        '鲲 Galgame 论坛 Galgame 资源页面, 提供各类 Galgame 下载, Galgame 资源, 汉化, 英语, 生肉, 日语 Windows, macOS, PC, 应用, 直装, 模拟器, 安卓, Linux'
     }
   ]
 })
 </script>
 
 <template>
-  <div class="root">
-    <GalgameCardNav />
-
-    <GalgameCardContainer />
-  </div>
+  <GalgameCardContainer />
 </template>
-
-<style lang="scss" scoped>
-.root {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
-  color: var(--kungalgame-font-color-3);
-}
-</style>

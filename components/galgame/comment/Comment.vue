@@ -12,7 +12,6 @@ const galgame = inject<GalgameDetail>('galgame')
 
 const { commentToUid } = storeToRefs(useTempGalgameResourceStore())
 const { uid, roles } = usePersistUserStore()
-const { locale } = useI18n()
 
 const isShowComment = ref(false)
 const isShowDelete = computed(
@@ -26,12 +25,7 @@ const handleClickComment = (uid: number) => {
 }
 
 const handleDeleteComment = async (gid: number, gcid: number) => {
-  const res = await useComponentMessageStore().alert({
-    'en-us': 'Are you sure you want to delete the comment?',
-    'ja-jp': 'コメントを削除してもよろしいですか？',
-    'zh-cn': '您确定删除评论吗？',
-    'zh-tw': '您確定刪除評論嗎？'
-  })
+  const res = await useComponentMessageStore().alert('您确定删除评论吗？')
   if (!res) {
     return
   }
@@ -57,14 +51,14 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
         <KunAvatar :user="comment.user" size="30px" />
         <span>{{ comment.user.name }}</span>
         <span class="time">
-          {{ formatTimeDifference(comment.time, locale) }}
+          {{ formatTimeDifference(comment.time) }}
         </span>
 
         <div v-if="comment.toUser">
           <span>=> </span>
-          <NuxtLinkLocale :to="`/kungalgamer/${comment.toUser.uid}/info`">
+          <NuxtLink :to="`/kungalgamer/${comment.toUser.uid}/info`">
             {{ `${comment.toUser.name}` }}
-          </NuxtLinkLocale>
+          </NuxtLink>
         </div>
       </div>
 

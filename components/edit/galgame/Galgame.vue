@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import type { VNDB, VNDBResponse } from '../utils/VNDB'
 
-const { locale } = useI18n()
-const introductionLanguage = ref(locale.value as Language)
+const introductionLanguage = ref<Language>('zh-cn')
 const isSuccess = ref(false)
 const isFetching = ref(false)
 
@@ -77,43 +76,31 @@ const handleGetVNData = async () => {
     <EditGalgameHelp />
 
     <KunDivider margin="50px 0">
-      <span class="divider">{{ $t('edit.galgame.essential') }}</span>
+      <span class="divider">必要信息部分</span>
     </KunDivider>
 
     <KunHeader :size="2" :show-help="true">
-      <template #header>{{ $t('edit.galgame.vndb.name') }}</template>
+      <template #header>VNDB 编号</template>
 
-      <template #help>{{ $t('edit.galgame.vndb.help') }}</template>
+      <template #help>
+        我们要求每一部游戏必须有 VNDB ID。VNDB ID 需要在页面上方的 VNDB 官网
+        (vndb.org) 获取，当进入对应游戏的页面，游戏页面的 URL (形如
+        https://vndb.org/v19658) 中的 v19658 就是 VNDB ID。输入 ID 后点击
+        '获取数据'，会根据该 ID 尝试从 VNDB 获取游戏的标题和介绍 (均为英语)
+      </template>
     </KunHeader>
 
     <div class="vndb">
-      <KunInput
-        v-model="vndbId"
-        :placeholder="$t('edit.galgame.vndb.placeholder')"
-      />
-      <KunButton @click="handleGetVNData">
-        {{ $t('edit.galgame.vndb.fetch') }}
-      </KunButton>
+      <KunInput v-model="vndbId" placeholder="例如: v19658" />
+      <KunButton @click="handleGetVNData">获取数据</KunButton>
     </div>
-    <p class="info">{{ $t('edit.galgame.vndb.info') }}</p>
+    <p class="info">在您获取数据时，我们会自动为您检查该游戏是否重复</p>
 
     <EditGalgameTitle :titles="data.titles">
-      <KunInput
-        :placeholder="$t('edit.galgame.introduction.en-us')"
-        v-model="name['en-us']"
-      />
-      <KunInput
-        :placeholder="$t('edit.galgame.introduction.ja-jp')"
-        v-model="name['ja-jp']"
-      />
-      <KunInput
-        :placeholder="$t('edit.galgame.introduction.zh-cn')"
-        v-model="name['zh-cn']"
-      />
-      <KunInput
-        :placeholder="$t('edit.galgame.introduction.zh-tw')"
-        v-model="name['zh-tw']"
-      />
+      <KunInput placeholder="英语" v-model="name['en-us']" />
+      <KunInput placeholder="日语" v-model="name['ja-jp']" />
+      <KunInput placeholder="简体中文" v-model="name['zh-cn']" />
+      <KunInput placeholder="繁体中文" v-model="name['zh-tw']" />
     </EditGalgameTitle>
 
     <EditGalgameIntroduction
@@ -134,8 +121,6 @@ const handleGetVNData = async () => {
   width: 100%;
   height: 100%;
   padding: 17px;
-
-  @include kun-blur;
 }
 
 :deep(h2) {

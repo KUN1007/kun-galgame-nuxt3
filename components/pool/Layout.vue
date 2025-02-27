@@ -31,12 +31,10 @@ const { layout } = storeToRefs(usePersistPoolStore())
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   padding: 10px;
-  @include kun-blur;
 }
 
 .list {
   padding: 10px;
-  @include kun-blur;
 }
 
 @media (max-width: 700px) {

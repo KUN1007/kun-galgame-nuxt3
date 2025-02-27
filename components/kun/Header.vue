@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
-  size: number
   showHelp?: boolean
+  classname?: string
 }>()
 
 const isShow = ref(false)
@@ -9,7 +9,7 @@ const isShowHelp = computed(() => props.showHelp ?? false)
 </script>
 
 <template>
-  <div class="kun-header" :class="`size-${size}`">
+  <div :class="cn('mt-4 flex items-center', classname)">
     <slot name="header" />
     <span v-if="isShowHelp" @click="isShow = !isShow">
       <Icon class="icon" name="lucide:circle-help" />
@@ -30,12 +30,6 @@ const isShowHelp = computed(() => props.showHelp ?? false)
   display: flex;
   align-items: center;
 
-  &::before {
-    content: '#';
-    color: var(--kungalgame-blue-5);
-    margin-right: 10px;
-  }
-
   .icon {
     cursor: pointer;
     color: var(--kungalgame-blue-5);
@@ -49,17 +43,5 @@ const isShowHelp = computed(() => props.showHelp ?? false)
   font-size: small;
   color: var(--kungalgame-font-color-0);
   font-style: oblique;
-}
-
-.size-1 {
-  font-size: 32px;
-}
-
-.size-2 {
-  font-size: 24px;
-}
-
-.size-3 {
-  font-size: 18px;
 }
 </style>

@@ -124,14 +124,10 @@ watch(
         v-if="!pending && !isLoadComplete"
         @click="pageData.page++"
       >
-        {{ $t('search.load') }}
+        加载更多
       </span>
-      <span v-if="pending">
-        {{ $t('search.loading') }}
-      </span>
-      <span v-if="isLoadComplete">
-        {{ $t('search.complete') }}
-      </span>
+      <span v-if="pending">少女祈祷中...</span>
+      <span v-if="isLoadComplete">被榨干了呜呜呜呜呜, 一滴也不剩了</span>
     </KunDivider>
   </div>
 </template>
@@ -140,8 +136,6 @@ watch(
 .pagination {
   padding: 10px;
   margin-bottom: 17px;
-
-  @include kun-blur;
 }
 
 .kun-divider {

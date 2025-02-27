@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { KUN_REGISTER_FORM_FIELD_MAP } from '~/constants/auth'
 import { registerFormItem } from './registerFormItem'
 import { checkRegisterForm } from './checkRegister'
 import type { Pinia } from 'pinia'
@@ -12,7 +13,6 @@ const { checkForm, checkRegister } = checkRegisterForm.asyncData(
   useNuxtApp().$pinia as Pinia
 )
 
-const localePath = useLocalePath()
 const isSendCode = ref(false)
 const isAgree = ref(false)
 
@@ -58,10 +58,10 @@ const handleRegister = async () => {
   })
 
   if (userInfo) {
-    info.info('AlertInfo.login.success')
+    info.info(`登陆成功! 欢迎来到 ${kungal.name}`)
     useMessage(10135, 'success')
     usePersistUserStore().setUserInfo(userInfo)
-    navigateTo(localePath('/'))
+    navigateTo('/')
   }
 
   isCaptureSuccessful.value = false
@@ -83,7 +83,7 @@ const handleRegister = async () => {
         :key="item.index"
       >
         <label :for="item.value">
-          {{ $t(`register.${item.placeholder}`) }}
+          {{ KUN_REGISTER_FORM_FIELD_MAP[item.placeholder] }}
         </label>
         <KunInput
           :id="item.value"
@@ -103,32 +103,22 @@ const handleRegister = async () => {
       />
 
       <KunCheckBox v-model="isAgree">
-        <span>{{ $t('register.agree') }}</span>
-        <NuxtLinkLocale to="/agreement">
-          {{ $t('register.agreement') }}
-        </NuxtLinkLocale>
-        <NuxtLinkLocale to="/privacy">
-          {{ $t('register.privacy') }}
-        </NuxtLinkLocale>
+        <span>我同意</span>
+        <NuxtLink to="/agreement">用户协议</NuxtLink>
+        <NuxtLink to="/privacy">隐私政策</NuxtLink>
       </KunCheckBox>
 
-      <KunButton @click="handleRegister">
-        {{ $t('register.title') }}
-      </KunButton>
+      <KunButton @click="handleRegister">注册</KunButton>
     </form>
 
     <KunDivider margin="16px 0">
-      <span>{{ $t('login.or') }}</span>
+      <span>或</span>
     </KunDivider>
 
     <div class="more">
-      <NuxtLinkLocale to="/login">
-        {{ $t('login.title') }}
-      </NuxtLinkLocale>
+      <NuxtLink to="/login">登录</NuxtLink>
 
-      <NuxtLinkLocale to="/forgot">
-        {{ $t('login.forgot') }}
-      </NuxtLinkLocale>
+      <NuxtLink to="/forgot">忘记密码</NuxtLink>
     </div>
   </div>
 </template>
@@ -139,7 +129,6 @@ const handleRegister = async () => {
   padding: 32px;
   margin-bottom: 32px;
   user-select: none;
-  @include kun-blur;
 }
 
 .form {

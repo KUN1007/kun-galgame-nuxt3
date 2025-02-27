@@ -2,10 +2,6 @@
 import DefaultLayout from './default.vue'
 
 const route = useRoute()
-const getRouteBaseName = useRouteBaseName()
-const baseRouteName = computed(() => {
-  return getRouteBaseName(route)
-})
 
 const isMobile = ref(false)
 
@@ -14,16 +10,14 @@ onMounted(() => {
 })
 
 const isShowAside = computed(() => {
-  if (isMobile.value && baseRouteName.value !== 'message') {
+  if (isMobile.value && route.name !== 'message') {
     return false
   }
   return true
 })
 
 const isShowContent = computed(() => {
-  return (
-    !isMobile.value || (isMobile.value && baseRouteName.value !== 'message')
-  )
+  return !isMobile.value || (isMobile.value && route.name !== 'message')
 })
 </script>
 
@@ -59,8 +53,6 @@ const isShowContent = computed(() => {
   position: relative;
   padding: 10px;
   margin-left: 16px;
-
-  @include kun-blur;
 }
 
 .kun-footer {

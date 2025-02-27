@@ -6,7 +6,6 @@ const user = ref<UserInfo>()
 const isBanned = ref(false)
 
 const route = useRoute()
-const { t } = useI18n()
 
 const uid = computed(() => {
   return parseInt((route.params as { uid: string }).uid)
@@ -43,7 +42,7 @@ onMounted(() => {
 })
 
 useHead({
-  title: `${user.value?.name} - ${t('head.title')}`,
+  title: `${user.value?.name} - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
@@ -72,9 +71,7 @@ useHead({
 
     <KunNull :condition="!user && !isBanned" type="404" />
 
-    <KunBlank v-if="isBanned">
-      {{ $t('user.banned') }}
-    </KunBlank>
+    <KunBlank v-if="isBanned">此用户已被封禁</KunBlank>
 
     <KunFooter />
   </div>
@@ -93,8 +90,6 @@ useHead({
 .container {
   width: 100%;
   margin: auto;
-
-  @include kun-blur;
 }
 
 .content {

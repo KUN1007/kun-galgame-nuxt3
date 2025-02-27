@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { HomeMessage } from '~/types/api/home'
 
-const { locale } = useI18n()
-
 const iconMap: Record<string, string> = {
   upvoted: 'lucide:sparkles',
   replied: 'lucide:reply',
@@ -16,7 +14,7 @@ const pageData = reactive({
   limit: 10
 })
 
-const { data, status } = await useFetch(`/api/home/message`, {
+const { data, status } = await useFetch('/api/home/message', {
   method: 'GET',
   query: pageData
 })
@@ -30,92 +28,47 @@ watch(
     }
   }
 )
-
-const handleClose = () => {
-  messageData.value = messageData.value?.slice(0, 10)
-  pageData.page = 1
-}
 </script>
 
 <template>
-  <div class="recent" v-if="messageData">
-    <div class="message" v-for="(message, index) in messageData" :key="index">
-      <Icon class="icon" :name="iconMap[message.type]" />
-      <NuxtLinkLocale class="user" :to="`/kungalgamer/${message.uid}/info`">
-        {{ message.name }}
-      </NuxtLinkLocale>
-      <NuxtLinkLocale
-        class="link"
-        :to="message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`"
+  <div v-if="messageData" class="w-3xs shrink-0 space-y-3 rounded-lg">
+    <h2 class="text-xl font-semibold">最新动态</h2>
+
+    <div class="rounded-lg border shadow">
+      <div
+        v-for="(message, index) in messageData"
+        :key="index"
+        class="group flex items-start space-x-3 rounded-lg p-3 transition-colors"
       >
-        <span>{{ message.content }}</span>
-        <span>{{ formatTimeDifference(message.time, locale) }}</span>
-      </NuxtLinkLocale>
+        <div
+          class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
+        >
+          <Icon :name="iconMap[message.type]" class="text-primary h-4 w-4" />
+        </div>
+
+        <div class="space-y-2">
+          <NuxtLink
+            :to="
+              message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`
+            "
+            class="hover:text-primary line-clamp-3 break-all transition-colors"
+          >
+            {{ message.content }}
+          </NuxtLink>
+
+          <div class="flex items-center space-x-2">
+            <NuxtLink
+              :to="`/kungalgamer/${message.uid}/info`"
+              class="hover:text-foreground text-sm font-medium text-gray-600 transition-colors"
+            >
+              {{ message.name }}
+            </NuxtLink>
+            <span class="text-sm text-gray-500">
+              {{ formatTimeDifference(message.time) }}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <HomeLoader v-model="pageData.page" :status="status">
-    <span v-if="pageData.page !== 1" class="close" @click="handleClose">
-      {{ $t('home.fold') }}
-    </span>
-  </HomeLoader>
 </template>
-
-<style lang="scss" scoped>
-.recent {
-  display: flex;
-  flex-shrink: 0;
-  flex-direction: column;
-  font-size: 16px;
-}
-
-.message {
-  margin-bottom: 8px;
-  word-break: break-all;
-
-  .user {
-    color: var(--kungalgame-font-color-3);
-
-    &::after {
-      content: '-';
-      color: var(--kungalgame-gray-4);
-      margin: 0 4px;
-    }
-  }
-
-  .icon {
-    margin-right: 5px;
-    color: var(--kungalgame-blue-5);
-  }
-
-  .link {
-    color: var(--kungalgame-font-color-0);
-
-    &:hover {
-      color: var(--kungalgame-blue-5);
-    }
-
-    span:last-child {
-      font-size: 12px;
-      font-weight: initial;
-      margin-left: 7px;
-    }
-  }
-}
-
-.close {
-  margin-left: 17px;
-  cursor: pointer;
-  padding-right: 17px;
-
-  &:hover {
-    color: var(--kungalgame-blue-5);
-  }
-}
-
-@media (max-width: 700px) {
-  .recent {
-    font-size: 15px;
-  }
-}
-</style>

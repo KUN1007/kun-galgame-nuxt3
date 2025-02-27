@@ -70,7 +70,7 @@ watch(
         >
           <!-- A ha ha ha! You probably didn't expect that this was inspired by しゅがてん！-Sugarfull tempering- -->
           <div class="info">
-            {{ `「 ${$t(infoMsg, { params: infoTranslateParams })} 」` }}
+            {{ `「 ${infoMsg} 」` }}
           </div>
         </Transition>
 
@@ -94,8 +94,6 @@ watch(
   left: 0;
   right: 0;
   z-index: 9999;
-
-  @include kun-blur;
 }
 
 .lass {

@@ -8,8 +8,7 @@ interface RankingStore {
   user: RankingGetUserRequestData
 }
 
-export const useTempRankingStore = defineStore({
-  id: 'tempRanking',
+export const useTempRankingStore = defineStore('tempRanking', {
   persist: false,
   state: (): RankingStore => ({
     topic: {

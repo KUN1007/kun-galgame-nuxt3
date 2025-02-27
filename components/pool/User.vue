@@ -9,12 +9,9 @@ const props = defineProps<{
 }>()
 const user = computed(() => props.user)
 
-const { locale } = useI18n()
-const localePath = useLocalePath()
-
 const handleClickAvatar = (event: MouseEvent) => {
   event.preventDefault()
-  navigateTo(localePath(`/kungalgamer/${user.value.uid}/info`))
+  navigateTo(`/kungalgamer/${user.value.uid}/info`)
 }
 </script>
 
@@ -36,7 +33,7 @@ const handleClickAvatar = (event: MouseEvent) => {
     <div class="info">
       <span>{{ user.name }}</span>
       <span class="time">
-        {{ formatDate(props.time, locale, { isPrecise: true }) }}
+        {{ formatDate(props.time, { isPrecise: true }) }}
       </span>
     </div>
   </div>

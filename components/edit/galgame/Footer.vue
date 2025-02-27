@@ -4,7 +4,6 @@ import { checkGalgamePublish } from '../utils/checkGalgamePublish'
 const { vndbId, name, introduction, aliases } = storeToRefs(
   usePersistEditGalgameStore()
 )
-const localePath = useLocalePath()
 
 const isPublishing = ref(false)
 
@@ -16,22 +15,8 @@ const handlePublishGalgame = async () => {
     return
   }
   const res = await useComponentMessageStore().alert(
-    {
-      'en-us': 'Confirm to Publish Visualnovel?',
-      'ja-jp': 'ギャルゲームを公開しますか？',
-      'zh-cn': '确定发布 Galgame 吗?',
-      'zh-tw': '確定發布 Galgame 嗎？'
-    },
-    {
-      'en-us':
-        'You are about to publish a visualnovel. After publishing, you must go to the resource details page of the visualnovel you published and add a link for obtaining/downloading that visualnovel resource.',
-      'ja-jp':
-        'あなたはギャルゲームを公開しようとしています。公開後は、公開したギャルゲームのリソース詳細ページに移動し、そのギャルゲームリソースの取得/ダウンロードリンクを追加する必要があります。',
-      'zh-cn':
-        '您要发布的是 Galgame。发布后, 您必须到您发布完成的 Galgame 资源详情页, 添加一条该Galgame 资源的获取 / 下载链接。',
-      'zh-tw':
-        '您要發佈的是 Galgame。發佈後, 您必須到您發佈完成的 Galgame 資源詳情頁, 添加一條該Galgame 資源的獲取 / 下載鏈接。'
-    }
+    '确定发布 Galgame 吗?',
+    '您要发布的是 Galgame。发布后, 您必须到您发布完成的 Galgame 资源详情页, 添加一条该Galgame 资源的获取 / 下载链接。'
   )
   if (!res) {
     return
@@ -62,7 +47,7 @@ const handlePublishGalgame = async () => {
     await deleteImage('kun-galgame-publish-banner')
     usePersistEditGalgameStore().resetGalgameData()
 
-    navigateTo(localePath(`/galgame/${gid}`))
+    navigateTo(`/galgame/${gid}`)
     useComponentMessageStore().info('AlertInfo.edit.publishSuccess')
   }
 }
@@ -70,9 +55,7 @@ const handlePublishGalgame = async () => {
 
 <template>
   <div class="confirm">
-    <KunButton @click="handlePublishGalgame">
-      {{ $t('edit.galgame.confirm') }}
-    </KunButton>
+    <KunButton @click="handlePublishGalgame">确认发布 Galgame</KunButton>
   </div>
 </template>
 

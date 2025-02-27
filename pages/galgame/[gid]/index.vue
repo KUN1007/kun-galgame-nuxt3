@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { GalgameDetail } from '~/types/api/galgame'
 
-const { t, locale } = useI18n()
 const route = useRoute()
 
 const galgame = ref<GalgameDetail>()
@@ -23,23 +22,15 @@ if (data.value === 'banned') {
 }
 
 if (galgame.value) {
-  const titleBase = getPreferredLanguageText(
-    galgame.value.name,
-    locale.value as Language
-  )
+  const titleBase = galgame.value.name['zh-cn']
   const title = titleBase
     .concat(
       titleBase !== galgame.value.name['ja-jp'] && galgame.value.name['ja-jp']
         ? ` | ${galgame.value.name['ja-jp']}`
         : ''
     )
-    .concat(` - ${t('head.title')}`)
-  const description = markdownToText(
-    getPreferredLanguageText(
-      galgame.value.introduction,
-      locale.value as Language
-    )
-  )
+    .concat(` - ${kungal.titleShort}`)
+  const description = markdownToText(galgame.value.introduction['zh-cn'])
 
   const keywords =
     Object.values(galgame.value.name).join(', ') +
@@ -48,9 +39,6 @@ if (galgame.value) {
 
   useHead({
     title,
-    htmlAttrs: {
-      lang: locale.value
-    },
     meta: [
       {
         name: 'description',
@@ -111,9 +99,7 @@ if (galgame.value) {
 
     <KunNull :condition="!galgame && !isBanned" type="404" />
 
-    <KunBlank v-if="isBanned">
-      {{ $t('galgame.banned') }}
-    </KunBlank>
+    <KunBlank v-if="isBanned">此 Galgame 已被封禁</KunBlank>
   </div>
 </template>
 
@@ -125,7 +111,5 @@ if (galgame.value) {
   max-width: 80rem;
   margin: 0 auto;
   padding: 17px;
-
-  @include kun-blur;
 }
 </style>

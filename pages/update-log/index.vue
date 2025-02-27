@@ -2,11 +2,12 @@
 const { t } = useI18n()
 
 useHead({
-  title: `${t('seo.updateLog.title')} - ${t('head.title')}`,
+  title: `更新记录 - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
-      content: t('seo.updateLog.description')
+      content:
+        '鲲 Galgame 论坛开源 GitHub 仓库的更新记录, 记录了 Galgame 论坛从零到一的一切'
     }
   ]
 })
@@ -16,12 +17,12 @@ useHead({
   <div class="root">
     <div class="content">
       <div class="todo">
-        <div class="title">{{ $t('update.todo') }}</div>
+        <div class="title">待办列表</div>
         <UpdateLogTodo />
       </div>
 
       <div class="history">
-        <div class="title">{{ $t('update.history') }}</div>
+        <div class="title">历史版本</div>
         <UpdateLogHistory />
       </div>
     </div>
@@ -44,8 +45,6 @@ useHead({
   &::-webkit-scrollbar {
     width: 0;
   }
-
-  @include kun-blur;
 }
 
 .content {

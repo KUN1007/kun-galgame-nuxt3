@@ -38,7 +38,7 @@ onMounted(() => {
     v-model="inputValue"
     type="search"
     class="input"
-    :placeholder="`${$t('search.placeholder')}`"
+    placeholder="输入内容以自动搜索"
     @input="debouncedSearch(inputValue)"
     @keydown.enter="debouncedSearch(inputValue)"
   />

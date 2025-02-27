@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const { t } = useI18n()
 const route = useRoute()
 
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
@@ -32,12 +31,10 @@ const resetPanelStatus = () => {
 
 onBeforeRouteLeave(async (_, __, next) => {
   if (isReplyRewriting.value) {
-    const res = await useComponentMessageStore().alert({
-      'en-us': 'Confirm leaving the page? Your changes will not be saved.',
-      'ja-jp': 'ページを離れてもよろしいですか？変更は保存されません。',
-      'zh-cn': '确认离开界面吗？您的更改将不会保存。',
-      'zh-tw': '確認離開介面嗎？您的更改將不會保存。'
-    })
+    const res =
+      await useComponentMessageStore().alert(
+        '确认离开界面吗？您的更改将不会保存。'
+      )
     if (res) {
       useTempReplyStore().resetRewriteReplyData()
       resetPanelStatus()
@@ -69,7 +66,7 @@ if (data) {
   )
 
   useHead({
-    title: `${data.title} - ${t('head.title')}`,
+    title: `${data.title} - ${kungal.titleShort}`,
     meta: [
       {
         name: 'description',
@@ -81,7 +78,7 @@ if (data) {
       },
       {
         name: 'og:title',
-        content: `${data.title} - ${t('head.title')}`
+        content: `${data.title} - ${kungal.titleShort}`
       },
       {
         name: 'og:description',
@@ -105,7 +102,7 @@ if (data) {
       },
       {
         name: 'twitter:title',
-        content: `${data.title} - ${t('head.title')}`
+        content: `${data.title} - ${kungal.titleShort}`
       },
       {
         name: 'twitter:description',
@@ -130,9 +127,7 @@ if (data) {
 
     <KunNull :condition="!data && !isBanned" type="404" />
 
-    <KunBlank v-if="isBanned">
-      {{ $t('topic.banned') }}
-    </KunBlank>
+    <KunBlank v-if="isBanned">此话题已被封禁</KunBlank>
 
     <TopicBar />
   </div>

@@ -16,27 +16,17 @@ asideItems.value = contact.value ? contact.value : []
 
 <template>
   <aside class="aside">
-    <h2>{{ $t('message.name') }}</h2>
+    <h2>消息</h2>
 
     <KunDivider margin="10px 0" />
 
-    <MessageAsideSystemItem
-      v-if="system"
-      :title="$t('message.notice')"
-      :data="system[0]"
-    />
+    <MessageAsideSystemItem v-if="system" title="通知" :data="system[0]" />
 
-    <MessageAsideSystemItem
-      v-if="system"
-      :title="$t('message.system')"
-      :data="system[1]"
-    >
+    <MessageAsideSystemItem v-if="system" title="系统消息" :data="system[1]">
       <template #system>
-        <span v-if="!system[1].unreadCount" class="zako">
-          {{ $t('topic.panel.reply') }}
-        </span>
+        <span v-if="!system[1].unreadCount" class="zako">杂鱼~♡</span>
         <span v-if="system[1].unreadCount" class="new">
-          {{ `「 ${$t('message.new')} 」` }}
+          {{ `「 新消息 」` }}
         </span>
       </template>
     </MessageAsideSystemItem>
@@ -66,8 +56,6 @@ asideItems.value = contact.value ? contact.value : []
   &::-webkit-scrollbar {
     width: 0;
   }
-
-  @include kun-blur;
 }
 
 span {

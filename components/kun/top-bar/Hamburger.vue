@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import 'animate.css'
 import { hamburgerItem } from './hamburgerItem'
 import type { Hamburger } from './hamburgerItem'
-
-const localePath = useLocalePath()
 
 const { showKUNGalgameHamburger } = storeToRefs(useTempSettingStore())
 const { showKUNGalgameBackLoli } = storeToRefs(usePersistSettingsStore())
@@ -73,9 +70,9 @@ const handleShowMore = () => {
         @touchend="handleTouchEnd"
       >
         <div>
-          <div class="kungalgame" @click="navigateTo(localePath('/'))">
-            <NuxtImg src="/favicon.webp" :alt="$t('head.title')" />
-            <span>{{ $t('header.name') }}</span>
+          <div class="kungalgame" @click="navigateTo('/')">
+            <NuxtImg src="/favicon.webp" :alt="kungal.titleShort" />
+            <span>{{ kungal.titleShort }}</span>
           </div>
 
           <div class="item-container">
@@ -83,21 +80,19 @@ const handleShowMore = () => {
               <span class="icon-item">
                 <Icon class="icon" :name="kun.icon" />
               </span>
-              <NuxtLinkLocale
+              <NuxtLink
                 :to="kun.router"
                 :target="isValidURL(kun.router) ? '_blank' : ''"
               >
-                {{ $t(`header.hamburger.${kun.name}`) }}
-              </NuxtLinkLocale>
+                {{ kun.label }}
+              </NuxtLink>
               <span class="hint" v-if="kun.hint">
-                {{ $t(`header.hamburger.${kun.hint}`) }}
+                {{ kun.hint }}
               </span>
             </div>
           </div>
 
           <KunSettingPanelComponentsMode v-if="isShowSettings" />
-
-          <KunSettingPanelComponentsSwitchLanguage v-if="isShowSettings" />
 
           <KunSettingPanelComponentsCustomBackground
             v-if="isShowSettings"
@@ -122,12 +117,12 @@ const handleShowMore = () => {
           <KunSettingPanelComponentsReset v-if="isShowSettings" />
 
           <div class="loli" v-if="isShowSettings">
-            <span>{{ $t('header.hamburger.loli') }}</span>
+            <span>展示萌萌的琥珀</span>
             <KunSwitch v-model="showKUNGalgameBackLoli" />
           </div>
 
           <span class="more" @click="handleShowMore">
-            <span>{{ $t('header.hamburger.settings') }}</span>
+            <span>设置</span>
             <span :class="isShowSettings ? 'active' : ''">
               <Icon class="icon" name="lucide:chevron-down" />
             </span>
@@ -137,21 +132,21 @@ const handleShowMore = () => {
         <div class="links">
           <a
             aria-label="KUN Visual Novel Open Source GitHub Repository | 鲲 Galgame 论坛开源 GitHub 仓库"
-            href="https://github.com/KUN1007/kun-galgame-nuxt3"
+            :href="kungal.github"
             target="_blank"
           >
             <span><Icon class="icon" name="lucide:github" /></span>
             <span>GitHub</span>
           </a>
 
-          <NuxtLinkLocale to="/rss">
+          <NuxtLink to="/rss">
             <span><Icon class="icon" name="lucide:rss" /></span>
             <span>RSS</span>
-          </NuxtLinkLocale>
+          </NuxtLink>
 
           <a
             aria-label="KUN Visual Novel Official Telegram Group"
-            href="https://t.me/kungalgame"
+            :href="kungal.domain.telegram_group"
             target="_blank"
           >
             <span><Icon class="icon" name="ph:telegram-logo" /></span>
@@ -189,7 +184,6 @@ const handleShowMore = () => {
   flex-direction: column;
   justify-content: space-between;
 
-  @include kun-blur;
   border-radius: 0 5px 5px 0;
 }
 

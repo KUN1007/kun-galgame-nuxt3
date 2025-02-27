@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const localePath = useLocalePath()
+import { navigateTo } from '#app'
 </script>
 
 <template>
@@ -8,9 +8,7 @@ const localePath = useLocalePath()
       <h1>
         <slot />
       </h1>
-      <button @click="navigateTo(localePath('/'))">
-        {{ $t('kungalgame.home') }}
-      </button>
+      <button @click="navigateTo('/')">返回主页</button>
     </div>
   </div>
 </template>
@@ -27,8 +25,6 @@ const localePath = useLocalePath()
   width: 400px;
   height: 300px;
 
-  @include kun-blur;
-  @include kun-center;
   flex-direction: column;
 
   h1 {

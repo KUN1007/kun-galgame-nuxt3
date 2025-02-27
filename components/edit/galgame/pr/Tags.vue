@@ -4,17 +4,13 @@ const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 
 <template>
   <KunHeader :size="2">
-    <template #header>
-      {{ $t('edit.pr.tags.name') }}
-    </template>
+    <template #header>游戏标签</template>
   </KunHeader>
 
-  <div class="hint">
-    {{ $t('edit.pr.tags.hint') }}
-  </div>
+  <div class="hint">如果有多个标签, 请用英语逗号分隔每个标签</div>
 
   <KunTextarea
-    :placeholder="`${$t('edit.pr.tags.placeholder')}`"
+    placeholder="请输入游戏标签, 例如纯爱, 萝莉, 妹妹, 白毛, 白丝, 等等"
     v-model="galgamePR[0].tags"
   />
 </template>

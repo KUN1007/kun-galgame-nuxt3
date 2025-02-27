@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { KUN_GALGAME_RESOURCE_PULL_REQUEST_ACTION_MAP } from '~/constants/galgame'
+
 const route = useRoute()
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
-const { locale } = useI18n()
 
 const pageData = reactive({
   page: 1,
@@ -22,9 +23,7 @@ const { data, status } = await useFetch(
 
 <template>
   <KunHeader :size="2">
-    <template #header>
-      {{ $t('galgame.history.name') }}
-    </template>
+    <template #header>贡献历史</template>
   </KunHeader>
 
   <div class="container" v-if="data">
@@ -33,17 +32,21 @@ const { data, status } = await useFetch(
       v-for="(history, index) in data.historyData"
       :key="index"
     >
-      <NuxtLinkLocale :to="`/kungalgamer/${history.user.uid}/info`">
+      <NuxtLink :to="`/kungalgamer/${history.user.uid}/info`">
         <KunAvatar :user="history.user" size="30px" />
-      </NuxtLinkLocale>
+      </NuxtLink>
 
       <div class="info">
         <div>
           <span>{{ history.user.name }}</span>
-          <span>{{ $t(`galgame.history.${history.action}`) }}</span>
-          <span>{{ $t(`galgame.history.${history.type}`) }}</span>
+          <span>
+            {{ KUN_GALGAME_RESOURCE_PULL_REQUEST_ACTION_MAP[history.action] }}
+          </span>
+          <span>
+            {{ KUN_GALGAME_RESOURCE_PULL_REQUEST_TYPE_MAP[history.type] }}
+          </span>
           <span class="time">
-            {{ formatTimeDifference(history.time, locale) }}
+            {{ formatTimeDifference(history.time) }}
           </span>
         </div>
 

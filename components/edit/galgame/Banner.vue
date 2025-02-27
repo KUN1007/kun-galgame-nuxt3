@@ -11,9 +11,13 @@ onMounted(async () => {
 
 <template>
   <KunHeader :size="2" :show-help="true">
-    <template #header>{{ $t('edit.galgame.banner.name') }}</template>
+    <template #header>预览图</template>
 
-    <template #help>{{ $t('edit.galgame.banner.help') }}</template>
+    <template #help>
+      Galgame
+      预览图请尽量在游戏内截取原始分辨率，不要拍屏，尽量不要包含设备窗口的边，宽度大于高度为好。预览图最终加载大小会变为不大于
+      1920 × 1080 分辨率
+    </template>
   </KunHeader>
   <KunUpload
     class="upload"
@@ -21,7 +25,7 @@ onMounted(async () => {
     width="300px"
     :size="1920"
     :aspect="16 / 9"
-    :hint="`${$t('edit.galgame.banner.hint')}`"
+    hint="预览图不可包含 R18 等敏感内容\n宽度大于高度为好"
     @set-image="(img) => saveImage(img, `kun-galgame-publish-banner`)"
   />
 </template>

@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import type { AsideItem } from '~/types/api/chat-message'
 
-const { locale } = useI18n()
-
 defineProps<{
   room: AsideItem
 }>()
 </script>
 
 <template>
-  <NuxtLinkLocale class="item" :to="`/message/user/${room.route}`">
+  <NuxtLink class="item" :to="`/message/user/${room.route}`">
     <KunAvatar
       :user="{
         uid: parseInt(room.route),
@@ -22,7 +20,7 @@ defineProps<{
       <div class="title">
         <span>{{ room.title }}</span>
         <span v-if="room.time">
-          {{ formatTimeDifference(room.time, locale) }}
+          {{ formatTimeDifference(room.time) }}
         </span>
       </div>
       <div class="content">
@@ -36,7 +34,7 @@ defineProps<{
         <span v-if="!room.unreadCount" class="read">{{ room.count }}</span>
       </div>
     </div>
-  </NuxtLinkLocale>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>

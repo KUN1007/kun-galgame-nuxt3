@@ -1,10 +1,10 @@
 <script setup lang="ts"></script>
 
 <template>
-  <NuxtLinkLocale to="/" class="return">
+  <NuxtLink to="/" class="return">
     <Icon class="icon" name="lucide:home" />
-    <span>{{ $t('back.home') }}</span>
-  </NuxtLinkLocale>
+    <span>主页</span>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>

@@ -15,10 +15,8 @@ const setFont = () => {
 <template>
   <div class="font">
     <div class="title">
-      <span>{{ $t('header.settings.font') }}</span>
-      <span v-if="showKUNGalgameFontStyle === 'system-ui'">
-        {{ $t('header.settings.default') }}
-      </span>
+      <span>字体样式</span>
+      <span v-if="showKUNGalgameFontStyle === 'system-ui'">系统默认</span>
       <span v-else-if="showKUNGalgameFontStyle !== 'system-ui'">
         {{ showKUNGalgameFontStyle }}
       </span>
@@ -26,14 +24,12 @@ const setFont = () => {
 
     <div class="font-input">
       <input
-        :placeholder="`${$t('header.settings.fontInput')}`"
+        placeholder="请在这里输入字体的名字"
         type="text"
         v-model="font"
         required
       />
-      <button @click="setFont">
-        {{ $t('header.settings.confirm') }}
-      </button>
+      <button @click="setFont">确定</button>
     </div>
   </div>
 </template>

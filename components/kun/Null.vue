@@ -19,8 +19,10 @@ withDefaults(
       loading="lazy"
       placeholder="/apple-touch-icon.png"
     />
-    <span v-if="type === 'null'">{{ $t('Null.null') }}</span>
-    <span v-if="type === '404'">{{ $t('pageError.404') }}</span>
+    <span v-if="type === 'null'">请填满这只萝莉吧, 因为这里空空如也</span>
+    <span v-if="type === '404'">
+      杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面不见了 ~ 是不是被你吃了?!
+    </span>
   </div>
 </template>
 

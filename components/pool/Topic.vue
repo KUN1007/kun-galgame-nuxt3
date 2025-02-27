@@ -9,7 +9,7 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
 </script>
 
 <template>
-  <NuxtLinkLocale
+  <NuxtLink
     class="topic"
     :to="`/topic/${props.topic.tid}`"
     v-kun-gradient="{
@@ -39,7 +39,7 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
         <span v-if="actionsCount">{{ actionsCount }}</span>
       </span>
     </div>
-  </NuxtLinkLocale>
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>

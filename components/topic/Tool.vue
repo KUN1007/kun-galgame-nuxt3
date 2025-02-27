@@ -29,9 +29,7 @@ const emits = defineEmits<{
       </span>
     </div>
 
-    <span class="pending" v-if="pending">
-      {{ $t('search.loading') }}
-    </span>
+    <span class="pending" v-if="pending">少女祈祷中...</span>
   </div>
 </template>
 
@@ -41,8 +39,6 @@ const emits = defineEmits<{
   margin-bottom: 17px;
   display: flex;
   align-items: center;
-
-  @include kun-blur;
 }
 
 .order {

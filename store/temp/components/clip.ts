@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
 import type { KunClipStore } from '~/store/types/components/clip'
 
-export const useComponentClipStore = defineStore({
-  id: 'tempComponentClip',
+export const useComponentClipStore = defineStore('tempComponentClip', {
   persist: false,
   state: (): KunClipStore => ({
     imageBlob: null,

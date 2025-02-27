@@ -11,6 +11,7 @@ const isShowProgress = ref(false)
 const mpWidth = computed(() => {
   return props.moemoepoint ? `${props.moemoepoint % 100}%` : '0%'
 })
+
 onMounted(() => (isShowProgress.value = true))
 </script>
 
@@ -21,13 +22,13 @@ onMounted(() => (isShowProgress.value = true))
     </div>
 
     <div class="username">
-      <NuxtLinkLocale
+      <NuxtLink
         v-if="currentUserUid !== props.uid"
         :to="`/message/user/${props.uid}`"
       >
         <Icon class="icon" name="lucide:message-circle" />
-        <span>{{ $t('user.chat') }}</span>
-      </NuxtLinkLocale>
+        <span>聊天</span>
+      </NuxtLink>
       <span>{{ props.name }}</span>
     </div>
 

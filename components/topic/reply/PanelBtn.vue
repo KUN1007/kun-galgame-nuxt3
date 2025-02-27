@@ -17,12 +17,7 @@ const handlePublish = async () => {
     return
   }
 
-  const res = await useComponentMessageStore().alert({
-    'en-us': 'Confirm to publish?',
-    'ja-jp': '公開を確定しますか？',
-    'zh-cn': '确认发布吗？',
-    'zh-tw': '確認發布嗎？'
-  })
+  const res = await useComponentMessageStore().alert('确认发布吗？')
   if (!res) {
     return
   }
@@ -59,12 +54,7 @@ const handleRewrite = async () => {
     return
   }
 
-  const res = await useComponentMessageStore().alert({
-    'en-us': 'Confirm to Rewrite?',
-    'ja-jp': 'リライトしますか？',
-    'zh-cn': '确认 Rewrite 吗？',
-    'zh-tw': '確認 Rewrite 嗎？'
-  })
+  const res = await useComponentMessageStore().alert('确定提交吗?')
   if (!res) {
     return
   }
@@ -103,16 +93,14 @@ const handleShowAdvance = () => {
 
 <template>
   <div class="btn-container">
-    <button class="advance-btn" @click="handleShowAdvance">
-      {{ $t('topic.panel.advance') }}
-    </button>
+    <button class="advance-btn" @click="handleShowAdvance">高级选项</button>
 
     <button v-if="!isReplyRewriting" class="confirm-btn" @click="handlePublish">
-      {{ $t('topic.panel.confirm') }}
+      确认发布
     </button>
 
     <button v-if="isReplyRewriting" class="rewrite-btn" @click="handleRewrite">
-      {{ $t('topic.panel.rewrite') }}
+      确定编辑
     </button>
   </div>
 </template>

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { checkChangePassword } from './utils/check'
 
-const localePath = useLocalePath()
-
 const input = reactive({
   oldPassword: '',
   newPassword: '',
@@ -20,12 +18,7 @@ const handleChangePassword = async () => {
     return
   }
 
-  const res = await useComponentMessageStore().alert({
-    'en-us': 'Are you sure you want to change the password?',
-    'ja-jp': 'パスワードを変更してもよろしいですか？',
-    'zh-cn': '确定更改密码吗?',
-    'zh-tw': '確定更改密碼嗎？'
-  })
+  const res = await useComponentMessageStore().alert('确定更改密码吗?')
   if (!res) {
     return
   }
@@ -38,7 +31,7 @@ const handleChangePassword = async () => {
 
   if (result) {
     usePersistUserStore().$reset()
-    navigateTo(localePath('/login'))
+    navigateTo('/login')
     useMessage(10121, 'success')
   }
 }
@@ -46,11 +39,11 @@ const handleChangePassword = async () => {
 
 <template>
   <form class="password" @submit.prevent>
-    <div class="title">{{ $t('user.email.pwd') }}</div>
+    <div class="title">更改密码</div>
     <input autocomplete="username" type="text" hidden />
 
     <div class="input-container">
-      <label for="old-password">{{ $t('user.email.oldPwd') }}</label>
+      <label for="old-password">请输入您的旧密码</label>
       <KunInput
         id="old-password"
         autocomplete="current-password"
@@ -60,7 +53,7 @@ const handleChangePassword = async () => {
     </div>
 
     <div class="input-container">
-      <label for="new-password">{{ $t('user.email.newPwd') }}</label>
+      <label for="new-password">请输入您的新密码</label>
       <KunInput
         id="new-password"
         autocomplete="new-password"
@@ -70,7 +63,7 @@ const handleChangePassword = async () => {
     </div>
 
     <div class="input-container">
-      <label for="repeat-password">{{ $t('user.email.rePwd') }}</label>
+      <label for="repeat-password">请再次输入新密码</label>
       <KunInput
         id="repeat-password"
         autocomplete="new-password"
@@ -80,9 +73,7 @@ const handleChangePassword = async () => {
     </div>
 
     <div class="btn">
-      <KunButton @click="handleChangePassword">
-        {{ $t('user.email.confirmPwd') }}
-      </KunButton>
+      <KunButton @click="handleChangePassword">确定更改密码</KunButton>
     </div>
   </form>
 </template>

@@ -1,12 +1,10 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 useHead({
-  title: `${t('seo.forgot.title')} - ${t('head.title')}`,
+  title: `忘记密码 - ${kungal.titleShort}`,
   meta: [
     {
       name: 'description',
-      content: t('seo.forgot.description')
+      content: '鲲 Galgame 忘记密码, 忘记密码找回'
     }
   ]
 })
@@ -15,7 +13,7 @@ useHead({
 <template>
   <div class="root">
     <div class="container">
-      <div class="title">{{ $t('forgot.title') }}</div>
+      <div class="title">忘记密码</div>
 
       <ForgotPassword />
 
@@ -38,7 +36,6 @@ useHead({
 .container {
   margin: auto;
   width: 360px;
-  @include kun-blur;
 }
 
 .title {

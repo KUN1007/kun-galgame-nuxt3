@@ -1,7 +1,6 @@
 import type { TempSettingStore } from '~/store/types/settings'
 
-export const useTempSettingStore = defineStore({
-  id: 'tempSetting',
+export const useTempSettingStore = defineStore('tempSetting', {
   persist: false,
   state: (): TempSettingStore => ({
     showKUNGalgameHamburger: false,
@@ -13,7 +12,7 @@ export const useTempSettingStore = defineStore({
   }),
 
   actions: {
-    reset () {
+    reset() {
       this.showKUNGalgameHamburger = false
       this.showKUNGalgamePanel = false
       this.showKUNGalgameUserPanel = false

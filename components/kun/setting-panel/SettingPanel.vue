@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { showKUNGalgameBackLoli } = storeToRefs(usePersistSettingsStore())
-const localePath = useLocalePath()
 
 const showItemIndex = ref(1)
 
@@ -17,10 +16,10 @@ const handelCloseSettingsPanel = () => {
   <div class="root">
     <div class="container">
       <div class="title">
-        <span>{{ $t('header.settings.name') }}</span>
+        <span>设置面板</span>
         <span>
           <Icon
-            @click="navigateTo(localePath('/rss'))"
+            @click="navigateTo('/rss')"
             class="rss-icon"
             name="lucide:rss"
           />
@@ -29,8 +28,6 @@ const handelCloseSettingsPanel = () => {
       </div>
 
       <KunSettingPanelComponentsMode />
-
-      <KunSettingPanelComponentsSwitchLanguage />
 
       <div class="switch">
         <div class="menu">
@@ -105,7 +102,6 @@ const handelCloseSettingsPanel = () => {
   display: flex;
   border: 1px solid var(--kungalgame-blue-2);
 
-  @include kun-blur;
   backdrop-filter: blur(10px);
 }
 
@@ -159,8 +155,6 @@ const handelCloseSettingsPanel = () => {
       border-radius: 10px;
       padding: 5px 7px;
       font-size: 20px;
-
-      @include kun-center;
     }
 
     .loli {

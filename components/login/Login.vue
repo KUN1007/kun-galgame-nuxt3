@@ -2,8 +2,6 @@
 import { checkLoginForm } from './checkLogin'
 import type { Pinia } from 'pinia'
 
-const localePath = useLocalePath()
-
 const info = useComponentMessageStore()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useComponentMessageStore()
@@ -40,9 +38,9 @@ watch(
       ...kungalgameResponseHandler
     })
     if (userInfo) {
-      info.info('AlertInfo.login.success')
+      info.info(`登陆成功! 欢迎来到 ${kungal.name}`)
       usePersistUserStore().setUserInfo(userInfo)
-      navigateTo(localePath('/'))
+      navigateTo('/')
     }
 
     isCaptureSuccessful.value = false
@@ -60,9 +58,7 @@ watch(
       />
 
       <div>
-        <label for="username">
-          {{ $t('login.email') }}
-        </label>
+        <label for="username">用户名或邮箱</label>
         <KunInput
           id="username"
           v-model="loginForm.name"
@@ -72,9 +68,7 @@ watch(
       </div>
 
       <div>
-        <label for="password">
-          {{ $t('login.password') }}
-        </label>
+        <label for="password">密码</label>
         <KunInput
           id="password"
           v-model="loginForm.password"
@@ -83,23 +77,17 @@ watch(
         />
       </div>
 
-      <KunButton @click="handleLogin" class="btn">
-        {{ $t('login.title') }}
-      </KunButton>
+      <KunButton @click="handleLogin" class="btn">登录</KunButton>
     </form>
 
     <KunDivider margin="16px 0">
-      <span>{{ $t('login.or') }}</span>
+      <span>或</span>
     </KunDivider>
 
     <div class="more">
-      <NuxtLinkLocale to="/register">
-        {{ $t('register.title') }}
-      </NuxtLinkLocale>
+      <NuxtLink to="/register">注册</NuxtLink>
 
-      <NuxtLinkLocale to="/forgot">
-        {{ $t('login.forgot') }}
-      </NuxtLinkLocale>
+      <NuxtLink to="/forgot">忘记密码?</NuxtLink>
     </div>
   </div>
 </template>
@@ -110,7 +98,6 @@ watch(
   padding: 32px;
   margin-bottom: 32px;
   user-select: none;
-  @include kun-blur;
 }
 
 .form {
