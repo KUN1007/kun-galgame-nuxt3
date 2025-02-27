@@ -82,6 +82,8 @@ onMounted(() => {
   <!-- ReplyPanel -->
   <LazyTopicReplyPanel />
 
+  <LazyKunSettingPanel />
+
   <NuxtPwaManifest />
   <NuxtLoadingIndicator color="var(--kungalgame-blue-5)" />
 

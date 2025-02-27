@@ -2,6 +2,8 @@
 import { kunLayoutItem } from '~/constants/layout'
 
 const route = useRoute()
+
+const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 </script>
 
 <template>
@@ -32,10 +34,8 @@ const route = useRoute()
           :key="index"
           :class="
             cn(
-              'flex items-center px-3 py-1',
-              route.fullPath === item.router
-                ? 'bg-primary-100 rounded-r-full font-bold'
-                : ''
+              'hover:bg-primary-100 flex items-center rounded-r-full px-3 py-1 transition-colors',
+              route.fullPath === item.router ? 'bg-primary-100 font-bold' : ''
             )
           "
         >
@@ -52,6 +52,18 @@ const route = useRoute()
           </span>
         </NuxtLink>
       </div>
+
+      <button
+        class="flex w-full cursor-pointer items-center px-3 py-1"
+        @click="showKUNGalgamePanel = !showKUNGalgamePanel"
+      >
+        <span
+          class="mr-3 flex items-center justify-center text-xl text-inherit"
+        >
+          <Icon class="text-inherit" name="lucide:settings" />
+        </span>
+        <span class="text-inherit">网站设置</span>
+      </button>
     </div>
 
     <div class="my-4 flex w-full justify-around">
