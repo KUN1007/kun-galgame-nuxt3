@@ -18,7 +18,7 @@ const handleFileChange = async (event: Event) => {
 </script>
 
 <template>
-  <div class="kungalgamer-bg">
+  <div>
     <input
       ref="input"
       hidden
@@ -26,44 +26,13 @@ const handleFileChange = async (event: Event) => {
       accept=".jpg, .jpeg, .png"
       @change="handleFileChange($event)"
     />
-    <span class="custom" @click="handleCustomBackground">
-      <span class="custom-pc">自定义</span>
-      <span class="custom-mobile">自定义背景</span>
-    </span>
+    <KunButton
+      color="default"
+      variant="flat"
+      class-name="py-1.5"
+      @click="handleCustomBackground"
+    >
+      自定义
+    </KunButton>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.kungalgamer-bg {
-  display: flex;
-  flex-direction: column;
-
-  .custom {
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    color: var(--kungalgame-font-color-3);
-    transition: all 0.2s;
-
-    &:hover {
-      color: var(--kungalgame-blue-5);
-      background-color: var(--kungalgame-trans-blue-0);
-    }
-  }
-}
-
-.custom-mobile {
-  display: none;
-}
-
-@media (max-width: 700px) {
-  .custom-pc {
-    display: none;
-  }
-
-  .custom-mobile {
-    display: block;
-  }
-}
-</style>

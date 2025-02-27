@@ -36,7 +36,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   variant: 'solid',
   color: 'primary',
   size: 'md',
-  rounded: 'md',
+  rounded: 'lg',
   type: 'button',
   disabled: false,
   loading: false,
@@ -95,11 +95,11 @@ const colorClasses = computed(() => {
     bordered: (color: KunButtonColor) =>
       `border-${color}-500 text-${color}-500 hover:bg-${color}-50`,
     light: (color: KunButtonColor) =>
-      `bg-${color}-200 text-${color}-400 hover:bg-${color}-300 border-transparent`,
+      `bg-${color}-200 text-${color}-500 hover:bg-${color}-300 border-transparent`,
     flat: (color: KunButtonColor) =>
-      `bg-${color}-100 text-${color}-400 hover:bg-${color}-200`,
+      `bg-${color}-50 text-${color}-500 hover:bg-${color}-200`,
     faded: (color: KunButtonColor) =>
-      `bg-${color}-100 text-${color}-400 hover:bg-${color}-200`,
+      `bg-${color}-50 text-${color}-500 hover:text-white hover:bg-${color}-500`,
     shadow: (color: KunButtonColor) =>
       `bg-${color}-500 text-white hover:bg-${color}-400 border-${color}-500`,
     ghost: (color: KunButtonColor) => `text-${color}-500 hover:bg-${color}-100`
@@ -132,7 +132,7 @@ const { ripples, onClick } = useRipple()
   <button
     :class="
       cn(
-        'relative inline-flex items-center justify-center overflow-hidden rounded-md font-medium transition-all active:scale-[0.97] disabled:opacity-50',
+        'relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-md font-medium transition-all active:scale-[0.97] disabled:opacity-50',
         sizeClasses,
         variantClasses,
         colorClasses,

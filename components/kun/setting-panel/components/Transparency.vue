@@ -14,17 +14,17 @@ watch(
 </script>
 
 <template>
-  <div>
-    <div class="container">
+  <div class="space-y-2">
+    <div class="flex justify-between">
       <span>页面透明度</span>
       <span>{{ showKUNGalgamePageTransparency }}%</span>
     </div>
 
-    <div class="scroll">
+    <div class="flex items-center">
       <span>10%</span>
 
       <KunSlider
-        class="main"
+        class="mx-4 w-full"
         :min="10"
         :max="90"
         :step="1"
@@ -35,22 +35,3 @@ watch(
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.scroll {
-  width: 100%;
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-}
-
-.main {
-  width: 100%;
-  margin: 20px 10px;
-}
-
-.container {
-  display: flex;
-  justify-content: space-between;
-}
-</style>

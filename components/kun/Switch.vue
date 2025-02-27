@@ -4,8 +4,9 @@ withDefaults(
     modelValue: boolean
     label?: string
     disabled?: boolean
+    className?: string
   }>(),
-  { label: '', disabled: false }
+  { label: '', className: '', disabled: false }
 )
 
 const stableId = useId()
@@ -17,7 +18,7 @@ defineEmits<{
 </script>
 
 <template>
-  <div class="inline-flex items-center">
+  <div :class="cn('inline-flex items-center', className)">
     <label
       :for="computedId"
       class="relative inline-flex cursor-pointer items-center"
@@ -39,9 +40,9 @@ defineEmits<{
       <div
         class="h-6 w-11 rounded-full transition-colors duration-200 ease-in-out"
         :class="[
-          modelValue ? 'bg-primary-600' : 'bg-gray-200',
+          modelValue ? 'bg-primary-500' : 'bg-gray-500',
           disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
-          modelValue && disabled ? 'bg-primary-400' : ''
+          modelValue && disabled ? 'bg-primary-300' : ''
         ]"
       />
       <div
@@ -55,7 +56,7 @@ defineEmits<{
     <span
       v-if="label"
       class="ml-3 text-sm font-medium"
-      :class="[disabled ? 'text-gray-400' : 'text-gray-900']"
+      :class="[disabled ? 'text-gray-400' : '']"
     >
       {{ label }}
     </span>

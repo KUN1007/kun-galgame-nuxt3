@@ -1,8 +1,5 @@
 <script setup lang="ts">
 const { showKUNGalgameBackLoli } = storeToRefs(usePersistSettingsStore())
-
-const showItemIndex = ref(1)
-
 const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 </script>
 
@@ -12,140 +9,46 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
     @update-value="(value) => (showKUNGalgamePanel = value)"
   >
     <div class="relative flex justify-between">
-      <div class="relative">
-        <div class="flex items-center justify-between text-lg">
+      <div class="relative shrink-0 space-y-4">
+        <div class="flex items-center gap-2 text-lg">
           <span>设置面板</span>
-          <span>
-            <Icon
-              @click="navigateTo('/rss')"
-              class="rss-icon"
-              name="lucide:rss"
-            />
-            <Icon class="settings-icon" name="uiw:setting-o" />
-          </span>
+          <Icon
+            class="hover:text-primary cursor-pointer"
+            name="lucide:circle-help"
+          />
         </div>
 
         <KunSettingPanelComponentsMode />
 
-        <div class="flex flex-col space-y-4">
-          <div class="flex items-center">
-            <span
-              :class="
-                cn(
-                  'flex rounded-lg p-2 transition-colors',
-                  showItemIndex === 1 ? 'bg-primary-50 text-primary shadow' : ''
-                )
-              "
-              @click="showItemIndex = 1"
-            >
-              <Icon class="text-inherit" name="mdi:circle-transparent" />
-            </span>
-            <span
-              :class="
-                cn(
-                  'flex rounded-lg p-2 transition-colors',
-                  showItemIndex === 2 ? 'bg-primary-50 text-primary shadow' : ''
-                )
-              "
-              @click="showItemIndex = 2"
-            >
-              <Icon class="text-inherit" name="tabler:blur" />
-            </span>
-            <span
-              :class="
-                cn(
-                  'flex rounded-lg p-2 transition-colors',
-                  showItemIndex === 3 ? 'bg-primary-50 text-primary shadow' : ''
-                )
-              "
-              @click="showItemIndex = 3"
-            >
-              <Icon class="text-inherit" name="ci:font" />
-            </span>
+        <KunSettingPanelComponentsConfigItems />
 
-            <span
-              class="loli"
-              v-tooltip="{
-                message: '是否显示琥珀',
-                position: 'bottom'
-              }"
-            >
-              <KunSwitch v-model="showKUNGalgameBackLoli" />
-            </span>
-          </div>
-
-          <TransitionGroup name="item" tag="div">
-            <div class="item" v-if="showItemIndex === 1">
-              <KunSettingPanelComponentsTransparency />
-            </div>
-
-            <div class="item" v-if="showItemIndex === 2">
-              <KunSettingPanelComponentsBlur />
-            </div>
-
-            <div class="item" v-else-if="showItemIndex === 3">
-              <KunSettingPanelComponentsFont />
-            </div>
-          </TransitionGroup>
+        <div class="ml-auto flex gap-2">
+          显示琥珀
+          <KunSwitch v-model="showKUNGalgameBackLoli" />
         </div>
 
-        <KunSettingPanelComponentsBackground class="background" />
+        <KunSettingPanelComponentsBackground />
 
         <KunSettingPanelComponentsReset />
       </div>
 
       <KunSettingPanelComponentsLoli />
 
-      <div class="absolute right-0">
-        <Icon
-          class="icon"
-          @click="showKUNGalgamePanel = false"
-          name="lucide:x"
-        />
-      </div>
+      <KunButton
+        color="default"
+        variant="flat"
+        class-name="absolute right-0 p-2 shadow"
+        rounded="full"
+        size="lg"
+        @click="showKUNGalgamePanel = false"
+      >
+        <Icon class="icon" name="lucide:x" />
+      </KunButton>
     </div>
   </KunModal>
 </template>
 
 <style lang="scss" scoped>
-.switch {
-  display: flex;
-  flex-direction: column;
-
-  .menu {
-    display: flex;
-    align-items: center;
-    margin-bottom: 17px;
-
-    span {
-      cursor: pointer;
-      border-radius: 10px;
-      padding: 5px 7px;
-      font-size: 20px;
-    }
-
-    .active {
-      box-shadow: var(--shadow);
-      background-color: var(--kungalgame-trans-blue-0);
-      color: var(--kungalgame-blue-5);
-    }
-  }
-
-  .item {
-    width: 100%;
-    height: 73px;
-  }
-}
-
-.close {
-  font-size: 25px;
-  width: 270px;
-  display: flex;
-  justify-content: flex-end;
-  margin: 20px;
-  cursor: pointer;
-}
-
 .item-move,
 .item-enter-active,
 .item-leave-active {
@@ -160,11 +63,5 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 
 .item-leave-active {
   position: absolute;
-}
-
-@media (max-width: 1000px) {
-  .root {
-    display: none;
-  }
 }
 </style>

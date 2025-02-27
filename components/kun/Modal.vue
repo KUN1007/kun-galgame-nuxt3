@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { useEventListener } from '@vueuse/core'
 
-defineProps<{
-  modalValue: boolean
-}>()
+withDefaults(
+  defineProps<{
+    modalValue: boolean
+    className?: string
+  }>(),
+  { className: '' }
+)
 
 const emits = defineEmits<{
   updateValue: [modalValue: boolean]
@@ -21,7 +25,12 @@ useEventListener('keydown', (e: KeyboardEvent) => {
     <Transition name="dialog">
       <div
         v-if="modalValue"
-        class="bg-default-800/70 fixed z-9999 flex size-full transition-all"
+        :class="
+          cn(
+            'bg-default-800/70 dark:bg-background/70 fixed z-100 flex size-full transition-all',
+            className
+          )
+        "
         @click="$emit('updateValue', false)"
         tabindex="0"
       >

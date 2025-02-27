@@ -23,13 +23,13 @@ const setFont = () => {
     </div>
 
     <div class="font-input">
-      <input
+      <KunInput
         placeholder="请在这里输入字体的名字"
         type="text"
         v-model="font"
         required
       />
-      <button @click="setFont">确定</button>
+      <KunButton @click="setFont">确定</KunButton>
     </div>
   </div>
 </template>

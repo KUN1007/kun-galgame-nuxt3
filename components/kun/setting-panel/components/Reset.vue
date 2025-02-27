@@ -16,22 +16,13 @@ const handleRecover = async () => {
 </script>
 
 <template>
-  <button class="reset" @click="handleRecover">恢复所有设置为默认</button>
+  <KunButton
+    full-width
+    color="danger"
+    variant="faded"
+    class-name="p-2"
+    @click="handleRecover"
+  >
+    恢复所有设置为默认
+  </KunButton>
 </template>
-
-<style lang="scss" scoped>
-.reset {
-  font-size: 15px;
-  cursor: pointer;
-  color: var(--kungalgame-red-5);
-  border: 1px solid var(--kungalgame-red-5);
-  background-color: transparent;
-  width: 100%;
-  height: 30px;
-
-  &:hover {
-    background-color: var(--kungalgame-red-5);
-    color: var(--kungalgame-white);
-  }
-}
-</style>

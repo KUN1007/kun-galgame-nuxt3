@@ -18,21 +18,24 @@ const handleConfirm = () => {
   <KunModal
     :modal-value="showAlert"
     @update-value="(value) => (showAlert = value)"
+    class-name="z-1000"
   >
-    <div class="gap-2">
-      <h3 class="text-lg" v-if="alertTitle">{{ alertTitle }}</h3>
-      <p class="text-sm" v-if="alertMsg">{{ alertMsg }}</p>
-    </div>
+    <div class="max-w-80">
+      <div class="gap-2">
+        <h3 class="text-lg" v-if="alertTitle">{{ alertTitle }}</h3>
+        <p class="text-sm" v-if="alertMsg">{{ alertMsg }}</p>
+      </div>
 
-    <div class="mt-6 flex justify-around">
-      <KunButton
-        v-if="isShowCancel ?? true"
-        class="button"
-        @click="handleClose"
-      >
-        取消
-      </KunButton>
-      <KunButton class="button" @click="handleConfirm">确定</KunButton>
+      <div class="mt-6 flex justify-around">
+        <KunButton
+          v-if="isShowCancel ?? true"
+          class="button"
+          @click="handleClose"
+        >
+          取消
+        </KunButton>
+        <KunButton class="button" @click="handleConfirm">确定</KunButton>
+      </div>
     </div>
   </KunModal>
 </template>

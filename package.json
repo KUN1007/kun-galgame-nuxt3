@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "3.0.28",
+  "version": "3.0.29",
   "packageManager": "pnpm@10.4.1",
   "private": true,
   "scripts": {
@@ -62,8 +62,8 @@
     "@milkdown/vue": "7.6.2",
     "@nuxtjs/i18n": "^9.2.0",
     "@prosemirror-adapter/vue": "^0.4.0",
-    "@tailwindcss/postcss": "^4.0.6",
-    "@tailwindcss/vite": "^4.0.6",
+    "@tailwindcss/postcss": "^4.0.9",
+    "@tailwindcss/vite": "^4.0.9",
     "@types/jsonwebtoken": "^9.0.8",
     "@vueuse/core": "^12.7.0",
     "animate.css": "^4.1.1",
@@ -91,7 +91,7 @@
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
     "tailwind-merge": "^3.0.1",
-    "tailwindcss": "^4.0.6"
+    "tailwindcss": "^4.0.9"
   },
   "pnpm": {
     "overrides": {

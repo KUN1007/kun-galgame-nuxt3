@@ -35,7 +35,7 @@ const computedId = computed(() => `kun-input-${stableId}`)
 const containerClass = computed(() => ['w-full'])
 
 const inputClass = computed(() => [
-  'block w-full rounded-md shadow-sm',
+  'block w-full rounded-md shadow-sm py-1 px-2',
   'text-sm text-gray-900',
   'transition duration-150 ease-in-out',
   'focus:ring-2 focus:ring-opacity-50 focus:outline-none'
