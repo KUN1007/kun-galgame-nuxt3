@@ -28,7 +28,7 @@ const handleLinkInsert = () => {
 </script>
 
 <template>
-  <KunDialog :is-show-dialog="show">
+  <KunModal :modal-value="show">
     <div class="container">
       <h2 class="title">插入超链接</h2>
 
@@ -51,7 +51,7 @@ const handleLinkInsert = () => {
         <KunButton @click="handleLinkInsert">插入</KunButton>
       </div>
     </div>
-  </KunDialog>
+  </KunModal>
 </template>
 
 <style lang="scss" scoped>

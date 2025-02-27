@@ -3,16 +3,24 @@ import { useRipple } from './utils/useRipple'
 
 type ButtonType = 'primary' | 'danger' | ''
 
-withDefaults(defineProps<{ type?: ButtonType; pending?: boolean }>(), {
-  type: '',
-  pending: false
-})
+withDefaults(
+  defineProps<{ type?: ButtonType; pending?: boolean; classNames?: string }>(),
+  {
+    type: '',
+    pending: false,
+    classNames: ''
+  }
+)
 
 const { ripples, onClick } = useRipple()
 </script>
 
 <template>
-  <button class="kun-button" @click="onClick" :class="type" :disabled="pending">
+  <button
+    :class="cn('kun-button', type, classNames)"
+    @click="onClick"
+    :disabled="pending"
+  >
     <Icon
       class="icon"
       v-if="pending"

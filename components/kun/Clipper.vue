@@ -3,7 +3,7 @@ import { croppingBoxStyle, handleMouseDown, handleCrop } from './utils/clip'
 
 const { imageBlob, isShowClipper } = storeToRefs(useComponentClipStore())
 
-const emits = defineEmits<{
+defineEmits<{
   close: []
 }>()
 
@@ -28,7 +28,10 @@ const handleConfirmClipImage = async () => {
 </script>
 
 <template>
-  <KunDialog :is-show-dialog="isShowClipper">
+  <KunModal
+    :modal-value="isShowClipper"
+    @update-value="(value) => (isShowClipper = value)"
+  >
     <div class="container">
       <div
         class="kun-clipper"
@@ -66,7 +69,7 @@ const handleConfirmClipImage = async () => {
         <button @click="handleConfirmClipImage">确定</button>
       </div>
     </div>
-  </KunDialog>
+  </KunModal>
 </template>
 
 <style lang="scss" scoped>
