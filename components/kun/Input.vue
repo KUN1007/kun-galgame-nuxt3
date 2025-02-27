@@ -22,7 +22,7 @@ withDefaults(
   }
 )
 
-const emit = defineEmits<{
+const emits = defineEmits<{
   'update:modelValue': [value: string | number]
   blur: [event: FocusEvent]
   focus: [event: FocusEvent]
@@ -43,17 +43,17 @@ const inputClass = computed(() => [
 
 const handleInput = (event: Event) => {
   const target = event.target as HTMLInputElement
-  emit('update:modelValue', target.value)
+  emits('update:modelValue', target.value)
 }
 
 const handleBlur = (event: FocusEvent) => {
   isFocused.value = false
-  emit('blur', event)
+  emits('blur', event)
 }
 
 const handleFocus = (event: FocusEvent) => {
   isFocused.value = true
-  emit('focus', event)
+  emits('focus', event)
 }
 
 defineExpose({

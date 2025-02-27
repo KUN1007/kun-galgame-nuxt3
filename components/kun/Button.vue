@@ -46,7 +46,9 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   className: ''
 })
 
-defineEmits(['click'])
+defineEmits<{
+  click: [event: MouseEvent]
+}>()
 
 const sizeClasses = computed(() => {
   switch (props.size) {
