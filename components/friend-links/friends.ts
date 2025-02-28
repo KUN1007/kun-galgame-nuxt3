@@ -115,7 +115,7 @@ export const galgame: Friend[] = [
   },
   {
     name: 'sayafx',
-    link: 'https://www.sayafx.top/',
+    link: 'https://www.sayafx.space/',
     label:
       'Galgame, 月谣, 月谣分享, Galgame 月谣, Galgame 下载, 免费 Galgame, Galgame 资讯'
   },
