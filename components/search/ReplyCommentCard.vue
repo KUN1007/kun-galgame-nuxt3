@@ -19,7 +19,7 @@ const content = computed(() =>
       <span>
         <Icon
           class="icon"
-          :name="type === 'reply' ? 'lucide:reply' : 'uil:comment-dots'"
+          :name="type === 'reply' ? 'carbon:reply' : 'uil:comment-dots'"
         />
       </span>
       <span>{{ data.title }}</span>

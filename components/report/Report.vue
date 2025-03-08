@@ -64,7 +64,6 @@ const handleSubmitReport = async () => {
         default-value="topic"
         i18n="report.select.section"
         @set="(value) => (selectReportType = value)"
-        position="bottom"
       >
         <span>{{ KUN_REPORT_SECTION_MAP[selectReportType] }}</span>
       </KunSelect>

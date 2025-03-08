@@ -3,7 +3,7 @@ import type { HomeMessage } from '~/types/api/home'
 
 const iconMap: Record<string, string> = {
   upvoted: 'lucide:sparkles',
-  replied: 'lucide:reply',
+  replied: 'carbon:reply',
   commented: 'uil:comment-dots',
   requested: 'lucide:git-pull-request-arrow'
 }

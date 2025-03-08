@@ -39,7 +39,7 @@ const isRecentlyUpvoted = computed(() => {
       class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
     >
       <div class="flex flex-wrap items-center gap-2">
-        <TopicSection :section="topic.section" />
+        <TopicDetailSection :section="topic.section" />
         <template v-if="topic.tags.length">
           <KunBadge v-for="(tag, index) in topic.tags" :key="index">
             {{ tag }}
@@ -51,7 +51,7 @@ const isRecentlyUpvoted = computed(() => {
         class="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400"
       >
         <span class="flex items-center gap-1">
-          <Icon name="lucide:mouse-pointer-click" class="h-4 w-4" />
+          <Icon name="lucide:eye" class="h-4 w-4" />
           {{ topic.views }}
         </span>
         <span class="flex items-center gap-1">
@@ -59,7 +59,7 @@ const isRecentlyUpvoted = computed(() => {
           {{ topic.likes }}
         </span>
         <span class="flex items-center gap-1">
-          <Icon name="lucide:reply" class="h-4 w-4" />
+          <Icon name="carbon:reply" class="h-4 w-4" />
           {{ topic.replies + topic.comments }}
         </span>
       </div>

@@ -23,7 +23,7 @@ const iconMap: Record<string, string> = {
   password: 'lucide:key-round',
   topic: 'lucide:square-gantt-chart',
   galgame: 'lucide:gamepad-2',
-  reply: 'lucide:reply',
+  reply: 'carbon:reply',
   comment: 'uil:comment-dots'
 }
 

@@ -11,26 +11,24 @@ const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
 </script>
 
 <template>
-  <div class="flex justify-between">
-    <div class="flex">
+  <div class="flex flex-wrap justify-between gap-2">
+    <div class="flex w-96 gap-2">
       <KunSelect
         :model-value="pageData.sortField"
         :options="topicSortFieldOptions"
         @set="
           (value) => (pageData.sortField = value as typeof pageData.sortField)
         "
-        position="bottom"
       >
         <span>{{ KUN_TOPIC_PAGE_SORT_FIELD[pageData.sortField] }}</span>
       </KunSelect>
 
       <KunSelect
         :options="topicSortCategoryOptions"
-        :default-value="pageData.category"
+        :model-value="pageData.category"
         @set="
           (value) => (pageData.category = value as typeof pageData.category)
         "
-        position="bottom"
       >
         <span>{{ KUN_TOPIC_CATEGORY[pageData.category] }}</span>
       </KunSelect>
@@ -40,6 +38,7 @@ const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
       <KunButton
         :is-icon-only="true"
         :variant="layout === 'grid' ? 'flat' : 'light'"
+        size="lg"
         @click="layout = 'grid'"
       >
         <Icon class="text-inherit" name="lucide:layout-grid" />
@@ -48,6 +47,7 @@ const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
       <KunButton
         :is-icon-only="true"
         :variant="layout === 'list' ? 'flat' : 'light'"
+        size="lg"
         @click="layout = 'list'"
       >
         <Icon class="text-inherit" name="lucide:list" />
@@ -56,6 +56,7 @@ const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
       <KunButton
         :is-icon-only="true"
         :variant="pageData.sortOrder === 'desc' ? 'flat' : 'light'"
+        size="lg"
         @click="pageData.sortOrder = 'desc'"
       >
         <Icon class="text-inherit" name="lucide:arrow-down" />
@@ -64,6 +65,7 @@ const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
       <KunButton
         :is-icon-only="true"
         :variant="pageData.sortOrder === 'asc' ? 'flat' : 'light'"
+        size="lg"
         @click="pageData.sortOrder = 'asc'"
       >
         <Icon class="text-inherit" name="lucide:arrow-up" />

@@ -10,16 +10,14 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
 
 <template>
   <NuxtLink
-    class="topic"
+    class="group relative flex flex-col gap-1 rounded-lg border p-4 shadow transition-all hover:shadow-md"
     :to="`/topic/${props.topic.tid}`"
-    v-kun-gradient="{
-      color: '--kungalgame-trans-blue-0',
-      radius: 70
-    }"
   >
-    <div class="title">{{ topic.title }}</div>
-
-    <TopicUser :user="props.topic.user" :time="props.topic.time" />
+    <h3
+      class="line-clamp-2 text-lg font-medium text-gray-900 dark:text-gray-100"
+    >
+      {{ topic.title }}
+    </h3>
 
     <TopicIntroduction
       :section="props.topic.section"
@@ -28,7 +26,7 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
 
     <div class="status">
       <span>
-        <Icon class="icon" name="lucide:mouse-pointer-click" />
+        <Icon class="icon" name="lucide:eye" />
         <span>{{ props.topic.views }}</span>
       </span>
 
@@ -38,10 +36,12 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
       </span>
 
       <span>
-        <Icon class="icon" name="lucide:reply" />
+        <Icon class="icon" name="carbon:reply" />
         <span v-if="actionsCount">{{ actionsCount }}</span>
       </span>
     </div>
+
+    <TopicUser :user="props.topic.user" :time="props.topic.time" />
   </NuxtLink>
 </template>
 

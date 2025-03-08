@@ -84,7 +84,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="topic">
+  <div class="bg-background flex flex-col rounded-lg">
     <TopicTool />
 
     <TopicLayout :topics="topics" />
@@ -104,14 +104,6 @@ onUnmounted(() => {
 </template>
 
 <style lang="scss" scoped>
-.topic {
-  display: flex;
-  flex-direction: column;
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: 0 10px;
-}
-
 .load {
   display: flex;
   justify-content: center;

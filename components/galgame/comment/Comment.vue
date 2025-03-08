@@ -64,7 +64,7 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
 
       <div class="action">
         <span class="reply" @click="handleClickComment(comment.user.uid)">
-          <Icon class="icon" name="lucide:reply" />
+          <Icon class="icon" name="carbon:reply" />
         </span>
         <GalgameCommentLike :comment="comment" />
         <span

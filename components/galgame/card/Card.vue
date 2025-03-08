@@ -58,7 +58,7 @@ defineProps<{
         >
           <div class="flex gap-3">
             <span class="flex items-center gap-1">
-              <Icon class="text-white" name="lucide:mouse-pointer-click" />
+              <Icon class="text-white" name="lucide:eye" />
               <span class="text-white">{{ galgame.views }}</span>
             </span>
 

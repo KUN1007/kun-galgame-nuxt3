@@ -66,7 +66,7 @@ watch(
 
       <div class="status">
         <span>
-          <Icon class="icon" name="lucide:mouse-pointer-click" />
+          <Icon class="icon" name="lucide:eye" />
           <span>{{ sec.views }}</span>
         </span>
         <span>
@@ -76,7 +76,7 @@ watch(
           </span>
         </span>
         <span>
-          <Icon class="icon" name="lucide:reply" />
+          <Icon class="icon" name="carbon:reply" />
           <span>{{ sec.replies }}</span>
         </span>
       </div>

@@ -83,7 +83,7 @@ const loliStatus = computed(() => {
             position: 'bottom'
           }"
         >
-          <Icon class="icon" name="lucide:mouse-pointer-click" />
+          <Icon class="icon" name="lucide:eye" />
           {{ topic.views }}
         </span>
 

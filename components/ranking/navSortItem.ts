@@ -30,13 +30,13 @@ interface User {
 export const topicSortItem: Topic[] = [
   {
     index: 1,
-    icon: 'lucide:mouse-pointer-click',
+    icon: 'lucide:eye',
     name: 'views',
     sortField: 'views'
   },
   {
     index: 2,
-    icon: 'lucide:reply',
+    icon: 'carbon:reply',
     name: 'replies',
     sortField: 'replies'
   },
@@ -87,7 +87,7 @@ export const userSortItem: User[] = [
   },
   {
     index: 5,
-    icon: 'lucide:reply',
+    icon: 'carbon:reply',
     name: 'reply',
     sortField: 'reply'
   },
@@ -104,14 +104,14 @@ export const userIconMap: Record<string, string> = {
   upvote: 'lucide:sparkles',
   like: 'lucide:thumbs-up',
   topic: 'lucide:square-gantt-chart',
-  reply: 'lucide:reply',
+  reply: 'carbon:reply',
   comment: 'uil:comment-dots'
 }
 
 export const topicIconMap: Record<string, string> = {
   upvotes: 'lucide:sparkles',
-  views: 'lucide:mouse-pointer-click',
+  views: 'lucide:eye',
   likes: 'lucide:thumbs-up',
-  replies: 'lucide:reply',
+  replies: 'carbon:reply',
   comments: 'uil:comment-dots'
 }

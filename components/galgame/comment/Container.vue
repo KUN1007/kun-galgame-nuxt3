@@ -63,7 +63,6 @@ onMounted(() => (commentToUid.value = toUser.uid))
       :options="userData.map((user) => user.name)"
       :discard-i18n="true"
       @set="handleSetUserInfo"
-      position="bottom"
     >
       {{ username }}
     </KunSelect>

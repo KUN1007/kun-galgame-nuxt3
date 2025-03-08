@@ -9,7 +9,10 @@ const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
 </script>
 
 <template>
-  <div :class="layout" v-if="layout === 'grid'">
+  <div
+    class="grid grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4"
+    v-if="layout === 'grid'"
+  >
     <TopicCard
       v-for="(kun, index) in topics"
       :key="index"
@@ -25,22 +28,3 @@ const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  padding: 10px;
-}
-
-.list {
-  padding: 10px;
-}
-
-@media (max-width: 700px) {
-  .grid {
-    grid-template-columns: repeat(2, minmax(100px, 233px));
-    padding: 10px 0;
-  }
-}
-</style>
