@@ -101,7 +101,7 @@ const selectEmoji = (emoji: string) => {
     box-shadow: var(--shadow);
     color: var(--kungalgame-font-color-3);
     transition: all 0.2s;
-  
+
     &:first-child {
       margin-right: 8px;
     }

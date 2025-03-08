@@ -5,7 +5,6 @@ export const insertLinkPlugin = $command(
   'InsertLink',
   (ctx) =>
     (payload: { href: string; text: string } | undefined) =>
-     
     (state, dispatch?) => {
       if (!dispatch || !payload) {
         return false

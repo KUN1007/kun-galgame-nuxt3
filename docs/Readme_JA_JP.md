@@ -8,21 +8,15 @@
 
 # 鯤 ギャルゲームフォーラム
 
-ウェブサイト紹介
---------------------
+## ウェブサイト紹介
 
 鯤 ギャルゲームはギャルゲーのジャンルに情熱を注ぐ個人のコレクティブです。現在、以下のサブウェブサイトが含まれています：
 
-  
-
-*   [鯤 ギャルゲームフォーラム](https://kungal.com) (このプロジェクト)
-*   [鯤 ギャルゲームステッカーパック](https://sticker.kungal.com) (ギャルゲーステッカーパックの収集と作成に特化したウェブサイト)
-*   [鯤 ギャルゲーム開発ドキュメント](https://soft.moe/kun-visualnovel-docs/kun-forum.html) (このフォーラムは完全にオープンソースであり、開発ドキュメントはここで公開されます)
-*   [鯤 ギャルゲーム ナビゲーションページ](https://nav.kungal.org/) （完全オープンソースのナビゲーションサイトです！ 鯤 ギャルゲーム のすべてのサブサイトにアクセスできます！）
-*   [鯤 ギャルゲーム ダウンページ](https://down.kungal.com/) （やむを得ずダウンする場合、フォーラムは強制的にこのページにリダイレクトされます）
-
-
-  
+- [鯤 ギャルゲームフォーラム](https://kungal.com) (このプロジェクト)
+- [鯤 ギャルゲームステッカーパック](https://sticker.kungal.com) (ギャルゲーステッカーパックの収集と作成に特化したウェブサイト)
+- [鯤 ギャルゲーム開発ドキュメント](https://soft.moe/kun-visualnovel-docs/kun-forum.html) (このフォーラムは完全にオープンソースであり、開発ドキュメントはここで公開されます)
+- [鯤 ギャルゲーム ナビゲーションページ](https://nav.kungal.org/) （完全オープンソースのナビゲーションサイトです！ 鯤 ギャルゲーム のすべてのサブサイトにアクセスできます！）
+- [鯤 ギャルゲーム ダウンページ](https://down.kungal.com/) （やむを得ずダウンする場合、フォーラムは強制的にこのページにリダイレクトされます）
 
 詳しい情報は、ウェブサイトの「私たちについて」ページをご覧ください
 
@@ -30,12 +24,12 @@ https://www.kungal.com/ja-jp/kungalgame
 
 ## 参加 / お問い合わせ
 
-* [Telegram グループ](https://t.me/kungalgame)
-* [Twitter / X](https://twitter.com/kungalgame)
-* [GitHub リポジトリ](https://github.com/KUN1007/kun-galgame-nuxt3)
-* [Discord グループ](https://discord.com/invite/5F4FS2cXhX)
-* [YouTube チャンネル](https://youtube.com/@kungalgame)
-* [Bilibili](https://space.bilibili.com/1748455574)
+- [Telegram グループ](https://t.me/kungalgame)
+- [Twitter / X](https://twitter.com/kungalgame)
+- [GitHub リポジトリ](https://github.com/KUN1007/kun-galgame-nuxt3)
+- [Discord グループ](https://discord.com/invite/5F4FS2cXhX)
+- [YouTube チャンネル](https://youtube.com/@kungalgame)
+- [Bilibili](https://space.bilibili.com/1748455574)
 
 ## ライセンス
 

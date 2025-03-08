@@ -7,7 +7,7 @@
 }
 
 @theme static inline {
-  --color-*: initial;
+  /*   --color-*: initial; */
   --color-black: #000;
   --color-white: #fff;
 
@@ -332,6 +332,7 @@
     border-color: var(--color-default-200, currentColor);
     color: var(--color-foreground);
   }
+
   *:focus {
     outline: none;
   }
@@ -356,6 +357,7 @@
     -ms-overflow-style: 'none';
     scrollbar-width: 'none';
   }
+
   .scrollbar-hide::-webkit-scrollbar {
     width: 0;
     height: 0;

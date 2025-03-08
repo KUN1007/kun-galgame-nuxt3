@@ -1,27 +1,27 @@
-name: "🐞 Bug Report"
-description: "Create a bug report to help us improve"
-title: "[BUG]: "
+name: '🐞 Bug Report'
+description: 'Create a bug report to help us improve'
+title: '[BUG]: '
 labels:
-  - "bug"
-  - "enhancement"
+  - 'bug'
+  - 'enhancement'
 assignees:
-  - "KUN1007"
+  - 'KUN1007'
 
 body:
   - type: textarea
     id: describe-the-bug
     attributes:
-      label: "Describe the bug"
-      description: "A clear and concise description of what the bug is."
-      placeholder: "Please describe the bug here."
+      label: 'Describe the bug'
+      description: 'A clear and concise description of what the bug is.'
+      placeholder: 'Please describe the bug here.'
     validations:
       required: true
-  
+
   - type: textarea
     id: steps-to-reproduce
     attributes:
-      label: "Steps to Reproduce"
-      description: "Provide the steps to reproduce the bug."
+      label: 'Steps to Reproduce'
+      description: 'Provide the steps to reproduce the bug.'
       placeholder: "1. Go to '...'\n2. Click on '....'\n3. Scroll down to '....'\n4. See error"
     validations:
       required: true
@@ -29,22 +29,22 @@ body:
   - type: textarea
     id: expected-behavior
     attributes:
-      label: "Expected behavior"
-      description: "A clear and concise description of what you expected to happen."
-      placeholder: "Describe what you expected to happen."
+      label: 'Expected behavior'
+      description: 'A clear and concise description of what you expected to happen.'
+      placeholder: 'Describe what you expected to happen.'
     validations:
       required: true
 
   - type: textarea
     id: screenshots
     attributes:
-      label: "Screenshots"
-      description: "If applicable, add screenshots to help explain your problem."
-      placeholder: "Upload screenshots if possible."
-  
+      label: 'Screenshots'
+      description: 'If applicable, add screenshots to help explain your problem.'
+      placeholder: 'Upload screenshots if possible.'
+
   - type: textarea
     id: additional-context
     attributes:
-      label: "Additional context"
-      description: "Add any other context about the problem here."
-      placeholder: "Any additional information that could help understand the issue."
+      label: 'Additional context'
+      description: 'Add any other context about the problem here.'
+      placeholder: 'Any additional information that could help understand the issue.'
