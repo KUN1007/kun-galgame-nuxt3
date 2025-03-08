@@ -21,15 +21,16 @@ const handleConfirm = () => {
     class-name="z-1000"
   >
     <div class="max-w-80">
-      <div class="gap-2">
+      <div class="space-y-2">
         <h3 class="text-lg" v-if="alertTitle">{{ alertTitle }}</h3>
         <p class="text-sm" v-if="alertMsg">{{ alertMsg }}</p>
       </div>
 
-      <div class="mt-6 flex justify-around">
+      <div class="mt-6 flex justify-end gap-2">
         <KunButton
           v-if="isShowCancel ?? true"
-          class="button"
+          variant="light"
+          color="danger"
           @click="handleClose"
         >
           取消

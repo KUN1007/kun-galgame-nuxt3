@@ -1,26 +1,10 @@
 <script setup lang="ts">
-import { useRipple } from './utils/useRipple'
-
-type KunButtonVariant =
-  | 'solid'
-  | 'bordered'
-  | 'light'
-  | 'flat'
-  | 'faded'
-  | 'shadow'
-  | 'ghost'
-
-type KunButtonColor =
-  | 'default'
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'warning'
-  | 'danger'
+import { useRipple } from '../utils/useRipple'
+import type { KunUIVariant, KunUIColor } from '../ui/type'
 
 interface ButtonProps {
-  variant?: KunButtonVariant
-  color?: KunButtonColor
+  variant?: KunUIVariant
+  color?: KunUIColor
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
   type?: 'button' | 'submit' | 'reset'
@@ -88,10 +72,7 @@ const variantClasses = computed(() => {
   }
 })
 
-const colorVariants: Record<
-  KunButtonVariant,
-  Record<KunButtonColor, string>
-> = {
+const colorVariants: Record<KunUIVariant, Record<KunUIColor, string>> = {
   solid: {
     default: 'bg-default',
     primary: 'bg-primary',

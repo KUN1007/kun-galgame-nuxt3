@@ -1,5 +1,41 @@
 <script setup lang="ts">
 const showItemIndex = ref(1)
+const font = ref('')
+
+const {
+  showKUNGalgamePageTransparency,
+  showKUNGalgameBackgroundBlur,
+  showKUNGalgameFontStyle
+} = storeToRefs(usePersistSettingsStore())
+
+watch(
+  () => showKUNGalgamePageTransparency.value,
+  debounce(() => {
+    usePersistSettingsStore().setKUNGalgameTransparency(
+      showKUNGalgamePageTransparency.value
+    )
+  }, 300)
+)
+
+watch(
+  () => showKUNGalgameBackgroundBlur.value,
+  debounce(() => {
+    usePersistSettingsStore().setKUNGalgameBackgroundBlur(
+      showKUNGalgameBackgroundBlur.value
+    )
+  }, 300)
+)
+
+watch(
+  () => font.value,
+  () => {
+    if (font.value) {
+      usePersistSettingsStore().setKUNGalgameFontStyle(font.value)
+    } else {
+      usePersistSettingsStore().setKUNGalgameFontStyle('system-ui')
+    }
+  }
+)
 </script>
 
 <template>
@@ -45,16 +81,64 @@ const showItemIndex = ref(1)
     </div>
 
     <TransitionGroup name="item" tag="div">
-      <div class="w-full" v-if="showItemIndex === 1">
-        <KunSettingPanelComponentsTransparency />
+      <div class="w-full space-y-2" v-if="showItemIndex === 1">
+        <div class="flex justify-between text-sm">
+          <span>页面透明度</span>
+          <span>{{ showKUNGalgamePageTransparency }}%</span>
+        </div>
+
+        <div class="flex items-center">
+          <span>10%</span>
+
+          <KunSlider
+            class="mx-4 w-full"
+            :min="10"
+            :max="90"
+            :step="1"
+            v-model="showKUNGalgamePageTransparency"
+          />
+
+          <span>90%</span>
+        </div>
       </div>
 
-      <div class="w-full" v-if="showItemIndex === 2">
-        <KunSettingPanelComponentsBlur />
+      <div class="w-full space-y-2" v-if="showItemIndex === 2">
+        <div class="flex justify-between text-sm">
+          <span>页面模糊度</span>
+          <span>{{ showKUNGalgameBackgroundBlur }}px</span>
+        </div>
+
+        <div class="flex w-full items-center">
+          <span>0px</span>
+          <KunSlider
+            class="mx-4 w-full"
+            :min="0"
+            :max="17"
+            :step="1"
+            v-model="showKUNGalgameBackgroundBlur"
+          />
+          <span>17px</span>
+        </div>
       </div>
 
-      <div class="w-full" v-else-if="showItemIndex === 3">
-        <KunSettingPanelComponentsFont />
+      <div class="w-full space-y-2" v-if="showItemIndex === 3">
+        <div class="flex justify-between text-sm">
+          <span>字体样式</span>
+          <span>
+            {{
+              showKUNGalgameFontStyle === 'system-ui'
+                ? '系统默认'
+                : showKUNGalgameFontStyle
+            }}
+          </span>
+        </div>
+
+        <KunInput
+          required
+          placeholder="请在这里输入字体的名字"
+          type="text"
+          v-model="font"
+        />
       </div>
     </TransitionGroup>
   </div>

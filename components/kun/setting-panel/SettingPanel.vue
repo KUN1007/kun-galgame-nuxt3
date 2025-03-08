@@ -22,7 +22,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 
         <KunSettingPanelComponentsConfigItems />
 
-        <div class="ml-auto flex gap-2">
+        <div class="ml-auto flex justify-between gap-2">
           显示琥珀
           <KunSwitch v-model="showKUNGalgameBackLoli" />
         </div>

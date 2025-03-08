@@ -69,7 +69,7 @@ const handleChangeImage = async (index: number) => {
         <KunSettingPanelComponentsCustomBackground />
       </div>
 
-      <div class="grid grid-cols-3 justify-center gap-2">
+      <div class="grid h-[240px] grid-cols-3 justify-center gap-2">
         <div
           class="flex shrink-0 items-center justify-center"
           v-for="kun in paginatedImages"

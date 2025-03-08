@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import type { KunUIColor } from './ui/type'
+
 withDefaults(
   defineProps<{
     modelValue?: string | number
     label?: string
     type?: string
+    color?: KunUIColor
+    className?: string
     placeholder?: string
     helperText?: string
     error?: string
@@ -12,6 +16,8 @@ withDefaults(
   }>(),
   {
     type: 'text',
+    color: 'default',
+    className: '',
     modelValue: '',
     label: '',
     placeholder: '',
@@ -32,14 +38,15 @@ const input = ref<HTMLInputElement | null>(null)
 const isFocused = ref(false)
 const stableId = useId()
 const computedId = computed(() => `kun-input-${stableId}`)
-const containerClass = computed(() => ['w-full'])
 
-const inputClass = computed(() => [
-  'block w-full rounded-md shadow-sm py-1 px-2',
-  'text-sm text-gray-900',
-  'transition duration-150 ease-in-out',
-  'focus:ring-2 focus:ring-opacity-50 focus:outline-none'
-])
+const colorClass: Record<KunUIColor, string> = {
+  default: 'bg-default/20 focus:ring-default',
+  primary: 'bg-default/20 focus:border-primary',
+  secondary: 'bg-default/20 focus:border-secondary',
+  success: 'bg-default/20 focus:border-success',
+  warning: 'bg-default/20 focus:border-warning',
+  danger: 'bg-default/20 focus:border-danger'
+}
 
 const handleInput = (event: Event) => {
   const target = event.target as HTMLInputElement
@@ -64,7 +71,7 @@ defineExpose({
 </script>
 
 <template>
-  <div :class="containerClass">
+  <div class="w-full">
     <label
       v-if="label"
       :for="computedId"
@@ -86,13 +93,15 @@ defineExpose({
         :required="required"
         :class="
           cn(
-            inputClass,
+            'block w-full rounded-md px-2 py-1 text-sm shadow-sm transition duration-150 ease-in-out focus:ring-1',
+            className,
+            colorClass[color],
             $slots.prefix && 'pl-10',
             $slots.suffix && 'pr-10',
             disabled && 'cursor-not-allowed bg-gray-100',
             error
               ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-              : 'focus:border-primary-500 focus:ring-primary-500 border-gray-300'
+              : ''
           )
         "
         @input="handleInput"
