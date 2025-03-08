@@ -4,6 +4,7 @@ import type { GalgameCard } from '~/types/api/galgame'
 
 defineProps<{
   galgames: GalgameCard[]
+  isTransparent?: boolean
 }>()
 </script>
 
@@ -12,7 +13,12 @@ defineProps<{
     class="grid grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4"
   >
     <NuxtLink
-      class="group bg-background relative flex flex-col overflow-hidden rounded-lg border shadow"
+      :class="
+        cn(
+          'group relative flex flex-col overflow-hidden rounded-lg border shadow',
+          isTransparent ? '' : 'bg-background'
+        )
+      "
       v-for="galgame in galgames"
       :key="galgame.gid"
       :to="`/galgame/${galgame.gid}`"

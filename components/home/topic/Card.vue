@@ -17,7 +17,6 @@ const isRecentlyUpvoted = computed(() => {
     :to="`/topic/${topic.tid}`"
     class="group relative flex flex-col gap-3 rounded-lg border p-4 shadow transition-all hover:shadow-md"
   >
-    <!-- Title and Time -->
     <div class="flex items-start justify-between gap-4">
       <h3
         class="line-clamp-2 text-lg font-medium text-gray-900 dark:text-gray-100"
@@ -36,7 +35,6 @@ const isRecentlyUpvoted = computed(() => {
       </div>
     </div>
 
-    <!-- User Info and Tags -->
     <div
       class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
     >
@@ -49,7 +47,6 @@ const isRecentlyUpvoted = computed(() => {
         </template>
       </div>
 
-      <!-- Engagement Stats -->
       <div
         class="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400"
       >
