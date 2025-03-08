@@ -6,7 +6,7 @@
   --kun-global-opacity: 0.7;
 }
 
-@theme static inline {
+@theme {
   /*   --color-*: initial; */
   --color-black: #000;
   --color-white: #fff;

@@ -34,7 +34,7 @@ const handleConfirm = () => {
         >
           取消
         </KunButton>
-        <KunButton class="button" @click="handleConfirm">确定</KunButton>
+        <KunButton @click="handleConfirm">确定</KunButton>
       </div>
     </div>
   </KunModal>

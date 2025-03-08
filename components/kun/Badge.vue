@@ -16,6 +16,15 @@ withDefaults(defineProps<Props>(), {
   color: 'default',
   classNames: ''
 })
+
+const colorClasses = {
+  default: 'bg-default/20 text-default-800',
+  primary: 'bg-primary/20 text-primary-800',
+  secondary: 'bg-secondary/20 text-secondary-800',
+  success: 'bg-success/20 text-success-800',
+  warning: 'bg-warning/20 text-warning-800',
+  danger: 'bg-danger/20 text-danger-800'
+}
 </script>
 
 <template>
@@ -23,7 +32,7 @@ withDefaults(defineProps<Props>(), {
     :class="
       cn(
         'inline-flex items-center justify-center gap-1 rounded-full px-2 py-1 text-xs font-medium',
-        `bg-${color}-100 text-${color}-800 text-${color}-800 dark:bg-${color}-900/30 dark:text-${color}-200`,
+        colorClasses[color as BadgeColor] || colorClasses.default,
         classNames
       )
     "

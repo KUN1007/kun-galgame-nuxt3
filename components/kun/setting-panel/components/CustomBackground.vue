@@ -27,7 +27,7 @@ const handleFileChange = async (event: Event) => {
       @change="handleFileChange($event)"
     />
     <KunButton
-      color="default"
+      color="primary"
       variant="flat"
       class-name="py-1.5"
       @click="handleCustomBackground"

@@ -40,25 +40,25 @@ const handleChangeImage = async (index: number) => {
     <div class="shrink-0 space-y-2">
       <div class="flex items-center justify-between">
         <KunButton
-          color="default"
+          color="primary"
           variant="flat"
           class-name="p-2"
           @click="prevPage"
         >
-          <Icon class="icon" name="lucide:chevron-left" />
+          <Icon class="text-inherit" name="lucide:chevron-left" />
         </KunButton>
 
         <KunButton
-          color="default"
+          color="primary"
           variant="flat"
           class-name="p-2"
           @click="nextPage"
         >
-          <Icon class="icon" name="lucide:chevron-right" />
+          <Icon class="text-inherit" name="lucide:chevron-right" />
         </KunButton>
 
         <KunButton
-          color="default"
+          color="primary"
           variant="flat"
           class-name="py-1.5"
           @click="restoreBackground"

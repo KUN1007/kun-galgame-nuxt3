@@ -70,7 +70,7 @@ const sizeClasses = computed(() => {
 const variantClasses = computed(() => {
   switch (props.variant) {
     case 'solid':
-      return 'shadow-sm'
+      return 'shadow-sm text-white'
     case 'bordered':
       return 'border-2 bg-transparent'
     case 'light':
@@ -80,7 +80,7 @@ const variantClasses = computed(() => {
     case 'faded':
       return 'bg-opacity-10 border-transparent'
     case 'shadow':
-      return 'shadow-lg'
+      return 'shadow-lg text-white'
     case 'ghost':
       return 'bg-transparent border-transparent shadow-none hover:bg-opacity-10'
     default:
@@ -88,24 +88,70 @@ const variantClasses = computed(() => {
   }
 })
 
-const colorClasses = computed(() => {
-  const baseClasses = {
-    solid: (color: KunButtonColor) =>
-      `bg-${color}-500 text-white hover:bg-${color}-400 border-${color}-500`,
-    bordered: (color: KunButtonColor) =>
-      `border-${color}-500 text-${color}-500 hover:bg-${color}-50`,
-    light: (color: KunButtonColor) =>
-      `bg-${color}-200 text-${color}-500 hover:bg-${color}-300 border-transparent`,
-    flat: (color: KunButtonColor) =>
-      `bg-${color}-50 text-${color}-500 hover:bg-${color}-200`,
-    faded: (color: KunButtonColor) =>
-      `bg-${color}-50 text-${color}-500 hover:text-white hover:bg-${color}-500`,
-    shadow: (color: KunButtonColor) =>
-      `bg-${color}-500 text-white hover:bg-${color}-400 border-${color}-500`,
-    ghost: (color: KunButtonColor) => `text-${color}-500 hover:bg-${color}-100`
+const colorVariants: Record<
+  KunButtonVariant,
+  Record<KunButtonColor, string>
+> = {
+  solid: {
+    default: 'bg-default',
+    primary: 'bg-primary',
+    secondary: 'bg-secondary',
+    success: 'bg-success',
+    warning: 'bg-warning',
+    danger: 'bg-danger'
+  },
+  bordered: {
+    default: 'bg-transparent border-default',
+    primary: 'bg-transparent border-primary text-primary',
+    secondary: 'bg-transparent border-secondary text-secondary',
+    success: 'bg-transparent border-success text-success',
+    warning: 'bg-transparent border-warning text-warning',
+    danger: 'bg-transparent border-danger text-danger'
+  },
+  light: {
+    default: 'bg-transparent hover:bg-default/40',
+    primary: 'bg-transparent text-primary hover:bg-primary/20',
+    secondary: 'bg-transparent text-secondary hover:bg-secondary/20',
+    success: 'bg-transparent text-success hover:bg-success/20',
+    warning: 'bg-transparent text-warning hover:bg-warning/20',
+    danger: 'bg-transparent text-danger hover:bg-danger/20'
+  },
+  flat: {
+    default: 'bg-default/40 text-default-700',
+    primary: 'bg-primary/20 text-primary-600',
+    secondary: 'bg-secondary/20 text-secondary-600',
+    success: 'bg-success/20 text-success-700 dark:text-success',
+    warning: 'bg-warning/20 text-warning-700 dark:text-warning',
+    danger: 'bg-danger/20 text-danger-600 dark:text-danger-500'
+  },
+  faded: {
+    default: 'border-default bg-default-100',
+    primary: 'border-default bg-primary-100 text-primary',
+    secondary: 'border-default bg-secondary-100 text-secondary',
+    success: 'border-default bg-success-100 text-success',
+    warning: 'border-default bg-warning-100 text-warning',
+    danger: 'border-default bg-danger-100 text-danger'
+  },
+  shadow: {
+    default: 'shadow-lg shadow-default/50 bg-default',
+    primary: 'shadow-lg shadow-primary/40 bg-primary',
+    secondary: 'shadow-lg shadow-secondary/40 bg-secondary',
+    success: 'shadow-lg shadow-success/40 bg-success',
+    warning: 'shadow-lg shadow-warning/40 bg-warning',
+    danger: 'shadow-lg shadow-danger/40 bg-danger'
+  },
+  ghost: {
+    default: 'border-default',
+    primary: 'border-primary text-primary',
+    secondary: 'border-secondary text-secondary',
+    success: 'border-success text-success',
+    warning: 'border-warning text-warning',
+    danger: 'border-danger text-danger'
   }
+} as const
 
-  return baseClasses[props.variant](props.color)
+const colorClasses = computed(() => {
+  return colorVariants[props.variant]?.[props.color] || ''
 })
 
 const roundedClasses = computed(() => {
@@ -132,7 +178,7 @@ const { ripples, onClick } = useRipple()
   <button
     :class="
       cn(
-        'relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-md font-medium transition-all active:scale-[0.97] disabled:opacity-50',
+        'relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-md font-medium transition-all hover:opacity-80 active:scale-[0.97] disabled:opacity-50',
         sizeClasses,
         variantClasses,
         colorClasses,
