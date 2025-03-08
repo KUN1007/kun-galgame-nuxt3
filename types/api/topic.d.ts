@@ -1,3 +1,26 @@
+import type { HomeTopic, HomeGalgame } from './home'
+
+export type SortField =
+  | 'updated'
+  | 'time'
+  | 'views'
+  | 'upvotes'
+  | 'likes'
+  | 'replies'
+  | 'comments'
+
+export type SortFieldTopic = 'views' | 'created'
+
+export type TopicCard = HomeTopic
+
+export interface TopicCardRequestData {
+  page: string
+  limit: string
+  sortField: string
+  sortOrder: string
+  category: string
+}
+
 export interface TopicAside {
   title: string
   tid: number

@@ -51,9 +51,9 @@ export const sitemap: Sitemap[] = [
     label: '不萌记录'
   },
   {
-    route: '/pool',
-    name: 'pool',
-    label: '全部话题'
+    route: '/topic',
+    name: 'topic',
+    label: '话题'
   },
   {
     route: '/privacy',

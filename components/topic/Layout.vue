@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import type { PoolTopic } from '~/types/api/pool'
+import type { TopicCard } from '~/types/api/topic'
 
 defineProps<{
-  topics: PoolTopic[]
+  topics: TopicCard[]
 }>()
 
-const { layout } = storeToRefs(usePersistPoolStore())
+const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
 </script>
 
 <template>
   <div :class="layout" v-if="layout === 'grid'">
-    <PoolTopic
+    <TopicCard
       v-for="(kun, index) in topics"
       :key="index"
       class="item"

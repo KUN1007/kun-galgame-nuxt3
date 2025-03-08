@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { pageData } from './pageData'
-import type { PoolTopic } from '~/types/api/pool'
+import type { TopicCard } from '~/types/api/topic'
 
 const isLoadingComplete = ref(false)
-const topics = ref<PoolTopic[]>([])
+const topics = ref<TopicCard[]>([])
 const savedPosition = ref(0)
 
 const getTopics = async () => {
-  const result = await $fetch(`/api/pool/topic`, {
+  const result = await $fetch(`/api/topic`, {
     method: 'GET',
     query: pageData,
     watch: false,
@@ -84,10 +84,10 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="pool" ref="pool">
-    <PoolTool />
+  <div class="topic">
+    <TopicTool />
 
-    <PoolLayout :topics="topics" />
+    <TopicLayout :topics="topics" />
 
     <div class="load">
       <span class="loader" v-if="!isLoadingComplete" @click="handleLoadTopics">
@@ -104,7 +104,7 @@ onUnmounted(() => {
 </template>
 
 <style lang="scss" scoped>
-.pool {
+.topic {
   display: flex;
   flex-direction: column;
   max-width: 80rem;
@@ -137,11 +137,5 @@ onUnmounted(() => {
 
 .kun-footer {
   margin-bottom: 17px;
-}
-
-@media (max-width: 700px) {
-  .pool {
-    padding: 0 5px;
-  }
 }
 </style>

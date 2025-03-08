@@ -15,10 +15,10 @@ export const kunLayoutItem: KunLayoutItem[] = [
     label: 'Galgame'
   },
   {
-    name: 'pool',
+    name: 'topic',
     icon: 'lucide:square-library',
-    router: '/pool',
-    label: '所有话题'
+    router: '/topic',
+    label: '话题'
   },
   {
     name: 'category',

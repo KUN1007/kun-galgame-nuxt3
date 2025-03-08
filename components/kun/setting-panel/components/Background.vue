@@ -42,7 +42,7 @@ const handleChangeImage = async (index: number) => {
         <KunButton
           color="primary"
           variant="flat"
-          class-name="p-2"
+          :is-icon-only="true"
           @click="prevPage"
         >
           <Icon class="text-inherit" name="lucide:chevron-left" />
@@ -51,7 +51,7 @@ const handleChangeImage = async (index: number) => {
         <KunButton
           color="primary"
           variant="flat"
-          class-name="p-2"
+          :is-icon-only="true"
           @click="nextPage"
         >
           <Icon class="text-inherit" name="lucide:chevron-right" />
@@ -60,7 +60,7 @@ const handleChangeImage = async (index: number) => {
         <KunButton
           color="primary"
           variant="flat"
-          class-name="py-1.5"
+          size="sm"
           @click="restoreBackground"
         >
           重置

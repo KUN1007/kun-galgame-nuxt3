@@ -1,9 +1,6 @@
-interface Option {
-  value: string | number
-  label: string
-}
+import type { KunSelectOption } from '~/components/kun/select/type'
 
-export const typeOptions: Option[] = [
+export const typeOptions: KunSelectOption[] = [
   { value: 'all', label: '全部类型' },
   { value: 'game', label: '游戏本体' },
   { value: 'patch', label: '补丁' },
@@ -14,7 +11,7 @@ export const typeOptions: Option[] = [
   { value: 'others', label: '其它' }
 ]
 
-export const languageOptions: Option[] = [
+export const languageOptions: KunSelectOption[] = [
   { value: 'all', label: '全部语言' },
   { value: 'ja-jp', label: '日语' },
   { value: 'en-us', label: '英语' },
@@ -23,7 +20,7 @@ export const languageOptions: Option[] = [
   { value: 'others', label: '其它' }
 ]
 
-export const platformOptions: Option[] = [
+export const platformOptions: KunSelectOption[] = [
   { value: 'name', label: '资源链接的平台' },
   { value: 'all', label: '全部平台' },
   { value: 'windows', label: 'Windows' },
@@ -34,7 +31,7 @@ export const platformOptions: Option[] = [
   { value: 'others', label: '其它' }
 ]
 
-export const sortFieldOptions: Option[] = [
+export const sortFieldOptions: KunSelectOption[] = [
   { value: 'views', label: '浏览顺序' },
   { value: 'time', label: '更新顺序' },
   { value: 'created', label: '创建顺序' }

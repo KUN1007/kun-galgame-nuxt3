@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { PoolTopic } from '~/types/api/pool'
+import type { TopicCard } from '~/types/api/topic'
 
 const props = defineProps<{
-  topic: PoolTopic
+  topic: TopicCard
 }>()
 
 const actionsCount = computed(() => props.topic.replies + props.topic.comments)
@@ -19,9 +19,12 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
   >
     <div class="title">{{ topic.title }}</div>
 
-    <PoolUser :user="props.topic.user" :time="props.topic.time" />
+    <TopicUser :user="props.topic.user" :time="props.topic.time" />
 
-    <PoolIntroduction :section="props.topic.section" :tags="props.topic.tags" />
+    <TopicIntroduction
+      :section="props.topic.section"
+      :tags="props.topic.tags"
+    />
 
     <div class="status">
       <span>

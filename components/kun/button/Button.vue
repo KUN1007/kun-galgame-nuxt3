@@ -1,20 +1,7 @@
 <script setup lang="ts">
 import { useRipple } from '../utils/useRipple'
 import type { KunUIVariant, KunUIColor } from '../ui/type'
-
-interface ButtonProps {
-  variant?: KunUIVariant
-  color?: KunUIColor
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
-  type?: 'button' | 'submit' | 'reset'
-  disabled?: boolean
-  loading?: boolean
-  fullWidth?: boolean
-  icon?: boolean
-  iconPosition?: 'left' | 'right'
-  className?: string
-}
+import type { ButtonProps } from './type'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   variant: 'solid',
@@ -25,6 +12,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   disabled: false,
   loading: false,
   fullWidth: false,
+  isIconOnly: false,
   icon: false,
   iconPosition: 'left',
   className: ''
@@ -152,6 +140,26 @@ const roundedClasses = computed(() => {
   }
 })
 
+const isIconOnlyClasses = computed(() => {
+  if (!props.isIconOnly) {
+    return ''
+  }
+  switch (props.size) {
+    case 'xs':
+      return 'p-1'
+    case 'sm':
+      return 'p-1.5'
+    case 'md':
+      return 'p-2'
+    case 'lg':
+      return 'p-2.5'
+    case 'xl':
+      return 'p-3'
+    default:
+      return 'p-2'
+  }
+})
+
 const { ripples, onClick } = useRipple()
 </script>
 
@@ -165,7 +173,8 @@ const { ripples, onClick } = useRipple()
         colorClasses,
         roundedClasses,
         fullWidth ? 'w-full' : '',
-        className
+        className,
+        isIconOnlyClasses
       )
     "
     :disabled="disabled || loading"

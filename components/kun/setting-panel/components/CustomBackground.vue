@@ -29,7 +29,7 @@ const handleFileChange = async (event: Event) => {
     <KunButton
       color="primary"
       variant="flat"
-      class-name="py-1.5"
+      size="sm"
       @click="handleCustomBackground"
     >
       自定义

@@ -37,9 +37,10 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
       <KunButton
         color="default"
         variant="light"
-        class-name="absolute right-0 p-2"
+        class-name="absolute right-0"
         rounded="full"
         size="lg"
+        :is-icon-only="true"
         @click="showKUNGalgamePanel = false"
       >
         <Icon class="icon" name="lucide:x" />

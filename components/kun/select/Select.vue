@@ -1,20 +1,9 @@
 <script setup lang="ts">
-interface Option {
-  value: string | number
-  label: string
-}
+import type { KunSelectProps } from './type'
 
-interface Props {
-  modelValue: string | number
-  options: Option[]
-  label: string
-  placeholder?: string
-  error?: string
-  disabled?: boolean
-}
-
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<KunSelectProps>(), {
   placeholder: '',
+  label: '',
   disabled: false,
   error: ''
 })

@@ -1,15 +1,15 @@
 import UserModel from '~/server/models/user'
 import TopicModel from '~/server/models/topic'
 import type {
-  SortFieldPool,
-  PoolTopicsRequestData,
-  PoolTopic
-} from '~/types/api/pool'
+  SortFieldTopic,
+  TopicCardRequestData,
+  TopicCard
+} from '~/types/api/topic'
 
-const getPoolTopics = async (
+const getTopicTopics = async (
   page: number,
   limit: number,
-  sortField: SortFieldPool,
+  sortField: SortFieldTopic,
   sortOrder: KunOrder,
   category: string
 ) => {
@@ -33,7 +33,7 @@ const getPoolTopics = async (
     .populate('user', 'uid avatar name', UserModel)
     .lean()
 
-  const data: PoolTopic[] = topics.map((topic) => ({
+  const data: TopicCard[] = topics.map((topic) => ({
     tid: topic.tid,
     title: topic.title,
     views: topic.views,
@@ -56,7 +56,7 @@ const getPoolTopics = async (
 }
 
 export default defineEventHandler(async (event) => {
-  const { page, limit, sortField, sortOrder, category }: PoolTopicsRequestData =
+  const { page, limit, sortField, sortOrder, category }: TopicCardRequestData =
     await getQuery(event)
   if (!page || !limit || !sortField || !sortOrder || !category) {
     return kunError(event, 10507)
@@ -69,10 +69,10 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10209)
   }
 
-  const topics = await getPoolTopics(
+  const topics = await getTopicTopics(
     parseInt(page),
     parseInt(limit),
-    sortField as SortFieldPool,
+    sortField as SortFieldTopic,
     sortOrder as KunOrder,
     category.charAt(0).toUpperCase() + category.slice(1)
   )
