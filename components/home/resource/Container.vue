@@ -21,12 +21,12 @@ const { data } = await useFetch(`/api/home/resource`, {
   <div class="w-full space-y-3 rounded-lg" v-if="data">
     <h2 class="text-xl font-semibold">最新 Galgame 资源</h2>
 
-    <div class="rounded-lg border shadow">
+    <KunCard content-class="space-y-3" :is-hoverable="false">
       <NuxtLink
         v-for="(link, index) in data"
         :key="index"
         :to="`/galgame/${link.gid}`"
-        class="group flex items-start space-x-3 rounded-lg p-3 transition-colors"
+        class="group flex items-start space-x-3 rounded-lg transition-colors"
       >
         <div
           class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
@@ -58,6 +58,6 @@ const { data } = await useFetch(`/api/home/resource`, {
           </div>
         </div>
       </NuxtLink>
-    </div>
+    </KunCard>
   </div>
 </template>

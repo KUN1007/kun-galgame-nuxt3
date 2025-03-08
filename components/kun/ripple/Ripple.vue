@@ -10,7 +10,7 @@ defineProps<{
   <span
     v-for="ripple in ripples"
     :key="ripple.key"
-    class="bg-background ripple pointer-events-none absolute rounded-full"
+    class="bg-foreground/30 ripple pointer-events-none absolute rounded-full"
     :style="{
       width: `${ripple.size}px`,
       height: `${ripple.size}px`,

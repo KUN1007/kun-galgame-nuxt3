@@ -12,16 +12,12 @@ defineProps<{
   <div
     class="grid grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4"
   >
-    <NuxtLink
-      :class="
-        cn(
-          'group relative flex flex-col overflow-hidden rounded-lg border shadow',
-          isTransparent ? '' : 'bg-background'
-        )
-      "
+    <KunCard
+      :is-pressable="true"
       v-for="galgame in galgames"
       :key="galgame.gid"
-      :to="`/galgame/${galgame.gid}`"
+      :href="`/galgame/${galgame.gid}`"
+      class-name="p-0"
     >
       <div class="relative overflow-hidden">
         <NuxtImg
@@ -88,7 +84,7 @@ defineProps<{
         </h3>
 
         <div class="flex items-center gap-3">
-          <KunAvatar :user="galgame.user" size="30px" class="rounded-full" />
+          <KunAvatar :user="galgame.user" />
           <div class="flex flex-col">
             <span class="text-sm font-medium">
               {{ galgame.user.name }}
@@ -99,6 +95,6 @@ defineProps<{
           </div>
         </div>
       </div>
-    </NuxtLink>
+    </KunCard>
   </div>
 </template>

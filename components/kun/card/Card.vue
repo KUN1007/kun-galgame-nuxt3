@@ -34,14 +34,16 @@ const handleKunCardClick = (event: MouseEvent) => {
 
 <template>
   <div
-    :class="[
-      'group relative flex flex-col gap-3 overflow-hidden rounded-lg p-3 shadow transition-all duration-200',
-      isHoverable && 'hover:bg-default-100 hover:shadow-md',
-      bordered && 'border',
-      isPressable && 'cursor-pointer active:scale-[0.97]',
-      isTransparent ? '' : 'bg-background',
-      className
-    ]"
+    :class="
+      cn(
+        'group relative flex flex-col gap-3 overflow-hidden rounded-lg p-3 shadow transition-all duration-200',
+        isHoverable && 'hover:bg-default-100 hover:shadow-md',
+        bordered && 'border',
+        isPressable && 'cursor-pointer active:scale-[0.97]',
+        isTransparent ? '' : 'bg-background',
+        className
+      )
+    "
     :role="isPressable ? 'button' : 'div'"
     @click="handleKunCardClick"
   >

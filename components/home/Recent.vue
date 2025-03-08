@@ -34,11 +34,11 @@ watch(
   <div v-if="messageData" class="w-full space-y-3 rounded-lg">
     <h2 class="text-xl font-semibold">最新动态</h2>
 
-    <div class="rounded-lg border shadow">
+    <KunCard content-class="space-y-3" :is-hoverable="false">
       <div
         v-for="(message, index) in messageData"
         :key="index"
-        class="group flex items-start space-x-3 rounded-lg p-3 transition-colors"
+        class="group flex items-start space-x-3 rounded-lg transition-colors"
       >
         <div
           class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
@@ -69,6 +69,6 @@ watch(
           </div>
         </div>
       </div>
-    </div>
+    </KunCard>
   </div>
 </template>
