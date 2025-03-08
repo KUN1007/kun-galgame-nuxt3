@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRipple } from '../utils/useRipple'
+import { useRipple } from '../ripple/useRipple'
 import type { KunUIVariant, KunUIColor } from '../ui/type'
 import type { ButtonProps } from './type'
 
@@ -195,6 +195,6 @@ const { ripples, onClick } = useRipple()
       <slot name="icon" />
     </span>
 
-    <KunUtilsRipple :ripples="ripples" />
+    <KunRipple :ripples="ripples" />
   </button>
 </template>

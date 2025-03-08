@@ -10,7 +10,7 @@ defineProps<{
   <span
     v-for="ripple in ripples"
     :key="ripple.key"
-    class="ripple"
+    class="bg-background ripple pointer-events-none absolute rounded-full"
     :style="{
       width: `${ripple.size}px`,
       height: `${ripple.size}px`,
@@ -22,12 +22,8 @@ defineProps<{
 
 <style lang="scss" scoped>
 .ripple {
-  position: absolute;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.5);
   transform: scale(0);
   animation: ripple-animation 0.6s ease-out;
-  pointer-events: none;
 }
 
 @keyframes ripple-animation {

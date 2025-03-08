@@ -9,9 +9,11 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
 </script>
 
 <template>
-  <NuxtLink
-    class="group bg-background relative flex flex-col justify-between gap-1 rounded-lg border p-4 shadow transition-all hover:shadow-md"
-    :to="`/topic/${props.topic.tid}`"
+  <KunCard
+    :is-pressable="true"
+    :is-transparent="false"
+    content-class="justify-between"
+    :href="`/topic/${props.topic.tid}`"
   >
     <h3
       class="line-clamp-2 text-lg font-medium text-gray-900 dark:text-gray-100"
@@ -44,5 +46,5 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
       :user="props.topic.user"
       :description="formatDate(props.topic.time, { isPrecise: true })"
     />
-  </NuxtLink>
+  </KunCard>
 </template>
