@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { KUN_TOPIC_SECTION } from '~/constants/topic'
+import type { KunUIColor } from '~/components/kun/ui/type'
 
 defineProps<{
   section: string[]
@@ -11,7 +12,7 @@ const iconMap: Record<string, string> = {
   o: 'lucide:circle-ellipsis'
 }
 
-const sectionColors: Record<string, string> = {
+const sectionColors: Record<string, KunUIColor> = {
   g: 'primary',
   t: 'success',
   o: 'secondary'

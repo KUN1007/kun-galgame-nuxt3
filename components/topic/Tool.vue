@@ -11,7 +11,9 @@ const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
 </script>
 
 <template>
-  <div class="flex flex-wrap justify-between gap-2">
+  <div
+    class="bg-background flex flex-wrap justify-between gap-2 rounded-lg border p-3 shadow"
+  >
     <div class="flex w-96 gap-2">
       <KunSelect
         :model-value="pageData.sortField"

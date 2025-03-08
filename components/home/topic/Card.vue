@@ -3,6 +3,7 @@ import type { HomeTopic } from '~/types/api/home'
 
 const props = defineProps<{
   topic: HomeTopic
+  isTransparent?: boolean
 }>()
 
 const isRecentlyUpvoted = computed(() => {
@@ -15,7 +16,12 @@ const isRecentlyUpvoted = computed(() => {
 <template>
   <NuxtLink
     :to="`/topic/${topic.tid}`"
-    class="group relative flex flex-col gap-3 rounded-lg border p-4 shadow transition-all hover:shadow-md"
+    :class="
+      cn(
+        'group relative flex flex-col gap-3 rounded-lg border p-4 shadow transition-all hover:shadow-md',
+        isTransparent ? '' : 'bg-background'
+      )
+    "
   >
     <div class="flex items-start justify-between gap-4">
       <h3
@@ -38,18 +44,9 @@ const isRecentlyUpvoted = computed(() => {
     <div
       class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
     >
-      <div class="flex flex-wrap items-center gap-2">
-        <TopicDetailSection :section="topic.section" />
-        <template v-if="topic.tags.length">
-          <KunBadge v-for="(tag, index) in topic.tags" :key="index">
-            {{ tag }}
-          </KunBadge>
-        </template>
-      </div>
+      <TopicTagGroup :section="topic.section" :tags="topic.tags" />
 
-      <div
-        class="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400"
-      >
+      <div class="text-default-700 flex items-center gap-4 text-sm">
         <span class="flex items-center gap-1">
           <Icon name="lucide:eye" class="h-4 w-4" />
           {{ topic.views }}

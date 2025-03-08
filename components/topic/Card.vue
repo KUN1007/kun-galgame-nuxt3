@@ -10,7 +10,7 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
 
 <template>
   <NuxtLink
-    class="group relative flex flex-col gap-1 rounded-lg border p-4 shadow transition-all hover:shadow-md"
+    class="group bg-background relative flex flex-col justify-between gap-1 rounded-lg border p-4 shadow transition-all hover:shadow-md"
     :to="`/topic/${props.topic.tid}`"
   >
     <h3
@@ -19,71 +19,30 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
       {{ topic.title }}
     </h3>
 
-    <TopicIntroduction
-      :section="props.topic.section"
-      :tags="props.topic.tags"
-    />
+    <TopicTagGroup :section="props.topic.section" :tags="props.topic.tags" />
 
-    <div class="status">
-      <span>
-        <Icon class="icon" name="lucide:eye" />
-        <span>{{ props.topic.views }}</span>
+    <div class="text-default-700 flex items-center gap-4 text-sm">
+      <span class="flex items-center gap-1 text-inherit">
+        <Icon class="h-4 w-4 text-inherit" name="lucide:eye" />
+        <span class="text-inherit">{{ props.topic.views }}</span>
       </span>
 
-      <span>
-        <Icon class="icon" name="lucide:thumbs-up" />
-        <span v-if="props.topic.likes">{{ props.topic.likes }}</span>
+      <span class="flex items-center gap-1 text-inherit">
+        <Icon class="h-4 w-4 text-inherit" name="lucide:thumbs-up" />
+        <span class="text-inherit" v-if="props.topic.likes">
+          {{ props.topic.likes }}
+        </span>
       </span>
 
-      <span>
-        <Icon class="icon" name="carbon:reply" />
-        <span v-if="actionsCount">{{ actionsCount }}</span>
+      <span class="flex items-center gap-1 text-inherit">
+        <Icon class="h-4 w-4 text-inherit" name="carbon:reply" />
+        <span class="text-inherit" v-if="actionsCount">{{ actionsCount }}</span>
       </span>
     </div>
 
-    <TopicUser :user="props.topic.user" :time="props.topic.time" />
+    <KunUser
+      :user="props.topic.user"
+      :description="formatDate(props.topic.time, { isPrecise: true })"
+    />
   </NuxtLink>
 </template>
-
-<style lang="scss" scoped>
-.topic {
-  display: flex;
-  flex-direction: column;
-  color: var(--kungalgame-font-color-3);
-  cursor: pointer;
-  max-width: 300px;
-  padding: 10px;
-  transition: all 0.2s;
-  border-radius: 10px;
-
-  &:hover {
-    box-shadow: var(--shadow);
-
-    .title {
-      color: var(--kungalgame-blue-5);
-    }
-  }
-}
-
-.title {
-  font-size: 18px;
-  color: var(--kungalgame-font-color-3);
-}
-
-.status {
-  display: flex;
-  overflow: hidden;
-  flex-wrap: wrap;
-  margin-top: 10px;
-
-  span {
-    display: flex;
-    align-items: center;
-    margin-right: 8px;
-
-    span {
-      margin-left: 4px;
-    }
-  }
-}
-</style>

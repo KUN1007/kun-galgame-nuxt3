@@ -19,7 +19,7 @@ const { data } = await useFetch(`/api/home/topic`, {
     </div>
 
     <template v-for="(topic, index) in data" :key="index">
-      <HomeTopicCard :topic="topic" />
+      <HomeTopicCard :topic="topic" :is-transparent="true" />
     </template>
   </div>
 </template>

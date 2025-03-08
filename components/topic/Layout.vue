@@ -21,10 +21,9 @@ const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
     />
   </div>
 
-  <div :class="layout" v-if="layout === 'list'">
-    <div v-for="(topic, index) in topics" :key="index">
+  <div class="space-y-3" v-if="layout === 'list'">
+    <template v-for="(topic, index) in topics" :key="index">
       <HomeTopicCard :topic="topic" />
-      <KunDivider margin="0 7px" color="var(--kungalgame-trans-blue-1)" />
-    </div>
+    </template>
   </div>
 </template>

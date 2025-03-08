@@ -84,7 +84,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="bg-background flex flex-col rounded-lg">
+  <div class="flex flex-col gap-3 rounded-lg">
     <TopicTool />
 
     <TopicLayout :topics="topics" />
