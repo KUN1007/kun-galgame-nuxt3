@@ -1,57 +1,63 @@
 <script setup lang="ts">
-import type { HomeGalgameResources } from '~/types/api/home'
+import {
+  typeIconMap,
+  platformIconMap
+} from '~/components/galgame/utils/iconMap'
+import {
+  KUN_GALGAME_RESOURCE_TYPE_MAP,
+  KUN_GALGAME_RESOURCE_LANGUAGE_MAP
+} from '~/constants/galgame'
 
-const resourceData = ref<HomeGalgameResources[] | null>()
-const pageData = reactive({
-  page: 1,
-  limit: 10
-})
-
-const { data, status } = await useFetch(`/api/home/resource`, {
+const { data } = await useFetch(`/api/home/resource`, {
   method: 'GET',
-  query: pageData
-})
-resourceData.value = data.value
-
-watch(
-  () => [pageData.page, status.value],
-  () => {
-    if (data.value && status.value !== 'pending' && pageData.page > 1) {
-      resourceData.value = resourceData.value?.concat(data.value)
-    }
+  query: {
+    page: 1,
+    limit: 10
   }
-)
-
-const handleClose = () => {
-  resourceData.value = resourceData.value?.slice(0, 10)
-  pageData.page = 1
-}
+})
 </script>
 
 <template>
-  <div class="container" v-if="resourceData">
-    <HomeResourceLink
-      v-for="resource in resourceData"
-      :key="resource.grid"
-      :link="resource"
-    />
+  <div class="w-full space-y-3 rounded-lg" v-if="data">
+    <h2 class="text-xl font-semibold">最新 Galgame 资源</h2>
+
+    <div class="rounded-lg border shadow">
+      <NuxtLink
+        v-for="(link, index) in data"
+        :key="index"
+        :to="`/galgame/${link.gid}`"
+        class="group flex items-start space-x-3 rounded-lg p-3 transition-colors"
+      >
+        <div
+          class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
+        >
+          <Icon
+            :name="platformIconMap[link.platform]"
+            class="text-primary h-4 w-4"
+          />
+        </div>
+
+        <div class="space-y-2">
+          <h3
+            class="hover:text-primary line-clamp-3 break-all transition-colors"
+          >
+            {{ getPreferredLanguageText(link.name) }}
+
+            <span class="text-default-500 text-sm">
+              {{ formatTimeDifference(link.time) }}
+            </span>
+          </h3>
+
+          <div class="text-default-700 flex gap-4 text-sm">
+            <span class="flex items-center gap-1">
+              <Icon class="icon" :name="typeIconMap[link.type]" />
+              {{ KUN_GALGAME_RESOURCE_TYPE_MAP[link.type] }}
+            </span>
+
+            {{ KUN_GALGAME_RESOURCE_LANGUAGE_MAP[link.language] }}
+          </div>
+        </div>
+      </NuxtLink>
+    </div>
   </div>
-
-  <HomeLoader v-model="pageData.page" :status="status">
-    <span v-if="pageData.page !== 1" class="close" @click="handleClose">
-      折叠为初始状态
-    </span>
-  </HomeLoader>
 </template>
-
-<style lang="scss" scoped>
-.close {
-  margin-left: 17px;
-  cursor: pointer;
-  padding-right: 17px;
-
-  &:hover {
-    color: var(--kungalgame-blue-5);
-  }
-}
-</style>

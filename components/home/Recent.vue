@@ -31,7 +31,7 @@ watch(
 </script>
 
 <template>
-  <div v-if="messageData" class="w-3xs shrink-0 space-y-3 rounded-lg">
+  <div v-if="messageData" class="w-full space-y-3 rounded-lg">
     <h2 class="text-xl font-semibold">最新动态</h2>
 
     <div class="rounded-lg border shadow">

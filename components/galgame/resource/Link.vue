@@ -3,8 +3,7 @@ import { typeIconMap, platformIconMap } from '../utils/iconMap'
 import {
   KUN_GALGAME_RESOURCE_TYPE_MAP,
   KUN_GALGAME_RESOURCE_LANGUAGE_MAP,
-  KUN_GALGAME_RESOURCE_PLATFORM_MAP,
-  KUN_GALGAME_RESOURCE_SORT_FIELD_MAP
+  KUN_GALGAME_RESOURCE_PLATFORM_MAP
 } from '~/constants/galgame'
 import type {
   GalgameResource,

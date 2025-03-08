@@ -43,5 +43,4 @@ export type HomeGalgame = GalgameCard
 
 export interface HomeGalgameResources extends GalgameResource {
   name: KunLanguage
-  time: number
 }
