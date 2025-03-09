@@ -333,6 +333,10 @@
     color: var(--color-foreground);
   }
 
+  span {
+    color: inherit;
+  }
+
   *:focus {
     outline: none;
   }

@@ -123,7 +123,7 @@ if (data) {
 
 <template>
   <div class="root">
-    <Topic v-if="data" :tid="tid" :topic="data" />
+    <TopicDetail v-if="data" :tid="tid" :topic="data" />
 
     <KunNull :condition="!data && !isBanned" type="404" />
 

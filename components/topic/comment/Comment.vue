@@ -30,42 +30,59 @@ const handleClickComment = (comment: TopicComment) => {
 </script>
 
 <template>
-  <div class="comment-container">
-    <div class="container" v-if="comments?.length">
-      <div class="title">
-        <span>评论</span>
-      </div>
+  <div class="bg-gray-50 p-6">
+    <h3
+      class="mb-4 text-lg font-semibold text-gray-900"
+      v-if="comments?.length"
+    >
+      评论
+    </h3>
 
-      <div class="comment" v-for="(comment, index) in comments" :key="index">
+    <div class="space-y-4">
+      <div
+        v-for="(comment, index) in comments"
+        :key="index"
+        class="flex items-start space-x-3"
+      >
         <NuxtLink
           v-if="comment.user.avatar"
           :to="`/kungalgamer/${comment.user.uid}/info`"
+          class="flex-shrink-0"
         >
           <img
             :src="comment.user.avatar.replace(/\.webp$/, '-100.webp')"
             alt="KUN"
+            class="h-8 w-8 rounded-full"
           />
         </NuxtLink>
 
-        <div class="content">
-          <div class="describe">
-            <div class="name">
-              {{ `${comment.user.name} 评论` }}
-              <NuxtLink :to="`/kungalgamer/${comment.toUser.uid}/info`">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center justify-between">
+            <div class="text-sm">
+              <span class="text-gray-900">{{ comment.user.name }}</span>
+              <span class="mx-1 text-gray-500">评论</span>
+              <NuxtLink
+                :to="`/kungalgamer/${comment.toUser.uid}/info`"
+                class="text-primary-600 hover:text-primary-700"
+              >
                 {{ comment.toUser.name }}
               </NuxtLink>
             </div>
 
-            <div class="operate">
+            <div class="flex items-center space-x-2">
               <TopicCommentLike :comment="comment" />
-
-              <span @click="handleClickComment(comment)">
-                <Icon class="icon" name="uil:comment-dots" />
-              </span>
+              <button
+                @click="handleClickComment(comment)"
+                class="text-gray-500 transition-colors hover:text-gray-700"
+              >
+                <Icon name="uil:comment-dots" class="h-5 w-5" />
+              </button>
             </div>
           </div>
 
-          <pre class="text">{{ comment.content }}</pre>
+          <p class="mt-1 text-sm whitespace-pre-wrap text-gray-700">
+            {{ comment.content }}
+          </p>
         </div>
       </div>
     </div>
@@ -77,77 +94,3 @@ const handleClickComment = (comment: TopicComment) => {
     />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.title {
-  border-top: 1px solid var(--kungalgame-trans-blue-2);
-  flex-shrink: 0;
-  padding: 17px 0;
-  color: var(--kungalgame-font-color-3);
-}
-
-.comment-container {
-  width: 100%;
-  padding: 0 17px;
-}
-
-.comment {
-  display: flex;
-  width: 100%;
-  margin: 10px 0;
-  color: var(--kungalgame-font-color-3);
-
-  img {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-  }
-}
-
-.content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.describe {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 5px;
-}
-
-.name {
-  font-size: 15px;
-
-  a {
-    color: var(--kungalgame-blue-5);
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
-
-.operate {
-  display: flex;
-  span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .icon {
-      cursor: pointer;
-      color: var(--kungalgame-font-color-2);
-      margin-right: 2px;
-    }
-  }
-}
-
-.text {
-  border-left: 3px solid var(--kungalgame-blue-5);
-  padding-left: 10px;
-  white-space: pre-wrap;
-  word-break: break-all;
-}
-</style>

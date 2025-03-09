@@ -90,7 +90,7 @@ export default defineNuxtConfig({
   },
 
   // Frontend
-  css: ['~/styles/tailwindcss.css'],
+  css: ['~/styles/index.css'],
 
   vite: {
     plugins: [tailwindcss()],

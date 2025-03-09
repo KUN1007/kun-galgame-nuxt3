@@ -59,7 +59,6 @@ watch(
   }
 )
 
-// TODO:
 watch(
   () => [pageData.page, pageData.sortOrder],
   async (newValue, oldValue) => {
@@ -68,15 +67,11 @@ watch(
       isLoadComplete.value = false
     }
 
-    if (pending.value) {
-      return
-    }
+    if (pending.value) return
 
     await refresh()
 
-    if (!data.value) {
-      return
-    }
+    if (!data.value) return
 
     if (newValue[0] !== oldValue[0]) {
       replyData.value = replyData.value?.concat(data.value)
@@ -92,77 +87,42 @@ watch(
 </script>
 
 <template>
-  <div class="content">
-    <TopicMaster :topic="topic" />
+  <div class="mx-auto w-full px-4 py-8">
+    <TopicDetailMaster :topic="topic" />
 
-    <TopicTool
-      v-if="replyData"
-      :reply-data="replyData"
-      :pending="pending"
-      :sort-order="pageData.sortOrder"
-      @set-sort-order="(value) => (pageData.sortOrder = value)"
-    />
-
-    <template v-if="replyData">
-      <TopicReply
-        v-for="reply in replyData"
-        :key="reply.rid"
-        :reply="reply"
-        :title="topic.title"
-        @scroll-page="(value) => scrollPage(value)"
+    <!-- Replies Section -->
+    <div class="mt-8">
+      <TopicDetailTool
+        v-if="replyData"
+        :reply-data="replyData"
+        :pending="pending"
+        :sort-order="pageData.sortOrder"
+        @set-sort-order="(value) => (pageData.sortOrder = value)"
       />
-    </template>
 
-    <KunDivider
-      v-if="replyData && replyData.length >= 30"
-      margin="30px"
-      padding="0 17px"
-    >
-      <slot />
-      <span
-        class="loader"
-        v-if="!pending && !isLoadComplete"
-        @click="pageData.page++"
-      >
-        加载更多
-      </span>
-      <span v-if="pending">少女祈祷中...</span>
-      <span v-if="isLoadComplete">被榨干了呜呜呜呜呜, 一滴也不剩了</span>
-    </KunDivider>
+      <div class="mt-6 space-y-6">
+        <TopicReply
+          v-for="reply in replyData"
+          :key="reply.rid"
+          :reply="reply"
+          :title="topic.title"
+          @scroll-page="scrollPage"
+        />
+      </div>
+
+      <div v-if="replyData && replyData.length >= 30" class="mt-8 text-center">
+        <button
+          v-if="!pending && !isLoadComplete"
+          @click="pageData.page++"
+          class="bg-primary-500 hover:bg-primary-600 rounded-md px-4 py-2 text-white transition-colors"
+        >
+          加载更多
+        </button>
+        <p v-if="pending" class="text-gray-500">少女祈祷中...</p>
+        <p v-if="isLoadComplete" class="text-gray-500">
+          被榨干了呜呜呜呜呜, 一滴也不剩了
+        </p>
+      </div>
+    </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.pagination {
-  padding: 10px;
-  margin-bottom: 17px;
-}
-
-.kun-divider {
-  font-size: 16px;
-
-  span {
-    &:first-child {
-      padding-left: 17px;
-    }
-
-    &:last-child {
-      padding-right: 17px;
-    }
-  }
-
-  .loader {
-    cursor: pointer;
-
-    &:hover {
-      color: var(--kungalgame-blue-5);
-    }
-  }
-}
-
-@media (max-width: 700px) {
-  .content {
-    padding: 0 5px;
-  }
-}
-</style>
