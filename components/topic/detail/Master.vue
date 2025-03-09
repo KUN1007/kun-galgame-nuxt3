@@ -25,7 +25,12 @@ const loliStatus = computed(() => {
   <div class="flex justify-between gap-3" id="k0">
     <TopicDetailUser v-if="topic.user" :user="topic.user" />
 
-    <KunCard :is-hoverable="false" class-name="w-full" content-class="gap-3">
+    <KunCard
+      :is-transparent="false"
+      :is-hoverable="false"
+      class-name="w-full"
+      content-class="gap-3"
+    >
       <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">
         {{ topic.title }}
       </h1>

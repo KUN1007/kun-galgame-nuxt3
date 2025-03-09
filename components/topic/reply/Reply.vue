@@ -28,7 +28,12 @@ watch(
   <div class="flex justify-between gap-3" :id="`k${reply.floor}`">
     <TopicDetailUser :user="reply.user" />
 
-    <KunCard class-name="w-full" content-class="gap-3" :is-hoverable="false">
+    <KunCard
+      :is-transparent="false"
+      :is-hoverable="false"
+      class-name="w-full"
+      content-class="gap-3"
+    >
       <div class="flex items-center justify-between space-x-2">
         <button
           @click="scrollToReplyId = reply.toFloor"

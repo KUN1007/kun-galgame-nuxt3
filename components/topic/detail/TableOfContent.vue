@@ -51,6 +51,7 @@ onMounted(() => {
 
 <template>
   <KunCard
+    :is-transparent="false"
     :is-hoverable="false"
     class-name="hidden w-52 shrink-0 lg:block"
     content-class="justify-start"

@@ -30,52 +30,45 @@ const handleClickComment = (comment: TopicComment) => {
 </script>
 
 <template>
-  <div v-if="comments?.length" class="bg-default-100 rounded-lg p-6">
-    <h3 class="mb-4 text-lg font-semibold text-gray-900">评论</h3>
+  <div v-if="comments?.length" class="bg-default-100 space-y-3 rounded-lg p-3">
+    <h3 class="text-lg font-semibold">评论</h3>
 
-    <div class="space-y-4">
+    <div class="space-y-3">
       <div
         v-for="(comment, index) in comments"
         :key="index"
         class="flex items-start space-x-3"
       >
-        <NuxtLink
-          v-if="comment.user.avatar"
-          :to="`/kungalgamer/${comment.user.uid}/info`"
-          class="flex-shrink-0"
-        >
-          <img
-            :src="comment.user.avatar.replace(/\.webp$/, '-100.webp')"
-            alt="KUN"
-            class="h-8 w-8 rounded-full"
-          />
-        </NuxtLink>
+        <KunAvatar :user="comment.user" />
 
-        <div class="min-w-0 flex-1">
+        <div class="flex w-full flex-col space-y-1">
           <div class="flex items-center justify-between">
             <div class="text-sm">
-              <span class="text-gray-900">{{ comment.user.name }}</span>
-              <span class="mx-1 text-gray-500">评论</span>
+              <span>{{ comment.user.name }}</span>
+              <span class="text-default-500 mx-1">评论</span>
               <NuxtLink
                 :to="`/kungalgamer/${comment.toUser.uid}/info`"
-                class="text-primary-600 hover:text-primary-700"
+                class="text-primary hover:text-primary-700"
               >
                 {{ comment.toUser.name }}
               </NuxtLink>
             </div>
 
-            <div class="flex items-center space-x-2">
+            <div class="flex items-center gap-1">
               <TopicCommentLike :comment="comment" />
-              <button
+              <KunButton
+                :is-icon-only="true"
+                variant="light"
+                color="default"
+                class-name="gap-1"
                 @click="handleClickComment(comment)"
-                class="text-gray-500 transition-colors hover:text-gray-700"
               >
-                <Icon name="uil:comment-dots" class="h-5 w-5" />
-              </button>
+                <Icon name="uil:comment-dots" />
+              </KunButton>
             </div>
           </div>
 
-          <p class="mt-1 text-sm whitespace-pre-wrap text-gray-700">
+          <p class="text-default-700 text-sm whitespace-pre-wrap">
             {{ comment.content }}
           </p>
         </div>

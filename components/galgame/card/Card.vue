@@ -13,6 +13,7 @@ defineProps<{
     class="grid grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4"
   >
     <KunCard
+      :is-transparent="isTransparent"
       :is-pressable="true"
       v-for="galgame in galgames"
       :key="galgame.gid"

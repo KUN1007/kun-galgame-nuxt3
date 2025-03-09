@@ -13,7 +13,11 @@ const emits = defineEmits<{
 </script>
 
 <template>
-  <KunCard :is-hoverable="false" v-if="replyData && replyData.length > 5">
+  <KunCard
+    :is-transparent="false"
+    :is-hoverable="false"
+    v-if="replyData && replyData.length > 5"
+  >
     <div class="flex items-center gap-2">
       <span class="pending" v-if="pending">少女祈祷中...</span>
 

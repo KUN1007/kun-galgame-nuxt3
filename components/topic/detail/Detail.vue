@@ -87,42 +87,39 @@ watch(
 </script>
 
 <template>
-  <div class="mx-auto w-full px-4 py-8">
+  <div class="w-full space-y-3 pb-6">
     <TopicDetailMaster :topic="topic" />
 
-    <!-- Replies Section -->
-    <div class="mt-8">
-      <TopicDetailTool
-        v-if="replyData"
-        :reply-data="replyData"
-        :pending="pending"
-        :sort-order="pageData.sortOrder"
-        @set-sort-order="(value) => (pageData.sortOrder = value)"
+    <TopicDetailTool
+      v-if="replyData"
+      :reply-data="replyData"
+      :pending="pending"
+      :sort-order="pageData.sortOrder"
+      @set-sort-order="(value) => (pageData.sortOrder = value)"
+    />
+
+    <div class="space-y-3">
+      <TopicReply
+        v-for="reply in replyData"
+        :key="reply.rid"
+        :reply="reply"
+        :title="topic.title"
+        @scroll-page="scrollPage"
       />
+    </div>
 
-      <div class="mt-6 space-y-6">
-        <TopicReply
-          v-for="reply in replyData"
-          :key="reply.rid"
-          :reply="reply"
-          :title="topic.title"
-          @scroll-page="scrollPage"
-        />
-      </div>
-
-      <div v-if="replyData && replyData.length >= 30" class="mt-8 text-center">
-        <button
-          v-if="!pending && !isLoadComplete"
-          @click="pageData.page++"
-          class="bg-primary-500 hover:bg-primary-600 rounded-md px-4 py-2 text-white transition-colors"
-        >
-          加载更多
-        </button>
-        <p v-if="pending" class="text-gray-500">少女祈祷中...</p>
-        <p v-if="isLoadComplete" class="text-gray-500">
-          被榨干了呜呜呜呜呜, 一滴也不剩了
-        </p>
-      </div>
+    <div v-if="replyData && replyData.length >= 30" class="text-center">
+      <KunButton
+        size="lg"
+        v-if="!pending && !isLoadComplete"
+        @click="pageData.page++"
+      >
+        加载更多
+      </KunButton>
+      <p v-if="pending" class="text-default-500">少女祈祷中...</p>
+      <p v-if="isLoadComplete" class="text-default-500">
+        被榨干了呜呜呜呜呜, 一滴也不剩了
+      </p>
     </div>
   </div>
 </template>

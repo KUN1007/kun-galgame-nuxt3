@@ -122,7 +122,7 @@ if (data) {
 </script>
 
 <template>
-  <div class="root">
+  <div>
     <TopicDetail v-if="data" :tid="tid" :topic="data" />
 
     <KunNull :condition="!data && !isBanned" type="404" />
@@ -132,14 +132,3 @@ if (data) {
     <TopicDetailBar />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.root {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
-  color: var(--kungalgame-font-color-3);
-}
-</style>
