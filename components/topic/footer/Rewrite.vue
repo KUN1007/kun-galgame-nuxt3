@@ -24,9 +24,14 @@ const rewriteTopic = () => {
 </script>
 
 <template>
-  <span v-if="isShowRewrite" @click="rewriteTopic" class="icon">
-    <Icon class="icon" name="lucide:pencil" />
-  </span>
+  <KunButton
+    :is-icon-only="true"
+    variant="light"
+    color="default"
+    size="lg"
+    v-if="isShowRewrite"
+    @click="rewriteTopic"
+  >
+    <Icon name="lucide:pencil" />
+  </KunButton>
 </template>
-
-<style lang="scss" scoped></style>

@@ -48,13 +48,9 @@ const loliStatus = computed(() => {
 
       <KunContent :content="topic.content" />
 
-      <p class="text-default-500 text-sm" v-if="topic.edited">
-        ×
+      <p class="text-default-500 ml-auto text-sm" v-if="topic.edited">
         {{
-          formatDate(topic.edited, {
-            isShowYear: true,
-            isPrecise: true
-          })
+          `重新编辑于 - ${formatDate(topic.edited, { isShowYear: true, isPrecise: true })}`
         }}
       </p>
 

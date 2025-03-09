@@ -61,40 +61,15 @@ const handleClickDislike = () => {
 </script>
 
 <template>
-  <span
-    class="dislike"
-    :class="isDisliked ? 'active' : ''"
+  <KunButton
+    :is-icon-only="true"
+    :variant="isDisliked ? 'flat' : 'light'"
+    :color="isDisliked ? 'secondary' : 'default'"
+    :size="dislikesCount ? 'md' : 'lg'"
+    class-name="gap-1"
     @click="handleClickDislike"
   >
     <Icon class="icon" name="lucide:thumbs-down" />
     <span v-if="dislikesCount">{{ dislikesCount }}</span>
-  </span>
+  </KunButton>
 </template>
-
-<style lang="scss" scoped>
-.dislike {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 0;
-  color: var(--kungalgame-font-color-2);
-
-  .icon {
-    cursor: pointer;
-    font-size: 24px;
-    margin-right: 3px;
-  }
-}
-
-.active .icon {
-  color: var(--kungalgame-red-4);
-}
-
-@media (max-width: 700px) {
-  .dislike {
-    .icon {
-      font-size: initial;
-    }
-  }
-}
-</style>

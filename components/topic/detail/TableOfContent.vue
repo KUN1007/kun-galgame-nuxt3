@@ -52,7 +52,7 @@ onMounted(() => {
 <template>
   <KunCard
     :is-hoverable="false"
-    class="hidden w-64 p-0 lg:block"
+    class-name="hidden w-52 shrink-0 lg:block"
     content-class="justify-start"
   >
     <h2 class="mb-4 text-lg font-semibold">本文索引</h2>

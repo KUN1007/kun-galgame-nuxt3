@@ -7,8 +7,8 @@ defineProps<{
 </script>
 
 <template>
-  <div class="footer">
-    <div class="left">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-1">
       <TopicFooterUpvote
         :tid="topic.tid"
         :to-uid="topic.user.uid"
@@ -38,7 +38,7 @@ defineProps<{
       />
     </div>
 
-    <div class="right">
+    <div class="flex items-center gap-1">
       <TopicFooterReply
         :tid="topic.tid"
         :to-user-name="topic.user.name"
@@ -46,77 +46,21 @@ defineProps<{
         :to-floor="0"
       />
 
-      <span
+      <KunButton
+        :is-icon-only="true"
+        variant="light"
+        color="default"
+        size="lg"
         @click="
           useKunCopy(
             `${topic.title}: https://www.kungal.com/topic/${topic.tid}`
           )
         "
-        class="icon"
       >
-        <Icon class="icon" name="lucide:share-2" />
-      </span>
+        <Icon name="lucide:share-2" />
+      </KunButton>
 
-      <TopicFooterRewrite
-        :topic="topic"
-        v-tooltip="{
-          message: 'Rewrite',
-          position: 'bottom'
-        }"
-      />
+      <TopicFooterRewrite :topic="topic" />
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.footer {
-  padding: 17px 10px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.left {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--kungalgame-font-color-3);
-
-  span {
-    display: flex;
-    margin-right: 17px;
-  }
-}
-
-.views {
-  margin-left: 17px;
-}
-
-.icon {
-  font-size: 24px;
-  color: var(--kungalgame-font-color-2);
-  cursor: pointer;
-}
-
-.right {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  span {
-    display: flex;
-    margin-right: 17px;
-  }
-}
-
-.active {
-  color: var(--kungalgame-blue-5);
-}
-
-@media (max-width: 700px) {
-  .icon {
-    font-size: initial;
-  }
-}
-</style>

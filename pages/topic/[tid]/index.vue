@@ -129,7 +129,7 @@ if (data) {
 
     <KunBlank v-if="isBanned">此话题已被封禁</KunBlank>
 
-    <TopicBar />
+    <TopicDetailBar />
   </div>
 </template>
 

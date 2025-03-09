@@ -44,40 +44,15 @@ const handleClickFavorite = () => {
 </script>
 
 <template>
-  <span
-    class="favorite"
-    :class="isFavorite ? 'active' : ''"
+  <KunButton
+    :is-icon-only="true"
+    :variant="isFavorite ? 'flat' : 'light'"
+    :color="isFavorite ? 'secondary' : 'default'"
+    :size="favoritesCount ? 'md' : 'lg'"
+    class-name="gap-1"
     @click="handleClickFavorite"
   >
     <Icon class="icon" name="lucide:heart" />
     <span v-if="favoritesCount">{{ favoritesCount }}</span>
-  </span>
+  </KunButton>
 </template>
-
-<style lang="scss" scoped>
-.favorite {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 0;
-  color: var(--kungalgame-font-color-2);
-
-  .icon {
-    cursor: pointer;
-    font-size: 24px;
-    margin-right: 3px;
-  }
-}
-
-.active .icon {
-  color: var(--kungalgame-red-4);
-}
-
-@media (max-width: 700px) {
-  .favorite {
-    .icon {
-      font-size: initial;
-    }
-  }
-}
-</style>

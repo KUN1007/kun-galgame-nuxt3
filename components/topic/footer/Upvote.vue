@@ -81,40 +81,15 @@ const handleClickUpvote = async () => {
 </script>
 
 <template>
-  <span
-    class="upvote"
-    :class="isUpvoted ? 'active' : ''"
+  <KunButton
+    :is-icon-only="true"
+    :variant="isUpvoted ? 'flat' : 'light'"
+    :color="isUpvoted ? 'secondary' : 'default'"
+    :size="upvoteCount ? 'md' : 'lg'"
+    class-name="gap-1"
     @click="handleClickUpvote"
   >
     <Icon class="icon" name="lucide:sparkles" />
     <span v-if="upvoteCount">{{ upvoteCount }}</span>
-  </span>
+  </KunButton>
 </template>
-
-<style lang="scss" scoped>
-.upvote {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 0;
-  color: var(--kungalgame-font-color-2);
-
-  .icon {
-    cursor: pointer;
-    font-size: 24px;
-    margin-right: 3px;
-  }
-}
-
-.active .icon {
-  color: var(--kungalgame-red-4);
-}
-
-@media (max-width: 700px) {
-  .upvote {
-    .icon {
-      font-size: initial;
-    }
-  }
-}
-</style>

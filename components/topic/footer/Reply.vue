@@ -24,5 +24,5 @@ const handleClickReply = () => {
 </script>
 
 <template>
-  <KunButton variant="flat" @click="handleClickReply"> 回复 </KunButton>
+  <KunButton variant="flat" @click="handleClickReply">回复</KunButton>
 </template>

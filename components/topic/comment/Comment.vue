@@ -30,13 +30,8 @@ const handleClickComment = (comment: TopicComment) => {
 </script>
 
 <template>
-  <div class="bg-gray-50 p-6">
-    <h3
-      class="mb-4 text-lg font-semibold text-gray-900"
-      v-if="comments?.length"
-    >
-      评论
-    </h3>
+  <div v-if="comments?.length" class="bg-default-100 rounded-lg p-6">
+    <h3 class="mb-4 text-lg font-semibold text-gray-900">评论</h3>
 
     <div class="space-y-4">
       <div

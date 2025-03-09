@@ -13,9 +13,9 @@ const user = computed(() => props.user)
 
 <template>
   <KunCard
-    class="w-64"
+    class-name="w-52 shrink-0"
     :is-hoverable="false"
-    content-class="justify-start items-center"
+    content-class="justify-start items-center gap-3"
   >
     <KunAvatar size="lg" :user="user" />
 
@@ -26,7 +26,7 @@ const user = computed(() => props.user)
       {{ user.name }}
     </NuxtLink>
 
-    <p class="text-secondary">
+    <p class="text-secondary flex items-center gap-1">
       <Icon class="text-inherit" name="lucide:lollipop" />
       {{ user.moemoepoint }}
     </p>
