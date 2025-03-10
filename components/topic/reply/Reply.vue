@@ -2,8 +2,9 @@
 import type { TopicReply } from '~/types/api/topic-reply'
 
 const { scrollToReplyId } = storeToRefs(useTempReplyStore())
+const { rid: storeRid, isShowPanel } = storeToRefs(useTempCommentStore())
 
-defineProps<{
+const props = defineProps<{
   reply: TopicReply
   title: string
 }>()
@@ -11,6 +12,8 @@ defineProps<{
 const emits = defineEmits<{
   scrollPage: [scrollToReplyId: number]
 }>()
+
+const comments = ref(props.reply.comment)
 
 watch(
   () => scrollToReplyId.value,
@@ -25,7 +28,7 @@ watch(
 </script>
 
 <template>
-  <div class="flex justify-between gap-3" :id="`k${reply.floor}`">
+  <div class="flex justify-between gap-3 rounded-lg" :id="`k${reply.floor}`">
     <TopicDetailUser :user="reply.user" />
 
     <KunCard
@@ -70,7 +73,13 @@ watch(
 
       <TopicReplyFooter :reply="reply" :title="title" />
 
-      <TopicComment :rid="reply.rid" :comments-data="reply.comment" />
+      <TopicComment :rid="reply.rid" :comments-data="comments" />
+
+      <LazyTopicCommentPanel
+        v-if="isShowPanel && reply.rid === storeRid"
+        :rid="reply.rid"
+        @get-comment="(newComment) => comments.push(newComment)"
+      />
     </KunCard>
   </div>
 </template>

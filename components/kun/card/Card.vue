@@ -36,7 +36,7 @@ const handleKunCardClick = (event: MouseEvent) => {
   <div
     :class="
       cn(
-        'group relative flex flex-col gap-3 overflow-hidden rounded-lg p-3 shadow transition-all duration-200',
+        'group border-default-300 relative flex flex-col gap-3 overflow-hidden rounded-lg p-3 shadow transition-all duration-200',
         isHoverable && 'hover:bg-default-100 hover:shadow-md',
         bordered && 'border',
         isPressable && 'cursor-pointer active:scale-[0.97]',

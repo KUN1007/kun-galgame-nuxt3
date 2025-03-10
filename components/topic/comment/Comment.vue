@@ -6,8 +6,6 @@ const props = defineProps<{
   commentsData: TopicComment[]
 }>()
 
-const comments = ref(props.commentsData)
-
 const currentUserUid = usePersistUserStore().uid
 const {
   rid: storeRid,
@@ -30,12 +28,15 @@ const handleClickComment = (comment: TopicComment) => {
 </script>
 
 <template>
-  <div v-if="comments?.length" class="bg-default-100 space-y-3 rounded-lg p-3">
+  <div
+    v-if="commentsData?.length"
+    class="bg-default-100 space-y-3 rounded-lg p-3"
+  >
     <h3 class="text-lg font-semibold">评论</h3>
 
     <div class="space-y-3">
       <div
-        v-for="(comment, index) in comments"
+        v-for="(comment, index) in commentsData"
         :key="index"
         class="flex items-start space-x-3"
       >
@@ -74,11 +75,5 @@ const handleClickComment = (comment: TopicComment) => {
         </div>
       </div>
     </div>
-
-    <LazyTopicCommentPanel
-      v-if="isShowPanel && rid === storeRid"
-      :rid="rid"
-      @get-comment="(newComment) => comments.push(newComment)"
-    />
   </div>
 </template>

@@ -34,13 +34,13 @@ const scrollPage = throttle((rid: number) => {
 
   if (childElement) {
     childElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    childElement.classList.add('active')
+    childElement.classList.add('bg-primary-500/30')
 
     if (timeout !== null) {
       clearTimeout(timeout)
     }
     timeout = setTimeout(() => {
-      childElement.classList.remove('active')
+      childElement.classList.remove('bg-primary-500/30')
     }, 3000)
   } else {
     useMessage(10215, 'info')
