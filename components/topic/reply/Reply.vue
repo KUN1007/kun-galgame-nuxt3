@@ -26,8 +26,8 @@ watch(
 
 <template>
   <div
-    class="outline-primary flex justify-between gap-3 rounded-lg outline-offset-2"
-    :id="`k${reply.floor}`"
+    class="outline-primary kun-reply flex justify-between gap-3 rounded-lg outline-offset-2"
+    :id="`${reply.floor}.${markdownToText(reply.content).slice(0, 20)}`"
   >
     <TopicDetailUser :user="reply.user" />
 

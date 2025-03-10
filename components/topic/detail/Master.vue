@@ -13,7 +13,7 @@ defineProps<{
         'outline-primary flex justify-between gap-3 rounded-lg outline-offset-2'
       )
     "
-    id="k0"
+    id="0"
   >
     <TopicDetailUser v-if="topic.user" :user="topic.user" />
 

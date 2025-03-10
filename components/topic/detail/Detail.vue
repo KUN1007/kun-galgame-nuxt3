@@ -70,7 +70,7 @@ watch(
 
 <template>
   <div class="flex w-full gap-3">
-    <div class="w-full space-y-3 lg:w-[calc(100%-220px)]">
+    <div class="w-full space-y-3 lg:w-[calc(100%-208px)]">
       <TopicDetailMaster :topic="topic" />
 
       <TopicDetailTool
@@ -89,7 +89,7 @@ watch(
       />
     </div>
 
-    <TopicDetailAside />
+    <TopicDetailAside :replies="replyData" />
   </div>
 
   <div v-if="replyData && replyData.length >= 30" class="py-6 text-center">
