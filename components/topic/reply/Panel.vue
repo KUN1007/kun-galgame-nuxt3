@@ -34,100 +34,36 @@ const handleClosePanel = async () => {
       enter-active-class="animate__animated animate__fadeInUp animate__faster"
       leave-active-class="animate__animated animate__fadeOutDown animate__faster"
     >
-      <div class="root" v-if="isEdit">
-        <div class="container">
-          <div class="title">
+      <div
+        class="fixed bottom-0 z-100 flex max-h-[70%] w-full flex-col items-center"
+        v-if="isEdit"
+      >
+        <div
+          class="bg-background border-default-300 w-full max-w-4xl overflow-y-auto rounded-lg border p-3 shadow"
+        >
+          <div class="flex items-center justify-between">
             <h3>
-              <span>回复给 @</span>
-              <span class="username">{{ replyDraft.toUserName }}</span>
-              <span>
-                <span class="emoji">(⋈◍＞◡＜◍)。✧♡ </span>
-                {{
-                  `${KUN_TOPIC_REPLY_PANEL_POSITION_MAP[position]} ${replyDraft.toFloor}`
-                }}
-              </span>
+              {{
+                `回复给 @ ${replyDraft.toUserName} - ${KUN_TOPIC_REPLY_PANEL_POSITION_MAP[position]} ${replyDraft.toFloor}`
+              }}
             </h3>
-            <span class="close">
-              <Icon class="icon" @click="handleClosePanel" name="lucide:x" />
-            </span>
+            <KunButton
+              color="default"
+              variant="light"
+              rounded="full"
+              size="lg"
+              :is-icon-only="true"
+              @click="handleClosePanel"
+            >
+              <Icon name="lucide:x" />
+            </KunButton>
           </div>
 
-          <div class="content">
-            <LazyTopicReplyEditor :is-show-menu="isShowAdvance" />
-          </div>
+          <LazyTopicReplyEditor :is-show-menu="true" />
 
-          <div class="footer">
-            <LazyEditTopicTags
-              style="margin-top: 10px; padding: 10px"
-              v-if="isShowAdvance"
-            />
-            <TopicReplyPanelBtn />
-          </div>
+          <TopicReplyPanelBtn />
         </div>
       </div>
     </Transition>
   </Teleport>
 </template>
-
-<style lang="scss" scoped>
-.root {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 1;
-}
-
-.container {
-  transition: all 0.2s;
-  width: 90%;
-  max-width: 60rem;
-  max-height: 77vh;
-  overflow-y: scroll;
-
-  .close {
-    font-size: 30px;
-    cursor: pointer;
-    color: var(--kungalgame-font-color-1);
-  }
-}
-
-.title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  padding-left: 20px;
-
-  span {
-    user-select: none;
-
-    &:nth-child(3) {
-      margin-left: 10px;
-    }
-
-    .emoji {
-      color: var(--kungalgame-pink-3);
-    }
-  }
-
-  .username {
-    margin: 0 5px;
-    cursor: pointer;
-    color: var(--kungalgame-blue-5);
-    border-bottom: 2px solid var(--kungalgame-white-9);
-
-    &:hover {
-      border-bottom: 2px solid var(--kungalgame-blue-5);
-    }
-  }
-}
-
-@media (max-width: 700px) {
-  .emoji {
-    display: none;
-  }
-}
-</style>

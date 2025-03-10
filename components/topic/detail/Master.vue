@@ -1,28 +1,20 @@
 <script setup lang="ts">
-import { KUN_TOPIC_DETAIL_STATUS } from '~/constants/topic'
 import type { TopicDetail } from '~/types/api/topic'
 
 const props = defineProps<{
   topic: TopicDetail
 }>()
-
-const loliStatus = computed(() => {
-  if (hourDiff(props.topic.upvoteTime, 10)) {
-    return 'featured'
-  }
-
-  const statusMap: Record<number, string> = {
-    0: 'normal',
-    1: 'banned',
-    2: 'pinned',
-    3: 'essential'
-  }
-  return statusMap[props.topic.status]
-})
 </script>
 
 <template>
-  <div :class="cn('flex justify-between gap-3 rounded-lg')" id="k0">
+  <div
+    :class="
+      cn(
+        'outline-primary flex justify-between gap-3 rounded-lg outline-offset-2'
+      )
+    "
+    id="k0"
+  >
     <TopicDetailUser v-if="topic.user" :user="topic.user" />
 
     <KunCard

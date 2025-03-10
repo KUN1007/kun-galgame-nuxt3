@@ -19,8 +19,6 @@ const emits = defineEmits<{
     v-if="replyData && replyData.length > 5"
   >
     <div class="flex items-center gap-2">
-      <span class="pending" v-if="pending">少女祈祷中...</span>
-
       <KunButton
         :is-icon-only="true"
         :variant="sortOrder === 'desc' ? 'flat' : 'light'"
@@ -38,6 +36,8 @@ const emits = defineEmits<{
       >
         <Icon class="text-inherit" name="lucide:arrow-up" />
       </KunButton>
+
+      <span class="pending" v-if="pending">少女祈祷中...</span>
     </div>
   </KunCard>
 </template>

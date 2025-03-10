@@ -89,45 +89,16 @@ onUnmounted(() => {
 
     <TopicLayout :topics="topics" />
 
-    <div class="load">
-      <span class="loader" v-if="!isLoadingComplete" @click="handleLoadTopics">
+    <div class="w-full items-center justify-center p-6">
+      <KunButton size="lg" v-if="!isLoadingComplete" @click="handleLoadTopics">
         点击继续加载话题
-      </span>
+      </KunButton>
 
-      <span class="complete" v-else-if="isLoadingComplete">
+      <p v-if="isLoadingComplete" class="text-default-500">
         已经。。。一滴也不剩了
-      </span>
+      </p>
     </div>
 
     <KunFooter />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.load {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  margin: 24px 0;
-
-  .loader {
-    cursor: pointer;
-    color: var(--kungalgame-font-color-1);
-
-    &:hover {
-      color: var(--kungalgame-blue-5);
-    }
-  }
-
-  .complete {
-    color: var(--kungalgame-trans-blue-2);
-    user-select: none;
-    cursor: default;
-  }
-}
-
-.kun-footer {
-  margin-bottom: 17px;
-}
-</style>

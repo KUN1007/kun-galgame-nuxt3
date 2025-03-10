@@ -14,7 +14,7 @@ watch(
 </script>
 
 <template>
-  <div class="fixed right-6 bottom-10 z-20">
+  <div class="fixed right-3 bottom-10 z-20">
     <KunButton
       rounded="full"
       :is-icon-only="true"

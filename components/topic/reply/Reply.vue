@@ -28,7 +28,10 @@ watch(
 </script>
 
 <template>
-  <div class="flex justify-between gap-3 rounded-lg" :id="`k${reply.floor}`">
+  <div
+    class="outline-primary flex justify-between gap-3 rounded-lg outline-offset-2"
+    :id="`k${reply.floor}`"
+  >
     <TopicDetailUser :user="reply.user" />
 
     <KunCard

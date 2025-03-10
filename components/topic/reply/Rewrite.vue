@@ -24,5 +24,3 @@ const rewriteReply = () => {
     <Icon class="icon" name="lucide:pencil" />
   </span>
 </template>
-
-<style lang="scss" scoped></style>

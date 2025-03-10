@@ -1,14 +1,20 @@
 <script setup lang="ts">
 import DOMPurify from 'isomorphic-dompurify'
 
-defineProps<{
-  content: string
-}>()
+withDefaults(
+  defineProps<{
+    content: string
+    className?: string
+  }>(),
+  {
+    className: ''
+  }
+)
 </script>
 
 <template>
   <article
-    class="kun-prose"
+    :class="cn('kun-prose', className)"
     v-html="DOMPurify.sanitize(content, { ADD_ATTR: ['line'] })"
   />
 </template>

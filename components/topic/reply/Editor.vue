@@ -81,20 +81,3 @@ watch(
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.code-editor {
-  textarea {
-    border: none;
-    width: 100%;
-    height: 100%;
-    min-height: 200px;
-    background-color: transparent;
-    font-size: 16px;
-    font-family: inherit;
-    color: var(--kungalgame-font-color-2);
-    padding: 10px;
-    resize: none;
-  }
-}
-</style>
