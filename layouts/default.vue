@@ -25,16 +25,16 @@ watch(
 
   <KunLayoutSidebar />
 
+  <KunTopBar />
+
   <div
     class="flex min-h-dvh justify-center overflow-hidden"
     :style="{ 'background-color': 'hsl(var(--background))' }"
   >
-    <div class="z-10 m-0 w-full max-w-7xl md:mr-3 md:ml-68">
-      <div class="sticky top-[0] z-1007">
-        <KunTopBar />
+    <div class="z-10 w-full max-w-7xl md:mr-3 md:ml-68">
+      <div class="pt-20">
+        <slot />
       </div>
-
-      <slot />
 
       <NuxtImg
         v-if="showKUNGalgameBackLoli"

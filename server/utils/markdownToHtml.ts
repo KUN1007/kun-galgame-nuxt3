@@ -1,4 +1,5 @@
 import rehypeSanitize from 'rehype-sanitize'
+import rehypeSlug from 'rehype-slug'
 import rehypeStringify from 'rehype-stringify'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
@@ -11,6 +12,7 @@ export const markdownToHtml = async (markdown: string) => {
   const htmlVFile = await unified()
     .use(remarkParse)
     .use(remarkRehype)
+    .use(rehypeSlug)
     .use(rehypeSanitize)
     .use(remarkFrontmatter)
     .use(remarkGfm)

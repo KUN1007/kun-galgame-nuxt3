@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { scrollPage } from '../_helper'
 import type { TopicDetail } from '~/types/api/topic'
 import type { TopicReply } from '~/types/api/topic-reply'
 
@@ -27,25 +28,6 @@ const { data, pending, refresh } = await useFetch(
   }
 )
 replyData.value = data.value
-
-const scrollPage = throttle((rid: number) => {
-  let timeout: NodeJS.Timeout | null = null
-  const childElement = document.querySelector(`#k${rid}`) as HTMLElement
-
-  if (childElement) {
-    childElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    childElement.classList.add('outline-2')
-
-    if (timeout !== null) {
-      clearTimeout(timeout)
-    }
-    timeout = setTimeout(() => {
-      childElement.classList.remove('outline-2')
-    }, 3000)
-  } else {
-    useMessage(10215, 'info')
-  }
-}, 1000)
 
 watch(
   () => tempReply.value[0],
@@ -87,39 +69,40 @@ watch(
 </script>
 
 <template>
-  <div class="w-full space-y-3 pb-6">
-    <TopicDetailMaster :topic="topic" />
+  <div class="flex w-full gap-3">
+    <div class="w-full space-y-3 lg:w-[calc(100%-220px)]">
+      <TopicDetailMaster :topic="topic" />
 
-    <TopicDetailTool
-      v-if="replyData"
-      :reply-data="replyData"
-      :pending="pending"
-      :sort-order="pageData.sortOrder"
-      @set-sort-order="(value) => (pageData.sortOrder = value)"
-    />
+      <TopicDetailTool
+        v-if="replyData"
+        :reply-data="replyData"
+        :pending="pending"
+        :sort-order="pageData.sortOrder"
+        @set-sort-order="(value) => (pageData.sortOrder = value)"
+      />
 
-    <div class="space-y-3">
       <TopicReply
         v-for="reply in replyData"
         :key="reply.rid"
         :reply="reply"
         :title="topic.title"
-        @scroll-page="scrollPage"
       />
     </div>
 
-    <div v-if="replyData && replyData.length >= 30" class="text-center">
-      <KunButton
-        size="lg"
-        v-if="!pending && !isLoadComplete"
-        @click="pageData.page++"
-      >
-        加载更多
-      </KunButton>
-      <p v-if="pending" class="text-default-500">少女祈祷中...</p>
-      <p v-if="isLoadComplete" class="text-default-500">
-        被榨干了呜呜呜呜呜, 一滴也不剩了
-      </p>
-    </div>
+    <TopicDetailAside />
+  </div>
+
+  <div v-if="replyData && replyData.length >= 30" class="py-6 text-center">
+    <KunButton
+      size="lg"
+      v-if="!pending && !isLoadComplete"
+      @click="pageData.page++"
+    >
+      加载更多
+    </KunButton>
+    <p v-if="pending" class="text-default-500">少女祈祷中...</p>
+    <p v-if="isLoadComplete" class="text-default-500">
+      被榨干了呜呜呜呜呜, 一滴也不剩了
+    </p>
   </div>
 </template>

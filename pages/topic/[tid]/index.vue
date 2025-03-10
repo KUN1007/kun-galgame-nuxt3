@@ -122,13 +122,11 @@ if (data) {
 </script>
 
 <template>
-  <div>
-    <TopicDetail v-if="data" :tid="tid" :topic="data" />
+  <TopicDetail v-if="data" :tid="tid" :topic="data" />
 
-    <KunNull :condition="!data && !isBanned" type="404" />
+  <KunNull :condition="!data && !isBanned" type="404" />
 
-    <KunBlank v-if="isBanned">此话题已被封禁</KunBlank>
+  <KunBlank v-if="isBanned">此话题已被封禁</KunBlank>
 
-    <TopicDetailBar />
-  </div>
+  <TopicDetailBar />
 </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="bg-background flex justify-between gap-3 rounded-lg p-3">
+  <div class="flex justify-between gap-3 rounded-lg">
     <div class="w-full space-y-12">
       <HomeTopicContainer />
 

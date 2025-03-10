@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { scrollPage } from '../_helper'
 import type { TopicReply } from '~/types/api/topic-reply'
 
 const { scrollToReplyId } = storeToRefs(useTempReplyStore())
@@ -9,10 +10,6 @@ const props = defineProps<{
   title: string
 }>()
 
-const emits = defineEmits<{
-  scrollPage: [scrollToReplyId: number]
-}>()
-
 const comments = ref(props.reply.comment)
 
 watch(
@@ -20,7 +17,7 @@ watch(
   async () => {
     if (scrollToReplyId.value !== -1) {
       await nextTick()
-      emits('scrollPage', scrollToReplyId.value)
+      scrollPage(scrollToReplyId.value)
       scrollToReplyId.value = -1
     }
   }

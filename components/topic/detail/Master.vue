@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TopicDetail } from '~/types/api/topic'
 
-const props = defineProps<{
+defineProps<{
   topic: TopicDetail
 }>()
 </script>
@@ -53,7 +53,5 @@ const props = defineProps<{
 
       <TopicFooter :topic="topic" />
     </KunCard>
-
-    <TopicDetailTableOfContent />
   </div>
 </template>

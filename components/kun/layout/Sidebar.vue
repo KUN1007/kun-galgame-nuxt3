@@ -8,7 +8,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 
 <template>
   <div
-    class="scrollbar-hide bg-default-100 fixed flex h-full w-3xs shrink-0 flex-col justify-between overflow-y-scroll"
+    class="scrollbar-hide bg-default-100 fixed z-100 flex h-full w-3xs shrink-0 flex-col justify-between overflow-y-scroll"
     @click.stop
   >
     <div>
