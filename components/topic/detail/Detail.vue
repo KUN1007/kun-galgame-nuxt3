@@ -12,13 +12,14 @@ const props = defineProps<{
 
 const replyData = ref<TopicReply[] | null>()
 const isLoadComplete = ref(false)
+const topicTocRef = useTemplateRef('toc')
 const pageData = reactive({
   page: 1,
   limit: 30,
   sortOrder: 'asc' as 'asc' | 'desc'
 })
 
-const { data, pending, refresh } = await useFetch(
+const { data, status, refresh } = await useFetch(
   `/api/topic/${props.tid}/reply`,
   {
     method: 'GET',
@@ -49,7 +50,7 @@ watch(
       isLoadComplete.value = false
     }
 
-    if (pending.value) return
+    if (status.value === 'pending') return
 
     await refresh()
 
@@ -57,6 +58,7 @@ watch(
 
     if (newValue[0] !== oldValue[0]) {
       replyData.value = replyData.value?.concat(data.value)
+      nextTick(() => topicTocRef.value?.refreshTOC())
     } else if (newValue[1] !== oldValue[1]) {
       replyData.value = data.value
     }
@@ -76,7 +78,7 @@ watch(
       <TopicDetailTool
         v-if="replyData"
         :reply-data="replyData"
-        :pending="pending"
+        :pending="status === 'pending'"
         :sort-order="pageData.sortOrder"
         @set-sort-order="(value) => (pageData.sortOrder = value)"
       />
@@ -89,18 +91,22 @@ watch(
       />
     </div>
 
-    <TopicDetailAside :replies="replyData" />
+    <div class-name="hidden w-52 shrink-0 lg:block">
+      <div class="fixed w-full">
+        <TopicDetailTableOfContent ref="toc" />
+      </div>
+    </div>
   </div>
 
   <div v-if="replyData && replyData.length >= 30" class="py-6 text-center">
     <KunButton
       size="lg"
-      v-if="!pending && !isLoadComplete"
+      v-if="status !== 'pending' && !isLoadComplete"
       @click="pageData.page++"
     >
       加载更多
     </KunButton>
-    <p v-if="pending" class="text-default-500">少女祈祷中...</p>
+    <p v-if="status === 'pending'" class="text-default-500">少女祈祷中...</p>
     <p v-if="isLoadComplete" class="text-default-500">
       被榨干了呜呜呜呜呜, 一滴也不剩了
     </p>
