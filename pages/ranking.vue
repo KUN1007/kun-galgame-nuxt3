@@ -13,7 +13,10 @@ import {
 
 const route = useRoute()
 
-const activeTab = ref(route.fullPath.split('/').pop() ?? 'user')
+const currentRouteName = computed(
+  () => route.fullPath.split('/').pop() ?? 'user'
+)
+const activeTab = ref(currentRouteName)
 
 const sortOptions = computed(() => {
   const items = activeTab.value === 'topic' ? topicSortItem : userSortItem
@@ -29,9 +32,13 @@ const sortOptions = computed(() => {
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-8">
-    <div class="mb-8">
-      <h1 class="mb-4 text-3xl font-bold text-gray-900">排行榜单</h1>
+  <KunCard
+    :is-hoverable="false"
+    :is-transparent="false"
+    content-class="space-y-3"
+  >
+    <div class="space-y-3">
+      <h1 class="text-2xl font-bold sm:text-3xl">排行榜单</h1>
 
       <div class="flex items-center justify-between">
         <KunTab
@@ -56,8 +63,6 @@ const sortOptions = computed(() => {
       </div>
     </div>
 
-    <div class="rounded-lg bg-white shadow">
-      <NuxtPage />
-    </div>
-  </div>
+    <NuxtPage />
+  </KunCard>
 </template>

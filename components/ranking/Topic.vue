@@ -10,29 +10,29 @@ const { data } = await useFetch(`/api/ranking/topic`, {
 </script>
 
 <template>
-  <div class="rounded-lg bg-white shadow">
-    <div class="divide-y divide-gray-200">
-      <div
-        v-for="(topic, index) in data"
-        :key="topic.tid"
-        class="flex items-center p-4 hover:bg-gray-50"
-      >
+  <div class="divide-default-200 divide-y">
+    <NuxtLink
+      v-for="(topic, index) in data"
+      :key="topic.tid"
+      :to="`/topic/${topic.tid}`"
+      class="hover:bg-default-100 flex cursor-pointer items-center justify-between rounded-lg p-3 transition-colors"
+    >
+      <div class="flex items-center">
         <span class="w-12 text-xl font-bold text-gray-400">
           {{ index + 1 }}
         </span>
-        <div class="flex-1">
-          <h3 class="text-lg font-medium text-gray-900">
-            {{ topic.title }}
-          </h3>
-        </div>
-        <div class="flex items-center space-x-2">
-          <Icon
-            :name="topicIconMap[topicRankingPageData.sortField]"
-            class="h-5 w-5 text-gray-500"
-          />
-          <span class="font-medium">{{ topic.field }}</span>
-        </div>
+        <h3>
+          {{ topic.title }}
+        </h3>
       </div>
-    </div>
+
+      <div class="flex items-center space-x-2">
+        <Icon
+          :name="topicIconMap[topicRankingPageData.sortField]"
+          class="text-default-500 h-5 w-5"
+        />
+        <span class="font-medium">{{ topic.field }}</span>
+      </div>
+    </NuxtLink>
   </div>
 </template>

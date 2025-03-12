@@ -10,28 +10,28 @@ const { data } = await useFetch(`/api/ranking/user`, {
 </script>
 
 <template>
-  <div class="divide-y divide-gray-200">
-    <div
+  <div class="divide-default-200 divide-y">
+    <NuxtLink
       v-for="(user, index) in data"
       :key="user.uid"
-      class="flex items-center p-4 hover:bg-gray-50"
+      :to="`/user/${user.uid}/info`"
+      class="hover:bg-default-100 flex cursor-pointer items-center justify-between rounded-lg p-3 transition-colors"
     >
-      <span class="w-12 text-xl font-bold text-gray-400">{{ index + 1 }}</span>
-      <div class="flex flex-1 items-center">
-        <img
-          :src="user.avatar"
-          class="mr-4 h-10 w-10 rounded-full"
-          :alt="user.name"
-        />
-        <h3 class="text-lg font-medium text-gray-900">{{ user.name }}</h3>
+      <div class="flex items-center">
+        <span class="text-default-500 w-12 text-xl font-bold">
+          {{ index + 1 }}
+        </span>
+        <KunAvatar :user="user" />
+        <h3 class="ml-3">{{ user.name }}</h3>
       </div>
+
       <div class="flex items-center space-x-2">
         <Icon
           :name="userIconMap[userRankingPageData.sortField]"
-          class="h-5 w-5 text-gray-500"
+          class="text-default-500 h-5 w-5"
         />
         <span class="font-medium">{{ user.field }}</span>
       </div>
-    </div>
+    </NuxtLink>
   </div>
 </template>

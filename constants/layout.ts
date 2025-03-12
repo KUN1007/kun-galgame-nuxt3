@@ -54,7 +54,7 @@ export const kunLayoutItem: KunLayoutItem[] = [
   {
     name: 'ranking',
     icon: 'lucide:align-end-horizontal',
-    router: '/ranking',
+    router: '/ranking/topic',
     label: '排行榜单'
   },
   {

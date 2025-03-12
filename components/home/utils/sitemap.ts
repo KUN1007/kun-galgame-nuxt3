@@ -61,7 +61,7 @@ export const sitemap: Sitemap[] = [
     label: ''
   },
   {
-    route: '/ranking',
+    route: '/ranking/topic',
     name: 'ranking',
     label: '排行榜单'
   },
