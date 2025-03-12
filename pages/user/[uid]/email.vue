@@ -6,7 +6,7 @@ definePageMeta({
 
 <template>
   <div class="article">
-    <KungalgamerEmail />
+    <UserEmail />
   </div>
 </template>
 

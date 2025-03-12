@@ -51,7 +51,7 @@ watch(
   <div class="pr">
     <div class="info">
       <KunAvatar :user="pr.user" size="30px" />
-      <NuxtLink :to="`/kungalgamer/${pr.user.uid}/info`">
+      <NuxtLink :to="`/user/${pr.user.uid}/info`">
         {{ pr.user.name }}
       </NuxtLink>
       <span>提出更新请求</span>

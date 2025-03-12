@@ -25,9 +25,9 @@ const count = computed(() => {
 </script>
 
 <template>
-  <KungalgamerList>
-    <KungalgamerGalgame :uid="user.uid" :type="galgameType" />
+  <UserList>
+    <UserGalgame :uid="user.uid" :type="galgameType" />
 
     <KunNull :condition="!count" type="null" />
-  </KungalgamerList>
+  </UserList>
 </template>

@@ -20,10 +20,7 @@ const user = computed(() => props.user)
   >
     <KunAvatar size="lg" :user="user" />
 
-    <NuxtLink
-      :aria-label="props.user.name"
-      :to="`/kungalgamer/${user.uid}/info`"
-    >
+    <NuxtLink :aria-label="props.user.name" :to="`/user/${user.uid}/info`">
       {{ user.name }}
     </NuxtLink>
 

@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLink :to="`/kungalgamer/${user.uid}/info`" v-kun-gradient>
+  <NuxtLink :to="`/user/${user.uid}/info`" v-kun-gradient>
     <div class="info">
       <KunAvatar :user="user" size="30px" />
       <span>{{ user.name }}</span>

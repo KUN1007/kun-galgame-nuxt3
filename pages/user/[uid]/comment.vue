@@ -7,9 +7,9 @@ defineProps<{
 </script>
 
 <template>
-  <KungalgamerList>
-    <KungalgamerReply :uid="user.uid" />
+  <UserList>
+    <UserComment :uid="user.uid" />
 
-    <KunNull :condition="!user.reply" type="null" />
-  </KungalgamerList>
+    <KunNull :condition="!user.comment" type="null" />
+  </UserList>
 </template>

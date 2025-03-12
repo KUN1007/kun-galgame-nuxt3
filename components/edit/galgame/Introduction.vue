@@ -24,7 +24,7 @@ const emits = defineEmits<{
     </template>
   </KunHeader>
 
-  <KunNav
+  <KunTab
     class="nav"
     :items="languageItems"
     :default-value="introductionLanguage"

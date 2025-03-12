@@ -25,7 +25,7 @@ const handleSetMode = (value: 'preview' | 'code') => {
 </script>
 
 <template>
-  <KunNav
+  <KunTab
     :items="modeItems"
     :default-value="route.name === 'edit-topic' ? topicMode : replyMode"
     @set="(value) => handleSetMode(value as 'preview' | 'code')"

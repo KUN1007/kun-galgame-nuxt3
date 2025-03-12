@@ -74,7 +74,7 @@ onMounted(async () => {
     <div class="func flex flex-col">
       <NuxtLink
         class="hover:text-secondary-600 hover:bg-default-200 relative flex items-center justify-center rounded-lg p-1 transition-colors"
-        :to="`/kungalgamer/${uid}/info`"
+        :to="`/user/${uid}/info`"
       >
         个人主页
       </NuxtLink>

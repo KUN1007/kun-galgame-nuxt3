@@ -1,5 +1,5 @@
 // User Information Interface
-export interface KUNGalgamerStore {
+export interface UserStore {
   uid: number
   name: string
   avatar: string

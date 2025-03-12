@@ -58,7 +58,7 @@ watch(
 
           <div class="flex items-center space-x-2">
             <NuxtLink
-              :to="`/kungalgamer/${message.uid}/info`"
+              :to="`/user/${message.uid}/info`"
               class="hover:text-foreground text-sm font-medium text-gray-600 transition-colors"
             >
               {{ message.name }}

@@ -6,7 +6,7 @@ definePageMeta({
 
 <template>
   <div class="article">
-    <KungalgamerPassword />
+    <UserPassword />
     <span @click="navigateTo('/forgot')" class="forget">忘记密码?</span>
   </div>
 </template>

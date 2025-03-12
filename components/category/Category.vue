@@ -12,7 +12,7 @@ const { data } = await useFetch(`/api/category`, {
 
 <template>
   <div class="flex flex-col space-y-4">
-    <KunNav
+    <KunTab
       :items="kunCategoryAvailableItem"
       :default-value="category"
       @set="(value) => (category = value as Category)"

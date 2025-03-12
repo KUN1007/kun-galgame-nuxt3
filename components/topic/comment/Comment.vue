@@ -48,7 +48,7 @@ const handleClickComment = (comment: TopicComment) => {
               <span>{{ comment.user.name }}</span>
               <span class="text-default-500 mx-1">评论</span>
               <NuxtLink
-                :to="`/kungalgamer/${comment.toUser.uid}/info`"
+                :to="`/user/${comment.toUser.uid}/info`"
                 class="text-primary hover:text-primary-700"
               >
                 {{ comment.toUser.name }}

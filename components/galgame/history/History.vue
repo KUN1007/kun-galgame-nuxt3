@@ -32,7 +32,7 @@ const { data, status } = await useFetch(
       v-for="(history, index) in data.historyData"
       :key="index"
     >
-      <NuxtLink :to="`/kungalgamer/${history.user.uid}/info`">
+      <NuxtLink :to="`/user/${history.user.uid}/info`">
         <KunAvatar :user="history.user" size="30px" />
       </NuxtLink>
 

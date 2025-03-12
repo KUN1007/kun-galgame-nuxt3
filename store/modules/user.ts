@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
-import type { KUNGalgamerStore } from '../types/kungalgamer'
+import type { UserStore } from '../types/user'
 import type { LoginResponseData } from '~/types/api/user'
 
 export const usePersistUserStore = defineStore('KUNGalgameUser', {
   persist: true,
-  state: (): KUNGalgamerStore => ({
+  state: (): UserStore => ({
     uid: 0,
     name: '',
     avatar: '',

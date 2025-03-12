@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { navBarRoute } from '~/components/kungalgamer/utils/routeName'
+import { navBarRoute } from '~/components/user/utils/routeName'
 import type { UserInfo } from '~/types/api/user'
 
 const user = ref<UserInfo>()
@@ -55,7 +55,7 @@ useHead({
 <template>
   <div class="root">
     <div class="container">
-      <KungalgamerHeader
+      <UserHeader
         v-if="user"
         :uid="user.uid"
         :name="user.name"
@@ -64,7 +64,7 @@ useHead({
       />
 
       <div class="content">
-        <KungalgamerNavBar :uid="uid" :nav="navBarRoute" />
+        <UserNavBar :uid="uid" :nav="navBarRoute" />
         <NuxtPage :user="user" />
       </div>
     </div>

@@ -13,11 +13,11 @@ const user = computed(() => props.user)
 
 <template>
   <div class="settings">
-    <KungalgamerAvatar />
+    <UserAvatar />
 
-    <KungalgamerBio :user="user" />
+    <UserBio :user="user" />
 
-    <KungalgamerUsername />
+    <UserUsername />
   </div>
 </template>
 

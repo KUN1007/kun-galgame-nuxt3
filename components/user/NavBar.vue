@@ -40,7 +40,7 @@ const currentPageUserRoles = computed(() => {
 })
 
 const activeClass = (currentPageUid: number, route: Nav) => {
-  return fullPath.value === `/kungalgamer/${currentPageUid}/${route.router}`
+  return fullPath.value === `/user/${currentPageUid}/${route.router}`
     ? 'active'
     : ''
 }
@@ -49,7 +49,7 @@ const handleCollapsed = (item: Nav) => {
   if (item.collapsed !== undefined) {
     item.collapsed = !item.collapsed
   } else {
-    navigateTo(`/kungalgamer/${currentPageUid.value}/${item.router}`.toString())
+    navigateTo(`/user/${currentPageUid.value}/${item.router}`.toString())
   }
 }
 </script>
@@ -80,7 +80,7 @@ const handleCollapsed = (item: Nav) => {
       </div>
 
       <div v-if="kun.child && !kun.collapsed" class="submenu">
-        <KungalgamerNavBar :uid="uid" :nav="kun.child" />
+        <UserNavBar :uid="uid" :nav="kun.child" />
       </div>
     </div>
   </div>

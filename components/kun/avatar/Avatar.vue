@@ -7,7 +7,7 @@ const props = withDefaults(defineProps<KunAvatarProps>(), {
 
 const handleClickAvatar = (event: MouseEvent) => {
   event.preventDefault()
-  navigateTo(`/kungalgamer/${props.user.uid}/info`)
+  navigateTo(`/user/${props.user.uid}/info`)
 }
 
 const sizeClasses = computed(() => {

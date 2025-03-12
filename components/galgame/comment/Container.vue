@@ -70,7 +70,7 @@ onMounted(() => (commentToUid.value = toUser.uid))
 
   <div class="panel">
     <GalgameCommentPanel :to-user="toUser" :refresh="refresh">
-      <KunNav
+      <KunTab
         class="nav"
         v-if="data && data.totalCount"
         :items="orderItems"

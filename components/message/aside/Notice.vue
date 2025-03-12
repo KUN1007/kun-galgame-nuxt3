@@ -45,7 +45,7 @@ const handleDeleteMessage = async (mid: number) => {
         />
       </div>
       <div>
-        <NuxtLink :to="`/kungalgamer/${message.sender.uid}/info`">
+        <NuxtLink :to="`/user/${message.sender.uid}/info`">
           {{ message.sender.name }}
         </NuxtLink>
         <span>{{ getMessageI18n(message) }}</span>

@@ -68,7 +68,7 @@ const handleLoadMore = async () => {
 
   <div class="container">
     <div class="nav">
-      <KunNav
+      <KunTab
         :items="navItems"
         :default-value="pageData.type"
         @set="(value) => handleSetType(value as SearchType)"

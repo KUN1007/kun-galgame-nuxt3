@@ -37,7 +37,7 @@ watch(
   >
     <div
       class="avatar"
-      @click.prevent="navigateTo(`/kungalgamer/${sec.user.uid}/info`)"
+      @click.prevent="navigateTo(`/user/${sec.user.uid}/info`)"
     >
       <NuxtImg
         height="50"

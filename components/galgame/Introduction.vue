@@ -13,7 +13,7 @@ defineProps<{
     <template #header>介绍</template>
   </KunHeader>
 
-  <KunNav
+  <KunTab
     class="nav"
     :items="languageItems"
     :default-value="introductionLanguage"

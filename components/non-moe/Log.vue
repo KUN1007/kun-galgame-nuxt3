@@ -10,9 +10,9 @@ const logs = computed(() => props.logs)
 
 <template>
   <div class="log" v-for="(kun, index) in logs" :key="index">
-    <div class="kungalgamer">
+    <div class="user">
       @
-      <NuxtLink :to="`/kungalgamer/${kun.uid}/info`" target="_blank">
+      <NuxtLink :to="`/user/${kun.uid}/info`" target="_blank">
         {{ kun.name }}
       </NuxtLink>
     </div>
@@ -41,7 +41,7 @@ const logs = computed(() => props.logs)
   border-bottom: 1px solid var(--kungalgame-blue-5);
 }
 
-.kungalgamer {
+.user {
   margin-bottom: 10px;
   font-weight: bold;
 

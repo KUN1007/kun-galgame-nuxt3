@@ -56,7 +56,7 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
 
         <div v-if="comment.toUser">
           <span>=> </span>
-          <NuxtLink :to="`/kungalgamer/${comment.toUser.uid}/info`">
+          <NuxtLink :to="`/user/${comment.toUser.uid}/info`">
             {{ `${comment.toUser.name}` }}
           </NuxtLink>
         </div>

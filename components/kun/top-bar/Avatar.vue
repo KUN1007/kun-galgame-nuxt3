@@ -16,7 +16,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 </script>
 
 <template>
-  <div class="kungalgamer-info">
+  <div class="user-info">
     <NuxtLink
       class="search"
       aria-label="search"
@@ -61,7 +61,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 </template>
 
 <style lang="scss" scoped>
-.kungalgamer-info {
+.user-info {
   display: flex;
   justify-content: center;
   align-items: center;

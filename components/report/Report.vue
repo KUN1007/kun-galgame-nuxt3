@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { KUN_REPORT_SECTION_MAP } from '~/constants/report'
-import { usePersistUserStore } from '~/store/modules/kungalgamer'
+import { usePersistUserStore } from '~/store/modules/user'
 import { reportSection } from './constant'
 
 useHead({
