@@ -27,7 +27,7 @@ const isExpanded = computed(() => props.expandedItems.includes(props.item.name))
           <span class="mr-3 flex items-center justify-center text-xl">
             <Icon :name="item.icon || ''" />
           </span>
-          <span>{{ item.label }}</span>
+          <span class="text-sm sm:text-base">{{ item.label }}</span>
 
           <Icon
             :name="isExpanded ? 'lucide:chevron-down' : 'lucide:chevron-right'"
@@ -60,13 +60,13 @@ const isExpanded = computed(() => props.expandedItems.includes(props.item.name))
       <span
         :class="
           cn(
-            'mr-3 flex items-center justify-center gap-2 text-xl',
+            'flex items-center justify-center gap-2 text-xl',
             route.fullPath === item.router ? '' : 'text-foreground'
           )
         "
       >
-        <Icon :name="item.icon || ''" />
-        <span class="text-base">{{ item.label }}</span>
+        <Icon v-if="item.icon" :name="item.icon" />
+        <span class="text-sm sm:text-base">{{ item.label }}</span>
       </span>
 
       <span v-if="item.hint" class="text-primary ml-auto text-xs">

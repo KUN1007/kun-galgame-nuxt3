@@ -94,21 +94,6 @@ export const kunLayoutItem: KunLayoutItem[] = [
     label: '友情链接'
   },
   {
-    name: 'sticker',
-    icon: 'lucide:image',
-    router: 'https://sticker.kungal.com/',
-    label: '表情包网站',
-    external: true
-  },
-  {
-    name: 'nav',
-    icon: 'lucide:navigation',
-    router: 'https://nav.kungal.org/',
-    label: '导航网站',
-    hint: '防失联',
-    external: true
-  },
-  {
     name: 'update',
     icon: 'lucide:arrow-big-up-dash',
     router: '/update-log',
@@ -119,5 +104,40 @@ export const kunLayoutItem: KunLayoutItem[] = [
     icon: 'lucide:ban',
     router: '/non-moe',
     label: '不萌记录'
+  }
+]
+
+export const kunLayoutExternalItem: KunLayoutItem[] = [
+  {
+    name: 'patch',
+    icon: 'lucide:puzzle',
+    router: 'https://www.moyu.moe/',
+    label: 'Galgame 补丁站',
+    external: true,
+    hint: '震憾上线'
+  },
+  {
+    name: 'sticker',
+    icon: 'lucide:image',
+    router: 'https://sticker.kungal.com/',
+    label: 'Galgame 表情包',
+    external: true,
+    hint: '全网最全'
+  },
+  {
+    name: 'doc',
+    icon: 'lucide:code-xml',
+    router: 'https://soft.moe/kun-visualnovel-docs/kun-forum.html',
+    label: '开发文档',
+    hint: '开源一切',
+    external: true
+  },
+  {
+    name: 'nav',
+    icon: 'lucide:navigation',
+    router: 'https://nav.kungal.org/',
+    label: '导航网站',
+    hint: '防失联',
+    external: true
   }
 ]

@@ -12,12 +12,9 @@ useHead({
   ]
 })
 
-const route = useRoute()
-
-const currentRouteName = computed(
-  () => route.fullPath.split('/').pop() ?? 'galgame'
+const activeTab = computed(
+  () => useRoute().fullPath.split('/').pop() || 'galgame'
 )
-const activeTab = ref(currentRouteName.value)
 </script>
 
 <template>
@@ -28,7 +25,6 @@ const activeTab = ref(currentRouteName.value)
       inner-class-name="shadow border"
       size="sm"
     />
-
     <NuxtPage />
   </div>
 </template>

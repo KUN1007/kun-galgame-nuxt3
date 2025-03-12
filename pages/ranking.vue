@@ -11,12 +11,7 @@ import {
   userRankingPageData
 } from '~/components/ranking/pageData'
 
-const route = useRoute()
-
-const currentRouteName = computed(
-  () => route.fullPath.split('/').pop() ?? 'user'
-)
-const activeTab = ref(currentRouteName.value)
+const activeTab = computed(() => useRoute().fullPath.split('/').pop() ?? 'user')
 
 const sortOptions = computed(() => {
   const items = activeTab.value === 'topic' ? topicSortItem : userSortItem
