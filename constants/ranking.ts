@@ -1,3 +1,5 @@
+import type { KunTabItem } from '~/components/kun/tab/type'
+
 export type RankingTopicSortField =
   | 'views'
   | 'upvotes'
@@ -126,9 +128,22 @@ export const KUN_RANKING_USER_MAP: Record<string, string> = {
 }
 
 export const KUN_RANKING_TOPIC_MAP: Record<string, string> = {
-  upvote: '推数',
+  upvotes: '推数',
   views: '浏览数',
   likes: '点赞数',
   replies: '回复数',
   comments: '评论数'
 }
+
+export const rankingPageTabs: KunTabItem[] = [
+  {
+    textValue: '话题',
+    value: 'topic',
+    href: '/ranking/topic'
+  },
+  {
+    textValue: '用户',
+    value: 'user',
+    href: '/ranking/user'
+  }
+]

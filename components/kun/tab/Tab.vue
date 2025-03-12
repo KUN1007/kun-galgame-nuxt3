@@ -1,27 +1,15 @@
 <script setup lang="ts">
-export type TabItem = {
-  textValue?: string
-  icon?: string
-  value: string
-  disabled?: boolean
-}
+import type { KunTabItem, KunTabVariant, KunTabColor, KunTabSize } from './type'
 
-export type TabVariant = 'solid' | 'underlined'
-export type TabColor =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'warning'
-  | 'danger'
-export type TabSize = 'sm' | 'md' | 'lg'
+const router = useRouter()
 
 const props = withDefaults(
   defineProps<{
-    items: TabItem[]
+    items: KunTabItem[]
     modelValue: string
-    variant?: TabVariant
-    color?: TabColor
-    size?: TabSize
+    variant?: KunTabVariant
+    color?: KunTabColor
+    size?: KunTabSize
     iconSize?: string
     fullWidth?: boolean
     disabled?: boolean
@@ -62,9 +50,9 @@ const tabListClasses = computed(() => {
   )
 })
 
-const tabItemClasses = computed(() => (item: TabItem) => {
+const tabItemClasses = computed(() => (item: KunTabItem) => {
   const isSelected = props.modelValue === item.value
-  const baseClasses = 'transition-all duration-200 cursor-pointer select-none'
+  const baseClasses = 'whitespace-nowrap cursor-pointer select-none'
 
   if (props.variant === 'solid') {
     return cn(
@@ -91,8 +79,13 @@ const tabItemClasses = computed(() => (item: TabItem) => {
   }
 })
 
-const handleTabClick = (item: TabItem) => {
-  if (props.disabled || item.disabled) return
+const handleTabClick = (item: KunTabItem) => {
+  if (props.disabled || item.disabled) {
+    return
+  }
+  if (item.href) {
+    router.push(item.href)
+  }
 
   emit('update:modelValue', item.value)
   emit('change', item.value)

@@ -9,6 +9,7 @@ const props = withDefaults(defineProps<KunSelectProps>(), {
 })
 
 const emit = defineEmits<{
+  'update:modelValue': [value: string | number]
   set: [value: string | number, index: number]
 }>()
 
@@ -44,6 +45,7 @@ const toggle = () => {
 }
 
 const selectOption = (value: string | number, index: number) => {
+  emit('update:modelValue', value)
   emit('set', value, index)
   isOpen.value = false
 }

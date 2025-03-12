@@ -11,5 +11,5 @@ useHead({
 </script>
 
 <template>
-  <RankingContainer />
+  <RankingTopic />
 </template>
