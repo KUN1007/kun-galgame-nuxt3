@@ -40,7 +40,7 @@ watch(
     class="bg-background z-10 flex w-full shrink-0 items-center justify-start rounded-lg border p-3 shadow"
   >
     <div
-      class="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
+      class="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
     >
       <KunSelect
         :model-value="type"

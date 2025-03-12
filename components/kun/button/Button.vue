@@ -15,10 +15,11 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   isIconOnly: false,
   icon: false,
   iconPosition: 'left',
-  className: ''
+  className: '',
+  href: ''
 })
 
-defineEmits<{
+const emits = defineEmits<{
   click: [event: MouseEvent]
 }>()
 
@@ -161,6 +162,15 @@ const isIconOnlyClasses = computed(() => {
 })
 
 const { ripples, onClick } = useRipple()
+const router = useRouter()
+
+const handleKunButtonClick = (event: MouseEvent) => {
+  if (props.href) {
+    router.push(props.href)
+  }
+  onClick(event)
+  emits('click', event)
+}
 </script>
 
 <template>
@@ -179,12 +189,7 @@ const { ripples, onClick } = useRipple()
     "
     :disabled="disabled || loading"
     :type="type"
-    @click="
-      (event) => {
-        onClick(event)
-        $emit('click', event)
-      }
-    "
+    @click="handleKunButtonClick"
   >
     <Icon class="text-sm" v-if="loading" name="svg-spinners:90-ring-with-bg" />
     <span v-if="icon && iconPosition === 'left'" class="mr-2">

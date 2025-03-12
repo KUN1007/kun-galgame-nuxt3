@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import { kunLayoutItem } from '~/constants/layout'
-
-const route = useRoute()
-
 const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 </script>
 
@@ -26,35 +22,11 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
         ACME
       </div>
 
-      <div class="mt-3 flex flex-col justify-center gap-3 border-y py-6 pr-3">
-        <NuxtLink
-          v-for="(item, index) in kunLayoutItem"
-          :to="item.router"
-          :target="isValidURL(item.router) ? '_blank' : ''"
-          :key="index"
-          :class="
-            cn(
-              'hover:bg-primary-100 flex items-center rounded-r-full px-3 py-1 transition-colors',
-              route.fullPath === item.router ? 'bg-primary-100 font-bold' : ''
-            )
-          "
-        >
-          <span
-            class="mr-3 flex items-center justify-center text-xl text-inherit"
-          >
-            <Icon class="icon text-inherit" :name="item.icon" />
-          </span>
-          <span class="text-inherit">
-            {{ item.label }}
-          </span>
-          <span class="text-primary ml-4 text-xs" v-if="item.hint">
-            {{ item.hint }}
-          </span>
-        </NuxtLink>
-      </div>
+      <KunLayoutSideBarNav />
 
-      <button
-        class="flex w-full cursor-pointer items-center px-3 py-1"
+      <KunButton
+        :full-width="true"
+        variant="light"
         @click="showKUNGalgamePanel = !showKUNGalgamePanel"
       >
         <span
@@ -63,7 +35,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
           <Icon class="text-inherit" name="lucide:settings" />
         </span>
         <span class="text-inherit">网站设置</span>
-      </button>
+      </KunButton>
     </div>
 
     <div class="my-4 flex w-full justify-around">

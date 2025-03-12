@@ -13,4 +13,5 @@ export interface ButtonProps {
   icon?: boolean
   iconPosition?: 'left' | 'right'
   className?: string
+  href?: string
 }

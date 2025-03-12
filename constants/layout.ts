@@ -1,10 +1,12 @@
 export interface KunLayoutItem {
-  icon: string
   name: string
-  router: string
   label: string
+  icon?: string
+  router?: string
   hint?: string
   external?: boolean
+  isCollapse?: boolean
+  children?: KunLayoutItem[]
 }
 
 export const kunLayoutItem: KunLayoutItem[] = [
@@ -23,21 +25,61 @@ export const kunLayoutItem: KunLayoutItem[] = [
   {
     name: 'category',
     icon: 'lucide:layers-3',
-    router: '/category',
-    label: '话题分类'
+    label: '话题分类',
+    isCollapse: true,
+    children: [
+      {
+        name: 'galgame',
+        router: '/category/galgame',
+        label: '话题分类'
+      },
+      {
+        name: 'technique',
+        router: '/category/technique',
+        label: '技术交流'
+      },
+      {
+        name: 'others',
+        router: '/category/others',
+        label: '其它'
+      }
+    ]
   },
   {
-    name: 'createTopic',
+    name: 'create',
     icon: 'lucide:pencil',
-    router: '/edit/topic',
-    label: '发布话题'
+    label: '发布主题',
+    isCollapse: false,
+    children: [
+      {
+        name: 'createTopic',
+        router: '/edit/topic',
+        label: '发布话题'
+      },
+      {
+        name: 'createGalgame',
+        router: '/edit/galgame?type=publish',
+        label: '发布 Galgame',
+        hint: '新'
+      }
+    ]
   },
   {
-    name: 'createGalgame',
-    icon: 'lucide:wand',
-    router: '/edit/galgame?type=publish',
-    label: '发布 Galgame',
-    hint: '新'
+    name: 'ranking',
+    icon: 'lucide:align-end-horizontal',
+    label: '排行榜单',
+    children: [
+      {
+        name: 'ranking',
+        router: '/ranking/topic',
+        label: '话题排行'
+      },
+      {
+        name: 'ranking',
+        router: '/ranking/user',
+        label: '用户排行'
+      }
+    ]
   },
   {
     name: 'about',
@@ -50,12 +92,6 @@ export const kunLayoutItem: KunLayoutItem[] = [
     icon: 'lucide:handshake',
     router: '/friend-links',
     label: '友情链接'
-  },
-  {
-    name: 'ranking',
-    icon: 'lucide:align-end-horizontal',
-    router: '/ranking/topic',
-    label: '排行榜单'
   },
   {
     name: 'sticker',
