@@ -16,7 +16,7 @@ const route = useRoute()
 const currentRouteName = computed(
   () => route.fullPath.split('/').pop() ?? 'user'
 )
-const activeTab = ref(currentRouteName)
+const activeTab = ref(currentRouteName.value)
 
 const sortOptions = computed(() => {
   const items = activeTab.value === 'topic' ? topicSortItem : userSortItem

@@ -1,21 +1,19 @@
-export type Category = 'galgame' | 'technique' | 'others'
+import type { KunTabItem } from '~/components/kun/tab/type'
 
-interface Item {
-  value: Category
-  textValue: string
-}
-
-export const kunCategoryAvailableItem: Item[] = [
+export const kunCategoryAvailableItem: KunTabItem[] = [
   {
     value: 'galgame',
-    textValue: 'Galgame'
+    textValue: 'Galgame',
+    href: '/category/galgame'
   },
   {
     value: 'technique',
-    textValue: '技术交流'
+    textValue: '技术交流',
+    href: '/category/technique'
   },
   {
     value: 'others',
-    textValue: '其它'
+    textValue: '其它话题',
+    href: '/category/others'
   }
 ]

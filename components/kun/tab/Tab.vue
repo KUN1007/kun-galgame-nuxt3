@@ -15,6 +15,8 @@ const props = withDefaults(
     disabled?: boolean
     radius?: 'none' | 'sm' | 'md' | 'lg' | 'full'
     disableAnimation?: boolean
+    className?: string
+    innerClassName?: string
   }>(),
   {
     variant: 'solid',
@@ -24,7 +26,9 @@ const props = withDefaults(
     fullWidth: false,
     disabled: false,
     radius: 'lg',
-    disableAnimation: false
+    disableAnimation: false,
+    className: '',
+    innerClassName: ''
   }
 )
 
@@ -37,7 +41,8 @@ const containerClasses = computed(() => {
   return cn(
     'inline-flex',
     props.fullWidth && 'w-full',
-    props.disabled && 'opacity-50 cursor-not-allowed'
+    props.disabled && 'opacity-50 cursor-not-allowed',
+    props.className
   )
 })
 
@@ -46,7 +51,8 @@ const tabListClasses = computed(() => {
     'scrollbar-hide flex h-fit items-center gap-2 overflow-x-scroll',
     props.variant === 'solid' && 'bg-default-100 rounded-lg p-1',
     props.variant === 'underlined' && 'border-b border-default-200',
-    props.fullWidth && 'w-full'
+    props.fullWidth && 'w-full',
+    props.innerClassName
   )
 })
 
@@ -77,6 +83,15 @@ const tabItemClasses = computed(() => (item: KunTabItem) => {
       !props.disableAnimation && 'after:transition-all'
     )
   }
+})
+
+const sizeClasses = computed(() => {
+  const sizeMap: Record<string, string> = {
+    sm: 'text-sm',
+    md: '',
+    lg: 'text-lg'
+  }
+  return sizeMap[props.size]
 })
 
 const handleTabClick = (item: KunTabItem) => {
@@ -116,7 +131,10 @@ const handleTabClick = (item: KunTabItem) => {
             'transition-colors'
           ]"
         />
-        <span v-if="item.textValue" :class="tabItemClasses(item)">
+        <span
+          v-if="item.textValue"
+          :class="cn(tabItemClasses(item), sizeClasses)"
+        >
           {{ item.textValue }}
         </span>
       </div>
