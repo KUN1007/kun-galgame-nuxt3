@@ -12,10 +12,6 @@ useHead({
 
 const { page, limit } = useTempNonMoeStore()
 
-const langClass = computed(() => {
-  return locale.value === 'en-us' ? 'title-en' : 'title-cn'
-})
-
 const pageCount = ref(parseInt(page))
 
 const { data: totalLength, status: totalStatus } = await useFetch(
@@ -29,48 +25,37 @@ const { data: totalLength, status: totalStatus } = await useFetch(
 
 const { data: logs, status: listStatus } = await useFetch(`/api/non-moe/logs`, {
   method: 'GET',
-  query: { page: pageCount, limit, language: locale.value },
+  query: { page: pageCount, limit, language: 'zh-cn' },
   watch: [pageCount],
   ...kungalgameResponseHandler
 })
 </script>
 
 <template>
-  <div class="root">
-    <div class="container">
-      <div class="title" :class="langClass">不萌记录</div>
-      <div class="article">
-        <div class="article-title">
-          这里记录了迄今为止所有被处罚的记录，希望大家不要这样做
-        </div>
+  <div class="container">
+    <div class="title">不萌记录</div>
+    <div class="article">
+      <div class="article-title">
+        这里记录了迄今为止所有被处罚的记录，希望大家不要这样做
+      </div>
 
-        <div class="content" v-if="logs">
-          <NonMoeLog v-if="logs.length" :logs="logs" />
-          <span class="empty" v-if="!logs.length">暂无不萌记录</span>
-          <KunPagination
-            v-if="totalLength && totalLength > 4"
-            :page="pageCount"
-            :limit="parseInt(limit)"
-            :sum="totalLength || 0"
-            :status="listStatus || totalStatus"
-            @set-page="(newPage) => (pageCount = newPage)"
-          />
-        </div>
+      <div class="content" v-if="logs">
+        <NonMoeLog v-if="logs.length" :logs="logs" />
+        <span class="empty" v-if="!logs.length">暂无不萌记录</span>
+        <KunPagination
+          v-if="totalLength && totalLength > 4"
+          :page="pageCount"
+          :limit="parseInt(limit)"
+          :sum="totalLength || 0"
+          :status="listStatus || totalStatus"
+          @set-page="(newPage) => (pageCount = newPage)"
+        />
       </div>
     </div>
-
-    <KunFooter style="margin: 20px auto" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.root {
-  height: calc(100vh - 75px);
-  display: flex;
-  flex-direction: column;
-  min-height: 750px;
-}
-
 .container {
   height: 70vh;
   min-height: 600px;

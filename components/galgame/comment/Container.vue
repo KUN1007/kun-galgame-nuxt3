@@ -106,8 +106,6 @@ onMounted(() => (commentToUid.value = toUser.uid))
     </div>
   </div>
 
-  <KunFooter />
-
   <KunSkeletonGalgameComment v-if="status === 'pending'" />
 </template>
 

@@ -28,29 +28,18 @@ onBeforeRouteLeave(async (_, __, next) => {
 </script>
 
 <template>
-  <div class="root">
-    <div class="container">
-      <div ref="content" class="content">
-        <ClientOnly>
-          <EditTopicTitle />
-          <EditTopicEditor :is-show-menu="true" />
-          <EditTopicFooter />
-        </ClientOnly>
-      </div>
+  <div class="container">
+    <div ref="content" class="content">
+      <ClientOnly>
+        <EditTopicTitle />
+        <EditTopicEditor :is-show-menu="true" />
+        <EditTopicFooter />
+      </ClientOnly>
     </div>
-
-    <KunFooter />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.root {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
-}
-
 .container {
   position: relative;
   width: 100%;

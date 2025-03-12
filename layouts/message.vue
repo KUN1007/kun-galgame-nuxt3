@@ -28,7 +28,6 @@ const isShowContent = computed(() => {
 
       <div v-show="isShowContent" class="content">
         <slot />
-        <KunFooter />
       </div>
     </div>
   </DefaultLayout>

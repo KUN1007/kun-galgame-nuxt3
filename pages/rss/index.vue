@@ -14,84 +14,71 @@ const getLink = (link: 'galgame' | 'topic') =>
 </script>
 
 <template>
-  <div class="root">
-    <div class="container">
-      <div class="title">
-        <div class="rss-icon">
-          <Icon class="icon" name="lucide:rss" />
-        </div>
-        <span>论坛目前支持话题与 Galgame 资源 RSS 订阅</span>
+  <div class="container">
+    <div class="title">
+      <div class="rss-icon">
+        <Icon class="icon" name="lucide:rss" />
       </div>
+      <span>论坛目前支持话题与 Galgame 资源 RSS 订阅</span>
+    </div>
 
-      <div class="subscribe">
-        <div class="card-container">
-          <a
-            :href="getLink('topic')"
-            class="card"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span>
-              <Icon class="icon" name="lucide:square-library" />
-            </span>
-            <span class="name">话题</span>
-          </a>
+    <div class="subscribe">
+      <div class="card-container">
+        <a
+          :href="getLink('topic')"
+          class="card"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>
+            <Icon class="icon" name="lucide:square-library" />
+          </span>
+          <span class="name">话题</span>
+        </a>
 
-          <KunCopy
-            :text="getLink('topic')"
-            name="复制 RSS"
-            v-tooltip="{
-              message: `${getLink('topic').slice(0, 30)}...`,
-              position: 'bottom'
-            }"
-          />
-        </div>
-        <div class="card-container">
-          <a
-            :href="getLink('galgame')"
-            class="card"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span>
-              <Icon class="icon" name="lucide:gamepad-2" />
-            </span>
-            <span class="name">Galgame</span>
-          </a>
-
-          <KunCopy
-            :text="getLink('galgame')"
-            name="复制 RSS"
-            v-tooltip="{
-              message: `${getLink('galgame').slice(0, 30)}...`,
-              position: 'bottom'
-            }"
-          />
-        </div>
+        <KunCopy
+          :text="getLink('topic')"
+          name="复制 RSS"
+          v-tooltip="{
+            message: `${getLink('topic').slice(0, 30)}...`,
+            position: 'bottom'
+          }"
+        />
       </div>
+      <div class="card-container">
+        <a
+          :href="getLink('galgame')"
+          class="card"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>
+            <Icon class="icon" name="lucide:gamepad-2" />
+          </span>
+          <span class="name">Galgame</span>
+        </a>
 
-      <p class="hint">RSS 数据十七分钟更新一次</p>
-
-      <div class="nav">
-        <KunBackToPrevious />
-        <KunBackToHome />
+        <KunCopy
+          :text="getLink('galgame')"
+          name="复制 RSS"
+          v-tooltip="{
+            message: `${getLink('galgame').slice(0, 30)}...`,
+            position: 'bottom'
+          }"
+        />
       </div>
     </div>
 
-    <KunFooter
-      style="position: absolute; bottom: 20px; width: 100%; margin: 0 auto"
-    />
+    <p class="hint">RSS 数据十七分钟更新一次</p>
+
+    <div class="nav">
+      <KunBackToPrevious />
+      <KunBackToHome />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.root {
-  height: calc(100vh - 75px);
-  width: 100vw;
-  min-height: 300px;
-  display: flex;
-}
-
 .container {
   position: relative;
   width: 400px;

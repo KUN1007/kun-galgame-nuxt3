@@ -27,7 +27,5 @@ const { data, status } = await useFetch(`/api/galgame`, {
       :status="status"
       @set-page="(newPage) => (pageData.page.value = newPage)"
     />
-
-    <KunFooter />
   </div>
 </template>

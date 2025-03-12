@@ -8,7 +8,7 @@ useHead({
       name: 'description',
       content: friendArray
         .flatMap((group) =>
-          group.value.map((friend) => t(`friends.${group.key}.${friend.name}`))
+          group.value.map((friend) => `friends.${group.key}.${friend.name}`)
         )
         .join(' | ')
     }
@@ -20,7 +20,6 @@ useHead({
   <div class="root">
     <FriendLinksHeader />
     <FriendLinksCard />
-    <KunFooter />
   </div>
 </template>
 

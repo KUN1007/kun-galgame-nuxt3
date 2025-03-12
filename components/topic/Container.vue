@@ -98,7 +98,5 @@ onUnmounted(() => {
         已经。。。一滴也不剩了
       </p>
     </div>
-
-    <KunFooter />
   </div>
 </template>

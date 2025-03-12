@@ -11,11 +11,7 @@ useHead({
 </script>
 
 <template>
-  <div class="root">
-    <Login />
-
-    <KunFooter />
-  </div>
+  <Login />
 </template>
 
 <style lang="scss" scoped>

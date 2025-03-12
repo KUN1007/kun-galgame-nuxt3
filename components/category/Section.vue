@@ -42,16 +42,11 @@ defineProps<{
             </div>
           </td>
           <td class="px-6 py-4">
-            <div class="text-default-900 text-sm">
+            <div class="text-sm">
               {{ category.topic.title }}
             </div>
-            <div class="text-sm">
-              {{
-                formatDate(category.topic.time, {
-                  isPrecise: true,
-                  isShowYear: true
-                })
-              }}
+            <div class="text-default-500 text-sm">
+              {{ formatTimeDifference(category.topic.time) }}
             </div>
           </td>
           <td class="px-6 py-4 whitespace-nowrap">

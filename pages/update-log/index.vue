@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 useHead({
   title: `更新记录 - ${kungal.titleShort}`,
   meta: [
@@ -14,39 +12,20 @@ useHead({
 </script>
 
 <template>
-  <div class="root">
-    <div class="content">
-      <div class="todo">
-        <div class="title">待办列表</div>
-        <UpdateLogTodo />
-      </div>
-
-      <div class="history">
-        <div class="title">历史版本</div>
-        <UpdateLogHistory />
-      </div>
+  <div class="content">
+    <div class="todo">
+      <div class="title">待办列表</div>
+      <UpdateLogTodo />
     </div>
 
-    <KunFooter />
+    <div class="history">
+      <div class="title">历史版本</div>
+      <UpdateLogHistory />
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.root {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: calc(100dvh - 75px);
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: 10px;
-  overflow-y: scroll;
-
-  &::-webkit-scrollbar {
-    width: 0;
-  }
-}
-
 .content {
   width: 100%;
   height: 100%;

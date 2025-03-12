@@ -104,7 +104,6 @@ const handleLoadMore = async () => {
 
     <span class="loading" v-if="isLoading">少女祈祷中...</span>
   </div>
-  <KunFooter />
 </template>
 
 <style lang="scss" scoped>
