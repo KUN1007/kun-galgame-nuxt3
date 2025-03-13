@@ -85,7 +85,7 @@ onMounted(() => {
   <LazyKunSettingPanel />
 
   <NuxtPwaManifest />
-  <NuxtLoadingIndicator color="var(--kungalgame-blue-5)" />
+  <NuxtLoadingIndicator color="var(--color-primary)" />
 
   <NuxtLayout>
     <NuxtPage />

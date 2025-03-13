@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Milkdown core
-import { Editor, rootCtx, rootAttrsCtx, defaultValueCtx } from '@milkdown/core'
+import { Editor, rootCtx, defaultValueCtx } from '@milkdown/core'
 import { Milkdown, useEditor } from '@milkdown/vue'
 import { commonmark } from '@milkdown/preset-commonmark'
 import { gfm } from '@milkdown/preset-gfm'
@@ -24,11 +24,6 @@ import LinkUpdatePopup from './plugins/LinkUpdatePopup.vue'
 import Footer from './plugins/Footer.vue'
 import { $prose } from '@milkdown/utils'
 import { Plugin } from '@milkdown/prose/state'
-
-// Milkdown Math plugin styles
-// import 'katex/dist/katex.min.css'
-// KUN Visual Novel style
-import '~/styles/editor/index.scss'
 
 // Syntax highlight
 import bash from 'refractor/lang/bash'
@@ -54,17 +49,13 @@ import markdown from 'refractor/lang/markdown'
 
 const props = defineProps<{
   valueMarkdown: string
-  editorHeight: string
-  isShowMenu: boolean
 }>()
 
 const emits = defineEmits<{
   saveMarkdown: [editorMarkdown: string]
 }>()
 
-const editorHeight = computed(() => props.editorHeight + 'px')
 const valueMarkdown = computed(() => props.valueMarkdown)
-const isShowMenu = computed(() => props.isShowMenu)
 
 const tooltip = tooltipFactory('Text')
 const linkUpdatePopup = tooltipFactory('linkUpdate')
@@ -77,10 +68,6 @@ const editorInfo = useEditor((root) =>
   Editor.make()
     .config((ctx) => {
       ctx.set(rootCtx, root)
-      ctx.set(rootAttrsCtx, {
-        roles: 'kun-galgame-milkdown-editor',
-        'aria-label': 'kun-galgame-milkdown-editor'
-      })
       ctx.set(defaultValueCtx, valueMarkdown.value)
 
       const listener = ctx.get(listenerCtx)
@@ -165,68 +152,13 @@ const editorInfo = useEditor((root) =>
 </script>
 
 <template>
-  <div ref="container" class="editor-container">
+  <div ref="container" class="space-y-3">
     <KunMilkdownPluginsMenu
       ref="toolbar"
-      v-if="isShowMenu"
       :editor-info="editorInfo"
       :is-show-upload-image="true"
     />
 
     <Milkdown class="kungalgame-content" />
-
-    <div class="loading" v-if="editorInfo.loading.value">
-      <span>
-        <Icon class="icon" name="svg-spinners:12-dots-scale-rotate" />
-      </span>
-      <span>正在加载编辑器...</span>
-    </div>
   </div>
 </template>
-
-<style lang="scss">
-@use '~/styles/editor/kun-content.scss';
-</style>
-
-<style lang="scss" scoped>
-.kungalgame-content {
-  position: relative;
-  width: 100%;
-
-  :deep(.milkdown) {
-    width: 100%;
-    padding: 10px;
-
-    /* Silence css check, not compatible katex */
-    * &:not(.katex-html) {
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    & > div:nth-child(1) {
-      transition: all 0.2s;
-      margin: 0 auto;
-      min-height: v-bind(editorHeight);
-    }
-  }
-}
-
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  height: calc(v-bind(editorHeight) + 61px);
-
-  span {
-    margin-left: 20px;
-    font-size: large;
-    font-style: oblique;
-    color: var(--kungalgame-blue-5);
-
-    &:nth-child(1) {
-      font-size: 50px;
-    }
-  }
-}
-</style>

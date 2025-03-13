@@ -23,9 +23,6 @@ import Size from './plugins/Size.vue'
 import { $prose, replaceAll } from '@milkdown/utils'
 import { Plugin } from '@milkdown/prose/state'
 
-// KUN Visual Novel style
-import '~/styles/editor/index.scss'
-
 // Syntax highlight
 import bash from 'refractor/lang/bash'
 import c from 'refractor/lang/c'

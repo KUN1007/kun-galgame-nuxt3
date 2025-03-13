@@ -3,8 +3,11 @@ import { usePluginViewContext } from '@prosemirror-adapter/vue'
 
 const route = useRoute()
 
-const { textCount: textCountEditRewrite, isTopicRewriting } =
-  storeToRefs(useTempEditStore())
+const {
+  textCount: textCountEditRewrite,
+  isTopicRewriting,
+  autosaveCount
+} = storeToRefs(useTempEditStore())
 const { textCount: textCountEdit } = storeToRefs(usePersistEditTopicStore())
 const { textCount: textCountReplyRewrite, isReplyRewriting } =
   storeToRefs(useTempReplyStore())
@@ -50,22 +53,20 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="footer">
-    <KunMilkdownComponentsSettings />
-    <span class="size"> {{ `${size} 字` }} </span>
+  <div class="flex items-center justify-between text-sm">
+    <div class="flex items-center gap-3">
+      <NuxtLink
+        to="/topic/280"
+        class="text-default-700 hover:text-primary transition-colors"
+      >
+        话题发布规定
+      </NuxtLink>
+
+      <span class="text-default-500">
+        {{ `自动保存 × ${autosaveCount}` }}
+      </span>
+    </div>
+
+    <span> {{ `${size} 字` }} </span>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.footer {
-  padding: 10px 17px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.size {
-  font-size: 15px;
-  color: var(--kungalgame-font-color-0);
-}
-</style>

@@ -28,7 +28,7 @@ onBeforeRouteLeave(async (_, __, next) => {
       :is-transparent="false"
     >
       <EditTopicTitle />
-      <EditTopicEditor :is-show-menu="true" />
+      <EditTopicEditor />
       <EditTopicFooter />
     </KunCard>
   </ClientOnly>

@@ -87,7 +87,7 @@ watch(
   <div class="mx-auto w-full">
     <div class="relative">
       <div
-        class="ring-primary bg-default/10 min-h-[44px] w-full rounded-lg px-6 py-3 shadow transition-colors focus-within:ring-1"
+        class="ring-default-500 bg-default/10 min-h-[44px] w-full rounded-lg px-6 py-3 shadow transition-all focus-within:ring-1"
       >
         <div class="flex flex-wrap gap-2">
           <span
@@ -128,8 +128,7 @@ watch(
     </div>
 
     <p class="mt-2 text-sm text-gray-600">
-      提示：（单个标签 17 个字符以内，至少选择一个、最多 7
-      个），您可以输入文字后按下 'Enter' 创建标签
+      话题至少选择一个标签, 最多 7 个标签, 您可以输入文字后按下回车创建标签
     </p>
   </div>
 </template>
