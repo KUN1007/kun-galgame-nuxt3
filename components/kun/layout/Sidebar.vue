@@ -41,7 +41,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
     <div>
       <KunLayoutSideBarExternal />
 
-      <div class="my-4 flex w-full justify-around">
+      <div class="flex w-full justify-between px-7 py-6">
         <a
           class="flex flex-col items-center justify-center"
           aria-label="KUN Visual Novel Open Source GitHub Repository | 鲲 Galgame 论坛开源 GitHub 仓库"
