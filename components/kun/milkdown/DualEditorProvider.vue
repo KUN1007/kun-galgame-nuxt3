@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { MilkdownProvider } from '@milkdown/vue'
+import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
+
 defineProps<{
   valueMarkdown: string
 }>()
@@ -29,27 +32,31 @@ const setCmAPI = (api: { update: (markdown: string) => void }) => {
 </script>
 
 <template>
-  <div class="space-y-3">
-    <KunTab
-      v-model="activeTab"
-      :items="tabs"
-      variant="underlined"
-      color="primary"
-    />
+  <MilkdownProvider>
+    <ProsemirrorAdapterProvider>
+      <div class="space-y-3">
+        <KunTab
+          v-model="activeTab"
+          :items="tabs"
+          variant="underlined"
+          color="primary"
+        />
 
-    <template v-if="activeTab === 'preview'">
-      <KunMilkdownEditor
-        :value-markdown="valueMarkdown"
-        @save-markdown="saveMarkdown"
-      />
-    </template>
+        <template v-if="activeTab === 'preview'">
+          <KunMilkdownEditor
+            :value-markdown="valueMarkdown"
+            @save-markdown="saveMarkdown"
+          />
+        </template>
 
-    <template v-if="activeTab === 'code'">
-      <KunMilkdownCodemirror
-        :markdown="valueMarkdown"
-        @set-cm-api="setCmAPI"
-        @on-change="(value) => emits('setMarkdown', value)"
-      />
-    </template>
-  </div>
+        <template v-if="activeTab === 'code'">
+          <KunMilkdownCodemirror
+            :markdown="valueMarkdown"
+            @set-cm-api="setCmAPI"
+            @on-change="(value) => emits('setMarkdown', value)"
+          />
+        </template>
+      </div>
+    </ProsemirrorAdapterProvider>
+  </MilkdownProvider>
 </template>

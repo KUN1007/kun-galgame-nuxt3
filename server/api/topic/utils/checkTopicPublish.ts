@@ -1,12 +1,8 @@
 import { isValidTimestamp } from '~/utils/validate'
-import {
-  galgameSection,
-  techniqueSection,
-  otherSection
-} from '~/components/edit/utils/category'
+import { KUN_TOPIC_SECTION } from '~/constants/topic'
 
 const topicCategory = ['Galgame', 'Technique', 'Others']
-const topicSection = [...galgameSection, ...techniqueSection, ...otherSection]
+const topicSection = Object.keys(KUN_TOPIC_SECTION)
 
 export const checkTopicPublish = (
   title: string,

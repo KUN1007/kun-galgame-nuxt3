@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { MilkdownProvider } from '@milkdown/vue'
-import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
-
 const {
   content: rewriteContent,
   isTopicRewriting,
@@ -23,12 +20,8 @@ const saveMarkdown = (editorMarkdown: string) => {
 </script>
 
 <template>
-  <MilkdownProvider>
-    <ProsemirrorAdapterProvider>
-      <KunMilkdownDualEditorProvider
-        :value-markdown="valueMarkdown"
-        @set-markdown="saveMarkdown"
-      />
-    </ProsemirrorAdapterProvider>
-  </MilkdownProvider>
+  <KunMilkdownDualEditorProvider
+    :value-markdown="valueMarkdown"
+    @set-markdown="saveMarkdown"
+  />
 </template>

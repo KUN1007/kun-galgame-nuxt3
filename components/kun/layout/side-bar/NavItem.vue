@@ -24,10 +24,14 @@ const isExpanded = computed(() => props.expandedItems.includes(props.item.name))
           @click="$emit('toggle-expand', item.name)"
           :class-name="cn(isExpanded ? 'mb-1' : '')"
         >
-          <span class="mr-3 flex items-center justify-center text-xl">
-            <Icon :name="item.icon || ''" />
+          <Icon
+            v-if="item.icon"
+            class="text-foreground mr-3 flex items-center justify-center text-xl"
+            :name="item.icon"
+          />
+          <span class="text-foreground text-sm sm:text-base">
+            {{ item.label }}
           </span>
-          <span class="text-sm sm:text-base">{{ item.label }}</span>
 
           <Icon
             :name="isExpanded ? 'lucide:chevron-down' : 'lucide:chevron-right'"
@@ -53,7 +57,7 @@ const isExpanded = computed(() => props.expandedItems.includes(props.item.name))
     <KunButton
       v-else
       class-name="justify-start w-full"
-      :variant="route.fullPath === item.router ? 'solid' : 'light'"
+      :variant="route.fullPath === item.router ? 'flat' : 'light'"
       :href="item.router"
       :target="item.external ? '_blank' : undefined"
     >

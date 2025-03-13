@@ -59,7 +59,7 @@ const handleClosePanel = async () => {
             </KunButton>
           </div>
 
-          <LazyTopicReplyEditor :is-show-menu="true" />
+          <LazyTopicReplyEditor />
 
           <TopicReplyPanelBtn />
         </div>
