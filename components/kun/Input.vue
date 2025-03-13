@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { KunUIColor } from './ui/type'
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     modelValue?: string | number
     label?: string
@@ -11,6 +11,7 @@ withDefaults(
     placeholder?: string
     helperText?: string
     error?: string
+    size?: string
     required?: boolean
     disabled?: boolean
   }>(),
@@ -23,6 +24,7 @@ withDefaults(
     placeholder: '',
     helperText: '',
     error: '',
+    size: 'md',
     required: false,
     disabled: false
   }
@@ -40,13 +42,30 @@ const stableId = useId()
 const computedId = computed(() => `kun-input-${stableId}`)
 
 const colorClass: Record<KunUIColor, string> = {
-  default: 'bg-default/20 focus:ring-default',
-  primary: 'bg-default/20 focus:border-primary',
-  secondary: 'bg-default/20 focus:border-secondary',
-  success: 'bg-default/20 focus:border-success',
-  warning: 'bg-default/20 focus:border-warning',
-  danger: 'bg-default/20 focus:border-danger'
+  default: 'bg-default/10 focus:ring-default',
+  primary: 'bg-primary/10 focus:ring-primary',
+  secondary: 'bg-secondary/10 focus:ring-secondary',
+  success: 'bg-success/10 focus:ring-success',
+  warning: 'bg-warning/10 focus:ring-warning',
+  danger: 'bg-danger/10 focus:ring-danger'
 }
+
+const sizeClasses = computed(() => {
+  switch (props.size) {
+    case 'xs':
+      return 'text-xs px-2 py-1'
+    case 'sm':
+      return 'text-sm px-3 py-1.5'
+    case 'md':
+      return 'text-sm px-4 py-2'
+    case 'lg':
+      return 'text-base px-5 py-2.5'
+    case 'xl':
+      return 'text-lg px-6 py-3'
+    default:
+      return 'text-sm px-4 py-2'
+  }
+})
 
 const handleInput = (event: Event) => {
   const target = event.target as HTMLInputElement
@@ -96,6 +115,7 @@ defineExpose({
             'block w-full rounded-md px-2 py-1 text-sm shadow-sm transition duration-150 ease-in-out focus:ring-1',
             className,
             colorClass[color],
+            sizeClasses,
             $slots.prefix && 'pl-10',
             $slots.suffix && 'pr-10',
             disabled && 'cursor-not-allowed bg-gray-100',

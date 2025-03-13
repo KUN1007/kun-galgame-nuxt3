@@ -34,9 +34,10 @@ const handleInput = debounce(() => {
 <template>
   <KunInput
     type="text"
-    placeholder="标题"
+    placeholder="文章标题"
     v-model="topicTitle"
     @input="handleInput"
     :maxlength="maxInputLength"
+    size="xl"
   />
 </template>

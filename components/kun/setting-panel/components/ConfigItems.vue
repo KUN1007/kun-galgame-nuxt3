@@ -138,6 +138,7 @@ watch(
           placeholder="请在这里输入字体的名字"
           type="text"
           v-model="font"
+          size="xs"
         />
       </div>
     </TransitionGroup>

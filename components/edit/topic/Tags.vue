@@ -87,7 +87,7 @@ watch(
   <div class="mx-auto w-full">
     <div class="relative">
       <div
-        class="ring-primary min-h-[44px] w-full rounded-lg border border-gray-200 bg-white p-2 transition-colors focus-within:ring-1"
+        class="ring-primary bg-default/10 min-h-[44px] w-full rounded-lg px-6 py-3 shadow transition-colors focus-within:ring-1"
       >
         <div class="flex flex-wrap gap-2">
           <span
@@ -105,7 +105,7 @@ watch(
           </span>
 
           <input
-            class="min-w-[120px] flex-grow bg-transparent text-gray-700 placeholder-gray-400 outline-none"
+            class="placeholder-default-500 min-w-[120px] flex-grow bg-transparent text-gray-700 outline-none"
             type="text"
             v-model="inputValue"
             placeholder="请输入标签"
