@@ -1,10 +1,15 @@
-import type { KunUIVariant, KunUIColor } from '../ui/type'
+import type {
+  KunUIVariant,
+  KunUIColor,
+  KunUISize,
+  KunUIRounded
+} from '../ui/type'
 
 export interface ButtonProps {
   variant?: KunUIVariant
   color?: KunUIColor
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-  rounded?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+  size?: KunUISize
+  rounded?: KunUIRounded
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
   loading?: boolean

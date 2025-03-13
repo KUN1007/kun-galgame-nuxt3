@@ -3,8 +3,6 @@ definePageMeta({
   middleware: 'auth'
 })
 
-const content = ref<HTMLElement | null>(null)
-
 const { isTopicRewriting } = storeToRefs(useTempEditStore())
 
 useHead({ title: '发布话题' })
@@ -28,26 +26,7 @@ onBeforeRouteLeave(async (_, __, next) => {
 </script>
 
 <template>
-  <div class="container">
-    <div ref="content" class="content">
-      <ClientOnly>
-        <EditTopicTitle />
-        <EditTopicEditor :is-show-menu="true" />
-        <EditTopicFooter />
-      </ClientOnly>
-    </div>
-  </div>
+  <EditTopicTitle />
+  <!-- <EditTopicEditor :is-show-menu="true" /> -->
+  <EditTopicFooter />
 </template>
-
-<style lang="scss" scoped>
-.container {
-  position: relative;
-  width: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
-}
-
-.kun-footer {
-  margin: 17px 0;
-}
-</style>

@@ -73,24 +73,3 @@ const isShowRequestHelpNotice = computed(() => {
     <p>如果您在尝试以上两点, 仍然解决不了您的问题, 我们很乐意帮助您</p>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.tip {
-  margin-bottom: 17px;
-
-  ul {
-    padding-left: 17px;
-    font-size: 15px;
-
-    a {
-      font-weight: bold;
-      color: var(--kungalgame-blue-5);
-    }
-
-    li {
-      list-style: none;
-      margin-bottom: 5px;
-    }
-  }
-}
-</style>

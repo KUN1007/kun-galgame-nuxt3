@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { KUN_TOPIC_SECTION } from '~/constants/topic'
-import type { KunUIColor } from '~/components/kun/ui/type'
+import type { KunUIColor, KunUISize } from '~/components/kun/ui/type'
 
 defineProps<{
   section: string[]
+  size?: KunUISize
 }>()
 
 const iconMap: Record<string, string> = {
@@ -25,6 +26,7 @@ const sectionColors: Record<string, KunUIColor> = {
       v-for="(sec, index) in section"
       :key="index"
       :color="sectionColors[sec.toLowerCase()[0]]"
+      :size="size"
     >
       <Icon :name="iconMap[sec.toLowerCase()[0]]" class="size-4 text-inherit" />
       {{ KUN_TOPIC_SECTION[sec] }}

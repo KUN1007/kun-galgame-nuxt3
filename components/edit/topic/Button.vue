@@ -125,91 +125,26 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 </script>
 
 <template>
-  <div class="btn-container">
-    <div class="section">
-      <Icon class="icon" name="lucide:layout-grid" />
-      <p v-for="(kun, index) in section" :key="index">
-        <Icon class="icon" :name="iconMap[kun[0]]" />
-        <span>
-          {{ KUN_TOPIC_SECTION[kun] }}
-        </span>
-      </p>
-    </div>
+  <div class="flex flex-wrap items-center justify-between">
+    <TopicDetailSection size="md" :section="section" />
 
     <KunButton
       v-if="!isTopicRewriting"
       class="confirm-btn"
       @click="handlePublish"
+      size="lg"
       :disabled="isPublishing"
     >
       确认发布
     </KunButton>
 
     <KunButton
-      type="danger"
       v-if="isTopicRewriting"
       class="rewrite-btn"
+      size="lg"
       @click="handleRewrite"
     >
       确认 Rewrite
     </KunButton>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.btn-container {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  button {
-    height: 40px;
-    width: 200px;
-    font-size: 17px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-}
-
-.section {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  color: var(--kungalgame-font-color-1);
-
-  .icon {
-    font-size: 20px;
-    margin-right: 10px;
-  }
-
-  p {
-    margin: 3px;
-    padding: 3px 17px;
-    background-color: var(--kungalgame-trans-blue-0);
-    border: 1px solid var(--kungalgame-blue-5);
-    color: var(--kungalgame-blue-5);
-    border-radius: 7px;
-    display: flex;
-    align-items: center;
-    user-select: none;
-  }
-}
-
-@media (max-width: 700px) {
-  .btn-container {
-    flex-direction: column;
-    align-items: initial;
-
-    button {
-      width: 150px;
-      margin: auto;
-    }
-  }
-
-  .section {
-    margin-bottom: 25px;
-  }
-}
-</style>
