@@ -9,7 +9,6 @@ const {
 } = storeToRefs(useTempEditStore())
 
 const { content: editContent } = storeToRefs(usePersistEditTopicStore())
-const { mode } = storeToRefs(usePersistEditTopicStore())
 
 const valueMarkdown = ref(
   isTopicRewriting.value ? rewriteContent.value : editContent.value
@@ -24,12 +23,11 @@ const saveMarkdown = (editorMarkdown: string) => {
 </script>
 
 <template>
-  <MilkdownProvider v-if="mode === 'preview'">
+  <MilkdownProvider>
     <ProsemirrorAdapterProvider>
-      <KunMilkdownEditor
-        @save-markdown="saveMarkdown"
+      <KunMilkdownDualEditorProvider
         :value-markdown="valueMarkdown"
-        editor-height="300"
+        @set-markdown="saveMarkdown"
       />
     </ProsemirrorAdapterProvider>
   </MilkdownProvider>

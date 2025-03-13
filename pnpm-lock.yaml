@@ -19,6 +19,33 @@ importers:
 
   .:
     dependencies:
+      '@codemirror/autocomplete':
+        specifier: ^6.18.4
+        version: 6.18.6
+      '@codemirror/commands':
+        specifier: ^6.8.0
+        version: 6.8.0
+      '@codemirror/lang-markdown':
+        specifier: ^6.3.2
+        version: 6.3.2
+      '@codemirror/language':
+        specifier: ^6.10.8
+        version: 6.10.8
+      '@codemirror/lint':
+        specifier: ^6.8.4
+        version: 6.8.4
+      '@codemirror/search':
+        specifier: ^6.5.8
+        version: 6.5.10
+      '@codemirror/state':
+        specifier: ^6.5.1
+        version: 6.5.2
+      '@codemirror/view':
+        specifier: ^6.36.2
+        version: 6.36.4
+      '@lezer/highlight':
+        specifier: ^1.2.1
+        version: 1.2.1
       '@milkdown/core':
         specifier: 7.6.3
         version: 7.6.3(@milkdown/ctx@7.6.3)(@milkdown/prose@7.6.3)(@milkdown/transformer@7.6.3(@milkdown/prose@7.6.3))

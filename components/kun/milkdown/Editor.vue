@@ -13,17 +13,30 @@ import { indent } from '@milkdown/plugin-indent'
 import { trailing } from '@milkdown/plugin-trailing'
 import { usePluginViewFactory } from '@prosemirror-adapter/vue'
 import { upload, uploadConfig } from '@milkdown/plugin-upload'
-import { kunUploader, kunUploadWidgetFactory } from './plugins/uploader'
-import { insertLinkPlugin } from './plugins/hyperlinkInsert'
 import { automd } from '@milkdown/plugin-automd'
-// KUN Visual Novel Custom tooltip
+
+// Custom plugins
+import { kunUploader, kunUploadWidgetFactory } from './plugins/upload/uploader'
+// import { insertLinkPlugin } from './plugins/hyperlinkInsert'
+// import LinkUpdatePopup from './plugins/LinkUpdatePopup.vue'
 import { tooltipFactory } from '@milkdown/plugin-tooltip'
-import Tooltip from './plugins/Tooltip.vue'
-import LinkUpdatePopup from './plugins/LinkUpdatePopup.vue'
-// Custom text size calculate
-import Footer from './plugins/Footer.vue'
+import Tooltip from './plugins/tooltip/Tooltip.vue'
+import Footer from './plugins/footer/Footer.vue'
 import { $prose } from '@milkdown/utils'
 import { Plugin } from '@milkdown/prose/state'
+// import {
+//   mentionsPlugin,
+//   mentionsPluginOptions
+// } from './plugins/mention/mentionPlugin'
+// import { MentionsListDropdown } from './plugins/mention/MentionsListDropdown'
+import {
+  stopLinkCommand,
+  linkCustomKeymap
+} from './plugins/stop-link/stopLinkPlugin'
+import {
+  placeholderPlugin,
+  placeholderCtx
+} from './plugins/placeholder/placeholderPlugin'
 
 // Syntax highlight
 import bash from 'refractor/lang/bash'
@@ -52,7 +65,7 @@ const props = defineProps<{
 }>()
 
 const emits = defineEmits<{
-  saveMarkdown: [editorMarkdown: string]
+  saveMarkdown: [markdown: string]
 }>()
 
 const valueMarkdown = computed(() => props.valueMarkdown)
@@ -117,11 +130,11 @@ const editorInfo = useEditor((root) =>
         })
       })
 
-      ctx.set(linkUpdatePopup.key, {
-        view: pluginViewFactory({
-          component: LinkUpdatePopup
-        })
-      })
+      // ctx.set(linkUpdatePopup.key, {
+      //   view: pluginViewFactory({
+      //     component: LinkUpdatePopup
+      //   })
+      // })
     })
     .use(history)
     .use(commonmark)
@@ -134,9 +147,15 @@ const editorInfo = useEditor((root) =>
     .use(tooltip)
     .use(linkUpdatePopup)
     .use(upload)
-    .use(insertLinkPlugin)
     .use(automd)
-    // Add custom plugin view, calculate markdown text size
+    .use(
+      [
+        stopLinkCommand,
+        linkCustomKeymap,
+        placeholderCtx,
+        placeholderPlugin
+      ].flat()
+    )
     .use(
       $prose(
         () =>

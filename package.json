@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "3.0.61",
+  "version": "3.1.0",
   "packageManager": "pnpm@10.4.1",
   "private": true,
   "scripts": {
@@ -43,6 +43,15 @@
     "vue-router": "^4.5.0"
   },
   "dependencies": {
+    "@codemirror/autocomplete": "^6.18.4",
+    "@codemirror/commands": "^6.8.0",
+    "@codemirror/lang-markdown": "^6.3.2",
+    "@codemirror/language": "^6.10.8",
+    "@codemirror/lint": "^6.8.4",
+    "@codemirror/search": "^6.5.8",
+    "@codemirror/state": "^6.5.1",
+    "@codemirror/view": "^6.36.2",
+    "@lezer/highlight": "^1.2.1",
     "@milkdown/core": "7.6.3",
     "@milkdown/ctx": "7.6.3",
     "@milkdown/plugin-automd": "^7.6.3",

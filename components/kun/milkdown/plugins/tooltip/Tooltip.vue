@@ -64,39 +64,3 @@ const call = <T,>(command: CmdKey<T>, payload?: T) => {
     </button>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.tooltip {
-  position: absolute;
-  display: flex;
-  background-color: var(--kungalgame-trans-white-2);
-  border: 1px solid var(--kungalgame-blue-5);
-  border-radius: 5px;
-  backdrop-filter: blur(10px);
-  z-index: 9999;
-
-  &[data-show='false'] {
-    display: none;
-  }
-
-  button {
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
-    margin: 5px;
-    font-size: 22px;
-    color: var(--kungalgame-font-color-3);
-    background-color: transparent;
-    border: 1px solid transparent;
-
-    &:hover {
-      border: 1px solid var(--kungalgame-blue-5);
-      color: var(--kungalgame-blue-5);
-    }
-  }
-}
-</style>

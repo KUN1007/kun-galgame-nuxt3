@@ -45,10 +45,8 @@ export const kunUploadWidgetFactory = (
   pos: number,
   spec: Parameters<typeof Decoration.widget>[2]
 ) => {
-  const { $i18n } = useNuxtApp()
-
   const widgetDOM = document.createElement('span')
-  widgetDOM.textContent = $i18n.t('edit.topic.uploading')
-  widgetDOM.style.color = 'var(--kungalgame-blue-5)'
+  widgetDOM.textContent = '正在上传中...'
+  widgetDOM.style.color = 'var(--color-primary)'
   return Decoration.widget(pos, widgetDOM, spec)
 }

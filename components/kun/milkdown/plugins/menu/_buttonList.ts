@@ -11,36 +11,36 @@ import {
 import { toggleStrikethroughCommand } from '@milkdown/preset-gfm'
 
 export const commands = [
-  { command: toggleStrongCommand.key, icon: 'lucide:bold', label: '加粗' },
-  { command: toggleEmphasisCommand.key, icon: 'lucide:italic', label: '斜体' },
+  { command: toggleStrongCommand, icon: 'lucide:bold', label: '加粗' },
+  { command: toggleEmphasisCommand, icon: 'lucide:italic', label: '斜体' },
   {
-    command: toggleStrikethroughCommand.key,
+    command: toggleStrikethroughCommand,
     icon: 'lucide:strikethrough',
     label: '删除线'
   },
   {
-    command: wrapInBulletListCommand.key,
+    command: wrapInBulletListCommand,
     icon: 'lucide:list',
     label: '无序列表'
   },
   {
-    command: wrapInOrderedListCommand.key,
+    command: wrapInOrderedListCommand,
     icon: 'lucide:list-ordered',
     label: '有序列表'
   },
   {
-    command: wrapInBlockquoteCommand.key,
+    command: wrapInBlockquoteCommand,
     icon: 'lucide:quote',
     label: '引用块'
   },
-  { command: insertHrCommand.key, icon: 'lucide:minus', label: '水平线' },
+  { command: insertHrCommand, icon: 'lucide:minus', label: '水平线' },
   {
-    command: toggleInlineCodeCommand.key,
+    command: toggleInlineCodeCommand,
     icon: 'lucide:code-xml',
     label: '行内代码'
   },
   {
-    command: createCodeBlockCommand.key,
+    command: createCodeBlockCommand,
     icon: 'lucide:square-code',
     label: '代码块',
     payload: 'javascript'
