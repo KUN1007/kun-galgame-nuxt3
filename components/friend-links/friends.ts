@@ -123,6 +123,11 @@ export const galgame: Friend[] = [
     name: 'lzacg',
     link: 'https://www.lzacg.top/',
     label: '量子ACG是一个以游戏为主, 进而推动日语学习的网站'
+  },
+  {
+    name: 'ai2moe',
+    link: 'https://www.ai2.moe/',
+    label: '禦愛同萌！一個以非營利為目的的交流社區'
   }
 ]
 
