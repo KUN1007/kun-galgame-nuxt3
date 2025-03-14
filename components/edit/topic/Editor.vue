@@ -25,6 +25,7 @@ const saveMarkdown = (editorMarkdown: string) => {
     @set-markdown="saveMarkdown"
   >
     <NuxtLink
+      target="_blank"
       to="/topic/280"
       class="text-default-700 hover:text-primary transition-colors"
     >

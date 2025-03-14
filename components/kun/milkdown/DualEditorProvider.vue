@@ -40,6 +40,7 @@ const setCmAPI = (api: { update: (markdown: string) => void }) => {
           :items="tabs"
           variant="underlined"
           color="primary"
+          size="sm"
         />
 
         <template v-if="activeTab === 'preview'">

@@ -58,7 +58,7 @@ export const kunLayoutItem: KunLayoutItem[] = [
       },
       {
         name: 'createGalgame',
-        router: '/edit/galgame?type=publish',
+        router: '/edit/galgame/create',
         label: '发布 Galgame',
         hint: '新'
       }

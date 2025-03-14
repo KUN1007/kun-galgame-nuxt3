@@ -35,7 +35,7 @@ export const hamburgerItem: Hamburger[] = [
   {
     name: 'createGalgame',
     icon: 'lucide:wand',
-    router: '/edit/galgame?type=publish',
+    router: '/edit/galgame/create',
     label: '发布 Galgame',
     hint: '新'
   },
