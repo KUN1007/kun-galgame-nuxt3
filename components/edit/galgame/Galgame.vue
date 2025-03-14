@@ -72,12 +72,8 @@ const handleGetVNData = async () => {
 </script>
 
 <template>
-  <div class="container">
+  <KunCard :is-hoverable="false" :is-transparent="false">
     <EditGalgameHelp />
-
-    <KunDivider margin="50px 0">
-      <span class="divider">必要信息部分</span>
-    </KunDivider>
 
     <KunHeader :size="2" :show-help="true">
       <template #header>VNDB 编号</template>
@@ -113,51 +109,5 @@ const handleGetVNData = async () => {
     <EditGalgameBanner />
 
     <EditGalgameFooter />
-  </div>
+  </KunCard>
 </template>
-
-<style lang="scss" scoped>
-.container {
-  width: 100%;
-  height: 100%;
-  padding: 17px;
-}
-
-:deep(h2) {
-  margin-bottom: 17px;
-
-  .icon {
-    font-size: large;
-    margin-left: 10px;
-  }
-}
-
-.divider {
-  padding: 0 17px;
-}
-
-.vndb {
-  display: flex;
-  margin-bottom: 17px;
-
-  input {
-    margin-right: 17px;
-  }
-}
-
-.info {
-  color: var(--kungalgame-font-color-0);
-  font-size: small;
-  font-style: oblique;
-  margin-bottom: 17px;
-}
-
-.titles {
-  display: flex;
-  flex-direction: column;
-
-  input {
-    margin-bottom: 7px;
-  }
-}
-</style>

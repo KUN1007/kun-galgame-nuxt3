@@ -23,5 +23,12 @@ const saveMarkdown = (editorMarkdown: string) => {
   <KunMilkdownDualEditorProvider
     :value-markdown="valueMarkdown"
     @set-markdown="saveMarkdown"
-  />
+  >
+    <NuxtLink
+      to="/topic/280"
+      class="text-default-700 hover:text-primary transition-colors"
+    >
+      话题发布规定
+    </NuxtLink>
+  </KunMilkdownDualEditorProvider>
 </template>

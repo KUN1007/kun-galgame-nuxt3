@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { MilkdownProvider } from '@milkdown/vue'
-import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
-
 const props = defineProps<{
   lang: Language
   type: 'publish' | 'rewrite'
-  pending?: boolean
 }>()
 
 const { introduction } = storeToRefs(usePersistEditGalgameStore())
@@ -29,16 +25,15 @@ const saveMarkdown = debounce((editorMarkdown: string) => {
 </script>
 
 <template>
-  <div>
-    <MilkdownProvider>
-      <ProsemirrorAdapterProvider>
-        <KunMilkdownNoImage
-          @save-markdown="saveMarkdown"
-          :value-markdown="valueMarkdown"
-          :language="lang"
-          :pending="pending"
-        />
-      </ProsemirrorAdapterProvider>
-    </MilkdownProvider>
-  </div>
+  <KunMilkdownDualEditorProvider
+    :value-markdown="valueMarkdown"
+    @set-markdown="saveMarkdown"
+  >
+    <NuxtLink
+      to="/topic/280"
+      class="text-default-700 hover:text-primary transition-colors"
+    >
+      Galgame 发布规定
+    </NuxtLink>
+  </KunMilkdownDualEditorProvider>
 </template>

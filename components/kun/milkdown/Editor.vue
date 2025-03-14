@@ -21,7 +21,6 @@ import { kunUploader, kunUploadWidgetFactory } from './plugins/upload/uploader'
 // import LinkUpdatePopup from './plugins/LinkUpdatePopup.vue'
 import { tooltipFactory } from '@milkdown/plugin-tooltip'
 import Tooltip from './plugins/tooltip/Tooltip.vue'
-import Footer from './plugins/footer/Footer.vue'
 import { $prose } from '@milkdown/utils'
 import { Plugin } from '@milkdown/prose/state'
 // import {
@@ -156,18 +155,9 @@ const editorInfo = useEditor((root) =>
         placeholderPlugin
       ].flat()
     )
-    .use(
-      $prose(
-        () =>
-          new Plugin({
-            view: pluginViewFactory({
-              component: Footer,
-              root: () => (container.value ? container.value : root)
-            })
-          })
-      )
-    )
 )
+
+const textCount = computed(() => markdownToText(props.valueMarkdown).length)
 </script>
 
 <template>
@@ -177,7 +167,11 @@ const editorInfo = useEditor((root) =>
       :editor-info="editorInfo"
       :is-show-upload-image="true"
     />
-
     <Milkdown class="kungalgame-content" />
+
+    <div class="flex items-center justify-between text-sm">
+      <slot />
+      <span> {{ `${textCount} 字` }} </span>
+    </div>
   </div>
 </template>

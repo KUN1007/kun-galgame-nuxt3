@@ -46,7 +46,9 @@ const setCmAPI = (api: { update: (markdown: string) => void }) => {
           <KunMilkdownEditor
             :value-markdown="valueMarkdown"
             @save-markdown="saveMarkdown"
-          />
+          >
+            <slot />
+          </KunMilkdownEditor>
         </template>
 
         <template v-if="activeTab === 'code'">

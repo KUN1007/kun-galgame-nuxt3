@@ -28,7 +28,7 @@ const { data } = await useFetch(`/api/ranking/user`, {
       <div class="flex items-center space-x-2">
         <Icon
           :name="userIconMap[userRankingPageData.sortField]"
-          class="text-default-500 h-5 w-5"
+          class="text-primary h-5 w-5"
         />
         <span class="font-medium">{{ user.field }}</span>
       </div>
