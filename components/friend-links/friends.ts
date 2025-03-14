@@ -123,6 +123,11 @@ export const galgame: Friend[] = [
     name: 'lzacg',
     link: 'https://www.lzacg.top/',
     label: '量子ACG是一个以游戏为主, 进而推动日语学习的网站'
+  },
+  {
+    name: 'ai2moe',
+    link: 'https://www.ai2.moe/',
+    label: '禦愛同萌！一個以非營利為目的的交流社區'
   }
 ]
 
@@ -160,6 +165,11 @@ export const others: Friend[] = [
     link: 'https://www.acgbox.link/',
     label:
       'ACG 盒子, ACG 二次元导航网站, 收录 ACG 二次元相关的网站, 打造一个 ACG 二次元专属的网站。'
+  },
+  {
+    name: 'chooiin',
+    link: 'https://www.chooiin.com/',
+    label: '最初的声音，无限的未来。'
   }
 ]
 
