@@ -9,97 +9,42 @@ const logs = computed(() => props.logs)
 </script>
 
 <template>
-  <div class="log" v-for="(kun, index) in logs" :key="index">
-    <div class="user">
-      @
-      <NuxtLink :to="`/user/${kun.uid}/info`" target="_blank">
-        {{ kun.name }}
-      </NuxtLink>
-    </div>
-
-    <div class="reason" v-html="kun.description['zh-cn']" />
-
-    <div class="footer">
-      <div class="time">
-        <Icon class="hourglass" name="lucide:clock-7" />
-        <span>{{ formatDate(kun.time, { isShowYear: true }) }}</span>
+  <div class="space-y-4">
+    <KunCard
+      :is-hoverable="false"
+      :is-transparent="false"
+      v-for="(kun, index) in logs"
+      :key="index"
+    >
+      <div>
+        @
+        <NuxtLink
+          :to="`/user/${kun.uid}/info`"
+          target="_blank"
+          class="text-primary"
+        >
+          {{ kun.name }}
+        </NuxtLink>
       </div>
-      <div class="result">
-        <Icon class="warning" name="lucide:triangle-alert" />
-        <span v-if="typeof kun.result === 'number'">
-          {{ `萌萌点 - ${kun.result}` }}
-        </span>
-        <span v-else> {{ kun.result }} </span>
+
+      <div
+        v-html="kun.description['zh-cn']"
+        class="text-default-700 leading-relaxed"
+      />
+
+      <div class="text-default-500 flex items-center justify-between text-sm">
+        <div class="text-default-500 flex items-center gap-1">
+          <Icon name="lucide:clock-7" />
+          <span>{{ formatDate(kun.time, { isShowYear: true }) }}</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <Icon name="lucide:triangle-alert" class="text-warning h-4 w-4" />
+          <span v-if="typeof kun.result === 'number'">
+            {{ `萌萌点 - ${kun.result}` }}
+          </span>
+          <span v-else>{{ kun.result }}</span>
+        </div>
       </div>
-    </div>
+    </KunCard>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.log {
-  margin: 20px 40px;
-  border-bottom: 1px solid var(--kungalgame-blue-5);
-}
-
-.user {
-  margin-bottom: 10px;
-  font-weight: bold;
-
-  a {
-    cursor: pointer;
-    color: var(--kungalgame-blue-5);
-    border-bottom: 2px solid transparent;
-
-    &:hover {
-      border-bottom: 2px solid var(--kungalgame-blue-5);
-    }
-  }
-}
-
-.reason {
-  width: 100%;
-  padding-left: 5px;
-  border-left: 2px solid var(--kungalgame-blue-5);
-}
-
-.footer {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 17px;
-}
-
-.time {
-  display: flex;
-  align-items: center;
-
-  .hourglass {
-    margin-right: 7px;
-    font-size: 17px;
-    color: var(--kungalgame-purple-4);
-  }
-}
-
-.result {
-  border-right: 4px solid var(--kungalgame-red-4);
-  padding-right: 5px;
-  display: flex;
-  align-items: center;
-
-  .warning {
-    margin-right: 7px;
-    font-size: 17px;
-    color: var(--kungalgame-red-3);
-  }
-}
-
-@media (max-width: 700px) {
-  .log {
-    margin: 20px 10px;
-
-    &:nth-child(1) {
-      margin-top: 0;
-    }
-  }
-}
-</style>

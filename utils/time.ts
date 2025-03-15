@@ -13,7 +13,7 @@ export const hourDiff = (upvoteTime: number, hours: number) => {
 }
 
 export const formatDate = (
-  time: Date | number,
+  time: Date | string | number,
   config?: { isShowYear?: boolean; isPrecise?: boolean }
 ): string => {
   let formatString = 'MM-DD'
