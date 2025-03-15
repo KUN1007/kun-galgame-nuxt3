@@ -4,6 +4,7 @@ import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
 
 defineProps<{
   valueMarkdown: string
+  language?: Language
 }>()
 
 const emits = defineEmits<{
@@ -47,6 +48,7 @@ const setCmAPI = (api: { update: (markdown: string) => void }) => {
           <KunMilkdownEditor
             :value-markdown="valueMarkdown"
             @save-markdown="saveMarkdown"
+            :language="language ?? 'zh-cn'"
           >
             <slot />
           </KunMilkdownEditor>

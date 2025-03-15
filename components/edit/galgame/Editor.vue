@@ -28,6 +28,7 @@ const saveMarkdown = debounce((editorMarkdown: string) => {
   <KunMilkdownDualEditorProvider
     :value-markdown="valueMarkdown"
     @set-markdown="saveMarkdown"
+    :language="lang ?? 'zh-cn'"
   >
     <NuxtLink
       target="_blank"

@@ -27,7 +27,7 @@ useEventListener('keydown', (e: KeyboardEvent) => {
         v-if="modalValue"
         :class="
           cn(
-            'bg-default-800/70 dark:bg-background/70 fixed z-100 flex h-full w-full p-3 transition-all',
+            'bg-default-800/70 dark:bg-background/70 fixed top-0 left-0 z-1007 flex h-full w-full items-center justify-center p-3 transition-all',
             className
           )
         "

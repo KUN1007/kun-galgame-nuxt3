@@ -21,7 +21,7 @@ import { kunUploader, kunUploadWidgetFactory } from './plugins/upload/uploader'
 // import LinkUpdatePopup from './plugins/LinkUpdatePopup.vue'
 import { tooltipFactory } from '@milkdown/plugin-tooltip'
 import Tooltip from './plugins/tooltip/Tooltip.vue'
-import { $prose } from '@milkdown/utils'
+import { $prose, replaceAll } from '@milkdown/utils'
 import { Plugin } from '@milkdown/prose/state'
 // import {
 //   mentionsPlugin,
@@ -61,6 +61,7 @@ import markdown from 'refractor/lang/markdown'
 
 const props = defineProps<{
   valueMarkdown: string
+  language: Language
 }>()
 
 const emits = defineEmits<{
@@ -158,6 +159,13 @@ const editorInfo = useEditor((root) =>
 )
 
 const textCount = computed(() => markdownToText(props.valueMarkdown).length)
+
+watch(
+  () => [props.language],
+  () => {
+    editorInfo.get()?.action(replaceAll(valueMarkdown.value))
+  }
+)
 </script>
 
 <template>
@@ -167,7 +175,7 @@ const textCount = computed(() => markdownToText(props.valueMarkdown).length)
       :editor-info="editorInfo"
       :is-show-upload-image="true"
     />
-    <Milkdown class="kungalgame-content" />
+    <Milkdown />
 
     <div class="flex items-center justify-between text-sm">
       <slot />
