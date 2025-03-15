@@ -97,7 +97,7 @@ const handleRegister = async () => {
 
         <KunVerificationCode
           @click="handleSendCode"
-          class="absolute right-4 bottom-[94px]"
+          class-name="absolute right-4 bottom-23"
           :name="registerForm.name"
           :email="registerForm.email"
           to="register"

@@ -3,6 +3,7 @@ const props = defineProps<{
   to: 'register' | 'forgot'
   name?: string
   email: string
+  className?: string
 }>()
 
 const { isCaptureSuccessful } = storeToRefs(useComponentMessageStore())
@@ -64,21 +65,14 @@ const handleSendCode = () => {
 </script>
 
 <template>
-  <button @click="handleSendCode" :disabled="isSending">
+  <KunButton
+    size="xs"
+    variant="light"
+    color="default"
+    @click="handleSendCode"
+    :disabled="isSending"
+    :class-name="className"
+  >
     {{ isSending ? countdown : '发送验证码' }}
-  </button>
+  </KunButton>
 </template>
-
-<style lang="scss" scoped>
-button {
-  width: 90px;
-  height: 30px;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  color: var(--kungalgame-font-color-1);
-  &:hover {
-    color: var(--kungalgame-blue-5);
-  }
-}
-</style>

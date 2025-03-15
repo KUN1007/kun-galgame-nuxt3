@@ -1,7 +1,8 @@
 <script setup lang="ts">
-const { name, avatarMin } = storeToRefs(usePersistUserStore())
-const { showKUNGalgamePanel, showKUNGalgameUserPanel, messageStatus } =
-  storeToRefs(useTempSettingStore())
+const { uid, name, avatar } = storeToRefs(usePersistUserStore())
+const { showKUNGalgamePanel, messageStatus } = storeToRefs(
+  useTempSettingStore()
+)
 
 const onKeydown = (event: KeyboardEvent) => {
   if (event.ctrlKey && event.key.toLowerCase() === 'k') {
@@ -13,39 +14,57 @@ const onKeydown = (event: KeyboardEvent) => {
 onMounted(() => window.addEventListener('keydown', onKeydown))
 
 onUnmounted(() => window.removeEventListener('keydown', onKeydown))
+
+const statusClasses = computed(() => {
+  if (messageStatus.value === 'admin') {
+    return 'bg-danger'
+  } else if (messageStatus.value === 'new') {
+    return 'bg-secondary'
+  } else if (messageStatus.value === 'online') {
+    return 'bg-success'
+  } else {
+    return 'bg-primary'
+  }
+})
 </script>
 
 <template>
-  <div class="user-info">
-    <NuxtLink
-      class="search"
-      aria-label="search"
-      v-tooltip="{
-        message: '按下 Ctrl + K 以搜索',
-        position: 'bottom'
-      }"
-      to="/search"
+  <div class="flex items-center space-x-1">
+    <KunButton
+      :is-icon-only="true"
+      variant="light"
+      color="default"
+      size="xl"
+      href="/search"
     >
-      <Icon class="icon" name="lucide:search" />
-    </NuxtLink>
+      <Icon name="lucide:search" />
+    </KunButton>
 
-    <span class="settings" @click="showKUNGalgamePanel = !showKUNGalgamePanel">
-      <Icon class="icon" name="uiw:setting-o" />
-    </span>
+    <KunButton
+      :is-icon-only="true"
+      variant="light"
+      color="default"
+      size="xl"
+      @click="showKUNGalgamePanel = !showKUNGalgamePanel"
+    >
+      <Icon name="lucide:settings" />
+    </KunButton>
 
     <KunPopover position="bottom-end">
       <template #trigger>
-        <div class="avatar" v-if="name">
+        <div v-if="name">
           <div>
-            <NuxtImg
-              class="avatar-image"
-              v-if="avatarMin"
-              :src="avatarMin"
-              :alt="name"
+            <KunAvatar
+              size="lg"
+              :is-navigation="false"
+              :user="{ uid, name, avatar }"
             />
-            <div class="status" :class="messageStatus"></div>
+            <div
+              class="absolute right-0 bottom-0 size-2 rounded-full"
+              :class="cn(statusClasses, messageStatus)"
+            />
           </div>
-          <span class="guest" v-if="!avatarMin">
+          <span class="guest" v-if="!avatar">
             {{ name }}
           </span>
         </div>
@@ -54,97 +73,20 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
       <LazyKunTopBarUserInfo />
     </KunPopover>
 
-    <div class="login" v-if="!name">
-      <NuxtLink to="/login">登录</NuxtLink>
-    </div>
+    <template v-if="!name">
+      <KunButton size="lg" variant="light" href="/login">登录</KunButton>
+      <KunButton size="lg" href="/register">注册</KunButton>
+    </template>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.user-info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .search {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--kungalgame-font-color-2);
-    font-size: 25px;
-    cursor: pointer;
-    margin-right: 20px;
-  }
-
-  .settings {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--kungalgame-font-color-2);
-    font-size: 25px;
-    cursor: pointer;
-  }
-}
-
-.avatar {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .guest {
-    white-space: nowrap;
-    cursor: pointer;
-    font-size: medium;
-    margin-left: 30px;
-    color: var(--kungalgame-font-color-2);
-
-    &:hover {
-      color: var(--kungalgame-blue-5);
-    }
-  }
-
-  .avatar-image {
-    margin-left: 30px;
-    height: 40px;
-    width: 40px;
-    cursor: pointer;
-    border-radius: 50%;
-    position: relative;
-  }
-}
-
-.login {
-  a {
-    color: var(--kungalgame-blue-5);
-  }
-}
-
-.status {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-}
-
-.online {
-  background-color: var(--kungalgame-green-4);
-}
-
-.offline {
-  background-color: var(--kungalgame-blue-5);
-}
-
 .new {
   animation: kun-pulse 1s infinite;
-  background-color: var(--kungalgame-pink-4);
 }
 
 .admin {
   animation: kun-pulse 1s infinite;
-  background-color: var(--kungalgame-red-4);
 }
 
 .login {
@@ -165,24 +107,6 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   100% {
     transform: scale(1);
     opacity: 1;
-  }
-}
-
-@media (max-width: 1000px) {
-  .settings {
-    display: none !important;
-  }
-
-  .login {
-    margin-left: 0;
-  }
-}
-
-@media (max-width: 700px) {
-  .avatar {
-    .avatar-image {
-      margin-left: 0;
-    }
   }
 }
 </style>
