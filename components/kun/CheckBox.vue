@@ -1,65 +1,63 @@
-<script lang="ts" setup>
-const model = defineModel<boolean>({ required: true })
+<script setup lang="ts">
+interface Props {
+  modelValue?: boolean
+  label?: string
+  id?: string
+  name?: string
+  value?: string | number | boolean
+  disabled?: boolean
+  className?: string
+}
+
+withDefaults(defineProps<Props>(), {
+  modelValue: false,
+  label: undefined,
+  id: undefined,
+  name: undefined,
+  value: undefined,
+  disabled: false,
+  className: ''
+})
+
+const emit = defineEmits<{
+  'update:modelValue': [value: boolean]
+  change: [value: boolean]
+}>()
+
+const updateValue = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  emit('update:modelValue', target.checked)
+  emit('change', target.checked)
+}
 </script>
 
 <template>
-  <label class="kun-checkbox">
-    <input type="checkbox" v-model="model" />
-    <span class="checkmark" />
+  <div :class="cn('flex items-center', className)">
+    <div class="relative flex items-center">
+      <input
+        type="checkbox"
+        :id="id"
+        :name="name"
+        :value="value"
+        :checked="modelValue"
+        :disabled="disabled"
+        class="peer focus:ring-primary checked:bg-primary checked:border-primary hover:border-primary border-default-300 h-5 w-5 appearance-none rounded border-2 text-white transition-all disabled:cursor-not-allowed disabled:opacity-50"
+        @change="updateValue"
+      />
+      <div
+        class="pointer-events-none absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 transition-opacity duration-200 peer-checked:opacity-100"
+      >
+        <Icon name="lucide:check" />
+      </div>
+    </div>
     <slot />
-  </label>
+    <label
+      v-if="label"
+      :for="id"
+      class="text-default-700 ml-2 cursor-pointer text-sm select-none"
+      :class="{ 'cursor-not-allowed opacity-50': disabled }"
+    >
+      {{ label }}
+    </label>
+  </div>
 </template>
-
-<style lang="scss" scoped>
-.kun-checkbox {
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-  position: relative;
-  padding-left: 32px;
-  font-size: 16px;
-
-  input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-
-    &:checked ~ .checkmark {
-      background-color: var(--kungalgame-blue-5);
-      border-color: var(--kungalgame-blue-5);
-
-      &:after {
-        display: block;
-      }
-    }
-  }
-
-  .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: var(--kungalgame-white);
-    border: 2px solid var(--kungalgame-blue-5);
-    border-radius: 4px;
-    transition: all 0.3s ease;
-
-    &:after {
-      content: '';
-      position: absolute;
-      display: none;
-      top: 1px;
-      left: 5px;
-      width: 4px;
-      height: 10px;
-      border: solid var(--kungalgame-white);
-      border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
-    }
-  }
-}
-</style>
