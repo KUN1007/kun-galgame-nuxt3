@@ -10,6 +10,6 @@ defineProps<{
   <UserList>
     <UserComment :uid="user.uid" />
 
-    <KunNull :condition="!user.comment" type="null" />
+    <KunNull v-if="!user.comment" type="null" />
   </UserList>
 </template>

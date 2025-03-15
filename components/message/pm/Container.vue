@@ -140,7 +140,7 @@ const handleLoadHistoryMessages = async () => {
       加载历史消息
     </div>
 
-    <KunNull :condition="!isShowLoader && messages.length > 30" type="null" />
+    <KunNull v-if="!isShowLoader && messages.length > 30" type="null" />
 
     <template v-if="messages.length">
       <MessagePmItem
@@ -152,7 +152,7 @@ const handleLoadHistoryMessages = async () => {
       />
     </template>
 
-    <KunNull :condition="!messages.length" type="null" />
+    <KunNull v-if="!messages.length" type="null" />
   </div>
 
   <div class="send-container">

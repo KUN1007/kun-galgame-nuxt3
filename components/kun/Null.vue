@@ -1,7 +1,6 @@
 <script setup lang="ts">
 withDefaults(
   defineProps<{
-    condition: boolean
     description?: string
     type?: 'null' | '404'
     isShowSticker?: boolean
@@ -15,7 +14,7 @@ withDefaults(
 </script>
 
 <template>
-  <div class="m-auto flex flex-col items-center gap-3" v-if="condition">
+  <div class="m-auto flex flex-col items-center gap-3">
     <NuxtImg
       v-if="isShowSticker"
       :src="useRandomSticker"

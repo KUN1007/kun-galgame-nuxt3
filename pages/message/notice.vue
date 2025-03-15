@@ -46,7 +46,7 @@ onMounted(async () => {
       <KunDivider margin="7px 0" />
     </template>
 
-    <KunNull :condition="!data.totalCount" type="null" />
+    <KunNull v-if="!data.totalCount" type="null" />
 
     <KunPagination
       class="pagination"

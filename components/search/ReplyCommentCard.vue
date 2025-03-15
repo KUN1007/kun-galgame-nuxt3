@@ -14,94 +14,34 @@ const content = computed(() =>
 </script>
 
 <template>
-  <NuxtLink :to="`/topic/${data.tid}`" v-kun-gradient>
-    <div class="title">
-      <span>
-        <Icon
-          class="icon"
-          :name="type === 'reply' ? 'carbon:reply' : 'uil:comment-dots'"
-        />
+  <NuxtLink :to="`/topic/${data.tid}`" class="search-result-card">
+    <div class="flex items-center gap-2">
+      <Icon
+        class="text-primary h-5 w-5"
+        :name="type === 'reply' ? 'carbon:reply' : 'uil:comment-dots'"
+      />
+      <span class="text-lg">{{ data.title }}</span>
+      <span class="text-default-500 ml-auto text-sm">
+        {{ formatTimeDifference(data.time) }}
       </span>
-      <span>{{ data.title }}</span>
-      <span>{{ formatTimeDifference(data.time) }}</span>
     </div>
 
-    <div class="content">
-      {{ content }}
+    <div
+      class="border-primary bg-primary/10 my-2 rounded border-l-3 p-2 text-sm"
+    >
+      {{ type === 'reply' ? markdownToText(content) : content }}
     </div>
 
-    <div class="users">
-      <div class="user">
+    <div class="flex flex-wrap items-center gap-2">
+      <div class="flex items-center">
         <KunAvatar :user="data.user" />
-        <span class="username">{{ data.user.name }}</span>
+        <span class="ml-2 text-sm">{{ data.user.name }}</span>
       </div>
-      <div class="arrow">-></div>
-      <div class="user">
+      <Icon name="lucide:arrow-right" class="h-4 w-4" />
+      <div class="flex items-center">
         <KunAvatar :user="data.toUser" />
-        <span class="username">{{ data.toUser.name }}</span>
+        <span class="ml-2 text-sm">{{ data.toUser.name }}</span>
       </div>
     </div>
   </NuxtLink>
 </template>
-
-<style lang="scss" scoped>
-a {
-  display: flex;
-  flex-direction: column;
-  color: var(--kungalgame-font-color-3);
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.title {
-  width: 100%;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-
-  span {
-    &:first-child {
-      display: flex;
-      margin-right: 5px;
-    }
-
-    &:last-child {
-      color: var(--kungalgame-font-color-0);
-      font-size: small;
-      font-weight: initial;
-      margin-left: 17px;
-      white-space: nowrap;
-    }
-  }
-}
-
-.content {
-  border-left: 3px solid var(--kungalgame-blue-5);
-  background-color: var(--kungalgame-trans-blue-0);
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: small;
-}
-
-.users {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-
-  .arrow {
-    margin: 0 5px;
-  }
-
-  .user {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: small;
-
-    .username {
-      margin-left: 5px;
-    }
-  }
-}
-</style>

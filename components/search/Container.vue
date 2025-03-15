@@ -10,7 +10,7 @@ const isLoadComplete = ref(false)
 const pageData = reactive({
   type: 'topic' as SearchType,
   page: 1,
-  limit: 10
+  limit: 12
 })
 
 const searchQuery = async () => {
@@ -20,7 +20,7 @@ const searchQuery = async () => {
     query: { keywords: keywords.value, ...pageData }
   })
 
-  if (result.length < 10) {
+  if (result.length < 12) {
     isLoadComplete.value = true
   }
 
@@ -72,7 +72,13 @@ const handleLoadMore = async () => {
       name="搜索"
       description="您可以在本页面搜索本论坛的所有话题, Galgame, 用户, 回复, 评论"
     />
-    <KunTab :items="navItems" v-model="pageData.type" size="sm" />
+    <KunTab
+      :items="navItems"
+      :model-value="pageData.type"
+      @update:model-value="(value) => handleSetType(value as SearchType)"
+      size="sm"
+      inner-class-name="shadow border bg-transparent"
+    />
 
     <SearchBox />
 
@@ -84,7 +90,7 @@ const handleLoadMore = async () => {
       v-if="results.length"
     />
 
-    <KunDivider v-if="results.length >= 10">
+    <KunDivider v-if="results.length >= 12">
       <slot />
       <KunButton
         variant="flat"

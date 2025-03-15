@@ -64,7 +64,7 @@ const statusName = () => {
       <div class="bio">
         <div>签名:</div>
         <pre v-if="user.bio">{{ user.bio }}</pre>
-        <KunNull :condition="!user.bio" type="null" :is-show-sticker="false" />
+        <KunNull v-if="!user.bio" type="null" :is-show-sticker="false" />
       </div>
     </div>
   </div>

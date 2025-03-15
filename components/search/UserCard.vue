@@ -7,73 +7,24 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLink :to="`/user/${user.uid}/info`" v-kun-gradient>
-    <div class="info">
+  <KunCard :is-pressable="true" :href="`/user/${user.uid}/info`">
+    <div class="flex items-center">
       <KunAvatar :user="user" />
-      <span>{{ user.name }}</span>
+      <span class="ml-2">{{ user.name }}</span>
     </div>
-    <div class="bio" v-if="user.bio">
-      <pre>{{ user.bio }}</pre>
-    </div>
-    <div class="addition">
-      <span class="moemoepoint">
-        <span><Icon class="icon" name="lucide:lollipop" /></span>
-        <span>{{ user.moemoepoint }}</span>
+
+    <pre v-if="user.bio" class="mt-2 text-sm break-all whitespace-pre-wrap">
+      {{ user.bio }}
+    </pre>
+
+    <div class="mt-2 flex items-center justify-between text-sm">
+      <div class="text-secondary flex items-center">
+        <Icon name="lucide:lollipop" class="h-5 w-5" />
+        {{ user.moemoepoint }}
+      </div>
+      <span class="text-default-700">
+        {{ formatDate(user.time, { isShowYear: true }) }}
       </span>
-      <span>{{ formatDate(user.time, { isShowYear: true }) }}</span>
     </div>
-  </NuxtLink>
+  </KunCard>
 </template>
-
-<style lang="scss" scoped>
-a {
-  display: flex;
-  flex-direction: column;
-  color: var(--kungalgame-font-color-3);
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.info {
-  display: flex;
-  align-items: center;
-
-  span {
-    margin-left: 10px;
-  }
-}
-
-.bio {
-  margin-top: 7px;
-
-  pre {
-    display: block;
-    width: 100%;
-    margin: 0;
-    white-space: pre-wrap;
-    word-break: break-all;
-    overflow-wrap: break-word;
-  }
-}
-
-.addition {
-  margin-top: 7px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: small;
-
-  .moemoepoint {
-    display: flex;
-    align-items: center;
-    margin-left: 5px;
-    font-weight: bold;
-    color: var(--kungalgame-pink-4);
-
-    .icon {
-      font-size: 20px;
-      margin-right: 5px;
-    }
-  }
-}
-</style>

@@ -124,7 +124,7 @@ if (data) {
 <template>
   <TopicDetail v-if="data" :tid="tid" :topic="data" />
 
-  <KunNull :condition="!data && !isBanned" type="404" />
+  <KunNull v-if="!data && !isBanned" type="404" />
 
   <KunBlank v-if="isBanned">此话题已被封禁</KunBlank>
 

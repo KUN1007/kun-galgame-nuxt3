@@ -28,6 +28,6 @@ const count = computed(() => {
   <UserList>
     <UserGalgame :uid="user.uid" :type="galgameType" />
 
-    <KunNull :condition="!count" type="null" />
+    <KunNull v-if="!count" type="null" />
   </UserList>
 </template>

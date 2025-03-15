@@ -30,6 +30,6 @@ const count = computed(() => {
   <UserList>
     <UserTopic :uid="user.uid" :type="topicType" />
 
-    <KunNull :condition="!count" type="null" />
+    <KunNull v-if="!count" type="null" />
   </UserList>
 </template>

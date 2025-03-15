@@ -97,7 +97,7 @@ if (galgame.value) {
   <div class="root">
     <Galgame v-if="galgame" :galgame="galgame" />
 
-    <KunNull :condition="!galgame && !isBanned" type="404" />
+    <KunNull v-if="!galgame && !isBanned" type="404" />
 
     <KunBlank v-if="isBanned">此 Galgame 已被封禁</KunBlank>
   </div>

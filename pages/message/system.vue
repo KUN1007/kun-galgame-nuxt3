@@ -46,7 +46,7 @@ onMounted(async () => {
       <KunDivider margin="7px 0" />
     </template>
 
-    <KunNull :condition="!data.length" type="null" />
+    <KunNull v-if="!data.length" type="null" />
   </div>
 </template>
 

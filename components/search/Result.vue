@@ -5,66 +5,70 @@ import type {
   SearchResultUser,
   SearchResultReply,
   SearchResultComment,
-  SearchResult
+  SearchType
 } from '~/types/api/search'
 
-const { searchHistory } = storeToRefs(usePersistKUNGalgameSearchStore())
-const { keywords } = storeToRefs(useTempSearchStore())
+type ResultTypeMap = {
+  topic: SearchResultTopic[]
+  galgame: SearchResultGalgame[]
+  user: SearchResultUser[]
+  reply: SearchResultReply[]
+  comment: SearchResultComment[]
+}
 
 const props = defineProps<{
-  results: SearchResult[]
-  type: 'topic' | 'galgame' | 'user' | 'reply' | 'comment'
+  type: SearchType
+  results: ResultTypeMap[keyof ResultTypeMap]
 }>()
 
-const handleClick = () => {
-  if (!searchHistory.value.includes(keywords.value)) {
-    searchHistory.value.push(keywords.value)
-  }
-}
+const isTopicResults = (results: unknown[]): results is SearchResultTopic[] =>
+  props.type === 'topic'
+const isGalgameResults = (
+  results: unknown[]
+): results is SearchResultGalgame[] => props.type === 'galgame'
+const isUserResults = (results: unknown[]): results is SearchResultUser[] =>
+  props.type === 'user'
+const isReplyResults = (results: unknown[]): results is SearchResultReply[] =>
+  props.type === 'reply'
+const isCommentResults = (
+  results: unknown[]
+): results is SearchResultComment[] => props.type === 'comment'
 </script>
 
 <template>
   <div class="result">
-    <div class="space-y-3" v-if="props.type === 'topic'">
+    <div v-if="isTopicResults(results)" class="space-y-3">
       <HomeTopicCard
         v-for="(topic, index) in results"
         :key="index"
-        @click="handleClick"
-        :topic="topic as SearchResultTopic"
+        :topic="topic"
       />
     </div>
 
-    <div class="space-y-3" v-if="props.type === 'galgame'">
-      <HomeGalgameCard
-        v-for="(galgame, index) in results"
-        :key="index"
-        @click="handleClick"
-        :galgame="galgame as SearchResultGalgame"
-      />
-    </div>
+    <GalgameCard v-if="isGalgameResults(results)" :galgames="results" />
 
-    <div class="space-y-3" v-if="props.type === 'user'">
+    <div v-if="isUserResults(results)" class="space-y-3">
       <SearchUserCard
         v-for="(user, index) in results"
         :key="index"
-        :user="user as SearchResultUser"
+        :user="user"
       />
     </div>
 
-    <div class="space-y-3" v-if="props.type === 'reply'">
+    <div v-if="isReplyResults(results)" class="space-y-3">
       <SearchReplyCommentCard
         v-for="(reply, index) in results"
         :key="index"
-        :data="reply as SearchResultReply"
+        :data="reply"
         type="reply"
       />
     </div>
 
-    <div class="space-y-3" v-if="props.type === 'comment'">
+    <div v-if="isCommentResults(results)" class="space-y-3">
       <SearchReplyCommentCard
         v-for="(comment, index) in results"
         :key="index"
-        :data="comment as SearchResultComment"
+        :data="comment"
         type="comment"
       />
     </div>
