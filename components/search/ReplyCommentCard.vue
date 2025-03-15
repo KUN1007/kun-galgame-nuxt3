@@ -32,12 +32,12 @@ const content = computed(() =>
 
     <div class="users">
       <div class="user">
-        <KunAvatar :user="data.user" size="30px" />
+        <KunAvatar :user="data.user" />
         <span class="username">{{ data.user.name }}</span>
       </div>
       <div class="arrow">-></div>
       <div class="user">
-        <KunAvatar :user="data.toUser" size="30px" />
+        <KunAvatar :user="data.toUser" />
         <span class="username">{{ data.toUser.name }}</span>
       </div>
     </div>
