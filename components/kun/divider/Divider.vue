@@ -2,7 +2,7 @@
 import type { KunUIColor } from '../ui/type'
 import type { KunDividerProps } from './type'
 
-const props = withDefaults(defineProps<KunDividerProps>(), {
+withDefaults(defineProps<KunDividerProps>(), {
   orientation: 'horizontal',
   color: 'default',
   borderStyle: 'solid',
@@ -23,7 +23,7 @@ const colorClasses: Record<KunUIColor, string> = {
 <template>
   <div
     :class="[
-      'flex items-center text-sm',
+      'flex items-center',
       orientation === 'horizontal' ? 'w-full' : 'h-full flex-col',
       className
     ]"
@@ -31,30 +31,25 @@ const colorClasses: Record<KunUIColor, string> = {
     <div
       :class="[
         orientation === 'horizontal' ? 'w-full border-t' : 'h-full border-l',
-        withLabel
-          ? orientation === 'horizontal'
-            ? 'flex-grow-0'
-            : ''
-          : 'w-full',
         borderStyle === 'dashed' ? 'border-dashed' : 'border-solid',
-        colorClasses[props.color]
+        colorClasses[color]
       ]"
     />
     <div
       v-if="$slots.default"
       :class="[
         'text-sm text-gray-500',
-        orientation === 'horizontal' ? 'px-3' : 'py-3'
+        orientation === 'horizontal' ? 'px-4 whitespace-nowrap' : 'py-4'
       ]"
     >
       <slot />
     </div>
     <div
-      v-if="withLabel"
+      v-if="$slots.default"
       :class="[
         orientation === 'horizontal' ? 'w-full border-t' : 'h-full border-l',
         borderStyle === 'dashed' ? 'border-dashed' : 'border-solid',
-        colorClasses
+        colorClasses[color]
       ]"
     />
   </div>

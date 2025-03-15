@@ -10,12 +10,7 @@ const logs = computed(() => props.logs)
 
 <template>
   <div class="space-y-4">
-    <KunCard
-      :is-hoverable="false"
-      :is-transparent="false"
-      v-for="(kun, index) in logs"
-      :key="index"
-    >
+    <KunCard :is-hoverable="false" v-for="(kun, index) in logs" :key="index">
       <div>
         @
         <NuxtLink

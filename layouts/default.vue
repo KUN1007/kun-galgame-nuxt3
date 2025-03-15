@@ -32,7 +32,7 @@ watch(
     :style="{ 'background-color': 'hsl(var(--background))' }"
   >
     <div class="z-10 w-full max-w-7xl md:mr-3 md:ml-68">
-      <div class="pt-19 pb-3">
+      <div class="h-full pt-19 pb-3">
         <NuxtPage />
       </div>
 
