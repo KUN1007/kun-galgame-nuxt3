@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { friendArray } from '~/components/friend-links/friends'
+import { friendArray } from '~/config/friend'
 
 useHead({
-  title: `友情链接 - ${kungal.titleShort}`,
+  title: '友情链接',
   meta: [
     {
       name: 'description',
       content: friendArray
-        .flatMap((group) =>
-          group.value.map((friend) => `friends.${group.key}.${friend.name}`)
-        )
+        .flatMap((group) => group.value.map((friend) => friend.name))
         .join(' | ')
     }
   ]
@@ -17,23 +15,5 @@ useHead({
 </script>
 
 <template>
-  <div class="root">
-    <FriendLinksHeader />
-    <FriendLinksCard />
-  </div>
+  <FriendLinksContainer />
 </template>
-
-<style lang="scss" scoped>
-.root {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: 17px;
-}
-
-.kun-footer {
-  margin-top: 30px;
-}
-</style>
