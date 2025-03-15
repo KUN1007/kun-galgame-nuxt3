@@ -1,3 +1,18 @@
+import type { KunTabItem } from '~/components/kun/tab/type'
+
+export const kunUpdateLogTabItem: KunTabItem[] = [
+  {
+    value: 'history',
+    textValue: '更新历史',
+    href: '/update/history'
+  },
+  {
+    value: 'todo',
+    textValue: '待办列表',
+    href: '/update/todo'
+  }
+]
+
 export const KUN_UPDATE_LOG_TYPE_MAP: Record<string, string> = {
   feat: '增加功能',
   pref: '性能优化',

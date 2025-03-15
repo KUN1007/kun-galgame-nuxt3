@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useRipple } from '../ripple/useRipple'
+import type { KunUIColor } from '~/components/kun/ui/type'
 
 interface Props {
   isHoverable?: boolean
@@ -9,6 +10,7 @@ interface Props {
   className?: string
   contentClass?: string
   href?: string
+  color?: KunUIColor | 'background'
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -18,7 +20,8 @@ const props = withDefaults(defineProps<Props>(), {
   bordered: true,
   className: '',
   contentClass: '',
-  href: '/'
+  href: '/',
+  color: 'background'
 })
 
 const router = useRouter()
@@ -30,6 +33,16 @@ const handleKunCardClick = (event: MouseEvent) => {
     onClick(event)
   }
 }
+
+const colorClasses: Record<KunUIColor | 'background', string> = {
+  background: 'bg-background',
+  default: 'bg-default-100/70',
+  primary: 'bg-primary-100/70 border-primary-300',
+  secondary: 'bg-secondary-100/70 border-secondary-300',
+  success: 'bg-success-100/70 border-success-300',
+  warning: 'bg-warning-100/70 border-warning-300',
+  danger: 'bg-danger-100/70 border-danger-300'
+}
 </script>
 
 <template>
@@ -40,7 +53,7 @@ const handleKunCardClick = (event: MouseEvent) => {
         isHoverable && 'hover:bg-default-100 hover:shadow-md',
         bordered && 'border',
         isPressable && 'cursor-pointer active:scale-[0.97]',
-        isTransparent ? '' : 'bg-background',
+        isTransparent ? '' : colorClasses[props.color],
         className
       )
     "

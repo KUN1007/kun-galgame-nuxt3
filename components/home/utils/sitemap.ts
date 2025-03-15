@@ -81,8 +81,8 @@ export const sitemap: Sitemap[] = [
     label: '感谢名单'
   },
   {
-    route: '/update-log',
-    name: 'updateLog',
+    route: '/update',
+    name: 'update',
     label: '更新记录'
   },
   {

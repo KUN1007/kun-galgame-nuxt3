@@ -75,7 +75,7 @@ export const hamburgerItem: Hamburger[] = [
   {
     name: 'update',
     icon: 'lucide:arrow-big-up-dash',
-    router: '/update-log',
+    router: '/update',
     label: '更新日志'
   },
   {

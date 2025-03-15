@@ -82,6 +82,24 @@ export const kunLayoutItem: KunLayoutItem[] = [
     ]
   },
   {
+    name: 'update',
+    icon: 'lucide:arrow-big-up-dash',
+    label: '更新日志',
+    isCollapse: true,
+    children: [
+      {
+        name: 'history',
+        router: '/update/history',
+        label: '更新历史'
+      },
+      {
+        name: 'todo',
+        router: '/update/todo',
+        label: '待办列表'
+      }
+    ]
+  },
+  {
     name: 'about',
     icon: 'lucide:info',
     router: '/kungalgame',
@@ -92,12 +110,6 @@ export const kunLayoutItem: KunLayoutItem[] = [
     icon: 'lucide:handshake',
     router: '/friend-links',
     label: '友情链接'
-  },
-  {
-    name: 'update',
-    icon: 'lucide:arrow-big-up-dash',
-    router: '/update-log',
-    label: '更新日志'
   },
   {
     name: 'nonMoe',
