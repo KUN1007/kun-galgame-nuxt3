@@ -10,11 +10,11 @@ const uid = parseInt((route.params as { uid: string }).uid)
 </script>
 
 <template>
-  <ClientOnly>
-    <MessagePmHeader :uid="uid" />
-  </ClientOnly>
+  <div class="h-full w-full">
+    <ClientOnly>
+      <MessagePmHeader :uid="uid" />
+    </ClientOnly>
 
-  <MessagePmContainer :uid="uid" />
+    <MessagePmContainer :uid="uid" />
+  </div>
 </template>
-
-<style lang="scss" scoped></style>

@@ -135,64 +135,43 @@ const handleLoadHistoryMessages = async () => {
 </script>
 
 <template>
-  <div ref="historyContainer" class="history">
-    <div class="loader" v-if="isShowLoader" @click="handleLoadHistoryMessages">
-      加载历史消息
+  <div
+    ref="historyContainer"
+    class="h-[calc(100dvh-14rem)] overflow-y-auto py-3"
+  >
+    <div class="flex justify-center">
+      <KunButton
+        variant="light"
+        v-if="isShowLoader"
+        @click="handleLoadHistoryMessages"
+      >
+        加载历史消息
+      </KunButton>
     </div>
 
     <KunNull v-if="!isShowLoader && messages.length > 30" type="null" />
 
-    <template v-if="messages.length">
+    <div class="space-y-2" v-if="messages.length">
       <MessagePmItem
         v-for="(message, index) in messages"
         :key="index"
         :message="message"
         :is-sent="uid !== message.sender.uid"
-        class="message-item"
       />
-    </template>
+    </div>
 
     <KunNull v-if="!messages.length" type="null" />
   </div>
 
-  <div class="send-container">
-    <KunInput v-model="messageInput" />
-    <KunButton @click="sendMessage">
-      <Icon class="icon" name="lucide:send" />
+  <div class="flex justify-between gap-2">
+    <KunInput size="lg" v-model="messageInput" />
+    <KunButton
+      size="xl"
+      :is-icon-only="true"
+      class-name="shrink-0"
+      @click="sendMessage"
+    >
+      <Icon name="lucide:send" />
     </KunButton>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.send-container {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 24px;
-
-  .kun-input {
-    width: 100%;
-    margin-right: 10px;
-    border: 1.5px solid var(--kungalgame-blue-5);
-  }
-
-  .icon {
-    font-size: 24px;
-  }
-}
-
-.history {
-  overflow-y: scroll;
-  padding-bottom: 16px;
-
-  .loader {
-    margin: 16px 0;
-    color: var(--kungalgame-font-color-0);
-    cursor: pointer;
-
-    &:hover {
-      color: var(--kungalgame-blue-5);
-    }
-  }
-}
-</style>

@@ -48,12 +48,12 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
           :href="kungal.github"
           target="_blank"
         >
-          <span><Icon class="icon" name="lucide:github" /></span>
+          <Icon class="icon" name="lucide:github" />
           <span class="text-xs">GitHub</span>
         </a>
 
         <NuxtLink class="flex flex-col items-center justify-center" to="/rss">
-          <span><Icon class="icon" name="lucide:rss" /></span>
+          <Icon class="icon" name="lucide:rss" />
           <span class="text-xs">RSS</span>
         </NuxtLink>
 
@@ -63,7 +63,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
           :href="kungal.domain.telegram_group"
           target="_blank"
         >
-          <span><Icon class="icon" name="ph:telegram-logo" /></span>
+          <Icon class="icon" name="ph:telegram-logo" />
           <span class="text-xs">Telegram</span>
         </a>
       </div>

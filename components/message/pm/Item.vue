@@ -8,87 +8,35 @@ defineProps<{
 </script>
 
 <template>
-  <div class="message-item" :class="isSent ? 'sent' : 'others'">
-    <KunAvatar :user="message.sender" size="30px" />
+  <div
+    class="flex w-full items-end gap-2"
+    :class="isSent ? 'flex-row-reverse' : 'flex-row'"
+  >
+    <KunAvatar :user="message.sender" class="mb-auto" />
 
-    <div class="content-container">
-      <div class="top">
-        <span class="username">
+    <div
+      class="relative max-w-[75%] rounded-lg p-3 shadow"
+      :class="
+        isSent
+          ? 'bg-primary/20 border-primary/20 border'
+          : 'bg-background border-default-300 border'
+      "
+    >
+      <div class="flex items-end">
+        <span
+          class="text-sm font-medium"
+          :class="isSent ? 'text-primary' : 'text-secondary'"
+        >
           {{ message.sender.name }}
         </span>
       </div>
-      <div class="content">
+
+      <div class="mt-1 text-sm leading-relaxed">
         <span>{{ message.content }}</span>
-        <span class="time">
+        <span class="text-default-500 ml-2 text-xs">
           {{ formatTimeDifference(message.time) }}
         </span>
       </div>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.message-item {
-  display: flex;
-  width: 100%;
-
-  .kun-avatar {
-    margin-top: auto;
-  }
-
-  .top {
-    display: flex;
-    align-items: end;
-  }
-
-  .username {
-    color: var(--kungalgame-pink-4);
-  }
-}
-
-.content-container {
-  background-color: var(--kungalgame-trans-white-5);
-  padding: 10px 15px;
-  border-radius: 18px;
-  max-width: 75%;
-  font-size: 14px;
-  margin: 0 10px;
-  position: relative;
-  line-height: 1.4;
-  box-shadow: var(--shadow);
-
-  .time {
-    font-size: 12px;
-    margin-left: 10px;
-    margin-right: 5px;
-    color: var(--kungalgame-font-color-1);
-  }
-
-  .icon {
-    transform: translateY(3px);
-    color: var(--kungalgame-font-color-1);
-  }
-}
-
-.message-item + .message-item {
-  margin-top: 5px;
-}
-
-.sent + .others,
-.others + .sent {
-  margin-top: 10px;
-}
-
-.sent {
-  justify-content: flex-start;
-  flex-direction: row-reverse;
-
-  .content-container {
-    background-color: var(--kungalgame-trans-blue-2);
-  }
-
-  .username {
-    color: var(--kungalgame-blue-5);
-  }
-}
-</style>

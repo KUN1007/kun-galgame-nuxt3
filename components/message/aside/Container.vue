@@ -15,10 +15,12 @@ asideItems.value = contact.value ? contact.value : []
 </script>
 
 <template>
-  <aside class="aside">
-    <h2>消息</h2>
+  <aside
+    class="scrollbar-hide border-default-300 flex w-88 shrink-0 flex-col space-y-3 overflow-y-auto border-r pr-3"
+  >
+    <h2 class="text-2xl">消息</h2>
 
-    <KunDivider margin="10px 0" />
+    <KunDivider />
 
     <MessageAsideSystemItem v-if="system" title="通知" :data="system[0]" />
 
@@ -36,51 +38,5 @@ asideItems.value = contact.value ? contact.value : []
       :key="index"
       :room="room"
     />
-
-    <div class="notice">
-      <MessageNotice />
-    </div>
   </aside>
 </template>
-
-<style lang="scss" scoped>
-.aside {
-  height: 100%;
-  width: 32rem;
-  color: var(--kungalgame-font-color-3);
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  overflow: scroll;
-
-  &::-webkit-scrollbar {
-    width: 0;
-  }
-}
-
-span {
-  font-size: small;
-}
-
-.zako {
-  color: var(--kungalgame-font-color-0);
-}
-
-.new {
-  color: var(--kungalgame-red-5);
-}
-
-.notice {
-  display: none;
-}
-
-@media (max-width: 700px) {
-  .aside {
-    width: 100%;
-  }
-
-  .notice {
-    display: block;
-  }
-}
-</style>

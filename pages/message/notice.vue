@@ -30,21 +30,27 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="container" v-if="data">
-    <header>
-      <NuxtLink to="/message">
-        <Icon class="icon" name="lucide:chevron-left" />
-      </NuxtLink>
-      <h2>通知</h2>
+  <div class="flex w-full flex-col space-y-3" v-if="data">
+    <header class="flex items-center gap-2">
+      <KunButton size="lg" :is-icon-only="true" variant="light" href="/message">
+        <Icon name="lucide:chevron-left" />
+      </KunButton>
+      <h2 class="text-lg">通知</h2>
     </header>
 
-    <KunDivider margin="7px 0" />
+    <KunDivider />
 
-    <template v-for="(message, index) in data.messages" :key="index">
-      <MessageAsideNotice :message="message" :refresh="refresh" />
-
-      <KunDivider margin="7px 0" />
-    </template>
+    <div
+      v-if="data.messages.length"
+      class="scrollbar-hide h-full overflow-y-auto"
+    >
+      <MessageAsideNotice
+        v-for="(message, index) in data.messages"
+        :key="index"
+        :message="message"
+        :refresh="refresh"
+      />
+    </div>
 
     <KunNull v-if="!data.totalCount" type="null" />
 
@@ -59,32 +65,3 @@ onMounted(async () => {
     />
   </div>
 </template>
-
-<style lang="scss" scoped>
-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-
-  a {
-    font-size: 24px;
-    margin-right: 10px;
-    color: var(--kungalgame-font-color-3);
-
-    &:hover {
-      color: var(--kungalgame-blue-5);
-    }
-  }
-
-  h2 {
-    &::before {
-      content: '';
-      margin: 0;
-    }
-  }
-}
-
-.container {
-  width: 100%;
-}
-</style>
