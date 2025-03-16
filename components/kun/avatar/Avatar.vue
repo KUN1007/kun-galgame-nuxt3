@@ -3,7 +3,8 @@ import type { KunAvatarProps } from './type'
 
 const props = withDefaults(defineProps<KunAvatarProps>(), {
   size: 'md',
-  isNavigation: true
+  isNavigation: true,
+  className: ''
 })
 
 const handleClickAvatar = (event: MouseEvent) => {
@@ -14,6 +15,10 @@ const handleClickAvatar = (event: MouseEvent) => {
 }
 
 const sizeClasses = computed(() => {
+  if (props.size === 'original') {
+    return 'size-40'
+  }
+
   if (props.size === 'xs') {
     return 'size-4'
   } else if (props.size === 'sm') {
@@ -32,13 +37,17 @@ const sizeClasses = computed(() => {
 
 <template>
   <div
-    class="flex shrink-0 cursor-pointer justify-center"
+    :class="cn('flex shrink-0 cursor-pointer justify-center', className)"
     @click="handleClickAvatar($event)"
   >
     <NuxtImg
       :class="cn('inline-block rounded-full', sizeClasses)"
       v-if="user.avatar"
-      :src="user.avatar.replace(/\.webp$/, '-100.webp')"
+      :src="
+        size === 'original'
+          ? user.avatar
+          : user.avatar.replace(/\.webp$/, '-100.webp')
+      "
       :alt="user.name"
     />
     <span
