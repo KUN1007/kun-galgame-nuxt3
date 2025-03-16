@@ -5,27 +5,8 @@ withDefaults(defineProps<{ text: string; name?: string }>(), {
 </script>
 
 <template>
-  <span class="kun-copy" @click="useKunCopy(text)">
+  <KunButton variant="light" class-name="gap-2" @click="useKunCopy(text)">
     <span>{{ decodeIfEncoded(name ? name : text) }}</span>
-    <Icon class="icon" name="lucide:copy" />
-  </span>
+    <Icon name="lucide:copy" />
+  </KunButton>
 </template>
-
-<style lang="scss" scoped>
-.kun-copy {
-  cursor: pointer;
-  color: var(--kungalgame-blue-5);
-  padding: 3px 10px;
-  font-weight: bold;
-  border-radius: 10px;
-  word-break: break-all;
-
-  &:hover {
-    background-color: var(--kungalgame-trans-blue-0);
-  }
-
-  .icon {
-    margin-left: 10px;
-  }
-}
-</style>
