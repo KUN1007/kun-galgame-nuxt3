@@ -37,7 +37,7 @@ useHead({
         :user="{ uid: data.uid, name: data.name, avatar: data.avatar }"
       />
 
-      <div class="h-full w-full px-3">
+      <div class="h-full w-full overflow-y-auto px-3">
         <NuxtPage :user="data" />
       </div>
     </div>

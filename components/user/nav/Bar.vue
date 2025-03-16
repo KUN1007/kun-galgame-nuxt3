@@ -10,7 +10,7 @@ const currentUserUid = usePersistUserStore().uid
 
 <template>
   <div class="flex h-full flex-col gap-3">
-    <div class="relative">
+    <div class="relative hidden sm:block">
       <KunAvatar
         class-name="cursor-default"
         :is-navigation="false"
@@ -22,11 +22,20 @@ const currentUserUid = usePersistUserStore().uid
         v-if="currentUserUid !== user.uid"
         :to="`/message/user/${user.uid}`"
       >
-        <KunButton variant="flat" rounded="full" size="md" color="primary">
-          <Icon name="lucide:message-circle" />
+        <KunButton rounded="full" size="sm" color="primary">
+          <Icon class="mr-1" name="lucide:message-circle" />
           私聊
         </KunButton>
       </NuxtLink>
+    </div>
+
+    <div class="relative block sm:hidden">
+      <KunAvatar
+        class-name="cursor-default"
+        :is-navigation="false"
+        size="md"
+        :user="user"
+      />
     </div>
 
     <UserNavItem :uid="user.uid" :nav="navBarRoute" />

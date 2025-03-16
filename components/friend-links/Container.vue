@@ -31,7 +31,7 @@ import { friendArray } from '~/config/friend'
           :key="i"
           :href="friend.link"
           target="_blank"
-          class="hover:bg-primary/10 block transform rounded-lg border p-4 shadow transition-all duration-200 hover:-translate-y-2 hover:shadow-lg"
+          class="block transform rounded-lg border p-4 shadow transition-all duration-200 hover:-translate-y-2 hover:shadow-lg"
         >
           <div class="mb-2 flex items-center">
             <span class="text-lg font-bold">
