@@ -16,9 +16,9 @@ asideItems.value = contact.value ? contact.value : []
 
 <template>
   <aside
-    class="scrollbar-hide border-default-300 flex w-88 shrink-0 flex-col space-y-3 overflow-y-auto border-r pr-3"
+    class="scrollbar-hide border-default-300 border-default-300 flex w-full shrink-0 flex-col space-y-3 overflow-y-auto border-r pr-0 sm:w-88 sm:pr-3"
   >
-    <h2 class="text-2xl">消息</h2>
+    <h2 class="px-2 text-2xl">消息</h2>
 
     <KunDivider />
 
@@ -38,5 +38,19 @@ asideItems.value = contact.value ? contact.value : []
       :key="index"
       :room="room"
     />
+
+    <div class="block p-2 sm:hidden">
+      <h2 class="text-lg">提示</h2>
+      <div>本消息系统尚在开发中, 但是功能应该足够用</div>
+      <div>如果您有任何问题, 请查看这个话题</div>
+      <a
+        href="https://www.kungal.com/zh-cn/topic/1650"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-primary underline"
+      >
+        [公告] 有关论坛消息系统的说明
+      </a>
+    </div>
   </aside>
 </template>

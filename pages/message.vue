@@ -1,6 +1,5 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'message',
   middleware: 'auth'
 })
 
@@ -15,7 +14,7 @@ onMounted(() => (messageStatus.value = 'online'))
   <KunCard
     :is-hoverable="false"
     :is-transparent="false"
-    content-class="flex-row h-[calc(100dvh-120px)] gap-3"
+    content-class="flex-row h-[calc(100dvh-120px)]"
   >
     <MessageAsideContainer />
     <NuxtPage />

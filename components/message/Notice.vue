@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="w-full">
+  <div class="hidden w-full pl-3 sm:block">
     <h2 class="text-lg">提示</h2>
     <div>本消息系统尚在开发中, 但是功能应该足够用</div>
     <div>如果您有任何问题, 请查看这个话题</div>

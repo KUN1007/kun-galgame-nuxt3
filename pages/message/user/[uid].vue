@@ -1,6 +1,5 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'message',
   middleware: 'auth'
 })
 
@@ -10,7 +9,7 @@ const uid = parseInt((route.params as { uid: string }).uid)
 </script>
 
 <template>
-  <div class="h-full w-full">
+  <div class="h-full w-full pl-3">
     <ClientOnly>
       <MessagePmHeader :uid="uid" />
     </ClientOnly>
