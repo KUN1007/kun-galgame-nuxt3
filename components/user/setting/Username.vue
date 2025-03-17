@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const message = useComponentMessageStore()
 
-const refresh = inject<() => Promise<void>>('refresh')
 const inputValue = ref('')
 
 const handleChangeUsername = async () => {
@@ -25,30 +24,23 @@ const handleChangeUsername = async () => {
 
   if (result) {
     useMessage(10124, 'success')
-    await refresh?.()
   }
 }
 </script>
 
 <template>
-  <div class="username">
-    <div class="title">更改用户名</div>
-    <p>
-      用户名为 1~17 位任意字符, 用户名不可重复，更改用户名将会消耗您 17 萌萌点
-    </p>
+  <KunCard :is-hoverable="false" content-class="space-y-3">
+    <div>
+      <span>更改用户名</span>
+      <p class="text-default-500 text-sm">
+        用户名为 1~17 位任意字符, 用户名不可重复，更改用户名将会消耗您 17 萌萌点
+      </p>
+    </div>
+
     <KunInput type="text" v-model="inputValue" />
-    <KunButton @click="handleChangeUsername">确定更改</KunButton>
-  </div>
+
+    <div class="flex justify-end">
+      <KunButton @click="handleChangeUsername">确定更改</KunButton>
+    </div>
+  </KunCard>
 </template>
-
-<style lang="scss" scoped>
-p {
-  margin: 10px 0;
-  font-size: 13px;
-}
-
-input {
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-</style>

@@ -18,7 +18,7 @@ const fullPath = computed(() =>
 
 const iconMap: Record<string, string> = {
   profile: 'lucide:user-round',
-  settings: 'lucide:settings',
+  setting: 'lucide:settings',
   email: 'lucide:mail',
   password: 'lucide:key-round',
   topic: 'lucide:square-gantt-chart',

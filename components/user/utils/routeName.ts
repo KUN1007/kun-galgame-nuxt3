@@ -13,8 +13,8 @@ export const navBarRoute: Ref<Nav[]> = ref([
     permission: [1, 2, 3, 4]
   },
   {
-    name: 'settings',
-    router: 'settings',
+    name: 'setting',
+    router: 'setting',
     permission: [4]
   },
   {

@@ -5,7 +5,6 @@ const props = defineProps<{
   user: UserInfo
 }>()
 
-const refresh = inject<() => Promise<void>>('refresh')
 const bioValue = ref('')
 const user = computed(() => props.user)
 
@@ -29,7 +28,6 @@ const handleChangeBio = async () => {
   if (result) {
     useMessage(10117, 'success')
     bioValue.value = ''
-    await refresh?.()
   }
 }
 
@@ -39,27 +37,18 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bio">
-    <div class="title">更改签名 (107 字之内)</div>
+  <KunCard :is-hoverable="false" content-class="space-y-3">
+    <div>更改签名 (107 字之内)</div>
     <KunTextarea
       name="bio"
       placeholder="输入您的新签名，最大 107 个字符"
-      rows="5"
+      :rows="5"
       v-model="bioValue"
     >
     </KunTextarea>
 
-    <KunButton @click="handleChangeBio">确定更改</KunButton>
-  </div>
+    <div class="flex justify-end">
+      <KunButton @click="handleChangeBio">确定更改</KunButton>
+    </div>
+  </KunCard>
 </template>
-
-<style lang="scss" scoped>
-.bio {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.title {
-  margin-bottom: 10px;
-}
-</style>

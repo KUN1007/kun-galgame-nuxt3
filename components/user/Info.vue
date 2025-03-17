@@ -5,9 +5,10 @@ import type { UserInfo } from '~/types/api/user'
 const props = defineProps<{
   user: UserInfo
 }>()
+const user = computed(() => props.user)
 
 const rolesName = () => {
-  const roles = props.user.roles
+  const roles = user.value.roles
   if (roles === 1) return 'user'
   if (roles === 2) return 'admin'
   if (roles === 3) return 'SU'
@@ -15,7 +16,7 @@ const rolesName = () => {
 }
 
 const statusName = () => {
-  const status = props.user.status
+  const status = user.value.status
   if (status === 0) return 'normal'
   if (status === 1) return 'banned'
   return ''

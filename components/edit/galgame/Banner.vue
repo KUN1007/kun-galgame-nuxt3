@@ -19,11 +19,11 @@ onMounted(async () => {
     </p>
     <KunUpload
       :initial-image="initialImageUrl"
-      width="300px"
       :size="1920"
       :aspect="16 / 9"
       hint="预览图不可包含 R18 等敏感内容"
       @set-image="(img) => saveImage(img, `kun-galgame-publish-banner`)"
+      class-name="w-64"
     />
   </div>
 </template>

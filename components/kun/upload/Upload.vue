@@ -4,13 +4,20 @@ import { checkImageValid, resizeImage } from './handleFileChange'
 import 'vue-advanced-cropper/dist/style.css'
 import 'vue-advanced-cropper/dist/theme.compact.css'
 
-const props = defineProps<{
-  width: string
-  size: number
-  aspect: number
-  initialImage?: string
-  hint?: string
-}>()
+const props = withDefaults(
+  defineProps<{
+    size: number
+    aspect: number
+    initialImage?: string
+    hint?: string
+    className?: string
+  }>(),
+  {
+    initialImage: '',
+    hint: '',
+    className: ''
+  }
+)
 
 const emits = defineEmits<{
   setImage: [img: Blob]
@@ -96,9 +103,14 @@ const handleApplyCrop = () => {
     <div
       ref="upload"
       tabindex="0"
-      class="border-default-300 hover:border-default-400 relative cursor-pointer rounded-lg border-2 border-dashed transition-colors"
-      :class="{ 'bg-gray-50': !selectedFileUrl && !initialImage }"
-      :style="{ width: props.width, 'aspect-ratio': props.aspect }"
+      :class="
+        cn(
+          'border-default-300 hover:border-default-400 relative cursor-pointer rounded-lg border-2 border-dashed transition-colors',
+          !selectedFileUrl && !initialImage && 'bg-default-50',
+          className
+        )
+      "
+      :style="{ 'aspect-ratio': props.aspect }"
       @drop="handleDrop"
       @dragover="handleDragOver"
       @click="handleClickUpload"

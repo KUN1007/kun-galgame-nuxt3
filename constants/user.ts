@@ -1,6 +1,6 @@
 export const KUN_USER_PAGE_NAV_MAP: Record<string, string> = {
   profile: '个人信息',
-  settings: '信息设置',
+  setting: '信息设置',
   email: '邮箱设置',
   password: '密码设置',
   topic: '话题',
