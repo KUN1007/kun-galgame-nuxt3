@@ -14,14 +14,10 @@ const isRecentlyUpvoted = computed(() => {
 </script>
 
 <template>
-  <KunCard
-    :is-pressable="true"
-    content-class="gap-2"
-    :href="`/topic/${topic.tid}`"
-  >
+  <NuxtLink class="space-y-2" :to="`/topic/${topic.tid}`">
     <div class="flex items-start justify-between gap-4">
       <h3
-        class="line-clamp-2 text-lg font-medium text-gray-900 dark:text-gray-100"
+        class="hover:text-primary line-clamp-2 text-lg font-medium transition-colors"
       >
         {{ topic.title }}
       </h3>
@@ -57,5 +53,5 @@ const isRecentlyUpvoted = computed(() => {
         </span>
       </div>
     </div>
-  </KunCard>
+  </NuxtLink>
 </template>
