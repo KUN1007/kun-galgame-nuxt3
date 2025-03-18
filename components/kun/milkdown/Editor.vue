@@ -17,17 +17,9 @@ import { automd } from '@milkdown/plugin-automd'
 
 // Custom plugins
 import { kunUploader, kunUploadWidgetFactory } from './plugins/upload/uploader'
-// import { insertLinkPlugin } from './plugins/hyperlinkInsert'
-// import LinkUpdatePopup from './plugins/LinkUpdatePopup.vue'
 import { tooltipFactory } from '@milkdown/plugin-tooltip'
 import Tooltip from './plugins/tooltip/Tooltip.vue'
-import { $prose, replaceAll } from '@milkdown/utils'
-import { Plugin } from '@milkdown/prose/state'
-// import {
-//   mentionsPlugin,
-//   mentionsPluginOptions
-// } from './plugins/mention/mentionPlugin'
-// import { MentionsListDropdown } from './plugins/mention/MentionsListDropdown'
+import { replaceAll } from '@milkdown/utils'
 import {
   stopLinkCommand,
   linkCustomKeymap
@@ -121,8 +113,6 @@ const editorInfo = useEditor((root) =>
           refractor.register(typescript)
         }
       })
-
-      useTempEditStore().editorContext = ctx
 
       ctx.set(tooltip.key, {
         view: pluginViewFactory({

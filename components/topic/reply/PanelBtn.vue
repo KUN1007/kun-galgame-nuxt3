@@ -6,7 +6,6 @@ const tid = computed(() => {
   return parseInt((route.params as { tid: string }).tid)
 })
 
-const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isEdit, isReplyRewriting, replyRewrite, tempReply } =
   storeToRefs(useTempReplyStore())
 const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
@@ -81,7 +80,6 @@ const handleRewrite = async () => {
   if (result) {
     useMessage(10244, 'success')
     useTempReplyStore().resetRewriteReplyData()
-    isShowAdvance.value = false
     isEdit.value = false
   }
 }

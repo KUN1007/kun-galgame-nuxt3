@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const route = useRoute()
 
-const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
 const { isEdit } = storeToRefs(useTempReplyStore())
 
@@ -24,11 +23,6 @@ const data = await useFetch(`/api/topic/${tid.value}`, {
   }
 })
 
-const resetPanelStatus = () => {
-  isEdit.value = false
-  isShowAdvance.value = false
-}
-
 onBeforeRouteLeave(async (_, __, next) => {
   if (isReplyRewriting.value) {
     const res =
@@ -37,7 +31,7 @@ onBeforeRouteLeave(async (_, __, next) => {
       )
     if (res) {
       useTempReplyStore().resetRewriteReplyData()
-      resetPanelStatus()
+      isEdit.value = false
       next()
     } else {
       next(false)
@@ -46,11 +40,10 @@ onBeforeRouteLeave(async (_, __, next) => {
     next()
   }
   isEdit.value = false
-  isShowAdvance.value = false
 })
 
 onBeforeMount(() => {
-  resetPanelStatus()
+  isEdit.value = false
 })
 
 const getFirstImageSrc = (htmlString: string) => {

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { KUN_TOPIC_REPLY_PANEL_POSITION_MAP } from '~/constants/topic'
 
-const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
 const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 const { isEdit } = storeToRefs(useTempReplyStore())
@@ -22,7 +21,6 @@ const handleClosePanel = async () => {
       return
     }
   }
-  isShowAdvance.value = false
   isEdit.value = false
 }
 </script>
