@@ -50,7 +50,11 @@ watch(
 
 <template>
   <div class="flex size-full items-center justify-center">
-    <KunCard :is-hoverable="false" class-name="w-88 p-8 select-none">
+    <KunCard
+      :is-transparent="false"
+      :is-hoverable="false"
+      class-name="w-88 p-8 select-none"
+    >
       <form
         class="flex h-full flex-col items-center justify-center"
         @submit.prevent

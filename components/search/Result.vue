@@ -5,20 +5,13 @@ import type {
   SearchResultUser,
   SearchResultReply,
   SearchResultComment,
-  SearchType
+  SearchType,
+  SearchResult
 } from '~/types/api/search'
-
-type ResultTypeMap = {
-  topic: SearchResultTopic[]
-  galgame: SearchResultGalgame[]
-  user: SearchResultUser[]
-  reply: SearchResultReply[]
-  comment: SearchResultComment[]
-}
 
 const props = defineProps<{
   type: SearchType
-  results: ResultTypeMap[keyof ResultTypeMap]
+  results: SearchResult[]
 }>()
 
 const isTopicResults = (results: unknown[]): results is SearchResultTopic[] =>

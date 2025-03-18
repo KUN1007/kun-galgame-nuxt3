@@ -1,4 +1,4 @@
-import { reportSection } from '~/pages/report/constant'
+import { reportSection } from '~/constants/report'
 import ReportModel from '~/server/models/report'
 
 import type { ReportSubmitRequestData } from '~/types/api/report'

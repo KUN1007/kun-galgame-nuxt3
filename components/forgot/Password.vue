@@ -66,14 +66,15 @@ const handleChangePassword = async () => {
   <div class="flex size-full items-center justify-center">
     <KunCard
       :is-hoverable="false"
+      :is-transparent="false"
       class-name="w-88 p-8 select-none"
       content-class="space-y-6"
     >
-      <div class="flex flex-col items-center justify-center">
+      <div class="flex flex-col items-center justify-center space-y-3">
         <KunButton rounded="full" :is-icon-only="true" size="xl" variant="flat">
           <Icon name="lucide:lock" />
         </KunButton>
-        <h2>找回密码</h2>
+        <h2 class="text-xl">找回密码</h2>
       </div>
 
       <Transition mode="out-in" name="slide">
