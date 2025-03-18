@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { kunUserTopicNavItem } from '~/constants/user'
 import type { TopicType } from '~/types/api/user'
 
 const props = defineProps<{
@@ -12,6 +13,10 @@ const pageData = reactive({
   type: props.type
 })
 
+const activeTab = computed(
+  () => useRoute().fullPath.split('/').pop() || 'publish'
+)
+
 const { data, status } = await useFetch(`/api/user/${props.uid}/topics`, {
   method: 'GET',
   query: pageData,
@@ -20,63 +25,29 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/topics`, {
 </script>
 
 <template>
-  <div class="topic" v-if="data && data.topics.length">
-    <div class="item" v-for="(topic, index) in data.topics" :key="index">
-      <NuxtLink :to="`/topic/${topic.tid}`">
-        <div class="title">
-          {{ topic.title }}
-        </div>
-        <div class="time">
-          {{ formatDate(topic.time, { isShowYear: true }) }}
-        </div>
-      </NuxtLink>
-    </div>
+  <div class="space-y-3">
+    <KunTab :items="kunUserTopicNavItem(uid)" v-model="activeTab" size="sm" />
 
-    <KunPagination
-      class="pagination"
-      v-if="data.totalCount > 50"
-      :page="pageData.page"
-      :limit="pageData.limit"
-      :sum="data.totalCount"
-      :status="status"
-      @set-page="(newPage) => (pageData.page = newPage)"
-    />
+    <div class="flex flex-col space-y-3" v-if="data && data.topics.length">
+      <KunCard v-for="(topic, index) in data.topics" :key="index">
+        <NuxtLink :to="`/topic/${topic.tid}`">
+          <div>
+            {{ topic.title }}
+          </div>
+          <div class="text-default-500 text-sm">
+            {{ formatDate(topic.time, { isShowYear: true }) }}
+          </div>
+        </NuxtLink>
+      </KunCard>
+
+      <KunPagination
+        v-if="data.totalCount > 50"
+        :page="pageData.page"
+        :limit="pageData.limit"
+        :sum="data.totalCount"
+        :status="status"
+        @set-page="(newPage) => (pageData.page = newPage)"
+      />
+    </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.item {
-  width: 100%;
-  margin-top: 17px;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-  cursor: pointer;
-
-  a {
-    border-radius: 10px;
-    padding: 10px;
-    height: 100%;
-    color: var(--kungalgame-font-color-3);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.2s;
-
-    &:hover {
-      color: var(--kungalgame-blue-5);
-      background-color: var(--kungalgame-trans-blue-0);
-    }
-  }
-}
-
-.title {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.time {
-  font-size: small;
-}
-</style>

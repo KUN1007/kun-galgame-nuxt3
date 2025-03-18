@@ -49,7 +49,9 @@ const handleCollapsed = (item: Nav) => {
 </script>
 
 <template>
-  <div class="scrollbar-hide h-full w-10 shrink-0 overflow-y-auto sm:w-40">
+  <div
+    class="scrollbar-hide h-full w-10 shrink-0 space-y-1 overflow-y-auto sm:w-40"
+  >
     <div
       v-for="(kun, index) in nav"
       :key="index"
@@ -58,46 +60,23 @@ const handleCollapsed = (item: Nav) => {
       <KunButton
         :full-width="true"
         :variant="
-          fullPath === `/user/${currentPageUid}/${kun.router}`
+          fullPath === `/user/${currentPageUid}/${kun.router.split('/')[0]}`
             ? 'flat'
             : 'light'
         "
         size="lg"
-        :class-name="cn('gap-2 justify-start', kun.collapsed ? 'mb-2' : 'mb-1')"
+        class-name="gap-2 justify-start text-foreground"
         @click="handleCollapsed(kun)"
       >
         <Icon
-          :class="
-            fullPath === `/user/${currentPageUid}/${kun.router}`
-              ? ''
-              : 'text-foreground'
-          "
+          class="text-inherit"
           v-if="iconMap[kun.name]"
           :name="iconMap[kun.name]"
         />
-        <span
-          :class="
-            cn(
-              'hidden sm:block',
-              fullPath === `/user/${currentPageUid}/${kun.router}`
-                ? ''
-                : 'text-foreground'
-            )
-          "
-        >
+        <span class="hidden text-inherit sm:block">
           {{ KUN_USER_PAGE_NAV_MAP[kun.name] }}
         </span>
-        <Icon
-          v-if="kun.collapsed !== undefined"
-          :name="
-            !kun.collapsed ? 'lucide:chevron-down' : 'lucide:chevron-right'
-          "
-        />
       </KunButton>
-
-      <div v-if="kun.child && !kun.collapsed" class="bg-default-100 rounded-lg">
-        <UserNavItem :uid="uid" :nav="kun.child" />
-      </div>
     </div>
   </div>
 </template>

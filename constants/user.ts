@@ -1,3 +1,30 @@
+import type { KunTabItem } from '~/components/kun/tab/type'
+
+export const kunUserTopicNavItem = (uid: number): KunTabItem[] => {
+  return [
+    {
+      value: 'publish',
+      textValue: '已发布',
+      href: `/user/${uid}/topic/publish`
+    },
+    {
+      value: 'like',
+      textValue: '已点赞',
+      href: `/user/${uid}/topic/like`
+    },
+    {
+      value: 'upvote',
+      textValue: '已推',
+      href: `/user/${uid}/topic/upvote`
+    },
+    {
+      value: 'favorite',
+      textValue: '已收藏',
+      href: `/user/${uid}/topic/favorite`
+    }
+  ]
+}
+
 export const KUN_USER_PAGE_NAV_MAP: Record<string, string> = {
   profile: '个人信息',
   setting: '信息设置',

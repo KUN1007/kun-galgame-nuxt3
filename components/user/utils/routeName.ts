@@ -29,57 +29,13 @@ export const navBarRoute: Ref<Nav[]> = ref([
   },
   {
     name: 'topic',
-    collapsed: true,
     permission: [1, 2, 3, 4],
-    child: [
-      {
-        name: 'publish',
-        router: 'topic/publish',
-        permission: [1, 2, 3, 4]
-      },
-      {
-        name: 'like',
-        router: 'topic/like',
-        permission: [1, 2, 3, 4]
-      },
-      {
-        name: 'upvote',
-        router: 'topic/upvote',
-        permission: [1, 2, 3, 4]
-      },
-      {
-        name: 'favorite',
-        router: 'topic/favorite',
-        permission: [1, 2, 3, 4]
-      }
-    ]
+    router: 'topic/publish'
   },
   {
     name: 'galgame',
-    collapsed: true,
     permission: [1, 2, 3, 4],
-    child: [
-      {
-        name: 'publish',
-        router: 'galgame/publish',
-        permission: [1, 2, 3, 4]
-      },
-      {
-        name: 'like',
-        router: 'galgame/like',
-        permission: [1, 2, 3, 4]
-      },
-      {
-        name: 'favorite',
-        router: 'galgame/favorite',
-        permission: [1, 2, 3, 4]
-      },
-      {
-        name: 'contribute',
-        router: 'galgame/contribute',
-        permission: [1, 2, 3, 4]
-      }
-    ]
+    router: 'galgame/publish'
   },
   {
     name: 'reply',

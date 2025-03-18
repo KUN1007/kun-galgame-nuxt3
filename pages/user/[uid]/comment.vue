@@ -7,9 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <UserList>
-    <UserComment :uid="user.uid" />
+  <UserComment :uid="user.uid" />
 
-    <KunNull v-if="!user.comment" type="null" />
-  </UserList>
+  <KunNull v-if="!user.comment" type="null" />
 </template>

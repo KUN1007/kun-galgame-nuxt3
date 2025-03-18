@@ -27,9 +27,7 @@ const count = computed(() => {
 </script>
 
 <template>
-  <UserList>
-    <UserTopic :uid="user.uid" :type="topicType" />
+  <UserTopic :uid="user.uid" :type="topicType" />
 
-    <KunNull v-if="!count" type="null" />
-  </UserList>
+  <KunNull v-if="!count" type="null" />
 </template>
