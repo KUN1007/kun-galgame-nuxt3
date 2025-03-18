@@ -11,7 +11,6 @@ export const useTempEditStore = defineStore('tempEdit', {
     category: [],
     section: [],
 
-    textCount: 0,
     isTopicRewriting: false,
 
     autosaveCount: 0,
@@ -27,9 +26,7 @@ export const useTempEditStore = defineStore('tempEdit', {
       this.category = []
       this.section = []
 
-      this.textCount = 0
       this.isTopicRewriting = false
-
       this.autosaveCount = 0
     }
   }

@@ -16,7 +16,6 @@ interface ReplyRewriteTemp {
 }
 
 export interface ReplyStoreTemp {
-  textCount: number
   isEdit: boolean
   isScrollToTop: boolean
   scrollToReplyId: number
@@ -28,7 +27,6 @@ export interface ReplyStoreTemp {
 
 export interface ReplyStorePersist {
   mode: 'preview' | 'code'
-  textCount: number
 
   replyDraft: ReplyDraft
 }

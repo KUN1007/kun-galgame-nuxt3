@@ -14,12 +14,10 @@ const {
   tags: rewriteTags,
   category: rewriteCategory,
   section: rewriteSection,
-  textCount: rewriteTextCount,
   isTopicRewriting
 } = storeToRefs(useTempEditStore())
 
 const {
-  textCount,
   title,
   content,
   tags,
@@ -31,6 +29,7 @@ const isPublishing = ref(false)
 const section = isTopicRewriting.value ? rewriteSection : editSection
 
 const handlePublish = async () => {
+  const textCount = markdownToText(content.value).trim().length
   const requestData: EditCreateTopicRequestData = {
     title: title.value,
     content: content.value,
@@ -39,7 +38,7 @@ const handlePublish = async () => {
     category: category.value,
     section: editSection.value
   }
-  if (!checkTopicPublish(textCount.value, requestData)) {
+  if (!checkTopicPublish(textCount, requestData)) {
     return
   }
 
@@ -70,6 +69,7 @@ const handlePublish = async () => {
 }
 
 const handleRewrite = async () => {
+  const textCount = markdownToText(rewriteContent.value).trim().length
   const requestData: EditUpdateTopicRequestData = {
     tid: tid.value,
     title: rewriteTitle.value,
@@ -79,7 +79,7 @@ const handleRewrite = async () => {
     section: rewriteSection.value,
     edited: Date.now().toString()
   }
-  if (!checkTopicPublish(rewriteTextCount.value, requestData)) {
+  if (!checkTopicPublish(textCount, requestData)) {
     return
   }
 
