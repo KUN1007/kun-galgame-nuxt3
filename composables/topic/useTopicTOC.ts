@@ -19,12 +19,12 @@ export const useTopicTOC = () => {
 
     const elements = Array.from(
       document.querySelectorAll(
-        'article h1, article h2, article h3, .kun-reply'
+        '.kun-master h1, .kun-master h2, .kun-master h3, .kun-reply'
       )
     )
 
     headings.value = elements.map((element) => {
-      if (element.matches('h1, h2, h3')) {
+      if (element.matches('.kun-master h1, .kun-master h2, .kun-master h3')) {
         return {
           id: element.id,
           text: element.textContent || '',
