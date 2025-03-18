@@ -48,18 +48,25 @@ watch(
       enter-active-class="animate__animated animate__fadeInUp animate__faster"
       leave-active-class="animate__animated animate__fadeOutDown animate__faster"
     >
-      <div class="container" v-if="showInfo">
+      <div
+        class="bg-background fixed right-0 bottom-0 left-0 z-2000 min-h-30 w-full border-t"
+        v-if="showInfo"
+      >
         <Transition
           enter-active-class="animate__animated animate__swing"
           appear
         >
-          <div class="lass">
-            <span>{{ name }}</span>
+          <div class="loli absolute -top-10 pl-24 text-lg sm:pl-32">
+            <span
+              class="bg-background px-10 py-1 text-center text-lg sm:text-2xl"
+            >
+              {{ name }}
+            </span>
           </div>
         </Transition>
 
-        <div class="avatar">
-          <NuxtImg :src="loli" />
+        <div class="pointer-events-none absolute mt-2 ml-6 select-none">
+          <NuxtImg class="h-16 w-full sm:h-24" :src="loli" />
         </div>
 
         <Transition
@@ -67,124 +74,53 @@ watch(
           appear
         >
           <!-- A ha ha ha! You probably didn't expect that this was inspired by しゅがてん！-Sugarfull tempering- -->
-          <div class="info">
+          <div class="info mt-4 mr-8 ml-24 text-base sm:ml-32 sm:text-lg">
             {{ `「 ${infoMsg} 」` }}
           </div>
         </Transition>
 
-        <div class="close" @click="handleClose">
-          <Icon class="icon" name="lucide:x" />
-        </div>
+        <KunButton
+          color="default"
+          variant="light"
+          class-name="absolute top-0 right-0"
+          rounded="full"
+          size="lg"
+          :is-icon-only="true"
+          @click="handleClose"
+        >
+          <Icon name="lucide:x" />
+        </KunButton>
 
-        <span class="progress"></span>
+        <span
+          :style="{
+            width: progressWidth
+          }"
+          class="bg-primary absolute top-0 right-0 h-1.5"
+        />
       </div>
     </Transition>
   </Teleport>
 </template>
 
 <style lang="scss" scoped>
-.container {
-  min-height: 120px;
-  width: 100%;
-  border-top: 1px solid var(--kungalgame-blue-2);
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-}
-
-.lass {
-  padding: 5px;
-  font-size: 20px;
-  position: absolute;
-  top: -41px;
-  padding-left: 150px;
-  border-bottom: none;
-  filter: drop-shadow(2px 4px 3px var(--kungalgame-trans-blue-4));
+.loli {
+  filter: drop-shadow(2px 4px 3px var(--color-primary-300));
 
   span {
-    padding: 0 50px;
-    text-align: center;
-    background-color: var(--kungalgame-trans-white-2);
-    font-size: 24px;
     clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0 50%);
   }
 }
 
-.avatar {
-  position: absolute;
-  margin-top: 10px;
-  margin-left: 20px;
-  pointer-events: none;
-  user-select: none;
-
-  img {
-    height: 100px;
-    width: 100%;
-  }
-}
-
 .info {
-  margin-top: 20px;
-  margin-left: 150px;
-  margin-right: 50px;
-  font-size: 20px;
-  color: var(--kungalgame-white);
+  color: var(--color-white);
   text-shadow:
-    0 1px var(--kungalgame-font-color-3),
-    1px 0 var(--kungalgame-font-color-3),
-    -1px 0 var(--kungalgame-font-color-3),
-    0 -1px var(--kungalgame-font-color-3),
-    1px 2px var(--kungalgame-font-color-3),
-    1px 2px var(--kungalgame-font-color-3),
-    1px 2px var(--kungalgame-font-color-3),
-    1px 2px var(--kungalgame-font-color-3);
-}
-
-.close {
-  font-size: 30px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  color: var(--kungalgame-font-color-1);
-}
-
-.progress {
-  position: absolute;
-  height: 5px;
-  width: v-bind(progressWidth);
-  background-color: var(--kungalgame-blue-5);
-  top: 0;
-  right: 0;
-}
-
-@media (max-width: 700px) {
-  .container {
-    min-height: 77px;
-  }
-
-  .lass {
-    padding: 5px;
-    font-size: 15px;
-    padding-left: 20px;
-    top: -33px;
-
-    span {
-      font-size: 17px;
-    }
-  }
-  .info {
-    margin-top: 10px;
-    margin-right: 30px;
-    margin-left: 77px;
-  }
-
-  .avatar {
-    img {
-      height: 50px;
-      width: 100%;
-    }
-  }
+    0 1px var(--color-foreground),
+    1px 0 var(--color-foreground),
+    -1px 0 var(--color-foreground),
+    0 -1px var(--color-foreground),
+    1px 2px var(--color-foreground),
+    1px 2px var(--color-foreground),
+    1px 2px var(--color-foreground),
+    1px 2px var(--color-foreground);
 }
 </style>
