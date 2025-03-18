@@ -26,6 +26,11 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/topics`, {
 
 <template>
   <div class="space-y-3">
+    <KunHeader
+      name="话题列表"
+      description="这是您的话题列表, 高级功能还在咕咕咕, 呜呜呜呜呜"
+    />
+
     <KunTab
       :items="kunUserTopicNavItem(uid)"
       :model-value="activeTab"

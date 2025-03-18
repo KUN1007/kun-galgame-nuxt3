@@ -26,7 +26,7 @@ const currentUserUid = usePersistUserStore().uid
 </script>
 
 <template>
-  <div v-if="user" class="w-full space-y-12">
+  <div v-if="user" class="w-full space-y-8">
     <div class="flex items-center space-x-3">
       <div class="flex-1">
         <h2 class="flex items-center gap-2 text-2xl font-bold">

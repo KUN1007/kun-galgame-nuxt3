@@ -31,13 +31,13 @@ useHead({
     class-name="m-auto"
     content-class="h-[calc(100dvh-120px)]"
   >
-    <div class="flex h-full w-full">
+    <div class="flex h-full w-full gap-3">
       <UserNavBar
         v-if="data && data !== 'banned'"
         :user="{ uid: data.uid, name: data.name, avatar: data.avatar }"
       />
 
-      <div class="h-full w-full overflow-y-auto px-3">
+      <div class="h-full w-full overflow-y-auto">
         <NuxtPage :user="data" />
       </div>
     </div>

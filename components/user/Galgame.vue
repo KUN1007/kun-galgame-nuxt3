@@ -26,6 +26,11 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/galgames`, {
 
 <template>
   <div class="space-y-3">
+    <KunHeader
+      name="Galgame 列表"
+      description="这是您的 Galgame 列表, 为什么这里的 Galgame 没有预览图! 因为我还在咕咕咕!"
+    />
+
     <KunTab
       :items="kunUserGalgameNavItem(uid)"
       :model-value="activeTab"

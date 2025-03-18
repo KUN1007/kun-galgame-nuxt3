@@ -89,6 +89,7 @@ export interface UserGetUserReplyRequestData {
 export interface UserComment {
   tid: number
   content: string
+  time: Date | string
 }
 
 export interface UserGetUserCommentRequestData {

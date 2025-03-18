@@ -53,33 +53,33 @@ const handleResetEmail = async () => {
 </script>
 
 <template>
-  <KunCard :is-hoverable="false">
-    <form class="space-y-3" @submit.prevent>
-      <div>
-        <span class="text-xl">更改邮箱</span>
-        <p class="text-default-500 text-sm">
-          {{ `您当前的邮箱是 => ${data}` }}
-        </p>
-      </div>
+  <div class="space-y-6">
+    <KunHeader
+      name="更改邮箱"
+      :description="`您当前的邮箱是 ${data}, 更改邮箱需要给您的新邮箱发送验证码`"
+    />
 
-      <div class="space-y-2">
-        <span>请输入您的新邮箱</span>
-        <KunInput v-model="input.newEmail" type="text" />
-      </div>
+    <KunCard :is-hoverable="false">
+      <form class="space-y-3" @submit.prevent>
+        <div class="space-y-2">
+          <span>请输入您的新邮箱</span>
+          <KunInput v-model="input.newEmail" type="text" />
+        </div>
 
-      <div class="space-y-2">
-        <span>请输入您的验证码</span>
-        <KunInput v-model="input.code" type="text" />
-      </div>
+        <div class="space-y-2">
+          <span>请输入您的验证码</span>
+          <KunInput v-model="input.code" type="text" />
+        </div>
 
-      <div class="flex justify-end gap-1">
-        <KunButton @click="handleSendCode" v-if="!hasSentCodeEmail">
-          发送验证码
-        </KunButton>
-        <KunButton v-if="hasSentCodeEmail" @click="handleResetEmail">
-          确定更改邮箱
-        </KunButton>
-      </div>
-    </form>
-  </KunCard>
+        <div class="flex justify-end gap-1">
+          <KunButton @click="handleSendCode" v-if="!hasSentCodeEmail">
+            发送验证码
+          </KunButton>
+          <KunButton v-if="hasSentCodeEmail" @click="handleResetEmail">
+            确定更改邮箱
+          </KunButton>
+        </div>
+      </form>
+    </KunCard>
+  </div>
 </template>
