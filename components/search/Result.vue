@@ -38,11 +38,9 @@ const isCommentResults = (
 <template>
   <div class="result">
     <div v-if="isTopicResults(results)" class="space-y-3">
-      <HomeTopicCard
-        v-for="(topic, index) in results"
-        :key="index"
-        :topic="topic"
-      />
+      <KunCard v-for="(topic, index) in results" :key="index">
+        <HomeTopicCard :topic="topic" />
+      </KunCard>
     </div>
 
     <GalgameCard v-if="isGalgameResults(results)" :galgames="results" />
@@ -56,21 +54,15 @@ const isCommentResults = (
     </div>
 
     <div v-if="isReplyResults(results)" class="space-y-3">
-      <SearchReplyCommentCard
-        v-for="(reply, index) in results"
-        :key="index"
-        :data="reply"
-        type="reply"
-      />
+      <KunCard v-for="(reply, index) in results" :key="index">
+        <SearchReplyCommentCard :data="reply" type="reply" />
+      </KunCard>
     </div>
 
     <div v-if="isCommentResults(results)" class="space-y-3">
-      <SearchReplyCommentCard
-        v-for="(comment, index) in results"
-        :key="index"
-        :data="comment"
-        type="comment"
-      />
+      <KunCard v-for="(comment, index) in results" :key="index">
+        <SearchReplyCommentCard :data="comment" type="comment" />
+      </KunCard>
     </div>
   </div>
 </template>

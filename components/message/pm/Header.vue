@@ -27,14 +27,14 @@ const handleReload = () => location.reload()
 
     <KunAvatar :user="user" />
 
-    <h2 class="relative flex items-center">
+    <h2 class="relative flex items-center gap-2">
       <span>{{ user.name }}</span>
       <span
         class="absolute -right-6 h-4 w-4 rounded-full"
         :class="socket.connected ? 'bg-success' : 'bg-default'"
       />
       <span
-        class="gap-2 text-base"
+        class="flex cursor-pointer items-center space-x-1 text-base"
         v-if="!socket.connected"
         @click="handleReload"
       >

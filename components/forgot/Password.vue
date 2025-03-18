@@ -63,108 +63,80 @@ const handleChangePassword = async () => {
 </script>
 
 <template>
-  <Transition mode="out-in" name="slide">
-    <form class="email" v-if="flag" @submit.prevent>
-      <div class="input-container">
-        <label for="email">您的邮箱</label>
-        <KunInput
-          id="email"
-          v-model="input.email"
-          autocomplete="email"
-          type="text"
+  <div class="flex size-full items-center justify-center">
+    <KunCard
+      :is-hoverable="false"
+      class-name="w-88 p-8 select-none"
+      content-class="space-y-6"
+    >
+      <div class="flex flex-col items-center justify-center">
+        <KunButton rounded="full" :is-icon-only="true" size="xl" variant="flat">
+          <Icon name="lucide:lock" />
+        </KunButton>
+        <h2>找回密码</h2>
+      </div>
+
+      <Transition mode="out-in" name="slide">
+        <form class="space-y-6" v-if="flag" @submit.prevent>
+          <div class="w-full">
+            <label for="email">您的邮箱</label>
+            <KunInput
+              id="email"
+              v-model="input.email"
+              autocomplete="email"
+              type="text"
+            />
+          </div>
+
+          <div class="w-full">
+            <label for="code">验证码</label>
+            <KunInput id="code" v-model="input.code" type="text" />
+          </div>
+        </form>
+
+        <form class="space-y-6" v-else-if="!flag" @submit.prevent>
+          <input autocomplete="username" type="text" hidden />
+
+          <div class="w-full">
+            <label for="new-password">新密码</label>
+            <KunInput
+              id="new-password"
+              v-model="input.newPassword"
+              autocomplete="new-password"
+              type="password"
+            />
+          </div>
+
+          <div class="w-full">
+            <label for="new-password">确认密码</label>
+            <KunInput
+              id="password"
+              v-model="input.confirmPassword"
+              autocomplete="new-password"
+              type="password"
+            />
+          </div>
+        </form>
+      </Transition>
+
+      <div class="flex justify-end gap-1">
+        <KunVerificationCode
+          v-if="flag"
+          @click="handleClickSendCode"
+          class="code"
+          :email="input.email"
+          :is-send-code="isSendCode"
+          to="forgot"
         />
+
+        <KunButton v-if="flag" @click="handleClickNext">下一步</KunButton>
+
+        <KunButton v-if="!flag" @click="handleClickPrev">上一步</KunButton>
+
+        <KunButton v-if="!flag" @click="handleChangePassword">
+          确定更改
+        </KunButton>
       </div>
-
-      <div class="input-container">
-        <label for="code">验证码</label>
-        <KunInput id="code" v-model="input.code" type="text" />
-      </div>
-    </form>
-
-    <form class="password" v-else-if="!flag" @submit.prevent>
-      <input autocomplete="username" type="text" hidden />
-
-      <div class="input-container">
-        <label for="new-password">新密码</label>
-        <KunInput
-          id="new-password"
-          v-model="input.newPassword"
-          autocomplete="new-password"
-          type="password"
-        />
-      </div>
-      <div class="input-container">
-        <label for="new-password">确认密码</label>
-        <KunInput
-          id="password"
-          v-model="input.confirmPassword"
-          autocomplete="new-password"
-          type="password"
-        />
-      </div>
-    </form>
-  </Transition>
-
-  <div class="btn">
-    <KunVerificationCode
-      v-if="flag"
-      @click="handleClickSendCode"
-      class="code"
-      :email="input.email"
-      :is-send-code="isSendCode"
-      to="forgot"
-    />
-
-    <KunButton v-if="flag" @click="handleClickNext">下一步</KunButton>
-
-    <KunButton v-if="!flag" @click="handleClickPrev">上一步</KunButton>
-
-    <KunButton v-if="!flag" @click="handleChangePassword">确定更改</KunButton>
+    </KunCard>
   </div>
 </template>
-
-<style lang="scss" scoped>
-form {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: 20px;
-  margin-top: 50px;
-}
-
-.input-container {
-  padding: 0 10px;
-  margin-bottom: 30px;
-  display: flex;
-  flex-direction: column;
-
-  label {
-    font-size: 14px;
-  }
-
-  .kun-input {
-    margin-top: 8px;
-  }
-}
-
-.btn {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.slide-enter-active,
-.slide-up-leave-active {
-  transition: all 0.25s ease-out;
-}
-
-.slide-enter-from {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.slide-leave-to {
-  opacity: 0;
-  transform: translateY(-30px);
-}
-</style>
