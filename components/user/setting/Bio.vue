@@ -38,7 +38,14 @@ onMounted(() => {
 
 <template>
   <KunCard :is-hoverable="false" content-class="space-y-3">
-    <div>更改签名 (107 字之内)</div>
+    <div>
+      <span class="text-xl">更改签名</span>
+      <p class="text-default-500 text-sm">
+        签名的长度在 107 字之内, 签名暂时只能使用纯文本 (但是保留换行符),
+        以后会加强的呜呜呜, 我一定不会咕咕咕的, 嗯
+      </p>
+    </div>
+
     <KunTextarea
       name="bio"
       placeholder="输入您的新签名，最大 107 个字符"

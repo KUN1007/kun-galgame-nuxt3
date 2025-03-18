@@ -35,7 +35,7 @@ const handleChangeAvatar = async () => {
   <KunCard :is-hoverable="false" content-class="space-y-3">
     <div class="flex justify-between gap-3">
       <div>
-        <span>更改头像</span>
+        <span class="text-xl">更改头像</span>
         <p class="text-default-500 text-sm">
           更改头像不是必须, 但是还是有头像比较好, 最好是小只可爱软萌的孩子, 嗯
         </p>
