@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { callCommand } from '@milkdown/utils'
 import { insertImageCommand } from '@milkdown/preset-commonmark'
-// import { insertLinkPlugin } from '../link-insert/hyperlinkInsert'
 import { commands } from './_buttonList'
 import type { UseEditorReturn } from '@milkdown/vue'
 import type { CmdKey } from '@milkdown/core'
@@ -13,7 +12,6 @@ const props = defineProps<{
 
 const { get } = props.editorInfo
 const input = ref<HTMLElement>()
-// const isShowInsertLink = ref(false)
 
 const call = <T,>(command: CmdKey<T>, payload?: T, callback?: () => void) => {
   const result = get()?.action(callCommand(command, payload))
@@ -56,7 +54,7 @@ const handleFileChange = async (event: Event) => {
 </script>
 
 <template>
-  <div class="flex items-center space-x-1">
+  <div class="flex flex-wrap items-center space-x-1">
     <KunButton
       :is-icon-only="true"
       v-for="(btn, index) in commands"
@@ -68,26 +66,6 @@ const handleFileChange = async (event: Event) => {
     >
       <Icon class="text-foreground" :name="btn.icon" />
     </KunButton>
-
-    <!-- <KunButton
-      :is-icon-only="true"
-      variant="light"
-      size="xl"
-      @click="isShowInsertLink = true"
-    >
-      <Icon class="text-foreground" name="lucide:link" />
-      <KunMilkdownPluginsLinkInsertDialog
-        :show="isShowInsertLink"
-        @insert="
-          call(
-            insertLinkPlugin.key,
-            undefined,
-            () => (isShowInsertLink = false)
-          )
-        "
-        @cancel="isShowInsertLink = false"
-      />
-    </KunButton> -->
 
     <KunButton
       :is-icon-only="true"
@@ -106,9 +84,14 @@ const handleFileChange = async (event: Event) => {
       />
     </KunButton>
 
-    <KunButton variant="light" size="xl" :is-icon-only="true">
-      <Icon class="text-foreground" name="lucide:smile-plus" />
-      <KunMilkdownPluginsEmojiContainer :editor-info="editorInfo" />
-    </KunButton>
+    <div class="group relative flex justify-center">
+      <KunButton variant="light" size="xl" :is-icon-only="true">
+        <Icon class="text-foreground" name="lucide:smile-plus" />
+      </KunButton>
+      <KunMilkdownPluginsEmojiContainer
+        class="hidden group-hover:flex"
+        :editor-info="editorInfo"
+      />
+    </div>
   </div>
 </template>
