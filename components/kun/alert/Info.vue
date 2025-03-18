@@ -2,9 +2,7 @@
 import img from './loli'
 import 'animate.css'
 
-const { showInfo, infoMsg, infoTranslateParams, durations } = storeToRefs(
-  useComponentMessageStore()
-)
+const { showInfo, infoMsg, durations } = storeToRefs(useComponentMessageStore())
 
 const { loli, name } = img
 const timer = ref<NodeJS.Timeout | null>()
