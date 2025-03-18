@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "3.1.30",
+  "version": "3.1.31",
   "packageManager": "pnpm@10.4.1",
   "private": true,
   "scripts": {
@@ -19,6 +19,11 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@iconify-json/carbon": "^1.2.8",
+    "@iconify-json/lucide": "^1.2.31",
+    "@iconify-json/svg-spinners": "^1.2.2",
+    "@iconify-json/uil": "^1.2.3",
+    "@iconify-json/uiw": "^1.2.1",
     "@nuxt/eslint": "^1.1.0",
     "@nuxt/icon": "^1.10.3",
     "@nuxt/image": "^1.9.0",

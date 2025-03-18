@@ -105,12 +105,6 @@ export default defineNuxtConfig({
     }
   },
 
-  icon: {
-    fetchTimeout: 7777,
-    provider: 'iconify',
-    serverBundle: false
-  },
-
   // Pinia store functions auto imports
   pinia: {
     storesDirs: ['./store/**']

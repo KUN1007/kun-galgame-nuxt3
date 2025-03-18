@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import type { KunSelectProps } from './type'
+import {
+  useElementBounding,
+  useEventListener,
+  useWindowSize
+} from '@vueuse/core'
 
 const props = withDefaults(defineProps<KunSelectProps>(), {
   placeholder: '',
@@ -16,6 +21,14 @@ const emit = defineEmits<{
 const stableId = useId()
 const computedId = computed(() => `kun-select-${stableId}`)
 const isOpen = ref(false)
+const showAbove = ref(false)
+const button = useTemplateRef<HTMLElement>('button')
+const dropdown = useTemplateRef<HTMLElement>('dropdown')
+
+const buttonBounds = useElementBounding(button)
+const dropdownBounds = useElementBounding(dropdown)
+const { height: windowHeight } = useWindowSize()
+
 const selectedLabel = computed(() => {
   const selected = props.options.find(
     (option) => option.value === props.modelValue
@@ -23,19 +36,29 @@ const selectedLabel = computed(() => {
   return selected?.label
 })
 
-const closeOnClickOutside = (e: MouseEvent) => {
+const updateDropdownPosition = () => {
+  if (!button.value || !dropdown.value) {
+    return
+  }
+
+  const spaceBelow = windowHeight.value - buttonBounds.bottom.value
+  const spaceAbove = buttonBounds.top.value
+  const requiredSpace = dropdownBounds.height.value + 8
+
+  showAbove.value = spaceBelow < requiredSpace && spaceAbove > requiredSpace
+}
+
+useEventListener(document, 'click', (e: MouseEvent) => {
   const target = e.target as HTMLElement
   if (!target.closest(`#${computedId.value}`)) {
     isOpen.value = false
   }
-}
-
-onMounted(() => {
-  document.addEventListener('click', closeOnClickOutside)
 })
 
-onUnmounted(() => {
-  document.removeEventListener('click', closeOnClickOutside)
+watch([isOpen, dropdownBounds.height], () => {
+  if (isOpen.value) {
+    nextTick(updateDropdownPosition)
+  }
 })
 
 const toggle = () => {
@@ -62,6 +85,7 @@ const selectOption = (value: string | number, index: number) => {
     </label>
 
     <button
+      ref="button"
       :id="computedId"
       type="button"
       class="focus:border-primary-500 focus:ring-primary-500 flex w-full cursor-pointer items-center justify-between rounded-lg border px-3 py-2 text-left shadow focus:ring-1 focus:outline-none sm:text-sm"
@@ -85,10 +109,12 @@ const selectOption = (value: string | number, index: number) => {
       />
     </button>
 
-    <Transition name="fadeIn">
+    <Transition :name="showAbove ? 'fadeDown' : 'fadeUp'">
       <div
         v-show="isOpen"
-        class="bg-background absolute z-10 mt-1 w-full rounded-md border p-1 shadow-lg"
+        ref="dropdown"
+        class="bg-background absolute z-10 w-full rounded-md border p-1 shadow-lg"
+        :class="showAbove ? 'bottom-full mb-1' : 'top-full mt-1'"
       >
         <ul
           class="scrollbar-hide max-h-60 overflow-auto rounded-md text-base focus:outline-none sm:text-sm"
@@ -121,14 +147,22 @@ const selectOption = (value: string | number, index: number) => {
 </template>
 
 <style lang="scss" scoped>
-.fadeIn-enter-active,
-.fadeIn-leave-active {
+.fadeUp-enter-active,
+.fadeUp-leave-active,
+.fadeDown-enter-active,
+.fadeDown-leave-active {
   transition: all 0.2s ease-in-out;
 }
 
-.fadeIn-enter-from,
-.fadeIn-leave-to {
+.fadeUp-enter-from,
+.fadeUp-leave-to {
   transform: translateY(-8px);
+  opacity: 0;
+}
+
+.fadeDown-enter-from,
+.fadeDown-leave-to {
+  transform: translateY(8px);
   opacity: 0;
 }
 </style>

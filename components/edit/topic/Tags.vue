@@ -90,19 +90,20 @@ watch(
         class="ring-default-500 bg-default/10 min-h-[44px] w-full rounded-lg px-6 py-3 shadow transition-all focus-within:ring-1"
       >
         <div class="flex flex-wrap gap-2">
-          <span
+          <KunBadge
+            color="primary"
+            size="md"
             v-for="(tag, index) in selectedTags"
             :key="index"
-            class="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-800"
           >
             {{ tag }}
             <button
               @click="handleTagClose(tag)"
-              class="ml-2 text-blue-600 hover:text-blue-800 focus:outline-none"
+              class="text-primary ml-2 focus:outline-none"
             >
               ×
             </button>
-          </span>
+          </KunBadge>
 
           <input
             class="placeholder-default-500 min-w-[120px] flex-grow bg-transparent text-gray-700 outline-none"
@@ -118,13 +119,16 @@ watch(
         </div>
       </div>
 
-      <button
-        v-if="inputValue"
-        @click="handleAddTag"
-        class="absolute top-1/2 right-2 -translate-y-1/2 rounded-full p-1 transition-colors hover:bg-gray-100"
-      >
-        <Icon name="lucide:plus" class="h-5 w-5 text-blue-600" />
-      </button>
+      <div class="absolute top-1/2 right-2 -translate-y-1/2">
+        <KunButton
+          :is-icon-only="true"
+          variant="flat"
+          v-if="inputValue"
+          @click="handleAddTag"
+        >
+          <Icon name="lucide:plus" class="h-5 w-5 text-blue-600" />
+        </KunButton>
+      </div>
     </div>
 
     <p class="mt-2 text-sm text-gray-600">
