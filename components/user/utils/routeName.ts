@@ -1,6 +1,7 @@
 export interface Nav {
   name: string
   router?: string
+  redirect?: string
   collapsed?: boolean
   permission?: number[]
   child?: Nav[]
@@ -30,12 +31,14 @@ export const navBarRoute: Ref<Nav[]> = ref([
   {
     name: 'topic',
     permission: [1, 2, 3, 4],
-    router: 'topic/publish'
+    redirect: 'topic/publish',
+    router: 'topic'
   },
   {
     name: 'galgame',
     permission: [1, 2, 3, 4],
-    router: 'galgame/publish'
+    redirect: 'galgame/publish',
+    router: 'galgame'
   },
   {
     name: 'reply',

@@ -21,7 +21,7 @@ const activeTab = computed(
   <div class="flex flex-col space-y-3">
     <KunTab
       :items="kunUpdateLogTabItem"
-      v-model="activeTab"
+      :model-value="activeTab"
       inner-class-name="shadow border"
       size="sm"
     />

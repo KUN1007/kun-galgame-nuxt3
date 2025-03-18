@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { kunUserGalgameNavItem } from '~/constants/user'
 import type { GalgameType } from '~/types/api/user'
 
 const props = defineProps<{
@@ -12,6 +13,10 @@ const pageData = reactive({
   type: props.type
 })
 
+const activeTab = computed(
+  () => useRoute().fullPath.split('/').pop() || 'publish'
+)
+
 const { data, status } = await useFetch(`/api/user/${props.uid}/galgames`, {
   method: 'GET',
   query: pageData,
@@ -20,59 +25,33 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/galgames`, {
 </script>
 
 <template>
-  <div class="topic" v-if="data && data.galgames.length">
-    <div class="item" v-for="(galgame, index) in data.galgames" :key="index">
-      <NuxtLink :to="`/galgame/${galgame.gid}`">
-        <div class="title">
-          {{ galgame.name['zh-cn'] }}
-        </div>
-        <div class="time">
-          {{ formatDate(galgame.time, { isShowYear: true }) }}
-        </div>
-      </NuxtLink>
-    </div>
-
-    <KunPagination
-      class="pagination"
-      v-if="data.totalCount > 50"
-      :page="pageData.page"
-      :limit="pageData.limit"
-      :sum="data.totalCount"
-      :status="status"
-      @set-page="(newPage) => (pageData.page = newPage)"
+  <div class="space-y-3">
+    <KunTab
+      :items="kunUserGalgameNavItem(uid)"
+      :model-value="activeTab"
+      size="sm"
     />
+
+    <div class="flex flex-col space-y-3" v-if="data && data.galgames.length">
+      <KunCard v-for="(galgame, index) in data.galgames" :key="index">
+        <NuxtLink :to="`/galgame/${galgame.gid}`">
+          <div>
+            {{ getPreferredLanguageText(galgame.name) }}
+          </div>
+          <div class="text-default-500 text-sm">
+            {{ formatDate(galgame.time, { isShowYear: true }) }}
+          </div>
+        </NuxtLink>
+      </KunCard>
+
+      <KunPagination
+        v-if="data.totalCount > 50"
+        :page="pageData.page"
+        :limit="pageData.limit"
+        :sum="data.totalCount"
+        :status="status"
+        @set-page="(newPage) => (pageData.page = newPage)"
+      />
+    </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.item {
-  width: 100%;
-  margin-top: 17px;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-  cursor: pointer;
-
-  a {
-    border-radius: 10px;
-    padding: 10px;
-    height: 100%;
-    color: var(--kungalgame-font-color-3);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.2s;
-
-    &:hover {
-      color: var(--kungalgame-blue-5);
-      background-color: var(--kungalgame-trans-blue-0);
-    }
-  }
-}
-
-.title {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-</style>

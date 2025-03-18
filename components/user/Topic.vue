@@ -26,7 +26,11 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/topics`, {
 
 <template>
   <div class="space-y-3">
-    <KunTab :items="kunUserTopicNavItem(uid)" v-model="activeTab" size="sm" />
+    <KunTab
+      :items="kunUserTopicNavItem(uid)"
+      :model-value="activeTab"
+      size="sm"
+    />
 
     <div class="flex flex-col space-y-3" v-if="data && data.topics.length">
       <KunCard v-for="(topic, index) in data.topics" :key="index">

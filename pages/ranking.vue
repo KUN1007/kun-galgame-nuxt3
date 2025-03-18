@@ -37,7 +37,7 @@ const sortOptions = computed(() => {
 
       <div class="flex items-center justify-between">
         <KunTab
-          v-model="activeTab"
+          :model-value="activeTab"
           :items="rankingPageTabs"
           variant="underlined"
           color="primary"

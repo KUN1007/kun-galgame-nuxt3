@@ -43,7 +43,9 @@ const handleCollapsed = (item: Nav) => {
   if (item.collapsed !== undefined) {
     item.collapsed = !item.collapsed
   } else {
-    navigateTo(`/user/${currentPageUid.value}/${item.router}`.toString())
+    navigateTo(
+      `/user/${currentPageUid.value}/${item.redirect ? item.redirect : item.router}`
+    )
   }
 }
 </script>
@@ -59,11 +61,7 @@ const handleCollapsed = (item: Nav) => {
     >
       <KunButton
         :full-width="true"
-        :variant="
-          fullPath === `/user/${currentPageUid}/${kun.router.split('/')[0]}`
-            ? 'flat'
-            : 'light'
-        "
+        :variant="fullPath.includes(kun.router) ? 'flat' : 'light'"
         size="lg"
         class-name="gap-2 justify-start text-foreground"
         @click="handleCollapsed(kun)"

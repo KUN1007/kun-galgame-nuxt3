@@ -25,6 +25,31 @@ export const kunUserTopicNavItem = (uid: number): KunTabItem[] => {
   ]
 }
 
+export const kunUserGalgameNavItem = (uid: number): KunTabItem[] => {
+  return [
+    {
+      value: 'publish',
+      textValue: '已发布',
+      href: `/user/${uid}/galgame/publish`
+    },
+    {
+      value: 'like',
+      textValue: '已点赞',
+      href: `/user/${uid}/galgame/like`
+    },
+    {
+      value: 'favorite',
+      textValue: '已推',
+      href: `/user/${uid}/galgame/favorite`
+    },
+    {
+      value: 'contribute',
+      textValue: '已贡献',
+      href: `/user/${uid}/galgame/contribute`
+    }
+  ]
+}
+
 export const KUN_USER_PAGE_NAV_MAP: Record<string, string> = {
   profile: '个人信息',
   setting: '信息设置',
