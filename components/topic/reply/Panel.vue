@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import 'animate.css'
 import { KUN_TOPIC_REPLY_PANEL_POSITION_MAP } from '~/constants/topic'
 
 const { isShowAdvance } = storeToRefs(usePersistKUNGalgameTopicStore())
@@ -31,8 +30,8 @@ const handleClosePanel = async () => {
 <template>
   <Teleport to="body" :disabled="!isEdit">
     <Transition
-      enter-active-class="animate__animated animate__fadeInUp animate__faster"
-      leave-active-class="animate__animated animate__fadeOutDown animate__faster"
+      enter-active-class="animate-fadeInUp"
+      leave-active-class="animate-fadeOutDown"
     >
       <div
         class="fixed bottom-0 z-100 flex max-h-[70%] w-full flex-col items-center"

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import img from './loli'
-import 'animate.css'
 
 const { showInfo, infoMsg, durations } = storeToRefs(useComponentMessageStore())
 
@@ -45,17 +44,14 @@ watch(
 <template>
   <Teleport to="body" :disabled="!showInfo">
     <Transition
-      enter-active-class="animate__animated animate__fadeInUp animate__faster"
-      leave-active-class="animate__animated animate__fadeOutDown animate__faster"
+      enter-active-class="animate-fadeInUp"
+      leave-active-class="animate-fadeOutDown"
     >
       <div
         class="bg-background fixed right-0 bottom-0 left-0 z-2000 min-h-30 w-full border-t"
         v-if="showInfo"
       >
-        <Transition
-          enter-active-class="animate__animated animate__swing"
-          appear
-        >
+        <Transition enter-active-class="animate-swing" appear>
           <div class="loli absolute -top-10 pl-24 text-lg sm:pl-32">
             <span
               class="bg-background px-10 py-1 text-center text-lg sm:text-2xl"
@@ -69,10 +65,7 @@ watch(
           <NuxtImg class="h-16 w-full sm:h-24" :src="loli" />
         </div>
 
-        <Transition
-          enter-active-class="animate__animated animate__bounceInRight animate__faster"
-          appear
-        >
+        <Transition enter-active-class="animate-bounceInRight" appear>
           <!-- A ha ha ha! You probably didn't expect that this was inspired by しゅがてん！-Sugarfull tempering- -->
           <div class="info mt-4 mr-8 ml-24 text-base sm:ml-32 sm:text-lg">
             {{ `「 ${infoMsg} 」` }}
