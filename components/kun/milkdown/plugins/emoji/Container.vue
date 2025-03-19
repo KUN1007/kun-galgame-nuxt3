@@ -41,13 +41,14 @@ const selectEmoji = (emoji: string) => {
   <div
     class="bg-background border-default-300 absolute top-10 flex flex-col items-center rounded-lg border p-2 shadow"
   >
-    <div class="grid w-64 grid-cols-7">
+    <div class="grid h-68 w-64 grid-cols-7">
       <KunButton
         :is-icon-only="true"
         variant="light"
         v-for="(emoji, index) in paginatedEmojis"
         :key="index"
         @click="selectEmoji(emoji)"
+        size="xl"
         class-name="shrink-0"
       >
         {{ emoji }}

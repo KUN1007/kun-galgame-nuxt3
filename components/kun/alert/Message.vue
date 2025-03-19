@@ -71,7 +71,7 @@ const iconName = computed(
 
 <style lang="scss" scoped>
 /* Fix the iconify/vue Icon color error */
-:deep(path) {
+:deep(*) {
   color: inherit;
 }
 </style>

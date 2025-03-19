@@ -69,10 +69,12 @@ const hide = () => {
     >
       <div
         v-if="isVisible"
-        :class="[
-          'bg-background absolute z-50 rounded-lg border px-3 py-2 text-sm font-medium shadow',
-          positionClasses
-        ]"
+        :class="
+          cn(
+            'absolute z-50 rounded-lg border bg-white px-3 py-2 text-sm font-medium whitespace-nowrap shadow dark:bg-black',
+            positionClasses
+          )
+        "
         role="tooltip"
       >
         <slot name="content">
@@ -80,10 +82,12 @@ const hide = () => {
         </slot>
 
         <div
-          :class="[
-            'bg-background absolute h-2 w-2 rotate-45 transform',
-            arrowPositionClasses
-          ]"
+          :class="
+            cn(
+              'absolute h-2 w-2 rotate-45 transform bg-white dark:bg-black',
+              arrowPositionClasses
+            )
+          "
         />
       </div>
     </Transition>

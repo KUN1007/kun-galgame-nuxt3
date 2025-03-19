@@ -18,12 +18,14 @@ const { data, pending } = await useLazyFetch(
 </script>
 
 <template>
-  <div class="galgame">
+  <KunCard
+    :is-hoverable="false"
+    :is-transparent="false"
+    content-class="space-y-6"
+  >
     <GalgameTitle :galgame="galgame" />
 
     <GalgameIntroduction :introduction="galgame.introduction" />
-
-    <GalgameInfo :galgame="galgame" />
 
     <GalgameResource />
 
@@ -51,7 +53,5 @@ const { data, pending } = await useLazyFetch(
       :user-data="data"
       :to-user="galgame.user"
     />
-  </div>
+  </KunCard>
 </template>
-
-<style lang="scss" scoped></style>

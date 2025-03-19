@@ -105,8 +105,7 @@ const handleApplyCrop = () => {
       tabindex="0"
       :class="
         cn(
-          'border-default-300 hover:border-default-400 relative cursor-pointer rounded-lg border-2 border-dashed transition-colors',
-          !selectedFileUrl && !initialImage && 'bg-default-50',
+          'border-default-500 hover:border-default-700 relative cursor-pointer rounded-lg border-2 border-dashed transition-colors',
           className
         )
       "
@@ -119,7 +118,7 @@ const handleApplyCrop = () => {
         v-if="!selectedFileUrl && !initialImage"
         class="absolute inset-0 flex flex-col items-center justify-center"
       >
-        <Icon name="i-lucide-plus" class="text-default-500 h-12 w-12" />
+        <Icon name="i-lucide-plus" class="text-default-500 text-3xl" />
         <span v-if="hint" class="text-default-500 mt-2 text-sm">
           {{ `${hint}` }}
         </span>

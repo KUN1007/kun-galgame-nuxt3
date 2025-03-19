@@ -1,3 +1,5 @@
+import type { KunTabItem } from '~/components/kun/tab/type'
+
 export const KUN_GALGAME_RESOURCE_TYPE_MAP: Record<string, string> = {
   name: '资源链接的类型',
   all: '全部类型',
@@ -88,3 +90,22 @@ export const KUN_GALGAME_RESOURCE_PULL_REQUEST_I18N_FIELD_MAP: Record<
   official: '官网',
   engine: '引擎'
 }
+
+export const galgameIntroductionLanguageTabs: KunTabItem[] = [
+  {
+    textValue: '英语标题',
+    value: 'en-us'
+  },
+  {
+    textValue: '日语标题',
+    value: 'ja-jp'
+  },
+  {
+    textValue: '简体中文',
+    value: 'zh-cn'
+  },
+  {
+    textValue: '繁体中文',
+    value: 'zh-tw'
+  }
+]

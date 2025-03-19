@@ -9,128 +9,75 @@ defineProps<{
 </script>
 
 <template>
-  <KunHeader :size="2">
-    <template #header>信息</template>
-  </KunHeader>
+  <div class="flex flex-col space-y-3">
+    <div>
+      <h4>标签</h4>
+      <GalgameNull v-if="!galgame.tags.length" />
+      <TopicTags :tags="galgame.tags" :is-show-icon="false" />
+    </div>
 
-  <div class="name">
-    <h4>标题</h4>
-    <KunCopy v-if="galgame.name['en-us']" :text="galgame.name['en-us']" />
-    <KunCopy v-if="galgame.name['ja-jp']" :text="galgame.name['ja-jp']" />
-    <KunCopy v-if="galgame.name['zh-cn']" :text="galgame.name['zh-cn']" />
-    <KunCopy v-if="galgame.name['zh-tw']" :text="galgame.name['zh-tw']" />
-  </div>
+    <div>
+      <h4>别名</h4>
+      <GalgameNull v-if="!galgame.alias.length" />
+      <div class="space-y-1 space-x-1">
+        <KunBadge
+          v-for="(alias, index) in galgame.alias"
+          :key="index"
+          color="primary"
+        >
+          {{ alias }}
+        </KunBadge>
+      </div>
+      <TopicTags :tags="galgame.alias" :is-show-icon="false" />
+    </div>
 
-  <div>
-    <h4>标签</h4>
-    <GalgameNull v-if="!galgame.tags.length" />
-    <TopicTags :tags="galgame.tags" :is-show-icon="false" />
-  </div>
-
-  <div>
-    <h4>别名</h4>
-    <GalgameNull v-if="!galgame.alias.length" />
-    <TopicTags :tags="galgame.alias" :is-show-icon="false" />
-  </div>
-
-  <div class="official">
-    <h4>官网</h4>
-    <GalgameNull v-if="!galgame.official.length" />
-    <template v-if="galgame.official.length">
-      <span class="link" v-for="(kun, index) in galgame.official" :key="index">
-        <KunCopy :text="kun" />
-        <a :href="kun" target="_blank" rel="noopener noreferrer">
+    <div>
+      <h4>官网</h4>
+      <GalgameNull v-if="!galgame.official.length" />
+      <template v-if="galgame.official.length">
+        <a
+          v-for="(kun, index) in galgame.official"
+          :key="index"
+          :href="kun"
+          class="text-primary flex items-center gap-2 underline-offset-3 hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ kun }}
           <Icon class="icon" name="lucide:external-link" />
         </a>
-      </span>
-    </template>
-  </div>
+      </template>
+    </div>
 
-  <div class="platform">
-    <h4>平台</h4>
-    <span
-      v-for="(platform, index) in galgame.platform"
-      :key="index"
-      v-tooltip="{
-        message: KUN_GALGAME_RESOURCE_PLATFORM_MAP[platform],
-        position: 'bottom'
-      }"
-    >
-      <Icon class="icon" :name="platformIconMap[platform]" />
-    </span>
-  </div>
+    <div>
+      <h4>平台</h4>
+      <GalgameNull v-if="!galgame.platform.length" />
+      <div class="space-y-1 space-x-1">
+        <KunTooltip
+          v-for="(platform, index) in galgame.platform"
+          :key="index"
+          :text="KUN_GALGAME_RESOURCE_PLATFORM_MAP[platform]"
+          position="bottom"
+        >
+          <KunBadge color="secondary">
+            <Icon class="icon" :name="platformIconMap[platform]" />
+          </KunBadge>
+        </KunTooltip>
+      </div>
+    </div>
 
-  <div class="engine" v-if="galgame.engine.length">
-    <h4>引擎</h4>
-    <span v-for="(engine, index) in galgame.engine" :key="index">
-      {{ engine }}
-    </span>
-  </div>
-
-  <div class="index">
-    <h4>序号</h4>
-    <span>{{ galgame.gid }}</span>
+    <div>
+      <h4>引擎</h4>
+      <GalgameNull v-if="!galgame.engine.length" />
+      <div class="space-y-1 space-x-1">
+        <KunBadge
+          color="warning"
+          v-for="(engine, index) in galgame.engine"
+          :key="index"
+        >
+          {{ engine }}
+        </KunBadge>
+      </div>
+    </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-div {
-  margin-bottom: 17px;
-}
-
-h4 {
-  margin-right: 17px;
-}
-
-.name {
-  .kun-copy {
-    font-size: large;
-  }
-}
-
-.official {
-  .link {
-    cursor: pointer;
-    margin-bottom: 10px;
-    margin-right: 17px;
-    display: inline-block;
-
-    & > a {
-      margin-left: 10px;
-      font-size: 20px;
-      color: var(--kungalgame-font-color-0);
-
-      &:hover {
-        color: var(--kungalgame-blue-5);
-      }
-    }
-  }
-}
-
-.platform {
-  display: flex;
-
-  span {
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-    color: var(--kungalgame-font-color-2);
-    margin-right: 10px;
-  }
-}
-
-.engine {
-  display: flex;
-
-  span {
-    display: flex;
-    align-items: center;
-    color: var(--kungalgame-font-color-2);
-    margin-right: 10px;
-  }
-}
-
-.index {
-  display: flex;
-}
-</style>
