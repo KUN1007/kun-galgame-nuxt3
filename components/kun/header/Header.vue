@@ -3,10 +3,12 @@ withDefaults(
   defineProps<{
     name?: string
     description?: string
+    isShowDivider?: boolean
   }>(),
   {
     name: '',
-    description: ''
+    description: '',
+    isShowDivider: true
   }
 )
 </script>
@@ -28,5 +30,5 @@ withDefaults(
     </div>
     <slot name="endContent" />
   </div>
-  <KunDivider />
+  <KunDivider v-if="isShowDivider" />
 </template>
