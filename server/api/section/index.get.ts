@@ -30,6 +30,7 @@ const getSectionTopic = async (
     title: topic.title,
     content: topic.content.slice(0, 233),
     time: topic.time,
+    section: topic.section,
     tags: topic.tags,
     views: topic.views,
     likes: topic.likes.length,

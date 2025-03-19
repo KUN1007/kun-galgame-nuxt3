@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { KunUserProps } from './type'
 
-const props = withDefaults(defineProps<KunUserProps>(), {
+withDefaults(defineProps<KunUserProps>(), {
   size: 'md',
   description: ''
 })
@@ -11,9 +11,9 @@ const props = withDefaults(defineProps<KunUserProps>(), {
   <div class="flex items-center gap-2">
     <KunAvatar :user="user" :size="size" />
 
-    <div class="flex flex-col">
+    <div class="flex flex-col text-sm">
       <span>{{ user.name }}</span>
-      <span v-if="description" class="text-default-500 text-sm">
+      <span v-if="description" class="text-default-500">
         {{ description }}
       </span>
     </div>

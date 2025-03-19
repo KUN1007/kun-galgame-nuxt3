@@ -8,10 +8,13 @@ const props = defineProps<{
 const page = ref(1)
 
 const categoryMap: Record<string, string> = {
-  g: 'Galgame',
-  t: 'Technique',
-  o: 'Others'
+  g: 'galgame',
+  t: 'technique',
+  o: 'others'
 }
+const category = computed(
+  () => KUN_TOPIC_CATEGORY[categoryMap[props.section[0]]]
+)
 
 const { data, status } = await useFetch(`/api/section`, {
   method: 'GET',
@@ -38,54 +41,70 @@ watch(
 </script>
 
 <template>
-  <KunCard :is-hoverable="false" :is-transparent="false">
-    <KunHeader
-      :name="KUN_TOPIC_SECTION[section]"
-      :description="KUN_TOPIC_SECTION_DESCRIPTION_MAP[section]"
-    />
+  <KunCard
+    :is-hoverable="false"
+    :is-transparent="false"
+    content-class="space-y-6"
+  >
+    <KunHeader :description="KUN_TOPIC_SECTION_DESCRIPTION_MAP[section]">
+      <template #title>
+        <div class="flex items-center gap-2">
+          <NuxtLink
+            class="text-primary underline-offset-3 hover:underline"
+            :to="`/category/${categoryMap[props.section[0]]}`"
+          >
+            {{ category }}
+          </NuxtLink>
+          /
+          <span class="text-lg">{{ KUN_TOPIC_SECTION[section] }}</span>
+        </div>
+      </template>
+    </KunHeader>
 
     <NuxtLink
-      class="section"
       v-for="(sec, index) in data?.topics"
-      :to="`/topic/${sec.tid}`"
       :key="index"
+      :to="`/topic/${sec.tid}`"
+      class="hover:bg-primary/10 flex gap-2 rounded-lg p-4 transition-colors duration-200"
     >
       <KunAvatar :user="sec.user" />
 
-      <div class="topic">
-        <div class="user">
-          <div class="name">{{ sec.user.name }}</div>
-          <div class="time">
+      <div class="w-full space-y-2">
+        <div class="flex items-center">
+          <div class="mr-2 font-bold">{{ sec.user.name }}</div>
+          <div class="text-sm text-gray-500">
             {{ formatDate(sec.time, { isShowYear: true, isPrecise: true }) }}
           </div>
         </div>
 
-        <div class="title">{{ sec.title }}</div>
-        <TopicTags :tags="sec.tags" :is-show-icon="false" />
+        <h2 class="hover:text-primary text-lg transition-colors">
+          {{ sec.title }}
+        </h2>
 
-        <div class="content">{{ markdownToText(sec.content) }}</div>
+        <TopicTagGroup :section="sec.section" :tags="sec.tags" />
 
-        <div class="status">
-          <span>
-            <Icon class="icon" name="lucide:eye" />
-            <span>{{ sec.views }}</span>
-          </span>
-          <span>
-            <Icon class="icon" name="lucide:thumbs-up" />
-            <span>
-              {{ sec.likes }}
-            </span>
-          </span>
-          <span>
-            <Icon class="icon" name="carbon:reply" />
-            <span>{{ sec.replies }}</span>
-          </span>
+        <div class="text-default-500 line-clamp-2 text-sm break-all">
+          {{ markdownToText(sec.content) }}
+        </div>
+
+        <div class="text-default-700 flex gap-4 text-sm">
+          <div class="flex items-center gap-2 text-inherit">
+            <Icon name="lucide:eye" />
+            {{ sec.views }}
+          </div>
+          <div class="flex items-center gap-2 text-inherit">
+            <Icon name="lucide:thumbs-up" />
+            {{ sec.likes }}
+          </div>
+          <div class="flex items-center gap-2 text-inherit">
+            <Icon name="carbon:reply" />
+            {{ sec.replies }}
+          </div>
         </div>
       </div>
     </NuxtLink>
 
     <KunPagination
-      class="pagination"
       v-if="data?.totalCount"
       :page="page"
       :limit="23"
@@ -95,94 +114,3 @@ watch(
     />
   </KunCard>
 </template>
-
-<style lang="scss" scoped>
-.section {
-  display: flex;
-  padding: 17px;
-  cursor: pointer;
-  color: var(--kungalgame-font-color-3);
-
-  &:hover {
-    background-color: var(--kungalgame-trans-blue-1);
-    transition: all 0.2s;
-  }
-}
-
-.avatar {
-  display: flex;
-  justify-content: center;
-  margin-right: 7px;
-
-  img {
-    border-radius: 50%;
-    display: inline-block;
-  }
-
-  span {
-    height: 50px;
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--kungalgame-blue-5);
-    font-weight: bold;
-  }
-}
-
-.user {
-  display: flex;
-  align-items: center;
-
-  .name {
-    font-weight: bold;
-    margin-right: 5px;
-  }
-
-  .time {
-    font-size: small;
-    color: var(--kungalgame-font-color-0);
-  }
-}
-
-.title {
-  color: var(--kungalgame-blue-5);
-  margin: 5px 0;
-}
-
-.content {
-  word-break: break-all;
-  font-size: small;
-  margin: 7px 0;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-}
-
-.status {
-  display: flex;
-  color: var(--kungalgame-font-color-1);
-
-  .icon {
-    margin-right: 3px;
-  }
-
-  span {
-    display: flex;
-    align-items: center;
-    margin-right: 17px;
-  }
-}
-
-.pagination {
-  margin: 50px 0;
-}
-
-@media (max-width: 700px) {
-  .pagination {
-    margin: 17px 0;
-  }
-}
-</style>
