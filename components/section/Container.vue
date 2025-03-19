@@ -1,8 +1,17 @@
 <script setup lang="ts">
+import { KUN_TOPIC_CATEGORY, KUN_TOPIC_SECTION } from '~/constants/topic'
+import { KUN_TOPIC_SECTION_DESCRIPTION_MAP } from '~/constants/section'
+
 const props = defineProps<{
   section: string
 }>()
 const page = ref(1)
+
+const categoryMap: Record<string, string> = {
+  g: 'Galgame',
+  t: 'Technique',
+  o: 'Others'
+}
 
 const { data, status } = await useFetch(`/api/section`, {
   method: 'GET',
@@ -29,69 +38,62 @@ watch(
 </script>
 
 <template>
-  <NuxtLink
-    class="section"
-    v-for="(sec, index) in data?.topics"
-    :to="`/topic/${sec.tid}`"
-    :key="index"
-  >
-    <div
-      class="avatar"
-      @click.prevent="navigateTo(`/user/${sec.user.uid}/info`)"
-    >
-      <NuxtImg
-        height="50"
-        width="50"
-        v-if="sec.user.avatar"
-        :src="sec.user.avatar.replace(/\.webp$/, '-100.webp')"
-        :alt="sec.user.name"
-      />
-      <span v-if="!sec.user.avatar">
-        {{ sec.user.name.slice(0, 1).toUpperCase() }}
-      </span>
-    </div>
+  <KunCard :is-hoverable="false" :is-transparent="false">
+    <KunHeader
+      :name="KUN_TOPIC_SECTION[section]"
+      :description="KUN_TOPIC_SECTION_DESCRIPTION_MAP[section]"
+    />
 
-    <div class="topic">
-      <div class="user">
-        <div class="name">{{ sec.user.name }}</div>
-        <div class="time">
-          {{ formatDate(sec.time, { isShowYear: true, isPrecise: true }) }}
+    <NuxtLink
+      class="section"
+      v-for="(sec, index) in data?.topics"
+      :to="`/topic/${sec.tid}`"
+      :key="index"
+    >
+      <KunAvatar :user="sec.user" />
+
+      <div class="topic">
+        <div class="user">
+          <div class="name">{{ sec.user.name }}</div>
+          <div class="time">
+            {{ formatDate(sec.time, { isShowYear: true, isPrecise: true }) }}
+          </div>
+        </div>
+
+        <div class="title">{{ sec.title }}</div>
+        <TopicTags :tags="sec.tags" :is-show-icon="false" />
+
+        <div class="content">{{ markdownToText(sec.content) }}</div>
+
+        <div class="status">
+          <span>
+            <Icon class="icon" name="lucide:eye" />
+            <span>{{ sec.views }}</span>
+          </span>
+          <span>
+            <Icon class="icon" name="lucide:thumbs-up" />
+            <span>
+              {{ sec.likes }}
+            </span>
+          </span>
+          <span>
+            <Icon class="icon" name="carbon:reply" />
+            <span>{{ sec.replies }}</span>
+          </span>
         </div>
       </div>
+    </NuxtLink>
 
-      <div class="title">{{ sec.title }}</div>
-      <TopicTags :tags="sec.tags" :is-show-icon="false" />
-
-      <div class="content">{{ markdownToText(sec.content) }}</div>
-
-      <div class="status">
-        <span>
-          <Icon class="icon" name="lucide:eye" />
-          <span>{{ sec.views }}</span>
-        </span>
-        <span>
-          <Icon class="icon" name="lucide:thumbs-up" />
-          <span>
-            {{ sec.likes }}
-          </span>
-        </span>
-        <span>
-          <Icon class="icon" name="carbon:reply" />
-          <span>{{ sec.replies }}</span>
-        </span>
-      </div>
-    </div>
-  </NuxtLink>
-
-  <KunPagination
-    class="pagination"
-    v-if="data?.totalCount"
-    :page="page"
-    :limit="23"
-    :sum="data?.totalCount"
-    :status="status"
-    @set-page="(newPage) => (page = newPage)"
-  />
+    <KunPagination
+      class="pagination"
+      v-if="data?.totalCount"
+      :page="page"
+      :limit="23"
+      :sum="data?.totalCount"
+      :status="status"
+      @set-page="(newPage) => (page = newPage)"
+    />
+  </KunCard>
 </template>
 
 <style lang="scss" scoped>

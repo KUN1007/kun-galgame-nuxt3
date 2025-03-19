@@ -13,5 +13,5 @@ const { data } = await useFetch(`/api/category`, {
 </script>
 
 <template>
-  <CategorySection v-if="data" :categories="data" />
+  <CategoryContainer v-if="data" :categories="data" />
 </template>
