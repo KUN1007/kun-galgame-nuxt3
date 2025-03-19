@@ -78,7 +78,7 @@ onMounted(async () => {
 
       <KunModal
         :modal-value="isShowUpload"
-        @update-value="(value) => (isShowUpload = value)"
+        @update:modal-value="(value) => (isShowUpload = value)"
       >
         <div class="flex flex-col space-y-3">
           <h2>更改 Galgame 预览图</h2>

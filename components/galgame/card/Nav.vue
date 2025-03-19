@@ -1,20 +1,18 @@
 <script setup lang="ts">
 import {
-  typeOptions,
-  languageOptions,
-  platformOptions,
-  sortFieldOptions
-} from '~/components/galgame/utils/options'
-import type {
-  TypeOptions,
-  LanguageOptions,
-  PlatformOptions
-} from '~/components/galgame/utils/options'
-import {
+  kunGalgameResourceTypeOptions,
+  kunGalgameResourceLanguageOptions,
+  kunGalgameResourcePlatformOptions,
+  kunGalgameSortFieldOptions,
   KUN_GALGAME_RESOURCE_TYPE_MAP,
   KUN_GALGAME_RESOURCE_LANGUAGE_MAP,
   KUN_GALGAME_RESOURCE_PLATFORM_MAP,
   KUN_GALGAME_RESOURCE_SORT_FIELD_MAP
+} from '~/constants/galgame'
+import type {
+  KunGalgameResourceTypeOptions,
+  KunGalgameResourceLanguageOptions,
+  KunGalgameResourcePlatformOptions
 } from '~/constants/galgame'
 
 const { page, type, language, platform, sortField, sortOrder } = storeToRefs(
@@ -44,32 +42,36 @@ watch(
     >
       <KunSelect
         :model-value="type"
-        :options="typeOptions"
-        @set="(newVal) => (type = newVal as TypeOptions)"
+        :options="kunGalgameResourceTypeOptions"
+        @set="(newVal) => (type = newVal as KunGalgameResourceTypeOptions)"
       >
         {{ KUN_GALGAME_RESOURCE_TYPE_MAP[type] }}
       </KunSelect>
 
       <KunSelect
-        :options="languageOptions"
+        :options="kunGalgameResourceLanguageOptions"
         :model-value="language"
-        @set="(newVal) => (language = newVal as LanguageOptions)"
+        @set="
+          (newVal) => (language = newVal as KunGalgameResourceLanguageOptions)
+        "
       >
         {{ KUN_GALGAME_RESOURCE_LANGUAGE_MAP[language] }}
       </KunSelect>
 
       <KunSelect
-        :options="platformOptions"
+        :options="kunGalgameResourcePlatformOptions"
         :model-value="platform"
-        @set="(newVal) => (platform = newVal as PlatformOptions)"
+        @set="
+          (newVal) => (platform = newVal as KunGalgameResourcePlatformOptions)
+        "
       >
         {{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[platform] }}
       </KunSelect>
 
       <KunSelect
-        :options="sortFieldOptions"
+        :options="kunGalgameSortFieldOptions"
         :model-value="sortField"
-        @set="(value) => (sortField = value as 'time' | 'views')"
+        @set="(value) => (sortField = value as 'time' | 'views' | 'created')"
       >
         <span>{{ KUN_GALGAME_RESOURCE_SORT_FIELD_MAP[sortField] }}</span>
       </KunSelect>

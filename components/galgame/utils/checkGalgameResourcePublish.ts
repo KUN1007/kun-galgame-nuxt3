@@ -1,8 +1,17 @@
-import { typeOptions, languageOptions, platformOptions } from './options'
+import {
+  kunGalgameResourceTypeOptions,
+  kunGalgameResourceLanguageOptions,
+  kunGalgameResourcePlatformOptions
+} from '~/constants/galgame'
 import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
 
 export const checkGalgameResourcePublish = (link: GalgameResourceStoreTemp) => {
-  if (!typeOptions.filter((item) => item !== 'all').includes(link.type)) {
+  if (
+    !kunGalgameResourceTypeOptions
+      .map((type) => type.value)
+      .filter((item) => item !== 'all')
+      .includes(link.type)
+  ) {
     useMessage(10556, 'warn')
     return false
   }
@@ -25,14 +34,20 @@ export const checkGalgameResourcePublish = (link: GalgameResourceStoreTemp) => {
   }
 
   if (
-    !languageOptions.filter((item) => item !== 'all').includes(link.language)
+    !kunGalgameResourceLanguageOptions
+      .map((lang) => lang.value)
+      .filter((item) => item !== 'all')
+      .includes(link.language)
   ) {
     useMessage(10560, 'warn')
     return false
   }
 
   if (
-    !platformOptions.filter((item) => item !== 'all').includes(link.platform)
+    !kunGalgameResourcePlatformOptions
+      .map((platform) => platform.value)
+      .filter((item) => item !== 'all')
+      .includes(link.platform)
   ) {
     useMessage(10561, 'warn')
     return false

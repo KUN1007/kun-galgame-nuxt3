@@ -57,7 +57,6 @@ defineProps<{
           v-for="(platform, index) in galgame.platform"
           :key="index"
           :text="KUN_GALGAME_RESOURCE_PLATFORM_MAP[platform]"
-          position="bottom"
         >
           <KunBadge color="secondary">
             <Icon class="icon" :name="platformIconMap[platform]" />

@@ -1,16 +1,27 @@
 <script setup lang="ts">
-import { typeOptions, languageOptions, platformOptions } from '../utils/options'
-import { checkGalgameResourcePublish } from '../utils/checkGalgameResourcePublish'
 import {
+  kunGalgameResourceTypeOptions,
+  kunGalgameResourceLanguageOptions,
+  kunGalgameResourcePlatformOptions,
   KUN_GALGAME_RESOURCE_TYPE_MAP,
   KUN_GALGAME_RESOURCE_LANGUAGE_MAP,
   KUN_GALGAME_RESOURCE_PLATFORM_MAP
+} from '~/constants/galgame'
+import { checkGalgameResourcePublish } from '../utils/checkGalgameResourcePublish'
+import type {
+  KunGalgameResourceTypeOptions,
+  KunGalgameResourceLanguageOptions,
+  KunGalgameResourcePlatformOptions
 } from '~/constants/galgame'
 import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
 
 const props = defineProps<{
   // For simplicity, the type is set to unknown here.
   refresh: () => Promise<unknown>
+}>()
+
+const emits = defineEmits<{
+  close: []
 }>()
 
 const route = useRoute()
@@ -36,13 +47,7 @@ const defaultResourceLink: GalgameResourceStoreTemp = {
 const resourceLink = ref<GalgameResourceStoreTemp>({ ...defaultResourceLink })
 
 const handlePublishResourceLink = async (method: 'POST' | 'PUT') => {
-  const linkArray = resourceLink.value.link
-    .toString()
-    .split(',')
-    .map((l) => l.trim())
-  if (
-    !checkGalgameResourcePublish({ ...resourceLink.value, link: linkArray })
-  ) {
+  if (!checkGalgameResourcePublish(resourceLink.value)) {
     return
   }
 
@@ -50,10 +55,7 @@ const handlePublishResourceLink = async (method: 'POST' | 'PUT') => {
   const result = await $fetch(`/api/galgame/${gid.value}/resource`, {
     method,
     query: rewriteResourceId.value ? { grid: rewriteResourceId.value } : {},
-    body: {
-      ...resourceLink.value,
-      link: linkArray
-    },
+    body: resourceLink.value,
     watch: false,
     ...kungalgameResponseHandler
   })
@@ -67,13 +69,14 @@ const handlePublishResourceLink = async (method: 'POST' | 'PUT') => {
       useMessage(10550, 'success')
     }
     await props.refresh()
-    resourceLink.value = { ...defaultResourceLink }
+    resourceLink.value = defaultResourceLink
+    emits('close')
   }
 }
 
 const handleCancel = () => {
   rewriteResourceId.value = 0
-  resourceLink.value = { ...defaultResourceLink }
+  resourceLink.value = defaultResourceLink
   resources.value[0] = resourceLink.value
 }
 
@@ -94,15 +97,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <GalgameResourceHelp />
+  <div class="space-y-3">
+    <GalgameResourceHelp />
 
-  <div class="link">
     <KunTextarea
       placeholder="资源链接 (网盘 | 磁链 | 网址) 等, 如果同一资源有多个链接，请用英语逗号分隔每个链接"
-      v-model="resourceLink.link"
+      :model-value="resourceLink.link.toString()"
+      @update:model-value="
+        (value) =>
+          (resourceLink.link = value
+            .toString()
+            .split(',')
+            .map((l) => l.trim()))
+      "
     />
 
-    <div>
+    <div class="space-y-3">
       <KunInput placeholder="资源体积 (MB 或 GB)" v-model="resourceLink.size" />
       <KunInput placeholder="资源提取码 (可选)" v-model="resourceLink.code" />
       <KunInput
@@ -110,153 +120,92 @@ onMounted(() => {
         v-model="resourceLink.password"
       />
     </div>
-  </div>
 
-  <div class="type">
     <KunSelect
-      class="kun-select"
-      :styles="{ width: '200px' }"
-      :options="typeOptions.filter((item) => item !== 'all')"
-      i18n="galgame.resource.type"
-      @set="(value) => (resourceLink.type = value)"
-      position="top"
-      default-value="game"
+      label="资源链接的类型"
+      :model-value="resourceLink.type"
+      :options="
+        kunGalgameResourceTypeOptions.filter((item) => item.value !== 'all')
+      "
+      @set="
+        (value) => (resourceLink.type = value as KunGalgameResourceTypeOptions)
+      "
     >
-      <div class="select">
-        <span>资源链接的类型</span>
-        <span v-if="resourceLink.type">
-          {{ KUN_GALGAME_RESOURCE_TYPE_MAP[resourceLink.type] }}
-        </span>
-      </div>
+      <span>
+        {{ KUN_GALGAME_RESOURCE_TYPE_MAP[resourceLink.type] }}
+      </span>
     </KunSelect>
 
     <KunSelect
-      class="kun-select"
-      :styles="{ width: '200px' }"
-      :options="languageOptions.filter((item) => item !== 'all')"
-      i18n="galgame.resource.language"
-      @set="(value) => (resourceLink.language = value)"
-      position="top"
-      default-value="zh-cn"
+      label="资源链接的语言"
+      :model-value="resourceLink.language"
+      :options="
+        kunGalgameResourceLanguageOptions.filter((item) => item.value !== 'all')
+      "
+      @set="
+        (value) =>
+          (resourceLink.language = value as KunGalgameResourceLanguageOptions)
+      "
     >
-      <div class="select">
-        <span>资源链接的语言</span>
-        <span v-if="resourceLink.language">
-          {{ KUN_GALGAME_RESOURCE_LANGUAGE_MAP[resourceLink.language] }}
-        </span>
-      </div>
+      <span>
+        {{ KUN_GALGAME_RESOURCE_LANGUAGE_MAP[resourceLink.language] }}
+      </span>
     </KunSelect>
 
     <KunSelect
-      class="kun-select"
-      :styles="{ width: '200px' }"
-      :options="platformOptions.filter((item) => item !== 'all')"
-      i18n="galgame.resource.platform"
-      @set="(value) => (resourceLink.platform = value)"
-      position="top"
-      default-value="windows"
+      label="资源链接的平台"
+      :model-value="resourceLink.platform"
+      :options="
+        kunGalgameResourcePlatformOptions.filter((item) => item.value !== 'all')
+      "
+      @set="
+        (value) =>
+          (resourceLink.platform = value as KunGalgameResourcePlatformOptions)
+      "
     >
-      <div class="select">
-        <span>资源链接的平台</span>
-        <span v-if="resourceLink.platform">
-          {{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[resourceLink.platform] }}
-        </span>
-      </div>
+      <span>
+        {{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[resourceLink.platform] }}
+      </span>
     </KunSelect>
-  </div>
 
-  <div class="note">
-    <KunTextarea placeholder="资源备注 (可选)" v-model="resourceLink.note" />
-  </div>
+    <KunTextarea
+      placeholder="资源备注, 可以填写资源的注意事项, 资源的介绍信息, 作者信息等等 (可选)"
+      v-model="resourceLink.note"
+    />
 
-  <div class="btn">
-    <KunButton
-      @click="handlePublishResourceLink('POST')"
-      type="primary"
-      :pending="isFetching"
-      v-if="!rewriteResourceId"
-    >
-      创建资源链接
-    </KunButton>
+    <div class="flex justify-end gap-1">
+      <KunButton
+        variant="light"
+        color="danger"
+        v-if="!rewriteResourceId"
+        @click="emits('close')"
+      >
+        取消
+      </KunButton>
+      <KunButton
+        v-if="!rewriteResourceId"
+        :pending="isFetching"
+        @click="handlePublishResourceLink('POST')"
+      >
+        创建资源链接
+      </KunButton>
 
-    <KunButton v-if="rewriteResourceId" @click="handleCancel">
-      取消 Rewrite
-    </KunButton>
+      <KunButton
+        variant="light"
+        color="danger"
+        v-if="rewriteResourceId"
+        @click="handleCancel"
+      >
+        取消 Rewrite
+      </KunButton>
 
-    <KunButton
-      class="rewrite"
-      @click="handlePublishResourceLink('PUT')"
-      type="danger"
-      :pending="isFetching"
-      v-if="rewriteResourceId"
-    >
-      确定 Rewrite
-    </KunButton>
+      <KunButton
+        @click="handlePublishResourceLink('PUT')"
+        :pending="isFetching"
+        v-if="rewriteResourceId"
+      >
+        确定 Rewrite
+      </KunButton>
+    </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.link {
-  display: flex;
-  flex-direction: column;
-
-  & > div {
-    margin-top: 10px;
-
-    input {
-      margin-bottom: 10px;
-      margin-right: 10px;
-    }
-  }
-}
-
-.type {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.kun-select {
-  padding: 10px;
-  background-color: var(--kungalgame-trans-blue-0);
-  border-radius: 10px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-
-.select {
-  display: flex;
-  flex-direction: column;
-
-  span {
-    &:first-child {
-      font-size: small;
-      color: var(--kungalgame-font-color-0);
-    }
-  }
-}
-
-.note {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-
-  button {
-    margin: 17px 0;
-  }
-}
-
-.btn {
-  margin-bottom: 10px;
-  display: flex;
-  width: 100%;
-
-  button {
-    width: 100%;
-  }
-
-  .rewrite {
-    margin-left: 10px;
-  }
-}
-</style>

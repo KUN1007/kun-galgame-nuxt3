@@ -31,7 +31,7 @@ export const kunLayoutItem: KunLayoutItem[] = [
       {
         name: 'galgame',
         router: '/category/galgame',
-        label: '话题分类'
+        label: 'Galgame'
       },
       {
         name: 'technique',

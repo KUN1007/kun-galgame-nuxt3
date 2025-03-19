@@ -1,18 +1,18 @@
 import UserModel from '~/server/models/user'
 import GalgameModel from '~/server/models/galgame'
 import type {
-  TypeOptions,
-  LanguageOptions,
-  PlatformOptions
-} from '~/components/galgame/utils/options'
+  KunGalgameResourceTypeOptions,
+  KunGalgameResourceLanguageOptions,
+  KunGalgameResourcePlatformOptions
+} from '~/constants/galgame'
 import type { GalgamePageRequestData, GalgameCard } from '~/types/api/galgame'
 
 const getGalgames = async (
   page: number,
   limit: number,
-  type: TypeOptions,
-  language: LanguageOptions,
-  platform: PlatformOptions,
+  type: KunGalgameResourceTypeOptions,
+  language: KunGalgameResourceLanguageOptions,
+  platform: KunGalgameResourcePlatformOptions,
   sortField: 'time' | 'created' | 'views',
   sortOrder: KunOrder
 ) => {

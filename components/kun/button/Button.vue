@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useRipple } from '../ripple/useRipple'
 import type { KunUIVariant, KunUIColor } from '../ui/type'
-import type { ButtonProps } from './type'
+import type { KunButtonProps } from './type'
 
-const props = withDefaults(defineProps<ButtonProps>(), {
+const props = withDefaults(defineProps<KunButtonProps>(), {
   variant: 'solid',
   color: 'primary',
   size: 'md',
@@ -183,8 +183,8 @@ const handleKunButtonClick = (event: MouseEvent) => {
         colorClasses,
         roundedClasses,
         fullWidth ? 'w-full' : '',
-        className,
-        isIconOnlyClasses
+        isIconOnlyClasses,
+        className
       )
     "
     :disabled="disabled || loading"

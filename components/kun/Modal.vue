@@ -1,28 +1,74 @@
 <script setup lang="ts">
 import { useEventListener } from '@vueuse/core'
+import { onMounted, onUnmounted, watch } from 'vue'
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     modalValue: boolean
     className?: string
+    isDismissable?: boolean
+    isShowCloseButton?: boolean
   }>(),
-  { className: '' }
+  {
+    className: '',
+    isDismissable: true,
+    isShowCloseButton: true
+  }
 )
 
 const emits = defineEmits<{
-  updateValue: [modalValue: boolean]
+  'update:modalValue': [value: boolean]
+  close: []
 }>()
+
+const lockScroll = () => {
+  document.body.style.overflow = 'hidden'
+  document.body.style.paddingRight = `${window.innerWidth - document.documentElement.clientWidth}px`
+}
+
+const unlockScroll = () => {
+  document.body.style.overflow = ''
+  document.body.style.paddingRight = ''
+}
+
+const handleCloseKunModal = () => {
+  if (props.isDismissable) {
+    emits('update:modalValue', false)
+    emits('close')
+  }
+}
 
 useEventListener('keydown', (e: KeyboardEvent) => {
   if (e.key === 'Escape') {
-    emits('updateValue', false)
+    handleCloseKunModal()
   }
+})
+
+watch(
+  () => props.modalValue,
+  (newValue) => {
+    if (newValue) {
+      lockScroll()
+    } else {
+      unlockScroll()
+    }
+  }
+)
+
+onMounted(() => {
+  if (props.modalValue) {
+    lockScroll()
+  }
+})
+
+onUnmounted(() => {
+  unlockScroll()
 })
 </script>
 
 <template>
   <Teleport to="body">
-    <Transition name="dialog">
+    <Transition name="kun-modal">
       <div
         v-if="modalValue"
         :class="
@@ -31,14 +77,32 @@ useEventListener('keydown', (e: KeyboardEvent) => {
             className
           )
         "
-        @click="$emit('updateValue', false)"
+        @click="handleCloseKunModal"
         tabindex="0"
       >
         <div
-          class="bg-background m-auto min-w-80 rounded-lg border p-6 shadow-lg transition-all"
+          class="bg-background scrollbar-hide relative m-auto max-h-[90vh] min-w-80 overflow-y-auto rounded-lg border p-6 shadow-lg transition-all"
           @click.stop
         >
           <slot />
+
+          <KunButton
+            v-if="isShowCloseButton"
+            color="default"
+            variant="light"
+            class-name="absolute top-2 right-2"
+            rounded="full"
+            size="lg"
+            :is-icon-only="true"
+            @click="
+              () => {
+                emits('update:modalValue', false)
+                emits('close')
+              }
+            "
+          >
+            <Icon class="icon" name="lucide:x" />
+          </KunButton>
         </div>
       </div>
     </Transition>
@@ -46,17 +110,18 @@ useEventListener('keydown', (e: KeyboardEvent) => {
 </template>
 
 <style lang="scss" scoped>
-.dialog-enter-from {
-  opacity: 0;
+.kun-modal-enter-active,
+.kun-modal-leave-active {
+  transition: all 0.3s ease;
 }
 
-.dialog-leave-to {
+.kun-modal-enter-from {
   opacity: 0;
+  transform: scale(1.1);
 }
 
-.dialog-enter-from,
-.dialog-leave-to {
-  -webkit-transform: scale(1.1);
+.kun-modal-leave-to {
+  opacity: 0;
   transform: scale(1.1);
 }
 </style>

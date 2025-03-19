@@ -128,9 +128,7 @@ onMounted(() => {
           cn(
             'scrollbar-hide w-full rounded-md border px-3 py-2 text-sm shadow-sm transition duration-150 ease-in-out',
             'focus:ring-primary-500 focus:border-primary-500 focus:ring-1 focus:outline-none',
-            disabled
-              ? 'bg-default-100 text-default-500 cursor-not-allowed'
-              : 'bg-background',
+            disabled ? 'text-default-500 cursor-not-allowed' : '',
             // readonly ? 'bg-gray-50' : '',
             error ? 'border-danger-300' : 'border-default-300',
             resize === 'none'

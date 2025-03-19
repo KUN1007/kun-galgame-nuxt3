@@ -6,7 +6,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 <template>
   <KunModal
     :modal-value="showKUNGalgamePanel"
-    @update-value="(value) => (showKUNGalgamePanel = value)"
+    @update:modal-value="(value) => (showKUNGalgamePanel = value)"
   >
     <div class="relative flex justify-between">
       <div class="relative shrink-0 space-y-4">
@@ -33,18 +33,6 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
       </div>
 
       <KunSettingPanelComponentsLoli />
-
-      <KunButton
-        color="default"
-        variant="light"
-        class-name="absolute right-0"
-        rounded="full"
-        size="lg"
-        :is-icon-only="true"
-        @click="showKUNGalgamePanel = false"
-      >
-        <Icon class="icon" name="lucide:x" />
-      </KunButton>
     </div>
   </KunModal>
 </template>

@@ -5,7 +5,7 @@ import type {
   KunUIRounded
 } from '../ui/type'
 
-export interface ButtonProps {
+export interface KunButtonProps {
   variant?: KunUIVariant
   color?: KunUIColor
   size?: KunUISize

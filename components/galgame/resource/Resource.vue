@@ -35,84 +35,59 @@ watch(
 </script>
 
 <template>
-  <div class="resource">
-    <KunHeader :size="2">
-      <template #header>
-        <span>资源链接</span>
-
-        <span class="contribute" @click="handleClickContribute">
-          <Icon class="icon" name="lucide:circle-plus" />
-        </span>
+  <div class="space-y-3">
+    <KunHeader :is-show-divider="false" name="资源链接">
+      <template #headerEndContent>
+        <KunButton :is-icon-only="true" @click="handleClickContribute">
+          添加资源
+        </KunButton>
+      </template>
+      <template #endContent>
+        <div class="text-sm">
+          <div class="text-primary">提示: 部分资源链接可能需要网络代理</div>
+          <div class="flex gap-1">
+            <p>如果您找不到想要的资源链接, 可以去看看友站</p>
+            <a
+              class="text-primary"
+              href="https://www.touchgal.io/"
+              target="_blank"
+            >
+              TouchGal
+            </a>
+            和
+            <a class="text-primary" href="https://www.zi6.cc/" target="_blank">
+              zi0
+            </a>
+          </div>
+        </div>
       </template>
     </KunHeader>
 
-    <div class="note">
-      <div>提示: 部分资源链接可能需要网络代理</div>
-      <div>
-        <span>如果您找不到想要的资源链接, 可以去看看友站</span>
-        <a href="https://www.touchgal.io/" target="_blank"> TouchGal</a>
-      </div>
-    </div>
+    <KunNull
+      v-if="!data?.length"
+      description="这个 Galgame 还没有资源链接, 快添加一个吧!"
+    />
 
-    <GalgameNull class="null" v-if="!data?.length" />
+    <KunModal
+      :is-dismissable="false"
+      :is-show-close-button="false"
+      :modal-value="isShowPublish"
+      @update:modal-value="(value) => (isShowPublish = value)"
+    >
+      <GalgameResourcePublish
+        :refresh="refresh"
+        @close="isShowPublish = false"
+      />
+    </KunModal>
 
-    <GalgameResourcePublish v-if="isShowPublish" :refresh="refresh" />
-
-    <div v-if="!pending">
+    <template v-if="!pending">
       <GalgameResourceLink
         v-for="resource in data"
         :key="resource.grid"
         :link="resource"
         :refresh="refresh"
       />
-    </div>
-    <KunSkeletonGalgameResource v-if="pending" />
+    </template>
+    <KunLoading v-if="pending" />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.resource {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.contribute {
-  cursor: pointer;
-  margin-left: 17px;
-  padding: 3px;
-  border-radius: 20px;
-  color: var(--kungalgame-blue-5);
-}
-
-.note {
-  margin-bottom: 17px;
-  font-size: small;
-
-  & > div {
-    display: block;
-
-    &:first-child {
-      color: var(--kungalgame-red-5);
-      font-weight: bold;
-      font-style: oblique;
-    }
-
-    &:last-child {
-      margin-top: 5px;
-    }
-  }
-
-  a {
-    font-weight: bold;
-    color: var(--kungalgame-blue-5);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    margin: 0 7px;
-  }
-}
-
-.null {
-  margin-bottom: 17px;
-}
-</style>

@@ -1,11 +1,40 @@
 <script setup lang="ts">
-withDefaults(defineProps<{ text: string; name?: string }>(), {
-  name: ''
+import type {
+  KunUIVariant,
+  KunUIColor,
+  KunUISize,
+  KunUIRounded
+} from './ui/type'
+
+interface KunCopyProps {
+  text: string
+  name?: string
+  variant?: KunUIVariant
+  color?: KunUIColor
+  size?: KunUISize
+  rounded?: KunUIRounded
+  className?: string
+}
+
+withDefaults(defineProps<KunCopyProps>(), {
+  name: '',
+  variant: 'light',
+  color: 'primary',
+  size: 'md',
+  rounded: 'lg',
+  className: ''
 })
 </script>
 
 <template>
-  <KunButton variant="light" class-name="gap-2" @click="useKunCopy(text)">
+  <KunButton
+    :variant="variant"
+    :color="color"
+    :size="size"
+    :rounded="rounded"
+    :class-name="cn('gap-2', className)"
+    @click="useKunCopy(text)"
+  >
     <span>{{ decodeIfEncoded(name ? name : text) }}</span>
     <Icon name="lucide:copy" />
   </KunButton>

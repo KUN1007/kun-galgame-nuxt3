@@ -142,7 +142,7 @@ const handleApplyCrop = () => {
 
     <KunModal
       :modal-value="showCropper"
-      @update-value="(value) => (showCropper = value)"
+      @update:modal-value="(value) => (showCropper = value)"
     >
       <div class="max-w-xl">
         <div class="mb-4">

@@ -17,7 +17,7 @@ const handleConfirm = () => {
 <template>
   <KunModal
     :modal-value="showAlert"
-    @update-value="(value) => (showAlert = value)"
+    @update:modal-value="(value) => (showAlert = value)"
     class-name="z-1000"
   >
     <div class="max-w-80">
