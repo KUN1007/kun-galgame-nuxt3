@@ -19,7 +19,7 @@ const handleRewriteGalgame = (galgame: GalgameDetail) => {
     engine,
     tags
   }
-  navigateTo(`/edit/galgame?type=pr&gid=${galgame.gid}`)
+  navigateTo('/edit/galgame/rewrite')
 }
 </script>
 

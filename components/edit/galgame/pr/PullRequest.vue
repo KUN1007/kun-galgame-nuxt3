@@ -3,16 +3,12 @@ const introductionLanguage = ref<Language>('zh-cn')
 </script>
 
 <template>
-  <div class="container">
+  <div class="space-y-6">
     <EditGalgamePrHelp />
 
     <EditGalgamePrTitle />
 
-    <EditGalgameIntroduction
-      :introduction-language="introductionLanguage"
-      type="rewrite"
-      @set="(value) => (introductionLanguage = value as Language)"
-    />
+    <EditGalgameEditor :lang="introductionLanguage" type="rewrite" />
 
     <EditGalgamePrSeries />
 
@@ -27,11 +23,3 @@ const introductionLanguage = ref<Language>('zh-cn')
     <EditGalgamePrFooter />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.container {
-  width: 100%;
-  height: 100%;
-  padding: 17px;
-}
-</style>

@@ -1,11 +1,33 @@
 import type { KunTabItem } from '~/components/kun/tab/type'
 
-export const REFERENCE_SITE_MAP: Record<string, string> = {
-  vndb: 'VNDB',
-  erogamescape: '批评空间',
-  dlsite: 'DLsite',
-  wikipedia: '维基百科'
+interface ReferenceSite {
+  url: string
+  name: string
+  label: string
 }
+
+export const referenceSiteList: ReferenceSite[] = [
+  {
+    url: 'https://vndb.org/',
+    name: 'vndb',
+    label: 'VNDB'
+  },
+  {
+    url: 'https://erogamescape.dyndns.org/',
+    name: 'erogamescape',
+    label: '批评空间'
+  },
+  {
+    url: 'https://www.dlsite.com/pro/',
+    name: 'dlsite',
+    label: 'DLsite'
+  },
+  {
+    url: 'https://www.wikipedia.org/',
+    name: 'wikipedia',
+    label: '维基百科'
+  }
+]
 
 export const languageItems: KunTabItem[] = [
   {

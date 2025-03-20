@@ -86,6 +86,7 @@ const handleGetVNData = async () => {
           <NuxtLink target="_blank" to="/topic/280" class="text-primary">
             Galgame 发布系统帮助文档、教程、介绍
           </NuxtLink>
+          <EditGalgameSite class="mt-2" />
         </template>
       </KunHeader>
 
