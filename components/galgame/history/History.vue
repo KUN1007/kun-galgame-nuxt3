@@ -14,7 +14,7 @@ const pageData = reactive({
   limit: 7
 })
 
-const { data, status } = await useFetch(
+const { data, status } = await useLazyFetch(
   `/api/galgame/${gid.value}/history/all`,
   {
     method: 'GET',
@@ -30,6 +30,8 @@ const { data, status } = await useFetch(
       name="贡献历史"
       description="这里记录了这个 Galgame 项目发生的所有更改历史, 资源下载链接更改历史不计"
     />
+
+    <KunLoading v-if="status === 'pending'" />
 
     <div
       class="flex items-center gap-2 text-sm"

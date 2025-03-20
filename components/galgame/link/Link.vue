@@ -14,7 +14,7 @@ const linkModel = reactive({
   link: ''
 })
 
-const { data, pending, refresh } = await useLazyFetch(
+const { data, status, refresh } = await useLazyFetch(
   `/api/galgame/${gid.value}/link/all`,
   {
     method: 'GET',
@@ -79,6 +79,9 @@ const handleDeleteLink = async (gid: number, glid: number) => {
       </template>
     </KunHeader>
 
+    <KunLoading v-if="status === 'pending'" />
+    <GalgameNull v-if="status !== 'pending' && !data?.length" />
+
     <div class="space-y-2" v-if="isShowEdit">
       <KunCard :is-hoverable="false">
         <p>
@@ -96,7 +99,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
       </div>
     </div>
 
-    <div class="space-y-2" v-if="data && !pending">
+    <div class="space-y-2" v-if="data">
       <KunCard :is-hoverable="false" v-for="(link, index) in data" :key="index">
         <p>{{ link.name }}</p>
         <a
@@ -121,9 +124,5 @@ const handleDeleteLink = async (gid: number, glid: number) => {
         </a>
       </KunCard>
     </div>
-
-    <KunLoading v-if="pending" />
-
-    <GalgameNull v-if="!pending && !data?.length" />
   </div>
 </template>

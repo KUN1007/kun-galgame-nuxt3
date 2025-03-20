@@ -11,7 +11,7 @@ const props = defineProps<{
 
 provide<GalgameDetail>('galgame', props.galgame)
 
-const { data, pending } = await useLazyFetch(
+const { data } = await useFetch(
   `/api/galgame/${props.galgame.gid}/contributor`,
   {
     method: 'GET',
@@ -33,12 +33,18 @@ const activeTab = ref<GalgameDetailSectionTabType>('comment')
 
     <GalgameIntroduction :introduction="galgame.introduction" />
 
-    <GalgameContributor
-      v-if="data"
-      :data="data"
-      :pending="pending"
-      :views="galgame.views"
-    />
+    <div class="space-y-3">
+      <p>本游戏项目的贡献者</p>
+      <div class="flex items-center gap-1" v-if="data">
+        <KunTooltip
+          v-for="(user, index) in data"
+          :key="index"
+          :text="user.name"
+        >
+          <KunAvatar :user="user" />
+        </KunTooltip>
+      </div>
+    </div>
 
     <KunDivider />
 

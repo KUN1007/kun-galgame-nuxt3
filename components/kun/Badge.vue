@@ -2,14 +2,14 @@
 import type { KunUIColor, KunUISize } from './ui/type'
 
 interface Props {
-  classNames?: string
+  className?: string
   color?: KunUIColor
   size?: KunUISize
 }
 
 withDefaults(defineProps<Props>(), {
   color: 'default',
-  classNames: '',
+  className: '',
   size: 'sm'
 })
 
@@ -35,10 +35,10 @@ const sizeClasses: Record<KunUISize, string> = {
   <span
     :class="
       cn(
-        'inline-flex items-center justify-center gap-1 rounded-full font-medium',
+        'inline-flex cursor-default items-center justify-center gap-1 rounded-full font-medium',
         colorClasses[color],
         sizeClasses[size],
-        classNames
+        className
       )
     "
   >

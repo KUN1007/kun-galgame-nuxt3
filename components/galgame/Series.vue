@@ -5,7 +5,7 @@ const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
 
-const { data, pending } = await useLazyFetch(
+const { data, status } = await useLazyFetch(
   `/api/galgame/${gid.value}/series`,
   {
     method: 'GET',
@@ -22,7 +22,9 @@ const { data, pending } = await useLazyFetch(
       description="同一部作品的其它 Galgame, 例如 `巧克甜恋 1, 巧克甜恋 2, 巧克甜恋 3` 就是一个系列"
     />
 
-    <div class="flex gap-2" v-if="data && !pending">
+    <KunLoading v-if="status === 'pending'" />
+
+    <div class="flex gap-2" v-if="data && status !== 'pending'">
       <NuxtLink
         v-for="(link, index) in data"
         :key="index"
@@ -31,6 +33,5 @@ const { data, pending } = await useLazyFetch(
         {{ link.name['zh-cn'] }}
       </NuxtLink>
     </div>
-    <KunSkeletonGalgameLink v-if="pending" />
   </div>
 </template>

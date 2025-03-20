@@ -9,9 +9,10 @@ const pageData = reactive({
   limit: 7
 })
 
-const { data, status, refresh } = await useLazyFetch(
+const { data, status, refresh } = await useFetch(
   `/api/galgame/${gid.value}/pr/all`,
   {
+    lazy: true,
     method: 'GET',
     query: pageData,
     ...kungalgameResponseHandler
@@ -20,11 +21,14 @@ const { data, status, refresh } = await useLazyFetch(
 </script>
 
 <template>
-  <div class="space-y-3" v-if="data && data.prs.length">
+  <div class="flex flex-col space-y-3" v-if="data">
     <KunHeader
       name="更新请求"
       description="蓝色代表增加, 红色代表删减, 游戏发布者或管理员可以合并或拒绝请求"
     />
+
+    <KunLoading v-if="status === 'pending'" />
+    <GalgameNull v-if="status !== 'pending' && !data.prs.length" />
 
     <div class="space-y-2" v-if="status === 'success'">
       <GalgamePrInfo
@@ -36,7 +40,6 @@ const { data, status, refresh } = await useLazyFetch(
         :refresh="refresh"
       />
     </div>
-    <KunSkeletonGalgameResource v-if="status === 'pending'" />
 
     <KunPagination
       class="pagination"

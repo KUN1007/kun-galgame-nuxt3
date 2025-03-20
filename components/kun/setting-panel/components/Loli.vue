@@ -18,22 +18,19 @@ const loliData = ref({
   mouth: '',
   face: ''
 })
-const isShowLoading = ref(false)
-
-const reGetLoli = async () => {
-  isShowLoading.value = true
-  loliData.value = await getLoli()
-  isShowLoading.value = false
-}
 
 onMounted(async () => {
-  await reGetLoli()
+  loliData.value = await getLoli()
 })
 </script>
 
 <template>
   <div class="block size-full shrink-0">
-    <div class="relative min-w-80" @click="reGetLoli" v-if="loliData.body">
+    <div
+      class="relative min-w-80"
+      @click="async () => (loliData = await getLoli())"
+      v-if="loliData.body"
+    >
       <div class="absolute -top-80 -left-32 size-full shrink-0">
         <img
           class="absolute shrink-0"
@@ -75,9 +72,5 @@ onMounted(async () => {
         />
       </div>
     </div>
-
-    <KunSkeletonSettingsPanelLoli v-if="!loliData.body" />
-
-    <KunLoading v-if="isShowLoading" style="top: 310px; left: 140px" />
   </div>
 </template>

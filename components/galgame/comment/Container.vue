@@ -83,6 +83,8 @@ onMounted(() => (commentToUid.value = toUser.uid))
         </div>
       </GalgameCommentPanel>
 
+      <KunLoading v-if="status === 'pending'" />
+
       <KunNull
         v-if="!data?.totalCount && status !== 'pending'"
         description="没人评论, 是没人要这个 Galgame 的小只可爱软萌女孩子了吗, 呜呜呜呜呜呜！！"
@@ -110,7 +112,5 @@ onMounted(() => (commentToUid.value = toUser.uid))
         />
       </div>
     </div>
-
-    <KunSkeletonGalgameComment v-if="status === 'pending'" />
   </div>
 </template>

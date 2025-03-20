@@ -6,10 +6,12 @@ const galgame = inject<GalgameDetail>('galgame')
 
 <template>
   <div v-if="galgame" class="flex items-center justify-end gap-1">
-    <KunBadge size="md">
-      <Icon name="lucide:eye" />
-      <span>{{ formatNumber(galgame.views) }}</span>
-    </KunBadge>
+    <KunTooltip :text="`浏览量: ${galgame.views}`">
+      <KunBadge size="md">
+        <Icon name="lucide:eye" />
+        <span>{{ formatNumber(galgame.views) }}</span>
+      </KunBadge>
+    </KunTooltip>
 
     <GalgameLike
       :gid="galgame.gid"
