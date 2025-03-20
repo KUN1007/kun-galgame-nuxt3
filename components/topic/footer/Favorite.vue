@@ -52,7 +52,7 @@ const handleClickFavorite = () => {
     class-name="gap-1"
     @click="handleClickFavorite"
   >
-    <Icon class="icon" name="lucide:heart" />
+    <Icon name="lucide:heart" />
     <span v-if="favoritesCount">{{ favoritesCount }}</span>
   </KunButton>
 </template>

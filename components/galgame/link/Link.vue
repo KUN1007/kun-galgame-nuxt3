@@ -77,7 +77,6 @@ const handleDeleteLink = async (gid: number, glid: number) => {
           添加相关链接
         </KunButton>
       </template>
-      <template #endContent> </template>
     </KunHeader>
 
     <div class="space-y-2" v-if="isShowEdit">
@@ -98,11 +97,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
     </div>
 
     <div class="space-y-2" v-if="data && !pending">
-      <div
-        class="bg-default-100 rounded-lg p-3"
-        v-for="(link, index) in data"
-        :key="index"
-      >
+      <KunCard :is-hoverable="false" v-for="(link, index) in data" :key="index">
         <p>{{ link.name }}</p>
         <a
           :href="link.link"
@@ -124,7 +119,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
             <Icon name="lucide:trash-2" />
           </KunButton>
         </a>
-      </div>
+      </KunCard>
     </div>
 
     <KunLoading v-if="pending" />

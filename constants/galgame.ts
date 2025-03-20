@@ -175,3 +175,23 @@ export const galgameIntroductionLanguageTabs: KunTabItem[] = [
     value: 'zh-tw'
   }
 ]
+
+export type GalgameDetailSectionTabType = 'comment' | 'history' | 'pr' | 'link'
+export const galgameDetailSectionTabs: KunTabItem[] = [
+  {
+    textValue: '游戏评论',
+    value: 'comment'
+  },
+  {
+    textValue: '相关链接',
+    value: 'link'
+  },
+  {
+    textValue: '贡献历史',
+    value: 'history'
+  },
+  {
+    textValue: '更新请求',
+    value: 'pr'
+  }
+]

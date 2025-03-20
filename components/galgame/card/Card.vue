@@ -27,6 +27,7 @@ defineProps<{
           :alt="galgame.name['zh-cn']"
           placeholder="/placeholder.webp"
           class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          :style="{ aspectRatio: '16/9' }"
         />
 
         <div class="absolute top-2 left-2 flex gap-1">
@@ -34,17 +35,14 @@ defineProps<{
             <span
               v-for="(platform, i) in galgame.platform"
               :key="i"
-              class="flex size-6 items-center justify-center rounded-full bg-black/50 p-1.5 text-xs backdrop-blur-sm sm:size-8 sm:text-sm"
+              class="bg-background flex size-6 items-center justify-center rounded-full p-1.5 text-xs backdrop-blur-sm sm:size-8 sm:text-sm"
             >
-              <Icon
-                :name="platformIconMap[platform]"
-                class="h-full w-full text-white"
-              />
+              <Icon :name="platformIconMap[platform]" class="h-full w-full" />
             </span>
           </template>
           <span
             v-else
-            class="rounded-full bg-black/50 px-3 py-1 text-xs text-white backdrop-blur-sm sm:text-sm"
+            class="bg-background rounded-full px-3 py-1 text-xs backdrop-blur-sm sm:text-sm"
           >
             准备中
           </span>

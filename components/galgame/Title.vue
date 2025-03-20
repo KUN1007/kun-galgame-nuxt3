@@ -61,13 +61,22 @@ onMounted(async () => {
 </script>
 
 <template>
-  <KunHeader :name="getPreferredLanguageText(galgame.name)">
+  <KunHeader
+    :is-show-divider="false"
+    :name="getPreferredLanguageText(galgame.name)"
+  >
     <template #endContent>
-      <div class="flex flex-wrap gap-2">
-        <template v-for="(alias, index) in galgame.name" :key="index">
-          <!-- <KunCopy v-if="alias" :name="alias" :text="alias" /> -->
-          <KunBadge v-if="alias">{{ alias }}</KunBadge>
-        </template>
+      <div class="space-y-3">
+        <div class="flex flex-wrap gap-2">
+          <template v-for="(alias, index) in galgame.name" :key="index">
+            <!-- <KunCopy v-if="alias" :name="alias" :text="alias" /> -->
+            <KunBadge v-if="alias">{{ alias }}</KunBadge>
+          </template>
+        </div>
+
+        <KunDivider />
+
+        <GalgameFooter />
       </div>
     </template>
   </KunHeader>

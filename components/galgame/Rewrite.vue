@@ -24,19 +24,13 @@ const handleRewriteGalgame = (galgame: GalgameDetail) => {
 </script>
 
 <template>
-  <span class="rewrite" @click="handleRewriteGalgame(galgame)">
-    <Icon class="icon" name="lucide:pencil" />
-  </span>
+  <KunButton
+    :is-icon-only="true"
+    variant="light"
+    color="default"
+    size="lg"
+    @click="handleRewriteGalgame(galgame)"
+  >
+    <Icon name="lucide:pencil" />
+  </KunButton>
 </template>
-
-<style lang="scss" scoped>
-.rewrite {
-  color: var(--kungalgame-font-color-2);
-  cursor: pointer;
-  display: flex;
-
-  .icon {
-    font-size: 24px;
-  }
-}
-</style>

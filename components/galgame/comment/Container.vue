@@ -89,7 +89,7 @@ onMounted(() => (commentToUid.value = toUser.uid))
       />
 
       <div
-        class="comments"
+        class="space-y-3"
         v-if="status !== 'pending' && data && data.totalCount"
       >
         <GalgameComment

@@ -19,18 +19,6 @@ defineProps<{
           position: 'bottom'
         }"
       />
-
-      <span
-        v-if="views > 0"
-        class="views"
-        v-tooltip="{
-          message: '浏览数',
-          position: 'bottom'
-        }"
-      >
-        <Icon class="icon" name="lucide:eye" />
-        <span>{{ views }}</span>
-      </span>
     </div>
     <KunSkeletonGalgameContributor v-if="pending" />
   </div>

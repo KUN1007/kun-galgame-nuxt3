@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import {
+  galgameDetailSectionTabs,
+  type GalgameDetailSectionTabType
+} from '~/constants/galgame'
 import type { GalgameDetail } from '~/types/api/galgame'
 
 const props = defineProps<{
@@ -15,6 +19,8 @@ const { data, pending } = await useLazyFetch(
     ...kungalgameResponseHandler
   }
 )
+
+const activeTab = ref<GalgameDetailSectionTabType>('comment')
 </script>
 
 <template>
@@ -27,16 +33,6 @@ const { data, pending } = await useLazyFetch(
 
     <GalgameIntroduction :introduction="galgame.introduction" />
 
-    <GalgameResource />
-
-    <GalgameSeries v-if="galgame.series.length" />
-
-    <GalgameLink />
-
-    <GalgamePrContainer />
-
-    <KunDivider />
-
     <GalgameContributor
       v-if="data"
       :data="data"
@@ -44,14 +40,27 @@ const { data, pending } = await useLazyFetch(
       :views="galgame.views"
     />
 
-    <GalgameFooter />
-
     <KunDivider />
 
-    <GalgameCommentContainer
-      v-if="data"
-      :user-data="data"
-      :to-user="galgame.user"
+    <GalgameResource />
+
+    <GalgameSeries v-if="galgame.series.length" />
+
+    <KunTab
+      :items="galgameDetailSectionTabs"
+      v-model="activeTab"
+      inner-class-name="shadow border"
+      size="sm"
     />
+    <KunCard :is-hoverable="false">
+      <GalgameCommentContainer
+        v-if="data && activeTab === 'comment'"
+        :user-data="data"
+        :to-user="galgame.user"
+      />
+      <GalgameHistory v-if="activeTab === 'history'" />
+      <GalgameLink v-if="activeTab === 'link'" />
+      <GalgamePrContainer v-if="activeTab === 'pr'" />
+    </KunCard>
   </KunCard>
 </template>
