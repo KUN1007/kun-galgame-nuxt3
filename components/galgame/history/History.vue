@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { KUN_GALGAME_RESOURCE_PULL_REQUEST_ACTION_MAP } from '~/constants/galgame'
+import {
+  KUN_GALGAME_RESOURCE_PULL_REQUEST_ACTION_MAP,
+  KUN_GALGAME_RESOURCE_PULL_REQUEST_TYPE_MAP
+} from '~/constants/galgame'
 
 const route = useRoute()
 const gid = computed(() => {
@@ -22,22 +25,21 @@ const { data, status } = await useFetch(
 </script>
 
 <template>
-  <KunHeader :size="2">
-    <template #header>贡献历史</template>
-  </KunHeader>
+  <div class="flex flex-col space-y-3" v-if="data">
+    <KunHeader
+      name="贡献历史"
+      description="这里记录了这个 Galgame 项目发生的所有更改历史, 资源下载链接更改历史不计"
+    />
 
-  <div class="container" v-if="data">
     <div
-      class="history"
+      class="flex items-center gap-2 text-sm"
       v-for="(history, index) in data.historyData"
       :key="index"
     >
-      <NuxtLink :to="`/user/${history.user.uid}/info`">
-        <KunAvatar :user="history.user" size="30px" />
-      </NuxtLink>
+      <KunAvatar :user="history.user" />
 
-      <div class="info">
-        <div>
+      <div class="space-y-1">
+        <div class="flex gap-2">
           <span>{{ history.user.name }}</span>
           <span>
             {{ KUN_GALGAME_RESOURCE_PULL_REQUEST_ACTION_MAP[history.action] }}
@@ -45,12 +47,12 @@ const { data, status } = await useFetch(
           <span>
             {{ KUN_GALGAME_RESOURCE_PULL_REQUEST_TYPE_MAP[history.type] }}
           </span>
-          <span class="time">
+          <span class="text-default-500">
             {{ formatTimeDifference(history.time) }}
           </span>
         </div>
 
-        <div class="content" v-if="history.content">
+        <div class="text-default-500" v-if="history.content">
           {{ history.content }}
         </div>
       </div>
@@ -67,37 +69,3 @@ const { data, status } = await useFetch(
     />
   </div>
 </template>
-
-<style lang="scss" scoped>
-h2 {
-  margin-bottom: 17px;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-}
-
-.history {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  font-size: small;
-
-  .info {
-    span {
-      margin-left: 7px;
-    }
-
-    .time {
-      color: var(--kungalgame-font-color-0);
-    }
-  }
-
-  .content {
-    margin-left: 7px;
-    margin-top: 5px;
-    color: var(--kungalgame-font-color-0);
-  }
-}
-</style>

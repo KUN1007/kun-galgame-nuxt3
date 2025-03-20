@@ -20,15 +20,13 @@ const { data, status, refresh } = await useLazyFetch(
 </script>
 
 <template>
-  <div class="container" v-if="data && data.prs.length">
-    <KunHeader :size="2" :show-help="true">
-      <template #header>更新请求</template>
-      <template #help>
-        蓝色代表增加, 红色代表删减, 游戏发布者或管理员可以合并或拒绝请求
-      </template>
-    </KunHeader>
+  <div class="space-y-3" v-if="data && data.prs.length">
+    <KunHeader
+      name="更新请求"
+      description="蓝色代表增加, 红色代表删减, 游戏发布者或管理员可以合并或拒绝请求"
+    />
 
-    <div v-if="status === 'success'">
+    <div class="space-y-2" v-if="status === 'success'">
       <GalgamePrInfo
         v-for="(pr, index) in data.prs"
         :key="index"
@@ -51,5 +49,3 @@ const { data, status, refresh } = await useLazyFetch(
     />
   </div>
 </template>
-
-<style lang="scss" scoped></style>

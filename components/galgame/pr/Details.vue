@@ -112,7 +112,7 @@ const handleMergeRequest = async () => {
         v-model="declineInput"
       />
       <KunButton
-        type="danger"
+        color="danger"
         @click="handleDeclineRequest"
         :pending="isFetching"
       >

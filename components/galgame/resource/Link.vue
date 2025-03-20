@@ -95,7 +95,6 @@ watch(
           color="default"
           rounded="full"
           v-if="details"
-          class="close"
           @click="details = undefined"
         >
           <Icon name="lucide:x" />

@@ -14,6 +14,11 @@ const iconMap: Record<number, string> = {
   1: 'lucide:check',
   2: 'lucide:x'
 }
+const statusColorMap: Record<number, string> = {
+  0: 'text-primary',
+  1: 'text-success',
+  2: 'text-danger'
+}
 
 const { uid } = usePersistUserStore()
 const details = ref<Partial<GalgamePRDetails>>()
@@ -48,132 +53,67 @@ watch(
 </script>
 
 <template>
-  <div class="pr">
-    <div class="info">
-      <KunAvatar :user="pr.user" size="30px" />
-      <NuxtLink :to="`/user/${pr.user.uid}/info`">
-        {{ pr.user.name }}
-      </NuxtLink>
-      <span>提出更新请求</span>
+  <div class="space-y-3">
+    <div class="flex flex-wrap items-center justify-between">
+      <div class="flex flex-wrap items-center gap-2 text-sm">
+        <KunAvatar :user="pr.user" />
+        <span>{{ pr.user.name }} 提出更新请求</span>
+        <span class="text-default-500">
+          {{ formatTimeDifference(pr.time) }}
+        </span>
+      </div>
 
-      <span class="time">
-        {{ formatTimeDifference(pr.time) }}
-      </span>
+      <div class="flex gap-1 text-sm">
+        <span
+          class="flex items-center gap-1"
+          :class="statusColorMap[pr.status]"
+        >
+          <span v-if="pr.completedTime">
+            {{
+              formatDate(pr.completedTime, {
+                isShowYear: true,
+                isPrecise: true
+              })
+            }}
+          </span>
+          <Icon :name="iconMap[pr.status]" />
+          <span>
+            {{ KUN_GALGAME_RESOURCE_PULL_REQUEST_STATUS_MAP[pr.status] }}
+          </span>
+        </span>
+
+        <KunButton
+          size="sm"
+          variant="flat"
+          v-if="!details && pr.status !== 2"
+          @click="handleGetDetails(pr.gprid)"
+          :pending="isFetching"
+        >
+          详情
+        </KunButton>
+
+        <span v-if="pr.status == 2">{{ `#${pr.index}` }}</span>
+
+        <KunButton
+          :is-icon-only="true"
+          variant="light"
+          color="default"
+          rounded="full"
+          v-if="details"
+          @click="details = undefined"
+        >
+          <Icon name="lucide:x" />
+        </KunButton>
+      </div>
     </div>
 
-    <div class="btn">
-      <span class="description" :class="`status${pr.status}`">
-        <span v-if="pr.completedTime">
-          {{
-            formatDate(pr.completedTime, {
-              isShowYear: true,
-              isPrecise: true
-            })
-          }}
-        </span>
-        <Icon class="icon" :name="iconMap[pr.status]" />
-        <span>
-          {{ KUN_GALGAME_RESOURCE_PULL_REQUEST_STATUS_MAP[pr.status] }}
-        </span>
-      </span>
+    <p
+      class="text-danger font-bold italic"
+      v-if="uid === props.pr.user.uid && props.pr.status === 0"
+    >
+      您可以自己合并自己提出的更新请求
+    </p>
 
-      <KunButton
-        v-if="!details && pr.status !== 2"
-        @click="handleGetDetails(pr.gprid)"
-        :pending="isFetching"
-      >
-        详情
-      </KunButton>
-
-      <span v-if="pr.status == 2">{{ `#${pr.index}` }}</span>
-
-      <span v-if="details" class="close" @click="details = undefined">
-        <Icon class="icon" name="lucide:x" />
-      </span>
-    </div>
+    <GalgamePrDetails v-if="details" :details="details" :refresh="refresh" />
   </div>
-
-  <p class="note" v-if="uid === props.pr.user.uid && props.pr.status === 0">
-    您可以自己合并自己提出的更新请求
-  </p>
-
-  <GalgamePrDetails v-if="details" :details="details" :refresh="refresh" />
 </template>
-
-<style lang="scss" scoped>
-.pr {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 17px;
-}
-
-.info {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  font-size: 14px;
-
-  a {
-    margin: 0 10px;
-    color: var(--kungalgame-blue-5);
-  }
-
-  .time {
-    color: var(--kungalgame-font-color-1);
-    margin-left: 10px;
-  }
-}
-
-.btn {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-
-  .description {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 3px 10px;
-    font-size: 14px;
-
-    span {
-      &:nth-child(1) {
-        margin-right: 5px;
-      }
-    }
-
-    .icon {
-      margin-right: 5px;
-    }
-  }
-
-  .kun-button {
-    padding: 3px 10px;
-  }
-
-  .close {
-    cursor: pointer;
-    font-size: 20px;
-  }
-}
-
-.note {
-  margin-bottom: 17px;
-  font-weight: bold;
-  color: var(--kungalgame-red-5);
-}
-
-.status0 {
-  color: var(--kungalgame-blue-5);
-}
-
-.status1 {
-  color: var(--kungalgame-green-4);
-}
-
-.status2 {
-  color: var(--kungalgame-red-5);
-}
-</style>
