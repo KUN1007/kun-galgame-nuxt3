@@ -13,7 +13,15 @@ defineProps<{
     <div>
       <h4>标签</h4>
       <GalgameNull v-if="!galgame.tags.length" />
-      <TopicTags :tags="galgame.tags" :is-show-icon="false" />
+      <div class="space-y-1 space-x-1">
+        <KunBadge
+          v-for="(tag, index) in galgame.tags"
+          :key="index"
+          color="primary"
+        >
+          {{ tag }}
+        </KunBadge>
+      </div>
     </div>
 
     <div>
@@ -23,12 +31,11 @@ defineProps<{
         <KunBadge
           v-for="(alias, index) in galgame.alias"
           :key="index"
-          color="primary"
+          color="secondary"
         >
           {{ alias }}
         </KunBadge>
       </div>
-      <TopicTags :tags="galgame.alias" :is-show-icon="false" />
     </div>
 
     <div>
@@ -53,15 +60,14 @@ defineProps<{
       <h4>平台</h4>
       <GalgameNull v-if="!galgame.platform.length" />
       <div class="space-y-1 space-x-1">
-        <KunTooltip
+        <KunBadge
           v-for="(platform, index) in galgame.platform"
           :key="index"
-          :text="KUN_GALGAME_RESOURCE_PLATFORM_MAP[platform]"
+          color="success"
         >
-          <KunBadge color="secondary">
-            <Icon class="icon" :name="platformIconMap[platform]" />
-          </KunBadge>
-        </KunTooltip>
+          <Icon class="icon" :name="platformIconMap[platform]" />
+          {{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[platform] }}
+        </KunBadge>
       </div>
     </div>
 

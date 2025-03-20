@@ -79,11 +79,11 @@ watch(
           <Icon name="lucide:database" />
           {{ link.size }}
         </KunBadge>
-        <KunBadge color="secondary">
+        <KunBadge color="success">
           <Icon :name="platformIconMap[link.platform]" />
           {{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[link.platform] }}
         </KunBadge>
-        <KunBadge color="success">
+        <KunBadge color="secondary">
           {{ KUN_GALGAME_RESOURCE_LANGUAGE_MAP[link.language] }}
         </KunBadge>
       </div>

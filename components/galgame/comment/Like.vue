@@ -48,23 +48,15 @@ const handleClickLike = async () => {
 </script>
 
 <template>
-  <span class="like" :class="isLiked ? 'active' : ''" @click="handleClickLike">
-    <Icon class="icon" name="lucide:thumbs-up" />
+  <KunButton
+    :is-icon-only="true"
+    :variant="isLiked ? 'flat' : 'light'"
+    :color="isLiked ? 'secondary' : 'default'"
+    :size="likesCount ? 'md' : 'lg'"
+    class-name="gap-1"
+    @click="handleClickLike"
+  >
+    <Icon name="lucide:thumbs-up" />
     <span v-if="likesCount">{{ likesCount }}</span>
-  </span>
+  </KunButton>
 </template>
-
-<style lang="scss" scoped>
-.icon {
-  cursor: pointer;
-  color: var(--kungalgame-font-color-2);
-  margin-right: 3px;
-  margin-bottom: 3px;
-}
-
-.active {
-  .icon {
-    color: var(--kungalgame-red-4);
-  }
-}
-</style>

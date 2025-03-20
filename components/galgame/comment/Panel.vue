@@ -45,37 +45,24 @@ const handlePublishComment = async () => {
 </script>
 
 <template>
-  <div class="panel">
+  <div class="space-y-3">
     <KunTextarea
       placeholder="「恋だよ、恋。私に出来なかったことのひとつを、君に代わりにかなえてもらう」"
       v-model="content"
       name="comment"
-      rows="5"
+      :rows="5"
     />
 
-    <div class="footer">
+    <div class="flex items-center justify-between">
       <slot />
 
-      <KunButton @click="handlePublishComment" :pending="isPublishing">
+      <KunButton
+        class="ml-auto"
+        @click="handlePublishComment"
+        :pending="isPublishing"
+      >
         发布评论
       </KunButton>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.panel {
-  margin-bottom: 17px;
-
-  .footer {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-
-    .kun-button {
-      margin-left: auto;
-    }
-  }
-}
-</style>
