@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { checkLoginForm } from './checkLogin'
-import type { Pinia } from 'pinia'
+import { checkLogin } from './checkLogin'
 
-const info = useComponentMessageStore()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useComponentMessageStore()
 )
@@ -13,7 +11,6 @@ const loginForm = reactive({
 })
 
 const handleLogin = () => {
-  const checkLogin = checkLoginForm.asyncData(useNuxtApp().$pinia as Pinia)
   const result = checkLogin(loginForm.name, loginForm.password)
   if (!result) {
     return
@@ -39,7 +36,7 @@ watch(
     })
     if (userInfo) {
       usePersistUserStore().setUserInfo(userInfo)
-      // info.info(`登陆成功! 欢迎来到 ${kungal.name}`)
+      useKunLoliInfo(`登陆成功! 欢迎来到 ${kungal.name}`)
       navigateTo('/')
     }
 

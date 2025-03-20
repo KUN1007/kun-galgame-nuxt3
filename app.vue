@@ -70,9 +70,6 @@ onMounted(() => {
   <!-- Global alert component -->
   <KunAlert />
 
-  <!-- Global info component -->
-  <KunAlertInfo />
-
   <!-- Global capture component -->
   <KunCapture />
 
