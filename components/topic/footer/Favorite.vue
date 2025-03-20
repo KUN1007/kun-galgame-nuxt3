@@ -6,7 +6,7 @@ const props = defineProps<{
   isFavorite: boolean
 }>()
 
-const { moemoeAccessToken } = usePersistUserStore()
+const { uid } = usePersistUserStore()
 const isFavorite = ref(props.isFavorite)
 const favoritesCount = ref(props.favoritesCount)
 
@@ -35,7 +35,7 @@ const handleClickFavoriteThrottled = throttle(toggleFavoriteGalgame, 1007, () =>
 )
 
 const handleClickFavorite = () => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10232, 'warn', 5000)
     return
   }

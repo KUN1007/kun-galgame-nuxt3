@@ -1,4 +1,3 @@
-import mongoose from 'mongoose'
 import { hash } from 'bcrypt'
 import UserModel from '~/server/models/user'
 import {
@@ -70,7 +69,7 @@ export default defineEventHandler(async (event) => {
   })
   await user.save()
 
-  const { token, refreshToken } = await createTokens(user.uid, user.name)
+  const { refreshToken } = await createTokens(user.uid, user.name)
   deleteCookie(event, 'kungalgame-is-navigate-to-login')
   setCookie(event, 'kungalgame-moemoe-refresh-token', refreshToken, {
     httpOnly: true,
@@ -82,8 +81,7 @@ export default defineEventHandler(async (event) => {
     name: user.name,
     avatar: user.avatar,
     moemoepoint: user.moemoepoint,
-    roles: user.roles,
-    token
+    roles: user.roles
   }
 
   return userInfo

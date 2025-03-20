@@ -1,6 +1,6 @@
 export interface Nav {
   name: string
-  router?: string
+  router: string
   redirect?: string
   collapsed?: boolean
   permission?: number[]

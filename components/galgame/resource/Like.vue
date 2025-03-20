@@ -7,7 +7,7 @@ const props = defineProps<{
   likes: number[]
 }>()
 
-const { uid, moemoeAccessToken } = usePersistUserStore()
+const { uid } = usePersistUserStore()
 const isLiked = ref(props.likes.includes(uid))
 const likesCount = ref(props.likes.length)
 
@@ -40,7 +40,7 @@ const likeResource = async () => {
 }
 
 const handleClickLike = async () => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10532, 'warn', 5000)
     return
   }

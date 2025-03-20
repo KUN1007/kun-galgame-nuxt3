@@ -17,7 +17,7 @@ const handleError = async () => {
         <h1>404</h1>
         <NuxtImg :src="useRandomSticker" />
         <p>杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面不见了 ~ 是不是被你吃了?!</p>
-        <KunButton type="danger" @click="handleError">
+        <KunButton color="danger" @click="handleError">
           一键转生为萝莉
         </KunButton>
       </div>
@@ -25,7 +25,7 @@ const handleError = async () => {
       <div class="card" v-else>
         <h1>{{ error.message }}</h1>
         <p>杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面出错了 ~ 是不是你干的?!</p>
-        <KunButton type="danger" @click="handleError">
+        <KunButton color="danger" @click="handleError">
           一键转生为萝莉
         </KunButton>
       </div>

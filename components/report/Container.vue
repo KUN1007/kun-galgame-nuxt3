@@ -4,11 +4,11 @@ import { usePersistUserStore } from '~/store/modules/user'
 
 const reason = ref('')
 const selectReportType = ref('topic')
-const { moemoeAccessToken } = usePersistUserStore()
+const { uid } = usePersistUserStore()
 const isFetching = ref(false)
 
 const handleSubmitReport = async () => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10142, 'warn')
     return
   }

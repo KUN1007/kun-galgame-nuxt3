@@ -38,8 +38,8 @@ watch(
       ...kungalgameResponseHandler
     })
     if (userInfo) {
-      info.info(`登陆成功! 欢迎来到 ${kungal.name}`)
       usePersistUserStore().setUserInfo(userInfo)
+      // info.info(`登陆成功! 欢迎来到 ${kungal.name}`)
       navigateTo('/')
     }
 

@@ -7,7 +7,7 @@ const props = defineProps<{
   isUpvoted: boolean
 }>()
 
-const { uid, moemoeAccessToken, moemoepoint } = usePersistUserStore()
+const { uid, moemoepoint } = usePersistUserStore()
 const isUpvoted = ref(props.isUpvoted)
 const upvoteCount = ref(props.upvoteCount)
 
@@ -57,7 +57,7 @@ const upvoteReply = async () => {
 }
 
 const handleClickUpvote = async () => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10240, 'warn', 5000)
     return
   }

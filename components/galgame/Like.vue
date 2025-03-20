@@ -6,7 +6,7 @@ const props = defineProps<{
   isLiked: boolean
 }>()
 
-const { uid, moemoeAccessToken } = usePersistUserStore()
+const { uid } = usePersistUserStore()
 const isLiked = ref(props.isLiked)
 const likesCount = ref(props.likesCount)
 
@@ -35,7 +35,7 @@ const handleClickLikeThrottled = throttle(toggleLikeGalgame, 1007, () =>
 )
 
 const handleClickLike = () => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10532, 'warn', 5000)
     return
   }

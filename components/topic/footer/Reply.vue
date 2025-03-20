@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { moemoeAccessToken } = usePersistUserStore()
+const { uid } = usePersistUserStore()
 const { isEdit } = storeToRefs(useTempReplyStore())
 const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 
@@ -10,7 +10,7 @@ const props = defineProps<{
 }>()
 
 const handleClickReply = () => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10237, 'warn', 5000)
     return
   }

@@ -1,7 +1,7 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-  const { moemoeAccessToken } = usePersistUserStore()
+  const { uid } = usePersistUserStore()
 
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10249, 'warn', 5000)
     return navigateTo('/login')
   }

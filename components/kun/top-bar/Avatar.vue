@@ -89,12 +89,6 @@ const statusClasses = computed(() => {
   animation: kun-pulse 1s infinite;
 }
 
-.login {
-  margin-left: 30px;
-  font-weight: bold;
-  white-space: nowrap;
-}
-
 @keyframes kun-pulse {
   0% {
     transform: scale(1);

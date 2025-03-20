@@ -6,13 +6,13 @@ defineProps<{
   reply: TopicReply
 }>()
 
-const { moemoeAccessToken } = usePersistUserStore()
+const { uid } = usePersistUserStore()
 const { rid, toUid, toUsername, isShowPanel } = storeToRefs(
   useTempCommentStore()
 )
 
 const handleClickComment = (replyIid: number, uid: number, name: string) => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10216, 'warn', 5000)
     return
   }

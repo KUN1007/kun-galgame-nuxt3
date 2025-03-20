@@ -7,7 +7,7 @@ const props = defineProps<{
   isDisliked: boolean
 }>()
 
-const { uid, moemoeAccessToken } = usePersistUserStore()
+const { uid } = usePersistUserStore()
 const isDisliked = ref(props.isDisliked)
 const dislikesCount = ref(props.dislikesCount)
 
@@ -48,7 +48,7 @@ const handleClickDislikeThrottled = throttle(toggleDislike, 1007, () =>
 )
 
 const handleClickDislike = () => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10228, 'warn', 5000)
     return
   }

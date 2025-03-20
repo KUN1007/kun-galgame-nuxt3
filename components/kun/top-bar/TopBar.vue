@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
-
 const isVisible = ref(true)
 let lastScrollY = 0
 

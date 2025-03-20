@@ -6,7 +6,7 @@ const props = defineProps<{
   comment: SerializeObject<GalgameComment>
 }>()
 
-const { uid, moemoeAccessToken } = usePersistUserStore()
+const { uid } = usePersistUserStore()
 const isLiked = ref(props.comment.likes.isLiked)
 const likesCount = ref(props.comment.likes.count)
 
@@ -39,7 +39,7 @@ const likeComment = async () => {
 }
 
 const handleClickLike = async () => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10532, 'warn', 5000)
     return
   }

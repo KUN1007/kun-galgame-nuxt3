@@ -10,7 +10,6 @@ export const usePersistUserStore = defineStore('KUNGalgameUser', {
     avatar: '',
     avatarMin: '',
     moemoepoint: 0,
-    moemoeAccessToken: '',
     roles: 0
   }),
   actions: {
@@ -21,19 +20,6 @@ export const usePersistUserStore = defineStore('KUNGalgameUser', {
       this.avatarMin = user.avatar.replace(/\.webp$/, '-100.webp')
       this.moemoepoint = user.moemoepoint
       this.roles = user.roles
-      this.moemoeAccessToken = user.token
-    },
-
-    setToken(moemoeAccessToken: string) {
-      this.moemoeAccessToken = moemoeAccessToken
-    },
-
-    getToken() {
-      return this.moemoeAccessToken
-    },
-
-    removeToken() {
-      this.moemoeAccessToken = ''
     }
   }
 })

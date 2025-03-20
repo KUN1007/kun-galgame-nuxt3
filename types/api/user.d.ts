@@ -124,5 +124,4 @@ export type LoginResponseData = {
   avatar: string
   moemoepoint: number
   roles: number
-  token: string
 }
