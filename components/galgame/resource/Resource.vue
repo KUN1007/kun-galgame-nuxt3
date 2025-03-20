@@ -38,9 +38,7 @@ watch(
   <div class="space-y-3">
     <KunHeader :is-show-divider="false" name="资源链接">
       <template #headerEndContent>
-        <KunButton :is-icon-only="true" @click="handleClickContribute">
-          添加资源
-        </KunButton>
+        <KunButton @click="handleClickContribute">添加资源</KunButton>
       </template>
       <template #endContent>
         <div class="text-sm">

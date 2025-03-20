@@ -15,7 +15,7 @@ withDefaults(
 
 <template>
   <div className="space-y-2">
-    <div className="flex justify-between">
+    <div className="flex items-center justify-between">
       <div className="space-y-2">
         <h1 className="text-2xl font-medium">
           <span v-if="name">{{ name }}</span>

@@ -136,7 +136,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
         rel="noopener noreferrer"
       >
         {{ kun }}
-        <Icon class="icon" name="lucide:external-link" />
+        <Icon name="lucide:external-link" />
       </a>
     </div>
   </div>
