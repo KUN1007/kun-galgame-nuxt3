@@ -1,5 +1,12 @@
 <script setup lang="ts">
-const error = useError()
+import type { NuxtError } from '#app'
+
+defineProps({
+  error: {
+    type: Object as () => NuxtError,
+    default: () => ({ statusCode: 500 })
+  }
+})
 
 const handleError = async () => {
   clearError({ redirect: '/' })
@@ -11,62 +18,30 @@ const handleError = async () => {
 </script>
 
 <template>
-  <KunLayout>
-    <div class="root" v-if="error">
-      <div class="card" v-if="error.statusCode === 404">
-        <h1>404</h1>
-        <NuxtImg :src="useRandomSticker" />
-        <p>杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面不见了 ~ 是不是被你吃了?!</p>
-        <KunButton color="danger" @click="handleError">
-          一键转生为萝莉
-        </KunButton>
-      </div>
+  <KunTopBar class-name="!pl-0" />
 
-      <div class="card" v-else>
-        <h1>{{ error.message }}</h1>
-        <p>杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面出错了 ~ 是不是你干的?!</p>
-        <KunButton color="danger" @click="handleError">
-          一键转生为萝莉
-        </KunButton>
+  <div
+    class="flex min-h-dvh w-full items-center justify-center bg-white dark:bg-black"
+  >
+    <KunCard
+      :is-hoverable="false"
+      :is-transparent="false"
+      content-class="flex flex-col justify-center items-center gap-3"
+    >
+      <h1 class="text-danger text-3xl font-bold">{{ error.statusCode }}</h1>
+      <KunNull
+        :description="
+          error.statusCode === 404
+            ? '杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面不见了 ~ 是不是被你吃了?!'
+            : '杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面出错了 ~ 是不是你干的?!'
+        "
+      />
+      <div class="bg-default-100 w-full max-w-xl rounded-lg p-3 text-sm">
+        {{ error.statusMessage }}
       </div>
-    </div>
-  </KunLayout>
+      <KunButton variant="shadow" color="secondary" @click="handleError">
+        一键转生为萝莉
+      </KunButton>
+    </KunCard>
+  </div>
 </template>
-
-<style lang="scss" scoped>
-.root {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: calc(100dvh - 75px);
-  max-width: 80rem;
-  margin: 0 auto;
-}
-
-.card {
-  margin: 0 auto;
-  padding: 17px;
-
-  flex-direction: column;
-
-  h1 {
-    color: var(--kungalgame-red-5);
-
-    &::before {
-      content: '';
-      color: var(--kungalgame-blue-5);
-      margin-right: 0;
-    }
-  }
-
-  img {
-    margin: 10px 0;
-  }
-
-  p {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 17px;
-  }
-}
-</style>

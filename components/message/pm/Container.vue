@@ -149,7 +149,7 @@ const handleLoadHistoryMessages = async () => {
       </KunButton>
     </div>
 
-    <KunNull v-if="!isShowLoader && messages.length > 30" type="null" />
+    <KunNull v-if="!isShowLoader && messages.length > 30" />
 
     <div class="space-y-2" v-if="messages.length">
       <MessagePmItem
@@ -160,7 +160,7 @@ const handleLoadHistoryMessages = async () => {
       />
     </div>
 
-    <KunNull v-if="!messages.length" type="null" />
+    <KunNull v-if="!messages.length" />
   </div>
 
   <div class="flex justify-between gap-2">

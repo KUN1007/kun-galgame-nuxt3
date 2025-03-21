@@ -27,5 +27,5 @@ const count = computed(() => {
 <template>
   <UserGalgame :uid="user.uid" :type="galgameType" />
 
-  <KunNull v-if="!count" type="null" />
+  <KunNull v-if="!count" />
 </template>

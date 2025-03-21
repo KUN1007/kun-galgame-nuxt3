@@ -29,5 +29,5 @@ const count = computed(() => {
 <template>
   <UserTopic :uid="user.uid" :type="topicType" />
 
-  <KunNull v-if="!count" type="null" />
+  <KunNull v-if="!count" />
 </template>

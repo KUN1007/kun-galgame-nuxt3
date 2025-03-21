@@ -2,12 +2,10 @@
 withDefaults(
   defineProps<{
     description?: string
-    type?: 'null' | '404'
     isShowSticker?: boolean
   }>(),
   {
-    description: '',
-    type: 'null',
+    description: '请填满这只萝莉吧, 因为这里空空如也',
     isShowSticker: true
   }
 )
@@ -22,10 +20,6 @@ withDefaults(
       loading="lazy"
       placeholder="/apple-touch-icon.png"
     />
-    <span v-if="description">{{ description }}</span>
-    <span v-if="type === 'null'">请填满这只萝莉吧, 因为这里空空如也</span>
-    <span v-if="type === '404'">
-      杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡ 页面不见了 ~ 是不是被你吃了?!
-    </span>
+    <span>{{ description }}</span>
   </div>
 </template>

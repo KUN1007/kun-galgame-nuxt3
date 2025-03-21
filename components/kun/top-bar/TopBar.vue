@@ -1,4 +1,13 @@
 <script setup lang="ts">
+withDefaults(
+  defineProps<{
+    className?: string
+  }>(),
+  {
+    className: ''
+  }
+)
+
 const isVisible = ref(true)
 let lastScrollY = 0
 
@@ -22,7 +31,8 @@ onUnmounted(() => {
     :class="
       cn(
         'fixed top-0 z-30 mb-3 w-full shrink-0 transition-all duration-300 md:pr-3 md:pl-68',
-        isVisible ? 'translate-y-0' : '-translate-y-full'
+        isVisible ? 'translate-y-0' : '-translate-y-full',
+        className
       )
     "
   >

@@ -9,5 +9,5 @@ defineProps<{
 <template>
   <UserComment :uid="user.uid" />
 
-  <KunNull v-if="!user.comment" type="null" />
+  <KunNull v-if="!user.comment" />
 </template>

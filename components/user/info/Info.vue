@@ -150,7 +150,7 @@ const currentUserUid = usePersistUserStore().uid
         class="bg-default-100 text-default-700 rounded-lg p-3 text-sm whitespace-pre-wrap"
         >{{ user.bio }}</pre
       >
-      <KunNull v-if="!user.bio" type="null" :is-show-sticker="false" />
+      <KunNull v-if="!user.bio" :is-show-sticker="false" />
     </div>
   </div>
 </template>

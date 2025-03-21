@@ -42,7 +42,7 @@ useHead({
       </div>
     </div>
 
-    <KunNull v-if="!data && data !== 'banned'" type="404" />
+    <KunNull v-if="!data && data !== 'banned'" />
     <KunBlank v-if="data === 'banned'">此用户已被封禁</KunBlank>
   </KunCard>
 </template>

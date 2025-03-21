@@ -51,7 +51,7 @@ onMounted(async () => {
       />
     </div>
 
-    <KunNull v-if="!data.totalCount" type="null" />
+    <KunNull v-if="!data.totalCount" />
 
     <KunPagination
       class="pagination"

@@ -86,7 +86,10 @@ if (data.value && data.value !== 'banned') {
 <template>
   <div>
     <Galgame v-if="data && data !== 'banned'" :galgame="data" />
-    <KunNull v-if="!data && data !== 'banned'" type="404" />
+    <KunNull
+      v-if="!data && data !== 'banned'"
+      description="未找到这个 Galgame"
+    />
     <KunBlank v-if="data === 'banned'">此 Galgame 已被封禁</KunBlank>
   </div>
 </template>

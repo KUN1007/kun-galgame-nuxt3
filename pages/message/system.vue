@@ -47,6 +47,6 @@ onMounted(async () => {
       />
     </div>
 
-    <KunNull v-if="!data.length" type="null" />
+    <KunNull v-if="!data.length" />
   </div>
 </template>

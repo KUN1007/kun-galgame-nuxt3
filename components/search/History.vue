@@ -45,6 +45,6 @@ const handleDeleteHistory = (historyIndex: number) => {
       </div>
     </div>
 
-    <KunNull v-if="!searchHistory.length" type="null" />
+    <KunNull v-if="!searchHistory.length" />
   </div>
 </template>
