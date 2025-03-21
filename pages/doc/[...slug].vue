@@ -8,15 +8,15 @@ const { data } = await useAsyncData(() => {
 <template>
   <KunCard :is-hoverable="false" :is-transparent="false" v-if="data">
     <div class="flex gap-3">
-      <DocCategoryTree />
+      <DocDetailCategoryTree />
 
       <article>
-        <h1 class="mb-8">{{ data.title }}</h1>
+        <DocDetailHeader :metadata="{ ...data }" />
         <ContentRenderer class="kun-prose" :value="data" />
       </article>
 
       <aside class="hidden shrink-0 space-y-8 lg:block lg:w-64">
-        <DocTableOfContent :toc="data.body.toc" />
+        <DocDetailTableOfContent :toc="data.body.toc" />
       </aside>
     </div>
   </KunCard>

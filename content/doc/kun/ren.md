@@ -6,10 +6,13 @@ date: 2024-12-4
 category: kun
 authorUid: 2
 authorName: '鲲'
-authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar-100.webp'
+authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar.webp'
 authorHomepage: 'https://github.com/KUN1007'
 pin: true
 ---
+
+::kun-blog-image{src="/content/kun/ren/banner.avif"}
+::
 
 ## 介绍
 

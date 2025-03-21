@@ -22,29 +22,36 @@ const hasPinnedPosts = computed(() => posts.value?.some((post) => post.pin))
 
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
       <KunCard
+        :is-pressable="true"
         v-for="post in posts"
         :key="post.id"
-        class="flex flex-col items-start"
+        :href="post.path"
+        content-class="space-y-3"
       >
-        <div class="flex items-center gap-x-4 text-xs">
+        <div class="flex items-center gap-3 text-sm">
           <KunBadge>
             {{ post.category }}
           </KunBadge>
 
-          <time :datetime="post.date.toString()" class="text-gray-500">
+          <time :datetime="post.date.toString()" class="text-default-500">
             {{ formatDate(post.date, { isShowYear: true }) }}
           </time>
         </div>
-        <div class="group relative">
-          <h3
-            class="mt-3 text-lg leading-6 font-semibold text-gray-900 group-hover:text-gray-600"
-          >
-            <NuxtLink :to="post.path">
-              <span class="absolute inset-0"></span>
-              {{ post.title }}
-            </NuxtLink>
-          </h3>
-          <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
+
+        <div class="group relative space-y-3">
+          <img
+            :alt="post.title"
+            class="rounded-lg"
+            :src="post.banner"
+            width="100%"
+            height="100%"
+          />
+
+          <h2 class="group-hover:text-primary text-lg leading-6 font-semibold">
+            {{ post.title }}
+          </h2>
+
+          <p class="text-default-500 line-clamp-3 text-sm leading-6">
             {{ post.description }}
           </p>
         </div>

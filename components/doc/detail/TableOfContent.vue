@@ -1,10 +1,9 @@
 <script setup lang="ts">
-defineProps({
-  toc: {
-    type: Object,
-    required: true
-  }
-})
+import type { TocLink } from '@nuxt/content'
+
+defineProps<{
+  toc: { links?: TocLink[] }
+}>()
 </script>
 
 <template>
@@ -15,7 +14,7 @@ defineProps({
         <li v-for="link in toc.links" :key="link.id" class="toc-link">
           <NuxtLink
             :to="`#${link.id}`"
-            class="block py-1 text-gray-600 hover:text-gray-900"
+            class="text-default-700 block py-1"
             :class="{ 'pl-4': link.depth === 2, 'pl-8': link.depth === 3 }"
           >
             {{ link.text }}
@@ -23,5 +22,7 @@ defineProps({
         </li>
       </ul>
     </nav>
+
+    <KunNull v-if="!toc" description="本页面无目录" />
   </div>
 </template>
