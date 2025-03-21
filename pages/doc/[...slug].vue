@@ -15,9 +15,7 @@ const { data } = await useAsyncData(() => {
         <ContentRenderer class="kun-prose" :value="data" />
       </article>
 
-      <aside class="hidden shrink-0 space-y-8 lg:block lg:w-64">
-        <DocDetailTableOfContent :toc="data.body.toc" />
-      </aside>
+      <DocDetailTableOfContent :toc="data.body.toc" />
     </div>
   </KunCard>
 </template>

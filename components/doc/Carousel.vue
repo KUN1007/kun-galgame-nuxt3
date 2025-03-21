@@ -18,7 +18,6 @@ const prevSlide = () => {
     pinnedPosts.value.length
 }
 
-// Autoplay
 onMounted(() => {
   autoplayInterval.value = setInterval(nextSlide, 5000)
 })
@@ -31,7 +30,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="relative overflow-hidden bg-white">
+  <div class="bg-background relative overflow-hidden">
     <div
       class="flex transition-transform duration-300 ease-in-out"
       :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
@@ -43,7 +42,7 @@ onUnmounted(() => {
       >
         <div class="relative h-[400px] w-full">
           <img
-            :src="post.image || 'https://via.placeholder.com/1200x400'"
+            :src="post.image || '/kungalgame.webp'"
             :alt="post.title"
             class="h-full w-full object-cover"
           />
@@ -59,20 +58,9 @@ onUnmounted(() => {
               </p>
               <NuxtLink
                 :to="post.path"
-                class="inline-flex items-center rounded-lg bg-white px-4 py-2 text-gray-900 transition-colors hover:bg-gray-100"
+                class="inline-flex items-center rounded-lg px-4 py-2 transition-colors"
               >
-                Read More
-                <svg
-                  class="ml-2 h-4 w-4"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
+                阅读更多 >
               </NuxtLink>
             </div>
           </div>
@@ -80,33 +68,19 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!-- Navigation Buttons -->
     <button
       @click="prevSlide"
-      class="absolute top-1/2 left-4 -translate-y-1/2 rounded-full bg-white/80 p-2 transition-colors hover:bg-white"
+      class="bg-background absolute top-1/2 left-4 -translate-y-1/2 rounded-full p-2 transition-colors hover:bg-white"
     >
-      <svg class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-        <path
-          fill-rule="evenodd"
-          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-          clip-rule="evenodd"
-        />
-      </svg>
+      <Icon name="lucide:chevron-left" />
     </button>
     <button
       @click="nextSlide"
       class="absolute top-1/2 right-4 -translate-y-1/2 rounded-full bg-white/80 p-2 transition-colors hover:bg-white"
     >
-      <svg class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-        <path
-          fill-rule="evenodd"
-          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-          clip-rule="evenodd"
-        />
-      </svg>
+      <Icon name="lucide:chevron-right" />
     </button>
 
-    <!-- Dots -->
     <div class="absolute bottom-4 left-1/2 flex -translate-x-1/2 space-x-2">
       <button
         v-for="(_, index) in pinnedPosts"
