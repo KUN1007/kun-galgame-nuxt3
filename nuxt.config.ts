@@ -56,6 +56,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxtjs/color-mode',
     '@nuxtjs/sitemap',
+    '@nuxt/content',
     '@pinia/nuxt',
     '@vite-pwa/nuxt',
     'pinia-plugin-persistedstate/nuxt',
