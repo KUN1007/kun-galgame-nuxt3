@@ -14,7 +14,7 @@ withDefaults(
 
 <template>
   <article
-    :class="cn('kun-prose', className)"
+    :class="cn('kun-prose break-all', className)"
     v-html="DOMPurify.sanitize(content, { ADD_ATTR: ['line'] })"
   />
 </template>
