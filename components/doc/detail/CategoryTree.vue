@@ -37,7 +37,7 @@ const toggleCategory = (category: string) => {
 </script>
 
 <template>
-  <div class="hidden shrink-0 space-y-1 lg:w-64 xl:block">
+  <div class="fixed hidden shrink-0 space-y-1 lg:w-64 xl:block">
     <h3 class="p-3 text-xl font-semibold">文章目录</h3>
     <div
       class="space-y-1"

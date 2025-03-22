@@ -9,10 +9,10 @@ const { data } = await useAsyncData(() => {
   <KunCard :is-hoverable="false" :is-transparent="false" v-if="data">
     <DocDetailBackgroundImage :src="data.banner" />
 
-    <div class="flex gap-3">
+    <div class="flex">
       <DocDetailCategoryTree />
 
-      <article>
+      <article class="pl-0 lg:pr-67 xl:pl-67">
         <DocDetailHeader :metadata="{ ...data }" />
         <ContentRenderer class="kun-prose" :value="data" />
       </article>
