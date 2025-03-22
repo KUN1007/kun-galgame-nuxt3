@@ -25,17 +25,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="nav-top flex h-full items-center">
-    <div class="cursor-pointer sm:hidden">
-      <Icon
-        class="icon"
-        name="lucide:menu"
-        @click="showKUNGalgameHamburger = true"
-      />
+  <div class="cursor-pointer">
+    <Icon
+      class="icon"
+      name="lucide:menu"
+      @click="showKUNGalgameHamburger = true"
+    />
 
-      <LazyKunTopBarHamburger />
-    </div>
-
-    <KunTopBarNavBar />
+    <LazyKunTopBarHamburger />
   </div>
 </template>

@@ -23,7 +23,9 @@ watch(
     :style="{ backgroundImage: `url(${imageURL})` }"
   />
 
-  <KunLayoutSidebar />
+  <div class="hidden md:block">
+    <KunLayoutSidebar />
+  </div>
 
   <KunTopBar />
 

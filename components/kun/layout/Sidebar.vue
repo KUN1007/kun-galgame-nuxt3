@@ -1,26 +1,23 @@
 <script setup lang="ts">
+defineProps<{
+  className?: string
+}>()
+
 const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 </script>
 
 <template>
   <div
-    class="scrollbar-hide bg-default-100 fixed z-50 flex h-full w-3xs shrink-0 flex-col justify-between overflow-y-scroll"
+    :class="
+      cn(
+        'scrollbar-hide bg-default-100 fixed z-50 flex h-full w-3xs shrink-0 flex-col justify-between overflow-y-scroll',
+        className
+      )
+    "
     @click.stop
   >
     <div class="space-y-3 p-3">
-      <div
-        class="flex cursor-pointer items-center gap-3"
-        @click="navigateTo('/')"
-      >
-        <!-- <NuxtImg class="size-10" src="/favicon.webp" :alt="kungal.titleShort" />
-        <span class="text-xl">{{ kungal.name }}</span>
-        <span
-          class="bg-primary-100 text-primary rounded-full px-3 py-1 text-sm"
-        >
-          论坛
-        </span> -->
-        ACME
-      </div>
+      <KunBrand />
 
       <KunLayoutSideBarNav />
 

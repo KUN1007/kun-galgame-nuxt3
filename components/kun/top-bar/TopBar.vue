@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { KunTopBarNav } from '#components'
+
 withDefaults(
   defineProps<{
     className?: string
@@ -39,7 +41,7 @@ onUnmounted(() => {
     <div
       class="bg-background border-default-300 mx-auto flex h-16 w-full max-w-7xl items-center justify-between rounded-b-lg border px-3 shadow"
     >
-      <span>占位文本</span>
+      <KunTopBarNav />
       <KunTopBarAvatar />
     </div>
   </div>
