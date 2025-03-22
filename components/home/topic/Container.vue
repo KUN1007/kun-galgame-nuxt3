@@ -18,9 +18,13 @@ const { data } = await useFetch(`/api/home/topic`, {
   >
     <div class="flex items-center gap-3">
       <h2 class="text-xl font-semibold">最新话题</h2>
-      <NuxtLink class="text-default-600 hover:text-primary text-sm" to="/topic">
+      <KunLink
+        underline="none"
+        class-name="text-default-500 hover:text-primary text-sm transition-colors"
+        to="/topic"
+      >
         查看更多 >
-      </NuxtLink>
+      </KunLink>
     </div>
 
     <template v-for="(topic, index) in data" :key="index">

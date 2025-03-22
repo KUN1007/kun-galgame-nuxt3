@@ -42,20 +42,18 @@ watch(
       </template>
       <template #endContent>
         <div class="text-sm">
-          <div class="text-primary">提示: 部分资源链接可能需要网络代理</div>
+          <div class="text-secondary-600">
+            提示: 部分资源链接可能需要网络代理
+          </div>
           <div class="flex gap-1">
             <p>如果您找不到想要的资源链接, 可以去看看友站</p>
-            <a
-              class="text-primary"
-              href="https://www.touchgal.io/"
-              target="_blank"
-            >
+            <KunLink size="sm" to="https://www.touchgal.io/" target="_blank">
               TouchGal
-            </a>
+            </KunLink>
             和
-            <a class="text-primary" href="https://www.zi6.cc/" target="_blank">
+            <KunLink size="sm" href="https://www.zi6.cc/" target="_blank">
               zi0
-            </a>
+            </KunLink>
           </div>
         </div>
       </template>

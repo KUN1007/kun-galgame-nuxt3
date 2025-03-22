@@ -83,9 +83,9 @@ const handleGetVNData = async () => {
         description="您需要创建 Galgame 才可以在对应的 Galgame 下发布 Galgame 资源, 如果这个 Galgame 已经存在, 直接在这个 Galgame 下添加资源即可"
       >
         <template #endContent>
-          <NuxtLink target="_blank" to="/topic/280" class="text-primary">
+          <KunLink target="_blank" to="/topic/280">
             Galgame 发布系统帮助文档、教程、介绍
-          </NuxtLink>
+          </KunLink>
           <EditGalgameSite class="mt-2" />
         </template>
       </KunHeader>

@@ -97,20 +97,9 @@ watch(
         <span class="mx-2">或</span>
       </KunDivider>
 
-      <div class="flex flex-col">
-        <NuxtLink
-          to="/register"
-          class="text-primary mb-4 underline underline-offset-[3px]"
-        >
-          注册
-        </NuxtLink>
-
-        <NuxtLink
-          to="/forgot"
-          class="text-primary mb-4 underline underline-offset-[3px]"
-        >
-          忘记密码?
-        </NuxtLink>
+      <div class="flex flex-col gap-3">
+        <KunLink to="/register">注册</KunLink>
+        <KunLink to="/forgot">忘记密码?</KunLink>
       </div>
     </KunCard>
   </div>

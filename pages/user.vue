@@ -30,10 +30,11 @@ useHead({
     :is-transparent="false"
     class-name="m-auto"
     content-class="h-[calc(100dvh-120px)]"
+    v-if="data !== 'banned'"
   >
     <div class="flex h-full w-full gap-3">
       <UserNavBar
-        v-if="data && data !== 'banned'"
+        v-if="data"
         :user="{ uid: data.uid, name: data.name, avatar: data.avatar }"
       />
 
@@ -42,7 +43,14 @@ useHead({
       </div>
     </div>
 
-    <KunNull v-if="!data && data !== 'banned'" />
+    <KunNull v-if="!data" />
+  </KunCard>
+
+  <KunCard
+    :is-hoverable="false"
+    :is-transparent="false"
+    content-class="h-[calc(100dvh-120px)]"
+  >
     <KunNull v-if="data === 'banned'" description="此用户已被封禁" />
   </KunCard>
 </template>

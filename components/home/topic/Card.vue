@@ -14,8 +14,12 @@ const isRecentlyUpvoted = computed(() => {
 </script>
 
 <template>
-  <NuxtLink class="space-y-2" :to="`/topic/${topic.tid}`">
-    <div class="flex items-start justify-between gap-4">
+  <KunLink
+    underline="none"
+    class-name="flex-col items-start w-full"
+    :to="`/topic/${topic.tid}`"
+  >
+    <div class="flex w-full items-center justify-between gap-4">
       <h3
         class="hover:text-primary line-clamp-2 text-lg font-medium transition-colors"
       >
@@ -34,7 +38,7 @@ const isRecentlyUpvoted = computed(() => {
     </div>
 
     <div
-      class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
+      class="flex w-full flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
     >
       <TopicTagGroup :section="topic.section" :tags="topic.tags" />
 
@@ -53,5 +57,5 @@ const isRecentlyUpvoted = computed(() => {
         </span>
       </div>
     </div>
-  </NuxtLink>
+  </KunLink>
 </template>

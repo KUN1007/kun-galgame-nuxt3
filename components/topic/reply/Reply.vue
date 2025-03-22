@@ -48,12 +48,14 @@ watch(
           {{ reply.toUser.name }}
         </button>
 
-        <NuxtLink
+        <KunLink
+          color="default"
+          underline="none"
           :to="`/topic/${reply.tid}#k${reply.floor}`"
           class="text-gray-400 hover:text-gray-600"
         >
           #{{ reply.floor }}
-        </NuxtLink>
+        </KunLink>
       </div>
 
       <KunContent :content="reply.content" />

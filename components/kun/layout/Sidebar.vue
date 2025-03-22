@@ -39,30 +39,37 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
       <KunLayoutSideBarExternal />
 
       <div class="flex w-full justify-between px-7 py-6">
-        <a
-          class="flex flex-col items-center justify-center"
-          aria-label="KUN Visual Novel Open Source GitHub Repository | 鲲 Galgame 论坛开源 GitHub 仓库"
-          :href="kungal.github"
+        <KunLink
+          underline="none"
+          color="default"
+          class-name="flex-col gap-0"
+          :to="kungal.github"
           target="_blank"
         >
           <Icon class="icon" name="lucide:github" />
           <span class="text-xs">GitHub</span>
-        </a>
+        </KunLink>
 
-        <NuxtLink class="flex flex-col items-center justify-center" to="/rss">
+        <KunLink
+          underline="none"
+          color="default"
+          class-name="flex-col gap-0"
+          to="/rss"
+        >
           <Icon class="icon" name="lucide:rss" />
           <span class="text-xs">RSS</span>
-        </NuxtLink>
+        </KunLink>
 
-        <a
-          class="flex flex-col items-center justify-center"
-          aria-label="KUN Visual Novel Official Telegram Group"
-          :href="kungal.domain.telegram_group"
+        <KunLink
+          underline="none"
+          color="default"
+          class-name="flex-col gap-0"
+          :to="kungal.domain.telegram_group"
           target="_blank"
         >
           <Icon class="icon" name="ph:telegram-logo" />
           <span class="text-xs">Telegram</span>
-        </a>
+        </KunLink>
       </div>
     </div>
   </div>

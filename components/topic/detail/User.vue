@@ -20,9 +20,13 @@ const user = computed(() => props.user)
   >
     <KunAvatar size="lg" :user="user" />
 
-    <NuxtLink :aria-label="props.user.name" :to="`/user/${user.uid}/info`">
+    <KunLink
+      underline="hover"
+      :aria-label="props.user.name"
+      :to="`/user/${user.uid}/info`"
+    >
       {{ user.name }}
-    </NuxtLink>
+    </KunLink>
 
     <p class="text-secondary flex items-center gap-1">
       <Icon class="text-inherit" name="lucide:lollipop" />

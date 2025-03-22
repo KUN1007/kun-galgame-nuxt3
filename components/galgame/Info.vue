@@ -42,17 +42,16 @@ defineProps<{
       <h4>官网</h4>
       <GalgameNull v-if="!galgame.official.length" />
       <template v-if="galgame.official.length">
-        <a
+        <KunLink
           v-for="(kun, index) in galgame.official"
           :key="index"
-          :href="kun"
-          class="text-primary flex items-center gap-2 underline-offset-3 hover:underline"
+          :to="kun"
+          :is-show-anchor-icon="true"
           target="_blank"
           rel="noopener noreferrer"
         >
           {{ kun }}
-          <Icon class="icon" name="lucide:external-link" />
-        </a>
+        </KunLink>
       </template>
     </div>
 

@@ -38,15 +38,18 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/galgames`, {
     />
 
     <div class="flex flex-col space-y-3" v-if="data && data.galgames.length">
-      <KunCard v-for="(galgame, index) in data.galgames" :key="index">
-        <NuxtLink :to="`/galgame/${galgame.gid}`">
-          <div>
-            {{ getPreferredLanguageText(galgame.name) }}
-          </div>
-          <div class="text-default-500 text-sm">
-            {{ formatDate(galgame.time, { isShowYear: true }) }}
-          </div>
-        </NuxtLink>
+      <KunCard
+        :is-pressable="true"
+        v-for="(galgame, index) in data.galgames"
+        :key="index"
+        :href="`/galgame/${galgame.gid}`"
+      >
+        <div>
+          {{ getPreferredLanguageText(galgame.name) }}
+        </div>
+        <div class="text-default-500 text-sm">
+          {{ formatDate(galgame.time, { isShowYear: true }) }}
+        </div>
       </KunCard>
 
       <KunPagination

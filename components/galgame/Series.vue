@@ -25,13 +25,13 @@ const { data, status } = await useLazyFetch(
     <KunLoading v-if="status === 'pending'" />
 
     <div class="flex gap-2" v-if="data && status !== 'pending'">
-      <NuxtLink
+      <KunLink
         v-for="(link, index) in data"
         :key="index"
         :to="`/galgame/${link.gid}`"
       >
         {{ link.name['zh-cn'] }}
-      </NuxtLink>
+      </KunLink>
     </div>
   </div>
 </template>

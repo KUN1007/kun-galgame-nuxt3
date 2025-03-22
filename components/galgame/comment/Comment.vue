@@ -53,12 +53,9 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
         <span class="text-default-700">{{ comment.user.name }}</span>
         <div v-if="comment.toUser">
           <span class="mx-2">=></span>
-          <NuxtLink
-            class="text-primary inline-flex flex-wrap items-center gap-2 underline-offset-3 hover:underline"
-            :to="`/user/${comment.toUser.uid}/info`"
-          >
+          <KunLink underline="hover" :to="`/user/${comment.toUser.uid}/info`">
             {{ `${comment.toUser.name}` }}
-          </NuxtLink>
+          </KunLink>
         </div>
       </div>
 

@@ -72,15 +72,19 @@ onMounted(async () => {
     </div>
 
     <div class="func flex flex-col">
-      <NuxtLink
-        class="hover:text-secondary-600 hover:bg-default-200 relative flex items-center justify-center rounded-lg p-1 transition-colors"
+      <KunLink
+        underline="none"
+        color="default"
+        class-name="hover:text-secondary-600 hover:bg-default-200 relative flex items-center justify-center rounded-lg p-1 transition-colors"
         :to="`/user/${uid}/info`"
       >
         个人主页
-      </NuxtLink>
+      </KunLink>
 
-      <NuxtLink
-        class="hover:text-secondary-600 hover:bg-default-200 relative flex items-center justify-center rounded-lg p-1 transition-colors"
+      <KunLink
+        underline="none"
+        color="default"
+        class-name="hover:text-secondary-600 hover:bg-default-200 relative flex items-center justify-center rounded-lg p-1 transition-colors"
         to="/message"
       >
         我的消息
@@ -88,7 +92,7 @@ onMounted(async () => {
           v-if="isShowMessageDot"
           class="bg-secondary-500 absolute right-1 bottom-3 size-2 rounded-full"
         />
-      </NuxtLink>
+      </KunLink>
 
       <div
         class="hover:text-secondary-600 hover:bg-default-200 relative flex items-center justify-center rounded-lg p-1 transition-colors"

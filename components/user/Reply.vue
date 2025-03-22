@@ -23,15 +23,18 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/replies`, {
     />
 
     <div class="flex flex-col space-y-3">
-      <KunCard v-for="(reply, index) in data.replies" :key="index">
-        <NuxtLink :to="`/topic/${reply.tid}`">
-          <div>
-            {{ markdownToText(reply.content) }}
-          </div>
-          <div class="text-default-500 text-sm">
-            {{ formatDate(reply.time, { isShowYear: true }) }}
-          </div>
-        </NuxtLink>
+      <KunCard
+        :is-pressable="true"
+        v-for="(reply, index) in data.replies"
+        :key="index"
+        :href="`/topic/${reply.tid}`"
+      >
+        <div>
+          {{ markdownToText(reply.content) }}
+        </div>
+        <div class="text-default-500 text-sm">
+          {{ formatDate(reply.time, { isShowYear: true }) }}
+        </div>
       </KunCard>
 
       <KunPagination

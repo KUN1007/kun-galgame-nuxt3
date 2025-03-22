@@ -14,7 +14,12 @@ const content = computed(() =>
 </script>
 
 <template>
-  <NuxtLink :to="`/topic/${data.tid}`" class="search-result-card">
+  <KunLink
+    color="default"
+    underline="none"
+    :to="`/topic/${data.tid}`"
+    class="flex-col items-start"
+  >
     <div class="flex items-center gap-2">
       <Icon
         class="text-primary h-5 w-5"
@@ -43,5 +48,5 @@ const content = computed(() =>
         <span class="ml-2 text-sm">{{ data.toUser.name }}</span>
       </div>
     </div>
-  </NuxtLink>
+  </KunLink>
 </template>

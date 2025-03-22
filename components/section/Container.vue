@@ -49,23 +49,26 @@ watch(
     <KunHeader :description="KUN_TOPIC_SECTION_DESCRIPTION_MAP[section]">
       <template #title>
         <div class="flex items-center gap-2">
-          <NuxtLink
-            class="text-primary underline-offset-3 hover:underline"
+          <KunLink
+            underline="hover"
             :to="`/category/${categoryMap[props.section[0]]}`"
+            class-name="text-2xl font-medium"
           >
             {{ category }}
-          </NuxtLink>
+          </KunLink>
           /
           <span class="text-lg">{{ KUN_TOPIC_SECTION[section] }}</span>
         </div>
       </template>
     </KunHeader>
 
-    <NuxtLink
+    <KunLink
+      color="default"
+      underline="none"
       v-for="(sec, index) in data?.topics"
       :key="index"
       :to="`/topic/${sec.tid}`"
-      class="hover:bg-primary/10 flex gap-2 rounded-lg p-4 transition-colors duration-200"
+      class-name="hover:bg-primary/10 items-start flex flex-nowrap gap-2 rounded-lg p-4 transition-colors duration-200"
     >
       <KunAvatar :user="sec.user" />
 
@@ -102,7 +105,7 @@ watch(
           </div>
         </div>
       </div>
-    </NuxtLink>
+    </KunLink>
 
     <KunPagination
       v-if="data?.totalCount"

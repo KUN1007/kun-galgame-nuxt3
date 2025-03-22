@@ -49,12 +49,9 @@ const handleDeleteMessage = async (mid: number) => {
       </div>
 
       <div>
-        <NuxtLink
-          class="text-primary underline"
-          :to="`/user/${message.sender.uid}/info`"
-        >
+        <KunLink :to="`/user/${message.sender.uid}/info`">
           {{ message.sender.name }}
-        </NuxtLink>
+        </KunLink>
         <span>{{ getMessageI18n(message) }}</span>
       </div>
     </div>
@@ -62,14 +59,18 @@ const handleDeleteMessage = async (mid: number) => {
     <div class="flex gap-2">
       <KunAvatar :user="message.sender" />
 
-      <NuxtLink
+      <KunLink
+        color="default"
+        underline="none"
         class="hover:text-primary cursor-pointer transition-colors"
         :to="message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`"
       >
-        <pre class="break-word text-sm whitespace-pre-line text-inherit">
+        <pre
+          class="break-word text-sm leading-8 whitespace-pre-line text-inherit"
+        >
           {{ markdownToText(message.content) }}
         </pre>
-      </NuxtLink>
+      </KunLink>
     </div>
 
     <div class="flex justify-between">

@@ -11,11 +11,13 @@ const { data } = await useFetch(`/api/ranking/user`, {
 
 <template>
   <div class="divide-default-200 divide-y">
-    <NuxtLink
+    <KunLink
+      color="default"
+      underline="none"
       v-for="(user, index) in data"
       :key="user.uid"
       :to="`/user/${user.uid}/info`"
-      class="hover:bg-default-100 flex cursor-pointer items-center justify-between rounded-lg p-3 transition-colors"
+      class-name="hover:bg-default-100 flex cursor-pointer items-center justify-between rounded-lg p-3 transition-colors"
     >
       <div class="flex items-center">
         <span class="text-default-500 w-12 text-xl font-bold">
@@ -32,6 +34,6 @@ const { data } = await useFetch(`/api/ranking/user`, {
         />
         <span class="font-medium">{{ user.field }}</span>
       </div>
-    </NuxtLink>
+    </KunLink>
   </div>
 </template>

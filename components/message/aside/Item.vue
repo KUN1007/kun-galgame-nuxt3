@@ -7,8 +7,10 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLink
-    class="hover:bg-primary/20 flex cursor-pointer gap-3 rounded-lg p-2 transition-colors hover:opacity-80"
+  <KunLink
+    color="default"
+    underline="none"
+    class-name="hover:bg-primary/20 flex cursor-pointer flex-nowrap gap-3 rounded-lg p-2 transition-colors hover:opacity-80"
     :to="`/message/user/${room.route}`"
   >
     <KunAvatar
@@ -40,5 +42,5 @@ defineProps<{
         </KunBadge>
       </div>
     </div>
-  </NuxtLink>
+  </KunLink>
 </template>

@@ -38,12 +38,9 @@ onMounted(() => (commentToUid.value = toUser.uid))
   <div class="space-y-3">
     <KunHeader name="游戏评论">
       <template #endContent>
-        <NuxtLink
-          class="text-primary inline-flex flex-wrap items-center gap-2 underline-offset-3 hover:underline"
-          to="/topic/1482"
-        >
+        <KunLink to="/topic/1482">
           Galgame 评论注意事项, 资源失效, 解压密码错误等问题反馈
-        </NuxtLink>
+        </KunLink>
       </template>
     </KunHeader>
 

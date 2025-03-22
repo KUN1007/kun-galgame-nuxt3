@@ -24,13 +24,13 @@
     <p>
       <strong>
         不要添加网盘下载站的页面链接, 详见
-        <a
-          href="https://www.kungal.com/zh-cn/galgame/819"
+        <KunLink
+          to="https://www.kungal.com/zh-cn/galgame/819"
           target="_blank"
           rel="noopener noreferrer"
         >
           此 Galgame
-        </a>
+        </KunLink>
         下的评论
       </strong>
     </p>

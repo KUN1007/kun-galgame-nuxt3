@@ -47,12 +47,12 @@ const handleClickComment = (comment: TopicComment) => {
             <div class="text-sm">
               <span>{{ comment.user.name }}</span>
               <span class="text-default-500 mx-1">评论</span>
-              <NuxtLink
+              <KunLink
+                underline="hover"
                 :to="`/user/${comment.toUser.uid}/info`"
-                class="text-primary hover:text-primary-700"
               >
                 {{ comment.toUser.name }}
-              </NuxtLink>
+              </KunLink>
             </div>
 
             <div class="flex items-center gap-1">

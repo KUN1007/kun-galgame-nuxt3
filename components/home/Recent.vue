@@ -51,22 +51,26 @@ watch(
       </div>
 
       <div class="space-y-2">
-        <NuxtLink
+        <KunLink
+          underline="none"
+          color="default"
           :to="
             message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`
           "
-          class="hover:text-primary line-clamp-3 break-all transition-colors"
+          class-name="hover:text-primary line-clamp-3 break-all transition-colors"
         >
           {{ message.content }}
-        </NuxtLink>
+        </KunLink>
 
         <div class="flex items-center space-x-2">
-          <NuxtLink
+          <KunLink
+            underline="none"
+            color="default"
             :to="`/user/${message.uid}/info`"
-            class="hover:text-foreground text-default-500 text-sm font-medium transition-colors"
+            class-name="hover:text-foreground text-default-500 text-sm font-medium transition-colors"
           >
             {{ message.name }}
-          </NuxtLink>
+          </KunLink>
           <span class="text-default-500 text-sm">
             {{ formatTimeDifference(message.time) }}
           </span>

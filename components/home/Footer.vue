@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const siteList = [
-  { name: '补丁', href: kungal.domain.patch },
+  { name: '补丁站', href: kungal.domain.patch },
   { name: '表情包', href: kungal.domain.sticker },
   { name: '导航网站', href: kungal.domain.nav },
   { name: '开发文档', href: kungal.domain.doc }
@@ -11,15 +11,15 @@ const siteList = [
   <KunCard :is-hoverable="false" :is-transparent="false">
     <footer class="space-y-2 text-sm">
       <div class="flex justify-center gap-2">
-        <a
+        <KunLink
+          size="sm"
           v-for="(site, index) in siteList"
           :key="index"
-          :href="site.href"
+          :to="site.href"
           target="_blank"
-          class="text-primary underline underline-offset-3"
         >
           {{ site.name }}
-        </a>
+        </KunLink>
       </div>
 
       <div class="flex flex-col items-center justify-center gap-2 sm:flex-row">
@@ -36,14 +36,14 @@ const siteList = [
         </div>
 
         <div class="flex items-center gap-1">
-          <a
-            class="text-primary underline underline-offset-3"
-            :href="kungal.github"
+          <KunLink
+            :to="kungal.github"
+            size="sm"
             target="_blank"
             rel="noopener noreferrer"
           >
             GitHub
-          </a>
+          </KunLink>
           {{
             `开源 | 版本 ${useRuntimeConfig().public.KUN_VISUAL_NOVEL_VERSION}`
           }}

@@ -19,13 +19,9 @@ const getLink = (link: 'galgame' | 'topic') =>
       <h2 class="text-xl">话题 RSS</h2>
 
       <div class="flex flex-wrap items-center gap-2">
-        <NuxtLink
-          :to="getLink('topic')"
-          target="_blank"
-          class="text-primary hover:underline"
-        >
+        <KunLink :to="getLink('topic')" target="_blank">
           {{ getLink('topic') }}
-        </NuxtLink>
+        </KunLink>
         <KunCopy :text="getLink('topic')" name="复制 RSS 链接" />
       </div>
     </KunCard>
@@ -34,13 +30,9 @@ const getLink = (link: 'galgame' | 'topic') =>
       <h2 class="text-xl">Galgame RSS</h2>
 
       <div class="flex flex-wrap items-center gap-2">
-        <NuxtLink
-          :to="getLink('galgame')"
-          target="_blank"
-          class="text-primary hover:underline"
-        >
+        <KunLink :to="getLink('galgame')" target="_blank">
           {{ getLink('galgame') }}
-        </NuxtLink>
+        </KunLink>
         <KunCopy :text="getLink('galgame')" name="复制 RSS 链接" />
       </div>
     </KunCard>

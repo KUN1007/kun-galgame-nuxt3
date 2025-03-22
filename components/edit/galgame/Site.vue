@@ -9,16 +9,15 @@ import { referenceSiteList } from '~/constants/edit'
     </p>
 
     <div class="flex items-center gap-3">
-      <a
+      <KunLink
         v-for="(site, index) in referenceSiteList"
         :key="index"
-        :href="site.url"
+        :to="site.url"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-primary inline-flex flex-wrap items-center gap-2 underline-offset-3 hover:underline"
       >
         {{ site.label }}
-      </a>
+      </KunLink>
     </div>
   </div>
 </template>

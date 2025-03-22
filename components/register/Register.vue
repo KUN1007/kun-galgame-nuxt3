@@ -112,19 +112,9 @@ const handleRegister = async () => {
           class-name="mb-4 flex items-center gap-2 text-sm"
         >
           <span>我同意</span>
-          <NuxtLink
-            to="/agreement"
-            class="text-primary ml-1 underline underline-offset-[3px]"
-          >
-            用户协议
-          </NuxtLink>
+          <KunLink size="sm" to="/doc/notice/agreement">用户协议</KunLink>
           和
-          <NuxtLink
-            to="/privacy"
-            class="text-primary ml-1 underline underline-offset-[3px]"
-          >
-            隐私政策
-          </NuxtLink>
+          <KunLink size="sm" to="/doc/notice/privacy">隐私政策</KunLink>
         </KunCheckBox>
 
         <KunButton
@@ -139,20 +129,9 @@ const handleRegister = async () => {
         <span class="mx-2">或</span>
       </KunDivider>
 
-      <div class="flex flex-col">
-        <NuxtLink
-          to="/login"
-          class="text-primary mb-4 underline underline-offset-[3px]"
-        >
-          登录
-        </NuxtLink>
-
-        <NuxtLink
-          to="/forgot"
-          class="text-primary mb-4 underline underline-offset-[3px]"
-        >
-          忘记密码
-        </NuxtLink>
+      <div class="flex flex-col gap-3">
+        <KunLink to="/login">登录</KunLink>
+        <KunLink to="/forgot">忘记密码</KunLink>
       </div>
     </KunCard>
   </div>

@@ -13,13 +13,9 @@ const logs = computed(() => props.logs)
     <KunCard :is-hoverable="false" v-for="(kun, index) in logs" :key="index">
       <div>
         @
-        <NuxtLink
-          :to="`/user/${kun.uid}/info`"
-          target="_blank"
-          class="text-primary"
-        >
+        <KunLink :to="`/user/${kun.uid}/info`">
           {{ kun.name }}
-        </NuxtLink>
+        </KunLink>
       </div>
 
       <div

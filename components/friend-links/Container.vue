@@ -26,12 +26,14 @@ import { friendArray } from '~/config/friend'
       </h2>
 
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <a
+        <KunLink
+          color="default"
+          underline="none"
           v-for="(friend, i) in friendGroup.value"
           :key="i"
-          :href="friend.link"
+          :to="friend.link"
           target="_blank"
-          class="block transform rounded-lg border p-4 shadow transition-all duration-200 hover:-translate-y-2 hover:shadow-lg"
+          class-name="block transform rounded-lg border p-4 shadow transition-all duration-200 hover:-translate-y-2 hover:shadow-lg"
         >
           <div class="mb-2 flex items-center">
             <span class="text-lg font-bold">
@@ -55,20 +57,18 @@ import { friendArray } from '~/config/friend'
             :src="`/friends/${friend.banner}.webp`"
             class="h-auto w-full rounded-md"
           />
-        </a>
+        </KunLink>
       </div>
     </template>
 
-    <NuxtLink
-      to="/contact"
-      class="mt-8 flex flex-col items-center justify-center text-center"
-    >
-      <h3 class="mb-2 text-xl font-bold text-blue-500 dark:text-blue-400">
-        加入我们
-      </h3>
+    <div class="flex flex-col items-center justify-center gap-3">
+      <KunLink underline="none" to="/doc/notice/contact">
+        <h3 class="text-primary text-xl font-bold">加入我们</h3>
+      </KunLink>
+
       <p class="text-sm text-neutral-600 dark:text-neutral-400">
         要加入我们, 请加入我们的群组, 提供您的网站链接
       </p>
-    </NuxtLink>
+    </div>
   </KunCard>
 </template>

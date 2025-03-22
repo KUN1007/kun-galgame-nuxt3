@@ -31,16 +31,17 @@ const currentUserUid = usePersistUserStore().uid
       <div class="flex-1">
         <h2 class="flex items-center gap-2 text-2xl font-bold">
           <span>{{ user.name }}</span>
-          <NuxtLink
-            class="block sm:hidden"
+          <KunButton
             v-if="currentUserUid !== user.uid"
-            :to="`/message/user/${user.uid}`"
+            variant="flat"
+            size="xs"
+            color="primary"
+            class-name="block sm:hidden"
+            :href="`/message/user/${user.uid}`"
           >
-            <KunButton variant="flat" size="xs" color="primary">
-              <Icon name="lucide:message-circle" />
-              私聊
-            </KunButton>
-          </NuxtLink>
+            <Icon name="lucide:message-circle" />
+            私聊
+          </KunButton>
         </h2>
         <div class="mt-2 flex items-center space-x-3">
           <KunBadge size="md" color="primary">

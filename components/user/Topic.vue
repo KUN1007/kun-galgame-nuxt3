@@ -38,15 +38,18 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/topics`, {
     />
 
     <div class="flex flex-col space-y-3" v-if="data && data.topics.length">
-      <KunCard v-for="(topic, index) in data.topics" :key="index">
-        <NuxtLink :to="`/topic/${topic.tid}`">
-          <div>
-            {{ topic.title }}
-          </div>
-          <div class="text-default-500 text-sm">
-            {{ formatDate(topic.time, { isShowYear: true }) }}
-          </div>
-        </NuxtLink>
+      <KunCard
+        :is-pressable="true"
+        v-for="(topic, index) in data.topics"
+        :key="index"
+        :href="`/topic/${topic.tid}`"
+      >
+        <div>
+          {{ topic.title }}
+        </div>
+        <div class="text-default-500 text-sm">
+          {{ formatDate(topic.time, { isShowYear: true }) }}
+        </div>
       </KunCard>
 
       <KunPagination

@@ -23,15 +23,18 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/comments`, {
     />
 
     <div class="flex flex-col space-y-3" v-if="data && data.comments.length">
-      <KunCard v-for="(comment, index) in data.comments" :key="index">
-        <NuxtLink :to="`/topic/${comment.tid}`">
-          <div>
-            {{ comment.content }}
-          </div>
-          <div class="text-default-500 text-sm">
-            {{ formatDate(comment.time, { isShowYear: true }) }}
-          </div>
-        </NuxtLink>
+      <KunCard
+        :is-pressable="true"
+        v-for="(comment, index) in data.comments"
+        :key="index"
+        :href="`/topic/${comment.tid}`"
+      >
+        <div>
+          {{ comment.content }}
+        </div>
+        <div class="text-default-500 text-sm">
+          {{ formatDate(comment.time, { isShowYear: true }) }}
+        </div>
       </KunCard>
 
       <KunPagination

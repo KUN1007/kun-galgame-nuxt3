@@ -127,17 +127,16 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
 
     <div class="space-y-2 space-x-2">
       <p class="text-default-500 text-sm">点击下面的链接以下载</p>
-      <a
+      <KunLink
         v-for="(kun, index) in details.link"
         :key="index"
-        :href="kun"
-        class="text-primary inline-flex items-center gap-2 underline-offset-3 hover:underline"
+        :to="kun"
         target="_blank"
         rel="noopener noreferrer"
+        :is-show-anchor-icon="true"
       >
         {{ kun }}
-        <Icon name="lucide:external-link" />
-      </a>
+      </KunLink>
     </div>
   </div>
 </template>

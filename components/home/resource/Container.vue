@@ -26,11 +26,12 @@ const { data } = await useFetch(`/api/home/resource`, {
   >
     <h2 class="text-xl font-semibold">最新 Galgame 资源</h2>
 
-    <NuxtLink
+    <KunLink
+      underline="none"
       v-for="(link, index) in data"
       :key="index"
       :to="`/galgame/${link.gid}`"
-      class="group flex items-start space-x-3 rounded-lg transition-colors"
+      class-name="group flex flex-nowrap items-start gap-3 rounded-lg transition-colors"
     >
       <div
         class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
@@ -59,6 +60,6 @@ const { data } = await useFetch(`/api/home/resource`, {
           {{ KUN_GALGAME_RESOURCE_LANGUAGE_MAP[link.language] }}
         </div>
       </div>
-    </NuxtLink>
+    </KunLink>
   </KunCard>
 </template>

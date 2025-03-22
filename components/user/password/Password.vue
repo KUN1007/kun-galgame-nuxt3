@@ -80,9 +80,7 @@ const handleChangePassword = async () => {
         </div>
       </form>
 
-      <NuxtLink class="text-primary underline underline-offset-3" to="/forgot">
-        忘记密码?
-      </NuxtLink>
+      <KunLink to="/forgot">忘记密码?</KunLink>
     </KunCard>
   </div>
 </template>
