@@ -90,6 +90,6 @@ if (data.value && data.value !== 'banned') {
       v-if="!data && data !== 'banned'"
       description="未找到这个 Galgame"
     />
-    <KunBlank v-if="data === 'banned'">此 Galgame 已被封禁</KunBlank>
+    <KunNull v-if="data === 'banned'" description="此 Galgame 已被封禁" />
   </div>
 </template>

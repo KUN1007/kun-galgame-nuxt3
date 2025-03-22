@@ -43,6 +43,6 @@ useHead({
     </div>
 
     <KunNull v-if="!data && data !== 'banned'" />
-    <KunBlank v-if="data === 'banned'">此用户已被封禁</KunBlank>
+    <KunNull v-if="data === 'banned'" description="此用户已被封禁" />
   </KunCard>
 </template>

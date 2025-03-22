@@ -17,12 +17,6 @@ export interface HomeUserStatus {
   isCheckIn: boolean
 }
 
-export interface HomePinnedTopic {
-  tid: number
-  title: string
-  time: number
-}
-
 export interface HomeTopic {
   tid: number
   title: string

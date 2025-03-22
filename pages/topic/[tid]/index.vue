@@ -119,7 +119,7 @@ if (data) {
 
   <KunNull v-if="!data && !isBanned" description="未找到这个话题" />
 
-  <KunBlank v-if="isBanned">此话题已被封禁</KunBlank>
+  <KunNull v-if="isBanned" description="此话题已被封禁" />
 
   <TopicDetailBar />
 </template>

@@ -22,16 +22,3 @@ const { galgamePR } = storeToRefs(useTempGalgamePRStore())
     />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.kun-input {
-  width: 100%;
-  margin-bottom: 17px;
-}
-
-.hint {
-  color: var(--kungalgame-font-color-0);
-  margin-bottom: 17px;
-  font-size: small;
-}
-</style>
