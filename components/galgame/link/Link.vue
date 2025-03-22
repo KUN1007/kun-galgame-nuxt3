@@ -102,12 +102,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
     <div class="space-y-2" v-if="data">
       <KunCard :is-hoverable="false" v-for="(link, index) in data" :key="index">
         <p>{{ link.name }}</p>
-        <a
-          :href="link.link"
-          class="text-primary inline-flex flex-wrap items-center gap-2 underline-offset-3 hover:underline"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <KunLink :to="link.link" target="_blank" rel="noopener noreferrer">
           {{ link.link }}
           <Icon name="lucide:external-link" />
           <KunButton
@@ -121,7 +116,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
           >
             <Icon name="lucide:trash-2" />
           </KunButton>
-        </a>
+        </KunLink>
       </KunCard>
     </div>
   </div>

@@ -56,12 +56,7 @@ onUnmounted(() => {
               <p class="mb-4 line-clamp-2 text-gray-200">
                 {{ post.description }}
               </p>
-              <NuxtLink
-                :to="post.path"
-                class="inline-flex items-center rounded-lg px-4 py-2 transition-colors"
-              >
-                阅读更多 >
-              </NuxtLink>
+              <KunLink :to="post.path">阅读更多 ></KunLink>
             </div>
           </div>
         </div>

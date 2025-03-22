@@ -30,12 +30,6 @@ const saveMarkdown = debounce((editorMarkdown: string) => {
     @set-markdown="saveMarkdown"
     :language="lang ?? 'zh-cn'"
   >
-    <NuxtLink
-      target="_blank"
-      to="/topic/280"
-      class="text-default-700 hover:text-primary transition-colors"
-    >
-      Galgame 发布规定
-    </NuxtLink>
+    <KunLink to="/topic/280"> Galgame 发布规定 </KunLink>
   </KunMilkdownDualEditorProvider>
 </template>
