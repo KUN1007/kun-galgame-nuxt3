@@ -20,7 +20,9 @@ const hasPinnedPosts = computed(() => posts.value?.some((post) => post.pin))
       description="这里存放了网站的简介信息, 网站公告, 开发文档等等"
     />
 
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div
+      class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+    >
       <KunCard
         :is-pressable="true"
         v-for="post in posts"

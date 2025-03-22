@@ -7,6 +7,8 @@ const { data } = await useAsyncData(() => {
 
 <template>
   <KunCard :is-hoverable="false" :is-transparent="false" v-if="data">
+    <DocDetailBackgroundImage :src="data.banner" />
+
     <div class="flex gap-3">
       <DocDetailCategoryTree />
 

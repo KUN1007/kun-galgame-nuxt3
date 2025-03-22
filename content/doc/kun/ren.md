@@ -11,9 +11,6 @@ authorHomepage: 'https://github.com/KUN1007'
 pin: true
 ---
 
-::kun-blog-image{src="/content/kun/ren/banner.avif"}
-::
-
 ## 介绍
 
 > 世间萌妹之多，可爱者甚蕃。

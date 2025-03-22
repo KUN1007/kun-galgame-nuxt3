@@ -100,9 +100,9 @@ export const kunLayoutItem: KunLayoutItem[] = [
     ]
   },
   {
-    name: 'about',
+    name: 'doc',
     icon: 'lucide:info',
-    router: '/kungalgame',
+    router: '/doc',
     label: '关于我们'
   },
   {

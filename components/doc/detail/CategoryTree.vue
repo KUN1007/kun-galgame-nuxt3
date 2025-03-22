@@ -22,6 +22,7 @@ const categorizedArticles = computed(() => {
 
       if (!acc[category]) {
         acc[category] = []
+        expandedCategories.value[category] = true
       }
       acc[category].push(article)
       return acc
@@ -50,7 +51,7 @@ const toggleCategory = (category: string) => {
         @click="toggleCategory(category)"
         class-name="justify-between"
       >
-        <span class="font-medium text-gray-700">
+        <span class="text-foreground">
           {{ category }}
         </span>
         <Icon
