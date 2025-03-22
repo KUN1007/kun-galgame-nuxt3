@@ -43,6 +43,8 @@ defineProps<{
         </span>
       </div>
 
+      <TopicDetailUserMobile :user="topic.user" />
+
       <KunContent class="kun-master" :content="topic.content" />
 
       <p class="text-default-500 ml-auto text-sm" v-if="topic.edited">

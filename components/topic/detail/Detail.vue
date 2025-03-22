@@ -71,7 +71,7 @@ watch(
 </script>
 
 <template>
-  <div class="flex w-full gap-3">
+  <div class="flex w-full">
     <div class="w-full space-y-3 lg:w-[calc(100%-208px)]">
       <TopicDetailMaster :topic="topic" />
 
@@ -91,8 +91,8 @@ watch(
       />
     </div>
 
-    <div class-name="hidden w-52 shrink-0 lg:block">
-      <div class="fixed w-full">
+    <div class-name="w-52 shrink-0">
+      <div class="fixed ml-3 hidden w-full lg:block">
         <TopicDetailTableOfContent ref="toc" />
       </div>
     </div>

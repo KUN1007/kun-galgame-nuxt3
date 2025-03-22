@@ -52,7 +52,7 @@ const handleCollapsed = (item: Nav) => {
 
 <template>
   <div
-    class="scrollbar-hide h-full w-10 shrink-0 space-y-1 overflow-y-auto sm:w-40"
+    class="scrollbar-hide h-full w-9 shrink-0 space-y-1 overflow-y-auto sm:w-40"
   >
     <div
       v-for="(kun, index) in nav"
@@ -63,11 +63,11 @@ const handleCollapsed = (item: Nav) => {
         :full-width="true"
         :variant="fullPath.includes(kun.router) ? 'flat' : 'light'"
         size="lg"
-        class-name="gap-2 justify-start text-foreground"
+        class-name="gap-2 justify-start text-foreground sm:px-5 sm:py-2.5 p-2"
         @click="handleCollapsed(kun)"
       >
         <Icon
-          class="text-inherit"
+          class="shrink-0 text-xl text-inherit sm:text-base"
           v-if="iconMap[kun.name]"
           :name="iconMap[kun.name]"
         />

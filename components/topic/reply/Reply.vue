@@ -37,6 +37,8 @@ watch(
       class-name="w-full"
       content-class="gap-3"
     >
+      <TopicDetailUserMobile :user="reply.user" />
+
       <div class="flex items-center justify-between space-x-2">
         <button
           @click="scrollToReplyId = reply.toFloor"
