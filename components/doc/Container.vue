@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: posts } = await useAsyncData('posts', () =>
+const { data: posts } = await useAsyncData('kun-doc-posts', () =>
   queryCollection('content').order('date', 'DESC').all()
 )
 const hasPinnedPosts = computed(() => posts.value?.some((post) => post.pin))

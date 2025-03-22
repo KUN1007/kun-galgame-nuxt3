@@ -1,9 +1,53 @@
 <script setup lang="ts">
 import type { TocLink } from '@nuxt/content'
+import { ref, onMounted, onUnmounted } from 'vue'
 
-defineProps<{
+const props = defineProps<{
   toc: { links?: TocLink[] }
 }>()
+
+const activeId = ref<string | null>(null)
+
+const scrollToHeading = (id: string) => {
+  const headingElement = document.getElementById(id)
+  if (headingElement) {
+    headingElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    })
+  }
+}
+
+let observer: IntersectionObserver | null = null
+
+onMounted(() => {
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          activeId.value = entry.target.id
+        }
+      })
+    },
+    {
+      rootMargin: '-100px 0px -66%',
+      threshold: 1.0
+    }
+  )
+
+  props.toc?.links?.forEach((link) => {
+    const element = document.getElementById(link.id)
+    if (element) {
+      observer?.observe(element)
+    }
+  })
+})
+
+onUnmounted(() => {
+  if (observer) {
+    observer.disconnect()
+  }
+})
 </script>
 
 <template>
@@ -13,13 +57,24 @@ defineProps<{
       <nav v-if="toc && toc.links" class="toc">
         <ul class="space-y-2">
           <li v-for="link in toc.links" :key="link.id" class="toc-link">
-            <NuxtLink
-              :to="`#${link.id}`"
-              class="text-default-700 block py-1"
-              :class="{ 'pl-4': link.depth === 2, 'pl-8': link.depth === 3 }"
+            <a
+              :href="`#${link.id}`"
+              @click="
+                (e) => {
+                  e.preventDefault()
+                  scrollToHeading(link.id)
+                }
+              "
+              class="block py-1 text-sm transition-colors duration-200"
+              :class="[
+                { 'pl-4': link.depth === 2, 'pl-8': link.depth === 3 },
+                activeId === link.id
+                  ? 'text-primary text-base font-medium'
+                  : 'text-default-700 hover:text-primary'
+              ]"
             >
               {{ link.text }}
-            </NuxtLink>
+            </a>
           </li>
         </ul>
       </nav>

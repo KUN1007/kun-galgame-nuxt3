@@ -6,15 +6,21 @@ const { data } = await useAsyncData(() => {
 </script>
 
 <template>
-  <KunCard :is-hoverable="false" :is-transparent="false" v-if="data">
+  <KunCard
+    :is-hoverable="false"
+    :is-transparent="false"
+    v-if="data"
+    class-name="pb-6 min-h-[calc(100dvh-6rem)]"
+  >
     <DocDetailBackgroundImage :src="data.banner" />
 
     <div class="flex">
       <DocDetailCategoryTree />
 
-      <article class="pl-0 lg:pr-67 xl:pl-67">
+      <article class="space-y-6 pl-0 lg:pr-67 xl:pl-67">
         <DocDetailHeader :metadata="{ ...data }" />
         <ContentRenderer class="kun-prose" :value="data" />
+        <DocDetailFooter />
       </article>
 
       <DocDetailTableOfContent :toc="data.body.toc" />
