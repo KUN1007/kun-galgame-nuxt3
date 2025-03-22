@@ -81,8 +81,8 @@ onMounted(async () => {
     </template>
   </KunHeader>
 
-  <div class="flex flex-wrap items-start justify-between gap-3 md:flex-nowrap">
-    <div class="relative flex min-w-96 items-end justify-center">
+  <div class="flex flex-wrap items-start justify-between gap-3 lg:flex-nowrap">
+    <div class="relative flex min-w-88 items-end justify-center">
       <NuxtImg class="rounded-lg" :src="galgame.banner" loading="lazy" />
 
       <KunModal

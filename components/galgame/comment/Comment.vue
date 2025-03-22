@@ -50,7 +50,7 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
 
     <div class="flex w-full flex-col space-y-2">
       <div class="flex flex-wrap items-center">
-        <span>{{ comment.user.name }}</span>
+        <span class="text-default-700">{{ comment.user.name }}</span>
         <div v-if="comment.toUser">
           <span class="mx-2">=></span>
           <NuxtLink
@@ -62,7 +62,7 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
         </div>
       </div>
 
-      <pre class="content">{{ comment.content }}</pre>
+      <div class="break-all whitespace-pre-line">{{ comment.content }}</div>
 
       <div class="flex items-end justify-between">
         <span class="text-default-500 text-sm">

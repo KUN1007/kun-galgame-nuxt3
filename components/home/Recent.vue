@@ -63,11 +63,11 @@ watch(
         <div class="flex items-center space-x-2">
           <NuxtLink
             :to="`/user/${message.uid}/info`"
-            class="hover:text-foreground text-sm font-medium text-gray-600 transition-colors"
+            class="hover:text-foreground text-default-500 text-sm font-medium transition-colors"
           >
             {{ message.name }}
           </NuxtLink>
-          <span class="text-sm text-gray-500">
+          <span class="text-default-500 text-sm">
             {{ formatTimeDifference(message.time) }}
           </span>
         </div>
