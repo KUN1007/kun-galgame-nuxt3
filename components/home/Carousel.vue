@@ -142,13 +142,21 @@ onUnmounted(() => {
             class-name="absolute right-0 bottom-0 left-0 m-3"
             content-class="gap-3"
           >
-            <h1 class="text-3xl font-bold">
+            <KunLink
+              underline="none"
+              class-name="text-xl sm:text-3xl font-bold text-foreground hover:text-primary transition-colors"
+              :to="post.path"
+            >
               {{ post.title }}
-            </h1>
-            <p class="text-default-500 line-clamp-2">
+            </KunLink>
+            <p class="text-default-700 line-clamp-2 text-sm sm:text-base">
               {{ post.description }}
             </p>
-            <KunLink class-name="ml-auto" underline="hover" :to="post.path">
+            <KunLink
+              class-name="ml-auto text-sm sm:text-base"
+              underline="hover"
+              :to="post.path"
+            >
               阅读更多 >
             </KunLink>
           </KunCard>

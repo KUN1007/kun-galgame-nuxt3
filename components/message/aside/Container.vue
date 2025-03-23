@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { asideItems } from './asideItemStore'
 
+const routeName = computed(() => useRoute().name)
+
 const { data: system } = await useFetch(`/api/message/nav/system`, {
   method: 'GET',
   ...kungalgameResponseHandler
@@ -16,7 +18,12 @@ asideItems.value = contact.value ? contact.value : []
 
 <template>
   <aside
-    class="scrollbar-hide border-default-300 border-default-300 flex w-full shrink-0 flex-col space-y-3 overflow-y-auto border-r pr-0 sm:w-88 sm:pr-3"
+    :class="
+      cn(
+        'scrollbar-hide border-default-300 border-r-none flex w-full shrink-0 flex-col space-y-3 overflow-y-auto pr-0 sm:w-88 sm:border-r sm:pr-3',
+        routeName !== 'message' ? 'hidden sm:flex' : ''
+      )
+    "
   >
     <h2 class="px-2 text-2xl">消息</h2>
 
