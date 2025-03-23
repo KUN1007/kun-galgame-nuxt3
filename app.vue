@@ -67,21 +67,23 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- Global alert component -->
-  <KunAlert />
+  <div class="kun">
+    <!-- Global alert component -->
+    <KunAlert />
 
-  <!-- Global capture component -->
-  <KunCapture />
+    <!-- Global capture component -->
+    <KunCapture />
 
-  <!-- ReplyPanel -->
-  <LazyTopicReplyPanel />
+    <!-- ReplyPanel -->
+    <LazyTopicReplyPanel />
 
-  <LazyKunSettingPanel />
+    <LazyKunSettingPanel />
 
-  <NuxtPwaManifest />
-  <NuxtLoadingIndicator color="var(--color-primary)" />
+    <NuxtPwaManifest />
+    <NuxtLoadingIndicator color="var(--color-primary)" />
 
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
 </template>
