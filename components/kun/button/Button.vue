@@ -184,6 +184,7 @@ const handleKunButtonClick = (event: MouseEvent) => {
         roundedClasses,
         fullWidth ? 'w-full' : '',
         isIconOnlyClasses,
+        disabled && 'cursor-not-allowed hover:bg-none',
         className
       )
     "

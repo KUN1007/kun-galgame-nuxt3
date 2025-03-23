@@ -51,7 +51,7 @@ watch(
               TouchGal
             </KunLink>
             和
-            <KunLink size="sm" href="https://www.zi6.cc/" target="_blank">
+            <KunLink size="sm" to="https://www.zi6.cc/" target="_blank">
               zi0
             </KunLink>
           </div>
