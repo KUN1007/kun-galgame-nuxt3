@@ -37,9 +37,16 @@ export default defineNuxtConfig({
           name: 'description',
           content: kungal.description
         },
+        {
+          name: 'image',
+          content: kungal.images[0].url
+        },
         { name: 'theme-color', content: kungal.themeColor },
+        { property: 'og:title', content: kungal.title },
         { property: 'og:site_name', content: kungal.titleShort },
+        { property: 'og:locale', content: 'zh_CN' },
         { property: 'og:type', content: 'website' },
+        { property: 'og:image', content: kungal.images[0].url },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:site', content: kungal.creator.mention }
       ],

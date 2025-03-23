@@ -57,7 +57,7 @@ const handleClickCategory = (kun: Category) => {
       :variant="selectedCategories.includes(kun.name) ? 'solid' : 'flat'"
       size="sm"
     >
-      {{ kun.name }}
+      {{ KUN_TOPIC_CATEGORY[kun.name.toLowerCase()] }}
     </KunButton>
   </div>
 </template>

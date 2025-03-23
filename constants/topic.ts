@@ -3,7 +3,7 @@ import type { KunSelectOption } from '~/components/kun/select/type'
 export const KUN_TOPIC_CATEGORY: Record<string, string> = {
   galgame: 'Galgame',
   technique: '技术交流',
-  others: '其它'
+  others: '其它话题'
 }
 
 export const KUN_TOPIC_SECTION: Record<string, string> = {
