@@ -75,7 +75,7 @@ watch(
       <div class="w-full space-y-2">
         <div class="flex items-center">
           <div class="mr-2 font-bold">{{ sec.user.name }}</div>
-          <div class="text-sm text-gray-500">
+          <div class="text-default-500 text-sm">
             {{ formatDate(sec.time, { isShowYear: true, isPrecise: true }) }}
           </div>
         </div>

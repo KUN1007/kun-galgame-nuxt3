@@ -20,7 +20,7 @@ const { data } = await useFetch(`/api/ranking/topic`, {
       class-name="hover:bg-default-100 flex cursor-pointer items-center justify-between rounded-lg p-3 transition-colors"
     >
       <div class="flex items-center">
-        <span class="w-12 text-xl font-bold text-gray-400">
+        <span class="text-default-500 w-12 text-xl font-bold">
           {{ index + 1 }}
         </span>
         <h3>

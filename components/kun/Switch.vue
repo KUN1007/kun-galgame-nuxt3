@@ -40,7 +40,7 @@ defineEmits<{
       <div
         class="h-6 w-11 rounded-full transition-colors duration-200 ease-in-out"
         :class="[
-          modelValue ? 'bg-primary-500' : 'bg-gray-500',
+          modelValue ? 'bg-primary-500' : 'bg-default-500',
           disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
           modelValue && disabled ? 'bg-primary-300' : ''
         ]"
@@ -56,7 +56,7 @@ defineEmits<{
     <span
       v-if="label"
       class="ml-3 text-sm font-medium"
-      :class="[disabled ? 'text-gray-400' : '']"
+      :class="[disabled ? 'text-default-400' : '']"
     >
       {{ label }}
     </span>

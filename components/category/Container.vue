@@ -30,7 +30,7 @@ defineProps<{
         <h2 class="text-lg font-semibold">
           {{ KUN_TOPIC_SECTION[category.section] }}
         </h2>
-        <div class="flex items-center gap-4 text-sm text-gray-500">
+        <div class="text-default-500 flex items-center gap-4 text-sm">
           <div class="flex items-center gap-2 text-inherit">
             <Icon name="lucide:newspaper" />
             {{ formatNumber(category.topics) }}

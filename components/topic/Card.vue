@@ -15,9 +15,7 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
     content-class="justify-between"
     :href="`/topic/${props.topic.tid}`"
   >
-    <h3
-      class="line-clamp-2 text-lg font-medium text-gray-900 dark:text-gray-100"
-    >
+    <h3 class="line-clamp-2 text-lg font-medium">
       {{ topic.title }}
     </h3>
 

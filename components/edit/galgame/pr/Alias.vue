@@ -89,7 +89,7 @@ watch(
         </KunBadge>
 
         <input
-          class="placeholder-default-500 min-w-[120px] flex-grow bg-transparent text-gray-700 outline-none"
+          class="placeholder-default-500 text-default-700 min-w-[120px] flex-grow bg-transparent outline-none"
           type="text"
           v-model="inputValue"
           placeholder="请输入游戏别名"

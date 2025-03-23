@@ -94,7 +94,7 @@ defineExpose({
     <label
       v-if="label"
       :for="computedId"
-      class="mb-1 block text-sm font-medium text-gray-700"
+      class="text-default-700 mb-1 block text-sm font-medium"
     >
       {{ label }}
       <span v-if="required" class="text-red-500">*</span>
@@ -118,7 +118,7 @@ defineExpose({
             sizeClasses,
             $slots.prefix && 'pl-10',
             $slots.suffix && 'pr-10',
-            disabled && 'cursor-not-allowed bg-gray-100',
+            disabled && 'bg-default-100 cursor-not-allowed',
             error
               ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
               : ''
@@ -144,7 +144,7 @@ defineExpose({
       </div>
     </div>
 
-    <p v-if="helperText && !error" class="mt-1 text-sm text-gray-500">
+    <p v-if="helperText && !error" class="text-default-500 mt-1 text-sm">
       {{ helperText }}
     </p>
 

@@ -62,7 +62,7 @@ watch(
         </span>
 
         <div class="flex items-center gap-2">
-          <span v-if="todo.completedTime" class="text-gray-600">
+          <span v-if="todo.completedTime" class="text-default-500">
             {{ formatDate(todo.completedTime, { isPrecise: true }) }}
           </span>
           <Icon

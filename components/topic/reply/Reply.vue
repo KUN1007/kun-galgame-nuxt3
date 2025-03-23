@@ -44,7 +44,7 @@ watch(
           @click="scrollToReplyId = reply.toFloor"
           class="text-primary cursor-pointer"
         >
-          <span class="text-gray-500">回复给</span>
+          <span class="text-default-500">回复给</span>
           {{ reply.toUser.name }}
         </button>
 
@@ -52,7 +52,7 @@ watch(
           color="default"
           underline="none"
           :to="`/topic/${reply.tid}#k${reply.floor}`"
-          class="text-gray-400 hover:text-gray-600"
+          class="text-default-500"
         >
           #{{ reply.floor }}
         </KunLink>
@@ -64,7 +64,7 @@ watch(
         <span>
           {{ formatDate(reply.time, { isShowYear: true, isPrecise: true }) }}
         </span>
-        <span v-if="reply.edited" class="text-gray-400">
+        <span v-if="reply.edited" class="text-default-500">
           (已编辑于
           {{
             formatDate(reply.edited, {

@@ -3,6 +3,8 @@
 <template>
   <div class="flex flex-col justify-between gap-3 rounded-lg lg:flex-row">
     <div class="w-full space-y-3">
+      <HomeCarousel />
+
       <HomeTopicContainer />
 
       <HomeGalgameContainer />

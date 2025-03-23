@@ -31,7 +31,7 @@ const isRecentlyUpvoted = computed(() => {
           <Icon name="lucide:sparkles" class="size-4 text-inherit" />
           <span class="text-inherit">该话题被推</span>
         </KunBadge>
-        <span class="shrink-0 text-sm text-gray-500 dark:text-gray-400">
+        <span class="text-default-500 shrink-0 text-sm">
           {{ formatTimeDifference(topic.time) }}
         </span>
       </div>

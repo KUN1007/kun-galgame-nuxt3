@@ -106,7 +106,7 @@ watch(
           </KunBadge>
 
           <input
-            class="placeholder-default-500 min-w-[120px] flex-grow bg-transparent text-gray-700 outline-none"
+            class="placeholder-default-500 text-default-700 min-w-[120px] flex-grow bg-transparent outline-none"
             type="text"
             v-model="inputValue"
             placeholder="请输入标签"
@@ -131,7 +131,7 @@ watch(
       </div>
     </div>
 
-    <p class="mt-2 text-sm text-gray-600">
+    <p class="text-default-500 mt-2 text-sm">
       话题至少选择一个标签, 最多 7 个标签, 您可以输入文字后按下回车创建标签
     </p>
   </div>

@@ -74,7 +74,7 @@ const colorClasses: Record<KunUIColor | 'background', string> = {
       <slot />
     </div>
 
-    <div v-if="$slots.footer" class="border-t bg-gray-50 px-3 py-2">
+    <div v-if="$slots.footer" class="bg-default-100 border-t px-3 py-2">
       <slot name="footer" />
     </div>
 
