@@ -3,23 +3,25 @@ const introductionLanguage = ref<Language>('zh-cn')
 </script>
 
 <template>
-  <div class="space-y-6">
-    <EditGalgamePrHelp />
+  <ClientOnly>
+    <KunCard :is-hoverable="false" :is-transparent="false" class="space-y-6">
+      <EditGalgamePrHelp />
 
-    <EditGalgamePrTitle />
+      <EditGalgamePrTitle />
 
-    <EditGalgameEditor :lang="introductionLanguage" type="rewrite" />
+      <EditGalgameEditor :lang="introductionLanguage" type="rewrite" />
 
-    <EditGalgamePrSeries />
+      <EditGalgamePrSeries />
 
-    <EditGalgamePrOfficial />
+      <EditGalgamePrOfficial />
 
-    <EditGalgamePrEngine />
+      <EditGalgamePrEngine />
 
-    <EditGalgamePrTags />
+      <EditGalgamePrTags />
 
-    <EditGalgamePrAlias />
+      <EditGalgamePrAlias />
 
-    <EditGalgamePrFooter />
-  </div>
+      <EditGalgamePrFooter />
+    </KunCard>
+  </ClientOnly>
 </template>

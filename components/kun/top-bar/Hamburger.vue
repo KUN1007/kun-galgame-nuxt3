@@ -70,7 +70,7 @@ watch(
       @click="showKUNGalgameHamburger = false"
     >
       <div
-        class="bg-background absolute top-0 left-0 container h-dvh w-64 rounded-r-lg"
+        class="absolute top-0 left-0 container h-dvh w-64 rounded-r-lg"
         @click.stop
         @touchstart.passive="handleTouchStart"
         @touchmove.passive="handleTouchMove"

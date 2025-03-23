@@ -10,7 +10,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
   >
     <div class="relative flex justify-between">
       <div class="relative shrink-0 space-y-4">
-        <div class="flex items-center gap-2 text-lg">
+        <div class="flex w-67 items-center gap-2 text-lg sm:w-58">
           <span>设置面板</span>
           <Icon
             class="hover:text-primary cursor-pointer"

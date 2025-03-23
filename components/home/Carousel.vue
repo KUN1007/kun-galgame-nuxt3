@@ -139,7 +139,8 @@ onUnmounted(() => {
           <KunCard
             :is-transparent="false"
             :is-hoverable="false"
-            class-name="absolute right-0 bottom-0 left-0 m-3"
+            :bordered="false"
+            class-name="absolute right-0 bottom-0 left-0 m-3 shadow-none"
             content-class="gap-3"
           >
             <KunLink
@@ -189,7 +190,9 @@ onUnmounted(() => {
         :key="index"
         @click="goToSlide(index)"
         class="h-2 w-2 rounded-full transition-colors"
-        :class="currentSlide === index ? 'bg-white' : 'bg-white/50'"
+        :class="
+          currentSlide === index ? 'bg-foreground/40' : 'bg-foreground/20'
+        "
       />
     </div>
   </KunCard>

@@ -25,7 +25,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="block size-full shrink-0">
+  <div class="hidden size-full shrink-0 sm:block">
     <div
       class="relative min-w-80"
       @click="async () => (loliData = await getLoli())"
