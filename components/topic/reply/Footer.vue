@@ -49,31 +49,37 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
         :to-floor="reply.floor"
       />
 
-      <KunButton
-        :is-icon-only="true"
-        variant="light"
-        color="default"
-        size="lg"
-        @click="
-          useKunCopy(
-            `${title}: https://www.kungal.com/topic/${reply.tid}#k${reply.floor}`
-          )
-        "
-      >
-        <Icon name="lucide:share-2" />
-      </KunButton>
+      <KunTooltip text="分享该回复">
+        <KunButton
+          :is-icon-only="true"
+          variant="light"
+          color="default"
+          size="lg"
+          @click="
+            useKunCopy(
+              `${title}: https://www.kungal.com/topic/${reply.tid}#k${reply.floor}`
+            )
+          "
+        >
+          <Icon name="lucide:share-2" />
+        </KunButton>
+      </KunTooltip>
 
       <TopicReplyRewrite :reply="reply" />
 
-      <KunButton
-        :is-icon-only="true"
-        variant="light"
-        color="default"
-        size="lg"
-        @click="handleClickComment(reply.rid, reply.user.uid, reply.user.name)"
-      >
-        <Icon name="uil:comment-dots" />
-      </KunButton>
+      <KunTooltip text="评论">
+        <KunButton
+          :is-icon-only="true"
+          variant="light"
+          color="default"
+          size="lg"
+          @click="
+            handleClickComment(reply.rid, reply.user.uid, reply.user.name)
+          "
+        >
+          <Icon name="uil:comment-dots" />
+        </KunButton>
+      </KunTooltip>
     </div>
   </div>
 </template>

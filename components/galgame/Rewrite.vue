@@ -24,13 +24,15 @@ const handleRewriteGalgame = (galgame: GalgameDetail) => {
 </script>
 
 <template>
-  <KunButton
-    :is-icon-only="true"
-    variant="light"
-    color="default"
-    size="lg"
-    @click="handleRewriteGalgame(galgame)"
-  >
-    <Icon name="lucide:pencil" />
-  </KunButton>
+  <KunTooltip text="重新编辑">
+    <KunButton
+      :is-icon-only="true"
+      variant="light"
+      color="default"
+      size="lg"
+      @click="handleRewriteGalgame(galgame)"
+    >
+      <Icon name="lucide:pencil" />
+    </KunButton>
+  </KunTooltip>
 </template>

@@ -123,7 +123,12 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
       />
     </div>
 
-    <pre class="bg-default-100 rounded-lg p-3">{{ details.note }}</pre>
+    <pre
+      v-if="details.note"
+      class="bg-default-100 rounded-lg p-3 whitespace-pre-line"
+    >
+      {{ details.note }}
+    </pre>
 
     <div class="space-y-2 space-x-2">
       <p class="text-default-500 text-sm">点击下面的链接以下载</p>

@@ -7,15 +7,18 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
   <KunModal
     :modal-value="showKUNGalgamePanel"
     @update:modal-value="(value) => (showKUNGalgamePanel = value)"
+    inner-class-name="overflow-visible"
   >
     <div class="relative flex justify-between">
       <div class="relative shrink-0 space-y-4">
         <div class="flex w-67 items-center gap-2 text-lg sm:w-58">
           <span>设置面板</span>
-          <Icon
-            class="hover:text-primary cursor-pointer"
-            name="lucide:circle-help"
-          />
+
+          <KunTooltip class-name="flex" text="设置面板帮助" position="bottom">
+            <KunLink color="default" class="hover:text-primary">
+              <Icon name="lucide:circle-help" />
+            </KunLink>
+          </KunTooltip>
         </div>
 
         <KunSettingPanelComponentsMode />
@@ -24,7 +27,13 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 
         <div class="ml-auto flex justify-between gap-2">
           显示琥珀
-          <KunSwitch v-model="showKUNGalgameBackLoli" />
+          <KunTooltip
+            class-name="flex"
+            text="是否显示网站右下角这只可爱的孩子"
+            position="bottom"
+          >
+            <KunSwitch v-model="showKUNGalgameBackLoli" />
+          </KunTooltip>
         </div>
 
         <KunSettingPanelComponentsBackground />

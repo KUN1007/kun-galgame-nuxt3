@@ -61,15 +61,17 @@ const handleClickDislike = () => {
 </script>
 
 <template>
-  <KunButton
-    :is-icon-only="true"
-    :variant="isDisliked ? 'flat' : 'light'"
-    :color="isDisliked ? 'secondary' : 'default'"
-    :size="dislikesCount ? 'md' : 'lg'"
-    class-name="gap-1"
-    @click="handleClickDislike"
-  >
-    <Icon class="icon" name="lucide:thumbs-down" />
-    <span v-if="dislikesCount">{{ dislikesCount }}</span>
-  </KunButton>
+  <KunTooltip text="点踩">
+    <KunButton
+      :is-icon-only="true"
+      :variant="isDisliked ? 'flat' : 'light'"
+      :color="isDisliked ? 'secondary' : 'default'"
+      :size="dislikesCount ? 'md' : 'lg'"
+      class-name="gap-1"
+      @click="handleClickDislike"
+    >
+      <Icon class="icon" name="lucide:thumbs-down" />
+      <span v-if="dislikesCount">{{ dislikesCount }}</span>
+    </KunButton>
+  </KunTooltip>
 </template>

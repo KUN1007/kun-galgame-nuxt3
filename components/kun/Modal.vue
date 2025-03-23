@@ -6,11 +6,13 @@ const props = withDefaults(
   defineProps<{
     modalValue: boolean
     className?: string
+    innerClassName?: string
     isDismissable?: boolean
     isShowCloseButton?: boolean
   }>(),
   {
     className: '',
+    innerClassName: '',
     isDismissable: true,
     isShowCloseButton: true
   }
@@ -81,7 +83,12 @@ onUnmounted(() => {
         tabindex="0"
       >
         <div
-          class="bg-background scrollbar-hide relative m-auto max-h-[90vh] min-w-80 overflow-y-auto rounded-lg border p-6 shadow-lg transition-all"
+          :class="
+            cn(
+              'bg-background scrollbar-hide relative m-auto max-h-[90vh] min-w-80 overflow-y-auto rounded-lg border p-6 shadow-lg transition-all',
+              innerClassName
+            )
+          "
           @click.stop
         >
           <slot />

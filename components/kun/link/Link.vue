@@ -59,7 +59,7 @@ const colorClasses: Record<KunUIColor, string> = {
     :to="to"
     :class="
       cn(
-        'inline-flex flex-wrap items-center gap-2',
+        'inline-flex flex-wrap items-center gap-2 break-all',
         underlineClasses,
         sizeClasses,
         colorClasses[color],

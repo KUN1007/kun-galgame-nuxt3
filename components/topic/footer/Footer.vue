@@ -46,19 +46,21 @@ defineProps<{
         :to-floor="0"
       />
 
-      <KunButton
-        :is-icon-only="true"
-        variant="light"
-        color="default"
-        size="lg"
-        @click="
-          useKunCopy(
-            `${topic.title}: https://www.kungal.com/topic/${topic.tid}`
-          )
-        "
-      >
-        <Icon name="lucide:share-2" />
-      </KunButton>
+      <KunTooltip text="分享">
+        <KunButton
+          :is-icon-only="true"
+          variant="light"
+          color="default"
+          size="lg"
+          @click="
+            useKunCopy(
+              `${topic.title}: https://www.kungal.com/topic/${topic.tid}`
+            )
+          "
+        >
+          <Icon name="lucide:share-2" />
+        </KunButton>
+      </KunTooltip>
 
       <TopicFooterRewrite :topic="topic" />
     </div>

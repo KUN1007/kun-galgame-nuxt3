@@ -44,15 +44,17 @@ const handleClickFavorite = () => {
 </script>
 
 <template>
-  <KunButton
-    :is-icon-only="true"
-    :variant="isFavorite ? 'flat' : 'light'"
-    :color="isFavorite ? 'secondary' : 'default'"
-    :size="favoritesCount ? 'md' : 'lg'"
-    class-name="gap-1"
-    @click="handleClickFavorite"
-  >
-    <Icon name="lucide:heart" />
-    <span v-if="favoritesCount">{{ favoritesCount }}</span>
-  </KunButton>
+  <KunTooltip text="收藏">
+    <KunButton
+      :is-icon-only="true"
+      :variant="isFavorite ? 'flat' : 'light'"
+      :color="isFavorite ? 'secondary' : 'default'"
+      :size="favoritesCount ? 'md' : 'lg'"
+      class-name="gap-1"
+      @click="handleClickFavorite"
+    >
+      <Icon name="lucide:heart" />
+      <span v-if="favoritesCount">{{ favoritesCount }}</span>
+    </KunButton>
+  </KunTooltip>
 </template>

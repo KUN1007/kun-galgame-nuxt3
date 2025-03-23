@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { KunTooltip } from '#components'
+
 const props = defineProps<{
   tid?: number
   rid?: number
@@ -81,15 +83,17 @@ const handleClickUpvote = async () => {
 </script>
 
 <template>
-  <KunButton
-    :is-icon-only="true"
-    :variant="isUpvoted ? 'flat' : 'light'"
-    :color="isUpvoted ? 'secondary' : 'default'"
-    :size="upvoteCount ? 'md' : 'lg'"
-    class-name="gap-1"
-    @click="handleClickUpvote"
-  >
-    <Icon class="icon" name="lucide:sparkles" />
-    <span v-if="upvoteCount">{{ upvoteCount }}</span>
-  </KunButton>
+  <KunTooltip text="推！">
+    <KunButton
+      :is-icon-only="true"
+      :variant="isUpvoted ? 'flat' : 'light'"
+      :color="isUpvoted ? 'secondary' : 'default'"
+      :size="upvoteCount ? 'md' : 'lg'"
+      class-name="gap-1"
+      @click="handleClickUpvote"
+    >
+      <Icon class="icon" name="lucide:sparkles" />
+      <span v-if="upvoteCount">{{ upvoteCount }}</span>
+    </KunButton>
+  </KunTooltip>
 </template>

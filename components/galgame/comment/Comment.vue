@@ -74,18 +74,22 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
           >
             回复
           </KunButton>
+
           <GalgameCommentLike :comment="comment" />
-          <KunButton
-            :is-icon-only="true"
-            v-if="isShowDelete"
-            variant="light"
-            color="danger"
-            size="lg"
-            class-name="gap-1"
-            @click="handleDeleteComment(comment.gid, comment.gcid)"
-          >
-            <Icon name="lucide:trash-2" />
-          </KunButton>
+
+          <KunTooltip text="删除">
+            <KunButton
+              :is-icon-only="true"
+              v-if="isShowDelete"
+              variant="light"
+              color="danger"
+              size="lg"
+              class-name="gap-1"
+              @click="handleDeleteComment(comment.gid, comment.gcid)"
+            >
+              <Icon name="lucide:trash-2" />
+            </KunButton>
+          </KunTooltip>
         </div>
       </div>
 

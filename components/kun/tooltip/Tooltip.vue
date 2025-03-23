@@ -2,11 +2,13 @@
 interface Props {
   text?: string
   position?: 'top' | 'bottom' | 'left' | 'right'
+  className?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   text: '',
-  position: 'top'
+  position: 'top',
+  className: ''
 })
 
 const isVisible = ref(false)
@@ -52,7 +54,7 @@ const hide = () => {
 
 <template>
   <div
-    class="relative inline-block"
+    :class="cn('relative inline-block', className)"
     @mouseenter="show"
     @mouseleave="hide"
     @focusin="show"

@@ -72,16 +72,18 @@ const handleChangeImage = async (index: number) => {
       <div class="grid h-[240px] grid-cols-3 justify-center gap-2">
         <div
           class="flex shrink-0 items-center justify-center"
-          v-for="kun in paginatedImages"
-          :key="kun.index"
+          v-for="image in paginatedImages"
+          :key="image.index"
         >
-          <NuxtImg
-            class="w-18 shrink-0 cursor-pointer transition-transform hover:scale-150"
-            v-if="kun"
-            :src="`bg/bg${kun.index}-m.webp`"
-            @click="handleChangeImage(kun.index)"
-            loading="lazy"
-          />
+          <KunTooltip :text="image.message['zh-cn']" position="bottom">
+            <NuxtImg
+              class="w-18 shrink-0 cursor-pointer transition-transform hover:scale-150"
+              v-if="image"
+              :src="`bg/bg${image.index}-m.webp`"
+              @click="handleChangeImage(image.index)"
+              loading="lazy"
+            />
+          </KunTooltip>
         </div>
       </div>
     </div>

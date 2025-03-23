@@ -52,7 +52,7 @@ watch(
           color="default"
           underline="none"
           :to="`/topic/${reply.tid}#k${reply.floor}`"
-          class="text-default-500"
+          class-name="text-default-500"
         >
           #{{ reply.floor }}
         </KunLink>
