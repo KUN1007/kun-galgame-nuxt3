@@ -119,7 +119,7 @@ const handleJumpToPage = () => {
         @keyup.enter="handleJumpToPage"
         min="1"
         :max="totalPage"
-        class="focus:ring-primary border-default-300 w-24 rounded-md border px-2 py-1 text-sm focus:ring-1 focus:outline-none"
+        class="focus:ring-primary border-default-500 w-24 rounded-md border px-2 py-1 text-sm focus:ring-1 focus:outline-none"
         :class="{ 'cursor-not-allowed opacity-50': isLoading }"
       />
       <KunButton

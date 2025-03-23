@@ -22,7 +22,7 @@ const { data, status } = await useFetch(`/api/section`, {
     section: props.section,
     order: 'desc',
     page,
-    limit: 23
+    limit: 30
   },
   ...kungalgameResponseHandler
 })
@@ -108,12 +108,10 @@ watch(
     </KunLink>
 
     <KunPagination
-      v-if="data?.totalCount"
-      :page="page"
-      :limit="23"
-      :sum="data?.totalCount"
-      :status="status"
-      @set-page="(newPage) => (page = newPage)"
+      v-if="data"
+      v-model:current-page="page"
+      :total-page="Math.ceil(data.totalCount / 30)"
+      :is-loading="status === 'pending'"
     />
   </KunCard>
 </template>

@@ -90,13 +90,12 @@ watch(
     </KunCard>
   </div>
 
-  <KunPagination
-    v-if="data && data.totalCount > 10"
-    class="mt-8 flex justify-center"
-    :page="pageData.page"
-    :limit="pageData.limit"
-    :sum="data.totalCount"
-    :status="status"
-    @set-page="(newPage) => (pageData.page = newPage)"
-  />
+  <KunCard :is-hoverable="false" :is-transparent="false">
+    <KunPagination
+      v-if="data"
+      v-model:current-page="pageData.page"
+      :total-page="Math.ceil(data.totalCount / pageData.limit)"
+      :is-loading="status === 'pending'"
+    />
+  </KunCard>
 </template>

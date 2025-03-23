@@ -61,13 +61,9 @@ const { data, status } = await useLazyFetch(
     </div>
 
     <KunPagination
-      class="pagination"
-      v-if="data.totalCount > 7"
-      :page="pageData.page"
-      :limit="pageData.limit"
-      :sum="data.totalCount"
-      :status="status"
-      @set-page="(newPage) => (pageData.page = newPage)"
+      v-model:current-page="pageData.page"
+      :total-page="Math.ceil(data.totalCount / pageData.limit)"
+      :is-loading="status === 'pending'"
     />
   </div>
 </template>

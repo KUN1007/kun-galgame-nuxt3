@@ -47,10 +47,11 @@ useHead({
   </KunCard>
 
   <KunCard
+    v-if="data === 'banned'"
     :is-hoverable="false"
     :is-transparent="false"
     content-class="h-[calc(100dvh-120px)]"
   >
-    <KunNull v-if="data === 'banned'" description="此用户已被封禁" />
+    <KunNull description="此用户已被封禁" />
   </KunCard>
 </template>

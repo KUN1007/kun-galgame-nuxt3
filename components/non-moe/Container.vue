@@ -34,13 +34,9 @@ const { data, status } = await useFetch(`/api/non-moe`, {
       </div>
 
       <KunPagination
-        v-if="data.total > 30"
-        :page="pageData.page"
-        :limit="pageData.limit"
-        :sum="data.total"
-        :status="status"
-        @set-page="(newPage) => (pageData.page = newPage)"
-        class="mt-8"
+        v-model:current-page="pageData.page"
+        :total-page="Math.ceil(data.total / pageData.limit)"
+        :is-loading="status === 'pending'"
       />
     </div>
   </KunCard>
