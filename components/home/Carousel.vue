@@ -11,6 +11,11 @@ const carouselRef = ref<HTMLElement | null>(null)
 const { isOutside } = useMouseInElement(carouselRef)
 
 const AUTOPLAY_DELAY = 3000
+const DRAG_THRESHOLD = 50
+
+const isDragging = ref(false)
+const dragStart = ref(0)
+const dragOffset = ref(0)
 
 const nextSlide = () => {
   if (!pinnedPosts.value) return
@@ -34,6 +39,39 @@ const stopAutoplay = () => {
     clearInterval(autoplayInterval.value)
     autoplayInterval.value = undefined
   }
+}
+
+const startDrag = (e: MouseEvent | TouchEvent) => {
+  isDragging.value = true
+  dragStart.value = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX
+  stopAutoplay()
+}
+
+const onDrag = (e: MouseEvent | TouchEvent) => {
+  if (!isDragging.value) return
+
+  e.preventDefault()
+  const currentX = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX
+  const diff = currentX - dragStart.value
+  const containerWidth = carouselRef.value?.offsetWidth || 0
+  dragOffset.value = (diff / containerWidth) * 100
+}
+
+const endDrag = () => {
+  if (!isDragging.value) return
+
+  const threshold = Math.abs(dragOffset.value) > DRAG_THRESHOLD
+  if (threshold) {
+    if (dragOffset.value > 0) {
+      prevSlide()
+    } else {
+      nextSlide()
+    }
+  }
+
+  isDragging.value = false
+  dragOffset.value = 0
+  startAutoplay()
 }
 
 const manualSlide = (direction: 'next' | 'prev') => {
@@ -71,11 +109,21 @@ onUnmounted(() => {
   <KunCard
     :is-hoverable="false"
     ref="carouselRef"
-    class-name="group relative overflow-hidden p-0"
+    @mousedown="startDrag"
+    @mousemove="onDrag"
+    @mouseup="endDrag"
+    @mouseleave="endDrag"
+    @touchstart="startDrag"
+    @touchmove="onDrag"
+    @touchend="endDrag"
+    class-name="group relative overflow-hidden p-0 cursor-grab"
   >
     <div
       class="flex transition-transform duration-300 ease-in-out"
-      :style="{ transform: `translateX(-${currentSlide * 100}%)` }"
+      :style="{
+        transform: `translateX(${-currentSlide * 100 + dragOffset}%)`,
+        transition: isDragging ? 'none' : 'transform 300ms ease-in-out'
+      }"
     >
       <div
         v-for="post in pinnedPosts"
@@ -86,10 +134,11 @@ onUnmounted(() => {
           <img
             :src="post.banner || '/kungalgame.webp'"
             :alt="post.title"
-            class="h-full w-full object-cover opacity-[var(--kun-global-opacity)]"
+            class="pointer-events-none h-full w-full object-cover opacity-[var(--kun-global-opacity)] select-none"
           />
           <KunCard
             :is-transparent="false"
+            :is-hoverable="false"
             class-name="absolute right-0 bottom-0 left-0 m-3"
             content-class="gap-3"
           >
