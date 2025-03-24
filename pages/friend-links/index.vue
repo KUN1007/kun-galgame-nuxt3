@@ -5,14 +5,21 @@ const description = friendArray
   .flatMap((group) => group.value.map((friend) => friend.name))
   .join(' 网站, ')
 
-useSeoMeta({
+useKunSeoMeta({
   title: '友情链接网站',
   description,
-  ogTitle: kungal.title,
-  ogDescription: description,
   articleAuthor: friendArray.flatMap((group) =>
     group.value.map((friend) => friend.link)
   )
+})
+
+useHead({
+  link: [
+    {
+      rel: 'canonical',
+      href: `${kungal.domain.main}/friend-links`
+    }
+  ]
 })
 </script>
 

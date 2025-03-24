@@ -8,18 +8,14 @@ useHead({
   link: [{ rel: 'canonical', href: `${kungal.domain.main}${data.value?.path}` }]
 })
 
-useSeoMeta({
+useKunSeoMeta({
   title: data.value?.title,
   description: data.value?.description,
 
-  ogTitle: data.value?.title,
-  ogDescription: data.value?.description,
   ogImage: data.value?.banner,
   ogUrl: `${kungal.domain.main}${data.value?.path}`,
   ogType: 'article',
 
-  twitterTitle: data.value?.title,
-  twitterDescription: data.value?.description,
   twitterImage: `${kungal.domain.main}${data.value?.banner}`,
   twitterCard: 'summary_large_image',
 

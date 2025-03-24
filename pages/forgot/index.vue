@@ -1,10 +1,14 @@
 <script setup lang="ts">
-useHead({
+useKunSeoMeta({
   title: '忘记密码',
-  meta: [
+  description: `${kungal.titleShort} 忘记密码, 忘记密码找回, 如果您忘记了您的 ${kungal.titleShort} 账户密码, 可以在此页面根据邮箱找回密码`
+})
+
+useHead({
+  link: [
     {
-      name: 'description',
-      content: `${kungal.titleShort} 忘记密码, 忘记密码找回, 如果您忘记了您的 ${kungal.titleShort} 账户密码, 可以在此页面根据邮箱找回密码`
+      rel: 'canonical',
+      href: `${kungal.domain.main}/forgot`
     }
   ]
 })

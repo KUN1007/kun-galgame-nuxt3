@@ -6,6 +6,10 @@ definePageMeta({
 const route = useRoute()
 
 const uid = parseInt((route.params as { uid: string }).uid)
+
+useKunSeoMeta({
+  title: '私信'
+})
 </script>
 
 <template>

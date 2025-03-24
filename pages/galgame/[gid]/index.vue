@@ -20,20 +20,18 @@ if (data.value && data.value !== 'banned') {
   )
   const description = markdownToText(
     getPreferredLanguageText(data.value.markdown)
-  ).slice(0, 175)
+  )
+    .slice(0, 175)
+    .replace(/\\|\n/g, '')
 
-  useSeoMeta({
+  useKunSeoMeta({
     title,
     description,
 
-    ogTitle: title,
-    ogDescription: description,
     ogImage: data.value.banner,
     ogUrl: useRequestURL().href,
     ogType: 'article',
 
-    twitterTitle: title,
-    twitterDescription: description,
     twitterImage: data.value.banner,
     twitterCard: 'summary_large_image',
 
@@ -41,8 +39,17 @@ if (data.value && data.value !== 'banned') {
     articlePublishedTime: data.value.created.toString(),
     articleModifiedTime: data.value.updated.toString()
   })
+
+  useHead({
+    link: [
+      {
+        rel: 'canonical',
+        href: `${kungal.domain.main}/galgame/${data.value.gid}`
+      }
+    ]
+  })
 } else {
-  useSeoMeta({
+  useKunSeoMeta({
     title: data.value
       ? '这个 Galgame 已被封禁'
       : '未找到这个 Galgame 资源 wiki',

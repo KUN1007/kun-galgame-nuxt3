@@ -3,7 +3,7 @@ definePageMeta({
   middleware: ['auth', 'prevent']
 })
 
-useHead({ title: '重新编辑 Galgame' })
+useKunSeoMeta({ title: '重新编辑 Galgame' })
 </script>
 
 <template>

@@ -3,6 +3,10 @@ definePageMeta({
   middleware: 'auth'
 })
 
+useKunSeoMeta({
+  title: '系统消息'
+})
+
 const pageData = reactive({
   page: 1,
   limit: 10,

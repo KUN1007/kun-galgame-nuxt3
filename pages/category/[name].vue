@@ -14,12 +14,16 @@ const { data } = await useFetch(`/api/category`, {
   ...kungalgameResponseHandler
 })
 
-useHead({
+useKunSeoMeta({
   title: KUN_TOPIC_CATEGORY[categoryName.value],
-  meta: [
+  description: KUN_CATEGORY_DESCRIPTION_MAP[categoryName.value]
+})
+
+useHead({
+  link: [
     {
-      name: 'description',
-      content: KUN_CATEGORY_DESCRIPTION_MAP[categoryName.value]
+      rel: 'canonical',
+      href: `${kungal.domain.main}/category/${categoryName.value}`
     }
   ]
 })
