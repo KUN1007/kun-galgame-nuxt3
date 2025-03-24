@@ -1,6 +1,6 @@
 // Reference: https://github.com/nextui-org/nextui useRipple
 
-import { ref } from 'vue'
+import { ref, onUnmounted } from 'vue'
 
 export type RippleType = {
   key: number
@@ -11,6 +11,7 @@ export type RippleType = {
 
 export const useRipple = () => {
   const ripples = ref<RippleType[]>([])
+  const timeouts = new Set<NodeJS.Timeout>()
 
   const onClick = (event: MouseEvent) => {
     const target = event.currentTarget as HTMLElement
@@ -25,10 +26,19 @@ export const useRipple = () => {
       y: event.clientY - rect.top - size / 2
     })
 
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       ripples.value.shift()
+      timeouts.delete(timeoutId)
     }, 600)
+
+    timeouts.add(timeoutId)
   }
+
+  onUnmounted(() => {
+    timeouts.forEach((timeoutId) => clearTimeout(timeoutId))
+    timeouts.clear()
+    ripples.value = []
+  })
 
   return {
     ripples,
