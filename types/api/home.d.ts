@@ -15,6 +15,7 @@ export interface HomeMessage {
 export interface HomeUserStatus {
   moemoepoints: number
   isCheckIn: boolean
+  hasNewMessage: boolean
 }
 
 export interface HomeTopic {

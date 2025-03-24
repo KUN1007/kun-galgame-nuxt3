@@ -5,4 +5,5 @@ export interface UserStore {
   avatarMin: string
   moemoepoint: number
   roles: number
+  isCheckIn: boolean
 }

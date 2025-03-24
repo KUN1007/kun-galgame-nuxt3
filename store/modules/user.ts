@@ -10,7 +10,8 @@ export const usePersistUserStore = defineStore('KUNGalgameUser', {
     avatar: '',
     avatarMin: '',
     moemoepoint: 0,
-    roles: 0
+    roles: 0,
+    isCheckIn: false
   }),
   actions: {
     setUserInfo(user: LoginResponseData) {

@@ -52,21 +52,16 @@ const statusClasses = computed(() => {
 
     <KunPopover position="bottom-end">
       <template #trigger>
-        <div v-if="name">
-          <div>
-            <KunAvatar
-              size="lg"
-              :is-navigation="false"
-              :user="{ uid, name, avatar }"
-            />
-            <div
-              class="absolute right-0 bottom-0 size-2 rounded-full"
-              :class="cn(statusClasses, messageStatus)"
-            />
-          </div>
-          <span class="guest" v-if="!avatar">
-            {{ name }}
-          </span>
+        <div>
+          <KunAvatar
+            size="lg"
+            :is-navigation="false"
+            :user="{ uid, name, avatar }"
+          />
+          <div
+            class="absolute right-0 bottom-0 size-2 rounded-full"
+            :class="cn(statusClasses, messageStatus)"
+          />
         </div>
       </template>
 

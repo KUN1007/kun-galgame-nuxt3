@@ -1,10 +1,8 @@
 <script setup lang="ts">
-const { uid, name, moemoepoint } = storeToRefs(usePersistUserStore())
+const { uid, name, moemoepoint, isCheckIn } = storeToRefs(usePersistUserStore())
 const { messageStatus } = storeToRefs(useTempSettingStore())
 const messageStore = useComponentMessageStore()
 
-const container = ref<HTMLElement>()
-const isCheckIn = ref(true)
 const isShowMessageDot = computed(() => messageStatus.value === 'new')
 
 const handleCheckIn = async () => {
@@ -44,21 +42,6 @@ const logOut = async () => {
     useMessage(10110, 'success')
   }
 }
-
-onMounted(async () => {
-  container.value?.focus()
-
-  const result = await $fetch(`/api/user/status`, {
-    method: 'GET',
-    watch: false,
-    ...kungalgameResponseHandler
-  })
-
-  if (result) {
-    isCheckIn.value = result.isCheckIn
-    moemoepoint.value = result.moemoepoints
-  }
-})
 </script>
 
 <template>
@@ -72,43 +55,47 @@ onMounted(async () => {
     </div>
 
     <div class="func flex flex-col">
-      <KunLink
-        underline="none"
-        color="default"
-        class-name="hover:text-secondary-600 hover:bg-default-200 relative flex items-center justify-center rounded-lg p-1 transition-colors"
-        :to="`/user/${uid}/info`"
+      <KunButton
+        variant="light"
+        class-name="text-base p-1 text-foreground"
+        :href="`/user/${uid}/info`"
       >
         个人主页
-      </KunLink>
+      </KunButton>
 
-      <KunLink
-        underline="none"
-        color="default"
-        class-name="hover:text-secondary-600 hover:bg-default-200 relative flex items-center justify-center rounded-lg p-1 transition-colors"
-        to="/message"
+      <KunButton
+        variant="light"
+        class-name="text-base p-1 text-foreground"
+        href="/message"
       >
         我的消息
         <span
           v-if="isShowMessageDot"
           class="bg-secondary-500 absolute right-1 bottom-3 size-2 rounded-full"
         />
-      </KunLink>
+      </KunButton>
 
-      <div
-        class="hover:text-secondary-600 hover:bg-default-200 relative flex items-center justify-center rounded-lg p-1 transition-colors"
+      <KunButton
+        variant="light"
+        color="secondary"
         v-if="!isCheckIn"
         @click="handleCheckIn"
+        class-name="text-base p-1"
       >
         每日签到
-        <span class="bg-secondary-500 size-2 rounded-full" />
-      </div>
+        <span
+          class="bg-secondary-500 absolute right-1 bottom-3 size-2 rounded-full"
+        />
+      </KunButton>
 
-      <button
-        class="hover:bg-danger flex cursor-pointer justify-center rounded-lg p-1 transition-all hover:text-white"
+      <KunButton
+        variant="light"
+        color="danger"
+        class-name="text-base p-1 hover:bg-danger hover:text-white"
         @click="logOut"
       >
         退出登录
-      </button>
+      </KunButton>
     </div>
   </div>
 </template>

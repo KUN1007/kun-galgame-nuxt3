@@ -4,6 +4,7 @@ const route = useRoute()
 const { showKUNGalgameHamburger, messageStatus } = storeToRefs(
   useTempSettingStore()
 )
+const { moemoepoint, isCheckIn } = storeToRefs(usePersistUserStore())
 
 const router = useRouter()
 const canGoBack = ref(false)
@@ -20,13 +21,13 @@ watch(
 )
 
 onMounted(async () => {
-  const result = await $fetch(`/api/message/unread`, {
+  const result = await $fetch('/api/user/status', {
     method: 'GET'
   })
-  if (result === 'Moe loli online!') {
-    messageStatus.value = 'online'
-  } else {
-    messageStatus.value = 'new'
+  if (result) {
+    isCheckIn.value = result.isCheckIn
+    moemoepoint.value = result.moemoepoints
+    messageStatus.value = result.hasNewMessage ? 'new' : 'online'
   }
 
   updateCanGoBack()
