@@ -12,7 +12,6 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   'update:isOpen': [value: boolean]
-  close: []
 }>()
 
 const MIN_SCALE = 1
@@ -54,10 +53,13 @@ watch(
   }
 )
 
-const close = () => {
-  emit('update:isOpen', false)
-  emit('close')
-  resetTransform()
+const handleKunLightBoxStatus = (value: boolean) => {
+  if (value) {
+    emit('update:isOpen', value)
+  } else {
+    emit('update:isOpen', false)
+    resetTransform()
+  }
 }
 
 const next = () => {
@@ -72,8 +74,9 @@ const prev = () => {
 }
 
 const getBounds = () => {
-  if (!imageRef.value || !containerRef.value)
+  if (!imageRef.value || !containerRef.value) {
     return { minX: 0, maxX: 0, minY: 0, maxY: 0 }
+  }
 
   const container = containerRef.value.getBoundingClientRect()
   const image = imageRef.value.getBoundingClientRect()
@@ -93,7 +96,9 @@ const getBounds = () => {
 }
 
 const constrainPosition = (x: number, y: number) => {
-  if (scale.value <= 1) return { x: 0, y: 0 }
+  if (scale.value <= 1) {
+    return { x: 0, y: 0 }
+  }
 
   const bounds = getBounds()
   return {
@@ -114,7 +119,9 @@ const handleWheel = (e: WheelEvent) => {
 
   if (clampedScale !== scale.value) {
     const rect = containerRef.value?.getBoundingClientRect()
-    if (!rect) return
+    if (!rect) {
+      return
+    }
 
     const mouseX = e.clientX - rect.left
     const mouseY = e.clientY - rect.top
@@ -185,11 +192,11 @@ const stopDrag = (e: MouseEvent | TouchEvent) => {
     } else {
       next()
     }
+    position.x = 0
+    position.y = 0
   }
 
   isDragging.value = false
-  position.x = 0
-  position.y = 0
 }
 
 const handleDoubleClick = (e: MouseEvent) => {
@@ -287,13 +294,11 @@ const downloadImage = async () => {
   }
 }
 
-const onImageLoad = () => {
-  resetTransform()
-}
-
 onMounted(() => {
   const handleKeydown = (e: KeyboardEvent) => {
-    if (!props.isOpen) return
+    if (!props.isOpen) {
+      return
+    }
 
     switch (e.key) {
       case 'ArrowLeft':
@@ -303,7 +308,7 @@ onMounted(() => {
         next()
         break
       case 'Escape':
-        close()
+        handleKunLightBoxStatus(false)
         break
     }
   }
@@ -318,7 +323,7 @@ onMounted(() => {
 <template>
   <KunModal
     :modal-value="isOpen"
-    @update:modal-value="(value) => emit('update:isOpen', value)"
+    @update:modal-value="handleKunLightBoxStatus"
     :with-container="false"
   >
     <div
@@ -328,7 +333,6 @@ onMounted(() => {
       <KunButton
         v-if="images.length > 1"
         :is-icon-only="true"
-        variant="flat"
         color="default"
         size="xl"
         rounded="full"
@@ -341,7 +345,6 @@ onMounted(() => {
       <KunButton
         v-if="images.length > 1"
         :is-icon-only="true"
-        variant="flat"
         color="default"
         size="xl"
         rounded="full"
@@ -353,7 +356,6 @@ onMounted(() => {
 
       <KunButton
         :is-icon-only="true"
-        variant="flat"
         color="default"
         size="xl"
         rounded="full"
@@ -361,6 +363,17 @@ onMounted(() => {
         class-name="absolute right-4 bottom-4 z-50 p-2"
       >
         <Icon name="lucide:download" />
+      </KunButton>
+
+      <KunButton
+        :is-icon-only="true"
+        color="default"
+        size="xl"
+        rounded="full"
+        @click.stop="() => handleKunLightBoxStatus(false)"
+        class-name="absolute right-4 top-4 z-50 p-2"
+      >
+        <Icon name="lucide:x" />
       </KunButton>
 
       <div
@@ -382,7 +395,7 @@ onMounted(() => {
           :alt="currentAlt"
           class="max-h-full max-w-full will-change-transform"
           :style="transformStyle"
-          @load="onImageLoad"
+          @load="resetTransform"
           draggable="false"
           @click.stop
         />

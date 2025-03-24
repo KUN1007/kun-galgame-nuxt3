@@ -15,6 +15,7 @@ defineProps<{
         :src="metadata.banner"
         width="100%"
         height="100%"
+        data-kun-lazy-image
       />
     </div>
 

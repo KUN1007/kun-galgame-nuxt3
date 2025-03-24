@@ -4,6 +4,8 @@ const { data } = await useAsyncData(() => {
   return queryCollection('content').path(route.path).first()
 })
 
+const { images, isLightboxOpen, currentImageIndex } = useKunLightbox()
+
 useHead({
   link: [{ rel: 'canonical', href: `${kungal.domain.main}${data.value?.path}` }]
 })
@@ -38,6 +40,12 @@ useKunSeoMeta({
       <DocDetailCategoryTree />
 
       <article class="space-y-6 pl-0 lg:pr-67 xl:pl-67">
+        <KunLightbox
+          :images="images"
+          v-model:is-open="isLightboxOpen"
+          :initial-index="currentImageIndex"
+        />
+
         <DocDetailHeader :metadata="{ ...data }" />
         <ContentRenderer class="kun-prose" :value="data" />
         <DocDetailFooter />
