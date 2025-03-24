@@ -2,6 +2,8 @@
 definePageMeta({
   middleware: ['auth', 'prevent']
 })
+
+useHead({ title: '重新编辑 Galgame' })
 </script>
 
 <template>

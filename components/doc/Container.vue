@@ -1,14 +1,10 @@
 <script setup lang="ts">
 const { data: posts } = await useAsyncData('kun-doc-posts', () =>
-  queryCollection('content').order('date', 'DESC').all()
+  queryCollection('content').order('publishedTime', 'DESC').all()
 )
-const hasPinnedPosts = computed(() => posts.value?.some((post) => post.pin))
 </script>
 
 <template>
-  <!-- Hero Carousel -->
-  <!-- <DocCarousel v-if="hasPinnedPosts" class="mb-16" /> -->
-
   <KunCard
     :is-hoverable="false"
     :is-transparent="false"
@@ -35,8 +31,11 @@ const hasPinnedPosts = computed(() => posts.value?.some((post) => post.pin))
             {{ post.category }}
           </KunBadge>
 
-          <time :datetime="post.date.toString()" class="text-default-500">
-            {{ formatDate(post.date, { isShowYear: true }) }}
+          <time
+            :datetime="post.publishedTime.toString()"
+            class="text-default-500"
+          >
+            {{ formatDate(post.publishedTime, { isShowYear: true }) }}
           </time>
         </div>
 

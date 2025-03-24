@@ -4,6 +4,10 @@ const { data } = await useAsyncData(() => {
   return queryCollection('content').path(route.path).first()
 })
 
+useHead({
+  link: [{ rel: 'canonical', href: `${kungal.domain.main}${data.value?.path}` }]
+})
+
 useSeoMeta({
   title: data.value?.title,
   description: data.value?.description,

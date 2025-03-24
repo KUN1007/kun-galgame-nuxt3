@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import { friendArray } from '~/config/friend'
 
-useHead({
-  title: '友情链接',
-  meta: [
-    {
-      name: 'description',
-      content: friendArray
-        .flatMap((group) => group.value.map((friend) => friend.name))
-        .join(' | ')
-    }
-  ]
+const description = friendArray
+  .flatMap((group) => group.value.map((friend) => friend.name))
+  .join(' 网站, ')
+
+useSeoMeta({
+  title: '友情链接网站',
+  description,
+  ogTitle: kungal.title,
+  ogDescription: description,
+  articleAuthor: friendArray.flatMap((group) =>
+    group.value.map((friend) => friend.link)
+  )
 })
 </script>
 

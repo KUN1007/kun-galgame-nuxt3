@@ -19,66 +19,36 @@ if (data.value && data.value !== 'banned') {
       : ''
   )
   const description = markdownToText(
-    getPreferredLanguageText(data.value.introduction)
-  )
+    getPreferredLanguageText(data.value.markdown)
+  ).slice(0, 175)
 
-  const keywords =
-    Object.values(data.value.name).join(', ') +
-    ', ' +
-    data.value.alias.toString()
-
-  useHead({
+  useSeoMeta({
     title,
-    meta: [
-      {
-        name: 'description',
-        content: description
-      },
-      {
-        name: 'keywords',
-        content: keywords
-      },
-      {
-        name: 'og:title',
-        content: title
-      },
-      {
-        name: 'og:description',
-        content: description
-      },
-      {
-        property: 'og:image',
-        content: data.value.banner
-      },
-      {
-        property: 'og:type',
-        content: 'website'
-      },
-      {
-        property: 'og:url',
-        content: useRequestURL().href
-      },
-      {
-        property: 'twitter:card',
-        content: description
-      },
-      {
-        name: 'twitter:title',
-        content: title
-      },
-      {
-        name: 'twitter:description',
-        content: description
-      },
-      {
-        property: 'twitter:image',
-        content: data.value.banner
-      },
-      {
-        property: 'twitter:url',
-        content: useRequestURL().href
-      }
-    ]
+    description,
+
+    ogTitle: title,
+    ogDescription: description,
+    ogImage: data.value.banner,
+    ogUrl: useRequestURL().href,
+    ogType: 'article',
+
+    twitterTitle: title,
+    twitterDescription: description,
+    twitterImage: data.value.banner,
+    twitterCard: 'summary_large_image',
+
+    articleAuthor: [`${kungal.domain.main}/user/${data.value.user.uid}/info`],
+    articlePublishedTime: data.value.created.toString(),
+    articleModifiedTime: data.value.updated.toString()
+  })
+} else {
+  useSeoMeta({
+    title: data.value
+      ? '这个 Galgame 已被封禁'
+      : '未找到这个 Galgame 资源 wiki',
+    description: data.value
+      ? `这个 Galgame 由于违反了 ${kungal.titleShort} 资源发布规定, 或者被作者删除, 您可以进入 Galgame 总览页面查看其它相似 Galgame 资源 wiki`
+      : `未找到这个 Galgame, 请确认您的请求路径是否正确, 您可以进入 Galgame 页面查看其它 Galgame`
   })
 }
 </script>

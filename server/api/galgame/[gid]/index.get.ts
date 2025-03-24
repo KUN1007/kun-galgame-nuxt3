@@ -73,7 +73,9 @@ export default defineEventHandler(async (event) => {
       official: galgame.official,
       engine: galgame.engine,
       tags: galgame.tags,
-      series: galgame.series
+      series: galgame.series,
+      created: galgame.created,
+      updated: galgame.updated
     }
 
     await session.commitTransaction()
