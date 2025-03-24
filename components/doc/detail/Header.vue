@@ -40,7 +40,7 @@ defineProps<{
             <Icon name="lucide:calendar-days" />
             <p class="text-small text-inherit">
               {{
-                formatDate(metadata.date, {
+                formatDate(metadata.publishedTime, {
                   isPrecise: true,
                   isShowYear: true
                 })

@@ -42,7 +42,8 @@ export default defineContentConfig({
         // Content schema
         tags: z.array(z.string()),
         image: z.string(),
-        date: z.date(),
+        publishedTime: z.date(),
+        modifiedTime: z.date(),
         category: z.string(),
         pin: z.boolean(),
         banner: z.string(),

@@ -1,7 +1,6 @@
 import tailwindcss from '@tailwindcss/vite'
 import fs from 'fs'
 import path from 'path'
-import { kungal } from './config/kungal'
 
 const packageJson = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, 'package.json'), 'utf-8')
@@ -21,40 +20,6 @@ export default defineNuxtConfig({
   devServer: {
     host: '127.0.0.1',
     port: 1007
-  },
-
-  app: {
-    head: {
-      htmlAttrs: {
-        lang: 'zh-Hans'
-      },
-      titleTemplate: kungal.titleTemplate,
-      meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'format-detection', content: 'telephone=no' },
-        {
-          name: 'description',
-          content: kungal.description
-        },
-        {
-          name: 'image',
-          content: kungal.images[0].url
-        },
-        { name: 'theme-color', content: kungal.themeColor },
-        { property: 'og:title', content: kungal.title },
-        { property: 'og:site_name', content: kungal.titleShort },
-        { property: 'og:locale', content: 'zh_CN' },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:image', content: kungal.images[0].url },
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:site', content: kungal.creator.mention }
-      ],
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'canonical', href: kungal.domain.main }
-      ]
-    }
   },
 
   modules: [

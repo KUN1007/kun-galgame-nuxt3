@@ -3,6 +3,26 @@ const route = useRoute()
 const { data } = await useAsyncData(() => {
   return queryCollection('content').path(route.path).first()
 })
+
+useSeoMeta({
+  title: data.value?.title,
+  description: data.value?.description,
+
+  ogTitle: data.value?.title,
+  ogDescription: data.value?.description,
+  ogImage: data.value?.banner,
+  ogUrl: `${kungal.domain.main}${data.value?.path}`,
+  ogType: 'article',
+
+  twitterTitle: data.value?.title,
+  twitterDescription: data.value?.description,
+  twitterImage: `${kungal.domain.main}${data.value?.banner}`,
+  twitterCard: 'summary_large_image',
+
+  articleAuthor: [`${kungal.domain.main}/user/${data.value?.authorUid}/info`],
+  articlePublishedTime: data.value?.publishedTime.toString(),
+  articleModifiedTime: data.value?.modifiedTime.toString()
+})
 </script>
 
 <template>

@@ -30,6 +30,7 @@ export interface KunSiteCreator {
 
 export interface KunSiteImage {
   url: string
+  fullUrl: string
   width: number
   height: number
   alt: string

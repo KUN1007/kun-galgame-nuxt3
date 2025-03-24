@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { TocLink } from '@nuxt/content'
-import { ref, onMounted, onUnmounted } from 'vue'
 
 const props = defineProps<{
   toc: { links?: TocLink[] }

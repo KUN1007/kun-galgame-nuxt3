@@ -10,7 +10,8 @@ export interface KunFrontmatter {
   title: string
   banner: string
   description: string
-  date: Date
+  publishedTime: Date
+  modifiedTime: Date
   category: string
   authorUid: number
   authorName: string

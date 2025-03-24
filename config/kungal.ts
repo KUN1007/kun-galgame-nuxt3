@@ -46,7 +46,7 @@ export const kungal: KunSiteConfig = {
   name: KUN_SITE_NAME,
   title: KUN_SITE_TITLE,
   titleShort: KUN_SITE_SHORT,
-  titleTemplate: `%s | ${KUN_SITE_TITLE}`,
+  titleTemplate: `%s 🐳 ${KUN_SITE_TITLE}`,
   description: KUN_SITE_DESCRIPTION,
   keywords: KUN_SITE_KEYWORDS,
   canonical: KUN_SITE_URL,
@@ -88,6 +88,7 @@ export const kungal: KunSiteConfig = {
   images: [
     {
       url: '/kungalgame.webp',
+      fullUrl: `${KUN_SITE_URL}/kungalgame.webp`,
       width: 1000,
       height: 800,
       alt: KUN_SITE_TITLE

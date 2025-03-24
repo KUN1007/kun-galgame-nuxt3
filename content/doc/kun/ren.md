@@ -2,7 +2,8 @@
 title: 爱莲说
 banner: '/content/kun/ren/banner.avif'
 description: '予独爱莲之出花海而不俗，濯可爱而不妖，小只可爱，软萌诱人，香远益清，亭亭玉立，可远观亦可连理焉。'
-date: 2024-12-4
+publishedTime: 2024-12-4
+modifiedTime: 2024-12-4
 category: kun
 authorUid: 2
 authorName: '鲲'
