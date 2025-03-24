@@ -48,7 +48,7 @@ const handlePublishGalgame = async () => {
     usePersistEditGalgameStore().resetGalgameData()
 
     navigateTo(`/galgame/${gid}`)
-    useComponentMessageStore().info('AlertInfo.edit.publishSuccess')
+    useKunLoliInfo('AlertInfo.edit.publishSuccess', 5)
   }
 }
 </script>

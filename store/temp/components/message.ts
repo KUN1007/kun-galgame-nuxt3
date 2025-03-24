@@ -4,11 +4,6 @@ import type { MessageStore } from '~/store/types/components/message'
 export const useComponentMessageStore = defineStore('tempComponentMessage', {
   persist: false,
   state: (): MessageStore => ({
-    showInfo: false,
-    infoMsg: '',
-    infoTranslateParams: '',
-    durations: 0,
-
     showAlert: false,
     alertTitle: '',
     alertMsg: '',
@@ -19,12 +14,6 @@ export const useComponentMessageStore = defineStore('tempComponentMessage', {
   }),
   getters: {},
   actions: {
-    info(infoMsg: string, durations?: number) {
-      this.showInfo = true
-      this.infoMsg = infoMsg
-      this.durations = durations ?? 3000
-    },
-
     alert(
       alertTitle?: string,
       alertMsg?: string,

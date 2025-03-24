@@ -63,7 +63,7 @@ const handlePublish = async () => {
 
   if (tid) {
     navigateTo(`/topic/${tid}`)
-    useComponentMessageStore().info('发布成功')
+    useKunLoliInfo('发布成功', 5)
     usePersistEditTopicStore().resetTopicData()
   }
 }
@@ -104,7 +104,7 @@ const handleRewrite = async () => {
 
   if (result) {
     navigateTo(`/topic/${tid.value}`)
-    useComponentMessageStore().info('重新编辑成功')
+    useKunLoliInfo('重新编辑成功', 5)
     useTempEditStore().resetRewriteTopicData()
   }
 }

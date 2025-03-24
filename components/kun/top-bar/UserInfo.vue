@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const { uid, name, moemoepoint, isCheckIn } = storeToRefs(usePersistUserStore())
 const { messageStatus } = storeToRefs(useTempSettingStore())
-const messageStore = useComponentMessageStore()
 
 const isShowMessageDot = computed(() => messageStatus.value === 'new')
 
@@ -17,20 +16,14 @@ const handleCheckIn = async () => {
   moemoepoint.value += result
 
   if (result === 0) {
-    messageStore.info(
+    useKunLoliInfo(
       '杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡. 签到成功，您今日什么也没获得...',
       5000
     )
   } else if (result === 7) {
-    messageStore.info(
-      '杂鱼~♡♡♡♡♡. 签到成功, 您今日好运获得了 7 萌萌点哦!',
-      5000
-    )
+    useKunLoliInfo('杂鱼~♡♡♡♡♡. 签到成功, 您今日好运获得了 7 萌萌点哦!', 5000)
   } else {
-    messageStore.info(
-      `杂~~~鱼~♡. 签到成功，您今日获得了 ${result} 萌萌点`,
-      5000
-    )
+    useKunLoliInfo(`杂~~~鱼~♡. 签到成功，您今日获得了 ${result} 萌萌点`, 5000)
   }
 }
 
