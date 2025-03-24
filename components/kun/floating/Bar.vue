@@ -1,4 +1,12 @@
 <script setup lang="ts">
+const CONFIGS = {
+  SCROLL_THRESHOLD: 100,
+  DIRECTION_THRESHOLD: 5,
+  MOBILE_TIMEOUT: 2000,
+  BOTTOM_THRESHOLD: 1,
+  MOBILE_BREAKPOINT: 768
+} as const
+
 const progress = ref(0)
 const isVisible = ref(false)
 const showOnMobile = ref(true)
@@ -7,66 +15,68 @@ const scrollingDown = ref(true)
 const lastScrollY = ref(0)
 const isAtBottom = ref(false)
 
-const SCROLL_THRESHOLD = 100
-const DIRECTION_THRESHOLD = 5
-const MOBILE_TIMEOUT = 2000
-const BOTTOM_THRESHOLD = 1
 let mobileTimer: NodeJS.Timeout | null = null
 
+const buttonText = computed(() =>
+  isAtBottom.value || !scrollingDown.value ? '滚动到顶部' : '滚动到底部'
+)
+
+const buttonIcon = computed(() =>
+  isAtBottom.value || !scrollingDown.value
+    ? 'lucide:arrow-up'
+    : 'lucide:arrow-down'
+)
+
+const handleScroll = () => {
+  window.scrollTo({
+    top:
+      isAtBottom.value || !scrollingDown.value
+        ? 0
+        : document.documentElement.scrollHeight,
+    behavior: 'smooth'
+  })
+}
+
 const updateProgress = () => {
-  const winScroll = window.scrollY
-  const height =
-    document.documentElement.scrollHeight -
-    document.documentElement.clientHeight
-  const scrolled = (winScroll / height) * 100
+  const { scrollY } = window
+  const { scrollHeight, clientHeight } = document.documentElement
 
+  const scrolled = (scrollY / (scrollHeight - clientHeight)) * 100
   progress.value = scrolled
-  isVisible.value = winScroll > SCROLL_THRESHOLD
-
-  isAtBottom.value = Math.abs(scrolled - 100) < BOTTOM_THRESHOLD
+  isVisible.value = scrollY > CONFIGS.SCROLL_THRESHOLD
+  isAtBottom.value = Math.abs(scrolled - 100) < CONFIGS.BOTTOM_THRESHOLD
 
   if (!isAtBottom.value) {
-    const scrollDiff = winScroll - lastScrollY.value
-    if (Math.abs(scrollDiff) > DIRECTION_THRESHOLD) {
+    const scrollDiff = scrollY - lastScrollY.value
+    if (Math.abs(scrollDiff) > CONFIGS.DIRECTION_THRESHOLD) {
       scrollingDown.value = scrollDiff > 0
     }
   }
-  lastScrollY.value = winScroll
+  lastScrollY.value = scrollY
 
   if (isSmallScreen.value) {
     showOnMobile.value = true
     if (mobileTimer) clearTimeout(mobileTimer)
     mobileTimer = setTimeout(() => {
       showOnMobile.value = false
-    }, MOBILE_TIMEOUT)
+    }, CONFIGS.MOBILE_TIMEOUT)
   }
 }
 
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-const scrollToBottom = () => {
-  window.scrollTo({
-    top: document.documentElement.scrollHeight,
-    behavior: 'smooth'
-  })
-}
-
-const checkScreenSize = () => {
-  isSmallScreen.value = window.innerWidth < 768
+const updateScreenSize = () => {
+  isSmallScreen.value = window.innerWidth < CONFIGS.MOBILE_BREAKPOINT
 }
 
 onMounted(() => {
   window.addEventListener('scroll', updateProgress)
-  window.addEventListener('resize', checkScreenSize)
-  checkScreenSize()
+  window.addEventListener('resize', updateScreenSize)
+  updateScreenSize()
   updateProgress()
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', updateProgress)
-  window.removeEventListener('resize', checkScreenSize)
+  window.removeEventListener('resize', updateScreenSize)
   if (mobileTimer) clearTimeout(mobileTimer)
 })
 </script>
@@ -89,49 +99,26 @@ onUnmounted(() => {
       class="bg-default-200 relative h-2 w-[100px] overflow-hidden rounded-full"
     >
       <span
-        class="absolute top-0 left-0 h-full rounded-full transition-all duration-200"
+        class="bg-primary absolute top-0 left-0 h-full rounded-full"
         :style="{
-          width: `${progress}%`,
-          backgroundColor: 'var(--color-primary)'
+          width: `${progress}%`
         }"
       />
     </div>
 
-    <span
-      class="text-sm font-medium"
-      :style="{ color: 'var(--color-primary)' }"
-    >
+    <span class="text-primary text-sm font-medium">
       {{ Math.round(progress) }}%
     </span>
 
-    <KunTooltip
-      :text="
-        isAtBottom ? '滚动到顶部' : scrollingDown ? '滚动到顶部' : '滚动到底部'
-      "
-    >
+    <KunTooltip :text="buttonText">
       <KunButton
         :is-icon-only="true"
         rounded="full"
         size="lg"
         variant="flat"
-        @click="
-          isAtBottom
-            ? scrollToTop()
-            : scrollingDown
-              ? scrollToBottom()
-              : scrollToTop()
-        "
+        @click="handleScroll"
       >
-        <Icon
-          :name="
-            isAtBottom
-              ? 'lucide:arrow-up'
-              : scrollingDown
-                ? 'lucide:arrow-down'
-                : 'lucide:arrow-up'
-          "
-          class="h-5 w-5 text-blue-600"
-        />
+        <Icon :name="buttonIcon" class="h-5 w-5 text-blue-600" />
       </KunButton>
     </KunTooltip>
   </div>
