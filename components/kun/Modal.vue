@@ -9,12 +9,14 @@ const props = withDefaults(
     innerClassName?: string
     isDismissable?: boolean
     isShowCloseButton?: boolean
+    withContainer?: boolean
   }>(),
   {
     className: '',
     innerClassName: '',
     isDismissable: true,
-    isShowCloseButton: true
+    isShowCloseButton: true,
+    withContainer: true
   }
 )
 
@@ -83,6 +85,7 @@ onUnmounted(() => {
         tabindex="0"
       >
         <div
+          v-if="withContainer"
           :class="
             cn(
               'bg-background scrollbar-hide relative m-auto max-h-[90vh] min-w-80 overflow-y-auto rounded-lg border p-6 shadow-lg transition-all',
@@ -110,6 +113,8 @@ onUnmounted(() => {
             <Icon class="icon" name="lucide:x" />
           </KunButton>
         </div>
+
+        <slot v-else />
       </div>
     </Transition>
   </Teleport>

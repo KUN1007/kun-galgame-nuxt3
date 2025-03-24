@@ -3,6 +3,8 @@ import { scrollPage } from '../_helper'
 import type { TopicDetail } from '~/types/api/topic'
 import type { TopicReply } from '~/types/api/topic-reply'
 
+const { images, isLightboxOpen, currentImageIndex } = useKunLightbox()
+
 const { tempReply } = storeToRefs(useTempReplyStore())
 
 const props = defineProps<{
@@ -71,6 +73,12 @@ watch(
 
 <template>
   <div class="flex w-full">
+    <KunLightbox
+      :images="images"
+      v-model:is-open="isLightboxOpen"
+      :initial-index="currentImageIndex"
+    />
+
     <div class="w-full space-y-3 lg:w-[calc(100%-208px)]">
       <TopicDetailMaster :topic="topic" />
 

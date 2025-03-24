@@ -84,7 +84,7 @@ const logOut = async () => {
       <KunButton
         variant="light"
         color="danger"
-        class-name="text-base p-1 hover:bg-danger hover:text-white"
+        class-name="text-base p-1 hover:bg-danger hover:text-white text-foreground"
         @click="logOut"
       >
         退出登录

@@ -51,7 +51,7 @@ if (data.value && data.value !== 'banned') {
   const created = new Date(data.value.time).toString()
   const updated = new Date(data.value.edited).toString()
   const description = computed(() =>
-    markdownToText(markdown).trim().replace(/\s+/g, ',').slice(0, 233)
+    markdownToText(markdown).trim().slice(0, 233).replace(/\\|\n/g, '')
   )
 
   useKunSeoMeta({

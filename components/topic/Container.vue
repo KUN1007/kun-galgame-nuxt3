@@ -10,10 +10,8 @@ const {
   loadInitialTopics
 } = useTopic()
 
-// Load initial data
 await loadInitialTopics()
 
-// Handle filter changes from TopicTool
 const handleFilterChange = async () => {
   await resetTopics()
 }
