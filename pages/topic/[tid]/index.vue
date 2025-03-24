@@ -86,7 +86,5 @@ if (data.value && data.value !== 'banned') {
     <KunNull v-if="!data && data !== 'banned'" description="未找到这个话题" />
 
     <KunNull v-if="data === 'banned'" description="此话题已被封禁" />
-
-    <TopicDetailBar />
   </div>
 </template>

@@ -73,7 +73,7 @@ const hide = () => {
         v-if="isVisible"
         :class="
           cn(
-            'absolute z-50 rounded-lg border bg-white px-3 py-2 text-sm font-medium whitespace-nowrap shadow dark:bg-black',
+            'absolute z-50 hidden rounded-lg border bg-white px-3 py-2 text-sm font-medium whitespace-nowrap shadow sm:block dark:bg-black',
             positionClasses
           )
         "

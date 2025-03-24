@@ -1,11 +1,17 @@
 <script setup lang="ts">
 const progress = ref(0)
-const showBar = ref(false)
+const isVisible = ref(false)
+const showOnMobile = ref(true)
+const isSmallScreen = ref(false)
 const scrollingDown = ref(true)
 const lastScrollY = ref(0)
+const isAtBottom = ref(false)
 
 const SCROLL_THRESHOLD = 100
 const DIRECTION_THRESHOLD = 5
+const MOBILE_TIMEOUT = 2000
+const BOTTOM_THRESHOLD = 1
+let mobileTimer: NodeJS.Timeout | null = null
 
 const updateProgress = () => {
   const winScroll = window.scrollY
@@ -15,14 +21,25 @@ const updateProgress = () => {
   const scrolled = (winScroll / height) * 100
 
   progress.value = scrolled
-  showBar.value = winScroll > SCROLL_THRESHOLD
+  isVisible.value = winScroll > SCROLL_THRESHOLD
 
-  const scrollDiff = winScroll - lastScrollY.value
-  if (Math.abs(scrollDiff) > DIRECTION_THRESHOLD) {
-    scrollingDown.value = scrollDiff > 0
+  isAtBottom.value = Math.abs(scrolled - 100) < BOTTOM_THRESHOLD
+
+  if (!isAtBottom.value) {
+    const scrollDiff = winScroll - lastScrollY.value
+    if (Math.abs(scrollDiff) > DIRECTION_THRESHOLD) {
+      scrollingDown.value = scrollDiff > 0
+    }
   }
-
   lastScrollY.value = winScroll
+
+  if (isSmallScreen.value) {
+    showOnMobile.value = true
+    if (mobileTimer) clearTimeout(mobileTimer)
+    mobileTimer = setTimeout(() => {
+      showOnMobile.value = false
+    }, MOBILE_TIMEOUT)
+  }
 }
 
 const scrollToTop = () => {
@@ -36,30 +53,48 @@ const scrollToBottom = () => {
   })
 }
 
+const checkScreenSize = () => {
+  isSmallScreen.value = window.innerWidth < 768
+}
+
 onMounted(() => {
   window.addEventListener('scroll', updateProgress)
+  window.addEventListener('resize', checkScreenSize)
+  checkScreenSize()
+  updateProgress()
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', updateProgress)
+  window.removeEventListener('resize', checkScreenSize)
+  if (mobileTimer) clearTimeout(mobileTimer)
 })
 </script>
 
 <template>
   <div
-    class="fixed right-6 bottom-6 z-50 flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 shadow-lg backdrop-blur-sm transition-opacity duration-300"
-    :class="{ 'opacity-0': !showBar, 'opacity-100': showBar }"
+    v-show="isVisible"
+    :class="
+      cn(
+        'bg-background fixed right-3 bottom-3 z-100 flex items-center gap-2 rounded-full px-4 py-2 shadow-lg backdrop-blur-sm transition-opacity duration-300',
+        isSmallScreen
+          ? showOnMobile
+            ? 'opacity-100'
+            : 'opacity-0'
+          : 'opacity-100'
+      )
+    "
   >
     <div
-      class="relative h-2 w-[100px] overflow-hidden rounded-full bg-gray-200"
+      class="bg-default-200 relative h-2 w-[100px] overflow-hidden rounded-full"
     >
-      <div
+      <span
         class="absolute top-0 left-0 h-full rounded-full transition-all duration-200"
         :style="{
           width: `${progress}%`,
           backgroundColor: 'var(--color-primary)'
         }"
-      ></div>
+      />
     </div>
 
     <span
@@ -69,50 +104,35 @@ onUnmounted(() => {
       {{ Math.round(progress) }}%
     </span>
 
-    <button
-      v-if="scrollingDown"
-      @click="scrollToBottom"
-      class="rounded-full p-2 transition-colors hover:bg-gray-100"
-      :style="{ color: 'var(--color-primary)' }"
-      title="Scroll to bottom"
+    <KunTooltip
+      :text="
+        isAtBottom ? '滚动到顶部' : scrollingDown ? '滚动到顶部' : '滚动到底部'
+      "
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
+      <KunButton
+        :is-icon-only="true"
+        rounded="full"
+        size="lg"
+        variant="flat"
+        @click="
+          isAtBottom
+            ? scrollToTop()
+            : scrollingDown
+              ? scrollToBottom()
+              : scrollToTop()
+        "
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M19 14l-7 7m0 0l-7-7m7 7V3"
+        <Icon
+          :name="
+            isAtBottom
+              ? 'lucide:arrow-up'
+              : scrollingDown
+                ? 'lucide:arrow-down'
+                : 'lucide:arrow-up'
+          "
+          class="h-5 w-5 text-blue-600"
         />
-      </svg>
-    </button>
-
-    <button
-      v-else
-      @click="scrollToTop"
-      class="rounded-full p-2 transition-colors hover:bg-gray-100"
-      :style="{ color: 'var(--color-primary)' }"
-      title="Scroll to top"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M5 10l7-7m0 0l7 7m-7-7v18"
-        />
-      </svg>
-    </button>
+      </KunButton>
+    </KunTooltip>
   </div>
 </template>

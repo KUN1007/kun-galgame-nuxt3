@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { KunFloatingBar } from '#components'
+
 const { showKUNGalgamePageTransparency, showKUNGalgameBackgroundBlur } =
   storeToRefs(usePersistSettingsStore())
 
@@ -110,6 +112,8 @@ onMounted(() => {
     <KunAlert />
 
     <KunCapture />
+
+    <KunFloatingBar />
 
     <LazyTopicReplyPanel />
 
