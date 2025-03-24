@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { KUN_USER_PAGE_NAV_MAP } from '~/constants/user'
 import type { TopicType, UserInfo } from '~/types/api/user'
 
 const props = defineProps<{
@@ -23,6 +24,22 @@ const count = computed(() => {
     return props.user.favoriteTopic
   }
   return []
+})
+
+useKunSeoMeta({
+  title: () =>
+    `${props.user.name}${KUN_USER_PAGE_NAV_MAP[topicType.value]}的话题`,
+  description: () =>
+    `${props.user.name}在${kungal.titleShort}${KUN_USER_PAGE_NAV_MAP[topicType.value]}的话题`
+})
+
+useHead({
+  link: [
+    {
+      rel: 'canonical',
+      href: `${kungal.domain.main}/user/${props.user.uid}/topic/${topicType.value}`
+    }
+  ]
 })
 </script>
 

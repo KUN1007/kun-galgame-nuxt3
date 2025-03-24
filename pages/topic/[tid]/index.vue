@@ -4,23 +4,15 @@ const route = useRoute()
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
 const { isEdit } = storeToRefs(useTempReplyStore())
 
-const isBanned = ref(false)
 const tid = computed(() => {
   return parseInt((route.params as { tid: string }).tid)
 })
 provide<number>('tid', tid.value)
 
-const data = await useFetch(`/api/topic/${tid.value}`, {
+const { data } = await useFetch(`/api/topic/${tid.value}`, {
   method: 'GET',
   watch: false,
   ...kungalgameResponseHandler
-}).then(({ data }) => {
-  if (data.value === 'banned') {
-    isBanned.value = true
-    return null
-  } else {
-    return data.value
-  }
 })
 
 onBeforeRouteLeave(async (_, __, next) => {
@@ -53,73 +45,48 @@ const getFirstImageSrc = (htmlString: string) => {
   return match ? match[1] : 'https://www.kungal.com/kungalgame.webp'
 }
 
-if (data) {
-  const content = computed(() =>
-    markdownToText(data.markdown).trim().replace(/\s+/g, ',').slice(0, 233)
+if (data.value && data.value !== 'banned') {
+  const markdown = data.value.markdown
+  const banner = getFirstImageSrc(data.value.content)
+  const created = new Date(data.value.time).toString()
+  const updated = new Date(data.value.edited).toString()
+  const description = computed(() =>
+    markdownToText(markdown).trim().replace(/\s+/g, ',').slice(0, 233)
   )
 
-  useHead({
-    title: `${data.title} - ${kungal.titleShort}`,
-    meta: [
-      {
-        name: 'description',
-        content: content.value
-      },
-      {
-        name: 'keywords',
-        content: data.tags.toString()
-      },
-      {
-        name: 'og:title',
-        content: `${data.title} - ${kungal.titleShort}`
-      },
-      {
-        name: 'og:description',
-        content: content.value
-      },
-      {
-        property: 'og:image',
-        content: getFirstImageSrc(data.content)
-      },
-      {
-        property: 'og:type',
-        content: 'article'
-      },
-      {
-        property: 'og:url',
-        content: useRequestURL().href
-      },
-      {
-        property: 'twitter:card',
-        content: content.value
-      },
-      {
-        name: 'twitter:title',
-        content: `${data.title} - ${kungal.titleShort}`
-      },
-      {
-        name: 'twitter:description',
-        content: content.value
-      },
-      {
-        property: 'twitter:url',
-        content: useRequestURL().href
-      },
-      {
-        property: 'twitter:image',
-        content: getFirstImageSrc(data.content)
-      }
-    ]
+  useKunSeoMeta({
+    title: data.value.title,
+    description,
+
+    ogImage: banner,
+    ogUrl: `${kungal.domain.main}/topic/${data.value.tid}`,
+    ogType: 'article',
+
+    twitterImage: banner,
+    twitterCard: 'summary_large_image',
+
+    articleAuthor: [`${kungal.domain.main}/user/${data.value.user.uid}/info`],
+    articlePublishedTime: created,
+    articleModifiedTime: updated
+  })
+} else {
+  useKunSeoMeta({
+    title: data.value ? '话题已被封禁' : '未找到此话题',
+    description: data.value
+      ? `这个话题由于违反了 ${kungal.titleShort} 话题发布规定, 或者该话题被作者删除, 您可以返回话题页面查看其它话题`
+      : `未找到这个话题, 请确认您的请求路径是否正确, 您可以返回话题页面查看其它话题`
   })
 }
 </script>
 
 <template>
-  <TopicDetail v-if="data" :tid="tid" :topic="data" />
+  <div>
+    <TopicDetail v-if="data && data !== 'banned'" :topic="data" />
 
-  <KunNull v-if="!data && !isBanned" description="未找到这个话题" />
+    <KunNull v-if="!data && data !== 'banned'" description="未找到这个话题" />
 
-  <KunNull v-if="isBanned" description="此话题已被封禁" />
+    <KunNull v-if="data === 'banned'" description="此话题已被封禁" />
 
-  <TopicDetailBar />
+    <TopicDetailBar />
+  </div>
 </template>

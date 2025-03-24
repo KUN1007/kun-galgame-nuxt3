@@ -2,6 +2,10 @@
 definePageMeta({
   middleware: 'auth'
 })
+
+useKunSeoMeta({
+  title: '邮箱设置'
+})
 </script>
 
 <template>

@@ -1,11 +1,14 @@
 <script setup lang="ts">
-useHead({
+useKunSeoMeta({
   title: '匿名举报',
-  meta: [
+  description: `${kungal.titleShort} 的举报页, 这里可以完全匿名的提交论坛内的违规记录, 希望大家不要违规`
+})
+
+useHead({
+  link: [
     {
-      name: 'description',
-      content:
-        '鲲 Galgame 论坛的举报页，这里可以提交论坛内的违规记录，希望大家不要违规'
+      rel: 'canonical',
+      href: `${kungal.domain.main}/report`
     }
   ]
 })

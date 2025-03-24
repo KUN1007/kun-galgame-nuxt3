@@ -6,7 +6,6 @@ import type { TopicReply } from '~/types/api/topic-reply'
 const { tempReply } = storeToRefs(useTempReplyStore())
 
 const props = defineProps<{
-  tid: number
   topic: TopicDetail
 }>()
 
@@ -20,7 +19,7 @@ const pageData = reactive({
 })
 
 const { data, status, refresh } = await useFetch(
-  `/api/topic/${props.tid}/reply`,
+  `/api/topic/${props.topic.tid}/reply`,
   {
     method: 'GET',
     query: pageData,

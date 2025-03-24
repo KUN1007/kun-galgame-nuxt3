@@ -39,7 +39,7 @@ export const kunUserGalgameNavItem = (uid: number): KunTabItem[] => {
     },
     {
       value: 'favorite',
-      textValue: '已推',
+      textValue: '已收藏',
       href: `/user/${uid}/galgame/favorite`
     },
     {
