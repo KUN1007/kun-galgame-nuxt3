@@ -1,5 +1,6 @@
 import { $command, $useKeymap } from '@milkdown/utils'
 import { linkSchema } from '@milkdown/preset-commonmark'
+import { spoilerSchema } from '../spoiler/spoilerPlugin'
 import { commandsCtx } from '@milkdown/core'
 import type { MarkType } from '@milkdown/kit/prose/model'
 import type { EditorState } from '@milkdown/prose/state'
@@ -25,6 +26,23 @@ export const stopLinkCommand = $command('StopLink', (ctx) => () => {
     return false
   }
 })
+
+// export const stopLinkCommand = $command('StopLink', (ctx) => () => {
+//   return (state, dispatch) => {
+//     const linkMarkType = linkSchema.type(ctx)
+//     const spoilerMarkType = spoilerSchema.type(ctx)
+
+//     const checkLinkMark = hasMark(state, linkMarkType)
+//     const checkSpoilerMark = hasMark(state, spoilerMarkType)
+//     if (checkLinkMark) {
+//       dispatch?.(state.tr.removeStoredMark(linkMarkType))
+//     }
+//     if (checkSpoilerMark) {
+//       dispatch?.(state.tr.removeStoredMark(spoilerMarkType))
+//     }
+//     return false
+//   }
+// })
 
 export const linkCustomKeymap = $useKeymap('linkCustomKeymap', {
   StopLink: {

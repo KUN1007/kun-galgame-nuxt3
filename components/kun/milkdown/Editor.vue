@@ -28,6 +28,7 @@ import {
   placeholderPlugin,
   placeholderCtx
 } from './plugins/placeholder/placeholderPlugin'
+import { spoiler } from './plugins/spoiler/spoilerPlugin'
 
 // Syntax highlight
 import bash from 'refractor/lang/bash'
@@ -143,7 +144,8 @@ const editorInfo = useEditor((root) =>
         stopLinkCommand,
         linkCustomKeymap,
         placeholderCtx,
-        placeholderPlugin
+        placeholderPlugin,
+        spoiler
       ].flat()
     )
 )
