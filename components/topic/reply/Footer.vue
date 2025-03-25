@@ -61,7 +61,7 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
             )
           "
         >
-          <Icon name="lucide:share-2" />
+          <KunIcon name="lucide:share-2" />
         </KunButton>
       </KunTooltip>
 
@@ -77,7 +77,7 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
             handleClickComment(reply.rid, reply.user.uid, reply.user.name)
           "
         >
-          <Icon name="uil:comment-dots" />
+          <KunIcon name="uil:comment-dots" />
         </KunButton>
       </KunTooltip>
     </div>

@@ -29,7 +29,7 @@ const { data } = await useFetch(`/api/ranking/topic`, {
       </div>
 
       <div class="flex items-center space-x-2">
-        <Icon
+        <KunIcon
           :name="topicIconMap[topicRankingPageData.sortField]"
           class="text-primary h-5 w-5"
         />

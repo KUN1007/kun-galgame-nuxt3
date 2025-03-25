@@ -47,7 +47,7 @@ const updateValue = (event: Event) => {
       <div
         class="pointer-events-none absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 transition-opacity duration-200 peer-checked:opacity-100"
       >
-        <Icon name="lucide:check" />
+        <KunIcon name="lucide:check" />
       </div>
     </div>
     <slot />

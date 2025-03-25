@@ -23,19 +23,19 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
 
     <div class="text-default-700 flex items-center gap-4 text-sm">
       <span class="flex items-center gap-1 text-inherit">
-        <Icon class="h-4 w-4 text-inherit" name="lucide:eye" />
+        <KunIcon class="h-4 w-4 text-inherit" name="lucide:eye" />
         <span class="text-inherit">{{ props.topic.views }}</span>
       </span>
 
       <span class="flex items-center gap-1 text-inherit">
-        <Icon class="h-4 w-4 text-inherit" name="lucide:thumbs-up" />
+        <KunIcon class="h-4 w-4 text-inherit" name="lucide:thumbs-up" />
         <span class="text-inherit" v-if="props.topic.likes">
           {{ props.topic.likes }}
         </span>
       </span>
 
       <span class="flex items-center gap-1 text-inherit">
-        <Icon class="h-4 w-4 text-inherit" name="carbon:reply" />
+        <KunIcon class="h-4 w-4 text-inherit" name="carbon:reply" />
         <span class="text-inherit" v-if="actionsCount">{{ actionsCount }}</span>
       </span>
     </div>

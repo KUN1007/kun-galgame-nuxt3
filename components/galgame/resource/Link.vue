@@ -72,15 +72,15 @@ watch(
     <div class="flex flex-wrap items-center justify-between space-y-2">
       <div class="flex flex-wrap items-center gap-1 rounded-lg">
         <KunBadge color="primary">
-          <Icon :name="typeIconMap[link.type]" />
+          <KunIcon :name="typeIconMap[link.type]" />
           {{ KUN_GALGAME_RESOURCE_TYPE_MAP[link.type] }}
         </KunBadge>
         <KunBadge color="warning">
-          <Icon name="lucide:database" />
+          <KunIcon name="lucide:database" />
           {{ link.size }}
         </KunBadge>
         <KunBadge color="success">
-          <Icon :name="platformIconMap[link.platform]" />
+          <KunIcon :name="platformIconMap[link.platform]" />
           {{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[link.platform] }}
         </KunBadge>
         <KunBadge color="secondary">
@@ -97,7 +97,7 @@ watch(
           v-if="details"
           @click="details = undefined"
         >
-          <Icon name="lucide:x" />
+          <KunIcon name="lucide:x" />
         </KunButton>
 
         <KunButton
@@ -133,7 +133,7 @@ watch(
             v-if="uid !== link.uid"
             href="/report"
           >
-            <Icon name="lucide:triangle-alert" />
+            <KunIcon name="lucide:triangle-alert" />
           </KunButton>
         </KunTooltip>
 

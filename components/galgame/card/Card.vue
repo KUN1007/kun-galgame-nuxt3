@@ -37,7 +37,10 @@ defineProps<{
               :key="i"
               class="bg-background flex size-6 items-center justify-center rounded-full p-1.5 text-xs backdrop-blur-sm sm:size-8 sm:text-sm"
             >
-              <Icon :name="platformIconMap[platform]" class="h-full w-full" />
+              <KunIcon
+                :name="platformIconMap[platform]"
+                class="h-full w-full"
+              />
             </span>
           </template>
           <span
@@ -53,12 +56,12 @@ defineProps<{
         >
           <div class="flex gap-3">
             <span class="flex items-center gap-1">
-              <Icon class="text-white" name="lucide:eye" />
+              <KunIcon class="text-white" name="lucide:eye" />
               <span class="text-white">{{ galgame.views }}</span>
             </span>
 
             <span class="flex items-center gap-1">
-              <Icon class="text-white" name="lucide:thumbs-up" />
+              <KunIcon class="text-white" name="lucide:thumbs-up" />
               <span class="text-white">{{ galgame.likes }}</span>
             </span>
           </div>

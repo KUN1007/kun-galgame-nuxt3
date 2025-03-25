@@ -47,7 +47,7 @@ watch(
       <div
         class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
       >
-        <Icon :name="iconMap[message.type]" class="text-primary h-4 w-4" />
+        <KunIcon :name="iconMap[message.type]" class="text-primary h-4 w-4" />
       </div>
 
       <div class="space-y-2">

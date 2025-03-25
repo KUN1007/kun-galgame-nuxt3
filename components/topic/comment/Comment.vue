@@ -64,7 +64,7 @@ const handleClickComment = (comment: TopicComment) => {
                 class-name="gap-1"
                 @click="handleClickComment(comment)"
               >
-                <Icon name="uil:comment-dots" />
+                <KunIcon name="uil:comment-dots" />
               </KunButton>
             </div>
           </div>

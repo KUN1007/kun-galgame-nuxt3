@@ -42,7 +42,7 @@ const logOut = async () => {
     <div class="flex flex-col items-center gap-1">
       <p class="font-lg">{{ name }}</p>
       <p class="flex items-center justify-between gap-1 font-bold">
-        <Icon class="icon text-secondary" name="lucide:lollipop" />
+        <KunIcon class="icon text-secondary" name="lucide:lollipop" />
         <span class="text-secondary">{{ moemoepoint }}</span>
       </p>
     </div>

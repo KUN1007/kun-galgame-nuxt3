@@ -54,7 +54,7 @@ const toggleCategory = (category: string) => {
         <span class="text-foreground">
           {{ category }}
         </span>
-        <Icon
+        <KunIcon
           :name="
             expandedCategories[category]
               ? 'lucide:chevron-down'

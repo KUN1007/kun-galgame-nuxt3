@@ -32,11 +32,11 @@ defineProps<{
         </h2>
         <div class="text-default-500 flex items-center gap-4 text-sm">
           <div class="flex items-center gap-2 text-inherit">
-            <Icon name="lucide:newspaper" />
+            <KunIcon name="lucide:newspaper" />
             {{ formatNumber(category.topics) }}
           </div>
           <div class="flex items-center gap-2 text-inherit">
-            <Icon name="lucide:eye" />
+            <KunIcon name="lucide:eye" />
             {{ formatNumber(category.views) }}
           </div>
         </div>

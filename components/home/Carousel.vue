@@ -172,7 +172,7 @@ onUnmounted(() => {
       @click="manualSlide('prev')"
       class-name="absolute hidden group-hover:flex top-1/2 left-3 -translate-y-1/2 rounded-full transition-colors"
     >
-      <Icon name="lucide:chevron-left" />
+      <KunIcon name="lucide:chevron-left" />
     </KunButton>
     <KunButton
       :is-icon-only="true"
@@ -181,7 +181,7 @@ onUnmounted(() => {
       @click="manualSlide('next')"
       class-name="absolute hidden group-hover:flex top-1/2 right-3 -translate-y-1/2 rounded-full transition-colors"
     >
-      <Icon name="lucide:chevron-right" />
+      <KunIcon name="lucide:chevron-right" />
     </KunButton>
 
     <div class="absolute bottom-4 left-1/2 flex -translate-x-1/2 space-x-2">

@@ -36,12 +36,12 @@ const handleDeleteMessage = async (mid: number) => {
   >
     <div class="flex items-center gap-2 break-all">
       <div class="flex text-lg">
-        <Icon
+        <KunIcon
           class="text-secondary"
           v-if="message.status === 'unread'"
           name="lucide:info"
         />
-        <Icon
+        <KunIcon
           class="text-default"
           v-if="message.status === 'read'"
           name="lucide:check-check"
@@ -90,7 +90,7 @@ const handleDeleteMessage = async (mid: number) => {
         size="sm"
         @click="handleDeleteMessage(message.mid)"
       >
-        <Icon name="lucide:trash-2" />
+        <KunIcon name="lucide:trash-2" />
       </KunButton>
     </div>
   </div>

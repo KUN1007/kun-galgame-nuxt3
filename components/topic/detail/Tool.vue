@@ -25,7 +25,7 @@ const emits = defineEmits<{
         size="lg"
         @click="emits('setSortOrder', 'desc')"
       >
-        <Icon class="text-inherit" name="lucide:arrow-down" />
+        <KunIcon class="text-inherit" name="lucide:arrow-down" />
       </KunButton>
 
       <KunButton
@@ -34,7 +34,7 @@ const emits = defineEmits<{
         size="lg"
         @click="emits('setSortOrder', 'asc')"
       >
-        <Icon class="text-inherit" name="lucide:arrow-up" />
+        <KunIcon class="text-inherit" name="lucide:arrow-up" />
       </KunButton>
 
       <span class="pending" v-if="pending">少女祈祷中...</span>

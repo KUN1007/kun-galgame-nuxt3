@@ -36,7 +36,7 @@ onMounted(async () => {
   <div class="flex w-full flex-col space-y-3" v-if="data">
     <header class="flex items-center gap-2">
       <KunButton size="lg" :is-icon-only="true" variant="light" href="/message">
-        <Icon name="lucide:chevron-left" />
+        <KunIcon name="lucide:chevron-left" />
       </KunButton>
       <h2 class="text-lg">通知</h2>
     </header>

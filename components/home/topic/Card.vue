@@ -28,7 +28,7 @@ const isRecentlyUpvoted = computed(() => {
 
       <div class="flex items-center gap-3">
         <KunBadge color="warning" v-if="isRecentlyUpvoted">
-          <Icon name="lucide:sparkles" class="size-4 text-inherit" />
+          <KunIcon name="lucide:sparkles" class="size-4 text-inherit" />
           <span class="text-inherit">该话题被推</span>
         </KunBadge>
         <span class="text-default-500 shrink-0 text-sm">
@@ -44,15 +44,15 @@ const isRecentlyUpvoted = computed(() => {
 
       <div class="text-default-700 flex items-center gap-4 text-sm">
         <span class="flex items-center gap-1">
-          <Icon name="lucide:eye" class="h-4 w-4" />
+          <KunIcon name="lucide:eye" class="h-4 w-4" />
           {{ topic.views }}
         </span>
         <span class="flex items-center gap-1">
-          <Icon name="lucide:thumbs-up" class="h-4 w-4" />
+          <KunIcon name="lucide:thumbs-up" class="h-4 w-4" />
           {{ topic.likes }}
         </span>
         <span class="flex items-center gap-1">
-          <Icon name="carbon:reply" class="h-4 w-4" />
+          <KunIcon name="carbon:reply" class="h-4 w-4" />
           {{ topic.replies + topic.comments }}
         </span>
       </div>

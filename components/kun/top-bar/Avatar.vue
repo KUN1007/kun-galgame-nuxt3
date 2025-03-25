@@ -37,7 +37,7 @@ const statusClasses = computed(() => {
       size="xl"
       href="/search"
     >
-      <Icon name="lucide:search" />
+      <KunIcon name="lucide:search" />
     </KunButton>
 
     <KunButton
@@ -47,7 +47,7 @@ const statusClasses = computed(() => {
       size="xl"
       @click="showKUNGalgamePanel = !showKUNGalgamePanel"
     >
-      <Icon name="lucide:settings" />
+      <KunIcon name="lucide:settings" />
     </KunButton>
 
     <KunPopover position="bottom-end">

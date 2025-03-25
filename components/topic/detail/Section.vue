@@ -28,7 +28,10 @@ const sectionColors: Record<string, KunUIColor> = {
       :color="sectionColors[sec.toLowerCase()[0]]"
       :size="size"
     >
-      <Icon :name="iconMap[sec.toLowerCase()[0]]" class="size-4 text-inherit" />
+      <KunIcon
+        :name="iconMap[sec.toLowerCase()[0]]"
+        class="size-4 text-inherit"
+      />
       {{ KUN_TOPIC_SECTION[sec] }}
     </KunBadge>
   </span>

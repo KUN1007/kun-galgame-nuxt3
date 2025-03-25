@@ -24,7 +24,7 @@ const isExpanded = computed(() => props.expandedItems.includes(props.item.name))
           @click="$emit('toggle-expand', item.name)"
           :class-name="cn(isExpanded ? 'mb-1' : '')"
         >
-          <Icon
+          <KunIcon
             v-if="item.icon"
             class="text-foreground mr-3 flex items-center justify-center text-xl"
             :name="item.icon"
@@ -33,7 +33,7 @@ const isExpanded = computed(() => props.expandedItems.includes(props.item.name))
             {{ item.label }}
           </span>
 
-          <Icon
+          <KunIcon
             :name="isExpanded ? 'lucide:chevron-down' : 'lucide:chevron-right'"
             class="ml-auto"
           />
@@ -69,7 +69,7 @@ const isExpanded = computed(() => props.expandedItems.includes(props.item.name))
           )
         "
       >
-        <Icon v-if="item.icon" :name="item.icon" />
+        <KunIcon v-if="item.icon" :name="item.icon" />
         <span class="text-sm sm:text-base">{{ item.label }}</span>
       </span>
 

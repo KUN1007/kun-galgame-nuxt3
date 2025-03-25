@@ -83,7 +83,7 @@ watch(
           size="lg"
           @click="sortOrder = 'desc'"
         >
-          <Icon class="text-inherit" name="lucide:arrow-down" />
+          <KunIcon class="text-inherit" name="lucide:arrow-down" />
         </KunButton>
 
         <KunButton
@@ -92,7 +92,7 @@ watch(
           size="lg"
           @click="sortOrder = 'asc'"
         >
-          <Icon class="text-inherit" name="lucide:arrow-up" />
+          <KunIcon class="text-inherit" name="lucide:arrow-up" />
         </KunButton>
       </div>
     </div>

@@ -76,7 +76,7 @@ watch(
               })
             }}
           </span>
-          <Icon :name="iconMap[pr.status]" />
+          <KunIcon :name="iconMap[pr.status]" />
           <span>
             {{ KUN_GALGAME_RESOURCE_PULL_REQUEST_STATUS_MAP[pr.status] }}
           </span>
@@ -102,7 +102,7 @@ watch(
           v-if="details"
           @click="details = undefined"
         >
-          <Icon name="lucide:x" />
+          <KunIcon name="lucide:x" />
         </KunButton>
       </div>
     </div>

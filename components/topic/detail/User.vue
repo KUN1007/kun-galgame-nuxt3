@@ -29,7 +29,7 @@ const user = computed(() => props.user)
     </KunLink>
 
     <p class="text-secondary flex items-center gap-1">
-      <Icon class="text-inherit" name="lucide:lollipop" />
+      <KunIcon class="text-inherit" name="lucide:lollipop" />
       {{ user.moemoepoint }}
     </p>
   </KunCard>

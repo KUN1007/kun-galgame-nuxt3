@@ -92,15 +92,15 @@ watch(
 
         <div class="text-default-700 flex gap-4 text-sm">
           <div class="flex items-center gap-2 text-inherit">
-            <Icon name="lucide:eye" />
+            <KunIcon name="lucide:eye" />
             {{ sec.views }}
           </div>
           <div class="flex items-center gap-2 text-inherit">
-            <Icon name="lucide:thumbs-up" />
+            <KunIcon name="lucide:thumbs-up" />
             {{ sec.likes }}
           </div>
           <div class="flex items-center gap-2 text-inherit">
-            <Icon name="carbon:reply" />
+            <KunIcon name="carbon:reply" />
             {{ sec.replies }}
           </div>
         </div>

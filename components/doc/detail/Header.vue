@@ -38,7 +38,7 @@ defineProps<{
             {{ metadata.authorName }}
           </h2>
           <div class="text-default-500 flex items-center gap-2">
-            <Icon name="lucide:calendar-days" />
+            <KunIcon name="lucide:calendar-days" />
             <p class="text-small text-inherit">
               {{
                 formatDate(metadata.publishedTime, {

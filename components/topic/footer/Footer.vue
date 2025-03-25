@@ -58,7 +58,7 @@ defineProps<{
             )
           "
         >
-          <Icon name="lucide:share-2" />
+          <KunIcon name="lucide:share-2" />
         </KunButton>
       </KunTooltip>
 

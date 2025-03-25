@@ -118,7 +118,7 @@ const handleApplyCrop = () => {
         v-if="!selectedFileUrl && !initialImage"
         class="absolute inset-0 flex flex-col items-center justify-center"
       >
-        <Icon name="i-lucide-plus" class="text-default-500 text-3xl" />
+        <KunIcon name="i-lucide-plus" class="text-default-500 text-3xl" />
         <span v-if="hint" class="text-default-500 mt-2 text-sm">
           {{ `${hint}` }}
         </span>

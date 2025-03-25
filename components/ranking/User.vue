@@ -28,7 +28,7 @@ const { data } = await useFetch(`/api/ranking/user`, {
       </div>
 
       <div class="flex items-center space-x-2">
-        <Icon
+        <KunIcon
           :name="userIconMap[userRankingPageData.sortField]"
           class="text-primary h-5 w-5"
         />

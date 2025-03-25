@@ -39,7 +39,7 @@ const currentUserUid = usePersistUserStore().uid
             class-name="block sm:hidden"
             :href="`/message/user/${user.uid}`"
           >
-            <Icon name="lucide:message-circle" />
+            <KunIcon name="lucide:message-circle" />
             私聊
           </KunButton>
         </h2>
@@ -89,21 +89,21 @@ const currentUserUid = usePersistUserStore().uid
 
     <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
       <div class="flex w-full items-center space-x-2">
-        <Icon class="text-secondary text-2xl" name="lucide:sparkles" />
+        <KunIcon class="text-secondary text-2xl" name="lucide:sparkles" />
         <div>
           <div class="text-lg font-medium">{{ user.upvote }}</div>
           <div class="text-default-500 text-sm">被推</div>
         </div>
       </div>
       <div class="flex w-full items-center space-x-2">
-        <Icon class="text-primary text-2xl" name="lucide:thumbs-up" />
+        <KunIcon class="text-primary text-2xl" name="lucide:thumbs-up" />
         <div>
           <div class="text-lg font-medium">{{ user.like }}</div>
           <div class="text-default-500 text-sm">被赞</div>
         </div>
       </div>
       <div class="flex w-full items-center space-x-2">
-        <Icon class="text-warning text-2xl" name="lucide:at-sign" />
+        <KunIcon class="text-warning text-2xl" name="lucide:at-sign" />
         <div>
           <!-- TODO: -->
           <div class="text-lg font-medium">0</div>
@@ -111,7 +111,7 @@ const currentUserUid = usePersistUserStore().uid
         </div>
       </div>
       <div class="flex w-full items-center space-x-2">
-        <Icon class="text-default text-2xl" name="lucide:thumbs-down" />
+        <KunIcon class="text-default text-2xl" name="lucide:thumbs-down" />
         <div>
           <div class="text-lg font-medium">{{ user.dislike }}</div>
           <div class="text-default-500 text-sm">被踩</div>

@@ -53,7 +53,7 @@ watch(
           "
           @click="showItemIndex = 1"
         >
-          <Icon class="text-inherit" name="mdi:circle-transparent" />
+          <KunIcon class="text-inherit" name="mdi:circle-transparent" />
         </span>
         <span
           :class="
@@ -64,7 +64,7 @@ watch(
           "
           @click="showItemIndex = 2"
         >
-          <Icon class="text-inherit" name="tabler:blur" />
+          <KunIcon class="text-inherit" name="tabler:blur" />
         </span>
         <span
           :class="
@@ -75,7 +75,7 @@ watch(
           "
           @click="showItemIndex = 3"
         >
-          <Icon class="text-inherit" name="ci:font" />
+          <KunIcon class="text-inherit" name="ci:font" />
         </span>
       </div>
     </div>

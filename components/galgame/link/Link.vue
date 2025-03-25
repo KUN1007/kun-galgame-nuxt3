@@ -104,7 +104,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
         <p>{{ link.name }}</p>
         <KunLink :to="link.link" target="_blank" rel="noopener noreferrer">
           {{ link.link }}
-          <Icon name="lucide:external-link" />
+          <KunIcon name="lucide:external-link" />
           <KunButton
             :is-icon-only="true"
             variant="light"
@@ -114,7 +114,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
             @click="handleDeleteLink(link.gid, link.glid)"
             :pending="isFetching"
           >
-            <Icon name="lucide:trash-2" />
+            <KunIcon name="lucide:trash-2" />
           </KunButton>
         </KunLink>
       </KunCard>

@@ -36,7 +36,7 @@ const { data } = await useFetch(`/api/home/resource`, {
       <div
         class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
       >
-        <Icon
+        <KunIcon
           :name="platformIconMap[link.platform]"
           class="text-primary h-4 w-4"
         />
@@ -53,7 +53,7 @@ const { data } = await useFetch(`/api/home/resource`, {
 
         <div class="text-default-700 flex gap-4 text-sm">
           <span class="flex items-center gap-1">
-            <Icon class="icon" :name="typeIconMap[link.type]" />
+            <KunIcon class="icon" :name="typeIconMap[link.type]" />
             {{ KUN_GALGAME_RESOURCE_TYPE_MAP[link.type] }}
           </span>
 

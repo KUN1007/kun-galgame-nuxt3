@@ -13,7 +13,7 @@ const [prev, next] = data.value || []
 <template>
   <div class="flex items-center justify-between">
     <KunButton v-if="prev" color="default" variant="light" :href="prev.path">
-      <Icon name="lucide:chevron-left" />
+      <KunIcon name="lucide:chevron-left" />
       {{ prev.title }}
     </KunButton>
     <KunButton
@@ -24,7 +24,7 @@ const [prev, next] = data.value || []
       :href="next.path"
     >
       {{ next.title }}
-      <Icon name="lucide:chevron-right" />
+      <KunIcon name="lucide:chevron-right" />
     </KunButton>
   </div>
 </template>

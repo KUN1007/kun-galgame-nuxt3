@@ -52,7 +52,7 @@ const handleClickLike = async () => {
     class-name="gap-1"
     @click="handleClickLike"
   >
-    <Icon class="icon" name="lucide:thumbs-up" />
+    <KunIcon class="icon" name="lucide:thumbs-up" />
     <span v-if="likesCount">{{ likesCount }}</span>
   </KunButton>
 </template>

@@ -43,7 +43,7 @@ const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
         size="lg"
         @click="layout = 'grid'"
       >
-        <Icon class="text-inherit" name="lucide:layout-grid" />
+        <KunIcon class="text-inherit" name="lucide:layout-grid" />
       </KunButton>
 
       <KunButton
@@ -52,7 +52,7 @@ const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
         size="lg"
         @click="layout = 'list'"
       >
-        <Icon class="text-inherit" name="lucide:list" />
+        <KunIcon class="text-inherit" name="lucide:list" />
       </KunButton>
 
       <KunButton
@@ -61,7 +61,7 @@ const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
         size="lg"
         @click="pageData.sortOrder = 'desc'"
       >
-        <Icon class="text-inherit" name="lucide:arrow-down" />
+        <KunIcon class="text-inherit" name="lucide:arrow-down" />
       </KunButton>
 
       <KunButton
@@ -70,7 +70,7 @@ const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
         size="lg"
         @click="pageData.sortOrder = 'asc'"
       >
-        <Icon class="text-inherit" name="lucide:arrow-up" />
+        <KunIcon class="text-inherit" name="lucide:arrow-up" />
       </KunButton>
     </div>
   </div>

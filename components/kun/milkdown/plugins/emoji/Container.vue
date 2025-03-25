@@ -57,11 +57,11 @@ const selectEmoji = (emoji: string) => {
 
     <div class="flex justify-center gap-1">
       <KunButton :is-icon-only="true" variant="light" @click="prevPage">
-        <Icon name="lucide:chevron-left" />
+        <KunIcon name="lucide:chevron-left" />
       </KunButton>
 
       <KunButton :is-icon-only="true" variant="light" @click="nextPage">
-        <Icon name="lucide:chevron-right" />
+        <KunIcon name="lucide:chevron-right" />
       </KunButton>
     </div>
   </div>

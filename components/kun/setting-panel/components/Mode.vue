@@ -50,7 +50,7 @@ watch(
           )
         "
       >
-        <Icon
+        <KunIcon
           class="text-inherit"
           :name="mode.icon"
           @click="$colorMode.preference = mode.name"

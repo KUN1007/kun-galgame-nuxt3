@@ -171,7 +171,7 @@ const handleLoadHistoryMessages = async () => {
       class-name="shrink-0"
       @click="sendMessage"
     >
-      <Icon name="lucide:send" />
+      <KunIcon name="lucide:send" />
     </KunButton>
   </div>
 </template>

@@ -29,7 +29,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
         <span
           class="mr-3 flex items-center justify-center text-xl text-inherit"
         >
-          <Icon class="text-inherit" name="lucide:settings" />
+          <KunIcon class="text-inherit" name="lucide:settings" />
         </span>
         <span class="text-inherit">网站设置</span>
       </KunButton>
@@ -46,7 +46,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
           :to="kungal.github"
           target="_blank"
         >
-          <Icon class="icon" name="lucide:github" />
+          <KunIcon class="icon" name="lucide:github" />
           <span class="text-xs">GitHub</span>
         </KunLink>
 
@@ -56,7 +56,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
           class-name="flex-col gap-0"
           to="/rss"
         >
-          <Icon class="icon" name="lucide:rss" />
+          <KunIcon class="icon" name="lucide:rss" />
           <span class="text-xs">RSS</span>
         </KunLink>
 
@@ -67,7 +67,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
           :to="kungal.domain.telegram_group"
           target="_blank"
         >
-          <Icon class="icon" name="ph:telegram-logo" />
+          <KunIcon class="icon" name="ph:telegram-logo" />
           <span class="text-xs">Telegram</span>
         </KunLink>
       </div>

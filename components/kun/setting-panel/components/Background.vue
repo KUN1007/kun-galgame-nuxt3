@@ -45,7 +45,7 @@ const handleChangeImage = async (index: number) => {
           :is-icon-only="true"
           @click="prevPage"
         >
-          <Icon class="text-inherit" name="lucide:chevron-left" />
+          <KunIcon class="text-inherit" name="lucide:chevron-left" />
         </KunButton>
 
         <KunButton
@@ -54,7 +54,7 @@ const handleChangeImage = async (index: number) => {
           :is-icon-only="true"
           @click="nextPage"
         >
-          <Icon class="text-inherit" name="lucide:chevron-right" />
+          <KunIcon class="text-inherit" name="lucide:chevron-right" />
         </KunButton>
 
         <KunButton

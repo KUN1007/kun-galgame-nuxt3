@@ -19,7 +19,7 @@ defineProps<{
 
     <div class="mt-2 flex items-center justify-between text-sm">
       <div class="text-secondary flex items-center">
-        <Icon name="lucide:lollipop" class="h-5 w-5" />
+        <KunIcon name="lucide:lollipop" class="h-5 w-5" />
         {{ user.moemoepoint }}
       </div>
       <span class="text-default-700">

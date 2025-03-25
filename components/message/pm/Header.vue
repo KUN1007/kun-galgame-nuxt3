@@ -22,7 +22,7 @@ const handleReload = () => location.reload()
 <template>
   <header class="flex items-center gap-2">
     <KunButton size="lg" :is-icon-only="true" variant="light" href="/message">
-      <Icon name="lucide:chevron-left" />
+      <KunIcon name="lucide:chevron-left" />
     </KunButton>
 
     <KunAvatar :user="user" />
@@ -39,7 +39,7 @@ const handleReload = () => location.reload()
         @click="handleReload"
       >
         <span>您已离线</span>
-        <Icon name="lucide:refresh-ccw" />
+        <KunIcon name="lucide:refresh-ccw" />
       </span>
     </h2>
   </header>

@@ -36,6 +36,6 @@ withDefaults(defineProps<KunCopyProps>(), {
     @click="useKunCopy(text)"
   >
     <span>{{ decodeIfEncoded(name ? name : text) }}</span>
-    <Icon name="lucide:copy" />
+    <KunIcon name="lucide:copy" />
   </KunButton>
 </template>

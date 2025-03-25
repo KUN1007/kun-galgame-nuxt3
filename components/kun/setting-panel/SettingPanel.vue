@@ -16,7 +16,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 
           <KunTooltip class-name="flex" text="设置面板帮助" position="bottom">
             <KunLink color="default" class="hover:text-primary">
-              <Icon name="lucide:circle-help" />
+              <KunIcon name="lucide:circle-help" />
             </KunLink>
           </KunTooltip>
         </div>

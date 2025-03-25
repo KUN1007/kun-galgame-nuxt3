@@ -66,7 +66,7 @@ const handleCollapsed = (item: Nav) => {
         class-name="gap-2 justify-start text-foreground sm:px-5 sm:py-2.5 p-2"
         @click="handleCollapsed(kun)"
       >
-        <Icon
+        <KunIcon
           class="shrink-0 text-xl text-inherit sm:text-base"
           v-if="iconMap[kun.name]"
           :name="iconMap[kun.name]"

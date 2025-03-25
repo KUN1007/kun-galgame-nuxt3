@@ -48,7 +48,7 @@ onMounted(async () => {
       @click="showKUNGalgameHamburger = true"
       class-name="flex sm:hidden"
     >
-      <Icon name="lucide:menu" />
+      <KunIcon name="lucide:menu" />
     </KunButton>
 
     <div class="hidden sm:block">
@@ -60,7 +60,7 @@ onMounted(async () => {
         variant="light"
         @click="router.back()"
       >
-        <Icon name="lucide:arrow-left" />
+        <KunIcon name="lucide:arrow-left" />
       </KunButton>
       <KunButton
         v-else
@@ -70,7 +70,7 @@ onMounted(async () => {
         variant="light"
         @click="() => navigateTo('/')"
       >
-        <Icon name="lucide:home" />
+        <KunIcon name="lucide:home" />
       </KunButton>
     </div>
 

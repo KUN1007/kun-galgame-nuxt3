@@ -84,7 +84,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
           variant="light"
           @click="handleRewriteResource(details)"
         >
-          <Icon class="icon" name="lucide:pencil" />
+          <KunIcon class="icon" name="lucide:pencil" />
         </KunButton>
         <KunButton
           :is-icon-only="true"
@@ -92,7 +92,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
           variant="light"
           @click="handleDeleteResource(details.gid, details.grid)"
         >
-          <Icon class="icon" name="lucide:trash-2" />
+          <KunIcon class="icon" name="lucide:trash-2" />
         </KunButton>
       </div>
 

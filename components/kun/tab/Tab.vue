@@ -122,7 +122,7 @@ const handleTabClick = (item: KunTabItem) => {
         @keydown.space="handleTabClick(item)"
         class="flex items-center gap-2"
       >
-        <Icon
+        <KunIcon
           v-if="item.icon"
           :name="item.icon"
           :size="iconSize"

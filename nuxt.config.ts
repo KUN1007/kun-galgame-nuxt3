@@ -65,6 +65,14 @@ export default defineNuxtConfig({
   // Frontend
   css: ['~/styles/index.css'],
 
+  icon: {
+    mode: 'svg',
+    clientBundle: {
+      scan: true,
+      sizeLimitKb: 256
+    }
+  },
+
   vite: {
     plugins: [tailwindcss()],
     esbuild: {

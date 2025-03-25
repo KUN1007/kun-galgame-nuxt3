@@ -13,12 +13,12 @@ defineProps<{
   >
     <div class="flex items-center break-all">
       <div class="ml-2 text-lg">
-        <Icon
+        <KunIcon
           class="text-secondary"
           v-if="message.status === 'unread'"
           name="lucide:info"
         />
-        <Icon
+        <KunIcon
           class="text-default"
           v-if="message.status === 'read'"
           name="lucide:check-check"

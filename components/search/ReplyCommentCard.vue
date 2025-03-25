@@ -21,7 +21,7 @@ const content = computed(() =>
     class="flex-col items-start"
   >
     <div class="flex items-center gap-2">
-      <Icon
+      <KunIcon
         class="text-primary h-5 w-5"
         :name="type === 'reply' ? 'carbon:reply' : 'uil:comment-dots'"
       />
@@ -42,7 +42,7 @@ const content = computed(() =>
         <KunAvatar :user="data.user" />
         <span class="ml-2 text-sm">{{ data.user.name }}</span>
       </div>
-      <Icon name="lucide:arrow-right" class="h-4 w-4" />
+      <KunIcon name="lucide:arrow-right" class="h-4 w-4" />
       <div class="flex items-center">
         <KunAvatar :user="data.toUser" />
         <span class="ml-2 text-sm">{{ data.toUser.name }}</span>

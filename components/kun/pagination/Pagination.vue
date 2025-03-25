@@ -78,7 +78,7 @@ const handleJumpToPage = () => {
           'cursor-not-allowed opacity-50': isLoading || currentPage === 1
         }"
       >
-        <Icon name="lucide:chevron-left" />
+        <KunIcon name="lucide:chevron-left" />
       </KunButton>
 
       <div class="flex items-center gap-1">
@@ -106,7 +106,7 @@ const handleJumpToPage = () => {
             isLoading || currentPage === totalPage
         }"
       >
-        <Icon name="lucide:chevron-right" />
+        <KunIcon name="lucide:chevron-right" />
       </KunButton>
     </div>
 

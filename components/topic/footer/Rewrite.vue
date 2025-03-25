@@ -34,7 +34,7 @@ const rewriteTopic = () => {
       v-if="isShowRewrite"
       @click="rewriteTopic"
     >
-      <Icon name="lucide:pencil" />
+      <KunIcon name="lucide:pencil" />
     </KunButton>
   </KunTooltip>
 </template>

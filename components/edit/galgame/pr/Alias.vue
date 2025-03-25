@@ -109,7 +109,7 @@ watch(
         v-if="inputValue"
         @click="handleAddAlias"
       >
-        <Icon name="lucide:plus" class="h-5 w-5 text-blue-600" />
+        <KunIcon name="lucide:plus" class="h-5 w-5 text-blue-600" />
       </KunButton>
     </div>
   </div>

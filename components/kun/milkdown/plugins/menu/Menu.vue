@@ -64,7 +64,7 @@ const handleFileChange = async (event: Event) => {
       size="xl"
       @click="call(btn.command.key, btn.payload)"
     >
-      <Icon class="text-foreground" :name="btn.icon" />
+      <KunIcon class="text-foreground" :name="btn.icon" />
     </KunButton>
 
     <KunButton
@@ -74,7 +74,7 @@ const handleFileChange = async (event: Event) => {
       size="xl"
       @click="input?.click()"
     >
-      <Icon class="text-foreground" name="lucide:image-plus" />
+      <KunIcon class="text-foreground" name="lucide:image-plus" />
       <input
         hidden
         ref="input"
@@ -86,7 +86,7 @@ const handleFileChange = async (event: Event) => {
 
     <div class="group relative flex justify-center">
       <KunButton variant="light" size="xl" :is-icon-only="true">
-        <Icon class="text-foreground" name="lucide:smile-plus" />
+        <KunIcon class="text-foreground" name="lucide:smile-plus" />
       </KunButton>
       <KunMilkdownPluginsEmojiContainer
         class="hidden group-hover:flex"

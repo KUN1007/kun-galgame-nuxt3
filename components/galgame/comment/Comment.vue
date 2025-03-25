@@ -87,7 +87,7 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
               class-name="gap-1"
               @click="handleDeleteComment(comment.gid, comment.gcid)"
             >
-              <Icon name="lucide:trash-2" />
+              <KunIcon name="lucide:trash-2" />
             </KunButton>
           </KunTooltip>
         </div>

@@ -70,7 +70,7 @@ const handleClickDislike = () => {
       class-name="gap-1"
       @click="handleClickDislike"
     >
-      <Icon class="icon" name="lucide:thumbs-down" />
+      <KunIcon class="icon" name="lucide:thumbs-down" />
       <span v-if="dislikesCount">{{ dislikesCount }}</span>
     </KunButton>
   </KunTooltip>

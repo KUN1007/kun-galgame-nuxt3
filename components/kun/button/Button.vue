@@ -192,7 +192,11 @@ const handleKunButtonClick = (event: MouseEvent) => {
     :type="type"
     @click="handleKunButtonClick"
   >
-    <Icon class="text-sm" v-if="loading" name="svg-spinners:90-ring-with-bg" />
+    <KunIcon
+      class="text-sm"
+      v-if="loading"
+      name="svg-spinners:90-ring-with-bg"
+    />
     <span v-if="icon && iconPosition === 'left'" class="mr-2">
       <slot name="icon" />
     </span>

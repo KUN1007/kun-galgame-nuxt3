@@ -32,7 +32,7 @@ const handleRewriteGalgame = (galgame: GalgameDetail) => {
       size="lg"
       @click="handleRewriteGalgame(galgame)"
     >
-      <Icon name="lucide:pencil" />
+      <KunIcon name="lucide:pencil" />
     </KunButton>
   </KunTooltip>
 </template>

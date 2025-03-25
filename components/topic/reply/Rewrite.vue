@@ -29,7 +29,7 @@ const rewriteReply = () => {
       v-if="isShowRewrite"
       @click="rewriteReply"
     >
-      <Icon name="lucide:pencil" />
+      <KunIcon name="lucide:pencil" />
     </KunButton>
   </KunTooltip>
 </template>

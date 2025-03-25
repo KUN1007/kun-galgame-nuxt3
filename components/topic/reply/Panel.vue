@@ -52,7 +52,7 @@ const handleClosePanel = async () => {
               :is-icon-only="true"
               @click="handleClosePanel"
             >
-              <Icon name="lucide:x" />
+              <KunIcon name="lucide:x" />
             </KunButton>
           </div>
 

@@ -66,7 +66,7 @@ onMounted(() => (commentToUid.value = toUser.uid))
             size="lg"
             @click="pageData.order = 'desc'"
           >
-            <Icon class="text-inherit" name="lucide:arrow-down" />
+            <KunIcon class="text-inherit" name="lucide:arrow-down" />
           </KunButton>
 
           <KunButton
@@ -75,7 +75,7 @@ onMounted(() => (commentToUid.value = toUser.uid))
             size="lg"
             @click="pageData.order = 'asc'"
           >
-            <Icon class="text-inherit" name="lucide:arrow-up" />
+            <KunIcon class="text-inherit" name="lucide:arrow-up" />
           </KunButton>
         </div>
       </GalgameCommentPanel>

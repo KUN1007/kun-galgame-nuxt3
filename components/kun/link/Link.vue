@@ -72,7 +72,7 @@ const colorClasses: Record<KunUIColor, string> = {
   >
     <slot name="prefix"></slot>
     <slot></slot>
-    <Icon v-if="props.isShowAnchorIcon" name="lucide:external-link" />
+    <KunIcon v-if="props.isShowAnchorIcon" name="lucide:external-link" />
     <slot name="suffix"></slot>
   </NuxtLink>
 </template>

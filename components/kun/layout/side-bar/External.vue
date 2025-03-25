@@ -19,7 +19,7 @@ import { kunLayoutExternalItem } from '~/constants/layout'
         v-if="item.icon"
         class="mr-3 flex items-center justify-center text-xl text-inherit"
       >
-        <Icon class="mr-3 text-inherit" :name="item.icon" />
+        <KunIcon class="mr-3 text-inherit" :name="item.icon" />
         <span class="text-sm">{{ item.label }}</span>
       </span>
 

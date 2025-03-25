@@ -118,7 +118,7 @@ onUnmounted(() => {
         variant="flat"
         @click="handleScroll"
       >
-        <Icon :name="buttonIcon" class="h-5 w-5 text-blue-600" />
+        <KunIcon class="text-inherit" :name="buttonIcon" />
       </KunButton>
     </KunTooltip>
   </div>

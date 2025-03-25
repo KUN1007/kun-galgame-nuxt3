@@ -92,7 +92,7 @@ const handleClickUpvote = async () => {
       class-name="gap-1"
       @click="handleClickUpvote"
     >
-      <Icon class="icon" name="lucide:sparkles" />
+      <KunIcon class="icon" name="lucide:sparkles" />
       <span v-if="upvoteCount">{{ upvoteCount }}</span>
     </KunButton>
   </KunTooltip>

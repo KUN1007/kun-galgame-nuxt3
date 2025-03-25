@@ -110,7 +110,7 @@ onUnmounted(() => {
               }
             "
           >
-            <Icon class="icon" name="lucide:x" />
+            <KunIcon class="icon" name="lucide:x" />
           </KunButton>
         </div>
 

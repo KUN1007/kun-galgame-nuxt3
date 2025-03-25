@@ -100,7 +100,7 @@ const selectOption = (value: string | number, index: number) => {
       <span class="block truncate">
         {{ selectedLabel || placeholder }}
       </span>
-      <Icon
+      <KunIcon
         name="lucide:chevron-down"
         class="pointer-events-none"
         :class="
@@ -132,7 +132,7 @@ const selectOption = (value: string | number, index: number) => {
               {{ option.label }}
             </span>
 
-            <Icon
+            <KunIcon
               v-if="modelValue === option.value"
               class="flex items-center pr-4"
               name="lucide:check"

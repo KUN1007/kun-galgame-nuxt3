@@ -40,7 +40,7 @@ const handleDeleteHistory = (historyIndex: number) => {
           variant="light"
           @click.stop="handleDeleteHistory(index)"
         >
-          <Icon name="lucide:x" class="h-4 w-4" />
+          <KunIcon name="lucide:x" class="h-4 w-4" />
         </KunButton>
       </div>
     </div>

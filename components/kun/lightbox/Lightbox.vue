@@ -339,7 +339,7 @@ onMounted(() => {
         @click.stop="prev"
         class-name="absolute left-4 z-50 p-2"
       >
-        <Icon name="lucide:chevron-left" />
+        <KunIcon name="lucide:chevron-left" />
       </KunButton>
 
       <KunButton
@@ -351,7 +351,7 @@ onMounted(() => {
         @click.stop="next"
         class-name="absolute right-4 z-50 p-2"
       >
-        <Icon name="lucide:chevron-right" />
+        <KunIcon name="lucide:chevron-right" />
       </KunButton>
 
       <KunButton
@@ -362,7 +362,7 @@ onMounted(() => {
         @click.stop="downloadImage"
         class-name="absolute right-4 bottom-4 z-50 p-2"
       >
-        <Icon name="lucide:download" />
+        <KunIcon name="lucide:download" />
       </KunButton>
 
       <KunButton
@@ -373,7 +373,7 @@ onMounted(() => {
         @click.stop="() => handleKunLightBoxStatus(false)"
         class-name="absolute right-4 top-4 z-50 p-2"
       >
-        <Icon name="lucide:x" />
+        <KunIcon name="lucide:x" />
       </KunButton>
 
       <div

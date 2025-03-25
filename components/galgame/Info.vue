@@ -64,7 +64,7 @@ defineProps<{
           :key="index"
           color="success"
         >
-          <Icon class="icon" :name="platformIconMap[platform]" />
+          <KunIcon class="icon" :name="platformIconMap[platform]" />
           {{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[platform] }}
         </KunBadge>
       </div>

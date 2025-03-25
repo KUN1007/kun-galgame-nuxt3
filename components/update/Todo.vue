@@ -65,7 +65,7 @@ watch(
           <span v-if="todo.completedTime" class="text-default-500">
             {{ formatDate(todo.completedTime, { isPrecise: true }) }}
           </span>
-          <Icon
+          <KunIcon
             :name="iconMap[todo.status]"
             class="h-4 w-4"
             :class="{
