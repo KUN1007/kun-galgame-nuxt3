@@ -1,5 +1,5 @@
-import TodoModel from '~/server/models/todo'
-import type { GetTodoRequestData, Todo } from '~/types/api/update-log'
+import TodoModel from '@/server/models/todo'
+import type { GetTodoRequestData, Todo } from '@/types/api/update-log'
 
 const getTodos = async (page: number, limit: number) => {
   const skip = (page - 1) * limit

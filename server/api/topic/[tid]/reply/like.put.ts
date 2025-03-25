@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import UserModel from '~/server/models/user'
-import ReplyModel from '~/server/models/reply'
+import UserModel from '@/server/models/user'
+import ReplyModel from '@/server/models/reply'
 
 const updateReplyLike = async (uid: number, rid: number) => {
   const reply = await ReplyModel.findOne({ rid })

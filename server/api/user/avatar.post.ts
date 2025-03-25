@@ -1,8 +1,8 @@
-import UserModel from '~/server/models/user'
-import env from '~/server/env/dotenv'
+import UserModel from '@/server/models/user'
+import env from '@/server/env/dotenv'
 import sharp from 'sharp'
-import { uploadImage } from '~/server/utils/uploadImage'
-import { checkBufferSize } from '~/server/utils/checkBufferSize'
+import { uploadImage } from '@/server/utils/uploadImage'
+import { checkBufferSize } from '@/server/utils/checkBufferSize'
 
 const resizeUserAvatar = async (name: string, avatar: Buffer, uid: number) => {
   const miniAvatar = await sharp(avatar)

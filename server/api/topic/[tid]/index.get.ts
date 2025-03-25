@@ -1,6 +1,6 @@
-import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
-import type { TopicDetail } from '~/types/api/topic'
+import UserModel from '@/server/models/user'
+import TopicModel from '@/server/models/topic'
+import type { TopicDetail } from '@/types/api/topic'
 
 export default defineEventHandler(async (event) => {
   const tid = getRouterParam(event, 'tid')

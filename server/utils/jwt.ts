@@ -1,10 +1,9 @@
 import jwt from 'jsonwebtoken'
-import type { KUNGalgamePayload } from '~/types/utils/jwt'
 
 const config = useRuntimeConfig()
 
 export const generateToken = (uid: number, name: string, expire: string) => {
-  const payload: KUNGalgamePayload = {
+  const payload: KUNGalgameJWTPayload = {
     iss: config.JWT_ISS,
     aud: config.JWT_AUD,
     uid,

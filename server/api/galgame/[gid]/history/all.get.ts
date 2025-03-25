@@ -1,10 +1,10 @@
-import UserModel from '~/server/models/user'
-import GalgameHistoryModel from '~/server/models/galgame-history'
+import UserModel from '@/server/models/user'
+import GalgameHistoryModel from '@/server/models/galgame-history'
 import type {
   GalgameHistoryAction,
   GalgameHistoryType,
   GalgameHistory
-} from '~/types/api/galgame-history'
+} from '@/types/api/galgame-history'
 
 export default defineEventHandler(async (event) => {
   const gid = getRouterParam(event, 'gid')

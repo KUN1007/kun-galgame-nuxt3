@@ -1,6 +1,6 @@
-import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
-import type { GetSectionRequestData, SectionTopic } from '~/types/api/section'
+import UserModel from '@/server/models/user'
+import TopicModel from '@/server/models/topic'
+import type { GetSectionRequestData, SectionTopic } from '@/types/api/section'
 
 const getSectionTopic = async (
   section: string,

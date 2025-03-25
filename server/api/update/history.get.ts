@@ -1,9 +1,9 @@
-import UpdateLogModel from '~/server/models/update-log'
+import UpdateLogModel from '@/server/models/update-log'
 import type {
   GetUpdateLogRequestData,
   UpdateType,
   UpdateLog
-} from '~/types/api/update-log'
+} from '@/types/api/update-log'
 
 const getUpdateLogs = async (page: number, limit: number) => {
   const skip = (page - 1) * limit

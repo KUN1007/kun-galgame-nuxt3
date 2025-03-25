@@ -1,9 +1,9 @@
 import mongoose from 'mongoose'
-import TopicModel from '~/server/models/topic'
-import UserModel from '~/server/models/user'
+import TopicModel from '@/server/models/topic'
+import UserModel from '@/server/models/user'
 import { checkTopicPublish } from './utils/checkTopicPublish'
 import type { H3Event } from 'h3'
-import type { EditCreateTopicRequestData } from '~/types/api/topic'
+import type { EditCreateTopicRequestData } from '@/types/api/topic'
 
 const readTopicData = async (event: H3Event) => {
   const {

@@ -1,8 +1,8 @@
 import sharp from 'sharp'
-import env from '~/server/env/dotenv'
-import UserModel from '~/server/models/user'
-import { uploadImage } from '~/server/utils/uploadImage'
-import { checkBufferSize } from '~/server/utils/checkBufferSize'
+import env from '@/server/env/dotenv'
+import UserModel from '@/server/models/user'
+import { uploadImage } from '@/server/utils/uploadImage'
+import { checkBufferSize } from '@/server/utils/checkBufferSize'
 
 const compressImage = async (name: string, image: Buffer, uid: number) => {
   const miniImage = await sharp(image)

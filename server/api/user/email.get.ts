@@ -1,4 +1,4 @@
-import UserModel from '~/server/models/user'
+import UserModel from '@/server/models/user'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)

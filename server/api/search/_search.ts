@@ -1,15 +1,15 @@
-import TopicModel from '~/server/models/topic'
-import GalgameModel from '~/server/models/galgame'
-import UserModel from '~/server/models/user'
-import ReplyModel from '~/server/models/reply'
-import CommentModel from '~/server/models/comment'
+import TopicModel from '@/server/models/topic'
+import GalgameModel from '@/server/models/galgame'
+import UserModel from '@/server/models/user'
+import ReplyModel from '@/server/models/reply'
+import CommentModel from '@/server/models/comment'
 import type {
   SearchResultTopic,
   SearchResultGalgame,
   SearchResultUser,
   SearchResultReply,
   SearchResultComment
-} from '~/types/api/search'
+} from '@/types/api/search'
 
 export const searchTopic = async (
   keywords: string[],

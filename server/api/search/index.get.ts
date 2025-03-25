@@ -5,7 +5,7 @@ import {
   searchReply,
   searchUser
 } from './_search'
-import type { SearchRequestData, SearchType } from '~/types/api/search'
+import type { SearchRequestData, SearchType } from '@/types/api/search'
 
 const search = async (
   keywords: string,

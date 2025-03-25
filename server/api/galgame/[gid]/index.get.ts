@@ -1,7 +1,7 @@
-import GalgameModel from '~/server/models/galgame'
-import UserModel from '~/server/models/user'
+import GalgameModel from '@/server/models/galgame'
+import UserModel from '@/server/models/user'
 import mongoose from 'mongoose'
-import type { GalgameContributor, GalgameDetail } from '~/types/api/galgame'
+import type { GalgameContributor, GalgameDetail } from '@/types/api/galgame'
 
 export default defineEventHandler(async (event) => {
   const gid = getRouterParam(event, 'gid')

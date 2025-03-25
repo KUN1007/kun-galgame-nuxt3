@@ -11,7 +11,9 @@ export type MessageType =
   | 'mentioned'
   | 'admin'
 
-export type MessageStatus = 'read' | 'unread'
+export type MessageReadStatus = 'read' | 'unread'
+
+export type MessageStatus = 'online' | 'offline' | 'new' | 'admin'
 
 export type SortField = 'time'
 

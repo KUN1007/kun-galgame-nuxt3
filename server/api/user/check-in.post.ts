@@ -1,4 +1,4 @@
-import UserModel from '~/server/models/user'
+import UserModel from '@/server/models/user'
 import { randomNum } from '~/utils/random'
 
 export default defineEventHandler(async (event) => {

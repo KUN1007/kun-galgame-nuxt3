@@ -4,13 +4,12 @@ import { parse } from 'cookie-es'
 import { Server as Engine } from 'engine.io'
 import { Server } from 'socket.io'
 import { defineEventHandler } from 'h3'
-import { handleSocketRequest } from '~/server/socket/handleSocketRequest'
+import { handleSocketRequest } from '@/server/socket/handleSocketRequest'
 import type { NitroApp } from 'nitropack'
 import type { Socket } from 'socket.io'
-import type { KUNGalgamePayload } from '~/types/utils/jwt'
 
 export interface KUNGalgameSocket extends Socket {
-  payload?: KUNGalgamePayload
+  payload?: KUNGalgameJWTPayload
 }
 
 export default defineNitroPlugin((nitroApp: NitroApp) => {
@@ -27,7 +26,7 @@ export default defineNitroPlugin((nitroApp: NitroApp) => {
       const payload = jwt.verify(
         refreshToken,
         env.JWT_SECRET || ''
-      ) as KUNGalgamePayload
+      ) as KUNGalgameJWTPayload
       socket.payload = payload
       next()
     } catch (error) {

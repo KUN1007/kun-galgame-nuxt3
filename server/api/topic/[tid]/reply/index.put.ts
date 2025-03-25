@@ -1,7 +1,7 @@
-import ReplyModel from '~/server/models/reply'
+import ReplyModel from '@/server/models/reply'
 import mongoose from 'mongoose'
 import { checkReplyPublish } from '../../utils/checkReplyPublish'
-import type { TopicUpdateReplyRequestData } from '~/types/api/topic-reply'
+import type { TopicUpdateReplyRequestData } from '@/types/api/topic-reply'
 
 const updateReply = async (
   uid: number,

@@ -1,6 +1,6 @@
-import UserModel from '~/server/models/user'
-import MessageAdminModel from '~/server/models/message-admin'
-import type { MessageAdmin } from '~/types/api/message-admin'
+import UserModel from '@/server/models/user'
+import MessageAdminModel from '@/server/models/message-admin'
+import type { MessageAdmin } from '@/types/api/message-admin'
 
 export default defineEventHandler(async (_) => {
   const messageAdmin = await MessageAdminModel.find()

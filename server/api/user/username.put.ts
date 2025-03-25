@@ -1,4 +1,4 @@
-import UserModel from '~/server/models/user'
+import UserModel from '@/server/models/user'
 import { isValidName } from '~/utils/validate'
 
 export default defineEventHandler(async (event) => {

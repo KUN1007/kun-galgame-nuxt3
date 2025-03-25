@@ -1,6 +1,6 @@
 import { createTransport } from 'nodemailer'
 import SMPTransport from 'nodemailer-smtp-transport'
-import env from '~/server/env/dotenv'
+import env from '@/server/env/dotenv'
 import type { H3Event } from 'h3'
 
 const getMailContent = (

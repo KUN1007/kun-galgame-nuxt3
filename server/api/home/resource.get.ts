@@ -1,6 +1,6 @@
-import GalgameModel from '~/server/models/galgame'
-import GalgameResourceModel from '~/server/models/galgame-resource'
-import type { HomeGalgameResources } from '~/types/api/home'
+import GalgameModel from '@/server/models/galgame'
+import GalgameResourceModel from '@/server/models/galgame-resource'
+import type { HomeGalgameResources } from '@/types/api/home'
 
 const getHomeGalgameResources = async (page: number, limit: number) => {
   const skip = (page - 1) * limit

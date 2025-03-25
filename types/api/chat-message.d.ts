@@ -1,7 +1,7 @@
 import type {
   MessageRead,
   MessageReaction
-} from '~/server/models/types/chat-message'
+} from '@/server/models/types/chat-message'
 
 export interface MessageHistoryRequest {
   receiverUid: string

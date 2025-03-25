@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
-import GalgameModel from '~/server/models/galgame'
-import GalgameCommentModel from '~/server/models/galgame-comment'
-import UserModel from '~/server/models/user'
+import GalgameModel from '@/server/models/galgame'
+import GalgameCommentModel from '@/server/models/galgame-comment'
+import UserModel from '@/server/models/user'
 
 export default defineEventHandler(async (event) => {
   const gid = getRouterParam(event, 'gid')

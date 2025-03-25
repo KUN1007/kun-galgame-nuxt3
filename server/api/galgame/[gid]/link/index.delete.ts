@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import GalgameLinkModel from '~/server/models/galgame-link'
+import GalgameLinkModel from '@/server/models/galgame-link'
 
 export default defineEventHandler(async (event) => {
   const { glid }: { glid: string } = await getQuery(event)

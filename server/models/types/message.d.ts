@@ -1,5 +1,5 @@
 import type { UserAttributes } from './user'
-import type { MessageStatus, MessageType } from '~/types/api/message'
+import type { MessageReadStatus, MessageType } from '@/types/api/message'
 
 export interface MessageAttributes {
   mid: number
@@ -9,7 +9,7 @@ export interface MessageAttributes {
   tid: number
   gid: number
   content: string
-  status: MessageStatus
+  status: MessageReadStatus
   type: MessageType
 
   user: UserAttributes[]

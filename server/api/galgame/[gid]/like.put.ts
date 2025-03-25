@@ -1,5 +1,5 @@
-import UserModel from '~/server/models/user'
-import GalgameModel from '~/server/models/galgame'
+import UserModel from '@/server/models/user'
+import GalgameModel from '@/server/models/galgame'
 import mongoose from 'mongoose'
 
 const updateGalgameLike = async (gid: number, uid: number) => {

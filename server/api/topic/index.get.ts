@@ -1,10 +1,10 @@
-import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
+import UserModel from '@/server/models/user'
+import TopicModel from '@/server/models/topic'
 import type {
   SortFieldTopic,
   TopicCardRequestData,
   TopicCard
-} from '~/types/api/topic'
+} from '@/types/api/topic'
 
 const getTopicTopics = async (
   page: number,

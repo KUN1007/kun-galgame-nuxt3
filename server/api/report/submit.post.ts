@@ -1,7 +1,7 @@
 import { reportSection } from '~/constants/report'
-import ReportModel from '~/server/models/report'
+import ReportModel from '@/server/models/report'
 
-import type { ReportSubmitRequestData } from '~/types/api/report'
+import type { ReportSubmitRequestData } from '@/types/api/report'
 
 export default defineEventHandler(async (event) => {
   const { reason, type }: ReportSubmitRequestData = await readBody(event)

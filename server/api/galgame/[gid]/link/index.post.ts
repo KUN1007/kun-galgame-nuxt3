@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import GalgameModel from '~/server/models/galgame'
-import GalgameLinkModel from '~/server/models/galgame-link'
+import GalgameModel from '@/server/models/galgame'
+import GalgameLinkModel from '@/server/models/galgame-link'
 import { checkGalgameLinkPublish } from '../../utils/checkGalgameLinkPublish'
 import type { H3Event } from 'h3'
 

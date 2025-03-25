@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import UserModel from '~/server/models/user'
-import GalgameCommentModel from '~/server/models/galgame-comment'
+import UserModel from '@/server/models/user'
+import GalgameCommentModel from '@/server/models/galgame-comment'
 import type { H3Event } from 'h3'
 
 const readReplyData = async (event: H3Event) => {

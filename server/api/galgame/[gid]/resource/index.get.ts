@@ -1,6 +1,6 @@
-import UserModel from '~/server/models/user'
-import GalgameResourceModel from '~/server/models/galgame-resource'
-import type { GalgameResourceDetails } from '~/types/api/galgame-resource'
+import UserModel from '@/server/models/user'
+import GalgameResourceModel from '@/server/models/galgame-resource'
+import type { GalgameResourceDetails } from '@/types/api/galgame-resource'
 
 export default defineEventHandler(async (event) => {
   const { grid }: { grid: string } = await getQuery(event)

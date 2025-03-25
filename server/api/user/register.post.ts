@@ -1,5 +1,5 @@
 import { hash } from 'bcrypt'
-import UserModel from '~/server/models/user'
+import UserModel from '@/server/models/user'
 import {
   isValidEmail,
   isValidName,
@@ -7,7 +7,7 @@ import {
   isValidMailConfirmCode
 } from '~/utils/validate'
 import type { H3Event } from 'h3'
-import type { RegisterRequestData, LoginResponseData } from '~/types/api/user'
+import type { RegisterRequestData, LoginResponseData } from '@/types/api/user'
 
 const registerController = async (event: H3Event) => {
   const { name, email, password, code }: RegisterRequestData =

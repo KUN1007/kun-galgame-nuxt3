@@ -1,5 +1,5 @@
-import GalgameLinkModel from '~/server/models/galgame-link'
-import type { GalgameLink } from '~/types/api/galgame-link'
+import GalgameLinkModel from '@/server/models/galgame-link'
+import type { GalgameLink } from '@/types/api/galgame-link'
 
 export default defineEventHandler(async (event) => {
   const gid = getRouterParam(event, 'gid')

@@ -1,9 +1,9 @@
-import UserModel from '~/server/models/user'
+import UserModel from '@/server/models/user'
 import type {
   UserSortFieldRanking,
   RankingGetUserRequestData,
   RankingUsers
-} from '~/types/api/ranking'
+} from '@/types/api/ranking'
 
 const getUserRanking = async (
   page: number,

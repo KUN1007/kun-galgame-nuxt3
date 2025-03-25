@@ -1,5 +1,5 @@
 import MessageModel from '../models/message'
-import type { MessageType } from '~/types/api/message'
+import type { MessageType } from '@/types/api/message'
 
 export const createMessage = async (
   senderUid: number,

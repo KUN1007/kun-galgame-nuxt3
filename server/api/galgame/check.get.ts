@@ -1,4 +1,4 @@
-import GalgameModel from '~/server/models/galgame'
+import GalgameModel from '@/server/models/galgame'
 
 export default defineEventHandler(async (event) => {
   const { vndbId }: { vndbId: string } = await getQuery(event)

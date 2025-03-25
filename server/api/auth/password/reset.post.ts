@@ -1,11 +1,11 @@
 import { hash } from 'bcrypt'
-import UserModel from '~/server/models/user'
+import UserModel from '@/server/models/user'
 import {
   isValidEmail,
   isValidMailConfirmCode,
   isValidPassword
 } from '~/utils/validate'
-import type { ResetPasswordByEmailRequestData } from '~/types/api/auth'
+import type { ResetPasswordByEmailRequestData } from '@/types/api/auth'
 
 const resetPasswordByEmail = async (
   email: string,

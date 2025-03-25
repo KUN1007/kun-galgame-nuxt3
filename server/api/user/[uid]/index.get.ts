@@ -1,5 +1,5 @@
-import UserModel from '~/server/models/user'
-import type { UserInfo } from '~/types/api/user'
+import UserModel from '@/server/models/user'
+import type { UserInfo } from '@/types/api/user'
 
 export default defineEventHandler(async (event) => {
   const uid = getRouterParam(event, 'uid')

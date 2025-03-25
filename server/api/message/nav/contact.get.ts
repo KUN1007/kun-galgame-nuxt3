@@ -1,7 +1,7 @@
-import UserModel from '~/server/models/user'
-import ChatRoomModel from '~/server/models/chat-room'
-import ChatMessageModel from '~/server/models/chat-message'
-import type { AsideItem } from '~/types/api/chat-message'
+import UserModel from '@/server/models/user'
+import ChatRoomModel from '@/server/models/chat-room'
+import ChatMessageModel from '@/server/models/chat-message'
+import type { AsideItem } from '@/types/api/chat-message'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)

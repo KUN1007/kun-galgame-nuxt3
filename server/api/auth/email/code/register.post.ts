@@ -1,6 +1,6 @@
-import UserModel from '~/server/models/user'
+import UserModel from '@/server/models/user'
 import { isValidEmail } from '~/utils/validate'
-import type { RegisterVerificationCodeRequestData } from '~/types/api/auth'
+import type { RegisterVerificationCodeRequestData } from '@/types/api/auth'
 
 export default defineEventHandler(async (event) => {
   const { name, email }: RegisterVerificationCodeRequestData =

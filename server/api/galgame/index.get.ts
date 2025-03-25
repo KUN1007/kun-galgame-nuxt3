@@ -1,11 +1,11 @@
-import UserModel from '~/server/models/user'
-import GalgameModel from '~/server/models/galgame'
+import UserModel from '@/server/models/user'
+import GalgameModel from '@/server/models/galgame'
 import type {
   KunGalgameResourceTypeOptions,
   KunGalgameResourceLanguageOptions,
   KunGalgameResourcePlatformOptions
 } from '~/constants/galgame'
-import type { GalgamePageRequestData, GalgameCard } from '~/types/api/galgame'
+import type { GalgamePageRequestData, GalgameCard } from '@/types/api/galgame'
 
 const getGalgames = async (
   page: number,

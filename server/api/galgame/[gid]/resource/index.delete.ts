@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
-import GalgameModel from '~/server/models/galgame'
-import GalgameResourceModel from '~/server/models/galgame-resource'
-import UserModel from '~/server/models/user'
+import GalgameModel from '@/server/models/galgame'
+import GalgameResourceModel from '@/server/models/galgame-resource'
+import UserModel from '@/server/models/user'
 
 export default defineEventHandler(async (event) => {
   const { grid }: { grid: string } = await getQuery(event)

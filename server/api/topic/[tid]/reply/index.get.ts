@@ -1,10 +1,10 @@
-import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
-import ReplyModel from '~/server/models/reply'
-import CommentModel from '~/server/models/comment'
+import UserModel from '@/server/models/user'
+import TopicModel from '@/server/models/topic'
+import ReplyModel from '@/server/models/reply'
+import CommentModel from '@/server/models/comment'
 import mongoose from 'mongoose'
-import type { TopicReplyRequestData, TopicReply } from '~/types/api/topic-reply'
-import type { TopicComment } from '~/types/api/topic-comment'
+import type { TopicReplyRequestData, TopicReply } from '@/types/api/topic-reply'
+import type { TopicComment } from '@/types/api/topic-comment'
 
 const getComments = async (uid: number, rid: number) => {
   const comment = await CommentModel.find({ rid })

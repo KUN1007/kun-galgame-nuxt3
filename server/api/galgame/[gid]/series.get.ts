@@ -1,4 +1,4 @@
-import GalgameModel from '~/server/models/galgame'
+import GalgameModel from '@/server/models/galgame'
 
 interface GalgameSeries {
   gid: number

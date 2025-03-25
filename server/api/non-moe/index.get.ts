@@ -1,5 +1,5 @@
-import NonMoeModel from '~/server/models/non-moe'
-import type { NonMoeLogRequestData, NonMoeLog } from '~/types/api/non-moe'
+import NonMoeModel from '@/server/models/non-moe'
+import type { NonMoeLogRequestData, NonMoeLog } from '@/types/api/non-moe'
 
 const getNonMoeLogs = async (page: number, limit: number) => {
   const skip = (page - 1) * limit

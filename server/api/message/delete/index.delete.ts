@@ -1,4 +1,4 @@
-import MessageModel from '~/server/models/message'
+import MessageModel from '@/server/models/message'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)

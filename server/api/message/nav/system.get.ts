@@ -1,6 +1,6 @@
-import MessageModel from '~/server/models/message'
-import MessageAdminModel from '~/server/models/message-admin'
-import type { AsideItem } from '~/types/api/chat-message'
+import MessageModel from '@/server/models/message'
+import MessageAdminModel from '@/server/models/message-admin'
+import type { AsideItem } from '@/types/api/chat-message'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)

@@ -1,5 +1,5 @@
 import { useKunFeed } from '../_useI18nFeed'
-import type { TopicRSS } from '~/types/api/rss'
+import type { TopicRSS } from '@/types/api/rss'
 
 export default defineEventHandler(async (event) => {
   const baseUrl = useRuntimeConfig().public.KUN_GALGAME_URL

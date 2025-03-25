@@ -1,14 +1,14 @@
 import mongoose from 'mongoose'
-import TopicModel from '~/server/models/topic'
-import ReplyModel from '~/server/models/reply'
-import CommentModel from '~/server/models/comment'
-import UserModel from '~/server/models/user'
+import TopicModel from '@/server/models/topic'
+import ReplyModel from '@/server/models/reply'
+import CommentModel from '@/server/models/comment'
+import UserModel from '@/server/models/user'
 import { checkCommentPublish } from '../../utils/checkCommentPublish'
 import type { H3Event } from 'h3'
 import type {
   TopicComment,
   TopicCreateCommentRequestData
-} from '~/types/api/topic-comment'
+} from '@/types/api/topic-comment'
 
 const readReplyData = async (event: H3Event) => {
   const { rid, toUid, content }: TopicCreateCommentRequestData =

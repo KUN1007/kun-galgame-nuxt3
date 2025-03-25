@@ -1,4 +1,4 @@
-import GalgameResourceModel from '~/server/models/galgame-resource'
+import GalgameResourceModel from '@/server/models/galgame-resource'
 
 export default defineEventHandler(async (event) => {
   const { grid }: { grid: string } = await getQuery(event)

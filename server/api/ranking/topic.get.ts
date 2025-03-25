@@ -1,9 +1,9 @@
-import TopicModel from '~/server/models/topic'
+import TopicModel from '@/server/models/topic'
 import type {
   TopicSortFieldRanking,
   RankingGetTopicsRequestData,
   RankingTopics
-} from '~/types/api/ranking'
+} from '@/types/api/ranking'
 
 const getTopicRanking = async (
   page: number,

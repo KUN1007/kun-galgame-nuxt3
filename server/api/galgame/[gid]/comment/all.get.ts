@@ -1,6 +1,6 @@
-import UserModel from '~/server/models/user'
-import GalgameCommentModel from '~/server/models/galgame-comment'
-import type { GalgameComment } from '~/types/api/galgame-comment'
+import UserModel from '@/server/models/user'
+import GalgameCommentModel from '@/server/models/galgame-comment'
+import type { GalgameComment } from '@/types/api/galgame-comment'
 
 interface RequestData {
   page: string

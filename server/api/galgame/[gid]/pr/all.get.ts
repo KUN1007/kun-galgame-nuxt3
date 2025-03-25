@@ -1,6 +1,6 @@
-import UserModel from '~/server/models/user'
-import GalgamePRModel from '~/server/models/galgame-pr'
-import type { GalgamePR } from '~/types/api/galgame-pr'
+import UserModel from '@/server/models/user'
+import GalgamePRModel from '@/server/models/galgame-pr'
+import type { GalgamePR } from '@/types/api/galgame-pr'
 
 export default defineEventHandler(async (event) => {
   const gid = getRouterParam(event, 'gid')

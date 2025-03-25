@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
-import GalgameModel from '~/server/models/galgame'
-import GalgamePRModel from '~/server/models/galgame-pr'
-import UserModel from '~/server/models/user'
+import GalgameModel from '@/server/models/galgame'
+import GalgamePRModel from '@/server/models/galgame-pr'
+import UserModel from '@/server/models/user'
 import type { H3Event } from 'h3'
 
 const checkUpdate = async (event: H3Event) => {

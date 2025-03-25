@@ -1,5 +1,5 @@
-import GalgameResourceModel from '~/server/models/galgame-resource'
-import type { GalgameResource } from '~/types/api/galgame-resource'
+import GalgameResourceModel from '@/server/models/galgame-resource'
+import type { GalgameResource } from '@/types/api/galgame-resource'
 
 export default defineEventHandler(async (event) => {
   const gid = getRouterParam(event, 'gid')

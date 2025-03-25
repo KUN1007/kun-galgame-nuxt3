@@ -1,7 +1,7 @@
 import { hash, compare } from 'bcrypt'
-import UserModel from '~/server/models/user'
+import UserModel from '@/server/models/user'
 import { isValidPassword } from '~/utils/validate'
-import type { UserUpdatePasswordRequestData } from '~/types/api/user'
+import type { UserUpdatePasswordRequestData } from '@/types/api/user'
 
 export default defineEventHandler(async (event) => {
   const { oldPassword, newPassword }: UserUpdatePasswordRequestData =

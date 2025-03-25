@@ -1,8 +1,8 @@
-import UserModel from '~/server/models/user'
-import MessageModel from '~/server/models/message'
-import MessageAdminModel from '~/server/models/message-admin'
-import ChatMessageModel from '~/server/models/chat-message'
-import type { HomeUserStatus } from '~/types/api/home'
+import UserModel from '@/server/models/user'
+import MessageModel from '@/server/models/message'
+import MessageAdminModel from '@/server/models/message-admin'
+import ChatMessageModel from '@/server/models/chat-message'
+import type { HomeUserStatus } from '@/types/api/home'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)

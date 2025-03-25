@@ -1,4 +1,4 @@
-import MessageAdminModel from '~/server/models/message-admin'
+import MessageAdminModel from '@/server/models/message-admin'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)

@@ -1,4 +1,4 @@
-import GalgameResourceModel from '~/server/models/galgame-resource'
+import GalgameResourceModel from '@/server/models/galgame-resource'
 import { checkGalgameResourcePublish } from '../../utils/checkGalgameResourcePublish'
 import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
 

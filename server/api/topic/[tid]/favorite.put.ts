@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
+import UserModel from '@/server/models/user'
+import TopicModel from '@/server/models/topic'
 
 const updateTopicFavorite = async (uid: number, tid: number) => {
   const topic = await TopicModel.findOne({ tid })

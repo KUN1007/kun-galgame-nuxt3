@@ -1,6 +1,7 @@
 import tailwindcss from '@tailwindcss/vite'
 import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
 const packageJson = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, 'package.json'), 'utf-8')
@@ -10,6 +11,10 @@ const appVersion = packageJson.version
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
+
+  future: {
+    compatibilityVersion: 4
+  },
 
   experimental: {
     scanPageMeta: true
@@ -55,7 +60,23 @@ export default defineNuxtConfig({
   },
 
   imports: {
-    dirs: ['./composables', './config', './utils']
+    dirs: ['./app/config/**/*.ts', './app/store/**/*.ts']
+  },
+
+  // `@` and `~` is duplicated, so we can modify the `@` to the root dir
+  alias: {
+    '@': fileURLToPath(new URL('.', import.meta.url)),
+    '@/*': fileURLToPath(new URL('./*', import.meta.url))
+  },
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        paths: {
+          '@': ['.'],
+          '@/*': ['./*']
+        }
+      }
+    }
   },
 
   site: {
@@ -64,6 +85,14 @@ export default defineNuxtConfig({
 
   // Frontend
   css: ['~/styles/index.css'],
+
+  icon: {
+    mode: 'svg',
+    clientBundle: {
+      scan: true,
+      sizeLimitKb: 256
+    }
+  },
 
   vite: {
     plugins: [tailwindcss()],

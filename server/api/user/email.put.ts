@@ -1,6 +1,6 @@
-import UserModel from '~/server/models/user'
+import UserModel from '@/server/models/user'
 import { isValidEmail, isValidMailConfirmCode } from '~/utils/validate'
-import type { UserUpdateEmailRequestData } from '~/types/api/user'
+import type { UserUpdateEmailRequestData } from '@/types/api/user'
 
 export default defineEventHandler(async (event) => {
   const { email, code }: UserUpdateEmailRequestData = await readBody(event)

@@ -1,7 +1,7 @@
-import UserModel from '~/server/models/user'
-import GalgameModel from '~/server/models/galgame'
+import UserModel from '@/server/models/user'
+import GalgameModel from '@/server/models/galgame'
 import { getPreferredLanguageText } from '~/utils/getPreferredLanguageText'
-import type { GalgameRSS } from '~/types/api/rss'
+import type { GalgameRSS } from '@/types/api/rss'
 
 export default defineEventHandler(async (event) => {
   const { language }: { language: Language } = await getQuery(event)

@@ -1,5 +1,5 @@
 import AWS from 'aws-sdk'
-import env from '~/server/env/dotenv'
+import env from '@/server/env/dotenv'
 
 export const uploadImage = async (
   file: Buffer,

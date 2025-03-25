@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import UserModel from '~/server/models/user'
-import GalgameCommentModel from '~/server/models/galgame-comment'
+import UserModel from '@/server/models/user'
+import GalgameCommentModel from '@/server/models/galgame-comment'
 
 const updateGalgameCommentLike = async (gcid: number, uid: number) => {
   const comment = await GalgameCommentModel.findOne({ gcid }).lean()

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import GalgameModel from '~/server/models/galgame'
-import GalgamePRModel from '~/server/models/galgame-pr'
+import GalgameModel from '@/server/models/galgame'
+import GalgamePRModel from '@/server/models/galgame-pr'
 import { isDeepEmpty } from '~/utils/isDeepEmpty'
 import { checkGalgamePR } from '../../utils/checkGalgamePR'
 import type { GalgameStoreTemp } from '~/store/types/edit/galgame'

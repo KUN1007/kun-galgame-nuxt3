@@ -1,5 +1,5 @@
-import TopicModel from '~/server/models/topic'
-import type { CategoryResponseData } from '~/types/api/category'
+import TopicModel from '@/server/models/topic'
+import type { CategoryResponseData } from '@/types/api/category'
 
 export const categoryMap: Record<string, RegExp> = {
   Galgame: /^g-/,

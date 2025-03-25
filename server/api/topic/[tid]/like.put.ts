@@ -1,5 +1,5 @@
-import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
+import UserModel from '@/server/models/user'
+import TopicModel from '@/server/models/topic'
 import mongoose from 'mongoose'
 
 const updateTopicLike = async (uid: number, tid: number) => {

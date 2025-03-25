@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
-import env from '~/server/env/dotenv'
-import UserModel from '~/server/models/user'
-import GalgameModel from '~/server/models/galgame'
+import env from '@/server/env/dotenv'
+import UserModel from '@/server/models/user'
+import GalgameModel from '@/server/models/galgame'
 import { uploadGalgameBanner } from '../utils/uploadGalgameBanner'
 
 export default defineEventHandler(async (event) => {

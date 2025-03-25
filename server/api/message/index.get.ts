@@ -1,11 +1,11 @@
-import UserModel from '~/server/models/user'
-import MessageModel from '~/server/models/message'
+import UserModel from '@/server/models/user'
+import MessageModel from '@/server/models/message'
 import type {
   MessageType,
   SortField,
   MessageRequestData,
   Message
-} from '~/types/api/message'
+} from '@/types/api/message'
 
 const getMessages = async (
   uid: number,

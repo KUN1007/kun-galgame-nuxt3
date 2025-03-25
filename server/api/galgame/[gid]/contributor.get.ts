@@ -1,5 +1,5 @@
-import GalgameModel from '~/server/models/galgame'
-import UserModel from '~/server/models/user'
+import GalgameModel from '@/server/models/galgame'
+import UserModel from '@/server/models/user'
 
 export default defineEventHandler(async (event) => {
   const gid = getRouterParam(event, 'gid')

@@ -1,7 +1,7 @@
-import TopicModel from '~/server/models/topic'
+import TopicModel from '@/server/models/topic'
 import mongoose from 'mongoose'
 import { checkTopicPublish } from '../utils/checkTopicPublish'
-import type { EditUpdateTopicRequestData } from '~/types/api/topic'
+import type { EditUpdateTopicRequestData } from '@/types/api/topic'
 
 const updateTopic = async (
   uid: number,
