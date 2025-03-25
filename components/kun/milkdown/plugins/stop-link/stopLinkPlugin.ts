@@ -1,6 +1,6 @@
 import { $command, $useKeymap } from '@milkdown/utils'
 import { linkSchema } from '@milkdown/preset-commonmark'
-import { spoilerSchema } from '../spoiler/spoilerPlugin'
+// import { spoilerSchema } from '../spoiler/spoilerPlugin'
 import { commandsCtx } from '@milkdown/core'
 import type { MarkType } from '@milkdown/kit/prose/model'
 import type { EditorState } from '@milkdown/prose/state'
