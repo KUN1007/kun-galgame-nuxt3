@@ -55,15 +55,3 @@ useKunSeoMeta({
     </div>
   </KunCard>
 </template>
-
-<style lang="scss" scoped>
-:deep(.kun-content-prose-header) {
-  color: var(--color-default-900);
-  text-decoration: none;
-}
-
-:deep(.kun-content-prose-header a) {
-  color: var(--color-default-900);
-  text-decoration: none;
-}
-</style>

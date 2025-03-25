@@ -57,26 +57,33 @@ pin: true
 
 本论坛和其所有子项目遵循 [AGPL-3.0 协议 ](https://www.gnu.org/licenses/gpl-3.0.en.html), 完全开源免费, GitHub 项目开源地址为
 
+<br/>
 
-当前版本论坛 (V3):
+**当前版本论坛 (V3)**
 
 Nuxt3 全栈实现 [kun-galgame-nuxt3](https://github.com/KUN1007/kun-galgame-nuxt3)
 
-旧版本论坛 (V2):
+<br/>
+
+**旧版本论坛 (V2)**
 
 Nuxt3 + mongodb 全栈实现 [kun-galgame-nuxt3/tree/v2](https://github.com/KUN1007/kun-galgame-nuxt3/tree/v2)
 
-前后端分离式论坛 (V1):
+<br/>
 
-前端 Vue3 + Vite + Typescript + Pinia 实现： [kun-galgame-vue](https://github.com/KUN1007/kun-galgame-vue)
+**前后端分离式论坛 (V1)**
 
-后端 Koa2 + Redis + Mongoose + Mongodb 实现： [kun-galgame-koa](https://github.com/KUN1007/kun-galgame-koa)
+前端 Vue3 + Vite + Typescript + Pinia 实现 [kun-galgame-vue](https://github.com/KUN1007/kun-galgame-vue)
 
+后端 Koa2 + Redis + Mongoose + Mongodb 实现 [kun-galgame-koa](https://github.com/KUN1007/kun-galgame-koa)
 
-论坛最初始设计稿:
+<br/>
 
-纯 HTML + CSS 实现： [kun-galgame-pure-css](https://github.com/KUN1007/kungalgame-pure-css)
+**论坛最初始设计稿**
 
+纯 HTML + CSS 实现 [kun-galgame-pure-css](https://github.com/KUN1007/kungalgame-pure-css)
+
+<br/>
 
 不嫌弃的话，您可以给我们的 GitHub 项目点一个 star, 当作对我们的支持。
 

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { TocLink } from '@nuxt/content'
+import type { Toc, TocLink } from '@nuxt/content'
 
 const props = defineProps<{
-  toc: { links?: TocLink[] }
+  toc: Toc
 }>()
 
 const activeId = ref<string | null>(null)
@@ -15,6 +15,16 @@ const scrollToHeading = (id: string) => {
       block: 'center'
     })
   }
+}
+
+const getAllHeadingIds = (links: TocLink[]): string[] => {
+  return links.reduce((acc: string[], link) => {
+    acc.push(link.id)
+    if (link.children && link.children.length > 0) {
+      acc.push(...getAllHeadingIds(link.children))
+    }
+    return acc
+  }, [])
 }
 
 let observer: IntersectionObserver | null = null
@@ -34,12 +44,15 @@ onMounted(() => {
     }
   )
 
-  props.toc?.links?.forEach((link) => {
-    const element = document.getElementById(link.id)
-    if (element) {
-      observer?.observe(element)
-    }
-  })
+  if (props.toc?.links) {
+    const allHeadingIds = getAllHeadingIds(props.toc.links)
+    allHeadingIds.forEach((id) => {
+      const element = document.getElementById(id)
+      if (element) {
+        observer?.observe(element)
+      }
+    })
+  }
 })
 
 onUnmounted(() => {
@@ -53,31 +66,13 @@ onUnmounted(() => {
   <aside class="fixed right-0 hidden w-64 shrink-0 space-y-8 lg:block">
     <div class="sticky top-0">
       <h3 class="p-3 text-xl font-semibold">页面目录</h3>
-      <nav v-if="toc && toc.links" class="toc">
-        <ul class="space-y-2">
-          <li v-for="link in toc.links" :key="link.id" class="toc-link">
-            <a
-              :href="`#${link.id}`"
-              @click="
-                (e) => {
-                  e.preventDefault()
-                  scrollToHeading(link.id)
-                }
-              "
-              class="block py-1 text-sm transition-colors duration-200"
-              :class="[
-                { 'pl-4': link.depth === 2, 'pl-8': link.depth === 3 },
-                activeId === link.id
-                  ? 'text-primary text-base font-medium'
-                  : 'text-default-700 hover:text-primary'
-              ]"
-            >
-              {{ link.text }}
-            </a>
-          </li>
-        </ul>
+      <nav v-if="toc?.links">
+        <DocDetailTOCLink
+          :links="toc.links"
+          :active-id="activeId"
+          @scroll-to="scrollToHeading"
+        />
       </nav>
-
       <KunNull v-if="!toc" description="本页面无目录" />
     </div>
   </aside>
