@@ -1,3 +1,4 @@
+// FIXME:
 import { visit } from 'unist-util-visit'
 import type { Node, Parent } from 'unist'
 import type { Plugin } from 'unified'
@@ -29,7 +30,6 @@ const createSpoilerElement = (
 
 export const remarkSpoiler: Plugin = () => {
   return (tree) => {
-    // Handle text spoilers
     visit(tree, 'text', (node: TextNode, index, parent: Parent) => {
       if (!parent || index === null) return
 
@@ -50,7 +50,6 @@ export const remarkSpoiler: Plugin = () => {
       parent.children.splice(index, 1, ...children)
     })
 
-    // Handle image spoilers
     visit(tree, 'image', (node: ImageNode, index, parent: Parent) => {
       if (!parent || index === null) return
 
@@ -63,7 +62,6 @@ export const remarkSpoiler: Plugin = () => {
         previousNode.value.endsWith('||') &&
         nextNode.value.startsWith('||')
       ) {
-        // Remove the spoiler markers
         previousNode.value = previousNode.value.slice(0, -2)
         nextNode.value = nextNode.value.slice(2)
 

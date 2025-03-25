@@ -1,3 +1,4 @@
+// FIXME:
 import rehypeSanitize from 'rehype-sanitize'
 import rehypeSlug from 'rehype-slug'
 import rehypeStringify from 'rehype-stringify'
@@ -42,7 +43,7 @@ const sanitizeOptions = {
   }
 }
 
-export const markdownToHtml = async (markdown: string) => {
+export const _markdownToHtml = async (markdown: string) => {
   const htmlVFile = await unified()
     .use(remarkParse)
     .use(remarkSpoiler)
