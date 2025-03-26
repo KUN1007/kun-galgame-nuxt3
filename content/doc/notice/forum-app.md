@@ -2,14 +2,14 @@
 title: '鲲 Galgame 论坛 App 安装指南'
 banner: '/content/notice/forum-app/banner.avif'
 description: '鲲 Galgame 论坛支持 PWA（渐进式 Web 应用），允许用户在 PC 和手机端安装类似 App 的快捷方式，占用存储不到 1MB，无需额外下载软件。PC 端用户可通过浏览器的“安装应用”选项快速安装，手机端需使用 Chrome、Firefox、Edge 等现代浏览器进行安装。尽管 PWA 与 App 体验相似，但论坛并不强制安装，普通网页访问已足够流畅。部分用户可能遇到 Edge 无法安装或卡在 Logo 界面的问题，部分已知需开启桌面快捷方式权限。'
-publishedTime: 2024-12-4
-modifiedTime: 2024-12-4
+publishedTime: 2024-09-02
+modifiedTime: 2024-09-02
 category: notice
 authorUid: 2
 authorName: '鲲'
 authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar.webp'
 authorHomepage: 'https://github.com/KUN1007'
-pin: true
+pin: false
 ---
 
 ## 简介

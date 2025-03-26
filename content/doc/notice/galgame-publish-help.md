@@ -2,8 +2,8 @@
 title: '发布 Galgame 帮助'
 banner: '/content/notice/galgame-publish-help/banner.avif'
 description: '鲲 Galgame 论坛提供详细的 Galgame 发布指南，确保游戏信息的准确性和资源的可用性。发布 Galgame 时，需先在 VNDB 检索游戏编号，以确保其分类符合标准。若无法获取数据，可手动填写相关信息。发布流程包括获取 VNDB 编号、完善游戏信息、添加预览图、上传资源链接，并确保资源可免费获取，无付费门槛。已发布的 Galgame 可通过更新请求进行修改，并由发布者或管理员审核。论坛仅提供资源索引，不存储游戏本体，旨在优化资源分享，提高 Galgame 社区的便利性。'
-publishedTime: 2024-12-4
-modifiedTime: 2024-12-4
+publishedTime: 2024-04-22
+modifiedTime: 2024-04-22
 category: notice
 authorUid: 2
 authorName: '鲲'

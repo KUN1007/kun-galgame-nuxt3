@@ -2,14 +2,14 @@
 title: '如何本地运行本论坛的开源项目'
 banner: '/content/other/how-to-run/banner.avif'
 description: '本文详细介绍了如何在本地搭建并运行鲲 Galgame 论坛的开源项目。文章提供了完整的安装和配置指南，包括 Node.js、MongoDB 和 Redis 的安装步骤，以及如何 Clone 代码仓库并配置 .env 文件。用户需安装依赖后，使用 pnpm dev 启动项目，并确保 Redis 和 MongoDB 连接成功。访问 http://127.0.0.1:1007/ 即可看到运行的论坛。由于默认未配置邮件服务，注册用户需手动查看验证码。该文档适合有基础开发经验的用户，帮助他们快速上手并运行该开源项目。'
-publishedTime: 2024-12-4
-modifiedTime: 2024-12-4
+publishedTime: 2024-10-17
+modifiedTime: 2024-10-17
 category: other
 authorUid: 2
 authorName: '鲲'
 authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar.webp'
 authorHomepage: 'https://github.com/KUN1007'
-pin: true
+pin: false
 ---
 
 ## 视频教程

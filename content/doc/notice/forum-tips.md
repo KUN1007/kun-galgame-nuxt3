@@ -2,8 +2,8 @@
 title: '鲲 Galgame 论坛使用小技巧'
 banner: '/content/notice/forum-tips/banner.avif'
 description: '鲲 Galgame 论坛提供了多种实用技巧，帮助用户更高效地参与讨论和管理内容。论坛支持 Markdown 语法，并开源在 GitHub，允许自由改进。Galgame 相关的更新请求可由发布者自行合并，评论系统可针对特定贡献者留言，避免无效通知。资源链接可由任何用户提供，但部分需网络代理访问。论坛界面可自定义，如话题页面布局切换、看板娘关闭设置等。针对访问速度问题，建议使用网络代理，关注官方导航页获取最新地址。此外，用户可通过 Markdown 语法手动插入表情包，未来将上线更便捷的表情系统。'
-publishedTime: 2024-12-4
-modifiedTime: 2024-12-4
+publishedTime: 2024-08-22
+modifiedTime: 2024-08-22
 category: notice
 authorUid: 2
 authorName: '鲲'

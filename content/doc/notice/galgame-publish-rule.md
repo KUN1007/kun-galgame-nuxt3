@@ -2,14 +2,14 @@
 title: 'Galgame 资源 发布规定'
 banner: '/content/notice/galgame-publish-rule/banner.avif'
 description: '鲲 Galgame 论坛对 Galgame 资源发布设定了严格规则，以保障资源的公平分享和用户体验。禁止盗用其他网站的资源链接，必须自行上传，并建议使用无解压密码或设置为自己用户名。网盘分为四个档次，鼓励使用不限速、自建网盘或优质云存储，允许使用速度较快的网盘，不建议使用速度慢的网赚盘，严格禁止使用体验极差的网赚网盘。此外，Galgame 资源可通过种子、Telegram等不限速聊天软件、符合规定的网页链接等方式分享，但禁止盗链。论坛秉持开源共享原则，不存储 Galgame 本体，仅提供资源索引，确保用户无门槛访问和下载体验。'
-publishedTime: 2024-12-4
-modifiedTime: 2024-12-4
+publishedTime: 2024-06-21
+modifiedTime: 2025-03-26
 category: notice
 authorUid: 2
 authorName: '鲲'
 authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar.webp'
 authorHomepage: 'https://github.com/KUN1007'
-pin: true
+pin: false
 ---
 
 ## 禁止盗用其它网站的资源链接

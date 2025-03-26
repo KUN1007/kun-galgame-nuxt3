@@ -2,14 +2,14 @@
 title: 'Galgame 评论注意事项'
 banner: '/content/notice/galgame-comment/banner.avif'
 description: '在鲲 Galgame 论坛发布评论时，请遵循一些基本注意事项，以确保良好的社区氛围。部分资源链接（如 Telegram 和 MEGA）可能需网络代理访问，解压失败通常与错误的解压软件或格式处理有关，建议仔细查看资源提供者的备注，并参考官方解压工具。遇到问题时，请先自行搜索，确保提供详细的系统环境、路径设置、解压状态等信息后再提问。此外，请尊重资源贡献者的辛勤付出，礼貌沟通，如发现恶意资源可举报处理。论坛推荐技术交流板块用于更复杂的问题求助，并提供参考示例。'
-publishedTime: 2024-12-4
-modifiedTime: 2024-12-4
+publishedTime: 2024-08-12
+modifiedTime: 2024-08-12
 category: notice
 authorUid: 2
 authorName: '鲲'
 authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar.webp'
 authorHomepage: 'https://github.com/KUN1007'
-pin: true
+pin: false
 ---
 
 ## 简介

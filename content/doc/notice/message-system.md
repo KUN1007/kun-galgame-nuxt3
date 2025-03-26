@@ -2,14 +2,14 @@
 title: '关于论坛消息系统的说明'
 banner: '/content/notice/message-system/banner.avif'
 description: '鲲 Galgame 论坛的消息系统提供了便捷且隐私保护的交流方式，但仍有部分功能待优化。目前消息发送可能会有延迟，若点击后未立即显示发送成功，可刷新页面确认。即使显示“已离线”，消息仍可正常发送。系统暂不支持消息撤回，进入聊天界面时所有未读消息会自动标记为已读，且仅支持纯文本输入，最大长度为 1007 字符。消息可实时同步，若对方在线可立即收到。群聊功能尚未实现，未来可能添加。此外，已读消息的未读数可能未及时同步，属于正常现象。系统消息目前暂无，因此显示“杂鱼”作为占位符。'
-publishedTime: 2024-12-4
-modifiedTime: 2024-12-4
+publishedTime: 2024-10-06
+modifiedTime: 2024-10-06
 category: notice
 authorUid: 2
 authorName: '鲲'
 authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar.webp'
 authorHomepage: 'https://github.com/KUN1007'
-pin: true
+pin: false
 ---
 
 ## 简介

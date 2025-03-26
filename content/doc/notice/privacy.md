@@ -2,14 +2,14 @@
 title: '鲲 Galgame 论坛隐私政策'
 banner: '/content/notice/privacy/banner.avif'
 description: '鲲 Galgame 论坛的隐私政策旨在保障用户数据安全并提供更好的服务体验。注册和使用论坛即表示用户同意数据收集，包括个人信息（如邮箱、注册时间，仅用于身份验证和通知）、日志数据（访问时间、IP、浏览记录等，用于优化网站）、设备信息（操作系统、浏览器类型等，以提升用户体验）。所有数据存储在安全服务器中并采用加密措施，但互联网传输存在风险。论坛使用 cookies 和本地存储以优化功能，用户可自行管理但可能影响使用体验。隐私政策可能随法律或运营需求调整，用户需关注官方通知，继续使用即视为同意更新。'
-publishedTime: 2024-12-4
-modifiedTime: 2024-12-4
+publishedTime: 2023-10-29
+modifiedTime: 2025-03-26
 category: notice
 authorUid: 2
 authorName: '鲲'
 authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar.webp'
 authorHomepage: 'https://github.com/KUN1007'
-pin: true
+pin: false
 ---
 
 ## 隐私政策

@@ -2,14 +2,14 @@
 title: '联系我们 / 寻求帮助'
 banner: '/content/notice/contact/banner.avif'
 description: '鲲 Galgame 论坛提供多种联系方式，确保用户在遇到问题时能获得及时支持。推荐的沟通方式包括论坛发布话题、加入 Telegram 群组（t.me/kungalgame），或通过 GitHub Issue 提交反馈（适合开源贡献者）。此外，用户还可通过社交媒体（Twitter、Discord、YouTube、Bilibili）与社区互动。论坛鼓励用户独立思考，善用搜索引擎解决问题，同时也欢迎大家在社区内交流，共同推动 Galgame 文化发展。'
-publishedTime: 2024-12-4
-modifiedTime: 2024-12-4
+publishedTime: 2023-10-29
+modifiedTime: 2025-03-26
 category: notice
 authorUid: 2
 authorName: '鲲'
 authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar.webp'
 authorHomepage: 'https://github.com/KUN1007'
-pin: true
+pin: false
 ---
 
 ## 寻求您想要的帮助

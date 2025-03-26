@@ -2,14 +2,14 @@
 title: '关于鲲 Galgame 论坛'
 banner: '/content/notice/about/banner.avif'
 description: '《关于鲲 Galgame 论坛》介绍了鲲 Galgame 及其相关子网站，包括论坛、补丁站、表情包站等，展示了其开放共享的生态。论坛致力于推广优秀 Galgame，倡导健康的社区氛围，避免鄙视链和负面风气。网站完全开源，遵循 AGPL-3.0 协议，并在 GitHub 上提供所有版本的代码。运营理念强调纯粹的 Galgame 交流环境，杜绝广告与收费，确保论坛始终以用户乐趣为核心。最终目标是打造全球最棒的 Galgame 论坛，让每位用户都能在此找到真正的快乐。'
-publishedTime: 2024-12-4
-modifiedTime: 2024-12-4
+publishedTime: 2023-10-29
+modifiedTime: 2023-10-29
 category: notice
 authorUid: 2
 authorName: '鲲'
 authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar.webp'
 authorHomepage: 'https://github.com/KUN1007'
-pin: true
+pin: false
 ---
 
 # 关于我们

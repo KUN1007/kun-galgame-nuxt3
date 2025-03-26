@@ -2,14 +2,14 @@
 title: '关于鲲 Galgame 的 CFMSC 发布机制'
 banner: '/content/other/cfmsc/banner.avif'
 description: 'CFMSC（Check -> Fetch -> Modify -> Submit -> Collaborate）是鲲 Galgame 论坛开发的一种高效资源发布和编辑流程，旨在优化 Galgame 资源管理。该机制借鉴了 GitHub 的 Pull Request 流程和恋爱游戏网的资源贡献模式，使用户能够自主创建、修改和提交游戏资源，同时避免重复内容，提高准确性和可扩展性。CFMSC 的核心步骤包括：检查（确保资源的正确性与唯一性）、获取（利用 VNDB API 自动填充信息）、修改（用户优化描述与添加预览图）、提交（创建 Galgame 资源基底）以及协作（多人审核与合并更新请求）。这一流程既降低了管理成本，又提升了用户参与度，并支持未来的去中心化发展愿景，推动构建更开放、透明、用户驱动的 Galgame 社区。'
-publishedTime: 2024-12-4
-modifiedTime: 2024-12-4
+publishedTime: 2024-12-08
+modifiedTime: 2024-12-08
 category: other
 authorUid: 2
 authorName: '鲲'
 authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar.webp'
 authorHomepage: 'https://github.com/KUN1007'
-pin: true
+pin: false
 ---
 
 ## 什么是 CFMSC

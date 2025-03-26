@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { KUN_DOC_CATEGORY_MAP } from '~/constants/doc'
 import type { ContentCollectionItem } from '@nuxt/content'
 
 const route = useRoute()
@@ -50,10 +51,10 @@ const toggleCategory = (category: string) => {
           variant="light"
           size="lg"
           @click="toggleCategory(category)"
-          class-name="justify-between"
+          class-name="justify-between mb-2"
         >
           <span class="text-foreground">
-            {{ category }}
+            {{ KUN_DOC_CATEGORY_MAP[category] }}
           </span>
           <KunIcon
             :name="

@@ -2,14 +2,14 @@
 title: '鲲 Galgame 论坛里的鲲到底是什么'
 banner: '/content/kun/who-is-kun/banner.avif'
 description: '鲲 Galgame 论坛的“鲲”来源于管理员对游戏《方舟指令》中角色“鲲”的喜爱，并从 2019 年 10 月 7 日开始以此为昵称。论坛名称结合了 Galgame 与 鲲，象征其主题与个性化风格。论坛内大量出现的 1007、10、7、17、77 等数字，均源自该日期，形成独特标识。该角色与简中圈某艺人无关。'
-publishedTime: 2024-12-4
-modifiedTime: 2024-12-4
+publishedTime: 2024-06-12
+modifiedTime: 2024-06-12
 category: kun
 authorUid: 2
 authorName: '鲲'
 authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar.webp'
 authorHomepage: 'https://github.com/KUN1007'
-pin: true
+pin: false
 ---
 
 ## 鲲是什么
