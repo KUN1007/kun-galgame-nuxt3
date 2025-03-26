@@ -51,7 +51,7 @@ const statusClasses = computed(() => {
     </KunButton>
 
     <KunPopover position="bottom-end">
-      <template #trigger>
+      <template v-if="uid" #trigger>
         <div>
           <KunAvatar
             size="lg"
@@ -68,7 +68,7 @@ const statusClasses = computed(() => {
       <LazyKunTopBarUserInfo />
     </KunPopover>
 
-    <template v-if="!name">
+    <template v-if="!uid">
       <KunButton size="lg" variant="light" href="/login">登录</KunButton>
       <KunButton size="lg" href="/register">注册</KunButton>
     </template>
