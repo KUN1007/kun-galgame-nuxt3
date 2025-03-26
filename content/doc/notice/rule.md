@@ -1,7 +1,7 @@
 ---
 title: '鲲 Galgame 论坛规定'
 banner: '/content/notice/rule/banner.avif'
-description: '鲲 Galgame 论坛'
+description: '鲲 Galgame 论坛规定旨在维护和谐的社区环境，确保用户能够愉快交流。论坛禁止一切政治讨论，以避免争议；广告引流行为，尤其涉及付费资源，将被视为违规。此外，涉及敏感话题（如 R18、R18-G）需在标题注明，而真人色情内容一律禁止。恶意刷评论、辱骂他人以及引起公愤的行为都会被严肃处理。当前版本的论坛全面禁止 R18 内容，若涉及裸露必须打码。制定这些规则是为了营造更友好的讨论氛围，更多发布规范可参考 不萌记录。'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4
 category: notice

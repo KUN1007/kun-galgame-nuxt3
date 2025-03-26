@@ -1,7 +1,7 @@
 ---
 title: 'VNDB 对于视觉小说的定义'
 banner: '/content/galgame/galgame-definition/banner.avif'
-description: '鲲 Galgame 论坛'
+description: 'VNDB 对视觉小说（Galgame）的定义主要基于叙述方式和互动形式。符合数据库收录的游戏需满足以下条件之一：纯视觉小说需以阅读为核心，交互仅限于选择分支，不能包含复杂玩法（如数值成长、养成系统）。混合型游戏需在讲述故事时采用小说式叙述方式，并且至少 50% 的内容是视觉小说式的阅读体验，避免频繁互动影响叙述完整性。此外，VNDB 允许收录部分经典冒险游戏作为历史例外，但不再接受新添加。站内规则基本与 VNDB 标准一致，不鼓励 3D 作品，也不允许 VNDB 之外的黄油资源。'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4
 category: galgame

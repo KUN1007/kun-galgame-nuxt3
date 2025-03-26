@@ -1,7 +1,7 @@
 ---
 title: '全新 Galgame 补丁资源下载网站'
 banner: '/content/notice/galgame-patch-website/banner.avif'
-description: '鲲 Galgame 论坛'
+description: '鲲 Galgame 论坛推出全新 Galgame 补丁下载网站 鲲 Galgame 补丁，目前处于公测阶段，致力于提供开源、免费、零门槛的补丁资源下载服务。该网站基于现代 Web 技术（如 Next.js 15、React 19、Node.js 等）开发，代码完全开源，遵循 AGPL-3.0 协议。用户无需注册即可下载补丁，所有资源均由社区驱动。反馈可通过论坛、Telegram 群组、GitHub Issue 等方式提交。此外，网站支持 S3 对象存储，确保高速下载体验。欢迎关注相关社交平台（X、Discord、Bilibili 等）获取更多信息。'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4
 category: notice

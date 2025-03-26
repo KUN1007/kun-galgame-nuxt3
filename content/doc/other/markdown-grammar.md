@@ -1,7 +1,7 @@
 ---
 title: 'Markdown 编辑器语法指南'
 banner: '/content/other/markdown-grammar/banner.avif'
-description: '鲲 Galgame 论坛'
+description: 'Markdown 编辑器语法指南：本指南介绍了鲲 Galgame 论坛使用的 Markdown 编辑器语法（基于 CommonMark + GFM），帮助用户熟练掌握文本格式化技巧。涵盖内容包括标题、空行、代码块、图片、加粗、视频插入等常用功能，并详细说明了论坛特定的语法规则。例如，代码块可通过 ``` + 语言名创建，图片支持本地上传及外链插入，而视频功能需提供视频文件直链。指南还列出了编辑器的一些限制，如有序列表与无序列表相同、行内代码可能存在 bug、每日图片上传上限 50 张等。通过本指南，用户可以更高效地撰写内容并优化论坛阅读体验。'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4
 category: other

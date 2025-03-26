@@ -1,7 +1,7 @@
 ---
 title: '鲲 Galgame 论坛用户协议'
 banner: '/content/notice/agreement/banner.avif'
-description: '鲲 Galgame 论坛'
+description: '《鲲 Galgame 论坛用户协议》明确了论坛的开源性质、用户责任及免责条款。论坛为非盈利的社区驱动学术组织，遵循 AGPL-3.0 许可协议，用户使用其代码需遵守相关规定。所有用户言论仅代表个人，与论坛无关。若用户违反论坛规定或损害开源项目维护，论坛有权封禁账号。协议强调用户需自行保护账户安全，因盗号或技术问题导致的损失论坛概不负责。此外，论坛保留修改协议的权利，重要变更将通过官方网站通知，用户继续使用即视为同意新协议内容。'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4
 category: notice

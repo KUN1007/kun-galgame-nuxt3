@@ -1,7 +1,7 @@
 ---
 title: '关于 Galgame 资源的盗链界定'
 banner: '/content/notice/about-galgame-resource/banner.avif'
-description: '鲲 Galgame 论坛'
+description: '《关于 Galgame 资源的盗链界定》详细解释了 Galgame 资源在论坛上的合规发布方式，避免用户误解或违规操作。论坛允许用户提供其他网站的资源页面链接，而非直接分享下载链接，以确保原网站的广告收益不受影响，同时保持资源共享的便利性。文档还明确指出，直接复制其他网站的下载链接，未经修改或重新打包，即构成盗链行为，会严重影响原网站的宣传与收益。此外，论坛提醒用户注意下载安全，优先选择可信的资源，并提供举报功能，帮助维护资源的合法性与合规性。'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4
 category: notice

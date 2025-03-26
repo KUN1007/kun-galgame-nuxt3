@@ -1,7 +1,7 @@
 ---
 title: '[求助示例]【彼女と俺と恋人と】打开报错 DirectDraw 初始化失败'
 banner: '/content/galgame/help-topic-paradigm/banner.avif'
-description: '鲲 Galgame 论坛'
+description: '该指南提供了求助贴的标准格式，帮助用户清晰描述问题，提升获取解决方案的效率。求助时需在标题中明确 游戏名、问题类型及具体错误，正文应包含 游戏来源、版本信息、运行环境（操作系统、语言设置、游戏路径是否全英文）、报错信息及错误出现的操作流程。此外，列举 已尝试的解决方案（如使用 Locale Emulator、CMD 运行、不同系统环境测试等）能避免重复建议。'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4
 category: galgame

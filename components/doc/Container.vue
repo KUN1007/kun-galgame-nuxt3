@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import {
+  KUN_DOC_CATEGORY_MAP,
+  KUN_DOC_CATEGORY_COLOR_MAP
+} from '~/constants/doc'
+
 const { data: posts } = await useAsyncData('kun-doc-posts', () =>
   queryCollection('content').order('publishedTime', 'DESC').all()
 )
@@ -27,8 +32,8 @@ const { data: posts } = await useAsyncData('kun-doc-posts', () =>
         content-class="space-y-3"
       >
         <div class="flex items-center gap-3 text-sm">
-          <KunBadge>
-            {{ post.category }}
+          <KunBadge :color="KUN_DOC_CATEGORY_COLOR_MAP[post.category]">
+            {{ KUN_DOC_CATEGORY_MAP[post.category] }}
           </KunBadge>
 
           <time
@@ -39,7 +44,7 @@ const { data: posts } = await useAsyncData('kun-doc-posts', () =>
           </time>
         </div>
 
-        <div class="group relative space-y-3">
+        <div class="group relative h-full space-y-3">
           <img
             :alt="post.title"
             class="rounded-lg"
@@ -48,7 +53,9 @@ const { data: posts } = await useAsyncData('kun-doc-posts', () =>
             height="100%"
           />
 
-          <h2 class="group-hover:text-primary text-lg leading-6 font-semibold">
+          <h2
+            class="group-hover:text-primary line-clamp-2 text-lg leading-6 font-semibold"
+          >
             {{ post.title }}
           </h2>
 

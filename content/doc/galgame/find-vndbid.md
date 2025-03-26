@@ -1,7 +1,7 @@
 ---
 title: '如何通过 VNDB 检索 Galgame?'
 banner: '/content/galgame/find-vndbid/banner.avif'
-description: '鲲 Galgame 论坛'
+description: '通过 VNDB 检索 Galgame 需要几个简单步骤，以确保获取正确的 VNDB 编号，方便后续发布。首先，在搜索引擎（如 Google 或 Bing）输入 Galgame 的日文原名，避免因本地化名称导致的检索失败。找到原名后，在 VNDB 网站的搜索框输入该名称，即可准确定位游戏。VNDB 并非必须使用原名检索，但这样更为精准。游戏页面 URL 中的编号（如 v19658）即为 VNDB ID，可用于发布 Galgame。若出现多个结果，根据 VNDB ID 选择正确的游戏。'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4
 category: galgame

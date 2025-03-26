@@ -1,7 +1,7 @@
 ---
 title: '话题发布规定'
 banner: '/content/notice/topic-publish-rule/banner.avif'
-description: '鲲 Galgame 论坛'
+description: '鲲 Galgame 论坛的话题发布规定旨在确保资源分享的规范性与社区的良性发展。论坛严禁盗链，即禁止直接使用其他网站的资源链接，发布者需自行上传文件，并避免解压密码关联其他网站。此外，禁止发布欧美 3D SLG 相关内容，Galgame 资源必须具备 VNDB ID 才能在相应板块发布。寻求资源前，用户需先搜索论坛及外部引擎，确保无法获取后再提问；请求技术帮助亦需先行尝试自行解决。论坛鼓励合理分享，如自行转存资源或删除外部信息后再发布均被允许，且 BT/磁力链接亦可直接分享。为提升话题质量，论坛提供友情链接及 Telegram 群组供资源交流，未来还将推出简化发布流程的资源板块。'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4
 category: notice
