@@ -150,7 +150,9 @@ onUnmounted(() => {
             >
               {{ post.title }}
             </KunLink>
-            <p class="text-default-700 line-clamp-2 text-sm sm:text-base">
+            <p
+              class="text-default-700 line-clamp-2 text-sm select-none sm:text-base"
+            >
               {{ post.description }}
             </p>
             <KunLink
