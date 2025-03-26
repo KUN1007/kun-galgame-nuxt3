@@ -1,50 +1,25 @@
-import { PrismaClient } from '@prisma/client'
+import mongoose from 'mongoose'
+import TopicModel from '../../server/models/topic'
+import GalgameModel from '../../server/models/galgame'
+import { config } from 'dotenv'
 
-const prisma = new PrismaClient()
+config()
+mongoose.connect(process.env.MONGODB_URL ?? '')
 
 export const getKunDynamicRoutes = async () => {
-  try {
-    const patches = await prisma.patch.findMany({
-      select: {
-        id: true,
-        updated: true
-      }
-    })
+  const topics = await TopicModel.find().select('tid updated').lean()
 
-    const tags = await prisma.patch_tag.findMany({
-      select: {
-        id: true,
-        updated: true
-      }
-    })
+  const galgames = await GalgameModel.find().select('gid updated').lean()
 
-    const companies = await prisma.patch_company.findMany({
-      select: {
-        id: true,
-        updated: true
-      }
-    })
+  const topicRoutes = topics.map((topic) => ({
+    path: `/topic/${topic.tid}`,
+    lastmod: topic.updated?.toISOString() || new Date().toISOString()
+  }))
 
-    const patchRoutes = patches.map((patch) => ({
-      path: `/patch/${patch.id}/introduction`,
-      lastmod: patch.updated?.toISOString() || new Date().toISOString()
-    }))
+  const galgameRoutes = galgames.map((galgame) => ({
+    path: `/galgame/${galgame.gid}`,
+    lastmod: galgame.updated?.toISOString() || new Date().toISOString()
+  }))
 
-    const tagRoutes = tags.map((tag) => ({
-      path: `/tag/${tag.id}`,
-      lastmod: tag.updated?.toISOString() || new Date().toISOString()
-    }))
-
-    const companyRoutes = companies.map((company) => ({
-      path: `/company/${company.id}`,
-      lastmod: company.updated?.toISOString() || new Date().toISOString()
-    }))
-
-    return [...patchRoutes, ...tagRoutes, ...companyRoutes]
-  } catch (error) {
-    console.error('Error fetching dynamic routes:', error)
-    return []
-  } finally {
-    await prisma.$disconnect()
-  }
+  return [...topicRoutes, ...galgameRoutes]
 }

@@ -23,7 +23,10 @@ logs
 .env.*
 !.env.example
 
-#backup
+# backup
 backup
 .vs
 package.json
+
+# sitemap
+public/*.xml

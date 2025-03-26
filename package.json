@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "packageManager": "pnpm@10.4.1",
   "private": true,
   "scripts": {
@@ -16,7 +16,12 @@
     "precommit": "node ./.husky/scripts/bumpAppVersion.js && git add package.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "up": "pnpm update --latest",
+    "build:sitemap": "esno scripts/generateKunSitemap.ts",
+    "postbuild": "esno scripts/postbuild.ts",
+    "deploy:install": "esno scripts/deployInstall.ts",
+    "deploy:build": "esno scripts/deployBuild.ts"
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.2.8",
@@ -38,6 +43,8 @@
     "@vite-pwa/nuxt": "^0.10.6",
     "dayjs-nuxt": "^2.1.11",
     "eslint": "^9.22.0",
+    "esno": "^4.8.0",
+    "globby": "13.2.2",
     "gray-matter": "^4.0.3",
     "husky": "^9.1.7",
     "nuxt": "^3.16.0",
@@ -108,7 +115,8 @@
     "socket.io-client": "^4.8.1",
     "tailwind-merge": "^3.0.2",
     "tailwindcss": "^4.0.12",
-    "vue-advanced-cropper": "^2.8.9"
+    "vue-advanced-cropper": "^2.8.9",
+    "zod": "^3.24.2"
   },
   "pnpm": {
     "overrides": {

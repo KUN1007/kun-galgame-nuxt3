@@ -1,31 +1,38 @@
 import { writeFile } from 'fs/promises'
+// Must to use globby 13.2.2: https://github.com/nuxt/nuxt/issues/24387#issuecomment-1821667490
 import { globby } from 'globby'
 import prettier from 'prettier'
 import { getKunDynamicRoutes } from './dynamic-routes/getKunDynamicRoutes'
 import { getKunDynamicBlog } from './dynamic-routes/getKunDynamicBlog'
+import { kunCategoryAvailableItem } from '../constants/category'
+import { KUN_TOPIC_SECTION_DESCRIPTION_MAP } from '../constants/section'
 
-const WEBSITE_URL = process.env.NEXT_PUBLIC_KUN_PATCH_ADDRESS_PROD
+const WEBSITE_URL = process.env.KUN_GALGAME_URL
 
 const generateKunSitemap = async () => {
   try {
     const pages = await globby([
-      'app/**/*.tsx',
-      '!app/**/_*.tsx',
-      '!app/**/layout.tsx',
-      '!app/**/providers.tsx',
-      '!app/**/loading.tsx',
-      '!app/**/error.tsx',
-      '!app/**/*.test.tsx',
-      '!app/**/components/**',
-      '!app/**/patch/**',
-      '!app/**/admin/**',
-      '!app/**/edit/**',
-      '!app/**/message/**',
-      '!app/**/user/**',
-      '!app/**/about/**',
-      '!app/**/company/**',
-      '!app/**/tag/**'
+      'pages/**/*.vue',
+      '!pages/doc/*.vue',
+      '!pages/category/*.vue',
+      '!pages/galgame/[gid]/*.vue',
+      '!pages/message/*.vue',
+      '!pages/section/*.vue',
+      '!pages/topic/[tid]/*.vue',
+      '!pages/user/**/*.vue'
     ])
+
+    const categoryRoutes = kunCategoryAvailableItem.map((category) => ({
+      path: `/category/${category.value}`,
+      lastmod: new Date().toISOString()
+    }))
+
+    const sectionRoutes = Object.keys(KUN_TOPIC_SECTION_DESCRIPTION_MAP).map(
+      (section) => ({
+        path: `/section/${section}`,
+        lastmod: new Date().toISOString()
+      })
+    )
 
     const dynamicPatches = await getKunDynamicRoutes()
     const dynamicBlogs = getKunDynamicBlog()
@@ -34,12 +41,12 @@ const generateKunSitemap = async () => {
       <?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
         ${pages
-          .concat(['app/about/page.tsx'])
+          .concat(['pages/doc/index.vue'])
           .map((page) => {
             const path = page
-              .replace('app', '')
-              .replace('/page.tsx', '')
-              .replace('.tsx', '')
+              .replace('pages', '')
+              .replace('/index.vue', '')
+              .replace('.vue', '')
             const route = path === '/index' ? '' : path
 
             return `
@@ -65,6 +72,8 @@ const generateKunSitemap = async () => {
           )
           .join('')}
           ${dynamicBlogs
+            .concat(categoryRoutes)
+            .concat(sectionRoutes)
             .map(
               (patch) => `
                 <url>
@@ -85,6 +94,7 @@ const generateKunSitemap = async () => {
 
     await writeFile('public/sitemap.xml', formatted)
     console.log('✅ Sitemap generated successfully!')
+    process.exit(0)
   } catch (error) {
     console.error('Error generating sitemap:', error)
     process.exit(1)
