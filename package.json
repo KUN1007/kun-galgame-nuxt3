@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "packageManager": "pnpm@10.4.1",
   "private": true,
   "scripts": {
@@ -38,6 +38,7 @@
     "@vite-pwa/nuxt": "^0.10.6",
     "dayjs-nuxt": "^2.1.11",
     "eslint": "^9.22.0",
+    "gray-matter": "^4.0.3",
     "husky": "^9.1.7",
     "nuxt": "^3.16.0",
     "nuxt-schema-org": "^5.0.0",
