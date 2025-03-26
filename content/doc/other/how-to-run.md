@@ -1,10 +1,10 @@
 ---
 title: '如何本地运行本论坛的开源项目'
-banner: '/content/notice/about/banner.avif'
+banner: '/content/other/how-to-run/banner.avif'
 description: '鲲 Galgame 论坛'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4
-category: notice
+category: other
 authorUid: 2
 authorName: '鲲'
 authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar.webp'

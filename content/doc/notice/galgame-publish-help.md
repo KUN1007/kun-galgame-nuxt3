@@ -1,6 +1,6 @@
 ---
 title: '发布 Galgame 帮助'
-banner: '/content/notice/about/banner.avif'
+banner: '/content/notice/galgame-publish-help/banner.avif'
 description: '鲲 Galgame 论坛'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4

@@ -1,6 +1,6 @@
 ---
 title: '鲲 Galgame 论坛使用小技巧'
-banner: '/content/notice/about/banner.avif'
+banner: '/content/notice/forum-tips/banner.avif'
 description: '鲲 Galgame 论坛'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4
@@ -76,7 +76,7 @@ PC 端: 打开设置面板，点一下神奇的按钮就可以关闭了
 
 论坛编辑器是 Markdown 语法，有些时候可能不符合您的直觉，使用方法在这里
 
-[论坛编辑器语法指南](https://www.kungal.com/zh-cn/topic/1225)
+[论坛编辑器语法指南](https://www.kungal.com/topic/1225)
 
 请注意加空格，注意回车
 

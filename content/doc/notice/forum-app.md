@@ -1,6 +1,6 @@
 ---
 title: '鲲 Galgame 论坛 App 安装指南'
-banner: '/content/notice/about/banner.avif'
+banner: '/content/notice/forum-app/banner.avif'
 description: '鲲 Galgame 论坛'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4

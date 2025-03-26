@@ -1,6 +1,6 @@
 ---
 title: 'Galgame 评论注意事项'
-banner: '/content/notice/about/banner.avif'
+banner: '/content/notice/galgame-comment/banner.avif'
 description: '鲲 Galgame 论坛'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4

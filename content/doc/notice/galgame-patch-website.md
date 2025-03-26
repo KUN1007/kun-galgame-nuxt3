@@ -1,6 +1,6 @@
 ---
 title: '全新 Galgame 补丁资源下载网站'
-banner: '/content/notice/about/banner.avif'
+banner: '/content/notice/galgame-patch-website/banner.avif'
 description: '鲲 Galgame 论坛'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4

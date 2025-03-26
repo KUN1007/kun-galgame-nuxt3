@@ -13,6 +13,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  type: {
+    type: String,
+    default: 'nuxt-img'
+  },
   width: {
     type: [String, Number],
     default: undefined
@@ -38,7 +42,7 @@ const refinedSrc = computed(() => {
 
 <template>
   <component
-    :is="ImageComponent"
+    :is="type === 'nuxt-img' ? ImageComponent : 'img'"
     :src="refinedSrc"
     :alt="props.alt"
     :width="props.width"

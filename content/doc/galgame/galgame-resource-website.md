@@ -1,10 +1,10 @@
 ---
 title: 'Galgame 资源网站大全'
-banner: '/content/notice/about/banner.avif'
+banner: '/content/galgame/galgame-resource-website/banner.avif'
 description: '鲲 Galgame 论坛'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4
-category: notice
+category: galgame
 authorUid: 2
 authorName: '鲲'
 authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar.webp'

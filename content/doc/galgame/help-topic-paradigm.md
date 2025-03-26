@@ -1,10 +1,10 @@
 ---
 title: '[求助示例]【彼女と俺と恋人と】打开报错 DirectDraw 初始化失败'
-banner: '/content/notice/about/banner.avif'
+banner: '/content/galgame/help-topic-paradigm/banner.avif'
 description: '鲲 Galgame 论坛'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4
-category: notice
+category: galgame
 authorUid: 2
 authorName: '鲲'
 authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar.webp'

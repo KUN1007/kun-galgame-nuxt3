@@ -1,10 +1,10 @@
 ---
 title: 'VNDB 对于视觉小说的定义'
-banner: '/content/notice/about/banner.avif'
+banner: '/content/galgame/galgame-definition/banner.avif'
 description: '鲲 Galgame 论坛'
 publishedTime: 2024-12-4
 modifiedTime: 2024-12-4
-category: notice
+category: galgame
 authorUid: 2
 authorName: '鲲'
 authorAvatar: 'https://image.kungal.com/avatar/user_2/avatar.webp'
