@@ -12,12 +12,18 @@ const [prev, next] = data.value || []
 
 <template>
   <div class="flex items-center justify-between">
-    <KunButton v-if="prev" color="default" variant="light" :href="prev.path">
+    <KunButton
+      class-name="mr-auto justify-start text-start gap-2"
+      v-if="prev"
+      color="default"
+      variant="light"
+      :href="prev.path"
+    >
       <KunIcon name="lucide:chevron-left" />
       {{ prev.title }}
     </KunButton>
     <KunButton
-      class-name="ml-auto"
+      class-name="ml-auto justify-end text-end gap-2"
       color="default"
       v-if="next"
       variant="light"

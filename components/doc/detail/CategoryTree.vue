@@ -72,12 +72,12 @@ const toggleCategory = (category: string) => {
             v-for="article in articles"
             :key="article.path"
             :href="article.path"
-            class-name="justify-start"
+            class-name="justify-start text-start"
           >
             <span
               :class="
                 cn(
-                  'flex items-center justify-center gap-2',
+                  'gap-2',
                   route.fullPath === article.path ? '' : 'text-foreground'
                 )
               "
