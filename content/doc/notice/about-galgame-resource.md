@@ -1,5 +1,5 @@
 ---
-title: 关于 Galgame 资源的盗链界定
+title: '关于 Galgame 资源的盗链界定'
 banner: '/content/notice/about/banner.avif'
 description: '鲲 Galgame 论坛'
 publishedTime: 2024-12-4

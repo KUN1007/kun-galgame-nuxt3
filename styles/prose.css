@@ -9,7 +9,7 @@
 
 /* Links */
 .kun-prose a {
-  @apply text-primary-500 decoration-primary-200 hover:text-primary-600 hover:decoration-primary-400 font-medium underline underline-offset-2 transition-colors duration-200;
+  @apply text-primary-500 decoration-primary-200 hover:text-primary-600 hover:decoration-primary-400 font-medium break-all underline underline-offset-2 transition-colors duration-200;
 }
 
 .kun-prose .anchor {
@@ -63,6 +63,10 @@
 
 .kun-prose pre code {
   @apply text-default-800 border-0 bg-transparent p-0 shadow-none;
+}
+
+.kun-prose pre code span {
+  @apply whitespace-normal;
 }
 
 /* Quotes with refined styling */

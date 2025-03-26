@@ -1,5 +1,5 @@
 ---
-title: 关于鲲 Galgame 论坛
+title: '关于鲲 Galgame 论坛'
 banner: '/content/notice/about/banner.avif'
 description: '鲲 Galgame 论坛'
 publishedTime: 2024-12-4

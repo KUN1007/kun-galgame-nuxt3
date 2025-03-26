@@ -1,5 +1,5 @@
 ---
-title: 鲲 Galgame 论坛隐私政策
+title: '鲲 Galgame 论坛隐私政策'
 banner: '/content/notice/about/banner.avif'
 description: '鲲 Galgame 论坛'
 publishedTime: 2024-12-4

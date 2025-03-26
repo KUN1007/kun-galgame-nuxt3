@@ -1,5 +1,5 @@
 ---
-title: Galgame 资源网站大全
+title: 'Galgame 资源网站大全'
 banner: '/content/notice/about/banner.avif'
 description: '鲲 Galgame 论坛'
 publishedTime: 2024-12-4

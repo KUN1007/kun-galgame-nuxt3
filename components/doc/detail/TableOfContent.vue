@@ -66,7 +66,10 @@ onUnmounted(() => {
   <aside class="fixed right-0 hidden w-64 shrink-0 space-y-8 lg:block">
     <div class="sticky top-0">
       <h3 class="p-3 text-xl font-semibold">页面目录</h3>
-      <nav v-if="toc?.links">
+      <nav
+        class="scrollbar-hide max-h-[calc(100dvh-10rem)] overflow-y-auto"
+        v-if="toc?.links"
+      >
         <DocDetailTOCLink
           :links="toc.links"
           :active-id="activeId"
