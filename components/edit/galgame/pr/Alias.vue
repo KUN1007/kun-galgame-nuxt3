@@ -61,111 +61,56 @@ watch(
 </script>
 
 <template>
-  <KunHeader :size="2">
-    <template #header>别名</template>
-  </KunHeader>
-
-  <div class="input-container">
-    <div class="alias-container">
-      <span
-        v-for="(alias, index) in selectedAlias"
-        :key="index"
-        class="selected-alias"
-      >
-        {{ alias }}
-        <span class="close-btn" @click="handleAliasClose(alias)">×</span>
-      </span>
+  <div class="relative">
+    <div class="space-y-2">
+      <h2 class="text-xl">游戏别名</h2>
+      <p class="text-default-500">
+        别名最多 17 个, 可以输入别名按下回车创建别名
+      </p>
     </div>
 
-    <input
-      class="input"
-      type="text"
-      v-model="inputValue"
-      placeholder="请输入游戏别名"
-      @input="canDeleteAlias = false"
-      @keyup.enter="handleAddAlias"
-      @keyup.backspace="handleRemoveAlias"
-      @focus="isInputFocus = true"
-      @blur="isInputFocus = false"
-    />
+    <div
+      class="ring-default-500 bg-default/10 min-h-[44px] w-full rounded-lg px-6 py-3 shadow transition-all focus-within:ring-1"
+    >
+      <div class="flex flex-wrap gap-2">
+        <KunBadge
+          color="primary"
+          size="md"
+          v-for="(alias, index) in selectedAlias"
+          :key="index"
+        >
+          {{ alias }}
+          <button
+            @click="handleAliasClose(alias)"
+            class="text-primary ml-2 focus:outline-none"
+          >
+            ×
+          </button>
+        </KunBadge>
 
-    <div class="box1"></div>
-    <div class="box2" :class="isInputFocus ? 'box-active' : ''"></div>
+        <input
+          class="placeholder-default-500 text-default-700 min-w-[120px] flex-grow bg-transparent outline-none"
+          type="text"
+          v-model="inputValue"
+          placeholder="请输入游戏别名"
+          @input="canDeleteAlias = false"
+          @keyup.enter="handleAddAlias"
+          @keyup.backspace="handleRemoveAlias"
+          @focus="isInputFocus = true"
+          @blur="isInputFocus = false"
+        />
+      </div>
+    </div>
+
+    <div class="absolute top-1/2 right-2 -translate-y-1/2">
+      <KunButton
+        :is-icon-only="true"
+        variant="flat"
+        v-if="inputValue"
+        @click="handleAddAlias"
+      >
+        <KunIcon name="lucide:plus" class="h-5 w-5 text-blue-600" />
+      </KunButton>
+    </div>
   </div>
-
-  <div class="hint">别名最多 17 个, 可以输入别名按下回车创建别名</div>
 </template>
-
-<style lang="scss" scoped>
-.input-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-}
-
-.alias-container {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.selected-alias {
-  border: 1px solid var(--kungalgame-pink-4);
-  border-radius: 14px;
-  margin: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  white-space: nowrap;
-  font-size: 14px;
-  padding: 3px 17px;
-  background-color: var(--kungalgame-trans-pink-0);
-
-  span {
-    cursor: pointer;
-  }
-}
-
-.close-btn {
-  margin: 0 5px;
-}
-
-.input {
-  background-color: transparent;
-  font-size: 17px;
-  flex-grow: 1;
-  border: none;
-  padding: 7px;
-  display: flex;
-  min-width: 300px;
-  color: var(--kungalgame-font-color-3);
-}
-
-.box1 {
-  height: 2px;
-  width: 100%;
-  display: flex;
-  background-color: var(--kungalgame-blue-0);
-}
-
-.box2 {
-  position: relative;
-  transform: translateY(-2px);
-  transition: all 0.5s;
-  height: 2px;
-  width: 1px;
-  display: flex;
-  background-color: var(--kungalgame-blue-2);
-}
-
-.box-active {
-  width: 100%;
-  background-color: var(--kungalgame-blue-5);
-}
-
-.hint {
-  font-size: small;
-  color: var(--kungalgame-font-color-1);
-}
-</style>

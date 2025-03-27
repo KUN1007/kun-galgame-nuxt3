@@ -4,6 +4,7 @@ import type { GalgameCard } from '~/types/api/galgame'
 
 defineProps<{
   galgames: GalgameCard[]
+  isTransparent?: boolean
 }>()
 </script>
 
@@ -11,11 +12,13 @@ defineProps<{
   <div
     class="grid grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4"
   >
-    <NuxtLink
-      class="group bg-background relative flex flex-col overflow-hidden rounded-lg border shadow"
+    <KunCard
+      :is-transparent="isTransparent"
+      :is-pressable="true"
       v-for="galgame in galgames"
       :key="galgame.gid"
-      :to="`/galgame/${galgame.gid}`"
+      :href="`/galgame/${galgame.gid}`"
+      class-name="p-0"
     >
       <div class="relative overflow-hidden">
         <NuxtImg
@@ -24,6 +27,7 @@ defineProps<{
           :alt="galgame.name['zh-cn']"
           placeholder="/placeholder.webp"
           class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          :style="{ aspectRatio: '16/9' }"
         />
 
         <div class="absolute top-2 left-2 flex gap-1">
@@ -31,17 +35,17 @@ defineProps<{
             <span
               v-for="(platform, i) in galgame.platform"
               :key="i"
-              class="flex size-6 items-center justify-center rounded-full bg-black/50 p-1.5 text-xs backdrop-blur-sm sm:size-8 sm:text-sm"
+              class="bg-background flex size-6 items-center justify-center rounded-full p-1.5 text-xs backdrop-blur-sm sm:size-8 sm:text-sm"
             >
-              <Icon
+              <KunIcon
                 :name="platformIconMap[platform]"
-                class="h-full w-full text-white"
+                class="h-full w-full"
               />
             </span>
           </template>
           <span
             v-else
-            class="rounded-full bg-black/50 px-3 py-1 text-xs text-white backdrop-blur-sm sm:text-sm"
+            class="bg-background rounded-full px-3 py-1 text-xs backdrop-blur-sm sm:text-sm"
           >
             准备中
           </span>
@@ -52,12 +56,12 @@ defineProps<{
         >
           <div class="flex gap-3">
             <span class="flex items-center gap-1">
-              <Icon class="text-white" name="lucide:mouse-pointer-click" />
+              <KunIcon class="text-white" name="lucide:eye" />
               <span class="text-white">{{ galgame.views }}</span>
             </span>
 
             <span class="flex items-center gap-1">
-              <Icon class="text-white" name="lucide:thumbs-up" />
+              <KunIcon class="text-white" name="lucide:thumbs-up" />
               <span class="text-white">{{ galgame.likes }}</span>
             </span>
           </div>
@@ -82,7 +86,7 @@ defineProps<{
         </h3>
 
         <div class="flex items-center gap-3">
-          <KunAvatar :user="galgame.user" size="30px" class="rounded-full" />
+          <KunAvatar :user="galgame.user" />
           <div class="flex flex-col">
             <span class="text-sm font-medium">
               {{ galgame.user.name }}
@@ -93,6 +97,6 @@ defineProps<{
           </div>
         </div>
       </div>
-    </NuxtLink>
+    </KunCard>
   </div>
 </template>

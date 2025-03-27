@@ -1,71 +1,38 @@
 <script setup lang="ts">
-import { topicIconMap } from './navSortItem'
-import type { TopicSortFieldRanking, RankingTopics } from '~/types/api/ranking'
+import { topicIconMap } from '~/constants/ranking'
+import { topicRankingPageData } from './pageData'
 
-const props = defineProps<{
-  field: TopicSortFieldRanking
-  topics: RankingTopics[]
-}>()
-
-const topics = computed(() => props.topics)
+const { data } = await useFetch(`/api/ranking/topic`, {
+  method: 'GET',
+  query: topicRankingPageData,
+  ...kungalgameResponseHandler
+})
 </script>
 
 <template>
-  <div class="single-topic" v-for="topic in topics" :key="topic.tid">
-    <NuxtLink :to="`/topic/${topic.tid}`">
-      <div class="topic-name">
+  <KunLink
+    color="default"
+    underline="none"
+    v-for="(topic, index) in data"
+    :key="topic.tid"
+    :to="`/topic/${topic.tid}`"
+    class-name="hover:bg-default-100 flex cursor-pointer items-center justify-between rounded-lg p-3 transition-colors"
+  >
+    <div class="flex items-center">
+      <span class="text-default-500 w-12 text-xl font-bold">
+        {{ index + 1 }}
+      </span>
+      <h3>
         {{ topic.title }}
-      </div>
+      </h3>
+    </div>
 
-      <div class="detail">
-        <Icon class="icon" :name="topicIconMap[props.field]" />
-        <span class="title">{{ Math.ceil(topic.field) }}</span>
-      </div>
-    </NuxtLink>
-  </div>
+    <div class="flex items-center space-x-2">
+      <KunIcon
+        :name="topicIconMap[topicRankingPageData.sortField]"
+        class="text-primary h-5 w-5"
+      />
+      <span class="font-medium">{{ topic.field }}</span>
+    </div>
+  </KunLink>
 </template>
-
-<style lang="scss" scoped>
-.single-topic {
-  a {
-    flex-shrink: 0;
-    height: 37px;
-    margin: 7px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--kungalgame-trans-blue-0);
-    border: 2px solid var(--kungalgame-trans-blue-2);
-    border-radius: 5px;
-    color: var(--kungalgame-font-color-3);
-    padding: 0 10px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: transparent;
-      border: 2px solid var(--kungalgame-blue-5);
-    }
-  }
-}
-
-.topic-name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.detail {
-  display: flex;
-  align-items: center;
-  color: var(--kungalgame-blue-5);
-
-  .icon {
-    z-index: -1;
-  }
-
-  .title {
-    color: var(--kungalgame-font-color-3);
-    margin-left: 10px;
-  }
-}
-</style>

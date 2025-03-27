@@ -1,5 +1,6 @@
 import type { GalgameResource } from './galgame-resource.d.ts'
 import type { MessageType } from './message.d.ts'
+import type { GalgameCard } from './galgame.d.ts'
 
 export interface HomeMessage {
   uid: number
@@ -14,12 +15,7 @@ export interface HomeMessage {
 export interface HomeUserStatus {
   moemoepoints: number
   isCheckIn: boolean
-}
-
-export interface HomePinnedTopic {
-  tid: number
-  title: string
-  time: number
+  hasNewMessage: boolean
 }
 
 export interface HomeTopic {
@@ -38,17 +34,8 @@ export interface HomeTopic {
   upvoteTime: number
 }
 
-export interface HomeGalgame {
-  gid: number
-  name: KunLanguage
-  time: number
-  views: number
-  contributors: KunUser[]
-  languages: string[]
-  platforms: string[]
-}
+export type HomeGalgame = GalgameCard
 
 export interface HomeGalgameResources extends GalgameResource {
   name: KunLanguage
-  time: number
 }

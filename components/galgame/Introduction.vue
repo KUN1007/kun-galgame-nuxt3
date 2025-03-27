@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { languageItems } from '~/components/edit/utils/options'
+import { galgameIntroductionLanguageTabs } from '~/constants/galgame'
 
-const introductionLanguage = ref('zh-cn')
+const introductionLanguage = ref<Language>('zh-cn')
 
 defineProps<{
   introduction: KunLanguage
@@ -9,41 +9,25 @@ defineProps<{
 </script>
 
 <template>
-  <KunHeader :size="2">
-    <template #header>介绍</template>
-  </KunHeader>
+  <div class="space-y-3">
+    <KunTab
+      :items="galgameIntroductionLanguageTabs"
+      v-model="introductionLanguage"
+      size="sm"
+      variant="underlined"
+    />
 
-  <KunNav
-    class="nav"
-    :items="languageItems"
-    :default-value="introductionLanguage"
-    @set="(value) => (introductionLanguage = value)"
-  />
+    <div
+      class="bg-primary/20 text-primary rounded-lg p-3"
+      v-if="introduction[introductionLanguage as Language] === ''"
+    >
+      暂无对应翻译, 为您找到最近似的语言, 欢迎贡献翻译
+    </div>
 
-  <div
-    class="hint"
-    v-if="introduction[introductionLanguage as Language] === ''"
-  >
-    暂无对应翻译, 为您找到最近似的语言, 欢迎贡献翻译
+    <KunCard :is-hoverable="false">
+      <KunContent
+        :content="getPreferredLanguageText(introduction, introductionLanguage)"
+      />
+    </KunCard>
   </div>
-
-  <KunContent class="kun-content" :content="introduction['zh-cn']" />
 </template>
-
-<style lang="scss" scoped>
-h2 {
-  margin: 17px 0;
-}
-
-.hint {
-  margin-top: 17px;
-  color: var(--kungalgame-white);
-  background-color: var(--kungalgame-blue-5);
-  font-size: 15px;
-  padding: 5px 10px;
-}
-
-.kun-content {
-  width: 100%;
-}
-</style>

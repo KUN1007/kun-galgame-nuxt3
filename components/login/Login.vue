@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import { checkLoginForm } from './checkLogin'
-import type { Pinia } from 'pinia'
+import { checkLogin } from './checkLogin'
 
-const info = useComponentMessageStore()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useComponentMessageStore()
 )
@@ -13,7 +11,6 @@ const loginForm = reactive({
 })
 
 const handleLogin = () => {
-  const checkLogin = checkLoginForm.asyncData(useNuxtApp().$pinia as Pinia)
   const result = checkLogin(loginForm.name, loginForm.password)
   if (!result) {
     return
@@ -38,8 +35,8 @@ watch(
       ...kungalgameResponseHandler
     })
     if (userInfo) {
-      info.info(`登陆成功! 欢迎来到 ${kungal.name}`)
       usePersistUserStore().setUserInfo(userInfo)
+      useKunLoliInfo(`登陆成功! 欢迎来到 ${kungal.name}`)
       navigateTo('/')
     }
 
@@ -49,109 +46,61 @@ watch(
 </script>
 
 <template>
-  <div class="login">
-    <form class="form" @submit.prevent>
-      <NuxtImg
-        preload
-        src="/placeholder.webp"
-        placeholder="/placeholder.webp"
-      />
-
-      <div>
-        <label for="username">用户名或邮箱</label>
-        <KunInput
-          id="username"
-          v-model="loginForm.name"
-          autocomplete="username"
-          type="text"
+  <div class="flex size-full items-center justify-center">
+    <KunCard
+      :is-transparent="false"
+      :is-hoverable="false"
+      class-name="w-88 p-8 select-none"
+    >
+      <form
+        class="flex h-full flex-col items-center justify-center"
+        @submit.prevent
+      >
+        <NuxtImg
+          preload
+          src="/placeholder.webp"
+          placeholder="/placeholder.webp"
+          class="w-full"
         />
+
+        <div class="w-full">
+          <label for="username" class="text-sm">用户名或邮箱</label>
+          <KunInput
+            id="username"
+            v-model="loginForm.name"
+            autocomplete="username"
+            type="text"
+            class-name="mt-2 mb-4 w-full"
+          />
+        </div>
+
+        <div class="w-full">
+          <label for="password" class="text-sm">密码</label>
+          <KunInput
+            id="password"
+            v-model="loginForm.password"
+            autocomplete="current-password"
+            type="password"
+            class-name="mt-2 mb-4 w-full"
+          />
+        </div>
+
+        <KunButton
+          @click="handleLogin"
+          class="bg-primary w-full rounded-3xl text-base tracking-wider text-white uppercase"
+        >
+          登录
+        </KunButton>
+      </form>
+
+      <KunDivider class="my-4">
+        <span class="mx-2">或</span>
+      </KunDivider>
+
+      <div class="flex flex-col gap-3">
+        <KunLink to="/register">注册</KunLink>
+        <KunLink to="/forgot">忘记密码?</KunLink>
       </div>
-
-      <div>
-        <label for="password">密码</label>
-        <KunInput
-          id="password"
-          v-model="loginForm.password"
-          autocomplete="current-password"
-          type="password"
-        />
-      </div>
-
-      <KunButton @click="handleLogin" class="btn">登录</KunButton>
-    </form>
-
-    <KunDivider margin="16px 0">
-      <span>或</span>
-    </KunDivider>
-
-    <div class="more">
-      <NuxtLink to="/register">注册</NuxtLink>
-
-      <NuxtLink to="/forgot">忘记密码?</NuxtLink>
-    </div>
+    </KunCard>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.login {
-  width: 360px;
-  padding: 32px;
-  margin-bottom: 32px;
-  user-select: none;
-}
-
-.form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
-
-  img {
-    width: 100%;
-  }
-
-  & > div {
-    width: 100%;
-
-    label {
-      font-size: 14px;
-    }
-  }
-
-  .kun-input {
-    width: 100%;
-    margin-bottom: 16px;
-    margin-top: 8px;
-    padding: 12px;
-  }
-
-  .kun-button {
-    width: 100%;
-    background-color: var(--kungalgame-blue-5);
-    color: var(--kungalgame-white);
-    font-size: 16px;
-    border-radius: 24px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-}
-
-.kun-divider {
-  span {
-    margin: 0 8px;
-  }
-}
-
-.more {
-  display: flex;
-  flex-direction: column;
-
-  a {
-    margin-bottom: 16px;
-    color: var(--kungalgame-blue-5);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-}
-</style>

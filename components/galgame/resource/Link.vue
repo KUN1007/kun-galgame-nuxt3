@@ -3,8 +3,7 @@ import { typeIconMap, platformIconMap } from '../utils/iconMap'
 import {
   KUN_GALGAME_RESOURCE_TYPE_MAP,
   KUN_GALGAME_RESOURCE_LANGUAGE_MAP,
-  KUN_GALGAME_RESOURCE_PLATFORM_MAP,
-  KUN_GALGAME_RESOURCE_SORT_FIELD_MAP
+  KUN_GALGAME_RESOURCE_PLATFORM_MAP
 } from '~/constants/galgame'
 import type {
   GalgameResource,
@@ -69,37 +68,39 @@ watch(
 </script>
 
 <template>
-  <div class="link">
-    <div class="base">
-      <div class="info">
-        <span class="rewrite" v-if="link.grid === rewriteResourceId">
-          <Icon class="icon" name="svg-spinners:12-dots-scale-rotate" />
-          <span>编辑中...</span>
-        </span>
-        <span>
-          <Icon class="icon" :name="typeIconMap[link.type]" />
-          <span>{{ KUN_GALGAME_RESOURCE_TYPE_MAP[link.type] }}</span>
-        </span>
-        <span>
-          <Icon class="icon" name="lucide:database" />
-          <span>{{ link.size }}</span>
-        </span>
-        <span>
-          <Icon class="icon" :name="platformIconMap[link.platform]" />
-          <span>{{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[link.platform] }}</span>
-        </span>
-        <span>
+  <div class="space-y-2">
+    <div class="flex flex-wrap items-center justify-between space-y-2">
+      <div class="flex flex-wrap items-center gap-1 rounded-lg">
+        <KunBadge color="primary">
+          <KunIcon :name="typeIconMap[link.type]" />
+          {{ KUN_GALGAME_RESOURCE_TYPE_MAP[link.type] }}
+        </KunBadge>
+        <KunBadge color="warning">
+          <KunIcon name="lucide:database" />
+          {{ link.size }}
+        </KunBadge>
+        <KunBadge color="success">
+          <KunIcon :name="platformIconMap[link.platform]" />
+          {{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[link.platform] }}
+        </KunBadge>
+        <KunBadge color="secondary">
           {{ KUN_GALGAME_RESOURCE_LANGUAGE_MAP[link.language] }}
-        </span>
+        </KunBadge>
       </div>
 
-      <div class="status">
-        <span v-if="details" class="close" @click="details = undefined">
-          <Icon class="icon" name="lucide:x" />
-        </span>
+      <div class="flex items-center gap-1">
+        <KunButton
+          :is-icon-only="true"
+          variant="light"
+          color="default"
+          rounded="full"
+          v-if="details"
+          @click="details = undefined"
+        >
+          <KunIcon name="lucide:x" />
+        </KunButton>
 
         <KunButton
-          class="valid"
           v-if="uid === link.uid && link.status === 1"
           @click="handleMarkValid(link.gid, link.grid)"
           :pending="isFetching"
@@ -107,6 +108,8 @@ watch(
           标记有效
         </KunButton>
         <KunButton
+          size="sm"
+          variant="flat"
           v-if="!details && link.grid !== rewriteResourceId"
           @click="handleGetDetail(link.grid)"
           :pending="isFetching"
@@ -120,31 +123,31 @@ watch(
           :grid="link.grid"
           :to-uid="link.uid"
           :likes="link.likes"
-          v-tooltip="{
-            message: '点赞',
-            position: 'bottom'
-          }"
         />
 
-        <NuxtLink
-          v-if="uid !== link.uid"
-          to="/report"
-          v-tooltip="{
-            message: '举报违规',
-            position: 'bottom'
-          }"
-        >
-          <Icon class="icon" name="lucide:triangle-alert" />
-        </NuxtLink>
+        <KunTooltip text="举报违规">
+          <KunButton
+            :is-icon-only="true"
+            color="danger"
+            variant="light"
+            v-if="uid !== link.uid"
+            href="/report"
+          >
+            <KunIcon name="lucide:triangle-alert" />
+          </KunButton>
+        </KunTooltip>
 
-        <span
-          class="status-dot"
-          :class="`status-${link.status}`"
-          v-tooltip="{
-            message: link.status ? '链接过期' : '链接有效',
-            position: 'bottom'
-          }"
-        />
+        <KunTooltip :text="link.status ? '链接过期' : '链接有效'">
+          <span
+            class="status-dot"
+            :class="
+              cn(
+                'rounded0full h-2 w-2',
+                link.status ? 'bg-danger' : 'bg-success'
+              )
+            "
+          />
+        </KunTooltip>
       </div>
     </div>
 
@@ -157,84 +160,3 @@ watch(
     <KunDivider margin="0 0 17px 0" />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.base {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.info {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  background-color: var(--kungalgame-trans-blue-0);
-  border-radius: 10px;
-  margin-bottom: 10px;
-
-  & > span {
-    padding: 3px 7px;
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-  }
-
-  .icon {
-    font-size: medium;
-    margin-right: 5px;
-  }
-
-  .rewrite {
-    user-select: none;
-    color: var(--kungalgame-red-5);
-  }
-}
-
-.status {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  margin-left: auto;
-
-  & > span,
-  a {
-    color: var(--kungalgame-font-color-3);
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-  }
-
-  .kun-button {
-    margin-right: 17px;
-    padding: 3px 10px;
-  }
-
-  .close {
-    cursor: pointer;
-    margin-right: 17px;
-    font-size: 20px;
-  }
-}
-
-.status-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.status-0 {
-  width: 10px;
-  height: 10px;
-  background-color: var(--kungalgame-green-4);
-  border-radius: 50%;
-}
-
-.status-1 {
-  width: 10px;
-  height: 10px;
-  background-color: var(--kungalgame-red-4);
-  border-radius: 50%;
-}
-</style>

@@ -15,10 +15,10 @@ export const hamburgerItem: Hamburger[] = [
     label: 'Galgame'
   },
   {
-    name: 'pool',
+    name: 'topic',
     icon: 'lucide:square-library',
-    router: '/pool',
-    label: '所有话题'
+    router: '/topic',
+    label: '话题'
   },
   {
     name: 'category',
@@ -35,7 +35,7 @@ export const hamburgerItem: Hamburger[] = [
   {
     name: 'createGalgame',
     icon: 'lucide:wand',
-    router: '/edit/galgame?type=publish',
+    router: '/edit/galgame/create',
     label: '发布 Galgame',
     hint: '新'
   },
@@ -54,7 +54,7 @@ export const hamburgerItem: Hamburger[] = [
   {
     name: 'ranking',
     icon: 'lucide:align-end-horizontal',
-    router: '/ranking',
+    router: '/ranking/topic',
     label: '排行榜单'
   },
   {
@@ -75,7 +75,7 @@ export const hamburgerItem: Hamburger[] = [
   {
     name: 'update',
     icon: 'lucide:arrow-big-up-dash',
-    router: '/update-log',
+    router: '/update',
     label: '更新日志'
   },
   {

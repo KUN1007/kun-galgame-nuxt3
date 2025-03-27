@@ -1,29 +1,48 @@
 <script setup lang="ts">
-import 'animate.css'
+import { KunTopBarNav } from '#components'
 
-const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
+withDefaults(
+  defineProps<{
+    className?: string
+  }>(),
+  {
+    className: ''
+  }
+)
+
+const isVisible = ref(true)
+let lastScrollY = 0
+
+const handleScroll = throttle(() => {
+  const currentScrollY = window.scrollY
+  isVisible.value = currentScrollY < lastScrollY || currentScrollY < 50
+  lastScrollY = currentScrollY
+}, 100)
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll, { passive: true })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <template>
   <div
-    class="bg-background z-10 mb-4 flex h-16 shrink-0 items-center justify-between rounded-b-lg px-3"
+    :class="
+      cn(
+        'fixed top-0 z-30 mb-3 w-full shrink-0 px-1 backdrop-blur-[var(--kun-background-blur)] transition-all duration-300 sm:px-0 md:pr-3 md:pl-68',
+        isVisible ? 'translate-y-0' : '-translate-y-full',
+        className
+      )
+    "
   >
-    <!-- <HomePinned /> -->
-    <span>占位文本</span>
-    <KunTopBarAvatar />
-  </div>
-
-  <div class="settings-panel z-50">
-    <Transition
-      enter-active-class="animate__animated animate__jackInTheBox animate__faster"
-      leave-active-class="animate__animated animate__fadeOutRight animate__faster"
+    <div
+      class="bg-background border-default-300 mx-auto flex h-16 w-full max-w-7xl items-center justify-between rounded-b-lg border px-3 shadow"
     >
-      <KeepAlive>
-        <LazyKunSettingPanel
-          v-if="showKUNGalgamePanel"
-          @close="showKUNGalgamePanel = false"
-        />
-      </KeepAlive>
-    </Transition>
+      <KunTopBarNav />
+      <KunTopBarAvatar />
+    </div>
   </div>
 </template>

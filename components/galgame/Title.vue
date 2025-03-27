@@ -61,80 +61,69 @@ onMounted(async () => {
 </script>
 
 <template>
-  <KunHeader :size="1">
-    <template #header>
-      {{ galgame.name['zh-cn'] }}
+  <KunHeader
+    :is-show-divider="false"
+    :name="getPreferredLanguageText(galgame.name)"
+  >
+    <template #endContent>
+      <div class="space-y-3">
+        <div class="flex flex-wrap gap-2">
+          <template v-for="(alias, index) in galgame.name" :key="index">
+            <!-- <KunCopy v-if="alias" :name="alias" :text="alias" /> -->
+            <KunBadge v-if="alias">{{ alias }}</KunBadge>
+          </template>
+        </div>
+
+        <KunDivider />
+
+        <GalgameFooter />
+      </div>
     </template>
   </KunHeader>
-  <div class="banner">
-    <NuxtImg :src="galgame.banner" loading="lazy" />
 
-    <div class="upload" v-if="isShowUpload && hasPermission">
-      <span class="close" @click="isShowUpload = false">
-        <Icon class="icon" name="lucide:x" />
-      </span>
-      <KunUpload
-        width="300px"
-        :initial-image="initialImageUrl"
-        :size="1920"
-        :aspect="16 / 9"
-        placeholder="预览图不可包含 R18 等敏感内容\n宽度大于高度为好"
-        @set-image="(img) => saveImage(img, `kun-galgame-rewrite-banner`)"
-      />
-      <span class="confirm" @click="handleChangeBanner">确定更改</span>
+  <div class="flex flex-wrap items-start justify-between gap-3 lg:flex-nowrap">
+    <div class="relative flex min-w-88 items-end justify-center">
+      <NuxtImg class="rounded-lg" :src="galgame.banner" loading="lazy" />
+
+      <KunModal
+        :modal-value="isShowUpload"
+        @update:modal-value="(value) => (isShowUpload = value)"
+      >
+        <div class="flex flex-col space-y-3">
+          <h2>更改 Galgame 预览图</h2>
+
+          <KunUpload
+            :initial-image="initialImageUrl"
+            :size="1920"
+            :aspect="16 / 9"
+            hint="预览图不可包含 R18 等敏感内容"
+            @set-image="(img) => saveImage(img, `kun-galgame-rewrite-banner`)"
+            class-name="w-96"
+          />
+
+          <div class="flex justify-end gap-1">
+            <KunButton
+              color="danger"
+              variant="light"
+              @click="isShowUpload = false"
+            >
+              取消
+            </KunButton>
+            <KunButton @click="handleChangeBanner">确定更改</KunButton>
+          </div>
+        </div>
+      </KunModal>
+
+      <KunButton
+        class-name="absolute top-0 right-0"
+        v-if="hasPermission"
+        @click="isShowUpload = !isShowUpload"
+        variant="bordered"
+      >
+        更改图片 >
+      </KunButton>
     </div>
-    <span
-      v-if="hasPermission"
-      class="change"
-      @click="isShowUpload = !isShowUpload"
-    >
-      更改图片 >
-    </span>
+
+    <GalgameInfo :galgame="galgame" />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.banner {
-  width: 100%;
-  display: flex;
-  margin-bottom: 17px;
-  position: relative;
-  color: var(--kungalgame-font-color-0);
-  user-select: none;
-
-  img {
-    max-width: 100%;
-    margin: 0 auto;
-  }
-
-  .upload {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-
-    .close {
-      position: absolute;
-      top: 3px;
-      right: 10px;
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    .confirm {
-      position: absolute;
-      bottom: 3px;
-      left: 10px;
-      font-size: small;
-      cursor: pointer;
-    }
-  }
-}
-
-.change {
-  position: absolute;
-  bottom: 3px;
-  right: 10px;
-  cursor: pointer;
-  font-size: small;
-}
-</style>

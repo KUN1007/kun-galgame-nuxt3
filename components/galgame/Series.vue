@@ -5,7 +5,7 @@ const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
 
-const { data, pending } = await useLazyFetch(
+const { data, status } = await useLazyFetch(
   `/api/galgame/${gid.value}/series`,
   {
     method: 'GET',
@@ -16,48 +16,22 @@ const { data, pending } = await useLazyFetch(
 </script>
 
 <template>
-  <div class="container">
-    <KunHeader :size="2" :show-help="true">
-      <template #header>游戏系列</template>
-      <template #help>
-        同一部作品的其它 Galgame, 例如 `巧克甜恋 1, 巧克甜恋 2, 巧克甜恋 3`
-        就是一个系列
-      </template>
-    </KunHeader>
+  <div class="space-y-3">
+    <KunHeader
+      name="游戏系列"
+      description="同一部作品的其它 Galgame, 例如 `巧克甜恋 1, 巧克甜恋 2, 巧克甜恋 3` 就是一个系列"
+    />
 
-    <div class="galgames" v-if="data && !pending">
-      <NuxtLink
+    <KunLoading v-if="status === 'pending'" />
+
+    <div class="flex gap-2" v-if="data && status !== 'pending'">
+      <KunLink
         v-for="(link, index) in data"
         :key="index"
         :to="`/galgame/${link.gid}`"
       >
         {{ link.name['zh-cn'] }}
-      </NuxtLink>
+      </KunLink>
     </div>
-    <KunSkeletonGalgameLink v-if="pending" />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.galgames {
-  margin-bottom: 17px;
-
-  a {
-    margin-right: 17px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: var(--kungalgame-blue-5);
-    border-bottom: 2px solid transparent;
-
-    &:hover {
-      border-bottom: 2px solid var(--kungalgame-blue-5);
-    }
-  }
-}
-</style>

@@ -1,0 +1,144 @@
+.kun-prose {
+  @apply text-default-800 leading-7 text-inherit;
+}
+
+/* Paragraphs */
+.kun-prose p {
+  @apply leading-8;
+}
+
+/* Links */
+.kun-prose a {
+  @apply text-primary-500 decoration-primary-200 hover:text-primary-600 hover:decoration-primary-400 font-medium break-all underline underline-offset-2 transition-colors duration-200;
+}
+
+.kun-prose .anchor {
+  @apply text-default-800 hover:text-primary-500 no-underline;
+}
+
+/* Headings with improved spacing and refined typography */
+.kun-prose h1 {
+  @apply text-default-900 mt-0 mb-8 scroll-m-20 text-4xl leading-tight font-extrabold tracking-tight;
+}
+
+.kun-prose h2 {
+  @apply text-default-900 border-default-200 mt-8 mb-4 scroll-m-20 border-t pt-4 text-2xl leading-tight font-bold tracking-tight;
+}
+
+.kun-prose h3 {
+  @apply text-default-900 mt-6 mb-3 scroll-m-20 pt-3 text-xl leading-snug font-semibold tracking-tight;
+}
+
+.kun-prose h4 {
+  @apply text-default-900 mt-6 mb-4 scroll-m-20 text-lg leading-snug font-semibold tracking-tight;
+}
+
+/* Lists with improved spacing and bullets */
+.kun-prose ul {
+  @apply marker:text-default-400 my-6 list-outside list-disc space-y-3 pl-8 text-inherit;
+}
+
+.kun-prose ol {
+  @apply marker:text-default-400 my-6 list-outside list-decimal space-y-3 pl-8 text-inherit;
+}
+
+.kun-prose li {
+  @apply mt-2 leading-relaxed text-inherit;
+}
+
+/* Nested lists */
+.kun-prose li > ul,
+.kun-prose li > ol {
+  @apply my-2 space-y-2;
+}
+
+/* Code blocks with improved styling */
+.kun-prose code {
+  @apply bg-default-100 text-default-800 border-default-200 rounded-md border px-1.5 py-0.5 font-mono text-sm;
+}
+
+.kun-prose pre {
+  @apply bg-default-50 border-default-200 ring-default-200/50 my-6 overflow-x-auto rounded-xl border p-4 shadow-sm ring-1;
+}
+
+.kun-prose pre code {
+  @apply text-default-800 border-0 bg-transparent p-0 shadow-none;
+}
+
+.kun-prose pre code span {
+  @apply whitespace-normal;
+}
+
+/* Quotes with refined styling */
+.kun-prose blockquote {
+  @apply border-primary-200 bg-primary-50/50 text-default-800 my-8 rounded-r-lg border-l-4 py-1 pr-4 pl-6 font-medium shadow-sm;
+}
+
+/* Tables with NextUI-inspired design */
+.kun-prose table {
+  @apply border-default-200 bg-content1 my-8 w-full overflow-hidden rounded-lg border shadow-sm;
+}
+
+.kun-prose thead {
+  @apply bg-default-50;
+}
+
+.kun-prose th {
+  @apply border-default-200 text-default-700 border-b px-4 py-3 text-left text-sm font-semibold tracking-wide uppercase;
+}
+
+.kun-prose td {
+  @apply border-default-200 text-default-600 border-b px-4 py-3;
+}
+
+.kun-prose tr:last-child td {
+  @apply border-b-0;
+}
+
+.kun-prose tr:hover {
+  @apply bg-default-50/50 transition-colors duration-200;
+}
+
+/* Additional refinements */
+.kun-prose hr {
+  @apply border-default-200 my-12;
+}
+
+.kun-prose img {
+  @apply border-default-200 my-8 rounded-lg border shadow-md;
+}
+
+.kun-prose figure {
+  @apply my-8;
+}
+
+.kun-prose figcaption {
+  @apply text-default-500 mt-3 text-center text-sm;
+}
+
+/* Definition lists */
+.kun-prose dt {
+  @apply text-default-900 mt-4 font-semibold;
+}
+
+.kun-prose dd {
+  @apply border-default-200 mt-2 border-l-2 pl-4;
+}
+
+/* Keyboard shortcuts */
+.kun-prose kbd {
+  @apply bg-default-100 border-default-300 text-default-700 rounded border px-2 py-1 font-mono text-sm shadow-sm;
+}
+
+/* Mark text */
+.kun-prose mark {
+  @apply bg-warning-100 text-warning-800 rounded px-1;
+}
+
+.kun-prose-normal {
+  @apply leading-7 whitespace-normal;
+}
+
+.kun-prose-normal p {
+  @apply my-4;
+}

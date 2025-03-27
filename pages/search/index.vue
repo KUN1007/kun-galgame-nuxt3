@@ -1,37 +1,19 @@
 <script setup lang="ts">
+useKunSeoMeta({
+  title: '搜索 Galgame, Galgame 资源, 话题, 用户, 回复, 评论',
+  description: `${kungal.titleShort} 搜索页面, 搜索 Galgame, Galgame 资源, 话题, 用户, 回复, 评论, 您可以在这里搜索关于 Galgame 的一切内容`
+})
+
 useHead({
-  title: `搜索 Galgame, Galgame 资源, 话题, 用户, 回复, 评论 - ${kungal.titleShort}`,
-  meta: [
+  link: [
     {
-      name: 'description',
-      content: '搜索 Galgame, Galgame 资源, 话题, 用户, 回复, 评论等'
+      rel: 'canonical',
+      href: `${kungal.domain.main}/search`
     }
   ]
 })
 </script>
 
 <template>
-  <div class="root">
-    <SearchContainer />
-  </div>
+  <SearchContainer />
 </template>
-
-<style lang="scss" scoped>
-.root {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: calc(100dvh - 75px);
-  max-width: 80rem;
-  margin: 0 auto;
-  color: var(--kungalgame-font-color-3);
-  padding: 17px;
-}
-
-@media (max-width: 700px) {
-  .root {
-    margin: 0 5px;
-    min-height: calc(100dvh - 63px);
-  }
-}
-</style>

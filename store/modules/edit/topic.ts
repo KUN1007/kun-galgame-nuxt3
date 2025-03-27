@@ -6,8 +6,6 @@ export const usePersistEditTopicStore = defineStore('KUNGalgameEditTopic', {
   },
   state: (): EditStorePersist => ({
     mode: 'preview',
-    textCount: 0,
-
     title: '',
     content: '',
     tags: [],
@@ -17,8 +15,6 @@ export const usePersistEditTopicStore = defineStore('KUNGalgameEditTopic', {
   getters: {},
   actions: {
     resetTopicData() {
-      this.textCount = 0
-
       this.title = ''
       this.content = ''
       this.tags = []

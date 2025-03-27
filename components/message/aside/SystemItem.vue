@@ -8,106 +8,33 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLink class="item" :to="`/message/${data.route as 'system' | 'notice'}`">
-    <NuxtImg src="/apple-touch-icon.png" />
-    <div class="info">
-      <div class="title">
-        <span class="name">{{ title }}</span>
-        <span class="time" v-if="data.time">
+  <KunLink
+    color="default"
+    underline="none"
+    class-name="hover:bg-primary/20 flex cursor-pointer flex-nowrap gap-3 rounded-lg p-2 transition-colors hover:opacity-80"
+    :to="`/message/${data.route as 'system' | 'notice'}`"
+  >
+    <NuxtImg src="/apple-touch-icon.png" class="h-12 w-12" />
+    <div class="justify-space flex w-full flex-col">
+      <div class="flex items-center justify-between">
+        <span class="font-bold">{{ title }}</span>
+        <span class="text-default-500 text-sm" v-if="data.time">
           {{ formatTimeDifference(data.time) }}
         </span>
       </div>
-      <div class="content">
+
+      <div class="flex items-center justify-between text-sm">
         <slot name="system" />
-        <span class="preview">
+        <span class="line-clamp-1 break-all">
           {{ markdownToText(data.content) }}
         </span>
-        <span v-if="data.unreadCount" class="unread">
+        <KunBadge color="primary" v-if="data.unreadCount">
           {{ data.unreadCount }}
-        </span>
-        <span v-if="!data.unreadCount" class="read">{{ data.count }}</span>
+        </KunBadge>
+        <KunBadge color="default" v-if="!data.unreadCount">
+          {{ data.count }}
+        </KunBadge>
       </div>
     </div>
-  </NuxtLink>
+  </KunLink>
 </template>
-
-<style lang="scss" scoped>
-.item {
-  display: flex;
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-  color: var(--kungalgame-font-color-3);
-
-  img {
-    height: 50px;
-    width: 50px;
-  }
-
-  &:hover {
-    background-color: var(--kungalgame-trans-blue-0);
-  }
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  margin-left: 10px;
-  width: 100%;
-
-  .title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .name {
-      font-weight: bold;
-    }
-
-    .time {
-      font-size: small;
-      color: var(--kungalgame-font-color-0);
-    }
-  }
-
-  .content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    span {
-      font-size: small;
-    }
-
-    .preview {
-      color: var(--kungalgame-font-color-0);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
-    }
-
-    .read,
-    .unread {
-      margin-left: auto;
-      font-size: 12px;
-      background-color: var(--kungalgame-gray-4);
-      color: var(--kungalgame-white);
-      border-radius: 10px;
-      padding: 2px 4px;
-    }
-
-    .unread {
-      background-color: var(--kungalgame-blue-5);
-    }
-  }
-}
-
-@media (max-width: 700px) {
-  .item {
-    width: 100%;
-  }
-}
-</style>

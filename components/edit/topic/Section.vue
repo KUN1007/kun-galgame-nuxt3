@@ -6,9 +6,9 @@ import {
   topicCategory
 } from '../utils/category'
 import { intersection } from '../utils/intersection'
-import { KUN_TOPIC_SECTION } from '~/constants/topic'
+import type { KunSelectOption } from '~/components/kun/select/type'
 
-const sectionMap: Record<string, string[]> = {
+const sectionMap: Record<string, KunSelectOption[]> = {
   Galgame: galgameSection,
   Technique: techniqueSection,
   Others: otherSection
@@ -35,7 +35,10 @@ const isShowSelect = (name: string) => {
 
 const handleSetSection = (name: string, value: string) => {
   if (isTopicRewriting.value) {
-    const section = intersection(rewriteSection.value, sectionMap[name])
+    const section = intersection(
+      rewriteSection.value,
+      sectionMap[name].map((s) => s.value)
+    )
     if (!section.length) {
       rewriteSection.value.push(value)
     } else if (!rewriteSection.value.includes(value)) {
@@ -45,7 +48,10 @@ const handleSetSection = (name: string, value: string) => {
       rewriteSection.value.push(value)
     }
   } else {
-    const section = intersection(editSection.value, sectionMap[name])
+    const section = intersection(
+      editSection.value,
+      sectionMap[name].map((s) => s.value)
+    )
     if (!section.length) {
       editSection.value.push(value)
     } else if (!editSection.value.includes(value)) {
@@ -59,31 +65,24 @@ const handleSetSection = (name: string, value: string) => {
 </script>
 
 <template>
-  <div class="section" v-if="isShowSection">
+  <div class="flex items-center gap-2" v-if="isShowSection">
+    分区
+
     <div
       v-for="(select, index) in topicCategory"
       :key="index"
       v-show="isShowSelect(select.name)"
+      class="min-w-48"
     >
       <KunSelect
         v-if="isShowSelect(select.name)"
-        :styles="{ width: '150px' }"
+        :model-value="select.name"
         :options="select.options"
-        i18n="edit.topic.section"
-        @set="(value) => handleSetSection(select.name, value)"
-        position="top"
+        @set="(value) => handleSetSection(select.name, value as string)"
+        :placeholder="select.placeholder"
       >
-        <span>{{ KUN_TOPIC_SECTION[select.name] }}</span>
+        {{ select.name }}
       </KunSelect>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 17px;
-}
-</style>

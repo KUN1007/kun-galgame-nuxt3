@@ -6,13 +6,13 @@ defineProps<{
   reply: TopicReply
 }>()
 
-const { moemoeAccessToken } = usePersistUserStore()
+const { uid } = usePersistUserStore()
 const { rid, toUid, toUsername, isShowPanel } = storeToRefs(
   useTempCommentStore()
 )
 
 const handleClickComment = (replyIid: number, uid: number, name: string) => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10216, 'warn', 5000)
     return
   }
@@ -25,162 +25,61 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
 </script>
 
 <template>
-  <div class="footer">
-    <div class="left">
-      <TopicFooterUpvote
-        :rid="reply.rid"
-        :to-uid="reply.user.uid"
-        :upvote-count="reply.upvotes.count"
-        :is-upvoted="reply.upvotes.isUpvoted"
-        v-tooltip="{
-          message: {
-            'en-us': 'Upvote',
-            'ja-jp': '推す',
-            'zh-cn': '推',
-            'zh-tw': '推'
-          },
-          position: 'bottom'
-        }"
-      />
-
-      <!-- Like -->
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-1">
       <TopicFooterLike
         :rid="reply.rid"
         :to-uid="reply.user.uid"
         :likes-count="reply.likes.count"
         :is-liked="reply.likes.isLiked"
-        v-tooltip="{
-          message: {
-            'en-us': 'Like',
-            'ja-jp': 'いいね',
-            'zh-cn': '点赞',
-            'zh-tw': '點贊'
-          },
-          position: 'bottom'
-        }"
       />
 
-      <!-- Dislike -->
       <TopicFooterDislike
         :rid="reply.rid"
         :to-uid="reply.user.uid"
         :dislikes-count="reply.dislikes.count"
         :is-disliked="reply.dislikes.isDisliked"
-        v-tooltip="{
-          message: {
-            'en-us': 'Dislike',
-            'ja-jp': '低評価',
-            'zh-cn': '点踩',
-            'zh-tw': '點踩'
-          },
-          position: 'bottom'
-        }"
       />
     </div>
 
-    <div class="right">
+    <div class="flex items-center gap-1">
       <TopicFooterReply
         :to-user-name="reply.user.name"
         :to-uid="reply.user.uid"
         :to-floor="reply.floor"
       />
 
-      <span
-        @click="
-          useKunCopy(
-            `${title}: https://www.kungal.com/topic/${reply.tid}#k${reply.floor}`
-          )
-        "
-        class="icon"
-        v-tooltip="{
-          message: {
-            'en-us': 'Share',
-            'ja-jp': '共有',
-            'zh-cn': '分享',
-            'zh-tw': '分享'
-          },
-          position: 'bottom'
-        }"
-      >
-        <Icon class="icon" name="lucide:share-2" />
-      </span>
+      <KunTooltip text="分享该回复">
+        <KunButton
+          :is-icon-only="true"
+          variant="light"
+          color="default"
+          size="lg"
+          @click="
+            useKunCopy(
+              `${title}: https://www.kungal.com/topic/${reply.tid}#k${reply.floor}`
+            )
+          "
+        >
+          <KunIcon name="lucide:share-2" />
+        </KunButton>
+      </KunTooltip>
 
-      <TopicReplyRewrite
-        :reply="reply"
-        v-tooltip="{
-          message: 'Rewrite',
-          position: 'bottom'
-        }"
-      />
+      <TopicReplyRewrite :reply="reply" />
 
-      <span
-        @click="handleClickComment(reply.rid, reply.user.uid, reply.user.name)"
-        class="comment"
-        v-tooltip="{
-          message: {
-            'en-us': 'Comment',
-            'ja-jp': 'コメント',
-            'zh-cn': '评论',
-            'zh-tw': '評論'
-          },
-          position: 'bottom'
-        }"
-      >
-        <Icon class="icon" name="uil:comment-dots" />
-      </span>
+      <KunTooltip text="评论">
+        <KunButton
+          :is-icon-only="true"
+          variant="light"
+          color="default"
+          size="lg"
+          @click="
+            handleClickComment(reply.rid, reply.user.uid, reply.user.name)
+          "
+        >
+          <KunIcon name="uil:comment-dots" />
+        </KunButton>
+      </KunTooltip>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.footer {
-  padding: 17px 10px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.left {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--kungalgame-font-color-3);
-
-  span {
-    display: flex;
-    margin-right: 17px;
-  }
-}
-
-.icon {
-  font-size: 24px;
-  color: var(--kungalgame-font-color-2);
-  cursor: pointer;
-}
-
-.right {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  span {
-    display: flex;
-    margin-right: 17px;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-}
-
-.active {
-  color: var(--kungalgame-blue-5);
-}
-
-@media (max-width: 700px) {
-  .icon {
-    font-size: initial;
-  }
-}
-</style>

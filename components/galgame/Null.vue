@@ -5,23 +5,10 @@ const handleClickContribute = () => {
 </script>
 
 <template>
-  <div class="null">
-    <span>该条目暂时为空</span>
-    <span @click="handleClickContribute">欢迎贡献条目</span>
+  <div class="text-default-500 text-sm italic">
+    <span>该项暂时为空</span>
+    <span class="text-primary cursor-pointer" @click="handleClickContribute">
+      欢迎贡献条目
+    </span>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.null {
-  font-size: small;
-  color: var(--kungalgame-font-color-0);
-  font-style: oblique;
-
-  span {
-    &:last-child {
-      cursor: pointer;
-      color: var(--kungalgame-blue-5);
-    }
-  }
-}
-</style>

@@ -7,104 +7,40 @@ defineProps<{
 </script>
 
 <template>
-  <NuxtLink class="item" :to="`/message/user/${room.route}`">
+  <KunLink
+    color="default"
+    underline="none"
+    class-name="hover:bg-primary/20 flex cursor-pointer flex-nowrap gap-3 rounded-lg p-2 transition-colors hover:opacity-80"
+    :to="`/message/user/${room.route}`"
+  >
     <KunAvatar
       :user="{
         uid: parseInt(room.route),
         name: room.title,
         avatar: room.avatar
       }"
-      size="50px"
+      size="xl"
     />
-    <div class="info">
-      <div class="title">
-        <span>{{ room.title }}</span>
-        <span v-if="room.time">
+    <div class="justify-space flex w-full flex-col">
+      <div class="flex items-center justify-between">
+        <span class="font-bold">{{ room.title }}</span>
+        <span class="text-default-500 text-sm" v-if="room.time">
           {{ formatTimeDifference(room.time) }}
         </span>
       </div>
-      <div class="content">
+
+      <div class="flex items-center justify-between text-sm">
         <slot name="system" />
-        <span class="preview">
+        <span class="line-clamp-1 break-all">
           {{ markdownToText(room.content) }}
         </span>
-        <span v-if="room.unreadCount" class="unread">
+        <KunBadge color="primary" v-if="room.unreadCount">
           {{ room.unreadCount }}
-        </span>
-        <span v-if="!room.unreadCount" class="read">{{ room.count }}</span>
+        </KunBadge>
+        <KunBadge color="default" v-if="!room.unreadCount">
+          {{ room.count }}
+        </KunBadge>
       </div>
     </div>
-  </NuxtLink>
+  </KunLink>
 </template>
-
-<style lang="scss" scoped>
-.item {
-  display: flex;
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-  color: var(--kungalgame-font-color-3);
-
-  &:hover {
-    background-color: var(--kungalgame-trans-blue-0);
-  }
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  margin-left: 10px;
-  width: 100%;
-
-  .title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    span {
-      &:first-child {
-        font-weight: bold;
-      }
-
-      &:last-child {
-        font-size: small;
-        color: var(--kungalgame-font-color-0);
-      }
-    }
-  }
-
-  .content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    span {
-      font-size: small;
-    }
-
-    .preview {
-      color: var(--kungalgame-font-color-0);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
-    }
-
-    .read,
-    .unread {
-      margin-left: auto;
-      font-size: 12px;
-      background-color: var(--kungalgame-gray-4);
-      color: var(--kungalgame-white);
-      border-radius: 10px;
-      padding: 2px 4px;
-    }
-
-    .unread {
-      background-color: var(--kungalgame-blue-5);
-    }
-  }
-}
-</style>

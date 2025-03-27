@@ -48,30 +48,15 @@ const handlePublishGalgame = async () => {
     usePersistEditGalgameStore().resetGalgameData()
 
     navigateTo(`/galgame/${gid}`)
-    useComponentMessageStore().info('AlertInfo.edit.publishSuccess')
+    useKunLoliInfo('AlertInfo.edit.publishSuccess', 5)
   }
 }
 </script>
 
 <template>
-  <div class="confirm">
-    <KunButton @click="handlePublishGalgame">确认发布 Galgame</KunButton>
+  <div class="flex justify-end">
+    <KunButton size="lg" @click="handlePublishGalgame">
+      确认发布 Galgame
+    </KunButton>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.confirm {
-  width: 100%;
-  margin-top: 50px;
-  display: flex;
-
-  button {
-    height: 40px;
-    width: 200px;
-    font-size: 17px;
-    flex-shrink: 0;
-    border-radius: 10px;
-    margin-left: auto;
-  }
-}
-</style>

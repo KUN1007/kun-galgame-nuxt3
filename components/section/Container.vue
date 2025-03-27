@@ -1,0 +1,117 @@
+<script setup lang="ts">
+import { KUN_TOPIC_CATEGORY, KUN_TOPIC_SECTION } from '~/constants/topic'
+import { KUN_TOPIC_SECTION_DESCRIPTION_MAP } from '~/constants/section'
+
+const props = defineProps<{
+  section: string
+}>()
+const page = ref(1)
+
+const categoryMap: Record<string, string> = {
+  g: 'galgame',
+  t: 'technique',
+  o: 'others'
+}
+const category = computed(
+  () => KUN_TOPIC_CATEGORY[categoryMap[props.section[0]]]
+)
+
+const { data, status } = await useFetch(`/api/section`, {
+  method: 'GET',
+  query: {
+    section: props.section,
+    order: 'desc',
+    page,
+    limit: 30
+  },
+  ...kungalgameResponseHandler
+})
+
+watch(
+  () => status.value,
+  () => {
+    if (status.value === 'success') {
+      window?.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
+  }
+)
+</script>
+
+<template>
+  <KunCard
+    :is-hoverable="false"
+    :is-transparent="false"
+    content-class="space-y-6"
+  >
+    <KunHeader :description="KUN_TOPIC_SECTION_DESCRIPTION_MAP[section]">
+      <template #title>
+        <div class="flex items-center gap-2">
+          <KunLink
+            underline="hover"
+            :to="`/category/${categoryMap[props.section[0]]}`"
+            class-name="text-2xl font-medium"
+          >
+            {{ category }}
+          </KunLink>
+          /
+          <span class="text-lg">{{ KUN_TOPIC_SECTION[section] }}</span>
+        </div>
+      </template>
+    </KunHeader>
+
+    <KunLink
+      color="default"
+      underline="none"
+      v-for="(sec, index) in data?.topics"
+      :key="index"
+      :to="`/topic/${sec.tid}`"
+      class-name="hover:bg-primary/10 items-start flex flex-nowrap gap-2 rounded-lg p-4 transition-colors duration-200"
+    >
+      <KunAvatar :user="sec.user" />
+
+      <div class="w-full space-y-2">
+        <div class="flex items-center">
+          <div class="mr-2 font-bold">{{ sec.user.name }}</div>
+          <div class="text-default-500 text-sm">
+            {{ formatDate(sec.time, { isShowYear: true, isPrecise: true }) }}
+          </div>
+        </div>
+
+        <h2 class="hover:text-primary text-lg transition-colors">
+          {{ sec.title }}
+        </h2>
+
+        <TopicTagGroup :section="sec.section" :tags="sec.tags" />
+
+        <div class="text-default-500 line-clamp-2 text-sm break-all">
+          {{ markdownToText(sec.content) }}
+        </div>
+
+        <div class="text-default-700 flex gap-4 text-sm">
+          <div class="flex items-center gap-2 text-inherit">
+            <KunIcon name="lucide:eye" />
+            {{ sec.views }}
+          </div>
+          <div class="flex items-center gap-2 text-inherit">
+            <KunIcon name="lucide:thumbs-up" />
+            {{ sec.likes }}
+          </div>
+          <div class="flex items-center gap-2 text-inherit">
+            <KunIcon name="carbon:reply" />
+            {{ sec.replies }}
+          </div>
+        </div>
+      </div>
+    </KunLink>
+
+    <KunPagination
+      v-if="data"
+      v-model:current-page="page"
+      :total-page="Math.ceil(data.totalCount / 30)"
+      :is-loading="status === 'pending'"
+    />
+  </KunCard>
+</template>

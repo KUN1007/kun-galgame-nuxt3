@@ -10,7 +10,7 @@ const isLoadComplete = ref(false)
 const pageData = reactive({
   type: 'topic' as SearchType,
   page: 1,
-  limit: 10
+  limit: 12
 })
 
 const searchQuery = async () => {
@@ -20,7 +20,7 @@ const searchQuery = async () => {
     query: { keywords: keywords.value, ...pageData }
   })
 
-  if (result.length < 10) {
+  if (result.length < 12) {
     isLoadComplete.value = true
   }
 
@@ -62,18 +62,23 @@ const handleLoadMore = async () => {
 </script>
 
 <template>
-  <KunHeader :size="2">
-    <template #header>搜索</template>
-  </KunHeader>
-
-  <div class="container">
-    <div class="nav">
-      <KunNav
-        :items="navItems"
-        :default-value="pageData.type"
-        @set="(value) => handleSetType(value as SearchType)"
-      />
-    </div>
+  <KunCard
+    :is-hoverable="false"
+    :is-transparent="false"
+    content-class="space-y-6"
+    class-name="min-h-[calc(100dvh-6rem)]"
+  >
+    <KunHeader
+      name="搜索"
+      description="您可以在本页面搜索本论坛的所有话题, Galgame, 用户, 回复, 评论"
+    />
+    <KunTab
+      :items="navItems"
+      :model-value="pageData.type"
+      @update:model-value="(value) => handleSetType(value as SearchType)"
+      size="sm"
+      inner-class-name="shadow border bg-transparent"
+    />
 
     <SearchBox />
 
@@ -85,85 +90,24 @@ const handleLoadMore = async () => {
       v-if="results.length"
     />
 
-    <KunDivider v-if="results.length >= 10" margin="30px" padding="0 17px">
+    <KunDivider v-if="results.length >= 12">
       <slot />
-      <span
-        class="loader"
+      <KunButton
+        variant="flat"
         v-if="!isLoading && !isLoadComplete"
         @click="handleLoadMore"
       >
         加载更多
-      </span>
+      </KunButton>
       <span v-if="isLoading">少女祈祷中...</span>
       <span v-if="isLoadComplete">被榨干了呜呜呜呜呜, 一滴也不剩了</span>
     </KunDivider>
 
-    <span class="empty" v-if="!results.length && keywords && !isLoading">
-      杂鱼杂鱼杂鱼~什么也没有搜索到
-    </span>
+    <KunNull
+      v-if="!results.length && keywords && !isLoading"
+      description="杂鱼杂鱼杂鱼~什么也没有搜索到"
+    />
 
-    <span class="loading" v-if="isLoading">少女祈祷中...</span>
-  </div>
-  <KunFooter />
+    <KunLoading v-if="isLoading" />
+  </KunCard>
 </template>
-
-<style lang="scss" scoped>
-.container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.kun-divider {
-  font-size: 16px;
-
-  span {
-    &:first-child {
-      padding-left: 17px;
-    }
-
-    &:last-child {
-      padding-right: 17px;
-    }
-  }
-
-  .loader {
-    cursor: pointer;
-
-    &:hover {
-      color: var(--kungalgame-blue-5);
-    }
-  }
-}
-
-.empty {
-  display: flex;
-  justify-content: center;
-  color: var(--kungalgame-font-color-1);
-  font-style: oblique;
-  margin-top: 20px;
-}
-
-.loading {
-  display: flex;
-  justify-content: center;
-  color: var(--kungalgame-blue-2);
-  margin-top: 20px;
-}
-
-.kun-footer {
-  margin-top: auto;
-}
-
-@media (max-width: 1000px) {
-  .container {
-    width: 60vw;
-  }
-}
-
-@media (max-width: 700px) {
-  .container {
-    width: 90vw;
-  }
-}
-</style>

@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import type { GalgameDetail } from '~/types/api/galgame'
-
 const route = useRoute()
 
-const galgame = ref<GalgameDetail>()
-const isBanned = ref(false)
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
@@ -15,101 +11,62 @@ const { data } = await useFetch(`/api/galgame/${gid.value}`, {
   ...kungalgameResponseHandler
 })
 
-if (data.value === 'banned') {
-  isBanned.value = true
-} else {
-  galgame.value = data.value ?? undefined
-}
+if (data.value && data.value !== 'banned') {
+  const titleBase = getPreferredLanguageText(data.value.name)
+  const title = titleBase.concat(
+    titleBase !== data.value.name['ja-jp'] && data.value.name['ja-jp']
+      ? ` | ${data.value.name['ja-jp']}`
+      : ''
+  )
+  const description = markdownToText(
+    getPreferredLanguageText(data.value.markdown)
+  )
+    .slice(0, 175)
+    .replace(/\\|\n/g, '')
 
-if (galgame.value) {
-  const titleBase = galgame.value.name['zh-cn']
-  const title = titleBase
-    .concat(
-      titleBase !== galgame.value.name['ja-jp'] && galgame.value.name['ja-jp']
-        ? ` | ${galgame.value.name['ja-jp']}`
-        : ''
-    )
-    .concat(` - ${kungal.titleShort}`)
-  const description = markdownToText(galgame.value.introduction['zh-cn'])
+  useKunSeoMeta({
+    title,
+    description,
 
-  const keywords =
-    Object.values(galgame.value.name).join(', ') +
-    ', ' +
-    galgame.value.alias.toString()
+    ogImage: data.value.banner,
+    ogUrl: useRequestURL().href,
+    ogType: 'article',
+
+    twitterImage: data.value.banner,
+    twitterCard: 'summary_large_image',
+
+    articleAuthor: [`${kungal.domain.main}/user/${data.value.user.uid}/info`],
+    articlePublishedTime: data.value.created.toString(),
+    articleModifiedTime: data.value.updated.toString()
+  })
 
   useHead({
-    title,
-    meta: [
+    link: [
       {
-        name: 'description',
-        content: description
-      },
-      {
-        name: 'keywords',
-        content: keywords
-      },
-      {
-        name: 'og:title',
-        content: title
-      },
-      {
-        name: 'og:description',
-        content: description
-      },
-      {
-        property: 'og:image',
-        content: galgame.value.banner
-      },
-      {
-        property: 'og:type',
-        content: 'website'
-      },
-      {
-        property: 'og:url',
-        content: useRequestURL().href
-      },
-      {
-        property: 'twitter:card',
-        content: description
-      },
-      {
-        name: 'twitter:title',
-        content: title
-      },
-      {
-        name: 'twitter:description',
-        content: description
-      },
-      {
-        property: 'twitter:image',
-        content: galgame.value.banner
-      },
-      {
-        property: 'twitter:url',
-        content: useRequestURL().href
+        rel: 'canonical',
+        href: `${kungal.domain.main}/galgame/${data.value.gid}`
       }
     ]
+  })
+} else {
+  useKunSeoMeta({
+    title: data.value
+      ? '这个 Galgame 已被封禁'
+      : '未找到这个 Galgame 资源 wiki',
+    description: data.value
+      ? `这个 Galgame 由于违反了 ${kungal.titleShort} 资源发布规定, 或者被作者删除, 您可以进入 Galgame 总览页面查看其它相似 Galgame 资源 wiki`
+      : `未找到这个 Galgame, 请确认您的请求路径是否正确, 您可以进入 Galgame 页面查看其它 Galgame`
   })
 }
 </script>
 
 <template>
-  <div class="root">
-    <Galgame v-if="galgame" :galgame="galgame" />
-
-    <KunNull :condition="!galgame && !isBanned" type="404" />
-
-    <KunBlank v-if="isBanned">此 Galgame 已被封禁</KunBlank>
+  <div>
+    <Galgame v-if="data && data !== 'banned'" :galgame="data" />
+    <KunNull
+      v-if="!data && data !== 'banned'"
+      description="未找到这个 Galgame"
+    />
+    <KunNull v-if="data === 'banned'" description="此 Galgame 已被封禁" />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.root {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: 17px;
-}
-</style>

@@ -37,7 +37,8 @@ export default defineEventHandler(async (event) => {
 
   const comments: UserComment[] = data.map((comment) => ({
     tid: comment.tid,
-    content: comment.content.substring(0, 107)
+    content: comment.content.substring(0, 107),
+    time: comment.created
   }))
 
   return { comments, totalCount }

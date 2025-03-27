@@ -1,84 +1,77 @@
 <script setup lang="ts">
-import { kunLayoutItem } from '~/constants/layout'
+defineProps<{
+  className?: string
+}>()
 
-const route = useRoute()
+const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 </script>
 
 <template>
-  <div
-    class="scrollbar-hide bg-default-100 fixed flex h-full w-3xs shrink-0 flex-col justify-between overflow-y-scroll"
+  <KunCard
+    :is-hoverable="false"
+    :class-name="
+      cn(
+        'scrollbar-hide rounded-none p-0 shadow-none border-none bg-default-100 fixed z-50 flex h-full w-3xs shrink-0 flex-col justify-between overflow-y-scroll',
+        className
+      )
+    "
     @click.stop
   >
-    <div>
-      <div
-        class="flex cursor-pointer items-center gap-3 p-3"
-        @click="navigateTo('/')"
+    <div class="space-y-3 p-3">
+      <KunBrand />
+
+      <KunLayoutSideBarNav />
+
+      <KunButton
+        :full-width="true"
+        variant="light"
+        @click="showKUNGalgamePanel = !showKUNGalgamePanel"
       >
-        <!-- <NuxtImg class="size-10" src="/favicon.webp" :alt="kungal.titleShort" />
-        <span class="text-xl">{{ kungal.name }}</span>
         <span
-          class="bg-primary-100 text-primary rounded-full px-3 py-1 text-sm"
+          class="mr-3 flex items-center justify-center text-xl text-inherit"
         >
-          论坛
-        </span> -->
-        ACME
-      </div>
-
-      <div class="mt-3 flex flex-col justify-center gap-3 border-y py-6 pr-3">
-        <NuxtLink
-          v-for="(item, index) in kunLayoutItem"
-          :to="item.router"
-          :target="isValidURL(item.router) ? '_blank' : ''"
-          :key="index"
-          :class="
-            cn(
-              'flex items-center px-3 py-1',
-              route.fullPath === item.router
-                ? 'bg-primary-100 rounded-r-full font-bold'
-                : ''
-            )
-          "
-        >
-          <span
-            class="mr-3 flex items-center justify-center text-xl text-inherit"
-          >
-            <Icon class="icon text-inherit" :name="item.icon" />
-          </span>
-          <span class="text-inherit">
-            {{ item.label }}
-          </span>
-          <span class="text-primary ml-4 text-xs" v-if="item.hint">
-            {{ item.hint }}
-          </span>
-        </NuxtLink>
-      </div>
+          <KunIcon class="text-inherit" name="lucide:settings" />
+        </span>
+        <span class="text-inherit">网站设置</span>
+      </KunButton>
     </div>
 
-    <div class="my-4 flex w-full justify-around">
-      <a
-        class="flex flex-col items-center justify-center"
-        aria-label="KUN Visual Novel Open Source GitHub Repository | 鲲 Galgame 论坛开源 GitHub 仓库"
-        :href="kungal.github"
-        target="_blank"
-      >
-        <span><Icon class="icon" name="lucide:github" /></span>
-        <span class="text-xs">GitHub</span>
-      </a>
+    <div>
+      <KunLayoutSideBarExternal />
 
-      <NuxtLink class="flex flex-col items-center justify-center" to="/rss">
-        <span><Icon class="icon" name="lucide:rss" /></span>
-        <span class="text-xs">RSS</span>
-      </NuxtLink>
+      <div class="flex w-full justify-between px-7 py-6">
+        <KunLink
+          underline="none"
+          color="default"
+          class-name="flex-col gap-0"
+          :to="kungal.github"
+          target="_blank"
+        >
+          <KunIcon class="icon" name="lucide:github" />
+          <span class="text-xs">GitHub</span>
+        </KunLink>
 
-      <a
-        class="flex flex-col items-center justify-center"
-        aria-label="KUN Visual Novel Official Telegram Group"
-        :href="kungal.domain.telegram_group"
-        target="_blank"
-      >
-        <span><Icon class="icon" name="ph:telegram-logo" /></span>
-        <span class="text-xs">Telegram</span>
-      </a>
+        <KunLink
+          underline="none"
+          color="default"
+          class-name="flex-col gap-0"
+          to="/rss"
+        >
+          <KunIcon class="icon" name="lucide:rss" />
+          <span class="text-xs">RSS</span>
+        </KunLink>
+
+        <KunLink
+          underline="none"
+          color="default"
+          class-name="flex-col gap-0"
+          :to="kungal.domain.telegram_group"
+          target="_blank"
+        >
+          <KunIcon class="icon" name="ph:telegram-logo" />
+          <span class="text-xs">Telegram</span>
+        </KunLink>
+      </div>
     </div>
-  </div>
+  </KunCard>
 </template>

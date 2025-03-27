@@ -1,3 +1,33 @@
+import type { KunTabItem } from '~/components/kun/tab/type'
+import type { KunSelectOption } from '~/components/kun/select/type'
+
+export type KunGalgameResourceTypeOptions =
+  | 'all'
+  | 'game'
+  | 'patch'
+  | 'collection'
+  | 'voice'
+  | 'image'
+  | 'ai'
+  | 'others'
+
+export type KunGalgameResourceLanguageOptions =
+  | 'all'
+  | 'ja-jp'
+  | 'en-us'
+  | 'zh-cn'
+  | 'zh-tw'
+  | 'others'
+
+export type KunGalgameResourcePlatformOptions =
+  | 'all'
+  | 'windows'
+  | 'mac'
+  | 'linux'
+  | 'emulator'
+  | 'app'
+  | 'others'
+
 export const KUN_GALGAME_RESOURCE_TYPE_MAP: Record<string, string> = {
   name: '资源链接的类型',
   all: '全部类型',
@@ -10,6 +40,18 @@ export const KUN_GALGAME_RESOURCE_TYPE_MAP: Record<string, string> = {
   others: '其它'
 }
 
+export const kunGalgameResourceTypeOptions: KunSelectOption[] = [
+  { value: 'name', label: '资源链接的类型' },
+  { value: 'all', label: '全部类型' },
+  { value: 'game', label: '游戏本体' },
+  { value: 'patch', label: '补丁' },
+  { value: 'collection', label: '合集' },
+  { value: 'voice', label: '音声相关' },
+  { value: 'image', label: '图片相关' },
+  { value: 'ai', label: 'AI 相关' },
+  { value: 'others', label: '其它' }
+]
+
 export const KUN_GALGAME_RESOURCE_LANGUAGE_MAP: Record<string, string> = {
   all: '全部语言',
   'ja-jp': '日语',
@@ -18,6 +60,15 @@ export const KUN_GALGAME_RESOURCE_LANGUAGE_MAP: Record<string, string> = {
   'zh-tw': '繁体中文',
   others: '其它'
 }
+
+export const kunGalgameResourceLanguageOptions: KunSelectOption[] = [
+  { value: 'all', label: '全部语言' },
+  { value: 'ja-jp', label: '日语' },
+  { value: 'en-us', label: '英语' },
+  { value: 'zh-cn', label: '简体中文' },
+  { value: 'zh-tw', label: '繁体中文' },
+  { value: 'others', label: '其它' }
+]
 
 export const KUN_GALGAME_RESOURCE_PLATFORM_MAP: Record<string, string> = {
   name: '资源链接的平台',
@@ -30,11 +81,28 @@ export const KUN_GALGAME_RESOURCE_PLATFORM_MAP: Record<string, string> = {
   others: '其它'
 }
 
+export const kunGalgameResourcePlatformOptions: KunSelectOption[] = [
+  { value: 'name', label: '资源链接的平台' },
+  { value: 'all', label: '全部平台' },
+  { value: 'windows', label: 'Windows' },
+  { value: 'mac', label: 'macOS' },
+  { value: 'linux', label: 'Linux' },
+  { value: 'emulator', label: '模拟器' },
+  { value: 'app', label: '应用直装' },
+  { value: 'others', label: '其它' }
+]
+
 export const KUN_GALGAME_RESOURCE_SORT_FIELD_MAP: Record<string, string> = {
   views: '浏览顺序',
   time: '更新顺序',
   created: '创建顺序'
 }
+
+export const kunGalgameSortFieldOptions: KunSelectOption[] = [
+  { value: 'views', label: '浏览顺序' },
+  { value: 'time', label: '更新顺序' },
+  { value: 'created', label: '创建顺序' }
+]
 
 export const KUN_GALGAME_RESOURCE_PULL_REQUEST_STATUS_MAP: Record<
   number,
@@ -88,3 +156,42 @@ export const KUN_GALGAME_RESOURCE_PULL_REQUEST_I18N_FIELD_MAP: Record<
   official: '官网',
   engine: '引擎'
 }
+
+export const galgameIntroductionLanguageTabs: KunTabItem[] = [
+  {
+    textValue: '英语标题',
+    value: 'en-us'
+  },
+  {
+    textValue: '日语标题',
+    value: 'ja-jp'
+  },
+  {
+    textValue: '简体中文',
+    value: 'zh-cn'
+  },
+  {
+    textValue: '繁体中文',
+    value: 'zh-tw'
+  }
+]
+
+export type GalgameDetailSectionTabType = 'comment' | 'history' | 'pr' | 'link'
+export const galgameDetailSectionTabs: KunTabItem[] = [
+  {
+    textValue: '游戏评论',
+    value: 'comment'
+  },
+  {
+    textValue: '相关链接',
+    value: 'link'
+  },
+  {
+    textValue: '贡献历史',
+    value: 'history'
+  },
+  {
+    textValue: '更新请求',
+    value: 'pr'
+  }
+]

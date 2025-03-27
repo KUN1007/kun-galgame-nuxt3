@@ -23,18 +23,20 @@ watch(
     :style="{ backgroundImage: `url(${imageURL})` }"
   />
 
-  <KunLayoutSidebar />
+  <div class="hidden md:block">
+    <KunLayoutSidebar />
+  </div>
+
+  <KunTopBar />
 
   <div
     class="flex min-h-dvh justify-center overflow-hidden"
     :style="{ 'background-color': 'hsl(var(--background))' }"
   >
-    <div class="z-10 m-0 w-full max-w-7xl md:mr-3 md:ml-68">
-      <div class="sticky top-[0] z-1007">
-        <KunTopBar />
+    <div class="z-10 w-full max-w-7xl md:mr-3 md:ml-68">
+      <div class="h-full px-1 pt-19 pb-3 sm:px-0">
+        <NuxtPage />
       </div>
-
-      <slot />
 
       <NuxtImg
         v-if="showKUNGalgameBackLoli"

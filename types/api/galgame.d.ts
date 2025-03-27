@@ -35,6 +35,8 @@ export interface GalgameDetail {
   engine: string[]
   tags: string[]
   series: number[]
+  created: Date | string
+  updated: Date | string
 }
 
 export interface GalgamePageRequestData {

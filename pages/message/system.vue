@@ -1,7 +1,10 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'message',
   middleware: 'auth'
+})
+
+useKunSeoMeta({
+  title: '系统消息'
 })
 
 const pageData = reactive({
@@ -30,51 +33,24 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="container" v-if="data">
-    <header>
-      <NuxtLink to="/message">
-        <Icon class="icon" name="lucide:chevron-left" />
-      </NuxtLink>
-      <h2>系统消息</h2>
+  <div class="flex w-full flex-col space-y-3" v-if="data">
+    <header class="flex items-center gap-2">
+      <KunButton size="lg" :is-icon-only="true" variant="light" href="/message">
+        <KunIcon name="lucide:chevron-left" />
+      </KunButton>
+      <h2 class="text-lg">系统消息</h2>
     </header>
 
-    <KunDivider margin="7px 0" />
+    <KunDivider />
 
-    <template v-for="(message, index) in data" :key="index">
-      <MessageAsideSystem :message="message" />
+    <div v-if="data.length" class="scrollbar-hide h-full overflow-y-auto">
+      <MessageAsideSystem
+        v-for="(message, index) in data"
+        :key="index"
+        :message="message"
+      />
+    </div>
 
-      <KunDivider margin="7px 0" />
-    </template>
-
-    <KunNull :condition="!data.length" type="null" />
+    <KunNull v-if="!data.length" />
   </div>
 </template>
-
-<style lang="scss" scoped>
-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-
-  a {
-    font-size: 24px;
-    margin-right: 10px;
-    color: var(--kungalgame-font-color-3);
-
-    &:hover {
-      color: var(--kungalgame-blue-5);
-    }
-  }
-
-  h2 {
-    &::before {
-      content: '';
-      margin: 0;
-    }
-  }
-}
-
-.container {
-  width: 100%;
-}
-</style>

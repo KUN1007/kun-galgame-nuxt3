@@ -1,77 +1,77 @@
 <script setup lang="ts">
-import type { TopicReply } from '~/types/api/topic-reply'
+import {
+  topicSortFieldOptions,
+  topicSortCategoryOptions,
+  KUN_TOPIC_PAGE_SORT_FIELD,
+  KUN_TOPIC_CATEGORY
+} from '~/constants/topic'
+import { pageData } from './pageData'
 
-defineProps<{
-  replyData: TopicReply[]
-  pending: boolean
-  sortOrder: 'asc' | 'desc'
-}>()
-
-const emits = defineEmits<{
-  setSortOrder: [value: 'asc' | 'desc']
-}>()
+const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
 </script>
 
 <template>
-  <div class="tool" v-if="replyData && replyData.length > 5">
-    <div class="order">
-      <span
-        :class="sortOrder === 'asc' ? 'active' : ''"
-        @click="emits('setSortOrder', 'asc')"
+  <div
+    class="bg-background flex flex-wrap justify-between gap-2 rounded-lg border p-3 shadow"
+  >
+    <div class="flex w-96 gap-2">
+      <KunSelect
+        :model-value="pageData.sortField"
+        :options="topicSortFieldOptions"
+        @set="
+          (value) => (pageData.sortField = value as typeof pageData.sortField)
+        "
       >
-        <Icon class="icon" name="lucide:arrow-up" />
-      </span>
-      <span
-        :class="sortOrder === 'desc' ? 'active' : ''"
-        @click="emits('setSortOrder', 'desc')"
+        <span>{{ KUN_TOPIC_PAGE_SORT_FIELD[pageData.sortField] }}</span>
+      </KunSelect>
+
+      <KunSelect
+        :options="topicSortCategoryOptions"
+        :model-value="pageData.category"
+        @set="
+          (value) => (pageData.category = value as typeof pageData.category)
+        "
       >
-        <Icon class="icon" name="lucide:arrow-down" />
-      </span>
+        <span>{{ KUN_TOPIC_CATEGORY[pageData.category] }}</span>
+      </KunSelect>
     </div>
 
-    <span class="pending" v-if="pending">少女祈祷中...</span>
+    <div class="flex items-center gap-2">
+      <KunButton
+        :is-icon-only="true"
+        :variant="layout === 'grid' ? 'flat' : 'light'"
+        size="lg"
+        @click="layout = 'grid'"
+      >
+        <KunIcon class="text-inherit" name="lucide:layout-grid" />
+      </KunButton>
+
+      <KunButton
+        :is-icon-only="true"
+        :variant="layout === 'list' ? 'flat' : 'light'"
+        size="lg"
+        @click="layout = 'list'"
+      >
+        <KunIcon class="text-inherit" name="lucide:list" />
+      </KunButton>
+
+      <KunButton
+        :is-icon-only="true"
+        :variant="pageData.sortOrder === 'desc' ? 'flat' : 'light'"
+        size="lg"
+        @click="pageData.sortOrder = 'desc'"
+      >
+        <KunIcon class="text-inherit" name="lucide:arrow-down" />
+      </KunButton>
+
+      <KunButton
+        :is-icon-only="true"
+        :variant="pageData.sortOrder === 'asc' ? 'flat' : 'light'"
+        size="lg"
+        @click="pageData.sortOrder = 'asc'"
+      >
+        <KunIcon class="text-inherit" name="lucide:arrow-up" />
+      </KunButton>
+    </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.tool {
-  padding: 10px;
-  margin-bottom: 17px;
-  display: flex;
-  align-items: center;
-}
-
-.order {
-  display: flex;
-  white-space: nowrap;
-
-  .icon {
-    font-size: 20px;
-  }
-
-  & > span {
-    display: flex;
-    cursor: pointer;
-    padding: 3px 10px;
-    margin-right: 5px;
-    border-radius: 10px;
-  }
-
-  .active {
-    box-shadow: var(--shadow);
-    color: var(--kungalgame-blue-5);
-  }
-}
-
-.pending {
-  margin-left: 10px;
-  color: var(--kungalgame-font-color-0);
-  user-select: none;
-}
-
-@media (max-width: 700px) {
-  .tool {
-    margin-bottom: 7px;
-  }
-}
-</style>

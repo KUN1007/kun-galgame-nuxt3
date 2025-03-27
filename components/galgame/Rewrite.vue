@@ -19,24 +19,20 @@ const handleRewriteGalgame = (galgame: GalgameDetail) => {
     engine,
     tags
   }
-  navigateTo(`/edit/galgame?type=pr&gid=${galgame.gid}`)
+  navigateTo('/edit/galgame/rewrite')
 }
 </script>
 
 <template>
-  <span class="rewrite" @click="handleRewriteGalgame(galgame)">
-    <Icon class="icon" name="lucide:pencil" />
-  </span>
+  <KunTooltip text="重新编辑">
+    <KunButton
+      :is-icon-only="true"
+      variant="light"
+      color="default"
+      size="lg"
+      @click="handleRewriteGalgame(galgame)"
+    >
+      <KunIcon name="lucide:pencil" />
+    </KunButton>
+  </KunTooltip>
 </template>
-
-<style lang="scss" scoped>
-.rewrite {
-  color: var(--kungalgame-font-color-2);
-  cursor: pointer;
-  display: flex;
-
-  .icon {
-    font-size: 24px;
-  }
-}
-</style>

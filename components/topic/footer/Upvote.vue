@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { KunTooltip } from '#components'
+
 const props = defineProps<{
   tid?: number
   rid?: number
@@ -7,7 +9,7 @@ const props = defineProps<{
   isUpvoted: boolean
 }>()
 
-const { uid, moemoeAccessToken, moemoepoint } = usePersistUserStore()
+const { uid, moemoepoint } = usePersistUserStore()
 const isUpvoted = ref(props.isUpvoted)
 const upvoteCount = ref(props.upvoteCount)
 
@@ -57,7 +59,7 @@ const upvoteReply = async () => {
 }
 
 const handleClickUpvote = async () => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10240, 'warn', 5000)
     return
   }
@@ -81,40 +83,17 @@ const handleClickUpvote = async () => {
 </script>
 
 <template>
-  <span
-    class="upvote"
-    :class="isUpvoted ? 'active' : ''"
-    @click="handleClickUpvote"
-  >
-    <Icon class="icon" name="lucide:sparkles" />
-    <span v-if="upvoteCount">{{ upvoteCount }}</span>
-  </span>
+  <KunTooltip text="推！">
+    <KunButton
+      :is-icon-only="true"
+      :variant="isUpvoted ? 'flat' : 'light'"
+      :color="isUpvoted ? 'secondary' : 'default'"
+      :size="upvoteCount ? 'md' : 'lg'"
+      class-name="gap-1"
+      @click="handleClickUpvote"
+    >
+      <KunIcon class="icon" name="lucide:sparkles" />
+      <span v-if="upvoteCount">{{ upvoteCount }}</span>
+    </KunButton>
+  </KunTooltip>
 </template>
-
-<style lang="scss" scoped>
-.upvote {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 0;
-  color: var(--kungalgame-font-color-2);
-
-  .icon {
-    cursor: pointer;
-    font-size: 24px;
-    margin-right: 3px;
-  }
-}
-
-.active .icon {
-  color: var(--kungalgame-red-4);
-}
-
-@media (max-width: 700px) {
-  .upvote {
-    .icon {
-      font-size: initial;
-    }
-  }
-}
-</style>

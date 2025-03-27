@@ -1,14 +1,19 @@
 import { isValidURL } from '~/utils/validate'
 import {
-  typeOptions,
-  languageOptions,
-  platformOptions
-} from '~/components/galgame/utils/options'
+  kunGalgameResourceTypeOptions,
+  kunGalgameResourceLanguageOptions,
+  kunGalgameResourcePlatformOptions
+} from '~/constants/galgame'
 import { ResourceSizePattern } from '~/utils/pattern'
 import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
 
 export const checkGalgameResourcePublish = (link: GalgameResourceStoreTemp) => {
-  if (!typeOptions.filter((item) => item !== 'all').includes(link.type)) {
+  if (
+    !kunGalgameResourceTypeOptions
+      .map((type) => type.value)
+      .filter((item) => item !== 'all')
+      .includes(link.type)
+  ) {
     return 10613
   }
 
@@ -27,13 +32,19 @@ export const checkGalgameResourcePublish = (link: GalgameResourceStoreTemp) => {
   }
 
   if (
-    !languageOptions.filter((item) => item !== 'all').includes(link.language)
+    !kunGalgameResourceLanguageOptions
+      .map((lang) => lang.value)
+      .filter((item) => item !== 'all')
+      .includes(link.language)
   ) {
     return 10616
   }
 
   if (
-    !platformOptions.filter((item) => item !== 'all').includes(link.platform)
+    !kunGalgameResourcePlatformOptions
+      .map((platform) => platform.value)
+      .filter((item) => item !== 'all')
+      .includes(link.platform)
   ) {
     return 10617
   }

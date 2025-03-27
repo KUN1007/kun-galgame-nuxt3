@@ -32,29 +32,12 @@ const handleInput = debounce(() => {
 </script>
 
 <template>
-  <div class="title">
-    <input
-      type="text"
-      placeholder="标题"
-      v-model="topicTitle"
-      @input="handleInput"
-      :maxlength="maxInputLength"
-    />
-  </div>
+  <KunInput
+    type="text"
+    placeholder="文章标题"
+    v-model="topicTitle"
+    @input="handleInput"
+    :maxlength="maxInputLength"
+    size="xl"
+  />
 </template>
-
-<style lang="scss" scoped>
-.title {
-  padding: 10px;
-  width: 100%;
-
-  input {
-    background-color: var(--kungalgame-white-9);
-    color: var(--kungalgame-font-color-2);
-    padding: 7px;
-    width: 100%;
-    font-size: 40px;
-    border: none;
-  }
-}
-</style>

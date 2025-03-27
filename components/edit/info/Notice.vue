@@ -33,13 +33,13 @@ const isShowRequestHelpNotice = computed(() => {
       </li>
       <li>
         3. 请您阅读
-        <a
-          href="https://www.kungal.com/zh-cn/topic/1223"
+        <KunLink
+          to="https://www.kungal.com/zh-cn/topic/1223"
           target="_blank"
           rel="noopener noreferrer"
         >
           此话题
-        </a>
+        </KunLink>
         , 确认此话题中提到的网站没有您要找的游戏
       </li>
     </ul>
@@ -60,37 +60,16 @@ const isShowRequestHelpNotice = computed(() => {
       </li>
       <li>
         3. 请您阅读
-        <a
-          href="https://www.kungal.com/zh-cn/topic/1483"
+        <KunLink
+          to="https://www.kungal.com/zh-cn/topic/1483"
           target="_blank"
           rel="noopener noreferrer"
         >
           此话题
-        </a>
+        </KunLink>
         , 以明确提出您的问题, 方便我们更好的理解问题, 从而帮您解决问题
       </li>
     </ul>
     <p>如果您在尝试以上两点, 仍然解决不了您的问题, 我们很乐意帮助您</p>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.tip {
-  margin-bottom: 17px;
-
-  ul {
-    padding-left: 17px;
-    font-size: 15px;
-
-    a {
-      font-weight: bold;
-      color: var(--kungalgame-blue-5);
-    }
-
-    li {
-      list-style: none;
-      margin-bottom: 5px;
-    }
-  }
-}
-</style>

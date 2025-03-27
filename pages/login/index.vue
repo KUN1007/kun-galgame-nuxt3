@@ -1,29 +1,19 @@
 <script setup lang="ts">
+useKunSeoMeta({
+  title: '登录',
+  description: `登录 ${kungal.titleShort}, 世界上最萌的 Galgame 论坛! 欢迎回家! 登录即可获取最新的 Galgame 更新信息, 下载信息, 资源信息等`
+})
+
 useHead({
-  title: `登录 - ${kungal.titleShort}`,
-  meta: [
+  link: [
     {
-      name: 'description',
-      content: '登录 鲲 Galgame 论坛, 世界上最萌的 Galgame 论坛! 欢迎回家!'
+      rel: 'canonical',
+      href: `${kungal.domain.main}/login`
     }
   ]
 })
 </script>
 
 <template>
-  <div class="root">
-    <Login />
-
-    <KunFooter />
-  </div>
+  <Login />
 </template>
-
-<style lang="scss" scoped>
-.root {
-  flex-direction: column;
-  height: 100%;
-  min-height: calc(100dvh - 75px);
-  max-width: 80rem;
-  margin: 0 auto;
-}
-</style>

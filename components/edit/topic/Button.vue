@@ -14,12 +14,10 @@ const {
   tags: rewriteTags,
   category: rewriteCategory,
   section: rewriteSection,
-  textCount: rewriteTextCount,
   isTopicRewriting
 } = storeToRefs(useTempEditStore())
 
 const {
-  textCount,
   title,
   content,
   tags,
@@ -31,6 +29,7 @@ const isPublishing = ref(false)
 const section = isTopicRewriting.value ? rewriteSection : editSection
 
 const handlePublish = async () => {
+  const textCount = markdownToText(content.value).trim().length
   const requestData: EditCreateTopicRequestData = {
     title: title.value,
     content: content.value,
@@ -39,7 +38,7 @@ const handlePublish = async () => {
     category: category.value,
     section: editSection.value
   }
-  if (!checkTopicPublish(textCount.value, requestData)) {
+  if (!checkTopicPublish(textCount, requestData)) {
     return
   }
 
@@ -64,12 +63,13 @@ const handlePublish = async () => {
 
   if (tid) {
     navigateTo(`/topic/${tid}`)
-    useComponentMessageStore().info('发布成功')
+    useKunLoliInfo('发布成功', 5)
     usePersistEditTopicStore().resetTopicData()
   }
 }
 
 const handleRewrite = async () => {
+  const textCount = markdownToText(rewriteContent.value).trim().length
   const requestData: EditUpdateTopicRequestData = {
     tid: tid.value,
     title: rewriteTitle.value,
@@ -79,7 +79,7 @@ const handleRewrite = async () => {
     section: rewriteSection.value,
     edited: Date.now().toString()
   }
-  if (!checkTopicPublish(rewriteTextCount.value, requestData)) {
+  if (!checkTopicPublish(textCount, requestData)) {
     return
   }
 
@@ -104,7 +104,7 @@ const handleRewrite = async () => {
 
   if (result) {
     navigateTo(`/topic/${tid.value}`)
-    useComponentMessageStore().info('重新编辑成功')
+    useKunLoliInfo('重新编辑成功', 5)
     useTempEditStore().resetRewriteTopicData()
   }
 }
@@ -125,91 +125,26 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 </script>
 
 <template>
-  <div class="btn-container">
-    <div class="section">
-      <Icon class="icon" name="lucide:layout-grid" />
-      <p v-for="(kun, index) in section" :key="index">
-        <Icon class="icon" :name="iconMap[kun[0]]" />
-        <span>
-          {{ KUN_TOPIC_SECTION[kun] }}
-        </span>
-      </p>
-    </div>
+  <div class="flex flex-wrap items-center justify-between">
+    <TopicDetailSection size="md" :section="section" />
 
     <KunButton
       v-if="!isTopicRewriting"
       class="confirm-btn"
       @click="handlePublish"
+      size="lg"
       :disabled="isPublishing"
     >
       确认发布
     </KunButton>
 
     <KunButton
-      type="danger"
       v-if="isTopicRewriting"
       class="rewrite-btn"
+      size="lg"
       @click="handleRewrite"
     >
       确认 Rewrite
     </KunButton>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.btn-container {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  button {
-    height: 40px;
-    width: 200px;
-    font-size: 17px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-}
-
-.section {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  color: var(--kungalgame-font-color-1);
-
-  .icon {
-    font-size: 20px;
-    margin-right: 10px;
-  }
-
-  p {
-    margin: 3px;
-    padding: 3px 17px;
-    background-color: var(--kungalgame-trans-blue-0);
-    border: 1px solid var(--kungalgame-blue-5);
-    color: var(--kungalgame-blue-5);
-    border-radius: 7px;
-    display: flex;
-    align-items: center;
-    user-select: none;
-  }
-}
-
-@media (max-width: 700px) {
-  .btn-container {
-    flex-direction: column;
-    align-items: initial;
-
-    button {
-      width: 150px;
-      margin: auto;
-    }
-  }
-
-  .section {
-    margin-bottom: 25px;
-  }
-}
-</style>

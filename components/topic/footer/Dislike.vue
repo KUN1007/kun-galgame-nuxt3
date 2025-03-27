@@ -7,7 +7,7 @@ const props = defineProps<{
   isDisliked: boolean
 }>()
 
-const { uid, moemoeAccessToken } = usePersistUserStore()
+const { uid } = usePersistUserStore()
 const isDisliked = ref(props.isDisliked)
 const dislikesCount = ref(props.dislikesCount)
 
@@ -48,7 +48,7 @@ const handleClickDislikeThrottled = throttle(toggleDislike, 1007, () =>
 )
 
 const handleClickDislike = () => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10228, 'warn', 5000)
     return
   }
@@ -61,40 +61,17 @@ const handleClickDislike = () => {
 </script>
 
 <template>
-  <span
-    class="dislike"
-    :class="isDisliked ? 'active' : ''"
-    @click="handleClickDislike"
-  >
-    <Icon class="icon" name="lucide:thumbs-down" />
-    <span v-if="dislikesCount">{{ dislikesCount }}</span>
-  </span>
+  <KunTooltip text="点踩">
+    <KunButton
+      :is-icon-only="true"
+      :variant="isDisliked ? 'flat' : 'light'"
+      :color="isDisliked ? 'secondary' : 'default'"
+      :size="dislikesCount ? 'md' : 'lg'"
+      class-name="gap-1"
+      @click="handleClickDislike"
+    >
+      <KunIcon class="icon" name="lucide:thumbs-down" />
+      <span v-if="dislikesCount">{{ dislikesCount }}</span>
+    </KunButton>
+  </KunTooltip>
 </template>
-
-<style lang="scss" scoped>
-.dislike {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 0;
-  color: var(--kungalgame-font-color-2);
-
-  .icon {
-    cursor: pointer;
-    font-size: 24px;
-    margin-right: 3px;
-  }
-}
-
-.active .icon {
-  color: var(--kungalgame-red-4);
-}
-
-@media (max-width: 700px) {
-  .dislike {
-    .icon {
-      font-size: initial;
-    }
-  }
-}
-</style>

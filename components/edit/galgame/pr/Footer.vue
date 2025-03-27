@@ -65,30 +65,13 @@ const handlePublishGalgamePR = async () => {
     navigateTo(`/galgame/${pullRequest.gid}`, {
       replace: true
     })
-    useComponentMessageStore().info('创建更新请求成功')
+    useKunLoliInfo('创建更新请求成功', 5)
   }
 }
 </script>
 
 <template>
-  <div class="confirm">
-    <KunButton @click="handlePublishGalgamePR">确定发布</KunButton>
+  <div class="flex justify-end">
+    <KunButton size="lg" @click="handlePublishGalgamePR">确定发布</KunButton>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.confirm {
-  width: 100%;
-  margin-top: 50px;
-  display: flex;
-
-  button {
-    height: 40px;
-    width: 200px;
-    font-size: 17px;
-    flex-shrink: 0;
-    border-radius: 10px;
-    margin-left: auto;
-  }
-}
-</style>

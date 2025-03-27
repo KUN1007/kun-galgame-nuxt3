@@ -7,7 +7,7 @@ const props = defineProps<{
   likes: number[]
 }>()
 
-const { uid, moemoeAccessToken } = usePersistUserStore()
+const { uid } = usePersistUserStore()
 const isLiked = ref(props.likes.includes(uid))
 const likesCount = ref(props.likes.length)
 
@@ -40,7 +40,7 @@ const likeResource = async () => {
 }
 
 const handleClickLike = async () => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10532, 'warn', 5000)
     return
   }
@@ -49,23 +49,17 @@ const handleClickLike = async () => {
 </script>
 
 <template>
-  <span class="like" :class="isLiked ? 'active' : ''" @click="handleClickLike">
-    <Icon class="icon" name="lucide:thumbs-up" />
-    <span v-if="likesCount">{{ likesCount }}</span>
-  </span>
+  <KunTooltip text="点赞">
+    <KunButton
+      :is-icon-only="true"
+      :variant="isLiked ? 'flat' : 'light'"
+      :color="isLiked ? 'secondary' : 'default'"
+      :size="likesCount ? 'sm' : 'md'"
+      class-name="gap-1"
+      @click="handleClickLike"
+    >
+      <KunIcon name="lucide:thumbs-up" />
+      <span v-if="likesCount">{{ likesCount }}</span>
+    </KunButton>
+  </KunTooltip>
 </template>
-
-<style lang="scss" scoped>
-.like {
-  color: var(--kungalgame-font-color-2);
-  cursor: pointer;
-
-  .icon {
-    margin-right: 3px;
-  }
-}
-
-.active .icon {
-  color: var(--kungalgame-red-4);
-}
-</style>

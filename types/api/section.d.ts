@@ -16,6 +16,7 @@ export interface SectionTopic {
   title: string
   content: string
   time: number
+  section: string[]
   tags: string[]
   views: number
   likes: number

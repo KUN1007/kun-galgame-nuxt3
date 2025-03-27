@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Milkdown core
-import { Editor, rootCtx, rootAttrsCtx, defaultValueCtx } from '@milkdown/core'
+import { Editor, rootCtx, defaultValueCtx } from '@milkdown/core'
 import { Milkdown, useEditor } from '@milkdown/vue'
 import { commonmark } from '@milkdown/preset-commonmark'
 import { gfm } from '@milkdown/preset-gfm'
@@ -13,22 +13,22 @@ import { indent } from '@milkdown/plugin-indent'
 import { trailing } from '@milkdown/plugin-trailing'
 import { usePluginViewFactory } from '@prosemirror-adapter/vue'
 import { upload, uploadConfig } from '@milkdown/plugin-upload'
-import { kunUploader, kunUploadWidgetFactory } from './plugins/uploader'
-import { insertLinkPlugin } from './plugins/hyperlinkInsert'
 import { automd } from '@milkdown/plugin-automd'
-// KUN Visual Novel Custom tooltip
-import { tooltipFactory } from '@milkdown/plugin-tooltip'
-import Tooltip from './plugins/Tooltip.vue'
-import LinkUpdatePopup from './plugins/LinkUpdatePopup.vue'
-// Custom text size calculate
-import Footer from './plugins/Footer.vue'
-import { $prose } from '@milkdown/utils'
-import { Plugin } from '@milkdown/prose/state'
 
-// Milkdown Math plugin styles
-// import 'katex/dist/katex.min.css'
-// KUN Visual Novel style
-import '~/styles/editor/index.scss'
+// Custom plugins
+import { kunUploader, kunUploadWidgetFactory } from './plugins/upload/uploader'
+import { tooltipFactory } from '@milkdown/plugin-tooltip'
+import Tooltip from './plugins/tooltip/Tooltip.vue'
+import { replaceAll } from '@milkdown/utils'
+import {
+  stopLinkCommand,
+  linkCustomKeymap
+} from './plugins/stop-link/stopLinkPlugin'
+import {
+  placeholderPlugin,
+  placeholderCtx
+} from './plugins/placeholder/placeholderPlugin'
+// import { spoiler } from './plugins/spoiler/spoilerPlugin'
 
 // Syntax highlight
 import bash from 'refractor/lang/bash'
@@ -54,17 +54,14 @@ import markdown from 'refractor/lang/markdown'
 
 const props = defineProps<{
   valueMarkdown: string
-  editorHeight: string
-  isShowMenu: boolean
+  language: Language
 }>()
 
 const emits = defineEmits<{
-  saveMarkdown: [editorMarkdown: string]
+  saveMarkdown: [markdown: string]
 }>()
 
-const editorHeight = computed(() => props.editorHeight + 'px')
 const valueMarkdown = computed(() => props.valueMarkdown)
-const isShowMenu = computed(() => props.isShowMenu)
 
 const tooltip = tooltipFactory('Text')
 const linkUpdatePopup = tooltipFactory('linkUpdate')
@@ -77,10 +74,6 @@ const editorInfo = useEditor((root) =>
   Editor.make()
     .config((ctx) => {
       ctx.set(rootCtx, root)
-      ctx.set(rootAttrsCtx, {
-        roles: 'kun-galgame-milkdown-editor',
-        'aria-label': 'kun-galgame-milkdown-editor'
-      })
       ctx.set(defaultValueCtx, valueMarkdown.value)
 
       const listener = ctx.get(listenerCtx)
@@ -122,19 +115,17 @@ const editorInfo = useEditor((root) =>
         }
       })
 
-      useTempEditStore().editorContext = ctx
-
       ctx.set(tooltip.key, {
         view: pluginViewFactory({
           component: Tooltip
         })
       })
 
-      ctx.set(linkUpdatePopup.key, {
-        view: pluginViewFactory({
-          component: LinkUpdatePopup
-        })
-      })
+      // ctx.set(linkUpdatePopup.key, {
+      //   view: pluginViewFactory({
+      //     component: LinkUpdatePopup
+      //   })
+      // })
     })
     .use(history)
     .use(commonmark)
@@ -147,86 +138,39 @@ const editorInfo = useEditor((root) =>
     .use(tooltip)
     .use(linkUpdatePopup)
     .use(upload)
-    .use(insertLinkPlugin)
     .use(automd)
-    // Add custom plugin view, calculate markdown text size
     .use(
-      $prose(
-        () =>
-          new Plugin({
-            view: pluginViewFactory({
-              component: Footer,
-              root: () => (container.value ? container.value : root)
-            })
-          })
-      )
+      [
+        stopLinkCommand,
+        linkCustomKeymap,
+        placeholderCtx,
+        placeholderPlugin
+      ].flat()
     )
+)
+
+const textCount = computed(() => markdownToText(props.valueMarkdown).length)
+
+watch(
+  () => [props.language],
+  () => {
+    editorInfo.get()?.action(replaceAll(valueMarkdown.value))
+  }
 )
 </script>
 
 <template>
-  <div ref="container" class="editor-container">
+  <div ref="container" class="space-y-3">
     <KunMilkdownPluginsMenu
       ref="toolbar"
-      v-if="isShowMenu"
       :editor-info="editorInfo"
       :is-show-upload-image="true"
     />
+    <Milkdown />
 
-    <Milkdown class="kungalgame-content" />
-
-    <div class="loading" v-if="editorInfo.loading.value">
-      <span>
-        <Icon class="icon" name="svg-spinners:12-dots-scale-rotate" />
-      </span>
-      <span>正在加载编辑器...</span>
+    <div class="flex items-center justify-between text-sm">
+      <slot />
+      <span> {{ `${textCount} 字` }} </span>
     </div>
   </div>
 </template>
-
-<style lang="scss">
-@use '~/styles/editor/kun-content.scss';
-</style>
-
-<style lang="scss" scoped>
-.kungalgame-content {
-  position: relative;
-  width: 100%;
-
-  :deep(.milkdown) {
-    width: 100%;
-    padding: 10px;
-
-    /* Silence css check, not compatible katex */
-    * &:not(.katex-html) {
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    & > div:nth-child(1) {
-      transition: all 0.2s;
-      margin: 0 auto;
-      min-height: v-bind(editorHeight);
-    }
-  }
-}
-
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  height: calc(v-bind(editorHeight) + 61px);
-
-  span {
-    margin-left: 20px;
-    font-size: large;
-    font-style: oblique;
-    color: var(--kungalgame-blue-5);
-
-    &:nth-child(1) {
-      font-size: 50px;
-    }
-  }
-}
-</style>

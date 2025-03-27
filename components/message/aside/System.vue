@@ -7,67 +7,29 @@ defineProps<{
 </script>
 
 <template>
-  <div class="message" :class="message.status === 'read' ? 'message-read' : ''">
-    <div class="title">
-      <div class="status">
-        <Icon
-          class="unread"
+  <div
+    class="space-y-3 rounded-lg p-2"
+    :class="message.status === 'read' ? 'message-read' : ''"
+  >
+    <div class="flex items-center break-all">
+      <div class="ml-2 text-lg">
+        <KunIcon
+          class="text-secondary"
           v-if="message.status === 'unread'"
           name="lucide:info"
         />
-        <Icon
-          class="read"
+        <KunIcon
+          class="text-default"
           v-if="message.status === 'read'"
           name="lucide:check-check"
         />
       </div>
-      <KunAvatar :user="message.admin" size="32px" />
-      <span class="time">
+      <KunAvatar :user="message.admin" />
+      <span class="text-default-500 text-sm">
         {{ formatTimeDifference(message.time) }}
       </span>
     </div>
 
-    <div class="content" v-html="message.content['zh-cn']" />
+    <div class="leading-8 break-all" v-html="message.content['zh-cn']" />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.message {
-  padding: 10px;
-  border-radius: 5px;
-
-  .title {
-    word-break: break-all;
-    display: flex;
-    align-items: center;
-
-    .status {
-      display: flex;
-      margin-right: 10px;
-      font-size: 18px;
-
-      .unread {
-        color: var(--kungalgame-red-5);
-      }
-
-      .read {
-        color: var(--kungalgame-blue-5);
-      }
-    }
-
-    .time {
-      color: var(--kungalgame-font-color-0);
-      font-size: small;
-      font-weight: initial;
-      margin-left: 17px;
-      white-space: nowrap;
-    }
-  }
-
-  .content {
-    margin-top: 10px;
-    word-break: break-all;
-    line-height: 1.5rem;
-  }
-}
-</style>

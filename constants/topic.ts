@@ -1,7 +1,9 @@
+import type { KunSelectOption } from '~/components/kun/select/type'
+
 export const KUN_TOPIC_CATEGORY: Record<string, string> = {
   galgame: 'Galgame',
   technique: '技术交流',
-  others: '其它'
+  others: '其它话题'
 }
 
 export const KUN_TOPIC_SECTION: Record<string, string> = {
@@ -52,3 +54,15 @@ export const KUN_TOPIC_REPLY_PANEL_POSITION_MAP: Record<string, string> = {
   master: '狗修金',
   reply: '杂鱼~♡'
 }
+
+export const topicSortFieldOptions: KunSelectOption[] = [
+  { value: 'created', label: '创建时间' },
+  { value: 'views', label: '浏览量' }
+]
+
+export const topicSortCategoryOptions: KunSelectOption[] = [
+  { value: 'all', label: '全部类型' },
+  { value: 'galgame', label: 'Galgame' },
+  { value: 'technique', label: '技术交流' },
+  { value: 'others', label: '其它' }
+]

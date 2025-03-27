@@ -1,7 +1,6 @@
 import tailwindcss from '@tailwindcss/vite'
 import fs from 'fs'
 import path from 'path'
-import { kungal } from './config/kungal'
 
 const packageJson = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, 'package.json'), 'utf-8')
@@ -16,38 +15,11 @@ export default defineNuxtConfig({
     scanPageMeta: true
   },
 
-  compatibilityDate: '2024-09-29',
+  compatibilityDate: '2024-11-01',
 
   devServer: {
     host: '127.0.0.1',
     port: 1007
-  },
-
-  app: {
-    head: {
-      htmlAttrs: {
-        lang: 'zh-Hans'
-      },
-      titleTemplate: kungal.titleTemplate,
-      meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'format-detection', content: 'telephone=no' },
-        {
-          name: 'description',
-          content: kungal.description
-        },
-        { name: 'theme-color', content: kungal.themeColor },
-        { property: 'og:site_name', content: kungal.titleShort },
-        { property: 'og:type', content: 'website' },
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:site', content: kungal.creator.mention }
-      ],
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'canonical', href: kungal.domain.main }
-      ]
-    }
   },
 
   modules: [
@@ -56,10 +28,10 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxtjs/color-mode',
     '@nuxtjs/sitemap',
+    '@nuxt/content',
     '@pinia/nuxt',
     '@vite-pwa/nuxt',
     'pinia-plugin-persistedstate/nuxt',
-    'dayjs-nuxt',
     'nuxt-schema-org'
   ],
 
@@ -90,7 +62,26 @@ export default defineNuxtConfig({
   },
 
   // Frontend
-  css: ['~/styles/tailwindcss.css'],
+  css: ['~/styles/index.css'],
+
+  icon: {
+    mode: 'svg',
+    clientBundle: {
+      scan: true,
+      sizeLimitKb: 256
+    }
+  },
+
+  content: {
+    build: {
+      markdown: {
+        toc: {
+          depth: 3,
+          searchDepth: 3
+        }
+      }
+    }
+  },
 
   vite: {
     plugins: [tailwindcss()],
@@ -103,12 +94,6 @@ export default defineNuxtConfig({
     config: {
       stylistic: false
     }
-  },
-
-  icon: {
-    fetchTimeout: 7777,
-    provider: 'iconify',
-    serverBundle: false
   },
 
   // Pinia store functions auto imports

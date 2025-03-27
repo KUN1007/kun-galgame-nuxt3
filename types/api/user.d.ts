@@ -89,6 +89,7 @@ export interface UserGetUserReplyRequestData {
 export interface UserComment {
   tid: number
   content: string
+  time: Date | string
 }
 
 export interface UserGetUserCommentRequestData {
@@ -123,5 +124,4 @@ export type LoginResponseData = {
   avatar: string
   moemoepoint: number
   roles: number
-  token: string
 }

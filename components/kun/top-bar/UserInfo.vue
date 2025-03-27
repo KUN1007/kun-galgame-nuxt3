@@ -1,10 +1,7 @@
 <script setup lang="ts">
-const { uid, name, moemoepoint } = storeToRefs(usePersistUserStore())
+const { uid, name, moemoepoint, isCheckIn } = storeToRefs(usePersistUserStore())
 const { messageStatus } = storeToRefs(useTempSettingStore())
-const messageStore = useComponentMessageStore()
 
-const container = ref<HTMLElement>()
-const isCheckIn = ref(true)
 const isShowMessageDot = computed(() => messageStatus.value === 'new')
 
 const handleCheckIn = async () => {
@@ -19,20 +16,14 @@ const handleCheckIn = async () => {
   moemoepoint.value += result
 
   if (result === 0) {
-    messageStore.info(
+    useKunLoliInfo(
       '杂~~~鱼~♡杂鱼~♡ 臭杂鱼♡. 签到成功，您今日什么也没获得...',
       5000
     )
   } else if (result === 7) {
-    messageStore.info(
-      '杂鱼~♡♡♡♡♡. 签到成功, 您今日好运获得了 7 萌萌点哦!',
-      5000
-    )
+    useKunLoliInfo('杂鱼~♡♡♡♡♡. 签到成功, 您今日好运获得了 7 萌萌点哦!', 5000)
   } else {
-    messageStore.info(
-      `杂~~~鱼~♡. 签到成功，您今日获得了 ${result} 萌萌点`,
-      5000
-    )
+    useKunLoliInfo(`杂~~~鱼~♡. 签到成功，您今日获得了 ${result} 萌萌点`, 5000)
   }
 }
 
@@ -44,21 +35,6 @@ const logOut = async () => {
     useMessage(10110, 'success')
   }
 }
-
-onMounted(async () => {
-  container.value?.focus()
-
-  const result = await $fetch(`/api/user/status`, {
-    method: 'GET',
-    watch: false,
-    ...kungalgameResponseHandler
-  })
-
-  if (result) {
-    isCheckIn.value = result.isCheckIn
-    moemoepoint.value = result.moemoepoints
-  }
-})
 </script>
 
 <template>
@@ -66,45 +42,53 @@ onMounted(async () => {
     <div class="flex flex-col items-center gap-1">
       <p class="font-lg">{{ name }}</p>
       <p class="flex items-center justify-between gap-1 font-bold">
-        <Icon class="icon text-secondary" name="lucide:lollipop" />
+        <KunIcon class="icon text-secondary" name="lucide:lollipop" />
         <span class="text-secondary">{{ moemoepoint }}</span>
       </p>
     </div>
 
     <div class="func flex flex-col">
-      <NuxtLink
-        class="hover:text-secondary-600 hover:bg-default-200 relative flex items-center justify-center rounded-lg p-1 transition-colors"
-        :to="`/kungalgamer/${uid}/info`"
+      <KunButton
+        variant="light"
+        class-name="text-base p-1 text-foreground"
+        :href="`/user/${uid}/info`"
       >
         个人主页
-      </NuxtLink>
+      </KunButton>
 
-      <NuxtLink
-        class="hover:text-secondary-600 hover:bg-default-200 relative flex items-center justify-center rounded-lg p-1 transition-colors"
-        to="/message"
+      <KunButton
+        variant="light"
+        class-name="text-base p-1 text-foreground"
+        href="/message"
       >
         我的消息
         <span
           v-if="isShowMessageDot"
           class="bg-secondary-500 absolute right-1 bottom-3 size-2 rounded-full"
         />
-      </NuxtLink>
+      </KunButton>
 
-      <div
-        class="hover:text-secondary-600 hover:bg-default-200 relative flex items-center justify-center rounded-lg p-1 transition-colors"
+      <KunButton
+        variant="light"
+        color="secondary"
         v-if="!isCheckIn"
         @click="handleCheckIn"
+        class-name="text-base p-1"
       >
         每日签到
-        <span class="bg-secondary-500 size-2 rounded-full" />
-      </div>
+        <span
+          class="bg-secondary-500 absolute right-1 bottom-3 size-2 rounded-full"
+        />
+      </KunButton>
 
-      <button
-        class="hover:bg-danger flex cursor-pointer justify-center rounded-lg p-1 transition-all hover:text-white"
+      <KunButton
+        variant="light"
+        color="danger"
+        class-name="text-base p-1 hover:bg-danger hover:text-white text-foreground"
         @click="logOut"
       >
         退出登录
-      </button>
+      </KunButton>
     </div>
   </div>
 </template>

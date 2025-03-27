@@ -1,20 +1,23 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'message',
   middleware: 'auth'
 })
 
 const route = useRoute()
 
 const uid = parseInt((route.params as { uid: string }).uid)
+
+useKunSeoMeta({
+  title: '私信'
+})
 </script>
 
 <template>
-  <ClientOnly>
-    <MessagePmHeader :uid="uid" />
-  </ClientOnly>
+  <div class="h-full w-full pl-3">
+    <ClientOnly>
+      <MessagePmHeader :uid="uid" />
+    </ClientOnly>
 
-  <MessagePmContainer :uid="uid" />
+    <MessagePmContainer :uid="uid" />
+  </div>
 </template>
-
-<style lang="scss" scoped></style>

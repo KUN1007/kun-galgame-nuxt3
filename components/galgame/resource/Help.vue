@@ -1,7 +1,8 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>
+  <KunCard class="kun-prose" :is-hoverable="false">
+    <p class="mb-3 text-xl">发布 Galgame 资源提示</p>
     <p>
       <strong>所有链接为用户添加, 鲲 Galgame 论坛不提供任何下载功能</strong>
     </p>
@@ -23,37 +24,16 @@
     <p>
       <strong>
         不要添加网盘下载站的页面链接, 详见
-        <a
-          href="https://www.kungal.com/zh-cn/galgame/819"
+        <KunLink
+          to="https://www.kungal.com/zh-cn/galgame/819"
           target="_blank"
           rel="noopener noreferrer"
         >
           此 Galgame
-        </a>
+        </KunLink>
         下的评论
       </strong>
     </p>
     <p>违规资源链接可举报, 若有其它需求, 请在 其它 -> 论坛相关 发布话题</p>
-  </div>
+  </KunCard>
 </template>
-
-<style lang="scss" scoped>
-.help {
-  border-left: 5px solid var(--kungalgame-blue-5);
-  padding-left: 17px;
-  margin-bottom: 17px;
-  font-size: small;
-
-  p {
-    margin-bottom: 7px;
-  }
-
-  a {
-    font-weight: bold;
-    color: var(--kungalgame-blue-5);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    margin: 0 7px;
-  }
-}
-</style>

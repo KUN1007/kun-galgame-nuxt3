@@ -30,6 +30,7 @@ const getSectionTopic = async (
     title: topic.title,
     content: topic.content.slice(0, 233),
     time: topic.time,
+    section: topic.section,
     tags: topic.tags,
     views: topic.views,
     likes: topic.likes.length,
@@ -50,7 +51,7 @@ export default defineEventHandler(async (event) => {
   if (!section || !page || !limit || !order) {
     return kunError(event, 10507)
   }
-  if (limit !== '23') {
+  if (limit !== '30') {
     return kunError(event, 10209)
   }
 

@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="help">
+  <KunCard :is-hoverable="false">
     <p>
       <strong>我们鼓励添加游戏的正版购买链接</strong>
     </p>
@@ -11,18 +11,5 @@
     </p>
     <p>除官方购买链接外, 不得放置付费的引流链接</p>
     <p>我们会在发布游戏时自动添加 VNDB 链接</p>
-  </div>
+  </KunCard>
 </template>
-
-<style lang="scss" scoped>
-.help {
-  border-left: 5px solid var(--kungalgame-blue-5);
-  padding-left: 17px;
-  margin-bottom: 17px;
-  font-size: small;
-
-  p {
-    margin-bottom: 7px;
-  }
-}
-</style>

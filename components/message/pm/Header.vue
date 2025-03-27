@@ -20,91 +20,27 @@ const handleReload = () => location.reload()
 </script>
 
 <template>
-  <header>
-    <NuxtLink to="/message">
-      <Icon class="icon" name="lucide:chevron-left" />
-    </NuxtLink>
-    <KunAvatar :user="user" size="30px" />
-    <h2 class="username">
+  <header class="flex items-center gap-2">
+    <KunButton size="lg" :is-icon-only="true" variant="light" href="/message">
+      <KunIcon name="lucide:chevron-left" />
+    </KunButton>
+
+    <KunAvatar :user="user" />
+
+    <h2 class="relative flex items-center gap-2">
       <span>{{ user.name }}</span>
       <span
-        class="status"
-        :class="socket.connected ? 'connected' : 'disconnected'"
+        class="absolute -right-6 h-4 w-4 rounded-full"
+        :class="socket.connected ? 'bg-success' : 'bg-default'"
       />
       <span
-        class="offline"
+        class="flex cursor-pointer items-center space-x-1 text-base"
         v-if="!socket.connected"
         @click="handleReload"
-        v-tooltip="{
-          message: '点击刷新页面, 不刷新也可以',
-          position: 'bottom'
-        }"
       >
         <span>您已离线</span>
-        <Icon name="lucide:refresh-ccw" />
+        <KunIcon name="lucide:refresh-ccw" />
       </span>
     </h2>
   </header>
 </template>
-
-<style lang="scss" scoped>
-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: 10px;
-  height: 32px;
-
-  a {
-    font-size: 24px;
-    margin-right: 10px;
-    color: var(--kungalgame-font-color-3);
-
-    &:hover {
-      color: var(--kungalgame-blue-5);
-    }
-  }
-
-  .username {
-    margin-left: 10px;
-    position: relative;
-    display: flex;
-    align-items: center;
-
-    &::before {
-      content: '';
-      margin: 0;
-    }
-  }
-
-  .status {
-    position: absolute;
-    right: -24px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-  }
-
-  .connected {
-    background-color: var(--kungalgame-green-4);
-  }
-
-  .disconnected {
-    background-color: var(--kungalgame-red-4);
-  }
-
-  .offline {
-    margin-left: 10px;
-    font-size: initial;
-    font-weight: 500;
-    color: var(--kungalgame-font-color-0);
-    cursor: pointer;
-
-    span {
-      &:last-child {
-        margin-left: 4px;
-      }
-    }
-  }
-}
-</style>

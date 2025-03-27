@@ -41,7 +41,7 @@ export default defineEventHandler(async (event) => {
   const { keywords, type, page, limit }: SearchRequestData =
     await getQuery(event)
 
-  if (limit !== '10') {
+  if (limit !== '12') {
     return kunError(event, 10209)
   }
 

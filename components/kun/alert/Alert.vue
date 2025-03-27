@@ -15,72 +15,28 @@ const handleConfirm = () => {
 </script>
 
 <template>
-  <KunDialog :is-show-dialog="showAlert">
-    <div class="container">
-      <div class="header">
-        <h3 v-if="alertTitle">{{ alertTitle }}</h3>
-        <p v-if="alertMsg">{{ alertMsg }}</p>
+  <KunModal
+    :modal-value="showAlert"
+    @update:modal-value="(value) => (showAlert = value)"
+    class-name="z-1000"
+  >
+    <div class="max-w-80">
+      <div class="space-y-2">
+        <h3 class="text-lg" v-if="alertTitle">{{ alertTitle }}</h3>
+        <p class="text-sm" v-if="alertMsg">{{ alertMsg }}</p>
       </div>
 
-      <div class="footer">
-        <button v-if="isShowCancel ?? true" class="button" @click="handleClose">
+      <div class="mt-6 flex justify-end gap-2">
+        <KunButton
+          v-if="isShowCancel ?? true"
+          variant="light"
+          color="danger"
+          @click="handleClose"
+        >
           取消
-        </button>
-        <button class="button" @click="handleConfirm">确定</button>
+        </KunButton>
+        <KunButton @click="handleConfirm">确定</KunButton>
       </div>
     </div>
-  </KunDialog>
+  </KunModal>
 </template>
-
-<style lang="scss" scoped>
-.container {
-  width: 300px;
-  margin: auto;
-  padding: 20px 30px;
-  background-color: var(--kungalgame-trans-white-2);
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all 0.3s ease;
-
-  .header {
-    h3 {
-      margin-bottom: 7px;
-    }
-
-    p {
-      font-size: small;
-    }
-  }
-}
-
-.footer {
-  margin-top: 20px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.button {
-  width: 70px;
-  height: 30px;
-  cursor: pointer;
-  border-radius: 2px;
-
-  &:nth-child(1) {
-    background-color: transparent;
-    border: 1px solid var(--kungalgame-blue-5);
-    color: var(--kungalgame-blue-5);
-  }
-
-  &:nth-child(2) {
-    margin-left: 98px;
-    background-color: transparent;
-    border: 1px solid var(--kungalgame-red-5);
-    color: var(--kungalgame-red-5);
-  }
-
-  &:active {
-    transform: scale(0.9);
-    transition: 0.1s;
-  }
-}
-</style>

@@ -1,0 +1,132 @@
+.milkdown {
+  @apply text-default-800 leading-7 whitespace-pre-line;
+}
+
+.milkdown .ProseMirror[data-placeholder]::before {
+  @apply text-default-400 dark:text-default-500 pointer-events-none absolute top-4 right-6 left-6 text-sm content-[attr(data-placeholder)];
+}
+
+.milkdown .ProseMirror {
+  @apply border-default-200 focus:ring-primary-200 focus:border-primary-500 min-h-[300px] rounded-lg border p-4 transition-colors duration-200 focus:ring-2 focus:outline-none;
+}
+
+.milkdown h1,
+.milkdown h2 {
+  @apply border-default-200 text-default-900 mt-12 mb-6 border-t pt-8 font-bold tracking-tight;
+}
+
+.milkdown h1 {
+  @apply text-4xl;
+}
+
+.milkdown h2 {
+  @apply text-3xl;
+}
+
+.milkdown h3,
+.milkdown h4 {
+  @apply text-default-900 mt-8 mb-4 font-semibold tracking-tight;
+}
+
+.milkdown h3 {
+  @apply text-2xl;
+}
+
+.milkdown h4 {
+  @apply text-xl;
+}
+
+.milkdown h5,
+.milkdown h6 {
+  @apply text-default-800 my-3 font-medium;
+}
+
+.milkdown p {
+  @apply text-default-700 my-4 leading-7 break-words;
+}
+
+.milkdown p code {
+  @apply bg-default-100 text-default-800 border-default-200 mx-1 rounded-md border px-1.5 py-0.5 font-mono text-sm;
+}
+
+.milkdown ul,
+.milkdown ol {
+  @apply my-6 space-y-3 pl-8;
+}
+
+.milkdown ul {
+  @apply marker:text-default-400 list-disc;
+}
+
+.milkdown ol {
+  @apply marker:text-default-400 list-decimal;
+}
+
+.milkdown blockquote {
+  @apply border-primary-200 bg-primary-50/30 text-default-700 my-6 rounded-r-lg border-l-4 py-2 pr-4 pl-6 shadow-sm;
+}
+
+.milkdown blockquote p {
+  @apply m-0;
+}
+
+.milkdown pre {
+  @apply bg-default-50 border-default-200 my-6 overflow-x-auto rounded-xl border p-4 shadow-sm;
+}
+
+.milkdown pre code {
+  @apply text-default-800 float-left min-w-full border-0 bg-transparent font-mono text-sm;
+}
+
+.milkdown a {
+  @apply text-primary-600 decoration-primary-200 hover:text-primary-700 hover:decoration-primary-400 cursor-pointer font-medium break-words underline underline-offset-2 transition-colors duration-200;
+}
+
+.milkdown img {
+  @apply border-default-200 my-6 max-w-full rounded-lg border shadow-md;
+}
+
+.milkdown table {
+  @apply border-default-200 my-6 w-full overflow-hidden rounded-lg border shadow-sm;
+}
+
+.milkdown table th,
+.milkdown table td {
+  @apply border-default-200 border-b px-4 py-2 text-left;
+}
+
+.milkdown table th {
+  @apply bg-default-50 text-default-700 font-semibold;
+}
+
+.milkdown table tr:nth-child(even) {
+  @apply bg-default-50/50;
+}
+
+.milkdown table tr:hover {
+  @apply bg-default-100/50 transition-colors duration-200;
+}
+
+.milkdown table tr:last-child td {
+  @apply border-b-0;
+}
+
+.milkdown del {
+  @apply text-default-500 line-through;
+}
+
+.milkdown hr {
+  @apply border-default-200 my-8;
+}
+
+.milkdown :not(pre) > code {
+  @apply bg-default-100 text-default-800 border-default-200 rounded-md border px-1.5 py-0.5 font-mono text-sm;
+}
+
+.milkdown mark {
+  @apply bg-warning-100 text-warning-800 rounded px-1;
+}
+
+.milkdown kbd {
+  @apply bg-default-100 border-default-300 text-default-700 rounded border px-2 py-1 font-mono text-sm shadow-sm;
+}

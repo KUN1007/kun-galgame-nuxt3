@@ -6,7 +6,7 @@ const props = defineProps<{
   comment: SerializeObject<GalgameComment>
 }>()
 
-const { uid, moemoeAccessToken } = usePersistUserStore()
+const { uid } = usePersistUserStore()
 const isLiked = ref(props.comment.likes.isLiked)
 const likesCount = ref(props.comment.likes.count)
 
@@ -39,7 +39,7 @@ const likeComment = async () => {
 }
 
 const handleClickLike = async () => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10532, 'warn', 5000)
     return
   }
@@ -48,23 +48,17 @@ const handleClickLike = async () => {
 </script>
 
 <template>
-  <span class="like" :class="isLiked ? 'active' : ''" @click="handleClickLike">
-    <Icon class="icon" name="lucide:thumbs-up" />
-    <span v-if="likesCount">{{ likesCount }}</span>
-  </span>
+  <KunTooltip text="点赞">
+    <KunButton
+      :is-icon-only="true"
+      :variant="isLiked ? 'flat' : 'light'"
+      :color="isLiked ? 'secondary' : 'default'"
+      :size="likesCount ? 'md' : 'lg'"
+      class-name="gap-1"
+      @click="handleClickLike"
+    >
+      <KunIcon name="lucide:thumbs-up" />
+      <span v-if="likesCount">{{ likesCount }}</span>
+    </KunButton>
+  </KunTooltip>
 </template>
-
-<style lang="scss" scoped>
-.icon {
-  cursor: pointer;
-  color: var(--kungalgame-font-color-2);
-  margin-right: 3px;
-  margin-bottom: 3px;
-}
-
-.active {
-  .icon {
-    color: var(--kungalgame-red-4);
-  }
-}
-</style>

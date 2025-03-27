@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Icon } from '@iconify/vue'
-import 'animate.css'
 
 const props = defineProps<{
   message: string
@@ -11,99 +10,68 @@ const props = defineProps<{
 
 const isRichText = computed(() => props.richText ?? false)
 
-const messageClassMap = {
-  warn: 'animate__animated animate__headShake',
-  success: 'animate__animated animate__bounceInDown',
-  error: 'animate__animated animate__tada',
-  info: 'animate__animated animate__bounce'
-}
+const animationClass = computed(
+  () =>
+    ({
+      warn: 'animate-shake',
+      success: 'animate-bounceInDown',
+      error: 'animate-tada',
+      info: 'animate-bounce'
+    })[props.type]
+)
 
-const messageClass = computed(
-  () => `${messageClassMap[props.type]} ${props.type}`
+const borderColorClass = computed(
+  () =>
+    ({
+      warn: 'border-warning',
+      success: 'border-success',
+      error: 'border-danger',
+      info: 'border-primary'
+    })[props.type]
+)
+
+const iconColorClass = computed(
+  () =>
+    ({
+      warn: 'var(--color-warning)',
+      success: 'var(--color-success)',
+      error: 'var(--color-danger)',
+      info: 'var(--color-primary)'
+    })[props.type]
+)
+
+const iconName = computed(
+  () =>
+    ({
+      warn: 'lucide:triangle-alert',
+      success: 'lucide:check',
+      error: 'lucide:x',
+      info: 'lucide:info'
+    })[props.type]
 )
 </script>
 
 <template>
-  <div class="kungalgame-message-container">
-    <div class="kungalgame-message" :class="messageClass">
-      <Icon
-        class="icon"
-        :icon="`lucide:${
-          {
-            warn: 'triangle-alert',
-            success: 'check',
-            error: 'x',
-            info: 'info'
-          }[type]
-        }`"
-      />
-
-      <span v-if="!isRichText" class="message">{{ message }}</span>
-      <span v-if="isRichText" v-html="message"></span>
+  <div class="fixed top-20 right-0 left-0 z-2000 flex w-full">
+    <div
+      :class="
+        cn(
+          'mx-auto flex items-center rounded-lg border bg-white px-6 py-3 text-lg shadow dark:bg-black',
+          animationClass,
+          borderColorClass
+        )
+      "
+    >
+      <Icon :color="iconColorClass" class="mr-4 text-2xl" :icon="iconName" />
+      <span v-if="!isRichText" class="break-all">{{ message }}</span>
+      <div v-else v-html="message" />
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.kungalgame-message-container {
-  position: fixed;
-  top: 100px;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  width: 100%;
-  display: flex;
-  z-index: 9999;
-}
-
-.kungalgame-message {
-  margin: 0 auto;
-  font-size: large;
-  padding: 1vh 10vw;
-
-  span {
-    flex-direction: column;
-  }
-
-  .message {
-    word-break: break-all;
-  }
-}
-
-.icon {
-  font-size: 23px;
-  margin-right: 17px;
-}
-
-.warn {
-  border: 1px solid var(--kungalgame-yellow-3);
-
-  .icon {
-    color: var(--kungalgame-yellow-3);
-  }
-}
-
-.success {
-  border: 1px solid var(--kungalgame-green-4);
-
-  .icon {
-    color: var(--kungalgame-green-4);
-  }
-}
-
-.error {
-  border: 1px solid var(--kungalgame-red-4);
-
-  .icon {
-    color: var(--kungalgame-red-4);
-  }
-}
-
-.info {
-  border: 1px solid var(--kungalgame-blue-5);
-
-  .icon {
-    color: var(--kungalgame-blue-5);
-  }
+/* Fix the iconify/vue Icon color error */
+:deep(*) {
+  color: inherit;
 }
 </style>

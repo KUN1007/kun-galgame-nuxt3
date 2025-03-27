@@ -38,78 +38,31 @@ const selectEmoji = (emoji: string) => {
 </script>
 
 <template>
-  <div class="emoji-container">
-    <div class="emoji-grid">
-      <span
+  <div
+    class="bg-background border-default-300 absolute top-10 flex flex-col items-center rounded-lg border p-2 shadow"
+  >
+    <div class="grid h-68 w-64 grid-cols-7">
+      <KunButton
+        :is-icon-only="true"
+        variant="light"
         v-for="(emoji, index) in paginatedEmojis"
         :key="index"
         @click="selectEmoji(emoji)"
-        class="emoji"
+        size="xl"
+        class-name="shrink-0"
       >
         {{ emoji }}
-      </span>
+      </KunButton>
     </div>
 
-    <div class="pagination">
-      <span class="prev" @click="prevPage">
-        <Icon class="icon" name="lucide:chevron-left" />
-      </span>
+    <div class="flex justify-center gap-1">
+      <KunButton :is-icon-only="true" variant="light" @click="prevPage">
+        <KunIcon name="lucide:chevron-left" />
+      </KunButton>
 
-      <span class="next" @click="nextPage">
-        <Icon class="icon" name="lucide:chevron-right" />
-      </span>
+      <KunButton :is-icon-only="true" variant="light" @click="nextPage">
+        <KunIcon name="lucide:chevron-right" />
+      </KunButton>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.emoji-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  top: 32px;
-
-  padding: 8px;
-}
-
-.emoji-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-
-  span {
-    padding: 2px;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 4px;
-
-    &:hover {
-      background-color: var(--kungalgame-trans-blue-2);
-    }
-  }
-}
-
-.pagination {
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
-
-  & > span {
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    color: var(--kungalgame-font-color-3);
-    transition: all 0.2s;
-  
-    &:first-child {
-      margin-right: 8px;
-    }
-
-    &:hover {
-      color: var(--kungalgame-blue-5);
-      background-color: var(--kungalgame-trans-blue-0);
-    }
-  }
-}
-</style>

@@ -3,27 +3,22 @@ const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 </script>
 
 <template>
-  <KunHeader :size="2">
-    <template #header>游戏标签</template>
-  </KunHeader>
+  <div class="space-y-2">
+    <div class="space-y-2">
+      <h2 class="text-xl">游戏标签</h2>
+      <p class="text-default-500">如果有多个标签, 请用英语逗号分隔每个标签</p>
+    </div>
 
-  <div class="hint">如果有多个标签, 请用英语逗号分隔每个标签</div>
-
-  <KunTextarea
-    placeholder="请输入游戏标签, 例如纯爱, 萝莉, 妹妹, 白毛, 白丝, 等等"
-    v-model="galgamePR[0].tags"
-  />
+    <KunTextarea
+      placeholder="请输入游戏标签, 例如纯爱, 萝莉, 妹妹, 白毛, 白丝, 等等"
+      :model-value="galgamePR[0].tags.toString()"
+      @update:model-value="
+        (value) =>
+          (galgamePR[0].tags = value
+            .toString()
+            .split(',')
+            .map((l) => l.trim()))
+      "
+    />
+  </div>
 </template>
-
-<style lang="scss" scoped>
-.kun-input {
-  width: 100%;
-  margin-bottom: 17px;
-}
-
-.hint {
-  color: var(--kungalgame-font-color-0);
-  margin-bottom: 17px;
-  font-size: small;
-}
-</style>

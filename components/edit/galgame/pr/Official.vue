@@ -3,24 +3,22 @@ const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 </script>
 
 <template>
-  <KunHeader :size="2">
-    <template #header>官网</template>
-  </KunHeader>
+  <div class="space-y-2">
+    <div class="space-y-2">
+      <h2 class="text-xl">游戏官网</h2>
+      <p class="text-default-500">如果有多个官网，请用英语逗号分隔每个链接</p>
+    </div>
 
-  <div class="hint">如果有多个官网，请用英语逗号分隔每个链接</div>
-
-  <KunTextarea placeholder="请输入官网链接" v-model="galgamePR[0].official" />
+    <KunTextarea
+      placeholder="请输入游戏的引擎名，例如 KiriKiri, RUGP, Shiina Rio, 可以输入多个"
+      :model-value="galgamePR[0].official.toString()"
+      @update:model-value="
+        (value) =>
+          (galgamePR[0].official = value
+            .toString()
+            .split(',')
+            .map((l) => l.trim()))
+      "
+    />
+  </div>
 </template>
-
-<style lang="scss" scoped>
-.kun-textarea {
-  width: 100%;
-  margin-bottom: 17px;
-}
-
-.hint {
-  color: var(--kungalgame-font-color-0);
-  margin-bottom: 17px;
-  font-size: small;
-}
-</style>

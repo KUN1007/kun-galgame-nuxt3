@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import {
+  galgameDetailSectionTabs,
+  type GalgameDetailSectionTabType
+} from '~/constants/galgame'
 import type { GalgameDetail } from '~/types/api/galgame'
 
 const props = defineProps<{
@@ -7,7 +11,7 @@ const props = defineProps<{
 
 provide<GalgameDetail>('galgame', props.galgame)
 
-const { data, pending } = await useLazyFetch(
+const { data } = await useFetch(
   `/api/galgame/${props.galgame.gid}/contributor`,
   {
     method: 'GET',
@@ -15,43 +19,54 @@ const { data, pending } = await useLazyFetch(
     ...kungalgameResponseHandler
   }
 )
+
+const activeTab = ref<GalgameDetailSectionTabType>('comment')
 </script>
 
 <template>
-  <div class="galgame">
+  <KunCard
+    :is-hoverable="false"
+    :is-transparent="false"
+    content-class="space-y-6"
+  >
     <GalgameTitle :galgame="galgame" />
 
     <GalgameIntroduction :introduction="galgame.introduction" />
 
-    <GalgameInfo :galgame="galgame" />
+    <div class="space-y-3">
+      <p>本游戏项目的贡献者</p>
+      <div class="flex items-center gap-1" v-if="data">
+        <KunTooltip
+          v-for="(user, index) in data"
+          :key="index"
+          :text="user.name"
+        >
+          <KunAvatar :user="user" />
+        </KunTooltip>
+      </div>
+    </div>
+
+    <KunDivider />
 
     <GalgameResource />
 
     <GalgameSeries v-if="galgame.series.length" />
 
-    <GalgameLink />
-
-    <GalgamePrContainer />
-
-    <KunDivider />
-
-    <GalgameContributor
-      v-if="data"
-      :data="data"
-      :pending="pending"
-      :views="galgame.views"
+    <KunTab
+      :items="galgameDetailSectionTabs"
+      v-model="activeTab"
+      inner-class-name="shadow border bg-transparent"
+      size="sm"
     />
-
-    <GalgameFooter />
-
-    <KunDivider />
-
-    <GalgameCommentContainer
-      v-if="data"
-      :user-data="data"
-      :to-user="galgame.user"
-    />
-  </div>
+    <KunCard :is-hoverable="false">
+      <GalgameCommentContainer
+        v-if="data && activeTab === 'comment'"
+        :user-data="data"
+        :to-user="galgame.user"
+      />
+      <GalgameHistory v-if="activeTab === 'history'" />
+      <GalgameLink v-if="activeTab === 'link'" />
+      <GalgamePrContainer v-if="activeTab === 'pr'" />
+    </KunCard>
+  </KunCard>
 </template>
-
-<style lang="scss" scoped></style>

@@ -45,112 +45,59 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
 </script>
 
 <template>
-  <div class="comment">
-    <div class="info">
-      <div class="user">
-        <KunAvatar :user="comment.user" size="30px" />
-        <span>{{ comment.user.name }}</span>
-        <span class="time">
-          {{ formatTimeDifference(comment.time) }}
-        </span>
+  <KunCard :is-hoverable="false" content-class="flex-row gap-3">
+    <KunAvatar :user="comment.user" />
 
+    <div class="flex w-full flex-col space-y-2">
+      <div class="flex flex-wrap items-center">
+        <span class="text-default-700">{{ comment.user.name }}</span>
         <div v-if="comment.toUser">
-          <span>=> </span>
-          <NuxtLink :to="`/kungalgamer/${comment.toUser.uid}/info`">
+          <span class="mx-2">=></span>
+          <KunLink underline="hover" :to="`/user/${comment.toUser.uid}/info`">
             {{ `${comment.toUser.name}` }}
-          </NuxtLink>
+          </KunLink>
         </div>
       </div>
 
-      <div class="action">
-        <span class="reply" @click="handleClickComment(comment.user.uid)">
-          <Icon class="icon" name="lucide:reply" />
+      <div class="break-all whitespace-pre-line">{{ comment.content }}</div>
+
+      <div class="flex items-end justify-between">
+        <span class="text-default-500 text-sm">
+          发布于 {{ formatTimeDifference(comment.time) }}
         </span>
-        <GalgameCommentLike :comment="comment" />
-        <span
-          class="delete"
-          v-if="isShowDelete"
-          @click="handleDeleteComment(comment.gid, comment.gcid)"
-        >
-          <Icon class="icon" name="lucide:trash-2" />
-        </span>
+
+        <div class="flex items-center justify-end gap-1">
+          <KunButton
+            variant="flat"
+            class-name="gap-1"
+            @click="handleClickComment(comment.user.uid)"
+          >
+            回复
+          </KunButton>
+
+          <GalgameCommentLike :comment="comment" />
+
+          <KunTooltip text="删除">
+            <KunButton
+              :is-icon-only="true"
+              v-if="isShowDelete"
+              variant="light"
+              color="danger"
+              size="lg"
+              class-name="gap-1"
+              @click="handleDeleteComment(comment.gid, comment.gcid)"
+            >
+              <KunIcon name="lucide:trash-2" />
+            </KunButton>
+          </KunTooltip>
+        </div>
       </div>
+
+      <GalgameCommentPanel
+        v-if="isShowComment"
+        :refresh="refresh"
+        @close="isShowComment = false"
+      />
     </div>
-    <pre class="content">{{ comment.content }}</pre>
-
-    <GalgameCommentPanel
-      v-if="isShowComment"
-      :refresh="refresh"
-      @close="isShowComment = false"
-    />
-  </div>
+  </KunCard>
 </template>
-
-<style lang="scss" scoped>
-.comment {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 30px;
-}
-
-.info {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-
-  .user {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-
-    a {
-      margin-right: 30px;
-      color: var(--kungalgame-blue-5);
-    }
-
-    .kun-avatar {
-      margin-right: 10px;
-    }
-
-    .time {
-      font-size: small;
-      margin: 0 10px;
-      color: var(--kungalgame-font-color-0);
-    }
-  }
-
-  .action {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    color: var(--kungalgame-font-color-2);
-
-    .reply {
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      color: var(--kungalgame-blue-5);
-      font-size: 20px;
-      margin-right: 10px;
-    }
-
-    .delete {
-      cursor: pointer;
-      margin-left: 5px;
-      margin-bottom: 3px;
-      color: var(--kungalgame-red-5);
-    }
-  }
-}
-
-.content {
-  margin: 0;
-  white-space: pre-wrap;
-  word-break: break-all;
-}
-
-.panel {
-  margin-top: 10px;
-}
-</style>

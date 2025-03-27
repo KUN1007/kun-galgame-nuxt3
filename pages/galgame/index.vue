@@ -1,11 +1,16 @@
 <script setup lang="ts">
+const description = `${kungal.titleShort} Galgame 资源页面, 提供各类 Galgame 下载, Galgame 资源, Galgame Wiki, Galgame 情报, Galgame 引擎, Galgame 官网, 汉化, 英语, 生肉, 日语 Windows, macOS, PC, 应用, 直装, 模拟器, 安卓, Linux`
+
+useKunSeoMeta({
+  title: 'Galgame 资源 wiki',
+  description
+})
+
 useHead({
-  title: `Galgame 资源 - ${kungal.titleShort}`,
-  meta: [
+  link: [
     {
-      name: 'description',
-      content:
-        '鲲 Galgame 论坛 Galgame 资源页面, 提供各类 Galgame 下载, Galgame 资源, 汉化, 英语, 生肉, 日语 Windows, macOS, PC, 应用, 直装, 模拟器, 安卓, Linux'
+      rel: 'canonical',
+      href: `${kungal.domain.main}/galgame`
     }
   ]
 })

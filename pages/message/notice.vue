@@ -1,7 +1,10 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'message',
   middleware: 'auth'
+})
+
+useKunSeoMeta({
+  title: '通知消息'
 })
 
 const pageData = reactive({
@@ -30,61 +33,35 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="container" v-if="data">
-    <header>
-      <NuxtLink to="/message">
-        <Icon class="icon" name="lucide:chevron-left" />
-      </NuxtLink>
-      <h2>通知</h2>
+  <div class="flex w-full flex-col space-y-3" v-if="data">
+    <header class="flex items-center gap-2">
+      <KunButton size="lg" :is-icon-only="true" variant="light" href="/message">
+        <KunIcon name="lucide:chevron-left" />
+      </KunButton>
+      <h2 class="text-lg">通知</h2>
     </header>
 
-    <KunDivider margin="7px 0" />
+    <KunDivider />
 
-    <template v-for="(message, index) in data.messages" :key="index">
-      <MessageAsideNotice :message="message" :refresh="refresh" />
+    <div
+      v-if="data.messages.length"
+      class="scrollbar-hide h-full overflow-y-auto"
+    >
+      <MessageAsideNotice
+        v-for="(message, index) in data.messages"
+        :key="index"
+        :message="message"
+        :refresh="refresh"
+      />
+    </div>
 
-      <KunDivider margin="7px 0" />
-    </template>
-
-    <KunNull :condition="!data.totalCount" type="null" />
+    <KunNull v-if="!data.totalCount" />
 
     <KunPagination
-      class="pagination"
       v-if="data.totalCount"
-      :page="pageData.page"
-      :limit="pageData.limit"
-      :sum="data.totalCount"
-      :status="status"
-      @set-page="(newPage) => (pageData.page = newPage)"
+      v-model:current-page="pageData.page"
+      :total-page="Math.ceil(data.totalCount / pageData.limit)"
+      :is-loading="status === 'pending'"
     />
   </div>
 </template>
-
-<style lang="scss" scoped>
-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-
-  a {
-    font-size: 24px;
-    margin-right: 10px;
-    color: var(--kungalgame-font-color-3);
-
-    &:hover {
-      color: var(--kungalgame-blue-5);
-    }
-  }
-
-  h2 {
-    &::before {
-      content: '';
-      margin: 0;
-    }
-  }
-}
-
-.container {
-  width: 100%;
-}
-</style>

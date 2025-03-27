@@ -46,66 +46,18 @@ const handleClickCategory = (kun: Category) => {
 </script>
 
 <template>
-  <div class="categories">
-    <Icon class="icon" name="lucide:layers-3" />
+  <div class="flex items-center gap-2">
+    分类
 
-    <span
+    <KunButton
       class="btn"
       v-for="kun in topicCategory"
       :key="kun.index"
       @click="handleClickCategory(kun)"
-      :class="{ active: selectedCategories.includes(kun.name) }"
+      :variant="selectedCategories.includes(kun.name) ? 'solid' : 'flat'"
+      size="sm"
     >
-      {{ KUN_TOPIC_CATEGORY[kun.name] }}
-    </span>
+      {{ KUN_TOPIC_CATEGORY[kun.name.toLowerCase()] }}
+    </KunButton>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.categories {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 17px 17px 0;
-
-  .icon {
-    font-size: 20px;
-    color: var(--kungalgame-font-color-1);
-    margin-right: 10px;
-  }
-}
-
-.btn {
-  height: 30px;
-  padding: 0 17px;
-  cursor: pointer;
-  border: 1px solid var(--kungalgame-trans-blue-2);
-  background-color: transparent;
-  color: var(--kungalgame-blue-5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 15px;
-  white-space: nowrap;
-
-  &:nth-child(2) {
-    border-radius: 17px 0 0 17px;
-  }
-
-  &:nth-child(3) {
-    border-left: transparent;
-    border-right: transparent;
-  }
-
-  &:last-child {
-    border-radius: 0 17px 17px 0;
-  }
-}
-
-.active {
-  background-color: var(--kungalgame-blue-5);
-  border: 1px solid var(--kungalgame-blue-5);
-  color: var(--kungalgame-white);
-}
-</style>

@@ -78,21 +78,26 @@ const handleMergeRequest = async () => {
 </script>
 
 <template>
-  <div class="details">
+  <div class="space-y-3">
     <div class="diff">
       <div v-for="(kun, index) in diff" :key="index">
-        <p class="name">
+        <p class="mb-2 font-bold">
           {{ KUN_GALGAME_RESOURCE_PULL_REQUEST_I18N_FIELD_MAP[kun.name] }}
         </p>
         <div
-          class="value"
+          class="break-word mb-4"
           v-html="DOMPurify.sanitize(kun.value.replace(/\\/g, ''))"
         />
       </div>
     </div>
 
-    <div class="btn" v-if="!details.status && isShowButton">
+    <div
+      class="flex items-center justify-end gap-1"
+      v-if="!details.status && isShowButton"
+    >
       <KunButton
+        variant="light"
+        color="danger"
         @click="isShowReasonInput = !isShowReasonInput"
         :pending="isFetching"
       >
@@ -102,19 +107,21 @@ const handleMergeRequest = async () => {
         合并
       </KunButton>
     </div>
-    <div class="hint" v-if="!details.status && !isShowButton">
+
+    <div
+      class="text-default-500 text-sm"
+      v-if="!details.status && !isShowButton"
+    >
       要处理该请求, 需要资源的发布者、或管理员
     </div>
 
-    <div class="decline-input" v-if="isShowReasonInput">
-      <KunInput
-        placeholder="您可以自己合并自己提出的更新请求"
-        v-model="declineInput"
-      />
+    <div class="flex items-center gap-1" v-if="isShowReasonInput">
+      <KunInput placeholder="请填写拒绝更新请求的理由" v-model="declineInput" />
       <KunButton
-        type="danger"
+        color="danger"
         @click="handleDeclineRequest"
         :pending="isFetching"
+        class-name="shrink-0"
       >
         确定拒绝
       </KunButton>
@@ -129,61 +136,26 @@ const handleMergeRequest = async () => {
   }
 
   :deep(strong) {
-    color: var(--kungalgame-red-5);
-    background-color: var(--kungalgame-trans-pink-1);
+    color: var(--color-danger);
+    background-color: color-mix(in oklab, var(--color-danger) 20%, transparent);
   }
 
   :deep(b) {
-    color: var(--kungalgame-blue-5);
-    background-color: var(--kungalgame-trans-blue-1);
+    color: var(--color-primary);
+    background-color: color-mix(
+      in oklab,
+      var(--color-primary) 20%,
+      transparent
+    );
   }
 
   :deep(i) {
-    color: var(--kungalgame-green-4);
-  }
-
-  .name {
-    margin-bottom: 7px;
-    font-weight: bold;
-  }
-
-  .value {
-    word-break: break-word;
-    margin-bottom: 17px;
-  }
-}
-
-.btn {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 17px;
-  margin-left: auto;
-
-  .kun-button {
-    &:first-child {
-      margin-right: 17px;
-    }
-  }
-}
-
-.hint {
-  font-size: small;
-  color: var(--kungalgame-font-color-0);
-  margin-bottom: 17px;
-}
-
-.decline-input {
-  display: flex;
-  align-items: center;
-  margin-bottom: 17px;
-
-  .kun-input {
-    width: 100%;
-    margin-right: 10px;
-  }
-
-  .kun-button {
-    flex-shrink: 0;
+    color: var(--color-success);
+    background-color: color-mix(
+      in oklab,
+      var(--color-success) 20%,
+      transparent
+    );
   }
 }
 </style>

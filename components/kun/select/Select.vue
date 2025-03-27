@@ -1,0 +1,168 @@
+<script setup lang="ts">
+import type { KunSelectProps } from './type'
+import {
+  useElementBounding,
+  useEventListener,
+  useWindowSize
+} from '@vueuse/core'
+
+const props = withDefaults(defineProps<KunSelectProps>(), {
+  placeholder: '',
+  label: '',
+  disabled: false,
+  error: ''
+})
+
+const emit = defineEmits<{
+  'update:modelValue': [value: string | number]
+  set: [value: string | number, index: number]
+}>()
+
+const stableId = useId()
+const computedId = computed(() => `kun-select-${stableId}`)
+const isOpen = ref(false)
+const showAbove = ref(false)
+const button = useTemplateRef<HTMLElement>('button')
+const dropdown = useTemplateRef<HTMLElement>('dropdown')
+
+const buttonBounds = useElementBounding(button)
+const dropdownBounds = useElementBounding(dropdown)
+const { height: windowHeight } = useWindowSize()
+
+const selectedLabel = computed(() => {
+  const selected = props.options.find(
+    (option) => option.value === props.modelValue
+  )
+  return selected?.label
+})
+
+const updateDropdownPosition = () => {
+  if (!button.value || !dropdown.value) {
+    return
+  }
+
+  const spaceBelow = windowHeight.value - buttonBounds.bottom.value
+  const spaceAbove = buttonBounds.top.value
+  const requiredSpace = dropdownBounds.height.value + 8
+
+  showAbove.value = spaceBelow < requiredSpace && spaceAbove > requiredSpace
+}
+
+useEventListener(document, 'click', (e: MouseEvent) => {
+  const target = e.target as HTMLElement
+  if (!target.closest(`#${computedId.value}`)) {
+    isOpen.value = false
+  }
+})
+
+watch([isOpen, dropdownBounds.height], () => {
+  if (isOpen.value) {
+    nextTick(updateDropdownPosition)
+  }
+})
+
+const toggle = () => {
+  if (!props.disabled) {
+    isOpen.value = !isOpen.value
+  }
+}
+
+const selectOption = (value: string | number, index: number) => {
+  emit('update:modelValue', value)
+  emit('set', value, index)
+  isOpen.value = false
+}
+</script>
+
+<template>
+  <div class="relative w-full">
+    <label
+      v-if="label"
+      :for="computedId"
+      class="mb-2 block text-sm font-medium"
+    >
+      {{ label }}
+    </label>
+
+    <button
+      ref="button"
+      :id="computedId"
+      type="button"
+      class="focus:border-primary-500 focus:ring-primary-500 flex w-full cursor-pointer items-center justify-between rounded-lg border px-3 py-2 text-left shadow focus:ring-1 focus:outline-none sm:text-sm"
+      :class="{
+        'border-default-300': !error,
+        'border-danger-500': error,
+        'bg-default-100': disabled
+      }"
+      @click="toggle"
+      :disabled="disabled"
+    >
+      <span class="block truncate">
+        {{ selectedLabel || placeholder }}
+      </span>
+      <KunIcon
+        name="lucide:chevron-down"
+        class="pointer-events-none"
+        :class="
+          cn('text-inherit transition-transform', isOpen ? 'rotate-180' : '')
+        "
+      />
+    </button>
+
+    <Transition :name="showAbove ? 'fadeDown' : 'fadeUp'">
+      <div
+        v-show="isOpen"
+        ref="dropdown"
+        class="bg-background absolute z-10 w-full rounded-md border p-1 shadow-lg"
+        :class="showAbove ? 'bottom-full mb-1' : 'top-full mt-1'"
+      >
+        <ul
+          class="scrollbar-hide max-h-60 overflow-auto rounded-md text-base focus:outline-none sm:text-sm"
+          tabindex="-1"
+          role="listbox"
+        >
+          <li
+            v-for="(option, index) in options"
+            :key="option.value"
+            class="hover:bg-default-100 text-foreground relative flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 select-none"
+            @click="selectOption(option.value, index)"
+            role="option"
+          >
+            <span class="block truncate">
+              {{ option.label }}
+            </span>
+
+            <KunIcon
+              v-if="modelValue === option.value"
+              class="flex items-center pr-4"
+              name="lucide:check"
+            />
+          </li>
+        </ul>
+      </div>
+    </Transition>
+
+    <p v-if="error" class="text-danger mt-2 text-sm">{{ error }}</p>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.fadeUp-enter-active,
+.fadeUp-leave-active,
+.fadeDown-enter-active,
+.fadeDown-leave-active {
+  transition: all 0.2s ease-in-out;
+}
+
+.fadeUp-enter-from,
+.fadeUp-leave-to {
+  transform: translateY(-8px);
+  opacity: 0;
+}
+
+.fadeDown-enter-from,
+.fadeDown-leave-to {
+  transform: translateY(8px);
+  opacity: 0;
+}
+</style>

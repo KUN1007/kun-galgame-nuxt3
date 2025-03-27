@@ -1,7 +1,6 @@
 export interface NonMoeLogRequestData {
   page: string
   limit: string
-  language: Language
 }
 
 export interface NonMoeLog {
@@ -9,6 +8,6 @@ export interface NonMoeLog {
   uid: number
   name: string
   description: KunLanguage
-  time: number
+  time: Date | string
   result: string | number
 }

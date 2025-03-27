@@ -5,7 +5,7 @@ const props = defineProps<{
   comment: TopicComment
 }>()
 
-const { uid, moemoeAccessToken } = usePersistUserStore()
+const { uid } = usePersistUserStore()
 const isLiked = ref(props.comment.likes.isLiked)
 const likesCount = ref(props.comment.likes.count)
 
@@ -35,7 +35,7 @@ const likeComment = async () => {
 }
 
 const handleClickLike = async () => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10220, 'warn', 5000)
     return
   }
@@ -44,27 +44,15 @@ const handleClickLike = async () => {
 </script>
 
 <template>
-  <span class="like" :class="isLiked ? 'active' : ''" @click="handleClickLike">
-    <Icon class="icon" name="lucide:thumbs-up" />
+  <KunButton
+    :is-icon-only="true"
+    :variant="isLiked ? 'flat' : 'light'"
+    :color="isLiked ? 'secondary' : 'default'"
+    :size="likesCount ? 'sm' : 'md'"
+    class-name="gap-1"
+    @click="handleClickLike"
+  >
+    <KunIcon class="icon" name="lucide:thumbs-up" />
     <span v-if="likesCount">{{ likesCount }}</span>
-  </span>
+  </KunButton>
 </template>
-
-<style lang="scss" scoped>
-.like {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 10px;
-
-  .icon {
-    cursor: pointer;
-    color: var(--kungalgame-font-color-2);
-    margin-right: 3px;
-  }
-}
-
-.active .icon {
-  color: var(--kungalgame-red-4);
-}
-</style>

@@ -76,12 +76,6 @@
       "label": "TouchGAL是立足于分享快乐的一站式Galgame文化社区, 为Gal爱好者提供一片净土!"
     },
     {
-      "name": "Galgamex",
-      "banner": "galgamex",
-      "link": "https://www.galgamex.org/",
-      "label": "Galgamex -- 一个二次元和galgame游戏资源交流社区"
-    },
-    {
       "name": "维咔 ACG",
       "banner": "vikacg",
       "link": "https://www.vikacg.com/",
@@ -96,8 +90,8 @@
     {
       "name": "莉斯坦 Galgame",
       "banner": "limulu",
-      "link": "https://listan.top/",
-      "label": "一个简洁美观的Gal网站"
+      "link": "https://www.limulu.moe/",
+      "label": "莉斯坦ACG - 一个简洁美观人性化的ACG资源站"
     },
     {
       "name": "梓澪の妙妙屋",
@@ -126,7 +120,7 @@
     {
       "name": "Galgame 月谣",
       "banner": "sayafx",
-      "link": "https://www.sayafx.top/",
+      "link": "https://www.sayafx.space/",
       "label": "Galgame, 月谣, 月谣分享, Galgame 月谣, Galgame 下载, 免费 Galgame, Galgame 资讯"
     },
     {
@@ -134,6 +128,12 @@
       "banner": "lzacg",
       "link": "https://www.lzacg.top/",
       "label": "量子ACG是一个以游戏为主, 进而推动日语学习的网站"
+    },
+    {
+      "name": "御爱同萌",
+      "banner": "ai2moe",
+      "link": "https://www.ai2.moe/",
+      "label": "禦愛同萌！一個以非營利為目的的交流社區"
     }
   ],
   "others": [
@@ -172,6 +172,12 @@
       "banner": "acgbox",
       "link": "https://www.acgbox.link/",
       "label": "ACG 盒子, ACG 二次元导航网站, 收录 ACG 二次元相关的网站, 打造一个 ACG 二次元专属的网站。"
+    },
+    {
+      "name": "初音导航",
+      "banner": "chooiin",
+      "link": "https://www.chooiin.com/",
+      "label": "最初的声音，无限的未来。"
     },
     {
       "name": "萌哩 - 萌萌的二次元美图",

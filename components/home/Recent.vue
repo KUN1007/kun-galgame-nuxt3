@@ -3,7 +3,7 @@ import type { HomeMessage } from '~/types/api/home'
 
 const iconMap: Record<string, string> = {
   upvoted: 'lucide:sparkles',
-  replied: 'lucide:reply',
+  replied: 'carbon:reply',
   commented: 'uil:comment-dots',
   requested: 'lucide:git-pull-request-arrow'
 }
@@ -31,44 +31,51 @@ watch(
 </script>
 
 <template>
-  <div v-if="messageData" class="w-3xs shrink-0 space-y-3 rounded-lg">
+  <KunCard
+    :is-transparent="false"
+    v-if="messageData"
+    content-class="space-y-3"
+    :is-hoverable="false"
+  >
     <h2 class="text-xl font-semibold">最新动态</h2>
 
-    <div class="rounded-lg border shadow">
+    <div
+      v-for="(message, index) in messageData"
+      :key="index"
+      class="group flex items-start space-x-3 rounded-lg transition-colors"
+    >
       <div
-        v-for="(message, index) in messageData"
-        :key="index"
-        class="group flex items-start space-x-3 rounded-lg p-3 transition-colors"
+        class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
       >
-        <div
-          class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
+        <KunIcon :name="iconMap[message.type]" class="text-primary h-4 w-4" />
+      </div>
+
+      <div class="space-y-2">
+        <KunLink
+          underline="none"
+          color="default"
+          :to="
+            message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`
+          "
+          class-name="hover:text-primary line-clamp-3 break-all transition-colors"
         >
-          <Icon :name="iconMap[message.type]" class="text-primary h-4 w-4" />
-        </div>
+          {{ message.content }}
+        </KunLink>
 
-        <div class="space-y-2">
-          <NuxtLink
-            :to="
-              message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`
-            "
-            class="hover:text-primary line-clamp-3 break-all transition-colors"
+        <div class="flex items-center space-x-2">
+          <KunLink
+            underline="none"
+            color="default"
+            :to="`/user/${message.uid}/info`"
+            class-name="hover:text-foreground text-default-500 text-sm font-medium transition-colors"
           >
-            {{ message.content }}
-          </NuxtLink>
-
-          <div class="flex items-center space-x-2">
-            <NuxtLink
-              :to="`/kungalgamer/${message.uid}/info`"
-              class="hover:text-foreground text-sm font-medium text-gray-600 transition-colors"
-            >
-              {{ message.name }}
-            </NuxtLink>
-            <span class="text-sm text-gray-500">
-              {{ formatTimeDifference(message.time) }}
-            </span>
-          </div>
+            {{ message.name }}
+          </KunLink>
+          <span class="text-default-500 text-sm">
+            {{ formatTimeDifference(message.time) }}
+          </span>
         </div>
       </div>
     </div>
-  </div>
+  </KunCard>
 </template>

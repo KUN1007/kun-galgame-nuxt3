@@ -47,7 +47,6 @@ const handleAddTag = () => {
 
   if (tagName.length > 0 && selectedTags.value.length < 7) {
     const tag = validateTagName(tagName)
-
     selectedTags.value.push(tag)
     inputValue.value = ''
     canDeleteTag.value = true
@@ -65,11 +64,9 @@ const handleRemoveTag = () => {
 
 const validateTagName = (tagName: string) => {
   let validatedName = tagName
-
   if (validatedName.length > 17) {
     validatedName = validatedName.slice(0, 17)
   }
-
   return validatedName
 }
 
@@ -87,131 +84,55 @@ watch(
 </script>
 
 <template>
-  <div class="container-a">
-    <div class="input-container">
-      <div class="tags-container">
-        <span
-          v-for="(tag, index) in selectedTags"
-          :key="index"
-          class="selected-tag"
-        >
-          {{ tag }}
-          <span class="close-btn" @click="handleTagClose(tag)">×</span>
-        </span>
+  <div class="mx-auto w-full">
+    <div class="relative">
+      <div
+        class="ring-default-500 bg-default/10 min-h-[44px] w-full rounded-lg px-6 py-3 shadow transition-all focus-within:ring-1"
+      >
+        <div class="flex flex-wrap gap-2">
+          <KunBadge
+            color="primary"
+            size="md"
+            v-for="(tag, index) in selectedTags"
+            :key="index"
+          >
+            {{ tag }}
+            <button
+              @click="handleTagClose(tag)"
+              class="text-primary ml-2 focus:outline-none"
+            >
+              ×
+            </button>
+          </KunBadge>
+
+          <input
+            class="placeholder-default-500 text-default-700 min-w-[120px] flex-grow bg-transparent outline-none"
+            type="text"
+            v-model="inputValue"
+            placeholder="请输入标签"
+            @input="canDeleteTag = false"
+            @keyup.enter="handleAddTag"
+            @keyup.backspace="handleRemoveTag"
+            @focus="isInputFocus = true"
+            @blur="isInputFocus = false"
+          />
+        </div>
       </div>
 
-      <input
-        class="input"
-        type="text"
-        v-model="inputValue"
-        placeholder="请输入标签"
-        @input="canDeleteTag = false"
-        @keyup.enter="handleAddTag"
-        @keyup.backspace="handleRemoveTag"
-        @focus="isInputFocus = true"
-        @blur="isInputFocus = false"
-      />
-
-      <span v-if="inputValue" class="add-tag" @click="handleAddTag">
-        <Icon name="lucide:plus" />
-      </span>
-
-      <div class="box1"></div>
-      <div class="box2" :class="isInputFocus ? 'box-active' : ''"></div>
+      <div class="absolute top-1/2 right-2 -translate-y-1/2">
+        <KunButton
+          :is-icon-only="true"
+          variant="flat"
+          v-if="inputValue"
+          @click="handleAddTag"
+        >
+          <KunIcon name="lucide:plus" class="h-5 w-5 text-blue-600" />
+        </KunButton>
+      </div>
     </div>
 
-    <div class="hint">
-      提示:（单个标签 17 个字符以内，至少选择一个、最多 7 个）,
-      您可以输入文字后按下 ' Enter ' 创建标签
-    </div>
+    <p class="text-default-500 mt-2 text-sm">
+      话题至少选择一个标签, 最多 7 个标签, 您可以输入文字后按下回车创建标签
+    </p>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.container-a {
-  width: 100%;
-}
-
-.input-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-
-  .tags-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .add-tag {
-    height: 32px;
-    width: 32px;
-
-    cursor: pointer;
-    font-size: 24px;
-    border-radius: 10px;
-    background-color: var(--kungalgame-blue-5);
-    color: var(--kungalgame-white);
-  }
-}
-
-.selected-tag {
-  border: 1px solid var(--kungalgame-pink-4);
-  border-radius: 14px;
-  margin: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  white-space: nowrap;
-  font-size: 14px;
-  padding: 3px 17px;
-  background-color: var(--kungalgame-trans-pink-0);
-
-  span {
-    cursor: pointer;
-  }
-}
-
-.close-btn {
-  margin: 0 5px;
-}
-
-.input {
-  background-color: transparent;
-  font-size: 17px;
-  flex-grow: 1;
-  border: none;
-  padding: 7px;
-  display: flex;
-  min-width: 300px;
-  color: var(--kungalgame-font-color-3);
-}
-
-.box1 {
-  height: 2px;
-  width: 100%;
-  display: flex;
-  background-color: var(--kungalgame-blue-0);
-}
-
-.box2 {
-  position: relative;
-  transform: translateY(-2px);
-  transition: all 0.5s;
-  height: 2px;
-  width: 1px;
-  display: flex;
-  background-color: var(--kungalgame-blue-2);
-}
-
-.box-active {
-  width: 100%;
-  background-color: var(--kungalgame-blue-5);
-}
-
-.hint {
-  font-size: small;
-  color: var(--kungalgame-font-color-1);
-}
-</style>

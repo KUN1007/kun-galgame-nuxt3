@@ -1,188 +1,52 @@
 <script setup lang="ts">
 const { showKUNGalgameBackLoli } = storeToRefs(usePersistSettingsStore())
-
-const showItemIndex = ref(1)
-
-const emits = defineEmits<{
-  close: [showKUNGalgamePanel: boolean]
-}>()
-
-const handelCloseSettingsPanel = () => {
-  emits('close', false)
-}
+const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 </script>
 
 <template>
-  <div class="root">
-    <div class="container">
-      <div class="title">
-        <span>设置面板</span>
-        <span>
-          <Icon
-            @click="navigateTo('/rss')"
-            class="rss-icon"
-            name="lucide:rss"
-          />
-          <Icon class="settings-icon" name="uiw:setting-o" />
-        </span>
-      </div>
+  <KunModal
+    :modal-value="showKUNGalgamePanel"
+    @update:modal-value="(value) => (showKUNGalgamePanel = value)"
+    inner-class-name="overflow-visible"
+  >
+    <div class="relative flex justify-between">
+      <div class="relative shrink-0 space-y-4">
+        <div class="flex w-67 items-center gap-2 text-lg sm:w-58">
+          <span>设置面板</span>
 
-      <KunSettingPanelComponentsMode />
-
-      <div class="switch">
-        <div class="menu">
-          <span
-            :class="showItemIndex === 1 ? 'active' : ''"
-            @click="showItemIndex = 1"
-          >
-            <Icon class="icon" name="mdi:circle-transparent" />
-          </span>
-          <span
-            :class="showItemIndex === 2 ? 'active' : ''"
-            @click="showItemIndex = 2"
-          >
-            <Icon class="icon" name="tabler:blur" />
-          </span>
-          <span
-            :class="showItemIndex === 3 ? 'active' : ''"
-            @click="showItemIndex = 3"
-          >
-            <Icon class="icon" name="ci:font" />
-          </span>
-
-          <span
-            class="loli"
-            v-tooltip="{
-              message: {
-                'en-us': 'Whether to display Kohaku',
-                'ja-jp': '琥珀を表示しますか？',
-                'zh-cn': '是否显示琥珀',
-                'zh-tw': '是否顯示琥珀'
-              },
-              position: 'bottom'
-            }"
-          >
-            <KunSwitch v-model="showKUNGalgameBackLoli" />
-          </span>
+          <KunTooltip class-name="flex" text="设置面板帮助" position="bottom">
+            <KunLink color="default" class="hover:text-primary">
+              <KunIcon name="lucide:circle-help" />
+            </KunLink>
+          </KunTooltip>
         </div>
 
-        <TransitionGroup name="item" tag="div">
-          <div class="item" v-if="showItemIndex === 1">
-            <KunSettingPanelComponentsTransparency />
-          </div>
+        <KunSettingPanelComponentsMode />
 
-          <div class="item" v-if="showItemIndex === 2">
-            <KunSettingPanelComponentsBlur />
-          </div>
+        <KunSettingPanelComponentsConfigItems />
 
-          <div class="item" v-else-if="showItemIndex === 3">
-            <KunSettingPanelComponentsFont />
-          </div>
-        </TransitionGroup>
+        <div class="ml-auto flex justify-between gap-2">
+          显示琥珀
+          <KunTooltip
+            class-name="flex"
+            text="是否显示网站右下角这只可爱的孩子"
+            position="bottom"
+          >
+            <KunSwitch v-model="showKUNGalgameBackLoli" />
+          </KunTooltip>
+        </div>
+
+        <KunSettingPanelComponentsBackground />
+
+        <KunSettingPanelComponentsReset />
       </div>
 
-      <KunSettingPanelComponentsBackground class="background" />
-
-      <KunSettingPanelComponentsReset />
+      <KunSettingPanelComponentsLoli />
     </div>
-
-    <KunSettingPanelComponentsLoli class="loli" />
-
-    <div class="close">
-      <Icon class="icon" @click="handelCloseSettingsPanel" name="lucide:x" />
-    </div>
-  </div>
+  </KunModal>
 </template>
 
 <style lang="scss" scoped>
-.root {
-  top: 75px;
-  right: 0;
-  position: absolute;
-  display: flex;
-  border: 1px solid var(--kungalgame-blue-2);
-
-  backdrop-filter: blur(10px);
-}
-
-.container {
-  position: relative;
-  margin: 20px;
-  font-size: 17px;
-}
-
-.title {
-  font-size: 23px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  span {
-    display: flex;
-    align-items: center;
-  }
-
-  .rss-icon {
-    cursor: pointer;
-    margin-right: 17px;
-  }
-
-  .settings-icon {
-    animation: settings 3s linear infinite;
-  }
-}
-
-@keyframes settings {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.switch {
-  display: flex;
-  flex-direction: column;
-
-  .menu {
-    display: flex;
-    align-items: center;
-    margin-bottom: 17px;
-
-    span {
-      cursor: pointer;
-      border-radius: 10px;
-      padding: 5px 7px;
-      font-size: 20px;
-    }
-
-    .loli {
-      margin-left: auto;
-    }
-
-    .active {
-      box-shadow: var(--shadow);
-      background-color: var(--kungalgame-trans-blue-0);
-      color: var(--kungalgame-blue-5);
-    }
-  }
-
-  .item {
-    width: 100%;
-    height: 73px;
-  }
-}
-
-.close {
-  font-size: 25px;
-  width: 270px;
-  display: flex;
-  justify-content: flex-end;
-  margin: 20px;
-  cursor: pointer;
-}
-
 .item-move,
 .item-enter-active,
 .item-leave-active {
@@ -197,11 +61,5 @@ const handelCloseSettingsPanel = () => {
 
 .item-leave-active {
   position: absolute;
-}
-
-@media (max-width: 1000px) {
-  .root {
-    display: none;
-  }
 }
 </style>

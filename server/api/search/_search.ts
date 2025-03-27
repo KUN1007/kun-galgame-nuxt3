@@ -73,18 +73,18 @@ export const searchGalgame = async (
           { 'name.ja-jp': { $regex: keywords.join('|'), $options: 'i' } },
           { 'name.zh-cn': { $regex: keywords.join('|'), $options: 'i' } },
           { 'name.zh-tw': { $regex: keywords.join('|'), $options: 'i' } },
-          {
-            'introduction.en-us': { $regex: keywords.join('|'), $options: 'i' }
-          },
-          {
-            'introduction.ja-jp': { $regex: keywords.join('|'), $options: 'i' }
-          },
-          {
-            'introduction.zh-cn': { $regex: keywords.join('|'), $options: 'i' }
-          },
-          {
-            'introduction.zh-tw': { $regex: keywords.join('|'), $options: 'i' }
-          },
+          // {
+          //   'introduction.en-us': { $regex: keywords.join('|'), $options: 'i' }
+          // },
+          // {
+          //   'introduction.ja-jp': { $regex: keywords.join('|'), $options: 'i' }
+          // },
+          // {
+          //   'introduction.zh-cn': { $regex: keywords.join('|'), $options: 'i' }
+          // },
+          // {
+          //   'introduction.zh-tw': { $regex: keywords.join('|'), $options: 'i' }
+          // },
           { alias: { $in: keywords } },
           { tags: { $in: keywords } },
           { vndb_id: { $in: keywords } }
@@ -97,32 +97,25 @@ export const searchGalgame = async (
     .sort({ time: -1 })
     .skip(skip)
     .limit(limit)
+    .populate('user', 'uid avatar name', UserModel)
     .lean()
 
-  const galgames: SearchResultGalgame[] = await Promise.all(
-    data.map(async (galgame) => {
-      const contributors = await Promise.all(
-        galgame.contributor.map(async (uid: number) => {
-          const user = await UserModel.findOne({ uid }).lean()
-          return {
-            uid,
-            name: user?.name || '',
-            avatar: user?.avatar || ''
-          }
-        })
-      )
-
-      return {
-        gid: galgame.gid,
-        name: galgame.name,
-        time: galgame.time,
-        views: galgame.views,
-        contributors,
-        languages: galgame.language,
-        platforms: galgame.platform
-      }
-    })
-  )
+  const galgames: SearchResultGalgame[] = data.map((galgame) => ({
+    gid: galgame.gid,
+    name: galgame.name,
+    banner: galgame.banner,
+    user: {
+      uid: galgame.user[0].uid,
+      name: galgame.user[0].name,
+      avatar: galgame.user[0].avatar
+    },
+    views: galgame.views,
+    likes: galgame.likes.length,
+    favorites: galgame.favorites.length,
+    time: galgame.time,
+    platform: galgame.platform,
+    language: galgame.language
+  }))
 
   return galgames
 }

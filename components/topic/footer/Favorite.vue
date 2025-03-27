@@ -6,7 +6,7 @@ const props = defineProps<{
   isFavorite: boolean
 }>()
 
-const { moemoeAccessToken } = usePersistUserStore()
+const { uid } = usePersistUserStore()
 const isFavorite = ref(props.isFavorite)
 const favoritesCount = ref(props.favoritesCount)
 
@@ -35,7 +35,7 @@ const handleClickFavoriteThrottled = throttle(toggleFavoriteGalgame, 1007, () =>
 )
 
 const handleClickFavorite = () => {
-  if (!moemoeAccessToken) {
+  if (!uid) {
     useMessage(10232, 'warn', 5000)
     return
   }
@@ -44,40 +44,17 @@ const handleClickFavorite = () => {
 </script>
 
 <template>
-  <span
-    class="favorite"
-    :class="isFavorite ? 'active' : ''"
-    @click="handleClickFavorite"
-  >
-    <Icon class="icon" name="lucide:heart" />
-    <span v-if="favoritesCount">{{ favoritesCount }}</span>
-  </span>
+  <KunTooltip text="收藏">
+    <KunButton
+      :is-icon-only="true"
+      :variant="isFavorite ? 'flat' : 'light'"
+      :color="isFavorite ? 'secondary' : 'default'"
+      :size="favoritesCount ? 'md' : 'lg'"
+      class-name="gap-1"
+      @click="handleClickFavorite"
+    >
+      <KunIcon name="lucide:heart" />
+      <span v-if="favoritesCount">{{ favoritesCount }}</span>
+    </KunButton>
+  </KunTooltip>
 </template>
-
-<style lang="scss" scoped>
-.favorite {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 0;
-  color: var(--kungalgame-font-color-2);
-
-  .icon {
-    cursor: pointer;
-    font-size: 24px;
-    margin-right: 3px;
-  }
-}
-
-.active .icon {
-  color: var(--kungalgame-red-4);
-}
-
-@media (max-width: 700px) {
-  .favorite {
-    .icon {
-      font-size: initial;
-    }
-  }
-}
-</style>

@@ -68,140 +68,80 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
 </script>
 
 <template>
-  <div class="more" v-if="details">
-    <div class="title">
-      <span class="link" v-for="(kun, index) in details.link" :key="index">
-        <KunCopy :text="kun" />
-        <a :href="kun" target="_blank" rel="noopener noreferrer">
-          <Icon class="icon" name="lucide:external-link" />
-        </a>
-      </span>
-
-      <div class="password">
-        <span v-if="details.code">
-          <span>提取码: </span>
-          <KunCopy :text="details.code" />
-        </span>
-        <span v-if="details.password">
-          <span>解压码: </span>
-          <KunCopy :text="details.password" />
-        </span>
-      </div>
-    </div>
-
-    <pre class="note">{{ details.note }}</pre>
-
-    <div class="user">
-      <div class="user-info">
-        <KunAvatar :user="details.user" size="33px" />
-        <span class="username">{{ details.user.name }}</span>
-        <span class="time">
+  <div class="space-y-2" v-if="details">
+    <div class="flex justify-between">
+      <div class="flex items-center gap-2">
+        <KunAvatar :user="details.user" />
+        <span>{{ details.user.name }}</span>
+        <span class="text-default-500 text-sm">
           {{ formatTimeDifference(details.time) }}
         </span>
       </div>
 
-      <div class="user-btn" v-if="details.user.uid === uid">
-        <span class="rewrite" @click="handleRewriteResource(details)">
-          <Icon class="icon" name="lucide:pencil" />
-        </span>
-        <span
-          class="delete"
+      <div class="space-x-1" v-if="details.user.uid === uid">
+        <KunButton
+          :is-icon-only="true"
+          variant="light"
+          @click="handleRewriteResource(details)"
+        >
+          <KunIcon class="icon" name="lucide:pencil" />
+        </KunButton>
+        <KunButton
+          :is-icon-only="true"
+          color="danger"
+          variant="light"
           @click="handleDeleteResource(details.gid, details.grid)"
         >
-          <Icon class="icon" name="lucide:trash-2" />
-        </span>
+          <KunIcon class="icon" name="lucide:trash-2" />
+        </KunButton>
       </div>
 
       <div class="other-btn" v-if="uid !== details.user.uid && !details.status">
         <KunButton
-          type="danger"
+          variant="flat"
+          color="danger"
           @click="handleReportExpire(details)"
           :pending="isFetching"
         >
-          报告过期
+          报告链接过期
         </KunButton>
       </div>
     </div>
+
+    <div class="flex items-center gap-2">
+      <KunCopy
+        variant="flat"
+        v-if="details.code"
+        :name="`提取码 ${details.code}`"
+        :text="details.code"
+      />
+      <KunCopy
+        variant="flat"
+        v-if="details.password"
+        :name="`解压码 ${details.password}`"
+        :text="details.password"
+      />
+    </div>
+
+    <pre
+      v-if="details.note"
+      class="bg-default-100 rounded-lg p-3 whitespace-pre-line"
+    >
+      {{ details.note }}
+    </pre>
+
+    <div class="space-y-2 space-x-2">
+      <p class="text-default-500 text-sm">点击下面的链接以下载</p>
+      <KunLink
+        v-for="(kun, index) in details.link"
+        :key="index"
+        :to="kun"
+        target="_blank"
+        rel="noopener noreferrer"
+        :is-show-anchor-icon="true"
+      >
+        {{ kun }}
+      </KunLink>
+    </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.more {
-  margin-bottom: 10px;
-}
-
-.title {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-  .link {
-    cursor: pointer;
-    margin-bottom: 10px;
-
-    & > a {
-      margin-left: 10px;
-      font-size: 20px;
-      color: var(--kungalgame-font-color-0);
-
-      &:hover {
-        color: var(--kungalgame-blue-5);
-      }
-    }
-  }
-
-  .password {
-    margin-bottom: 10px;
-
-    & > span {
-      &:first-child {
-        margin-right: 10px;
-      }
-    }
-  }
-}
-
-.note {
-  margin: 0;
-  margin-bottom: 10px;
-  border-left: 5px solid var(--kungalgame-blue-5);
-  padding-left: 10px;
-  white-space: pre-wrap;
-  word-break: break-all;
-}
-
-.user {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-  .user-info {
-    display: flex;
-    align-items: center;
-
-    .username {
-      margin: 0 10px;
-    }
-
-    .time {
-      font-size: small;
-    }
-  }
-
-  .user-btn {
-    font-size: 17px;
-
-    span {
-      cursor: pointer;
-
-      &:first-child {
-        margin-right: 17px;
-      }
-
-      &:last-child {
-        color: var(--kungalgame-red-5);
-      }
-    }
-  }
-}
-</style>

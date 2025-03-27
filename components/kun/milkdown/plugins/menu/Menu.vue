@@ -1,0 +1,97 @@
+<script setup lang="ts">
+import { callCommand } from '@milkdown/utils'
+import { insertImageCommand } from '@milkdown/preset-commonmark'
+import { commands } from './_buttonList'
+import type { UseEditorReturn } from '@milkdown/vue'
+import type { CmdKey } from '@milkdown/core'
+
+const props = defineProps<{
+  editorInfo: UseEditorReturn
+  isShowUploadImage: boolean
+}>()
+
+const { get } = props.editorInfo
+const input = ref<HTMLElement>()
+
+const call = <T,>(command: CmdKey<T>, payload?: T, callback?: () => void) => {
+  const result = get()?.action(callCommand(command, payload))
+  if (callback) {
+    callback()
+  }
+  return result
+}
+
+const handleFileChange = async (event: Event) => {
+  const input = event.target as HTMLInputElement
+  if (!input.files || !input.files[0]) {
+    return
+  }
+  const file = input.files[0]
+
+  const formData = new FormData()
+  formData.append('image', file)
+
+  useMessage(10107, 'info')
+  const result = await $fetch('/api/image/topic', {
+    method: 'POST',
+    body: formData,
+    watch: false,
+    ...kungalgameResponseHandler
+  })
+
+  if (result) {
+    const fileName = file.name.replace(/[^a-zA-Z0-9 ]/g, '')
+    const userName = usePersistUserStore().name
+    const imageName = `${userName}-${Date.now()}-${fileName}`
+    call(insertImageCommand.key, {
+      src: result ?? '',
+      title: imageName,
+      alt: imageName
+    })
+    useMessage(10108, 'success')
+  }
+}
+</script>
+
+<template>
+  <div class="flex flex-wrap items-center space-x-1">
+    <KunButton
+      :is-icon-only="true"
+      v-for="(btn, index) in commands"
+      :key="index"
+      class="btn"
+      variant="light"
+      size="xl"
+      @click="call(btn.command.key, btn.payload)"
+    >
+      <KunIcon class="text-foreground" :name="btn.icon" />
+    </KunButton>
+
+    <KunButton
+      :is-icon-only="true"
+      v-if="props.isShowUploadImage"
+      variant="light"
+      size="xl"
+      @click="input?.click()"
+    >
+      <KunIcon class="text-foreground" name="lucide:image-plus" />
+      <input
+        hidden
+        ref="input"
+        type="file"
+        accept=".jpg, .jpeg, .png, .webp"
+        @change="handleFileChange($event)"
+      />
+    </KunButton>
+
+    <div class="group relative flex justify-center">
+      <KunButton variant="light" size="xl" :is-icon-only="true">
+        <KunIcon class="text-foreground" name="lucide:smile-plus" />
+      </KunButton>
+      <KunMilkdownPluginsEmojiContainer
+        class="hidden group-hover:flex"
+        :editor-info="editorInfo"
+      />
+    </div>
+  </div>
+</template>

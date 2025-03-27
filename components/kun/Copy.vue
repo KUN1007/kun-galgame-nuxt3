@@ -1,31 +1,41 @@
 <script setup lang="ts">
-withDefaults(defineProps<{ text: string; name?: string }>(), {
-  name: ''
+import type {
+  KunUIVariant,
+  KunUIColor,
+  KunUISize,
+  KunUIRounded
+} from './ui/type'
+
+interface KunCopyProps {
+  text: string
+  name?: string
+  variant?: KunUIVariant
+  color?: KunUIColor
+  size?: KunUISize
+  rounded?: KunUIRounded
+  className?: string
+}
+
+withDefaults(defineProps<KunCopyProps>(), {
+  name: '',
+  variant: 'light',
+  color: 'primary',
+  size: 'md',
+  rounded: 'lg',
+  className: ''
 })
 </script>
 
 <template>
-  <span class="kun-copy" @click="useKunCopy(text)">
+  <KunButton
+    :variant="variant"
+    :color="color"
+    :size="size"
+    :rounded="rounded"
+    :class-name="cn('gap-2', className)"
+    @click="useKunCopy(text)"
+  >
     <span>{{ decodeIfEncoded(name ? name : text) }}</span>
-    <Icon class="icon" name="lucide:copy" />
-  </span>
+    <KunIcon name="lucide:copy" />
+  </KunButton>
 </template>
-
-<style lang="scss" scoped>
-.kun-copy {
-  cursor: pointer;
-  color: var(--kungalgame-blue-5);
-  padding: 3px 10px;
-  font-weight: bold;
-  border-radius: 10px;
-  word-break: break-all;
-
-  &:hover {
-    background-color: var(--kungalgame-trans-blue-0);
-  }
-
-  .icon {
-    margin-left: 10px;
-  }
-}
-</style>

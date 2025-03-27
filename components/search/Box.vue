@@ -1,6 +1,8 @@
 <script setup lang="ts">
+const { searchHistory } = storeToRefs(usePersistKUNGalgameSearchStore())
 const { keywords } = storeToRefs(useTempSearchStore())
 
+const isFocus = ref(false)
 const input = ref<HTMLElement | null>(null)
 const inputValue = ref('')
 
@@ -9,11 +11,7 @@ onBeforeMount(() => {
 })
 
 const debouncedSearch = debounce((inputValue: string) => {
-  if (inputValue.trim()) {
-    keywords.value = inputValue
-  } else {
-    keywords.value = ''
-  }
+  keywords.value = inputValue.trim() || ''
 }, 500)
 
 watch(
@@ -25,44 +23,31 @@ watch(
   }
 )
 
-onMounted(() => {
-  if (input.value) {
-    input.value?.focus()
+onMounted(() => input.value?.focus())
+
+const handleInputBlur = () => {
+  isFocus.value = false
+  if (!keywords.value.trim()) {
+    return
   }
-})
+
+  if (!searchHistory.value.includes(keywords.value)) {
+    searchHistory.value.push(keywords.value)
+  }
+}
 </script>
 
 <template>
-  <input
+  <KunInput
     ref="input"
     v-model="inputValue"
     type="search"
-    class="input"
+    size="lg"
+    :color="isFocus ? 'primary' : 'default'"
     placeholder="输入内容以自动搜索"
+    @focus="isFocus = true"
+    @blur="handleInputBlur"
     @input="debouncedSearch(inputValue)"
     @keydown.enter="debouncedSearch(inputValue)"
   />
 </template>
-
-<style lang="scss" scoped>
-.input {
-  padding: 0 15px;
-  height: 40px;
-  width: 100%;
-  font-size: 16px;
-  border: none;
-  background-color: transparent;
-  border: 2px solid var(--kungalgame-blue-5);
-  border-radius: 10px;
-  color: var(--kungalgame-font-color-3);
-  transition: all 0.2s;
-
-  &:focus {
-    border: 2px solid var(--kungalgame-pink-4);
-  }
-
-  &::placeholder {
-    color: var(--kungalgame-font-color-1);
-  }
-}
-</style>

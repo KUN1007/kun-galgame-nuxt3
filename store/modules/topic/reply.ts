@@ -6,8 +6,6 @@ export const usePersistKUNGalgameReplyStore = defineStore(
     persist: true,
     state: (): ReplyStorePersist => ({
       mode: 'preview',
-      textCount: 0,
-
       replyDraft: {
         toUserName: '',
         toUid: 0,
@@ -18,8 +16,6 @@ export const usePersistKUNGalgameReplyStore = defineStore(
     }),
     actions: {
       resetReplyDraft() {
-        this.textCount = 0
-
         this.replyDraft.toUserName = ''
         this.replyDraft.toUid = 0
         this.replyDraft.content = ''
@@ -28,8 +24,6 @@ export const usePersistKUNGalgameReplyStore = defineStore(
       },
 
       resetReplyContent() {
-        this.textCount = 0
-
         this.replyDraft.content = ''
         this.replyDraft.tags = []
       }

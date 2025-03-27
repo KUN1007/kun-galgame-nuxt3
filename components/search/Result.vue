@@ -5,78 +5,57 @@ import type {
   SearchResultUser,
   SearchResultReply,
   SearchResultComment,
+  SearchType,
   SearchResult
 } from '~/types/api/search'
 
-const { searchHistory } = storeToRefs(usePersistKUNGalgameSearchStore())
-const { keywords } = storeToRefs(useTempSearchStore())
-
 const props = defineProps<{
+  type: SearchType
   results: SearchResult[]
-  type: 'topic' | 'galgame' | 'user' | 'reply' | 'comment'
 }>()
 
-const handleClick = () => {
-  if (!searchHistory.value.includes(keywords.value)) {
-    searchHistory.value.push(keywords.value)
-  }
-}
+const isTopicResults = (results: unknown[]): results is SearchResultTopic[] =>
+  props.type === 'topic'
+const isGalgameResults = (
+  results: unknown[]
+): results is SearchResultGalgame[] => props.type === 'galgame'
+const isUserResults = (results: unknown[]): results is SearchResultUser[] =>
+  props.type === 'user'
+const isReplyResults = (results: unknown[]): results is SearchResultReply[] =>
+  props.type === 'reply'
+const isCommentResults = (
+  results: unknown[]
+): results is SearchResultComment[] => props.type === 'comment'
 </script>
 
 <template>
   <div class="result">
-    <div class="container" v-if="props.type === 'topic'">
-      <div v-for="(topic, index) in results" :key="index">
-        <HomeTopicCard
-          @click="handleClick"
-          :topic="topic as SearchResultTopic"
-        />
-        <KunDivider margin="0 7px" />
-      </div>
+    <div v-if="isTopicResults(results)" class="space-y-3">
+      <KunCard v-for="(topic, index) in results" :key="index">
+        <HomeTopicCard :topic="topic" />
+      </KunCard>
     </div>
 
-    <div class="container" v-if="props.type === 'galgame'">
-      <div v-for="(galgame, index) in results" :key="index">
-        <HomeGalgameCard
-          @click="handleClick"
-          :galgame="galgame as SearchResultGalgame"
-        />
-        <KunDivider margin="0 7px" />
-      </div>
+    <GalgameCard v-if="isGalgameResults(results)" :galgames="results" />
+
+    <div v-if="isUserResults(results)" class="space-y-3">
+      <SearchUserCard
+        v-for="(user, index) in results"
+        :key="index"
+        :user="user"
+      />
     </div>
 
-    <div class="container" v-if="props.type === 'user'">
-      <div v-for="(user, index) in results" :key="index">
-        <SearchUserCard :user="user as SearchResultUser" />
-        <KunDivider margin="0 17px" />
-      </div>
+    <div v-if="isReplyResults(results)" class="space-y-3">
+      <KunCard v-for="(reply, index) in results" :key="index">
+        <SearchReplyCommentCard :data="reply" type="reply" />
+      </KunCard>
     </div>
 
-    <div class="container" v-if="props.type === 'reply'">
-      <div v-for="(reply, index) in results" :key="index">
-        <SearchReplyCommentCard
-          :data="reply as SearchResultReply"
-          type="reply"
-        />
-        <KunDivider margin="0 17px" />
-      </div>
-    </div>
-
-    <div class="container" v-if="props.type === 'comment'">
-      <div v-for="(comment, index) in results" :key="index">
-        <SearchReplyCommentCard
-          :data="comment as SearchResultComment"
-          type="comment"
-        />
-        <KunDivider margin="0 17px" />
-      </div>
+    <div v-if="isCommentResults(results)" class="space-y-3">
+      <KunCard v-for="(comment, index) in results" :key="index">
+        <SearchReplyCommentCard :data="comment" type="comment" />
+      </KunCard>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.result {
-  width: 100%;
-  margin-top: 17px;
-}
-</style>

@@ -14,7 +14,7 @@ const linkModel = reactive({
   link: ''
 })
 
-const { data, pending, refresh } = await useLazyFetch(
+const { data, status, refresh } = await useLazyFetch(
   `/api/galgame/${gid.value}/link/all`,
   {
     method: 'GET',
@@ -66,106 +66,58 @@ const handleDeleteLink = async (gid: number, glid: number) => {
 </script>
 
 <template>
-  <div class="container">
-    <KunHeader :size="2">
-      <template #header>
-        <span>相关链接</span>
-
-        <span class="contribute" @click="isShowEdit = !isShowEdit">
-          <Icon class="icon" name="lucide:circle-plus" />
-        </span>
+  <div class="flex flex-col space-y-3">
+    <KunHeader
+      :is-show-divider="false"
+      name="相关链接"
+      description="这里可以添加任何与该游戏有关的链接, 例如论坛话题, 其它网络文章, 视频链接, 媒体链接等等"
+    >
+      <template #headerEndContent>
+        <KunButton class-name="shrink-0" @click="isShowEdit = !isShowEdit">
+          添加相关链接
+        </KunButton>
       </template>
     </KunHeader>
 
-    <div class="link-edit" v-if="isShowEdit">
-      <GalgameLinkHelp />
+    <KunLoading v-if="status === 'pending'" />
+    <GalgameNull v-if="status !== 'pending' && !data?.length" />
 
+    <div class="space-y-2" v-if="isShowEdit">
+      <KunCard :is-hoverable="false">
+        <p>
+          <strong>我们鼓励添加游戏的正版购买链接</strong>
+        </p>
+        <p>除官方购买链接外, 不得放置付费的引流链接</p>
+        <p>我们会在发布游戏时自动添加 VNDB 链接</p>
+      </KunCard>
       <KunInput placeholder="链接名" v-model="linkModel.name" />
       <KunInput placeholder="链接地址" v-model="linkModel.link" />
-      <KunButton @click="handlePublishLink" :pending="isFetching">
-        创建
-      </KunButton>
+      <div class="flex justify-end">
+        <KunButton @click="handlePublishLink" :pending="isFetching">
+          创建链接
+        </KunButton>
+      </div>
     </div>
 
-    <div class="links" v-if="data && !pending">
-      <span class="link" v-for="(link, index) in data" :key="index">
-        <KunCopy
-          :text="link.link"
-          :name="link.name"
-          v-tooltip="{
-            message: `${link.link.slice(0, 30)}...`,
-            position: 'bottom'
-          }"
-        />
-        <a :href="link.link" target="_blank" rel="noopener noreferrer">
-          <Icon class="icon" name="lucide:external-link" />
-        </a>
-        <span
-          v-if="uid === link.uid"
-          class="delete"
-          @click="handleDeleteLink(link.gid, link.glid)"
-          :pending="isFetching"
-        >
-          <Icon class="icon" name="lucide:trash-2" />
-        </span>
-      </span>
+    <div class="space-y-2" v-if="data">
+      <KunCard :is-hoverable="false" v-for="(link, index) in data" :key="index">
+        <p>{{ link.name }}</p>
+        <KunLink :to="link.link" target="_blank" rel="noopener noreferrer">
+          {{ link.link }}
+          <KunIcon name="lucide:external-link" />
+          <KunButton
+            :is-icon-only="true"
+            variant="light"
+            color="danger"
+            size="sm"
+            v-if="uid === link.uid"
+            @click="handleDeleteLink(link.gid, link.glid)"
+            :pending="isFetching"
+          >
+            <KunIcon name="lucide:trash-2" />
+          </KunButton>
+        </KunLink>
+      </KunCard>
     </div>
-    <KunSkeletonGalgameLink v-if="pending" />
-
-    <GalgameNull class="null" v-if="!pending && !data?.length" />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.contribute {
-  cursor: pointer;
-  margin-left: 17px;
-  padding: 3px;
-  border-radius: 20px;
-  color: var(--kungalgame-blue-5);
-}
-
-.null {
-  margin-bottom: 17px;
-}
-
-.link-edit {
-  margin-bottom: 17px;
-
-  input {
-    margin-right: 10px;
-    margin-bottom: 10px;
-  }
-}
-
-.links {
-  .link {
-    cursor: pointer;
-    margin-bottom: 10px;
-    margin-right: 17px;
-    display: inline-block;
-
-    & > a {
-      margin-left: 10px;
-      font-size: 20px;
-      color: var(--kungalgame-font-color-0);
-
-      &:hover {
-        color: var(--kungalgame-blue-5);
-      }
-    }
-
-    .delete {
-      font-size: 20px;
-      color: var(--kungalgame-red-5);
-      margin-left: 10px;
-    }
-  }
-}
-</style>

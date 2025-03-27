@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { KunTooltip } from '#components'
 import type { TopicDetail } from '~/types/api/topic'
 
 const props = defineProps<{
@@ -24,9 +25,16 @@ const rewriteTopic = () => {
 </script>
 
 <template>
-  <span v-if="isShowRewrite" @click="rewriteTopic" class="icon">
-    <Icon class="icon" name="lucide:pencil" />
-  </span>
+  <KunTooltip text="重新编辑">
+    <KunButton
+      :is-icon-only="true"
+      variant="light"
+      color="default"
+      size="lg"
+      v-if="isShowRewrite"
+      @click="rewriteTopic"
+    >
+      <KunIcon name="lucide:pencil" />
+    </KunButton>
+  </KunTooltip>
 </template>
-
-<style lang="scss" scoped></style>

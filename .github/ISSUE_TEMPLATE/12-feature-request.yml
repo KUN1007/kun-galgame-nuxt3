@@ -1,18 +1,18 @@
-name: "✨ Feature Request"
-description: "Suggest an idea or enhancement"
-title: "[Feature Request]: "
+name: '✨ Feature Request'
+description: 'Suggest an idea or enhancement'
+title: '[Feature Request]: '
 labels:
-  - "feature request"
+  - 'feature request'
 assignees:
-  - "KUN1007"
+  - 'KUN1007'
 
 body:
   - type: textarea
     id: problem-description
     attributes:
-      label: "Is your feature request related to a problem? Please describe."
+      label: 'Is your feature request related to a problem? Please describe.'
       description: "A clear and concise description of the problem or need. For example, 'I'm always frustrated when...'"
-      placeholder: "Describe the problem or need here."
+      placeholder: 'Describe the problem or need here.'
     validations:
       required: true
 
@@ -20,8 +20,8 @@ body:
     id: solution-description
     attributes:
       label: "Describe the solution you'd like"
-      description: "A clear and concise description of what you want to happen."
-      placeholder: "Describe the solution you propose here."
+      description: 'A clear and concise description of what you want to happen.'
+      placeholder: 'Describe the solution you propose here.'
     validations:
       required: true
 
@@ -30,11 +30,11 @@ body:
     attributes:
       label: "Describe alternatives you've considered"
       description: "A clear and concise description of any alternative solutions or features you've considered."
-      placeholder: "List any alternative solutions or features here."
-  
+      placeholder: 'List any alternative solutions or features here.'
+
   - type: textarea
     id: additional-context
     attributes:
-      label: "Additional context"
-      description: "Add any other context or screenshots about the feature request here."
-      placeholder: "Provide additional information, if any."
+      label: 'Additional context'
+      description: 'Add any other context or screenshots about the feature request here.'
+      placeholder: 'Provide additional information, if any.'

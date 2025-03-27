@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { asideItems } from './asideItemStore'
 
+const routeName = computed(() => useRoute().name)
+
 const { data: system } = await useFetch(`/api/message/nav/system`, {
   method: 'GET',
   ...kungalgameResponseHandler
@@ -15,10 +17,17 @@ asideItems.value = contact.value ? contact.value : []
 </script>
 
 <template>
-  <aside class="aside">
-    <h2>消息</h2>
+  <aside
+    :class="
+      cn(
+        'scrollbar-hide border-default-300 border-r-none flex w-full shrink-0 flex-col space-y-3 overflow-y-auto pr-0 sm:w-88 sm:border-r sm:pr-3',
+        routeName !== 'message' ? 'hidden sm:flex' : ''
+      )
+    "
+  >
+    <h2 class="px-2 text-2xl">消息</h2>
 
-    <KunDivider margin="10px 0" />
+    <KunDivider />
 
     <MessageAsideSystemItem v-if="system" title="通知" :data="system[0]" />
 
@@ -37,50 +46,18 @@ asideItems.value = contact.value ? contact.value : []
       :room="room"
     />
 
-    <div class="notice">
-      <MessageNotice />
+    <div class="block p-2 sm:hidden">
+      <h2 class="text-lg">提示</h2>
+      <div>本消息系统尚在开发中, 但是功能应该足够用</div>
+      <div>如果您有任何问题, 请查看这个话题</div>
+      <KunLink
+        to="https://www.kungal.com/zh-cn/topic/1650"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-primary underline"
+      >
+        [公告] 有关论坛消息系统的说明
+      </KunLink>
     </div>
   </aside>
 </template>
-
-<style lang="scss" scoped>
-.aside {
-  height: 100%;
-  width: 32rem;
-  color: var(--kungalgame-font-color-3);
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  overflow: scroll;
-
-  &::-webkit-scrollbar {
-    width: 0;
-  }
-}
-
-span {
-  font-size: small;
-}
-
-.zako {
-  color: var(--kungalgame-font-color-0);
-}
-
-.new {
-  color: var(--kungalgame-red-5);
-}
-
-.notice {
-  display: none;
-}
-
-@media (max-width: 700px) {
-  .aside {
-    width: 100%;
-  }
-
-  .notice {
-    display: block;
-  }
-}
-</style>

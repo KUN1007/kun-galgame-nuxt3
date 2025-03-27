@@ -1,31 +1,19 @@
 <script setup lang="ts">
+useKunSeoMeta({
+  title: '匿名举报',
+  description: `${kungal.titleShort} 的举报页, 这里可以完全匿名的提交论坛内的违规记录, 希望大家不要违规`
+})
+
 useHead({
-  title: `匿名举报 - ${kungal.titleShort}`,
-  meta: [
+  link: [
     {
-      name: 'description',
-      content:
-        '鲲 Galgame 论坛的举报页，这里可以提交论坛内的违规记录，希望大家不要违规'
+      rel: 'canonical',
+      href: `${kungal.domain.main}/report`
     }
   ]
 })
 </script>
 
 <template>
-  <div class="root">
-    <Report />
-  </div>
+  <ReportContainer />
 </template>
-
-<style lang="scss" scoped>
-.root {
-  height: 100%;
-  min-height: calc(100dvh - 75px);
-}
-
-@media (max-width: 700px) {
-  .root {
-    min-height: calc(100dvh - 63px);
-  }
-}
-</style>

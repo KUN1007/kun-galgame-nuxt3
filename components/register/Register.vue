@@ -69,141 +69,70 @@ const handleRegister = async () => {
 </script>
 
 <template>
-  <div class="register">
-    <form class="form" @submit.prevent>
-      <NuxtImg
-        preload
-        src="/placeholder.webp"
-        placeholder="/placeholder.webp"
-      />
-
-      <div
-        class="input-container"
-        v-for="item in registerFormItem"
-        :key="item.index"
+  <div class="flex size-full items-center justify-center">
+    <KunCard
+      :is-transparent="false"
+      :is-hoverable="false"
+      class-name="w-88 p-8 select-none"
+    >
+      <form
+        class="relative flex h-full flex-col items-center justify-center"
+        @submit.prevent
       >
-        <label :for="item.value">
-          {{ KUN_REGISTER_FORM_FIELD_MAP[item.placeholder] }}
-        </label>
-        <KunInput
-          :id="item.value"
-          v-model="registerForm[item.value]"
-          :autocomplete="item.autocomplete"
-          :type="item.type"
-          :class="item.class"
+        <NuxtImg
+          preload
+          src="/placeholder.webp"
+          placeholder="/placeholder.webp"
+          class="w-full"
         />
+
+        <div v-for="item in registerFormItem" :key="item.index" class="w-full">
+          <label :for="item.value" class="text-sm">
+            {{ KUN_REGISTER_FORM_FIELD_MAP[item.placeholder] }}
+          </label>
+          <KunInput
+            :id="item.value"
+            v-model="registerForm[item.value]"
+            :autocomplete="item.autocomplete"
+            :type="item.type"
+            :class="cn('mt-2 mb-4 w-full', item.class)"
+          />
+        </div>
+
+        <KunVerificationCode
+          @click="handleSendCode"
+          class-name="absolute right-4 bottom-23"
+          :name="registerForm.name"
+          :email="registerForm.email"
+          to="register"
+        />
+
+        <KunCheckBox
+          v-model="isAgree"
+          class-name="mb-4 flex items-center gap-2 text-sm"
+        >
+          <span>我同意</span>
+          <KunLink size="sm" to="/doc/notice/agreement">用户协议</KunLink>
+          和
+          <KunLink size="sm" to="/doc/notice/privacy">隐私政策</KunLink>
+        </KunCheckBox>
+
+        <KunButton
+          @click="handleRegister"
+          class="bg-primary w-full rounded-[24px] text-base tracking-wider text-white uppercase"
+        >
+          注册
+        </KunButton>
+      </form>
+
+      <KunDivider class="my-4">
+        <span class="mx-2">或</span>
+      </KunDivider>
+
+      <div class="flex flex-col gap-3">
+        <KunLink to="/login">登录</KunLink>
+        <KunLink to="/forgot">忘记密码</KunLink>
       </div>
-
-      <KunVerificationCode
-        @click="handleSendCode"
-        class="code"
-        :name="registerForm.name"
-        :email="registerForm.email"
-        to="register"
-      />
-
-      <KunCheckBox v-model="isAgree">
-        <span>我同意</span>
-        <NuxtLink to="/agreement">用户协议</NuxtLink>
-        <NuxtLink to="/privacy">隐私政策</NuxtLink>
-      </KunCheckBox>
-
-      <KunButton @click="handleRegister">注册</KunButton>
-    </form>
-
-    <KunDivider margin="16px 0">
-      <span>或</span>
-    </KunDivider>
-
-    <div class="more">
-      <NuxtLink to="/login">登录</NuxtLink>
-
-      <NuxtLink to="/forgot">忘记密码</NuxtLink>
-    </div>
+    </KunCard>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.register {
-  width: 360px;
-  padding: 32px;
-  margin-bottom: 32px;
-  user-select: none;
-}
-
-.form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100%;
-  position: relative;
-
-  img {
-    width: 100%;
-  }
-
-  .input-container {
-    width: 100%;
-
-    label {
-      font-size: 14px;
-    }
-  }
-
-  .kun-input {
-    width: 100%;
-    margin-bottom: 16px;
-    margin-top: 8px;
-    padding: 12px;
-  }
-
-  .code {
-    position: absolute;
-    bottom: 94px;
-    right: 16px;
-  }
-
-  .kun-checkbox {
-    display: flex;
-    align-items: center;
-    font-size: small;
-    margin-bottom: 16px;
-
-    a {
-      color: var(--kungalgame-blue-5);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      margin-left: 4px;
-    }
-  }
-
-  .kun-button {
-    width: 100%;
-    background-color: var(--kungalgame-blue-5);
-    color: var(--kungalgame-white);
-    font-size: 16px;
-    border-radius: 24px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-}
-
-.kun-divider {
-  span {
-    margin: 0 8px;
-  }
-}
-
-.more {
-  display: flex;
-  flex-direction: column;
-
-  a {
-    margin-bottom: 16px;
-    color: var(--kungalgame-blue-5);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-}
-</style>

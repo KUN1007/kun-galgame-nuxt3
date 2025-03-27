@@ -1,40 +1,81 @@
 <script setup lang="ts">
+import { KunFloatingBar } from '#components'
+
 const { showKUNGalgamePageTransparency, showKUNGalgameBackgroundBlur } =
   storeToRefs(usePersistSettingsStore())
 
+const route = useRoute()
 useHead({
+  htmlAttrs: { lang: 'zh-Hans' },
+  meta: [{ name: 'image', content: kungal.images[0].fullUrl }],
+  templateParams: {
+    schemaOrg: {
+      host: kungal.domain.main,
+      path: route.path,
+      inLanguage: 'zh-Hans'
+    }
+  },
   link: [
     {
       rel: 'alternative',
       href: `https://www.kungal.com/rss/topic.xml`,
       type: 'application/rss+xml',
-      title: '鲲 Galgame 论坛话题订阅'
+      title: () => `${kungal.titleShort}话题订阅`
     },
     {
       rel: 'feed',
       href: `https://www.kungal.com/rss/topic.xml`,
       type: 'application/rss+xml',
-      title: '鲲 Galgame 论坛话题订阅'
+      title: `${kungal.titleShort}话题订阅`
     },
     {
       rel: 'alternative',
       href: `https://www.kungal.com/rss/galgame.xml`,
       type: 'application/rss+xml',
-      title: '鲲 Galgame 论坛 Galgame 订阅'
+      title: () => `${kungal.titleShort} Galgame 订阅`
     },
     {
       rel: 'feed',
       href: `https://www.kungal.com/rss/galgame.xml`,
       type: 'application/rss+xml',
-      title: '鲲 Galgame 论坛 Galgame 订阅'
+      title: () => `${kungal.titleShort} Galgame 订阅`
     },
     {
       rel: 'me',
       href: `https://mastodon.social/@kungal`,
       type: 'text/html',
       title: 'Mastodon'
-    }
+    },
+    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    { rel: 'canonical', href: kungal.domain.main }
   ]
+})
+
+useSeoMeta({
+  titleTemplate: () => kungal.titleTemplate,
+  charset: 'utf-8',
+  viewport: 'width=device-width, initial-scale=1',
+  formatDetection: 'telephone=no',
+  description: kungal.description,
+  themeColor: kungal.themeColor,
+
+  ogDescription: kungal.description,
+  ogLocale: 'zh_CN',
+  ogTitle: kungal.title,
+  ogSiteName: kungal.title,
+  ogType: 'website',
+
+  // use absolute URLs
+  ogImage: kungal.images[0].fullUrl,
+  ogImageAlt: kungal.title,
+
+  ogImageWidth: 1920,
+  ogImageHeight: 1080,
+  ogImageType: 'image/png',
+  ogImageUrl: `${kungal.domain.main}/kungalgame.png`,
+
+  twitterCard: 'summary_large_image',
+  twitterImage: `${kungal.domain.main}/kungalgame.png`
 })
 
 useSchemaOrg([
@@ -43,7 +84,7 @@ useSchemaOrg([
     url: kungal.domain.main,
     sameAs: [kungal.github]
   }),
-  defineWebSite({ name: kungal.titleShort }),
+  defineWebSite({ name: kungal.titleShort, description: kungal.description }),
   defineWebPage()
 ])
 
@@ -67,25 +108,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- Global alert component -->
-  <KunAlert />
+  <div class="kun">
+    <KunAlert />
 
-  <!-- Global info component -->
-  <KunAlertInfo />
+    <KunCapture />
 
-  <!-- Global capture component -->
-  <KunCapture />
+    <KunFloatingBar />
 
-  <!-- Global Clip component -->
-  <KunClipper />
+    <LazyTopicReplyPanel />
 
-  <!-- ReplyPanel -->
-  <LazyTopicReplyPanel />
+    <LazyKunSettingPanel />
 
-  <NuxtPwaManifest />
-  <NuxtLoadingIndicator color="var(--kungalgame-blue-5)" />
+    <NuxtPwaManifest />
+    <NuxtLoadingIndicator color="var(--color-primary)" />
 
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
 </template>
