@@ -1,10 +1,11 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "3.3.7",
+  "version": "3.3.8",
   "packageManager": "pnpm@10.4.1",
   "private": true,
   "scripts": {
     "build": "nuxt build",
+    "build:limit": "NODE_OPTIONS='--max-old-space-size=8192' nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
