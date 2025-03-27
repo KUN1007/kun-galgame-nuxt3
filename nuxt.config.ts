@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     scanPageMeta: true
   },
 
-  compatibilityDate: '2024-09-29',
+  compatibilityDate: '2024-11-01',
 
   devServer: {
     host: '127.0.0.1',
@@ -32,7 +32,6 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@vite-pwa/nuxt',
     'pinia-plugin-persistedstate/nuxt',
-    'dayjs-nuxt',
     'nuxt-schema-org'
   ],
 
