@@ -18,7 +18,7 @@ try {
   console.log('Environment variables are valid.')
   console.log('Executing the commands...')
 
-  execSync('git pull && pnpm build && pnpm stop && pnpm start', {
+  execSync('git pull && pnpm build:limit && pnpm stop && pnpm start', {
     stdio: 'inherit'
   })
 } catch (error) {
