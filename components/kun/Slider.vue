@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 interface SliderProps {
-  min: number
-  max: number
-  step: number
+  min?: number
+  max?: number
+  step?: number
 }
 
 const value = defineModel<number>({ required: true })

@@ -7,10 +7,11 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
 </script>
 
 <template>
-  <div
-    :class="
+  <KunCard
+    :is-hoverable="false"
+    :class-name="
       cn(
-        'scrollbar-hide bg-default-100 fixed z-50 flex h-full w-3xs shrink-0 flex-col justify-between overflow-y-scroll',
+        'scrollbar-hide rounded-none p-0 shadow-none border-none bg-default-100 fixed z-50 flex h-full w-3xs shrink-0 flex-col justify-between overflow-y-scroll',
         className
       )
     "
@@ -72,5 +73,5 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
         </KunLink>
       </div>
     </div>
-  </div>
+  </KunCard>
 </template>

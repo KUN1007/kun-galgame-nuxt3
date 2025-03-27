@@ -26,17 +26,17 @@
   --color-danger: hsl(var(--danger-500));
   --color-info: hsl(var(--info-500));
 
-  --color-default-50: hsla(var(--default-50), var(--kun-global-opacity));
+  --color-default-50: hsla(var(--default-50));
   --color-default-100: hsla(var(--default-100), var(--kun-global-opacity));
-  --color-default-200: hsla(var(--default-200), var(--kun-global-opacity));
-  --color-default-300: hsla(var(--default-300), var(--kun-global-opacity));
-  --color-default-400: hsla(var(--default-400), var(--kun-global-opacity));
-  --color-default-500: hsla(var(--default-500), var(--kun-global-opacity));
-  --color-default-600: hsla(var(--default-600), var(--kun-global-opacity));
-  --color-default-700: hsla(var(--default-700), var(--kun-global-opacity));
-  --color-default-800: hsla(var(--default-800), var(--kun-global-opacity));
-  --color-default-900: hsla(var(--default-900), var(--kun-global-opacity));
-  --color-default-950: hsla(var(--default-950), var(--kun-global-opacity));
+  --color-default-200: hsla(var(--default-200));
+  --color-default-300: hsla(var(--default-300));
+  --color-default-400: hsla(var(--default-400));
+  --color-default-500: hsla(var(--default-500));
+  --color-default-600: hsla(var(--default-600));
+  --color-default-700: hsla(var(--default-700));
+  --color-default-800: hsla(var(--default-800));
+  --color-default-900: hsla(var(--default-900));
+  --color-default-950: hsla(var(--default-950));
   --color-primary-50: hsl(var(--primary-50));
   --color-primary-100: hsl(var(--primary-100));
   --color-primary-200: hsl(var(--primary-200));
