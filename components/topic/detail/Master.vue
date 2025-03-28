@@ -27,12 +27,11 @@ defineProps<{
         {{ topic.title }}
       </h1>
 
-      <div class="flex flex-wrap gap-1">
-        <TopicDetailSection :section="topic.section" />
-        <KunBadge v-for="(tag, index) in topic.tags" :key="index">
-          {{ tag }}
-        </KunBadge>
-      </div>
+      <TopicTagGroup
+        :section="topic.section"
+        :tags="topic.tags"
+        :upvote-time="topic.upvoteTime"
+      />
 
       <div class="text-default-500 flex items-center space-x-4 text-sm">
         <span>{{ `浏览数 - ${topic.views}` }}</span>

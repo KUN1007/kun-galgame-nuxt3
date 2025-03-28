@@ -1,16 +1,10 @@
 <script setup lang="ts">
 import type { HomeTopic } from '~/types/api/home'
 
-const props = defineProps<{
+defineProps<{
   topic: HomeTopic
   isTransparent?: boolean
 }>()
-
-const isRecentlyUpvoted = computed(() => {
-  const hoursSinceUpvote =
-    (Date.now() - props.topic.upvoteTime) / (1000 * 60 * 60)
-  return hoursSinceUpvote <= 10
-})
 </script>
 
 <template>
@@ -26,21 +20,19 @@ const isRecentlyUpvoted = computed(() => {
         {{ topic.title }}
       </h3>
 
-      <div class="flex items-center gap-3">
-        <KunBadge color="warning" v-if="isRecentlyUpvoted">
-          <KunIcon name="lucide:sparkles" class="size-4 text-inherit" />
-          <span class="text-inherit">该话题被推</span>
-        </KunBadge>
-        <span class="text-default-500 shrink-0 text-sm">
-          {{ formatTimeDifference(topic.time) }}
-        </span>
-      </div>
+      <span class="text-default-500 shrink-0 text-sm">
+        {{ formatTimeDifference(topic.time) }}
+      </span>
     </div>
 
     <div
       class="flex w-full flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
     >
-      <TopicTagGroup :section="topic.section" :tags="topic.tags" />
+      <TopicTagGroup
+        :section="topic.section"
+        :tags="topic.tags"
+        :upvote-time="topic.upvoteTime"
+      />
 
       <div class="text-default-700 flex items-center gap-4 text-sm">
         <span class="flex items-center gap-1">
