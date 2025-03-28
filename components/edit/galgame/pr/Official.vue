@@ -10,7 +10,7 @@ const { galgamePR } = storeToRefs(useTempGalgamePRStore())
     </div>
 
     <KunTextarea
-      placeholder="请输入游戏的引擎名，例如 KiriKiri, RUGP, Shiina Rio, 可以输入多个"
+      placeholder="请输入游戏的官网, 例如 http://sweet.clearrave.co.jp/karehana/"
       :model-value="galgamePR[0].official.toString()"
       @update:model-value="
         (value) =>

@@ -32,7 +32,7 @@ const siteList = [
               :alt="kungal.titleShort"
             />
           </a>
-          <span>{{ `© 2024 ${kungal.titleShort}` }}</span>
+          <span>{{ `© 2023 ~ Forever! ${kungal.titleShort}` }}</span>
         </div>
 
         <div class="flex items-center gap-1">

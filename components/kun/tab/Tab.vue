@@ -39,7 +39,7 @@ const emit = defineEmits<{
 
 const containerClasses = computed(() => {
   return cn(
-    'inline-flex',
+    'inline-flex max-w-full scrollbar-hide overflow-scroll',
     props.fullWidth && 'w-full',
     props.disabled && 'opacity-50 cursor-not-allowed',
     props.className
@@ -48,7 +48,7 @@ const containerClasses = computed(() => {
 
 const tabListClasses = computed(() => {
   return cn(
-    'scrollbar-hide flex h-fit items-center gap-2 overflow-x-scroll',
+    'flex h-fit items-center gap-2',
     props.variant === 'solid' && 'bg-default-100 rounded-lg p-1',
     props.variant === 'underlined' && 'border-b border-default-200',
     props.fullWidth && 'w-full',
