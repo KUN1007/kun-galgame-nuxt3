@@ -64,7 +64,7 @@ export default defineNuxtConfig({
 
   umami: {
     id: process.env.KUN_VISUAL_NOVEL_FORUM_UMAMI_ID,
-    host: 'https://cloud.umami.is',
+    host: 'https://stats.kungal.org/',
     autoTrack: true
   },
 
