@@ -4,17 +4,16 @@ import type { ContentCollectionItem } from '@nuxt/content'
 
 const route = useRoute()
 
-const { data: posts } = await useAsyncData('all-articles', () =>
-  queryCollection('content').all()
-)
+const data = await queryCollection('content').all()
+
 const expandedCategories = ref<Record<string, boolean>>({})
 
 const categorizedArticles = computed(() => {
-  if (!posts.value) {
+  if (!data) {
     return {}
   }
 
-  return posts.value.reduce(
+  return data.reduce(
     (
       acc: Record<string, ContentCollectionItem[]>,
       article: ContentCollectionItem

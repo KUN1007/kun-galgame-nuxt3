@@ -1,13 +1,11 @@
 <script setup lang="ts">
-const { path } = useRoute()
+const route = useRoute()
 
-const { data } = await useAsyncData(`kun-doc-footer`, () =>
-  queryCollectionItemSurroundings('content', path, {
-    fields: ['title', 'path']
-  })
-)
+const data = await queryCollectionItemSurroundings('content', route.path, {
+  fields: ['title', 'path']
+})
 
-const [prev, next] = data.value || []
+const [prev, next] = data || []
 </script>
 
 <template>

@@ -1,29 +1,27 @@
 <script setup lang="ts">
 const route = useRoute()
-const { data } = await useAsyncData(() => {
-  return queryCollection('content').path(route.path).first()
-})
+const data = await queryCollection('content').path(route.path).first()
 
 const { images, isLightboxOpen, currentImageIndex } = useKunLightbox()
 
 useHead({
-  link: [{ rel: 'canonical', href: `${kungal.domain.main}${data.value?.path}` }]
+  link: [{ rel: 'canonical', href: `${kungal.domain.main}${data?.path}` }]
 })
 
 useKunSeoMeta({
-  title: data.value?.title,
-  description: data.value?.description,
+  title: data?.title,
+  description: data?.description,
 
-  ogImage: data.value?.banner,
-  ogUrl: `${kungal.domain.main}${data.value?.path}`,
+  ogImage: data?.banner,
+  ogUrl: `${kungal.domain.main}${data?.path}`,
   ogType: 'article',
 
-  twitterImage: `${kungal.domain.main}${data.value?.banner}`,
+  twitterImage: `${kungal.domain.main}${data?.banner}`,
   twitterCard: 'summary_large_image',
 
-  articleAuthor: [`${kungal.domain.main}/user/${data.value?.authorUid}/info`],
-  articlePublishedTime: data.value?.publishedTime.toString(),
-  articleModifiedTime: data.value?.modifiedTime.toString()
+  articleAuthor: [`${kungal.domain.main}/user/${data?.authorUid}/info`],
+  articlePublishedTime: data?.publishedTime.toString(),
+  articleModifiedTime: data?.modifiedTime.toString()
 })
 </script>
 
