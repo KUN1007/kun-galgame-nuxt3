@@ -56,7 +56,7 @@ if (data.value && data.value !== 'banned') {
 
   useKunSeoMeta({
     title: data.value.title,
-    description,
+    description: description.value,
 
     ogImage: banner,
     ogUrl: `${kungal.domain.main}/topic/${data.value.tid}`,

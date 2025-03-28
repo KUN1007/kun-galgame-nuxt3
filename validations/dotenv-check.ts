@@ -30,7 +30,9 @@ export const envSchema = z.object({
   KUN_VISUAL_NOVEL_IMAGE_BED_ACCESS_KEY: z.string(),
   KUN_VISUAL_NOVEL_IMAGE_BED_SECRET_KEY: z.string(),
   KUN_VISUAL_NOVEL_IMAGE_BED_ENDPOINT: z.string(),
-  KUN_VISUAL_NOVEL_IMAGE_BED_URL: z.string()
+  KUN_VISUAL_NOVEL_IMAGE_BED_URL: z.string(),
+
+  KUN_VISUAL_NOVEL_FORUM_UMAMI_ID: z.string()
 })
 
 export const env = envSchema.safeParse(process.env)

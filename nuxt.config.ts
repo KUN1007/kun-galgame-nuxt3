@@ -32,7 +32,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@vite-pwa/nuxt',
     'pinia-plugin-persistedstate/nuxt',
-    'nuxt-schema-org'
+    'nuxt-schema-org',
+    'nuxt-umami'
   ],
 
   runtimeConfig: {
@@ -59,6 +60,12 @@ export default defineNuxtConfig({
 
   site: {
     url: process.env.KUN_GALGAME_URL
+  },
+
+  umami: {
+    id: process.env.KUN_VISUAL_NOVEL_FORUM_UMAMI_ID,
+    host: 'https://cloud.umami.is',
+    autoTrack: true
   },
 
   // Frontend
