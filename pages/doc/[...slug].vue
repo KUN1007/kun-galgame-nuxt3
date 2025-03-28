@@ -1,27 +1,29 @@
 <script setup lang="ts">
 const route = useRoute()
-const data = await queryCollection('content').path(route.path).first()
+const { data: post } = await useAsyncData(() => {
+  return queryCollection('content').path(route.path).first()
+})
 
 const { images, isLightboxOpen, currentImageIndex } = useKunLightbox()
 
 useHead({
-  link: [{ rel: 'canonical', href: `${kungal.domain.main}${data?.path}` }]
+  link: [{ rel: 'canonical', href: `${kungal.domain.main}${post.value?.path}` }]
 })
 
 useKunSeoMeta({
-  title: data?.title,
-  description: data?.description,
+  title: post.value?.title,
+  description: post.value?.description,
 
-  ogImage: data?.banner,
-  ogUrl: `${kungal.domain.main}${data?.path}`,
+  ogImage: post.value?.banner,
+  ogUrl: `${kungal.domain.main}${post.value?.path}`,
   ogType: 'article',
 
-  twitterImage: `${kungal.domain.main}${data?.banner}`,
+  twitterImage: `${kungal.domain.main}${post.value?.banner}`,
   twitterCard: 'summary_large_image',
 
-  articleAuthor: [`${kungal.domain.main}/user/${data?.authorUid}/info`],
-  articlePublishedTime: data?.publishedTime.toString(),
-  articleModifiedTime: data?.modifiedTime.toString()
+  articleAuthor: [`${kungal.domain.main}/user/${post.value?.authorUid}/info`],
+  articlePublishedTime: post.value?.publishedTime.toString(),
+  articleModifiedTime: post.value?.modifiedTime.toString()
 })
 </script>
 
@@ -29,10 +31,10 @@ useKunSeoMeta({
   <KunCard
     :is-hoverable="false"
     :is-transparent="false"
-    v-if="data"
+    v-if="post"
     class-name="pb-6 min-h-[calc(100dvh-6rem)]"
   >
-    <DocDetailBackgroundImage :src="data.banner" />
+    <DocDetailBackgroundImage :src="post.banner" />
 
     <div class="flex">
       <DocDetailCategoryTree />
@@ -44,12 +46,12 @@ useKunSeoMeta({
           :initial-index="currentImageIndex"
         />
 
-        <DocDetailHeader :metadata="{ ...data }" />
-        <ContentRenderer class="kun-prose" :value="data" />
+        <DocDetailHeader :metadata="{ ...post }" />
+        <ContentRenderer class="kun-prose" :value="post" />
         <DocDetailFooter />
       </article>
 
-      <DocDetailTableOfContent :toc="data.body.toc" />
+      <DocDetailTableOfContent :toc="post.body.toc" />
     </div>
   </KunCard>
 </template>

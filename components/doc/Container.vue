@@ -4,9 +4,9 @@ import {
   KUN_DOC_CATEGORY_COLOR_MAP
 } from '~/constants/doc'
 
-const data = await queryCollection('content')
-  .order('publishedTime', 'DESC')
-  .all()
+const { data: posts } = await useAsyncData(() => {
+  return queryCollection('content').order('publishedTime', 'DESC').all()
+})
 </script>
 
 <template>
@@ -26,7 +26,7 @@ const data = await queryCollection('content')
     >
       <KunCard
         :is-pressable="true"
-        v-for="post in data"
+        v-for="post in posts"
         :key="post.id"
         :href="post.path"
         content-class="space-y-3"

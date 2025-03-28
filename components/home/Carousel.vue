@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { useMouseInElement } from '@vueuse/core'
 
-const data = await queryCollection('content').where('pin', '=', true).all()
-const pinnedPosts = ref(data)
+const { data: pinnedPosts } = await useAsyncData(() => {
+  return queryCollection('content').where('pin', '=', true).all()
+})
 
 const currentSlide = ref(0)
 const autoplayInterval = ref<NodeJS.Timeout>()

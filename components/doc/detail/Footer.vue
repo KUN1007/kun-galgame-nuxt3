@@ -1,11 +1,13 @@
 <script setup lang="ts">
 const route = useRoute()
 
-const data = await queryCollectionItemSurroundings('content', route.path, {
-  fields: ['title', 'path']
+const { data: posts } = await useAsyncData(() => {
+  return queryCollectionItemSurroundings('content', route.path, {
+    fields: ['title', 'path']
+  })
 })
 
-const [prev, next] = data || []
+const [prev, next] = posts.value || []
 </script>
 
 <template>

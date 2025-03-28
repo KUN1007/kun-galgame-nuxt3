@@ -83,7 +83,7 @@ onUnmounted(() => {
 
 <template>
   <div
-    v-show="isVisible"
+    v-if="isVisible"
     :class="
       cn(
         'bg-background fixed right-3 bottom-3 z-100 flex items-center gap-2 rounded-full px-4 py-2 shadow-lg backdrop-blur-sm transition-opacity duration-300',
