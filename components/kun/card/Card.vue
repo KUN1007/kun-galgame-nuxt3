@@ -24,12 +24,10 @@ const props = withDefaults(defineProps<Props>(), {
   color: 'background'
 })
 
-const router = useRouter()
 const { ripples, onClick } = useRipple()
 
 const handleKunCardClick = (event: MouseEvent) => {
   if (props.isPressable) {
-    router.push(props.href)
     onClick(event)
   }
 }
@@ -46,7 +44,8 @@ const colorClasses: Record<KunUIColor | 'background', string> = {
 </script>
 
 <template>
-  <div
+  <component
+    :is="isPressable ? defineNuxtLink({}) : 'div'"
     :class="
       cn(
         'border-default-300 relative flex flex-col gap-3 overflow-hidden rounded-lg p-3 shadow backdrop-blur-[var(--kun-background-blur)] transition-all duration-200',
@@ -57,7 +56,8 @@ const colorClasses: Record<KunUIColor | 'background', string> = {
         className
       )
     "
-    :role="isPressable ? 'button' : 'div'"
+    :to="props.href"
+    :role="isPressable ? 'a' : 'div'"
     @click="handleKunCardClick"
   >
     <div v-if="$slots.header" class="border-b">
@@ -79,5 +79,5 @@ const colorClasses: Record<KunUIColor | 'background', string> = {
     </div>
 
     <KunRipple :ripples="ripples" />
-  </div>
+  </component>
 </template>

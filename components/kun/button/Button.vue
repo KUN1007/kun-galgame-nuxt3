@@ -162,19 +162,16 @@ const isIconOnlyClasses = computed(() => {
 })
 
 const { ripples, onClick } = useRipple()
-const router = useRouter()
 
 const handleKunButtonClick = (event: MouseEvent) => {
-  if (props.href) {
-    router.push(props.href)
-  }
   onClick(event)
   emits('click', event)
 }
 </script>
 
 <template>
-  <button
+  <component
+    :is="props.href ? defineNuxtLink({}) : 'button'"
     :class="
       cn(
         'relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-md font-medium transition-all hover:opacity-80 active:scale-[0.97] disabled:opacity-50',
@@ -188,7 +185,9 @@ const handleKunButtonClick = (event: MouseEvent) => {
         className
       )
     "
+    :to="props.href"
     :disabled="disabled || loading"
+    :role="props.href ? 'a' : 'button'"
     :type="type"
     @click="handleKunButtonClick"
   >
@@ -206,5 +205,5 @@ const handleKunButtonClick = (event: MouseEvent) => {
     </span>
 
     <KunRipple :ripples="ripples" />
-  </button>
+  </component>
 </template>
