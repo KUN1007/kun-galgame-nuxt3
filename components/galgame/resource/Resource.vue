@@ -45,13 +45,23 @@ watch(
           <div class="text-secondary-600">
             提示: 部分资源链接可能需要网络代理
           </div>
-          <div class="flex gap-1">
+          <div class="inline-flex gap-1">
             <p>如果您找不到想要的资源链接, 可以去看看友站</p>
-            <KunLink size="sm" to="https://www.touchgal.io/" target="_blank">
+            <KunLink
+              class-name="block whitespace-nowrap"
+              size="sm"
+              to="https://www.touchgal.io/"
+              target="_blank"
+            >
               TouchGal
             </KunLink>
             和
-            <KunLink size="sm" to="https://www.zi6.cc/" target="_blank">
+            <KunLink
+              class-name="block whitespace-nowrap"
+              size="sm"
+              to="https://www.zi6.cc/"
+              target="_blank"
+            >
               zi0
             </KunLink>
           </div>

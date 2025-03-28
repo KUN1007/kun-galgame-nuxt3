@@ -28,10 +28,18 @@ defineProps<{
         <span class="line-clamp-1 break-all">
           {{ markdownToText(data.content) }}
         </span>
-        <KunBadge color="primary" v-if="data.unreadCount">
+        <KunBadge
+          class-name="whitespace-nowrap"
+          color="primary"
+          v-if="data.unreadCount"
+        >
           {{ data.unreadCount }}
         </KunBadge>
-        <KunBadge color="default" v-if="!data.unreadCount">
+        <KunBadge
+          class-name="whitespace-nowrap"
+          color="default"
+          v-if="!data.unreadCount"
+        >
           {{ data.count }}
         </KunBadge>
       </div>

@@ -9,16 +9,16 @@ interface KunRSSContent {
 
 const contentMap: Record<'topic' | 'galgame', KunRSSContent> = {
   topic: {
-    title: '鯤 Galgame 論壇 - 新話題訂閱',
-    description: '最新更新關於 Galgame 的話題',
+    title: '鲲 Galgame 论坛 - 新话题订阅',
+    description: '最新更新关于 Galgame 的话题',
     generator: '萌萌 RSS 生成器',
-    copyright: `版權所有 © 2024 鯤 Galgame 保留所有權利`
+    copyright: `版权所有 © 2024 鲲 Galgame 保留所有权利`
   },
   galgame: {
-    title: '鯤 Galgame 論壇 - 新 Galgame 訂閱',
+    title: '鲲 Galgame 论坛 - 新 Galgame 订阅',
     description: '最新更新的 Galgame',
     generator: '萌萌 RSS 生成器',
-    copyright: `版權所有 © 2024 鯤 Galgame 保留所有權利`
+    copyright: `版权所有 © 2024 鲲 Galgame 保留所有权利`
   }
 }
 
