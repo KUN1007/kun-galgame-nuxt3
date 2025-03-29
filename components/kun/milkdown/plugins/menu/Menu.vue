@@ -93,5 +93,15 @@ const handleFileChange = async (event: Event) => {
 
       <KunMilkdownPluginsEmojiContainer :editor-info="editorInfo" />
     </KunPopover>
+
+    <KunPopover inner-class="-left-28">
+      <template #trigger>
+        <KunButton variant="light" size="xl" :is-icon-only="true">
+          <KunIcon class="text-foreground" name="lucide:sticker" />
+        </KunButton>
+      </template>
+
+      <KunMilkdownPluginsStickerContainer :editor-info="editorInfo" />
+    </KunPopover>
   </div>
 </template>

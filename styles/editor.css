@@ -86,6 +86,10 @@
   @apply border-default-200 my-6 max-w-full rounded-lg border shadow-md;
 }
 
+.milkdown img[alt='Sticker'] {
+  @apply m-2 inline w-32;
+}
+
 .milkdown table {
   @apply border-default-200 my-6 w-full overflow-hidden rounded-lg border shadow-sm;
 }

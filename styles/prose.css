@@ -105,7 +105,11 @@
 }
 
 .kun-prose img {
-  @apply border-default-200 my-8 rounded-lg border shadow-md;
+  @apply border-default-200 my-8 cursor-pointer rounded-lg border shadow-md;
+}
+
+.kun-prose img[alt='Sticker'] {
+  @apply m-2 inline w-32;
 }
 
 .kun-prose figure {
