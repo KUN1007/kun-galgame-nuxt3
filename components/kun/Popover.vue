@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { useEventListener } from '@vueuse/core'
 
-const props = defineProps({
-  position: {
-    type: String,
-    default: 'bottom-start',
-    validator: (value: string) =>
-      ['top-start', 'top-end', 'bottom-start', 'bottom-end'].includes(value)
+const props = withDefaults(
+  defineProps<{
+    position?: 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end'
+    innerClass?: string
+  }>(),
+  {
+    position: 'bottom-start',
+    innerClass: ''
   }
-})
+)
 
 const isOpen = ref(false)
 const triggerRef = ref<HTMLElement | null>(null)
@@ -79,13 +81,11 @@ useEventListener(document, 'click', close)
         :id="popoverId"
         role="dialog"
         :aria-hidden="!isOpen"
-        class="bg-background absolute z-50 mt-2 rounded-lg border shadow-lg"
-        :class="[positionClass]"
+        class="absolute z-50 mt-2 rounded-lg border bg-white shadow-lg dark:bg-black"
+        :class="cn(positionClass, innerClass)"
         @click.stop
       >
-        <div class="p-1">
-          <slot />
-        </div>
+        <slot />
       </div>
     </Transition>
   </div>

@@ -84,14 +84,14 @@ const handleFileChange = async (event: Event) => {
       />
     </KunButton>
 
-    <div class="group relative flex justify-center">
-      <KunButton variant="light" size="xl" :is-icon-only="true">
-        <KunIcon class="text-foreground" name="lucide:smile-plus" />
-      </KunButton>
-      <KunMilkdownPluginsEmojiContainer
-        class="hidden group-hover:flex"
-        :editor-info="editorInfo"
-      />
-    </div>
+    <KunPopover inner-class="-left-28">
+      <template #trigger>
+        <KunButton variant="light" size="xl" :is-icon-only="true">
+          <KunIcon class="text-foreground" name="lucide:smile-plus" />
+        </KunButton>
+      </template>
+
+      <KunMilkdownPluginsEmojiContainer :editor-info="editorInfo" />
+    </KunPopover>
   </div>
 </template>

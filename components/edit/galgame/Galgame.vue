@@ -6,7 +6,7 @@ const introductionLanguage = ref<Language>('zh-cn')
 const isSuccess = ref(false)
 const isFetching = ref(false)
 
-const data = reactive<VNDB>({
+const data = ref<VNDB>({
   title: '',
   titles: [],
   description: '',
@@ -57,9 +57,10 @@ const handleGetVNData = async () => {
     isFetching.value = false
     useMessage(10504, 'info')
 
-    name.value['en-us'] = data.title
-    introduction.value['en-us'] = data.description ?? ''
-    aliases.value = data.aliases
+    data.value = vndbData.results[0]
+    name.value['en-us'] = data.value.title
+    introduction.value['en-us'] = data.value.description ?? ''
+    aliases.value = data.value.aliases
 
     // For reactivity
     if (introductionLanguage.value !== 'en-us') {
@@ -116,15 +117,19 @@ const handleGetVNData = async () => {
           游戏名要求至少写一种, 非常建议全部填写
           (如果游戏没有对应翻译可以不填写, 英语标题可以从 VNDB 自动获取到)
         </p>
-        <div class="reference" v-if="data.titles.length">
-          <b>参考标题（点击复制）</b>
-          <KunBadge
-            v-for="(title, index) in data.titles"
-            :key="index"
-            @click="useKunCopy(title.title)"
-          >
-            {{ title.title }}
-          </KunBadge>
+        <div class="space-y-2" v-if="data.titles.length">
+          <p>参考标题（点击复制）</p>
+          <div>
+            <KunButton
+              size="sm"
+              variant="flat"
+              v-for="(title, index) in data.titles"
+              :key="index"
+              @click="useKunCopy(title.title)"
+            >
+              {{ title.title }}
+            </KunButton>
+          </div>
         </div>
         <div class="space-y-2">
           <KunInput placeholder="英语" v-model="name['en-us']" />
