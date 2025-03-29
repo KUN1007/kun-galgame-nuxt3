@@ -18,7 +18,7 @@ const user = computed(() => props.user)
     class-name="w-52 shrink-0 hidden md:flex"
     content-class="justify-start items-center gap-3"
   >
-    <KunAvatar size="lg" :user="user" />
+    <KunAvatar size="original-sm" :user="user" />
 
     <KunLink
       underline="hover"

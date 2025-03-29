@@ -16,7 +16,7 @@ const emit = defineEmits<{
 
 const MIN_SCALE = 1
 const MAX_SCALE = 5
-const SWIPE_THRESHOLD = 100
+const SWIPE_THRESHOLD = 50
 
 const currentIndex = ref(props.initialIndex || 0)
 const scale = ref(1)

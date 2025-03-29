@@ -113,11 +113,11 @@ watch(
           <KunSlider
             class="mx-4 w-full"
             :min="0"
-            :max="17"
+            :max="32"
             :step="1"
             v-model="showKUNGalgameBackgroundBlur"
           />
-          <span>17px</span>
+          <span>32px</span>
         </div>
       </div>
 

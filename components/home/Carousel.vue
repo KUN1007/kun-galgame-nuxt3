@@ -134,7 +134,7 @@ onUnmounted(() => {
           <img
             :src="post.banner || '/kungalgame.webp'"
             :alt="post.title"
-            class="pointer-events-none h-full w-full object-cover opacity-[var(--kun-global-opacity)] select-none"
+            class="opacity-[calc(var(--kun-global-opacity) / 2)] pointer-events-none h-full w-full object-cover select-none"
           />
           <KunCard
             :is-transparent="false"

@@ -18,6 +18,9 @@ const sizeClasses = computed(() => {
   if (props.size === 'original') {
     return 'size-40'
   }
+  if (props.size === 'original-sm') {
+    return 'size-24'
+  }
 
   if (props.size === 'xs') {
     return 'size-4'
@@ -33,6 +36,12 @@ const sizeClasses = computed(() => {
     return 'size-8'
   }
 })
+
+const userAvatarSrc = computed(() => {
+  return props.size === 'original' || props.size === 'original-sm'
+    ? props.user.avatar
+    : props.user.avatar.replace(/\.webp$/, '-100.webp')
+})
 </script>
 
 <template>
@@ -43,11 +52,7 @@ const sizeClasses = computed(() => {
     <NuxtImg
       :class="cn('inline-block rounded-full', sizeClasses)"
       v-if="user.avatar"
-      :src="
-        size === 'original'
-          ? user.avatar
-          : user.avatar.replace(/\.webp$/, '-100.webp')
-      "
+      :src="userAvatarSrc"
       :alt="user.name"
     />
     <span
