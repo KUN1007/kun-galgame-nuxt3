@@ -113,7 +113,7 @@ const selectOption = (value: string | number, index: number) => {
       <div
         v-show="isOpen"
         ref="dropdown"
-        class="bg-background absolute z-10 w-full rounded-md border p-1 shadow-lg"
+        class="white:bg-black absolute z-10 w-full rounded-md border bg-white p-1 shadow-lg"
         :class="showAbove ? 'bottom-full mb-1' : 'top-full mt-1'"
       >
         <ul

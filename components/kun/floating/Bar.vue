@@ -2,15 +2,13 @@
 const CONFIGS = {
   SCROLL_THRESHOLD: 100,
   DIRECTION_THRESHOLD: 5,
-  MOBILE_TIMEOUT: 2000,
-  BOTTOM_THRESHOLD: 1,
-  MOBILE_BREAKPOINT: 768
+  AUTO_HIDE_TIMEOUT: 2000,
+  BOTTOM_THRESHOLD: 1
 } as const
 
 const progress = ref(0)
 const isVisible = ref(false)
-const showOnMobile = ref(true)
-const isSmallScreen = ref(false)
+const autoHideStatus = ref(true)
 const scrollingDown = ref(true)
 const lastScrollY = ref(0)
 const isAtBottom = ref(false)
@@ -54,29 +52,20 @@ const updateProgress = () => {
   }
   lastScrollY.value = scrollY
 
-  if (isSmallScreen.value) {
-    showOnMobile.value = true
-    if (mobileTimer) clearTimeout(mobileTimer)
-    mobileTimer = setTimeout(() => {
-      showOnMobile.value = false
-    }, CONFIGS.MOBILE_TIMEOUT)
-  }
-}
-
-const updateScreenSize = () => {
-  isSmallScreen.value = window.innerWidth < CONFIGS.MOBILE_BREAKPOINT
+  autoHideStatus.value = true
+  if (mobileTimer) clearTimeout(mobileTimer)
+  mobileTimer = setTimeout(() => {
+    autoHideStatus.value = false
+  }, CONFIGS.AUTO_HIDE_TIMEOUT)
 }
 
 onMounted(() => {
   window.addEventListener('scroll', updateProgress)
-  window.addEventListener('resize', updateScreenSize)
-  updateScreenSize()
   updateProgress()
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', updateProgress)
-  window.removeEventListener('resize', updateScreenSize)
   if (mobileTimer) clearTimeout(mobileTimer)
 })
 </script>
@@ -87,7 +76,7 @@ onUnmounted(() => {
     :class="
       cn(
         'bg-background fixed right-3 bottom-3 z-100 flex items-center gap-2 rounded-full px-4 py-2 shadow-lg backdrop-blur-sm transition-opacity duration-300',
-        isSmallScreen && !showOnMobile && 'hidden'
+        !autoHideStatus && 'hidden'
       )
     "
   >
