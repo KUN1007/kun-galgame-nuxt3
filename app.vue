@@ -104,7 +104,7 @@ onMounted(() => {
       '{"logStoreChanges":false}'
     )
     // Disable umami for dev
-    localStorage.setItem('umami.disabled', 1)
+    // localStorage.setItem('umami.disabled', 1)
   }
 })
 </script>

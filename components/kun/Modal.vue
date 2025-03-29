@@ -88,7 +88,7 @@ onUnmounted(() => {
           v-if="withContainer"
           :class="
             cn(
-              'bg-background scrollbar-hide relative m-auto max-h-[90vh] min-w-80 overflow-y-auto rounded-lg border p-6 shadow-lg transition-all',
+              'bg-background scrollbar-hide relative m-auto max-h-[90vh] min-w-80 overflow-y-auto rounded-lg border p-6 shadow-lg backdrop-blur-[var(--kun-background-blur)] transition-all',
               innerClassName
             )
           "

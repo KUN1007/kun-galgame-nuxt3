@@ -35,7 +35,7 @@ watch(
 
 <template>
   <div
-    class="bg-background z-10 flex w-full shrink-0 items-center justify-start rounded-lg border p-3 shadow"
+    class="bg-background z-10 flex w-full shrink-0 items-center justify-start rounded-lg border p-3 shadow backdrop-blur-[var(--kun-background-blur)]"
   >
     <div
       class="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"

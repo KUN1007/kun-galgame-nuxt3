@@ -3,7 +3,7 @@ import { kunLayoutExternalItem } from '~/constants/layout'
 </script>
 
 <template>
-  <div class="mt-3 flex flex-col justify-center gap-1 border-b p-3">
+  <div class="mt-3 flex flex-col justify-center gap-1 p-3">
     <h2 class="text-default-700 px-4 select-none">子网站</h2>
 
     <KunLink

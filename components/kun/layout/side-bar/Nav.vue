@@ -18,7 +18,7 @@ const toggleExpand = (itemName: string) => {
 </script>
 
 <template>
-  <div class="flex flex-col justify-center gap-1 border-y py-3">
+  <div class="flex flex-col justify-center gap-1 py-3">
     <KunLayoutSideBarNavItem
       v-for="item in kunLayoutItem"
       :key="item.name"

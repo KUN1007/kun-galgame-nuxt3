@@ -38,7 +38,7 @@ useHead({
         :user="{ uid: data.uid, name: data.name, avatar: data.avatar }"
       />
 
-      <div class="h-full w-full overflow-y-auto">
+      <div class="scrollbar-hide h-full w-full overflow-y-auto">
         <NuxtPage :user="data" />
       </div>
     </div>

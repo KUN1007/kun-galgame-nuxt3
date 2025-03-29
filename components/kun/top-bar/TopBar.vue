@@ -32,14 +32,14 @@ onUnmounted(() => {
   <div
     :class="
       cn(
-        'fixed top-0 z-30 mb-3 w-full shrink-0 px-1 backdrop-blur-[var(--kun-background-blur)] transition-all duration-300 sm:px-0 md:pr-3 md:pl-68',
+        'fixed top-0 z-30 mb-3 w-full shrink-0 px-1 transition-all duration-300 sm:px-0 md:pr-3 md:pl-68',
         isVisible ? 'translate-y-0' : '-translate-y-full',
         className
       )
     "
   >
     <div
-      class="bg-background border-default-300 mx-auto flex h-16 w-full max-w-7xl items-center justify-between rounded-b-lg border px-3 shadow"
+      class="bg-background border-default-300 mx-auto flex h-16 w-full max-w-7xl items-center justify-between rounded-b-lg border px-3 shadow backdrop-blur-[var(--kun-background-blur)]"
     >
       <KunTopBarNav />
       <KunTopBarAvatar />
