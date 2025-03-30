@@ -100,7 +100,7 @@ export default defineEventHandler(async (event) => {
       { $addToSet: { contributor: uid } }
     )
 
-    const res = await uploadGalgameBanner(banner, newGalgame.gid)
+    const res = await uploadGalgameBanner(Buffer.from(banner), newGalgame.gid)
     if (!res) {
       return kunError(event, 10116)
     }

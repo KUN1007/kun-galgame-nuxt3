@@ -1,7 +1,7 @@
 import sharp from 'sharp'
 
 export const uploadGalgameBanner = async (
-  bannerBuffer: ArrayBuffer,
+  bannerBuffer: Buffer,
   gid: number
 ) => {
   const banner = await sharp(bannerBuffer).toBuffer()

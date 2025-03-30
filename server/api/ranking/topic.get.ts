@@ -63,11 +63,11 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10209)
   }
 
-  const rankingTopicCache: RankingTopics[] | null = await useStorage(
-    'redis'
-  ).getItem(`ranking:topic:${page}:${limit}:${sortField}:${sortOrder}`)
+  const rankingTopicCache = await useStorage('redis').getItem(
+    `ranking:topic:${page}:${limit}:${sortField}:${sortOrder}`
+  )
   if (rankingTopicCache) {
-    return rankingTopicCache
+    return rankingTopicCache as RankingTopics[]
   }
 
   const topics = await getTopicRanking(

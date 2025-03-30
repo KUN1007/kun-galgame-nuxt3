@@ -13,7 +13,7 @@ export const generateToken = (uid: number, name: string, expire: string) => {
 
   const token = jwt.sign(payload, config.JWT_SECRET, {
     expiresIn: expire
-  })
+  } as jwt.SignOptions)
 
   return token
 }

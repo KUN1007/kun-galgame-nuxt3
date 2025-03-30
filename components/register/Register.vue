@@ -2,15 +2,11 @@
 import { KUN_REGISTER_FORM_FIELD_MAP } from '~/constants/auth'
 import { registerFormItem } from './registerFormItem'
 import { checkRegisterForm } from './checkRegister'
-import type { Pinia } from 'pinia'
+import { checkForm, checkRegister } from './checkRegister.ts'
 
 const info = useComponentMessageStore()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useComponentMessageStore()
-)
-
-const { checkForm, checkRegister } = checkRegisterForm.asyncData(
-  useNuxtApp().$pinia as Pinia
 )
 
 const isSendCode = ref(false)

@@ -8,11 +8,11 @@ export const categoryMap: Record<string, RegExp> = {
 }
 
 const getCategoryData = async (category: string) => {
-  const categoryDataCache: CategoryResponseData[] | null = await useStorage(
-    'redis'
-  ).getItem(`category:${category}`)
+  const categoryDataCache = await useStorage('redis').getItem(
+    `category:${category}`
+  )
   if (categoryDataCache) {
-    return categoryDataCache
+    return categoryDataCache as CategoryResponseData[]
   }
 
   const data: CategoryResponseData[] = await TopicModel.aggregate([

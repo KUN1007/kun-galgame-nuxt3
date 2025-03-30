@@ -36,7 +36,10 @@ export default defineEventHandler(async (event) => {
   const session = await mongoose.startSession()
   session.startTransaction()
   try {
-    const res = await uploadGalgameBanner(bannerFile[0].data, parseInt(gid))
+    const res = await uploadGalgameBanner(
+      Buffer.from(bannerFile[0].data),
+      parseInt(gid)
+    )
     if (!res) {
       return kunError(event, 10116)
     }

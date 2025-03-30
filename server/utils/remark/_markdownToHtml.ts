@@ -8,7 +8,7 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypePrism from 'rehype-prism-plus'
 import { unified } from 'unified'
-import { remarkSpoiler } from './remarkSpoiler'
+// import { remarkSpoiler } from './remarkSpoiler'
 
 import type { Plugin } from 'unified'
 import type { Root } from 'hast'
@@ -46,7 +46,7 @@ const sanitizeOptions = {
 export const _markdownToHtml = async (markdown: string) => {
   const htmlVFile = await unified()
     .use(remarkParse)
-    .use(remarkSpoiler)
+    // .use(remarkSpoiler)
     .use(remarkRehype)
     .use(rehypeSlug)
     .use(rehypeSanitize, sanitizeOptions)
