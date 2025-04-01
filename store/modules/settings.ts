@@ -11,17 +11,15 @@ export const usePersistSettingsStore = defineStore('KUNGalgameSettings', {
     showKUNGalgameFontStyle: SETTINGS_DEFAULT_FONT_FAMILY,
     showKUNGalgameBackground: 0,
     showKUNGalgameBackgroundBlur: 0,
+    showKUNGalgameBackgroundBrightness: 100,
     showKUNGalgameBackLoli: true
   }),
   actions: {
-    // Set the font style, allowing users to set their own
-    // , with the default as system UI
     setKUNGalgameFontStyle(font: string) {
       this.showKUNGalgameFontStyle = font
       document.documentElement.style.setProperty('--font-family', font)
     },
 
-    // Set the page transparency
     setKUNGalgameTransparency(trans: number) {
       this.showKUNGalgamePageTransparency = trans
       document.documentElement.style.setProperty(
@@ -30,12 +28,19 @@ export const usePersistSettingsStore = defineStore('KUNGalgameSettings', {
       )
     },
 
-    // Set the page background blur
     setKUNGalgameBackgroundBlur(blur: number) {
       this.showKUNGalgameBackgroundBlur = blur
       document.documentElement.style.setProperty(
         '--kun-background-blur',
         `${blur}px`
+      )
+    },
+
+    setKUNGalgameBackgroundBrightness(brightness: number) {
+      this.showKUNGalgameBackgroundBrightness = brightness
+      document.documentElement.style.setProperty(
+        '--kun-background-brightness',
+        `${brightness}%`
       )
     },
 

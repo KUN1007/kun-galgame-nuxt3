@@ -5,6 +5,7 @@ export interface KUNGalgameSettingsStore {
   showKUNGalgameFontStyle: string
   showKUNGalgameBackground: number
   showKUNGalgameBackgroundBlur: number
+  showKUNGalgameBackgroundBrightness: number
   showKUNGalgameBackLoli: boolean
 }
 

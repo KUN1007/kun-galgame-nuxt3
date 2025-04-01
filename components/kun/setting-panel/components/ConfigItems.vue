@@ -5,7 +5,8 @@ const font = ref('')
 const {
   showKUNGalgamePageTransparency,
   showKUNGalgameBackgroundBlur,
-  showKUNGalgameFontStyle
+  showKUNGalgameFontStyle,
+  showKUNGalgameBackgroundBrightness
 } = storeToRefs(usePersistSettingsStore())
 
 watch(
@@ -22,6 +23,15 @@ watch(
   debounce(() => {
     usePersistSettingsStore().setKUNGalgameBackgroundBlur(
       showKUNGalgameBackgroundBlur.value
+    )
+  }, 300)
+)
+
+watch(
+  () => showKUNGalgameBackgroundBrightness.value,
+  debounce(() => {
+    usePersistSettingsStore().setKUNGalgameBackgroundBrightness(
+      showKUNGalgameBackgroundBrightness.value
     )
   }, 300)
 )
@@ -75,6 +85,17 @@ watch(
           "
           @click="showItemIndex = 3"
         >
+          <KunIcon class="text-inherit" name="lucide:lightbulb" />
+        </span>
+        <span
+          :class="
+            cn(
+              'flex rounded-lg p-2 transition-colors',
+              showItemIndex === 4 ? 'bg-primary-50 text-primary shadow' : ''
+            )
+          "
+          @click="showItemIndex = 4"
+        >
           <KunIcon class="text-inherit" name="ci:font" />
         </span>
       </div>
@@ -122,6 +143,25 @@ watch(
       </div>
 
       <div class="w-full space-y-2" v-if="showItemIndex === 3">
+        <div class="flex justify-between text-sm">
+          <span>背景亮度</span>
+          <span>{{ showKUNGalgameBackgroundBrightness }}%</span>
+        </div>
+
+        <div class="flex w-full items-center">
+          <span>10%</span>
+          <KunSlider
+            class="mx-4 w-full"
+            :min="10"
+            :max="100"
+            :step="1"
+            v-model="showKUNGalgameBackgroundBrightness"
+          />
+          <span>100%</span>
+        </div>
+      </div>
+
+      <div class="w-full space-y-2" v-if="showItemIndex === 4">
         <div class="flex justify-between text-sm">
           <span>字体样式</span>
           <span>
