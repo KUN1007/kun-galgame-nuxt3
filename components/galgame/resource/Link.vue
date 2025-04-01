@@ -88,7 +88,7 @@ watch(
         </KunBadge>
       </div>
 
-      <div class="flex items-center gap-1">
+      <div class="ml-auto flex items-center gap-1">
         <KunButton
           :is-icon-only="true"
           variant="light"
@@ -137,12 +137,14 @@ watch(
           </KunButton>
         </KunTooltip>
 
-        <KunTooltip :text="link.status ? '链接过期' : '链接有效'">
-          <span
-            class="status-dot"
+        <KunTooltip
+          position="left"
+          :text="link.status ? '链接过期' : '链接有效'"
+        >
+          <div
             :class="
               cn(
-                'rounded0full h-2 w-2',
+                'h-3 w-3 shrink-0 rounded-full',
                 link.status ? 'bg-danger' : 'bg-success'
               )
             "

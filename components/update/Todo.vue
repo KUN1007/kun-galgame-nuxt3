@@ -16,6 +16,13 @@ const colorMap: Record<number, KunUIColor | 'background'> = {
   3: 'danger'
 }
 
+const textMap: Record<number, string> = {
+  0: 'text-background',
+  1: 'text-primary',
+  2: 'text-success',
+  3: 'text-danger'
+}
+
 const pageData = ref({
   page: 1,
   limit: 10,
@@ -50,7 +57,7 @@ watch(
       :key="todo.todoId"
       :color="colorMap[todo.status]"
     >
-      <pre class="mb-4 font-mono whitespace-pre-line">
+      <pre class="mb-4 font-mono break-all whitespace-pre-line">
         {{ todo.content['zh-cn'] }}
       </pre>
 
@@ -67,22 +74,9 @@ watch(
           </span>
           <KunIcon
             :name="iconMap[todo.status]"
-            class="h-4 w-4"
-            :class="{
-              'text-default': todo.status === 0,
-              'text-primary animate-spin': todo.status === 1,
-              'text-success': todo.status === 2,
-              'text-danger': todo.status === 3
-            }"
+            :class-name="cn('h-4 w-4', textMap[todo.status])"
           />
-          <span
-            :class="{
-              'text-default': todo.status === 0,
-              'text-primary': todo.status === 1,
-              'text-success': todo.status === 2,
-              'text-danger': todo.status === 3
-            }"
-          >
+          <span :class="cn(textMap[todo.status])">
             {{ KUN_UPDATE_LOG_STATUS_MAP[todo.status] }}
           </span>
         </div>

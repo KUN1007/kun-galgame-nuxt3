@@ -125,7 +125,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
 
     <pre
       v-if="details.note"
-      class="bg-default-100 rounded-lg p-3 whitespace-pre-line"
+      class="bg-default-100 rounded-lg p-3 break-all whitespace-pre-line"
     >
       {{ details.note }}
     </pre>

@@ -58,15 +58,15 @@
 }
 
 .kun-prose pre {
-  @apply bg-default-50 border-default-200 ring-default-200/50 my-6 overflow-x-auto rounded-xl border p-4 shadow-sm ring-1;
+  @apply bg-default-50 border-default-200 ring-default-200/50 my-6 overflow-x-auto rounded-xl border p-4 break-words whitespace-pre-wrap shadow-sm ring-1;
 }
 
 .kun-prose pre code {
-  @apply text-default-800 border-0 bg-transparent p-0 shadow-none;
+  @apply text-default-800 border-0 bg-transparent p-0 break-words whitespace-pre-wrap shadow-none;
 }
 
 .kun-prose pre code span {
-  @apply whitespace-normal;
+  @apply break-words whitespace-pre-wrap;
 }
 
 /* Quotes with refined styling */

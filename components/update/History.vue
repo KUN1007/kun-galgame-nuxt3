@@ -43,7 +43,7 @@ watch(
         </span>
       </div>
       <pre
-        class="bg-default-100 rounded-md p-4 font-mono text-sm whitespace-pre-line"
+        class="bg-default-100 rounded-md p-4 font-mono text-sm break-all whitespace-pre-line"
       >
           {{ kun.content['zh-cn'] }}
         </pre
