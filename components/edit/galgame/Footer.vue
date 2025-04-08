@@ -1,17 +1,25 @@
 <script setup lang="ts">
 import { checkGalgamePublish } from '../utils/checkGalgamePublish'
 
-const { vndbId, name, introduction, aliases } = storeToRefs(
-  usePersistEditGalgameStore()
-)
+const { vndbId, name, introduction, series, aliases, official, engine, tags } =
+  storeToRefs(usePersistEditGalgameStore())
 
 const isPublishing = ref(false)
 
 const handlePublishGalgame = async () => {
   const banner = await getImage('kun-galgame-publish-banner')
-  if (
-    !checkGalgamePublish(vndbId.value, name.value, banner, introduction.value)
-  ) {
+  const isValid = checkGalgamePublish(
+    vndbId.value,
+    name.value,
+    banner,
+    introduction.value,
+    series.value,
+    aliases.value,
+    official.value,
+    engine.value,
+    tags.value
+  )
+  if (!isValid) {
     return
   }
   const res = await useComponentMessageStore().alert(
@@ -34,7 +42,11 @@ const handlePublishGalgame = async () => {
   formData.append('name', JSON.stringify(name.value))
   formData.append('banner', banner!)
   formData.append('introduction', JSON.stringify(introduction.value))
+  formData.append('series', JSON.stringify(series.value.slice(0, 17)))
   formData.append('aliases', JSON.stringify(aliases.value.slice(0, 17)))
+  formData.append('official', JSON.stringify(official.value.slice(0, 17)))
+  formData.append('engine', JSON.stringify(engine.value.slice(0, 17)))
+  formData.append('tags', JSON.stringify(tags.value.slice(0, 17)))
 
   const gid = await $fetch('/api/galgame', {
     method: 'POST',

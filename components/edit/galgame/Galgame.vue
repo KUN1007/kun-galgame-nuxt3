@@ -82,14 +82,19 @@ const handleGetVNData = async () => {
       <KunHeader
         name="发布 Galgame"
         description="您需要创建 Galgame 才可以在对应的 Galgame 下发布 Galgame 资源, 如果这个 Galgame 已经存在, 直接在这个 Galgame 下添加资源即可"
+        :is-show-divider="false"
       >
         <template #endContent>
-          <KunLink target="_blank" to="/topic/280">
+          <KunLink target="_blank" to="/doc/notice/galgame-publish-help">
             Galgame 发布系统帮助文档、教程、介绍
           </KunLink>
           <EditGalgameSite class="mt-2" />
         </template>
       </KunHeader>
+
+      <KunDivider>
+        <span class="mx-2">必要信息</span>
+      </KunDivider>
 
       <div>
         <h2 class="text-xl">VNDB 编号</h2>
@@ -158,6 +163,20 @@ const handleGetVNData = async () => {
       </div>
 
       <EditGalgameBanner />
+
+      <KunDivider>
+        <span class="mx-2">可选信息, 下面的信息可以选填</span>
+      </KunDivider>
+
+      <EditGalgamePrSeries type="create" />
+
+      <EditGalgamePrOfficial type="create" />
+
+      <EditGalgamePrEngine type="create" />
+
+      <EditGalgamePrTags type="create" />
+
+      <EditGalgamePrAlias type="create" />
 
       <EditGalgameFooter />
     </KunCard>

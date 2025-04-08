@@ -7,7 +7,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <Icon :name="name" :class="cn('text-inherit', props.class)" />
+  <Icon :name="name" :class="cn('text-inherit', props.class, className)" />
 </template>
 
 <style lang="scss" scoped>

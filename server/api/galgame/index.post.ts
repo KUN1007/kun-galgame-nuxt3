@@ -13,13 +13,21 @@ const readGalgameData = async (event: H3Event) => {
   const vndbIdData = formData.get('vndbId')
   const nameData = formData.get('name')
   const introductionData = formData.get('introduction')
+  const seriesData = formData.get('series')
   const aliasesData = formData.get('aliases')
+  const officialData = formData.get('official')
+  const engineData = formData.get('engine')
+  const tagsData = formData.get('tags')
   const bannerData = formData.get('banner')
   if (
     !vndbIdData ||
     !nameData ||
     !introductionData ||
+    !seriesData ||
     !aliasesData ||
+    !officialData ||
+    !engineData ||
+    !tagsData ||
     !bannerData
   ) {
     return kunError(event, 10507)
@@ -28,9 +36,23 @@ const readGalgameData = async (event: H3Event) => {
   const vndbId = vndbIdData.toString()
   const name = JSON.parse(nameData.toString()) as KunLanguage
   const introduction = JSON.parse(introductionData.toString()) as KunLanguage
-  const aliases = JSON.parse(aliasesData.toString())
+  const series = JSON.parse(seriesData.toString()) as string[]
+  const aliases = JSON.parse(aliasesData.toString()) as string[]
+  const official = JSON.parse(officialData.toString()) as string[]
+  const engine = JSON.parse(engineData.toString()) as string[]
+  const tags = JSON.parse(tagsData.toString()) as string[]
   const banner = await new Response(bannerData).arrayBuffer()
-  const res = checkGalgamePublish(vndbId, name, introduction, aliases)
+
+  const res = checkGalgamePublish(
+    vndbId,
+    name,
+    introduction,
+    series,
+    aliases,
+    official,
+    engine,
+    tags
+  )
   if (res) {
     return kunError(event, res)
   }
@@ -52,7 +74,11 @@ const readGalgameData = async (event: H3Event) => {
     name,
     banner,
     introduction,
-    aliases
+    series,
+    aliases,
+    official,
+    engine,
+    tags
   }
 }
 
@@ -61,7 +87,18 @@ export default defineEventHandler(async (event) => {
   if (!result) {
     return
   }
-  const { uid, vndb_id, name, banner, introduction, aliases } = result
+  const {
+    uid,
+    vndb_id,
+    name,
+    banner,
+    introduction,
+    series,
+    aliases,
+    official,
+    engine,
+    tags
+  } = result
 
   const user = await UserModel.findOne({ uid })
   if (!user) {
@@ -80,7 +117,11 @@ export default defineEventHandler(async (event) => {
       uid,
       name,
       introduction,
+      series,
       alias: aliases,
+      official,
+      engine,
+      tags,
       time: Date.now()
     })
 

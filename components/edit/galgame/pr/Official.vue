@@ -1,5 +1,28 @@
 <script setup lang="ts">
+const props = defineProps<{
+  type: 'create' | 'rewrite'
+}>()
+
 const { galgamePR } = storeToRefs(useTempGalgamePRStore())
+const { official } = storeToRefs(usePersistEditGalgameStore())
+
+const handleUpdateGalgameOfficial = (value: string | number) => {
+  const officialArray = value
+    .toString()
+    .split(',')
+    .map((l) => l.trim())
+  if (props.type === 'create') {
+    official.value = officialArray
+  } else {
+    galgamePR.value[0].official = officialArray
+  }
+}
+
+const getValue = computed(() => {
+  return props.type === 'create'
+    ? official.value.toString()
+    : galgamePR.value[0].official.toString()
+})
 </script>
 
 <template>
@@ -11,14 +34,8 @@ const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 
     <KunTextarea
       placeholder="请输入游戏的官网, 例如 http://sweet.clearrave.co.jp/karehana/"
-      :model-value="galgamePR[0].official.toString()"
-      @update:model-value="
-        (value) =>
-          (galgamePR[0].official = value
-            .toString()
-            .split(',')
-            .map((l) => l.trim()))
-      "
+      :model-value="getValue"
+      @update:model-value="handleUpdateGalgameOfficial"
     />
   </div>
 </template>

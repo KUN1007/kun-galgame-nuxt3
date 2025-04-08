@@ -18,7 +18,11 @@ export const usePersistEditGalgameStore = defineStore('KUNGalgameEditGalgame', {
       'zh-cn': '',
       'zh-tw': ''
     },
-    aliases: []
+    aliases: [],
+    official: [],
+    engine: [],
+    tags: [],
+    series: []
   }),
   actions: {
     resetGalgameData() {

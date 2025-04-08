@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
   if (!page || !limit) {
     return kunError(event, 10507)
   }
-  if (limit !== '10') {
+  if (limit !== '30') {
     return kunError(event, 10209)
   }
 

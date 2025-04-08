@@ -2,7 +2,11 @@ export interface GalgameStorePersist {
   vndbId: string
   name: KunLanguage
   introduction: KunLanguage
+  series: string[]
   aliases: string[]
+  official: string[]
+  engine: string[]
+  tags: string[]
 }
 
 export interface GalgameStoreTemp {

@@ -17,7 +17,7 @@ const colorMap: Record<number, KunUIColor | 'background'> = {
 }
 
 const textMap: Record<number, string> = {
-  0: 'text-background',
+  0: 'text-default',
   1: 'text-primary',
   2: 'text-success',
   3: 'text-danger'
@@ -74,7 +74,7 @@ watch(
           </span>
           <KunIcon
             :name="iconMap[todo.status]"
-            :class-name="cn('h-4 w-4', textMap[todo.status])"
+            :class="cn('h-4 w-4', textMap[todo.status])"
           />
           <span :class="cn(textMap[todo.status])">
             {{ KUN_UPDATE_LOG_STATUS_MAP[todo.status] }}

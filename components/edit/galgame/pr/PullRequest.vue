@@ -11,15 +11,15 @@ const introductionLanguage = ref<Language>('zh-cn')
 
       <EditGalgameEditor :lang="introductionLanguage" type="rewrite" />
 
-      <EditGalgamePrSeries />
+      <EditGalgamePrSeries type="rewrite" />
 
-      <EditGalgamePrOfficial />
+      <EditGalgamePrOfficial type="rewrite" />
 
-      <EditGalgamePrEngine />
+      <EditGalgamePrEngine type="rewrite" />
 
-      <EditGalgamePrTags />
+      <EditGalgamePrTags type="rewrite" />
 
-      <EditGalgamePrAlias />
+      <EditGalgamePrAlias type="rewrite" />
 
       <EditGalgamePrFooter />
     </KunCard>

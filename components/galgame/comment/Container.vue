@@ -12,7 +12,7 @@ const gid = parseInt((route.params as { gid: string }).gid)
 
 const pageData = reactive({
   page: 1,
-  limit: 10,
+  limit: 30,
   order: 'desc'
 })
 

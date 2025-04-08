@@ -54,5 +54,15 @@ export const checkGalgamePR = (galgame: GalgameStoreTemp) => {
     }
   }
 
+  if (galgame.series.length > 50) {
+    return 10645
+  }
+
+  for (const s of galgame.series) {
+    if (!/^\d{1,6}$/.test(s)) {
+      return 10646
+    }
+  }
+
   return 0
 }

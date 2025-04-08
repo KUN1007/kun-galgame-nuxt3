@@ -1,7 +1,14 @@
 <script setup lang="ts">
-const { galgamePR } = storeToRefs(useTempGalgamePRStore())
+const props = defineProps<{
+  type: 'create' | 'rewrite'
+}>()
 
-const selectedAlias = ref(galgamePR.value[0].alias)
+const { galgamePR } = storeToRefs(useTempGalgamePRStore())
+const { aliases } = storeToRefs(usePersistEditGalgameStore())
+
+const selectedAlias = ref(
+  props.type === 'create' ? aliases.value : galgamePR.value[0].alias
+)
 const isInputFocus = ref(false)
 const inputValue = ref('')
 const canDeleteAlias = ref(false)
@@ -55,7 +62,11 @@ const validateAliasName = (tagName: string) => {
 watch(
   () => selectedAlias.value,
   () => {
-    galgamePR.value[0].alias = selectedAlias.value
+    if (props.type === 'create') {
+      aliases.value = selectedAlias.value
+    } else {
+      galgamePR.value[0].alias = selectedAlias.value
+    }
   }
 )
 </script>

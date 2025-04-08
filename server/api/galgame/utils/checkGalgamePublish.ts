@@ -5,7 +5,11 @@ export const checkGalgamePublish = (
   vndb_id: string,
   name: KunLanguage,
   introduction: KunLanguage,
-  aliases?: string[]
+  series: string[],
+  aliases: string[],
+  official: string[],
+  engine: string[],
+  tags: string[]
 ) => {
   if (!vndb_id.trim()) {
     return 10601
@@ -23,10 +27,6 @@ export const checkGalgamePublish = (
     return 10606
   }
 
-  if (!aliases) {
-    return 0
-  }
-
   if (aliases.length > 17) {
     return 10611
   }
@@ -34,6 +34,46 @@ export const checkGalgamePublish = (
   for (const alias of aliases) {
     if (alias.length > 500) {
       return 10612
+    }
+  }
+
+  if (official.length > 17) {
+    return 10637
+  }
+
+  for (const o of official) {
+    if (o.trim().length > 233) {
+      return 10629
+    }
+  }
+
+  if (engine.length > 17) {
+    return 10638
+  }
+
+  for (const e of engine) {
+    if (e.trim().length > 107) {
+      return 10635
+    }
+  }
+
+  if (tags.length > 107) {
+    return 10642
+  }
+
+  for (const t of tags) {
+    if (t.trim().length > 50) {
+      return 10643
+    }
+  }
+
+  if (series.length > 50) {
+    return 10645
+  }
+
+  for (const s of series) {
+    if (!/^\d{1,6}$/.test(s)) {
+      return 10646
     }
   }
 
