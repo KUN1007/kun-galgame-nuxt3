@@ -69,7 +69,6 @@ onMounted(async () => {
       <div class="space-y-3">
         <div class="flex flex-wrap gap-2">
           <template v-for="(alias, index) in galgame.name" :key="index">
-            <!-- <KunCopy v-if="alias" :name="alias" :text="alias" /> -->
             <KunBadge v-if="alias">{{ alias }}</KunBadge>
           </template>
         </div>
@@ -118,7 +117,6 @@ onMounted(async () => {
         class-name="absolute top-0 right-0"
         v-if="hasPermission"
         @click="isShowUpload = !isShowUpload"
-        variant="bordered"
       >
         更改图片 >
       </KunButton>

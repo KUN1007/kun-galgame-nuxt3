@@ -7,7 +7,7 @@ const props = defineProps<{
 <template>
   <Teleport to="#teleports">
     <img
-      class="fixed top-0 left-0 h-full w-full object-cover brightness-50 dark:brightness-30"
+      class="fixed top-0 left-0 h-full w-full object-cover brightness-[var(--kun-background-brightness)]"
       :src="props.src"
     />
   </Teleport>

@@ -37,10 +37,7 @@ defineProps<{
               :key="i"
               class="bg-background flex size-6 items-center justify-center rounded-full p-1.5 text-xs backdrop-blur-sm sm:size-8 sm:text-sm"
             >
-              <KunIcon
-                :name="platformIconMap[platform]"
-                class="h-full w-full"
-              />
+              <KunIcon :name="platformIconMap[platform]" class="h-4 w-4" />
             </span>
           </template>
           <span
@@ -85,16 +82,9 @@ defineProps<{
           {{ getPreferredLanguageText(galgame.name) }}
         </h3>
 
-        <div class="flex items-center gap-3">
-          <KunAvatar :user="galgame.user" />
-          <div class="flex flex-col">
-            <span class="text-sm font-medium">
-              {{ galgame.user.name }}
-            </span>
-            <span class="text-default-600 text-xs">
-              {{ formatTimeDifference(galgame.time) }}
-            </span>
-          </div>
+        <div class="text-default-600 flex items-center gap-1 text-sm">
+          <KunAvatar :user="galgame.user" size="xs" />
+          {{ `${galgame.user.name} · ${formatTimeDifference(galgame.time)}` }}
         </div>
       </div>
     </KunCard>

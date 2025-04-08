@@ -40,9 +40,9 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
       </span>
     </div>
 
-    <KunUser
-      :user="props.topic.user"
-      :description="formatDate(props.topic.time, { isPrecise: true })"
-    />
+    <div class="text-default-600 flex items-center gap-1 text-sm">
+      <KunAvatar :user="topic.user" size="xs" />
+      {{ `${topic.user.name} · ${formatTimeDifference(topic.time)}` }}
+    </div>
   </KunCard>
 </template>
