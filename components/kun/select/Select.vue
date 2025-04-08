@@ -18,8 +18,7 @@ const emit = defineEmits<{
   set: [value: string | number, index: number]
 }>()
 
-const stableId = useId()
-const computedId = computed(() => `kun-select-${stableId}`)
+const kunUniqueId = useKunUniqueId('kun-select')
 const isOpen = ref(false)
 const showAbove = ref(false)
 const button = useTemplateRef<HTMLElement>('button')
@@ -50,7 +49,7 @@ const updateDropdownPosition = () => {
 
 useEventListener(document, 'click', (e: MouseEvent) => {
   const target = e.target as HTMLElement
-  if (!target.closest(`#${computedId.value}`)) {
+  if (!target.closest(`#${kunUniqueId.value}`)) {
     isOpen.value = false
   }
 })
@@ -78,7 +77,7 @@ const selectOption = (value: string | number, index: number) => {
   <div class="relative w-full">
     <label
       v-if="label"
-      :for="computedId"
+      :for="kunUniqueId"
       class="mb-2 block text-sm font-medium"
     >
       {{ label }}
@@ -86,7 +85,7 @@ const selectOption = (value: string | number, index: number) => {
 
     <button
       ref="button"
-      :id="computedId"
+      :id="kunUniqueId"
       type="button"
       class="focus:border-primary-500 focus:ring-primary-500 flex w-full cursor-pointer items-center justify-between rounded-lg border px-3 py-2 text-left shadow focus:ring-1 focus:outline-none sm:text-sm"
       :class="{

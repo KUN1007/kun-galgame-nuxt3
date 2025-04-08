@@ -41,8 +41,7 @@ const props = withDefaults(
   }
 )
 
-const stableId = useId()
-const computedId = computed(() => `kun-textarea-${stableId}`)
+const kunUniqueId = useKunUniqueId('kun-textarea')
 const textareaRef = ref<HTMLTextAreaElement | null>(null)
 const localValue = ref(props.modelValue)
 
@@ -103,7 +102,7 @@ onMounted(() => {
   <div class="w-full">
     <label
       v-if="label"
-      :for="computedId"
+      :for="kunUniqueId"
       class="mb-1 block text-sm font-medium"
     >
       {{ label }}
@@ -112,7 +111,7 @@ onMounted(() => {
 
     <div class="relative">
       <textarea
-        :id="computedId"
+        :id="kunUniqueId"
         ref="textareaRef"
         v-model="localValue"
         :name="name"

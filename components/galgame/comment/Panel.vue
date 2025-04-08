@@ -47,7 +47,7 @@ const handlePublishComment = async () => {
 <template>
   <div class="space-y-3">
     <KunTextarea
-      placeholder="「恋だよ、恋。私に出来なかったことのひとつを、君に代わりにかなえてもらう」"
+      placeholder="请注意您 “评论给” 的用户, 只有被评论的用户才会收到您的评论通知, 因此您需要在 “评论给” 的用户中选择一位资源发布者或贡献者"
       v-model="content"
       name="comment"
       :rows="5"

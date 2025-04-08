@@ -9,8 +9,7 @@ withDefaults(
   { label: '', className: '', disabled: false }
 )
 
-const stableId = useId()
-const computedId = computed(() => `kun-switch-${stableId}`)
+const kunUniqueId = useKunUniqueId('kun-switch')
 
 defineEmits<{
   'update:modelValue': [value: boolean]
@@ -20,11 +19,11 @@ defineEmits<{
 <template>
   <div :class="cn('inline-flex items-center', className)">
     <label
-      :for="computedId"
+      :for="kunUniqueId"
       class="relative inline-flex cursor-pointer items-center"
     >
       <input
-        :id="computedId"
+        :id="kunUniqueId"
         type="checkbox"
         class="peer sr-only"
         :checked="modelValue"

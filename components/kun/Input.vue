@@ -38,8 +38,7 @@ const emits = defineEmits<{
 
 const input = ref<HTMLInputElement | null>(null)
 const isFocused = ref(false)
-const stableId = useId()
-const computedId = computed(() => `kun-input-${stableId}`)
+const kunUniqueId = useKunUniqueId('kun-input')
 
 const colorClass: Record<KunUIColor, string> = {
   default: 'bg-default/10 focus:ring-default',
@@ -93,7 +92,7 @@ defineExpose({
   <div class="w-full">
     <label
       v-if="label"
-      :for="computedId"
+      :for="kunUniqueId"
       class="text-default-700 mb-1 block text-sm font-medium"
     >
       {{ label }}
@@ -102,7 +101,7 @@ defineExpose({
 
     <div class="relative">
       <input
-        :id="computedId"
+        :id="kunUniqueId"
         ref="input"
         v-bind="$attrs"
         :value="modelValue"

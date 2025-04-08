@@ -9,7 +9,7 @@ export const typeIconMap: Record<string, string> = {
 }
 
 export const platformIconMap: Record<string, string> = {
-  windows: 'ri:microsoft-line',
+  windows: 'ant-design:windows-outlined',
   mac: 'iconoir:apple-mac',
   linux: 'ant-design:linux-outlined',
   emulator: 'lucide:terminal',

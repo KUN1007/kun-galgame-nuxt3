@@ -12,7 +12,7 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
   <KunCard
     :is-pressable="true"
     :is-transparent="false"
-    content-class="justify-between"
+    content-class="justify-between gap-2"
     :href="`/topic/${props.topic.tid}`"
   >
     <h3 class="line-clamp-2 text-lg font-medium">
@@ -24,7 +24,7 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
     <div class="text-default-700 flex items-center gap-4 text-sm">
       <span class="flex items-center gap-1 text-inherit">
         <KunIcon class="h-4 w-4 text-inherit" name="lucide:eye" />
-        <span class="text-inherit">{{ props.topic.views }}</span>
+        <span class="text-inherit">{{ formatNumber(props.topic.views) }}</span>
       </span>
 
       <span class="flex items-center gap-1 text-inherit">

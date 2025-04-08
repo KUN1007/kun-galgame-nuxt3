@@ -10,7 +10,7 @@ const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
 
 <template>
   <div
-    class="grid grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4"
+    class="grid grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 xl:grid-cols-3"
     v-if="layout === 'grid'"
   >
     <TopicCard

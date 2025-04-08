@@ -37,7 +37,7 @@ defineProps<{
       <div class="text-default-700 flex items-center gap-4 text-sm">
         <span class="flex items-center gap-1">
           <KunIcon name="lucide:eye" class="h-4 w-4" />
-          {{ topic.views }}
+          {{ formatNumber(topic.views) }}
         </span>
         <span class="flex items-center gap-1">
           <KunIcon name="lucide:thumbs-up" class="h-4 w-4" />
