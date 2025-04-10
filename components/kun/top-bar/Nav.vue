@@ -22,7 +22,8 @@ watch(
 
 onMounted(async () => {
   const result = await $fetch('/api/user/status', {
-    method: 'GET'
+    method: 'GET',
+    ...kungalgameResponseHandler
   })
   if (result) {
     isCheckIn.value = result.isCheckIn
