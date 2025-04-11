@@ -20,8 +20,10 @@ type KunOnResponseErrorContext<R extends ResponseType = 'json'> =
 export const onResponse = (context: KunOnResponseContext) => {
   if (context.response.status === 205) {
     const navigateCookie = Cookies.get('kungalgame-is-navigate-to-login')
-    if (!navigateCookie) {
-      usePersistUserStore().$reset()
+    const userStore = usePersistUserStore()
+
+    if (!navigateCookie && userStore.uid) {
+      userStore.$reset()
       useMessage(10250, 'error', 7777)
 
       navigateTo('/login')
