@@ -41,7 +41,7 @@ const updateValue = (event: Event) => {
         :value="value"
         :checked="modelValue"
         :disabled="disabled"
-        class="peer focus:ring-primary checked:bg-primary checked:border-primary hover:border-primary border-default-300 h-5 w-5 appearance-none rounded border-2 text-white transition-all disabled:cursor-not-allowed disabled:opacity-50"
+        class="peer focus:ring-primary checked:bg-primary checked:border-primary hover:border-primary h-5 w-5 appearance-none rounded text-white transition-all disabled:cursor-not-allowed disabled:opacity-50"
         @change="updateValue"
       />
       <div

@@ -36,7 +36,7 @@ const handleClosePanel = async () => {
         v-if="isEdit"
       >
         <div
-          class="bg-background border-default-300 w-full max-w-4xl overflow-y-auto rounded-lg border p-3 shadow"
+          class="bg-background w-full max-w-4xl overflow-y-auto rounded-lg p-3 shadow"
         >
           <div class="flex items-center justify-between">
             <h3>
