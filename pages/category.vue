@@ -11,7 +11,6 @@ const activeTab = computed(
     <KunTab
       :items="kunCategoryAvailableItem"
       :model-value="activeTab"
-      inner-class-name="shadow border"
       size="sm"
     />
     <NuxtPage />

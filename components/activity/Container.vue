@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { activityPageTabs } from '~/constants/activity'
+
 const iconMap: Record<string, string> = {
   upvoted: 'lucide:sparkles',
   replied: 'carbon:reply',
@@ -8,7 +10,8 @@ const iconMap: Record<string, string> = {
 
 const pageData = reactive({
   page: 1,
-  limit: 50
+  limit: 50,
+  type: 'all'
 })
 
 const { data, status } = await useFetch('/api/activity', {
@@ -24,7 +27,17 @@ const { data, status } = await useFetch('/api/activity', {
     content-class="space-y-3"
     :is-hoverable="false"
   >
-    <h2 class="text-xl font-semibold">最新动态</h2>
+    <KunHeader
+      name="最新动态"
+      description="这里展示了论坛的所有动态, 最早可以追溯到论坛追加消息系统时"
+    />
+
+    <KunTab
+      :model-value="pageData.type"
+      @update:model-value="(value) => (pageData.type = value)"
+      :items="activityPageTabs"
+      size="sm"
+    />
 
     <div
       v-for="(activity, index) in data.activities"

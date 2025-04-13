@@ -148,7 +148,7 @@ onUnmounted(() => {
               class-name="text-xl sm:text-3xl font-bold text-foreground hover:text-primary transition-colors"
               :to="post.path"
             >
-              {{ post.title }}
+              <h1>{{ post.title }}</h1>
             </KunLink>
             <p
               class="text-default-700 line-clamp-2 text-sm select-none sm:text-base"

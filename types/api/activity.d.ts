@@ -1,3 +1,16 @@
+export type KunActivityType =
+  | 'all'
+  | 'upvoted'
+  | 'replied'
+  | 'commented'
+  | 'requested'
+
+export interface KunActivityRequestData {
+  page: string
+  limit: string
+  type: KunActivityType
+}
+
 export interface KunActivity {
   uid: number
   name: string

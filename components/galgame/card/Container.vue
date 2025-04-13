@@ -10,6 +10,14 @@ const { data, status } = await useFetch(`/api/galgame`, {
 
 <template>
   <div v-if="data" class="flex flex-col gap-3">
+    <KunCard :is-hoverable="false" :is-transparent="false">
+      <KunHeader
+        name="Galgame 资源 Wiki"
+        description="Galgame 资源页面, 提供各类 Galgame 下载。我们不是资源的提供者, 我们只是资源的指路人。"
+        :is-show-divider="false"
+      />
+    </KunCard>
+
     <GalgameCardNav />
 
     <GalgameCard v-if="data.galgames" :galgames="data.galgames" />
@@ -19,10 +27,6 @@ const { data, status } = await useFetch(`/api/galgame`, {
       :is-transparent="false"
       content-class="gap-3"
     >
-      <div class="text-default-600 text-center text-sm select-none">
-        我们不是资源的提供者, 我们只是资源的指路人
-      </div>
-
       <KunPagination
         v-model:current-page="pageData.page.value"
         :total-page="Math.ceil(data.totalCount / pageData.limit.value)"

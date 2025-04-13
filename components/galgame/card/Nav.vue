@@ -35,11 +35,9 @@ watch(
 
 <template>
   <div
-    class="bg-background z-10 flex w-full shrink-0 items-center justify-start rounded-lg border p-3 shadow backdrop-blur-[var(--kun-background-blur)]"
+    class="bg-background z-10 flex w-full shrink-0 flex-wrap items-center justify-between gap-3 rounded-lg border p-3 shadow backdrop-blur-[var(--kun-background-blur)] sm:flex-nowrap"
   >
-    <div
-      class="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
-    >
+    <div class="grid w-full grid-cols-2 gap-3 lg:grid-cols-4">
       <KunSelect
         :model-value="type"
         :options="kunGalgameResourceTypeOptions"
@@ -75,26 +73,26 @@ watch(
       >
         <span>{{ KUN_GALGAME_RESOURCE_SORT_FIELD_MAP[sortField] }}</span>
       </KunSelect>
+    </div>
 
-      <div class="flex items-center gap-2">
-        <KunButton
-          :is-icon-only="true"
-          :variant="sortOrder === 'desc' ? 'flat' : 'light'"
-          size="lg"
-          @click="sortOrder = 'desc'"
-        >
-          <KunIcon class="text-inherit" name="lucide:arrow-down" />
-        </KunButton>
+    <div class="flex items-center gap-2">
+      <KunButton
+        :is-icon-only="true"
+        :variant="sortOrder === 'desc' ? 'flat' : 'light'"
+        size="lg"
+        @click="sortOrder = 'desc'"
+      >
+        <KunIcon class="text-inherit" name="lucide:arrow-down" />
+      </KunButton>
 
-        <KunButton
-          :is-icon-only="true"
-          :variant="sortOrder === 'asc' ? 'flat' : 'light'"
-          size="lg"
-          @click="sortOrder = 'asc'"
-        >
-          <KunIcon class="text-inherit" name="lucide:arrow-up" />
-        </KunButton>
-      </div>
+      <KunButton
+        :is-icon-only="true"
+        :variant="sortOrder === 'asc' ? 'flat' : 'light'"
+        size="lg"
+        @click="sortOrder = 'asc'"
+      >
+        <KunIcon class="text-inherit" name="lucide:arrow-up" />
+      </KunButton>
     </div>
   </div>
 </template>

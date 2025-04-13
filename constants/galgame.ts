@@ -41,7 +41,6 @@ export const KUN_GALGAME_RESOURCE_TYPE_MAP: Record<string, string> = {
 }
 
 export const kunGalgameResourceTypeOptions: KunSelectOption[] = [
-  { value: 'name', label: '资源链接的类型' },
   { value: 'all', label: '全部类型' },
   { value: 'game', label: '游戏本体' },
   { value: 'patch', label: '补丁' },
@@ -82,7 +81,6 @@ export const KUN_GALGAME_RESOURCE_PLATFORM_MAP: Record<string, string> = {
 }
 
 export const kunGalgameResourcePlatformOptions: KunSelectOption[] = [
-  { value: 'name', label: '资源链接的平台' },
   { value: 'all', label: '全部平台' },
   { value: 'windows', label: 'Windows' },
   { value: 'mac', label: 'macOS' },

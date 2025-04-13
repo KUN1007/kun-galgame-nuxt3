@@ -22,7 +22,16 @@ const { data } = await useFetch('/api/home/message', {
     content-class="space-y-3"
     :is-hoverable="false"
   >
-    <h2 class="text-xl font-semibold">最新动态</h2>
+    <div class="flex items-center gap-3">
+      <h2 class="text-xl font-semibold">最新动态</h2>
+      <KunLink
+        underline="none"
+        class-name="text-default-500 hover:text-primary text-sm transition-colors"
+        to="/activity"
+      >
+        查看更多 >
+      </KunLink>
+    </div>
 
     <div
       v-for="(message, index) in data"
