@@ -6,12 +6,14 @@ const iconMap: Record<string, string> = {
   requested: 'lucide:git-pull-request-arrow'
 }
 
-const { data } = await useFetch('/api/home/message', {
+const pageData = reactive({
+  page: 1,
+  limit: 50
+})
+
+const { data, status } = await useFetch('/api/activity', {
   method: 'GET',
-  query: {
-    page: 1,
-    limit: 10
-  }
+  query: pageData
 })
 </script>
 
@@ -25,14 +27,14 @@ const { data } = await useFetch('/api/home/message', {
     <h2 class="text-xl font-semibold">最新动态</h2>
 
     <div
-      v-for="(message, index) in data"
+      v-for="(activity, index) in data.activities"
       :key="index"
       class="group flex items-start space-x-3 rounded-lg transition-colors"
     >
       <div
         class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
       >
-        <KunIcon :name="iconMap[message.type]" class="text-primary h-4 w-4" />
+        <KunIcon :name="iconMap[activity.type]" class="text-primary h-4 w-4" />
       </div>
 
       <div class="space-y-2">
@@ -40,27 +42,33 @@ const { data } = await useFetch('/api/home/message', {
           underline="none"
           color="default"
           :to="
-            message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`
+            activity.tid ? `/topic/${activity.tid}` : `/galgame/${activity.gid}`
           "
           class-name="hover:text-primary line-clamp-3 break-all transition-colors"
         >
-          {{ message.content }}
+          {{ activity.content }}
         </KunLink>
 
         <div class="flex items-center space-x-2">
           <KunLink
             underline="none"
             color="default"
-            :to="`/user/${message.uid}/info`"
+            :to="`/user/${activity.uid}/info`"
             class-name="hover:text-foreground text-default-500 text-sm font-medium transition-colors"
           >
-            {{ message.name }}
+            {{ activity.name }}
           </KunLink>
           <span class="text-default-500 text-sm">
-            {{ formatTimeDifference(message.time) }}
+            {{ formatTimeDifference(activity.time) }}
           </span>
         </div>
       </div>
     </div>
+
+    <KunPagination
+      v-model:current-page="pageData.page"
+      :total-page="Math.ceil(data.totalCount / pageData.limit)"
+      :is-loading="status === 'pending'"
+    />
   </KunCard>
 </template>

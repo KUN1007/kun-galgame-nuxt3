@@ -23,6 +23,12 @@ export const kunLayoutItem: KunLayoutItem[] = [
     label: '话题'
   },
   {
+    name: 'activity',
+    icon: 'lucide:activity',
+    router: '/activity',
+    label: '最新动态'
+  },
+  {
     name: 'category',
     icon: 'lucide:layers-3',
     label: '话题分类',

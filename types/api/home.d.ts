@@ -2,16 +2,6 @@ import type { GalgameResource } from './galgame-resource.d.ts'
 import type { MessageType } from './message.d.ts'
 import type { GalgameCard } from './galgame.d.ts'
 
-export interface HomeMessage {
-  uid: number
-  name: string
-  tid: number
-  gid: number
-  type: MessageType
-  content: string
-  time: number
-}
-
 export interface HomeUserStatus {
   moemoepoints: number
   isCheckIn: boolean
