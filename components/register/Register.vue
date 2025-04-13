@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { KUN_REGISTER_FORM_FIELD_MAP } from '~/constants/auth'
 import { registerFormItem } from './registerFormItem'
-import { checkRegisterForm } from './checkRegister'
-import { checkForm, checkRegister } from './checkRegister.ts'
+import { checkForm, checkRegister } from './checkRegister'
 
-const info = useComponentMessageStore()
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
   useComponentMessageStore()
 )
@@ -54,8 +52,7 @@ const handleRegister = async () => {
   })
 
   if (userInfo) {
-    info.info(`登陆成功! 欢迎来到 ${kungal.name}`)
-    useMessage(10135, 'success')
+    useKunLoliInfo(`注册成功! 欢迎来到 ${kungal.name}`)
     usePersistUserStore().setUserInfo(userInfo)
     navigateTo('/')
   }

@@ -20,6 +20,8 @@ const saveMarkdown = (editorMarkdown: string) => {
     :value-markdown="valueMarkdown"
     @set-markdown="saveMarkdown"
   >
-    <KunLink to="/topic/280">话题发布规定</KunLink>
+    <KunLink target="_blank" to="/doc/notice/topic-publish-rule">
+      话题发布规定
+    </KunLink>
   </KunMilkdownDualEditorProvider>
 </template>

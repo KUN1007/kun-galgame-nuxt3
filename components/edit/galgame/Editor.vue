@@ -30,6 +30,8 @@ const saveMarkdown = debounce((editorMarkdown: string) => {
     @set-markdown="saveMarkdown"
     :language="lang ?? 'zh-cn'"
   >
-    <KunLink to="/topic/280"> Galgame 发布规定 </KunLink>
+    <KunLink target="_blank" to="/doc/notice/galgame-publish-rule">
+      Galgame 发布规定
+    </KunLink>
   </KunMilkdownDualEditorProvider>
 </template>

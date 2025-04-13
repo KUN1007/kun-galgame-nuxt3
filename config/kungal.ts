@@ -10,7 +10,7 @@ const KUN_SITE_URL = 'https://www.kungal.com'
 const KUN_SITE_URL_BACKUP = 'https://www.kungal.org'
 const KUN_SITE_NAV = 'https://nav.kungal.org'
 const KUN_SITE_PATCH = 'https://www.moyu.moe'
-const KUN_SITE_STICKER = 'https://www.moyu.moe'
+const KUN_SITE_STICKER = 'https://sticker.kungal.com'
 const KUN_SITE_DEVELOPMENT_DOCUMENTATION =
   'https://soft.moe/kun-visualnovel-docs/kun-forum.html'
 const KUN_SITE_TELEGRAM_GROUP = 'https://t.me/kungalgame'

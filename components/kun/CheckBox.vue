@@ -41,11 +41,11 @@ const updateValue = (event: Event) => {
         :value="value"
         :checked="modelValue"
         :disabled="disabled"
-        class="peer focus:ring-primary checked:bg-primary checked:border-primary hover:border-primary h-5 w-5 appearance-none rounded text-white transition-all disabled:cursor-not-allowed disabled:opacity-50"
+        class="peer focus:ring-primary checked:bg-primary checked:border-primary hover:border-primary border-default-300 h-5 w-5 appearance-none rounded border-2 text-white transition-all disabled:cursor-not-allowed disabled:opacity-50"
         @change="updateValue"
       />
       <div
-        class="pointer-events-none absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 transition-opacity duration-200 peer-checked:opacity-100"
+        class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 transition-opacity duration-200 peer-checked:opacity-100"
       >
         <KunIcon name="lucide:check" />
       </div>
