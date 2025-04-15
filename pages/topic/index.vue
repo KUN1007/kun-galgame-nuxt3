@@ -5,12 +5,7 @@ useKunSeoMeta({
 })
 
 useHead({
-  link: [
-    {
-      rel: 'canonical',
-      href: `${kungal.domain.main}/topic`
-    }
-  ]
+  link: [{ rel: 'canonical', href: `${kungal.domain.main}/topic` }]
 })
 </script>
 

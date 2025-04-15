@@ -54,6 +54,15 @@ if (data.value && data.value !== 'banned') {
     markdownToText(markdown).trim().slice(0, 233).replace(/\\|\n/g, '')
   )
 
+  useHead({
+    link: [
+      {
+        rel: 'canonical',
+        href: `${kungal.domain.main}/topic/${data.value.tid}`
+      }
+    ]
+  })
+
   useKunSeoMeta({
     title: data.value.title,
     description: description.value,

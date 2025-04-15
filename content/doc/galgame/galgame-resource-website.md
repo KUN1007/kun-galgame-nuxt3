@@ -1,7 +1,7 @@
 ---
 title: 'Galgame 资源网站大全'
 banner: '/content/galgame/galgame-resource-website/banner.avif'
-description: '本指南汇总了多个优质 Galgame 资源网站，按不同层级分类，帮助玩家快速获取游戏。T0 级别包括 Nyaa，是最全面的 Galgame 资源站，以及 GGBases，提供大量种子下载。T1 级别推荐 Anime-Sharing（AS 论坛）和 绯月论坛（KF），前者资源丰富，后者为中文 Galgame 交流的核心。T2 级别涵盖网盘下载站，如 梓澪姐姐的网站，提供 PC、KRKR、RPG 等资源。T3 级别如 TouchGal.io，适合寻找带预览的资源。特殊站点包括 Moyu.moe（补丁下载）和 Telegram 群组（如黄油联盟 bot），提供自动化搜索服务。此外，Kungal.com 是开源、无广告的独特站点，并计划未来推出 Galgame 网站索引。'
+description: '本指南汇总了多个优质 Galgame 资源网站，按不同层级分类，帮助玩家快速获取游戏。T0 级别包括 Nyaa，是最全面的 Galgame 资源站。T1 级别推荐 Anime-Sharing（AS 论坛）和 绯月论坛（KF），前者资源丰富，后者为中文 Galgame 交流的核心。T2 级别涵盖网盘下载站，如 梓澪姐姐的网站，提供 PC、KRKR、RPG 等资源。特殊站点包括 Moyu.moe（补丁下载）和 Telegram 群组（如黄油联盟 bot），提供自动化搜索服务。此外，Kungal.com 是开源、无广告的独特站点，并计划未来推出 Galgame 网站索引。'
 publishedTime: 2024-05-03
 modifiedTime: 2024-03-26
 category: galgame
@@ -36,7 +36,7 @@ Galgame 在这里，其它的分类望自行探索
 
 ### GGBases
 
-https://www.ggbases.com/
+https://www. ggbases点com/
 
 这是 ggbases，一个非常无敌的网站，里面包含了世界上大部分可以找到的 Galgame，下载形式为种子
 
@@ -84,7 +84,7 @@ https://www.kungal.com/friend-links
 
 ### Galgame 补丁资源下载站
 
-[https://www.moyu.moe](https://www.moyu.moe/)
+https://www. moyu点moe
 
 你可以在这里下载到大部分你想要的游戏补丁，包括游戏补丁，汉化补丁，修正补丁，机翻补丁等等, 它是零门槛, 免登录, 免积分, 不限速下载的网站
 
