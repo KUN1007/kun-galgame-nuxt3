@@ -49,6 +49,10 @@ if (data.value && data.value !== 'banned') {
     ]
   })
 } else {
+  useHead({
+    meta: [{ name: 'robots', content: 'noindex, nofollow' }]
+  })
+
   useKunSeoMeta({
     title: data.value
       ? '这个 Galgame 已被封禁'

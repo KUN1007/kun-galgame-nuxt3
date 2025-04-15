@@ -10,18 +10,20 @@ const { data } = await useFetch(`/api/user/${uid.value}`, {
   ...kungalgameResponseHandler
 })
 
-useHead({
-  title:
-    data.value === 'banned'
-      ? '该用户已被封禁'
-      : `${data.value?.name} - ${kungal.titleShort}`,
-  meta: [
-    {
-      name: 'description',
-      content: data.value !== 'banned' ? data.value?.bio : '该用户已被封禁'
-    }
-  ]
-})
+if (data.value === 'banned') {
+  useHead({
+    meta: [{ name: 'robots', content: 'noindex, nofollow' }]
+  })
+  useKunSeoMeta({
+    title: '该用户已被封禁',
+    description: '该用户已被封禁'
+  })
+} else {
+  useKunSeoMeta({
+    title: data.value?.name,
+    description: data.value?.bio
+  })
+}
 </script>
 
 <template>

@@ -70,6 +70,9 @@ if (data.value && data.value !== 'banned') {
     articleModifiedTime: updated
   })
 } else {
+  useHead({
+    meta: [{ name: 'robots', content: 'noindex, nofollow' }]
+  })
   useKunSeoMeta({
     title: data.value ? '话题已被封禁' : '未找到此话题',
     description: data.value
