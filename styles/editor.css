@@ -23,22 +23,20 @@
   @apply text-3xl;
 }
 
-.milkdown h3,
-.milkdown h4 {
-  @apply text-default-900 mt-8 mb-4 font-semibold tracking-tight;
-}
-
 .milkdown h3 {
-  @apply text-2xl;
+  @apply text-default-900 mt-8 mb-4 text-2xl font-semibold tracking-tight;
 }
 
 .milkdown h4 {
-  @apply text-xl;
+  @apply text-default-900 mt-8 mb-4 text-xl font-semibold tracking-tight;
 }
 
-.milkdown h5,
+.milkdown h5 {
+  @apply text-default-800 my-3 text-base font-medium;
+}
+
 .milkdown h6 {
-  @apply text-default-800 my-3 font-medium;
+  @apply text-default-800 my-3 text-sm font-medium;
 }
 
 .milkdown p {

@@ -30,7 +30,15 @@
 }
 
 .kun-prose h4 {
-  @apply text-default-900 mt-6 mb-4 scroll-m-20 text-lg leading-snug font-semibold tracking-tight;
+  @apply text-default-900 my-3 scroll-m-20 text-lg leading-snug font-semibold tracking-tight;
+}
+
+.kun-prose h5 {
+  @apply text-default-800 my-3 text-base leading-snug font-medium tracking-tight;
+}
+
+.kun-prose h6 {
+  @apply text-default-800 my-3 text-sm leading-snug font-medium tracking-tight;
 }
 
 /* Lists with improved spacing and bullets */

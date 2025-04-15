@@ -55,6 +55,8 @@ const handleFileChange = async (event: Event) => {
 
 <template>
   <div class="flex flex-wrap items-center space-x-1">
+    <KunMilkdownPluginsHeader :editor-info="editorInfo" />
+
     <KunButton
       :is-icon-only="true"
       v-for="(btn, index) in commands"
