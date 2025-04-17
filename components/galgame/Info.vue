@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { platformIconMap } from './utils/iconMap'
+import { GALGAME_RESOURCE_PLATFORM_ICON_MAP } from '~/constants/galgameResource'
 import { KUN_GALGAME_RESOURCE_PLATFORM_MAP } from '~/constants/galgame'
 import type { GalgameDetail } from '~/types/api/galgame'
 
@@ -64,7 +64,10 @@ defineProps<{
           :key="index"
           color="success"
         >
-          <KunIcon class="icon" :name="platformIconMap[platform]" />
+          <KunIcon
+            class="icon"
+            :name="GALGAME_RESOURCE_PLATFORM_ICON_MAP[platform]"
+          />
           {{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[platform] }}
         </KunBadge>
       </div>

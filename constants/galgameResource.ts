@@ -1,5 +1,3 @@
-import type { KunSelectOption } from '~/components/kun/select/type'
-
 export const GALGAME_RESOURCE_TYPE_ICON_MAP: Record<string, string> = {
   game: 'lucide:box',
   patch: 'lucide:puzzle',
