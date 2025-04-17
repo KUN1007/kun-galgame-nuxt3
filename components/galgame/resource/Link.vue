@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { typeIconMap, platformIconMap } from '../utils/iconMap'
+import {
+  GALGAME_RESOURCE_TYPE_ICON_MAP,
+  GALGAME_RESOURCE_PLATFORM_ICON_MAP
+} from '~/constants/galgameResource'
 import {
   KUN_GALGAME_RESOURCE_TYPE_MAP,
   KUN_GALGAME_RESOURCE_LANGUAGE_MAP,
@@ -72,7 +75,7 @@ watch(
     <div class="flex flex-wrap items-center justify-between space-y-2">
       <div class="flex flex-wrap items-center gap-1 rounded-lg">
         <KunBadge color="primary">
-          <KunIcon :name="typeIconMap[link.type]" />
+          <KunIcon :name="GALGAME_RESOURCE_TYPE_ICON_MAP[link.type]" />
           {{ KUN_GALGAME_RESOURCE_TYPE_MAP[link.type] }}
         </KunBadge>
         <KunBadge color="warning">
@@ -80,7 +83,7 @@ watch(
           {{ link.size }}
         </KunBadge>
         <KunBadge color="success">
-          <KunIcon :name="platformIconMap[link.platform]" />
+          <KunIcon :name="GALGAME_RESOURCE_PLATFORM_ICON_MAP[link.platform]" />
           {{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[link.platform] }}
         </KunBadge>
         <KunBadge color="secondary">

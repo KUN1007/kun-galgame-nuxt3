@@ -1,3 +1,4 @@
+import GalgameResourceModel from '~/server/models/galgame-resource'
 import UserModel from '~/server/models/user'
 import type { UserInfo } from '~/types/api/user'
 
@@ -20,6 +21,11 @@ export default defineEventHandler(async (event) => {
   if (user.status === 1) {
     return 'banned'
   }
+
+  const invalidGalgameResource = await GalgameResourceModel.countDocuments({
+    uid,
+    status: 1
+  })
 
   const responseData: UserInfo = {
     uid: user.uid,
@@ -46,6 +52,9 @@ export default defineEventHandler(async (event) => {
     likeGalgame: user.like_galgame.length,
     favoriteGalgame: user.favorite_galgame.length,
     contributeGalgame: user.contribute_galgame.length,
+
+    galgameResourceValid: user.galgame_resource.length,
+    galgameResourceInvalid: invalidGalgameResource,
 
     dailyTopicCount: user.daily_topic_count,
     dailyGalgameCount: user.daily_galgame_count

@@ -1,5 +1,6 @@
 export type TopicType = 'publish' | 'like' | 'upvote' | 'favorite'
 export type GalgameType = 'publish' | 'like' | 'favorite' | 'contribute'
+export type GalgameResourceType = 'valid' | 'invalid' | 'like'
 
 export interface UserInfo {
   uid: number
@@ -26,6 +27,9 @@ export interface UserInfo {
   likeGalgame: number
   favoriteGalgame: number
   contributeGalgame: number
+
+  galgameResourceValid: number
+  galgameResourceInvalid: number
 
   dailyTopicCount: number
   dailyGalgameCount: number
@@ -69,10 +73,24 @@ export interface UserGalgame {
   time: number
 }
 
+export interface UserGalgameResource {
+  gid: number
+  name: KunLanguage
+  platform: string
+  status: number
+  time: number
+}
+
 export interface UserGetGalgameRequestData {
   page: string
   limit: string
   type: GalgameType
+}
+
+export interface UserGetGalgameResourceRequestData {
+  page: string
+  limit: string
+  type: GalgameResourceType
 }
 
 export interface UserReply {

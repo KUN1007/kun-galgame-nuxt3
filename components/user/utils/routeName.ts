@@ -41,6 +41,12 @@ export const navBarRoute: Ref<Nav[]> = ref([
     router: 'galgame'
   },
   {
+    name: 'resource',
+    permission: [1, 2, 3, 4],
+    redirect: 'resource/valid',
+    router: 'resource'
+  },
+  {
     name: 'reply',
     router: 'reply',
     permission: [1, 2, 3, 4]

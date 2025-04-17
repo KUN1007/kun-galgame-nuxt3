@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {
-  typeIconMap,
-  platformIconMap
-} from '~/components/galgame/utils/iconMap'
+  GALGAME_RESOURCE_TYPE_ICON_MAP,
+  GALGAME_RESOURCE_PLATFORM_ICON_MAP
+} from '~/constants/galgameResource'
 import {
   KUN_GALGAME_RESOURCE_TYPE_MAP,
   KUN_GALGAME_RESOURCE_LANGUAGE_MAP
@@ -37,7 +37,7 @@ const { data } = await useFetch(`/api/home/resource`, {
         class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
       >
         <KunIcon
-          :name="platformIconMap[link.platform]"
+          :name="GALGAME_RESOURCE_PLATFORM_ICON_MAP[link.platform]"
           class="text-primary h-4 w-4"
         />
       </div>
@@ -53,7 +53,10 @@ const { data } = await useFetch(`/api/home/resource`, {
 
         <div class="text-default-700 flex gap-4 text-sm">
           <span class="flex items-center gap-1">
-            <KunIcon class="icon" :name="typeIconMap[link.type]" />
+            <KunIcon
+              class="icon"
+              :name="GALGAME_RESOURCE_TYPE_ICON_MAP[link.type]"
+            />
             {{ KUN_GALGAME_RESOURCE_TYPE_MAP[link.type] }}
           </span>
 

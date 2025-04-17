@@ -34,13 +34,13 @@ if (data.value === 'banned') {
     content-class="h-[calc(100dvh-120px)]"
     v-if="data !== 'banned'"
   >
-    <div class="flex h-full w-full gap-3">
+    <div class="flex h-full w-full">
       <UserNavBar
         v-if="data"
         :user="{ uid: data.uid, name: data.name, avatar: data.avatar }"
       />
 
-      <div class="scrollbar-hide h-full w-full overflow-y-auto">
+      <div class="scrollbar-hide h-full w-full overflow-y-auto px-3">
         <NuxtPage :user="data" />
       </div>
     </div>

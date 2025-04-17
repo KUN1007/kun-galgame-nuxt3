@@ -50,6 +50,26 @@ export const kunUserGalgameNavItem = (uid: number): KunTabItem[] => {
   ]
 }
 
+export const kunUserGalgameResourceNavItem = (uid: number): KunTabItem[] => {
+  return [
+    {
+      value: 'valid',
+      textValue: '有效资源',
+      href: `/user/${uid}/resource/valid`
+    },
+    {
+      value: 'invalid',
+      textValue: '过期资源',
+      href: `/user/${uid}/resource/invalid`
+    },
+    {
+      value: 'like',
+      textValue: '点赞资源',
+      href: `/user/${uid}/resource/like`
+    }
+  ]
+}
+
 export const KUN_USER_PAGE_NAV_MAP: Record<string, string> = {
   profile: '个人信息',
   setting: '信息设置',
@@ -57,6 +77,7 @@ export const KUN_USER_PAGE_NAV_MAP: Record<string, string> = {
   password: '密码设置',
   topic: '话题',
   galgame: 'Galgame',
+  resource: 'Gal 资源',
   publish: '已发布',
   like: '已点赞',
   favorite: '已收藏',
