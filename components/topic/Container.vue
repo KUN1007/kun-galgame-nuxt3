@@ -5,7 +5,6 @@ const {
   topics,
   isLoadingComplete,
   isFetching,
-  loadMoreTopics,
   resetTopics,
   loadInitialTopics
 } = useTopic()
@@ -23,19 +22,10 @@ const handleFilterChange = async () => {
 
     <TopicLayout :topics="topics" />
 
-    <div class="w-full items-center justify-center p-6">
-      <KunButton
-        size="lg"
-        v-if="!isLoadingComplete"
-        :disabled="isFetching"
-        @click="loadMoreTopics"
-      >
-        {{ isFetching ? '加载中...' : '点击继续加载话题' }}
-      </KunButton>
+    <div class="flex w-full items-center justify-center p-6">
+      <KunLoading v-if="isFetching" description="正在摸鱼中...咕咕咕" />
 
-      <p v-if="isLoadingComplete" class="text-default-500">
-        已经。。。一滴也不剩了
-      </p>
+      <KunNull v-if="isLoadingComplete" description="真的一滴也不剩了呜呜呜" />
     </div>
   </div>
 </template>

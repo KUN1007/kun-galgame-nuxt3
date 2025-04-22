@@ -56,6 +56,7 @@ export const KUN_TOPIC_REPLY_PANEL_POSITION_MAP: Record<string, string> = {
 }
 
 export const topicSortFieldOptions: KunSelectOption[] = [
+  { value: 'time', label: '更新时间' },
   { value: 'created', label: '创建时间' },
   { value: 'views', label: '浏览量' }
 ]

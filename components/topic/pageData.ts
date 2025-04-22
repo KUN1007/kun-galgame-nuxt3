@@ -1,7 +1,7 @@
 export interface PageData {
   page: number
   limit: number
-  sortField: 'created' | 'views'
+  sortField: 'time' | 'created' | 'views'
   sortOrder: 'asc' | 'desc'
   category: 'all' | 'galgame' | 'technique' | 'others'
 }
@@ -9,7 +9,7 @@ export interface PageData {
 export const pageData = reactive<PageData>({
   page: 1,
   limit: 24,
-  sortField: 'created',
+  sortField: 'time',
   sortOrder: 'desc',
   category: 'all'
 })

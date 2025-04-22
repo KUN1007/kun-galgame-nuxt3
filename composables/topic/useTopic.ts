@@ -1,73 +1,57 @@
+import { pageData } from '~/components/topic/pageData'
 import type { TopicCard } from '~/types/api/topic'
-
-export interface PageData {
-  page: number
-  limit: number
-  sortField: 'created' | 'views'
-  sortOrder: 'asc' | 'desc'
-  category: 'all' | 'galgame' | 'technique' | 'others'
-}
-
-export const pageData = reactive<PageData>({
-  page: 1,
-  limit: 24,
-  sortField: 'created',
-  sortOrder: 'desc',
-  category: 'all'
-})
 
 export const useTopic = () => {
   const topics = useState<TopicCard[]>('topics', () => [])
   const isLoadingComplete = useState('isLoadingComplete', () => false)
   const isFetching = useState('isFetching', () => false)
-  const page = useState('page', () => 1)
   const scrollPosition = useState('scrollPosition', () => 0)
 
   const getTopics = async () => {
+    isFetching.value = true
     const result = await $fetch('/api/topic', {
       method: 'GET',
-      query: {
-        ...pageData,
-        page: page.value
-      }
+      query: pageData
     })
+    isFetching.value = false
     return result
   }
 
   const loadInitialTopics = async () => {
     if (topics.value.length === 0) {
-      page.value = 1
+      pageData.page = 1
       const initialTopics = await getTopics()
       topics.value = initialTopics
     }
   }
 
   const loadMoreTopics = async () => {
-    if (isLoadingComplete.value || isFetching.value) return
-
-    isFetching.value = true
-    page.value++
-
-    try {
-      const newTopics = await getTopics()
-
-      if (newTopics.length < pageData.limit) {
-        isLoadingComplete.value = true
-      }
-
-      topics.value = [...topics.value, ...newTopics]
-    } finally {
-      isFetching.value = false
+    if (isLoadingComplete.value || isFetching.value) {
+      return
     }
+
+    pageData.page++
+
+    const newTopics = await getTopics()
+    if (newTopics.length < pageData.limit) {
+      isLoadingComplete.value = true
+    }
+
+    topics.value = [...topics.value, ...newTopics]
   }
 
   const resetTopics = async () => {
-    page.value = 1
+    pageData.page = 1
     isLoadingComplete.value = false
     topics.value = []
     scrollPosition.value = 0
     await loadInitialTopics()
   }
+
+  watch(
+    () => [pageData.sortField, pageData.sortOrder, pageData.category],
+    async () => await resetTopics()
+  )
 
   const handleScroll = () => {
     const scrollHeight = document.documentElement.scrollHeight
