@@ -15,7 +15,7 @@ withDefaults(
   <div class="m-auto flex flex-col items-center gap-3">
     <NuxtImg
       v-if="isShowSticker"
-      :src="useRandomSticker"
+      :src="getRandomSticker(description || '').value"
       class="h-32 w-32 rounded-lg"
       loading="lazy"
       placeholder="/apple-touch-icon.png"

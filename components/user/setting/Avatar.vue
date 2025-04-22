@@ -37,7 +37,14 @@ const handleChangeAvatar = async () => {
       <div>
         <span class="text-xl">更改头像</span>
         <p class="text-default-500 text-sm">
-          更改头像不是必须, 但是还是有头像比较好, 最好是小只可爱软萌的孩子, 嗯
+          更改头像不是必须, 但是还是有头像比较好, 最好是小只可爱软萌的孩子, 嗯。
+        </p>
+        <p class="text-default-500 text-sm">
+          您的默认头像将会从
+          <KunLink size="sm" :to="kungal.domain.sticker" target="_blank">
+            鲲 Galgame 表情包
+          </KunLink>
+          中随机选取, 每一次都是不同的孩子哦, 欸嘿嘿嘿
         </p>
       </div>
 

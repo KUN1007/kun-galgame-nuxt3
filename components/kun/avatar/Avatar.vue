@@ -38,9 +38,13 @@ const sizeClasses = computed(() => {
 })
 
 const userAvatarSrc = computed(() => {
-  return props.size === 'original' || props.size === 'original-sm'
-    ? props.user.avatar
-    : props.user.avatar.replace(/\.webp$/, '-100.webp')
+  if (props.user.avatar) {
+    return props.size === 'original' || props.size === 'original-sm'
+      ? props.user.avatar
+      : props.user.avatar.replace(/\.webp$/, '-100.webp')
+  } else {
+    return getRandomSticker(props.user.name).value
+  }
 })
 </script>
 
@@ -49,13 +53,18 @@ const userAvatarSrc = computed(() => {
     :class="cn('flex shrink-0 cursor-pointer justify-center', className)"
     @click="handleClickAvatar($event)"
   >
-    <NuxtImg
+    <!-- <NuxtImg
       :class="cn('inline-block rounded-full', sizeClasses)"
       v-if="user.avatar"
       :src="userAvatarSrc"
       :alt="user.name"
+    /> -->
+    <NuxtImg
+      :class="cn('inline-block rounded-full', sizeClasses)"
+      :src="userAvatarSrc"
+      :alt="user.name"
     />
-    <span
+    <!-- <span
       :style="{ height: size, width: size }"
       :class="
         cn(
@@ -66,6 +75,6 @@ const userAvatarSrc = computed(() => {
       v-if="!user.avatar"
     >
       {{ user.name.slice(0, 1).toUpperCase() }}
-    </span>
+    </span> -->
   </div>
 </template>
