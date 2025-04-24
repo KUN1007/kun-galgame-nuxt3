@@ -16,6 +16,7 @@ export interface GalgameDetail {
   name: KunLanguage
   banner: string
   introduction: KunLanguage
+  contentLimit: string
   markdown: KunLanguage
   time: number
   views: number
@@ -54,6 +55,7 @@ export interface GalgameCard {
   name: KunLanguage
   banner: string
   user: KunUser
+  contentLimit: string
 
   views: number
   likes: number

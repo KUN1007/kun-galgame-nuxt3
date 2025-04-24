@@ -14,6 +14,10 @@ export const checkGalgamePR = (galgame: GalgameStoreTemp) => {
     return 10606
   }
 
+  if (!['sfw', 'nsfw'].includes(galgame.contentLimit)) {
+    return 10647
+  }
+
   if (galgame.alias.length > 17) {
     return 10611
   }

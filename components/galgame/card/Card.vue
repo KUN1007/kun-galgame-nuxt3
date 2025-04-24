@@ -30,24 +30,36 @@ defineProps<{
           :style="{ aspectRatio: '16/9' }"
         />
 
-        <div class="absolute top-2 left-2 flex gap-1">
-          <template v-if="galgame.platform.length">
+        <div class="absolute top-2 right-2 left-2 flex justify-between">
+          <div class="flex gap-1">
+            <template v-if="galgame.platform.length">
+              <span
+                v-for="(platform, i) in galgame.platform"
+                :key="i"
+                class="bg-background flex size-6 items-center justify-center rounded-full p-1.5 text-xs backdrop-blur-sm sm:size-8 sm:text-sm"
+              >
+                <KunIcon
+                  :name="GALGAME_RESOURCE_PLATFORM_ICON_MAP[platform]"
+                  class="h-4 w-4"
+                />
+              </span>
+            </template>
             <span
-              v-for="(platform, i) in galgame.platform"
-              :key="i"
-              class="bg-background flex size-6 items-center justify-center rounded-full p-1.5 text-xs backdrop-blur-sm sm:size-8 sm:text-sm"
+              v-else
+              class="bg-background rounded-full px-3 py-1 text-xs backdrop-blur-sm sm:text-sm"
             >
-              <KunIcon
-                :name="GALGAME_RESOURCE_PLATFORM_ICON_MAP[platform]"
-                class="h-4 w-4"
-              />
+              准备中
             </span>
-          </template>
+          </div>
           <span
-            v-else
-            class="bg-background rounded-full px-3 py-1 text-xs backdrop-blur-sm sm:text-sm"
+            :class="
+              cn(
+                'bg-background flex items-center justify-center rounded-lg px-2 text-xs backdrop-blur-sm sm:px-3 sm:text-sm',
+                galgame.contentLimit === 'sfw' ? '' : 'text-danger'
+              )
+            "
           >
-            准备中
+            {{ galgame.contentLimit.toUpperCase() }}
           </span>
         </div>
 

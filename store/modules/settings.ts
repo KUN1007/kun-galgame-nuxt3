@@ -9,6 +9,7 @@ export const usePersistSettingsStore = defineStore('KUNGalgameSettings', {
   state: (): KUNGalgameSettingsStore => ({
     showKUNGalgamePageTransparency: 77,
     showKUNGalgameFontStyle: SETTINGS_DEFAULT_FONT_FAMILY,
+    showKUNGalgameContentLimit: 'sfw',
     showKUNGalgameBackground: 0,
     showKUNGalgameBackgroundBlur: 0,
     showKUNGalgameBackgroundBrightness: 100,

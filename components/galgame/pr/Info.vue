@@ -20,7 +20,6 @@ const statusColorMap: Record<number, string> = {
   2: 'text-danger'
 }
 
-const { uid } = usePersistUserStore()
 const details = ref<Partial<GalgamePRDetails>>()
 const isFetching = ref(false)
 
@@ -106,13 +105,6 @@ watch(
         </KunButton>
       </div>
     </div>
-
-    <p
-      class="text-danger font-bold italic"
-      v-if="uid === props.pr.user.uid && props.pr.status === 0"
-    >
-      您可以自己合并自己提出的更新请求
-    </p>
 
     <GalgamePrDetails v-if="details" :details="details" :refresh="refresh" />
   </div>

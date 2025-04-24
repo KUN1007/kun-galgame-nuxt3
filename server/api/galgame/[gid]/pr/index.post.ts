@@ -23,13 +23,23 @@ export default defineEventHandler(async (event) => {
   if (!originalGalgame) {
     return kunError(event, 10610)
   }
-  const { gid, name, introduction, series, alias, official, engine, tags } =
-    originalGalgame
+  const {
+    gid,
+    name,
+    introduction,
+    series,
+    alias,
+    official,
+    engine,
+    content_limit,
+    tags
+  } = originalGalgame
 
   const diffGalgame = compareObjects(galgame, {
     gid,
     name,
     introduction,
+    contentLimit: content_limit,
     series: series.map((s) => s.toString()),
     alias,
     official,

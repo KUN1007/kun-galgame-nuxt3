@@ -30,6 +30,7 @@ const handlePublishGalgamePR = async () => {
     gid: galgamePR.value[0].gid,
     name: galgamePR.value[0].name,
     introduction: galgamePR.value[0].introduction,
+    contentLimit: galgamePR.value[0].contentLimit,
     alias: galgamePR.value[0].alias,
     official: officialArray,
     engine: engineArray,

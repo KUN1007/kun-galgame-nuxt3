@@ -5,6 +5,7 @@ export const checkGalgamePublish = (
   vndb_id: string,
   name: KunLanguage,
   introduction: KunLanguage,
+  contentLimit: string,
   series: string[],
   aliases: string[],
   official: string[],
@@ -25,6 +26,10 @@ export const checkGalgamePublish = (
 
   if (!isValidKunLanguage(introduction, 100007)) {
     return 10606
+  }
+
+  if (!['sfw', 'nsfw'].includes(contentLimit)) {
+    return 10647
   }
 
   if (aliases.length > 17) {

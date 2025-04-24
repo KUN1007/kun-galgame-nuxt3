@@ -116,5 +116,6 @@ export const errorMessages: Record<number, string> = {
   10643: `Galgame 的标签名最长 50 字 (-B)`,
   10644: `未检测到更改，更新请求取消 (-B)`,
   10645: `Galgame 系列最多 50 个游戏 (-B)`,
-  10646: `非法的 Galgame 序列号 (-B)`
+  10646: `非法的 Galgame 序列号 (-B)`,
+  10647: `非法的 Galgame 内容限制类型 (-B)`
 }

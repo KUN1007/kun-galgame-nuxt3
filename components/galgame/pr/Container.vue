@@ -24,7 +24,7 @@ const { data, status, refresh } = await useFetch(
   <div class="flex flex-col space-y-3" v-if="data">
     <KunHeader
       name="更新请求"
-      description="蓝色代表增加, 红色代表删减, 游戏发布者或管理员可以合并或拒绝请求"
+      description="蓝色代表增加, 红色代表删减, 游戏发布者或管理员可以合并或拒绝请求, 您可以自己合并自己为自己创建的游戏提出的更新请求"
     />
 
     <KunLoading v-if="status === 'pending'" />

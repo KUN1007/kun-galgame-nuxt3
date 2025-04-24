@@ -7,6 +7,7 @@ export interface Galgame {
   name: KunLanguage
   banner: string
   introduction: KunLanguage
+  content_limit: string
 
   time: number
   status: number

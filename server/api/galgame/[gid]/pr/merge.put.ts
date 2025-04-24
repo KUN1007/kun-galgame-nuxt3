@@ -75,6 +75,7 @@ export default defineEventHandler(async (event) => {
           galgame.introduction,
           galgamePR.galgame?.introduction ?? {}
         ),
+        content_limit: galgamePR.galgame.contentLimit,
         alias: galgamePR.galgame?.alias?.filter((str) => str !== ''),
         series: galgamePR.galgame?.series?.map((s) => parseInt(s)),
         official: galgamePR.galgame?.official?.filter((str) => str !== ''),

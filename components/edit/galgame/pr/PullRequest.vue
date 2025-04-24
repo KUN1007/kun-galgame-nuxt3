@@ -6,10 +6,16 @@ const introductionLanguage = ref<Language>('zh-cn')
 
 <template>
   <ClientOnly>
-    <KunCard :is-hoverable="false" :is-transparent="false" class="space-y-6">
+    <KunCard
+      :is-hoverable="false"
+      :is-transparent="false"
+      content-class="space-y-6"
+    >
       <EditGalgamePrHelp />
 
       <EditGalgamePrTitle />
+
+      <EditGalgameContentLimit type="rewrite" />
 
       <KunTab
         :items="languageItems"

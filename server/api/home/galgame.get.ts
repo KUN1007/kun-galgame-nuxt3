@@ -2,10 +2,15 @@ import UserModel from '~/server/models/user'
 import GalgameModel from '~/server/models/galgame'
 import type { HomeGalgame } from '~/types/api/home'
 
-const getHomeGalgames = async (page: number, limit: number) => {
+const getHomeGalgames = async (page: number, limit: number, nsfw: string) => {
   const skip = (page - 1) * limit
 
-  const data = await GalgameModel.find({ status: { $ne: 1 } })
+  const queryData = {
+    status: { $ne: 1 },
+    ...(nsfw === 'sfw' ? { content_limit: 'sfw' } : {})
+  }
+
+  const data = await GalgameModel.find(queryData)
     .sort({ time: -1 })
     .skip(skip)
     .limit(limit)
@@ -16,6 +21,7 @@ const getHomeGalgames = async (page: number, limit: number) => {
     gid: galgame.gid,
     name: galgame.name,
     banner: galgame.banner,
+    contentLimit: galgame.content_limit,
     user: {
       uid: galgame.user[0].uid,
       name: galgame.user[0].name,
@@ -37,7 +43,10 @@ export default defineEventHandler(async (event) => {
   if (limit !== '12') {
     return kunError(event, 10209)
   }
-  const result = await getHomeGalgames(parseInt(page), parseInt(limit))
+
+  const nsfw = getNSFWCookie(event)
+
+  const result = await getHomeGalgames(parseInt(page), parseInt(limit), nsfw)
 
   return result
 })

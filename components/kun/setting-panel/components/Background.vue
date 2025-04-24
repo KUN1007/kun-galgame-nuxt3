@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 import { backgroundImages } from './backgroundImage'
 
-const itemsPerPage = 15
+const itemsPerPage = 12
 const totalPages = Math.ceil(backgroundImages.length / itemsPerPage)
 const currentPage = ref(1)
 
@@ -69,7 +69,7 @@ const handleChangeImage = async (index: number) => {
         <KunSettingPanelComponentsCustomBackground />
       </div>
 
-      <div class="grid h-[240px] grid-cols-3 justify-center gap-2">
+      <div class="grid h-48 grid-cols-3 justify-center gap-2">
         <div
           class="flex shrink-0 items-center justify-center"
           v-for="image in paginatedImages"

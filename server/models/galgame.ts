@@ -20,6 +20,7 @@ const GalgameSchema = new mongoose.Schema<Galgame>(
       'zh-cn': { type: String, default: '', maxlength: 100007 },
       'zh-tw': { type: String, default: '', maxlength: 100007 }
     },
+    content_limit: { type: String, default: 'sfw', maxlength: 10 },
 
     time: { type: Number, default: 0 },
     status: { type: Number, default: 0 },

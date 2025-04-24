@@ -136,18 +136,15 @@ export const KUN_GALGAME_RESOURCE_PULL_REQUEST_I18N_FIELD_MAP: Record<
   string,
   string | KunLanguage
 > = {
-  name: {
-    'en-us': '英语标题',
-    'ja-jp': '日语标题',
-    'zh-cn': '简体中文',
-    'zh-tw': '繁体中文'
-  },
-  introduction: {
-    'en-us': '英语介绍',
-    'ja-jp': '日语介绍',
-    'zh-cn': '简体中文',
-    'zh-tw': '繁体中文'
-  },
+  'name.en-us': '英语标题',
+  'name.ja-jp': '日语标题',
+  'name.zh-cn': '简体中文标题',
+  'name.zh-tw': '繁体中文标题',
+  'introduction.en-us': '英语介绍',
+  'introduction.ja-jp': '日语介绍',
+  'introduction.zh-cn': '简体中文介绍',
+  'introduction.zh-tw': '繁体中文介绍',
+  contentLimit: '内容限制',
   tags: '标签',
   series: '系列',
   alias: '别名',

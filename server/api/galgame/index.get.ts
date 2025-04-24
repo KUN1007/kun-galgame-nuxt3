@@ -14,12 +14,14 @@ const getGalgames = async (
   language: KunGalgameResourceLanguageOptions,
   platform: KunGalgameResourcePlatformOptions,
   sortField: 'time' | 'created' | 'views',
-  sortOrder: KunOrder
+  sortOrder: KunOrder,
+  nsfw: string
 ) => {
   const skip = (page - 1) * limit
 
   const queryData = {
     status: { $ne: 1 },
+    ...(nsfw === 'sfw' ? { content_limit: 'sfw' } : {}),
     ...(type !== 'all' ? { type: { $elemMatch: { $eq: type } } } : {}),
     ...(language !== 'all'
       ? { language: { $elemMatch: { $eq: language } } }
@@ -46,6 +48,7 @@ const getGalgames = async (
       name: galgame.user[0].name,
       avatar: galgame.user[0].avatar
     },
+    contentLimit: galgame.content_limit,
     views: galgame.views,
     likes: galgame.likes.length,
     favorites: galgame.favorites.length,
@@ -74,6 +77,8 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10209)
   }
 
+  const nsfw = getNSFWCookie(event)
+
   const galgames = await getGalgames(
     parseInt(page),
     parseInt(limit),
@@ -81,7 +86,8 @@ export default defineEventHandler(async (event) => {
     language,
     platform,
     sortField as 'time' | 'created' | 'views',
-    sortOrder as KunOrder
+    sortOrder as KunOrder,
+    nsfw
   )
 
   return galgames

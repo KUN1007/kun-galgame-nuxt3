@@ -52,6 +52,7 @@ export default defineEventHandler(async (event) => {
         name: publisher.name,
         avatar: publisher.avatar
       },
+      contentLimit: galgame.content_limit,
       name: galgame.name,
       banner: galgame.banner,
       introduction: introductionHtml,

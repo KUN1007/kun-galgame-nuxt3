@@ -13,6 +13,7 @@ const readGalgameData = async (event: H3Event) => {
   const vndbIdData = formData.get('vndbId')
   const nameData = formData.get('name')
   const introductionData = formData.get('introduction')
+  const contentLimitData = formData.get('contentLimit')
   const seriesData = formData.get('series')
   const aliasesData = formData.get('aliases')
   const officialData = formData.get('official')
@@ -23,6 +24,7 @@ const readGalgameData = async (event: H3Event) => {
     !vndbIdData ||
     !nameData ||
     !introductionData ||
+    !contentLimitData ||
     !seriesData ||
     !aliasesData ||
     !officialData ||
@@ -36,6 +38,7 @@ const readGalgameData = async (event: H3Event) => {
   const vndbId = vndbIdData.toString()
   const name = JSON.parse(nameData.toString()) as KunLanguage
   const introduction = JSON.parse(introductionData.toString()) as KunLanguage
+  const contentLimit = JSON.parse(contentLimitData.toString()) as string
   const series = JSON.parse(seriesData.toString()) as string[]
   const aliases = JSON.parse(aliasesData.toString()) as string[]
   const official = JSON.parse(officialData.toString()) as string[]
@@ -47,6 +50,7 @@ const readGalgameData = async (event: H3Event) => {
     vndbId,
     name,
     introduction,
+    contentLimit,
     series,
     aliases,
     official,

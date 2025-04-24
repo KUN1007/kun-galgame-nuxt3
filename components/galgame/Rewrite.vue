@@ -8,16 +8,11 @@ defineProps<{
 const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 
 const handleRewriteGalgame = (galgame: GalgameDetail) => {
-  const { gid, name, markdown, series, alias, official, engine, tags } = galgame
+  const { introduction, markdown, series, ...rest } = galgame
   galgamePR.value[0] = {
-    gid,
-    name,
     introduction: markdown,
     series: series.map((s) => s.toString()),
-    alias,
-    official,
-    engine,
-    tags
+    ...rest
   }
   navigateTo('/edit/galgame/rewrite')
 }

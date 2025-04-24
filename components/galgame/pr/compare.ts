@@ -50,6 +50,7 @@ export const diffGalgame = (
       gid: oldGalgame.gid,
       name: oldGalgame.name,
       introduction: oldGalgame.markdown,
+      contentLimit: oldGalgame?.contentLimit,
       alias: oldGalgame.alias?.toString(),
       official: oldGalgame.official?.toString(),
       engine: oldGalgame.engine?.toString(),

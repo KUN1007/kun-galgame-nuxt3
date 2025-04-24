@@ -164,6 +164,8 @@ const handleGetVNData = async () => {
 
       <EditGalgameBanner />
 
+      <EditGalgameContentLimit type="create" />
+
       <KunDivider>
         <span class="mx-2">可选信息, 下面的信息可以选填</span>
       </KunDivider>

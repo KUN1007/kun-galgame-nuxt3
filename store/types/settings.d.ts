@@ -3,6 +3,7 @@ import type { MessageStatus } from '~/types/utils/message'
 export interface KUNGalgameSettingsStore {
   showKUNGalgamePageTransparency: number
   showKUNGalgameFontStyle: string
+  showKUNGalgameContentLimit: string
   showKUNGalgameBackground: number
   showKUNGalgameBackgroundBlur: number
   showKUNGalgameBackgroundBrightness: number

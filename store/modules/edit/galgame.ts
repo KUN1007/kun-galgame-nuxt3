@@ -18,28 +18,12 @@ export const usePersistEditGalgameStore = defineStore('KUNGalgameEditGalgame', {
       'zh-cn': '',
       'zh-tw': ''
     },
+    contentLimit: 'sfw',
     aliases: [],
     official: [],
     engine: [],
     tags: [],
     series: []
   }),
-  actions: {
-    resetGalgameData() {
-      this.vndbId = ''
-      this.name = {
-        'en-us': '',
-        'ja-jp': '',
-        'zh-cn': '',
-        'zh-tw': ''
-      }
-      this.introduction = {
-        'en-us': '',
-        'ja-jp': '',
-        'zh-cn': '',
-        'zh-tw': ''
-      }
-      this.aliases = []
-    }
-  }
+  actions: {}
 })
