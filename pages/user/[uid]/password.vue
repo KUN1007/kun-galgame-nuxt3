@@ -3,9 +3,7 @@ definePageMeta({
   middleware: 'auth'
 })
 
-useKunSeoMeta({
-  title: '密码设置'
-})
+useKunDisableSeo('密码设置')
 </script>
 
 <template>

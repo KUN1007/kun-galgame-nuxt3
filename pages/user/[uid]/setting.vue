@@ -9,9 +9,7 @@ defineProps<{
   user: UserInfo
 }>()
 
-useKunSeoMeta({
-  title: '信息设置'
-})
+useKunDisableSeo('信息设置')
 </script>
 
 <template>

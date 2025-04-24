@@ -35,7 +35,9 @@ export const useKunDisableSeo = (title: string) => {
     ogImageUrl: '',
 
     twitterCard: undefined,
-    twitterImage: ''
+    twitterImage: '',
+    twitterTitle: '',
+    twitterDescription: ''
   })
 
   useSchemaOrg([defineOrganization({}), defineWebSite({}), defineWebPage()])

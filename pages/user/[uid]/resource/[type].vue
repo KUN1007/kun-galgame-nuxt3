@@ -16,19 +16,9 @@ const count = computed(() => {
     : props.user.galgameResourceInvalid
 })
 
-useKunSeoMeta({
-  title: () => `${props.user.name}${KUN_USER_PAGE_NAV_MAP[resourceType.value]}`,
-  description: () => `${props.user.name}发布的 Galgame 下载资源`
-})
-
-useHead({
-  link: [
-    {
-      rel: 'canonical',
-      href: `${kungal.domain.main}/user/${props.user.uid}/resource/${resourceType.value}`
-    }
-  ]
-})
+useKunDisableSeo(
+  `${props.user.name}${KUN_USER_PAGE_NAV_MAP[resourceType.value]}`
+)
 </script>
 
 <template>

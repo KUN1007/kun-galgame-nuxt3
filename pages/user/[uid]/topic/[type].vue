@@ -26,21 +26,9 @@ const count = computed(() => {
   return []
 })
 
-useKunSeoMeta({
-  title: () =>
-    `${props.user.name}${KUN_USER_PAGE_NAV_MAP[topicType.value]}的话题`,
-  description: () =>
-    `${props.user.name}在${kungal.titleShort}${KUN_USER_PAGE_NAV_MAP[topicType.value]}的话题`
-})
-
-useHead({
-  link: [
-    {
-      rel: 'canonical',
-      href: `${kungal.domain.main}/user/${props.user.uid}/topic/${topicType.value}`
-    }
-  ]
-})
+useKunDisableSeo(
+  `${props.user.name}${KUN_USER_PAGE_NAV_MAP[topicType.value]}的话题`
+)
 </script>
 
 <template>
