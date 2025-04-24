@@ -62,13 +62,11 @@ export const searchTopic = async (
 export const searchGalgame = async (
   keywords: string[],
   skip: number,
-  limit: number,
-  nsfw: string
+  limit: number
 ) => {
   const searchQuery = {
     $and: [
       { status: { $ne: 1 } },
-      nsfw === 'sfw' ? { content_limit: 'sfw' } : {},
       {
         $or: [
           { 'name.en-us': { $regex: keywords.join('|'), $options: 'i' } },

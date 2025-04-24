@@ -15,10 +15,18 @@ const galgame = data.value
 
 if (galgame) {
   if (galgame === 'banned') {
-    useKunDisableSeo('这个 Galgame 已被封禁')
-  } else if (galgame.contentLimit === 'nsfw') {
-    useKunDisableSeo(getPreferredLanguageText(galgame.name))
-  } else if (galgame.contentLimit === 'sfw') {
+    useHead({
+      meta: [{ name: 'robots', content: 'noindex, nofollow' }]
+    })
+    useKunSeoMeta({
+      title: data.value
+        ? '这个 Galgame 已被封禁'
+        : '未找到这个 Galgame 资源 wiki',
+      description: data.value
+        ? `这个 Galgame 由于违反了 ${kungal.titleShort} 资源发布规定, 或者被作者删除, 您可以进入 Galgame 总览页面查看其它相似 Galgame 资源 wiki`
+        : `未找到这个 Galgame, 请确认您的请求路径是否正确, 您可以进入 Galgame 页面查看其它 Galgame`
+    })
+  } else {
     const titleBase = getPreferredLanguageText(galgame.name)
     const jaTitle = galgame.name['ja-jp']
     const title =
@@ -50,27 +58,15 @@ if (galgame) {
         {
           rel: 'canonical',
           href: `${kungal.domain.main}/galgame/${galgame.gid}`
-        }
+        },
+        galgame.contentLimit === 'nsfw'
+          ? { name: 'bingbot', content: 'noindex, nofollow, noarchive' }
+          : undefined
       ]
     })
   }
 } else {
   useKunDisableSeo('请求 Galgame 错误')
-}
-
-if (data.value && data.value === 'banned') {
-  useHead({
-    meta: [{ name: 'robots', content: 'noindex, nofollow' }]
-  })
-
-  useKunSeoMeta({
-    title: data.value
-      ? '这个 Galgame 已被封禁'
-      : '未找到这个 Galgame 资源 wiki',
-    description: data.value
-      ? `这个 Galgame 由于违反了 ${kungal.titleShort} 资源发布规定, 或者被作者删除, 您可以进入 Galgame 总览页面查看其它相似 Galgame 资源 wiki`
-      : `未找到这个 Galgame, 请确认您的请求路径是否正确, 您可以进入 Galgame 页面查看其它 Galgame`
-  })
 }
 </script>
 

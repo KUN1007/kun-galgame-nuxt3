@@ -70,7 +70,7 @@ const handleLoadMore = async () => {
   >
     <KunHeader
       name="搜索"
-      description="您可以在本页面搜索本论坛的所有话题, Galgame, 用户, 回复, 评论。若您搜索不到 Galgame, 请尝试在设置面板打开 NSFW 开关以显示隐藏内容"
+      description="您可以在本页面搜索本论坛的所有话题, Galgame, 用户, 回复, 评论。当前的搜索会一并搜索 NSFW 内容"
     />
     <KunTab
       :items="navItems"
@@ -103,13 +103,10 @@ const handleLoadMore = async () => {
       <span v-if="isLoadComplete">被榨干了呜呜呜呜呜, 一滴也不剩了</span>
     </KunDivider>
 
-    <KunNull v-if="!results.length && keywords && !isLoading" description="">
-      <p>杂鱼杂鱼杂鱼~什么也没有搜索到</p>
-      <p>
-        如果搜索不到 Galgame, 请尝试在设置面板打开 NSFW
-        开关以显示涩涩内容哦杂鱼~
-      </p>
-    </KunNull>
+    <KunNull
+      v-if="!results.length && keywords && !isLoading"
+      description="杂鱼杂鱼杂鱼~什么也没有搜索到"
+    />
 
     <KunLoading v-if="isLoading" />
   </KunCard>

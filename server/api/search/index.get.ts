@@ -11,8 +11,7 @@ const search = async (
   keywords: string,
   type: SearchType,
   page: number,
-  limit: number,
-  nsfw: string
+  limit: number
 ) => {
   const skip = (page - 1) * limit
   const keywordsArray: string[] = keywords
@@ -28,7 +27,7 @@ const search = async (
   if (type === 'topic') {
     return await searchTopic(escapedKeywords, skip, limit)
   } else if (type === 'galgame') {
-    return await searchGalgame(escapedKeywords, skip, limit, nsfw)
+    return await searchGalgame(escapedKeywords, skip, limit)
   } else if (type === 'user') {
     return await searchUser(escapedKeywords.join(''), skip, limit)
   } else if (type === 'reply') {
@@ -52,8 +51,7 @@ export default defineEventHandler(async (event) => {
     keywords.trim().slice(0, 40),
     type,
     parseInt(page),
-    parseInt(limit),
-    nsfw
+    parseInt(limit)
   )
 
   return result
