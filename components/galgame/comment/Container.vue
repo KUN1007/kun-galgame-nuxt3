@@ -36,7 +36,7 @@ onMounted(() => (commentToUid.value = toUser.uid))
 
 <template>
   <div class="space-y-3">
-    <KunHeader name="游戏评论">
+    <KunHeader name="游戏评论" scale="h2">
       <template #endContent>
         <KunLink to="/topic/1482">
           Galgame 评论注意事项, 资源失效, 解压密码错误等问题反馈

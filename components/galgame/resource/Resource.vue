@@ -36,7 +36,7 @@ watch(
 
 <template>
   <div class="space-y-3">
-    <KunHeader :is-show-divider="false" name="资源链接">
+    <KunHeader :is-show-divider="false" name="资源链接" scale="h2">
       <template #headerEndContent>
         <KunButton @click="handleClickContribute">添加资源</KunButton>
       </template>

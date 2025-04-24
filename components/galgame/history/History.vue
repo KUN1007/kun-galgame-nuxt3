@@ -29,6 +29,7 @@ const { data, status } = await useLazyFetch(
     <KunHeader
       name="贡献历史"
       description="这里记录了这个 Galgame 项目发生的所有更改历史, 资源下载链接更改历史不计"
+      scale="h2"
     />
 
     <KunLoading v-if="status === 'pending'" />

@@ -4,25 +4,27 @@ withDefaults(
     name?: string
     description?: string
     isShowDivider?: boolean
+    scale?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   }>(),
   {
     name: '',
     description: '',
-    isShowDivider: true
+    isShowDivider: true,
+    scale: 'h1'
   }
 )
 </script>
 
 <template>
-  <div className="space-y-2">
-    <div className="flex items-center justify-between">
-      <div className="space-y-2">
-        <h1 className="text-2xl font-medium">
+  <div class="space-y-2">
+    <div class="flex items-center justify-between">
+      <div class="space-y-2">
+        <component :is="scale" class="text-2xl font-medium">
           <span v-if="name">{{ name }}</span>
           <slot name="title" />
-        </h1>
+        </component>
 
-        <p v-if="description" className="whitespace-pre-wrap text-default-500">
+        <p v-if="description" class="text-default-500 whitespace-pre-wrap">
           {{ description }}
         </p>
       </div>
