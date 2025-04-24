@@ -55,7 +55,7 @@ const activeTab = ref<GalgameDetailSectionTabType>('comment')
     <KunTab
       :items="galgameDetailSectionTabs"
       v-model="activeTab"
-      inner-class-name="shadow border bg-transparent"
+      variant="underlined"
       size="sm"
     />
     <KunCard :is-hoverable="false">

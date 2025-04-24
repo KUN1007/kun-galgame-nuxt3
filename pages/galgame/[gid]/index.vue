@@ -11,44 +11,54 @@ const { data } = await useFetch(`/api/galgame/${gid.value}`, {
   ...kungalgameResponseHandler
 })
 
-if (data.value && data.value !== 'banned') {
-  const titleBase = getPreferredLanguageText(data.value.name)
-  const title = titleBase.concat(
-    titleBase !== data.value.name['ja-jp'] && data.value.name['ja-jp']
-      ? ` | ${data.value.name['ja-jp']}`
-      : ''
-  )
-  const description = markdownToText(
-    getPreferredLanguageText(data.value.markdown)
-  )
-    .slice(0, 175)
-    .replace(/\\|\n/g, '')
+const galgame = data.value
 
-  useKunSeoMeta({
-    title,
-    description,
+if (galgame) {
+  if (galgame === 'banned') {
+    useKunDisableSeo('这个 Galgame 已被封禁')
+  } else if (galgame.contentLimit === 'nsfw') {
+    useKunDisableSeo(getPreferredLanguageText(galgame.name))
+  } else if (galgame.contentLimit === 'sfw') {
+    const titleBase = getPreferredLanguageText(galgame.name)
+    const jaTitle = galgame.name['ja-jp']
+    const title =
+      jaTitle && titleBase !== jaTitle ? `${titleBase} | ${jaTitle}` : titleBase
 
-    ogImage: data.value.banner,
-    ogUrl: useRequestURL().href,
-    ogType: 'article',
+    const description = markdownToText(
+      getPreferredLanguageText(galgame.markdown)
+    )
+      .slice(0, 175)
+      .replace(/\\|\n/g, '')
 
-    twitterImage: data.value.banner,
-    twitterCard: 'summary_large_image',
+    const ogUrl = useRequestURL().href
 
-    articleAuthor: [`${kungal.domain.main}/user/${data.value.user.uid}/info`],
-    articlePublishedTime: data.value.created.toString(),
-    articleModifiedTime: data.value.updated.toString()
-  })
+    useKunSeoMeta({
+      title,
+      description,
+      ogImage: galgame.banner,
+      ogUrl,
+      ogType: 'article',
+      twitterImage: galgame.banner,
+      twitterCard: 'summary_large_image',
+      articleAuthor: [`${kungal.domain.main}/user/${galgame.user.uid}/info`],
+      articlePublishedTime: galgame.created.toString(),
+      articleModifiedTime: galgame.updated.toString()
+    })
 
-  useHead({
-    link: [
-      {
-        rel: 'canonical',
-        href: `${kungal.domain.main}/galgame/${data.value.gid}`
-      }
-    ]
-  })
+    useHead({
+      link: [
+        {
+          rel: 'canonical',
+          href: `${kungal.domain.main}/galgame/${galgame.gid}`
+        }
+      ]
+    })
+  }
 } else {
+  useKunDisableSeo('请求 Galgame 错误')
+}
+
+if (data.value && data.value === 'banned') {
   useHead({
     meta: [{ name: 'robots', content: 'noindex, nofollow' }]
   })

@@ -8,7 +8,7 @@ const { isShowPublish, rewriteResourceId } = storeToRefs(
   useTempGalgameResourceStore()
 )
 
-const { data, pending, refresh } = await useLazyFetch(
+const { data, status, refresh } = await useLazyFetch(
   `/api/galgame/${gid.value}/resource/all`,
   {
     method: 'GET',
@@ -86,7 +86,7 @@ watch(
       />
     </KunModal>
 
-    <template v-if="!pending">
+    <template v-if="status !== 'pending'">
       <GalgameResourceLink
         v-for="resource in data"
         :key="resource.grid"
@@ -95,6 +95,6 @@ watch(
       />
     </template>
 
-    <KunLoading v-if="pending" />
+    <KunLoading v-if="status === 'pending'" />
   </div>
 </template>

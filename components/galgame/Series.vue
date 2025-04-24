@@ -20,6 +20,7 @@ const { data, status } = await useLazyFetch(
     <KunHeader
       name="游戏系列"
       description="同一部作品的其它 Galgame, 例如 `巧克甜恋 1, 巧克甜恋 2, 巧克甜恋 3` 就是一个系列"
+      scale="h2"
     />
 
     <KunLoading v-if="status === 'pending'" />
