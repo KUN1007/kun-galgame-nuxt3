@@ -67,11 +67,6 @@ export default defineEventHandler(async (event) => {
       galgame: diffGalgame
     })
 
-    await GalgameModel.updateOne(
-      { gid: galgame.gid },
-      { $set: { time: Date.now() } }
-    )
-
     await createGalgameHistory({
       gid,
       uid: userInfo.uid,
