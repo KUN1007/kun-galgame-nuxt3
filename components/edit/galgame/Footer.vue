@@ -1,8 +1,17 @@
 <script setup lang="ts">
 import { checkGalgamePublish } from '../utils/checkGalgamePublish'
 
-const { vndbId, name, introduction, series, aliases, official, engine, tags } =
-  storeToRefs(usePersistEditGalgameStore())
+const {
+  vndbId,
+  name,
+  contentLimit,
+  introduction,
+  series,
+  aliases,
+  official,
+  engine,
+  tags
+} = storeToRefs(usePersistEditGalgameStore())
 
 const isPublishing = ref(false)
 
@@ -40,6 +49,7 @@ const handlePublishGalgame = async () => {
   const formData = new FormData()
   formData.append('vndbId', vndbId.value)
   formData.append('name', JSON.stringify(name.value))
+  formData.append('contentLimit', JSON.stringify(contentLimit.value))
   formData.append('banner', banner!)
   formData.append('introduction', JSON.stringify(introduction.value))
   formData.append('series', JSON.stringify(series.value.slice(0, 17)))
@@ -60,7 +70,7 @@ const handlePublishGalgame = async () => {
     usePersistEditGalgameStore().$reset()
 
     navigateTo(`/galgame/${gid}`)
-    useKunLoliInfo('AlertInfo.edit.publishSuccess', 5)
+    useKunLoliInfo('发布 Galgame 成功', 5)
   }
 }
 </script>
