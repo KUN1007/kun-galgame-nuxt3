@@ -34,9 +34,8 @@ if (data.value === 'banned') {
     content-class="h-[calc(100dvh-120px)]"
     v-if="data !== 'banned'"
   >
-    <div class="flex h-full w-full">
+    <div v-if="data" class="flex h-full w-full">
       <UserNavBar
-        v-if="data"
         :user="{ uid: data.uid, name: data.name, avatar: data.avatar }"
       />
 
@@ -45,7 +44,7 @@ if (data.value === 'banned') {
       </div>
     </div>
 
-    <KunNull v-if="!data" />
+    <KunNull v-if="!data" description="未找到该用户" />
   </KunCard>
 
   <KunCard

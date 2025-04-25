@@ -21,6 +21,5 @@ withDefaults(
       placeholder="/apple-touch-icon.png"
     />
     <span>{{ description }}</span>
-    <slot />
   </div>
 </template>
