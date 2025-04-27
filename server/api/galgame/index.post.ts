@@ -36,9 +36,9 @@ const readGalgameData = async (event: H3Event) => {
   }
 
   const vndbId = vndbIdData.toString()
+  const contentLimit = contentLimitData.toString()
   const name = JSON.parse(nameData.toString()) as KunLanguage
   const introduction = JSON.parse(introductionData.toString()) as KunLanguage
-  const contentLimit = JSON.parse(contentLimitData.toString()) as string
   const series = JSON.parse(seriesData.toString()) as string[]
   const aliases = JSON.parse(aliasesData.toString()) as string[]
   const official = JSON.parse(officialData.toString()) as string[]
@@ -75,6 +75,7 @@ const readGalgameData = async (event: H3Event) => {
   return {
     uid,
     vndb_id: vndbId,
+    content_limit: contentLimit,
     name,
     banner,
     introduction,
@@ -94,6 +95,7 @@ export default defineEventHandler(async (event) => {
   const {
     uid,
     vndb_id,
+    content_limit,
     name,
     banner,
     introduction,
@@ -118,6 +120,7 @@ export default defineEventHandler(async (event) => {
   try {
     const newGalgame = await GalgameModel.create({
       vndb_id,
+      content_limit,
       uid,
       name,
       introduction,

@@ -48,8 +48,8 @@ const handlePublishGalgame = async () => {
 
   const formData = new FormData()
   formData.append('vndbId', vndbId.value)
+  formData.append('contentLimit', contentLimit.value)
   formData.append('name', JSON.stringify(name.value))
-  formData.append('contentLimit', JSON.stringify(contentLimit.value))
   formData.append('banner', banner!)
   formData.append('introduction', JSON.stringify(introduction.value))
   formData.append('series', JSON.stringify(series.value.slice(0, 17)))
