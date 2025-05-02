@@ -1,0 +1,31 @@
+// Galgame Comment model
+model galgame_comment {
+  id         Int      @id @default(autoincrement())
+  galgame_id Int
+  user_id    Int
+  to_user_id Int?
+  content    String   @db.VarChar(1007)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  // Relations
+  galgame    galgame @relation(fields: [galgame_id], references: [id])
+  user       user    @relation("user_to_galgame_comment", fields: [user_id], references: [id])
+  to_user    user?   @relation("galgame_comment_target_user", fields: [to_user_id], references: [id])
+  
+  // Many-to-many relationships
+  likes      galgame_comment_like[]
+}
+
+// Galgame Comment Like junction table
+model galgame_comment_like {
+  id                Int      @id @default(autoincrement())
+  galgame_comment_id Int
+  user_id           Int
+  created_at        DateTime @default(now())
+  
+  galgame_comment   galgame_comment @relation(fields: [galgame_comment_id], references: [id])
+  user              user           @relation(fields: [user_id], references: [id])
+  
+  @@unique([galgame_comment_id, user_id])
+} 

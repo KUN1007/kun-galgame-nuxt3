@@ -19,6 +19,7 @@
     "Asuka",
     "ATRI",
     "atrule",
+    "autoincrement",
     "automd",
     "autorestart",
     "axios",
@@ -66,6 +67,7 @@
     "erogamespace",
     "exagear",
     "Fandisc",
+    "favorited",
     "fenghuaxueyue",
     "Fikper",
     "Flowlove",
@@ -209,6 +211,7 @@
     "nekotaku",
     "Nikaido",
     "nitropack",
+    "nmid",
     "noarchive",
     "non-moe",
     "nonmoe",
@@ -376,5 +379,8 @@
   "i18n-ally.keystyle": "nested",
   "i18n-ally.displayLanguage": "zh-CN",
   "eslint.useFlatConfig": true,
-  "css.customData": [".vscode/tailwind.json"]
+  "css.customData": [".vscode/tailwind.json"],
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  }
 }

@@ -1,0 +1,17 @@
+// Non-Moe model
+model non_moe {
+  id              Int      @id @default(autoincrement())
+  user_id         Int
+  name            String
+  desc_en_us      String?  @db.Text
+  desc_ja_jp      String?  @db.Text
+  desc_zh_cn      String?  @db.Text
+  desc_zh_tw      String?  @db.Text
+  time            DateTime @default(now())
+  result          Json
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+
+  // Relations
+  user            user     @relation(fields: [user_id], references: [id])
+} 
