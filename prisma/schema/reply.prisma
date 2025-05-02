@@ -1,0 +1,88 @@
+// Reply model
+model reply {
+    id         Int      @id @default(autoincrement())
+    content    String   @db.Text
+    user_id    Int
+    topic_id   Int
+    to_user_id Int
+    floor      Int      @default(0)
+    to_floor   Int      @default(0)
+    time       DateTime @default(now())
+    edited     Int      @default(0)
+    upvote_time DateTime?
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+    parent_id  Int?
+
+    // Relations
+    user     user      @relation("user_created_reply", fields: [user_id], references: [id])
+    to_user  user      @relation("reply_target_user", fields: [to_user_id], references: [id])
+    topic    topic     @relation(fields: [topic_id], references: [id])
+    parent   reply?    @relation("reply_to_reply", fields: [parent_id], references: [id])
+    children reply[]   @relation("reply_to_reply")
+    comments comment[]
+    tags     tag[]
+    reply_tags reply_tag[]
+    
+    // Many-to-many relationships
+    like      reply_like[]
+    dislike   reply_dislike[]
+    upvote    reply_upvote[]
+}
+
+// Reply tags junction table
+model reply_tag {
+    id         Int      @id @default(autoincrement())
+    reply_id   Int
+    tag        String
+    created_at DateTime @default(now())
+
+    reply      reply    @relation(fields: [reply_id], references: [id])
+
+    @@unique([reply_id, tag])
+}
+
+// Reply like junction table
+model reply_like {
+    id         Int      @id @default(autoincrement())
+    user_id    Int
+    reply_id   Int
+    created_at DateTime @default(now())
+
+    // Relations
+    user  user  @relation(fields: [user_id], references: [id])
+    reply reply @relation(fields: [reply_id], references: [id])
+
+    // Unique constraint
+    @@unique([user_id, reply_id])
+}
+
+// Reply dislike junction table
+model reply_dislike {
+    id         Int      @id @default(autoincrement())
+    user_id    Int
+    reply_id   Int
+    created_at DateTime @default(now())
+
+    // Relations
+    user  user  @relation(fields: [user_id], references: [id])
+    reply reply @relation(fields: [reply_id], references: [id])
+
+    // Unique constraint
+    @@unique([user_id, reply_id])
+}
+
+// Reply upvote junction table
+model reply_upvote {
+    id         Int      @id @default(autoincrement())
+    user_id    Int
+    reply_id   Int
+    created_at DateTime @default(now())
+
+    // Relations
+    user  user  @relation(fields: [user_id], references: [id])
+    reply reply @relation(fields: [reply_id], references: [id])
+
+    // Unique constraint
+    @@unique([user_id, reply_id])
+}

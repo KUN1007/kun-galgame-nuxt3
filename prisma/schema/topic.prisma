@@ -1,0 +1,89 @@
+// Topic model
+model topic {
+    id          Int       @id @default(autoincrement())
+    title       String    @db.VarChar(40)
+    content     String    @db.Text
+    user_id     Int
+    time        DateTime  @default(now())
+    view        Int       @default(0)
+    comment     Int       @default(0)
+    upvote_time DateTime?
+    status      Int       @default(0)
+    edited      Int       @default(0)
+    created_at  DateTime  @default(now())
+    updated_at  DateTime  @updatedAt
+
+    // Relations
+    user      user        @relation("user_to_topic", fields: [user_id], references: [id])
+    reply     reply[]
+    topic_tag topic_tag[]
+    comments  comment[]
+    tags      tag[]
+
+    // Many-to-many relationships
+    upvote   topic_upvote[]
+    like     topic_like[]
+    dislike  topic_dislike[]
+    favorite topic_favorite[]
+}
+
+// Topic-related junction tables
+model topic_tag {
+    id       Int     @id @default(autoincrement())
+    topic_id Int
+    tag      String
+    category String?
+    section  String?
+
+    topic topic @relation(fields: [topic_id], references: [id])
+
+    @@unique([topic_id, tag])
+}
+
+model topic_upvote {
+    id         Int      @id @default(autoincrement())
+    topic_id   Int
+    user_id    Int
+    created_at DateTime @default(now())
+
+    topic topic @relation(fields: [topic_id], references: [id])
+    user  user  @relation(fields: [user_id], references: [id])
+
+    @@unique([topic_id, user_id])
+}
+
+model topic_like {
+    id         Int      @id @default(autoincrement())
+    topic_id   Int
+    user_id    Int
+    created_at DateTime @default(now())
+
+    topic topic @relation(fields: [topic_id], references: [id])
+    user  user  @relation(fields: [user_id], references: [id])
+
+    @@unique([topic_id, user_id])
+}
+
+model topic_dislike {
+    id         Int      @id @default(autoincrement())
+    topic_id   Int
+    user_id    Int
+    created_at DateTime @default(now())
+
+    topic topic @relation(fields: [topic_id], references: [id])
+    user  user  @relation(fields: [user_id], references: [id])
+
+    @@unique([topic_id, user_id])
+}
+
+model topic_favorite {
+    id         Int      @id @default(autoincrement())
+    topic_id   Int
+    user_id    Int
+    created_at DateTime @default(now())
+
+    topic topic @relation(fields: [topic_id], references: [id])
+    user  user  @relation(fields: [user_id], references: [id])
+
+    @@unique([topic_id, user_id])
+}

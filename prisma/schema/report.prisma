@@ -1,0 +1,14 @@
+// Report model
+model report {
+  id          Int      @id @default(autoincrement())
+  user_id     Int
+  reason      String   @db.VarChar(1007)
+  type        String   @default("")
+  target_id   Int      @default(0)
+  status      Int      @default(0)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  // Relations
+  user        user     @relation(fields: [user_id], references: [id])
+} 

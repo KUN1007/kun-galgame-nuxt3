@@ -1,0 +1,95 @@
+// Chat Room model
+model chat_room {
+  id            Int      @id @default(autoincrement())
+  name          String   @default("")
+  avatar        String   @default("")
+  type          String
+  last_message_content String  @default("")
+  last_message_time    DateTime?
+  last_message_sender_id Int?
+  last_message_sender_name String  @default("")
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  // Relations
+  messages      chat_message[]
+  participants  chat_room_participant[]
+  admins        chat_room_admin[]
+}
+
+// Chat Room Participant junction table
+model chat_room_participant {
+  id          Int      @id @default(autoincrement())
+  chat_room_id Int
+  user_id     Int
+  created_at  DateTime @default(now())
+  
+  chat_room   chat_room @relation(fields: [chat_room_id], references: [id])
+  user        user      @relation(fields: [user_id], references: [id])
+  
+  @@unique([chat_room_id, user_id])
+}
+
+// Chat Room Admin junction table
+model chat_room_admin {
+  id          Int      @id @default(autoincrement())
+  chat_room_id Int
+  user_id     Int
+  created_at  DateTime @default(now())
+  
+  chat_room   chat_room @relation(fields: [chat_room_id], references: [id])
+  user        user      @relation(fields: [user_id], references: [id])
+  
+  @@unique([chat_room_id, user_id])
+}
+
+// Chat Message model
+model chat_message {
+  id            Int       @id @default(autoincrement())
+  chat_room_id  Int
+  chatroom_name String
+  sender_id     Int
+  receiver_id   Int?
+  content       String    @db.VarChar(1000)
+  time          DateTime  @default(now())
+  status        String    @default("pending")
+  is_recalled   Boolean   @default(false)
+  recalled_time DateTime?
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
+
+  // Relations
+  chat_room     chat_room @relation(fields: [chat_room_id], references: [id])
+  sender        user      @relation("user_to_chat_message", fields: [sender_id], references: [id])
+  
+  // Many-to-many relationships
+  read_by       chat_message_read_by[]
+  reactions     chat_message_reaction[]
+}
+
+// Chat Message Read By junction table
+model chat_message_read_by {
+  id             Int      @id @default(autoincrement())
+  chat_message_id Int
+  user_id        Int
+  read_time      DateTime @default(now())
+  
+  chat_message    chat_message @relation(fields: [chat_message_id], references: [id])
+  user            user         @relation(fields: [user_id], references: [id])
+  
+  @@unique([chat_message_id, user_id])
+}
+
+// Chat Message Reaction junction table
+model chat_message_reaction {
+  id             Int      @id @default(autoincrement())
+  chat_message_id Int
+  user_id        Int
+  reaction       String
+  created_at     DateTime @default(now())
+  
+  chat_message    chat_message @relation(fields: [chat_message_id], references: [id])
+  user            user         @relation(fields: [user_id], references: [id])
+  
+  @@unique([chat_message_id, user_id, reaction])
+} 

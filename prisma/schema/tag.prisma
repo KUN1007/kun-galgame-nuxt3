@@ -1,0 +1,28 @@
+// Tag model
+model tag {
+  id         Int      @id @default(autoincrement())
+  topic_id   Int?
+  reply_id   Int?
+  name       String   @db.VarChar(17)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  // Relations
+  topic     topic?   @relation(fields: [topic_id], references: [id])
+  reply     reply?   @relation(fields: [reply_id], references: [id])
+  
+  // Tag categories junction table
+  categories tag_category[]
+}
+
+// Tag Category
+model tag_category {
+  id         Int      @id @default(autoincrement())
+  tag_id     Int
+  category   String
+  created_at DateTime @default(now())
+  
+  tag        tag      @relation(fields: [tag_id], references: [id])
+  
+  @@unique([tag_id, category])
+} 

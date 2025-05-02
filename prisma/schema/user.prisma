@@ -1,0 +1,99 @@
+// User model
+model user {
+    id                  Int      @id @default(autoincrement())
+    name                String
+    email               String   @unique
+    password            String
+    ip                  String?  @default("")
+    avatar              String?  @default("")
+    role                Int      @default(1)
+    status              Int      @default(0)
+    time                DateTime @default(now())
+    moemoepoint         Int      @default(1007)
+    bio                 String?  @default("") @db.VarChar(107)
+    upvote              Int      @default(0)
+    like                Int      @default(0)
+    dislike             Int      @default(0)
+    daily_topic_count   Int      @default(0)
+    daily_galgame_count Int      @default(0)
+    daily_image_count   Int      @default(0)
+    daily_check_in      Int      @default(0)
+    created_at          DateTime @default(now())
+    updated_at          DateTime @updatedAt
+
+    // Relationships
+    topic              topic[]            @relation("user_to_topic")
+    reply_created      reply[]            @relation("user_created_reply")
+    reply_target       reply[]            @relation("reply_target_user")
+    galgame            galgame[]          @relation("user_to_galgame")
+    galgame_resource   galgame_resource[] @relation("user_to_galgame_resource")
+    comment_created    comment[]          @relation("user_created_comment")
+    comment_target     comment[]          @relation("comment_target_user")
+    chat_message       chat_message[]     @relation("user_to_chat_message")
+    report             report[]
+    todo               todo[]
+    non_moe            non_moe[]
+    message            message[]
+    admin_message      message_admin[]    @relation("user_to_admin_message")
+    admin_message_to   message_admin[]    @relation("admin_to_user_message")
+    galgame_comment    galgame_comment[]  @relation("user_to_galgame_comment")
+    galgame_comment_to galgame_comment[]  @relation("galgame_comment_target_user")
+    galgame_pr         galgame_pr[]
+    galgame_history    galgame_history[]
+    galgame_link       galgame_link[]
+
+    // Many-to-many relations
+    friend_relations   user_friend[] @relation("user_to_friend")
+    friend_of          user_friend[] @relation("friend_to_user")
+    follower_relations user_follow[] @relation("follower_to_user")
+    followed_relations user_follow[] @relation("user_to_followed")
+
+    topic_like     topic_like[]
+    topic_dislike  topic_dislike[]
+    topic_upvote   topic_upvote[]
+    topic_favorite topic_favorite[]
+
+    galgame_like        galgame_like[]
+    galgame_favorite    galgame_favorite[]
+    galgame_contributor galgame_contributor[]
+
+    galgame_resource_like galgame_resource_like[]
+    galgame_comment_like  galgame_comment_like[]
+
+    chat_room_participant chat_room_participant[]
+    chat_room_admin       chat_room_admin[]
+
+    reply_like    reply_like[]
+    reply_dislike reply_dislike[]
+    reply_upvote  reply_upvote[]
+
+    comment_like comment_like[]
+
+    chat_message_read_by  chat_message_read_by[]
+    chat_message_reaction chat_message_reaction[]
+}
+
+// User relationships
+model user_friend {
+    id         Int      @id @default(autoincrement())
+    user_id    Int
+    friend_id  Int
+    created_at DateTime @default(now())
+
+    user   user @relation("user_to_friend", fields: [user_id], references: [id])
+    friend user @relation("friend_to_user", fields: [friend_id], references: [id])
+
+    @@unique([user_id, friend_id])
+}
+
+model user_follow {
+    id          Int      @id @default(autoincrement())
+    follower_id Int
+    followed_id Int
+    created_at  DateTime @default(now())
+
+    follower user @relation("follower_to_user", fields: [follower_id], references: [id])
+    followed user @relation("user_to_followed", fields: [followed_id], references: [id])
+
+    @@unique([follower_id, followed_id])
+}

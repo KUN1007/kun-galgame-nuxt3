@@ -1,0 +1,16 @@
+// Galgame History model
+model galgame_history {
+  id         Int      @id @default(autoincrement())
+  galgame_id Int
+  user_id    Int
+  time       DateTime @default(now())
+  action     String   @default("")
+  type       String   @default("")
+  content    String   @default("") @db.VarChar(1007)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  // Relations
+  galgame    galgame @relation(fields: [galgame_id], references: [id])
+  user       user    @relation(fields: [user_id], references: [id])
+} 

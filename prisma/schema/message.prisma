@@ -1,0 +1,36 @@
+// Message model
+model message {
+  id           Int      @id @default(autoincrement())
+  sender_id    Int
+  receiver_id  Int
+  time         DateTime @default(now())
+  topic_id     Int?     @default(0)
+  galgame_id   Int?     @default(0)
+  content      String   @db.VarChar(233)
+  status       String   @default("unread")
+  type         String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  // Relations
+  sender       user     @relation(fields: [sender_id], references: [id])
+}
+
+// Message Admin model
+model message_admin {
+  id           Int      @id @default(autoincrement())
+  user_id      Int
+  admin_id     Int
+  time         DateTime @default(now())
+  content_en_us String?  @db.Text
+  content_ja_jp String?  @db.Text
+  content_zh_cn String?  @db.Text
+  content_zh_tw String?  @db.Text
+  status       String   @default("unread")
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  // Relations
+  user         user     @relation("admin_to_user_message", fields: [user_id], references: [id])
+  admin        user     @relation("user_to_admin_message", fields: [admin_id], references: [id])
+} 
