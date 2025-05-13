@@ -36,7 +36,7 @@ const currentUserUid = usePersistUserStore().uid
             variant="flat"
             size="xs"
             color="primary"
-            class-name="block sm:hidden"
+            class-name="gap-1"
             :href="`/message/user/${user.uid}`"
           >
             <KunIcon name="lucide:message-circle" />
