@@ -1,8 +1,8 @@
 export const verifyVerificationCode = async (
-  email: string,
+  key: string,
   userProvidedCode: string
 ): Promise<boolean> => {
-  const storedCode = await useStorage('redis').getItem(email)
+  const storedCode = await useStorage('redis').getItem(key)
 
   if (!storedCode) {
     return false

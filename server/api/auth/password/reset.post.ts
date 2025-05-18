@@ -12,11 +12,12 @@ const resetPasswordByEmail = async (
   code: string,
   newPassword: string
 ) => {
-  const validEmail = verifyVerificationCode(email, code)
-
+  const codeKey = `forgot:${email}`
+  const validEmail = verifyVerificationCode(codeKey, code)
   if (!validEmail) {
     return 10103
   }
+  await useStorage('redis').removeItem(codeKey)
 
   const hashedPassword = await hash(newPassword, 7)
 

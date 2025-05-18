@@ -14,10 +14,12 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10115, 205)
   }
 
-  const isCodeValid = await verifyVerificationCode(email, code)
+  const codeKey = `reset:${email}`
+  const isCodeValid = await verifyVerificationCode(codeKey, code)
   if (!isCodeValid) {
     return kunError(event, 10103)
   }
+  await useStorage('redis').removeItem(codeKey)
 
   await UserModel.updateOne({ uid: userInfo.uid }, { $set: { email } })
 

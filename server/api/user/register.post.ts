@@ -43,10 +43,12 @@ export default defineEventHandler(async (event) => {
   }
   const { name, email, password, code, ip } = result
 
-  const isCodeValid = await verifyVerificationCode(email, code)
+  const codeKey = `register:${email}`
+  const isCodeValid = await verifyVerificationCode(codeKey, code)
   if (!isCodeValid) {
     return kunError(event, 10103)
   }
+  await useStorage('redis').removeItem(codeKey)
 
   const usernameCount = await UserModel.countDocuments({
     name: { $regex: new RegExp('^' + name + '$', 'i') }

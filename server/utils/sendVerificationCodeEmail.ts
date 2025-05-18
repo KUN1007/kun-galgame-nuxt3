@@ -30,7 +30,7 @@ export const sendVerificationCodeEmail = async (
   }
 
   const code = generateRandomCode(7)
-  await useStorage('redis').setItem(email, code, { ttl: 10 * 60 })
+  await useStorage('redis').setItem(`${type}:${email}`, code, { ttl: 10 * 60 })
   await useStorage('redis').setItem(`limit:email:${email}`, code, { ttl: 30 })
   await useStorage('redis').setItem(`limit:ip:${ip}`, code, { ttl: 30 })
 
