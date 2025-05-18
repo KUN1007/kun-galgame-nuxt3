@@ -8,6 +8,7 @@ export interface ForgotPasswordVerificationCodeRequestData {
 }
 
 export interface ResetPasswordByEmailRequestData {
+  codeSalt: string
   email: string
   code: string
   newPassword: string

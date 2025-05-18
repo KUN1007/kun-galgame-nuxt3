@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { checkEmail, checkCode, checkPassword } from './check'
 
-const { isShowCapture, isCaptureSuccessful } = storeToRefs(
+const { isShowCapture, isCaptureSuccessful, codeSalt } = storeToRefs(
   useComponentMessageStore()
 )
 
@@ -51,11 +51,12 @@ const handleChangePassword = async () => {
 
   const data = await $fetch('/api/auth/password/reset', {
     method: 'POST',
-    body: input,
+    body: { codeSalt: codeSalt.value, ...input },
     ...kungalgameResponseHandler
   })
 
   if (data) {
+    codeSalt.value = ''
     navigateTo('/login')
     useMessage(10101, 'success')
   }

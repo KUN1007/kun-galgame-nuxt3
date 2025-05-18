@@ -9,6 +9,7 @@ const { data, refresh } = await useFetch('/api/user/email', {
 })
 
 const input = reactive({
+  codeSalt: '',
   newEmail: '',
   code: ''
 })
@@ -27,7 +28,8 @@ const handleSendCode = async () => {
     ...kungalgameResponseHandler
   })
 
-  if (result) {
+  if (result.length === 64) {
+    input.codeSalt = result
     useMessage(10119, 'success')
   }
 }
@@ -39,7 +41,7 @@ const handleResetEmail = async () => {
 
   const result = await $fetch('/api/user/email', {
     method: 'PUT',
-    body: { email: input.newEmail, code: input.code },
+    body: { codeSalt: input.codeSalt, email: input.newEmail, code: input.code },
     ...kungalgameResponseHandler
   })
 

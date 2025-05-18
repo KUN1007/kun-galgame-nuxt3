@@ -10,7 +10,9 @@ export const useComponentMessageStore = defineStore('tempComponentMessage', {
     isShowCancel: false,
 
     isShowCapture: false,
-    isCaptureSuccessful: false
+    isCaptureSuccessful: false,
+
+    codeSalt: ''
   }),
   getters: {},
   actions: {

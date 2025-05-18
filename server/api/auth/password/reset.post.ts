@@ -8,17 +8,18 @@ import {
 import type { ResetPasswordByEmailRequestData } from '~/types/api/auth'
 
 const resetPasswordByEmail = async (
+  codeSalt: string,
   email: string,
   code: string,
   newPassword: string
 ) => {
-  const codeKey = `forgot:${email}`
-  const validEmail = verifyVerificationCode(codeKey, code)
-  if (!validEmail) {
+  const codeKey = `${codeSalt}:${email}`
+  const isCodeValid = await verifyVerificationCode(codeKey, code)
+  if (!isCodeValid) {
     return 10103
   }
-  await useStorage('redis').removeItem(codeKey)
 
+  await useStorage('redis').removeItem(codeKey)
   const hashedPassword = await hash(newPassword, 7)
 
   const user = await UserModel.findOneAndUpdate(
@@ -32,10 +33,16 @@ const resetPasswordByEmail = async (
 }
 
 export default defineEventHandler(async (event) => {
-  const { email, code, newPassword }: ResetPasswordByEmailRequestData =
-    await readBody(event)
+  const {
+    codeSalt,
+    email,
+    code,
+    newPassword
+  }: ResetPasswordByEmailRequestData = await readBody(event)
 
   if (
+    !codeSalt ||
+    codeSalt.length !== 64 ||
     !isValidEmail(email) ||
     !isValidMailConfirmCode(code) ||
     !isValidPassword(newPassword)
@@ -43,7 +50,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10303)
   }
 
-  const result = await resetPasswordByEmail(email, code, newPassword)
+  const result = await resetPasswordByEmail(codeSalt, email, code, newPassword)
 
   if (typeof result === 'number') {
     return kunError(event, result)

@@ -3,7 +3,7 @@ import { KUN_REGISTER_FORM_FIELD_MAP } from '~/constants/auth'
 import { registerFormItem } from './registerFormItem'
 import { checkForm, checkRegister } from './checkRegister'
 
-const { isShowCapture, isCaptureSuccessful } = storeToRefs(
+const { isShowCapture, isCaptureSuccessful, codeSalt } = storeToRefs(
   useComponentMessageStore()
 )
 
@@ -46,12 +46,13 @@ const handleRegister = async () => {
 
   const userInfo = await $fetch('/api/user/register', {
     method: 'POST',
-    body: registerForm,
+    body: { codeSalt: codeSalt.value, ...registerForm },
     watch: false,
     ...kungalgameResponseHandler
   })
 
   if (userInfo) {
+    codeSalt.value = ''
     useKunLoliInfo(`注册成功! 欢迎来到 ${kungal.name}`)
     usePersistUserStore().setUserInfo(userInfo)
     navigateTo('/')

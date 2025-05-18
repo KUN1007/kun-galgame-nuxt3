@@ -6,8 +6,9 @@ const props = defineProps<{
   className?: string
 }>()
 
-const { isCaptureSuccessful } = storeToRefs(useComponentMessageStore())
-const info = useComponentMessageStore()
+const { isCaptureSuccessful, codeSalt } = storeToRefs(
+  useComponentMessageStore()
+)
 
 const isSendCode = ref(false)
 const isSending = ref(false)
@@ -28,6 +29,9 @@ const sendCode = async () => {
     body,
     ...kungalgameResponseHandler
   })
+  if (result.length === 64) {
+    codeSalt.value = result
+  }
   return result
 }
 
@@ -49,7 +53,7 @@ watch(
       const result = await sendCode()
 
       if (result) {
-        info.info('AlertInfo.code.code')
+        useKunLoliInfo('验证码发送成功')
       } else {
         isSending.value = false
       }

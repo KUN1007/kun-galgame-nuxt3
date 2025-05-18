@@ -20,5 +20,5 @@ export default defineEventHandler(async (event) => {
     return kunError(event, result)
   }
 
-  return 'MOEMOE send reset email verification code successfully!'
+  return result
 })

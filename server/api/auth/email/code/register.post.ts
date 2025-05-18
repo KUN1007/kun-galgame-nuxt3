@@ -57,10 +57,9 @@ export default defineEventHandler(async (event) => {
   }
 
   const result = await sendVerificationCodeEmail(event, email, 'register')
-
   if (typeof result === 'number') {
     return kunError(event, result)
   }
 
-  return 'MOEMOE send register verification code successfully!'
+  return result
 })

@@ -46,6 +46,7 @@ export interface UserUpdateBioRequestData {
 }
 
 export interface UserUpdateEmailRequestData {
+  codeSalt: string
   email: string
   code: string
 }
@@ -121,6 +122,7 @@ export interface LoginRequestData {
 }
 
 export interface RegisterRequestData {
+  codeSalt: string
   name: string
   email: string
   password: string

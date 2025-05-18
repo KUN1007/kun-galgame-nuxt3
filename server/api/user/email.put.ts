@@ -3,9 +3,15 @@ import { isValidEmail, isValidMailConfirmCode } from '~/utils/validate'
 import type { UserUpdateEmailRequestData } from '~/types/api/user'
 
 export default defineEventHandler(async (event) => {
-  const { email, code }: UserUpdateEmailRequestData = await readBody(event)
+  const { codeSalt, email, code }: UserUpdateEmailRequestData =
+    await readBody(event)
 
-  if (!isValidEmail(email) || !isValidMailConfirmCode(code)) {
+  if (
+    !codeSalt ||
+    codeSalt.length !== 64 ||
+    !isValidEmail(email) ||
+    !isValidMailConfirmCode(code)
+  ) {
     return kunError(event, 10109)
   }
 
@@ -14,7 +20,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, 10115, 205)
   }
 
-  const codeKey = `reset:${email}`
+  const codeKey = `${codeSalt}:${email}`
   const isCodeValid = await verifyVerificationCode(codeKey, code)
   if (!isCodeValid) {
     return kunError(event, 10103)

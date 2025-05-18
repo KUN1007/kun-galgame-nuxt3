@@ -1,6 +1,7 @@
 import { createTransport } from 'nodemailer'
 import SMPTransport from 'nodemailer-smtp-transport'
 import env from '~/server/env/dotenv'
+import crypto from 'crypto'
 import type { H3Event } from 'h3'
 
 const getMailContent = (
@@ -30,7 +31,9 @@ export const sendVerificationCodeEmail = async (
   }
 
   const code = generateRandomCode(7)
-  await useStorage('redis').setItem(`${type}:${email}`, code, { ttl: 10 * 60 })
+  const salt = crypto.randomBytes(32).toString('hex')
+
+  await useStorage('redis').setItem(`${salt}:${email}`, code, { ttl: 10 * 60 })
   await useStorage('redis').setItem(`limit:email:${email}`, code, { ttl: 30 })
   await useStorage('redis').setItem(`limit:ip:${ip}`, code, { ttl: 30 })
 
@@ -59,4 +62,6 @@ export const sendVerificationCodeEmail = async (
   }
 
   transporter.sendMail(mailOptions)
+
+  return salt
 }

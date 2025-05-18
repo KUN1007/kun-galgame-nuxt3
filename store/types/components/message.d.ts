@@ -6,4 +6,6 @@ export interface MessageStore {
 
   isShowCapture: boolean
   isCaptureSuccessful: boolean
+
+  codeSalt: string
 }

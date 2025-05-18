@@ -10,12 +10,14 @@ import type { H3Event } from 'h3'
 import type { RegisterRequestData, LoginResponseData } from '~/types/api/user'
 
 const registerController = async (event: H3Event) => {
-  const { name, email, password, code }: RegisterRequestData =
+  const { codeSalt, name, email, password, code }: RegisterRequestData =
     await readBody(event)
 
   const ip = getRemoteIp(event)
 
   if (
+    !codeSalt ||
+    codeSalt.length !== 64 ||
     !isValidEmail(email) ||
     !isValidName(name) ||
     !isValidPassword(password) ||
@@ -33,7 +35,7 @@ const registerController = async (event: H3Event) => {
     useStorage('redis').setItem(`login:register:cd:${ip}`, ip, { ttl: 60 })
   }
 
-  return { name, email, password, code, ip }
+  return { codeSalt, name, email, password, code, ip }
 }
 
 export default defineEventHandler(async (event) => {
@@ -41,9 +43,9 @@ export default defineEventHandler(async (event) => {
   if (!result) {
     return
   }
-  const { name, email, password, code, ip } = result
+  const { codeSalt, name, email, password, code, ip } = result
 
-  const codeKey = `register:${email}`
+  const codeKey = `${codeSalt}:${email}`
   const isCodeValid = await verifyVerificationCode(codeKey, code)
   if (!isCodeValid) {
     return kunError(event, 10103)
