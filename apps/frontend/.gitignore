@@ -26,3 +26,6 @@ logs
 # backup
 backup
 .vs
+
+# sitemap
+public/*.xml

@@ -1,0 +1,28 @@
+[package]
+name = "kun-galgame-forum-axum-api"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+axum = { version = "0.8.4", features = ["macros", "multipart", "ws"] }
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+dotenvy = "0.15"
+config = "0.15"
+thiserror = "2.0"
+anyhow = "1.0"
+sqlx = { version = "0.8.6", features = [
+    "runtime-tokio-rustls",
+    "postgres",
+    "macros",
+    "chrono",
+    "uuid",
+    "json",
+] }
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1", features = ["serde", "v4"] }
+bcrypt = "0.17"
+jsonwebtoken = "9"

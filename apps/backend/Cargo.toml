@@ -1,0 +1,11 @@
+[package]
+name = "kun-galgame-forum-axum"
+version = "0.1.0"
+authors = ["KUN1007 <kun@kungal.com>"]
+edition = "2024"
+
+[workspace]
+members = [".", "api"]
+
+[dependencies]
+kun-galgame-forum-axum-api = { path = "api" }
