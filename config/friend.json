@@ -140,6 +140,12 @@
       "banner": "galgamex",
       "link": "https://www.galgamex.org/",
       "label": "Galgamex -- 一个二次元和galgame游戏资源交流社区"
+    },
+    {
+      "name": "Nysoure",
+      "banner": "nysoure",
+      "link": "https://res.nyne.dev/",
+      "label": "Nysoure 是一个galgame分享网站"
     }
   ],
   "others": [
