@@ -55,12 +55,13 @@
       "name": "夏轩阁",
       "banner": "xiayuge",
       "link": "https://xiayuge1.top/",
-      "label": "夏轩阁是一个创建于2022年的一个主要与galgame有关的站点, 与大家分享、探讨自己喜欢的作品, 我们一直在提供公益服务, 接下来的路还很长, 希望能够与各位一起走完。"
+      "label": "夏轩阁是一个创建于2022年的一个主要与galgame有关的站点, 与大家分享、探讨自己喜欢的作品, 我们一直在提供公益服务, 接下来的路还很长, 希望能够与各位一起走完。",
+      "status": "down"
     },
     {
       "name": "Hikarinagi",
       "banner": "hikarinagi",
-      "link": "https://www.hikarinagi.com/",
+      "link": "https://www.hikarinagi.org/",
       "label": "Hikarinagi致力于为所有ACG爱好者提供一个交流和分享的平台! 你不仅可以找到汉化Galgame、小说、漫画等等超多资源, 还能和谐愉快地与大家互动!"
     },
     {
@@ -146,6 +147,12 @@
       "banner": "nysoure",
       "link": "https://res.nyne.dev/",
       "label": "Nysoure 是一个galgame分享网站"
+    },
+    {
+      "name": "LyCorisGal",
+      "banner": "lycorisgal",
+      "link": "https://www.lycorisgal.top/",
+      "label": "Gal引导资源站, 一站式 GAL 引导"
     }
   ],
   "others": [
