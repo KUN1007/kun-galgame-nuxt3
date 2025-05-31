@@ -73,7 +73,7 @@
 }
 
 .milkdown pre code {
-  @apply text-default-800 border-0 bg-transparent p-0 break-words whitespace-pre-wrap shadow-none;
+  @apply text-default-800 border-0 bg-transparent p-0 whitespace-pre shadow-none;
 }
 
 .milkdown a {

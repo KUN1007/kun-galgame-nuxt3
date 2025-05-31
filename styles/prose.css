@@ -70,11 +70,7 @@
 }
 
 .kun-prose pre code {
-  @apply text-default-800 border-0 bg-transparent p-0 break-words whitespace-pre-wrap shadow-none;
-}
-
-.kun-prose pre code span {
-  @apply break-words whitespace-pre-wrap;
+  @apply text-default-800 border-0 bg-transparent p-0 whitespace-pre shadow-none;
 }
 
 /* Quotes with refined styling */
