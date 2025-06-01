@@ -15,7 +15,7 @@ const user = computed(() => props.user)
   <KunCard
     :is-transparent="false"
     :is-hoverable="false"
-    class-name="w-52 shrink-0 hidden md:flex"
+    class-name="w-36 shrink-0 hidden md:flex"
     content-class="justify-start items-center gap-3"
   >
     <KunAvatar size="original-sm" :user="user" />

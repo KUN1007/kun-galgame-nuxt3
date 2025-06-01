@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onKeyStroke } from '@vueuse/core'
 import { checkLogin } from './checkLogin'
 
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
@@ -20,6 +21,11 @@ const handleLogin = () => {
     isShowCapture.value = true
   }
 }
+
+onKeyStroke('Enter', (e) => {
+  e.preventDefault()
+  handleLogin()
+})
 
 watch(
   () => isCaptureSuccessful.value,
