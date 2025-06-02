@@ -50,6 +50,8 @@ export default defineEventHandler(async (event) => {
     const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${gid}/banner/banner.webp`
     await GalgameModel.updateOne({ gid }, { $set: { banner: imageLink } })
 
+    await purgeCache('galgameBanner', Number(gid))
+
     await createGalgameHistory({
       gid: parseInt(gid),
       uid: userInfo.uid,

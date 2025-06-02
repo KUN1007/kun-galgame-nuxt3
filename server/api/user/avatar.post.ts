@@ -55,5 +55,7 @@ export default defineEventHandler(async (event) => {
     { $set: { avatar: imageLink } }
   )
 
+  await purgeCache('userAvatar', userInfo.uid)
+
   return imageLink
 })
