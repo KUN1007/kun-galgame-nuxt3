@@ -1,6 +1,5 @@
 import { writeFile } from 'fs/promises'
-// Must to use globby 13.2.2: https://github.com/nuxt/nuxt/issues/24387#issuecomment-1821667490
-import { globby } from 'globby'
+import { glob } from 'tinyglobby'
 import prettier from 'prettier'
 import { getKunDynamicRoutes } from './dynamic-routes/getKunDynamicRoutes'
 import { getKunDynamicBlog } from './dynamic-routes/getKunDynamicBlog'
@@ -11,7 +10,7 @@ const WEBSITE_URL = process.env.KUN_GALGAME_URL
 
 const generateKunSitemap = async () => {
   try {
-    const pages = await globby([
+    const pages = await glob([
       'pages/**/*.vue',
       '!pages/doc/*.vue',
       '!pages/category/*.vue',
