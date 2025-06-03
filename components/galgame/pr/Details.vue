@@ -99,11 +99,11 @@ const handleMergeRequest = async () => {
         variant="light"
         color="danger"
         @click="isShowReasonInput = !isShowReasonInput"
-        :pending="isFetching"
+        :loading="isFetching"
       >
         拒绝
       </KunButton>
-      <KunButton @click="handleMergeRequest" :pending="isFetching">
+      <KunButton @click="handleMergeRequest" :loading="isFetching">
         合并
       </KunButton>
     </div>
@@ -120,7 +120,7 @@ const handleMergeRequest = async () => {
       <KunButton
         color="danger"
         @click="handleDeclineRequest"
-        :pending="isFetching"
+        :loading="isFetching"
         class-name="shrink-0"
       >
         确定拒绝

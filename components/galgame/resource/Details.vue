@@ -101,7 +101,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
           variant="flat"
           color="danger"
           @click="handleReportExpire(details)"
-          :pending="isFetching"
+          :loading="isFetching"
         >
           报告链接过期
         </KunButton>

@@ -86,7 +86,7 @@ watch(
           variant="flat"
           v-if="!details && pr.status !== 2"
           @click="handleGetDetails(pr.gprid)"
-          :pending="isFetching"
+          :loading="isFetching"
         >
           详情
         </KunButton>

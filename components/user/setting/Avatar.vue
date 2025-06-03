@@ -57,7 +57,7 @@ const handleChangeAvatar = async () => {
     </div>
 
     <div class="flex justify-end">
-      <KunButton :pending="isUploading" @click="handleChangeAvatar">
+      <KunButton :loading="isUploading" @click="handleChangeAvatar">
         确定更改
       </KunButton>
     </div>

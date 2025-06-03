@@ -85,7 +85,7 @@ watch(
       <TopicDetailTool
         v-if="replyData"
         :reply-data="replyData"
-        :pending="status === 'pending'"
+        :loading="status === 'pending'"
         :sort-order="pageData.sortOrder"
         @set-sort-order="(value) => (pageData.sortOrder = value)"
       />
