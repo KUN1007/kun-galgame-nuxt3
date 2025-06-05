@@ -165,6 +165,12 @@
       "banner": "kdays",
       "link": "https://bbs2.kdays.net/",
       "label": "GalGame 动漫综合向论坛"
+    },
+    {
+      "name": "0721_Galgame",
+      "banner": "0721_galgame",
+      "link": "https://nn0721.icu/",
+      "label": "Galgame,Galgame网站,Galgame下载,Galgame资源,Galgame汉化Galgame制作,Galgame讨论"
     }
   ],
   "anime": [
@@ -173,6 +179,12 @@
       "banner": "xifanacg",
       "link": "https://dm.xifanacg.com/",
       "label": "免费高清动漫分享,高清,动漫,免费视频,在线视频,高清动漫,在线,动漫在线"
+    },
+    {
+      "name": "0721动漫",
+      "banner": "dm0721",
+      "link": "https://dm0721.icu/",
+      "label": "0721动漫,免费动漫,好看动漫,免费番剧,好看番剧,抢先看,老番,新番"
     }
   ],
   "others": [
@@ -180,7 +192,7 @@
       "name": "OhMyGPT",
       "banner": "ohmygpt",
       "link": "https://ohmygpt.com",
-      "label": "OhMyGPT.COM offers you convenient, unlimited access to advanced AI models like GPT-3.5-turbo, GPT-3.5-turbo-16k, GPT-4, GPT-4-32k, DALL-E, whisper, MidJourney, and more."
+      "label": "OhMyGPT.COM 可以让你便捷地无限量访问GPT-3.5-turbo、GPT-3.5-turbo-16k、GPT-4、GPT-4-32k、DALL-E、whisper、MidJourney等先进的AI模型。"
     },
     {
       "name": "Koibumi URL Shorten",
