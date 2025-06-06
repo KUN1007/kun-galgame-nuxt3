@@ -5,6 +5,7 @@ export const GALGAME_RESOURCE_TYPE_ICON_MAP: Record<string, string> = {
   voice: 'lucide:music-4',
   image: 'lucide:image',
   ai: 'simple-icons:openai',
+  video: 'lucide:video',
   others: 'lucide:ellipsis'
 }
 

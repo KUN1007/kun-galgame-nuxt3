@@ -9,6 +9,7 @@ export type KunGalgameResourceTypeOptions =
   | 'voice'
   | 'image'
   | 'ai'
+  | 'video'
   | 'others'
 
 export type KunGalgameResourceLanguageOptions =
@@ -37,6 +38,7 @@ export const KUN_GALGAME_RESOURCE_TYPE_MAP: Record<string, string> = {
   voice: '音声相关',
   image: '图片相关',
   ai: 'AI 相关',
+  video: '视频相关',
   others: '其它'
 }
 
@@ -48,6 +50,7 @@ export const kunGalgameResourceTypeOptions: KunSelectOption[] = [
   { value: 'voice', label: '音声相关' },
   { value: 'image', label: '图片相关' },
   { value: 'ai', label: 'AI 相关' },
+  { value: 'video', label: '视频相关' },
   { value: 'others', label: '其它' }
 ]
 
