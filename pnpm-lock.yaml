@@ -260,9 +260,6 @@ importers:
       '@nuxtjs/color-mode':
         specifier: ^3.5.2
         version: 3.5.2(magicast@0.3.5)
-      '@nuxtjs/sitemap':
-        specifier: 7.2.7
-        version: 7.2.7(h3@1.15.1)(magicast@0.3.5)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.85.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.2))
       '@pinia/nuxt':
         specifier: ^0.10.1
         version: 0.10.1(magicast@0.3.5)(pinia@3.0.1(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2)))
@@ -1901,10 +1898,6 @@ packages:
   '@nuxtjs/mdc@0.16.1':
     resolution: {integrity: sha512-di9Ox9QY5pO2eIkQPyKFe9O8L3RvIrGbmjI3rJQRj1xGYRFj2S9RvBPCFbvfaqQGOTjOfxHLg8KtQIGj1Iw/lg==}
 
-  '@nuxtjs/sitemap@7.2.7':
-    resolution: {integrity: sha512-hskX+ZJA0JFAqp5FOKZLtWSkylG3SZNXlS4N20Zw/0Ygfb6xsKejOsFLXH+Yx9kC0TLBwQqy11PfOeJKMjmXQA==}
-    engines: {node: '>=18.0.0'}
-
   '@oxc-parser/binding-darwin-arm64@0.56.5':
     resolution: {integrity: sha512-rj4WZqQVJQgLnGnDu2ciIOC5SqcBPc4x11RN0NwuedSGzny5mtBdNVLwt0+8iB15lIjrOKg5pjYJ8GQVPca5HA==}
     engines: {node: '>=14.0.0'}
@@ -3196,10 +3189,6 @@ packages:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
 
-  chalk@5.4.1:
-    resolution: {integrity: sha512-zgVZuo2WcZgfUEmsn6eO3kINexW8RAE4maiQ8QNs8CtpPCSyMiYsULR3HQYkm3w8FIA3SberyMJMSldGsW+U3w==}
-    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
-
   char-regex@1.0.2:
     resolution: {integrity: sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==}
     engines: {node: '>=10'}
@@ -4221,11 +4210,6 @@ packages:
   gzip-size@7.0.0:
     resolution: {integrity: sha512-O1Ld7Dr+nqPnmGpdhzLmMTQ4vAsD+rHwMm1NLUmoUFFymBOMKxCCrtDxqdBRYXdeEPEi3SyoR4TizJLQrnKBNA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-
-  h3-compression@0.3.2:
-    resolution: {integrity: sha512-B+yCKyDRnO0BXSfjAP4tCXJgJwmnKp3GyH5Yh66mY9KuOCrrGQSPk/gBFG2TgH7OyB/6mvqNZ1X0XNVuy0qRsw==}
-    peerDependencies:
-      h3: ^1.6.0
 
   h3@1.15.1:
     resolution: {integrity: sha512-+ORaOBttdUm1E2Uu/obAyCguiI7MbBvsLTndc3gyK3zU+SYLoZXlyCP9Xgy0gikkGufFLTZXCXD6+4BsufnmHA==}
@@ -9787,27 +9771,6 @@ snapshots:
       - magicast
       - supports-color
 
-  '@nuxtjs/sitemap@7.2.7(h3@1.15.1)(magicast@0.3.5)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.85.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))(vue@3.5.13(typescript@5.8.2))':
-    dependencies:
-      '@nuxt/devtools-kit': 2.3.2(magicast@0.3.5)(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(lightningcss@1.29.2)(sass@1.85.0)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
-      '@nuxt/kit': 3.16.1(magicast@0.3.5)
-      chalk: 5.4.1
-      defu: 6.1.4
-      h3-compression: 0.3.2(h3@1.15.1)
-      nuxt-site-config: 3.1.7(magicast@0.3.5)(vue@3.5.13(typescript@5.8.2))
-      ofetch: 1.4.1
-      pathe: 2.0.3
-      pkg-types: 2.1.0
-      radix3: 1.1.2
-      semver: 7.7.1
-      sirv: 3.0.1
-      ufo: 1.5.4
-    transitivePeerDependencies:
-      - h3
-      - magicast
-      - vite
-      - vue
-
   '@oxc-parser/binding-darwin-arm64@0.56.5':
     optional: true
 
@@ -11163,8 +11126,6 @@ snapshots:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
 
-  chalk@5.4.1: {}
-
   char-regex@1.0.2: {}
 
   character-entities-html4@2.1.0: {}
@@ -12226,10 +12187,6 @@ snapshots:
   gzip-size@7.0.0:
     dependencies:
       duplexer: 0.1.2
-
-  h3-compression@0.3.2(h3@1.15.1):
-    dependencies:
-      h3: 1.15.1
 
   h3@1.15.1:
     dependencies:

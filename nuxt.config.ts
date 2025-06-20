@@ -27,7 +27,6 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/eslint',
     '@nuxtjs/color-mode',
-    '@nuxtjs/sitemap',
     '@nuxt/content',
     '@pinia/nuxt',
     '@vite-pwa/nuxt',

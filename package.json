@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "3.4.39",
+  "version": "3.4.40",
   "packageManager": "pnpm@10.4.1",
   "private": true,
   "scripts": {
@@ -49,7 +49,6 @@
     "@nuxt/icon": "^1.11.0",
     "@nuxt/image": "^1.10.0",
     "@nuxtjs/color-mode": "^3.5.2",
-    "@nuxtjs/sitemap": "7.2.7",
     "@pinia/nuxt": "^0.10.1",
     "@types/bcrypt": "^5.0.2",
     "@types/js-cookie": "^3.0.6",
