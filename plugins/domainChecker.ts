@@ -10,7 +10,8 @@ export default defineNuxtPlugin(() => {
 
   if (isProduction && !legitimateDomains.includes(currentHostname)) {
     navigateTo(
-      `https://${legitimateDomains[0]}${window.location.pathname}${window.location.search}`
+      `${legitimateDomains[0]}${window.location.pathname}${window.location.search}`,
+      { external: true }
     )
   }
 })
