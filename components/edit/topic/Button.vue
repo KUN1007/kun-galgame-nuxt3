@@ -103,9 +103,9 @@ const handleRewrite = async () => {
   isPublishing.value = false
 
   if (result) {
-    useTempEditStore().resetRewriteTopicData()
     useKunLoliInfo('重新编辑成功', 5)
     await navigateTo(`/topic/${tid.value}`)
+    useTempEditStore().resetRewriteTopicData()
   }
 }
 
