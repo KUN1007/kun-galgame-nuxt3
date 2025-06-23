@@ -24,6 +24,7 @@ const KUN_SITE_LIST = [
   { name: '鲲 Galgame 开发文档', url: KUN_SITE_DEVELOPMENT_DOCUMENTATION }
 ]
 const KUN_SITE_THEME_COLOR = '#006FEE'
+const KUN_SITE_VALID_DOMAIN_LIST = [KUN_SITE_URL, KUN_SITE_URL_BACKUP]
 
 const KUN_SITE_KEYWORDS = [
   'Galgame',
@@ -53,6 +54,7 @@ export const kungal: KunSiteConfig = {
   themeColor: KUN_SITE_THEME_COLOR,
   github: KUN_SITE_GITHUB,
   authorGitHub: KUN_SITE_AUTHOR_GITHUB,
+  validDomain: KUN_SITE_VALID_DOMAIN_LIST,
   author: [
     { name: KUN_SITE_TITLE, url: KUN_SITE_URL },
     { name: 'GitHub', url: KUN_SITE_GITHUB },
