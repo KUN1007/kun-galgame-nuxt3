@@ -40,11 +40,11 @@ const currentPageUserRoles = computed(() => {
   }
 })
 
-const handleCollapsed = (item: Nav) => {
+const handleCollapsed = async (item: Nav) => {
   if (item.collapsed !== undefined) {
     item.collapsed = !item.collapsed
   } else {
-    navigateTo(
+    await navigateTo(
       `/user/${currentPageUid.value}/${item.redirect ? item.redirect : item.router}`
     )
   }

@@ -63,10 +63,10 @@ const handlePublishGalgamePR = async () => {
   isPublishing.value = false
 
   if (result) {
-    navigateTo(`/galgame/${pullRequest.gid}`, {
+    useKunLoliInfo('创建更新请求成功', 5)
+    await navigateTo(`/galgame/${pullRequest.gid}`, {
       replace: true
     })
-    useKunLoliInfo('创建更新请求成功', 5)
   }
 }
 </script>

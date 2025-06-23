@@ -7,14 +7,14 @@ defineProps<{
 
 const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 
-const handleRewriteGalgame = (galgame: GalgameDetail) => {
+const handleRewriteGalgame = async (galgame: GalgameDetail) => {
   const { introduction, markdown, series, ...rest } = galgame
   galgamePR.value[0] = {
     introduction: markdown,
     series: series.map((s) => s.toString()),
     ...rest
   }
-  navigateTo('/edit/galgame/rewrite')
+  await navigateTo('/edit/galgame/rewrite')
 }
 </script>
 

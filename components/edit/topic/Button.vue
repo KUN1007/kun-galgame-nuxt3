@@ -62,9 +62,9 @@ const handlePublish = async () => {
   isPublishing.value = false
 
   if (tid) {
-    navigateTo(`/topic/${tid}`)
-    useKunLoliInfo('发布成功', 5)
     usePersistEditTopicStore().resetTopicData()
+    useKunLoliInfo('发布成功', 5)
+    await navigateTo(`/topic/${tid}`)
   }
 }
 
@@ -103,9 +103,9 @@ const handleRewrite = async () => {
   isPublishing.value = false
 
   if (result) {
-    navigateTo(`/topic/${tid.value}`)
-    useKunLoliInfo('重新编辑成功', 5)
     useTempEditStore().resetRewriteTopicData()
+    useKunLoliInfo('重新编辑成功', 5)
+    await navigateTo(`/topic/${tid.value}`)
   }
 }
 

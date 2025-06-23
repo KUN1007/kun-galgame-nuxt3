@@ -1,6 +1,6 @@
 import { kungal } from '~/config/kungal'
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin(async () => {
   if (!window) return
 
   const legitimateDomains = kungal.validDomain
@@ -9,8 +9,8 @@ export default defineNuxtPlugin(() => {
   const isProduction = process.env.NODE_ENV === 'production'
 
   if (isProduction && !legitimateDomains.includes(currentHostname)) {
-    navigateTo(
-      `${legitimateDomains[0]}${window.location.pathname}${window.location.search}`,
+    await navigateTo(
+      `https://${legitimateDomains[0]}${window.location.pathname}${window.location.search}`,
       { external: true }
     )
   }

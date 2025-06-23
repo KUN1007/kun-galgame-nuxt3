@@ -43,7 +43,7 @@ watch(
     if (userInfo) {
       usePersistUserStore().setUserInfo(userInfo)
       useKunLoliInfo(`登陆成功! 欢迎来到 ${kungal.name}`)
-      navigateTo('/')
+      await navigateTo('/')
     }
 
     isCaptureSuccessful.value = false

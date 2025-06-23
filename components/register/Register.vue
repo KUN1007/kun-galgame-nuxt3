@@ -56,7 +56,7 @@ const handleRegister = async () => {
     codeSalt.value = ''
     useKunLoliInfo(`注册成功! 欢迎来到 ${kungal.name}`)
     usePersistUserStore().setUserInfo(userInfo)
-    navigateTo('/')
+    await navigateTo('/')
   }
 
   isCaptureSuccessful.value = false

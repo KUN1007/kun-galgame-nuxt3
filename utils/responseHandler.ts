@@ -26,9 +26,8 @@ export const onResponse = (context: KunOnResponseContext) => {
       userStore.$reset()
       useMessage(10250, 'error', 7777)
 
-      navigateTo('/login')
       Cookies.set('kungalgame-is-navigate-to-login', 'navigated')
-      return
+      return navigateTo('/login')
     }
   }
 
