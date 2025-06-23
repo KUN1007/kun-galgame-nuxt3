@@ -9,9 +9,6 @@ export default defineNuxtPlugin(() => {
   const isProduction = process.env.NODE_ENV === 'production'
 
   if (isProduction && !legitimateDomains.includes(currentHostname)) {
-    navigateTo(
-      `${legitimateDomains[0]}${window.location.pathname}${window.location.search}`,
-      { external: true }
-    )
+    window.location.href = `https://${legitimateDomains[0]}${window.location.pathname}${window.location.search}`
   }
 })
