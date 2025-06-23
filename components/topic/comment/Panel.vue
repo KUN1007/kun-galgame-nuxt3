@@ -69,7 +69,9 @@ const handlePublishComment = async () => {
       <KunButton variant="light" color="danger" @click="isShowPanel = false">
         关闭
       </KunButton>
-      <KunButton @click="handlePublishComment">发布评论</KunButton>
+      <KunButton :loading="isPublishing" @click="handlePublishComment">
+        发布评论
+      </KunButton>
     </div>
   </div>
 </template>
