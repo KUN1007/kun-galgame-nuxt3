@@ -24,7 +24,7 @@ const KUN_SITE_LIST = [
   { name: '鲲 Galgame 开发文档', url: KUN_SITE_DEVELOPMENT_DOCUMENTATION }
 ]
 const KUN_SITE_THEME_COLOR = '#006FEE'
-const KUN_SITE_VALID_DOMAIN_LIST = [KUN_SITE_URL, KUN_SITE_URL_BACKUP]
+const KUN_SITE_VALID_DOMAIN_LIST = ['www.kungal.com', 'www.kungal.org']
 
 const KUN_SITE_KEYWORDS = [
   'Galgame',
