@@ -5,12 +5,12 @@ import type { HomeTopic } from '~/types/api/home'
 const getHomeTopics = async (page: number, limit: number) => {
   const skip = (page - 1) * limit
 
-  const now = new Date()
-  const thirtyDaysAgo = new Date(now.setDate(now.getDate() - 90))
+  const now = Date.now()
+  const ninetyDaysAgo = now - 90 * 24 * 60 * 60 * 1000
 
   const topics = await TopicModel.find({
     status: { $ne: 1 },
-    created: { $gte: thirtyDaysAgo }
+    time: { $gte: ninetyDaysAgo }
   })
     .sort({ time: -1 })
     .skip(skip)
