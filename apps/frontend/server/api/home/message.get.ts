@@ -21,7 +21,10 @@ const getMessages = async (page: number, limit: number) => {
     tid: message.tid,
     gid: message.gid,
     type: message.type,
-    content: markdownToText(message.content).slice(0, 50),
+    content:
+      message.type === 'requested' && message.content.length < 233
+        ? `请求更新: ${Object.values(JSON.parse(message.content)).join(',').slice(0, 50)}`
+        : markdownToText(message.content).slice(0, 50),
     time: message.time
   }))
 

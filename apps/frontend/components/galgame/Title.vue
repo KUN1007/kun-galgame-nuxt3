@@ -26,7 +26,7 @@ const handleChangeBanner = async () => {
 
   const res = await useComponentMessageStore().alert(
     '确定更新预览图吗?',
-    '由于网络缓存, 您的新图片可能需要一段时间才会生效, 可以使用 Ctrl + F5 刷新页面缓存。'
+    '更改后使用 Ctrl + F5 刷新页面缓存, 即可看到更新后的图片'
   )
   if (!res) {
     return

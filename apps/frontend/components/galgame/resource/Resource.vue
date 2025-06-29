@@ -59,7 +59,7 @@ watch(
             <KunLink
               class-name="block whitespace-nowrap"
               size="sm"
-              to="https://www.zi6.cc/"
+              to="https://zi6.cc/"
               target="_blank"
             >
               zi0

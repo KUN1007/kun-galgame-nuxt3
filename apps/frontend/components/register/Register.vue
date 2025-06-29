@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onKeyStroke } from '@vueuse/core'
 import { KUN_REGISTER_FORM_FIELD_MAP } from '~/constants/auth'
 import { registerFormItem } from './registerFormItem'
 import { checkForm, checkRegister } from './checkRegister'
@@ -55,11 +56,16 @@ const handleRegister = async () => {
     codeSalt.value = ''
     useKunLoliInfo(`注册成功! 欢迎来到 ${kungal.name}`)
     usePersistUserStore().setUserInfo(userInfo)
-    navigateTo('/')
+    await navigateTo('/')
   }
 
   isCaptureSuccessful.value = false
 }
+
+onKeyStroke('Enter', async (e) => {
+  e.preventDefault()
+  await handleRegister()
+})
 </script>
 
 <template>

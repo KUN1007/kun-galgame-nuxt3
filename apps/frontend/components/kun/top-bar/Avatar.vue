@@ -4,10 +4,10 @@ const { showKUNGalgamePanel, messageStatus } = storeToRefs(
   useTempSettingStore()
 )
 
-const onKeydown = (event: KeyboardEvent) => {
+const onKeydown = async (event: KeyboardEvent) => {
   if (event.ctrlKey && event.key.toLowerCase() === 'k') {
     event.preventDefault()
-    navigateTo('/search')
+    await navigateTo('/search')
   }
 }
 

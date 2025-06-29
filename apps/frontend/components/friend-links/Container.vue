@@ -35,16 +35,11 @@ import { friendArray } from '~/config/friend'
           target="_blank"
           class-name="block transform rounded-lg p-4 shadow transition-all duration-200 hover:-translate-y-2 hover:shadow-lg"
         >
-          <div class="mb-2 flex items-center">
+          <div class="mb-2 flex items-center gap-2">
             <span class="text-lg font-bold">
               {{ friend.name }}
             </span>
-            <span
-              v-if="friend.status"
-              class="ml-2 text-sm text-neutral-600 dark:text-neutral-400"
-            >
-              {{ friend.status }}
-            </span>
+            <KunBadge v-if="friend.status" color="danger">已下线</KunBadge>
           </div>
           <div class="mb-3 text-sm text-neutral-600 dark:text-neutral-400">
             {{

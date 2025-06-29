@@ -184,7 +184,7 @@ onMounted(() => {
       </KunButton>
       <KunButton
         v-if="!rewriteResourceId"
-        :pending="isFetching"
+        :loading="isFetching"
         @click="handlePublishResourceLink('POST')"
       >
         创建资源链接
@@ -201,7 +201,7 @@ onMounted(() => {
 
       <KunButton
         @click="handlePublishResourceLink('PUT')"
-        :pending="isFetching"
+        :loading="isFetching"
         v-if="rewriteResourceId"
       >
         确定 Rewrite

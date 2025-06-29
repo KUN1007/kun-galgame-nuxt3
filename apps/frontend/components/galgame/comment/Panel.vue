@@ -59,7 +59,7 @@ const handlePublishComment = async () => {
       <KunButton
         class="ml-auto"
         @click="handlePublishComment"
-        :pending="isPublishing"
+        :loading="isPublishing"
       >
         发布评论
       </KunButton>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const uid = storeToRefs(usePersistUserStore()).uid.value
 const route = useRoute()
 
 const gid = computed(() => {
@@ -12,6 +13,7 @@ const { data } = await useFetch(`/api/galgame/${gid.value}`, {
 })
 
 const galgame = data.value
+const isShowGalgame = ref(true)
 
 if (galgame) {
   if (galgame === 'banned') {
@@ -26,6 +28,13 @@ if (galgame) {
         ? `这个 Galgame 由于违反了 ${kungal.titleShort} 资源发布规定, 或者被作者删除, 您可以进入 Galgame 总览页面查看其它相似 Galgame 资源 wiki`
         : `未找到这个 Galgame, 请确认您的请求路径是否正确, 您可以进入 Galgame 页面查看其它 Galgame`
     })
+  } else if (galgame.contentLimit === 'nsfw') {
+    const title = getPreferredLanguageText(galgame.name)
+    useKunDisableSeo(uid ? title : '')
+
+    if (!uid) {
+      isShowGalgame.value = false
+    }
   } else {
     const titleBase = getPreferredLanguageText(galgame.name)
     const jaTitle = galgame.name['ja-jp']
@@ -58,10 +67,7 @@ if (galgame) {
         {
           rel: 'canonical',
           href: `${kungal.domain.main}/galgame/${galgame.gid}`
-        },
-        galgame.contentLimit === 'nsfw'
-          ? { name: 'bingbot', content: 'noindex, nofollow, noarchive' }
-          : undefined
+        }
       ]
     })
   }
@@ -72,7 +78,15 @@ if (galgame) {
 
 <template>
   <div>
-    <Galgame v-if="data && data !== 'banned'" :galgame="data" />
+    <div v-if="data && data !== 'banned'">
+      <Galgame v-if="isShowGalgame" :galgame="data" />
+
+      <KunCard v-else :is-hoverable="false" :is-transparent="false">
+        <p>这个 Galgame 含有 NSFW 内容, 您需要点击确认以显示这个 Galgame</p>
+        <KunButton @click="isShowGalgame = true">确认显示</KunButton>
+      </KunCard>
+    </div>
+
     <KunNull
       v-if="!data && data !== 'banned'"
       description="未找到这个 Galgame"

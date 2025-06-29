@@ -47,6 +47,7 @@ export interface KunSiteConfig {
   themeColor: string
   github: string
   authorGitHub: string
+  validDomain: string[]
   author: KunSiteAuthor[]
   creator: KunSiteCreator
   publisher: KunSiteCreator

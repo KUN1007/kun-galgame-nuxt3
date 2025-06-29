@@ -76,7 +76,7 @@ const handleSubmitReport = async () => {
     </div>
 
     <div class="flex justify-end">
-      <KunButton @click="handleSubmitReport" :pending="isFetching">
+      <KunButton @click="handleSubmitReport" :loading="isFetching">
         提交举报
       </KunButton>
     </div>

@@ -106,7 +106,7 @@ watch(
         <KunButton
           v-if="uid === link.uid && link.status === 1"
           @click="handleMarkValid(link.gid, link.grid)"
-          :pending="isFetching"
+          :loading="isFetching"
         >
           标记有效
         </KunButton>
@@ -115,7 +115,7 @@ watch(
           variant="flat"
           v-if="!details && link.grid !== rewriteResourceId"
           @click="handleGetDetail(link.grid)"
-          :pending="isFetching"
+          :loading="isFetching"
         >
           获取链接
         </KunButton>

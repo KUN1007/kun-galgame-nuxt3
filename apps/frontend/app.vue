@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { KunFloatingBar } from '#components'
+import { showMoeMessage } from '~/widget/showMoeMessage'
 
 const { showKUNGalgamePageTransparency, showKUNGalgameBackgroundBlur } =
   storeToRefs(usePersistSettingsStore())
@@ -105,6 +105,8 @@ onMounted(() => {
     )
     // Disable umami for dev
     localStorage.setItem('umami.disabled', '1')
+  } else {
+    showMoeMessage()
   }
 })
 </script>

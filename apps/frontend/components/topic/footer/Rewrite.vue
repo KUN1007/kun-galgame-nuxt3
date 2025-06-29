@@ -11,7 +11,7 @@ const { tid, title, content, tags, category, section, isTopicRewriting } =
 const { uid } = usePersistUserStore()
 const isShowRewrite = computed(() => uid === props.topic.user.uid)
 
-const rewriteTopic = () => {
+const rewriteTopic = async () => {
   tid.value = props.topic.tid
   title.value = props.topic.title
   content.value = props.topic.markdown
@@ -20,7 +20,7 @@ const rewriteTopic = () => {
   section.value = props.topic.section ?? []
   isTopicRewriting.value = true
 
-  navigateTo('/edit/topic')
+  await navigateTo('/edit/topic')
 }
 </script>
 

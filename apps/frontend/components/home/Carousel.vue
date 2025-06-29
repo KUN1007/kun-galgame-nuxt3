@@ -130,7 +130,7 @@ onUnmounted(() => {
         :key="post.path"
         class="w-full flex-shrink-0"
       >
-        <div class="relative h-[200px] w-full sm:h-[300px]">
+        <div class="relative h-[200px] w-full select-none sm:h-[300px]">
           <img
             :src="post.banner || '/kungalgame.webp'"
             :alt="post.title"
@@ -150,9 +150,7 @@ onUnmounted(() => {
             >
               <h1>{{ post.title }}</h1>
             </KunLink>
-            <p
-              class="text-default-700 line-clamp-2 text-sm select-none sm:text-base"
-            >
+            <p class="text-default-700 line-clamp-2 text-sm sm:text-base">
               {{ post.description }}
             </p>
             <KunLink

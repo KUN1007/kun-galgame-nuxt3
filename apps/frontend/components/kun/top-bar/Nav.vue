@@ -76,7 +76,7 @@ onMounted(async () => {
         color="default"
         size="xl"
         variant="light"
-        @click="() => navigateTo('/')"
+        @click="navigateTo('/')"
       >
         <KunIcon name="lucide:home" />
       </KunButton>

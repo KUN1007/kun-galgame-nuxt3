@@ -67,10 +67,10 @@ const handlePublishGalgame = async () => {
 
   if (gid) {
     await deleteImage('kun-galgame-publish-banner')
-    usePersistEditGalgameStore().$reset()
 
-    navigateTo(`/galgame/${gid}`)
     useKunLoliInfo('发布 Galgame 成功', 5)
+    await navigateTo(`/galgame/${gid}`)
+    usePersistEditGalgameStore().$reset()
   }
 }
 </script>

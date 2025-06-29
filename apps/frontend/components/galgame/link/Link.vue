@@ -94,7 +94,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
       <KunInput placeholder="链接名" v-model="linkModel.name" />
       <KunInput placeholder="链接地址" v-model="linkModel.link" />
       <div class="flex justify-end">
-        <KunButton @click="handlePublishLink" :pending="isFetching">
+        <KunButton @click="handlePublishLink" :loading="isFetching">
           创建链接
         </KunButton>
       </div>
@@ -113,7 +113,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
             size="sm"
             v-if="uid === link.uid"
             @click="handleDeleteLink(link.gid, link.glid)"
-            :pending="isFetching"
+            :loading="isFetching"
           >
             <KunIcon name="lucide:trash-2" />
           </KunButton>

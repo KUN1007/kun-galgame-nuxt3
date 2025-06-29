@@ -57,8 +57,8 @@ const handleChangePassword = async () => {
 
   if (data) {
     codeSalt.value = ''
-    navigateTo('/login')
     useMessage(10101, 'success')
+    await navigateTo('/login')
   }
 }
 </script>

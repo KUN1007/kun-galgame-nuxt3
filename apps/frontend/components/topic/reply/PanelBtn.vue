@@ -87,11 +87,21 @@ const handleRewrite = async () => {
 
 <template>
   <div class="flex justify-end gap-1">
-    <KunButton size="lg" v-if="!isReplyRewriting" @click="handlePublish">
+    <KunButton
+      size="lg"
+      :loading="isPublishing"
+      v-if="!isReplyRewriting"
+      @click="handlePublish"
+    >
       确认发布
     </KunButton>
 
-    <KunButton size="lg" v-if="isReplyRewriting" @click="handleRewrite">
+    <KunButton
+      size="lg"
+      :loading="isPublishing"
+      v-if="isReplyRewriting"
+      @click="handleRewrite"
+    >
       确定编辑
     </KunButton>
   </div>

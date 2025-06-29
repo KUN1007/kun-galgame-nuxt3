@@ -55,12 +55,13 @@
       "name": "夏轩阁",
       "banner": "xiayuge",
       "link": "https://xiayuge1.top/",
-      "label": "夏轩阁是一个创建于2022年的一个主要与galgame有关的站点, 与大家分享、探讨自己喜欢的作品, 我们一直在提供公益服务, 接下来的路还很长, 希望能够与各位一起走完。"
+      "label": "夏轩阁是一个创建于2022年的一个主要与galgame有关的站点, 与大家分享、探讨自己喜欢的作品, 我们一直在提供公益服务, 接下来的路还很长, 希望能够与各位一起走完。",
+      "status": "down"
     },
     {
       "name": "Hikarinagi",
       "banner": "hikarinagi",
-      "link": "https://www.hikarinagi.com/",
+      "link": "https://www.hikarinagi.org/",
       "label": "Hikarinagi致力于为所有ACG爱好者提供一个交流和分享的平台! 你不仅可以找到汉化Galgame、小说、漫画等等超多资源, 还能和谐愉快地与大家互动!"
     },
     {
@@ -138,8 +139,46 @@
     {
       "name": "Galgamex",
       "banner": "galgamex",
-      "link": "https://www.galgamex.org/",
-      "label": "Galgamex -- 一个二次元和galgame游戏资源交流社区"
+      "link": "https://www.galgamex.net/",
+      "label": "Galgamex是一个集多种功能于一体的综合性社区。在这里, 你能畅聊二次元话题, 结交志同道合的朋友, 还能获取海量二次元资源, 全部免费下载。"
+    },
+    {
+      "name": "Nysoure",
+      "banner": "nysoure",
+      "link": "https://res.nyne.dev/",
+      "label": "Nysoure 是一个galgame分享网站"
+    },
+    {
+      "name": "LyCorisGal",
+      "banner": "lycorisgal",
+      "link": "https://www.lycorisgal.top/",
+      "label": "Gal引导资源站, 一站式 GAL 引导"
+    },
+    {
+      "name": "NekoGal",
+      "banner": "nekogal",
+      "link": "https://www.nekogal.com/",
+      "label": "NekoGAL- Galgame传递者, 免费·高质量 Galgame 资源站"
+    },
+    {
+      "name": "KDays",
+      "banner": "kdays",
+      "link": "https://bbs2.kdays.net/",
+      "label": "GalGame 动漫综合向论坛"
+    },
+    {
+      "name": "0721_Galgame",
+      "banner": "0721_galgame",
+      "link": "https://nn0721.icu/",
+      "label": "Galgame,Galgame网站,Galgame下载,Galgame资源,Galgame汉化Galgame制作,Galgame讨论"
+    }
+  ],
+  "anime": [
+    {
+      "name": "稀饭动漫",
+      "banner": "xifanacg",
+      "link": "https://dm.xifanacg.com/",
+      "label": "免费高清动漫分享,高清,动漫,免费视频,在线视频,高清动漫,在线,动漫在线"
     }
   ],
   "others": [
@@ -147,7 +186,7 @@
       "name": "OhMyGPT",
       "banner": "ohmygpt",
       "link": "https://ohmygpt.com",
-      "label": "OhMyGPT.COM offers you convenient, unlimited access to advanced AI models like GPT-3.5-turbo, GPT-3.5-turbo-16k, GPT-4, GPT-4-32k, DALL-E, whisper, MidJourney, and more."
+      "label": "OhMyGPT.COM 可以让你便捷地无限量访问GPT-3.5-turbo、GPT-3.5-turbo-16k、GPT-4、GPT-4-32k、DALL-E、whisper、MidJourney等先进的AI模型。"
     },
     {
       "name": "Koibumi URL Shorten",

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onKeyStroke } from '@vueuse/core'
 import { checkLogin } from './checkLogin'
 
 const { isShowCapture, isCaptureSuccessful } = storeToRefs(
@@ -21,6 +22,11 @@ const handleLogin = () => {
   }
 }
 
+onKeyStroke('Enter', (e) => {
+  e.preventDefault()
+  handleLogin()
+})
+
 watch(
   () => isCaptureSuccessful.value,
   async () => {
@@ -37,7 +43,7 @@ watch(
     if (userInfo) {
       usePersistUserStore().setUserInfo(userInfo)
       useKunLoliInfo(`登陆成功! 欢迎来到 ${kungal.name}`)
-      navigateTo('/')
+      await navigateTo('/')
     }
 
     isCaptureSuccessful.value = false

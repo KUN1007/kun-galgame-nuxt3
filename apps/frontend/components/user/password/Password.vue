@@ -31,8 +31,8 @@ const handleChangePassword = async () => {
 
   if (result) {
     usePersistUserStore().$reset()
-    navigateTo('/login')
     useMessage(10121, 'success')
+    await navigateTo('/login')
   }
 }
 </script>
