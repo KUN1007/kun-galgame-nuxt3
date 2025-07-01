@@ -1,16 +1,16 @@
-// Galgame PR model
 model galgame_pr {
-  id              Int       @id @default(autoincrement())
-  galgame_id      Int
-  user_id         Int
-  status          Int       @default(0)
-  index           Int       @default(0)
-  completed_time  DateTime?
-  note            String    @default("") @db.VarChar(1007)
-  galgame_data    Json?
-  created_at      DateTime  @default(now())
-  updated_at      DateTime  @updatedAt
+  id             Int       @id @default(autoincrement())
+  status         Int       @default(0)
+  index          Int       @default(0)
+  note           String    @default("") @db.VarChar(1007)
+  completed_time DateTime?
+  diff_data      Json?
 
-  // Relations
-  user            user      @relation(fields: [user_id], references: [id])
-} 
+  user_id    Int
+  user       user    @relation(fields: [user_id], references: [id])
+  galgame_id Int
+  galgame    galgame @relation(fields: [galgame_id], references: [id])
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+}

@@ -1,89 +1,99 @@
-// Topic model
 model topic {
     id          Int       @id @default(autoincrement())
     title       String    @db.VarChar(40)
     content     String    @db.Text
-    user_id     Int
-    time        DateTime  @default(now())
     view        Int       @default(0)
-    comment     Int       @default(0)
-    upvote_time DateTime?
+    // 0 - normal, 1 - banned, 2 - pinned, 3 - essential
     status      Int       @default(0)
     edited      Int       @default(0)
-    created_at  DateTime  @default(now())
-    updated_at  DateTime  @updatedAt
+    update_time DateTime  @default(now())
+    upvote_time DateTime?
 
-    // Relations
-    user      user        @relation("user_to_topic", fields: [user_id], references: [id])
+    user_id Int
+    user    user @relation("user_topic", fields: [user_id], references: [id])
+
     reply     reply[]
     topic_tag topic_tag[]
-    comments  comment[]
-    tags      tag[]
+    comment   comment[]
 
-    // Many-to-many relationships
     upvote   topic_upvote[]
     like     topic_like[]
     dislike  topic_dislike[]
     favorite topic_favorite[]
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
 }
 
-// Topic-related junction tables
 model topic_tag {
-    id       Int     @id @default(autoincrement())
+    id       Int    @id @default(autoincrement())
+    name     String
+    category String
+    section  String
+
     topic_id Int
-    tag      String
-    category String?
-    section  String?
+    topic    topic @relation(fields: [topic_id], references: [id])
+    user_id  Int
+    user     user  @relation(fields: [user_id], references: [id])
 
-    topic topic @relation(fields: [topic_id], references: [id])
+    created DateTime @default(now())
+    updated DateTime @updatedAt
 
-    @@unique([topic_id, tag])
+    @@unique([topic_id, name])
 }
 
 model topic_upvote {
-    id         Int      @id @default(autoincrement())
-    topic_id   Int
-    user_id    Int
-    created_at DateTime @default(now())
+    id Int @id @default(autoincrement())
 
-    topic topic @relation(fields: [topic_id], references: [id])
-    user  user  @relation(fields: [user_id], references: [id])
+    topic_id Int
+    topic    topic @relation(fields: [topic_id], references: [id])
+    user_id  Int
+    user     user  @relation(fields: [user_id], references: [id])
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
 
     @@unique([topic_id, user_id])
 }
 
 model topic_like {
-    id         Int      @id @default(autoincrement())
-    topic_id   Int
-    user_id    Int
-    created_at DateTime @default(now())
+    id Int @id @default(autoincrement())
 
-    topic topic @relation(fields: [topic_id], references: [id])
-    user  user  @relation(fields: [user_id], references: [id])
+    topic_id Int
+    topic    topic @relation(fields: [topic_id], references: [id])
+    user_id  Int
+    user     user  @relation(fields: [user_id], references: [id])
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
 
     @@unique([topic_id, user_id])
 }
 
 model topic_dislike {
-    id         Int      @id @default(autoincrement())
-    topic_id   Int
-    user_id    Int
-    created_at DateTime @default(now())
+    id Int @id @default(autoincrement())
 
-    topic topic @relation(fields: [topic_id], references: [id])
-    user  user  @relation(fields: [user_id], references: [id])
+    topic_id Int
+    topic    topic @relation(fields: [topic_id], references: [id])
+    user_id  Int
+    user     user  @relation(fields: [user_id], references: [id])
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
 
     @@unique([topic_id, user_id])
 }
 
 model topic_favorite {
-    id         Int      @id @default(autoincrement())
-    topic_id   Int
-    user_id    Int
-    created_at DateTime @default(now())
+    id Int @id @default(autoincrement())
 
-    topic topic @relation(fields: [topic_id], references: [id])
-    user  user  @relation(fields: [user_id], references: [id])
+    topic_id Int
+    topic    topic @relation(fields: [topic_id], references: [id])
+    user_id  Int
+    user     user  @relation(fields: [user_id], references: [id])
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
 
     @@unique([topic_id, user_id])
 }

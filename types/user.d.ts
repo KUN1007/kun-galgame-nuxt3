@@ -1,5 +1,5 @@
 interface KunUser {
-  uid: number
+  id: number
   name: string
   avatar: string
 }

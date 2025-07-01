@@ -12,11 +12,9 @@ export interface KunActivityRequestData {
 }
 
 export interface KunActivity {
-  uid: number
-  name: string
-  tid: number
-  gid: number
+  user: KunUser
+  link: string
   type: MessageType
   content: string
-  time: number
+  created: Date | string
 }

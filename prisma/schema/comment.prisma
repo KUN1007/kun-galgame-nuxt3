@@ -1,33 +1,32 @@
-// Comment model
 model comment {
-  id         Int      @id @default(autoincrement())
-  reply_id   Int
-  topic_id   Int
-  user_id    Int
-  to_user_id Int
-  content    String   @db.VarChar(1007)
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id      Int    @id @default(autoincrement())
+  content String @db.VarChar(1007)
 
-  // Relations
-  topic    topic @relation(fields: [topic_id], references: [id])
-  reply    reply @relation(fields: [reply_id], references: [id])
-  user     user  @relation("user_created_comment", fields: [user_id], references: [id])
-  to_user  user  @relation("comment_target_user", fields: [to_user_id], references: [id])
-  
-  // Many-to-many relationships
-  likes    comment_like[]
+  topic_id       Int
+  topic          topic @relation(fields: [topic_id], references: [id])
+  reply_id       Int
+  reply          reply @relation(fields: [reply_id], references: [id])
+  user_id        Int
+  user           user  @relation("user_created_comment", fields: [user_id], references: [id])
+  target_user_id Int
+  target_user    user  @relation("comment_target_user", fields: [target_user_id], references: [id])
+
+  likes comment_like[]
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
 }
 
-// Comment Like junction table
 model comment_like {
-  id         Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
+
   comment_id Int
+  comment    comment @relation(fields: [comment_id], references: [id])
   user_id    Int
-  created_at DateTime @default(now())
-  
-  comment   comment @relation(fields: [comment_id], references: [id])
-  user      user    @relation(fields: [user_id], references: [id])
-  
+  user       user    @relation(fields: [user_id], references: [id])
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
   @@unique([comment_id, user_id])
-} 
+}

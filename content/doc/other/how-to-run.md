@@ -148,7 +148,7 @@ Nuxt 3.13.2 with Nitro 2.9.7
 ✔ Nuxt Nitro server built in 3180 ms
 ℹ Vite client warmed up in 1ms
 ℹ Vite server warmed up in 2343ms
-redis: 127.0.0.1:6379 connection successful! 
+redis: 127.0.0.1:6379 connection successful!
 MongoDB: mongodb://127.0.0.1:27017/kungalgame connection successful!
 ```
 

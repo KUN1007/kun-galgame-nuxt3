@@ -1,6 +1,5 @@
-import UserModel from '~/server/models/user'
-import MessageModel from '~/server/models/message'
 import { markdownToText } from '~/utils/markdownToText'
+import prisma from '~/prisma/prisma'
 import type {
   KunActivityType,
   KunActivityRequestData,
@@ -14,30 +13,38 @@ const getMessages = async (
   limit: number,
   type: KunActivityType
 ) => {
-  const skip = (page - 1) * limit
+  const offset = (page - 1) * limit
 
-  const queryData = {
-    type: type === 'all' ? { $in: allowedMessageType } : type
-  }
-  const totalCount = await MessageModel.countDocuments(queryData)
-  const data = await MessageModel.find(queryData)
-    .sort({ time: -1 })
-    .skip(skip)
-    .limit(limit)
-    .populate('user', 'name', UserModel)
-    .lean()
+  const queryData =
+    type === 'all' ? { type: { in: allowedMessageType } } : { type }
+
+  const totalCount = await prisma.message.count({
+    where: queryData
+  })
+  const data = await prisma.message.findMany({
+    where: queryData,
+    take: limit,
+    skip: offset,
+    include: {
+      sender: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true
+        }
+      }
+    }
+  })
 
   const activities: KunActivity[] = data.map((message) => ({
-    uid: message.sender_uid,
-    name: message.user[0].name,
-    tid: message.tid,
-    gid: message.gid,
+    user: message.sender,
+    link: message.link,
     type: message.type,
     content:
       message.type === 'requested' && message.content.length < 233
         ? `请求更新: ${Object.values(JSON.parse(message.content)).join(',').slice(0, 50)}`
         : markdownToText(message.content).slice(0, 50),
-    time: message.time
+    created: message.created
   }))
 
   return { activities, totalCount }

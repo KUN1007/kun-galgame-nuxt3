@@ -1,14 +1,13 @@
-// Galgame Link model
 model galgame_link {
-  id         Int      @id @default(autoincrement())
-  galgame_id Int
-  user_id    Int
-  name       String   @default("") @db.VarChar(107)
-  link       String   @default("") @db.VarChar(233)
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id   Int    @id @default(autoincrement())
+  name String @default("") @db.VarChar(107)
+  link String @default("") @db.VarChar(233)
 
-  // Relations
+  galgame_id Int
   galgame    galgame @relation(fields: [galgame_id], references: [id])
+  user_id    Int
   user       user    @relation(fields: [user_id], references: [id])
-} 
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+}

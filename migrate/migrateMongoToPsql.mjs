@@ -106,8 +106,8 @@ async function migrateUsers(userModel) {
             daily_galgame_count: user.daily_galgame_count,
             daily_image_count: user.daily_image_count,
             daily_check_in: user.daily_check_in,
-            created_at: user.created ? new Date(user.created) : new Date(),
-            updated_at: user.updated ? new Date(user.updated) : new Date()
+            created: user.created ? new Date(user.created) : new Date(),
+            updated: user.updated ? new Date(user.updated) : new Date()
           }
         })
 
@@ -158,8 +158,8 @@ async function migrateTopics(topicModel) {
             upvote_time: topic.upvote_time ? new Date(topic.upvote_time) : null,
             status: topic.status,
             edited: topic.edited,
-            created_at: topic.created ? new Date(topic.created) : new Date(),
-            updated_at: topic.updated ? new Date(topic.updated) : new Date()
+            created: topic.created ? new Date(topic.created) : new Date(),
+            updated: topic.updated ? new Date(topic.updated) : new Date()
           }
         })
 
@@ -251,8 +251,8 @@ async function migrateReplies(replyModel) {
             edited: reply.edited,
             content: reply.content,
             upvote_time: reply.upvote_time ? new Date(reply.upvote_time) : null,
-            created_at: reply.created ? new Date(reply.created) : new Date(),
-            updated_at: reply.updated ? new Date(reply.updated) : new Date()
+            created: reply.created ? new Date(reply.created) : new Date(),
+            updated: reply.updated ? new Date(reply.updated) : new Date()
           }
         })
 
@@ -322,10 +322,8 @@ async function migrateGalgames(galgameModel) {
             time: new Date(galgame.time),
             status: galgame.status,
             view: galgame.views,
-            created_at: galgame.created
-              ? new Date(galgame.created)
-              : new Date(),
-            updated_at: galgame.updated ? new Date(galgame.updated) : new Date()
+            created: galgame.created ? new Date(galgame.created) : new Date(),
+            updated: galgame.updated ? new Date(galgame.updated) : new Date()
           }
         })
 
@@ -473,12 +471,8 @@ async function migrateGalgameResources(galgameResourceModel) {
             note: resource.note || '',
             time: new Date(resource.time),
             status: resource.status,
-            created_at: resource.created
-              ? new Date(resource.created)
-              : new Date(),
-            updated_at: resource.updated
-              ? new Date(resource.updated)
-              : new Date()
+            created: resource.created ? new Date(resource.created) : new Date(),
+            updated: resource.updated ? new Date(resource.updated) : new Date()
           }
         })
 
@@ -544,10 +538,8 @@ async function migrateComments(commentModel) {
             user_id: userId,
             to_user_id: toUserId,
             content: comment.content,
-            created_at: comment.created
-              ? new Date(comment.created)
-              : new Date(),
-            updated_at: comment.updated ? new Date(comment.updated) : new Date()
+            created: comment.created ? new Date(comment.created) : new Date(),
+            updated: comment.updated ? new Date(comment.updated) : new Date()
           }
         })
 
@@ -598,10 +590,8 @@ async function migrateGalgameComments(galgameCommentModel) {
             user_id: userId,
             to_user_id: toUserId,
             content: comment.content,
-            created_at: comment.created
-              ? new Date(comment.created)
-              : new Date(),
-            updated_at: comment.updated ? new Date(comment.updated) : new Date()
+            created: comment.created ? new Date(comment.created) : new Date(),
+            updated: comment.updated ? new Date(comment.updated) : new Date()
           }
         })
 
@@ -658,8 +648,8 @@ async function migrateChatRooms(chatRoomModel) {
             last_message_sender_name: room.last_message
               ? room.last_message.sender_name || ''
               : '',
-            created_at: room.created ? new Date(room.created) : new Date(),
-            updated_at: room.updated ? new Date(room.updated) : new Date()
+            created: room.created ? new Date(room.created) : new Date(),
+            updated: room.updated ? new Date(room.updated) : new Date()
           }
         })
 
@@ -760,10 +750,8 @@ async function migrateChatMessages(chatMessageModel) {
             recalled_time: message.recalled_time
               ? new Date(message.recalled_time)
               : null,
-            created_at: message.created
-              ? new Date(message.created)
-              : new Date(),
-            updated_at: message.updated ? new Date(message.updated) : new Date()
+            created: message.created ? new Date(message.created) : new Date(),
+            updated: message.updated ? new Date(message.updated) : new Date()
           }
         })
 
@@ -848,8 +836,8 @@ async function migrateTodos(todoModel) {
               ? new Date(todo.completed_time)
               : null,
             user_id: adminUser.id,
-            created_at: todo.created ? new Date(todo.created) : new Date(),
-            updated_at: todo.updated ? new Date(todo.updated) : new Date()
+            created: todo.created ? new Date(todo.created) : new Date(),
+            updated: todo.updated ? new Date(todo.updated) : new Date()
           }
         })
 
@@ -889,8 +877,8 @@ async function migrateUpdateLogs(updateLogModel) {
             content_zh_tw: log.content['zh-tw'] || null,
             time: log.time || '',
             version: log.version || '',
-            created_at: log.created ? new Date(log.created) : new Date(),
-            updated_at: log.updated ? new Date(log.updated) : new Date()
+            created: log.created ? new Date(log.created) : new Date(),
+            updated: log.updated ? new Date(log.updated) : new Date()
           }
         })
 
@@ -940,8 +928,8 @@ async function migrateNonMoe(nonMoeModel) {
             desc_zh_tw: entry.description['zh-tw'] || null,
             time: new Date(entry.time),
             result: entry.result,
-            created_at: entry.created ? new Date(entry.created) : new Date(),
-            updated_at: entry.updated ? new Date(entry.updated) : new Date()
+            created: entry.created ? new Date(entry.created) : new Date(),
+            updated: entry.updated ? new Date(entry.updated) : new Date()
           }
         })
 
@@ -990,10 +978,8 @@ async function migrateMessages(messageModel) {
             content: message.content,
             status: message.status,
             type: message.type,
-            created_at: message.created
-              ? new Date(message.created)
-              : new Date(),
-            updated_at: message.updated ? new Date(message.updated) : new Date()
+            created: message.created ? new Date(message.created) : new Date(),
+            updated: message.updated ? new Date(message.updated) : new Date()
           }
         })
 
@@ -1053,10 +1039,8 @@ async function migrateAdminMessages(messageAdminModel) {
             content_zh_cn: message.content['zh-cn'] || null,
             content_zh_tw: message.content['zh-tw'] || null,
             status: message.status,
-            created_at: message.created
-              ? new Date(message.created)
-              : new Date(),
-            updated_at: message.updated ? new Date(message.updated) : new Date()
+            created: message.created ? new Date(message.created) : new Date(),
+            updated: message.updated ? new Date(message.updated) : new Date()
           }
         })
 
@@ -1101,8 +1085,8 @@ async function migrateReports(reportModel) {
             reason: report.reason,
             type: report.type,
             status: report.status,
-            created_at: report.created ? new Date(report.created) : new Date(),
-            updated_at: report.updated ? new Date(report.updated) : new Date()
+            created: report.created ? new Date(report.created) : new Date(),
+            updated: report.updated ? new Date(report.updated) : new Date()
           }
         })
 

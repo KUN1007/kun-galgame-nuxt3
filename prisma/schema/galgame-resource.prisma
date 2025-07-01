@@ -1,8 +1,5 @@
-// Galgame Resource model
 model galgame_resource {
   id          Int      @id @default(autoincrement())
-  galgame_id  Int
-  user_id     Int
   type        String   @default("")
   language    String   @default("")
   platform    String   @default("")
@@ -10,39 +7,44 @@ model galgame_resource {
   code        String   @default("") @db.VarChar(1007)
   password    String   @default("") @db.VarChar(1007)
   note        String   @default("") @db.VarChar(1007)
-  time        DateTime @default(now())
+  update_time DateTime @default(now())
   status      Int      @default(0)
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
 
-  // Relations
-  galgame     galgame               @relation(fields: [galgame_id], references: [id])
-  user        user                  @relation("user_to_galgame_resource", fields: [user_id], references: [id])
-  links       galgame_resource_link[]
-  likes       galgame_resource_like[]
+  galgame_id Int
+  galgame    galgame @relation(fields: [galgame_id], references: [id])
+  user_id    Int
+  user       user    @relation("user_galgame_resource", fields: [user_id], references: [id])
+
+  link galgame_resource_link[]
+  like galgame_resource_like[]
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
 }
 
-// Galgame Resource Link model
 model galgame_resource_link {
-  id                Int      @id @default(autoincrement())
+  id  Int    @id @default(autoincrement())
+  url String
+
   galgame_resource_id Int
-  url               String
-  created_at        DateTime @default(now())
-  
-  galgame_resource  galgame_resource @relation(fields: [galgame_resource_id], references: [id], onDelete: Cascade)
-  
+  galgame_resource    galgame_resource @relation(fields: [galgame_resource_id], references: [id], onDelete: Cascade)
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
   @@unique([galgame_resource_id, url])
 }
 
-// Galgame Resource Like junction table
 model galgame_resource_like {
-  id                Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
+
+  user_id             Int
+  user                user             @relation(fields: [user_id], references: [id])
   galgame_resource_id Int
-  user_id           Int
-  created_at        DateTime @default(now())
-  
-  galgame_resource  galgame_resource @relation(fields: [galgame_resource_id], references: [id])
-  user              user           @relation(fields: [user_id], references: [id])
-  
+  galgame_resource    galgame_resource @relation(fields: [galgame_resource_id], references: [id])
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
   @@unique([galgame_resource_id, user_id])
-} 
+}

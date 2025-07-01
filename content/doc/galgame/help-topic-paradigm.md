@@ -31,7 +31,7 @@ pin: false
 
 如果有朋友想要发布求助，可以参考该话题发布求助
 
-------
+---
 
 ## 问题
 
@@ -88,8 +88,6 @@ Win10 Pro 21h2, Inter Core i7, 英文版 / 中文版，64 - bit，已安装 Visu
 ![鲲-1723469252640-3cf0b545a983bf1apng](https://image.kungal.com/topic/user_2/%E9%B2%B2-1723469252596.webp)
 
 ![鲲-1723469260896-a7a20df36cee9cfapng](https://image.kungal.com/topic/user_2/%E9%B2%B2-1723469261248.webp)
-
-
 
 ## Arch Linux x86-64 实机环境
 
