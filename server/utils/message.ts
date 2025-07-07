@@ -1,57 +1,65 @@
-import MessageModel from '../models/message'
+import type { Prisma, PrismaClient } from '@prisma/client'
+import type { DefaultArgs } from '~/prisma/client/runtime/library'
 import type { MessageType } from '~/types/api/message'
 
 export const createMessage = async (
-  senderUid: number,
-  receiverUid: number,
+  prisma: Omit<
+    PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>,
+    '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'
+  >,
+  sender_id: number,
+  receiver_id: number,
   type: MessageType,
   content: string,
-  tid: number,
-  gid: number
+  topicId?: number,
+  galgameId?: number
 ) => {
-  const newTopic = new MessageModel({
-    sender_uid: senderUid,
-    receiver_uid: receiverUid,
-    time: Date.now(),
-    type,
-    content,
-    tid,
-    gid
+  const link = topicId ? `/topic/${topicId}` : `/galgame/${galgameId}`
+
+  const newMessage = await prisma.message.create({
+    data: {
+      sender_id,
+      receiver_id,
+      type,
+      content,
+      link
+    }
   })
 
-  return await newTopic.save()
+  return newMessage
 }
 
-// When user toggle like ans dislike, maybe send deduplication request
+// When user toggle like ans dislike, maybe send a duplicate request
 export const createDedupMessage = async (
-  senderUid: number,
-  receiverUid: number,
+  prisma: Omit<
+    PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>,
+    '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'
+  >,
+  sender_id: number,
+  receiver_id: number,
   type: MessageType,
   content: string,
-  tid: number,
-  gid: number
+  topicId?: number,
+  galgameId?: number
 ) => {
-  const duplicatedMessage = await MessageModel.findOne({
-    sender_uid: senderUid,
-    receiver_uid: receiverUid,
-    type,
-    content,
-    tid,
-    gid
+  const link = topicId ? `/topic/${topicId}` : `/galgame/${galgameId}`
+
+  const duplicatedMessage = await prisma.message.findFirst({
+    where: { sender_id, receiver_id, type, content, link }
   })
   if (duplicatedMessage) {
     return
   }
 
-  const newTopic = new MessageModel({
-    sender_uid: senderUid,
-    receiver_uid: receiverUid,
-    time: Date.now(),
-    type,
-    content,
-    tid,
-    gid
+  const newMessage = await prisma.message.create({
+    data: {
+      sender_id,
+      receiver_id,
+      type,
+      content,
+      link
+    }
   })
 
-  return await newTopic.save()
+  return newMessage
 }

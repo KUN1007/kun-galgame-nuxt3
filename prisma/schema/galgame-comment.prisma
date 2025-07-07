@@ -9,7 +9,7 @@ model galgame_comment {
   target_user_id Int?
   target_user    user?   @relation("galgame_comment_target_user", fields: [target_user_id], references: [id])
 
-  likes galgame_comment_like[]
+  like galgame_comment_like[]
 
   created DateTime @default(now())
   updated DateTime @updatedAt

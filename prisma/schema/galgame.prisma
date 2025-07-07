@@ -1,10 +1,10 @@
 model galgame {
   id                   Int      @id @default(autoincrement())
   vndb_id              String   @db.VarChar(10)
-  name_en_us           String   @default("") @db.Text
-  name_ja_jp           String   @default("") @db.Text
-  name_zh_cn           String   @default("") @db.Text
-  name_zh_tw           String   @default("") @db.Text
+  name_en_us           String   @default("") @db.VarChar(1000)
+  name_ja_jp           String   @default("") @db.VarChar(1000)
+  name_zh_cn           String   @default("") @db.VarChar(1000)
+  name_zh_tw           String   @default("") @db.VarChar(1000)
   banner               String   @default("") @db.VarChar(233)
   intro_en_us          String   @default("") @db.Text
   intro_ja_jp          String   @default("") @db.Text
@@ -15,22 +15,21 @@ model galgame {
   view                 Int      @default(0)
   resource_update_time DateTime @default(now())
 
-  user_id Int
-  user    user @relation("user_galgame", fields: [user_id], references: [id])
+  user_id   Int
+  user      user            @relation("user_galgame", fields: [user_id], references: [id])
+  series_id Int?
+  series    galgame_series? @relation(fields: [series_id], references: [id])
 
   resource galgame_resource[]
   comment  galgame_comment[]
   link     galgame_link[]
   pr       galgame_pr[]
   history  galgame_history[]
-
-  types    galgame_type[]
-  language galgame_language[]
-  platform galgame_platform[]
   alias    galgame_alias[]
-  official galgame_official[]
-  engine   galgame_engine[]
-  tag      galgame_tag[]
+
+  official galgame_official_relation[]
+  engine   galgame_engine_relation[]
+  tag      galgame_tag_relation[]
 
   like        galgame_like[]
   favorite    galgame_favorite[]
@@ -40,43 +39,15 @@ model galgame {
   updated DateTime @updatedAt
 }
 
-model galgame_type {
-  id   Int    @id @default(autoincrement())
-  name String @default("")
+model galgame_series {
+  id          Int    @id @default(autoincrement())
+  name        String @unique @default("") @db.VarChar(1000)
+  description String @default("") @db.VarChar(2000)
 
-  galgame_id Int
-  galgame    galgame @relation(fields: [galgame_id], references: [id])
-
-  created DateTime @default(now())
-  updated DateTime @updatedAt
-
-  @@unique([galgame_id, name])
-}
-
-model galgame_language {
-  id   Int    @id @default(autoincrement())
-  name String @default("")
-
-  galgame_id Int
-  galgame    galgame @relation(fields: [galgame_id], references: [id])
+  galgame galgame[]
 
   created DateTime @default(now())
   updated DateTime @updatedAt
-
-  @@unique([galgame_id, name])
-}
-
-model galgame_platform {
-  id   Int    @id @default(autoincrement())
-  name String @default("")
-
-  galgame_id Int
-  galgame    galgame @relation(fields: [galgame_id], references: [id])
-
-  created DateTime @default(now())
-  updated DateTime @updatedAt
-
-  @@unique([galgame_id, name])
 }
 
 model galgame_alias {
@@ -85,47 +56,6 @@ model galgame_alias {
 
   galgame_id Int
   galgame    galgame @relation(fields: [galgame_id], references: [id])
-
-  created DateTime @default(now())
-  updated DateTime @updatedAt
-
-  @@unique([galgame_id, name])
-}
-
-model galgame_official {
-  id  Int    @id @default(autoincrement())
-  url String @default("")
-
-  galgame_id Int
-  galgame    galgame @relation(fields: [galgame_id], references: [id])
-
-  created DateTime @default(now())
-  updated DateTime @updatedAt
-
-  @@unique([galgame_id, url])
-}
-
-model galgame_engine {
-  id   Int    @id @default(autoincrement())
-  name String @default("")
-
-  galgame_id Int
-  galgame    galgame @relation(fields: [galgame_id], references: [id])
-
-  created DateTime @default(now())
-  updated DateTime @updatedAt
-
-  @@unique([galgame_id, name])
-}
-
-model galgame_tag {
-  id   Int    @id @default(autoincrement())
-  name String @default("")
-
-  galgame_id Int
-  galgame    galgame @relation(fields: [galgame_id], references: [id])
-  user_id    Int
-  user       user    @relation(fields: [user_id], references: [id])
 
   created DateTime @default(now())
   updated DateTime @updatedAt
@@ -173,4 +103,73 @@ model galgame_contributor {
   updated DateTime @updatedAt
 
   @@unique([galgame_id, user_id])
+}
+
+// official, engine, tag instances will auto created by our system
+
+model galgame_official {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  url  String @unique @default("")
+
+  galgame galgame_official_relation[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model galgame_engine {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  galgame galgame_engine_relation[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model galgame_tag {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  galgame galgame_tag_relation[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model galgame_official_relation {
+  galgame_id  Int
+  galgame     galgame          @relation(fields: [galgame_id], references: [id])
+  official_id Int
+  official    galgame_official @relation(fields: [official_id], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([galgame_id, official_id])
+}
+
+model galgame_engine_relation {
+  galgame_id Int
+  galgame    galgame        @relation(fields: [galgame_id], references: [id])
+  engine_id  Int
+  engine     galgame_engine @relation(fields: [engine_id], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([galgame_id, engine_id])
+}
+
+model galgame_tag_relation {
+  galgame_id Int
+  galgame    galgame     @relation(fields: [galgame_id], references: [id])
+  tag_id     Int
+  tag        galgame_tag @relation(fields: [tag_id], references: [id])
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([galgame_id, tag_id])
 }

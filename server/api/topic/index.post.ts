@@ -1,97 +1,70 @@
-import mongoose from 'mongoose'
-import TopicModel from '~/server/models/topic'
-import UserModel from '~/server/models/user'
-import { checkTopicPublish } from './utils/checkTopicPublish'
-import type { H3Event } from 'h3'
-import type { EditCreateTopicRequestData } from '~/types/api/topic'
-
-const readTopicData = async (event: H3Event) => {
-  const {
-    title,
-    content,
-    time,
-    tags,
-    category,
-    section
-  }: EditCreateTopicRequestData = await readBody(event)
-
-  const res = checkTopicPublish(
-    title,
-    content,
-    tags,
-    category,
-    section,
-    parseInt(time)
-  )
-  if (res) {
-    return kunError(event, res)
-  }
-
-  const userInfo = await getCookieTokenInfo(event)
-  if (!userInfo) {
-    return kunError(event, 10115, 205)
-  }
-  const uid = userInfo.uid
-
-  const deduplicatedTags = Array.from(new Set(tags))
-
-  return {
-    title,
-    content,
-    time,
-    tags: deduplicatedTags,
-    category,
-    section,
-    uid
-  }
-}
+import { subDays } from 'date-fns'
+import prisma from '~/prisma/prisma'
+import { createTopicSchema } from '~/validations/topic'
 
 export default defineEventHandler(async (event) => {
-  const result = await readTopicData(event)
-  if (!result) {
-    return
+  const input = await kunParsePutBody(event, createTopicSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
-  const { title, content, time, tags, category, section, uid } = result
+  const userInfo = await getCookieTokenInfo(event)
+  if (!userInfo) {
+    return kunError(event, '用户登录失效', 205)
+  }
 
-  const user = await UserModel.findOne({ uid })
+  const user = await prisma.user.findUnique({
+    where: { id: userInfo.uid },
+    include: {
+      topic: {
+        where: {
+          created: {
+            gte: subDays(new Date(), 1)
+          }
+        }
+      }
+    }
+  })
   if (!user) {
-    return kunError(event, 10101)
+    return kunError(event, '未找到该用户')
+  }
+  if (user.moemoepoint / 10 + 1 < user.topic.length) {
+    return kunError(
+      event,
+      '您今日发布的话题已经达到上限, 您每天可以发布您的 (萌萌点 / 10) + 1 个话题'
+    )
   }
 
-  if (user.moemoepoint / 10 < user.daily_topic_count) {
-    return kunError(event, 10201)
-  }
+  const { section, ...topicData } = input
 
-  const session = await mongoose.startSession()
-  session.startTransaction()
-  try {
-    const newTopic = await TopicModel.create({
-      title,
-      content,
-      time,
-      tags,
-      category,
-      section,
-      uid
+  return await prisma.$transaction(async (prisma) => {
+    const newTopic = await prisma.topic.create({
+      data: {
+        ...topicData,
+        user_id: userInfo.uid
+      }
     })
 
-    await UserModel.updateOne(
-      { uid },
-      {
-        $addToSet: { topic: newTopic.tid },
-        $inc: { daily_topic_count: 1 }
+    const sections = await prisma.topic_section.findMany({
+      where: { name: { in: section } },
+      select: {
+        id: true
       }
-    )
+    })
+    const newSectionIds = sections.map((s) => s.id)
+    const dataToCreate = newSectionIds.map((sectionId) => ({
+      topic_id: newTopic.id,
+      topic_section_id: sectionId
+    }))
+    await prisma.topic_section_relation.createMany({
+      data: dataToCreate,
+      skipDuplicates: true
+    })
 
-    await createTagsByTidAndRid(newTopic.tid, 0, tags, category)
+    await prisma.user.update({
+      where: { id: userInfo.uid },
+      data: { moemoepoint: { increment: 3 } }
+    })
 
-    await session.commitTransaction()
-
-    return newTopic.tid
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
+    return newTopic.id
+  })
 })

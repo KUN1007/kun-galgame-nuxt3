@@ -30,3 +30,6 @@ package.json
 
 # sitemap
 public/*.xml
+
+# prisma generated
+prisma/client

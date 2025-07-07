@@ -1,57 +1,53 @@
-import mongoose from 'mongoose'
-import UserModel from '~/server/models/user'
-import ReplyModel from '~/server/models/reply'
-
-const updateReplyDislike = async (uid: number, rid: number) => {
-  const reply = await ReplyModel.findOne({ rid })
-  if (!reply) {
-    return 10506
-  }
-
-  if (uid === reply.r_uid) {
-    return
-  }
-
-  const isDislikedReply = reply.dislikes.includes(uid)
-  const amount = isDislikedReply ? -1 : 1
-
-  const session = await mongoose.startSession()
-  session.startTransaction()
-
-  try {
-    await ReplyModel.updateOne(
-      { rid },
-      { [isDislikedReply ? '$pull' : '$addToSet']: { dislikes: uid } }
-    )
-
-    await UserModel.updateOne(
-      { uid: reply.r_uid },
-      { $inc: { dislike: amount } }
-    )
-
-    await session.commitTransaction()
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
-}
+import prisma from '~/prisma/prisma'
+import { updateReplyDislikeSchema } from '~/validations/topic'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
+  }
+  const uid = userInfo.uid
+
+  const input = await kunParsePutBody(event, updateReplyDislikeSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const { rid }: { rid: string } = await getQuery(event)
-  if (!rid) {
-    return kunError(event, 10507)
+  const reply = await prisma.topic_reply.findUnique({
+    where: { id: input.replyId, user_id: uid },
+    include: {
+      dislike: {
+        where: {
+          user_id: uid
+        }
+      }
+    }
+  })
+  if (!reply) {
+    return kunError(event, '未找到该回复')
+  }
+  if (reply.user_id === uid) {
+    return kunError(event, '您不能给自己点踩')
   }
 
-  const result = await updateReplyDislike(userInfo.uid, parseInt(rid))
-  if (typeof result === 'number') {
-    return kunError(event, result)
+  const isDislikedReply = reply.dislike.length > 0
+
+  if (isDislikedReply) {
+    await prisma.topic_reply_dislike.delete({
+      where: {
+        user_id_topic_reply_id: {
+          user_id: uid,
+          topic_reply_id: input.replyId
+        }
+      }
+    })
+  } else {
+    await prisma.topic_reply_dislike.create({
+      data: {
+        user_id: uid,
+        topic_reply_id: input.replyId
+      }
+    })
   }
 
   return 'MOEMOE dislike reply successfully!'

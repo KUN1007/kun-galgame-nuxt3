@@ -1,0 +1,15 @@
+model unmoe {
+  id         Int    @id @default(autoincrement())
+  name       String
+  result     String @default("")
+  desc_en_us String @default("") @db.Text
+  desc_ja_jp String @default("") @db.Text
+  desc_zh_cn String @default("") @db.Text
+  desc_zh_tw String @default("") @db.Text
+
+  user_id Int
+  user    user @relation(fields: [user_id], references: [id])
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+}

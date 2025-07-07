@@ -24,13 +24,20 @@ export interface MessageRequestData {
 }
 
 export interface Message {
-  mid: number
+  id: number
   sender: KunUser
   receiverUid: number
-  time: number
-  tid: number
-  gid: number
+  link: string
   content: string
   status: MessageStatus
   type: MessageType
+  created: Date | string
+}
+
+export interface SystemMessage {
+  id: number
+  status: MessageStatus
+  content: KunNullable<KunLanguage>
+  admin: KunUser
+  created: Date | string
 }

@@ -1,14 +1,16 @@
-import UserModel from '~/server/models/user'
+import prisma from '~/prisma/prisma'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
 
-  const user = await UserModel.findOne({ uid: userInfo.uid })
+  const user = await prisma.user.findUnique({
+    where: { id: userInfo.uid }
+  })
   if (!user) {
-    return kunError(event, 10101)
+    return kunError(event, '未找到该用户')
   }
 
   const email = user.email

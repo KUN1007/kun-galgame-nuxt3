@@ -1,40 +1,36 @@
-import UpdateLogModel from '~/server/models/update-log'
-import type {
-  GetUpdateLogRequestData,
-  UpdateType,
-  UpdateLog
-} from '~/types/api/update-log'
+import prisma from '~/prisma/prisma'
+import { getUpdateLogSchema } from '~/validations/update-log'
+import type { UpdateType, UpdateLog } from '~/types/api/update-log'
 
-const getUpdateLogs = async (page: number, limit: number) => {
+export default defineEventHandler(async (event) => {
+  const input = kunParseGetQuery(event, getUpdateLogSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
+  }
+
+  const { page, limit } = input
+
   const skip = (page - 1) * limit
-  const totalCount = await UpdateLogModel.countDocuments().lean()
+  const totalCount = await prisma.update_log.count()
 
-  const updateLogs = await UpdateLogModel.find()
-    .sort({ upid: -1 })
-    .skip(skip)
-    .limit(limit)
+  const updateLogs = await prisma.update_log.findMany({
+    skip,
+    take: limit,
+    orderBy: { created: 'desc' }
+  })
 
   const updates: UpdateLog[] = updateLogs.map((log) => ({
-    upid: log.upid,
+    id: log.id,
     type: log.type as UpdateType,
-    content: log.content,
-    time: log.time,
-    version: log.version
+    content: {
+      'en-us': log.content_en_us,
+      'ja-jp': log.content_ja_jp,
+      'zh-cn': log.content_zh_cn,
+      'zh-tw': log.content_zh_tw
+    },
+    version: log.version,
+    created: log.created
   }))
 
   return { updates, totalCount }
-}
-
-export default defineEventHandler(async (event) => {
-  const { page, limit }: GetUpdateLogRequestData = await getQuery(event)
-  if (!page || !limit) {
-    return kunError(event, 10507)
-  }
-  if (limit !== '10') {
-    return kunError(event, 10209)
-  }
-
-  const updates = await getUpdateLogs(parseInt(page), parseInt(limit))
-
-  return updates
 })

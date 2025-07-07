@@ -1,44 +1,83 @@
-import UserModel from '~/server/models/user'
-import ReplyModel from '~/server/models/reply'
+import prisma from '~/prisma/prisma'
+import { getUserReplySchema } from '~/validations/user'
+import type { Prisma } from '@prisma/client'
 import type { UserReply } from '~/types/api/user'
 
 export default defineEventHandler(async (event) => {
-  const uid = getRouterParam(event, 'uid')
-  if (!uid) {
-    return kunError(event, 10101)
+  const input = kunParseGetQuery(event, getUserReplySchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const { page, limit }: { page: string; limit: string } = await getQuery(event)
-  if (!page || !limit) {
-    return kunError(event, 10507)
+  const userInfo = await getCookieTokenInfo(event)
+  if (!userInfo) {
+    return kunError(event, '用户登录失效', 205)
   }
-  if (limit !== '50') {
-    return kunError(event, 10209)
+  const userId = userInfo.uid
+
+  const { page, limit, type } = input
+  const skip = (page - 1) * limit
+
+  let whereClause: Prisma.topic_replyWhereInput = {}
+
+  switch (type) {
+    case 'reply_created':
+      whereClause = {
+        user_id: userId
+      }
+      break
+    case 'reply_like':
+      whereClause = {
+        like: {
+          some: {
+            user_id: userId
+          }
+        }
+      }
+      break
+    case 'reply_target':
+      whereClause = {
+        target: {
+          some: {
+            target_reply: {
+              user_id: userId
+            }
+          }
+        }
+      }
+      break
+    default:
+      return kunError(event, '无效的类型参数', 400)
   }
-  const skip = (parseInt(page) - 1) * parseInt(limit)
 
-  const user = await UserModel.findOne({ uid }).lean()
-  if (!user) {
-    return kunError(event, 10114)
-  }
+  const [replies, totalCount] = await prisma.$transaction([
+    prisma.topic_reply.findMany({
+      where: whereClause,
+      select: {
+        topic_id: true,
+        content: true,
+        created: true
+      },
+      orderBy: {
+        created: 'desc'
+      },
+      skip: skip,
+      take: limit
+    }),
 
-  const totalCount = await ReplyModel.countDocuments({
-    rid: { $in: user.reply },
-    status: { $ne: 1 }
-  }).lean()
-  const data = await ReplyModel.find({
-    rid: { $in: user.reply },
-    status: { $ne: 1 }
-  })
-    .sort({ created: -1 })
-    .skip(skip)
-    .limit(parseInt(limit))
-    .lean()
+    prisma.topic_reply.count({
+      where: whereClause
+    })
+  ])
 
-  const replies: UserReply[] = data.map((reply) => ({
-    tid: reply.tid,
-    content: reply.content.substring(0, 107),
-    time: reply.time
+  const formattedReplies: UserReply[] = replies.map((reply) => ({
+    topicId: reply.topic_id,
+    content: reply.content,
+    created: reply.created
   }))
-  return { replies, totalCount }
+
+  return {
+    replies: formattedReplies,
+    totalCount: totalCount
+  }
 })

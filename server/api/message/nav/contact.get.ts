@@ -1,61 +1,95 @@
-import UserModel from '~/server/models/user'
-import ChatRoomModel from '~/server/models/chat-room'
-import ChatMessageModel from '~/server/models/chat-message'
+import prisma from '~/prisma/prisma'
 import type { AsideItem } from '~/types/api/chat-message'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
-
   const userId = userInfo.uid
 
-  const chatRooms = await ChatRoomModel.find({
-    participants: userId,
-    'last_message.sender_uid': { $ne: 0 }
-  }).sort({
-    'last_message.time': -1
+  const chatRooms = await prisma.chat_room.findMany({
+    where: {
+      participant: {
+        some: { user_id: userId }
+      },
+      last_message_sender_id: {
+        not: 0
+      },
+      last_message_time: {
+        not: null
+      }
+    },
+    orderBy: {
+      last_message_time: 'desc'
+    },
+    include: {
+      participant: {
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              avatar: true
+            }
+          }
+        }
+      },
+      message: {
+        where: {
+          sender_id: {
+            not: userId
+          },
+          read_by: {
+            none: {
+              user_id: userId
+            }
+          }
+        },
+        select: {
+          id: true
+        }
+      },
+      _count: {
+        select: {
+          message: true
+        }
+      }
+    }
   })
 
   if (!chatRooms.length) {
     return []
   }
 
-  const asideItems: AsideItem[] = await Promise.all(
-    chatRooms.map(async (chatRoom) => {
-      const lastMessage = chatRoom.last_message
+  const asideItems: AsideItem[] = chatRooms.map((room) => {
+    let title = room.name
+    let avatar = room.avatar
+    let route = room.name
 
-      const readCount = await ChatMessageModel.countDocuments({
-        chatroom_name: chatRoom.name
-      })
+    if (room.type === 'private') {
+      const otherParticipant = room.participant.find(
+        (p) => p.user_id !== userId
+      )
 
-      const unreadCount = await ChatMessageModel.countDocuments({
-        chatroom_name: chatRoom.name,
-        sender_uid: { $ne: userId },
-        'read_by.uid': { $ne: userId }
-      })
-
-      const receiverUid = chatRoom.participants.filter((p) => p !== userId)[0]
-      const receiver = await UserModel.findOne({ uid: receiverUid }).lean()
-
-      const chatRoute =
-        chatRoom.type === 'private' ? receiverUid.toString() : chatRoom.name
-      const chatAvatar =
-        chatRoom.type === 'private' ? receiver!.avatar : chatRoom.avatar
-
-      return {
-        chatroomName: chatRoom.name,
-        content: lastMessage.content,
-        time: lastMessage.time,
-        count: readCount,
-        unreadCount: unreadCount,
-        route: chatRoute,
-        title: receiver!.name,
-        avatar: chatAvatar
+      if (otherParticipant && otherParticipant.user) {
+        title = otherParticipant.user.name
+        avatar = otherParticipant.user.avatar
+        route = otherParticipant.user_id.toString()
       }
-    })
-  )
+    }
+
+    return {
+      chatroomName: room.name,
+      content: room.last_message_content,
+      lastMessageTime: room.last_message_time || '',
+      count: room._count.message,
+      unreadCount: room.message.length,
+      route: route,
+      title: title,
+      avatar: avatar
+    }
+  })
 
   return asideItems
 })

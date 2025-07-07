@@ -1,80 +1,54 @@
-import TopicModel from '~/server/models/topic'
-import mongoose from 'mongoose'
-import { checkTopicPublish } from '../utils/checkTopicPublish'
-import type { EditUpdateTopicRequestData } from '~/types/api/topic'
-
-const updateTopic = async (
-  uid: number,
-  tid: number,
-  title: string,
-  content: string,
-  tags: string[],
-  category: string[],
-  section: string[],
-  edited: number
-) => {
-  const session = await mongoose.startSession()
-  session.startTransaction()
-  try {
-    await TopicModel.updateOne(
-      { tid, uid },
-      { title, content, tags, category, section, edited }
-    )
-
-    await updateTagsByTidAndRid(tid, 0, tags, category)
-
-    await session.commitTransaction()
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
-}
+import prisma from '~/prisma/prisma'
+import { updateTopicSchema } from '~/validations/topic'
 
 export default defineEventHandler(async (event) => {
-  const tid = getRouterParam(event, 'tid')
-  if (!tid) {
-    return kunError(event, 10210)
+  const input = await kunParsePutBody(event, updateTopicSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
-
-  const {
-    title,
-    content,
-    tags,
-    category,
-    section,
-    edited
-  }: EditUpdateTopicRequestData = await readBody(event)
-
-  const res = checkTopicPublish(
-    title,
-    content,
-    tags,
-    category,
-    section,
-    parseInt(edited)
-  )
-  if (res) {
-    return kunError(event, res)
-  }
-
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
-  const uid = userInfo.uid
 
-  await updateTopic(
-    uid,
-    parseInt(tid),
-    title,
-    content,
-    tags,
-    category,
-    section,
-    parseInt(edited)
-  )
+  const { topicId, section, ...topicData } = input
 
-  return 'MOEMOE update topic successfully!'
+  return await prisma.$transaction(async (prisma) => {
+    await prisma.topic.update({
+      where: { id: topicId, user_id: userInfo.uid },
+      data: {
+        ...topicData,
+        edited: new Date()
+      }
+    })
+
+    const sections = await prisma.topic_section.findMany({
+      where: { name: { in: section } },
+      select: {
+        id: true
+      }
+    })
+    const newSectionIds = sections.map((s) => s.id)
+
+    await prisma.topic_section_relation.deleteMany({
+      where: {
+        topic_id: topicId,
+        topic_section_id: {
+          notIn: newSectionIds
+        }
+      }
+    })
+
+    const dataToCreate = newSectionIds.map((sectionId) => ({
+      topic_id: topicId,
+      topic_section_id: sectionId
+    }))
+
+    await prisma.topic_section_relation.createMany({
+      data: dataToCreate,
+      skipDuplicates: true
+    })
+
+    return 'MOEMOE update topic successfully!'
+  })
 })

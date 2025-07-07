@@ -1,72 +1,63 @@
-import mongoose from 'mongoose'
-import GalgameModel from '~/server/models/galgame'
-import GalgameCommentModel from '~/server/models/galgame-comment'
-import UserModel from '~/server/models/user'
+import prisma from '~/prisma/prisma'
+import { deleteGalgameCommentSchema } from '~/validations/galgame'
 
 export default defineEventHandler(async (event) => {
-  const gid = getRouterParam(event, 'gid')
-  if (!gid) {
-    return kunError(event, 10507)
-  }
-  const galgame = await GalgameModel.findOne({ gid }).lean()
-  if (!galgame) {
-    return kunError(event, 10610)
+  const input = kunParseDeleteQuery(event, deleteGalgameCommentSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const { gcid }: { gcid: string } = await getQuery(event)
-  if (!gcid) {
-    return kunError(event, 10507)
-  }
-
-  const comment = await GalgameCommentModel.findOne({ gcid }).lean()
+  const comment = await prisma.galgame_comment.findUnique({
+    where: { id: input.galgameCommentId },
+    include: {
+      _count: { select: { like: true } },
+      galgame: {
+        select: {
+          user_id: true
+        }
+      }
+    }
+  })
   if (!comment) {
     return
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
-  const user = await UserModel.findOne({ uid: userInfo.uid }).lean()
+  const user = await prisma.user.findUnique({
+    where: { id: userInfo.uid }
+  })
   if (!user) {
-    return kunError(event, 10101)
+    return kunError(event, '未找到用户')
   }
 
   if (
-    comment.c_uid !== user.uid &&
-    galgame.uid !== user.uid &&
-    user.roles < 2
+    comment.user_id !== user.id &&
+    comment.galgame.user_id !== user.id &&
+    user.role < 2
   ) {
-    return kunError(event, 10639)
+    return kunError(event, '您没有权限删除该评论')
   }
 
-  const session = await mongoose.startSession()
-  session.startTransaction()
-  try {
-    if (comment.to_uid && comment.c_uid !== comment.to_uid) {
-      await UserModel.updateOne(
-        { uid: comment.to_uid },
-        { $inc: { moemoepoint: -1 } }
-      )
+  return await prisma.$transaction(async (prisma) => {
+    if (comment.target_user_id && comment.user_id !== comment.target_user_id) {
+      await prisma.user.update({
+        where: { id: comment.target_user_id },
+        data: { moemoepoint: { increment: -1 } }
+      })
     }
 
-    await UserModel.updateOne(
-      { uid: comment.c_uid },
-      {
-        $inc: {
-          moemoepoint: -comment.likes.length,
-          like: -comment.likes.length
-        }
-      }
-    )
+    await prisma.user.update({
+      where: { id: comment.user_id },
+      data: { moemoepoint: { increment: -comment._count.like } }
+    })
 
-    await GalgameCommentModel.deleteOne({ gcid })
+    await prisma.galgame_comment.delete({
+      where: { id: input.galgameCommentId }
+    })
 
     return 'MOEMOE delete visualnovel comment successfully!'
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
+  })
 })

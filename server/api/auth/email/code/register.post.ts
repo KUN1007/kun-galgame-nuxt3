@@ -1,39 +1,44 @@
-import UserModel from '~/server/models/user'
-import { isValidEmail } from '~/utils/validate'
+import prisma from '~/prisma/prisma'
 import { KUN_ALLOW_REGISTER_EMAIL } from '~/config/email-whitelist'
 import {
   ADMIN_DELETE_EMAIL_CACHE_KEY,
   ADMIN_DELETE_IP_CACHE_KEY,
   KUN_FORUM_DISABLE_REGISTER_KEY
 } from '~/config/admin'
-import type { RegisterVerificationCodeRequestData } from '~/types/api/auth'
+import { createSendRegisterVerificationCodeSchema } from '~/validations/auth'
 
 export default defineEventHandler(async (event) => {
-  const { name, email }: RegisterVerificationCodeRequestData =
-    await readBody(event)
-  if (!isValidEmail(email)) {
-    return kunError(event, 10302)
+  const input = await kunParsePostBody(
+    event,
+    createSendRegisterVerificationCodeSchema
+  )
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
+  const { name, email } = input
 
   const isDisableRegister = await useStorage('redis').getItem(
     KUN_FORUM_DISABLE_REGISTER_KEY
   )
   if (isDisableRegister) {
-    return kunError(event, 10308)
+    return kunError(
+      event,
+      '由于网站近日遭受大量攻击，当前时间段暂时不可注册，请明天下午再来，一定要来哦 (-B)'
+    )
   }
 
   const isDeletedUserEmail = await useStorage('redis').getItem(
     `${ADMIN_DELETE_EMAIL_CACHE_KEY}:${email}`
   )
   if (isDeletedUserEmail) {
-    return kunError(event, 10306)
+    return kunError(event, '您已经被永久封禁')
   }
   const authUserIp = getRemoteIp(event)
   const isDeletedUserIp = await useStorage('redis').getItem(
     `${ADMIN_DELETE_IP_CACHE_KEY}:${authUserIp}`
   )
   if (isDeletedUserIp) {
-    return kunError(event, 10307)
+    return kunError(event, '您已经被永久封禁')
   }
 
   const emailDomain = email.split('@')[1]
@@ -41,25 +46,27 @@ export default defineEventHandler(async (event) => {
     (whitelistedDomain) => whitelistedDomain === emailDomain
   )
   if (!isEmailAllowed) {
-    return kunError(event, 10305)
+    return kunError(event, '您的邮箱地址暂时不受支持, 请换一个邮箱试试')
   }
 
-  const usernameCount = await UserModel.countDocuments({
-    name: { $regex: new RegExp('^' + name + '$', 'i') }
+  const existUser = await prisma.user.findFirst({
+    where: { name: { equals: name.toLowerCase(), mode: 'insensitive' } }
   })
-  if (usernameCount > 0) {
-    return kunError(event, 10105)
+  if (existUser) {
+    return kunError(event, '您的用户名已经被使用了, 请换一个试试')
   }
 
-  const emailCount = await UserModel.countDocuments({ email })
-  if (emailCount > 0) {
-    return kunError(event, 10104)
+  const existEmail = await prisma.user.findFirst({
+    where: { email }
+  })
+  if (existEmail) {
+    return kunError(event, '您的邮箱已经被使用了, 请换一个试试')
   }
 
   const result = await sendVerificationCodeEmail(event, email, 'register')
-  if (typeof result === 'number') {
+  if (typeof result === 'string') {
     return kunError(event, result)
   }
 
-  return result
+  return result.salt
 })

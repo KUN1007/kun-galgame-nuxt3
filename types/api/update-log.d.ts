@@ -1,13 +1,3 @@
-export interface GetTodoRequestData {
-  page: string
-  limit: string
-}
-
-export interface GetUpdateLogRequestData {
-  page: string
-  limit: string
-}
-
 export type UpdateType =
   | 'feat'
   | 'pref'
@@ -21,17 +11,17 @@ export type UpdateType =
   | 'test'
 
 export interface Todo {
-  todoId: number
+  id: number
   status: number
   content: KunLanguage
-  time: number
-  completedTime: number
+  completedTime: Date | string | null
+  created: Date | string
 }
 
 export interface UpdateLog {
-  upid: number
+  id: number
   type: UpdateType
   content: KunLanguage
-  time: string
   version: string
+  created: Date | string
 }

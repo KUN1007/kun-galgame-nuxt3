@@ -1,36 +1,30 @@
-import UserModel from '~/server/models/user'
-import MessageModel from '~/server/models/message'
-import MessageAdminModel from '~/server/models/message-admin'
-import ChatMessageModel from '~/server/models/chat-message'
+import prisma from '~/prisma/prisma'
 import type { HomeUserStatus } from '~/types/api/home'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
   const uid = userInfo.uid
 
-  const user = await UserModel.findOne(
-    { uid },
-    { moemoepoint: 1, daily_check_in: 1, _id: 0 }
-  )
+  const user = await prisma.user.findUnique({
+    where: { id: uid }
+  })
   if (!user) {
-    return kunError(event, 10101)
+    return kunError(event, '未找到该用户')
   }
 
-  const message = await MessageModel.findOne({
-    receiver_uid: uid,
-    status: 'unread'
+  const message = await prisma.message.count({
+    where: { receiver_id: uid, status: 'unread' }
   })
 
-  const messageAdmin = await MessageAdminModel.findOne({
-    status: 'unread'
+  const messageAdmin = await prisma.message.count({
+    where: { status: 'unread' }
   })
 
-  const chatMessage = await ChatMessageModel.findOne({
-    receiver_uid: uid,
-    'read_by.uid': { $ne: uid }
+  const chatMessage = await prisma.chat_message.count({
+    where: { receiver_id: uid, read_by: { some: { user_id: { not: uid } } } }
   })
 
   const responseData: HomeUserStatus = {

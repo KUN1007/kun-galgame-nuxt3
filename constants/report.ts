@@ -25,4 +25,4 @@ export const reportSection = [
   'user',
   'galgame',
   'galgameComment'
-]
+] as const

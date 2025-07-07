@@ -1,24 +1,29 @@
-import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
+import prisma from '~/prisma/prisma'
 import type { TopicRSS } from '~/types/api/rss'
 
 export default defineEventHandler(async (event) => {
-  const data = await TopicModel.find()
-    .sort({ created: 'desc' })
-    .limit(10)
-    .populate('user', 'uid avatar name', UserModel)
-    .lean()
+  const data = await prisma.topic.findMany({
+    orderBy: {
+      created: 'desc'
+    },
+    take: 10,
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true
+        }
+      }
+    }
+  })
 
   const topics: TopicRSS[] = data.map((topic) => ({
-    tid: topic.tid,
+    id: topic.id,
     name: topic.title,
-    user: {
-      uid: topic.user[0].uid,
-      name: topic.user[0].name,
-      avatar: topic.user[0].avatar
-    },
-    time: topic.time,
-    description: topic.content.slice(0, 233)
+    user: topic.user,
+    description: topic.content.slice(0, 233),
+    created: topic.created
   }))
 
   return topics

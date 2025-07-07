@@ -3,12 +3,18 @@ import type { KUNGalgamePayload } from '~/types/utils/jwt'
 
 const config = useRuntimeConfig()
 
-export const generateToken = (uid: number, name: string, expire: string) => {
+export const generateToken = (
+  uid: number,
+  name: string,
+  role: number,
+  expire: string
+) => {
   const payload: KUNGalgamePayload = {
     iss: config.JWT_ISS,
     aud: config.JWT_AUD,
     uid,
-    name
+    name,
+    role
   }
 
   const token = jwt.sign(payload, config.JWT_SECRET, {
@@ -18,9 +24,9 @@ export const generateToken = (uid: number, name: string, expire: string) => {
   return token
 }
 
-export const createTokens = async (uid: number, name: string) => {
-  const token = generateToken(uid, name, '60m')
-  const refreshToken = generateToken(uid, name, '30d')
+export const createTokens = async (uid: number, name: string, role: number) => {
+  const token = generateToken(uid, name, role, '60m')
+  const refreshToken = generateToken(uid, name, role, '30d')
 
   // see: https://unstorage.unjs.io/drivers/redis
   await useStorage('redis').setItem(`refreshToken:${uid}`, refreshToken, {

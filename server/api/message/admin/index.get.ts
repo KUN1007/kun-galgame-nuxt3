@@ -1,24 +1,32 @@
-import UserModel from '~/server/models/user'
-import MessageAdminModel from '~/server/models/message-admin'
-import type { MessageAdmin } from '~/types/api/message-admin'
+import prisma from '~/prisma/prisma'
+import type { SystemMessage } from '~/types/api/message'
 
 export default defineEventHandler(async (_) => {
-  const messageAdmin = await MessageAdminModel.find()
-    .sort({ maid: -1 })
-    .populate('user', 'uid name avatar', UserModel)
-    .lean()
-
-  const data: MessageAdmin[] = messageAdmin.map((message) => ({
-    maid: message.maid,
-    time: message.time,
-    status: message.status,
-    content: message.content,
-    admin: {
-      uid: message.user[0].uid,
-      name: message.user[0].name,
-      avatar: message.user[0].avatar
+  const data = await prisma.system_message.findMany({
+    orderBy: { created: 'desc' },
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true
+        }
+      }
     }
+  })
+
+  const messages: SystemMessage[] = data.map((message) => ({
+    id: message.id,
+    status: message.status as 'read' | 'unread',
+    content: {
+      'en-us': message.content_en_us,
+      'ja-jp': message.content_ja_jp,
+      'zh-cn': message.content_zh_cn,
+      'zh-tw': message.content_zh_tw
+    },
+    admin: message.user,
+    created: message.created
   }))
 
-  return data
+  return messages
 })

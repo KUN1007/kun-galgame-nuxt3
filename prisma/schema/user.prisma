@@ -1,23 +1,19 @@
 model user {
-    id             Int      @id @default(autoincrement())
-    name           String
-    email          String   @unique
-    password       String
-    ip             String   @default("")
-    avatar         String   @default("")
-    role           Int      @default(1)
-    status         Int      @default(0)
-    time           DateTime @default(now())
-    moemoepoint    Int      @default(1007)
-    bio            String   @default("") @db.VarChar(107)
-    upvote         Int      @default(0)
-    like           Int      @default(0)
-    dislike        Int      @default(0)
-    daily_check_in Int      @default(0)
+    id                Int    @id @default(autoincrement())
+    name              String @unique
+    email             String @unique
+    password          String
+    ip                String @default("")
+    avatar            String @default("")
+    role              Int    @default(1)
+    status            Int    @default(0)
+    moemoepoint       Int    @default(7)
+    bio               String @default("") @db.VarChar(107)
+    daily_check_in    Int    @default(0)
+    daily_image_count Int    @default(0)
 
-    report report[]
-    todo   todo[]
-    un_moe un_moe[]
+    todo  todo[]
+    unmoe unmoe[]
 
     system_message  system_message[] @relation("system_message_sender")
     send_message    message[]        @relation("user_send_message")
@@ -29,14 +25,12 @@ model user {
     followed_relation user_follow[] @relation("user_followed")
 
     topic          topic[]          @relation("user_topic")
-    topic_tag      topic_tag[]
     topic_like     topic_like[]
     topic_dislike  topic_dislike[]
     topic_upvote   topic_upvote[]
     topic_favorite topic_favorite[]
 
     galgame                galgame[]             @relation("user_galgame")
-    galgame_tag            galgame_tag[]
     galgame_like           galgame_like[]
     galgame_favorite       galgame_favorite[]
     galgame_contributor    galgame_contributor[]
@@ -50,14 +44,13 @@ model user {
     galgame_resource_like galgame_resource_like[]
     galgame_comment_like  galgame_comment_like[]
 
-    reply_created reply[]         @relation("user_created_reply")
-    reply_target  reply[]         @relation("reply_target_user")
-    reply_like    reply_like[]
-    reply_dislike reply_dislike[]
+    reply_created topic_reply[]         @relation("user_created_topic_reply")
+    reply_like    topic_reply_like[]
+    reply_dislike topic_reply_dislike[]
 
-    comment_created comment[]      @relation("user_created_comment")
-    comment_target  comment[]      @relation("comment_target_user")
-    comment_like    comment_like[]
+    comment_created topic_comment[]      @relation("user_created_topic_comment")
+    comment_target  topic_comment[]      @relation("topic_comment_target_user")
+    comment_like    topic_comment_like[]
 
     chat_message_send     chat_message[]          @relation("user_send_chat_message")
     chat_message_receive  chat_message[]          @relation("user_receive_chat_receive_message")

@@ -1,51 +1,64 @@
-import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
-import type { UserTopic, UserGetTopicRequestData } from '~/types/api/user'
+import prisma from '~/prisma/prisma'
+import { getUserTopicSchema } from '~/validations/user'
+import type { UserTopic } from '~/types/api/user'
+import type { Prisma } from '@prisma/client'
 
 export default defineEventHandler(async (event) => {
-  const uid = getRouterParam(event, 'uid')
-  if (!uid) {
-    return kunError(event, 10101)
+  const input = kunParseGetQuery(event, getUserTopicSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const { page, limit, type }: UserGetTopicRequestData = await getQuery(event)
-  if (!page || !limit || !type) {
-    return kunError(event, 10507)
+  const userInfo = await getCookieTokenInfo(event)
+  if (!userInfo) {
+    return kunError(event, '用户登录失效', 205)
   }
-  if (limit !== '50') {
-    return kunError(event, 10209)
+  const userId = userInfo.uid
+
+  const { page, limit, type } = input
+
+  const whereClause: Prisma.topicWhereInput = {}
+
+  switch (type) {
+    case 'topic':
+      whereClause.user_id = userId
+      break
+
+    case 'topic_like':
+      whereClause.like = { some: { user_id: userId } }
+      break
+
+    case 'topic_upvote':
+      whereClause.upvote = { some: { user_id: userId } }
+      break
+
+    case 'topic_favorite':
+      whereClause.favorite = { some: { user_id: userId } }
+      break
   }
-  const skip = (parseInt(page) - 1) * parseInt(limit)
 
-  const user = await UserModel.findOne({ uid }).lean()
-  if (!user) {
-    return kunError(event, 10114)
+  const [topics, totalCount]: [UserTopic[], number] = await prisma.$transaction(
+    [
+      prisma.topic.findMany({
+        where: whereClause,
+        skip: (page - 1) * limit,
+        take: limit,
+        orderBy: {
+          created: 'desc'
+        },
+        select: {
+          id: true,
+          title: true,
+          created: true
+        }
+      }),
+
+      prisma.topic.count({ where: whereClause })
+    ]
+  )
+
+  return {
+    topics,
+    totalCount
   }
-
-  const topicArray =
-    {
-      publish: user.topic,
-      like: user.like_topic,
-      upvote: user.upvote_topic,
-      favorite: user.favorite_topic
-    }[type] || []
-
-  const totalCount = await TopicModel.countDocuments({
-    tid: { $in: topicArray },
-    status: { $ne: 1 }
-  }).lean()
-  const data = await TopicModel.find({
-    tid: { $in: topicArray },
-    status: { $ne: 1 }
-  })
-    .sort({ created: -1 })
-    .skip(skip)
-    .limit(parseInt(limit))
-
-  const topics: UserTopic[] = data.map((topic) => ({
-    tid: topic.tid,
-    title: topic.title,
-    time: new Date(topic.created).getTime()
-  }))
-  return { topics, totalCount }
 })

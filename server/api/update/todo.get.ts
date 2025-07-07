@@ -1,37 +1,36 @@
-import TodoModel from '~/server/models/todo'
-import type { GetTodoRequestData, Todo } from '~/types/api/update-log'
+import prisma from '~/prisma/prisma'
+import { getTodoSchema } from '~/validations/todo'
+import type { Todo } from '~/types/api/update-log'
 
-const getTodos = async (page: number, limit: number) => {
+export default defineEventHandler(async (event) => {
+  const input = kunParseGetQuery(event, getTodoSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
+  }
+
+  const { page, limit } = input
+
   const skip = (page - 1) * limit
-  const totalCount = await TodoModel.countDocuments().lean()
+  const totalCount = await prisma.todo.count()
 
-  const data = await TodoModel.find()
-    .sort({ todo_id: -1 })
-    .skip(skip)
-    .limit(limit)
-    .lean()
+  const data = await prisma.todo.findMany({
+    skip,
+    take: limit,
+    orderBy: { created: 'desc' }
+  })
 
   const todos: Todo[] = data.map((todo) => ({
-    todoId: todo.todo_id,
+    id: todo.id,
     status: todo.status,
-    content: todo.content,
-    time: todo.time,
-    completedTime: todo.completed_time
+    content: {
+      'en-us': todo.content_en_us,
+      'ja-jp': todo.content_ja_jp,
+      'zh-cn': todo.content_zh_cn,
+      'zh-tw': todo.content_zh_tw
+    },
+    completedTime: todo.completed_time,
+    created: todo.created
   }))
 
   return { todos, totalCount }
-}
-
-export default defineEventHandler(async (event) => {
-  const { page, limit }: GetTodoRequestData = await getQuery(event)
-  if (!page || !limit) {
-    return kunError(event, 10507)
-  }
-  if (limit !== '10') {
-    return kunError(event, 10209)
-  }
-
-  const todos = await getTodos(parseInt(page), parseInt(limit))
-
-  return todos
 })

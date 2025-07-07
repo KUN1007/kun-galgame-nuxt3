@@ -1,79 +1,58 @@
 import { hash } from 'bcrypt'
-import UserModel from '~/server/models/user'
-import {
-  isValidEmail,
-  isValidName,
-  isValidPassword,
-  isValidMailConfirmCode
-} from '~/utils/validate'
-import type { H3Event } from 'h3'
-import type { RegisterRequestData, LoginResponseData } from '~/types/api/user'
+import prisma from '~/prisma/prisma'
+import { userRegisterSchema } from '~/validations/user'
+import type { LoginResponseData } from '~/types/api/user'
 
-const registerController = async (event: H3Event) => {
-  const { codeSalt, name, email, password, code }: RegisterRequestData =
-    await readBody(event)
-
-  const ip = getRemoteIp(event)
-
-  if (
-    !codeSalt ||
-    codeSalt.length !== 64 ||
-    !isValidEmail(email) ||
-    !isValidName(name) ||
-    !isValidPassword(password) ||
-    !isValidMailConfirmCode(code)
-  ) {
-    return kunError(event, 10107)
+export default defineEventHandler(async (event) => {
+  const input = await kunParsePostBody(event, userRegisterSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
+  const { codeSalt, name, email, password, code } = input
+
+  const ip = getRemoteIp(event)
   const registerCD = await useStorage('redis').getItem(
     `login:register:cd:${name}`
   )
   if (registerCD) {
-    return kunError(event, 10113)
+    return kunError(event, '注册冷却中, 请等待 60 秒后重试')
   } else {
     useStorage('redis').setItem(`login:register:cd:${ip}`, ip, { ttl: 60 })
   }
 
-  return { codeSalt, name, email, password, code, ip }
-}
-
-export default defineEventHandler(async (event) => {
-  const result = await registerController(event)
-  if (!result) {
-    return
-  }
-  const { codeSalt, name, email, password, code, ip } = result
-
   const codeKey = `${codeSalt}:${email}`
   const isCodeValid = await verifyVerificationCode(codeKey, code)
   if (!isCodeValid) {
-    return kunError(event, 10103)
+    return kunError(event, '非法的邮箱验证码')
   }
   await useStorage('redis').removeItem(codeKey)
 
-  const usernameCount = await UserModel.countDocuments({
-    name: { $regex: new RegExp('^' + name + '$', 'i') }
+  const usernameCount = await prisma.user.count({
+    where: { name: { equals: name, mode: 'insensitive' } }
   })
   if (usernameCount) {
-    return kunError(event, 10105)
+    return kunError(event, '您的用户名已经被使用, 请更换')
   }
 
-  const emailCount = await UserModel.countDocuments({ email })
-  if (emailCount) {
-    return kunError(event, 10104)
-  }
-  const hashedPassword = await hash(password, 7)
-
-  const user = new UserModel({
-    name,
-    email,
-    password: hashedPassword,
-    ip
+  const emailCount = await prisma.user.count({
+    where: { email }
   })
-  await user.save()
+  if (emailCount) {
+    return kunError(event, '您的邮箱已经被使用, 请更换')
+  }
 
-  const { refreshToken } = await createTokens(user.uid, user.name)
+  const hashedPassword = await hash(password, 7)
+  const user = await prisma.user.create({
+    data: {
+      name,
+      email,
+      password: hashedPassword,
+      ip: ip.toString()
+    }
+  })
+
+  const { refreshToken } = await createTokens(user.id, user.name, user.role)
   deleteCookie(event, 'kungalgame-is-navigate-to-login')
   setCookie(event, 'kungalgame-moemoe-refresh-token', refreshToken, {
     httpOnly: true,
@@ -81,11 +60,11 @@ export default defineEventHandler(async (event) => {
   })
 
   const userInfo: LoginResponseData = {
-    uid: user.uid,
+    id: user.id,
     name: user.name,
     avatar: user.avatar,
     moemoepoint: user.moemoepoint,
-    roles: user.roles
+    role: user.role
   }
 
   return userInfo

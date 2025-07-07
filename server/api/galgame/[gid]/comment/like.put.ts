@@ -1,64 +1,63 @@
-import mongoose from 'mongoose'
-import UserModel from '~/server/models/user'
-import GalgameCommentModel from '~/server/models/galgame-comment'
-
-const updateGalgameCommentLike = async (gcid: number, uid: number) => {
-  const comment = await GalgameCommentModel.findOne({ gcid }).lean()
-  if (!comment) {
-    return 10622
-  }
-  if (comment.c_uid === uid) {
-    return
-  }
-  if (comment.likes.includes(uid)) {
-    return 10624
-  }
-
-  const session = await mongoose.startSession()
-  session.startTransaction()
-
-  try {
-    await GalgameCommentModel.updateOne({ gcid }, { $addToSet: { likes: uid } })
-
-    await UserModel.updateOne(
-      { uid: comment.c_uid },
-      { $inc: { moemoepoint: 1, like: 1 } }
-    )
-
-    await createMessage(
-      uid,
-      comment.c_uid,
-      'liked',
-      comment.content.slice(0, 233),
-      0,
-      comment.gid
-    )
-
-    await session.commitTransaction()
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
-}
+import prisma from '~/prisma/prisma'
+import { updateGalgameCommentLikeSchema } from '~/validations/galgame'
 
 export default defineEventHandler(async (event) => {
-  const { gcid }: { gcid: string } = await getQuery(event)
-  if (!gcid) {
-    return kunError(event, 10507)
+  const input = await kunParsePostBody(event, updateGalgameCommentLikeSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
   const uid = userInfo.uid
 
-  const result = await updateGalgameCommentLike(parseInt(gcid), uid)
-  if (typeof result === 'number') {
-    return kunError(event, result)
+  const comment = await prisma.galgame_comment.findUnique({
+    where: { id: input.galgameCommentId },
+    include: {
+      like: {
+        where: {
+          user_id: uid
+        }
+      }
+    }
+  })
+  if (!comment) {
+    return kunError(event, '未找到该评论')
+  }
+  if (comment.user_id === uid) {
+    return kunError(event, '您不能给自己点赞')
+  }
+  if (comment.like.length > 0) {
+    return kunError(event, '您已经点赞过了')
   }
 
-  return 'MOEMOE like galgame comment successfully!'
+  return await prisma.$transaction(async (prisma) => {
+    await prisma.galgame_comment_like.create({
+      data: {
+        user_id: uid,
+        galgame_comment_id: input.galgameCommentId
+      }
+    })
+
+    await prisma.user.update({
+      where: { id: comment.user_id },
+      data: { moemoepoint: { increment: 1 } }
+    })
+
+    if (comment.target_user_id) {
+      await createMessage(
+        prisma,
+        uid,
+        comment.target_user_id,
+        'liked',
+        comment.content.slice(0, 233),
+        0,
+        comment.galgame_id
+      )
+    }
+
+    return 'MOEMOE like galgame comment successfully!'
+  })
 })

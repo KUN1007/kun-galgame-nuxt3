@@ -6,6 +6,12 @@ export const KUN_TOPIC_CATEGORY: Record<string, string> = {
   others: '其它话题'
 }
 
+export const KUN_TOPIC_CATEGORY_CONST = [
+  'galgame',
+  'technique',
+  'others'
+] as const
+
 export const KUN_TOPIC_SECTION: Record<string, string> = {
   'g-walkthrough': '攻略',
   'g-chatting': '闲聊',
@@ -36,6 +42,36 @@ export const KUN_TOPIC_SECTION: Record<string, string> = {
   'o-other': '其它'
 }
 
+export const KUN_TOPIC_SECTION_CONST = [
+  'g-walkthrough',
+  'g-chatting',
+  'g-article',
+  'g-seeking',
+  'g-news',
+  'g-releases',
+  'g-other',
+  't-crack',
+  't-web',
+  't-languages',
+  't-help',
+  't-linux',
+  't-practical',
+  't-ai',
+  't-android',
+  't-adobe',
+  't-algorithm',
+  't-other',
+  'o-anime',
+  'o-comics',
+  'o-music',
+  'o-novel',
+  'o-daily',
+  'o-essay',
+  'o-forum',
+  'o-patch',
+  'o-other'
+] as const
+
 export const KUN_TOPIC_PAGE_SORT_FIELD: Record<string, string> = {
   views: '浏览',
   created: '时间',
@@ -60,6 +96,15 @@ export const topicSortFieldOptions: KunSelectOption[] = [
   { value: 'created', label: '创建时间' },
   { value: 'views', label: '浏览量' }
 ]
+
+export const TOPIC_SORT_FIELD_CONST = [
+  'created',
+  'view',
+  'status_update_time',
+  'like',
+  'favorite',
+  'upvote'
+] as const
 
 export const topicSortCategoryOptions: KunSelectOption[] = [
   { value: 'all', label: '全部类型' },

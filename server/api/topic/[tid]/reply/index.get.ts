@@ -1,142 +1,142 @@
-import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
-import ReplyModel from '~/server/models/reply'
-import CommentModel from '~/server/models/comment'
-import mongoose from 'mongoose'
-import type { TopicReplyRequestData, TopicReply } from '~/types/api/topic-reply'
+import prisma from '~/prisma/prisma'
+import { getReplySchema } from '~/validations/topic'
+import { markdownToText } from '~/utils/markdownToText'
+import type { z } from 'zod'
+import type { TopicReply } from '~/types/api/topic-reply'
 import type { TopicComment } from '~/types/api/topic-comment'
 
-const getComments = async (uid: number, rid: number) => {
-  const comment = await CommentModel.find({ rid })
-    .populate('cuid', 'uid avatar name', UserModel)
-    .populate('touid', 'uid name', UserModel)
-    .lean()
-
-  const replyComments: TopicComment[] = comment.map((comment) => ({
-    cid: comment.cid,
-    rid: comment.rid,
-    tid: comment.tid,
-    user: {
-      uid: comment.cuid[0].uid,
-      avatar: comment.cuid[0].avatar,
-      name: comment.cuid[0].name
-    },
-    toUser: {
-      uid: comment.touid[0].uid,
-      name: comment.touid[0].name
-    },
-    content: comment.content,
-    likes: {
-      count: comment.likes.length,
-      isLiked: comment.likes.includes(uid)
-    }
-  }))
-
-  return replyComments
-}
-
-const getReplies = async (
-  uid: number,
-  tid: number,
-  page: number,
-  limit: number,
-  sortOrder: KunOrder
+const getTopicReplies = async (
+  input: z.infer<typeof getReplySchema>,
+  uid?: number
 ) => {
-  const session = await mongoose.startSession()
-  session.startTransaction()
-  try {
-    const reply = await TopicModel.findOne({ tid }).lean()
-    if (!reply) {
-      return 10506
-    }
-    const replyId = reply.replies
+  const { topicId, page, limit, sortOrder } = input
+  const skip = (page - 1) * limit
 
-    const skip = (page - 1) * limit
-
-    const replyDetails = await ReplyModel.find({ rid: { $in: replyId } })
-      .sort({ floor: sortOrder })
-      .skip(skip)
-      .limit(limit)
-      .populate('r_user', 'uid avatar name moemoepoint', UserModel)
-      .populate('to_user', 'uid name', UserModel)
-      .lean()
-
-    const repliesData: TopicReply[] = await Promise.all(
-      replyDetails.map(async (reply) => ({
-        rid: reply.rid,
-        tid: reply.tid,
-        floor: reply.floor,
-        toFloor: reply.to_floor,
+  const [repliesData, totalCount] = await prisma.$transaction([
+    prisma.topic_reply.findMany({
+      skip,
+      take: limit,
+      where: {
+        topic_id: topicId
+      },
+      orderBy: {
+        floor: sortOrder
+      },
+      include: {
         user: {
-          uid: reply.r_user[0].uid,
-          name: reply.r_user[0].name,
-          avatar: reply.r_user[0].avatar,
-          moemoepoint: reply.r_user[0].moemoepoint
+          select: { id: true, name: true, avatar: true, moemoepoint: true }
         },
-        toUser: {
-          uid: reply.to_user[0].uid,
-          name: reply.to_user[0].name
+        target: {
+          orderBy: {
+            target_reply: { floor: 'asc' }
+          },
+          select: {
+            content: true,
+            target_reply: {
+              select: {
+                id: true,
+                floor: true,
+                content: true,
+                user: {
+                  select: { id: true, name: true, avatar: true }
+                }
+              }
+            }
+          }
         },
-        edited: reply.edited,
-        content: await markdownToHtml(reply.content),
-        markdown: reply.content,
-        upvotes: {
-          count: reply.upvotes.length,
-          isUpvoted: reply.upvotes.includes(uid)
+
+        _count: {
+          select: { like: true, dislike: true, comment: true }
         },
-        upvoteTime: reply.upvote_time,
-        likes: {
-          count: reply.likes.length,
-          isLiked: reply.likes.includes(uid)
-        },
-        dislikes: {
-          count: reply.dislikes.length,
-          isDisliked: reply.dislikes.includes(uid)
-        },
-        tags: reply.tags,
-        time: reply.time,
-        comment: await getComments(uid, reply.rid)
+        like: { where: { user_id: uid } },
+        dislike: { where: { user_id: uid } },
+        comment: {
+          orderBy: { created: 'asc' },
+          include: {
+            user: {
+              select: { id: true, name: true, avatar: true }
+            },
+            target_user: {
+              select: { id: true, name: true, avatar: true }
+            },
+            _count: {
+              select: { like: true }
+            },
+            like: {
+              where: { user_id: uid }
+            }
+          }
+        }
+      }
+    }),
+
+    prisma.topic_reply.count({
+      where: { topic_id: topicId }
+    })
+  ])
+
+  const replies: TopicReply[] = await Promise.all(
+    repliesData.map(async (reply) => {
+      const comments: TopicComment[] = reply.comment.map((comment) => ({
+        id: comment.id,
+        replyId: comment.topic_reply_id,
+        topicId: comment.topic_id,
+        user: comment.user,
+        toUser: comment.target_user,
+        content: comment.content,
+        isLiked: comment.like.length > 0,
+        likeCount: comment._count.like,
+        created: comment.created
       }))
-    )
 
-    await session.commitTransaction()
+      const targets = await Promise.all(
+        reply.target.map(async (targetRelation) => {
+          const targetReply = targetRelation.target_reply
+          const contentText = markdownToText(targetReply.content)
+          return {
+            id: targetReply.id,
+            floor: targetReply.floor,
+            user: targetReply.user,
+            contentPreview:
+              contentText.slice(0, 150) +
+              (contentText.length > 150 ? '...' : ''),
+            replyContentMarkdown: targetRelation.content,
+            replyContentHtml: await markdownToHtml(targetRelation.content)
+          }
+        })
+      )
 
-    return repliesData
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
+      return {
+        id: reply.id,
+        topicId: reply.topic_id,
+        floor: reply.floor,
+        user: reply.user,
+        edited: reply.edited,
+        contentMarkdown: reply.content,
+        contentHtml: await markdownToHtml(reply.content),
+        likeCount: reply._count.like,
+        isLiked: reply.like.length > 0,
+        dislikeCount: reply._count.dislike,
+        isDisliked: reply.dislike.length > 0,
+        comment: comments,
+        created: reply.created,
+        targets: targets
+      }
+    })
+  )
+
+  return { replies, totalCount }
 }
 
 export default defineEventHandler(async (event) => {
-  const tid = getRouterParam(event, 'tid')
-  if (!tid) {
-    return kunError(event, 10210)
-  }
-
-  const { page, limit, sortOrder }: TopicReplyRequestData =
-    await getQuery(event)
-  if (!page || !limit || !sortOrder) {
-    return kunError(event, 10507)
-  }
-
-  if (limit !== '30') {
-    return kunError(event, 10209)
+  const input = kunParseGetQuery(event, getReplySchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
   const userInfo = await getCookieTokenInfo(event)
-  const result = await getReplies(
-    userInfo?.uid ?? 0,
-    parseInt(tid),
-    parseInt(page),
-    parseInt(limit),
-    sortOrder
-  )
-  if (typeof result === 'number') {
-    return kunError(event, result)
-  }
+
+  const result = await getTopicReplies(input, userInfo?.uid)
 
   return result
 })

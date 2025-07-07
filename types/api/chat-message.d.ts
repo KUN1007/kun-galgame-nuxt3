@@ -12,20 +12,23 @@ export interface MessageHistoryRequest {
 export interface AsideItem {
   chatroomName: string
   content: string
-  time: number
   count: number
   unreadCount: number
   route: string
   title: string
   avatar: string
+  lastMessageTime: Date | string
 }
 
-export interface Message {
-  cmid: number
+export interface ChatMessage {
+  id: number
   chatroomName: string
   sender: KunUser
-  receiverUid: number
+  readBy: KunUser[]
+  receiverUid: number | null
   content: string
-  time: number
-  status: string
+  isRecall: boolean
+  created: Date | string
+  recallTime: Date | string | null
+  editTime: Date | string | null
 }

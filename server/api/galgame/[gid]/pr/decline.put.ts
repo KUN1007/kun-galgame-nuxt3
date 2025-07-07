@@ -1,90 +1,52 @@
-import mongoose from 'mongoose'
-import GalgameModel from '~/server/models/galgame'
-import GalgamePRModel from '~/server/models/galgame-pr'
-import UserModel from '~/server/models/user'
-import type { H3Event } from 'h3'
+import prisma from '~/prisma/prisma'
+import { updateGalgamePrDeclineSchema } from '~/validations/galgame'
 
-const checkUpdate = async (event: H3Event) => {
-  const { gprid, note }: { gprid: number; note: string } = await readBody(event)
-  if (!gprid || !note) {
-    return kunError(event, 10507)
+export default defineEventHandler(async (event) => {
+  const input = await kunParsePostBody(event, updateGalgamePrDeclineSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
-  if (!note.trim() || note.length > 1007) {
-    return kunError(event, 10631)
-  }
+  const { galgamePrId, note } = input
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
-  const user = await UserModel.findOne({ uid: userInfo.uid }).lean()
-  if (!user) {
-    return kunError(event, 10101)
-  }
+  const uid = userInfo.uid
 
-  const gid = getRouterParam(event, 'gid')
-  if (!gid) {
-    return kunError(event, 10507)
-  }
-  const galgame = await GalgameModel.findOne({ gid }).lean()
-  if (!galgame) {
-    return kunError(event, 10610)
-  }
-
-  if (userInfo.uid !== galgame.uid && user.roles < 2) {
-    return kunError(event, 10632)
-  }
-
-  return { uid: userInfo.uid, gprid, note }
-}
-
-export default defineEventHandler(async (event) => {
-  const result = await checkUpdate(event)
-  if (!result) {
-    return
-  }
-  const { uid, gprid, note } = result
-
-  const session = await mongoose.startSession()
-  session.startTransaction()
-  try {
-    const galgamePR = await GalgamePRModel.findOneAndUpdate(
-      { gprid },
-      { status: 2, note, galgame: {} }
-    ).lean()
-    if (!galgamePR) {
-      return kunError(event, 10610)
-    }
+  return await prisma.$transaction(async (prisma) => {
+    const galgamePR = await prisma.galgame_pr.update({
+      where: { id: galgamePrId },
+      data: {
+        status: 2,
+        note,
+        galgame: {}
+      }
+    })
     if (galgamePR.status !== 0) {
-      return kunError(event, 10633)
+      return kunError(event, '该更新请求已经被处理')
     }
 
-    await createGalgameHistory({
-      gid: galgamePR.gid,
-      uid,
-      time: Date.now(),
+    await createGalgameHistory(prisma, {
+      galgame_id: galgamePR.galgame_id,
+      user_id: galgamePR.user_id,
       action: 'declined',
       type: 'pr',
       content: `#${galgamePR.index} ${note}`
     })
 
-    if (uid !== galgamePR.uid) {
+    if (uid !== galgamePR.user_id) {
       await createMessage(
+        prisma,
         uid,
-        galgamePR.uid,
+        galgamePR.user_id,
         'declined',
         `#${galgamePR.index} ${note}`,
         0,
-        galgamePR.gid
+        galgamePR.galgame_id
       )
     }
 
-    await session.commitTransaction()
     return 'MOEMOE declined galgame pull request successfully!'
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
+  })
 })

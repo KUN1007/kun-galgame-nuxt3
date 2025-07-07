@@ -1,18 +1,30 @@
-import GalgameLinkModel from '~/server/models/galgame-link'
+import prisma from '~/prisma/prisma'
+import { getGalgameLinkSchema } from '~/validations/galgame'
 import type { GalgameLink } from '~/types/api/galgame-link'
 
 export default defineEventHandler(async (event) => {
-  const gid = getRouterParam(event, 'gid')
-  if (!gid) {
-    return kunError(event, 10507)
+  const input = kunParseGetQuery(event, getGalgameLinkSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const data = await GalgameLinkModel.find({ gid }).sort({ created: -1 }).lean()
+  const data = await prisma.galgame_link.findMany({
+    where: { galgame_id: input.galgameId },
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true
+        }
+      }
+    }
+  })
 
   const links: GalgameLink[] = data.map((link) => ({
-    gid: link.gid,
-    glid: link.glid,
-    uid: link.uid,
+    id: link.id,
+    galgameId: link.galgame_id,
+    user: link.user,
     name: link.name,
     link: link.link
   }))

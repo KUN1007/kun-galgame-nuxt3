@@ -1,18 +1,21 @@
-import MessageModel from '~/server/models/message'
+import prisma from '~/prisma/prisma'
+import { deleteMessageSchema } from '~/validations/chat'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
   const uid = userInfo.uid
 
-  const { mid }: { mid: string } = await getQuery(event)
-  if (!mid) {
-    return kunError(event, 10507)
+  const input = kunParseDeleteQuery(event, deleteMessageSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  await MessageModel.deleteOne({ receiver_uid: uid, mid })
+  await prisma.chat_message.delete({
+    where: { id: input.messageId, sender_id: uid }
+  })
 
   return 'MOEMOE delete message successfully!'
 })

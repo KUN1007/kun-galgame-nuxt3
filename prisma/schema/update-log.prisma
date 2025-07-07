@@ -1,12 +1,11 @@
 model update_log {
-  id            Int     @id @default(autoincrement())
+  id            Int    @id @default(autoincrement())
   type          String
-  content_en_us String? @db.Text
-  content_ja_jp String? @db.Text
-  content_zh_cn String? @db.Text
-  content_zh_tw String? @db.Text
-  time          String  @default("")
-  version       String  @default("")
+  version       String @default("")
+  content_en_us String @default("") @db.Text
+  content_ja_jp String @default("") @db.Text
+  content_zh_cn String @default("") @db.Text
+  content_zh_tw String @default("") @db.Text
 
   created DateTime @default(now())
   updated DateTime @updatedAt

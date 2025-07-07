@@ -1,69 +1,95 @@
-import UserModel from '~/server/models/user'
-import ChatMessageModel from '~/server/models/chat-message'
-import ChatRoomModel from '~/server/models/chat-room'
-import type { MessageHistoryRequest, Message } from '~/types/api/chat-message'
+import prisma from '~/prisma/prisma'
+import { getChatMessageHistorySchema } from '~/validations/chat'
+import type { ChatMessage } from '~/types/api/chat-message'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
   const uid = userInfo.uid
 
-  const { receiverUid, page, limit }: MessageHistoryRequest = getQuery(event)
-  if (!receiverUid || !page || !limit) {
-    return kunError(event, 10507)
+  const input = kunParseGetQuery(event, getChatMessageHistorySchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
-  if (parseInt(receiverUid) === userInfo.uid) {
-    return kunError(event, 10401)
+  const receiverUid = Number(input.receiverUid)
+  if (receiverUid === userInfo.uid) {
+    return kunError(event, '不能给自己发送消息')
   }
-  if (limit !== '30') {
-    return kunError(event, 10209)
-  }
-  const roomId = generateRoomId(parseInt(receiverUid), uid)
+  const roomId = generateRoomId(receiverUid, uid)
 
-  const room = await ChatRoomModel.findOne({ name: roomId }).lean()
+  const room = await prisma.chat_room.findFirst({
+    where: { name: roomId }
+  })
   if (!room) {
-    await ChatRoomModel.create({
-      name: roomId,
-      type: 'private',
-      participants: [uid, receiverUid],
-      last_message: { time: Date.now() }
+    const newRoom = await prisma.chat_room.create({
+      data: {
+        name: roomId,
+        type: 'private'
+      }
+    })
+
+    await prisma.chat_room_participant.createMany({
+      data: [
+        { chat_room_id: newRoom.id, user_id: uid },
+        { chat_room_id: newRoom.id, user_id: receiverUid }
+      ]
     })
 
     return []
   }
 
-  const skip = (parseInt(page) - 1) * parseInt(limit)
-  const histories = await ChatMessageModel.find({ chatroom_name: roomId })
-    .sort({ cmid: -1 })
-    .skip(skip)
-    .limit(parseInt(limit))
-    .populate('user', 'uid avatar name', UserModel)
-    .lean()
+  const skip = (input.page - 1) * input.limit
+  const data = await prisma.chat_message.findMany({
+    skip,
+    take: input.limit,
+    orderBy: { id: 'desc' },
+    where: { chatroom_name: roomId },
+    include: {
+      sender: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true
+        }
+      },
+      read_by: {
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              avatar: true
+            }
+          }
+        }
+      }
+    }
+  })
 
-  const cmidArray = histories
-    .filter((message) => !message.read_by.some((read) => read.uid === uid))
-    .map((message) => message.cmid)
-  if (cmidArray.length > 0) {
-    await ChatMessageModel.updateMany(
-      { cmid: { $in: cmidArray }, 'read_by.uid': { $ne: uid } },
-      { $push: { read_by: { uid, read_time: Date.now() } } }
-    )
+  const messageReadByArray = data.map((m) => ({
+    chat_message_id: m.id,
+    user_id: uid
+  }))
+  if (messageReadByArray.length > 0) {
+    await prisma.chat_message_read_by.createMany({
+      data: messageReadByArray,
+      skipDuplicates: true
+    })
   }
 
-  const messages: Message[] = histories.map((message) => ({
-    cmid: message.cmid,
+  const messages: ChatMessage[] = data.map((message) => ({
+    id: message.id,
     chatroomName: message.chatroom_name,
-    sender: {
-      uid: message.user[0].uid,
-      name: message.user[0].name,
-      avatar: message.user[0].avatar
-    },
-    receiverUid: parseInt(receiverUid),
+    sender: message.sender,
+    readBy: message.read_by.map((r) => r.user),
+    receiverUid: message.receiver_id,
     content: message.content,
-    time: message.time,
-    status: message.status
+    isRecall: message.is_recall,
+    created: message.created,
+    recallTime: message.recall_time,
+    editTime: message.edit_time
   }))
 
   return messages.reverse()

@@ -1,26 +1,41 @@
-import UserModel from '~/server/models/user'
-import GalgameModel from '~/server/models/galgame'
 import { getPreferredLanguageText } from '~/utils/getPreferredLanguageText'
+import prisma from '~/prisma/prisma'
 import type { GalgameRSS } from '~/types/api/rss'
 
 export default defineEventHandler(async () => {
-  const data = await GalgameModel.find()
-    .sort({ created: 'desc' })
-    .limit(10)
-    .populate('user', 'uid avatar name', UserModel)
-    .lean()
+  const data = await prisma.galgame.findMany({
+    orderBy: {
+      created: 'desc'
+    },
+    take: 10,
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true
+        }
+      }
+    }
+  })
 
   const galgames: GalgameRSS[] = data.map((galgame) => ({
-    gid: galgame.gid,
-    name: getPreferredLanguageText(galgame.name),
+    id: galgame.id,
+    name: getPreferredLanguageText({
+      'en-us': galgame.name_en_us,
+      'ja-jp': galgame.name_ja_jp,
+      'zh-cn': galgame.name_zh_cn,
+      'zh-tw': galgame.name_zh_tw
+    }),
     banner: galgame.banner,
-    user: {
-      uid: galgame.user[0].uid,
-      name: galgame.user[0].name,
-      avatar: galgame.user[0].avatar
-    },
-    time: galgame.time,
-    description: getPreferredLanguageText(galgame.introduction).slice(0, 233)
+    user: galgame.user,
+    description: getPreferredLanguageText({
+      'en-us': galgame.intro_en_us,
+      'ja-jp': galgame.intro_ja_jp,
+      'zh-cn': galgame.intro_zh_cn,
+      'zh-tw': galgame.intro_zh_tw
+    }).slice(0, 233),
+    created: galgame.created
   }))
 
   return galgames

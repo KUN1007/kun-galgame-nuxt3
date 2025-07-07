@@ -1,53 +1,148 @@
-import ReplyModel from '~/server/models/reply'
-import mongoose from 'mongoose'
-import { checkReplyPublish } from '../../utils/checkReplyPublish'
-import type { TopicUpdateReplyRequestData } from '~/types/api/topic-reply'
-
-const updateReply = async (
-  uid: number,
-  tid: number,
-  rid: number,
-  content: string,
-  tags: string[],
-  edited: number
-) => {
-  const session = await mongoose.startSession()
-  session.startTransaction()
-  try {
-    await ReplyModel.updateOne({ rid, r_uid: uid }, { tags, edited, content })
-
-    await updateTagsByTidAndRid(tid, rid, tags, [])
-
-    await session.commitTransaction()
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
-}
+import prisma from '~/prisma/prisma'
+import { updateReplySchema } from '~/validations/topic'
+import { markdownToText } from '~/utils/markdownToText'
+import type { TopicReply } from '~/types/api/topic-reply'
 
 export default defineEventHandler(async (event) => {
-  const tid = getRouterParam(event, 'tid')
-  if (!tid) {
-    return kunError(event, 10210)
+  const input = await kunParsePutBody(event, updateReplySchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
-
-  const { rid, content, tags, edited }: TopicUpdateReplyRequestData =
-    await readBody(event)
-
-  const result = checkReplyPublish(tags, content, edited)
-  if (result) {
-    return kunError(event, result)
-  }
-
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
+
+  const { replyId, targets, content } = input
   const uid = userInfo.uid
 
-  await updateReply(uid, parseInt(tid), rid, content, tags, edited)
+  const existingReply = await prisma.topic_reply.findUnique({
+    where: { id: replyId },
+    include: { target: true }
+  })
+  if (!existingReply) {
+    return kunError(event, '回复不存在')
+  }
+  if (existingReply.user_id !== uid) {
+    return kunError(event, '您没有权限修改此回复')
+  }
 
-  return 'MOEMOE update reply successfully!'
+  const originalTargetUserIds = new Set(
+    existingReply.target.map((t) => t.target_reply_id)
+  )
+
+  return await prisma.$transaction(async (prisma) => {
+    if (targets) {
+      await prisma.topic_reply_target.deleteMany({
+        where: { reply_id: replyId }
+      })
+    }
+
+    const result = await prisma.topic_reply.update({
+      where: { id: replyId },
+      data: {
+        content,
+        edited: new Date(),
+        target: {
+          create: targets?.map((target) => ({
+            target_reply_id: target.targetReplyId,
+            content: target.content
+          }))
+        }
+      },
+      include: {
+        user: {
+          select: { id: true, name: true, avatar: true, moemoepoint: true }
+        },
+        target: {
+          include: {
+            target_reply: {
+              select: {
+                id: true,
+                floor: true,
+                content: true,
+                user: {
+                  select: { id: true, name: true, avatar: true }
+                }
+              }
+            }
+          }
+        },
+        like: { where: { user_id: uid } },
+        dislike: { where: { user_id: uid } },
+        _count: {
+          select: {
+            like: true,
+            dislike: true
+          }
+        }
+      }
+    })
+
+    const targetUsersMap = new Map<number, { user: KunUser; content: string }>()
+    for (const newTarget of result.target) {
+      if (
+        newTarget.target_reply.user.id !== userInfo.uid &&
+        !originalTargetUserIds.has(newTarget.target_reply_id)
+      ) {
+        targetUsersMap.set(newTarget.target_reply.user.id, {
+          user: newTarget.target_reply.user,
+          content: newTarget.content
+        })
+      }
+    }
+
+    for (const [, { user, content }] of targetUsersMap) {
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { moemoepoint: { increment: 1 } }
+      })
+
+      await createDedupMessage(
+        prisma,
+        userInfo.uid,
+        user.id,
+        'replied',
+        markdownToText(content).slice(0, 233),
+        result.topic_id
+      )
+    }
+
+    const formattedTargets = await Promise.all(
+      result.target.map(async (targetRelation) => {
+        const targetReply = targetRelation.target_reply
+        const originalContentText = markdownToText(targetReply.content)
+
+        return {
+          id: targetReply.id,
+          floor: targetReply.floor,
+          user: targetReply.user,
+          contentPreview:
+            originalContentText.slice(0, 150) +
+            (originalContentText.length > 150 ? '...' : ''),
+          replyContentMarkdown: targetRelation.content,
+          replyContentHtml: await markdownToHtml(targetRelation.content)
+        }
+      })
+    )
+
+    const formattedReply: TopicReply = {
+      id: result.id,
+      topicId: result.topic_id,
+      floor: result.floor,
+      user: result.user as KunUser & { moemoepoint: number },
+      edited: result.edited,
+      contentMarkdown: result.content,
+      contentHtml: await markdownToHtml(result.content),
+      likeCount: result._count.like,
+      isLiked: result.like.length > 0,
+      dislikeCount: result._count.dislike,
+      isDisliked: result.dislike.length > 0,
+      comment: [],
+      created: result.created,
+      targets: formattedTargets
+    }
+
+    return formattedReply
+  })
 })

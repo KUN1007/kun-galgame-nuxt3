@@ -1,14 +1,15 @@
 export interface GalgameResource {
-  gid: number
-  grid: number
-  uid: number
+  id: number
+  galgameId: number
+  user: KunUser
   type: string
   language: string
   platform: string
   size: string
-  time: number
   status: number
-  likes: number[]
+  likeCount: number
+  isLike: boolean
+  created: Date | string
 }
 
 export interface GalgameResourceDetails extends GalgameResource {

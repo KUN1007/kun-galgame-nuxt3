@@ -1,18 +1,21 @@
-import UserModel from '~/server/models/user'
+import prisma from '~/prisma/prisma'
+import { updateUserBioSchema } from '~/validations/user'
 
 export default defineEventHandler(async (event) => {
-  const { bio }: { bio: string } = await readBody(event)
+  const input = kunParseGetQuery(event, updateUserBioSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
+  }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
 
-  if (bio.length > 107) {
-    return kunError(event, 10106)
-  }
-
-  await UserModel.updateOne({ uid: userInfo.uid }, { $set: { bio } })
+  await prisma.user.update({
+    where: { id: userInfo.uid },
+    data: { bio: input.bio }
+  })
 
   return 'MoeMoe update bio successfully!'
 })

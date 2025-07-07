@@ -1,29 +1,23 @@
 import UserModel from '~/server/models/user'
-import { isValidEmail, isValidMailConfirmCode } from '~/utils/validate'
-import type { UserUpdateEmailRequestData } from '~/types/api/user'
+import { userUpdateEmailSchema } from '~/validations/user'
 
 export default defineEventHandler(async (event) => {
-  const { codeSalt, email, code }: UserUpdateEmailRequestData =
-    await readBody(event)
-
-  if (
-    !codeSalt ||
-    codeSalt.length !== 64 ||
-    !isValidEmail(email) ||
-    !isValidMailConfirmCode(code)
-  ) {
-    return kunError(event, 10109)
+  const input = await kunParsePutBody(event, userUpdateEmailSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
+
+  const { codeSalt, email, code } = input
 
   const codeKey = `${codeSalt}:${email}`
   const isCodeValid = await verifyVerificationCode(codeKey, code)
   if (!isCodeValid) {
-    return kunError(event, 10103)
+    return kunError(event, '错误的邮箱验证码')
   }
   await useStorage('redis').removeItem(codeKey)
 

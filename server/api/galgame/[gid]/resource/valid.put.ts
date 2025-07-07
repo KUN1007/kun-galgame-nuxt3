@@ -1,25 +1,27 @@
-import GalgameResourceModel from '~/server/models/galgame-resource'
+import prisma from '~/prisma/prisma'
+import { updateGalgameResourceValidSchema } from '~/validations/galgame'
 
 export default defineEventHandler(async (event) => {
-  const { grid }: { grid: string } = await getQuery(event)
-  if (!grid) {
-    return kunError(event, 10507)
+  const input = await kunParsePutBody(event, updateGalgameResourceValidSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
-
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
 
-  const resource = await GalgameResourceModel.findOne({ grid })
+  const resource = await prisma.galgame_resource.findUnique({
+    where: { id: input.galgameResourceId, user_id: userInfo.uid }
+  })
   if (!resource) {
-    return kunError(event, 10622)
-  }
-  if (resource.uid !== userInfo.uid) {
-    return kunError(event, 10623)
+    return kunError(event, '未找到这个 Galgame 资源')
   }
 
-  await GalgameResourceModel.updateOne({ grid }, { status: 0 }).lean()
+  await prisma.galgame_resource.update({
+    where: { id: input.galgameResourceId },
+    data: { status: 0 }
+  })
 
   return 'MOEMOE mark galgame resource link valid successfully!'
 })

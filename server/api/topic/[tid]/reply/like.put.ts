@@ -1,67 +1,70 @@
-import mongoose from 'mongoose'
-import UserModel from '~/server/models/user'
-import ReplyModel from '~/server/models/reply'
-
-const updateReplyLike = async (uid: number, rid: number) => {
-  const reply = await ReplyModel.findOne({ rid })
-  if (!reply) {
-    return 10506
-  }
-
-  if (uid === reply.r_uid) {
-    return
-  }
-
-  const isLikedReply = reply.likes.includes(uid)
-  const moemoepointAmount = isLikedReply ? -1 : 1
-
-  const session = await mongoose.startSession()
-  session.startTransaction()
-
-  try {
-    await ReplyModel.updateOne(
-      { rid },
-      { [isLikedReply ? '$pull' : '$addToSet']: { likes: uid } }
-    )
-
-    await UserModel.updateOne(
-      { uid: reply.r_uid },
-      { $inc: { moemoepoint: moemoepointAmount, like: moemoepointAmount } }
-    )
-
-    await createDedupMessage(
-      uid,
-      reply.r_uid,
-      'liked',
-      reply.content.slice(0, 233),
-      reply.tid,
-      0
-    )
-
-    await session.commitTransaction()
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
-}
+import prisma from '~/prisma/prisma'
+import { updateReplyLikeSchema } from '~/validations/topic'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
+  }
+  const uid = userInfo.uid
+
+  const input = await kunParsePutBody(event, updateReplyLikeSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const { rid }: { rid: string } = await getQuery(event)
-  if (!rid) {
-    return kunError(event, 10507)
+  const reply = await prisma.topic_reply.findUnique({
+    where: { id: input.replyId, user_id: uid },
+    include: {
+      like: {
+        where: {
+          user_id: uid
+        }
+      }
+    }
+  })
+  if (!reply) {
+    return kunError(event, '未找到该回复')
+  }
+  if (reply.user_id === uid) {
+    return kunError(event, '您不能给自己点赞')
   }
 
-  const result = await updateReplyLike(userInfo.uid, parseInt(rid))
-  if (typeof result === 'number') {
-    return kunError(event, result)
-  }
+  const isLikedReply = reply.like.length > 0
 
-  return 'MOEMOE like reply successfully!'
+  return await prisma.$transaction(async (prisma) => {
+    if (isLikedReply) {
+      await prisma.topic_reply_like.delete({
+        where: {
+          user_id_topic_reply_id: {
+            user_id: uid,
+            topic_reply_id: input.replyId
+          }
+        }
+      })
+    } else {
+      await prisma.topic_reply_like.create({
+        data: {
+          user_id: uid,
+          topic_reply_id: input.replyId
+        }
+      })
+    }
+
+    await prisma.user.update({
+      where: { id: reply.user_id },
+      data: { moemoepoint: { increment: isLikedReply ? -1 : 1 } }
+    })
+
+    await createDedupMessage(
+      prisma,
+      uid,
+      reply.user_id,
+      'liked',
+      reply.content.slice(0, 233),
+      reply.topic_id
+    )
+
+    return 'MOEMOE like reply successfully!'
+  })
 })

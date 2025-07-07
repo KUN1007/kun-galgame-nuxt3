@@ -1,8 +1,8 @@
 import sharp from 'sharp'
 import env from '~/server/env/dotenv'
-import UserModel from '~/server/models/user'
 import { uploadImage } from '~/server/utils/uploadImage'
 import { checkBufferSize } from '~/server/utils/checkBufferSize'
+import prisma from '~/prisma/prisma'
 
 const compressImage = async (name: string, image: Buffer, uid: number) => {
   const miniImage = await sharp(image)
@@ -14,7 +14,7 @@ const compressImage = async (name: string, image: Buffer, uid: number) => {
     .toBuffer()
 
   if (!checkBufferSize(miniImage, 1.007)) {
-    return 10215
+    return '压缩后图片体积大小超过 1 MB'
   }
 
   const bucketName = `image/topic/user_${uid}`
@@ -25,38 +25,40 @@ const compressImage = async (name: string, image: Buffer, uid: number) => {
 export default defineEventHandler(async (event) => {
   const imageFile = await readMultipartFormData(event)
   if (!imageFile || !Array.isArray(imageFile)) {
-    return kunError(event, 10216)
+    return kunError(event, '读取图片数据错误')
   }
   if (!checkBufferSize(imageFile[0].data, 10)) {
-    return kunError(event, 10214)
+    return kunError(event, '图片大小应该小于 10MB')
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
-  const user = await UserModel.findOne({ uid: userInfo.uid })
+  const user = await prisma.user.findUnique({
+    where: { id: userInfo.uid }
+  })
   if (!user) {
-    return kunError(event, 10101)
+    return kunError(event, '未找到用户')
   }
   if (user.daily_image_count >= 50) {
-    return kunError(event, 10217)
+    return kunError(event, '您今日上传图片已达到 50 张上限')
   }
 
   const newFileName = `${userInfo.name}-${Date.now()}`
 
   const res = await compressImage(newFileName, imageFile[0].data, userInfo.uid)
   if (!res) {
-    return kunError(event, 10116)
+    return kunError(event, '上传图片错误')
   }
-  if (typeof res === 'number') {
+  if (typeof res === 'string') {
     return kunError(event, res)
   }
 
-  await UserModel.updateOne(
-    { uid: userInfo.uid },
-    { $inc: { daily_image_count: 1 } }
-  )
+  await prisma.user.update({
+    where: { id: userInfo.uid },
+    data: { daily_image_count: { increment: 1 } }
+  })
 
   const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/topic/user_${userInfo.uid}/${newFileName}.webp`
   return imageLink

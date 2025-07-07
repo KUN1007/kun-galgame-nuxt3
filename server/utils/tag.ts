@@ -1,4 +1,5 @@
 import TagModel from '../models/tag'
+import prisma from '~/prisma/prisma'
 import mongoose from 'mongoose'
 
 export const createTagsByTidAndRid = async (

@@ -1,51 +1,28 @@
-import type { TopicUserInfo, TopicToUserInfo } from './topic'
-import type { TopicComment } from './galgame-comment'
+import type { TopicComment } from './topic-comment'
 
-export interface TopicReplyRequestData {
-  page: string
-  limit: string
-  sortOrder: KunOrder
+export interface TopicReplyTargetInfo {
+  id: number
+  floor: number
+  user: KunUser
+  contentPreview: string
+  replyContentHtml: string
+  replyContentMarkdown: string
 }
 
 export interface TopicReply {
-  rid: number
-  tid: number
+  id: number
+  topicId: number
   floor: number
-  toFloor: number
-  user: TopicUserInfo
-  toUser: TopicToUserInfo
-  edited: number
-  content: string
-  markdown: string
-  upvotes: {
-    count: number
-    isUpvoted: boolean
-  }
-  upvoteTime: number
-  likes: {
-    count: number
-    isLiked: boolean
-  }
-  dislikes: {
-    count: number
-    isDisliked: boolean
-  }
-  tags: string[]
-  time: number
+  user: KunUser & { moemoepoint: number }
+  contentHtml: string
+  contentMarkdown: string
+  likeCount: number
+  isLiked: boolean
+  dislikeCount: number
+  isDisliked: boolean
   comment: TopicComment[]
-}
+  created: Date | string
+  edited: Date | string | null
 
-export interface TopicCreateReplyRequestData {
-  toUid: number
-  toFloor: number
-  tags: string[]
-  content: string
-  time: number
-}
-
-export interface TopicUpdateReplyRequestData {
-  rid: number
-  content: string
-  tags: string[]
-  edited: number
+  targets: TopicReplyTargetInfo[]
 }

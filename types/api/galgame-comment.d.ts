@@ -1,13 +1,11 @@
 export interface GalgameComment {
-  gcid: number
-  gid: number
-  time: number
+  id: number
+  galgameId: number
+  created: number
   content: string
-  likes: {
-    count: number
-    isLiked: boolean
-  }
+  likeCount: number
+  isLike: boolean
 
   user: KunUser
-  toUser: Omit<KunUser, 'avatar'> | 0
+  targetUser?: KunUser
 }

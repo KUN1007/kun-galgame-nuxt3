@@ -27,7 +27,7 @@ export const sendVerificationCodeEmail = async (
   const limitEmail = await useStorage('redis').getItem(`limit:email:${email}`)
   const limitIP = await useStorage('redis').getItem(`limit:ip:${ip}`)
   if (limitEmail || limitIP) {
-    return 10301
+    return '您的发邮件的频率过快, 请 30s 后重试'
   }
 
   const code = generateRandomCode(7)
@@ -63,5 +63,5 @@ export const sendVerificationCodeEmail = async (
 
   transporter.sendMail(mailOptions)
 
-  return salt
+  return { salt }
 }

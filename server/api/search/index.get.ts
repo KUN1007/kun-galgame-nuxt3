@@ -5,18 +5,16 @@ import {
   searchReply,
   searchUser
 } from './_search'
-import type { SearchRequestData, SearchType } from '~/types/api/search'
+import { getSearchResultSchema } from '~/validations/search'
+import type { z } from 'zod'
 
-const search = async (
-  keywords: string,
-  type: SearchType,
-  page: number,
-  limit: number
-) => {
+const search = async (input: z.infer<typeof getSearchResultSchema>) => {
+  const { keywords, type, page, limit } = input
+
   const skip = (page - 1) * limit
   const keywordsArray: string[] = keywords
     .trim()
-    .slice(0, 40)
+    .slice(0, 107)
     .split(' ')
     .filter((keyword) => keyword.trim() !== '')
 
@@ -38,21 +36,14 @@ const search = async (
 }
 
 export default defineEventHandler(async (event) => {
-  const { keywords, type, page, limit }: SearchRequestData =
-    await getQuery(event)
-
-  if (limit !== '12') {
-    return kunError(event, 10209)
+  const input = await kunParsePostBody(event, getSearchResultSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const nsfw = getNSFWCookie(event)
+  // const nsfw = getNSFWCookie(event)
 
-  const result = await search(
-    keywords.trim().slice(0, 40),
-    type,
-    parseInt(page),
-    parseInt(limit)
-  )
+  const result = await search(input)
 
   return result
 })

@@ -4,13 +4,24 @@ import type {
   PlatformOptions
 } from '~/components/galgame/utils/options'
 
-export interface GalgameContributor {
-  uid: number
-  avatar: string
+export interface GalgameSeriesItem {
+  id: number
+  name_en_us: string
+  name_ja_jp: string
+  name_zh_cn: string
+  name_zh_tw: string
+  banner: string
+}
+
+export interface GalgameSeries {
+  id: number
+  name: string
+  description: string
+  galgame: GalgameSeriesItem[]
 }
 
 export interface GalgameDetail {
-  gid: number
+  id: number
   vndbId: string
   user: KunUser
   name: KunLanguage
@@ -18,24 +29,21 @@ export interface GalgameDetail {
   introduction: KunLanguage
   contentLimit: string
   markdown: KunLanguage
-  time: number
-  views: number
+  resourceUpdateTime: Date | string
+  view: number
   platform: string[]
   language: string[]
-  contributor: GalgameContributor[]
-  likes: {
-    count: number
-    isLiked: boolean
-  }
-  favorites: {
-    count: number
-    isFavorite: boolean
-  }
+  type: string[]
+  contributor: KunUser[]
+  likeCount: number
+  isLiked: boolean
+  favoriteCount: number
+  isFavorite: boolean
   alias: string[]
   official: string[]
   engine: string[]
   tags: string[]
-  series: number[]
+  series: GalgameSeries | null
   created: Date | string
   updated: Date | string
 }
@@ -51,15 +59,14 @@ export interface GalgamePageRequestData {
 }
 
 export interface GalgameCard {
-  gid: number
+  id: number
   name: KunLanguage
   banner: string
   user: KunUser
   contentLimit: string
-
-  views: number
-  likes: number
-  time: number
+  view: number
+  likeCount: number
   platform: string[]
   language: string[]
+  resourceUpdateTime: Date | string
 }

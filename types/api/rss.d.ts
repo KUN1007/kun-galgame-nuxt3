@@ -1,18 +1,18 @@
 export interface GalgameRSS {
-  gid: number
+  id: number
   name: string
   banner: string
   user: KunUser
 
-  time: number
+  created: Date | string
   description: string
 }
 
 export interface TopicRSS {
-  tid: number
+  id: number
   name: string
   user: KunUser
 
-  time: number
+  created: Date | string
   description: string
 }

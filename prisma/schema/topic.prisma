@@ -1,47 +1,57 @@
 model topic {
-    id          Int       @id @default(autoincrement())
-    title       String    @db.VarChar(40)
-    content     String    @db.Text
-    view        Int       @default(0)
-    // 0 - normal, 1 - banned, 2 - pinned, 3 - essential
-    status      Int       @default(0)
-    edited      Int       @default(0)
-    update_time DateTime  @default(now())
-    upvote_time DateTime?
+    id                 Int       @id @default(autoincrement())
+    title              String    @db.VarChar(40)
+    content            String    @db.Text
+    view               Int       @default(0)
+    // 0 - normal, 1 - banned, 2 - pinned, 3 - essential, 4 - locked
+    status             Int       @default(0)
+    category           String
+    tag                String[]
+    // When have a new reply, or upvoted
+    status_update_time DateTime  @default(now())
+    edited             DateTime?
+    upvote_time        DateTime?
 
     user_id Int
     user    user @relation("user_topic", fields: [user_id], references: [id])
 
-    reply     reply[]
-    topic_tag topic_tag[]
-    comment   comment[]
+    reply   topic_reply[]
+    comment topic_comment[]
 
     upvote   topic_upvote[]
     like     topic_like[]
     dislike  topic_dislike[]
     favorite topic_favorite[]
 
+    section topic_section_relation[]
+
     created DateTime @default(now())
     updated DateTime @updatedAt
 }
 
-model topic_tag {
-    id       Int    @id @default(autoincrement())
-    name     String
-    category String
-    section  String
+model topic_section {
+    id   Int    @id @default(autoincrement())
+    name String
 
-    topic_id Int
-    topic    topic @relation(fields: [topic_id], references: [id])
-    user_id  Int
-    user     user  @relation(fields: [user_id], references: [id])
+    topic topic_section_relation[]
 
     created DateTime @default(now())
     updated DateTime @updatedAt
-
-    @@unique([topic_id, name])
 }
 
+model topic_section_relation {
+    topic_id         Int
+    topic            topic         @relation(fields: [topic_id], references: [id])
+    topic_section_id Int
+    topic_section    topic_section @relation(fields: [topic_section_id], references: [id])
+
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+
+    @@id([topic_id, topic_section_id])
+}
+
+// Allow duplicate upvote
 model topic_upvote {
     id Int @id @default(autoincrement())
 
@@ -52,8 +62,6 @@ model topic_upvote {
 
     created DateTime @default(now())
     updated DateTime @updatedAt
-
-    @@unique([topic_id, user_id])
 }
 
 model topic_like {

@@ -1,74 +1,71 @@
-import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
-import mongoose from 'mongoose'
-
-const updateTopicLike = async (uid: number, tid: number) => {
-  const topic = await TopicModel.findOne({ tid })
-  if (!topic) {
-    return 10211
-  }
-
-  if (uid === topic.uid) {
-    return
-  }
-
-  const isLikedTopic = topic.likes.includes(uid)
-  const moemoepointAmount = isLikedTopic ? -1 : 1
-
-  const session = await mongoose.startSession()
-  session.startTransaction()
-
-  try {
-    await TopicModel.updateOne(
-      { tid },
-      { [isLikedTopic ? '$pull' : '$addToSet']: { likes: uid } }
-    )
-
-    await UserModel.updateOne(
-      { uid },
-      { [isLikedTopic ? '$pull' : '$addToSet']: { like_topic: tid } }
-    )
-
-    await UserModel.updateOne(
-      { uid: topic.uid },
-      { $inc: { moemoepoint: moemoepointAmount, like: moemoepointAmount } }
-    )
-
-    if (!isLikedTopic) {
-      await createDedupMessage(
-        uid,
-        topic.uid,
-        'liked',
-        topic?.content.slice(0, 233) ?? '',
-        tid,
-        0
-      )
-    }
-
-    await session.commitTransaction()
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
-}
+import prisma from '~/prisma/prisma'
+import { updateTopicLikeSchema } from '~/validations/topic'
+import { markdownToText } from '~/utils/markdownToText'
 
 export default defineEventHandler(async (event) => {
-  const tid = getRouterParam(event, 'tid')
-  if (!tid) {
-    return kunError(event, 10210)
-  }
-
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
+  }
+  const uid = userInfo.uid
+
+  const input = await kunParsePutBody(event, updateTopicLikeSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const result = await updateTopicLike(userInfo.uid, parseInt(tid))
-  if (typeof result === 'number') {
-    return kunError(event, result)
+  const topic = await prisma.topic.findUnique({
+    where: { id: input.topicId, user_id: uid },
+    include: {
+      like: {
+        where: {
+          user_id: uid
+        }
+      }
+    }
+  })
+  if (!topic) {
+    return kunError(event, '未找到该话题')
+  }
+  if (topic.user_id === uid) {
+    return kunError(event, '您不能给自己点赞')
   }
 
-  return 'MOEMOE like topic successfully!'
+  const isLiked = topic.like.length > 0
+
+  return await prisma.$transaction(async (prisma) => {
+    if (isLiked) {
+      await prisma.topic_like.delete({
+        where: {
+          topic_id_user_id: {
+            user_id: uid,
+            topic_id: input.topicId
+          }
+        }
+      })
+    } else {
+      await prisma.topic_like.create({
+        data: {
+          user_id: uid,
+          topic_id: input.topicId
+        }
+      })
+    }
+
+    await prisma.user.update({
+      where: { id: topic.user_id },
+      data: { moemoepoint: { increment: isLiked ? -1 : 1 } }
+    })
+
+    await createDedupMessage(
+      prisma,
+      uid,
+      topic.user_id,
+      'liked',
+      markdownToText(topic.content).slice(0, 233),
+      topic.id
+    )
+
+    return 'MOEMOE like topic successfully!'
+  })
 })

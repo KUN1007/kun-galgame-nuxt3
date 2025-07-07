@@ -1,72 +1,62 @@
-import UserModel from '~/server/models/user'
-import GalgameResourceModel from '~/server/models/galgame-resource'
-import mongoose from 'mongoose'
-
-const updateGalgameResourceLike = async (grid: number, uid: number) => {
-  const resource = await GalgameResourceModel.findOne({ grid }).lean()
-  if (!resource) {
-    return 10622
-  }
-  if (resource.uid === uid) {
-    return
-  }
-  if (resource.likes.includes(uid)) {
-    return 10624
-  }
-
-  const session = await mongoose.startSession()
-  session.startTransaction()
-
-  try {
-    await GalgameResourceModel.updateOne(
-      { grid },
-      { $addToSet: { likes: uid } }
-    )
-
-    await UserModel.updateOne(
-      { uid },
-      { $addToSet: { like_galgame_resource: grid } }
-    )
-
-    await UserModel.updateOne(
-      { uid: resource.uid },
-      { $inc: { moemoepoint: 1, like: 1 } }
-    )
-
-    await createMessage(
-      uid,
-      resource.uid,
-      'liked',
-      resource.link[0].slice(0, 233),
-      0,
-      resource.gid
-    )
-
-    await session.commitTransaction()
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
-}
+import prisma from '~/prisma/prisma'
+import { updateGalgameResourceLikeSchema } from '~/validations/galgame'
 
 export default defineEventHandler(async (event) => {
-  const { grid }: { grid: string } = await getQuery(event)
-  if (!grid) {
-    return kunError(event, 10507)
+  const input = await kunParsePutBody(event, updateGalgameResourceLikeSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
-
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
   const uid = userInfo.uid
 
-  const result = await updateGalgameResourceLike(parseInt(grid), uid)
-  if (typeof result === 'number') {
-    return kunError(event, result)
+  const resource = await prisma.galgame_resource.findUnique({
+    where: { id: input.galgameResourceId, user_id: uid },
+    include: {
+      like: {
+        where: {
+          user_id: uid
+        }
+      },
+      link: {
+        select: {
+          url: true
+        }
+      }
+    }
+  })
+  if (!resource) {
+    return kunError(event, '未找到该资源')
+  }
+  if (resource.like.length > 0) {
+    return kunError(event, '您已经点赞过这个资源了')
   }
 
-  return 'MOEMOE like galgame resource operation successfully!'
+  return await prisma.$transaction(async (prisma) => {
+    await prisma.galgame_resource_like.create({
+      data: {
+        galgame_resource_id: input.galgameResourceId,
+        user_id: uid
+      }
+    })
+
+    await prisma.user.update({
+      where: { id: uid },
+      data: { moemoepoint: { increment: 1 } }
+    })
+
+    await createMessage(
+      prisma,
+      uid,
+      resource.user_id,
+      'liked',
+      resource.link[0].url.slice(0, 233),
+      undefined,
+      resource.galgame_id
+    )
+
+    return 'MOEMOE like galgame resource operation successfully!'
+  })
 })

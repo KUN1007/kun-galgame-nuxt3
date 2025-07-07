@@ -1,14 +1,17 @@
-import GalgameModel from '~/server/models/galgame'
+import prisma from '~/prisma/prisma'
+import { getGalgameDuplicateSchema } from '~/validations/galgame'
 
 export default defineEventHandler(async (event) => {
-  const { vndbId }: { vndbId: string } = await getQuery(event)
-  if (!vndbId) {
-    return kunError(event, 10507)
+  const input = kunParseGetQuery(event, getGalgameDuplicateSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const galgame = await GalgameModel.countDocuments({ vndb_id: vndbId })
+  const galgame = await prisma.galgame.count({
+    where: { vndb_id: input.vndbId }
+  })
   if (galgame) {
-    return kunError(event, 10641)
+    return kunError(event, '这个 Galgame 已经有人发布过了')
   }
 
   return 'The galgame is unique!'

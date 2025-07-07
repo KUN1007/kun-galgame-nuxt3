@@ -1,59 +1,90 @@
-import UserModel from '~/server/models/user'
-import GalgameModel from '~/server/models/galgame'
-import GalgameResourceModel from '~/server/models/galgame-resource'
-import type {
-  UserGalgameResource,
-  UserGetGalgameResourceRequestData
-} from '~/types/api/user'
+import prisma from '~/prisma/prisma'
+import { getUserGalgameResourceSchema } from '~/validations/user'
+import type { UserGalgameResource } from '~/types/api/user'
+import type { Prisma } from '@prisma/client'
 
 export default defineEventHandler(async (event) => {
-  const uid = getRouterParam(event, 'uid')
-  if (!uid) {
-    return kunError(event, 10101)
+  const input = kunParseGetQuery(event, getUserGalgameResourceSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const { page, limit, type }: UserGetGalgameResourceRequestData =
-    await getQuery(event)
-  if (!page || !limit || !type) {
-    return kunError(event, 10507)
+  const { userId, page, limit, type } = input
+  const skip = (page - 1) * limit
+
+  let whereClause: Prisma.galgame_resourceWhereInput = {}
+
+  switch (type) {
+    case 'valid':
+      whereClause = {
+        user_id: userId,
+        status: 0
+      }
+      break
+    case 'expire':
+      whereClause = {
+        user_id: userId,
+        status: 1
+      }
+      break
+    case 'galgame_resource_like':
+      whereClause = {
+        like: {
+          some: {
+            user_id: userId
+          }
+        }
+      }
+      break
+    default:
+      return kunError(event, '无效的类型参数', 400)
   }
-  if (limit !== '50') {
-    return kunError(event, 10209)
-  }
-  const skip = (parseInt(page) - 1) * parseInt(limit)
 
-  const user = await UserModel.findOne({ uid }).lean()
-  if (!user) {
-    return kunError(event, 10114)
-  }
+  const [resources, totalCount] = await prisma.$transaction([
+    prisma.galgame_resource.findMany({
+      where: whereClause,
 
-  const resourceArray =
-    {
-      valid: user.galgame_resource,
-      invalid: user.galgame_resource,
-      like: user.like_galgame_resource
-    }[type] || []
+      select: {
+        galgame_id: true,
+        platform: true,
+        status: true,
+        created: true,
+        galgame: {
+          select: {
+            name_en_us: true,
+            name_ja_jp: true,
+            name_zh_cn: true,
+            name_zh_tw: true
+          }
+        }
+      },
+      orderBy: {
+        created: 'desc'
+      },
+      skip: skip,
+      take: limit
+    }),
 
-  const totalCount = await GalgameResourceModel.countDocuments({
-    grid: { $in: resourceArray },
-    status: type === 'like' ? { $ne: 1 } : type === 'valid' ? 0 : 1
-  }).lean()
-  const data = await GalgameResourceModel.find({
-    grid: { $in: resourceArray },
-    status: type === 'like' ? { $ne: 1 } : type === 'valid' ? 0 : 1
-  })
-    .sort({ created: -1 })
-    .skip(skip)
-    .limit(parseInt(limit))
-    .populate('game', 'name', GalgameModel)
-    .lean()
+    prisma.galgame_resource.count({
+      where: whereClause
+    })
+  ])
 
-  const resources: UserGalgameResource[] = data.map((res) => ({
-    gid: res.gid,
-    name: res.game[0].name,
+  const formattedResources: UserGalgameResource[] = resources.map((res) => ({
+    galgameId: res.galgame_id,
+    galgameName: {
+      'en-us': res.galgame.name_en_us,
+      'ja-jp': res.galgame.name_ja_jp,
+      'zh-cn': res.galgame.name_zh_cn,
+      'zh-tw': res.galgame.name_zh_tw
+    },
     platform: res.platform,
     status: res.status,
-    time: new Date(res.time).getTime()
+    created: res.created
   }))
-  return { resources, totalCount }
+
+  return {
+    resources: formattedResources,
+    totalCount: totalCount
+  }
 })

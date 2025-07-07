@@ -1,25 +1,6 @@
 import type { HomeTopic, HomeGalgame } from './home'
 
-export type SortField =
-  | 'updated'
-  | 'time'
-  | 'views'
-  | 'upvotes'
-  | 'likes'
-  | 'replies'
-  | 'comments'
-
-export type SortFieldTopic = 'views' | 'created'
-
 export type TopicCard = HomeTopic
-
-export interface TopicCardRequestData {
-  page: string
-  limit: string
-  sortField: string
-  sortOrder: string
-  category: string
-}
 
 export interface TopicAside {
   title: string
@@ -45,48 +26,29 @@ export interface EditUpdateTopicRequestData {
   edited: string
 }
 
-export interface TopicUserInfo {
-  uid: number
-  name: string
-  avatar: string
-  moemoepoint: number
-}
-
-export interface TopicToUserInfo {
-  uid: number
-  name: string
-}
-
 export interface TopicDetail {
-  tid: number
+  id: number
   title: string
-  views: number
-  likes: {
-    count: number
-    isLiked: boolean
-  }
-  dislikes: {
-    count: number
-    isDisliked: boolean
-  }
-  favorites: {
-    count: number
-    isFavorite: boolean
-  }
-  time: number
-  content: string
-  markdown: string
-  upvotes: {
-    count: number
-    isUpvoted: boolean
-  }
-  tags: string[]
-  edited: number
-  user: TopicUserInfo
-  replies: number[]
+  view: number
   status: number
-  share: number[]
-  category: string[]
+  category: string
   section: string[]
-  upvoteTime: number
+  tag: string[]
+  user: KunUser & { moemoepoint: number }
+
+  likeCount: number
+  isLiked: boolean
+  dislikeCount: number
+  isDisliked: boolean
+  favoriteCount: number
+  isFavorited: boolean
+  upvoteCount: number
+  isUpvoted: boolean
+
+  contentHtml: string
+  contentMarkdown: string
+  statusUpdateTime: Date | string
+  upvoteTime: Date | string | null
+  edited: Date | string | null
+  created: Date | string
 }

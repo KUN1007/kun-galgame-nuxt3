@@ -1,18 +1,18 @@
 import { hash } from 'bcrypt'
-import UserModel from '~/server/models/user'
-import {
-  isValidEmail,
-  isValidMailConfirmCode,
-  isValidPassword
-} from '~/utils/validate'
-import type { ResetPasswordByEmailRequestData } from '~/types/api/auth'
+import prisma from '~/prisma/prisma'
+import { createSendResetPasswordByEmailVerificationCodeSchema } from '~/validations/auth'
 
-const resetPasswordByEmail = async (
-  codeSalt: string,
-  email: string,
-  code: string,
-  newPassword: string
-) => {
+export default defineEventHandler(async (event) => {
+  const input = await kunParsePostBody(
+    event,
+    createSendResetPasswordByEmailVerificationCodeSchema
+  )
+  if (typeof input === 'string') {
+    return kunError(event, input)
+  }
+
+  const { codeSalt, email, code, newPassword } = input
+
   const codeKey = `${codeSalt}:${email}`
   const isCodeValid = await verifyVerificationCode(codeKey, code)
   if (!isCodeValid) {
@@ -22,38 +22,12 @@ const resetPasswordByEmail = async (
   await useStorage('redis').removeItem(codeKey)
   const hashedPassword = await hash(newPassword, 7)
 
-  const user = await UserModel.findOneAndUpdate(
-    { email },
-    { $set: { password: hashedPassword } }
-  )
-
+  const user = await prisma.user.update({
+    where: { email },
+    data: { password: hashedPassword }
+  })
   if (!user) {
-    return 10101
-  }
-}
-
-export default defineEventHandler(async (event) => {
-  const {
-    codeSalt,
-    email,
-    code,
-    newPassword
-  }: ResetPasswordByEmailRequestData = await readBody(event)
-
-  if (
-    !codeSalt ||
-    codeSalt.length !== 64 ||
-    !isValidEmail(email) ||
-    !isValidMailConfirmCode(code) ||
-    !isValidPassword(newPassword)
-  ) {
-    return kunError(event, 10303)
-  }
-
-  const result = await resetPasswordByEmail(codeSalt, email, code, newPassword)
-
-  if (typeof result === 'number') {
-    return kunError(event, result)
+    return kunError(event, '为找到该用户')
   }
 
   return 'MOEMOE reset password by email successfully!'

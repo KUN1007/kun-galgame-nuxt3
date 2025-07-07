@@ -1,7 +1,6 @@
 export interface GalgameLink {
-  gid: number
-  glid: number
-  uid: number
-  name: string
+  id: number
+  user: KunUser
+  galgameId: number
   link: string
 }

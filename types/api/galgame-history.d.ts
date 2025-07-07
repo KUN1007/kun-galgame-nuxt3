@@ -6,27 +6,19 @@ export type GalgameHistoryAction =
   | 'declined'
 export type GalgameHistoryType = 'galgame' | 'banner' | 'link' | 'pr'
 
-interface User {
-  uid: number
-  name: string
-  avatar: string
-}
-
 export interface CreateGalgameHistoryRequestData {
-  gid: number
-  uid: number
-  time: number
+  galgame_id: number
+  user_id: number
   action: GalgameHistoryAction
   type: GalgameHistoryType
   content: string
 }
 
 export interface GalgameHistory {
-  gid: number
-  time: number
+  id: number
   action: GalgameHistoryAction
   type: GalgameHistoryType
   content: string
-
-  user: User
+  user: KunUser
+  created: Date | string
 }

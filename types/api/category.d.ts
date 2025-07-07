@@ -1,5 +1,5 @@
 export interface CategoryTopic {
-  tid: number
+  id: number
   title: string
   time: number
 }

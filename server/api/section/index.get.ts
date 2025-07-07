@@ -1,66 +1,93 @@
-import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
-import type { GetSectionRequestData, SectionTopic } from '~/types/api/section'
+import prisma from '~/prisma/prisma'
+import { getSectionSchema } from '~/validations/section'
+import type { z } from 'zod'
+import type { SectionTopic } from '~/types/api/section'
 
-const getSectionTopic = async (
-  section: string,
-  page: number,
-  limit: number,
-  order: 'asc' | 'desc'
-) => {
+const getSectionTopic = async (input: z.infer<typeof getSectionSchema>) => {
+  const { section, page, limit, sortOrder } = input
   const skip = (page - 1) * limit
 
-  const totalCount = await TopicModel.countDocuments({
-    status: { $ne: 1 },
-    section: { $in: section }
+  const totalCount = await prisma.topic.count({
+    where: {
+      status: {
+        not: 1
+      },
+      section: {
+        some: {
+          topic_section: {
+            name: section
+          }
+        }
+      }
+    }
   })
 
-  const data = await TopicModel.find({
-    status: { $ne: 1 },
-    section: { $in: section }
+  const data = await prisma.topic.findMany({
+    skip,
+    take: limit,
+    orderBy: { created: sortOrder },
+    where: {
+      status: {
+        not: 1
+      },
+      section: {
+        some: {
+          topic_section: {
+            name: section
+          }
+        }
+      }
+    },
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true
+        }
+      },
+      section: {
+        select: {
+          topic_section: {
+            select: {
+              name: true
+            }
+          }
+        }
+      },
+      _count: {
+        select: {
+          like: true,
+          reply: true,
+          comment: true
+        }
+      }
+    }
   })
-    .sort({ time: order })
-    .skip(skip)
-    .limit(limit)
-    .populate('user', 'uid avatar name', UserModel)
-    .lean()
 
   const topics: SectionTopic[] = data.map((topic) => ({
-    tid: topic.tid,
+    id: topic.id,
     title: topic.title,
     content: topic.content.slice(0, 233),
-    time: topic.time,
-    section: topic.section,
-    tags: topic.tags,
-    views: topic.views,
-    likes: topic.likes.length,
-    replies: topic.replies.length,
-    user: {
-      uid: topic.user[0].uid,
-      avatar: topic.user[0].avatar,
-      name: topic.user[0].name
-    }
+    section: topic.section.map((s) => s.topic_section.name),
+    tag: topic.tag,
+    view: topic.view,
+    like: topic._count.like,
+    reply: topic._count.reply,
+    user: topic.user,
+    created: topic.created
   }))
 
   return { topics, totalCount }
 }
 
 export default defineEventHandler(async (event) => {
-  const { section, page, limit, order }: GetSectionRequestData =
-    await getQuery(event)
-  if (!section || !page || !limit || !order) {
-    return kunError(event, 10507)
-  }
-  if (limit !== '30') {
-    return kunError(event, 10209)
+  const input = kunParseGetQuery(event, getSectionSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const res = await getSectionTopic(
-    section,
-    parseInt(page),
-    parseInt(limit),
-    order
-  )
+  const res = await getSectionTopic(input)
 
   return res
 })

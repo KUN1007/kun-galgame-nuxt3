@@ -13,29 +13,46 @@ type UserSortFieldRanking =
   | 'reply'
   | 'comment'
 
-export interface RankingGetTopicsRequestData {
-  page: string
-  limit: string
-  sortField: TopicSortFieldRanking
-  sortOrder: KunOrder
-}
+type GalgameSortFieldRanking =
+  | 'view'
+  | 'like'
+  | 'favorite'
+  | 'resource'
+  | 'created'
 
-export interface RankingTopics {
-  tid: number
-  title: string
-  field: number
-}
-
-export interface RankingGetUserRequestData {
-  page: string
-  limit: string
-  sortField: UserSortFieldRanking
-  sortOrder: KunOrder
-}
-
-export interface RankingUsers {
-  uid: number
+export interface UserRankingItem {
+  id: number
   name: string
   avatar: string
-  field: number
+  bio: string
+  moemoepoint: number
+  topicCount: number
+  replyCount: number
+  commentCount: number
+  likeCount: number
+  upvoteCount: number
+  created: Date
+}
+
+export interface TopicRankingItem {
+  id: number
+  title: string
+  view: number
+  created: Date
+  user: KunUser
+  upvoteCount: number
+  likeCount: number
+  replyCount: number
+  commentCount: number
+}
+
+export interface GalgameRankingItem {
+  id: number
+  name: KunLanguage
+  banner: string
+  view: number
+  created: Date
+  likeCount: number
+  favoriteCount: number
+  resourceCount: number
 }

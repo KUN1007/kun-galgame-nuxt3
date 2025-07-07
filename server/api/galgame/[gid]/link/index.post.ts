@@ -1,72 +1,42 @@
-import mongoose from 'mongoose'
-import GalgameModel from '~/server/models/galgame'
-import GalgameLinkModel from '~/server/models/galgame-link'
-import { checkGalgameLinkPublish } from '../../utils/checkGalgameLinkPublish'
-import type { H3Event } from 'h3'
-
-const getLinkData = async (event: H3Event) => {
-  const { name, link }: { name: string; link: string } = await readBody(event)
-  if (!name || !link) {
-    return kunError(event, 10507)
-  }
-  const res = checkGalgameLinkPublish(name, link)
-  if (res) {
-    return kunError(event, res)
-  }
-  const gid = getRouterParam(event, 'gid')
-  if (!gid) {
-    return
-  }
-
-  const userInfo = await getCookieTokenInfo(event)
-  if (!userInfo) {
-    return kunError(event, 10115, 205)
-  }
-  const uid = userInfo.uid
-
-  return {
-    gid,
-    uid,
-    name,
-    link
-  }
-}
+import prisma from '~/prisma/prisma'
+import { createGalgameLinkSchema } from '~/validations/galgame'
 
 export default defineEventHandler(async (event) => {
-  const result = await getLinkData(event)
-  if (!result) {
-    return
+  const input = await kunParsePostBody(event, createGalgameLinkSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
+  }
+  const userInfo = await getCookieTokenInfo(event)
+  if (!userInfo) {
+    return kunError(event, '用户登录失效', 205)
   }
 
-  const session = await mongoose.startSession()
-  session.startTransaction()
-  try {
-    await GalgameLinkModel.create({ ...result })
+  const uid = userInfo.uid
+  const { galgameId, name, link } = input
 
-    await GalgameModel.updateOne(
-      { gid: result.gid },
-      {
-        $set: { time: Date.now() },
-        $addToSet: { contributor: result.uid }
+  return await prisma.$transaction(async (prisma) => {
+    await prisma.galgame_link.create({
+      data: {
+        user_id: uid,
+        galgame_id: galgameId,
+        name,
+        link
       }
-    )
+    })
 
-    await session.commitTransaction()
+    await prisma.galgame_contributor.createMany({
+      data: [{ user_id: uid, galgame_id: galgameId }],
+      skipDuplicates: true
+    })
 
-    await createGalgameHistory({
-      gid: parseInt(result.gid),
-      uid: result.uid,
-      time: Date.now(),
+    await createGalgameHistory(prisma, {
+      galgame_id: galgameId,
+      user_id: uid,
       action: 'created',
       type: 'link',
-      content: result.name
+      content: name
     })
 
     return 'MOEMOE create visualnovel-related link successfully!'
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
+  })
 })

@@ -1,103 +1,56 @@
-export type TopicType = 'publish' | 'like' | 'upvote' | 'favorite'
-export type GalgameType = 'publish' | 'like' | 'favorite' | 'contribute'
-export type GalgameResourceType = 'valid' | 'invalid' | 'like'
+import type { GalgameCard } from '~/types/api/galgame'
 
 export interface UserInfo {
-  uid: number
+  id: number
   name: string
   avatar: string
-  roles: number
+  role: number
   status: number
-  time: number
   moemoepoint: number
   bio: string
+  created: Date | string
+
   upvote: number
   like: number
   dislike: number
+  favorite: number
 
-  reply: number
-  comment: number
-
+  replyCreated: number
+  commentCreated: number
   topic: number
-  likeTopic: number
-  upvoteTopic: number
-  favoriteTopic: number
 
   galgame: number
-  likeGalgame: number
-  favoriteGalgame: number
+  galgameComment: number
+  galgamePr: number
+  galgameLink: number
   contributeGalgame: number
 
-  galgameResourceValid: number
-  galgameResourceInvalid: number
+  galgameResource: number
 
   dailyTopicCount: number
   dailyGalgameCount: number
 }
 
-export interface UserUpdateAvatarRequestData {
-  uid: number
-  avatar: FormData
-}
-
-export interface UserUpdateBioRequestData {
-  uid: number
-  bio: string
-}
-
-export interface UserUpdateEmailRequestData {
-  codeSalt: string
-  email: string
-  code: string
-}
-
-export interface UserUpdatePasswordRequestData {
-  oldPassword: string
-  newPassword: string
-}
-
 export interface UserTopic {
-  tid: number
+  id: number
   title: string
-  time: number
+  created: Date | string
 }
 
-export interface UserGetTopicRequestData {
-  page: string
-  limit: string
-  type: TopicType
-}
-
-export interface UserGalgame {
-  gid: number
-  name: KunLanguage
-  time: number
-}
+export type UserGalgame = GalgameCard
 
 export interface UserGalgameResource {
-  gid: number
-  name: KunLanguage
+  galgameId: number
+  galgameName: KunLanguage
   platform: string
   status: number
-  time: number
-}
-
-export interface UserGetGalgameRequestData {
-  page: string
-  limit: string
-  type: GalgameType
-}
-
-export interface UserGetGalgameResourceRequestData {
-  page: string
-  limit: string
-  type: GalgameResourceType
+  created: Date | string
 }
 
 export interface UserReply {
-  tid: number
+  topicId: number
   content: string
-  time: number
+  created: Date | string
 }
 
 export interface UserGetUserReplyRequestData {
@@ -106,27 +59,14 @@ export interface UserGetUserReplyRequestData {
 }
 
 export interface UserComment {
-  tid: number
+  topicId: number
   content: string
-  time: Date | string
+  created: Date | string
 }
 
 export interface UserGetUserCommentRequestData {
   uid: number
   cidArray: number[]
-}
-
-export interface LoginRequestData {
-  name: string
-  password: string
-}
-
-export interface RegisterRequestData {
-  codeSalt: string
-  name: string
-  email: string
-  password: string
-  code: string
 }
 
 export type UserUpdateAvatarResponseData = {
@@ -139,9 +79,9 @@ export type UserGetUserEmailResponseData = {
 }
 
 export type LoginResponseData = {
-  uid: number
+  id: number
   name: string
   avatar: string
   moemoepoint: number
-  roles: number
+  role: number
 }

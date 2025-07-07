@@ -1,29 +1,19 @@
-import { reportSection } from '~/constants/report'
-import ReportModel from '~/server/models/report'
-
-import type { ReportSubmitRequestData } from '~/types/api/report'
+import prisma from '~/prisma/prisma'
+import { createReportSchema } from '~/validations/report'
 
 export default defineEventHandler(async (event) => {
-  const { reason, type }: ReportSubmitRequestData = await readBody(event)
+  const input = kunParseGetQuery(event, createReportSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
+  }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
 
-  if (!reportSection.includes(type)) {
-    return kunError(event, 10121)
-  }
-  if (!reason) {
-    return kunError(event, 10122)
-  }
-  if (reason.trim().length > 1007) {
-    return kunError(event, 10123)
-  }
-
-  await ReportModel.create({
-    reason,
-    type
+  await prisma.report.create({
+    data: { reason: input.reason, type: input.type }
   })
 
   return 'Moe Moe submit report successfully!'

@@ -1,81 +1,61 @@
-import mongoose from 'mongoose'
-import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
-
-const updateTopicUpvote = async (uid: number, tid: number) => {
-  const topic = await TopicModel.findOne({ tid })
-  if (!topic) {
-    return 10211
-  }
-
-  const userInfo = await UserModel.findOne({ uid })
-  if (!userInfo) {
-    return 10115
-  }
-
-  const moemoepoint = userInfo.moemoepoint
-  if (moemoepoint < 1100) {
-    return 10202
-  }
-
-  const session = await mongoose.startSession()
-  session.startTransaction()
-
-  try {
-    await TopicModel.updateOne(
-      { tid },
-      {
-        $set: { upvote_time: Date.now() },
-        $push: { upvotes: uid }
-      }
-    )
-
-    await UserModel.updateOne(
-      { uid },
-      {
-        $inc: { moemoepoint: -7 },
-        $addToSet: { upvote_topic: tid }
-      }
-    )
-
-    await UserModel.updateOne(
-      { uid: topic.uid },
-      { $inc: { moemoepoint: 3, upvote: 1 } }
-    )
-
-    await createMessage(
-      uid,
-      topic.uid,
-      'upvoted',
-      topic.content.slice(0, 233),
-      tid,
-      0
-    )
-
-    await session.commitTransaction()
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
-}
+import prisma from '~/prisma/prisma'
+import { markdownToText } from '~/utils/markdownToText'
+import { updateTopicUpvoteSchema } from '~/validations/topic'
 
 export default defineEventHandler(async (event) => {
-  const tid = getRouterParam(event, 'tid')
-  if (!tid) {
-    return kunError(event, 10210)
-  }
-
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
+  }
+  const uid = userInfo.uid
+
+  const input = await kunParsePutBody(event, updateTopicUpvoteSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const result = await updateTopicUpvote(userInfo.uid, parseInt(tid))
-  if (typeof result === 'number') {
-    return kunError(event, result)
+  const topic = await prisma.topic.findUnique({
+    where: { id: input.topicId, user_id: uid }
+  })
+  if (!topic) {
+    return kunError(event, '未找到该话题')
+  }
+  if (topic.user_id === uid) {
+    return kunError(event, '您不能推自己的话题')
   }
 
-  return 'MOEMOE upvote topic successfully!'
+  return await prisma.$transaction(async (prisma) => {
+    await prisma.topic_upvote.create({
+      data: {
+        user_id: uid,
+        topic_id: input.topicId
+      }
+    })
+
+    await prisma.topic.update({
+      where: { id: input.topicId },
+      data: { status_update_time: new Date() }
+    })
+
+    await prisma.user.update({
+      where: { id: topic.user_id },
+      data: { moemoepoint: { increment: 3 } }
+    })
+
+    await prisma.user.update({
+      where: { id: uid },
+      data: { moemoepoint: { increment: -7 } }
+    })
+
+    await createDedupMessage(
+      prisma,
+      uid,
+      topic.user_id,
+      'upvoted',
+      markdownToText(topic.content).slice(0, 233),
+      topic.id
+    )
+
+    return 'MOEMOE upvoted topic successfully!'
+  })
 })

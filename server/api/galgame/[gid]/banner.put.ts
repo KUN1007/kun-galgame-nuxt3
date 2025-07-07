@@ -1,73 +1,63 @@
-import mongoose from 'mongoose'
 import env from '~/server/env/dotenv'
-import UserModel from '~/server/models/user'
-import GalgameModel from '~/server/models/galgame'
+import prisma from '~/prisma/prisma'
 import { uploadGalgameBanner } from '../utils/uploadGalgameBanner'
+import { updateGalgameBannerSchema } from '~/validations/galgame'
 
 export default defineEventHandler(async (event) => {
   const bannerFile = await readMultipartFormData(event)
   if (!bannerFile || !Array.isArray(bannerFile)) {
-    return kunError(event, 10110)
+    return kunError(event, '读取图片失败')
   }
 
-  const gid = getRouterParam(event, 'gid')
-  if (!gid) {
-    return kunError(event, 10609)
+  const input = await kunParsePutBody(event, updateGalgameBannerSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
-
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
-  const user = await UserModel.findOne({ uid: userInfo.uid }).lean()
-  if (!user) {
-    return kunError(event, 10101)
-  }
+  const uid = userInfo.uid
 
-  const galgame = await GalgameModel.findOne({ gid, status: { $ne: 1 } }).lean()
+  const galgame = await prisma.galgame.findUnique({
+    where: { id: input.galgameId, status: { not: 1 }, user_id: userInfo.uid }
+  })
   if (!galgame) {
-    return kunError(event, 10610)
+    return kunError(event, '未找到这个 Galgame')
+  }
+  if (galgame.user_id !== uid || userInfo.role < 2) {
+    return kunError(event, '您没有权限更改这个 Galgame 的预览图')
   }
 
-  if (userInfo.uid !== galgame.uid && user.roles < 2) {
-    return kunError(event, 10632)
-  }
-
-  const session = await mongoose.startSession()
-  session.startTransaction()
-  try {
+  return await prisma.$transaction(async (prisma) => {
     const res = await uploadGalgameBanner(
       Buffer.from(bannerFile[0].data),
-      parseInt(gid)
+      input.galgameId
     )
     if (!res) {
-      return kunError(event, 10116)
+      return kunError(event, '上传 Galgame 预览图错误')
     }
-    if (typeof res === 'number') {
+    if (typeof res === 'string') {
       return kunError(event, res)
     }
 
-    const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${gid}/banner/banner.webp`
-    await GalgameModel.updateOne({ gid }, { $set: { banner: imageLink } })
+    const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${galgame.id}/banner/banner.webp`
 
-    await purgeCache('galgameBanner', Number(gid))
+    await prisma.galgame.update({
+      where: { id: galgame.id },
+      data: { banner: imageLink }
+    })
 
-    await createGalgameHistory({
-      gid: parseInt(gid),
-      uid: userInfo.uid,
-      time: Date.now(),
+    await purgeCache('galgameBanner', galgame.id)
+
+    await createGalgameHistory(prisma, {
+      galgame_id: galgame.id,
+      user_id: userInfo.uid,
       action: 'updated',
       type: 'banner',
       content: ''
     })
 
-    await session.commitTransaction()
-
     return 'MOEMOE update galgame banner successfully!'
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
+  })
 })

@@ -9,23 +9,25 @@ export interface HomeUserStatus {
 }
 
 export interface HomeTopic {
-  tid: number
+  id: number
   title: string
-  views: number
-  likes: number
-  replies: number
-  comments: number
+  view: number
 
-  time: number
-  tags: string[]
   section: string[]
+  tag: string[]
   user: KunUser
   status: number
-  upvoteTime: number
+
+  likeCount: number
+  replyCount: number
+  commentCount: number
+
+  statusUpdateTime: Date | string
+  upvoteTime: Date | string | null
 }
 
 export type HomeGalgame = GalgameCard
 
 export interface HomeGalgameResources extends GalgameResource {
-  name: KunLanguage
+  galgameName: KunLanguage
 }

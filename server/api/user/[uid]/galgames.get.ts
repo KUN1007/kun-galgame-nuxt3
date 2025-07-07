@@ -1,51 +1,118 @@
-import UserModel from '~/server/models/user'
-import GalgameModel from '~/server/models/galgame'
-import type { UserGalgame, UserGetGalgameRequestData } from '~/types/api/user'
+import prisma from '~/prisma/prisma'
+import { getUserGalgameSchema } from '~/validations/user'
+import type { GalgameCard } from '~/types/api/galgame'
+import type { Prisma } from '@prisma/client'
 
 export default defineEventHandler(async (event) => {
-  const uid = getRouterParam(event, 'uid')
-  if (!uid) {
-    return kunError(event, 10101)
+  const input = kunParseGetQuery(event, getUserGalgameSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const { page, limit, type }: UserGetGalgameRequestData = await getQuery(event)
-  if (!page || !limit || !type) {
-    return kunError(event, 10507)
+  const userInfo = await getCookieTokenInfo(event)
+  if (!userInfo) {
+    return kunError(event, '用户登录失效', 205)
   }
-  if (limit !== '50') {
-    return kunError(event, 10209)
+  const userId = userInfo.uid
+
+  const { page, limit, type } = input
+
+  const where: Prisma.galgameWhereInput = {}
+
+  switch (type) {
+    case 'galgame':
+      where.user_id = userId
+      break
+    case 'galgame_like':
+      where.like = { some: { user_id: userId } }
+      break
+    case 'galgame_favorite':
+      where.favorite = { some: { user_id: userId } }
+      break
+    case 'galgame_contribute':
+      where.contributor = { some: { user_id: userId } }
+      break
+
+    case 'galgame_pr':
+      where.pr = { some: { user_id: userId } }
+      break
+    case 'galgame_history':
+      where.history = { some: { user_id: userId } }
+      break
+    case 'galgame_link':
+      where.link = { some: { user_id: userId } }
+      break
+    case 'galgame_comment':
+      where.comment = { some: { user_id: userId } }
+      break
+    case 'galgame_comment_target':
+      where.comment = { some: { target_user_id: userId } }
+      break
+    case 'galgame_comment_like':
+      where.comment = { some: { like: { some: { user_id: userId } } } }
+      break
   }
-  const skip = (parseInt(page) - 1) * parseInt(limit)
 
-  const user = await UserModel.findOne({ uid }).lean()
-  if (!user) {
-    return kunError(event, 10114)
-  }
+  const [data, totalCount] = await prisma.$transaction([
+    prisma.galgame.findMany({
+      where,
+      skip: (page - 1) * limit,
+      take: limit,
+      orderBy: {
+        resource_update_time: 'desc'
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            avatar: true
+          }
+        },
+        _count: {
+          select: {
+            like: true,
+            favorite: true
+          }
+        },
+        resource: {
+          select: {
+            platform: true,
+            language: true
+          }
+        }
+      }
+    }),
+    prisma.galgame.count({ where: where })
+  ])
 
-  const galgameArray =
-    {
-      publish: user.galgame,
-      like: user.like_galgame,
-      favorite: user.favorite_galgame,
-      contribute: user.contribute_galgame
-    }[type] || []
+  const galgames: GalgameCard[] = data.map((galgame) => {
+    const platforms = [...new Set(galgame.resource.map((r) => r.platform))]
+    const languages = [...new Set(galgame.resource.map((r) => r.language))]
 
-  const totalCount = await GalgameModel.countDocuments({
-    gid: { $in: galgameArray },
-    status: { $ne: 1 }
-  }).lean()
-  const data = await GalgameModel.find({
-    gid: { $in: galgameArray },
-    status: { $ne: 1 }
+    return {
+      id: galgame.id,
+      name: {
+        'en-us': galgame.name_en_us,
+        'ja-jp': galgame.name_ja_jp,
+        'zh-cn': galgame.name_zh_cn,
+        'zh-tw': galgame.name_zh_tw
+      },
+      banner: galgame.banner,
+
+      user: galgame.user as unknown as KunUser,
+      contentLimit: galgame.content_limit,
+      view: galgame.view,
+      likeCount: galgame._count.like,
+      favorites: galgame._count.favorite,
+      resourceUpdateTime: galgame.resource_update_time,
+      platform: platforms,
+      language: languages
+    }
   })
-    .sort({ created: -1 })
-    .skip(skip)
-    .limit(parseInt(limit))
 
-  const galgames: UserGalgame[] = data.map((galgame) => ({
-    gid: galgame.gid,
-    name: galgame.name,
-    time: new Date(galgame.time).getTime()
-  }))
-  return { galgames, totalCount }
+  return {
+    galgames,
+    totalCount
+  }
 })

@@ -11,7 +11,7 @@ export interface GalgameStorePersist {
 }
 
 export interface GalgameStoreTemp {
-  gid: number
+  id: number
   name: KunLanguage
   introduction: KunLanguage
   contentLimit: string

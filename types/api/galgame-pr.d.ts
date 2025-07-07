@@ -1,14 +1,12 @@
 import type { GalgameStoreTemp } from '~/store/types/edit/galgame'
 
 export interface GalgamePR {
-  gprid: number
-  gid: number
+  id: number
+  galgameId: number
   index: number
   status: number
-  time: Date | string
-  completedTime: number
-
   user: KunUser
+  completedTime: Date | string | null
 }
 
 export interface GalgamePRDetails extends GalgamePR {

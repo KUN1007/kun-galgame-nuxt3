@@ -4,9 +4,6 @@ model report {
   type   String @default("")
   status Int    @default(0)
 
-  user_id Int
-  user    user @relation(fields: [user_id], references: [id])
-
   created DateTime @default(now())
   updated DateTime @updatedAt
 }

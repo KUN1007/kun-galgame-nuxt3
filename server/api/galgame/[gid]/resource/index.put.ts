@@ -1,28 +1,45 @@
-import GalgameResourceModel from '~/server/models/galgame-resource'
-import { checkGalgameResourcePublish } from '../../utils/checkGalgameResourcePublish'
-import type { GalgameResourceStoreTemp } from '~/store/types/galgame/resource'
+import prisma from '~/prisma/prisma'
+import { updateGalgameResourceSchema } from '~/validations/galgame'
 
 export default defineEventHandler(async (event) => {
-  const result: GalgameResourceStoreTemp = await readBody(event)
-  if (!result) {
-    return kunError(event, 10507)
+  const input = await kunParsePutBody(event, updateGalgameResourceSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
-  const res = checkGalgameResourcePublish(result)
-  if (res) {
-    return kunError(event, res)
-  }
-  const { grid }: { grid: string } = await getQuery(event)
-  if (!grid) {
-    return kunError(event, 10507)
-  }
-
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
-  const uid = userInfo.uid
 
-  await GalgameResourceModel.updateOne({ grid, uid }, { ...result })
+  const resource = await prisma.galgame_resource.findFirst({
+    where: { id: input.galgameResourceId, user_id: userInfo.uid }
+  })
+  if (!resource) {
+    return kunError(event, '未找到这个 Galgame 资源')
+  }
 
-  return 'MOEMOE update galgame resource operation successfully!'
+  const { link, galgameId, galgameResourceId, ...rest } = input
+
+  return await prisma.$transaction(async (prisma) => {
+    await prisma.galgame_resource.update({
+      where: { id: galgameResourceId, user_id: userInfo.uid },
+      data: rest
+    })
+
+    await prisma.galgame_resource_link.deleteMany({
+      where: { galgame_resource_id: galgameResourceId }
+    })
+
+    const linksData = link.map((l) => ({
+      galgame_resource_id: galgameResourceId,
+      url: l
+    }))
+
+    await prisma.galgame_resource_link.createMany({
+      data: linksData,
+      skipDuplicates: true
+    })
+
+    return 'MOEMOE update galgame resource operation successfully!'
+  })
 })

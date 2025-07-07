@@ -1,81 +1,103 @@
-import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
-import type {
-  SortFieldTopic,
-  TopicCardRequestData,
-  TopicCard
-} from '~/types/api/topic'
+import prisma from '~/prisma/prisma'
+import { getTopicSchema } from '~/validations/topic'
+import type { TopicCard } from '~/types/api/topic'
+import type { Prisma } from '@prisma/client'
 
-const getTopicTopics = async (
-  page: number,
-  limit: number,
-  sortField: SortFieldTopic,
-  sortOrder: KunOrder,
-  category: string
-) => {
-  const skip = (page - 1) * limit
-
-  const queryData = {
-    status: { $ne: 1 },
-    ...(category !== 'All'
-      ? { category: { $elemMatch: { $eq: category } } }
-      : {})
+export default defineEventHandler(async (event) => {
+  const input = await kunParsePutBody(event, getTopicSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const sortOptions: Record<string, 'asc' | 'desc'> = {
-    [sortField]: sortOrder === 'asc' ? 'asc' : 'desc'
+  const { page, limit, sortField, sortOrder, category } = input
+
+  let orderBy: Prisma.topicOrderByWithRelationInput = {}
+  if (
+    sortField === 'created' ||
+    sortField === 'view' ||
+    sortField === 'status_update_time'
+  ) {
+    orderBy = {
+      [sortField]: sortOrder
+    }
+  } else if (
+    sortField === 'like' ||
+    sortField === 'favorite' ||
+    sortField === 'upvote'
+  ) {
+    orderBy = {
+      [sortField]: {
+        _count: sortOrder
+      }
+    }
   }
 
-  const topics = await TopicModel.find(queryData)
-    .sort(sortOptions)
-    .skip(skip)
-    .limit(limit)
-    .populate('user', 'uid avatar name', UserModel)
-    .lean()
+  const [data, total] = await prisma.$transaction([
+    prisma.topic.findMany({
+      where: {
+        category,
+        status: { not: 1 }
+      },
+      skip: (page - 1) * limit,
+      take: limit,
+      orderBy,
+      select: {
+        id: true,
+        title: true,
+        view: true,
+        tag: true,
+        status: true,
+        status_update_time: true,
+        upvote_time: true,
 
-  const data: TopicCard[] = topics.map((topic) => ({
-    tid: topic.tid,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            avatar: true
+          }
+        },
+
+        section: {
+          select: {
+            topic_section: {
+              select: {
+                name: true
+              }
+            }
+          }
+        },
+
+        _count: {
+          select: {
+            like: true,
+            reply: true,
+            comment: true
+          }
+        }
+      }
+    }),
+    prisma.topic.count({
+      where: { category, status: { not: 1 } }
+    })
+  ])
+
+  const topics: TopicCard[] = data.map((topic) => ({
+    id: topic.id,
     title: topic.title,
-    views: topic.views,
-    likes: topic.likes.length,
-    replies: topic.replies.length,
-    comments: topic.comments,
-    time: topic.time,
-    tags: topic.tags,
-    section: topic.section,
-    user: {
-      uid: topic.user[0].uid,
-      name: topic.user[0].name,
-      avatar: topic.user[0].avatar
-    },
+    view: topic.view,
+    tag: topic.tag,
+    user: topic.user as KunUser,
     status: topic.status,
+
+    likeCount: topic._count.like,
+    replyCount: topic._count.reply,
+    commentCount: topic._count.comment,
+
+    section: topic.section.map((s) => s.topic_section.name),
+    statusUpdateTime: topic.status_update_time,
     upvoteTime: topic.upvote_time
   }))
 
-  return data
-}
-
-export default defineEventHandler(async (event) => {
-  const { page, limit, sortField, sortOrder, category }: TopicCardRequestData =
-    await getQuery(event)
-  if (!page || !limit || !sortField || !sortOrder || !category) {
-    return kunError(event, 10507)
-  }
-  const availableCategory = ['all', 'galgame', 'technique', 'others']
-  if (!availableCategory.includes(category)) {
-    return kunError(event, 10220)
-  }
-  if (limit !== '24') {
-    return kunError(event, 10209)
-  }
-
-  const topics = await getTopicTopics(
-    parseInt(page),
-    parseInt(limit),
-    sortField as SortFieldTopic,
-    sortOrder as KunOrder,
-    category.charAt(0).toUpperCase() + category.slice(1)
-  )
-
-  return topics
+  return { topics, total }
 })

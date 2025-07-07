@@ -1,94 +1,98 @@
-import UserModel from '~/server/models/user'
-import GalgameModel from '~/server/models/galgame'
-import type {
-  KunGalgameResourceTypeOptions,
-  KunGalgameResourceLanguageOptions,
-  KunGalgameResourcePlatformOptions
-} from '~/constants/galgame'
-import type { GalgamePageRequestData, GalgameCard } from '~/types/api/galgame'
-
-const getGalgames = async (
-  page: number,
-  limit: number,
-  type: KunGalgameResourceTypeOptions,
-  language: KunGalgameResourceLanguageOptions,
-  platform: KunGalgameResourcePlatformOptions,
-  sortField: 'time' | 'created' | 'views',
-  sortOrder: KunOrder,
-  nsfw: string
-) => {
-  const skip = (page - 1) * limit
-
-  const queryData = {
-    status: { $ne: 1 },
-    ...(nsfw === 'sfw' ? { content_limit: 'sfw' } : {}),
-    ...(type !== 'all' ? { type: { $elemMatch: { $eq: type } } } : {}),
-    ...(language !== 'all'
-      ? { language: { $elemMatch: { $eq: language } } }
-      : {}),
-    ...(platform !== 'all'
-      ? { platform: { $elemMatch: { $eq: platform } } }
-      : {})
-  }
-
-  const totalCount = await GalgameModel.countDocuments(queryData)
-  const data = await GalgameModel.find(queryData)
-    .sort({ [sortField]: sortOrder })
-    .skip(skip)
-    .limit(limit)
-    .populate('user', 'uid avatar name', UserModel)
-    .lean()
-
-  const galgames: GalgameCard[] = data.map((galgame) => ({
-    gid: galgame.gid,
-    name: galgame.name,
-    banner: galgame.banner,
-    user: {
-      uid: galgame.user[0].uid,
-      name: galgame.user[0].name,
-      avatar: galgame.user[0].avatar
-    },
-    contentLimit: galgame.content_limit,
-    views: galgame.views,
-    likes: galgame.likes.length,
-    favorites: galgame.favorites.length,
-    time: galgame.time,
-    platform: galgame.platform,
-    language: galgame.language
-  }))
-
-  return { galgames, totalCount }
-}
+import prisma from '~/prisma/prisma'
+import { getGalgameSchema } from '~/validations/galgame'
+import type { GalgameCard } from '~/types/api/galgame'
 
 export default defineEventHandler(async (event) => {
-  const {
-    page,
-    limit,
-    type,
-    language,
-    platform,
-    sortField,
-    sortOrder
-  }: GalgamePageRequestData = await getQuery(event)
-  if (!page || !limit || !sortField || !sortOrder) {
-    return kunError(event, 10507)
-  }
-  if (limit !== '24') {
-    return kunError(event, 10209)
+  const input = kunParseGetQuery(event, getGalgameSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
   const nsfw = getNSFWCookie(event)
+  const { page, limit, type, language, platform, sortField, sortOrder } = input
 
-  const galgames = await getGalgames(
-    parseInt(page),
-    parseInt(limit),
-    type,
-    language,
-    platform,
-    sortField as 'time' | 'created' | 'views',
-    sortOrder as KunOrder,
-    nsfw
-  )
+  const skip = (page - 1) * limit
 
-  return galgames
+  const resourceFilters = []
+  if (type !== 'all') {
+    resourceFilters.push({ type })
+  }
+  if (language !== 'all') {
+    resourceFilters.push({ language })
+  }
+  if (platform !== 'all') {
+    resourceFilters.push({ platform })
+  }
+
+  const where = {
+    status: { not: 1 },
+    content_limit: nsfw === 'sfw' ? 'sfw' : undefined,
+    resource: {
+      some: {
+        AND: resourceFilters
+      }
+    }
+  }
+
+  const orderBy = {
+    [sortField === 'time' ? 'resource_update_time' : sortField]: sortOrder
+  }
+
+  const [totalCount, data] = await Promise.all([
+    prisma.galgame.count({ where }),
+    prisma.galgame.findMany({
+      where,
+      orderBy,
+      skip,
+      take: limit,
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            avatar: true
+          }
+        },
+        _count: {
+          select: {
+            like: true,
+            favorite: true
+          }
+        },
+        resource: {
+          select: {
+            platform: true,
+            language: true
+          }
+        }
+      }
+    })
+  ])
+
+  const galgames: GalgameCard[] = data.map((galgame) => {
+    const platforms = [...new Set(galgame.resource.map((r) => r.platform))]
+    const languages = [...new Set(galgame.resource.map((r) => r.language))]
+
+    return {
+      id: galgame.id,
+      name: {
+        'en-us': galgame.name_en_us,
+        'ja-jp': galgame.name_ja_jp,
+        'zh-cn': galgame.name_zh_cn,
+        'zh-tw': galgame.name_zh_tw
+      },
+      banner: galgame.banner,
+
+      user: galgame.user as unknown as KunUser,
+      contentLimit: galgame.content_limit,
+      view: galgame.view,
+      likeCount: galgame._count.like,
+      favorites: galgame._count.favorite,
+      resourceUpdateTime: galgame.resource_update_time,
+      platform: platforms,
+      language: languages
+    }
+  })
+
+  return { galgames, totalCount }
 })

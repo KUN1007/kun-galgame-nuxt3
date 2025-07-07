@@ -1,51 +1,42 @@
 import { compare } from 'bcrypt'
-import UserModel from '~/server/models/user'
-import { isValidEmail, isValidName, isValidPassword } from '~/utils/validate'
-import type { H3Event } from 'h3'
-import type { LoginRequestData, LoginResponseData } from '~/types/api/user'
+import prisma from '~/prisma/prisma'
+import { userLoginSchema } from '~/validations/user'
+import type { LoginResponseData } from '~/types/api/user'
 
-const login = async (event: H3Event) => {
-  const { name, password }: LoginRequestData = await readBody(event)
-  const ip = getRemoteIp(event)
-
-  if (
-    !(isValidName(name) || isValidEmail(name)) ||
-    !isValidPassword(password)
-  ) {
-    return kunError(event, 10107)
+export default defineEventHandler(async (event) => {
+  const input = await kunParsePostBody(event, userLoginSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
+  const { name, password } = input
+
+  const ip = getRemoteIp(event)
   const loginCD = await useStorage('redis').getItem(`login:login:cd:${ip}`)
   if (loginCD) {
-    return kunError(event, 10112)
+    return kunError(event, '登录冷却中, 请 17 秒后重试')
   } else {
     useStorage('redis').setItem(`login:login:cd:${ip}`, ip, { ttl: 17 })
   }
 
-  return { name, password }
-}
-
-export default defineEventHandler(async (event) => {
-  const result = await login(event)
-  if (!result) {
-    return
-  }
-  const { name, password } = result
-
-  const user = await UserModel.findOne({ $or: [{ name }, { email: name }] })
+  const user = await prisma.user.findFirst({
+    where: {
+      OR: [{ name }, { email: name }]
+    }
+  })
   if (!user) {
-    return kunError(event, 10101)
+    return kunError(event, '未找到用户')
   }
   if (user.status) {
-    return kunError(event, 10120)
+    return kunError(event, '该用户已被封禁')
   }
 
   const isCorrectPassword = await compare(password, user.password)
   if (!isCorrectPassword) {
-    return kunError(event, 10102)
+    return kunError(event, '用户密码错误')
   }
 
-  const { refreshToken } = await createTokens(user.uid, user.name)
+  const { refreshToken } = await createTokens(user.id, user.name, user.role)
   deleteCookie(event, 'kungalgame-is-navigate-to-login')
   setCookie(event, 'kungalgame-moemoe-refresh-token', refreshToken, {
     httpOnly: true,
@@ -53,11 +44,11 @@ export default defineEventHandler(async (event) => {
   })
 
   const userInfo: LoginResponseData = {
-    uid: user.uid,
+    id: user.id,
     name: user.name,
     avatar: user.avatar,
     moemoepoint: user.moemoepoint,
-    roles: user.roles
+    role: user.role
   }
 
   return userInfo

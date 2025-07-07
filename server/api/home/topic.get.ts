@@ -1,51 +1,58 @@
-import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
+import { subMonths } from 'date-fns'
+import prisma from '~/prisma/prisma'
+import { getTopicSchema } from '~/validations/home'
 import type { HomeTopic } from '~/types/api/home'
 
-const getHomeTopics = async (page: number, limit: number) => {
+export default defineEventHandler(async (event) => {
+  const input = kunParseGetQuery(event, getTopicSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
+  }
+
+  const { page, limit } = input
   const skip = (page - 1) * limit
 
-  const now = Date.now()
-  const ninetyDaysAgo = now - 90 * 24 * 60 * 60 * 1000
-
-  const topics = await TopicModel.find({
-    status: { $ne: 1 },
-    time: { $gte: ninetyDaysAgo }
+  const data = await prisma.topic.findMany({
+    skip,
+    take: limit,
+    where: { status: { not: 1 }, created: { gte: subMonths(new Date(), 3) } },
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true
+        }
+      },
+      section: {
+        include: {
+          topic_section: true
+        }
+      },
+      _count: {
+        select: {
+          like: true,
+          reply: true,
+          comment: true
+        }
+      }
+    }
   })
-    .sort({ time: -1 })
-    .skip(skip)
-    .limit(limit)
-    .populate('user', 'uid avatar name', UserModel)
-    .lean()
 
-  const data: HomeTopic[] = topics.map((topic) => ({
-    tid: topic.tid,
+  const topics: HomeTopic[] = data.map((topic) => ({
+    id: topic.id,
     title: topic.title,
-    views: topic.views,
-    likes: topic.likes.length,
-    replies: topic.replies.length,
-    comments: topic.comments,
-    time: topic.time,
-    tags: topic.tags,
-    section: topic.section,
-    user: {
-      uid: topic.user[0].uid,
-      name: topic.user[0].name,
-      avatar: topic.user[0].avatar
-    },
+    view: topic.view,
+    likeCount: topic._count.like,
+    replyCount: topic._count.reply,
+    commentCount: topic._count.comment,
+    tag: topic.tag,
+    section: topic.section.map((s) => s.topic_section.name),
+    user: topic.user,
     status: topic.status,
-    upvoteTime: topic.upvote_time
+    upvoteTime: topic.upvote_time,
+    statusUpdateTime: topic.status_update_time
   }))
 
-  return data
-}
-
-export default defineEventHandler(async (event) => {
-  const { page, limit }: KunPagination = await getQuery(event)
-  if (limit !== '10') {
-    return kunError(event, 10209)
-  }
-  const result = await getHomeTopics(parseInt(page), parseInt(limit))
-
-  return result
+  return topics
 })

@@ -1,24 +1,26 @@
-import UserModel from '~/server/models/user'
-import { isValidEmail } from '~/utils/validate'
-import type { ForgotPasswordVerificationCodeRequestData } from '~/types/api/auth'
+import prisma from '~/prisma/prisma'
+import { createSendResetEmailVerificationCodeSchema } from '~/validations/auth'
 
 export default defineEventHandler(async (event) => {
-  const { email }: ForgotPasswordVerificationCodeRequestData =
-    await readBody(event)
-
-  if (!isValidEmail(email)) {
-    return kunError(event, 10302)
+  const input = await kunParsePostBody(
+    event,
+    createSendResetEmailVerificationCodeSchema
+  )
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const emailCounts = await UserModel.countDocuments({ email })
-  if (emailCounts) {
-    return kunError(event, 10104)
+  const existEmail = await prisma.user.findFirst({
+    where: { email: { equals: input.email, mode: 'insensitive' } }
+  })
+  if (existEmail) {
+    return kunError(event, '未找到该邮箱对应的用户')
   }
 
-  const result = await sendVerificationCodeEmail(event, email, 'reset')
-  if (typeof result === 'number') {
+  const result = await sendVerificationCodeEmail(event, input.email, 'reset')
+  if (typeof result === 'string') {
     return kunError(event, result)
   }
 
-  return result
+  return result.salt
 })

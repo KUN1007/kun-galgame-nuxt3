@@ -1,6 +1,6 @@
 model chat_room {
   id                       Int       @id @default(autoincrement())
-  name                     String    @default("")
+  name                     String    @unique @default("")
   avatar                   String    @default("")
   type                     String
   last_message_content     String    @default("")
@@ -8,21 +8,21 @@ model chat_room {
   last_message_sender_id   Int?
   last_message_sender_name String    @default("")
 
-  messages     chat_message[]
-  participants chat_room_participant[]
-  admins       chat_room_admin[]
+  message     chat_message[]
+  participant chat_room_participant[]
+  admins      chat_room_admin[]
 
   created DateTime @default(now())
   updated DateTime @updatedAt
 }
 
 model chat_room_participant {
-  id           Int @id @default(autoincrement())
-  chat_room_id Int
-  user_id      Int
+  id Int @id @default(autoincrement())
 
-  chat_room chat_room @relation(fields: [chat_room_id], references: [id])
-  user      user      @relation(fields: [user_id], references: [id])
+  chat_room_id Int
+  chat_room    chat_room @relation(fields: [chat_room_id], references: [id])
+  user_id      Int
+  user         user      @relation(fields: [user_id], references: [id])
 
   created DateTime @default(now())
   updated DateTime @updatedAt
@@ -31,12 +31,12 @@ model chat_room_participant {
 }
 
 model chat_room_admin {
-  id           Int @id @default(autoincrement())
-  chat_room_id Int
-  user_id      Int
+  id Int @id @default(autoincrement())
 
-  chat_room chat_room @relation(fields: [chat_room_id], references: [id])
-  user      user      @relation(fields: [user_id], references: [id])
+  chat_room_id Int
+  chat_room    chat_room @relation(fields: [chat_room_id], references: [id])
+  user_id      Int
+  user         user      @relation(fields: [user_id], references: [id])
 
   created DateTime @default(now())
   updated DateTime @updatedAt
@@ -48,10 +48,9 @@ model chat_message {
   id            Int       @id @default(autoincrement())
   chatroom_name String
   content       String    @db.VarChar(1000)
-  time          DateTime  @default(now())
-  status        String    @default("pending")
-  is_recalled   Boolean   @default(false)
-  recalled_time DateTime?
+  is_recall     Boolean   @default(false)
+  recall_time   DateTime?
+  edit_time     DateTime?
 
   chat_room_id Int
   chat_room    chat_room @relation(fields: [chat_room_id], references: [id])
@@ -60,22 +59,21 @@ model chat_message {
   receiver_id  Int?
   receiver     user?     @relation("user_receive_chat_receive_message", fields: [receiver_id], references: [id])
 
-  read_by   chat_message_read_by[]
-  reactions chat_message_reaction[]
-  userId    Int?
+  read_by  chat_message_read_by[]
+  reaction chat_message_reaction[]
 
   created DateTime @default(now())
   updated DateTime @updatedAt
 }
 
 model chat_message_read_by {
-  id              Int      @id @default(autoincrement())
-  chat_message_id Int
-  user_id         Int
-  read_time       DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  read_time DateTime @default(now())
 
-  chat_message chat_message @relation(fields: [chat_message_id], references: [id])
-  user         user         @relation(fields: [user_id], references: [id])
+  chat_message_id Int
+  chat_message    chat_message @relation(fields: [chat_message_id], references: [id])
+  user_id         Int
+  user            user         @relation(fields: [user_id], references: [id])
 
   created DateTime @default(now())
   updated DateTime @updatedAt
@@ -84,13 +82,13 @@ model chat_message_read_by {
 }
 
 model chat_message_reaction {
-  id              Int    @id @default(autoincrement())
-  chat_message_id Int
-  user_id         Int
-  reaction        String
+  id       Int    @id @default(autoincrement())
+  reaction String
 
-  chat_message chat_message @relation(fields: [chat_message_id], references: [id])
-  user         user         @relation(fields: [user_id], references: [id])
+  chat_message_id Int
+  chat_message    chat_message @relation(fields: [chat_message_id], references: [id])
+  user_id         Int
+  user            user         @relation(fields: [user_id], references: [id])
 
   created DateTime @default(now())
   updated DateTime @updatedAt

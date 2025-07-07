@@ -1,59 +1,46 @@
-import mongoose from 'mongoose'
-import GalgameModel from '~/server/models/galgame'
-import GalgameResourceModel from '~/server/models/galgame-resource'
-import UserModel from '~/server/models/user'
+import prisma from '~/prisma/prisma'
+import { deleteGalgameResourceSchema } from '~/validations/galgame'
 
 export default defineEventHandler(async (event) => {
-  const { grid }: { grid: string } = await getQuery(event)
-  if (!grid) {
-    return kunError(event, 10507)
+  const input = kunParseDeleteQuery(event, deleteGalgameResourceSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const resource = await GalgameResourceModel.findOne({ grid }).lean()
+  const resource = await prisma.galgame_resource.findUnique({
+    where: { id: input.galgameResourceId },
+    include: {
+      _count: {
+        select: {
+          like: true
+        }
+      }
+    }
+  })
   if (!resource) {
-    return kunError(event, 10622)
+    return kunError(event, '未找到该 Galgame 资源')
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
-  if (resource.uid !== userInfo.uid) {
-    return kunError(event, 10623)
+  if (resource.user_id !== userInfo.uid) {
+    return kunError(event, '您没有权限删除这个 Galgame 资源')
   }
 
-  const session = await mongoose.startSession()
-  session.startTransaction()
-  try {
-    await UserModel.updateOne(
-      { uid: userInfo.uid },
-      {
-        $inc: {
-          moemoepoint: -(resource.likes.length + 5),
-          like: -resource.likes.length
-        }
+  return await prisma.$transaction(async (prisma) => {
+    await prisma.user.update({
+      where: { id: userInfo.uid },
+      data: {
+        moemoepoint: { increment: -(resource._count.like + 5) }
       }
-    )
+    })
 
-    for (const likedUser of resource.likes) {
-      await UserModel.updateOne(
-        { uid: likedUser },
-        { $pull: { like_galgame_resource: grid } }
-      )
-    }
-
-    await GalgameModel.updateOne(
-      { gid: resource.gid },
-      { $pull: { resources: resource.grid } }
-    )
-
-    await GalgameResourceModel.deleteOne({ grid })
+    await prisma.galgame_resource.delete({
+      where: { id: resource.id }
+    })
 
     return 'MOEMOE delete visualnovel resource successfully!'
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
+  })
 })

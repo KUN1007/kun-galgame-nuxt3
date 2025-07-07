@@ -1,62 +1,53 @@
-import mongoose from 'mongoose'
-import UserModel from '~/server/models/user'
-import TopicModel from '~/server/models/topic'
-
-const updateTopicDislike = async (uid: number, tid: number) => {
-  const topic = await TopicModel.findOne({ tid })
-  if (!topic) {
-    return 10211
-  }
-
-  if (uid === topic.uid) {
-    return
-  }
-
-  const isDislikedTopic = topic.dislikes.includes(uid)
-  const amount = isDislikedTopic ? -1 : 1
-
-  const session = await mongoose.startSession()
-  session.startTransaction()
-
-  try {
-    await TopicModel.updateOne(
-      { tid },
-      { [isDislikedTopic ? '$pull' : '$addToSet']: { dislikes: uid } }
-    )
-
-    await UserModel.updateOne(
-      { uid },
-      { [isDislikedTopic ? '$pull' : '$addToSet']: { dislike_topic: tid } }
-    )
-
-    await UserModel.updateOne({ uid: topic.uid }, { $inc: { dislike: amount } })
-
-    await session.commitTransaction()
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
-}
+import prisma from '~/prisma/prisma'
+import { updateTopicDislikeSchema } from '~/validations/topic'
 
 export default defineEventHandler(async (event) => {
-  const tid = getRouterParam(event, 'tid')
-  if (!tid) {
-    kunError(event, 10210)
-    return
-  }
-
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    kunError(event, 10115, 205)
-    return
+    return kunError(event, '用户登录失效', 205)
+  }
+  const uid = userInfo.uid
+
+  const input = await kunParsePutBody(event, updateTopicDislikeSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const result = await updateTopicDislike(userInfo.uid, parseInt(tid))
-  if (typeof result === 'number') {
-    kunError(event, result)
-    return
+  const topic = await prisma.topic.findUnique({
+    where: { id: input.topicId, user_id: uid },
+    include: {
+      dislike: {
+        where: {
+          user_id: uid
+        }
+      }
+    }
+  })
+  if (!topic) {
+    return kunError(event, '未找到该话题')
+  }
+  if (topic.user_id === uid) {
+    return kunError(event, '您不能给自己点踩')
+  }
+
+  const isDisliked = topic.dislike.length > 0
+
+  if (isDisliked) {
+    await prisma.topic_dislike.delete({
+      where: {
+        topic_id_user_id: {
+          user_id: uid,
+          topic_id: input.topicId
+        }
+      }
+    })
+  } else {
+    await prisma.topic_dislike.create({
+      data: {
+        user_id: uid,
+        topic_id: input.topicId
+      }
+    })
   }
 
   return 'MOEMOE dislike topic successfully!'

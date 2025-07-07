@@ -1,151 +1,129 @@
-import mongoose from 'mongoose'
-import TopicModel from '~/server/models/topic'
-import ReplyModel from '~/server/models/reply'
-import UserModel from '~/server/models/user'
-import { checkReplyPublish } from '../../utils/checkReplyPublish'
-import type { H3Event } from 'h3'
-import type {
-  TopicReply,
-  TopicCreateReplyRequestData
-} from '~/types/api/topic-reply'
-
-const readReplyData = async (event: H3Event) => {
-  const { toUid, toFloor, tags, content, time }: TopicCreateReplyRequestData =
-    await readBody(event)
-
-  const res = checkReplyPublish(tags, content, time)
-  if (res) {
-    return kunError(event, res)
-  }
-
-  const userInfo = await getCookieTokenInfo(event)
-  if (!userInfo) {
-    return kunError(event, 10115, 205)
-  }
-
-  const tid = getRouterParam(event, 'tid')
-  if (!tid) {
-    return kunError(event, 10210)
-  }
-
-  const deduplicatedTags = Array.from(new Set(tags))
-
-  return {
-    tid: parseInt(tid),
-    uid: userInfo.uid,
-    toUid,
-    toFloor,
-    tags: deduplicatedTags,
-    content,
-    time
-  }
-}
+import prisma from '~/prisma/prisma'
+import { createReplySchema } from '~/validations/topic'
+import { markdownToText } from '~/utils/markdownToText'
+import { createMessage } from '~/server/utils/message'
+import type { TopicReply } from '~/types/api/topic-reply'
 
 export default defineEventHandler(async (event) => {
-  const result = await readReplyData(event)
-  if (!result) {
-    return
+  const input = await kunParsePostBody(event, createReplySchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
-  const { tid, uid, toUid, toFloor, tags, content, time } = result
+  const userInfo = await getCookieTokenInfo(event)
+  if (!userInfo) {
+    return kunError(event, '用户登录失效', 401)
+  }
 
-  const session = await mongoose.startSession()
-  session.startTransaction()
-  try {
-    const maxFloorReply = await ReplyModel.findOne({ tid })
-      .sort('-floor')
-      .lean()
-    const baseFloor = maxFloorReply ? maxFloorReply.floor : 0
-    const floor = baseFloor + 1
+  const { topicId, content, targets } = input
 
-    const newReply = await ReplyModel.create({
-      tid,
-      r_uid: uid,
-      to_uid: toUid,
-      to_floor: toFloor,
-      floor,
-      tags,
-      content,
-      time
+  const currentReplyCount = await prisma.topic_reply.count({
+    where: { topic_id: topicId }
+  })
+  const newFloor = currentReplyCount + 1
+
+  return await prisma.$transaction(async (prisma) => {
+    await prisma.topic.update({
+      where: { id: input.topicId },
+      data: { status_update_time: new Date() }
     })
 
-    const user = await UserModel.findOneAndUpdate(
-      { uid: newReply.r_uid },
-      { $addToSet: { reply: newReply.rid } }
-    )
+    const newReply = await prisma.topic_reply.create({
+      data: {
+        user_id: userInfo.uid,
+        topic_id: topicId,
+        floor: newFloor,
+        content,
 
-    const toUser = await UserModel.findOne({ uid: newReply.to_uid })
+        target: {
+          create: targets.map((target) => ({
+            target_reply_id: target.targetReplyId,
+            content: target.content
+          }))
+        }
+      },
 
-    await TopicModel.updateOne(
-      { tid },
-      {
-        $addToSet: { replies: newReply.rid },
-        $set: { time: Date.now() }
+      include: {
+        user: {
+          select: { id: true, name: true, avatar: true, moemoepoint: true }
+        },
+        target: {
+          include: {
+            target_reply: {
+              select: {
+                id: true,
+                floor: true,
+                content: true,
+                user: {
+                  select: { id: true, name: true, avatar: true }
+                }
+              }
+            }
+          }
+        }
       }
-    )
+    })
 
-    if (tags.length) {
-      await createTagsByTidAndRid(tid, newReply.rid, tags, [])
-    }
+    const targetUsersMap = new Map<number, { user: KunUser; content: string }>()
+    newReply.target.map((t) => {
+      if (t.target_reply.user.id !== userInfo.uid) {
+        targetUsersMap.set(t.target_reply.user.id, {
+          user: t.target_reply.user,
+          content: t.content
+        })
+      }
+    })
 
-    if (uid !== toUid) {
-      await UserModel.updateOne(
-        { uid: newReply.to_uid },
-        { $inc: { moemoepoint: 2 } }
-      )
+    for (const [, { user, content }] of targetUsersMap) {
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { moemoepoint: { increment: 1 } }
+      })
 
       await createMessage(
-        uid,
-        toUid,
+        prisma,
+        userInfo.uid,
+        user.id,
         'replied',
-        newReply.content.slice(0, 233),
-        tid,
-        0
+        markdownToText(content).slice(0, 233),
+        topicId
       )
     }
 
-    const response: TopicReply = {
-      rid: newReply.rid,
-      tid: newReply.tid,
+    const formattedTargets = await Promise.all(
+      newReply.target.map(async (targetRelation) => {
+        const targetReply = targetRelation.target_reply
+        const originalContentText = markdownToText(targetReply.content)
+
+        return {
+          id: targetReply.id,
+          floor: targetReply.floor,
+          user: targetReply.user,
+          contentPreview:
+            originalContentText.slice(0, 150) +
+            (originalContentText.length > 150 ? '...' : ''),
+          replyContentMarkdown: targetRelation.content,
+          replyContentHtml: await markdownToHtml(targetRelation.content)
+        }
+      })
+    )
+
+    const formattedReply: TopicReply = {
+      id: newReply.id,
+      topicId: newReply.topic_id,
       floor: newReply.floor,
-      toFloor: newReply.to_floor,
-      user: {
-        uid: user!.uid,
-        name: user!.name,
-        avatar: user!.avatar,
-        moemoepoint: user!.moemoepoint
-      },
-      toUser: {
-        uid: toUser!.uid,
-        name: toUser!.name
-      },
+      user: newReply.user,
       edited: newReply.edited,
-      content: await markdownToHtml(newReply.content),
-      markdown: newReply.content,
-      upvotes: {
-        count: 0,
-        isUpvoted: false
-      },
-      upvoteTime: newReply.upvote_time,
-      likes: {
-        count: 0,
-        isLiked: false
-      },
-      dislikes: {
-        count: 0,
-        isDisliked: false
-      },
-      tags: [],
-      time: newReply.time,
-      comment: []
+      contentMarkdown: newReply.content,
+      contentHtml: await markdownToHtml(newReply.content),
+      likeCount: 0,
+      isLiked: false,
+      dislikeCount: 0,
+      isDisliked: false,
+      created: newReply.created,
+      comment: [],
+      targets: formattedTargets
     }
 
-    await session.commitTransaction()
-
-    return response
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
+    return formattedReply
+  })
 })

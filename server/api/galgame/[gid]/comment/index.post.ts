@@ -1,71 +1,45 @@
-import mongoose from 'mongoose'
-import UserModel from '~/server/models/user'
-import GalgameCommentModel from '~/server/models/galgame-comment'
-import type { H3Event } from 'h3'
+import prisma from '~/prisma/prisma'
+import { createGalgameCommentSchema } from '~/validations/galgame'
 
-const readReplyData = async (event: H3Event) => {
-  const { toUid, content }: { toUid: number; content: string } =
-    await readBody(event)
-  if (!toUid || !content) {
-    return kunError(event, 10507)
+export default defineEventHandler(async (event) => {
+  const input = await kunParsePostBody(event, createGalgameCommentSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
-  if (content.trim().length > 1007) {
-    return kunError(event, 10634)
-  }
+  const { galgameId, targetUserId, content } = input
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
-  }
-  const uid = userInfo.uid
-
-  const gid = getRouterParam(event, 'gid')
-  if (!gid) {
-    return kunError(event, 10210)
+    return kunError(event, '用户登录失效', 205)
   }
 
-  return {
-    gid: parseInt(gid),
-    c_uid: uid,
-    to_uid: toUid,
-    content
-  }
-}
+  return await prisma.$transaction(async (prisma) => {
+    await prisma.galgame_comment.create({
+      data: {
+        galgame_id: galgameId,
+        target_user_id: targetUserId,
+        content: content,
+        user_id: userInfo.uid
+      }
+    })
 
-export default defineEventHandler(async (event) => {
-  const result = await readReplyData(event)
-  if (!result) {
-    return
-  }
-
-  const session = await mongoose.startSession()
-  session.startTransaction()
-  try {
-    await GalgameCommentModel.create(result)
-
-    if (result.c_uid !== result.to_uid) {
-      await UserModel.updateOne(
-        { uid: result.to_uid },
-        { $inc: { moemoepoint: 1 } }
-      )
+    if (userInfo.uid !== targetUserId) {
+      await prisma.user.update({
+        where: { id: targetUserId },
+        data: { moemoepoint: { increment: 1 } }
+      })
 
       await createMessage(
-        result.c_uid,
-        result.to_uid,
+        prisma,
+        userInfo.uid,
+        targetUserId,
         'commented',
-        result.content.slice(0, 233),
-        0,
-        result.gid
+        content.slice(0, 233),
+        undefined,
+        galgameId
       )
     }
 
-    await session.commitTransaction()
-
     return 'MOEMOE publish galgame comment successfully!'
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
+  })
 })

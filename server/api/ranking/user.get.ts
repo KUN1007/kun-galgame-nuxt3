@@ -1,91 +1,63 @@
-import UserModel from '~/server/models/user'
-import type {
-  UserSortFieldRanking,
-  RankingGetUserRequestData,
-  RankingUsers
-} from '~/types/api/ranking'
+import prisma from '~/prisma/prisma'
+import { getUserRankingSchema } from '~/validations/ranking'
+import type { z } from 'zod'
+import type { UserRankingItem } from '~/types/api/ranking'
 
-const getUserRanking = async (
-  page: number,
-  limit: number,
-  sortField: UserSortFieldRanking,
-  sortOrder: KunOrder
-) => {
+const getUserRanking = async (input: z.infer<typeof getUserRankingSchema>) => {
+  const { page, limit, sortField, sortOrder } = input
   const skip = (page - 1) * limit
 
-  const sortOptions: Record<string, 1 | -1> = {
-    [sortField]: sortOrder === 'asc' ? 1 : -1
-  }
+  const users = await prisma.user.findMany({
+    skip,
+    take: limit,
+    orderBy: {
+      [sortField]: sortOrder
+    },
+    select: {
+      id: true,
+      name: true,
+      avatar: true,
+      bio: true,
+      moemoepoint: true,
+      created: true,
 
-  const numberField = ['moemoepoint', 'upvote', 'like']
-  if (numberField.includes(sortField)) {
-    const users = await UserModel.find()
-      .sort(sortOptions)
-      .skip(skip)
-      .limit(limit)
-      .lean()
-
-    const responseData: RankingUsers[] = users.map((user) => ({
-      uid: user.uid,
-      name: user.name,
-      avatar: user.avatar,
-      field: user[sortField] as number
-    }))
-
-    return responseData
-  } else {
-    const users: RankingUsers[] = await UserModel.aggregate([
-      { $unwind: `$${sortField}` },
-      {
-        $group: {
-          _id: '$_id',
-          uid: { $first: '$uid' },
-          name: { $first: '$name' },
-          avatar: { $first: '$avatar' },
-          [sortField]: { $sum: 1 }
+      _count: {
+        select: {
+          topic: true,
+          reply_created: true,
+          comment_created: true,
+          topic_like: true,
+          topic_upvote: true
         }
-      },
-      { $sort: sortOptions },
-      { $skip: skip },
-      { $limit: limit },
-      {
-        $project: { _id: 0, uid: 1, name: 1, avatar: 1, field: `$${sortField}` }
       }
-    ])
+    }
+  })
 
-    return users
-  }
+  const totalCount = await prisma.user.count()
+
+  const items: UserRankingItem[] = users.map((user) => ({
+    id: user.id,
+    name: user.name,
+    avatar: user.avatar,
+    bio: user.bio,
+    moemoepoint: user.moemoepoint,
+    created: user.created,
+    topicCount: user._count.topic,
+    replyCount: user._count.reply_created,
+    commentCount: user._count.comment_created,
+    likeCount: user._count.topic_like,
+    upvoteCount: user._count.topic_upvote
+  }))
+
+  return { items, totalCount }
 }
 
 export default defineEventHandler(async (event) => {
-  const { page, limit, sortField, sortOrder }: RankingGetUserRequestData =
-    await getQuery(event)
-  if (!page || !limit || !sortField || !sortOrder) {
-    return kunError(event, 10507)
-  }
-  if (limit !== '100') {
-    return kunError(event, 10209)
+  const input = kunParseGetQuery(event, getUserRankingSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const rankingUserCache = await useStorage('redis').getItem(
-    `ranking:user:${page}:${limit}:${sortField}:${sortOrder}`
-  )
-  if (rankingUserCache) {
-    return rankingUserCache as RankingUsers[]
-  }
-
-  const users = await getUserRanking(
-    parseInt(page),
-    parseInt(limit),
-    sortField,
-    sortOrder
-  )
-
-  await useStorage('redis').setItem(
-    `ranking:user:${page}:${limit}:${sortField}:${sortOrder}`,
-    users,
-    { ttl: 17 * 60 }
-  )
-
-  return users
+  const result = await getUserRanking(input)
+  return result
 })

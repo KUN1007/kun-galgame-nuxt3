@@ -1,45 +1,80 @@
-import UserModel from '~/server/models/user'
-import CommentModel from '~/server/models/comment'
+import prisma from '~/prisma/prisma'
+import { getUserCommentSchema } from '~/validations/user'
+import type { Prisma } from '@prisma/client'
 import type { UserComment } from '~/types/api/user'
 
 export default defineEventHandler(async (event) => {
-  const uid = getRouterParam(event, 'uid')
-  if (!uid) {
-    return kunError(event, 10101)
+  const input = kunParseGetQuery(event, getUserCommentSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const { page, limit }: { page: string; limit: string } = await getQuery(event)
-  if (!page || !limit) {
-    return kunError(event, 10507)
+  const userInfo = await getCookieTokenInfo(event)
+  if (!userInfo) {
+    return kunError(event, '用户登录失效', 205)
   }
-  if (limit !== '50') {
-    return kunError(event, 10209)
+  const userId = userInfo.uid
+
+  const { page, limit, type } = input
+  const skip = (page - 1) * limit
+
+  let whereClause: Prisma.topic_commentWhereInput = {}
+
+  switch (type) {
+    case 'comment_created':
+      whereClause = {
+        user_id: userId
+      }
+      break
+
+    case 'comment_target':
+      whereClause = {
+        target_user_id: userId
+      }
+      break
+
+    case 'comment_like':
+      whereClause = {
+        like: {
+          some: {
+            user_id: userId
+          }
+        }
+      }
+      break
+
+    default:
+      return kunError(event, '无效的类型参数', 400)
   }
-  const skip = (parseInt(page) - 1) * parseInt(limit)
 
-  const user = await UserModel.findOne({ uid }).lean()
-  if (!user) {
-    return kunError(event, 10114)
-  }
+  const [comments, totalCount] = await prisma.$transaction([
+    prisma.topic_comment.findMany({
+      where: whereClause,
+      select: {
+        topic_id: true,
+        content: true,
+        created: true
+      },
+      orderBy: {
+        created: 'desc'
+      },
+      skip: skip,
+      take: limit
+    }),
 
-  const totalCount = await CommentModel.countDocuments({
-    cid: { $in: user.comment },
-    status: { $ne: 1 }
-  }).lean()
-  const data = await CommentModel.find({
-    cid: { $in: user.comment },
-    status: { $ne: 1 }
-  })
-    .sort({ created: -1 })
-    .skip(skip)
-    .limit(parseInt(limit))
-    .lean()
+    prisma.topic_comment.count({
+      where: whereClause
+    })
+  ])
 
-  const comments: UserComment[] = data.map((comment) => ({
-    tid: comment.tid,
-    content: comment.content.substring(0, 107),
-    time: comment.created
+  const formattedComments: UserComment[] = comments.map((comment) => ({
+    topicId: comment.topic_id,
+    content: comment.content,
+    created: comment.created
   }))
 
-  return { comments, totalCount }
+  return {
+    comments: formattedComments,
+    totalCount: totalCount
+  }
 })

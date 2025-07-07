@@ -41,7 +41,6 @@ export const KUN_GALGAME_RESOURCE_TYPE_MAP: Record<string, string> = {
   video: '视频相关',
   others: '其它'
 }
-
 export const kunGalgameResourceTypeOptions: KunSelectOption[] = [
   { value: 'all', label: '全部类型' },
   { value: 'game', label: '游戏本体' },
@@ -53,6 +52,16 @@ export const kunGalgameResourceTypeOptions: KunSelectOption[] = [
   { value: 'video', label: '视频相关' },
   { value: 'others', label: '其它' }
 ]
+export const KUN_RESOURCE_TYPE_CONST = [
+  'game',
+  'patch',
+  'collection',
+  'voice',
+  'image',
+  'ai',
+  'video',
+  'others'
+] as const
 
 export const KUN_GALGAME_RESOURCE_LANGUAGE_MAP: Record<string, string> = {
   all: '全部语言',
@@ -62,7 +71,6 @@ export const KUN_GALGAME_RESOURCE_LANGUAGE_MAP: Record<string, string> = {
   'zh-tw': '繁体中文',
   others: '其它'
 }
-
 export const kunGalgameResourceLanguageOptions: KunSelectOption[] = [
   { value: 'all', label: '全部语言' },
   { value: 'ja-jp', label: '日语' },
@@ -71,6 +79,13 @@ export const kunGalgameResourceLanguageOptions: KunSelectOption[] = [
   { value: 'zh-tw', label: '繁体中文' },
   { value: 'others', label: '其它' }
 ]
+export const KUN_RESOURCE_LANGUAGE_CONST = [
+  'ja-jp',
+  'en-us',
+  'zh-cn',
+  'zh-tw',
+  'others'
+] as const
 
 export const KUN_GALGAME_RESOURCE_PLATFORM_MAP: Record<string, string> = {
   name: '资源链接的平台',
@@ -82,7 +97,6 @@ export const KUN_GALGAME_RESOURCE_PLATFORM_MAP: Record<string, string> = {
   app: '应用直装',
   others: '其它'
 }
-
 export const kunGalgameResourcePlatformOptions: KunSelectOption[] = [
   { value: 'all', label: '全部平台' },
   { value: 'windows', label: 'Windows' },
@@ -92,6 +106,14 @@ export const kunGalgameResourcePlatformOptions: KunSelectOption[] = [
   { value: 'app', label: '应用直装' },
   { value: 'others', label: '其它' }
 ]
+export const KUN_RESOURCE_PLATFORM_CONST = [
+  'windows',
+  'mac',
+  'linux',
+  'emulator',
+  'app',
+  'others'
+] as const
 
 export const KUN_GALGAME_RESOURCE_SORT_FIELD_MAP: Record<string, string> = {
   views: '浏览顺序',

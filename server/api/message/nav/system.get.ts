@@ -1,35 +1,45 @@
-import MessageModel from '~/server/models/message'
-import MessageAdminModel from '~/server/models/message-admin'
+import prisma from '~/prisma/prisma'
 import type { AsideItem } from '~/types/api/chat-message'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
   const uid = userInfo.uid
 
   const [
-    message,
+    latestMessage,
     messageCount,
     messageUnreadCount,
-    messageAdmin,
-    messageAdminCount,
-    messageAdminUnreadCount
-  ] = await Promise.all([
-    MessageModel.findOne({ receiver_uid: uid }).sort({ time: -1 }).lean(),
-    MessageModel.countDocuments({ receiver_uid: uid }),
-    MessageModel.countDocuments({ receiver_uid: uid, status: 'unread' }),
-    MessageAdminModel.findOne().sort({ time: -1 }).lean(),
-    MessageAdminModel.countDocuments(),
-    MessageAdminModel.countDocuments({ status: 'unread' })
+    latestSystemMessage,
+    systemMessageCount,
+    systemMessageUnreadCount
+  ] = await prisma.$transaction([
+    prisma.message.findFirst({
+      where: { receiver_id: uid },
+      orderBy: { created: 'desc' }
+    }),
+    prisma.message.count({
+      where: { receiver_id: uid }
+    }),
+    prisma.message.count({
+      where: { receiver_id: uid, status: 'unread' }
+    }),
+    prisma.system_message.findFirst({
+      orderBy: { time: 'desc' }
+    }),
+    prisma.system_message.count(),
+    prisma.system_message.count({
+      where: { status: 'unread' }
+    })
   ])
 
   const responseData: AsideItem[] = [
     {
       chatroomName: '',
-      content: message ? message.content.slice(0, 100) : '',
-      time: message?.time || 0,
+      content: latestMessage ? latestMessage.content.slice(0, 100) : '',
+      lastMessageTime: latestMessage?.created || '',
       count: messageCount,
       unreadCount: messageUnreadCount,
       route: 'notice',
@@ -39,9 +49,9 @@ export default defineEventHandler(async (event) => {
     {
       chatroomName: '',
       content: '',
-      time: messageAdmin?.time || 0,
-      count: messageAdminCount,
-      unreadCount: messageAdminUnreadCount,
+      lastMessageTime: latestSystemMessage?.created || '',
+      count: systemMessageCount,
+      unreadCount: systemMessageUnreadCount,
       route: 'system',
       title: 'zako~',
       avatar: ''

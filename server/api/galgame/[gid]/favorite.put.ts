@@ -1,73 +1,80 @@
-import UserModel from '~/server/models/user'
-import GalgameModel from '~/server/models/galgame'
-import mongoose from 'mongoose'
+import prisma from '~/prisma/prisma'
+import { updateGalgameFavoriteSchema } from '~/validations/galgame'
 
-const updateGalgameFavorite = async (gid: number, uid: number) => {
-  const galgame = await GalgameModel.findOne({ gid, status: { $ne: 1 } }).lean()
+export default defineEventHandler(async (event) => {
+  const input = await kunParsePutBody(event, updateGalgameFavoriteSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
+  }
+  const userInfo = await getCookieTokenInfo(event)
+  if (!userInfo) {
+    return kunError(event, '用户登录失效', 205)
+  }
+
+  const uid = userInfo.uid
+  const galgameId = input.galgameId
+
+  const galgame = await prisma.galgame.findUnique({
+    where: { id: galgameId, status: { not: 1 } },
+    include: {
+      like: {
+        where: {
+          user_id: uid
+        }
+      }
+    }
+  })
   if (!galgame) {
     return 10211
   }
 
-  const isFavoriteGalgame = galgame.favorites.includes(uid)
-  const moemoepointAmount = isFavoriteGalgame ? -1 : 1
+  const isFavoriteGalgame = galgame.like.length > 0
 
-  const session = await mongoose.startSession()
-  session.startTransaction()
+  return await prisma.$transaction(async (prisma) => {
+    if (isFavoriteGalgame) {
+      await prisma.galgame_favorite.delete({
+        where: {
+          galgame_id_user_id: {
+            user_id: uid,
+            galgame_id: galgameId
+          }
+        }
+      })
+    } else {
+      await prisma.galgame_favorite.create({
+        data: {
+          user_id: uid,
+          galgame_id: galgameId
+        }
+      })
+    }
 
-  try {
-    await GalgameModel.updateOne(
-      { gid },
-      { [isFavoriteGalgame ? '$pull' : '$addToSet']: { favorites: uid } }
-    )
-
-    await UserModel.updateOne(
-      { uid },
-      { [isFavoriteGalgame ? '$pull' : '$addToSet']: { favorite_galgame: gid } }
-    )
-
-    if (uid !== galgame.uid) {
-      await UserModel.updateOne(
-        { uid: galgame.uid },
-        { $inc: { moemoepoint: moemoepointAmount } }
-      )
+    if (uid !== galgame.user_id) {
+      await prisma.user.update({
+        where: { id: uid },
+        data: {
+          moemoepoint: {
+            increment: isFavoriteGalgame ? -1 : 1
+          }
+        }
+      })
 
       if (!isFavoriteGalgame) {
         await createDedupMessage(
+          prisma,
           uid,
-          galgame.uid,
+          galgame.user_id,
           'favorite',
-          findNonNullProperty(galgame.name),
-          0,
-          gid
+          galgame.name_zh_cn ||
+            galgame.name_zh_tw ||
+            galgame.name_ja_jp ||
+            galgame.name_en_us,
+          undefined,
+          galgameId
         )
       }
     }
 
-    await session.commitTransaction()
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
-}
-
-export default defineEventHandler(async (event) => {
-  const gid = getRouterParam(event, 'gid')
-  if (!gid) {
-    return kunError(event, 10609)
-  }
-
-  const userInfo = await getCookieTokenInfo(event)
-  if (!userInfo) {
-    return kunError(event, 10115, 205)
-  }
-  const uid = userInfo.uid
-
-  const result = await updateGalgameFavorite(parseInt(gid), uid)
-  if (typeof result === 'number') {
-    return kunError(event, result)
-  }
-
-  return 'MOEMOE favorite galgame operation successfully!'
+    return 'MOEMOE favorite galgame operation successfully!'
+  })
 })

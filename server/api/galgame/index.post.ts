@@ -1,190 +1,169 @@
-import mongoose from 'mongoose'
+import { subDays } from 'date-fns'
 import env from '~/server/env/dotenv'
 import GalgameModel from '~/server/models/galgame'
 import GalgameLinkModel from '~/server/models/galgame-link'
 import UserModel from '~/server/models/user'
 import { checkGalgamePublish } from './utils/checkGalgamePublish'
 import { uploadGalgameBanner } from './utils/uploadGalgameBanner'
+import prisma from '~/prisma/prisma'
+import { createGalgameSchema } from '~/validations/galgame'
 import type { H3Event } from 'h3'
 
 const readGalgameData = async (event: H3Event) => {
-  const formData = await readFormData(event)
+  // const formData = await readFormData(event)
 
-  const vndbIdData = formData.get('vndbId')
-  const nameData = formData.get('name')
-  const introductionData = formData.get('introduction')
-  const contentLimitData = formData.get('contentLimit')
-  const seriesData = formData.get('series')
-  const aliasesData = formData.get('aliases')
-  const officialData = formData.get('official')
-  const engineData = formData.get('engine')
-  const tagsData = formData.get('tags')
-  const bannerData = formData.get('banner')
-  if (
-    !vndbIdData ||
-    !nameData ||
-    !introductionData ||
-    !contentLimitData ||
-    !seriesData ||
-    !aliasesData ||
-    !officialData ||
-    !engineData ||
-    !tagsData ||
-    !bannerData
-  ) {
-    return kunError(event, 10507)
+  // const vndbIdData = formData.get('vndbId')
+  // const seriesIdData = formData.get('seriesId')
+  // const officialIdData = formData.get('officialId')
+  // const engineIdData = formData.get('engineId')
+  // const tagIdData = formData.get('tagId')
+
+  // const nameData = formData.get('name')
+  // const introductionData = formData.get('introduction')
+  // const contentLimitData = formData.get('contentLimit')
+  // const aliasesData = formData.get('aliases')
+  // const bannerData = formData.get('banner')
+  // if (
+  //   !vndbIdData ||
+  //   !seriesIdData ||
+  //   !officialIdData ||
+  //   !engineIdData ||
+  //   !tagIdData ||
+  //   !nameData ||
+  //   !introductionData ||
+  //   !contentLimitData ||
+  //   !aliasesData ||
+  //   !bannerData
+  // ) {
+  //   return kunError(event, 10507)
+  // }
+
+  // const vndbId = vndbIdData.toString()
+  // const seriesId = seriesIdData.toString()
+  // const contentLimit = contentLimitData.toString()
+  // const name = JSON.parse(nameData.toString()) as KunLanguage
+  // const introduction = JSON.parse(introductionData.toString()) as KunLanguage
+  // const aliases = JSON.parse(aliasesData.toString()) as string[]
+  // const official = JSON.parse(officialData.toString()) as string[]
+  // const engine = JSON.parse(engineData.toString()) as string[]
+  // const tags = JSON.parse(tagsData.toString()) as string[]
+  // const banner = await new Response(bannerData).arrayBuffer()
+
+  const input = await kunParseFormData(event, createGalgameSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const vndbId = vndbIdData.toString()
-  const contentLimit = contentLimitData.toString()
-  const name = JSON.parse(nameData.toString()) as KunLanguage
-  const introduction = JSON.parse(introductionData.toString()) as KunLanguage
-  const series = JSON.parse(seriesData.toString()) as string[]
-  const aliases = JSON.parse(aliasesData.toString()) as string[]
-  const official = JSON.parse(officialData.toString()) as string[]
-  const engine = JSON.parse(engineData.toString()) as string[]
-  const tags = JSON.parse(tagsData.toString()) as string[]
-  const banner = await new Response(bannerData).arrayBuffer()
-
-  const res = checkGalgamePublish(
-    vndbId,
-    name,
-    introduction,
-    contentLimit,
-    series,
-    aliases,
-    official,
-    engine,
-    tags
-  )
-  if (res) {
-    return kunError(event, res)
-  }
-
-  const galgame = await GalgameModel.findOne({ vndb_id: vndbId })
+  const galgame = await prisma.galgame.count({
+    where: { vndb_id: input.vndbId }
+  })
   if (galgame) {
-    return kunError(event, 10608)
+    return kunError(event, '未找到这个 Galgame')
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
-  const uid = userInfo.uid
 
-  return {
-    uid,
-    vndb_id: vndbId,
-    content_limit: contentLimit,
-    name,
-    banner,
-    introduction,
-    series,
-    aliases,
-    official,
-    engine,
-    tags
+  const user = await prisma.user.findUnique({
+    where: { id: userInfo.uid },
+    include: {
+      galgame: {
+        where: {
+          created: {
+            gte: subDays(new Date(), 1)
+          }
+        }
+      }
+    }
+  })
+  if (!user) {
+    return kunError(event, '未找到该用户')
   }
+
+  if (user.moemoepoint / 10 < user.galgame.length) {
+    return kunError(event, '您今日发布的 Galgame 已经达到上限')
+  }
+
+  return { result: input, uid: userInfo.uid }
 }
 
 export default defineEventHandler(async (event) => {
-  const result = await readGalgameData(event)
-  if (!result) {
+  const res = await readGalgameData(event)
+  if (!res) {
     return
   }
-  const {
-    uid,
-    vndb_id,
-    content_limit,
-    name,
-    banner,
-    introduction,
-    series,
-    aliases,
-    official,
-    engine,
-    tags
-  } = result
+  const { result, uid } = res
 
-  const user = await UserModel.findOne({ uid })
-  if (!user) {
-    return kunError(event, 10101)
-  }
+  return await prisma.$transaction(
+    async (prisma) => {
+      const newGalgame = await prisma.galgame.create({
+        data: {
+          name_en_us: result.name_en_us,
+          name_ja_jp: result.name_ja_jp,
+          name_zh_cn: result.name_zh_cn,
+          name_zh_tw: result.name_zh_tw,
+          intro_en_us: result.intro_en_us,
+          intro_ja_jp: result.intro_ja_jp,
+          intro_zh_cn: result.intro_zh_cn,
+          intro_zh_tw: result.intro_zh_tw,
+          vndb_id: result.vndbId,
+          series_id: result.seriesId,
+          content_limit: result.contentLimit,
+          user_id: uid
+        }
+      })
 
-  if (user.moemoepoint / 10 < user.daily_galgame_count) {
-    return kunError(event, 10607)
-  }
+      await prisma.galgame_contributor.create({
+        data: {
+          galgame_id: newGalgame.id,
+          user_id: uid
+        }
+      })
 
-  const session = await mongoose.startSession()
-  session.startTransaction()
-  try {
-    const newGalgame = await GalgameModel.create({
-      vndb_id,
-      content_limit,
-      uid,
-      name,
-      introduction,
-      series,
-      alias: aliases,
-      official,
-      engine,
-      tags,
-      time: Date.now()
-    })
+      await prisma.user.update({
+        where: { id: uid },
+        data: { moemoepoint: { increment: 3 } }
+      })
 
-    await UserModel.updateOne(
-      { uid },
-      {
-        $addToSet: {
-          galgame: newGalgame.gid,
-          contribute_galgame: newGalgame.gid
-        },
-        $inc: { daily_galgame_count: 1, daily_image_count: 1, moemoepoint: 3 }
+      // TODO:
+
+      const res = await uploadGalgameBanner(
+        Buffer.from(result.banner),
+        newGalgame.id
+      )
+      if (!res) {
+        return kunError(event, 10116)
       }
-    )
+      if (typeof res === 'number') {
+        return kunError(event, res)
+      }
 
-    await GalgameModel.updateOne(
-      { gid: newGalgame.gid },
-      { $addToSet: { contributor: uid } }
-    )
+      const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${newGalgame.gid}/banner/banner.webp`
+      await GalgameModel.updateOne(
+        { gid: newGalgame.gid },
+        { $set: { banner: imageLink } }
+      )
 
-    const res = await uploadGalgameBanner(Buffer.from(banner), newGalgame.gid)
-    if (!res) {
-      return kunError(event, 10116)
-    }
-    if (typeof res === 'number') {
-      return kunError(event, res)
-    }
+      await GalgameLinkModel.create({
+        gid: newGalgame.gid,
+        uid,
+        name: 'VNDB',
+        link: `https://vndb.org/${vndb_id}`
+      })
 
-    const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${newGalgame.gid}/banner/banner.webp`
-    await GalgameModel.updateOne(
-      { gid: newGalgame.gid },
-      { $set: { banner: imageLink } }
-    )
+      await createGalgameHistory({
+        gid: newGalgame.gid,
+        uid,
+        time: Date.now(),
+        action: 'created',
+        type: 'galgame',
+        content: ''
+      })
 
-    await GalgameLinkModel.create({
-      gid: newGalgame.gid,
-      uid,
-      name: 'VNDB',
-      link: `https://vndb.org/${vndb_id}`
-    })
-
-    await createGalgameHistory({
-      gid: newGalgame.gid,
-      uid,
-      time: Date.now(),
-      action: 'created',
-      type: 'galgame',
-      content: ''
-    })
-
-    await session.commitTransaction()
-
-    return newGalgame.gid
-  } catch (error) {
-    await session.abortTransaction()
-    throw error
-  } finally {
-    await session.endSession()
-  }
+      return newGalgame.gid
+    },
+    { timeout: 60000 }
+  )
 })

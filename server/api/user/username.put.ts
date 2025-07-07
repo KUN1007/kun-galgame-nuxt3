@@ -1,4 +1,5 @@
 import UserModel from '~/server/models/user'
+import prisma from '~/prisma/prisma'
 import { isValidName } from '~/utils/validate'
 
 export default defineEventHandler(async (event) => {

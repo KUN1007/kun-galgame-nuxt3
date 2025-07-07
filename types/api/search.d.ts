@@ -3,32 +3,22 @@ import type { HomeTopic, HomeGalgame } from './home'
 export type SearchResultTopic = HomeTopic
 export type SearchResultGalgame = HomeGalgame
 
-export interface SearchResultUser {
-  uid: number
-  name: string
-  avatar: string
+export interface SearchResultUser extends KunUser {
   bio: string
   moemoepoint: number
-  time: number
+  created: Date | string
 }
 
 export interface SearchResultReply {
-  tid: number
-  title: string
+  topicId: number
+  topicTitle: string
   content: string
   user: KunUser
-  toUser: KunUser
-  time: number
+  targetUser: KunUser
+  created: Date | string
 }
 
-export interface SearchResultComment {
-  tid: number
-  title: string
-  content: string
-  user: KunUser
-  toUser: KunUser
-  time: number
-}
+export type SearchResultComment = SearchResultReply
 
 export type SearchType = 'topic' | 'galgame' | 'user' | 'reply' | 'comment'
 export type SearchResult =
@@ -37,10 +27,3 @@ export type SearchResult =
   | SearchResultUser
   | SearchResultReply
   | SearchResultComment
-
-export interface SearchRequestData {
-  keywords: string
-  type: SearchType
-  page: string
-  limit: string
-}

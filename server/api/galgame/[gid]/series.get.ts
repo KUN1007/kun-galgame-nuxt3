@@ -1,24 +1,40 @@
-import GalgameModel from '~/server/models/galgame'
-
-interface GalgameSeries {
-  gid: number
-  name: KunLanguage
-}
+import prisma from '~/prisma/prisma'
+import { getGalgameSeriesSchema } from '~/validations/galgame'
+import type { GalgameSeries } from '~/types/api/galgame'
 
 export default defineEventHandler(async (event) => {
-  const gid = getRouterParam(event, 'gid')
-  if (!gid) {
-    return kunError(event, 10609)
+  const input = kunParseGetQuery(event, getGalgameSeriesSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const galgame = await GalgameModel.findOne({ gid, status: { $ne: 1 } }).lean()
+  const galgame = await prisma.galgame.findUnique({
+    where: { id: input.galgameId },
+    include: {
+      series: {
+        select: {
+          id: true,
+          name: true,
+          description: true,
+          galgame: {
+            select: {
+              id: true,
+              name_en_us: true,
+              name_ja_jp: true,
+              name_zh_cn: true,
+              name_zh_tw: true,
+              banner: true
+            }
+          }
+        }
+      }
+    }
+  })
   if (!galgame) {
-    return kunError(event, 10610)
+    return kunError(event, '未找到这个 Galgame')
   }
 
-  const series: GalgameSeries[] = await GalgameModel.find({
-    gid: { $in: galgame.series }
-  }).select({ _id: 0, gid: 1, name: 1 })
+  const series: GalgameSeries | null = galgame.series
 
   return series
 })

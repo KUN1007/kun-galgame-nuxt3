@@ -1,25 +1,12 @@
-export interface GetSectionRequestData {
-  section: string
-  page: string
-  limit: string
-  order: 'asc' | 'desc'
-}
-
-export interface SectionUser {
-  uid: number
-  name: string
-  avatar: string
-}
-
 export interface SectionTopic {
-  tid: number
+  id: number
   title: string
   content: string
-  time: number
   section: string[]
-  tags: string[]
-  views: number
-  likes: number
-  replies: number
-  user: SectionUser
+  tag: string[]
+  view: number
+  like: number
+  reply: number
+  user: KunUser
+  created: Date | string
 }

@@ -1,52 +1,72 @@
-import UserModel from '~/server/models/user'
-import GalgameModel from '~/server/models/galgame'
+import prisma from '~/prisma/prisma'
+import { getGalgameSchema } from '~/validations/home'
 import type { HomeGalgame } from '~/types/api/home'
 
-const getHomeGalgames = async (page: number, limit: number, nsfw: string) => {
-  const skip = (page - 1) * limit
-
-  const queryData = {
-    status: { $ne: 1 },
-    ...(nsfw === 'sfw' ? { content_limit: 'sfw' } : {})
-  }
-
-  const data = await GalgameModel.find(queryData)
-    .sort({ time: -1 })
-    .skip(skip)
-    .limit(limit)
-    .populate('user', 'uid avatar name', UserModel)
-    .lean()
-
-  const galgames: HomeGalgame[] = data.map((galgame) => ({
-    gid: galgame.gid,
-    name: galgame.name,
-    banner: galgame.banner,
-    contentLimit: galgame.content_limit,
-    user: {
-      uid: galgame.user[0].uid,
-      name: galgame.user[0].name,
-      avatar: galgame.user[0].avatar
-    },
-    views: galgame.views,
-    likes: galgame.likes.length,
-    favorites: galgame.favorites.length,
-    time: galgame.time,
-    platform: galgame.platform,
-    language: galgame.language
-  }))
-
-  return galgames
-}
-
 export default defineEventHandler(async (event) => {
-  const { page, limit }: KunPagination = await getQuery(event)
-  if (limit !== '12') {
-    return kunError(event, 10209)
+  const input = kunParseGetQuery(event, getGalgameSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
+  const { page, limit } = input
   const nsfw = getNSFWCookie(event)
 
-  const result = await getHomeGalgames(parseInt(page), parseInt(limit), nsfw)
+  const skip = (page - 1) * limit
 
-  return result
+  const where = {
+    status: { not: 1 },
+    content_limit: nsfw === 'sfw' ? 'sfw' : undefined
+  }
+
+  const data = await prisma.galgame.findMany({
+    where,
+    orderBy: { resource_update_time: 'desc' },
+    skip,
+    take: limit,
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true
+        }
+      },
+      _count: {
+        select: {
+          like: true
+        }
+      },
+      resource: {
+        select: {
+          platform: true,
+          language: true
+        }
+      }
+    }
+  })
+
+  const galgames: HomeGalgame[] = data.map((galgame) => {
+    const platforms = [...new Set(galgame.resource.map((r) => r.platform))]
+    const languages = [...new Set(galgame.resource.map((r) => r.language))]
+
+    return {
+      id: galgame.id,
+      name: {
+        'en-us': galgame.name_en_us,
+        'ja-jp': galgame.name_ja_jp,
+        'zh-cn': galgame.name_zh_cn,
+        'zh-tw': galgame.name_zh_tw
+      },
+      banner: galgame.banner,
+      user: galgame.user,
+      contentLimit: galgame.content_limit,
+      view: galgame.view,
+      likeCount: galgame._count.like,
+      resourceUpdateTime: galgame.resource_update_time,
+      platform: platforms,
+      language: languages
+    }
+  })
+
+  return galgames
 })

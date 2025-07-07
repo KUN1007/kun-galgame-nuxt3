@@ -1,34 +1,38 @@
 import { hash, compare } from 'bcrypt'
-import UserModel from '~/server/models/user'
-import { isValidPassword } from '~/utils/validate'
-import type { UserUpdatePasswordRequestData } from '~/types/api/user'
+import prisma from '~/prisma/prisma'
+import { userUpdatePasswordSchema } from '~/validations/user'
 
 export default defineEventHandler(async (event) => {
-  const { oldPassword, newPassword }: UserUpdatePasswordRequestData =
-    await readBody(event)
-
-  if (!isValidPassword(oldPassword) || !isValidPassword(newPassword)) {
-    return kunError(event, 10108)
+  const input = await kunParsePutBody(event, userUpdatePasswordSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
+
+  const { oldPassword, newPassword } = input
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
   const uid = userInfo.uid
 
-  const user = await UserModel.findOne({ uid })
+  const user = await prisma.user.findUnique({
+    where: { id: uid }
+  })
   if (!user) {
-    return kunError(event, 10101)
+    return kunError(event, '未找到用户')
   }
 
   const isCorrectPassword = await compare(oldPassword, user.password)
   if (!isCorrectPassword) {
-    return kunError(event, 10102)
+    return kunError(event, '旧密码错误')
   }
 
   const hashedPassword = await hash(newPassword, 7)
-  await UserModel.updateOne({ uid }, { $set: { password: hashedPassword } })
+  await prisma.user.update({
+    where: { id: uid },
+    data: { password: hashedPassword }
+  })
 
   return 'Moe Moe'
 })

@@ -1,0 +1,65 @@
+model topic_reply {
+    id      Int       @id @default(autoincrement())
+    content String    @default("") @db.Text
+    floor   Int       @default(0)
+    edited  DateTime?
+
+    user_id  Int
+    user     user  @relation("user_created_topic_reply", fields: [user_id], references: [id])
+    topic_id Int
+    topic    topic @relation(fields: [topic_id], references: [id])
+
+    target    topic_reply_target[] @relation("reply_to_target")
+    target_by topic_reply_target[] @relation("target_of_reply")
+
+    comment topic_comment[]
+    like    topic_reply_like[]
+    dislike topic_reply_dislike[]
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
+}
+
+model topic_reply_like {
+    id Int @id @default(autoincrement())
+
+    user_id        Int
+    user           user        @relation(fields: [user_id], references: [id])
+    topic_reply_id Int
+    reply          topic_reply @relation(fields: [topic_reply_id], references: [id])
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
+
+    @@unique([user_id, topic_reply_id])
+}
+
+model topic_reply_dislike {
+    id Int @id @default(autoincrement())
+
+    user_id        Int
+    user           user        @relation(fields: [user_id], references: [id])
+    topic_reply_id Int
+    reply          topic_reply @relation(fields: [topic_reply_id], references: [id])
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
+
+    @@unique([user_id, topic_reply_id])
+}
+
+model topic_reply_target {
+    id      Int    @id @default(autoincrement())
+    content String @default("") @db.Text
+
+    reply_id Int
+    reply    topic_reply @relation("reply_to_target", fields: [reply_id], references: [id], onDelete: Cascade)
+
+    target_reply_id Int
+    target_reply    topic_reply @relation("target_of_reply", fields: [target_reply_id], references: [id], onDelete: Cascade)
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
+
+    @@unique([reply_id, target_reply_id])
+}

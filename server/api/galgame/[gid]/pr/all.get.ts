@@ -1,43 +1,43 @@
-import UserModel from '~/server/models/user'
-import GalgamePRModel from '~/server/models/galgame-pr'
+import prisma from '~/prisma/prisma'
+import { getGalgamePrSchema } from '~/validations/galgame'
 import type { GalgamePR } from '~/types/api/galgame-pr'
 
 export default defineEventHandler(async (event) => {
-  const gid = getRouterParam(event, 'gid')
-  if (!gid) {
-    return kunError(event, 10507)
+  const input = kunParseGetQuery(event, getGalgamePrSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const { page, limit }: { page: string; limit: string } = await getQuery(event)
-  if (!page || !limit) {
-    return kunError(event, 10507)
-  }
-  if (limit !== '7') {
-    return kunError(event, 10209)
-  }
+  const { galgameId, page, limit } = input
 
-  const skip = (parseInt(page) - 1) * parseInt(limit)
-  const totalCount = await GalgamePRModel.countDocuments({ gid }).lean()
+  const offset = (page - 1) * limit
+  const totalCount = await prisma.galgame_pr.count({
+    where: { galgame_id: galgameId }
+  })
 
-  const data = await GalgamePRModel.find({ gid })
-    .sort({ created: -1 })
-    .skip(skip)
-    .limit(parseInt(limit))
-    .populate('user', 'uid avatar name', UserModel)
-    .lean()
+  const data = await prisma.galgame_pr.findMany({
+    take: Number(limit),
+    skip: offset,
+    orderBy: { created: 'desc' },
+    where: { galgame_id: galgameId },
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true
+        }
+      }
+    }
+  })
 
   const prs: GalgamePR[] = data.map((pr) => ({
-    gprid: pr.gprid,
-    gid: pr.gid,
+    id: pr.id,
+    galgameId: pr.galgame_id,
     index: pr.index,
     status: pr.status,
-    time: pr.created,
     completedTime: pr.completed_time,
-    user: {
-      uid: pr.user[0].uid,
-      name: pr.user[0].name,
-      avatar: pr.user[0].avatar
-    }
+    user: pr.user
   }))
 
   return { prs, totalCount }
