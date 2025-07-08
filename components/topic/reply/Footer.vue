@@ -6,20 +6,19 @@ defineProps<{
   reply: TopicReply
 }>()
 
-const { uid } = usePersistUserStore()
-const { rid, toUid, toUsername, isShowPanel } = storeToRefs(
+const { replyId, targetUserId, targetUsername, isShowPanel } = storeToRefs(
   useTempCommentStore()
 )
 
-const handleClickComment = (replyIid: number, uid: number, name: string) => {
+const handleClickComment = (id: number, uid: number, name: string) => {
   if (!uid) {
     useMessage(10216, 'warn', 5000)
     return
   }
 
-  rid.value = replyIid
-  toUid.value = uid
-  toUsername.value = name
+  replyId.value = id
+  targetUserId.value = uid
+  targetUsername.value = name
   isShowPanel.value = !isShowPanel.value
 }
 </script>
@@ -28,25 +27,25 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
   <div class="flex items-center justify-between">
     <div class="flex items-center gap-1">
       <TopicFooterLike
-        :rid="reply.rid"
-        :to-uid="reply.user.uid"
-        :likes-count="reply.likes.count"
-        :is-liked="reply.likes.isLiked"
+        :reply-id="reply.id"
+        :target-user-id="reply.user.id"
+        :like-count="reply.likeCount"
+        :is-liked="reply.isLiked"
       />
 
       <TopicFooterDislike
-        :rid="reply.rid"
-        :to-uid="reply.user.uid"
-        :dislikes-count="reply.dislikes.count"
-        :is-disliked="reply.dislikes.isDisliked"
+        :reply-id="reply.id"
+        :target-user-id="reply.user.id"
+        :dislike-count="reply.dislikeCount"
+        :is-disliked="reply.isDisliked"
       />
     </div>
 
     <div class="flex items-center gap-1">
       <TopicFooterReply
-        :to-user-name="reply.user.name"
-        :to-uid="reply.user.uid"
-        :to-floor="reply.floor"
+        :target-user-name="reply.user.name"
+        :target-user-id="reply.user.id"
+        :target-floor="reply.floor"
       />
 
       <KunTooltip text="分享该回复">
@@ -57,7 +56,7 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
           size="lg"
           @click="
             useKunCopy(
-              `${title}: https://www.kungal.com/topic/${reply.tid}#k${reply.floor}`
+              `${title}: https://www.kungal.com/topic/${reply.topicId}#k${reply.floor}`
             )
           "
         >
@@ -73,9 +72,7 @@ const handleClickComment = (replyIid: number, uid: number, name: string) => {
           variant="light"
           color="default"
           size="lg"
-          @click="
-            handleClickComment(reply.rid, reply.user.uid, reply.user.name)
-          "
+          @click="handleClickComment(reply.id, reply.user.id, reply.user.name)"
         >
           <KunIcon name="uil:comment-dots" />
         </KunButton>

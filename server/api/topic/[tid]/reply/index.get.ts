@@ -12,68 +12,62 @@ const getTopicReplies = async (
   const { topicId, page, limit, sortOrder } = input
   const skip = (page - 1) * limit
 
-  const [repliesData, totalCount] = await prisma.$transaction([
-    prisma.topic_reply.findMany({
-      skip,
-      take: limit,
-      where: {
-        topic_id: topicId
+  const repliesData = await prisma.topic_reply.findMany({
+    skip,
+    take: limit,
+    where: {
+      topic_id: topicId
+    },
+    orderBy: {
+      floor: sortOrder
+    },
+    include: {
+      user: {
+        select: { id: true, name: true, avatar: true, moemoepoint: true }
       },
-      orderBy: {
-        floor: sortOrder
-      },
-      include: {
-        user: {
-          select: { id: true, name: true, avatar: true, moemoepoint: true }
+      target: {
+        orderBy: {
+          target_reply: { floor: 'asc' }
         },
-        target: {
-          orderBy: {
-            target_reply: { floor: 'asc' }
-          },
-          select: {
-            content: true,
-            target_reply: {
-              select: {
-                id: true,
-                floor: true,
-                content: true,
-                user: {
-                  select: { id: true, name: true, avatar: true }
-                }
+        select: {
+          content: true,
+          target_reply: {
+            select: {
+              id: true,
+              floor: true,
+              content: true,
+              user: {
+                select: { id: true, name: true, avatar: true }
               }
             }
           }
-        },
+        }
+      },
 
-        _count: {
-          select: { like: true, dislike: true, comment: true }
-        },
-        like: { where: { user_id: uid } },
-        dislike: { where: { user_id: uid } },
-        comment: {
-          orderBy: { created: 'asc' },
-          include: {
-            user: {
-              select: { id: true, name: true, avatar: true }
-            },
-            target_user: {
-              select: { id: true, name: true, avatar: true }
-            },
-            _count: {
-              select: { like: true }
-            },
-            like: {
-              where: { user_id: uid }
-            }
+      _count: {
+        select: { like: true, dislike: true, comment: true }
+      },
+      like: { where: { user_id: uid } },
+      dislike: { where: { user_id: uid } },
+      comment: {
+        orderBy: { created: 'asc' },
+        include: {
+          user: {
+            select: { id: true, name: true, avatar: true }
+          },
+          target_user: {
+            select: { id: true, name: true, avatar: true }
+          },
+          _count: {
+            select: { like: true }
+          },
+          like: {
+            where: { user_id: uid }
           }
         }
       }
-    }),
-
-    prisma.topic_reply.count({
-      where: { topic_id: topicId }
-    })
-  ])
+    }
+  })
 
   const replies: TopicReply[] = await Promise.all(
     repliesData.map(async (reply) => {
@@ -125,7 +119,7 @@ const getTopicReplies = async (
     })
   )
 
-  return { replies, totalCount }
+  return replies
 }
 
 export default defineEventHandler(async (event) => {

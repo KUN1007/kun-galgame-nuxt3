@@ -9,7 +9,7 @@ const { isEdit, isReplyRewriting, replyRewrite } =
   storeToRefs(useTempReplyStore())
 const { uid } = usePersistUserStore()
 
-const isShowRewrite = computed(() => uid === props.reply.user.uid)
+const isShowRewrite = computed(() => uid === props.reply.user.id)
 
 const rewriteReply = () => {
   replyRewrite.value.push(props.reply)

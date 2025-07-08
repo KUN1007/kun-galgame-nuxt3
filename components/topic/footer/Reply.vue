@@ -4,9 +4,9 @@ const { isEdit } = storeToRefs(useTempReplyStore())
 const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 
 const props = defineProps<{
-  toUserName: string
-  toUid: number
-  toFloor: number
+  targetUserName: string
+  targetUserId: number
+  targetFloor: number
 }>()
 
 const handleClickReply = () => {
@@ -15,9 +15,9 @@ const handleClickReply = () => {
     return
   }
 
-  replyDraft.value.toUserName = props.toUserName
-  replyDraft.value.toUid = props.toUid
-  replyDraft.value.toFloor = props.toFloor
+  replyDraft.value.targetUserName = props.targetUserName
+  replyDraft.value.targetUserId = props.targetUserId
+  replyDraft.value.targetFloor = props.targetFloor
 
   isEdit.value = true
 }

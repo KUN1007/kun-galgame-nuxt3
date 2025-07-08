@@ -1,29 +1,29 @@
 <script setup lang="ts">
 const props = defineProps<{
-  tid?: number
-  rid?: number
-  toUid: number
-  dislikesCount: number
+  topicId?: number
+  replyId?: number
+  targetUserId: number
+  dislikeCount: number
   isDisliked: boolean
 }>()
 
 const { uid } = usePersistUserStore()
 const isDisliked = ref(props.isDisliked)
-const dislikesCount = ref(props.dislikesCount)
+const dislikeCount = ref(props.dislikeCount)
 
 const toggleDislike = async () => {
   let res = ''
-  if (props.tid) {
-    const result = await $fetch(`/api/topic/${props.tid}/dislike`, {
+  if (props.topicId) {
+    const result = await $fetch(`/api/topic/${props.topicId}/dislike`, {
       method: 'PUT',
       watch: false,
       ...kungalgameResponseHandler
     })
     res = result ?? ''
   } else {
-    const result = await $fetch(`/api/topic/${props.tid}/reply/dislike`, {
+    const result = await $fetch(`/api/topic/${props.topicId}/reply/dislike`, {
       method: 'PUT',
-      query: { rid: props.rid },
+      query: { rid: props.replyId },
       watch: false,
       ...kungalgameResponseHandler
     })
@@ -31,7 +31,7 @@ const toggleDislike = async () => {
   }
 
   if (res) {
-    dislikesCount.value += isDisliked.value ? -1 : 1
+    dislikeCount.value += isDisliked.value ? -1 : 1
 
     if (!isDisliked.value) {
       useMessage(10225, 'success')
@@ -52,7 +52,7 @@ const handleClickDislike = () => {
     useMessage(10228, 'warn', 5000)
     return
   }
-  if (uid === props.toUid) {
+  if (uid === props.targetUserId) {
     useMessage(10229, 'warn')
     return
   }
@@ -66,12 +66,12 @@ const handleClickDislike = () => {
       :is-icon-only="true"
       :variant="isDisliked ? 'flat' : 'light'"
       :color="isDisliked ? 'secondary' : 'default'"
-      :size="dislikesCount ? 'md' : 'lg'"
+      :size="dislikeCount ? 'md' : 'lg'"
       class-name="gap-1"
       @click="handleClickDislike"
     >
       <KunIcon class="icon" name="lucide:thumbs-down" />
-      <span v-if="dislikesCount">{{ dislikesCount }}</span>
+      <span v-if="dislikeCount">{{ dislikeCount }}</span>
     </KunButton>
   </KunTooltip>
 </template>

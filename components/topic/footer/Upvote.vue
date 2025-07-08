@@ -2,9 +2,8 @@
 import { KunTooltip } from '#components'
 
 const props = defineProps<{
-  tid?: number
-  rid?: number
-  toUid: number
+  topicId?: number
+  targetUserId: number
   upvoteCount: number
   isUpvoted: boolean
 }>()
@@ -22,7 +21,7 @@ const upvoteTopic = async () => {
     return
   }
 
-  const result = await $fetch(`/api/topic/${props.tid}/upvote`, {
+  const result = await $fetch(`/api/topic/${props.topicId}/upvote`, {
     method: 'PUT',
     watch: false,
     ...kungalgameResponseHandler
@@ -35,36 +34,13 @@ const upvoteTopic = async () => {
   }
 }
 
-const upvoteReply = async () => {
-  const res = await useComponentMessageStore().alert(
-    '您确定推这个回复吗?',
-    '推回复将会消耗您 2 萌萌点, 并给被推者增加 1 萌萌点。'
-  )
-  if (!res) {
-    return
-  }
-
-  const result = await $fetch(`/api/topic/${props.tid}/reply/upvote`, {
-    method: 'PUT',
-    query: { rid: props.rid },
-    watch: false,
-    ...kungalgameResponseHandler
-  })
-
-  if (result) {
-    upvoteCount.value++
-    isUpvoted.value = true
-    useMessage(10239, 'success')
-  }
-}
-
 const handleClickUpvote = async () => {
   if (!uid) {
     useMessage(10240, 'warn', 5000)
     return
   }
 
-  if (uid === props.toUid) {
+  if (uid === props.targetUserId) {
     useMessage(10241, 'warn')
     return
   }
@@ -74,11 +50,7 @@ const handleClickUpvote = async () => {
     return
   }
 
-  if (props.rid) {
-    await upvoteReply()
-  } else {
-    await upvoteTopic()
-  }
+  await upvoteTopic()
 }
 </script>
 

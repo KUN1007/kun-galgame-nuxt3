@@ -1,18 +1,10 @@
 import type { TopicReply } from '~/types/api/topic-reply'
 
 interface ReplyDraft {
-  toUid: number
-  toUserName: string
-  toFloor: number
-  tags: string[]
+  targetUserId: number
+  targetUserName: string
+  targetFloor: number
   content: string
-}
-
-interface ReplyRewriteTemp {
-  rid: number
-  content: string
-  tags: string[]
-  edited: number
 }
 
 export interface ReplyStoreTemp {

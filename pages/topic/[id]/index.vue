@@ -4,14 +4,15 @@ const route = useRoute()
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
 const { isEdit } = storeToRefs(useTempReplyStore())
 
-const tid = computed(() => {
-  return parseInt((route.params as { tid: string }).tid)
+const topicId = computed(() => {
+  return parseInt((route.params as { id: string }).id)
 })
-provide<number>('tid', tid.value)
+provide<number>('topicId', topicId.value)
 
-const { data } = await useFetch(`/api/topic/${tid.value}`, {
+const { data } = await useFetch(`/api/topic/${topicId.value}`, {
   method: 'GET',
   watch: false,
+  query: { topicId: topicId.value },
   ...kungalgameResponseHandler
 })
 
@@ -46,10 +47,12 @@ const getFirstImageSrc = (htmlString: string) => {
 }
 
 if (data.value && data.value !== 'banned') {
-  const markdown = data.value.markdown
-  const banner = getFirstImageSrc(data.value.content)
-  const created = new Date(data.value.time).toString()
-  const updated = new Date(data.value.edited).toString()
+  const markdown = data.value.contentMarkdown
+  const banner = getFirstImageSrc(data.value.contentHtml)
+  const created = new Date(data.value.created).toString()
+  const updated = data.value.edited
+    ? new Date(data.value.edited).toString()
+    : ''
   const description = computed(() =>
     markdownToText(markdown).trim().slice(0, 233).replace(/\\|\n/g, '')
   )
@@ -58,7 +61,7 @@ if (data.value && data.value !== 'banned') {
     link: [
       {
         rel: 'canonical',
-        href: `${kungal.domain.main}/topic/${data.value.tid}`
+        href: `${kungal.domain.main}/topic/${data.value.id}`
       }
     ]
   })
@@ -68,13 +71,13 @@ if (data.value && data.value !== 'banned') {
     description: description.value,
 
     ogImage: banner,
-    ogUrl: `${kungal.domain.main}/topic/${data.value.tid}`,
+    ogUrl: `${kungal.domain.main}/topic/${data.value.id}`,
     ogType: 'article',
 
     twitterImage: banner,
     twitterCard: 'summary_large_image',
 
-    articleAuthor: [`${kungal.domain.main}/user/${data.value.user.uid}/info`],
+    articleAuthor: [`${kungal.domain.main}/user/${data.value.user.id}/info`],
     articlePublishedTime: created,
     articleModifiedTime: updated
   })

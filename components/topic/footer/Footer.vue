@@ -10,40 +10,39 @@ defineProps<{
   <div class="flex items-center justify-between">
     <div class="flex items-center gap-1">
       <TopicFooterUpvote
-        :tid="topic.tid"
-        :to-uid="topic.user.uid"
-        :upvote-count="topic.upvotes.count"
-        :is-upvoted="topic.upvotes.isUpvoted"
+        :topic-id="topic.id"
+        :target-user-id="topic.user.id"
+        :upvote-count="topic.upvoteCount"
+        :is-upvoted="topic.isUpvoted"
       />
 
       <TopicFooterLike
-        :tid="topic.tid"
-        :to-uid="topic.user.uid"
-        :likes-count="topic.likes.count"
-        :is-liked="topic.likes.isLiked"
+        :topic-id="topic.id"
+        :target-user-id="topic.user.id"
+        :like-count="topic.likeCount"
+        :is-liked="topic.isLiked"
       />
 
       <TopicFooterDislike
-        :tid="topic.tid"
-        :to-uid="topic.user.uid"
-        :dislikes-count="topic.dislikes.count"
-        :is-disliked="topic.dislikes.isDisliked"
+        :topic-id="topic.id"
+        :target-user-id="topic.user.id"
+        :dislike-count="topic.dislikeCount"
+        :is-disliked="topic.isDisliked"
       />
 
       <TopicFooterFavorite
-        :tid="topic.tid"
-        :to-uid="topic.user.uid"
-        :favorites-count="topic.favorites.count"
-        :is-favorite="topic.favorites.isFavorite"
+        :topic-id="topic.id"
+        :target-user-id="topic.user.id"
+        :favorite-count="topic.favoriteCount"
+        :is-favorite="topic.isFavorited"
       />
     </div>
 
     <div class="flex items-center gap-1">
       <TopicFooterReply
-        :tid="topic.tid"
-        :to-user-name="topic.user.name"
-        :to-uid="topic.user.uid"
-        :to-floor="0"
+        :target-user-name="topic.user.name"
+        :target-user-id="topic.user.id"
+        :target-floor="0"
       />
 
       <KunTooltip text="分享">
@@ -54,7 +53,7 @@ defineProps<{
           size="lg"
           @click="
             useKunCopy(
-              `${topic.title}: https://www.kungal.com/topic/${topic.tid}`
+              `${topic.title}: https://www.kungal.com/topic/${topic.id}`
             )
           "
         >

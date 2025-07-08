@@ -6,8 +6,8 @@ const props = defineProps<{
 }>()
 
 const { uid } = usePersistUserStore()
-const isLiked = ref(props.comment.likes.isLiked)
-const likesCount = ref(props.comment.likes.count)
+const isLiked = ref(props.comment.isLiked)
+const likeCount = ref(props.comment.likeCount)
 
 const likeComment = async () => {
   if (isLiked.value) {
@@ -15,20 +15,20 @@ const likeComment = async () => {
     return
   }
 
-  if (uid === props.comment.user.uid) {
+  if (uid === props.comment.user.id) {
     useMessage(10218, 'warn')
     return
   }
 
-  const result = await $fetch(`/api/topic/${props.comment.tid}/comment/like`, {
+  const result = await $fetch(`/api/topic/${props.comment.id}/comment/like`, {
     method: 'PUT',
-    query: { cid: props.comment.cid },
+    query: { commentId: props.comment.id },
     watch: false,
     ...kungalgameResponseHandler
   })
 
   if (result) {
-    likesCount.value++
+    likeCount.value++
     isLiked.value = true
     useMessage(10219, 'success')
   }
@@ -48,11 +48,11 @@ const handleClickLike = async () => {
     :is-icon-only="true"
     :variant="isLiked ? 'flat' : 'light'"
     :color="isLiked ? 'secondary' : 'default'"
-    :size="likesCount ? 'sm' : 'md'"
+    :size="likeCount ? 'sm' : 'md'"
     class-name="gap-1"
     @click="handleClickLike"
   >
     <KunIcon class="icon" name="lucide:thumbs-up" />
-    <span v-if="likesCount">{{ likesCount }}</span>
+    <span v-if="likeCount">{{ likeCount }}</span>
   </KunButton>
 </template>

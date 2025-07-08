@@ -1,12 +1,19 @@
+import { createError, sendError } from 'h3'
 import type { H3Event } from 'h3'
 
 export const kunError = (
   event: H3Event,
-  message?: string,
-  code?: number,
-  errorCode?: number
+  message: string,
+  code: number = 233,
+  statusCode: number = 233
 ) => {
-  event.node.res.statusCode = errorCode || 400
-  event.node.res.setHeader('Kun-Error', code?.toString() || '')
-  event.node.res.setHeader('Kun-Error-Message', message || '')
+  return sendError(
+    event,
+    createError({
+      statusCode: statusCode,
+      statusMessage: 'Kun Galgame Custom Error',
+
+      data: { code, message }
+    })
+  )
 }

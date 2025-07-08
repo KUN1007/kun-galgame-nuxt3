@@ -6,16 +6,16 @@ const props = defineProps<{
   topic: TopicDetail
 }>()
 
-const { tid, title, content, tags, category, section, isTopicRewriting } =
+const { id, title, content, tags, category, section, isTopicRewriting } =
   storeToRefs(useTempEditStore())
 const { uid } = usePersistUserStore()
-const isShowRewrite = computed(() => uid === props.topic.user.uid)
+const isShowRewrite = computed(() => uid === props.topic.user.id)
 
 const rewriteTopic = async () => {
-  tid.value = props.topic.tid
+  id.value = props.topic.id
   title.value = props.topic.title
-  content.value = props.topic.markdown
-  tags.value = props.topic.tags
+  content.value = props.topic.contentMarkdown
+  tags.value = props.topic.tag
   category.value = props.topic.category
   section.value = props.topic.section ?? []
   isTopicRewriting.value = true

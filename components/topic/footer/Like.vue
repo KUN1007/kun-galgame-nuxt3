@@ -1,29 +1,29 @@
 <script setup lang="ts">
 const props = defineProps<{
-  tid?: number
-  rid?: number
-  toUid: number
-  likesCount: number
+  topicId?: number
+  replyId?: number
+  targetUserId: number
+  likeCount: number
   isLiked: boolean
 }>()
 
 const { uid } = usePersistUserStore()
 const isLiked = ref(props.isLiked)
-const likesCount = ref(props.likesCount)
+const likeCount = ref(props.likeCount)
 
 const toggleLike = async () => {
   let res = ''
-  if (props.tid) {
-    const result = await $fetch(`/api/topic/${props.tid}/like`, {
+  if (props.topicId) {
+    const result = await $fetch(`/api/topic/${props.topicId}/like`, {
       method: 'PUT',
       watch: false,
       ...kungalgameResponseHandler
     })
     res = result ?? ''
   } else {
-    const result = await $fetch(`/api/topic/${props.tid}/reply/like`, {
+    const result = await $fetch(`/api/topic/${props.topicId}/reply/like`, {
       method: 'PUT',
-      query: { rid: props.rid },
+      query: { rid: props.replyId },
       watch: false,
       ...kungalgameResponseHandler
     })
@@ -31,7 +31,7 @@ const toggleLike = async () => {
   }
 
   if (res) {
-    likesCount.value += isLiked.value ? -1 : 1
+    likeCount.value += isLiked.value ? -1 : 1
 
     if (!isLiked.value) {
       useMessage(10233, 'success')
@@ -52,7 +52,7 @@ const handleClickLike = () => {
     useMessage(10235, 'warn', 5000)
     return
   }
-  if (uid === props.toUid) {
+  if (uid === props.targetUserId) {
     useMessage(10236, 'warn')
     return
   }
@@ -66,12 +66,12 @@ const handleClickLike = () => {
       :is-icon-only="true"
       :variant="isLiked ? 'flat' : 'light'"
       :color="isLiked ? 'secondary' : 'default'"
-      :size="likesCount ? 'md' : 'lg'"
+      :size="likeCount ? 'md' : 'lg'"
       class-name="gap-1"
       @click="handleClickLike"
     >
       <KunIcon name="lucide:thumbs-up" />
-      <span v-if="likesCount">{{ likesCount }}</span>
+      <span v-if="likeCount">{{ likeCount }}</span>
     </KunButton>
   </KunTooltip>
 </template>

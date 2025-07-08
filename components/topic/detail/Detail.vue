@@ -15,13 +15,14 @@ const replyData = ref<TopicReply[] | null>()
 const isLoadComplete = ref(false)
 const topicTocRef = useTemplateRef('toc')
 const pageData = reactive({
+  topicId: props.topic.id,
   page: 1,
   limit: 30,
   sortOrder: 'asc' as 'asc' | 'desc'
 })
 
 const { data, status, refresh } = await useFetch(
-  `/api/topic/${props.topic.tid}/reply`,
+  `/api/topic/${props.topic.id}/reply`,
   {
     method: 'GET',
     query: pageData,
@@ -92,7 +93,7 @@ watch(
 
       <TopicReply
         v-for="reply in replyData"
-        :key="reply.rid"
+        :key="reply.id"
         :reply="reply"
         :title="topic.title"
       />

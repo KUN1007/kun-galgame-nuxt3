@@ -3,7 +3,9 @@ import { scrollPage } from '../_helper'
 import type { TopicReply } from '~/types/api/topic-reply'
 
 const { scrollToReplyId } = storeToRefs(useTempReplyStore())
-const { rid: storeRid, isShowPanel } = storeToRefs(useTempCommentStore())
+const { replyId: storeReplyId, isShowPanel } = storeToRefs(
+  useTempCommentStore()
+)
 
 const props = defineProps<{
   reply: TopicReply
@@ -27,7 +29,7 @@ watch(
 <template>
   <div
     class="outline-primary kun-reply flex justify-between gap-3 rounded-lg outline-offset-2"
-    :id="`${reply.floor}.${markdownToText(reply.markdown).slice(0, 20)}`"
+    :id="`${reply.floor}.${markdownToText(reply.contentMarkdown).slice(0, 20)}`"
   >
     <TopicDetailUser :user="reply.user" />
 
@@ -39,7 +41,7 @@ watch(
     >
       <TopicDetailUserMobile :user="reply.user" />
 
-      <div class="flex items-center justify-between space-x-2">
+      <!-- <div class="flex items-center justify-between space-x-2">
         <button
           @click="scrollToReplyId = reply.toFloor"
           class="text-primary cursor-pointer"
@@ -56,13 +58,13 @@ watch(
         >
           #{{ reply.floor }}
         </KunLink>
-      </div>
+      </div> -->
 
-      <KunContent :content="reply.content" />
+      <KunContent :content="reply.contentHtml" />
 
       <div class="text-default-500 flex items-center justify-between text-sm">
         <span>
-          {{ formatDate(reply.time, { isShowYear: true, isPrecise: true }) }}
+          {{ formatDate(reply.created, { isShowYear: true, isPrecise: true }) }}
         </span>
         <span v-if="reply.edited" class="text-default-500">
           (已编辑于
@@ -77,11 +79,11 @@ watch(
 
       <TopicReplyFooter :reply="reply" :title="title" />
 
-      <TopicComment :rid="reply.rid" :comments-data="comments" />
+      <TopicComment :reply-id="reply.id" :comments-data="comments" />
 
       <LazyTopicCommentPanel
-        v-if="isShowPanel && reply.rid === storeRid"
-        :rid="reply.rid"
+        v-if="isShowPanel && reply.id === storeReplyId"
+        :reply-id="reply.id"
         @get-comment="(newComment) => comments.push(newComment)"
       />
     </KunCard>

@@ -2,7 +2,7 @@
 import type { TopicComment } from '~/types/api/topic-comment'
 
 const props = defineProps<{
-  rid: number
+  replyId: number
 }>()
 
 const emits = defineEmits<{
@@ -10,8 +10,10 @@ const emits = defineEmits<{
 }>()
 
 const { name } = usePersistUserStore()
-const { toUid, toUsername, isShowPanel } = storeToRefs(useTempCommentStore())
-const tid = inject<number>('tid')
+const { targetUserId, targetUsername, isShowPanel } = storeToRefs(
+  useTempCommentStore()
+)
+const topicId = inject<number>('topicId')
 const commentValue = ref('')
 const isPublishing = ref(false)
 
@@ -32,11 +34,11 @@ const handlePublishComment = async () => {
     isPublishing.value = true
     useMessage(10223, 'info')
   }
-  const comment = await $fetch(`/api/topic/${tid}/comment`, {
+  const comment = await $fetch(`/api/topic/${topicId}/comment`, {
     method: 'POST',
     body: {
-      rid: props.rid,
-      toUid: toUid.value,
+      replyId: props.replyId,
+      targetUserId: targetUserId.value,
       content: commentValue.value
     },
     watch: false,
@@ -55,7 +57,7 @@ const handlePublishComment = async () => {
 <template>
   <div class="w-full space-y-3">
     <div>
-      {{ `${name} 评论 ${toUsername}` }}
+      {{ `${name} 评论 ${targetUsername}` }}
     </div>
 
     <KunTextarea

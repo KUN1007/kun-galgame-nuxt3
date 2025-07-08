@@ -12,7 +12,7 @@ const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 const isPublishing = ref(false)
 
 const handlePublish = async () => {
-  if (!checkReplyPublish(replyDraft.value.tags, replyDraft.value.content)) {
+  if (!checkReplyPublish(replyDraft.value.content)) {
     return
   }
 
@@ -44,12 +44,7 @@ const handlePublish = async () => {
 }
 
 const handleRewrite = async () => {
-  if (
-    !checkReplyPublish(
-      replyRewrite.value[0].tags,
-      replyRewrite.value[0].markdown
-    )
-  ) {
+  if (!checkReplyPublish(replyRewrite.value[0].contentMarkdown)) {
     return
   }
 
@@ -67,10 +62,8 @@ const handleRewrite = async () => {
   const result = await $fetch(`/api/topic/${tid.value}/reply`, {
     method: 'PUT',
     body: {
-      rid: replyRewrite.value[0].rid,
-      content: replyRewrite.value[0].markdown,
-      tags: replyRewrite.value[0].tags,
-      edited: Date.now()
+      replyId: replyRewrite.value[0].id,
+      content: replyRewrite.value[0].contentMarkdown
     },
     watch: false,
     ...kungalgameResponseHandler

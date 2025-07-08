@@ -6,7 +6,7 @@ const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 const { isEdit } = storeToRefs(useTempReplyStore())
 
 const position = computed(() => {
-  return replyDraft.value.toFloor === 0 ? 'master' : 'reply'
+  return replyDraft.value.targetFloor === 0 ? 'master' : 'reply'
 })
 
 const handleClosePanel = async () => {
@@ -41,7 +41,7 @@ const handleClosePanel = async () => {
           <div class="flex items-center justify-between">
             <h3>
               {{
-                `回复给 @ ${replyDraft.toUserName} - ${KUN_TOPIC_REPLY_PANEL_POSITION_MAP[position]} ${replyDraft.toFloor}`
+                `回复给 @ ${replyDraft.targetUserName} - ${KUN_TOPIC_REPLY_PANEL_POSITION_MAP[position]} ${replyDraft.targetFloor}`
               }}
             </h3>
             <KunButton

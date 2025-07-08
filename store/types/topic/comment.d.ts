@@ -1,7 +1,7 @@
 export interface TopicComment {
-  rid: number
-  toUid: number
-  toUsername: string
+  replyId: number
+  targetUserId: number
+  targetUsername: string
   content: string
 
   isShowPanel: boolean

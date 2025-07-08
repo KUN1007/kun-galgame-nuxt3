@@ -1,6 +1,11 @@
 import Cookies from 'js-cookie'
 import type { FetchContext, FetchResponse } from 'ofetch'
 
+interface KunErrorData {
+  code: number
+  message: string
+}
+
 interface ResponseMap {
   blob: Blob
   text: string
@@ -17,27 +22,39 @@ type KunOnResponseErrorContext<R extends ResponseType = 'json'> =
     response: FetchResponse<R>
   }
 
-export const onResponse = async (context: KunOnResponseContext) => {
-  if (context.response.status === 205) {
+export const onResponse = (context: KunOnResponseContext) => {}
+
+const onResponseError = async (context: KunOnResponseErrorContext) => {
+  const errorData = context.response?._data?.data as KunErrorData | undefined
+
+  if (!errorData) {
+    useMessage('网络请求失败，请稍后重试', 'error')
+    return
+  }
+
+  const { code, message } = errorData
+
+  if (code === 205) {
     const navigateCookie = Cookies.get('kungalgame-is-navigate-to-login')
     const userStore = usePersistUserStore()
 
     if (!navigateCookie && userStore.uid) {
       userStore.$reset()
-      useMessage(10250, 'error', 7777)
 
-      Cookies.set('kungalgame-is-navigate-to-login', 'navigated')
+      useMessage(message || '登录已失效，请重新登录', 'error', 7777)
+
+      Cookies.set('kungalgame-is-navigate-to-login', 'navigated', {
+        expires: 1 / 1440
+      })
 
       await navigateTo('/login')
       return
     }
   }
 
-  if (context.response.status === 233) {
-    kungalgameErrorHandler(context.response.headers.get('Kun-Error') || '')
+  if (code === 233) {
+    useMessage(message, 'error')
   }
 }
-
-const onResponseError = (_: KunOnResponseErrorContext) => {}
 
 export const kungalgameResponseHandler = { onResponse, onResponseError }

@@ -5,7 +5,9 @@ const props = defineProps<{
   topic: TopicCard
 }>()
 
-const actionsCount = computed(() => props.topic.replies + props.topic.comments)
+const actionsCount = computed(
+  () => props.topic.replyCount + props.topic.commentCount
+)
 </script>
 
 <template>
@@ -13,24 +15,24 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
     :is-pressable="true"
     :is-transparent="false"
     content-class="justify-between gap-2"
-    :href="`/topic/${props.topic.tid}`"
+    :href="`/topic/${props.topic.id}`"
   >
     <h3 class="line-clamp-2 text-lg font-medium">
       {{ topic.title }}
     </h3>
 
-    <TopicTagGroup :section="props.topic.section" :tags="props.topic.tags" />
+    <TopicTagGroup :section="props.topic.section" :tags="props.topic.tag" />
 
     <div class="text-default-700 flex items-center gap-4 text-sm">
       <span class="flex items-center gap-1 text-inherit">
         <KunIcon class="h-4 w-4 text-inherit" name="lucide:eye" />
-        <span class="text-inherit">{{ formatNumber(props.topic.views) }}</span>
+        <span class="text-inherit">{{ formatNumber(props.topic.view) }}</span>
       </span>
 
       <span class="flex items-center gap-1 text-inherit">
         <KunIcon class="h-4 w-4 text-inherit" name="lucide:thumbs-up" />
-        <span class="text-inherit" v-if="props.topic.likes">
-          {{ props.topic.likes }}
+        <span class="text-inherit" v-if="props.topic.likeCount">
+          {{ props.topic.likeCount }}
         </span>
       </span>
 
@@ -42,7 +44,9 @@ const actionsCount = computed(() => props.topic.replies + props.topic.comments)
 
     <div class="text-default-600 flex items-center gap-1 text-sm">
       <KunAvatar :user="topic.user" size="xs" />
-      {{ `${topic.user.name} · ${formatTimeDifference(topic.time)}` }}
+      {{
+        `${topic.user.name} · ${formatTimeDifference(topic.statusUpdateTime)}`
+      }}
     </div>
   </KunCard>
 </template>

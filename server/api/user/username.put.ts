@@ -1,38 +1,37 @@
-import UserModel from '~/server/models/user'
 import prisma from '~/prisma/prisma'
-import { isValidName } from '~/utils/validate'
+import { updateUsernameSchema } from '~/validations/user'
 
 export default defineEventHandler(async (event) => {
-  const { username }: { username: string } = await readBody(event)
-
+  const input = await kunParsePutBody(event, updateUsernameSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
+  }
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
 
-  if (!isValidName(username)) {
-    return kunError(event, 10117)
-  }
-
-  const user = await UserModel.findOne({ uid: userInfo.uid })
+  const user = await prisma.user.findUnique({
+    where: { id: userInfo.uid }
+  })
   if (!user) {
-    return kunError(event, 10101)
+    return kunError(event, '未找到该用户')
   }
-  if (user.moemoepoint < 1017) {
-    return kunError(event, 10118)
+  if (user.moemoepoint < 17) {
+    return kunError(event, '更改用户名需要 17 萌萌点, 您的萌萌点不足')
   }
 
-  const duplicatedNumber = await UserModel.countDocuments({
-    name: { $regex: new RegExp('^' + username + '$', 'i') }
+  const duplicatedNumber = await prisma.user.count({
+    where: { name: { equals: input.username, mode: 'insensitive' } }
   })
   if (duplicatedNumber) {
-    return kunError(event, 10105)
+    return kunError(event, '您的用户名已经被使用, 请换一个')
   }
 
-  await UserModel.updateOne(
-    { uid: userInfo.uid },
-    { $set: { name: username }, $inc: { moemoepoint: -17 } }
-  )
+  await prisma.user.update({
+    where: { id: userInfo.uid },
+    data: { name: input.username, moemoepoint: { increment: -17 } }
+  })
 
   return 'Moe Moe'
 })

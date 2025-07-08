@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   user: {
-    uid: number
+    id: number
     name: string
     avatar: string
     moemoepoint: number
@@ -23,7 +23,7 @@ const user = computed(() => props.user)
     <KunLink
       underline="hover"
       :aria-label="props.user.name"
-      :to="`/user/${user.uid}/info`"
+      :to="`/user/${user.id}/info`"
     >
       {{ user.name }}
     </KunLink>

@@ -51,6 +51,12 @@ export const updateUserBioSchema = z.object({
   bio: z.string().max(107, { message: '签名最大长度为 107 个字符' })
 })
 
+export const updateUsernameSchema = z.object({
+  username: z.string().refine((s) => isValidName(s) || isValidEmail(s), {
+    message: '非法的用户名'
+  })
+})
+
 export const userUpdateEmailSchema = z.object({
   codeSalt: z.string().min(64).max(64),
   email: z.string().email(),

@@ -1,24 +1,23 @@
 <script setup lang="ts">
 const props = defineProps<{
-  tid: number
-  toUid: number
-  favoritesCount: number
+  topicId: number
+  favoriteCount: number
   isFavorite: boolean
 }>()
 
 const { uid } = usePersistUserStore()
 const isFavorite = ref(props.isFavorite)
-const favoritesCount = ref(props.favoritesCount)
+const favoriteCount = ref(props.favoriteCount)
 
 const toggleFavoriteGalgame = async () => {
-  const result = await $fetch(`/api/topic/${props.tid}/favorite`, {
+  const result = await $fetch(`/api/topic/${props.topicId}/favorite`, {
     method: 'PUT',
     watch: false,
     ...kungalgameResponseHandler
   })
 
   if (result) {
-    favoritesCount.value += isFavorite.value ? -1 : 1
+    favoriteCount.value += isFavorite.value ? -1 : 1
 
     if (!isFavorite.value) {
       useMessage(10230, 'success')
@@ -49,12 +48,12 @@ const handleClickFavorite = () => {
       :is-icon-only="true"
       :variant="isFavorite ? 'flat' : 'light'"
       :color="isFavorite ? 'secondary' : 'default'"
-      :size="favoritesCount ? 'md' : 'lg'"
+      :size="favoriteCount ? 'md' : 'lg'"
       class-name="gap-1"
       @click="handleClickFavorite"
     >
       <KunIcon name="lucide:heart" />
-      <span v-if="favoritesCount">{{ favoritesCount }}</span>
+      <span v-if="favoriteCount">{{ favoriteCount }}</span>
     </KunButton>
   </KunTooltip>
 </template>

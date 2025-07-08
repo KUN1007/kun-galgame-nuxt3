@@ -2,15 +2,15 @@
 import type { TopicComment } from '~/types/api/topic-comment'
 
 const props = defineProps<{
-  rid: number
+  replyId: number
   commentsData: TopicComment[]
 }>()
 
 const currentUserUid = usePersistUserStore().uid
 const {
-  rid: storeRid,
-  toUid,
-  toUsername,
+  replyId: storeReplyId,
+  targetUserId,
+  targetUsername,
   isShowPanel
 } = storeToRefs(useTempCommentStore())
 
@@ -20,9 +20,9 @@ const handleClickComment = (comment: TopicComment) => {
     return
   }
 
-  storeRid.value = props.rid
-  toUid.value = comment.user.uid
-  toUsername.value = comment.user.name
+  storeReplyId.value = props.replyId
+  targetUserId.value = comment.user.id
+  targetUsername.value = comment.user.name
   isShowPanel.value = !isShowPanel.value
 }
 </script>
@@ -49,7 +49,7 @@ const handleClickComment = (comment: TopicComment) => {
               <span class="text-default-500 mx-1">评论</span>
               <KunLink
                 underline="hover"
-                :to="`/user/${comment.toUser.uid}/info`"
+                :to="`/user/${comment.toUser.id}/info`"
               >
                 {{ comment.toUser.name }}
               </KunLink>

@@ -9,11 +9,11 @@ export interface EditStorePersist {
 }
 
 export interface EditStoreTemp {
-  tid: number
+  id: number
   title: string
   content: string
   tags: string[]
-  category: string[]
+  category: string
   section: string[]
 
   isTopicRewriting: boolean

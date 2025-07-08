@@ -29,22 +29,22 @@ defineProps<{
 
       <TopicTagGroup
         :section="topic.section"
-        :tags="topic.tags"
+        :tags="topic.tag"
         :upvote-time="topic.upvoteTime"
       />
 
       <div class="text-default-500 flex items-center space-x-4 text-sm">
-        <span>{{ `浏览数 - ${topic.views}` }}</span>
+        <span>{{ `浏览数 - ${topic.view}` }}</span>
         <span>
           {{
-            `发布于 - ${formatDate(topic.time, { isShowYear: true, isPrecise: true })}`
+            `发布于 - ${formatDate(topic.created, { isShowYear: true, isPrecise: true })}`
           }}
         </span>
       </div>
 
       <TopicDetailUserMobile :user="topic.user" />
 
-      <KunContent class="kun-master" :content="topic.content" />
+      <KunContent class="kun-master" :content="topic.contentHtml" />
 
       <p class="text-default-500 ml-auto text-sm" v-if="topic.edited">
         {{

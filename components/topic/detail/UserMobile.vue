@@ -7,7 +7,7 @@ defineProps<{
 <template>
   <div class="flex items-center gap-2 sm:hidden">
     <KunAvatar :user="user" />
-    <KunLink underline="none" :to="`/user/${user.uid}/info`">
+    <KunLink underline="none" :to="`/user/${user.id}/info`">
       {{ user.name }}
     </KunLink>
     <p class="text-secondary flex items-center gap-1">

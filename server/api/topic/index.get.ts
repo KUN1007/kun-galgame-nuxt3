@@ -4,7 +4,7 @@ import type { TopicCard } from '~/types/api/topic'
 import type { Prisma } from '@prisma/client'
 
 export default defineEventHandler(async (event) => {
-  const input = await kunParsePutBody(event, getTopicSchema)
+  const input = kunParseGetQuery(event, getTopicSchema)
   if (typeof input === 'string') {
     return kunError(event, input)
   }
@@ -32,55 +32,50 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  const [data, total] = await prisma.$transaction([
-    prisma.topic.findMany({
-      where: {
-        category,
-        status: { not: 1 }
+  const data = await prisma.topic.findMany({
+    where: {
+      category,
+      status: { not: 1 }
+    },
+    skip: (page - 1) * limit,
+    take: limit,
+    orderBy,
+    select: {
+      id: true,
+      title: true,
+      view: true,
+      tag: true,
+      status: true,
+      status_update_time: true,
+      upvote_time: true,
+
+      user: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true
+        }
       },
-      skip: (page - 1) * limit,
-      take: limit,
-      orderBy,
-      select: {
-        id: true,
-        title: true,
-        view: true,
-        tag: true,
-        status: true,
-        status_update_time: true,
-        upvote_time: true,
 
-        user: {
-          select: {
-            id: true,
-            name: true,
-            avatar: true
-          }
-        },
-
-        section: {
-          select: {
-            topic_section: {
-              select: {
-                name: true
-              }
+      section: {
+        select: {
+          topic_section: {
+            select: {
+              name: true
             }
           }
-        },
+        }
+      },
 
-        _count: {
-          select: {
-            like: true,
-            reply: true,
-            comment: true
-          }
+      _count: {
+        select: {
+          like: true,
+          reply: true,
+          comment: true
         }
       }
-    }),
-    prisma.topic.count({
-      where: { category, status: { not: 1 } }
-    })
-  ])
+    }
+  })
 
   const topics: TopicCard[] = data.map((topic) => ({
     id: topic.id,
@@ -99,5 +94,5 @@ export default defineEventHandler(async (event) => {
     upvoteTime: topic.upvote_time
   }))
 
-  return { topics, total }
+  return topics
 })
