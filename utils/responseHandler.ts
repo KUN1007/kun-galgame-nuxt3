@@ -17,7 +17,7 @@ type KunOnResponseErrorContext<R extends ResponseType = 'json'> =
     response: FetchResponse<R>
   }
 
-export const onResponse = (context: KunOnResponseContext) => {
+export const onResponse = async (context: KunOnResponseContext) => {
   if (context.response.status === 205) {
     const navigateCookie = Cookies.get('kungalgame-is-navigate-to-login')
     const userStore = usePersistUserStore()
@@ -27,7 +27,9 @@ export const onResponse = (context: KunOnResponseContext) => {
       useMessage(10250, 'error', 7777)
 
       Cookies.set('kungalgame-is-navigate-to-login', 'navigated')
-      return navigateTo('/login')
+
+      await navigateTo('/login')
+      return
     }
   }
 

@@ -30,7 +30,7 @@ const { data } = await useFetch(`/api/home/resource`, {
       underline="none"
       v-for="(link, index) in data"
       :key="index"
-      :to="`/galgame/${link.gid}`"
+      :to="`/galgame/${link.galgameId}`"
       class-name="group flex flex-nowrap items-start gap-3 rounded-lg transition-colors"
     >
       <div
@@ -44,10 +44,10 @@ const { data } = await useFetch(`/api/home/resource`, {
 
       <div class="space-y-2">
         <h3 class="hover:text-primary line-clamp-3 break-all transition-colors">
-          {{ getPreferredLanguageText(link.name) }}
+          {{ getPreferredLanguageText(link.galgameName) }}
 
           <span class="text-default-500 text-sm">
-            {{ formatTimeDifference(link.time) }}
+            {{ formatTimeDifference(link.created) }}
           </span>
         </h3>
 

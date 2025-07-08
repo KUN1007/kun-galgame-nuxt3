@@ -1,9 +1,8 @@
 model galgame_history {
-  id      Int      @id @default(autoincrement())
-  time    DateTime @default(now())
-  action  String   @default("")
-  type    String   @default("")
-  content String   @default("") @db.VarChar(1007)
+  id      Int    @id @default(autoincrement())
+  action  String @default("")
+  type    String @default("")
+  content String @default("") @db.VarChar(1007)
 
   galgame_id Int
   galgame    galgame @relation(fields: [galgame_id], references: [id])

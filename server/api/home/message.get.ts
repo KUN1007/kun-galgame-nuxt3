@@ -20,6 +20,7 @@ export default defineEventHandler(async (event) => {
     },
     take: limit,
     skip,
+    orderBy: { created: 'desc' },
     include: {
       sender: {
         select: {

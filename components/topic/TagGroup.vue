@@ -2,7 +2,7 @@
 const props = defineProps<{
   section: string[]
   tags: string[]
-  upvoteTime?: number
+  upvoteTime?: Date | string | null
 }>()
 
 const isRecentlyUpvoted = computed(() => hourDiff(props.upvoteTime || 0, 10))

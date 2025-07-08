@@ -24,6 +24,11 @@ import TodoModel from '~/server/models/todo'
 import UpdateLogModel from '~/server/models/update-log'
 import UserModel from '~/server/models/user'
 
+import {
+  KUN_TOPIC_CATEGORY_CONST,
+  KUN_TOPIC_SECTION_CONST
+} from '~/constants/topic'
+
 // 加载环境变量
 dotenv.config()
 
@@ -185,7 +190,7 @@ async function precacheLookups() {
   // )
 
   await prisma.topic_section.createMany({
-    data: ['galgame', 'technique', 'others'].map((s) => ({ name: s }))
+    data: KUN_TOPIC_SECTION_CONST.map((s) => ({ name: s }))
   })
 
   // Topic tags lookup (from TagModel)
@@ -255,7 +260,7 @@ async function migrateUsers() {
             bio: doc.bio ?? '',
             daily_check_in: doc.daily_check_in ?? 0,
             daily_image_count: doc.daily_image_count ?? 0,
-            created: msToDate(doc.time) ?? doc.created,
+            created: doc.created,
             updated: doc.updated
           }
         })
@@ -306,7 +311,7 @@ async function migrateTodos() {
       content_zh_tw: doc.content?.['zh-tw'] ?? '',
       completed_time: msToDate(doc.completed_time),
       user_id: 2,
-      created: msToDate(doc.time) ?? doc.created,
+      created: doc.created,
       updated: doc.updated
     })
 
@@ -341,7 +346,7 @@ async function migrateUpdateLogs() {
       content_ja_jp: doc.content?.['ja-jp'] ?? '',
       content_zh_cn: doc.content?.['zh-cn'] ?? '',
       content_zh_tw: doc.content?.['zh-tw'] ?? '',
-      created: flexibleToDate(doc.time) ?? doc.created,
+      created: doc.created,
       updated: doc.updated
     })
 
@@ -379,12 +384,12 @@ async function migrateTopics(
         content: doc.content ?? '',
         view: doc.views ?? 0,
         status: doc.status ?? 0,
-        category: doc.category?.[0] ?? 'uncategorized',
+        category: doc.category?.[0].toLocaleLowerCase() ?? 'uncategorized',
         tag: cache.topicTagsByTid.get(doc.tid) ?? doc.tags ?? [],
-        status_update_time: msToDate(doc.upvote_time) ?? doc.updated, // Use upvote_time as status_update_time
+        status_update_time: msToDate(doc.time) ?? doc.updated, // Use upvote_time as status_update_time
         edited: msToDate(doc.edited),
         upvote_time: msToDate(doc.upvote_time),
-        created: msToDate(doc.time) ?? doc.created,
+        created: doc.created,
         updated: doc.updated,
 
         // user: { connect: { id: doc.uid } },
@@ -702,8 +707,8 @@ async function migrateMessages() {
       type: doc.type,
       sender_id: doc.sender_uid,
       receiver_id: doc.receiver_uid,
-      created: msToDate(doc.time) ?? doc.created, // 遵循Prisma的惯例，使用created_at
-      updated: doc.updated // 遵循Prisma的惯例，使用updated_at
+      created: doc.created,
+      updated: doc.updated
     })
 
     if (batch.length >= BATCH_SIZE) {
@@ -741,7 +746,6 @@ async function migrateSystemMessages() {
   for await (const doc of cursor) {
     batch.push({
       id: doc.maid,
-      time: msToDate(doc.time) ?? doc.created,
       content_en_us: doc.content?.['en-us'] ?? null,
       content_ja_jp: doc.content?.['ja-jp'] ?? null,
       content_zh_cn: doc.content?.['zh-cn'] ?? null,
@@ -806,7 +810,7 @@ async function migrateUnmoes() {
       desc_zh_cn: doc.description?.['zh-cn'] ?? '',
       desc_zh_tw: doc.description?.['zh-tw'] ?? '',
       user_id: doc.uid,
-      created: msToDate(doc.time) ?? doc.created,
+      created: doc.created,
       updated: doc.updated
     })
 
@@ -1205,7 +1209,7 @@ async function migrateChatMessages() {
         content: doc.content ?? '',
         is_recall: doc.is_recalled ?? false,
         recall_time: msToDate(doc.recalled_time),
-        created: msToDate(doc.time) ?? doc.created,
+        created: doc.created,
         updated: doc.updated,
 
         // 使用从 Map 中查找到的 ID
@@ -1331,7 +1335,6 @@ async function migrateGalgameHistories() {
       // 只有当 uid 存在于 validUserIds 中时，才处理这条数据
       batch.push({
         id: doc.ghid,
-        time: msToDate(doc.time) ?? doc.created,
         action: doc.action ?? '',
         type: doc.type ?? '',
         content: doc.content ?? '',
@@ -1514,7 +1517,6 @@ async function migrateGalgameResources() {
         code: doc.code ?? '',
         password: doc.password ?? '',
         note: sanitizeString(doc.note) ?? '',
-        update_time: msToDate(doc.time) ?? doc.created,
         status: doc.status ?? 0,
         created: doc.created,
         updated: doc.updated,

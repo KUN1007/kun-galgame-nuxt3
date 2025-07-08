@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
 
     await prisma.topic.update({
       where: { id: input.topicId },
-      data: { status_update_time: new Date() }
+      data: { status_update_time: new Date(), upvote_time: new Date() }
     })
 
     await prisma.user.update({

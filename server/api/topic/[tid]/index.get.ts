@@ -3,7 +3,7 @@ import { getTopicDetailSchema } from '~/validations/topic'
 import type { TopicDetail } from '~/types/api/topic'
 
 export default defineEventHandler(async (event) => {
-  const input = await kunParsePutBody(event, getTopicDetailSchema)
+  const input = kunParseGetQuery(event, getTopicDetailSchema)
   if (typeof input === 'string') {
     return kunError(event, input)
   }

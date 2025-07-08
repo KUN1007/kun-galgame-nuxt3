@@ -48,9 +48,7 @@ const { data } = await useFetch('/api/home/message', {
         <KunLink
           underline="none"
           color="default"
-          :to="
-            message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`
-          "
+          :to="message.link"
           class-name="hover:text-primary line-clamp-3 break-all transition-colors"
         >
           {{ message.content }}
@@ -60,13 +58,13 @@ const { data } = await useFetch('/api/home/message', {
           <KunLink
             underline="none"
             color="default"
-            :to="`/user/${message.uid}/info`"
+            :to="`/user/${message.user.id}/info`"
             class-name="hover:text-foreground text-default-500 text-sm font-medium transition-colors"
           >
-            {{ message.name }}
+            {{ message.user.name }}
           </KunLink>
           <span class="text-default-500 text-sm">
-            {{ formatTimeDifference(message.time) }}
+            {{ formatTimeDifference(message.created) }}
           </span>
         </div>
       </div>

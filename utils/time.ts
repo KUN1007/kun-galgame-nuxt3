@@ -29,7 +29,7 @@ export const formatTimeDifference = (pastTime: number | Date | string) => {
   }
 }
 
-export const hourDiff = (upvoteTime: number, hours: number) => {
+export const hourDiff = (upvoteTime: number | Date | string, hours: number) => {
   if (upvoteTime === 0 || upvoteTime === undefined) {
     return false
   }

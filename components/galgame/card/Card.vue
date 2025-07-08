@@ -16,8 +16,8 @@ defineProps<{
       :is-transparent="isTransparent"
       :is-pressable="true"
       v-for="galgame in galgames"
-      :key="galgame.gid"
-      :href="`/galgame/${galgame.gid}`"
+      :key="galgame.id"
+      :href="`/galgame/${galgame.id}`"
       class-name="p-0"
     >
       <div class="relative overflow-hidden">
@@ -69,12 +69,12 @@ defineProps<{
           <div class="flex gap-3">
             <span class="flex items-center gap-1">
               <KunIcon class="text-white" name="lucide:eye" />
-              <span class="text-white">{{ galgame.views }}</span>
+              <span class="text-white">{{ galgame.view }}</span>
             </span>
 
             <span class="flex items-center gap-1">
               <KunIcon class="text-white" name="lucide:thumbs-up" />
-              <span class="text-white">{{ galgame.likes }}</span>
+              <span class="text-white">{{ galgame.likeCount }}</span>
             </span>
           </div>
 
@@ -99,7 +99,9 @@ defineProps<{
 
         <div class="text-default-600 flex items-center gap-1 text-sm">
           <KunAvatar :user="galgame.user" size="xs" />
-          {{ `${galgame.user.name} · ${formatTimeDifference(galgame.time)}` }}
+          {{
+            `${galgame.user.name} · ${formatTimeDifference(galgame.resourceUpdateTime)}`
+          }}
         </div>
       </div>
     </KunCard>

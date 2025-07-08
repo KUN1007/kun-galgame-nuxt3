@@ -16,6 +16,7 @@ export default defineEventHandler(async (event) => {
     skip,
     take: limit,
     where: { status: { not: 1 }, created: { gte: subMonths(new Date(), 3) } },
+    orderBy: { status_update_time: 'desc' },
     include: {
       user: {
         select: {
