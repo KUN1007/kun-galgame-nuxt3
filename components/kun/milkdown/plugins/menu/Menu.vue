@@ -53,21 +53,20 @@ const handleFileChange = async (event: Event) => {
   }
 }
 
-const handleActiveTabChange = (value: string) => {
-  activeTab.value = value
+const toggleTab = () => {
+  activeTab.value = activeTab.value === 'preview' ? 'code' : 'preview'
 }
+
+const currentTabLabel = computed(() => {
+  return activeTab.value === 'preview' ? tabs[1].textValue : tabs[0].textValue
+})
 </script>
 
 <template>
   <div class="flex flex-wrap items-center space-x-1">
-    <KunTab
-      :model-value="activeTab"
-      @change="handleActiveTabChange"
-      :items="tabs"
-      variant="underlined"
-      color="primary"
-      size="sm"
-    />
+    <KunButton variant="light" @click="toggleTab">
+      {{ currentTabLabel }}
+    </KunButton>
 
     <template v-if="activeTab === 'preview'">
       <KunMilkdownPluginsHeader :editor-info="editorInfo" />
@@ -76,9 +75,8 @@ const handleActiveTabChange = (value: string) => {
         :is-icon-only="true"
         v-for="(btn, index) in commands"
         :key="index"
-        class="btn"
+        class-name="text-xl"
         variant="light"
-        size="xl"
         @click="call(btn.command.key, btn.payload)"
       >
         <KunIcon class="text-foreground" :name="btn.icon" />
@@ -88,7 +86,7 @@ const handleActiveTabChange = (value: string) => {
         :is-icon-only="true"
         v-if="props.isShowUploadImage"
         variant="light"
-        size="xl"
+        class-name="text-xl"
         @click="input?.click()"
       >
         <KunIcon class="text-foreground" name="lucide:image-plus" />
@@ -103,7 +101,7 @@ const handleActiveTabChange = (value: string) => {
 
       <KunPopover inner-class="-left-28">
         <template #trigger>
-          <KunButton variant="light" size="xl" :is-icon-only="true">
+          <KunButton variant="light" class-name="text-xl" :is-icon-only="true">
             <KunIcon class="text-foreground" name="lucide:smile-plus" />
           </KunButton>
         </template>
@@ -113,7 +111,7 @@ const handleActiveTabChange = (value: string) => {
 
       <KunPopover inner-class="-left-28">
         <template #trigger>
-          <KunButton variant="light" size="xl" :is-icon-only="true">
+          <KunButton variant="light" class-name="text-xl" :is-icon-only="true">
             <KunIcon class="text-foreground" name="lucide:sticker" />
           </KunButton>
         </template>

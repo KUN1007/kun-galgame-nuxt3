@@ -76,7 +76,7 @@ const getTopicReplies = async (
         replyId: comment.topic_reply_id,
         topicId: comment.topic_id,
         user: comment.user,
-        toUser: comment.target_user,
+        targetUser: comment.target_user,
         content: comment.content,
         isLiked: comment.like.length > 0,
         likeCount: comment._count.like,

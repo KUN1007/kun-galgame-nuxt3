@@ -3,7 +3,7 @@ export interface TopicComment {
   replyId: number
   topicId: number
   user: KunUser
-  toUser: KunUser
+  targetUser: KunUser
   content: string
   isLiked: boolean
   likeCount: number

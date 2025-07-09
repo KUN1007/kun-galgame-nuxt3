@@ -63,7 +63,7 @@ export default defineEventHandler(async (event) => {
       replyId: newComment.topic_reply_id,
       topicId: newComment.topic_id,
       user: newComment.user,
-      toUser: newComment.target_user,
+      targetUser: newComment.target_user,
       content: newComment.content,
       isLiked: false,
       likeCount: 0

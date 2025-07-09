@@ -22,7 +22,7 @@ const likeComment = async () => {
 
   const result = await $fetch(`/api/topic/${props.comment.id}/comment/like`, {
     method: 'PUT',
-    query: { commentId: props.comment.id },
+    body: { commentId: props.comment.id },
     watch: false,
     ...kungalgameResponseHandler
   })

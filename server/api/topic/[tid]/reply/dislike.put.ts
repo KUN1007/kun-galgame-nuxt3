@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const reply = await prisma.topic_reply.findUnique({
-    where: { id: input.replyId, user_id: uid },
+    where: { id: input.replyId },
     include: {
       dislike: {
         where: {

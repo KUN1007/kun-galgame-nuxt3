@@ -49,9 +49,9 @@ const handleClickComment = (comment: TopicComment) => {
               <span class="text-default-500 mx-1">评论</span>
               <KunLink
                 underline="hover"
-                :to="`/user/${comment.toUser.id}/info`"
+                :to="`/user/${comment.targetUser.id}/info`"
               >
-                {{ comment.toUser.name }}
+                {{ comment.targetUser.name }}
               </KunLink>
             </div>
 

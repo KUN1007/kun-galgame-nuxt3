@@ -80,7 +80,7 @@ const handleToggleParagraph = (type: HeadingType) => {
 <template>
   <KunPopover position="bottom-start">
     <template #trigger>
-      <KunButton variant="light" size="lg">文本大小</KunButton>
+      <KunButton variant="light">文本大小</KunButton>
     </template>
 
     <div class="flex flex-col gap-1 p-3">

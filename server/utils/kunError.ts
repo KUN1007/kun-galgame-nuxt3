@@ -11,8 +11,6 @@ export const kunError = (
     event,
     createError({
       statusCode: statusCode,
-      statusMessage: 'Kun Galgame Custom Error',
-
       data: { code, message }
     })
   )

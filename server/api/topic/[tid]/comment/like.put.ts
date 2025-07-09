@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const comment = await prisma.topic_comment.findUnique({
-    where: { id: input.commentId, user_id: uid }
+    where: { id: input.commentId }
   })
   if (!comment) {
     return kunError(event, '未找到该评论')

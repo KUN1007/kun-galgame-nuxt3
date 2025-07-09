@@ -1,50 +1,88 @@
-import { render, h, ref } from 'vue'
-import Message from '~/components/kun/alert/Message.vue'
+import { ref, render, h, computed, type Ref } from 'vue'
+import MessageContainer from '~/components/kun/alert/MessageContainer.vue'
 import { infoMessages } from '~/error/kunMessage'
 
-type MessageType = `warn` | `success` | `error` | `info`
+export type MessageType = 'warn' | 'success' | 'error' | 'info'
+export type MessagePosition =
+  | 'top-center'
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-center'
+  | 'bottom-left'
+  | 'bottom-right'
 
-const messageCount = ref(0)
+export interface MessageOptions {
+  id: string
+  message: string
+  type: MessageType
+  duration: number
+  richText: boolean
+  position: MessagePosition
+  count: number
+}
 
-/**
- * @param {number | string} messageData - Message i18n object
- * @param {type} type - Type of the message, can be one of `warn`, `success`, `error`, or `info`
- * @param {number} duration - Display duration of the message, optional, default is 3 seconds
- * @param {boolean} richText - Whether the message text support html
- */
+const messages: Ref<MessageOptions[]> = ref([])
+let seed = 0
+let containerRef: HTMLElement | null = null
+
+export const useMessageState = () => ({
+  messages: computed(() => messages.value),
+  removeMessage: (id: string) => {
+    messages.value = messages.value.filter((msg) => msg.id !== id)
+  }
+})
+
+const initializeContainer = () => {
+  if (containerRef) return
+
+  containerRef = document.createElement('div')
+  containerRef.id = 'kun-message-container-root'
+  document.body.appendChild(containerRef)
+
+  const vNode = h(MessageContainer)
+  render(vNode, containerRef)
+}
+
 export const useMessage = (
   messageData: number | string,
   type: MessageType,
-  duration?: number,
-  richText?: boolean
+  duration = 3000,
+  richText = false,
+  position = 'top-center' as MessagePosition
 ) => {
-  let timeout: NodeJS.Timeout | null = null
-  // IMPORTANT: string type is only available for error messages, and the number type for frontend messages map
-  const message =
+  initializeContainer()
+
+  const resolvedMessage =
     typeof messageData === 'string' ? messageData : infoMessages[messageData]
 
-  messageCount.value++
-  render(null, document.body)
+  const existingMessage = messages.value.find(
+    (m) =>
+      m.message === resolvedMessage &&
+      m.position === position &&
+      m.type === type
+  )
 
-  const messageNode = h(Message, {
-    message,
-    type,
-    duration,
-    richText
-  })
+  if (existingMessage) {
+    existingMessage.count++
+    existingMessage.duration = duration
+  } else {
+    seed++
+    const id = `message_${seed}`
 
-  const time = duration || 3000
-
-  if (timeout) {
-    clearTimeout(timeout)
-  }
-  timeout = setTimeout(() => {
-    messageCount.value--
-
-    if (!messageCount.value) {
-      render(null, document.body)
+    const newMessage: MessageOptions = {
+      id,
+      message: resolvedMessage,
+      type,
+      duration,
+      richText,
+      position,
+      count: 1
     }
-  }, time)
 
-  render(messageNode, document.body)
+    if (position.startsWith('top')) {
+      messages.value.push(newMessage)
+    } else {
+      messages.value.unshift(newMessage)
+    }
+  }
 }

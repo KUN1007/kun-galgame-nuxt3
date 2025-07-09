@@ -37,6 +37,7 @@ const handlePublishComment = async () => {
   const comment = await $fetch(`/api/topic/${topicId}/comment`, {
     method: 'POST',
     body: {
+      topicId: topicId,
       replyId: props.replyId,
       targetUserId: targetUserId.value,
       content: commentValue.value
