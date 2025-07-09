@@ -17,6 +17,7 @@ const toggleDislike = async () => {
     const result = await $fetch(`/api/topic/${props.topicId}/dislike`, {
       method: 'PUT',
       watch: false,
+      body: { topicId: props.topicId },
       ...kungalgameResponseHandler
     })
     res = result ?? ''
@@ -34,9 +35,9 @@ const toggleDislike = async () => {
     dislikeCount.value += isDisliked.value ? -1 : 1
 
     if (!isDisliked.value) {
-      useMessage('点踩成功', 'success')
+      useMessage(10225, 'success')
     } else {
-      useMessage('取消点踩成功', 'success')
+      useMessage(10226, 'success')
     }
 
     isDisliked.value = !isDisliked.value
@@ -44,16 +45,16 @@ const toggleDislike = async () => {
 }
 
 const handleClickDislikeThrottled = throttle(toggleDislike, 1007, () =>
-  useMessage('您在 1007 毫秒内只能进行一次操作', 'warn')
+  useMessage(10227, 'warn')
 )
 
 const handleClickDislike = () => {
   if (!id) {
-    useMessage('请登录后使用点踩', 'warn', 5000)
+    useMessage(10228, 'warn', 5000)
     return
   }
   if (id === props.targetUserId) {
-    useMessage('您不能给自己点踩', 'warn')
+    useMessage(10229, 'warn')
     return
   }
   handleClickDislikeThrottled()

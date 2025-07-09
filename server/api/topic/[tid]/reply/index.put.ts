@@ -14,6 +14,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const { replyId, targets, content } = input
+  const validTargets = targets?.filter((item) => item.content?.trim())
   const uid = userInfo.uid
 
   const existingReply = await prisma.topic_reply.findUnique({
@@ -44,7 +45,7 @@ export default defineEventHandler(async (event) => {
         content,
         edited: new Date(),
         target: {
-          create: targets?.map((target) => ({
+          create: validTargets?.map((target) => ({
             target_reply_id: target.targetReplyId,
             content: target.content
           }))

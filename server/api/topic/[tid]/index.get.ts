@@ -35,7 +35,8 @@ export default defineEventHandler(async (event) => {
           like: true,
           dislike: true,
           favorite: true,
-          upvote: true
+          upvote: true,
+          reply: true
         }
       }
     }
@@ -65,6 +66,8 @@ export default defineEventHandler(async (event) => {
     isFavorited: data.favorite.length > 0,
     upvoteCount: data._count.upvote,
     isUpvoted: data.upvote.length > 0,
+
+    replyCount: data._count.reply,
 
     contentHtml: await markdownToHtml(data.content),
     contentMarkdown: data.content,

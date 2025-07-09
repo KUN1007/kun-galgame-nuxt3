@@ -8,7 +8,7 @@ const props = defineProps<{
   isUpvoted: boolean
 }>()
 
-const { uid, moemoepoint } = usePersistUserStore()
+const { id, moemoepoint } = usePersistUserStore()
 const isUpvoted = ref(props.isUpvoted)
 const upvoteCount = ref(props.upvoteCount)
 
@@ -24,6 +24,7 @@ const upvoteTopic = async () => {
   const result = await $fetch(`/api/topic/${props.topicId}/upvote`, {
     method: 'PUT',
     watch: false,
+    body: { topicId: props.topicId },
     ...kungalgameResponseHandler
   })
 
@@ -35,12 +36,12 @@ const upvoteTopic = async () => {
 }
 
 const handleClickUpvote = async () => {
-  if (!uid) {
+  if (!id) {
     useMessage(10240, 'warn', 5000)
     return
   }
 
-  if (uid === props.targetUserId) {
+  if (id === props.targetUserId) {
     useMessage(10241, 'warn')
     return
   }

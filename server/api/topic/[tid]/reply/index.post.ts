@@ -15,6 +15,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const { topicId, content, targets } = input
+  const validTargets = targets.filter((item) => item.content?.trim())
 
   const currentReplyCount = await prisma.topic_reply.count({
     where: { topic_id: topicId }
@@ -35,7 +36,7 @@ export default defineEventHandler(async (event) => {
         content,
 
         target: {
-          create: targets.map((target) => ({
+          create: validTargets.map((target) => ({
             target_reply_id: target.targetReplyId,
             content: target.content
           }))

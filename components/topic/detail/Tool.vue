@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import type { TopicReply } from '~/types/api/topic-reply'
-
 defineProps<{
-  replyData: TopicReply[]
-  pending: boolean
+  replyCount: number
+  status: 'idle' | 'pending' | 'success' | 'error'
   sortOrder: 'asc' | 'desc'
 }>()
 
@@ -14,30 +12,38 @@ const emits = defineEmits<{
 
 <template>
   <KunCard
+    v-if="replyCount > 0"
     :is-transparent="false"
     :is-hoverable="false"
-    v-if="replyData && replyData.length > 5"
+    class-name="sticky top-16 z-10 backdrop-blur-md bg-background/70"
   >
-    <div class="flex items-center gap-2">
-      <KunButton
-        :is-icon-only="true"
-        :variant="sortOrder === 'desc' ? 'flat' : 'light'"
-        size="lg"
-        @click="emits('setSortOrder', 'desc')"
-      >
-        <KunIcon class="text-inherit" name="lucide:arrow-down" />
-      </KunButton>
+    <div class="flex items-center justify-between">
+      <p class="text-default-700 text-sm font-bold">{{ replyCount }} 条回复</p>
 
-      <KunButton
-        :is-icon-only="true"
-        :variant="sortOrder === 'asc' ? 'flat' : 'light'"
-        size="lg"
-        @click="emits('setSortOrder', 'asc')"
-      >
-        <KunIcon class="text-inherit" name="lucide:arrow-up" />
-      </KunButton>
-
-      <span class="pending" v-if="pending">少女祈祷中...</span>
+      <div class="flex items-center gap-1">
+        <KunButton
+          size="sm"
+          :variant="sortOrder === 'asc' ? 'flat' : 'light'"
+          :is-disabled="status === 'pending'"
+          @click="emits('setSortOrder', 'asc')"
+        >
+          <template #startContent>
+            <KunIcon name="lucide:arrow-up" />
+          </template>
+          最早
+        </KunButton>
+        <KunButton
+          size="sm"
+          :variant="sortOrder === 'desc' ? 'flat' : 'light'"
+          :is-disabled="status === 'pending'"
+          @click="emits('setSortOrder', 'desc')"
+        >
+          <template #startContent>
+            <KunIcon name="lucide:arrow-down" />
+          </template>
+          最新
+        </KunButton>
+      </div>
     </div>
   </KunCard>
 </template>

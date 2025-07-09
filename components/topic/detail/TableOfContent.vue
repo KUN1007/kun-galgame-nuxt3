@@ -11,7 +11,7 @@ defineExpose({ refreshTOC })
   <KunCard
     :is-transparent="false"
     :is-hoverable="false"
-    class-name="h-full max-w-49"
+    class-name="h-full max-w-52"
     content-class="justify-start"
   >
     <h2 class="mb-4 text-lg font-semibold">目录导航</h2>

@@ -43,7 +43,7 @@ const getFirstImageSrc = (htmlString: string) => {
   const imgRegex = /<img[^>]+src="([^">]+)"/i
   const match = htmlString.match(imgRegex)
 
-  return match ? match[1] : 'https://www.kungal.com/kungalgame.webp'
+  return match ? match[1] : `${kungal.domain.main}/kungalgame.webp`
 }
 
 if (data.value && data.value !== 'banned') {

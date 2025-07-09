@@ -13,6 +13,7 @@ const toggleFavoriteGalgame = async () => {
   const result = await $fetch(`/api/topic/${props.topicId}/favorite`, {
     method: 'PUT',
     watch: false,
+    body: { topicId: props.topicId },
     ...kungalgameResponseHandler
   })
 

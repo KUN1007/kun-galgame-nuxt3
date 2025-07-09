@@ -26,3 +26,5 @@ export interface TopicReply {
 
   targets: TopicReplyTargetInfo[]
 }
+
+export type TopicReplyDetail = Omit<TopicReply, 'comment'>

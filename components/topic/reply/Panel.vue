@@ -54,7 +54,7 @@ const handleRemoveTarget = (id: number) => {
               :variant="activeTab === target.targetReplyId ? 'solid' : 'flat'"
               @click="activeTab = target.targetReplyId"
             >
-              @{{ target.targetUserName }}
+              {{ `@${target.targetUserName} #${target.targetFloor}` }}
               <KunButton
                 :is-icon-only="true"
                 size="xs"
@@ -76,7 +76,7 @@ const handleRemoveTarget = (id: number) => {
               :variant="activeTab === 'main' ? 'solid' : 'flat'"
               @click="activeTab = 'main'"
             >
-              {{ currentData.targets.length > 0 ? '补充内容' : '回复内容' }}
+              回复内容
               <span
                 v-if="activeTab === 'main'"
                 class="bg-primary absolute bottom-0 left-0 h-0.5 w-full"

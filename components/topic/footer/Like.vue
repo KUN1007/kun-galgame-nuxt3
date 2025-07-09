@@ -17,6 +17,7 @@ const toggleLike = async () => {
     const result = await $fetch(`/api/topic/${props.topicId}/like`, {
       method: 'PUT',
       watch: false,
+      body: { topicId: props.topicId },
       ...kungalgameResponseHandler
     })
     res = result ?? ''

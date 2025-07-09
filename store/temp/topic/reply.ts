@@ -1,4 +1,7 @@
-import type { ReplyStoreTemp } from '~/store/types/topic/reply'
+import type {
+  ReplyStoreTemp,
+  SuccessfulReplyEvent
+} from '~/store/types/topic/reply'
 import type { TopicReply } from '~/types/api/topic-reply'
 
 export const useTempReplyStore = defineStore('tempTopicReply', {
@@ -9,7 +12,7 @@ export const useTempReplyStore = defineStore('tempTopicReply', {
     scrollToReplyId: -1,
     isReplyRewriting: false,
     replyRewrite: null,
-    tempReply: []
+    lastSuccessfulReply: null
   }),
   actions: {
     setRewriteData(reply: TopicReply) {
@@ -29,6 +32,14 @@ export const useTempReplyStore = defineStore('tempTopicReply', {
     resetRewriteReplyData() {
       this.replyRewrite = null
       this.isReplyRewriting = false
+    },
+
+    setSuccessfulReply(event: SuccessfulReplyEvent) {
+      this.lastSuccessfulReply = event
+    },
+
+    clearSuccessfulReply() {
+      this.lastSuccessfulReply = null
     }
   }
 })

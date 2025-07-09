@@ -18,14 +18,18 @@ export interface ReplyRewriteData {
   }[]
 }
 
+export interface SuccessfulReplyEvent {
+  data: TopicReply
+  type: 'created' | 'updated'
+}
+
 export interface ReplyStoreTemp {
   isEdit: boolean
   isScrollToTop: boolean
   scrollToReplyId: number
   isReplyRewriting: boolean
-
   replyRewrite: ReplyRewriteData | null
-  tempReply: []
+  lastSuccessfulReply: SuccessfulReplyEvent | null
 }
 
 export interface ReplyTargetDraft {

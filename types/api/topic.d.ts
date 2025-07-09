@@ -45,6 +45,8 @@ export interface TopicDetail {
   upvoteCount: number
   isUpvoted: boolean
 
+  replyCount: number
+
   contentHtml: string
   contentMarkdown: string
   statusUpdateTime: Date | string

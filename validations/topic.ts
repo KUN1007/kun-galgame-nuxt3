@@ -86,21 +86,22 @@ export const getReplySchema = z.object({
   sortOrder: z.enum(SORT_ORDER_CONST)
 })
 
+export const getReplyDetailSchema = z.object({
+  replyId: z.coerce.number().min(1).max(9999999)
+})
+
 export const createReplySchema = z
   .object({
     topicId: z.coerce.number().min(1).max(9999999),
     content: z
       .string()
-      .min(1, { message: '回复内容最少 1 个字符' })
-      .max(10007, { message: '单条回复的最大长度为 10007 个字符' })
-      .optional(),
+      .max(10007, { message: '单条回复的最大长度为 10007 个字符' }),
     targets: z
       .array(
         z.object({
           targetReplyId: z.coerce.number().min(1).max(9999999),
           content: z
             .string()
-            .min(1, { message: '回复内容最少 1 个字符' })
             .max(10007, { message: '单条回复的最大长度为 10007 个字符' })
         })
       )
@@ -115,16 +116,13 @@ export const updateReplySchema = z
     replyId: z.coerce.number().min(1).max(9999999),
     content: z
       .string()
-      .min(1, { message: '回复内容最少 1 个字符' })
-      .max(10007, { message: '单条回复的最大长度为 10007 个字符' })
-      .optional(),
+      .max(10007, { message: '单条回复的最大长度为 10007 个字符' }),
     targets: z
       .array(
         z.object({
           targetReplyId: z.coerce.number().min(1).max(9999999),
           content: z
             .string()
-            .min(1, { message: '回复内容最少 1 个字符' })
             .max(10007, { message: '单条回复的最大长度为 10007 个字符' })
         })
       )

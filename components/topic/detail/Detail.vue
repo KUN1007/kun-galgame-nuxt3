@@ -1,74 +1,62 @@
 <script setup lang="ts">
-import { scrollPage } from '../_helper'
+import { useTopicReplies } from '~/composables/topic/useTopicReplies'
 import type { TopicDetail } from '~/types/api/topic'
-import type { TopicReply } from '~/types/api/topic-reply'
-
-const { images, isLightboxOpen, currentImageIndex } = useKunLightbox()
-
-const { tempReply } = storeToRefs(useTempReplyStore())
 
 const props = defineProps<{
   topic: TopicDetail
 }>()
 
-const replyData = ref<TopicReply[] | null>()
-const isLoadComplete = ref(false)
-const topicTocRef = useTemplateRef('toc')
-const pageData = reactive({
-  topicId: props.topic.id,
-  page: 1,
-  limit: 30,
-  sortOrder: 'asc' as 'asc' | 'desc'
-})
+const { images, isLightboxOpen, currentImageIndex } = useKunLightbox()
+const tempReplyStore = useTempReplyStore()
+const { lastSuccessfulReply } = storeToRefs(tempReplyStore)
 
-const { data, status, refresh } = await useFetch(
-  `/api/topic/${props.topic.id}/reply`,
-  {
-    method: 'GET',
-    query: pageData,
-    watch: false,
-    ...kungalgameResponseHandler
-  }
-)
-replyData.value = data.value
+const {
+  replies,
+  status,
+  isComplete,
+  sortOrder,
+  loadInitialReplies,
+  loadMore,
+  setSort,
+  addNewReply,
+  updateReply
+} = useTopicReplies(props.topic.id)
+
+await loadInitialReplies()
 
 watch(
-  () => tempReply.value[0],
-  async () => {
-    if (tempReply.value[0]) {
-      replyData.value?.push(tempReply.value[0])
-      await nextTick()
-      scrollPage(tempReply.value[0].floor)
-      tempReply.value = []
-    }
-  }
-)
-
-watch(
-  () => [pageData.page, pageData.sortOrder],
-  async (newValue, oldValue) => {
-    if (newValue[1] !== oldValue[1]) {
-      pageData.page = 1
-      isLoadComplete.value = false
+  lastSuccessfulReply,
+  (event) => {
+    if (!event) {
+      return
     }
 
-    if (status.value === 'pending') return
+    switch (event.type) {
+      case 'created':
+        addNewReply(event.data)
 
-    await refresh()
+        nextTick(() => {
+          document.getElementById(`k${event.data.floor}`)?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          })
+        })
+        break
+      case 'updated':
+        updateReply(event.data)
 
-    if (!data.value) return
-
-    if (newValue[0] !== oldValue[0]) {
-      replyData.value = replyData.value?.concat(data.value)
-      nextTick(() => topicTocRef.value?.refreshTOC())
-    } else if (newValue[1] !== oldValue[1]) {
-      replyData.value = data.value
+        nextTick(() => {
+          document.getElementById(`k${event.data.floor}`)?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          })
+        })
+        break
     }
 
-    if (data.value.length < 30) {
-      isLoadComplete.value = true
-    }
-  }
+    tempReplyStore.clearSuccessfulReply()
+  },
+  { deep: true }
 )
 </script>
 
@@ -80,43 +68,57 @@ watch(
       :initial-index="currentImageIndex"
     />
 
-    <div class="w-full space-y-3 lg:w-[calc(100%-208px)]">
+    <div class="w-full min-w-0 flex-1 space-y-4">
       <TopicDetailMaster :topic="topic" />
 
-      <TopicDetailTool
-        v-if="replyData"
-        :reply-data="replyData"
-        :pending="status === 'pending'"
-        :sort-order="pageData.sortOrder"
-        @set-sort-order="(value) => (pageData.sortOrder = value)"
-      />
+      <section id="reply-section" class="space-y-4">
+        <TopicDetailTool
+          :reply-count="topic.replyCount"
+          :status="status"
+          :sort-order="sortOrder"
+          @set-sort-order="setSort"
+        />
 
-      <TopicReply
-        v-for="reply in replyData"
-        :key="reply.id"
-        :reply="reply"
-        :title="topic.title"
-      />
+        <div
+          v-if="status === 'pending' && replies.length === 0"
+          class="flex justify-center py-16"
+        >
+          <KunLoading hint="少女祈祷中..." />
+        </div>
+
+        <TopicReplyList
+          v-else-if="replies.length > 0"
+          :initial-replies="replies"
+          :topic-id="topic.id"
+          :title="topic.title"
+        />
+
+        <KunNull
+          v-if="status !== 'pending' && replies.length === 0"
+          description="暂无回复"
+        />
+
+        <div class="py-6 text-center">
+          <KunButton
+            v-if="!isComplete && status !== 'pending'"
+            size="lg"
+            variant="flat"
+            @click="loadMore"
+          >
+            加载更多
+          </KunButton>
+          <KunLoading v-if="status === 'pending' && replies.length > 0" />
+          <p v-if="isComplete" class="text-default-500">
+            {{ `(｡>︿<｡) 已经一滴都不剩了哦~` }}
+          </p>
+        </div>
+      </section>
     </div>
 
-    <div class-name="w-52 shrink-0">
-      <div class="fixed ml-3 hidden w-full lg:block">
+    <div class="ml-3 hidden w-52 shrink-0 md:block">
+      <div class="sticky top-16">
         <TopicDetailTableOfContent ref="toc" />
       </div>
     </div>
-  </div>
-
-  <div v-if="replyData && replyData.length >= 30" class="py-6 text-center">
-    <KunButton
-      size="lg"
-      v-if="status !== 'pending' && !isLoadComplete"
-      @click="pageData.page++"
-    >
-      加载更多
-    </KunButton>
-    <p v-if="status === 'pending'" class="text-default-500">少女祈祷中...</p>
-    <p v-if="isLoadComplete" class="text-default-500">
-      被榨干了呜呜呜呜呜, 一滴也不剩了
-    </p>
   </div>
 </template>

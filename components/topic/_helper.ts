@@ -1,6 +1,6 @@
-export const scrollPage = throttle((rid: number) => {
+export const scrollPage = (rid: number) => {
   let timeout: NodeJS.Timeout | null = null
-  const element = document.querySelector(`[id^="${rid}"]`) as HTMLElement
+  const element = document.querySelector(`[id^="k${rid}"]`) as HTMLElement
 
   if (element) {
     element.scrollIntoView({ behavior: 'smooth', block: 'center' })
@@ -22,10 +22,11 @@ export const scrollPage = throttle((rid: number) => {
         'rounded-lg'
       )
     }, 3000)
+    return true
   } else {
-    useMessage(10215, 'info')
+    return false
   }
-}, 1000)
+}
 
 export const scrollToTOCElement = (id: string) => {
   let timeout: NodeJS.Timeout | null = null
