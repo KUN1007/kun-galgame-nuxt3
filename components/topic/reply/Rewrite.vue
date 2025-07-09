@@ -5,16 +5,14 @@ const props = defineProps<{
   reply: TopicReply
 }>()
 
-const { isEdit, isReplyRewriting, replyRewrite } =
-  storeToRefs(useTempReplyStore())
-const { uid } = usePersistUserStore()
+const { setRewriteData } = useTempReplyStore()
+const { isEdit } = storeToRefs(useTempReplyStore())
+const { id } = usePersistUserStore()
 
-const isShowRewrite = computed(() => uid === props.reply.user.id)
+const isShowRewrite = computed(() => id === props.reply.user.id)
 
-const rewriteReply = () => {
-  replyRewrite.value.push(props.reply)
-
-  isReplyRewriting.value = true
+const handleClickRewrite = () => {
+  setRewriteData(props.reply)
   isEdit.value = true
 }
 </script>
@@ -27,7 +25,7 @@ const rewriteReply = () => {
       color="default"
       size="lg"
       v-if="isShowRewrite"
-      @click="rewriteReply"
+      @click="handleClickRewrite"
     >
       <KunIcon name="lucide:pencil" />
     </KunButton>

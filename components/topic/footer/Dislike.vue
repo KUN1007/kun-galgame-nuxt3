@@ -7,7 +7,7 @@ const props = defineProps<{
   isDisliked: boolean
 }>()
 
-const { uid } = usePersistUserStore()
+const { id } = usePersistUserStore()
 const isDisliked = ref(props.isDisliked)
 const dislikeCount = ref(props.dislikeCount)
 
@@ -48,11 +48,11 @@ const handleClickDislikeThrottled = throttle(toggleDislike, 1007, () =>
 )
 
 const handleClickDislike = () => {
-  if (!uid) {
+  if (!id) {
     useMessage(10228, 'warn', 5000)
     return
   }
-  if (uid === props.targetUserId) {
+  if (id === props.targetUserId) {
     useMessage(10229, 'warn')
     return
   }

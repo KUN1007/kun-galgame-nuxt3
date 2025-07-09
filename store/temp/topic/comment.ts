@@ -3,9 +3,9 @@ import type { TopicComment } from '~/store/types/topic/comment'
 export const useTempCommentStore = defineStore('tempTopicComment', {
   persist: false,
   state: (): TopicComment => ({
-    rid: 0,
-    toUid: 0,
-    toUsername: '',
+    replyId: 0,
+    targetUserId: 0,
+    targetUsername: '',
     content: '',
 
     isShowPanel: false

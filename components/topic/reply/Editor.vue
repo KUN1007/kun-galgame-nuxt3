@@ -5,14 +5,14 @@ const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 const valueMarkdown = ref(
   isReplyRewriting.value
     ? replyRewrite.value[0].contentMarkdown
-    : replyDraft.value.content
+    : replyDraft.value.mainContent
 )
 
 const saveMarkdown = (editorMarkdown: string) => {
   if (isReplyRewriting.value) {
     replyRewrite.value[0].contentMarkdown = editorMarkdown
   } else {
-    replyDraft.value.content = editorMarkdown
+    replyDraft.value.mainContent = editorMarkdown
   }
   valueMarkdown.value = editorMarkdown
 }

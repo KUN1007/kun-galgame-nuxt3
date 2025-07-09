@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { uid, name, moemoepoint, isCheckIn } = storeToRefs(usePersistUserStore())
+const { id, name, moemoepoint, isCheckIn } = storeToRefs(usePersistUserStore())
 const { messageStatus } = storeToRefs(useTempSettingStore())
 
 const isShowMessageDot = computed(() => messageStatus.value === 'new')
@@ -51,7 +51,7 @@ const logOut = async () => {
       <KunButton
         variant="light"
         class-name="text-base p-1 text-foreground"
-        :href="`/user/${uid}/info`"
+        :href="`/user/${id}/info`"
       >
         个人主页
       </KunButton>

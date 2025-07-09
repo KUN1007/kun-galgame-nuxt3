@@ -6,7 +6,7 @@ const props = defineProps<{
   isFavorite: boolean
 }>()
 
-const { uid } = usePersistUserStore()
+const { id } = usePersistUserStore()
 const isFavorite = ref(props.isFavorite)
 const favoritesCount = ref(props.favoritesCount)
 
@@ -35,7 +35,7 @@ const handleClickFavoriteThrottled = throttle(toggleFavoriteGalgame, 1007, () =>
 )
 
 const handleClickFavorite = () => {
-  if (!uid) {
+  if (!id) {
     useMessage(10529, 'warn', 5000)
     return
   }

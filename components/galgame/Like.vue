@@ -6,7 +6,7 @@ const props = defineProps<{
   isLiked: boolean
 }>()
 
-const { uid } = usePersistUserStore()
+const { id } = usePersistUserStore()
 const isLiked = ref(props.isLiked)
 const likesCount = ref(props.likesCount)
 
@@ -35,11 +35,11 @@ const handleClickLikeThrottled = throttle(toggleLikeGalgame, 1007, () =>
 )
 
 const handleClickLike = () => {
-  if (!uid) {
+  if (!id) {
     useMessage(10532, 'warn', 5000)
     return
   }
-  if (uid === props.toUid) {
+  if (id === props.toUid) {
     useMessage(10533, 'warn')
     return
   }

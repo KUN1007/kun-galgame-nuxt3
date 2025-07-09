@@ -7,7 +7,7 @@ const props = defineProps<{
   isLiked: boolean
 }>()
 
-const { uid } = usePersistUserStore()
+const { id } = usePersistUserStore()
 const isLiked = ref(props.isLiked)
 const likeCount = ref(props.likeCount)
 
@@ -23,7 +23,7 @@ const toggleLike = async () => {
   } else {
     const result = await $fetch(`/api/topic/${props.topicId}/reply/like`, {
       method: 'PUT',
-      query: { rid: props.replyId },
+      query: { replyId: props.replyId },
       watch: false,
       ...kungalgameResponseHandler
     })
@@ -48,11 +48,11 @@ const handleClickLikeThrottled = throttle(toggleLike, 1007, () =>
 )
 
 const handleClickLike = () => {
-  if (!uid) {
+  if (!id) {
     useMessage(10235, 'warn', 5000)
     return
   }
-  if (uid === props.targetUserId) {
+  if (id === props.targetUserId) {
     useMessage(10236, 'warn')
     return
   }

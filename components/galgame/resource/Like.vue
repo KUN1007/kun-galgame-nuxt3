@@ -7,14 +7,14 @@ const props = defineProps<{
   likes: number[]
 }>()
 
-const { uid } = usePersistUserStore()
-const isLiked = ref(props.likes.includes(uid))
+const { id } = usePersistUserStore()
+const isLiked = ref(props.likes.includes(id))
 const likesCount = ref(props.likes.length)
 
 watch(
   () => props.likes,
   (newLikes) => {
-    isLiked.value = newLikes.includes(uid)
+    isLiked.value = newLikes.includes(id)
     likesCount.value = newLikes.length
   }
 )
@@ -40,7 +40,7 @@ const likeResource = async () => {
 }
 
 const handleClickLike = async () => {
-  if (!uid) {
+  if (!id) {
     useMessage(10532, 'warn', 5000)
     return
   }

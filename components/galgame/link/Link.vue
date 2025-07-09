@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { checkGalgameLinkPublish } from '../utils/checkGalgameLinkPublish'
 
-const { uid } = usePersistUserStore()
+const { id } = usePersistUserStore()
 const route = useRoute()
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
@@ -111,7 +111,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
             variant="light"
             color="danger"
             size="sm"
-            v-if="uid === link.uid"
+            v-if="id === link.uid"
             @click="handleDeleteLink(link.gid, link.glid)"
             :loading="isFetching"
           >

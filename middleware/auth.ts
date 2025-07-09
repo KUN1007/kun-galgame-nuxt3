@@ -1,7 +1,7 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-  const { uid } = usePersistUserStore()
+  const { id } = usePersistUserStore()
 
-  if (!uid) {
+  if (!id) {
     useMessage(10249, 'warn', 5000)
     return navigateTo('/login')
   }

@@ -5,7 +5,7 @@ const props = defineProps<{
   comment: TopicComment
 }>()
 
-const { uid } = usePersistUserStore()
+const { id } = usePersistUserStore()
 const isLiked = ref(props.comment.isLiked)
 const likeCount = ref(props.comment.likeCount)
 
@@ -15,7 +15,7 @@ const likeComment = async () => {
     return
   }
 
-  if (uid === props.comment.user.id) {
+  if (id === props.comment.user.id) {
     useMessage(10218, 'warn')
     return
   }
@@ -35,7 +35,7 @@ const likeComment = async () => {
 }
 
 const handleClickLike = async () => {
-  if (!uid) {
+  if (!id) {
     useMessage(10220, 'warn', 5000)
     return
   }

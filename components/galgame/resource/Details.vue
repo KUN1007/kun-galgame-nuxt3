@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { GalgameResourceDetails } from '~/types/api/galgame-resource'
 
-const { uid } = usePersistUserStore()
+const { id } = usePersistUserStore()
 const { resources, rewriteResourceId } = storeToRefs(
   useTempGalgameResourceStore()
 )
@@ -33,7 +33,7 @@ const handleDeleteResource = async (gid: number, grid: number) => {
 }
 
 const handleReportExpire = async (details: GalgameResourceDetails) => {
-  if (!uid) {
+  if (!id) {
     useMessage(10546, 'warn')
     return
   }

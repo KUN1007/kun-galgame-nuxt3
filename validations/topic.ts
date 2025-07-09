@@ -104,7 +104,6 @@ export const createReplySchema = z
             .max(10007, { message: '单条回复的最大长度为 10007 个字符' })
         })
       )
-      .min(1, { message: '至少需要指定一个回复目标' })
       .max(10, { message: '最多只能同时回复 10 个目标' })
   })
   .refine((data) => data.content?.trim() || data.targets, {
@@ -129,7 +128,7 @@ export const updateReplySchema = z
             .max(10007, { message: '单条回复的最大长度为 10007 个字符' })
         })
       )
-      .optional()
+      .max(10, { message: '最多只能同时回复 10 个目标' })
   })
   .refine((data) => data.content?.trim() || data.targets, {
     message: '至少需要提供回复内容或回复目标才可以进行更新'

@@ -4,9 +4,7 @@ const route = useRoute()
 const { showKUNGalgameHamburger, messageStatus } = storeToRefs(
   useTempSettingStore()
 )
-const { uid, avatar, moemoepoint, isCheckIn } = storeToRefs(
-  usePersistUserStore()
-)
+const { moemoepoint, isCheckIn } = storeToRefs(usePersistUserStore())
 
 const router = useRouter()
 const canGoBack = ref(false)

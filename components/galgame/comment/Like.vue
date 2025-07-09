@@ -6,7 +6,7 @@ const props = defineProps<{
   comment: SerializeObject<GalgameComment>
 }>()
 
-const { uid } = usePersistUserStore()
+const { id } = usePersistUserStore()
 const isLiked = ref(props.comment.likes.isLiked)
 const likesCount = ref(props.comment.likes.count)
 
@@ -16,7 +16,7 @@ const likeComment = async () => {
     return
   }
 
-  if (uid === props.comment.user.uid) {
+  if (id === props.comment.user.uid) {
     useMessage(10533, 'warn')
     return
   }
@@ -39,7 +39,7 @@ const likeComment = async () => {
 }
 
 const handleClickLike = async () => {
-  if (!uid) {
+  if (!id) {
     useMessage(10532, 'warn', 5000)
     return
   }

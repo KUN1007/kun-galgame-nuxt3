@@ -6,7 +6,7 @@ const props = defineProps<{
   commentsData: TopicComment[]
 }>()
 
-const currentUserUid = usePersistUserStore().uid
+const currentUserUid = usePersistUserStore().id
 const {
   replyId: storeReplyId,
   targetUserId,

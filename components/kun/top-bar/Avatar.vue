@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { uid, name, avatar } = storeToRefs(usePersistUserStore())
+const { id, name, avatar } = storeToRefs(usePersistUserStore())
 const { showKUNGalgamePanel, messageStatus } = storeToRefs(
   useTempSettingStore()
 )
@@ -51,12 +51,12 @@ const statusClasses = computed(() => {
     </KunButton>
 
     <KunPopover position="bottom-end">
-      <template v-if="uid" #trigger>
+      <template v-if="id" #trigger>
         <div>
           <KunAvatar
             size="lg"
             :is-navigation="false"
-            :user="{ uid, name, avatar }"
+            :user="{ id, name, avatar }"
           />
           <div
             class="absolute right-0 bottom-0 size-2 rounded-full"
@@ -68,7 +68,7 @@ const statusClasses = computed(() => {
       <LazyKunTopBarUserInfo />
     </KunPopover>
 
-    <template v-if="!uid">
+    <template v-if="!id">
       <KunButton size="lg" variant="light" href="/login">登录</KunButton>
       <KunButton size="lg" href="/register">注册</KunButton>
     </template>

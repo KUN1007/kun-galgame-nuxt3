@@ -19,7 +19,7 @@ const props = defineProps<{
 }>()
 
 const details = ref<GalgameResourceDetails>()
-const { uid } = usePersistUserStore()
+const { id } = usePersistUserStore()
 const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
 const isFetching = ref(false)
 

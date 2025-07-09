@@ -1,27 +1,34 @@
 <script setup lang="ts">
-import { KUN_TOPIC_REPLY_PANEL_POSITION_MAP } from '~/constants/topic'
-
-const { isReplyRewriting } = storeToRefs(useTempReplyStore())
-const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
+const { isReplyRewriting, replyRewrite } = storeToRefs(useTempReplyStore())
 const { isEdit } = storeToRefs(useTempReplyStore())
+const replyStore = usePersistKUNGalgameReplyStore()
+const { replyDraft } = storeToRefs(replyStore)
 
-const position = computed(() => {
-  return replyDraft.value.targetFloor === 0 ? 'master' : 'reply'
-})
+const activeTab = ref<number | 'main'>('main')
 
-const handleClosePanel = async () => {
-  if (isReplyRewriting.value) {
-    const res = await useComponentMessageStore().alert(
-      '确认关闭面板吗？您的更改将不会被保存。'
-    )
+const currentData = computed(() =>
+  isReplyRewriting.value ? replyRewrite.value : replyDraft.value
+)
 
-    if (res) {
-      useTempReplyStore().resetRewriteReplyData()
-    } else {
-      return
+watch(
+  () => [isEdit.value, currentData.value?.targets],
+  ([editing, targets]) => {
+    if (editing && Array.isArray(targets)) {
+      if (targets.length > 0) {
+        const lastTarget = targets[targets.length - 1]
+        if (!targets.some((t) => t.targetReplyId === activeTab.value)) {
+          activeTab.value = lastTarget.targetReplyId
+        }
+      } else {
+        activeTab.value = 'main'
+      }
     }
-  }
-  isEdit.value = false
+  },
+  { deep: true, immediate: true }
+)
+
+const handleRemoveTarget = (id: number) => {
+  replyStore.removeTarget(id)
 }
 </script>
 
@@ -32,33 +39,64 @@ const handleClosePanel = async () => {
       leave-active-class="animate-fadeOutDown"
     >
       <div
-        class="fixed bottom-0 z-100 flex max-h-[70%] w-full flex-col items-center"
-        v-if="isEdit"
+        class="fixed bottom-0 z-100 flex max-h-[80%] w-full flex-col items-center"
+        v-if="isEdit && currentData"
       >
-        <div
-          class="bg-background w-full max-w-4xl overflow-y-auto rounded-lg p-3 shadow"
-        >
-          <div class="flex items-center justify-between">
-            <h3>
-              {{
-                `回复给 @ ${replyDraft.targetUserName} - ${KUN_TOPIC_REPLY_PANEL_POSITION_MAP[position]} ${replyDraft.targetFloor}`
-              }}
-            </h3>
+        <div class="bg-background w-full max-w-4xl rounded-t-lg p-3 shadow-2xl">
+          <div class="scrollbar-hide flex items-center gap-1 overflow-x-auto">
             <KunButton
-              color="default"
-              variant="light"
+              size="xs"
               rounded="full"
-              size="lg"
-              :is-icon-only="true"
-              @click="handleClosePanel"
+              v-for="target in currentData.targets"
+              :key="target.targetReplyId"
+              :variant="activeTab === target.targetReplyId ? 'solid' : 'flat'"
+              @click="activeTab = target.targetReplyId"
             >
-              <KunIcon name="lucide:x" />
+              @{{ target.targetUserName }}
+              <KunButton
+                :is-icon-only="true"
+                size="xs"
+                rounded="full"
+                v-if="!isReplyRewriting"
+                @click.stop="handleRemoveTarget(target.targetReplyId)"
+                color="primary"
+                :variant="
+                  activeTab === target.targetReplyId ? 'solid' : 'light'
+                "
+              >
+                <KunIcon name="lucide:x" size="12" />
+              </KunButton>
+            </KunButton>
+
+            <KunButton
+              size="xs"
+              rounded="full"
+              :variant="activeTab === 'main' ? 'solid' : 'flat'"
+              @click="activeTab = 'main'"
+            >
+              {{ currentData.targets.length > 0 ? '补充内容' : '回复内容' }}
+              <span
+                v-if="activeTab === 'main'"
+                class="bg-primary absolute bottom-0 left-0 h-0.5 w-full"
+              />
             </KunButton>
           </div>
 
-          <LazyTopicReplyEditor />
+          <div :key="activeTab">
+            <template
+              v-for="target in currentData.targets"
+              :key="target.targetReplyId"
+            >
+              <div v-show="activeTab === target.targetReplyId">
+                <TopicReplyTargetEditor v-model="target.content" />
+              </div>
+            </template>
+            <div v-show="activeTab === 'main'">
+              <TopicReplyTargetEditor v-model="currentData.mainContent" />
+            </div>
+          </div>
 
-          <TopicReplyPanelBtn />
+          <TopicReplyPanelBtn class="mt-3" />
         </div>
       </div>
     </Transition>

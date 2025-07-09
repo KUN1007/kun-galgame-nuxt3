@@ -46,6 +46,7 @@ const handleClickComment = (id: number, uid: number, name: string) => {
         :target-user-name="reply.user.name"
         :target-user-id="reply.user.id"
         :target-floor="reply.floor"
+        :target-reply-id="reply.id"
       />
 
       <KunTooltip text="分享该回复">

@@ -4,11 +4,11 @@ import { usePersistUserStore } from '~/store/modules/user'
 
 const reason = ref('')
 const selectReportType = ref('topic')
-const { uid } = usePersistUserStore()
+const { id } = usePersistUserStore()
 const isFetching = ref(false)
 
 const handleSubmitReport = async () => {
-  if (!uid) {
+  if (!id) {
     useMessage(10142, 'warn')
     return
   }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { checkReplyPublish } from '../utils/checkReplyPublish'
+import { z } from 'zod'
 
 const route = useRoute()
 const tid = computed(() => {
@@ -11,25 +11,71 @@ const { isEdit, isReplyRewriting, replyRewrite, tempReply } =
 const { replyDraft } = storeToRefs(usePersistKUNGalgameReplyStore())
 const isPublishing = ref(false)
 
+const checkCreatePublish = () => {
+  const { mainContent, targets } = replyDraft.value
+  if (!mainContent?.trim() && targets.length === 0) {
+    useMessage('回复内容或回复目标不能为空', 'error')
+    return false
+  }
+
+  const targetSchema = z.string().min(1, { message: '回复内容不能为空' })
+  for (const target of targets) {
+    const result = targetSchema.safeParse(target.content)
+    if (!result.success) {
+      useMessage(
+        `对 @${target.targetUserName} 的回复: ${result.error.issues[0].message}`,
+        'error'
+      )
+      return false
+    }
+  }
+  return true
+}
+
+const checkMultiReplyPublish = () => {
+  if (replyDraft.value.targets.length === 0) {
+    useMessage('请至少选择一个回复目标', 'error')
+    return false
+  }
+
+  const targetSchema = z.string().min(1, { message: '回复内容不能为空' })
+  for (const target of replyDraft.value.targets) {
+    const result = targetSchema.safeParse(target.content)
+    if (!result.success) {
+      useMessage(
+        `对 @${target.targetUserName} 的回复: ${result.error.issues[0].message}`,
+        'error'
+      )
+      return false
+    }
+  }
+  return true
+}
+
 const handlePublish = async () => {
-  if (!checkReplyPublish(replyDraft.value.content)) {
+  if (!checkMultiReplyPublish()) {
     return
   }
 
   const res = await useComponentMessageStore().alert('确认发布吗？')
-  if (!res) {
-    return
+  if (!res) return
+  if (isPublishing.value) return
+
+  isPublishing.value = true
+  useMessage(10201, 'info')
+
+  const body = {
+    topicId: tid.value,
+    content: replyDraft.value.mainContent,
+    targets: replyDraft.value.targets.map((t) => ({
+      targetReplyId: t.targetReplyId,
+      content: t.content
+    }))
   }
 
-  if (isPublishing.value) {
-    return
-  } else {
-    isPublishing.value = true
-    useMessage(10201, 'info')
-  }
   const reply = await $fetch(`/api/topic/${tid.value}/reply`, {
     method: 'POST',
-    body: { ...replyDraft.value, time: Date.now() },
+    body,
     watch: false,
     ...kungalgameResponseHandler
   })
@@ -44,27 +90,29 @@ const handlePublish = async () => {
 }
 
 const handleRewrite = async () => {
-  if (!checkReplyPublish(replyRewrite.value[0].contentMarkdown)) {
+  if (!checkRewritePublish() || !replyRewrite.value) {
     return
   }
 
-  const res = await useComponentMessageStore().alert('确定提交吗?')
-  if (!res) {
-    return
+  const res = await useComponentMessageStore().alert('确定提交编辑吗?')
+  if (!res) return
+  if (isPublishing.value) return
+
+  isPublishing.value = true
+  useMessage(10201, 'info')
+
+  const body = {
+    replyId: replyRewrite.value.id,
+    content: replyRewrite.value.mainContent,
+    targets: replyRewrite.value.targets.map((t) => ({
+      targetReplyId: t.targetReplyId,
+      content: t.content
+    }))
   }
 
-  if (isPublishing.value) {
-    return
-  } else {
-    isPublishing.value = true
-    useMessage(10201, 'info')
-  }
-  const result = await $fetch(`/api/topic/${tid.value}/reply`, {
+  const result = await $fetch(`/api/topic/reply`, {
     method: 'PUT',
-    body: {
-      replyId: replyRewrite.value[0].id,
-      content: replyRewrite.value[0].contentMarkdown
-    },
+    body,
     watch: false,
     ...kungalgameResponseHandler
   })
@@ -72,6 +120,8 @@ const handleRewrite = async () => {
 
   if (result) {
     useMessage(10244, 'success')
+
+    tempReply.value.push(result)
     useTempReplyStore().resetRewriteReplyData()
     isEdit.value = false
   }
@@ -80,8 +130,11 @@ const handleRewrite = async () => {
 
 <template>
   <div class="flex justify-end gap-1">
+    <KunButton color="danger" variant="light" @click="isEdit = false">
+      取消
+    </KunButton>
+
     <KunButton
-      size="lg"
       :loading="isPublishing"
       v-if="!isReplyRewriting"
       @click="handlePublish"
@@ -90,7 +143,6 @@ const handleRewrite = async () => {
     </KunButton>
 
     <KunButton
-      size="lg"
       :loading="isPublishing"
       v-if="isReplyRewriting"
       @click="handleRewrite"

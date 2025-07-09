@@ -1,9 +1,9 @@
 export interface UserStore {
-  uid: number
+  id: number
   name: string
   avatar: string
   avatarMin: string
   moemoepoint: number
-  roles: number
+  role: number
   isCheckIn: boolean
 }

@@ -7,18 +7,38 @@ interface ReplyDraft {
   content: string
 }
 
+export interface ReplyRewriteData {
+  id: number
+  mainContent: string
+  targets: {
+    targetReplyId: number
+    targetFloor: number
+    targetUserName: string
+    content: string
+  }[]
+}
+
 export interface ReplyStoreTemp {
   isEdit: boolean
   isScrollToTop: boolean
   scrollToReplyId: number
   isReplyRewriting: boolean
 
-  replyRewrite: TopicReply[]
-  tempReply: TopicReply[]
+  replyRewrite: ReplyRewriteData | null
+  tempReply: []
+}
+
+export interface ReplyTargetDraft {
+  targetReplyId: number
+  targetFloor: number
+  targetUserName: string
+  content: string
 }
 
 export interface ReplyStorePersist {
-  mode: 'preview' | 'code'
-
-  replyDraft: ReplyDraft
+  mode: 'preview' | 'source'
+  replyDraft: {
+    targets: ReplyTargetDraft[]
+    mainContent: string
+  }
 }
