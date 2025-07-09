@@ -16,6 +16,7 @@ import { upload, uploadConfig } from '@milkdown/plugin-upload'
 import { automd } from '@milkdown/plugin-automd'
 
 // Custom plugins
+import { activeTab } from './atom'
 import { kunUploader, kunUploadWidgetFactory } from './plugins/upload/uploader'
 import { tooltipFactory } from '@milkdown/plugin-tooltip'
 import Tooltip from './plugins/tooltip/Tooltip.vue'
@@ -166,11 +167,14 @@ watch(
       :editor-info="editorInfo"
       :is-show-upload-image="true"
     />
-    <Milkdown />
 
-    <div class="flex items-center justify-between text-sm">
-      <slot />
-      <span> {{ `${textCount} 字` }} </span>
-    </div>
+    <template v-if="activeTab === 'preview'">
+      <Milkdown />
+
+      <div class="flex items-center justify-between text-sm">
+        <slot name="footer" />
+        <span> {{ `${textCount} 字` }} </span>
+      </div>
+    </template>
   </div>
 </template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { MilkdownProvider } from '@milkdown/vue'
 import { ProsemirrorAdapterProvider } from '@prosemirror-adapter/vue'
+import { activeTab } from './atom'
 
 defineProps<{
   valueMarkdown: string
@@ -14,13 +15,6 @@ const emits = defineEmits<{
 const cmAPI = ref({
   update: (_: string) => {}
 })
-
-const activeTab = ref('preview')
-
-const tabs = [
-  { textValue: '预览', value: 'preview' },
-  { textValue: '代码', value: 'code' }
-]
 
 const saveMarkdown = (markdown: string) => {
   cmAPI.value.update(markdown)
@@ -36,23 +30,15 @@ const setCmAPI = (api: { update: (markdown: string) => void }) => {
   <MilkdownProvider>
     <ProsemirrorAdapterProvider>
       <div class="space-y-3">
-        <KunTab
-          v-model="activeTab"
-          :items="tabs"
-          variant="underlined"
-          color="primary"
-          size="sm"
-        />
-
-        <template v-if="activeTab === 'preview'">
-          <KunMilkdownEditor
-            :value-markdown="valueMarkdown"
-            @save-markdown="saveMarkdown"
-            :language="language ?? 'zh-cn'"
-          >
+        <KunMilkdownEditor
+          :value-markdown="valueMarkdown"
+          @save-markdown="saveMarkdown"
+          :language="language ?? 'zh-cn'"
+        >
+          <template #footer>
             <slot />
-          </KunMilkdownEditor>
-        </template>
+          </template>
+        </KunMilkdownEditor>
 
         <template v-if="activeTab === 'code'">
           <KunMilkdownCodemirror

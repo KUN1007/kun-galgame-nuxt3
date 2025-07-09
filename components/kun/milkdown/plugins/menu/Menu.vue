@@ -2,6 +2,7 @@
 import { callCommand } from '@milkdown/utils'
 import { insertImageCommand } from '@milkdown/preset-commonmark'
 import { commands } from './_buttonList'
+import { tabs, activeTab } from '../../atom'
 import type { UseEditorReturn } from '@milkdown/vue'
 import type { CmdKey } from '@milkdown/core'
 
@@ -51,59 +52,74 @@ const handleFileChange = async (event: Event) => {
     useMessage(10108, 'success')
   }
 }
+
+const handleActiveTabChange = (value: string) => {
+  activeTab.value = value
+}
 </script>
 
 <template>
   <div class="flex flex-wrap items-center space-x-1">
-    <KunMilkdownPluginsHeader :editor-info="editorInfo" />
+    <KunTab
+      :model-value="activeTab"
+      @change="handleActiveTabChange"
+      :items="tabs"
+      variant="underlined"
+      color="primary"
+      size="sm"
+    />
 
-    <KunButton
-      :is-icon-only="true"
-      v-for="(btn, index) in commands"
-      :key="index"
-      class="btn"
-      variant="light"
-      size="xl"
-      @click="call(btn.command.key, btn.payload)"
-    >
-      <KunIcon class="text-foreground" :name="btn.icon" />
-    </KunButton>
+    <template v-if="activeTab === 'preview'">
+      <KunMilkdownPluginsHeader :editor-info="editorInfo" />
 
-    <KunButton
-      :is-icon-only="true"
-      v-if="props.isShowUploadImage"
-      variant="light"
-      size="xl"
-      @click="input?.click()"
-    >
-      <KunIcon class="text-foreground" name="lucide:image-plus" />
-      <input
-        hidden
-        ref="input"
-        type="file"
-        accept=".jpg, .jpeg, .png, .webp"
-        @change="handleFileChange($event)"
-      />
-    </KunButton>
+      <KunButton
+        :is-icon-only="true"
+        v-for="(btn, index) in commands"
+        :key="index"
+        class="btn"
+        variant="light"
+        size="xl"
+        @click="call(btn.command.key, btn.payload)"
+      >
+        <KunIcon class="text-foreground" :name="btn.icon" />
+      </KunButton>
 
-    <KunPopover inner-class="-left-28">
-      <template #trigger>
-        <KunButton variant="light" size="xl" :is-icon-only="true">
-          <KunIcon class="text-foreground" name="lucide:smile-plus" />
-        </KunButton>
-      </template>
+      <KunButton
+        :is-icon-only="true"
+        v-if="props.isShowUploadImage"
+        variant="light"
+        size="xl"
+        @click="input?.click()"
+      >
+        <KunIcon class="text-foreground" name="lucide:image-plus" />
+        <input
+          hidden
+          ref="input"
+          type="file"
+          accept=".jpg, .jpeg, .png, .webp"
+          @change="handleFileChange($event)"
+        />
+      </KunButton>
 
-      <KunMilkdownPluginsEmojiContainer :editor-info="editorInfo" />
-    </KunPopover>
+      <KunPopover inner-class="-left-28">
+        <template #trigger>
+          <KunButton variant="light" size="xl" :is-icon-only="true">
+            <KunIcon class="text-foreground" name="lucide:smile-plus" />
+          </KunButton>
+        </template>
 
-    <KunPopover inner-class="-left-28">
-      <template #trigger>
-        <KunButton variant="light" size="xl" :is-icon-only="true">
-          <KunIcon class="text-foreground" name="lucide:sticker" />
-        </KunButton>
-      </template>
+        <KunMilkdownPluginsEmojiContainer :editor-info="editorInfo" />
+      </KunPopover>
 
-      <KunMilkdownPluginsStickerContainer :editor-info="editorInfo" />
-    </KunPopover>
+      <KunPopover inner-class="-left-28">
+        <template #trigger>
+          <KunButton variant="light" size="xl" :is-icon-only="true">
+            <KunIcon class="text-foreground" name="lucide:sticker" />
+          </KunButton>
+        </template>
+
+        <KunMilkdownPluginsStickerContainer :editor-info="editorInfo" />
+      </KunPopover>
+    </template>
   </div>
 </template>

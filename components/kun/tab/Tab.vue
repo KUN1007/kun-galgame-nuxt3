@@ -126,10 +126,12 @@ const handleTabClick = (item: KunTabItem) => {
           v-if="item.icon"
           :name="item.icon"
           :size="iconSize"
-          :class="[
-            modelValue === item.value ? `text-${color}` : 'text-default-500',
-            'transition-colors'
-          ]"
+          :class="
+            cn(
+              modelValue === item.value ? `text-${color}` : 'text-default-500',
+              'transition-colors'
+            )
+          "
         />
         <span
           v-if="item.textValue"
