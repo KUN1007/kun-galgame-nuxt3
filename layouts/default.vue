@@ -30,7 +30,7 @@ watch(
   <KunTopBar />
 
   <div class="bg-default-50 flex min-h-dvh justify-center">
-    <div class="z-10 w-full max-w-7xl md:mr-3 md:ml-68">
+    <div class="z-10 w-full max-w-7xl min-w-0 md:mr-3 md:ml-68">
       <div class="h-full px-1 pt-19 pb-3 sm:px-0">
         <NuxtPage />
       </div>

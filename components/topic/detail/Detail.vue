@@ -71,14 +71,14 @@ watch(
     <div class="w-full min-w-0 flex-1 space-y-4">
       <TopicDetailMaster :topic="topic" />
 
-      <section id="reply-section" class="space-y-4">
-        <TopicDetailTool
-          :reply-count="topic.replyCount"
-          :status="status"
-          :sort-order="sortOrder"
-          @set-sort-order="setSort"
-        />
+      <TopicDetailTool
+        :reply-count="topic.replyCount"
+        :status="status"
+        :sort-order="sortOrder"
+        @set-sort-order="setSort"
+      />
 
+      <section id="reply-section" class="space-y-4">
         <div
           v-if="status === 'pending' && replies.length === 0"
           class="flex justify-center py-16"

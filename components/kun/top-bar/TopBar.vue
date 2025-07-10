@@ -5,9 +5,7 @@ withDefaults(
   defineProps<{
     className?: string
   }>(),
-  {
-    className: ''
-  }
+  { className: '' }
 )
 
 const isVisible = ref(true)
