@@ -7,7 +7,7 @@
 }
 
 .milkdown .ProseMirror {
-  @apply border-default-200 focus:ring-primary-200 focus:border-primary-500 min-h-[300px] rounded-lg border p-4 transition-colors duration-200 focus:ring-2 focus:outline-none;
+  @apply focus:border-primary-500 border-default-200 focus:ring-primary-500 min-h-[300px] rounded-lg border p-4 shadow-sm transition-colors duration-200 focus:ring-1 focus:outline-none;
 }
 
 .milkdown h1,

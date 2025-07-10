@@ -33,12 +33,18 @@ watch(
     }
   }
 )
+
+const replyContent = computed(() => {
+  const targetsContent = props.reply.targets.map((t) => t.replyContentMarkdown)
+  const content = props.reply.contentMarkdown + targetsContent.join('')
+  return markdownToText(content).slice(0, 20)
+})
 </script>
 
 <template>
   <div
     class="outline-primary kun-reply flex justify-between gap-3 outline-offset-2"
-    :id="`k${reply.floor}`"
+    :id="`${reply.floor}.${replyContent}`"
   >
     <TopicDetailUser :user="reply.user" />
 

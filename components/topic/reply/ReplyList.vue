@@ -58,7 +58,6 @@ const loadQuotedReply = async (
     <TopicReply
       v-for="reply in replies"
       :key="reply.id"
-      :id="`k${reply.floor}`"
       :reply="reply"
       :title="title"
       :is-loading-target="isLoadingReply"

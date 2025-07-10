@@ -173,7 +173,16 @@ watch(
 
       <div class="flex items-center justify-between text-sm">
         <slot name="footer" />
-        <span> {{ `${textCount} 字` }} </span>
+
+        <div class="flex items-center gap-2">
+          <KunBadge color="success">
+            <KunIconMarkdown />
+            Markdown 支持
+          </KunBadge>
+          <span>
+            {{ `${textCount} 字` }}
+          </span>
+        </div>
       </div>
     </template>
   </div>
