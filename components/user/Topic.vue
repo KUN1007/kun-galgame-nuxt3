@@ -1,21 +1,20 @@
 <script setup lang="ts">
-import { kunUserTopicNavItem } from '~/constants/user'
-import type { TopicType } from '~/types/api/user'
+import {
+  kunUserTopicNavItem,
+  type KUN_USER_PAGE_TOPIC_TYPE
+} from '~/constants/user'
 
 const props = defineProps<{
   uid: number
-  type: TopicType
+  type: (typeof KUN_USER_PAGE_TOPIC_TYPE)[number]
 }>()
 
+const activeTab = ref(props.type)
 const pageData = reactive({
   page: 1,
   limit: 50,
   type: props.type
 })
-
-const activeTab = computed(
-  () => useRoute().fullPath.split('/').pop() || 'publish'
-)
 
 const { data, status } = await useFetch(`/api/user/${props.uid}/topics`, {
   method: 'GET',
@@ -42,13 +41,13 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/topics`, {
         :is-pressable="true"
         v-for="(topic, index) in data.topics"
         :key="index"
-        :href="`/topic/${topic.tid}`"
+        :href="`/topic/${topic.id}`"
       >
         <div>
           {{ topic.title }}
         </div>
         <div class="text-default-500 text-sm">
-          {{ formatDate(topic.time, { isShowYear: true }) }}
+          {{ formatDate(topic.created, { isShowYear: true }) }}
         </div>
       </KunCard>
 
@@ -59,5 +58,10 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/topics`, {
         :is-loading="status === 'pending'"
       />
     </div>
+
+    <KunNull
+      v-if="data && !data.topics.length"
+      description="这只萝莉没有发布过任何 Galgame 资源"
+    />
   </div>
 </template>

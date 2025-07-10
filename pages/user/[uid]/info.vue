@@ -14,7 +14,7 @@ useHead({
   link: [
     {
       rel: 'canonical',
-      href: `${kungal.domain.main}/user/${props.user.uid}/info`
+      href: `${kungal.domain.main}/user/${props.user.id}/info`
     }
   ]
 })

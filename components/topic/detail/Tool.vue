@@ -70,7 +70,7 @@ onUnmounted(() => {
     :is-hoverable="false"
     :class-name="
       cn(
-        'sticky top-16 z-10 backdrop-blur-md bg-background/70 transition-transform duration-300',
+        'sticky top-16 z-10 transition-transform duration-300',
         isVisible ? 'translate-y-0' : '-translate-y-full'
       )
     "

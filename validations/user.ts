@@ -1,5 +1,12 @@
 import { z } from 'zod'
 import { isValidName, isValidEmail, isValidPassword } from '~/utils/validate'
+import {
+  KUN_USER_PAGE_TOPIC_TYPE,
+  KUN_USER_PAGE_REPLY_TYPE,
+  KUN_USER_PAGE_COMMENT_TYPE,
+  KUN_USER_PAGE_GALGAME_TYPE,
+  KUN_USER_PAGE_GALGAME_RESOURCE_TYPE
+} from '~/constants/user'
 
 export const getUserInfoSchema = z.object({
   userId: z.coerce.number().min(1).max(9999999)
@@ -8,43 +15,32 @@ export const getUserInfoSchema = z.object({
 export const getUserTopicSchema = z.object({
   page: z.coerce.number().min(1).max(9999999),
   limit: z.coerce.number().min(1).max(50),
-  type: z.enum(['topic', 'topic_like', 'topic_upvote', 'topic_favorite'])
+  type: z.enum(KUN_USER_PAGE_TOPIC_TYPE)
 })
 
 export const getUserReplySchema = z.object({
   page: z.coerce.number().min(1).max(9999999),
   limit: z.coerce.number().min(1).max(50),
-  type: z.enum(['reply_created', 'reply_target', 'reply_like'])
+  type: z.enum(KUN_USER_PAGE_REPLY_TYPE)
 })
 
 export const getUserCommentSchema = z.object({
   page: z.coerce.number().min(1).max(9999999),
   limit: z.coerce.number().min(1).max(50),
-  type: z.enum(['comment_created', 'comment_target', 'comment_like'])
+  type: z.enum(KUN_USER_PAGE_COMMENT_TYPE)
 })
 
 export const getUserGalgameSchema = z.object({
   page: z.coerce.number().min(1).max(9999999),
-  limit: z.coerce.number().min(1).max(50),
-  type: z.enum([
-    'galgame',
-    'galgame_like',
-    'galgame_favorite',
-    'galgame_contribute',
-    'galgame_pr',
-    'galgame_history',
-    'galgame_link',
-    'galgame_comment',
-    'galgame_comment_target',
-    'galgame_comment_like'
-  ])
+  limit: z.coerce.number().min(1).max(24),
+  type: z.enum(KUN_USER_PAGE_GALGAME_TYPE)
 })
 
 export const getUserGalgameResourceSchema = z.object({
   userId: z.coerce.number().min(1).max(9999999),
   page: z.coerce.number().min(1).max(9999999),
   limit: z.coerce.number().min(1).max(50),
-  type: z.enum(['valid', 'expire', 'galgame_resource_like'])
+  type: z.enum(KUN_USER_PAGE_GALGAME_RESOURCE_TYPE)
 })
 
 export const updateUserBioSchema = z.object({

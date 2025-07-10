@@ -2,7 +2,7 @@
 import { KUN_USER_PAGE_NAV_MAP } from '~/constants/user'
 import type { Nav } from '../utils/routeName'
 
-const { uid: storeUid, roles } = storeToRefs(usePersistUserStore())
+const { id: storeUid, role } = storeToRefs(usePersistUserStore())
 
 const props = defineProps<{
   uid: number
@@ -12,9 +12,11 @@ const props = defineProps<{
 const route = useRoute()
 
 const currentPageUid = computed(() => props.uid)
-const fullPath = computed(() =>
-  route.fullPath.replace(/^\/[a-z]{2}-[a-z]{2}\//, '/')
-)
+const activeRouteName = computed(() => {
+  // third part
+  const match = route.fullPath.match(/^\/user\/\d+\/([^/]+)/)
+  return match ? match[1] : ''
+})
 
 const iconMap: Record<string, string> = {
   profile: 'lucide:user-round',
@@ -36,7 +38,7 @@ const currentPageUserRoles = computed(() => {
   if (props.uid === storeUid.value) {
     return 4
   } else {
-    return roles.value
+    return role.value
   }
 })
 
@@ -62,7 +64,7 @@ const handleCollapsed = async (item: Nav) => {
     >
       <KunButton
         :full-width="true"
-        :variant="fullPath.includes(kun.router) ? 'flat' : 'light'"
+        :variant="activeRouteName === kun.router ? 'flat' : 'light'"
         size="lg"
         class-name="gap-2 justify-start text-foreground sm:px-5 sm:py-2.5 p-2"
         @click="handleCollapsed(kun)"

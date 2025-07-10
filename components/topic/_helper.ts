@@ -1,6 +1,6 @@
 export const scrollPage = (rid: number) => {
   let timeout: NodeJS.Timeout | null = null
-  const element = document.querySelector(`[id^="k${rid}"]`) as HTMLElement
+  const element = document.querySelector(`[id^="${rid}"]`) as HTMLElement
 
   if (element) {
     element.scrollIntoView({ behavior: 'smooth', block: 'center' })

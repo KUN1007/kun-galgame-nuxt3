@@ -7,6 +7,7 @@ const uid = computed(() => {
 
 const { data } = await useFetch(`/api/user/${uid.value}`, {
   method: 'GET',
+  query: { userId: uid },
   ...kungalgameResponseHandler
 })
 
@@ -36,7 +37,7 @@ if (data.value === 'banned') {
   >
     <div v-if="data" class="flex h-full w-full">
       <UserNavBar
-        :user="{ uid: data.uid, name: data.name, avatar: data.avatar }"
+        :user="{ id: data.id, name: data.name, avatar: data.avatar }"
       />
 
       <div class="scrollbar-hide h-full w-full overflow-y-auto px-3">

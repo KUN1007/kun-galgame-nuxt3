@@ -12,7 +12,15 @@ export default defineEventHandler(async (event) => {
 
   const user = await prisma.user.findUnique({
     where: { id: uid },
-    include: {
+    select: {
+      id: true,
+      name: true,
+      avatar: true,
+      role: true,
+      status: true,
+      moemoepoint: true,
+      bio: true,
+      created: true,
       galgame: {
         where: {
           created: {
@@ -27,38 +35,22 @@ export default defineEventHandler(async (event) => {
           }
         }
       },
-      // User received upvotes
-      topic_upvote: { where: { user_id: uid } },
-      // User received likes
-      topic_like: { where: { user_id: uid } },
-      reply_like: { where: { user_id: uid } },
-      comment_like: { where: { user_id: uid } },
-      galgame_like: { where: { user_id: uid } },
-      galgame_comment_like: { where: { user_id: uid } },
-      galgame_resource_like: { where: { user_id: uid } },
-      // User received favorites
-      topic_favorite: { where: { user_id: uid } },
-      galgame_favorite: { where: { user_id: uid } },
-      // User received dislikes
-      topic_dislike: { where: { user_id: uid } },
-      reply_dislike: { where: { user_id: uid } },
       _count: {
         select: {
           reply_created: true,
           comment_created: true,
           topic: true,
-
           galgame: true,
           galgame_comment: true,
           galgame_pr: true,
           galgame_link: true,
           galgame_contributor: true,
-
           galgame_resource: true
         }
       }
     }
   })
+  // not use a userPromise, because some users were not fount
   if (!user) {
     return kunError(event, '未找到该用户')
   }
@@ -66,15 +58,44 @@ export default defineEventHandler(async (event) => {
     return 'banned'
   }
 
-  const likes =
-    user.topic_like.length +
-    user.reply_like.length +
-    user.comment_like.length +
-    user.galgame_like.length +
-    user.galgame_comment_like.length +
-    user.galgame_resource_like.length
-  const dislikes = user.topic_dislike.length + user.reply_dislike.length
-  const favorites = user.topic_favorite.length + user.galgame_favorite.length
+  // Likes
+  const receivedLikesPromise = Promise.all([
+    prisma.topic_like.count({ where: { topic: { user_id: uid } } }),
+    prisma.topic_reply_like.count({ where: { reply: { user_id: uid } } }),
+    prisma.topic_comment_like.count({ where: { comment: { user_id: uid } } }),
+    prisma.galgame_like.count({ where: { galgame: { user_id: uid } } }),
+    prisma.galgame_comment_like.count({
+      where: { galgame_comment: { user_id: uid } }
+    }),
+    prisma.galgame_resource_like.count({
+      where: { galgame_resource: { user_id: uid } }
+    })
+  ]).then((counts) => counts.reduce((acc, count) => acc + count, 0))
+
+  // Dislikes
+  const receivedDislikesPromise = Promise.all([
+    prisma.topic_dislike.count({ where: { topic: { user_id: uid } } }),
+    prisma.topic_reply_dislike.count({ where: { reply: { user_id: uid } } })
+  ]).then((counts) => counts.reduce((acc, count) => acc + count, 0))
+
+  // Upvotes
+  const receivedUpvotesPromise = prisma.topic_upvote.count({
+    where: { topic: { user_id: uid } }
+  })
+
+  // Favorites
+  const receivedFavoritesPromise = Promise.all([
+    prisma.topic_favorite.count({ where: { topic: { user_id: uid } } }),
+    prisma.galgame_favorite.count({ where: { galgame: { user_id: uid } } })
+  ]).then((counts) => counts.reduce((acc, count) => acc + count, 0))
+
+  const [totalLikes, totalDislikes, totalUpvotes, totalFavorites] =
+    await Promise.all([
+      receivedLikesPromise,
+      receivedDislikesPromise,
+      receivedUpvotesPromise,
+      receivedFavoritesPromise
+    ])
 
   const responseData: UserInfo = {
     id: user.id,
@@ -86,10 +107,10 @@ export default defineEventHandler(async (event) => {
     bio: user.bio,
     created: user.created,
 
-    upvote: user.topic_upvote.length,
-    like: likes,
-    dislike: dislikes,
-    favorite: favorites,
+    upvote: totalUpvotes,
+    like: totalLikes,
+    dislike: totalDislikes,
+    favorite: totalFavorites,
 
     replyCreated: user._count.reply_created,
     commentCreated: user._count.comment_created,
@@ -106,5 +127,6 @@ export default defineEventHandler(async (event) => {
     dailyTopicCount: user.topic.length,
     dailyGalgameCount: user.galgame.length
   }
+
   return responseData
 })

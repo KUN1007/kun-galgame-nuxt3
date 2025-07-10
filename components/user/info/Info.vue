@@ -8,7 +8,7 @@ const props = defineProps<{
 const user = computed(() => props.user)
 
 const rolesName = () => {
-  const roles = user.value.roles
+  const roles = user.value.role
   if (roles === 1) return 'user'
   if (roles === 2) return 'admin'
   if (roles === 3) return 'SU'
@@ -22,7 +22,7 @@ const statusName = () => {
   return ''
 }
 
-const currentUserUid = usePersistUserStore().uid
+const currentUserUid = usePersistUserStore().id
 </script>
 
 <template>
@@ -32,12 +32,12 @@ const currentUserUid = usePersistUserStore().uid
         <h2 class="flex items-center gap-2 text-2xl font-bold">
           <span>{{ user.name }}</span>
           <KunButton
-            v-if="currentUserUid !== user.uid"
+            v-if="currentUserUid !== user.id"
             variant="flat"
             size="xs"
             color="primary"
             class-name="gap-1"
-            :href="`/message/user/${user.uid}`"
+            :href="`/message/user/${user.id}`"
           >
             <KunIcon name="lucide:message-circle" />
             私聊
@@ -75,13 +75,13 @@ const currentUserUid = usePersistUserStore().uid
       </div>
       <div class="bg-default-100 rounded-lg p-4">
         <div class="text-xl font-semibold">
-          {{ user.reply }}
+          {{ user.replyCreated }}
         </div>
         <div class="text-default-500 text-sm">回复</div>
       </div>
       <div class="bg-default-100 rounded-lg p-4">
         <div class="text-xl font-semibold">
-          {{ user.comment }}
+          {{ user.commentCreated }}
         </div>
         <div class="text-default-500 text-sm">评论</div>
       </div>
@@ -122,7 +122,7 @@ const currentUserUid = usePersistUserStore().uid
     <div class="space-y-4">
       <div class="text-default-700 flex items-center justify-between text-sm">
         <span>注册序号</span>
-        <span class="font-medium">{{ user.uid }}</span>
+        <span class="font-medium">{{ user.id }}</span>
       </div>
       <div class="text-default-700 flex items-center justify-between text-sm">
         <span>今日发布话题</span>
@@ -138,9 +138,9 @@ const currentUserUid = usePersistUserStore().uid
       </div>
       <div class="text-default-700 flex items-center justify-between text-sm">
         <span>注册时间</span>
-        <span class="font-medium">{{
-          formatDate(user.time, { isShowYear: true, isPrecise: true })
-        }}</span>
+        <span class="font-medium">
+          {{ formatDate(user.created, { isShowYear: true, isPrecise: true }) }}
+        </span>
       </div>
     </div>
 

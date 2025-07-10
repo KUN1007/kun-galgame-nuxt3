@@ -1,21 +1,20 @@
 <script setup lang="ts">
-import { kunUserGalgameNavItem } from '~/constants/user'
-import type { GalgameType } from '~/types/api/user'
+import {
+  kunUserGalgameNavItem,
+  type KUN_USER_PAGE_GALGAME_TYPE
+} from '~/constants/user'
 
 const props = defineProps<{
   uid: number
-  type: GalgameType
+  type: (typeof KUN_USER_PAGE_GALGAME_TYPE)[number]
 }>()
 
+const activeTab = ref(props.type)
 const pageData = reactive({
   page: 1,
-  limit: 50,
+  limit: 24,
   type: props.type
 })
-
-const activeTab = computed(
-  () => useRoute().fullPath.split('/').pop() || 'publish'
-)
 
 const { data, status } = await useFetch(`/api/user/${props.uid}/galgames`, {
   method: 'GET',
@@ -38,19 +37,7 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/galgames`, {
     />
 
     <div class="flex flex-col space-y-3" v-if="data && data.galgames.length">
-      <KunCard
-        :is-pressable="true"
-        v-for="(galgame, index) in data.galgames"
-        :key="index"
-        :href="`/galgame/${galgame.gid}`"
-      >
-        <div>
-          {{ getPreferredLanguageText(galgame.name) }}
-        </div>
-        <div class="text-default-500 text-sm">
-          {{ formatDate(galgame.time, { isShowYear: true }) }}
-        </div>
-      </KunCard>
+      <GalgameCard :galgames="data.galgames" />
 
       <KunPagination
         v-if="data.totalCount > pageData.limit"
@@ -59,5 +46,10 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/galgames`, {
         :is-loading="status === 'pending'"
       />
     </div>
+
+    <KunNull
+      v-if="data && !data.galgames.length"
+      description="这只萝莉没有发布过任何 Galgame 资源"
+    />
   </div>
 </template>

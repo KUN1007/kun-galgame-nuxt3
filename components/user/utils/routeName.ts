@@ -31,13 +31,13 @@ export const navBarRoute: Ref<Nav[]> = ref([
   {
     name: 'topic',
     permission: [1, 2, 3, 4],
-    redirect: 'topic/publish',
+    redirect: 'topic/topic',
     router: 'topic'
   },
   {
     name: 'galgame',
     permission: [1, 2, 3, 4],
-    redirect: 'galgame/publish',
+    redirect: 'galgame/galgame',
     router: 'galgame'
   },
   {
@@ -49,11 +49,13 @@ export const navBarRoute: Ref<Nav[]> = ref([
   {
     name: 'reply',
     router: 'reply',
+    redirect: 'reply/reply-created',
     permission: [1, 2, 3, 4]
   },
   {
     name: 'comment',
     router: 'comment',
+    redirect: 'comment/comment-created',
     permission: [1, 2, 3, 4]
   }
 ])

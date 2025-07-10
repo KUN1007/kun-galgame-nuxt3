@@ -50,7 +50,7 @@ const getTopicReplies = async (
       like: { where: { user_id: uid } },
       dislike: { where: { user_id: uid } },
       comment: {
-        orderBy: { created: 'desc' },
+        orderBy: { created: 'asc' },
         include: {
           user: {
             select: { id: true, name: true, avatar: true }

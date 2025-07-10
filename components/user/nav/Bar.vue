@@ -22,6 +22,6 @@ defineProps<{
       :user="user"
     />
 
-    <UserNavItem :uid="user.uid" :nav="navBarRoute" />
+    <UserNavItem :uid="user.id" :nav="navBarRoute" />
   </div>
 </template>

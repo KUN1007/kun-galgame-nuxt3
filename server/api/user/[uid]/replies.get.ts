@@ -18,33 +18,52 @@ export default defineEventHandler(async (event) => {
   const { page, limit, type } = input
   const skip = (page - 1) * limit
 
-  let whereClause: Prisma.topic_replyWhereInput = {}
+  if (type === 'reply_target') {
+    const where: Prisma.topic_reply_targetWhereInput = {
+      target_reply: { user_id: userId },
+      reply: { user_id: { not: userId } }
+    }
 
-  switch (type) {
-    case 'reply_created':
-      whereClause = {
-        user_id: userId
-      }
-      break
-    case 'reply_like':
-      whereClause = {
-        like: {
-          some: {
-            user_id: userId
-          }
-        }
-      }
-      break
-    case 'reply_target':
-      whereClause = {
-        target: {
-          some: {
-            target_reply: {
-              user_id: userId
+    const [targets, totalCount] = await prisma.$transaction([
+      prisma.topic_reply_target.findMany({
+        where,
+        select: {
+          content: true,
+          reply: {
+            select: {
+              topic_id: true,
+              created: true
             }
           }
-        }
+        },
+        orderBy: { created: 'desc' },
+        skip: skip,
+        take: limit
+      }),
+      prisma.topic_reply_target.count({ where })
+    ])
+
+    const formattedReplies: UserReply[] = targets.map((target) => {
+      return {
+        topicId: target.reply.topic_id,
+        content: target.content,
+        created: target.reply.created
       }
+    })
+
+    return {
+      replies: formattedReplies,
+      totalCount: totalCount
+    }
+  }
+
+  let where: Prisma.topic_replyWhereInput = {}
+  switch (type) {
+    case 'reply_created':
+      where = { user_id: userId }
+      break
+    case 'reply_like':
+      where = { like: { some: { user_id: userId } } }
       break
     default:
       return kunError(event, '无效的类型参数', 400)
@@ -52,29 +71,46 @@ export default defineEventHandler(async (event) => {
 
   const [replies, totalCount] = await prisma.$transaction([
     prisma.topic_reply.findMany({
-      where: whereClause,
+      where,
+
       select: {
         topic_id: true,
         content: true,
-        created: true
+        created: true,
+        target: {
+          select: {
+            content: true
+          }
+        }
       },
-      orderBy: {
-        created: 'desc'
-      },
+      orderBy: { created: 'desc' },
       skip: skip,
       take: limit
     }),
-
-    prisma.topic_reply.count({
-      where: whereClause
-    })
+    prisma.topic_reply.count({ where })
   ])
 
-  const formattedReplies: UserReply[] = replies.map((reply) => ({
-    topicId: reply.topic_id,
-    content: reply.content,
-    created: reply.created
-  }))
+  const formattedReplies: UserReply[] = replies.flatMap((reply) => {
+    if (reply.target && reply.target.length > 0) {
+      return reply.target.map((t) => ({
+        topicId: reply.topic_id,
+        content: t.content,
+        created: reply.created
+      }))
+    }
+
+    if (reply.content) {
+      return [
+        {
+          topicId: reply.topic_id,
+          content: reply.content,
+          created: reply.created
+        }
+      ]
+    }
+
+    return []
+  })
 
   return {
     replies: formattedReplies,
