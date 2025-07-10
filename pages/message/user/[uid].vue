@@ -15,9 +15,9 @@ useKunSeoMeta({
 <template>
   <div class="h-full w-full pl-3">
     <ClientOnly>
-      <MessagePmHeader :uid="uid" />
+      <MessagePmHeader :id="uid" />
     </ClientOnly>
 
-    <MessagePmContainer :uid="uid" />
+    <MessagePmContainer :user-id="uid" />
   </div>
 </template>

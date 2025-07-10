@@ -9,7 +9,7 @@ useKunSeoMeta({
 
 const pageData = reactive({
   page: 1,
-  limit: 10,
+  limit: 30,
   order: 'desc'
 })
 

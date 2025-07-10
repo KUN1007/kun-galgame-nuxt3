@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { replaceAsideItem } from '../aside/asideItemStore'
-import type { Message } from '~/types/api/chat-message'
+import type { ChatMessage } from '~/types/api/chat-message'
 
 const props = defineProps<{
-  uid: number
+  userId: number
 }>()
 
 const socket = useSocketIO()
@@ -11,7 +11,7 @@ useSocketIOErrorHandler()
 
 const historyContainer = ref<HTMLDivElement | null>(null)
 const messageInput = ref('')
-const messages = ref<Message[]>([])
+const messages = ref<ChatMessage[]>([])
 const isLoadHistoryMessageComplete = ref(false)
 const isShowLoader = computed(() => {
   if (isLoadHistoryMessageComplete.value) {
@@ -22,8 +22,8 @@ const isShowLoader = computed(() => {
   }
   return true
 })
-const currentUserUid = usePersistUserStore().uid
-const uid = props.uid
+const currentUserUid = usePersistUserStore().id
+const uid = props.userId
 const pageData = reactive({
   page: 1,
   limit: 30
@@ -69,15 +69,15 @@ watch(
 onMounted(async () => {
   socket.emit('private:join', uid)
 
-  socket.on('message:sent', (newMessage: Message) => {
+  socket.on('message:sent', (newMessage: ChatMessage) => {
     messages.value.push(newMessage)
     replaceAsideItem(newMessage)
     messageInput.value = ''
     nextTick(() => scrollToBottom())
   })
 
-  socket.on('message:received', (msg: Message) => {
-    if (msg.receiverUid === currentUserUid && msg.sender.uid === uid) {
+  socket.on('message:received', (msg: ChatMessage) => {
+    if (msg.receiverUid === currentUserUid && msg.sender.id === uid) {
       messages.value.push(msg)
       replaceAsideItem(msg)
       nextTick(() => {
@@ -97,7 +97,7 @@ onMounted(async () => {
 const onKeydown = async (event: KeyboardEvent) => {
   if (event.key === 'Enter') {
     event.preventDefault()
-    await sendMessage()
+    sendMessage()
   }
 }
 
@@ -156,7 +156,7 @@ const handleLoadHistoryMessages = async () => {
         v-for="(message, index) in messages"
         :key="index"
         :message="message"
-        :is-sent="uid !== message.sender.uid"
+        :is-sent="uid !== message.sender.id"
       />
     </div>
 

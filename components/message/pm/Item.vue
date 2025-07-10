@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Message } from '~/types/api/chat-message'
+import type { ChatMessage } from '~/types/api/chat-message'
 
 defineProps<{
-  message: Message
+  message: ChatMessage
   isSent: boolean
 }>()
 </script>
@@ -34,7 +34,7 @@ defineProps<{
       <div class="mt-1 text-sm leading-relaxed">
         <span>{{ message.content }}</span>
         <span class="text-default-500 ml-2 text-xs">
-          {{ formatTimeDifference(message.time) }}
+          {{ formatTimeDifference(message.created) }}
         </span>
       </div>
     </div>

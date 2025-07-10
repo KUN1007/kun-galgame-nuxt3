@@ -18,8 +18,8 @@ defineProps<{
     <div class="justify-space flex w-full flex-col">
       <div class="flex items-center justify-between">
         <span class="font-bold">{{ title }}</span>
-        <span class="text-default-500 text-sm" v-if="data.time">
-          {{ formatTimeDifference(data.time) }}
+        <span class="text-default-500 text-sm" v-if="data.lastMessageTime">
+          {{ formatTimeDifference(data.lastMessageTime) }}
         </span>
       </div>
 

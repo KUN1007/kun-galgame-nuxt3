@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<KunAvatarProps>(), {
 const handleClickAvatar = async (event: MouseEvent) => {
   event.preventDefault()
   if (props.isNavigation) {
-    await navigateTo(`/user/${props.user.uid}/info`)
+    await navigateTo(`/user/${props.user.id}/info`)
   }
 }
 

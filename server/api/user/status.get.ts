@@ -19,12 +19,28 @@ export default defineEventHandler(async (event) => {
     where: { receiver_id: uid, status: 'unread' }
   })
 
-  const messageAdmin = await prisma.message.count({
+  const messageAdmin = await prisma.system_message.count({
     where: { status: 'unread' }
   })
 
   const chatMessage = await prisma.chat_message.count({
-    where: { receiver_id: uid, read_by: { some: { user_id: { not: uid } } } }
+    where: {
+      sender_id: {
+        not: uid
+      },
+      chat_room: {
+        participant: {
+          some: {
+            user_id: uid
+          }
+        }
+      },
+      read_by: {
+        none: {
+          user_id: uid
+        }
+      }
+    }
   })
 
   const responseData: HomeUserStatus = {

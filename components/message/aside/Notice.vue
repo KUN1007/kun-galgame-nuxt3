@@ -49,7 +49,7 @@ const handleDeleteMessage = async (mid: number) => {
       </div>
 
       <div>
-        <KunLink :to="`/user/${message.sender.uid}/info`">
+        <KunLink :to="`/user/${message.sender.id}/info`">
           {{ message.sender.name }}
         </KunLink>
         <span>{{ getMessageI18n(message) }}</span>
@@ -63,7 +63,7 @@ const handleDeleteMessage = async (mid: number) => {
         color="default"
         underline="none"
         class="hover:text-primary cursor-pointer transition-colors"
-        :to="message.tid ? `/topic/${message.tid}` : `/galgame/${message.gid}`"
+        :to="message.link"
       >
         <pre
           class="break-word text-sm leading-8 whitespace-pre-line text-inherit"
@@ -76,7 +76,7 @@ const handleDeleteMessage = async (mid: number) => {
     <div class="flex justify-between">
       <span class="text-default-500 text-sm">
         {{
-          formatDate(message.time, {
+          formatDate(message.created, {
             isShowYear: true,
             isPrecise: true
           })
@@ -88,7 +88,7 @@ const handleDeleteMessage = async (mid: number) => {
         variant="light"
         color="danger"
         size="sm"
-        @click="handleDeleteMessage(message.mid)"
+        @click="handleDeleteMessage(message.id)"
       >
         <KunIcon name="lucide:trash-2" />
       </KunButton>

@@ -1,22 +1,23 @@
 <script setup lang="ts">
 const props = defineProps<{
-  uid: number
+  id: number
 }>()
 
-const socket = useSocketIO()
+// const socket = useSocketIO()
 
-const res = await $fetch(`/api/user/${props.uid}`, {
+const res = await $fetch(`/api/user/${props.id}`, {
   method: 'GET',
+  query: { userId: props.id },
   ...kungalgameResponseHandler
 })
 
 const user = {
-  uid: props.uid,
+  id: props.id,
   name: typeof res !== 'string' ? res.name : '',
   avatar: typeof res !== 'string' ? res.avatar : ''
 }
 
-const handleReload = () => location.reload()
+// const handleReload = () => location.reload()
 </script>
 
 <template>
@@ -29,7 +30,7 @@ const handleReload = () => location.reload()
 
     <h2 class="relative flex items-center gap-2">
       <span>{{ user.name }}</span>
-      <span
+      <!-- <span
         class="absolute -right-6 h-4 w-4 rounded-full"
         :class="socket.connected ? 'bg-success' : 'bg-default'"
       />
@@ -40,7 +41,7 @@ const handleReload = () => location.reload()
       >
         <span>您已离线</span>
         <KunIcon name="lucide:refresh-ccw" />
-      </span>
+      </span> -->
     </h2>
   </header>
 </template>

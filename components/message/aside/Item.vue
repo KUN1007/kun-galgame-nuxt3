@@ -15,7 +15,7 @@ defineProps<{
   >
     <KunAvatar
       :user="{
-        uid: parseInt(room.route),
+        id: parseInt(room.route),
         name: room.title,
         avatar: room.avatar
       }"
@@ -24,8 +24,8 @@ defineProps<{
     <div class="justify-space flex w-full flex-col">
       <div class="flex items-center justify-between">
         <span class="font-bold">{{ room.title }}</span>
-        <span class="text-default-500 text-sm" v-if="room.time">
-          {{ formatTimeDifference(room.time) }}
+        <span class="text-default-500 text-sm" v-if="room.lastMessageTime">
+          {{ formatTimeDifference(room.lastMessageTime) }}
         </span>
       </div>
 

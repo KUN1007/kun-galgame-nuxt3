@@ -1,49 +1,69 @@
-import UserModel from '~/server/models/user'
-import ChatRoomModel from '~/server/models/chat-room'
-import ChatMessageModel from '~/server/models/chat-message'
-import type { Message } from '~/types/api/chat-message'
+import prisma from '~/prisma/prisma'
+import type { ChatMessage } from '~/types/api/chat-message'
 
 export const sendingMessage = async (
   uid: number,
   receiverUid: number,
   content: string
-) => {
-  const user = await UserModel.findOne({ uid }).lean()
-
-  const roomId = generateRoomId(receiverUid, uid)
-  await ChatRoomModel.findOneAndUpdate(
-    { name: roomId },
-    {
-      last_message: {
-        content,
-        time: Date.now(),
-        sender_uid: uid,
-        sender_name: user!.name
-      }
+): Promise<ChatMessage> => {
+  const senderUser = await prisma.user.findUnique({
+    where: { id: uid },
+    select: {
+      id: true,
+      name: true,
+      avatar: true
     }
-  )
-
-  const message = await ChatMessageModel.create({
-    chatroom_name: roomId,
-    sender_uid: uid,
-    receiver_uid: receiverUid,
-    content,
-    status: 'sent'
   })
-
-  const responseData: Message = {
-    cmid: message.cmid,
-    chatroomName: message.chatroom_name,
-    sender: {
-      uid: user!.uid,
-      name: user!.name,
-      avatar: user!.avatar
-    },
-    receiverUid: receiverUid,
-    content: message.content,
-    time: message.time,
-    status: message.status
+  if (!senderUser) {
+    return {
+      content: '用户不存在'
+    } as ChatMessage
   }
 
-  return responseData
+  const roomName = generateRoomId(receiverUid, uid)
+
+  return await prisma.$transaction(async (prisma) => {
+    const newMessage = await prisma.chat_message.create({
+      data: {
+        content,
+        chatroom_name: roomName,
+
+        chat_room: { connect: { name: roomName } },
+        sender: { connect: { id: uid } },
+        receiver: { connect: { id: receiverUid } },
+
+        read_by: {
+          create: {
+            user_id: uid
+          }
+        }
+      }
+    })
+
+    await prisma.chat_room.update({
+      where: { name: roomName },
+      data: {
+        last_message_content: content,
+        last_message_time: new Date(),
+        last_message_sender_id: uid,
+        last_message_sender_name: senderUser.name
+      }
+    })
+
+    const responseData: ChatMessage = {
+      id: newMessage.id,
+      chatroomName: newMessage.chatroom_name,
+      sender: senderUser,
+
+      readBy: [senderUser],
+      receiverUid: newMessage.receiver_id,
+      content: newMessage.content,
+      isRecall: newMessage.is_recall,
+      created: newMessage.created,
+      recallTime: newMessage.recall_time,
+      editTime: newMessage.edit_time
+    }
+
+    return responseData
+  })
 }

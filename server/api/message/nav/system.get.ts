@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
       where: { receiver_id: uid, status: 'unread' }
     }),
     prisma.system_message.findFirst({
-      orderBy: { time: 'desc' }
+      orderBy: { created: 'desc' }
     }),
     prisma.system_message.count(),
     prisma.system_message.count({

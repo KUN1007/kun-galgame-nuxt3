@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { MessageAdmin } from '~/types/api/message-admin'
+import type { SystemMessage } from '~/types/api/message'
 
 defineProps<{
-  message: MessageAdmin
+  message: SystemMessage
 }>()
 </script>
 
@@ -26,7 +26,7 @@ defineProps<{
       </div>
       <KunAvatar :user="message.admin" />
       <span class="text-default-500 text-sm">
-        {{ formatTimeDifference(message.time) }}
+        {{ formatTimeDifference(message.created) }}
       </span>
     </div>
 
