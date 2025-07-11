@@ -98,6 +98,7 @@ onMounted(() => (commentToUid.value = props.targetUser.id))
       </div>
 
       <KunPagination
+        v-if="data.totalCount > 30 || data.totalCount === 30"
         v-model:current-page="pageData.page"
         :total-page="Math.ceil(data.totalCount / pageData.limit)"
         :is-loading="status === 'pending'"

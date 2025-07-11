@@ -6,10 +6,7 @@ import type {
 
 export interface GalgameSeriesItem {
   id: number
-  name_en_us: string
-  name_ja_jp: string
-  name_zh_cn: string
-  name_zh_tw: string
+  name: KunLanguage
   banner: string
 }
 

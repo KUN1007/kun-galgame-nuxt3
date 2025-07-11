@@ -367,6 +367,111 @@ async function migrateUpdateLogs() {
   )
 }
 
+type TopicCategoryKey = 'galgame' | 'technique' | 'others'
+const TOPIC_SECTIONS: Record<TopicCategoryKey, Record<string, string>> = {
+  galgame: {
+    'g-walkthrough': '攻略',
+    'g-chatting': '闲聊',
+    'g-article': '文章',
+    'g-seeking': '寻求资源',
+    'g-news': '资讯',
+    'g-releases': '新作消息',
+    'g-other': '其它'
+  },
+  technique: {
+    't-crack': '逆向工程',
+    't-web': 'Web',
+    't-languages': '编程语言',
+    't-help': '请求帮助',
+    't-linux': 'Linux',
+    't-practical': '实用技术',
+    't-ai': 'AI',
+    't-android': 'Android',
+    't-adobe': 'Adobe',
+    't-algorithm': '算法',
+    't-other': '其它'
+  },
+  others: {
+    'o-anime': '动漫',
+    'o-comics': '漫画',
+    'o-music': '音乐',
+    'o-novel': '轻小说',
+    'o-daily': '日常',
+    'o-essay': '个人随笔',
+    'o-forum': '论坛相关',
+    'o-patch': '补丁网站',
+    'o-other': '其它'
+  }
+}
+
+const sectionToCategoryMap = new Map<string, TopicCategoryKey>()
+for (const category in TOPIC_SECTIONS) {
+  for (const sectionKey in TOPIC_SECTIONS[category as TopicCategoryKey]) {
+    sectionToCategoryMap.set(sectionKey, category as TopicCategoryKey)
+  }
+}
+
+/**
+ * 清洗和规范化话题的分类和分区
+ * @param doc - 从 Mongoose 读取的原始话题文档
+ * @returns { finalCategory: TopicCategoryKey, finalSections: string[] } - 一个保证合规的对象
+ */
+function normalizeCategoryAndSections(doc: {
+  category?: string[]
+  section?: string[]
+}): { finalCategory: TopicCategoryKey; finalSections: string[] } {
+  // 确保输入是数组，并对 category 进行小写转换以匹配 TOPIC_SECTIONS 的键
+  const docCategories = doc.category?.map((c) => c.toLowerCase()) ?? []
+  const docSections = doc.section ?? []
+
+  // 规则 1: 优先从 Section 推断 Category
+  // "存在两个 category 一个 section 的情况，这时只需取 section 对应的那个 category 即可"
+  // "存在两个 category 两个 section 的情况... 只需任取一组即可"
+  // 我们的策略是：找到第一个同时满足以下条件的 section：
+  // a) 它是一个有效的、在 TOPIC_SECTIONS 中存在的 section
+  // b) 它的父 category 也存在于当前文档的 category 列表中
+  for (const sectionName of docSections) {
+    const parentCategory = sectionToCategoryMap.get(sectionName)
+    if (parentCategory && docCategories.includes(parentCategory)) {
+      // 找到了一个完美的匹配！以此为基准
+      const finalCategory = parentCategory
+      // 筛选出所有属于这个最终 category 的 section
+      const finalSections = docSections.filter(
+        (s) => sectionToCategoryMap.get(s) === finalCategory
+      )
+      return { finalCategory, finalSections }
+    }
+  }
+
+  // 规则 2: 如果上面的规则没有匹配上（例如 section 的 category 不在文档的 category 列表里）
+  // 我们放宽条件：只要找到文档中的第一个有效 section，就采用它的 category。
+  // 这符合“任取一组”的原则。
+  for (const sectionName of docSections) {
+    const parentCategory = sectionToCategoryMap.get(sectionName)
+    if (parentCategory) {
+      // 找到了一个有效的 section，不管它的 category 在不在 doc.category 里，就用它了！
+      const finalCategory = parentCategory
+      const finalSections = docSections.filter(
+        (s) => sectionToCategoryMap.get(s) === finalCategory
+      )
+      return { finalCategory, finalSections }
+    }
+  }
+
+  // 规则 3: 如果文档根本没有有效的 section，则根据 category 来决定
+  // 取文档中第一个有效的 category
+  const firstValidCategory = docCategories.find(
+    (c): c is TopicCategoryKey => c in TOPIC_SECTIONS
+  )
+  if (firstValidCategory) {
+    return { finalCategory: firstValidCategory, finalSections: [] }
+  }
+
+  // 规则 4: 最终回退
+  // 如果文档既没有有效 section，也没有有效 category，则分配一个默认值
+  return { finalCategory: 'others', finalSections: [] }
+}
+
 async function migrateTopics(
   cache: Awaited<ReturnType<typeof precacheLookups>>
 ) {
@@ -377,6 +482,14 @@ async function migrateTopics(
   let batch: Prisma.PrismaPromise<unknown>[] = []
 
   for await (const doc of cursor) {
+    if (!doc.tid) {
+      console.warn('  ... Skipping document without tid:', doc._id)
+      continue
+    }
+
+    // **核心清洗步骤**
+    const { finalCategory, finalSections } = normalizeCategoryAndSections(doc)
+
     const createPayload: Prisma.topicCreateArgs = {
       data: {
         id: doc.tid,
@@ -384,27 +497,28 @@ async function migrateTopics(
         content: doc.content ?? '',
         view: doc.views ?? 0,
         status: doc.status ?? 0,
-        category: doc.category?.[0].toLocaleLowerCase() ?? 'uncategorized',
+
+        // **使用清洗后的数据**
+        category: finalCategory,
+        section: {
+          create: finalSections
+            // 确保 section ID 存在于 cache 中
+            .filter((name) => cache.sectionMap.has(name))
+            .map((name) => ({
+              topic_section_id: cache.sectionMap.get(name)!
+            }))
+        },
+
         tag: cache.topicTagsByTid.get(doc.tid) ?? doc.tags ?? [],
-        status_update_time: msToDate(doc.time) ?? doc.updated, // Use upvote_time as status_update_time
+        status_update_time: msToDate(doc.time) ?? doc.updated,
         edited: msToDate(doc.edited),
         upvote_time: msToDate(doc.upvote_time),
         created: doc.created,
         updated: doc.updated,
 
-        // user: { connect: { id: doc.uid } },
         user_id: doc.uid,
 
-        section: {
-          create:
-            doc.section
-              ?.map((name) => ({
-                topic_section_id: cache.sectionMap.get(name)!
-              }))
-              .filter((s) => s.topic_section_id) ?? []
-        },
-
-        // create related records
+        // 关系数据创建保持不变
         upvote: { create: doc.upvotes?.map((uid) => ({ user_id: uid })) ?? [] },
         like: { create: doc.likes?.map((uid) => ({ user_id: uid })) ?? [] },
         dislike: {
