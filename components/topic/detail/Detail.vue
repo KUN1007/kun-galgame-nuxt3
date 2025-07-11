@@ -93,11 +93,6 @@ watch(
           :title="topic.title"
         />
 
-        <KunNull
-          v-if="status !== 'pending' && replies.length === 0"
-          description="暂无回复"
-        />
-
         <div class="py-6 text-center">
           <KunButton
             v-if="!isComplete && status !== 'pending'"
@@ -109,7 +104,7 @@ watch(
           </KunButton>
           <KunLoading v-if="status === 'pending' && replies.length > 0" />
           <p v-if="isComplete" class="text-default-500">
-            {{ `(｡>︿<｡) 已经一滴都不剩了哦~` }}
+            {{ `(｡>︿<｡) 已经一滴回复都不剩了哦~` }}
           </p>
         </div>
       </section>

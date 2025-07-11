@@ -9,7 +9,7 @@ export const usePersistEditTopicStore = defineStore('KUNGalgameEditTopic', {
     title: '',
     content: '',
     tags: [],
-    category: [],
+    category: '',
     section: []
   }),
   getters: {},
@@ -18,7 +18,7 @@ export const usePersistEditTopicStore = defineStore('KUNGalgameEditTopic', {
       this.title = ''
       this.content = ''
       this.tags = []
-      this.category = []
+      this.category = ''
       this.section = []
     }
   }

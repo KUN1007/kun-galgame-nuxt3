@@ -4,7 +4,7 @@ export interface EditStorePersist {
   title: string
   content: string
   tags: string[]
-  category: string[]
+  category: string
   section: string[]
 }
 

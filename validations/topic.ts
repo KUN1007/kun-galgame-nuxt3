@@ -26,21 +26,21 @@ export const getTopicDetailSchema = z.object({
 export const createTopicSchema = z.object({
   title: z
     .string()
-    .min(1)
+    .min(1, { message: '话题标题最少 1 个字符' })
     .max(107, { message: '话题标题最大长度为 107 个字符' })
-    .refine((t) => t.trim().length > 1, { message: '话题标题最少为 1 个字符' }),
+    .refine((t) => t.trim().length, { message: '话题标题最少为 1 个字符' }),
   content: z
     .string()
-    .min(1)
+    .min(1, { message: '话题内容最少 1 个字符' })
     .max(100007, { message: '话题标题最大长度为 100007 个字符' })
-    .refine((t) => t.trim().length > 1, { message: '话题内容最少为 1 个字符' }),
-  tags: z
+    .refine((t) => t.trim().length, { message: '话题内容最少为 1 个字符' }),
+  tag: z
     .array(
       z
         .string()
-        .min(1)
+        .min(1, { message: '每个标签最少 1 个字符' })
         .max(17, { message: '每个标签最多 17 个字符' })
-        .refine((t) => t.trim().length > 1, {
+        .refine((t) => t.trim().length, {
           message: '每个标签最少为 1 个字符'
         })
     )
@@ -50,7 +50,7 @@ export const createTopicSchema = z.object({
   section: z
     .array(z.enum(KUN_TOPIC_SECTION_CONST))
     .min(1, { message: '您至少选择一个话题的分区' })
-    .min(3, { message: '您至多选择三个话题的分区' })
+    .max(3, { message: '您至多选择三个话题的分区' })
 })
 
 export const updateTopicSchema = createTopicSchema.merge(

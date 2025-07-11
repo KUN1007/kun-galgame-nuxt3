@@ -112,7 +112,6 @@ defineExpose({
         :class="
           cn(
             'block w-full rounded-md px-2 py-1 text-sm shadow-sm transition duration-150 ease-in-out focus:ring-1',
-            className,
             colorClass[color],
             sizeClasses,
             $slots.prefix && 'pl-10',
@@ -120,7 +119,8 @@ defineExpose({
             disabled && 'bg-default-100 cursor-not-allowed',
             error
               ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
-              : ''
+              : '',
+            className
           )
         "
         @input="handleInput"

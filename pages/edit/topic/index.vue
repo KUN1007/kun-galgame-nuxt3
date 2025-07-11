@@ -7,5 +7,5 @@ useKunSeoMeta({ title: '发布话题' })
 </script>
 
 <template>
-  <EditTopicContainer />
+  <EditTopicLayout />
 </template>

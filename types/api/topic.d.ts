@@ -7,25 +7,6 @@ export interface TopicAside {
   tid: number
 }
 
-export interface EditCreateTopicRequestData {
-  title: string
-  content: string
-  time: string
-  tags: string[]
-  category: string[]
-  section: string[]
-}
-
-export interface EditUpdateTopicRequestData {
-  tid: number
-  title: string
-  content: string
-  tags: string[]
-  category: string[]
-  section: string[]
-  edited: string
-}
-
 export interface TopicDetail {
   id: number
   title: string
