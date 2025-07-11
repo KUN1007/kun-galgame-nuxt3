@@ -19,7 +19,7 @@ const handleRewriteGalgame = async (galgame: GalgameDetail) => {
 </script>
 
 <template>
-  <KunTooltip text="重新编辑">
+  <KunTooltip text="编辑">
     <KunButton
       :is-icon-only="true"
       variant="light"

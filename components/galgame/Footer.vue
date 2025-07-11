@@ -6,13 +6,6 @@ const galgame = inject<GalgameDetail>('galgame')
 
 <template>
   <div v-if="galgame" class="flex items-center justify-between">
-    <KunBadge
-      size="md"
-      :color="galgame.contentLimit === 'sfw' ? 'success' : 'danger'"
-    >
-      {{ galgame.contentLimit.toLocaleUpperCase() }}
-    </KunBadge>
-
     <div class="flex gap-1">
       <KunTooltip :text="`浏览量: ${galgame.view}`">
         <KunBadge size="md">
