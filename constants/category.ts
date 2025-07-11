@@ -26,3 +26,5 @@ export const KUN_CATEGORY_DESCRIPTION_MAP: Record<string, string> = {
   others:
     '其它话题, 动漫, 漫画, 音乐, 轻小说, 日常, 个人随笔, 论坛相关, 鲲 Galgame 补丁网站相关, 其它内容'
 }
+
+export const KUN_ALLOWED_CATEGORY = ['galgame', 'technique', 'others'] as const

@@ -65,43 +65,45 @@ watch(
     <KunLink
       color="default"
       underline="none"
-      v-for="(sec, index) in data?.topics"
+      v-for="(topic, index) in data?.topics"
       :key="index"
-      :to="`/topic/${sec.tid}`"
+      :to="`/topic/${topic.id}`"
       class-name="hover:bg-primary/10 items-start flex flex-nowrap gap-2 rounded-lg p-4 transition-colors duration-200"
     >
-      <KunAvatar :user="sec.user" />
+      <KunAvatar :user="topic.user" />
 
       <div class="w-full space-y-2">
         <div class="flex items-center">
-          <div class="mr-2 font-bold">{{ sec.user.name }}</div>
+          <div class="mr-2 font-bold">{{ topic.user.name }}</div>
           <div class="text-default-500 text-sm">
-            {{ formatDate(sec.time, { isShowYear: true, isPrecise: true }) }}
+            {{
+              formatDate(topic.created, { isShowYear: true, isPrecise: true })
+            }}
           </div>
         </div>
 
         <h2 class="hover:text-primary text-lg transition-colors">
-          {{ sec.title }}
+          {{ topic.title }}
         </h2>
 
-        <TopicTagGroup :section="sec.section" :tags="sec.tags" />
+        <TopicTagGroup :section="topic.section" :tags="topic.tag" />
 
         <div class="text-default-500 line-clamp-2 text-sm break-all">
-          {{ markdownToText(sec.content) }}
+          {{ markdownToText(topic.content) }}
         </div>
 
         <div class="text-default-700 flex gap-4 text-sm">
           <div class="flex items-center gap-2 text-inherit">
             <KunIcon name="lucide:eye" />
-            {{ sec.views }}
+            {{ topic.view }}
           </div>
           <div class="flex items-center gap-2 text-inherit">
             <KunIcon name="lucide:thumbs-up" />
-            {{ sec.likes }}
+            {{ topic.like }}
           </div>
           <div class="flex items-center gap-2 text-inherit">
             <KunIcon name="carbon:reply" />
-            {{ sec.replies }}
+            {{ topic.reply }}
           </div>
         </div>
       </div>

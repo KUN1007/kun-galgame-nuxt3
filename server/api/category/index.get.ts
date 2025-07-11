@@ -1,112 +1,72 @@
 import prisma from '~/prisma/prisma'
-import type { CategoryResponseData } from '~/types/api/category'
-
-export const categoryMap: Record<string, string> = {
-  Galgame: 'g-',
-  Technique: 't-',
-  Others: 'o-'
-}
-
-const getCategoryData = async (category: string) => {
-  const categoryDataCache = await useStorage('redis').getItem(
-    `category:${category}`
-  )
-  if (categoryDataCache) {
-    return categoryDataCache as CategoryResponseData[]
-  }
-
-  const prefix = categoryMap[category]
-  if (!prefix) {
-    return []
-  }
-  const pattern = `${prefix}%`
-
-  //   const data: CategoryResponseData[] = await TopicModel.aggregate([
-  //   {
-  //     $unwind: '$section'
-  //   },
-  //   {
-  //     $match: {
-  //       section: categoryMap[category]
-  //     }
-  //   },
-  //   {
-  //     $group: {
-  //       _id: '$section',
-  //       topics: { $sum: 1 },
-  //       views: { $sum: '$views' },
-  //       latestTopic: { $last: '$$ROOT' }
-  //     }
-  //   },
-  //   {
-  //     $project: {
-  //       _id: 0,
-  //       section: '$_id',
-  //       topic: {
-  //         tid: '$latestTopic.tid',
-  //         title: '$latestTopic.title',
-  //         time: '$latestTopic.time'
-  //       },
-  //       topics: 1,
-  //       views: 1
-  //     }
-  //   }
-  // ])
-
-  // prettier-ignore
-  const data: CategoryResponseData[] = await prisma.$queryRaw<CategoryResponseData[]>`
-    WITH RankedTopics AS (
-      SELECT
-        t.id,
-        t.title,
-        t.created,
-        t.view,
-        tt.section,
-        ROW_NUMBER() OVER(PARTITION BY tt.section ORDER BY t.created DESC) as rn
-      FROM "topic_tag" AS tt
-      JOIN "topic" AS t ON tt.topic_id = t.id
-      WHERE tt.section LIKE ${pattern}
-    ),
-    Aggregates AS (
-      SELECT
-        section,
-        COUNT(*) as topics,
-        SUM(view) as views
-      FROM RankedTopics
-      GROUP BY section
-    )
-    SELECT
-      agg.section,
-      agg.topics,
-      agg.views,
-      json_build_object(
-        'tid', rt.id,
-        'title', rt.title,
-        'time', rt.created
-      ) AS topic
-    FROM Aggregates AS agg
-    JOIN RankedTopics AS rt ON agg.section = rt.section
-    WHERE rt.rn = 1
-    ORDER BY agg.section;
-  `
-
-  await useStorage('redis').setItem(`category:${category}`, data, {
-    ttl: 17 * 60
-  })
-
-  return data
-}
+import { getTopicCategoryStats } from '~/validations/category'
+import type { LatestTopicInfo, SectionStats } from '~/types/api/category'
 
 export default defineEventHandler(async (event) => {
-  const { category }: { category: string } = await getQuery(event)
-  const availableCategory = ['galgame', 'technique', 'others']
-  if (!availableCategory.includes(category)) {
-    return kunError(event, '非法的话题分类')
+  const input = kunParseGetQuery(event, getTopicCategoryStats)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
-  const capitalizeFirstLetter =
-    category.charAt(0).toUpperCase() + category.slice(1)
-  const result = await getCategoryData(capitalizeFirstLetter)
+  const topics = await prisma.topic.findMany({
+    where: {
+      category: input.category
+    },
+    select: {
+      id: true,
+      title: true,
+      view: true,
+      created: true,
+
+      section: {
+        select: {
+          topic_section: {
+            select: {
+              id: true,
+              name: true
+            }
+          }
+        }
+      }
+    },
+    orderBy: {
+      created: 'desc'
+    }
+  })
+
+  const statsMap = new Map<number, SectionStats>()
+
+  for (const topic of topics) {
+    for (const relation of topic.section) {
+      const section = relation.topic_section
+      if (!section) continue
+
+      if (!statsMap.has(section.id)) {
+        statsMap.set(section.id, {
+          id: section.id,
+          name: section.name,
+          topicCount: 0,
+          viewCount: 0,
+          latestTopic: null
+        })
+      }
+
+      const stats = statsMap.get(section.id)!
+
+      stats.topicCount++
+      stats.viewCount += topic.view
+
+      if (stats.latestTopic === null) {
+        stats.latestTopic = {
+          id: topic.id,
+          title: topic.title,
+          created: topic.created
+        } satisfies LatestTopicInfo
+      }
+    }
+  }
+
+  const result = Array.from(statsMap.values())
 
   return result
 })

@@ -1,12 +1,13 @@
-export interface CategoryTopic {
+export interface LatestTopicInfo {
   id: number
   title: string
-  time: number
+  created: Date | string
 }
 
-export interface CategoryResponseData {
-  section: string
-  topic: CategoryTopic
-  topics: number
-  views: number
+export interface SectionStats {
+  id: number
+  name: string
+  topicCount: number
+  viewCount: number
+  latestTopic: LatestTopicInfo | null
 }

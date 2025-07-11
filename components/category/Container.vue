@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { KUN_TOPIC_CATEGORY, KUN_TOPIC_SECTION } from '~/constants/topic'
 import { KUN_CATEGORY_DESCRIPTION_MAP } from '~/constants/category'
-import type { CategoryResponseData } from '~/types/api/category'
+import type { SectionStats } from '~/types/api/category'
 
 defineProps<{
-  categories: CategoryResponseData[]
+  sections: SectionStats[]
   categoryName: string
 }>()
 </script>
@@ -22,32 +22,32 @@ defineProps<{
     <KunCard
       :is-transparent="false"
       :is-pressable="true"
-      v-for="category in categories"
-      :key="category.section"
-      :href="`/section/${category.section}`"
+      v-for="section in sections"
+      :key="section.id"
+      :href="`/section/${section.name}`"
     >
       <div class="mb-4 flex items-center justify-between">
         <h2 class="text-lg font-semibold">
-          {{ KUN_TOPIC_SECTION[category.section] }}
+          {{ KUN_TOPIC_SECTION[section.name] }}
         </h2>
         <div class="text-default-500 flex items-center gap-4 text-sm">
           <div class="flex items-center gap-2 text-inherit">
             <KunIcon name="lucide:newspaper" />
-            {{ formatNumber(category.topics) }}
+            {{ formatNumber(section.topicCount) }}
           </div>
           <div class="flex items-center gap-2 text-inherit">
             <KunIcon name="lucide:eye" />
-            {{ formatNumber(category.views) }}
+            {{ formatNumber(section.viewCount) }}
           </div>
         </div>
       </div>
 
       <div class="space-y-2">
         <h3 class="line-clamp-1">
-          {{ category.topic.title }}
+          {{ section.latestTopic?.title }}
         </h3>
         <p class="text-default-500 text-sm">
-          {{ formatTimeDifference(category.topic.time) }}
+          {{ formatTimeDifference(section.latestTopic?.created || '') }}
         </p>
       </div>
     </KunCard>

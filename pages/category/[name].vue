@@ -32,7 +32,7 @@ useHead({
 <template>
   <CategoryContainer
     v-if="data"
-    :categories="data"
+    :sections="data"
     :category-name="categoryName"
   />
 </template>
