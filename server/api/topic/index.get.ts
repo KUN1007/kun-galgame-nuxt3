@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
 
   const data = await prisma.topic.findMany({
     where: {
-      category,
+      category: category === 'all' ? undefined : category,
       status: { not: 1 }
     },
     skip: (page - 1) * limit,

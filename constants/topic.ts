@@ -9,7 +9,8 @@ export const KUN_TOPIC_CATEGORY: Record<string, string> = {
 export const KUN_TOPIC_CATEGORY_CONST = [
   'galgame',
   'technique',
-  'others'
+  'others',
+  'all'
 ] as const
 
 export const KUN_TOPIC_SECTION: Record<string, string> = {
@@ -92,9 +93,9 @@ export const KUN_TOPIC_REPLY_PANEL_POSITION_MAP: Record<string, string> = {
 }
 
 export const topicSortFieldOptions: KunSelectOption[] = [
-  { value: 'time', label: '更新时间' },
+  { value: 'status_update_time', label: '更新时间' },
   { value: 'created', label: '创建时间' },
-  { value: 'views', label: '浏览量' }
+  { value: 'view', label: '浏览量' }
 ]
 
 export const TOPIC_SORT_FIELD_CONST = [

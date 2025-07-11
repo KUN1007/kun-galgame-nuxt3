@@ -10,10 +10,16 @@ export default defineEventHandler(async (event) => {
 
   const { page, limit } = input
   const userInfo = await getCookieTokenInfo(event)
+  const nsfw = getNSFWCookie(event)
 
   const skip = (page - 1) * limit
 
   const resources = await prisma.galgame_resource.findMany({
+    where: {
+      galgame: {
+        content_limit: nsfw === 'sfw' ? 'sfw' : undefined
+      }
+    },
     skip,
     take: limit,
     include: {
@@ -54,7 +60,7 @@ export default defineEventHandler(async (event) => {
     size: resource.size,
     status: resource.status,
     likeCount: resource._count.like,
-    isLike: resource.like.length > 0,
+    isLiked: resource.like.length > 0,
     created: resource.created,
 
     galgameName: {
