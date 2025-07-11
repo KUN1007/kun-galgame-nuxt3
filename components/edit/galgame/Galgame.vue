@@ -152,6 +152,12 @@ const handleGetVNData = async () => {
           进入游戏详情页面, 该页面的 ストーリー 部分就是日语介绍; 汉语介绍可以在
           Bangumi 或者萌娘百科获得。您也可以抛弃官方对游戏的介绍，自己介绍游戏
         </p>
+        <p class="text-default-500 text-sm">
+          请不要在介绍部分放置任何 R18 图片, 我们的系统还没有开发完毕,
+          之后会有专门处理图片的展示方式, 切记, 一定不要放置。R18 的定义很严格,
+          过于露骨的图片都视为 R18。一般图片尽可能少的放置,
+          能不放置图片就不要放置图片, 因为我们之后会专门做放图片的位置。
+        </p>
         <KunTab
           :items="languageItems"
           v-model="introductionLanguage"
@@ -165,18 +171,6 @@ const handleGetVNData = async () => {
       <EditGalgameBanner />
 
       <EditGalgameContentLimit type="create" />
-
-      <KunDivider>
-        <span class="mx-2">可选信息, 下面的信息可以选填</span>
-      </KunDivider>
-
-      <EditGalgamePrSeries type="create" />
-
-      <EditGalgamePrOfficial type="create" />
-
-      <EditGalgamePrEngine type="create" />
-
-      <EditGalgamePrTags type="create" />
 
       <EditGalgamePrAlias type="create" />
 

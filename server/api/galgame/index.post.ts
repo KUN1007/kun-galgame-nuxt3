@@ -1,53 +1,11 @@
 import { subDays } from 'date-fns'
 import env from '~/server/env/dotenv'
-import GalgameModel from '~/server/models/galgame'
-import GalgameLinkModel from '~/server/models/galgame-link'
-import UserModel from '~/server/models/user'
 import { uploadGalgameBanner } from './utils/uploadGalgameBanner'
 import prisma from '~/prisma/prisma'
 import { createGalgameSchema } from '~/validations/galgame'
 import type { H3Event } from 'h3'
 
 const readGalgameData = async (event: H3Event) => {
-  // const formData = await readFormData(event)
-
-  // const vndbIdData = formData.get('vndbId')
-  // const seriesIdData = formData.get('seriesId')
-  // const officialIdData = formData.get('officialId')
-  // const engineIdData = formData.get('engineId')
-  // const tagIdData = formData.get('tagId')
-
-  // const nameData = formData.get('name')
-  // const introductionData = formData.get('introduction')
-  // const contentLimitData = formData.get('contentLimit')
-  // const aliasesData = formData.get('aliases')
-  // const bannerData = formData.get('banner')
-  // if (
-  //   !vndbIdData ||
-  //   !seriesIdData ||
-  //   !officialIdData ||
-  //   !engineIdData ||
-  //   !tagIdData ||
-  //   !nameData ||
-  //   !introductionData ||
-  //   !contentLimitData ||
-  //   !aliasesData ||
-  //   !bannerData
-  // ) {
-  //   return kunError(event, 10507)
-  // }
-
-  // const vndbId = vndbIdData.toString()
-  // const seriesId = seriesIdData.toString()
-  // const contentLimit = contentLimitData.toString()
-  // const name = JSON.parse(nameData.toString()) as KunLanguage
-  // const introduction = JSON.parse(introductionData.toString()) as KunLanguage
-  // const aliases = JSON.parse(aliasesData.toString()) as string[]
-  // const official = JSON.parse(officialData.toString()) as string[]
-  // const engine = JSON.parse(engineData.toString()) as string[]
-  // const tags = JSON.parse(tagsData.toString()) as string[]
-  // const banner = await new Response(bannerData).arrayBuffer()
-
   const input = await kunParseFormData(event, createGalgameSchema)
   if (typeof input === 'string') {
     return kunError(event, input)
@@ -108,10 +66,16 @@ export default defineEventHandler(async (event) => {
           intro_zh_cn: result.intro_zh_cn,
           intro_zh_tw: result.intro_zh_tw,
           vndb_id: result.vndbId,
-          series_id: result.seriesId,
           content_limit: result.contentLimit,
           user_id: uid
         }
+      })
+
+      await prisma.galgame_alias.createMany({
+        data: result.aliases.split(',').map((a) => ({
+          galgame_id: newGalgame.id,
+          name: a
+        }))
       })
 
       await prisma.galgame_contributor.create({
@@ -126,10 +90,8 @@ export default defineEventHandler(async (event) => {
         data: { moemoepoint: { increment: 3 } }
       })
 
-      // TODO:
-
       const res = await uploadGalgameBanner(
-        Buffer.from(result.banner),
+        Buffer.from(result.banner as Buffer),
         newGalgame.id
       )
       if (!res) {
@@ -139,29 +101,32 @@ export default defineEventHandler(async (event) => {
         return kunError(event, res)
       }
 
-      const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${newGalgame.gid}/banner/banner.webp`
-      await GalgameModel.updateOne(
-        { gid: newGalgame.gid },
-        { $set: { banner: imageLink } }
-      )
-
-      await GalgameLinkModel.create({
-        gid: newGalgame.gid,
-        uid,
-        name: 'VNDB',
-        link: `https://vndb.org/${vndb_id}`
+      const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${newGalgame.id}/banner/banner.webp`
+      await prisma.galgame.update({
+        where: { id: newGalgame.id },
+        data: { banner: imageLink }
       })
 
-      await createGalgameHistory({
-        gid: newGalgame.gid,
-        uid,
-        time: Date.now(),
-        action: 'created',
-        type: 'galgame',
-        content: ''
+      await prisma.galgame_link.create({
+        data: {
+          galgame_id: newGalgame.id,
+          user_id: uid,
+          name: 'VNDB',
+          link: `https://vndb.org/${result.vndbId}`
+        }
       })
 
-      return newGalgame.gid
+      await prisma.galgame_history.create({
+        data: {
+          galgame_id: newGalgame.id,
+          user_id: uid,
+          action: 'created',
+          type: 'galgame',
+          content: ''
+        }
+      })
+
+      return newGalgame.id
     },
     { timeout: 60000 }
   )

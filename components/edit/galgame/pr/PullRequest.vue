@@ -26,14 +26,6 @@ const introductionLanguage = ref<Language>('zh-cn')
       />
       <EditGalgameEditor :lang="introductionLanguage" type="rewrite" />
 
-      <EditGalgamePrSeries type="rewrite" />
-
-      <EditGalgamePrOfficial type="rewrite" />
-
-      <EditGalgamePrEngine type="rewrite" />
-
-      <EditGalgamePrTags type="rewrite" />
-
       <EditGalgamePrAlias type="rewrite" />
 
       <EditGalgamePrFooter />

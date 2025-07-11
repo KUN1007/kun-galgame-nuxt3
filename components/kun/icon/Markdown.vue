@@ -12,3 +12,21 @@
     />
   </svg>
 </template>
+
+<style lang="scss" scoped>
+:deep(path) {
+  color: inherit;
+}
+
+:deep(g) {
+  color: inherit;
+}
+
+:deep(rect) {
+  color: inherit;
+}
+
+:deep(circle) {
+  color: inherit;
+}
+</style>

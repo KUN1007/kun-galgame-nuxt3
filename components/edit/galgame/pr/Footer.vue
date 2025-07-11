@@ -6,36 +6,12 @@ const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 const isPublishing = ref(false)
 
 const handlePublishGalgamePR = async () => {
-  const seriesArray = galgamePR.value[0].series
-    .toString()
-    .split(',')
-    .map((o: string) => o.trim())
-    .filter((str: string) => str !== '')
-  const officialArray = galgamePR.value[0].official
-    .toString()
-    .split(',')
-    .map((o: string) => o.trim())
-    .filter((str: string) => str !== '')
-  const engineArray = galgamePR.value[0].engine
-    .toString()
-    .split(',')
-    .map((e: string) => e.trim())
-    .filter((str: string) => str !== '')
-  const tagsArray = galgamePR.value[0].tags
-    .toString()
-    .split(',')
-    .map((t: string) => t.trim())
-    .filter((str: string) => str !== '')
   const pullRequest = {
-    gid: galgamePR.value[0].gid,
+    gid: galgamePR.value[0].id,
     name: galgamePR.value[0].name,
     introduction: galgamePR.value[0].introduction,
     contentLimit: galgamePR.value[0].contentLimit,
-    alias: galgamePR.value[0].alias,
-    official: officialArray,
-    engine: engineArray,
-    tags: tagsArray,
-    series: seriesArray
+    alias: galgamePR.value[0].alias
   }
 
   if (!checkGalgamePR(pullRequest)) {

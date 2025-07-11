@@ -103,7 +103,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
 
     <div class="space-y-2" v-if="data">
       <KunCard :is-hoverable="false" v-for="(link, index) in data" :key="index">
-        <p>{{ link.link }}</p>
+        <p>{{ link.name }}</p>
         <KunLink :to="link.link" target="_blank" rel="noopener noreferrer">
           {{ link.link }}
           <KunIcon name="lucide:external-link" />

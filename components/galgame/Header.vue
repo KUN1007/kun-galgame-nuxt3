@@ -22,6 +22,14 @@ const route = useRoute()
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
+const galgameAliasArray = computed(() => {
+  const nameArray = Object.entries(props.galgame.name)
+    .filter(
+      ([_, value]) => value !== getPreferredLanguageText(props.galgame.name)
+    )
+    .map(([_, value]) => value)
+  return nameArray.concat(props.galgame.alias)
+})
 const hasPermission = computed(() => props.galgame.user.id === id || role >= 2)
 
 const handleChangeBanner = async () => {
@@ -133,7 +141,7 @@ onMounted(async () => {
 
       <div class="space-y-3">
         <div class="flex flex-wrap gap-2">
-          <template v-for="(alias, index) in galgame.name" :key="index">
+          <template v-for="(alias, index) in galgameAliasArray" :key="index">
             <KunBadge v-if="alias">{{ alias }}</KunBadge>
           </template>
         </div>

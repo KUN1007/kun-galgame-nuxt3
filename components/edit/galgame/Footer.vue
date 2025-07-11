@@ -1,34 +1,35 @@
 <script setup lang="ts">
-import { checkGalgamePublish } from '../utils/checkGalgamePublish'
+import { createGalgameSchema } from '~/validations/galgame'
 
-const {
-  vndbId,
-  name,
-  contentLimit,
-  introduction,
-  series,
-  aliases,
-  official,
-  engine,
-  tags
-} = storeToRefs(usePersistEditGalgameStore())
+const { vndbId, name, contentLimit, introduction, aliases } = storeToRefs(
+  usePersistEditGalgameStore()
+)
 
 const isPublishing = ref(false)
 
 const handlePublishGalgame = async () => {
   const banner = await getImage('kun-galgame-publish-banner')
-  const isValid = checkGalgamePublish(
-    vndbId.value,
-    name.value,
+  const data: Record<string, number | string | string[] | Blob | null> = {
+    vndbId: vndbId.value,
+    name_en_us: name.value['en-us'],
+    name_ja_jp: name.value['ja-jp'],
+    name_zh_cn: name.value['zh-cn'],
+    name_zh_tw: name.value['zh-tw'],
+    intro_en_us: introduction.value['en-us'],
+    intro_ja_jp: introduction.value['ja-jp'],
+    intro_zh_cn: introduction.value['zh-cn'],
+    intro_zh_tw: introduction.value['zh-tw'],
+    contentLimit: contentLimit.value,
     banner,
-    introduction.value,
-    series.value,
-    aliases.value,
-    official.value,
-    engine.value,
-    tags.value
-  )
-  if (!isValid) {
+    aliases: String(aliases.value)
+  }
+  const result = createGalgameSchema.safeParse(data)
+  if (!result.success) {
+    const message = JSON.parse(result.error.message)[0]
+    useMessage(
+      `位置: ${message.path[0]} - 错误提示: ${message.message}`,
+      'warn'
+    )
     return
   }
   const res = await useComponentMessageStore().alert(
@@ -47,17 +48,16 @@ const handlePublishGalgame = async () => {
   }
 
   const formData = new FormData()
-  formData.append('vndbId', vndbId.value)
-  formData.append('contentLimit', contentLimit.value)
-  formData.append('name', JSON.stringify(name.value))
-  formData.append('banner', banner!)
-  formData.append('introduction', JSON.stringify(introduction.value))
-  formData.append('series', JSON.stringify(series.value.slice(0, 17)))
-  formData.append('aliases', JSON.stringify(aliases.value.slice(0, 17)))
-  formData.append('official', JSON.stringify(official.value.slice(0, 17)))
-  formData.append('engine', JSON.stringify(engine.value.slice(0, 17)))
-  formData.append('tags', JSON.stringify(tags.value.slice(0, 17)))
-
+  for (const key in data) {
+    const value = data[key]
+    if (value !== null && value !== undefined) {
+      if (value instanceof Blob) {
+        formData.append(key, value)
+      } else {
+        formData.append(key, String(value))
+      }
+    }
+  }
   const gid = await $fetch('/api/galgame', {
     method: 'POST',
     body: formData,

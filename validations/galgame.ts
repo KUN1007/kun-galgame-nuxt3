@@ -32,44 +32,93 @@ export const getGalgameDuplicateSchema = z.object({
     .refine((s) => VNDBPattern.test(s), { message: '非法的 VNDB ID 格式' })
 })
 
-export const createGalgameSchema = z.object({
-  vndbId: z
-    .string()
-    .min(2)
-    .max(10)
-    .refine((value) => VNDBPattern.test(value), {
-      message: '非法的 VNDB ID 格式'
-    }),
-  seriesId: z.coerce.number().min(1).max(9999999).nullable(),
-  officialId: z.coerce.number().min(1).max(9999999),
-  engineId: z.coerce.number().min(1).max(9999999),
-  tagId: z
-    .array(z.coerce.number().min(1).max(9999999))
-    .min(1)
-    .max(107, { message: '每个 Galgame 最多 107 个标签' }),
-  name_en_us: z.string().min(1).max(100007, { message: '游戏名称最多 233 字' }),
-  name_ja_jp: z.string().min(1).max(100007, { message: '游戏名称最多 233 字' }),
-  name_zh_cn: z.string().min(1).max(100007, { message: '游戏名称最多 233 字' }),
-  name_zh_tw: z.string().min(1).max(100007, { message: '游戏名称最多 233 字' }),
-  intro_en_us: z
-    .string()
-    .min(1)
-    .max(100007, { message: '游戏介绍最多 100007 字' }),
-  intro_ja_jp: z
-    .string()
-    .min(1)
-    .max(100007, { message: '游戏介绍最多 100007 字' }),
-  intro_zh_cn: z
-    .string()
-    .min(1)
-    .max(100007, { message: '游戏介绍最多 100007 字' }),
-  intro_zh_tw: z
-    .string()
-    .min(1)
-    .max(100007, { message: '游戏介绍最多 100007 字' }),
-  contentLimit: z.enum(['sfw', 'nsfw']),
-  banner: z.unknown()
-})
+export const createGalgameSchema = z
+  .object({
+    vndbId: z
+      .string()
+      .min(2)
+      .max(10)
+      .refine((value) => VNDBPattern.test(value), {
+        message: '非法的 VNDB ID 格式'
+      }),
+    name_en_us: z
+      .string()
+      .max(100007, { message: '游戏名称最多 233 字' })
+      .default(''),
+    name_ja_jp: z
+      .string()
+      .max(100007, { message: '游戏名称最多 233 字' })
+      .default(''),
+    name_zh_cn: z
+      .string()
+      .max(100007, { message: '游戏名称最多 233 字' })
+      .default(''),
+    name_zh_tw: z
+      .string()
+      .max(100007, { message: '游戏名称最多 233 字' })
+      .default(''),
+    intro_en_us: z
+      .string()
+      .max(100007, { message: '游戏介绍最多 100007 字' })
+      .default(''),
+    intro_ja_jp: z
+      .string()
+      .max(100007, { message: '游戏介绍最多 100007 字' })
+      .default(''),
+    intro_zh_cn: z
+      .string()
+      .max(100007, { message: '游戏介绍最多 100007 字' })
+      .default(''),
+    intro_zh_tw: z
+      .string()
+      .max(100007, { message: '游戏介绍最多 100007 字' })
+      .default(''),
+    contentLimit: z.enum(['sfw', 'nsfw']),
+    aliases: z.string().default(''),
+    banner: z.unknown()
+  })
+  .superRefine((data, ctx) => {
+    const aliasArray = data.aliases.split(',')
+    const isAliasLengthValid = aliasArray.length < 30
+    if (!isAliasLengthValid) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Galgame 最多有 30 个别名',
+        path: ['aliases']
+      })
+    }
+    const hasInvalidAlias = aliasArray.some((a) => a.length > 500)
+    if (hasInvalidAlias) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '每个 Galgame 别名最多 500 个字符',
+        path: ['aliases']
+      })
+    }
+
+    const hasAtLeastOneName =
+      data.name_en_us || data.name_ja_jp || data.name_zh_cn || data.name_zh_tw
+    if (!hasAtLeastOneName) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '至少需要填写一个语言版本的游戏名称',
+        path: ['name_zh_cn']
+      })
+    }
+
+    const hasAtLeastOneIntro =
+      data.intro_en_us ||
+      data.intro_ja_jp ||
+      data.intro_zh_cn ||
+      data.intro_zh_tw
+    if (!hasAtLeastOneIntro) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '至少需要填写一个语言版本的游戏介绍',
+        path: ['intro_zh_cn']
+      })
+    }
+  })
 
 export const updateGalgameBannerSchema = z.object({
   galgameId: z.coerce.number().min(1).max(9999999)

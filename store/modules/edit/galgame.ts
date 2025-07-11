@@ -19,11 +19,7 @@ export const usePersistEditGalgameStore = defineStore('KUNGalgameEditGalgame', {
       'zh-tw': ''
     },
     contentLimit: 'sfw',
-    aliases: [],
-    official: [],
-    engine: [],
-    tags: [],
-    series: []
+    aliases: []
   }),
   actions: {}
 })

@@ -14,7 +14,7 @@ export const uploadGalgameBanner = async (
     .toBuffer()
 
   if (!checkBufferSize(miniBanner, 1.007)) {
-    return 10605
+    return '图片压缩后大小超过 1.007 MB'
   }
 
   const bucketName = `image/galgame/${gid}/banner`

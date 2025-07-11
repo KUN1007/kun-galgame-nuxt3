@@ -3,11 +3,7 @@ export interface GalgameStorePersist {
   name: KunLanguage
   introduction: KunLanguage
   contentLimit: string
-  series: string[]
   aliases: string[]
-  official: string[]
-  engine: string[]
-  tags: string[]
 }
 
 export interface GalgameStoreTemp {
@@ -15,9 +11,5 @@ export interface GalgameStoreTemp {
   name: KunLanguage
   introduction: KunLanguage
   contentLimit: string
-  series: string[]
   alias: string[]
-  official: string[]
-  engine: string[]
-  tags: string[]
 }

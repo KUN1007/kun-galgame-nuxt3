@@ -55,10 +55,6 @@ export default defineEventHandler(async (event) => {
       },
       contentLimit: pr.galgame.content_limit,
       alias: pr.galgame.alias.map((a) => a.name)
-      // TODO:
-      // official: pr.galgame.official.map((o) => o.url),
-      // engine: pr.galgame.engine.map((e) => e.name),
-      // tags: pr.galgame.tag.map((t) => t.name)
     }
   }
 

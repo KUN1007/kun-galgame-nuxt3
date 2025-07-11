@@ -174,9 +174,9 @@ watch(
       <div class="flex items-center justify-between text-sm">
         <slot name="footer" />
 
-        <div class="flex items-center gap-2">
+        <div class="flex shrink-0 items-center gap-2">
           <KunBadge color="success">
-            <KunIconMarkdown />
+            <KunIconMarkdown class="text-success-700 dark:text-success" />
             Markdown 支持
           </KunBadge>
           <span>
