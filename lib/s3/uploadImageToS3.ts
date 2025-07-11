@@ -11,7 +11,7 @@ export const s3 = new S3Client({
 
 export const uploadImageToS3 = async (key: string, fileBuffer: Buffer) => {
   const uploadCommand = new PutObjectCommand({
-    Bucket: process.env.KUN_VISUAL_NOVEL_S3_STORAGE_BUCKET_NAME!,
+    Bucket: process.env.KUN_VISUAL_NOVEL_IMAGE_BED_BUCKET!,
     Key: key,
     Body: fileBuffer,
     ContentType: 'application/octet-stream'

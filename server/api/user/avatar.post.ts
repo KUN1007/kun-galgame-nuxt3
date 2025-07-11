@@ -1,33 +1,28 @@
 import prisma from '~/prisma/prisma'
 import env from '~/server/env/dotenv'
 import sharp from 'sharp'
-import { uploadImage } from '~/server/utils/uploadImage'
+import { uploadImageToS3 } from '~/lib/s3/uploadImageToS3'
+import { KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT } from '~/config/app'
 import { checkBufferSize } from '~/server/utils/checkBufferSize'
 
 const resizeUserAvatar = async (name: string, avatar: Buffer, uid: number) => {
   const miniAvatar = await sharp(avatar)
     .resize(100, 100, {
-      fit: 'contain',
-      background: { r: 0, g: 0, b: 0, alpha: 0 }
+      fit: 'inside',
+      withoutEnlargement: true
     })
     .webp({ quality: 77 })
     .toBuffer()
 
-  if (!checkBufferSize(miniAvatar, 1.007)) {
-    return '图片压缩后大小超过 1 MB'
+  if (!checkBufferSize(miniAvatar, KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT)) {
+    return `图片压缩后大小超过 ${KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT} MB`
   }
 
   const miniAvatarName = `${name}-100`
-  const bucketName = `image/avatar/user_${uid}`
+  const bucketName = `avatar/user_${uid}`
 
-  const res1 = await uploadImage(avatar, `${name}.webp`, bucketName)
-  const res2 = await uploadImage(
-    miniAvatar,
-    `${miniAvatarName}.webp`,
-    bucketName
-  )
-
-  return !!(res1 && res2)
+  await uploadImageToS3(`${bucketName}/${name}.webp`, avatar)
+  await uploadImageToS3(`${bucketName}/${miniAvatarName}.webp`, miniAvatar)
 }
 
 export default defineEventHandler(async (event) => {
@@ -42,10 +37,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const res = await resizeUserAvatar('avatar', avatarFile[0].data, userInfo.uid)
-  if (!res) {
-    return kunError(event, '上传图片错误')
-  }
-  if (typeof res === 'string') {
+  if (res) {
     return kunError(event, res)
   }
 

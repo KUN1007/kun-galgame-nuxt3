@@ -1,6 +1,7 @@
 import sharp from 'sharp'
 import env from '~/server/env/dotenv'
-import { uploadImage } from '~/server/utils/uploadImage'
+import { uploadImageToS3 } from '~/lib/s3/uploadImageToS3'
+import { KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT } from '~/config/app'
 import { checkBufferSize } from '~/server/utils/checkBufferSize'
 import prisma from '~/prisma/prisma'
 
@@ -13,13 +14,13 @@ const compressImage = async (name: string, image: Buffer, uid: number) => {
     .webp({ quality: 77 })
     .toBuffer()
 
-  if (!checkBufferSize(miniImage, 1.007)) {
-    return '压缩后图片体积大小超过 1 MB'
+  if (!checkBufferSize(miniImage, KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT)) {
+    return `图片压缩后大小超过 ${KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT} MB`
   }
 
-  const bucketName = `image/topic/user_${uid}`
-  const res1 = await uploadImage(miniImage, `${name}.webp`, bucketName)
-  return !!res1
+  const bucketName = `topic/user_${uid}`
+
+  await uploadImageToS3(`${bucketName}/${name}.webp`, miniImage)
 }
 
 export default defineEventHandler(async (event) => {
@@ -48,10 +49,7 @@ export default defineEventHandler(async (event) => {
   const newFileName = `${userInfo.name}-${Date.now()}`
 
   const res = await compressImage(newFileName, imageFile[0].data, userInfo.uid)
-  if (!res) {
-    return kunError(event, '上传图片错误')
-  }
-  if (typeof res === 'string') {
+  if (res) {
     return kunError(event, res)
   }
 

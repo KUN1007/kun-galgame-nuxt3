@@ -94,10 +94,7 @@ export default defineEventHandler(async (event) => {
         Buffer.from(result.banner as Buffer),
         newGalgame.id
       )
-      if (!res) {
-        return kunError(event, 10116)
-      }
-      if (typeof res === 'number') {
+      if (res) {
         return kunError(event, res)
       }
 

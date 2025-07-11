@@ -29,20 +29,17 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '您没有权限更改这个 Galgame 的预览图')
   }
 
+  const res = await uploadGalgameBanner(
+    Buffer.from(bannerFile[0].data),
+    input.galgameId
+  )
+  if (res) {
+    return kunError(event, res)
+  }
+
+  const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${galgame.id}/banner/banner.webp`
+
   return await prisma.$transaction(async (prisma) => {
-    const res = await uploadGalgameBanner(
-      Buffer.from(bannerFile[0].data),
-      input.galgameId
-    )
-    if (!res) {
-      return kunError(event, '上传 Galgame 预览图错误')
-    }
-    if (typeof res === 'string') {
-      return kunError(event, res)
-    }
-
-    const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${galgame.id}/banner/banner.webp`
-
     await prisma.galgame.update({
       where: { id: galgame.id },
       data: { banner: imageLink }

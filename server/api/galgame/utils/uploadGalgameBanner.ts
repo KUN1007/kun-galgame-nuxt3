@@ -1,26 +1,26 @@
 import sharp from 'sharp'
+import { uploadImageToS3 } from '~/lib/s3/uploadImageToS3'
+import { KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT } from '~/config/app'
 
 export const uploadGalgameBanner = async (
   bannerBuffer: Buffer,
-  gid: number
+  galgameId: number
 ) => {
   const banner = await sharp(bannerBuffer).toBuffer()
   const miniBanner = await sharp(bannerBuffer)
     .resize(460, 259, {
-      fit: 'contain',
-      background: { r: 0, g: 0, b: 0, alpha: 0 }
+      fit: 'inside',
+      withoutEnlargement: true
     })
     .webp({ quality: 77 })
     .toBuffer()
 
-  if (!checkBufferSize(miniBanner, 1.007)) {
-    return '图片压缩后大小超过 1.007 MB'
+  if (!checkBufferSize(banner, KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT)) {
+    return `图片压缩后大小超过 ${KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT} MB`
   }
 
-  const bucketName = `image/galgame/${gid}/banner`
+  const bucketName = `galgame/${galgameId}/banner`
 
-  const res1 = await uploadImage(banner, 'banner.webp', bucketName)
-  const res2 = await uploadImage(miniBanner, 'banner-mini.webp', bucketName)
-
-  return !!(res1 && res2)
+  await uploadImageToS3(`${bucketName}/banner.webp`, banner)
+  await uploadImageToS3(`${bucketName}/banner-mini.webp`, miniBanner)
 }
