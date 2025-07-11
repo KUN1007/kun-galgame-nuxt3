@@ -10,12 +10,21 @@ defineProps<{
 
 <template>
   <div class="space-y-3">
-    <KunTab
-      :items="galgameIntroductionLanguageTabs"
-      v-model="introductionLanguage"
-      size="sm"
-      variant="underlined"
-    />
+    <KunHeader
+      name="游戏介绍"
+      description="Galgame 的简体中文, 繁体中文, 英语, 日语 介绍。英语介绍来源于 VNDB, 日语介绍来源于游戏官网"
+      scale="h2"
+      :is-show-divider="false"
+    >
+      <template #endContent>
+        <KunTab
+          :items="galgameIntroductionLanguageTabs"
+          v-model="introductionLanguage"
+          size="sm"
+          variant="underlined"
+        />
+      </template>
+    </KunHeader>
 
     <div
       class="bg-primary/20 text-primary rounded-lg p-3"

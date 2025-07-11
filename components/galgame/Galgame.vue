@@ -18,26 +18,14 @@ const activeTab = ref<GalgameDetailSectionTabType>('comment')
   <div class="space-y-3">
     <GalgameHeader :galgame="galgame" />
 
-    <div class="flex gap-3">
+    <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
       <KunCard
         :is-hoverable="false"
         :is-transparent="false"
-        content-class="space-y-6"
+        content-class="space-y-6 relative"
+        class-name="w-full h-full md:col-span-2"
       >
         <GalgameIntroduction :introduction="galgame.introduction" />
-
-        <div class="space-y-3">
-          <p>本游戏项目的贡献者</p>
-          <div class="flex items-center gap-1">
-            <KunTooltip
-              v-for="(user, index) in galgame.contributor"
-              :key="index"
-              :text="user.name"
-            >
-              <KunAvatar :user="user" />
-            </KunTooltip>
-          </div>
-        </div>
 
         <KunDivider />
 
@@ -63,7 +51,31 @@ const activeTab = ref<GalgameDetailSectionTabType>('comment')
         </KunCard>
       </KunCard>
 
-      <GalgameInfo :galgame="galgame" />
+      <div class="space-y-3 md:col-span-1">
+        <GalgameInfo :galgame="galgame" />
+
+        <KunCard :is-hoverable="false" :is-transparent="false">
+          <GalgameHistory />
+        </KunCard>
+
+        <KunCard :is-hoverable="false" :is-transparent="false">
+          <KunHeader
+            name="贡献者"
+            description="本游戏项目的贡献者, 计 Galgame 资源贡献"
+            scale="h3"
+            :is-show-divider="false"
+          />
+          <div class="flex items-center gap-1">
+            <KunTooltip
+              v-for="(user, index) in galgame.contributor"
+              :key="index"
+              :text="user.name"
+            >
+              <KunAvatar :user="user" />
+            </KunTooltip>
+          </div>
+        </KunCard>
+      </div>
     </div>
   </div>
 </template>

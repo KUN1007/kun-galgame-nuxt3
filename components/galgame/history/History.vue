@@ -11,7 +11,7 @@ const gid = computed(() => {
 
 const pageData = reactive({
   page: 1,
-  limit: 7,
+  limit: 10,
   galgameId: gid.value
 })
 
@@ -30,7 +30,7 @@ const { data, status } = await useLazyFetch(
     <KunHeader
       name="贡献历史"
       description="这里记录了这个 Galgame 项目发生的所有更改历史, 资源下载链接更改历史不计"
-      scale="h2"
+      scale="h3"
     />
 
     <KunLoading v-if="status === 'pending'" />
@@ -63,6 +63,7 @@ const { data, status } = await useLazyFetch(
     </div>
 
     <KunPagination
+      v-if="data.totalCount > 10 || data.totalCount === 10"
       v-model:current-page="pageData.page"
       :total-page="Math.ceil(data.totalCount / pageData.limit)"
       :is-loading="status === 'pending'"

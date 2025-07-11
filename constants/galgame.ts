@@ -179,11 +179,11 @@ export const KUN_GALGAME_RESOURCE_PULL_REQUEST_I18N_FIELD_MAP: Record<
 
 export const galgameIntroductionLanguageTabs: KunTabItem[] = [
   {
-    textValue: '英语标题',
+    textValue: '英语介绍',
     value: 'en-us'
   },
   {
-    textValue: '日语标题',
+    textValue: '日语介绍',
     value: 'ja-jp'
   },
   {

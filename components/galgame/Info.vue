@@ -9,82 +9,13 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex flex-col space-y-3">
-    <div>
-      <h4>标签</h4>
-      <GalgameNull v-if="!galgame.tags.length" />
-      <div class="space-y-1 space-x-1">
-        <KunBadge
-          v-for="(tag, index) in galgame.tags"
-          :key="index"
-          color="primary"
-        >
-          {{ tag }}
-        </KunBadge>
-      </div>
-    </div>
+  <KunCard :is-hoverable="false" :is-transparent="false">
+    <KunHeader
+      name="游戏信息"
+      description="Galgame 的标签, 引擎 等必要信息"
+      scale="h3"
+    />
 
-    <div>
-      <h4>别名</h4>
-      <GalgameNull v-if="!galgame.alias.length" />
-      <div class="space-y-1 space-x-1">
-        <KunBadge
-          v-for="(alias, index) in galgame.alias"
-          :key="index"
-          color="secondary"
-        >
-          {{ alias }}
-        </KunBadge>
-      </div>
-    </div>
-
-    <div>
-      <h4>官网</h4>
-      <GalgameNull v-if="!galgame.official.length" />
-      <template v-if="galgame.official.length">
-        <KunLink
-          v-for="(kun, index) in galgame.official"
-          :key="index"
-          :to="kun"
-          :is-show-anchor-icon="true"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {{ kun }}
-        </KunLink>
-      </template>
-    </div>
-
-    <div>
-      <h4>平台</h4>
-      <GalgameNull v-if="!galgame.platform.length" />
-      <div class="space-y-1 space-x-1">
-        <KunBadge
-          v-for="(platform, index) in galgame.platform"
-          :key="index"
-          color="success"
-        >
-          <KunIcon
-            class="icon"
-            :name="GALGAME_RESOURCE_PLATFORM_ICON_MAP[platform]"
-          />
-          {{ KUN_GALGAME_RESOURCE_PLATFORM_MAP[platform] }}
-        </KunBadge>
-      </div>
-    </div>
-
-    <div>
-      <h4>引擎</h4>
-      <GalgameNull v-if="!galgame.engine.length" />
-      <div class="space-y-1 space-x-1">
-        <KunBadge
-          color="warning"
-          v-for="(engine, index) in galgame.engine"
-          :key="index"
-        >
-          {{ engine }}
-        </KunBadge>
-      </div>
-    </div>
-  </div>
+    <KunNull description="TODO:" />
+  </KunCard>
 </template>

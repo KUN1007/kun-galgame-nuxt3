@@ -4,7 +4,7 @@ withDefaults(
     name?: string
     description?: string
     isShowDivider?: boolean
-    scale?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+    scale?: 'h1' | 'h2' | 'h3'
   }>(),
   {
     name: '',
@@ -19,7 +19,19 @@ withDefaults(
   <div class="space-y-2">
     <div class="flex items-center justify-between">
       <div class="space-y-2">
-        <component :is="scale" class="text-2xl font-medium">
+        <component
+          :is="scale"
+          :class="
+            cn(
+              'font-medium',
+              scale === 'h1'
+                ? 'text-3xl'
+                : scale === 'h2'
+                  ? 'text-2xl'
+                  : 'text-xl'
+            )
+          "
+        >
           <span v-if="name">{{ name }}</span>
           <slot name="title" />
         </component>
