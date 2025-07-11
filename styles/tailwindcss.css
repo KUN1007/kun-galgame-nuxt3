@@ -526,12 +526,11 @@
 
   /* Custom scrollbar-hide syntax */
   .scrollbar-hide {
-    -ms-overflow-style: 'none';
-    scrollbar-width: 'none';
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   .scrollbar-hide::-webkit-scrollbar {
-    width: 0;
-    height: 0;
+    display: none;
   }
 }

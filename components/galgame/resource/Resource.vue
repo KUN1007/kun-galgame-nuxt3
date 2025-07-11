@@ -12,6 +12,7 @@ const { data, status, refresh } = await useLazyFetch(
   `/api/galgame/${gid.value}/resource/all`,
   {
     method: 'GET',
+    query: { galgameId: gid.value },
     ...kungalgameResponseHandler
   }
 )
@@ -89,7 +90,7 @@ watch(
     <template v-if="status !== 'pending'">
       <GalgameResourceLink
         v-for="resource in data"
-        :key="resource.grid"
+        :key="resource.id"
         :link="resource"
         :refresh="refresh"
       />

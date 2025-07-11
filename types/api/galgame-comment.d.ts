@@ -4,8 +4,8 @@ export interface GalgameComment {
   created: number
   content: string
   likeCount: number
-  isLike: boolean
+  isLiked: boolean
 
   user: KunUser
-  targetUser?: KunUser
+  targetUser: KunUser | null
 }

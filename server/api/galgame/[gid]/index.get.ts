@@ -125,7 +125,7 @@ export default defineEventHandler(async (event) => {
     likeCount: galgame._count.like,
     isLiked: galgame.like.length > 0,
     favoriteCount: galgame._count.favorite,
-    isFavorite: galgame.favorite.length > 0,
+    isFavorited: galgame.favorite.length > 0,
     alias: galgame.alias.map((a) => a.name),
     official: galgame.official.map((o) => o.official.name),
     engine: galgame.engine.map((e) => e.engine.name),

@@ -38,7 +38,7 @@ export interface GalgameDetail {
   likeCount: number
   isLiked: boolean
   favoriteCount: number
-  isFavorite: boolean
+  isFavorited: boolean
   alias: string[]
   official: string[]
   engine: string[]

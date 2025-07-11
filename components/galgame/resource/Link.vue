@@ -23,13 +23,13 @@ const { id } = usePersistUserStore()
 const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
 const isFetching = ref(false)
 
-const handleGetDetail = async (grid: number) => {
+const handleGetDetail = async (galgameResourceId: number) => {
   if (details.value) {
     return
   }
   isFetching.value = true
-  const result = await $fetch(`/api/galgame/${props.link.gid}/resource`, {
-    query: { grid },
+  const result = await $fetch(`/api/galgame/${props.link.galgameId}/resource`, {
+    query: { galgameResourceId },
     method: 'GET',
     ...kungalgameResponseHandler
   })
@@ -40,7 +40,10 @@ const handleGetDetail = async (grid: number) => {
   }
 }
 
-const handleMarkValid = async (gid: number, grid: number) => {
+const handleMarkValid = async (
+  galgameId: number,
+  galgameResourceId: number
+) => {
   const res = await useComponentMessageStore().alert(
     '您确定重新标记资源链接有效吗？',
     '若您修复了资源链接，您可以重新标记资源链接有效。'
@@ -49,9 +52,9 @@ const handleMarkValid = async (gid: number, grid: number) => {
     return
   }
 
-  const result = await $fetch(`/api/galgame/${gid}/resource/valid`, {
+  const result = await $fetch(`/api/galgame/${galgameId}/resource/valid`, {
     method: 'PUT',
-    query: { grid },
+    body: { galgameResourceId },
     watch: false,
     ...kungalgameResponseHandler
   })
@@ -104,28 +107,30 @@ watch(
         </KunButton>
 
         <KunButton
-          v-if="uid === link.uid && link.status === 1"
-          @click="handleMarkValid(link.gid, link.grid)"
+          size="sm"
+          v-if="id === link.user.id && link.status === 1"
+          @click="handleMarkValid(link.galgameId, link.id)"
           :loading="isFetching"
         >
-          标记有效
+          重新标记有效
         </KunButton>
         <KunButton
           size="sm"
           variant="flat"
-          v-if="!details && link.grid !== rewriteResourceId"
-          @click="handleGetDetail(link.grid)"
+          v-if="!details && link.id !== rewriteResourceId"
+          @click="handleGetDetail(link.id)"
           :loading="isFetching"
         >
           获取链接
         </KunButton>
 
         <GalgameResourceLike
-          v-if="uid !== link.uid"
-          :gid="link.gid"
-          :grid="link.grid"
-          :to-uid="link.uid"
-          :likes="link.likes"
+          v-if="id !== link.user.id"
+          :galgame-id="link.galgameId"
+          :galgame-resource-id="link.id"
+          :target-user-id="link.user.id"
+          :is-liked="link.isLiked"
+          :like-count="link.likeCount"
         />
 
         <KunTooltip text="举报违规">
@@ -133,7 +138,7 @@ watch(
             :is-icon-only="true"
             color="danger"
             variant="light"
-            v-if="uid !== link.uid"
+            v-if="id !== link.user.id"
             href="/report"
           >
             <KunIcon name="lucide:triangle-alert" />

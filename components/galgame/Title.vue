@@ -5,7 +5,7 @@ const props = defineProps<{
   galgame: GalgameDetail
 }>()
 
-const { uid, roles } = usePersistUserStore()
+const { id, role } = usePersistUserStore()
 
 const initialImageUrl = ref('')
 const isShowUpload = ref(false)
@@ -13,9 +13,7 @@ const route = useRoute()
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
-const hasPermission = computed(
-  () => props.galgame.user.uid === uid || roles >= 2
-)
+const hasPermission = computed(() => props.galgame.user.id === id || role >= 2)
 
 const handleChangeBanner = async () => {
   const imageBlob = await getImage('kun-galgame-rewrite-banner')

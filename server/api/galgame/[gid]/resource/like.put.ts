@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
   const uid = userInfo.uid
 
   const resource = await prisma.galgame_resource.findUnique({
-    where: { id: input.galgameResourceId, user_id: uid },
+    where: { id: input.galgameResourceId },
     include: {
       like: {
         where: {

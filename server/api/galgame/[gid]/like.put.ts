@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
   const galgameId = input.galgameId
 
   const galgame = await prisma.galgame.findUnique({
-    where: { id: galgameId, user_id: uid, status: { not: 1 } },
+    where: { id: galgameId, status: { not: 1 } },
     include: {
       like: {
         where: {
@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
     }
   })
   if (!galgame) {
-    return 10211
+    return kunError(event, '未找到这个 Galgame')
   }
 
   const isLikedGalgame = galgame.like.length > 0
@@ -64,7 +64,7 @@ export default defineEventHandler(async (event) => {
           prisma,
           uid,
           galgame.user_id,
-          'favorite',
+          'liked',
           galgame.name_zh_cn ||
             galgame.name_zh_tw ||
             galgame.name_ja_jp ||

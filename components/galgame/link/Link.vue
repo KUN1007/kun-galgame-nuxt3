@@ -18,6 +18,7 @@ const { data, status, refresh } = await useLazyFetch(
   `/api/galgame/${gid.value}/link/all`,
   {
     method: 'GET',
+    query: { galgameId: gid.value },
     watch: false,
     ...kungalgameResponseHandler
   }
@@ -102,7 +103,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
 
     <div class="space-y-2" v-if="data">
       <KunCard :is-hoverable="false" v-for="(link, index) in data" :key="index">
-        <p>{{ link.name }}</p>
+        <p>{{ link.link }}</p>
         <KunLink :to="link.link" target="_blank" rel="noopener noreferrer">
           {{ link.link }}
           <KunIcon name="lucide:external-link" />
@@ -111,8 +112,8 @@ const handleDeleteLink = async (gid: number, glid: number) => {
             variant="light"
             color="danger"
             size="sm"
-            v-if="id === link.uid"
-            @click="handleDeleteLink(link.gid, link.glid)"
+            v-if="id === link.user.id"
+            @click="handleDeleteLink(link.galgameId, link.id)"
             :loading="isFetching"
           >
             <KunIcon name="lucide:trash-2" />

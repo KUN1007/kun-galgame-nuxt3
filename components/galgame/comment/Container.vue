@@ -1,19 +1,20 @@
 <script setup lang="ts">
-const { userData, toUser } = defineProps<{
+const props = defineProps<{
   userData: KunUser[]
-  toUser: KunUser
+  targetUser: KunUser
 }>()
 
 const route = useRoute()
 const { commentToUid } = storeToRefs(useTempGalgameResourceStore())
 
-const username = ref(toUser.name)
+const username = ref(props.targetUser.name)
 const gid = parseInt((route.params as { gid: string }).gid)
 
 const pageData = reactive({
+  galgameId: gid,
   page: 1,
   limit: 30,
-  order: 'desc'
+  sortOrder: 'desc'
 })
 
 const { data, status, refresh } = await useLazyFetch(
@@ -28,10 +29,10 @@ const { data, status, refresh } = await useLazyFetch(
 const handleSetUserInfo = (name: string) => {
   username.value = name
   commentToUid.value =
-    userData.find((user) => user.name === name)?.uid || toUser.uid
+    props.userData.find((user) => user.name === name)?.id || props.targetUser.id
 }
 
-onMounted(() => (commentToUid.value = toUser.uid))
+onMounted(() => (commentToUid.value = props.targetUser.id))
 </script>
 
 <template>
@@ -44,7 +45,7 @@ onMounted(() => (commentToUid.value = toUser.uid))
       </template>
     </KunHeader>
 
-    <div class="flex items-center gap-2" v-if="toUser">
+    <div class="flex items-center gap-2" v-if="targetUser">
       <div class="whitespace-nowrap">评论给</div>
       <KunSelect
         :model-value="username"
@@ -58,22 +59,22 @@ onMounted(() => (commentToUid.value = toUser.uid))
     </div>
 
     <div class="space-y-3" v-if="data">
-      <GalgameCommentPanel :to-user="toUser" :refresh="refresh">
+      <GalgameCommentPanel :to-user="targetUser" :refresh="refresh">
         <div v-if="data.totalCount" class="flex items-center gap-2">
           <KunButton
             :is-icon-only="true"
-            :variant="pageData.order === 'desc' ? 'flat' : 'light'"
+            :variant="pageData.sortOrder === 'desc' ? 'flat' : 'light'"
             size="lg"
-            @click="pageData.order = 'desc'"
+            @click="pageData.sortOrder = 'desc'"
           >
             <KunIcon class="text-inherit" name="lucide:arrow-down" />
           </KunButton>
 
           <KunButton
             :is-icon-only="true"
-            :variant="pageData.order === 'asc' ? 'flat' : 'light'"
+            :variant="pageData.sortOrder === 'asc' ? 'flat' : 'light'"
             size="lg"
-            @click="pageData.order = 'asc'"
+            @click="pageData.sortOrder = 'asc'"
           >
             <KunIcon class="text-inherit" name="lucide:arrow-up" />
           </KunButton>
@@ -90,7 +91,7 @@ onMounted(() => (commentToUid.value = toUser.uid))
       <div class="space-y-3" v-if="status !== 'pending' && data.totalCount">
         <GalgameComment
           v-for="comment in data.commentData"
-          :key="comment.gcid"
+          :key="comment.id"
           :comment="comment"
           :refresh="refresh"
         />

@@ -8,7 +8,7 @@ export interface GalgameResource {
   size: string
   status: number
   likeCount: number
-  isLike: boolean
+  isLiked: boolean
   created: Date | string
 }
 

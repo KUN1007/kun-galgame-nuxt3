@@ -44,7 +44,9 @@ const defaultResourceLink: GalgameResourceStoreTemp = {
   note: ''
 }
 
-const resourceLink = ref<GalgameResourceStoreTemp>({ ...defaultResourceLink })
+const resourceLink = ref<GalgameResourceStoreTemp>({
+  ...defaultResourceLink
+})
 
 const handlePublishResourceLink = async (method: 'POST' | 'PUT') => {
   if (!checkGalgameResourcePublish(resourceLink.value)) {
@@ -54,8 +56,11 @@ const handlePublishResourceLink = async (method: 'POST' | 'PUT') => {
   isFetching.value = true
   const result = await $fetch(`/api/galgame/${gid.value}/resource`, {
     method,
-    query: rewriteResourceId.value ? { grid: rewriteResourceId.value } : {},
-    body: resourceLink.value,
+    body: {
+      ...resourceLink.value,
+      galgameId: gid.value,
+      galgameResourceId: rewriteResourceId.value
+    },
     watch: false,
     ...kungalgameResponseHandler
   })

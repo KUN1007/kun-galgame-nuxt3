@@ -42,7 +42,7 @@ export default defineEventHandler(async (event) => {
     size: resource.size,
     status: resource.status,
     likeCount: resource._count.like,
-    isLike: resource.like.length > 0,
+    isLiked: resource.like.length > 0,
     created: resource.created
   }))
 

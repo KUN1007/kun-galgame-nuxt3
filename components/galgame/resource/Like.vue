@@ -1,23 +1,15 @@
 <script setup lang="ts">
 const props = defineProps<{
-  gid: number
-  grid: number
-  toUid: number
-
-  likes: number[]
+  galgameId: number
+  galgameResourceId: number
+  targetUserId: number
+  isLiked: boolean
+  likeCount: number
 }>()
 
 const { id } = usePersistUserStore()
-const isLiked = ref(props.likes.includes(id))
-const likesCount = ref(props.likes.length)
-
-watch(
-  () => props.likes,
-  (newLikes) => {
-    isLiked.value = newLikes.includes(id)
-    likesCount.value = newLikes.length
-  }
-)
+const isLiked = ref(props.isLiked)
+const likesCount = ref(props.likeCount)
 
 const likeResource = async () => {
   if (isLiked.value) {
@@ -25,9 +17,9 @@ const likeResource = async () => {
     return
   }
 
-  const result = await $fetch(`/api/galgame/${props.gid}/resource/like`, {
+  const result = await $fetch(`/api/galgame/${props.galgameId}/resource/like`, {
     method: 'PUT',
-    query: { grid: props.grid },
+    body: { galgameResourceId: props.galgameResourceId },
     watch: false,
     ...kungalgameResponseHandler
   })

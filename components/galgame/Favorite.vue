@@ -1,32 +1,33 @@
 <script setup lang="ts">
 const props = defineProps<{
-  gid: number
-  toUid: number
-  favoritesCount: number
-  isFavorite: boolean
+  galgameId: number
+  targetUserId: number
+  favoriteCount: number
+  isFavorited: boolean
 }>()
 
 const { id } = usePersistUserStore()
-const isFavorite = ref(props.isFavorite)
-const favoritesCount = ref(props.favoritesCount)
+const isFavorited = ref(props.isFavorited)
+const favoriteCount = ref(props.favoriteCount)
 
 const toggleFavoriteGalgame = async () => {
-  const result = await $fetch(`/api/galgame/${props.gid}/favorite`, {
+  const result = await $fetch(`/api/galgame/${props.galgameId}/favorite`, {
     method: 'PUT',
     watch: false,
+    body: { galgameId: props.galgameId },
     ...kungalgameResponseHandler
   })
 
   if (result) {
-    favoritesCount.value += isFavorite.value ? -1 : 1
+    favoriteCount.value += isFavorited.value ? -1 : 1
 
-    if (!isFavorite.value) {
+    if (!isFavorited.value) {
       useMessage(10526, 'success')
     } else {
       useMessage(10527, 'success')
     }
 
-    isFavorite.value = !isFavorite.value
+    isFavorited.value = !isFavorited.value
   }
 }
 
@@ -47,14 +48,14 @@ const handleClickFavorite = () => {
   <KunTooltip text="收藏">
     <KunButton
       :is-icon-only="true"
-      :variant="isFavorite ? 'flat' : 'light'"
-      :color="isFavorite ? 'secondary' : 'default'"
-      :size="favoritesCount ? 'md' : 'lg'"
+      :variant="isFavorited ? 'flat' : 'light'"
+      :color="isFavorited ? 'secondary' : 'default'"
+      :size="favoriteCount ? 'md' : 'lg'"
       class-name="gap-1"
       @click="handleClickFavorite"
     >
       <KunIcon name="lucide:heart" />
-      <span v-if="favoritesCount">{{ favoritesCount }}</span>
+      <span v-if="favoriteCount">{{ favoriteCount }}</span>
     </KunButton>
   </KunTooltip>
 </template>

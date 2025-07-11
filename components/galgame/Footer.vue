@@ -14,25 +14,25 @@ const galgame = inject<GalgameDetail>('galgame')
     </KunBadge>
 
     <div class="flex gap-1">
-      <KunTooltip :text="`浏览量: ${galgame.views}`">
+      <KunTooltip :text="`浏览量: ${galgame.view}`">
         <KunBadge size="md">
           <KunIcon name="lucide:eye" />
-          <span>{{ formatNumber(galgame.views) }}</span>
+          <span>{{ formatNumber(galgame.view) }}</span>
         </KunBadge>
       </KunTooltip>
 
       <GalgameLike
-        :gid="galgame.gid"
-        :to-uid="galgame.user.uid"
-        :likes-count="galgame.likes.count"
-        :is-liked="galgame.likes.isLiked"
+        :galgame-id="galgame.id"
+        :target-user-id="galgame.user.id"
+        :like-count="galgame.likeCount"
+        :is-liked="galgame.isLiked"
       />
 
       <GalgameFavorite
-        :gid="galgame.gid"
-        :to-uid="galgame.user.uid"
-        :favorites-count="galgame.favorites.count"
-        :is-favorite="galgame.favorites.isFavorite"
+        :galgame-id="galgame.id"
+        :target-user-id="galgame.user.id"
+        :favorite-count="galgame.favoriteCount"
+        :is-favorited="galgame.isFavorited"
       />
 
       <GalgameRewrite :galgame="galgame" />

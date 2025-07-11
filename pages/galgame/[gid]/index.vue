@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const uid = storeToRefs(usePersistUserStore()).uid.value
+const uid = storeToRefs(usePersistUserStore()).id.value
 const route = useRoute()
 
 const gid = computed(() => {
@@ -9,6 +9,7 @@ const gid = computed(() => {
 const { data } = await useFetch(`/api/galgame/${gid.value}`, {
   method: 'GET',
   watch: false,
+  query: { galgameId: gid.value },
   ...kungalgameResponseHandler
 })
 
@@ -57,7 +58,7 @@ if (galgame) {
       ogType: 'article',
       twitterImage: galgame.banner,
       twitterCard: 'summary_large_image',
-      articleAuthor: [`${kungal.domain.main}/user/${galgame.user.uid}/info`],
+      articleAuthor: [`${kungal.domain.main}/user/${galgame.user.id}/info`],
       articlePublishedTime: galgame.created.toString(),
       articleModifiedTime: galgame.updated.toString()
     })
@@ -66,7 +67,7 @@ if (galgame) {
       link: [
         {
           rel: 'canonical',
-          href: `${kungal.domain.main}/galgame/${galgame.gid}`
+          href: `${kungal.domain.main}/galgame/${galgame.id}`
         }
       ]
     })

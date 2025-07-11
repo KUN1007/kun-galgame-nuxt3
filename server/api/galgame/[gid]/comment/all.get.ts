@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
   const data = await prisma.galgame_comment.findMany({
     take: limit,
     skip,
-    where: { id: galgameId },
+    where: { galgame_id: galgameId },
     orderBy: { created: sortOrder },
     include: {
       like: {
@@ -52,9 +52,9 @@ export default defineEventHandler(async (event) => {
     galgameId: comment.galgame_id,
     content: comment.content,
     likeCount: comment._count.like,
-    isLike: comment.like.length > 0,
+    isLiked: comment.like.length > 0,
     user: comment.user,
-    toUser: comment.target_user,
+    targetUser: comment.target_user,
     created: new Date(comment.created).getTime()
   }))
 

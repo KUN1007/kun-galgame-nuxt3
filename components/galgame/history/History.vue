@@ -11,7 +11,8 @@ const gid = computed(() => {
 
 const pageData = reactive({
   page: 1,
-  limit: 7
+  limit: 7,
+  galgameId: gid.value
 })
 
 const { data, status } = await useLazyFetch(
@@ -51,7 +52,7 @@ const { data, status } = await useLazyFetch(
             {{ KUN_GALGAME_RESOURCE_PULL_REQUEST_TYPE_MAP[history.type] }}
           </span>
           <span class="text-default-500">
-            {{ formatTimeDifference(history.time) }}
+            {{ formatTimeDifference(history.created) }}
           </span>
         </div>
 

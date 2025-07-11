@@ -11,7 +11,10 @@ const props = defineProps<{
 }>()
 const isFetching = ref(false)
 
-const handleDeleteResource = async (gid: number, grid: number) => {
+const handleDeleteResource = async (
+  galgameId: number,
+  galgameResourceId: number
+) => {
   const res = await useComponentMessageStore().alert(
     '您确定删除 Galgame 资源链接吗？',
     '这将会扣除您发布 Galgame 资源获得的 5 萌萌点，并且扣除其它人对资源链接的点赞影响（萌萌点和点赞数减一），此操作不可撤销。'
@@ -20,9 +23,9 @@ const handleDeleteResource = async (gid: number, grid: number) => {
     return
   }
 
-  const result = await $fetch(`/api/galgame/${gid}/resource`, {
+  const result = await $fetch(`/api/galgame/${galgameId}/resource`, {
     method: 'DELETE',
-    query: { grid },
+    query: { galgameResourceId },
     watch: false,
     ...kungalgameResponseHandler
   })
@@ -47,12 +50,15 @@ const handleReportExpire = async (details: GalgameResourceDetails) => {
   }
 
   isFetching.value = true
-  const result = await $fetch(`/api/galgame/${details.gid}/resource/expired`, {
-    method: 'PUT',
-    query: { grid: details.grid },
-    watch: false,
-    ...kungalgameResponseHandler
-  })
+  const result = await $fetch(
+    `/api/galgame/${details.galgameId}/resource/expired`,
+    {
+      method: 'PUT',
+      body: { galgameResourceId: details.id },
+      watch: false,
+      ...kungalgameResponseHandler
+    }
+  )
   isFetching.value = false
 
   if (result) {
@@ -63,7 +69,7 @@ const handleReportExpire = async (details: GalgameResourceDetails) => {
 
 const handleRewriteResource = (details: GalgameResourceDetails) => {
   resources.value[0] = { ...details }
-  rewriteResourceId.value = details.grid
+  rewriteResourceId.value = details.id
 }
 </script>
 
@@ -74,11 +80,11 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
         <KunAvatar :user="details.user" />
         <span>{{ details.user.name }}</span>
         <span class="text-default-500 text-sm">
-          {{ formatTimeDifference(details.time) }}
+          {{ formatTimeDifference(details.created) }}
         </span>
       </div>
 
-      <div class="space-x-1" v-if="details.user.uid === uid">
+      <div class="space-x-1" v-if="details.user.id === id">
         <KunButton
           :is-icon-only="true"
           variant="light"
@@ -90,13 +96,13 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
           :is-icon-only="true"
           color="danger"
           variant="light"
-          @click="handleDeleteResource(details.gid, details.grid)"
+          @click="handleDeleteResource(details.galgameId, details.id)"
         >
           <KunIcon class="icon" name="lucide:trash-2" />
         </KunButton>
       </div>
 
-      <div class="other-btn" v-if="uid !== details.user.uid && !details.status">
+      <div class="other-btn" v-if="id !== details.user.id && !details.status">
         <KunButton
           variant="flat"
           color="danger"

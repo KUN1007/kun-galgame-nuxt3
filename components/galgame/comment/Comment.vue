@@ -11,12 +11,11 @@ const props = defineProps<{
 const galgame = inject<GalgameDetail>('galgame')
 
 const { commentToUid } = storeToRefs(useTempGalgameResourceStore())
-const { uid, roles } = usePersistUserStore()
+const { id, role } = usePersistUserStore()
 
 const isShowComment = ref(false)
 const isShowDelete = computed(
-  () =>
-    props.comment.user?.uid === uid || galgame?.user.uid === uid || roles >= 2
+  () => props.comment.user?.id === id || galgame?.user.id === id || role >= 2
 )
 
 const handleClickComment = (uid: number) => {
@@ -24,15 +23,18 @@ const handleClickComment = (uid: number) => {
   commentToUid.value = uid
 }
 
-const handleDeleteComment = async (gid: number, gcid: number) => {
+const handleDeleteComment = async (
+  galgameId: number,
+  galgameCommentId: number
+) => {
   const res = await useComponentMessageStore().alert('您确定删除评论吗？')
   if (!res) {
     return
   }
 
-  const result = await $fetch(`/api/galgame/${gid}/comment`, {
+  const result = await $fetch(`/api/galgame/${galgameId}/comment`, {
     method: 'DELETE',
-    query: { gcid },
+    query: { galgameCommentId },
     watch: false,
     ...kungalgameResponseHandler
   })
@@ -51,10 +53,13 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
     <div class="flex w-full flex-col space-y-2">
       <div class="flex flex-wrap items-center">
         <span class="text-default-700">{{ comment.user.name }}</span>
-        <div v-if="comment.toUser">
+        <div v-if="comment.targetUser">
           <span class="mx-2">=></span>
-          <KunLink underline="hover" :to="`/user/${comment.toUser.uid}/info`">
-            {{ `${comment.toUser.name}` }}
+          <KunLink
+            underline="hover"
+            :to="`/user/${comment.targetUser.id}/info`"
+          >
+            {{ `${comment.targetUser.name}` }}
           </KunLink>
         </div>
       </div>
@@ -63,14 +68,14 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
 
       <div class="flex items-end justify-between">
         <span class="text-default-500 text-sm">
-          发布于 {{ formatTimeDifference(comment.time) }}
+          发布于 {{ formatTimeDifference(comment.created) }}
         </span>
 
         <div class="flex items-center justify-end gap-1">
           <KunButton
             variant="flat"
             class-name="gap-1"
-            @click="handleClickComment(comment.user.uid)"
+            @click="handleClickComment(comment.user.id)"
           >
             回复
           </KunButton>
@@ -85,7 +90,7 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
               color="danger"
               size="lg"
               class-name="gap-1"
-              @click="handleDeleteComment(comment.gid, comment.gcid)"
+              @click="handleDeleteComment(comment.galgameId, comment.id)"
             >
               <KunIcon name="lucide:trash-2" />
             </KunButton>
@@ -93,11 +98,20 @@ const handleDeleteComment = async (gid: number, gcid: number) => {
         </div>
       </div>
 
-      <GalgameCommentPanel
-        v-if="isShowComment"
-        :refresh="refresh"
-        @close="isShowComment = false"
-      />
+      <Transition
+        enter-active-class="transition-all duration-300 ease-out"
+        enter-from-class="opacity-0 max-h-0"
+        enter-to-class="opacity-100 max-h-96"
+        leave-active-class="transition-all duration-300 ease-in"
+        leave-from-class="opacity-100 max-h-96"
+        leave-to-class="opacity-0 max-h-0"
+      >
+        <GalgameCommentPanel
+          v-if="isShowComment"
+          :refresh="refresh"
+          @close="isShowComment = false"
+        />
+      </Transition>
     </div>
   </KunCard>
 </template>

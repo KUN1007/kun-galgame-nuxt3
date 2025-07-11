@@ -11,15 +11,6 @@ const props = defineProps<{
 
 provide<GalgameDetail>('galgame', props.galgame)
 
-const { data } = await useFetch(
-  `/api/galgame/${props.galgame.gid}/contributor`,
-  {
-    method: 'GET',
-    watch: false,
-    ...kungalgameResponseHandler
-  }
-)
-
 const activeTab = ref<GalgameDetailSectionTabType>('comment')
 </script>
 
@@ -35,9 +26,9 @@ const activeTab = ref<GalgameDetailSectionTabType>('comment')
 
     <div class="space-y-3">
       <p>本游戏项目的贡献者</p>
-      <div class="flex items-center gap-1" v-if="data">
+      <div class="flex items-center gap-1">
         <KunTooltip
-          v-for="(user, index) in data"
+          v-for="(user, index) in galgame.contributor"
           :key="index"
           :text="user.name"
         >
@@ -50,7 +41,7 @@ const activeTab = ref<GalgameDetailSectionTabType>('comment')
 
     <GalgameResource />
 
-    <GalgameSeries v-if="galgame.series.length" />
+    <GalgameSeries v-if="galgame.series" />
 
     <KunTab
       :items="galgameDetailSectionTabs"
@@ -60,9 +51,9 @@ const activeTab = ref<GalgameDetailSectionTabType>('comment')
     />
     <KunCard :is-hoverable="false">
       <GalgameCommentContainer
-        v-if="data && activeTab === 'comment'"
-        :user-data="data"
-        :to-user="galgame.user"
+        v-if="activeTab === 'comment'"
+        :user-data="galgame.contributor"
+        :target-user="galgame.user"
       />
       <GalgameHistory v-if="activeTab === 'history'" />
       <GalgameLink v-if="activeTab === 'link'" />

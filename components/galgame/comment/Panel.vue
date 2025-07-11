@@ -11,7 +11,7 @@ const { commentToUid } = storeToRefs(useTempGalgameResourceStore())
 const route = useRoute()
 
 const content = ref('')
-const gid = computed(() => {
+const galgameId = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
 const isPublishing = ref(false)
@@ -27,9 +27,13 @@ const handlePublishComment = async () => {
   }
 
   isPublishing.value = true
-  const result = await $fetch(`/api/galgame/${gid.value}/comment`, {
+  const result = await $fetch(`/api/galgame/${galgameId.value}/comment`, {
     method: 'POST',
-    body: { toUid: commentToUid.value, content: content.value },
+    body: {
+      galgameId: galgameId.value,
+      targetUserId: commentToUid.value,
+      content: content.value
+    },
     watch: false,
     ...kungalgameResponseHandler
   })

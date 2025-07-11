@@ -53,7 +53,7 @@ export default defineEventHandler(async (event) => {
     password: data.password,
     note: data.note,
     likeCount: data._count.like,
-    isLike: data.like.length > 0,
+    isLiked: data.like.length > 0,
     created: data.created
   }
 

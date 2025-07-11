@@ -7,8 +7,8 @@ const props = defineProps<{
 }>()
 
 const { id } = usePersistUserStore()
-const isLiked = ref(props.comment.likes.isLiked)
-const likesCount = ref(props.comment.likes.count)
+const isLiked = ref(props.comment.isLiked)
+const likesCount = ref(props.comment.likeCount)
 
 const likeComment = async () => {
   if (isLiked.value) {
@@ -16,16 +16,16 @@ const likeComment = async () => {
     return
   }
 
-  if (id === props.comment.user.uid) {
+  if (id === props.comment.user.id) {
     useMessage(10533, 'warn')
     return
   }
 
   const result = await $fetch(
-    `/api/galgame/${props.comment.gid}/comment/like`,
+    `/api/galgame/${props.comment.galgameId}/comment/like`,
     {
       method: 'PUT',
-      query: { gcid: props.comment.gcid },
+      body: { galgameCommentId: props.comment.id },
       watch: false,
       ...kungalgameResponseHandler
     }

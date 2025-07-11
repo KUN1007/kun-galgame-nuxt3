@@ -1,19 +1,20 @@
 <script setup lang="ts">
 const props = defineProps<{
-  gid: number
-  toUid: number
-  likesCount: number
+  galgameId: number
+  targetUserId: number
+  likeCount: number
   isLiked: boolean
 }>()
 
 const { id } = usePersistUserStore()
 const isLiked = ref(props.isLiked)
-const likesCount = ref(props.likesCount)
+const likesCount = ref(props.likeCount)
 
 const toggleLikeGalgame = async () => {
-  const result = await $fetch(`/api/galgame/${props.gid}/like`, {
+  const result = await $fetch(`/api/galgame/${props.galgameId}/like`, {
     method: 'PUT',
     watch: false,
+    body: { galgameId: props.galgameId },
     ...kungalgameResponseHandler
   })
 
@@ -39,7 +40,7 @@ const handleClickLike = () => {
     useMessage(10532, 'warn', 5000)
     return
   }
-  if (id === props.toUid) {
+  if (id === props.targetUserId) {
     useMessage(10533, 'warn')
     return
   }
