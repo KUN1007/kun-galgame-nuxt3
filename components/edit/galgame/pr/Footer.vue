@@ -1,20 +1,33 @@
 <script setup lang="ts">
-import { checkGalgamePR } from '../../utils/checkGalgamePR'
+import { updateGalgameSchema } from '~/validations/galgame'
 
 const { galgamePR } = storeToRefs(useTempGalgamePRStore())
 
 const isPublishing = ref(false)
 
 const handlePublishGalgamePR = async () => {
-  const pullRequest = {
-    gid: galgamePR.value[0].id,
-    name: galgamePR.value[0].name,
-    introduction: galgamePR.value[0].introduction,
-    contentLimit: galgamePR.value[0].contentLimit,
-    alias: galgamePR.value[0].alias
+  const galgame = galgamePR.value[0]
+  const data: Record<string, number | string | string[]> = {
+    vndbId: galgame.vndbId,
+    name_en_us: galgame.name['en-us'],
+    name_ja_jp: galgame.name['ja-jp'],
+    name_zh_cn: galgame.name['zh-cn'],
+    name_zh_tw: galgame.name['zh-tw'],
+    intro_en_us: galgame.introduction['en-us'],
+    intro_ja_jp: galgame.introduction['ja-jp'],
+    intro_zh_cn: galgame.introduction['zh-cn'],
+    intro_zh_tw: galgame.introduction['zh-tw'],
+    contentLimit: galgame.contentLimit,
+    aliases: String(galgame.alias)
   }
 
-  if (!checkGalgamePR(pullRequest)) {
+  const result = updateGalgameSchema.safeParse(data)
+  if (!result.success) {
+    const message = JSON.parse(result.error.message)[0]
+    useMessage(
+      `位置: ${message.path[0]} - 错误提示: ${message.message}`,
+      'warn'
+    )
     return
   }
   const res = await useComponentMessageStore().alert(
@@ -30,17 +43,17 @@ const handlePublishGalgamePR = async () => {
     isPublishing.value = true
   }
 
-  const result = await $fetch(`/api/galgame/${pullRequest.gid}/pr`, {
+  const response = await $fetch(`/api/galgame/${galgame.id}/pr`, {
     method: 'POST',
-    body: pullRequest,
+    body: data,
     watch: false,
     ...kungalgameResponseHandler
   })
   isPublishing.value = false
 
-  if (result) {
+  if (response) {
     useKunLoliInfo('创建更新请求成功', 5)
-    await navigateTo(`/galgame/${pullRequest.gid}`, {
+    await navigateTo(`/galgame/${galgame.id}`, {
       replace: true
     })
   }

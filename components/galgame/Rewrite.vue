@@ -11,7 +11,6 @@ const handleRewriteGalgame = async (galgame: GalgameDetail) => {
   const { introduction, markdown, series, ...rest } = galgame
   galgamePR.value[0] = {
     introduction: markdown,
-    series: [],
     ...rest
   }
   await navigateTo('/edit/galgame/rewrite')

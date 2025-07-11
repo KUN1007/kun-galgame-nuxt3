@@ -69,7 +69,7 @@ watch(
       <KunSelect
         :options="kunGalgameSortFieldOptions"
         :model-value="sortField"
-        @set="(value) => (sortField = value as 'time' | 'views' | 'created')"
+        @set="(value) => (sortField = value as 'time' | 'view' | 'created')"
       >
         <span>{{ KUN_GALGAME_RESOURCE_SORT_FIELD_MAP[sortField] }}</span>
       </KunSelect>

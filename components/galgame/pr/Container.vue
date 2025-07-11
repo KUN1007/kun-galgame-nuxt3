@@ -6,7 +6,8 @@ const gid = computed(() => {
 
 const pageData = reactive({
   page: 1,
-  limit: 7
+  limit: 10,
+  galgameId: gid.value
 })
 
 const { data, status, refresh } = await useFetch(
@@ -25,7 +26,7 @@ const { data, status, refresh } = await useFetch(
     <KunHeader
       name="更新请求"
       description="蓝色代表增加, 红色代表删减, 游戏发布者或管理员可以合并或拒绝请求, 您可以自己合并自己为自己创建的游戏提出的更新请求"
-      scale="h2"
+      scale="h3"
     />
 
     <KunLoading v-if="status === 'pending'" />
@@ -35,7 +36,7 @@ const { data, status, refresh } = await useFetch(
       <GalgamePrInfo
         v-for="(pr, index) in data.prs"
         :key="index"
-        :gid="gid"
+        :galgame-id="gid"
         :pr="pr"
         :status="status"
         :refresh="refresh"
@@ -43,6 +44,7 @@ const { data, status, refresh } = await useFetch(
     </div>
 
     <KunPagination
+      v-if="data.totalCount > 10 || data.totalCount === 10"
       v-model:current-page="pageData.page"
       :total-page="Math.ceil(data.totalCount / pageData.limit)"
       :is-loading="status === 'pending'"

@@ -113,14 +113,12 @@ export default defineEventHandler(async (event) => {
         }
       })
 
-      await prisma.galgame_history.create({
-        data: {
-          galgame_id: newGalgame.id,
-          user_id: uid,
-          action: 'created',
-          type: 'galgame',
-          content: ''
-        }
+      await createGalgameHistory(prisma, {
+        galgame_id: newGalgame.id,
+        user_id: uid,
+        action: 'created',
+        type: 'galgame',
+        content: ''
       })
 
       return newGalgame.id

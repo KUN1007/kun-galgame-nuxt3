@@ -8,6 +8,7 @@ export interface GalgameStorePersist {
 
 export interface GalgameStoreTemp {
   id: number
+  vndbId: string
   name: KunLanguage
   introduction: KunLanguage
   contentLimit: string

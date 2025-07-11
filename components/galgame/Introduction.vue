@@ -33,10 +33,8 @@ defineProps<{
       暂无对应翻译, 为您找到最近似的语言, 欢迎贡献翻译
     </div>
 
-    <KunCard :is-hoverable="false">
-      <KunContent
-        :content="getPreferredLanguageText(introduction, introductionLanguage)"
-      />
-    </KunCard>
+    <KunContent
+      :content="getPreferredLanguageText(introduction, introductionLanguage)"
+    />
   </div>
 </template>

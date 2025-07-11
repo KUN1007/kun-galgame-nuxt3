@@ -10,6 +10,6 @@ export interface GalgameStoreTemp {
   type: TypeOptions
   language: LanguageOptions
   platform: PlatformOptions
-  sortField: 'time' | 'created' | 'views'
+  sortField: 'time' | 'created' | 'view'
   sortOrder: KunOrder
 }

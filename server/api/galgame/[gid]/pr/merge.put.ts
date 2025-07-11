@@ -1,127 +1,112 @@
 import prisma from '~/prisma/prisma'
-import type { H3Event } from 'h3'
+import {
+  updateGalgameSchema,
+  updateGalgamePrMergeSchema
+} from '~/validations/galgame'
+import type { z } from 'zod'
 
-const checkMerge = async (event: H3Event) => {
-  const { gprid }: { gprid: number } = await readBody(event)
-  if (!gprid) {
-    return kunError(event, 10507)
+export default defineEventHandler(async (event) => {
+  const input = await kunParsePostBody(event, updateGalgamePrMergeSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
   }
 
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, 10115, 205)
+    return kunError(event, '用户登录失效', 205)
   }
-  const user = await prisma.user.findUnique({
-    where: { id: userInfo.uid }
+  const uid = userInfo.uid
+
+  const galgamePR = await prisma.galgame_pr.findUnique({
+    where: { id: input.galgamePrId },
+    include: {
+      galgame: {
+        select: {
+          user_id: true
+        }
+      }
+    }
   })
-  if (!user) {
-    return kunError(event, 10101)
+  if (!galgamePR) {
+    return kunError(event, '未找到这个更新请求')
+  }
+  if (galgamePR.status !== 0) {
+    return kunError(event, '这个更新请求已经被拒绝或合并')
+  }
+  if (uid !== galgamePR.galgame.user_id && userInfo.role < 2) {
+    return kunError(event, '您没有权限合并这个更新请求')
   }
 
-  const gid = getRouterParam(event, 'gid')
-  if (!gid) {
-    return kunError(event, 10507)
+  const prJSONObject = galgamePR.new_data as z.infer<typeof updateGalgameSchema>
+  const parseResult = updateGalgameSchema.safeParse(prJSONObject)
+  if (!parseResult.success) {
+    return kunError(event, '解析 Galgame 更新请求内容失败')
   }
-  const galgame = await prisma.galgame.findUnique({
-    where: { id: Number(gid) }
+
+  const galgameId = galgamePR.galgame_id
+
+  return await prisma.$transaction(async (prisma) => {
+    await prisma.galgame_pr.update({
+      where: { id: input.galgamePrId },
+      data: {
+        status: 1,
+        completed_time: new Date()
+      }
+    })
+
+    await createGalgameHistory(prisma, {
+      galgame_id: galgameId,
+      user_id: uid,
+      action: 'merged',
+      type: 'pr',
+      content: `#${galgamePR.index}`
+    })
+
+    const { vndbId, contentLimit, aliases, ...rest } = prJSONObject
+    await prisma.galgame.update({
+      where: { id: galgameId },
+      data: {
+        vndb_id: vndbId,
+        content_limit: contentLimit,
+        ...rest
+      }
+    })
+    await prisma.galgame_alias.deleteMany({
+      where: { galgame_id: galgameId }
+    })
+
+    await prisma.galgame_alias.createMany({
+      data: aliases.split(',').map((a) => ({
+        galgame_id: galgameId,
+        name: a
+      }))
+    })
+
+    await prisma.galgame_contributor.createMany({
+      data: [
+        { user_id: galgamePR.user_id, galgame_id: galgameId },
+        { user_id: uid, galgame_id: galgameId }
+      ],
+      skipDuplicates: true
+    })
+
+    if (uid !== galgamePR.user_id) {
+      await prisma.user.update({
+        where: { id: galgamePR.user_id },
+        data: { moemoepoint: { increment: 1 } }
+      })
+
+      await createMessage(
+        prisma,
+        uid,
+        galgamePR.user_id,
+        'merged',
+        `#${galgamePR.index}`,
+        undefined,
+        galgamePR.galgame_id
+      )
+    }
+
+    return 'MOEMOE merged galgame pull request successfully!'
   })
-  if (!galgame) {
-    return kunError(event, 10610)
-  }
-
-  if (userInfo.uid !== galgame.user_id && user.role < 2) {
-    return kunError(event, 10632)
-  }
-
-  return { uid: userInfo.uid, gprid, gid, galgame }
-}
-
-export default defineEventHandler(async (event) => {
-  const result = await checkMerge(event)
-  if (!result) {
-    return
-  }
-  const { uid, gprid, gid, galgame } = result
-
-  // const galgamePR = await GalgamePRModel.findOne({ gprid }).lean()
-  // if (!galgamePR) {
-  //   return kunError(event, 10610)
-  // }
-  // if (galgamePR.status !== 0) {
-  //   return kunError(event, 10633)
-  // }
-
-  // const session = await mongoose.startSession()
-  // session.startTransaction()
-  // try {
-  //   await GalgamePRModel.updateOne(
-  //     { gprid },
-  //     { status: 1, completed_time: Date.now() }
-  //   )
-
-  //   await createGalgameHistory({
-  //     gid: galgamePR.gid,
-  //     uid,
-  //     time: Date.now(),
-  //     action: 'merged',
-  //     type: 'pr',
-  //     content: `#${galgamePR.index}`
-  //   })
-
-  //   await GalgameModel.updateOne(
-  //     { gid },
-  //     {
-  //       name: mergeLanguages(galgame.name, galgamePR.galgame?.name ?? {}),
-  //       introduction: mergeLanguages(
-  //         galgame.introduction,
-  //         galgamePR.galgame?.introduction ?? {}
-  //       ),
-  //       content_limit: galgamePR.galgame.contentLimit,
-  //       alias: galgamePR.galgame?.alias?.filter((str) => str !== ''),
-  //       series: galgamePR.galgame?.series?.map((s) => parseInt(s)),
-  //       official: galgamePR.galgame?.official?.filter((str) => str !== ''),
-  //       engine: galgamePR.galgame?.engine?.filter((str) => str !== ''),
-  //       tags: galgamePR.galgame?.tags?.filter((str) => str !== ''),
-  //       $addToSet: { contributor: uid }
-  //     }
-  //   )
-
-  //   await UserModel.updateOne(
-  //     { uid },
-  //     { $addToSet: { contribute_galgame: gid } }
-  //   )
-
-  //   if (uid !== galgamePR.uid) {
-  //     await GalgameModel.updateOne(
-  //       { gid },
-  //       { $addToSet: { contributor: galgamePR.uid } }
-  //     )
-
-  //     await UserModel.updateOne(
-  //       { uid: galgamePR.uid },
-  //       {
-  //         $inc: { moemoepoint: 1 },
-  //         $addToSet: { contribute_galgame: gid }
-  //       }
-  //     )
-
-  //     await createMessage(
-  //       uid,
-  //       galgamePR.uid,
-  //       'merged',
-  //       `#${galgamePR.index}`,
-  //       0,
-  //       galgamePR.gid
-  //     )
-  //   }
-
-  //   await session.commitTransaction()
-
-  //   return 'MOEMOE merged galgame pull request successfully!'
-  // } catch (error) {
-  //   await session.abortTransaction()
-  //   throw error
-  // } finally {
-  //   await session.endSession()
-  // }
 })

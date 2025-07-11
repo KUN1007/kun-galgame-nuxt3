@@ -1,4 +1,6 @@
 import type { GalgameStoreTemp } from '~/store/types/edit/galgame'
+import type { updateGalgameSchema } from '~/validations/galgame'
+import type { z } from 'zod'
 
 export interface GalgamePR {
   id: number
@@ -7,8 +9,10 @@ export interface GalgamePR {
   status: number
   user: KunUser
   completedTime: Date | string | null
+  created: Date | string
 }
 
 export interface GalgamePRDetails extends GalgamePR {
-  galgame: Partial<GalgameStoreTemp>
+  oldData: z.infer<typeof updateGalgameSchema>
+  newData: z.infer<typeof updateGalgameSchema>
 }

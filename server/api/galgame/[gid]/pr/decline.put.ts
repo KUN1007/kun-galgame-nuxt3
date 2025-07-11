@@ -20,12 +20,10 @@ export default defineEventHandler(async (event) => {
       data: {
         status: 2,
         note,
-        galgame: {}
+        old_data: {},
+        new_data: {}
       }
     })
-    if (galgamePR.status !== 0) {
-      return kunError(event, '该更新请求已经被处理')
-    }
 
     await createGalgameHistory(prisma, {
       galgame_id: galgamePR.galgame_id,

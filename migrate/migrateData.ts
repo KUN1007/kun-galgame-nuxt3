@@ -1429,10 +1429,10 @@ async function migrateGalgamePRs() {
       index: doc.index ?? 0,
       note: doc.note ?? '',
       completed_time: msToDate(doc.completed_time),
-      // diff_data is not in mongoose model. Assuming `galgame` object is the diff.
-      diff_data: doc.galgame
+      old_data: doc.galgame
         ? JSON.parse(JSON.stringify(doc.galgame))
         : Prisma.JsonNull,
+      new_data: Prisma.JsonNull,
       user_id: doc.uid,
       galgame_id: doc.gid,
       created: doc.created,

@@ -1,22 +1,20 @@
 import { markdownToText } from '~/utils/markdownToText'
 import prisma from '~/prisma/prisma'
-import type {
-  KunActivityType,
-  KunActivityRequestData,
-  KunActivity
-} from '~/types/api/activity'
+import { getActivitySchema } from '~/validations/activity'
+import { KUN_ALLOWED_ACTIVITY_TYPE } from '~/constants/activity'
+import type { KunActivity } from '~/types/api/activity'
 
-const allowedMessageType = ['upvoted', 'replied', 'commented', 'requested']
+export default defineEventHandler(async (event) => {
+  const input = kunParseGetQuery(event, getActivitySchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
+  }
+  const { page, limit, type } = input
 
-const getMessages = async (
-  page: number,
-  limit: number,
-  type: KunActivityType
-) => {
   const offset = (page - 1) * limit
 
-  const queryData =
-    type === 'all' ? { type: { in: allowedMessageType } } : { type }
+  const allowedType = [...KUN_ALLOWED_ACTIVITY_TYPE]
+  const queryData = type === 'all' ? { type: { in: allowedType } } : { type }
 
   const totalCount = await prisma.message.count({
     where: queryData
@@ -40,26 +38,9 @@ const getMessages = async (
     user: message.sender,
     link: message.link,
     type: message.type,
-    content:
-      message.type === 'requested' && message.content.length < 233
-        ? `请求更新: ${Object.values(JSON.parse(message.content)).join(',').slice(0, 50)}`
-        : markdownToText(message.content).slice(0, 50),
+    content: markdownToText(message.content).slice(0, 50),
     created: message.created
   }))
 
   return { activities, totalCount }
-}
-
-export default defineEventHandler(async (event) => {
-  const { page, limit, type }: KunActivityRequestData = await getQuery(event)
-  if (limit !== '50') {
-    return kunError(event, 10209)
-  }
-  if (!allowedMessageType.concat('all').includes(type)) {
-    return kunError(event, 10402)
-  }
-
-  const messages = await getMessages(parseInt(page), parseInt(limit), type)
-
-  return messages
 })

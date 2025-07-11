@@ -37,7 +37,8 @@ export default defineEventHandler(async (event) => {
     index: pr.index,
     status: pr.status,
     completedTime: pr.completed_time,
-    user: pr.user
+    user: pr.user,
+    created: pr.created
   }))
 
   return { prs, totalCount }

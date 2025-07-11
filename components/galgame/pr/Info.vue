@@ -3,7 +3,7 @@ import { KUN_GALGAME_RESOURCE_PULL_REQUEST_STATUS_MAP } from '~/constants/galgam
 import type { GalgamePR, GalgamePRDetails } from '~/types/api/galgame-pr'
 
 const props = defineProps<{
-  gid: number
+  galgameId: number
   pr: GalgamePR
   status: UseFetchStatus
   refresh: () => void
@@ -23,14 +23,14 @@ const statusColorMap: Record<number, string> = {
 const details = ref<Partial<GalgamePRDetails>>()
 const isFetching = ref(false)
 
-const handleGetDetails = async (gprid: number) => {
+const handleGetDetails = async (galgamePrId: number) => {
   if (details.value) {
     return
   }
   isFetching.value = true
-  const result = await $fetch(`/api/galgame/${props.gid}/pr`, {
+  const result = await $fetch(`/api/galgame/${props.galgameId}/pr`, {
     method: 'GET',
-    query: { gprid },
+    query: { galgamePrId },
     watch: false,
     ...kungalgameResponseHandler
   })
@@ -58,7 +58,7 @@ watch(
         <KunAvatar :user="pr.user" />
         <span>{{ pr.user.name }} 提出更新请求</span>
         <span class="text-default-500">
-          {{ formatTimeDifference(pr.time) }}
+          {{ formatTimeDifference(pr.created) }}
         </span>
       </div>
 
@@ -85,7 +85,7 @@ watch(
           size="sm"
           variant="flat"
           v-if="!details && pr.status !== 2"
-          @click="handleGetDetails(pr.gprid)"
+          @click="handleGetDetails(pr.id)"
           :loading="isFetching"
         >
           详情

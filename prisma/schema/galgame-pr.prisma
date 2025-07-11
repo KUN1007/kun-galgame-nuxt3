@@ -1,10 +1,12 @@
 model galgame_pr {
   id             Int       @id @default(autoincrement())
+  // 0 - pending, 1 - merged, 2 - declined
   status         Int       @default(0)
   index          Int       @default(0)
   note           String    @default("") @db.VarChar(1007)
   completed_time DateTime?
-  diff_data      Json?
+  old_data       Json?
+  new_data       Json?
 
   user_id    Int
   user       user    @relation(fields: [user_id], references: [id])

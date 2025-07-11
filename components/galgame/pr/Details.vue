@@ -11,17 +11,14 @@ const props = defineProps<{
 }>()
 const galgame = inject<GalgameDetail>('galgame')
 
-const { uid, roles } = usePersistUserStore()
-const isShowButton = computed(() => galgame?.user.uid === uid || roles >= 2)
+const { id, role } = usePersistUserStore()
+const isShowButton = computed(() => galgame?.user.id === id || role >= 2)
 const isFetching = ref(false)
 const isShowReasonInput = ref(false)
 const declineInput = ref('')
 
 const diff = computed(() => {
-  if (!galgame || !props.details.galgame) {
-    return []
-  }
-  return diffGalgame(galgame, props.details.galgame)
+  return diffGalgame(toRaw(props.details.oldData), toRaw(props.details.newData))
 })
 
 const handleDeclineRequest = async () => {
@@ -38,12 +35,15 @@ const handleDeclineRequest = async () => {
   }
 
   isFetching.value = true
-  const result = await $fetch(`/api/galgame/${props.details.gid}/pr/decline`, {
-    method: 'PUT',
-    body: { gprid: props.details.gprid, note: declineInput.value.trim() },
-    watch: false,
-    ...kungalgameResponseHandler
-  })
+  const result = await $fetch(
+    `/api/galgame/${props.details.galgameId}/pr/decline`,
+    {
+      method: 'PUT',
+      body: { galgamePrId: props.details.id, note: declineInput.value.trim() },
+      watch: false,
+      ...kungalgameResponseHandler
+    }
+  )
   isFetching.value = false
 
   if (result) {
@@ -62,12 +62,15 @@ const handleMergeRequest = async () => {
   }
 
   isFetching.value = true
-  const result = await $fetch(`/api/galgame/${props.details.gid}/pr/merge`, {
-    method: 'PUT',
-    body: { gprid: props.details.gprid },
-    watch: false,
-    ...kungalgameResponseHandler
-  })
+  const result = await $fetch(
+    `/api/galgame/${props.details.galgameId}/pr/merge`,
+    {
+      method: 'PUT',
+      body: { galgamePrId: props.details.id },
+      watch: false,
+      ...kungalgameResponseHandler
+    }
+  )
   isFetching.value = false
 
   if (result) {

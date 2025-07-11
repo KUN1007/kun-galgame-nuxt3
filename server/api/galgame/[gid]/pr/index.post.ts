@@ -1,81 +1,124 @@
-import { isDeepEmpty } from '~/utils/isDeepEmpty'
-// import { checkGalgamePR } from '../../utils/checkGalgamePR'
 import prisma from '~/prisma/prisma'
-import type { GalgameStoreTemp } from '~/store/types/edit/galgame'
+import { updateGalgameSchema } from '~/validations/galgame'
+import { formatDate } from '~/utils/time'
 
 export default defineEventHandler(async (event) => {
-  // const galgame: GalgameStoreTemp = await readBody(event)
-  // const res = checkGalgamePR(galgame)
-  // if (res) {
-  //   return kunError(event, res)
-  // }
-  // const userInfo = await getCookieTokenInfo(event)
-  // if (!userInfo) {
-  //   return kunError(event, 10115, 205)
-  // }
-  // const originalGalgame = await prisma.galgame.findUnique({
-  //   where: { id: galgame.id },
-  //   include: {
-  //     alias: true,
-  //     official: true,
-  //     engine: true,
-  //     tag: true
-  //   }
-  // })
-  // if (!originalGalgame) {
-  //   return kunError(event, 10610)
-  // }
-  // const diffGalgame = compareObjects(galgame, {
-  //   id,
-  //   name,
-  //   introduction,
-  //   contentLimit: content_limit,
-  //   alias,
-  //   official,
-  //   engine,
-  //   tags
-  // })
-  // if (isDeepEmpty(diffGalgame)) {
-  //   return kunError(event, 10644)
-  // }
-  // const session = await mongoose.startSession()
-  // session.startTransaction()
-  // try {
-  //   const maxIndexPR = await GalgamePRModel.findOne({ gid })
-  //     .sort({ index: -1 })
-  //     .lean()
-  //   const baseIndex = maxIndexPR ? maxIndexPR.index : 0
-  //   const index = baseIndex + 1
-  //   await GalgamePRModel.create({
-  //     gid: galgame.gid,
-  //     uid: userInfo.uid,
-  //     index,
-  //     galgame: diffGalgame
-  //   })
-  //   await createGalgameHistory({
-  //     gid,
-  //     uid: userInfo.uid,
-  //     time: Date.now(),
-  //     action: 'created',
-  //     type: 'pr',
-  //     content: ''
-  //   })
-  //   if (userInfo.uid !== originalGalgame.uid) {
-  //     await createMessage(
-  //       userInfo.uid,
-  //       originalGalgame.uid,
-  //       'requested',
-  //       JSON.stringify(diffGalgame).slice(0, 233),
-  //       0,
-  //       gid
-  //     )
-  //   }
-  //   await session.commitTransaction()
-  //   return 'MOEMOE committed galgame pull request successfully!'
-  // } catch (error) {
-  //   await session.abortTransaction()
-  //   throw error
-  // } finally {
-  //   await session.endSession()
-  // }
+  const input = await kunParsePostBody(event, updateGalgameSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
+  }
+
+  const userInfo = await getCookieTokenInfo(event)
+  if (!userInfo) {
+    return kunError(event, '用户登录失效', 205)
+  }
+  const uid = userInfo.uid
+
+  const gid = getRouterParam(event, 'gid')
+  if (!gid) {
+    return kunError(event, '读取 Galgame ID 失败')
+  }
+  const galgameId = Number(gid)
+
+  const originalGalgame = await prisma.galgame.findUnique({
+    where: { id: galgameId },
+    include: {
+      alias: {
+        select: {
+          name: true
+        }
+      }
+    }
+  })
+  if (!originalGalgame) {
+    return kunError(event, '未找到原 Galgame')
+  }
+
+  const originGalgameObject = {
+    vndbId: originalGalgame.vndb_id,
+    name_en_us: originalGalgame.name_en_us,
+    name_ja_jp: originalGalgame.name_ja_jp,
+    name_zh_cn: originalGalgame.name_zh_cn,
+    name_zh_tw: originalGalgame.name_zh_tw,
+    intro_en_us: originalGalgame.intro_en_us,
+    intro_ja_jp: originalGalgame.intro_ja_jp,
+    intro_zh_cn: originalGalgame.intro_zh_cn,
+    intro_zh_tw: originalGalgame.intro_zh_tw,
+    contentLimit: originalGalgame.content_limit,
+    aliases: originalGalgame.alias.map((a) => a.name).toString()
+  }
+
+  return await prisma.$transaction(async (prisma) => {
+    if (uid === originalGalgame.user_id || userInfo.role > 1) {
+      const { vndbId, contentLimit, aliases, ...rest } = input
+      await prisma.galgame.update({
+        where: { id: galgameId },
+        data: {
+          vndb_id: vndbId,
+          content_limit: contentLimit,
+          ...rest
+        }
+      })
+      await prisma.galgame_alias.deleteMany({
+        where: { galgame_id: galgameId }
+      })
+
+      await prisma.galgame_alias.createMany({
+        data: aliases.split(',').map((a) => ({
+          galgame_id: galgameId,
+          name: a
+        }))
+      })
+
+      await createGalgameHistory(prisma, {
+        galgame_id: galgameId,
+        user_id: uid,
+        action: 'updated',
+        type: 'galgame',
+        content: formatDate(new Date(), { isPrecise: true, isShowYear: true })
+      })
+
+      await prisma.galgame_contributor.createMany({
+        data: [{ user_id: uid, galgame_id: galgameId }],
+        skipDuplicates: true
+      })
+    } else {
+      const maxIndexPR = await prisma.galgame_pr.findFirst({
+        orderBy: { id: 'desc' },
+        take: 1,
+        where: { galgame_id: galgameId }
+      })
+      const baseIndex = maxIndexPR ? maxIndexPR.index : 0
+      const index = baseIndex + 1
+      await prisma.galgame_pr.create({
+        data: {
+          galgame_id: galgameId,
+          user_id: uid,
+          index,
+          old_data: originGalgameObject,
+          new_data: input
+        }
+      })
+
+      await createGalgameHistory(prisma, {
+        galgame_id: galgameId,
+        user_id: userInfo.uid,
+        action: 'created',
+        type: 'pr',
+        content: ''
+      })
+
+      await createMessage(
+        prisma,
+        uid,
+        originalGalgame.user_id,
+        'requested',
+        Object.values(input).join(',').slice(0, 233),
+        undefined,
+        galgameId
+      )
+    }
+
+    return 'MOEMOE committed galgame pull request successfully!'
+  })
 })

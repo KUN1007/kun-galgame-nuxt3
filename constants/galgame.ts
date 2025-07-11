@@ -122,7 +122,7 @@ export const KUN_GALGAME_RESOURCE_SORT_FIELD_MAP: Record<string, string> = {
 }
 
 export const kunGalgameSortFieldOptions: KunSelectOption[] = [
-  { value: 'views', label: '浏览顺序' },
+  { value: 'view', label: '浏览顺序' },
   { value: 'time', label: '更新顺序' },
   { value: 'created', label: '创建顺序' }
 ]
@@ -161,6 +161,7 @@ export const KUN_GALGAME_RESOURCE_PULL_REQUEST_I18N_FIELD_MAP: Record<
   string,
   string | KunLanguage
 > = {
+  // Old version compatible
   'name.en-us': '英语标题',
   'name.ja-jp': '日语标题',
   'name.zh-cn': '简体中文标题',
@@ -169,12 +170,22 @@ export const KUN_GALGAME_RESOURCE_PULL_REQUEST_I18N_FIELD_MAP: Record<
   'introduction.ja-jp': '日语介绍',
   'introduction.zh-cn': '简体中文介绍',
   'introduction.zh-tw': '繁体中文介绍',
-  contentLimit: '内容限制',
   tags: '标签',
   series: '系列',
   alias: '别名',
   official: '官网',
-  engine: '引擎'
+
+  engine: '引擎',
+  vndbId: 'VNDB ID',
+  contentLimit: '内容限制',
+  name_en_us: '英语标题',
+  name_ja_jp: '日语标题',
+  name_zh_cn: '简体中文标题',
+  name_zh_tw: '繁体中文标题',
+  intro_en_us: '英语介绍',
+  intro_ja_jp: '日语介绍',
+  intro_zh_cn: '简体中文介绍',
+  intro_zh_tw: '繁体中文介绍'
 }
 
 export const galgameIntroductionLanguageTabs: KunTabItem[] = [
@@ -193,25 +204,5 @@ export const galgameIntroductionLanguageTabs: KunTabItem[] = [
   {
     textValue: '繁体中文',
     value: 'zh-tw'
-  }
-]
-
-export type GalgameDetailSectionTabType = 'comment' | 'history' | 'pr' | 'link'
-export const galgameDetailSectionTabs: KunTabItem[] = [
-  {
-    textValue: '游戏评论',
-    value: 'comment'
-  },
-  {
-    textValue: '相关链接',
-    value: 'link'
-  },
-  {
-    textValue: '贡献历史',
-    value: 'history'
-  },
-  {
-    textValue: '更新请求',
-    value: 'pr'
   }
 ]

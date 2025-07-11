@@ -72,10 +72,15 @@ const handleDeleteLink = async (gid: number, glid: number) => {
       :is-show-divider="false"
       name="相关链接"
       description="这里可以添加任何与该游戏有关的链接, 例如论坛话题, 其它网络文章, 视频链接, 媒体链接等等"
-      scale="h2"
+      scale="h3"
     >
-      <template #headerEndContent>
-        <KunButton class-name="shrink-0" @click="isShowEdit = !isShowEdit">
+      <template #endContent>
+        <KunButton
+          size="sm"
+          variant="flat"
+          class-name="shrink-0"
+          @click="isShowEdit = !isShowEdit"
+        >
           添加相关链接
         </KunButton>
       </template>

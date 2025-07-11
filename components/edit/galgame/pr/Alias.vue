@@ -72,13 +72,9 @@ watch(
 </script>
 
 <template>
-  <div class="relative">
-    <div class="space-y-2">
-      <h2 class="text-xl">游戏别名</h2>
-      <p class="text-default-500">
-        别名最多 17 个, 可以输入别名按下回车创建别名
-      </p>
-    </div>
+  <div class="relative space-y-2">
+    <h2 class="text-xl">游戏别名</h2>
+    <p class="text-default-500">别名最多 17 个, 可以输入别名按下回车创建别名</p>
 
     <div
       class="ring-default-500 bg-default/10 min-h-[44px] w-full rounded-lg px-6 py-3 shadow transition-all focus-within:ring-1"

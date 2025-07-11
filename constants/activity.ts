@@ -22,3 +22,11 @@ export const activityPageTabs: KunTabItem[] = [
     value: 'requested'
   }
 ]
+
+export const KUN_ALLOWED_ACTIVITY_TYPE = [
+  'all',
+  'upvoted',
+  'replied',
+  'commented',
+  'requested'
+] as const

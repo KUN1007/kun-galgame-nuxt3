@@ -93,13 +93,13 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()]
   },
 
-  $production: {
-    vite: {
-      esbuild: {
-        drop: ['console', 'debugger']
-      }
-    }
-  },
+  // $production: {
+  //   vite: {
+  //     esbuild: {
+  //       drop: ['console', 'debugger']
+  //     }
+  //   }
+  // },
 
   eslint: {
     config: {

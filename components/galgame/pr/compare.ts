@@ -1,5 +1,5 @@
-import type { GalgameDetail } from '~/types/api/galgame'
-import type { GalgameStoreTemp } from '~/store/types/edit/galgame'
+import type { updateGalgameSchema } from '~/validations/galgame'
+import type { z } from 'zod'
 
 interface Diffs {
   name: string
@@ -7,65 +7,48 @@ interface Diffs {
 }
 
 export const diffGalgame = (
-  oldGalgame: Partial<GalgameDetail>,
-  newGalgame: Partial<GalgameStoreTemp>
-) => {
+  oldGalgame?: z.infer<typeof updateGalgameSchema>,
+  newGalgame?: z.infer<typeof updateGalgameSchema>
+): Diffs[] => {
   const diffs: Diffs[] = []
 
-  const compareObjects = (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    obj1: Record<string, any>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    obj2: Record<string, any>,
-    path = ''
-  ) => {
-    for (const key in obj1) {
-      const newPath = path ? `${path}.${key}` : key
-
-      if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
-        compareObjects(obj1[key], obj2[key], newPath)
-      } else if (obj1[key] !== obj2[key]) {
-        if (obj1[key] === undefined) {
-          diffs.push({
-            name: newPath,
-            value: `<b>${obj2[key]}</b>`
-          })
-        } else if (obj2[key] !== undefined && obj1[key] !== undefined) {
-          diffs.push({
-            name: newPath,
-            value: `${useDiff(obj2[key], obj1[key])}`
-          })
-        }
-      } else if (obj2[key] !== undefined) {
-        diffs.push({
-          name: newPath,
-          value: `<i>${obj2[key]}</i>`
-        })
-      }
-    }
+  const oldData = {
+    ...oldGalgame,
+    alias: newGalgame?.aliases?.toString()
   }
 
-  compareObjects(
-    {
-      gid: oldGalgame.gid,
-      name: oldGalgame.name,
-      introduction: oldGalgame.markdown,
-      contentLimit: oldGalgame?.contentLimit,
-      alias: oldGalgame.alias?.toString(),
-      official: oldGalgame.official?.toString(),
-      engine: oldGalgame.engine?.toString(),
-      tags: oldGalgame.tags?.toString(),
-      series: oldGalgame.series?.toString()
-    },
-    {
-      ...newGalgame,
-      alias: newGalgame.alias?.toString(),
-      official: newGalgame.official?.toString(),
-      engine: newGalgame.engine?.toString(),
-      tags: newGalgame.tags?.toString(),
-      series: newGalgame.series?.toString()
+  const newData = {
+    ...newGalgame,
+    alias: newGalgame?.aliases?.toString()
+  }
+
+  const allKeys = Object.keys({ ...oldData, ...newData })
+
+  for (const key of allKeys) {
+    const oldValue = oldData[key as keyof typeof oldData]
+    const newValue = newData[key as keyof typeof newData]
+
+    if (oldValue === newValue) {
+      continue
     }
-  )
+
+    if (oldValue === undefined && newValue !== undefined) {
+      diffs.push({
+        name: key,
+        value: `<b>${newValue}</b>`
+      })
+    } else if (oldValue !== undefined && newValue === undefined) {
+      diffs.push({
+        name: key,
+        value: `<del>${oldValue}</del>`
+      })
+    } else {
+      diffs.push({
+        name: key,
+        value: `${useDiff(String(newValue), String(oldValue))}`
+      })
+    }
+  }
 
   return diffs
 }

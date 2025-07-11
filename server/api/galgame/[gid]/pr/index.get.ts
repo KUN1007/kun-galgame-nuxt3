@@ -1,6 +1,8 @@
 import prisma from '~/prisma/prisma'
 import { getGalgamePrDetailSchema } from '~/validations/galgame'
 import type { GalgamePRDetails } from '~/types/api/galgame-pr'
+import type { updateGalgameSchema } from '~/validations/galgame'
+import type { z } from 'zod'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getGalgamePrDetailSchema)
@@ -17,14 +19,6 @@ export default defineEventHandler(async (event) => {
           name: true,
           avatar: true
         }
-      },
-      galgame: {
-        include: {
-          alias: true,
-          official: true,
-          engine: true,
-          tag: true
-        }
       }
     }
   })
@@ -39,23 +33,9 @@ export default defineEventHandler(async (event) => {
     status: pr.status,
     completedTime: pr.completed_time,
     user: pr.user,
-    galgame: {
-      id: pr.galgame.id,
-      name: {
-        'en-us': pr.galgame.name_en_us,
-        'ja-jp': pr.galgame.name_ja_jp,
-        'zh-cn': pr.galgame.name_zh_cn,
-        'zh-tw': pr.galgame.name_zh_tw
-      },
-      introduction: {
-        'en-us': pr.galgame.intro_en_us,
-        'ja-jp': pr.galgame.intro_ja_jp,
-        'zh-cn': pr.galgame.intro_zh_cn,
-        'zh-tw': pr.galgame.intro_zh_tw
-      },
-      contentLimit: pr.galgame.content_limit,
-      alias: pr.galgame.alias.map((a) => a.name)
-    }
+    created: pr.created,
+    oldData: pr.old_data as z.infer<typeof updateGalgameSchema>,
+    newData: pr.new_data as z.infer<typeof updateGalgameSchema>
   }
 
   return details
