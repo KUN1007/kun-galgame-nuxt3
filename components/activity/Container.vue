@@ -54,9 +54,7 @@ const { data, status } = await useFetch('/api/activity', {
         <KunLink
           underline="none"
           color="default"
-          :to="
-            activity.tid ? `/topic/${activity.tid}` : `/galgame/${activity.gid}`
-          "
+          :to="activity.link"
           class-name="hover:text-primary line-clamp-3 break-all transition-colors"
         >
           {{ activity.content }}
@@ -66,13 +64,13 @@ const { data, status } = await useFetch('/api/activity', {
           <KunLink
             underline="none"
             color="default"
-            :to="`/user/${activity.uid}/info`"
+            :to="`/user/${activity.user.id}/info`"
             class-name="hover:text-foreground text-default-500 text-sm font-medium transition-colors"
           >
-            {{ activity.name }}
+            {{ activity.user.name }}
           </KunLink>
           <span class="text-default-500 text-sm">
-            {{ formatTimeDifference(activity.time) }}
+            {{ formatTimeDifference(activity.created) }}
           </span>
         </div>
       </div>

@@ -664,39 +664,56 @@ async function migrateGalgames() {
 async function migrateMessages() {
   console.log('\n🚀 Starting Message migration...')
 
-  // 1. 预加载所有有效的用户ID到一个Set中，用于快速查找
-  console.log('  Fetching all valid user IDs from target database...')
-  const users = await prisma.user.findMany({
-    select: {
-      id: true // 只需要id字段
-    }
-  })
+  // 1. 预加载所有有效的用户ID、Topic ID 和 Galgame ID 到 Set 中，用于快速查找
+  console.log('  Fetching all valid IDs from target database...')
+
+  // 获取用户ID
+  const users = await prisma.user.findMany({ select: { id: true } })
   const validUserIds = new Set(users.map((u) => u.id))
   console.log(`  ... Found ${validUserIds.size} valid users.`)
+
+  // 获取 Topic ID
+  const topics = await prisma.topic.findMany({ select: { id: true } })
+  const validTopicIds = new Set(topics.map((t) => t.id))
+  console.log(`  ... Found ${validTopicIds.size} valid topics.`)
+
+  // 获取 Galgame ID
+  const galgames = await prisma.galgame.findMany({ select: { id: true } })
+  const validGalgameIds = new Set(galgames.map((g) => g.id))
+  console.log(`  ... Found ${validGalgameIds.size} valid galgames.`)
 
   const total = await MessageModel.countDocuments()
   const cursor = MessageModel.find().lean().cursor()
 
   let migratedCount = 0
-  let skippedCount = 0 // 新增一个计数器，用于记录跳过的消息
+  let skippedCount = 0
   let batch: Prisma.messageCreateManyArgs['data'] = []
 
   for await (const doc of cursor) {
-    // 2. 在内存中校验 sender_id 和 receiver_id 是否有效
+    // 2. 校验 sender_id 和 receiver_id 是否有效
     if (
+      !doc.sender_uid ||
+      !doc.receiver_uid ||
       !validUserIds.has(doc.sender_uid) ||
       !validUserIds.has(doc.receiver_uid)
     ) {
       skippedCount++
-      continue // 跳过这条消息
+      continue // 如果发送者或接收者ID为空或无效，则跳过
     }
 
-    // 如果 sender_uid 或 receiver_uid 为空也跳过 (可选的额外健壮性检查)
-    if (!doc.sender_uid || !doc.receiver_uid) {
+    // 3. 校验 tid 和 gid 是否有效
+    // 只有当 tid 或 gid 存在时，才进行校验。如果它们都为 null/undefined，则消息本身与 topic/galgame 无关，应该被迁移。
+    // 如果 tid 存在，但它不在有效的 Topic ID 集合中，则跳过。
+    if (doc.tid && !validTopicIds.has(doc.tid)) {
       skippedCount++
       continue
     }
-
+    // 如果 gid 存在，但它不在有效的 Galgame ID 集合中，则跳过。
+    if (doc.gid && !validGalgameIds.has(doc.gid)) {
+      skippedCount++
+      continue
+    }
+    // 只有通过所有校验的消息才会进入这里
     const link = doc.gid ? `/galgame/${doc.gid}` : `/topic/${doc.tid}`
 
     batch.push({
@@ -731,7 +748,6 @@ async function migrateMessages() {
     `✅ Message migration complete. Total migrated: ${migratedCount}. Total skipped: ${skippedCount}.`
   )
 }
-
 async function migrateSystemMessages() {
   console.log('\n🚀 Starting System Message (MessageAdmin) migration...')
   const total = await MessageAdminModel.countDocuments()
