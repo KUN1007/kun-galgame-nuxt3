@@ -5,11 +5,19 @@ const props = defineProps<{
   galgame: GalgameDetail
 }>()
 
+const { images, isLightboxOpen, currentImageIndex } = useKunLightbox()
+
 provide<GalgameDetail>('galgame', props.galgame)
 </script>
 
 <template>
   <div class="space-y-3">
+    <KunLightbox
+      :images="images"
+      v-model:is-open="isLightboxOpen"
+      :initial-index="currentImageIndex"
+    />
+
     <GalgameHeader :galgame="galgame" />
 
     <div class="grid grid-cols-1 gap-3 md:grid-cols-3">

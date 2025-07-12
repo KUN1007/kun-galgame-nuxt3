@@ -84,7 +84,12 @@ onMounted(async () => {
     <div
       className="relative rounded-lg w-full h-full overflow-hidden md:col-span-1 aspect-video md:rounded-l-xl"
     >
-      <NuxtImg class="object-cover" :src="galgame.banner" loading="lazy" />
+      <NuxtImg
+        data-kun-lazy-image="true"
+        class="cursor-pointer object-cover"
+        :src="galgame.banner"
+        loading="lazy"
+      />
 
       <KunModal
         :modal-value="isShowUpload"

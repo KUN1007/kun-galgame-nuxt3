@@ -20,7 +20,8 @@ export const kunLayoutItem: KunLayoutItem[] = [
     name: 'series',
     icon: 'lucide:columns-4',
     router: '/series',
-    label: 'Galgame 系列'
+    label: 'Galgame 系列',
+    hint: '新'
   },
   {
     name: 'topic',
@@ -66,13 +67,13 @@ export const kunLayoutItem: KunLayoutItem[] = [
       {
         name: 'createTopic',
         router: '/edit/topic',
-        label: '发布话题'
+        label: '发布话题',
+        hint: '大升级'
       },
       {
         name: 'createGalgame',
         router: '/edit/galgame/create',
-        label: '发布 Galgame',
-        hint: '新'
+        label: '发布 Galgame'
       }
     ]
   },
@@ -84,7 +85,8 @@ export const kunLayoutItem: KunLayoutItem[] = [
       {
         name: 'ranking',
         router: '/ranking/topic',
-        label: '话题排行'
+        label: '话题排行',
+        hint: '优化'
       },
       {
         name: 'galgame',

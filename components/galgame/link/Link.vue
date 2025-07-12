@@ -11,7 +11,8 @@ const isShowEdit = ref(false)
 const isFetching = ref(false)
 const linkModel = reactive({
   name: '',
-  link: ''
+  link: '',
+  galgameId: gid.value
 })
 
 const { data, status, refresh } = await useLazyFetch(
@@ -55,7 +56,7 @@ const handleDeleteLink = async (gid: number, glid: number) => {
 
   const result = await $fetch(`/api/galgame/${gid}/link`, {
     method: 'DELETE',
-    query: { glid },
+    query: { galgameLinkId: glid },
     watch: false,
     ...kungalgameResponseHandler
   })
@@ -109,21 +110,27 @@ const handleDeleteLink = async (gid: number, glid: number) => {
     <div class="space-y-2" v-if="data">
       <KunCard :is-hoverable="false" v-for="(link, index) in data" :key="index">
         <p>{{ link.name }}</p>
-        <KunLink :to="link.link" target="_blank" rel="noopener noreferrer">
-          {{ link.link }}
-          <KunIcon name="lucide:external-link" />
+
+        <div class="flex flex-wrap items-center gap-2">
+          <KunLink :to="link.link" target="_blank" rel="noopener noreferrer">
+            {{ link.link }}
+            <KunIcon name="lucide:external-link" />
+          </KunLink>
+
           <KunButton
             :is-icon-only="true"
-            variant="light"
+            variant="flat"
             color="danger"
             size="sm"
             v-if="id === link.user.id"
             @click="handleDeleteLink(link.galgameId, link.id)"
             :loading="isFetching"
+            class-name="ml-auto"
           >
+            删除链接
             <KunIcon name="lucide:trash-2" />
           </KunButton>
-        </KunLink>
+        </div>
       </KunCard>
     </div>
   </div>
