@@ -57,7 +57,7 @@ export const searchTopic = async (
     id: topic.id,
     title: topic.title,
     view: topic.view,
-    updateTime: topic.update_time,
+    statusUpdateTime: topic.status_update_time,
     tag: topic.tag,
     section: topic.section.map((s) => s.topic_section.name),
     user: topic.user,
@@ -137,7 +137,7 @@ export const searchGalgame = async (
     const languages = [...new Set(galgame.resource.map((r) => r.language))]
 
     return {
-      gid: galgame.id,
+      id: galgame.id,
       name: {
         'en-us': galgame.name_en_us,
         'ja-jp': galgame.name_ja_jp,

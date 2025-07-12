@@ -17,8 +17,14 @@ export const kunLayoutItem: KunLayoutItem[] = [
     label: 'Galgame'
   },
   {
+    name: 'series',
+    icon: 'lucide:columns-4',
+    router: '/series',
+    label: 'Galgame 系列'
+  },
+  {
     name: 'topic',
-    icon: 'lucide:square-library',
+    icon: 'icon-park-outline:topic',
     router: '/topic',
     label: '话题'
   },
