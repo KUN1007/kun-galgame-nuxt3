@@ -30,15 +30,17 @@ const statusClasses = computed(() => {
 
 <template>
   <div class="flex items-center space-x-1">
-    <KunButton
-      :is-icon-only="true"
-      variant="light"
-      color="default"
-      size="xl"
-      href="/search"
-    >
-      <KunIcon name="lucide:search" />
-    </KunButton>
+    <KunTooltip text="Ctrl + K 以快速搜索" position="bottom">
+      <KunButton
+        :is-icon-only="true"
+        variant="light"
+        color="default"
+        size="xl"
+        href="/search"
+      >
+        <KunIcon name="lucide:search" />
+      </KunButton>
+    </KunTooltip>
 
     <KunButton
       :is-icon-only="true"

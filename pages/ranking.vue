@@ -1,26 +1,34 @@
 <script setup lang="ts">
 import {
   topicSortItem,
+  galgameSortItem,
   userSortItem,
-  KUN_RANKING_TOPIC_MAP,
-  KUN_RANKING_USER_MAP,
   rankingPageTabs
 } from '~/constants/ranking'
 import {
   topicRankingPageData,
+  galgameRankingPageData,
   userRankingPageData
 } from '~/components/ranking/pageData'
 
 const activeTab = computed(() => useRoute().fullPath.split('/').pop() ?? 'user')
 
+const currentSortItems = computed(() => {
+  switch (activeTab.value) {
+    case 'topic':
+      return topicSortItem
+    case 'galgame':
+      return galgameSortItem
+    case 'user':
+    default:
+      return userSortItem
+  }
+})
+
 const sortOptions = computed(() => {
-  const items = activeTab.value === 'topic' ? topicSortItem : userSortItem
-  return items.map((item) => ({
-    value: item.name,
-    label:
-      activeTab.value === 'topic'
-        ? KUN_RANKING_TOPIC_MAP[item.sortField]
-        : KUN_RANKING_USER_MAP[item.sortField],
+  return currentSortItems.value.map((item) => ({
+    value: item.sortField,
+    label: item.label,
     icon: item.icon
   }))
 })
@@ -50,7 +58,12 @@ const sortOptions = computed(() => {
             :options="sortOptions"
           />
           <KunSelect
-            v-else
+            v-if="activeTab === 'galgame'"
+            v-model="galgameRankingPageData.sortField"
+            :options="sortOptions"
+          />
+          <KunSelect
+            v-if="activeTab === 'user'"
             v-model="userRankingPageData.sortField"
             :options="sortOptions"
           />

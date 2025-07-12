@@ -1,59 +1,6 @@
 import prisma from '~/prisma/prisma'
 import { getTopicRankingSchema } from '~/validations/ranking'
-import type { z } from 'zod'
 import type { TopicRankingItem } from '~/types/api/ranking'
-
-const getTopicRanking = async (
-  input: z.infer<typeof getTopicRankingSchema>
-) => {
-  const { page, limit, sortField, sortOrder } = input
-  const skip = (page - 1) * limit
-
-  const topics = await prisma.topic.findMany({
-    skip,
-    take: limit,
-    orderBy: {
-      [sortField]: sortOrder
-    },
-    select: {
-      id: true,
-      title: true,
-      view: true,
-      created: true,
-      user: {
-        select: {
-          id: true,
-          name: true,
-          avatar: true
-        }
-      },
-      _count: {
-        select: {
-          upvote: true,
-          like: true,
-          reply: true,
-          comment: true
-        }
-      }
-    }
-  })
-
-  const totalCount = await prisma.topic.count()
-
-  const items: TopicRankingItem[] = topics.map((topic) => ({
-    id: topic.id,
-    title: topic.title,
-    view: topic.view,
-    created: topic.created,
-    user: topic.user,
-    upvoteCount: topic._count.upvote,
-    likeCount: topic._count.like,
-    replyCount: topic._count.reply,
-    commentCount: topic._count.comment
-  }))
-
-  return { items, totalCount }
-}
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getTopicRankingSchema)
@@ -61,6 +8,58 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
-  const result = await getTopicRanking(input)
-  return result
+  const { page, limit, sortField, sortOrder } = input
+  const skip = (page - 1) * limit
+
+  const countFields = ['upvote', 'like', 'reply', 'comment', 'favorite']
+  const isCountField = countFields.includes(sortField)
+
+  const select = {
+    id: true,
+    title: true,
+    created: true,
+    user: {
+      select: {
+        id: true,
+        name: true,
+        avatar: true
+      }
+    },
+    ...(sortField === 'view' && { view: true }),
+    ...(isCountField && {
+      _count: {
+        select: {
+          [sortField]: true
+        }
+      }
+    })
+  }
+
+  const topics = await prisma.topic.findMany({
+    skip,
+    take: limit,
+    orderBy: isCountField
+      ? { [sortField]: { _count: sortOrder } }
+      : { [sortField]: sortOrder },
+    select: select
+  })
+
+  const items: TopicRankingItem[] = topics.map((topic) => {
+    let value: number
+    if (sortField === 'view') {
+      value = topic.view
+    } else {
+      value = topic._count[sortField]
+    }
+
+    return {
+      id: topic.id,
+      title: topic.title,
+      created: topic.created,
+      user: topic.user,
+      value,
+      sortField
+    }
+  })
+  return items
 })

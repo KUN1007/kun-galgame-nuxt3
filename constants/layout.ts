@@ -81,6 +81,11 @@ export const kunLayoutItem: KunLayoutItem[] = [
         label: '话题排行'
       },
       {
+        name: 'galgame',
+        router: '/ranking/galgame',
+        label: 'Galgame 排行'
+      },
+      {
         name: 'ranking',
         router: '/ranking/user',
         label: '用户排行'

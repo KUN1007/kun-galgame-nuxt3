@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { userIconMap } from '~/constants/ranking'
+import { userSortItem } from '~/constants/ranking'
 import { userRankingPageData } from './pageData'
 
 const { data } = await useFetch(`/api/ranking/user`, {
@@ -14,8 +14,8 @@ const { data } = await useFetch(`/api/ranking/user`, {
     color="default"
     underline="none"
     v-for="(user, index) in data"
-    :key="user.uid"
-    :to="`/user/${user.uid}/info`"
+    :key="user.id"
+    :to="`/user/${user.id}/info`"
     class-name="hover:bg-default-100 flex cursor-pointer items-center justify-between rounded-lg p-3 transition-colors"
   >
     <div class="flex items-center">
@@ -28,10 +28,12 @@ const { data } = await useFetch(`/api/ranking/user`, {
 
     <div class="flex items-center space-x-2">
       <KunIcon
-        :name="userIconMap[userRankingPageData.sortField]"
+        :name="
+          userSortItem.find((i) => i.sortField === user.sortField)?.icon || ''
+        "
         class="text-primary h-5 w-5"
       />
-      <span class="font-medium">{{ user.field }}</span>
+      <span class="font-medium">{{ user.value }}</span>
     </div>
   </KunLink>
 </template>
