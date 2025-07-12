@@ -26,7 +26,7 @@ onBeforeRouteLeave(async (to, from, next) => {
         :is-hoverable="false"
         :is-pressable="false"
         :is-transparent="false"
-        class-name="lg:col-span-1"
+        class-name="lg:col-span-1 order-2 sm:order-1"
         content-class="space-y-6"
       >
         <EditTopicMetadataEditor />
@@ -34,7 +34,7 @@ onBeforeRouteLeave(async (to, from, next) => {
         <EditTopicSubmitActions />
       </KunCard>
 
-      <div class="space-y-3 lg:col-span-2">
+      <div class="order-1 space-y-3 sm:order-2 lg:col-span-2">
         <KunCard
           :is-hoverable="false"
           :is-pressable="false"

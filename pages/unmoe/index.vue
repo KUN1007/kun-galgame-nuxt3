@@ -8,12 +8,12 @@ useHead({
   link: [
     {
       rel: 'canonical',
-      href: `${kungal.domain.main}/non-moe`
+      href: `${kungal.domain.main}/unmoe`
     }
   ]
 })
 </script>
 
 <template>
-  <NonMoeContainer />
+  <UnmoeContainer />
 </template>

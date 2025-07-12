@@ -54,7 +54,7 @@ watch(
       :is-hoverable="false"
       :is-transparent="false"
       v-for="todo in data.todos"
-      :key="todo.todoId"
+      :key="todo.id"
       :color="colorMap[todo.status]"
     >
       <pre class="mb-4 font-mono break-all whitespace-pre-line">
@@ -65,7 +65,7 @@ watch(
         class="flex flex-col items-start gap-2 text-sm sm:flex-row sm:items-center sm:justify-between"
       >
         <span class="text-default-600">
-          {{ formatDate(todo.time, { isPrecise: true }) }}
+          {{ formatDate(todo.created, { isPrecise: true }) }}
         </span>
 
         <div class="flex items-center gap-2">

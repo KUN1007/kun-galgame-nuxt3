@@ -79,14 +79,14 @@ const handleTagInputBackspace = () => {
         <Icon name="lucide:layout-grid" class="h-5 w-5" />
         选择分类 <span class="text-danger-500">*</span>
       </h3>
-      <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+      <div class="grid grid-cols-3 gap-3">
         <button
           v-for="cat in TOPIC_CATEGORIES"
           :key="cat.key"
           @click="handleSelectCategory(cat.key)"
           :class="
             cn(
-              'flex flex-col items-center justify-center rounded-lg border-2 p-4 transition-all duration-200',
+              'flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 p-4 transition-all duration-200',
               category === cat.key
                 ? 'border-primary-500 bg-primary-50 shadow-md'
                 : 'border-default-200 bg-default-50 hover:border-primary-400 hover:bg-primary-50/50'

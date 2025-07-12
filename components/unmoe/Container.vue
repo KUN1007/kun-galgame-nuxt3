@@ -4,7 +4,7 @@ const pageData = reactive({
   limit: 30
 })
 
-const { data, status } = await useFetch(`/api/non-moe`, {
+const { data, status } = await useFetch(`/api/unmoe`, {
   method: 'GET',
   query: pageData,
   ...kungalgameResponseHandler

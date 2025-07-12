@@ -131,9 +131,9 @@ export const kunLayoutItem: KunLayoutItem[] = [
     label: '友情链接'
   },
   {
-    name: 'nonMoe',
+    name: 'unmoe',
     icon: 'lucide:ban',
-    router: '/non-moe',
+    router: '/unmoe',
     label: '不萌记录'
   }
 ]

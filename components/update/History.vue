@@ -32,14 +32,15 @@ watch(
       :is-hoverable="false"
       :is-transparent="false"
       v-for="kun in data.updates"
-      :key="kun.upid"
+      :key="kun.id"
     >
       <div class="mb-3 flex items-center gap-3">
         <KunBadge color="primary">
           {{ KUN_UPDATE_LOG_TYPE_MAP[kun.type] }}
         </KunBadge>
         <span class="text-default-500 text-sm">
-          {{ kun.time }} - Version {{ kun.version }}
+          {{ formatDate(kun.created, { isShowYear: true }) }} - Version
+          {{ kun.version }}
         </span>
       </div>
       <pre

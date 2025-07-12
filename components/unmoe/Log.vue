@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { NonMoeLog } from '~/types/api/non-moe'
+import type { UnmoeLog } from '~/types/api/unmoe'
 
 const props = defineProps<{
-  logs: NonMoeLog[]
+  logs: UnmoeLog[]
 }>()
 
 const logs = computed(() => props.logs)
@@ -13,7 +13,7 @@ const logs = computed(() => props.logs)
     <KunCard :is-hoverable="false" v-for="(kun, index) in logs" :key="index">
       <div>
         @
-        <KunLink :to="`/user/${kun.uid}/info`">
+        <KunLink :to="`/user/${kun.id}/info`">
           {{ kun.name }}
         </KunLink>
       </div>
@@ -26,7 +26,7 @@ const logs = computed(() => props.logs)
       <div class="text-default-500 flex items-center justify-between text-sm">
         <div class="text-default-500 flex items-center gap-1">
           <KunIcon name="lucide:clock-7" />
-          <span>{{ formatDate(kun.time, { isShowYear: true }) }}</span>
+          <span>{{ formatDate(kun.created, { isShowYear: true }) }}</span>
         </div>
         <div class="flex items-center gap-1">
           <KunIcon name="lucide:triangle-alert" class="text-warning h-4 w-4" />
