@@ -12,10 +12,8 @@ const logs = computed(() => props.logs)
   <div class="space-y-4">
     <KunCard :is-hoverable="false" v-for="(kun, index) in logs" :key="index">
       <div>
-        @
-        <KunLink :to="`/user/${kun.id}/info`">
-          {{ kun.name }}
-        </KunLink>
+        违规用户名:
+        {{ kun.name }}
       </div>
 
       <div

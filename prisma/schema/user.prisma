@@ -68,8 +68,8 @@ model user_friend {
     user_id   Int
     friend_id Int
 
-    user   user @relation("user_friend", fields: [user_id], references: [id])
-    friend user @relation("friend_to_user", fields: [friend_id], references: [id])
+    user   user @relation("user_friend", fields: [user_id], references: [id], onDelete: Cascade)
+    friend user @relation("friend_to_user", fields: [friend_id], references: [id], onDelete: Cascade)
 
     created DateTime @default(now())
     updated DateTime @updatedAt
@@ -82,8 +82,8 @@ model user_follow {
     follower_id Int
     followed_id Int
 
-    follower user @relation("follower_to_user", fields: [follower_id], references: [id])
-    followed user @relation("user_followed", fields: [followed_id], references: [id])
+    follower user @relation("follower_to_user", fields: [follower_id], references: [id], onDelete: Cascade)
+    followed user @relation("user_followed", fields: [followed_id], references: [id], onDelete: Cascade)
 
     created DateTime @default(now())
     updated DateTime @updatedAt

@@ -3,6 +3,7 @@ model chat_room {
   name                     String    @unique @default("")
   avatar                   String    @default("")
   type                     String
+  // TODO:
   last_message_content     String    @default("")
   last_message_time        DateTime?
   last_message_sender_id   Int?
@@ -20,9 +21,9 @@ model chat_room_participant {
   id Int @id @default(autoincrement())
 
   chat_room_id Int
-  chat_room    chat_room @relation(fields: [chat_room_id], references: [id])
+  chat_room    chat_room @relation(fields: [chat_room_id], references: [id], onDelete: Cascade)
   user_id      Int
-  user         user      @relation(fields: [user_id], references: [id])
+  user         user      @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   created DateTime @default(now())
   updated DateTime @updatedAt
@@ -34,9 +35,9 @@ model chat_room_admin {
   id Int @id @default(autoincrement())
 
   chat_room_id Int
-  chat_room    chat_room @relation(fields: [chat_room_id], references: [id])
+  chat_room    chat_room @relation(fields: [chat_room_id], references: [id], onDelete: Cascade)
   user_id      Int
-  user         user      @relation(fields: [user_id], references: [id])
+  user         user      @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   created DateTime @default(now())
   updated DateTime @updatedAt
@@ -53,11 +54,11 @@ model chat_message {
   edit_time     DateTime?
 
   chat_room_id Int
-  chat_room    chat_room @relation(fields: [chat_room_id], references: [id])
+  chat_room    chat_room @relation(fields: [chat_room_id], references: [id], onDelete: Cascade)
   sender_id    Int
-  sender       user      @relation("user_send_chat_message", fields: [sender_id], references: [id])
+  sender       user      @relation("user_send_chat_message", fields: [sender_id], references: [id], onDelete: Cascade)
   receiver_id  Int?
-  receiver     user?     @relation("user_receive_chat_receive_message", fields: [receiver_id], references: [id])
+  receiver     user?     @relation("user_receive_chat_receive_message", fields: [receiver_id], references: [id], onDelete: Cascade)
 
   read_by  chat_message_read_by[]
   reaction chat_message_reaction[]
@@ -71,9 +72,9 @@ model chat_message_read_by {
   read_time DateTime @default(now())
 
   chat_message_id Int
-  chat_message    chat_message @relation(fields: [chat_message_id], references: [id])
+  chat_message    chat_message @relation(fields: [chat_message_id], references: [id], onDelete: Cascade)
   user_id         Int
-  user            user         @relation(fields: [user_id], references: [id])
+  user            user         @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   created DateTime @default(now())
   updated DateTime @updatedAt
@@ -86,9 +87,9 @@ model chat_message_reaction {
   reaction String
 
   chat_message_id Int
-  chat_message    chat_message @relation(fields: [chat_message_id], references: [id])
+  chat_message    chat_message @relation(fields: [chat_message_id], references: [id], onDelete: Cascade)
   user_id         Int
-  user            user         @relation(fields: [user_id], references: [id])
+  user            user         @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   created DateTime @default(now())
   updated DateTime @updatedAt

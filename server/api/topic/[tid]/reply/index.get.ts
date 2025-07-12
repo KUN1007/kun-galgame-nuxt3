@@ -45,7 +45,7 @@ const getTopicReplies = async (
       },
 
       _count: {
-        select: { like: true, dislike: true, comment: true }
+        select: { like: true, dislike: true, comment: true, target_by: true }
       },
       like: { where: { user_id: uid } },
       dislike: { where: { user_id: uid } },
@@ -111,6 +111,7 @@ const getTopicReplies = async (
         likeCount: reply._count.like,
         isLiked: reply.like.length > 0,
         dislikeCount: reply._count.dislike,
+        targetByCount: reply._count.target_by,
         isDisliked: reply.dislike.length > 0,
         comment: comments,
         created: reply.created,

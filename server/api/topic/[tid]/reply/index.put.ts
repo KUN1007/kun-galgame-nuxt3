@@ -74,7 +74,8 @@ export default defineEventHandler(async (event) => {
         _count: {
           select: {
             like: true,
-            dislike: true
+            dislike: true,
+            target_by: true
           }
         }
       }
@@ -139,6 +140,7 @@ export default defineEventHandler(async (event) => {
       isLiked: result.like.length > 0,
       dislikeCount: result._count.dislike,
       isDisliked: result.dislike.length > 0,
+      targetByCount: result._count.target_by,
       comment: [],
       created: result.created,
       targets: formattedTargets

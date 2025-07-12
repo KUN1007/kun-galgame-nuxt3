@@ -78,6 +78,8 @@ const handleClickComment = (id: number, uid: number, name: string) => {
           <KunIcon name="uil:comment-dots" />
         </KunButton>
       </KunTooltip>
+
+      <TopicReplyDelete :reply="reply" />
     </div>
   </div>
 </template>

@@ -13,7 +13,7 @@ model topic {
     upvote_time        DateTime?
 
     user_id Int
-    user    user @relation("user_topic", fields: [user_id], references: [id])
+    user    user @relation("user_topic", fields: [user_id], references: [id], onDelete: Cascade)
 
     reply   topic_reply[]
     comment topic_comment[]
@@ -41,9 +41,9 @@ model topic_section {
 
 model topic_section_relation {
     topic_id         Int
-    topic            topic         @relation(fields: [topic_id], references: [id])
+    topic            topic         @relation(fields: [topic_id], references: [id], onDelete: Cascade)
     topic_section_id Int
-    topic_section    topic_section @relation(fields: [topic_section_id], references: [id])
+    topic_section    topic_section @relation(fields: [topic_section_id], references: [id], onDelete: Cascade)
 
     created_at DateTime @default(now())
     updated_at DateTime @updatedAt
@@ -56,9 +56,9 @@ model topic_upvote {
     id Int @id @default(autoincrement())
 
     topic_id Int
-    topic    topic @relation(fields: [topic_id], references: [id])
+    topic    topic @relation(fields: [topic_id], references: [id], onDelete: Cascade)
     user_id  Int
-    user     user  @relation(fields: [user_id], references: [id])
+    user     user  @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
     created DateTime @default(now())
     updated DateTime @updatedAt
@@ -68,9 +68,9 @@ model topic_like {
     id Int @id @default(autoincrement())
 
     topic_id Int
-    topic    topic @relation(fields: [topic_id], references: [id])
+    topic    topic @relation(fields: [topic_id], references: [id], onDelete: Cascade)
     user_id  Int
-    user     user  @relation(fields: [user_id], references: [id])
+    user     user  @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
     created DateTime @default(now())
     updated DateTime @updatedAt
@@ -82,9 +82,9 @@ model topic_dislike {
     id Int @id @default(autoincrement())
 
     topic_id Int
-    topic    topic @relation(fields: [topic_id], references: [id])
+    topic    topic @relation(fields: [topic_id], references: [id], onDelete: Cascade)
     user_id  Int
-    user     user  @relation(fields: [user_id], references: [id])
+    user     user  @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
     created DateTime @default(now())
     updated DateTime @updatedAt
@@ -96,9 +96,9 @@ model topic_favorite {
     id Int @id @default(autoincrement())
 
     topic_id Int
-    topic    topic @relation(fields: [topic_id], references: [id])
+    topic    topic @relation(fields: [topic_id], references: [id], onDelete: Cascade)
     user_id  Int
-    user     user  @relation(fields: [user_id], references: [id])
+    user     user  @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
     created DateTime @default(now())
     updated DateTime @updatedAt

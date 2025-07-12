@@ -4,9 +4,9 @@ model galgame_link {
   link String @default("") @db.VarChar(233)
 
   galgame_id Int
-  galgame    galgame @relation(fields: [galgame_id], references: [id])
+  galgame    galgame @relation(fields: [galgame_id], references: [id], onDelete: Cascade)
   user_id    Int
-  user       user    @relation(fields: [user_id], references: [id])
+  user       user    @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   created DateTime @default(now())
   updated DateTime @updatedAt

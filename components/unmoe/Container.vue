@@ -24,7 +24,7 @@ const { data, status } = await useFetch(`/api/unmoe`, {
     />
 
     <div class="space-y-6">
-      <NonMoeLog v-if="data.logs.length" :logs="data.logs" />
+      <UnmoeLog v-if="data.logs.length" :logs="data.logs" />
 
       <div
         v-if="!data.logs.length"

@@ -40,7 +40,7 @@ export default defineEventHandler(async (event) => {
       },
 
       _count: {
-        select: { like: true, dislike: true, comment: true }
+        select: { like: true, dislike: true, comment: true, target_by: true }
       },
       like: { where: { user_id: uid } },
       dislike: { where: { user_id: uid } }
@@ -78,6 +78,7 @@ export default defineEventHandler(async (event) => {
     isLiked: reply.like.length > 0,
     dislikeCount: reply._count.dislike,
     isDisliked: reply.dislike.length > 0,
+    targetByCount: reply._count.target_by,
     created: reply.created,
     targets: targets
   }

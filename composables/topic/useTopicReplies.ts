@@ -97,6 +97,13 @@ export const useTopicReplies = (topicId: number | Ref<number>) => {
     }
   }
 
+  const removeReply = (replyId: number) => {
+    const index = replies.value.findIndex((r) => r.id === replyId)
+    if (index !== -1) {
+      replies.value.splice(index, 1)
+    }
+  }
+
   return {
     replies,
     status,
@@ -106,6 +113,7 @@ export const useTopicReplies = (topicId: number | Ref<number>) => {
     loadMore,
     setSort,
     addNewReply,
-    updateReply
+    updateReply,
+    removeReply
   }
 }

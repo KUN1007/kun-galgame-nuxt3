@@ -11,9 +11,9 @@ model galgame_resource {
   status      Int      @default(0)
 
   galgame_id Int
-  galgame    galgame @relation(fields: [galgame_id], references: [id])
+  galgame    galgame @relation(fields: [galgame_id], references: [id], onDelete: Cascade)
   user_id    Int
-  user       user    @relation("user_galgame_resource", fields: [user_id], references: [id])
+  user       user    @relation("user_galgame_resource", fields: [user_id], references: [id], onDelete: Cascade)
 
   link galgame_resource_link[]
   like galgame_resource_like[]
@@ -39,9 +39,9 @@ model galgame_resource_like {
   id Int @id @default(autoincrement())
 
   user_id             Int
-  user                user             @relation(fields: [user_id], references: [id])
+  user                user             @relation(fields: [user_id], references: [id], onDelete: Cascade)
   galgame_resource_id Int
-  galgame_resource    galgame_resource @relation(fields: [galgame_resource_id], references: [id])
+  galgame_resource    galgame_resource @relation(fields: [galgame_resource_id], references: [id], onDelete: Cascade)
 
   created DateTime @default(now())
   updated DateTime @updatedAt

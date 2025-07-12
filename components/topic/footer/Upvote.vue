@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { KunTooltip } from '#components'
-
 const props = defineProps<{
   topicId?: number
   targetUserId: number

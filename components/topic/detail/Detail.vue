@@ -19,7 +19,8 @@ const {
   loadMore,
   setSort,
   addNewReply,
-  updateReply
+  updateReply,
+  removeReply
 } = useTopicReplies(props.topic.id)
 
 await loadInitialReplies()
@@ -51,6 +52,9 @@ watch(
             block: 'center'
           })
         })
+        break
+      case 'deleted':
+        removeReply(event.data.id)
         break
     }
 

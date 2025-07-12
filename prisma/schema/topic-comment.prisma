@@ -3,13 +3,13 @@ model topic_comment {
   content String @default("") @db.VarChar(1007)
 
   topic_id       Int
-  topic          topic       @relation(fields: [topic_id], references: [id])
+  topic          topic       @relation(fields: [topic_id], references: [id], onDelete: Cascade)
   topic_reply_id Int
-  topic_reply    topic_reply @relation(fields: [topic_reply_id], references: [id])
+  topic_reply    topic_reply @relation(fields: [topic_reply_id], references: [id], onDelete: Cascade)
   user_id        Int
-  user           user        @relation("user_created_topic_comment", fields: [user_id], references: [id])
+  user           user        @relation("user_created_topic_comment", fields: [user_id], references: [id], onDelete: Cascade)
   target_user_id Int
-  target_user    user        @relation("topic_comment_target_user", fields: [target_user_id], references: [id])
+  target_user    user        @relation("topic_comment_target_user", fields: [target_user_id], references: [id], onDelete: Cascade)
 
   like topic_comment_like[]
 
@@ -21,9 +21,9 @@ model topic_comment_like {
   id Int @id @default(autoincrement())
 
   topic_comment_id Int
-  comment          topic_comment @relation(fields: [topic_comment_id], references: [id])
+  comment          topic_comment @relation(fields: [topic_comment_id], references: [id], onDelete: Cascade)
   user_id          Int
-  user             user          @relation(fields: [user_id], references: [id])
+  user             user          @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   created DateTime @default(now())
   updated DateTime @updatedAt

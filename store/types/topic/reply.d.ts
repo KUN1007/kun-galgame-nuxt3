@@ -20,7 +20,7 @@ export interface ReplyRewriteData {
 
 export interface SuccessfulReplyEvent {
   data: TopicReply
-  type: 'created' | 'updated'
+  type: 'created' | 'updated' | 'deleted'
 }
 
 export interface ReplyStoreTemp {

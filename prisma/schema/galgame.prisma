@@ -16,9 +16,9 @@ model galgame {
   resource_update_time DateTime @default(now())
 
   user_id   Int
-  user      user            @relation("user_galgame", fields: [user_id], references: [id])
+  user      user            @relation("user_galgame", fields: [user_id], references: [id], onDelete: Cascade)
   series_id Int?
-  series    galgame_series? @relation(fields: [series_id], references: [id])
+  series    galgame_series? @relation(fields: [series_id], references: [id], onDelete: Cascade)
 
   resource galgame_resource[]
   comment  galgame_comment[]
@@ -55,7 +55,7 @@ model galgame_alias {
   name String @default("")
 
   galgame_id Int
-  galgame    galgame @relation(fields: [galgame_id], references: [id])
+  galgame    galgame @relation(fields: [galgame_id], references: [id], onDelete: Cascade)
 
   created DateTime @default(now())
   updated DateTime @updatedAt
@@ -67,9 +67,9 @@ model galgame_like {
   id Int @id @default(autoincrement())
 
   galgame_id Int
-  galgame    galgame @relation(fields: [galgame_id], references: [id])
+  galgame    galgame @relation(fields: [galgame_id], references: [id], onDelete: Cascade)
   user_id    Int
-  user       user    @relation(fields: [user_id], references: [id])
+  user       user    @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   created DateTime @default(now())
   updated DateTime @updatedAt
@@ -81,9 +81,9 @@ model galgame_favorite {
   id Int @id @default(autoincrement())
 
   galgame_id Int
-  galgame    galgame @relation(fields: [galgame_id], references: [id])
+  galgame    galgame @relation(fields: [galgame_id], references: [id], onDelete: Cascade)
   user_id    Int
-  user       user    @relation(fields: [user_id], references: [id])
+  user       user    @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   created DateTime @default(now())
   updated DateTime @updatedAt
@@ -95,9 +95,9 @@ model galgame_contributor {
   id Int @id @default(autoincrement())
 
   galgame_id Int
-  galgame    galgame @relation(fields: [galgame_id], references: [id])
+  galgame    galgame @relation(fields: [galgame_id], references: [id], onDelete: Cascade)
   user_id    Int
-  user       user    @relation(fields: [user_id], references: [id])
+  user       user    @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   created DateTime @default(now())
   updated DateTime @updatedAt
@@ -140,9 +140,9 @@ model galgame_tag {
 
 model galgame_official_relation {
   galgame_id  Int
-  galgame     galgame          @relation(fields: [galgame_id], references: [id])
+  galgame     galgame          @relation(fields: [galgame_id], references: [id], onDelete: Cascade)
   official_id Int
-  official    galgame_official @relation(fields: [official_id], references: [id])
+  official    galgame_official @relation(fields: [official_id], references: [id], onDelete: Cascade)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -152,9 +152,9 @@ model galgame_official_relation {
 
 model galgame_engine_relation {
   galgame_id Int
-  galgame    galgame        @relation(fields: [galgame_id], references: [id])
+  galgame    galgame        @relation(fields: [galgame_id], references: [id], onDelete: Cascade)
   engine_id  Int
-  engine     galgame_engine @relation(fields: [engine_id], references: [id])
+  engine     galgame_engine @relation(fields: [engine_id], references: [id], onDelete: Cascade)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -164,9 +164,9 @@ model galgame_engine_relation {
 
 model galgame_tag_relation {
   galgame_id Int
-  galgame    galgame     @relation(fields: [galgame_id], references: [id])
+  galgame    galgame     @relation(fields: [galgame_id], references: [id], onDelete: Cascade)
   tag_id     Int
-  tag        galgame_tag @relation(fields: [tag_id], references: [id])
+  tag        galgame_tag @relation(fields: [tag_id], references: [id], onDelete: Cascade)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

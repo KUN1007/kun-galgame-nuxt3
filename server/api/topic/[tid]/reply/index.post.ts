@@ -120,6 +120,7 @@ export default defineEventHandler(async (event) => {
       isLiked: false,
       dislikeCount: 0,
       isDisliked: false,
+      targetByCount: 0,
       created: newReply.created,
       comment: [],
       targets: formattedTargets

@@ -5,9 +5,9 @@ model topic_reply {
     edited  DateTime?
 
     user_id  Int
-    user     user  @relation("user_created_topic_reply", fields: [user_id], references: [id])
+    user     user  @relation("user_created_topic_reply", fields: [user_id], references: [id], onDelete: Cascade)
     topic_id Int
-    topic    topic @relation(fields: [topic_id], references: [id])
+    topic    topic @relation(fields: [topic_id], references: [id], onDelete: Cascade)
 
     target    topic_reply_target[] @relation("reply_to_target")
     target_by topic_reply_target[] @relation("target_of_reply")
@@ -24,9 +24,9 @@ model topic_reply_like {
     id Int @id @default(autoincrement())
 
     user_id        Int
-    user           user        @relation(fields: [user_id], references: [id])
+    user           user        @relation(fields: [user_id], references: [id], onDelete: Cascade)
     topic_reply_id Int
-    reply          topic_reply @relation(fields: [topic_reply_id], references: [id])
+    reply          topic_reply @relation(fields: [topic_reply_id], references: [id], onDelete: Cascade)
 
     created DateTime @default(now())
     updated DateTime @updatedAt
@@ -38,9 +38,9 @@ model topic_reply_dislike {
     id Int @id @default(autoincrement())
 
     user_id        Int
-    user           user        @relation(fields: [user_id], references: [id])
+    user           user        @relation(fields: [user_id], references: [id], onDelete: Cascade)
     topic_reply_id Int
-    reply          topic_reply @relation(fields: [topic_reply_id], references: [id])
+    reply          topic_reply @relation(fields: [topic_reply_id], references: [id], onDelete: Cascade)
 
     created DateTime @default(now())
     updated DateTime @updatedAt

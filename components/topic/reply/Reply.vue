@@ -35,9 +35,10 @@ watch(
 )
 
 const replyContent = computed(() => {
-  const targetsContent = props.reply.targets.map((t) => t.replyContentMarkdown)
-  const content = props.reply.contentMarkdown + targetsContent.join('')
-  return markdownToText(content).slice(0, 20)
+  const targetsContent = props.reply.targets.map((t) => t.contentPreview)
+  const content =
+    markdownToText(props.reply.contentMarkdown) + targetsContent.join('')
+  return content.slice(0, 20)
 })
 </script>
 

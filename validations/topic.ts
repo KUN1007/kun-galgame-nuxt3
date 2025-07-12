@@ -6,6 +6,7 @@ import {
 } from '~/constants/topic'
 
 const SORT_ORDER_CONST = ['asc', 'desc'] as const
+const DELETE_TYPE_CONST = ['soft', 'hard'] as const
 
 /*
  * Topic
@@ -137,6 +138,10 @@ export const updateReplyLikeSchema = z.object({
 })
 
 export const updateReplyDislikeSchema = z.object({
+  replyId: z.coerce.number().min(1).max(9999999)
+})
+
+export const deleteReplySchema = z.object({
   replyId: z.coerce.number().min(1).max(9999999)
 })
 

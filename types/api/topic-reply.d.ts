@@ -16,10 +16,13 @@ export interface TopicReply {
   user: KunUser & { moemoepoint: number }
   contentHtml: string
   contentMarkdown: string
+
   likeCount: number
   isLiked: boolean
   dislikeCount: number
   isDisliked: boolean
+  targetByCount: number
+
   comment: TopicComment[]
   created: Date | string
   edited: Date | string | null
