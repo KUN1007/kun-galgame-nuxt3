@@ -2,7 +2,19 @@ import prisma from '~/prisma/prisma'
 import type { GalgameSeries, GalgameSample } from '~/types/api/series'
 
 export default defineEventHandler(async (event) => {
+  const nsfw = getNSFWCookie(event)
+  const isSFW = nsfw === 'sfw'
+
   const data = await prisma.galgame_series.findMany({
+    where: isSFW
+      ? {
+          galgame: {
+            some: {
+              content_limit: 'sfw'
+            }
+          }
+        }
+      : {},
     include: {
       _count: {
         select: {
@@ -10,6 +22,11 @@ export default defineEventHandler(async (event) => {
         }
       },
       galgame: {
+        where: isSFW
+          ? {
+              content_limit: 'sfw'
+            }
+          : {},
         select: {
           content_limit: true,
           name_en_us: true,

@@ -17,15 +17,21 @@ provide<GalgameDetail>('galgame', props.galgame)
         <KunCard
           :is-hoverable="false"
           :is-transparent="false"
-          content-class="space-y-6 relative"
+          content-class="space-y-12 relative"
         >
           <GalgameIntroduction :introduction="galgame.introduction" />
 
-          <KunDivider />
-
           <GalgameResource />
 
-          <GalgameSeries v-if="galgame.series" />
+          <div class="space-y-3">
+            <KunHeader
+              name="Galgame 系列"
+              description="Galgame 全系列所有 Galgame 作品。例如美少女万华镜 1, 2, 3, 4, 5, 雪女, 外传 就是一个 Galgame 系列"
+              scale="h3"
+              :is-show-divider="false"
+            />
+            <SeriesCard v-if="galgame.series" :series="galgame.series" />
+          </div>
 
           <GalgameCommentContainer
             :user-data="galgame.contributor"

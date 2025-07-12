@@ -3,18 +3,12 @@ import type {
   LanguageOptions,
   PlatformOptions
 } from '~/components/galgame/utils/options'
+import type { GalgameSeries } from './series'
 
 export interface GalgameSeriesItem {
   id: number
   name: KunLanguage
   banner: string
-}
-
-export interface GalgameSeries {
-  id: number
-  name: string
-  description: string
-  galgame: GalgameSeriesItem[]
 }
 
 export interface GalgameDetail {

@@ -1,6 +1,7 @@
 import prisma from '~/prisma/prisma'
 import { getGalgameDetailSchema } from '~/validations/galgame'
 import type { GalgameDetail } from '~/types/api/galgame'
+import type { GalgameSeries, GalgameSample } from '~/types/api/series'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getGalgameDetailSchema)
@@ -44,18 +45,24 @@ export default defineEventHandler(async (event) => {
         },
         alias: { select: { name: true } },
         series: {
-          select: {
-            id: true,
-            name: true,
-            description: true,
+          include: {
+            _count: {
+              select: {
+                galgame: true
+              }
+            },
             galgame: {
               select: {
-                id: true,
+                content_limit: true,
                 name_en_us: true,
                 name_ja_jp: true,
                 name_zh_cn: true,
                 name_zh_tw: true,
                 banner: true
+              },
+              take: 5,
+              orderBy: {
+                created: 'asc'
               }
             }
           }
@@ -91,6 +98,33 @@ export default defineEventHandler(async (event) => {
       markdownToHtml(galgame.intro_zh_cn),
       markdownToHtml(galgame.intro_zh_tw)
     ])
+
+  const sampleGalgame: GalgameSample[] = galgame.series
+    ? galgame.series.galgame.map((g) => ({
+        banner: g.banner,
+        name: {
+          'en-us': g.name_en_us,
+          'ja-jp': g.name_ja_jp,
+          'zh-cn': g.name_zh_cn,
+          'zh-tw': g.name_zh_tw
+        }
+      }))
+    : []
+  const isSeriesNSFW = galgame.series
+    ? galgame.series.galgame.some((g) => g.content_limit === 'nsfw')
+    : false
+  const galgameSeries: GalgameSeries | null = galgame.series
+    ? {
+        id: galgame.series.id,
+        name: galgame.series.name,
+        description: galgame.series.description,
+        isNSFW: isSeriesNSFW,
+        sampleGalgame,
+        galgameCount: galgame.series._count.galgame,
+        created: galgame.series.created,
+        updated: galgame.series.updated
+      }
+    : null
 
   const data: GalgameDetail = {
     id: galgame.id,
@@ -130,7 +164,7 @@ export default defineEventHandler(async (event) => {
     official: galgame.official.map((o) => o.official.name),
     engine: galgame.engine.map((e) => e.engine.name),
     tags: galgame.tag.map((t) => t.tag.name),
-    series: galgame.series,
+    series: galgameSeries,
     created: galgame.created,
     updated: galgame.updated
   }
