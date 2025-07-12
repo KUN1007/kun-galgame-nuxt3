@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { topicSortItem } from '~/constants/ranking'
-import { topicRankingPageData } from './pageData'
+import { topicRankingPageData, getRankClasses } from './pageData'
 
 const { data } = await useFetch(`/api/ranking/topic`, {
   method: 'GET',
@@ -10,31 +10,53 @@ const { data } = await useFetch(`/api/ranking/topic`, {
 </script>
 
 <template>
-  <KunLink
-    color="default"
-    underline="none"
-    v-for="(topic, index) in data"
-    :key="topic.id"
-    :to="`/topic/${topic.id}`"
-    class-name="hover:bg-default-100 flex cursor-pointer items-center justify-between rounded-lg p-3 transition-colors"
-  >
-    <div class="flex items-center">
-      <span class="text-default-500 w-12 text-xl font-bold">
-        {{ index + 1 }}
-      </span>
-      <h3>
-        {{ topic.title }}
-      </h3>
-    </div>
-
-    <div class="flex items-center space-x-2">
-      <KunIcon
-        :name="
-          topicSortItem.find((i) => i.sortField === topic.sortField)?.icon || ''
+  <ul v-if="data" class="space-y-3">
+    <li v-for="(topic, index) in data" :key="topic.id">
+      <KunLink
+        color="default"
+        underline="none"
+        :to="`/topic/${topic.id}`"
+        :class-name="
+          cn(
+            'relative flex items-center gap-4 rounded-xl border p-3 transition-all hover:shadow-md hover:-translate-y-1',
+            getRankClasses(index)
+          )
         "
-        class="text-primary h-5 w-5"
-      />
-      <span class="font-medium">{{ topic.value }}</span>
-    </div>
-  </KunLink>
+      >
+        <RankingMedal :index="index" />
+
+        <div class="flex-1 overflow-hidden">
+          <h3 class="truncate font-semibold">{{ topic.title }}</h3>
+          <div class="mt-1 flex items-center gap-2">
+            <KunAvatar :user="topic.user" size="sm" />
+            <span class="text-default-500 text-sm">{{ topic.user.name }}</span>
+
+            <div class="flex shrink-0 items-center gap-2 sm:hidden">
+              <KunIcon
+                :name="
+                  topicSortItem.find((i) => i.sortField === topic.sortField)
+                    ?.icon || ''
+                "
+                class="text-primary h-5 w-5"
+              />
+              <span class="text-default-500 text-sm">
+                {{ topic.value }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hidden shrink-0 items-center gap-2 sm:flex">
+          <KunIcon
+            :name="
+              topicSortItem.find((i) => i.sortField === topic.sortField)
+                ?.icon || ''
+            "
+            class="text-primary h-5 w-5"
+          />
+          <span class="text-lg font-medium">{{ topic.value }}</span>
+        </div>
+      </KunLink>
+    </li>
+  </ul>
 </template>

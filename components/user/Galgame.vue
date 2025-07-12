@@ -27,7 +27,7 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/galgames`, {
   <div class="space-y-3">
     <KunHeader
       name="Galgame 列表"
-      description="这是您的 Galgame 列表, 为什么这里的 Galgame 没有预览图! 因为我还在咕咕咕!"
+      description="这是您的 Galgame 列表。什么你问我为什么评论还有历史都是 Galgame, 因为我还在咕咕咕! 八嘎!"
     />
 
     <KunTab

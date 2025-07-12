@@ -22,6 +22,13 @@ export default defineEventHandler(async (event) => {
     name_zh_tw: true,
     banner: true,
     created: true,
+    user: {
+      select: {
+        id: true,
+        name: true,
+        avatar: true
+      }
+    },
     ...(sortField === 'view' && { view: true }),
     ...(isCountField && {
       _count: {
@@ -57,6 +64,7 @@ export default defineEventHandler(async (event) => {
         'zh-cn': game.name_zh_cn,
         'zh-tw': game.name_zh_tw
       },
+      user: game.user,
       banner: game.banner,
       created: game.created,
       value,

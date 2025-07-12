@@ -41,7 +41,7 @@ import { friendArray } from '~/config/friend'
             </span>
             <KunBadge v-if="friend.status" color="danger">已下线</KunBadge>
           </div>
-          <div class="mb-3 text-sm text-neutral-600 dark:text-neutral-400">
+          <div class="text-default-600 mb-3 text-sm">
             {{
               friend.label.length > 107
                 ? `${friend.label.slice(0, 107)}...`
@@ -61,7 +61,7 @@ import { friendArray } from '~/config/friend'
         <h3 class="text-primary text-xl font-bold">加入我们</h3>
       </KunLink>
 
-      <p class="text-sm text-neutral-600 dark:text-neutral-400">
+      <p class="text-default-600 text-sm">
         要加入我们, 请加入我们的群组, 提供您的网站链接
       </p>
     </div>

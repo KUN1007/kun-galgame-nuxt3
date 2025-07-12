@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { galgameSortItem } from '~/constants/ranking'
-import { galgameRankingPageData } from './pageData'
+import { galgameRankingPageData, getRankClasses } from './pageData'
 
 const { data } = await useFetch(`/api/ranking/galgame`, {
   method: 'GET',
@@ -10,30 +10,66 @@ const { data } = await useFetch(`/api/ranking/galgame`, {
 </script>
 
 <template>
-  <KunLink
-    color="default"
-    underline="none"
-    v-for="(galgame, index) in data"
-    :key="galgame.id"
-    :to="`/user/${galgame.id}/info`"
-    class-name="hover:bg-default-100 flex cursor-pointer items-center justify-between rounded-lg p-3 transition-colors"
-  >
-    <div class="flex items-center">
-      <span class="text-default-500 w-12 text-xl font-bold">
-        {{ index + 1 }}
-      </span>
-      {{ getPreferredLanguageText(galgame.name) }}
-    </div>
-
-    <div class="flex items-center space-x-2">
-      <KunIcon
-        :name="
-          galgameSortItem.find((i) => i.sortField === galgame.sortField)
-            ?.icon || ''
+  <ul v-if="data" class="space-y-3">
+    <li v-for="(galgame, index) in data" :key="galgame.id">
+      <KunLink
+        color="default"
+        underline="none"
+        :to="`/galgame/${galgame.id}`"
+        :class-name="
+          cn(
+            'relative flex items-center gap-4 rounded-xl border p-3 transition-all hover:shadow-md hover:-translate-y-1',
+            getRankClasses(index)
+          )
         "
-        class="text-primary h-5 w-5"
-      />
-      <span class="font-medium">{{ galgame.value }}</span>
-    </div>
-  </KunLink>
+      >
+        <RankingMedal :index="index" />
+
+        <div
+          class="aspect-video h-16 shrink-0 overflow-hidden rounded-md bg-cover bg-center"
+          :style="{
+            backgroundImage: `url(${galgame.banner.replace(/\.webp$/, '-mini.webp')})`
+          }"
+        />
+        <div class="flex-1 overflow-hidden">
+          <div class="flex flex-col items-start justify-between gap-3">
+            <h3 class="truncate font-semibold">
+              {{ getPreferredLanguageText(galgame.name) }}
+            </h3>
+            <div class="mt-1 flex items-center gap-2">
+              <KunAvatar :user="galgame.user" size="sm" />
+              <span class="text-default-500 text-sm">
+                {{ galgame.user.name }}
+              </span>
+
+              <div class="flex shrink-0 items-center gap-2 sm:hidden">
+                <KunIcon
+                  :name="
+                    galgameSortItem.find(
+                      (i) => i.sortField === galgame.sortField
+                    )?.icon || ''
+                  "
+                  class="text-primary"
+                />
+                <span class="text-default-500 text-sm">
+                  {{ galgame.value }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hidden shrink-0 items-center gap-2 sm:flex">
+          <KunIcon
+            :name="
+              galgameSortItem.find((i) => i.sortField === galgame.sortField)
+                ?.icon || ''
+            "
+            class="text-primary h-5 w-5"
+          />
+          <span class="text-lg font-medium">{{ galgame.value }}</span>
+        </div>
+      </KunLink>
+    </li>
+  </ul>
 </template>

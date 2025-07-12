@@ -32,7 +32,6 @@ export interface UserRankingItem {
 export interface TopicRankingItem {
   id: number
   title: string
-  created: Date
   user: KunUser
   sortField: string
   value: number
@@ -41,6 +40,7 @@ export interface TopicRankingItem {
 export interface GalgameRankingItem {
   id: number
   name: KunLanguage
+  user: KunUser
   banner: string
   sortField: string
   value: number

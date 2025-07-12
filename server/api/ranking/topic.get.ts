@@ -55,7 +55,6 @@ export default defineEventHandler(async (event) => {
     return {
       id: topic.id,
       title: topic.title,
-      created: topic.created,
       user: topic.user,
       value,
       sortField

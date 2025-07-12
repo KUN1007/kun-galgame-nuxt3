@@ -29,3 +29,16 @@ export const userRankingPageData = reactive<User>({
   sortField: 'moemoepoint',
   sortOrder: 'desc'
 })
+
+export const getRankClasses = (index: number) => {
+  if (index === 0) {
+    return 'bg-warning-400/20 border-warning-500/50'
+  }
+  if (index === 1) {
+    return 'bg-default-400/20 border-default-500/50'
+  }
+  if (index === 2) {
+    return 'bg-info-400/20 border-info-500/50'
+  }
+  return 'bg-default-100/50 border-transparent'
+}
