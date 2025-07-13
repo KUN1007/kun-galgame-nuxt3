@@ -33,3 +33,7 @@ public/*.xml
 
 # prisma generated
 prisma/client
+
+# migration
+migrate/lib.ts
+migrate/*.json

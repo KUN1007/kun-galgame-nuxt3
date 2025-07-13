@@ -14,6 +14,9 @@ model galgame {
   status               Int      @default(0)
   view                 Int      @default(0)
   resource_update_time DateTime @default(now())
+  original_language    String   @default("ja-jp")
+  // all, r18
+  age_limit            String   @default("r18")
 
   user_id   Int
   user      user            @relation("user_galgame", fields: [user_id], references: [id], onDelete: Cascade)
@@ -106,11 +109,16 @@ model galgame_contributor {
 }
 
 // official, engine, tag instances will auto created by our system
-
 model galgame_official {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-  url  String @unique @default("")
+  id          Int                      @id @default(autoincrement())
+  // website links
+  link        String[]                 @default([])
+  name        String                   @unique
+  // company individual amateur 
+  category    String
+  lang        String                   @default("")
+  description String                   @default("")
+  alias       galgame_official_alias[]
 
   galgame galgame_official_relation[]
 
@@ -118,9 +126,24 @@ model galgame_official {
   updated_at DateTime @updatedAt
 }
 
-model galgame_engine {
+model galgame_official_alias {
   id   Int    @id @default(autoincrement())
-  name String @unique
+  name String @default("")
+
+  galgame_official_id Int
+  official            galgame_official @relation(fields: [galgame_official_id], references: [id], onDelete: Cascade)
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  @@unique([galgame_official_id, name])
+}
+
+model galgame_engine {
+  id          Int                    @id @default(autoincrement())
+  name        String                 @unique
+  description String                 @default("")
+  alias       galgame_engine_alias[]
 
   galgame galgame_engine_relation[]
 
@@ -128,14 +151,44 @@ model galgame_engine {
   updated_at DateTime @updatedAt
 }
 
-model galgame_tag {
+model galgame_engine_alias {
   id   Int    @id @default(autoincrement())
-  name String @unique
+  name String @default("")
+
+  galgame_engine_id Int
+  engine            galgame_engine @relation(fields: [galgame_engine_id], references: [id], onDelete: Cascade)
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  @@unique([galgame_engine_id, name])
+}
+
+model galgame_tag {
+  id          Int                 @id @default(autoincrement())
+  name        String              @unique
+  description String              @default("")
+  // content sexual technical
+  category    String
+  alias       galgame_tag_alias[]
 
   galgame galgame_tag_relation[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+}
+
+model galgame_tag_alias {
+  id   Int    @id @default(autoincrement())
+  name String @default("")
+
+  galgame_tag_id Int
+  tag            galgame_tag @relation(fields: [galgame_tag_id], references: [id], onDelete: Cascade)
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  @@unique([galgame_tag_id, name])
 }
 
 model galgame_official_relation {
