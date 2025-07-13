@@ -20,12 +20,12 @@ const handleClick = () => {
 </script>
 
 <template>
-  <blockquote
+  <div
     @click="handleClick"
-    class="group border-primary/30 bg-default-100/50 hover:border-primary/80 hover:bg-default-100 cursor-pointer rounded-lg border-l-4 p-3 transition-colors"
+    class="group hover:border-primary-500 dark:hover:border-primary-400 border-default-300 bg-default-100 hover:bg-default-200/60 dark:border-default-600 dark:bg-default-700/50 dark:hover:bg-default-700 cursor-pointer rounded-md border-l-2 p-3 transition-all duration-200"
   >
     <div class="flex flex-wrap items-center gap-x-2 text-sm">
-      <span class="text-default-600">回复</span>
+      <span class="text-default-600 dark:text-default-300">回复</span>
       <KunLink
         underline="hover"
         size="sm"
@@ -35,15 +35,20 @@ const handleClick = () => {
       >
         @{{ target.user.name }}
       </KunLink>
-      <span class="text-primary font-semibold">#{{ target.floor }}</span>
+      <span class="text-default-500 font-semibold"> #{{ target.floor }} </span>
     </div>
 
-    <p class="text-default-600 mt-1 line-clamp-2 text-sm italic">
-      {{ target.contentPreview }}
-    </p>
+    <div class="text-default-700 dark:text-default-200 mt-2 text-sm">
+      <KunContent
+        v-if="target.replyContentHtml"
+        :content="target.replyContentHtml"
+        class="prose prose-sm dark:prose-invert max-w-none"
+      />
+      <p v-else class="line-clamp-2 italic">
+        {{ target.contentPreview }}
+      </p>
+    </div>
 
-    <div v-if="isLoading" class="text-primary mt-2 text-xs">正在加载...</div>
-  </blockquote>
-
-  <KunContent :content="target.replyContentHtml" class="mt-2" />
+    <KunLoading v-if="isLoading" description="正在获取完整评论内容..." />
+  </div>
 </template>

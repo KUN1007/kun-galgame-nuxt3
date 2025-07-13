@@ -35,10 +35,9 @@ watch(
 )
 
 const replyContent = computed(() => {
-  const targetsContent = props.reply.targets.map((t) => t.contentPreview)
-  const content =
-    markdownToText(props.reply.contentMarkdown) + targetsContent.join('')
-  return content.slice(0, 20)
+  const targetsContent = props.reply.targets.map((t) => t.replyContentMarkdown)
+  const content = props.reply.contentMarkdown + targetsContent.join('')
+  return markdownToText(content.slice(0, 20))
 })
 </script>
 
@@ -47,15 +46,19 @@ const replyContent = computed(() => {
     class="outline-primary kun-reply flex justify-between gap-3 outline-offset-2"
     :id="`${reply.floor}.${replyContent}`"
   >
-    <TopicDetailUser :user="reply.user" />
-
     <KunCard
       :is-transparent="false"
       :is-hoverable="false"
       class-name="w-full"
       content-class="gap-3"
     >
-      <TopicDetailUserMobile :user="reply.user" />
+      <TopicDetailUser
+        :user="reply.user"
+        :created="reply.created"
+        :edited="reply.edited"
+        :topic-id="reply.topicId"
+        :floor="reply.floor"
+      />
 
       <div
         v-if="reply.targets && reply.targets.length > 0"
@@ -93,7 +96,7 @@ const replyContent = computed(() => {
           color="default"
           underline="none"
           :to="`/topic/${reply.topicId}#k${reply.floor}`"
-          class-name="text-default-500 font-bold"
+          class-name="text-default-400 font-bold"
         >
           #{{ reply.floor }}
         </KunLink>
@@ -103,11 +106,20 @@ const replyContent = computed(() => {
 
       <TopicComment :reply-id="reply.id" :comments-data="comments" />
 
-      <LazyTopicCommentPanel
-        v-if="isShowPanel && reply.id === storeReplyId"
-        :reply-id="reply.id"
-        @get-comment="(newComment) => comments.push(newComment)"
-      />
+      <Transition
+        enter-active-class="transition-all duration-300 ease-out"
+        enter-from-class="opacity-0 max-h-0"
+        enter-to-class="opacity-100 max-h-96"
+        leave-active-class="transition-all duration-300 ease-in"
+        leave-from-class="opacity-100 max-h-96"
+        leave-to-class="opacity-0 max-h-0"
+      >
+        <LazyTopicCommentPanel
+          v-if="isShowPanel && reply.id === storeReplyId"
+          :reply-id="reply.id"
+          @get-comment="(newComment) => comments.push(newComment)"
+        />
+      </Transition>
     </KunCard>
   </div>
 </template>

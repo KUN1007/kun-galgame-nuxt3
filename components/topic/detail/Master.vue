@@ -15,7 +15,7 @@ defineProps<{
     "
     id="0"
   >
-    <TopicDetailUser v-if="topic.user" :user="topic.user" />
+    <TopicDetailMasterUser v-if="topic.user" :user="topic.user" />
 
     <KunCard
       :is-transparent="false"
@@ -42,7 +42,15 @@ defineProps<{
         </span>
       </div>
 
-      <TopicDetailUserMobile :user="topic.user" />
+      <TopicDetailUser
+        class-name="lg:hidden"
+        :user="topic.user"
+        :created="topic.created"
+        :edited="topic.edited"
+        :topic-id="topic.id"
+        :floor="0"
+        :show-addition="false"
+      />
 
       <KunContent class="kun-master" :content="topic.contentHtml" />
 
