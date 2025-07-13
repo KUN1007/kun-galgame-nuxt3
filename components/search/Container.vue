@@ -94,12 +94,12 @@ const handleLoadMore = async () => {
       <slot />
       <KunButton
         variant="flat"
-        v-if="!isLoading && !isLoadComplete"
+        :loading="isLoading"
+        :disabled="isLoading || isLoadComplete"
         @click="handleLoadMore"
       >
         加载更多
       </KunButton>
-      <span v-if="isLoading">少女祈祷中...</span>
       <span v-if="isLoadComplete">被榨干了呜呜呜呜呜, 一滴也不剩了</span>
     </KunDivider>
 

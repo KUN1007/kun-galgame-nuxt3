@@ -9,7 +9,24 @@ export interface SearchResultUser extends KunUser {
   created: Date | string
 }
 
+export interface SearchResultReplyTarget {
+  id: number
+  user: KunUser
+  content: string
+  contentPreview: string
+}
+
 export interface SearchResultReply {
+  topicId: number
+  topicTitle: string
+  floor: number
+  content: string
+  user: KunUser
+  targets: SearchResultReplyTarget[]
+  created: Date | string
+}
+
+export type SearchResultComment = {
   topicId: number
   topicTitle: string
   content: string
@@ -17,8 +34,6 @@ export interface SearchResultReply {
   targetUser: KunUser
   created: Date | string
 }
-
-export type SearchResultComment = SearchResultReply
 
 export type SearchType = 'topic' | 'galgame' | 'user' | 'reply' | 'comment'
 export type SearchResult =

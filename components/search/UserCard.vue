@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <KunCard :is-pressable="true" :href="`/user/${user.uid}/info`">
+  <KunCard :is-pressable="true" :href="`/user/${user.id}/info`">
     <div class="flex items-center">
       <KunAvatar :user="user" />
       <span class="ml-2">{{ user.name }}</span>
@@ -23,7 +23,7 @@ defineProps<{
         {{ user.moemoepoint }}
       </div>
       <span class="text-default-700">
-        {{ formatDate(user.time, { isShowYear: true }) }}
+        {{ formatDate(user.created, { isShowYear: true }) }}
       </span>
     </div>
   </KunCard>

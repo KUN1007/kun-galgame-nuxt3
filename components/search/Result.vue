@@ -48,13 +48,13 @@ const isCommentResults = (
 
     <div v-if="isReplyResults(results)" class="space-y-3">
       <KunCard v-for="(reply, index) in results" :key="index">
-        <SearchReplyCommentCard :data="reply" type="reply" />
+        <SearchReplyCard :reply="reply" />
       </KunCard>
     </div>
 
     <div v-if="isCommentResults(results)" class="space-y-3">
       <KunCard v-for="(comment, index) in results" :key="index">
-        <SearchReplyCommentCard :data="comment" type="comment" />
+        <SearchCommentCard :comment="comment" />
       </KunCard>
     </div>
   </div>

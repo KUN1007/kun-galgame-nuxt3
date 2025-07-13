@@ -1,9 +1,12 @@
 import prisma from '~/prisma/prisma'
+import { markdownToText } from '~/utils/markdownToText'
 import type {
   SearchResultTopic,
   SearchResultGalgame,
   SearchResultUser,
-  SearchResultReply
+  SearchResultReplyTarget,
+  SearchResultReply,
+  SearchResultComment
 } from '~/types/api/search'
 
 export const searchTopic = async (
@@ -14,10 +17,10 @@ export const searchTopic = async (
   const data = await prisma.topic.findMany({
     where: {
       status: { not: 1 },
-      category: { in: keywords },
-      tag: { hasSome: keywords },
       AND: keywords.map((kw) => ({
         OR: [
+          { category: { in: keywords } },
+          { tag: { hasSome: keywords } },
           { title: { contains: kw, mode: 'insensitive' } },
           { content: { contains: kw, mode: 'insensitive' } }
         ]
@@ -82,16 +85,10 @@ export const searchGalgame = async (
     orderBy: { created: 'desc' },
     where: {
       status: { not: 1 },
-      vndb_id: { in: keywords },
-      tag: {
-        some: {
-          tag: {
-            name: { in: keywords }
-          }
-        }
-      },
       AND: keywords.map((kw) => ({
         OR: [
+          { vndb_id: { in: keywords } },
+          { tag: { some: { tag: { name: { in: keywords } } } } },
           { name_en_us: { contains: kw, mode: 'insensitive' } },
           { name_ja_jp: { contains: kw, mode: 'insensitive' } },
           { name_zh_cn: { contains: kw, mode: 'insensitive' } },
@@ -200,11 +197,22 @@ export const searchReply = async (
           avatar: true
         }
       },
-      target_user: {
+      target: {
+        orderBy: {
+          target_reply: { floor: 'asc' }
+        },
         select: {
-          id: true,
-          name: true,
-          avatar: true
+          content: true,
+          target_reply: {
+            select: {
+              id: true,
+              floor: true,
+              content: true,
+              user: {
+                select: { id: true, name: true, avatar: true }
+              }
+            }
+          }
         }
       },
       topic: {
@@ -215,14 +223,33 @@ export const searchReply = async (
     }
   })
 
-  const replies: SearchResultReply[] = data.map((reply) => ({
-    topicId: reply.topic_id,
-    topicTitle: reply.topic.title,
-    content: reply.content.slice(0, 233),
-    user: reply.user,
-    targetUser: reply.target_user,
-    created: reply.created
-  }))
+  const replies: SearchResultReply[] = data.map((reply) => {
+    const targets: SearchResultReplyTarget[] = reply.target.map(
+      (targetRelation) => {
+        const targetReply = targetRelation.target_reply
+        const content = markdownToText(targetRelation.content)
+        const contentPreviewText = markdownToText(targetReply.content)
+        return {
+          id: targetReply.id,
+          user: targetReply.user,
+          content: content.slice(0, 150) + (content.length > 150 ? '...' : ''),
+          contentPreview:
+            contentPreviewText.slice(0, 150) +
+            (contentPreviewText.length > 150 ? '...' : '')
+        }
+      }
+    )
+
+    return {
+      topicId: reply.topic_id,
+      topicTitle: reply.topic.title,
+      content: markdownToText(reply.content).slice(0, 233),
+      user: reply.user,
+      floor: reply.floor,
+      targets,
+      created: reply.created
+    }
+  })
 
   return replies
 }
@@ -262,7 +289,7 @@ export const searchComment = async (
     }
   })
 
-  const comments: SearchResultReply[] = data.map((comment) => ({
+  const comments: SearchResultComment[] = data.map((comment) => ({
     topicId: comment.topic_id,
     topicTitle: comment.topic.title,
     content: comment.content.slice(0, 233),

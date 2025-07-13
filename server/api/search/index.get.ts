@@ -36,7 +36,7 @@ const search = async (input: z.infer<typeof getSearchResultSchema>) => {
 }
 
 export default defineEventHandler(async (event) => {
-  const input = await kunParsePostBody(event, getSearchResultSchema)
+  const input = kunParseGetQuery(event, getSearchResultSchema)
   if (typeof input === 'string') {
     return kunError(event, input)
   }
