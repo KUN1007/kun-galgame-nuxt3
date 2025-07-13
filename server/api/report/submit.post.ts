@@ -2,7 +2,7 @@ import prisma from '~/prisma/prisma'
 import { createReportSchema } from '~/validations/report'
 
 export default defineEventHandler(async (event) => {
-  const input = kunParseGetQuery(event, createReportSchema)
+  const input = await kunParsePostBody(event, createReportSchema)
   if (typeof input === 'string') {
     return kunError(event, input)
   }

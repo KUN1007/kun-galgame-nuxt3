@@ -20,7 +20,7 @@ const { data, status } = await useFetch(`/api/section`, {
   method: 'GET',
   query: {
     section: props.section,
-    order: 'desc',
+    sortOrder: 'desc',
     page,
     limit: 30
   },

@@ -1,4 +1,4 @@
-import UserModel from '~/server/models/user'
+import prisma from '~/prisma/prisma'
 import { userUpdateEmailSchema } from '~/validations/user'
 
 export default defineEventHandler(async (event) => {
@@ -21,7 +21,10 @@ export default defineEventHandler(async (event) => {
   }
   await useStorage('redis').removeItem(codeKey)
 
-  await UserModel.updateOne({ uid: userInfo.uid }, { $set: { email } })
+  await prisma.user.update({
+    where: { id: userInfo.uid },
+    data: { email }
+  })
 
   return 'Moe Moe'
 })

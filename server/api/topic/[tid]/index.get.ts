@@ -11,36 +11,43 @@ export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   const uid = userInfo?.uid
 
-  const data = await prisma.topic.findUnique({
-    where: { id: input.topicId },
-    include: {
-      user: {
-        select: { id: true, name: true, avatar: true, moemoepoint: true }
-      },
-      like: { where: { user_id: uid } },
-      dislike: { where: { user_id: uid } },
-      favorite: { where: { user_id: uid } },
-      upvote: { where: { user_id: uid } },
-      section: {
-        select: {
-          topic_section: {
-            select: {
-              name: true
+  const [data] = await Promise.all([
+    prisma.topic.findUnique({
+      where: { id: input.topicId },
+      include: {
+        user: {
+          select: { id: true, name: true, avatar: true, moemoepoint: true }
+        },
+        like: { where: { user_id: uid } },
+        dislike: { where: { user_id: uid } },
+        favorite: { where: { user_id: uid } },
+        upvote: { where: { user_id: uid } },
+        section: {
+          select: {
+            topic_section: {
+              select: {
+                name: true
+              }
             }
           }
-        }
-      },
-      _count: {
-        select: {
-          like: true,
-          dislike: true,
-          favorite: true,
-          upvote: true,
-          reply: true
+        },
+        _count: {
+          select: {
+            like: true,
+            dislike: true,
+            favorite: true,
+            upvote: true,
+            reply: true
+          }
         }
       }
-    }
-  })
+    }),
+
+    prisma.topic.update({
+      where: { id: input.topicId },
+      data: { view: { increment: 1 } }
+    })
+  ])
   if (!data) {
     return kunError(event, '未找到该话题')
   }
