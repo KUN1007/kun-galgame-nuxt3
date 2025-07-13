@@ -90,22 +90,24 @@ const handleDeleteLink = async (gid: number, glid: number) => {
     <KunLoading v-if="status === 'pending'" />
     <GalgameNull v-if="status !== 'pending' && !data?.length" />
 
-    <div class="space-y-2" v-if="isShowEdit">
-      <KunCard :is-hoverable="false">
-        <p>
-          <strong>我们鼓励添加游戏的正版购买链接</strong>
-        </p>
-        <p>除官方购买链接外, 不得放置付费的引流链接</p>
-        <p>我们会在发布游戏时自动添加 VNDB 链接</p>
-      </KunCard>
-      <KunInput placeholder="链接名" v-model="linkModel.name" />
-      <KunInput placeholder="链接地址" v-model="linkModel.link" />
-      <div class="flex justify-end">
-        <KunButton @click="handlePublishLink" :loading="isFetching">
-          创建链接
-        </KunButton>
+    <KunAnimationFadeCard>
+      <div class="space-y-2" v-if="isShowEdit">
+        <KunCard :is-hoverable="false">
+          <p>
+            <strong>我们鼓励添加游戏的正版购买链接</strong>
+          </p>
+          <p>除官方购买链接外, 不得放置付费的引流链接</p>
+          <p>我们会在发布游戏时自动添加 VNDB 链接</p>
+        </KunCard>
+        <KunInput placeholder="链接名" v-model="linkModel.name" />
+        <KunInput placeholder="链接地址" v-model="linkModel.link" />
+        <div class="flex justify-end">
+          <KunButton @click="handlePublishLink" :loading="isFetching">
+            创建链接
+          </KunButton>
+        </div>
       </div>
-    </div>
+    </KunAnimationFadeCard>
 
     <div class="space-y-2" v-if="data">
       <KunCard :is-hoverable="false" v-for="(link, index) in data" :key="index">

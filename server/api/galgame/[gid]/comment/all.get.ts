@@ -12,40 +12,42 @@ export default defineEventHandler(async (event) => {
   const { galgameId, page, limit, sortOrder } = input
 
   const skip = (page - 1) * limit
-  const totalCount = await prisma.galgame_comment.count({
-    where: { id: galgameId }
-  })
 
-  const data = await prisma.galgame_comment.findMany({
-    take: limit,
-    skip,
-    where: { galgame_id: galgameId },
-    orderBy: { created: sortOrder },
-    include: {
-      like: {
-        where: {
-          user_id: userInfo?.uid
-        }
-      },
-      _count: {
-        select: { like: true }
-      },
-      user: {
-        select: {
-          id: true,
-          name: true,
-          avatar: true
-        }
-      },
-      target_user: {
-        select: {
-          id: true,
-          name: true,
-          avatar: true
+  const [data, totalCount] = await Promise.all([
+    prisma.galgame_comment.findMany({
+      take: limit,
+      skip,
+      where: { galgame_id: galgameId },
+      orderBy: { created: sortOrder },
+      include: {
+        like: {
+          where: {
+            user_id: userInfo?.uid
+          }
+        },
+        _count: {
+          select: { like: true }
+        },
+        user: {
+          select: {
+            id: true,
+            name: true,
+            avatar: true
+          }
+        },
+        target_user: {
+          select: {
+            id: true,
+            name: true,
+            avatar: true
+          }
         }
       }
-    }
-  })
+    }),
+    prisma.galgame_comment.count({
+      where: { galgame_id: galgameId }
+    })
+  ])
 
   const commentData: GalgameComment[] = data.map((comment) => ({
     id: comment.id,
