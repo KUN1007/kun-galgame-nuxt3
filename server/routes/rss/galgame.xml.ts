@@ -11,15 +11,15 @@ export default defineEventHandler(async (event) => {
 
   for (const galgame of galgames) {
     feed.addItem({
-      link: `${baseUrl}/galgame/${galgame.gid}`,
+      link: `${baseUrl}/galgame/${galgame.id}`,
       image: galgame.banner,
       title: galgame.name,
-      date: new Date(galgame.time),
+      date: new Date(galgame.created),
       description: galgame.description,
       author: [
         {
           name: galgame.user.name,
-          link: `${baseUrl}galgamer/${galgame.user.uid}/info`
+          link: `${baseUrl}galgamer/${galgame.user.id}/info`
         }
       ]
     })

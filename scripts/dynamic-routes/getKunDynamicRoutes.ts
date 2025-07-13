@@ -1,23 +1,21 @@
-import mongoose from 'mongoose'
-import TopicModel from '../../server/models/topic'
-import GalgameModel from '../../server/models/galgame'
-import { config } from 'dotenv'
-
-config()
-mongoose.connect(process.env.MONGODB_URL ?? '')
+import prisma from '~/prisma/prisma'
 
 export const getKunDynamicRoutes = async () => {
-  const topics = await TopicModel.find().select('tid updated').lean()
+  const topics = await prisma.topic.findMany({
+    select: { id: true, updated: true }
+  })
 
-  const galgames = await GalgameModel.find().select('gid updated').lean()
+  const galgames = await prisma.galgame.findMany({
+    select: { id: true, updated: true }
+  })
 
   const topicRoutes = topics.map((topic) => ({
-    path: `/topic/${topic.tid}`,
+    path: `/topic/${topic.id}`,
     lastmod: topic.updated?.toISOString() || new Date().toISOString()
   }))
 
   const galgameRoutes = galgames.map((galgame) => ({
-    path: `/galgame/${galgame.gid}`,
+    path: `/galgame/${galgame.id}`,
     lastmod: galgame.updated?.toISOString() || new Date().toISOString()
   }))
 

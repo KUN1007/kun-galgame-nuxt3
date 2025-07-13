@@ -4,25 +4,25 @@ import { Prisma, PrismaClient } from '@prisma/client'
 import readline from 'readline'
 import dotenv from 'dotenv'
 import { getPreferredLanguageText } from '~/utils/getPreferredLanguageText'
-import ChatRoomModel from '~/server/models/chat-room'
-import ChatMessageModel from '~/server/models/chat-message'
-import CommentModel from '~/server/models/comment'
-import GalgameCommentModel from '~/server/models/galgame-comment'
-import GalgameHistoryModel from '~/server/models/galgame-history'
-import GalgameLinkModel from '~/server/models/galgame-link'
-import GalgamePRModel from '~/server/models/galgame-pr'
-import GalgameResourceModel from '~/server/models/galgame-resource'
-import GalgameModel from '~/server/models/galgame'
-import MessageAdminModel from '~/server/models/message-admin'
-import MessageModel from '~/server/models/message'
-import NonMoeModel from '~/server/models/non-moe'
-import ReplyModel from '~/server/models/reply'
-import ReportModel from '~/server/models/report'
-import TagModel from '~/server/models/tag'
-import TopicModel from '~/server/models/topic'
-import TodoModel from '~/server/models/todo'
-import UpdateLogModel from '~/server/models/update-log'
-import UserModel from '~/server/models/user'
+import ChatRoomModel from './models/chat-room'
+import ChatMessageModel from './models/chat-message'
+import CommentModel from './models/comment'
+import GalgameCommentModel from './models/galgame-comment'
+import GalgameHistoryModel from './models/galgame-history'
+import GalgameLinkModel from './models/galgame-link'
+import GalgamePRModel from './models/galgame-pr'
+import GalgameResourceModel from './models/galgame-resource'
+import GalgameModel from './models/galgame'
+import MessageAdminModel from './models/message-admin'
+import MessageModel from './models/message'
+import NonMoeModel from './models/non-moe'
+import ReplyModel from './models/reply'
+import ReportModel from './models/report'
+import TagModel from './models/tag'
+import TopicModel from './models/topic'
+import TodoModel from './models/todo'
+import UpdateLogModel from './models/update-log'
+import UserModel from './models/user'
 
 import {
   KUN_TOPIC_CATEGORY_CONST,
@@ -914,51 +914,51 @@ async function migrateSystemMessages() {
 
 // ---- Unmoe Migration ----
 
-async function migrateUnmoes() {
-  console.log('\n🚀 Starting Unmoe (NonMoe) migration...')
-  const total = await NonMoeModel.countDocuments()
-  const cursor = NonMoeModel.find().lean().cursor()
+// async function migrateUnmoes() {
+//   console.log('\n🚀 Starting Unmoe (NonMoe) migration...')
+//   const total = await NonMoeModel.countDocuments()
+//   const cursor = NonMoeModel.find().lean().cursor()
 
-  let migratedCount = 0
-  let batch: Prisma.unmoeCreateManyArgs['data'] = []
+//   let migratedCount = 0
+//   let batch: Prisma.unmoeCreateManyArgs['data'] = []
 
-  for await (const doc of cursor) {
-    // Some user's account were deleted
-    // Non-moe's data size is low, so directly use findUnique in a for condition
-    const existUser = await prisma.user.findUnique({
-      where: { id: doc.uid }
-    })
-    if (!existUser) {
-      continue
-    }
-    batch.push({
-      id: doc.nid,
-      name: doc.name,
-      result: doc.result ? JSON.stringify(doc.result) : '',
-      desc_en_us: doc.description?.['en-us'] ?? '',
-      desc_ja_jp: doc.description?.['ja-jp'] ?? '',
-      desc_zh_cn: doc.description?.['zh-cn'] ?? '',
-      desc_zh_tw: doc.description?.['zh-tw'] ?? '',
-      user_id: doc.uid,
-      created: doc.created,
-      updated: doc.updated
-    })
+//   for await (const doc of cursor) {
+//     // Some user's account were deleted
+//     // Non-moe's data size is low, so directly use findUnique in a for condition
+//     const existUser = await prisma.user.findUnique({
+//       where: { id: doc.uid }
+//     })
+//     if (!existUser) {
+//       continue
+//     }
+//     batch.push({
+//       id: doc.nid,
+//       name: doc.name,
+//       result: doc.result ? JSON.stringify(doc.result) : '',
+//       desc_en_us: doc.description?.['en-us'] ?? '',
+//       desc_ja_jp: doc.description?.['ja-jp'] ?? '',
+//       desc_zh_cn: doc.description?.['zh-cn'] ?? '',
+//       desc_zh_tw: doc.description?.['zh-tw'] ?? '',
+//       user_id: doc.uid,
+//       created: doc.created,
+//       updated: doc.updated
+//     })
 
-    if (batch.length >= BATCH_SIZE) {
-      await prisma.unmoe.createMany({ data: batch, skipDuplicates: true })
-      migratedCount += batch.length
-      console.log(`  ... Migrated ${migratedCount} of ${total} unmoes.`)
-      batch = []
-    }
-  }
+//     if (batch.length >= BATCH_SIZE) {
+//       await prisma.unmoe.createMany({ data: batch, skipDuplicates: true })
+//       migratedCount += batch.length
+//       console.log(`  ... Migrated ${migratedCount} of ${total} unmoes.`)
+//       batch = []
+//     }
+//   }
 
-  if (batch.length > 0) {
-    await prisma.unmoe.createMany({ data: batch, skipDuplicates: true })
-    migratedCount += batch.length
-  }
+//   if (batch.length > 0) {
+//     await prisma.unmoe.createMany({ data: batch, skipDuplicates: true })
+//     migratedCount += batch.length
+//   }
 
-  console.log(`✅ Unmoe migration complete. Total migrated: ${migratedCount}.`)
-}
+//   console.log(`✅ Unmoe migration complete. Total migrated: ${migratedCount}.`)
+// }
 
 // ---- Topic Reply Migration ----
 
@@ -1790,7 +1790,7 @@ async function main() {
     await migrateGalgames() // Pass cache to it
     await migrateChatRooms()
     await migrateSystemMessages() // Depends on User
-    await migrateUnmoes() // Depends on User
+    // await migrateUnmoes() // Depends on User
     await migrateMessages() // Depends on User
 
     // Level 2: Models that depend on Level 1

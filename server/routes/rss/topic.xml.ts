@@ -9,14 +9,14 @@ export default defineEventHandler(async (event) => {
 
   for (const topic of topics) {
     feed.addItem({
-      link: `${baseUrl}/topic/${topic.tid}`,
+      link: `${baseUrl}/topic/${topic.id}`,
       title: topic.name,
-      date: new Date(topic.time),
+      date: new Date(topic.created),
       description: topic.description,
       author: [
         {
           name: topic.user.name,
-          link: `${baseUrl}galgamer/${topic.user.uid}/info`
+          link: `${baseUrl}galgamer/${topic.user.id}/info`
         }
       ]
     })
