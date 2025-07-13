@@ -1,3 +1,4 @@
+import type { KunGalgameTagCategory } from '~/constants/galgame'
 import type {
   TypeOptions,
   LanguageOptions,
@@ -11,6 +12,22 @@ export interface GalgameSeriesItem {
   banner: string
 }
 
+export interface GalgameEngine {
+  id: number
+  name: string
+}
+
+export interface GalgameOfficial {
+  id: number
+  name: string
+}
+
+export interface GalgameTag {
+  id: number
+  name: string
+  category: KunGalgameTagCategory
+}
+
 export interface GalgameDetail {
   id: number
   vndbId: string
@@ -22,6 +39,8 @@ export interface GalgameDetail {
   markdown: KunLanguage
   resourceUpdateTime: Date | string
   view: number
+  originalLanguage: string
+  ageLimit: string
   platform: string[]
   language: string[]
   type: string[]
@@ -31,10 +50,10 @@ export interface GalgameDetail {
   favoriteCount: number
   isFavorited: boolean
   alias: string[]
-  official: string[]
-  engine: string[]
-  tags: string[]
   series: GalgameSeries | null
+  engine: GalgameEngine[]
+  official: GalgameOfficial[]
+  tag: GalgameTag[]
   created: Date | string
   updated: Date | string
 }

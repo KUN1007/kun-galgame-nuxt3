@@ -1,6 +1,6 @@
 import prisma from '~/prisma/prisma'
 import { getGalgameDetailSchema } from '~/validations/galgame'
-import type { GalgameDetail } from '~/types/api/galgame'
+import type { GalgameDetail, GalgameTag } from '~/types/api/galgame'
 import type { GalgameSeries, GalgameSample } from '~/types/api/series'
 
 export default defineEventHandler(async (event) => {
@@ -68,13 +68,13 @@ export default defineEventHandler(async (event) => {
           }
         },
         official: {
-          select: { official: { select: { name: true } } }
+          select: { official: { select: { id: true, name: true } } }
         },
         engine: {
-          select: { engine: { select: { name: true } } }
+          select: { engine: { select: { id: true, name: true } } }
         },
         tag: {
-          select: { tag: { select: { name: true } } }
+          select: { tag: { select: { id: true, name: true, category: true } } }
         },
         resource: {
           select: { type: true, language: true, platform: true }
@@ -152,6 +152,8 @@ export default defineEventHandler(async (event) => {
     },
     resourceUpdateTime: galgame.resource_update_time,
     view: galgame.view,
+    originalLanguage: galgame.original_language,
+    ageLimit: galgame.age_limit,
     type: [...new Set(galgame.resource.map((r) => r.type))],
     platform: [...new Set(galgame.resource.map((r) => r.platform))],
     language: [...new Set(galgame.resource.map((r) => r.language))],
@@ -161,10 +163,10 @@ export default defineEventHandler(async (event) => {
     favoriteCount: galgame._count.favorite,
     isFavorited: galgame.favorite.length > 0,
     alias: galgame.alias.map((a) => a.name),
-    official: galgame.official.map((o) => o.official.name),
-    engine: galgame.engine.map((e) => e.engine.name),
-    tags: galgame.tag.map((t) => t.tag.name),
     series: galgameSeries,
+    engine: galgame.engine.map((e) => e.engine),
+    official: galgame.official.map((o) => o.official),
+    tag: galgame.tag.map((t) => t.tag as GalgameTag),
     created: galgame.created,
     updated: galgame.updated
   }

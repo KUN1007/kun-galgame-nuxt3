@@ -29,6 +29,16 @@ export type KunGalgameResourcePlatformOptions =
   | 'app'
   | 'others'
 
+export type KunGalgameTagCategory = 'content' | 'sexual' | 'technical'
+export const KUN_GALGAME_TAG_CATEGORY_MAP: Record<
+  KunGalgameTagCategory,
+  string
+> = {
+  content: '游戏内容',
+  sexual: '成人内容',
+  technical: '技术细节'
+}
+
 export const KUN_GALGAME_RESOURCE_TYPE_MAP: Record<string, string> = {
   name: '资源链接的类型',
   all: '全部类型',

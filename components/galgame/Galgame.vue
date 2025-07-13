@@ -20,6 +20,8 @@ provide<GalgameDetail>('galgame', props.galgame)
 
     <GalgameHeader :galgame="galgame" />
 
+    <GalgameTag :tags="galgame.tag" />
+
     <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
       <div class="md:col-span-2">
         <KunCard

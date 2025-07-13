@@ -211,15 +211,10 @@ function processApiData(
 }
 
 async function main() {
-  const allVndbIds: string[] = [
-    'v19658',
-    'v17',
-    'v50',
-    'v92',
-    'v2016',
-    'v2002',
-    'v2'
-  ]
+  const data = await prisma.galgame.findMany({
+    select: { vndb_id: true }
+  })
+  const allVndbIds: string[] = data.map((d) => d.vndb_id)
 
   const outputData: OutputData = {
     engines: {},

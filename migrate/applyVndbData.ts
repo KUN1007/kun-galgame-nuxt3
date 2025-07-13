@@ -1,10 +1,13 @@
 import { PrismaClient } from '@prisma/client'
 import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
 const prisma = new PrismaClient()
-const INPUT_FILE = path.join(process.cwd(), 'vndb_data.json')
-const BATCH_SIZE = 500
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const INPUT_FILE = path.join(__dirname, 'vndb_data.json')
 
 interface OutputData {
   engines: Record<string, { name: string }>
