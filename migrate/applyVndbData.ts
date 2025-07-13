@@ -19,6 +19,7 @@ interface OutputData {
       category: string
       lang: string
       aliases: string[]
+      link: string
     }
   >
   tags: Record<
@@ -36,23 +37,33 @@ interface OutputData {
       officials: string[]
       engines: string[]
       tags: string[]
+      links: { name: string; link: string }[]
     }
   >
 }
 
 async function seedMasterDataAndCreateLookups(jsonData: OutputData) {
-  console.log('🌱 Seeding master data tables (officials, engines, tags)...')
+  console.log('🌱 Seeding master data tables and their aliases...')
 
-  const officialsToCreate = Object.values(jsonData.officials).map((o) => ({
-    name: o.name,
-    category: o.category,
-    lang: o.lang
-  }))
-  await prisma.galgame_official.createMany({
-    data: officialsToCreate,
-    skipDuplicates: true
-  })
-  console.log(`   - Upserted ${officialsToCreate.length} officials.`)
+  console.log('   - Step 1: Upserting parent records...')
+
+  const officialUpserts = Object.values(jsonData.officials).map((o) =>
+    prisma.galgame_official.upsert({
+      where: { name: o.name },
+      update: {
+        link: o.link || ''
+      },
+      create: {
+        name: o.name,
+        category: o.category,
+        lang: o.lang,
+        link: o.link || '',
+        description: ''
+      }
+    })
+  )
+  await Promise.all(officialUpserts)
+  console.log('   - Upserted official records.')
 
   const enginesToCreate = Object.values(jsonData.engines).map((e) => ({
     name: e.name
@@ -61,19 +72,19 @@ async function seedMasterDataAndCreateLookups(jsonData: OutputData) {
     data: enginesToCreate,
     skipDuplicates: true
   })
-  console.log(`   - Upserted ${enginesToCreate.length} engines.`)
 
   const tagsToCreate = Object.values(jsonData.tags).map((t) => ({
     name: t.name,
-    category: t.category
+    category: t.category,
+    description: ''
   }))
   await prisma.galgame_tag.createMany({
     data: tagsToCreate,
     skipDuplicates: true
   })
-  console.log(`   - Upserted ${tagsToCreate.length} tags.`)
+  console.log('   - Created/skipped engine and tag records.')
 
-  console.log('🗺️ Creating ID lookup maps...')
+  console.log('   - Step 2: Fetching DB IDs and creating lookup maps...')
 
   const [allDbOfficials, allDbEngines, allDbTags] = await Promise.all([
     prisma.galgame_official.findMany({ select: { id: true, name: true } }),
@@ -94,24 +105,70 @@ async function seedMasterDataAndCreateLookups(jsonData: OutputData) {
   const officialVndbIdToDbIdMap = new Map<string, number>()
   allDbOfficials.forEach((dbOfficial) => {
     const vndbId = officialNameToVndbIdMap.get(dbOfficial.name)
-    if (vndbId) {
-      officialVndbIdToDbIdMap.set(vndbId, dbOfficial.id)
-    }
+    if (vndbId) officialVndbIdToDbIdMap.set(vndbId, dbOfficial.id)
   })
 
   const tagVndbIdToDbIdMap = new Map<string, number>()
   allDbTags.forEach((dbTag) => {
     const vndbId = tagNameToVndbIdMap.get(dbTag.name)
-    if (vndbId) {
-      tagVndbIdToDbIdMap.set(vndbId, dbTag.id)
-    }
+    if (vndbId) tagVndbIdToDbIdMap.set(vndbId, dbTag.id)
   })
 
   const engineNameToDbIdMap = new Map(allDbEngines.map((e) => [e.name, e.id]))
+  console.log('   - Lookup maps created.')
 
+  console.log('   - Step 3: Preparing alias records for creation...')
+
+  const officialAliasesToCreate: {
+    galgame_official_id: number
+    name: string
+  }[] = []
+  for (const officialVndbId in jsonData.officials) {
+    const officialData = jsonData.officials[officialVndbId]
+    const officialDbId = officialVndbIdToDbIdMap.get(officialVndbId)
+    if (officialDbId && officialData.aliases.length > 0) {
+      officialData.aliases.forEach((aliasName) => {
+        officialAliasesToCreate.push({
+          galgame_official_id: officialDbId,
+          name: aliasName
+        })
+      })
+    }
+  }
+
+  const tagAliasesToCreate: { galgame_tag_id: number; name: string }[] = []
+  for (const tagVndbId in jsonData.tags) {
+    const tagData = jsonData.tags[tagVndbId]
+    const tagDbId = tagVndbIdToDbIdMap.get(tagVndbId)
+    if (tagDbId && tagData.aliases.length > 0) {
+      tagData.aliases.forEach((aliasName) => {
+        tagAliasesToCreate.push({
+          galgame_tag_id: tagDbId,
+          name: aliasName
+        })
+      })
+    }
+  }
   console.log(
-    `   - Created maps for ${officialVndbIdToDbIdMap.size} officials, ${engineNameToDbIdMap.size} engines, ${tagVndbIdToDbIdMap.size} tags.`
+    `   - Prepared ${officialAliasesToCreate.length} official aliases and ${tagAliasesToCreate.length} tag aliases.`
   )
+
+  console.log('   - Step 4: Creating alias records...')
+
+  if (officialAliasesToCreate.length > 0) {
+    await prisma.galgame_official_alias.createMany({
+      data: officialAliasesToCreate,
+      skipDuplicates: true
+    })
+  }
+
+  if (tagAliasesToCreate.length > 0) {
+    await prisma.galgame_tag_alias.createMany({
+      data: tagAliasesToCreate,
+      skipDuplicates: true
+    })
+  }
+  console.log('   - Alias records created/skipped.')
 
   return { officialVndbIdToDbIdMap, engineNameToDbIdMap, tagVndbIdToDbIdMap }
 }
@@ -139,39 +196,50 @@ async function createRelations(
   const engineRelations: { galgame_id: number; engine_id: number }[] = []
   const tagRelations: { galgame_id: number; tag_id: number }[] = []
 
+  const galgameLinksToCreate: {
+    galgame_id: number
+    name: string
+    link: string
+    user_id: number
+  }[] = []
+
   for (const [vndbId, relations] of Object.entries(jsonData.galgames)) {
     const galgameDbId = galgameVndbIdToDbIdMap.get(vndbId)
-    if (!galgameDbId) {
-      continue
-    }
+    if (!galgameDbId) continue
 
     for (const officialVndbId of relations.officials) {
       const officialDbId = lookups.officialVndbIdToDbIdMap.get(officialVndbId)
-      if (officialDbId) {
+      if (officialDbId)
         officialRelations.push({
           galgame_id: galgameDbId,
           official_id: officialDbId
         })
-      }
     }
-
     for (const engineName of relations.engines) {
       const engineDbId = lookups.engineNameToDbIdMap.get(engineName)
-      if (engineDbId) {
+      if (engineDbId)
         engineRelations.push({ galgame_id: galgameDbId, engine_id: engineDbId })
-      }
     }
-
     for (const tagVndbId of relations.tags) {
       const tagDbId = lookups.tagVndbIdToDbIdMap.get(tagVndbId)
-      if (tagDbId) {
+      if (tagDbId)
         tagRelations.push({ galgame_id: galgameDbId, tag_id: tagDbId })
+    }
+
+    if (relations.links && relations.links.length > 0) {
+      for (const link of relations.links) {
+        galgameLinksToCreate.push({
+          galgame_id: galgameDbId,
+          name: link.name,
+          link: link.link,
+          user_id: 553
+        })
       }
     }
   }
 
   console.log(
-    `   - Preparing to insert ${officialRelations.length} official relations, ${engineRelations.length} engine relations, and ${tagRelations.length} tag relations.`
+    `   - Preparing to insert ${officialRelations.length} official relations, ${engineRelations.length} engine relations, ${tagRelations.length} tag relations, and ${galgameLinksToCreate.length} game links.`
   )
 
   await prisma.galgame_official_relation.createMany({
@@ -191,6 +259,14 @@ async function createRelations(
     skipDuplicates: true
   })
   console.log(`   - Inserted tag relations.`)
+
+  if (galgameLinksToCreate.length > 0) {
+    await prisma.galgame_link.createMany({
+      data: galgameLinksToCreate,
+      skipDuplicates: false
+    })
+    console.log(`   - Inserted game links.`)
+  }
 }
 
 async function main() {
@@ -203,7 +279,6 @@ async function main() {
   console.log(`   - Loaded data from ${INPUT_FILE}.`)
 
   const lookups = await seedMasterDataAndCreateLookups(jsonData)
-
   await createRelations(jsonData, lookups)
 
   console.log(

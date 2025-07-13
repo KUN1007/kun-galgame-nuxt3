@@ -8,7 +8,6 @@
     <KunLink
       to="https://www.kungal.com/zh-cn/topic/1650"
       target="_blank"
-      rel="noopener noreferrer"
       class="text-primary underline"
     >
       [公告] 有关论坛消息系统的说明
@@ -20,7 +19,6 @@
     <KunLink
       to="https://github.com/KUN1007/kun-galgame-nuxt3"
       target="_blank"
-      rel="noopener noreferrer"
       class="text-primary underline"
     >
       https://github.com/KUN1007/kun-galgame-nuxt3

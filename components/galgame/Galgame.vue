@@ -51,7 +51,12 @@ provide<GalgameDetail>('galgame', props.galgame)
       </div>
 
       <div class="space-y-3 md:col-span-1">
-        <GalgameInfo :galgame="galgame" />
+        <GalgameInfo
+          :official="galgame.official"
+          :engine="galgame.engine"
+          :age-limit="galgame.ageLimit"
+          :original-language="galgame.originalLanguage"
+        />
 
         <KunCard :is-hoverable="false" :is-transparent="false">
           <GalgameLink />

@@ -24,11 +24,7 @@
     <p>
       <strong>
         不要添加网盘下载站的页面链接, 详见
-        <KunLink
-          to="https://www.kungal.com/zh-cn/galgame/819"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <KunLink to="https://www.kungal.com/zh-cn/galgame/819" target="_blank">
           此 Galgame
         </KunLink>
         下的评论

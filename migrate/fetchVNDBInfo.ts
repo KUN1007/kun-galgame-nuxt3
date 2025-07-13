@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+
 import { TAG_MAP } from './lib'
 import { fileURLToPath } from 'url'
 import { PrismaClient } from '@prisma/client'
@@ -7,9 +8,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 const API_BASE_URL = 'https://api.vndb.org/kana'
-
 const CHUNK_SIZE = 50
-
 const DELAY_MS = 2000
 
 const __filename = fileURLToPath(import.meta.url)
@@ -29,6 +28,13 @@ const PRODUCER_TYPE_MAP: Record<string, string> = {
   ng: 'amateur'
 }
 
+interface VndbExtLink {
+  id: string | number
+  url: string
+  label: string
+  name: string
+}
+
 interface VndbProducer {
   id: string
   name: string
@@ -37,6 +43,7 @@ interface VndbProducer {
   lang: string
   type: 'co' | 'in' | 'ng'
   description: string | null
+  extlinks: VndbExtLink[]
 }
 
 interface VndbTag {
@@ -69,6 +76,7 @@ interface OutputData {
       category: string
       lang: string
       aliases: string[]
+      link: string
     }
   >
 
@@ -88,6 +96,7 @@ interface OutputData {
       officials: string[]
       engines: string[]
       tags: string[]
+      links: { name: string; link: string }[]
     }
   >
 }
@@ -98,8 +107,9 @@ async function fetchVnData(vndbIds: string[]): Promise<VnResult[]> {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       filters: ['or', ...vndbIds.map((id) => ['id', '=', id])],
+
       fields:
-        'id, developers{id,name,original,aliases,lang,type}, tags{id,name,aliases,category}',
+        'id, developers{id,name,original,aliases,lang,type,extlinks{id,url,label,name}}, tags{id,name,aliases,category}',
       results: vndbIds.length
     })
   })
@@ -158,20 +168,40 @@ function processApiData(
       outputData.galgames[vndbId] = {
         officials: [],
         engines: [],
-        tags: []
+        tags: [],
+        links: []
       }
     }
 
     for (const dev of vn.developers) {
+      let officialWebsite = ''
+      const otherLinks: { name: string; link: string }[] = []
+      if (dev.extlinks) {
+        for (const link of dev.extlinks) {
+          if (link.label === 'Official website') {
+            officialWebsite = link.url
+          } else {
+            otherLinks.push({ name: link.label, link: link.url })
+          }
+        }
+      }
+
+      outputData.galgames[vndbId].links.push(...otherLinks)
+
       if (!outputData.officials[dev.id]) {
         if (PRODUCER_TYPE_MAP[dev.type]) {
           outputData.officials[dev.id] = {
             id: dev.id,
             name: dev.original || dev.name,
             category: PRODUCER_TYPE_MAP[dev.type],
-            lang: dev.lang === 'ja' ? 'ja-jp' : 'unknown',
-            aliases: dev.aliases
+            lang: dev.lang,
+            aliases: dev.original ? [dev.name, ...dev.aliases] : dev.aliases,
+            link: officialWebsite
           }
+        }
+      } else {
+        if (!outputData.officials[dev.id].link && officialWebsite) {
+          outputData.officials[dev.id].link = officialWebsite
         }
       }
 
@@ -183,11 +213,16 @@ function processApiData(
     for (const tag of vn.tags) {
       if (!outputData.tags[tag.id]) {
         if (TAG_CATEGORY_MAP[tag.category]) {
+          const mappedValue = TAG_MAP[tag.name] || ''
+          const parts = mappedValue.split('/')
+          const newName = parts[0]
+          const additionalAliases = parts.slice(1)
+
           outputData.tags[tag.id] = {
             id: tag.id,
-            name: TAG_MAP[tag.name] || '',
+            name: newName,
             category: TAG_CATEGORY_MAP[tag.category],
-            aliases: [tag.name, ...tag.aliases]
+            aliases: [tag.name, ...tag.aliases, ...additionalAliases]
           }
         }
       }

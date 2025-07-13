@@ -68,7 +68,17 @@ export default defineEventHandler(async (event) => {
           }
         },
         official: {
-          select: { official: { select: { id: true, name: true } } }
+          select: {
+            official: {
+              select: {
+                id: true,
+                name: true,
+                link: true,
+                category: true,
+                lang: true
+              }
+            }
+          }
         },
         engine: {
           select: { engine: { select: { id: true, name: true } } }
@@ -153,7 +163,7 @@ export default defineEventHandler(async (event) => {
     resourceUpdateTime: galgame.resource_update_time,
     view: galgame.view,
     originalLanguage: galgame.original_language,
-    ageLimit: galgame.age_limit,
+    ageLimit: galgame.age_limit as 'all' | 'r18',
     type: [...new Set(galgame.resource.map((r) => r.type))],
     platform: [...new Set(galgame.resource.map((r) => r.platform))],
     language: [...new Set(galgame.resource.map((r) => r.language))],

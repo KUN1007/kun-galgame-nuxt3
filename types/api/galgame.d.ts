@@ -20,6 +20,9 @@ export interface GalgameEngine {
 export interface GalgameOfficial {
   id: number
   name: string
+  link: string
+  category: string
+  lang: string
 }
 
 export interface GalgameTag {
@@ -40,7 +43,7 @@ export interface GalgameDetail {
   resourceUpdateTime: Date | string
   view: number
   originalLanguage: string
-  ageLimit: string
+  ageLimit: 'all' | 'r18'
   platform: string[]
   language: string[]
   type: string[]

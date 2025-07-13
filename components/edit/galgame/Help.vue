@@ -10,11 +10,7 @@
       对检索不到的非 Galgame 游戏, 请大家暂时发布在话题的 Galgame ->其它 分类。
     </p>
     <p>
-      <KunLink
-        to="https://www.kungal.com/zh-cn/topic/1040"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <KunLink to="https://www.kungal.com/zh-cn/topic/1040" target="_blank">
         如何通过 VNDB 检索 Galgame?
       </KunLink>
     </p>

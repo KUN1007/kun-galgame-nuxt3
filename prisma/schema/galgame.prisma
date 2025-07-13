@@ -112,7 +112,7 @@ model galgame_contributor {
 model galgame_official {
   id          Int                      @id @default(autoincrement())
   // website links
-  link        String[]                 @default([])
+  link        String                   @default("")
   name        String                   @unique
   // company individual amateur 
   category    String
