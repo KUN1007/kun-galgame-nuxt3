@@ -201,23 +201,12 @@ const handleSubmit = () => {
             标签 (可选, 最多10个)
           </label>
           <div v-if="status === 'pending'">正在加载标签...</div>
-          <div
-            v-else-if="data"
-            class="border-default-200 max-h-40 overflow-y-auto rounded-md border p-2"
-          >
-            <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
-              <KunCheckBox
-                v-for="tag in data"
-                :id="tag.name"
-                :key="tag.id"
-                :model-value="formData.tag_ids.includes(tag.id)"
-                @update:model-value="(value) => handleTagChange(value, tag.id)"
-                :label="KUN_WEBSITE_TAG_MAP[tag.name]"
-                :value="tag.id"
-                class-name="w-full p-1 hover:bg-default-100 rounded"
-              />
-            </div>
-          </div>
+
+          <WebsiteModalTagSelector
+            :tags="data"
+            :tag-ids="formData.tag_ids"
+            @update-ids="(value) => (formData.tag_ids = value)"
+          />
         </div>
       </div>
 

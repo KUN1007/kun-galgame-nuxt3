@@ -149,7 +149,7 @@ const handleAction = async (
         @click="toggleLike"
       >
         <KunIcon name="lucide:thumbs-up" />
-        <span v-if="likeCount">{{ website.likeCount }}</span>
+        <span v-if="likeCount">{{ likeCount }}</span>
       </KunButton>
     </KunTooltip>
 
@@ -163,7 +163,7 @@ const handleAction = async (
         @click="toggleFavorite"
       >
         <KunIcon name="lucide:heart" />
-        <span v-if="favoriteCount">{{ website.favoriteCount }}</span>
+        <span v-if="favoriteCount">{{ favoriteCount }}</span>
       </KunButton>
     </KunTooltip>
 

@@ -10,81 +10,6 @@ const KUN_WEBSITE_CATEGORY_MAP: Record<string, string> = {
   other: '其它网站'
 }
 
-const KUN_WEBSITE_TAG_MAP: Record<string, string> = {
-  ad0: '无广告',
-  // <3
-  ad1: '少量广告',
-  // >3 & <6
-  ad2: '有广告',
-  // >6
-  ad3: '广告较多',
-
-  open0: '完全开源',
-  open1: '部分开源',
-  open2: '不开源',
-
-  // >10000
-  resource0: '资源超丰富',
-  // >5000
-  resource1: '资源较多',
-  // >2000
-  resource2: '资源数一般',
-  // <1000
-  resource3: '资源较少',
-
-  trash_storage0: '自建存储',
-  // <10%
-  trash_storage1: '无网赚盘',
-  // > 30%
-  trash_storage2: '有网赚盘',
-  // >50%
-  trash_storage3: '大量网赚盘',
-
-  age0: '存活 20 年+',
-  age1: '存活 10 年+',
-  age2: '存活 5 年+',
-  age3: '存活 3 年+',
-  age4: '存活 1 年+',
-  age5: '新站',
-
-  threshold0: '无门槛',
-  threshold1: '需登录',
-  threshold2: '需登录 + 回复',
-  threshold3: '需登录 + 积分',
-  threshold4: '获取资源难',
-
-  intro0: '介绍非常详细',
-  intro1: '介绍较多',
-  intro2: '介绍一般',
-  intro3: '无游戏介绍',
-
-  // new create items > 300 / 1day
-  active0: '社区超级活跃',
-  // > 100
-  active1: '社区活跃',
-  // > 50
-  active2: '社区较活跃',
-  // > 10
-  active3: '活跃度一般',
-  // < 10
-  active4: '社区较冷',
-
-  // first-content load complete < 3s, based on SSR App, SPA -3s
-  performance0: '网站速度极快',
-  // <6s
-  performance2: '网站加载快',
-  // <9s
-  performance3: '网站速度一般',
-  // >12s
-  performance4: '网站速度较慢',
-
-  patch: '补丁站',
-  // Powered by OpenList / Alist or other cloud-storage program
-  cloud: '网盘站',
-  // Impl CFMSC or other wiki-like features
-  wiki: '百科站'
-}
-
 const KUN_WEBSITE_TAG_LEVEL_MAP: Record<string, number> = {
   ad0: 20,
   // <3
@@ -107,13 +32,25 @@ const KUN_WEBSITE_TAG_LEVEL_MAP: Record<string, number> = {
   // <1000
   resource3: 0,
 
+  update0: 15,
+  update1: 10,
+  update2: 5,
+  update3: -5,
+
+  storage0: 20,
+  storage1: 10,
+  storage2: 0,
+  storage3: -10,
+
+  support0: 15,
+  support1: 5,
+  support2: -10,
+
   trash_storage0: 20,
   // <10%
-  trash_storage1: 10,
+  trash_storage1: 0,
   // > 30%
-  trash_storage2: 0,
-  // >50%
-  trash_storage3: -10,
+  trash_storage2: -10,
 
   age0: 20,
   age1: 10,
@@ -132,6 +69,23 @@ const KUN_WEBSITE_TAG_LEVEL_MAP: Record<string, number> = {
   intro1: 5,
   intro2: 0,
   intro3: -5,
+
+  curation0: 15,
+  curation1: 10,
+  curation2: 0,
+  curation3: -10,
+
+  mobile0: 10,
+  mobile1: 5,
+  mobile2: 0,
+
+  search0: 10,
+  search1: 0,
+  search2: -5,
+
+  vibe0: 10,
+  vibe1: 0,
+  vibe2: -10,
 
   // new create items > 300 / 1day
   active0: 20,
@@ -153,11 +107,19 @@ const KUN_WEBSITE_TAG_LEVEL_MAP: Record<string, number> = {
   // >12s
   performance4: -5,
 
+  security0: 10,
+  security1: 0,
+  security2: -100,
+
   patch: 0,
   // Powered by OpenList / Alist or other cloud-storage program
   cloud: 0,
   // Impl CFMSC or other wiki-like features
-  wiki: 0
+  wiki: 0,
+  localization: 0,
+  raw: 0,
+  // information website
+  info: 0
 }
 
 const getDomain = (url: string) => {
@@ -176,10 +138,11 @@ const initWebsiteData = async () => {
     })
 
     await prisma.galgame_website_tag.createMany({
-      data: Object.keys(KUN_WEBSITE_TAG_MAP).map((k) => ({
+      data: Object.keys(KUN_WEBSITE_TAG_LEVEL_MAP).map((k) => ({
         name: k,
         level: KUN_WEBSITE_TAG_LEVEL_MAP[k]
-      }))
+      })),
+      skipDuplicates: true
     })
 
     const testTagData = [1, 4, 8, 12, 16, 20, 24]

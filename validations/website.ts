@@ -19,7 +19,7 @@ export const createWebsiteSchema = z.object({
   category_id: z.coerce.number().min(1).max(9999999),
   tag_ids: z
     .array(z.coerce.number().min(1).max(9999999))
-    .max(10, '网站最多十个标签')
+    .max(20, '网站最多 20 个标签')
     .optional()
     .default([]),
   domain: z
