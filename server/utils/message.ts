@@ -12,9 +12,14 @@ export const createMessage = async (
   type: MessageType,
   content: string,
   topicId?: number,
-  galgameId?: number
+  galgameId?: number,
+  websiteDomain?: string
 ) => {
-  const link = topicId ? `/topic/${topicId}` : `/galgame/${galgameId}`
+  const link = topicId
+    ? `/topic/${topicId}`
+    : galgameId
+      ? `/galgame/${galgameId}`
+      : `/website/${websiteDomain}`
 
   const newMessage = await prisma.message.create({
     data: {

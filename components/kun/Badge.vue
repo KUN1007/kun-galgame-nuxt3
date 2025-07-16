@@ -15,15 +15,6 @@ const props = withDefaults(defineProps<Props>(), {
   variant: 'flat'
 })
 
-// const colorClasses: Record<KunUIColor, string> = {
-//   default: 'bg-default/20 text-default-800',
-//   primary: 'bg-primary/20 text-primary-800',
-//   secondary: 'bg-secondary/20 text-secondary-800',
-//   success: 'bg-success/20 text-success-800',
-//   warning: 'bg-warning/20 text-warning-800',
-//   danger: 'bg-danger/20 text-danger-800'
-// }
-
 const variantClasses = computed(() => {
   switch (props.variant) {
     case 'solid':
@@ -91,7 +82,7 @@ const colorVariants: Record<KunUIVariant, Record<KunUIColor, string>> = {
     primary: 'shadow-lg shadow-primary/40 bg-primary',
     secondary: 'shadow-lg shadow-secondary/40 bg-secondary',
     success: 'shadow-lg shadow-success/40 bg-success',
-    warning: 'shadow-lg shadow-warning/40 bg-warning',
+    warning: 'shadow-lg shadow-warning/40 bg-warning dark:text-black',
     danger: 'shadow-lg shadow-danger/40 bg-danger'
   },
   ghost: {

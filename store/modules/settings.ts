@@ -13,7 +13,7 @@ export const usePersistSettingsStore = defineStore('KUNGalgameSettings', {
     showKUNGalgameBackground: 0,
     showKUNGalgameBackgroundBlur: 0,
     showKUNGalgameBackgroundBrightness: 100,
-    showKUNGalgameBackLoli: true
+    showKUNGalgameBackLoli: false
   }),
   actions: {
     setKUNGalgameFontStyle(font: string) {

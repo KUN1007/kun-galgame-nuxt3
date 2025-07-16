@@ -1,0 +1,99 @@
+model galgame_website {
+    id          Int      @id @default(autoincrement())
+    name        String   @unique
+    url         String   @unique
+    create_time DateTime
+    description String   @default("")
+    icon        String   @default("")
+    view        Int      @default(0)
+    // en-us, ja-jp, zh-cn, zh-tw
+    language    String   @default("JA")
+    // all, r18
+    age_limit   String   @default("all")
+    domain      String[] @default([])
+
+    category_id Int
+    category    galgame_website_category @relation(fields: [category_id], references: [id])
+
+    tag galgame_website_tag_relation[]
+
+    like     galgame_website_like[]
+    favorite galgame_website_favorite[]
+    comment  galgame_website_comment[]
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
+}
+
+model galgame_website_category {
+    id          Int               @id @default(autoincrement())
+    // resource, patch, community, telegram, other
+    name        String            @unique
+    description String            @default("")
+    website     galgame_website[]
+}
+
+model galgame_website_tag {
+    id      Int                            @id @default(autoincrement())
+    level   Int
+    name    String                         @unique
+    website galgame_website_tag_relation[]
+}
+
+model galgame_website_tag_relation {
+    galgame_website_id     Int
+    website                galgame_website     @relation(fields: [galgame_website_id], references: [id], onDelete: Cascade)
+    galgame_website_tag_id Int
+    tag                    galgame_website_tag @relation(fields: [galgame_website_tag_id], references: [id], onDelete: Cascade)
+
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+
+    @@id([galgame_website_id, galgame_website_tag_id])
+}
+
+model galgame_website_comment {
+    id      Int       @id @default(autoincrement())
+    content String    @default("")
+    edited  DateTime?
+
+    user_id    Int
+    user       user            @relation("user_galgame_website_comment", fields: [user_id], references: [id], onDelete: Cascade)
+    website_id Int
+    website    galgame_website @relation(fields: [website_id], references: [id], onDelete: Cascade)
+
+    parent_id Int?
+    parent    galgame_website_comment? @relation("galgame_website_comment_reply", fields: [parent_id], references: [id], onDelete: Cascade)
+
+    reply galgame_website_comment[] @relation("galgame_website_comment_reply")
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
+
+    @@index([website_id])
+    @@index([user_id])
+}
+
+model galgame_website_like {
+    user_id    Int
+    user       user            @relation("user_galgame_website_like", fields: [user_id], references: [id], onDelete: Cascade)
+    website_id Int
+    website    galgame_website @relation(fields: [website_id], references: [id], onDelete: Cascade)
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
+
+    @@id([user_id, website_id])
+}
+
+model galgame_website_favorite {
+    user_id    Int
+    user       user            @relation("user_galgame_website_favorite", fields: [user_id], references: [id], onDelete: Cascade)
+    website_id Int
+    website    galgame_website @relation(fields: [website_id], references: [id], onDelete: Cascade)
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
+
+    @@id([user_id, website_id])
+}

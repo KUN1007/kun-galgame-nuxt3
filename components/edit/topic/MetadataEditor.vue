@@ -88,8 +88,8 @@ const handleTagInputBackspace = () => {
             cn(
               'flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 p-4 transition-all duration-200',
               category === cat.key
-                ? 'border-primary-500 bg-primary-50 shadow-md'
-                : 'border-default-200 bg-default-50 hover:border-primary-400 hover:bg-primary-50/50'
+                ? 'border-primary-500 bg-primary-500/10 shadow-md'
+                : 'border-default-200 bg-default-500/10 hover:border-primary-400 hover:bg-primary-50/50'
             )
           "
         >
@@ -161,9 +161,7 @@ const handleTagInputBackspace = () => {
       <div
         class="flex flex-wrap items-center gap-2 rounded-lg border p-3 transition-all"
         :class="
-          isTagInputFocused
-            ? 'border-primary-500 ring-primary-500/20 ring-2'
-            : 'border-default-300'
+          isTagInputFocused ? 'ring-primary-500 ring-2' : 'border-default-300'
         "
       >
         <KunBadge size="md" color="default" v-for="t in tags" :key="t">

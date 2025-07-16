@@ -52,7 +52,7 @@ const colorClasses: Record<KunUIColor | 'background', string> = {
         isHoverable && 'hover:bg-default-100 hover:shadow-md',
         // bordered && 'border',
         isPressable && 'cursor-pointer active:scale-[0.97]',
-        isTransparent ? '' : colorClasses[props.color],
+        isTransparent ? 'backdrop-blur-none' : colorClasses[props.color],
         className
       )
     "

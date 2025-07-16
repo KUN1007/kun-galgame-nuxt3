@@ -41,12 +41,12 @@ const isFocused = ref(false)
 const kunUniqueId = useKunUniqueId('kun-input')
 
 const colorClass: Record<KunUIColor, string> = {
-  default: 'bg-default/10 focus:ring-default',
-  primary: 'bg-primary/10 focus:ring-primary',
-  secondary: 'bg-secondary/10 focus:ring-secondary',
-  success: 'bg-success/10 focus:ring-success',
-  warning: 'bg-warning/10 focus:ring-warning',
-  danger: 'bg-danger/10 focus:ring-danger'
+  default: 'focus:ring-default',
+  primary: 'focus:ring-primary',
+  secondary: 'focus:ring-secondary',
+  success: 'focus:ring-success',
+  warning: 'focus:ring-warning',
+  danger: 'focus:ring-danger'
 }
 
 const sizeClasses = computed(() => {
@@ -111,7 +111,7 @@ defineExpose({
         :required="required"
         :class="
           cn(
-            'block w-full rounded-md px-2 py-1 text-sm shadow-sm transition duration-150 ease-in-out focus:ring-1',
+            'border-default/20 block w-full rounded-md border px-2 py-1 text-sm shadow-sm transition duration-150 ease-in-out focus:border-transparent focus:ring-2',
             colorClass[color],
             sizeClasses,
             $slots.prefix && 'pl-10',

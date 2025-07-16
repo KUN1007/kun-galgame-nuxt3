@@ -125,8 +125,8 @@ onMounted(() => {
         :autofocus="autofocus"
         :class="
           cn(
-            'scrollbar-hide w-full rounded-md px-3 py-2 text-sm shadow-sm transition duration-150 ease-in-out',
-            'focus:ring-primary-500 focus:border-primary-500 focus:ring-1 focus:outline-none',
+            'scrollbar-hide border-default/20 w-full rounded-md border p-3 shadow-sm transition duration-150 ease-in-out',
+            'focus:ring-primary-500 focus:border-transparent focus:ring-2 focus:outline-none',
             disabled ? 'text-default-500 cursor-not-allowed' : '',
             // readonly ? 'bg-default-100' : '',
             // error ? 'border-danger-300' : 'border-default-300',
