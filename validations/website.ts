@@ -25,7 +25,8 @@ export const createWebsiteSchema = z.object({
   domain: z
     .array(z.string().max(100, '网站可用域名最多 100 个字符'))
     .optional()
-    .default([])
+    .default([]),
+  create_time: z.string().min(1).max(20, '网站创建时间描述最多 20 个字符')
 })
 
 export const updateWebsiteSchema = createWebsiteSchema.merge(

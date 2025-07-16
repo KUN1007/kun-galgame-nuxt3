@@ -30,7 +30,7 @@ export interface WebsiteDetail {
   icon: string
   view: number
   language: string
-  ageLimit: string
+  ageLimit: 'all' | 'r18'
   category: WebsiteCategory
   tags: WebsiteTag[]
   likeCount: number
@@ -38,6 +38,7 @@ export interface WebsiteDetail {
   favoriteCount: number
   isFavorited: boolean
   domain: string[]
+  createTime: string
 
   created: Date | string
   updated: Date | string

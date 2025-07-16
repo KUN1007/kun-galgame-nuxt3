@@ -65,10 +65,11 @@ const filteredTags = computed(() => {
 
     <div class="dark:border-gray-700">
       <TransitionGroup name="tag-list" tag="div" class="flex flex-wrap gap-3">
-        <div
+        <KunBadge
+          class-name="bg-default-500/10"
+          size="md"
           v-for="tag in filteredTags"
           :key="tag.id"
-          class="flex cursor-pointer items-center rounded-full bg-gray-100 px-4 py-1.5 text-sm font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-200"
         >
           <span
             :class="
@@ -83,7 +84,7 @@ const filteredTags = computed(() => {
             #
           </span>
           {{ tag.name }}
-        </div>
+        </KunBadge>
       </TransitionGroup>
 
       <KunNull

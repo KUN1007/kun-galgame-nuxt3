@@ -2,7 +2,7 @@ model galgame_website {
     id          Int      @id @default(autoincrement())
     name        String   @unique
     url         String   @unique
-    create_time DateTime
+    create_time String
     description String   @default("")
     icon        String   @default("")
     view        Int      @default(0)

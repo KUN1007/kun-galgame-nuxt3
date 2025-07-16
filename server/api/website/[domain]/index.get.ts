@@ -45,7 +45,7 @@ export default defineEventHandler(async (event) => {
     icon: data.icon,
     view: data.view,
     language: data.language,
-    ageLimit: data.age_limit,
+    ageLimit: data.age_limit as 'all' | 'r18',
     category: data.category,
     tags: data.tag.map((t) => t.tag),
     likeCount: data._count.like,
@@ -53,6 +53,7 @@ export default defineEventHandler(async (event) => {
     domain: data.domain,
     favoriteCount: data._count.favorite,
     isFavorited: data.favorite.length > 0,
+    createTime: data.create_time,
     created: data.created,
     updated: data.updated
   }

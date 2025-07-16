@@ -13,7 +13,7 @@ export const KUN_WEBSITE_LANGUAGE_MAP: Record<string, string> = {
 }
 
 export const KUN_WEBSITE_ACG_LIMIT_MAP: Record<string, string> = {
-  all: '不含 R18 内容',
+  all: '页面默认不含 R18 内容',
   r18: '含有 R18 内容'
 }
 

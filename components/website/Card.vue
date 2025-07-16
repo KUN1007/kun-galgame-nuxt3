@@ -15,13 +15,13 @@ const totalLevel = computed(() => {
     :is-pressable="true"
     :is-transparent="true"
     :href="`/website/${website.domain}`"
-    class-name="group"
+    class-name="group dark:border dark:border-default-200"
     content-class="space-y-3"
   >
     <div class="flex items-start space-x-4">
       <div class="flex-shrink-0">
         <NuxtImg
-          :src="'/favicon-square.webp'"
+          :src="website.icon"
           :alt="website.name"
           class="h-12 w-12 rounded-2xl object-cover shadow-md"
         />

@@ -1,5 +1,6 @@
 import prisma from '~/prisma/prisma'
 import { updateWebsiteSchema } from '~/validations/website'
+import { getDomain } from '~/utils/getDomain'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
@@ -15,12 +16,12 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
-  const { tag_ids, websiteId, ...websiteData } = input
+  const { tag_ids, websiteId, url, ...rest } = input
 
   return await prisma.$transaction(async (prisma) => {
     await prisma.galgame_website.update({
       where: { id: websiteId },
-      data: websiteData
+      data: { ...rest, url: getDomain(url) }
     })
 
     await prisma.galgame_website_tag_relation.deleteMany({

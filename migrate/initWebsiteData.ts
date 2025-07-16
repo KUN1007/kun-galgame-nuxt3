@@ -189,7 +189,7 @@ const initWebsiteData = async () => {
       data: websiteArr.map((w) => ({
         url: getDomain(w.link),
         name: w.name,
-        create_time: new Date(),
+        create_time: '1 year ago',
         description: w.label,
         icon: '/favicon.webp',
         language: 'zh-cn',

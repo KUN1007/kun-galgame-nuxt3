@@ -25,9 +25,9 @@ export const kunLayoutItem: KunLayoutItem[] = [
   },
   {
     name: 'website',
-    icon: 'lucide:columns-4',
+    icon: 'lucide:globe',
     router: '/website',
-    label: 'Galgame 网站集合',
+    label: 'Galgame 网站 Wiki',
     hint: '新'
   },
   {

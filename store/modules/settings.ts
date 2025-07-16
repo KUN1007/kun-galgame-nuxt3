@@ -7,7 +7,7 @@ const SETTINGS_DEFAULT_FONT_FAMILY: string = 'system-ui'
 export const usePersistSettingsStore = defineStore('KUNGalgameSettings', {
   persist: true,
   state: (): KUNGalgameSettingsStore => ({
-    showKUNGalgamePageTransparency: 77,
+    showKUNGalgamePageTransparency: 50,
     showKUNGalgameFontStyle: SETTINGS_DEFAULT_FONT_FAMILY,
     showKUNGalgameContentLimit: 'sfw',
     showKUNGalgameBackground: 0,

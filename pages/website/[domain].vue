@@ -11,16 +11,12 @@ const domain = computed(() => {
   return (route.params as { domain: string }).domain
 })
 
-const { data } = await useFetch(`/api/website/${domain.value}`, {
+const { data, refresh } = await useFetch(`/api/website/${domain.value}`, {
   method: 'GET',
   watch: false,
   query: { domain: domain.value },
   ...kungalgameResponseHandler
 })
-
-const toggleLike = () => {}
-
-const toggleFavorite = () => {}
 </script>
 
 <template>
@@ -35,7 +31,7 @@ const toggleFavorite = () => {}
         <div class="flex items-start space-x-6">
           <div class="flex-shrink-0">
             <NuxtImg
-              :src="'/favicon-square.webp'"
+              :src="data.icon"
               :alt="data.name"
               class="h-20 w-20 rounded-2xl object-cover shadow-md"
             />
@@ -61,19 +57,7 @@ const toggleFavorite = () => {}
           </div>
         </div>
 
-        <div class="mt-3 flex flex-wrap gap-4">
-          <KunButton variant="flat" class-name="gap-1" @click="toggleLike">
-            <KunIcon name="lucide:thumbs-up" />
-            <span>{{ data.likeCount }} 点赞</span>
-          </KunButton>
-
-          <KunButton variant="flat" class-name="gap-1" @click="toggleFavorite">
-            <KunIcon name="lucide:heart" />
-            <span>{{ data.favoriteCount }} 收藏</span>
-          </KunButton>
-
-          <KunButton class-name="ml-auto">访问网站</KunButton>
-        </div>
+        <WebsiteOperation :website="data" @refresh="refresh" />
       </KunCard>
 
       <WebsiteCommentContainer :website-id="data.id" />

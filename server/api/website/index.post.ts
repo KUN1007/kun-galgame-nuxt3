@@ -1,5 +1,6 @@
 import prisma from '~/prisma/prisma'
 import { createWebsiteSchema } from '~/validations/website'
+import { getDomain } from '~/utils/getDomain'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
@@ -15,11 +16,11 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
-  const { tag_ids, ...websiteData } = input
+  const { tag_ids, url, ...rest } = input
 
   return await prisma.$transaction(async (prisma) => {
     const website = await prisma.galgame_website.create({
-      data: websiteData
+      data: { ...rest, url: getDomain(url) }
     })
 
     const dataToCreate = tag_ids.map((sectionId) => ({

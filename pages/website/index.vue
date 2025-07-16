@@ -37,7 +37,7 @@ const navigateToWebsite = (domain: string) => {
 
     <div v-for="(web, category) in data" :key="category">
       <div class="mb-3 flex items-center space-x-3">
-        <h2 class="text-2xl text-slate-900">
+        <h2 class="text-default-900 text-2xl">
           {{ KUN_WEBSITE_CATEGORY_MAP[category] }}
         </h2>
         <KunBadge> {{ web.length }} 个网站 </KunBadge>
