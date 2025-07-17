@@ -138,7 +138,7 @@ const handleAction = async (
 </script>
 
 <template>
-  <div class="mt-3 flex flex-wrap gap-3">
+  <div class="flex flex-wrap gap-3">
     <KunTooltip text="点赞">
       <KunButton
         :is-icon-only="true"
