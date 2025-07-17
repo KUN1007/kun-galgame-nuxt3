@@ -26,19 +26,27 @@ model galgame_website {
 }
 
 model galgame_website_category {
-    id          Int               @id @default(autoincrement())
+    id          Int    @id @default(autoincrement())
     // resource, patch, community, telegram, other
-    name        String            @unique
-    description String            @default("")
-    website     galgame_website[]
+    name        String @unique
+    description String @default("")
+
+    website galgame_website[]
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
 }
 
 model galgame_website_tag {
-    id          Int                            @id @default(autoincrement())
+    id          Int    @id @default(autoincrement())
     level       Int
-    name        String                         @unique
-    description String                         @default("")
-    website     galgame_website_tag_relation[]
+    name        String @unique
+    description String @default("")
+
+    website galgame_website_tag_relation[]
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
 }
 
 model galgame_website_tag_relation {
@@ -47,8 +55,8 @@ model galgame_website_tag_relation {
     galgame_website_tag_id Int
     tag                    galgame_website_tag @relation(fields: [galgame_website_tag_id], references: [id], onDelete: Cascade)
 
-    created_at DateTime @default(now())
-    updated_at DateTime @updatedAt
+    created DateTime @default(now())
+    updated DateTime @updatedAt
 
     @@id([galgame_website_id, galgame_website_tag_id])
 }

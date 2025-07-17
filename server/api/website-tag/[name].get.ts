@@ -1,6 +1,6 @@
 import prisma from '~/prisma/prisma'
 import { getWebsiteByTagSchema } from '~/validations/website'
-import type { WebsiteCard } from '~/types/api/website'
+import type { WebsiteTagDetail } from '~/types/api/website'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getWebsiteByTagSchema)
@@ -8,37 +8,48 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
-  const data = await prisma.galgame_website.findMany({
-    where: {
-      tag: {
-        some: {
-          tag: {
-            name: input.name
-          }
-        }
-      }
-    },
+  const data = await prisma.galgame_website_tag.findUnique({
+    where: { name: input.name },
     include: {
-      category: true,
-      tag: {
+      website: {
         include: {
-          tag: true
+          website: {
+            include: {
+              category: true,
+              tag: {
+                include: {
+                  tag: true
+                }
+              }
+            }
+          }
         }
       }
     }
   })
+  if (!data) {
+    return kunError(event, '未找到这个标签')
+  }
 
-  const websites: WebsiteCard[] = data.map((w) => ({
-    id: w.id,
-    name: w.name,
-    domain: w.url,
-    description: w.description,
-    ageLimit: w.age_limit,
-    icon: w.icon,
-    level: w.tag.reduce((acc, curr) => acc + curr.tag.level, 0),
-    tags: w.tag.map((t) => t.tag),
-    category: w.category.name
-  }))
+  const websites: WebsiteTagDetail = {
+    id: data.id,
+    name: data.name,
+    description: data.description,
+    websiteCount: data.website.length,
+    websites: data.website.map((w) => ({
+      id: w.website.id,
+      name: w.website.name,
+      description: w.website.description,
+      domain: w.website.url,
+      ageLimit: w.website.age_limit,
+      icon: w.website.icon,
+      level: w.website.tag.reduce((acc, curr) => acc + curr.tag.level, 0),
+      tags: w.website.tag.map((t) => t.tag),
+      category: w.website.category.name
+    })),
+    created: data.created,
+    updated: data.updated
+  }
 
   return websites
 })

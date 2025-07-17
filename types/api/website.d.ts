@@ -10,6 +10,16 @@ export interface WebsiteTag {
   level: number
 }
 
+export interface WebsiteTagDetail {
+  id: number
+  name: string
+  description: string
+  websiteCount: number
+  websites: WebsiteCard[]
+  created: Date | string
+  updated: Date | string
+}
+
 export interface WebsiteCard {
   id: number
   name: string
