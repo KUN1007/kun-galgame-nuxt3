@@ -32,17 +32,5 @@ export default defineEventHandler(async (event) => {
     category: w.category.name
   }))
 
-  const results = websites.reduce(
-    (accumulator, site) => {
-      const category = site.category
-      if (!accumulator[category]) {
-        accumulator[category] = []
-      }
-      accumulator[category].push(site)
-      return accumulator
-    },
-    {} as Record<string, WebsiteCard[]>
-  )
-
-  return results
+  return websites
 })

@@ -34,10 +34,11 @@ model galgame_website_category {
 }
 
 model galgame_website_tag {
-    id      Int                            @id @default(autoincrement())
-    level   Int
-    name    String                         @unique
-    website galgame_website_tag_relation[]
+    id          Int                            @id @default(autoincrement())
+    level       Int
+    name        String                         @unique
+    description String                         @default("")
+    website     galgame_website_tag_relation[]
 }
 
 model galgame_website_tag_relation {
