@@ -69,7 +69,18 @@ const openCreateWebsiteModal = () => {
 
 const handleCreateWebsite = async (
   data: CreateWebsitePayload | UpdateWebsitePayload
-) => {}
+) => {
+  const result = await $fetch('/api/website', {
+    method: 'POST',
+    watch: false,
+    body: data,
+    ...kungalgameResponseHandler
+  })
+
+  if (result) {
+    useMessage('创建网站成功', 'success')
+  }
+}
 </script>
 
 <template>

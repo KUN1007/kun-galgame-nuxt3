@@ -82,18 +82,6 @@ const removeDomain = (index: number) => {
   formData.domain?.splice(index, 1)
 }
 
-const handleTagChange = (isChecked: boolean, tagId: number) => {
-  const selectedIds = new Set(formData.tag_ids)
-
-  if (isChecked) {
-    selectedIds.add(tagId)
-  } else {
-    selectedIds.delete(tagId)
-  }
-
-  formData.tag_ids = Array.from(selectedIds)
-}
-
 const handleSubmit = () => {
   const schema = isEditing.value ? updateWebsiteSchema : createWebsiteSchema
   const result = schema.safeParse(formData)
@@ -113,7 +101,11 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <KunModal v-model:modal-value="isModalOpen" inner-class-name="max-w-2xl">
+  <KunModal
+    :is-dismissable="false"
+    v-model:modal-value="isModalOpen"
+    inner-class-name="max-w-2xl"
+  >
     <form @submit.prevent>
       <h2 class="mb-4 text-xl font-bold">
         {{ isEditing ? '编辑网站' : '创建新网站' }}
@@ -122,6 +114,11 @@ const handleSubmit = () => {
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
         <KunInput v-model="formData.name" label="网站名称" required />
         <KunInput v-model="formData.icon" label="图标 URL" required />
+        <KunInput
+          v-model="formData.create_time"
+          label="网站创建时间"
+          required
+        />
         <KunInput
           v-model="formData.url"
           label="网站主域名"
