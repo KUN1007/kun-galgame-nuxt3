@@ -30,6 +30,7 @@ export default defineEventHandler(async (event) => {
   const websites: WebsiteCategoryDetail = {
     id: data.id,
     name: data.name,
+    label: data.label,
     description: data.description,
     websiteCount: data.website.length,
     websites: data.website.map((w) => ({

@@ -11,6 +11,7 @@ const { data } = await useFetch('/api/website', {
   ...kungalgameResponseHandler
 })
 
+const { role } = usePersistUserStore()
 const searchQuery = ref('')
 const showWebsiteModal = ref(false)
 const editingWebsite = ref<CreateWebsitePayload | undefined>(undefined)
@@ -103,7 +104,7 @@ const handleCreateWebsite = async (
             placeholder="搜索 Galgame 网站"
           />
 
-          <div class="flex justify-end">
+          <div v-if="role > 2" class="flex justify-end">
             <KunButton @click="openCreateWebsiteModal"> 创建新网站 </KunButton>
           </div>
         </div>

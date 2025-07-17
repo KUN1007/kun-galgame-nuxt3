@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { KUN_WEBSITE_CATEGORY_MAP } from '~/constants/website'
 import type { UpdateWebsiteCategoryPayload } from '~/components/website/modal/types'
 
 const route = useRoute()
@@ -25,6 +24,7 @@ const openEditCategoryModal = () => {
   }
   editingCategory.value = {
     name: data.value.name,
+    label: data.value.label,
     categoryId: data.value.id,
     description: data.value.description
   } satisfies UpdateWebsiteCategoryPayload
@@ -54,7 +54,7 @@ const handleUpdateCategory = async (data: UpdateWebsiteCategoryPayload) => {
     v-if="data"
   >
     <KunHeader
-      :name="KUN_WEBSITE_CATEGORY_MAP[data.name]"
+      :name="data.label"
       :description="data.description"
       :is-show-divider="false"
     >
@@ -62,9 +62,7 @@ const handleUpdateCategory = async (data: UpdateWebsiteCategoryPayload) => {
         <div class="space-y-3">
           <div class="flex items-center space-x-3">
             <KunBadge color="primary">
-              {{
-                `本 Wiki 拥有 ${data.websiteCount} 个 ${KUN_WEBSITE_CATEGORY_MAP[data.name]}`
-              }}
+              {{ `本 Wiki 拥有 ${data.websiteCount} 个 ${data.label}` }}
             </KunBadge>
             <KunBadge>
               更新于 {{ formatDate(data.updated, { isShowYear: true }) }}
@@ -94,9 +92,6 @@ const handleUpdateCategory = async (data: UpdateWebsiteCategoryPayload) => {
       </div>
     </div>
 
-    <KunNull
-      v-else
-      :description="`${KUN_WEBSITE_CATEGORY_MAP[categoryName]} 分类下暂无网站`"
-    />
+    <KunNull v-else :description="`${data.label} 分类下暂无网站`" />
   </KunCard>
 </template>

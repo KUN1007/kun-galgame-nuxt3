@@ -27,6 +27,7 @@ const isSubmitting = ref(false)
 
 const getInitialFormData = (): TagData => ({
   name: '',
+  label: '',
   level: 1,
   description: '',
   ...(props.initialData || {})

@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import {
-  KUN_TAG_CATEGORY_TITLE,
-  KUN_WEBSITE_TAG_MAP
-} from '~/constants/website'
+import { KUN_TAG_CATEGORY_TITLE } from '~/constants/website'
 import type { WebsiteTag } from '~/types/api/website'
 
 const props = withDefaults(
@@ -97,7 +94,7 @@ const handleCheckboxChange = (value: boolean, tagId: number) => {
           :key="tag.id"
           :model-value="getSelectedRadioValue(category) === tag.id"
           @update:model-value="handleRadioChange(tag.id, category)"
-          :label="KUN_WEBSITE_TAG_MAP[tag.name]"
+          :label="tag.label"
           :value="tag.id"
           class-name="w-full p-1 hover:bg-default-100 rounded"
         />
@@ -118,7 +115,7 @@ const handleCheckboxChange = (value: boolean, tagId: number) => {
           :key="tag.id"
           :model-value="tagIds.includes(tag.id)"
           @update:model-value="(value) => handleCheckboxChange(value, tag.id)"
-          :label="KUN_WEBSITE_TAG_MAP[tag.name]"
+          :label="tag.label"
           :value="tag.id"
           class-name="w-full p-1 hover:bg-default-100 rounded"
         />

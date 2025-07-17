@@ -1,18 +1,22 @@
 export interface WebsiteCategory {
   id: number
   name: string
+  label: string
   description: string
 }
 
 export interface WebsiteTag {
   id: number
   name: string
+  description: string
+  label: string
   level: number
 }
 
 export interface WebsiteTagDetail {
   id: number
   name: string
+  label: string
   level: number
   description: string
   websiteCount: number
@@ -24,6 +28,7 @@ export interface WebsiteTagDetail {
 export interface WebsiteCategoryDetail {
   id: number
   name: string
+  label: string
   description: string
   websiteCount: number
   websites: WebsiteCard[]

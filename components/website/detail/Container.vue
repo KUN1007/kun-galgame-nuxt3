@@ -51,6 +51,8 @@ const { data, refresh } = await useFetch(`/api/website/${props.domain}`, {
           {{ data.description }}
         </p>
 
+        <WebsiteDetailTagVisualization :tags="data.tags" />
+
         <WebsiteOperation :website="data" @refresh="refresh" />
       </KunCard>
 

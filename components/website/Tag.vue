@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { KUN_WEBSITE_TAG_MAP } from '~/constants/website'
 import type { WebsiteTag } from '~/types/api/website'
 
 const props = defineProps<{
@@ -91,7 +90,7 @@ const handleClick = (tagName: string) => {
         :color="tagColor(tag)"
         :class-name="isNav ? 'cursor-pointer' : ''"
       >
-        {{ KUN_WEBSITE_TAG_MAP[tag.name] }}
+        {{ tag.label }}
       </KunBadge>
     </KunTooltip>
   </template>

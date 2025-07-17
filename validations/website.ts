@@ -45,12 +45,20 @@ export const deleteWebsiteSchema = z.object({
 
 /* tag */
 
+export const getWebsiteTagSchema = z.object({
+  websiteId: z.coerce.number().min(1).max(9999999).optional()
+})
+
 export const getWebsiteByTagSchema = z.object({
   name: z.string().min(1, '标签名称不能为空').max(30, '标签名称最多 30 个字符')
 })
 
 export const createWebsiteTagSchema = z.object({
   name: z.string().min(1, '标签名称不能为空').max(30, '标签名称最多 30 个字符'),
+  label: z
+    .string()
+    .min(1, '标签 label 不能为空')
+    .max(30, '标签 label 最多 30 个字符'),
   level: z.coerce
     .number()
     .int('标签等级必须是整数')
@@ -77,6 +85,10 @@ export const getWebsiteByCategorySchema = z.object({
 export const updateWebsiteCategorySchema = z.object({
   categoryId: z.coerce.number().min(1).max(9999999),
   name: z.string().min(1, '分类名称不能为空').max(30, '分类名称最多 30 个字符'),
+  label: z
+    .string()
+    .min(1, '分类 label 不能为空')
+    .max(30, '分类 label 最多 30 个字符'),
   description: z.string().max(300, '网站分类描述最多 300 个字符').optional()
 })
 

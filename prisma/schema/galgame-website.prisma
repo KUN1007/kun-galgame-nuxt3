@@ -29,6 +29,7 @@ model galgame_website_category {
     id          Int    @id @default(autoincrement())
     // resource, patch, community, telegram, other
     name        String @unique
+    label       String @default("")
     description String @default("")
 
     website galgame_website[]
@@ -41,6 +42,7 @@ model galgame_website_tag {
     id          Int    @id @default(autoincrement())
     level       Int
     name        String @unique
+    label       String @default("")
     description String @default("")
 
     website galgame_website_tag_relation[]

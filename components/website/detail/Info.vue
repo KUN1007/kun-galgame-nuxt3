@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  KUN_WEBSITE_CATEGORY_MAP,
   KUN_WEBSITE_LANGUAGE_MAP,
   KUN_WEBSITE_ACG_LIMIT_MAP
 } from '~/constants/website'
@@ -28,7 +27,7 @@ defineProps<{
           underline="none"
         >
           <KunBadge class-name="cursor-pointer" color="primary">
-            {{ KUN_WEBSITE_CATEGORY_MAP[data.category.name] }}
+            {{ data.category.label }}
           </KunBadge>
         </KunLink>
       </div>

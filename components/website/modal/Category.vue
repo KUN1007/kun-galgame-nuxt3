@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { reactive, watch, computed, ref } from 'vue'
 import { updateWebsiteCategorySchema } from '~/validations/website'
 import type { UpdateWebsiteCategoryPayload } from './types'
 

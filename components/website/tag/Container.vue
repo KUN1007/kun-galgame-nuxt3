@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { KUN_WEBSITE_TAG_MAP } from '~/constants/website'
 import type {
   CreateWebsiteTagPayload,
   UpdateWebsiteTagPayload
@@ -26,6 +25,7 @@ const openEditTagModal = () => {
   }
   editingTag.value = {
     name: data.value.name,
+    label: data.value.label,
     level: data.value.level,
     tagId: data.value.id,
     description: data.value.description
@@ -60,7 +60,7 @@ const handleTagSubmit = async (
     v-if="data"
   >
     <KunHeader
-      :name="`${KUN_WEBSITE_TAG_MAP[data.name]}的 Galgame 网站`"
+      :name="`${data.label}的 Galgame 网站`"
       :description="data.description"
       :is-show-divider="false"
     >
@@ -97,9 +97,6 @@ const handleTagSubmit = async (
       </div>
     </div>
 
-    <KunNull
-      v-else
-      :description="`${KUN_WEBSITE_TAG_MAP[tagName]} 标签下暂无网站`"
-    />
+    <KunNull v-else :description="`${data.label} 标签下暂无网站`" />
   </KunCard>
 </template>
