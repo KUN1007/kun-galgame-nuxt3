@@ -78,7 +78,7 @@ const handleSubmit = () => {
         <KunInput v-model="formData.name" label="标签名称" required />
         <KunInput
           v-model="formData.level"
-          label="标签等级 (0-10)"
+          label="标签等级 (0-20)"
           type="number"
           required
         />

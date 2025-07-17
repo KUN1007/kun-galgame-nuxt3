@@ -138,8 +138,8 @@ const KUN_WEBSITE_TAG_LEVEL_MAP: Record<string, number> = {
   // >6
   ad3: -10,
 
-  open0: 10,
-  open1: 5,
+  open0: 20,
+  open1: 10,
   open2: 0,
 
   // >10000

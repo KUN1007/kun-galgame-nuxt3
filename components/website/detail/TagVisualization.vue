@@ -124,11 +124,18 @@ const getBackgroundColor = (color: string): string => {
         </div>
       </div>
 
-      <div class="bg-content3 mb-2 overflow-hidden rounded-full">
+      <div
+        :class="
+          cn(
+            'mb-2 overflow-hidden rounded-full',
+            totalScore > 0 ? 'bg-content3' : 'bg-danger-500/30'
+          )
+        "
+      >
         <div
           class="relative h-8"
           :style="{
-            width: (totalScore / 245) * 100 + '%'
+            width: ((totalScore > 0 ? totalScore : 0) / 245) * 100 + '%'
           }"
         >
           <div

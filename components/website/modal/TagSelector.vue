@@ -44,14 +44,20 @@ const groupedTags = computed(() => {
 })
 
 const handleRadioChange = (newTagId: number, category: string) => {
-  const categoryTagIds = groupedTags.value.radioGroups[category].map(
-    (t) => t.id
-  )
-
-  const otherTagIds = props.tagIds.filter((id) => !categoryTagIds.includes(id))
-
-  const newIds = [...otherTagIds, newTagId]
-  emits('updateIds', newIds)
+  const isAlreadySelected = props.tagIds.includes(newTagId)
+  if (isAlreadySelected) {
+    const newIds = props.tagIds.filter((id) => id !== newTagId)
+    emits('updateIds', newIds)
+  } else {
+    const categoryTagIds = groupedTags.value.radioGroups[category].map(
+      (t) => t.id
+    )
+    const otherTagIds = props.tagIds.filter(
+      (id) => !categoryTagIds.includes(id)
+    )
+    const newIds = [...otherTagIds, newTagId]
+    emits('updateIds', newIds)
+  }
 }
 
 const getSelectedRadioValue = (category: string): number | null => {

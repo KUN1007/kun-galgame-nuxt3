@@ -22,7 +22,7 @@ const calculateTagSum = (tags: WebsiteTag[]): number => {
 
 const filteredAndSortedWebsites = computed(() => {
   if (!data.value || !Array.isArray(data.value)) {
-    return {}
+    return []
   }
 
   const lowerCaseQuery = searchQuery.value.toLowerCase()
@@ -56,7 +56,18 @@ const filteredAndSortedWebsites = computed(() => {
     })
   }
 
-  return categorized
+  // ordered sort, ['resource', 'community', 'telegram', 'other']
+  return Object.keys(KUN_WEBSITE_CATEGORY_MAP)
+    .map((categoryKey) => {
+      const sites = categorized[categoryKey] || []
+      return {
+        key: categoryKey,
+        name: KUN_WEBSITE_CATEGORY_MAP[categoryKey],
+        sites: sites
+      }
+    })
+
+    .filter((categoryGroup) => categoryGroup.sites.length > 0)
 })
 
 const navigateToWebsite = (domain: string) => {
@@ -93,7 +104,7 @@ const handleCreateWebsite = async (
   >
     <KunHeader
       name="Galgame 网站 Wiki"
-      description="世界上最全的 Galgame 资源网站, 社区网站, Telegram 社群列表"
+      description="世界上最全的 Galgame 资源网站, 社区网站, 论坛网站, 资讯网站, Galgame Wiki, Telegram 社群 等 Galgame 网站汇总, 仅收录 Galgame 相关的网站。本 Wiki 仅会收录免费网站, 并且严格禁止任何有付费行为的网站。"
       :is-show-divider="false"
     >
       <template #endContent>
@@ -117,19 +128,22 @@ const handleCreateWebsite = async (
       @submit="handleCreateWebsite"
     />
 
-    <div v-for="(sites, category) in filteredAndSortedWebsites" :key="category">
+    <div
+      v-for="categoryGroup in filteredAndSortedWebsites"
+      :key="categoryGroup.key"
+    >
       <div class="mb-3 flex items-center space-x-3">
         <h2 class="text-default-900 text-2xl">
-          {{ KUN_WEBSITE_CATEGORY_MAP[category] }}
+          {{ categoryGroup.name }}
         </h2>
-        <KunBadge> {{ sites.length }} 个网站 </KunBadge>
+        <KunBadge> {{ categoryGroup.sites.length }} 个网站 </KunBadge>
       </div>
 
       <div
         class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
       >
         <WebsiteCard
-          v-for="website in sites"
+          v-for="website in categoryGroup.sites"
           :key="website.id"
           :website="website"
           @click="navigateToWebsite(website.domain)"

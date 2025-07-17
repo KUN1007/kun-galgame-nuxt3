@@ -51,7 +51,7 @@ watch(
             <KunLink
               class-name="block whitespace-nowrap"
               size="sm"
-              to="https://www.touchgal.io/"
+              to="https://www.touchgal.us/"
               target="_blank"
             >
               TouchGal

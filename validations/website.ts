@@ -13,7 +13,7 @@ export const createWebsiteSchema = z.object({
     .string()
     .min(10, '网站介绍最少 10 个字符')
     .max(170, '网站介绍最多 170 个字符'),
-  icon: z.string().url('无效的图标 URL').max(100, '图标 URL 最多 100 个字符'),
+  icon: z.string().url('无效的图标 URL').max(300, '图标 URL 最多 300 个字符'),
   language: z.enum(['en-us', 'ja-jp', 'zh-cn', 'zh-tw']).default('zh-cn'),
   age_limit: z.enum(['all', 'r18']).default('all'),
   category_id: z.coerce.number().min(1).max(9999999),

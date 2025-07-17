@@ -72,7 +72,7 @@ https://zi0.cc/
 
 如果你觉得网盘下载站，nyaa 等没有预览图，可以看看
 
-[https://www.touchgal.io](https://www.touchgal.io/)
+[https://www.touchgal.us](https://www.touchgal.us/)
 
 其它登录制、积分制免费下载站，可以查看我们的友情链接等等
 
@@ -84,7 +84,8 @@ https://www.kungal.com/friend-links
 
 ### Galgame 补丁资源下载站
 
-https://www. moyu点moe
+
+[https://www.moyu.moe](https://www.moyu.moe/)
 
 你可以在这里下载到大部分你想要的游戏补丁，包括游戏补丁，汉化补丁，修正补丁，机翻补丁等等, 它是零门槛, 免登录, 免积分, 不限速下载的网站
 
@@ -115,8 +116,6 @@ https://www.kungal.com/
 目前, 您可以在这里看到一些 Galgame 网站索引, **这些索引不是我们制作的**
 
 https://github.com/Shrans/GalSites
-
-https://github.com/AdingApkgg/gal-site
 
 https://github.com/mokurin000/galgame_cn
 

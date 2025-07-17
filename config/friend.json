@@ -73,7 +73,7 @@
     {
       "name": "TouchGal",
       "banner": "touchgal",
-      "link": "https://www.touchgal.io/",
+      "link": "https://www.touchgal.us/",
       "label": "TouchGAL是立足于分享快乐的一站式Galgame文化社区, 为Gal爱好者提供一片净土!"
     },
     {
@@ -198,7 +198,8 @@
       "name": "雪月风花",
       "banner": "xueyuefenghua",
       "link": "https://play.ziyuanshare.cc/",
-      "label": "雪月风花是一个集ACG游戏、动漫、电影、音乐、网络项目、热点资讯的免费分享平台"
+      "label": "雪月风花是一个集ACG游戏、动漫、电影、音乐、网络项目、热点资讯的免费分享平台",
+      "status": "down"
     },
     {
       "name": "TGNAV",
