@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import { KUN_WEBSITE_CATEGORY_MAP } from '~/constants/website'
+import type { UpdateWebsiteCategoryPayload } from '~/components/website/modal/types'
 
 const route = useRoute()
 const categoryName = computed(() => {
   return (route.params as { name: string }).name
 })
+
+const showCategoryModal = ref(false)
+const editingCategory = ref<UpdateWebsiteCategoryPayload>(
+  {} as UpdateWebsiteCategoryPayload
+)
 
 const { data } = await useFetch(`/api/website-category/${categoryName.value}`, {
   method: 'GET',
@@ -12,6 +18,31 @@ const { data } = await useFetch(`/api/website-category/${categoryName.value}`, {
   query: { name: categoryName.value },
   ...kungalgameResponseHandler
 })
+
+const openEditCategoryModal = () => {
+  if (!data.value) {
+    return
+  }
+  editingCategory.value = {
+    name: data.value.name,
+    categoryId: data.value.id,
+    description: data.value.description
+  } satisfies UpdateWebsiteCategoryPayload
+  showCategoryModal.value = true
+}
+
+const handleUpdateCategory = async (data: UpdateWebsiteCategoryPayload) => {
+  const result = await $fetch(`/api/website-category`, {
+    method: 'PUT',
+    watch: false,
+    body: data,
+    ...kungalgameResponseHandler
+  })
+
+  if (result) {
+    useMessage('重新编辑成功', 'success')
+  }
+}
 </script>
 
 <template>
@@ -20,28 +51,52 @@ const { data } = await useFetch(`/api/website-category/${categoryName.value}`, {
     :is-hoverable="false"
     :is-pressable="false"
     content-class="space-y-6"
+    v-if="data"
   >
     <KunHeader
-      :name="KUN_WEBSITE_CATEGORY_MAP[categoryName]"
-      :description="`分类 “${KUN_WEBSITE_CATEGORY_MAP[categoryName]}”下的所有网站`"
+      :name="KUN_WEBSITE_CATEGORY_MAP[data.name]"
+      :description="data.description"
       :is-show-divider="false"
+    >
+      <template #endContent>
+        <div class="space-y-3">
+          <div class="flex items-center space-x-3">
+            <KunBadge color="primary">
+              {{
+                `本 Wiki 拥有 ${data.websiteCount} 个 ${KUN_WEBSITE_CATEGORY_MAP[data.name]}`
+              }}
+            </KunBadge>
+            <KunBadge>
+              更新于 {{ formatDate(data.updated, { isShowYear: true }) }}
+            </KunBadge>
+          </div>
+
+          <div class="flex justify-end">
+            <KunButton @click="openEditCategoryModal">编辑分类</KunButton>
+          </div>
+        </div>
+      </template>
+    </KunHeader>
+
+    <WebsiteModalCategory
+      v-model="showCategoryModal"
+      :initial-data="editingCategory"
+      @submit="handleUpdateCategory"
     />
 
-    <template v-if="data">
-      <div v-if="data.length">
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <WebsiteCard
-            v-for="website in data"
-            :key="website.id"
-            :website="website"
-          />
-        </div>
+    <div v-if="data.websites.length">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <WebsiteCard
+          v-for="website in data.websites"
+          :key="website.id"
+          :website="website"
+        />
       </div>
+    </div>
 
-      <KunNull
-        v-else
-        :description="`${KUN_WEBSITE_CATEGORY_MAP[categoryName]} 分类下暂无网站`"
-      />
-    </template>
+    <KunNull
+      v-else
+      :description="`${KUN_WEBSITE_CATEGORY_MAP[categoryName]} 分类下暂无网站`"
+    />
   </KunCard>
 </template>

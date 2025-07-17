@@ -11,7 +11,7 @@ const tagName = computed(() => {
 })
 
 const showTagModal = ref(false)
-const editingTag = ref()
+const editingTag = ref<UpdateWebsiteTagPayload>({} as UpdateWebsiteTagPayload)
 
 const { data } = await useFetch(`/api/website-tag/${tagName.value}`, {
   method: 'GET',
@@ -29,7 +29,7 @@ const openEditTagModal = () => {
     level: data.value.level,
     tagId: data.value.id,
     description: data.value.description
-  }
+  } satisfies UpdateWebsiteTagPayload
   showTagModal.value = true
 }
 
@@ -60,7 +60,7 @@ const handleTagSubmit = async (
     v-if="data"
   >
     <KunHeader
-      :name="KUN_WEBSITE_TAG_MAP[data.name]"
+      :name="`${KUN_WEBSITE_TAG_MAP[data.name]}的 Galgame 网站`"
       :description="data.description"
       :is-show-divider="false"
     >

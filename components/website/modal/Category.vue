@@ -26,7 +26,6 @@ watch(
   (isOpen) => {
     if (isOpen) {
       isSubmitting.value = false
-
       Object.assign(formData, props.initialData)
     }
   }
@@ -68,11 +67,7 @@ const handleSubmit = () => {
       </div>
 
       <div class="mt-6 flex justify-end gap-3">
-        <KunButton
-          variant="bordered"
-          color="default"
-          @click="isModalOpen = false"
-        >
+        <KunButton variant="light" color="danger" @click="isModalOpen = false">
           取消
         </KunButton>
         <KunButton type="submit" color="primary" :loading="isSubmitting">
