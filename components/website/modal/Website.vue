@@ -3,8 +3,7 @@ import { createWebsiteSchema, updateWebsiteSchema } from '~/validations/website'
 import {
   KUN_WEBSITE_CATEGORY_MAP,
   KUN_WEBSITE_LANGUAGE_MAP,
-  KUN_WEBSITE_ACG_LIMIT_MAP,
-  KUN_WEBSITE_TAG_MAP
+  KUN_WEBSITE_ACG_LIMIT_MAP
 } from '~/constants/website'
 import type { CreateWebsitePayload, UpdateWebsitePayload } from './types'
 import type { KunSelectOption } from '~/components/kun/select/type'

@@ -13,6 +13,7 @@ export interface WebsiteTag {
 export interface WebsiteTagDetail {
   id: number
   name: string
+  level: number
   description: string
   websiteCount: number
   websites: WebsiteCard[]

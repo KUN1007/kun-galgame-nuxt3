@@ -51,7 +51,11 @@ export const getWebsiteByTagSchema = z.object({
 
 export const createWebsiteTagSchema = z.object({
   name: z.string().min(1, '标签名称不能为空').max(30, '标签名称最多 30 个字符'),
-  level: z.coerce.number().int('标签等级必须是整数').max(10)
+  level: z.coerce
+    .number()
+    .int('标签等级必须是整数')
+    .max(20, '网站标签等级最大为 20'),
+  description: z.string().max(300, '网站标签描述最多 300 个字符').optional()
 })
 
 export const updateWebsiteTagSchema = createWebsiteTagSchema.merge(

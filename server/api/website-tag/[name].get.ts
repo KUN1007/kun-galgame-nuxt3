@@ -34,6 +34,7 @@ export default defineEventHandler(async (event) => {
   const websites: WebsiteTagDetail = {
     id: data.id,
     name: data.name,
+    level: data.level,
     description: data.description,
     websiteCount: data.website.length,
     websites: data.website.map((w) => ({
