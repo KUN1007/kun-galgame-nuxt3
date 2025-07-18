@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
           {
             alias: {
               some: {
-                name: { in: searchTerms, mode: 'insensitive' }
+                name: { contains: st, mode: 'insensitive' }
               }
             }
           }

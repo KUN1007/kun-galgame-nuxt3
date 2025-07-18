@@ -10,6 +10,7 @@ interface Props {
   className?: string
   contentClass?: string
   href?: string
+  rounded?: string
   color?: KunUIColor | 'background'
 }
 
@@ -21,6 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
   className: '',
   contentClass: '',
   href: '/',
+  rounded: 'lg',
   color: 'background'
 })
 
@@ -41,6 +43,23 @@ const colorClasses: Record<KunUIColor | 'background', string> = {
   warning: 'bg-warning-100/70 border-warning-300',
   danger: 'bg-danger-100/70 border-danger-300'
 }
+
+const roundedClasses = computed(() => {
+  switch (props.rounded) {
+    case 'none':
+      return 'rounded-none'
+    case 'sm':
+      return 'rounded-sm'
+    case 'md':
+      return 'rounded-md'
+    case 'lg':
+      return 'rounded-lg'
+    case 'full':
+      return 'rounded-full'
+    default:
+      return 'rounded-lg'
+  }
+})
 </script>
 
 <template>
@@ -48,11 +67,12 @@ const colorClasses: Record<KunUIColor | 'background', string> = {
     :is="isPressable ? defineNuxtLink({}) : 'div'"
     :class="
       cn(
-        'relative flex flex-col gap-3 overflow-hidden rounded-lg p-3 shadow backdrop-blur-[var(--kun-background-blur)] transition-all duration-200',
+        'relative flex flex-col gap-3 overflow-hidden p-3 shadow backdrop-blur-[var(--kun-background-blur)] transition-all duration-200',
         isHoverable && 'hover:bg-default-100 hover:shadow-md',
         // bordered && 'border',
         isPressable && 'cursor-pointer active:scale-[0.97]',
         isTransparent ? 'backdrop-blur-none' : colorClasses[props.color],
+        roundedClasses,
         className
       )
     "

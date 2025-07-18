@@ -113,7 +113,7 @@ const getBackgroundColor = (color: string): string => {
 </script>
 
 <template>
-  <div class="space-y-3">
+  <div class="space-y-6">
     <div>
       <div class="mb-4 flex items-center justify-between">
         <h2 class="text-foreground text-2xl font-bold">网站价值精算值</h2>
