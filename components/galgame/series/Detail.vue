@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { GalgameSeriesDetail } from '~/types/api/series'
+import type { GalgameSeriesDetail } from '~/types/api/galgame-series'
 
 defineProps<{
   data: GalgameSeriesDetail

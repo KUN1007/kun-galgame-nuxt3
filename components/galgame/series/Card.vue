@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { GalgameSeries } from '~/types/api/series'
+import type { GalgameSeries } from '~/types/api/galgame-series'
 
 const props = defineProps<{
   series: GalgameSeries
@@ -19,7 +19,7 @@ const includedGamesText = computed(() => {
 <template>
   <KunCard
     :is-pressable="true"
-    :href="`/series/${series.id}`"
+    :href="`/galgame-series/${series.id}`"
     class-name="group relative flex h-full flex-col overflow-hidden backdrop-blur-none"
     :is-transparent="true"
   >
@@ -32,7 +32,7 @@ const includedGamesText = computed(() => {
         {{ series.isNSFW ? 'NSFW' : 'SFW' }}
       </KunBadge>
 
-      <SeriesBanner
+      <GalgameSeriesBanner
         :is-n-s-f-w="series.isNSFW"
         :galgames="series.sampleGalgame"
       />

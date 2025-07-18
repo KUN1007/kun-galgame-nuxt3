@@ -19,8 +19,29 @@ export const kunLayoutItem: KunLayoutItem[] = [
   {
     name: 'series',
     icon: 'lucide:columns-4',
-    router: '/series',
+    router: '/galgame-series',
     label: 'Galgame 系列',
+    hint: '新'
+  },
+  {
+    name: 'series',
+    icon: 'lucide:columns-4',
+    router: '/galgame-official',
+    label: 'Galgame 会社',
+    hint: '新'
+  },
+  {
+    name: 'series',
+    icon: 'lucide:columns-4',
+    router: '/galgame-tag',
+    label: 'Galgame 标签',
+    hint: '新'
+  },
+  {
+    name: 'series',
+    icon: 'lucide:columns-4',
+    router: '/galgame-engine',
+    label: 'Galgame 引擎',
     hint: '新'
   },
   {

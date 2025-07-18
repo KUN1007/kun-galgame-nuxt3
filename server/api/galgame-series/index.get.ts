@@ -1,5 +1,5 @@
 import prisma from '~/prisma/prisma'
-import type { GalgameSeries, GalgameSample } from '~/types/api/series'
+import type { GalgameSeries, GalgameSample } from '~/types/api/galgame-series'
 
 export default defineEventHandler(async (event) => {
   const nsfw = getNSFWCookie(event)

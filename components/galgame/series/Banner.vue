@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { GalgameSample } from '~/types/api/series'
+import type { GalgameSample } from '~/types/api/galgame-series'
 
 const props = defineProps<{
   isNSFW: boolean

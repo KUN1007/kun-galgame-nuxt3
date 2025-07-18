@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data } = await useFetch('/api/series', {
+const { data } = await useFetch('/api/galgame-series', {
   method: 'GET',
   ...kungalgameResponseHandler
 })
@@ -22,7 +22,7 @@ const { data } = await useFetch('/api/series', {
     </KunHeader>
 
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-      <SeriesCard
+      <GalgameSeriesCard
         v-for="(series, index) in data"
         :key="series.id"
         :style="{ animationDelay: `${index * 50}ms` }"
