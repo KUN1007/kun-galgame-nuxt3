@@ -2,7 +2,7 @@
 const route = useRoute()
 const seriesId = route.params.id
 
-const { data } = await useFetch(`/api/series/${seriesId}`, {
+const { data } = await useFetch(`/api/galgame-series/${seriesId}`, {
   method: 'GET',
   query: { seriesId },
   ...kungalgameResponseHandler
@@ -24,7 +24,7 @@ useKunSeoMeta({
 </script>
 
 <template>
-  <SeriesDetail :data="data" v-if="data" />
+  <GalgameSeriesDetail :data="data" v-if="data" />
 
   <KunNull v-else description="未找到这个 Galgame 系列" />
 </template>

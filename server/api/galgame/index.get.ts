@@ -55,8 +55,7 @@ export default defineEventHandler(async (event) => {
         },
         _count: {
           select: {
-            like: true,
-            favorite: true
+            like: true
           }
         },
         resource: {
@@ -82,12 +81,10 @@ export default defineEventHandler(async (event) => {
         'zh-tw': galgame.name_zh_tw
       },
       banner: galgame.banner,
-
-      user: galgame.user as unknown as KunUser,
+      user: galgame.user,
       contentLimit: galgame.content_limit,
       view: galgame.view,
       likeCount: galgame._count.like,
-      favorites: galgame._count.favorite,
       resourceUpdateTime: galgame.resource_update_time,
       platform: platforms,
       language: languages

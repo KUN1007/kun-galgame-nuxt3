@@ -17,6 +17,14 @@ export interface GalgameEngine {
   name: string
 }
 
+export interface GalgameEngineDetail {
+  id: number
+  name: string
+  description: string
+  alias: string[]
+  galgame: GalgameCard[]
+}
+
 export interface GalgameOfficial {
   id: number
   name: string
@@ -25,10 +33,30 @@ export interface GalgameOfficial {
   lang: string
 }
 
+export interface GalgameOfficialDetail {
+  id: number
+  name: string
+  link: string
+  category: string
+  lang: string
+  description: string
+  alias: string[]
+  galgame: GalgameCard[]
+}
+
 export interface GalgameTag {
   id: number
   name: string
   category: KunGalgameTagCategory
+}
+
+export interface GalgameTagDetail {
+  id: number
+  name: string
+  category: KunGalgameTagCategory
+  description: string
+  alias: string[]
+  galgame: GalgameCard[]
 }
 
 export interface GalgameDetail {

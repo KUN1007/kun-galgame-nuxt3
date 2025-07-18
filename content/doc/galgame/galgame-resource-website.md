@@ -117,6 +117,10 @@ https://www.kungal.com/
 
 https://github.com/Shrans/GalSites
 
+https://github.com/dl666123/dl666123.github.io/issues/29
+
+https://github.com/yisubox/gamge
+
 https://github.com/mokurin000/galgame_cn
 
 https://rinaex.github.io/vitepress-nav/nav/

@@ -16,5 +16,5 @@ useKunSeoMeta({
 </script>
 
 <template>
-  <SeriesContainer />
+  <GalgameSeriesContainer />
 </template>

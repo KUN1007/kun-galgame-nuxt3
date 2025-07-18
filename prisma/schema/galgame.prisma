@@ -140,28 +140,15 @@ model galgame_official_alias {
 }
 
 model galgame_engine {
-  id          Int                    @id @default(autoincrement())
-  name        String                 @unique
-  description String                 @default("")
-  alias       galgame_engine_alias[]
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String   @default("")
+  alias       String[] @default([])
 
   galgame galgame_engine_relation[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-}
-
-model galgame_engine_alias {
-  id   Int    @id @default(autoincrement())
-  name String @default("")
-
-  galgame_engine_id Int
-  engine            galgame_engine @relation(fields: [galgame_engine_id], references: [id], onDelete: Cascade)
-
-  created DateTime @default(now())
-  updated DateTime @updatedAt
-
-  @@unique([galgame_engine_id, name])
 }
 
 model galgame_tag {

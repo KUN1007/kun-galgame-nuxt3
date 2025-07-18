@@ -1,0 +1,24 @@
+import { z } from 'zod'
+import { KUN_GALGAME_OFFICIAL_TYPE } from '~/constants/galgameOfficial'
+
+export const getGalgameByOfficialSchema = z.object({
+  name: z.string().min(1, '制作会社名称不能为空')
+})
+
+export const updateGalgameOfficialSchema = z.object({
+  officialId: z.coerce.number().min(1).max(9999999),
+  name: z.string().min(1).max(200, 'Galgame 制作会社名最多 200 个字符'),
+  link: z.string().url('请输入有效的链接').max(500, '会社链接最多 500 个字符'),
+  category: z.enum(KUN_GALGAME_OFFICIAL_TYPE),
+  lang: z.string().max(20).optional().default('ja'),
+  description: z
+    .string()
+    .max(2000, '会社介绍最多 2000 个字符')
+    .optional()
+    .default(''),
+  alias: z
+    .array(z.string().min(1).max(100, '标签会社别名最多 100 个字符'))
+    .max(20, '标签最多 20 个别名')
+    .optional()
+    .default([])
+})
