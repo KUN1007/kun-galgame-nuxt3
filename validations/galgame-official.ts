@@ -1,9 +1,17 @@
 import { z } from 'zod'
 import { KUN_GALGAME_OFFICIAL_TYPE } from '~/constants/galgameOfficial'
 
-export const getGalgameByOfficialSchema = z.object({
-  name: z.string().min(1, '制作会社名称不能为空')
+export const getGalgameOfficialSchema = z.object({
+  page: z.coerce.number().min(1).max(9999999),
+  limit: z.coerce.number().min(1).max(100)
 })
+
+export const getGalgameByOfficialSchema = getGalgameOfficialSchema.merge(
+  z.object({
+    officialId: z.coerce.number().min(1).max(9999999),
+    limit: z.coerce.number().min(1).max(24)
+  })
+)
 
 export const updateGalgameOfficialSchema = z.object({
   officialId: z.coerce.number().min(1).max(9999999),

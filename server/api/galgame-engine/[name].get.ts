@@ -8,10 +8,20 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
+  const { engineId, page, limit } = input
+  const skip = (page - 1) * limit
+
   const data = await prisma.galgame_engine.findUnique({
-    where: { name: input.name },
+    where: { id: engineId },
     include: {
       galgame: {
+        skip,
+        take: limit,
+        orderBy: {
+          galgame: {
+            resource_update_time: 'desc'
+          }
+        },
         include: {
           galgame: {
             include: {

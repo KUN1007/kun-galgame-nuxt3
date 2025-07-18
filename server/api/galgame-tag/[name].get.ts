@@ -1,6 +1,7 @@
 import prisma from '~/prisma/prisma'
 import { getGalgameByTagSchema } from '~/validations/galgame-tag'
-import type { GalgameTagDetail, GalgameCard } from '~/types/api/galgame'
+import type { GalgameCard } from '~/types/api/galgame'
+import type { GalgameTagDetail } from '~/types/api/galgame-tag'
 import type { KUN_GALGAME_TAG_TYPE } from '~/constants/galgameTag'
 
 export default defineEventHandler(async (event) => {
@@ -9,18 +10,46 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
+  const { tagId, page, limit } = input
+  const skip = (page - 1) * limit
+
   const data = await prisma.galgame_tag.findUnique({
-    where: { name: input.name },
+    where: { id: tagId },
     include: {
       alias: true,
+      _count: {
+        select: {
+          galgame: true
+        }
+      },
       galgame: {
+        skip,
+        take: limit,
+        orderBy: {
+          galgame: {
+            resource_update_time: 'desc'
+          }
+        },
         include: {
           galgame: {
             include: {
-              user: true,
-              resource: true,
+              user: {
+                select: {
+                  id: true,
+                  name: true,
+                  avatar: true
+                }
+              },
               _count: {
-                select: { like: true }
+                select: {
+                  like: true
+                }
+              },
+              resource: {
+                select: {
+                  platform: true,
+                  language: true
+                }
               }
             }
           }
@@ -33,12 +62,13 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '未找到这个标签')
   }
 
-  const result: GalgameTagDetail = {
+  const tag: GalgameTagDetail = {
     id: data.id,
     name: data.name,
     category: data.category as (typeof KUN_GALGAME_TAG_TYPE)[number],
     description: data.description,
     alias: data.alias.map((a) => a.name),
+    galgameCount: data._count.galgame,
     galgame: data.galgame.map((relation) => {
       const g = relation.galgame
       const platforms = [...new Set(g.resource.map((r) => r.platform))]
@@ -65,5 +95,5 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  return result
+  return tag
 })

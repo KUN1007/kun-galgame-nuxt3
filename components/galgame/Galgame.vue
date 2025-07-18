@@ -40,7 +40,7 @@ provide<GalgameDetail>('galgame', props.galgame)
               scale="h3"
               :is-show-divider="false"
             />
-            <SeriesCard v-if="galgame.series" :series="galgame.series" />
+            <GalgameSeriesCard v-if="galgame.series" :series="galgame.series" />
           </div>
 
           <GalgameCommentContainer

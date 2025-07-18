@@ -1,8 +1,24 @@
 import { z } from 'zod'
 import { KUN_GALGAME_TAG_TYPE } from '~/constants/galgameTag'
 
-export const getGalgameByTagSchema = z.object({
-  name: z.string().min(1, '标签名称不能为空')
+export const getGalgameTagSchema = z.object({
+  page: z.coerce.number().min(1).max(9999999),
+  limit: z.coerce.number().min(1).max(100)
+})
+
+export const getGalgameByTagSchema = getGalgameTagSchema.merge(
+  z.object({
+    tagId: z.coerce.number().min(1).max(9999999),
+    limit: z.coerce.number().min(1).max(24)
+  })
+)
+
+export const getGalgameTagBySearchSchema = z.object({
+  q: z
+    .string()
+    .trim()
+    .min(1, '搜索词不能为空')
+    .max(100, '搜索关键词最大 100 个字符')
 })
 
 export const updateGalgameTagSchema = z.object({

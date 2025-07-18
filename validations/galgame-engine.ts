@@ -1,7 +1,9 @@
 import { z } from 'zod'
 
 export const getGalgameByEngineSchema = z.object({
-  name: z.string().min(1, '引擎名称不能为空')
+  engineId: z.coerce.number().min(1).max(9999999),
+  page: z.coerce.number().min(1).max(9999999),
+  limit: z.coerce.number().min(1).max(24)
 })
 
 export const updateGalgameEngineSchema = z.object({

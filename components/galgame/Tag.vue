@@ -2,7 +2,7 @@
 import {
   KUN_GALGAME_TAG_CATEGORY_MAP,
   type KunGalgameTagCategory
-} from '~/constants/galgame'
+} from '~/constants/galgameTag'
 import type { KunUIColor } from '~/components/kun/ui/type'
 
 export interface GalgameTag {

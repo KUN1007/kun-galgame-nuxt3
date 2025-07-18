@@ -29,16 +29,6 @@ export type KunGalgameResourcePlatformOptions =
   | 'app'
   | 'others'
 
-export type KunGalgameTagCategory = 'content' | 'sexual' | 'technical'
-export const KUN_GALGAME_TAG_CATEGORY_MAP: Record<
-  KunGalgameTagCategory,
-  string
-> = {
-  content: '游戏内容',
-  sexual: '成人内容',
-  technical: '技术细节'
-}
-
 // /migrate/getAllOfficialLanguage.js
 export const KUN_GALGAME_OFFICIAL_LANGUAGE_MAP: Record<string, string> = {
   ja: '日语',
