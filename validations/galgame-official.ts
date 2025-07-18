@@ -13,6 +13,14 @@ export const getGalgameByOfficialSchema = getGalgameOfficialSchema.merge(
   })
 )
 
+export const getGalgameOfficialBySearchSchema = z.object({
+  q: z
+    .string()
+    .trim()
+    .min(1, '搜索词不能为空')
+    .max(100, '搜索关键词最大 100 个字符')
+})
+
 export const updateGalgameOfficialSchema = z.object({
   officialId: z.coerce.number().min(1).max(9999999),
   name: z.string().min(1).max(200, 'Galgame 制作会社名最多 200 个字符'),

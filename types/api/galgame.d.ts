@@ -32,35 +32,6 @@ export interface GalgameEngineDetail {
   galgameCount: number
 }
 
-export interface GalgameOfficial {
-  id: number
-  name: string
-  link: string
-  category: string
-  lang: string
-}
-
-export interface GalgameOfficialItem {
-  id: number
-  name: string
-  link: string
-  category: string
-  lang: string
-  alias: string[]
-}
-
-export interface GalgameOfficialDetail {
-  id: number
-  name: string
-  link: string
-  category: string
-  lang: string
-  description: string
-  alias: string[]
-  galgame: GalgameCard[]
-  galgameCount: number
-}
-
 export interface GalgameDetail {
   id: number
   vndbId: string

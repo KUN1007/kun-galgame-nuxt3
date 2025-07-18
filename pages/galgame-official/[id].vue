@@ -1,48 +1,55 @@
 <script setup lang="ts">
-import type { UpdateGalgameTagPayload } from '~/components/galgame/types'
+import type { UpdateGalgameOfficialPayload } from '~/components/galgame/types'
 import {
-  KUN_GALGAME_TAG_CATEGORY_MAP,
-  type KUN_GALGAME_TAG_TYPE
-} from '~/constants/galgameTag'
+  KUN_GALGAME_OFFICIAL_CATEGORY_MAP,
+  type KUN_GALGAME_OFFICIAL_TYPE
+} from '~/constants/galgameOfficial'
 
 const { role } = usePersistUserStore()
 const route = useRoute()
-const tagId = computed(() => {
+const officialId = computed(() => {
   return Number((route.params as { id: string }).id)
 })
 
 const pageData = reactive({
   page: 1,
   limit: 24,
-  tagId: tagId.value
+  officialId: officialId.value
 })
 
-const showTagModal = ref(false)
-const editingTag = ref<UpdateGalgameTagPayload>({} as UpdateGalgameTagPayload)
+const showOfficialModal = ref(false)
+const editingOfficial = ref<UpdateGalgameOfficialPayload>(
+  {} as UpdateGalgameOfficialPayload
+)
 
-const { data, status } = await useFetch(`/api/galgame-tag/${tagId.value}`, {
-  method: 'GET',
-  query: pageData,
-  ...kungalgameResponseHandler
-})
+const { data, status } = await useFetch(
+  `/api/galgame-official/${officialId.value}`,
+  {
+    method: 'GET',
+    query: pageData,
+    ...kungalgameResponseHandler
+  }
+)
 
-const openEditTagModal = () => {
+const openEditOfficialModal = () => {
   if (!data.value) {
     return
   }
   const res = data.value
-  editingTag.value = {
+  editingOfficial.value = {
     name: res.name,
-    tagId: res.id,
+    officialId: res.id,
+    link: res.link,
+    lang: res.lang,
     description: res.description,
-    category: res.category as (typeof KUN_GALGAME_TAG_TYPE)[number],
+    category: res.category as (typeof KUN_GALGAME_OFFICIAL_TYPE)[number],
     alias: res.alias
-  } satisfies UpdateGalgameTagPayload
-  showTagModal.value = true
+  } satisfies UpdateGalgameOfficialPayload
+  showOfficialModal.value = true
 }
 
-const handleUpdateTag = async (data: UpdateGalgameTagPayload) => {
-  const result = await $fetch(`/api/galgame-tag`, {
+const handleUpdateOfficial = async (data: UpdateGalgameOfficialPayload) => {
+  const result = await $fetch(`/api/galgame-official`, {
     method: 'PUT',
     watch: false,
     body: data,
@@ -64,24 +71,24 @@ const handleUpdateTag = async (data: UpdateGalgameTagPayload) => {
     v-if="data"
   >
     <KunHeader
-      :name="`含有标签 ${data.name} 的 Galgame`"
+      :name="`${data.name} 制作的 Galgame`"
       :description="data.description"
       :is-show-divider="false"
     >
       <template #endContent>
         <div class="space-y-3">
           <div class="text-default-500">
-            标签类别
+            会社类别
             <KunBadge
               :color="
-                data.category === 'content'
+                data.category === 'company'
                   ? 'primary'
-                  : data.category === 'sexual'
-                    ? 'danger'
+                  : data.category === 'individual'
+                    ? 'secondary'
                     : 'success'
               "
             >
-              {{ KUN_GALGAME_TAG_CATEGORY_MAP[data.category] }}
+              {{ KUN_GALGAME_OFFICIAL_CATEGORY_MAP[data.category] }}
             </KunBadge>
           </div>
           <div
@@ -98,16 +105,16 @@ const handleUpdateTag = async (data: UpdateGalgameTagPayload) => {
             </KunBadge>
           </div>
           <div v-if="role > 2" class="flex justify-end">
-            <KunButton @click="openEditTagModal">编辑标签</KunButton>
+            <KunButton @click="openEditOfficialModal">编辑会社</KunButton>
           </div>
         </div>
       </template>
     </KunHeader>
 
-    <GalgameTagModal
-      v-model="showTagModal"
-      :initial-data="editingTag"
-      @submit="handleUpdateTag"
+    <GalgameOfficialModal
+      v-model="showOfficialModal"
+      :initial-data="editingOfficial"
+      @submit="handleUpdateOfficial"
     />
 
     <GalgameCard v-if="data.galgame.length" :galgames="data.galgame" />
@@ -121,7 +128,7 @@ const handleUpdateTag = async (data: UpdateGalgameTagPayload) => {
 
     <KunNull
       v-if="!data.galgameCount"
-      :description="`${data.name} 标签下暂无 Galgame`"
+      :description="`${data.name} 会社下暂无 Galgame`"
     />
   </KunCard>
 </template>

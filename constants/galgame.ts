@@ -29,17 +29,6 @@ export type KunGalgameResourcePlatformOptions =
   | 'app'
   | 'others'
 
-// /migrate/getAllOfficialLanguage.js
-export const KUN_GALGAME_OFFICIAL_LANGUAGE_MAP: Record<string, string> = {
-  ja: '日语',
-  zh: '中文',
-  en: '英语',
-  id: '印度尼西亚语',
-  ko: '韩语',
-  ru: '俄语',
-  es: '西班牙语'
-}
-
 export const KUN_GALGAME_RESOURCE_TYPE_MAP: Record<string, string> = {
   name: '资源链接的类型',
   all: '全部类型',

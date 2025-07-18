@@ -2,7 +2,7 @@ import prisma from '~/prisma/prisma'
 import { getGalgameByTagSchema } from '~/validations/galgame-tag'
 import type { GalgameCard } from '~/types/api/galgame'
 import type { GalgameTagDetail } from '~/types/api/galgame-tag'
-import type { KUN_GALGAME_TAG_TYPE } from '~/constants/galgameTag'
+import type { KunGalgameTagCategory } from '~/constants/galgameTag'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getGalgameByTagSchema)
@@ -65,7 +65,7 @@ export default defineEventHandler(async (event) => {
   const tag: GalgameTagDetail = {
     id: data.id,
     name: data.name,
-    category: data.category as (typeof KUN_GALGAME_TAG_TYPE)[number],
+    category: data.category as KunGalgameTagCategory,
     description: data.description,
     alias: data.alias.map((a) => a.name),
     galgameCount: data._count.galgame,

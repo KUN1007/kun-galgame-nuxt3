@@ -1,6 +1,8 @@
 import prisma from '~/prisma/prisma'
 import { getGalgameByOfficialSchema } from '~/validations/galgame-official'
-import type { GalgameOfficialDetail, GalgameCard } from '~/types/api/galgame'
+import type { GalgameCard } from '~/types/api/galgame'
+import type { GalgameOfficialDetail } from '~/types/api/galgame-official'
+import type { KunGalgameOfficialCategory } from '~/constants/galgameOfficial'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getGalgameByOfficialSchema)
@@ -15,6 +17,11 @@ export default defineEventHandler(async (event) => {
     where: { id: officialId },
     include: {
       alias: true,
+      _count: {
+        select: {
+          galgame: true
+        }
+      },
       galgame: {
         skip,
         take: limit,
@@ -59,10 +66,11 @@ export default defineEventHandler(async (event) => {
     id: data.id,
     name: data.name,
     link: data.link,
-    category: data.category,
+    category: data.category as KunGalgameOfficialCategory,
     lang: data.lang,
     description: data.description,
     alias: data.alias.map((a) => a.name),
+    galgameCount: data._count.galgame,
     galgame: data.galgame.map((relation) => {
       const g = relation.galgame
       const platforms = [...new Set(g.resource.map((r) => r.platform))]
