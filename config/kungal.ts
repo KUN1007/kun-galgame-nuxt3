@@ -5,7 +5,7 @@ const KUN_SITE_SHORT = '鲲 Galgame 论坛'
 const KUN_SITE_MENTION = '@kungalgame'
 const KUN_SITE_TITLE = '鲲 Galgame 论坛 - 开源 Galgame 网站'
 const KUN_SITE_DESCRIPTION =
-  '世界上最萌的 Galgame 论坛! 世界上最先进的 Galgame 资源发布网站! 永远不会有广告! 永远免费! Galgame 下载, Galgame 资源网站'
+  '世界上最萌的 Galgame 论坛! 世界上最先进的 Galgame 资源 Wiki 网站! 永远不会有广告! 永远免费! Next Generation Galgame Website Wiki!'
 const KUN_SITE_URL = 'https://www.kungal.com'
 const KUN_SITE_URL_BACKUP = 'https://www.kungal.org'
 const KUN_SITE_NAV = 'https://nav.kungal.org'
@@ -32,6 +32,11 @@ const KUN_SITE_KEYWORDS = [
   'Galgame 下载',
   'Galgame 资源',
   'Galgame wiki',
+  'Galgame 网站',
+  'Galgame 系列',
+  'Galgame 会社',
+  'Galgame 标签',
+  'Galgame 引擎',
   'Galgame 评测',
   'Galgame 数据分析',
   'Galgame 新作动态',

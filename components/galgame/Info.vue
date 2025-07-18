@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { KUN_GALGAME_OFFICIAL_LANGUAGE_MAP } from '~/constants/galgameOfficial'
-import type { GalgameEngine } from '~/types/api/galgame-engine'
-import type { GalgameOfficial } from '~/types/api/galgame-official'
+import type { GalgameEngineItem } from '~/types/api/galgame-engine'
+import type { GalgameOfficialItem } from '~/types/api/galgame-official'
 
 defineProps<{
-  official: GalgameOfficial[]
-  engine: GalgameEngine[]
+  official: GalgameOfficialItem[]
+  engine: GalgameEngineItem[]
   originalLanguage: string
   ageLimit: 'all' | 'r18'
 }>()
@@ -52,14 +52,26 @@ const getLanguageName = (langCode: string) => {
     :is-hoverable="false"
     :is-pressable="false"
     :is-transparent="false"
+    class-name="overflow-visible"
     content-class="space-y-3"
   >
     <dl class="space-y-5">
       <div v-if="official && official.length > 0">
         <dt class="text-default-500 text-sm font-medium">制作方</dt>
         <dd class="mt-1.5 space-y-3">
-          <div v-for="item in official" :key="item.id">
-            <span class="text-base font-semibold">{{ item.name }}</span>
+          <div class="space-y-2" v-for="item in official" :key="item.id">
+            <KunTooltip :text="`该会社制作了 ${item.galgameCount} 个 Galgame`">
+              <KunLink
+                :to="`/galgame-official/${item.id}`"
+                underline="none"
+                class-name="text-foreground hover:text-primary text-base font-semibold"
+              >
+                {{ item.name }}
+                <KunBadge size="xs">
+                  {{ `+ ${item.galgameCount}` }}
+                </KunBadge>
+              </KunLink>
+            </KunTooltip>
 
             <div class="mt-1 flex items-center justify-between">
               <div class="flex items-center gap-x-2">
@@ -87,6 +99,20 @@ const getLanguageName = (langCode: string) => {
                 官方网站
               </KunLink>
             </div>
+
+            <div
+              v-if="item.alias.length"
+              class="text-default-500 flex flex-wrap gap-2"
+            >
+              <KunBadge
+                size="xs"
+                color="success"
+                v-for="(a, index) in item.alias"
+                :key="index"
+              >
+                {{ a }}
+              </KunBadge>
+            </div>
           </div>
         </dd>
       </div>
@@ -101,9 +127,22 @@ const getLanguageName = (langCode: string) => {
         <dd
           class="text-default-900 mt-1.5 text-base font-medium dark:text-white"
         >
-          <div v-for="item in engine" :key="item.id">
-            {{ item.name }}
-          </div>
+          <KunTooltip
+            v-for="item in engine"
+            :key="item.id"
+            :text="`${item.galgameCount} 个 Galgame 使用此引擎制作`"
+          >
+            <KunLink
+              :to="`/galgame-engine/${item.id}`"
+              underline="none"
+              class-name="text-foreground hover:text-primary text-base font-semibold"
+            >
+              {{ item.name }}
+              <KunBadge size="xs">
+                {{ `+ ${item.galgameCount}` }}
+              </KunBadge>
+            </KunLink>
+          </KunTooltip>
         </dd>
       </div>
 

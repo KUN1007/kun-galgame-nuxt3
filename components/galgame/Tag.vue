@@ -4,15 +4,10 @@ import {
   type KunGalgameTagCategory
 } from '~/constants/galgameTag'
 import type { KunUIColor } from '~/components/kun/ui/type'
-
-export interface GalgameTag {
-  id: number
-  name: string
-  category: 'content' | 'sexual' | 'technical'
-}
+import type { GalgameTagItem } from '~/types/api/galgame-tag'
 
 const props = defineProps<{
-  tags: GalgameTag[]
+  tags: GalgameTagItem[]
 }>()
 
 const colorMap: Record<string, KunUIColor> = {
@@ -47,6 +42,7 @@ const filteredTags = computed(() => {
     :is-hoverable="false"
     :is-pressable="false"
     :is-transparent="false"
+    class-name="overflow-visible"
     content-class="space-y-3"
   >
     <div class="flex flex-wrap gap-3">
@@ -65,26 +61,30 @@ const filteredTags = computed(() => {
 
     <div class="dark:border-gray-700">
       <TransitionGroup name="tag-list" tag="div" class="flex flex-wrap gap-3">
-        <KunBadge
-          class-name="bg-default-500/10"
-          size="md"
+        <KunLink
           v-for="tag in filteredTags"
           :key="tag.id"
+          underline="none"
+          :to="`/galgame-tag/${tag.id}`"
         >
-          <span
-            :class="
-              cn(
-                'mr-1.5',
-                tag.category === 'content' && 'text-primary',
-                tag.category === 'sexual' && 'text-danger',
-                tag.category === 'technical' && 'text-success'
-              )
-            "
-          >
-            #
-          </span>
-          {{ tag.name }}
-        </KunBadge>
+          <KunTooltip :text="`${tag.galgameCount} 个 Galgame 使用该标签`">
+            <KunBadge class-name="bg-default-500/10 cursor-pointer" size="md">
+              <span
+                :class="
+                  cn(
+                    'mr-1.5',
+                    tag.category === 'content' && 'text-primary',
+                    tag.category === 'sexual' && 'text-danger',
+                    tag.category === 'technical' && 'text-success'
+                  )
+                "
+              >
+                #
+              </span>
+              {{ tag.name }}
+            </KunBadge>
+          </KunTooltip>
+        </KunLink>
       </TransitionGroup>
 
       <KunNull

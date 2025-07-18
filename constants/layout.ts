@@ -11,51 +11,106 @@ export interface KunLayoutItem {
 
 export const kunLayoutItem: KunLayoutItem[] = [
   {
+    name: 'create',
+    icon: 'lucide:pencil',
+    label: '发布主题',
+    isCollapse: false,
+    children: [
+      {
+        name: 'createTopic',
+        icon: 'icon-park-outline:topic',
+        router: '/edit/topic',
+        label: '发布话题',
+        hint: '大升级'
+      },
+      {
+        name: 'createGalgame',
+        icon: 'lucide:gamepad-2',
+        router: '/edit/galgame/create',
+        label: '发布 Galgame'
+      }
+    ]
+  },
+  {
     name: 'galgame',
     icon: 'lucide:gamepad-2',
-    router: '/galgame',
-    label: 'Galgame'
-  },
-  {
-    name: 'series',
-    icon: 'lucide:columns-4',
-    router: '/galgame-series',
-    label: 'Galgame 系列',
-    hint: '新'
-  },
-  {
-    name: 'series',
-    icon: 'lucide:columns-4',
-    router: '/galgame-official',
-    label: 'Galgame 会社',
-    hint: '新'
-  },
-  {
-    name: 'series',
-    icon: 'lucide:columns-4',
-    router: '/galgame-tag',
-    label: 'Galgame 标签',
-    hint: '新'
-  },
-  {
-    name: 'series',
-    icon: 'lucide:columns-4',
-    router: '/galgame-engine',
-    label: 'Galgame 引擎',
-    hint: '新'
-  },
-  {
-    name: 'website',
-    icon: 'lucide:globe',
-    router: '/website',
-    label: 'Galgame 网站 Wiki',
-    hint: '新'
+    label: 'Galgame',
+    isCollapse: false,
+    children: [
+      {
+        name: 'galgame',
+        icon: 'lucide:box',
+        router: '/galgame',
+        label: 'Galgame 资源'
+      },
+      {
+        name: 'website',
+        icon: 'lucide:globe',
+        router: '/website',
+        label: 'Gal 网站 Wiki',
+        hint: '真牛逼'
+      },
+      {
+        name: 'galgame-series',
+        icon: 'lucide:boxes',
+        router: '/galgame-series',
+        label: 'Galgame 系列',
+        hint: '新'
+      },
+      {
+        name: 'galgame-official',
+        icon: 'cuida:building-outline',
+        router: '/galgame-official',
+        label: 'Galgame 会社',
+        hint: '新'
+      },
+      {
+        name: 'galgame-tag',
+        icon: 'lucide:tag',
+        router: '/galgame-tag',
+        label: 'Galgame 标签',
+        hint: '新'
+      },
+      {
+        name: 'galgame-engine',
+        icon: 'carbon:ibm-engineering-lifecycle-mgmt',
+        router: '/galgame-engine',
+        label: 'Galgame 引擎',
+        hint: '新'
+      }
+    ]
   },
   {
     name: 'topic',
     icon: 'icon-park-outline:topic',
-    router: '/topic',
-    label: '话题'
+    label: '话题',
+    isCollapse: false,
+    children: [
+      {
+        name: 'topic',
+        icon: 'lucide:library-big',
+        router: '/topic',
+        label: '全部话题'
+      },
+      {
+        name: 'galgame',
+        icon: 'lucide:gamepad-2',
+        router: '/category/galgame',
+        label: 'Galgame 类'
+      },
+      {
+        name: 'technique',
+        icon: 'lucide:drafting-compass',
+        router: '/category/technique',
+        label: '技术交流 类'
+      },
+      {
+        name: 'others',
+        icon: 'lucide:circle-ellipsis',
+        router: '/category/others',
+        label: '其它 类'
+      }
+    ]
   },
   {
     name: 'activity',
@@ -64,51 +119,10 @@ export const kunLayoutItem: KunLayoutItem[] = [
     label: '最新动态'
   },
   {
-    name: 'category',
-    icon: 'lucide:layers-3',
-    label: '话题分类',
-    isCollapse: true,
-    children: [
-      {
-        name: 'galgame',
-        router: '/category/galgame',
-        label: 'Galgame'
-      },
-      {
-        name: 'technique',
-        router: '/category/technique',
-        label: '技术交流'
-      },
-      {
-        name: 'others',
-        router: '/category/others',
-        label: '其它'
-      }
-    ]
-  },
-  {
-    name: 'create',
-    icon: 'lucide:pencil',
-    label: '发布主题',
-    isCollapse: false,
-    children: [
-      {
-        name: 'createTopic',
-        router: '/edit/topic',
-        label: '发布话题',
-        hint: '大升级'
-      },
-      {
-        name: 'createGalgame',
-        router: '/edit/galgame/create',
-        label: '发布 Galgame'
-      }
-    ]
-  },
-  {
     name: 'ranking',
     icon: 'lucide:align-end-horizontal',
     label: '排行榜单',
+    isCollapse: true,
     children: [
       {
         name: 'ranking',
@@ -119,12 +133,14 @@ export const kunLayoutItem: KunLayoutItem[] = [
       {
         name: 'galgame',
         router: '/ranking/galgame',
-        label: 'Galgame 排行'
+        label: 'Galgame 排行',
+        hint: '新'
       },
       {
         name: 'ranking',
         router: '/ranking/user',
-        label: '用户排行'
+        label: '用户排行',
+        hint: '优化'
       }
     ]
   },

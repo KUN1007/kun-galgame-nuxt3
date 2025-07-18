@@ -1,15 +1,10 @@
 <script setup lang="ts">
 import { KUN_GALGAME_TAG_CATEGORY_MAP } from '~/constants/galgameTag'
 import type { GalgameTagItem } from '~/types/api/galgame-tag'
-import type { KunUIRounded } from '~/components/kun/ui/type'
 
-withDefaults(
-  defineProps<{
-    tag: GalgameTagItem
-    rounded?: KunUIRounded
-  }>(),
-  { rounded: 'lg' }
-)
+defineProps<{
+  tag: GalgameTagItem
+}>()
 </script>
 
 <template>
@@ -20,7 +15,6 @@ withDefaults(
       :is-transparent="true"
       :is-hoverable="true"
       :is-pressable="true"
-      :rounded="rounded"
       class-name="dark:border dark:border-default-200"
       :to="`/galgame-tag/${tag.id}`"
     >

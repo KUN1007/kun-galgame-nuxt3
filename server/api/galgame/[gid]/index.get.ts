@@ -1,8 +1,9 @@
 import prisma from '~/prisma/prisma'
 import { getGalgameDetailSchema } from '~/validations/galgame'
 import type { GalgameDetail } from '~/types/api/galgame'
-import type { GalgameTag } from '~/types/api/galgame-tag'
 import type { GalgameSeries, GalgameSample } from '~/types/api/galgame-series'
+import type { KunGalgameTagCategory } from '~/constants/galgameTag'
+import type { KunGalgameOfficialCategory } from '~/constants/galgameOfficial'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getGalgameDetailSchema)
@@ -71,21 +72,42 @@ export default defineEventHandler(async (event) => {
         official: {
           select: {
             official: {
-              select: {
-                id: true,
-                name: true,
-                link: true,
-                category: true,
-                lang: true
+              include: {
+                _count: {
+                  select: {
+                    galgame: true
+                  }
+                },
+                alias: true
               }
             }
           }
         },
         engine: {
-          select: { engine: { select: { id: true, name: true } } }
+          select: {
+            engine: {
+              include: {
+                _count: {
+                  select: {
+                    galgame: true
+                  }
+                }
+              }
+            }
+          }
         },
         tag: {
-          select: { tag: { select: { id: true, name: true, category: true } } }
+          select: {
+            tag: {
+              include: {
+                _count: {
+                  select: {
+                    galgame: true
+                  }
+                }
+              }
+            }
+          }
         },
         resource: {
           select: { type: true, language: true, platform: true }
@@ -175,9 +197,27 @@ export default defineEventHandler(async (event) => {
     isFavorited: galgame.favorite.length > 0,
     alias: galgame.alias.map((a) => a.name),
     series: galgameSeries,
-    engine: galgame.engine.map((e) => e.engine),
-    official: galgame.official.map((o) => o.official),
-    tag: galgame.tag.map((t) => t.tag as GalgameTag),
+    engine: galgame.engine.map((o) => ({
+      id: o.engine.id,
+      name: o.engine.name,
+      alias: o.engine.alias,
+      galgameCount: o.engine._count.galgame
+    })),
+    official: galgame.official.map((o) => ({
+      id: o.official.id,
+      name: o.official.name,
+      link: o.official.link,
+      category: o.official.category as KunGalgameOfficialCategory,
+      lang: o.official.lang,
+      alias: o.official.alias.map((a) => a.name),
+      galgameCount: o.official._count.galgame
+    })),
+    tag: galgame.tag.map((tag) => ({
+      id: tag.tag.id,
+      name: tag.tag.name,
+      category: tag.tag.category as KunGalgameTagCategory,
+      galgameCount: tag.tag._count.galgame
+    })),
     created: galgame.created,
     updated: galgame.updated
   }

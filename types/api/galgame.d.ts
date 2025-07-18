@@ -1,10 +1,12 @@
-import type { KunGalgameTagCategory } from '~/constants/galgame'
 import type {
-  TypeOptions,
-  LanguageOptions,
-  PlatformOptions
-} from '~/components/galgame/utils/options'
-import type { GalgameSeries } from './series'
+  KunGalgameResourceTypeOptions,
+  KunGalgameResourceLanguageOptions,
+  KunGalgameResourcePlatformOptions
+} from '~/constants/galgame'
+import type { GalgameSeries } from './galgame-series'
+import type { GalgameEngineItem } from './galgame-engine'
+import type { GalgameOfficialItem } from './galgame-official'
+import type { GalgameTagItem } from './galgame-tag'
 
 export interface GalgameDetail {
   id: number
@@ -29,9 +31,9 @@ export interface GalgameDetail {
   isFavorited: boolean
   alias: string[]
   series: GalgameSeries | null
-  engine: GalgameEngine[]
-  official: GalgameOfficial[]
-  tag: GalgameTag[]
+  engine: GalgameEngineItem[]
+  official: GalgameOfficialItem[]
+  tag: GalgameTagItem[]
   created: Date | string
   updated: Date | string
 }
@@ -39,9 +41,9 @@ export interface GalgameDetail {
 export interface GalgamePageRequestData {
   page: string
   limit: string
-  type: TypeOptions
-  language: LanguageOptions
-  platform: PlatformOptions
+  type: KunGalgameResourceTypeOptions
+  language: KunGalgameResourceLanguageOptions
+  platform: KunGalgameResourcePlatformOptions
   sortField: 'time' | 'views'
   sortOrder: KunOrder
 }
