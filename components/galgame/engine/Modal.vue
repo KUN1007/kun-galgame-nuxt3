@@ -1,29 +1,16 @@
 <script setup lang="ts">
-import {
-  KUN_GALGAME_OFFICIAL_CATEGORY_MAP,
-  KUN_GALGAME_OFFICIAL_LANGUAGE_MAP
-} from '~/constants/galgameOfficial'
-import { updateGalgameOfficialSchema } from '~/validations/galgame-official'
-import type { UpdateGalgameOfficialPayload } from '../types'
-import type { KunSelectOption } from '~/components/kun/select/type'
+import { updateGalgameEngineSchema } from '~/validations/galgame-engine'
+import type { UpdateGalgameEnginePayload } from '../types'
 
 const props = defineProps<{
   modelValue: boolean
-  initialData: UpdateGalgameOfficialPayload
+  initialData: UpdateGalgameEnginePayload
 }>()
 
 const emits = defineEmits<{
   'update:modelValue': [value: boolean]
-  submit: [data: UpdateGalgameOfficialPayload]
+  submit: [data: UpdateGalgameEnginePayload]
 }>()
-
-const categoryOptions: KunSelectOption[] = Object.entries(
-  KUN_GALGAME_OFFICIAL_CATEGORY_MAP
-).map(([value, label]) => ({ value, label }))
-
-const languageOptions: KunSelectOption[] = Object.entries(
-  KUN_GALGAME_OFFICIAL_LANGUAGE_MAP
-).map(([value, label]) => ({ value, label }))
 
 const isModalOpen = computed({
   get: () => props.modelValue,
@@ -31,7 +18,7 @@ const isModalOpen = computed({
 })
 
 const isSubmitting = ref(false)
-const formData = reactive<UpdateGalgameOfficialPayload>(props.initialData)
+const formData = reactive<UpdateGalgameEnginePayload>(props.initialData)
 
 watch(
   () => isModalOpen.value,
@@ -46,7 +33,7 @@ watch(
 const handleSubmit = () => {
   isSubmitting.value = true
 
-  const result = updateGalgameOfficialSchema.safeParse(formData)
+  const result = updateGalgameEngineSchema.safeParse(formData)
   if (!result.success) {
     const message = JSON.parse(result.error.message)[0]
     useMessage(
@@ -61,7 +48,7 @@ const handleSubmit = () => {
   isModalOpen.value = false
 }
 
-const handleUpdateGalgameOfficialAlias = (value: string | number) => {
+const handleUpdateGalgameEngineAlias = (value: string | number) => {
   const aliasArray = value
     .toString()
     .split(',')
@@ -74,28 +61,14 @@ const handleUpdateGalgameOfficialAlias = (value: string | number) => {
 <template>
   <KunModal v-model:modal-value="isModalOpen" inner-class-name="max-w-md">
     <form @submit.prevent>
-      <h2 class="mb-6 text-xl font-bold">编辑制作会社</h2>
+      <h2 class="mb-6 text-xl font-bold">编辑游戏引擎</h2>
 
       <div class="space-y-4">
-        <KunInput v-model="formData.name" label="名称" required />
-        <KunInput v-model="formData.link" label="官网链接" type="url" />
-
-        <KunSelect
-          v-model="formData.lang"
-          label="会社分类"
-          :options="languageOptions"
-        />
-
-        <KunSelect
-          v-model="formData.category"
-          label="会社分类"
-          :options="categoryOptions"
-        />
-
-        <KunTextarea v-model="formData.description" label="描述" />
+        <KunInput v-model="formData.name" label="引擎名称" required />
+        <KunTextarea v-model="formData.description" label="引擎描述" />
         <KunTextarea
           :model-value="formData.alias.toString()"
-          @update:model-value="handleUpdateGalgameOfficialAlias"
+          @update:model-value="handleUpdateGalgameEngineAlias"
           label="别名 (请使用 , 分隔)"
           :rows="4"
         />

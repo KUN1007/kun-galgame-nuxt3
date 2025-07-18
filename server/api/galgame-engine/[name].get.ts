@@ -1,6 +1,7 @@
 import prisma from '~/prisma/prisma'
 import { getGalgameByEngineSchema } from '~/validations/galgame-engine'
-import type { GalgameEngineDetail, GalgameCard } from '~/types/api/galgame'
+import type { GalgameCard } from '~/types/api/galgame'
+import type { GalgameEngineDetail } from '~/types/api/galgame-engine'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getGalgameByEngineSchema)
@@ -14,6 +15,11 @@ export default defineEventHandler(async (event) => {
   const data = await prisma.galgame_engine.findUnique({
     where: { id: engineId },
     include: {
+      _count: {
+        select: {
+          galgame: true
+        }
+      },
       galgame: {
         skip,
         take: limit,
@@ -59,6 +65,7 @@ export default defineEventHandler(async (event) => {
     name: data.name,
     description: data.description,
     alias: data.alias,
+    galgameCount: data._count.galgame,
     galgame: data.galgame.map((relation) => {
       const g = relation.galgame
       const platforms = [...new Set(g.resource.map((r) => r.platform))]

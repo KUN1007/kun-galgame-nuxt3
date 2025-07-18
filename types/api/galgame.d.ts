@@ -6,32 +6,6 @@ import type {
 } from '~/components/galgame/utils/options'
 import type { GalgameSeries } from './series'
 
-export interface GalgameSeriesItem {
-  id: number
-  name: KunLanguage
-  banner: string
-}
-
-export interface GalgameEngine {
-  id: number
-  name: string
-}
-
-export interface GalgameEngineItem {
-  id: number
-  name: string
-  alias: string[]
-}
-
-export interface GalgameEngineDetail {
-  id: number
-  name: string
-  description: string
-  alias: string[]
-  galgame: GalgameCard[]
-  galgameCount: number
-}
-
 export interface GalgameDetail {
   id: number
   vndbId: string

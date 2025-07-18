@@ -5,6 +5,12 @@ export interface GalgameSample {
   banner: string
 }
 
+export interface GalgameSeriesItem {
+  id: number
+  name: KunLanguage
+  banner: string
+}
+
 export interface GalgameSeries {
   id: number
   name: string
