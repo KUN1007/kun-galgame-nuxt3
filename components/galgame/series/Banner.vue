@@ -42,7 +42,7 @@ const hoverTranslations = [
         <NuxtImg
           :src="banner"
           :alt="`Series Banner ${index + 1}`"
-          class="ring-default/50 h-full w-full rounded-lg object-cover ring-2"
+          class="h-full w-full rounded-lg object-cover shadow-md"
           loading="lazy"
           format="webp"
           quality="80"

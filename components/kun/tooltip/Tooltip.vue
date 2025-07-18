@@ -43,6 +43,28 @@ const arrowPositionClasses = computed(() => {
   }
 })
 
+const transitionClasses = computed(() => {
+  const common = 'opacity-0'
+  switch (props.position) {
+    case 'top':
+      return { from: `${common} translate-y-1`, to: `${common} translate-y-1` }
+    case 'bottom':
+      return {
+        from: `${common} -translate-y-1`,
+        to: `${common} -translate-y-1`
+      }
+    case 'left':
+      return { from: `${common} translate-x-1`, to: `${common} translate-x-1` }
+    case 'right':
+      return {
+        from: `${common} -translate-x-1`,
+        to: `${common} -translate-x-1`
+      }
+    default:
+      return { from: `${common} translate-y-1`, to: `${common} translate-y-1` }
+  }
+})
+
 const show = () => {
   isVisible.value = true
 }
@@ -63,11 +85,11 @@ const hide = () => {
     <slot />
     <Transition
       enter-active-class="transition duration-200 ease-out"
-      enter-from-class="opacity-0 translate-y-1"
-      enter-to-class="opacity-100 translate-y-0"
+      :enter-from-class="transitionClasses.from"
+      enter-to-class="opacity-100"
       leave-active-class="transition duration-150 ease-in"
-      leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 translate-y-1"
+      leave-from-class="opacity-100"
+      :leave-to-class="transitionClasses.to"
     >
       <div
         v-if="isVisible"

@@ -51,16 +51,14 @@ defineProps<{
               准备中
             </span>
           </div>
-          <span
-            :class="
-              cn(
-                'bg-background flex items-center justify-center rounded-lg px-2 text-xs backdrop-blur-sm sm:px-3 sm:text-sm',
-                galgame.contentLimit === 'sfw' ? '' : 'text-danger'
-              )
-            "
+
+          <KunBadge
+            variant="solid"
+            class-name="opacity-50 absolute top-0 right-0"
+            :color="galgame.contentLimit === 'sfw' ? 'success' : 'danger'"
           >
-            {{ galgame.contentLimit.toUpperCase() }}
-          </span>
+            {{ galgame.contentLimit.toLocaleUpperCase() }}
+          </KunBadge>
         </div>
 
         <div

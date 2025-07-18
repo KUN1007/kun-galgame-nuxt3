@@ -36,7 +36,10 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
           </KunTooltip>
         </div>
 
-        <KunSettingPanelComponentsNSFW />
+        <KunSettingPanelComponentsNSFW
+          class-name="justify-between"
+          label-class="text-foreground"
+        />
 
         <KunSettingPanelComponentsBackground />
 

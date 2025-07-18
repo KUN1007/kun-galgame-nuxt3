@@ -206,3 +206,13 @@ export const galgameIntroductionLanguageTabs: KunTabItem[] = [
     value: 'zh-tw'
   }
 ]
+
+export const KUN_GALGAME_AGE_LIMIT_MAP: Record<string, string> = {
+  all: '本游戏不含有成人内容',
+  r18: '本游戏可能含有成人内容'
+}
+
+export const KUN_GALGAME_CONTENT_LIMIT_MAP: Record<string, string> = {
+  sfw: '页面内容不含有 R18 内容',
+  nsfw: '页面内容可能含有 R18 内容'
+}

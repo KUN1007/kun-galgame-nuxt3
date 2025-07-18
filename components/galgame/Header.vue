@@ -6,7 +6,8 @@ import {
 import {
   KUN_GALGAME_RESOURCE_TYPE_MAP,
   KUN_GALGAME_RESOURCE_LANGUAGE_MAP,
-  KUN_GALGAME_RESOURCE_PLATFORM_MAP
+  KUN_GALGAME_RESOURCE_PLATFORM_MAP,
+  KUN_GALGAME_CONTENT_LIMIT_MAP
 } from '~/constants/galgame'
 import type { GalgameDetail } from '~/types/api/galgame'
 
@@ -125,7 +126,12 @@ onMounted(async () => {
         class="absolute top-2 left-2"
         :color="galgame.contentLimit === 'sfw' ? 'success' : 'danger'"
       >
-        {{ galgame.contentLimit.toLocaleUpperCase() }}
+        <KunTooltip
+          position="right"
+          :text="KUN_GALGAME_CONTENT_LIMIT_MAP[galgame.contentLimit]"
+        >
+          {{ galgame.contentLimit.toLocaleUpperCase() }}
+        </KunTooltip>
       </KunBadge>
 
       <KunButton
