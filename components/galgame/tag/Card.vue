@@ -15,7 +15,7 @@ defineProps<{
       :is-transparent="true"
       :is-hoverable="true"
       :is-pressable="true"
-      class-name="dark:border dark:border-default-200"
+      :dark-border="true"
       :to="`/galgame-tag/${tag.id}`"
     >
       <h3 class="text-default-900 font-semibold">

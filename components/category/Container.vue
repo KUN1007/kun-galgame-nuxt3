@@ -10,7 +10,7 @@ defineProps<{
 </script>
 
 <template>
-  <KunCard :is-hoverable="false" :is-transparent="false">
+  <KunCard :is-hoverable="false" :is-transparent="false" :dark-border="true">
     <KunHeader
       :is-show-divider="false"
       :name="KUN_TOPIC_CATEGORY[categoryName]"
@@ -22,6 +22,7 @@ defineProps<{
     <KunCard
       :is-transparent="false"
       :is-pressable="true"
+      :dark-border="true"
       v-for="section in sections"
       :key="section.id"
       :href="`/section/${section.name}`"

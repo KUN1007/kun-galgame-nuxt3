@@ -182,7 +182,8 @@ const getBackgroundColor = (color: string): string => {
         :is-pressable="false"
         v-for="category in categoryStats"
         :key="category.name"
-        class-name="hover:shadow-xl dark:border dark:border-default-200"
+        :dark-border="true"
+        class-name="hover:shadow-xl"
         content-class="justify-start"
       >
         <div class="mb-3 flex items-center justify-between">

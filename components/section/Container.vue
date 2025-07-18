@@ -62,13 +62,15 @@ watch(
       </template>
     </KunHeader>
 
-    <KunLink
-      color="default"
-      underline="none"
+    <KunCard
+      :is-hoverable="true"
+      :is-transparent="true"
+      :is-pressable="true"
+      :dark-border="true"
+      content-class="items-start flex flex-row gap-3 flex-nowrap"
       v-for="(topic, index) in data?.topics"
       :key="index"
       :to="`/topic/${topic.id}`"
-      class-name="hover:bg-primary/10 items-start flex flex-nowrap gap-2 rounded-lg p-4 transition-colors duration-200"
     >
       <KunAvatar :user="topic.user" />
 
@@ -107,7 +109,7 @@ watch(
           </div>
         </div>
       </div>
-    </KunLink>
+    </KunCard>
 
     <KunPagination
       v-if="data"

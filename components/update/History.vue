@@ -31,6 +31,7 @@ watch(
     <KunCard
       :is-hoverable="false"
       :is-transparent="false"
+      :dark-border="true"
       v-for="kun in data.updates"
       :key="kun.id"
     >

@@ -12,6 +12,7 @@ interface Props {
   href?: string
   rounded?: string
   color?: KunUIColor | 'background'
+  darkBorder?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -23,7 +24,8 @@ const props = withDefaults(defineProps<Props>(), {
   contentClass: '',
   href: '/',
   rounded: 'lg',
-  color: 'background'
+  color: 'background',
+  darkBorder: false
 })
 
 const { ripples, onClick } = useRipple()
@@ -70,6 +72,7 @@ const roundedClasses = computed(() => {
         'relative flex flex-col gap-3 overflow-hidden p-3 shadow backdrop-blur-[var(--kun-background-blur)] transition-all duration-200',
         isHoverable && 'hover:bg-default-100 hover:shadow-md',
         // bordered && 'border',
+        darkBorder && 'dark:border-default-200 border border-transparent',
         isPressable && 'cursor-pointer active:scale-[0.97]',
         isTransparent ? 'backdrop-blur-none' : colorClasses[props.color],
         roundedClasses,

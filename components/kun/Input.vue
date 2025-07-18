@@ -14,6 +14,7 @@ const props = withDefaults(
     size?: string
     required?: boolean
     disabled?: boolean
+    darkBorder?: boolean
   }>(),
   {
     type: 'text',
@@ -26,7 +27,8 @@ const props = withDefaults(
     error: '',
     size: 'md',
     required: false,
-    disabled: false
+    disabled: false,
+    darkBorder: true
   }
 )
 
@@ -111,9 +113,10 @@ defineExpose({
         :required="required"
         :class="
           cn(
-            'border-default/20 dark:border-default-200 block w-full rounded-md border px-2 py-1 text-sm shadow-sm transition duration-150 ease-in-out focus:border-transparent focus:ring-2',
+            'border-default/20 block w-full rounded-md border px-2 py-1 text-sm shadow-sm transition duration-150 ease-in-out focus:border-transparent focus:ring-2',
             colorClass[color],
             sizeClasses,
+            darkBorder && 'dark:border-default-200',
             $slots.prefix && 'pl-10',
             $slots.suffix && 'pr-10',
             disabled && 'bg-default-100 cursor-not-allowed',

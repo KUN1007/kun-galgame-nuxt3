@@ -15,6 +15,7 @@ defineProps<{
     <KunCard
       :is-transparent="isTransparent"
       :is-pressable="true"
+      :dark-border="true"
       v-for="galgame in galgames"
       :key="galgame.id"
       :href="`/galgame/${galgame.id}`"

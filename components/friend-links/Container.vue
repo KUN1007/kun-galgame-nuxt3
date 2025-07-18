@@ -26,14 +26,13 @@ import { friendArray } from '~/config/friend'
       </h2>
 
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <KunLink
-          color="default"
-          underline="none"
+        <KunCard
+          :is-pressable="true"
+          :dark-border="true"
           v-for="(friend, i) in friendGroup.value"
           :key="i"
           :to="friend.link"
           target="_blank"
-          class-name="block transform rounded-lg p-4 shadow transition-all duration-200 hover:-translate-y-2 hover:shadow-lg"
         >
           <div class="mb-2 flex items-center gap-2">
             <span class="text-lg font-bold">
@@ -52,7 +51,7 @@ import { friendArray } from '~/config/friend'
             :src="`/friends/${friend.banner}.webp`"
             class="h-auto w-full rounded-md"
           />
-        </KunLink>
+        </KunCard>
       </div>
     </template>
 

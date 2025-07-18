@@ -11,6 +11,7 @@ defineProps<{
     :is-transparent="true"
     :is-hoverable="true"
     :is-pressable="true"
+    :dark-border="true"
     :to="`/galgame-engine/${engine.id}`"
   >
     <h3 class="text-default-900 font-semibold">

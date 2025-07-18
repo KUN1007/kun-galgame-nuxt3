@@ -22,6 +22,7 @@ const includedGamesText = computed(() => {
     :href="`/galgame-series/${series.id}`"
     class-name="group relative flex h-full flex-col overflow-hidden backdrop-blur-none"
     :is-transparent="true"
+    :dark-border="true"
   >
     <div class="relative mb-4 h-32 w-full">
       <KunBadge

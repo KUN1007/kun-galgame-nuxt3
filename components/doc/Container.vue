@@ -26,6 +26,7 @@ const { data: posts } = await useAsyncData(() => {
     >
       <KunCard
         :is-pressable="true"
+        :dark-border="true"
         v-for="post in posts"
         :key="post.id"
         :href="post.path"

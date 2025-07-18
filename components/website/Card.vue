@@ -15,7 +15,8 @@ const totalLevel = computed(() => {
     :is-pressable="true"
     :is-transparent="true"
     :href="`/website/${website.domain}`"
-    class-name="group dark:border dark:border-default-200"
+    :dark-border="true"
+    class-name="group"
     content-class="space-y-3"
   >
     <div class="flex items-start space-x-4">

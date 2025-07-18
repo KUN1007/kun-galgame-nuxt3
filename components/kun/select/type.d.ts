@@ -10,4 +10,5 @@ export interface KunSelectProps {
   placeholder?: string
   error?: string
   disabled?: boolean
+  darkBorder?: boolean
 }

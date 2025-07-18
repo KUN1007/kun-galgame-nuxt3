@@ -53,6 +53,7 @@ watch(
     <KunCard
       :is-hoverable="false"
       :is-transparent="false"
+      :dark-border="true"
       v-for="todo in data.todos"
       :key="todo.id"
       :color="colorMap[todo.status]"
