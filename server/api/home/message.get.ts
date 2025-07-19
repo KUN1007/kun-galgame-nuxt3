@@ -86,6 +86,7 @@ const timelineFetchers = {
 
   TOPIC_CREATION: async () => {
     const items = await prisma.topic.findMany({
+      where: { status: { not: 1 } },
       orderBy: { created: 'desc' },
       take: ACTIVITY_ITEM_FETCHER_LIMIT,
       select: {

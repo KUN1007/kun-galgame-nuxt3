@@ -123,7 +123,7 @@ const getTopicReplies = async (
   const skip = (page - 1) * limit
 
   const topic = await prisma.topic.findUnique({
-    where: { id: topicId },
+    where: { id: topicId, status: { not: 1 } },
     select: { pinned_reply_id: true, best_answer_id: true }
   })
 

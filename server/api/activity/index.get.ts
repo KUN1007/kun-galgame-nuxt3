@@ -111,6 +111,7 @@ const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
   TOPIC_CREATION: async (limit, skip) => {
     const [items, total] = await prisma.$transaction([
       prisma.topic.findMany({
+        where: { status: { not: 1 } },
         orderBy: { created: 'desc' },
         take: limit,
         skip,

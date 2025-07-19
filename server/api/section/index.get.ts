@@ -27,9 +27,7 @@ const getSectionTopic = async (input: z.infer<typeof getSectionSchema>) => {
     take: limit,
     orderBy: { created: sortOrder },
     where: {
-      status: {
-        not: 1
-      },
+      status: { not: 1 },
       section: {
         some: {
           topic_section: {

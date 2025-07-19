@@ -30,6 +30,7 @@ export const searchTopic = async (
     take: limit,
     orderBy: { created: 'desc' },
     include: {
+      best_answer: true,
       user: {
         select: {
           id: true,
@@ -68,7 +69,8 @@ export const searchTopic = async (
     upvoteTime: topic.upvote_time,
     likeCount: topic._count.like,
     replyCount: topic._count.reply,
-    commentCount: topic._count.comment
+    commentCount: topic._count.comment,
+    hasBestAnswer: !!topic.best_answer
   }))
 
   return topics

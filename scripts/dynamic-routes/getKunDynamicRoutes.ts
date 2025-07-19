@@ -2,6 +2,7 @@ import prisma from '~/prisma/prisma'
 
 export const getKunDynamicRoutes = async () => {
   const topics = await prisma.topic.findMany({
+    where: { status: { not: 1 } },
     select: { id: true, updated: true }
   })
 

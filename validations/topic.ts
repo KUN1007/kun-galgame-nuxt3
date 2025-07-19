@@ -81,6 +81,10 @@ export const updateTopicBestAnswerSchema = z.object({
   replyId: z.coerce.number().min(1).max(9999999)
 })
 
+export const updateTopicHideStatusSchema = z.object({
+  topicId: z.coerce.number().min(1).max(9999999)
+})
+
 /*
  * Reply
  */

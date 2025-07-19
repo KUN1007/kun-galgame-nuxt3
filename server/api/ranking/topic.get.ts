@@ -36,6 +36,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const topics = await prisma.topic.findMany({
+    where: { status: { not: 1 } },
     skip,
     take: limit,
     orderBy: isCountField

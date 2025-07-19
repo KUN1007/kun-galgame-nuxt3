@@ -4,6 +4,8 @@ import type { TopicDetail } from '~/types/api/topic'
 defineProps<{
   topic: TopicDetail
 }>()
+
+const { id } = usePersistUserStore()
 </script>
 
 <template>
@@ -62,6 +64,23 @@ defineProps<{
       </KunTooltip>
 
       <TopicFooterRewrite :topic="topic" />
+
+      <KunPopover position="top-end">
+        <template v-if="id" #trigger>
+          <KunButton
+            :is-icon-only="true"
+            variant="light"
+            color="default"
+            size="lg"
+          >
+            <KunIcon name="lucide:ellipsis" />
+          </KunButton>
+        </template>
+
+        <div class="flex w-54 flex-col gap-2 p-2">
+          <TopicFooterHide :topic-id="topic.id" />
+        </div>
+      </KunPopover>
     </div>
   </div>
 </template>

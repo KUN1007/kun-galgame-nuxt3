@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const topic = await prisma.topic.findUnique({
-    where: { id: input.topicId },
+    where: { id: input.topicId, status: { not: 1 } },
     include: {
       like: {
         where: {

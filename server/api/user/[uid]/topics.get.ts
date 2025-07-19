@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
 
   const { userId, page, limit, type } = input
 
-  const whereClause: Prisma.topicWhereInput = {}
+  const whereClause: Prisma.topicWhereInput = { status: { not: 1 } }
 
   switch (type) {
     case 'topic':
