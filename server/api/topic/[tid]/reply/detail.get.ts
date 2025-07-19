@@ -17,6 +17,8 @@ export default defineEventHandler(async (event) => {
       id: input.replyId
     },
     include: {
+      pinned: true,
+      best_answer: true,
       user: {
         select: { id: true, name: true, avatar: true, moemoepoint: true }
       },
@@ -80,7 +82,9 @@ export default defineEventHandler(async (event) => {
     isDisliked: reply.dislike.length > 0,
     targetByCount: reply._count.target_by,
     created: reply.created,
-    targets: targets
+    targets: targets,
+    isPinned: !!reply.pinned,
+    isBestAnswer: !!reply.best_answer
   }
 
   return result

@@ -39,7 +39,7 @@ const handleUpdateReplyPin = async () => {
 <template>
   <KunButton
     variant="light"
-    :color="reply.isPinned ? 'warning' : 'secondary'"
+    :color="reply.isPinned ? 'warning' : 'default'"
     size="sm"
     :disabled="isDisabled"
     @click="handleUpdateReplyPin"

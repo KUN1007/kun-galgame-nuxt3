@@ -52,6 +52,8 @@ export default defineEventHandler(async (event) => {
         }
       },
       include: {
+        pinned: true,
+        best_answer: true,
         user: {
           select: { id: true, name: true, avatar: true, moemoepoint: true }
         },
@@ -143,7 +145,9 @@ export default defineEventHandler(async (event) => {
       targetByCount: result._count.target_by,
       comment: [],
       created: result.created,
-      targets: formattedTargets
+      targets: formattedTargets,
+      isPinned: !!result.pinned,
+      isBestAnswer: !!result.best_answer
     }
 
     return formattedReply

@@ -39,7 +39,7 @@ const handleUpdateTopicBestAnswer = async () => {
 <template>
   <KunButton
     variant="light"
-    :color="reply.isBestAnswer ? 'warning' : 'success'"
+    :color="reply.isBestAnswer ? 'warning' : 'default'"
     size="sm"
     :disabled="isDisabled"
     @click="handleUpdateTopicBestAnswer"

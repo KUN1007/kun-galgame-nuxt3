@@ -17,10 +17,12 @@ export default defineEventHandler(async (event) => {
   const { topicId, content, targets } = input
   const validTargets = targets.filter((item) => item.content?.trim())
 
-  const currentReplyCount = await prisma.topic_reply.count({
-    where: { topic_id: topicId }
+  const lastReply = await prisma.topic_reply.findFirst({
+    where: { topic_id: topicId },
+    orderBy: { floor: 'desc' },
+    select: { floor: true }
   })
-  const newFloor = currentReplyCount + 1
+  const newFloor = (lastReply?.floor || 0) + 1
 
   return await prisma.$transaction(async (prisma) => {
     await prisma.topic.update({
@@ -123,7 +125,9 @@ export default defineEventHandler(async (event) => {
       targetByCount: 0,
       created: newReply.created,
       comment: [],
-      targets: formattedTargets
+      targets: formattedTargets,
+      isBestAnswer: false,
+      isPinned: false
     }
 
     return formattedReply
