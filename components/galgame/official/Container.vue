@@ -58,6 +58,7 @@ watchDebounced(
       <template #endContent>
         <div>
           <KunInput
+            :autofocus="true"
             v-model="searchQuery"
             type="text"
             placeholder="搜索会社名称、描述或别名..."

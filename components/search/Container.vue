@@ -70,8 +70,19 @@ const handleLoadMore = async () => {
   >
     <KunHeader
       name="搜索"
-      description="您可以在本页面搜索本论坛的所有话题, Galgame, 用户, 回复, 评论。当前的搜索会一并搜索 NSFW 内容, 如果您要按照 Galgame 厂商 / 会社 / 标签搜索, 请前往 Galgame 会社或者 Galgame 标签的页面进行搜索。"
-    />
+      description="您可以在本页面搜索本论坛的所有话题, Galgame, 用户, 回复, 评论。"
+    >
+      <template #endContent>
+        <div class="text-default-500">
+          当前的搜索会一并搜索 NSFW 内容, 如果您要按照 Galgame 厂商 / 会社 /
+          标签搜索, 请前往
+          <KunLink to="/galgame-official"> Galgame 会社 Wiki </KunLink>
+          或者
+          <KunLink to="/galgame-tag"> Galgame 标签 Wiki </KunLink>
+          的页面进行搜索。
+        </div>
+      </template>
+    </KunHeader>
     <KunTab
       :items="navItems"
       :model-value="pageData.type"

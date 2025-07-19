@@ -15,6 +15,7 @@ const props = withDefaults(
     required?: boolean
     disabled?: boolean
     darkBorder?: boolean
+    autofocus?: boolean
   }>(),
   {
     type: 'text',
@@ -28,7 +29,8 @@ const props = withDefaults(
     size: 'md',
     required: false,
     disabled: false,
-    darkBorder: true
+    darkBorder: true,
+    autofocus: false
   }
 )
 
@@ -82,6 +84,13 @@ const handleFocus = (event: FocusEvent) => {
   isFocused.value = true
   emits('focus', event)
 }
+
+onMounted(() => {
+  if (props.autofocus) {
+    isFocused.value = true
+    input.value?.focus()
+  }
+})
 
 defineExpose({
   focus: () => input.value?.focus(),

@@ -58,12 +58,13 @@ watchDebounced(
       <template #endContent>
         <div class="space-y-3">
           <p class="text-default-500">
-            默认仅显示了 SFW 的标签, 查看 NSFW 网站请在设置面板打开 NSFW
+            默认仅显示了 SFW 的标签, 查看 NSFW 标签请在设置面板打开 NSFW
             开关。如果有数据错误请
             <KunLink to="/doc/notice/contact"> 联系我们 </KunLink>。
           </p>
 
           <KunInput
+            :autofocus="true"
             v-model="searchQuery"
             type="text"
             placeholder="搜索标签名称、描述或别名..."

@@ -77,6 +77,12 @@ const handleUpdateOfficial = async (data: UpdateGalgameOfficialPayload) => {
     >
       <template #endContent>
         <div class="space-y-3">
+          <p class="text-default-500">
+            默认仅显示了 SFW 的 Galgame, 查看 NSFW Galgame 请在设置面板打开 NSFW
+            开关。如果有数据错误请
+            <KunLink to="/doc/notice/contact"> 联系我们 </KunLink>。
+          </p>
+
           <div class="text-default-500">
             会社类别
             <KunBadge
