@@ -116,7 +116,8 @@
       "name": "莫邪游戏资源分享网",
       "banner": "xiuren",
       "link": "https://xiuren.cyou/",
-      "label": "分享galgame, SLG, RPG等资源"
+      "label": "分享galgame, SLG, RPG等资源",
+      "status": "down"
     },
     {
       "name": "Galgame 月谣",
@@ -171,6 +172,12 @@
       "banner": "0721_galgame",
       "link": "https://nn0721.icu/",
       "label": "Galgame,Galgame网站,Galgame下载,Galgame资源,Galgame汉化Galgame制作,Galgame讨论"
+    },
+    {
+      "name": "次元宅社",
+      "banner": "acgsekai",
+      "link": "https://www.acgsekai.xyz/",
+      "label": "次元宅社, 提供ACGN资源, 是公益性的全免费资源分享平台。打造二次元网站一片净土, 我们的理念是开放、共创, 希望与您共同CHANGE SEKAI!"
     }
   ],
   "anime": [
