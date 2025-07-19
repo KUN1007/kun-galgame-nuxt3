@@ -70,8 +70,8 @@ onUnmounted(() => {
     :is-hoverable="false"
     :class-name="
       cn(
-        'sticky top-16 z-10 transition-transform duration-300',
-        isVisible ? 'translate-y-0' : '-translate-y-full'
+        'sticky top-16 transition-transform duration-300',
+        isVisible ? 'translate-y-0' : '-translate-y-full z-10'
       )
     "
   >

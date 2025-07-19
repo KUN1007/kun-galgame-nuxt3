@@ -62,7 +62,7 @@ const bannerBaseClasses =
     <KunCard
       :is-transparent="false"
       :is-hoverable="false"
-      :class-name="cn('w-full relative', cardClasses)"
+      :class-name="cn('w-full relative overflow-visible', cardClasses)"
       content-class="gap-3"
     >
       <div
@@ -94,7 +94,7 @@ const bannerBaseClasses =
         <KunIcon class-name="text-xl" name="lucide:pin" />
         <span>置顶回复</span>
         <KunIcon
-          class-name="absolute bottom-3 right-3 text-[10rem] text-success-500/20 select-none -z-1"
+          class-name="absolute bottom-3 right-3 text-[10rem] text-secondary-500/20 select-none -z-1"
           name="lucide:disc-2"
         />
       </div>

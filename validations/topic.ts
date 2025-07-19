@@ -138,6 +138,11 @@ export const updateReplySchema = z
     message: '至少需要提供回复内容或回复目标才可以进行更新'
   })
 
+export const updateReplyPinSchema = z.object({
+  topicId: z.coerce.number().min(1).max(9999999),
+  replyId: z.coerce.number().min(1).max(9999999)
+})
+
 export const updateReplyLikeSchema = z.object({
   replyId: z.coerce.number().min(1).max(9999999)
 })

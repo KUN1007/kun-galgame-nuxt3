@@ -94,6 +94,7 @@ const handleClickComment = (id: number, uid: number, name: string) => {
         </template>
 
         <div class="flex w-54 flex-col gap-2 p-2">
+          <TopicReplyPin :reply="reply" />
           <TopicReplyBestAnswer :reply="reply" />
           <TopicReplyDelete :reply="reply" />
         </div>
