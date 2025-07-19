@@ -11,13 +11,17 @@ const isRecentlyUpvoted = computed(() => hourDiff(props.upvoteTime || 0, 10))
 
 <template>
   <div class="flex flex-wrap items-center gap-2">
-    <KunBadge color="warning" v-if="upvoteTime && isRecentlyUpvoted">
+    <KunBadge
+      variant="solid"
+      color="warning"
+      v-if="upvoteTime && isRecentlyUpvoted"
+    >
       <KunIcon name="lucide:sparkles" class="size-4 text-inherit" />
       <span class="text-inherit">该话题被推</span>
     </KunBadge>
 
     <span v-if="hasBestAnswer" class="flex gap-1">
-      <KunBadge color="success">
+      <KunBadge variant="solid" color="success">
         <KunIcon name="lucide:bookmark-check" class="size-4 text-inherit" />
         有解答
       </KunBadge>

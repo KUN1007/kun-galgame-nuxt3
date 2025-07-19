@@ -51,9 +51,18 @@ watchDebounced(
     :is-pressable="false"
     content-class="space-y-6"
   >
-    <KunHeader name="标签列表" description="Galgame 标签列表">
+    <KunHeader
+      name="Galgame 标签 Wiki"
+      description="这里展示了绝大多数 Galgame 的标签, 并附带有标签的别名, 您可以点击标签以查看所有含有这个标签的 Galgame"
+    >
       <template #endContent>
-        <div>
+        <div class="space-y-3">
+          <p class="text-default-500">
+            默认仅显示了 SFW 的标签, 查看 NSFW 网站请在设置面板打开 NSFW
+            开关。如果有数据错误请
+            <KunLink to="/doc/notice/contact"> 联系我们 </KunLink>。
+          </p>
+
           <KunInput
             v-model="searchQuery"
             type="text"

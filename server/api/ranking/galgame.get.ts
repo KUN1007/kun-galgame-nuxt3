@@ -8,6 +8,8 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
+  const nsfw = getNSFWCookie(event)
+
   const { page, limit, sortField, sortOrder } = input
   const skip = (page - 1) * limit
 
@@ -40,6 +42,9 @@ export default defineEventHandler(async (event) => {
   }
 
   const galgames = await prisma.galgame.findMany({
+    where: {
+      content_limit: nsfw === 'sfw' ? 'sfw' : undefined
+    },
     skip,
     take: limit,
     orderBy: isCountField

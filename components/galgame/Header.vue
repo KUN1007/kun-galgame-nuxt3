@@ -87,7 +87,7 @@ onMounted(async () => {
     >
       <NuxtImg
         data-kun-lazy-image="true"
-        class="cursor-pointer object-cover"
+        class="size-full cursor-pointer object-cover"
         :src="galgame.banner"
         loading="lazy"
       />

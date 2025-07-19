@@ -26,7 +26,7 @@ watch(
 
 <template>
   <div :class="cn('ml-auto flex gap-3', className)">
-    <span :class="cn('text-default-500', labelClass)">是否显示 NSFW 游戏</span>
+    <span :class="cn('text-default-500', labelClass)">启用网站 NSFW 模式</span>
     <KunTooltip
       class-name="flex"
       text="是否显示内容限制的游戏内容 (R18 等)"

@@ -9,11 +9,16 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
+  const nsfw = getNSFWCookie(event)
+
   const { page, limit } = input
   const skip = (page - 1) * limit
 
   const [data, totalCount] = await Promise.all([
     prisma.galgame_tag.findMany({
+      where: {
+        category: nsfw === 'sfw' ? { in: ['content', 'technical'] } : undefined
+      },
       skip,
       take: limit,
       include: {
@@ -29,7 +34,11 @@ export default defineEventHandler(async (event) => {
         }
       }
     }),
-    prisma.galgame_tag.count()
+    prisma.galgame_tag.count({
+      where: {
+        category: nsfw === 'sfw' ? { in: ['content', 'technical'] } : undefined
+      }
+    })
   ])
 
   const tags: GalgameTagItem[] = data.map((tag) => ({

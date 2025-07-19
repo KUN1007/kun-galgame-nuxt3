@@ -10,6 +10,8 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
+  const nsfw = getNSFWCookie(event)
+
   const { tagId, page, limit } = input
   const skip = (page - 1) * limit
 
@@ -23,6 +25,11 @@ export default defineEventHandler(async (event) => {
         }
       },
       galgame: {
+        where: {
+          galgame: {
+            content_limit: nsfw === 'sfw' ? 'sfw' : undefined
+          }
+        },
         skip,
         take: limit,
         orderBy: {
