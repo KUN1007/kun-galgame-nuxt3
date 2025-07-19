@@ -1,10 +1,17 @@
 <script setup lang="ts">
-import { activityPageTabs, KUN_ACTIVITY_ICON_MAP } from '~/constants/activity'
+import { KUN_ACTIVITY_TYPE_TYPE } from '~/constants/activity'
+
+const activityPageTabs = Object.entries(KUN_ACTIVITY_TYPE_TYPE).map(
+  ([key, value]) => ({
+    value: key,
+    textValue: value
+  })
+)
 
 const pageData = reactive({
   page: 1,
   limit: 50,
-  type: 'all'
+  type: 'TOPIC_CREATION'
 })
 
 const { data, status } = await useFetch('/api/activity', {
@@ -22,10 +29,11 @@ const { data, status } = await useFetch('/api/activity', {
   >
     <KunHeader
       name="最新动态"
-      description="这里展示了论坛的所有动态, 最早可以追溯到论坛追加消息系统时"
+      description="这里展示了论坛的所有动态, 包括 Galgame, Galgame 资源, Galgame 网站, 话题, 回复, 评论, 网站更新 等"
     />
 
     <KunTab
+      :has-scrollbar="true"
       :model-value="pageData.type"
       @update:model-value="(value) => (pageData.type = value)"
       :items="activityPageTabs"
@@ -33,42 +41,27 @@ const { data, status } = await useFetch('/api/activity', {
     />
 
     <div
-      v-for="(activity, index) in data.activities"
+      v-for="(activity, index) in data.items"
       :key="index"
-      class="group flex items-start space-x-3 rounded-lg transition-colors"
+      class="flex flex-col space-y-2"
     >
-      <div
-        class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
+      <KunLink
+        underline="none"
+        color="default"
+        :to="activity.link"
+        class-name="hover:text-primary line-clamp-3 break-all transition-colors"
       >
-        <KunIcon
-          :name="KUN_ACTIVITY_ICON_MAP[activity.type]"
-          class="text-primary h-4 w-4"
-        />
-      </div>
+        {{ activity.content }}
+        <KunBadge class-name="cursor-pointer" color="primary" size="xs">
+          {{ KUN_ACTIVITY_TYPE_TYPE[activity.type] }}
+        </KunBadge>
+      </KunLink>
 
-      <div class="space-y-2">
-        <KunLink
-          underline="none"
-          color="default"
-          :to="activity.link"
-          class-name="hover:text-primary line-clamp-3 break-all transition-colors"
-        >
-          {{ activity.content }}
-        </KunLink>
-
-        <div class="flex items-center space-x-2">
-          <KunLink
-            underline="none"
-            color="default"
-            :to="`/user/${activity.user.id}/info`"
-            class-name="hover:text-foreground text-default-500 text-sm font-medium transition-colors"
-          >
-            {{ activity.user.name }}
-          </KunLink>
-          <span class="text-default-500 text-sm">
-            {{ formatTimeDifference(activity.created) }}
-          </span>
-        </div>
+      <div class="flex items-center space-x-2">
+        <KunUser size="sm" v-if="activity.actor" :user="activity.actor" />
+        <span class="text-default-500 text-sm">
+          {{ formatTimeDifference(activity.timestamp) }}
+        </span>
       </div>
     </div>
 

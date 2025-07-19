@@ -1,45 +1,31 @@
-import type { KunTabItem } from '~/components/kun/tab/type'
-
-export const activityPageTabs: KunTabItem[] = [
-  {
-    textValue: '全部',
-    value: 'all'
-  },
-  {
-    textValue: '被推',
-    value: 'upvoted'
-  },
-  {
-    textValue: '回复',
-    value: 'replied'
-  },
-  {
-    textValue: '评论',
-    value: 'commented'
-  },
-  {
-    textValue: '最佳答案',
-    value: 'solution'
-  },
-  {
-    textValue: '更新请求',
-    value: 'requested'
-  }
-]
+export const KUN_ACTIVITY_TYPE_TYPE: Record<string, string> = {
+  GALGAME_CREATION: 'Galgame',
+  TOPIC_CREATION: '话题',
+  MESSAGE_UPVOTE: '话题被推',
+  MESSAGE_SOLUTION: '最佳解答',
+  TOPIC_REPLY_CREATION: '话题回复',
+  TOPIC_COMMENT_CREATION: '话题评论',
+  GALGAME_WEBSITE_CREATION: 'Galgame 网站',
+  GALGAME_RESOURCE_CREATION: 'Galgame 资源',
+  GALGAME_COMMENT_CREATION: 'Galgame 评论',
+  GALGAME_PR_CREATION: 'Galgame 更新请求',
+  GALGAME_WEBSITE_COMMENT_CREATION: 'Galgame 网站评论',
+  TODO_CREATION: '待办',
+  UPDATE_LOG_CREATION: '更新日志'
+}
 
 export const KUN_ALLOWED_ACTIVITY_TYPE = [
-  'all',
-  'upvoted',
-  'replied',
-  'commented',
-  'solution',
-  'requested'
+  'GALGAME_CREATION',
+  'GALGAME_COMMENT_CREATION',
+  'GALGAME_PR_CREATION',
+  'GALGAME_WEBSITE_CREATION',
+  'GALGAME_WEBSITE_COMMENT_CREATION',
+  'GALGAME_RESOURCE_CREATION',
+  'TOPIC_CREATION',
+  'TOPIC_REPLY_CREATION',
+  'TOPIC_COMMENT_CREATION',
+  'TODO_CREATION',
+  'UPDATE_LOG_CREATION',
+  'MESSAGE_UPVOTE',
+  'MESSAGE_SOLUTION'
 ] as const
-
-export const KUN_ACTIVITY_ICON_MAP: Record<string, string> = {
-  upvoted: 'lucide:sparkles',
-  replied: 'carbon:reply',
-  commented: 'uil:comment-dots',
-  requested: 'lucide:git-pull-request-arrow',
-  solution: 'lucide:bookmark-check'
-}

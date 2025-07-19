@@ -1,12 +1,8 @@
 <script setup lang="ts">
-import { activityPageTabs, KUN_ACTIVITY_ICON_MAP } from '~/constants/activity'
+import { KUN_ACTIVITY_TYPE_TYPE } from '~/constants/activity'
 
 const { data } = await useFetch('/api/home/message', {
-  method: 'GET',
-  query: {
-    page: 1,
-    limit: 10
-  }
+  method: 'GET'
 })
 </script>
 
@@ -29,50 +25,27 @@ const { data } = await useFetch('/api/home/message', {
     </div>
 
     <div
-      v-for="(message, index) in data"
+      v-for="(activity, index) in data"
       :key="index"
-      class="group flex items-start space-x-3 rounded-lg transition-colors"
+      class="flex flex-col space-y-2"
     >
-      <KunTooltip
-        :text="
-          activityPageTabs.find((item) => item.value === message.type)
-            ?.textValue || ''
-        "
-        position="right"
+      <KunLink
+        underline="none"
+        color="default"
+        :to="activity.link"
+        class-name="hover:text-primary line-clamp-3 break-all transition-colors"
       >
-        <div
-          class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
-        >
-          <KunIcon
-            :name="KUN_ACTIVITY_ICON_MAP[message.type]"
-            class="text-primary h-4 w-4"
-          />
-        </div>
-      </KunTooltip>
+        {{ activity.content }}
+        <KunBadge class-name="cursor-pointer" color="primary" size="xs">
+          {{ KUN_ACTIVITY_TYPE_TYPE[activity.type] }}
+        </KunBadge>
+      </KunLink>
 
-      <div class="space-y-2">
-        <KunLink
-          underline="none"
-          color="default"
-          :to="message.link"
-          class-name="hover:text-primary line-clamp-3 break-all transition-colors"
-        >
-          {{ message.content }}
-        </KunLink>
-
-        <div class="flex items-center space-x-2">
-          <KunLink
-            underline="none"
-            color="default"
-            :to="`/user/${message.user.id}/info`"
-            class-name="hover:text-foreground text-default-500 text-sm font-medium transition-colors"
-          >
-            {{ message.user.name }}
-          </KunLink>
-          <span class="text-default-500 text-sm">
-            {{ formatTimeDifference(message.created) }}
-          </span>
-        </div>
+      <div class="flex items-center space-x-2">
+        <KunUser size="sm" v-if="activity.actor" :user="activity.actor" />
+        <span class="text-default-500 text-sm">
+          {{ formatTimeDifference(activity.timestamp) }}
+        </span>
       </div>
     </div>
   </KunCard>

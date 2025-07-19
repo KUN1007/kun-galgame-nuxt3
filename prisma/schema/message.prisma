@@ -4,7 +4,7 @@ model message {
   link    String @default("") @db.VarChar(100)
   status  String @default("unread")
   // 'upvoted' | 'liked' | 'favorite' | 'replied' | 'commented' | 'expired'
-  // 'requested' | 'merged' | 'declined' | 'mentioned' | 'admin'
+  // ‘solution' | 'pin-reply' | 'requested' | 'merged' | 'declined' | 'mentioned' | 'admin'
   type    String
 
   sender_id   Int

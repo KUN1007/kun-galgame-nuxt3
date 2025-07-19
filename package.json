@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "4.1.25",
+  "version": "4.1.26",
   "packageManager": "pnpm@10.4.1",
   "private": true,
   "scripts": {
@@ -36,6 +36,7 @@
     "@iconify-json/ant-design": "^1.2.5",
     "@iconify-json/carbon": "^1.2.8",
     "@iconify-json/ci": "^1.2.2",
+    "@iconify-json/icon-park-outline": "^1.2.2",
     "@iconify-json/line-md": "^1.2.8",
     "@iconify-json/lucide": "^1.2.32",
     "@iconify-json/mdi": "^1.2.3",

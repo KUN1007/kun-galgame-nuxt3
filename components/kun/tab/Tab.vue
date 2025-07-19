@@ -17,6 +17,7 @@ const props = withDefaults(
     disableAnimation?: boolean
     className?: string
     innerClassName?: string
+    hasScrollbar?: boolean
   }>(),
   {
     variant: 'solid',
@@ -28,7 +29,8 @@ const props = withDefaults(
     radius: 'lg',
     disableAnimation: false,
     className: '',
-    innerClassName: ''
+    innerClassName: '',
+    hasScrollbar: false
   }
 )
 
@@ -39,9 +41,10 @@ const emit = defineEmits<{
 
 const containerClasses = computed(() => {
   return cn(
-    'inline-flex max-w-full scrollbar-hide overflow-scroll',
+    'inline-flex max-w-full overflow-scroll',
     props.fullWidth && 'w-full',
     props.disabled && 'opacity-50 cursor-not-allowed',
+    !props.hasScrollbar && 'scrollbar-hide',
     props.className
   )
 })
