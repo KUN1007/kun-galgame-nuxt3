@@ -2,7 +2,7 @@
 import {
   KUN_WEBSITE_LANGUAGE_MAP,
   KUN_WEBSITE_ACG_LIMIT_MAP
-} from '~/constants/website'
+} from '~/constants/galgameWebsite'
 
 import type { WebsiteDetail } from '~/types/api/website'
 

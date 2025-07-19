@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { KUN_GALGAME_OFFICIAL_LANGUAGE_MAP } from '~/constants/galgameOfficial'
+import { KUN_GALGAME_AGE_LIMIT_MAP } from '~/constants/galgame'
 import type { GalgameEngineItem } from '~/types/api/galgame-engine'
 import type { GalgameOfficialItem } from '~/types/api/galgame-official'
 
@@ -36,7 +37,7 @@ const getOfficialCategoryInfo = (category: string) => {
 }
 
 const getLanguageName = (langCode: string) => {
-  // TODO:
+  // TODO: support more language names
   const map: Record<string, string> = {
     'ja-jp': '日本語',
     'en-us': 'English',
@@ -159,12 +160,15 @@ const getLanguageName = (langCode: string) => {
         >
           年龄限制
         </span>
-        <KunBadge
-          variant="flat"
-          :color="ageLimit === 'all' ? 'success' : 'danger'"
-        >
-          {{ ageLimit === 'all' ? '全年龄' : 'R18' }}
-        </KunBadge>
+
+        <KunTooltip position="left" :text="KUN_GALGAME_AGE_LIMIT_MAP[ageLimit]">
+          <KunBadge
+            variant="flat"
+            :color="ageLimit === 'all' ? 'success' : 'danger'"
+          >
+            {{ ageLimit === 'all' ? '全年龄' : 'R18' }}
+          </KunBadge>
+        </KunTooltip>
       </div>
     </dl>
   </KunCard>

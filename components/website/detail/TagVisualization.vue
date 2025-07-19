@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { KUN_TAG_CATEGORY_TITLE } from '~/constants/website'
+import { KUN_TAG_CATEGORY_TITLE } from '~/constants/galgameWebsite'
 import type { WebsiteTag } from '~/types/api/website'
 
 interface TagDetail extends WebsiteTag {

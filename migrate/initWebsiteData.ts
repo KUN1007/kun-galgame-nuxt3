@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { friendArray } from '~/config/friend'
-import { KUN_WEBSITE_CATEGORY_MAP } from '~/constants/website'
+import { KUN_WEBSITE_CATEGORY_MAP } from '~/constants/galgameWebsite'
 
 const prisma = new PrismaClient()
 

@@ -4,7 +4,7 @@ import {
   KUN_WEBSITE_CATEGORY_MAP,
   KUN_WEBSITE_LANGUAGE_MAP,
   KUN_WEBSITE_ACG_LIMIT_MAP
-} from '~/constants/website'
+} from '~/constants/galgameWebsite'
 import type { CreateWebsitePayload, UpdateWebsitePayload } from './types'
 import type { KunSelectOption } from '~/components/kun/select/type'
 

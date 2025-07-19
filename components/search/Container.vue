@@ -70,7 +70,7 @@ const handleLoadMore = async () => {
   >
     <KunHeader
       name="搜索"
-      description="您可以在本页面搜索本论坛的所有话题, Galgame, 用户, 回复, 评论。当前的搜索会一并搜索 NSFW 内容"
+      description="您可以在本页面搜索本论坛的所有话题, Galgame, 用户, 回复, 评论。当前的搜索会一并搜索 NSFW 内容, 如果您要按照 Galgame 厂商 / 会社 / 标签搜索, 请前往会社或者标签的页面进行搜索。"
     />
     <KunTab
       :items="navItems"

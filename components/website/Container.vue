@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { KUN_WEBSITE_CATEGORY_MAP } from '~/constants/website'
+import { KUN_WEBSITE_CATEGORY_MAP } from '~/constants/galgameWebsite'
 import type { WebsiteCard, WebsiteTag } from '~/types/api/website'
 import type {
   CreateWebsitePayload,
