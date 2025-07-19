@@ -31,6 +31,7 @@ defineProps<{
         :section="topic.section"
         :tags="topic.tag"
         :upvote-time="topic.upvoteTime"
+        :has-best-answer="!!topic.bestAnswer"
       />
 
       <div class="text-default-500 flex items-center space-x-4 text-sm">
@@ -41,6 +42,11 @@ defineProps<{
           }}
         </span>
       </div>
+
+      <TopicDetailBestAnswer
+        v-if="topic.bestAnswer"
+        :best-answer="topic.bestAnswer"
+      />
 
       <TopicDetailUser
         class-name="lg:hidden"

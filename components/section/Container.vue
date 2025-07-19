@@ -88,7 +88,11 @@ watch(
           {{ topic.title }}
         </h2>
 
-        <TopicTagGroup :section="topic.section" :tags="topic.tag" />
+        <TopicTagGroup
+          :section="topic.section"
+          :tags="topic.tag"
+          :has-best-answer="topic.hasBestAnswer"
+        />
 
         <div class="text-default-500 line-clamp-2 text-sm break-all">
           {{ markdownToText(topic.content) }}

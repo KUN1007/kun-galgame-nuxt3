@@ -28,6 +28,8 @@ export interface TopicReply {
   edited: Date | string | null
 
   targets: TopicReplyTargetInfo[]
+  isPinned: boolean
+  isBestAnswer: boolean
 }
 
 export type TopicReplyDetail = Omit<TopicReply, 'comment'>

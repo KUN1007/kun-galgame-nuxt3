@@ -32,6 +32,7 @@ defineProps<{
         :section="topic.section"
         :tags="topic.tag"
         :upvote-time="topic.upvoteTime"
+        :has-best-answer="topic.hasBestAnswer"
       />
 
       <div class="text-default-700 flex items-center gap-4 text-sm">

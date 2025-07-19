@@ -3,6 +3,7 @@ export type MessageType =
   | 'liked'
   | 'favorite'
   | 'replied'
+  | 'solution'
   | 'commented'
   | 'expired'
   | 'requested'

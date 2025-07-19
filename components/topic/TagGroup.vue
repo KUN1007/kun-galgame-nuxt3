@@ -3,6 +3,7 @@ const props = defineProps<{
   section: string[]
   tags: string[]
   upvoteTime?: Date | string | null
+  hasBestAnswer?: boolean
 }>()
 
 const isRecentlyUpvoted = computed(() => hourDiff(props.upvoteTime || 0, 10))
@@ -14,6 +15,13 @@ const isRecentlyUpvoted = computed(() => hourDiff(props.upvoteTime || 0, 10))
       <KunIcon name="lucide:sparkles" class="size-4 text-inherit" />
       <span class="text-inherit">该话题被推</span>
     </KunBadge>
+
+    <span v-if="hasBestAnswer" class="flex gap-1">
+      <KunBadge color="success">
+        <KunIcon name="lucide:bookmark-check" class="size-4 text-inherit" />
+        有解答
+      </KunBadge>
+    </span>
 
     <TopicDetailSection :section="props.section" />
 

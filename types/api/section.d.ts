@@ -7,6 +7,7 @@ export interface SectionTopic {
   view: number
   like: number
   reply: number
+  hasBestAnswer: boolean
   user: KunUser
   created: Date | string
 }

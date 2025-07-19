@@ -18,6 +18,10 @@ export const activityPageTabs: KunTabItem[] = [
     value: 'commented'
   },
   {
+    textValue: '最佳答案',
+    value: 'solution'
+  },
+  {
     textValue: '更新请求',
     value: 'requested'
   }
@@ -28,5 +32,14 @@ export const KUN_ALLOWED_ACTIVITY_TYPE = [
   'upvoted',
   'replied',
   'commented',
+  'solution',
   'requested'
 ] as const
+
+export const KUN_ACTIVITY_ICON_MAP: Record<string, string> = {
+  upvoted: 'lucide:sparkles',
+  replied: 'carbon:reply',
+  commented: 'uil:comment-dots',
+  requested: 'lucide:git-pull-request-arrow',
+  solution: 'lucide:bookmark-check'
+}

@@ -48,6 +48,7 @@ export default defineEventHandler(async (event) => {
       status: true,
       status_update_time: true,
       upvote_time: true,
+      best_answer: true,
 
       user: {
         select: {
@@ -84,6 +85,7 @@ export default defineEventHandler(async (event) => {
     tag: topic.tag,
     user: topic.user as KunUser,
     status: topic.status,
+    hasBestAnswer: !!topic.best_answer,
 
     likeCount: topic._count.like,
     replyCount: topic._count.reply,

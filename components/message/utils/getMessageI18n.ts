@@ -36,6 +36,7 @@ const messageTemplates: Record<string, Record<string, string>> = {
     commented: ' 评论了您!',
     expired: ' 报告了您的资源链接已过期！',
     requested: ' 向您提出更新请求！',
+    solution: '您的回复被标记为最佳答案!',
     merged: '您的更新请求已被  合并！',
     declined: '您的更新请求被  拒绝！',
     admin: '系统消息',

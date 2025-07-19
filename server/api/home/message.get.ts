@@ -1,9 +1,8 @@
 import { markdownToText } from '~/utils/markdownToText'
 import prisma from '~/prisma/prisma'
 import { getMessageSchema } from '~/validations/home'
+import { KUN_ALLOWED_ACTIVITY_TYPE } from '~/constants/activity'
 import type { KunActivity } from '~/types/api/activity'
-
-const allowedMessageType = ['upvoted', 'replied', 'commented', 'requested']
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getMessageSchema)
@@ -13,6 +12,8 @@ export default defineEventHandler(async (event) => {
 
   const { page, limit } = input
   const skip = (page - 1) * limit
+
+  const [all, ...allowedMessageType] = KUN_ALLOWED_ACTIVITY_TYPE
 
   const data = await prisma.message.findMany({
     where: {

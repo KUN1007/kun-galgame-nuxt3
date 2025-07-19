@@ -17,6 +17,7 @@ export interface HomeTopic {
   tag: string[]
   user: KunUser
   status: number
+  hasBestAnswer: boolean
 
   likeCount: number
   replyCount: number

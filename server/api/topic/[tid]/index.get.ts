@@ -1,6 +1,6 @@
 import prisma from '~/prisma/prisma'
 import { getTopicDetailSchema } from '~/validations/topic'
-import type { TopicDetail } from '~/types/api/topic'
+import type { TopicDetail, TopicBestAnswer } from '~/types/api/topic'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getTopicDetailSchema)
@@ -15,6 +15,13 @@ export default defineEventHandler(async (event) => {
     prisma.topic.findUnique({
       where: { id: input.topicId },
       include: {
+        best_answer: {
+          include: {
+            user: {
+              select: { id: true, name: true, avatar: true, moemoepoint: true }
+            }
+          }
+        },
         user: {
           select: { id: true, name: true, avatar: true, moemoepoint: true }
         },
@@ -55,6 +62,21 @@ export default defineEventHandler(async (event) => {
     return 'banned'
   }
 
+  let bestAnswer: TopicBestAnswer | null = null
+  if (data.best_answer) {
+    const ba = data.best_answer
+    bestAnswer = {
+      id: ba.id,
+      topicId: ba.topic_id,
+      floor: ba.floor,
+      user: ba.user,
+      edited: ba.edited,
+      created: ba.created,
+      contentMarkdown: ba.content,
+      contentHtml: await markdownToHtml(ba.content)
+    }
+  }
+
   const topic: TopicDetail = {
     id: data.id,
     title: data.title,
@@ -75,6 +97,7 @@ export default defineEventHandler(async (event) => {
     isUpvoted: data.upvote.length > 0,
 
     replyCount: data._count.reply,
+    bestAnswer,
 
     contentHtml: await markdownToHtml(data.content),
     contentMarkdown: data.content,

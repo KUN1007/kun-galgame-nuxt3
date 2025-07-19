@@ -1,10 +1,22 @@
 import type { HomeTopic, HomeGalgame } from './home'
+import type { TopicReply } from './topic-reply'
 
 export type TopicCard = HomeTopic
 
 export interface TopicAside {
   title: string
   tid: number
+}
+
+export interface TopicBestAnswer {
+  id: number
+  topicId: number
+  floor: number
+  user: KunUser & { moemoepoint: number }
+  contentHtml: string
+  contentMarkdown: string
+  created: Date | string
+  edited: Date | string | null
 }
 
 export interface TopicDetail {
@@ -27,6 +39,7 @@ export interface TopicDetail {
   isUpvoted: boolean
 
   replyCount: number
+  bestAnswer: TopicBestAnswer | null
 
   contentHtml: string
   contentMarkdown: string

@@ -53,7 +53,7 @@ useEventListener(document, 'click', close)
 </script>
 
 <template>
-  <div class="relative inline-block">
+  <div class="relative z-20 inline-block">
     <div
       ref="triggerRef"
       @click="toggle"

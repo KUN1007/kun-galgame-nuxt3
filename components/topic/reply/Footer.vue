@@ -6,6 +6,8 @@ defineProps<{
   reply: TopicReply
 }>()
 
+const { id } = usePersistUserStore()
+
 const { replyId, targetUserId, targetUsername, isShowPanel } = storeToRefs(
   useTempCommentStore()
 )
@@ -79,7 +81,23 @@ const handleClickComment = (id: number, uid: number, name: string) => {
         </KunButton>
       </KunTooltip>
 
-      <TopicReplyDelete :reply="reply" />
+      <KunPopover position="top-end">
+        <template v-if="id" #trigger>
+          <KunButton
+            :is-icon-only="true"
+            variant="light"
+            color="default"
+            size="lg"
+          >
+            <KunIcon name="lucide:ellipsis" />
+          </KunButton>
+        </template>
+
+        <div class="flex w-54 flex-col gap-2 p-2">
+          <TopicReplyBestAnswer :reply="reply" />
+          <TopicReplyDelete :reply="reply" />
+        </div>
+      </KunPopover>
     </div>
   </div>
 </template>

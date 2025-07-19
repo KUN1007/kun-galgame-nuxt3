@@ -9,8 +9,10 @@ model topic_reply {
     topic_id Int
     topic    topic @relation(fields: [topic_id], references: [id], onDelete: Cascade)
 
-    target    topic_reply_target[] @relation("reply_to_target")
-    target_by topic_reply_target[] @relation("target_of_reply")
+    target      topic_reply_target[] @relation("reply_to_target")
+    target_by   topic_reply_target[] @relation("target_of_reply")
+    best_answer topic?               @relation("best_answer_for_topic")
+    pinned      topic?               @relation("pinned_reply_for_topic")
 
     comment topic_comment[]
     like    topic_reply_like[]

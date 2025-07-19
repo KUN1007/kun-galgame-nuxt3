@@ -1,10 +1,5 @@
 <script setup lang="ts">
-const iconMap: Record<string, string> = {
-  upvoted: 'lucide:sparkles',
-  replied: 'carbon:reply',
-  commented: 'uil:comment-dots',
-  requested: 'lucide:git-pull-request-arrow'
-}
+import { activityPageTabs, KUN_ACTIVITY_ICON_MAP } from '~/constants/activity'
 
 const { data } = await useFetch('/api/home/message', {
   method: 'GET',
@@ -38,11 +33,22 @@ const { data } = await useFetch('/api/home/message', {
       :key="index"
       class="group flex items-start space-x-3 rounded-lg transition-colors"
     >
-      <div
-        class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
+      <KunTooltip
+        :text="
+          activityPageTabs.find((item) => item.value === message.type)
+            ?.textValue || ''
+        "
+        position="right"
       >
-        <KunIcon :name="iconMap[message.type]" class="text-primary h-4 w-4" />
-      </div>
+        <div
+          class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
+        >
+          <KunIcon
+            :name="KUN_ACTIVITY_ICON_MAP[message.type]"
+            class="text-primary h-4 w-4"
+          />
+        </div>
+      </KunTooltip>
 
       <div class="space-y-2">
         <KunLink

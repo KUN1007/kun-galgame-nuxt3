@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import { activityPageTabs } from '~/constants/activity'
-
-const iconMap: Record<string, string> = {
-  upvoted: 'lucide:sparkles',
-  replied: 'carbon:reply',
-  commented: 'uil:comment-dots',
-  requested: 'lucide:git-pull-request-arrow'
-}
+import { activityPageTabs, KUN_ACTIVITY_ICON_MAP } from '~/constants/activity'
 
 const pageData = reactive({
   page: 1,
@@ -47,7 +40,10 @@ const { data, status } = await useFetch('/api/activity', {
       <div
         class="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
       >
-        <KunIcon :name="iconMap[activity.type]" class="text-primary h-4 w-4" />
+        <KunIcon
+          :name="KUN_ACTIVITY_ICON_MAP[activity.type]"
+          class="text-primary h-4 w-4"
+        />
       </div>
 
       <div class="space-y-2">

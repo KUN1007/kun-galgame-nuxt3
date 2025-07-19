@@ -25,6 +25,8 @@ const {
 
 await loadInitialReplies()
 
+provide('topicUserId', props.topic.user.id)
+
 watch(
   lastSuccessfulReply,
   (event) => {

@@ -18,6 +18,7 @@ export default defineEventHandler(async (event) => {
     where: { status: { not: 1 }, created: { gte: subMonths(new Date(), 3) } },
     orderBy: { status_update_time: 'desc' },
     include: {
+      best_answer: true,
       user: {
         select: {
           id: true,
@@ -47,6 +48,7 @@ export default defineEventHandler(async (event) => {
     likeCount: topic._count.like,
     replyCount: topic._count.reply,
     commentCount: topic._count.comment,
+    hasBestAnswer: !!topic.best_answer,
     tag: topic.tag,
     section: topic.section.map((s) => s.topic_section.name),
     user: topic.user,

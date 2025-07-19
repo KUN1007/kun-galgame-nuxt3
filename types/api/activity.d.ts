@@ -4,6 +4,7 @@ export type KunActivityType =
   | 'replied'
   | 'commented'
   | 'requested'
+  | 'solution'
 
 export interface KunActivityRequestData {
   page: string

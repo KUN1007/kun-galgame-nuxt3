@@ -48,16 +48,15 @@ const handleDeleteReply = async () => {
 </script>
 
 <template>
-  <KunTooltip text="删除回复">
-    <KunButton
-      v-if="id === reply.user.id"
-      :is-icon-only="true"
-      variant="light"
-      color="danger"
-      size="lg"
-      @click="handleDeleteReply"
-    >
-      <KunIcon class="icon" name="lucide:trash-2" />
-    </KunButton>
-  </KunTooltip>
+  <KunButton
+    variant="light"
+    color="danger"
+    size="sm"
+    @click="handleDeleteReply"
+    class-name="whitespace-nowrap gap-2 justify-start"
+    :disabled="id !== reply.user.id"
+  >
+    <KunIcon class-name="text-lg" name="lucide:trash-2" />
+    删除回复
+  </KunButton>
 </template>

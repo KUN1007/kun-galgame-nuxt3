@@ -12,8 +12,12 @@ model topic {
     edited             DateTime?
     upvote_time        DateTime?
 
-    user_id Int
-    user    user @relation("user_topic", fields: [user_id], references: [id], onDelete: Cascade)
+    user_id         Int
+    user            user         @relation("user_topic", fields: [user_id], references: [id], onDelete: Cascade)
+    best_answer_id  Int?         @unique
+    best_answer     topic_reply? @relation("best_answer_for_topic", fields: [best_answer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    pinned_reply_id Int?         @unique
+    pinned_reply    topic_reply? @relation("pinned_reply_for_topic", fields: [pinned_reply_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
     reply   topic_reply[]
     comment topic_comment[]

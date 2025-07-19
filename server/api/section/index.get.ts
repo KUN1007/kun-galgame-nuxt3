@@ -39,6 +39,7 @@ const getSectionTopic = async (input: z.infer<typeof getSectionSchema>) => {
       }
     },
     include: {
+      best_answer: true,
       user: {
         select: {
           id: true,
@@ -75,6 +76,7 @@ const getSectionTopic = async (input: z.infer<typeof getSectionSchema>) => {
     like: topic._count.like,
     reply: topic._count.reply,
     user: topic.user,
+    hasBestAnswer: !!topic.best_answer,
     created: topic.created
   }))
 

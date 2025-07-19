@@ -21,7 +21,11 @@ const actionsCount = computed(
       {{ topic.title }}
     </h3>
 
-    <TopicTagGroup :section="props.topic.section" :tags="props.topic.tag" />
+    <TopicTagGroup
+      :section="props.topic.section"
+      :tags="props.topic.tag"
+      :has-best-answer="topic.hasBestAnswer"
+    />
 
     <div class="text-default-700 flex items-center gap-4 text-sm">
       <span class="flex items-center gap-1 text-inherit">
