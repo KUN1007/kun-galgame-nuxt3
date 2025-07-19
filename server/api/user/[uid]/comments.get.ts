@@ -9,13 +9,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
-  const userInfo = await getCookieTokenInfo(event)
-  if (!userInfo) {
-    return kunError(event, '用户登录失效', 205)
-  }
-  const userId = userInfo.uid
-
-  const { page, limit, type } = input
+  const { userId, page, limit, type } = input
   const skip = (page - 1) * limit
 
   let whereClause: Prisma.topic_commentWhereInput = {}

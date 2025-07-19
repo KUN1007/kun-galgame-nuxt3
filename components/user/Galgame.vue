@@ -13,7 +13,8 @@ const activeTab = ref(props.type)
 const pageData = reactive({
   page: 1,
   limit: 24,
-  type: props.type
+  type: props.type,
+  userId: props.uid
 })
 
 const { data, status } = await useFetch(`/api/user/${props.uid}/galgames`, {

@@ -13,24 +13,28 @@ export const getUserInfoSchema = z.object({
 })
 
 export const getUserTopicSchema = z.object({
+  userId: z.coerce.number().min(1).max(9999999),
   page: z.coerce.number().min(1).max(9999999),
   limit: z.coerce.number().min(1).max(50),
   type: z.enum(KUN_USER_PAGE_TOPIC_TYPE)
 })
 
 export const getUserReplySchema = z.object({
+  userId: z.coerce.number().min(1).max(9999999),
   page: z.coerce.number().min(1).max(9999999),
   limit: z.coerce.number().min(1).max(50),
   type: z.enum(KUN_USER_PAGE_REPLY_TYPE)
 })
 
 export const getUserCommentSchema = z.object({
+  userId: z.coerce.number().min(1).max(9999999),
   page: z.coerce.number().min(1).max(9999999),
   limit: z.coerce.number().min(1).max(50),
   type: z.enum(KUN_USER_PAGE_COMMENT_TYPE)
 })
 
 export const getUserGalgameSchema = z.object({
+  userId: z.coerce.number().min(1).max(9999999),
   page: z.coerce.number().min(1).max(9999999),
   limit: z.coerce.number().min(1).max(24),
   type: z.enum(KUN_USER_PAGE_GALGAME_TYPE)
