@@ -111,7 +111,14 @@ const handleCreateWebsite = async (
         <div class="space-y-3">
           <p class="text-default-500">
             当前本页面正在不断更新中, 默认仅显示 SFW 的网站, 查看 NSFW
-            网站请在设置面板打开 NSFW 开关。如果有数据错误请
+            网站请在设置面板打开 NSFW 开关。
+          </p>
+          <p class="text-default-500">
+            关于 Galgame 网站 Wiki 请查看
+            <KunLink to="/doc/galgame/galgame-website-wiki">
+              Galgame 网站 Wiki
+            </KunLink>
+            , 如果有数据错误请
             <KunLink to="/doc/notice/contact"> 联系我们 </KunLink>。
           </p>
           <KunInput

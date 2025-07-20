@@ -18,9 +18,9 @@ pin: true
 
 那么我们在此推出一个重磅的页面, 那就是 [Galgame 网站 Wiki](/website)
 
-字面意思, Galgame 网站 Wiki 只会收录 Galgame 网站 (后续如果拓展可能会支持 ACG 类 / 技术类网站, 当然那个时候网站会被从论坛中分出)
+字面意思, [Galgame 网站 Wiki](/website) 只会收录 Galgame 网站 (后续如果拓展可能会支持 ACG 类 / 技术类网站, 当然那个时候网站会被从论坛中分出)
 
-Galgame 网站 Wiki 中介绍的所有网站, 均有一个特点, 那就是无任何付费行为, 我们认为这是建立一个 Galgame 网站的根本原则
+[Galgame 网站 Wiki](/website) 中介绍的所有网站, 均有一个特点, 那就是无任何付费行为, 我们认为这是建立一个 Galgame 网站的根本原则
 
 ## Galgame 网站评判标准
 
@@ -568,6 +568,6 @@ Galgame 网站类型只是一个 Galgame 网站的标签, 这和 Galgame 网站�
 
 ## Galgame 网站收录
 
-我们的 Galgame 网站 Wiki 依然在不断的扩大着, 之后也还会持续不断的收录各种类型的 Galgame 网站
+我们的 [Galgame 网站 Wiki](/website) 依然在不断的扩大着, 之后也还会持续不断的收录各种类型的 Galgame 网站
 
 如果您有推荐的, 好的 Galgame 网站, 或者有 Galgame 网站信息错误想要请我们修正, 都欢迎 [加入我们](/doc/notice/contact)
