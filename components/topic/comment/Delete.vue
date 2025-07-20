@@ -12,7 +12,8 @@ const emits = defineEmits<{
 const { id, moemoepoint, role } = usePersistUserStore()
 
 const isCommonUser = role < 2
-const isDisabled = computed(() => id !== props.comment.user.id && isCommonUser)
+const isAdmin = role > 1
+const canDelete = computed(() => id === props.comment.user.id || isAdmin)
 
 const handleDeleteComment = async () => {
   const moemoepointToDecrease = 3 * (props.comment.likeCount + 1)
@@ -53,11 +54,11 @@ const handleDeleteComment = async () => {
 
 <template>
   <KunButton
+    v-if="canDelete"
     :is-icon-only="true"
     variant="light"
     color="danger"
     @click="handleDeleteComment"
-    :disabled="isDisabled"
   >
     <KunIcon name="lucide:trash-2" />
   </KunButton>

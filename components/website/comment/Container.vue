@@ -19,6 +19,13 @@ const handlePublishSuccess = (newComment: WebsiteComment) => {
   comments.value = [newComment, ...comments.value]
   nextTick(() => scrollIntoComment(newComment.id))
 }
+
+const handleRemoveComment = (commentId: number) => {
+  const index = comments.value.findIndex((c) => c.id === commentId)
+  if (index !== -1) {
+    comments.value.splice(index, 1)
+  }
+}
 </script>
 
 <template>
@@ -42,6 +49,7 @@ const handlePublishSuccess = (newComment: WebsiteComment) => {
         :comments="comments"
         :website-id="websiteId"
         @set-new-comment="handlePublishSuccess"
+        @remove-comment="handleRemoveComment"
       />
     </div>
   </KunCard>

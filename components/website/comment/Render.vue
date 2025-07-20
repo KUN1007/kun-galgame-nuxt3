@@ -13,6 +13,7 @@ withDefaults(
 
 const emits = defineEmits<{
   setNewComment: [comment: WebsiteComment]
+  removeComment: [commentId: number]
 }>()
 
 const replyTo = ref<number | null>(null)
@@ -84,9 +85,16 @@ const handleCommitNewComment = (comment: WebsiteComment) => {
             {{ com.content }}
           </p>
 
-          <KunButton @click="handleClickReply(com)" size="sm" variant="flat">
-            回复
-          </KunButton>
+          <div class="flex gap-1">
+            <KunButton @click="handleClickReply(com)" size="sm" variant="flat">
+              回复
+            </KunButton>
+
+            <WebsiteCommentDelete
+              @remove-comment="(commentId) => emits('removeComment', commentId)"
+              :comment="com"
+            />
+          </div>
         </div>
       </div>
 
