@@ -3,6 +3,7 @@ import {
   updateGalgameSchema,
   updateGalgamePrMergeSchema
 } from '~/validations/galgame'
+import { resyncVndbData } from '../../_syncVndb'
 import type { z } from 'zod'
 
 export default defineEventHandler(async (event) => {
@@ -22,7 +23,8 @@ export default defineEventHandler(async (event) => {
     include: {
       galgame: {
         select: {
-          user_id: true
+          user_id: true,
+          vndb_id: true
         }
       }
     }
@@ -46,6 +48,14 @@ export default defineEventHandler(async (event) => {
   const galgameId = galgamePR.galgame_id
 
   return await prisma.$transaction(async (prisma) => {
+    if (galgamePR.galgame.vndb_id !== prJSONObject.vndbId) {
+      await resyncVndbData(prisma, {
+        galgameId,
+        newVndbId: prJSONObject.vndbId,
+        userId: uid
+      })
+    }
+
     await prisma.galgame_pr.update({
       where: { id: input.galgamePrId },
       data: {

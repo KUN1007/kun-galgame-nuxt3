@@ -74,8 +74,8 @@ export default defineEventHandler(async (event) => {
 
       await syncVndbData(prisma, {
         galgameId: newGalgame.id,
-        userId: uid,
-        vndbId: result.vndbId
+        vndbId: result.vndbId,
+        userId: uid
       })
 
       await prisma.galgame_alias.createMany({

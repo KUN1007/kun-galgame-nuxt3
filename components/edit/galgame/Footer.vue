@@ -77,7 +77,12 @@ const handlePublishGalgame = async () => {
 
 <template>
   <div class="flex justify-end">
-    <KunButton size="lg" @click="handlePublishGalgame">
+    <KunButton
+      :disabled="isPublishing"
+      :loading="isPublishing"
+      size="lg"
+      @click="handlePublishGalgame"
+    >
       确认发布 Galgame
     </KunButton>
   </div>

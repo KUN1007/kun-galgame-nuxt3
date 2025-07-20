@@ -240,3 +240,42 @@ export const syncVndbData = async (
     throw new Error('VNDB sync failed, transaction will be rolled back.')
   }
 }
+
+export const resyncVndbData = async (
+  prisma: PrismaTransactionClient,
+  {
+    galgameId,
+    newVndbId,
+    userId
+  }: { galgameId: number; newVndbId: string; userId: number }
+) => {
+  await prisma.galgame_tag_relation.deleteMany({
+    where: { galgame_id: galgameId }
+  })
+  await prisma.galgame_engine_relation.deleteMany({
+    where: { galgame_id: galgameId }
+  })
+  await prisma.galgame_official_relation.deleteMany({
+    where: { galgame_id: galgameId }
+  })
+
+  await prisma.galgame_link.deleteMany({
+    where: {
+      galgame_id: galgameId
+    }
+  })
+  await prisma.galgame_link.create({
+    data: {
+      galgame_id: galgameId,
+      user_id: userId,
+      name: 'VNDB',
+      link: `https://vndb.org/${newVndbId}`
+    }
+  })
+
+  await syncVndbData(prisma, {
+    galgameId: galgameId,
+    vndbId: newVndbId,
+    userId: userId
+  })
+}

@@ -1,6 +1,7 @@
 import prisma from '~/prisma/prisma'
 import { updateGalgameSchema } from '~/validations/galgame'
 import { formatDate } from '~/utils/time'
+import { resyncVndbData } from '../../_syncVndb'
 
 export default defineEventHandler(async (event) => {
   const input = await kunParsePostBody(event, updateGalgameSchema)
@@ -19,6 +20,18 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '读取 Galgame ID 失败')
   }
   const galgameId = Number(gid)
+
+  if (input.vndbId) {
+    const duplicateGalgame = await prisma.galgame.findFirst({
+      where: {
+        vndb_id: input.vndbId,
+        id: { not: galgameId }
+      }
+    })
+    if (duplicateGalgame) {
+      return kunError(event, '新 VNDB ID 的 Galgame 已经有人发布过了')
+    }
+  }
 
   const originalGalgame = await prisma.galgame.findUnique({
     where: { id: galgameId },
@@ -50,6 +63,14 @@ export default defineEventHandler(async (event) => {
 
   return await prisma.$transaction(async (prisma) => {
     if (uid === originalGalgame.user_id || userInfo.role > 1) {
+      if (originalGalgame.vndb_id !== input.vndbId) {
+        await resyncVndbData(prisma, {
+          galgameId,
+          newVndbId: input.vndbId,
+          userId: uid
+        })
+      }
+
       const { vndbId, contentLimit, aliases, ...rest } = input
       await prisma.galgame.update({
         where: { id: galgameId },

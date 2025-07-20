@@ -1,6 +1,6 @@
 model galgame {
   id                   Int      @id @default(autoincrement())
-  vndb_id              String   @db.VarChar(10)
+  vndb_id              String   @unique @db.VarChar(10)
   name_en_us           String   @default("") @db.VarChar(1000)
   name_ja_jp           String   @default("") @db.VarChar(1000)
   name_zh_cn           String   @default("") @db.VarChar(1000)

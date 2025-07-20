@@ -62,6 +62,13 @@ const handlePublishGalgamePR = async () => {
 
 <template>
   <div class="flex justify-end">
-    <KunButton size="lg" @click="handlePublishGalgamePR">确定发布</KunButton>
+    <KunButton
+      :disabled="isPublishing"
+      :loading="isPublishing"
+      size="lg"
+      @click="handlePublishGalgamePR"
+    >
+      确定发布
+    </KunButton>
   </div>
 </template>
