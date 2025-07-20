@@ -1,7 +1,7 @@
 ---
 title: 'Galgame 资源网站大全'
 banner: '/content/galgame/galgame-resource-website/banner.avif'
-description: '本指南汇总了多个优质 Galgame 资源网站，按不同层级分类，帮助玩家快速获取游戏。T0 级别包括 Nyaa，是最全面的 Galgame 资源站。T1 级别推荐 Anime-Sharing（AS 论坛）和 绯月论坛（KF），前者资源丰富，后者为中文 Galgame 交流的核心。T2 级别涵盖网盘下载站，如 梓澪姐姐的网站，提供 PC、KRKR、RPG 等资源。特殊站点包括 Moyu.moe（补丁下载）和 Telegram 群组（如黄油联盟 bot），提供自动化搜索服务。此外，Kungal.com 是开源、无广告的独特站点，并计划未来推出 Galgame 网站索引。'
+description: '本指南汇总了多个优质 Galgame 资源网站，按推荐等级分为 SSS、T0 到 T3 多个级别。文章首推 “Galgame 网站 Wiki” 作为最全面的资源索引平台。T0 级别包括 Nyaa，是最全面的 Galgame 资源站。T1 级别推荐 Anime-Sharing（AS 论坛）和 绯月论坛（KF），前者资源丰富，后者为中文 Galgame 交流的核心。T2 级别涵盖网盘下载站，如 zi0.cc。特殊站点包括 Moyu.moe（补丁下载）和 Telegram 群组（如黄油联盟 bot），提供自动化搜索服务。此外，Kungal.com 是开源、无广告的独特站点。'
 publishedTime: 2024-05-03
 modifiedTime: 2025-07-21
 category: galgame
@@ -19,6 +19,16 @@ pin: true
 https://www.google.com/
 
 遇事首先 Google，否则就 Bing，养成根据蛛丝马迹搜索到资源的能力，自给自足
+
+## SSS
+
+首先请您务必知道, 世界上一切 Galgame 网站的 Wiki 站, 就是 Galgame 资源网站 Wiki, 这是 T0 之上的最高级别, 一定要被了解的 Galgame 网站
+
+[https://www.kungal.com/website](/website)
+
+这里记录了世界上绝大多数免费无门槛体验良好的 Galgame 网站的信息, 并提供了详细的价值解释和报告, 您可以在这个网站找到您想要的 Galgame 网站的一切
+
+Galgame 网站 Wiki 只收录各种 Galgame 类型的网站, 例如 Galgame 资源网站, Galgame 补丁网站, Galgame 信息网站, Galgame 数据库等等
 
 ## T0
 
