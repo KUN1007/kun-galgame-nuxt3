@@ -12,13 +12,26 @@ const generateKunSitemap = async () => {
   try {
     const pages = await glob([
       'pages/**/*.vue',
+      '!pages/category.vue',
+      '!pages/message.vue',
+      '!pages/ranking.vue',
+      '!pages/update.vue',
+      '!pages/user.vue',
       '!pages/doc/*.vue',
+      '!pages/user/**/*.vue',
+      '!pages/edit/**/*.vue',
+      '!pages/message/**/*.vue',
       '!pages/category/*.vue',
       '!pages/galgame/[gid]/*.vue',
-      '!pages/message/*.vue',
       '!pages/section/*.vue',
-      '!pages/topic/[tid]/*.vue',
-      '!pages/user/**/*.vue'
+      '!pages/topic/[id]/*.vue',
+      '!pages/galgame-engine/[id].vue',
+      '!pages/galgame-official/[id].vue',
+      '!pages/galgame-series/[id].vue',
+      '!pages/galgame-tag/[id].vue',
+      '!pages/website/[domain].vue',
+      '!pages/website-category/[name].vue',
+      '!pages/website-tag/[name].vue'
     ])
 
     const categoryRoutes = kunCategoryAvailableItem.map((category) => ({

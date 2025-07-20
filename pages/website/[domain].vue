@@ -89,23 +89,29 @@ const jsonLd = computed<WithContext<Article> | null>(() => {
 })
 
 if (data.value) {
-  useHead({
-    script: [
-      {
-        id: 'schema-org-website',
-        type: 'application/ld+json',
-        innerHTML: JSON.parse(DOMPurify.sanitize(JSON.stringify(jsonLd.value)))
-      }
-    ]
-  })
+  if (data.value.ageLimit === 'all') {
+    useHead({
+      script: [
+        {
+          id: 'schema-org-website',
+          type: 'application/ld+json',
+          innerHTML: JSON.parse(
+            DOMPurify.sanitize(JSON.stringify(jsonLd.value))
+          )
+        }
+      ]
+    })
 
-  useKunSeoMeta({
-    title: data.value.name,
-    description: data.value.description,
-    ogImage: data.value.icon,
-    articlePublishedTime: data.value.created.toString(),
-    articleModifiedTime: data.value.updated.toString()
-  })
+    useKunSeoMeta({
+      title: data.value.name,
+      description: data.value.description,
+      ogImage: data.value.icon,
+      articlePublishedTime: data.value.created.toString(),
+      articleModifiedTime: data.value.updated.toString()
+    })
+  } else {
+    useKunDisableSeo(data.value.name)
+  }
 }
 </script>
 

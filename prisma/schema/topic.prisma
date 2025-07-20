@@ -49,8 +49,8 @@ model topic_section_relation {
     topic_section_id Int
     topic_section    topic_section @relation(fields: [topic_section_id], references: [id], onDelete: Cascade)
 
-    created_at DateTime @default(now())
-    updated_at DateTime @updatedAt
+    created DateTime @default(now())
+    updated DateTime @updatedAt
 
     @@id([topic_id, topic_section_id])
 }
