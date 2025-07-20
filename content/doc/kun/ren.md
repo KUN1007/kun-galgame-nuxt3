@@ -77,9 +77,9 @@ pin: true
 
 ## 来点莲图
 
-<img src='/content/kun/ren/ren1.avif' />
+![](/content/kun/ren/ren1.avif)
 
-<img src='/content/kun/ren/ren2.avif' />
+![](/content/kun/ren/ren2.avif)
 
 ## 车牌号
 

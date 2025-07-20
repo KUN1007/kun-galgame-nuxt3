@@ -32,7 +32,7 @@ useKunSeoMeta({
     :is-hoverable="false"
     :is-transparent="false"
     v-if="post"
-    class-name="pb-6 min-h-[calc(100dvh-6rem)]"
+    class-name="backdrop-blur-none pb-6 min-h-[calc(100dvh-6rem)]"
   >
     <DocDetailBackgroundImage :src="post.banner" />
 
