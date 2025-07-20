@@ -5,7 +5,6 @@ export const useTopicSubmitter = () => {
   const { category, section, tags, title, content } = useTopicEditorStore()
   const tempStore = useTempEditStore()
   const persistStore = usePersistEditTopicStore()
-  const router = useRouter()
 
   const isSubmitting = ref(false)
   const isRewriteMode = computed(() => tempStore.isTopicRewriting)
@@ -50,7 +49,7 @@ export const useTopicSubmitter = () => {
       })
       useKunLoliInfo('重新编辑成功', 5)
       tempStore.resetRewriteTopicData()
-      await router.push(`/topic/${topicId}`)
+      await navigateTo(`/topic/${topicId}`)
     } else {
       const tid = await $fetch('/api/topic', {
         method: 'POST',
@@ -61,7 +60,7 @@ export const useTopicSubmitter = () => {
       if (tid) {
         useKunLoliInfo('发布成功', 5)
         persistStore.resetTopicData()
-        await router.push(`/topic/${tid}`)
+        await navigateTo(`/topic/${tid}`)
       }
     }
     isSubmitting.value = false

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { KunTabItem, KunTabVariant, KunTabColor, KunTabSize } from './type'
 
-const router = useRouter()
-
 const props = withDefaults(
   defineProps<{
     items: KunTabItem[]
@@ -97,12 +95,12 @@ const sizeClasses = computed(() => {
   return sizeMap[props.size]
 })
 
-const handleTabClick = (item: KunTabItem) => {
+const handleTabClick = async (item: KunTabItem) => {
   if (props.disabled || item.disabled) {
     return
   }
   if (item.href) {
-    router.push(item.href)
+    await navigateTo(item.href)
   }
 
   emit('update:modelValue', item.value)

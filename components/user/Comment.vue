@@ -61,7 +61,7 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/comments`, {
 
     <KunNull
       v-if="data && !data.comments.length"
-      description="这只萝莉没有发布过任何 Galgame 资源"
+      description="这只笨蛋萝莉没有发布过任何评论"
     />
   </div>
 </template>

@@ -7,8 +7,6 @@ const props = defineProps<{
   isNav?: boolean
 }>()
 
-const router = useRouter()
-
 const sortedTags = computed(() => {
   if (!props.tags || !props.tags.length) {
     return []
@@ -74,9 +72,9 @@ const tagVariant = (tag: WebsiteTag) => {
   }
 }
 
-const handleClick = (tagName: string) => {
+const handleClick = async (tagName: string) => {
   if (props.isNav) {
-    router.push(`/website-tag/${tagName}`)
+    await navigateTo(`/website-tag/${tagName}`)
   }
 }
 </script>

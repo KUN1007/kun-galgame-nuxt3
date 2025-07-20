@@ -12,7 +12,6 @@ const emits = defineEmits<{
 
 type WebsiteData = (CreateWebsitePayload & { websiteId?: number }) | undefined
 
-const router = useRouter()
 const { id, role } = usePersistUserStore()
 
 const isLiked = ref(props.website.isLiked)
@@ -114,7 +113,7 @@ const handleDelete = () =>
 
     if (result) {
       useMessage('删除网站成功', 'success')
-      router.push('/website')
+      await navigateTo('/website')
     }
   })
 

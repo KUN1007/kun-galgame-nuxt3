@@ -9,7 +9,8 @@ export const TOPIC_NAV_CONFIG: Record<
   topic: { text: '已发布', path: 'topic' },
   topic_like: { text: '已点赞', path: 'topic-like' },
   topic_upvote: { text: '已推', path: 'topic-upvote' },
-  topic_favorite: { text: '已收藏', path: 'topic-favorite' }
+  topic_favorite: { text: '已收藏', path: 'topic-favorite' },
+  topic_hide: { text: '已隐藏', path: 'topic-hide' }
 }
 
 export const REPLY_NAV_CONFIG: Record<
@@ -117,7 +118,8 @@ export const KUN_USER_PAGE_TOPIC_TYPE = [
   'topic',
   'topic_like',
   'topic_upvote',
-  'topic_favorite'
+  'topic_favorite',
+  'topic_hide'
 ] as const
 
 export const KUN_USER_PAGE_REPLY_TYPE = [

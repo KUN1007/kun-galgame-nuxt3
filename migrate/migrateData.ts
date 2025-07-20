@@ -256,7 +256,7 @@ async function migrateUsers() {
             avatar: doc.avatar ?? '',
             role: doc.roles ?? 1,
             status: doc.status ?? 0,
-            moemoepoint: doc.moemoepoint ?? 7,
+            moemoepoint: doc.moemoepoint ? doc.moemoepoint - 1000 : 7,
             bio: doc.bio ?? '',
             daily_check_in: doc.daily_check_in ?? 0,
             daily_image_count: doc.daily_image_count ?? 0,

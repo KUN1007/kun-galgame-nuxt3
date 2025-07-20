@@ -23,10 +23,17 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '您没有权限隐藏该话题')
   }
 
-  await prisma.topic.update({
-    where: { id: input.topicId },
-    data: { status: 1 }
-  })
+  if (topic.status === 1) {
+    await prisma.topic.update({
+      where: { id: input.topicId },
+      data: { status: 0 }
+    })
+  } else {
+    await prisma.topic.update({
+      where: { id: input.topicId },
+      data: { status: 1 }
+    })
+  }
 
-  return 'Moemoe hide topic successfully!'
+  return 'Moemoe update topic status successfully!'
 })

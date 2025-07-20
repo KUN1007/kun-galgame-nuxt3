@@ -11,30 +11,61 @@ export default defineEventHandler(async (event) => {
 
   const { userId, page, limit, type } = input
 
-  const whereClause: Prisma.topicWhereInput = { status: { not: 1 } }
+  if (type === 'topic_hide') {
+    const userInfo = await getCookieTokenInfo(event)
+    if (userId !== userInfo?.uid) {
+      return { topics: [], totalCount: 0 }
+    }
+
+    const [topics, totalCount]: [UserTopic[], number] =
+      await prisma.$transaction([
+        prisma.topic.findMany({
+          where: { status: 1, user_id: userInfo.uid },
+          skip: (page - 1) * limit,
+          take: limit,
+          orderBy: {
+            created: 'desc'
+          },
+          select: {
+            id: true,
+            title: true,
+            created: true
+          }
+        }),
+
+        prisma.topic.count({ where: { status: 1, user_id: userInfo.uid } })
+      ])
+
+    return {
+      topics,
+      totalCount
+    }
+  }
+
+  const where: Prisma.topicWhereInput = { status: { not: 1 } }
 
   switch (type) {
     case 'topic':
-      whereClause.user_id = userId
+      where.user_id = userId
       break
 
     case 'topic_like':
-      whereClause.like = { some: { user_id: userId } }
+      where.like = { some: { user_id: userId } }
       break
 
     case 'topic_upvote':
-      whereClause.upvote = { some: { user_id: userId } }
+      where.upvote = { some: { user_id: userId } }
       break
 
     case 'topic_favorite':
-      whereClause.favorite = { some: { user_id: userId } }
+      where.favorite = { some: { user_id: userId } }
       break
   }
 
   const [topics, totalCount]: [UserTopic[], number] = await prisma.$transaction(
     [
       prisma.topic.findMany({
-        where: whereClause,
+        where,
         skip: (page - 1) * limit,
         take: limit,
         orderBy: {
@@ -47,7 +78,7 @@ export default defineEventHandler(async (event) => {
         }
       }),
 
-      prisma.topic.count({ where: whereClause })
+      prisma.topic.count({ where })
     ]
   )
 

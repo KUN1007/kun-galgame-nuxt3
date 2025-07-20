@@ -8,7 +8,7 @@ const topicUserId = inject<number>('topicUserId')
 
 const isDisabled = role < 2 && topicUserId !== id
 
-const handleUpdateTopicBestAnswer = async () => {
+const handleUpdateTopicHideStatus = async () => {
   const res = await useComponentMessageStore().alert(
     '八嘎杂鱼笨蛋萝莉, 你要隐藏该话题吗, 隐藏后此话题任何人都不可见, 您可以在您的主页重新启用被隐藏的话题'
   )
@@ -35,7 +35,7 @@ const handleUpdateTopicBestAnswer = async () => {
     color="danger"
     size="sm"
     :disabled="isDisabled"
-    @click="handleUpdateTopicBestAnswer"
+    @click="handleUpdateTopicHideStatus"
     class-name="whitespace-nowrap gap-2 justify-start"
   >
     <KunIcon class-name="text-lg" name="lucide:ban" />
