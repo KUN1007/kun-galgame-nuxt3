@@ -28,7 +28,7 @@ defineProps<{
         <KunAvatar
           size="xl"
           :user="{
-            uid: metadata.authorUid,
+            id: metadata.authorUid,
             name: metadata.authorName,
             avatar: metadata.authorAvatar
           }"

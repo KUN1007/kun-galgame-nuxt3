@@ -51,7 +51,11 @@ useKunSeoMeta({
         <DocDetailFooter />
       </article>
 
-      <DocDetailTableOfContent :toc="post.body.toc" />
+      <div>
+        <div class="fixed -translate-x-67">
+          <DocDetailTableOfContent :toc="post.body.toc" />
+        </div>
+      </div>
     </div>
   </KunCard>
 </template>

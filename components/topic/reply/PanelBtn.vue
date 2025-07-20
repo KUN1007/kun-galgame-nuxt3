@@ -114,7 +114,7 @@ const handleCancel = () => {
 <template>
   <div class="flex justify-between gap-1">
     <KunTooltip class-name="flex" text="设置面板帮助" position="bottom">
-      <KunLink size="sm" underline="hover">
+      <KunLink to="/doc/help/reply-panel-help" size="sm" underline="hover">
         回复面板使用帮助
         <KunIcon name="lucide:circle-help" />
       </KunLink>
