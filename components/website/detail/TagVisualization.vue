@@ -234,13 +234,11 @@ const getBackgroundColor = (color: string): string => {
       </KunCard>
     </div>
 
-    <div class="bg-info-50 space-y-2 rounded-lg p-3">
-      <h4 class="text-info-900 font-medium">评分说明</h4>
-      <p class="text-info-800 text-sm">
-        评分基于网站的各项指标, 包括广告程度、资源数量、更新频率等。
-        正分表示优质特性, 负分表示存在问题。总分越高表示网站质量越好, 超过 100
-        分的网站已经很不错了。
-      </p>
+    <KunInfo
+      title="评分说明"
+      color="info"
+      description="评分基于网站的各项指标, 包括广告程度、资源数量、更新频率等。正分表示优质特性, 负分表示存在问题。总分越高表示网站质量越好, 超过 100 分的网站已经很不错了。"
+    >
       <p class="text-info-800 text-sm">
         评分数值仅供参考, 如果您对此评分或者网站数据有任何问题, 欢迎评论或
         <KunLink size="sm" to="/doc/notice/contact"> 联系我们 </KunLink>。
@@ -248,6 +246,6 @@ const getBackgroundColor = (color: string): string => {
       <KunButton variant="flat" size="sm" @click="isShowDetail = !isShowDetail">
         展开网站价值分析详情
       </KunButton>
-    </div>
+    </KunInfo>
   </div>
 </template>
