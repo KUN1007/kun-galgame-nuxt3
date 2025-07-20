@@ -1,6 +1,5 @@
 import fs from 'fs'
 import path from 'path'
-
 import { TAG_MAP } from '~/lib/tagMap'
 import { fileURLToPath } from 'url'
 import { PrismaClient } from '@prisma/client'
