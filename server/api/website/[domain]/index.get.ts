@@ -16,6 +16,13 @@ export default defineEventHandler(async (event) => {
     include: {
       like: { where: { user_id: uid } },
       favorite: { where: { user_id: uid } },
+      comment: {
+        include: {
+          user: {
+            select: { id: true, name: true, avatar: true }
+          }
+        }
+      },
       category: true,
       tag: {
         include: {
@@ -54,6 +61,7 @@ export default defineEventHandler(async (event) => {
     favoriteCount: data._count.favorite,
     isFavorited: data.favorite.length > 0,
     createTime: data.create_time,
+    comment: data.comment,
     created: data.created,
     updated: data.updated
   }
