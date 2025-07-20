@@ -3,6 +3,7 @@ import env from '~/server/env/dotenv'
 import { uploadGalgameBanner } from './utils/uploadGalgameBanner'
 import prisma from '~/prisma/prisma'
 import { createGalgameSchema } from '~/validations/galgame'
+import { syncVndbData } from './_syncVndb'
 import type { H3Event } from 'h3'
 
 const readGalgameData = async (event: H3Event) => {
@@ -69,6 +70,12 @@ export default defineEventHandler(async (event) => {
           content_limit: result.contentLimit,
           user_id: uid
         }
+      })
+
+      await syncVndbData(prisma, {
+        galgameId: newGalgame.id,
+        userId: uid,
+        vndbId: result.vndbId
       })
 
       await prisma.galgame_alias.createMany({
