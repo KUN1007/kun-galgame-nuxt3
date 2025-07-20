@@ -123,7 +123,11 @@ const handleUpdateOfficial = async (data: UpdateGalgameOfficialPayload) => {
       @submit="handleUpdateOfficial"
     />
 
-    <GalgameCard v-if="data.galgame.length" :galgames="data.galgame" />
+    <GalgameCard
+      :is-transparent="true"
+      v-if="data.galgame.length"
+      :galgames="data.galgame"
+    />
 
     <KunPagination
       v-if="data.galgameCount > pageData.limit"

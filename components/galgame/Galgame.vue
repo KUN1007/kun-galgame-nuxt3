@@ -87,6 +87,14 @@ provide<GalgameDetail>('galgame', props.galgame)
             </KunTooltip>
           </div>
         </KunCard>
+
+        <div class="text-default-500 flex items-center justify-center text-sm">
+          部分页面数据由
+          <KunLink size="sm" target="_blank" to="https://vndb.org">
+            VNDB
+          </KunLink>
+          提供
+        </div>
       </div>
     </div>
   </div>

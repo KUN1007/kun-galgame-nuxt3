@@ -38,6 +38,6 @@ defineProps<{
       </template>
     </KunHeader>
 
-    <GalgameCard :galgames="data.galgame" />
+    <GalgameCard :is-transparent="true" :galgames="data.galgame" />
   </KunCard>
 </template>

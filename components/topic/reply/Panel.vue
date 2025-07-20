@@ -43,7 +43,7 @@ const handleRemoveTarget = (id: number) => {
         v-if="isEdit && currentData"
       >
         <div
-          class="bg-background scrollbar-hide w-full max-w-4xl space-y-2 overflow-scroll rounded-t-lg p-3 shadow-2xl"
+          class="bg-content1/85 scrollbar-hide w-full max-w-4xl space-y-2 overflow-scroll rounded-t-lg p-3 shadow-2xl"
         >
           <div class="scrollbar-hide flex items-center gap-1 overflow-x-auto">
             <KunButton

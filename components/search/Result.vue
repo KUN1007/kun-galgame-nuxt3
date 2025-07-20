@@ -36,7 +36,11 @@ const isCommentResults = (
       </KunCard>
     </div>
 
-    <GalgameCard v-if="isGalgameResults(results)" :galgames="results" />
+    <GalgameCard
+      :is-transparent="true"
+      v-if="isGalgameResults(results)"
+      :galgames="results"
+    />
 
     <div v-if="isUserResults(results)" class="space-y-3">
       <SearchUserCard

@@ -174,6 +174,12 @@ const handleGetVNData = async () => {
 
       <EditGalgamePrAlias type="create" />
 
+      <KunInfo
+        title="其它 Galgame 信息"
+        description="我们在发布 Galgame 时会自动为您添加所有的 Galgame 标签、Galgame 会社、Galgame 引擎 等信息, 您无需关心这些信息"
+        color="info"
+      />
+
       <EditGalgameFooter />
     </KunCard>
   </ClientOnly>

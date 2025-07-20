@@ -38,6 +38,21 @@ watch(
       (Safe for work)。这将防止社死并有助于网站索引。
     </p>
 
+    <KunInfo
+      color="danger"
+      title="再次请大家注意 NSFW 问题"
+      description="网站目前的 NSFW 认定标准可能比较苛刻, 看起来不能在公司报告大会上放在 PPT 里展示的游戏都是 NSFW ,封面需要打码才能放上去的一律算 NSFW, 总之就是越严越好，可以错杀不可以放过，因为会导致网站违反 Google 或 Bing 的条款"
+    >
+      <p class="text-default-500 text-sm">
+        例如下面两张图就算作 NSFW 的游戏, 有 NSFW 的游戏名或介绍等等也算作 NSFW
+      </p>
+      <div class="flex gap-2">
+        <NuxtImg alt="nsfw-image2" src="/edit/1.avif" :width="200" />
+        <NuxtImg alt="nsfw-image2" src="/edit/2.avif" :width="200" />
+      </div>
+    </KunInfo>
+
+    <p>请注意这个 NSFW 开关, 越严越好, 只要有一点不对立即设置为 NSFW</p>
     <KunSwitch v-model="option" label="开启 NSFW" />
   </div>
 </template>

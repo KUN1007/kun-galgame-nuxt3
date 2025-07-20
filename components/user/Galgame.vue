@@ -38,7 +38,7 @@ const { data, status } = await useFetch(`/api/user/${props.uid}/galgames`, {
     />
 
     <div class="flex flex-col space-y-3" v-if="data && data.galgames.length">
-      <GalgameCard :galgames="data.galgames" />
+      <GalgameCard :is-transparent="true" :galgames="data.galgames" />
 
       <KunPagination
         v-if="data.totalCount > pageData.limit"
