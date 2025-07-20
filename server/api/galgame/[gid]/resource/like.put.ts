@@ -30,24 +30,37 @@ export default defineEventHandler(async (event) => {
   if (!resource) {
     return kunError(event, '未找到该资源')
   }
-  if (resource.like.length > 0) {
-    return kunError(event, '您已经点赞过这个资源了')
+  if (resource.user_id === uid) {
+    return kunError(event, '您不能给自己的资源点赞')
   }
 
+  const isLikedResource = resource.like.length > 0
+
   return await prisma.$transaction(async (prisma) => {
-    await prisma.galgame_resource_like.create({
-      data: {
-        galgame_resource_id: input.galgameResourceId,
-        user_id: uid
-      }
-    })
+    if (isLikedResource) {
+      await prisma.galgame_resource_like.delete({
+        where: {
+          galgame_resource_id_user_id: {
+            user_id: uid,
+            galgame_resource_id: input.galgameResourceId
+          }
+        }
+      })
+    } else {
+      await prisma.galgame_resource_like.create({
+        data: {
+          galgame_resource_id: input.galgameResourceId,
+          user_id: uid
+        }
+      })
+    }
 
     await prisma.user.update({
       where: { id: uid },
-      data: { moemoepoint: { increment: 1 } }
+      data: { moemoepoint: { increment: isLikedResource ? -1 : 1 } }
     })
 
-    await createMessage(
+    await createDedupMessage(
       prisma,
       uid,
       resource.user_id,

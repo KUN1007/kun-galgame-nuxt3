@@ -10,11 +10,6 @@ const isLiked = ref(props.comment.isLiked)
 const likeCount = ref(props.comment.likeCount)
 
 const likeComment = async () => {
-  if (isLiked.value) {
-    useMessage(10217, 'warn')
-    return
-  }
-
   if (id === props.comment.user.id) {
     useMessage(10218, 'warn')
     return
@@ -28,9 +23,15 @@ const likeComment = async () => {
   })
 
   if (result) {
-    likeCount.value++
-    isLiked.value = true
-    useMessage(10219, 'success')
+    likeCount.value += isLiked.value ? -1 : 1
+
+    if (!isLiked.value) {
+      useMessage('点赞评论成功', 'success')
+    } else {
+      useMessage('取消点赞成功', 'success')
+    }
+
+    isLiked.value = !isLiked.value
   }
 }
 

@@ -9,14 +9,9 @@ const props = defineProps<{
 
 const { id } = usePersistUserStore()
 const isLiked = ref(props.isLiked)
-const likesCount = ref(props.likeCount)
+const likeCount = ref(props.likeCount)
 
 const likeResource = async () => {
-  if (isLiked.value) {
-    useMessage(10539, 'warn')
-    return
-  }
-
   const result = await $fetch(`/api/galgame/${props.galgameId}/resource/like`, {
     method: 'PUT',
     body: { galgameResourceId: props.galgameResourceId },
@@ -25,15 +20,26 @@ const likeResource = async () => {
   })
 
   if (result) {
-    likesCount.value++
-    isLiked.value = true
-    useMessage(10530, 'success')
+    likeCount.value += isLiked.value ? -1 : 1
+
+    if (!isLiked.value) {
+      useMessage('点赞资源成功', 'success')
+    } else {
+      useMessage('取消点赞成功', 'success')
+    }
+
+    isLiked.value = !isLiked.value
   }
 }
 
 const handleClickLike = async () => {
   if (!id) {
     useMessage(10532, 'warn', 5000)
+    return
+  }
+
+  if (id === props.targetUserId) {
+    useMessage('您不能给自己点赞', 'warn')
     return
   }
   await likeResource()
@@ -46,12 +52,12 @@ const handleClickLike = async () => {
       :is-icon-only="true"
       :variant="isLiked ? 'flat' : 'light'"
       :color="isLiked ? 'secondary' : 'default'"
-      :size="likesCount ? 'sm' : 'md'"
+      :size="likeCount ? 'sm' : 'md'"
       class-name="gap-1"
       @click="handleClickLike"
     >
       <KunIcon name="lucide:thumbs-up" />
-      <span v-if="likesCount">{{ likesCount }}</span>
+      <span v-if="likeCount">{{ likeCount }}</span>
     </KunButton>
   </KunTooltip>
 </template>

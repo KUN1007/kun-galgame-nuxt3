@@ -176,3 +176,7 @@ export const createCommentSchema = z.object({
 export const updateCommentLikeSchema = z.object({
   commentId: z.coerce.number().min(1).max(9999999)
 })
+
+export const deleteCommentSchema = z.object({
+  commentId: z.coerce.number().min(1).max(9999999)
+})
