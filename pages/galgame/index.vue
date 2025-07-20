@@ -5,15 +5,6 @@ useKunSeoMeta({
   title: 'Galgame 资源 wiki',
   description
 })
-
-useHead({
-  link: [
-    {
-      rel: 'canonical',
-      href: `${kungal.domain.main}/galgame`
-    }
-  ]
-})
 </script>
 
 <template>

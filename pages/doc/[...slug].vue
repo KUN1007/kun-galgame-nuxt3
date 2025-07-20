@@ -13,14 +13,8 @@ useHead({
 useKunSeoMeta({
   title: post.value?.title,
   description: post.value?.description,
-
   ogImage: post.value?.banner,
-  ogUrl: `${kungal.domain.main}${post.value?.path}`,
   ogType: 'article',
-
-  twitterImage: `${kungal.domain.main}${post.value?.banner}`,
-  twitterCard: 'summary_large_image',
-
   articleAuthor: [`${kungal.domain.main}/user/${post.value?.authorUid}/info`],
   articlePublishedTime: post.value?.publishedTime.toString(),
   articleModifiedTime: post.value?.modifiedTime.toString()

@@ -5,15 +5,6 @@ useKunSeoMeta({
   title: '站内动态',
   description
 })
-
-useHead({
-  link: [
-    {
-      rel: 'canonical',
-      href: `${kungal.domain.main}/activity`
-    }
-  ]
-})
 </script>
 
 <template>

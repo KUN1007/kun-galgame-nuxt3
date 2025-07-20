@@ -12,15 +12,6 @@ useKunSeoMeta({
     group.value.map((friend) => friend.link)
   )
 })
-
-useHead({
-  link: [
-    {
-      rel: 'canonical',
-      href: `${kungal.domain.main}/friend-links`
-    }
-  ]
-})
 </script>
 
 <template>

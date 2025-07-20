@@ -3,7 +3,7 @@ import type { KunSiteConfig } from './config'
 const KUN_SITE_NAME = '鲲 Galgame'
 const KUN_SITE_SHORT = '鲲 Galgame 论坛'
 const KUN_SITE_MENTION = '@kungalgame'
-const KUN_SITE_TITLE = '鲲 Galgame 论坛 - 开源 Galgame 网站'
+const KUN_SITE_TITLE = '鲲 Galgame 论坛 🐳 开源 Galgame 网站'
 const KUN_SITE_DESCRIPTION =
   '世界上最萌的 Galgame 论坛! 世界上最先进的 Galgame 资源 Wiki 网站! 永远不会有广告! 永远免费! Next Generation Galgame Website Wiki!'
 const KUN_SITE_URL = 'https://www.kungal.com'
@@ -52,7 +52,7 @@ export const kungal: KunSiteConfig = {
   name: KUN_SITE_NAME,
   title: KUN_SITE_TITLE,
   titleShort: KUN_SITE_SHORT,
-  titleTemplate: `%s 🐳 ${KUN_SITE_TITLE}`,
+  titleTemplate: `%s - ${KUN_SITE_TITLE}`,
   description: KUN_SITE_DESCRIPTION,
   keywords: KUN_SITE_KEYWORDS,
   canonical: KUN_SITE_URL,

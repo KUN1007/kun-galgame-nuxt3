@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import DOMPurify from 'isomorphic-dompurify'
+import type {
+  VideoGame,
+  WithContext,
+  Person,
+  CreativeWorkSeries
+} from 'schema-dts'
+
 const uid = storeToRefs(usePersistUserStore()).id.value
 const route = useRoute()
 
@@ -41,35 +49,89 @@ if (galgame) {
     const jaTitle = galgame.name['ja-jp']
     const title =
       jaTitle && titleBase !== jaTitle ? `${titleBase} | ${jaTitle}` : titleBase
-
+    const pageUrl = `${kungal.domain.main}${route.path}`
     const description = markdownToText(
       getPreferredLanguageText(galgame.markdown)
     )
       .slice(0, 175)
       .replace(/\\|\n/g, '')
 
-    const ogUrl = useRequestURL().href
+    const jsonLd: WithContext<VideoGame> = {
+      '@context': 'https://schema.org',
+      '@type': 'VideoGame',
+      name: titleBase,
+      alternateName: galgame.alias,
+      url: pageUrl,
+      image: galgame.banner,
+      description: description,
+      inLanguage: galgame.originalLanguage,
+      datePublished: new Date(galgame.created).toISOString(),
+      dateModified: new Date(galgame.updated).toISOString(),
+      publisher: galgame.official.map((o) => ({
+        '@type': 'Organization',
+        name: o.name
+      })),
+
+      genre: galgame.tag
+        .filter((t) => t.category === 'content')
+        .map((t) => t.name),
+      keywords: galgame.tag
+        .filter((t) => t.category === 'technical' || t.category === 'sexual')
+        .map((t) => t.name)
+        .join(', '),
+
+      ...(galgame.series && {
+        isPartOf: {
+          '@type': 'CreativeWorkSeries',
+          name: galgame.series.name,
+          url: `${kungal.domain.main}/series/${galgame.series.id}`
+        } satisfies CreativeWorkSeries
+      }),
+
+      interactionStatistic: [
+        {
+          '@type': 'InteractionCounter',
+          interactionType: {
+            '@type': 'LikeAction'
+          },
+          userInteractionCount: galgame.likeCount
+        },
+        {
+          '@type': 'InteractionCounter',
+          interactionType: {
+            '@type': 'WatchAction'
+          },
+          userInteractionCount: galgame.view
+        }
+      ],
+
+      author: {
+        '@type': 'Person',
+        name: galgame.user.name
+      } satisfies Person,
+      contributor: galgame.contributor.map((c) => ({
+        '@type': 'Person',
+        name: c.name
+      })) satisfies Person[]
+    }
+
+    useHead({
+      script: [
+        {
+          id: 'schema-org-video-game',
+          type: 'application/ld+json',
+          innerHTML: JSON.parse(DOMPurify.sanitize(JSON.stringify(jsonLd)))
+        }
+      ]
+    })
 
     useKunSeoMeta({
       title,
       description,
       ogImage: galgame.banner,
-      ogUrl,
-      ogType: 'article',
-      twitterImage: galgame.banner,
-      twitterCard: 'summary_large_image',
       articleAuthor: [`${kungal.domain.main}/user/${galgame.user.id}/info`],
       articlePublishedTime: galgame.created.toString(),
       articleModifiedTime: galgame.updated.toString()
-    })
-
-    useHead({
-      link: [
-        {
-          rel: 'canonical',
-          href: `${kungal.domain.main}/galgame/${galgame.id}`
-        }
-      ]
     })
   }
 } else {

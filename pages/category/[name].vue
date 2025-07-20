@@ -18,15 +18,6 @@ useKunSeoMeta({
   title: KUN_TOPIC_CATEGORY[categoryName.value],
   description: KUN_CATEGORY_DESCRIPTION_MAP[categoryName.value]
 })
-
-useHead({
-  link: [
-    {
-      rel: 'canonical',
-      href: `${kungal.domain.main}/category/${categoryName.value}`
-    }
-  ]
-})
 </script>
 
 <template>
