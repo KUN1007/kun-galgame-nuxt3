@@ -50,7 +50,13 @@ const userAvatarSrc = computed(() => {
 
 <template>
   <div
-    :class="cn('flex shrink-0 cursor-pointer justify-center', className)"
+    :class="
+      cn(
+        'flex shrink-0 cursor-pointer justify-center',
+        'hover:ring-primary-500 rounded-full transition duration-150 ease-in-out hover:ring-2',
+        className
+      )
+    "
     @click="handleClickAvatar($event)"
   >
     <!-- <NuxtImg

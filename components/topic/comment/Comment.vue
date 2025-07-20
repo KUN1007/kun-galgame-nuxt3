@@ -6,6 +6,8 @@ const props = defineProps<{
   commentsData: TopicComment[]
 }>()
 
+const comments = ref(props.commentsData)
+
 const currentUserUid = usePersistUserStore().id
 const {
   replyId: storeReplyId,
@@ -25,18 +27,22 @@ const handleClickComment = (comment: TopicComment) => {
   targetUsername.value = comment.user.name
   isShowPanel.value = !isShowPanel.value
 }
+
+const handleRemoveComment = (commentId: number) => {
+  const index = comments.value.findIndex((c) => c.id === commentId)
+  if (index !== -1) {
+    comments.value.splice(index, 1)
+  }
+}
 </script>
 
 <template>
-  <div
-    v-if="commentsData?.length"
-    class="bg-default-100 space-y-3 rounded-lg p-3"
-  >
+  <div v-if="comments.length" class="bg-default-100 space-y-3 rounded-lg p-3">
     <h3 class="text-lg font-semibold">评论</h3>
 
     <div class="space-y-3">
       <div
-        v-for="(comment, index) in commentsData"
+        v-for="(comment, index) in comments"
         :key="index"
         class="flex items-start space-x-3"
       >
@@ -66,6 +72,11 @@ const handleClickComment = (comment: TopicComment) => {
               >
                 <KunIcon name="uil:comment-dots" />
               </KunButton>
+
+              <TopicCommentDelete
+                @remove-comment="handleRemoveComment"
+                :comment="comment"
+              />
             </div>
           </div>
 
