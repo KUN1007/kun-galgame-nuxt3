@@ -20,3 +20,8 @@ export interface GalgameSeriesDetail extends GalgameSeries {
   description: string
   galgame: GalgameCard[]
 }
+
+export interface GalgameSearchSearchItem {
+  id: number
+  name: string
+}

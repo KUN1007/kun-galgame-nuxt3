@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DOMPurify from 'isomorphic-dompurify'
+import { KUN_WEBSITE_CATEGORY_MAP } from '~/constants/galgameWebsite'
 import type {
   Article,
   WebSite,
@@ -28,7 +29,7 @@ const jsonLd = computed<WithContext<Article> | null>(() => {
   }
 
   const website = data.value
-  const pageUrl = `${kungal.domain.main}/website/${website.domain[0]}`
+  const pageUrl = `${kungal.domain.main}/website/${website.url}`
 
   const publisherSchema: Organization = {
     '@type': 'Organization',
@@ -74,9 +75,10 @@ const jsonLd = computed<WithContext<Article> | null>(() => {
     author: publisherSchema,
     publisher: publisherSchema,
     about: aboutWebsiteSchema,
-    keywords: [website.category.name, ...website.tags.map((t) => t.name)].join(
-      ', '
-    ),
+    keywords: [
+      KUN_WEBSITE_CATEGORY_MAP[website.category.name],
+      ...website.tags.map((t) => t.label)
+    ].join(', '),
     ...(reviewsSchema.length > 0 && { review: reviewsSchema })
   }
 
@@ -90,9 +92,9 @@ if (data.value) {
   useHead({
     script: [
       {
-        id: 'schema-org-video-game',
+        id: 'schema-org-website',
         type: 'application/ld+json',
-        innerHTML: JSON.parse(DOMPurify.sanitize(JSON.stringify(jsonLd)))
+        innerHTML: JSON.parse(DOMPurify.sanitize(JSON.stringify(jsonLd.value)))
       }
     ]
   })

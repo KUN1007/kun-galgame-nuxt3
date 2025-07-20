@@ -1,8 +1,27 @@
 <script setup lang="ts">
+import type { UpdateGalgameSeriesPayload } from '../types'
+
 const { data } = await useFetch('/api/galgame-series', {
   method: 'GET',
   ...kungalgameResponseHandler
 })
+
+const { role } = usePersistUserStore()
+
+const showSeriesModal = ref(false)
+
+const handleCreateSeries = async (data: UpdateGalgameSeriesPayload) => {
+  const result = await $fetch(`/api/galgame-series`, {
+    method: 'POST',
+    watch: false,
+    body: data,
+    ...kungalgameResponseHandler
+  })
+
+  if (result) {
+    useMessage('创建 Galgame 系列成功', 'success')
+  }
+}
 </script>
 
 <template>
@@ -18,8 +37,18 @@ const { data } = await useFetch('/api/galgame-series', {
     >
       <template #endContent>
         <KunSettingPanelComponentsNSFW />
+
+        <div v-if="role > 2" class="flex justify-end">
+          <KunButton @click="showSeriesModal = true">创建系列</KunButton>
+        </div>
       </template>
     </KunHeader>
+
+    <GalgameSeriesModal
+      v-model="showSeriesModal"
+      :initial-data="{} as UpdateGalgameSeriesPayload"
+      @submit="handleCreateSeries"
+    />
 
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
       <GalgameSeriesCard

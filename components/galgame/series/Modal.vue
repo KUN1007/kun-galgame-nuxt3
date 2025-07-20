@@ -1,20 +1,18 @@
 <script setup lang="ts">
 import {
-  createWebsiteTagSchema,
-  updateWebsiteTagSchema
-} from '~/validations/website'
-import type { CreateWebsiteTagPayload, UpdateWebsiteTagPayload } from './types'
-
-type TagData = CreateWebsiteTagPayload & { tagId?: number }
+  createGalgameSeriesSchema,
+  updateGalgameSeriesSchema
+} from '~/validations/galgame-series'
+import type { UpdateGalgameSeriesPayload } from '../types'
 
 const props = defineProps<{
   modelValue: boolean
-  initialData?: TagData
+  initialData?: UpdateGalgameSeriesPayload
 }>()
 
 const emits = defineEmits<{
   'update:modelValue': [value: boolean]
-  submit: [data: CreateWebsiteTagPayload | UpdateWebsiteTagPayload]
+  submit: [data: UpdateGalgameSeriesPayload]
 }>()
 
 const isModalOpen = computed({
@@ -22,18 +20,18 @@ const isModalOpen = computed({
   set: (value) => emits('update:modelValue', value)
 })
 
-const isEditing = computed(() => !!props.initialData?.tagId)
+const isEditing = computed(() => !!props.initialData?.seriesId)
 const isSubmitting = ref(false)
 
-const getInitialFormData = (): TagData => ({
+const getInitialFormData = (): UpdateGalgameSeriesPayload => ({
+  seriesId: 0,
   name: '',
-  label: '',
-  level: 1,
   description: '',
+  galgameIds: [],
   ...(props.initialData || {})
 })
 
-const formData = reactive<TagData>(getInitialFormData())
+const formData = reactive<UpdateGalgameSeriesPayload>(getInitialFormData())
 
 watch(
   () => isModalOpen.value,
@@ -48,8 +46,9 @@ watch(
 const handleSubmit = () => {
   isSubmitting.value = true
   const schema = isEditing.value
-    ? updateWebsiteTagSchema
-    : createWebsiteTagSchema
+    ? updateGalgameSeriesSchema
+    : createGalgameSeriesSchema
+
   const result = schema.safeParse(formData)
 
   if (!result.success) {
@@ -58,10 +57,11 @@ const handleSubmit = () => {
       `位置: ${message.path[0]} - 错误提示: ${message.message}`,
       'warn'
     )
+    isSubmitting.value = false
     return
   }
 
-  emits('submit', result.data)
+  emits('submit', { seriesId: formData.seriesId, ...result.data })
   isSubmitting.value = false
   isModalOpen.value = false
 }
@@ -71,25 +71,23 @@ const handleSubmit = () => {
   <KunModal
     :is-dismissable="false"
     v-model:modal-value="isModalOpen"
-    inner-class-name="max-w-md"
+    inner-class-name="max-w-xl overflow-visible"
   >
     <form @submit.prevent>
       <h2 class="mb-6 text-xl font-bold">
-        {{ isEditing ? '编辑标签' : '创建新标签' }}
+        {{ isEditing ? '编辑系列' : '创建新系列' }}
       </h2>
 
       <div class="space-y-4">
-        <KunInput v-model="formData.name" label="标签名称" required />
-        <KunInput
-          v-model="formData.level"
-          label="标签等级 (0-20)"
-          type="number"
-          required
-        />
+        <KunInput v-model="formData.name" label="系列名称" required />
         <KunTextarea
           v-model="formData.description"
-          label="标签描述 (300 字符之内)"
-          type="number"
+          label="系列描述 (1000 字符之内)"
+        />
+
+        <GalgameSeriesSelectGalgame
+          v-model="formData.galgameIds"
+          label="包含的 Galgame (最少 2 个，最多 200 个)"
           required
         />
       </div>

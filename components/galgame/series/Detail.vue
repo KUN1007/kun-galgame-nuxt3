@@ -1,9 +1,43 @@
 <script setup lang="ts">
+import type { UpdateGalgameSeriesPayload } from '../types'
 import type { GalgameSeriesDetail } from '~/types/api/galgame-series'
 
-defineProps<{
+const props = defineProps<{
   data: GalgameSeriesDetail
 }>()
+
+const { role } = usePersistUserStore()
+const showSeriesModal = ref(false)
+const editingSeries = ref<UpdateGalgameSeriesPayload>(
+  {} as UpdateGalgameSeriesPayload
+)
+
+const openEditSeriesModal = () => {
+  if (!props.data) {
+    return
+  }
+  const res = props.data
+  editingSeries.value = {
+    seriesId: res.id,
+    name: res.name,
+    description: res.description,
+    galgameIds: res.galgame.map((g) => g.id)
+  } satisfies UpdateGalgameSeriesPayload
+  showSeriesModal.value = true
+}
+
+const handleUpdateSeries = async (data: UpdateGalgameSeriesPayload) => {
+  const result = await $fetch(`/api/galgame-series/${props.data.id}`, {
+    method: 'PUT',
+    watch: false,
+    body: data,
+    ...kungalgameResponseHandler
+  })
+
+  if (result) {
+    useMessage('重新编辑成功', 'success')
+  }
+}
 </script>
 
 <template>
@@ -13,7 +47,7 @@ defineProps<{
     :is-transparent="false"
     content-class="space-y-3"
   >
-    <KunHeader :name="data.name" :description="data.description">
+    <KunHeader :name="`${data.name} 系列`" :description="data.description">
       <template #endContent>
         <div class="flex flex-col flex-wrap gap-3 text-sm">
           <div class="text-default-500 flex items-center gap-2">
@@ -34,9 +68,19 @@ defineProps<{
               {{ formatTimeDifference(data.updated) }}
             </span>
           </div>
+
+          <div v-if="role > 2" class="flex justify-end">
+            <KunButton @click="openEditSeriesModal">编辑系列</KunButton>
+          </div>
         </div>
       </template>
     </KunHeader>
+
+    <GalgameSeriesModal
+      v-model="showSeriesModal"
+      :initial-data="editingSeries"
+      @submit="handleUpdateSeries"
+    />
 
     <GalgameCard :is-transparent="true" :galgames="data.galgame" />
   </KunCard>

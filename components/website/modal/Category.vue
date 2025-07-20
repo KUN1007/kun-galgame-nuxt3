@@ -50,7 +50,11 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <KunModal v-model:modal-value="isModalOpen" inner-class-name="max-w-md">
+  <KunModal
+    :is-dismissable="false"
+    v-model:modal-value="isModalOpen"
+    inner-class-name="max-w-md"
+  >
     <form @submit.prevent="handleSubmit">
       <h2 class="mb-6 text-xl font-bold">编辑分类</h2>
 

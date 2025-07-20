@@ -90,7 +90,15 @@ export const searchGalgame = async (
       AND: keywords.map((kw) => ({
         OR: [
           { vndb_id: { in: keywords } },
-          { tag: { some: { tag: { name: { in: keywords } } } } },
+          {
+            tag: {
+              some: {
+                tag: {
+                  name: { contains: kw, mode: 'insensitive' }
+                }
+              }
+            }
+          },
           { name_en_us: { contains: kw, mode: 'insensitive' } },
           { name_ja_jp: { contains: kw, mode: 'insensitive' } },
           { name_zh_cn: { contains: kw, mode: 'insensitive' } },
