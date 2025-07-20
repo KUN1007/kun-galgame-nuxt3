@@ -10,15 +10,6 @@ useKunSeoMeta({
   description:
     KUN_TOPIC_SECTION_DESCRIPTION_MAP[section.value.toLocaleLowerCase()]
 })
-
-useHead({
-  link: [
-    {
-      rel: 'canonical',
-      href: `${kungal.domain.main}/section/${section.value}`
-    }
-  ]
-})
 </script>
 
 <template>

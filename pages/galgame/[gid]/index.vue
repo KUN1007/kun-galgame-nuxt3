@@ -76,7 +76,7 @@ if (galgame) {
         .filter((t) => t.category === 'content')
         .map((t) => t.name),
       keywords: galgame.tag
-        .filter((t) => t.category === 'technical' || t.category === 'sexual')
+        .filter((t) => t.category === 'technical')
         .map((t) => t.name)
         .join(', '),
 

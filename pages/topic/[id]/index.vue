@@ -1,4 +1,14 @@
 <script setup lang="ts">
+import DOMPurify from 'isomorphic-dompurify'
+import { KUN_TOPIC_SECTION } from '~/constants/topic'
+import type {
+  DiscussionForumPosting,
+  WithContext,
+  Person,
+  Comment,
+  InteractionCounter
+} from 'schema-dts'
+
 const route = useRoute()
 
 const { isReplyRewriting } = storeToRefs(useTempReplyStore())
@@ -47,21 +57,93 @@ const getFirstImageSrc = (htmlString: string) => {
 }
 
 if (data.value && data.value !== 'banned') {
-  const markdown = data.value.contentMarkdown
-  const banner = getFirstImageSrc(data.value.contentHtml)
-  const created = new Date(data.value.created).toString()
-  const updated = data.value.edited
-    ? new Date(data.value.edited).toString()
-    : ''
+  const topic = data.value
+
+  const markdown = topic.contentMarkdown
+  const banner = getFirstImageSrc(topic.contentHtml)
+  const created = new Date(topic.created).toString()
+  const updated = topic.edited ? new Date(topic.edited).toString() : ''
   const description = computed(() =>
     markdownToText(markdown).trim().slice(0, 233).replace(/\\|\n/g, '')
   )
 
-  useHead({
-    link: [
+  const jsonLd = computed<WithContext<DiscussionForumPosting>>(() => {
+    const topicUrl = `${kungal.domain.main}/topic/${topic.id}`
+
+    const authorSchema: Person = {
+      '@type': 'Person',
+      name: topic.user.name,
+      url: `${kungal.domain.main}/user/${topic.user.id}/info`,
+      image: topic.user.avatar
+    }
+
+    const interactionStatistics: InteractionCounter[] = [
       {
-        rel: 'canonical',
-        href: `${kungal.domain.main}/topic/${data.value.id}`
+        '@type': 'InteractionCounter',
+        interactionType: {
+          '@type': 'CommentAction'
+        },
+        userInteractionCount: topic.replyCount
+      },
+      {
+        '@type': 'InteractionCounter',
+        interactionType: {
+          '@type': 'LikeAction'
+        },
+        userInteractionCount: topic.likeCount
+      },
+      {
+        '@type': 'InteractionCounter',
+        interactionType: {
+          '@type': 'VoteAction'
+        },
+        userInteractionCount: topic.upvoteCount
+      }
+    ]
+
+    let acceptedAnswerSchema: Comment | undefined = undefined
+    if (topic.bestAnswer) {
+      acceptedAnswerSchema = {
+        '@type': 'Comment',
+        text: markdownToText(topic.bestAnswer.contentMarkdown),
+        dateCreated: new Date(topic.bestAnswer.created).toISOString(),
+        url: `${topicUrl}#${topic.bestAnswer.floor}`,
+        author: {
+          '@type': 'Person',
+          name: topic.bestAnswer.user.name,
+          url: `${kungal.domain.main}/user/${topic.bestAnswer.user.id}/info`
+        }
+      }
+    }
+
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'DiscussionForumPosting',
+      mainEntityOfPage: topicUrl,
+      headline: topic.title,
+      description: description.value,
+      image: banner,
+      author: authorSchema,
+      datePublished: new Date(topic.created).toISOString(),
+      dateModified: topic.edited
+        ? new Date(topic.edited).toISOString()
+        : new Date(topic.created).toISOString(),
+      interactionStatistic: interactionStatistics,
+      commentCount: topic.replyCount,
+      ...(acceptedAnswerSchema && { acceptedAnswer: acceptedAnswerSchema }),
+      keywords: [
+        ...topic.section.map((s) => KUN_TOPIC_SECTION[s]).filter(Boolean),
+        ...topic.tag
+      ].join(', ')
+    }
+  })
+
+  useHead({
+    script: [
+      {
+        id: 'schema-org-qa-page',
+        type: 'application/ld+json',
+        innerHTML: JSON.parse(DOMPurify.sanitize(JSON.stringify(jsonLd.value)))
       }
     ]
   })
@@ -69,28 +151,14 @@ if (data.value && data.value !== 'banned') {
   useKunSeoMeta({
     title: data.value.title,
     description: description.value,
-
     ogImage: banner,
-    ogUrl: `${kungal.domain.main}/topic/${data.value.id}`,
     ogType: 'article',
-
-    twitterImage: banner,
-    twitterCard: 'summary_large_image',
-
     articleAuthor: [`${kungal.domain.main}/user/${data.value.user.id}/info`],
     articlePublishedTime: created,
     articleModifiedTime: updated
   })
 } else {
-  useHead({
-    meta: [{ name: 'robots', content: 'noindex, nofollow' }]
-  })
-  useKunSeoMeta({
-    title: data.value ? '话题已被封禁' : '未找到此话题',
-    description: data.value
-      ? `这个话题由于违反了 ${kungal.titleShort} 话题发布规定, 或者该话题被作者删除, 您可以返回话题页面查看其它话题`
-      : `未找到这个话题, 请确认您的请求路径是否正确, 您可以返回话题页面查看其它话题`
-  })
+  useKunDisableSeo(data.value ? '话题已被封禁' : '未找到此话题')
 }
 </script>
 

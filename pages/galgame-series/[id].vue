@@ -8,19 +8,16 @@ const { data } = await useFetch(`/api/galgame-series/${seriesId}`, {
   ...kungalgameResponseHandler
 })
 
-useHead({
-  link: [
-    {
-      rel: 'canonical',
-      href: `${kungal.domain.main}/series/${seriesId}`
-    }
-  ]
-})
-
-useKunSeoMeta({
-  title: `${data.value?.name} - 资源 wiki`,
-  description: data.value?.description
-})
+if (data.value) {
+  if (data.value.isNSFW) {
+    useKunDisableSeo(data.value.name)
+  } else {
+    useKunSeoMeta({
+      title: data.value.name,
+      description: data.value.description
+    })
+  }
+}
 </script>
 
 <template>

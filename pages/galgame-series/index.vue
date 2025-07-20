@@ -1,13 +1,4 @@
 <script setup lang="ts">
-useHead({
-  link: [
-    {
-      rel: 'canonical',
-      href: `${kungal.domain.main}/series`
-    }
-  ]
-})
-
 useKunSeoMeta({
   title: 'Galgame 系列',
   description:

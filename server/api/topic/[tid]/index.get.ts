@@ -19,7 +19,8 @@ export default defineEventHandler(async (event) => {
           include: {
             user: {
               select: { id: true, name: true, avatar: true, moemoepoint: true }
-            }
+            },
+            target: { select: { content: true } }
           }
         },
         user: {
@@ -72,7 +73,7 @@ export default defineEventHandler(async (event) => {
       user: ba.user,
       edited: ba.edited,
       created: ba.created,
-      contentMarkdown: ba.content,
+      contentMarkdown: `${ba.content}${ba.target.map((t) => t.content).join('')}`,
       contentHtml: await markdownToHtml(ba.content)
     }
   }
