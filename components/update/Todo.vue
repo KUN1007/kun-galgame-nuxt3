@@ -25,7 +25,7 @@ const textMap: Record<number, string> = {
 
 const pageData = ref({
   page: 1,
-  limit: 10,
+  limit: 30,
   language: 'zh-cn'
 })
 
