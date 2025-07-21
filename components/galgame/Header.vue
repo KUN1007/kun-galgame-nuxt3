@@ -9,6 +9,7 @@ import {
   KUN_GALGAME_RESOURCE_PLATFORM_MAP,
   KUN_GALGAME_CONTENT_LIMIT_MAP
 } from '~/constants/galgame'
+import { updateGalgameBannerSchema } from '~/validations/galgame'
 import type { GalgameDetail } from '~/types/api/galgame'
 
 const props = defineProps<{
@@ -17,9 +18,10 @@ const props = defineProps<{
 
 const { id, role } = usePersistUserStore()
 
+const route = useRoute()
 const initialImageUrl = ref('')
 const isShowUpload = ref(false)
-const route = useRoute()
+const isPublishing = ref(false)
 const gid = computed(() => {
   return parseInt((route.params as { gid: string }).gid)
 })
@@ -40,6 +42,19 @@ const handleChangeBanner = async () => {
     return
   }
 
+  const result = updateGalgameBannerSchema.safeParse({
+    banner: imageBlob,
+    galgameId: gid.value
+  })
+  if (!result.success) {
+    const message = JSON.parse(result.error.message)[0]
+    useMessage(
+      `位置: ${message.path[0]} - 错误提示: ${message.message}`,
+      'warn'
+    )
+    return
+  }
+
   const res = await useComponentMessageStore().alert(
     '确定更新预览图吗?',
     '更改后使用 Ctrl + F5 刷新页面缓存, 即可看到更新后的图片'
@@ -52,16 +67,16 @@ const handleChangeBanner = async () => {
   formData.append('banner', imageBlob)
   formData.append('galgameId', gid.value.toString())
 
-  useMessage(10536, 'info')
-
-  const result = await $fetch(`/api/galgame/${gid.value}/banner`, {
+  isPublishing.value = true
+  const response = await $fetch(`/api/galgame/${gid.value}/banner`, {
     method: 'PUT',
     body: formData,
     watch: false,
     ...kungalgameResponseHandler
   })
+  isPublishing.value = false
 
-  if (result) {
+  if (response) {
     isShowUpload.value = false
     initialImageUrl.value = ''
     await deleteImage(`kun-galgame-rewrite-banner`)
@@ -117,7 +132,13 @@ onMounted(async () => {
             >
               取消
             </KunButton>
-            <KunButton @click="handleChangeBanner">确定更改</KunButton>
+            <KunButton
+              :disabled="isPublishing"
+              :loading="isPublishing"
+              @click="handleChangeBanner"
+            >
+              确定更改
+            </KunButton>
           </div>
         </div>
       </KunModal>

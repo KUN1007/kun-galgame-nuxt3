@@ -40,6 +40,14 @@ const handleUpdateSeries = async (data: UpdateGalgameSeriesPayload) => {
 }
 
 const handleDeleteSeries = async () => {
+  const res = await useComponentMessageStore().alert(
+    '确定删除这个 Galgame 系列吗?',
+    '注意, 删除操作不可撤销'
+  )
+  if (!res) {
+    return
+  }
+
   const result = await $fetch(`/api/galgame-series/${props.data.id}`, {
     method: 'DELETE',
     watch: false,

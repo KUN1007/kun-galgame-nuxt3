@@ -16,12 +16,12 @@ export default defineEventHandler(async (event) => {
   const uid = userInfo.uid
 
   const galgame = await prisma.galgame.findUnique({
-    where: { id: input.galgameId, status: { not: 1 }, user_id: userInfo.uid }
+    where: { id: input.galgameId, status: { not: 1 } }
   })
   if (!galgame) {
     return kunError(event, '未找到这个 Galgame')
   }
-  if (galgame.user_id !== uid || userInfo.role < 2) {
+  if (galgame.user_id !== uid && userInfo.role < 2) {
     return kunError(event, '您没有权限更改这个 Galgame 的预览图')
   }
 
