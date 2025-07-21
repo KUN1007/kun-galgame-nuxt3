@@ -70,6 +70,14 @@ const logOut = async () => {
 
       <KunButton
         variant="light"
+        class-name="text-base p-1 text-foreground"
+        href="/admin/overview"
+      >
+        管理系统
+      </KunButton>
+
+      <KunButton
+        variant="light"
         color="secondary"
         v-if="!isCheckIn"
         @click="handleCheckIn"
