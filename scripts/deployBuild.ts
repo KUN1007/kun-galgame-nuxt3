@@ -18,9 +18,12 @@ try {
   console.log('Environment variables are valid.')
   console.log('Executing the commands...')
 
-  execSync('git pull && pnpm build:limit && pnpm stop && pnpm start', {
-    stdio: 'inherit'
-  })
+  execSync(
+    'git pull && pnpm prisma:push && pnpm build:limit && pnpm stop && pnpm start',
+    {
+      stdio: 'inherit'
+    }
+  )
 } catch (error) {
   console.error('Invalid environment variables', error)
   process.exit(1)
