@@ -61,10 +61,18 @@ const handleUpdateGalgameEngineAlias = (value: string | number) => {
 <template>
   <KunModal v-model:modal-value="isModalOpen" inner-class-name="max-w-md">
     <form @submit.prevent>
-      <h2 class="mb-6 text-xl font-bold">编辑游戏引擎</h2>
+      <div class="mb-6 space-y-2">
+        <h2 class="text-xl font-bold">编辑游戏引擎</h2>
+        <p class="text-sm">不建议更新会社名称, 更新别名即可, 效果相同</p>
+      </div>
 
       <div class="space-y-4">
-        <KunInput v-model="formData.name" label="引擎名称" required />
+        <KunInput
+          :disabled="true"
+          v-model="formData.name"
+          label="引擎名称"
+          required
+        />
         <KunTextarea v-model="formData.description" label="引擎描述" />
         <KunTextarea
           :model-value="formData.alias.toString()"
