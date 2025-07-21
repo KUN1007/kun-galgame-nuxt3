@@ -21,7 +21,7 @@ model galgame {
   user_id   Int
   user      user            @relation("user_galgame", fields: [user_id], references: [id], onDelete: Cascade)
   series_id Int?
-  series    galgame_series? @relation(fields: [series_id], references: [id], onDelete: Cascade)
+  series    galgame_series? @relation(fields: [series_id], references: [id], onDelete: SetNull)
 
   resource galgame_resource[]
   comment  galgame_comment[]

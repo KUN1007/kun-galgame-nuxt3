@@ -38,7 +38,7 @@ const handleCreateSeries = async (data: UpdateGalgameSeriesPayload) => {
       <template #endContent>
         <KunSettingPanelComponentsNSFW />
 
-        <div v-if="role > 2" class="flex justify-end">
+        <div class="flex justify-end">
           <KunButton @click="showSeriesModal = true">创建系列</KunButton>
         </div>
       </template>

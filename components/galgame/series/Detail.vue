@@ -38,6 +38,20 @@ const handleUpdateSeries = async (data: UpdateGalgameSeriesPayload) => {
     useMessage('重新编辑成功', 'success')
   }
 }
+
+const handleDeleteSeries = async () => {
+  const result = await $fetch(`/api/galgame-series/${props.data.id}`, {
+    method: 'DELETE',
+    watch: false,
+    query: { seriesId: props.data.id },
+    ...kungalgameResponseHandler
+  })
+
+  if (result) {
+    useMessage('删除 Galgame 系列成功', 'success')
+    navigateTo('/galgame-series')
+  }
+}
 </script>
 
 <template>
@@ -69,7 +83,15 @@ const handleUpdateSeries = async (data: UpdateGalgameSeriesPayload) => {
             </span>
           </div>
 
-          <div v-if="role > 2" class="flex justify-end">
+          <div class="flex justify-end gap-1">
+            <KunButton
+              v-if="role > 2"
+              variant="light"
+              color="danger"
+              @click="handleDeleteSeries"
+            >
+              删除系列
+            </KunButton>
             <KunButton @click="openEditSeriesModal">编辑系列</KunButton>
           </div>
         </div>

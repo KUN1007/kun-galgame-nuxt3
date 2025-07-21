@@ -6,9 +6,6 @@ export default defineEventHandler(async (event) => {
   if (!userInfo) {
     return kunError(event, '用户登录失效')
   }
-  if (userInfo.role <= 2) {
-    return kunError(event, '您没有权限更新系列')
-  }
 
   const input = await kunParsePutBody(event, updateGalgameSeriesSchema)
   if (typeof input === 'string') {
