@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DOMPurify from 'isomorphic-dompurify'
 import { KUN_TOPIC_SECTION } from '~/constants/topic'
 import type {
   DiscussionForumPosting,
@@ -143,7 +142,7 @@ if (data.value && data.value !== 'banned') {
       {
         id: 'schema-org-qa-page',
         type: 'application/ld+json',
-        innerHTML: JSON.parse(DOMPurify.sanitize(JSON.stringify(jsonLd.value)))
+        innerHTML: jsonLd.value
       }
     ]
   })

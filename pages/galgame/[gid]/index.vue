@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DOMPurify from 'isomorphic-dompurify'
 import type {
   VideoGame,
   WithContext,
@@ -120,7 +119,7 @@ if (galgame) {
         {
           id: 'schema-org-video-game',
           type: 'application/ld+json',
-          innerHTML: JSON.parse(DOMPurify.sanitize(JSON.stringify(jsonLd)))
+          innerHTML: jsonLd
         }
       ]
     })

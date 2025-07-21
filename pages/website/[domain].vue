@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DOMPurify from 'isomorphic-dompurify'
 import { KUN_WEBSITE_CATEGORY_MAP } from '~/constants/galgameWebsite'
 import type {
   Article,
@@ -95,9 +94,7 @@ if (data.value) {
         {
           id: 'schema-org-website',
           type: 'application/ld+json',
-          innerHTML: JSON.parse(
-            DOMPurify.sanitize(JSON.stringify(jsonLd.value))
-          )
+          innerHTML: jsonLd.value
         }
       ]
     })
