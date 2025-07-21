@@ -197,6 +197,12 @@ const handleAction = async (
       </KunButton>
     </KunTooltip>
 
-    <KunButton class-name="ml-auto">访问网站</KunButton>
+    <KunButton
+      target="_blank"
+      :href="`https://${website.url}`"
+      class-name="ml-auto"
+    >
+      访问网站
+    </KunButton>
   </div>
 </template>

@@ -16,7 +16,8 @@ const props = withDefaults(defineProps<KunButtonProps>(), {
   icon: false,
   iconPosition: 'left',
   className: '',
-  href: ''
+  href: '',
+  target: '_self'
 })
 
 const emits = defineEmits<{
@@ -186,6 +187,7 @@ const handleKunButtonClick = (event: MouseEvent) => {
       )
     "
     :to="props.href"
+    :target="props.target"
     :disabled="disabled || loading"
     :role="props.href ? 'a' : 'button'"
     :type="type"
