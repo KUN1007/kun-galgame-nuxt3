@@ -17,6 +17,13 @@ export default defineEventHandler(async (event) => {
   const { topicId, content, targets } = input
   const validTargets = targets.filter((item) => item.content?.trim())
 
+  const topic = await prisma.topic.findUnique({
+    where: { id: topicId }
+  })
+  if (!topic) {
+    return kunError(event, '未找到该话题')
+  }
+
   const lastReply = await prisma.topic_reply.findFirst({
     where: { topic_id: topicId },
     orderBy: { floor: 'desc' },
@@ -86,6 +93,22 @@ export default defineEventHandler(async (event) => {
         prisma,
         userInfo.uid,
         user.id,
+        'replied',
+        markdownToText(content).slice(0, 233),
+        topicId
+      )
+    }
+
+    if (content.trim()) {
+      await prisma.user.update({
+        where: { id: topic.user_id },
+        data: { moemoepoint: { increment: 1 } }
+      })
+
+      await createMessage(
+        prisma,
+        userInfo.uid,
+        topic.user_id,
         'replied',
         markdownToText(content).slice(0, 233),
         topicId
