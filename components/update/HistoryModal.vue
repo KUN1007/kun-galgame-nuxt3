@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { KUN_UPDATE_LOG } from '~/constants/update'
+import { KUN_UPDATE_LOG, KUN_UPDATE_LOG_TYPE_MAP } from '~/constants/update'
 import {
   createUpdateLogSchema,
   updateUpdateLogSchema
@@ -25,7 +25,7 @@ const isEditing = computed(() => !!props.initialData?.updateLogId)
 const isSubmitting = ref(false)
 
 const logTypeOptions = KUN_UPDATE_LOG.map((type) => ({
-  label: type,
+  label: KUN_UPDATE_LOG_TYPE_MAP[type],
   value: type
 }))
 

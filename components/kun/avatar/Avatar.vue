@@ -54,6 +54,7 @@ const userAvatarSrc = computed(() => {
       cn(
         'flex shrink-0 cursor-pointer justify-center',
         'hover:ring-primary-500 rounded-full transition duration-150 ease-in-out hover:ring-2',
+        sizeClasses,
         className
       )
     "
