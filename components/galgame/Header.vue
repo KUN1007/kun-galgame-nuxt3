@@ -49,7 +49,8 @@ const handleChangeBanner = async () => {
   }
 
   const formData = new FormData()
-  formData.append('avatar', imageBlob)
+  formData.append('banner', imageBlob)
+  formData.append('galgameId', gid.value.toString())
 
   useMessage(10536, 'info')
 

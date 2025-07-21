@@ -208,7 +208,8 @@ export const updateGalgameSchema = z
   })
 
 export const updateGalgameBannerSchema = z.object({
-  galgameId: z.coerce.number().min(1).max(9999999)
+  galgameId: z.coerce.number().min(1).max(9999999),
+  banner: z.unknown()
 })
 
 export const updateGalgameLikeSchema = z.object({

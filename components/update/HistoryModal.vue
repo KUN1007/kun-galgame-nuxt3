@@ -73,7 +73,11 @@ const handleSubmit = () => {
 </script>
 
 <template>
-  <KunModal v-model:modal-value="isModalOpen" inner-class-name="max-w-xl">
+  <KunModal
+    :is-dismissable="false"
+    v-model:modal-value="isModalOpen"
+    inner-class-name="max-w-xl"
+  >
     <form @submit.prevent>
       <h2 class="mb-6 text-xl font-bold">
         {{ isEditing ? '编辑更新日志' : '创建新更新日志' }}

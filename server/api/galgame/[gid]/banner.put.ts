@@ -4,15 +4,11 @@ import { uploadGalgameBanner } from '../utils/uploadGalgameBanner'
 import { updateGalgameBannerSchema } from '~/validations/galgame'
 
 export default defineEventHandler(async (event) => {
-  const bannerFile = await readMultipartFormData(event)
-  if (!bannerFile || !Array.isArray(bannerFile)) {
-    return kunError(event, '读取图片失败')
-  }
-
-  const input = await kunParsePutBody(event, updateGalgameBannerSchema)
+  const input = await kunParseFormData(event, updateGalgameBannerSchema)
   if (typeof input === 'string') {
     return kunError(event, input)
   }
+
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
     return kunError(event, '用户登录失效', 205)
@@ -30,7 +26,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const res = await uploadGalgameBanner(
-    Buffer.from(bannerFile[0].data),
+    Buffer.from(input.banner as Buffer),
     input.galgameId
   )
   if (res) {
