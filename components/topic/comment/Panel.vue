@@ -55,8 +55,9 @@ const handleClose = () => {
 
 <template>
   <div class="w-full space-y-3 pt-2">
-    <div>
-      {{ `${name} 评论 ${targetUser.name}` }}
+    <div class="flex items-center gap-1">
+      {{ `${name} 评论` }}
+      <KunUser size="sm" :user="targetUser" />
     </div>
 
     <KunTextarea

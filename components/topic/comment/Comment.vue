@@ -55,6 +55,7 @@ const handleRemoveComment = (commentId: number) => {
                 <span>{{ comment.user.name }}</span>
                 <span class="text-default-500 mx-1">评论</span>
                 <KunLink
+                  size="sm"
                   underline="hover"
                   :to="`/user/${comment.targetUser.id}/info`"
                 >
