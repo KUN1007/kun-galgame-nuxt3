@@ -28,12 +28,7 @@ const handlePublishComment = async () => {
     return
   }
 
-  if (isPublishing.value) {
-    return
-  } else {
-    isPublishing.value = true
-    useMessage(10223, 'info')
-  }
+  isPublishing.value = true
   const comment = await $fetch(`/api/topic/${topicId}/comment`, {
     method: 'POST',
     body: {
@@ -72,7 +67,11 @@ const handlePublishComment = async () => {
       <KunButton variant="light" color="danger" @click="isShowPanel = false">
         关闭
       </KunButton>
-      <KunButton :loading="isPublishing" @click="handlePublishComment">
+      <KunButton
+        :disabled="isPublishing"
+        :loading="isPublishing"
+        @click="handlePublishComment"
+      >
         发布评论
       </KunButton>
     </div>

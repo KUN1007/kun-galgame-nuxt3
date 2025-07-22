@@ -37,8 +37,6 @@ export const useTopicSubmitter = () => {
     if (!confirmation) return
 
     isSubmitting.value = true
-    useMessage(10201, 'info')
-
     if (isRewriteMode.value) {
       const topicId = tempStore.id
       await $fetch(`/api/topic/${topicId}`, {
