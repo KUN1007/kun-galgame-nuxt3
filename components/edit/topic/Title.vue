@@ -8,7 +8,7 @@ const maxInputLength = 40
 <template>
   <KunInput
     type="text"
-    placeholder="请输入一个巨牛逼的标题"
+    placeholder="请在标题中点名您话题的主旨"
     v-model="title"
     :maxlength="maxInputLength"
     size="xl"

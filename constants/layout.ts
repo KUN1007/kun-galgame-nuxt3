@@ -48,7 +48,7 @@ export const kunLayoutItem: KunLayoutItem[] = [
         icon: 'lucide:globe',
         router: '/website',
         label: 'Gal 网站 Wiki',
-        hint: '真牛逼'
+        hint: '起飞!'
       },
       {
         name: 'galgame-series',
