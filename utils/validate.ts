@@ -104,3 +104,30 @@ export const isValidKunLanguage = (
   const isWithinLengthLimit = values.every((value) => value.length <= maxLength)
   return isNotEmpty && isWithinLengthLimit
 }
+
+const botUserAgents = [
+  'googlebot',
+  'bingbot',
+  'slurp',
+  'duckduckgo',
+  'baiduspider',
+  'yandexbot',
+  'sogou',
+  'exabot',
+  'facebot',
+  'twitterbot',
+  'linkedinbot',
+  'embedly',
+  'pinterest',
+  'slackbot',
+  'telegrambot',
+  'discordbot',
+  'whatsapp',
+  'petalbot',
+  'headlesschrome'
+]
+
+export const isBotAgent = new RegExp(
+  `(${botUserAgents.join('|')}|\\w*(bot|spider))`,
+  'i'
+)
