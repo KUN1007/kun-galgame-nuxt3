@@ -45,8 +45,6 @@ const isExpand = ref(false)
 
     <div class="w-full shrink-0 space-y-3 lg:w-72">
       <HomeRecent />
-
-      <HomeResourceContainer />
     </div>
   </div>
 </template>

@@ -41,7 +41,7 @@ export const kunLayoutItem: KunLayoutItem[] = [
         name: 'galgame',
         icon: 'lucide:box',
         router: '/galgame',
-        label: 'Galgame 资源'
+        label: 'Galgame'
       },
       {
         name: 'website',
@@ -49,6 +49,13 @@ export const kunLayoutItem: KunLayoutItem[] = [
         router: '/website',
         label: 'Gal 网站 Wiki',
         hint: '起飞!'
+      },
+      {
+        name: 'galgame-resource',
+        icon: 'lucide:download',
+        router: '/galgame-resource',
+        label: 'Gal 资源列表',
+        hint: '新'
       },
       {
         name: 'galgame-series',

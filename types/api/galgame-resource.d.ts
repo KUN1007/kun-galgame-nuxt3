@@ -19,3 +19,7 @@ export interface GalgameResourceDetails extends GalgameResource {
   password: string
   note: string
 }
+
+export interface GalgameResourceCard extends GalgameResource {
+  galgameName: KunLanguage
+}

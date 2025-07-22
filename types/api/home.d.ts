@@ -1,4 +1,3 @@
-import type { GalgameResource } from './galgame-resource.d.ts'
 import type { MessageType } from './message.d.ts'
 import type { GalgameCard } from './galgame.d.ts'
 
@@ -28,7 +27,3 @@ export interface HomeTopic {
 }
 
 export type HomeGalgame = GalgameCard
-
-export interface HomeGalgameResources extends GalgameResource {
-  galgameName: KunLanguage
-}
