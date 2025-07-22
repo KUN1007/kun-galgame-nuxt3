@@ -5,7 +5,7 @@ import type { OnlineUserCount } from '~/server/socket/socket'
 let socket: Socket
 
 export const useOnlineUser = () => {
-  const onlineCount = ref<OnlineUserCount>({ total: 0, user: 0, guest: 0 })
+  const { onlineCount } = storeToRefs(useTempSettingStore())
 
   const connect = () => {
     if (socket && socket.connected) {
