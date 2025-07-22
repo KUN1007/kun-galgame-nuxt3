@@ -6,12 +6,8 @@ import { Server } from 'socket.io'
 import { defineEventHandler } from 'h3'
 import { handleSocketRequest } from '~/server/socket/handleSocketRequest'
 import type { NitroApp } from 'nitropack'
-import type { Socket } from 'socket.io'
 import type { KUNGalgamePayload } from '~/types/utils/jwt'
-
-export interface KUNGalgameSocket extends Socket {
-  payload?: KUNGalgamePayload
-}
+import type { KUNGalgameSocket } from '../socket/socket'
 
 export default defineNitroPlugin((nitroApp: NitroApp) => {
   const engine = new Engine()
@@ -20,22 +16,27 @@ export default defineNitroPlugin((nitroApp: NitroApp) => {
   io.bind(engine)
 
   io.use((socket: KUNGalgameSocket, next) => {
-    const token = parse(socket.request.headers.cookie || '')
-    const refreshToken = token['kungalgame-moemoe-refresh-token']
-
     try {
-      const payload = jwt.verify(
-        refreshToken,
-        env.JWT_SECRET || ''
-      ) as KUNGalgamePayload
-      socket.payload = payload
+      const token = parse(socket.request.headers.cookie || '')
+      const refreshToken = token['kungalgame-moemoe-refresh-token']
+
+      if (refreshToken) {
+        const payload = jwt.verify(
+          refreshToken,
+          env.JWT_SECRET || ''
+        ) as KUNGalgamePayload
+        socket.payload = payload
+      }
+
       next()
     } catch (error) {
-      return error
+      next()
     }
   })
 
-  io.on('connection', handleSocketRequest)
+  io.on('connection', (socket: KUNGalgameSocket) => {
+    handleSocketRequest(io, socket)
+  })
 
   nitroApp.router.use(
     '/socket.io/',

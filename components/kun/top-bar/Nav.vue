@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { useOnlineUser } from '~/composables/online/useOnlineUser'
+
 const route = useRoute()
 
 const { showKUNGalgameHamburger, messageStatus } = storeToRefs(
   useTempSettingStore()
 )
-const { moemoepoint, isCheckIn } = storeToRefs(usePersistUserStore())
+const { id, moemoepoint, isCheckIn } = storeToRefs(usePersistUserStore())
+
+const { userDidLogin, userDidLogout } = useOnlineUser()
 
 const router = useRouter()
 const canGoBack = ref(false)
@@ -20,6 +24,14 @@ watch(
     useTempSettingStore().reset()
   }
 )
+
+watchEffect(() => {
+  if (id.value) {
+    userDidLogin(id.value.toString())
+  } else {
+    userDidLogout()
+  }
+})
 
 onMounted(async () => {
   const result = await $fetch('/api/user/status', {

@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { KUN_ACTIVITY_TYPE_TYPE } from '~/constants/activity'
+import { useOnlineUser } from '~/composables/online/useOnlineUser'
+
+const { onlineCount } = useOnlineUser()
 
 const { data } = await useFetch('/api/home/message', {
   method: 'GET'
@@ -47,6 +50,17 @@ const { data } = await useFetch('/api/home/message', {
           {{ formatTimeDifference(activity.timestamp) }}
         </span>
       </div>
+    </div>
+
+    <div class="flex flex-col items-center justify-center gap-1 text-sm">
+      <p class="text-default-500">
+        {{ `当前网站在线 ${onlineCount.total} 只萝莉` }}
+      </p>
+      <p class="text-default-500">
+        {{
+          `${onlineCount.user} 注册萝莉 - ${onlineCount.guest} 正在视奸的萝莉`
+        }}
+      </p>
     </div>
   </KunCard>
 </template>
