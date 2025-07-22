@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "4.2.20",
+  "version": "4.2.21",
   "packageManager": "pnpm@10.4.1",
   "private": true,
   "scripts": {
@@ -120,8 +120,6 @@
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "localforage": "^1.10.0",
-    "mongodb": "^6.15.0",
-    "mongoose": "^8.13.0",
     "nodemailer": "^6.10.0",
     "nodemailer-smtp-transport": "^2.7.4",
     "pinia": "^3.0.1",

@@ -57,9 +57,15 @@ pin: false
 
 <br/>
 
+**当前版本论坛 (V4)**
+
+Nuxt3 + Prisma + PostgreSQL 全栈实现 [kun-galgame-nuxt3](https://github.com/KUN1007/kun-galgame-nuxt3)
+
+<br/>
+
 **当前版本论坛 (V3)**
 
-Nuxt3 全栈实现 [kun-galgame-nuxt3](https://github.com/KUN1007/kun-galgame-nuxt3)
+Nuxt3 + MongoDB + Mongoose 全栈实现 [kun-galgame-nuxt3](https://github.com/KUN1007/kun-galgame-nuxt3)
 
 <br/>
 
