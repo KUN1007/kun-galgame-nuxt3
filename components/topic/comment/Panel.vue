@@ -3,16 +3,15 @@ import type { TopicComment } from '~/types/api/topic-comment'
 
 const props = defineProps<{
   replyId: number
+  targetUser: KunUser
 }>()
 
 const emits = defineEmits<{
   getComment: [newComment: TopicComment]
+  closePanel: []
 }>()
 
 const { name } = usePersistUserStore()
-const { targetUserId, targetUsername, isShowPanel } = storeToRefs(
-  useTempCommentStore()
-)
 const topicId = inject<number>('topicId')
 const commentValue = ref('')
 const isPublishing = ref(false)
@@ -34,7 +33,7 @@ const handlePublishComment = async () => {
     body: {
       topicId: topicId,
       replyId: props.replyId,
-      targetUserId: targetUserId.value,
+      targetUserId: props.targetUser.id,
       content: commentValue.value
     },
     watch: false,
@@ -45,15 +44,19 @@ const handlePublishComment = async () => {
   if (comment) {
     emits('getComment', comment)
     useMessage(10224, 'success')
-    isShowPanel.value = false
+    emits('closePanel')
   }
+}
+
+const handleClose = () => {
+  emits('closePanel')
 }
 </script>
 
 <template>
-  <div class="w-full space-y-3">
+  <div class="w-full space-y-3 pt-2">
     <div>
-      {{ `${name} 评论 ${targetUsername}` }}
+      {{ `${name} 评论 ${targetUser.name}` }}
     </div>
 
     <KunTextarea
@@ -64,7 +67,7 @@ const handlePublishComment = async () => {
     />
 
     <div class="flex w-full justify-end space-x-1">
-      <KunButton variant="light" color="danger" @click="isShowPanel = false">
+      <KunButton variant="light" color="danger" @click="handleClose">
         关闭
       </KunButton>
       <KunButton

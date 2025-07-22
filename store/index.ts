@@ -12,7 +12,6 @@ export const kungalgameStoreReset = () => {
   useTempGalgamePRStore().$reset()
   useTempGalgameStore().$reset()
   useTempGalgameResourceStore().$reset()
-  useTempCommentStore().$reset()
   useTempReplyStore().$reset()
   useTempSearchStore().$reset()
   useComponentMessageStore().$reset()

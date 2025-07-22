@@ -66,7 +66,8 @@ export default defineEventHandler(async (event) => {
       targetUser: newComment.target_user,
       content: newComment.content,
       isLiked: false,
-      likeCount: 0
+      likeCount: 0,
+      created: newComment.created
     }
 
     return responseData

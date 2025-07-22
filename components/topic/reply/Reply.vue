@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { scrollPage } from '../_helper'
 import type { TopicReply } from '~/types/api/topic-reply'
+import type { TopicComment } from '~/types/api/topic-comment'
 
-const { scrollToReplyId } = storeToRefs(useTempReplyStore())
-const { replyId: storeReplyId, isShowPanel } = storeToRefs(
-  useTempCommentStore()
-)
+const bannerBaseClasses =
+  'flex items-center gap-2 px-4 py-2 mb-3 rounded-lg font-semibold text-sm'
 
 const props = defineProps<{
   reply: TopicReply
@@ -17,22 +16,8 @@ const emit = defineEmits<{
   loadReply: [targetReplyId: number, anchorReplyId: number]
 }>()
 
-const handleLoadDetail = (targetReplyId: number) => {
-  emit('loadReply', targetReplyId, props.reply.id)
-}
-
+const { scrollToReplyId } = storeToRefs(useTempReplyStore())
 const comments = ref(props.reply.comment)
-
-watch(
-  () => scrollToReplyId.value,
-  async () => {
-    if (scrollToReplyId.value !== -1) {
-      await nextTick()
-      scrollPage(scrollToReplyId.value)
-      scrollToReplyId.value = -1
-    }
-  }
-)
 
 const replyContent = computed(() => {
   const targetsContent = props.reply.targets.map((t) => t.replyContentMarkdown)
@@ -50,8 +35,24 @@ const cardClasses = computed(() => {
   return ''
 })
 
-const bannerBaseClasses =
-  'flex items-center gap-2 px-4 py-2 mb-3 rounded-lg font-semibold text-sm'
+watch(
+  () => scrollToReplyId.value,
+  async () => {
+    if (scrollToReplyId.value !== -1) {
+      await nextTick()
+      scrollPage(scrollToReplyId.value)
+      scrollToReplyId.value = -1
+    }
+  }
+)
+
+const handleLoadDetail = (targetReplyId: number) => {
+  emit('loadReply', targetReplyId, props.reply.id)
+}
+
+const handleNewComment = (comment: TopicComment) => {
+  comments.value.push(comment)
+}
 </script>
 
 <template>
@@ -125,17 +126,13 @@ const bannerBaseClasses =
         :content="reply.contentHtml"
       />
 
-      <TopicReplyFooter :reply="reply" :title="title" />
+      <TopicReplyFooter
+        :reply="reply"
+        :title="title"
+        @handle-new-comment="handleNewComment"
+      />
 
       <TopicComment :reply-id="reply.id" :comments-data="comments" />
-
-      <KunAnimationFadeCard>
-        <LazyTopicCommentPanel
-          v-if="isShowPanel && reply.id === storeReplyId"
-          :reply-id="reply.id"
-          @get-comment="(newComment) => comments.push(newComment)"
-        />
-      </KunAnimationFadeCard>
     </KunCard>
   </div>
 </template>

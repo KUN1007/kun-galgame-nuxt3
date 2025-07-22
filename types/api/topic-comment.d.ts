@@ -7,4 +7,5 @@ export interface TopicComment {
   content: string
   isLiked: boolean
   likeCount: number
+  created: Date | string
 }

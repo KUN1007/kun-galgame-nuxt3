@@ -6,15 +6,10 @@ const props = defineProps<{
   commentsData: TopicComment[]
 }>()
 
-const comments = ref(props.commentsData)
-
 const currentUserUid = usePersistUserStore().id
-const {
-  replyId: storeReplyId,
-  targetUserId,
-  targetUsername,
-  isShowPanel
-} = storeToRefs(useTempCommentStore())
+const comments = ref(props.commentsData)
+const activeCommentId = ref<number | null>(null)
+const targetUserForPanel = ref<KunUser | null>(null)
 
 const handleClickComment = (comment: TopicComment) => {
   if (!currentUserUid) {
@@ -22,10 +17,19 @@ const handleClickComment = (comment: TopicComment) => {
     return
   }
 
-  storeReplyId.value = props.replyId
-  targetUserId.value = comment.user.id
-  targetUsername.value = comment.user.name
-  isShowPanel.value = !isShowPanel.value
+  if (activeCommentId.value === comment.id) {
+    activeCommentId.value = null
+    targetUserForPanel.value = null
+  } else {
+    activeCommentId.value = comment.id
+    targetUserForPanel.value = comment.user
+  }
+}
+
+const handleNewComment = (newComment: TopicComment) => {
+  comments.value.push(newComment)
+  activeCommentId.value = null
+  targetUserForPanel.value = null
 }
 
 const handleRemoveComment = (commentId: number) => {
@@ -41,49 +45,70 @@ const handleRemoveComment = (commentId: number) => {
     <h3 class="text-lg font-semibold">评论</h3>
 
     <div class="space-y-3">
-      <div
-        v-for="(comment, index) in comments"
-        :key="index"
-        class="flex items-start space-x-3"
-      >
-        <KunAvatar :user="comment.user" />
+      <div v-for="comment in comments" :key="comment.id">
+        <div class="flex items-start space-x-3">
+          <KunAvatar :user="comment.user" />
 
-        <div class="flex w-full flex-col space-y-1">
-          <div class="flex items-center justify-between">
-            <div class="text-sm">
-              <span>{{ comment.user.name }}</span>
-              <span class="text-default-500 mx-1">评论</span>
-              <KunLink
-                underline="hover"
-                :to="`/user/${comment.targetUser.id}/info`"
-              >
-                {{ comment.targetUser.name }}
-              </KunLink>
+          <div class="flex w-full flex-col space-y-1">
+            <div class="flex items-center justify-between">
+              <div class="text-sm">
+                <span>{{ comment.user.name }}</span>
+                <span class="text-default-500 mx-1">评论</span>
+                <KunLink
+                  underline="hover"
+                  :to="`/user/${comment.targetUser.id}/info`"
+                >
+                  {{ comment.targetUser.name }}
+                </KunLink>
+              </div>
+
+              <div class="flex items-center gap-1">
+                <TopicCommentDelete
+                  @remove-comment="handleRemoveComment"
+                  :comment="comment"
+                />
+              </div>
             </div>
 
-            <div class="flex items-center gap-1">
-              <TopicCommentLike :comment="comment" />
-              <KunButton
-                :is-icon-only="true"
-                variant="light"
-                color="default"
-                class-name="gap-1"
-                @click="handleClickComment(comment)"
-              >
-                <KunIcon name="uil:comment-dots" />
-              </KunButton>
+            <p class="text-default-700 text-sm whitespace-pre-wrap">
+              {{ comment.content }}
+            </p>
 
-              <TopicCommentDelete
-                @remove-comment="handleRemoveComment"
-                :comment="comment"
-              />
+            <div class="flex items-center justify-between">
+              <span class="text-default-500 text-xs">
+                {{
+                  formatDate(comment.created, {
+                    isPrecise: true,
+                    isShowYear: true
+                  })
+                }}
+              </span>
+
+              <div class="flex gap-2">
+                <TopicCommentLike :comment="comment" />
+                <KunButton
+                  :is-icon-only="true"
+                  variant="light"
+                  color="default"
+                  class-name="gap-1"
+                  @click="handleClickComment(comment)"
+                >
+                  <KunIcon name="uil:comment-dots" />
+                </KunButton>
+              </div>
             </div>
           </div>
-
-          <p class="text-default-700 text-sm whitespace-pre-wrap">
-            {{ comment.content }}
-          </p>
         </div>
+
+        <KunAnimationFadeCard>
+          <LazyTopicCommentPanel
+            v-if="activeCommentId === comment.id && targetUserForPanel"
+            :reply-id="replyId"
+            :target-user="targetUserForPanel"
+            @get-comment="handleNewComment"
+            @close-panel="activeCommentId = null"
+          />
+        </KunAnimationFadeCard>
       </div>
     </div>
   </div>
