@@ -5,7 +5,6 @@ import { Server as Engine } from 'engine.io'
 import { Server } from 'socket.io'
 import { defineEventHandler } from 'h3'
 import { handleSocketRequest } from '~/server/socket/handleSocketRequest'
-import { isBotAgent } from '~/utils/validate'
 import type { NitroApp } from 'nitropack'
 import type { KUNGalgamePayload } from '~/types/utils/jwt'
 import type { KUNGalgameSocket } from '../socket/socket'
@@ -17,32 +16,22 @@ export default defineNitroPlugin((nitroApp: NitroApp) => {
   io.bind(engine)
 
   io.use((socket: KUNGalgameSocket, next) => {
-    const userAgent = socket.request.headers['user-agent'] || ''
-    if (isBotAgent.test(userAgent)) {
-      return next(new Error('Bot access Socket.IO denied'))
-    }
+    const token = parse(socket.request.headers.cookie || '')
+    const refreshToken = token['kungalgame-moemoe-refresh-token']
 
     try {
-      const token = parse(socket.request.headers.cookie || '')
-      const refreshToken = token['kungalgame-moemoe-refresh-token']
-
-      if (refreshToken) {
-        const payload = jwt.verify(
-          refreshToken,
-          env.JWT_SECRET || ''
-        ) as KUNGalgamePayload
-        socket.payload = payload
-      }
-
+      const payload = jwt.verify(
+        refreshToken,
+        env.JWT_SECRET || ''
+      ) as KUNGalgamePayload
+      socket.payload = payload
       next()
     } catch (error) {
-      next()
+      return error
     }
   })
 
-  io.on('connection', (socket: KUNGalgameSocket) => {
-    handleSocketRequest(socket)
-  })
+  io.on('connection', handleSocketRequest)
 
   nitroApp.router.use(
     '/socket.io/',

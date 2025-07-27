@@ -8,8 +8,7 @@ export const useTempSettingStore = defineStore('tempSetting', {
     showKUNGalgameUserPanel: false,
     showKUNGalgameMessageBox: false,
 
-    messageStatus: 'offline',
-    onlineCount: { total: 0, user: 0, guest: 0 }
+    messageStatus: 'offline'
   }),
 
   actions: {

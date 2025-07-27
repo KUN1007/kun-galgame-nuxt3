@@ -1,5 +1,4 @@
 import type { MessageStatus } from '~/types/utils/message'
-import type { OnlineUserCount } from '~/server/socket/socket'
 
 export interface KUNGalgameSettingsStore {
   showKUNGalgamePageTransparency: number
@@ -18,5 +17,4 @@ export interface TempSettingStore {
 
   showKUNGalgameMessageBox: boolean
   messageStatus: MessageStatus
-  onlineCount: OnlineUserCount
 }
