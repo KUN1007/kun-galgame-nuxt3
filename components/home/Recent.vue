@@ -61,6 +61,7 @@ const { data } = await useFetch('/api/home/message', {
           `${onlineCount.user} 注册萝莉 - ${onlineCount.guest} 正在视奸的萝莉`
         }}
       </p>
+      <p class="text-default-500">(本统计结果已排除 Bot 和爬虫)</p>
     </div>
   </KunCard>
 </template>

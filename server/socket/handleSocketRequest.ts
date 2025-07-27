@@ -5,8 +5,10 @@ import type { Server } from 'socket.io'
 
 const userSockets = new Map<number | undefined, KUNGalgameSocket>()
 const onlineClients = new Map<string, string | null>()
+const THROTTLE_INTERVAL = 5000
+let updateTimeout: NodeJS.Timeout | null = null
 
-const updateAndBroadcastCount = (io: Server) => {
+const broadcastCount = (io: Server) => {
   const userIds = new Set<string>()
   let guestCount = 0
   onlineClients.forEach((userId) => {
@@ -20,6 +22,16 @@ const updateAndBroadcastCount = (io: Server) => {
     user: userCount,
     guest: guestCount
   } satisfies OnlineUserCount)
+}
+
+const scheduleBroadcast = (io: Server) => {
+  if (updateTimeout) {
+    return
+  }
+  updateTimeout = setTimeout(() => {
+    broadcastCount(io)
+    updateTimeout = null
+  }, THROTTLE_INTERVAL)
 }
 
 const handlePrivateChat = (io: Server, socket: KUNGalgameSocket) => {
@@ -61,7 +73,7 @@ const handlePrivateChat = (io: Server, socket: KUNGalgameSocket) => {
 const handleOnlinePresence = (io: Server, socket: KUNGalgameSocket) => {
   const initialUserId = socket.payload?.uid ? String(socket.payload.uid) : null
   onlineClients.set(socket.id, initialUserId)
-  updateAndBroadcastCount(io)
+  scheduleBroadcast(io)
 
   socket.on('login', () => {
     const loggedInUserId = socket.payload?.uid
@@ -69,7 +81,7 @@ const handleOnlinePresence = (io: Server, socket: KUNGalgameSocket) => {
       : null
     if (loggedInUserId) {
       onlineClients.set(socket.id, loggedInUserId)
-      updateAndBroadcastCount(io)
+      scheduleBroadcast(io)
 
       handlePrivateChat(io, socket)
     }
@@ -78,7 +90,7 @@ const handleOnlinePresence = (io: Server, socket: KUNGalgameSocket) => {
   socket.on('logout', () => {
     if (onlineClients.has(socket.id)) {
       onlineClients.set(socket.id, null)
-      updateAndBroadcastCount(io)
+      scheduleBroadcast(io)
 
       socket.removeAllListeners('private:join')
       socket.removeAllListeners('message:sending')
@@ -91,7 +103,7 @@ const handleOnlinePresence = (io: Server, socket: KUNGalgameSocket) => {
     if (socket.payload?.uid) {
       userSockets.delete(socket.payload.uid)
     }
-    updateAndBroadcastCount(io)
+    scheduleBroadcast(io)
   })
 }
 
