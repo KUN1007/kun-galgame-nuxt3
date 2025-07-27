@@ -39,6 +39,11 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '未找到该 Galgame 资源')
   }
 
+  await prisma.galgame_resource.update({
+    where: { id: input.galgameResourceId },
+    data: { download: { increment: 1 } }
+  })
+
   const resource: GalgameResourceDetails = {
     id: data.id,
     galgameId: data.galgame_id,
@@ -48,6 +53,7 @@ export default defineEventHandler(async (event) => {
     platform: data.platform,
     size: data.size,
     status: data.status,
+    download: data.download,
     link: data.link.map((l) => l.url),
     linkDomain: '',
     code: data.code,

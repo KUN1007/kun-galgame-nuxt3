@@ -53,6 +53,7 @@ export default defineEventHandler(async (event) => {
       platform: resource.platform,
       size: resource.size,
       status: resource.status,
+      download: resource.download,
       likeCount: resource._count.like,
       isLiked: resource.like.length > 0,
       linkDomain: linkDomain.length ? linkDomain[0] : '',

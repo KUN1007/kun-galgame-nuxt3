@@ -9,6 +9,7 @@ model galgame_resource {
   note        String   @default("") @db.VarChar(1007)
   update_time DateTime @default(now())
   status      Int      @default(0)
+  download    Int      @default(0)
 
   galgame_id Int
   galgame    galgame @relation(fields: [galgame_id], references: [id], onDelete: Cascade)

@@ -7,6 +7,7 @@ export interface GalgameResource {
   platform: string
   size: string
   status: number
+  download: number
   likeCount: number
   isLiked: boolean
   linkDomain: string

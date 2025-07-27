@@ -43,7 +43,7 @@ watch(
       </template>
       <template #endContent>
         <div class="text-sm">
-          <div class="text-secondary-600">
+          <div class="text-secondary-600 font-bold">
             提示: 部分资源链接可能需要网络代理
           </div>
           <div class="inline-flex gap-1">

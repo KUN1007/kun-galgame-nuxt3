@@ -130,8 +130,6 @@ onMounted(async () => {
       </div>
 
       <div class="ml-auto flex items-center gap-1">
-        <span class="text-default-500 mr-2 text-sm">{{ providerName }}</span>
-
         <KunButton
           :is-icon-only="true"
           variant="light"
@@ -143,6 +141,8 @@ onMounted(async () => {
           <KunIcon name="lucide:x" />
         </KunButton>
 
+        <span class="text-default-500 mr-2 text-sm">{{ providerName }}</span>
+
         <KunButton
           size="sm"
           v-if="id === resource.user.id && resource.status === 1"
@@ -151,15 +151,19 @@ onMounted(async () => {
         >
           重新标记有效
         </KunButton>
-        <KunButton
-          size="sm"
-          variant="flat"
-          v-if="!details && resource.id !== rewriteResourceId"
-          @click="handleGetDetail(resource.id)"
-          :loading="isFetching"
-        >
-          获取链接
-        </KunButton>
+
+        <KunTooltip text="下载数 (2025-07-27 起)">
+          <KunButton
+            :is-icon-only="true"
+            variant="light"
+            color="default"
+            size="sm"
+            class-name="gap-1"
+          >
+            <KunIcon name="lucide:download" />
+            <span>{{ resource.download }}</span>
+          </KunButton>
+        </KunTooltip>
 
         <GalgameResourceLike
           v-if="id !== resource.user.id"
@@ -169,6 +173,16 @@ onMounted(async () => {
           :is-liked="resource.isLiked"
           :like-count="resource.likeCount"
         />
+
+        <KunButton
+          size="sm"
+          variant="flat"
+          v-if="!details && resource.id !== rewriteResourceId"
+          @click="handleGetDetail(resource.id)"
+          :loading="isFetching"
+        >
+          获取链接
+        </KunButton>
 
         <KunTooltip text="举报违规">
           <KunButton
