@@ -19,7 +19,7 @@ try {
   console.log('Executing the commands...')
 
   execSync(
-    'git pull && pnpm prisma:push && pnpm build:limit && pnpm stop && pnpm start',
+    'git pull && pnpm prisma:push && pnpm build:limit && pnpm stop && pnpm start && pnpm build:sitemap',
     {
       stdio: 'inherit'
     }

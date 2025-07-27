@@ -41,7 +41,7 @@ export default defineNitroPlugin((nitroApp: NitroApp) => {
   })
 
   io.on('connection', (socket: KUNGalgameSocket) => {
-    handleSocketRequest(io, socket)
+    handleSocketRequest(socket)
   })
 
   nitroApp.router.use(

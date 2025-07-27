@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "4.2.31",
+  "version": "4.2.32",
   "packageManager": "pnpm@10.4.1",
   "private": true,
   "scripts": {
@@ -25,7 +25,6 @@
     "prisma:studio": "prisma studio",
     "build:sitemap": "esno scripts/generateKunSitemap.ts",
     "build:friend": "esno scripts/generateFriendSiteCapture.ts",
-    "postbuild": "esno scripts/postbuild.ts",
     "deploy:install": "esno scripts/deployInstall.ts",
     "deploy:build": "esno scripts/deployBuild.ts"
   },

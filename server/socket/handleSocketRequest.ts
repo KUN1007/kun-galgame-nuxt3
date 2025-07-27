@@ -1,14 +1,11 @@
 import { sendingMessage } from './service/message-sending'
 import { ERROR_CODES } from './error'
 import type { KUNGalgameSocket, OnlineUserCount } from './socket'
-import type { Server } from 'socket.io'
 
 const userSockets = new Map<number | undefined, KUNGalgameSocket>()
 const onlineClients = new Map<string, string | null>()
-const THROTTLE_INTERVAL = 5000
-let updateTimeout: NodeJS.Timeout | null = null
 
-const broadcastCount = (io: Server) => {
+const calculateOnlineCount = (): OnlineUserCount => {
   const userIds = new Set<string>()
   let guestCount = 0
   onlineClients.forEach((userId) => {
@@ -17,24 +14,14 @@ const broadcastCount = (io: Server) => {
   })
   const userCount = userIds.size
   const totalCount = userCount + guestCount
-  io.emit('update:online:count', {
+  return {
     total: totalCount,
     user: userCount,
     guest: guestCount
-  } satisfies OnlineUserCount)
-}
-
-const scheduleBroadcast = (io: Server) => {
-  if (updateTimeout) {
-    return
   }
-  updateTimeout = setTimeout(() => {
-    broadcastCount(io)
-    updateTimeout = null
-  }, THROTTLE_INTERVAL)
 }
 
-const handlePrivateChat = (io: Server, socket: KUNGalgameSocket) => {
+const handlePrivateChat = (socket: KUNGalgameSocket) => {
   const uid = socket.payload?.uid
   if (!uid) {
     return
@@ -70,10 +57,9 @@ const handlePrivateChat = (io: Server, socket: KUNGalgameSocket) => {
   })
 }
 
-const handleOnlinePresence = (io: Server, socket: KUNGalgameSocket) => {
+const handleOnlinePresence = (socket: KUNGalgameSocket) => {
   const initialUserId = socket.payload?.uid ? String(socket.payload.uid) : null
   onlineClients.set(socket.id, initialUserId)
-  scheduleBroadcast(io)
 
   socket.on('login', () => {
     const loggedInUserId = socket.payload?.uid
@@ -81,17 +67,13 @@ const handleOnlinePresence = (io: Server, socket: KUNGalgameSocket) => {
       : null
     if (loggedInUserId) {
       onlineClients.set(socket.id, loggedInUserId)
-      scheduleBroadcast(io)
-
-      handlePrivateChat(io, socket)
+      handlePrivateChat(socket)
     }
   })
 
   socket.on('logout', () => {
     if (onlineClients.has(socket.id)) {
       onlineClients.set(socket.id, null)
-      scheduleBroadcast(io)
-
       socket.removeAllListeners('private:join')
       socket.removeAllListeners('message:sending')
       socket.removeAllListeners('private:leave')
@@ -103,14 +85,16 @@ const handleOnlinePresence = (io: Server, socket: KUNGalgameSocket) => {
     if (socket.payload?.uid) {
       userSockets.delete(socket.payload.uid)
     }
-    scheduleBroadcast(io)
   })
 }
 
-export const handleSocketRequest = (io: Server, socket: KUNGalgameSocket) => {
-  handleOnlinePresence(io, socket)
-
+export const handleSocketRequest = (socket: KUNGalgameSocket) => {
+  handleOnlinePresence(socket)
   if (socket.payload?.uid) {
-    handlePrivateChat(io, socket)
+    handlePrivateChat(socket)
   }
+
+  socket.on('get:online:count', () => {
+    socket.emit('update:online:count', calculateOnlineCount())
+  })
 }
