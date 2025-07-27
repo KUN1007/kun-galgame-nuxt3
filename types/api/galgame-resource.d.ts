@@ -9,6 +9,7 @@ export interface GalgameResource {
   status: number
   likeCount: number
   isLiked: boolean
+  linkDomain: string
   created: Date | string
 }
 

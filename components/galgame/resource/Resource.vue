@@ -91,7 +91,7 @@ watch(
       <GalgameResourceLink
         v-for="resource in data"
         :key="resource.id"
-        :link="resource"
+        :resource="resource"
         :refresh="refresh"
       />
     </template>

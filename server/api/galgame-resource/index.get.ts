@@ -71,6 +71,7 @@ export default defineEventHandler(async (event) => {
     likeCount: resource._count.like,
     isLiked: resource.like.length > 0,
     created: resource.created,
+    linkDomain: '',
 
     galgameName: {
       'en-us': resource.galgame.name_en_us,

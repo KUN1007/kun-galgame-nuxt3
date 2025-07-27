@@ -49,6 +49,7 @@ export default defineEventHandler(async (event) => {
     size: data.size,
     status: data.status,
     link: data.link.map((l) => l.url),
+    linkDomain: '',
     code: data.code,
     password: data.password,
     note: data.note,

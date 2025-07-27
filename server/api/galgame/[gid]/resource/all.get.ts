@@ -1,5 +1,6 @@
 import prisma from '~/prisma/prisma'
 import { getGalgameResourceSchema } from '~/validations/galgame'
+import { getDomain } from '~/utils/getDomain'
 import type { GalgameResource } from '~/types/api/galgame-resource'
 
 export default defineEventHandler(async (event) => {
@@ -27,24 +28,37 @@ export default defineEventHandler(async (event) => {
           name: true,
           avatar: true
         }
+      },
+      link: {
+        select: {
+          url: true
+        }
       }
     },
     orderBy: { created: 'desc' }
   })
 
-  const galgames: GalgameResource[] = data.map((resource) => ({
-    id: resource.id,
-    galgameId: resource.galgame_id,
-    user: resource.user,
-    type: resource.type,
-    language: resource.language,
-    platform: resource.platform,
-    size: resource.size,
-    status: resource.status,
-    likeCount: resource._count.like,
-    isLiked: resource.like.length > 0,
-    created: resource.created
-  }))
+  const galgames: GalgameResource[] = data.map((resource) => {
+    const linkDomain = [
+      ...new Set(
+        resource.link.map((l) => getDomain(l.url, { getRootDomain: true }))
+      )
+    ]
+    return {
+      id: resource.id,
+      galgameId: resource.galgame_id,
+      user: resource.user,
+      type: resource.type,
+      language: resource.language,
+      platform: resource.platform,
+      size: resource.size,
+      status: resource.status,
+      likeCount: resource._count.like,
+      isLiked: resource.like.length > 0,
+      linkDomain: linkDomain.length ? linkDomain[0] : '',
+      created: resource.created
+    }
+  })
 
   return galgames
 })
