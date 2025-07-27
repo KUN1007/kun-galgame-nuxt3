@@ -59,7 +59,8 @@ export default defineEventHandler(async (event) => {
           id: input.topicId
         },
         data: {
-          best_answer_id: input.replyId
+          best_answer_id: input.replyId,
+          status_update_time: new Date()
         }
       })
 

@@ -18,7 +18,8 @@ export default defineEventHandler(async (event) => {
       where: { id: topicId, user_id: userInfo.uid },
       data: {
         ...topicData,
-        edited: new Date()
+        edited: new Date(),
+        status_update_time: new Date()
       }
     })
 

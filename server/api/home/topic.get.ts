@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
   const data = await prisma.topic.findMany({
     skip,
     take: limit,
-    where: { status: { not: 1 }, created: { gte: subMonths(new Date(), 3) } },
+    where: { status: { not: 1 }, edited: { gte: subMonths(new Date(), 3) } },
     orderBy: { status_update_time: 'desc' },
     include: {
       best_answer: true,
