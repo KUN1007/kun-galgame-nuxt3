@@ -91,7 +91,7 @@ useKunSeoMeta({
       <p class="text-default-500 text-sm">网站在建立以来, 各项指标的总和数据</p>
       <div
         v-if="allStats"
-        class="grid grid-cols-2 gap-6 lg:grid-cols-3 xl:grid-cols-5"
+        class="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-5"
       >
         <KunCard
           :is-transparent="true"
@@ -99,6 +99,7 @@ useKunSeoMeta({
           :is-pressable="false"
           v-for="stat in allStats"
           :key="stat.name"
+          :dark-border="true"
         >
           <p
             class="truncate text-sm font-medium text-gray-500 dark:text-gray-400"
@@ -125,6 +126,7 @@ useKunSeoMeta({
           :is-pressable="false"
           v-for="stat in totalStats"
           :key="stat.name"
+          :dark-border="true"
         >
           <p
             class="truncate text-sm font-medium text-gray-500 dark:text-gray-400"
@@ -157,6 +159,7 @@ useKunSeoMeta({
         :is-transparent="true"
         :is-hoverable="false"
         :is-pressable="false"
+        :dark-border="true"
         v-if="data"
       >
         <AdminOverviewChart :data="data" />
