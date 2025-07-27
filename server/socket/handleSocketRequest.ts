@@ -57,39 +57,10 @@ const handlePrivateChat = (socket: KUNGalgameSocket) => {
   })
 }
 
-const handleOnlinePresence = (socket: KUNGalgameSocket) => {
+export const handleSocketRequest = (socket: KUNGalgameSocket) => {
   const initialUserId = socket.payload?.uid ? String(socket.payload.uid) : null
   onlineClients.set(socket.id, initialUserId)
 
-  socket.on('login', () => {
-    const loggedInUserId = socket.payload?.uid
-      ? String(socket.payload.uid)
-      : null
-    if (loggedInUserId) {
-      onlineClients.set(socket.id, loggedInUserId)
-      handlePrivateChat(socket)
-    }
-  })
-
-  socket.on('logout', () => {
-    if (onlineClients.has(socket.id)) {
-      onlineClients.set(socket.id, null)
-      socket.removeAllListeners('private:join')
-      socket.removeAllListeners('message:sending')
-      socket.removeAllListeners('private:leave')
-    }
-  })
-
-  socket.on('disconnect', () => {
-    onlineClients.delete(socket.id)
-    if (socket.payload?.uid) {
-      userSockets.delete(socket.payload.uid)
-    }
-  })
-}
-
-export const handleSocketRequest = (socket: KUNGalgameSocket) => {
-  handleOnlinePresence(socket)
   if (socket.payload?.uid) {
     handlePrivateChat(socket)
   }
