@@ -4,7 +4,7 @@ import { markdownToText } from '~/utils/markdownToText'
 import type { ActivityItem } from '~/types/api/activity'
 
 const ACTIVITY_ITEM_FETCHER_LIMIT = 5
-const ACTIVITY_ITEM_LIMIT = 20
+const ACTIVITY_ITEM_LIMIT = 22
 
 const timelineFetchers = {
   GALGAME_CREATION: async (): Promise<ActivityItem[]> => {

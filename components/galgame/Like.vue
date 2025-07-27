@@ -7,7 +7,7 @@ const props = defineProps<{
 }>()
 
 const { id } = usePersistUserStore()
-const isLiked = ref(props.isLiked)
+const isLiked = ref(id && props.isLiked)
 const likesCount = ref(props.likeCount)
 
 const toggleLikeGalgame = async () => {

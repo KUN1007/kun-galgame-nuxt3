@@ -8,7 +8,7 @@ const props = defineProps<{
 }>()
 
 const { id } = usePersistUserStore()
-const isLiked = ref(props.isLiked)
+const isLiked = ref(id && props.isLiked)
 const likeCount = ref(props.likeCount)
 
 const likeResource = async () => {

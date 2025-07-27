@@ -14,9 +14,9 @@ type WebsiteData = (CreateWebsitePayload & { websiteId?: number }) | undefined
 
 const { id, role } = usePersistUserStore()
 
-const isLiked = ref(props.website.isLiked)
+const isLiked = ref(id && props.website.isLiked)
 const likeCount = ref(props.website.likeCount)
-const isFavorited = ref(props.website.isFavorited)
+const isFavorited = ref(id && props.website.isFavorited)
 const favoriteCount = ref(props.website.favoriteCount)
 type ActionType = 'like' | 'favorite' | 'update' | 'delete'
 const loadingStates = reactive<Record<ActionType, boolean>>({

@@ -7,7 +7,7 @@ const props = defineProps<{
 }>()
 
 const { id } = usePersistUserStore()
-const isFavorited = ref(props.isFavorited)
+const isFavorited = ref(id && props.isFavorited)
 const favoriteCount = ref(props.favoriteCount)
 
 const toggleFavoriteGalgame = async () => {

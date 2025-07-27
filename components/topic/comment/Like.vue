@@ -6,7 +6,7 @@ const props = defineProps<{
 }>()
 
 const { id } = usePersistUserStore()
-const isLiked = ref(props.comment.isLiked)
+const isLiked = ref(id && props.comment.isLiked)
 const likeCount = ref(props.comment.likeCount)
 
 const likeComment = async () => {
