@@ -47,8 +47,8 @@ watch(
         例如下面两张图就算作 NSFW 的游戏, 有 NSFW 的游戏名或介绍等等也算作 NSFW
       </p>
       <div class="flex gap-2">
-        <NuxtImg alt="nsfw-image2" src="/edit/1.avif" :width="200" />
-        <NuxtImg alt="nsfw-image2" src="/edit/2.avif" :width="200" />
+        <KunImage alt="nsfw-image2" src="/edit/1.avif" :width="200" />
+        <KunImage alt="nsfw-image2" src="/edit/2.avif" :width="200" />
       </div>
     </KunInfo>
 

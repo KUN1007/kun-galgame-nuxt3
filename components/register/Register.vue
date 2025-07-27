@@ -79,7 +79,7 @@ onKeyStroke('Enter', async (e) => {
         class="relative flex h-full flex-col items-center justify-center"
         @submit.prevent
       >
-        <NuxtImg
+        <KunImage
           preload
           src="/placeholder.webp"
           placeholder="/placeholder.webp"

@@ -76,7 +76,7 @@ const handleChangeImage = async (index: number) => {
           :key="image.index"
         >
           <KunTooltip :text="image.message['zh-cn']" position="bottom">
-            <NuxtImg
+            <KunImage
               class="w-18 shrink-0 cursor-pointer transition-transform hover:scale-150"
               v-if="image"
               :src="`bg/bg${image.index}-m.webp`"

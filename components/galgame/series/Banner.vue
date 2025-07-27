@@ -39,7 +39,7 @@ const hoverTranslations = [
         "
         :style="{ zIndex: banners.length - index }"
       >
-        <NuxtImg
+        <KunImage
           :src="banner"
           :alt="`Series Banner ${index + 1}`"
           class="h-full w-full rounded-lg object-cover shadow-md"

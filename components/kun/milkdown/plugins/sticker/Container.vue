@@ -54,7 +54,7 @@ const selectSticker = (stickerUrl: string) => {
   <div class="flex flex-col items-center gap-2 rounded-lg p-2">
     <div class="grid h-68 w-64 grid-cols-5 gap-1">
       <template v-for="(sticker, index) in paginatedStickers" :key="index">
-        <NuxtImg
+        <KunImage
           @click="selectSticker(sticker)"
           :src="sticker"
           class="h-full w-full rounded-lg object-contain"

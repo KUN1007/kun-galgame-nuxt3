@@ -60,13 +60,13 @@ const userAvatarSrc = computed(() => {
     "
     @click="handleClickAvatar($event)"
   >
-    <!-- <NuxtImg
+    <!-- <KunImage
       :class="cn('inline-block rounded-full', sizeClasses)"
       v-if="user.avatar"
       :src="userAvatarSrc"
       :alt="user.name"
     /> -->
-    <NuxtImg
+    <KunImage
       :class="cn('inline-block rounded-full', sizeClasses)"
       :src="userAvatarSrc"
       :alt="user.name"

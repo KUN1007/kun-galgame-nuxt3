@@ -25,7 +25,7 @@ const siteList = [
       <div class="flex flex-col items-center justify-center gap-2 sm:flex-row">
         <div class="flex items-center gap-2">
           <a :href="kungal.domain.main" target="_blank">
-            <NuxtImg
+            <KunImage
               class="h-8 w-8"
               src="/favicon.webp"
               :aria-label="kungal.titleShort"

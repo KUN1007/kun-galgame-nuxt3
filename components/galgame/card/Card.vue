@@ -22,7 +22,7 @@ defineProps<{
       class-name="p-0"
     >
       <div class="relative overflow-hidden">
-        <NuxtImg
+        <KunImage
           :src="galgame.banner.replace(/\.webp$/, '-mini.webp')"
           loading="lazy"
           :alt="galgame.name['zh-cn']"

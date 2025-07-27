@@ -47,7 +47,7 @@ import { friendArray } from '~/config/friend'
                 : friend.label
             }}
           </div>
-          <NuxtImg
+          <KunImage
             :src="`/friends/${friend.banner}.webp`"
             class="h-auto w-full rounded-md"
           />

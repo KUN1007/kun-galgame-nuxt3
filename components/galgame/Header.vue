@@ -101,7 +101,7 @@ onMounted(async () => {
     <div
       className="relative rounded-lg w-full h-full overflow-hidden md:col-span-1 aspect-video md:rounded-l-xl"
     >
-      <NuxtImg
+      <KunImage
         data-kun-lazy-image="true"
         class="size-full cursor-pointer object-cover"
         :src="galgame.banner"

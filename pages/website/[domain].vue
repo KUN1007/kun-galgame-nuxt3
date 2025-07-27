@@ -124,7 +124,7 @@ if (data.value) {
       >
         <div class="flex items-start space-x-6">
           <div class="flex-shrink-0">
-            <NuxtImg
+            <KunImage
               :src="data.icon"
               :alt="data.name"
               class="h-20 w-20 rounded-2xl object-cover shadow-md"

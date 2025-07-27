@@ -28,7 +28,7 @@ watch(
   <KunTooltip
     class-name="flex"
     text="是否显示内容限制的游戏内容 (R18 等)"
-    position="bottom"
+    position="top"
   >
     <KunSwitch
       label="启用网站 NSFW 模式"

@@ -13,7 +13,7 @@ withDefaults(
 
 <template>
   <div class="m-auto flex flex-col items-center gap-3">
-    <NuxtImg
+    <KunImage
       v-if="isShowSticker"
       :src="getRandomSticker(description || '').value"
       class="h-32 w-32 rounded-lg"

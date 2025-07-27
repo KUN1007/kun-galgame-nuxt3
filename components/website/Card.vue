@@ -21,7 +21,7 @@ const totalLevel = computed(() => {
   >
     <div class="flex items-start space-x-4">
       <div class="flex-shrink-0">
-        <NuxtImg
+        <KunImage
           :src="website.icon"
           :alt="website.name"
           class="h-12 w-12 rounded-2xl object-cover shadow-md"

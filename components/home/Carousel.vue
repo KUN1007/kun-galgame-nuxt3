@@ -126,7 +126,7 @@ onUnmounted(() => {
         class="w-full flex-shrink-0"
       >
         <div class="relative h-[200px] w-full select-none sm:h-[300px]">
-          <NuxtImg
+          <img
             :src="post.banner || '/kungalgame.webp'"
             :alt="post.title"
             class="opacity-[calc(var(--kun-global-opacity) / 2)] pointer-events-none h-full w-full object-cover select-none"
