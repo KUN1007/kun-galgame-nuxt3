@@ -61,6 +61,7 @@ useEventListener(document, 'click', close)
       @keydown.space.prevent="toggle"
       tabindex="0"
       role="button"
+      aria-label="popover-trigger"
       :aria-expanded="isOpen"
       :aria-controls="popoverId"
     >

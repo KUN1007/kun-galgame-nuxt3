@@ -17,12 +17,37 @@ const props = withDefaults(defineProps<KunButtonProps>(), {
   iconPosition: 'left',
   className: '',
   href: '',
-  target: '_self'
+  target: '_self',
+  ariaLabel: ''
 })
 
 const emits = defineEmits<{
   click: [event: MouseEvent]
 }>()
+
+const slots = useSlots()
+
+const computedAriaLabel = computed(() => {
+  if (props.ariaLabel) {
+    return props.ariaLabel
+  }
+
+  if (props.isIconOnly) {
+    // if (import.meta.dev) {
+    //   console.warn(
+    //     `[KunButton] An icon-only button should have an explicit 'ariaLabel' prop for accessibility.`
+    //   )
+    // }
+    return 'button'
+  }
+
+  if (slots.default) {
+    const slotText = extractTextFromVNodes(slots.default()).trim()
+    return slotText || ''
+  }
+
+  return ''
+})
 
 const sizeClasses = computed(() => {
   switch (props.size) {
@@ -175,7 +200,7 @@ const handleKunButtonClick = (event: MouseEvent) => {
     :is="props.href ? defineNuxtLink({}) : 'button'"
     :class="
       cn(
-        'relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-md font-medium transition-all hover:opacity-80 active:scale-[0.97] disabled:opacity-50',
+        'relative inline-flex cursor-pointer items-center justify-center gap-1 overflow-hidden rounded-md font-medium transition-all hover:opacity-80 active:scale-[0.97] disabled:opacity-50',
         sizeClasses,
         variantClasses,
         colorClasses,
@@ -189,8 +214,9 @@ const handleKunButtonClick = (event: MouseEvent) => {
     :to="props.href"
     :target="props.target"
     :disabled="disabled || loading"
-    :role="props.href ? 'a' : 'button'"
+    :role="props.href ? 'link' : 'button'"
     :type="type"
+    :aria-label="computedAriaLabel"
     @click="handleKunButtonClick"
   >
     <KunIcon

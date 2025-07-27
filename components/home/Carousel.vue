@@ -83,11 +83,6 @@ const manualSlide = (direction: 'next' | 'prev') => {
   startAutoplay()
 }
 
-const goToSlide = (index: number) => {
-  currentSlide.value = index
-  startAutoplay()
-}
-
 watch(isOutside, (outside) => {
   if (outside) {
     startAutoplay()
@@ -131,7 +126,7 @@ onUnmounted(() => {
         class="w-full flex-shrink-0"
       >
         <div class="relative h-[200px] w-full select-none sm:h-[300px]">
-          <img
+          <NuxtImg
             :src="post.banner || '/kungalgame.webp'"
             :alt="post.title"
             class="opacity-[calc(var(--kun-global-opacity) / 2)] pointer-events-none h-full w-full object-cover select-none"
@@ -185,10 +180,9 @@ onUnmounted(() => {
     </KunButton>
 
     <div class="absolute bottom-4 left-1/2 flex -translate-x-1/2 space-x-2">
-      <button
+      <span
         v-for="(_, index) in pinnedPosts"
         :key="index"
-        @click="goToSlide(index)"
         class="h-2 w-2 rounded-full transition-colors"
         :class="
           currentSlide === index ? 'bg-foreground/40' : 'bg-foreground/20'

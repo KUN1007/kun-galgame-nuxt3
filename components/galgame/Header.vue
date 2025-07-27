@@ -106,6 +106,7 @@ onMounted(async () => {
         class="size-full cursor-pointer object-cover"
         :src="galgame.banner"
         loading="lazy"
+        :alt="getPreferredLanguageText(galgame.name)"
       />
 
       <KunModal

@@ -27,6 +27,7 @@ const colorClasses: Record<KunUIColor, string> = {
       orientation === 'horizontal' ? 'w-full' : 'h-full flex-col',
       className
     ]"
+    role="separator"
   >
     <div
       :class="[

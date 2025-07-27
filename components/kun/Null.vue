@@ -19,6 +19,7 @@ withDefaults(
       class="h-32 w-32 rounded-lg"
       loading="lazy"
       placeholder="/apple-touch-icon.png"
+      alt="blank galgame"
     />
     <span>{{ description }}</span>
   </div>

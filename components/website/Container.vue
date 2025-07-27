@@ -122,7 +122,6 @@ const handleCreateWebsite = async (
             <KunLink to="/doc/notice/contact"> 联系我们 </KunLink>。
           </p>
           <KunInput
-            :autofocus="true"
             v-model="searchQuery"
             type="text"
             placeholder="搜索 Galgame 网站"

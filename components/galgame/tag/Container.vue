@@ -64,7 +64,6 @@ watchDebounced(
           </p>
 
           <KunInput
-            :autofocus="true"
             v-model="searchQuery"
             type="text"
             placeholder="搜索标签名称、描述或别名..."

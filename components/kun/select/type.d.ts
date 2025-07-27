@@ -11,4 +11,5 @@ export interface KunSelectProps {
   error?: string
   disabled?: boolean
   darkBorder?: boolean
+  ariaLabel?: string
 }

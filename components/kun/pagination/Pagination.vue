@@ -10,6 +10,7 @@ const emit = defineEmits<{
 }>()
 
 const jumpToPage = ref('')
+const kunUniqueId = useKunUniqueId('kun-pagination')
 
 const displayedPages = computed(() => {
   const pages: (number | string)[] = []
@@ -111,8 +112,9 @@ const handleJumpToPage = () => {
     </div>
 
     <div class="flex items-center gap-2">
-      <span class="text-sm">跳转到页数</span>
+      <label :for="kunUniqueId" class="text-sm">跳转到页数</label>
       <input
+        :id="kunUniqueId"
         type="number"
         v-model="jumpToPage"
         :disabled="isLoading"

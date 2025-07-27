@@ -90,11 +90,11 @@ defineProps<{
       </div>
 
       <div class="flex flex-auto flex-col justify-between p-3">
-        <h3
-          class="text-middle hover:text-primary mb-3 line-clamp-2 font-medium transition-colors sm:text-lg"
+        <h2
+          class="text-md hover:text-primary mb-3 line-clamp-2 font-medium transition-colors sm:text-lg"
         >
           {{ getPreferredLanguageText(galgame.name) }}
-        </h3>
+        </h2>
 
         <div class="text-default-600 flex items-center gap-1 text-sm">
           <KunAvatar :user="galgame.user" size="xs" />

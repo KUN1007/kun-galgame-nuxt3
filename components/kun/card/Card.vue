@@ -80,7 +80,6 @@ const roundedClasses = computed(() => {
       )
     "
     :to="props.href"
-    :role="isPressable ? 'a' : 'div'"
     @click="handleKunCardClick"
   >
     <div v-if="$slots.header" class="border-b">

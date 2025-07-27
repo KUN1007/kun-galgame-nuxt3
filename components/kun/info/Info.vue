@@ -135,7 +135,7 @@ const titleColor = computed(() => {
       cn('space-y-2 rounded-lg p-3', variantClasses, colorClasses, className)
     "
   >
-    <h4 :class="cn('font-medium', titleColor)">{{ title }}</h4>
+    <h3 :class="cn('font-medium', titleColor)">{{ title }}</h3>
     <p class="text-sm text-inherit">
       {{ description }}
     </p>

@@ -25,14 +25,16 @@ watch(
 </script>
 
 <template>
-  <div :class="cn('ml-auto flex gap-3', className)">
-    <span :class="cn('text-default-500', labelClass)">启用网站 NSFW 模式</span>
-    <KunTooltip
-      class-name="flex"
-      text="是否显示内容限制的游戏内容 (R18 等)"
-      position="bottom"
-    >
-      <KunSwitch v-model="option" />
-    </KunTooltip>
-  </div>
+  <KunTooltip
+    class-name="flex"
+    text="是否显示内容限制的游戏内容 (R18 等)"
+    position="bottom"
+  >
+    <KunSwitch
+      label="启用网站 NSFW 模式"
+      :class-name="cn('flex-row-reverse w-full justify-end gap-3', className)"
+      :label-class-name="cn('text-md text-default-500 ml-0', labelClass)"
+      v-model="option"
+    />
+  </KunTooltip>
 </template>

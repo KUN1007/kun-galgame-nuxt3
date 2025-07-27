@@ -120,7 +120,7 @@ const getLanguageName = (langCode: string) => {
 
       <div
         v-if="engine && engine.length > 0"
-        class="border-default-200 dark:border-default-700/50 border-t pt-5"
+        class="border-default-200 dark:border-default-700/50"
       >
         <dt class="text-default-500 dark:text-default-400 text-sm font-medium">
           游戏引擎
@@ -148,27 +148,31 @@ const getLanguageName = (langCode: string) => {
       </div>
 
       <div class="flex items-center justify-between">
-        <span class="text-default-500 text-sm font-medium">游戏原语言</span>
-        <KunBadge color="warning">
-          {{ getLanguageName(originalLanguage) }}
-        </KunBadge>
+        <dt class="text-default-500 text-sm font-medium">游戏原语言</dt>
+        <dd>
+          <KunBadge color="warning">
+            {{ getLanguageName(originalLanguage) }}
+          </KunBadge>
+        </dd>
       </div>
 
       <div class="flex items-center justify-between">
-        <span
-          class="text-default-500 dark:text-default-400 text-sm font-medium"
-        >
+        <dt class="text-default-500 dark:text-default-400 text-sm font-medium">
           年龄限制
-        </span>
-
-        <KunTooltip position="left" :text="KUN_GALGAME_AGE_LIMIT_MAP[ageLimit]">
-          <KunBadge
-            variant="flat"
-            :color="ageLimit === 'all' ? 'success' : 'danger'"
+        </dt>
+        <dd>
+          <KunTooltip
+            position="left"
+            :text="KUN_GALGAME_AGE_LIMIT_MAP[ageLimit]"
           >
-            {{ ageLimit === 'all' ? '全年龄' : 'R18' }}
-          </KunBadge>
-        </KunTooltip>
+            <KunBadge
+              variant="flat"
+              :color="ageLimit === 'all' ? 'success' : 'danger'"
+            >
+              {{ ageLimit === 'all' ? '全年龄' : 'R18' }}
+            </KunBadge>
+          </KunTooltip>
+        </dd>
       </div>
     </dl>
   </KunCard>

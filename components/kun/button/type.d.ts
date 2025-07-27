@@ -20,4 +20,5 @@ export interface KunButtonProps {
   className?: string
   href?: string
   target?: '_blank' | '_self' | '_parent' | '_top'
+  ariaLabel?: string
 }
