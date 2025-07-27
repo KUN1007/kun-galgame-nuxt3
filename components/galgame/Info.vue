@@ -76,12 +76,19 @@ const getLanguageName = (langCode: string) => {
 
             <div class="mt-1 flex items-center justify-between">
               <div class="flex items-center gap-x-2">
-                <span
-                  class="inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium"
-                  :class="getOfficialCategoryInfo(item.category).class"
+                <KunBadge
+                  size="xs"
+                  class-name="rounded-md"
+                  :color="
+                    item.category === 'company'
+                      ? 'primary'
+                      : item.category === 'individual'
+                        ? 'secondary'
+                        : 'success'
+                  "
                 >
                   {{ getOfficialCategoryInfo(item.category).text }}
-                </span>
+                </KunBadge>
                 <span class="text-default-500 dark:text-default-400 text-xs">
                   {{
                     KUN_GALGAME_OFFICIAL_LANGUAGE_MAP[item.lang] || item.lang

@@ -88,7 +88,6 @@ const handleLoadMore = async () => {
       :model-value="pageData.type"
       @update:model-value="(value) => handleSetType(value as SearchType)"
       size="sm"
-      inner-class-name="shadow border bg-transparent"
     />
 
     <SearchBox />

@@ -11,7 +11,12 @@ withDefaults(
 
 <template>
   <div class="m-auto flex flex-col items-center gap-3">
-    <img alt="loading" src="/kun.webp" class="h-48 w-48 rounded-lg" />
+    <KunImage
+      :custom="true"
+      alt="loading"
+      src="/kun.webp"
+      class="h-48 w-48 rounded-lg"
+    />
     <span>{{ description }}</span>
   </div>
 </template>

@@ -9,7 +9,8 @@ defineProps<{
 <template>
   <KunCard :is-hoverable="false" class-name="border-none">
     <div class="relative mb-6 w-full overflow-hidden rounded-lg">
-      <img
+      <KunImage
+        :custom="true"
         :alt="metadata.title"
         class="object-cover"
         :src="metadata.banner"

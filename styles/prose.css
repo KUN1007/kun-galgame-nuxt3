@@ -62,7 +62,7 @@
 
 /* Code blocks with improved styling */
 .kun-prose pre {
-  @apply bg-default-50 border-default-200 my-6 overflow-x-auto rounded-xl border p-4 shadow-sm;
+  @apply bg-default-50/50 border-default-200 my-6 overflow-x-auto rounded-xl border p-4 shadow-sm;
 }
 
 .kun-prose pre code {

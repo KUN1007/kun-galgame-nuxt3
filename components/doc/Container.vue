@@ -46,7 +46,8 @@ const { data: posts } = await useAsyncData(() => {
         </div>
 
         <div class="group relative h-full space-y-3">
-          <img
+          <KunImage
+            :custom="true"
             :alt="post.title"
             class="rounded-lg"
             :src="post.banner"

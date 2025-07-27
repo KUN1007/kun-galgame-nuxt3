@@ -6,7 +6,8 @@ const props = defineProps<{
 
 <template>
   <Teleport to="#teleports">
-    <img
+    <KunImage
+      :custom="true"
       class="fixed top-0 left-0 h-full w-full object-cover brightness-[var(--kun-background-brightness)]"
       :src="props.src"
     />
