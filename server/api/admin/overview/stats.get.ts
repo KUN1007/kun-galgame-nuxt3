@@ -16,11 +16,6 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
-  const userInfo = await getCookieTokenInfo(event)
-  if (!userInfo) {
-    return kunError(event, '用户登录失效')
-  }
-
   const { days } = input
 
   const endDate = endOfDay(new Date())
