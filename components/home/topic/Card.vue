@@ -25,9 +25,7 @@ defineProps<{
       </span>
     </div>
 
-    <div
-      class="flex w-full flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
-    >
+    <div class="flex w-full flex-wrap items-center justify-between gap-2">
       <TopicTagGroup
         :section="topic.section"
         :tags="topic.tag"

@@ -20,6 +20,7 @@ defineProps<{
     :is-hoverable="true"
     :is-pressable="true"
     :to="`/galgame/${resource.galgameId}`"
+    :dark-border="true"
   >
     <div class="flex items-center gap-2">
       <div
