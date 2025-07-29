@@ -12,6 +12,7 @@ const activeTab = computed(
       :items="kunCategoryAvailableItem"
       :model-value="activeTab"
       size="sm"
+      inner-class-name="bg-background"
     />
     <NuxtPage />
   </div>

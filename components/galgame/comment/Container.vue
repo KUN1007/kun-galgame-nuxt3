@@ -39,7 +39,7 @@ onMounted(() => (commentToUid.value = props.targetUser.id))
   <div class="space-y-3">
     <KunHeader name="游戏评论" scale="h2">
       <template #endContent>
-        <KunLink to="/topic/1482">
+        <KunLink size="sm" to="/topic/1482">
           Galgame 评论注意事项, 资源失效, 解压密码错误等问题反馈
         </KunLink>
       </template>

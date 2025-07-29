@@ -8,7 +8,12 @@ const activeTab = computed(
 
 <template>
   <div class="flex flex-col space-y-3">
-    <KunTab :items="kunUpdateLogTabItem" :model-value="activeTab" size="sm" />
+    <KunTab
+      :items="kunUpdateLogTabItem"
+      inner-class-name="bg-background"
+      :model-value="activeTab"
+      size="sm"
+    />
     <NuxtPage />
   </div>
 </template>

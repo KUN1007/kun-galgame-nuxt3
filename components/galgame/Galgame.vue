@@ -33,6 +33,8 @@ provide<GalgameDetail>('galgame', props.galgame)
 
           <GalgameResource />
 
+          <GalgamePatchContainer :vndb-id="galgame.vndbId" />
+
           <div v-if="galgame.series" class="space-y-3">
             <KunHeader
               name="Galgame 系列"

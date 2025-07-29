@@ -37,7 +37,7 @@ watch(
         <NuxtPage />
       </div>
 
-      <KunImage
+      <NuxtImg
         v-if="showKUNGalgameBackLoli"
         class="pointer-events-none fixed right-px bottom-px z-0 opacity-17 select-none"
         src="/image/kohaku.webp"

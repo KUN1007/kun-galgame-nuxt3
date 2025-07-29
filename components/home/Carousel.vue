@@ -108,8 +108,8 @@ onUnmounted(() => {
     @mousemove="onDrag"
     @mouseup="endDrag"
     @mouseleave="endDrag"
-    @touchstart="startDrag"
-    @touchmove="onDrag"
+    @touchstart.passive="startDrag"
+    @touchmove.passive="onDrag"
     @touchend="endDrag"
     class-name="group relative overflow-hidden p-0 cursor-grab"
   >

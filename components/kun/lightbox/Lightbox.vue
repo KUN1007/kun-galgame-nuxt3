@@ -384,8 +384,8 @@ onMounted(() => {
         @mousemove="onDrag"
         @mouseup="stopDrag"
         @mouseleave="stopDrag"
-        @touchstart="handleTouchStart"
-        @touchmove="handleTouchMove"
+        @touchstart.passive="handleTouchStart"
+        @touchmove.passive="handleTouchMove"
         @touchend="stopDrag"
         @dblclick="handleDoubleClick"
       >

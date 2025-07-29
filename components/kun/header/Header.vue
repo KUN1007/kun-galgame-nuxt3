@@ -36,7 +36,10 @@ withDefaults(
           <slot name="title" />
         </component>
 
-        <p v-if="description" class="text-default-500 whitespace-pre-wrap">
+        <p
+          v-if="description"
+          class="text-default-500 text-sm whitespace-pre-wrap sm:text-base"
+        >
           {{ description }}
         </p>
       </div>

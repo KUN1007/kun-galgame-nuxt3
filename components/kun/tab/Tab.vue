@@ -49,7 +49,7 @@ const containerClasses = computed(() => {
 
 const tabListClasses = computed(() => {
   return cn(
-    'flex h-fit items-center gap-2 bg-background',
+    'flex h-fit items-center gap-2',
     props.variant === 'solid' &&
       'border border-default-200 rounded-lg shadow p-1',
     props.variant === 'underlined' && 'border-b border-default-200',
