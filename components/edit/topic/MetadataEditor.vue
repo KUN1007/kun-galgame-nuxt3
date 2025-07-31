@@ -188,6 +188,13 @@ const handleTagInputBackspace = () => {
           @focus="isTagInputFocused = true"
           @blur="isTagInputFocused = false"
         />
+        <KunButton
+          v-if="tags.length < MAX_TAGS"
+          variant="flat"
+          :is-icon-only="true"
+        >
+          <KunIcon @click="handleAddTag" name="lucide:plus" />
+        </KunButton>
       </div>
       <p class="text-default-500 mt-2 text-sm">
         话题至少选择一个标签，最多 {{ MAX_TAGS }} 个
