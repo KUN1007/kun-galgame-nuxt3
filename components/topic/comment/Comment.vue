@@ -71,7 +71,7 @@ const handleRemoveComment = (commentId: number) => {
               </div>
             </div>
 
-            <p class="text-default-700 text-sm whitespace-pre-wrap">
+            <p class="text-default-700 text-sm break-all whitespace-pre-wrap">
               {{ comment.content }}
             </p>
 

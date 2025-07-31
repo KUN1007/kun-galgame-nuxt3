@@ -75,13 +75,13 @@ onUnmounted(() => {
     v-if="isVisible"
     :class="
       cn(
-        'bg-background fixed right-3 bottom-3 z-100 flex items-center gap-2 rounded-full px-4 py-2 shadow-lg backdrop-blur-sm transition-opacity duration-300',
+        'bg-background fixed right-3 bottom-3 z-100 flex items-center gap-2 rounded-full px-2 py-2 shadow-lg backdrop-blur-sm transition-opacity duration-300 sm:px-4',
         !autoHideStatus && 'hidden'
       )
     "
   >
     <div
-      class="bg-default-200 relative h-2 w-[100px] overflow-hidden rounded-full"
+      class="bg-default-200 relative hidden h-2 w-[100px] overflow-hidden rounded-full sm:block"
     >
       <span
         class="bg-primary absolute top-0 left-0 h-full rounded-full"
@@ -91,20 +91,42 @@ onUnmounted(() => {
       />
     </div>
 
-    <span class="text-primary text-sm font-medium">
+    <span class="text-primary hidden text-sm font-medium sm:block">
       {{ Math.round(progress) }}%
     </span>
 
-    <KunTooltip :text="buttonText">
+    <div class="flex flex-col gap-2">
+      <KunTooltip :text="buttonText">
+        <KunButton
+          :is-icon-only="true"
+          rounded="full"
+          size="lg"
+          variant="flat"
+          @click="handleScroll"
+        >
+          <KunIcon class="text-inherit" :name="buttonIcon" />
+        </KunButton>
+      </KunTooltip>
+
       <KunButton
         :is-icon-only="true"
+        class-name="text-xs flex sm:hidden"
         rounded="full"
         size="lg"
         variant="flat"
-        @click="handleScroll"
       >
-        <KunIcon class="text-inherit" :name="buttonIcon" />
+        {{ Math.round(progress) }}
       </KunButton>
-    </KunTooltip>
+
+      <KunButton
+        :is-icon-only="true"
+        class-name="flex sm:hidden"
+        rounded="full"
+        size="lg"
+        variant="flat"
+      >
+        <KunIcon class="text-inherit" name="lucide:arrow-left" />
+      </KunButton>
+    </div>
   </div>
 </template>
