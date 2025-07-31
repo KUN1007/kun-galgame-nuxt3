@@ -9,13 +9,15 @@ interface Props {
   className?: string
   color?: KunInfoColor
   variant?: KunUIVariant
+  icon?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   description: '',
   color: 'default',
   className: '',
-  variant: 'flat'
+  variant: 'flat',
+  icon: ''
 })
 
 const variantClasses = computed(() => {
@@ -135,10 +137,14 @@ const titleColor = computed(() => {
       cn('space-y-2 rounded-lg p-3', variantClasses, colorClasses, className)
     "
   >
-    <h3 :class="cn('font-medium', titleColor)">{{ title }}</h3>
-    <p class="text-sm text-inherit">
-      {{ description }}
-    </p>
-    <slot />
+    <h3 :class="cn('flex items-center gap-2 font-medium', titleColor)">
+      <KunIcon v-if="icon" :name="icon" class-name="h-5 w-5 flex-shrink-0" />
+      <span>{{ title }}</span>
+    </h3>
+
+    <div v-if="description || $slots.default" class="text-sm opacity-90">
+      <p v-if="description">{{ description }}</p>
+      <slot />
+    </div>
   </div>
 </template>

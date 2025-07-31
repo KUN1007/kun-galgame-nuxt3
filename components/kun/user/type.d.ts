@@ -4,4 +4,5 @@ export interface KunUserProps {
   user: KunUser
   size?: KunAvatarSize
   description?: string
+  className?: string
 }

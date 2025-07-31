@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import type { KunUserProps } from './type'
 
-withDefaults(defineProps<KunUserProps>(), {
+const props = withDefaults(defineProps<KunUserProps>(), {
   size: 'md',
-  description: ''
+  description: '',
+  className: ''
 })
 </script>
 
 <template>
-  <div class="flex items-center gap-2">
+  <div :class="cn('flex items-center gap-2', props.className)">
     <KunAvatar :user="user" :size="size" />
 
     <div class="flex flex-col text-sm">

@@ -20,7 +20,7 @@
 
 更多信息请直接访问网站的关于我们页面
 
-https://www.kungal.com/zh-cn/kungalgame
+https://www.kungal.com/kungalgame
 
 ## 加入我们
 

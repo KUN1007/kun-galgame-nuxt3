@@ -91,4 +91,4 @@ pin: true
 >
 > [SWEET&TEA 官网](http://sweet.clearrave.co.jp/karehana/)
 
-[游戏下载？](https://www.kungal.com/zh-cn/galgame/1)
+[游戏下载？](https://www.kungal.com/galgame/1)

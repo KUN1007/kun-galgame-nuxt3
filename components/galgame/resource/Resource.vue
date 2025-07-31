@@ -37,19 +37,20 @@ watch(
 
 <template>
   <div class="space-y-3">
-    <KunHeader :is-show-divider="false" name="资源链接" scale="h2">
+    <KunHeader :is-show-divider="false" name="Galgame 资源链接" scale="h2">
       <template #headerEndContent>
         <KunButton @click="handleClickContribute">添加资源</KunButton>
       </template>
       <template #endContent>
-        <div class="text-sm">
-          <div class="text-secondary-600 font-bold">
-            提示: 部分资源链接可能需要网络代理
-          </div>
-          <div class="inline-flex gap-1">
-            <p>如果您找不到想要的资源链接, 可以去看看友站</p>
+        <KunInfo
+          color="info"
+          title="一些小提示以及帮助文档"
+          description="部分资源链接可能需要网络代理"
+        >
+          <div class="my-1 text-sm">
+            <span>如果您找不到想要的资源链接, 可以去看看友站</span>
             <KunLink
-              class-name="block whitespace-nowrap"
+              class-name="inline whitespace-nowrap"
               size="sm"
               to="https://www.touchgal.us/"
               target="_blank"
@@ -58,7 +59,7 @@ watch(
             </KunLink>
             和
             <KunLink
-              class-name="block whitespace-nowrap"
+              class-name="inline whitespace-nowrap"
               size="sm"
               to="https://zi6.cc/"
               target="_blank"
@@ -66,7 +67,37 @@ watch(
               zi0
             </KunLink>
           </div>
-        </div>
+
+          <div class="mb-1 flex items-center gap-1">
+            <KunLink class-name="inline" size="sm" to="/topic/2431">
+              Galgame萌新入门(待补充)
+            </KunLink>
+            - by
+            <KunUser
+              size="sm"
+              :user="{
+                id: 19994,
+                name: '大伊兜子',
+                avatar: 'https://image.kungal.com/avatar/user_19994/avatar.webp'
+              }"
+            />
+          </div>
+
+          <div class="flex items-center gap-1">
+            <KunLink class-name="inline" size="sm" to="/topic/2522">
+              如何安装镜像文件(教程)
+            </KunLink>
+            - by
+            <KunUser
+              size="sm"
+              :user="{
+                id: 19994,
+                name: '大伊兜子',
+                avatar: 'https://image.kungal.com/avatar/user_19994/avatar.webp'
+              }"
+            />
+          </div>
+        </KunInfo>
       </template>
     </KunHeader>
 

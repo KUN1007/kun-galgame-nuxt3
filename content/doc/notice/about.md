@@ -34,7 +34,7 @@ pin: false
 - [量子 ACG ](http://lzacg.org/)- 我不是loli控
 - [Galgamer ](http://galgamer.moe/)- 冬夜
 
-除此之外，鲲 Galgame 的建设还受到了大量人员的支持，以及诸多网站的启发，请看 [感谢名单](https://www.kungal.com/zh-cn/thanks-list)
+除此之外，鲲 Galgame 的建设还受到了大量人员的支持，以及诸多网站的启发，请看 [感谢名单](https://www.kungal.com/thanks-list)
 
 **我们衷心的感谢所有对鲲 Galgame 建设做出贡献的人们！并且感谢使用鲲 Galgame 论坛的人们！**
 

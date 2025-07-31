@@ -6,7 +6,7 @@
     <div>本消息系统尚在开发中, 但是功能应该足够用</div>
     <div>如果您有任何问题, 请查看这个话题</div>
     <KunLink
-      to="https://www.kungal.com/zh-cn/topic/1650"
+      to="https://www.kungal.com/topic/1650"
       target="_blank"
       class="text-primary underline"
     >
