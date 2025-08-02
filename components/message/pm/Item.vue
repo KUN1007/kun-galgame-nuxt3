@@ -12,7 +12,11 @@ defineProps<{
     class="flex w-full items-end gap-2"
     :class="isSent ? 'flex-row-reverse' : 'flex-row'"
   >
-    <KunAvatar :user="message.sender" class="mb-auto" />
+    <KunAvatar
+      :disable-floating="true"
+      :user="message.sender"
+      class="mb-auto"
+    />
 
     <div
       class="relative max-w-[75%] rounded-lg p-3 shadow"

@@ -5,7 +5,8 @@ const props = withDefaults(defineProps<KunAvatarProps>(), {
   size: 'md',
   isNavigation: true,
   className: '',
-  disableFloating: false
+  disableFloating: false,
+  floatingPosition: 'top'
 })
 
 const handleClickAvatar = async (event: MouseEvent) => {
@@ -50,7 +51,11 @@ const userAvatarSrc = computed(() => {
 </script>
 
 <template>
-  <KunFloatingUserCard :disabled="props.disableFloating" :user-id="user.id">
+  <KunFloatingUserCard
+    :position="props.floatingPosition"
+    :disabled="props.disableFloating"
+    :user-id="user.id"
+  >
     <template #trigger>
       <div
         :class="

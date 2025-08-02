@@ -56,6 +56,7 @@ const handlePostComment = async () => {
         name: userStore.name,
         avatar: userStore.avatar
       }"
+      :disable-floating="true"
     />
     <div class="flex-1">
       <KunTextarea v-model="newCommentContent" :rows="3" />

@@ -25,7 +25,7 @@ const { data } = await useFetch(`/api/ranking/topic`, {
       >
         <RankingMedal :index="index" />
 
-        <div class="flex-1 overflow-hidden">
+        <div class="flex-1">
           <h3 class="truncate font-semibold">{{ topic.title }}</h3>
           <div class="mt-1 flex items-center gap-2">
             <KunAvatar :user="topic.user" size="sm" />

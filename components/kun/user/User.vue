@@ -5,13 +5,15 @@ const props = withDefaults(defineProps<KunUserProps>(), {
   size: 'md',
   description: '',
   className: '',
-  disableFloating: false
+  disableFloating: false,
+  floatingPosition: 'top'
 })
 </script>
 
 <template>
   <div :class="cn('flex items-center gap-2', props.className)">
     <KunAvatar
+      :floating-position="props.floatingPosition"
       :disable-floating="props.disableFloating"
       :user="user"
       :size="size"

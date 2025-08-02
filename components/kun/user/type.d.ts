@@ -6,4 +6,5 @@ export interface KunUserProps {
   description?: string
   className?: string
   disableFloating?: boolean
+  floatingPosition?: 'top' | 'bottom' | 'left' | 'right'
 }

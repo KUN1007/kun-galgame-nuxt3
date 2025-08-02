@@ -26,7 +26,7 @@ const user = {
       <KunIcon name="lucide:chevron-left" />
     </KunButton>
 
-    <KunAvatar :user="user" />
+    <KunAvatar :disable-floating="true" :user="user" />
 
     <h2 class="relative flex items-center gap-2">
       <span>{{ user.name }}</span>

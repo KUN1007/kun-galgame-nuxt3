@@ -6,4 +6,5 @@ export interface KunAvatarProps {
   isNavigation?: boolean
   className?: string
   disableFloating?: boolean
+  floatingPosition?: 'top' | 'bottom' | 'left' | 'right'
 }

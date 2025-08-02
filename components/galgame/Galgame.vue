@@ -80,13 +80,11 @@ provide<GalgameDetail>('galgame', props.galgame)
             :is-show-divider="false"
           />
           <div class="flex flex-wrap items-center gap-1">
-            <KunTooltip
+            <KunAvatar
               v-for="(user, index) in galgame.contributor"
               :key="index"
-              :text="user.name"
-            >
-              <KunAvatar :user="user" />
-            </KunTooltip>
+              :user="user"
+            />
           </div>
         </KunCard>
 

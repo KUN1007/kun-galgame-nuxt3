@@ -9,7 +9,7 @@ defineProps<{
 <template>
   <KunCard :is-pressable="true" :href="`/user/${user.id}/info`">
     <div class="flex items-center">
-      <KunAvatar :user="user" />
+      <KunAvatar :disable-floating="true" :user="user" />
       <span class="ml-2">{{ user.name }}</span>
     </div>
 

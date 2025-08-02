@@ -72,7 +72,7 @@ watch(
       :key="index"
       :to="`/topic/${topic.id}`"
     >
-      <KunAvatar :user="topic.user" />
+      <KunAvatar :disable-floating="true" :user="topic.user" />
 
       <div class="w-full space-y-2">
         <div class="flex items-center">

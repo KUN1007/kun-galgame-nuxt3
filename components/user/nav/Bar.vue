@@ -13,6 +13,7 @@ defineProps<{
       :is-navigation="false"
       size="original"
       :user="user"
+      :disable-floating="true"
     />
 
     <KunAvatar
@@ -20,6 +21,7 @@ defineProps<{
       :is-navigation="false"
       size="md"
       :user="user"
+      :disable-floating="true"
     />
 
     <UserNavItem :uid="user.id" :nav="navBarRoute" />

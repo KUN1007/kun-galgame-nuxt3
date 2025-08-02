@@ -31,7 +31,7 @@ const { data } = await useFetch(`/api/ranking/galgame`, {
             backgroundImage: `url(${galgame.banner.replace(/\.webp$/, '-mini.webp')})`
           }"
         />
-        <div class="flex-1 overflow-hidden">
+        <div class="flex-1">
           <div class="flex flex-col items-start justify-between gap-3">
             <h3 class="truncate font-semibold">
               {{ getPreferredLanguageText(galgame.name) }}

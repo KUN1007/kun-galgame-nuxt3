@@ -15,10 +15,10 @@ const user = computed(() => props.user)
   <KunCard
     :is-transparent="false"
     :is-hoverable="false"
-    class-name="w-36 shrink-0 hidden lg:flex"
+    class-name="w-36 shrink-0 z-1 hidden lg:flex"
     content-class="justify-start items-center gap-3"
   >
-    <KunAvatar size="original-sm" :user="user" />
+    <KunAvatar floating-position="bottom" size="original-sm" :user="user" />
 
     <KunLink
       underline="hover"

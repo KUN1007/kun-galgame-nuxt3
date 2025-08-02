@@ -57,7 +57,7 @@ const handleDeleteMessage = async (mid: number) => {
     </div>
 
     <div class="flex gap-2">
-      <KunAvatar :user="message.sender" />
+      <KunAvatar :disable-floating="true" :user="message.sender" />
 
       <KunLink
         color="default"

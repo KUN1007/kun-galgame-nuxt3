@@ -5,8 +5,12 @@ const props = withDefaults(
   defineProps<{
     userId: number
     disabled?: boolean
+    position?: 'top' | 'bottom' | 'left' | 'right'
   }>(),
-  { disabled: false }
+  {
+    disabled: false,
+    position: 'top'
+  }
 )
 
 const currentUserUid = usePersistUserStore().id
@@ -16,6 +20,20 @@ const isLoading = ref(false)
 
 let showTimer: ReturnType<typeof setTimeout> | null = null
 let hideTimer: ReturnType<typeof setTimeout> | null = null
+
+const positionClasses = computed(() => {
+  switch (props.position) {
+    case 'bottom':
+      return 'top-full left-1/2 -translate-x-1/2 mt-3'
+    case 'left':
+      return 'right-full top-1/2 -translate-y-1/2 mr-3'
+    case 'right':
+      return 'left-full top-1/2 -translate-y-1/2 ml-3'
+    case 'top':
+    default:
+      return 'bottom-full left-1/2 -translate-x-1/2 mb-3'
+  }
+})
 
 const fetchUserData = async () => {
   if (isLoading.value || userData.value) {
@@ -76,6 +94,15 @@ const stats = computed(() => {
     { label: 'Galgame 贡献', value: userData.value.galgameContributeCount }
   ]
 })
+
+onUnmounted(() => {
+  if (showTimer) {
+    clearTimeout(showTimer)
+  }
+  if (hideTimer) {
+    clearTimeout(hideTimer)
+  }
+})
 </script>
 
 <template>
@@ -96,15 +123,14 @@ const stats = computed(() => {
     >
       <div
         v-if="showCard"
-        class="border-default-200 absolute z-20 w-72 rounded-xl border bg-white p-4 shadow-lg dark:bg-black"
-        style="
-          bottom: 100%;
-          left: 50%;
-          transform: translateX(-50%);
-          margin-bottom: 0.75rem;
+        :class="
+          cn(
+            'border-default-200 absolute z-20 w-72 rounded-xl border bg-white p-4 shadow-lg dark:bg-black',
+            positionClasses
+          )
         "
       >
-        <KunLoading v-if="isLoading" description="正在加载萝莉三围..." />
+        <KunLoading v-if="isLoading" description="正在加载..." />
 
         <div v-else-if="userData" class="flex flex-col gap-3">
           <div class="flex items-start justify-between">

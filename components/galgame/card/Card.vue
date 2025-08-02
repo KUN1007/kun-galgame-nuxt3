@@ -97,7 +97,7 @@ defineProps<{
         </h2>
 
         <div class="text-default-600 flex items-center gap-1 text-sm">
-          <KunAvatar :user="galgame.user" size="xs" />
+          <KunAvatar :disable-floating="true" :user="galgame.user" size="xs" />
           {{
             `${galgame.user.name} · ${formatTimeDifference(galgame.resourceUpdateTime)}`
           }}

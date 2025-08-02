@@ -20,6 +20,7 @@ defineProps<{
         avatar: room.avatar
       }"
       size="xl"
+      :disable-floating="true"
     />
     <div class="justify-space flex w-full flex-col">
       <div class="flex items-center justify-between">

@@ -17,7 +17,7 @@ defineProps<{
     "
     @click="scrollPage(bestAnswer.floor)"
   >
-    <KunUser :user="bestAnswer.user" />
+    <KunUser :disable-floating="true" :user="bestAnswer.user" />
     {{ `在 #${bestAnswer.floor} 发布了最佳答案` }}
   </div>
 </template>

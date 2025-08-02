@@ -24,7 +24,7 @@ defineProps<{
           name="lucide:check-check"
         />
       </div>
-      <KunAvatar :user="message.admin" />
+      <KunAvatar :disable-floating="true" :user="message.admin" />
       <span class="text-default-500 text-sm">
         {{ formatTimeDifference(message.created) }}
       </span>
