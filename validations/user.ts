@@ -12,6 +12,10 @@ export const getUserInfoSchema = z.object({
   userId: z.coerce.number().min(1).max(9999999)
 })
 
+export const getUserFloatingCardSchema = z.object({
+  userId: z.coerce.number().min(1).max(9999999)
+})
+
 export const getUserTopicSchema = z.object({
   userId: z.coerce.number().min(1).max(9999999),
   page: z.coerce.number().min(1).max(9999999),

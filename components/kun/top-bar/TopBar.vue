@@ -30,7 +30,8 @@ onUnmounted(() => {
   <div
     :class="
       cn(
-        'fixed top-0 z-30 mb-3 w-full shrink-0 px-1 transition-all duration-300 sm:px-0 md:pr-3 md:pl-68',
+        'fixed top-0 z-30 mb-3 ml-0 shrink-0 px-1 transition-all duration-300',
+        'left-0 w-full md:left-[260px] md:w-[calc(100%-268px)]',
         isVisible ? 'translate-y-0' : '-translate-y-full',
         className
       )

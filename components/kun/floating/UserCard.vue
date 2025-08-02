@@ -1,0 +1,154 @@
+<script setup lang="ts">
+import type { UserFloatingCard } from '~/types/api/user'
+
+const props = withDefaults(
+  defineProps<{
+    userId: number
+    disabled?: boolean
+  }>(),
+  { disabled: false }
+)
+
+const currentUserUid = usePersistUserStore().id
+const showCard = ref(false)
+const userData = ref<UserFloatingCard | null>(null)
+const isLoading = ref(false)
+
+let showTimer: ReturnType<typeof setTimeout> | null = null
+let hideTimer: ReturnType<typeof setTimeout> | null = null
+
+const fetchUserData = async () => {
+  if (isLoading.value || userData.value) {
+    return
+  }
+
+  isLoading.value = true
+
+  const data = await $fetch<UserFloatingCard>(
+    `/api/user/${props.userId}/floating`,
+    {
+      method: 'GET',
+      query: { userId: props.userId },
+      ...kungalgameResponseHandler
+    }
+  )
+  userData.value = data
+
+  isLoading.value = false
+}
+
+const handleMouseEnter = () => {
+  if (props.disabled) {
+    return
+  }
+
+  if (hideTimer) {
+    clearTimeout(hideTimer)
+    hideTimer = null
+  }
+
+  showTimer = setTimeout(() => {
+    showCard.value = true
+
+    fetchUserData()
+  }, 300)
+}
+
+const handleMouseLeave = () => {
+  if (showTimer) {
+    clearTimeout(showTimer)
+    showTimer = null
+  }
+
+  hideTimer = setTimeout(() => {
+    showCard.value = false
+  }, 200)
+}
+
+const stats = computed(() => {
+  if (!userData.value) return []
+  return [
+    { label: '话题', value: userData.value.topicCount },
+    { label: '回复', value: userData.value.topicReplyCount },
+    { label: '评论', value: userData.value.topicCommentCount },
+    { label: 'Galgame', value: userData.value.galgameCount },
+    { label: 'Galgame 资源', value: userData.value.galgameResourceCount },
+    { label: 'Galgame 贡献', value: userData.value.galgameContributeCount }
+  ]
+})
+</script>
+
+<template>
+  <div
+    class="relative"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
+  >
+    <slot name="trigger" />
+
+    <Transition
+      enter-active-class="transition duration-200 ease-out"
+      enter-from-class="transform scale-95 opacity-0"
+      enter-to-class="transform scale-100 opacity-100"
+      leave-active-class="transition duration-150 ease-in"
+      leave-from-class="transform scale-100 opacity-100"
+      leave-to-class="transform scale-95 opacity-0"
+    >
+      <div
+        v-if="showCard"
+        class="border-default-200 absolute z-20 w-72 rounded-xl border bg-white p-4 shadow-lg dark:bg-black"
+        style="
+          bottom: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          margin-bottom: 0.75rem;
+        "
+      >
+        <KunLoading v-if="isLoading" description="正在加载萝莉三围..." />
+
+        <div v-else-if="userData" class="flex flex-col gap-3">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center space-x-3">
+              <KunAvatar
+                :user="{
+                  id: userData.id,
+                  name: userData.name,
+                  avatar: userData.avatar
+                }"
+                size="xl"
+                :disable-floating="true"
+              />
+              <div>
+                <p class="text-default-900 font-bold">
+                  {{ userData.name }}
+                </p>
+                <p class="flex items-center gap-1 font-bold">
+                  <KunIcon class="icon text-secondary" name="lucide:lollipop" />
+                  <span class="text-secondary">{{ userData.moemoepoint }}</span>
+                </p>
+              </div>
+            </div>
+            <KunButton
+              v-if="currentUserUid !== userData.id"
+              class-name="shrink-0"
+              :href="`/message/user/${userData.id}`"
+            >
+              发消息
+            </KunButton>
+          </div>
+
+          <div class="grid grid-cols-3 gap-y-3 text-center">
+            <div v-for="stat in stats" :key="stat.label">
+              <p class="text-default-900 font-bold">
+                {{ stat.value }}
+              </p>
+              <p class="text-default-500 text-xs">
+                {{ stat.label }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Transition>
+  </div>
+</template>

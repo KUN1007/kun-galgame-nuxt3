@@ -5,4 +5,5 @@ export interface KunUserProps {
   size?: KunAvatarSize
   description?: string
   className?: string
+  disableFloating?: boolean
 }

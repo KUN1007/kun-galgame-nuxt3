@@ -4,13 +4,18 @@ import type { KunUserProps } from './type'
 const props = withDefaults(defineProps<KunUserProps>(), {
   size: 'md',
   description: '',
-  className: ''
+  className: '',
+  disableFloating: false
 })
 </script>
 
 <template>
   <div :class="cn('flex items-center gap-2', props.className)">
-    <KunAvatar :user="user" :size="size" />
+    <KunAvatar
+      :disable-floating="props.disableFloating"
+      :user="user"
+      :size="size"
+    />
 
     <div class="flex flex-col text-sm">
       <span>{{ user.name }}</span>

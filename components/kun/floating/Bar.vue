@@ -13,6 +13,8 @@ const scrollingDown = ref(true)
 const lastScrollY = ref(0)
 const isAtBottom = ref(false)
 
+const router = useRouter()
+
 let mobileTimer: NodeJS.Timeout | null = null
 
 const buttonText = computed(() =>
@@ -124,6 +126,7 @@ onUnmounted(() => {
         rounded="full"
         size="lg"
         variant="flat"
+        @click="router.back()"
       >
         <KunIcon class="text-inherit" name="lucide:arrow-left" />
       </KunButton>

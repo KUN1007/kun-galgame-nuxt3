@@ -69,6 +69,16 @@ export interface UserGetUserCommentRequestData {
   cidArray: number[]
 }
 
+export interface UserFloatingCard extends KunUser {
+  moemoepoint: number
+  topicCount: number
+  topicReplyCount: number
+  topicCommentCount: number
+  galgameCount: number
+  galgameResourceCount: number
+  galgameContributeCount: number
+}
+
 export type UserUpdateAvatarResponseData = {
   avatar: string
   avatarMin: string

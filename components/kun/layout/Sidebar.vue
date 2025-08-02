@@ -10,7 +10,7 @@ const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
   <div
     :class="
       cn(
-        'scrollbar-hide sm:bg-default-100 bg-default-200 fixed z-50 flex h-full w-3xs shrink-0 -translate-x-1 flex-col justify-between overflow-y-scroll rounded-none border-none p-0 shadow-none sm:backdrop-blur-[var(--kun-background-blur)]',
+        'scrollbar-hide sm:bg-default-100 bg-default-200 fixed flex h-full w-3xs shrink-0 -translate-x-1 flex-col justify-between overflow-y-scroll rounded-none border-none p-0 shadow-none sm:backdrop-blur-[var(--kun-background-blur)]',
         className
       )
     "

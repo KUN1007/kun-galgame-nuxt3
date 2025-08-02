@@ -32,8 +32,8 @@ watch(
   <div
     class="from-secondary-50 to-primary-50 flex min-h-dvh min-h-screen justify-center bg-gradient-to-br"
   >
-    <div class="z-10 w-full max-w-7xl min-w-0 md:mr-3 md:ml-68">
-      <div class="h-full px-1 pt-19 pb-3 sm:px-0">
+    <div class="z-10 w-full max-w-7xl min-w-0 md:mr-3 md:ml-66">
+      <div class="h-full px-1 pt-19 pb-3 md:px-0">
         <NuxtPage />
       </div>
 
