@@ -4,7 +4,7 @@ const route = useRoute()
 const { showKUNGalgameHamburger, messageStatus } = storeToRefs(
   useTempSettingStore()
 )
-const { moemoepoint, isCheckIn } = storeToRefs(usePersistUserStore())
+const { id, moemoepoint, isCheckIn } = storeToRefs(usePersistUserStore())
 
 const router = useRouter()
 const canGoBack = ref(false)
@@ -45,7 +45,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="cursor-pointer">
+  <div class="flex items-center gap-1">
     <KunButton
       :is-icon-only="true"
       color="default"
@@ -79,6 +79,25 @@ onMounted(async () => {
         <KunIcon name="lucide:home" />
       </KunButton>
     </div>
+
+    <KunTooltip
+      text="本网站完全开源, 点击访问 GitHub 仓库为我们点亮 star ⭐"
+      position="bottom"
+      v-if="!id"
+    >
+      <KunButton
+        :is-icon-only="true"
+        variant="light"
+        color="default"
+        size="xl"
+        target="_blank"
+        :href="kungal.github"
+        class-name="text-xl"
+      >
+        <KunIcon name="ant-design:github-filled" />
+        <span class="text-sm sm:text-base">GitHub</span>
+      </KunButton>
+    </KunTooltip>
 
     <!-- <KunModal
       :modal-value="isShowUpdateAvatarModal"
