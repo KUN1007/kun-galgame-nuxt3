@@ -89,3 +89,7 @@ export const userUpdatePasswordSchema = z.object({
 })
 
 export const userRegisterSchema = userLoginSchema.merge(userUpdateEmailSchema)
+
+export const deleteUserSchema = z.object({
+  userId: z.coerce.number().min(1).max(9999999)
+})

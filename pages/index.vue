@@ -1,6 +1,7 @@
 <script setup lang="ts">
-useHead({
-  title: '主页'
+useKunSeoMeta({
+  title: '主页',
+  description: kungal.description
 })
 </script>
 

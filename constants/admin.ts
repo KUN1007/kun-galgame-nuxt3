@@ -46,3 +46,35 @@ export const KUN_ADMIN_OVERVIEW_STATS_MODEL_MAP: Record<
   // galgame_history: { label: '论坛动态消息', color: '#90a1b9' },
   // galgame_contributor: { label: '论坛动态消息', color: '#90a1b9' }
 } as const
+
+export const KUN_ADMIN_PAGE_ROUTE = ['overview', 'user', 'setting']
+
+export type KUN_ADMIN_PAGE_ROUTE_TYPE = (typeof KUN_ADMIN_PAGE_ROUTE)[number]
+
+export interface KunAdminPageAsideItem {
+  name: KUN_ADMIN_PAGE_ROUTE_TYPE
+  label: string
+  icon?: string
+  router?: KUN_ADMIN_PAGE_ROUTE_TYPE
+}
+
+export const KUN_ADMIN_PAGE_ASIDE_NAV_ITEM: KunAdminPageAsideItem[] = [
+  {
+    name: 'overview',
+    label: '数据总览',
+    icon: 'lucide:chart-area',
+    router: 'overview'
+  },
+  {
+    name: 'user',
+    label: '用户管理',
+    icon: 'lucide:user',
+    router: 'user'
+  },
+  {
+    name: 'setting',
+    label: '网站设置',
+    icon: 'lucide:settings',
+    router: 'setting'
+  }
+]

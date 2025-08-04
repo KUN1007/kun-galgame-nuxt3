@@ -33,7 +33,7 @@ const handleCreateSeries = async (data: UpdateGalgameSeriesPayload) => {
   >
     <KunHeader
       name="Galgame 系列"
-      description="Galgame 全系列所有 Galgame 作品。例如美少女万华镜 1, 2, 3, 4, 5, 雪女, 外传 就是一个 Galgame 系列"
+      description="Galgame 全系列所有 Galgame 作品。例如美少女万华镜 1, 2, 3, 4, 5, 雪女, 外传 就是一个 Galgame 系列。某个会社制作的所有 Galgame 并不算系列, 请到 Galgame 会社页面中查看"
     >
       <template #endContent>
         <KunSettingPanelComponentsNSFW />
