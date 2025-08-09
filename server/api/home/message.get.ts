@@ -7,8 +7,9 @@ const ACTIVITY_ITEM_FETCHER_LIMIT = 5
 const ACTIVITY_ITEM_LIMIT = 22
 
 const timelineFetchers = {
-  GALGAME_CREATION: async (): Promise<ActivityItem[]> => {
+  GALGAME_CREATION: async (content_limit?: string): Promise<ActivityItem[]> => {
     const items = await prisma.galgame.findMany({
+      where: { content_limit },
       orderBy: { created: 'desc' },
       take: ACTIVITY_ITEM_FETCHER_LIMIT,
       select: {
@@ -231,8 +232,9 @@ const timelineFetchers = {
       content: item.content.substring(0, 100)
     })) satisfies ActivityItem[]
   },
-  GALGAME_RESOURCE_CREATION: async () => {
+  GALGAME_RESOURCE_CREATION: async (content_limit?: string) => {
     const items = await prisma.galgame_resource.findMany({
+      where: { galgame: { content_limit } },
       orderBy: { created: 'desc' },
       take: ACTIVITY_ITEM_FETCHER_LIMIT,
       select: {
