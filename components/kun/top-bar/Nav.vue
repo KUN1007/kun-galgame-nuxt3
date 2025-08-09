@@ -81,7 +81,7 @@ onMounted(async () => {
     </div>
 
     <KunTooltip
-      text="本网站完全开源, 点击访问 GitHub 仓库为我们点亮 star ⭐"
+      text="本网站完全开源, 代码完全自主编写, 点击访问 GitHub 仓库为我们点亮 star ⭐"
       position="bottom"
       v-if="!id"
     >
