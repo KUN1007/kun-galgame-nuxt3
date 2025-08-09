@@ -170,14 +170,13 @@ export const KUN_USER_PAGE_NAV_MAP: Record<string, string> = {
   comment: '评论'
 }
 
-export const KUN_USER_ROLE_MAP: Record<string, string> = {
-  user: '用户',
-  admin: '管理员',
-  SU: '超级管理员'
+export const KUN_USER_ROLE_MAP: Record<number, string> = {
+  1: '用户',
+  2: '管理员',
+  3: '超级管理员'
 }
 
-export const KUN_USER_STATUS_MAP: Record<string, string> = {
-  normal: '正常',
-  banned: '封禁',
-  name: '用户名'
+export const KUN_USER_STATUS_MAP: Record<number, string> = {
+  0: '正常',
+  1: '封禁'
 }

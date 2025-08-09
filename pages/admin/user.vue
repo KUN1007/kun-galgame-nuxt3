@@ -74,7 +74,7 @@ watchDebounced(
             <span v-if="!searchQuery.trim()">
               {{ `总计 ${data?.totalCount || 0} 个用户` }}
             </span>
-            <span v-else>{{ `搜索结果: ${searchResult.length} 个标签` }}</span>
+            <span v-else>{{ `搜索结果: ${searchResult.length} 个用户` }}</span>
           </div>
         </div>
       </template>

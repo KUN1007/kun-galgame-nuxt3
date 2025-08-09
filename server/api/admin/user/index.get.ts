@@ -32,7 +32,8 @@ export default defineEventHandler(async (event) => {
     id: user.id,
     name: user.name,
     avatar: user.avatar,
-    created: user.created
+    created: user.created,
+    status: user.status
   }))
 
   return { users, totalCount }

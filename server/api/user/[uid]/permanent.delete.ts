@@ -27,9 +27,9 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '不能删除一个管理员')
   }
 
-  await prisma.user.delete({
-    where: { id: input.userId }
-  })
+  // await prisma.user.delete({
+  //   where: { id: input.userId }
+  // })
 
   return 'Moemoe delete user successfully!'
 })

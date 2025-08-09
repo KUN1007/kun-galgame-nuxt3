@@ -5,4 +5,5 @@ export interface AdminOverStats {
 
 export interface AdminUser extends KunUser {
   created: Date | string
+  status: number
 }

@@ -6,6 +6,7 @@ model user {
     ip                String @default("")
     avatar            String @default("")
     role              Int    @default(1)
+    // 0 - normal, 1 - banned
     status            Int    @default(0)
     moemoepoint       Int    @default(7)
     bio               String @default("") @db.VarChar(107)

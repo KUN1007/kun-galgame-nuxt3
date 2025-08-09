@@ -7,21 +7,6 @@ const props = defineProps<{
 }>()
 const user = computed(() => props.user)
 
-const rolesName = () => {
-  const roles = user.value.role
-  if (roles === 1) return 'user'
-  if (roles === 2) return 'admin'
-  if (roles === 3) return 'SU'
-  return ''
-}
-
-const statusName = () => {
-  const status = user.value.status
-  if (status === 0) return 'normal'
-  if (status === 1) return 'banned'
-  return ''
-}
-
 const currentUserUid = usePersistUserStore().id
 </script>
 
@@ -45,10 +30,10 @@ const currentUserUid = usePersistUserStore().id
         </h2>
         <div class="mt-2 flex items-center space-x-3">
           <KunBadge size="md" color="primary">
-            {{ KUN_USER_ROLE_MAP[rolesName()] }}
+            {{ KUN_USER_ROLE_MAP[user.role] }}
           </KunBadge>
           <KunBadge size="md" color="success">
-            {{ KUN_USER_STATUS_MAP[statusName()] }}
+            {{ KUN_USER_STATUS_MAP[user.status] }}
           </KunBadge>
         </div>
       </div>
