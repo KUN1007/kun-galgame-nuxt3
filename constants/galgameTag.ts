@@ -1,4 +1,4 @@
-export const KUN_GALGAME_TAG_TYPE = ['content', 'sexual', 'technical'] as const
+export const KUN_GALGAME_TAG_TYPE = ['content', 'technical', 'sexual'] as const
 
 export type KunGalgameTagCategory = (typeof KUN_GALGAME_TAG_TYPE)[number]
 

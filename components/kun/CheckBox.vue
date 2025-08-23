@@ -32,7 +32,7 @@ const updateValue = (event: Event) => {
 </script>
 
 <template>
-  <div :class="cn('flex items-center', className)">
+  <div :class="cn('flex cursor-pointer items-center', className)">
     <div class="relative flex items-center">
       <input
         type="checkbox"
@@ -54,8 +54,12 @@ const updateValue = (event: Event) => {
     <label
       v-if="label"
       :for="id"
-      class="text-default-700 ml-2 cursor-pointer text-sm select-none"
-      :class="{ 'cursor-not-allowed opacity-50': disabled }"
+      :class="
+        cn(
+          'text-default-700 ml-2 cursor-pointer text-sm select-none',
+          disabled && 'cursor-not-allowed opacity-50'
+        )
+      "
     >
       {{ label }}
     </label>

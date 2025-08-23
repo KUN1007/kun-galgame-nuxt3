@@ -533,4 +533,13 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  .scrollbar-default {
+    scrollbar-width: auto;
+    -ms-overflow-style: auto;
+  }
+
+  .scrollbar-default::-webkit-scrollbar {
+    display: block;
+  }
 }
