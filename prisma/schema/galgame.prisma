@@ -208,6 +208,9 @@ model galgame_tag_relation {
   tag_id     Int
   tag        galgame_tag @relation(fields: [tag_id], references: [id], onDelete: Cascade)
 
+  // 0 - none, 1 - mild, 2 - severe
+  spoiler_level Int @default(0)
+
   created DateTime @default(now())
   updated DateTime @updatedAt
 

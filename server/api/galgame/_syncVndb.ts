@@ -36,6 +36,7 @@ interface VndbTag {
   aliases: string[]
   description: string
   category: 'cont' | 'ero' | 'tech'
+  spoiler: number
 }
 
 interface VnResult {
@@ -56,7 +57,7 @@ const fetchVnData = async (vndbId: string): Promise<VnResult | null> => {
     body: JSON.stringify({
       filters: ['id', '=', vndbId],
       fields:
-        'id, developers{id,name,original,aliases,lang,type,extlinks{url,label}}, tags{id,name,aliases,category}'
+        'id, developers{id,name,original,aliases,lang,type,extlinks{url,label}}, tags{id,name,aliases,category,spoiler,description}'
     })
   })
   if (!response.ok) {
@@ -195,9 +196,15 @@ export const syncVndbData = async (
       })
     }
 
+    let hasSexualTag = false
     const tagRelations = []
+
     for (const tag of vnResult.tags) {
       if (!TAG_CATEGORY_MAP[tag.category]) continue
+
+      if (tag.category === 'ero') {
+        hasSexualTag = true
+      }
 
       const mappedValue = TAG_MAP[tag.name] || tag.name
       const parts = mappedValue.split('/')
@@ -214,7 +221,11 @@ export const syncVndbData = async (
         }
       })
 
-      tagRelations.push({ galgame_id: galgameId, tag_id: dbTag.id })
+      tagRelations.push({
+        galgame_id: galgameId,
+        tag_id: dbTag.id,
+        spoiler_level: tag.spoiler
+      })
 
       const aliases = [
         ...new Set([tag.name, ...tag.aliases, ...additionalAliases])
@@ -235,8 +246,14 @@ export const syncVndbData = async (
         skipDuplicates: true
       })
     }
+
+    if (hasSexualTag) {
+      await prisma.galgame.update({
+        where: { id: galgameId },
+        data: { age_limit: 'r18' }
+      })
+    }
   } catch (error) {
-    // throw error, ensure the transaction rollback
     throw new Error('VNDB sync failed, transaction will be rolled back.')
   }
 }
@@ -249,6 +266,11 @@ export const resyncVndbData = async (
     userId
   }: { galgameId: number; newVndbId: string; userId: number }
 ) => {
+  await prisma.galgame.update({
+    where: { id: galgameId },
+    data: { age_limit: 'all' }
+  })
+
   await prisma.galgame_tag_relation.deleteMany({
     where: { galgame_id: galgameId }
   })

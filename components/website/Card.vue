@@ -76,27 +76,9 @@ const priceInfo = computed(() => {
 
     <div class="text-default-500 flex items-center justify-between text-sm">
       <span>网站价值精算值</span>
-
-      <div class="text-default-500 flex items-center gap-2">
-        <span :class="cn('font-bold', priceInfo.colorClass)">
-          {{ website.price }}
-        </span>
-
-        <KunTooltip
-          class-name="flex text-default-700"
-          text="直达网站"
-          position="left"
-        >
-          <KunButton
-            :is-icon-only="true"
-            class-name="p-0 text-base hover:bg-transparent"
-            variant="light"
-            color="default"
-          >
-            <KunIcon name="lucide:circle-chevron-right" />
-          </KunButton>
-        </KunTooltip>
-      </div>
+      <span :class="cn('font-bold', priceInfo.colorClass)">
+        {{ website.price }}
+      </span>
     </div>
   </KunCard>
 </template>
