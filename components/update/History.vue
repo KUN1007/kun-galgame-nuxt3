@@ -52,13 +52,7 @@ const handleUpdateLogAction = async (data: UpdateUpdateLogPayload) => {
 </script>
 
 <template>
-  <KunCard
-    :is-transparent="false"
-    :is-hoverable="false"
-    :is-pressable="false"
-    content-class="space-y-6"
-    v-if="data"
-  >
+  <div class="space-y-6" v-if="data">
     <KunHeader
       name="更新日志"
       description="本页面记录了网站所有的更新日志, 新特性, BUG 修复, 功能更改, 性能优化等等"
@@ -111,7 +105,7 @@ const handleUpdateLogAction = async (data: UpdateUpdateLogPayload) => {
       @submit="handleUpdateLogAction"
     />
 
-    <KunCard :is-hoverable="false" :is-transparent="false">
+    <KunCard :is-hoverable="false" :is-transparent="true">
       <KunPagination
         v-if="data"
         v-model:current-page="pageData.page"
@@ -119,5 +113,5 @@ const handleUpdateLogAction = async (data: UpdateUpdateLogPayload) => {
         :is-loading="status === 'pending'"
       />
     </KunCard>
-  </KunCard>
+  </div>
 </template>
