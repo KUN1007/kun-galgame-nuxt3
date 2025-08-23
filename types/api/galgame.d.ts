@@ -8,6 +8,10 @@ import type { GalgameEngineItem } from './galgame-engine'
 import type { GalgameOfficialItem } from './galgame-official'
 import type { GalgameTagItem } from './galgame-tag'
 
+export interface GalgameDetailTag extends GalgameTagItem {
+  spoilerLevel: number
+}
+
 export interface GalgameDetail {
   id: number
   vndbId: string
@@ -33,7 +37,7 @@ export interface GalgameDetail {
   series: GalgameSeries | null
   engine: GalgameEngineItem[]
   official: GalgameOfficialItem[]
-  tag: GalgameTagItem[]
+  tag: GalgameDetailTag[]
   created: Date | string
   updated: Date | string
 }

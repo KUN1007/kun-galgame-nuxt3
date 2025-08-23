@@ -98,6 +98,7 @@ export default defineEventHandler(async (event) => {
         },
         tag: {
           select: {
+            spoiler_level: true,
             tag: {
               include: {
                 _count: {
@@ -216,7 +217,8 @@ export default defineEventHandler(async (event) => {
       id: tag.tag.id,
       name: tag.tag.name,
       category: tag.tag.category as KunGalgameTagCategory,
-      galgameCount: tag.tag._count.galgame
+      galgameCount: tag.tag._count.galgame,
+      spoilerLevel: tag.spoiler_level
     })),
     created: galgame.created,
     updated: galgame.updated

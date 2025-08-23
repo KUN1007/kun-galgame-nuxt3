@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import {
   KUN_GALGAME_TAG_CATEGORY_MAP,
-  type KunGalgameTagCategory
+  KUN_GALGAME_TAG_SPOILER_MAP,
+  type KunGalgameTagCategory,
+  type KunGalgameTagSpoiler
 } from '~/constants/galgameTag'
 import type { KunUIColor } from '~/components/kun/ui/type'
-import type { GalgameTagItem } from '~/types/api/galgame-tag'
+import type { GalgameDetailTag } from '~/types/api/galgame'
 
 const props = defineProps<{
-  tags: GalgameTagItem[]
+  tags: GalgameDetailTag[]
 }>()
 
 const colorMap: Record<string, KunUIColor> = {
@@ -16,22 +18,37 @@ const colorMap: Record<string, KunUIColor> = {
   technical: 'success'
 }
 const selectedCategories = ref<KunGalgameTagCategory[]>(['content'])
+const selectedSpoilerLevels = ref<KunGalgameTagSpoiler[]>([0])
 
-const toggleCategory = (category: KunGalgameTagCategory) => {
-  const index = selectedCategories.value.indexOf(category)
+const toggleItemInArray = <T,>(arrayRef: Ref<T[]>, item: T) => {
+  const index = arrayRef.value.indexOf(item)
   if (index === -1) {
-    selectedCategories.value.push(category)
+    arrayRef.value.push(item)
   } else {
-    selectedCategories.value.splice(index, 1)
+    arrayRef.value.splice(index, 1)
   }
 }
 
+const toggleCategory = (category: KunGalgameTagCategory) => {
+  toggleItemInArray(selectedCategories, category)
+}
+
+const toggleSpoilerLevel = (spoiler: KunGalgameTagSpoiler) => {
+  toggleItemInArray(selectedSpoilerLevels, spoiler)
+}
+
 const filteredTags = computed(() => {
-  if (selectedCategories.value.length === 0) {
+  if (
+    selectedCategories.value.length === 0 ||
+    selectedSpoilerLevels.value.length === 0
+  ) {
     return []
   }
-  const filtered = props.tags.filter((tag) =>
-    selectedCategories.value.includes(tag.category)
+
+  const filtered = props.tags.filter(
+    (tag) =>
+      selectedCategories.value.includes(tag.category) &&
+      selectedSpoilerLevels.value.includes(tag.spoilerLevel as 0)
   )
   return filtered.sort((a, b) => a.id - b.id)
 })
@@ -45,7 +62,7 @@ const filteredTags = computed(() => {
     class-name="overflow-visible"
     content-class="space-y-3"
   >
-    <div class="flex flex-wrap gap-3">
+    <div class="flex flex-wrap items-center gap-3">
       <KunButton
         v-for="(name, key) in KUN_GALGAME_TAG_CATEGORY_MAP"
         size="sm"
@@ -54,6 +71,24 @@ const filteredTags = computed(() => {
         @click="toggleCategory(key)"
         :variant="selectedCategories.includes(key) ? 'solid' : 'flat'"
         :color="selectedCategories.includes(key) ? colorMap[key] : 'default'"
+      >
+        {{ name }}
+      </KunButton>
+
+      <KunButton
+        v-for="(name, key) in KUN_GALGAME_TAG_SPOILER_MAP"
+        :key="key"
+        size="sm"
+        rounded="full"
+        @click="toggleSpoilerLevel(Number(key) as KunGalgameTagSpoiler)"
+        :variant="
+          selectedSpoilerLevels.includes(Number(key) as 0) ? 'solid' : 'flat'
+        "
+        :color="
+          selectedSpoilerLevels.includes(Number(key) as 0)
+            ? 'secondary'
+            : 'default'
+        "
       >
         {{ name }}
       </KunButton>
@@ -82,6 +117,19 @@ const filteredTags = computed(() => {
                 #
               </span>
               {{ tag.name }}
+              <span
+                v-if="tag.spoilerLevel > 0"
+                :class="
+                  cn(
+                    'ml-1.5 text-xs',
+                    tag.spoilerLevel > 1
+                      ? 'text-danger-600'
+                      : 'text-warning-600'
+                  )
+                "
+              >
+                {{ tag.spoilerLevel > 1 ? '(严重剧透)' : '(剧透)' }}
+              </span>
             </KunBadge>
           </KunTooltip>
         </KunLink>
@@ -89,7 +137,7 @@ const filteredTags = computed(() => {
 
       <KunNull
         v-if="filteredTags.length === 0"
-        description="请至少选择一个类别来查看标签"
+        description="请至少选择一个类别来查看标签，或调整剧透等级"
       />
     </div>
   </KunCard>
@@ -101,13 +149,11 @@ const filteredTags = computed(() => {
 .tag-list-leave-active {
   transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 }
-
 .tag-list-enter-from,
 .tag-list-leave-to {
   opacity: 0;
   transform: scale(0.8);
 }
-
 .tag-list-leave-active {
   position: absolute;
 }
