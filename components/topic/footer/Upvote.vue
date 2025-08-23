@@ -44,7 +44,7 @@ const handleClickUpvote = async () => {
     return
   }
 
-  if (moemoepoint < 1100) {
+  if (moemoepoint < 50) {
     useMessage(10242, 'warn')
     return
   }
