@@ -7,34 +7,23 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypePrism from 'rehype-prism-plus'
 import { unified } from 'unified'
-
-import type { Plugin } from 'unified'
-import type { Root } from 'hast'
-import { visit } from 'unist-util-visit'
-
-const rehypeImgLazy: Plugin<[], Root> = () => {
-  return (tree) => {
-    visit(tree, 'element', (node) => {
-      if (node.tagName === 'img') {
-        node.properties = node.properties || {}
-        node.properties.loading = 'lazy'
-        node.properties.decoding = 'async'
-        node.properties['data-kun-lazy-image'] = 'true'
-      }
-    })
-  }
-}
+import { rehypeImgLazy } from './plugins/lazyImage'
+import { rehypeCodeBlockWrapper } from './plugins/codeBlockWrapper'
 
 export const markdownToHtml = async (markdown: string) => {
   const htmlVFile = await unified()
     .use(remarkParse)
-    .use(remarkRehype)
-    .use(rehypeSlug)
-    .use(rehypeSanitize)
-    .use(rehypeImgLazy)
-    .use(remarkFrontmatter)
     .use(remarkGfm)
-    .use(rehypePrism, { ignoreMissing: true })
+    .use(remarkFrontmatter)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeSanitize)
+    .use(rehypeSlug)
+    .use(rehypeImgLazy)
+    .use(rehypePrism, {
+      showLineNumbers: true,
+      ignoreMissing: true
+    })
+    .use(rehypeCodeBlockWrapper)
     .use(rehypeStringify)
     .process(markdown)
 

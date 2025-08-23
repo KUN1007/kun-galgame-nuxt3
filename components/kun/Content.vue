@@ -10,11 +10,55 @@ withDefaults(
     className: ''
   }
 )
+
+const articleRef = ref<HTMLElement | null>(null)
+
+const handleContentClick = (event: MouseEvent) => {
+  const target = event.target as HTMLElement
+
+  if (target && target.matches('.copy')) {
+    const container = target.closest('.kun-code-container')
+    if (!container) return
+
+    const pre = container.querySelector('pre')
+    if (!pre) return
+
+    const codeToCopy = pre.innerText
+
+    navigator.clipboard
+      .writeText(codeToCopy)
+      .then(() => {
+        target.classList.add('copied')
+        setTimeout(() => {
+          target.classList.remove('copied')
+        }, 3000)
+      })
+      .catch((err) => {
+        useMessage('复制失败', 'error')
+      })
+  }
+}
+
+onMounted(() => {
+  articleRef.value?.addEventListener('click', handleContentClick)
+})
+
+onBeforeUnmount(() => {
+  articleRef.value?.removeEventListener('click', handleContentClick)
+})
+
+const sanitizeConfig = {
+  ADD_TAGS: ['div', 'span', 'button'],
+  ADD_ATTR: ['class', 'title', 'line']
+}
 </script>
 
 <template>
-  <article
-    :class="cn('kun-prose break-all', className)"
-    v-html="DOMPurify.sanitize(content, { ADD_ATTR: ['line'] })"
-  />
+  <div>
+    <article
+      ref="articleRef"
+      :class="cn('kun-prose break-all', className)"
+      v-html="DOMPurify.sanitize(content, sanitizeConfig)"
+    />
+  </div>
 </template>

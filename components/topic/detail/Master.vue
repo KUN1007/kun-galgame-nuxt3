@@ -20,7 +20,7 @@ defineProps<{
     <KunCard
       :is-transparent="false"
       :is-hoverable="false"
-      class-name="w-full"
+      class-name="lg:w-[calc(100%-156px)] w-full"
       content-class="gap-3"
     >
       <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">
