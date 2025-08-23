@@ -5,8 +5,35 @@ const props = defineProps<{
   website: WebsiteCard
 }>()
 
-const totalLevel = computed(() => {
-  return props.website.tags.reduce((sum, tag) => sum + tag.level, 0)
+const priceInfo = computed(() => {
+  const price = props.website.price
+
+  if (price > 200) {
+    return {
+      tierLabel: '神',
+      tierClass: 'text-warning-500/30 bottom-0 text-7xl italic',
+      colorClass: 'text-warning-500 text-base'
+    }
+  }
+  if (price > 100) {
+    return {
+      tierLabel: '优秀',
+      tierClass: 'text-success-500/20 bottom-0 text-3xl italic',
+      colorClass: 'text-success-600'
+    }
+  }
+  if (price > 0) {
+    return {
+      tierLabel: '能冲',
+      tierClass: 'text-primary-500/20 bottom-0 text-3xl italic',
+      colorClass: 'text-default-700'
+    }
+  }
+  return {
+    tierLabel: '冲不动',
+    tierClass: 'text-danger-500/20 bottom-0 text-3xl italic',
+    colorClass: 'text-danger-600'
+  }
 })
 </script>
 
@@ -33,7 +60,9 @@ const totalLevel = computed(() => {
         >
           {{ website.name }}
         </h3>
-        <p class="text-default-500 font-mono text-sm">{{ website.domain }}</p>
+        <p class="text-default-500 truncate font-mono text-sm">
+          {{ website.domain }}
+        </p>
       </div>
     </div>
 
@@ -41,22 +70,33 @@ const totalLevel = computed(() => {
       {{ website.description }}
     </p>
 
-    <div class="mb-4 flex min-h-[28px] flex-wrap gap-2">
-      <WebsiteTag :tags="website.tags" :length="3" />
-      <div
-        v-if="website.tags.length > 3"
-        class="bg-default-100 text-default-600 inline-flex items-center rounded-full px-2 py-1 text-xs font-medium"
-        :title="`还有 ${website.tags.length - 3} 个标签`"
-      >
-        +{{ website.tags.length - 3 }}
-      </div>
-    </div>
+    <span :class="cn('absolute', priceInfo.tierClass)">
+      {{ priceInfo.tierLabel }}
+    </span>
 
     <div class="text-default-500 flex items-center justify-between text-sm">
       <span>网站价值精算值</span>
-      <span class="font-bold">
-        {{ totalLevel }}
-      </span>
+
+      <div class="text-default-500 flex items-center gap-2">
+        <span :class="cn('font-bold', priceInfo.colorClass)">
+          {{ website.price }}
+        </span>
+
+        <KunTooltip
+          class-name="flex text-default-700"
+          text="直达网站"
+          position="left"
+        >
+          <KunButton
+            :is-icon-only="true"
+            class-name="p-0 text-base hover:bg-transparent"
+            variant="light"
+            color="default"
+          >
+            <KunIcon name="lucide:circle-chevron-right" />
+          </KunButton>
+        </KunTooltip>
+      </div>
     </div>
   </KunCard>
 </template>

@@ -16,10 +16,6 @@ const searchQuery = ref('')
 const showWebsiteModal = ref(false)
 const editingWebsite = ref<CreateWebsitePayload | undefined>(undefined)
 
-const calculateTagSum = (tags: WebsiteTag[]): number => {
-  return tags.reduce((sum, tag) => sum + tag.level, 0)
-}
-
 const filteredAndSortedWebsites = computed(() => {
   if (!data.value || !Array.isArray(data.value)) {
     return []
@@ -50,9 +46,7 @@ const filteredAndSortedWebsites = computed(() => {
 
   for (const category in categorized) {
     categorized[category].sort((a, b) => {
-      const sumA = calculateTagSum(a.tags)
-      const sumB = calculateTagSum(b.tags)
-      return sumB - sumA
+      return a.price - b.price
     })
   }
 
@@ -63,7 +57,7 @@ const filteredAndSortedWebsites = computed(() => {
       return {
         key: categoryKey,
         name: KUN_WEBSITE_CATEGORY_MAP[categoryKey],
-        sites: sites
+        sites: sites.reverse()
       }
     })
 

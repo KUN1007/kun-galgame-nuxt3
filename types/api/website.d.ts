@@ -44,7 +44,7 @@ export interface WebsiteCard {
   ageLimit: string
   level: number
   icon: string
-  tags: WebsiteTag[]
+  price: number
   category: string
 }
 

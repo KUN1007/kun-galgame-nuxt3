@@ -46,7 +46,9 @@ export default defineEventHandler(async (event) => {
       ageLimit: w.website.age_limit,
       icon: w.website.icon,
       level: w.website.tag.reduce((acc, curr) => acc + curr.tag.level, 0),
-      tags: w.website.tag.map((t) => t.tag),
+      price: w.website.tag
+        .map((t) => t.tag)
+        .reduce((sum, tag) => sum + tag.level, 0),
       category: w.website.category.name
     })),
     created: data.created,
