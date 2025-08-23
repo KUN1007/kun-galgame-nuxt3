@@ -1,5 +1,5 @@
 <script setup lang="ts">
-withDefaults(
+const props = withDefaults(
   defineProps<{
     name?: string
     description?: string
@@ -13,25 +13,21 @@ withDefaults(
     scale: 'h1'
   }
 )
+const headingClass = computed(() => {
+  const scaleClasses = {
+    h1: 'text-2xl sm:text-3xl',
+    h2: 'text-xl sm:text-2xl',
+    h3: 'text-lg sm:text-xl'
+  }
+  return cn('font-medium', scaleClasses[props.scale])
+})
 </script>
 
 <template>
   <div class="space-y-2">
     <div class="flex items-center justify-between">
       <div class="space-y-2">
-        <component
-          :is="scale"
-          :class="
-            cn(
-              'font-medium',
-              scale === 'h1'
-                ? 'text-3xl'
-                : scale === 'h2'
-                  ? 'text-2xl'
-                  : 'text-xl'
-            )
-          "
-        >
+        <component :is="scale" :class="headingClass">
           <span v-if="name">{{ name }}</span>
           <slot name="title" />
         </component>

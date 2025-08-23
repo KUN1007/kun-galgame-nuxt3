@@ -7,9 +7,9 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex h-full flex-col gap-3">
+  <div class="flex h-[calc(100dvh-300px)] flex-col">
     <KunAvatar
-      class-name="cursor-default relative hidden sm:block"
+      class-name="cursor-default mb-3 relative hidden sm:block"
       :is-navigation="false"
       size="original"
       :user="user"
@@ -17,7 +17,7 @@ defineProps<{
     />
 
     <KunAvatar
-      class-name="cursor-default relative block sm:hidden"
+      class-name="cursor-default mb-3 relative block sm:hidden"
       :is-navigation="false"
       size="md"
       :user="user"
