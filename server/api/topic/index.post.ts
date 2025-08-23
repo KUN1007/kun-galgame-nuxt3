@@ -1,6 +1,10 @@
 import { subDays } from 'date-fns'
 import prisma from '~/prisma/prisma'
 import { createTopicSchema } from '~/validations/topic'
+import {
+  TOPIC_SECTION_CONSUME_MOEMOEPOINTS,
+  MOEMOEPOINT_COST_FOR_CONSUME_SECTION
+} from '~/config/moemoepoint'
 
 export default defineEventHandler(async (event) => {
   const input = await kunParsePutBody(event, createTopicSchema)
@@ -33,6 +37,17 @@ export default defineEventHandler(async (event) => {
       '您今日发布的话题已经达到上限, 您每天可以发布您的 (萌萌点 / 10) + 1 个话题'
     )
   }
+  const hasConsumeSection = TOPIC_SECTION_CONSUME_MOEMOEPOINTS.some((item) =>
+    input.section.includes(item as 'g-seeking')
+  )
+  if (hasConsumeSection) {
+    if (user.moemoepoint < MOEMOEPOINT_COST_FOR_CONSUME_SECTION) {
+      return kunError(
+        event,
+        '您的萌萌点不足, 无法发布求助类或者寻求资源类的话题, 您可以通过发布 Galgame, 签到, 接受别人的赞赏, 等等来获取萌萌点'
+      )
+    }
+  }
 
   const { section, ...topicData } = input
 
@@ -62,7 +77,7 @@ export default defineEventHandler(async (event) => {
 
     await prisma.user.update({
       where: { id: userInfo.uid },
-      data: { moemoepoint: { increment: 3 } }
+      data: { moemoepoint: { increment: hasConsumeSection ? -10 : 3 } }
     })
 
     return newTopic.id

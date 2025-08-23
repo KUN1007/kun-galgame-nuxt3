@@ -1,5 +1,9 @@
 import prisma from '~/prisma/prisma'
 import { updateTopicSchema } from '~/validations/topic'
+import {
+  TOPIC_SECTION_CONSUME_MOEMOEPOINTS,
+  MOEMOEPOINT_COST_FOR_CONSUME_SECTION
+} from '~/config/moemoepoint'
 
 export default defineEventHandler(async (event) => {
   const input = await kunParsePutBody(event, updateTopicSchema)
@@ -9,6 +13,44 @@ export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
     return kunError(event, '用户登录失效', 205)
+  }
+
+  const oldTopic = await prisma.topic.findUnique({
+    where: { id: input.topicId, user_id: userInfo.uid },
+    include: {
+      user: {
+        select: {
+          moemoepoint: true
+        }
+      },
+      section: {
+        select: {
+          topic_section: {
+            select: {
+              name: true
+            }
+          }
+        }
+      }
+    }
+  })
+  if (!oldTopic) {
+    return kunError(event, '未找到此话题')
+  }
+  const oldSections = oldTopic.section.map((s) => s.topic_section.name)
+  const oldTopicHasConsumeSection = TOPIC_SECTION_CONSUME_MOEMOEPOINTS.some(
+    (item) => oldSections.includes(item as 'g-seeking')
+  )
+  const newTopicHasConsumeSection = TOPIC_SECTION_CONSUME_MOEMOEPOINTS.some(
+    (item) => input.section.includes(item as 'g-seeking')
+  )
+  if (!oldTopicHasConsumeSection && newTopicHasConsumeSection) {
+    if (oldTopic.user.moemoepoint < MOEMOEPOINT_COST_FOR_CONSUME_SECTION) {
+      return kunError(
+        event,
+        '您的萌萌点不足, 无法更改话题的分类为求助或者寻求资源, 您可以通过发布 Galgame, 签到, 接受别人的赞赏, 等等来获取萌萌点'
+      )
+    }
   }
 
   const { topicId, section, ...topicData } = input
@@ -49,6 +91,13 @@ export default defineEventHandler(async (event) => {
       data: dataToCreate,
       skipDuplicates: true
     })
+
+    if (!oldTopicHasConsumeSection && newTopicHasConsumeSection) {
+      await prisma.user.update({
+        where: { id: userInfo.uid },
+        data: { moemoepoint: -10 }
+      })
+    }
 
     return 'MOEMOE update topic successfully!'
   })

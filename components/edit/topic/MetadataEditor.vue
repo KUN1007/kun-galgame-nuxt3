@@ -89,7 +89,7 @@ const handleTagInputBackspace = () => {
               'flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 p-4 transition-all duration-200',
               category === cat.key
                 ? 'border-primary-500 bg-primary-500/10 shadow-md'
-                : 'border-default-200 bg-default-500/10 hover:border-primary-400 hover:bg-primary-50/50'
+                : 'border-default-500/20 hover:border-primary-500'
             )
           "
         >
@@ -125,7 +125,7 @@ const handleTagInputBackspace = () => {
         </h3>
         <div class="flex flex-wrap gap-3">
           <KunButton
-            :variant="isSectionSelected(key) ? 'solid' : 'bordered'"
+            :variant="isSectionSelected(key) ? 'solid' : 'light'"
             :color="isSectionSelected(key) ? 'primary' : 'default'"
             v-for="(label, key) in availableSections"
             :key="key"
@@ -135,7 +135,7 @@ const handleTagInputBackspace = () => {
             "
             rounded="full"
             size="sm"
-            class-name="border-default-300 hover:border-primary-400"
+            :class-name="isSectionSelected(key) ? '' : 'bg-default-500/20'"
           >
             {{ label }}
           </KunButton>
@@ -192,8 +192,9 @@ const handleTagInputBackspace = () => {
           v-if="tags.length < MAX_TAGS"
           variant="flat"
           :is-icon-only="true"
+          @click="handleAddTag"
         >
-          <KunIcon @click="handleAddTag" name="lucide:plus" />
+          <KunIcon name="lucide:plus" />
         </KunButton>
       </div>
       <p class="text-default-500 mt-2 text-sm">

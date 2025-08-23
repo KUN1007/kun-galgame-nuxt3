@@ -7,7 +7,7 @@ const props = defineProps<{
 }>()
 
 const { id, moemoepoint } = usePersistUserStore()
-const isUpvoted = ref(props.isUpvoted)
+const isUpvoted = ref(id && props.isUpvoted)
 const upvoteCount = ref(props.upvoteCount)
 
 const upvoteTopic = async () => {

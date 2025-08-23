@@ -1,10 +1,15 @@
 import { createTopicSchema } from '~/validations/topic'
 import { useTopicEditorStore } from './useTopicEditorStore'
+import {
+  TOPIC_SECTION_CONSUME_MOEMOEPOINTS,
+  MOEMOEPOINT_COST_FOR_CONSUME_SECTION
+} from '~/config/moemoepoint'
 
 export const useTopicSubmitter = () => {
   const { category, section, tags, title, content } = useTopicEditorStore()
   const tempStore = useTempEditStore()
   const persistStore = usePersistEditTopicStore()
+  const { moemoepoint } = usePersistUserStore()
 
   const isSubmitting = ref(false)
   const isRewriteMode = computed(() => tempStore.isTopicRewriting)
@@ -31,8 +36,24 @@ export const useTopicSubmitter = () => {
       return
     }
 
+    const hasConsumeSection = TOPIC_SECTION_CONSUME_MOEMOEPOINTS.some((item) =>
+      submitData.section.includes(item as 'g-seeking')
+    )
+    if (
+      hasConsumeSection &&
+      moemoepoint < MOEMOEPOINT_COST_FOR_CONSUME_SECTION
+    ) {
+      useMessage(
+        `您没有足够的萌萌点来发布求助或者寻求资源的话题, 您可以通过发布 Galgame, 签到, 接受别人的赞赏, 等等来获取萌萌点`,
+        'warn'
+      )
+      return
+    }
     const confirmation = await useComponentMessageStore().alert(
-      `确定要${isRewriteMode.value ? '提交更改' : '发布话题'}吗?`
+      `确定要${isRewriteMode.value ? '提交更改' : '发布话题'}吗?`,
+      hasConsumeSection
+        ? `发布此分类的话题将会消耗您 10 萌萌点, 您目前有 ${moemoepoint} 萌萌点`
+        : ''
     )
     if (!confirmation) return
 
