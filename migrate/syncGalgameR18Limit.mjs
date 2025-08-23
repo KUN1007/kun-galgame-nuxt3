@@ -1,13 +1,37 @@
-const response = await fetch(`https://api.vndb.org/kana/vn`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    filters: ['id', '=', 'v19658'],
-    fields:
-      'id, developers{id,name,original,aliases,lang,type,extlinks{url,label}}, tags{id,name,aliases,category,spoiler,description}'
-  })
-})
+import { PrismaClient } from '@prisma/client'
 
-const res = await response.json()
+const prisma = new PrismaClient()
 
-console.log(res)
+const syncGalgameR18Limit = async () => {
+  try {
+    await prisma.galgame.updateMany({
+      data: { age_limit: 'all' }
+    })
+
+    const updateResult = await prisma.galgame.updateMany({
+      where: {
+        tag: {
+          some: {
+            tag: {
+              category: 'sexual'
+            }
+          }
+        }
+      },
+
+      data: {
+        age_limit: 'r18'
+      }
+    })
+
+    console.log(`✅ Script finished successfully.`)
+    console.log(`Found and updated ${updateResult.count} galgames.`)
+  } catch (error) {
+    console.error('error:', error)
+    process.exit(1)
+  } finally {
+    await prisma.$disconnect()
+  }
+}
+
+syncGalgameR18Limit()
