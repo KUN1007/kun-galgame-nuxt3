@@ -2,17 +2,17 @@ import type { Plugin } from 'unified'
 import type { Root, Element } from 'hast'
 import { visit } from 'unist-util-visit'
 
-const getLanguage = (node: Element): string | null => {
+const getLanguage = (node: Element): string => {
   const className = (node.properties?.className as string[]) || []
   for (const cls of className) {
     if (cls.startsWith('language-')) {
       return cls.substring('language-'.length)
     }
   }
-  return null
+  return 'text'
 }
 
-export const rehypeCodeBlockWrapper: Plugin<[], Root> = () => {
+export const rehypeKunCodeBlockWrapper: Plugin<[], Root> = () => {
   return (tree, file) => {
     visit(tree, 'element', (node, index, parent) => {
       if (node.tagName !== 'pre' || !parent || typeof index !== 'number') {

@@ -4,7 +4,7 @@
 
 /* Paragraphs */
 .kun-prose p {
-  @apply leading-8;
+  @apply py-1;
   overflow-wrap: break-word;
 }
 

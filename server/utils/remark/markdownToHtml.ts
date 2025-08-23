@@ -7,8 +7,10 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypePrism from 'rehype-prism-plus'
 import { unified } from 'unified'
-import { rehypeImgLazy } from './plugins/lazyImage'
-import { rehypeCodeBlockWrapper } from './plugins/codeBlockWrapper'
+import { rehypeKunLazyImage } from './plugins/rehypeKunLazyImage'
+import { rehypeKunCodeBlockWrapper } from './plugins/rehypeKunCodeBlockWrapper'
+// import { rehypeKunSpoiler } from './plugins/rehypeKunSpoiler'
+// import { rehypeKunVideo } from './plugins/rehypeKunVideo'
 
 export const markdownToHtml = async (markdown: string) => {
   const htmlVFile = await unified()
@@ -18,16 +20,22 @@ export const markdownToHtml = async (markdown: string) => {
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeSanitize)
     .use(rehypeSlug)
-    .use(rehypeImgLazy)
+    .use(rehypeKunLazyImage)
     .use(rehypePrism, {
       showLineNumbers: true,
       ignoreMissing: true
     })
-    .use(rehypeCodeBlockWrapper)
+    .use(rehypeKunCodeBlockWrapper)
     .use(rehypeStringify)
     .process(markdown)
 
   let htmlContent = htmlVFile.toString()
+
+  const spoilerRegex = /\|\|(.*?)\|\|/gs
+  htmlContent = htmlContent.replace(
+    spoilerRegex,
+    '<span class="kun-spoiler text-transparent kun-spoiler-hidden">$1</span>'
+  )
 
   const videoLinkRegex = /kv:<a href="(https?:\/\/[^\s]+?\.(mp4))">[^<]+<\/a>/g
   htmlContent = htmlContent.replace(videoLinkRegex, (match, videoUrl) => {

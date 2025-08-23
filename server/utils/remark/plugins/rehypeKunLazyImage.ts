@@ -2,7 +2,7 @@ import { visit } from 'unist-util-visit'
 import type { Plugin } from 'unified'
 import type { Root } from 'hast'
 
-export const rehypeImgLazy: Plugin<[], Root> = () => {
+export const rehypeKunLazyImage: Plugin<[], Root> = () => {
   return (tree) => {
     visit(tree, 'element', (node) => {
       if (node.tagName === 'img') {

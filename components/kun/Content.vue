@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DOMPurify from 'isomorphic-dompurify'
+import { useSpoilerContent } from '~/composables/topic/useSpoilerContent'
 
 withDefaults(
   defineProps<{
@@ -13,39 +14,7 @@ withDefaults(
 
 const articleRef = ref<HTMLElement | null>(null)
 
-const handleContentClick = (event: MouseEvent) => {
-  const target = event.target as HTMLElement
-
-  if (target && target.matches('.copy')) {
-    const container = target.closest('.kun-code-container')
-    if (!container) return
-
-    const pre = container.querySelector('pre')
-    if (!pre) return
-
-    const codeToCopy = pre.innerText
-
-    navigator.clipboard
-      .writeText(codeToCopy)
-      .then(() => {
-        target.classList.add('copied')
-        setTimeout(() => {
-          target.classList.remove('copied')
-        }, 3000)
-      })
-      .catch((err) => {
-        useMessage('复制失败', 'error')
-      })
-  }
-}
-
-onMounted(() => {
-  articleRef.value?.addEventListener('click', handleContentClick)
-})
-
-onBeforeUnmount(() => {
-  articleRef.value?.removeEventListener('click', handleContentClick)
-})
+useSpoilerContent(articleRef)
 
 const sanitizeConfig = {
   ADD_TAGS: ['div', 'span', 'button'],
@@ -62,3 +31,48 @@ const sanitizeConfig = {
     />
   </div>
 </template>
+
+<style scoped lang="scss">
+.kun-prose {
+  :deep(.kun-spoiler) {
+    position: relative;
+    display: inline-block;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    vertical-align: middle;
+
+    & > *:not(.spoiler-canvas) {
+      transition: filter 0.3s ease-in-out;
+      filter: blur(0);
+    }
+
+    .spoiler-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
+      background-color: rgba(150, 150, 150, 0.1);
+
+      &.fade-out {
+        opacity: 0;
+      }
+    }
+  }
+
+  :deep(.kun-spoiler.kun-spoiler-hidden) {
+    cursor: pointer;
+
+    & > *:not(.spoiler-canvas) {
+      filter: blur(52px);
+      user-select: none;
+    }
+  }
+
+  :deep(div.kun-spoiler) {
+    display: block;
+    width: fit-content;
+  }
+}
+</style>

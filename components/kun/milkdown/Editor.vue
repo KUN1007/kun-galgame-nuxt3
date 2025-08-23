@@ -29,7 +29,7 @@ import {
   placeholderPlugin,
   placeholderCtx
 } from './plugins/placeholder/placeholderPlugin'
-// import { spoiler } from './plugins/spoiler/spoilerPlugin'
+import { kunSpoilerPlugin } from './plugins/spoiler/spoilerPlugin'
 
 // Syntax highlight
 import bash from 'refractor/lang/bash'
@@ -121,12 +121,6 @@ const editorInfo = useEditor((root) =>
           component: Tooltip
         })
       })
-
-      // ctx.set(linkUpdatePopup.key, {
-      //   view: pluginViewFactory({
-      //     component: LinkUpdatePopup
-      //   })
-      // })
     })
     .use(history)
     .use(commonmark)
@@ -142,6 +136,7 @@ const editorInfo = useEditor((root) =>
     .use(automd)
     .use(
       [
+        kunSpoilerPlugin,
         stopLinkCommand,
         linkCustomKeymap,
         placeholderCtx,
@@ -183,6 +178,11 @@ watch(
             {{ `${textCount} 字` }}
           </span>
         </div>
+      </div>
+
+      <div class="text-default-500 text-sm">
+        特殊语法: 您可以使用 ||隐藏文本|| 来隐藏图片或者文字 (目前依然禁止 R18
+        图片内容)
       </div>
     </template>
   </div>

@@ -1,24 +1,32 @@
-// FIXME:
 import type { MilkdownPlugin } from '@milkdown/ctx'
 import type { Node } from '@milkdown/transformer'
 import { expectDomTypeError } from '@milkdown/exception'
 import { InputRule } from '@milkdown/prose/inputrules'
-import { $inputRule, $nodeAttr, $nodeSchema, $remark } from '@milkdown/utils'
+import {
+  $inputRule,
+  $nodeAttr,
+  $nodeSchema,
+  $remark,
+  $command
+} from '@milkdown/utils'
+import { visit } from 'unist-util-visit'
+import type { Node as UnistNode } from 'unist'
 
 interface SpoilerNode extends Node {
-  type: 'spoiler' | 'text'
+  type: 'kun-spoiler' | 'text'
   value?: string
   children?: SpoilerNode[]
 }
 
-export const spoilerAttr = $nodeAttr('spoiler', () => ({
+export const spoilerAttr = $nodeAttr('kun-spoiler', () => ({
   container: {
-    class: 'spoiler-content',
-    style: 'background: #000; color: #222; padding: 0 4px; cursor: pointer;'
+    class: 'kun-spoiler',
+    style:
+      'background: var(--color-default-500); border-radius: 8px; padding: 0 4px; cursor: pointer;'
   }
 }))
 
-export const spoilerSchema = $nodeSchema('spoiler', (ctx) => ({
+export const spoilerSchema = $nodeSchema('kun-spoiler', (ctx) => ({
   group: 'inline',
   inline: true,
   content: 'inline*',
@@ -30,7 +38,7 @@ export const spoilerSchema = $nodeSchema('spoiler', (ctx) => ({
   },
   parseDOM: [
     {
-      tag: 'span[data-type="spoiler"]',
+      tag: 'span[data-type="kun-spoiler"]',
       getAttrs: (dom) => {
         if (!(dom instanceof HTMLElement)) throw expectDomTypeError(dom)
         return {
@@ -45,16 +53,14 @@ export const spoilerSchema = $nodeSchema('spoiler', (ctx) => ({
       'span',
       {
         ...attrs.container,
-        'data-type': 'spoiler',
-        'data-revealed': node.attrs.revealed,
-        onclick:
-          'this.style.color = this.style.color === "#000" ? "#fff" : "#000";'
+        'data-type': 'kun-spoiler',
+        'data-revealed': node.attrs.revealed
       },
       0
     ]
   },
   parseMarkdown: {
-    match: ({ type }) => type === 'spoiler',
+    match: ({ type }) => type === 'kun-spoiler',
     runner: (state, node, type) => {
       state.openNode(type)
       state.next(node.children || [])
@@ -62,7 +68,7 @@ export const spoilerSchema = $nodeSchema('spoiler', (ctx) => ({
     }
   },
   toMarkdown: {
-    match: (node) => node.type.name === 'spoiler',
+    match: (node) => node.type.name === 'kun-spoiler',
     runner: (state, node) => {
       state.addNode('text', undefined, '||')
       state.next(node.content)
@@ -71,73 +77,97 @@ export const spoilerSchema = $nodeSchema('spoiler', (ctx) => ({
   }
 }))
 
+// FIXME:
+export const insertKunSpoilerCommand = $command(
+  'InsertKunSpoiler',
+  (ctx) => () => (state, dispatch) => {
+    if (!dispatch) {
+      return true
+    }
+    const node = spoilerSchema.type(ctx).create()
+    if (!node) {
+      return true
+    }
+    dispatch(state.tr.replaceSelectionWith(node).scrollIntoView())
+    return true
+  }
+)
+
 export const insertSpoilerInputRule = $inputRule(
   () =>
-    new InputRule(/(?:^|\s)\|\|([^|]+)\|\|$/, (state, match, start, end) => {
+    new InputRule(/(?:^|\s)\|\|(.*?)\|\|$/, (state, match, start, end) => {
       const [fullMatch, content] = match
       if (!content) return null
-
       const startPos = start + (fullMatch.startsWith(' ') ? 1 : 0)
       const { tr } = state
-      const nodeType = state.schema.nodes.spoiler
+      const schema = state.schema
+      const spoilerNodeType = schema.nodes['kun-spoiler']
+      if (!spoilerNodeType) return null
 
+      const spoilerNode = spoilerNodeType.create(
+        { revealed: false },
+        schema.text(content)
+      )
+      const zeroWidthSpace = schema.text('\u200B')
       return tr
-        .replaceWith(
-          startPos,
-          end,
-          nodeType.create({ revealed: false }, state.schema.text(content))
-        )
+        .replaceWith(startPos, end, [spoilerNode, zeroWidthSpace])
+        .setStoredMarks([])
         .scrollIntoView()
     })
 )
 
-export const remarkSpoilerPlugin = $remark(
-  'remarkSpoiler',
-  () => () => (tree) => {
-    const transform = (node: SpoilerNode) => {
-      if (node.type === 'text' && typeof node.value === 'string') {
-        const parts = node.value.split(/(\|\|[^|]+\|\|)/)
-        if (parts.length > 1) {
-          const newNodes: SpoilerNode[] = []
-          parts.forEach((part) => {
-            if (part.startsWith('||') && part.endsWith('||')) {
-              const content = part.slice(2, -2)
-              if (content.trim()) {
-                newNodes.push({
-                  type: 'spoiler',
-                  children: [
-                    {
-                      type: 'text',
-                      value: content
-                    }
-                  ]
-                })
-              }
-            } else if (part.trim()) {
-              newNodes.push({
-                type: 'text',
-                value: part
-              })
-            }
+export const remarkSpoilerPlugin = $remark('remarkSpoiler', () => (tree) => {
+  const transformer = (tree: UnistNode) => {
+    visit(tree, 'text', (node: SpoilerNode, index, parent: SpoilerNode) => {
+      if (typeof node.value !== 'string' || !parent) {
+        return
+      }
+
+      const regex = /\|\|(.*?)\|\|/g
+      if (!regex.test(node.value)) {
+        return
+      }
+
+      regex.lastIndex = 0
+
+      const newNodes: SpoilerNode[] = []
+      let lastIndex = 0
+      let match
+
+      while ((match = regex.exec(node.value)) !== null) {
+        const [fullMatch, content] = match
+
+        if (match.index > lastIndex) {
+          newNodes.push({
+            type: 'text',
+            value: node.value.slice(lastIndex, match.index)
           })
-
-          if (newNodes.length > 0) {
-            Object.assign(node, newNodes[0])
-          }
         }
+
+        if (content) {
+          newNodes.push({
+            type: 'kun-spoiler',
+            children: [{ type: 'text', value: content }]
+          })
+        }
+
+        lastIndex = regex.lastIndex
       }
 
-      if ('children' in node && Array.isArray(node.children)) {
-        node.children.forEach((child) => transform(child as SpoilerNode))
+      if (lastIndex < node.value.length) {
+        newNodes.push({ type: 'text', value: node.value.slice(lastIndex) })
       }
-    }
 
-    transform(tree as unknown as SpoilerNode)
-    return tree
+      if (newNodes.length > 0 && typeof index === 'number') {
+        parent.children?.splice(index, 1, ...newNodes)
+      }
+    })
   }
-)
 
-export const spoiler: MilkdownPlugin[] = [
+  return transformer
+})
+
+export const kunSpoilerPlugin: MilkdownPlugin[] = [
   spoilerAttr,
   spoilerSchema,
   insertSpoilerInputRule,
