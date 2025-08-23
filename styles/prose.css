@@ -5,6 +5,7 @@
 /* Paragraphs */
 .kun-prose p {
   @apply leading-8;
+  overflow-wrap: break-word;
 }
 
 /* Links */

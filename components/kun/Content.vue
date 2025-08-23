@@ -57,7 +57,7 @@ const sanitizeConfig = {
   <div>
     <article
       ref="articleRef"
-      :class="cn('kun-prose break-all', className)"
+      :class="cn('kun-prose', className)"
       v-html="DOMPurify.sanitize(content, sanitizeConfig)"
     />
   </div>
