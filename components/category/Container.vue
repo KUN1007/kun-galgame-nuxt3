@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { KUN_TOPIC_CATEGORY, KUN_TOPIC_SECTION } from '~/constants/topic'
-import { KUN_CATEGORY_DESCRIPTION_MAP } from '~/constants/category'
+import { KUN_TOPIC_SECTION } from '~/constants/topic'
 import type { SectionStats } from '~/types/api/category'
 
 defineProps<{
@@ -10,17 +9,9 @@ defineProps<{
 </script>
 
 <template>
-  <KunCard :is-hoverable="false" :is-transparent="false" :dark-border="true">
-    <KunHeader
-      :is-show-divider="false"
-      :name="KUN_TOPIC_CATEGORY[categoryName]"
-      :description="KUN_CATEGORY_DESCRIPTION_MAP[categoryName]"
-    />
-  </KunCard>
-
   <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
     <KunCard
-      :is-transparent="false"
+      :is-transparent="true"
       :is-pressable="true"
       :dark-border="true"
       v-for="section in sections"

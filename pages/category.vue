@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { kunCategoryAvailableItem } from '~/constants/category'
+import { KUN_TOPIC_CATEGORY } from '~/constants/topic'
+import { KUN_CATEGORY_DESCRIPTION_MAP } from '~/constants/category'
 
 const activeTab = computed(
   () => useRoute().fullPath.split('/').pop() || 'galgame'
@@ -7,13 +8,18 @@ const activeTab = computed(
 </script>
 
 <template>
-  <div class="flex flex-col space-y-3">
-    <KunTab
-      :items="kunCategoryAvailableItem"
-      :model-value="activeTab"
-      size="sm"
-      inner-class-name="bg-background"
+  <KunCard
+    :is-hoverable="false"
+    :is-pressable="false"
+    :is-transparent="false"
+    class-name="h-full"
+    content-class="space-y-3 justify-start"
+  >
+    <KunHeader
+      :name="KUN_TOPIC_CATEGORY[activeTab]"
+      :description="KUN_CATEGORY_DESCRIPTION_MAP[activeTab]"
     />
+
     <NuxtPage />
-  </div>
+  </KunCard>
 </template>
