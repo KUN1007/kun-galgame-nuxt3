@@ -35,7 +35,7 @@ watch(
 
 <template>
   <div
-    class="bg-background dark:border-default-200 z-10 flex w-full shrink-0 flex-wrap items-center justify-between gap-3 rounded-lg border border-transparent p-3 shadow backdrop-blur-[var(--kun-background-blur)] sm:flex-nowrap"
+    class="flex w-full shrink-0 flex-wrap items-center justify-between gap-3 rounded-lg border border-transparent sm:flex-nowrap"
   >
     <div class="grid w-full grid-cols-2 gap-3 lg:grid-cols-4">
       <KunSelect

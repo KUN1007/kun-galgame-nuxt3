@@ -138,7 +138,11 @@ const titleColor = computed(() => {
     "
   >
     <h3 :class="cn('flex items-center gap-2 font-medium', titleColor)">
-      <KunIcon v-if="icon" :name="icon" class-name="h-5 w-5 flex-shrink-0" />
+      <KunIcon
+        v-if="icon"
+        :name="icon"
+        :class-name="cn('h-5 w-5 flex-shrink-0')"
+      />
       <span>{{ title }}</span>
     </h3>
 

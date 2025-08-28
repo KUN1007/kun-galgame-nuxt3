@@ -1,11 +1,9 @@
 <script setup lang="ts">
 const showItemIndex = ref(1)
-const font = ref('')
 
 const {
   showKUNGalgamePageTransparency,
   showKUNGalgameBackgroundBlur,
-  showKUNGalgameFontStyle,
   showKUNGalgameBackgroundBrightness
 } = storeToRefs(usePersistSettingsStore())
 
@@ -34,17 +32,6 @@ watch(
       showKUNGalgameBackgroundBrightness.value
     )
   }, 300)
-)
-
-watch(
-  () => font.value,
-  () => {
-    if (font.value) {
-      usePersistSettingsStore().setKUNGalgameFontStyle(font.value)
-    } else {
-      usePersistSettingsStore().setKUNGalgameFontStyle('system-ui')
-    }
-  }
 )
 </script>
 
@@ -86,17 +73,6 @@ watch(
           @click="showItemIndex = 3"
         >
           <KunIcon class="text-inherit" name="lucide:lightbulb" />
-        </span>
-        <span
-          :class="
-            cn(
-              'flex rounded-lg p-2 transition-colors',
-              showItemIndex === 4 ? 'bg-primary-50 text-primary shadow' : ''
-            )
-          "
-          @click="showItemIndex = 4"
-        >
-          <KunIcon class="text-inherit" name="ci:font" />
         </span>
       </div>
     </div>
@@ -159,27 +135,6 @@ watch(
           />
           <span>100%</span>
         </div>
-      </div>
-
-      <div class="w-full space-y-2" v-if="showItemIndex === 4">
-        <div class="flex justify-between text-sm">
-          <span>字体样式</span>
-          <span>
-            {{
-              showKUNGalgameFontStyle === 'system-ui'
-                ? '系统默认'
-                : showKUNGalgameFontStyle
-            }}
-          </span>
-        </div>
-
-        <KunInput
-          required
-          placeholder="请在这里输入字体的名字"
-          type="text"
-          v-model="font"
-          size="xs"
-        />
       </div>
     </TransitionGroup>
   </div>

@@ -22,12 +22,8 @@ const { data } = await useFetch(`/api/home/galgame`, {
         默认仅展示 SFW (内容安全的内容), 您可以打开 NSFW (会显示涩涩等内容,
         不适合在公共场合打开)
       </p>
-      <div class="w-full">
-        <KunSettingPanelComponentsNSFW />
-      </div>
+      <GalgameCardNSFWHint />
     </KunCard>
-
-    <GalgameCardNSFWHint />
 
     <GalgameCard :galgames="data" :is-transparent="false" />
   </div>
