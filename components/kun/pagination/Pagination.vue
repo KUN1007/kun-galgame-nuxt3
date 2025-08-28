@@ -89,11 +89,9 @@ watch(
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center gap-3">
-    <div
-      class="flex w-full flex-col items-center justify-between gap-4 sm:flex-row"
-    >
-      <div class="flex items-center gap-2">
+  <div class="flex w-full flex-wrap items-center justify-between gap-4">
+    <div class="mx-auto flex flex-wrap items-center gap-2">
+      <div class="mx-auto flex items-center gap-2">
         <KunButton
           :is-icon-only="true"
           variant="light"
@@ -135,44 +133,46 @@ watch(
         </KunButton>
       </div>
 
-      <div class="flex items-center gap-2">
-        <label :for="kunUniqueId" class="text-sm">跳转到页数</label>
-        <input
-          :id="kunUniqueId"
-          type="number"
-          v-model="jumpToPage"
-          :disabled="isLoading"
-          @keyup.enter="handleJumpToPage"
-          min="1"
-          :max="totalPage"
-          class=""
-          :class="
-            cn(
-              'focus:ring-primary border-default-300 w-24 rounded-md border px-2 py-1 text-sm focus:ring-1 focus:outline-none',
-              isLoading && 'cursor-not-allowed opacity-50'
-            )
-          "
-        />
-        <KunButton
-          size="sm"
-          @click="handleJumpToPage"
-          :disabled="isLoading"
-          class=""
-          :class="
-            cn(
-              'bg-primary hover:bg-opacity-90 focus:ring-primary focus:ring-opacity-50 rounded-md px-3 py-1 text-sm text-white focus:ring-2 focus:outline-none',
-              isLoading && 'cursor-not-allowed opacity-50'
-            )
-          "
-        >
-          跳转
-        </KunButton>
+      <div
+        class="text-default-500 mx-auto hidden items-center gap-2 text-sm sm:flex"
+      >
+        您可以使用 <KunIcon name="lucide:arrow-left" />
+        <KunIcon name="lucide:arrow-right" /> 来进行快速翻页
       </div>
     </div>
 
-    <div class="text-default-500 hidden items-center gap-2 text-sm sm:flex">
-      您可以使用 <KunIcon name="lucide:arrow-left" />
-      <KunIcon name="lucide:arrow-right" /> 来进行快速翻页
+    <div class="mx-auto flex items-center gap-2">
+      <label :for="kunUniqueId" class="text-sm">跳转到页数</label>
+      <input
+        :id="kunUniqueId"
+        type="number"
+        v-model="jumpToPage"
+        :disabled="isLoading"
+        @keyup.enter="handleJumpToPage"
+        min="1"
+        :max="totalPage"
+        class=""
+        :class="
+          cn(
+            'focus:ring-primary border-default-300 w-24 rounded-md border px-2 py-1 text-sm focus:ring-1 focus:outline-none',
+            isLoading && 'cursor-not-allowed opacity-50'
+          )
+        "
+      />
+      <KunButton
+        size="sm"
+        @click="handleJumpToPage"
+        :disabled="isLoading"
+        class=""
+        :class="
+          cn(
+            'bg-primary hover:bg-opacity-90 focus:ring-primary focus:ring-opacity-50 rounded-md px-3 py-1 text-sm text-white focus:ring-2 focus:outline-none',
+            isLoading && 'cursor-not-allowed opacity-50'
+          )
+        "
+      >
+        跳转
+      </KunButton>
     </div>
   </div>
 </template>
