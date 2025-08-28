@@ -23,7 +23,9 @@ const { data, status } = await useFetch(`/api/galgame`, {
       </KunHeader>
     </KunCard>
 
-    <GalgameCard v-if="data.galgames" :galgames="data.galgames" />
+    <KunLoading :loading="status === 'pending'">
+      <GalgameCard v-if="data.galgames" :galgames="data.galgames" />
+    </KunLoading>
 
     <KunCard
       :is-hoverable="false"
