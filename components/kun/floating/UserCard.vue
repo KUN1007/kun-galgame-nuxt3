@@ -125,7 +125,7 @@ onUnmounted(() => {
         v-if="showCard"
         :class="
           cn(
-            'border-default-200 absolute z-20 w-72 rounded-xl border bg-white p-4 shadow-lg dark:bg-black',
+            'border-default-200 absolute z-20 hidden w-72 rounded-xl border bg-white p-4 shadow-lg sm:block dark:bg-black',
             positionClasses
           )
         "

@@ -10,6 +10,7 @@ const { data } = await useFetch('/api/home/message', {
   <KunCard
     :is-transparent="false"
     v-if="data"
+    class-name="h-full"
     content-class="space-y-3"
     :is-hoverable="false"
   >

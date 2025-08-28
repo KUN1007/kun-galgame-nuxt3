@@ -4,7 +4,7 @@ import { markdownToText } from '~/utils/markdownToText'
 import type { ActivityItem } from '~/types/api/activity'
 
 const ACTIVITY_ITEM_FETCHER_LIMIT = 5
-const ACTIVITY_ITEM_LIMIT = 22
+const ACTIVITY_ITEM_LIMIT = 23
 
 const timelineFetchers = {
   GALGAME_CREATION: async (content_limit?: string): Promise<ActivityItem[]> => {
@@ -319,7 +319,12 @@ const timelineFetchers = {
 }
 
 export default defineEventHandler(async (event) => {
-  const promises = Object.values(timelineFetchers).map((fetcher) => fetcher())
+  const nsfw = getNSFWCookie(event)
+  const contentLimit = nsfw === 'sfw' ? 'sfw' : undefined
+
+  const promises = Object.values(timelineFetchers).map((fetcher) =>
+    fetcher(contentLimit)
+  )
   const results = await Promise.allSettled(promises)
 
   const allActivities = results

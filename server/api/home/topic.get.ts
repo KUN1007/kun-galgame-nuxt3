@@ -17,7 +17,10 @@ export default defineEventHandler(async (event) => {
     take: limit,
     where: {
       status: { not: 1 },
-      OR: [{ edited: { gte: subMonths(new Date(), 3) } }, { edited: null }]
+      OR: [
+        { edited: { gte: subMonths(new Date(), 3) } },
+        { edited: null, created: { gte: subMonths(new Date(), 3) } }
+      ]
     },
     orderBy: { status_update_time: 'desc' },
     include: {
