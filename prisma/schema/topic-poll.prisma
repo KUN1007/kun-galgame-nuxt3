@@ -1,0 +1,63 @@
+model topic_poll {
+    id          Int    @id @default(autoincrement())
+    title       String @db.VarChar(100)
+    description String @default("") @db.VarChar(500)
+
+    // single, multiple
+    type       String @default("single")
+    min_choice Int?
+    max_choice Int?
+
+    // has endtime?
+    deadline          DateTime?
+    // open, closed
+    status            String    @default("open")
+    notification_sent Boolean   @default(false)
+    // always - always visible, after_vote, after_deadline - visible on poll end
+    result_visibility String    @default("always")
+    is_anonymous      Boolean   @default(false)
+    // can user change vote result
+    can_change_vote   Boolean   @default(true)
+
+    topic_id Int
+    topic    topic @relation(fields: [topic_id], references: [id], onDelete: Cascade)
+    user_id  Int
+    user     user  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    option topic_poll_option[]
+    vote   topic_poll_vote[]
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
+}
+
+model topic_poll_option {
+    id   Int    @id @default(autoincrement())
+    text String @db.VarChar(100)
+
+    poll_id Int
+    poll    topic_poll @relation(fields: [poll_id], references: [id], onDelete: Cascade)
+
+    vote topic_poll_vote[]
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
+}
+
+// user vote logs
+model topic_poll_vote {
+    id Int @id @default(autoincrement())
+
+    poll_id   Int
+    poll      topic_poll        @relation(fields: [poll_id], references: [id], onDelete: Cascade)
+    option_id Int
+    option    topic_poll_option @relation(fields: [option_id], references: [id], onDelete: Cascade)
+    user_id   Int
+    user      user              @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
+
+    @@unique([poll_id, option_id, user_id])
+    @@index([user_id, poll_id])
+}

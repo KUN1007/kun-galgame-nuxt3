@@ -31,6 +31,9 @@ model user {
     topic_upvote   topic_upvote[]
     topic_favorite topic_favorite[]
 
+    created_topic_poll topic_poll[]
+    topic_poll_vote    topic_poll_vote[]
+
     galgame                galgame[]             @relation("user_galgame")
     galgame_like           galgame_like[]
     galgame_favorite       galgame_favorite[]

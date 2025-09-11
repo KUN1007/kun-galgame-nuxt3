@@ -1,0 +1,44 @@
+import prisma from '~/prisma/prisma'
+import { createPollSchema } from '~/validations/topic-poll'
+
+export default defineEventHandler(async (event) => {
+  const userInfo = await getCookieTokenInfo(event)
+  if (!userInfo) {
+    return kunError(event, '用户登录失效')
+  }
+
+  const input = await kunParsePostBody(event, createPollSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
+  }
+
+  const topic = await prisma.topic.findUnique({
+    where: { id: input.topic_id }
+  })
+  if (!topic) {
+    return kunError(event, '话题不存在')
+  }
+  if (topic.user_id !== userInfo.uid && userInfo.role < 2) {
+    return kunError(event, '您没有权限在此话题下创建投票')
+  }
+
+  await prisma.$transaction(async (prisma) => {
+    const { options, ...rest } = input
+    const createdPoll = await prisma.topic_poll.create({
+      data: {
+        ...rest,
+        deadline: rest.deadline ? new Date(rest.deadline) : null,
+        user_id: userInfo.uid
+      }
+    })
+
+    await prisma.topic_poll_option.createMany({
+      data: options.map((opt) => ({
+        text: opt.text,
+        poll_id: createdPoll.id
+      }))
+    })
+  })
+
+  return 'Moemoe create poll successfully!'
+})

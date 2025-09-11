@@ -1,4 +1,3 @@
-import type { GalgameStoreTemp } from '~/store/types/edit/galgame'
 import type { updateGalgameSchema } from '~/validations/galgame'
 import type { z } from 'zod'
 

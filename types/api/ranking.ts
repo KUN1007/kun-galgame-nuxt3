@@ -1,25 +1,3 @@
-type TopicSortFieldRanking =
-  | 'views'
-  | 'upvotes'
-  | 'likes'
-  | 'replies'
-  | 'comments'
-
-type UserSortFieldRanking =
-  | 'moemoepoint'
-  | 'upvote'
-  | 'like'
-  | 'topic'
-  | 'reply'
-  | 'comment'
-
-type GalgameSortFieldRanking =
-  | 'view'
-  | 'like'
-  | 'favorite'
-  | 'resource'
-  | 'created'
-
 export interface UserRankingItem {
   id: number
   name: string
