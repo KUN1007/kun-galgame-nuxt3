@@ -1,5 +1,5 @@
 import prisma from '~/prisma/prisma'
-import { userPostVoteSchema } from '~/validations/topic-poll'
+import { updateUserVoteSchema } from '~/validations/topic-poll'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '请先登录再投票')
   }
 
-  const input = await kunParsePostBody(event, userPostVoteSchema)
+  const input = await kunParsePostBody(event, updateUserVoteSchema)
   if (typeof input === 'string') {
     return kunError(event, input)
   }

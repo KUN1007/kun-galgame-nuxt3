@@ -34,11 +34,7 @@ export const getPollByTopicSchema = z.object({
   topic_id: z.coerce.number().min(1).max(9999999)
 })
 
-export const getPollDetailSchema = z.object({
-  poll_id: z.coerce.number().min(1).max(9999999)
-})
-
-export const userPostVoteSchema = z.object({
+export const updateUserVoteSchema = z.object({
   poll_id: z.coerce.number().min(1).max(9999999),
   option_id_array: z.array(z.coerce.number().int()).min(1, '请至少选择一个选项')
 })
@@ -83,24 +79,6 @@ export const updatePollSchema = z.object({
     .optional()
 })
 
-export const createPollOptionSchema = z.object({
-  poll_id: z.coerce.number().min(1).max(9999999),
-  text: z.string().min(1, '选项内容不能为空').max(100, '选项内容最多100个字符')
-})
-
-export const updatePollOptionSchema = z.object({
-  option_id: z.coerce.number().min(1).max(9999999),
-  text: z.string().min(1, '选项内容不能为空').max(100, '选项内容最多100个字符')
-})
-
-export const deletePollOptionSchema = z.object({
-  option_id: z.coerce.number().min(1).max(9999999)
-})
-
-export const updatePollStatusSchema = z.object({
-  status: z.enum(['open', 'closed'])
-})
-
-export const getPollVoterSchema = z.object({
-  option_id: z.coerce.number().min(1).max(9999999)
+export const deletePoolSchema = z.object({
+  poll_id: z.coerce.number().min(1).max(9999999)
 })

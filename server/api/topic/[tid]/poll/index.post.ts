@@ -1,5 +1,6 @@
 import prisma from '~/prisma/prisma'
 import { createPollSchema } from '~/validations/topic-poll'
+import type { TopicPoll } from '~/types/api/topic-poll'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
@@ -22,23 +23,59 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '您没有权限在此话题下创建投票')
   }
 
-  await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     const { options, ...rest } = input
-    const createdPoll = await prisma.topic_poll.create({
+    const poll = await prisma.topic_poll.create({
       data: {
         ...rest,
         deadline: rest.deadline ? new Date(rest.deadline) : null,
         user_id: userInfo.uid
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            avatar: true
+          }
+        }
       }
     })
 
-    await prisma.topic_poll_option.createMany({
+    const createdOptions = await prisma.topic_poll_option.createManyAndReturn({
       data: options.map((opt) => ({
         text: opt.text,
-        poll_id: createdPoll.id
+        poll_id: poll.id
       }))
     })
-  })
 
-  return 'Moemoe create poll successfully!'
+    const res: TopicPoll = {
+      id: poll.id,
+      title: poll.title,
+      description: poll.description,
+      min_choice: poll.min_choice,
+      max_choice: poll.max_choice,
+      deadline: poll.deadline,
+      type: poll.type,
+      status: poll.status,
+      result_visibility: poll.result_visibility,
+      is_anonymous: poll.is_anonymous,
+      can_change_vote: poll.can_change_vote,
+      topic_id: poll.topic_id,
+      user: poll.user,
+      option: createdOptions.map((opt) => ({
+        id: opt.id,
+        text: opt.text,
+        vote_count: 0,
+        is_voted: false
+      })),
+      voters: [],
+      voters_count: 0,
+      vote_count: 0,
+      created: poll.created,
+      updated: poll.updated
+    }
+
+    return res
+  })
 })
