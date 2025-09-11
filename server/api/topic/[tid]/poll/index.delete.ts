@@ -1,5 +1,5 @@
 import prisma from '~/prisma/prisma'
-import { deletePoolSchema } from '~/validations/topic-poll'
+import { deletePollSchema } from '~/validations/topic-poll'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '用户登录失效')
   }
 
-  const input = kunParseGetQuery(event, deletePoolSchema)
+  const input = kunParseGetQuery(event, deletePollSchema)
   if (typeof input === 'string') {
     return kunError(event, input)
   }
@@ -22,5 +22,9 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '您无权删除该话题投票')
   }
 
-  return 'Moe moe delete topic pool successfully!'
+  await prisma.topic_poll.delete({
+    where: { id: input.poll_id }
+  })
+
+  return 'Moe moe delete topic poll successfully!'
 })

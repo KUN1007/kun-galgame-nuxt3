@@ -11,7 +11,8 @@ export const useTopic = () => {
     isFetching.value = true
     const result = await $fetch('/api/topic', {
       method: 'GET',
-      query: pageData
+      query: pageData,
+      ...kungalgameResponseHandler
     })
     isFetching.value = false
     return result

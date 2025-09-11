@@ -1,6 +1,5 @@
 import prisma from '~/prisma/prisma'
 import { createPollSchema } from '~/validations/topic-poll'
-import type { TopicPoll } from '~/types/api/topic-poll'
 
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
@@ -42,40 +41,11 @@ export default defineEventHandler(async (event) => {
       }
     })
 
-    const createdOptions = await prisma.topic_poll_option.createManyAndReturn({
+    await prisma.topic_poll_option.createMany({
       data: options.map((opt) => ({
         text: opt.text,
         poll_id: poll.id
       }))
     })
-
-    const res: TopicPoll = {
-      id: poll.id,
-      title: poll.title,
-      description: poll.description,
-      min_choice: poll.min_choice,
-      max_choice: poll.max_choice,
-      deadline: poll.deadline,
-      type: poll.type,
-      status: poll.status,
-      result_visibility: poll.result_visibility,
-      is_anonymous: poll.is_anonymous,
-      can_change_vote: poll.can_change_vote,
-      topic_id: poll.topic_id,
-      user: poll.user,
-      option: createdOptions.map((opt) => ({
-        id: opt.id,
-        text: opt.text,
-        vote_count: 0,
-        is_voted: false
-      })),
-      voters: [],
-      voters_count: 0,
-      vote_count: 0,
-      created: poll.created,
-      updated: poll.updated
-    }
-
-    return res
   })
 })

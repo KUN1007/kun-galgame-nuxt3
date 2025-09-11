@@ -4,32 +4,32 @@ const pollOptionSchema = z.object({
   text: z.string().min(1, '选项内容不能为空').max(100, '选项内容最多100个字符')
 })
 
-export const createPollSchema = z.object({
-  topic_id: z.coerce.number().min(1).max(9999999),
+const poolSchema = z.object({
   title: z
     .string()
     .min(1, '投票标题不能为空')
     .max(100, '投票标题最多100个字符'),
-  description: z
-    .string()
-    .max(500, '投票描述最多500个字符')
-    .optional()
-    .default(''),
+  description: z.string().max(500, '投票描述最多500个字符').default(''),
   type: z.enum(['single', 'multiple'], { message: '投票类型必须是单选或多选' }),
-  min_choice: z.coerce.number().int().min(1).optional(),
-  max_choice: z.coerce.number().int().min(1).optional(),
-  deadline: z.string().datetime({ message: '截止日期格式不正确' }).optional(),
+  min_choice: z.coerce.number().int().min(1).default(1),
+  max_choice: z.coerce.number().int().min(1).default(1),
+  deadline: z.string().datetime().optional(),
   result_visibility: z.enum(['always', 'after_vote', 'after_deadline'], {
     message: '结果可见性设置不正确'
   }),
   is_anonymous: z.boolean(),
-  can_change_vote: z.boolean(),
-  options: z
-    .array(pollOptionSchema)
-    .min(2, '投票至少需要2个选项')
-    .max(20, '投票最多只能有20个选项')
+  can_change_vote: z.boolean()
 })
 
+export const createPollSchema = poolSchema.merge(
+  z.object({
+    topic_id: z.coerce.number().min(1).max(9999999),
+    options: z
+      .array(pollOptionSchema)
+      .min(2, '投票至少需要2个选项')
+      .max(20, '投票最多只能有20个选项')
+  })
+)
 export const getPollByTopicSchema = z.object({
   topic_id: z.coerce.number().min(1).max(9999999)
 })
@@ -39,46 +39,39 @@ export const updateUserVoteSchema = z.object({
   option_id_array: z.array(z.coerce.number().int()).min(1, '请至少选择一个选项')
 })
 
-export const updatePollSchema = z.object({
-  poll_id: z.coerce.number().min(1).max(9999999),
-  title: z
-    .string()
-    .min(1, '投票标题不能为空')
-    .max(100, '投票标题最多100个字符'),
-  description: z
-    .string()
-    .max(500, '投票描述最多500个字符')
-    .optional()
-    .default(''),
-  type: z.enum(['single', 'multiple'], { message: '投票类型必须是单选或多选' }),
-  min_choice: z.coerce.number().int().min(1).optional(),
-  max_choice: z.coerce.number().int().min(1).optional(),
-  deadline: z.string().datetime({ message: '截止日期格式不正确' }).optional(),
-  result_visibility: z.enum(['always', 'after_vote', 'after_deadline'], {
-    message: '结果可见性设置不正确'
-  }),
-  is_anonymous: z.boolean(),
-  can_change_vote: z.boolean(),
+export const updatePollSchema = poolSchema.merge(
+  z.object({
+    poll_id: z.coerce.number().min(1).max(9999999),
+    options: z
+      .object({
+        add: z.array(pollOptionSchema).optional().default([]),
+        update: z
+          .array(
+            z.object({
+              option_id: z.coerce.number().min(1).max(9999999),
+              text: z
+                .string()
+                .min(1, '选项内容不能为空')
+                .max(100, '选项内容最多100个字符')
+            })
+          )
+          .optional()
+          .default([]),
+        delete: z
+          .array(z.coerce.number().min(1).max(9999999))
+          .optional()
+          .default([])
+      })
+      .optional()
+  })
+)
 
-  options: z
-    .object({
-      add: z.array(pollOptionSchema).optional(),
-      update: z
-        .array(
-          z.object({
-            option_id: z.coerce.number().min(1).max(9999999),
-            text: z
-              .string()
-              .min(1, '选项内容不能为空')
-              .max(100, '选项内容最多100个字符')
-          })
-        )
-        .optional(),
-      delete: z.array(z.coerce.number().min(1).max(9999999)).optional()
-    })
-    .optional()
+export const deletePollSchema = z.object({
+  poll_id: z.coerce.number().min(1).max(9999999)
 })
 
-export const deletePoolSchema = z.object({
-  poll_id: z.coerce.number().min(1).max(9999999)
+export const getPollLogSchema = z.object({
+  poll_id: z.coerce.number().min(1).max(9999999),
+  page: z.coerce.number().min(1).max(9999999),
+  limit: z.coerce.number().min(1).max(50)
 })

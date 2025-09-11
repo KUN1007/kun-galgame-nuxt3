@@ -33,7 +33,8 @@ export const useTopicReplies = (topicId: number | Ref<number>) => {
         page: fetchPage,
         limit: 30,
         sortOrder: fetchSortOrder
-      }
+      },
+      ...kungalgameResponseHandler
     })
     status.value = 'success'
     return newReplies

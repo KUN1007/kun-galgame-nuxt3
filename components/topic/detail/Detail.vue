@@ -6,9 +6,11 @@ const props = defineProps<{
   topic: TopicDetail
 }>()
 
+const { id, role } = usePersistUserStore()
 const { images, isLightboxOpen, currentImageIndex } = useKunLightbox()
 const tempReplyStore = useTempReplyStore()
 const { lastSuccessfulReply } = storeToRefs(tempReplyStore)
+const isTopicAdmin = computed(() => role > 1 || props.topic.user.id === id)
 
 const {
   replies,
@@ -76,6 +78,8 @@ watch(
 
     <div class="w-full min-w-0 flex-1 space-y-4">
       <TopicDetailMaster :topic="topic" />
+
+      <TopicPollContainer :topic-id="topic.id" :is-topic-admin="isTopicAdmin" />
 
       <TopicDetailTool
         :reply-count="topic.replyCount"

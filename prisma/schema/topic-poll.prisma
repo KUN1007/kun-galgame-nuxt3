@@ -5,8 +5,8 @@ model topic_poll {
 
     // single, multiple
     type       String @default("single")
-    min_choice Int?
-    max_choice Int?
+    min_choice Int    @default(1)
+    max_choice Int    @default(1)
 
     // has endtime?
     deadline          DateTime?

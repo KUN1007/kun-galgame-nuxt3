@@ -109,6 +109,7 @@ export default defineEventHandler(async (event) => {
         vote_count: showResults ? opt._count.vote : null,
         is_voted: opt.vote.length > 0
       })),
+      has_voted: isUserVoted,
       voters: voters,
       voters_count: poll._count.vote,
       vote_count: showResults ? poll._count.vote : null,

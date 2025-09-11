@@ -10,8 +10,8 @@ export interface TopicPoll {
   title: string
   description: string
 
-  min_choice: number | null
-  max_choice: number | null
+  min_choice: number
+  max_choice: number
   deadline: string | Date | null
 
   type: string
@@ -20,6 +20,7 @@ export interface TopicPoll {
 
   is_anonymous: boolean
   can_change_vote: boolean
+  has_voted: boolean
 
   topic_id: number
   user: KunUser
@@ -31,4 +32,11 @@ export interface TopicPoll {
 
   created: string | Date
   updated: string | Date
+}
+
+export interface TopicPollVoteLog {
+  id: number
+  created: Date | string
+  option: string
+  user: KunUser
 }
