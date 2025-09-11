@@ -45,7 +45,7 @@ export default defineEventHandler(async (event) => {
   const targets = reply.target.map((t) => markdownToText(t.content))
   const replyContent = `${markdownToText(reply.content)}${targets.toString()}`
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     if (reply.pinned) {
       await prisma.topic.update({
         where: { id: reply.topic_id },

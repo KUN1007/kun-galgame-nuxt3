@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
     existingReply.target.map((t) => t.target_reply_id)
   )
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     if (targets) {
       await prisma.topic_reply_target.deleteMany({
         where: { reply_id: replyId }

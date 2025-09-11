@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
 
   const { tag_ids, url, ...rest } = input
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     const website = await prisma.galgame_website.create({
       data: { ...rest, url: getDomain(url) }
     })

@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
 
   const isLikedGalgame = galgame.like.length > 0
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     if (isLikedGalgame) {
       await prisma.galgame_like.delete({
         where: {

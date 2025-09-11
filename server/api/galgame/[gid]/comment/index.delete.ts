@@ -41,7 +41,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '您没有权限删除该评论')
   }
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     if (comment.target_user_id && comment.user_id !== comment.target_user_id) {
       await prisma.user.update({
         where: { id: comment.target_user_id },

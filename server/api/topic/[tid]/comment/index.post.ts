@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
   const { topicId, replyId, targetUserId, content } = input
   const uid = userInfo.uid
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     const newComment = await prisma.topic_comment.create({
       data: {
         topic_id: topicId,

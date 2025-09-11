@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
 
   const isLiked = topic.like.length > 0
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     if (isLiked) {
       await prisma.topic_like.delete({
         where: {

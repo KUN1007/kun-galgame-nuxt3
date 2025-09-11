@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
 
   const { link, galgameId, ...rest } = input
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     const resource = await prisma.galgame_resource.create({
       data: {
         ...rest,

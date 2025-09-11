@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '您已经点赞过了')
   }
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     await prisma.galgame_comment_like.create({
       data: {
         user_id: uid,

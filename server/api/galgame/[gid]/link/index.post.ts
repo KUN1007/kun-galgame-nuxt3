@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
   const uid = userInfo.uid
   const { galgameId, name, link } = input
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     await prisma.galgame_link.create({
       data: {
         user_id: uid,

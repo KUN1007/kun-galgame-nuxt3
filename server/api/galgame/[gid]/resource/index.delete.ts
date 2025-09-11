@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '您没有权限删除这个 Galgame 资源')
   }
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     await prisma.user.update({
       where: { id: userInfo.uid },
       data: {

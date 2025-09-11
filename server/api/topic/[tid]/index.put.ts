@@ -55,7 +55,7 @@ export default defineEventHandler(async (event) => {
 
   const { topicId, section, ...topicData } = input
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     await prisma.topic.update({
       where: { id: topicId, user_id: userInfo.uid },
       data: {

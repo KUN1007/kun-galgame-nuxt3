@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     const newComment = await prisma.galgame_website_comment.create({
       data: {
         content: input.content,

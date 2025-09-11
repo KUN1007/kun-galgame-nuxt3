@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '您不能推自己的话题')
   }
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     await prisma.topic_upvote.create({
       data: {
         user_id: uid,

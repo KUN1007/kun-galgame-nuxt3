@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
 
   const isLikedResource = resource.like.length > 0
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     if (isLikedResource) {
       await prisma.galgame_resource_like.delete({
         where: {

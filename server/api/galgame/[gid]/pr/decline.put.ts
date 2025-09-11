@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
   }
   const uid = userInfo.uid
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     const galgamePR = await prisma.galgame_pr.update({
       where: { id: galgamePrId },
       data: {

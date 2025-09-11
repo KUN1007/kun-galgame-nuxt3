@@ -22,7 +22,7 @@ export const sendingMessage = async (
 
   const roomName = generateRoomId(receiverUid, uid)
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     const newMessage = await prisma.chat_message.create({
       data: {
         content,

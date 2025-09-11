@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '您无权删除这个相关链接')
   }
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     await prisma.galgame_link.delete({
       where: { id: input.galgameLinkId }
     })

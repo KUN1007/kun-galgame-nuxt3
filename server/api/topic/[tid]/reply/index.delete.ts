@@ -108,7 +108,7 @@ export default defineEventHandler(async (event) => {
     )
   }
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     await deleteReplyRecursive(reply.id, prisma)
 
     await prisma.user.update({

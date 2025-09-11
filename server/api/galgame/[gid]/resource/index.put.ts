@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
 
   const { link, galgameId, galgameResourceId, ...rest } = input
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     await prisma.galgame_resource.update({
       where: { id: galgameResourceId, user_id: userInfo.uid },
       data: rest

@@ -54,7 +54,7 @@ export default defineEventHandler(async (event) => {
   }
   const { result, uid } = res
 
-  return await prisma.$transaction(
+  return prisma.$transaction(
     async (prisma) => {
       const newGalgame = await prisma.galgame.create({
         data: {
@@ -97,13 +97,10 @@ export default defineEventHandler(async (event) => {
         data: { moemoepoint: { increment: 3 } }
       })
 
-      const res = await uploadGalgameBanner(
+      await uploadGalgameBanner(
         Buffer.from(result.banner as Buffer),
         newGalgame.id
       )
-      if (res) {
-        return kunError(event, res)
-      }
 
       const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${newGalgame.id}/banner/banner.webp`
       await prisma.galgame.update({

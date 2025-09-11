@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
 
   const { galgameIds, ...seriesData } = input
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     const newSeries = await prisma.galgame_series.create({
       data: seriesData
     })

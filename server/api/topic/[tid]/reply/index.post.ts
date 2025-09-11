@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
   })
   const newFloor = (lastReply?.floor || 0) + 1
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     await prisma.topic.update({
       where: { id: input.topicId },
       data: { status_update_time: new Date() }

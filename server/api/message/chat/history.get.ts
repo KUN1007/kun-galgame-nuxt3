@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
   }
   const roomId = generateRoomId(receiverUid, uid)
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     const room = await prisma.chat_room.findFirst({
       where: { name: roomId }
     })

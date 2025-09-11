@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
 
   const isFavoriteGalgame = galgame.favorite.length > 0
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     if (isFavoriteGalgame) {
       await prisma.galgame_favorite.delete({
         where: {

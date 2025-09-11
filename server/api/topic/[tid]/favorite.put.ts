@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
 
   const isFavorited = topic.favorite.length > 0
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     if (isFavorited) {
       await prisma.topic_favorite.delete({
         where: {

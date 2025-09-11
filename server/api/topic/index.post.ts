@@ -51,7 +51,7 @@ export default defineEventHandler(async (event) => {
 
   const { section, ...topicData } = input
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     const newTopic = await prisma.topic.create({
       data: {
         ...topicData,

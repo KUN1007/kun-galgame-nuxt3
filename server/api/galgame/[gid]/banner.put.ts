@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
 
   const imageLink = `${env.KUN_VISUAL_NOVEL_IMAGE_BED_URL}/galgame/${galgame.id}/banner/banner.webp`
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     await prisma.galgame.update({
       where: { id: galgame.id },
       data: { banner: imageLink }

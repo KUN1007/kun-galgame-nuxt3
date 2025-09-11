@@ -61,7 +61,7 @@ export default defineEventHandler(async (event) => {
     aliases: originalGalgame.alias.map((a) => a.name).toString()
   }
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     if (uid === originalGalgame.user_id || userInfo.role > 1) {
       if (originalGalgame.vndb_id !== input.vndbId) {
         await resyncVndbData(prisma, {

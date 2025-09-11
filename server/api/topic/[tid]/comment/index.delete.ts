@@ -50,7 +50,7 @@ export default defineEventHandler(async (event) => {
     )
   }
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     await prisma.topic_comment.delete({
       where: { id: input.commentId }
     })

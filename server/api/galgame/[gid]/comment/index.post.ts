@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '用户登录失效', 205)
   }
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     await prisma.galgame_comment.create({
       data: {
         galgame_id: galgameId,

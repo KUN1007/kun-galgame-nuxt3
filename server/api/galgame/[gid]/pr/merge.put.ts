@@ -47,7 +47,7 @@ export default defineEventHandler(async (event) => {
 
   const galgameId = galgamePR.galgame_id
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     if (galgamePR.galgame.vndb_id !== prJSONObject.vndbId) {
       await resyncVndbData(prisma, {
         galgameId,

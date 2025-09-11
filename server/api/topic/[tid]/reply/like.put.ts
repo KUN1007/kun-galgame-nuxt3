@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
 
   const isLikedReply = reply.like.length > 0
 
-  return await prisma.$transaction(async (prisma) => {
+  return prisma.$transaction(async (prisma) => {
     if (isLikedReply) {
       await prisma.topic_reply_like.delete({
         where: {
