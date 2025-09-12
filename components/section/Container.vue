@@ -92,6 +92,7 @@ watch(
           :section="topic.section"
           :tags="topic.tag"
           :has-best-answer="topic.hasBestAnswer"
+          :is-poll-topic="topic.isPollTopic"
         />
 
         <div class="text-default-500 line-clamp-2 text-sm break-all">

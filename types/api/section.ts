@@ -8,6 +8,7 @@ export interface SectionTopic {
   like: number
   reply: number
   hasBestAnswer: boolean
+  isPollTopic: boolean
   user: KunUser
   created: Date | string
 }

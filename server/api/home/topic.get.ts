@@ -41,7 +41,8 @@ export default defineEventHandler(async (event) => {
         select: {
           like: true,
           reply: true,
-          comment: true
+          comment: true,
+          poll: true
         }
       }
     }
@@ -55,6 +56,7 @@ export default defineEventHandler(async (event) => {
     replyCount: topic._count.reply,
     commentCount: topic._count.comment,
     hasBestAnswer: !!topic.best_answer,
+    isPollTopic: !!topic._count.poll,
     tag: topic.tag,
     section: topic.section.map((s) => s.topic_section.name),
     user: topic.user,

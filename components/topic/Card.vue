@@ -25,6 +25,7 @@ const actionsCount = computed(
       :section="props.topic.section"
       :tags="props.topic.tag"
       :has-best-answer="topic.hasBestAnswer"
+      :is-poll-topic="topic.isPollTopic"
     />
 
     <div class="text-default-700 flex items-center gap-4 text-sm">

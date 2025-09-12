@@ -7,7 +7,7 @@ model topic {
     status             Int       @default(0)
     category           String
     tag                String[]
-    // When have a new reply, or upvoted
+    // When have a new reply, or upvoted, or polled
     status_update_time DateTime  @default(now())
     edited             DateTime?
     upvote_time        DateTime?
@@ -29,7 +29,7 @@ model topic {
 
     section topic_section_relation[]
 
-    poll    topic_poll[]
+    poll topic_poll[]
 
     created DateTime @default(now())
     updated DateTime @updatedAt

@@ -58,7 +58,8 @@ const getSectionTopic = async (input: z.infer<typeof getSectionSchema>) => {
         select: {
           like: true,
           reply: true,
-          comment: true
+          comment: true,
+          poll: true
         }
       }
     }
@@ -75,6 +76,7 @@ const getSectionTopic = async (input: z.infer<typeof getSectionSchema>) => {
     reply: topic._count.reply,
     user: topic.user,
     hasBestAnswer: !!topic.best_answer,
+    isPollTopic: !!topic._count.poll,
     created: topic.created
   }))
 

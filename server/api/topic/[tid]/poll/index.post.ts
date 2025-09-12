@@ -13,13 +13,23 @@ export default defineEventHandler(async (event) => {
   }
 
   const topic = await prisma.topic.findUnique({
-    where: { id: input.topic_id }
+    where: { id: input.topic_id },
+    include: {
+      _count: {
+        select: {
+          poll: true
+        }
+      }
+    }
   })
   if (!topic) {
     return kunError(event, '话题不存在')
   }
   if (topic.user_id !== userInfo.uid && userInfo.role < 2) {
     return kunError(event, '您没有权限在此话题下创建投票')
+  }
+  if (topic._count.poll >= 30) {
+    return kunError(event, '单个话题下方最多有 30 个投票')
   }
 
   return prisma.$transaction(async (prisma) => {
@@ -46,6 +56,11 @@ export default defineEventHandler(async (event) => {
         text: opt.text,
         poll_id: poll.id
       }))
+    })
+
+    await prisma.topic.update({
+      where: { id: input.topic_id },
+      data: { status_update_time: new Date() }
     })
   })
 })

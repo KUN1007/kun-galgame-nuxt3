@@ -42,7 +42,8 @@ export const searchTopic = async (
         select: {
           like: true,
           reply: true,
-          comment: true
+          comment: true,
+          poll: true
         }
       },
       section: {
@@ -70,7 +71,8 @@ export const searchTopic = async (
     likeCount: topic._count.like,
     replyCount: topic._count.reply,
     commentCount: topic._count.comment,
-    hasBestAnswer: !!topic.best_answer
+    hasBestAnswer: !!topic.best_answer,
+    isPollTopic: !!topic._count.poll
   }))
 
   return topics

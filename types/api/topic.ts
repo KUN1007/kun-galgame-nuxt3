@@ -1,5 +1,4 @@
-import type { HomeTopic, HomeGalgame } from './home'
-import type { TopicReply } from './topic-reply'
+import type { HomeTopic } from './home'
 
 export type TopicCard = HomeTopic
 
@@ -40,6 +39,7 @@ export interface TopicDetail {
 
   replyCount: number
   bestAnswer: TopicBestAnswer | null
+  isPollTopic: boolean
 
   contentHtml: string
   contentMarkdown: string

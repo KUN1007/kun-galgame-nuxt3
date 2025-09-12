@@ -1,4 +1,3 @@
-import type { MessageType } from './message.d.ts'
 import type { GalgameCard } from './galgame.d.ts'
 
 export interface HomeUserStatus {
@@ -17,6 +16,7 @@ export interface HomeTopic {
   user: KunUser
   status: number
   hasBestAnswer: boolean
+  isPollTopic: boolean
 
   likeCount: number
   replyCount: number

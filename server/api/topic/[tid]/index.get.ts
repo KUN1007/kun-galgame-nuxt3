@@ -45,7 +45,8 @@ export default defineEventHandler(async (event) => {
             dislike: true,
             favorite: true,
             upvote: true,
-            reply: true
+            reply: true,
+            poll: true
           }
         }
       }
@@ -99,6 +100,7 @@ export default defineEventHandler(async (event) => {
 
     replyCount: data._count.reply,
     bestAnswer,
+    isPollTopic: !!data._count.poll,
 
     contentHtml: await markdownToHtml(data.content),
     contentMarkdown: data.content,

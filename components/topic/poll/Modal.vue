@@ -145,9 +145,13 @@ const handleSubmit = async () => {
     inner-class-name="max-w-3xl"
   >
     <form @submit.prevent="handleSubmit">
-      <h2 class="mb-6 text-2xl font-bold">
+      <h2 class="mb-3 text-2xl font-bold">
         {{ isEditing ? '编辑投票' : '创建投票' }}
       </h2>
+
+      <p class="text-default-500 mb-6 text-sm">
+        目前阶段, 话题下方投票最多 30 个, 每个投票最多 20 个选项
+      </p>
 
       <div class="flex flex-col gap-4">
         <KunInput v-model="formData.title" label="投票标题" required />

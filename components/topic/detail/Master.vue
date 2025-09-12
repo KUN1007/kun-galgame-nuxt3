@@ -37,6 +37,7 @@ defineProps<{
         :tags="topic.tag"
         :upvote-time="topic.upvoteTime"
         :has-best-answer="!!topic.bestAnswer"
+        :is-poll-topic="topic.isPollTopic"
       />
 
       <div class="text-default-500 flex items-center space-x-4 text-sm">
