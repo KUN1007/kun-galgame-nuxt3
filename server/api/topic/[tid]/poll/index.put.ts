@@ -7,8 +7,10 @@ const updatePoll = async (
   input: z.infer<typeof updatePollSchema>,
   userInfo: KUNGalgamePayload
 ) => {
+  const { options, poll_id, ...rest } = input
+
   const poll = await prisma.topic_poll.findUnique({
-    where: { id: input.poll_id },
+    where: { id: poll_id },
     include: {
       topic: true,
       option: {
@@ -16,7 +18,6 @@ const updatePoll = async (
       }
     }
   })
-
   if (!poll) {
     return '投票不存在'
   }
@@ -24,25 +25,37 @@ const updatePoll = async (
     return '您没有权限修改此投票'
   }
 
-  const { options, ...rest } = input
-  if (!options) {
+  const totalOptionsCount = Object.values(options || {}).reduce(
+    (sum, arr) => sum + arr.length,
+    0
+  )
+
+  if (!totalOptionsCount) {
     await prisma.topic_poll.update({
-      where: { id: poll.id },
+      where: { id: poll_id },
       data: rest
     })
-    return '投票信息更新成功！'
+    return
+  }
+
+  if (!poll.can_change_vote) {
+    return '本投票结果不可修改'
   }
 
   const existingOptionsMap = new Map(poll.option.map((opt) => [opt.id, opt]))
 
   if (options.update && options.update.length > 0) {
-    for (const { option_id } of options.update) {
-      const option = existingOptionsMap.get(option_id)
-      if (!option) {
-        return `要更新的选项 ID ${option_id} 不存在`
+    for (const optionToUpdate of options.update) {
+      const existingOption = existingOptionsMap.get(optionToUpdate.option_id)
+
+      if (!existingOption) {
+        return `要更新的选项 ID ${optionToUpdate.option_id} 不存在`
       }
-      if (option._count.vote > 0) {
-        return `选项 ${option.text} 已有投票，无法编辑`
+      if (
+        existingOption._count.vote > 0 &&
+        existingOption.text !== optionToUpdate.text
+      ) {
+        return `选项 "${existingOption.text}" 已有投票，无法修改其内容`
       }
     }
   }
@@ -54,14 +67,14 @@ const updatePoll = async (
         return `要删除的选项 ID ${optionId} 不存在`
       }
       if (option._count.vote > 0) {
-        return `选项 ${option.text} 已有投票，无法删除`
+        return `选项 "${option.text}" 已有投票，无法删除`
       }
     }
   }
 
   await prisma.$transaction(async (prisma) => {
     await prisma.topic_poll.update({
-      where: { id: poll.id },
+      where: { id: poll_id },
       data: rest
     })
 
@@ -69,7 +82,7 @@ const updatePoll = async (
       await prisma.topic_poll_option.createMany({
         data: options.add.map((opt) => ({
           text: opt.text,
-          poll_id: input.poll_id
+          poll_id
         }))
       })
     }

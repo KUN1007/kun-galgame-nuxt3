@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import type { TopicPollVoteLog } from '~/types/api/topic-poll'
 
-const pageData = reactive({
-  page: 1,
-  limit: 50
-})
-
 const props = defineProps<{
   modelValue: boolean
   pollId: number
   topicId: number
 }>()
+
+const pageData = reactive({
+  poll_id: props.pollId,
+  page: 1,
+  limit: 50
+})
 
 const emits = defineEmits<{
   'update:modelValue': [value: boolean]
@@ -56,7 +57,7 @@ watch(
       class="text-center"
     />
 
-    <KunNull v-else-if="logs.length === 0" description="暂无投票记录" />
+    <KunNull v-else-if="logs.length === 0" description="无记录或匿名投票" />
 
     <div v-else class="max-h-[60vh] overflow-y-auto">
       <ul class="flex flex-col gap-3">

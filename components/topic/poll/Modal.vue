@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { usePoll } from '~/composables/topic/usePoll'
 import { createPollSchema, updatePollSchema } from '~/validations/topic-poll'
+import { TOPIC_POLL_VISIBILITY_OPTIONS } from '~/constants/topic'
 import type { TopicPoll } from '~/types/api/topic-poll'
 import type { PollFormData } from './types'
-import type { KunSelectOption } from '~/components/kun/select/type'
 
 const props = defineProps<{
   modelValue: boolean
@@ -112,7 +112,9 @@ const removeOption = (index: number) => {
 
 const handleSubmit = async () => {
   const schema = isEditing.value ? updatePollSchema : createPollSchema
-  const result = schema.safeParse(formData)
+  const result = schema.safeParse(
+    isEditing.value ? { ...formData, options: {} } : formData
+  )
 
   if (!result.success) {
     const message = JSON.parse(result.error.message)[0]
@@ -125,7 +127,7 @@ const handleSubmit = async () => {
 
   isLoading.value = true
   if (isEditing.value && props.initialData) {
-    await updatePoll(props.initialData.id, formData)
+    await updatePoll(props.initialData.id, props.initialData.option, formData)
   } else {
     await createPoll(formData)
   }
@@ -134,12 +136,6 @@ const handleSubmit = async () => {
   isLoading.value = false
   isModalOpen.value = false
 }
-
-const resultVisibilityOptions: KunSelectOption[] = [
-  { value: 'always', label: '任何人可见' },
-  { value: 'after_vote', label: '投票后可见' },
-  { value: 'after_deadline', label: '结束后可见' }
-]
 </script>
 
 <template>
@@ -204,11 +200,13 @@ const resultVisibilityOptions: KunSelectOption[] = [
               <KunCheckBox
                 :model-value="formData.type === 'single'"
                 label="单选"
+                color="primary"
                 @update:model-value="formData.type = 'single'"
               />
               <KunCheckBox
                 :model-value="formData.type === 'multiple'"
                 label="多选"
+                color="primary"
                 @update:model-value="formData.type = 'multiple'"
               />
             </div>
@@ -242,7 +240,7 @@ const resultVisibilityOptions: KunSelectOption[] = [
           <KunSelect
             v-model="formData.result_visibility"
             label="结果可见性"
-            :options="resultVisibilityOptions"
+            :options="TOPIC_POLL_VISIBILITY_OPTIONS"
           />
         </div>
 

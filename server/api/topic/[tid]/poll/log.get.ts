@@ -1,11 +1,40 @@
 import prisma from '~/prisma/prisma'
 import { getPollLogSchema } from '~/validations/topic-poll'
+import { canUserViewPollResults } from './_canUserViewPollResults'
 import type { TopicPollVoteLog } from '~/types/api/topic-poll'
 
 export default defineEventHandler(async (event) => {
+  const userInfo = await getCookieTokenInfo(event)
+
   const input = kunParseGetQuery(event, getPollLogSchema)
   if (typeof input === 'string') {
     return kunError(event, input)
+  }
+
+  const poll = await prisma.topic_poll.findUnique({
+    where: { id: input.poll_id },
+    include: {
+      option: {
+        include: {
+          vote: {
+            where: {
+              user_id: userInfo?.uid
+            }
+          }
+        }
+      }
+    }
+  })
+  if (!poll) {
+    return kunError(event, '未找到该投票')
+  }
+
+  const isUserVoted = poll.option.some((opt) => opt.vote.length > 0)
+
+  const showResults = canUserViewPollResults(poll, userInfo, isUserVoted)
+
+  if (!showResults || poll.is_anonymous) {
+    return { logs: [], totalCount: 0 }
   }
 
   const { page, limit } = input
@@ -29,7 +58,8 @@ export default defineEventHandler(async (event) => {
             text: true
           }
         }
-      }
+      },
+      orderBy: { created: 'desc' }
     }),
     prisma.topic_poll_vote.count({ where: { poll_id: input.poll_id } })
   ])

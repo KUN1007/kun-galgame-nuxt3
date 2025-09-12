@@ -42,27 +42,25 @@ export const updateUserVoteSchema = z.object({
 export const updatePollSchema = poolSchema.merge(
   z.object({
     poll_id: z.coerce.number().min(1).max(9999999),
-    options: z
-      .object({
-        add: z.array(pollOptionSchema).optional().default([]),
-        update: z
-          .array(
-            z.object({
-              option_id: z.coerce.number().min(1).max(9999999),
-              text: z
-                .string()
-                .min(1, '选项内容不能为空')
-                .max(100, '选项内容最多100个字符')
-            })
-          )
-          .optional()
-          .default([]),
-        delete: z
-          .array(z.coerce.number().min(1).max(9999999))
-          .optional()
-          .default([])
-      })
-      .optional()
+    options: z.object({
+      add: z.array(pollOptionSchema).optional().default([]),
+      update: z
+        .array(
+          z.object({
+            option_id: z.coerce.number().min(1).max(9999999),
+            text: z
+              .string()
+              .min(1, '选项内容不能为空')
+              .max(100, '选项内容最多100个字符')
+          })
+        )
+        .optional()
+        .default([]),
+      delete: z
+        .array(z.coerce.number().min(1).max(9999999))
+        .optional()
+        .default([])
+    })
   })
 )
 

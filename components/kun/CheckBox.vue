@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import type { KunUIColor } from './ui/type'
+
 interface Props {
   modelValue?: boolean
+  color?: KunUIColor
+  type?: 'single' | 'multiple'
   label?: string
   id?: string
   name?: string
@@ -9,8 +13,10 @@ interface Props {
   className?: string
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   modelValue: false,
+  color: 'default',
+  type: 'multiple',
   label: undefined,
   id: undefined,
   name: undefined,
@@ -29,6 +35,21 @@ const updateValue = (event: Event) => {
   emit('update:modelValue', target.checked)
   emit('change', target.checked)
 }
+
+const colorClasses: Record<KunUIColor, string> = {
+  default:
+    'border-default-300 checked:bg-default checked:border-default hover:border-default',
+  primary:
+    'border-primary-300 checked:bg-primary checked:border-primary hover:border-primary',
+  secondary:
+    'border-secondary-300 checked:bg-secondary checked:border-secondary hover:border-secondary',
+  success:
+    'border-success-300 checked:bg-success checked:border-success hover:border-success',
+  warning:
+    'border-warning-300 checked:bg-warning checked:border-warning hover:border-warning',
+  danger:
+    'border-danger-300 checked:bg-danger checked:border-danger hover:border-danger'
+}
 </script>
 
 <template>
@@ -41,7 +62,13 @@ const updateValue = (event: Event) => {
         :value="value"
         :checked="modelValue"
         :disabled="disabled"
-        class="peer focus:ring-primary checked:bg-primary checked:border-primary hover:border-primary border-default-300 h-5 w-5 appearance-none rounded border-2 text-white transition-all disabled:cursor-not-allowed disabled:opacity-50"
+        :class="
+          cn(
+            'peer checked:bg-primary h-5 w-5 appearance-none border-2 text-white transition-all disabled:cursor-not-allowed disabled:opacity-50',
+            props.type === 'single' ? 'rounded-full' : 'rounded',
+            colorClasses[props.color]
+          )
+        "
         @change="updateValue"
       />
       <div

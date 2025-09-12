@@ -120,7 +120,7 @@ watch(
       </section>
     </div>
 
-    <div class="ml-3 hidden w-52 shrink-0 md:block">
+    <div class="ml-3 hidden w-52 shrink-0 lg:block">
       <div class="sticky top-16">
         <TopicDetailTableOfContent ref="toc" />
       </div>

@@ -15,7 +15,7 @@ const isShowHelp = ref(false)
 const pollToEdit = ref<TopicPoll | undefined>(undefined)
 
 const { data, refresh } = await getPoll()
-const polls = ref(data.value ? data.value : [])
+const polls = computed(() => data.value || [])
 
 const openCreateModal = () => {
   pollToEdit.value = undefined
@@ -30,7 +30,7 @@ const openEditModal = (pollData: TopicPoll) => {
 
 <template>
   <div class="space-y-3">
-    <div>
+    <div class="space-y-3">
       <TopicPollList
         v-for="(poll, index) in polls"
         :key="index"

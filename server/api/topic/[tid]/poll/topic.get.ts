@@ -1,5 +1,6 @@
 import prisma from '~/prisma/prisma'
 import { getPollByTopicSchema } from '~/validations/topic-poll'
+import { canUserViewPollResults } from './_canUserViewPollResults'
 import type { TopicPoll } from '~/types/api/topic-poll'
 
 export default defineEventHandler(async (event) => {
@@ -12,20 +13,14 @@ export default defineEventHandler(async (event) => {
 
   const polls = await prisma.topic_poll.findMany({
     where: { topic_id: input.topic_id },
+    orderBy: { created: 'desc' },
     include: {
       option: {
         include: {
-          _count: {
-            select: { vote: true }
-          },
-
+          _count: { select: { vote: true } },
           vote: {
-            where: {
-              user_id: userInfo?.uid
-            },
-            select: {
-              id: true
-            }
+            where: { user_id: userInfo?.uid },
+            select: { id: true }
           }
         }
       },
@@ -35,61 +30,24 @@ export default defineEventHandler(async (event) => {
         orderBy: { created: 'desc' },
         select: {
           user: {
-            select: {
-              id: true,
-              name: true,
-              avatar: true
-            }
+            select: { id: true, name: true, avatar: true }
           }
         }
       },
       user: { select: { id: true, name: true, avatar: true } },
-      _count: {
-        select: {
-          vote: true
-        }
-      }
+      _count: { select: { vote: true } }
     }
   })
+
   if (!polls.length) {
     return []
   }
 
-  const formatePolls: TopicPoll[] = polls.map((poll) => {
+  const formattedPolls: TopicPoll[] = polls.map((poll) => {
     const isUserVoted = poll.option.some((opt) => opt.vote.length > 0)
+    const showResults = canUserViewPollResults(poll, userInfo, isUserVoted)
 
-    let showResults = false
-    const now = new Date()
-
-    if (
-      userInfo?.uid === poll.user_id ||
-      (userInfo?.role && userInfo?.role > 1)
-    ) {
-      showResults = true
-    }
-
-    switch (poll.result_visibility) {
-      case 'always':
-        showResults = true
-        break
-      case 'after_vote':
-        if (isUserVoted) {
-          showResults = true
-        }
-        break
-      case 'after_deadline':
-        if (
-          poll.status === 'closed' ||
-          (poll.deadline ? poll.deadline < now : false)
-        ) {
-          showResults = true
-        }
-        break
-    }
-
-    const voters = poll.vote.map((v) => v.user)
-
-    const res: TopicPoll = {
+    return {
       id: poll.id,
       title: poll.title,
       description: poll.description,
@@ -102,6 +60,8 @@ export default defineEventHandler(async (event) => {
       is_anonymous: poll.is_anonymous,
       can_change_vote: poll.can_change_vote,
       topic_id: poll.topic_id,
+      created: poll.created,
+      updated: poll.updated,
       user: poll.user,
       option: poll.option.map((opt) => ({
         id: opt.id,
@@ -110,15 +70,12 @@ export default defineEventHandler(async (event) => {
         is_voted: opt.vote.length > 0
       })),
       has_voted: isUserVoted,
-      voters: voters,
+      voters:
+        showResults && !poll.is_anonymous ? poll.vote.map((v) => v.user) : [],
       voters_count: poll._count.vote,
-      vote_count: showResults ? poll._count.vote : null,
-      created: poll.created,
-      updated: poll.updated
+      vote_count: showResults ? poll._count.vote : null
     }
-
-    return res
   })
 
-  return formatePolls
+  return formattedPolls
 })

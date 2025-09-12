@@ -172,3 +172,15 @@ export const TOPIC_SECTIONS: Record<
     'o-other': '其它'
   }
 }
+
+export const TOPIC_POLL_VISIBILITY_OPTIONS: KunSelectOption[] = [
+  { value: 'always', label: '任何人可见结果' },
+  { value: 'after_vote', label: '投票后可见结果' },
+  { value: 'after_deadline', label: '结束后可见结果' }
+]
+
+export const TOPIC_POLL_VISIBILITY_MAP: Record<string, string> = {
+  always: '任何人可见结果',
+  after_vote: '投票后可见结果',
+  after_deadline: '结束后可见结果'
+}
