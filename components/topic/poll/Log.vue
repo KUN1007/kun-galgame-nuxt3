@@ -60,26 +60,25 @@ watch(
     <KunNull v-else-if="logs.length === 0" description="无记录或匿名投票" />
 
     <div v-else class="max-h-[60vh] overflow-y-auto">
-      <ul class="flex flex-col gap-3">
-        <li
+      <div class="flex flex-col gap-6">
+        <div
           v-for="log in logs"
           :key="log.id"
-          class="hover:bg-default-100 flex items-center justify-between rounded-md p-2"
+          class="flex flex-col justify-between gap-2"
         >
           <div class="flex items-center gap-3">
-            <KunAvatar :user="log.user" size="md" />
-            <div class="flex flex-col">
-              <span class="font-medium">{{ log.user.name }}</span>
-              <span class="text-default-500 text-xs">
-                {{ new Date(log.created).toLocaleString() }}
-              </span>
+            <KunUser :disable-floating="true" :user="log.user" />
+            <div class="text-default-500 text-sm">
+              {{
+                formatDate(log.created, { isPrecise: true, isShowYear: true })
+              }}
             </div>
           </div>
           <span class="text-default-700 text-sm">
             投给了「{{ log.option }}」
           </span>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   </KunModal>
 </template>

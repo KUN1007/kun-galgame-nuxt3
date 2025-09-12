@@ -138,7 +138,7 @@ const handleDelete = async () => {
           }"
         />
 
-        <div class="relative z-10 flex items-center justify-between">
+        <div class="relative z-10 flex items-center justify-between gap-3">
           <div class="flex flex-grow items-center gap-3">
             <KunCheckBox
               v-if="poll.type === 'multiple'"
@@ -159,16 +159,21 @@ const handleDelete = async () => {
               @change="handleOptionClick(option.id)"
             />
 
-            <span class="font-medium">{{ option.text }}</span>
+            <span class="text-sm">{{ option.text }}</span>
             <KunIcon
               v-if="option.is_voted"
               name="lucide:check-circle-2"
-              class="text-primary"
+              class="text-primary shrink-0"
             />
           </div>
 
-          <div v-if="canViewResults" class="flex items-center gap-2 text-sm">
-            <span class="font-semibold">{{ option.vote_count || 0 }} 票</span>
+          <div
+            v-if="canViewResults"
+            class="flex shrink-0 items-center gap-2 text-sm"
+          >
+            <span class="shrink-0 font-semibold">
+              {{ option.vote_count || 0 }} 票
+            </span>
             <span class="text-default-500">
               ({{
                 (
@@ -217,9 +222,13 @@ const handleDelete = async () => {
 
         <div
           class="bg-default-500/20 flex size-8 items-center justify-center rounded-full text-xs"
-          v-if="poll.vote_count && poll.vote_count > 5"
+          v-if="!poll.is_anonymous && poll.vote_count && poll.vote_count > 5"
         >
           {{ `+ ${poll.vote_count - 5}` }}
+        </div>
+
+        <div class="text-default-500 text-sm" v-if="poll.is_anonymous">
+          {{ `${poll.vote_count} 人投票` }}
         </div>
       </div>
 
