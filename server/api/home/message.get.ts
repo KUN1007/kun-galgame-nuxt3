@@ -85,9 +85,9 @@ const timelineFetchers = {
     })) satisfies ActivityItem[]
   },
 
-  TOPIC_CREATION: async () => {
+  TOPIC_CREATION: async (content_limit?: string) => {
     const items = await prisma.topic.findMany({
-      where: { status: { not: 1 } },
+      where: { status: { not: 1 }, ...(content_limit === 'sfw' ? { is_nsfw: false } : {}) },
       orderBy: { created: 'desc' },
       take: ACTIVITY_ITEM_FETCHER_LIMIT,
       select: {
@@ -107,7 +107,7 @@ const timelineFetchers = {
     })) satisfies ActivityItem[]
   },
 
-  TOPIC_REPLY_CREATION: async () => {
+  TOPIC_REPLY_CREATION: async (content_limit?: string) => {
     const items = await prisma.topic_reply.findMany({
       orderBy: { created: 'desc' },
       take: ACTIVITY_ITEM_FETCHER_LIMIT,
@@ -118,7 +118,8 @@ const timelineFetchers = {
         created: true,
         user: { select: { id: true, name: true, avatar: true } },
         target: { select: { content: true } }
-      }
+      },
+      where: content_limit === 'sfw' ? { topic: { is_nsfw: false } } : undefined
     })
     return items.map((item) => ({
       uniqueId: `topic-reply-${item.id}`,
@@ -267,7 +268,7 @@ const timelineFetchers = {
       })}》发布了下载资源`
     })) satisfies ActivityItem[]
   },
-  TOPIC_COMMENT_CREATION: async () => {
+  TOPIC_COMMENT_CREATION: async (content_limit?: string) => {
     const items = await prisma.topic_comment.findMany({
       orderBy: { created: 'desc' },
       take: ACTIVITY_ITEM_FETCHER_LIMIT,
@@ -277,7 +278,8 @@ const timelineFetchers = {
         created: true,
         user: { select: { id: true, name: true, avatar: true } },
         topic_id: true
-      }
+      },
+      where: content_limit === 'sfw' ? { topic: { is_nsfw: false } } : undefined
     })
     return items.map((item) => ({
       uniqueId: `topic-comment-${item.id}`,

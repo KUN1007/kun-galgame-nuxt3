@@ -5,6 +5,7 @@ const props = defineProps<{
   upvoteTime?: Date | string | null
   hasBestAnswer?: boolean
   isPollTopic?: boolean
+  isNSFWTopic?: boolean
 }>()
 
 const isRecentlyUpvoted = computed(() => hourDiff(props.upvoteTime || 0, 10))
@@ -32,6 +33,13 @@ const isRecentlyUpvoted = computed(() => hourDiff(props.upvoteTime || 0, 10))
       <KunBadge variant="solid" color="primary">
         <KunIcon name="lucide:bar-chart-3" class="size-4 text-inherit" />
         投票话题
+      </KunBadge>
+    </span>
+
+    <span v-if="isNSFWTopic" class="flex gap-1">
+      <KunBadge variant="solid" color="primary" class-name="bg-orange-600">
+        <KunIcon name="uil:18-plus" class="size-4 text-inherit" />
+        NSFW 话题
       </KunBadge>
     </span>
 

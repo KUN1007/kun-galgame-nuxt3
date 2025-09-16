@@ -1,5 +1,6 @@
 import { subMonths } from 'date-fns'
 import prisma from '~/prisma/prisma'
+import { getNSFWCookie } from '~/server/utils/getNSFWCookie'
 import { getTopicSchema } from '~/validations/home'
 import type { HomeTopic } from '~/types/api/home'
 
@@ -12,11 +13,15 @@ export default defineEventHandler(async (event) => {
   const { page, limit } = input
   const skip = (page - 1) * limit
 
+  const nsfw = getNSFWCookie(event)
+  const isSFW = nsfw === 'sfw'
+
   const data = await prisma.topic.findMany({
     skip,
     take: limit,
     where: {
       status: { not: 1 },
+      ...(isSFW ? { is_nsfw: false } : {}),
       OR: [
         { edited: { gte: subMonths(new Date(), 3) } },
         { edited: null, created: { gte: subMonths(new Date(), 3) } }
@@ -57,6 +62,7 @@ export default defineEventHandler(async (event) => {
     commentCount: topic._count.comment,
     hasBestAnswer: !!topic.best_answer,
     isPollTopic: !!topic._count.poll,
+    isNSFWTopic: topic.is_nsfw,
     tag: topic.tag,
     section: topic.section.map((s) => s.topic_section.name),
     user: topic.user,

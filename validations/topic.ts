@@ -51,7 +51,8 @@ export const createTopicSchema = z.object({
   section: z
     .array(z.enum(KUN_TOPIC_SECTION_CONST))
     .min(1, { message: '您至少选择一个话题的分区' })
-    .max(3, { message: '您至多选择三个话题的分区' })
+    .max(3, { message: '您至多选择三个话题的分区' }),
+  is_nsfw: z.coerce.boolean({ message: '未找到话题的 NSFW 设置' })
 })
 
 export const updateTopicSchema = createTopicSchema.merge(

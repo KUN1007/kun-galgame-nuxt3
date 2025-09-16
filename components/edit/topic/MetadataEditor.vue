@@ -9,7 +9,7 @@ import {
 const MAX_SECTIONS = 3
 const MAX_TAGS = 7
 
-const { category, section, tags } = useTopicEditorStore()
+const { category, section, tags, isNSFW } = useTopicEditorStore()
 const tagInput = ref('')
 const isTagInputFocused = ref(false)
 
@@ -199,6 +199,25 @@ const handleTagInputBackspace = () => {
       </div>
       <p class="text-default-500 mt-2 text-sm">
         话题至少选择一个标签，最多 {{ MAX_TAGS }} 个
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <h3 class="flex items-center gap-2 text-lg font-semibold">
+        <Icon name="lucide:shield-alert" class="h-5 w-5" />
+        NSFW 设置
+      </h3>
+      <KunCheckBox
+        v-model="isNSFW"
+        type="single"
+        label="该话题包含 NSFW 内容 (R18 等)"
+        color="primary"
+      />
+      <p class="text-default-500 mt-2 text-sm">
+        勾选后, 未开启网站 NSFW 模式的用户将无法看到该话题, 和 Galgame 的 NSFW
+        标准一样, 看起来不能在公司报告大会上放在 PPT 里展示的话题都是 NSFW,
+        总之就是越严越好，可以错杀不可以放过 (另外, 只允许萌萌的涩涩,
+        不允许纯粹的色情废料)
       </p>
     </div>
   </div>

@@ -147,15 +147,19 @@ if (data.value && data.value !== 'banned') {
     ]
   })
 
-  useKunSeoMeta({
-    title: data.value.title,
-    description: description.value,
-    ogImage: banner,
-    ogType: 'article',
-    articleAuthor: [`${kungal.domain.main}/user/${data.value.user.id}/info`],
-    articlePublishedTime: created,
-    articleModifiedTime: updated
-  })
+  if (topic.isNSFW) {
+    useKunDisableSeo(topic.title)
+  } else {
+    useKunSeoMeta({
+      title: data.value.title,
+      description: description.value,
+      ogImage: banner,
+      ogType: 'article',
+      articleAuthor: [`${kungal.domain.main}/user/${data.value.user.id}/info`],
+      articlePublishedTime: created,
+      articleModifiedTime: updated
+    })
+  }
 } else {
   useKunDisableSeo(data.value ? '话题已被封禁' : '未找到此话题')
 }
@@ -167,6 +171,9 @@ if (data.value && data.value !== 'banned') {
 
     <KunNull v-if="!data && data !== 'banned'" description="未找到这个话题" />
 
-    <KunNull v-if="data === 'banned'" description="此话题已被封禁" />
+    <KunNull
+      v-if="data === 'banned'"
+      description="话题被隐藏, 或您未开启网站 NSFW 模式"
+    />
   </div>
 </template>

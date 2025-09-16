@@ -3,17 +3,19 @@ import { getPreferredLanguageText } from '~/utils/getPreferredLanguageText'
 import { markdownToText } from '~/utils/markdownToText'
 import { getActivitySchema } from '~/validations/activity'
 import type { ActivityItem, ActivityEventType } from '~/types/api/activity'
+import { getNSFWCookie } from '~/server/utils/getNSFWCookie'
 
 type ActivityFetcher = (
   limit: number,
-  skip: number
+  skip: number,
+  isSFW?: boolean
 ) => Promise<{
   items: ActivityItem[]
   total: number
 }>
 
 const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
-  GALGAME_CREATION: async (limit, skip) => {
+  GALGAME_CREATION: async (limit, skip, _isSFW) => {
     const [items, total] = await prisma.$transaction([
       prisma.galgame.findMany({
         orderBy: { created: 'desc' },
@@ -48,7 +50,7 @@ const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
       total
     }
   },
-  GALGAME_COMMENT_CREATION: async (limit, skip) => {
+  GALGAME_COMMENT_CREATION: async (limit, skip, _isSFW) => {
     const [items, total] = await prisma.$transaction([
       prisma.galgame_comment.findMany({
         orderBy: { created: 'desc' },
@@ -76,7 +78,7 @@ const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
       total
     }
   },
-  GALGAME_PR_CREATION: async (limit, skip) => {
+  GALGAME_PR_CREATION: async (limit, skip, _isSFW) => {
     const [items, total] = await prisma.$transaction([
       prisma.galgame_pr.findMany({
         orderBy: { created: 'desc' },
@@ -108,10 +110,10 @@ const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
       total
     }
   },
-  TOPIC_CREATION: async (limit, skip) => {
+  TOPIC_CREATION: async (limit, skip, isSFW) => {
     const [items, total] = await prisma.$transaction([
       prisma.topic.findMany({
-        where: { status: { not: 1 } },
+        where: { status: { not: 1 }, ...(isSFW ? { is_nsfw: false } : {}) },
         orderBy: { created: 'desc' },
         take: limit,
         skip,
@@ -122,7 +124,7 @@ const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
           user: { select: { id: true, name: true, avatar: true } }
         }
       }),
-      prisma.topic.count()
+      prisma.topic.count({ where: { status: { not: 1 }, ...(isSFW ? { is_nsfw: false } : {}) } })
     ])
     return {
       items: items.map((item) => ({
@@ -302,7 +304,7 @@ const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
       total
     }
   },
-  GALGAME_RESOURCE_CREATION: async (limit, skip) => {
+  GALGAME_RESOURCE_CREATION: async (limit, skip, _isSFW) => {
     const [items, total] = await prisma.$transaction([
       prisma.galgame_resource.findMany({
         orderBy: { created: 'desc' },
@@ -343,7 +345,7 @@ const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
       total
     }
   },
-  TOPIC_COMMENT_CREATION: async (limit, skip) => {
+  TOPIC_COMMENT_CREATION: async (limit, skip, isSFW) => {
     const [items, total] = await prisma.$transaction([
       prisma.topic_comment.findMany({
         orderBy: { created: 'desc' },
@@ -355,9 +357,10 @@ const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
           created: true,
           user: { select: { id: true, name: true, avatar: true } },
           topic_id: true
-        }
+        },
+        where: isSFW ? { topic: { is_nsfw: false } } : undefined
       }),
-      prisma.topic_comment.count()
+      prisma.topic_comment.count({ where: isSFW ? { topic: { is_nsfw: false } } : undefined })
     ])
     return {
       items: items.map((item) => ({
@@ -418,7 +421,9 @@ export default defineEventHandler(async (event) => {
   const skip = (page - 1) * limit
 
   const fetcher = activityFetchers[type]
-  const { items, total } = await fetcher(limit, skip)
+  const nsfw = getNSFWCookie(event)
+  const isSFW = nsfw === 'sfw'
+  const { items, total } = await fetcher(limit, skip, isSFW)
 
   return { items, totalCount: total }
 })

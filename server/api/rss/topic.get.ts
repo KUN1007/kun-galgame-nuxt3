@@ -3,7 +3,7 @@ import type { TopicRSS } from '~/types/api/rss'
 
 export default defineEventHandler(async (event) => {
   const data = await prisma.topic.findMany({
-    where: { status: { not: 1 } },
+    where: { status: { not: 1 }, is_nsfw: false },
     orderBy: {
       created: 'desc'
     },

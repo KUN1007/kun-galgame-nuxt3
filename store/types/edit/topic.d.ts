@@ -6,6 +6,7 @@ export interface EditStorePersist {
   tags: string[]
   category: string
   section: string[]
+  isNSFW: boolean
 }
 
 export interface EditStoreTemp {
@@ -15,6 +16,7 @@ export interface EditStoreTemp {
   tags: string[]
   category: string
   section: string[]
+  isNSFW: boolean
 
   isTopicRewriting: boolean
 }

@@ -38,6 +38,7 @@ defineProps<{
         :upvote-time="topic.upvoteTime"
         :has-best-answer="!!topic.bestAnswer"
         :is-poll-topic="topic.isPollTopic"
+        :is-n-s-f-w-topic="topic.isNSFW"
       />
 
       <div class="text-default-500 flex items-center space-x-4 text-sm">

@@ -6,7 +6,7 @@ const props = defineProps<{
   topic: TopicDetail
 }>()
 
-const { id, title, content, tags, category, section, isTopicRewriting } =
+const { id, title, content, tags, category, section, isNSFW, isTopicRewriting } =
   storeToRefs(useTempEditStore())
 const { id: userId } = usePersistUserStore()
 const isShowRewrite = computed(() => userId === props.topic.user.id)
@@ -18,6 +18,7 @@ const rewriteTopic = async () => {
   tags.value = props.topic.tag
   category.value = props.topic.category
   section.value = props.topic.section ?? []
+  isNSFW.value = !!props.topic.isNSFW
   isTopicRewriting.value = true
 
   await navigateTo('/edit/topic')

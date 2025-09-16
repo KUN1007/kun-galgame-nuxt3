@@ -64,6 +64,7 @@ const filteredTags = computed(() => {
           :key="key"
           @click="toggleCategory(key)"
           :model-value="selectedCategories.includes(key)"
+          color="primary"
         >
           {{ name }}
         </KunCheckBox>
@@ -74,6 +75,7 @@ const filteredTags = computed(() => {
           class-name="gap-2"
           @click="toggleSpoilerLevel(Number(key) as KunGalgameTagSpoiler)"
           :model-value="selectedSpoilerLevels.includes(Number(key) as 0)"
+          color="primary"
         >
           {{ name }}
         </KunCheckBox>

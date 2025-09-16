@@ -6,7 +6,8 @@ import {
 } from '~/config/moemoepoint'
 
 export const useTopicSubmitter = () => {
-  const { category, section, tags, title, content } = useTopicEditorStore()
+  const { category, section, tags, title, content, isNSFW } =
+    useTopicEditorStore()
   const tempStore = useTempEditStore()
   const persistStore = usePersistEditTopicStore()
   const { moemoepoint } = usePersistUserStore()
@@ -22,7 +23,8 @@ export const useTopicSubmitter = () => {
       content: content.value,
       tag: tags.value,
       category: category.value,
-      section: section.value
+      section: section.value,
+      is_nsfw: isNSFW.value
     }
 
     const submitData = isRewriteMode.value

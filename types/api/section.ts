@@ -9,6 +9,7 @@ export interface SectionTopic {
   reply: number
   hasBestAnswer: boolean
   isPollTopic: boolean
+  isNSFWTopic: boolean
   user: KunUser
   created: Date | string
 }

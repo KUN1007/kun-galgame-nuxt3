@@ -23,6 +23,7 @@ export interface TopicDetail {
   title: string
   view: number
   status: number
+  isNSFW: boolean
   category: string
   section: string[]
   tag: string[]

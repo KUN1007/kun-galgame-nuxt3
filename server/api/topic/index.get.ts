@@ -1,4 +1,5 @@
 import prisma from '~/prisma/prisma'
+import { getNSFWCookie } from '~/server/utils/getNSFWCookie'
 import { getTopicSchema } from '~/validations/topic'
 import type { TopicCard } from '~/types/api/topic'
 import type { Prisma } from '@prisma/client'
@@ -32,10 +33,14 @@ export default defineEventHandler(async (event) => {
     }
   }
 
+  const nsfw = getNSFWCookie(event)
+  const isSFW = nsfw === 'sfw'
+
   const data = await prisma.topic.findMany({
     where: {
       category: category === 'all' ? undefined : category,
-      status: { not: 1 }
+      status: { not: 1 },
+      ...(isSFW ? { is_nsfw: false } : {})
     },
     skip: (page - 1) * limit,
     take: limit,
@@ -49,6 +54,7 @@ export default defineEventHandler(async (event) => {
       status_update_time: true,
       upvote_time: true,
       best_answer: true,
+      is_nsfw: true,
 
       user: {
         select: {
@@ -88,6 +94,7 @@ export default defineEventHandler(async (event) => {
     status: topic.status,
     hasBestAnswer: !!topic.best_answer,
     isPollTopic: !!topic._count.poll,
+    isNSFWTopic: topic.is_nsfw,
 
     likeCount: topic._count.like,
     replyCount: topic._count.reply,

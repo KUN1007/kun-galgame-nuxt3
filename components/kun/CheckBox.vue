@@ -30,6 +30,7 @@ const emit = defineEmits<{
   change: [value: boolean]
 }>()
 
+const kunUniqueId = useKunUniqueId('kun-checkbox')
 const updateValue = (event: Event) => {
   const target = event.target as HTMLInputElement
   emit('update:modelValue', target.checked)
@@ -57,7 +58,7 @@ const colorClasses: Record<KunUIColor, string> = {
     <div class="relative flex items-center">
       <input
         type="checkbox"
-        :id="id"
+        :id="kunUniqueId"
         :name="name"
         :value="value"
         :checked="modelValue"
@@ -80,7 +81,7 @@ const colorClasses: Record<KunUIColor, string> = {
     <slot />
     <label
       v-if="label"
-      :for="id"
+      :for="kunUniqueId"
       :class="
         cn(
           'text-default-700 ml-2 cursor-pointer text-sm select-none',

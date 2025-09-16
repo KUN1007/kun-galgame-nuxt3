@@ -43,11 +43,19 @@ export const useTopicEditorStore = () => {
     }
   })
 
+  const isNSFW = computed<boolean>({
+    get: () => activeStore.value.isNSFW,
+    set: (value) => {
+      activeStore.value.isNSFW = value
+    }
+  })
+
   return {
     category,
     section,
     tags,
     title,
-    content
+    content,
+    isNSFW
   }
 }

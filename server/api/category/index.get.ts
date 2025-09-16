@@ -1,4 +1,5 @@
 import prisma from '~/prisma/prisma'
+import { getNSFWCookie } from '~/server/utils/getNSFWCookie'
 import { getTopicCategoryStats } from '~/validations/category'
 import type { LatestTopicInfo, SectionStats } from '~/types/api/category'
 
@@ -8,9 +9,13 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
+  const nsfw = getNSFWCookie(event)
+  const isSFW = nsfw === 'sfw'
+
   const topics = await prisma.topic.findMany({
     where: {
       status: { not: 1 },
+      ...(isSFW ? { is_nsfw: false } : {}),
       category: input.category
     },
     select: {

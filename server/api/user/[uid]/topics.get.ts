@@ -1,4 +1,5 @@
 import prisma from '~/prisma/prisma'
+import { getNSFWCookie } from '~/server/utils/getNSFWCookie'
 import { getUserTopicSchema } from '~/validations/user'
 import type { UserTopic } from '~/types/api/user'
 import type { Prisma } from '@prisma/client'
@@ -42,7 +43,9 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  const where: Prisma.topicWhereInput = { status: { not: 1 } }
+  const nsfw = getNSFWCookie(event)
+  const isSFW = nsfw === 'sfw'
+  const where: Prisma.topicWhereInput = { status: { not: 1 }, ...(isSFW ? { is_nsfw: false } : {}) }
 
   switch (type) {
     case 'topic':

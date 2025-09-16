@@ -13,7 +13,7 @@ export const getKunDynamicRoutes = async () => {
     websiteTags
   ] = await Promise.all([
     prisma.topic.findMany({
-      where: { status: { not: 1 } },
+      where: { status: { not: 1 }, is_nsfw: false },
       select: { id: true, updated: true }
     }),
 

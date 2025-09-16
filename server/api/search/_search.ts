@@ -12,11 +12,13 @@ import type {
 export const searchTopic = async (
   keywords: string[],
   skip: number,
-  limit: number
+  limit: number,
+  isSFW?: boolean
 ) => {
   const data = await prisma.topic.findMany({
     where: {
       status: { not: 1 },
+      ...(isSFW ? { is_nsfw: false } : {}),
       AND: keywords.map((kw) => ({
         OR: [
           { category: { in: keywords } },
@@ -72,7 +74,8 @@ export const searchTopic = async (
     replyCount: topic._count.reply,
     commentCount: topic._count.comment,
     hasBestAnswer: !!topic.best_answer,
-    isPollTopic: !!topic._count.poll
+    isPollTopic: !!topic._count.poll,
+    isNSFWTopic: topic.is_nsfw
   }))
 
   return topics

@@ -17,6 +17,7 @@ export interface HomeTopic {
   status: number
   hasBestAnswer: boolean
   isPollTopic: boolean
+  isNSFWTopic: boolean
 
   likeCount: number
   replyCount: number

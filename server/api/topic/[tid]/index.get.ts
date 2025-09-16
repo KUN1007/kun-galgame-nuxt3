@@ -1,4 +1,5 @@
 import prisma from '~/prisma/prisma'
+import { getNSFWCookie } from '~/server/utils/getNSFWCookie'
 import { getTopicDetailSchema } from '~/validations/topic'
 import type { TopicDetail, TopicBestAnswer } from '~/types/api/topic'
 
@@ -60,7 +61,8 @@ export default defineEventHandler(async (event) => {
   if (!data) {
     return kunError(event, '未找到该话题')
   }
-  if (data.status === 1) {
+  const nsfw = getNSFWCookie(event)
+  if ((nsfw === 'sfw' && data.is_nsfw) || data.status === 1) {
     return 'banned'
   }
 
@@ -84,6 +86,7 @@ export default defineEventHandler(async (event) => {
     title: data.title,
     view: data.view,
     status: data.status,
+    isNSFW: data.is_nsfw,
     category: data.category,
     section: data.section.map((s) => s.topic_section.name),
     tag: data.tag,

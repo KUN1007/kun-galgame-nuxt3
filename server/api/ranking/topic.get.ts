@@ -1,4 +1,5 @@
 import prisma from '~/prisma/prisma'
+import { getNSFWCookie } from '~/server/utils/getNSFWCookie'
 import { getTopicRankingSchema } from '~/validations/ranking'
 import type { TopicRankingItem } from '~/types/api/ranking'
 
@@ -9,6 +10,8 @@ export default defineEventHandler(async (event) => {
   }
 
   const { page, limit, sortField, sortOrder } = input
+  const nsfw = getNSFWCookie(event)
+  const isSFW = nsfw === 'sfw'
   const skip = (page - 1) * limit
 
   const countFields = ['upvote', 'like', 'reply', 'comment', 'favorite']
@@ -36,7 +39,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const topics = await prisma.topic.findMany({
-    where: { status: { not: 1 } },
+    where: { status: { not: 1 }, ...(isSFW ? { is_nsfw: false } : {}) },
     skip,
     take: limit,
     orderBy: isCountField

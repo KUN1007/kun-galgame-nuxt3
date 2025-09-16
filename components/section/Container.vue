@@ -93,6 +93,7 @@ watch(
           :tags="topic.tag"
           :has-best-answer="topic.hasBestAnswer"
           :is-poll-topic="topic.isPollTopic"
+          :is-n-s-f-w-topic="topic.isNSFWTopic"
         />
 
         <div class="text-default-500 line-clamp-2 text-sm break-all">

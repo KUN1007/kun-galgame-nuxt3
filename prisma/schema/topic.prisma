@@ -3,6 +3,7 @@ model topic {
     title              String    @db.VarChar(40)
     content            String    @db.Text
     view               Int       @default(0)
+    is_nsfw            Boolean   @default(false)
     // 0 - normal, 1 - banned, 2 - pinned, 3 - essential, 4 - locked
     status             Int       @default(0)
     category           String

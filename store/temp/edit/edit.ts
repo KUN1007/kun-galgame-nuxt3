@@ -9,6 +9,7 @@ export const useTempEditStore = defineStore('tempEdit', {
     tags: [],
     category: '',
     section: [],
+    isNSFW: false,
 
     isTopicRewriting: false
   }),
@@ -20,6 +21,7 @@ export const useTempEditStore = defineStore('tempEdit', {
       this.tags = []
       this.category = ''
       this.section = []
+      this.isNSFW = false
 
       this.isTopicRewriting = false
     }

@@ -6,9 +6,13 @@ import {
   searchUser
 } from './_search'
 import { getSearchResultSchema } from '~/validations/search'
+import { getNSFWCookie } from '~/server/utils/getNSFWCookie'
 import type { z } from 'zod'
 
-const search = async (input: z.infer<typeof getSearchResultSchema>) => {
+const search = async (
+  input: z.infer<typeof getSearchResultSchema>,
+  isSFW?: boolean
+) => {
   const { keywords, type, page, limit } = input
 
   const skip = (page - 1) * limit
@@ -23,7 +27,7 @@ const search = async (input: z.infer<typeof getSearchResultSchema>) => {
   )
 
   if (type === 'topic') {
-    return await searchTopic(escapedKeywords, skip, limit)
+    return await searchTopic(escapedKeywords, skip, limit, isSFW)
   } else if (type === 'galgame') {
     return await searchGalgame(escapedKeywords, skip, limit)
   } else if (type === 'user') {
@@ -41,9 +45,10 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
-  // const nsfw = getNSFWCookie(event)
+  const nsfw = getNSFWCookie(event)
+  const isSFW = nsfw === 'sfw'
 
-  const result = await search(input)
+  const result = await search(input, isSFW)
 
   return result
 })
