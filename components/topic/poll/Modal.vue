@@ -236,11 +236,7 @@ const handleSubmit = async () => {
         </div>
 
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <KunInput
-            v-model="formData.deadline"
-            label="截止日期 (可选)"
-            type="datetime-local"
-          />
+          <KunDatePicker v-model="formData.deadline" label="截止日期 (可选)" />
           <KunSelect
             v-model="formData.result_visibility"
             label="结果可见性"

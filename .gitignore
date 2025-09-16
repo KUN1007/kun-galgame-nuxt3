@@ -26,7 +26,6 @@ logs
 # backup
 backup
 .vs
-package.json
 
 # sitemap
 public/*.xml
