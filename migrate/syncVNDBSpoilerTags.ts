@@ -7,7 +7,7 @@ const VNDB_API_BASE = 'https://api.vndb.org/kana'
 const BATCH_SIZE = 100
 const REQUEST_DELAY = 1000
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
 async function fetchAllVndbTags() {
   console.log('  - 正在从 VNDB 获取所有标签数据...')
@@ -33,7 +33,7 @@ async function fetchAllVndbTags() {
     }
 
     const data = await response.json()
-    data.results.forEach((tag) => {
+    data.results.forEach((tag: { id: number; name: string }) => {
       vndbTagIdToNameMap.set(tag.id, tag.name)
     })
 
@@ -165,7 +165,9 @@ async function main() {
         console.log('  - 该批次没有需要更新的剧透标签。')
       }
     } catch (error) {
-      console.error(`  - 处理批次时发生错误: ${error.message}`)
+      console.error(
+        `  - 处理批次时发生错误: ${(error as { message: string }).message}`
+      )
     }
 
     if (i + BATCH_SIZE < localGalgames.length) {

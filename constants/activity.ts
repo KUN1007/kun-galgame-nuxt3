@@ -11,7 +11,8 @@ export const KUN_ACTIVITY_TYPE_TYPE: Record<string, string> = {
   GALGAME_PR_CREATION: 'Galgame 更新请求',
   GALGAME_WEBSITE_COMMENT_CREATION: 'Galgame 网站评论',
   TODO_CREATION: '待办',
-  UPDATE_LOG_CREATION: '更新日志'
+  UPDATE_LOG_CREATION: '更新日志',
+  TOOLSET_COMMENT_CREATION: '工具集评论'
 }
 
 export const KUN_ALLOWED_ACTIVITY_TYPE = [
@@ -21,6 +22,7 @@ export const KUN_ALLOWED_ACTIVITY_TYPE = [
   'GALGAME_WEBSITE_CREATION',
   'GALGAME_WEBSITE_COMMENT_CREATION',
   'GALGAME_RESOURCE_CREATION',
+  'TOOLSET_COMMENT_CREATION',
   'TOPIC_CREATION',
   'TOPIC_REPLY_CREATION',
   'TOPIC_COMMENT_CREATION',
@@ -37,6 +39,7 @@ export const KUN_ACTIVITY_ICON_MAP: Record<string, string> = {
   GALGAME_WEBSITE_CREATION: 'lucide:globe',
   GALGAME_WEBSITE_COMMENT_CREATION: 'lucide:message-square-text',
   GALGAME_RESOURCE_CREATION: 'lucide:box',
+  TOOLSET_COMMENT_CREATION: 'lucide:wrench',
   TOPIC_CREATION: 'icon-park-outline:topic',
   TOPIC_REPLY_CREATION: 'carbon:reply',
   TOPIC_COMMENT_CREATION: 'lucide:message-circle-more',

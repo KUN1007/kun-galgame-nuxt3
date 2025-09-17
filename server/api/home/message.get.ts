@@ -233,6 +233,27 @@ const timelineFetchers = {
       content: item.content.substring(0, 100)
     })) satisfies ActivityItem[]
   },
+  TOOLSET_COMMENT_CREATION: async () => {
+    const items = await prisma.galgame_toolset_comment.findMany({
+      orderBy: { created: 'desc' },
+      take: ACTIVITY_ITEM_FETCHER_LIMIT,
+      select: {
+        id: true,
+        content: true,
+        created: true,
+        user: { select: { id: true, name: true, avatar: true } },
+        toolset_id: true
+      }
+    })
+    return items.map((item) => ({
+      uniqueId: `toolset-comment-${item.id}`,
+      type: 'TOOLSET_COMMENT_CREATION',
+      timestamp: item.created,
+      actor: item.user,
+      link: `/toolset/${item.toolset_id}`,
+      content: item.content.substring(0, 100)
+    })) satisfies ActivityItem[]
+  },
   GALGAME_RESOURCE_CREATION: async (content_limit?: string) => {
     const items = await prisma.galgame_resource.findMany({
       where: { galgame: { content_limit } },

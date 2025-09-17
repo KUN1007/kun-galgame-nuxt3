@@ -304,6 +304,34 @@ const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
       total
     }
   },
+  TOOLSET_COMMENT_CREATION: async (limit, skip) => {
+    const [items, total] = await prisma.$transaction([
+      prisma.galgame_toolset_comment.findMany({
+        orderBy: { created: 'desc' },
+        take: limit,
+        skip,
+        select: {
+          id: true,
+          content: true,
+          created: true,
+          user: { select: { id: true, name: true, avatar: true } },
+          toolset_id: true
+        }
+      }),
+      prisma.galgame_toolset_comment.count()
+    ])
+    return {
+      items: items.map((item) => ({
+        uniqueId: `toolset-comment-${item.id}`,
+        type: 'TOOLSET_COMMENT_CREATION',
+        timestamp: item.created,
+        actor: item.user,
+        link: `/toolset/${item.toolset_id}`,
+        content: item.content.substring(0, 100)
+      })) satisfies ActivityItem[],
+      total
+    }
+  },
   GALGAME_RESOURCE_CREATION: async (limit, skip, _isSFW) => {
     const [items, total] = await prisma.$transaction([
       prisma.galgame_resource.findMany({

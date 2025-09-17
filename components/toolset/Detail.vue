@@ -1,0 +1,210 @@
+<script setup lang="ts">
+import {
+  KUN_GALGAME_TOOLSET_TYPE_MAP,
+  KUN_GALGAME_TOOLSET_LANGUAGE_MAP,
+  KUN_GALGAME_TOOLSET_PLATFORM_MAP,
+  KUN_GALGAME_TOOLSET_VERSION_MAP
+} from '~/constants/toolset'
+import { toolsetUpdateForm } from './rewriteStore'
+import type { ToolsetRating } from '~/types/api/toolset'
+
+const props = defineProps<{ id: number }>()
+
+const { data } = await useFetch(`/api/toolset/${props.id}`, {
+  method: 'GET',
+  query: { toolsetId: props.id },
+  ...kungalgameResponseHandler
+})
+
+const { id: uid, role } = usePersistUserStore()
+const canManageToolset = computed(
+  () => data?.value && (data.value.user.id === uid || role >= 2)
+)
+
+const isDeleting = ref(false)
+const handleDeleteToolset = async () => {
+  if (!data?.value) {
+    return
+  }
+  const res = await useComponentMessageStore().alert('确认删除该工具？')
+  if (!res) {
+    return
+  }
+
+  isDeleting.value = true
+  const ok = await $fetch(`/api/toolset/${data.value.id}`, {
+    method: 'DELETE',
+    ...kungalgameResponseHandler
+  })
+  isDeleting.value = false
+
+  if (ok) {
+    useMessage('已删除', 'success')
+    navigateTo('/toolset')
+  }
+}
+
+const handleRewriteToolset = () => {
+  if (!data) {
+    return
+  }
+  if (!data.value) {
+    return
+  }
+  toolsetUpdateForm.toolsetId = data.value.id
+  toolsetUpdateForm.name = data.value.name
+  toolsetUpdateForm.description = data.value.description
+  toolsetUpdateForm.language = data.value.language as 'zh-cn'
+  toolsetUpdateForm.platform = data.value.platform as 'windows'
+  toolsetUpdateForm.type = data.value.type as 'all'
+  toolsetUpdateForm.version = data.value.version as 'rc'
+  toolsetUpdateForm.homepage = data.value.homepage
+  toolsetUpdateForm.aliases = data.value.aliases
+  navigateTo('/edit/toolset/rewrite')
+}
+
+// TODO:
+const handlePublishResource = () => {}
+
+const isSubmittingRate = ref(false)
+const practicalityData = ref<ToolsetRating | null>(null)
+
+const loadPracticalityMine = async () => {
+  const res = await $fetch(`/api/toolset/${props.id}/practicality`, {
+    method: 'GET',
+    query: { toolsetId: props.id },
+    watch: false,
+    ...kungalgameResponseHandler
+  })
+  if (res?.mine) {
+    practicalityData.value = res
+  }
+}
+
+onMounted(loadPracticalityMine)
+
+const handleSetStar = async (val: number) => {
+  isSubmittingRate.value = true
+  await $fetch(`/api/toolset/${props.id}/practicality`, {
+    method: 'PUT',
+    body: { toolsetId: props.id, rate: val },
+    watch: false,
+    ...kungalgameResponseHandler
+  })
+
+  useMessage(`已提交评分: ${val} 星`, 'success')
+  isSubmittingRate.value = false
+  await loadPracticalityMine()
+}
+</script>
+
+<template>
+  <div v-if="data" class="space-y-4">
+    <KunCard
+      :is-hoverable="false"
+      :is-transparent="false"
+      content-class="space-y-6"
+    >
+      <div class="space-y-3">
+        <h1 class="text-2xl leading-tight font-bold">{{ data.name }}</h1>
+        <div class="mt-2 flex flex-wrap items-center gap-2">
+          <template v-for="(a, i) in data.aliases" :key="i">
+            <KunBadge v-if="a" color="default" size="sm">{{ a }}</KunBadge>
+          </template>
+          <KunBadge color="secondary" size="sm">
+            当前为{{ KUN_GALGAME_TOOLSET_VERSION_MAP[data.version] }}版本
+          </KunBadge>
+          <KunBadge color="success" size="sm">
+            {{ KUN_GALGAME_TOOLSET_PLATFORM_MAP[data.platform] }}
+          </KunBadge>
+          <KunBadge color="primary" size="sm">
+            {{ KUN_GALGAME_TOOLSET_LANGUAGE_MAP[data.language] }}
+          </KunBadge>
+          <KunBadge color="danger" size="sm">
+            {{ KUN_GALGAME_TOOLSET_TYPE_MAP[data.type] }}
+          </KunBadge>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div class="space-y-3 md:col-span-2">
+          <template v-if="practicalityData">
+            <ToolsetPracticalityChart
+              :practicality-data="practicalityData"
+              :id="data.id"
+            />
+          </template>
+          <div v-else class="h-[306px] w-full">
+            <KunLoading />
+          </div>
+
+          <h1 class="font-bold">工具介绍</h1>
+          <div class="text-default-600">{{ data.description }}</div>
+        </div>
+
+        <div class="space-y-6 md:col-span-1">
+          <div class="space-y-2">
+            <h3 class="font-semibold">发布者</h3>
+            <KunUser :user="data.user" />
+          </div>
+
+          <div v-if="data.homepage.length" class="space-y-2">
+            <h3 class="font-semibold">主页 / 官网</h3>
+            <div class="flex flex-col gap-2">
+              <KunLink
+                v-for="(url, idx) in data.homepage"
+                :key="idx"
+                :to="url"
+                target="_blank"
+                underline="hover"
+              >
+                {{ url }}
+              </KunLink>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <h3 class="font-semibold">评价此工具的实用性</h3>
+            <div v-if="practicalityData" class="flex items-center gap-2">
+              <KunRating
+                :model-value="practicalityData.mine"
+                @set="handleSetStar"
+              />
+              <KunBadge size="sm" variant="flat">
+                {{ practicalityData.mine }} / 5
+              </KunBadge>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="text-default-500">
+          {{ `${formatNumber(data.download)} 人下载该工具` }}
+        </div>
+        <div class="flex gap-1">
+          <KunButton @click="handlePublishResource">发布资源</KunButton>
+          <KunButton variant="flat" @click="handleRewriteToolset">
+            重新编辑
+          </KunButton>
+          <KunButton
+            v-if="canManageToolset"
+            color="danger"
+            :loading="isDeleting"
+            @click="handleDeleteToolset"
+          >
+            删除
+          </KunButton>
+        </div>
+      </div>
+    </KunCard>
+
+    <KunCard
+      :is-hoverable="false"
+      :is-transparent="false"
+      content-class="space-y-3"
+    >
+      <ToolsetCommentContainer :toolset-id="data.id" :owner-id="data.user.id" />
+    </KunCard>
+  </div>
+</template>

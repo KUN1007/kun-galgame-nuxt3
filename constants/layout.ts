@@ -28,6 +28,13 @@ export const kunLayoutItem: KunLayoutItem[] = [
         icon: 'lucide:gamepad-2',
         router: '/edit/galgame/create',
         label: '发布 Galgame'
+      },
+      {
+        name: 'createToolset',
+        icon: 'lucide:wrench',
+        router: '/edit/toolset/create',
+        label: '发布 Gal 工具集',
+        hint: '新'
       }
     ]
   },
@@ -49,6 +56,13 @@ export const kunLayoutItem: KunLayoutItem[] = [
         router: '/website',
         label: 'Gal 网站 Wiki',
         hint: '起飞!'
+      },
+      {
+        name: 'toolset',
+        icon: 'lucide:wrench',
+        router: '/toolset',
+        label: 'Gal 工具集',
+        hint: '最实用!'
       },
       {
         name: 'galgame-resource',

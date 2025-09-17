@@ -13,13 +13,16 @@ export const createMessage = async (
   content: string,
   topicId?: number,
   galgameId?: number,
-  websiteDomain?: string
+  websiteDomain?: string,
+  toolsetId?: number
 ) => {
   const link = topicId
     ? `/topic/${topicId}`
     : galgameId
       ? `/galgame/${galgameId}`
-      : `/website/${websiteDomain}`
+      : toolsetId
+        ? `/toolset/${toolsetId}`
+        : `/website/${websiteDomain}`
 
   const newMessage = await prisma.message.create({
     data: {
@@ -45,9 +48,14 @@ export const createDedupMessage = async (
   type: MessageType,
   content: string,
   topicId?: number,
-  galgameId?: number
+  galgameId?: number,
+  toolsetId?: number
 ) => {
-  const link = topicId ? `/topic/${topicId}` : `/galgame/${galgameId}`
+  const link = topicId
+    ? `/topic/${topicId}`
+    : galgameId
+      ? `/galgame/${galgameId}`
+      : `/toolset/${toolsetId}`
 
   const duplicatedMessage = await prisma.message.findFirst({
     where: { sender_id, receiver_id, type, content, link }
