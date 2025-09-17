@@ -30,7 +30,8 @@ model topic {
 
     section topic_section_relation[]
 
-    poll topic_poll[]
+    poll            topic_poll[]
+    galgame_toolset galgame_toolset_topic_relation[]
 
     created DateTime @default(now())
     updated DateTime @updatedAt

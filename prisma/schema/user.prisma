@@ -63,9 +63,13 @@ model user {
     chat_message_read_by  chat_message_read_by[]
     chat_message_reaction chat_message_reaction[]
 
-    galgame_website_comment  galgame_website_comment[]  @relation("user_galgame_website_comment")
-    galgame_website_like     galgame_website_like[]     @relation("user_galgame_website_like")
-    galgame_website_favorite galgame_website_favorite[] @relation("user_galgame_website_favorite")
+    galgame_website_comment      galgame_website_comment[]      @relation("user_galgame_website_comment")
+    galgame_website_like         galgame_website_like[]         @relation("user_galgame_website_like")
+    galgame_website_favorite     galgame_website_favorite[]     @relation("user_galgame_website_favorite")
+    galgame_toolset              galgame_toolset[]              @relation("user_galgame_toolset")
+    galgame_toolset_resource     galgame_toolset_resource[]     @relation("user_galgame_toolset_resource")
+    galgame_toolset_comment      galgame_toolset_comment[]      @relation("user_galgame_toolset_comment")
+    galgame_toolset_practicality galgame_toolset_practicality[] @relation("user_galgame_toolset_practicality")
 
     created DateTime @default(now())
     updated DateTime @updatedAt

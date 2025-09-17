@@ -1,0 +1,134 @@
+model galgame_toolset {
+  id Int @id @default(autoincrement())
+
+  name        String @default("") @db.VarChar(500)
+  description String @default("") @db.VarChar(2000)
+
+  language String   @default("")
+  platform String   @default("")
+  homepage String[] @default([])
+
+  // alpha, beta, rc, stable
+  version String @default("") @db.VarChar(233)
+
+  status   Int @default(0)
+  download Int @default(0)
+
+  user_id Int
+  user    user @relation("user_galgame_toolset", fields: [user_id], references: [id], onDelete: Cascade)
+
+  alias        galgame_toolset_alias[]
+  resource     galgame_toolset_resource[]
+  category     galgame_toolset_topic_relation[]
+  topic        galgame_toolset_category_relation[]
+  comment      galgame_toolset_comment[]
+  practicality galgame_toolset_practicality[]
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+}
+
+model galgame_toolset_practicality {
+  id   Int @id @default(autoincrement())
+  // 1 to 10, 10 is max
+  rate Int @default(1)
+
+  user_id    Int
+  user       user            @relation("user_galgame_toolset_practicality", fields: [user_id], references: [id], onDelete: Cascade)
+  toolset_id Int
+  toolset    galgame_toolset @relation(fields: [toolset_id], references: [id], onDelete: Cascade)
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+}
+
+model galgame_toolset_alias {
+  id   Int    @id @default(autoincrement())
+  name String @default("")
+
+  toolset_id Int
+  toolset    galgame_toolset @relation(fields: [toolset_id], references: [id], onDelete: Cascade)
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  @@unique([toolset_id, name])
+}
+
+model galgame_toolset_resource {
+  id       Int    @id @default(autoincrement())
+  url      String
+  type     String @default("")
+  password String @default("") @db.VarChar(107)
+  size     String @default("") @db.VarChar(107)
+  note     String @default("") @db.VarChar(1007)
+  count    Int    @default(0)
+
+  toolset_id Int
+  toolset    galgame_toolset @relation(fields: [toolset_id], references: [id], onDelete: Cascade)
+  user_id    Int
+  user       user            @relation("user_galgame_toolset_resource", fields: [user_id], references: [id], onDelete: Cascade)
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  @@unique([toolset_id, url])
+}
+
+model galgame_toolset_category {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  description String   @default("")
+  alias       String[] @default([])
+
+  toolset galgame_toolset_category_relation[]
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+}
+
+model galgame_toolset_category_relation {
+  toolset_id  Int
+  toolset     galgame_toolset          @relation(fields: [toolset_id], references: [id], onDelete: Cascade)
+  category_id Int
+  category    galgame_toolset_category @relation(fields: [category_id], references: [id], onDelete: Cascade)
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  @@id([toolset_id, category_id])
+}
+
+model galgame_toolset_topic_relation {
+  toolset_id Int
+  toolset    galgame_toolset @relation(fields: [toolset_id], references: [id], onDelete: Cascade)
+  topic_id   Int
+  topic      topic           @relation(fields: [topic_id], references: [id])
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  @@id([toolset_id, topic_id])
+}
+
+model galgame_toolset_comment {
+  id      Int       @id @default(autoincrement())
+  content String    @default("")
+  edited  DateTime?
+
+  user_id    Int
+  user       user            @relation("user_galgame_toolset_comment", fields: [user_id], references: [id], onDelete: Cascade)
+  toolset_id Int
+  toolset    galgame_toolset @relation(fields: [toolset_id], references: [id], onDelete: Cascade)
+
+  parent_id Int?
+  parent    galgame_toolset_comment? @relation("galgame_toolset_comment_reply", fields: [parent_id], references: [id], onDelete: Cascade)
+
+  reply galgame_toolset_comment[] @relation("galgame_toolset_comment_reply")
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  @@index([toolset_id])
+  @@index([user_id])
+}
