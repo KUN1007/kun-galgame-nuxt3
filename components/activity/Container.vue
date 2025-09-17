@@ -16,7 +16,8 @@ const pageData = reactive({
 
 const { data, status } = await useFetch('/api/activity', {
   method: 'GET',
-  query: pageData
+  query: pageData,
+  ...kungalgameResponseHandler
 })
 </script>
 

@@ -29,3 +29,19 @@ export const KUN_ALLOWED_ACTIVITY_TYPE = [
   'MESSAGE_UPVOTE',
   'MESSAGE_SOLUTION'
 ] as const
+
+export const KUN_ACTIVITY_ICON_MAP: Record<string, string> = {
+  GALGAME_CREATION: 'lucide:gamepad-2',
+  GALGAME_COMMENT_CREATION: 'lucide:message-square',
+  GALGAME_PR_CREATION: 'lucide:git-pull-request-arrow',
+  GALGAME_WEBSITE_CREATION: 'lucide:globe',
+  GALGAME_WEBSITE_COMMENT_CREATION: 'lucide:message-square-text',
+  GALGAME_RESOURCE_CREATION: 'lucide:box',
+  TOPIC_CREATION: 'icon-park-outline:topic',
+  TOPIC_REPLY_CREATION: 'carbon:reply',
+  TOPIC_COMMENT_CREATION: 'lucide:message-circle-more',
+  TODO_CREATION: 'lucide:list-checks',
+  UPDATE_LOG_CREATION: 'lucide:file-clock',
+  MESSAGE_UPVOTE: 'lucide:sparkles',
+  MESSAGE_SOLUTION: 'lucide:bookmark-check'
+}

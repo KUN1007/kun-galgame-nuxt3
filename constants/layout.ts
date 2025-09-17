@@ -122,8 +122,21 @@ export const kunLayoutItem: KunLayoutItem[] = [
   {
     name: 'activity',
     icon: 'lucide:activity',
-    router: '/activity',
-    label: '最新动态'
+    label: '网站动态',
+    isCollapse: false,
+    children: [
+      {
+        name: 'timeline',
+        router: '/activity',
+        label: '动态时间线',
+        hint: '新'
+      },
+      {
+        name: 'activity',
+        router: '/activity/category',
+        label: '分类动态'
+      }
+    ]
   },
   {
     name: 'ranking',

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-const description = `${kungal.titleShort} 动态页面, 本页面记录了所有 Galgame 资源 wiki 的变化, 论坛的动态, 回复, 评论等等, Galgame 资源区的评论, Galgame 资源贡献信息`
+const description = `动态时间线, 展示全站 话题, 回复, Galgame 与社区的最新 Galgame 资源, Galgame 动态, Galgame 讨论, Galgame 评论等`
 
 useKunSeoMeta({
-  title: '站内动态',
+  title: '动态时间线',
   description
 })
 </script>
 
 <template>
-  <ActivityContainer />
+  <ActivityTimeline />
 </template>
