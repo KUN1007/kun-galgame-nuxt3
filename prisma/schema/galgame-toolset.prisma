@@ -4,6 +4,7 @@ model galgame_toolset {
   name        String @default("") @db.VarChar(500)
   description String @default("") @db.VarChar(2000)
 
+  type     String   @default("")
   language String   @default("")
   platform String   @default("")
   homepage String[] @default([])

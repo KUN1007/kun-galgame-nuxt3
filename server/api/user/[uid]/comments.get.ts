@@ -1,6 +1,6 @@
 import prisma from '~/prisma/prisma'
 import { getUserCommentSchema } from '~/validations/user'
-import type { Prisma } from '@prisma/client'
+import type { Prisma } from '~/prisma/client/client'
 import type { UserComment } from '~/types/api/user'
 
 export default defineEventHandler(async (event) => {

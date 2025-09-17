@@ -2,7 +2,7 @@ import prisma from '~/prisma/prisma'
 import { getNSFWCookie } from '~/server/utils/getNSFWCookie'
 import { getUserTopicSchema } from '~/validations/user'
 import type { UserTopic } from '~/types/api/user'
-import type { Prisma } from '@prisma/client'
+import type { Prisma } from '~/prisma/client/client'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getUserTopicSchema)
@@ -45,7 +45,10 @@ export default defineEventHandler(async (event) => {
 
   const nsfw = getNSFWCookie(event)
   const isSFW = nsfw === 'sfw'
-  const where: Prisma.topicWhereInput = { status: { not: 1 }, ...(isSFW ? { is_nsfw: false } : {}) }
+  const where: Prisma.topicWhereInput = {
+    status: { not: 1 },
+    ...(isSFW ? { is_nsfw: false } : {})
+  }
 
   switch (type) {
     case 'topic':

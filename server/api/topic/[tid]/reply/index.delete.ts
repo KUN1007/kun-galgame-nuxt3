@@ -1,6 +1,6 @@
 import prisma from '~/prisma/prisma'
 import { deleteReplySchema } from '~/validations/topic'
-import type { Prisma, PrismaClient } from '@prisma/client'
+import type { Prisma, PrismaClient } from '~/prisma/client/client'
 import type { DefaultArgs } from '~/prisma/client/runtime/library'
 
 const deleteReplyRecursive = async (
