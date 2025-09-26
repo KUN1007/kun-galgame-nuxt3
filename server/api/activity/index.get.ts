@@ -124,7 +124,9 @@ const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
           user: { select: { id: true, name: true, avatar: true } }
         }
       }),
-      prisma.topic.count({ where: { status: { not: 1 }, ...(isSFW ? { is_nsfw: false } : {}) } })
+      prisma.topic.count({
+        where: { status: { not: 1 }, ...(isSFW ? { is_nsfw: false } : {}) }
+      })
     ])
     return {
       items: items.map((item) => ({
@@ -388,7 +390,9 @@ const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
         },
         where: isSFW ? { topic: { is_nsfw: false } } : undefined
       }),
-      prisma.topic_comment.count({ where: isSFW ? { topic: { is_nsfw: false } } : undefined })
+      prisma.topic_comment.count({
+        where: isSFW ? { topic: { is_nsfw: false } } : undefined
+      })
     ])
     return {
       items: items.map((item) => ({

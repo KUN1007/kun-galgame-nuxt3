@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { ResourceSizePattern } from '~/utils/pattern'
 import {
   KUN_TOOLSET_TYPE_CONST,
   KUN_TOOLSET_LANGUAGE_CONST,
@@ -66,4 +67,42 @@ export const updateToolsetCommentSchema = z.object({
 
 export const deleteToolsetCommentSchema = z.object({
   commentId: z.coerce.number().min(1).max(9999999)
+})
+
+// Toolset resource & upload
+export const createToolsetResourceSchema = z.object({
+  toolsetId: z.coerce.number().min(1).max(9999999),
+  salt: z.string().min(7).max(7),
+  content: z.string().max(1007).optional().default(''),
+  size: z.string().refine((s) => ResourceSizePattern.test(s), {
+    message: '大小格式不正确, 需要包含 MB 或者 GB'
+  }),
+  code: z.string().max(1007).optional().default(''),
+  password: z.string().max(1007).optional().default(''),
+  note: z.string().max(1007).optional().default('')
+})
+
+export const initToolsetUploadSchema = z.object({
+  toolsetId: z.coerce.number().min(1).max(9999999),
+  filename: z
+    .string()
+    .min(1)
+    .max(1007)
+    .regex(/\.(7z|zip|rar)$/i, {
+      message: '文件名必须以 .7z, .zip 或 .rar 结尾'
+    }),
+  filesize: z.coerce.number().int().positive()
+})
+
+export const completeToolsetUploadSchema = z.object({
+  salt: z.string().min(7).max(7),
+  uploadId: z.string().optional(),
+  parts: z
+    .array(z.object({ PartNumber: z.number().int().min(1), ETag: z.string() }))
+    .optional()
+})
+
+export const abortToolsetUploadSchema = z.object({
+  salt: z.string().min(7).max(7),
+  uploadId: z.string().min(1)
 })

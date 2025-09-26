@@ -38,8 +38,13 @@ export default defineEventHandler(async (event) => {
 
   const { refreshToken } = await createTokens(user.id, user.name, user.role)
   deleteCookie(event, 'kungalgame-is-navigate-to-login')
+
+  const isProd = process.env.NODE_ENV === 'production'
   setCookie(event, 'kungalgame-moemoe-refresh-token', refreshToken, {
     httpOnly: true,
+    sameSite: 'strict',
+    secure: isProd,
+    path: '/',
     maxAge: 30 * 24 * 60 * 60 * 1000
   })
 

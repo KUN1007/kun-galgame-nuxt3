@@ -4,7 +4,7 @@ import { updateUserVoteSchema } from '~/validations/topic-poll'
 export default defineEventHandler(async (event) => {
   const userInfo = await getCookieTokenInfo(event)
   if (!userInfo) {
-    return kunError(event, '请先登录再投票')
+    return kunError(event, '用户登录失效')
   }
 
   const input = await kunParsePostBody(event, updateUserVoteSchema)

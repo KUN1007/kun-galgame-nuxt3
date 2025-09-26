@@ -1,6 +1,9 @@
 import sharp from 'sharp'
 import { uploadImageToS3 } from '~/lib/s3/uploadImageToS3'
-import { KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT } from '~/config/app'
+import {
+  KUN_VISUAL_NOVEL_IMAGE_COMPRESS_QUALITY,
+  KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT
+} from '~/config/upload'
 
 export const uploadGalgameBanner = async (
   bannerBuffer: Buffer,
@@ -12,7 +15,7 @@ export const uploadGalgameBanner = async (
       fit: 'inside',
       withoutEnlargement: true
     })
-    .webp({ quality: 77 })
+    .webp({ quality: KUN_VISUAL_NOVEL_IMAGE_COMPRESS_QUALITY })
     .toBuffer()
 
   if (!checkBufferSize(banner, KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT)) {

@@ -19,7 +19,9 @@ export default defineEventHandler(async (event) => {
       orderBy: { created: sortOrder },
       include: {
         user: { select: { id: true, name: true, avatar: true } },
-        parent: { include: { user: { select: { id: true, name: true, avatar: true } } } }
+        parent: {
+          include: { user: { select: { id: true, name: true, avatar: true } } }
+        }
       }
     }),
     prisma.galgame_toolset_comment.count({ where: { toolset_id: toolsetId } })

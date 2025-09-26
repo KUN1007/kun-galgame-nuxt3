@@ -109,3 +109,9 @@ export const KUN_TOOLSET_VERSION_CONST = [
   'rc',
   'stable'
 ] as const
+
+export const KUN_GALGAME_TOOLSET_STORAGE_MAP: Record<string, string> = {
+  s3: '对象存储',
+  user: '自定义链接下载'
+}
+export const KUN_TOOLSET_STORAGE_CONST = ['s3', 'user'] as const

@@ -1,17 +1,18 @@
 model user {
-    id                Int    @id @default(autoincrement())
-    name              String @unique
-    email             String @unique
-    password          String
-    ip                String @default("")
-    avatar            String @default("")
-    role              Int    @default(1)
+    id                         Int    @id @default(autoincrement())
+    name                       String @unique
+    email                      String @unique
+    password                   String
+    ip                         String @default("")
+    avatar                     String @default("")
+    role                       Int    @default(1)
     // 0 - normal, 1 - banned
-    status            Int    @default(0)
-    moemoepoint       Int    @default(7)
-    bio               String @default("") @db.VarChar(107)
-    daily_check_in    Int    @default(0)
-    daily_image_count Int    @default(0)
+    status                     Int    @default(0)
+    moemoepoint                Int    @default(7)
+    bio                        String @default("") @db.VarChar(107)
+    daily_check_in             Int    @default(0)
+    daily_image_count          Int    @default(0)
+    daily_toolset_upload_count Int    @default(0)
 
     todo  todo[]
     unmoe unmoe[]
@@ -70,6 +71,7 @@ model user {
     galgame_toolset_resource     galgame_toolset_resource[]     @relation("user_galgame_toolset_resource")
     galgame_toolset_comment      galgame_toolset_comment[]      @relation("user_galgame_toolset_comment")
     galgame_toolset_practicality galgame_toolset_practicality[] @relation("user_galgame_toolset_practicality")
+    galgame_toolset_contributor  galgame_toolset_contributor[]
 
     created DateTime @default(now())
     updated DateTime @updatedAt

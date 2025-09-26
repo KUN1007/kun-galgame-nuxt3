@@ -8,4 +8,3 @@ useKunSeoMeta({ title: '工具详情' })
 <template>
   <ToolsetDetail :id="id" />
 </template>
-

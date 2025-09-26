@@ -26,7 +26,7 @@ const handleDeleteToolset = async () => {
   if (!data?.value) {
     return
   }
-  const res = await useComponentMessageStore().alert('确认删除该工具？')
+  const res = await useComponentMessageStore().alert('确定删除该工具？')
   if (!res) {
     return
   }
@@ -63,8 +63,10 @@ const handleRewriteToolset = () => {
   navigateTo('/edit/toolset/rewrite')
 }
 
-// TODO:
-const handlePublishResource = () => {}
+const showResourceModal = ref(false)
+const handlePublishResource = () => {
+  showResourceModal.value = true
+}
 
 const isSubmittingRate = ref(false)
 const practicalityData = ref<ToolsetRating | null>(null)
@@ -92,7 +94,7 @@ const handleSetStar = async (val: number) => {
     ...kungalgameResponseHandler
   })
 
-  useMessage(`已提交评分: ${val} 星`, 'success')
+  useMessage(`已评分: ${val} 星`, 'success')
   isSubmittingRate.value = false
   await loadPracticalityMine()
 }
@@ -112,7 +114,7 @@ const handleSetStar = async (val: number) => {
             <KunBadge v-if="a" color="default" size="sm">{{ a }}</KunBadge>
           </template>
           <KunBadge color="secondary" size="sm">
-            当前为{{ KUN_GALGAME_TOOLSET_VERSION_MAP[data.version] }}版本
+            v{{ KUN_GALGAME_TOOLSET_VERSION_MAP[data.version] }}
           </KunBadge>
           <KunBadge color="success" size="sm">
             {{ KUN_GALGAME_TOOLSET_PLATFORM_MAP[data.platform] }}
@@ -138,7 +140,7 @@ const handleSetStar = async (val: number) => {
             <KunLoading />
           </div>
 
-          <h1 class="font-bold">工具介绍</h1>
+          <h1 class="font-bold">简介</h1>
           <div class="text-default-600">{{ data.description }}</div>
         </div>
 
@@ -149,7 +151,7 @@ const handleSetStar = async (val: number) => {
           </div>
 
           <div v-if="data.homepage.length" class="space-y-2">
-            <h3 class="font-semibold">主页 / 官网</h3>
+            <h3 class="font-semibold">主页 / 项目</h3>
             <div class="flex flex-col gap-2">
               <KunLink
                 v-for="(url, idx) in data.homepage"
@@ -164,15 +166,15 @@ const handleSetStar = async (val: number) => {
           </div>
 
           <div class="space-y-2">
-            <h3 class="font-semibold">评价此工具的实用性</h3>
+            <h3 class="font-semibold">实用性评分</h3>
             <div v-if="practicalityData" class="flex items-center gap-2">
               <KunRating
                 :model-value="practicalityData.mine"
                 @set="handleSetStar"
               />
-              <KunBadge size="sm" variant="flat">
-                {{ practicalityData.mine }} / 5
-              </KunBadge>
+              <KunBadge size="sm" variant="flat"
+                >{{ practicalityData.mine }} / 5</KunBadge
+              >
             </div>
           </div>
         </div>
@@ -180,21 +182,20 @@ const handleSetStar = async (val: number) => {
 
       <div class="flex flex-wrap items-center justify-between gap-2">
         <div class="text-default-500">
-          {{ `${formatNumber(data.download)} 人下载该工具` }}
+          {{ `${formatNumber(data.download)} 次下载` }}
         </div>
         <div class="flex gap-1">
-          <KunButton @click="handlePublishResource">发布资源</KunButton>
-          <KunButton variant="flat" @click="handleRewriteToolset">
-            重新编辑
-          </KunButton>
+          <KunButton @click="handlePublishResource">上传/添加资源</KunButton>
+          <KunButton variant="flat" @click="handleRewriteToolset"
+            >修改</KunButton
+          >
           <KunButton
             v-if="canManageToolset"
             color="danger"
             :loading="isDeleting"
             @click="handleDeleteToolset"
+            >删除</KunButton
           >
-            删除
-          </KunButton>
         </div>
       </div>
     </KunCard>
@@ -206,5 +207,18 @@ const handleSetStar = async (val: number) => {
     >
       <ToolsetCommentContainer :toolset-id="data.id" :owner-id="data.user.id" />
     </KunCard>
+
+    <KunModal
+      :modal-value="showResourceModal"
+      @update:modal-value="(v) => (showResourceModal = v)"
+    >
+      <div class="max-w-2xl">
+        <h3 class="mb-3 text-lg font-semibold">发布资源</h3>
+        <ToolsetResourceContainer
+          :toolset-id="data.id"
+          :on-close="() => (showResourceModal = false)"
+        />
+      </div>
+    </KunModal>
   </div>
 </template>

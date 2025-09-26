@@ -41,9 +41,9 @@ const handleFileChange = async (event: Event) => {
   })
 
   if (result) {
-    const fileName = file.name.replace(/[^a-zA-Z0-9 ]/g, '')
+    const filename = file.name.replace(/[^a-zA-Z0-9 ]/g, '')
     const userName = usePersistUserStore().name
-    const imageName = `${userName}-${Date.now()}-${fileName}`
+    const imageName = `${userName}-${Date.now()}-${filename}`
     call(insertImageCommand.key, {
       src: result ?? '',
       title: imageName,

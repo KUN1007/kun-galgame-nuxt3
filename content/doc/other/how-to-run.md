@@ -77,9 +77,6 @@ git clone https://github.com/KUN1007/kun-galgame-nuxt3
 该文件的详细介绍为
 
 ```yaml
-# 静默处理 AWS SDK 的警告信息，我们没有研究透 S3 api 的 V3 用法，使用了 V2 的用法，因此会提示让我们迁移到 V3
-AWS_SDK_JS_SUPPRESS_MAINTENANCE_MODE_MESSAGE = "1"
-
 # 本地 mongodb 的连接
 MONGODB_URL = 'mongodb://127.0.0.1:27017/kungalgame'
 

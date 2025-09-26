@@ -19,7 +19,7 @@ const isPublishing = ref(false)
 
 const handlePostComment = async () => {
   if (!userStore.id) {
-    useMessage('请先登录再发表评论', 'warn')
+    useMessage('请登陆后再发表评论', 'warn')
     return
   }
   if (!newCommentContent.value.trim()) {

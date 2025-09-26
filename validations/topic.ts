@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { KUN_TOPIC_TITLE_LENGTH_LIMIT } from '~/config/limit'
 import {
   KUN_TOPIC_CATEGORY_CONST,
   KUN_TOPIC_SECTION_CONST,
@@ -28,7 +29,9 @@ export const createTopicSchema = z.object({
   title: z
     .string()
     .min(1, { message: '话题标题最少 1 个字符' })
-    .max(107, { message: '话题标题最大长度为 107 个字符' })
+    .max(KUN_TOPIC_TITLE_LENGTH_LIMIT, {
+      message: `话题标题最大长度为 ${KUN_TOPIC_TITLE_LENGTH_LIMIT} 个字符`
+    })
     .refine((t) => t.trim().length, { message: '话题标题最少为 1 个字符' }),
   content: z
     .string()

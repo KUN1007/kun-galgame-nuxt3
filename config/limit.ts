@@ -1,0 +1,1 @@
+export const KUN_TOPIC_TITLE_LENGTH_LIMIT = 233

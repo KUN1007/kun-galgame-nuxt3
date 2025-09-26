@@ -35,3 +35,29 @@ export interface ToolsetRating {
   avg: number
   mine: number
 }
+
+export interface ToolsetLargeFileUploadResponse {
+  key: string
+  salt: string
+  uploadId: string
+  partSize: number
+  urls: {
+    partNumber: number
+    url: string
+  }[]
+}
+
+export interface ToolsetSmallFileUploadResponse {
+  key: string
+  salt: string
+  post: {
+    url: string
+    fields: Record<string, string>
+  }
+}
+
+export interface ToolsetUploadCompleteResponse {
+  salt: string
+  key: string
+  filesize: number
+}

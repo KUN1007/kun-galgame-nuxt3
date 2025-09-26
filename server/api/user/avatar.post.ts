@@ -2,7 +2,10 @@ import prisma from '~/prisma/prisma'
 import env from '~/server/env/dotenv'
 import sharp from 'sharp'
 import { uploadImageToS3 } from '~/lib/s3/uploadImageToS3'
-import { KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT } from '~/config/app'
+import {
+  KUN_VISUAL_NOVEL_IMAGE_COMPRESS_QUALITY,
+  KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT
+} from '~/config/upload'
 import { checkBufferSize } from '~/server/utils/checkBufferSize'
 
 const resizeUserAvatar = async (name: string, avatar: Buffer, uid: number) => {
@@ -11,7 +14,7 @@ const resizeUserAvatar = async (name: string, avatar: Buffer, uid: number) => {
       fit: 'inside',
       withoutEnlargement: true
     })
-    .webp({ quality: 77 })
+    .webp({ quality: KUN_VISUAL_NOVEL_IMAGE_COMPRESS_QUALITY })
     .toBuffer()
 
   if (!checkBufferSize(miniAvatar, KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT)) {

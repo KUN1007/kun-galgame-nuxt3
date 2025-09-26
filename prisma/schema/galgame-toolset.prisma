@@ -24,9 +24,24 @@ model galgame_toolset {
   topic        galgame_toolset_category_relation[]
   comment      galgame_toolset_comment[]
   practicality galgame_toolset_practicality[]
+  contributor  galgame_toolset_contributor[]
 
   created DateTime @default(now())
   updated DateTime @updatedAt
+}
+
+model galgame_toolset_contributor {
+  id Int @id @default(autoincrement())
+
+  toolset_id Int
+  toolset    galgame_toolset @relation(fields: [toolset_id], references: [id], onDelete: Cascade)
+  user_id    Int
+  user       user            @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  created DateTime @default(now())
+  updated DateTime @updatedAt
+
+  @@unique([toolset_id, user_id])
 }
 
 model galgame_toolset_practicality {
@@ -58,12 +73,16 @@ model galgame_toolset_alias {
 
 model galgame_toolset_resource {
   id       Int    @id @default(autoincrement())
-  url      String
+  content  String @default("") @db.VarChar(1007)
+  // s3 - object storage, user - self file-host
   type     String @default("")
-  password String @default("") @db.VarChar(107)
+  code     String @default("") @db.VarChar(1007)
+  password String @default("") @db.VarChar(1007)
   size     String @default("") @db.VarChar(107)
   note     String @default("") @db.VarChar(1007)
   count    Int    @default(0)
+  download Int    @default(0)
+  status   Int    @default(0)
 
   toolset_id Int
   toolset    galgame_toolset @relation(fields: [toolset_id], references: [id], onDelete: Cascade)
@@ -73,7 +92,7 @@ model galgame_toolset_resource {
   created DateTime @default(now())
   updated DateTime @updatedAt
 
-  @@unique([toolset_id, url])
+  @@unique([toolset_id, content])
 }
 
 model galgame_toolset_category {

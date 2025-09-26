@@ -58,9 +58,9 @@ const writeColorsToTxt = (
     cyan: 'info'
   }
 
-  for (const [fileName, colorData] of Object.entries(colors)) {
-    const category = categories[fileName] || 'default'
-    output += `/* ${category.charAt(0).toUpperCase() + category.slice(1)} colors - ${fileName.charAt(0).toUpperCase() + fileName.slice(1)} */\n`
+  for (const [filename, colorData] of Object.entries(colors)) {
+    const category = categories[filename] || 'default'
+    output += `/* ${category.charAt(0).toUpperCase() + category.slice(1)} colors - ${filename.charAt(0).toUpperCase() + filename.slice(1)} */\n`
     for (const [key, hex] of Object.entries(colorData)) {
       const hsl = hexToHsl(hex)
       output += `    --${category}-${key}: ${hsl};\n`

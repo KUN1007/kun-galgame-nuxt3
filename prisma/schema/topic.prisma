@@ -1,6 +1,6 @@
 model topic {
     id                 Int       @id @default(autoincrement())
-    title              String    @db.VarChar(40)
+    title              String    @db.VarChar(233)
     content            String    @db.Text
     view               Int       @default(0)
     is_nsfw            Boolean   @default(false)

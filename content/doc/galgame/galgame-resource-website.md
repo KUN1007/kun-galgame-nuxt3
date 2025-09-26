@@ -94,7 +94,6 @@ https://www.kungal.com/friend-links
 
 ### Galgame 补丁资源下载站
 
-
 [https://www.moyu.moe](https://www.moyu.moe/)
 
 你可以在这里下载到大部分你想要的游戏补丁，包括游戏补丁，汉化补丁，修正补丁，机翻补丁等等, 它是零门槛, 免登录, 免积分, 不限速下载的网站

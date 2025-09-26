@@ -6,8 +6,16 @@ const props = defineProps<{
   topic: TopicDetail
 }>()
 
-const { id, title, content, tags, category, section, isNSFW, isTopicRewriting } =
-  storeToRefs(useTempEditStore())
+const {
+  id,
+  title,
+  content,
+  tags,
+  category,
+  section,
+  isNSFW,
+  isTopicRewriting
+} = storeToRefs(useTempEditStore())
 const { id: userId } = usePersistUserStore()
 const isShowRewrite = computed(() => userId === props.topic.user.id)
 

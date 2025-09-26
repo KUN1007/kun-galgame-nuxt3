@@ -10,4 +10,3 @@ export interface ToolsetComment {
   user: KunUser
   targetUser?: KunUser | null
 }
-

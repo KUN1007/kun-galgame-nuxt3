@@ -1,7 +1,11 @@
 import sharp from 'sharp'
 import env from '~/server/env/dotenv'
 import { uploadImageToS3 } from '~/lib/s3/uploadImageToS3'
-import { KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT } from '~/config/app'
+import {
+  KUN_VISUAL_NOVEL_IMAGE_COMPRESS_QUALITY,
+  KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT,
+  KUN_VISUAL_NOVEL_USER_DAILY_UPLOAD_IMAGE_LIMIT
+} from '~/config/upload'
 import { checkBufferSize } from '~/server/utils/checkBufferSize'
 import prisma from '~/prisma/prisma'
 
@@ -11,7 +15,7 @@ const compressImage = async (name: string, image: Buffer, uid: number) => {
       fit: 'inside',
       withoutEnlargement: true
     })
-    .webp({ quality: 77 })
+    .webp({ quality: KUN_VISUAL_NOVEL_IMAGE_COMPRESS_QUALITY })
     .toBuffer()
 
   if (!checkBufferSize(miniImage, KUN_VISUAL_NOVEL_IMAGE_COMPRESS_LIMIT)) {
@@ -42,8 +46,13 @@ export default defineEventHandler(async (event) => {
   if (!user) {
     return kunError(event, '未找到用户')
   }
-  if (user.daily_image_count >= 50) {
-    return kunError(event, '您今日上传图片已达到 50 张上限')
+  if (
+    user.daily_image_count >= KUN_VISUAL_NOVEL_USER_DAILY_UPLOAD_IMAGE_LIMIT
+  ) {
+    return kunError(
+      event,
+      `您今日上传图片已达到 ${KUN_VISUAL_NOVEL_USER_DAILY_UPLOAD_IMAGE_LIMIT} 张上限`
+    )
   }
 
   const newFileName = `${userInfo.name}-${Date.now()}`
