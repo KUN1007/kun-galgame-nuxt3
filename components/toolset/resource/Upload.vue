@@ -5,6 +5,10 @@ import {
   completeToolsetUploadSchema,
   abortToolsetUploadSchema
 } from '~/validations/toolset'
+import {
+  KUN_GALGAME_TOOLSET_UPLOAD_STATUS_MAP,
+  type KUN_GALGAME_TOOLSET_UPLOAD_STATUS_CONST
+} from '~/constants/toolset'
 import type { ToolsetUploadCompleteResponse } from '~/types/api/toolset'
 
 const props = defineProps<{
@@ -21,11 +25,21 @@ const selectedFile = ref<File | null>(null)
 
 const uploading = ref(false)
 const progress = ref(0)
+const uploadStatus =
+  ref<(typeof KUN_GALGAME_TOOLSET_UPLOAD_STATUS_CONST)[number]>('idle')
 const isDragging = ref(false)
 
 const isLarge = computed(() => {
   const f = selectedFile.value
   return !!f && f.size > MAX_SMALL_FILE_SIZE
+})
+
+const statusMessage = computed(() => {
+  if (uploadStatus.value === 'largeUploading') {
+    return `正在上传大文件【进度 ${progress.value}%】`
+  } else {
+    return KUN_GALGAME_TOOLSET_UPLOAD_STATUS_MAP[uploadStatus.value]
+  }
 })
 
 const pick = () => fileInput.value?.click()
@@ -55,9 +69,11 @@ const onDragLeave = () => {
 const clearSelected = () => {
   selectedFile.value = null
   if (fileInput.value) fileInput.value.value = ''
+  uploadStatus.value = 'idle'
 }
 
 const uploadSmall = async (f: File) => {
+  uploadStatus.value = 'smallInit'
   const initUploadData = {
     toolsetId: props.toolsetId,
     filename: f.name,
@@ -77,17 +93,19 @@ const uploadSmall = async (f: File) => {
   })
   if (!initRes) {
     uploading.value = false
+    uploadStatus.value = 'idle'
     return
   }
 
   try {
-    const formData = new FormData()
-    Object.entries(initRes.post.fields).forEach(([k, v]) =>
-      formData.append(k, v as string)
-    )
-    formData.append('file', f)
-    await fetch(initRes.post.url, { method: 'POST', body: formData })
+    uploadStatus.value = 'smallUploading'
+    await fetch(initRes.url, {
+      headers: { 'Content-Type': 'application/octet-stream' },
+      method: 'PUT',
+      body: f
+    })
 
+    uploadStatus.value = 'smallComplete'
     const completeUploadData = {
       salt: initRes.salt
     }
@@ -113,10 +131,12 @@ const uploadSmall = async (f: File) => {
     }
   } finally {
     uploading.value = false
+    uploadStatus.value = 'idle'
   }
 }
 
 const uploadLarge = async (f: File) => {
+  uploadStatus.value = 'largeInit'
   const initUploadData = {
     toolsetId: props.toolsetId,
     filename: f.name,
@@ -137,6 +157,7 @@ const uploadLarge = async (f: File) => {
   })
   if (!initRes) {
     uploading.value = false
+    uploadStatus.value = 'idle'
     return
   }
 
@@ -151,12 +172,17 @@ const uploadLarge = async (f: File) => {
       ETag: string
     }[] = []
 
+    uploadStatus.value = 'largeUploading'
     for (let i = 0; i < urls.length; i++) {
       const { partNumber, url } = urls[i]
       const start = (partNumber - 1) * partSize
       const end = Math.min(start + partSize, f.size)
       const blob = f.slice(start, end)
-      const resp = await fetch(url, { method: 'PUT', body: blob })
+      const resp = await fetch(url, {
+        headers: { 'Content-Type': 'application/octet-stream' },
+        method: 'PUT',
+        body: blob
+      })
       const etag = resp.headers.get('ETag') || resp.headers.get('etag')
       if (!etag) {
         throw new Error('Missing ETag')
@@ -165,6 +191,7 @@ const uploadLarge = async (f: File) => {
       progress.value = Math.round(((i + 1) / urls.length) * 100)
     }
 
+    uploadStatus.value = 'largeComplete'
     const completeUploadData = {
       salt: initRes.salt,
       uploadId: initRes.uploadId,
@@ -214,6 +241,7 @@ const uploadLarge = async (f: File) => {
     }
   } finally {
     uploading.value = false
+    uploadStatus.value = 'idle'
   }
 }
 
@@ -298,7 +326,7 @@ const submit = async () => {
             />
           </div>
           <div class="text-default-600 mt-2 text-right text-sm">
-            {{ isLarge ? `${progress}%` : '上传中…' }}
+            {{ statusMessage }}
           </div>
         </div>
       </div>

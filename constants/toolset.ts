@@ -115,3 +115,23 @@ export const KUN_GALGAME_TOOLSET_STORAGE_MAP: Record<string, string> = {
   user: '自定义链接下载'
 }
 export const KUN_TOOLSET_STORAGE_CONST = ['s3', 'user'] as const
+
+export const KUN_GALGAME_TOOLSET_UPLOAD_STATUS_MAP: Record<string, string> = {
+  idle: '未开始上传，请添加文件',
+  smallInit: '正在请求小文件上传接口',
+  smallUploading: '正在上传小文件',
+  smallComplete: '正在请求结束上传接口',
+  largeInit: '正在请求大文件接口',
+  largeUploading: '正在上传大文件【进度 ${progress.value}%】',
+  largeComplete: '正在请求结束上传接口'
+}
+
+export const KUN_GALGAME_TOOLSET_UPLOAD_STATUS_CONST = [
+  'idle',
+  'smallInit',
+  'smallUploading',
+  'smallComplete',
+  'largeInit',
+  'largeUploading',
+  'largeComplete'
+] as const

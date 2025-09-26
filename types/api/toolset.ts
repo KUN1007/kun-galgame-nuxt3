@@ -50,10 +50,7 @@ export interface ToolsetLargeFileUploadResponse {
 export interface ToolsetSmallFileUploadResponse {
   key: string
   salt: string
-  post: {
-    url: string
-    fields: Record<string, string>
-  }
+  url: string
 }
 
 export interface ToolsetUploadCompleteResponse {

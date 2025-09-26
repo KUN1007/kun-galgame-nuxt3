@@ -55,6 +55,24 @@ export default defineEventHandler(async (event) => {
       Key: fileCache.key
     })
   )
+  /* a response head example
+{ '$metadata':
+   { httpStatusCode: 200,
+     requestId: '',
+     extendedRequestId: '',
+     cfId: undefined,
+     attempts: 1,
+     totalRetryDelay: 0 },
+  AcceptRanges: 'bytes',
+  LastModified: 2025-09-26T18:11:39.000Z,
+  ContentLength: 15521549,
+  ETag: '"dca682778c0765206314a525e3bb902c"',
+  VersionId: '',
+  ContentType: 'application/octet-stream',
+  Metadata: {} 
+}
+   */
+
   const actualBytes = Number(head.ContentLength || 0)
   if (!actualBytes || actualBytes !== fileCache.filesize) {
     await s3.send(

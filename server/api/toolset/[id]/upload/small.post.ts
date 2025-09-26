@@ -1,13 +1,17 @@
 import prisma from '~/prisma/prisma'
 import { s3 } from '~/lib/s3/client'
-import { createPresignedPost } from '@aws-sdk/s3-presigned-post'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { generateRandomCode } from '~/server/utils/generateRandomCode'
-import { MAX_SMALL_FILE_SIZE } from '~/config/upload'
+import {
+  MAX_SMALL_FILE_SIZE,
+  KUN_VISUAL_NOVEL_UPLOAD_TIMEOUT_LIMIT
+} from '~/config/upload'
 import { initToolsetUploadSchema } from '~/validations/toolset'
 import { parseFileName } from '~/server/utils/upload/parseFileName'
 import { saveUploadSalt } from '~/server/utils/upload/saveUploadSalt'
 import { canUserUpload } from '~/server/utils/upload/canUserUpload'
 import type { ToolsetSmallFileUploadResponse } from '~/types/api/toolset'
+import { PutObjectCommand } from '@aws-sdk/client-s3'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -44,17 +48,26 @@ export default defineEventHandler(async (event) => {
   const salt = generateRandomCode(7)
   const key = `toolset/${toolsetId}/${userInfo.uid}_${base}_${salt}.${ext}`
 
-  const bucket = process.env.KUN_VISUAL_NOVEL_S3_STORAGE_BUCKET_NAME!
+  // Some S3 compatible providers not supported createPresignedPost
+  // const post = await createPresignedPost(s3, {
+  //   Bucket: process.env.KUN_VISUAL_NOVEL_S3_STORAGE_BUCKET_NAME!,
+  //   Key: key,
+  //   Conditions: [
+  //     ['content-length-range', filesize, filesize],
+  //     ['eq', '$Content-Type', 'application/octet-stream']
+  //   ],
+  //   Fields: { 'Content-Type': 'application/octet-stream' },
+  //   Expires: 3600
+  // })
 
-  const post = await createPresignedPost(s3, {
-    Bucket: bucket,
+  const command = new PutObjectCommand({
+    Bucket: process.env.KUN_VISUAL_NOVEL_S3_STORAGE_BUCKET_NAME!,
     Key: key,
-    Conditions: [
-      ['content-length-range', filesize, filesize],
-      ['eq', '$Content-Type', 'application/octet-stream']
-    ],
-    Fields: { 'Content-Type': 'application/octet-stream' },
-    Expires: 3600
+    ContentType: 'application/octet-stream'
+  })
+
+  const url = await getSignedUrl(s3, command, {
+    expiresIn: KUN_VISUAL_NOVEL_UPLOAD_TIMEOUT_LIMIT
   })
 
   await saveUploadSalt(key, 'small', salt, filesize, base, ext)
@@ -62,7 +75,7 @@ export default defineEventHandler(async (event) => {
   const response: ToolsetSmallFileUploadResponse = {
     key,
     salt,
-    post
+    url
   }
 
   return response

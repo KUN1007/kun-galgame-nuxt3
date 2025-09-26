@@ -9,7 +9,8 @@ import { generateRandomCode } from '~/server/utils/generateRandomCode'
 import {
   LARGE_FILE_CHUNK_SIZE,
   MAX_SMALL_FILE_SIZE,
-  MAX_LARGE_FILE_SIZE
+  MAX_LARGE_FILE_SIZE,
+  KUN_VISUAL_NOVEL_UPLOAD_TIMEOUT_LIMIT
 } from '~/config/upload'
 import { initToolsetUploadSchema } from '~/validations/toolset'
 import { parseFileName } from '~/server/utils/upload/parseFileName'
@@ -83,7 +84,7 @@ export default defineEventHandler(async (event) => {
         UploadId: createRes.UploadId,
         PartNumber: i
       }),
-      { expiresIn: 3600 }
+      { expiresIn: KUN_VISUAL_NOVEL_UPLOAD_TIMEOUT_LIMIT }
     )
     urls.push({ partNumber: i, url })
   }

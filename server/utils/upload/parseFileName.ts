@@ -4,8 +4,8 @@ export const sanitizeFileName = (fileName: string) => {
     return fileName
   }
 
-  const baseName = match[1] || 'kun'
-  const extension = match[2] || 'ren'
+  const baseName = match[1] || ''
+  const extension = match[2] || ''
 
   const sanitizedBaseName = baseName.replace(/[^\p{L}\p{N}_-]/gu, '')
 

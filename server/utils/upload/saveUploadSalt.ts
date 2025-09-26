@@ -33,7 +33,8 @@ export const getUploadCache = async (salt?: string) => {
     return
   }
 
-  const parsedResult = JSON.parse(res.toString()) as UploadSaltCache
+  // useStorage may auto parse a stringified object
+  const parsedResult = JSON.parse(JSON.stringify(res)) as UploadSaltCache
   return parsedResult
 }
 
