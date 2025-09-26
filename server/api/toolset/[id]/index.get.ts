@@ -11,9 +11,32 @@ export default defineEventHandler(async (event) => {
   const toolset = await prisma.galgame_toolset.findUnique({
     where: { id: input.toolsetId },
     include: {
-      user: { select: { id: true, name: true, avatar: true } },
-      alias: { select: { name: true } },
-      practicality: { select: { rate: true } }
+      user: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true
+        }
+      },
+      alias: {
+        select: {
+          name: true
+        }
+      },
+      practicality: {
+        select: {
+          rate: true
+        }
+      },
+      resource: {
+        select: {
+          id: true,
+          type: true,
+          size: true,
+          download: true,
+          status: true
+        }
+      }
     }
   })
 
@@ -26,20 +49,18 @@ export default defineEventHandler(async (event) => {
       toolset.practicality.length
     : null
 
+  const totalDownload = toolset.resource.reduce(
+    (sum, r) => sum + (r.download ?? 0),
+    0
+  )
+
   const detail: ToolsetDetail = {
-    id: toolset.id,
-    name: toolset.name,
-    type: toolset.type,
-    description: toolset.description,
-    platform: toolset.platform,
-    language: toolset.language,
-    version: toolset.version,
-    homepage: toolset.homepage,
-    download: toolset.download,
-    user: toolset.user,
-    aliases: toolset.alias.map((a) => a.name),
+    ...toolset,
     practicalityAvg,
-    practicalityCount: toolset.practicality.length
+    download: totalDownload,
+    aliases: toolset.alias.map((a) => a.name),
+    practicalityCount: toolset.practicality.length,
+    resource_update_time: toolset.resource_update_time
   }
 
   return detail

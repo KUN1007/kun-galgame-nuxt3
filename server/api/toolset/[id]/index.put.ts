@@ -31,7 +31,8 @@ export default defineEventHandler(async (event) => {
       platform: input.platform,
       type: input.type,
       version: input.version,
-      homepage: input.homepage
+      homepage: input.homepage,
+      edited: new Date()
     }
   })
 

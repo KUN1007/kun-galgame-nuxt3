@@ -1,5 +1,7 @@
 import prisma from '~/prisma/prisma'
 import { deleteToolsetDetailSchema } from '~/validations/toolset'
+import { s3 } from '~/lib/s3/client'
+import { DeleteObjectCommand } from '@aws-sdk/client-s3'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseDeleteQuery(event, deleteToolsetDetailSchema)
@@ -14,7 +16,15 @@ export default defineEventHandler(async (event) => {
 
   const toolset = await prisma.galgame_toolset.findUnique({
     where: { id: input.toolsetId },
-    select: { user_id: true }
+    include: {
+      resource: {
+        select: {
+          id: true,
+          type: true,
+          content: true
+        }
+      }
+    }
   })
   if (!toolset) {
     return kunError(event, '工具不存在或已删除')
@@ -22,6 +32,21 @@ export default defineEventHandler(async (event) => {
 
   if (toolset.user_id !== userInfo.uid && userInfo.role < 2) {
     return kunError(event, '您无权限删除该工具')
+  }
+
+  for (const res of toolset.resource) {
+    if (res.type === 's3') {
+      await s3.send(
+        new DeleteObjectCommand({
+          Bucket: process.env.KUN_VISUAL_NOVEL_S3_STORAGE_BUCKET_NAME!,
+          Key: res.content
+        })
+      )
+
+      await prisma.galgame_toolset_resource.delete({
+        where: { id: res.id }
+      })
+    }
   }
 
   await prisma.galgame_toolset.delete({ where: { id: input.toolsetId } })

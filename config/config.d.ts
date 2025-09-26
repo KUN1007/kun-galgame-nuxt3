@@ -8,6 +8,7 @@ export interface KunSiteDomain {
   sticker: string
   nav: string
   doc: string
+  oss: string
 }
 
 export interface KunSiteAuthor {

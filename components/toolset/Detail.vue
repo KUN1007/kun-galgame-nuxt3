@@ -6,11 +6,11 @@ import {
   KUN_GALGAME_TOOLSET_VERSION_MAP
 } from '~/constants/toolset'
 import { toolsetUpdateForm } from './rewriteStore'
-import type { ToolsetRating } from '~/types/api/toolset'
+import type { ToolsetRating, ToolsetResource } from '~/types/api/toolset'
 
 const props = defineProps<{ id: number }>()
 
-const { data } = await useFetch(`/api/toolset/${props.id}`, {
+const { data, refresh } = await useFetch(`/api/toolset/${props.id}`, {
   method: 'GET',
   query: { toolsetId: props.id },
   ...kungalgameResponseHandler
@@ -97,6 +97,19 @@ const handleSetStar = async (val: number) => {
   useMessage(`已评分: ${val} 星`, 'success')
   isSubmittingRate.value = false
   await loadPracticalityMine()
+}
+
+const handleResourceDeleted = (toolsetResourceId: number) => {
+  if (!data?.value) return
+  data.value.resource = data.value.resource.filter(
+    (r) => r.id !== toolsetResourceId
+  )
+}
+
+const handleResourceUpdated = (res: ToolsetResource) => {
+  if (!data?.value) return
+  const idx = data.value.resource.findIndex((r) => r.id === res.id)
+  if (idx !== -1) data.value.resource[idx] = res
 }
 </script>
 
@@ -186,18 +199,37 @@ const handleSetStar = async (val: number) => {
         </div>
         <div class="flex gap-1">
           <KunButton @click="handlePublishResource">上传/添加资源</KunButton>
-          <KunButton variant="flat" @click="handleRewriteToolset"
-            >修改</KunButton
+          <KunButton
+            v-if="canManageToolset"
+            variant="flat"
+            @click="handleRewriteToolset"
           >
+            修改
+          </KunButton>
           <KunButton
             v-if="canManageToolset"
             color="danger"
+            variant="flat"
             :loading="isDeleting"
             @click="handleDeleteToolset"
-            >删除</KunButton
           >
+            删除
+          </KunButton>
         </div>
       </div>
+    </KunCard>
+
+    <KunCard
+      :is-hoverable="false"
+      :is-transparent="false"
+      content-class="space-y-3"
+    >
+      <ToolsetResourceList
+        :toolset-id="data.id"
+        :resources="data.resource"
+        @deleted="handleResourceDeleted"
+        @updated="handleResourceUpdated"
+      />
     </KunCard>
 
     <KunCard

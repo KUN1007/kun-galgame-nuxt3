@@ -129,7 +129,7 @@ onMounted(() => {
           cn(
             'scrollbar-hide border-default/20 w-full rounded-md border p-3 shadow-sm transition duration-150 ease-in-out',
             'focus:ring-primary-500 focus:border-transparent focus:ring-2 focus:outline-none',
-            disabled ? 'text-default-500 cursor-not-allowed' : '',
+            disabled ? 'text-default-500 cursor-not-allowed shadow-none' : '',
             darkBorder && 'dark:border-default-200',
             // readonly ? 'bg-default-100' : '',
             // error ? 'border-danger-300' : 'border-default-300',

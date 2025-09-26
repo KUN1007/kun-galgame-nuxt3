@@ -4,10 +4,12 @@ model galgame_toolset {
   name        String @default("") @db.VarChar(500)
   description String @default("") @db.VarChar(2000)
 
-  type     String   @default("")
-  language String   @default("")
-  platform String   @default("")
-  homepage String[] @default([])
+  type                 String    @default("")
+  language             String    @default("")
+  platform             String    @default("")
+  homepage             String[]  @default([])
+  resource_update_time DateTime  @default(now())
+  edited               DateTime?
 
   // alpha, beta, rc, stable
   version String @default("") @db.VarChar(233)
@@ -72,17 +74,17 @@ model galgame_toolset_alias {
 }
 
 model galgame_toolset_resource {
-  id       Int    @id @default(autoincrement())
-  content  String @default("") @db.VarChar(1007)
+  id       Int       @id @default(autoincrement())
+  content  String    @default("") @db.VarChar(1007)
   // s3 - object storage, user - self file-host
-  type     String @default("")
-  code     String @default("") @db.VarChar(1007)
-  password String @default("") @db.VarChar(1007)
-  size     String @default("") @db.VarChar(107)
-  note     String @default("") @db.VarChar(1007)
-  count    Int    @default(0)
-  download Int    @default(0)
-  status   Int    @default(0)
+  type     String    @default("")
+  code     String    @default("") @db.VarChar(1007)
+  password String    @default("") @db.VarChar(1007)
+  size     String    @default("") @db.VarChar(107)
+  note     String    @default("") @db.VarChar(1007)
+  download Int       @default(0)
+  status   Int       @default(0)
+  edited   DateTime?
 
   toolset_id Int
   toolset    galgame_toolset @relation(fields: [toolset_id], references: [id], onDelete: Cascade)

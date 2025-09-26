@@ -70,9 +70,13 @@ export const deleteToolsetCommentSchema = z.object({
 })
 
 // Toolset resource & upload
+export const getToolsetResourceDetailSchema = z.object({
+  toolsetResourceId: z.coerce.number().min(1).max(9999999)
+})
+
 export const createToolsetResourceSchema = z.object({
   toolsetId: z.coerce.number().min(1).max(9999999),
-  salt: z.string().min(7).max(7),
+  salt: z.string().max(7).optional().default(''),
   content: z.string().max(1007).optional().default(''),
   size: z.string().refine((s) => ResourceSizePattern.test(s), {
     message: '大小格式不正确, 需要包含 MB 或者 GB'
@@ -80,6 +84,21 @@ export const createToolsetResourceSchema = z.object({
   code: z.string().max(1007).optional().default(''),
   password: z.string().max(1007).optional().default(''),
   note: z.string().max(1007).optional().default('')
+})
+
+export const updateToolsetResourceSchema = z.object({
+  toolsetResourceId: z.coerce.number().min(1).max(9999999),
+  content: z.string().max(1007).optional().default(''),
+  size: z.string().refine((s) => ResourceSizePattern.test(s), {
+    message: '大小格式不正确, 需要包含 MB 或者 GB'
+  }),
+  code: z.string().max(1007).optional().default(''),
+  password: z.string().max(1007).optional().default(''),
+  note: z.string().max(1007).optional().default('')
+})
+
+export const deleteToolsetResourceSchema = z.object({
+  toolsetResourceId: z.coerce.number().min(1).max(9999999)
 })
 
 export const initToolsetUploadSchema = z.object({

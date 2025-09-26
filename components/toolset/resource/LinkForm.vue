@@ -26,8 +26,6 @@ const formData = reactive({
 const isLoading = ref(false)
 
 const submitLink = async () => {
-  console.log(formData)
-
   const result = useSchemaValidator(createToolsetResourceSchema, formData)
   if (!result) {
     return

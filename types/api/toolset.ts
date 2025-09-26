@@ -26,6 +26,11 @@ export interface ToolsetDetail {
   aliases: string[]
   practicalityAvg: number | null
   practicalityCount: number
+  resource_update_time: Date | string
+  resource: ToolsetResource[]
+  edited: Date | string | null
+  created: Date | string
+  updated: Date | string
 }
 
 export interface ToolsetRating {
@@ -57,4 +62,23 @@ export interface ToolsetUploadCompleteResponse {
   salt: string
   key: string
   filesize: number
+}
+
+export interface ToolsetResource {
+  id: number
+  type: string
+  size: string
+  download: number
+  status: number
+}
+
+export interface ToolsetResourceDetail extends ToolsetResource {
+  user: KunUser
+  content: string
+  code: string
+  note: string
+  password: string
+  edited: Date | string | null
+  created: Date | string
+  updated: Date | string
 }
