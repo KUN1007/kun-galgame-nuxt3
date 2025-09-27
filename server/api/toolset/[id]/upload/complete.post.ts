@@ -5,12 +5,12 @@ import {
   HeadObjectCommand,
   DeleteObjectCommand
 } from '@aws-sdk/client-s3'
-import { USER_DAILY_UPLOAD_LIMIT as MAX_DAILY_BYTES } from '~/config/upload'
 import { completeToolsetUploadSchema } from '~/validations/toolset'
 import {
   getUploadCache,
   removeUploadCache
 } from '~/server/utils/upload/saveUploadSalt'
+import { canUserUpload } from '~/server/utils/upload/canUserUpload'
 import type { ToolsetUploadCompleteResponse } from '~/types/api/toolset'
 
 export default defineEventHandler(async (event) => {
@@ -85,27 +85,20 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '文件大小校验失败，请重试或联系管理员')
   }
 
-  const user = await prisma.user.findUnique({
-    where: { id: userInfo.uid },
-    select: { role: true, daily_toolset_upload_count: true }
-  })
-  if (!user) {
-    return kunError(event, '用户不存在', 205)
-  }
-
-  const used = user.daily_toolset_upload_count || 0
-  if (used + actualBytes > MAX_DAILY_BYTES) {
-    return kunError(event, '超出当日可用上传额度，请明天再试')
+  const result = await canUserUpload(userInfo.uid, actualBytes)
+  if (typeof result === 'string') {
+    return kunError(event, result)
   }
 
   await prisma.user.update({
     where: { id: userInfo.uid },
-    data: { daily_toolset_upload_count: used + actualBytes }
+    data: { daily_toolset_upload_count: result }
   })
 
   return {
     salt,
     key: fileCache.key,
-    filesize: fileCache.filesize
+    filesize: fileCache.filesize,
+    dailyToolsetUploadCount: result
   } satisfies ToolsetUploadCompleteResponse
 })

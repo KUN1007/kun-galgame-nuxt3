@@ -144,7 +144,12 @@ const circleOffset = computed(
     :class="[sizeClasses, roundedClasses, className]"
   >
     <div
-      :class="[barClasses, 'h-full transition-all duration-500 ease-out']"
+      :class="
+        cn(
+          'flex h-full items-center transition-all duration-500 ease-out',
+          barClasses
+        )
+      "
       :style="indeterminate ? 'width:100%' : `width:${percentage}%`"
     >
       <span

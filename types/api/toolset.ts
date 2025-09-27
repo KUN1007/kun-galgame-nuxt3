@@ -64,6 +64,7 @@ export interface ToolsetUploadCompleteResponse {
   salt: string
   key: string
   filesize: number
+  dailyToolsetUploadCount: number
 }
 
 export interface ToolsetResource {

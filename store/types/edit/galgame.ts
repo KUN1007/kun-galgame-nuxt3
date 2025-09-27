@@ -6,7 +6,7 @@ export interface GalgameStorePersist {
   aliases: string[]
 }
 
-export interface GalgameStoreTemp {
+export interface GalgameEditStoreTemp {
   id: number
   vndbId: string
   name: KunLanguage

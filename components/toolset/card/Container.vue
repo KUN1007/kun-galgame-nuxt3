@@ -12,7 +12,7 @@ const { data, status } = await useFetch(`/api/toolset`, {
   <div v-if="data" class="flex flex-col gap-3">
     <KunCard class-name="z-10" :is-hoverable="false" :is-transparent="false">
       <KunHeader
-        name="Galgame 工具集"
+        name="Galgame 工具资源下载"
         description="收录 Galgame 相关工具：模拟器、翻译器、提取器等"
         :is-show-divider="false"
       >

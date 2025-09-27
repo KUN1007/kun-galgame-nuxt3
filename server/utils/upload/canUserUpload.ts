@@ -17,11 +17,12 @@ export const canUserUpload = async (user_id: number, filesize: number) => {
   }
 
   const isAdmin = user.role > 1
-  const dailyUsed = user.daily_toolset_upload_count || 0
+  const dailyUsed = user.daily_toolset_upload_count
   const dailyRemaining = isAdmin
     ? MAX_LARGE_FILE_SIZE
     : Math.max(0, USER_DAILY_UPLOAD_LIMIT - dailyUsed)
-  const moemoepointDeltaForDailyFileSize = dailyRemaining + user.moemoepoint
+  const moemoepointDeltaForDailyFileSize =
+    dailyRemaining + user.moemoepoint * MB
 
   const moemoepointMaxSingleFile =
     Math.floor(user.moemoepoint / MOEMOEPOINT_SINGLE_MB_DIVISOR) * MB
@@ -39,4 +40,6 @@ export const canUserUpload = async (user_id: number, filesize: number) => {
     const limitMB = (maxSingleFileForUser / MB).toFixed(2)
     return `单文件大小超过限制, 最大 ${limitMB} MB`
   }
+
+  return user.daily_toolset_upload_count + filesize
 }

@@ -1,7 +1,7 @@
-import type { GalgameStoreTemp } from '~/store/types/edit/galgame'
+import type { GalgameEditStoreTemp } from '~/store/types/edit/galgame'
 
 interface Store {
-  galgamePR: GalgameStoreTemp[]
+  galgamePR: GalgameEditStoreTemp[]
 }
 
 export const useTempGalgamePRStore = defineStore('tempGalgamePR', {

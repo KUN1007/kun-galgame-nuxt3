@@ -63,8 +63,11 @@ export default defineEventHandler(async (event) => {
     id: user.id,
     name: user.name,
     avatar: user.avatar,
+    avatarMin: user.avatar,
     moemoepoint: user.moemoepoint,
-    role: user.role
+    role: user.role,
+    isCheckIn: !!user.daily_check_in,
+    dailyToolsetUploadCount: user.daily_toolset_upload_count
   }
 
   return userInfo

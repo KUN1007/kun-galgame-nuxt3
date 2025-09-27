@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { withTrailingSlash, withLeadingSlash, joinURL } from 'ufo'
-import { useRuntimeConfig, computed } from '#imports'
 
 import ImageComponent from '#build/mdc-image-component.mjs'
 

@@ -90,6 +90,10 @@ const loadPracticalityMine = async () => {
 onMounted(loadPracticalityMine)
 
 const handleSetStar = async (val: number) => {
+  if (!uid) {
+    useMessage('请登陆后再评分, 否则我们无法统计数据', 'warn', 7000)
+    return
+  }
   isSubmittingRate.value = true
   await $fetch(`/api/toolset/${props.id}/practicality`, {
     method: 'PUT',
@@ -225,7 +229,7 @@ const handleResourceUpdated = (res: ToolsetResource) => {
           {{ `${formatNumber(data.download)} 下载` }}
         </div>
         <div class="flex gap-1">
-          <KunButton @click="handlePublishResource">上传/添加资源</KunButton>
+          <KunButton @click="handlePublishResource">上传 / 添加资源</KunButton>
           <KunButton
             v-if="canManageToolset"
             variant="flat"
@@ -272,14 +276,11 @@ const handleResourceUpdated = (res: ToolsetResource) => {
       @update:modal-value="(v) => (showResourceModal = v)"
       :is-dismissable="false"
     >
-      <div class="max-w-2xl">
-        <h3 class="mb-3 text-lg font-semibold">发布资源</h3>
-        <ToolsetResourceContainer
-          :toolset-id="data.id"
-          @on-close="() => (showResourceModal = false)"
-          @on-success="(value) => data!.resource.push(value)"
-        />
-      </div>
+      <ToolsetResourceContainer
+        :toolset-id="data.id"
+        @on-close="() => (showResourceModal = false)"
+        @on-success="(value) => data!.resource.push(value)"
+      />
     </KunModal>
   </div>
 </template>

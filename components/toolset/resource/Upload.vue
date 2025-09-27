@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { MAX_SMALL_FILE_SIZE } from '~/config/upload'
+import {
+  MAX_SMALL_FILE_SIZE,
+  MAX_LARGE_FILE_SIZE,
+  USER_DAILY_UPLOAD_LIMIT
+} from '~/config/upload'
 import {
   initToolsetUploadSchema,
   completeToolsetUploadSchema,
@@ -20,18 +24,29 @@ const emits = defineEmits<{
   onClose: []
 }>()
 
+const MB = 1024 * 1024
+
+const { moemoepoint, dailyToolsetUploadCount } = storeToRefs(
+  usePersistUserStore()
+)
 const fileInput = ref<HTMLInputElement>()
 const selectedFile = ref<File | null>(null)
 
 const progress = ref(0)
+const isDragging = ref(false)
 const uploadStatus =
   ref<(typeof KUN_GALGAME_TOOLSET_UPLOAD_STATUS_CONST)[number]>('idle')
-const isDragging = ref(false)
 
 const isLarge = computed(() => {
   const f = selectedFile.value
   return !!f && f.size > MAX_SMALL_FILE_SIZE
 })
+const userUploadLimit = computed(
+  () =>
+    USER_DAILY_UPLOAD_LIMIT +
+    moemoepoint.value * MB -
+    dailyToolsetUploadCount.value
+)
 
 const statusMessage = computed(() => {
   if (uploadStatus.value === 'largeUploading') {
@@ -41,12 +56,37 @@ const statusMessage = computed(() => {
   }
 })
 
+const checkFileValid = (file: File | null) => {
+  if (!file) {
+    return false
+  }
+  if (!isValidArchive(file.name || '')) {
+    useMessage('我们仅支持 .7z, .zip, .rar 压缩格式上传', 'warn')
+    return false
+  }
+  if (file.size > MAX_LARGE_FILE_SIZE) {
+    useMessage(
+      `文件大小超过最大文件限制 ${MAX_LARGE_FILE_SIZE / MB} MB`,
+      'warn'
+    )
+    return false
+  }
+  if (file.size > userUploadLimit.value) {
+    useMessage(
+      `文件大小超过您的可用上传额度 ${(userUploadLimit.value / MB).toFixed(1)} MB`,
+      'warn'
+    )
+    return false
+  }
+  return true
+}
+
 const pick = () => fileInput.value?.click()
 const onChange = (e: Event) => {
   const t = e.target as HTMLInputElement
   const targetFile = t.files && t.files[0] ? t.files[0] : null
-  if (!isValidArchive(targetFile?.name || '')) {
-    useMessage('我们仅支持 .7z, .zip, .rar 压缩格式上传', 'warn')
+  const res = checkFileValid(targetFile)
+  if (!res) {
     return
   }
   selectedFile.value = targetFile
@@ -57,8 +97,8 @@ const onDrop = (e: DragEvent) => {
   isDragging.value = false
   const dt = e.dataTransfer
   if (dt?.files && dt.files.length > 0) {
-    if (!isValidArchive(dt.files[0].name || '')) {
-      useMessage('我们仅支持 .7z, .zip, .rar 压缩格式上传', 'warn')
+    const res = checkFileValid(dt.files[0])
+    if (!res) {
       return
     }
     selectedFile.value = dt.files[0]
@@ -313,18 +353,11 @@ const submit = async () => {
             >
               {{
                 isLarge
-                  ? `文件大于 ${MAX_SMALL_FILE_SIZE / (1024 * 1024)}MB, 分片上传`
-                  : `文件小于 ${MAX_SMALL_FILE_SIZE / (1024 * 1024)}MB, 直接上传`
+                  ? `文件大于 ${MAX_SMALL_FILE_SIZE / MB}MB, 分片上传`
+                  : `文件小于 ${MAX_SMALL_FILE_SIZE / MB}MB, 直接上传`
               }}
             </span>
           </div>
-
-          <!-- <div class="bg-default-200 h-2 w-full rounded">
-            <div
-              class="bg-primary-500 h-2 rounded"
-              :style="{ width: `${progress}%` }"
-            />
-          </div> -->
 
           <KunProgress :value="progress" />
 

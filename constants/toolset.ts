@@ -3,28 +3,28 @@ import type { KunSelectOption } from '~/components/kun/select/type'
 export const KUN_GALGAME_TOOLSET_TYPE_MAP: Record<string, string> = {
   name: '工具类型',
   all: '全部类型',
-  emulator: '模拟器相关 (KRKR 等)',
-  translator: '翻译相关 (翻译器, 文本 Hook, OCR 等)',
+  emulator: '模拟器相关',
+  translator: '翻译相关',
   extractor: '解包工具',
-  converter: '资源转换 (音频/图片/字体)',
+  converter: '资源转换工具',
   engine: '引擎相关工具',
   debug: '开发者工具',
   launcher: '游戏管理工具',
   script: '自动化脚本',
-  docs: '文档相关 (指南, 社区资源 等)',
+  docs: '文档相关',
   others: '其它'
 }
 export const kunGalgameToolsetTypeOptions: KunSelectOption[] = [
   { value: 'all', label: '全部类型' },
-  { value: 'emulator', label: '模拟器相关 (KRKR 等)' },
-  { value: 'translator', label: '翻译相关 (翻译器, Hook 等)' },
+  { value: 'emulator', label: '模拟器相关' },
+  { value: 'translator', label: '翻译相关' },
   { value: 'extractor', label: '解包工具' },
-  { value: 'converter', label: '资源转换 (音频/图片/字体)' },
+  { value: 'converter', label: '资源转换工具' },
   { value: 'engine', label: '引擎相关工具' },
   { value: 'debug', label: '开发者工具' },
   { value: 'launcher', label: '游戏管理工具' },
   { value: 'script', label: '自动化脚本' },
-  { value: 'docs', label: '文档相关 (指南, 社区资源 等)' },
+  { value: 'docs', label: '文档相关' },
   { value: 'others', label: '其它' }
 ]
 export const KUN_TOOLSET_TYPE_CONST = [

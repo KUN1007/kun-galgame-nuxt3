@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { KunTopBarNav } from '#components'
-
 withDefaults(
   defineProps<{
     className?: string
