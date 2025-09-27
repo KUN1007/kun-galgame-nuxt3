@@ -11,10 +11,15 @@ export default defineTask({
     const { count } = await prisma.user.updateMany({
       data: {
         daily_check_in: 0,
-        daily_image_count: 0
+        daily_image_count: 0,
+        daily_toolset_upload_count: 0
       },
       where: {
-        OR: [{ daily_check_in: { not: 0 } }, { daily_image_count: { not: 0 } }]
+        OR: [
+          { daily_check_in: { not: 0 } },
+          { daily_image_count: { not: 0 } },
+          { daily_toolset_upload_count: { not: 0 } }
+        ]
       }
     })
 

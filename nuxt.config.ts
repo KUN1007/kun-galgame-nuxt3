@@ -173,7 +173,9 @@ export default defineNuxtConfig({
       tasks: true
     },
     scheduledTasks: {
-      '0 0 * * *': ['reset-daily']
+      '0 0 * * *': ['reset-daily'],
+      '0 * * * *': ['cleanup-toolset-resource']
+      // '* * * * *': ['cleanup-toolset-resource']
     }
   }
 })

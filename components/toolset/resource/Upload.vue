@@ -91,7 +91,7 @@ const uploadSmall = async (f: File) => {
     filename: f.name,
     filesize: f.size
   }
-  const result = useSchemaValidator(initToolsetUploadSchema, initUploadData)
+  const result = useKunSchemaValidator(initToolsetUploadSchema, initUploadData)
   if (!result) {
     return
   }
@@ -119,7 +119,7 @@ const uploadSmall = async (f: File) => {
     const completeUploadData = {
       salt: initRes.salt
     }
-    const result = useSchemaValidator(
+    const result = useKunSchemaValidator(
       completeToolsetUploadSchema,
       completeUploadData
     )
@@ -151,7 +151,7 @@ const uploadLarge = async (f: File) => {
     filename: f.name,
     filesize: f.size
   }
-  const result = useSchemaValidator(initToolsetUploadSchema, initUploadData)
+  const result = useKunSchemaValidator(initToolsetUploadSchema, initUploadData)
   if (!result) {
     return
   }
@@ -204,7 +204,7 @@ const uploadLarge = async (f: File) => {
       uploadId: initRes.uploadId,
       parts
     }
-    const result = useSchemaValidator(
+    const result = useKunSchemaValidator(
       completeToolsetUploadSchema,
       completeUploadData
     )
@@ -231,7 +231,7 @@ const uploadLarge = async (f: File) => {
         salt: initRes.salt,
         uploadId: initRes.uploadId
       }
-      const result = useSchemaValidator(
+      const result = useKunSchemaValidator(
         abortToolsetUploadSchema,
         abortUploadData
       )

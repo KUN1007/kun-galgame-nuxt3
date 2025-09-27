@@ -9,3 +9,12 @@ export const s3 = new S3Client({
   },
   requestChecksumCalculation: 'WHEN_REQUIRED'
 })
+
+export const s3ClientR2 = new S3Client({
+  endpoint: process.env.KUN_VISUAL_NOVEL_IMAGE_BED_ENDPOINT!,
+  region: 'auto',
+  credentials: {
+    accessKeyId: process.env.KUN_VISUAL_NOVEL_IMAGE_BED_ACCESS_KEY!,
+    secretAccessKey: process.env.KUN_VISUAL_NOVEL_IMAGE_BED_SECRET_KEY!
+  }
+})

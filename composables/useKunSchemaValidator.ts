@@ -1,6 +1,9 @@
 import type { ZodSchema } from 'zod'
 
-export const useSchemaValidator = <T>(schema: ZodSchema<T>, data: unknown) => {
+export const useKunSchemaValidator = <T>(
+  schema: ZodSchema<T>,
+  data: unknown
+) => {
   const result = schema.safeParse(data)
   if (!result.success) {
     const message = JSON.parse(result.error.message)[0]

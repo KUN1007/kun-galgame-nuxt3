@@ -140,7 +140,7 @@ const handleSave = async () => {
     note: formData.note,
     content: base.value.type === 'user' ? formData.content : ''
   }
-  const valid = useSchemaValidator(updateToolsetResourceSchema, body)
+  const valid = useKunSchemaValidator(updateToolsetResourceSchema, body)
   if (!valid) {
     return
   }

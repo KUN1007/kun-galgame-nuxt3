@@ -38,7 +38,7 @@ watch(
 )
 
 const submitLink = async () => {
-  const result = useSchemaValidator(createToolsetResourceSchema, formData)
+  const result = useKunSchemaValidator(createToolsetResourceSchema, formData)
   if (!result) {
     return
   }
