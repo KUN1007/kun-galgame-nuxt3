@@ -14,50 +14,48 @@ defineProps<{
 
 <template>
   <div
-    class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+    class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
   >
     <KunCard
       v-for="t in items"
       :key="t.id"
+      :href="`/toolset/${t.id}`"
       :is-transparent="false"
       :is-hoverable="true"
-      content-class="space-y-2"
+      :is-pressable="true"
+      content-class="space-y-3 group"
     >
-      <div class="flex items-center justify-between gap-2">
-        <KunLink :to="`/toolset/${t.id}`" class-name="text-lg font-semibold">
-          {{ t.name }}
-        </KunLink>
-        <div class="flex items-center gap-2">
-          <KunBadge color="primary" size="xs">
-            {{ KUN_GALGAME_TOOLSET_TYPE_MAP[t.type] || t.type }}
-          </KunBadge>
-          <span class="text-default-500 text-sm">
-            {{ KUN_GALGAME_TOOLSET_VERSION_MAP[t.version] }}
-          </span>
-        </div>
-      </div>
-      <p class="text-default-500 line-clamp-3 text-sm">
-        {{ t.description }}
+      <h2 class="group-hover:text-primary truncate text-base text-lg">
+        {{ t.name }}
+      </h2>
+
+      <p class="text-default-600 text-xs">
+        {{ KUN_GALGAME_TOOLSET_VERSION_MAP[t.version] || t.version }}
+        <span class="mx-1">·</span>
+        {{ KUN_GALGAME_TOOLSET_PLATFORM_MAP[t.platform] || t.platform }}
+        <span class="mx-1">·</span>
+        {{ KUN_GALGAME_TOOLSET_LANGUAGE_MAP[t.language] || t.language }}
       </p>
-      <div class="text-default-600 text-xs">
-        <span>{{ KUN_GALGAME_TOOLSET_PLATFORM_MAP[t.platform] }}</span>
-        <span class="mx-2">·</span>
-        <span>{{ KUN_GALGAME_TOOLSET_LANGUAGE_MAP[t.language] }}</span>
-      </div>
+
       <div class="text-default-600 flex items-center justify-between text-xs">
-        <div>
+        <div class="flex gap-2">
           <span>下载 {{ t.download }}</span>
-          <span class="mx-2">·</span>
           <span>评论 {{ t.commentCount }}</span>
         </div>
-        <div>
-          <span v-if="t.practicalityAvg != null">
-            实用性 {{ t.practicalityAvg.toFixed(1) }}
-          </span>
-        </div>
+        <span v-if="t.practicalityAvg != null">
+          实用性 {{ t.practicalityAvg.toFixed(1) }}
+        </span>
       </div>
+
       <div class="flex items-center gap-2">
         <KunUser size="sm" :user="t.user" />
+        <span class="text-default-500 text-xs">
+          {{ formatTimeDifference(t.resource_update_time) }}
+        </span>
+
+        <KunBadge class-name="ml-auto" color="primary" size="xs">
+          {{ KUN_GALGAME_TOOLSET_TYPE_MAP[t.type] || t.type }}
+        </KunBadge>
       </div>
     </KunCard>
   </div>

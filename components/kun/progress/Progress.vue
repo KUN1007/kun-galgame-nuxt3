@@ -107,7 +107,7 @@ const circleOffset = computed(
   >
     <svg class="h-24 w-24 -rotate-90 transform" viewBox="0 0 100 100">
       <circle
-        class="text-gray-200"
+        class="text-default-300"
         stroke="currentColor"
         stroke-width="10"
         fill="transparent"
@@ -136,7 +136,7 @@ const circleOffset = computed(
 
   <div
     v-else
-    class="bg-default-200 w-full overflow-hidden"
+    class="bg-default-300 w-full overflow-hidden"
     role="progressbar"
     :aria-valuenow="indeterminate ? undefined : percentage"
     :aria-valuemin="0"

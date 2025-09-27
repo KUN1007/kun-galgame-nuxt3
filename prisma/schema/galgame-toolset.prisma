@@ -4,18 +4,16 @@ model galgame_toolset {
   name        String @default("") @db.VarChar(500)
   description String @default("") @db.VarChar(2000)
 
+  status               Int       @default(0)
   type                 String    @default("")
   language             String    @default("")
   platform             String    @default("")
   homepage             String[]  @default([])
   resource_update_time DateTime  @default(now())
   edited               DateTime?
+  version              String    @default("") @db.VarChar(233)
 
   // alpha, beta, rc, stable
-  version String @default("") @db.VarChar(233)
-
-  status   Int @default(0)
-  download Int @default(0)
 
   user_id Int
   user    user @relation("user_galgame_toolset", fields: [user_id], references: [id], onDelete: Cascade)

@@ -65,7 +65,11 @@ const submitLink = async () => {
 <template>
   <div class="space-y-3">
     <KunInput
-      placeholder="大小 (如 520KB, 1007MB, 0721GB)"
+      :placeholder="
+        props.type === 'user'
+          ? '大小 (如 520KB, 1007MB, 0721GB)'
+          : '确认上传完成后, 自动生成文件大小'
+      "
       :disabled="props.type === 's3'"
       v-model="formData.size"
     />

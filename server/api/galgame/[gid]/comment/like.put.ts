@@ -50,7 +50,7 @@ export default defineEventHandler(async (event) => {
       await createMessage(
         prisma,
         uid,
-        comment.target_user_id,
+        comment.user_id,
         'liked',
         comment.content.slice(0, 233),
         0,

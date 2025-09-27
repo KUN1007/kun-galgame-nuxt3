@@ -319,12 +319,14 @@ const submit = async () => {
             </span>
           </div>
 
-          <div class="bg-default-200 h-2 w-full rounded">
+          <!-- <div class="bg-default-200 h-2 w-full rounded">
             <div
               class="bg-primary-500 h-2 rounded"
               :style="{ width: `${progress}%` }"
             />
-          </div>
+          </div> -->
+
+          <KunProgress :value="progress" />
 
           <div
             class="text-default-500 flex items-center justify-center gap-2 text-sm"

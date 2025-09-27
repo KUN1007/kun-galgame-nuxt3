@@ -21,7 +21,8 @@ export default defineEventHandler(async (event) => {
       include: {
         user: { select: { id: true, name: true, avatar: true } },
         comment: { select: { id: true } },
-        practicality: { select: { rate: true } }
+        practicality: { select: { rate: true } },
+        resource: { select: { download: true } }
       }
     })
   ])
@@ -30,17 +31,22 @@ export default defineEventHandler(async (event) => {
     const practicalityAvg = t.practicality.length
       ? t.practicality.reduce((a, b) => a + b.rate, 0) / t.practicality.length
       : null
+    const totalDownload = t.resource.reduce(
+      (sum, r) => sum + (r.download ?? 0),
+      0
+    )
+
     return {
       id: t.id,
       name: t.name,
-      description: t.description,
       user: t.user,
       type: t.type,
       platform: t.platform,
       language: t.language,
       version: t.version,
-      download: t.download,
+      download: totalDownload,
       commentCount: t.comment.length,
+      resource_update_time: t.resource_update_time,
       practicalityAvg
     }
   })

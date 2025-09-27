@@ -27,7 +27,7 @@ defineProps<{
           loading="lazy"
           :alt="galgame.name['zh-cn']"
           placeholder="/placeholder.webp"
-          class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          class="h-full w-full object-cover transition-transform duration-300"
           :style="{ aspectRatio: '16/9' }"
         />
 

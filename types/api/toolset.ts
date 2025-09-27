@@ -1,7 +1,6 @@
 export interface ToolsetCard {
   id: number
   name: string
-  description: string
   user: KunUser
   type: string
   platform: string
@@ -10,6 +9,7 @@ export interface ToolsetCard {
   download: number
   commentCount: number
   practicalityAvg: number | null
+  resource_update_time: Date | string
 }
 
 export interface ToolsetDetail {
