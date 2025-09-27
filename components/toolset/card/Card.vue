@@ -39,8 +39,8 @@ defineProps<{
 
       <div class="text-default-600 flex items-center justify-between text-xs">
         <div class="flex gap-2">
+          <span>浏览 {{ t.view }}</span>
           <span>下载 {{ t.download }}</span>
-          <span>评论 {{ t.commentCount }}</span>
         </div>
         <span v-if="t.practicalityAvg != null">
           实用性 {{ t.practicalityAvg.toFixed(1) }}
@@ -53,7 +53,7 @@ defineProps<{
           {{ formatTimeDifference(t.resource_update_time) }}
         </span>
 
-        <KunBadge class-name="ml-auto" color="primary" size="xs">
+        <KunBadge class-name="ml-auto" color="primary" size="sm">
           {{ KUN_GALGAME_TOOLSET_TYPE_MAP[t.type] || t.type }}
         </KunBadge>
       </div>

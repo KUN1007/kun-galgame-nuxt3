@@ -5,6 +5,7 @@ model galgame_toolset {
   description String @default("") @db.VarChar(2000)
 
   status               Int       @default(0)
+  view                 Int       @default(0)
   type                 String    @default("")
   language             String    @default("")
   platform             String    @default("")

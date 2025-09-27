@@ -8,26 +8,31 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
-  const res = await prisma.galgame_toolset_resource.findUnique({
-    where: { id: input.toolsetResourceId },
-    include: {
-      user: {
-        select: {
-          id: true,
-          name: true,
-          avatar: true
+  const res = await prisma.$transaction(async (prisma) => {
+    const res = await prisma.galgame_toolset_resource.findUnique({
+      where: { id: input.toolsetResourceId },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            avatar: true
+          }
         }
       }
-    }
+    })
+
+    await prisma.galgame_toolset_resource.update({
+      where: { id: input.toolsetResourceId },
+      data: { download: { increment: 1 } }
+    })
+
+    return res
   })
+
   if (!res) {
     return kunError(event, '未找到该工具集')
   }
-
-  await prisma.galgame_toolset_resource.update({
-    where: { id: input.toolsetResourceId },
-    data: { download: { increment: 1 } }
-  })
 
   return res satisfies ToolsetResourceDetail
 })

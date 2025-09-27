@@ -9,7 +9,13 @@ import {
 
 export const getToolsetSchema = z.object({
   page: z.coerce.number().min(1).max(9999999),
-  limit: z.coerce.number().min(1).max(50)
+  limit: z.coerce.number().min(1).max(24),
+  type: z.enum([...KUN_TOOLSET_TYPE_CONST, 'all']),
+  language: z.enum([...KUN_TOOLSET_LANGUAGE_CONST, 'all']),
+  platform: z.enum([...KUN_TOOLSET_PLATFORM_CONST, 'all']),
+  version: z.enum([...KUN_TOOLSET_VERSION_CONST, 'all']),
+  sortField: z.enum(['resource_update_time', 'created', 'view']),
+  sortOrder: z.enum(['asc', 'desc'])
 })
 
 export const getToolsetDetailSchema = z.object({

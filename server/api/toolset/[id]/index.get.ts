@@ -8,36 +8,45 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
-  const toolset = await prisma.galgame_toolset.findUnique({
-    where: { id: input.toolsetId },
-    include: {
-      user: {
-        select: {
-          id: true,
-          name: true,
-          avatar: true
-        }
-      },
-      alias: {
-        select: {
-          name: true
-        }
-      },
-      practicality: {
-        select: {
-          rate: true
-        }
-      },
-      resource: {
-        select: {
-          id: true,
-          type: true,
-          size: true,
-          download: true,
-          status: true
+  const toolset = await prisma.$transaction(async (prisma) => {
+    const res = await prisma.galgame_toolset.findUnique({
+      where: { id: input.toolsetId },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            avatar: true
+          }
+        },
+        alias: {
+          select: {
+            name: true
+          }
+        },
+        practicality: {
+          select: {
+            rate: true
+          }
+        },
+        resource: {
+          select: {
+            id: true,
+            type: true,
+            size: true,
+            download: true,
+            status: true
+          }
         }
       }
-    }
+    })
+
+    await prisma.galgame_toolset.update({
+      where: { id: input.toolsetId },
+      data: { view: { increment: 1 } }
+    })
+
+    return res
   })
 
   if (!toolset) {

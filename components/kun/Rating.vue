@@ -72,7 +72,7 @@ const onLeave = () => {
       :class="
         cn(
           'disabled:text-default-200 cursor-pointer hover:scale-110 focus:outline-none disabled:cursor-not-allowed',
-          current >= val ? 'text-warning' : 'text-default-300'
+          current >= val ? 'text-secondary' : 'text-default-300'
         )
       "
       :disabled="disabled"
@@ -82,9 +82,8 @@ const onLeave = () => {
       :title="`${val}/${max}`"
     >
       <KunIcon
-        :name="current >= val ? 'ri:star-fill' : 'ri:star-line'"
-        :class="iconSize"
-        class="transition-colors"
+        name="lucide:lollipop"
+        :class="cn('transition-colors', current >= val ? '' : '', iconSize)"
       />
     </button>
   </div>

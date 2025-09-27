@@ -17,7 +17,7 @@ export const KUN_GALGAME_TOOLSET_TYPE_MAP: Record<string, string> = {
 export const kunGalgameToolsetTypeOptions: KunSelectOption[] = [
   { value: 'all', label: '全部类型' },
   { value: 'emulator', label: '模拟器相关 (KRKR 等)' },
-  { value: 'translator', label: '翻译相关 (翻译器, 文本 Hook, OCR 等)' },
+  { value: 'translator', label: '翻译相关 (翻译器, Hook 等)' },
   { value: 'extractor', label: '解包工具' },
   { value: 'converter', label: '资源转换 (音频/图片/字体)' },
   { value: 'engine', label: '引擎相关工具' },
@@ -92,18 +92,21 @@ export const KUN_TOOLSET_PLATFORM_CONST = [
 ] as const
 
 export const KUN_GALGAME_TOOLSET_VERSION_MAP: Record<string, string> = {
+  all: '全部版本',
   alpha: '内测版本',
   beta: '公测版本',
   rc: '候选版本',
   stable: '稳定版本'
 }
 export const kunGalgameToolsetVersionOptions: KunSelectOption[] = [
+  { value: 'all', label: '全部版本' },
   { value: 'alpha', label: '内测版本' },
   { value: 'beta', label: '公测版本' },
   { value: 'rc', label: '候选版本' },
   { value: 'stable', label: '稳定版本' }
 ]
 export const KUN_TOOLSET_VERSION_CONST = [
+  'all',
   'alpha',
   'beta',
   'rc',
@@ -137,3 +140,15 @@ export const KUN_GALGAME_TOOLSET_UPLOAD_STATUS_CONST = [
   'largeComplete',
   'complete'
 ] as const
+
+export const KUN_GALGAME_TOOLSET_SORT_FIELD_MAP: Record<string, string> = {
+  resource_update_time: '资源更新时间',
+  created: '发布时间',
+  view: '浏览数'
+}
+
+export const kunGalgameToolsetSortFieldOptions: KunSelectOption[] = [
+  { value: 'resource_update_time', label: '资源更新时间' },
+  { value: 'created', label: '发布时间' },
+  { value: 'view', label: '浏览数' }
+]

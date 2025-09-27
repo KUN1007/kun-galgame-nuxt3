@@ -8,14 +8,31 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
-  const { page, limit } = input
+  const {
+    page,
+    limit,
+    type,
+    language,
+    platform,
+    version,
+    sortField,
+    sortOrder
+  } = input
   const skip = (page - 1) * limit
 
+  const where = {
+    status: { not: 1 },
+    ...(type !== 'all' ? { type } : {}),
+    ...(language !== 'all' ? { language } : {}),
+    ...(platform !== 'all' ? { platform } : {}),
+    ...(version !== 'all' ? { version } : {})
+  }
+
   const [totalCount, data] = await Promise.all([
-    prisma.galgame_toolset.count({ where: { status: { not: 1 } } }),
+    prisma.galgame_toolset.count({ where }),
     prisma.galgame_toolset.findMany({
-      where: { status: { not: 1 } },
-      orderBy: { updated: 'desc' },
+      where,
+      orderBy: { [sortField]: sortOrder },
       skip,
       take: limit,
       include: {
@@ -45,6 +62,7 @@ export default defineEventHandler(async (event) => {
       language: t.language,
       version: t.version,
       download: totalDownload,
+      view: t.view,
       commentCount: t.comment.length,
       resource_update_time: t.resource_update_time,
       practicalityAvg

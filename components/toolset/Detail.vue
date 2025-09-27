@@ -204,6 +204,7 @@ const handleResourceUpdated = (res: ToolsetResource) => {
 
           <div class="space-y-2">
             <h3 class="font-semibold">实用性评分</h3>
+            <p class="text-default-500 text-sm">点击以评分</p>
             <div v-if="practicalityData" class="flex items-center gap-2">
               <KunRating
                 :model-value="practicalityData.mine"
@@ -218,8 +219,10 @@ const handleResourceUpdated = (res: ToolsetResource) => {
       </div>
 
       <div class="flex flex-wrap items-center justify-between gap-2">
-        <div class="text-default-500">
-          {{ `${formatNumber(data.download)} 次下载` }}
+        <div class="text-default-500 text-sm">
+          {{ `${formatNumber(data.view)} 浏览` }}
+          ·
+          {{ `${formatNumber(data.download)} 下载` }}
         </div>
         <div class="flex gap-1">
           <KunButton @click="handlePublishResource">上传/添加资源</KunButton>

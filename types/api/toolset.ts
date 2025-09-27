@@ -6,6 +6,7 @@ export interface ToolsetCard {
   platform: string
   language: string
   version: string
+  view: number
   download: number
   commentCount: number
   practicalityAvg: number | null
@@ -22,6 +23,7 @@ export interface ToolsetDetail {
   version: string
   homepage: string[]
   download: number
+  view: number
   user: KunUser
   aliases: string[]
   practicalityAvg: number | null

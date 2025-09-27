@@ -1,8 +1,5 @@
 <script setup lang="ts">
-const pageData = reactive({
-  page: 1,
-  limit: 48
-})
+const pageData = storeToRefs(useTempToolsetStore())
 
 const { data, status } = await useFetch(`/api/toolset`, {
   method: 'GET',
@@ -16,9 +13,13 @@ const { data, status } = await useFetch(`/api/toolset`, {
     <KunCard class-name="z-10" :is-hoverable="false" :is-transparent="false">
       <KunHeader
         name="Galgame 工具集"
-        description="收录与 Galgame 相关的工具：模拟器、文本提取、系统辅助、补丁汉化等"
+        description="收录 Galgame 相关工具：模拟器、翻译器、提取器等"
         :is-show-divider="false"
-      />
+      >
+        <template #endContent>
+          <ToolsetCardNav />
+        </template>
+      </KunHeader>
     </KunCard>
 
     <KunLoading :loading="status === 'pending'">
@@ -31,8 +32,8 @@ const { data, status } = await useFetch(`/api/toolset`, {
       content-class="gap-3"
     >
       <KunPagination
-        v-model:current-page="pageData.page"
-        :total-page="Math.ceil(data.totalCount / pageData.limit)"
+        v-model:current-page="pageData.page.value"
+        :total-page="Math.ceil(data.totalCount / pageData.limit.value)"
         :is-loading="status === 'pending'"
       />
     </KunCard>
