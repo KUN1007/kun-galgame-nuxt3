@@ -7,7 +7,6 @@ export interface ToolsetStoreTemp {
     | 'translator'
     | 'extractor'
     | 'converter'
-    | 'engine'
     | 'debug'
     | 'launcher'
     | 'script'

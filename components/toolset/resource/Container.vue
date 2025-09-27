@@ -38,7 +38,9 @@ const handleUploadSuccess = (value: ToolsetUploadCompleteResponse) => {
   <div class="max-w-2xl space-y-3">
     <h3 class="mb-3 text-lg font-semibold">发布资源</h3>
 
-    <KunLink to="/doc">发布 Galgame 工具下载资源规定</KunLink>
+    <KunLink to="/doc/notice/create-galgame-toolset">
+      发布 Galgame 工具下载资源规定
+    </KunLink>
 
     <div class="flex flex-col gap-1">
       <p class="text-default-700 text-sm">

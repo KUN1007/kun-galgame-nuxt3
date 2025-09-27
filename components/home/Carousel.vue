@@ -2,7 +2,10 @@
 import { useMouseInElement } from '@vueuse/core'
 
 const { data: pinnedPosts } = await useAsyncData(() => {
-  return queryCollection('content').where('pin', '=', true).all()
+  return queryCollection('content')
+    .where('pin', '=', true)
+    .order('modifiedTime', 'DESC')
+    .all()
 })
 
 const currentSlide = ref(0)
