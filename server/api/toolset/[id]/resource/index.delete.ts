@@ -34,9 +34,16 @@ export default defineEventHandler(async (event) => {
     )
   }
 
-  await prisma.galgame_toolset_resource.delete({
-    where: { id: input.toolsetResourceId }
-  })
+  return prisma.$transaction(async (prisma) => {
+    await prisma.user.update({
+      where: { id: toolsetResource.user_id },
+      data: { moemoepoint: { increment: -3 } }
+    })
 
-  return 'MOEMOE delete toolset successfully!'
+    await prisma.galgame_toolset_resource.delete({
+      where: { id: input.toolsetResourceId }
+    })
+
+    return 'MOEMOE delete toolset successfully!'
+  })
 })

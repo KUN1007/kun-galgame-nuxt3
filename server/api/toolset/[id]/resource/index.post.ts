@@ -4,6 +4,7 @@ import {
   getUploadCache,
   removeUploadCache
 } from '~/server/utils/upload/saveUploadSalt'
+import { isValidArchive } from '~/utils/validate'
 import type { ToolsetResource } from '~/types/api/toolset'
 
 export default defineEventHandler(async (event) => {
@@ -20,6 +21,9 @@ export default defineEventHandler(async (event) => {
   const { toolsetId, content, code, password, size, note, salt } = input
 
   const fileCache = await getUploadCache(salt)
+  if (fileCache && !isValidArchive(fileCache.key)) {
+    return kunError(event, '非法的文件扩展名')
+  }
 
   const toolset = await prisma.galgame_toolset.findUnique({
     where: { id: toolsetId },
@@ -58,6 +62,11 @@ export default defineEventHandler(async (event) => {
     await p.galgame_toolset.update({
       where: { id: toolset.id },
       data: { resource_update_time: new Date() }
+    })
+
+    await prisma.user.update({
+      where: { id: userInfo.uid },
+      data: { moemoepoint: { increment: 3 } }
     })
 
     await p.galgame_toolset_contributor.createMany({

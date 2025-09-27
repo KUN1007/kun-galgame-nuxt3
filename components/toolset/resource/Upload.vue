@@ -23,7 +23,6 @@ const emits = defineEmits<{
 const fileInput = ref<HTMLInputElement>()
 const selectedFile = ref<File | null>(null)
 
-const uploading = ref(false)
 const progress = ref(0)
 const uploadStatus =
   ref<(typeof KUN_GALGAME_TOOLSET_UPLOAD_STATUS_CONST)[number]>('idle')
@@ -45,7 +44,12 @@ const statusMessage = computed(() => {
 const pick = () => fileInput.value?.click()
 const onChange = (e: Event) => {
   const t = e.target as HTMLInputElement
-  selectedFile.value = t.files && t.files[0] ? t.files[0] : null
+  const targetFile = t.files && t.files[0] ? t.files[0] : null
+  if (!isValidArchive(targetFile?.name || '')) {
+    useMessage('我们仅支持 .7z, .zip, .rar 压缩格式上传', 'warn')
+    return
+  }
+  selectedFile.value = targetFile
 }
 const onDrop = (e: DragEvent) => {
   e.preventDefault()
@@ -53,12 +57,18 @@ const onDrop = (e: DragEvent) => {
   isDragging.value = false
   const dt = e.dataTransfer
   if (dt?.files && dt.files.length > 0) {
+    if (!isValidArchive(dt.files[0].name || '')) {
+      useMessage('我们仅支持 .7z, .zip, .rar 压缩格式上传', 'warn')
+      return
+    }
     selectedFile.value = dt.files[0]
   }
 }
 const onDragOver = (e: DragEvent) => {
   e.preventDefault()
-  if (e.dataTransfer) e.dataTransfer.dropEffect = 'copy'
+  if (e.dataTransfer) {
+    e.dataTransfer.dropEffect = 'copy'
+  }
 }
 const onDragEnter = () => {
   isDragging.value = true
@@ -68,7 +78,9 @@ const onDragLeave = () => {
 }
 const clearSelected = () => {
   selectedFile.value = null
-  if (fileInput.value) fileInput.value.value = ''
+  if (fileInput.value) {
+    fileInput.value.value = ''
+  }
   uploadStatus.value = 'idle'
 }
 
@@ -84,7 +96,6 @@ const uploadSmall = async (f: File) => {
     return
   }
 
-  uploading.value = true
   const initRes = await $fetch(`/api/toolset/${props.toolsetId}/upload/small`, {
     method: 'POST',
     body: initUploadData,
@@ -92,7 +103,6 @@ const uploadSmall = async (f: File) => {
     ...kungalgameResponseHandler
   })
   if (!initRes) {
-    uploading.value = false
     uploadStatus.value = 'idle'
     return
   }
@@ -130,8 +140,7 @@ const uploadSmall = async (f: File) => {
       emits('onUploadSuccess', done)
     }
   } finally {
-    uploading.value = false
-    uploadStatus.value = 'idle'
+    uploadStatus.value = 'complete'
   }
 }
 
@@ -147,7 +156,6 @@ const uploadLarge = async (f: File) => {
     return
   }
 
-  uploading.value = true
   progress.value = 0
   const initRes = await $fetch(`/api/toolset/${props.toolsetId}/upload/large`, {
     method: 'POST',
@@ -156,7 +164,6 @@ const uploadLarge = async (f: File) => {
     ...kungalgameResponseHandler
   })
   if (!initRes) {
-    uploading.value = false
     uploadStatus.value = 'idle'
     return
   }
@@ -240,8 +247,7 @@ const uploadLarge = async (f: File) => {
       })
     }
   } finally {
-    uploading.value = false
-    uploadStatus.value = 'idle'
+    uploadStatus.value = 'complete'
   }
 }
 
@@ -263,80 +269,96 @@ const submit = async () => {
   <div class="space-y-4">
     <input ref="fileInput" type="file" hidden @change="onChange" />
 
-    <KunCard
-      :is-hoverable="false"
-      :is-pressable="false"
-      :is-transparent="true"
-      class-name="p-4"
-    >
-      <div class="space-y-4">
-        <div
-          class="cursor-pointer rounded-lg border-2 border-dashed p-8 text-center transition-colors"
-          :class="
-            cn(
-              isDragging
-                ? 'border-primary-500 bg-primary-50/50'
-                : 'border-default-300 hover:border-default-500'
-            )
-          "
-          @click="pick"
-          @drop="onDrop"
-          @dragover="onDragOver"
-          @dragenter="onDragEnter"
-          @dragleave="onDragLeave"
-        >
-          <div v-if="!selectedFile" class="flex flex-col items-center gap-2">
+    <KunCard :is-hoverable="false" :is-pressable="false" :is-transparent="true">
+      <div
+        class="cursor-pointer rounded-lg border-2 border-dashed p-6 text-center transition-colors"
+        :class="
+          cn(
+            isDragging
+              ? 'border-primary-500 bg-primary-50/50'
+              : 'border-default-300 hover:border-default-500'
+          )
+        "
+        @click="pick"
+        @drop="onDrop"
+        @dragover="onDragOver"
+        @dragenter="onDragEnter"
+        @dragleave="onDragLeave"
+      >
+        <div v-if="!selectedFile" class="flex flex-col items-center gap-2">
+          <KunIcon
+            name="lucide:upload-cloud"
+            class="text-default-500 text-3xl"
+          />
+          <div class="text-default-600">点击或拖拽文件到此处</div>
+        </div>
+
+        <div v-else class="flex flex-col justify-center gap-2">
+          <div class="flex items-center gap-3">
             <KunIcon
-              name="lucide:upload-cloud"
-              class="text-default-500 text-3xl"
+              name="lucide:file-check"
+              class="text-success-600 text-xl"
             />
-            <div class="text-default-600">点击或拖拽文件到此处</div>
-            <div class="text-default-400 text-xs">
-              {{ '提示信息' }}
-            </div>
-          </div>
-          <div v-else class="flex flex-col items-center gap-2">
-            <KunIcon name="lucide:file" class="text-default-500 text-2xl" />
             <div class="text-default-700 font-medium">
               {{ selectedFile?.name }}
             </div>
+          </div>
+
+          <div class="flex items-center gap-3">
             <div class="text-default-500 text-xs">
               {{ formatFileSize(selectedFile!.size) }}
             </div>
             <span
               class="border-default-200 bg-default-100 text-default-600 rounded-full border px-2 py-0.5 text-xs"
             >
-              {{ isLarge ? '分片上传 (S3)' : '直传 (S3)' }}
+              {{
+                isLarge
+                  ? `文件大于 ${MAX_SMALL_FILE_SIZE / (1024 * 1024)}MB, 分片上传`
+                  : `文件小于 ${MAX_SMALL_FILE_SIZE / (1024 * 1024)}MB, 直接上传`
+              }}
             </span>
-            <KunButton
-              variant="light"
-              color="danger"
-              @click.stop="clearSelected"
-            >
-              移除文件
-            </KunButton>
           </div>
-        </div>
 
-        <div v-if="uploading" class="bg-default-100 w-full rounded p-2">
           <div class="bg-default-200 h-2 w-full rounded">
             <div
               class="bg-primary-500 h-2 rounded"
               :style="{ width: `${progress}%` }"
             />
           </div>
-          <div class="text-default-600 mt-2 text-right text-sm">
-            {{ statusMessage }}
+
+          <div
+            class="text-default-500 flex items-center justify-center gap-2 text-sm"
+          >
+            <span>{{ statusMessage }}</span>
+            <KunIcon
+              class="text-sm"
+              v-if="uploadStatus !== 'idle' && uploadStatus !== 'complete'"
+              name="svg-spinners:90-ring-with-bg"
+            />
+            <KunIcon
+              class="text-success-600 text-sm"
+              v-if="uploadStatus === 'complete'"
+              name="lucide:circle-check-big"
+            />
           </div>
         </div>
       </div>
     </KunCard>
 
-    <div class="flex justify-end gap-2">
-      <KunButton variant="light" color="danger" @click="emits('onClose')">
-        取消
+    <div class="flex items-center justify-end gap-2">
+      <KunButton
+        v-if="selectedFile"
+        variant="light"
+        color="danger"
+        @click.stop="clearSelected"
+      >
+        移除文件
       </KunButton>
-      <KunButton :loading="uploading" :disabled="!selectedFile" @click="submit">
+      <KunButton
+        :loading="uploadStatus !== 'idle' && uploadStatus !== 'complete'"
+        :disabled="!selectedFile || uploadStatus === 'complete'"
+        @click="submit"
+      >
         确认上传
       </KunButton>
     </div>

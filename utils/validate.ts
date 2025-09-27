@@ -105,6 +105,12 @@ export const isValidKunLanguage = (
   return isNotEmpty && isWithinLengthLimit
 }
 
+export const isValidArchive = (filename: string) => {
+  const allowed = ['.zip', '.7z', '.rar']
+  const lowerName = filename.toLowerCase()
+  return allowed.some((ext) => lowerName.endsWith(ext))
+}
+
 const botUserAgents = [
   'googlebot',
   'bingbot',

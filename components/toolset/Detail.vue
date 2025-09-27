@@ -10,7 +10,7 @@ import type { ToolsetRating, ToolsetResource } from '~/types/api/toolset'
 
 const props = defineProps<{ id: number }>()
 
-const { data, refresh } = await useFetch(`/api/toolset/${props.id}`, {
+const { data } = await useFetch(`/api/toolset/${props.id}`, {
   method: 'GET',
   query: { toolsetId: props.id },
   ...kungalgameResponseHandler
@@ -26,7 +26,11 @@ const handleDeleteToolset = async () => {
   if (!data?.value) {
     return
   }
-  const res = await useComponentMessageStore().alert('确定删除该工具？')
+  const moemoePointToConsume = 3 + data.value.resource.length * 3
+  const res = await useComponentMessageStore().alert(
+    '确定删除该工具？',
+    `删除这个工具将会消耗 ${moemoePointToConsume} 萌萌点, 计算公式为 3 + 这个工具下所有的资源数 * 3, 删除是永久性的, 不可撤销`
+  )
   if (!res) {
     return
   }
@@ -100,16 +104,22 @@ const handleSetStar = async (val: number) => {
 }
 
 const handleResourceDeleted = (toolsetResourceId: number) => {
-  if (!data?.value) return
+  if (!data?.value) {
+    return
+  }
   data.value.resource = data.value.resource.filter(
     (r) => r.id !== toolsetResourceId
   )
 }
 
 const handleResourceUpdated = (res: ToolsetResource) => {
-  if (!data?.value) return
+  if (!data?.value) {
+    return
+  }
   const idx = data.value.resource.findIndex((r) => r.id === res.id)
-  if (idx !== -1) data.value.resource[idx] = res
+  if (idx !== -1) {
+    data.value.resource[idx] = res
+  }
 }
 </script>
 
@@ -123,11 +133,8 @@ const handleResourceUpdated = (res: ToolsetResource) => {
       <div class="space-y-3">
         <h1 class="text-2xl leading-tight font-bold">{{ data.name }}</h1>
         <div class="mt-2 flex flex-wrap items-center gap-2">
-          <template v-for="(a, i) in data.aliases" :key="i">
-            <KunBadge v-if="a" color="default" size="sm">{{ a }}</KunBadge>
-          </template>
           <KunBadge color="secondary" size="sm">
-            v{{ KUN_GALGAME_TOOLSET_VERSION_MAP[data.version] }}
+            {{ KUN_GALGAME_TOOLSET_VERSION_MAP[data.version] }}
           </KunBadge>
           <KunBadge color="success" size="sm">
             {{ KUN_GALGAME_TOOLSET_PLATFORM_MAP[data.platform] }}
@@ -139,6 +146,12 @@ const handleResourceUpdated = (res: ToolsetResource) => {
             {{ KUN_GALGAME_TOOLSET_TYPE_MAP[data.type] }}
           </KunBadge>
         </div>
+
+        <KunInfo color="info" title="工具简介">
+          <pre class="font-sans text-base break-all whitespace-pre-line">
+            {{ data.description }}
+          </pre>
+        </KunInfo>
       </div>
 
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -152,9 +165,6 @@ const handleResourceUpdated = (res: ToolsetResource) => {
           <div v-else class="h-[306px] w-full">
             <KunLoading />
           </div>
-
-          <h1 class="font-bold">简介</h1>
-          <div class="text-default-600">{{ data.description }}</div>
         </div>
 
         <div class="space-y-6 md:col-span-1">
@@ -178,6 +188,20 @@ const handleResourceUpdated = (res: ToolsetResource) => {
             </div>
           </div>
 
+          <div v-if="data.aliases.length" class="space-y-2">
+            <h3 class="font-semibold">别名</h3>
+            <div class="flex flex-wrap items-center gap-2">
+              <KunBadge
+                v-for="(a, i) in data.aliases"
+                :key="i"
+                color="default"
+                size="sm"
+              >
+                {{ a }}
+              </KunBadge>
+            </div>
+          </div>
+
           <div class="space-y-2">
             <h3 class="font-semibold">实用性评分</h3>
             <div v-if="practicalityData" class="flex items-center gap-2">
@@ -185,9 +209,9 @@ const handleResourceUpdated = (res: ToolsetResource) => {
                 :model-value="practicalityData.mine"
                 @set="handleSetStar"
               />
-              <KunBadge size="sm" variant="flat"
-                >{{ practicalityData.mine }} / 5</KunBadge
-              >
+              <KunBadge size="sm" variant="flat">
+                {{ practicalityData.mine }} / 5
+              </KunBadge>
             </div>
           </div>
         </div>
@@ -243,12 +267,14 @@ const handleResourceUpdated = (res: ToolsetResource) => {
     <KunModal
       :modal-value="showResourceModal"
       @update:modal-value="(v) => (showResourceModal = v)"
+      :is-dismissable="false"
     >
       <div class="max-w-2xl">
         <h3 class="mb-3 text-lg font-semibold">发布资源</h3>
         <ToolsetResourceContainer
           :toolset-id="data.id"
-          :on-close="() => (showResourceModal = false)"
+          @on-close="() => (showResourceModal = false)"
+          @on-success="(value) => data!.resource.push(value)"
         />
       </div>
     </KunModal>

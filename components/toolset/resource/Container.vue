@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import type { ToolsetUploadCompleteResponse } from '~/types/api/toolset'
+import type {
+  ToolsetUploadCompleteResponse,
+  ToolsetResource
+} from '~/types/api/toolset'
 
 const props = defineProps<{
   toolsetId: number
-  onClose: () => void
 }>()
 
 const emits = defineEmits<{
   onClose: []
+  onSuccess: [ToolsetResource]
 }>()
 
 const mode = ref<'s3' | 'user'>('s3')
@@ -19,7 +22,7 @@ const uploadResult = ref<ToolsetUploadCompleteResponse>({
 </script>
 
 <template>
-  <div class="space-y-4">
+  <div class="z-10 space-y-4">
     <div class="flex items-center gap-6">
       <KunCheckBox
         type="single"
@@ -44,9 +47,10 @@ const uploadResult = ref<ToolsetUploadCompleteResponse>({
 
     <ToolsetResourceLinkForm
       :toolset-id="props.toolsetId"
-      :on-close="emits('onClose')"
       :type="mode"
       :upload-result="uploadResult"
+      @on-close="emits('onClose')"
+      @on-success="(value) => emits('onSuccess', value)"
     />
   </div>
 </template>

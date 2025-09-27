@@ -79,7 +79,7 @@ export const createToolsetResourceSchema = z.object({
   salt: z.string().max(7).optional().default(''),
   content: z.string().max(1007).optional().default(''),
   size: z.string().refine((s) => ResourceSizePattern.test(s), {
-    message: '大小格式不正确, 需要包含 MB 或者 GB'
+    message: '大小格式不正确, 需要包含 KB, MB, GB'
   }),
   code: z.string().max(1007).optional().default(''),
   password: z.string().max(1007).optional().default(''),
@@ -90,7 +90,7 @@ export const updateToolsetResourceSchema = z.object({
   toolsetResourceId: z.coerce.number().min(1).max(9999999),
   content: z.string().max(1007).optional().default(''),
   size: z.string().refine((s) => ResourceSizePattern.test(s), {
-    message: '大小格式不正确, 需要包含 MB 或者 GB'
+    message: '大小格式不正确, 需要包含 KB, MB, GB'
   }),
   code: z.string().max(1007).optional().default(''),
   password: z.string().max(1007).optional().default(''),

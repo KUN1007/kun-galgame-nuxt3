@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { createToolsetResourceSchema } from '~/validations/toolset'
-import type { ToolsetUploadCompleteResponse } from '~/types/api/toolset'
+import type {
+  ToolsetUploadCompleteResponse,
+  ToolsetResource
+} from '~/types/api/toolset'
 
 const props = defineProps<{
   toolsetId: number
@@ -10,6 +13,7 @@ const props = defineProps<{
 
 const emits = defineEmits<{
   onClose: []
+  onSuccess: [ToolsetResource]
 }>()
 
 const formData = reactive({
@@ -24,6 +28,14 @@ const formData = reactive({
   note: ''
 })
 const isLoading = ref(false)
+
+watch(
+  () => props.uploadResult,
+  () => {
+    formData.salt = props.uploadResult.salt
+    formData.size = formatFileSize(props.uploadResult.filesize)
+  }
+)
 
 const submitLink = async () => {
   const result = useSchemaValidator(createToolsetResourceSchema, formData)
@@ -40,8 +52,11 @@ const submitLink = async () => {
   })
   isLoading.value = false
 
-  if (ok) {
+  if (typeof ok === 'string') {
+    useMessage(ok, 'warn')
+  } else {
     useMessage('资源发布成功', 'success')
+    emits('onSuccess', ok)
     emits('onClose')
   }
 }
@@ -50,7 +65,7 @@ const submitLink = async () => {
 <template>
   <div class="space-y-3">
     <KunInput
-      placeholder="大小 (如 1007MB, 0721GB)"
+      placeholder="大小 (如 520KB, 1007MB, 0721GB)"
       :disabled="props.type === 's3'"
       v-model="formData.size"
     />

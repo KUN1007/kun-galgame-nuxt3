@@ -8,7 +8,7 @@ const props = defineProps<{
   isNSFWTopic?: boolean
 }>()
 
-const isRecentlyUpvoted = computed(() => hourDiff(props.upvoteTime || 0, 10))
+const isRecentlyUpvoted = computed(() => hourDiff(props.upvoteTime || 0, 24))
 </script>
 
 <template>

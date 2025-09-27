@@ -12,24 +12,31 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
-  const created = await prisma.galgame_toolset.create({
-    data: {
-      name: input.name,
-      description: input.description,
-      language: input.language,
-      platform: input.platform,
-      type: input.type,
-      version: input.version,
-      homepage: input.homepage,
-      user_id: userInfo.uid
-    }
-  })
-
-  if (input.aliases.length) {
-    await prisma.galgame_toolset_alias.createMany({
-      data: input.aliases.map((name) => ({ name, toolset_id: created.id }))
+  return prisma.$transaction(async (prisma) => {
+    const created = await prisma.galgame_toolset.create({
+      data: {
+        name: input.name,
+        description: input.description,
+        language: input.language,
+        platform: input.platform,
+        type: input.type,
+        version: input.version,
+        homepage: input.homepage,
+        user_id: userInfo.uid
+      }
     })
-  }
 
-  return created.id
+    await prisma.user.update({
+      where: { id: userInfo.uid },
+      data: { moemoepoint: { increment: 3 } }
+    })
+
+    if (input.aliases.length) {
+      await prisma.galgame_toolset_alias.createMany({
+        data: input.aliases.map((name) => ({ name, toolset_id: created.id }))
+      })
+    }
+
+    return created.id
+  })
 })

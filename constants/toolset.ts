@@ -92,16 +92,16 @@ export const KUN_TOOLSET_PLATFORM_CONST = [
 ] as const
 
 export const KUN_GALGAME_TOOLSET_VERSION_MAP: Record<string, string> = {
-  alpha: '内测',
-  beta: '公测',
-  rc: '候选',
-  stable: '稳定'
+  alpha: '内测版本',
+  beta: '公测版本',
+  rc: '候选版本',
+  stable: '稳定版本'
 }
 export const kunGalgameToolsetVersionOptions: KunSelectOption[] = [
-  { value: 'alpha', label: '内测' },
-  { value: 'beta', label: '公测' },
-  { value: 'rc', label: '候选' },
-  { value: 'stable', label: '稳定' }
+  { value: 'alpha', label: '内测版本' },
+  { value: 'beta', label: '公测版本' },
+  { value: 'rc', label: '候选版本' },
+  { value: 'stable', label: '稳定版本' }
 ]
 export const KUN_TOOLSET_VERSION_CONST = [
   'alpha',
@@ -117,13 +117,14 @@ export const KUN_GALGAME_TOOLSET_STORAGE_MAP: Record<string, string> = {
 export const KUN_TOOLSET_STORAGE_CONST = ['s3', 'user'] as const
 
 export const KUN_GALGAME_TOOLSET_UPLOAD_STATUS_MAP: Record<string, string> = {
-  idle: '未开始上传，请添加文件',
+  idle: '未开始上传',
   smallInit: '正在请求小文件上传接口',
   smallUploading: '正在上传小文件',
   smallComplete: '正在请求结束上传接口',
   largeInit: '正在请求大文件接口',
   largeUploading: '正在上传大文件【进度 ${progress.value}%】',
-  largeComplete: '正在请求结束上传接口'
+  largeComplete: '正在请求结束上传接口',
+  complete: '文件已成功上传'
 }
 
 export const KUN_GALGAME_TOOLSET_UPLOAD_STATUS_CONST = [
@@ -133,5 +134,6 @@ export const KUN_GALGAME_TOOLSET_UPLOAD_STATUS_CONST = [
   'smallComplete',
   'largeInit',
   'largeUploading',
-  'largeComplete'
+  'largeComplete',
+  'complete'
 ] as const

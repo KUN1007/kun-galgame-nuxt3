@@ -92,16 +92,16 @@ export default defineEventHandler(async (event) => {
   if (!user) {
     return kunError(event, '用户不存在', 205)
   }
-  if (user.role <= 1) {
-    const used = user.daily_toolset_upload_count || 0
-    if (used + actualBytes > MAX_DAILY_BYTES) {
-      return kunError(event, '超出当日可用上传额度，请明天再试')
-    }
-    await prisma.user.update({
-      where: { id: userInfo.uid },
-      data: { daily_toolset_upload_count: used + actualBytes }
-    })
+
+  const used = user.daily_toolset_upload_count || 0
+  if (used + actualBytes > MAX_DAILY_BYTES) {
+    return kunError(event, '超出当日可用上传额度，请明天再试')
   }
+
+  await prisma.user.update({
+    where: { id: userInfo.uid },
+    data: { daily_toolset_upload_count: used + actualBytes }
+  })
 
   return {
     salt,

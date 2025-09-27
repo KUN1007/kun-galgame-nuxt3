@@ -22,28 +22,33 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '您没有权限更新该工具集')
   }
 
-  await prisma.galgame_toolset.update({
-    where: { id: input.toolsetId },
-    data: {
-      name: input.name,
-      description: input.description,
-      language: input.language,
-      platform: input.platform,
-      type: input.type,
-      version: input.version,
-      homepage: input.homepage,
-      edited: new Date()
+  return prisma.$transaction(async (prisma) => {
+    await prisma.galgame_toolset.update({
+      where: { id: input.toolsetId },
+      data: {
+        name: input.name,
+        description: input.description,
+        language: input.language,
+        platform: input.platform,
+        type: input.type,
+        version: input.version,
+        homepage: input.homepage,
+        edited: new Date()
+      }
+    })
+
+    if (input.aliases && input.aliases.length) {
+      await prisma.galgame_toolset_alias.deleteMany({
+        where: { toolset_id: input.toolsetId }
+      })
+      await prisma.galgame_toolset_alias.createMany({
+        data: input.aliases.map((name) => ({
+          name,
+          toolset_id: input.toolsetId
+        }))
+      })
     }
+
+    return 'Moemoe update toolset successfully'
   })
-
-  if (input.aliases && input.aliases.length) {
-    await prisma.galgame_toolset_alias.deleteMany({
-      where: { toolset_id: input.toolsetId }
-    })
-    await prisma.galgame_toolset_alias.createMany({
-      data: input.aliases.map((name) => ({ name, toolset_id: input.toolsetId }))
-    })
-  }
-
-  return 'Moemoe update toolset successfully'
 })

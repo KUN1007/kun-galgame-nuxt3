@@ -111,7 +111,7 @@ const handleDelete = async () => {
   }
   const okConfirm = await useComponentMessageStore().alert(
     '确定删除该工具资源吗？',
-    '删除为永久删除, 不可恢复'
+    `删除资源将会消耗您 3 萌萌点, 资源将会永久删除, 不可恢复`
   )
   if (!okConfirm) {
     return
@@ -260,7 +260,7 @@ const handleSave = async () => {
       </div>
 
       <KunInfo v-if="detail.note" color="info" title="下载备注信息">
-        <pre class="break-all whitespace-pre-line">
+        <pre class="font-sans break-all whitespace-pre-line">
           {{ detail.note }}
         </pre>
       </KunInfo>
