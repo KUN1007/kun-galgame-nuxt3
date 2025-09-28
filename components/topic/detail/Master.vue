@@ -24,7 +24,7 @@ defineProps<{
       content-class="gap-3"
     >
       <h1
-        class="text-2xl font-bold tracking-tight sm:text-3xl"
+        class="text-xl font-bold tracking-tight sm:text-2xl"
         :style="{
           overflowWrap: 'break-word'
         }"
