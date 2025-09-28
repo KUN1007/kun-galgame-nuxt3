@@ -27,7 +27,7 @@ import { kunSpoilerPlugin } from './plugins/spoiler/spoilerPlugin'
 
 // Code Block
 import { defaultKeymap, indentWithTab } from '@codemirror/commands'
-import { keymap } from '@codemirror/view'
+import { keymap, EditorView } from '@codemirror/view'
 import {
   codeBlockComponent,
   codeBlockConfig,
@@ -43,6 +43,7 @@ import {
   visibilityOffIcon
 } from './plugins/code/icons'
 import { languages } from '@codemirror/language-data'
+import { kunCM } from './codemirror/theme'
 import type { Extension } from '@codemirror/state'
 
 const props = defineProps<{
@@ -89,6 +90,8 @@ const editorInfo = useEditor((root) =>
       })
 
       const extensions = [
+        kunCM(),
+        EditorView.lineWrapping,
         keymap.of(defaultKeymap.concat(indentWithTab)),
         basicSetup
       ]
@@ -102,16 +105,16 @@ const editorInfo = useEditor((root) =>
         expandIcon: chevronDownIcon,
         searchIcon: searchIcon,
         clearSearchIcon: clearIcon,
-        searchPlaceholder: 'Search language',
-        copyText: 'Copy',
+        searchPlaceholder: '搜索咒文',
+        copyText: '复制咒文',
         copyIcon: copyIcon,
         onCopy: () => {},
-        noResultText: 'No result',
+        noResultText: '无结果',
         renderLanguage: defaultConfig.renderLanguage,
         renderPreview: defaultConfig.renderPreview,
         previewToggleButton: (previewOnlyMode) => {
           const icon = previewOnlyMode ? editIcon : visibilityOffIcon
-          const text = previewOnlyMode ? 'Edit' : 'Hide'
+          const text = previewOnlyMode ? '编辑' : '隐藏'
           return [icon, text].map((v) => v.trim()).join(' ')
         },
         previewLabel: defaultConfig.previewLabel

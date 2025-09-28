@@ -63,6 +63,7 @@ export const createCodeMirrorState = ({ onChange, content }: StateOptions) => {
     doc: content,
     extensions: [
       kunCM(),
+      EditorView.lineWrapping,
       basicSetup,
       markdown(),
       EditorView.updateListener.of((viewUpdate) => {

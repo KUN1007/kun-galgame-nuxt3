@@ -14,6 +14,7 @@ overrides:
   safer-buffer: npm:@nolyfill/safer-buffer@^1
   string.prototype.matchall: npm:@nolyfill/string.prototype.matchall@^1
   which-typed-array: npm:@nolyfill/which-typed-array@^1
+  prosemirror-model: 1.25.3
 
 importers:
 
@@ -6215,9 +6216,6 @@ packages:
   prosemirror-keymap@1.2.3:
     resolution: {integrity: sha512-4HucRlpiLd1IPQQXNqeo81BGtkY8Ai5smHhKW9jjPKRc2wQIxksg7Hl1tTI2IfT2B/LgX6bfYvXxEpJl7aKYKw==}
 
-  prosemirror-model@1.25.0:
-    resolution: {integrity: sha512-/8XUmxWf0pkj2BmtqZHYJipTBMHIdVjuvFzMvEoxrtyGNmfvdhBiRwYt/eFwy2wA9DtBW3RLqvZnjurEkHaFCw==}
-
   prosemirror-model@1.25.3:
     resolution: {integrity: sha512-dY2HdaNXlARknJbrManZ1WyUtos+AP97AmvqdOQtWtrrC5g4mohVX5DTi9rXNFSk09eczLq9GuNTtq3EfMeMGA==}
 
@@ -6248,7 +6246,7 @@ packages:
   prosemirror-virtual-cursor@0.4.2:
     resolution: {integrity: sha512-pUMKnIuOhhnMcgIJUjhIQTVJruBEGxfMBVQSrK0g2qhGPDm1i12KdsVaFw15dYk+29tZcxjMeR7P5VDKwmbwJg==}
     peerDependencies:
-      prosemirror-model: ^1.0.0
+      prosemirror-model: 1.25.3
       prosemirror-state: ^1.0.0
       prosemirror-view: ^1.0.0
     peerDependenciesMeta:
@@ -15632,10 +15630,6 @@ snapshots:
       prosemirror-state: 1.4.3
       w3c-keyname: 2.2.8
 
-  prosemirror-model@1.25.0:
-    dependencies:
-      orderedmap: 2.1.1
-
   prosemirror-model@1.25.3:
     dependencies:
       orderedmap: 2.1.1
@@ -15653,7 +15647,7 @@ snapshots:
 
   prosemirror-state@1.4.3:
     dependencies:
-      prosemirror-model: 1.25.0
+      prosemirror-model: 1.25.3
       prosemirror-transform: 1.10.3
       prosemirror-view: 1.38.1
 
@@ -15667,7 +15661,7 @@ snapshots:
 
   prosemirror-transform@1.10.3:
     dependencies:
-      prosemirror-model: 1.25.0
+      prosemirror-model: 1.25.3
 
   prosemirror-transform@1.10.4:
     dependencies:
@@ -15675,7 +15669,7 @@ snapshots:
 
   prosemirror-view@1.38.1:
     dependencies:
-      prosemirror-model: 1.25.0
+      prosemirror-model: 1.25.3
       prosemirror-state: 1.4.3
       prosemirror-transform: 1.10.3
 

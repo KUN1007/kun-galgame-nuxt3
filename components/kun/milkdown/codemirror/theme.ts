@@ -3,9 +3,9 @@ import { HighlightStyle, syntaxHighlighting } from '@codemirror/language'
 import { tags as t } from '@lezer/highlight'
 import type { Extension } from '@codemirror/state'
 
-// Enhanced color palette with NextUI tokens
 const colors = {
   primary: 'var(--color-primary)',
+  selected: 'color-mix(in oklab,var(--color-primary)10%,transparent)',
   primaryLight: 'var(--color-primary-400)',
   primaryDark: 'var(--color-primary-600)',
   secondary: 'var(--color-secondary)',
@@ -43,21 +43,20 @@ export const kunCMTheme = () => {
     },
 
     '.cm-scroller': {
-      display: 'block !important',
       lineHeight: '1.5',
-      padding: '1rem 0.5rem',
       maxWidth: '100%',
-      scrollbarWidth: 'none',
-      '&>.div': {
-        maxWidth: '100%'
-      }
+      scrollbarWidth: 'none'
+    },
+
+    '.cm-content': {
+      padding: '1rem 0.5rem',
+      maxWidth: '100%'
     },
 
     '.cm-line': {
       padding: '0.2rem 0',
       borderRadius: '0.375rem',
       maxWidth: '100%',
-      whiteSpace: 'pre-wrap',
       fontSize: '1rem',
       '&:hover': {
         backgroundColor: colors.overlayLight
@@ -111,13 +110,22 @@ export const kunCMTheme = () => {
     '.cm-gutters': {
       backgroundColor: 'transparent',
       border: 'none',
-      borderRadius: '0.5rem',
-      fontSize: '0.85rem',
-      padding: '0 0.5rem'
+      borderRadius: '0',
+      fontSize: '1rem',
+      padding: '0'
     },
 
     '.cm-lineNumbers': {
       color: colors.content3
+    },
+
+    '&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection':
+      {
+        backgroundColor: colors.selected
+      },
+
+    '.cm-activeLineGutter': {
+      backgroundColor: colors.selected
     },
 
     '.cm-foldGutter': {
