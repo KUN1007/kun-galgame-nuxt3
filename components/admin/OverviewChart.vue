@@ -85,20 +85,30 @@ const chartOptions = computed<ApexOptions>(() => {
     }
   }
 })
+
+// for page transition render
+const showChart = ref(false)
+const nuxtApp = useNuxtApp()
+
+onMounted(() => {
+  nuxtApp.hook('page:transition:finish', () => {
+    showChart.value = true
+  })
+})
 </script>
 
 <template>
-  <div class="contents">
-    <ClientOnly>
+  <ClientOnly>
+    <template v-if="showChart">
       <VueApexCharts
         type="area"
         height="400"
         :options="chartOptions"
         :series="chartSeries"
       />
-      <template #fallback>
-        <KunLoading description="正在加载图表..." />
-      </template>
-    </ClientOnly>
-  </div>
+    </template>
+    <template #fallback>
+      <KunLoading description="正在加载图表..." />
+    </template>
+  </ClientOnly>
 </template>
