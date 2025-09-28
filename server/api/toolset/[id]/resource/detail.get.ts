@@ -29,9 +29,8 @@ export default defineEventHandler(async (event) => {
 
     return res
   })
-
   if (!res) {
-    return kunError(event, '未找到该工具集')
+    return kunError(event, '未找到该工具资源')
   }
 
   return res satisfies ToolsetResourceDetail

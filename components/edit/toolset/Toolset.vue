@@ -47,7 +47,7 @@ const handleSubmit = async () => {
   isSubmitting.value = false
 
   if (id) {
-    useMessage('创建工具集成功', 'success')
+    useMessage('创建工具成功', 'success')
     navigateTo(`/toolset/${id}`)
   }
 }
@@ -95,7 +95,7 @@ const handleUpdatePageLink = (value: string | number) => {
       <KunInput v-model="form.name" placeholder="工具名称" />
     </div>
 
-    <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+    <div class="grid grid-cols-2 gap-3">
       <KunSelect
         v-model="form.type"
         label="工具类型"
@@ -104,19 +104,10 @@ const handleUpdatePageLink = (value: string | number) => {
       <KunSelect
         v-model="form.version"
         label="版本"
-        :options="kunGalgameToolsetVersionOptions"
+        :options="
+          kunGalgameToolsetVersionOptions.filter((o) => o.value !== 'all')
+        "
       />
-    </div>
-
-    <div class="space-y-2">
-      <div class="text-sm font-medium">简介</div>
-      <KunTextarea
-        v-model="form.description"
-        placeholder="简要说明该工具用途..."
-      />
-    </div>
-
-    <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
       <KunSelect
         v-model="form.platform"
         label="平台"
@@ -134,11 +125,19 @@ const handleUpdatePageLink = (value: string | number) => {
     </div>
 
     <div class="space-y-2">
+      <div class="text-sm font-medium">简介</div>
+      <KunTextarea
+        v-model="form.description"
+        placeholder="简要说明该工具用途..."
+      />
+    </div>
+
+    <div class="space-y-2">
       <div class="text-sm font-medium">主页 / 下载链接</div>
       <KunTextarea
         :model-value="form.homepage.toString()"
         @update:model-value="handleUpdatePageLink"
-        placeholder="每行一个链接或以逗号分隔"
+        placeholder="如果有多个链接, 使用英语逗号分隔每个下载链接"
       />
     </div>
 
@@ -167,7 +166,7 @@ const handleUpdatePageLink = (value: string | number) => {
             @keydown.enter.prevent="handleAddAlias"
             @keydown.backspace="handleRemoveAlias"
             class="placeholder-default-500 text-default-700 min-w-[120px] flex-grow bg-transparent outline-none"
-            placeholder="输入别名后回车"
+            placeholder="输入别名后按下回车添加"
           />
         </div>
       </div>

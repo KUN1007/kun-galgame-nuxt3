@@ -16,10 +16,10 @@ export default defineEventHandler(async (event) => {
     where: { id: input.toolsetId }
   })
   if (!old) {
-    return kunError(event, '未找到该工具集')
+    return kunError(event, '未找到该工具资源')
   }
   if (old.user_id !== userInfo.uid && userInfo.role < 2) {
-    return kunError(event, '您没有权限更新该工具集')
+    return kunError(event, '您没有权限更新该工具资源')
   }
 
   return prisma.$transaction(async (prisma) => {

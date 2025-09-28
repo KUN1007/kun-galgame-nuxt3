@@ -1,7 +1,6 @@
 import type { KunSelectOption } from '~/components/kun/select/type'
 
 export const KUN_GALGAME_TOOLSET_TYPE_MAP: Record<string, string> = {
-  name: '工具类型',
   all: '全部类型',
   emulator: '模拟器相关',
   translator: '翻译相关',
@@ -26,8 +25,6 @@ export const kunGalgameToolsetTypeOptions: KunSelectOption[] = [
   { value: 'others', label: '其它' }
 ]
 export const KUN_TOOLSET_TYPE_CONST = [
-  'name',
-  'all',
   'emulator',
   'translator',
   'extractor',
@@ -65,7 +62,6 @@ export const KUN_TOOLSET_LANGUAGE_CONST = [
 ] as const
 
 export const KUN_GALGAME_TOOLSET_PLATFORM_MAP: Record<string, string> = {
-  name: '工具平台',
   all: '全部平台',
   windows: 'Windows',
   mac: 'macOS',
@@ -104,7 +100,6 @@ export const kunGalgameToolsetVersionOptions: KunSelectOption[] = [
   { value: 'stable', label: '稳定版本' }
 ]
 export const KUN_TOOLSET_VERSION_CONST = [
-  'all',
   'alpha',
   'beta',
   'rc',

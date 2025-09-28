@@ -33,7 +33,7 @@ const handleSubmit = async () => {
   })
   isSubmitting.value = false
 
-  useMessage('更新工具集成功', 'success')
+  useMessage('更新工具信息成功', 'success')
   navigateTo(`/toolset/${toolsetUpdateForm.toolsetId}`)
 }
 
@@ -72,7 +72,10 @@ const handleUpdatePageLink = (value: string | number) => {
     :is-transparent="false"
     content-class="space-y-6"
   >
-    <KunHeader name="编辑工具集" description="更新你发布的 Galgame 工具信息" />
+    <KunHeader
+      name="编辑工具信息"
+      description="更新你发布的 Galgame 工具信息"
+    />
 
     <div class="space-y-2">
       <label class="text-sm font-medium">名称</label>

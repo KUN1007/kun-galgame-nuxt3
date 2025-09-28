@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     where: { id: toolsetResourceId }
   })
   if (!toolsetResource) {
-    return kunError(event, '未找到该工具集资源')
+    return kunError(event, '未找到该工具资源')
   }
   if (userInfo.role < 2 && userInfo.uid !== toolsetResource.user_id) {
     return kunError(event, '您没有权限更改该工具资源')

@@ -6,26 +6,28 @@ import {
   KUN_GALGAME_TOOLSET_VERSION_MAP
 } from '~/constants/toolset'
 import { toolsetUpdateForm } from './rewriteStore'
-import type { ToolsetRating, ToolsetResource } from '~/types/api/toolset'
+import type {
+  ToolsetDetail,
+  ToolsetRating,
+  ToolsetResource
+} from '~/types/api/toolset'
 
-const props = defineProps<{ id: number }>()
-
-const { data } = await useFetch(`/api/toolset/${props.id}`, {
-  method: 'GET',
-  query: { toolsetId: props.id },
-  ...kungalgameResponseHandler
-})
+const props = defineProps<{
+  id: number
+  toolset: ToolsetDetail
+}>()
 
 const { id: uid, role } = usePersistUserStore()
-const canManageToolset = computed(
-  () => data?.value && (data.value.user.id === uid || role >= 2)
-)
+const data = computed(() => props.toolset)
+const canManageToolset = computed(() => data.value.user.id === uid || role >= 2)
 
 const isDeleting = ref(false)
 const handleDeleteToolset = async () => {
-  if (!data?.value) {
+  if (!uid) {
+    useMessage('请登陆后再删除', 'warn', 7000)
     return
   }
+
   const moemoePointToConsume = 3 + data.value.resource.length * 3
   const res = await useComponentMessageStore().alert(
     '确定删除该工具？',
@@ -43,18 +45,12 @@ const handleDeleteToolset = async () => {
   isDeleting.value = false
 
   if (ok) {
-    useMessage('已删除', 'success')
+    useMessage('已删除该工具', 'success')
     navigateTo('/toolset')
   }
 }
 
 const handleRewriteToolset = () => {
-  if (!data) {
-    return
-  }
-  if (!data.value) {
-    return
-  }
   toolsetUpdateForm.toolsetId = data.value.id
   toolsetUpdateForm.name = data.value.name
   toolsetUpdateForm.description = data.value.description
@@ -108,18 +104,12 @@ const handleSetStar = async (val: number) => {
 }
 
 const handleResourceDeleted = (toolsetResourceId: number) => {
-  if (!data?.value) {
-    return
-  }
   data.value.resource = data.value.resource.filter(
     (r) => r.id !== toolsetResourceId
   )
 }
 
 const handleResourceUpdated = (res: ToolsetResource) => {
-  if (!data?.value) {
-    return
-  }
   const idx = data.value.resource.findIndex((r) => r.id === res.id)
   if (idx !== -1) {
     data.value.resource[idx] = res
@@ -128,7 +118,7 @@ const handleResourceUpdated = (res: ToolsetResource) => {
 </script>
 
 <template>
-  <div v-if="data" class="space-y-4">
+  <div class="space-y-4">
     <KunCard
       :is-hoverable="false"
       :is-transparent="false"

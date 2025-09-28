@@ -33,7 +33,7 @@ export const kunLayoutItem: KunLayoutItem[] = [
         name: 'createToolset',
         icon: 'lucide:wrench',
         router: '/edit/toolset/create',
-        label: '发布 Gal 工具集',
+        label: '发布 Gal 工具',
         hint: '新'
       }
     ]
@@ -61,7 +61,7 @@ export const kunLayoutItem: KunLayoutItem[] = [
         name: 'toolset',
         icon: 'lucide:wrench',
         router: '/toolset',
-        label: 'Gal 工具集',
+        label: 'Gal 工具资源',
         hint: '最实用!'
       },
       {

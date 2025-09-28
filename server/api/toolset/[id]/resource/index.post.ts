@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
     select: { id: true }
   })
   if (!toolset) {
-    return kunError(event, '该工具集不存在')
+    return kunError(event, '该工具资源不存在')
   }
 
   const user = await prisma.user.findUnique({

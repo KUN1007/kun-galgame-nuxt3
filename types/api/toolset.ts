@@ -1,3 +1,5 @@
+import type { ToolsetComment } from './toolset-comment'
+
 export interface ToolsetCard {
   id: number
   name: string
@@ -33,6 +35,9 @@ export interface ToolsetDetail {
   edited: Date | string | null
   created: Date | string
   updated: Date | string
+  ratingCounts: Record<number, number>
+  commentCount: number
+  commentPreview: ToolsetComment[]
 }
 
 export interface ToolsetRating {

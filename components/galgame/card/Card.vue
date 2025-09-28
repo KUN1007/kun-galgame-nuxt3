@@ -89,9 +89,9 @@ defineProps<{
         </div>
       </div>
 
-      <div class="flex flex-auto flex-col justify-between p-3">
+      <div class="flex flex-auto flex-col justify-between p-2 sm:p-3">
         <h2
-          class="text-md hover:text-primary mb-3 line-clamp-2 font-medium transition-colors sm:text-lg"
+          class="hover:text-primary mb-3 line-clamp-2 font-medium transition-colors"
         >
           {{ getPreferredLanguageText(galgame.name) }}
         </h2>

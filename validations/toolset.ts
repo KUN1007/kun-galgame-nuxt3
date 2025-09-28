@@ -29,7 +29,7 @@ export const createToolsetSchema = z.object({
   platform: z.enum(KUN_TOOLSET_PLATFORM_CONST, { message: '非法的平台' }),
   type: z.enum(KUN_TOOLSET_TYPE_CONST, { message: '非法的工具类型' }),
   version: z.enum(KUN_TOOLSET_VERSION_CONST, { message: '非法的版本类型' }),
-  homepage: z.array(z.string().url()).default([]),
+  homepage: z.array(z.string().url().max(500)).default([]),
   aliases: z.array(z.string().min(1).max(500)).default([])
 })
 
