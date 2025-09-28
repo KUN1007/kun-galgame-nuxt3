@@ -1,5 +1,5 @@
-import type { MilkdownPlugin } from '@milkdown/ctx'
-import type { Node } from '@milkdown/transformer'
+import type { MilkdownPlugin } from '@milkdown/kit/ctx'
+import type { Node } from '@milkdown/kit/transformer'
 import { expectDomTypeError } from '@milkdown/exception'
 import { InputRule } from '@milkdown/prose/inputrules'
 import {
@@ -8,7 +8,7 @@ import {
   $nodeSchema,
   $remark,
   $command
-} from '@milkdown/utils'
+} from '@milkdown/kit/utils'
 import { visit } from 'unist-util-visit'
 import type { Node as UnistNode } from 'unist'
 
@@ -88,6 +88,7 @@ export const insertKunSpoilerCommand = $command(
     if (!node) {
       return true
     }
+    // @ts-expect-error it's a milkdown type change
     dispatch(state.tr.replaceSelectionWith(node).scrollIntoView())
     return true
   }

@@ -2,3 +2,4 @@
 @import './prose.css';
 @import './editor.css';
 @import './code-theme.css';
+@import './editor/code-mirror.css';

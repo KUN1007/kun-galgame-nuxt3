@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { callCommand } from '@milkdown/utils'
-import { insertImageCommand } from '@milkdown/preset-commonmark'
+import { callCommand } from '@milkdown/kit/utils'
+import { insertImageCommand } from '@milkdown/kit/preset/commonmark'
 import { commands } from './_buttonList'
 import { tabs, activeTab } from '../../atom'
 import type { UseEditorReturn } from '@milkdown/vue'
-import type { CmdKey } from '@milkdown/core'
+import type { CmdKey } from '@milkdown/kit/core'
 
 const props = defineProps<{
   editorInfo: UseEditorReturn

@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import { Icon } from '#components'
-import { TooltipProvider } from '@milkdown/plugin-tooltip'
+import { TooltipProvider } from '@milkdown/kit/plugin/tooltip'
 import {
   toggleStrongCommand,
   toggleEmphasisCommand,
   toggleInlineCodeCommand
-} from '@milkdown/preset-commonmark'
-import { toggleStrikethroughCommand } from '@milkdown/preset-gfm'
-import { callCommand } from '@milkdown/utils'
+} from '@milkdown/kit/preset/commonmark'
+import { toggleStrikethroughCommand } from '@milkdown/kit/preset/gfm'
+import { callCommand } from '@milkdown/kit/utils'
 import { useInstance } from '@milkdown/vue'
 import { usePluginViewContext } from '@prosemirror-adapter/vue'
 import type { VNodeRef } from 'vue'
-import type { CmdKey } from '@milkdown/core'
+import type { CmdKey } from '@milkdown/kit/core'
 
 const { view, prevState } = usePluginViewContext()
 const [loading, get] = useInstance()

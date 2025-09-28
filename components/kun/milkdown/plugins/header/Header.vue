@@ -46,6 +46,7 @@ const setBlockType = (
         tr.setBlockType(
           pos,
           pos + state.doc.nodeAt(pos)!.nodeSize || 0,
+          // @ts-expect-error it's a milkdown type change
           nodeType,
           attrs
         )

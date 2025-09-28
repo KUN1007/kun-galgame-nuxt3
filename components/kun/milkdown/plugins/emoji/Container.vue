@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { editorViewCtx } from '@milkdown/core'
+import { editorViewCtx } from '@milkdown/kit/core'
 import { emojiArray } from './_isoEmoji'
 import type { UseEditorReturn } from '@milkdown/vue'
 

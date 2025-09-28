@@ -7,8 +7,8 @@ import {
   wrapInOrderedListCommand,
   insertHrCommand,
   toggleInlineCodeCommand
-} from '@milkdown/preset-commonmark'
-import { toggleStrikethroughCommand } from '@milkdown/preset-gfm'
+} from '@milkdown/kit/preset/commonmark'
+import { toggleStrikethroughCommand } from '@milkdown/kit/preset/gfm'
 
 export const commands = [
   { command: toggleStrongCommand, icon: 'lucide:bold', label: '加粗' },

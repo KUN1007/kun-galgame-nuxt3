@@ -1,57 +1,49 @@
 <script setup lang="ts">
 // Milkdown core
-import { Editor, rootCtx, defaultValueCtx } from '@milkdown/core'
+import { Editor, rootCtx, defaultValueCtx } from '@milkdown/kit/core'
 import { Milkdown, useEditor } from '@milkdown/vue'
-import { commonmark } from '@milkdown/preset-commonmark'
-import { gfm } from '@milkdown/preset-gfm'
+import { commonmark } from '@milkdown/kit/preset/commonmark'
+import { gfm } from '@milkdown/kit/preset/gfm'
 // Milkdown Plugins
-import { history } from '@milkdown/plugin-history'
-import { prism, prismConfig } from '@milkdown/plugin-prism'
-import { listener, listenerCtx } from '@milkdown/plugin-listener'
-import { clipboard } from '@milkdown/plugin-clipboard'
-import { indent } from '@milkdown/plugin-indent'
-import { trailing } from '@milkdown/plugin-trailing'
+import { history } from '@milkdown/kit/plugin/history'
+import { listener, listenerCtx } from '@milkdown/kit/plugin/listener'
+import { clipboard } from '@milkdown/kit/plugin/clipboard'
+import { indent } from '@milkdown/kit/plugin/indent'
+import { trailing } from '@milkdown/kit/plugin/trailing'
 import { usePluginViewFactory } from '@prosemirror-adapter/vue'
-import { upload, uploadConfig } from '@milkdown/plugin-upload'
-import { automd } from '@milkdown/plugin-automd'
+import { upload, uploadConfig } from '@milkdown/kit/plugin/upload'
 
 // Custom plugins
 import { activeTab } from './atom'
 import { kunUploader, kunUploadWidgetFactory } from './plugins/upload/uploader'
-import { tooltipFactory } from '@milkdown/plugin-tooltip'
+import { tooltipFactory } from '@milkdown/kit/plugin/tooltip'
 import Tooltip from './plugins/tooltip/Tooltip.vue'
-import { replaceAll } from '@milkdown/utils'
+import { replaceAll } from '@milkdown/kit/utils'
 import {
   stopLinkCommand,
   linkCustomKeymap
 } from './plugins/stop-link/stopLinkPlugin'
-import {
-  placeholderPlugin,
-  placeholderCtx
-} from './plugins/placeholder/placeholderPlugin'
 import { kunSpoilerPlugin } from './plugins/spoiler/spoilerPlugin'
 
-// Syntax highlight
-import bash from 'refractor/lang/bash'
-import c from 'refractor/lang/c'
-import cpp from 'refractor/lang/cpp'
-import csharp from 'refractor/lang/csharp'
-import css from 'refractor/lang/css'
-import go from 'refractor/lang/go'
-import haskell from 'refractor/lang/haskell'
-import python from 'refractor/lang/python'
-import java from 'refractor/lang/java'
-import javascript from 'refractor/lang/javascript'
-import jsx from 'refractor/lang/jsx'
-import json from 'refractor/lang/json'
-import kotlin from 'refractor/lang/kotlin'
-import r from 'refractor/lang/r'
-import rust from 'refractor/lang/rust'
-import scala from 'refractor/lang/scala'
-import sql from 'refractor/lang/sql'
-import tsx from 'refractor/lang/tsx'
-import typescript from 'refractor/lang/typescript'
-import markdown from 'refractor/lang/markdown'
+// Code Block
+import { defaultKeymap, indentWithTab } from '@codemirror/commands'
+import { keymap } from '@codemirror/view'
+import {
+  codeBlockComponent,
+  codeBlockConfig,
+  type CodeBlockConfig
+} from '@milkdown/kit/component/code-block'
+import { basicSetup } from 'codemirror'
+import {
+  chevronDownIcon,
+  clearIcon,
+  copyIcon,
+  editIcon,
+  searchIcon,
+  visibilityOffIcon
+} from './plugins/code/icons'
+import { languages } from '@codemirror/language-data'
+import type { Extension } from '@codemirror/state'
 
 const props = defineProps<{
   valueMarkdown: string
@@ -65,7 +57,6 @@ const emits = defineEmits<{
 const valueMarkdown = computed(() => props.valueMarkdown)
 
 const tooltip = tooltipFactory('Text')
-const linkUpdatePopup = tooltipFactory('linkUpdate')
 const pluginViewFactory = usePluginViewFactory()
 const container = ref<HTMLElement | null>(null)
 const toolbar = ref<HTMLElement | null>(null)
@@ -91,58 +82,55 @@ const editorInfo = useEditor((root) =>
         uploadWidgetFactory: kunUploadWidgetFactory
       }))
 
-      ctx.set(prismConfig.key, {
-        configureRefractor: (refractor) => {
-          refractor.register(c)
-          refractor.register(bash)
-          refractor.register(cpp)
-          refractor.register(csharp)
-          refractor.register(css)
-          refractor.register(go)
-          refractor.register(haskell)
-          refractor.register(python)
-          refractor.register(markdown)
-          refractor.register(java)
-          refractor.register(javascript)
-          refractor.register(json)
-          refractor.register(jsx)
-          refractor.register(kotlin)
-          refractor.register(r)
-          refractor.register(rust)
-          refractor.register(scala)
-          refractor.register(sql)
-          refractor.register(tsx)
-          refractor.register(typescript)
-        }
-      })
-
       ctx.set(tooltip.key, {
         view: pluginViewFactory({
           component: Tooltip
         })
       })
+
+      const extensions = [
+        keymap.of(defaultKeymap.concat(indentWithTab)),
+        basicSetup
+      ]
+      // if (theme) {
+      //   extensions.push(theme)
+      // }
+
+      ctx.update(codeBlockConfig.key, (defaultConfig) => ({
+        extensions,
+        languages,
+        expandIcon: chevronDownIcon,
+        searchIcon: searchIcon,
+        clearSearchIcon: clearIcon,
+        searchPlaceholder: 'Search language',
+        copyText: 'Copy',
+        copyIcon: copyIcon,
+        onCopy: () => {},
+        noResultText: 'No result',
+        renderLanguage: defaultConfig.renderLanguage,
+        renderPreview: defaultConfig.renderPreview,
+        previewToggleButton: (previewOnlyMode) => {
+          const icon = previewOnlyMode ? editIcon : visibilityOffIcon
+          const text = previewOnlyMode ? 'Edit' : 'Hide'
+          return [icon, text].map((v) => v.trim()).join(' ')
+        },
+        previewLabel: defaultConfig.previewLabel
+        // previewLoading: config.previewLoading || defaultConfig.previewLoading,
+        // previewOnlyByDefault:
+        //   config.previewOnlyByDefault ?? defaultConfig.previewOnlyByDefault
+      }))
     })
     .use(history)
     .use(commonmark)
     .use(gfm)
-    .use(prism)
     .use(listener)
     .use(clipboard)
     .use(indent)
     .use(trailing)
     .use(tooltip)
-    .use(linkUpdatePopup)
     .use(upload)
-    .use(automd)
-    .use(
-      [
-        kunSpoilerPlugin,
-        stopLinkCommand,
-        linkCustomKeymap,
-        placeholderCtx,
-        placeholderPlugin
-      ].flat()
-    )
+    .use(codeBlockComponent)
+    .use([kunSpoilerPlugin, stopLinkCommand, linkCustomKeymap].flat())
 )
 
 const textCount = computed(() => markdownToText(props.valueMarkdown).length)

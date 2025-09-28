@@ -1,7 +1,6 @@
-import { $command, $useKeymap } from '@milkdown/utils'
-import { linkSchema } from '@milkdown/preset-commonmark'
-// import { spoilerSchema } from '../spoiler/spoilerPlugin'
-import { commandsCtx } from '@milkdown/core'
+import { $command, $useKeymap } from '@milkdown/kit/utils'
+import { linkSchema } from '@milkdown/kit/preset/commonmark'
+import { commandsCtx } from '@milkdown/kit/core'
 import type { MarkType } from '@milkdown/kit/prose/model'
 import type { EditorState } from '@milkdown/prose/state'
 
@@ -11,8 +10,10 @@ const hasMark = (state: EditorState, type: MarkType) => {
   }
   const { from, $from, to, empty } = state.selection
   if (empty) {
+    // @ts-expect-error it's a milkdown type change
     return !!type.isInSet(state.storedMarks || $from.marks())
   }
+  // @ts-expect-error it's a milkdown type change
   return state.doc.rangeHasMark(from, to, type)
 }
 
@@ -21,28 +22,12 @@ export const stopLinkCommand = $command('StopLink', (ctx) => () => {
     const markType = linkSchema.type(ctx)
     const checkMark = hasMark(state, markType)
     if (checkMark) {
+      // @ts-expect-error it's a milkdown type change
       dispatch?.(state.tr.removeStoredMark(markType))
     }
     return false
   }
 })
-
-// export const stopLinkCommand = $command('StopLink', (ctx) => () => {
-//   return (state, dispatch) => {
-//     const linkMarkType = linkSchema.type(ctx)
-//     const spoilerMarkType = spoilerSchema.type(ctx)
-
-//     const checkLinkMark = hasMark(state, linkMarkType)
-//     const checkSpoilerMark = hasMark(state, spoilerMarkType)
-//     if (checkLinkMark) {
-//       dispatch?.(state.tr.removeStoredMark(linkMarkType))
-//     }
-//     if (checkSpoilerMark) {
-//       dispatch?.(state.tr.removeStoredMark(spoilerMarkType))
-//     }
-//     return false
-//   }
-// })
 
 export const linkCustomKeymap = $useKeymap('linkCustomKeymap', {
   StopLink: {

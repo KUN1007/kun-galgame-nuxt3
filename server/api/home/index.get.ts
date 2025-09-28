@@ -68,7 +68,9 @@ export default defineEventHandler(async (event) => {
         best_answer: true,
         user: { select: { id: true, name: true, avatar: true } },
         section: { include: { topic_section: true } },
-        _count: { select: { like: true, reply: true, comment: true, poll: true } }
+        _count: {
+          select: { like: true, reply: true, comment: true, poll: true }
+        }
       }
     })
     .then((data) => {
@@ -106,4 +108,3 @@ export default defineEventHandler(async (event) => {
 
   return { galgames, topics, activities }
 })
-

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { callCommand } from '@milkdown/utils'
-import { insertImageCommand } from '@milkdown/preset-commonmark'
+import { callCommand } from '@milkdown/kit/utils'
+import { insertImageCommand } from '@milkdown/kit/preset/commonmark'
 import type { UseEditorReturn } from '@milkdown/vue'
 
 const props = defineProps<{

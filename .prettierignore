@@ -38,5 +38,4 @@ migrate/lib.ts
 migrate/*.json
 
 # docs
-docs/milkdown
-docs/milkdown-src
+docs
