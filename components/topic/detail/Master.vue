@@ -42,7 +42,7 @@ defineProps<{
       />
 
       <div
-        class="text-default-500 flex flex-wrap items-center space-x-4 text-sm"
+        class="text-default-500 flex flex-wrap items-center gap-2 space-x-2 text-sm"
       >
         <span>{{ `浏览数 - ${topic.view}` }}</span>
         <span>
@@ -52,7 +52,7 @@ defineProps<{
         </span>
         <p class="text-default-500" v-if="topic.edited">
           {{
-            `编辑于 - ${formatDate(topic.edited, { isShowYear: true, isPrecise: true })}`
+            `重新编辑于 - ${formatDate(topic.edited, { isShowYear: true, isPrecise: true })}`
           }}
         </p>
       </div>
