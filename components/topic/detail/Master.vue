@@ -20,8 +20,8 @@ defineProps<{
     <KunCard
       :is-transparent="false"
       :is-hoverable="false"
-      class-name="lg:w-[calc(100%-156px)] w-full"
-      content-class="gap-3"
+      class-name="lg:w-[calc(100%-220px)] w-full"
+      content-class="gap-3 justify-start"
     >
       <h1
         class="text-xl font-bold tracking-tight sm:text-2xl"
@@ -41,13 +41,20 @@ defineProps<{
         :is-n-s-f-w-topic="topic.isNSFW"
       />
 
-      <div class="text-default-500 flex items-center space-x-4 text-sm">
+      <div
+        class="text-default-500 flex flex-wrap items-center space-x-4 text-sm"
+      >
         <span>{{ `浏览数 - ${topic.view}` }}</span>
         <span>
           {{
             `发布于 - ${formatDate(topic.created, { isShowYear: true, isPrecise: true })}`
           }}
         </span>
+        <p class="text-default-500" v-if="topic.edited">
+          {{
+            `编辑于 - ${formatDate(topic.edited, { isShowYear: true, isPrecise: true })}`
+          }}
+        </p>
       </div>
 
       <TopicDetailBestAnswer
@@ -66,12 +73,6 @@ defineProps<{
       />
 
       <KunContent class="kun-master" :content="topic.contentHtml" />
-
-      <p class="text-default-500 ml-auto text-sm" v-if="topic.edited">
-        {{
-          `重新编辑于 - ${formatDate(topic.edited, { isShowYear: true, isPrecise: true })}`
-        }}
-      </p>
 
       <TopicFooter :topic="topic" />
     </KunCard>

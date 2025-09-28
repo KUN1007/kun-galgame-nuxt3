@@ -5,6 +5,7 @@ export interface KunAvatarProps {
   size?: KunUISize | 'original' | 'original-sm'
   isNavigation?: boolean
   className?: string
+  imageClassName?: string
   disableFloating?: boolean
   floatingPosition?: 'top' | 'bottom' | 'left' | 'right'
 }

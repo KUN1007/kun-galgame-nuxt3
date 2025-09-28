@@ -9,7 +9,7 @@ const { id } = usePersistUserStore()
 </script>
 
 <template>
-  <div class="flex items-center justify-between">
+  <div class="mt-auto flex items-center justify-between">
     <div class="flex items-center gap-1">
       <TopicFooterUpvote
         :topic-id="topic.id"

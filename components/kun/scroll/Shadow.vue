@@ -5,14 +5,14 @@ interface Props {
   axis?: 'horizontal' | 'vertical'
   shadowColor?: string
   shadowSize?: string
-  class?: string
+  className?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   axis: 'horizontal',
   shadowColor: 'var(--color-background)',
   shadowSize: '2rem',
-  class: ''
+  className: ''
 })
 
 const scrollContainer = ref<HTMLElement | null>(null)
@@ -87,7 +87,7 @@ const shadowStyles = computed(() => {
         )
       "
       :style="shadowStyles.start"
-    ></div>
+    />
 
     <div
       ref="scrollContainer"
@@ -95,7 +95,7 @@ const shadowStyles = computed(() => {
         cn(
           'scrollbar-hide',
           axis === 'horizontal' ? 'overflow-x-auto' : 'overflow-y-auto',
-          props.class
+          props.className
         )
       "
     >
@@ -114,6 +114,6 @@ const shadowStyles = computed(() => {
         )
       "
       :style="shadowStyles.end"
-    ></div>
+    />
   </div>
 </template>

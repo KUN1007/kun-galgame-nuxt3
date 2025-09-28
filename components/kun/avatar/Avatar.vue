@@ -5,6 +5,7 @@ const props = withDefaults(defineProps<KunAvatarProps>(), {
   size: 'md',
   isNavigation: true,
   className: '',
+  imageClassName: '',
   disableFloating: false,
   floatingPosition: 'top'
 })
@@ -75,7 +76,9 @@ const userAvatarSrc = computed(() => {
           :alt="user.name"
         /> -->
         <KunImage
-          :class="cn('inline-block rounded-full', sizeClasses)"
+          :class="
+            cn('inline-block rounded-full', sizeClasses, props.imageClassName)
+          "
           :src="userAvatarSrc"
           :alt="user.name"
         />

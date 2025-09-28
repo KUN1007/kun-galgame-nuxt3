@@ -69,61 +69,53 @@ watch(
 </script>
 
 <template>
-  <div class="flex w-full">
+  <div class="w-full min-w-0 flex-1 space-y-4">
     <KunLightbox
       :images="images"
       v-model:is-open="isLightboxOpen"
       :initial-index="currentImageIndex"
     />
 
-    <div class="w-full min-w-0 flex-1 space-y-4">
-      <TopicDetailMaster :topic="topic" />
+    <TopicDetailMaster :topic="topic" />
 
-      <TopicPollContainer :topic-id="topic.id" :is-topic-admin="isTopicAdmin" />
+    <TopicPollContainer :topic-id="topic.id" :is-topic-admin="isTopicAdmin" />
 
-      <TopicDetailTool
-        :reply-count="topic.replyCount"
-        :status="status"
-        :sort-order="sortOrder"
-        @set-sort-order="setSort"
+    <TopicDetailTool
+      :reply-count="topic.replyCount"
+      :status="status"
+      :sort-order="sortOrder"
+      @set-sort-order="setSort"
+    />
+
+    <section id="reply-section" class="space-y-4">
+      <div
+        v-if="status === 'pending' && replies.length === 0"
+        class="flex justify-center py-16"
+      >
+        <KunLoading hint="少女祈祷中..." />
+      </div>
+
+      <TopicReplyList
+        v-else-if="replies.length > 0"
+        :initial-replies="replies"
+        :topic-id="topic.id"
+        :title="topic.title"
       />
 
-      <section id="reply-section" class="space-y-4">
-        <div
-          v-if="status === 'pending' && replies.length === 0"
-          class="flex justify-center py-16"
+      <div class="py-6 text-center">
+        <KunButton
+          v-if="!isComplete && status !== 'pending'"
+          size="lg"
+          variant="flat"
+          @click="loadMore"
         >
-          <KunLoading hint="少女祈祷中..." />
-        </div>
-
-        <TopicReplyList
-          v-else-if="replies.length > 0"
-          :initial-replies="replies"
-          :topic-id="topic.id"
-          :title="topic.title"
-        />
-
-        <div class="py-6 text-center">
-          <KunButton
-            v-if="!isComplete && status !== 'pending'"
-            size="lg"
-            variant="flat"
-            @click="loadMore"
-          >
-            加载更多
-          </KunButton>
-          <KunLoading v-if="status === 'pending' && replies.length > 0" />
-          <p v-if="isComplete" class="text-default-500">
-            {{ `(｡>︿<｡) 已经一滴回复都不剩了哦~` }}
-          </p>
-        </div>
-      </section>
-    </div>
-
-    <div class="ml-3 hidden w-52 shrink-0 lg:block">
-      <div class="sticky top-16">
-        <TopicDetailTableOfContent ref="toc" />
+          加载更多
+        </KunButton>
+        <KunLoading v-if="status === 'pending' && replies.length > 0" />
+        <p v-if="isComplete" class="text-default-500">
+          {{ `(｡>︿<｡) 已经一滴回复都不剩了哦~` }}
+        </p>
       </div>
-    </div>
+    </section>
   </div>
 </template>
