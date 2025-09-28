@@ -192,7 +192,7 @@ const isInPreviewRange = (date: Date) => {
         :disabled="disabled"
         :class="
           cn(
-            'flex w-full cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-left shadow focus:ring-1 focus:outline-none sm:text-sm',
+            'flex w-full cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-left focus:ring-1 focus:outline-none sm:text-sm',
             'focus:border-primary-500 focus:ring-primary-500',
             darkBorder && 'dark:border-default-200 border-default-200 border',
             disabled && 'bg-default-100 cursor-not-allowed'
@@ -223,7 +223,7 @@ const isInPreviewRange = (date: Date) => {
       <div
         v-show="isOpen"
         ref="dropdownRef"
-        class="absolute z-50 rounded-md border bg-white p-3 shadow-lg dark:bg-black"
+        class="absolute z-50 rounded-md border bg-white p-3 dark:bg-black"
         :class="showAbove ? 'bottom-full mb-1' : 'top-full mt-1'"
         :style="{ minWidth: `${Math.max(260, Math.round(pickerWidth))}px` }"
         role="dialog"

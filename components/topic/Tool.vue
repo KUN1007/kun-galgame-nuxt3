@@ -12,7 +12,7 @@ const { layout } = storeToRefs(usePersistKUNGalgameTopicStore())
 
 <template>
   <div
-    class="bg-background flex flex-wrap justify-between gap-2 rounded-lg border p-3 shadow"
+    class="bg-background flex flex-wrap justify-between gap-2 rounded-lg border p-3"
   >
     <div class="flex w-96 gap-2">
       <KunSelect

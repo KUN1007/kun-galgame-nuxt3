@@ -139,7 +139,7 @@ onUnmounted(() => {
             :is-transparent="false"
             :is-hoverable="false"
             :bordered="false"
-            class-name="absolute right-0 bottom-0 left-0 m-3 shadow-none"
+            class-name="absolute right-0 bottom-0 left-0 m-3"
             content-class="gap-3"
           >
             <KunLink

@@ -132,7 +132,7 @@ const handleUpdatePageLink = (value: string | number) => {
     <div class="space-y-2">
       <div class="text-sm font-medium">别名（按 Enter 添加，最多 17 个）</div>
       <div
-        class="ring-default-500 bg-default/10 min-h-[44px] w-full rounded-lg px-4 py-2 shadow transition-all focus-within:ring-1"
+        class="ring-default-500 bg-default/10 min-h-[44px] w-full rounded-lg px-4 py-2 transition-all focus-within:ring-1"
       >
         <div class="flex flex-wrap gap-2">
           <KunBadge

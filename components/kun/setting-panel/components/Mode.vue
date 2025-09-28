@@ -45,7 +45,7 @@ watch(
           cn(
             'flex rounded-lg p-2 transition-colors',
             $colorMode.preference === mode.name
-              ? 'bg-primary-50 text-primary shadow'
+              ? 'bg-primary-50 text-primary'
               : ''
           )
         "

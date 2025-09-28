@@ -54,7 +54,7 @@ const handleBanUser = async () => {
 
 <template>
   <div
-    class="dark:border-default-200 relative flex flex-col gap-3 rounded-lg border border-transparent p-3 shadow backdrop-blur-none transition-all duration-200"
+    class="dark:border-default-200 relative flex flex-col gap-3 rounded-lg border border-transparent p-3 backdrop-blur-none transition-all duration-200"
   >
     <div class="flex items-center gap-3">
       <KunUser :user="user" />

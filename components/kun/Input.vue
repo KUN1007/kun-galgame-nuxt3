@@ -122,7 +122,7 @@ defineExpose({
         :required="required"
         :class="
           cn(
-            'border-default/20 block w-full rounded-md border px-2 py-1 text-sm shadow-sm transition duration-150 ease-in-out focus:border-transparent focus:ring-2',
+            'border-default/20 block w-full rounded-md border px-2 py-1 text-sm transition duration-150 ease-in-out focus:border-transparent focus:ring-2',
             colorClass[color],
             sizeClasses,
             darkBorder && 'dark:border-default-200',

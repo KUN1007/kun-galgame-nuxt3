@@ -19,7 +19,7 @@ defineProps<{
     />
 
     <div
-      class="relative max-w-[75%] rounded-lg p-3 shadow"
+      class="relative max-w-[75%] rounded-lg p-3"
       :class="
         isSent
           ? 'bg-primary/20 border-primary/20 border'

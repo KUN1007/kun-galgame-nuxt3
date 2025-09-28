@@ -54,7 +54,7 @@
 
   /* Blockquote */
   & blockquote {
-    @apply border-primary-200 bg-primary-50/50 text-default-800 my-8 rounded-r-lg border-l-4 py-1 pr-4 pl-6 font-medium shadow-sm;
+    @apply border-primary-200 bg-primary-50/50 text-default-800 my-8 rounded-r-lg border-l-4 py-1 pr-4 pl-6 font-medium;
   }
 
   /* Tables */
@@ -62,7 +62,7 @@
     @apply w-full overflow-x-auto;
 
     & table {
-      @apply border-default-200 my-8 w-full min-w-[600px] border-collapse border-spacing-0 overflow-hidden rounded-lg border text-sm shadow-sm;
+      @apply border-default-200 my-8 w-full min-w-[600px] border-collapse border-spacing-0 overflow-hidden rounded-lg border text-sm;
     }
 
     & thead {
@@ -92,7 +92,7 @@
   }
 
   & img {
-    @apply border-default-200 my-8 cursor-pointer rounded-lg border shadow-md;
+    @apply border-default-200 my-8 cursor-pointer rounded-lg border;
 
     &[alt='Sticker'] {
       @apply m-2 inline w-32;
@@ -117,7 +117,7 @@
 
   /* Keyboard shortcuts */
   & kbd {
-    @apply bg-default-100 border-default-300 text-default-700 rounded border px-2 py-1 font-mono text-sm shadow-sm;
+    @apply bg-default-100 border-default-300 text-default-700 rounded border px-2 py-1 font-mono text-sm;
   }
 
   /* Mark text */
@@ -127,7 +127,7 @@
 
   /* Code Blocks */
   & .kun-code-container {
-    @apply border-default-200 relative my-6 overflow-x-auto rounded-xl border shadow-sm;
+    @apply border-default-200 relative my-6 overflow-x-auto rounded-xl border;
 
     & pre {
       @apply overflow-x-auto p-4;

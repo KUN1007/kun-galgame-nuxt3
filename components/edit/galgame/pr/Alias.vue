@@ -77,7 +77,7 @@ watch(
     <p class="text-default-500">别名最多 17 个, 可以输入别名按下回车创建别名</p>
 
     <div
-      class="ring-default-500 bg-default/10 min-h-[44px] w-full rounded-lg px-6 py-3 shadow transition-all focus-within:ring-1"
+      class="ring-default-500 bg-default/10 min-h-[44px] w-full rounded-lg px-6 py-3 transition-all focus-within:ring-1"
     >
       <div class="flex flex-wrap gap-2">
         <KunBadge

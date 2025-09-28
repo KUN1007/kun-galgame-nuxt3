@@ -18,10 +18,12 @@ watch(
 </script>
 
 <template>
-  <div
-    class="fixed size-full bg-cover bg-fixed bg-center bg-no-repeat brightness-[var(--kun-background-brightness)]"
-    :style="{ backgroundImage: `url(${imageURL})` }"
-  />
+  <div class="bg-background fixed top-0 left-0 h-full w-full">
+    <div
+      class="fixed size-full bg-cover bg-fixed bg-center bg-no-repeat opacity-30 brightness-[var(--kun-background-brightness)]"
+      :style="{ backgroundImage: `url(${imageURL})` }"
+    />
+  </div>
 
   <div class="hidden md:block">
     <KunLayoutSidebar />
@@ -29,7 +31,7 @@ watch(
 
   <KunTopBar />
 
-  <div class="flex min-h-dvh min-h-screen justify-center">
+  <div class="bg-primary-50 flex min-h-dvh min-h-screen justify-center">
     <div class="z-10 w-full max-w-7xl min-w-0 md:mr-3 md:ml-66">
       <div class="h-full px-1 pt-19 pb-3 md:px-0">
         <NuxtPage />

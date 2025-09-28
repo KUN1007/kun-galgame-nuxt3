@@ -126,7 +126,7 @@ const handleBlur = () => {
 
     <div
       v-if="isDropdownOpen && (searchResults.length > 0 || isLoading)"
-      class="border-default-300 bg-background absolute z-10 mt-1 w-full rounded-md border shadow-lg"
+      class="border-default-300 bg-background absolute z-10 mt-1 w-full rounded-md border"
     >
       <ul class="max-h-60 overflow-auto py-1">
         <li v-if="isLoading" class="text-default-500 px-4 py-2">正在搜索...</li>

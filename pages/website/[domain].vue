@@ -127,7 +127,7 @@ if (data.value) {
             <KunImage
               :src="data.icon"
               :alt="data.name"
-              class="h-20 w-20 rounded-2xl object-cover shadow-md"
+              class="h-20 w-20 rounded-2xl object-cover"
             />
           </div>
           <div class="space-y-3">

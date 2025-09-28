@@ -51,7 +51,7 @@ const priceInfo = computed(() => {
         <KunImage
           :src="website.icon"
           :alt="website.name"
-          class="h-12 w-12 rounded-2xl object-cover shadow-md"
+          class="h-12 w-12 rounded-2xl object-cover"
         />
       </div>
       <div class="min-w-0 flex-1">

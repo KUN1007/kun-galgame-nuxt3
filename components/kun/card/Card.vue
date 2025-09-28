@@ -69,10 +69,14 @@ const roundedClasses = computed(() => {
     :is="isPressable ? defineNuxtLink({}) : 'div'"
     :class="
       cn(
-        'relative flex flex-col gap-3 p-3 shadow backdrop-blur-[var(--kun-background-blur)] transition-all duration-200',
-        isHoverable && 'hover:bg-default-100 hover:shadow-md',
-        // bordered && 'border',
-        darkBorder && 'dark:border-default-200 border border-transparent',
+        'relative flex flex-col gap-3 p-3 backdrop-blur-[var(--kun-background-blur)] transition-all duration-200',
+        isHoverable && 'hover:bg-default-100',
+        bordered && 'border-default/20 border',
+        darkBorder &&
+          cn(
+            'dark:border-default-200 border border-transparent',
+            bordered && 'border-default/20'
+          ),
         isPressable && 'cursor-pointer overflow-hidden active:scale-[0.97]',
         isTransparent ? 'backdrop-blur-none' : colorClasses[props.color],
         roundedClasses,

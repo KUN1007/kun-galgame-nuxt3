@@ -82,7 +82,7 @@ useEventListener(document, 'click', close)
         :id="popoverId"
         role="dialog"
         :aria-hidden="!isOpen"
-        class="absolute z-50 mt-2 rounded-lg border bg-white shadow-lg dark:bg-black"
+        class="absolute z-50 mt-2 rounded-lg border bg-white dark:bg-black"
         :class="cn(positionClass, innerClass)"
         @click.stop
       >

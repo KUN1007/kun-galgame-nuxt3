@@ -7,7 +7,7 @@
 }
 
 .milkdown .ProseMirror {
-  @apply focus:border-primary-500 border-default-200 focus:ring-primary-500 min-h-[300px] rounded-lg border p-4 shadow-sm transition-colors duration-200 focus:ring-1 focus:outline-none;
+  @apply focus:border-primary-500 border-default-200 focus:ring-primary-500 min-h-[300px] rounded-lg border p-4 transition-colors duration-200 focus:ring-1 focus:outline-none;
 }
 
 .milkdown h1,
@@ -61,7 +61,7 @@
 }
 
 .milkdown blockquote {
-  @apply border-primary-200 bg-primary-50/30 text-default-700 my-6 rounded-r-lg border-l-4 py-2 pr-4 pl-6 shadow-sm;
+  @apply border-primary-200 bg-primary-50/30 text-default-700 my-6 rounded-r-lg border-l-4 py-2 pr-4 pl-6;
 }
 
 .milkdown blockquote p {
@@ -69,7 +69,7 @@
 }
 
 .milkdown pre {
-  @apply bg-default-50 border-default-200 ring-default-200/50 my-6 overflow-x-auto rounded-xl border p-4 break-words whitespace-pre-wrap shadow-sm ring-1;
+  @apply bg-default-50 border-default-200 ring-default-200/50 my-6 overflow-x-auto rounded-xl border p-4 break-words whitespace-pre-wrap ring-1;
 }
 
 .milkdown pre code {
@@ -81,7 +81,7 @@
 }
 
 .milkdown img {
-  @apply border-default-200 my-6 max-w-full rounded-lg border shadow-md;
+  @apply border-default-200 my-6 max-w-full rounded-lg border;
 }
 
 .milkdown img[alt='Sticker'] {
@@ -89,7 +89,7 @@
 }
 
 .milkdown table {
-  @apply border-default-200 my-6 w-full overflow-hidden rounded-lg border shadow-sm;
+  @apply border-default-200 my-6 w-full overflow-hidden rounded-lg border;
 }
 
 .milkdown table th,
@@ -130,5 +130,5 @@
 }
 
 .milkdown kbd {
-  @apply bg-default-100 border-default-300 text-default-700 rounded border px-2 py-1 font-mono text-sm shadow-sm;
+  @apply bg-default-100 border-default-300 text-default-700 rounded border px-2 py-1 font-mono text-sm;
 }

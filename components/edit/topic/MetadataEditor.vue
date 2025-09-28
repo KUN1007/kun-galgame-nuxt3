@@ -88,7 +88,7 @@ const handleTagInputBackspace = () => {
             cn(
               'flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 p-4 transition-all duration-200',
               category === cat.key
-                ? 'border-primary-500 bg-primary-500/10 shadow-md'
+                ? 'border-primary-500 bg-primary-500/10'
                 : 'border-default-500/20 hover:border-primary-500'
             )
           "

@@ -79,7 +79,7 @@ onUnmounted(() => {
         :style="{ width: fillerWidth }"
       />
       <div
-        class="bg-background border-primary absolute top-[50%] size-5 cursor-grab rounded-full border-2 shadow active:cursor-grabbing active:border-3"
+        class="bg-background border-primary absolute top-[50%] size-5 cursor-grab rounded-full border-2 active:cursor-grabbing active:border-3"
         role="slider"
         :style="thumbStyle"
         @mousedown.passive="startDrag"

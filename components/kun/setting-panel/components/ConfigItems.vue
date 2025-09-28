@@ -45,7 +45,7 @@ watch(
           :class="
             cn(
               'flex rounded-lg p-2 transition-colors',
-              showItemIndex === 1 ? 'bg-primary-50 text-primary shadow' : ''
+              showItemIndex === 1 ? 'bg-primary-50 text-primary' : ''
             )
           "
           @click="showItemIndex = 1"
@@ -56,7 +56,7 @@ watch(
           :class="
             cn(
               'flex rounded-lg p-2 transition-colors',
-              showItemIndex === 2 ? 'bg-primary-50 text-primary shadow' : ''
+              showItemIndex === 2 ? 'bg-primary-50 text-primary' : ''
             )
           "
           @click="showItemIndex = 2"
@@ -67,7 +67,7 @@ watch(
           :class="
             cn(
               'flex rounded-lg p-2 transition-colors',
-              showItemIndex === 3 ? 'bg-primary-50 text-primary shadow' : ''
+              showItemIndex === 3 ? 'bg-primary-50 text-primary' : ''
             )
           "
           @click="showItemIndex = 3"

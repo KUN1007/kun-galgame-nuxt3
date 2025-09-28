@@ -92,8 +92,8 @@ const selectOption = (value: string | number, index: number) => {
       :aria-label="props.ariaLabel || 'select'"
       :class="
         cn(
-          'focus:border-primary-500 focus:ring-primary-500 flex w-full cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-left shadow focus:ring-1 focus:outline-none sm:text-sm',
-          darkBorder && 'dark:border-default-200 border border-transparent',
+          'focus:border-primary-500 focus:ring-primary-500 flex w-full cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-left focus:ring-1 focus:outline-none sm:text-sm',
+          darkBorder && 'dark:border-default-200 border-default/20 border',
           disabled && 'bg-default-100 cursor-cursor-not-allowed'
         )
       "
@@ -116,7 +116,7 @@ const selectOption = (value: string | number, index: number) => {
       <div
         v-show="isOpen"
         ref="dropdown"
-        class="absolute z-10 w-full rounded-md border bg-white p-1 shadow-lg dark:bg-black"
+        class="absolute z-10 w-full rounded-md border bg-white p-1 dark:bg-black"
         :class="showAbove ? 'bottom-full mb-1' : 'top-full mt-1'"
       >
         <ul

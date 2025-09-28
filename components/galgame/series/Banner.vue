@@ -33,7 +33,7 @@ const hoverTranslations = [
         :key="banner"
         :class="
           cn(
-            'absolute aspect-video h-full rounded-lg shadow-lg transition-transform duration-500 ease-out',
+            'absolute aspect-video h-full rounded-lg transition-transform duration-500 ease-out',
             hoverTranslations[index]
           )
         "
@@ -42,7 +42,7 @@ const hoverTranslations = [
         <KunImage
           :src="banner"
           :alt="`Series Banner ${index + 1}`"
-          class="h-full w-full rounded-lg object-cover shadow-md"
+          class="h-full w-full rounded-lg object-cover"
           loading="lazy"
           format="webp"
           quality="80"

@@ -17,6 +17,5 @@ const description = isNSFWEnable.value
     :color="isNSFWEnable ? 'danger' : 'warning'"
     :description="description"
     :icon="isNSFWEnable ? 'lucide:ban' : 'lucide:shield-check'"
-    class-name="shadow-sm"
   />
 </template>

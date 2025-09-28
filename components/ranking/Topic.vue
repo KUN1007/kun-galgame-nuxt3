@@ -18,7 +18,7 @@ const { data } = await useFetch(`/api/ranking/topic`, {
         :to="`/topic/${topic.id}`"
         :class-name="
           cn(
-            'relative flex items-center gap-4 rounded-xl border p-3 transition-all hover:shadow-md hover:-translate-y-1',
+            'relative flex items-center gap-4 rounded-xl border p-3 transition-all hover: hover:-translate-y-1',
             getRankClasses(index)
           )
         "

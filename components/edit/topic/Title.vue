@@ -12,6 +12,6 @@ const { title } = useTopicEditorStore()
     v-model="title"
     :maxlength="KUN_TOPIC_TITLE_LENGTH_LIMIT"
     size="xl"
-    class-name="text-2xl font-bold bg-transparent shadow-none"
+    class-name="text-2xl font-bold bg-transparent"
   />
 </template>

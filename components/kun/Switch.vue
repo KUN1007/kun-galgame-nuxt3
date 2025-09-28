@@ -51,7 +51,7 @@ defineEmits<{
       <div
         :class="
           cn(
-            'absolute top-0.5 left-0.5 h-5 w-5 transform rounded-full bg-white shadow-md transition-transform duration-200 ease-in-out',
+            'absolute top-0.5 left-0.5 h-5 w-5 transform rounded-full bg-white transition-transform duration-200 ease-in-out',
             modelValue ? 'translate-x-5' : 'translate-x-0'
           )
         "

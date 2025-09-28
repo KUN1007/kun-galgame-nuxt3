@@ -52,6 +52,7 @@ const updateComment = (commentId: number, content: string, edited: string) => {
       name="评论"
       description="如果您对该工具有任何的使用疑问, 欢迎发布评论"
       scale="h2"
+      :is-show-divider="false"
     />
 
     <ToolsetCommentPublish

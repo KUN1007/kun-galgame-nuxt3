@@ -36,7 +36,7 @@ onUnmounted(() => {
     "
   >
     <div
-      class="bg-background mx-auto flex h-16 w-full max-w-7xl items-center justify-between rounded-b-lg px-3 shadow backdrop-blur-[var(--kun-background-blur)]"
+      class="bg-background border-default/20 mx-auto flex h-16 w-full max-w-7xl items-center justify-between rounded-b-lg border px-3 backdrop-blur-[var(--kun-background-blur)]"
     >
       <KunTopBarNav />
       <KunTopBarAvatar />

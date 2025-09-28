@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<Props>(), {
 const variantClasses = computed(() => {
   switch (props.variant) {
     case 'solid':
-      return 'shadow-sm text-white'
+      return ' text-white'
     case 'bordered':
       return 'border-2 bg-transparent'
     case 'light':
@@ -33,11 +33,11 @@ const variantClasses = computed(() => {
     case 'faded':
       return 'bg-opacity-10 border-transparent'
     case 'shadow':
-      return 'shadow-lg text-white'
+      return ' text-white'
     case 'ghost':
       return 'bg-transparent border-transparent shadow-none hover:bg-opacity-10'
     default:
-      return 'shadow-sm'
+      return ''
   }
 })
 
@@ -88,13 +88,13 @@ const colorVariants: Record<KunUIVariant, Record<KunInfoColor, string>> = {
     info: 'border-default bg-info-100 text-info'
   },
   shadow: {
-    default: 'shadow-lg shadow-default/50 bg-default',
-    primary: 'shadow-lg shadow-primary/40 bg-primary',
-    secondary: 'shadow-lg shadow-secondary/40 bg-secondary',
-    success: 'shadow-lg shadow-success/40 bg-success',
-    warning: 'shadow-lg shadow-warning/40 bg-warning dark:text-black',
-    danger: 'shadow-lg shadow-danger/40 bg-danger',
-    info: 'shadow-lg shadow-info/40 bg-info'
+    default: ' shadow-default/50 bg-default',
+    primary: ' shadow-primary/40 bg-primary',
+    secondary: ' shadow-secondary/40 bg-secondary',
+    success: ' shadow-success/40 bg-success',
+    warning: ' shadow-warning/40 bg-warning dark:text-black',
+    danger: ' shadow-danger/40 bg-danger',
+    info: ' shadow-info/40 bg-info'
   },
   ghost: {
     default: 'border-default',
