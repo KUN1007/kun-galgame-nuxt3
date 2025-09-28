@@ -1,5 +1,7 @@
 model todo {
   id             Int       @id @default(autoincrement())
+  // forum - kungal.com, patch - moyu.moe
+  type           String    @default("forum")
   status         Int       @default(0)
   content_en_us  String    @default("") @db.Text
   content_ja_jp  String    @default("") @db.Text

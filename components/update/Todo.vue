@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { KUN_UPDATE_LOG_STATUS_MAP } from '~/constants/update'
+import {
+  KUN_TODO_TYPE_MAP,
+  KUN_UPDATE_LOG_STATUS_MAP
+} from '~/constants/update'
 import type { Todo } from '~/types/api/update-log'
 import type { UpdateTodoPayload } from './types'
 
@@ -40,6 +43,7 @@ const openEditTodoModal = (log: Todo) => {
   }
   editingTodo.value = {
     status: log.status,
+    type: 'forum',
     content_en_us: log.content['en-us'],
     content_zh_cn: log.content['zh-cn'],
     todoId: log.id
@@ -81,17 +85,24 @@ const handleTodoAction = async (data: UpdateTodoPayload) => {
       :dark-border="true"
       v-for="todo in data.todos"
       :key="todo.id"
+      content-class="space-y-3"
     >
-      <pre class="mb-4 font-mono break-all whitespace-pre-line">
+      <div class="flex items-center gap-3">
+        <KunBadge color="primary">
+          {{ KUN_TODO_TYPE_MAP[todo.type] }}
+        </KunBadge>
+
+        <span class="text-default-600 text-sm">
+          {{ `该企划创建于 ${formatDate(todo.created, { isPrecise: true })}` }}
+        </span>
+      </div>
+
+      <pre class="font-mono break-all whitespace-pre-line">
         {{ todo.content['zh-cn'] }}
       </pre>
 
-      <div class="flex items-center justify-between gap-2 text-sm">
-        <span class="text-default-600">
-          {{ formatDate(todo.created, { isPrecise: true }) }}
-        </span>
-
-        <div class="flex items-center gap-2">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2 text-sm">
           <span v-if="todo.completedTime" class="text-default-500">
             {{ formatDate(todo.completedTime, { isPrecise: true }) }}
           </span>
@@ -102,16 +113,16 @@ const handleTodoAction = async (data: UpdateTodoPayload) => {
           <span :class="cn(textMap[todo.status])">
             {{ KUN_UPDATE_LOG_STATUS_MAP[todo.status] }}
           </span>
-
-          <KunButton
-            variant="flat"
-            size="sm"
-            v-if="role > 2"
-            @click="openEditTodoModal(todo)"
-          >
-            编辑
-          </KunButton>
         </div>
+
+        <KunButton
+          variant="flat"
+          size="sm"
+          v-if="role > 2"
+          @click="openEditTodoModal(todo)"
+        >
+          编辑
+        </KunButton>
       </div>
     </KunCard>
 

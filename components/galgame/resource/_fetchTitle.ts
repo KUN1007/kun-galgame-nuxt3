@@ -11,7 +11,9 @@ export const fetchTitle = async (domain: string) => {
     const match = html.match(/<title>(.*?)<\/title>/i)
 
     if (match && match[1]) {
-      return { title: match[1].trim() }
+      const index = match[1].indexOf(' ')
+      const result = index === -1 ? match[1] : match[1].substring(0, index)
+      return { title: result.trim() }
     } else {
       return { title: null }
     }

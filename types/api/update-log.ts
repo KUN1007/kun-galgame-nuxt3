@@ -13,6 +13,7 @@ export type UpdateType =
 export interface Todo {
   id: number
   status: number
+  type: string
   content: KunLanguage
   completedTime: Date | string | null
   created: Date | string

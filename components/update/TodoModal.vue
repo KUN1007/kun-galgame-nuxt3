@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { KUN_UPDATE_LOG_STATUS_MAP } from '~/constants/update'
+import {
+  KUN_UPDATE_LOG_STATUS_MAP,
+  kunTodoTypeOptions
+} from '~/constants/update'
 import { createTodoSchema, updateTodoSchema } from '~/validations/todo'
 import type { UpdateTodoPayload } from './types'
 
@@ -30,6 +33,7 @@ const todoStatusOptions = Object.entries(KUN_UPDATE_LOG_STATUS_MAP).map(
 
 const getInitialFormData = (): UpdateTodoPayload => ({
   todoId: 0,
+  type: 'forum',
   status: 0,
   content_en_us: '',
   content_zh_cn: '',
@@ -86,6 +90,12 @@ const handleSubmit = () => {
           v-model="formData.status"
           :options="todoStatusOptions"
           label="待办状态"
+          required
+        />
+        <KunSelect
+          v-model="formData.type"
+          :options="kunTodoTypeOptions"
+          label="待办类型"
           required
         />
         <KunTextarea

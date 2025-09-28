@@ -30,7 +30,9 @@ export const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
           user: { select: { id: true, name: true, avatar: true } }
         }
       }),
-      prisma.galgame.count({ where: isSFW ? { content_limit: 'sfw' } : undefined })
+      prisma.galgame.count({
+        where: isSFW ? { content_limit: 'sfw' } : undefined
+      })
     ])
     return {
       items: items.map((item) => ({
@@ -104,7 +106,9 @@ export const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
         timestamp: item.created,
         actor: item.user,
         link: `/galgame/${item.galgame.id}`,
-        content: Object.values(item.new_data || {}).join('').slice(0, 100)
+        content: Object.values(item.new_data || {})
+          .join('')
+          .slice(0, 100)
       })),
       total
     }
@@ -195,12 +199,12 @@ export const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
         timestamp: item.created,
         actor: item.user,
         link: `/galgame/${item.galgame.id}`,
-        content: getPreferredLanguageText({
+        content: `在《${getPreferredLanguageText({
           'en-us': item.galgame.name_en_us,
           'ja-jp': item.galgame.name_ja_jp,
           'zh-cn': item.galgame.name_zh_cn,
           'zh-tw': item.galgame.name_zh_tw
-        })
+        })}》发布了下载资源`
       })),
       total
     }
@@ -339,7 +343,9 @@ export const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
           target: { select: { content: true } }
         }
       }),
-      prisma.topic_reply.count({ where: isSFW ? { topic: { is_nsfw: false } } : undefined })
+      prisma.topic_reply.count({
+        where: isSFW ? { topic: { is_nsfw: false } } : undefined
+      })
     ])
     return {
       items: items.map((item) => ({
@@ -508,4 +514,3 @@ export const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
     }
   }
 }
-

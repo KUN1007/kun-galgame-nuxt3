@@ -22,6 +22,7 @@ export default defineEventHandler(async (event) => {
   const todos: Todo[] = data.map((todo) => ({
     id: todo.id,
     status: todo.status,
+    type: todo.type,
     content: {
       'en-us': todo.content_en_us,
       'ja-jp': todo.content_ja_jp,

@@ -56,7 +56,7 @@ const handleRewriteToolset = () => {
   toolsetUpdateForm.description = data.value.description
   toolsetUpdateForm.language = data.value.language as 'zh-cn'
   toolsetUpdateForm.platform = data.value.platform as 'windows'
-  toolsetUpdateForm.type = data.value.type as 'all'
+  toolsetUpdateForm.type = data.value.type as 'others'
   toolsetUpdateForm.version = data.value.version as 'rc'
   toolsetUpdateForm.homepage = data.value.homepage
   toolsetUpdateForm.aliases = data.value.aliases
