@@ -1,5 +1,10 @@
 <script setup lang="ts">
 const isExpand = ref(false)
+
+const { data } = await useFetch(`/api/home`, {
+  method: 'GET',
+  ...kungalgameResponseHandler
+})
 </script>
 
 <template>
@@ -36,15 +41,15 @@ const isExpand = ref(false)
         </div>
       </KunCard>
 
-      <HomeTopicContainer />
+      <HomeTopicContainer v-if="data" :topics="data.topics" />
 
-      <HomeGalgameContainer />
+      <HomeGalgameContainer v-if="data" :galgames="data.galgames" />
 
       <HomeFooter />
     </div>
 
     <div class="w-full shrink-0 space-y-3 lg:w-72">
-      <HomeRecent />
+      <HomeRecent v-if="data" :activities="data.activities" />
     </div>
   </div>
 </template>

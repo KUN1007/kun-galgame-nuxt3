@@ -5,6 +5,8 @@ export type ActivityEventType =
   | 'GALGAME_WEBSITE_CREATION'
   | 'GALGAME_WEBSITE_COMMENT_CREATION'
   | 'GALGAME_RESOURCE_CREATION'
+  | 'TOOLSET_CREATION'
+  | 'TOOLSET_RESOURCE_CREATION'
   | 'TOOLSET_COMMENT_CREATION'
   | 'TOPIC_CREATION'
   | 'TOPIC_REPLY_CREATION'
@@ -17,7 +19,7 @@ export type ActivityEventType =
 export interface ActivityItem {
   uniqueId: string
   type: ActivityEventType
-  timestamp: Date
+  timestamp: Date | string
   actor: KunUser | null
   link: string
   content: string

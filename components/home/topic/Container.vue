@@ -1,12 +1,9 @@
 <script setup lang="ts">
-const { data } = await useFetch(`/api/home/topic`, {
-  method: 'GET',
-  query: {
-    page: 1,
-    limit: 10
-  },
-  ...kungalgameResponseHandler
-})
+import type { HomeTopic } from '~/types/api/home'
+
+defineProps<{
+  topics: HomeTopic[]
+}>()
 </script>
 
 <template>
@@ -14,7 +11,6 @@ const { data } = await useFetch(`/api/home/topic`, {
     :is-hoverable="false"
     :is-transparent="false"
     content-class="space-y-6"
-    v-if="data"
   >
     <div class="flex items-center gap-3">
       <h2 class="text-xl font-semibold">最新话题</h2>
@@ -27,7 +23,7 @@ const { data } = await useFetch(`/api/home/topic`, {
       </KunLink>
     </div>
 
-    <template v-for="(topic, index) in data" :key="index">
+    <template v-for="(topic, index) in topics" :key="index">
       <HomeTopicCard :topic="topic" :is-transparent="true" />
     </template>
   </KunCard>

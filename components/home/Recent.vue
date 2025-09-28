@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { KUN_ACTIVITY_TYPE_TYPE } from '~/constants/activity'
+import type { ActivityItem } from '~/types/api/activity'
 
-const { data } = await useFetch('/api/home/message', {
-  method: 'GET'
-})
+defineProps<{
+  activities: ActivityItem[]
+}>()
 </script>
 
 <template>
   <KunCard
     :is-transparent="false"
-    v-if="data"
     class-name="h-full"
     content-class="space-y-3"
     :is-hoverable="false"
@@ -26,7 +26,7 @@ const { data } = await useFetch('/api/home/message', {
     </div>
 
     <div
-      v-for="(activity, index) in data"
+      v-for="(activity, index) in activities"
       :key="index"
       class="flex flex-col space-y-2"
     >

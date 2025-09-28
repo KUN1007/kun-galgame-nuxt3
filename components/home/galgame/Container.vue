@@ -1,12 +1,13 @@
 <script setup lang="ts">
-const { data } = await useFetch(`/api/home/galgame`, {
-  method: 'GET',
-  query: { page: 1, limit: 12 }
-})
+import type { HomeGalgame, HomeTopic } from '~/types/api/home'
+
+defineProps<{
+  galgames: HomeGalgame[]
+}>()
 </script>
 
 <template>
-  <div class="space-y-3" v-if="data">
+  <div class="space-y-3">
     <KunCard :is-hoverable="false" :is-transparent="false">
       <div class="flex items-center justify-start gap-2">
         <h2 class="text-xl font-semibold">最新 Galgame</h2>
@@ -25,6 +26,6 @@ const { data } = await useFetch(`/api/home/galgame`, {
       <GalgameCardNSFWHint />
     </KunCard>
 
-    <GalgameCard :galgames="data" :is-transparent="false" />
+    <GalgameCard :galgames="galgames" :is-transparent="false" />
   </div>
 </template>
