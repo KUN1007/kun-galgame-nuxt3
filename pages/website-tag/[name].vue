@@ -71,7 +71,6 @@ if (data.value) {
     <KunHeader
       :name="`${data.label}的 Galgame 网站`"
       :description="data.description"
-      :is-show-divider="false"
     >
       <template #endContent>
         <div class="space-y-3">

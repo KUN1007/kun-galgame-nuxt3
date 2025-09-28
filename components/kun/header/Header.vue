@@ -3,13 +3,11 @@ const props = withDefaults(
   defineProps<{
     name?: string
     description?: string
-    isShowDivider?: boolean
     scale?: 'h1' | 'h2' | 'h3'
   }>(),
   {
     name: '',
     description: '',
-    isShowDivider: true,
     scale: 'h1'
   }
 )
@@ -43,5 +41,4 @@ const headingClass = computed(() => {
     </div>
     <slot name="endContent" />
   </div>
-  <KunDivider v-if="isShowDivider" />
 </template>

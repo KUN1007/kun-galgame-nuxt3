@@ -60,7 +60,6 @@ watchDebounced(
     <KunHeader
       name="用户管理"
       description="您可以在此处管理所有的网站用户, 有时会有广告或者发真人色情的用户, 这时直接将该用户删除即可, 目前的管理系统仅临时使用, 非必要请不要删除用户"
-      :is-show-divider="false"
     >
       <template #endContent>
         <div class="space-y-3">

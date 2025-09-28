@@ -70,7 +70,6 @@ const handleDeleteLink = async (gid: number, glid: number) => {
 <template>
   <div class="flex flex-col space-y-3">
     <KunHeader
-      :is-show-divider="false"
       name="相关链接"
       description="这里可以添加任何与该游戏有关的链接, 例如论坛话题, 其它网络文章, 视频链接, 媒体链接等等"
       scale="h3"

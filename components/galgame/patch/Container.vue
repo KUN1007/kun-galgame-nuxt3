@@ -30,7 +30,7 @@ onMounted(async () => {
 
 <template>
   <div v-if="resources.length" class="flex flex-col gap-3">
-    <KunHeader :is-show-divider="false" name="补丁资源下载" scale="h2">
+    <KunHeader name="补丁资源下载" scale="h2">
       <template #endContent>
         <p class="text-default-500 text-sm">
           下面是从

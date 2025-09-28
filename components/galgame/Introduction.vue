@@ -14,7 +14,6 @@ defineProps<{
       name="游戏介绍"
       description="Galgame 的简体中文, 繁体中文, 英语, 日语 介绍。英语介绍来源于 VNDB, 日语介绍来源于游戏官网"
       scale="h2"
-      :is-show-divider="false"
     >
       <template #endContent>
         <KunTab

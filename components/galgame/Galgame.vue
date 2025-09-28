@@ -40,7 +40,6 @@ provide<GalgameDetail>('galgame', props.galgame)
               name="Galgame 系列"
               description="Galgame 全系列所有 Galgame 作品。例如美少女万华镜 1, 2, 3, 4, 5, 雪女, 外传 就是一个 Galgame 系列"
               scale="h3"
-              :is-show-divider="false"
             />
             <GalgameSeriesCard :series="galgame.series" />
           </div>
@@ -77,7 +76,6 @@ provide<GalgameDetail>('galgame', props.galgame)
             name="贡献者"
             description="本游戏项目的贡献者, 计 Galgame 资源发布贡献"
             scale="h3"
-            :is-show-divider="false"
           />
           <div class="flex flex-wrap items-center gap-1">
             <KunAvatar

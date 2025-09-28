@@ -88,15 +88,17 @@ const chartOptions = computed<ApexOptions>(() => {
 </script>
 
 <template>
-  <ClientOnly>
-    <VueApexCharts
-      type="area"
-      height="400"
-      :options="chartOptions"
-      :series="chartSeries"
-    />
-    <template #fallback>
-      <KunLoading description="正在加载图表..." />
-    </template>
-  </ClientOnly>
+  <div class="contents">
+    <ClientOnly>
+      <VueApexCharts
+        type="area"
+        height="400"
+        :options="chartOptions"
+        :series="chartSeries"
+      />
+      <template #fallback>
+        <KunLoading description="正在加载图表..." />
+      </template>
+    </ClientOnly>
+  </div>
 </template>

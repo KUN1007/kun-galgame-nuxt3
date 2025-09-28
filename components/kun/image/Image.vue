@@ -38,19 +38,7 @@ withDefaults(defineProps<KunImageProps>(), {
 </script>
 
 <template>
-  <img
-    v-if="custom"
-    :class="cn('', showKUNGalgameBackground && 'opacity-80', className)"
-    :src="src"
-    :alt="alt"
-    :aria-label="ariaLabel"
-    :style="style"
-    :width="width"
-    :height="height"
-  />
-
   <NuxtImg
-    v-else
     :class="cn('', showKUNGalgameBackground && 'opacity-80', className)"
     :src="src"
     :alt="alt"
@@ -63,5 +51,17 @@ withDefaults(defineProps<KunImageProps>(), {
     :width="width"
     :height="height"
     :preload="preload"
-  />
+    :custom="custom"
+  >
+    <img
+      v-if="custom"
+      :class="cn('', showKUNGalgameBackground && 'opacity-80', className)"
+      :src="src"
+      :alt="alt"
+      :aria-label="ariaLabel"
+      :style="style"
+      :width="width"
+      :height="height"
+    />
+  </NuxtImg>
 </template>

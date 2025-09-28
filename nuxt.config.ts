@@ -11,6 +11,11 @@ const appVersion = packageJson.version
 export default defineNuxtConfig({
   devtools: { enabled: false },
 
+  app: {
+    pageTransition: { name: 'kun-page', mode: 'out-in' },
+    layoutTransition: { name: 'kun-page', mode: 'out-in' }
+  },
+
   experimental: {
     scanPageMeta: true
   },

@@ -131,30 +131,32 @@ const options = computed(
 </script>
 
 <template>
-  <ClientOnly>
-    <div class="space-y-2">
-      <div class="flex items-center gap-3">
-        <h3 class="font-semibold">工具实用性分布</h3>
-        <span class="text-default-500">
-          平均
-          <span class="text-warning text-lg font-bold">
-            {{ practicalityData.avg.toFixed(1) }}
+  <div class="contents">
+    <ClientOnly>
+      <div class="space-y-2">
+        <div class="flex items-center gap-3">
+          <h3 class="font-semibold">工具实用性分布</h3>
+          <span class="text-default-500">
+            平均
+            <span class="text-warning text-lg font-bold">
+              {{ practicalityData.avg.toFixed(1) }}
+            </span>
+            / 5.0
           </span>
-          / 5.0
-        </span>
+        </div>
+
+        <VueApexCharts
+          :key="practicalityData.mine"
+          type="bar"
+          height="260"
+          :options="options"
+          :series="series"
+        />
       </div>
 
-      <VueApexCharts
-        :key="practicalityData.mine"
-        type="bar"
-        height="260"
-        :options="options"
-        :series="series"
-      />
-    </div>
-
-    <template #fallback>
-      <KunLoading :loading="loading" />
-    </template>
-  </ClientOnly>
+      <template #fallback>
+        <KunLoading :loading="loading" />
+      </template>
+    </ClientOnly>
+  </div>
 </template>

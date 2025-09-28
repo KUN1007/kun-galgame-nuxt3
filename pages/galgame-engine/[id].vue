@@ -71,7 +71,6 @@ useKunSeoMeta({
     <KunHeader
       :name="`${data.name} 引擎制作的 Galgame`"
       :description="data.description"
-      :is-show-divider="false"
     >
       <template #endContent>
         <div class="space-y-3">

@@ -39,7 +39,6 @@ const handleUpdateRegisterStatus = async () => {
     <KunHeader
       name="网站设置"
       description="有时网站会不间断涌入大量发布违规信息的用户, 这是有人在攻击网站, 此时请各位管理员关闭网站注册"
-      :is-show-divider="false"
     >
     </KunHeader>
 

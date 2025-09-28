@@ -62,11 +62,7 @@ if (data.value) {
     content-class="space-y-6"
     v-if="data"
   >
-    <KunHeader
-      :name="data.label"
-      :description="data.description"
-      :is-show-divider="false"
-    >
+    <KunHeader :name="data.label" :description="data.description">
       <template #endContent>
         <div class="space-y-3">
           <div class="flex items-center space-x-3">

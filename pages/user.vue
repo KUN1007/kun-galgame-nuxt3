@@ -28,32 +28,34 @@ if (data.value === 'banned') {
 </script>
 
 <template>
-  <KunCard
-    :is-hoverable="false"
-    :is-transparent="false"
-    class-name="m-auto"
-    content-class="h-[calc(100dvh-120px)]"
-    v-if="data !== 'banned'"
-  >
-    <div v-if="data" class="flex h-full w-full">
-      <UserNavBar
-        :user="{ id: data.id, name: data.name, avatar: data.avatar }"
-      />
+  <div class="contents">
+    <KunCard
+      :is-hoverable="false"
+      :is-transparent="false"
+      class-name="m-auto"
+      content-class="h-[calc(100dvh-120px)]"
+      v-if="data !== 'banned'"
+    >
+      <div v-if="data" class="flex h-full w-full">
+        <UserNavBar
+          :user="{ id: data.id, name: data.name, avatar: data.avatar }"
+        />
 
-      <div class="scrollbar-hide h-full w-full overflow-y-auto px-3">
-        <NuxtPage :user="data" />
+        <div class="scrollbar-hide h-full w-full overflow-y-auto px-3">
+          <NuxtPage :user="data" />
+        </div>
       </div>
-    </div>
 
-    <KunNull v-if="!data" description="未找到该用户" />
-  </KunCard>
+      <KunNull v-if="!data" description="未找到该用户" />
+    </KunCard>
 
-  <KunCard
-    v-if="data === 'banned'"
-    :is-hoverable="false"
-    :is-transparent="false"
-    content-class="h-[calc(100dvh-120px)]"
-  >
-    <KunNull description="此用户已被封禁" />
-  </KunCard>
+    <KunCard
+      v-if="data === 'banned'"
+      :is-hoverable="false"
+      :is-transparent="false"
+      content-class="h-[calc(100dvh-120px)]"
+    >
+      <KunNull description="此用户已被封禁" />
+    </KunCard>
+  </div>
 </template>

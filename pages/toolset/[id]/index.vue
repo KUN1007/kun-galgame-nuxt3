@@ -136,7 +136,8 @@ if (toolset) {
 </script>
 
 <template>
-  <ToolsetDetail v-if="data" :toolset="data" :id="id" />
-
-  <KunNull v-else description="未找到该工具资源" />
+  <div class="contents">
+    <ToolsetDetail v-if="data" :toolset="data" :id="id" />
+    <KunNull v-else description="未找到该工具资源" />
+  </div>
 </template>

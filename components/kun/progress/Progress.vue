@@ -101,63 +101,65 @@ const circleOffset = computed(
 </script>
 
 <template>
-  <div
-    v-if="variant === 'circle'"
-    class="relative inline-flex items-center justify-center"
-  >
-    <svg class="h-24 w-24 -rotate-90 transform" viewBox="0 0 100 100">
-      <circle
-        class="text-default-300"
-        stroke="currentColor"
-        stroke-width="10"
-        fill="transparent"
-        r="45"
-        cx="50"
-        cy="50"
-      />
-      <circle
-        :class="colorClasses[color]"
-        stroke="currentColor"
-        stroke-width="10"
-        fill="transparent"
-        r="45"
-        cx="50"
-        cy="50"
-        stroke-linecap="round"
-        :stroke-dasharray="circleCircumference"
-        :stroke-dashoffset="circleOffset"
-        style="transition: stroke-dashoffset 0.35s ease"
-      />
-    </svg>
-    <span v-if="showLabel" class="absolute text-sm font-medium">
-      {{ percentage }}%
-    </span>
-  </div>
-
-  <div
-    v-else
-    class="bg-default-300 w-full overflow-hidden"
-    role="progressbar"
-    :aria-valuenow="indeterminate ? undefined : percentage"
-    :aria-valuemin="0"
-    :aria-valuemax="max"
-    :class="[sizeClasses, roundedClasses, className]"
-  >
+  <div class="contents">
     <div
-      :class="
-        cn(
-          'flex h-full items-center transition-all duration-500 ease-out',
-          barClasses
-        )
-      "
-      :style="indeterminate ? 'width:100%' : `width:${percentage}%`"
+      v-if="variant === 'circle'"
+      class="relative inline-flex items-center justify-center"
     >
-      <span
-        v-if="showLabel && !indeterminate"
-        class="px-2 text-xs font-medium text-white"
-      >
+      <svg class="h-24 w-24 -rotate-90 transform" viewBox="0 0 100 100">
+        <circle
+          class="text-default-300"
+          stroke="currentColor"
+          stroke-width="10"
+          fill="transparent"
+          r="45"
+          cx="50"
+          cy="50"
+        />
+        <circle
+          :class="colorClasses[color]"
+          stroke="currentColor"
+          stroke-width="10"
+          fill="transparent"
+          r="45"
+          cx="50"
+          cy="50"
+          stroke-linecap="round"
+          :stroke-dasharray="circleCircumference"
+          :stroke-dashoffset="circleOffset"
+          style="transition: stroke-dashoffset 0.35s ease"
+        />
+      </svg>
+      <span v-if="showLabel" class="absolute text-sm font-medium">
         {{ percentage }}%
       </span>
+    </div>
+
+    <div
+      v-else
+      class="bg-default-300 w-full overflow-hidden"
+      role="progressbar"
+      :aria-valuenow="indeterminate ? undefined : percentage"
+      :aria-valuemin="0"
+      :aria-valuemax="max"
+      :class="[sizeClasses, roundedClasses, className]"
+    >
+      <div
+        :class="
+          cn(
+            'flex h-full items-center transition-all duration-500 ease-out',
+            barClasses
+          )
+        "
+        :style="indeterminate ? 'width:100%' : `width:${percentage}%`"
+      >
+        <span
+          v-if="showLabel && !indeterminate"
+          class="px-2 text-xs font-medium text-white"
+        >
+          {{ percentage }}%
+        </span>
+      </div>
     </div>
   </div>
 </template>

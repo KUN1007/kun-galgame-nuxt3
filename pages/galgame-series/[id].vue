@@ -24,7 +24,8 @@ if (data.value) {
 </script>
 
 <template>
-  <GalgameSeriesDetail :data="data" v-if="data" />
-
-  <KunNull v-else description="未找到这个 Galgame 系列" />
+  <div class="contents">
+    <GalgameSeriesDetail :data="data" v-if="data" />
+    <KunNull v-else description="未找到这个 Galgame 系列" />
+  </div>
 </template>

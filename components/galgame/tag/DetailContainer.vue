@@ -66,7 +66,6 @@ const handleUpdateTag = async (data: UpdateGalgameTagPayload) => {
     <KunHeader
       :name="`含有标签 ${data.name} 的 Galgame`"
       :description="data.description"
-      :is-show-divider="false"
     >
       <template #endContent>
         <div class="space-y-3">

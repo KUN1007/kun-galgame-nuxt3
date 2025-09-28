@@ -18,36 +18,39 @@ const getIndexClasses = (index: number) => {
 </script>
 
 <template>
-  <div class="absolute right-1 bottom-1 flex sm:hidden">
-    <span
-      :class="
-        cn(
-          'text-default-500 flex items-center justify-center rounded-full px-2 text-xl font-bold',
-          getIndexClasses(index)
-        )
-      "
-    >
-      {{ index + 1 }}
-    </span>
-  </div>
-  <div class="hidden w-10 shrink-0 items-center justify-center sm:flex">
-    <Icon
-      v-if="index === 0"
-      name="fluent-emoji-flat:1st-place-medal"
-      class="h-8 w-8"
-    />
-    <Icon
-      v-else-if="index === 1"
-      name="fluent-emoji-flat:2nd-place-medal"
-      class="h-8 w-8"
-    />
-    <Icon
-      v-else-if="index === 2"
-      name="fluent-emoji-flat:3rd-place-medal"
-      class="h-8 w-8"
-    />
-    <span v-else class="text-default-500 text-xl font-bold">
-      {{ index + 1 }}
-    </span>
+  <div class="contents">
+    <div class="absolute right-1 bottom-1 flex sm:hidden">
+      <span
+        :class="
+          cn(
+            'text-default-500 flex items-center justify-center rounded-full px-2 text-xl font-bold',
+            getIndexClasses(index)
+          )
+        "
+      >
+        {{ index + 1 }}
+      </span>
+    </div>
+
+    <div class="hidden w-10 shrink-0 items-center justify-center sm:flex">
+      <Icon
+        v-if="index === 0"
+        name="fluent-emoji-flat:1st-place-medal"
+        class="h-8 w-8"
+      />
+      <Icon
+        v-else-if="index === 1"
+        name="fluent-emoji-flat:2nd-place-medal"
+        class="h-8 w-8"
+      />
+      <Icon
+        v-else-if="index === 2"
+        name="fluent-emoji-flat:3rd-place-medal"
+        class="h-8 w-8"
+      />
+      <span v-else class="text-default-500 text-xl font-bold">
+        {{ index + 1 }}
+      </span>
+    </div>
   </div>
 </template>

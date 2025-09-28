@@ -131,3 +131,29 @@ onMounted(() => {
     </NuxtLayout>
   </div>
 </template>
+
+<style>
+.kun-page-enter-active,
+.kun-page-leave-active {
+  transition: all 0.2s ease;
+  will-change: transform, opacity;
+}
+
+.kun-page-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.kun-page-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.kun-page-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+.kun-page-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
+}
+</style>

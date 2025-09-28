@@ -15,7 +15,6 @@ const emits = defineEmits<{
 <template>
   <div class="space-y-3">
     <KunHeader
-      :is-show-divider="false"
       name="Galgame 工具下载资源"
       description="您可以在这里添加或下载 Galgame 工具资源, S3 对象存储是直链不限速的下载方式"
       scale="h2"
