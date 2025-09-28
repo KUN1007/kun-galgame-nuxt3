@@ -43,7 +43,7 @@ const { data, status } = await useLazyFetch(
       <KunAvatar :user="history.user" />
 
       <div class="space-y-1">
-        <div class="flex gap-2">
+        <div class="flex flex-wrap gap-2">
           <span>{{ history.user.name }}</span>
           <span>
             {{ KUN_GALGAME_RESOURCE_PULL_REQUEST_ACTION_MAP[history.action] }}

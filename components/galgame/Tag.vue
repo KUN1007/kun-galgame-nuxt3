@@ -85,7 +85,7 @@ const filteredTags = computed(() => {
     <KunScrollShadow
       axis="vertical"
       shadow-size="3rem"
-      class="max-h-[200px] md:max-h-[400px]"
+      class-name="max-h-[200px] md:max-h-[400px]"
     >
       <TransitionGroup name="tag-list" tag="div" class="flex flex-wrap gap-3">
         <KunLink
@@ -94,29 +94,27 @@ const filteredTags = computed(() => {
           underline="none"
           :to="`/galgame-tag/${tag.id}`"
         >
-          <KunTooltip :text="`${tag.galgameCount} 个 Galgame 使用该标签`">
-            <KunBadge class-name="bg-default-500/10 cursor-pointer" size="md">
-              <span
-                :class="
-                  cn(
-                    'mr-1.5',
-                    tag.category === 'content' && 'text-primary',
-                    tag.category === 'sexual' && 'text-danger',
-                    tag.category === 'technical' && 'text-success'
-                  )
-                "
-              >
-                #
-              </span>
-              {{ tag.name }}
-              <span
-                v-if="tag.spoilerLevel > 0"
-                class="text-warning-600 text-xs"
-              >
-                {{ tag.spoilerLevel > 1 ? '(严重剧透)' : '(剧透)' }}
-              </span>
-            </KunBadge>
-          </KunTooltip>
+          <KunBadge class-name="bg-default-500/10 cursor-pointer" size="md">
+            <span
+              :class="
+                cn(
+                  'mr-1.5',
+                  tag.category === 'content' && 'text-primary',
+                  tag.category === 'sexual' && 'text-danger',
+                  tag.category === 'technical' && 'text-success'
+                )
+              "
+            >
+              #
+            </span>
+            {{ tag.name }}
+            <span class="text-default-500 text-xs">
+              {{ `+${tag.galgameCount}` }}
+            </span>
+            <span v-if="tag.spoilerLevel > 0" class="text-warning-600 text-xs">
+              {{ tag.spoilerLevel > 1 ? '(严重剧透)' : '(剧透)' }}
+            </span>
+          </KunBadge>
         </KunLink>
       </TransitionGroup>
 
