@@ -54,12 +54,11 @@ export const kunCMTheme = () => {
     },
 
     '.cm-line': {
-      padding: '0',
+      padding: '0.2rem 0',
       borderRadius: '0.375rem',
       maxWidth: '100%',
       whiteSpace: 'pre-wrap',
       fontSize: '1rem',
-      margin: '0.2rem 0',
       '&:hover': {
         backgroundColor: colors.overlayLight
       }
