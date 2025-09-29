@@ -88,7 +88,6 @@ export const insertKunSpoilerCommand = $command(
     if (!node) {
       return true
     }
-    // @ts-expect-error it's a milkdown type change
     dispatch(state.tr.replaceSelectionWith(node).scrollIntoView())
     return true
   }

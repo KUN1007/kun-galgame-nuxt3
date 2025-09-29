@@ -10,10 +10,8 @@ const hasMark = (state: EditorState, type: MarkType) => {
   }
   const { from, $from, to, empty } = state.selection
   if (empty) {
-    // @ts-expect-error it's a milkdown type change
     return !!type.isInSet(state.storedMarks || $from.marks())
   }
-  // @ts-expect-error it's a milkdown type change
   return state.doc.rangeHasMark(from, to, type)
 }
 
@@ -22,7 +20,6 @@ export const stopLinkCommand = $command('StopLink', (ctx) => () => {
     const markType = linkSchema.type(ctx)
     const checkMark = hasMark(state, markType)
     if (checkMark) {
-      // @ts-expect-error it's a milkdown type change
       dispatch?.(state.tr.removeStoredMark(markType))
     }
     return false
