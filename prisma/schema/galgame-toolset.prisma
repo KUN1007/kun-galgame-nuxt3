@@ -21,7 +21,6 @@ model galgame_toolset {
 
   alias        galgame_toolset_alias[]
   resource     galgame_toolset_resource[]
-  category     galgame_toolset_topic_relation[]
   topic        galgame_toolset_category_relation[]
   comment      galgame_toolset_comment[]
   practicality galgame_toolset_practicality[]
@@ -118,18 +117,6 @@ model galgame_toolset_category_relation {
   updated DateTime @updatedAt
 
   @@id([toolset_id, category_id])
-}
-
-model galgame_toolset_topic_relation {
-  toolset_id Int
-  toolset    galgame_toolset @relation(fields: [toolset_id], references: [id], onDelete: Cascade)
-  topic_id   Int
-  topic      topic           @relation(fields: [topic_id], references: [id])
-
-  created DateTime @default(now())
-  updated DateTime @updatedAt
-
-  @@id([toolset_id, topic_id])
 }
 
 model galgame_toolset_comment {

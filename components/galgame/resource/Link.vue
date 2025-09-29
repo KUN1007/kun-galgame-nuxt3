@@ -108,7 +108,7 @@ onMounted(async () => {
 
 <template>
   <div class="space-y-2">
-    <div class="flex flex-wrap items-center justify-between space-y-2">
+    <div class="flex flex-wrap items-center justify-between gap-2">
       <div class="flex flex-wrap items-center gap-1 rounded-lg">
         <KunBadge color="primary">
           <KunIcon :name="GALGAME_RESOURCE_TYPE_ICON_MAP[resource.type]" />

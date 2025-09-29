@@ -1,0 +1,80 @@
+model galgame_rating {
+    id Int @id @default(autoincrement())
+
+    // no, neutral, yes
+    recommend     String
+    // 1-10
+    overall       Int
+    view          Int      @default(0)
+    // ba_saku - ba_saku opus, plot - plot opus, moe - moe opus, daily - daily opus
+    galgame_type  String[] @default([])
+    // not_started, in_progress, finished_one, finished_main, finished_all, dropped
+    play_status   String   @default("not_started")
+    short_summary String   @default("")
+    // summary spoiler - none, portion, serious
+    spoiler_level String   @default("none")
+
+    // 1-10, 0 refers to null
+    // art style, artists
+    art          Int @default(0)
+    // galgame story
+    story        Int @default(0)
+    // bgm
+    music        Int @default(0)
+    // character characterization
+    character    Int @default(0)
+    // single character route, route option settings
+    route        Int @default(0)
+    // galgame system design, user usage experience
+    system       Int @default(0)
+    // cv
+    voice        Int @default(0)
+    // is this galgame desire to replay
+    replay_value Int @default(0)
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
+
+    user_id    Int
+    user       user    @relation(fields: [user_id], references: [id])
+    galgame_id Int
+    galgame    galgame @relation(fields: [galgame_id], references: [id])
+    topic_id   Int?
+
+    like    galgame_rating_like[]
+    comment galgame_rating_comment[]
+
+    // user can rating a galgame only once
+    @@unique([user_id, galgame_id])
+    @@index([galgame_id])
+    @@index([overall])
+}
+
+model galgame_rating_like {
+    id Int @id @default(autoincrement())
+
+    galgame_rating_id Int
+    galgame_rating    galgame_rating @relation(fields: [galgame_rating_id], references: [id], onDelete: Cascade)
+    user_id           Int
+    user              user           @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
+
+    @@unique([galgame_rating_id, user_id])
+}
+
+model galgame_rating_comment {
+    id      Int    @id @default(autoincrement())
+    content String @db.VarChar(1007)
+
+    galgame_rating_id Int
+    galgame_rating    galgame_rating @relation(fields: [galgame_rating_id], references: [id], onDelete: Cascade)
+    user_id           Int
+    user              user           @relation("user_galgame_rating_comment", fields: [user_id], references: [id], onDelete: Cascade)
+    target_user_id    Int?
+    target_user       user?          @relation("galgame_rating_comment_target_user", fields: [target_user_id], references: [id], onDelete: Cascade)
+
+    created DateTime @default(now())
+    updated DateTime @updatedAt
+}

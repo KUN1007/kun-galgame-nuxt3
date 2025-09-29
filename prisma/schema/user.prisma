@@ -35,15 +35,19 @@ model user {
     created_topic_poll topic_poll[]
     topic_poll_vote    topic_poll_vote[]
 
-    galgame                galgame[]             @relation("user_galgame")
-    galgame_like           galgame_like[]
-    galgame_favorite       galgame_favorite[]
-    galgame_contributor    galgame_contributor[]
-    galgame_comment        galgame_comment[]     @relation("user_galgame_comment")
-    galgame_comment_target galgame_comment[]     @relation("galgame_comment_target_user")
-    galgame_pr             galgame_pr[]
-    galgame_history        galgame_history[]
-    galgame_link           galgame_link[]
+    galgame                       galgame[]                @relation("user_galgame")
+    galgame_like                  galgame_like[]
+    galgame_favorite              galgame_favorite[]
+    galgame_contributor           galgame_contributor[]
+    galgame_comment               galgame_comment[]        @relation("user_galgame_comment")
+    galgame_comment_target        galgame_comment[]        @relation("galgame_comment_target_user")
+    galgame_pr                    galgame_pr[]
+    galgame_history               galgame_history[]
+    galgame_link                  galgame_link[]
+    galgame_rating                galgame_rating[]
+    galgame_rating_like           galgame_rating_like[]
+    galgame_rating_comment        galgame_rating_comment[] @relation("user_galgame_rating_comment")
+    galgame_rating_comment_target galgame_rating_comment[] @relation("galgame_rating_comment_target_user")
 
     galgame_resource      galgame_resource[]      @relation("user_galgame_resource")
     galgame_resource_like galgame_resource_like[]

@@ -22,11 +22,9 @@ const { data } = await useFetch(`/api/toolset/${id.value}`, {
 const toolset = data.value
 
 if (toolset) {
-  const title = toolset.name as string
+  const title = `${toolset.name} 资源下载`
   const pageUrl = `${kungal.domain.main}${route.path}`
-  const description = (toolset.description as string)
-    ?.slice(0, 175)
-    ?.replace(/\\|\n/g, '')
+  const description = toolset.description.slice(0, 175)?.replace(/\\|\n/g, '')
 
   const osMap: Record<string, string> = {
     windows: 'Windows',
@@ -54,7 +52,7 @@ if (toolset) {
     dateModified: new Date(toolset.updated).toISOString(),
     author: {
       '@type': 'Person',
-      name: toolset.user?.name
+      name: toolset.user.name
     } as Person,
     sameAs: (toolset.homepage || []).slice(0, 5),
     interactionStatistic: [
@@ -102,13 +100,13 @@ if (toolset) {
       articleBody: description,
       datePublished: new Date(toolset.created).toISOString(),
       dateModified: new Date(toolset.updated).toISOString(),
-      author: { '@type': 'Person', name: toolset.user?.name } as Person,
+      author: { '@type': 'Person', name: toolset.user.name } as Person,
       commentCount: toolset.commentCount,
       comment: (toolset.commentPreview || []).map((c) => ({
         '@type': 'Comment',
         text: (c.content as string)?.slice(0, 280)?.replace(/\\|\n/g, ''),
         datePublished: new Date(c.created).toISOString(),
-        author: { '@type': 'Person', name: c.user?.name } as Person
+        author: { '@type': 'Person', name: c.user.name } as Person
       }))
     }
 
@@ -127,8 +125,8 @@ if (toolset) {
     title,
     description,
     articleAuthor: [`${kungal.domain.main}/user/${toolset.user?.id}/info`],
-    articlePublishedTime: toolset.created?.toString?.() || `${toolset.created}`,
-    articleModifiedTime: toolset.updated?.toString?.() || `${toolset.updated}`
+    articlePublishedTime: toolset.created.toString(),
+    articleModifiedTime: toolset.updated.toString()
   })
 } else {
   useKunDisableSeo('未找到该工具资源')

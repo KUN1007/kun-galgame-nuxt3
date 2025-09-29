@@ -29,6 +29,7 @@ model galgame {
   pr       galgame_pr[]
   history  galgame_history[]
   alias    galgame_alias[]
+  rating   galgame_rating[]
 
   official galgame_official_relation[]
   engine   galgame_engine_relation[]

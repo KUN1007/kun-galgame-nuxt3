@@ -16,7 +16,7 @@ if (data.value) {
     useKunDisableSeo(data.value.name)
   } else {
     useKunSeoMeta({
-      title: data.value.name,
+      title: `${data.value.name} 系列下载资源`,
       description: data.value.description
     })
   }
