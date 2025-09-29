@@ -18,7 +18,7 @@ const { data } = await useFetch(`/api/ranking/galgame`, {
         :to="`/galgame/${galgame.id}`"
         :class-name="
           cn(
-            'relative flex items-center gap-4 rounded-xl border p-3 transition-all hover: hover:-translate-y-1',
+            'relative flex border border-default/20 items-center gap-3 rounded-xl p-3 transition-all hover:-translate-y-1',
             getRankClasses(index)
           )
         "
@@ -33,9 +33,9 @@ const { data } = await useFetch(`/api/ranking/galgame`, {
         />
         <div class="flex-1">
           <div class="flex flex-col items-start justify-between gap-3">
-            <h3 class="truncate font-semibold">
+            <h2 class="font-semibold">
               {{ getPreferredLanguageText(galgame.name) }}
-            </h3>
+            </h2>
             <div class="mt-1 flex items-center gap-2">
               <KunAvatar :user="galgame.user" size="sm" />
               <span class="text-default-500 text-sm">

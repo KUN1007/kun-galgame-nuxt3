@@ -40,5 +40,5 @@ export const getRankClasses = (index: number) => {
   if (index === 2) {
     return 'bg-info-400/20 border-info-500/50'
   }
-  return 'bg-default-100/50 border-transparent'
+  return ''
 }

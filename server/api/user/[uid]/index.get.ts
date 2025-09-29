@@ -40,12 +40,15 @@ export default defineEventHandler(async (event) => {
           reply_created: true,
           comment_created: true,
           topic: true,
+          created_topic_poll: true,
           galgame: true,
           galgame_comment: true,
           galgame_pr: true,
           galgame_link: true,
           galgame_contributor: true,
-          galgame_resource: true
+          galgame_resource: true,
+          galgame_toolset: true,
+          galgame_toolset_resource: true
         }
       }
     }
@@ -115,6 +118,7 @@ export default defineEventHandler(async (event) => {
     replyCreated: user._count.reply_created,
     commentCreated: user._count.comment_created,
     topic: user._count.topic,
+    topicPoll: user._count.created_topic_poll,
 
     galgame: user._count.galgame,
     galgameComment: user._count.galgame_comment,
@@ -123,6 +127,8 @@ export default defineEventHandler(async (event) => {
     contributeGalgame: user._count.galgame_contributor,
 
     galgameResource: user._count.galgame_resource,
+    galgameToolset: user._count.galgame_toolset,
+    galgameToolsetResource: user._count.galgame_toolset_resource,
 
     dailyTopicCount: user.topic.length,
     dailyGalgameCount: user.galgame.length

@@ -19,6 +19,7 @@ export interface UserInfo {
   replyCreated: number
   commentCreated: number
   topic: number
+  topicPoll: number
 
   galgame: number
   galgameComment: number
@@ -27,6 +28,8 @@ export interface UserInfo {
   contributeGalgame: number
 
   galgameResource: number
+  galgameToolset: number
+  galgameToolsetResource: number
 
   dailyTopicCount: number
   dailyGalgameCount: number

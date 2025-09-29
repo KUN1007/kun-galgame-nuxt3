@@ -22,7 +22,7 @@ const handleClick = () => {
 <template>
   <blockquote
     @click="handleClick"
-    class="group border-primary/30 bg-default-100/50 hover:border-primary/80 hover:bg-default-100 hover: cursor-pointer rounded-lg border-l-4 p-3 transition-all"
+    class="group border-primary/30 bg-default-100/50 hover:border-primary/80 hover:bg-default-100 cursor-pointer rounded-lg border-l-4 p-3 transition-all"
   >
     <div class="flex flex-wrap items-center gap-x-2 text-sm">
       <span class="text-default-600">回复</span>
