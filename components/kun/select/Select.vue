@@ -3,7 +3,8 @@ import type { KunSelectProps } from './type'
 import {
   useElementBounding,
   useEventListener,
-  useWindowSize
+  useWindowSize,
+  onClickOutside
 } from '@vueuse/core'
 
 const props = withDefaults(defineProps<KunSelectProps>(), {
@@ -29,6 +30,9 @@ const dropdown = useTemplateRef<HTMLElement>('dropdown')
 const buttonBounds = useElementBounding(button)
 const dropdownBounds = useElementBounding(dropdown)
 const { height: windowHeight } = useWindowSize()
+onClickOutside(button, () => {
+  isOpen.value = false
+})
 
 const selectedLabel = computed(() => {
   const selected = props.options.find(

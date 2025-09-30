@@ -238,7 +238,8 @@ const touchActionStyle = computed(() => ({
           'scrollbar-hide',
           axis === 'horizontal' ? 'overflow-x-auto' : 'overflow-y-auto',
           props.className,
-          isDragging ? 'cursor-grabbing' : 'cursor-grab'
+          draggable ? 'cursor-grab' : '',
+          isDragging ? 'cursor-grabbing' : ''
         )
       "
       :style="touchActionStyle"

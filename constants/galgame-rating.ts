@@ -85,6 +85,7 @@ export const KUN_GALGAME_DIM_LABELS: Record<KunGalgameDim, string> = {
 
 export const KUN_GALGAME_DIM_DESCRIPTIONS: Record<KunGalgameDim, string[]> = {
   art: [
+    '',
     '无画面, 或者画的简直不是人',
     '作画太简单, 或多处崩坏',
     '画面令人感觉突兀',
@@ -97,6 +98,7 @@ export const KUN_GALGAME_DIM_DESCRIPTIONS: Record<KunGalgameDim, string[]> = {
     '最强作画, 这游戏简直就是艺术'
   ],
   story: [
+    '',
     '白开水都不如',
     '剧情很迷惑, 不知所以',
     '剧情绝大部分比较无聊',
@@ -109,6 +111,7 @@ export const KUN_GALGAME_DIM_DESCRIPTIONS: Record<KunGalgameDim, string[]> = {
     '简直就是神作, 一辈子都忘不了'
   ],
   music: [
+    '',
     '没有音乐, 或者纯噪音',
     'BGM 完全不合适, 听了出戏',
     '音乐存在感极低, 记不住任何旋律',
@@ -121,6 +124,7 @@ export const KUN_GALGAME_DIM_DESCRIPTIONS: Record<KunGalgameDim, string[]> = {
     '神级 BGM, 直接听哭了'
   ],
   character: [
+    '',
     '这游戏塑造的是鸡, 不是人',
     '勉强能算是在写人',
     '很难对这个游戏的角色有印象',
@@ -133,6 +137,7 @@ export const KUN_GALGAME_DIM_DESCRIPTIONS: Record<KunGalgameDim, string[]> = {
     '我要和她恋爱一辈子, 立马结婚生孩子'
   ],
   route: [
+    '',
     '没有分支, 单线游戏',
     '所谓分支只是摆设',
     '路线设计很单调, 重复度高',
@@ -145,6 +150,7 @@ export const KUN_GALGAME_DIM_DESCRIPTIONS: Record<KunGalgameDim, string[]> = {
     '分支和真结局都是神级, 回味无穷'
   ],
   system: [
+    '',
     '系统极其简陋, 甚至有错误',
     '界面交互非常反人类',
     '功能少得可怜, 影响游玩体验',
@@ -157,6 +163,7 @@ export const KUN_GALGAME_DIM_DESCRIPTIONS: Record<KunGalgameDim, string[]> = {
     '完美的系统设计, 体验堪比现代大作'
   ],
   voice: [
+    '',
     '没有配音, 不是人配的音',
     '配音质量极差, 不完整, 影响体验',
     '配音很敷衍, 听着尴尬',
@@ -169,6 +176,7 @@ export const KUN_GALGAME_DIM_DESCRIPTIONS: Record<KunGalgameDim, string[]> = {
     '神级演绎, 传奇声优阵容'
   ],
   replay_value: [
+    '',
     '谁玩第二次谁 **',
     '玩过一遍就腻了',
     '重复体验基本没有必要',

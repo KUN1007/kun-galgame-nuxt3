@@ -22,7 +22,7 @@ provide<GalgameDetail>('galgame', props.galgame)
 
     <GalgameTag :tags="galgame.tag" />
 
-    <div class="grid grid-cols-1 gap-3">
+    <div v-if="galgame.ratings.length" class="grid grid-cols-1 gap-3">
       <GalgameRatingCard :ratings="galgame.ratings" />
     </div>
 
@@ -38,8 +38,6 @@ provide<GalgameDetail>('galgame', props.galgame)
           <GalgameResource />
 
           <GalgamePatchContainer :vndb-id="galgame.vndbId" />
-
-          <GalgameRatingContainer />
 
           <div v-if="galgame.series" class="space-y-3">
             <KunHeader
@@ -77,12 +75,28 @@ provide<GalgameDetail>('galgame', props.galgame)
           <GalgamePrContainer />
         </KunCard>
 
-        <KunCard :is-hoverable="false" :is-transparent="false">
+        <KunCard
+          content-class="space-y-3"
+          :is-hoverable="false"
+          :is-transparent="false"
+        >
           <KunHeader
             name="贡献者"
             description="本游戏项目的贡献者, 计 Galgame 资源发布贡献"
             scale="h3"
           />
+
+          <div
+            class="text-default-500 flex cursor-default flex-wrap items-center gap-2"
+          >
+            <KunUser :user="galgame.user" />
+            <span class="text-sm">
+              {{
+                `${formatDate(galgame.created, { isShowYear: true })} 创建本游戏`
+              }}
+            </span>
+          </div>
+
           <div class="flex flex-wrap items-center gap-1">
             <KunAvatar
               v-for="(user, index) in galgame.contributor"

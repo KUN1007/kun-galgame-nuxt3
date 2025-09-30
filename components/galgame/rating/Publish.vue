@@ -4,25 +4,31 @@ import {
   KUN_GALGAME_RATING_RECOMMEND_MAP,
   KUN_GALGAME_RATING_PLAY_STATUS_CONST,
   KUN_GALGAME_RATING_PLAY_STATUS_MAP,
-  KUN_GALGAME_DIMENSIONS,
-  KUN_GALGAME_DIM_DESCRIPTIONS,
-  KUN_GALGAME_DIM_LABELS,
-  type KunGalgameDim
+  KUN_GALGAME_RATING_SPOILER_CONST,
+  KUN_GALGAME_RATING_SPOILER_MAP
 } from '~/constants/galgame-rating'
+import { createGalgameRatingSchema } from '~/validations/galgame-rating'
 
 const props = defineProps<{
   galgameId: number
+  modalValue: boolean
   onPublished?: () => void
+}>()
+
+const emit = defineEmits<{
+  'update:modalValue': [value: boolean]
 }>()
 
 const recommend =
   ref<(typeof KUN_GALGAME_RATING_RECOMMEND_CONST)[number]>('neutral')
 const playStatus =
   ref<(typeof KUN_GALGAME_RATING_PLAY_STATUS_CONST)[number]>('not_started')
+const spoilerLevel =
+  ref<(typeof KUN_GALGAME_RATING_SPOILER_CONST)[number]>('none')
 const overall = ref(1)
 const shortSummary = ref('')
 
-const advancedOpen = ref(false)
+const showAdvanced = ref(false)
 const dims = ref({
   art: 1,
   story: 1,
@@ -64,29 +70,41 @@ const playStatusOptions = computed(() =>
     label: KUN_GALGAME_RATING_PLAY_STATUS_MAP[v] || v
   }))
 )
+const spoilerOptions = computed(() =>
+  (KUN_GALGAME_RATING_SPOILER_CONST as readonly string[]).map((v) => ({
+    value: v,
+    label: KUN_GALGAME_RATING_SPOILER_MAP[v] || v
+  }))
+)
 
-const validate = () => {
-  if (!recommend.value) return '请选择推荐度'
-  if (!overall.value) return '请选择总评分数'
-  if (!playStatus.value) return '请选择游玩状态'
-  if (
-    (overall.value === 1 || overall.value === 10) &&
-    shortSummary.value.trim().length < 100
-  ) {
-    return '当总评为 1 或 10 时，短评需至少 100 字'
+const close = () => emit('update:modalValue', false)
+
+const resetForm = () => {
+  recommend.value = 'neutral'
+  playStatus.value = 'not_started'
+  spoilerLevel.value = 'none'
+  overall.value = 1
+  shortSummary.value = ''
+  showAdvanced.value = false
+  dims.value = {
+    art: 1,
+    story: 1,
+    music: 1,
+    character: 1,
+    route: 1,
+    system: 1,
+    voice: 1,
+    replay_value: 1
   }
-  return ''
 }
 
 const submit = async () => {
-  const msg = validate()
-  if (msg) return useMessage(msg, 'warn')
-  isSubmitting.value = true
   const body = {
     galgameId: props.galgameId,
     recommend: recommend.value,
     overall: overall.value,
     play_status: playStatus.value,
+    spoiler_level: spoilerLevel.value,
     short_summary: shortSummary.value,
     art: dims.value.art,
     story: dims.value.story,
@@ -98,7 +116,12 @@ const submit = async () => {
     replay_value: dims.value.replay_value,
     galgameType: [] as string[]
   }
+  const valid = useKunSchemaValidator(createGalgameRatingSchema, body)
+  if (!valid) {
+    return
+  }
 
+  isSubmitting.value = true
   const res = await $fetch('/api/galgame-rating', {
     method: 'POST',
     body,
@@ -108,77 +131,85 @@ const submit = async () => {
   isSubmitting.value = false
   if (res) {
     useMessage('发布评分成功', 'success')
-    recommend.value = 'neutral'
-    playStatus.value = 'not_started'
-    overall.value = 1
-    shortSummary.value = ''
-    dims.value = {
-      art: 1,
-      story: 1,
-      music: 1,
-      character: 1,
-      route: 1,
-      system: 1,
-      voice: 1,
-      replay_value: 1
-    }
+    resetForm()
     props.onPublished?.()
+    close()
   }
 }
 </script>
 
 <template>
-  <div class="space-y-3">
-    <div class="space-y-1">
-      <label class="text-sm">总评(1-10)</label>
-      <KunRating v-model="overall" :max="10" aria-label="overall" />
-    </div>
-
-    <div class="grid grid-cols-1 gap-3 md:grid-cols-4">
-      <KunSelect
-        :options="recommendOptions"
-        v-model="recommend"
-        label="推荐度"
-      />
-      <KunSelect
-        :options="playStatusOptions"
-        v-model="playStatus"
-        label="游玩状态"
-      />
-      <div class="flex items-end justify-end gap-2">
-        <KunButton variant="light" @click="advancedOpen = true">
-          高级评分
-        </KunButton>
-        <KunButton :loading="isSubmitting" @click="submit">提交</KunButton>
-      </div>
-    </div>
-
-    <KunTextarea
-      v-model="shortSummary"
-      label="短评"
-      :rows="4"
-      placeholder="可选填；当总评为 1 或 10 时需至少 100 字"
-      :maxlength="1007"
-      :show-char-count="true"
-      auto-grow
-    />
-
-    <KunModal
-      v-model:modal-value="advancedOpen"
-      inner-class-name="max-w-[780px] w-[90vw]"
-    >
+  <KunModal
+    :modal-value="modalValue"
+    @update:modal-value="(v) => emit('update:modalValue', v)"
+    inner-class-name="max-w-[780px] w-[90vw]"
+    :is-dismissable="false"
+  >
+    <div class="space-y-3">
       <KunHeader
-        name="高级评分"
-        description="补充八维评分，可以更准确地反映你的观感"
+        name="对此游戏进行评分"
+        description="您可以对每个游戏提交一次评分, 评分提交后可以修改, 您填写的简评越长, 您的评分在 Galgame 页面展示会越靠前 (这将会有平均 1w 左右的浏览量)"
         scale="h3"
       />
-      <GalgameRatingAdvanced v-model="dims" />
-      <div class="mt-4 flex justify-end gap-2">
-        <KunButton variant="light" @click="advancedOpen = false">
-          关闭
-        </KunButton>
-        <KunButton :loading="isSubmitting" @click="submit">提交</KunButton>
+
+      <div class="flex items-end gap-6">
+        <div class="flex flex-col gap-1">
+          <label class="text-sm">总评分(1-10)</label>
+          <KunRating v-model="overall" :max="10" aria-label="overall" />
+        </div>
+
+        <span class="text-warning-500 text-4xl font-bold">
+          {{ overall }}
+        </span>
       </div>
-    </KunModal>
-  </div>
+
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
+        <KunSelect
+          :options="recommendOptions"
+          v-model="recommend"
+          label="推荐度"
+        />
+        <KunSelect
+          :options="playStatusOptions"
+          v-model="playStatus"
+          label="通关状态"
+        />
+        <KunSelect
+          :options="spoilerOptions"
+          v-model="spoilerLevel"
+          label="您的简评是否有剧透"
+        />
+      </div>
+
+      <KunTextarea
+        v-model="shortSummary"
+        label="简评 (不要出现 R18)"
+        :rows="4"
+        placeholder="「 枯れない世界と終わる花 」莲真的是我遇见最好的女孩子, 想和她结婚天长地久恩恩爱爱百年好合, 想和她翻云覆雨、干湿分离、水乳交融、干柴烈火, 日日夜夜每时每刻每个开心难过七滋八味苦辣麻香咸的日子里都在想念、挚爱、铭记着莲, 你们懂这种心情吗！！！这已经不是爱了, 这种东西叫本能, 我只是本能的爱着这个孩子而已, 我无法控制自己的本能, 我已经病入膏肓了, 病名为莲。"
+        :maxlength="1007"
+        :show-char-count="true"
+        auto-grow
+      />
+
+      <div class="flex items-center justify-between">
+        <KunButton variant="flat" @click="showAdvanced = !showAdvanced">
+          {{ showAdvanced ? '关闭高级评分' : '高级评分' }}
+        </KunButton>
+        <div class="flex items-center gap-2">
+          <KunButton variant="light" color="default" @click="close">
+            取消
+          </KunButton>
+          <KunButton :loading="isSubmitting" @click="submit">发布</KunButton>
+        </div>
+      </div>
+
+      <p class="text-default-500 text-sm">
+        如果您不填写高级评分, 我们会自动根据总评分为您填写
+      </p>
+
+      <div v-if="showAdvanced" class="pt-2">
+        <GalgameRatingAdvanced v-model="dims" />
+      </div>
+    </div>
+  </KunModal>
 </template>

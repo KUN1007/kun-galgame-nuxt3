@@ -35,6 +35,8 @@ const galgameAliasArray = computed(() => {
 })
 const hasPermission = computed(() => props.galgame.user.id === id || role >= 2)
 
+const isRatingOpen = ref(false)
+
 const handleChangeBanner = async () => {
   const imageBlob = await getImage('kun-galgame-rewrite-banner')
   if (!imageBlob) {
@@ -215,19 +217,7 @@ onMounted(async () => {
         </div>
 
         <div class="flex items-center justify-between">
-          <KunTooltip text="Galgame 创建时间">
-            <div
-              class="text-default-500 flex cursor-default items-center gap-2"
-            >
-              <KunAvatar :user="galgame.user" />
-              <KunIcon name="lucide:calendar" />
-              <span>
-                {{ formatDate(galgame.created, { isShowYear: true }) }}
-              </span>
-            </div>
-          </KunTooltip>
-
-          <div class="flex gap-1">
+          <div class="flex items-center gap-1">
             <KunTooltip :text="`浏览量: ${galgame.view}`">
               <KunBadge size="md">
                 <KunIcon name="lucide:eye" />
@@ -248,8 +238,23 @@ onMounted(async () => {
               :favorite-count="galgame.favoriteCount"
               :is-favorited="galgame.isFavorited"
             />
+          </div>
+
+          <div class="flex gap-1">
+            <KunButton
+              variant="shadow"
+              color="primary"
+              @click="isRatingOpen = true"
+            >
+              添加评分
+            </KunButton>
 
             <GalgameRewrite :galgame="galgame" />
+
+            <GalgameRatingPublish
+              v-model:modal-value="isRatingOpen"
+              :galgame-id="galgame.id"
+            />
           </div>
         </div>
       </div>

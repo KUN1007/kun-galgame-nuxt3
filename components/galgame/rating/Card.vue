@@ -5,17 +5,25 @@ import {
   KUN_GALGAME_RATING_PLAY_STATUS_MAP
 } from '~/constants/galgame-rating'
 import type { GalgamePageRatingCard } from '~/types/api/galgame-rating'
+import type { KunUIColor } from '~/components/kun/ui/type'
 
 defineProps<{
   ratings: GalgamePageRatingCard[]
 }>()
 
-const recommendColor = (rating: GalgamePageRatingCard) =>
-  rating.recommend === 'yes'
-    ? 'success'
-    : rating.recommend === 'no'
-      ? 'danger'
-      : 'default'
+const recommendColor: Record<string, KunUIColor> = {
+  strong_no: 'danger',
+  no: 'default',
+  neutral: 'secondary',
+  yes: 'success',
+  strong_yes: 'warning'
+}
+
+const spoilerColor: Record<string, KunUIColor> = {
+  none: 'success',
+  portion: 'warning',
+  serious: 'danger'
+}
 </script>
 
 <template>
@@ -64,13 +72,16 @@ const recommendColor = (rating: GalgamePageRatingCard) =>
         </div>
 
         <div class="text-default-500 flex flex-wrap items-center gap-2">
-          <KunBadge class-name="shrink-0" :color="recommendColor(rating)">
+          <KunBadge
+            class-name="shrink-0"
+            :color="recommendColor[rating.recommend]"
+          >
             {{ KUN_GALGAME_RATING_RECOMMEND_MAP[rating.recommend] }}
           </KunBadge>
           <KunBadge color="primary">
             {{ KUN_GALGAME_RATING_PLAY_STATUS_MAP[rating.play_status] }}
           </KunBadge>
-          <KunBadge color="secondary">
+          <KunBadge :color="spoilerColor[rating.spoiler_level]">
             {{ KUN_GALGAME_RATING_SPOILER_MAP[rating.spoiler_level] }}
           </KunBadge>
         </div>
