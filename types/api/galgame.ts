@@ -7,6 +7,7 @@ import type { GalgameSeries } from './galgame-series'
 import type { GalgameEngineItem } from './galgame-engine'
 import type { GalgameOfficialItem } from './galgame-official'
 import type { GalgameTagItem } from './galgame-tag'
+import type { GalgamePageRatingCard } from './galgame-rating'
 
 export interface GalgameDetailTag extends GalgameTagItem {
   spoilerLevel: number
@@ -38,6 +39,7 @@ export interface GalgameDetail {
   engine: GalgameEngineItem[]
   official: GalgameOfficialItem[]
   tag: GalgameDetailTag[]
+  ratings: GalgamePageRatingCard[]
   created: Date | string
   updated: Date | string
 }

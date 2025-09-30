@@ -1,7 +1,7 @@
 model galgame_rating {
     id Int @id @default(autoincrement())
 
-    // no, neutral, yes
+    // strong_no, no, neutral, yes, strong_yes
     recommend     String
     // 1-10
     overall       Int

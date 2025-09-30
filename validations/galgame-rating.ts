@@ -26,6 +26,7 @@ export const createGalgameRatingSchema = z
     music: z.coerce.number().int().min(0).max(10).default(0),
     character: z.coerce.number().int().min(0).max(10).default(0),
     route: z.coerce.number().int().min(0).max(10).default(0),
+    system: z.coerce.number().int().min(0).max(10).default(0),
     voice: z.coerce.number().int().min(0).max(10).default(0),
     replay_value: z.coerce.number().int().min(0).max(10).default(0)
   })
@@ -57,6 +58,7 @@ export const updateGalgameRatingSchema = z
     music: z.coerce.number().int().min(0).max(10),
     character: z.coerce.number().int().min(0).max(10),
     route: z.coerce.number().int().min(0).max(10),
+    system: z.coerce.number().int().min(0).max(10),
     voice: z.coerce.number().int().min(0).max(10),
     replay_value: z.coerce.number().int().min(0).max(10)
   })

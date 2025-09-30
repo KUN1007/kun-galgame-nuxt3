@@ -22,6 +22,10 @@ provide<GalgameDetail>('galgame', props.galgame)
 
     <GalgameTag :tags="galgame.tag" />
 
+    <div class="grid grid-cols-1 gap-3">
+      <GalgameRatingCard :ratings="galgame.ratings" />
+    </div>
+
     <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
       <div class="md:col-span-2">
         <KunCard
@@ -34,6 +38,8 @@ provide<GalgameDetail>('galgame', props.galgame)
           <GalgameResource />
 
           <GalgamePatchContainer :vndb-id="galgame.vndbId" />
+
+          <GalgameRatingContainer />
 
           <div v-if="galgame.series" class="space-y-3">
             <KunHeader

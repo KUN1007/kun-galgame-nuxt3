@@ -38,12 +38,12 @@ const handleKunCardClick = (event: MouseEvent) => {
 
 const colorClasses: Record<KunUIColor | 'background', string> = {
   background: 'bg-background',
-  default: 'bg-default-100/70',
-  primary: 'bg-primary-100/70 border-primary-300',
-  secondary: 'bg-secondary-100/70 border-secondary-300',
-  success: 'bg-success-100/70 border-success-300',
-  warning: 'bg-warning-100/70 border-warning-300',
-  danger: 'bg-danger-100/70 border-danger-300'
+  default: 'bg-default-100/30',
+  primary: 'bg-primary-100/30 border-primary-300',
+  secondary: 'bg-secondary-100/30 border-secondary-300',
+  success: 'bg-success-100/30 border-success-300',
+  warning: 'bg-warning-100/30 border-warning-300',
+  danger: 'bg-danger-100/30 border-danger-300'
 }
 
 const roundedClasses = computed(() => {
