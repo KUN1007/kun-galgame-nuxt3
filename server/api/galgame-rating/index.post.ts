@@ -22,31 +22,42 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '您已经发布过该 Galgame 的评分了')
   }
 
-  const res = await prisma.galgame_rating.create({
-    data: {
-      galgame_id: galgameId,
-      user_id: userInfo.uid,
-      galgame_type: galgameType,
-      ...rest
-    },
-    include: {
-      user: { select: { id: true, name: true, avatar: true } },
-      _count: {
-        select: {
-          like: true
+  const contentLength = rest.short_summary.length
+  const moemoepointIncrement =
+    contentLength > 100 ? 10 : contentLength > 20 ? 5 : 3
+
+  return prisma.$transaction(async (prisma) => {
+    const res = await prisma.galgame_rating.create({
+      data: {
+        galgame_id: galgameId,
+        user_id: userInfo.uid,
+        galgame_type: galgameType,
+        ...rest
+      },
+      include: {
+        user: { select: { id: true, name: true, avatar: true } },
+        _count: {
+          select: {
+            like: true
+          }
         }
       }
+    })
+
+    await prisma.user.update({
+      where: { id: userInfo.uid },
+      data: { moemoepoint: { increment: moemoepointIncrement } }
+    })
+
+    const newRating: GalgamePageRatingCard = {
+      ...res,
+      galgameId: res.galgame_id,
+      user: res.user,
+      galgameType: res.galgame_type,
+      likeCount: 0,
+      isLiked: false
     }
+
+    return newRating
   })
-
-  const newRating: GalgamePageRatingCard = {
-    ...res,
-    galgameId: res.galgame_id,
-    user: res.user,
-    galgameType: res.galgame_type,
-    likeCount: 0,
-    isLiked: false
-  }
-
-  return newRating
 })

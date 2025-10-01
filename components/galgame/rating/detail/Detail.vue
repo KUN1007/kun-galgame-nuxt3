@@ -15,6 +15,7 @@ import type { GalgameRatingDetails } from '~/types/api/galgame-rating'
 const props = defineProps<{
   ratingId: number
   data: GalgameRatingDetails
+  refresh: () => void
 }>()
 
 const { id: uid, role } = usePersistUserStore()
@@ -285,6 +286,7 @@ const handleDeleteRating = async () => {
         replay_value: data.replay_value,
         galgameType: data.galgameType
       }"
+      @on-updated="refresh"
     />
   </div>
 </template>

@@ -64,19 +64,24 @@ const dims = ref({
   replay_value: 1
 })
 
-watch(overall, (val) => {
-  if (val <= 0) return
-  dims.value = {
-    art: val,
-    story: val,
-    music: val,
-    character: val,
-    route: val,
-    system: val,
-    voice: val,
-    replay_value: val
+watch(
+  () => overall.value,
+  (val) => {
+    if (val <= 0 || props.initialData) {
+      return
+    }
+    dims.value = {
+      art: val,
+      story: val,
+      music: val,
+      character: val,
+      route: val,
+      system: val,
+      voice: val,
+      replay_value: val
+    }
   }
-})
+)
 
 const isSubmitting = ref(false)
 

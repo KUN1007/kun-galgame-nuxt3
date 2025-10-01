@@ -34,7 +34,22 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '没有删除该评分的权限')
   }
 
-  await prisma.galgame_rating.delete({ where: { id: input.galgameRatingId } })
+  const contentLength = rating.short_summary.length
+  const moemoepointDecrement =
+    contentLength > 100 ? 10 : contentLength > 20 ? 5 : 3
 
-  return 'MOEMOE delete galgame rating successfully!'
+  return prisma.$transaction(async (prisma) => {
+    await prisma.galgame_rating.delete({
+      where: {
+        id: input.galgameRatingId
+      }
+    })
+
+    await prisma.user.update({
+      where: { id: userInfo.uid },
+      data: { moemoepoint: { increment: moemoepointDecrement } }
+    })
+
+    return 'MOEMOE delete galgame rating successfully!'
+  })
 })
