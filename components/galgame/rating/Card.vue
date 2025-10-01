@@ -54,7 +54,7 @@ defineProps<{
             class-name="max-h-[110px]"
             class="text-default-700 text-sm"
           >
-            {{ rating.short_summary }}
+            <KunContentText :content="rating.short_summary" />
           </KunScrollShadow>
         </div>
 

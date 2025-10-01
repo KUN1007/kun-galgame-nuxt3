@@ -134,12 +134,10 @@ const handleDeleteRating = async () => {
             </KunBadge>
           </div>
 
-          <div
-            v-if="data.short_summary"
-            class="text-default-700 leading-7 whitespace-pre-wrap"
-          >
-            <KunContent :content="data.short_summary" />
-          </div>
+          <KunContentText
+            :content="data.short_summary"
+            class-name="leading-7"
+          />
         </div>
 
         <GalgameRatingRadar

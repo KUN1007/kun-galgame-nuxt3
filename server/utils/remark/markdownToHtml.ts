@@ -9,8 +9,9 @@ import rehypePrism from 'rehype-prism-plus'
 import { unified } from 'unified'
 import { rehypeKunLazyImage } from './plugins/rehypeKunLazyImage'
 import { rehypeKunCodeBlockWrapper } from './plugins/rehypeKunCodeBlockWrapper'
-import { rehypeH1ToH2 } from './plugins/rehypeH1ToH2'
+import { rehypeKunH1ToH2 } from './plugins/rehypeKunH1ToH2'
 import { rehypeKunTableWrapper } from './plugins/rehypeKunTableWrapper'
+import { rehypeKunInsertZeroWidthSpace } from './plugins/rehypeKunInsertZeroWidthSpace'
 // import { rehypeKunSpoiler } from './plugins/rehypeKunSpoiler'
 // import { rehypeKunVideo } from './plugins/rehypeKunVideo'
 
@@ -21,7 +22,7 @@ export const markdownToHtml = async (markdown: string) => {
     .use(remarkFrontmatter)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeSanitize)
-    .use(rehypeH1ToH2)
+    .use(rehypeKunH1ToH2)
     .use(rehypeSlug)
     .use(rehypeKunLazyImage)
     .use(rehypePrism, {
@@ -30,6 +31,7 @@ export const markdownToHtml = async (markdown: string) => {
     })
     .use(rehypeKunCodeBlockWrapper)
     .use(rehypeKunTableWrapper)
+    .use(rehypeKunInsertZeroWidthSpace)
     .use(rehypeStringify)
     .process(markdown)
 
