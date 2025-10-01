@@ -1,7 +1,6 @@
 import prisma from '~/prisma/prisma'
 import { getGalgameDetailSchema } from '~/validations/galgame'
 import type { GalgameDetail } from '~/types/api/galgame'
-import type { GalgamePageRatingCard } from '~/types/api/galgame-rating'
 import type { GalgameSeries, GalgameSample } from '~/types/api/galgame-series'
 import type { KunGalgameTagCategory } from '~/constants/galgameTag'
 import type { KunGalgameOfficialCategory } from '~/constants/galgameOfficial'
@@ -113,6 +112,13 @@ export default defineEventHandler(async (event) => {
         },
         resource: {
           select: { type: true, language: true, platform: true }
+        },
+        rating: {
+          include: {
+            user: { select: { id: true, name: true, avatar: true } },
+            like: { where: { user_id: userId } },
+            _count: { select: { like: true } }
+          }
         }
       }
     }),
@@ -221,46 +227,16 @@ export default defineEventHandler(async (event) => {
       galgameCount: tag.tag._count.galgame,
       spoilerLevel: tag.spoiler_level
     })),
+    ratings: galgame.rating.map((r) => ({
+      ...r,
+      galgameId: r.galgame_id,
+      galgameType: r.galgame_type,
+      likeCount: r._count.like,
+      isLiked: r.like.length > 0
+    })),
     created: galgame.created,
     updated: galgame.updated
   }
 
-  // ratings for page display
-  const ratingRows = await prisma.galgame_rating.findMany({
-    where: { galgame_id: galgameId },
-    orderBy: { created: 'desc' },
-    take: 10,
-    include: {
-      user: { select: { id: true, name: true, avatar: true } },
-      like: { where: { user_id: userId } },
-      _count: { select: { like: true } }
-    }
-  })
-
-  const ratings: GalgamePageRatingCard[] = ratingRows.map((r) => ({
-    id: r.id,
-    galgameId: r.galgame_id,
-    user: r.user,
-    recommend: r.recommend,
-    overall: r.overall,
-    view: r.view,
-    galgameType: r.galgame_type,
-    play_status: r.play_status,
-    likeCount: r._count.like,
-    created: r.created,
-    updated: r.updated,
-    art: r.art,
-    story: r.story,
-    music: r.music,
-    character: r.character,
-    route: r.route,
-    system: r.system,
-    voice: r.voice,
-    replay_value: r.replay_value,
-    spoiler_level: r.spoiler_level,
-    short_summary: r.short_summary,
-    isLiked: r.like.length > 0
-  }))
-
-  return { ...data, ratings }
+  return data
 })

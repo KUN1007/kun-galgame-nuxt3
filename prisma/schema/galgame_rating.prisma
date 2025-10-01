@@ -10,7 +10,7 @@ model galgame_rating {
     galgame_type  String[] @default([])
     // not_started, in_progress, finished_one, finished_main, finished_all, dropped
     play_status   String   @default("not_started")
-    short_summary String   @default("")
+    short_summary String   @default("") @db.VarChar(1314)
     // summary spoiler - none, portion, serious
     spoiler_level String   @default("none")
 
@@ -66,7 +66,7 @@ model galgame_rating_like {
 
 model galgame_rating_comment {
     id      Int    @id @default(autoincrement())
-    content String @db.VarChar(1007)
+    content String @default("") @db.VarChar(1314)
 
     galgame_rating_id Int
     galgame_rating    galgame_rating @relation(fields: [galgame_rating_id], references: [id], onDelete: Cascade)

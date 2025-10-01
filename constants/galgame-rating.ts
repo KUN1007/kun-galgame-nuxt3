@@ -1,3 +1,5 @@
+import type { KunUIColor } from '~/components/kun/ui/type'
+
 export const KUN_GALGAME_RATING_RECOMMEND_CONST = [
   'strong_no',
   'no',
@@ -12,6 +14,16 @@ export const KUN_GALGAME_RATING_RECOMMEND_MAP: Record<string, string> = {
   yes: '推荐',
   strong_yes: '强烈推荐'
 }
+export const KUN_GALGAME_RATING_RECOMMEND_COLOR_MAP: Record<
+  string,
+  KunUIColor
+> = {
+  strong_no: 'danger',
+  no: 'default',
+  neutral: 'secondary',
+  yes: 'success',
+  strong_yes: 'warning'
+}
 
 export const KUN_GALGAME_RATING_SPOILER_CONST = [
   'none',
@@ -23,6 +35,12 @@ export const KUN_GALGAME_RATING_SPOILER_MAP: Record<string, string> = {
   portion: '本评分有部分剧透',
   serious: '本评分有严重剧透'
 }
+export const KUN_GALGAME_RATING_SPOILER_COLOR_MAP: Record<string, KunUIColor> =
+  {
+    none: 'success',
+    portion: 'warning',
+    serious: 'danger'
+  }
 
 export const KUN_GALGAME_RATING_PLAY_STATUS_CONST = [
   'not_started',

@@ -2,6 +2,7 @@ import prisma from '~/prisma/prisma'
 import { getGalgameRatingDetailSchema } from '~/validations/galgame-rating'
 import type { GalgameRatingDetails } from '~/types/api/galgame-rating'
 import type { GalgameSample, GalgameSeries } from '~/types/api/galgame-series'
+import type { KunGalgameOfficialCategory } from '~/constants/galgameOfficial'
 
 const userSelect = {
   id: true,
@@ -32,7 +33,18 @@ export default defineEventHandler(async (event) => {
         include: {
           rating: { select: { overall: true } },
           official: {
-            select: { official: { select: { id: true, name: true } } }
+            select: {
+              official: {
+                include: {
+                  _count: {
+                    select: {
+                      galgame: true
+                    }
+                  },
+                  alias: true
+                }
+              }
+            }
           },
           series: {
             include: {
@@ -134,7 +146,16 @@ export default defineEventHandler(async (event) => {
         'zh-cn': data.galgame.name_zh_cn,
         'zh-tw': data.galgame.name_zh_tw
       },
-      official: data.galgame.official.map((o) => o.official),
+      official: data.galgame.official.map((o) => ({
+        id: o.official.id,
+        name: o.official.name,
+        link: o.official.link,
+        category: o.official.category as KunGalgameOfficialCategory,
+        lang: o.official.lang,
+        alias: o.official.alias.map((a) => a.name),
+        galgameCount: o.official._count.galgame
+      })),
+      ageLimit: data.galgame.age_limit,
       originalLanguage: data.galgame.original_language,
       banner: data.galgame.banner,
       rating: data.galgame.rating.reduce((sum, r) => sum + (r.overall ?? 0), 0),

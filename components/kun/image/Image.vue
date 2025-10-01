@@ -9,7 +9,6 @@ interface KunImageProps {
   ariaLabel?: string
   format?: string
   quality?: string | number
-  style?: unknown
   width?: string | number
   height?: string | number
   preload?:
@@ -30,7 +29,6 @@ withDefaults(defineProps<KunImageProps>(), {
   ariaLabel: undefined,
   format: undefined,
   quality: undefined,
-  style: undefined,
   width: undefined,
   height: undefined,
   preload: undefined
@@ -47,21 +45,9 @@ withDefaults(defineProps<KunImageProps>(), {
     :aria-label="ariaLabel"
     :format="format"
     :quality="quality"
-    :style="style"
     :width="width"
     :height="height"
     :preload="preload"
     :custom="custom"
-  >
-    <img
-      v-if="custom"
-      :class="cn('', showKUNGalgameBackground && 'opacity-80', className)"
-      :src="src"
-      :alt="alt"
-      :aria-label="ariaLabel"
-      :style="style"
-      :width="width"
-      :height="height"
-    />
-  </NuxtImg>
+  />
 </template>

@@ -96,21 +96,37 @@ let lastTime = 0
 let velocity = 0
 let rafId: number | null = null
 
+const isInteractiveTarget = (el: EventTarget | null) => {
+  if (!(el instanceof Element)) return false
+  return !!el.closest(
+    'a, button, input, textarea, select, label, [role="link"], [role="button"], [data-no-drag]'
+  )
+}
+
 const onPointerDown = (e: PointerEvent) => {
   if (!props.draggable || props.axis !== 'horizontal') return
   const el = scrollContainer.value
   if (!el) return
   if (e.pointerType === 'mouse' && e.button !== 0) return
 
+  // if press el is a link / button / ...
+  if (isInteractiveTarget(e.target)) {
+    return
+  }
+
   isDragging.value = true
   preventClick.value = false
   startPointerX = e.clientX
   startScroll = el.scrollLeft
 
+  // capture on original target, click-friendly
   try {
-    el.setPointerCapture(e.pointerId)
-  } catch (e) {
-    console.log(e)
+    const tgt = e.target as Element | null
+    if (tgt && typeof tgt.setPointerCapture === 'function') {
+      tgt.setPointerCapture(e.pointerId)
+    }
+  } catch (err) {
+    // console.warn('setPointerCapture failed', err)
   }
 
   prevUserSelect = document.body.style.userSelect
@@ -126,38 +142,44 @@ const onPointerDown = (e: PointerEvent) => {
 }
 
 const onPointerMove = (e: PointerEvent) => {
-  if (!isDragging.value || props.axis !== 'horizontal') {
-    return
-  }
+  if (!isDragging.value || props.axis !== 'horizontal') return
   const el = scrollContainer.value
-  if (!el) {
-    return
-  }
-
-  e.preventDefault()
+  if (!el) return
 
   const curX = e.clientX
   const delta = curX - startPointerX
-  if (Math.abs(delta) > DRAG_THRESHOLD) preventClick.value = true
-  el.scrollLeft = startScroll - delta
 
-  const now = performance.now()
-  const dt = now - lastTime
-  if (dt > 0) {
-    velocity = (curX - lastX) / dt // px/ms
-    lastX = curX
-    lastTime = now
+  if (Math.abs(delta) > DRAG_THRESHOLD) {
+    preventClick.value = true
+    e.preventDefault()
+    el.scrollLeft = startScroll - delta
+
+    const now = performance.now()
+    const dt = now - lastTime
+    if (dt > 0) {
+      velocity = (curX - lastX) / dt
+      lastX = curX
+      lastTime = now
+    }
   }
 }
 
 const endDrag = (e?: PointerEvent) => {
-  if (!isDragging.value) {
-    return
-  }
+  if (!isDragging.value) return
   const el = scrollContainer.value
-  if (el && e) {
-    el.releasePointerCapture(e.pointerId)
+  if (e) {
+    try {
+      const tgt = e.target as Element | null
+      if (tgt && typeof tgt.releasePointerCapture === 'function') {
+        tgt.releasePointerCapture(e.pointerId)
+      } else if (el && typeof el.releasePointerCapture === 'function') {
+        el.releasePointerCapture(e.pointerId)
+      }
+    } catch (err) {
+      // console.log(err)
+    }
   }
+
   isDragging.value = false
   document.body.style.userSelect = prevUserSelect ?? ''
 
@@ -165,10 +187,8 @@ const endDrag = (e?: PointerEvent) => {
   const MIN_VELOCITY = 0.02
 
   const step = () => {
-    if (!el) {
-      return
-    }
-    el.scrollLeft -= velocity * 16 // a frame
+    if (!el) return
+    el.scrollLeft -= velocity * 16
     velocity *= FRICTION
     if (Math.abs(velocity) > MIN_VELOCITY) {
       rafId = requestAnimationFrame(step)
@@ -180,6 +200,7 @@ const endDrag = (e?: PointerEvent) => {
     rafId = requestAnimationFrame(step)
   }
 
+  // delay preventClick for clickable element
   setTimeout(() => {
     preventClick.value = false
   }, 0)

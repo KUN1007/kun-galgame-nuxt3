@@ -117,9 +117,14 @@ export const createGalgameRatingCommentSchema = z.object({
   content: z
     .string()
     .min(1)
-    .max(1007, { message: '评分评论长度不能超过 1007 字符' })
+    .max(1007, { message: '评分评论长度不能超过 1314 字符' })
 })
 
 export const deleteGalgameRatingCommentSchema = z.object({
   galgameRatingCommentId: z.coerce.number().min(1).max(9999999)
+})
+
+export const updateGalgameRatingCommentSchema = z.object({
+  galgameRatingCommentId: z.coerce.number().min(1).max(9999999),
+  content: z.string().min(1).max(1314, { message: '内容长度不能超过 1314 字' })
 })

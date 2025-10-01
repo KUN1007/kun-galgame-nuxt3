@@ -35,11 +35,10 @@ const isWrapperMode = computed(() => !!slots.default)
           class="bg-background/50 absolute inset-0 z-50 flex items-center justify-center rounded-lg"
         >
           <div class="flex flex-col items-center gap-3">
-            <KunImage
-              :custom="true"
+            <KunImageNative
               alt="loading"
               src="/kun.webp"
-              class="h-48 w-48 rounded-lg"
+              class-name="h-48 w-48 rounded-lg"
             />
             <span class="info text-xl">{{ description }}</span>
           </div>
@@ -48,7 +47,7 @@ const isWrapperMode = computed(() => !!slots.default)
     </div>
 
     <div v-else class="m-auto flex flex-col items-center gap-3">
-      <KunImage
+      <KunImageNative
         :custom="true"
         alt="loading"
         src="/kun.webp"

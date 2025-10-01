@@ -1,12 +1,11 @@
+import type { GalgameOfficialItem } from './galgame-official'
 import type { GalgameSeries } from './galgame-series'
 
 export interface GalgameInfoForRating {
   id: number
   name: KunLanguage
-  official: {
-    id: number
-    name: string
-  }[]
+  official: GalgameOfficialItem[]
+  ageLimit: string
   originalLanguage: string
   banner: string
   // rating overall average

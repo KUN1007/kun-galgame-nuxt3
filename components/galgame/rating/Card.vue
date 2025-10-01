@@ -1,29 +1,16 @@
 <script setup lang="ts">
 import {
   KUN_GALGAME_RATING_RECOMMEND_MAP,
+  KUN_GALGAME_RATING_RECOMMEND_COLOR_MAP,
   KUN_GALGAME_RATING_SPOILER_MAP,
+  KUN_GALGAME_RATING_SPOILER_COLOR_MAP,
   KUN_GALGAME_RATING_PLAY_STATUS_MAP
 } from '~/constants/galgame-rating'
 import type { GalgamePageRatingCard } from '~/types/api/galgame-rating'
-import type { KunUIColor } from '~/components/kun/ui/type'
 
 defineProps<{
   ratings: GalgamePageRatingCard[]
 }>()
-
-const recommendColor: Record<string, KunUIColor> = {
-  strong_no: 'danger',
-  no: 'default',
-  neutral: 'secondary',
-  yes: 'success',
-  strong_yes: 'warning'
-}
-
-const spoilerColor: Record<string, KunUIColor> = {
-  none: 'success',
-  portion: 'warning',
-  serious: 'danger'
-}
 </script>
 
 <template>
@@ -74,14 +61,16 @@ const spoilerColor: Record<string, KunUIColor> = {
         <div class="text-default-500 flex flex-wrap items-center gap-2">
           <KunBadge
             class-name="shrink-0"
-            :color="recommendColor[rating.recommend]"
+            :color="KUN_GALGAME_RATING_RECOMMEND_COLOR_MAP[rating.recommend]"
           >
             {{ KUN_GALGAME_RATING_RECOMMEND_MAP[rating.recommend] }}
           </KunBadge>
           <KunBadge color="primary">
             {{ KUN_GALGAME_RATING_PLAY_STATUS_MAP[rating.play_status] }}
           </KunBadge>
-          <KunBadge :color="spoilerColor[rating.spoiler_level]">
+          <KunBadge
+            :color="KUN_GALGAME_RATING_SPOILER_COLOR_MAP[rating.spoiler_level]"
+          >
             {{ KUN_GALGAME_RATING_SPOILER_MAP[rating.spoiler_level] }}
           </KunBadge>
         </div>
@@ -95,7 +84,13 @@ const spoilerColor: Record<string, KunUIColor> = {
             <KunIcon name="lucide:thumbs-up" />
             {{ rating.likeCount }}
           </span>
-          <KunLink size="sm" class-name="ml-auto">阅读详情 ></KunLink>
+          <KunLink
+            :to="`/galgame-rating/${rating.id}`"
+            size="sm"
+            class-name="ml-auto"
+          >
+            阅读详情 >
+          </KunLink>
         </div>
       </KunCard>
     </div>

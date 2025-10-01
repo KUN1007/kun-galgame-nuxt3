@@ -48,7 +48,7 @@ export default defineEventHandler(async (event) => {
     }
 
     await prisma.user.update({
-      where: { id: uid },
+      where: { id: rating.user_id },
       data: { moemoepoint: { increment: isLiked ? -1 : 1 } }
     })
 

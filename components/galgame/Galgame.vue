@@ -97,13 +97,7 @@ provide<GalgameDetail>('galgame', props.galgame)
             </span>
           </div>
 
-          <div class="flex flex-wrap items-center gap-1">
-            <KunAvatar
-              v-for="(user, index) in galgame.contributor"
-              :key="index"
-              :user="user"
-            />
-          </div>
+          <KunAvatarGroup :users="galgame.contributor" :ellipsis="false" />
         </KunCard>
 
         <div class="text-default-500 flex items-center justify-center text-sm">

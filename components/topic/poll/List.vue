@@ -213,24 +213,15 @@ const handleDelete = async () => {
     </div>
 
     <div class="flex flex-wrap justify-between gap-3">
-      <div class="flex flex-wrap items-center gap-1">
-        <KunAvatar
-          v-for="(user, index) in poll.voters"
-          :key="index"
-          :user="user"
-        />
-
-        <div
-          class="bg-default-500/20 flex size-8 items-center justify-center rounded-full text-xs"
-          v-if="!poll.is_anonymous && poll.vote_count && poll.vote_count > 5"
-        >
-          {{ `+ ${poll.vote_count - 5}` }}
-        </div>
-
+      <KunAvatarGroup
+        v-if="!poll.is_anonymous && poll.vote_count"
+        :users="poll.voters"
+        :total="poll.vote_count"
+      >
         <div class="text-default-500 text-sm" v-if="poll.is_anonymous">
           {{ `${poll.vote_count} 人投票` }}
         </div>
-      </div>
+      </KunAvatarGroup>
 
       <div
         v-if="canViewResults"
