@@ -25,7 +25,7 @@ defineProps<{
         <KunImage
           :src="galgame.banner.replace(/\.webp$/, '-mini.webp')"
           loading="lazy"
-          :alt="galgame.name['zh-cn']"
+          :alt="getPreferredLanguageText(galgame.name)"
           placeholder="/placeholder.webp"
           class="h-full w-full object-cover transition-transform duration-300"
           :style="{ aspectRatio: '16/9' }"

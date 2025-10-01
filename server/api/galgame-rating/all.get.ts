@@ -47,6 +47,16 @@ export default defineEventHandler(async (event) => {
       orderBy,
       include: {
         user: { select: { id: true, name: true, avatar: true } },
+        galgame: {
+          select: {
+            id: true,
+            banner: true,
+            name_en_us: true,
+            name_ja_jp: true,
+            name_zh_cn: true,
+            name_zh_tw: true
+          }
+        },
         _count: {
           select: {
             like: true
@@ -73,11 +83,22 @@ export default defineEventHandler(async (event) => {
     music: r.music,
     character: r.character,
     route: r.route,
+    system: r.system,
     voice: r.voice,
     replay_value: r.replay_value,
     likeCount: r._count.like,
     created: r.created,
-    updated: r.updated
+    updated: r.updated,
+    galgame: {
+      id: r.galgame.id,
+      banner: r.galgame.banner,
+      name: {
+        'en-us': r.galgame.name_en_us,
+        'ja-jp': r.galgame.name_ja_jp,
+        'zh-cn': r.galgame.name_zh_cn,
+        'zh-tw': r.galgame.name_zh_tw
+      }
+    }
   }))
 
   return { ratingData, totalCount }

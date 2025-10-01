@@ -5,7 +5,10 @@ import {
   KUN_GALGAME_RATING_PLAY_STATUS_CONST,
   KUN_GALGAME_RATING_PLAY_STATUS_MAP,
   KUN_GALGAME_RATING_SPOILER_CONST,
-  KUN_GALGAME_RATING_SPOILER_MAP
+  KUN_GALGAME_RATING_SPOILER_MAP,
+  KUN_GALGAME_RATING_GAME_TYPE_CONST,
+  KUN_GALGAME_RATING_GAME_TYPE_MAP,
+  KUN_GALGAME_RATING_GAME_TYPE_DESCRIPTION_MAP
 } from '~/constants/galgame-rating'
 import {
   createGalgameRatingSchema,
@@ -51,6 +54,15 @@ const spoilerLevel =
   ref<(typeof KUN_GALGAME_RATING_SPOILER_CONST)[number]>('none')
 const overall = ref(1)
 const shortSummary = ref('')
+const selectedTypes = ref<string[]>([])
+
+const toggleGameType = (checked: boolean, t: string) => {
+  if (checked) {
+    if (!selectedTypes.value.includes(t)) selectedTypes.value.push(t)
+  } else {
+    selectedTypes.value = selectedTypes.value.filter((x) => x !== t)
+  }
+}
 
 const showAdvanced = ref(false)
 const dims = ref({
@@ -126,6 +138,7 @@ watch(
         voice: props.initialData.voice,
         replay_value: props.initialData.replay_value
       }
+      selectedTypes.value = [...(props.initialData.galgameType ?? [])]
       showAdvanced.value = true
     }
   }
@@ -148,6 +161,7 @@ const resetForm = () => {
     voice: 1,
     replay_value: 1
   }
+  selectedTypes.value = []
 }
 
 const submit = async () => {
@@ -167,7 +181,7 @@ const submit = async () => {
       system: dims.value.system,
       voice: dims.value.voice,
       replay_value: dims.value.replay_value,
-      galgameType: props.initialData?.galgameType ?? []
+      galgameType: selectedTypes.value
     }
     const valid = useKunSchemaValidator(updateGalgameRatingSchema, body)
     if (!valid) {
@@ -206,7 +220,7 @@ const submit = async () => {
       system: dims.value.system,
       voice: dims.value.voice,
       replay_value: dims.value.replay_value,
-      galgameType: [] as string[]
+      galgameType: selectedTypes.value
     }
     const valid = useKunSchemaValidator(createGalgameRatingSchema, body)
     if (!valid) return
@@ -239,7 +253,7 @@ const submit = async () => {
     <div class="space-y-3">
       <KunHeader
         :name="isEditing ? '编辑评分' : '发布评分'"
-        description="发布对本作的评分与短评，支持高级维度评分。"
+        description="您可以选择性的使用高级评分, 每条评分将会平均有 1w+ 的曝光数, 您的评分会左右本网站 Galgame 的状态"
         scale="h3"
       />
 
@@ -250,6 +264,26 @@ const submit = async () => {
         </div>
 
         <span class="text-warning-500 text-4xl font-bold">{{ overall }}</span>
+      </div>
+
+      <div>
+        <span class="text-sm">游戏类型 (必选, 可多选)</span>
+        <div class="mt-2 flex flex-col gap-2">
+          <div
+            class="flex gap-3"
+            v-for="t in KUN_GALGAME_RATING_GAME_TYPE_CONST"
+            :key="t"
+          >
+            <KunCheckBox
+              :model-value="selectedTypes.includes(t)"
+              @update:model-value="(checked) => toggleGameType(checked, t)"
+              :label="KUN_GALGAME_RATING_GAME_TYPE_MAP[t]"
+            />
+            <p class="text-default-700 text-sm">
+              {{ KUN_GALGAME_RATING_GAME_TYPE_DESCRIPTION_MAP[t] }}
+            </p>
+          </div>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 gap-3 md:grid-cols-3">

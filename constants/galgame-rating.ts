@@ -71,6 +71,15 @@ export const KUN_GALGAME_RATING_GAME_TYPE_MAP: Record<string, string> = {
   moe: '萌系',
   daily: '日常系'
 }
+export const KUN_GALGAME_RATING_GAME_TYPE_DESCRIPTION_MAP: Record<
+  string,
+  string
+> = {
+  ba_saku: '以色情为主要游戏内容',
+  plot: '作品是否是剧情作由你来定义',
+  moe: '画风萌萌的 Galgame 即为萌作',
+  daily: '作品风格偏日常恋爱系'
+}
 
 export const KUN_GALGAME_RATING_SORT_FIELD_CONST = [
   'time',

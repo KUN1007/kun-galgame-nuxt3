@@ -13,6 +13,11 @@ export interface GalgameInfoForRating {
   ratingCount: number
 }
 
+export interface GalgameBasicForRatingCard {
+  id: number
+  name: KunLanguage
+}
+
 export interface GalgameRatingCard {
   id: number
   galgameId: number
@@ -23,9 +28,21 @@ export interface GalgameRatingCard {
   galgameType: string[]
   play_status: string
 
+  art: number
+  story: number
+  music: number
+  character: number
+  route: number
+  system: number
+  voice: number
+  replay_value: number
+  spoiler_level: string
+
   likeCount: number
   created: Date | string
   updated: Date | string
+
+  galgame: GalgameBasicForRatingCard
 }
 
 export interface GalgameRatingComment {
@@ -39,16 +56,6 @@ export interface GalgameRatingComment {
 }
 
 export interface GalgameRatingDetails extends GalgameRatingCard {
-  art: number
-  story: number
-  music: number
-  character: number
-  route: number
-  system: number
-  voice: number
-  replay_value: number
-
-  spoiler_level: string
   short_summary: string
 
   isLiked: boolean
@@ -59,17 +66,6 @@ export interface GalgameRatingDetails extends GalgameRatingCard {
 }
 
 export interface GalgamePageRatingCard extends GalgameRatingCard {
-  art: number
-  story: number
-  music: number
-  character: number
-  route: number
-  system: number
-  voice: number
-  replay_value: number
-
-  spoiler_level: string
   short_summary: string
-
   isLiked: boolean
 }

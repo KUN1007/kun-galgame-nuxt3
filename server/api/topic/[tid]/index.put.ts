@@ -95,7 +95,7 @@ export default defineEventHandler(async (event) => {
     if (!oldTopicHasConsumeSection && newTopicHasConsumeSection) {
       await prisma.user.update({
         where: { id: userInfo.uid },
-        data: { moemoepoint: -10 }
+        data: { moemoepoint: { increment: -10 } }
       })
     }
 

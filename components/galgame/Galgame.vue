@@ -38,7 +38,7 @@ const handleRatingCreated = (newRating: GalgamePageRatingCard) => {
     <GalgameTag :tags="galgame.tag" />
 
     <div v-if="sortedRatings.length" class="grid grid-cols-1 gap-3">
-      <GalgameRatingCard :ratings="sortedRatings" />
+      <GalgameRatingRadarCard :ratings="sortedRatings" />
     </div>
 
     <div class="grid grid-cols-1 gap-3 md:grid-cols-3">

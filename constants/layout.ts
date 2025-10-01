@@ -51,6 +51,13 @@ export const kunLayoutItem: KunLayoutItem[] = [
         label: 'Galgame'
       },
       {
+        name: 'galgame-rating',
+        icon: 'lucide:lollipop',
+        router: '/galgame-rating',
+        label: 'Galgame 评分',
+        hint: '最强!'
+      },
+      {
         name: 'website',
         icon: 'lucide:globe',
         router: '/website',

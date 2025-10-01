@@ -16,7 +16,7 @@ export const createGalgameRatingSchema = z
     overall: z.coerce.number().int().min(1).max(10),
     galgameType: z
       .array(z.enum(KUN_GALGAME_RATING_GAME_TYPE_CONST))
-      .default([]),
+      .min(1, { message: '您至少选择一个 Galgame 类型' }),
     play_status: z.enum(KUN_GALGAME_RATING_PLAY_STATUS_CONST),
     short_summary: z.string().default(''),
     spoiler_level: z.enum(KUN_GALGAME_RATING_SPOILER_CONST).default('none'),
@@ -48,7 +48,9 @@ export const updateGalgameRatingSchema = z
     galgameRatingId: z.coerce.number().min(1).max(9999999),
     recommend: z.enum(KUN_GALGAME_RATING_RECOMMEND_CONST),
     overall: z.coerce.number().int().min(1).max(10),
-    galgameType: z.array(z.enum(KUN_GALGAME_RATING_GAME_TYPE_CONST)),
+    galgameType: z
+      .array(z.enum(KUN_GALGAME_RATING_GAME_TYPE_CONST))
+      .min(1, { message: '您至少选择一个 Galgame 类型' }),
     play_status: z.enum(KUN_GALGAME_RATING_PLAY_STATUS_CONST),
     short_summary: z.string(),
     spoiler_level: z.enum(KUN_GALGAME_RATING_SPOILER_CONST),
