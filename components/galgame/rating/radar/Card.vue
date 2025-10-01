@@ -32,7 +32,7 @@ defineProps<{
 
           <div class="flex items-center gap-2">
             <span
-              class="text-secondary flex shrink-0 items-center text-xl font-bold"
+              class="text-warning flex shrink-0 items-center text-xl font-bold"
             >
               {{ `${rating.overall}` }}
               <span class="text-default-500 ml-1.5 text-sm">/ 10 </span>

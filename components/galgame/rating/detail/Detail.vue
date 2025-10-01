@@ -109,7 +109,13 @@ const handleDeleteRating = async () => {
                 <KunIcon class-name="text-2xl" name="lucide:lollipop" />
                 {{ rating }}
               </span>
-              <span class="text-default text-sm">系统算法评分</span>
+              <KunLink
+                to="/doc/help/galgame-rating-guide"
+                size="sm"
+                class="text-default"
+              >
+                系统算法评分
+              </KunLink>
             </div>
           </div>
 
@@ -167,28 +173,27 @@ const handleDeleteRating = async () => {
         />
       </div>
 
-      <div class="mt-4">
-        <KunHeader
-          name="维度说明"
-          description="各维度对应分值的文字解释"
-          scale="h3"
-        />
-        <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
-          <div
-            v-for="dim in KUN_GALGAME_DIMENSIONS"
-            :key="dim"
-            class="rounded-lg border p-3"
-          >
-            <div class="mb-1 flex items-center justify-between">
-              <span class="font-medium">
-                {{ KUN_GALGAME_DIM_LABELS[dim] }}
-              </span>
-              <KunBadge color="secondary">{{ data[dim] }}</KunBadge>
-            </div>
-            <p class="text-default-500 text-sm">
-              {{ KUN_GALGAME_DIM_DESCRIPTIONS[dim][data[dim]] }}
-            </p>
+      <KunHeader
+        name="维度说明"
+        description="各维度对应分值的文字解释"
+        scale="h2"
+        class="mt-6"
+      />
+      <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+        <div
+          v-for="dim in KUN_GALGAME_DIMENSIONS"
+          :key="dim"
+          class="rounded-lg border p-3"
+        >
+          <div class="mb-1 flex items-center justify-between">
+            <span class="font-medium">
+              {{ KUN_GALGAME_DIM_LABELS[dim] }}
+            </span>
+            <KunBadge color="secondary">{{ data[dim] }}</KunBadge>
           </div>
+          <p class="text-default-500 text-sm">
+            {{ KUN_GALGAME_DIM_DESCRIPTIONS[dim][data[dim]] }}
+          </p>
         </div>
       </div>
 
@@ -197,7 +202,7 @@ const handleDeleteRating = async () => {
         class="flex flex-wrap items-center gap-2"
       >
         <KunAvatarGroup :users="data.likedUsers" :ellipsis="false" />
-        <span class="text-default-500 text-sm">点赞了评分</span>
+        <span class="text-default-500 text-sm">点赞了该评分</span>
       </div>
 
       <div class="flex items-center justify-between gap-2">

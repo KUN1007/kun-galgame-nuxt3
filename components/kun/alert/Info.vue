@@ -69,7 +69,7 @@ onBeforeUnmount(() => {
       </Transition>
 
       <div class="pointer-events-none absolute mt-2 ml-6 select-none">
-        <KunImage :custom="true" class="h-16 w-full sm:h-24" :src="loli" />
+        <KunImage class="h-16 w-full sm:h-24" :src="loli" />
       </div>
 
       <Transition enter-active-class="animate-bounceInRight" appear>

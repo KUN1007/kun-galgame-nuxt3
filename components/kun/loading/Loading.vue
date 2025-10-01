@@ -48,7 +48,6 @@ const isWrapperMode = computed(() => !!slots.default)
 
     <div v-else class="m-auto flex flex-col items-center gap-3">
       <KunImageNative
-        :custom="true"
         alt="loading"
         src="/kun.webp"
         class="h-48 w-48 rounded-lg"

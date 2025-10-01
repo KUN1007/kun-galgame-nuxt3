@@ -43,7 +43,7 @@ const systemRating = (rating: GalgameRatingCard) => {
         />
 
         <div class="flex flex-col items-end gap-1">
-          <span class="flex items-center gap-1 text-yellow-500">
+          <span class="text-warning flex items-center gap-1">
             <KunIcon class="text-xl" name="lucide:lollipop" />
             <span class="text-lg font-bold">
               {{ systemRating(rating) }}

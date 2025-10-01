@@ -2,7 +2,6 @@
 interface KunImageProps {
   src: string
   alt?: string
-  custom?: boolean
   loading?: 'lazy' | 'eager'
   placeholder?: string | number | boolean | unknown[]
   className?: string
@@ -22,7 +21,6 @@ const { showKUNGalgameBackground } = storeToRefs(usePersistSettingsStore())
 
 withDefaults(defineProps<KunImageProps>(), {
   alt: 'image',
-  custom: undefined,
   loading: undefined,
   placeholder: undefined,
   className: undefined,
@@ -48,6 +46,5 @@ withDefaults(defineProps<KunImageProps>(), {
     :width="width"
     :height="height"
     :preload="preload"
-    :custom="custom"
   />
 </template>

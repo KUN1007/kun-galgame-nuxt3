@@ -257,6 +257,17 @@ const submit = async () => {
         scale="h3"
       />
 
+      <KunLink to="/doc/help/galgame-rating-guide">
+        鲲 Galgame 八维超评分系统介绍及使用说明
+      </KunLink>
+
+      <KunInfo
+        title="萌萌点奖励"
+        color="secondary"
+        icon="lucide:lollipop"
+        description="每发布一个评分, 您会获得 3 萌萌点, 短评超过 20 字为 5 萌萌点, 超过 100 字为 10 萌萌点"
+      />
+
       <div class="flex items-end gap-6">
         <div class="flex flex-col gap-1">
           <label class="text-sm">总体评分 (1-10)</label>
@@ -306,7 +317,7 @@ const submit = async () => {
 
       <KunTextarea
         v-model="shortSummary"
-        label="短评（请勿包含 R18 内容）"
+        label="短评 (可选, 请勿包含 R18 内容)"
         :rows="4"
         placeholder="「 枯れない世界と終わる花 」莲真的是我遇见最好的女孩子, 想和她结婚天长地久恩恩爱爱百年好合, 想和她翻云覆雨、干湿分离、水乳交融、干柴烈火, 日日夜夜每时每刻每个开心难过七滋八味苦辣麻香咸的日子里都在想念、挚爱、铭记着莲, 你们懂这种心情吗！！！这已经不是爱了, 这种东西叫本能, 我只是本能的爱着这个孩子而已, 我无法控制自己的本能, 我已经病入膏肓了, 病名为莲。"
         :maxlength="1314"
@@ -329,7 +340,8 @@ const submit = async () => {
       </div>
 
       <p class="text-default-500 text-sm">
-        如需长评，建议前往主题区发布主题贴。
+        如需长评, 建议前往话题区发布话题后将链接放在短评中。评分可较为随意填写,
+        我们的算法会帮您摆平一切!
       </p>
 
       <div v-if="showAdvanced" class="pt-2">

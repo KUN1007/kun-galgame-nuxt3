@@ -3,7 +3,7 @@ title: 'Galgame 资源网站大全'
 banner: '/content/galgame/galgame-resource-website/banner.avif'
 description: '本指南汇总了多个优质 Galgame 资源网站，按推荐等级分为 SSS、T0 到 T3 多个级别。文章首推 “Galgame 网站 Wiki” 作为最全面的资源索引平台。T0 级别包括 Nyaa，是最全面的 Galgame 资源站。T1 级别推荐 Anime-Sharing（AS 论坛）和 绯月论坛（KF），前者资源丰富，后者为中文 Galgame 交流的核心。T2 级别涵盖网盘下载站，如 zi0.cc。特殊站点包括 Moyu.moe（补丁下载）和 Telegram 群组（如黄油联盟 bot），提供自动化搜索服务。此外，Kungal.com 是开源、无广告的独特站点。'
 publishedTime: 2024-05-03
-modifiedTime: 2025-09-28
+modifiedTime: 2025-10-01
 category: galgame
 authorUid: 2
 authorName: '鲲'
