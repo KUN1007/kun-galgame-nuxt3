@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { GalgameDetail } from '~/types/api/galgame'
+import type { GalgamePageRatingCard } from '~/types/api/galgame-rating'
 
 const props = defineProps<{
   galgame: GalgameDetail
@@ -8,6 +9,17 @@ const props = defineProps<{
 const { images, isLightboxOpen, currentImageIndex } = useKunLightbox()
 
 provide<GalgameDetail>('galgame', props.galgame)
+
+const ratings = ref([...props.galgame.ratings])
+const sortedRatings = computed(() => {
+  return [...ratings.value].sort(
+    (a, b) => b.short_summary.length - a.short_summary.length
+  )
+})
+
+const handleRatingCreated = (newRating: GalgamePageRatingCard) => {
+  ratings.value.unshift(newRating)
+}
 </script>
 
 <template>
@@ -18,12 +30,15 @@ provide<GalgameDetail>('galgame', props.galgame)
       :initial-index="currentImageIndex"
     />
 
-    <GalgameHeader :galgame="galgame" />
+    <GalgameHeader
+      :galgame="galgame"
+      @on-rating-created="handleRatingCreated"
+    />
 
     <GalgameTag :tags="galgame.tag" />
 
-    <div v-if="galgame.ratings.length" class="grid grid-cols-1 gap-3">
-      <GalgameRatingCard :ratings="galgame.ratings" />
+    <div v-if="sortedRatings.length" class="grid grid-cols-1 gap-3">
+      <GalgameRatingCard :ratings="sortedRatings" />
     </div>
 
     <div class="grid grid-cols-1 gap-3 md:grid-cols-3">

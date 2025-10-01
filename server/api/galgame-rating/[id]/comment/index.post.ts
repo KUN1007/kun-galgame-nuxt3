@@ -1,5 +1,6 @@
 import prisma from '~/prisma/prisma'
 import { createGalgameRatingCommentSchema } from '~/validations/galgame-rating'
+import type { GalgameRatingComment } from '~/types/api/galgame-rating'
 
 export default defineEventHandler(async (event) => {
   const input = await kunParsePostBody(event, createGalgameRatingCommentSchema)
@@ -22,21 +23,32 @@ export default defineEventHandler(async (event) => {
   const { galgameRatingId, targetUserId, content } = input
 
   return prisma.$transaction(async (prisma) => {
-    await prisma.galgame_rating_comment.create({
+    const res = await prisma.galgame_rating_comment.create({
       data: {
         galgame_rating_id: galgameRatingId,
         target_user_id: targetUserId,
         content,
         user_id: userInfo.uid
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            avatar: true
+          }
+        },
+        target_user: {
+          select: {
+            id: true,
+            name: true,
+            avatar: true
+          }
+        }
       }
     })
 
     if (userInfo.uid !== targetUserId) {
-      await prisma.user.update({
-        where: { id: targetUserId },
-        data: { moemoepoint: { increment: 1 } }
-      })
-
       await createMessage(
         prisma,
         userInfo.uid,
@@ -48,6 +60,15 @@ export default defineEventHandler(async (event) => {
       )
     }
 
-    return 'MOEMOE publish galgame rating comment successfully!'
+    const newComment: GalgameRatingComment = {
+      id: res.id,
+      content: res.content,
+      user: res.user,
+      targetUser: res.target_user,
+      created: res.created,
+      updated: res.updated
+    }
+
+    return newComment
   })
 })

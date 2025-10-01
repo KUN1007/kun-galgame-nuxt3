@@ -1,28 +1,33 @@
 <script setup lang="ts">
+import type { GalgameRatingComment } from '~/types/api/galgame-rating'
+
 const props = defineProps<{
   ratingId: number
   ratingAuthor: KunUser
-  comments: Array<{
-    id: number
-    content: string
-    user: KunUser
-    targetUser: KunUser | null
-    created: string | Date
-    updated: string | Date
-  }>
+  commentsData: GalgameRatingComment[]
 }>()
 
 const sortOrder = ref<'desc' | 'asc'>('desc')
+const comments = ref<GalgameRatingComment[]>([...props.commentsData])
 
 const sortedComments = computed(() => {
-  const arr = [...props.comments]
-  arr.sort((a, b) => {
+  return [...comments.value].sort((a, b) => {
     const ta = new Date(a.created).getTime()
     const tb = new Date(b.created).getTime()
     return sortOrder.value === 'desc' ? tb - ta : ta - tb
   })
-  return arr
 })
+
+const handleEditCommentSuccess = (updatedComment: GalgameRatingComment) => {
+  const index = comments.value.findIndex((c) => c.id === updatedComment.id)
+  if (index !== -1) {
+    comments.value[index] = updatedComment
+  }
+}
+
+const handleDeleteCommentSuccess = (commentId: number) => {
+  comments.value = comments.value.filter((c) => c.id !== commentId)
+}
 </script>
 
 <template>
@@ -56,20 +61,21 @@ const sortedComments = computed(() => {
       <GalgameRatingCommentPanel
         :rating-id="ratingId"
         :target-user-id="ratingAuthor.id"
+        @on-success="(newComment) => comments.push(newComment)"
       />
 
-      <KunNull
-        v-if="sortedComments.length === 0"
-        description="还没有人评论，来做第一个吧！"
-      />
+      <KunNull v-if="comments.length === 0" />
 
       <div class="space-y-3" v-else>
         <GalgameRatingComment
-          v-for="c in sortedComments"
-          :key="c.id"
+          v-for="comment in sortedComments"
+          :key="comment.id"
           :rating-id="ratingId"
           :rating-author-id="ratingAuthor.id"
-          :comment="c"
+          :comment="comment"
+          @on-edit-success="handleEditCommentSuccess"
+          @on-delete-success="handleDeleteCommentSuccess"
+          @on-create-success="(newComment) => comments.push(newComment)"
         />
       </div>
     </div>

@@ -1,5 +1,6 @@
 import prisma from '~/prisma/prisma'
 import { createGalgameRatingSchema } from '~/validations/galgame-rating'
+import type { GalgamePageRatingCard } from '~/types/api/galgame-rating'
 
 export default defineEventHandler(async (event) => {
   const input = await kunParsePostBody(event, createGalgameRatingSchema)
@@ -21,14 +22,31 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '您已经发布过该 Galgame 的评分了')
   }
 
-  await prisma.galgame_rating.create({
+  const res = await prisma.galgame_rating.create({
     data: {
       galgame_id: galgameId,
       user_id: userInfo.uid,
       galgame_type: galgameType,
       ...rest
+    },
+    include: {
+      user: { select: { id: true, name: true, avatar: true } },
+      _count: {
+        select: {
+          like: true
+        }
+      }
     }
   })
 
-  return 'MOEMOE publish galgame rating successfully!'
+  const newRating: GalgamePageRatingCard = {
+    ...res,
+    galgameId: res.galgame_id,
+    user: res.user,
+    galgameType: res.galgame_type,
+    likeCount: 0,
+    isLiked: false
+  }
+
+  return newRating
 })

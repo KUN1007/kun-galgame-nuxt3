@@ -1,5 +1,6 @@
 import prisma from '~/prisma/prisma'
 import { updateGalgameRatingCommentSchema } from '~/validations/galgame-rating'
+import type { GalgameRatingComment } from '~/types/api/galgame-rating'
 
 export default defineEventHandler(async (event) => {
   const input = await kunParsePutBody(event, updateGalgameRatingCommentSchema)
@@ -21,6 +22,20 @@ export default defineEventHandler(async (event) => {
           user_id: true,
           galgame: { select: { user_id: true } }
         }
+      },
+      user: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true
+        }
+      },
+      target_user: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true
+        }
       }
     }
   })
@@ -32,9 +47,8 @@ export default defineEventHandler(async (event) => {
   if (!user) {
     return kunError(event, '用户不存在')
   }
-
-  if (comment.user_id !== user.id && user.role < 2) {
-    return kunError(event, '无权限编辑该评论', 403)
+  if (comment.user_id !== user.id) {
+    return kunError(event, '您无权限编辑该评论', 403)
   }
 
   await prisma.galgame_rating_comment.update({
@@ -42,5 +56,14 @@ export default defineEventHandler(async (event) => {
     data: { content: input.content }
   })
 
-  return 'MOEMOE update galgame rating comment successfully!'
+  const newComment: GalgameRatingComment = {
+    id: comment.id,
+    content: input.content,
+    user: comment.user,
+    targetUser: comment.target_user,
+    created: comment.created,
+    updated: comment.updated
+  }
+
+  return newComment
 })

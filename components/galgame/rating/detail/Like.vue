@@ -49,17 +49,16 @@ const handleClickLike = () => {
 </script>
 
 <template>
-  <KunTooltip text="点赞">
-    <KunButton
-      :is-icon-only="true"
-      :variant="isLiked ? 'flat' : 'light'"
-      :color="isLiked ? 'secondary' : 'default'"
-      :size="likeCount ? 'md' : 'lg'"
-      class-name="gap-1"
-      @click="handleClickLike"
-    >
-      <KunIcon name="lucide:thumbs-up" />
-      <span v-if="likeCount">{{ likeCount }}</span>
-    </KunButton>
-  </KunTooltip>
+  <KunButton
+    :is-icon-only="true"
+    :variant="isLiked ? 'flat' : 'light'"
+    :color="isLiked ? 'secondary' : 'default'"
+    size="lg"
+    class-name="gap-1"
+    @click="handleClickLike"
+  >
+    <KunIcon name="lucide:thumbs-up" />
+    <span class="text-sm">点赞</span>
+    <span class="text-sm">{{ likeCount }}</span>
+  </KunButton>
 </template>

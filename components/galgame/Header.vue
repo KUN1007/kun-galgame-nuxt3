@@ -11,9 +11,14 @@ import {
 } from '~/constants/galgame'
 import { updateGalgameBannerSchema } from '~/validations/galgame'
 import type { GalgameDetail } from '~/types/api/galgame'
+import type { GalgamePageRatingCard } from '~/types/api/galgame-rating'
 
 const props = defineProps<{
   galgame: GalgameDetail
+}>()
+
+const emits = defineEmits<{
+  onRatingCreated: [GalgamePageRatingCard]
 }>()
 
 const { id, role } = usePersistUserStore()
@@ -254,6 +259,7 @@ onMounted(async () => {
             <GalgameRatingPublish
               v-model:modal-value="isRatingOpen"
               :galgame-id="galgame.id"
+              @on-published="(newRating) => emits('onRatingCreated', newRating)"
             />
           </div>
         </div>

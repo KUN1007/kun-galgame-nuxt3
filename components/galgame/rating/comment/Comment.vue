@@ -7,6 +7,12 @@ const props = defineProps<{
   comment: GalgameRatingComment
 }>()
 
+const emits = defineEmits<{
+  onCreateSuccess: [GalgameRatingComment]
+  onEditSuccess: [GalgameRatingComment]
+  onDeleteSuccess: [commentId: number]
+}>()
+
 const { id, role } = usePersistUserStore()
 
 const isShowReply = ref(false)
@@ -14,7 +20,7 @@ const isEditing = ref(false)
 const editingContent = ref('')
 
 const canDelete = computed(() => props.comment.user.id === id || role >= 2)
-const canEdit = computed(() => props.comment.user.id === id || role >= 2)
+const canEdit = computed(() => props.comment.user.id === id)
 
 const startEdit = () => {
   isEditing.value = true
@@ -43,6 +49,7 @@ const submitEdit = async () => {
   if (res) {
     useMessage('更新成功', 'success')
     cancelEdit()
+    emits('onEditSuccess', res)
   }
 }
 
@@ -60,7 +67,14 @@ const deleteComment = async () => {
   })
   if (res) {
     useMessage('删除成功', 'success')
+    emits('onDeleteSuccess', props.comment.id)
   }
+}
+
+const handleCreateSuccess = (newComment: GalgameRatingComment) => {
+  emits('onCreateSuccess', newComment)
+  cancelEdit()
+  isShowReply.value = false
 }
 </script>
 
@@ -71,8 +85,8 @@ const deleteComment = async () => {
     <div class="flex w-full flex-col space-y-2">
       <div class="flex flex-wrap items-center">
         <span class="text-default-700">{{ comment.user.name }}</span>
-        <div v-if="comment.targetUser">
-          <span class="mx-2">→</span>
+        <div class="ml-1" v-if="comment.targetUser">
+          =>
           <KunLink
             underline="hover"
             :to="`/user/${comment.targetUser.id}/info`"
@@ -94,15 +108,16 @@ const deleteComment = async () => {
             variant="light"
             color="default"
             @click="cancelEdit"
-            >取消</KunButton
           >
+            取消
+          </KunButton>
         </div>
       </div>
 
       <div class="flex items-end justify-between">
-        <span class="text-default-500 text-sm"
-          >发布于 {{ formatTimeDifference(comment.created) }}</span
-        >
+        <span class="text-default-500 text-sm">
+          发布于 {{ formatTimeDifference(comment.created) }}
+        </span>
 
         <div class="flex items-center justify-end gap-1">
           <KunButton
@@ -149,6 +164,7 @@ const deleteComment = async () => {
           :rating-id="ratingId"
           :target-user-id="comment.user.id"
           @close="isShowReply = false"
+          @on-success="handleCreateSuccess"
         />
       </KunAnimationFadeCard>
     </div>

@@ -39,7 +39,6 @@ model galgame_rating {
     user       user    @relation(fields: [user_id], references: [id])
     galgame_id Int
     galgame    galgame @relation(fields: [galgame_id], references: [id])
-    topic_id   Int?
 
     like    galgame_rating_like[]
     comment galgame_rating_comment[]

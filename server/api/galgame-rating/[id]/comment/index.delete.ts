@@ -40,18 +40,9 @@ export default defineEventHandler(async (event) => {
     return kunError(event, '您没有删除该评论的权限', 403)
   }
 
-  return prisma.$transaction(async (prisma) => {
-    if (comment.target_user_id && comment.user_id !== comment.target_user_id) {
-      await prisma.user.update({
-        where: { id: comment.target_user_id },
-        data: { moemoepoint: { increment: -1 } }
-      })
-    }
-
-    await prisma.galgame_rating_comment.delete({
-      where: { id: input.galgameRatingCommentId }
-    })
-
-    return 'MOEMOE delete galgame rating comment successfully!'
+  await prisma.galgame_rating_comment.delete({
+    where: { id: input.galgameRatingCommentId }
   })
+
+  return 'MOEMOE delete galgame rating comment successfully!'
 })

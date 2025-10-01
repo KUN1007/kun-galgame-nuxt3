@@ -88,10 +88,6 @@ const handleDeleteRating = async () => {
                 <span>
                   {{ data.user.name }}
                 </span>
-
-                <KunBadge size="md" color="primary">
-                  {{ KUN_GALGAME_RATING_PLAY_STATUS_MAP[data.play_status] }}
-                </KunBadge>
               </div>
 
               <div class="text-default-500 flex items-center gap-2 text-sm">
@@ -112,25 +108,39 @@ const handleDeleteRating = async () => {
                 <KunIcon class-name="text-2xl" name="lucide:lollipop" />
                 {{ rating }}
               </span>
-              <span class="text-default text-sm">
-                {{ `含用户总评 ${data.overall}` }}
-              </span>
+              <span class="text-default text-sm">系统算法评分</span>
             </div>
           </div>
 
-          <div class="flex items-center gap-2">
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="text-default-500 text-sm">通关状态</div>
+            <KunBadge color="primary">
+              {{ KUN_GALGAME_RATING_PLAY_STATUS_MAP[data.play_status] }}
+            </KunBadge>
+
+            <span class="bg-default-300 h-3 w-px" />
+
             <div class="text-default-500 text-sm">推荐程度</div>
             <KunBadge
               :color="KUN_GALGAME_RATING_RECOMMEND_COLOR_MAP[data.recommend]"
             >
               {{ KUN_GALGAME_RATING_RECOMMEND_MAP[data.recommend] }}
             </KunBadge>
+
             <span class="bg-default-300 h-3 w-px" />
+
             <div class="text-default-500 text-sm">剧透程度</div>
             <KunBadge
               :color="KUN_GALGAME_RATING_SPOILER_COLOR_MAP[data.spoiler_level]"
             >
               {{ KUN_GALGAME_RATING_SPOILER_MAP[data.spoiler_level] }}
+            </KunBadge>
+
+            <span class="bg-default-300 h-3 w-px" />
+
+            <KunBadge color="warning" variant="solid">
+              用户总评分
+              {{ data.overall }}
             </KunBadge>
           </div>
 
@@ -189,50 +199,70 @@ const handleDeleteRating = async () => {
         <span class="text-default-500 text-sm">点赞了评分</span>
       </div>
 
-      <div class="flex items-center gap-2">
-        <GalgameRatingDetailLike
-          :rating-id="data.id"
-          :target-user-id="data.user.id"
-          :like-count="data.likeCount"
-          :is-liked="data.isLiked"
-        />
+      <div class="flex items-center justify-between gap-2">
+        <div class="space-x-1">
+          <KunButton
+            size="lg"
+            :is-icon-only="true"
+            color="default"
+            variant="light"
+          >
+            <KunIcon name="lucide:eye" />
+            <span class="text-sm">浏览</span>
+            <span class="text-sm">{{ data.view }}</span>
+          </KunButton>
 
-        <KunButton
-          v-if="canEdit"
-          size="sm"
-          variant="flat"
-          @click="isEditOpen = true"
-        >
-          <KunIcon name="lucide:pencil" /> 编辑评分
-        </KunButton>
+          <GalgameRatingDetailLike
+            :rating-id="data.id"
+            :target-user-id="data.user.id"
+            :like-count="data.likeCount"
+            :is-liked="data.isLiked"
+          />
+        </div>
 
-        <KunButton
-          v-if="canDelete"
-          size="sm"
-          color="danger"
-          variant="light"
-          @click="handleDeleteRating"
-        >
-          <KunIcon name="lucide:trash-2" /> 删除评分
-        </KunButton>
+        <div class="space-x-1">
+          <KunButton
+            v-if="canDelete"
+            size="sm"
+            color="danger"
+            variant="light"
+            @click="handleDeleteRating"
+          >
+            <KunIcon name="lucide:trash-2" /> 删除
+          </KunButton>
+
+          <KunButton
+            v-if="canEdit"
+            size="sm"
+            variant="flat"
+            @click="isEditOpen = true"
+          >
+            <KunIcon name="lucide:pencil" /> 编辑
+          </KunButton>
+        </div>
       </div>
     </KunCard>
 
-    <GalgameRatingCommentContainer
-      v-if="data"
-      :rating-id="data.id"
-      :rating-author="data.user"
-      :comments="data.comments"
-    />
-
-    <template v-if="data?.galgameSeries">
+    <KunCard
+      :is-hoverable="false"
+      :is-transparent="false"
+      :is-pressable="false"
+      v-if="data?.galgameSeries"
+    >
       <KunHeader
         name="所属 Galgame 系列"
         description="该作品所属的 Galgame 系列"
         scale="h3"
       />
       <GalgameSeriesCard :series="data.galgameSeries" />
-    </template>
+    </KunCard>
+
+    <GalgameRatingCommentContainer
+      v-if="data"
+      :rating-id="data.id"
+      :rating-author="data.user"
+      :comments-data="data.comments"
+    />
 
     <GalgameRatingPublish
       v-if="data && canEdit"

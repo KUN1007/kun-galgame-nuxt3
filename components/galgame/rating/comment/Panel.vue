@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import type { GalgameRatingComment } from '~/types/api/galgame-rating'
+
 const props = defineProps<{
   ratingId: number
   targetUserId: number
 }>()
 
 const emits = defineEmits<{
-  close: []
+  onSuccess: [GalgameRatingComment]
 }>()
 
 const content = ref('')
@@ -38,20 +40,14 @@ const handlePublishComment = async () => {
   if (result) {
     content.value = ''
     useMessage('发布成功', 'success')
-    emits('close')
+    emits('onSuccess', result)
   }
 }
 </script>
 
 <template>
   <div class="space-y-3">
-    <KunTextarea
-      placeholder="友善发言，最多 1007 字"
-      v-model="content"
-      name="comment"
-      :rows="5"
-      auto-grow
-    />
+    <KunTextarea v-model="content" name="comment" :rows="5" />
 
     <div class="flex items-center justify-end">
       <KunButton

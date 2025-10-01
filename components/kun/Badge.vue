@@ -54,7 +54,7 @@ const colorVariants: Record<KunUIVariant, Record<KunUIColor, string>> = {
     danger: 'bg-transparent border-danger text-danger'
   },
   light: {
-    default: 'bg-transparent hover:bg-default/40',
+    default: 'bg-transparent hover:bg-default/20',
     primary: 'bg-transparent text-primary hover:bg-primary/20',
     secondary: 'bg-transparent text-secondary hover:bg-secondary/20',
     success: 'bg-transparent text-success hover:bg-success/20',
@@ -78,7 +78,7 @@ const colorVariants: Record<KunUIVariant, Record<KunUIColor, string>> = {
     danger: 'border-default bg-danger-100 text-danger'
   },
   shadow: {
-    default: ' shadow-default/50 bg-default',
+    default: ' shadow-default/40 bg-default',
     primary: ' shadow-primary/40 bg-primary',
     secondary: ' shadow-secondary/40 bg-secondary',
     success: ' shadow-success/40 bg-success',

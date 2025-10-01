@@ -21,7 +21,7 @@ const getLanguageName = (langCode: string) => {
 <template>
   <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
     <div
-      className="relative rounded-lg w-full h-full min-h-54 max-h-54 overflow-hidden md:col-span-1 aspect-video md:rounded-l-xl"
+      className="relative rounded-lg w-full h-full overflow-hidden md:col-span-1 aspect-video md:rounded-l-xl"
     >
       <KunImage
         data-kun-lazy-image="true"

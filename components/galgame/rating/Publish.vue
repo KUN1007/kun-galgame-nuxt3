@@ -11,6 +11,7 @@ import {
   createGalgameRatingSchema,
   updateGalgameRatingSchema
 } from '~/validations/galgame-rating'
+import type { GalgamePageRatingCard } from '~/types/api/galgame-rating'
 
 type RatingInitialData = {
   galgameRatingId: number
@@ -34,12 +35,12 @@ const props = defineProps<{
   galgameId: number
   modalValue: boolean
   initialData?: RatingInitialData
-  onPublished?: () => void
-  onUpdated?: () => void
 }>()
 
-const emit = defineEmits<{
+const emits = defineEmits<{
   'update:modalValue': [value: boolean]
+  onUpdated: []
+  onPublished: [GalgamePageRatingCard]
 }>()
 
 const recommend =
@@ -98,7 +99,7 @@ const spoilerOptions = computed(() =>
   }))
 )
 
-const close = () => emit('update:modalValue', false)
+const close = () => emits('update:modalValue', false)
 const isEditing = computed(() => !!props.initialData?.galgameRatingId)
 
 watch(
@@ -181,7 +182,7 @@ const submit = async () => {
     isSubmitting.value = false
     if (res) {
       useMessage('更新成功', 'success')
-      props.onUpdated?.()
+      emits('onUpdated')
       close()
     }
   } else {
@@ -216,8 +217,8 @@ const submit = async () => {
     if (res) {
       useMessage('发布成功', 'success')
       resetForm()
-      props.onPublished?.()
       close()
+      emits('onPublished', res)
     }
   }
 }
@@ -226,7 +227,7 @@ const submit = async () => {
 <template>
   <KunModal
     :modal-value="modalValue"
-    @update:modal-value="(v) => emit('update:modalValue', v)"
+    @update:modal-value="(v) => emits('update:modalValue', v)"
     inner-class-name="max-w-[780px] w-[90vw]"
     :is-dismissable="false"
   >

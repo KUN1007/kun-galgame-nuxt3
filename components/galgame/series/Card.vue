@@ -43,7 +43,7 @@ const includedGamesText = computed(() => {
       <h3
         class="group-hover:text-primary mb-2 line-clamp-2 text-xl font-bold transition-colors"
       >
-        {{ series.name }}
+        {{ `${series.name} 系列` }}
       </h3>
 
       <p class="text-default-500 mb-4 line-clamp-1 text-xs">
