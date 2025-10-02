@@ -12,7 +12,7 @@ module.exports = {
       max_memory_restart: '1G',
       script: './.output/server/index.mjs',
       interpreter: 'node',
-      node_args: '--experimental-modules'
+      node_args: '--experimental-specifier-resolution=node'
     }
   ]
 }
