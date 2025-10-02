@@ -52,6 +52,50 @@ export const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
     }
   },
 
+  GALGAME_RATING_CREATION: async (limit, skip, isSFW) => {
+    const where = isSFW ? { galgame: { content_limit: 'sfw' } } : undefined
+    const [items, total] = await prisma.$transaction([
+      prisma.galgame_rating.findMany({
+        where,
+        orderBy: { created: 'desc' },
+        take: limit,
+        skip,
+        select: {
+          id: true,
+          short_summary: true,
+          created: true,
+          user: { select: { id: true, name: true, avatar: true } },
+          galgame: {
+            select: {
+              id: true,
+              name_en_us: true,
+              name_ja_jp: true,
+              name_zh_cn: true,
+              name_zh_tw: true
+            }
+          }
+        }
+      }),
+      prisma.galgame_rating.count({ where })
+    ])
+    return {
+      items: items.map((item) => ({
+        uniqueId: `galgame-rating-${item.id}`,
+        type: 'GALGAME_RATING_CREATION',
+        timestamp: item.created,
+        actor: item.user,
+        link: `/galgame-rating/${item.id}`,
+        content: `${getPreferredLanguageText({
+          'en-us': item.galgame.name_en_us,
+          'ja-jp': item.galgame.name_ja_jp,
+          'zh-cn': item.galgame.name_zh_cn,
+          'zh-tw': item.galgame.name_zh_tw
+        })} · ${item.short_summary.slice(0, 100)}`
+      })),
+      total
+    }
+  },
+
   GALGAME_COMMENT_CREATION: async (limit, skip, isSFW) => {
     const where = isSFW ? { galgame: { content_limit: 'sfw' } } : undefined
     const [items, total] = await prisma.$transaction([
@@ -132,6 +176,39 @@ export const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
         actor: null,
         link: `/website/${item.url}`,
         content: `新增 Galgame 站点: ${item.name}`
+      })),
+      total
+    }
+  },
+
+  GALGAME_RATING_COMMENT_CREATION: async (limit, skip, isSFW) => {
+    const where = isSFW
+      ? { galgame_rating: { galgame: { content_limit: 'sfw' } } }
+      : undefined
+    const [items, total] = await prisma.$transaction([
+      prisma.galgame_rating_comment.findMany({
+        where,
+        orderBy: { created: 'desc' },
+        take: limit,
+        skip,
+        select: {
+          id: true,
+          content: true,
+          created: true,
+          user: { select: { id: true, name: true, avatar: true } },
+          galgame_rating_id: true
+        }
+      }),
+      prisma.galgame_rating_comment.count({ where })
+    ])
+    return {
+      items: items.map((item) => ({
+        uniqueId: `galgame-rating-comment-${item.id}`,
+        type: 'GALGAME_RATING_COMMENT_CREATION',
+        timestamp: item.created,
+        actor: item.user,
+        link: `/galgame-rating/${item.galgame_rating_id}`,
+        content: item.content.substring(0, 100)
       })),
       total
     }

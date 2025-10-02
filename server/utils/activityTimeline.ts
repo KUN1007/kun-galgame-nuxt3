@@ -22,6 +22,8 @@ export const getActivityTimelineData = async ({
   const types: ActivityEventType[] = [
     'GALGAME_CREATION',
     'GALGAME_COMMENT_CREATION',
+    'GALGAME_RATING_CREATION',
+    'GALGAME_RATING_COMMENT_CREATION',
     'GALGAME_PR_CREATION',
     'GALGAME_RESOURCE_CREATION',
     'TOOLSET_CREATION',

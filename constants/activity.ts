@@ -1,5 +1,7 @@
 export const KUN_ACTIVITY_TYPE_TYPE: Record<string, string> = {
   GALGAME_CREATION: 'Galgame',
+  GALGAME_RATING_CREATION: 'Galgame 评分',
+  GALGAME_RATING_COMMENT_CREATION: 'Galgame 评分评论',
   TOPIC_CREATION: '新话题',
   MESSAGE_UPVOTE: '话题被推',
   MESSAGE_SOLUTION: '最佳答案',
@@ -20,6 +22,8 @@ export const KUN_ACTIVITY_TYPE_TYPE: Record<string, string> = {
 export const KUN_ALLOWED_ACTIVITY_TYPE = [
   'GALGAME_CREATION',
   'GALGAME_COMMENT_CREATION',
+  'GALGAME_RATING_CREATION',
+  'GALGAME_RATING_COMMENT_CREATION',
   'GALGAME_PR_CREATION',
   'GALGAME_WEBSITE_CREATION',
   'GALGAME_WEBSITE_COMMENT_CREATION',
@@ -38,6 +42,8 @@ export const KUN_ALLOWED_ACTIVITY_TYPE = [
 
 export const KUN_ACTIVITY_ICON_MAP: Record<string, string> = {
   GALGAME_CREATION: 'lucide:gamepad-2',
+  GALGAME_RATING_CREATION: 'lucide:star',
+  GALGAME_RATING_COMMENT_CREATION: 'lucide:message-square-text',
   GALGAME_COMMENT_CREATION: 'lucide:message-square',
   GALGAME_PR_CREATION: 'lucide:git-pull-request-arrow',
   GALGAME_WEBSITE_CREATION: 'lucide:globe',

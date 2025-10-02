@@ -6,7 +6,7 @@ import type { HomeGalgame, HomeTopic } from '~/types/api/home'
 
 const GALGAME_LIMIT = 12
 const TOPIC_LIMIT = 10
-const ACTIVITY_LIMIT = 23
+const ACTIVITY_LIMIT = 30
 
 export default defineEventHandler(async (event) => {
   const nsfw = getNSFWCookie(event)
