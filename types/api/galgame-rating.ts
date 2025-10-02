@@ -4,6 +4,7 @@ import type { GalgameSeries } from './galgame-series'
 export interface GalgameInfoForRating {
   id: number
   name: KunLanguage
+  contentLimit: string
   official: GalgameOfficialItem[]
   ageLimit: string
   originalLanguage: string
@@ -16,11 +17,11 @@ export interface GalgameInfoForRating {
 export interface GalgameBasicForRatingCard {
   id: number
   name: KunLanguage
+  contentLimit: string
 }
 
 export interface GalgameRatingCard {
   id: number
-  galgameId: number
   user: KunUser
   recommend: string
   overall: number

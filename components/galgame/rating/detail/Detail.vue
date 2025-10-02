@@ -55,7 +55,7 @@ const handleDeleteRating = async () => {
   })
   if (res) {
     useMessage('删除成功', 'success')
-    await navigateTo(`/galgame/${props.data.galgameId}`)
+    await navigateTo(`/galgame/${props.data.galgame.id}`)
   }
 }
 </script>
@@ -273,7 +273,7 @@ const handleDeleteRating = async () => {
     <GalgameRatingPublish
       v-if="data && canEdit"
       v-model:modal-value="isEditOpen"
-      :galgame-id="data.galgameId"
+      :galgame-id="data.galgame.id"
       :initial-data="{
         galgameRatingId: data.id,
         recommend: data.recommend as 'no',

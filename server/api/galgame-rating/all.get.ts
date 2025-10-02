@@ -9,6 +9,8 @@ export default defineEventHandler(async (event) => {
     return kunError(event, input)
   }
 
+  const nsfw = getNSFWCookie(event)
+
   const {
     page,
     limit,
@@ -21,7 +23,11 @@ export default defineEventHandler(async (event) => {
 
   const skip = (page - 1) * limit
 
-  const where: Prisma.galgame_ratingWhereInput = {}
+  const where: Prisma.galgame_ratingWhereInput = {
+    galgame: {
+      content_limit: nsfw === 'sfw' ? 'sfw' : undefined
+    }
+  }
   if (spoilerLevel !== 'all') {
     where.spoiler_level = spoilerLevel
   }
@@ -54,7 +60,8 @@ export default defineEventHandler(async (event) => {
             name_en_us: true,
             name_ja_jp: true,
             name_zh_cn: true,
-            name_zh_tw: true
+            name_zh_tw: true,
+            content_limit: true
           }
         },
         _count: {
@@ -69,7 +76,6 @@ export default defineEventHandler(async (event) => {
 
   const ratingData: GalgameRatingCard[] = rows.map((r) => ({
     id: r.id,
-    galgameId: r.galgame_id,
     user: r.user,
     recommend: r.recommend,
     overall: r.overall,
@@ -92,6 +98,7 @@ export default defineEventHandler(async (event) => {
     galgame: {
       id: r.galgame.id,
       banner: r.galgame.banner,
+      contentLimit: r.galgame.content_limit,
       name: {
         'en-us': r.galgame.name_en_us,
         'ja-jp': r.galgame.name_ja_jp,

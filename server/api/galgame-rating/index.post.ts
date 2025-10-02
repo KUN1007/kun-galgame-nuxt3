@@ -40,6 +40,15 @@ export default defineEventHandler(async (event) => {
           select: {
             like: true
           }
+        },
+        galgame: {
+          select: {
+            name_en_us: true,
+            name_ja_jp: true,
+            name_zh_cn: true,
+            name_zh_tw: true,
+            content_limit: true
+          }
         }
       }
     })
@@ -51,7 +60,16 @@ export default defineEventHandler(async (event) => {
 
     const newRating: GalgamePageRatingCard = {
       ...res,
-      galgameId: res.galgame_id,
+      galgame: {
+        id: res.galgame_id,
+        name: {
+          'en-us': res.galgame.name_en_us,
+          'ja-jp': res.galgame.name_ja_jp,
+          'zh-cn': res.galgame.name_zh_cn,
+          'zh-tw': res.galgame.name_zh_tw
+        },
+        contentLimit: res.galgame.content_limit
+      },
       user: res.user,
       galgameType: res.galgame_type,
       likeCount: 0,

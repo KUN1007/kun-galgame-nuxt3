@@ -108,7 +108,6 @@ export default defineEventHandler(async (event) => {
 
   const details: GalgameRatingDetails = {
     id: data.id,
-    galgameId: data.galgame_id,
     user: data.user,
     recommend: data.recommend,
     overall: data.overall,
@@ -140,6 +139,7 @@ export default defineEventHandler(async (event) => {
     })),
     galgame: {
       id: data.galgame.id,
+      contentLimit: data.galgame.content_limit,
       name: {
         'en-us': data.galgame.name_en_us,
         'ja-jp': data.galgame.name_ja_jp,

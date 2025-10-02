@@ -116,7 +116,9 @@ const jsonLd = computed<WithContext<Review> | null>(() => {
 })
 
 if (data.value) {
-  if (data.value.galgame.ageLimit !== 'nsfw') {
+  if (data.value.galgame.contentLimit === 'nsfw') {
+    useKunDisableSeo(`${data.value.user.name} 的评价`)
+  } else {
     useHead({
       script: [
         {
@@ -150,9 +152,9 @@ if (data.value) {
       articlePublishedTime: data.value.created.toString(),
       articleModifiedTime: data.value.updated.toString()
     })
-  } else {
-    useKunDisableSeo(`${data.value.user.name} 的评价`)
   }
+} else {
+  useKunDisableSeo('请求 Galgame 评分数据错误')
 }
 </script>
 
