@@ -22,6 +22,16 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
+
+const { showKUNGalgameSidebarCollapsed } = storeToRefs(
+  usePersistSettingsStore()
+)
+
+const offsetClass = computed(() =>
+  showKUNGalgameSidebarCollapsed.value
+    ? 'md:left-[80px] md:w-[calc(100%-88px)]'
+    : 'md:left-[260px] md:w-[calc(100%-268px)]'
+)
 </script>
 
 <template>
@@ -29,7 +39,8 @@ onUnmounted(() => {
     :class="
       cn(
         'fixed top-0 z-30 mb-3 ml-0 shrink-0 px-1 transition-all duration-300',
-        'left-0 w-full md:left-[260px] md:w-[calc(100%-268px)]',
+        'left-0 w-full',
+        offsetClass,
         isVisible ? 'translate-y-0' : '-translate-y-full',
         className
       )

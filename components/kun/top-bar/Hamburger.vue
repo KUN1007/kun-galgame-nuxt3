@@ -76,7 +76,7 @@ watch(
         @touchmove.passive="handleTouchMove"
         @touchend="handleTouchEnd"
       >
-        <KunLayoutSidebar class-name="static" />
+        <KunLayoutSidebar class-name="static" :force-expanded="true" />
       </div>
     </div>
   </Transition>

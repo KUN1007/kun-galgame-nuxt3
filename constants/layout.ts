@@ -9,6 +9,13 @@ export interface KunLayoutItem {
   children?: KunLayoutItem[]
 }
 
+export interface KunLayoutCollapsedItem {
+  name: string
+  label: string
+  icon: string
+  router: string
+}
+
 export const kunLayoutItem: KunLayoutItem[] = [
   {
     name: 'create',

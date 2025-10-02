@@ -5,6 +5,9 @@ const { showKUNGalgameHamburger, messageStatus } = storeToRefs(
   useTempSettingStore()
 )
 const { id, moemoepoint, isCheckIn } = storeToRefs(usePersistUserStore())
+const { showKUNGalgameSidebarCollapsed } = storeToRefs(
+  usePersistSettingsStore()
+)
 
 const router = useRouter()
 const canGoBack = ref(false)
@@ -46,6 +49,30 @@ onMounted(async () => {
 
 <template>
   <div class="flex items-center gap-1">
+    <KunTooltip
+      :text="showKUNGalgameSidebarCollapsed ? '展开侧边栏' : '折叠侧边栏'"
+      position="bottom"
+    >
+      <KunButton
+        :is-icon-only="true"
+        color="default"
+        size="xl"
+        variant="light"
+        class-name="hidden md:flex"
+        @click="
+          showKUNGalgameSidebarCollapsed = !showKUNGalgameSidebarCollapsed
+        "
+      >
+        <KunIcon
+          :name="
+            showKUNGalgameSidebarCollapsed
+              ? 'lucide:panel-left-open'
+              : 'lucide:panel-left-close'
+          "
+        />
+      </KunButton>
+    </KunTooltip>
+
     <KunButton
       :is-icon-only="true"
       color="default"
@@ -57,28 +84,20 @@ onMounted(async () => {
       <KunIcon name="lucide:menu" />
     </KunButton>
 
-    <div class="hidden sm:block">
+    <KunTooltip :text="canGoBack ? '返回上一页' : '返回主页'" position="bottom">
       <KunButton
-        v-if="canGoBack"
         :is-icon-only="true"
         color="default"
         size="xl"
         variant="light"
-        @click="router.back()"
+        class-name="hidden sm:block"
+        @click="canGoBack ? router.back() : navigateTo('/')"
       >
-        <KunIcon name="lucide:arrow-left" />
+        <KunIcon :name="canGoBack ? 'lucide:arrow-left' : 'lucide:home'" />
       </KunButton>
-      <KunButton
-        v-else
-        :is-icon-only="true"
-        color="default"
-        size="xl"
-        variant="light"
-        @click="navigateTo('/')"
-      >
-        <KunIcon name="lucide:home" />
-      </KunButton>
-    </div>
+    </KunTooltip>
+
+    <KunTopBarSideCollapsed v-if="showKUNGalgameSidebarCollapsed" />
 
     <KunTooltip
       text="本网站完全开源, 代码完全自主编写, 点击访问 GitHub 仓库为我们点亮 star ⭐"

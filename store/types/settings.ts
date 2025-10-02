@@ -8,6 +8,7 @@ export interface KUNGalgameSettingsStore {
   showKUNGalgameBackgroundBlur: number
   showKUNGalgameBackgroundBrightness: number
   showKUNGalgameBackLoli: boolean
+  showKUNGalgameSidebarCollapsed: boolean
 }
 
 export interface TempSettingStore {

@@ -1,76 +1,147 @@
 <script setup lang="ts">
-defineProps<{
-  className?: string
-}>()
+const props = withDefaults(
+  defineProps<{
+    className?: string
+    forceExpanded?: boolean
+  }>(),
+  { className: '', forceExpanded: false }
+)
 
-const { showKUNGalgamePanel } = storeToRefs(useTempSettingStore())
+const { showKUNGalgameSidebarCollapsed } = storeToRefs(
+  usePersistSettingsStore()
+)
+
+const isCollapsed = computed(
+  () => !props.forceExpanded && showKUNGalgameSidebarCollapsed.value
+)
 </script>
 
 <template>
   <div
     :class="
       cn(
-        'scrollbar-hide sm:bg-default-100 bg-default-200 border-default/20 fixed z-1 flex h-full w-3xs shrink-0 -translate-x-1 flex-col justify-between overflow-y-scroll rounded-none border-r p-0 sm:backdrop-blur-[var(--kun-background-blur)]',
+        'scrollbar-hide sm:bg-default-100 bg-default-200 border-default/20 fixed z-1 flex h-full shrink-0 -translate-x-1 flex-col justify-between rounded-none border-r p-0 transition-all duration-300 sm:backdrop-blur-[var(--kun-background-blur)]',
+        isCollapsed ? 'w-20' : 'w-3xs overflow-y-scroll',
         className
       )
     "
     @click.stop
   >
     <div class="space-y-3 p-3">
-      <KunBrand />
-
-      <KunLayoutSideBarNav />
-
-      <KunButton
-        :full-width="true"
-        variant="light"
-        @click="showKUNGalgamePanel = !showKUNGalgamePanel"
-      >
-        <span
-          class="mr-3 flex items-center justify-center text-xl text-inherit"
+      <template v-if="!isCollapsed">
+        <KunBrand />
+      </template>
+      <template v-else>
+        <KunLink
+          class-name="flex justify-center items-center gap-0"
+          underline="none"
+          to="/"
         >
-          <KunIcon class="text-inherit" name="lucide:settings" />
-        </span>
-        <span class="text-inherit">网站设置</span>
-      </KunButton>
+          <KunImage
+            class="size-12"
+            src="/favicon.webp"
+            :alt="kungal.titleShort"
+          />
+        </KunLink>
+      </template>
+
+      <Transition name="sidebar-switch" mode="out-in">
+        <template v-if="!isCollapsed">
+          <KunLayoutSideBarNav />
+        </template>
+        <template v-else>
+          <KunLayoutSideBarCollapsed />
+        </template>
+      </Transition>
     </div>
 
     <div>
-      <KunLayoutSideBarExternal />
+      <template v-if="!isCollapsed">
+        <KunLayoutSideBarExternal />
 
-      <div class="flex w-full justify-between px-7 py-6">
-        <KunLink
-          underline="none"
-          color="default"
-          class-name="flex-col gap-0"
-          :to="kungal.github"
-          target="_blank"
-        >
-          <KunIcon class="icon" name="lucide:github" />
-          <span class="text-xs">GitHub</span>
-        </KunLink>
+        <div class="flex w-full justify-between px-7 py-6">
+          <KunLink
+            underline="none"
+            color="default"
+            class-name="flex-col gap-0"
+            :to="kungal.github"
+            target="_blank"
+          >
+            <KunIcon class="icon" name="lucide:github" />
+            <span class="text-xs">GitHub</span>
+          </KunLink>
 
-        <KunLink
-          underline="none"
-          color="default"
-          class-name="flex-col gap-0"
-          to="/rss"
-        >
-          <KunIcon class="icon" name="lucide:rss" />
-          <span class="text-xs">RSS</span>
-        </KunLink>
+          <KunLink
+            underline="none"
+            color="default"
+            class-name="flex-col gap-0"
+            to="/rss"
+          >
+            <KunIcon class="icon" name="lucide:rss" />
+            <span class="text-xs">RSS</span>
+          </KunLink>
 
-        <KunLink
-          underline="none"
-          color="default"
-          class-name="flex-col gap-0"
-          :to="kungal.domain.telegram_group"
-          target="_blank"
-        >
-          <KunIcon class="icon" name="ph:telegram-logo" />
-          <span class="text-xs">Telegram</span>
-        </KunLink>
-      </div>
+          <KunLink
+            underline="none"
+            color="default"
+            class-name="flex-col gap-0"
+            :to="kungal.domain.telegram_group"
+            target="_blank"
+          >
+            <KunIcon class="icon" name="ph:telegram-logo" />
+            <span class="text-xs">Telegram</span>
+          </KunLink>
+        </div>
+      </template>
+      <template v-else>
+        <div class="flex flex-col items-center gap-2 px-3 pb-4">
+          <KunLink
+            underline="none"
+            color="default"
+            class-name="flex-col gap-0"
+            :to="kungal.github"
+            target="_blank"
+            title="GitHub"
+          >
+            <KunIcon class="icon text-xl" name="lucide:github" />
+          </KunLink>
+
+          <KunLink
+            underline="none"
+            color="default"
+            class-name="flex-col gap-0"
+            to="/rss"
+            title="RSS"
+          >
+            <KunIcon class="icon text-xl" name="lucide:rss" />
+          </KunLink>
+
+          <KunLink
+            underline="none"
+            color="default"
+            class-name="flex-col gap-0"
+            :to="kungal.domain.telegram_group"
+            target="_blank"
+            title="Telegram"
+          >
+            <KunIcon class="icon text-xl" name="ph:telegram-logo" />
+          </KunLink>
+        </div>
+      </template>
     </div>
   </div>
 </template>
+
+<style scoped>
+.sidebar-switch-enter-active,
+.sidebar-switch-leave-active {
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+.sidebar-switch-enter-from,
+.sidebar-switch-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+</style>

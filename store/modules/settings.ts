@@ -13,9 +13,14 @@ export const usePersistSettingsStore = defineStore('KUNGalgameSettings', {
     showKUNGalgameBackground: 0,
     showKUNGalgameBackgroundBlur: 0,
     showKUNGalgameBackgroundBrightness: 100,
-    showKUNGalgameBackLoli: false
+    showKUNGalgameBackLoli: false,
+    showKUNGalgameSidebarCollapsed: false
   }),
   actions: {
+    toggleKUNGalgameSidebarCollapsed() {
+      this.showKUNGalgameSidebarCollapsed = !this.showKUNGalgameSidebarCollapsed
+    },
+
     setKUNGalgameFontStyle(font: string) {
       this.showKUNGalgameFontStyle = font
       document.documentElement.style.setProperty('--font-family', font)
