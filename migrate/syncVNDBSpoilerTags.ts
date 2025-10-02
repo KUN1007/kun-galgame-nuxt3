@@ -1,4 +1,4 @@
-import { PrismaClient } from '~/prisma/client/client'
+import { PrismaClient } from '@prisma/client'
 import { TAG_MAP } from '~/lib/tagMap'
 
 const prisma = new PrismaClient()

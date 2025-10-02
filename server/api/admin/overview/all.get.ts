@@ -3,7 +3,7 @@ import {
   KUN_ADMIN_OVERVIEW_STATS_MODEL_ITEM,
   KUN_ADMIN_OVERVIEW_STATS_MODEL_MAP
 } from '~/constants/admin'
-import type { PrismaPromise } from '~/prisma/client/client'
+import type { PrismaPromise } from '@prisma/client'
 
 type ModelCount = {
   count: () => PrismaPromise<number>
