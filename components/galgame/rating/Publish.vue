@@ -278,7 +278,7 @@ const submit = async () => {
       </div>
 
       <div>
-        <span class="text-sm">游戏类型 (必选, 可多选)</span>
+        <span class="text-sm">本游戏的类型 (必选, 可多选)</span>
         <div class="mt-2 flex flex-col gap-2">
           <div
             class="flex gap-3"

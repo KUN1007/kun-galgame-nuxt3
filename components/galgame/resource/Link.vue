@@ -22,6 +22,7 @@ const props = defineProps<{
 
 const providerName = ref('')
 const details = ref<GalgameResourceDetails>()
+const isModalOpen = ref(false)
 const { id } = usePersistUserStore()
 const { rewriteResourceId } = storeToRefs(useTempGalgameResourceStore())
 const isFetching = ref(false)
@@ -43,6 +44,17 @@ const handleGetDetail = async (galgameResourceId: number) => {
 
   if (result) {
     details.value = result
+  }
+}
+
+const handleOpenDetails = async () => {
+  if (details.value) {
+    isModalOpen.value = true
+    return
+  }
+  await handleGetDetail(props.resource.id)
+  if (details.value) {
+    isModalOpen.value = true
   }
 }
 
@@ -75,6 +87,7 @@ watch(
   () => [rewriteResourceId.value, props.resource],
   () => {
     details.value = undefined
+    isModalOpen.value = false
   }
 )
 
@@ -130,17 +143,6 @@ onMounted(async () => {
       </div>
 
       <div class="ml-auto flex items-center gap-1">
-        <KunButton
-          :is-icon-only="true"
-          variant="light"
-          color="default"
-          rounded="full"
-          v-if="details"
-          @click="details = undefined"
-        >
-          <KunIcon name="lucide:x" />
-        </KunButton>
-
         <span class="text-default-500 mr-2 text-sm">{{ providerName }}</span>
 
         <KunButton
@@ -177,8 +179,8 @@ onMounted(async () => {
         <KunButton
           size="sm"
           variant="flat"
-          v-if="!details && resource.id !== rewriteResourceId"
-          @click="handleGetDetail(resource.id)"
+          v-if="resource.id !== rewriteResourceId"
+          @click="handleOpenDetails()"
           :loading="isFetching"
         >
           获取链接
@@ -212,11 +214,18 @@ onMounted(async () => {
       </div>
     </div>
 
-    <GalgameResourceDetails
-      v-if="details"
-      :details="details"
-      :refresh="refresh"
-    />
+    <KunModal
+      :modal-value="isModalOpen"
+      @update:modal-value="(value) => (isModalOpen = value)"
+      inner-class-name="max-w-xl"
+    >
+      <GalgameResourceDetails
+        v-if="details"
+        :details="details"
+        :refresh="refresh"
+      />
+      <KunLoading v-else />
+    </KunModal>
 
     <KunDivider margin="0 0 17px 0" />
   </div>

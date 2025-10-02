@@ -75,6 +75,12 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
 
 <template>
   <div class="space-y-2" v-if="details">
+    <KunHeader
+      name="补票提示信息"
+      description="须知 Galgame 厂商制作游戏不易, 如果条件允许, 请尽可能前往本页面的 Galgame 制作商部分进行正版 Galgame 补票"
+      scale="h3"
+    />
+
     <div class="flex justify-between">
       <div class="flex items-center gap-2">
         <KunAvatar :user="details.user" />
@@ -135,7 +141,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
       </pre>
     </KunInfo>
 
-    <div class="space-y-2 space-x-2">
+    <div class="mb-6 space-y-2 space-x-2">
       <p class="text-default-500 text-sm">点击下面的链接以下载</p>
       <KunLink
         v-for="(kun, index) in details.link"
@@ -148,5 +154,10 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
         {{ kun }}
       </KunLink>
     </div>
+
+    <KunInfo
+      title="鲲的小请求"
+      description="在您下载这部 Galgame 并游玩之后, 可否请您在本网站为这部 Galgame 提交一个评分, 这将有助于我们把优秀的 Galgame 推荐给更多人, 谢谢您的支持"
+    />
   </div>
 </template>
