@@ -2,17 +2,30 @@ import { render, h, ref } from 'vue'
 import Info from '~/components/kun/alert/Info.vue'
 
 const messageCount = ref(0)
+let containerEl: HTMLElement | null = null
 
 /**
  * @param {string} message - Kawaii loli message >_<
  * @param {number} duration - Message duration in seconds
  */
 export const useKunLoliInfo = (message: string, duration?: number) => {
+  if (!import.meta.client) return
+
+  // ensure a dedicated container is used instead of document.body to
+  // avoid interfering with Nuxt page/layout transitions
+  if (!containerEl) {
+    containerEl = document.createElement('div')
+    containerEl.id = 'kun-loli-info-root'
+    containerEl.style.position = 'relative'
+    document.body.appendChild(containerEl)
+  }
+
   let timeout: NodeJS.Timeout | null = null
   const durationMs = duration ? duration * 1000 : 3000
 
   messageCount.value++
-  render(null, document.body)
+  // unmount any previous vnode mounted by this util before re-rendering
+  render(null, containerEl)
 
   const messageNode = h(Info, {
     message,
@@ -25,11 +38,11 @@ export const useKunLoliInfo = (message: string, duration?: number) => {
   timeout = setTimeout(() => {
     messageCount.value--
 
-    if (!messageCount.value) {
-      render(null, document.body)
+    if (!messageCount.value && containerEl) {
+      render(null, containerEl)
     }
     // 500ms for Transition component
   }, durationMs + 500)
 
-  render(messageNode, document.body)
+  render(messageNode, containerEl)
 }
