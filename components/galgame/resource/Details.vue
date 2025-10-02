@@ -77,7 +77,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
   <div class="space-y-2" v-if="details">
     <KunHeader
       name="补票提示信息"
-      description="须知 Galgame 厂商制作游戏不易, 如果条件允许, 请尽可能前往本页面的 Galgame 制作商部分进行正版 Galgame 补票"
+      description="须知 Galgame 厂商制作游戏不易, 很多厂商如今都在炒冷饭, 可见经济并不宽裕。如果条件允许, 请尽可能前往本页面的 Galgame 制作商部分进行正版 Galgame 补票, 感谢您对 Galgame 业界做出的贡献"
       scale="h3"
     />
 

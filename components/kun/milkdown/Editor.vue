@@ -44,7 +44,19 @@ import {
 } from './plugins/code/icons'
 import { languages } from '@codemirror/language-data'
 import { kunCM } from './codemirror/theme'
-import type { Extension } from '@codemirror/state'
+
+// katex
+import { blockKatexSchema } from './plugins/katex/blockKatex'
+import { mathInlineSchema } from './plugins/katex/inlineKatex'
+import { toggleLatexCommand } from './plugins/katex/command'
+import {
+  mathBlockInputRule,
+  mathInlineInputRule
+} from './plugins/katex/inputRule'
+import { remarkMathBlockPlugin, remarkMathPlugin } from './plugins/katex/remark'
+import katex from 'katex'
+import type { KatexOptions } from 'katex'
+import 'katex/dist/katex.min.css'
 
 const props = defineProps<{
   valueMarkdown: string
@@ -62,6 +74,15 @@ const pluginViewFactory = usePluginViewFactory()
 const container = ref<HTMLElement | null>(null)
 const toolbar = ref<HTMLElement | null>(null)
 const editorContent = ref('')
+
+const renderLatex = (content: string, options?: KatexOptions) => {
+  const html = katex.renderToString(content, {
+    ...options,
+    throwOnError: false,
+    displayMode: true
+  })
+  return html
+}
 
 const editorInfo = useEditor((root) =>
   Editor.make()
@@ -122,6 +143,21 @@ const editorInfo = useEditor((root) =>
         // previewOnlyByDefault:
         //   config.previewOnlyByDefault ?? defaultConfig.previewOnlyByDefault
       }))
+
+      const katexOptions: KatexOptions = {}
+
+      ctx.update(codeBlockConfig.key, (prev) => ({
+        ...prev,
+        // @ts-expect-error milkdown type
+        renderPreview: (language, content, applyPreview) => {
+          if (language.toLowerCase() === 'latex' && content.length > 0) {
+            return renderLatex(content, katexOptions)
+          }
+          const renderPreview = prev.renderPreview
+          // @ts-expect-error milkdown type
+          return renderPreview(language, content, applyPreview)
+        }
+      }))
     })
     .use(history)
     .use(commonmark)
@@ -134,6 +170,13 @@ const editorInfo = useEditor((root) =>
     .use(upload)
     .use(codeBlockComponent)
     .use([kunSpoilerPlugin, stopLinkCommand, linkCustomKeymap].flat())
+    .use(remarkMathPlugin)
+    .use(remarkMathBlockPlugin)
+    .use(mathInlineSchema)
+    .use(mathInlineInputRule)
+    .use(mathBlockInputRule)
+    .use(blockKatexSchema)
+    .use(toggleLatexCommand)
 )
 
 const textCount = computed(() => markdownToText(props.valueMarkdown).length)

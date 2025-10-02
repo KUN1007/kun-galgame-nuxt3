@@ -97,7 +97,6 @@ export default defineEventHandler(async (event) => {
     updated: r.updated,
     galgame: {
       id: r.galgame.id,
-      banner: r.galgame.banner,
       contentLimit: r.galgame.content_limit,
       name: {
         'en-us': r.galgame.name_en_us,

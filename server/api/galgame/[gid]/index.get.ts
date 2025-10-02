@@ -232,7 +232,17 @@ export default defineEventHandler(async (event) => {
       galgameId: r.galgame_id,
       galgameType: r.galgame_type,
       likeCount: r._count.like,
-      isLiked: r.like.length > 0
+      isLiked: r.like.length > 0,
+      galgame: {
+        id: galgame.id,
+        contentLimit: galgame.content_limit,
+        name: {
+          'en-us': galgame.name_en_us,
+          'ja-jp': galgame.name_ja_jp,
+          'zh-cn': galgame.name_zh_cn,
+          'zh-tw': galgame.name_zh_tw
+        }
+      }
     })),
     created: galgame.created,
     updated: galgame.updated
