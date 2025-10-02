@@ -1,4 +1,4 @@
-import rehypeSanitize from 'rehype-sanitize'
+import rehypeSanitize, { defaultSchema } from 'rehype-sanitize'
 import rehypeSlug from 'rehype-slug'
 import rehypeStringify from 'rehype-stringify'
 import remarkFrontmatter from 'remark-frontmatter'
@@ -7,6 +7,8 @@ import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypePrism from 'rehype-prism-plus'
 import { unified } from 'unified'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
 import { rehypeKunLazyImage } from './plugins/rehypeKunLazyImage'
 import { rehypeKunCodeBlockWrapper } from './plugins/rehypeKunCodeBlockWrapper'
 import { rehypeKunH1ToH2 } from './plugins/rehypeKunH1ToH2'
@@ -20,15 +22,25 @@ export const markdownToHtml = async (markdown: string) => {
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkFrontmatter)
+    .use(remarkMath)
     .use(remarkRehype, { allowDangerousHtml: true })
-    .use(rehypeSanitize)
+    .use(rehypeSanitize, {
+      ...defaultSchema,
+      attributes: {
+        ...defaultSchema.attributes,
+        // The `language-*` regex is allowed by default.
+        code: [['className', /^language-./, 'math-inline', 'math-display']]
+      }
+    })
     .use(rehypeKunH1ToH2)
     .use(rehypeSlug)
     .use(rehypeKunLazyImage)
+    .use(rehypeKatex)
     .use(rehypePrism, {
       showLineNumbers: true,
       ignoreMissing: true
     })
+    // will damage rehypeKatex
     .use(rehypeKunCodeBlockWrapper)
     .use(rehypeKunTableWrapper)
     .use(rehypeKunInsertZeroWidthSpace)

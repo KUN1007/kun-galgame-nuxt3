@@ -56,7 +56,6 @@ import {
 import { remarkMathBlockPlugin, remarkMathPlugin } from './plugins/katex/remark'
 import katex from 'katex'
 import type { KatexOptions } from 'katex'
-import 'katex/dist/katex.min.css'
 
 const props = defineProps<{
   valueMarkdown: string

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import DOMPurify from 'isomorphic-dompurify'
 import { useSpoilerContent } from '~/composables/topic/useSpoilerContent'
+import 'katex/dist/katex.min.css'
 
 withDefaults(
   defineProps<{
