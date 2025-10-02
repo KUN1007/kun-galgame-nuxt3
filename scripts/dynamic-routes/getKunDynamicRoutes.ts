@@ -10,7 +10,9 @@ export const getKunDynamicRoutes = async () => {
     tags,
     websites,
     websiteCategories,
-    websiteTags
+    websiteTags,
+    toolsets,
+    galgameRatings
   ] = await Promise.all([
     prisma.topic.findMany({
       where: { status: { not: 1 }, is_nsfw: false },
@@ -50,6 +52,14 @@ export const getKunDynamicRoutes = async () => {
 
     prisma.galgame_website_tag.findMany({
       select: { name: true, updated: true }
+    }),
+
+    prisma.galgame_toolset.findMany({
+      select: { id: true, updated: true }
+    }),
+
+    prisma.galgame_rating.findMany({
+      select: { id: true, updated: true }
     })
   ])
 
@@ -98,6 +108,16 @@ export const getKunDynamicRoutes = async () => {
     lastmod: tag.updated?.toISOString() || new Date().toISOString()
   }))
 
+  const galgameToolsetRoutes = toolsets.map((toolset) => ({
+    path: `/toolset/${toolset.id}`,
+    lastmod: toolset.updated?.toISOString() || new Date().toISOString()
+  }))
+
+  const galgameRatingRoutes = galgameRatings.map((rating) => ({
+    path: `/galgame-rating/${rating.id}`,
+    lastmod: rating.updated?.toISOString() || new Date().toISOString()
+  }))
+
   return [
     ...topicRoutes,
     ...galgameRoutes,
@@ -107,6 +127,8 @@ export const getKunDynamicRoutes = async () => {
     ...galgameTagRoutes,
     ...websiteRoutes,
     ...websiteCategoryRoutes,
-    ...websiteTagRoutes
+    ...websiteTagRoutes,
+    ...galgameToolsetRoutes,
+    ...galgameRatingRoutes
   ]
 }

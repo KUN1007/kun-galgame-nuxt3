@@ -31,7 +31,9 @@ const generateKunSitemap = async () => {
       '!pages/galgame-tag/[id].vue',
       '!pages/website/[domain].vue',
       '!pages/website-category/[name].vue',
-      '!pages/website-tag/[name].vue'
+      '!pages/website-tag/[name].vue',
+      '!pages/toolset/[id]/index.vue',
+      '!pages/galgame-rating/[id].vue'
     ])
 
     const categoryRoutes = kunCategoryAvailableItem.map((category) => ({
