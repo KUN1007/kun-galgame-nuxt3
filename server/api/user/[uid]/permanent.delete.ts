@@ -47,9 +47,9 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  // await prisma.user.delete({
-  //   where: { id: input.userId }
-  // })
+  await prisma.user.delete({
+    where: { id: input.userId }
+  })
 
   return 'Moemoe delete user successfully!'
 })

@@ -8,25 +8,25 @@ const props = defineProps<{
 
 const isLoading = ref(false)
 
-// const handleDeleteUser = async () => {
-//   const res = await useComponentMessageStore().alert(
-//     `要永久删除用户 ${props.user.name} 吗`,
-//     '严重注意! 🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨 该操作会彻底删除用户, 删除用户发布的话题, 评论, Galgame, Galgame 资源, 删除用户的一切存在, 不可撤销, 您真的要删除吗, 这个操作只是为了针对广告和违法用户存在的, 非必要请勿使用'
-//   )
-//   if (!res) {
-//     return
-//   }
+const handleDeleteUser = async () => {
+  const res = await useComponentMessageStore().alert(
+    `要永久删除用户 ${props.user.name} 吗`,
+    '严重注意! 🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨 该操作会彻底删除用户, 删除用户发布的话题, 评论, Galgame, Galgame 资源, 删除用户的一切存在, 不可撤销, 您真的要删除吗, 这个操作只是为了针对广告和违法用户存在的, 非必要请勿使用'
+  )
+  if (!res) {
+    return
+  }
 
-//   isLoading.value = true
+  isLoading.value = true
 
-//   await $fetch(`/api/user/${props.user.id}/permanent`, {
-//     method: 'DELETE',
-//     query: { userId: props.user.id },
-//     ...kungalgameResponseHandler
-//   })
+  await $fetch(`/api/user/${props.user.id}/permanent`, {
+    method: 'DELETE',
+    query: { userId: props.user.id },
+    ...kungalgameResponseHandler
+  })
 
-//   isLoading.value = false
-// }
+  isLoading.value = false
+}
 
 const handleBanUser = async () => {
   const res = await useComponentMessageStore().alert(
@@ -72,14 +72,14 @@ const handleBanUser = async () => {
         {{ formatDate(user.created, { isShowYear: true, isPrecise: true }) }}
       </span>
 
-      <!-- <KunButton
+      <KunButton
         color="danger"
         @click="handleDeleteUser"
         :loading="isLoading"
         :disabled="isLoading"
       >
         彻底删除用户
-      </KunButton> -->
+      </KunButton>
 
       <KunButton
         size="sm"

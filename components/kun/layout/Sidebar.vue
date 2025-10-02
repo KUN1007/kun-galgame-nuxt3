@@ -95,37 +95,41 @@ const isCollapsed = computed(
       </template>
       <template v-else>
         <div class="flex flex-col items-center gap-2 px-3 pb-4">
-          <KunLink
-            underline="none"
+          <KunButton
+            :is-icon-only="true"
+            variant="light"
             color="default"
             class-name="flex-col gap-0"
-            :to="kungal.github"
+            :href="kungal.github"
             target="_blank"
             title="GitHub"
           >
             <KunIcon class="icon text-xl" name="lucide:github" />
-          </KunLink>
+          </KunButton>
 
-          <KunLink
-            underline="none"
+          <KunButton
+            :is-icon-only="true"
+            variant="light"
             color="default"
             class-name="flex-col gap-0"
-            to="/rss"
+            href="/rss"
             title="RSS"
+            target="_blank"
           >
             <KunIcon class="icon text-xl" name="lucide:rss" />
-          </KunLink>
+          </KunButton>
 
-          <KunLink
-            underline="none"
+          <KunButton
+            :is-icon-only="true"
+            variant="light"
             color="default"
             class-name="flex-col gap-0"
-            :to="kungal.domain.telegram_group"
+            :href="kungal.domain.telegram_group"
             target="_blank"
             title="Telegram"
           >
             <KunIcon class="icon text-xl" name="ph:telegram-logo" />
-          </KunLink>
+          </KunButton>
         </div>
       </template>
     </div>
