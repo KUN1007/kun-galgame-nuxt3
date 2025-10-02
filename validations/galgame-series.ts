@@ -38,3 +38,8 @@ export const updateGalgameSeriesSchema = createGalgameSeriesSchema.merge(
 export const deleteGalgameSeriesSchema = z.object({
   seriesId: z.coerce.number().min(1).max(9999999)
 })
+
+export const getGalgameSeriesSchema = z.object({
+  page: z.coerce.number().min(1).max(9999999),
+  limit: z.coerce.number().min(1).max(12)
+})

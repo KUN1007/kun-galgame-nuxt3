@@ -1,52 +1,76 @@
 import prisma from '~/prisma/prisma'
+import { getGalgameSeriesSchema } from '~/validations/galgame-series'
 import type { GalgameSeries, GalgameSample } from '~/types/api/galgame-series'
 
 export default defineEventHandler(async (event) => {
+  const input = kunParseGetQuery(event, getGalgameSeriesSchema)
+  if (typeof input === 'string') {
+    return kunError(event, input)
+  }
+
   const nsfw = getNSFWCookie(event)
   const isSFW = nsfw === 'sfw'
 
-  const data = await prisma.galgame_series.findMany({
-    where: isSFW
-      ? {
-          galgame: {
-            some: {
-              content_limit: 'sfw'
+  const { page, limit } = input
+  const skip = (page - 1) * limit
+
+  const [data, totalCount] = await Promise.all([
+    prisma.galgame_series.findMany({
+      where: isSFW
+        ? {
+            galgame: {
+              some: {
+                content_limit: 'sfw'
+              }
             }
           }
-        }
-      : {},
-    include: {
-      _count: {
-        select: {
-          galgame: true
+        : {},
+      skip,
+      take: limit,
+      include: {
+        _count: {
+          select: {
+            galgame: true
+          }
+        },
+        galgame: {
+          where: isSFW
+            ? {
+                content_limit: 'sfw'
+              }
+            : {},
+          select: {
+            content_limit: true,
+            name_en_us: true,
+            name_ja_jp: true,
+            name_zh_cn: true,
+            name_zh_tw: true,
+            banner: true
+          },
+          take: 5,
+          orderBy: {
+            created: 'asc'
+          }
         }
       },
-      galgame: {
-        where: isSFW
-          ? {
-              content_limit: 'sfw'
-            }
-          : {},
-        select: {
-          content_limit: true,
-          name_en_us: true,
-          name_ja_jp: true,
-          name_zh_cn: true,
-          name_zh_tw: true,
-          banner: true
-        },
-        take: 5,
-        orderBy: {
-          created: 'asc'
+      orderBy: {
+        galgame: {
+          _count: 'desc'
         }
       }
-    },
-    orderBy: {
-      galgame: {
-        _count: 'desc'
-      }
-    }
-  })
+    }),
+    prisma.galgame_series.count({
+      where: isSFW
+        ? {
+            galgame: {
+              some: {
+                content_limit: 'sfw'
+              }
+            }
+          }
+        : {}
+    })
+  ])
 
   const series: GalgameSeries[] = data.map((s) => {
     const isNSFW = s.galgame.some((g) => g.content_limit === 'nsfw')
@@ -73,5 +97,5 @@ export default defineEventHandler(async (event) => {
     }
   })
 
-  return series
+  return { series, totalCount }
 })

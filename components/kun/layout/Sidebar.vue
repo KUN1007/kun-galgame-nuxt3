@@ -20,7 +20,7 @@ const isCollapsed = computed(
   <div
     :class="
       cn(
-        'scrollbar-hide sm:bg-default-100 bg-default-200 border-default/20 fixed z-1 flex h-full shrink-0 -translate-x-1 flex-col justify-between rounded-none border-r p-0 transition-all duration-300 sm:backdrop-blur-[var(--kun-background-blur)]',
+        'scrollbar-hide sm:bg-default-100 bg-default-200 border-default/20 fixed z-20 flex h-full shrink-0 -translate-x-1 flex-col justify-between rounded-none border-r p-0 transition-all duration-300 sm:backdrop-blur-[var(--kun-background-blur)]',
         isCollapsed ? 'w-20' : 'w-3xs overflow-y-scroll',
         className
       )
