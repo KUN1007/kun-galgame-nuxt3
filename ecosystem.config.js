@@ -4,7 +4,7 @@ import path from 'path'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-module.exports = {
+export default {
   apps: [
     {
       name: 'kun-visual-novel',
