@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "4.4.53",
+  "version": "4.4.54",
   "packageManager": "pnpm@10.17.1",
   "private": true,
   "scripts": {
@@ -28,6 +28,9 @@
     "build:friend": "esno scripts/generateFriendSiteCapture.ts",
     "deploy:install": "esno scripts/deployInstall.ts",
     "deploy:build": "esno scripts/deployBuild.ts"
+  },
+  "prisma": {
+    "schema": "./prisma/schema"
   },
   "devDependencies": {
     "@iconify-json/ant-design": "^1.2.5",
@@ -64,7 +67,7 @@
     "nuxt-umami": "3.2.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "prisma": "^6.12.0",
+    "prisma": "^6.7.0",
     "schema-dts": "^1.1.5",
     "typescript": "^5.8.2",
     "vue": "^3.5.13",
@@ -86,7 +89,7 @@
     "@milkdown/kit": "^7.16.0",
     "@milkdown/vue": "7.16.0",
     "@nuxt/content": "^3.4.0",
-    "@prisma/client": "^6.12.0",
+    "@prisma/client": "^6.7.0",
     "@prosemirror-adapter/vue": "^0.4.1",
     "@tailwindcss/postcss": "^4.0.17",
     "@tailwindcss/vite": "^4.0.17",
