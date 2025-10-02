@@ -45,11 +45,13 @@ const { data, status } = await useFetch('/api/activity/timeline', {
             underline="none"
             color="default"
             :to="activity.link"
-            class-name="hover:text-primary line-clamp-3 break-all transition-colors"
+            class-name="hover:text-primary block space-x-3 break-all transition-colors"
           >
-            {{ activity.content }}
-            <KunBadge class-name="cursor-pointer" color="primary" size="xs">
-              <KunIcon :name="KUN_ACTIVITY_ICON_MAP[activity.type]" />
+            <KunContentText
+              class-name="whitespace-normal!"
+              :content="activity.content"
+            />
+            <KunBadge color="primary" size="xs">
               {{ KUN_ACTIVITY_TYPE_TYPE[activity.type] }}
             </KunBadge>
           </KunLink>

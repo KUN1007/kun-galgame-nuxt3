@@ -70,13 +70,13 @@ const colorVariants: Record<KunUIVariant, Record<KunInfoColor, string>> = {
     info: 'bg-transparent text-info-800 hover:bg-info/20'
   },
   flat: {
-    default: 'bg-default/20 text-default-800',
-    primary: 'bg-primary/20 text-primary-800',
-    secondary: 'bg-secondary/20 text-secondary-800',
-    success: 'bg-success/20 text-success-800 dark:text-success',
-    warning: 'bg-warning/20 text-warning-800 dark:text-warning',
-    danger: 'bg-danger/20 text-danger-800 dark:text-danger-500',
-    info: 'bg-info/20 text-info-800 dark:text-info-500'
+    default: 'bg-default/15 text-default-800',
+    primary: 'bg-primary/15 text-primary-800',
+    secondary: 'bg-secondary/15 text-secondary-800',
+    success: 'bg-success/15 text-success-800 dark:text-success',
+    warning: 'bg-warning/15 text-warning-800 dark:text-warning',
+    danger: 'bg-danger/15 text-danger-800 dark:text-danger-500',
+    info: 'bg-info/15 text-info-800 dark:text-info-500'
   },
   faded: {
     default: 'border-default bg-default-100',

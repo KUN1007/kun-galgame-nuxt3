@@ -10,17 +10,12 @@ defineProps<{
   <KunCard
     :is-hoverable="false"
     :is-transparent="false"
+    class-name="sm:p-6 p-3"
     content-class="space-y-6"
   >
     <div class="flex items-center gap-3">
-      <h2 class="text-xl font-semibold">最新话题</h2>
-      <KunLink
-        underline="none"
-        class-name="text-default-500 hover:text-primary text-sm transition-colors"
-        to="/topic"
-      >
-        查看更多 >
-      </KunLink>
+      <h2 class="text-lg sm:text-2xl">最新话题</h2>
+      <KunButton size="sm" variant="light" href="/topic">查看更多 ></KunButton>
     </div>
 
     <template v-for="(topic, index) in topics" :key="index">

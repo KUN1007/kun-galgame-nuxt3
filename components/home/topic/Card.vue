@@ -15,7 +15,7 @@ defineProps<{
   >
     <div class="flex w-full items-center justify-between gap-4">
       <h3
-        class="hover:text-primary line-clamp-2 text-lg font-medium transition-colors"
+        class="hover:text-primary line-clamp-2 text-base font-medium transition-colors sm:text-lg"
       >
         {{ topic.title }}
       </h3>
