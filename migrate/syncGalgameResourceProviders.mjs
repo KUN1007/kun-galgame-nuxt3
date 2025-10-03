@@ -3,7 +3,7 @@ import process from 'process'
 
 const PATTERNS = {
   baidu: ['pan.baidu.com', 'tieba.baidu.com', 'pan.baidu.', 'baidu.com'],
-  aliyun: ['alipan.com', 'aliyun', 'aliyundrive', 'aliyunpan'],
+  aliyun: ['alipan.com', 'aliyun', 'aliyundrive', 'aliyuncs', 'aliyunpan'],
   quark: ['pan.quark.cn', 'quark.cn', 'quark'],
   pan123: [
     '123pan',
@@ -15,7 +15,22 @@ const PATTERNS = {
     '123865.com',
     '123pan.cn',
     'vip.123pan'
-  ]
+  ],
+  tianyiyun: ['cloud.189.cn', '189.cn', 'ecloud.189.cn'],
+  caiyun: ['caiyun.139.com', 'yun.139.com', '139.com'],
+  xunlei: ['pan.xunlei.com', 'xunlei.com'],
+  uc: ['drive.uc.cn', 'uc.cn'],
+  lanzou: [
+    'lanzou.com',
+    'lanzous.com',
+    'lanzoux.com',
+    'lanzoui.com',
+    'lanzouw.com',
+    'lanzouj.com',
+    'lanzouu.com',
+    'lanzouq.com'
+  ],
+  other: []
 }
 
 function detectProvidersFromUrls(urls = []) {

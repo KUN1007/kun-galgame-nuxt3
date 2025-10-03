@@ -74,7 +74,17 @@ export const GALGAME_RESOURCE_PROVIDER_MAP: Record<string, string> = {
   'dlgal.com': 'GGbases'
 }
 
-export type ProviderKey = 'baidu' | 'aliyun' | 'quark' | 'pan123' | 'other'
+export type ProviderKey =
+  | 'baidu'
+  | 'aliyun'
+  | 'quark'
+  | 'pan123'
+  | 'tianyiyun'
+  | 'caiyun'
+  | 'xunlei'
+  | 'uc'
+  | 'lanzou'
+  | 'other'
 
 export const PROVIDER_PATTERNS: Record<ProviderKey, string[]> = {
   baidu: ['pan.baidu.com', 'tieba.baidu.com', 'pan.baidu.', 'baidu.com'],
@@ -91,5 +101,45 @@ export const PROVIDER_PATTERNS: Record<ProviderKey, string[]> = {
     '123pan.cn',
     'vip.123pan'
   ],
+  tianyiyun: ['cloud.189.cn', '189.cn', 'ecloud.189.cn'],
+  caiyun: ['caiyun.139.com', 'yun.139.com', '139.com'],
+  xunlei: ['pan.xunlei.com', 'xunlei.com'],
+  uc: ['drive.uc.cn', 'uc.cn'],
+  lanzou: [
+    'lanzou.com',
+    'lanzous.com',
+    'lanzoux.com',
+    'lanzoui.com',
+    'lanzouw.com',
+    'lanzouj.com',
+    'lanzouu.com',
+    'lanzouq.com'
+  ],
   other: []
+}
+
+export const PROVIDER_KEY_OPTIONS = [
+  'baidu',
+  'aliyun',
+  'quark',
+  'pan123',
+  'tianyiyun',
+  'caiyun',
+  'xunlei',
+  'uc',
+  'lanzou',
+  'other'
+] as const satisfies ProviderKey[]
+
+export const KUN_GALGAME_PROVIDER_LABEL_MAP: Record<ProviderKey, string> = {
+  baidu: '百度网盘',
+  aliyun: '阿里云盘',
+  quark: '夸克网盘',
+  pan123: '123盘',
+  tianyiyun: '天翼云盘',
+  caiyun: '和彩云',
+  xunlei: '迅雷网盘',
+  uc: 'UC网盘',
+  lanzou: '蓝奏云',
+  other: '其他 (自建网盘等不限速)'
 }

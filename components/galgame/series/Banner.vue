@@ -40,7 +40,7 @@ const hoverTranslations = [
         :style="{ zIndex: banners.length - index }"
       >
         <KunImage
-          :src="banner"
+          :src="banner.replace(/\.webp$/, '-mini.webp')"
           :alt="`Series Banner ${index + 1}`"
           class="h-full w-full rounded-lg object-cover"
           loading="lazy"

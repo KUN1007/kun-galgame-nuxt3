@@ -1,6 +1,8 @@
 import prisma from '~/prisma/prisma'
 import { getGalgameSchema } from '~/validations/galgame'
+import { PROVIDER_KEY_OPTIONS } from '~/constants/galgameResource'
 import type { GalgameCard } from '~/types/api/galgame'
+import type { Prisma } from '@prisma/client'
 
 export default defineEventHandler(async (event) => {
   const input = kunParseGetQuery(event, getGalgameSchema)
@@ -9,7 +11,17 @@ export default defineEventHandler(async (event) => {
   }
 
   const nsfw = getNSFWCookie(event)
-  const { page, limit, type, language, platform, sortField, sortOrder } = input
+  const {
+    page,
+    limit,
+    type,
+    language,
+    platform,
+    sortField,
+    sortOrder,
+    includeProviders,
+    excludeOnlyProviders
+  } = input
 
   const skip = (page - 1) * limit
 
@@ -24,14 +36,43 @@ export default defineEventHandler(async (event) => {
     resourceFilters.push({ platform })
   }
 
+  // Build provider based conditions
+  const providerConditions: Prisma.galgameWhereInput[] = []
+  if (includeProviders.length > 0) {
+    providerConditions.push({
+      resource: {
+        some: {
+          AND: [...resourceFilters, { provider: { hasSome: includeProviders } }]
+        }
+      }
+    })
+  }
+  if (excludeOnlyProviders.length > 0) {
+    const allowed = PROVIDER_KEY_OPTIONS.filter(
+      (p) => !excludeOnlyProviders.includes(p)
+    )
+    providerConditions.push({
+      resource: {
+        some: {
+          AND: [...resourceFilters, { provider: { hasSome: allowed } }]
+        }
+      }
+    })
+  }
+
   const where = {
     status: { not: 1 },
     content_limit: nsfw === 'sfw' ? 'sfw' : undefined,
-    resource: {
-      some: {
-        AND: resourceFilters
-      }
-    }
+    AND: [
+      {
+        resource: {
+          some: {
+            AND: resourceFilters
+          }
+        }
+      },
+      ...providerConditions
+    ]
   }
 
   const orderBy = {

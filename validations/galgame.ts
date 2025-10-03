@@ -5,12 +5,27 @@ import {
   KUN_RESOURCE_LANGUAGE_CONST,
   KUN_RESOURCE_PLATFORM_CONST
 } from '~/constants/galgame'
+import { PROVIDER_KEY_OPTIONS } from '~/constants/galgameResource'
 
 const SORT_ORDER_CONST = ['asc', 'desc'] as const
 
 /*
  * Galgame
  */
+
+const ProviderEnum = z.enum(PROVIDER_KEY_OPTIONS)
+
+// helper: coerce query param (string | string[] | undefined) -> ProviderKey[]
+const providerQueryArray = z.preprocess((v) => {
+  if (Array.isArray(v)) {
+    return v
+  }
+  if (typeof v === 'string') {
+    if (!v) return []
+    return v.split(',')
+  }
+  return []
+}, z.array(ProviderEnum).default([]))
 
 export const getGalgameSchema = z.object({
   page: z.coerce.number().min(1).max(9999999),
@@ -19,7 +34,9 @@ export const getGalgameSchema = z.object({
   language: z.enum([...KUN_RESOURCE_LANGUAGE_CONST, 'all']),
   platform: z.enum([...KUN_RESOURCE_PLATFORM_CONST, 'all']),
   sortField: z.enum(['time', 'created', 'view']),
-  sortOrder: z.enum(SORT_ORDER_CONST)
+  sortOrder: z.enum(SORT_ORDER_CONST),
+  includeProviders: providerQueryArray,
+  excludeOnlyProviders: providerQueryArray
 })
 
 export const getGalgameDetailSchema = z.object({
