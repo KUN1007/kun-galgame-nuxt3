@@ -74,13 +74,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
 </script>
 
 <template>
-  <div class="space-y-2" v-if="details">
-    <KunHeader
-      name="补票提示信息"
-      description="须知 Galgame 厂商制作游戏不易, 很多厂商如今都在炒冷饭, 可见经济并不宽裕。如果条件允许, 请尽可能前往本页面的 Galgame 制作商部分进行正版 Galgame 补票, 感谢您对 Galgame 业界做出的贡献"
-      scale="h3"
-    />
-
+  <div class="space-y-3" v-if="details">
     <div class="flex justify-between">
       <div class="flex items-center gap-2">
         <KunAvatar :user="details.user" />
@@ -141,8 +135,7 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
       </pre>
     </KunInfo>
 
-    <div class="mb-6 space-y-2 space-x-2">
-      <p class="text-default-500 text-sm">点击下面的链接以下载</p>
+    <KunInfo color="success" title="下载链接 - 点击下面的链接以下载">
       <KunLink
         v-for="(kun, index) in details.link"
         :key="index"
@@ -153,7 +146,13 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
       >
         {{ kun }}
       </KunLink>
-    </div>
+    </KunInfo>
+
+    <KunInfo
+      title="补票提示信息"
+      description="须知 Galgame 厂商制作游戏不易, 很多厂商如今都在炒冷饭, 可见经济并不宽裕。如果条件允许, 请尽可能前往本页面的 Galgame 制作商部分进行正版 Galgame 补票, 感谢您对 Galgame 业界做出的贡献"
+      color="danger"
+    />
 
     <KunInfo
       title="鲲的小请求"
