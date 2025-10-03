@@ -10,6 +10,7 @@ model galgame_resource {
   update_time DateTime @default(now())
   status      Int      @default(0)
   download    Int      @default(0)
+  provider    String[] @default([])
 
   galgame_id Int
   galgame    galgame @relation(fields: [galgame_id], references: [id], onDelete: Cascade)

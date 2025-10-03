@@ -35,10 +35,26 @@ export default defineEventHandler(async (event) => {
       url: l
     }))
 
-    await prisma.galgame_resource_link.createMany({
-      data: linksData,
-      skipDuplicates: true
+    if (linksData.length > 0) {
+      await prisma.galgame_resource_link.createMany({
+        data: linksData,
+        skipDuplicates: true
+      })
+    }
+
+    const providers = detectProvidersFromUrls(link)
+
+    await prisma.galgame_resource.update({
+      where: { id: galgameResourceId },
+      data: { provider: { set: providers } }
     })
+
+    if (galgameId) {
+      await prisma.galgame.update({
+        where: { id: galgameId },
+        data: { resource_update_time: new Date() }
+      })
+    }
 
     return 'MOEMOE update galgame resource operation successfully!'
   })

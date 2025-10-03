@@ -73,3 +73,23 @@ export const GALGAME_RESOURCE_PROVIDER_MAP: Record<string, string> = {
   'touchgal.us': 'TouchGal',
   'dlgal.com': 'GGbases'
 }
+
+export type ProviderKey = 'baidu' | 'aliyun' | 'quark' | 'pan123' | 'other'
+
+export const PROVIDER_PATTERNS: Record<ProviderKey, string[]> = {
+  baidu: ['pan.baidu.com', 'tieba.baidu.com', 'pan.baidu.', 'baidu.com'],
+  aliyun: ['alipan.com', 'aliyun', 'aliyundrive', 'aliyuncs', 'aliyunpan'],
+  quark: ['pan.quark.cn', 'quark.cn', 'quark'],
+  pan123: [
+    '123pan',
+    '123684',
+    '123865',
+    '123912',
+    '123912.com',
+    '123684.com',
+    '123865.com',
+    '123pan.cn',
+    'vip.123pan'
+  ],
+  other: []
+}

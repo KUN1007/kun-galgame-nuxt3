@@ -13,12 +13,15 @@ export default defineEventHandler(async (event) => {
 
   const { link, galgameId, ...rest } = input
 
+  const providers = detectProvidersFromUrls(link)
+
   return prisma.$transaction(async (prisma) => {
     const resource = await prisma.galgame_resource.create({
       data: {
         ...rest,
         galgame_id: galgameId,
-        user_id: userInfo.uid
+        user_id: userInfo.uid,
+        provider: providers
       }
     })
 
@@ -27,10 +30,12 @@ export default defineEventHandler(async (event) => {
       url: l
     }))
 
-    await prisma.galgame_resource_link.createMany({
-      data: linksData,
-      skipDuplicates: true
-    })
+    if (linksData.length > 0) {
+      await prisma.galgame_resource_link.createMany({
+        data: linksData,
+        skipDuplicates: true
+      })
+    }
 
     await prisma.user.update({
       where: { id: userInfo.uid },
