@@ -9,7 +9,6 @@ const props = defineProps<{
 }>()
 
 const colorMode = useColorMode()
-const loading = ref(true)
 
 const categories = computed(() =>
   Array.from({ length: 5 }, (_, i) => String(i + 1))
@@ -153,10 +152,6 @@ const options = computed(
           :series="series"
         />
       </div>
-
-      <template #fallback>
-        <KunLoading :loading="loading" />
-      </template>
     </ClientOnly>
   </div>
 </template>

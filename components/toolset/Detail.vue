@@ -78,7 +78,7 @@ const loadPracticalityMine = async () => {
     watch: false,
     ...kungalgameResponseHandler
   })
-  if (res?.mine) {
+  if (res) {
     practicalityData.value = res
   }
 }
