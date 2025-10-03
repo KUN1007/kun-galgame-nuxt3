@@ -1,9 +1,18 @@
 <script setup lang="ts">
+import { usePersistKUNGalgameAdvancedFilterStore } from '~/store/modules/galgame'
+
 const pageData = storeToRefs(useTempGalgameStore())
+const { includeProviders, excludeOnlyProviders } = storeToRefs(
+  usePersistKUNGalgameAdvancedFilterStore()
+)
 
 const { data, status } = await useFetch(`/api/galgame`, {
   method: 'GET',
-  query: pageData,
+  query: {
+    ...pageData,
+    includeProviders: includeProviders.value,
+    excludeOnlyProviders: excludeOnlyProviders.value
+  },
   ...kungalgameResponseHandler
 })
 </script>

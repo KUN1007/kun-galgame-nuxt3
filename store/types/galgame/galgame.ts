@@ -3,7 +3,6 @@ import type {
   KunGalgameResourceLanguageOptions,
   KunGalgameResourcePlatformOptions
 } from '~/constants/galgame'
-import type { ProviderKey } from '~/constants/galgameResource'
 
 export interface GalgameStoreTemp {
   page: number
@@ -13,6 +12,4 @@ export interface GalgameStoreTemp {
   platform: KunGalgameResourcePlatformOptions
   sortField: 'time' | 'created' | 'view'
   sortOrder: KunOrder
-  includeProviders: ProviderKey[]
-  excludeOnlyProviders: ProviderKey[]
 }

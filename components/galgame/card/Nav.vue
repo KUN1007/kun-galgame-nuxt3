@@ -14,22 +14,22 @@ import {
   PROVIDER_KEY_OPTIONS,
   type ProviderKey
 } from '~/constants/galgameResource'
+import { usePersistKUNGalgameAdvancedFilterStore } from '~/store/modules/galgame'
 import type {
   KunGalgameResourceTypeOptions,
   KunGalgameResourceLanguageOptions,
   KunGalgameResourcePlatformOptions
 } from '~/constants/galgame'
 
-const {
-  page,
-  type,
-  language,
-  platform,
-  sortField,
-  sortOrder,
-  includeProviders,
-  excludeOnlyProviders
-} = storeToRefs(useTempGalgameStore())
+const { page, type, language, platform, sortField, sortOrder } = storeToRefs(
+  useTempGalgameStore()
+)
+
+const advStore = usePersistKUNGalgameAdvancedFilterStore()
+const { includeProviders, excludeOnlyProviders } = storeToRefs(advStore)
+const hasAdvanceFilter = computed(
+  () => !!includeProviders.value.length || !!excludeOnlyProviders.value.length
+)
 
 watch(
   () => [
@@ -46,21 +46,12 @@ watch(
   }
 )
 
-const toggleItemInArray = <T,>(arrayRef: Ref<T[]>, item: T) => {
-  const index = arrayRef.value.indexOf(item)
-  if (index === -1) {
-    arrayRef.value.push(item)
-  } else {
-    arrayRef.value.splice(index, 1)
-  }
-}
-
 const toggleIncludeProvider = (key: ProviderKey) => {
-  toggleItemInArray(includeProviders as Ref<ProviderKey[]>, key)
+  advStore.toggleIncludeProvider(key)
 }
 
 const toggleExcludeOnlyProvider = (key: ProviderKey) => {
-  toggleItemInArray(excludeOnlyProviders as Ref<ProviderKey[]>, key)
+  advStore.toggleExcludeOnlyProvider(key)
 }
 </script>
 
@@ -113,16 +104,22 @@ const toggleExcludeOnlyProvider = (key: ProviderKey) => {
         :inner-class="'min-w-64 p-3'"
       >
         <template #trigger>
-          <KunButton variant="light">
-            <KunIcon name="lucide:filter" class="mr-2" />
-            <span>网盘种类</span>
+          <KunButton
+            :color="hasAdvanceFilter ? 'warning' : 'primary'"
+            :variant="hasAdvanceFilter ? 'flat' : 'light'"
+          >
+            <KunIcon
+              :name="hasAdvanceFilter ? 'lucide:check' : 'lucide:filter'"
+              class="mr-2"
+            />
+            <span>高级筛选</span>
           </KunButton>
         </template>
 
         <div class="space-y-3">
           <div>
             <div class="mb-2 text-sm font-medium">
-              资源链接必须含有下面网盘提供方的 Galgame (默认全选)
+              必须含有下面网盘下载的 Galgame
             </div>
             <div class="grid grid-cols-2 gap-2">
               <KunCheckBox
@@ -137,7 +134,9 @@ const toggleExcludeOnlyProvider = (key: ProviderKey) => {
               </KunCheckBox>
             </div>
           </div>
+
           <KunDivider />
+
           <div>
             <div class="mb-2 text-sm font-medium">
               排除仅含有以下网盘下载的 Galgame
@@ -155,17 +154,11 @@ const toggleExcludeOnlyProvider = (key: ProviderKey) => {
               </KunCheckBox>
             </div>
           </div>
-          <div class="flex justify-end gap-2 pt-1">
-            <KunButton variant="light" size="sm" @click="includeProviders = []">
-              清空包含
-            </KunButton>
-            <KunButton
-              variant="light"
-              size="sm"
-              @click="excludeOnlyProviders = []"
-            >
-              清空排除
-            </KunButton>
+
+          <KunDivider />
+
+          <div class="text-default-500 text-sm">
+            网站是聪明的萝莉, 她会记住您的高级筛选, 下次使用时仍会应用筛选
           </div>
         </div>
       </KunPopover>

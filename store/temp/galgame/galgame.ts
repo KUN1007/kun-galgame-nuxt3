@@ -1,5 +1,6 @@
 import type { GalgameStoreTemp } from '~/store/types/galgame/galgame'
 
+// for cross page state not lost
 export const useTempGalgameStore = defineStore('tempGalgame', {
   persist: false,
   state: (): GalgameStoreTemp => ({
@@ -9,9 +10,7 @@ export const useTempGalgameStore = defineStore('tempGalgame', {
     language: 'all',
     platform: 'all',
     sortField: 'time',
-    sortOrder: 'desc',
-    includeProviders: [],
-    excludeOnlyProviders: []
+    sortOrder: 'desc'
   }),
   actions: {}
 })

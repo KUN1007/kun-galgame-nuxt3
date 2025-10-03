@@ -1,3 +1,5 @@
+import { usePersistKUNGalgameAdvancedFilterStore } from './modules/galgame'
+
 export const kungalgameStoreReset = () => {
   usePersistEditGalgameStore().$reset()
   usePersistEditTopicStore().$reset()
@@ -7,10 +9,10 @@ export const kungalgameStoreReset = () => {
   usePersistKUNGalgameHomeStore().$reset()
   usePersistUserStore().$reset()
   usePersistSettingsStore().$reset()
+  usePersistKUNGalgameAdvancedFilterStore().$reset()
 
   useTempEditStore().$reset()
   useTempGalgamePRStore().$reset()
-  useTempGalgameStore().$reset()
   useTempGalgameResourceStore().$reset()
   useTempReplyStore().$reset()
   useTempSearchStore().$reset()
