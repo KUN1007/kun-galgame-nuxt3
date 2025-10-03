@@ -7,6 +7,10 @@ model update_log {
   content_zh_cn String @default("") @db.Text
   content_zh_tw String @default("") @db.Text
 
+  // TODO:
+  user_id Int  @default(2)
+  user    user @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
   created DateTime @default(now())
   updated DateTime @updatedAt
 }

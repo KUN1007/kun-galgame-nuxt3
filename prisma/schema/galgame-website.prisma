@@ -21,6 +21,10 @@ model galgame_website {
     favorite galgame_website_favorite[]
     comment  galgame_website_comment[]
 
+    // TODO:
+    user_id Int  @default(2)
+    user    user @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
     created DateTime @default(now())
     updated DateTime @updatedAt
 }

@@ -164,7 +164,13 @@ export const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
         orderBy: { created: 'desc' },
         take: limit,
         skip,
-        select: { id: true, url: true, name: true, created: true }
+        select: {
+          user: { select: { id: true, name: true, avatar: true } },
+          id: true,
+          url: true,
+          name: true,
+          created: true
+        }
       }),
       prisma.galgame_website.count()
     ])
@@ -173,7 +179,7 @@ export const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
         uniqueId: `galgame-website-${item.id}`,
         type: 'GALGAME_WEBSITE_CREATION',
         timestamp: item.created,
-        actor: null,
+        actor: item.user,
         link: `/website/${item.url}`,
         content: `新增 Galgame 站点: ${item.name}`
       })),
@@ -512,7 +518,13 @@ export const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
         orderBy: { created: 'desc' },
         take: limit,
         skip,
-        select: { id: true, version: true, created: true, content_zh_cn: true }
+        select: {
+          user: { select: { id: true, name: true, avatar: true } },
+          id: true,
+          version: true,
+          created: true,
+          content_zh_cn: true
+        }
       }),
       prisma.update_log.count()
     ])
@@ -521,7 +533,7 @@ export const activityFetchers: Record<ActivityEventType, ActivityFetcher> = {
         uniqueId: `update-log-${item.id}`,
         type: 'UPDATE_LOG_CREATION',
         timestamp: item.created,
-        actor: null,
+        actor: item.user,
         link: `/update/history`,
         content: item.content_zh_cn
       })),

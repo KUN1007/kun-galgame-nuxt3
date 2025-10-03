@@ -34,7 +34,10 @@ export const getActivityTimelineData = async ({
     'TOPIC_COMMENT_CREATION',
     'GALGAME_WEBSITE_CREATION',
     'GALGAME_WEBSITE_COMMENT_CREATION',
-    'TODO_CREATION'
+    'TODO_CREATION',
+    'UPDATE_LOG_CREATION',
+    'MESSAGE_UPVOTE',
+    'MESSAGE_SOLUTION'
   ]
 
   const results = await Promise.all(

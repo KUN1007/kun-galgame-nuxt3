@@ -14,8 +14,11 @@ model user {
     daily_image_count          Int    @default(0)
     daily_toolset_upload_count Int    @default(0)
 
-    todo  todo[]
-    unmoe unmoe[]
+    // SU only
+    todo       todo[]
+    update_log update_log[]
+    website    galgame_website[]
+    unmoe      unmoe[]
 
     system_message  system_message[] @relation("system_message_sender")
     send_message    message[]        @relation("user_send_message")

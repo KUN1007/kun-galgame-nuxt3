@@ -22,7 +22,7 @@ export interface ActivityItem {
   uniqueId: string
   type: ActivityEventType
   timestamp: Date | string
-  actor: KunUser | null
+  actor: KunUser
   link: string
   content: string
 }
