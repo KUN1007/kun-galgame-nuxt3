@@ -53,7 +53,7 @@ const handleDeleteToolset = async () => {
 const handleRewriteToolset = () => {
   toolsetUpdateForm.toolsetId = data.value.id
   toolsetUpdateForm.name = data.value.name
-  toolsetUpdateForm.description = data.value.description
+  toolsetUpdateForm.description = data.value.contentMarkdown
   toolsetUpdateForm.language = data.value.language as 'zh-cn'
   toolsetUpdateForm.platform = data.value.platform as 'windows'
   toolsetUpdateForm.type = data.value.type as 'others'
@@ -141,11 +141,9 @@ const handleResourceUpdated = (res: ToolsetResource) => {
           </KunBadge>
         </div>
 
-        <KunInfo color="info" title="工具简介">
-          <pre class="font-sans text-base break-all whitespace-pre-line">
-            {{ data.description }}
-          </pre>
-        </KunInfo>
+        <KunDivider class-name="my-6" />
+
+        <KunContent :content="data.contentHtml" />
       </div>
 
       <div class="grid grid-cols-1 gap-6 md:grid-cols-3">

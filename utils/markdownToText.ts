@@ -8,6 +8,6 @@ export const markdownToText = (markdown: string) => {
     .replace(/`/g, '')
     .replace(/^(-{3,}|\*{3,})$/gm, '')
     .replace(/^\s*([-*+]|\d+\.)\s+/gm, '')
-    .replace(/\n{2,}/g, '\n')
+    .replace(/\n+/g, ' ')
     .trim()
 }

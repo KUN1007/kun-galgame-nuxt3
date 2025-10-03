@@ -96,11 +96,19 @@ const handleUpdatePageLink = (value: string | number) => {
     </div>
 
     <div class="space-y-2">
-      <div class="text-sm font-medium">简介</div>
-      <KunTextarea
-        v-model="toolsetUpdateForm.description"
-        placeholder="简要说明该工具用途..."
-      />
+      <div class="text-xl font-medium">简介</div>
+      <p class="text-default-500 text-sm">
+        请在此处具体说明工具是什么, 以及如何使用该工具, 越详细越好
+      </p>
+      <KunMilkdownDualEditorProvider
+        :value-markdown="toolsetUpdateForm.description"
+        @set-markdown="(value) => (toolsetUpdateForm.description = value)"
+        language="zh-cn"
+      >
+        <KunLink target="_blank" to="/doc/notice/create-galgame-toolset">
+          发布 Galgame 工具规定
+        </KunLink>
+      </KunMilkdownDualEditorProvider>
     </div>
 
     <div class="grid grid-cols-1 gap-3 md:grid-cols-3">

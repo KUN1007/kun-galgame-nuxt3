@@ -24,7 +24,7 @@ const toolset = data.value
 if (toolset) {
   const title = `${toolset.name} 资源下载`
   const pageUrl = `${kungal.domain.main}${route.path}`
-  const description = toolset.description.slice(0, 175)?.replace(/\\|\n/g, '')
+  const description = markdownToText(toolset.contentMarkdown).slice(0, 175)
 
   const osMap: Record<string, string> = {
     windows: 'Windows',

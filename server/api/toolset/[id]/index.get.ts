@@ -103,6 +103,8 @@ export default defineEventHandler(async (event) => {
 
   const detail: ToolsetDetail = {
     ...toolset,
+    contentMarkdown: toolset.description,
+    contentHtml: await markdownToHtml(toolset.description),
     practicalityAvg,
     download: totalDownload,
     aliases: toolset.alias.map((a) => a.name),

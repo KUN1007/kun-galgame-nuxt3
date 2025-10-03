@@ -18,7 +18,8 @@ export interface ToolsetCard {
 export interface ToolsetDetail {
   id: number
   name: string
-  description: string
+  contentHtml: string
+  contentMarkdown: string
   type: string
   platform: string
   language: string

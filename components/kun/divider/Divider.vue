@@ -22,11 +22,13 @@ const colorClasses: Record<KunUIColor, string> = {
 
 <template>
   <div
-    :class="[
-      'flex items-center',
-      orientation === 'horizontal' ? 'w-full' : 'h-full flex-col',
-      className
-    ]"
+    :class="
+      cn(
+        'flex items-center',
+        orientation === 'horizontal' ? 'w-full' : 'h-full flex-col',
+        className
+      )
+    "
     role="separator"
   >
     <div
