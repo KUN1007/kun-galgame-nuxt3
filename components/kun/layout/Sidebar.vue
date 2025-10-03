@@ -14,6 +14,29 @@ const { showKUNGalgameSidebarCollapsed } = storeToRefs(
 const isCollapsed = computed(
   () => !props.forceExpanded && showKUNGalgameSidebarCollapsed.value
 )
+
+const links = [
+  {
+    name: 'GitHub',
+    icon: 'lucide:github',
+    to: kungal.github,
+    target: '_blank',
+    tooltip: 'GitHub 仓库地址'
+  },
+  {
+    name: 'RSS',
+    icon: 'lucide:rss',
+    to: '/rss',
+    tooltip: '话题和 Galgame RSS 订阅'
+  },
+  {
+    name: 'Telegram',
+    icon: 'ph:telegram-logo',
+    to: kungal.domain.telegram_group,
+    target: '_blank',
+    tooltip: '加入 Telegram 交流群'
+  }
+]
 </script>
 
 <template>
@@ -61,75 +84,40 @@ const isCollapsed = computed(
 
         <div class="flex w-full justify-between px-7 py-6">
           <KunLink
+            v-for="item in links"
+            :key="item.name"
             underline="none"
             color="default"
             class-name="flex-col gap-0"
-            :to="kungal.github"
-            target="_blank"
+            :to="item.to"
+            :target="item.target as '_blank'"
           >
-            <KunIcon class="icon" name="lucide:github" />
-            <span class="text-xs">GitHub</span>
-          </KunLink>
-
-          <KunLink
-            underline="none"
-            color="default"
-            class-name="flex-col gap-0"
-            to="/rss"
-          >
-            <KunIcon class="icon" name="lucide:rss" />
-            <span class="text-xs">RSS</span>
-          </KunLink>
-
-          <KunLink
-            underline="none"
-            color="default"
-            class-name="flex-col gap-0"
-            :to="kungal.domain.telegram_group"
-            target="_blank"
-          >
-            <KunIcon class="icon" name="ph:telegram-logo" />
-            <span class="text-xs">Telegram</span>
+            <KunIcon class="icon" :name="item.icon" />
+            <span class="text-xs">{{ item.name }}</span>
           </KunLink>
         </div>
       </template>
+
       <template v-else>
         <div class="flex flex-col items-center gap-2 px-3 pb-4">
-          <KunButton
-            :is-icon-only="true"
-            variant="light"
-            color="default"
-            class-name="flex-col gap-0"
-            :href="kungal.github"
-            target="_blank"
-            title="GitHub"
+          <KunTooltip
+            v-for="item in links"
+            :key="item.name"
+            :text="item.tooltip"
+            position="right"
           >
-            <KunIcon class="icon text-xl" name="lucide:github" />
-          </KunButton>
-
-          <KunButton
-            :is-icon-only="true"
-            variant="light"
-            color="default"
-            class-name="flex-col gap-0"
-            href="/rss"
-            title="RSS"
-            target="_blank"
-          >
-            <KunIcon class="icon text-xl" name="lucide:rss" />
-          </KunButton>
-
-          <KunButton
-            :is-icon-only="true"
-            variant="light"
-            color="default"
-            class-name="flex-col gap-0"
-            :href="kungal.domain.telegram_group"
-            target="_blank"
-            title="Telegram"
-          >
-            <KunIcon class="icon text-xl" name="ph:telegram-logo" />
-          </KunButton>
+            <KunButton
+              :is-icon-only="true"
+              variant="light"
+              color="default"
+              class-name="flex-col gap-0"
+              :href="item.to"
+              :target="item.target as '_blank'"
+              :title="item.name"
+            >
+              <KunIcon class="icon text-xl" :name="item.icon" />
+            </KunButton>
+          </KunTooltip>
         </div>
       </template>
     </div>
