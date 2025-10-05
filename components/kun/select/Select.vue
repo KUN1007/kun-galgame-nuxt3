@@ -13,7 +13,8 @@ const props = withDefaults(defineProps<KunSelectProps>(), {
   disabled: false,
   error: '',
   darkBorder: true,
-  ariaLabel: ''
+  ariaLabel: '',
+  className: ''
 })
 
 const emit = defineEmits<{
@@ -80,7 +81,7 @@ const selectOption = (value: string | number, index: number) => {
 </script>
 
 <template>
-  <div class="relative w-full">
+  <div :class="cn('relative w-full', props.className)">
     <label
       v-if="label"
       :for="kunUniqueId"

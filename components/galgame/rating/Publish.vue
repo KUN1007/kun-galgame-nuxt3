@@ -14,6 +14,7 @@ import {
   createGalgameRatingSchema,
   updateGalgameRatingSchema
 } from '~/validations/galgame-rating'
+import { usePersistEditGalgameRatingStore } from '~/store/modules/edit/rating'
 import type { GalgamePageRatingCard } from '~/types/api/galgame-rating'
 
 type RatingInitialData = {
@@ -45,6 +46,10 @@ const emits = defineEmits<{
   onUpdated: []
   onPublished: [GalgamePageRatingCard]
 }>()
+
+const { shortSummary: shortSummaryStore } = storeToRefs(
+  usePersistEditGalgameRatingStore()
+)
 
 const recommend =
   ref<(typeof KUN_GALGAME_RATING_RECOMMEND_CONST)[number]>('neutral')
@@ -95,6 +100,15 @@ watch(
   }
 )
 
+watch(
+  () => shortSummary.value,
+  () => {
+    if (!props.initialData) {
+      shortSummaryStore.value = shortSummary.value
+    }
+  }
+)
+
 const isSubmitting = ref(false)
 
 const recommendOptions = computed(() =>
@@ -140,6 +154,8 @@ watch(
       }
       selectedTypes.value = [...(props.initialData.galgameType ?? [])]
       showAdvanced.value = true
+    } else {
+      shortSummary.value = shortSummaryStore.value
     }
   }
 )
@@ -238,6 +254,7 @@ const submit = async () => {
       resetForm()
       close()
       emits('onPublished', res)
+      shortSummaryStore.value = ''
     }
   }
 }
@@ -317,7 +334,7 @@ const submit = async () => {
 
       <KunTextarea
         v-model="shortSummary"
-        label="短评 (可选, 请勿包含 R18 内容)"
+        label="短评 (可选, 请勿包含 R18 内容, 您的短评在编写的同时会被自动保存在本地, 关掉面板不会丢失)"
         :rows="4"
         placeholder="「 枯れない世界と終わる花 」莲真的是我遇见最好的女孩子, 想和她结婚天长地久恩恩爱爱百年好合, 想和她翻云覆雨、干湿分离、水乳交融、干柴烈火, 日日夜夜每时每刻每个开心难过七滋八味苦辣麻香咸的日子里都在想念、挚爱、铭记着莲, 你们懂这种心情吗！！！这已经不是爱了, 这种东西叫本能, 我只是本能的爱着这个孩子而已, 我无法控制自己的本能, 我已经病入膏肓了, 病名为莲。"
         :maxlength="1314"

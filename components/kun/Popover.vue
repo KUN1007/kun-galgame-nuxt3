@@ -259,7 +259,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div ref="containerRef" class="relative z-20 inline-block">
+  <div ref="containerRef" class="relative inline-block">
     <div
       ref="triggerRef"
       @click="toggle"

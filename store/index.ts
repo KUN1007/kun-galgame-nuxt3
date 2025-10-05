@@ -1,8 +1,10 @@
+import { usePersistEditGalgameRatingStore } from './modules/edit/rating'
 import { usePersistKUNGalgameAdvancedFilterStore } from './modules/galgame'
 
 export const kungalgameStoreReset = () => {
   usePersistEditGalgameStore().$reset()
   usePersistEditTopicStore().$reset()
+  usePersistEditGalgameRatingStore().$reset()
   usePersistKUNGalgameReplyStore().$reset()
   usePersistKUNGalgameTopicStore().$reset()
   usePersistCategoryStore().$reset()
