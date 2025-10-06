@@ -20,7 +20,9 @@ const galgameBlocks = [
   { key: 'galgame', label: 'Galgame' },
   { key: 'galgameResource', label: 'Galgame 资源' },
   { key: 'galgameToolset', label: 'Galgame 工具' },
-  { key: 'galgameToolsetResource', label: 'Galgame 工具资源' }
+  { key: 'galgameToolsetResource', label: 'Galgame 工具资源' },
+  { key: 'galgameRating', label: 'Galgame 评分' },
+  { key: 'contributeGalgame', label: 'Galgame 贡献' }
 ]
 
 const interactionBlocks = [

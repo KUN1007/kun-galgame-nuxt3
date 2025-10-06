@@ -40,6 +40,7 @@ const handleDeleteToolset = async () => {
   isDeleting.value = true
   const ok = await $fetch(`/api/toolset/${data.value.id}`, {
     method: 'DELETE',
+    query: { toolsetId: data.value.id },
     ...kungalgameResponseHandler
   })
   isDeleting.value = false

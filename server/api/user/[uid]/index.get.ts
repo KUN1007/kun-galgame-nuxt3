@@ -45,6 +45,7 @@ export default defineEventHandler(async (event) => {
           galgame_comment: true,
           galgame_pr: true,
           galgame_link: true,
+          galgame_rating: true,
           galgame_contributor: true,
           galgame_resource: true,
           galgame_toolset: true,
@@ -124,6 +125,7 @@ export default defineEventHandler(async (event) => {
     galgameComment: user._count.galgame_comment,
     galgamePr: user._count.galgame_pr,
     galgameLink: user._count.galgame_link,
+    galgameRating: user._count.galgame_rating,
     contributeGalgame: user._count.galgame_contributor,
 
     galgameResource: user._count.galgame_resource,

@@ -25,6 +25,7 @@ export interface UserInfo {
   galgameComment: number
   galgamePr: number
   galgameLink: number
+  galgameRating: number
   contributeGalgame: number
 
   galgameResource: number
