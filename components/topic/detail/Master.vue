@@ -74,6 +74,29 @@ defineProps<{
 
       <KunContent class="kun-master" :content="topic.contentHtml" />
 
+      <p class="text-default-500 ml-auto text-sm">
+        本文版权遵循
+        <KunLink
+          underline="hover"
+          size="sm"
+          class-name="text-default-500"
+          target="_blank"
+          rel="noopener noreferrer"
+          to="https://creativecommons.org/licenses/by-nc/4.0/deed.en"
+        >
+          CC BY-NC 协议
+        </KunLink>
+        和
+        <KunLink
+          underline="hover"
+          size="sm"
+          class-name="text-default-500"
+          to="/doc/notice/article-copyright"
+        >
+          本站版权政策
+        </KunLink>
+      </p>
+
       <TopicFooter :topic="topic" />
     </KunCard>
   </div>
