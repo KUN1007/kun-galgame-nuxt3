@@ -29,9 +29,8 @@
     {
       "name": "ACGNGAME",
       "banner": "acgngame",
-      "link": "https://acgngames.net",
-      "label": "ACGNGAME, Gal World, Galgame 游戏爱好者之家",
-      "status": "down"
+      "link": "https://acgn.games",
+      "label": "ACGNGAME, Gal World, Galgame 游戏爱好者之家"
     },
     {
       "name": "失落的小站",
@@ -50,13 +49,6 @@
       "banner": "galgamer",
       "link": "https://galgamer.moe",
       "label": "因爲你是一個一個一個 <Galgamer/美少女> 啊啊啊啊阿"
-    },
-    {
-      "name": "夏轩阁",
-      "banner": "xiayuge",
-      "link": "https://xiayuge1.top/",
-      "label": "夏轩阁是一个创建于2022年的一个主要与galgame有关的站点, 与大家分享、探讨自己喜欢的作品, 我们一直在提供公益服务, 接下来的路还很长, 希望能够与各位一起走完。",
-      "status": "down"
     },
     {
       "name": "Hikarinagi",
@@ -111,13 +103,6 @@
       "banner": "nekotaku",
       "link": "https://www.nekotaku.me/",
       "label": "喵源领域是一个专注于高质量的Galgame文化分享网站, 提供最新最全的Galgame相关文件下载服务, 助力将Galgame游戏文化推向世界!"
-    },
-    {
-      "name": "莫邪游戏资源分享网",
-      "banner": "xiuren",
-      "link": "https://xiuren.cyou/",
-      "label": "分享galgame, SLG, RPG等资源",
-      "status": "down"
     },
     {
       "name": "Galgame 月谣",
@@ -178,6 +163,12 @@
       "banner": "acgsekai",
       "link": "https://www.acgsekai.xyz/",
       "label": "次元宅社, 提供ACGN资源, 是公益性的全免费资源分享平台。打造二次元网站一片净土, 我们的理念是开放、共创, 希望与您共同CHANGE SEKAI!"
+    },
+    {
+      "name": "05的资源小站",
+      "banner": "05",
+      "link": "https://05fx.022016.xyz/",
+      "label": "05号机 一手维护建设的资源站"
     }
   ],
   "others": [
@@ -192,13 +183,6 @@
       "banner": "koibumi",
       "link": "https://s.koid.cc/",
       "label": "A simple url shorten app"
-    },
-    {
-      "name": "雪月风花",
-      "banner": "xueyuefenghua",
-      "link": "https://play.ziyuanshare.cc/",
-      "label": "雪月风花是一个集ACG游戏、动漫、电影、音乐、网络项目、热点资讯的免费分享平台",
-      "status": "down"
     },
     {
       "name": "TGNAV",
