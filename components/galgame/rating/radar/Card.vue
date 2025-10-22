@@ -14,7 +14,12 @@ defineProps<{
 </script>
 
 <template>
-  <KunScrollShadow :draggable="true" axis="horizontal" shadow-size="5rem">
+  <KunScrollShadow
+    class-name="scrollbar-visible"
+    :draggable="true"
+    axis="horizontal"
+    shadow-size="5rem"
+  >
     <div class="flex" v-for="rating in ratings" :key="rating.id">
       <KunCard
         :is-transparent="false"

@@ -534,12 +534,12 @@
     display: none;
   }
 
-  .scrollbar-default {
-    scrollbar-width: auto;
-    -ms-overflow-style: auto;
+  .scrollbar-visible {
+    scrollbar-width: thin;
+    -ms-overflow-style: thin;
   }
 
-  .scrollbar-default::-webkit-scrollbar {
+  .scrollbar-visible::-webkit-scrollbar {
     display: block;
   }
 }
