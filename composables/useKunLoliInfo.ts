@@ -32,6 +32,12 @@ export const useKunLoliInfo = (message: string, duration?: number) => {
     duration: durationMs
   })
 
+  // Attach Nuxt app context so global components/plugins
+  // (e.g. auto-registered components like KunImage) resolve correctly
+  const nuxtApp = useNuxtApp()
+  // vueApp._context is stable and intended for programmatic mounts
+  messageNode.appContext = nuxtApp.vueApp._context
+
   if (timeout) {
     clearTimeout(timeout)
   }
