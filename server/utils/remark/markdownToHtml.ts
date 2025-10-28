@@ -13,8 +13,7 @@ import { rehypeKunLazyImage } from './plugins/rehypeKunLazyImage'
 import { rehypeKunCodeBlockWrapper } from './plugins/rehypeKunCodeBlockWrapper'
 import { rehypeKunH1ToH2 } from './plugins/rehypeKunH1ToH2'
 import { rehypeKunTableWrapper } from './plugins/rehypeKunTableWrapper'
-import { rehypeKunInsertZeroWidthSpace } from './plugins/rehypeKunInsertZeroWidthSpace'
-// import { rehypeKunSpoiler } from './plugins/rehypeKunSpoiler'
+// import { rehypeKunInsertWbr } from './plugins/rehypeKunInsertWbr'
 // import { rehypeKunVideo } from './plugins/rehypeKunVideo'
 
 export const markdownToHtml = async (markdown: string) => {
@@ -43,7 +42,7 @@ export const markdownToHtml = async (markdown: string) => {
     // will damage rehypeKatex
     .use(rehypeKunCodeBlockWrapper)
     .use(rehypeKunTableWrapper)
-    .use(rehypeKunInsertZeroWidthSpace)
+    // .use(() => rehypeKunInsertWbr({ minLength: 30, chunkSize: 20 }))
     .use(rehypeStringify)
     .process(markdown)
 
