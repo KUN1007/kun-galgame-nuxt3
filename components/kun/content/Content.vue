@@ -42,6 +42,16 @@ const sanitizeConfig = {
     overflow: hidden;
     vertical-align: middle;
 
+    .spoiler-frost {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: rgb(150, 150, 150);
+      border-radius: inherit;
+      transform: translateZ(0);
+      z-index: 5;
+    }
+
     & > *:not(.spoiler-canvas) {
       transition: filter 0.3s ease-in-out;
       filter: blur(0);
