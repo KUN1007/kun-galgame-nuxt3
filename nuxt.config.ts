@@ -54,6 +54,8 @@ export default defineNuxtConfig({
 
     public: {
       KUN_GALGAME_URL: process.env.KUN_GALGAME_URL,
+      KUN_VISUAL_NOVEL_FORUM_YANDEX_VERIFICATION:
+        process.env.KUN_VISUAL_NOVEL_FORUM_YANDEX_VERIFICATION,
       KUN_VISUAL_NOVEL_VERSION: appVersion
     }
   },

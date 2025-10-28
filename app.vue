@@ -5,9 +5,17 @@ const { showKUNGalgamePageTransparency, showKUNGalgameBackgroundBlur } =
   storeToRefs(usePersistSettingsStore())
 
 const route = useRoute()
+const config = useRuntimeConfig()
+
 useHead({
   htmlAttrs: { lang: 'zh-Hans' },
-  meta: [{ name: 'image', content: kungal.images[0].fullUrl }],
+  meta: [
+    { name: 'image', content: kungal.images[0].fullUrl },
+    {
+      name: 'yandex-verification',
+      content: config.public.KUN_VISUAL_NOVEL_FORUM_YANDEX_VERIFICATION
+    }
+  ],
   templateParams: {
     schemaOrg: {
       host: kungal.domain.main,
