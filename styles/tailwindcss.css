@@ -522,6 +522,7 @@
       Hiragino Sans GB,
       Microsoft YaHei,
       sans-serif !important;
+    text-autospace: normal;
   }
 
   /* Custom scrollbar-hide syntax */

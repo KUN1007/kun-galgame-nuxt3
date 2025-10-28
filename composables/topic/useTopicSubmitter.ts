@@ -12,11 +12,25 @@ export const useTopicSubmitter = () => {
   const persistStore = usePersistEditTopicStore()
   const { moemoepoint } = usePersistUserStore()
 
+  const rules = reactive({
+    isReadRule: false,
+    isAgreeCategory: false,
+    isValidTitle: false,
+    isKnownConsequence: false
+  })
   const isSubmitting = ref(false)
   const isRewriteMode = computed(() => tempStore.isTopicRewriting)
 
   const submit = async () => {
-    if (isSubmitting.value) return
+    if (isSubmitting.value) {
+      return
+    }
+
+    const isReadAllRules = Object.values(rules).every((value) => value)
+    if (moemoepoint < 50 && !isReadAllRules) {
+      useMessage('请勾选同意所有发布须知后再发布话题', 'warn')
+      return
+    }
 
     const data = {
       title: title.value,
@@ -98,6 +112,7 @@ export const useTopicSubmitter = () => {
   onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
   return {
+    rules,
     submit,
     isSubmitting,
     isRewriteMode
