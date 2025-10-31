@@ -43,12 +43,21 @@ export default defineEventHandler(async (event) => {
   const [resources, totalCount] = await prisma.$transaction([
     prisma.galgame_resource.findMany({
       where: whereClause,
-
       select: {
+        id: true,
         galgame_id: true,
+        type: true,
+        language: true,
         platform: true,
+        size: true,
+        code: true,
+        password: true,
+        note: true,
         status: true,
         created: true,
+        link: {
+          select: { url: true }
+        },
         galgame: {
           select: {
             name_en_us: true,
@@ -58,19 +67,16 @@ export default defineEventHandler(async (event) => {
           }
         }
       },
-      orderBy: {
-        created: 'desc'
-      },
+      orderBy: { created: 'desc' },
       skip: skip,
       take: limit
     }),
 
-    prisma.galgame_resource.count({
-      where: whereClause
-    })
+    prisma.galgame_resource.count({ where: whereClause })
   ])
 
   const formattedResources: UserGalgameResource[] = resources.map((res) => ({
+    id: res.id,
     galgameId: res.galgame_id,
     galgameName: {
       'en-us': res.galgame.name_en_us,
@@ -78,7 +84,14 @@ export default defineEventHandler(async (event) => {
       'zh-cn': res.galgame.name_zh_cn,
       'zh-tw': res.galgame.name_zh_tw
     },
+    type: res.type,
+    language: res.language,
     platform: res.platform,
+    size: res.size,
+    code: res.code,
+    password: res.password,
+    note: res.note,
+    link: res.link.map((l) => l.url),
     status: res.status,
     created: res.created
   }))

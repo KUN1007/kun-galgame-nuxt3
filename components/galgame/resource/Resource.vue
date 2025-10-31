@@ -7,6 +7,7 @@ const gid = computed(() => {
 const { isShowPublish, rewriteResourceId } = storeToRefs(
   useTempGalgameResourceStore()
 )
+const { id } = usePersistUserStore()
 
 const { data, status, refresh } = await useLazyFetch(
   `/api/galgame/${gid.value}/resource/all`,
@@ -39,8 +40,19 @@ watch(
   <div class="space-y-3">
     <KunHeader name="Galgame 资源链接" scale="h2">
       <template #headerEndContent>
-        <KunButton @click="handleClickContribute">添加资源</KunButton>
+        <div class="ml-auto flex items-center gap-1">
+          <KunButton
+            v-if="id"
+            :href="`/user/${id}/resource/expire`"
+            color="success"
+            variant="flat"
+          >
+            批量更改已失效资源链接
+          </KunButton>
+          <KunButton @click="handleClickContribute">添加资源</KunButton>
+        </div>
       </template>
+
       <template #endContent>
         <KunInfo
           color="info"

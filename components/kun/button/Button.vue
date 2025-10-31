@@ -92,7 +92,7 @@ const colorVariants: Record<KunUIVariant, Record<KunUIColor, string>> = {
     default: 'bg-default',
     primary: 'bg-primary',
     secondary: 'bg-secondary',
-    success: 'bg-success',
+    success: 'bg-success-600',
     warning: 'bg-warning',
     danger: 'bg-danger'
   },
@@ -108,7 +108,7 @@ const colorVariants: Record<KunUIVariant, Record<KunUIColor, string>> = {
     default: 'bg-transparent hover:bg-default/20',
     primary: 'bg-transparent text-primary hover:bg-primary/20',
     secondary: 'bg-transparent text-secondary hover:bg-secondary/20',
-    success: 'bg-transparent text-success hover:bg-success/20',
+    success: 'bg-transparent text-success hover:bg-success-600/20',
     warning: 'bg-transparent text-warning hover:bg-warning/20',
     danger: 'bg-transparent text-danger hover:bg-danger/20'
   },
@@ -116,7 +116,7 @@ const colorVariants: Record<KunUIVariant, Record<KunUIColor, string>> = {
     default: 'bg-default/20 text-default-700',
     primary: 'bg-primary/20 text-primary-600',
     secondary: 'bg-secondary/20 text-secondary-600',
-    success: 'bg-success/20 text-success-700 dark:text-success',
+    success: 'bg-success-600/20 text-success-700 dark:text-success',
     warning: 'bg-warning/20 text-warning-700 dark:text-warning',
     danger: 'bg-danger/20 text-danger-600 dark:text-danger-500'
   },
@@ -124,7 +124,7 @@ const colorVariants: Record<KunUIVariant, Record<KunUIColor, string>> = {
     default: 'border-default bg-default-100',
     primary: 'border-default bg-primary-100 text-primary',
     secondary: 'border-default bg-secondary-100 text-secondary',
-    success: 'border-default bg-success-100 text-success',
+    success: 'border-default bg-success-600-100 text-success',
     warning: 'border-default bg-warning-100 text-warning',
     danger: 'border-default bg-danger-100 text-danger'
   },
@@ -132,7 +132,7 @@ const colorVariants: Record<KunUIVariant, Record<KunUIColor, string>> = {
     default: ' shadow-default/40 bg-default',
     primary: ' shadow-primary/40 bg-primary',
     secondary: ' shadow-secondary/40 bg-secondary',
-    success: ' shadow-success/40 bg-success',
+    success: ' shadow-success/40 bg-success-600',
     warning: ' shadow-warning/40 bg-warning',
     danger: ' shadow-danger/40 bg-danger'
   },

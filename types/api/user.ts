@@ -45,9 +45,17 @@ export interface UserTopic {
 export type UserGalgame = GalgameCard
 
 export interface UserGalgameResource {
+  id: number
   galgameId: number
   galgameName: KunLanguage
+  type: string
+  language: string
   platform: string
+  size: string
+  link: string[]
+  code: string
+  password: string
+  note: string
   status: number
   created: Date | string
 }
