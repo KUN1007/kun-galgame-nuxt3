@@ -154,7 +154,7 @@ onMounted(async () => {
           重新标记有效
         </KunButton>
 
-        <KunTooltip text="下载数 (2025-07-27 起)">
+        <KunTooltip text="资源下载数">
           <KunButton
             :is-icon-only="true"
             variant="light"
