@@ -53,6 +53,7 @@ const toggleIncludeProvider = (key: ProviderKey) => {
 const toggleExcludeOnlyProvider = (key: ProviderKey) => {
   advStore.toggleExcludeOnlyProvider(key)
 }
+const props = defineProps<{ showAdvanced?: boolean }>()
 </script>
 
 <template>
@@ -99,6 +100,7 @@ const toggleExcludeOnlyProvider = (key: ProviderKey) => {
 
     <div class="flex shrink-0 items-center gap-2">
       <KunPopover
+        v-if="props.showAdvanced !== false"
         :auto-position="true"
         position="bottom-end"
         :inner-class="'min-w-64 p-3'"

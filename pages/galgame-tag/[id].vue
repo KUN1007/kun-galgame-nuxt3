@@ -11,18 +11,24 @@ const tagId = computed(() => {
   return Number((route.params as { id: string }).id)
 })
 
-const pageData = reactive({
-  page: 1,
-  limit: 24,
-  tagId: tagId.value
-})
+const { page, limit, type, language, platform, sortField, sortOrder } =
+  storeToRefs(useTempGalgameStore())
 
 const showTagModal = ref(false)
 const editingTag = ref<UpdateGalgameTagPayload>({} as UpdateGalgameTagPayload)
 
 const { data, status } = await useFetch(`/api/galgame-tag/${tagId.value}`, {
   method: 'GET',
-  query: pageData,
+  query: {
+    page,
+    limit,
+    type,
+    language,
+    platform,
+    sortField,
+    sortOrder,
+    tagId
+  },
   ...kungalgameResponseHandler
 })
 
@@ -124,6 +130,8 @@ if (data.value) {
       </template>
     </KunHeader>
 
+    <GalgameCardNav :show-advanced="false" />
+
     <GalgameTagModal
       v-model="showTagModal"
       :initial-data="editingTag"
@@ -137,9 +145,9 @@ if (data.value) {
     />
 
     <KunPagination
-      v-if="data.galgameCount > pageData.limit"
-      v-model:current-page="pageData.page"
-      :total-page="Math.ceil(data.galgameCount / pageData.limit)"
+      v-if="data.galgameCount > limit"
+      v-model:current-page="page"
+      :total-page="Math.ceil(data.galgameCount / limit)"
       :is-loading="status === 'pending'"
     />
 

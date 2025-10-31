@@ -141,11 +141,11 @@ const handleUpdatePageLink = (value: string | number) => {
     </div>
 
     <div class="space-y-2">
-      <div class="text-xl font-medium">主页 / 下载链接</div>
+      <div class="text-xl font-medium">主页</div>
       <KunTextarea
         :model-value="form.homepage.toString()"
         @update:model-value="handleUpdatePageLink"
-        placeholder="如果有多个链接, 使用英语逗号分隔每个下载链接"
+        placeholder="工具的官网, GitHub 仓库等等, 如果有多个链接, 使用英语逗号分隔每个下载链接"
       />
     </div>
 

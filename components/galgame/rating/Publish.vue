@@ -342,6 +342,10 @@ const submit = async () => {
         auto-grow
       />
 
+      <div v-if="showAdvanced" class="pt-2">
+        <GalgameRatingAdvanced v-model="dims" />
+      </div>
+
       <div class="flex items-center justify-between">
         <KunButton variant="flat" @click="showAdvanced = !showAdvanced">
           {{ showAdvanced ? '收起高级评分' : '展开高级评分' }}
@@ -360,10 +364,6 @@ const submit = async () => {
         如需长评, 建议前往话题区发布话题后将链接放在短评中。评分可较为随意填写,
         我们的算法会帮您摆平一切!
       </p>
-
-      <div v-if="showAdvanced" class="pt-2">
-        <GalgameRatingAdvanced v-model="dims" />
-      </div>
     </div>
   </KunModal>
 </template>

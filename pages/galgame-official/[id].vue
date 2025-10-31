@@ -11,11 +11,8 @@ const officialId = computed(() => {
   return Number((route.params as { id: string }).id)
 })
 
-const pageData = reactive({
-  page: 1,
-  limit: 24,
-  officialId: officialId.value
-})
+const { page, limit, type, language, platform, sortField, sortOrder } =
+  storeToRefs(useTempGalgameStore())
 
 const showOfficialModal = ref(false)
 const editingOfficial = ref<UpdateGalgameOfficialPayload>(
@@ -26,7 +23,16 @@ const { data, status } = await useFetch(
   `/api/galgame-official/${officialId.value}`,
   {
     method: 'GET',
-    query: pageData,
+    query: {
+      page,
+      limit,
+      type,
+      language,
+      platform,
+      sortField,
+      sortOrder,
+      officialId
+    },
     ...kungalgameResponseHandler
   }
 )
@@ -121,6 +127,8 @@ useKunSeoMeta({
       </template>
     </KunHeader>
 
+    <GalgameCardNav :show-advanced="false" />
+
     <GalgameOfficialModal
       v-model="showOfficialModal"
       :initial-data="editingOfficial"
@@ -134,9 +142,9 @@ useKunSeoMeta({
     />
 
     <KunPagination
-      v-if="data.galgameCount > pageData.limit"
-      v-model:current-page="pageData.page"
-      :total-page="Math.ceil(data.galgameCount / pageData.limit)"
+      v-if="data.galgameCount > limit"
+      v-model:current-page="page"
+      :total-page="Math.ceil(data.galgameCount / limit)"
       :is-loading="status === 'pending'"
     />
 

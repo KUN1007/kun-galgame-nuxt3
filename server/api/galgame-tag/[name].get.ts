@@ -12,8 +12,14 @@ export default defineEventHandler(async (event) => {
 
   const nsfw = getNSFWCookie(event)
 
-  const { tagId, page, limit } = input
+  const { tagId, page, limit, type, language, platform, sortField, sortOrder } =
+    input
   const skip = (page - 1) * limit
+
+  const resourceFilters = []
+  if (type !== 'all') resourceFilters.push({ type })
+  if (language !== 'all') resourceFilters.push({ language })
+  if (platform !== 'all') resourceFilters.push({ platform })
 
   const data = await prisma.galgame_tag.findUnique({
     where: { id: tagId },
@@ -27,14 +33,16 @@ export default defineEventHandler(async (event) => {
       galgame: {
         where: {
           galgame: {
-            content_limit: nsfw === 'sfw' ? 'sfw' : undefined
+            content_limit: nsfw === 'sfw' ? 'sfw' : undefined,
+            resource: { some: { AND: resourceFilters } }
           }
         },
         skip,
         take: limit,
         orderBy: {
           galgame: {
-            resource_update_time: 'desc'
+            [sortField === 'time' ? 'resource_update_time' : sortField]:
+              sortOrder
           }
         },
         include: {
