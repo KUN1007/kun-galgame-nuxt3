@@ -41,7 +41,7 @@ if (data.value === 'banned') {
           :user="{ id: data.id, name: data.name, avatar: data.avatar }"
         />
 
-        <div class="scrollbar-hide h-full w-full overflow-y-auto px-3">
+        <div class="scrollbar-hide h-full w-full overflow-y-auto pl-3">
           <NuxtPage :user="data" />
         </div>
       </div>

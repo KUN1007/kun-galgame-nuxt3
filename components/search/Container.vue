@@ -75,7 +75,8 @@ const handleLoadMore = async () => {
       <template #endContent>
         <div class="text-default-500">
           当前的搜索会一并搜索 NSFW 内容, 如果您要按照 Galgame 厂商 / 会社 /
-          标签搜索, 请前往
+          标签搜索, 或者需要 <KunLink to="/galgame-tag">多标签搜索</KunLink> ,
+          请前往
           <KunLink to="/galgame-official"> Galgame 会社 Wiki </KunLink>
           或者
           <KunLink to="/galgame-tag"> Galgame 标签 Wiki </KunLink>

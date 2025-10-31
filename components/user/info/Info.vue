@@ -13,10 +13,7 @@ const statsBlocks = [
   { key: 'topic', label: '话题' },
   { key: 'topicPoll', label: '话题投票' },
   { key: 'replyCreated', label: '回复' },
-  { key: 'commentCreated', label: '评论' }
-]
-
-const galgameBlocks = [
+  { key: 'commentCreated', label: '评论' },
   { key: 'galgame', label: 'Galgame' },
   { key: 'galgameResource', label: 'Galgame 资源' },
   { key: 'galgameToolset', label: 'Galgame 工具' },
@@ -106,7 +103,7 @@ const infoList = [
       </div>
     </KunCard>
 
-    <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
+    <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
       <KunCard
         :is-transparent="false"
         :is-hoverable="false"
@@ -122,23 +119,7 @@ const infoList = [
       </KunCard>
     </div>
 
-    <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
-      <KunCard
-        :is-transparent="false"
-        :is-hoverable="false"
-        :is-pressable="false"
-        color="secondary"
-        v-for="block in galgameBlocks"
-        :key="block.key"
-      >
-        <div class="text-xl font-semibold">
-          {{ user[block.key as 'topic'] }}
-        </div>
-        <div class="text-default-500 text-sm">{{ block.label }}</div>
-      </KunCard>
-    </div>
-
-    <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
+    <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
       <div
         v-for="block in interactionBlocks"
         :key="block.key"

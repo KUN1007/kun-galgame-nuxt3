@@ -70,21 +70,23 @@ onKeyStroke('Enter', async (e) => {
 
 <template>
   <div class="flex size-full items-center justify-center">
+    <DocDetailBackgroundImage src="/login.webp" />
+
     <KunCard
       :is-transparent="false"
       :is-hoverable="false"
       class-name="w-88 p-8 select-none"
     >
-      <form
-        class="relative flex h-full flex-col items-center justify-center"
-        @submit.prevent
-      >
-        <KunImage
-          preload
-          src="/placeholder.webp"
-          placeholder="/placeholder.webp"
-          class="w-full"
-        />
+      <form class="flex h-full flex-col justify-center" @submit.prevent>
+        <div class="my-6">
+          <h1 class="mb-6 flex items-center gap-2 text-2xl">
+            <KunImage src="/favicon.webp" class-name="h-8 w-8" />注册
+          </h1>
+          <p class="text-default-500 mb-1">鲲的朋友! 很荣幸此生遇见你!</p>
+          <p class="text-default-500">
+            {{ `希望这个小家可以给你带来倾城美好!` }}
+          </p>
+        </div>
 
         <div v-for="item in registerFormItem" :key="item.index" class="w-full">
           <label :for="item.value" class="text-sm">
@@ -101,7 +103,7 @@ onKeyStroke('Enter', async (e) => {
 
         <KunVerificationCode
           @click="handleSendCode"
-          class-name="absolute right-4 bottom-23"
+          class-name="absolute right-9 bottom-61.5"
           :name="registerForm.name"
           :email="registerForm.email"
           to="register"

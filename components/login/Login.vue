@@ -53,21 +53,23 @@ watch(
 
 <template>
   <div class="flex size-full items-center justify-center">
+    <DocDetailBackgroundImage src="/login.webp" />
+
     <KunCard
       :is-transparent="false"
       :is-hoverable="false"
       class-name="w-88 p-8 select-none"
     >
-      <form
-        class="flex h-full flex-col items-center justify-center"
-        @submit.prevent
-      >
-        <KunImage
-          preload
-          src="/placeholder.webp"
-          placeholder="/placeholder.webp"
-          class="w-full"
-        />
+      <form class="flex h-full flex-col justify-center" @submit.prevent>
+        <div class="my-6">
+          <h1 class="mb-6 flex items-center gap-2 text-2xl">
+            <KunImage src="/favicon.webp" class-name="h-8 w-8" />登录
+          </h1>
+          <p class="text-default-500 mb-1">你好呀鲲的朋友! 欢迎回家!</p>
+          <p class="text-default-500">
+            {{ `${kungal.titleShort}给你最温暖的拥抱!` }}
+          </p>
+        </div>
 
         <div class="w-full">
           <label for="username" class="text-sm">用户名或邮箱</label>
