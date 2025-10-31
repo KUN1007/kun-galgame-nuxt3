@@ -1,3 +1,6 @@
+// predicted_preJul = round( β * time_est + (1 - β) * view_est )
+// est = SCALE * (BETA * time_est + (1 - BETA) * view_est)
+
 import { PrismaClient } from '@prisma/client'
 import process from 'process'
 
@@ -6,7 +9,8 @@ const prisma = new PrismaClient()
 const JUL26_ISO = '2025-07-26T00:00:00.000Z'
 const JUL26 = new Date(JUL26_ISO)
 
-const BETA = 0.6
+const BETA = 0.3
+const SCALE = 2.0
 
 function daysBetween(a, b) {
   return Math.max(0, (b.getTime() - a.getTime()) / (1000 * 60 * 60 * 24))
@@ -98,7 +102,7 @@ async function main() {
         view_est = (gameView * global_conv) / preResourcesCount
       }
 
-      const est = BETA * time_est + (1 - BETA) * view_est
+      const est = SCALE * (BETA * time_est + (1 - BETA) * view_est)
       const predicted_preJul = Math.max(0, Math.round(est))
 
       if (predicted_preJul <= 0) continue

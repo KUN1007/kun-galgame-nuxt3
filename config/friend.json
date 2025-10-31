@@ -175,6 +175,24 @@
       "banner": "feiyuwan",
       "link": "https://feiyuwan.top/",
       "label": "一个免费分享 Gal, Cos, Asmr 的网站"
+    },
+    {
+      "name": "书音的图书馆",
+      "banner": "shionlib",
+      "link": "https://shionlib.com/zh/",
+      "label": "书音的图书馆 - 免费、开源、零门槛的 视觉小说 / Galgame 档案库"
+    },
+    {
+      "name": "初音游戏库",
+      "banner": "mikugame",
+      "link": "https://mikugame.icu/",
+      "label": "MikuGame初音游戏库是专业的游戏资源分享平台, 提供海量免费3A大作、Galgame视觉小说游戏、绅士游戏等各类游戏资源下载。"
+    },
+    {
+      "name": "米洛次元",
+      "banner": "mikiacg",
+      "link": "https://www.mikiacg.com/",
+      "label": "优质-免费-干净-简洁, 免费,优质精品游戏"
     }
   ],
   "others": [
