@@ -46,3 +46,25 @@ export const updateGalgameTagSchema = z.object({
     .optional()
     .default([])
 })
+
+const numberArrayFromQuery = z.preprocess(
+  (v) => {
+    if (Array.isArray(v)) {
+      return v.map((x) => Number(x)).filter((n) => Number.isFinite(n) && n > 0)
+    }
+    if (typeof v === 'string') {
+      return v
+        .split(',')
+        .map((s) => Number(s.trim()))
+        .filter((n) => Number.isFinite(n) && n > 0)
+    }
+    return []
+  },
+  z.array(z.number().int().min(1)).min(1)
+)
+
+export const getGalgameByTagsSchema = z.object({
+  page: z.coerce.number().min(1).max(9999999),
+  limit: z.coerce.number().min(1).max(24),
+  tagIds: numberArrayFromQuery
+})

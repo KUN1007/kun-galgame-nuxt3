@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { watchDebounced } from '@vueuse/core'
 import type { GalgameTagItem } from '~/types/api/galgame-tag'
+import type { GalgameCard } from '~/types/api/galgame'
 
 const pageData = reactive({
   page: 1,
@@ -16,8 +17,14 @@ const { data, status } = await useFetch(`/api/galgame-tag`, {
 const searchResult = ref<GalgameTagItem[]>([])
 const searchQuery = ref('')
 const isSearching = ref(false)
-const displayTags = computed(() =>
-  searchQuery.value.trim() ? searchResult.value : data.value!.tags
+const displayTags = computed(() => data.value!.tags)
+
+const inputFocused = ref(false)
+const isDropdownOpen = computed(
+  () =>
+    inputFocused.value &&
+    !!searchQuery.value.trim() &&
+    !!searchResult.value.length
 )
 
 const handleSearch = async () => {
@@ -28,7 +35,7 @@ const handleSearch = async () => {
   isSearching.value = true
   const res = await $fetch(`/api/galgame-tag/search`, {
     method: 'GET',
-    query: { q: searchQuery.value.split(' ') }
+    query: { q: searchQuery.value }
   })
   isSearching.value = false
 
@@ -41,6 +48,62 @@ watchDebounced(
     handleSearch()
   },
   { debounce: 500, maxWait: 1000 }
+)
+
+const onInputBlur = () => {
+  setTimeout(() => {
+    inputFocused.value = false
+  }, 120)
+}
+
+const selectedTags = ref<GalgameTagItem[]>([])
+const resultGames = ref<GalgameCard[]>([])
+const totalGameCount = ref(0)
+const gamesPage = ref(1)
+const gamesLimit = 24
+const loadingGames = ref(false)
+
+const fetchGames = async () => {
+  if (!selectedTags.value.length) {
+    resultGames.value = []
+    totalGameCount.value = 0
+    return
+  }
+  loadingGames.value = true
+  const res = await $fetch(`/api/galgame-tag/multi`, {
+    method: 'GET',
+    query: {
+      page: gamesPage.value,
+      limit: gamesLimit,
+      tagIds: selectedTags.value.map((t) => t.id).join(',')
+    },
+    ...kungalgameResponseHandler
+  })
+  loadingGames.value = false
+  if (res) {
+    resultGames.value = res.galgames
+    totalGameCount.value = res.totalCount
+  }
+}
+
+const addTag = (tag: GalgameTagItem) => {
+  if (selectedTags.value.find((t) => t.id === tag.id)) return
+  selectedTags.value.push(tag)
+  gamesPage.value = 1
+  fetchGames()
+}
+
+const removeTag = (id: number) => {
+  selectedTags.value = selectedTags.value.filter((t) => t.id !== id)
+  gamesPage.value = 1
+  fetchGames()
+}
+
+watch(
+  () => gamesPage.value,
+  () => {
+    fetchGames()
+  }
 )
 </script>
 
@@ -63,37 +126,102 @@ watchDebounced(
             <KunLink to="/doc/notice/contact"> 联系我们 </KunLink>。
           </p>
 
-          <KunInput
-            v-model="searchQuery"
-            type="text"
-            placeholder="搜索标签名称、描述或别名..."
-          />
+          <div v-if="selectedTags.length" class="flex flex-wrap gap-2">
+            <KunBadge
+              v-for="t in selectedTags"
+              :key="t.id"
+              color="primary"
+              class="flex items-center gap-2"
+            >
+              {{ t.name }}
+              <KunButton
+                size="sm"
+                :is-icon-only="true"
+                variant="light"
+                @click.stop="removeTag(t.id)"
+              >
+                <KunIcon name="lucide:x" />
+              </KunButton>
+            </KunBadge>
+          </div>
 
-          <div class="text-default-600 mt-4 flex items-center gap-4 text-sm">
-            <span v-if="!searchQuery.trim()">
-              {{ `总计 ${data?.totalCount || 0} 个标签` }}
-            </span>
-            <span v-else>{{ `搜索结果: ${searchResult.length} 个标签` }}</span>
+          <div class="relative">
+            <KunInput
+              v-model="searchQuery"
+              type="text"
+              placeholder="输入将会自动搜索标签, 点击标签使用多标签筛选"
+              @focus="inputFocused = true"
+              @blur="onInputBlur"
+            />
+
+            <div
+              v-if="isDropdownOpen"
+              class="border-default-200 bg-content1 absolute top-full right-0 left-0 z-50 mt-2 rounded-lg border shadow-md"
+            >
+              <KunScrollShadow
+                axis="vertical"
+                shadow-size="3rem"
+                class-name="max-h-96"
+              >
+                <div
+                  v-for="tag in searchResult"
+                  :key="tag.id"
+                  class="hover:bg-default-100 flex cursor-pointer items-center justify-between px-3 py-2"
+                  @mousedown.prevent="
+                    () => {
+                      addTag(tag)
+                      searchQuery = ''
+                    }
+                  "
+                >
+                  <div class="truncate">{{ tag.name }}</div>
+                </div>
+              </KunScrollShadow>
+            </div>
+          </div>
+
+          <div
+            v-if="!selectedTags.length"
+            class="text-default-600 mt-4 flex items-center gap-4 text-sm"
+          >
+            <span>{{ `共 ${data?.totalCount || 0} 个标签` }}</span>
           </div>
         </div>
       </template>
     </KunHeader>
 
     <div
+      v-if="!selectedTags.length"
       class="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4"
     >
       <GalgameTagCard v-for="tag in displayTags" :key="tag.id" :tag="tag" />
     </div>
 
-    <KunNull v-if="!isSearching && !displayTags.length && searchQuery.trim()" />
-
-    <KunLoading v-if="isSearching" />
+    <KunNull
+      v-if="!isSearching && !displayTags.length && !selectedTags.length"
+    />
+    <KunLoading v-if="isSearching && !selectedTags.length" />
 
     <KunPagination
-      v-if="data && data.totalCount > pageData.limit && !searchQuery.trim()"
+      v-if="!selectedTags.length && data && data.totalCount > pageData.limit"
       v-model:current-page="pageData.page"
       :total-page="Math.ceil(data.totalCount / pageData.limit)"
       :is-loading="status === 'pending'"
     />
+
+    <div v-else class="space-y-3">
+      <KunLoading :loading="loadingGames">
+        <GalgameCard v-if="resultGames.length" :galgames="resultGames" />
+      </KunLoading>
+      <KunNull
+        v-if="!loadingGames && !resultGames.length && selectedTags.length"
+      />
+      <KunPagination
+        v-if="totalGameCount > gamesLimit"
+        v-model:current-page="gamesPage"
+        :total-page="Math.ceil(totalGameCount / gamesLimit)"
+        :is-loading="loadingGames"
+      />
+    </div>
   </KunCard>
 </template>
