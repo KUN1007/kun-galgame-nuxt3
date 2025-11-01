@@ -37,29 +37,21 @@ const notices = computed(() => [
 </script>
 
 <template>
-  <div class="space-y-4">
-    <template v-for="(notice, index) in notices" :key="index">
-      <Transition
-        enter-active-class="transition-all duration-300 ease-out"
-        enter-from-class="opacity-0 -translate-y-2"
-        enter-to-class="opacity-100 translate-y-0"
-      >
-        <div
-          v-if="notice.show"
-          class="bg-warning-50 rounded-r-lg border-l-4 p-4"
-          :class="['border-warning-400']"
-        >
-          <h4 class="text-warning-800 mb-2 font-bold">
-            {{ notice.title }}
-          </h4>
-          <p
-            class="text-sm"
-            v-for="(line, i) in notice.content"
-            :key="i"
-            v-html="line"
-          ></p>
-        </div>
-      </Transition>
-    </template>
-  </div>
+  <template v-for="(notice, index) in notices" :key="index">
+    <div
+      v-if="notice.show"
+      class="bg-warning-50 rounded-r-lg border-l-4 p-4"
+      :class="['border-warning-400']"
+    >
+      <h4 class="text-warning-800 mb-2 font-bold">
+        {{ notice.title }}
+      </h4>
+      <p
+        class="text-sm"
+        v-for="(line, i) in notice.content"
+        :key="i"
+        v-html="line"
+      ></p>
+    </div>
+  </template>
 </template>

@@ -18,7 +18,7 @@ const searchResult = ref<GalgameTagItem[]>([])
 const searchQuery = ref('')
 const isSearching = ref(false)
 
-const searchMode = ref<'single' | 'multi'>('multi')
+const searchMode = ref<'single' | 'multi'>('single')
 const searchModeOptions = [
   { label: '单标签搜索', value: 'single' },
   { label: '多标签搜索', value: 'multi' }
@@ -163,6 +163,13 @@ watch(
           </div>
 
           <div class="flex items-center gap-2">
+            <KunSelect
+              v-model="searchMode"
+              :options="searchModeOptions"
+              aria-label="search-mode"
+              class-name="w-36"
+            />
+
             <div class="relative flex-1">
               <KunInput
                 v-model="searchQuery"
@@ -197,13 +204,6 @@ watch(
                 </KunScrollShadow>
               </div>
             </div>
-
-            <KunSelect
-              v-model="searchMode"
-              :options="searchModeOptions"
-              aria-label="search-mode"
-              class-name="w-36"
-            />
           </div>
 
           <div

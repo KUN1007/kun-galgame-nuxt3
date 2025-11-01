@@ -125,7 +125,7 @@ const selectOption = (value: string | number, index: number) => {
         :class="showAbove ? 'bottom-full mb-1' : 'top-full mt-1'"
       >
         <ul
-          class="scrollbar-hide max-h-60 overflow-auto rounded-md text-base focus:outline-none sm:text-sm"
+          class="scrollbar-hide max-h-60 overflow-auto rounded-md text-base text-sm focus:outline-none"
           tabindex="-1"
           role="listbox"
         >
