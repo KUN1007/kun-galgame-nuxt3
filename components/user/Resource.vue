@@ -19,6 +19,7 @@ const props = defineProps<{
   type: (typeof KUN_USER_PAGE_GALGAME_RESOURCE_TYPE)[number]
 }>()
 
+const isCurrentUser = computed(() => usePersistUserStore().id === props.uid)
 const activeTab = ref(props.type)
 const pageData = reactive({
   page: 1,
@@ -36,7 +37,6 @@ const { data, status, refresh } = await useFetch(
   }
 )
 
-const isExpire = computed(() => props.type === 'expire')
 const draftLinks = ref<string[]>([])
 
 watch(
@@ -108,7 +108,7 @@ const submitFix = async (index: number) => {
     />
 
     <div class="flex flex-col space-y-3" v-if="data && data.resources.length">
-      <template v-if="isExpire">
+      <template v-if="props.type !== 'galgame_resource_like' && isCurrentUser">
         <KunCard
           :is-pressable="false"
           :is-hoverable="false"
@@ -149,8 +149,15 @@ const submitFix = async (index: number) => {
             </div>
             <KunTextarea v-model="draftLinks[index]" :rows="2" auto-grow />
             <div class="flex justify-end">
-              <KunButton color="success" @click="submitFix(index)">
-                确定更改并将资源标记为有效
+              <KunButton
+                :color="props.type === 'expire' ? 'success' : 'primary'"
+                @click="submitFix(index)"
+              >
+                {{
+                  props.type === 'expire'
+                    ? '确定更改并将资源标记为有效'
+                    : '更改链接'
+                }}
               </KunButton>
             </div>
           </div>
