@@ -97,7 +97,7 @@ const selectOption = (value: string | number, index: number) => {
       :aria-label="props.ariaLabel || 'select'"
       :class="
         cn(
-          'focus:border-primary-500 focus:ring-primary-500 flex w-full cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-left focus:ring-1 focus:outline-none sm:text-sm',
+          'focus:border-primary-500 focus:ring-primary-500 flex w-full cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-left text-sm focus:ring-1 focus:outline-none',
           darkBorder && 'dark:border-default-200 border-default/20 border',
           disabled && 'bg-default-100 cursor-cursor-not-allowed'
         )

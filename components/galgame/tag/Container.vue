@@ -17,11 +17,25 @@ const { data, status } = await useFetch(`/api/galgame-tag`, {
 const searchResult = ref<GalgameTagItem[]>([])
 const searchQuery = ref('')
 const isSearching = ref(false)
-const displayTags = computed(() => data.value!.tags)
+
+const searchMode = ref<'single' | 'multi'>('multi')
+const searchModeOptions = [
+  { label: '单标签搜索', value: 'single' },
+  { label: '多标签搜索', value: 'multi' }
+]
+
+const displayTags = computed(() => {
+  if (searchMode.value === 'single') {
+    if (searchQuery.value.trim()) return searchResult.value
+    return data.value!.tags
+  }
+  return data.value!.tags
+})
 
 const inputFocused = ref(false)
 const isDropdownOpen = computed(
   () =>
+    searchMode.value === 'multi' &&
     inputFocused.value &&
     !!searchQuery.value.trim() &&
     !!searchResult.value.length
@@ -126,7 +140,10 @@ watch(
             <KunLink to="/doc/notice/contact"> 联系我们 </KunLink>。
           </p>
 
-          <div v-if="selectedTags.length" class="flex flex-wrap gap-2">
+          <div
+            v-if="searchMode === 'multi' && selectedTags.length"
+            class="flex flex-wrap gap-2"
+          >
             <KunBadge
               v-for="t in selectedTags"
               :key="t.id"
@@ -145,43 +162,52 @@ watch(
             </KunBadge>
           </div>
 
-          <div class="relative">
-            <KunInput
-              v-model="searchQuery"
-              type="text"
-              placeholder="输入将会自动搜索标签, 点击标签使用多标签筛选"
-              @focus="inputFocused = true"
-              @blur="onInputBlur"
-            />
+          <div class="flex items-center gap-2">
+            <div class="relative flex-1">
+              <KunInput
+                v-model="searchQuery"
+                type="text"
+                placeholder="输入将会自动搜索标签, 点击标签使用多标签筛选"
+                @focus="inputFocused = true"
+                @blur="onInputBlur"
+              />
 
-            <div
-              v-if="isDropdownOpen"
-              class="border-default-200 bg-content1 absolute top-full right-0 left-0 z-50 mt-2 rounded-lg border shadow-md"
-            >
-              <KunScrollShadow
-                axis="vertical"
-                shadow-size="3rem"
-                class-name="max-h-96"
+              <div
+                v-if="isDropdownOpen"
+                class="border-default-200 bg-content1 absolute top-full right-0 left-0 z-50 mt-2 rounded-lg border shadow-md"
               >
-                <div
-                  v-for="tag in searchResult"
-                  :key="tag.id"
-                  class="hover:bg-default-100 flex cursor-pointer items-center justify-between px-3 py-2"
-                  @mousedown.prevent="
-                    () => {
-                      addTag(tag)
-                      searchQuery = ''
-                    }
-                  "
+                <KunScrollShadow
+                  axis="vertical"
+                  shadow-size="3rem"
+                  class-name="max-h-96"
                 >
-                  <div class="truncate">{{ tag.name }}</div>
-                </div>
-              </KunScrollShadow>
+                  <div
+                    v-for="tag in searchResult"
+                    :key="tag.id"
+                    class="hover:bg-default-100 flex cursor-pointer items-center justify-between px-3 py-2"
+                    @mousedown.prevent="
+                      () => {
+                        addTag(tag)
+                        searchQuery = ''
+                      }
+                    "
+                  >
+                    <div class="truncate">{{ tag.name }}</div>
+                  </div>
+                </KunScrollShadow>
+              </div>
             </div>
+
+            <KunSelect
+              v-model="searchMode"
+              :options="searchModeOptions"
+              aria-label="search-mode"
+              class-name="w-36"
+            />
           </div>
 
           <div
-            v-if="!selectedTags.length"
+            v-if="searchMode === 'single'"
             class="text-default-600 mt-4 flex items-center gap-4 text-sm"
           >
             <span>{{ `共 ${data?.totalCount || 0} 个标签` }}</span>
@@ -191,25 +217,36 @@ watch(
     </KunHeader>
 
     <div
-      v-if="!selectedTags.length"
+      v-if="searchMode === 'single' || !selectedTags.length"
       class="grid grid-cols-2 gap-3 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4"
     >
       <GalgameTagCard v-for="tag in displayTags" :key="tag.id" :tag="tag" />
     </div>
 
     <KunNull
-      v-if="!isSearching && !displayTags.length && !selectedTags.length"
+      v-if="
+        !isSearching &&
+        !displayTags.length &&
+        (searchMode === 'single' || !selectedTags.length)
+      "
     />
-    <KunLoading v-if="isSearching && !selectedTags.length" />
+    <KunLoading
+      v-if="isSearching && (searchMode === 'single' || !selectedTags.length)"
+    />
 
     <KunPagination
-      v-if="!selectedTags.length && data && data.totalCount > pageData.limit"
+      v-if="
+        searchMode === 'multi' &&
+        !selectedTags.length &&
+        data &&
+        data.totalCount > pageData.limit
+      "
       v-model:current-page="pageData.page"
       :total-page="Math.ceil(data.totalCount / pageData.limit)"
       :is-loading="status === 'pending'"
     />
 
-    <div v-else class="space-y-3">
+    <div v-if="searchMode === 'multi' && selectedTags.length">
       <KunLoading :loading="loadingGames">
         <GalgameCard v-if="resultGames.length" :galgames="resultGames" />
       </KunLoading>
@@ -217,6 +254,7 @@ watch(
         v-if="!loadingGames && !resultGames.length && selectedTags.length"
       />
       <KunPagination
+        class="mt-3"
         v-if="totalGameCount > gamesLimit"
         v-model:current-page="gamesPage"
         :total-page="Math.ceil(totalGameCount / gamesLimit)"
