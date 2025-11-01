@@ -51,6 +51,12 @@ export const getUserGalgameResourceSchema = z.object({
   type: z.enum(KUN_USER_PAGE_GALGAME_RESOURCE_TYPE)
 })
 
+export const getUserRatingSchema = z.object({
+  userId: z.coerce.number().min(1).max(9999999),
+  page: z.coerce.number().min(1).max(9999999),
+  limit: z.coerce.number().min(1).max(50)
+})
+
 export const updateUserBioSchema = z.object({
   bio: z.string().max(107, { message: '签名最大长度为 107 个字符' })
 })

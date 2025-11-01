@@ -160,6 +160,7 @@ export const KUN_USER_PAGE_NAV_MAP: Record<string, string> = {
   password: '密码设置',
   topic: '话题',
   galgame: 'Galgame',
+  rating: 'Gal 评分',
   resource: 'Gal 资源',
   publish: '已发布',
   like: '已点赞',

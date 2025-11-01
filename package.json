@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "4.4.84",
+  "version": "4.4.85",
   "packageManager": "pnpm@10.17.1",
   "private": true,
   "scripts": {

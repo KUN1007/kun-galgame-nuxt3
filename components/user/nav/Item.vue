@@ -26,6 +26,7 @@ const iconMap: Record<string, string> = {
   topic: 'lucide:square-gantt-chart',
   galgame: 'lucide:gamepad-2',
   resource: 'lucide:package',
+  rating: 'lucide:star',
   reply: 'carbon:reply',
   comment: 'uil:comment-dots'
 }

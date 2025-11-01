@@ -17,7 +17,7 @@ const resourceType = computed(() => {
 })
 
 useKunDisableSeo(
-  `${props.user.name}${GALGAME_RESOURCE_NAV_CONFIG[resourceType.value].text}`
+  `${props.user.name} 的${GALGAME_RESOURCE_NAV_CONFIG[resourceType.value].text}`
 )
 </script>
 

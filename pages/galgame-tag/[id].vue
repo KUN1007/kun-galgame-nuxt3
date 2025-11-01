@@ -63,7 +63,7 @@ const handleUpdateTag = async (data: UpdateGalgameTagPayload) => {
 if (data.value) {
   if (data.value.category !== 'sexual') {
     useKunSeoMeta({
-      title: data.value.name,
+      title: `标签 ${data.value.name} 的 Galgame`,
       description: data.value
         ? data.value.galgame
             .map((g) => getPreferredLanguageText(g.name))
@@ -71,7 +71,7 @@ if (data.value) {
         : ''
     })
   } else {
-    useKunDisableSeo(data.value.name)
+    useKunDisableSeo(`标签 ${data.value.name} 的 Galgame`)
   }
 }
 </script>
