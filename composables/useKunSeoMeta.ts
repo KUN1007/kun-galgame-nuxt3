@@ -57,12 +57,14 @@ export const useKunSeoMeta = (
     options
   )
 
-  defineOgImageComponent('Kun', {
-    title: title.split('-')[0] || title,
-    description,
-    headline: input.ogHeadline,
-    icon: input.ogUserAvatar
-  })
+  if (!input.ogImage) {
+    defineOgImageComponent('Kun', {
+      title: title.split('-')[0] || title,
+      description,
+      headline: input.ogHeadline,
+      icon: input.ogUserAvatar
+    })
+  }
 
   useHead({
     link: [{ rel: 'canonical', href: pageUrl }]
