@@ -37,7 +37,7 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     'pinia-plugin-persistedstate/nuxt',
     'nuxt-schema-org',
-    'nuxt-og-image',
+    // 'nuxt-og-image',
     'nuxt-umami'
   ],
 
@@ -109,15 +109,15 @@ export default defineNuxtConfig({
   //   }
   // },
 
-  ogImage: {
-    fonts: [
-      {
-        name: 'Lolita',
-        weight: 400,
-        path: '/fonts/Lolita.ttf'
-      }
-    ]
-  },
+  // ogImage: {
+  //   fonts: [
+  //     {
+  //       name: 'Lolita',
+  //       weight: 400,
+  //       path: '/fonts/Lolita.ttf'
+  //     }
+  //   ]
+  // },
 
   eslint: {
     config: {
