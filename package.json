@@ -1,6 +1,6 @@
 {
   "name": "kun-galgame-nuxt3",
-  "version": "4.4.85",
+  "version": "4.4.86",
   "packageManager": "pnpm@10.17.1",
   "private": true,
   "scripts": {
@@ -109,6 +109,7 @@
     "localforage": "^1.10.0",
     "nodemailer": "^6.10.0",
     "nodemailer-smtp-transport": "^2.7.4",
+    "nuxt-og-image": "^5.1.12",
     "pinia": "^3.0.1",
     "pinia-plugin-persistedstate": "^4.2.0",
     "postcss": "^8.5.3",

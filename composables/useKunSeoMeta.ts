@@ -23,7 +23,10 @@ export const useKunSeoMeta = (
     | 'twitterDescription'
     | 'twitterImage'
     | 'twitterImageAlt'
-  >,
+  > & {
+    ogUserAvatar?: string
+    ogHeadline?: string
+  },
   options?: NuxtUseHeadOptions
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 ): ActiveHeadEntry<UseSeoMetaInput> | void => {
@@ -53,6 +56,13 @@ export const useKunSeoMeta = (
     },
     options
   )
+
+  defineOgImageComponent('Kun', {
+    title: title.split('-')[0] || title,
+    description,
+    headline: input.ogHeadline,
+    icon: input.ogUserAvatar
+  })
 
   useHead({
     link: [{ rel: 'canonical', href: pageUrl }]

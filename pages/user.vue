@@ -22,7 +22,8 @@ if (data.value === 'banned') {
 } else {
   useKunSeoMeta({
     title: data.value?.name,
-    description: data.value?.bio
+    description: data.value?.bio,
+    ogHeadline: data.value?.bio
   })
 }
 </script>
