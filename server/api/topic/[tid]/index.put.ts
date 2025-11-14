@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const oldTopic = await prisma.topic.findUnique({
-    where: { id: input.topicId, user_id: userInfo.uid },
+    where: { id: input.topicId },
     include: {
       user: {
         select: {
@@ -37,6 +37,9 @@ export default defineEventHandler(async (event) => {
   if (!oldTopic) {
     return kunError(event, '未找到此话题')
   }
+  if (userInfo.uid !== oldTopic.user_id && userInfo.role < 2) {
+    return kunError(event, '您没有权限更改此话题')
+  }
   const oldSections = oldTopic.section.map((s) => s.topic_section.name)
   const oldTopicHasConsumeSection = TOPIC_SECTION_CONSUME_MOEMOEPOINTS.some(
     (item) => oldSections.includes(item as 'g-seeking')
@@ -45,7 +48,10 @@ export default defineEventHandler(async (event) => {
     (item) => input.section.includes(item as 'g-seeking')
   )
   if (!oldTopicHasConsumeSection && newTopicHasConsumeSection) {
-    if (oldTopic.user.moemoepoint < MOEMOEPOINT_COST_FOR_CONSUME_SECTION) {
+    if (
+      oldTopic.user.moemoepoint < MOEMOEPOINT_COST_FOR_CONSUME_SECTION &&
+      userInfo.role < 2
+    ) {
       return kunError(
         event,
         '您的萌萌点不足, 无法更改话题的分类为求助或者寻求资源, 您可以通过发布 Galgame, 签到, 接受别人的赞赏, 等等来获取萌萌点'
@@ -57,7 +63,7 @@ export default defineEventHandler(async (event) => {
 
   return prisma.$transaction(async (prisma) => {
     await prisma.topic.update({
-      where: { id: topicId, user_id: userInfo.uid },
+      where: { id: topicId },
       data: {
         ...topicData,
         edited: new Date(),
@@ -94,7 +100,7 @@ export default defineEventHandler(async (event) => {
 
     if (!oldTopicHasConsumeSection && newTopicHasConsumeSection) {
       await prisma.user.update({
-        where: { id: userInfo.uid },
+        where: { id: oldTopic.user_id },
         data: { moemoepoint: { increment: -10 } }
       })
     }
