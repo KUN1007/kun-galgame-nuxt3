@@ -39,6 +39,7 @@ defineProps<{
         :has-best-answer="!!topic.bestAnswer"
         :is-poll-topic="topic.isPollTopic"
         :is-n-s-f-w-topic="topic.isNSFW"
+        :is-nav-to-section="true"
       />
 
       <div
