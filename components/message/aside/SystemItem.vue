@@ -14,7 +14,7 @@ defineProps<{
     class-name="hover:bg-primary/20 flex cursor-pointer flex-nowrap gap-3 rounded-lg p-2 transition-colors hover:opacity-80"
     :to="`/message/${data.route as 'system' | 'notice'}`"
   >
-    <KunImage src="/apple-touch-icon.png" class="h-12 w-12" />
+    <KunImage src="/apple-touch-icon.png" class="h-12 w-12 rounded-full" />
     <div class="justify-space flex w-full flex-col">
       <div class="flex items-center justify-between">
         <span class="font-bold">{{ title }}</span>

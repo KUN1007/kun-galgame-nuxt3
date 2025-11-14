@@ -80,7 +80,8 @@ onKeyStroke('Enter', async (e) => {
       <form class="flex h-full flex-col justify-center" @submit.prevent>
         <div class="my-6">
           <h1 class="mb-6 flex items-center gap-2 text-2xl">
-            <KunImage src="/favicon.webp" class-name="h-8 w-8" />注册
+            <KunImage src="/favicon.webp" class-name="h-8 w-8 rounded-2xl" />
+            注册
           </h1>
           <p class="text-default-500 mb-1">鲲的朋友! 很荣幸此生遇见你!</p>
           <p class="text-default-500">

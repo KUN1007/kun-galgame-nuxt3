@@ -61,7 +61,7 @@ const links = [
           to="/"
         >
           <KunImage
-            class="size-12"
+            class="size-12 rounded-2xl"
             src="/favicon.webp"
             :alt="kungal.titleShort"
           />

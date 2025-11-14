@@ -16,7 +16,7 @@ withDefaults(
     <KunImage
       v-if="isShowSticker"
       :src="getRandomSticker(description || '').value"
-      class="h-32 w-32 rounded-lg"
+      class="h-32 w-32 rounded-2xl"
       loading="lazy"
       placeholder="/apple-touch-icon.png"
       alt="blank galgame"

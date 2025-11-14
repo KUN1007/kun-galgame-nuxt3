@@ -80,10 +80,10 @@ useSeoMeta({
   ogImageWidth: 1920,
   ogImageHeight: 1080,
   ogImageType: 'image/png',
-  ogImageUrl: `${kungal.domain.main}/kungalgame.png`,
+  ogImageUrl: `${kungal.domain.main}/kungalgame.webp`,
 
   twitterCard: 'summary_large_image',
-  twitterImage: `${kungal.domain.main}/kungalgame.png`
+  twitterImage: `${kungal.domain.main}/kungalgame.webp`
 })
 
 useSchemaOrg([

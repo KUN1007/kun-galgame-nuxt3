@@ -26,7 +26,7 @@ const siteList = [
         <div class="flex items-center gap-2">
           <a :href="kungal.domain.main" target="_blank">
             <KunImage
-              class="h-8 w-8"
+              class="h-8 w-8 rounded-2xl"
               src="/favicon.webp"
               :aria-label="kungal.titleShort"
               :alt="kungal.titleShort"

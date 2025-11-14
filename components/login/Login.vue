@@ -63,7 +63,10 @@ watch(
       <form class="flex h-full flex-col justify-center" @submit.prevent>
         <div class="my-6">
           <h1 class="mb-6 flex items-center gap-2 text-2xl">
-            <KunImage src="/favicon.webp" class-name="h-8 w-8" />登录
+            <KunImage
+              src="/favicon.webp"
+              class-name="h-8 w-8 rounded-2xl"
+            />登录
           </h1>
           <p class="text-default-500 mb-1">你好呀鲲的朋友! 欢迎回家!</p>
           <p class="text-default-500">
