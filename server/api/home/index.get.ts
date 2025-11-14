@@ -58,6 +58,13 @@ export default defineEventHandler(async (event) => {
       where: {
         status: { not: 1 },
         ...(isSFW ? { is_nsfw: false } : {}),
+        section: {
+          none: {
+            topic_section: {
+              name: { in: ['g-seeking', 'g-other', 't-help'] }
+            }
+          }
+        },
         OR: [
           { edited: { gte: subMonths(new Date(), 3) } },
           { edited: null, created: { gte: subMonths(new Date(), 3) } }

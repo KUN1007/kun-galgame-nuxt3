@@ -41,10 +41,12 @@ export default defineEventHandler(async (event) => {
       category: category === 'all' ? undefined : category,
       status: { not: 1 },
       section: {
-        none: {
-          topic_section: {
-            name: { in: ['g-seeking', 'g-other', 't-help'] }
-          }
+        some: {
+          OR: [
+            { topic_section: { name: 'g-seeking' } },
+            { topic_section: { name: 'g-other' } },
+            { topic_section: { name: 't-help' } }
+          ]
         }
       },
       ...(isSFW ? { is_nsfw: false } : {})

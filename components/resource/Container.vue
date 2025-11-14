@@ -7,7 +7,7 @@ const {
   isFetching,
   resetTopics,
   loadInitialTopics
-} = useTopic('all')
+} = useTopic('resource')
 
 await loadInitialTopics()
 
@@ -18,9 +18,25 @@ const handleFilterChange = async () => {
 
 <template>
   <div class="flex flex-col gap-3 rounded-lg">
+    <KunCard :is-hoverable="false" :is-transparent="false">
+      <KunHeader
+        name="资源和求助话题列表"
+        description="有关于 Galgame 下载资源, Galgame 和技术相关求助的话题列表"
+        scale="h1"
+      />
+    </KunCard>
+
     <TopicTool @filter-change="handleFilterChange" />
 
-    <TopicLayout :topics="topics" />
+    <div class="space-y-3">
+      <KunCard
+        :is-transparent="false"
+        v-for="(topic, index) in topics"
+        :key="index"
+      >
+        <HomeTopicCard :topic="topic" />
+      </KunCard>
+    </div>
 
     <div class="flex w-full items-center justify-center p-6">
       <KunLoading v-if="isFetching" description="正在摸鱼中...咕咕咕" />

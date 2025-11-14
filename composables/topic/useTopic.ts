@@ -1,19 +1,23 @@
 import { pageData } from '~/components/topic/pageData'
 import type { TopicCard } from '~/types/api/topic'
 
-export const useTopic = () => {
-  const topics = useState<TopicCard[]>('topics', () => [])
+export const useTopic = (topicType: 'resource' | 'all') => {
+  const topics = useState<TopicCard[]>(topicType, () => [])
+
   const isLoadingComplete = useState('isLoadingComplete', () => false)
   const isFetching = useState('isFetching', () => false)
   const scrollPosition = useState('scrollPosition', () => 0)
 
   const getTopics = async () => {
     isFetching.value = true
-    const result = await $fetch('/api/topic', {
-      method: 'GET',
-      query: pageData,
-      ...kungalgameResponseHandler
-    })
+    const result = await $fetch(
+      topicType === 'resource' ? '/api/resource' : '/api/topic',
+      {
+        method: 'GET',
+        query: pageData,
+        ...kungalgameResponseHandler
+      }
+    )
     isFetching.value = false
     return result
   }
