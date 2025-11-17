@@ -25,13 +25,13 @@ export default defineEventHandler(async (event) => {
   if (!userInfo) {
     return kunError(event, '用户登录失效', 205)
   }
-  if (resource.user_id !== userInfo.uid) {
+  if (resource.user_id !== userInfo.uid && userInfo.role < 2) {
     return kunError(event, '您没有权限删除这个 Galgame 资源')
   }
 
   return prisma.$transaction(async (prisma) => {
     await prisma.user.update({
-      where: { id: userInfo.uid },
+      where: { id: resource.user_id },
       data: {
         moemoepoint: { increment: -(resource._count.like + 5) }
       }

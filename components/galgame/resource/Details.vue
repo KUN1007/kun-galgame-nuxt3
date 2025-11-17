@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { GalgameResourceDetails } from '~/types/api/galgame-resource'
 
-const { id } = usePersistUserStore()
+const { id, role } = usePersistUserStore()
 const { resources, rewriteResourceId } = storeToRefs(
   useTempGalgameResourceStore()
 )
@@ -75,6 +75,26 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
 
 <template>
   <div class="space-y-3" v-if="details">
+    <div class="space-x-1" v-if="details.user.id === id || role > 1">
+      <KunButton
+        :is-icon-only="true"
+        variant="flat"
+        @click="handleRewriteResource(details)"
+      >
+        编辑资源
+        <KunIcon name="lucide:pencil" />
+      </KunButton>
+      <KunButton
+        :is-icon-only="true"
+        color="danger"
+        variant="flat"
+        @click="handleDeleteResource(details.galgameId, details.id)"
+      >
+        删除资源
+        <KunIcon name="lucide:trash-2" />
+      </KunButton>
+    </div>
+
     <div class="flex justify-between">
       <div class="flex items-center gap-2">
         <KunAvatar :user="details.user" />
@@ -82,24 +102,6 @@ const handleRewriteResource = (details: GalgameResourceDetails) => {
         <span class="text-default-500 text-sm">
           {{ formatTimeDifference(details.created) }}
         </span>
-      </div>
-
-      <div class="space-x-1" v-if="details.user.id === id">
-        <KunButton
-          :is-icon-only="true"
-          variant="light"
-          @click="handleRewriteResource(details)"
-        >
-          <KunIcon class="icon" name="lucide:pencil" />
-        </KunButton>
-        <KunButton
-          :is-icon-only="true"
-          color="danger"
-          variant="light"
-          @click="handleDeleteResource(details.galgameId, details.id)"
-        >
-          <KunIcon class="icon" name="lucide:trash-2" />
-        </KunButton>
       </div>
 
       <div class="other-btn" v-if="id !== details.user.id && !details.status">

@@ -12,17 +12,20 @@ export default defineEventHandler(async (event) => {
   }
 
   const resource = await prisma.galgame_resource.findFirst({
-    where: { id: input.galgameResourceId, user_id: userInfo.uid }
+    where: { id: input.galgameResourceId }
   })
   if (!resource) {
     return kunError(event, '未找到这个 Galgame 资源')
+  }
+  if (resource.user_id !== userInfo.uid && userInfo.role < 2) {
+    return kunError(event, '您没有权限更新这个 Galgame 资源')
   }
 
   const { link, galgameId, galgameResourceId, ...rest } = input
 
   return prisma.$transaction(async (prisma) => {
     await prisma.galgame_resource.update({
-      where: { id: galgameResourceId, user_id: userInfo.uid },
+      where: { id: galgameResourceId },
       data: rest
     })
 
