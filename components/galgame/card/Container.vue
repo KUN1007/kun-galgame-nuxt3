@@ -26,7 +26,7 @@ const { data, status } = await useFetch(`/api/galgame`, {
       >
         <template #endContent>
           <GalgameCardNSFWHint />
-          <GalgameCardNav />
+          <GalgameCardNav :is-show-advanced="true" />
         </template>
       </KunHeader>
     </KunCard>

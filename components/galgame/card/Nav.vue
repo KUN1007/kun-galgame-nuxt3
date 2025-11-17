@@ -21,6 +21,13 @@ import type {
   KunGalgameResourcePlatformOptions
 } from '~/constants/galgame'
 
+const props = withDefaults(
+  defineProps<{
+    isShowAdvanced?: boolean
+  }>(),
+  { isShowAdvanced: false }
+)
+
 const { page, type, language, platform, sortField, sortOrder } = storeToRefs(
   useTempGalgameStore()
 )
@@ -53,7 +60,6 @@ const toggleIncludeProvider = (key: ProviderKey) => {
 const toggleExcludeOnlyProvider = (key: ProviderKey) => {
   advStore.toggleExcludeOnlyProvider(key)
 }
-const props = defineProps<{ showAdvanced?: boolean }>()
 </script>
 
 <template>
@@ -100,7 +106,7 @@ const props = defineProps<{ showAdvanced?: boolean }>()
 
     <div class="flex shrink-0 items-center gap-2">
       <KunPopover
-        v-if="props.showAdvanced !== false"
+        v-if="props.isShowAdvanced"
         :auto-position="true"
         position="bottom-end"
         :inner-class="'min-w-64 p-3'"

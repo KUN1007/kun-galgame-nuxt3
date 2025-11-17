@@ -129,7 +129,7 @@ export const kunLayoutItem: KunLayoutItem[] = [
       },
       {
         name: 'resource',
-        icon: 'lucide:circle-question-mark',
+        icon: 'lucide:message-circle-question-mark',
         router: '/resource',
         label: '资源和求助话题'
       },
